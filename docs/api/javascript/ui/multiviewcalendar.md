@@ -22,10 +22,10 @@ Represents the Kendo UI MultiViewCalendar widget. Inherits from [Widget](/api/ja
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="multiViewCalendar"></div>
@@ -364,7 +364,7 @@ By default user is able to select a single date. The property can also be set to
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
 
 ### selectDates `Array`  *(default: [])*
 
@@ -382,7 +382,7 @@ Specifies which dates to be selected when the multiViewCalendar is initialized.
         });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/multiviewcalendar/selection) for a live demo.
 
 ### showViewHeader `Boolean` *(default: false)*
 

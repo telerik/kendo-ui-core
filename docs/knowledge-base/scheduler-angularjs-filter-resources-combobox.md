@@ -182,4 +182,4 @@ The following example demonstrates the full implementation of the suggested appr
 
 ## See Also
 
-* [API Reference of the Scheduler](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [API Reference of the Scheduler](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)

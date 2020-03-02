@@ -14,11 +14,11 @@ This article provides solutions for issues you might encounter while exporting t
 
 Clicking the **Export to Excel** button or calling the `saveAsExcel` throws an exception if the JSZip JavaScript library is not found.
 
-**Solution** Include JSZip in the page. For more information on the export of the Grid to Excel, refer to [this article](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
+**Solution** Include JSZip in the page. For more information on the export of the Grid to Excel, refer to [this article](https://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 ## Export Does Not Work in Internet Explorer and Safari
 
-Internet Explorer versions below 10 and Safari cannot save a file and require the implementation of a [server proxy](http://docs.telerik.com/kendo-ui/framework/save-files/introduction).
+Internet Explorer versions below 10 and Safari cannot save a file and require the implementation of a [server proxy](https://docs.telerik.com/kendo-ui/framework/save-files/introduction).
 
 **Solution** Set the `ProxyURL` option to specify the server proxy URL.
 

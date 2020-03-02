@@ -9,7 +9,7 @@ position: 1
 
 # Integration with Kendo UI for the Web
 
-As of the Kendo UI Q1 2014 release, the [Kendo UI hybrid for mobile devices](http://demos.telerik.com/kendo-ui/m/index) can be used alongside the Kendo UI widgets for the web in a regular web page, without an active mobile application instance.
+As of the Kendo UI Q1 2014 release, the [Kendo UI hybrid for mobile devices](https://demos.telerik.com/kendo-ui/m/index) can be used alongside the Kendo UI widgets for the web in a regular web page, without an active mobile application instance.
 
 ## Basic Usage
 

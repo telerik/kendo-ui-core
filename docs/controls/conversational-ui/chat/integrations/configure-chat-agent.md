@@ -8,7 +8,7 @@ slug: connect_to_chatbot_service
 
 # Chat Bot Services
 
-The [Chat](http://demos.telerik.com/kendo-ui/chat/index) allows you to connect to any remote service that can return content to the widget.
+The [Chat](https://demos.telerik.com/kendo-ui/chat/index) allows you to connect to any remote service that can return content to the widget.
 
 ## Communicating with the Remote Service
 
@@ -139,5 +139,5 @@ You can achieve the same result by encapsulating the communication logic in an `
 
 ## See Also
 
-* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

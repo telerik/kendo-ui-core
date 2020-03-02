@@ -12,7 +12,7 @@ The LinearGauge represents values on a linear scale.
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 
-* [Demo page for the LinearGauge](http://demos.telerik.com/kendo-ui/linear-gauge/index)
+* [Demo page for the LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 
 ## Initializing the LinearGauge
 

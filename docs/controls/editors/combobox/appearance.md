@@ -60,7 +60,7 @@ The ComboBox list renders an `ID` attribute which is generated from the ID of th
 
 ## Supporting label Elements
 
-Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For a runnable example, refer to [this Kendo UI Dojo demo](http://dojo.telerik.com/uSeho).
+Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For a runnable example, refer to [this Kendo UI Dojo demo](https://dojo.telerik.com/uSeho).
 
 ## Removing Input Values
 

@@ -33,7 +33,7 @@ The following example demonstrates how to customize the appearance of the legend
 
               // A layout will hold the checkbox and the default visual
               //
-              // http://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
               var layout = new kendo.drawing.Layout(rect, {
                 spacing: 5,
                 alignItems: "center"
@@ -41,7 +41,7 @@ The following example demonstrates how to customize the appearance of the legend
 
               // Cheat a bit by rendering the checkbox using the Unicode ballot symbol
               //
-              // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+              // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
               var cbSymbol = e.active ? "☑" : "☐";
               var cb = new kendo.drawing.Text(cbSymbol, [0, 0], {
                 fill: {

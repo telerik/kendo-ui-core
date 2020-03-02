@@ -10,7 +10,7 @@ position: 10
 
 As of the R1 2017 release, the Telerik UI Editor for ASP.NET MVC enables you to import and export various types of documents through the dedicated `Kendo.Mvc.Export` assembly.
 
-Along with the server-side integration of the [Telerik Document Processing](http://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
+Along with the server-side integration of the [Telerik Document Processing](https://docs.telerik.com/devtools/document-processing/introduction) suite, the new `ExportAs` and `Import` tools which utilize the import and export functionality are available.
 
 ![Importing and exporting an animation](import-export-animation.gif)
 
@@ -21,7 +21,7 @@ The import and export capabilities are bundled as part of the [UI for ASP.NET MV
 To start using the import and export functionality:
 
 1. Add a reference in your project to the `Kendo.MVC.Export` assembly.
-1. Add references in your project to the required [Telerik Document Processing libraries](http://docs.telerik.com/devtools/document-processing/introduction#libraries).
+1. Add references in your project to the required [Telerik Document Processing libraries](https://docs.telerik.com/devtools/document-processing/introduction#libraries).
 
 ## Exporting Content from the Editor
 
@@ -147,7 +147,7 @@ To start using the import and export functionality:
 
 ## Changing Import and Export Settings
 
-The Document Processing Library provides settings for the import and export which enables you to fine-tune the way the content is handled in the supported document types. The following example demonstrates how to use [`HtmlImportSettings`](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so that you can process HTML images before they are exported to `RadFlowDocument`.
+The Document Processing Library provides settings for the import and export which enables you to fine-tune the way the content is handled in the supported document types. The following example demonstrates how to use [`HtmlImportSettings`](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings) so that you can process HTML images before they are exported to `RadFlowDocument`.
 
 ```
 using Kendo.Mvc.Export;
@@ -182,7 +182,7 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ...
 ```
 
-The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
+The following example demonstrates how to configure the import capabilities so that images are generated with inline base64 data in the HTML `<img>` tag. For more information on each setting that is supported by `EditorImportSettings`, refer to the [documentation on HTML export settings](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/formats-and-conversion/html/settings#export-settings).
 
 ```
 using Kendo.Mvc.Export;
@@ -202,5 +202,5 @@ using Telerik.Windows.Documents.Flow.FormatProviders.Html;
 ## See Also
 
 * [Document Import and Export by the Editor HtmlHelper for ASP.NET MVC (Demo)](https://demos.telerik.com/aspnet-mvc/editor/import-export)
-* [EditorBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
+* [EditorBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/EditorBuilder)
 * [Editor Server-Side API](/api/editor)

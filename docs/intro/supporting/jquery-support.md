@@ -9,7 +9,7 @@ position: 3
 
 # jQuery Support
 
-The Kendo UI library is based on [jQuery](http://jquery.com/) and all Kendo UI bundles include the corresponding minified jQuery library in their `js` directories.
+The Kendo UI library is based on [jQuery](https://jquery.com/) and all Kendo UI bundles include the corresponding minified jQuery library in their `js` directories.
 
 > In order for the Kendo UI scripts to work as expected, include a reference to the jQuery library in the document before the scripts.
 

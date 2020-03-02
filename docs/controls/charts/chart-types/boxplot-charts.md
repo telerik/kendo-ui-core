@@ -163,5 +163,5 @@ You can configure the outliers separately and customize them by using:
 
 ## See Also
 
-* [Basic Usage of the Box Plot Chart (Demo)](http://demos.telerik.com/kendo-ui/box-plot-charts/index)
+* [Basic Usage of the Box Plot Chart (Demo)](https://demos.telerik.com/kendo-ui/box-plot-charts/index)
 * [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

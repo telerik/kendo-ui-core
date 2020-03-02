@@ -61,4 +61,4 @@ Edit the `ConfigureServices` method in the `Startup.cs`.
 
 ## See Also
 
-[Getting Started with Telerik UI for ASP.NET Core](http://docs.telerik.com/aspnet-core/getting-started/getting-started)
+[Getting Started with Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/getting-started/getting-started)

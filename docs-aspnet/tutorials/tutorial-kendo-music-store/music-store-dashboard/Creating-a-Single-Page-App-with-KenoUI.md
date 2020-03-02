@@ -83,7 +83,7 @@ The Music Store Dashboard application is a simple JavaScript object named `music
 
 The `musicDashboard` object has a setup method that initializes the router member to a new Kendo UI Router object. The Router object allows you to define the URLs of your application. This means they can be shared to provide a deep linking to your application.
 
-For more information on the [Kendo UI Router object](http://blogs.telerik.com/kendoui/posts/13-05-09/a-day-at-the-spa-with-kendo.router "Kendo Router"), refer to http://blogs.telerik.com/kendoui/posts/13-05-09/a-day-at-the-spa-with-kendo.router.
+For more information on the [Kendo UI Router object](https://www.telerik.com/blogs/a-day-at-the-spa-with-kendo.router "Kendo Router"), refer to https://www.telerik.com/blogs/a-day-at-the-spa-with-kendo.router.
 
   // A Kendo UI router object.
   router: undefined,

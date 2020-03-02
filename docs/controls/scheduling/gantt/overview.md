@@ -12,7 +12,7 @@ The Gantt displays a set of tasks and dependencies which are used to visualize p
 
 It provides a tree-list section where the user can edit, sort and reorder the tasks in a grid-like fashion, and a time-line section where the tasks and dependencies are visualized under an adjustable time ruler. The user can resize, move, edit, and remove them. The Gantt also supports the display of the time-line section in the day, week, and month views.
 
-* [Demo page for the Gantt](http://demos.telerik.com/kendo-ui/gantt/index)
+* [Demo page for the Gantt](https://demos.telerik.com/kendo-ui/gantt/index)
 
 ## Basic Configuration
 

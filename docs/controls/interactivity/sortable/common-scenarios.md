@@ -16,7 +16,7 @@ This article provides common scenarios you might encounter when working with the
 
 ## Persisting the Current Items Order
 
-By default, the Sortable does not persist the order of the current items. To detect changes in the items order and save them in local storage or submit them to the server with [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/), use the `change` event. To restore the Sortable layout, render the DOM elements in their last order.
+By default, the Sortable does not persist the order of the current items. To detect changes in the items order and save them in local storage or submit them to the server with [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/), use the `change` event. To restore the Sortable layout, render the DOM elements in their last order.
 
 The following example demonstrates how to persist the order of items in local storage.
 

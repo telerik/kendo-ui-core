@@ -13,7 +13,7 @@ The ToolBar is designed to hold different types of controls such as buttons, but
 
 The ToolBar consists of the ToolBar wrapper, overflow anchor, and command overflow popup main areas. The wrapper holds all commands that can be placed within the available container width. The ones that have no space to fit are moved to the command overflow popup.
 
-* [Demo page for the ToolBar](http://demos.telerik.com/kendo-ui/toolbar/index)
+* [Demo page for the ToolBar](https://demos.telerik.com/kendo-ui/toolbar/index)
 
 The following image demonstrates a Kendo UI ToolBar.
 

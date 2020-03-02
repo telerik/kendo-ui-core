@@ -24,7 +24,7 @@ component: grid
 
 ## Description
 
-I have a hierarchical Grid with a [custom DataSource](http://demos.telerik.com/aspnet-mvc/grid/custom-datasource) and a `ClientHandlerDescriptor` which is defined as [described here](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#common-scenarios).
+I have a hierarchical Grid with a [custom DataSource](https://demos.telerik.com/aspnet-mvc/grid/custom-datasource) and a `ClientHandlerDescriptor` which is defined as [described here](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#common-scenarios).
 
 How can I pass additional parameters to the `ClientHandlerDescriptor`?
 

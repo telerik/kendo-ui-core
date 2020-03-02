@@ -114,7 +114,7 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 ### Client-Side Instances
 
-You are able to reference an existing Menu instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
+You are able to reference an existing Menu instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
 
 
         <?php

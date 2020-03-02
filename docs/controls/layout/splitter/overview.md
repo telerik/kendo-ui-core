@@ -12,7 +12,7 @@ The Splitter provides a dynamic layout of resizable and collapsible panes.
 
 It converts the children of an HTML element into an interactive layout and adds resize and collapse handles depending on its configuration. The vertical and horizontal orientation of the Splitter can be combined to build complex layouts. The Splitter provides default configuration options such as a maximum and minimum pane size, resizable and collapsible or expandable pane behaviors, and horizontal and vertical orientation.
 
-* [Demo page for the Splitter](http://demos.telerik.com/kendo-ui/splitter/index)
+* [Demo page for the Splitter](https://demos.telerik.com/kendo-ui/splitter/index)
 
 ## Initializing the Splitter
 
@@ -54,7 +54,7 @@ You have to define the properties of a pane during initialization and to set the
 
 ## Referencing Existing Instances
 
-To refer to an existing Splitter instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Splitter API](/api/web/splitter) to control its behavior.
+To refer to an existing Splitter instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Splitter API](/api/web/splitter) to control its behavior.
 
 The following example demonstrates how to access an existing Splitter instance.
 

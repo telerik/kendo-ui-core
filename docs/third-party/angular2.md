@@ -10,17 +10,17 @@ slug: angular2support_integration_kendoui
 
 Kendo UI provides integration support for the Angular framework.
 
-[Kendo UI for Angular](http://www.telerik.com/kendo-angular-ui/) is a separate suite of native Angular 2 UI components. The [Kendo UI for Angular Roadmap](http://www.telerik.com/kendo-angular-ui/roadmap/) page provides information about the development plans of the team with regard to new components and features. The [Telerik blogs](http://www.telerik.com/blogs/) are an additional source for the latest updates on Kendo UI for Angular. For example, [Petyo Ivanov's blog posts](http://www.telerik.com/blogs/author/petyo-ivanov).
+[Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui/) is a separate suite of native Angular 2 UI components. The [Kendo UI for Angular Roadmap](https://www.telerik.com/kendo-angular-ui/roadmap/) page provides information about the development plans of the team with regard to new components and features. The [Telerik blogs](https://www.telerik.com/blogs/) are an additional source for the latest updates on Kendo UI for Angular. For example, [Petyo Ivanov's blog posts](https://www.telerik.com/blogs/author/petyo-ivanov).
 
 For the sake of distinction, Kendo UI Professional (subject of this documentation hub) is also regarded as the Kendo UI for jQuery suite.
 
-* The Angular integration, which was previously provided in this article, is no longer applicable. Telerik has decided to deliver a fresh, [native Angular implementation](http://www.telerik.com/kendo-angular-ui/) instead of wrapping the existing Kendo UI Professional library.
-* The community has come up with some examples on initializing the existing Kendo UI Professional widgets in Angular 2 context&mdash;[this forum thread](http://www.telerik.com/forums/problem-with-kendovalueaccessor-in-angular-2-0-0-beta-0) contains some of them.
+* The Angular integration, which was previously provided in this article, is no longer applicable. Telerik has decided to deliver a fresh, [native Angular implementation](https://www.telerik.com/kendo-angular-ui/) instead of wrapping the existing Kendo UI Professional library.
+* The community has come up with some examples on initializing the existing Kendo UI Professional widgets in Angular 2 context&mdash;[this forum thread](https://www.telerik.com/forums/problem-with-kendovalueaccessor-in-angular-2-0-0-beta-0) contains some of them.
 * Note that this approach, while working in certain cases, is not supported by Telerik.
 
 ## See Also
 
-* [Angular 2 Migration Guide](http://ngmigrate.telerik.com/)
+* [Angular 2 Migration Guide](https://www.telerik.com/blogs/ngmigrate-helps-you-move-from-angularjs-1-to-angular-2)
 * [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})
 * [RequireJS]({% slug requirejs_integration_kendoui %})

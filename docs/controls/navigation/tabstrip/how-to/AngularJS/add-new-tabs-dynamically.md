@@ -7,7 +7,7 @@ slug: howto_addnewtabsdynamically_tabstrip
 
 # Add New Tabs Dynamically by Manual HTML Content Compilation
 
-Out of the box, the Kendo UI TabStrip does not support the execution of dynamic Angular templates&mdash;directives and bindings. For more information on this issue, refer to [this forum thread](http://www.telerik.com/forums/use-angularjs-directive-in-tab-content).
+Out of the box, the Kendo UI TabStrip does not support the execution of dynamic Angular templates&mdash;directives and bindings. For more information on this issue, refer to [this forum thread](https://www.telerik.com/forums/use-angularjs-directive-in-tab-content).
 
 However, it is possible to use a workaround and to compile the HTML content manually after adding a new tab by targeting the element that needs to be compiled through `$compile`.
 

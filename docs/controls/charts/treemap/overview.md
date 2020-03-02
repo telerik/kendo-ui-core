@@ -12,7 +12,7 @@ The TreeMap displays hierarchical data in a traditional tree structure.
 
 TreeMaps also support different rendering types such us Squarified, Vertical, and Horizontal (slice and dice algorithm).
 
-* [Demo page for the TreeMap](http://demos.telerik.com/kendo-ui/treemap/index)
+* [Demo page for the TreeMap](https://demos.telerik.com/kendo-ui/treemap/index)
 
 ## Basic Configuration
 
@@ -37,11 +37,11 @@ The TreeMap provides options for [binding it to data]({% slug databinding_treema
 
 ## Referencing Existing Instances
 
-You can refer an existing TreeMap instance by using [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeMap API](/api/javascript/dataviz/ui/treemap) to control its behavior.
+You can refer an existing TreeMap instance by using [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeMap API](/api/javascript/dataviz/ui/treemap) to control its behavior.
 
     var treeMap = $("#treeMap").data("kendoTreeMap");
 
 ## See Also
 
-* [Basic Usage of the TreeMap (Demo)](http://demos.telerik.com/kendo-ui/treemap/index)
+* [Basic Usage of the TreeMap (Demo)](https://demos.telerik.com/kendo-ui/treemap/index)
 * [JavaScript API Reference of the TreeMap](/api/javascript/dataviz/ui/treemap)

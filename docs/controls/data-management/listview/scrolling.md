@@ -40,5 +40,5 @@ The ListView supports endless scrolling regardless of whether it is bound to loc
 
 ## See Also
 
-* [Basic Usage of the ListView (Demo)](http://demos.telerik.com/kendo-ui/listview/index)
+* [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
 * [JavaScript API Reference of the ListView](/api/javascript/ui/listview)

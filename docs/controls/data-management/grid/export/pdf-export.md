@@ -31,7 +31,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script>

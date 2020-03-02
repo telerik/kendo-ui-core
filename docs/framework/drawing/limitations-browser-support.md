@@ -101,7 +101,7 @@ This element might end up in a position where the whole text fits on the current
 
 Because of browser limitations and CORS-related security restrictions, PDF export is not supported for mobile&mdash;for example, locally stored font files cannot be loaded in hybrid applications. While in specific scenarios PDF export might still work on mobile devices, it is not supported by mobile browsers and hybrid applications.
 
-The [Kendo UI Drawing API](http://demos.telerik.com/kendo-ui/drawing/index) adapts to the browser capabilities by using dedicated [`Surface`](/api/dataviz/drawing/surface) implementations.
+The [Kendo UI Drawing API](https://demos.telerik.com/kendo-ui/drawing/index) adapts to the browser capabilities by using dedicated [`Surface`](/api/dataviz/drawing/surface) implementations.
 
 The [`Surface.create`](/api/dataviz/drawing/surface#create) method uses feature detection to determine the default `surface` type. Surfaces are listed in their order of preference. You can request a specific [`type`](/api/dataviz/drawing/surface#configuration-type), such as `canvas`, if desired. The preference will be ignored if no support is provided by the browser.
 

@@ -84,5 +84,5 @@ Save the old value and, then, revert back to it. Revert the value if the **Cance
 
 ## See Also
 
-* [API Reference of the DropDownList](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
-* [AngularJS Demo of the DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/angular)
+* [API Reference of the DropDownList](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist)
+* [AngularJS Demo of the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/angular)

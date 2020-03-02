@@ -31,7 +31,7 @@ In specific scenarios you can set a height style to the scrollable data area eit
 
 > Not applicable when virtual scrolling is enabled. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).
 
-You can make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, [remove the default data area height](http://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). Instead of the `GridID`, you can also use the `.k-grid` class to target all widget instances.
+You can make the Grid expand and shrink vertically according to the number of its rows and yet within certain limits. To achieve this, apply a minimum and/or maximum height style to the scrollable data area and do not set any height of the Grid. If you use the MVC wrapper of the Grid, [remove the default data area height](https://docs.telerik.com/aspnet-mvc/helpers/grid/configuration#scrolling). Instead of the `GridID`, you can also use the `.k-grid` class to target all widget instances.
 
     #GridID .k-grid-content
     {

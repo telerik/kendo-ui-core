@@ -201,7 +201,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
     });
     </script>
 
-> Check [Aggregates](http://demos.telerik.com/kendo-ui/grid/aggregates) for a live demo.
+> Check [Aggregates](https://demos.telerik.com/kendo-ui/grid/aggregates) for a live demo.
 
 ### columns.attributes `Object`
 
@@ -351,7 +351,7 @@ The CSS class applied to the command button.
 
 ### columns.command.click `Function`
 
-The JavaScript function executed when the user clicks the command button. The function receives a [jQuery Event](http://api.jquery.com/category/events/event-object/) as an argument.
+The JavaScript function executed when the user clicks the command button. The function receives a [jQuery Event](https://api.jquery.com/category/events/event-object/) as an argument.
 
 The function context (available via the `this` keyword) will be set to the grid instance.
 
@@ -384,7 +384,7 @@ The function context (available via the `this` keyword) will be set to the grid 
 
 ### columns.command.iconClass `String|Object`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button.
+The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button.
 When it is defined as an object it allows to customize the web font icon for the "edit", "update" and "cancel" command buttons.
 
 > Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
@@ -431,7 +431,7 @@ When it is defined as an object it allows to customize the web font icon for the
 
 ### columns.command.iconClass.cancel `String`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
+The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the cancel command button.
 
 #### Example - provide an custom iconClass for the cancel command button
 
@@ -455,7 +455,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 
 ### columns.command.iconClass.edit `String`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the edit command button.
+The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the edit command button.
 
 #### Example - provide an custom iconClass for the edit command button
 
@@ -479,7 +479,7 @@ The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-la
 
 ### columns.command.iconClass.update `String`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the update command button.
+The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the update command button.
 
 #### Example - provide an custom iconClass for the update command button
 
@@ -784,7 +784,7 @@ Array of values specified via the [values](columns.values) option.
     });
     </script>
 
-> Check [Editing custom editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) for a live demo.
+> Check [Editing custom editor](https://demos.telerik.com/kendo-ui/grid/editing-custom) for a live demo.
 
 ### columns.encoded `Boolean` *(default: true)*
 
@@ -1560,7 +1560,7 @@ The role data attribute of the widget used in the filter menu or a JavaScript fu
       });
     </script>
 
-> Check [Filter menu customization](http://demos.telerik.com/kendo-ui/grid/filter-menu-customization) for a live demo.
+> Check [Filter menu customization](https://demos.telerik.com/kendo-ui/grid/filter-menu-customization) for a live demo.
 
 ### columns.footerAttributes `Object`
 
@@ -2159,7 +2159,7 @@ If set to `true` the column will not be displayed in the grid. By default all co
 
 If set to `true` the column will be displayed as locked (frozen) in the grid. Also see [Locked Columns](/controls/data-management/grid/columns/locked-columns) help section for additional information.
 
-> **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
+> **Important**: Row template and detail features are not supported in combination with column locking. If [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to lock (freeze) a column at the topmost level only.
 
 #### Example - locked columns
 
@@ -2548,7 +2548,7 @@ An array of values that will be displayed instead of the bound value. Each item 
 
 This example displays "Beverages" and "Food" in the "category" column instead of "1" and "2".
 
-> Check [ForeignKey column](http://demos.telerik.com/kendo-ui/grid/foreignkeycolumn) for a live demo.
+> Check [ForeignKey column](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn) for a live demo.
 
 ### columns.menu `Boolean`
 
@@ -2596,7 +2596,7 @@ Can be set to a JavaScript object which represents the column menu configuration
     });
     </script>
 
-> Check [Column menu](http://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
+> Check [Column menu](https://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
 
 ### columnMenu.columns `Boolean` *(default: true)*
 
@@ -3094,7 +3094,7 @@ Can be set to a JavaScript object which represents the editing configuration.
     });
     </script>
 
-> Check [Batch editing](http://demos.telerik.com/kendo-ui/grid/editing), [Inline editing](http://demos.telerik.com/kendo-ui/grid/editing-inline) and [Popup editing](http://demos.telerik.com/kendo-ui/grid/editing-popup) for live demos.
+> Check [Batch editing](https://demos.telerik.com/kendo-ui/grid/editing), [Inline editing](https://demos.telerik.com/kendo-ui/grid/editing-inline) and [Popup editing](https://demos.telerik.com/kendo-ui/grid/editing-popup) for live demos.
 
 ### editable.confirmation `Boolean|String|Function` *(default: true)*
 
@@ -5678,7 +5678,7 @@ Can be set to a JavaScript object which represents the grouping configuration.
     });
     </script>
 
-> Check [Basic usage](http://demos.telerik.com/kendo-ui/grid/index) for a live demo.
+> Check [Basic usage](https://demos.telerik.com/kendo-ui/grid/index) for a live demo.
 
 ### groupable.enabled `Boolean` *(default: true)*
 
@@ -6348,7 +6348,7 @@ If set to `true` the use could navigate the widget using the keyboard navigation
     });
     </script>
 
-> Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/grid/keyboard-navigation) for a live demo.
+> Check [Keyboard navigation](https://demos.telerik.com/kendo-ui/grid/keyboard-navigation) for a live demo.
 
 ### noRecords `Boolean|Object` *(default: false)*
 
@@ -7090,7 +7090,7 @@ Exports all grid pages, starting from the first one.
 > [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
 > this library with a `<script>` tag will enable compression in PDF, e.g.:
 >
-> `<script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
+> `<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
 >
 > The allPages export is not supported when virtual scrolling is enabled.
 
@@ -7607,7 +7607,7 @@ Multi-level headers allow reordering only in same level.
     });
     </script>
 
-> Check [Column reordering](http://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
+> Check [Column reordering](https://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
 
 ### resizable `Boolean` *(default:false)*
 
@@ -7633,7 +7633,7 @@ By default, column resizing is disabled.
     });
     </script>
 
-> Check [Column resizing](http://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
+> Check [Column resizing](https://demos.telerik.com/kendo-ui/grid/column-resizing) for a live demo and
 the [Column widths](/web/grid/appearance#column-widths) help section for additional relevant information.
 
 ### rowTemplate `String|Function`
@@ -7685,7 +7685,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
     });
     </script>
 
-> Check [Row template](http://demos.telerik.com/kendo-ui/grid/rowtemplate) for a live demo.
+> Check [Row template](https://demos.telerik.com/kendo-ui/grid/rowtemplate) for a live demo.
 
 ### scrollable `Boolean|Object` *(default: true)*
 
@@ -7728,7 +7728,7 @@ Can also be set to the following string values:
 
 If set to `true` the grid will always display a single page of data. Scrolling to the end will load more items untill all items are displayed.
 
-> Check [Endless scrolling of local data](http://demos.telerik.com/kendo-ui/grid/endless-scrolling-local) and [Endless scrolling of remote data](http://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote) for live demos.
+> Check [Endless scrolling of local data](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local) and [Endless scrolling of remote data](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-remote) for live demos.
 
 ### search `Object`
 
@@ -7803,7 +7803,7 @@ Can also be set to the following string values:
     });
     </script>
 
-> Check [Selection](http://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
+> Check [Selection](https://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
 
 ### sortable `Boolean|Object` *(default: false)*
 
@@ -7828,7 +7828,7 @@ Can be set to a JavaScript object which represents the sorting configuration.
     });
     </script>
 
-> Check [Sorting](http://demos.telerik.com/kendo-ui/grid/sorting) for a live demo.
+> Check [Sorting](https://demos.telerik.com/kendo-ui/grid/sorting) for a live demo.
 
 ### sortable.allowUnsort `Boolean` *(default: true)*
 
@@ -8018,7 +8018,7 @@ The "search" built-in search panel for the grid.
 
 ### toolbar.iconClass `String`
 
-The class for the [web font icon](http://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
+The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web) of the button that will be rendered in the toolbar.
 
 > Grid commands are rendered as anchors (`<a>`) with a `span` inside. The icon for the button depends on the **iconClass** which is rendered as a class for the inner span.
 > Built-in commands have a predefined **iconClass** value.
@@ -8116,7 +8116,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     });
     </script>
 
-> Check [Toolbar template](http://demos.telerik.com/kendo-ui/grid/toolbar-template) for a live demo.
+> Check [Toolbar template](https://demos.telerik.com/kendo-ui/grid/toolbar-template) for a live demo.
 
 #### Example - set the template as a string
 
@@ -11883,7 +11883,7 @@ If invoked the grid will not save the generated file.
 
 A promise that will be resolved when the export completes.
 
-The promise [progress handler](http://api.jquery.com/deferred.progress/) will be called periodically with the following arguments:
+The promise [progress handler](https://api.jquery.com/deferred.progress/) will be called periodically with the following arguments:
 * page - The current page content. An instance of [drawing.Group](/api/javascript/drawing/group)
 * pageNumber - The current page number
 * progress - Number if the range 0 to 1, indicating the progress of the current export operation

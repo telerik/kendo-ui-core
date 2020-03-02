@@ -9,7 +9,7 @@ component: actionsheet_mobile
 
 # ActionSheet Overview
 
-The [Hybrid UI ActionSheet widget](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index) displays a set of choices related to a task the user initiates.
+The [Hybrid UI ActionSheet widget](https://demos.telerik.com/kendo-ui/m/index#actionsheet/index) displays a set of choices related to a task the user initiates.
 
 ## Getting Started
 

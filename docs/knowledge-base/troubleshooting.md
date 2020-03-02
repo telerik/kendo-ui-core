@@ -23,7 +23,7 @@ Normally, a foreign key column is bound to a numeric data field which points to 
 To work around the issue, use either of the following approaches:
 
 * Use zeros instead of nulls to match the data values with the declared data field type.
-* Use a [custom column editor](http://demos.telerik.com/kendo-ui/grid/editing-custom) with a manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist/configuration/valueprimitive) setting set to `true`.
+* Use a [custom column editor](https://demos.telerik.com/kendo-ui/grid/editing-custom) with a manually configured DropDownList that has a [`valuePrimitive`](/api/javascript/ui/dropdownlist/configuration/valueprimitive) setting set to `true`.
 
 For a runnable example on implementing foreign-key columns in the Grid, refer to [this demo](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn).
 
@@ -37,7 +37,7 @@ To work around this issue, define a custom data-binding mechanism. After applyin
 
 When editing is applied to a Boolean column, the Grid renders a standard, CheckBox element input type by default. The custom CheckBox editor enables you to unify the look of the Grid editors by applying additional styles to the CheckBox that are based on the used CSS theme.
 
-The following example demonstrates how to use Kendo UI-styled CheckBox editor for Boolean columns. For a runnable example, refer to [this demo on editing](http://demos.telerik.com/kendo-ui/grid/editing).
+The following example demonstrates how to use Kendo UI-styled CheckBox editor for Boolean columns. For a runnable example, refer to [this demo on editing](https://demos.telerik.com/kendo-ui/grid/editing).
 
     function customBoolEditor(container, options) {
         $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);

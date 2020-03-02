@@ -12,7 +12,7 @@ The MultiColumnComboBox visualizes huge sets of data in a grid-like table.
 
 Besides the core virtualization, templates, cascading, and data-binding functionality that the standard Kendo UI ComboBox provides, the MultiColumnComboBox enables you to define columns that will be rendered in the drop-down and specify against which fields from the data source the filter will apply.
 
-* [Demo page for the MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index)
+* [Demo page for the MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
 
 ## Initializing the MultiColumnComboBox
 
@@ -37,6 +37,6 @@ To initialize the MultiColumnComboBox, use any of the following approaches:
 
 ## See Also
 
-* [Basic Usage of the MultiColumnComboBox (Demo)](http://demos.telerik.com/kendo-ui/multicolumncombobox/index)
+* [Basic Usage of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
 * [Using the API of the MultiColumnComboBox (Demo)](https://demos.telerik.com/kendo-ui/multicolumncombobox/api)
 * [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)

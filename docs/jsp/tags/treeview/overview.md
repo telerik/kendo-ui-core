@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a server-bound TreeView.
 
@@ -65,7 +65,7 @@ You can subscribe to all [events exposed by Kendo UI TreeView](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing TreeView instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TreeView API](/api/javascript/ui/treeview#methods) to control its behavior.
+You are able to reference an existing TreeView instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TreeView API](/api/javascript/ui/treeview#methods) to control its behavior.
 
 
 

@@ -9,7 +9,7 @@ position: 1
 
 # Overview
 
-This article elaborates on the basics of building applications with [the Hybrid UI components in Kendo UI](http://www.telerik.com/kendo-ui-mobile).
+This article elaborates on the basics of building applications with [the Hybrid UI components in Kendo UI](https://www.telerik.com/kendo-ui-mobile).
 
 The Kendo UI hybrid framework is designed to help developers build mobile app experiences through using HTML and JavaScript that automatically adapt to the native look and feel of different mobile platforms. Developers using Kendo UI hybrid components can focus on the content and functions of their apps and let the Kendo UI framework handle differences between platforms such as iOS and Android.
 
@@ -23,15 +23,15 @@ The advantage of building apps with HTML, JavaScript, and Kendo UI is that you a
 
 ## Building Blocks of Hybrid Applications
 
-The Kendo UI hybrid applications are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](http://en.wikipedia.org/wiki/JSON).
+The Kendo UI hybrid applications are built entirely with HTML, JavaScript, and CSS. Those are the only skills you will need to build a Kendo UI mobile app that looks and feels native across mobile platforms. If you plan to work with data, make sure you are familiar with [JSON](https://en.wikipedia.org/wiki/JSON).
 
 Applications do not need to be cross-compiled into a native [software-development kit (SDK)](https://en.wikipedia.org/wiki/Software_development_kit) language. Your HTML and JavaScript code is ultimately intended to run on mobile devices, even if you eventually use tools like [Cordova](http://incubator.apache.org/cordova/) to package your application for an app store.
 
 There are a few key, non-visual pieces of Kendo UI hybrid components used in virtually all applications. These are:
 
-1. [Application](http://demos.telerik.com/kendo-ui/m/index#application/loadingpopup)&mdash;This is the shell of Kendo UI hybrid apps. Application manages all navigation, application history, loading views, rendering mobile meta tags, and other essential mobile app tasks.
+1. [Application](https://demos.telerik.com/kendo-ui/m/index#application/loadingpopup)&mdash;This is the shell of Kendo UI hybrid apps. Application manages all navigation, application history, loading views, rendering mobile meta tags, and other essential mobile app tasks.
 2. [Layout]({% slug layout_hybridkendoui %})&mdash;Defines the reusable portions of a hybrid app, similar to a MasterPage or template. Layouts are often used improve app maintainability by defining things used across multiple views, like navigation. While not required, layouts are encouraged to use.
-3. [Views](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index)&mdash;Individual pages of a hybrid app. Views contain the greater part of the application content. Every application has one or more views.
+3. [Views](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index)&mdash;Individual pages of a hybrid app. Views contain the greater part of the application content. Every application has one or more views.
 
 Layouts and Views are defined through HTML. The Application is simply JavaScript. No markup associated with the Application is used.
 
@@ -313,7 +313,7 @@ When using this code, you effectively disable the adaptive rendering detection a
 
 ### Use Browser Tools
 
-Kendo UI relies on the [`UserAgent` string](http://en.wikipedia.org/wiki/User_agent) to trigger different platform renderings. If a browser reports that it is a specific mobile device, the mobile application responds and provides the correct, device-specific rendering.
+Kendo UI relies on the [`UserAgent` string](https://en.wikipedia.org/wiki/User_agent) to trigger different platform renderings. If a browser reports that it is a specific mobile device, the mobile application responds and provides the correct, device-specific rendering.
 
 Some desktop browsers, such as Google's Chrome, allow you to easily modify your user agent string, thereby allowing you to trick Kendo UI that your browser is a given mobile device. This helps you to quickly preview your application styling for different mobile platforms without changing any code.
 

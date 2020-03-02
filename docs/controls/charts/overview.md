@@ -26,7 +26,7 @@ The following image displays the structure of the Chart.
 
 ![Chart Structure](chart-structure.png)
 
-* [Demo page for the Charts](http://demos.telerik.com/kendo-ui/)
+* [Demo page for the Charts](https://demos.telerik.com/kendo-ui/)
 
 ## Basic Configuration
 

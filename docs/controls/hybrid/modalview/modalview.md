@@ -9,7 +9,7 @@ component: modal-view
 
 # ModalView Overview
 
-The [Hybrid UI ModalView widget](http://demos.telerik.com/kendo-ui/m/index#modalview/index) is used to present a self-contained functionality in the context of the current task.
+The [Hybrid UI ModalView widget](https://demos.telerik.com/kendo-ui/m/index#modalview/index) is used to present a self-contained functionality in the context of the current task.
 
 > **Important**
 >

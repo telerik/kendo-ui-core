@@ -15,7 +15,7 @@ You can disable this behavior with the `avoidLinks` option.
 
 ```dojo
     <div id="content">
-        This is <a href="http://www.telerik.com">a non-clickable link</a>.
+        This is <a href="https://www.telerik.com">a non-clickable link</a>.
     </div>
     <script>
         var draw = kendo.drawing;

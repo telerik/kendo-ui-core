@@ -75,7 +75,7 @@ The icons in the sprite image have been rearranged to include more icons in two 
       });
     ```
 
-* Initializing the editor from a `div` element triggers the [inline editing mode](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
+* Initializing the editor from a `div` element triggers the [inline editing mode](https://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
 
 **Mobile ListView**
 

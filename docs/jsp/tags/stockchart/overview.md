@@ -83,7 +83,7 @@ You can subscribe to all [events exposed by Kendo UI StockChart](/api/javascript
 
 ### Existing Instances
 
-You are able to reference an existing StockChart instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+You are able to reference an existing StockChart instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
 
 

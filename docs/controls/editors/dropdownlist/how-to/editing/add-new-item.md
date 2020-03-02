@@ -8,7 +8,7 @@ slug: howto_addnewitems_dropdownlist
 
 # Add New Items
 
-To see the example, refer to the online demo on [adding a new item to a Kendo UI DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/addnewitem).
+To see the example, refer to the online demo on [adding a new item to a Kendo UI DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/addnewitem).
 
 ## See Also
 

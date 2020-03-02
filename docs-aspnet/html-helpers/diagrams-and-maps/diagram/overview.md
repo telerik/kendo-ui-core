@@ -54,7 +54,7 @@ You can subscribe to all Diagram [events](/api/diagram). For a complete example 
 
 ## Referencing Existing Instances
 
-To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Diagram client-side API](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
+To reference an existing Kendo UI Diagram instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [Diagram client-side API](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
         // Place the following after the Diagram for {{ site.framework }} declaration.
         <script>

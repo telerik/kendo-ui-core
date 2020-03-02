@@ -12,7 +12,7 @@ The DatePicker enables the user to select a date from a calendar or through a di
 
 It provides options for using custom templates for its **Month** view, setting minimum and maximum dates, a start view, and a depth for navigation.
 
-* [Demo page for the DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
+* [Demo page for the DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index)
 
 ## Initializing the DatePicker
 
@@ -52,7 +52,7 @@ For a complete example on basic DatePicker events, refer to the [demo on using t
 
 ## See Also
 
-* [Basic Usage of the DatePicker (Demo)](http://demos.telerik.com/kendo-ui/datepicker/index)
+* [Basic Usage of the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/index)
 * [Basic Events in the DatePicker (Demo)](https://demos.telerik.com/kendo-ui/datepicker/events)
 * [Binding the DatePicker over MVVM (Demo)](https://demos.telerik.com/kendo-ui/datepicker/keyboard-navigation)
 * [Using the DatePicker with AngularJS Directives (Demo)](https://demos.telerik.com/kendo-ui/datepicker/angular)

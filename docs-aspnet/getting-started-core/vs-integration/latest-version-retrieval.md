@@ -23,7 +23,7 @@ Clicking **Update Now** starts the Latest Version Acquirer tool which prompts fo
 
 ## The Download Process
 
-1. Go to the [release notes of the Telerik UI for ASP.NET Core distribution](http://www.telerik.com/support/whats-new/aspnet-core-ui/release-history) to get information on the latest available versions.
+1. Go to the [release notes of the Telerik UI for ASP.NET Core distribution](https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history) to get information on the latest available versions.
 1. To avoid having to enter your Telerik credentials multiple times, use the **Save my password** checkbox. The persistence is securely done and the credentials are saved in a per-user context. Other users on the machine do not have access to your stored credentials.
 1. In the dialog that appears, confirm the download.
 

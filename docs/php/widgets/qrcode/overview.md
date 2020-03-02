@@ -44,7 +44,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 ### Client-Side Instances
 
-You are able to reference an existing QRCode instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [QRCode API](/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
+You are able to reference an existing QRCode instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [QRCode API](/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
 
 
 

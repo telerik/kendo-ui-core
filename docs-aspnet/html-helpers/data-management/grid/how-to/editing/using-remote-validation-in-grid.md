@@ -10,7 +10,7 @@ slug: howto_usingremotevalidationingrid_gridaspnetmvc
 
 As of the Kendo UI R1 2017 SP1 release, you can use remote validation with the Grid HtmlHelper.
 
-To see the example, refer to the demo on [configuring remote validation in the Grid](http://demos.telerik.com/aspnet-mvc/grid/editing-remote-validation).
+To see the example, refer to the demo on [configuring remote validation in the Grid](https://demos.telerik.com/aspnet-mvc/grid/editing-remote-validation).
 
 Remote validation is suitable for informing the user whether a value is valid right after the filed editor gets blurred. While you can consider the functionality as a real-time user assistant, avoid relying on it for receiving a valid entry for the field. Only the popup and inline edit modes support remote validation.
 
@@ -129,4 +129,4 @@ To start using the remote validation in the Grid:
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)

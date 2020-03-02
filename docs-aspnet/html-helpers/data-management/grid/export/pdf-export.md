@@ -42,7 +42,7 @@ To initiate PDF export, press the **Toolbar** button or use the [Grid client-sid
 The following example demonstrates how to enable the PDF export functionality of the Grid.
 
         <!-- Load Pako Deflate library to enable PDF compression -->
-        <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
         @(Html.Kendo().Grid<.ProductViewModel>()
             .Name("grid")

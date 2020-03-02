@@ -27,12 +27,12 @@ The FileManager is compliant with the Section 508 requirements. For more informa
 The FileManager supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/).
 
 For more information, refer to:
-* [WCAG 2.1 support by the FileManager (demo)](http://demos.telerik.com/kendo-ui/filemanager/index)
+* [WCAG 2.1 support by the FileManager (demo)](https://demos.telerik.com/kendo-ui/filemanager/index)
 * [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %})
 
 ## See Also
 
-* [Keyboard Navigation by the FileManager (Demo)](http://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation.html)
+* [Keyboard Navigation by the FileManager (Demo)](https://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation.html)
 * [Keyboard Navigation by the Grid]({% slug keynav_kendoui_grid_widget %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

@@ -104,7 +104,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#dialog) to control its behavior.
+To refer to an existing Dialog instance, use [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#dialog) to control its behavior.
 
 
 

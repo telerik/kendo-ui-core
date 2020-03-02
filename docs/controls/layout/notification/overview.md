@@ -10,7 +10,7 @@ position: 1
 
 The Notification provides a styled UI widget with arbitrary content which can provide information to the user on various occasions.
 
-* [Demo page for the Notification](http://demos.telerik.com/kendo-ui/notification/index)
+* [Demo page for the Notification](https://demos.telerik.com/kendo-ui/notification/index)
 
 ## Initializing the Notification
 

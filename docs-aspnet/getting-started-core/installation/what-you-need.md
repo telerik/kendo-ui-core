@@ -18,7 +18,7 @@ To facilitate the common project types, Kendo UI ships the following combined sc
 *  The `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution](https://docs.telerik.com/kendo-ui/introduction#list-of-widgets). The relevant script is available in the Kendo UI Core package as well.
 *  The `kendo.all.min.js` contains a minified version of all features provided by Kendo UI.
 
-  > The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](http://www.telerik.com/download/custom-download).
+  > The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](https://www.telerik.com/download/custom-download).
 
 * The `kendo.web.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all desktop browser widgets (previously distributed as Kendo UI Web).
 * The `kendo.dataviz.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all data visualization widgets (previously distributed as Kendo UI DataViz).
@@ -55,7 +55,7 @@ You can create custom scripts that provide only the widgets and features your pr
 
 ### Employing the Download Builder
 
-Users with a commercial license might use the [custom Download Builder tool](http://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
+Users with a commercial license might use the [custom Download Builder tool](https://www.telerik.com/download/custom-download) to create a single JavaScript file which contains only the required widgets and features.
 
 > * Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 > * It is not possible to load Download Builder packages by using RequireJS because the tool will not create the required AMD modules.

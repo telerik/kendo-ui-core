@@ -35,7 +35,7 @@ The following example demonstrates how to use the `overflow` property.
 
 ## Mobile Rendering
 
-The widget provides a mobile specific style options when placed within the header or footer of a mobile View. For more information on the mobile rendering feature, refer to the [demo on the ToolBar acting as an ActionBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index).
+The widget provides a mobile specific style options when placed within the header or footer of a mobile View. For more information on the mobile rendering feature, refer to the [demo on the ToolBar acting as an ActionBar](https://demos.telerik.com/kendo-ui/m/index#navbar/index).
 
 The mobile view of the Toolbar exposes an additional option for aligning tools to the left or to the right side of the widget. This behavior is achieved by using the `items.align` configuration. For more information, refer to the article on [using the mobile view of the ToolBar]({% slug howto_usemobileview_toolbar %}).
 

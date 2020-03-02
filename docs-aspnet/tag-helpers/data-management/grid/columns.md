@@ -38,7 +38,7 @@ The following example demonstrates how to specify your own custom layout for the
     <script>
         function template(data) {
             return `<div class='customer-photo'
-                    style= 'background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
+                    style= 'background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
                     <div class='customer-name'>${ data.ContactName} </div>
                     `
         }
@@ -93,7 +93,7 @@ The following example demonstrates how to specify your own custom layout for the
     <script>
         function template(data) {
             return `<div class='customer-photo'
-                    style= 'background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
+                    style= 'background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${data.CustomerID}.jpg);' ></div >
                     <div class='customer-name'>${ data.ContactName} </div>
                     `
         }

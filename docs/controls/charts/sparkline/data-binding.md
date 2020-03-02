@@ -40,5 +40,5 @@ For more information, refer to the article on [binding Telerik UI Charts to a da
 
 ## See Also
 
-* [Basic Usage of the Sparkline (Demo)](http://demos.telerik.com/kendo-ui/sparklines/index)
+* [Basic Usage of the Sparkline (Demo)](https://demos.telerik.com/kendo-ui/sparklines/index)
 * [JavaScript API Reference of the Sparkline](/api/javascript/dataviz/ui/sparkline)

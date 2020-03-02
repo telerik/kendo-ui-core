@@ -12,7 +12,7 @@ The Button provides a styled clickable UI functionality with arbitrary content.
 
 Apart from consistent Kendo UI for jQuery styling, the Button provides keyboard operability for elements, which natively do not have it&mdash;for example, `span`.
 
-* [Demo page for the Button](http://demos.telerik.com/kendo-ui/button/index) 
+* [Demo page for the Button](https://demos.telerik.com/kendo-ui/button/index) 
 
 ## Getting Started
 

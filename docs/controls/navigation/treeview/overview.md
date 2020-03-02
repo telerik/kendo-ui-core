@@ -12,7 +12,7 @@ The Kendo UI TreeView widget displays hierarchical data in a traditional tree st
 
 It supports user interaction through mouse or touch events to perform re-ordering operations by using the drag-and-drop functionality.
 
-* [Demo page for the TreeView](http://demos.telerik.com/kendo-ui/treeview/index)
+* [Demo page for the TreeView](https://demos.telerik.com/kendo-ui/treeview/index)
 
 ## Initializing the TreeView
 
@@ -48,7 +48,7 @@ The following example demonstrates how to initialize the TreeView through a hier
 
 ## Referencing Existing Instances
 
-To refer to an existing TreeView instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once you establish a reference, use the [TreeView API](/api/javascript/ui/treeview) to control its behavior.
+To refer to an existing TreeView instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once you establish a reference, use the [TreeView API](/api/javascript/ui/treeview) to control its behavior.
 
 The following example demonstrates how to access an existing TreeView instance.
 

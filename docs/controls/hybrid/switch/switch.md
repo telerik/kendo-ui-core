@@ -9,7 +9,7 @@ component: switch
 
 # Switch Overview
 
-The [Hybrid UI Switch widget](http://demos.telerik.com/kendo-ui/m/index#switch/mobile) is used to display two exclusive choices.
+The [Hybrid UI Switch widget](https://demos.telerik.com/kendo-ui/m/index#switch/mobile) is used to display two exclusive choices.
 
 When initialized, it shows the currently selected value. Users are able to slide the control to reveal the second value. The mobile Switch can be created from an `input` element of type `checkbox`.
 

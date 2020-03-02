@@ -26,8 +26,8 @@ The following example demonstrates how to include Google Web Fonts to the Kendo 
 			<li>Gracefully degrades to a <code>textarea</code> when JavaScript is turned off</li>
 		</ul>
 		<p>
-			Read <a href="http://docs.kendoui.com">more details</a> or send us your
-			<a href="http://www.kendoui.com/forums.aspx">feedback</a>!
+			Read <a href="https://docs.telerik.com/kendo-ui/introduction">more details</a> or send us your
+			<a href="https://www.telerik.com/kendo-ui/forums.aspx">feedback</a>!
 		</p>
     </textarea>
 	<script>

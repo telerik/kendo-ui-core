@@ -13,7 +13,7 @@ The following table lists the individual script files for the Kendo UI conversat
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Chat](http://demos.telerik.com/kendo-ui/chat/index) | jquery.js | |
+| [Chat](https://demos.telerik.com/kendo-ui/chat/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |

@@ -1928,12 +1928,12 @@ skip_tabbed_code: true
 code_lang: true
 has_kb_portal: true
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs
-download: http://www.telerik.com/download/kendo-ui
+download: https://www.telerik.com/download/kendo-ui
 nav:
   "Demos": https://demos.telerik.com/kendo-ui/
   "Release History": https://www.telerik.com/support/whats-new/kendo-ui/release-history
-  "About": http://www.telerik.com/kendo-ui
-  "Pricing": http://www.telerik.com/purchase/kendo-ui
+  "About": https://www.telerik.com/kendo-ui
+  "Pricing": https://www.telerik.com/purchase/kendo-ui
 
 footer:
 -

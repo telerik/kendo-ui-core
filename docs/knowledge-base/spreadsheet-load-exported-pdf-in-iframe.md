@@ -26,7 +26,7 @@ How can I generate a PDF from a Kendo UI Spreadsheet and display the PDF in a se
 
 ## Solution
 
-Load the generated base64 PDF data in the `<iframe>` element. To do that, use the `draw()` method of the Spreadsheet `Sheet` object. To properly load the data in the `<iframe>`, opne the following example in the [full screen mode of the Dojo](http://runner.telerik.io/fullscreen/UVAyu/3).
+Load the generated base64 PDF data in the `<iframe>` element. To do that, use the `draw()` method of the Spreadsheet `Sheet` object. To properly load the data in the `<iframe>`, opne the following example in the [full screen mode of the Dojo](https://runner.telerik.io/fullscreen/UVAyu/3).
 
 ```dojo
 <input type="button" id="btn" value="PDF export Spreadsheet" />
@@ -65,5 +65,5 @@ Load the generated base64 PDF data in the `<iframe>` element. To do that, use th
 
 ## See Also
 
-* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 * [`sheet`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)

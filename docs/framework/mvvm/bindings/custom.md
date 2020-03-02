@@ -7,7 +7,7 @@ slug: custombinding_mvvm_kendoui
 
 # Custom Binding
 
-The [Kendo UI MVVM component](http://demos.telerik.com/kendo-ui/mvvm/index) allows for the [custom bindings](http://demos.telerik.com/kendo-ui/mvvm/custom).
+The [Kendo UI MVVM component](https://demos.telerik.com/kendo-ui/mvvm/index) allows for the [custom bindings](https://demos.telerik.com/kendo-ui/mvvm/custom).
 
 > The custom binding has to be registered before the `kendo.bind` method is called.
 

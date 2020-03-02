@@ -16,7 +16,7 @@ Users navigate to the Checkout page when they hover over the Shopping Cart Menu 
 
 ### Create the Grid
 
-The examples use an MVVM-bound [Kendo UI Grid](http://demos.telerik.com/kendo-ui/web/grid/index.html) widget to render the shopping cart contents on the Checkout page. This is done by defining a `<div>` element and specifying `data-role="grid"`.
+The examples use an MVVM-bound [Kendo UI Grid](https://demos.telerik.com/kendo-ui/web/grid/index.html) widget to render the shopping cart contents on the Checkout page. This is done by defining a `<div>` element and specifying `data-role="grid"`.
 
     <div id="cart-grid"
         data-role="grid"

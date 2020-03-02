@@ -485,8 +485,8 @@ Specifies the url of the button to navigate to.
             {
                 type: "buttonGroup",
                 buttons: [
-                { text: "foo", url: "http://www.telerik.com" },
-                { text: "bar", url: "http://www.google.com" },
+                { text: "foo", url: "https://www.telerik.com" },
+                { text: "bar", url: "https://www.google.com" },
                 ]
             }
             ]
@@ -863,8 +863,8 @@ Specifies the url of the menu button to navigate to.
                 type: "splitButton",
                 text: "splitButton",
                 menuButtons: [
-                    { id: "foo", text: "Telerik", url: "http://www.telerik.com" },
-                    { id: "bar", text: "Google", url: "http://www.google.com" }
+                    { id: "foo", text: "Telerik", url: "https://www.telerik.com" },
+                    { id: "bar", text: "Google", url: "https://www.google.com" }
                 ]
             }
             ]
@@ -1140,7 +1140,7 @@ Specifies the url to navigate to.
             {
                 type: "button",
                 text: "Foo",
-                url: "http://www.google.com"
+                url: "https://www.google.com"
             }
             ]
         });

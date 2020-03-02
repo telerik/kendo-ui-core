@@ -12,7 +12,7 @@ The Spreadsheet allows you to edit and visualize tabular data by using cell form
 
 The Spreadsheet supports Internet Explorer 9 and later versions. The widget is primarily targeted at desktop users and, therefore, its performance and functionalities on mobile devices are limited.
 
-* [Demo page for the Spreadsheet](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Demo page for the Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 
 ## Initializing the Spreadsheet
 
@@ -68,5 +68,5 @@ The following example demonstrates how to set the value for a range of cells.
 
 ## See Also
 
-* [Basic Usage of the Spreadsheet (Demo)](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

@@ -8,7 +8,7 @@ position: 1
 
 # Hybrid UI ListView Overview
 
-The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
+The [Hybrid UI ListView widget](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
 
 ## Getting Started
 

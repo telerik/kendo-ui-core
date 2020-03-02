@@ -16,11 +16,11 @@ Telerik Document Processing is a set of UI-independent and cross-platform librar
 
 Telerik Document Processing includes the following libraries:
 
-* [RadPdfProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview)&mdash;Create, import, and export PDF documents.
-* [RadSpreadProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview)&mdash;Create, modify, and save spreadsheet documents.
-* [RadSpreadStreamProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview)&mdash;Export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
-* [RadWordsProcessing](http://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview)&mdash;Create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
-* [RadZipLibrary](http://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview)&mdash;Compress and decompress `ZIP` files.
+* [RadPdfProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview)&mdash;Create, import, and export PDF documents.
+* [RadSpreadProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview)&mdash;Create, modify, and save spreadsheet documents.
+* [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview)&mdash;Export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
+* [RadWordsProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview)&mdash;Create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
+* [RadZipLibrary](https://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview)&mdash;Compress and decompress `ZIP` files.
 
 ## Supported File Formats
 
@@ -51,7 +51,7 @@ Telerik Document Processing supports [.NET Framework 4.0](https://dotnet.microso
 * `Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll`&mdash;The assembly is required when processing `XLSX` documents.
 * `Telerik.Windows.Documents.Fixed.dll`&mdash;The assembly is required when processing PDF documents.
 * `Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll`&mdash;The assembly is required when processing PDF documents.
-* `Telerik.Windows.Zip.dll`&mdash;The assembly of the [**Telerik Zip Library**](http://demos.telerik.com/aspnet-ajax/ziplibrary/examples/overview/defaultcs.aspx). Required when working with zipped formats, such as `DOCX` and `XLSX`, and PDF.
+* `Telerik.Windows.Zip.dll`&mdash;The assembly of the [**Telerik Zip Library**](https://demos.telerik.com/aspnet-ajax/ziplibrary/examples/overview/defaultcs.aspx). Required when working with zipped formats, such as `DOCX` and `XLSX`, and PDF.
 * `Telerik.Windows.Zip.Extensions.dll`&mdash;The assembly extends `Telerik.Windows.Zip` with additional helper methods (Zip Extensions).
 
 ## Licensing
@@ -68,5 +68,5 @@ Telerik Document Processing is available as part of the following suites:
 
 ## See Also
 
-* [Get Started with Telerik Document Processing](http://docs.telerik.com/devtools/document-processing/installation-and-deployment/installing-on-your-computer)
+* [Get Started with Telerik Document Processing](https://docs.telerik.com/devtools/document-processing/installation-and-deployment/installing-on-your-computer)
 * [Telerik UI for ASP.NET MVC Overview]({% slug overview_aspnetmvc6_aspnetmvc %})

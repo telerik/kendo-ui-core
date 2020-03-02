@@ -10,7 +10,7 @@ position: 2
 
 You can use any valid technique for loading Splitter content.
 
-However, the Splitter provides built-in support for asynchronously loading content from URLs. These URLs return HTML fragments that can be loaded in the pane of a Splitter. To load a whole page in an `iframe`, specify the complete URL, for example, http://telerik.com/.
+However, the Splitter provides built-in support for asynchronously loading content from URLs. These URLs return HTML fragments that can be loaded in the pane of a Splitter. To load a whole page in an `iframe`, specify the complete URL, for example, https://www.telerik.com/.
 
 The following example demonstrates how to load the Splitter content asynchronously.
 
@@ -27,7 +27,7 @@ The following example demonstrates how to load content for one pane asynchronous
             panes: [
                 {},
                 { contentUrl: "html-content-snippet.html" },
-                { contentUrl: "http://telerik.com/" }
+                { contentUrl: "https://www.telerik.com/" }
             ]
         });
     });

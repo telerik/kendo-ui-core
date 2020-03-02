@@ -246,7 +246,7 @@ Sets an array with the URLs from which the tabs content to be loaded from. If on
         });
     </script>
 
-As of the Kendo UI R1 2017 release, this option can contain configuration objects that are passed to [`jQuery.ajax`](http://api.jquery.com/jquery.ajax/#jQuery-ajax-settings), used by the widget for remote requests. This means that you can set options supported by `jQuery.ajax` through configuration objects such as `cache`, `url`, `type`, and others.
+As of the Kendo UI R1 2017 release, this option can contain configuration objects that are passed to [`jQuery.ajax`](https://api.jquery.com/jquery.ajax/#jQuery-ajax-settings), used by the widget for remote requests. This means that you can set options supported by `jQuery.ajax` through configuration objects such as `cache`, `url`, `type`, and others.
 
     <div id="tabstrip">
         <ul>
@@ -400,8 +400,8 @@ Sets the field of the data item that provides the link URL for the tab.
             dataTextField: "Name",
             dataUrlField: "Url",
             dataSource: [
-              { Name: "Telerik", Url: "http://www.telerik.com" },
-              { Name: "Google", Url: "http://www.google.com" }
+              { Name: "Telerik", Url: "https://www.telerik.com" },
+              { Name: "Google", Url: "https://www.google.com" }
             ]
         });
     </script>
@@ -834,7 +834,7 @@ Inserts a newly-created tab after a specified tab.
         tabStrip.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"               // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"               // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -889,7 +889,7 @@ Inserts a newly-created tab before a specified tab.
         tabStrip.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"               // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"               // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",

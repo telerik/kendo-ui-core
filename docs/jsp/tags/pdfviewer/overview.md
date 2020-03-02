@@ -8,7 +8,7 @@ position: 1
 
 # PDFViewer JSP Tag Overview
 
-The PDFViewer JSP tag is a server-side wrapper for the [Kendo UI PDFViewer](http://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget.
+The PDFViewer JSP tag is a server-side wrapper for the [Kendo UI PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget.
 
 The [Kendo UI PDFViewer](https://demos.telerik.com/jsp-ui/pdfviewer/index) displays PDF files in the browser. It uses the [PDF.JS Processing](https://mozilla.github.io/pdf.js/) to process the files.
 
@@ -41,7 +41,7 @@ The PDFViewer consists of a toolbar and a scrollable container that wraps the pa
 
 
 
-    <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+    <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the [PDF.JS Processing](https://mozilla.github.io/pdf.js/) scripts.
 

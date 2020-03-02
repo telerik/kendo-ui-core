@@ -14,7 +14,7 @@ The `k-ng-model` binding does not update the internal `$dirty` and `$pristine` p
 
 For more information on the differences between the `ng-model` and `k-ng-model` bindings, refer to the section on [scope bindings]({% slug angularjs_integration_directives %}#scope-bindings).
 
-For more information on how to alternatively use the Kendo UI Validator, refer to the [runnable example on validation](http://demos.telerik.com/kendo-ui/validator/angular) and to the [introductory article of the Validator]({% slug overview_kendoui_validator_widget %}).
+For more information on how to alternatively use the Kendo UI Validator, refer to the [runnable example on validation](https://demos.telerik.com/kendo-ui/validator/angular) and to the [introductory article of the Validator]({% slug overview_kendoui_validator_widget %}).
 
 ## See Also
 

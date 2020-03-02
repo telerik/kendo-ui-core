@@ -29,8 +29,8 @@ How can I expand a single row in a master Kendo UI Grid at a specific time?
 
 ## Solution
 
-1. Handle the [`detailExpand`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event.
-1. Find any previously expanded rows and collapse them by using the [`collapseRow()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/collapserow) method.
+1. Handle the [`detailExpand`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/detailexpand) event.
+1. Find any previously expanded rows and collapse them by using the [`collapseRow()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/collapserow) method.
 
 The following example demonstrates how to collapse a Grid row that was previously expanded when the user expands a new one.
 

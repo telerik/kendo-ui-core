@@ -8,7 +8,7 @@ position: 3
 
 # Create the Home Page
 
-For the main content of the **Home** page, a main banner image rotator and two groups of Albums are going to be displayed. One will be the top-sellers, and the other will be a featured artist. For this, you will be using the [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/web/listview/index.html). For this view, we will also use a declarative approach to initializing the widgets, using the `data-` attributes, and the [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/web/mvvm/index.html) framework.
+For the main content of the **Home** page, a main banner image rotator and two groups of Albums are going to be displayed. One will be the top-sellers, and the other will be a featured artist. For this, you will be using the [Kendo UI ListView widget](https://demos.telerik.com/kendo-ui/web/listview/index.html). For this view, we will also use a declarative approach to initializing the widgets, using the `data-` attributes, and the [Kendo UI MVVM](https://demos.telerik.com/kendo-ui/web/mvvm/index.html) framework.
 
 This page is contained in the `Views\Home\Index.cshtml` and `Scripts\App\home-index.js` files.
 
@@ -46,7 +46,7 @@ The template is moved to an ASP.NET MVC partial to keep the code clean and to al
 <!--_-->
 In the template, note the special `type="text/x-kendo-template"`. This is required for Kendo UI to be able to resolve the template. Also the `id` matches the template indicated by the `<div>` tags.
 
-For more information on templates, refer to [this online demo](http://demos.telerik.com/kendo-ui/web/templates/index.html).
+For more information on templates, refer to [this online demo](https://demos.telerik.com/kendo-ui/web/templates/index.html).
 
 Finally, the `data-bind` property contains the list of binders that will be applied to this widget. In this case the examples are using the `source` binder, and binding it to the `featuredArtistAlbums` property of the view model. This means you need to create your view model in JavaScript, as shown in the example below.
 
@@ -68,7 +68,7 @@ The `viewModel` is a Kendo UI `Observable` object, which facilitates the updatin
 
     <h3>Featured Artist: <span data-bind="text: featuredArtistName"></span></h3>
 
-The `featuredArtistAlbums` and `topSellingAlbums` properties of the view model are both set to the [Kendo UI DataSources](http://demos.telerik.com/kendo-ui/web/datasource/index.html) that will pull remote data from our WCF Data Service. In the case of the `featuredArtistAlbums` data source, there is additional code specified that enabled server-side filtering by artist name, which is using oData.
+The `featuredArtistAlbums` and `topSellingAlbums` properties of the view model are both set to the [Kendo UI DataSources](https://demos.telerik.com/kendo-ui/web/datasource/index.html) that will pull remote data from our WCF Data Service. In the case of the `featuredArtistAlbums` data source, there is additional code specified that enabled server-side filtering by artist name, which is using oData.
 
 ## Add the Image Rotator
 

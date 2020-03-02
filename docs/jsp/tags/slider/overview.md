@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `slider` tag.
 
@@ -72,7 +72,7 @@ You can subscribe to all [events exposed by Kendo UI Slider](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
+You are able to reference an existing Slider instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
 
 
 

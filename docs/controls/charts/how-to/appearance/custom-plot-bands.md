@@ -37,7 +37,7 @@ The following example demonstrates how to render a custom plot band in a Column 
         render: function(e) {
           // Locate value slot
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
           var valueAxis = e.sender.getAxis("valueAxis");
           var valueSlot = valueAxis.slot(650);
 
@@ -50,7 +50,7 @@ The following example demonstrates how to render a custom plot band in a Column 
 
           // Render a line element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var line = new kendo.drawing.Path({
             stroke: {
               color: "red",
@@ -61,7 +61,7 @@ The following example demonstrates how to render a custom plot band in a Column 
 
           // Render a text element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var labelPos = [maxCategorySlot.origin.x - 50, valueSlot.origin.y - 20];
           var label = new kendo.drawing.Text("MAX", labelPos, {
             fill: {
@@ -75,7 +75,7 @@ The following example demonstrates how to render a custom plot band in a Column 
 
           // Draw on chart surface
           //
-          // http://docs.telerik.com/kendo-ui/framework/drawing/overview
+          // https://docs.telerik.com/kendo-ui/framework/drawing/overview
           e.sender.surface.draw(group);
         }
       });
@@ -105,7 +105,7 @@ The following example demonstrates how to render a custom plot band in a Bar Ken
         render: function(e) {
           // Locate value slot
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
           var valueAxis = e.sender.getAxis("valueAxis");
           var valueSlot = valueAxis.slot(650);
 
@@ -118,7 +118,7 @@ The following example demonstrates how to render a custom plot band in a Bar Ken
 
           // Render a line element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var line = new kendo.drawing.Path({
             stroke: {
               color: "red",
@@ -129,7 +129,7 @@ The following example demonstrates how to render a custom plot band in a Bar Ken
 
           // Render a text element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var labelPos = [valueSlot.origin.x + 10, maxCategorySlot.origin.y - 30];
           var label = new kendo.drawing.Text("MAX", labelPos, {
             fill: {
@@ -143,7 +143,7 @@ The following example demonstrates how to render a custom plot band in a Bar Ken
 
           // Draw on chart surface
           //
-          // http://docs.telerik.com/kendo-ui/framework/drawing/overview
+          // https://docs.telerik.com/kendo-ui/framework/drawing/overview
           e.sender.surface.draw(group);
         }
       });

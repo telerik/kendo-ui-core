@@ -12,7 +12,7 @@ The hybrid Telerik UI ButtonGroup HtmlHelper for ASP.NET MVC is a server-side wr
 
 The ButtonGroup presents a linear set of grouped buttons.
 
-* [Demo page for the ButtonGroup](http://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile)
+* [Demo page for the ButtonGroup](https://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile)
 
 ## Basic Configuration
 
@@ -152,4 +152,4 @@ You can reference a hybrid ButtonGroup instance by using the code from the follo
 
 ## See Also
 
-* [Hybrid ButtonGroupBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonGroupBuilder)
+* [Hybrid ButtonGroupBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonGroupBuilder)

@@ -23,7 +23,7 @@ For the feature to work properly, the following configuration settings has to be
 
 > * The [JavaScript API of the Grid](/api/javascript/ui/grid) allows you to lock and unlock columns on the fly. However, this is possible only if at least one column is initially locked during initialization. The HTML output and script behavior of the Grid are different when you apply frozen columns. That is why the widget cannot switch between frozen and unfrozen mode after initialization.
 > * The locked columns can be positioned only at the left side of the Grid. Positioning them on the right side is not supported.
-> * The row template and detail features are not supported in combination with locked columns. If you use [multi-column headers](http://demos.telerik.com/kendo-ui/grid/multicolumnheaders), you can lock a column at the topmost level only.
+> * The row template and detail features are not supported in combination with locked columns. If you use [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders), you can lock a column at the topmost level only.
 
 Locked columns cannot be scrolled on touch because they are wrapped in a container with an `overflow:hidden` style. To work around this limitation on desktop devices, use the `mousewheel` event. However, no workaround exists for touch devices.
 

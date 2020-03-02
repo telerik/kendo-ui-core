@@ -9,13 +9,13 @@ position: 1
 
 # DataSource Overview
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
 
 ## Getting Started
 
 The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML). It fully supports CRUD (Create, Read, Update, Destroy) data operations and provides both client-side and server-side support for sorting, paging, filtering, grouping, and aggregates.
 
-The following list includes some of the functionality and features which the DataSource provides. For detailed information on the capabilities of the DataSource, refer to its [configuration API, methods, and events](/api/javascript/data/datasource), and [demos](http://demos.telerik.com/kendo-ui/datasource/index).
+The following list includes some of the functionality and features which the DataSource provides. For detailed information on the capabilities of the DataSource, refer to its [configuration API, methods, and events](/api/javascript/data/datasource), and [demos](https://demos.telerik.com/kendo-ui/datasource/index).
 
 * [Retrieval of data from a remote endpoint](/framework/datasource/cors).
 * Maintaining the [structure and type of the data (`schema`)](/framework/datasource/crud#schema).

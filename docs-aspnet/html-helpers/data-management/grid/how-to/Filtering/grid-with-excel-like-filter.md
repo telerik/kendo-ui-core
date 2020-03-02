@@ -10,13 +10,13 @@ slug: howto_useexcellikefilteringrid_gridaspnetmvc
 
 To see the example, refer to the project on how to [use an Excel-like filter in the Kendo UI Grid](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-with-excel-like-filter) in ASP.NET MVC applications.
 
-The example utilizes the [Kendo UI shared DataSource](http://demos.telerik.com/aspnet-mvc/datasource/shared-datasource).
+The example utilizes the [Kendo UI shared DataSource](https://demos.telerik.com/aspnet-mvc/datasource/shared-datasource).
 
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
 * [Overview of the MultiSelect HtmlHelper]({% slug htmlhelpers_multiselect_aspnetcore %})
-* [MultiSelectBuilder API Reference](http://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
+* [MultiSelectBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
 
 

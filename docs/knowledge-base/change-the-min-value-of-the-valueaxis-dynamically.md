@@ -38,9 +38,9 @@ How can I dynamically set the min value of the `valueAxis` when the data or the 
 ## Solution
 
 1. Loop through the visible series values.
-1. Based on the visible lines, set the minimum value on the [`render`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render) event of the Chart.  
+1. Based on the visible lines, set the minimum value on the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render) event of the Chart.  
 
-For the full implementation, refer to [this Dojo example](http://dojo.telerik.com/ukITOJ/2).
+For the full implementation, refer to [this Dojo example](https://dojo.telerik.com/ukITOJ/2).
 
 ```
    <div id="example">

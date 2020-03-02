@@ -12,7 +12,7 @@ The DateTimePicker allows the user to select a value from a calendar, a time dro
 
 The DateTimePicker supports configurable options for minimum and maximum value, format, interval between predefined hours in the time view, custom templates for the **Month** view of the calendar, start view, and a depth for navigation. The first day of the week in the **Calendar** view depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
-* [Demo page for the DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)
+* [Demo page for the DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index)
 
 ## Basic Configuration
 

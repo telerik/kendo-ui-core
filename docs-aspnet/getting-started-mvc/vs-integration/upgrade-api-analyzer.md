@@ -25,7 +25,7 @@ The tool also points out the exact piece of code that is affected by a certain c
 
 ## Getting Started
 
-Telerik Upgrade API Analyzer is a click-once application. To download the installation, refer to its [setup page](http://demos.telerik.com/UpgradeAPIAnalyzer/setup.exe).
+Telerik Upgrade API Analyzer is a click-once application. To download the installation, refer to its [setup page](https://demos.telerik.com/UpgradeAPIAnalyzer/setup.exe).
 
 > The tool relies on Microsoft .NET Framework 4.5.2. If not installed on your machine, the setup of the tool installs it automatically.
 
@@ -50,7 +50,7 @@ After the setup of the tool is ready, the Upgrade API Analyzer starts analyzing 
 
 ![The tool starts analyzing as soon as you open a solution](../../getting-started-mvc/vs-integration/images/upgrade-api-analyzer_1.png)
 
-The tool lists all the changes that are found between the two versions. To present the results from the comparison, the it uses the [RadGridView for WPF](http://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html), which provides options for data handling such as sorting, filtering, and resizing columns.
+The tool lists all the changes that are found between the two versions. To present the results from the comparison, the it uses the [RadGridView for WPF](https://docs.telerik.com/devtools/wpf/controls/radgridview/overview2.html), which provides options for data handling such as sorting, filtering, and resizing columns.
 
 ![The Upgrade API Analyzer lists the found differences](../../getting-started-mvc/vs-integration/images/upgrade-api-analyzer_2.png)
 
@@ -80,7 +80,7 @@ To provide your feedback on the Upgrade API Analyzer, either send your comments:
 * Through the **Feedback** link inside the Upgrade API Analyzer, or
 * Directly to [UpgradeApiAnalyzer@telerik.com](mailto:UpgradeApiAnalyzer@telerik.com).
 
-For more information on possible issues and their solutions, refer to the section on the frequently asked questions in the [API Analyzer Helps Upgrading Telerik Projects](http://www.telerik.com/blogs/api-analyzer-helps-upgrading-telerik-projects) blog post.
+For more information on possible issues and their solutions, refer to the section on the frequently asked questions in the [API Analyzer Helps Upgrading Telerik Projects](https://www.telerik.com/blogs/api-analyzer-helps-upgrading-telerik-projects) blog post.
 
 ## See Also
 

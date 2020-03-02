@@ -30,5 +30,5 @@ The following example demonstrates how to specify a direction for the desired ef
 
 ## See Also
 
-* [Basic Usage of FX (Demo)](http://demos.telerik.com/kendo-ui/fx/expand)
+* [Basic Usage of FX (Demo)](https://demos.telerik.com/kendo-ui/fx/expand)
 * [JavaScript API Reference of FX](/api/javascript/effects/common)

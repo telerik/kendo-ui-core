@@ -114,4 +114,4 @@ For a complete example on basic ToolBar events, refer to the [demo on using the 
 * [Basic Usage of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar)
 * [Using the API of the ToolBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/toolbar/api)
 * [ToolBar Server-Side API](/api/toolbar)
-* [ToolBar Client-Side API](http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)
+* [ToolBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar)

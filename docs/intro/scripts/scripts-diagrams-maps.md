@@ -12,7 +12,7 @@ The following table lists the individual script files for the Kendo UI Diagram a
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Diagram](http://demos.telerik.com/kendo-ui/diagram/index) | jquery.js | |
+| [Diagram](https://demos.telerik.com/kendo-ui/diagram/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
@@ -37,7 +37,7 @@ The following table lists the individual script files for the Kendo UI Diagram a
 | | kendo.list.js | Editing feature (optional) |
 | | kendo.dropdownlist.js | Editing feature (optional) |
 | | kendo.dataviz.diagram.js | |
-| [Map](http://demos.telerik.com/kendo-ui/map/index) | jquery.js | |
+| [Map](https://demos.telerik.com/kendo-ui/map/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |

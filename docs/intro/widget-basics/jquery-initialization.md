@@ -13,7 +13,7 @@ All Kendo UI widgets are registered as [jQuery plugins](http://learn.jquery.com/
 
 The jQuery plugin method is formed by the widget name in Pascal Case that is prefixed with `kendo` as in `kendoGrid` and `kendoListView`. To avoid collisions with their desktop counterparts, the methods for the hybrid UI widgets are prefixed with `Mobile` as in `kendoMobileTabStrip`, `kendoMobileButton`, and `kendoMobileListView`.
 
-Some Kendo UI widgets have specific requirements about the element types on which they are instantiated. For more details and working examples, refer to the source code in the [respective widget demo](http://demos.telerik.com/kendo-ui/) and [API reference](/api/javascript/kendo).
+Some Kendo UI widgets have specific requirements about the element types on which they are instantiated. For more details and working examples, refer to the source code in the [respective widget demo](https://demos.telerik.com/kendo-ui/) and [API reference](/api/javascript/kendo).
 
 > * Avoid initializing several different Kendo UI widgets from the same DOM element because duplicate initialization might lead to undesired side effects.
 > * It is strongly recommended to initialize the Kendo UI widgets from HTML elements which are part of the DOM tree. Creating widgets from [document fragments](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) might cause undesired side effects or lead to JavaScript errors.

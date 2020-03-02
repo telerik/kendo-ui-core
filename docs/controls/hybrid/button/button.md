@@ -9,7 +9,7 @@ component: mobile-button
 
 # Hybrid UI Button Overview
 
-The [Hybrid UI Button widget](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index) navigates to a mobile View or executes a custom callback when tapped.
+The [Hybrid UI Button widget](https://demos.telerik.com/kendo-ui/m/index#mobile-button/index) navigates to a mobile View or executes a custom callback when tapped.
 
 ## Getting Started
 

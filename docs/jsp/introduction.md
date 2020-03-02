@@ -123,7 +123,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 8** Use any Kendo UI HtmlHelper extension.
 
@@ -137,15 +137,15 @@ You are also able to include the JavaScript and CSS files from CDN. Do not forge
 
 
 
-       <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-       <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+       <link href="https://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+       <link href="https://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
 
        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-       <script src="http://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
+       <script src="https://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
 
 ## Next Steps
 
-To gain more practice on Progress Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
+To gain more practice on Progress Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](https://www.youtube.com/kendouitv):
 
 1. [Get Started with Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
 1. [Get Started with Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)

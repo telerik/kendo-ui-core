@@ -49,7 +49,7 @@ To fix this issue, apply the following approaches for:
 
 To fix the vertical overflowing of the Grid, use any of the following approaches:
 
-* Enable the scrolling functionality of the Grid. It is active by default except when using the [Kendo UI Grid for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview) (for historical and backwards compatibility reasons).
+* Enable the scrolling functionality of the Grid. It is active by default except when using the [Kendo UI Grid for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview) (for historical and backwards compatibility reasons).
 * Remove the `height` of the Grid. Apply a height for the Grid only if the scrolling of the Grid is enabled.
 * Apply an `overflow:auto` style to the `<div>` of the Grid, that is, to the `<div class="k-widget k-grid">` element. Use this approach only if the previous ones are unacceptable.
 
@@ -57,7 +57,7 @@ To fix the vertical overflowing of the Grid, use any of the following approaches
 
 To fix the horizontal overflowing of the Grid, use any of the following approaches:
 
-* Enable the scrolling functionality of the Grid. It is active by default except when using the [Kendo UI Grid for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/helpers/grid/overview) (for historical and backwards compatibility reasons).
+* Enable the scrolling functionality of the Grid. It is active by default except when using the [Kendo UI Grid for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/helpers/grid/overview) (for historical and backwards compatibility reasons).
 * Set a `width` that is large enough to display the content of the Grid or set a `min-width` style to the `<div>` of the Grid, that is, to the `<div class="k-widget k-grid">` element.
 * Apply a `display:table` or `display:table-cell` style to the `<div>` of the Grid.
 * [Float](https://developer.mozilla.org/en-US/docs/Web/CSS/float) the Grid wrapper and [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear) the float right after the widget. Floated elements expand and shrink automatically to enclose their content when needed. Use this approach only if the previous ones are unacceptable.

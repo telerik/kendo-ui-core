@@ -55,4 +55,4 @@ edit:function(e){
 }
 ```
 
-For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/OWIGe).
+For the complete implementation, refer to [this Dojo example](https://dojo.telerik.com/OWIGe).

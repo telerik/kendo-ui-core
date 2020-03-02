@@ -12,7 +12,7 @@ The Kendo UI RangeSlider displays a range of values and allows you to select ran
 
 Unlike the HTML5 range input, the RangeSlider enables the consistent experience across browsers and provides a rich API and event model. The RangeSlider provides configuration options for customizing its behavior, for example, setting its minimum and maximum values, orientation, step, and tooltip format and placement.
 
-* [Demo page for the RangeSlider](http://demos.telerik.com/kendo-ui/slider/events)
+* [Demo page for the RangeSlider](https://demos.telerik.com/kendo-ui/slider/events)
 
 ## Basic Configuration
 
@@ -44,11 +44,11 @@ The following example demonstrates how to customize the RangeSlider.
 
 ## Referencing Existing Instances
 
-To reference to an existing RangeSlider instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the API to control its behavior.
+To reference to an existing RangeSlider instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the API to control its behavior.
 
     var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
 
 ## See Also
 
-* [Basic Usage of the RangeSlider (Demo)](http://demos.telerik.com/kendo-ui/slider/events)
+* [Basic Usage of the RangeSlider (Demo)](https://demos.telerik.com/kendo-ui/slider/events)
 * [JavaScript API Reference of the RangeSlider](/api/javascript/ui/rangeslider)

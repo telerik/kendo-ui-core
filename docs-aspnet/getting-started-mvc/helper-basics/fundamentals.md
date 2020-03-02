@@ -14,7 +14,7 @@ Telerik UI for ASP.NET MVC is a set of server-side wrappers (HTML helpers) that 
 
 For more information on the difference between helpers and widgets, refer to the [Telerik UI for ASP.NET MVC introduction article]({% slug overview_aspnetmvc6_aspnetmvc %}#widgets-vs-helpers).
 
-As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](http://demos.telerik.com/kendo-ui/). As a result, regardless of whether the document is ready at the point of execution or not, the code placed outside a document-ready handler is executed before the code within the handler. This change affects the usage of the Telerik UI for ASP.NET MVC components because the widgets for the MVC helpers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a widget and its API calls within a document-ready handler.
+As of the jQuery 3.0 release, the [document-ready handlers are called asynchronously](https://demos.telerik.com/kendo-ui/). As a result, regardless of whether the document is ready at the point of execution or not, the code placed outside a document-ready handler is executed before the code within the handler. This change affects the usage of the Telerik UI for ASP.NET MVC components because the widgets for the MVC helpers are initialized in a document-ready handler. This means that after the jQuery 3.0 release you need to get the reference of a widget and its API calls within a document-ready handler.
 
 ## Basic Configuration
 

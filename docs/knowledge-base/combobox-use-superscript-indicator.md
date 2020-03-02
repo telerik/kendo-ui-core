@@ -73,4 +73,4 @@ How can I use subscript indicators in the ComboBox widget?
 
 ## See Also
 
-* [API Reference of the ComboBox](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)
+* [API Reference of the ComboBox](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)

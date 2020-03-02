@@ -44,7 +44,7 @@ How can I render an auto-resizing Kendo UI Editor in a Kendo UI Grid editor temp
 ```dojo
 <div id="grid"></div>
 <script>
-    var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
         dataSource = new kendo.data.DataSource({
           transport: {
             read: {

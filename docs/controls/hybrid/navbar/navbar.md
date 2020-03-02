@@ -9,7 +9,7 @@ component: navbar
 
 # NavBar Overview
 
-The [Hybrid UI NavBar widget](http://demos.telerik.com/kendo-ui/m/index#navbar/index) is used inside a mobile View or Layout `header` element to display an application navigation bar. The mobile NavBar may display the current view title in the center, and optionally some additional left- and right-aligned widgets&mdash;a back button, settings button, etc.
+The [Hybrid UI NavBar widget](https://demos.telerik.com/kendo-ui/m/index#navbar/index) is used inside a mobile View or Layout `header` element to display an application navigation bar. The mobile NavBar may display the current view title in the center, and optionally some additional left- and right-aligned widgets&mdash;a back button, settings button, etc.
 
 ## Getting Started
 

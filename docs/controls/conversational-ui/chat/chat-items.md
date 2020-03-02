@@ -210,5 +210,5 @@ The following example demonstrates how to place a [Kendo UI Calendar]({% slug ov
 
 ## See Also
 
-* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

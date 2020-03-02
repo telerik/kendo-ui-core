@@ -31,7 +31,7 @@ How can I enable the copying of the selected items in a TreeList?
 
 ## Solution
 
-This functionality is not part of the built-in TreeList settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/11317023-enable-multi-selection-in-treelist-a-la-grid-and-s](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/11317023-enable-multi-selection-in-treelist-a-la-grid-and-s).
+This functionality is not part of the built-in TreeList settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [https://feedback.telerik.com/kendo-jquery-ui/1359707-enable-multi-selection-in-treelist-a-la-grid-and-support-copying-selection-to-clipboard](https://feedback.telerik.com/kendo-jquery-ui/1359707-enable-multi-selection-in-treelist-a-la-grid-and-support-copying-selection-to-clipboard).
 
 ## Suggested Workarounds
 

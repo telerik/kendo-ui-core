@@ -33,7 +33,7 @@ How can I create a custom editor in the Kendo UI Grid in AngularJS applications?
 
 ## Solution
 
-The following example demonstrates how to create a custom editor in the [Grid](http://www.telerik.com/kendo-ui/grid) in AngularJS applications.
+The following example demonstrates how to create a custom editor in the [Grid](https://www.telerik.com/kendo-ui/grid) in AngularJS applications.
 
 ```dojo
   <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

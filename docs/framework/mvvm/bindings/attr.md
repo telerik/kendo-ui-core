@@ -7,11 +7,11 @@ slug: attributebinding_mvvm_kendoui
 
 # Attribute Binding
 
-The [Kendo UI Attribute (`attr`) binding](http://demos.telerik.com/kendo-ui/mvvm/attributes) populates DOM element attributes from View-Model fields or methods.
+The [Kendo UI Attribute (`attr`) binding](https://demos.telerik.com/kendo-ui/mvvm/attributes) populates DOM element attributes from View-Model fields or methods.
 
 This is useful in many cases, such as setting the `href` and `title` of a hyperlink, setting the `src` attribute of an image, etc. If the View-Model fields change, the attributes get updated.
 
-> The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) do not support the `attr` binding.
+> The [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) do not support the `attr` binding.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ The following example demonstrates how to implement the Attribute binding. The `
     <img id="logo" data-bind="attr: { src: imageSource, alt: imageAlt }" />
     <script>
     var viewModel = kendo.observable({
-        imageSource: "http://www.telerik.com/image/kendo-logo.png",
+        imageSource: "https://www.telerik.com/image/kendo-logo.png",
         imageAlt: "Kendo Logo"
     });
 
@@ -31,7 +31,7 @@ The following example demonstrates how to implement the Attribute binding. The `
 
 After calling `kendo.bind`, the image looks in the following way. The `data-bind` attribute is removed for clarity. Changing the `imageSource` or `imageAlt` fields will update the `src` and `alt` attributes respectively.
 
-    <img id="logo" src="http://www.telerik.com/image/kendo-logo.png" alt="Kendo Logo"" />
+    <img id="logo" src="https://www.telerik.com/image/kendo-logo.png" alt="Kendo Logo"" />
 
 ## Important Notes
 

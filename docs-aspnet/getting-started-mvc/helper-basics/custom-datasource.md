@@ -12,13 +12,13 @@ permalink: /getting-started/helper-basics/custom-datasource
 
 Telerik UI for ASP.NET MVC enables you to use the CustomDataSource builder that is available helpers which support data binding.
 
-The CustomDataSource builder provides full control over the [DataSource client-side API options](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource). The CustomDataSource builder facilitate the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
+The CustomDataSource builder provides full control over the [DataSource client-side API options](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource). The CustomDataSource builder facilitate the usage of the Telerik UI helpers&mdash;for example, the helpers generate validation attributes, editors, and so on, while they utilize the flexibility of JavaScript. The CustomDataSource builder can also be used in more advanced scenarios where the regular DataSource builders prevent you from fully customizing the options of the DataSource.
 
 ## Getting Started
 
 The CustomDataSource builder removes all predefined settings that are introduced by the regular DataSource builders.
 
-The following example demonstrates how to convert a regular [Grid](http://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
+The following example demonstrates how to convert a regular [Grid](https://demos.telerik.com/kendo-ui/grid/index) AjaxDataSourceBuilder to a CustomDataSource builder.
 
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
@@ -145,7 +145,7 @@ The following example demonstrates how to set a JavaScript function for the `Rea
     <script>
         function customRead(options) {
             $.ajax({
-                url: "http://demos.telerik.com/kendo-ui/service/meetings",
+                url: "https://demos.telerik.com/kendo-ui/service/meetings",
                 dataType: "jsonp",
                 success: function (data) {
                     alert("Data is received");
@@ -236,19 +236,19 @@ The following example demonstrates how to bind the Grid to the Kendo UI online d
             .Transport(transport =>
             {
                 transport.Read(read =>
-                   read.Url("http://demos.telerik.com/kendo-ui/service/products")
+                   read.Url("https://demos.telerik.com/kendo-ui/service/products")
                        .DataType("jsonp")
                 );
                 transport.Create(create =>
-                   create.Url("http://demos.telerik.com/kendo-ui/service/products/create")
+                   create.Url("https://demos.telerik.com/kendo-ui/service/products/create")
                          .DataType("jsonp")
                 );
                 transport.Update(update =>
-                   update.Url("http://demos.telerik.com/kendo-ui/service/products/update")
+                   update.Url("https://demos.telerik.com/kendo-ui/service/products/update")
                          .DataType("jsonp")
                 );
                 transport.Destroy(destroy =>
-                   destroy.Url("http://demos.telerik.com/kendo-ui/service/products/destroy")
+                   destroy.Url("https://demos.telerik.com/kendo-ui/service/products/destroy")
                           .DataType("jsonp")
                 );
                 transport.ParameterMap("parameterMap");
@@ -281,7 +281,7 @@ The following example demonstrates how to bind the Grid to the oData service. Fo
             .Custom()
             .Type("odata")
             .Transport(transport =>
-               transport.Read(read => read.Url("http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
+               transport.Read(read => read.Url("https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"))
             )
             .PageSize(20)
             .ServerPaging(true)

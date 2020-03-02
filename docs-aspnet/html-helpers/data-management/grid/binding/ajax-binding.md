@@ -15,7 +15,7 @@ When configured for Ajax binding, the Grid for {{ site.framework }} makes Ajax r
 
 The Ajax-bound mode has the following features:
 - The Grid retrieves only the data (in JSON format) representing the current page. As a result, only the Grid is updated.
-- All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI for jQuery template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
+- All Grid templates (column, detail) are executed client-side. They follow the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 To configure the Grid for {{ site.framework }} to do Ajax binding to the **Products** table of the Northwind database:
 

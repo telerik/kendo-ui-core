@@ -15,7 +15,7 @@ The usage of `cm`, `in`, `mm`, `pt`, or any other than `px` leads to unpredictab
 
 To draw the DOM, you inspect the computed styles of the elements and at that stage all dimensions are converted to pixels. For example, look at a `<div style='width: 1cm'>`. Assuming a correct display of the dots-per-inch (DPI) setting, this element has to be rendered by the browser on screen as being `1cm` wide. When you query the width in its computed style, however, you get back `37.78125px`. Note that this may vary depending on the display.
 
-For simplicity, and since the computed style yields back pixels, the PDF generator keeps a 1:1 mapping between the screen pixels and the default PDF unit, which is the [typographic point](http://en.wikipedia.org/wiki/Point_%28typography%29) (`pt`). This means that the same element will be rendered to PDF with a length of `37.78125pt`. Here are the conversion rules for these units:
+For simplicity, and since the computed style yields back pixels, the PDF generator keeps a 1:1 mapping between the screen pixels and the default PDF unit, which is the [typographic point](https://en.wikipedia.org/wiki/Point_%28typography%29) (`pt`). This means that the same element will be rendered to PDF with a length of `37.78125pt`. Here are the conversion rules for these units:
 
 - `1 pt = 1/72 in` (points to inches)
 - `1 in = 2.54 cm` (inches to centimeters)

@@ -42,7 +42,7 @@ How can I filter the events by resources in the Scheduler with a Kendo UI ComboB
 1. Subscribe to the `change` event of the widget.
 1. Filter the data source of the Scheduler by using the selection of the ComboBox or DropDownList.
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/@nenchef/ipuzUN/2).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/@nenchef/ipuzUN/2).
 
 ```dojo
 <div id="example">

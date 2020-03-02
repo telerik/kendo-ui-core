@@ -12,7 +12,7 @@ The Kendo UI RippleContainer widget provides [the Material ink ripple effect](ht
 
 The RippleContainer is compatible only with [the SASS-based Material Theme](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes). The ripple effect is applied to all components that are located inside the `RippleContainer` element.
 
-* [Demo page for the RippleContainer](http://demos.telerik.com/kendo-ui/ripplecontainer/index)
+* [Demo page for the RippleContainer](https://demos.telerik.com/kendo-ui/ripplecontainer/index)
 
 ## Initializing the RippleContainer
 
@@ -36,7 +36,7 @@ The RippleContainer provides a [set of elements]({% slug elements_kendoui_ripple
 
 ## Referencing Existing Instances
 
-To reference an existing RippleContainer instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/) and the [RippleContainer API](/api/web/ripplecontainer) to control its behavior.
+To reference an existing RippleContainer instance, use [`jQuery.data()`](https://api.jquery.com/jQuery.data/) and the [RippleContainer API](/api/web/ripplecontainer) to control its behavior.
 
 The following example demonstrates how to access an existing RippleContainer instance.
 

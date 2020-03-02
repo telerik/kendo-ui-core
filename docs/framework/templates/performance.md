@@ -8,7 +8,7 @@ position: 2
 
 # Performance
 
-The [Kendo UI Templates](http://demos.telerik.com/kendo-ui/templates/index) enable you to improve immensely the performance of your project.  
+The [Kendo UI Templates](https://demos.telerik.com/kendo-ui/templates/index) enable you to improve immensely the performance of your project.  
 
 With JavaScript applications running on a myriad of low-power devices, such as phones and tablets, it is essential that applications squeeze every last bit of performance out of their code. Code that may look fine on a desktop browser like Chrome can crawl on a tablet if not carefully engineered. While the Kendo UI Templates do not offer as many features as other JavaScript templating libraries, they do so intentionally to deliver better performance. Depending on the browser and computer (templates run on the client machine, so naturally there are variances), Kendo UI Templates are up to 60 times (6000%) faster than jQuery templates. To compare performance results directly, [refer to the live JSPerf test](http://jsperf.com/dom-vs-innerhtml-based-templating/509).
 

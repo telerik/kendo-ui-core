@@ -42,7 +42,7 @@ The following example demonstrates how to:
 3. Show nested items under the TreeView elements.
 
 ```dojo
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css">
 
   <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">

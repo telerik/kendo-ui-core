@@ -12,7 +12,7 @@ The DateRangePicker is a container for holding start and end date inputs.
 
 It allows the user to select a date range from a calendar or through a direct input. The widget also supports custom templates for its `month` view, configuration options for minimum and maximum dates, a start view, and a depth for navigation. The first day of the week in the **Calendar** view depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
-* [Demo page for the DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index)
+* [Demo page for the DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/index)
 
 ## Basic Configuration
 

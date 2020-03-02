@@ -15,7 +15,7 @@ This article demonstrates how to include the client-side resources which are req
 As the UI for ASP.NET Core suite is a set of [server-side wrappers over the Kendo UI for jQuery client-side widgets](https://docs.telerik.com/aspnet-core/introduction#widgets-vs-helpers), to run the components, you have to provide the same set of web assets. For more information on the files you need, refer to the articles on:
 
 * [Getting Started with Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/intro/first-steps) - Add the required JavaScript and CSS files
-* [Getting Started with Kendo UI Themes](http://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)
+* [Getting Started with Kendo UI Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#getting-started)
 
 To include the client-side resources, use any of the following approaches:
 

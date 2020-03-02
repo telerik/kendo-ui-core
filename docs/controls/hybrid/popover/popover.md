@@ -9,7 +9,7 @@ component: pop-over
 
 # PopOver Overview
 
-The [Hybrid UI PopOver widget](http://demos.telerik.com/kendo-ui/m/index#popover/index) represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. It can contain one or more mobile views which can be navigated to, if needed.
+The [Hybrid UI PopOver widget](https://demos.telerik.com/kendo-ui/m/index#popover/index) represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. It can contain one or more mobile views which can be navigated to, if needed.
 
 ## Getting Started
 

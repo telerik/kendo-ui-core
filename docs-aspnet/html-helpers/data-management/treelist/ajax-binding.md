@@ -14,7 +14,7 @@ When configured for Ajax binding, the Telerik UI TreeList for {{ site.framework 
 
 The Ajax-bound mode has the following features:
 - The TreeList retrieves only the data (in JSON format) representing the current level items.
-- All column templates are executed client-side. They follow the [Kendo UI for jQuery template](http://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
+- All column templates are executed client-side. They follow the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 To configure the TreeList for {{ site.framework }} to do Ajax binding:
 

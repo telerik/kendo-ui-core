@@ -31,8 +31,8 @@ How can I change the default two decimals places in the numeric filters in a gri
 
 To change the decimals precision:
 
-1. Subscribe for the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event of the Grid.
-1. In the `filterMenuInit` event handler, use [`setOptions`](http://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method to set new values for the [`decimals`](http://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals) and [`format`](http://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format) configurations.
+1. Subscribe for the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event of the Grid.
+1. In the `filterMenuInit` event handler, use [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/setoptions) method to set new values for the [`decimals`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/decimals) and [`format`](https://docs.telerik.com/kendo-ui/api/javascript/ui/numerictextbox/configuration/format) configurations.
 
 ```dojo
 <div id="grid"></div>

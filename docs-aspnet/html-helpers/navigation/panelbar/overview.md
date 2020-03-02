@@ -96,7 +96,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 ## Referencing Existing Instances
 
-To reference an existing PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side PanelBar API](http://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
+To reference an existing PanelBar instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [client-side PanelBar API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar#methods) to control its behavior.
 
     // Place this after the PanelBar for {{ site.framework }} declaration.
     <script>
@@ -111,5 +111,5 @@ To reference an existing PanelBar instance, use the [`jQuery.data()`](http://api
 * [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)
 * [Using the API of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/api)
 * [PanelBar Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/panelbar)
-* [PanelBarBuilder Server-Side API](http://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
+* [PanelBarBuilder Server-Side API](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/PanelBarBuilder)
 * [PanelBar Server-Side API](/api/panelbar)

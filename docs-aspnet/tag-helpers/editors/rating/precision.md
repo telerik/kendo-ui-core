@@ -56,4 +56,4 @@ With half precision the Rating widget allows to set decimal values. The passed v
 
 ## See Also
 
-* [Server-Side API](http://docs.telerik.com/aspnet-core/api/Kendo.Mvc/Rating)
+* [Server-Side API](https://docs.telerik.com/aspnet-core/api/rating)

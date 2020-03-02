@@ -7,7 +7,7 @@ slug: eventsbinding_mvvm_kendoui
 
 # Events Binding
 
-The [Kendo UI Events (`events`) binding](http://demos.telerik.com/kendo-ui/mvvm/event) attaches methods of the View-Model to specified DOM events.
+The [Kendo UI Events (`events`) binding](https://demos.telerik.com/kendo-ui/mvvm/event) attaches methods of the View-Model to specified DOM events.
 
 The methods will be invoked when the associated DOM event is raised.
 
@@ -38,11 +38,11 @@ The following example demonstrates how to use the `events` binding.
 
 ## Accessing DOM Event Arguments
 
-Kendo UI MVVM supplies the DOM event argument wrapped in a jQuery [`Event` object](http://api.jquery.com/category/events/event-object/).
+Kendo UI MVVM supplies the DOM event argument wrapped in a jQuery [`Event` object](https://api.jquery.com/category/events/event-object/).
 
 ## Preventing DOM Event Bubbling
 
-To prevent the event from bubbling up the DOM tree, use the [`stopPropagation`](http://api.jquery.com/event.stopPropagation/) method.
+To prevent the event from bubbling up the DOM tree, use the [`stopPropagation`](https://api.jquery.com/event.stopPropagation/) method.
 
     <span data-bind="events: { click: click }">Click</span>
     <script>
@@ -57,7 +57,7 @@ To prevent the event from bubbling up the DOM tree, use the [`stopPropagation`](
 
 ## Preventing Default Actions of DOM Events
 
-Some DOM events have a default action. For example, the `click` event may navigate to another page or submit a form. To prevent the default action, use the [`preventDefault`](http://api.jquery.com/event.preventDefault/) method.
+Some DOM events have a default action. For example, the `click` event may navigate to another page or submit a form. To prevent the default action, use the [`preventDefault`](https://api.jquery.com/event.preventDefault/) method.
 
     <a href="http://example.com" data-bind="events: { click: click }">Click</a>
     <script>

@@ -50,7 +50,7 @@ The following example demonstrates how to build a static hint.
     </script>
 ```
 
-The following example demonstrates how to disable the hint by setting the `hint` option to an empty function ([`jQuery.noop`](http://api.jquery.com/jQuery.noop/)).
+The following example demonstrates how to disable the hint by setting the `hint` option to an empty function ([`jQuery.noop`](https://api.jquery.com/jQuery.noop/)).
 
 ```dojo
     <ul id="sortable">

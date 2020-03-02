@@ -117,5 +117,5 @@ How to implement a Kendo ContextMenu, which allows the user to change the resour
 
 ## See Also
 
-* [Kendo Scheduler API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Kendo ContextMenu API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)
+* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Kendo ContextMenu API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu)

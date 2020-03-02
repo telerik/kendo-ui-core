@@ -41,7 +41,7 @@ How can I show target lines for each Chart bar?
 ## Solution
 
 Use either of the following approaches:
-1. Implement the [Kendo UI Bullet Chart](http://demos.telerik.com/kendo-ui/bullet-charts/index), or
+1. Implement the [Kendo UI Bullet Chart](https://demos.telerik.com/kendo-ui/bullet-charts/index), or
 1. Utilize [custom visuals](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.visual).
 
 The following example demonstrates how to use the custom visuals approach.

@@ -8,7 +8,7 @@ slug: connect_to_ms_bot_framework
 
 # Microsoft Bot Framework
 
-You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](http://demos.telerik.com/kendo-ui/chat/index) widget and the [Microsoft Bot Framework](https://dev.botframework.com/).
+You can configure a [Chat `agent` class]({% slug connect_to_chatbot_service %}) that handles the communication between the [Chat](https://demos.telerik.com/kendo-ui/chat/index) widget and the [Microsoft Bot Framework](https://dev.botframework.com/).
 
 In this case, the establishment of a connection to the service and the binding of the appropriate events are done within the `init` method. The `agent` is subscribed to listen for any `activity$` of the remote service. When an activity is detected, the appropriate method from the Chat public API is invoked to render the data. To handle the user input, the example implements the [`post`](/api/javascript/ui/chat/events/post) event handler of the Chat and the arguments are passed to the Chat Bot service.
 
@@ -87,5 +87,5 @@ In this case, the establishment of a connection to the service and the binding o
 
 ## See Also
 
-* [Basic Usage of the Chat (Demo)](http://demos.telerik.com/kendo-ui/chat/index)
+* [Basic Usage of the Chat (Demo)](https://demos.telerik.com/kendo-ui/chat/index)
 * [JavaScript API Reference of the Chat](/api/javascript/ui/chat)

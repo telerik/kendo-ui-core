@@ -8,7 +8,7 @@ position: 1
 
 # RadialGauge Overview
 
-The [Kendo UI RadialGauge widget](http://demos.telerik.com/kendo-ui/radial-gauge/index) enables users to quickly understand in what certain range a value lies.
+The [Kendo UI RadialGauge widget](https://demos.telerik.com/kendo-ui/radial-gauge/index) enables users to quickly understand in what certain range a value lies.
 
 All graphics render on the client by using the [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) format.
 

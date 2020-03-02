@@ -80,7 +80,7 @@ The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/shee
 
     function bindChart(chart, sheet, range) {
         // Change will fire when the sheet data changes
-        // http://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/events/change
+        // https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/events/change
         sheet.bind("change", function(e) {
             if (e.recalc) {
                update();
@@ -895,5 +895,5 @@ The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/shee
 
 ## See Also
 
-* [Basic Usage of the Spreadsheet (Demo)](http://demos.telerik.com/kendo-ui/spreadsheet/index)
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)

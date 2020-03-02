@@ -50,4 +50,4 @@ kendo.ui.Grid.fn._dirtyIndicatorTemplate = function(field, paramName) {
 }
 ```
 
-For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/aFEjIN).
+For the complete implementation, refer to [this Dojo example](https://dojo.telerik.com/aFEjIN).

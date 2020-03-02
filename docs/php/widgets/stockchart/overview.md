@@ -118,7 +118,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing StockChart instance through the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+You are able to reference an existing StockChart instance through the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
 
 

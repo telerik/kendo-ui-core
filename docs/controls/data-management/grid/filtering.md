@@ -50,4 +50,4 @@ The runnable [demo on implementing custom menu filtering](https://demos.telerik.
 * [Header Row Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-row)
 * [Multi-Checkbox Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-multi-checkboxes)
 * [Custom Menu Filtering by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/filter-menu-customization)
-* [JavaScript API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [JavaScript API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

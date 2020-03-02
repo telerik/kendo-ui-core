@@ -13,7 +13,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index) | jquery.js | |
+| [AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -24,7 +24,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.autocomplete.js | |
-| [Color tools](http://demos.telerik.com/kendo-ui/colorpicker/index) | jquery.js | |
+| [Color tools](https://demos.telerik.com/kendo-ui/colorpicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
 | | kendo.popup.js | |
@@ -33,7 +33,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.slider.js | |
 | | kendo.button.js | |
 | | kendo.colorpicker.js | |
-| [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) | jquery.js | |
+| [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -44,14 +44,14 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.combobox.js | |
-| [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index) | jquery.js | |
+| [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
 | | kendo.calendar.js | |
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
-| [DateRangePicker](http://demos.telerik.com/kendo-ui/daterangepicker/index) | jquery.js | |
+| [DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
@@ -60,7 +60,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.popup.js | |
 | | kendo.datepicker.js | |
 | | kendo.daterangepicker.js | |
-| [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index) | jquery.js | |
+| [DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.selectable.js | |
@@ -69,7 +69,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.datepicker.js | |
 | | kendo.timepicker.js | |
 | | kendo.datetimepicker.js | |
-| [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) | jquery.js | |
+| [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -80,13 +80,13 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.dropdownlist.js | |
-| [DropDownTree](http://demos.telerik.com/kendo-ui/dropdowntree/index) | jquery.js | |
+| [DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.treeview.js | |
 | | kendo.popup.js | |
 | | kendo.dropdowntree.js | |
-| [Editor](http://demos.telerik.com/kendo-ui/editor/index) | jquery.js | |
+| [Editor](https://demos.telerik.com/kendo-ui/editor/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -111,17 +111,17 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.drawing.js | PDF export feature (optional) |
 | | kendo.pdf.js | PDF export feature (optional) |
 | | kendo.editor.js | |
-| [ListBox](http://demos.telerik.com/kendo-ui/listbox/index) | jquery.js | |
+| [ListBox](https://demos.telerik.com/kendo-ui/listbox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.data.js | |
 | | kendo.selectable.js | |
 | | kendo.listbox.js | |
-| [MaskedTextBox](http://demos.telerik.com/kendo-ui/maskedtextbox/index) | jquery.js | |
+| [MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.maskedtextbox.js | |
-| [MultiColumnComboBox](http://demos.telerik.com/kendo-ui/multicolumncombobox/index) | jquery.js | |
+| [MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -133,7 +133,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.multicolumncombobox.js | |
-| [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) | jquery.js | |
+| [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |
@@ -144,23 +144,23 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.multiselect.js | |
-| [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index) | jquery.js | |
+| [NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.numerictextbox.js | |
-| [Slider](http://demos.telerik.com/kendo-ui/slider/index) | jquery.js | |
+| [Slider](https://demos.telerik.com/kendo-ui/slider/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
-| [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index) | jquery.js | |
+| [TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.timepicker.js | |
-| [Upload](http://demos.telerik.com/kendo-ui/upload/index) | jquery.js | |
+| [Upload](https://demos.telerik.com/kendo-ui/upload/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.upload.js | |
-| [Validator](http://demos.telerik.com/kendo-ui/validator/index) | jquery.js | |
+| [Validator](https://demos.telerik.com/kendo-ui/validator/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.validator.js | |
 

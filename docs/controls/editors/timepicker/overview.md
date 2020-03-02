@@ -12,7 +12,7 @@ The TimePicker enables users to select time values from a predefined list or ent
 
 The widget supports configurable options for setting its format, minimum and maximum time, and the interval between the predefined values in the list.
 
-* [Demo page for the TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)
+* [Demo page for the TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index)
 
 ## Initializing the TimePicker
 

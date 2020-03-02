@@ -8,7 +8,7 @@ slug: integrationwith_tabstrip_sortable_widget
 
 # TabStrip Integration
 
-You can use the [Kendo UI Sortable wisget](http://demos.telerik.com/kendo-ui/sortable/index) to reorder the items in the tabs of a TabStrip.
+You can use the [Kendo UI Sortable wisget](https://demos.telerik.com/kendo-ui/sortable/index) to reorder the items in the tabs of a TabStrip.
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ To reorder the tabs of a TabStrip, initialize the Sortable on the `ul.k-tabstrip
         }
     });
 
-To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable. For more information on the Sortable events, refer to the [Sortable API](/api/javascript/ui/sortable#events) and the [demo on integrating the Sortable with the TabStrip](http://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html).
+To avoid visual glitches, activate the current tab at the `start` event handler of the Sortable. For more information on the Sortable events, refer to the [Sortable API](/api/javascript/ui/sortable#events) and the [demo on integrating the Sortable with the TabStrip](https://demos.telerik.com/kendo-ui/web/sortable/integration-tabstrip.html).
 
     start: function(e) {
         $("#tabstrip").data("kendoTabStrip").activateTab(e.item);

@@ -87,6 +87,6 @@ The following example demonstrates how to update the checked state on all child 
 
 ## See Also
 
-* [Basic Usage of the TreeList (Demo)](http://demos.telerik.com/kendo-ui/treelist/index)
+* [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
 * [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
 * [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

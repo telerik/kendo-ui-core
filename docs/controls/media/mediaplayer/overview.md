@@ -15,7 +15,7 @@ The MediaPlayer also provides a styled video UI functionality by using the HTML5
 
 To respond to cutting-end design practices and trends, the MediaPlayer component provides a responsive layout. This means that its size adapts depending on the capabilities of the client (end user) device and browser. The component automatically resizes its area to display the video in the most suitable possible way within the provided dimensions. The responsive web design of the MediaPlayer is shipped out-of-the-box and intends to save you time and efforts when developing your responsive applications.
 
-* [Demo page for the MediaPlayer](http://demos.telerik.com/kendo-ui/mediaplayer/index)
+* [Demo page for the MediaPlayer](https://demos.telerik.com/kendo-ui/mediaplayer/index)
 
 The following image demonstrates a template of the MediaPlayer.
 

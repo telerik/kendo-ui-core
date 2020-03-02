@@ -26,4 +26,4 @@ How can I programmatically access the details row in a Grid?
 
 ## Solution
 
-To programmatically access a detail Grid and apply sorting to its dataSource, refer to [this Dojo example](http://dojo.telerik.com/iSAKi).
+To programmatically access a detail Grid and apply sorting to its dataSource, refer to [this Dojo example](https://dojo.telerik.com/iSAKi).

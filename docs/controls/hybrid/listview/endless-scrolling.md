@@ -9,7 +9,7 @@ position: 2
 
 # Endless Scrolling
 
-The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) supports displaying large amounts of data by appending additional pages of data on demand. Loading can happen automatically by enabling the [endless scrolling functionality](/api/mobile/listview#configuration-endlessScroll), or by displaying a button at the bottom ([ press to load more ](/api/mobile/listview#configuration-loadMore)).
+The [Hybrid UI ListView widget](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) supports displaying large amounts of data by appending additional pages of data on demand. Loading can happen automatically by enabling the [endless scrolling functionality](/api/mobile/listview#configuration-endlessScroll), or by displaying a button at the bottom ([ press to load more ](/api/mobile/listview#configuration-loadMore)).
 
 ## Virtual Mode
 

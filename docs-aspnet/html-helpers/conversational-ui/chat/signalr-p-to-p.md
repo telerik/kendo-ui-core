@@ -164,7 +164,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
         // In this way, the SignalR Hub "knows" who is the user that sends the message
         // and who are the clients that have to receive that message.
         .Name(@name)
-        .IconUrl("http://demos.telerik.com/kendo-ui/content/chat/avatar.png")
+        .IconUrl("https://demos.telerik.com/kendo-ui/content/chat/avatar.png")
     )
     .Events(events => events
         .TypingStart("onTypingStart")

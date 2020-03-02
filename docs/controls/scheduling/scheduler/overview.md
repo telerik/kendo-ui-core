@@ -20,7 +20,7 @@ As of the Kendo UI 2016 Q2 (2016.2.504) release:
 
 The change was driven by the [RFC 5545](http://tools.ietf.org/html/rfc5545#page-120) specification. Note that the previously demonstrated behavior had been incorrect.
 
-* [Demo page for the Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)
+* [Demo page for the Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index)
 
 ## Initializing the Scheduler
 

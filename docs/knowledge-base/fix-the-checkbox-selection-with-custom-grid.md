@@ -54,4 +54,4 @@ checkBox.closest(".k-grid.k-widget").data("kendoMyGrid")
 
 Overwrite the two methods. Note that because the methods are private, their modification might cause unexpected behavior.  
 
-For the complete implementation of the approach, refer to [this runnable example](http://dojo.telerik.com/usiZiM/2).  
+For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/usiZiM/2).  

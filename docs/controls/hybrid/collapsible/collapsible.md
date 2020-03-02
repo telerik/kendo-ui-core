@@ -9,7 +9,7 @@ component: collapsible
 
 # Overview Collapsible
 
-The [Hybrid UI Collapsible widget](http://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
+The [Hybrid UI Collapsible widget](https://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
 
 ## Getting Started
 

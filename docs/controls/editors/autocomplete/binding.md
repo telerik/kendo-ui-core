@@ -42,7 +42,7 @@ The following example demonstrates how to bind the AutoComplete to a local data 
 
 ## Binding to Remote Data
 
-Remote data binding is useful when you bind suggestions for larger datasets so that the items are loaded on demand upon display. To perform remote data binding, use the [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) which is an abstraction for local and remote data. You can use the DataSource for serving data from various data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+Remote data binding is useful when you bind suggestions for larger datasets so that the items are loaded on demand upon display. To perform remote data binding, use the [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) which is an abstraction for local and remote data. You can use the DataSource for serving data from various data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
 The following example demonstrates how to bind the AutoComplete to a remote data service by using oData and the DataSource component.
 

@@ -17,7 +17,7 @@ This article is an overview of the Kendo UI Sales Hub sample project. The Kendo 
 
 The Sales Hub project is an Order Management System that demonstrates the usage of Telerik UI for ASP.NET MVC in an enterprise environment.
 
-The goal of this sample project to is show how to use a subset of Kendo UI widgets using Telerik UI for ASP.NET MVC as well as to show how to easily implement server-side filtering for [DataSource](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource) requests, using the server-side components that Telerik UI for ASP.NET MVC provides.
+The goal of this sample project to is show how to use a subset of Kendo UI widgets using Telerik UI for ASP.NET MVC as well as to show how to easily implement server-side filtering for [DataSource](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource) requests, using the server-side components that Telerik UI for ASP.NET MVC provides.
 
 This sample is not feature-complete and is only meant to be used as a reference for how to use Telerik UI for ASP.NET MVC.
 
@@ -25,7 +25,7 @@ This sample is not feature-complete and is only meant to be used as a reference 
 
 ### View the Live Site
 
-To view the demo of the Kendo UI Sales Hub sample project, refer to [demos.telerik.com/kendo-ui/saleshub](http://demos.telerik.com/kendo-ui/saleshub).
+To view the demo of the Kendo UI Sales Hub sample project, refer to [demos.telerik.com/kendo-ui/saleshub](https://demos.telerik.com/kendo-ui/saleshub).
 
 ### Get the Source Code
 
@@ -37,7 +37,7 @@ Start by getting the source for the [SalesHub from GitHub](https://github.com/te
 
 > Due to licensing restrictions, **the sample project does not include the dll for the Telerik UI for ASP.NET MVC**.
 
-If you have a license for Telerik UI for ASP.NET MVC, use the [Telerik Control Panel](http://www.telerik.com/download-trial-file.aspx?pid=972) to download and install the extensions. If you do not have a license yet, download and install the [free trial](http://www.telerik.com/download/kendo-ui-complete) for the extensions.
+If you have a license for Telerik UI for ASP.NET MVC, use the [Telerik Control Panel](https://www.telerik.com/download-trial-file.aspx?pid=972) to download and install the extensions. If you do not have a license yet, download and install the [free trial](https://www.telerik.com/download/kendo-ui-complete) for the extensions.
 
 Once you download and install the extensions, copy `\wrappers\aspnetmvc\Binaries\Mvc3\Kendo.Mvc.dll` from the installation directory of Telerik UI for ASP.NET MVC to the `SalesHub\libs` directory.
 

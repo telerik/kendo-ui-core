@@ -12,7 +12,7 @@ The hybrid Telerik UI Button HtmlHelper for ASP.NET MVC is a server-side wrapper
 
 The Button navigates to a mobile View or executes a custom callback when tapped.
 
-* [Demo page for the Button](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index)
+* [Demo page for the Button](https://demos.telerik.com/kendo-ui/m/index#mobile-button/index)
 
 ## Basic Configuration
 
@@ -132,4 +132,4 @@ You can reference a hybrid Button instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid ButtonBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)
+* [Hybrid ButtonBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileButtonBuilder)

@@ -12,7 +12,7 @@ The Sortable provides a sortable drag-and-drop functionality to elements within 
 
 The Sortable does not support integration with the Kendo UI TreeList widget.
 
-* [Demo page for the Sortable](http://demos.telerik.com/kendo-ui/sortable/index)
+* [Demo page for the Sortable](https://demos.telerik.com/kendo-ui/sortable/index)
 
 ## Initializing the Sortable
 

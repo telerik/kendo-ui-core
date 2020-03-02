@@ -86,7 +86,7 @@ To achieve this behavior:
 
 ## See Also
 
-* [Basic Usage of the Diagram (Demo)](http://demos.telerik.com/kendo-ui/diagram/index)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Pan with Mouse Wheel]({% slug howto_pan_with_mouse_wheel %})
 * [How to Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagram %})

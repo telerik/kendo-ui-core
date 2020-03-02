@@ -29,9 +29,9 @@ How can I group columns which are bound to objects?
 
 ## Solution
 
-1. When the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/group) event fires, check for a group by the column which is bound to an object.
+1. When the [`group`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/group) event fires, check for a group by the column which is bound to an object.
 
-1. If such a group exists, use the [`group`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/group) method of the dataSource to add a group by one of the properties of the object.
+1. If such a group exists, use the [`group`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/group) method of the dataSource to add a group by one of the properties of the object.
 
 ```       
     <div id="grid"></div>

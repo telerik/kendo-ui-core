@@ -43,6 +43,6 @@ For more information on updating a document on GitHub, refer to [this article on
 
 Using the Kendo UI forums is yet another straightforward way to submit your suggestion. However, this approach takes more time for the issue to reach our team of Technical Writers. If you like the accountability of forums and need a quick reply from our support team, leaving feedback in the Kendo UI forums guarantees that your suggestion has a support number and that the team will follow up on it.
 
-1. Visit the [Kendo UI Forums](http://www.telerik.com/forums/kendo-ui).
+1. Visit the [Kendo UI Forums](https://www.telerik.com/forums/kendo-ui).
 1. Check if the topic already exists by using the **Search** box.
 1. Add your feedback to an existing topic if relevant, or create a new one.

@@ -8,7 +8,7 @@ position: 3
 
 # Grouping
 
-As of the Kendo UI Q1 2015 (2015.1.318) release, the [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) support binding to a grouped [DataSource]({% slug overview_kendoui_datasourcecomponent %}).
+As of the Kendo UI Q1 2015 (2015.1.318) release, the [Kendo UI AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) support binding to a grouped [DataSource]({% slug overview_kendoui_datasourcecomponent %}).
 
 Grouping enables you to display data items that are categorized by a specific model field. The ComboBox supports grouping by utilizing the [`group` configuration of the Kendo UI DataSource](/api/javascript/data/datasource/configuration/group).
 

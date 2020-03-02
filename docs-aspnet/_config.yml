@@ -1298,10 +1298,10 @@ api_columns_count: 2
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet
 download: https://www.telerik.com/download-trial-file/v2/aspnet-core-ui
 nav:
-  "Demos": http://demos.telerik.com/aspnet-core/
+  "Demos": https://demos.telerik.com/aspnet-core/
   "Release History": https://www.telerik.com/support/whats-new/aspnet-core-ui/release-history
-  "About": http://www.telerik.com/aspnet-mvc/mvc6-features
-  "Pricing": http://www.telerik.com/purchase/aspnet-core-ui
+  "About": https://www.telerik.com/aspnet-core-ui
+  "Pricing": https://www.telerik.com/purchase/aspnet-core-ui
 
 footer:
 -

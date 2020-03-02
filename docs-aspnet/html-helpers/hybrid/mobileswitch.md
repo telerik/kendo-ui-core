@@ -12,7 +12,7 @@ The hybrid Telerik UI Switch HtmlHelper for ASP.NET MVC is a server-side wrapper
 
 The Switch displays two exclusive choices.
 
-* [Demo page for the Switch](http://demos.telerik.com/kendo-ui/m/index#switch/mobile)
+* [Demo page for the Switch](https://demos.telerik.com/kendo-ui/m/index#switch/mobile)
 
 ## Basic Configuration
 
@@ -130,4 +130,4 @@ You can reference a hybrid Switch instance by using the [`jQuery.data()`](http:/
 
 ## See Also
 
-* [Hybrid SwitchBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)
+* [Hybrid SwitchBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileSwitchBuilder)

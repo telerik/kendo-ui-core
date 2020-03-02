@@ -25,7 +25,7 @@ The following example demonstrates how to access the `window` and `document` obj
     $(function() {
         $("#window").kendoWindow({
             iframe: true,
-            content: "http://docs.telerik.com/kendo-ui/"
+            content: "https://docs.telerik.com/kendo-ui/"
         });
     });
 

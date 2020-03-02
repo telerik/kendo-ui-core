@@ -30,20 +30,20 @@ The following example demonstrates how to implement color-coded ranges (stripes)
         series: [{
           type: "bar",
           data: [10, 20, 30],
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.visual
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/series.visual
           visual: function(e) {
-            // http://docs.telerik.com/kendo-ui/api/javascript/geometry/rect
+            // https://docs.telerik.com/kendo-ui/api/javascript/geometry/rect
             var left = e.rect.topLeft();
             var right = e.rect.topRight();
             var bottom = e.rect.bottomLeft();
 
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/group
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/group
             var group = new draw.Group();
 
             for (var x = left.x; x < right.x; x += WIDTH) {
               var rect = new geom.Rect([x, left.y], [WIDTH, e.rect.height()])
 
-              // http://docs.telerik.com/kendo-ui/api/javascript/drawing/path
+              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/path
               var value = Math.random();
               var path = draw.Path.fromRect(rect, {
                 fill: {

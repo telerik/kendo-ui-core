@@ -12,7 +12,7 @@ To start using the Kendo UI for jQuery and host the library into your project, y
 
 ## Downloading the Bundles
 
-To download the Kendo UI bundles, go to [http://www.telerik.com/download/kendo-ui](http://www.telerik.com/download/kendo-ui). After the download is complete, your local repository will host the following folders:
+To download the Kendo UI bundles, go to [https://www.telerik.com/download/kendo-ui](https://www.telerik.com/download/kendo-ui). After the download is complete, your local repository will host the following folders:
 
 |Folders 						|Contents |
 |:---								|:---			|
@@ -61,7 +61,7 @@ To include the required CSS and JavaScript files:
 
 1. Initialize a widget. Note that the examples in this step assume that the Kendo UI scripts and stylesheets are now added to the document.
 
-	 The following example demonstrates how to initialize the [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index).
+	 The following example demonstrates how to initialize the [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index).
 
         <!-- HTML element from which the DatePicker would be initialized -->
         <input id="datepicker" />
@@ -72,7 +72,7 @@ To include the required CSS and JavaScript files:
         });
         </script>
 
-		The following example demonstrates the full initialization of the [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index).
+		The following example demonstrates the full initialization of the [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index).
 
 		    <!DOCTYPE html>
 		    <html>

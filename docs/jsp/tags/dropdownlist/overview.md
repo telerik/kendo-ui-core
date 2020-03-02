@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a server-bound DropDownList.
 
@@ -73,7 +73,7 @@ You can subscribe to all [events exposed by Kendo UI DropDownList](/api/javascri
 
 ### Existing Instances
 
-You are able to reference an existing DropDownList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+You are able to reference an existing DropDownList instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
 
 

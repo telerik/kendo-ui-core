@@ -12,7 +12,7 @@ The DropDownList displays a list of values and allows for a single selection fro
 
 The user input is restricted within the predefined options. To apply a keyboard input, use the [Kendo UI ComboBox]({% slug overview_kendoui_combobox_widget %}).
 
-* [Demo page for the DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index)
+* [Demo page for the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index)
 
 ## Initializing the DropDownList
 

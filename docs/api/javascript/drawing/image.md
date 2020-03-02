@@ -19,7 +19,7 @@ Draws a bitmap image with a given source URL into the specified [rectangle](../g
             [10, 10],  // Position of the top left corner
             [249, 240] // Size of the rectangle
         );
-        var image = new draw.Image("http://goo.gl/6ov8Gw", rect);
+        var image = new draw.Image("https://goo.gl/6ov8Gw", rect);
 
         var surface = draw.Surface.create($("#surface"));
         surface.draw(image);
@@ -127,13 +127,13 @@ Gets or sets the image source URL.
             [10, 10],  // Position of the top left corner
             [240, 240] // Size of the rectangle
         );
-        var image = new draw.Image("http://goo.gl/6ov8Gw", rect);
+        var image = new draw.Image("https://goo.gl/6ov8Gw", rect);
 
         var surface = draw.Surface.create($("#surface"));
         surface.draw(image);
 
         setTimeout(function() {
-            image.src("http://goo.gl/10IzfV");
+            image.src("https://goo.gl/10IzfV");
         }, 1000);
     </script>
 
@@ -161,7 +161,7 @@ Gets or sets the rectangle defines the image position and size.
             [10, 10],  // Position of the top left corner
             [240, 240] // Size of the rectangle
         );
-        var image = new draw.Image("http://goo.gl/6ov8Gw", rect);
+        var image = new draw.Image("https://goo.gl/6ov8Gw", rect);
 
         var surface = draw.Surface.create($("#surface"));
         surface.draw(image);

@@ -37,7 +37,7 @@ The Grid triggers an [`excelExport`](https://docs.telerik.com/kendo-ui/api/javas
 
 The example demonstrates how to export additional information to Excel by implementing the following actions:
 
-1. Change the name of the sheet by using the [`sheets.name`](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.name) configuration property. For example, `sheets[0].name = "Orders";`.
+1. Change the name of the sheet by using the [`sheets.name`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.name) configuration property. For example, `sheets[0].name = "Orders";`.
 1. Insert a new row of cells which contains the custom headers at position `0`.
 1. Style the new headers with a new background color, font size, horizontal alignment, and row height.
 
@@ -125,6 +125,6 @@ The example demonstrates how to export additional information to Excel by implem
 
 ## See Also
 
-* [Workbook API reference](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
-* [Complete List of Configurable Cell Options](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells)
-* [More Information on Appearance](http://docs.telerik.com/kendo-ui/framework/excel/appearance)
+* [Workbook API reference](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook)
+* [Complete List of Configurable Cell Options](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells)
+* [More Information on Appearance](https://docs.telerik.com/kendo-ui/framework/excel/appearance)

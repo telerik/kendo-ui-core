@@ -9,7 +9,7 @@ position: 2
 
 # Integration with Kendo UI MVVM
 
-The [Kendo UI hybrid mobile Application](http://demos.telerik.com/kendo-ui/m/index#application/transitions) provides a close integration with the [Kendo UI MVVM framework](http://demos.telerik.com/kendo-ui/mvvm/index). The mobile widgets' configuration options can be bound and managed through a view model.
+The [Kendo UI hybrid mobile Application](https://demos.telerik.com/kendo-ui/m/index#application/transitions) provides a close integration with the [Kendo UI MVVM framework](https://demos.telerik.com/kendo-ui/mvvm/index). The mobile widgets' configuration options can be bound and managed through a view model.
 
 ## Getting Started
 

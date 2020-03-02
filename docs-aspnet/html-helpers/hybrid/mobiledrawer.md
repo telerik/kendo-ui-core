@@ -12,7 +12,7 @@ The hybrid Telerik UI Drawer HtmlHelper for ASP.NET MVC is a server-side wrapper
 
 The Drawer provides a slide to reveal the global mobile application toolbox or navigation.
 
-* [Demo page for the Drawer](http://demos.telerik.com/kendo-ui/m/index#drawer/index)
+* [Demo page for the Drawer](https://demos.telerik.com/kendo-ui/m/index#drawer/index)
 
 ## Basic Configuration
 
@@ -176,4 +176,4 @@ You can reference a hybrid Drawer instance by using the code from the following 
 
 ## See Also
 
-* [Hybrid DrawerBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileDrawerBuilder)
+* [Hybrid DrawerBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileDrawerBuilder)

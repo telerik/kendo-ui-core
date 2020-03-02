@@ -100,7 +100,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing TabStrip instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
+You are able to reference an existing TabStrip instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
 
 
 

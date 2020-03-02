@@ -339,7 +339,7 @@ Gets or sets the editor of the cells in the range.
 
 ##### value `String` *optional*
 
-The name of the custom cell editor, registered as [described in this help article](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
 
 #### Returns
 
@@ -993,7 +993,7 @@ Omit argument to get the existing URL, if any.
     var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
     var sheet = spreadsheet.activeSheet();
     sheet.range("A1").value("Visit telerik.com!");
-    sheet.range("A1").link("http://www.telerik.com/");
+    sheet.range("A1").link("https://www.telerik.com/");
 </script>
 ```
 

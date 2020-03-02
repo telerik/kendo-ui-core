@@ -156,7 +156,7 @@ Finally, the window is positioned and shown. In this example, call `window.cente
 
 ### Handle Changes in Quantity
 
-One of the features of the album details window is that it enables users to change the quantity through implementing a [Kendo UI NumericTextBox widget](http://demos.telerik.com/kendo-ui/web/numerictextbox/index.html). It uses an MVVM bound input box as the base element for the number box.
+One of the features of the album details window is that it enables users to change the quantity through implementing a [Kendo UI NumericTextBox widget](https://demos.telerik.com/kendo-ui/web/numerictextbox/index.html). It uses an MVVM bound input box as the base element for the number box.
 
     <input type="number" value="1" min="1" max="100" data-role="numerictextbox" data-decimals="0" data-format="n0" data-bind="value: quantity, events: { spin: updateQty }" />
 

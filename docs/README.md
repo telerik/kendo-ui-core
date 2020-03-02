@@ -5,7 +5,7 @@ publish: false
 
 # Kendo UI Public Documentation
 
-Welcome to the GitHub documentation repo for [Telerik<sup>®</sup> Kendo UI<sup>®</sup> by Progress](http://www.telerik.com/kendo-ui). This repository contains the source content&mdash;written in Markdown&mdash;that we use to power the Kendo UI Documentation at [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui/). If you have arrived here wanting to search and peruse our docs, you'd be better served heading over to [docs.telerik.com/kendo-ui](http://docs.telerik.com/kendo-ui) where our content is prettified and searchable.
+Welcome to the GitHub documentation repo for [Telerik<sup>®</sup> Kendo UI<sup>®</sup> by Progress](https://www.telerik.com/kendo-ui). This repository contains the source content&mdash;written in Markdown&mdash;that we use to power the Kendo UI Documentation at [docs.telerik.com/kendo-ui](https://docs.telerik.com/kendo-ui/). If you have arrived here wanting to search and peruse our docs, you'd be better served heading over to [docs.telerik.com/kendo-ui](https://docs.telerik.com/kendo-ui) where our content is prettified and searchable.
 
 We believe that the documentation for a product is at its best when the content is a collaboration between the builders and consumers of that product. As such, this documentation is both public, and open-sourced under a MIT license (see below). This means you can clone this repository, read the docs offline, or even load the entire thing to an Apple Newton, if that's your thing.
 
@@ -24,14 +24,14 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
 
 * **Send us a pull request** - Creating an issue is great&mdash;and we certainly appreciate them&mdash;but what we really love are pull requests. So, if you find an issue in the docs, or even feel like creating new content, we'd be happy to have your contributions! If you're just getting started with open source, Git and GitHub, we suggest you first read up on [forking repositories](https://help.github.com/articles/fork-a-repo) and [sending pull requests](https://help.github.com/articles/using-pull-requests), both great articles from the GitHub bootcamp.
 
-    Once you've read these — or you've already memorized them — you're ready to contribute to the Kendo docs. Start by creating a local clone of our repo either using [GitHub for Windows](http://windows.github.com/), [GitHub for Mac](http://mac.github.com/) or your friendly command-line:
+    Once you've read these — or you've already memorized them — you're ready to contribute to the Kendo docs. Start by creating a local clone of our repo either using [GitHub Desktop](https://desktop.github.com/) or your friendly command-line:
 
         git clone git@github.com:telerik/kendo-ui-core.git
 
     Then, open up the kendo-docs folder in your favorite text editor and contribute away! Of course, as you work with the docs, we do ask that you follow a couple of ground rules:
 
     - The [documentation Wiki](https://github.com/telerik/kendo-ui-core/wiki) contains the latest authoring guidelines.
-    - Fixing grammar, punctuation and other general errors is always appreciated. So are changes that expand on key ideas or correct errors in logic phrasing or otherwise. If your ambitions are greater, however, and you want to add completely new content to the site — like a new tutorial on using Kendo UI with an Atari 2600, for instance — we suggest you contact a member of the team first (or enter an issue!) to vet your idea. [Burke Holland](http://twitter.com/burkeholland), [Todd Anglin](http://twitter.com/toddanglin) and [Brandon Satrom](http://twitter.com/brandonsatrom) would all be happy to hear your idea and offer advice.
+    - Fixing grammar, punctuation and other general errors is always appreciated. So are changes that expand on key ideas or correct errors in logic phrasing or otherwise. If your ambitions are greater, however, and you want to add completely new content to the site — like a new tutorial on using Kendo UI with an Atari 2600, for instance — we suggest you contact a member of the team first (or enter an issue!) to vet your idea. [Burke Holland](https://twitter.com/burkeholland), [Todd Anglin](https://twitter.com/toddanglin) and [Brandon Satrom](https://twitter.com/brandonsatrom) would all be happy to hear your idea and offer advice.
     - Each document in this repo contains a section of YAML Front Matter at the very top. This content, which looks like the text below, is used by our auto-import tool when content is processed for the live documentation site. Please don't edit the content in this section of a document.
 
         ```yaml
@@ -42,7 +42,7 @@ There are two ways you can contribute to the public Kendo UI documentation: eith
         ---
         ```
 
-    - When adding content or making changes, please use only standard Markdown syntax, and make to preview your additions or changes before sending us a pull request. You can use an online tool like [Dillinger.io](https://dillinger.io/) or [Marked](http://markedapp.com/) on OSX to view what your changes will look like when ported to HTML.
+    - When adding content or making changes, please use only standard Markdown syntax, and make to preview your additions or changes before sending us a pull request. You can use an online tool like [Dillinger.io](https://dillinger.io/) or [Marked 2](https://marked2app.com/) on OSX to view what your changes will look like when ported to HTML.
 
 
     Once you've made your changes, commit, pull, merge, push and [send us a pull request](https://help.github.com/articles/using-pull-requests)! We — and Kendo UI users everywhere — thank you for making our docs the best front-end library documentation on the web!
@@ -58,7 +58,7 @@ You can generate a static website from the Kendo UI the documentation and browse
 
 ## License
 
-The Kendo UI Documentation is licensed under an MIT license. This license applies to the markdown (.md) files in this site **ONLY**, and does not convey, override or modify any existing licenses covering the runtime source and components of Kendo UI. For information about available licensed for the Kendo UI Library, visit our [license page](http://www.telerik.com/purchase/license-agreement/kendo-ui-complete).
+The Kendo UI Documentation is licensed under an MIT license. This license applies to the markdown (.md) files in this site **ONLY**, and does not convey, override or modify any existing licenses covering the runtime source and components of Kendo UI. For information about available licensed for the Kendo UI Library, visit our [license page](https://www.telerik.com/purchase/license-agreement/kendo-ui-complete).
 
 ### MIT License
 

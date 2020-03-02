@@ -42,7 +42,7 @@ The following example demonstrates how to initialize a Scheduler with two events
 
 ## Binding to Remote Data
 
-You can bind the Scheduler to a remote service which will return, create, update, or delete Scheduler events. The [online Kendo UI Scheduler demos](https://demos.telerik.com/kendo-ui/scheduler/index) use a demo remote service which returns sample Gantt tasks and dependencies. To support cross-domain requests, the remote service uses [JSONP](http://en.wikipedia.org/wiki/JSONP).
+You can bind the Scheduler to a remote service which will return, create, update, or delete Scheduler events. The [online Kendo UI Scheduler demos](https://demos.telerik.com/kendo-ui/scheduler/index) use a demo remote service which returns sample Gantt tasks and dependencies. To support cross-domain requests, the remote service uses [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
 > If the service you use resides in the same domain as your website, use JSON instead. For more information on cross-domain requests, refer to [this article]({% slug corsdatafetching_anotherdomain_datasourcecomponent %}).
 
@@ -104,7 +104,7 @@ The following example demonstrates how to bind the widget to a remote service. N
 When you bind the Scheduler to a remote service:
 
 * Set the [`timezone`](/api/web/scheduler#configuration-timezone) option of the Scheduler. It is used to indicate to the widget in what timezone its events are created and stored on the server. If the timezone is not set, the Scheduler will use the current timezone. This means that users with different timezone settings will see different start and end times. Setting the timezone of the Scheduler will make the widget display the same start and end times regardless of the current user timezone. For more information, refer to the [article about timezones]({% slug timezones_kendoui_scheduler_widget %}).
-* Send the start and end date fields of the Scheduler event to the remote service in [UTC format](http://en.wikipedia.org/wiki/Coordinated_Universal_Time). The `parameterMap` option from the previous example implements the same functionality.
+* Send the start and end date fields of the Scheduler event to the remote service in [UTC format](https://en.wikipedia.org/wiki/Coordinated_Universal_Time). The `parameterMap` option from the previous example implements the same functionality.
 
         parameterMap: function(options, operation) {
             if (operation !== "read" && options.models) {

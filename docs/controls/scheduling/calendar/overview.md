@@ -12,7 +12,7 @@ The Calendar renders a graphical calendar that provides navigation and selection
 
 It also supports custom templates for its `month` view and configuration options for minimum and maximum dates, a start view, and the depth of the navigation. The first day of the week depends on the applied [culture]({% slug culture_definition_kendoui_globalization %}).
 
-* [Demo page for the Calendar](http://demos.telerik.com/kendo-ui/calendar/index)
+* [Demo page for the Calendar](https://demos.telerik.com/kendo-ui/calendar/index)
 
 ## Initializing the Calendar
 

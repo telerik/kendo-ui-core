@@ -10,7 +10,7 @@ position: 1
 
 The AutoComplete provides suggestions depending on the typed text and allows multiple value entries.
 
-* [Demo page for the AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index)
+* [Demo page for the AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index)
 
 ## Initializing the AutoComplete
 

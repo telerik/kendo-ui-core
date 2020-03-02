@@ -40,7 +40,7 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
         ]
     ```
 
-2. Set [`toolbar.text`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.text) to a space.
+2. Set [`toolbar.text`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.text) to a space.
 
     ```
         toolbar: [{name: "create", text: " "}]

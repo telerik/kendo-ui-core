@@ -12,7 +12,7 @@ The PanelBar displays hierarchical data as a multi-level, expandable widget.
 
 Depending on the requirements, you can define its structure by using HTML or y dynamically configuring it through the PanelBar API. The content of the PanelBar items can also be loaded through AJAX by specifying a content URL.
 
-* [Demo page for the PanelBar](http://demos.telerik.com/kendo-ui/panelbar/index)
+* [Demo page for the PanelBar](https://demos.telerik.com/kendo-ui/panelbar/index)
 
 ## Initializing the PanelBar
 
@@ -54,7 +54,7 @@ The following example demonstrates how to initialize a PanelBar by using a JSON 
             text: "Item 1",
             cssClass: "myClass",                            // (Optional) Add a custom CSS class to the item.
                                                             // Added with 2012 Q3 SP1.
-            url: "http://www.telerik.com/"                  // (Optional) Link a URL if navigation is needed.
+            url: "https://www.telerik.com/"                  // (Optional) Link a URL if navigation is needed.
             },
           {
             text: "<b>Item 2</b>",
@@ -67,7 +67,7 @@ The following example demonstrates how to initialize a PanelBar by using a JSON 
           },
           {
             text: "Item 4",
-            imageUrl: "http://www.telerik.com/test.jpg",    // (Optional) An item image URL.
+            imageUrl: "https://www.telerik.com/test.jpg",    // (Optional) An item image URL.
             expanded: true,                                 // The item is rendered as expanded.
             items: [{                                       // A subitem collection.
               text: "Sub Item 1"

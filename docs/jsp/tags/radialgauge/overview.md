@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 ### Existing Instances
 
-You are able to reference an existing Radial Gauge instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Radial Gauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
+You are able to reference an existing Radial Gauge instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Radial Gauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
 
 
 

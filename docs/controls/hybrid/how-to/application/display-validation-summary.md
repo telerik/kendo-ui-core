@@ -21,7 +21,7 @@ The example below demonstrates how to display a validation summary if the valida
 
         <div class="validation-summary">
             <!-- customizing the tooltip position -->
-            <!-- for more information please see http://docs.kendoui.com/getting-started/framework/validator/overview#customizing-the-tooltip-position -->
+            <!-- for more information please see https://docs.telerik.com/kendo-ui/knowledge-base/change-validation-tooltip-position -->
             <span class="k-invalid-msg" data-for="username"></span>
             <span class="k-invalid-msg" data-for="email"></span>
             <span class="k-invalid-msg" data-for="birthdate"></span>

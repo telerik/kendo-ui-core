@@ -14,9 +14,9 @@ This behavior is set because of the following reasons:
 - The DatePicker allows you to use different formats for date parsing which require unrestricted user input. For more information, refer to the [`parseFormats`](/api/javascript/ui/datepicker/configuration/parseformats) option.
 - The DatePicker does not automatically update the typed text when the types text is invalid. Such a change in the input value may lead to unexpected behavior.
 
-To validate the input value of the DatePicker, use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). In this way, you can provide an error message to end users which prompts them to do the right actions for them to resolve the issue. For more details, refer to the [demo on custom validation](http://demos.telerik.com/kendo-ui/validator/custom-validation).
+To validate the input value of the DatePicker, use a client-validation framework such as the [Kendo UI Validator]({% slug overview_kendoui_validator_widget %}). In this way, you can provide an error message to end users which prompts them to do the right actions for them to resolve the issue. For more details, refer to the [demo on custom validation](https://demos.telerik.com/kendo-ui/validator/custom-validation).
 
 ## See Also
 
-* [Using Custom Validation in Kendo UI for jQuery (Demo)](http://demos.telerik.com/kendo-ui/validator/custom-validation)
+* [Using Custom Validation in Kendo UI for jQuery (Demo)](https://demos.telerik.com/kendo-ui/validator/custom-validation)
 * [JavaScript API Reference of the DatePicker](/api/javascript/ui/datepicker)

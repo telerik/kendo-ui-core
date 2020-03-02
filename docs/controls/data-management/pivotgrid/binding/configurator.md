@@ -10,7 +10,7 @@ position: 4
 
 The [Kendo UI PivotConfigurator](/api/web/pivotconfigurator) represents an OLAP cube structure.
 
-The PivotConfigurator can be used for configuring the column and row dimensions, and the measure fields of the [PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index). It is a supplementary component which is strongly related to the Kendo UI `PivotDataSource` component.
+The PivotConfigurator can be used for configuring the column and row dimensions, and the measure fields of the [PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index). It is a supplementary component which is strongly related to the Kendo UI `PivotDataSource` component.
 
 ## Initializing the PivotConfigurator
 
@@ -43,7 +43,7 @@ The following example demonstrates how to configure the PivotConfigurator.
                             cube: "Adventure Works"
                         },
                         read: {
-                            url: "http://demos.telerik.com/olap/msmdpump.dll",
+                            url: "https://demos.telerik.com/olap/msmdpump.dll",
                             dataType: "text",
                             contentType: "text/xml",
                             type: "POST"
@@ -63,7 +63,7 @@ The following image demonstrates the output from the previous example.
 
 ## Referencing Existing Instances
 
-To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator API](/api/web/pivotconfigurator) to control its behavior.
+To reference an existing PivotConfigurator instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotConfigurator API](/api/web/pivotconfigurator) to control its behavior.
 
 The following example demonstrates how to access an existing PivotConfigurator instance.
 
@@ -71,5 +71,5 @@ The following example demonstrates how to access an existing PivotConfigurator i
 
 ## See Also
 
-* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

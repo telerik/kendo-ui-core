@@ -23,7 +23,7 @@ While Sparklines are typically line charts, other types are supported as well:
 
  Generally, Sparklines are simple, word-sized graphics that can be embedded in chunks of text, tables, or headlines. The concept for such graphics was developed by [Edward Tufte](https://en.wikipedia.org/wiki/Edward_Tufte). The Telerik UI Sparklines HtmlHelper is a version of the Telerik UI Chart HtmlHelper that is tailored for this specific application.
 
-* [Demo page for the Sparkline](http://demos.telerik.com/kendo-ui/sparklines/index)
+* [Demo page for the Sparkline](https://demos.telerik.com/kendo-ui/sparklines/index)
 
 ## Basic Configuration
 
@@ -46,5 +46,5 @@ To render the Sparkline, select the `div` with a jQuery selector and call the `k
 
 ## See Also
 
-* [Basic Usage of the Sparkline (Demo)](http://demos.telerik.com/kendo-ui/sparklines/index)
+* [Basic Usage of the Sparkline (Demo)](https://demos.telerik.com/kendo-ui/sparklines/index)
 * [JavaScript API Reference of the Sparkline](/api/javascript/dataviz/ui/sparkline)

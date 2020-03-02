@@ -10,7 +10,7 @@ position: 4
 
 The TreeList supports client-side paging for large sets of data.
 
-To enable the paging functionality of the TreeList, configure the [`pageable`](http://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/pageable) settings.
+To enable the paging functionality of the TreeList, configure the [`pageable`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/configuration/pageable) settings.
 
 > Remember to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize). You can define a `pageSize` in the `pageable` or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings. If an already existing dataSource instance is passed to the TreeList, then the `pageSize` option has to be set in the dataSource settings and not in the `pageable` settings.
 

@@ -49,13 +49,13 @@ The following example demonstrates how to draw a straight line between a marker 
         var data = marker.dataItem;
         if (data.pointTo) {
           // Convert the latitude and longitude locations to coordinates on the screen.
-          // See: http://docs.telerik.com/kendo-ui/api/dataviz/map#methods-eventToView
+          // See: https://docs.telerik.com/kendo-ui/api/dataviz/map#methods-eventToView
           var from = map.locationToView(marker.location());
           var to = map.locationToView(data.pointTo);
 
           // Draw a path on the shape layer.
-          // See: http://docs.telerik.com/kendo-ui/api/dataviz/drawing/path
-          //      http://docs.telerik.com/kendo-ui/getting-started/dataviz/drawing/basic-shapes
+          // See: https://docs.telerik.com/kendo-ui/api/dataviz/drawing/path
+          //      https://docs.telerik.com/kendo-ui/getting-started/dataviz/drawing/basic-shapes
           var shapeLayer = map.layers[0];
           var line = new kendo.dataviz.drawing.Path({
             stroke: {

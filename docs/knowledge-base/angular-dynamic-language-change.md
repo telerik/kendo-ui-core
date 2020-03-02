@@ -33,7 +33,7 @@ How can I dynamically change the language of the Kendo UI Grid in AngularJS appl
 
 ## Solution
 
-The following example represents the AngularJS version of [this demo](http://demos.telerik.com/kendo-ui/grid/localization).
+The following example represents the AngularJS version of [this demo](https://demos.telerik.com/kendo-ui/grid/localization).
 
 ```dojo
 <div id="example" ng-app="KendoDemos">

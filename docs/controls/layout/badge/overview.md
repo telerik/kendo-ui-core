@@ -12,7 +12,7 @@ The Badge is an absolutely positioned element that is used to decorate avatars, 
 
 It also provides customizing its content through templates, setting different types and layouts.
 
-* [Demo page for the Badge](http://demos.telerik.com/kendo-ui/badge/index)
+* [Demo page for the Badge](https://demos.telerik.com/kendo-ui/badge/index)
 
 ## Initializing the Badge
 

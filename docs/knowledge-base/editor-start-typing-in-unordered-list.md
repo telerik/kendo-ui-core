@@ -51,4 +51,4 @@ Handle the `select` event of the widget and execute the `insertUnorderedList` co
 
 ## See Also
 
-* [Kendo UI Editor JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/editor)
+* [Kendo UI Editor JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor)

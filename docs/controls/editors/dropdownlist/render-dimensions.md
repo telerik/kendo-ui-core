@@ -79,7 +79,7 @@ The DropDownList renders an `ID` attribute that is generated from the ID of the 
 
 ## Focusing
 
-Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](http://dojo.telerik.com/uSeho).
+Because of its complex rendering, focusing the widget by using a `label` element requires additional implementation. For more information, refer to [this Kendo UI Dojo snippet](https://dojo.telerik.com/uSeho).
 
 ## See Also
 

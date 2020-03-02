@@ -9,7 +9,7 @@ component: scroller
 
 # Scroller Overview
 
-The [Hybrid UI Scroller widget](http://demos.telerik.com/kendo-ui/m/index#scroller/index) enables touch-friendly kinetic scrolling for the contents of a given DOM element.
+The [Hybrid UI Scroller widget](https://demos.telerik.com/kendo-ui/m/index#scroller/index) enables touch-friendly kinetic scrolling for the contents of a given DOM element.
 
 ## Getting Started
 

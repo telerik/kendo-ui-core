@@ -30,7 +30,7 @@ The following example demonstrates how to access the **Fields to include** filte
                             catalog: "Adventure Works DW 2008R2",
                             cube: "Adventure Works"
                         },
-                        read: "http://demos.telerik.com/olap/msmdpump.dll",
+                        read: "https://demos.telerik.com/olap/msmdpump.dll",
                       parameterMap: function(options, type) {
                         var query = kendo.data.transports.xmla.fn.options.parameterMap(options, type);
 

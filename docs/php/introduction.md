@@ -9,7 +9,7 @@ position: 1
 
 # Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP
 
-[Progress Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP websites.
+[Progress Telerik UI for PHP](https://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP websites.
 
 ## Getting Started
 
@@ -108,9 +108,9 @@ The example below demonstrates the complete source code.
 
 ## Next Steps
 
-Watch the video tutorials on getting started with Progress Telerik UI for PHP in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
+Watch the video tutorials on getting started with Progress Telerik UI for PHP in the [Kendo UI YouTube channel](https://www.youtube.com/kendouitv):
 
-* [Get Started with the PHP Wrappers for Kendo UI: Part 1](http://www.youtube.com/watch?v=2Kpgp_nocEI)
+* [Get Started with the PHP Wrappers for Kendo UI: Part 1](https://www.youtube.com/watch?v=2Kpgp_nocEI)
 * [Get Started with the PHP Wrappers for Kendo UI: Part 2](https://www.youtube.com/watch?v=RQCLqA6Pu_E)
 * [Get Started with the PHP Wrappers for Kendo UI: Part 3](https://www.youtube.com/watch?v=zYh6cuU_leQ)
 

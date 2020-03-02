@@ -24,7 +24,7 @@ To enable the Excel export option of the Grid:
 
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
-        <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
 
         @(Html.Kendo().Grid<ProductViewModel>()
             .Name("grid")
@@ -149,7 +149,7 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
 
 ## Defining the Column Format
 
-The Telerik UI Grid for {{ site.framework }} does not use the `Format` option during Excel export because some formats are incompatible with Excel. To format the cell values, set the Kendo UI for jQuery [`format`](http://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
+The Telerik UI Grid for {{ site.framework }} does not use the `Format` option during Excel export because some formats are incompatible with Excel. To format the cell values, set the Kendo UI for jQuery [`format`](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook.html#configuration-sheets.rows.cells.format) option of the cells.
 
 The [page on creating a custom number format](https://support.office.com/en-us/article/Create-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4) describes the formats that are supported by Excel.
 
@@ -183,7 +183,7 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
 
 ## Server-Side Processing
 
-To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](http://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
 > The {{ site.framework }} version is in development. For updates, check [this](https://feedback.telerik.com/document-processing/1356226-document-processing-provide-version-for-net-core) feature request.
 

@@ -21,7 +21,7 @@ Depending on selection type (single or multiple), the Calendar behaves different
 * The pressing of `Shift` + `Up Arrow` or `Down Arrow` extends the selection up or down one row in the month view respectively.
 * The pressing of `Shift` + `Right Arrow` or `Left Arrow` adds the next or previous date to the current selection respectively.
 
-For a runnable example on performing date selection over the keyboard, refer to [this demo](http://demos.telerik.com/kendo-ui/calendar/keyboard-navigation).
+For a runnable example on performing date selection over the keyboard, refer to [this demo](https://demos.telerik.com/kendo-ui/calendar/keyboard-navigation).
 
 ## See Also
 

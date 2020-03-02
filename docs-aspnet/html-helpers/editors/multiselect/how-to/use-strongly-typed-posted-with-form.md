@@ -13,4 +13,4 @@ To see the example, refer to the project on how to [use a strongly-typed Kendo U
 ## See Also
 
 * [Overview of the MultiSelect HtmlHelper]({% slug htmlhelpers_multiselect_aspnetcore %})
-* [MultiSelectBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)
+* [MultiSelectBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MultiSelectBuilder)

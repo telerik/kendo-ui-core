@@ -39,7 +39,7 @@ The following example demonstrates how to position any path at the origin of the
 
 ## See Also
 
-* [Basic Usage of the Diagram (Demo)](http://demos.telerik.com/kendo-ui/diagram/index)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
 * [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})

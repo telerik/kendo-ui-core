@@ -12,7 +12,7 @@ The MultiViewCalendar renders a graphical Gregorian calendar with multiple horiz
 
 It supports the selection and navigation between dates as well as data templates and ranges for scheduling appointments.
 
-* [Demo page for the MultiViewCalendar](http://demos.telerik.com/kendo-ui/multiviewcalendar/index)
+* [Demo page for the MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
 
 ## Initializing the MultiViewCalendar
 

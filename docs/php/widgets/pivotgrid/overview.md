@@ -10,13 +10,13 @@ position: 1
 
 The Kendo UI PivotGrid for PHP is a server-side wrapper for the [Kendo UI PivotGrid](/api/javascript/ui/pivotgrid) widget.
 
-For more information on the OLAP concept supported by the Kendo UI PivotGrid for PHP, refer to the articles about [OLAP fundamentals]({% slug fundamentals_pivotgrid_widget %}), [setup an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}), or use the Kendo UI OLAP service at `http://demos.telerik.com/olap/msmdpump.dll`. Note that the service URL does not open directly in the browser.
+For more information on the OLAP concept supported by the Kendo UI PivotGrid for PHP, refer to the articles about [OLAP fundamentals]({% slug fundamentals_pivotgrid_widget %}), [setup an OLAP cube]({% slug olap_cube_setup_pivotgrid_widget %}), or use the Kendo UI OLAP service at `https://demos.telerik.com/olap/msmdpump.dll`. Note that the service URL does not open directly in the browser.
 
 ## Getting Started
 
 ### Configuration
 
-Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for PHP to do Ajax binding to an **Adventure Works** cube hosted on `http://demos.telerik.com/olap/msmdpump.dll`.
+Below are listed the steps for you to follow when configuring the Kendo UI PivotGrid for PHP to do Ajax binding to an **Adventure Works** cube hosted on `https://demos.telerik.com/olap/msmdpump.dll`.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for PHP]({% slug overview_uiforphp %})&mdash;include the autoloader, JavaScript, and CSS files.
 
@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
         $read = new \Kendo\Data\PivotDataSourceTransportRead();
 
-        $read->url('http://demos.telerik.com/olap/msmdpump.dll')
+        $read->url('https://demos.telerik.com/olap/msmdpump.dll')
              ->contentType('text/xml')
              ->dataType('text')
              ->type('POST');
@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Pivot
 
         $discover = new \Kendo\Data\PivotDataSourceTransportDiscover();
 
-        $discover->url('http://demos.telerik.com/olap/msmdpump.dll')
+        $discover->url('https://demos.telerik.com/olap/msmdpump.dll')
              ->contentType('text/xml')
              ->dataType('text')
              ->type('POST');
@@ -146,7 +146,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing PivotGrid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
+You are able to reference an existing PivotGrid instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [PivotGrid API](/api/javascript/ui/pivotgrid#methods) to control its behavior.
 
 
 

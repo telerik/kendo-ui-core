@@ -12,7 +12,7 @@ The QRCode generates [Canvas](https://en.wikipedia.org/wiki/Canvas_X) and [Scala
 
 QR codes take a piece of information from a transitory media, place it into the cell phone, and enable the cell phone to quickly read these generated images. All graphics are rendered on the client by using Canvas or SVG.
 
-* [Demo page for the QRCode](http://demos.telerik.com/kendo-ui/qrcode/index)
+* [Demo page for the QRCode](https://demos.telerik.com/kendo-ui/qrcode/index)
 
 ## Basic Configuration
 
@@ -26,7 +26,7 @@ The following example demonstrates how to initialize the QRCode with its default
         value: "FOO"
     });
 
-The following example demonstrates how to specify the [error correction level](http://en.wikipedia.org/wiki/QR_code#Error_correction) and the size of the QRCode. To set the border, color, background, and encoding of the QRCode, use the [QRCode API](/api/javascript/dataviz/ui/qrcode).
+The following example demonstrates how to specify the [error correction level](https://en.wikipedia.org/wiki/QR_code#Error_correction) and the size of the QRCode. To set the border, color, background, and encoding of the QRCode, use the [QRCode API](/api/javascript/dataviz/ui/qrcode).
 
     $("#qrcode").kendoQRCode({
         value: "Hello world!",
@@ -40,7 +40,7 @@ The QRCode supports a set of [encoding conventions]({% slug overview_kendoui_qrc
 
 ## See Also
 
-* [Basic Usage of the QRCode (Demo)](http://demos.telerik.com/kendo-ui/qrcode/inde)
+* [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/inde)
 * [Using the API of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/api)
 * [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the QRCode](/api/javascript/dataviz/ui/qrcode)

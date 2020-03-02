@@ -148,4 +148,4 @@ Use the `CSS` jQuery method and the `change` event of the radio button.
 
 ## See Also
 
-* [ API Reference of the css jQuery Method](http://api.jquery.com/css/)
+* [ API Reference of the css jQuery Method](https://api.jquery.com/css/)

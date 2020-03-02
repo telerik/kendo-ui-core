@@ -37,7 +37,7 @@ How can I display a task progress drag handle when I set a `taskTemplate` for th
 
 ## Solution
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/OmONA).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/OmONA).
 
 1. Show the task progress by adding a `div` with the `progress` class in the template.  
 

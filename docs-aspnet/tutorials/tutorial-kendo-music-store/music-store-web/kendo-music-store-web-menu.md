@@ -10,7 +10,7 @@ position: 2
 
 ![An overview of the main menu](images/kendo-menu-overview.png)
 
-The main menu of the Music Store application features some of the [Kendo UI Menu widget functionalities](http://demos.telerik.com/kendo-ui/web/menu/index.html) and consists of the items listed below:
+The main menu of the Music Store application features some of the [Kendo UI Menu widget functionalities](https://demos.telerik.com/kendo-ui/web/menu/index.html) and consists of the items listed below:
 
 * The **Genres** item uses a pull-down menu of items to show all the genres of music in the store.
 * The **About** item displays static content within a panel that opens the menu below.

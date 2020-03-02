@@ -12,21 +12,21 @@ The internationalization approaches in Kendo UI for jQuery apply the desired cul
 
 ## Getting Started
 
-[Kendo UI provides a way to internationalize the current page using a culture script](http://demos.telerik.com/kendo-ui/globalization/index). Kendo UI exposes culture (`cultureName`) method which allows you to select the culture script corresponding to the `<language code>-<country/region code>`. For more information on the `culture` method, refer to the [API reference article on this method](/api/javascript/kendo/methods/culture).
+[Kendo UI provides a way to internationalize the current page using a culture script](https://demos.telerik.com/kendo-ui/globalization/index). Kendo UI exposes culture (`cultureName`) method which allows you to select the culture script corresponding to the `<language code>-<country/region code>`. For more information on the `culture` method, refer to the [API reference article on this method](/api/javascript/kendo/methods/culture).
 
-All Kendo UI widgets which support date or number formatting depend also on the current culture. These widgets are the more complex ones such as the [Grid](http://demos.telerik.com/kendo-ui/grid/index), [ListView](http://demos.telerik.com/kendo-ui/listview/index), [Charts](http://demos.telerik.com/kendo-ui/area-charts/index), and so on.
+All Kendo UI widgets which support date or number formatting depend also on the current culture. These widgets are the more complex ones such as the [Grid](https://demos.telerik.com/kendo-ui/grid/index), [ListView](https://demos.telerik.com/kendo-ui/listview/index), [Charts](https://demos.telerik.com/kendo-ui/area-charts/index), and so on.
 
 The following Kendo UI widgets depend on the current culture:
 
-- [Calendar](http://demos.telerik.com/kendo-ui/calendar/index)
+- [Calendar](https://demos.telerik.com/kendo-ui/calendar/index)
 - [DateInput](https://demos.telerik.com/kendo-ui/dateinput/index)
-- [DatePicker](http://demos.telerik.com/kendo-ui/datepicker/index)
-- [TimePicker](http://demos.telerik.com/kendo-ui/timepicker/index)
-- [DateTimePicker](http://demos.telerik.com/kendo-ui/datetimepicker/index)
-- [NumericTextBox](http://demos.telerik.com/kendo-ui/numerictextbox/index)
-- [MaskedTextBox (globalized mask literals)](http://demos.telerik.com/kendo-ui/maskedtextbox/index)
-- [Scheduler](http://demos.telerik.com/kendo-ui/scheduler/index)
-- [Gantt](http://demos.telerik.com/kendo-ui/gantt/index)
+- [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index)
+- [TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index)
+- [DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/index)
+- [NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/index)
+- [MaskedTextBox (globalized mask literals)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
+- [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index)
+- [Gantt](https://demos.telerik.com/kendo-ui/gantt/index)
 
 ## Defining the Current Culture
 
@@ -45,9 +45,9 @@ To define the current culture:
         <script src="kendo.culture.en-GB.js"></script>
 
         <!-- or when using the Kendo UI CDN -->
-        <script src="http://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
-        <script src="http://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/jquery.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.all.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/<version>/js/cultures/kendo.culture.en-GB.min.js"></script>
     ```
 
 1. Set the culture script that Kendo UI will use.

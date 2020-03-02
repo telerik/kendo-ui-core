@@ -18,7 +18,7 @@ The **Genre** listing is going to display all albums according to a selected gen
 
 This view is contained in `Views/Store/Browse.cshtml`.
 
-Start with a [Kendo UI ListView widget](http://demos.telerik.com/kendo-ui/web/listview/index.html) that is to become the container for the albums.
+Start with a [Kendo UI ListView widget](https://demos.telerik.com/kendo-ui/web/listview/index.html) that is to become the container for the albums.
 
     <div data-role="listview" data-bind="source: albums" data-template="album-template"></div>
 

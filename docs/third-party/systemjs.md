@@ -29,9 +29,9 @@ The following example demonstrates the configuration for SystemJS up to 0.20 ver
     <!DOCTYPE html>
     <html>
     <head>
-      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common.min.css">
-      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.rtl.min.css">
-      <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.112/styles/kendo.default.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.112/styles/kendo.common.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.112/styles/kendo.rtl.min.css">
+      <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.112/styles/kendo.default.min.css">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.16/system.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>

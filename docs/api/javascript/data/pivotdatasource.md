@@ -1294,7 +1294,7 @@ The path which uniquely specifies the tuple member that needs to be expanded.
 
 #### Example - expand the second-level tuple member
 
-    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+    <!-- Real life demo: https://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({

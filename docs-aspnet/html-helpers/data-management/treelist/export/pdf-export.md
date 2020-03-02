@@ -26,7 +26,7 @@ To initiate the PDF export, press the **Toolbar** button or use the [TreeList cl
 The following example demonstrates how to enable the PDF export functionality of the TreeList.
 
         <!-- Load Pako Deflate library to enable PDF compression -->
-        <script src="http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
             .Name("treelist")

@@ -12,7 +12,7 @@ The hybrid Telerik UI ModalView HtmlHelper for ASP.NET MVC is a server-side wrap
 
 The ModalView presents a self-contained functionality in the context of the current task.
 
-* [Demo page for the ModalView](http://demos.telerik.com/kendo-ui/m/index#modalview/index)
+* [Demo page for the ModalView](https://demos.telerik.com/kendo-ui/m/index#modalview/index)
 
 ## Basic Configuration
 
@@ -171,4 +171,4 @@ You can reference a hybrid ModalView instance by using the code from the followi
 
 ## See Also
 
-* [Hybrid ModalViewBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)
+* [Hybrid ModalViewBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/MobileModalViewBuilder)

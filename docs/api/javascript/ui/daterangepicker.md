@@ -34,10 +34,10 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="daterangepicker"></div>

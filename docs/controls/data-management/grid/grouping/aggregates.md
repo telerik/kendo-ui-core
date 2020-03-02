@@ -16,4 +16,4 @@ To enable grouping by using aggregate functions, use the `aggregates`, `groupFoo
 
 * [Grouping with Aggregates by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/aggregates)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
-* [Group Templates](http://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)
+* [Group Templates](https://docs.telerik.com/aspnet-mvc/helpers/grid/templating/client-detail-template)

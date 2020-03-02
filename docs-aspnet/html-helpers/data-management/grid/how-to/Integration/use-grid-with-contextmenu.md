@@ -13,8 +13,8 @@ To see the example, refer to the project on how to [use the Kendo UI Grid with t
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Overview of the ContextMenu HtmlHelper](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
-* [ContextMenuBuilder API Reference](http://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Overview of the ContextMenu HtmlHelper](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
+* [ContextMenuBuilder API Reference](https://docs.telerik.com/kendo-ui/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/ContextMenuBuilder)
 
 

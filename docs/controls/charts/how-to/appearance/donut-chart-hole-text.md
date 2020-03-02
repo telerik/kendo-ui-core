@@ -85,21 +85,21 @@ The following example demonstrates how to place some text in the center of a Ken
             // The center and radius are populated by now.
             // We can ask a circle geometry to calculate the bounding rectangle for us.
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/geometry/circle/methods/bbox
+            // https://docs.telerik.com/kendo-ui/api/javascript/geometry/circle/methods/bbox
             var circleGeometry = new geom.Circle(center, radius);
             var bbox = circleGeometry.bbox();
 
             // Render the text
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
             var text = new draw.Text("Foo & Bar", [0, 0], {
               font: "18px Verdana,Arial,sans-serif"
             });
 
             // Align the text in the bounding box
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/vAlign
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/vAlign
             draw.align([text], bbox, "center");
             draw.vAlign([text], bbox, "center");
 

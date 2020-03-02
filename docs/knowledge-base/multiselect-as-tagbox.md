@@ -83,5 +83,5 @@ How can I configure and customize the MultiSelect to behave as a TagBox?
 
 ## See Also
 
-* [JavaScript API Reference of the MultiSelect](http://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
-* [Demo on Adding New MultiSelect Items](http://demos.telerik.com/kendo-ui/multiselect/addnewitem)
+* [JavaScript API Reference of the MultiSelect](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect)
+* [Demo on Adding New MultiSelect Items](https://demos.telerik.com/kendo-ui/multiselect/addnewitem)

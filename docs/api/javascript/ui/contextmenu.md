@@ -409,7 +409,7 @@ Refer to the example below for a list of the supported properties.
                     [{
                         text: "Item 1",
                         cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                        url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
+                        url: "https://www.telerik.com/kendo-ui"                // Link URL if navigation is needed, optional.
                     },
                     {
                         text: "<b>Item 2</b>",
@@ -418,7 +418,7 @@ Refer to the example below for a list of the supported properties.
                     },
                     {
                         text: "Item 3",
-                        imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+                        imageUrl: "https://www.telerik.com/kendo-ui/test.jpg", // Item image URL, optional.
                         items: [{                                    // Sub item collection
                              text: "Sub Item 1"
                         },
@@ -901,7 +901,7 @@ Appends an item to a **ContextMenu** in the specified referenceItem's sub menu (
             [{
                 text: "Item 1",
                 cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1157,7 +1157,7 @@ Inserts an item into a **ContextMenu** after the specified referenceItem.
         contextMenu.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1166,7 +1166,7 @@ Inserts an item into a **ContextMenu** after the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -1230,7 +1230,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
         contextMenu.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1239,7 +1239,7 @@ Inserts an item into a **ContextMenu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },

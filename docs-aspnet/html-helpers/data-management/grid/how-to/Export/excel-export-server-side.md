@@ -17,5 +17,5 @@ To see the example, refer to the project on how to [export to Excel on the serve
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
-* [Telerik Document Processing (TDP) by Progress](http://docs.telerik.com/devtools/document-processing/introduction)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction)

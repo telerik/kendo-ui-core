@@ -19,7 +19,7 @@ HTML Helpers can be added and further configured through predefined strongly typ
 
 * Currently, {{ site.product }} does not support localization resources. For more information and discussion on this issue, refer to [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007) and [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142).
 * The current set of helpers is limited and next releases will add more helpers.
-* [`Deferred()`](http://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferred) can be invoked only as a last setting.
+* [`Deferred()`](https://docs.telerik.com/aspnet-mvc/getting-started/fundamentals#configuration-Deferred) can be invoked only as a last setting.
 
         @(Html.Kendo().NumericTextBox()
               .Name("age")

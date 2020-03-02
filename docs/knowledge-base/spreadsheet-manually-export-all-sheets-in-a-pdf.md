@@ -132,6 +132,6 @@ Use the `Spreadsheet.Sheet.draw()` method which is internally used by the Spread
 
 ## See Also
 
-* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 * [API Reference of the Drawing Group](https://docs.telerik.com/kendo-ui/api/javascript/drawing/group)
 * [API Reference of the Drawing](https://docs.telerik.com/kendo-ui/api/javascript/drawing)

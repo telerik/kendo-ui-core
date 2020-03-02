@@ -24,7 +24,7 @@ The following example demonstrates how to combine effects which run on the same 
         // Calling reverse will zoom in and fade in.
     </script>
 
-The following example demonstrates how to combine effects which run on different elements by using the [`jQuery.when`](http://api.jquery.com/jQuery.when/) configuration.
+The following example demonstrates how to combine effects which run on different elements by using the [`jQuery.when`](https://api.jquery.com/jQuery.when/) configuration.
 
     <div id="foo">
         I will fade out.
@@ -47,5 +47,5 @@ The following example demonstrates how to combine effects which run on different
 
 ## See Also
 
-* [Basic Usage of FX (Demo)](http://demos.telerik.com/kendo-ui/fx/expand)
+* [Basic Usage of FX (Demo)](https://demos.telerik.com/kendo-ui/fx/expand)
 * [JavaScript API Reference of FX](/api/javascript/effects/common)

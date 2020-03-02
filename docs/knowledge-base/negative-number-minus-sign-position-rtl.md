@@ -43,10 +43,10 @@ Utilize and modify the number format pattern in the Kendo UI culture which is in
 kendo.culture().numberFormat.pattern[0] = "n-";
 ```
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/EcIgE).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/EcIgE).
 
 ## See Also
 
-* [Globalization in Kendo UI](http://docs.telerik.com/kendo-ui/framework/globalization/overview).
-* [Culture Definition in Kendo UI](http://docs.telerik.com/kendo-ui/framework/globalization/definecultureinfo).
-* [Right-to-Left (RTL) Support in Kendo UI](http://docs.telerik.com/kendo-ui/accessibility/supporting-rtl-languages)
+* [Globalization in Kendo UI](https://docs.telerik.com/kendo-ui/framework/globalization/overview).
+* [Culture Definition in Kendo UI](https://docs.telerik.com/kendo-ui/framework/globalization/definecultureinfo).
+* [Right-to-Left (RTL) Support in Kendo UI](https://docs.telerik.com/kendo-ui/accessibility/supporting-rtl-languages)

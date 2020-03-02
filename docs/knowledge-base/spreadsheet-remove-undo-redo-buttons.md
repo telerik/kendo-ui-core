@@ -47,4 +47,4 @@ To remove the buttons, apply CSS rules.
 
 ## See Also
 
-* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)

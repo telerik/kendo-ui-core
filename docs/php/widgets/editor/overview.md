@@ -83,7 +83,7 @@ The Editor posts its value HTML-encoded by default. You can either disable this 
 
 ### Client-Side Instances
 
-You are able to reference an existing Editor instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
+You are able to reference an existing Editor instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
 
 
 

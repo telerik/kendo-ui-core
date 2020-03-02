@@ -13,7 +13,7 @@ The following table lists the individual script files for the Kendo UI Gauges.&n
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [Gauge](http://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
+| [Gauge](https://demos.telerik.com/kendo-ui/linear-gauge/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
 | | kendo.popup.js | |

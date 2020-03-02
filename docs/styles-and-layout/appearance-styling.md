@@ -9,7 +9,7 @@ position: 1
 
 # Less-Based Themes
 
-All [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) support a set of predefined themes.
+All [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) support a set of predefined themes.
 
 **Figure 1: Kendo UI themes for the Web**
 
@@ -23,7 +23,7 @@ This is how the same themes are rendered in widgets that visualize data, such as
 
 ## Getting Started
 
-Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](http://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](http://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
+Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
 * `kendo.common.css`&mdash;This is a common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function in a proper way.
 * `kendo.[theme].css`&mdash;This stylesheet applies theme-specific styles such color palette, background gradients and patterns, etc.
@@ -89,7 +89,7 @@ The syntax of the generated classes is `k-[browser] k-[browser][majorVersion]`.
 
 Kendo UI widgets use primitives, meaning that different HTML elements in different widgets use the same CSS classes to provide a level of abstraction and allow common styling.
 
-You can use some CSS classes to apply borders and background colors to containers&mdash;for example, `k-info-colored`, `k-success-colored`, and `k-error-colored`. For more examples, refer to the [StylingPanels demo](http://demos.telerik.com/kendo-ui/styling/panels).
+You can use some CSS classes to apply borders and background colors to containers&mdash;for example, `k-info-colored`, `k-success-colored`, and `k-error-colored`. For more examples, refer to the [StylingPanels demo](https://demos.telerik.com/kendo-ui/styling/panels).
 
 ### Common CSS Classes
 
@@ -160,12 +160,12 @@ To customize the appearance of a particular widget instance, you will need a cus
 
 To create a custom theme with Kendo UI, use either of the following approaches:
 
-1. Use the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
+1. Use the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/). For detailed information on how to configure its options, refer to the [section on the Less Theme Builder](#theme-builder).
 2. Modify a `.less` file to achieve a theme of your liking. To do so, choose one of the available `kendo.*.less` files depending on what you want to achieve. Copy it to your project and rename it. Change the colors and run the [Less command-line compiler](http://lesscss.org/#using-less-command-line-usage) on it.
 
 ### Using the Less Theme Builder
 
-The [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html) enables you to modify Kendo UI themes to match the look and feel of your website or application.
+The [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/web.html) enables you to modify Kendo UI themes to match the look and feel of your website or application.
 
 When you customize a theme, you can either:
 

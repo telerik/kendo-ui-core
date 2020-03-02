@@ -18,13 +18,13 @@ To initiate the export to PDF, call the [`saveAsPdf`](/api/javascript/dataviz/ui
 For more information, refer to the following resources:
 
 * [API configuration for exporting the Chart to PDF](/api/javascript/dataviz/ui/chart/configuration/pdf)
-* [Exporting Charts to PDF (demo)](http://demos.telerik.com/kendo-ui/chart-api/pdf-export)
+* [Exporting Charts to PDF (demo)](https://demos.telerik.com/kendo-ui/chart-api/pdf-export)
 
 The following example demonstrates how to enable the PDF export functionality of the Chart.
 
 ```dojo
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -85,7 +85,7 @@ The following example demonstrates how to enable the PDF export functionality of
 
 ## Advanced Export
 
-The Chart allows you to retrieve Scalable Vector Graphics (SVG), Image (PNG) or PDF representation of its content as a `Base64`-encoded string. You can send this content to a service for further processing or to offer it as a file to the user. For more information, refer to [this online demo](http://demos.telerik.com/kendo-ui/chart-api/export).
+The Chart allows you to retrieve Scalable Vector Graphics (SVG), Image (PNG) or PDF representation of its content as a `Base64`-encoded string. You can send this content to a service for further processing or to offer it as a file to the user. For more information, refer to [this online demo](https://demos.telerik.com/kendo-ui/chart-api/export).
 
 The advanced export functionality is delivered though the following methods:
 * [`exportPDF`](/api/javascript/dataviz/ui/chart/methods/exportpdf)
@@ -126,7 +126,7 @@ The following example demonstrates how to obtain an image from the Chart.
 Internet Explorer 9 and Safari do not support the saving of files and require the implementation of a [server proxy]({% slug overview_savingfiles_kendoui %}#browser-support). To specify the URL of the server proxy, set the [`proxyURL`](/api/javascript/ui/grid/configuration/pdf.proxyurl) option.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -191,7 +191,7 @@ To send the generated file to a remote service, set the `proxyUrl` and `forcePro
 The following example demonstrates how to post files to the server.
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <button class='export-pdf k-button'>Save as PDF</button>
 
@@ -267,10 +267,10 @@ The following example demonstrates how to handle custom fonts by embedding a cus
         // NOTE: Only required if the Kendo UI stylesheets are loaded
         // from a different origin, e.g. kendo.cdn.telerik.com.
         kendo.pdf.defineFont({
-            "DejaVu Sans"             : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold"        : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic" : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic"      : "http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
+            "DejaVu Sans"             : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold"        : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic" : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic"      : "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf"
         });
     </script>
 

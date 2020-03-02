@@ -51,7 +51,7 @@ The following example demonstrates how to initialize the ComboBox through the `<
 
 ## Binding to Remote Data
 
-Remote data binding is useful for larger datasets so that the items are loaded on demand upon display. To initialize the ComboBox by binding the widget to remote data arrays and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). You can use the DataSource for serving data from various data services such as [XML](http://en.wikipedia.org/wiki/XML), [JSON](http://en.wikipedia.org/wiki/JSON), and [JSONP](http://en.wikipedia.org/wiki/JSONP).
+Remote data binding is useful for larger datasets so that the items are loaded on demand upon display. To initialize the ComboBox by binding the widget to remote data arrays and utilizing the `<input>` element, use the [Data Source component]({% slug overview_kendoui_datasourcecomponent %}). You can use the DataSource for serving data from various data services such as [XML](https://en.wikipedia.org/wiki/XML), [JSON](https://en.wikipedia.org/wiki/JSON), and [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
     <input id="comboBox" />
 

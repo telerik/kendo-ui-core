@@ -14,5 +14,5 @@ To see the example, refer to the GitHub repo on how to [use a custom DataSource 
 
 ## See Also
 
-* [DropDownListBuilder Server-Side API](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
+* [DropDownListBuilder Server-Side API](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder)
 * [DropDownList Server-Side API](/api/dropdownlist)

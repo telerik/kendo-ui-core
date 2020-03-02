@@ -10,11 +10,11 @@ position: 1
 
 The Kendo UI PivotGrid represents multidimensional data in a cross-tabular format.
 
-* [Demo page for the PivotGrid](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Demo page for the PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 
 ## Basic Configuration
 
-To configure the PivotGrid to the **Adventure Works** cube that is hosted on http://demos.telerik.com, create the widget by defining an HTML `<div>` element.
+To configure the PivotGrid to the **Adventure Works** cube that is hosted on https://demos.telerik.com, create the widget by defining an HTML `<div>` element.
 
 		<!-- Define	 the HTML div that will hold the PivotGrid -->
 		<div id="pivotgrid">
@@ -37,7 +37,7 @@ The following example demonstrates how to further configure the PivotGrid widget
                                 cube: "Adventure Works" // Specify the name of the cube.
                             },
                             read: {
-                                url: "http://demos.telerik.com/olap/msmdpump.dll", // Define the URL of the service.
+                                url: "https://demos.telerik.com/olap/msmdpump.dll", // Define the URL of the service.
                                 dataType: "text",
                                 contentType: "text/xml",
                                 type: "POST"
@@ -65,7 +65,7 @@ The previous example outputs the following result.
 
 ## Referencing Existing Instances
 
-To reference an existing PivotGrid instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotGrid API](/api/web/pivotgrid) to control its behavior.
+To reference an existing PivotGrid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference has been established, use the [PivotGrid API](/api/web/pivotgrid) to control its behavior.
 
 The following example demonstrates how to access an existing PivotGrid instance.
 
@@ -73,5 +73,5 @@ The following example demonstrates how to access an existing PivotGrid instance.
 
 ## See Also
 
-* [Basic Usage of the PivotGrid (Demo)](http://demos.telerik.com/kendo-ui/pivotgrid/index)
+* [Basic Usage of the PivotGrid (Demo)](https://demos.telerik.com/kendo-ui/pivotgrid/index)
 * [PivotGrid JavaScript API Reference](/api/javascript/ui/pivotgrid)

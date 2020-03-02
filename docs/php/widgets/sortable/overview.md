@@ -99,7 +99,7 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 <!--*-->
 ## Disable Hints
 
-The Sortable widget can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+The Sortable widget can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](https://api.jquery.com/jQuery.noop/)).
 
 
 
@@ -116,7 +116,7 @@ The Sortable widget can operate without a hint. To disable the hint, set it to a
 
 ### Client-Side Instances
 
-You are able to reference an existing Sortable instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
+You are able to reference an existing Sortable instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
 
 
 

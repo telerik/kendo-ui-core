@@ -67,7 +67,7 @@ Sets the icon for the header of the collapsible widget when it is in a collapsed
     <style>
         /*
             define custom icon names, full list of available icons can be found at:
-            http://docs.telerik.com/kendo-ui/mobile/icons
+            https://docs.telerik.com/kendo-ui/mobile/icons
         */
         .km-arrow-up:after,
         .km-arrow-up:before {
@@ -100,7 +100,7 @@ Sets the icon for the header of the collapsible widget when it is in a expanded 
     <style>
         /*
             define custom icon names, full list of available icons can be found at:
-            http://docs.telerik.com/kendo-ui/mobile/icons
+            https://docs.telerik.com/kendo-ui/mobile/icons
         */
         .km-arrow-up:after,
         .km-arrow-up:before {

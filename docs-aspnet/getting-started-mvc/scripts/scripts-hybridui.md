@@ -13,7 +13,7 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [ActionSheet](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index) | jquery.js | |
+| [ActionSheet](https://demos.telerik.com/kendo-ui/m/index#actionsheet/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.fx.js | |
@@ -29,7 +29,7 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 | | kendo.mobile.popover.js | |
 | | kendo.mobile.shim.js | |
 | | kendo.mobile.actionsheet.js | |
-| [Application](http://demos.telerik.com/kendo-ui/m/index#application/index) | jquery.js | |
+| [Application](https://demos.telerik.com/kendo-ui/m/index#application/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.userevents.js | |
@@ -43,18 +43,18 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 | | kendo.mobile.pane.js | |
 | | kendo.router.js | |
 | | kendo.mobile.application.js | |
-| [Button](http://demos.telerik.com/kendo-ui/m/index#button/index) | jquery.js | |
+| [Button](https://demos.telerik.com/kendo-ui/m/index#button/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.mobile.button.js | |
-| [ButtonGroup](http://demos.telerik.com/kendo-ui/m/index#buttongroup/index) | jquery.js | |
+| [ButtonGroup](https://demos.telerik.com/kendo-ui/m/index#buttongroup/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.mobile.buttongroup.js | |
-| [Collapsible](http://demos.telerik.com/kendo-ui/m/index#collapsible/index) | jquery.js | |
+| [Collapsible](https://demos.telerik.com/kendo-ui/m/index#collapsible/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.mobile.collapsible.js | |
-| [Drawer](http://demos.telerik.com/kendo-ui/m/index#drawer/index) | jquery.js | |
+| [Drawer](https://demos.telerik.com/kendo-ui/m/index#drawer/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.userevents.js | |
@@ -65,13 +65,13 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 | | kendo.view.js | |
 | | kendo.mobile.view.js | |
 | | kendo.mobile.drawer.js | |
-| [ListView](http://demos.telerik.com/kendo-ui/m/index#listview/index) | jquery.js | |
+| [ListView](https://demos.telerik.com/kendo-ui/m/index#listview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.mobile.button.js | |
 | | kendo.mobile.listview.js | |
-| [ModalView](http://demos.telerik.com/kendo-ui/m/index#modalview/index) | jquery.js | |
+| [ModalView](https://demos.telerik.com/kendo-ui/m/index#modalview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.mobile.shim.js | |
@@ -84,10 +84,10 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 | | kendo.view.js | |
 | | kendo.mobile.view.js | |
 | | kendo.mobile.modalview.js | |
-| [NavBar](http://demos.telerik.com/kendo-ui/m/index#navbar/index) | jquery.js | |
+| [NavBar](https://demos.telerik.com/kendo-ui/m/index#navbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.mobile.navbar.js | |
-| [PopOver](http://demos.telerik.com/kendo-ui/m/index#popover/index) | jquery.js | |
+| [PopOver](https://demos.telerik.com/kendo-ui/m/index#popover/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.fx.js | |
@@ -101,20 +101,20 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 | | kendo.mobile.loader.js | |
 | | kendo.mobile.pane.js | |
 | | kendo.mobile.popover.js | |
-| [Scroller](http://demos.telerik.com/kendo-ui/m/index#scroller/index) | jquery.js | |
+| [Scroller](https://demos.telerik.com/kendo-ui/m/index#scroller/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.mobile.scroller.js | |
-| [ScrollView](http://demos.telerik.com/kendo-ui/m/index#scrollview/index) | jquery.js | |
+| [ScrollView](https://demos.telerik.com/kendo-ui/m/index#scrollview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.data.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.mobile.scrollview.js | |
-| [SplitView](http://demos.telerik.com/kendo-ui/m/index#splitview/index) | jquery.js | |
+| [SplitView](https://demos.telerik.com/kendo-ui/m/index#splitview/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.userevents.js | |
@@ -127,12 +127,12 @@ The following table lists the individual script files for the hybrid Kendo UI wi
 | | kendo.mobile.loader.js | |
 | | kendo.mobile.pane.js | |
 | | kendo.mobile.splitview.js | |
-| [Switch](http://demos.telerik.com/kendo-ui/m/index#switch/index) | jquery.js | |
+| [Switch](https://demos.telerik.com/kendo-ui/m/index#switch/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
 | | kendo.userevents.js | |
 | | kendo.mobile.switch.js | |
-| [TabStrip](http://demos.telerik.com/kendo-ui/m/index#tabstrip/index) | jquery.js | |
+| [TabStrip](https://demos.telerik.com/kendo-ui/m/index#tabstrip/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.mobile.tabstrip.js | |
 

@@ -13,7 +13,7 @@ position: 3
 
 Since **SalesHub** contains a lot of orders for various customers, it would not be very efficient for **all**
 of the orders to be returned when the orders grid renders. To reduce wait times and cut back on the amount of bandwidth
-that is used when retrieving orders from the server, the [Kendo DataSource](http://demos.telerik.com/kendo-ui/web/datasource/index.html)
+that is used when retrieving orders from the server, the [Kendo DataSource](https://demos.telerik.com/kendo-ui/web/datasource/index.html)
 that the orders grid uses has been configured to do server-side operations.
 
 ## Configuration

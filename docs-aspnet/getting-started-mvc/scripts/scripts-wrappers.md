@@ -13,7 +13,7 @@ The following table lists the Kendo UI supplementary scripts for integration wit
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
-| [ASP.NET MVC](http://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) | jquery.js | |
+| [ASP.NET MVC](https://docs.telerik.com/kendo-ui/aspnet-mvc/introduction) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |
 | | kendo.popup.js | |

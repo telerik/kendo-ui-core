@@ -13,7 +13,7 @@ The ContextMenu displays hierarchical data as a multi-level menu in a popup.
 
 It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands. You can define and initialize items from HTML or use the API to add and remove items. You can also specify a ContextMenu target along with a filter for multiple targets and an event for making the ContextMenu pop up.
 
-* [Demo page for the ContextMenu](http://demos.telerik.com/kendo-ui/menu/context-menu)
+* [Demo page for the ContextMenu](https://demos.telerik.com/kendo-ui/menu/context-menu)
 
 ## Initializing the ContextMenu
 
@@ -48,7 +48,7 @@ The following example demonstrates how to initialize the ContextMenu by using a 
                         text: "Item 1",
                         cssClass: "myClass",                         // (Optional) Add a custom CSS class to the item.
                                                                      // Added in 2012 Q3 SP1.
-                        url: "http://www.telerik.com"                // (Optional) Link a URL if navigation is needed.
+                        url: "https://www.telerik.com"                // (Optional) Link a URL if navigation is needed.
                     },
                     {
                         text: "<b>Item 2</b>",
@@ -57,7 +57,7 @@ The following example demonstrates how to initialize the ContextMenu by using a 
                     },
                     {
                         text: "Item 3",
-                        imageUrl: "http://www.telerik.com/test.jpg", // (Optional) An item image URL.
+                        imageUrl: "https://www.telerik.com/test.jpg", // (Optional) An item image URL.
                         items: [{                                    // A sub-item collection.
                              text: "Sub Item 1"
                         },

@@ -16,7 +16,7 @@ A similar thing happens on the client side. Browsers convert all dates according
 
 To keep time in the UTC format, apply an explicit transformation to the dates on both client and server.
 
-> If you use formats for parsing UTC date strings, [apply the `zzz` specifier](http://docs.telerik.com/kendo-ui/framework/globalization/dateparsing#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
+> If you use formats for parsing UTC date strings, [apply the `zzz` specifier](https://docs.telerik.com/kendo-ui/framework/globalization/dateparsing#parse-utc-date-strings) to render the local time. Otherwise, the current browser timezone offset will apply.
 
 Below are listed the 2 corresponding steps for you to follow.
 
@@ -94,4 +94,4 @@ To see the example, refer to the project on how to [use UTC time on both the cli
 ## See Also
 
 * [Overview of the Grid HtmlHelper]({% slug htmlhelpers_grid_aspnetcore_overview %})
-* [GridBuilder API Reference](http://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)
+* [GridBuilder API Reference](https://docs.telerik.com/aspnet-mvc/api/Kendo.Mvc.UI.Fluent/GridBuilder)

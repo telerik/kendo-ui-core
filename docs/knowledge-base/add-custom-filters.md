@@ -61,4 +61,4 @@ I have a Kendo UI Grid for ASP.NET MVC with regular filters and local filtering.
 
 To allow the application of both filter types, wrap the custom filter in an additional filter with the `"OR"` criteria.
 
-For the complete implementation of the approach, refer to [this runnable example](http://dojo.telerik.com/AgIgO/17), which applies the [`filter`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method of the DataSource.
+For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/AgIgO/17), which applies the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/filter) method of the DataSource.

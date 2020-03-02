@@ -14,7 +14,7 @@ The ListView is ideally suited for displaying a list of items in a consistent ma
 
 The ListView can be bound to local JSON data or to remote data by using the Kendo UI DataSource component. It enables you to control the display of data. It does not provide a default rendering of data-bound items. Instead, it relies on templates to define the way a list of items is displayed, including alternating items and items that are in the process of editing.
 
-* [Demo page for the ListView](http://demos.telerik.com/kendo-ui/listview/index)
+* [Demo page for the ListView](https://demos.telerik.com/kendo-ui/listview/index)
 
 ## Basic Configuration
 
@@ -64,5 +64,5 @@ The following example demonstrates how the ListView works by defining a target H
 
 ## See Also
 
-* [Basic Usage of the ListView (Demo)](http://demos.telerik.com/kendo-ui/listview/index)
+* [Basic Usage of the ListView (Demo)](https://demos.telerik.com/kendo-ui/listview/index)
 * [JavaScript API Reference of the ListView](/api/javascript/ui/listview)

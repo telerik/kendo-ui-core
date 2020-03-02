@@ -8,7 +8,7 @@ position: 1
 
 # PDFViewer PHP Class Overview
 
-The PDFViewer PHP Class is a server-side wrapper for the [Kendo UI PDFViewer](http://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget.
+The PDFViewer PHP Class is a server-side wrapper for the [Kendo UI PDFViewer](https://docs.telerik.com/kendo-ui/api/javascript/ui/pdfviewer) widget.
 
 The [Kendo UI PDFViewer](https://demos.telerik.com/php-ui/pdfviewer/index) displays PDF files in the browser. It uses the [PDF.JS Processing](https://mozilla.github.io/pdf.js/) to process the files.
 
@@ -62,7 +62,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI PDFVi
 
 ### Client-Side Instances
 
-You are able to reference an existing PDFViewer instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [PDFViewer API](/api/javascript/ui/pdfviewer#methods) to control its behavior.
+You are able to reference an existing PDFViewer instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [PDFViewer API](/api/javascript/ui/pdfviewer#methods) to control its behavior.
 
 
 

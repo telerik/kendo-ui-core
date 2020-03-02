@@ -80,7 +80,7 @@ You can subscribe to all [events exposed by Kendo UI Chart](/api/javascript/data
 
 ### Existing Instances
 
-You are able to reference an existing Chart instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+You are able to reference an existing Chart instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
 
 

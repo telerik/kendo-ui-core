@@ -10,7 +10,7 @@ position: 1
 
 The Rating allows to intuitively rate by selecting number of items stars from a predefined maximum number of items.
 
-* [Demo page for the Rating](http://demos.telerik.com/kendo-ui/rating/index) 
+* [Demo page for the Rating](https://demos.telerik.com/kendo-ui/rating/index) 
 
 ## Initializing the Rating
 
