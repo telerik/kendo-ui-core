@@ -15,8 +15,14 @@ For example, when you filter or edit data on mobile, the system slides in a new 
 
 ## Enabling the Responsive Web Design
 
-To enable the adaptive rendering feature, use the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#mobile) method.
+To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
 
+* If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
+* If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.
+
+> Important: With the mobile rendering, we recommend to set up `height` as well. Without setting an explicit height, every view of the grid might have a different height.
+
+```Razor
     @(Html.Kendo().Grid<ProductViewModel>()
         .Name("grid")
         .Mobile()
@@ -26,20 +32,7 @@ To enable the adaptive rendering feature, use the [`Mobile`](https://docs.teleri
             .Read(read => read.Action("Products_Read", "Home"))
         )
     )
-
-## Configuring Panes on Mobile
-
-The Pane in which the adaptive Grid is placed does not automatically expand its height and you need to define an explicit pixel Grid height by setting the `height` option.
-
-    @(Html.Kendo().Grid<ProductViewModel>()
-        .Name("grid")
-        .Mobile(MobileMode.Phone)
-        .HtmlAttributes(new { style = "height:450px;" })
-        .DataSource(dataSource => dataSource
-            .Ajax()
-            .Read(read => read.Action("Products_Read", "Home"))
-        )
-    )
+```
 
 ## Resizing Columns
 

@@ -47,6 +47,17 @@
             validator.validate();
         });
 
+        it("validate event contains errors data", function() {
+            var input = $('<input type="text" required />'),
+                validator = setup(input, {
+                    validate: function(e) {
+                        assert.equal(e.errors.length, 1);
+                    }
+                });
+
+            validator.validate();
+        });
+
         it("validate returns true for non empty input with attribute required", function() {
             var input = $('<input type="text" required />'),
                 validator = setup(input);
@@ -1671,6 +1682,17 @@
             var input = container.find("#foo1");
             validator.bind("validateInput", function(e) {
                 assert.equal(input.attr("id"), e.input.attr("id"));
+            });
+
+            validator.validate();
+        });
+
+        it("validateInput contains data for the error message", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" validationMessage="foo1 is required"/><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container);
+            var input = container.find("#foo1");
+            validator.bind("validateInput", function(e) {
+                assert.equal(e.error, input.attr("validationMessage"));
             });
 
             validator.validate();

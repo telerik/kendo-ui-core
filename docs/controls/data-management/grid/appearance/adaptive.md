@@ -15,91 +15,100 @@ For example, when you filter or edit data on mobile, Kendo UI slides in a new sc
 
 ## Enabling Responsive Design
 
-To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true` or `phone`.
+To enable the adaptive rendering feature, set the [`mobile`](/api/javascript/ui/grid/configuration/mobile) property to `true` or `"phone"`:
+
+* If set to `true`, the widget will use adaptive rendering when viewed on a mobile browser.
+* If set to `"phone"`, the widget will be forced to use adaptive rendering regardless of the browser type.
+
+> Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the grid might have a different height.
 
 ```dojo
-    <div id="grid"></div>
-    <script>
+<div id="grid"></div>
+
+<script>
     $("#grid").kendoGrid({
-       columns: [
-         { field: "name" },
-         { field: "age" },
-         { command: "destroy" }
-       ],
-       dataSource: [
-         { name: "Jane Doe", age: 30 },
-         { name: "John Doe", age: 33 }
-       ],
-       filterable: true,
-       columnMenu: true,
-       height: 550,
-       mobile: true
+        columns: [
+            { field: "name" },
+            { field: "age" },
+            { command: "destroy" }
+        ],
+        dataSource: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+        ],
+        filterable: true,
+        editable: true,
+        columnMenu: true,
+        height: 550,
+        mobile: "phone"
     });
-    </script>
+</script>
 ```
 
 ## Configuring Panes on Mobile
 
-The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true` and apply an `auto` height to the Grid. Alternatively, define an explicit pixel Grid height and omit the pane `stretch` option.
+The mobile pane in which the adaptive Grid is placed does not automatically expand its height. To add an adaptive Grid to a Kendo UI mobile application, set the `stretch` configuration of the respective view to `true` and apply `100%` height to the Grid. Alternatively, define an explicit pixel Grid height and omit the pane `stretch` option.
+
+> Important: When the Adaptive Rendering of the Grid is used in a Kendo mobile Application, apply one of our [Less-based themes]({% slug themesandappearnce_kendoui_desktopwidgets %}).
 
 The following example demonstrates how to apply the `stretch` option.
 
-```dojo
-    <div id="foo" data-role="view" data-init="onInit" data-stretch="true">
-        <div id="grid"></div>
-    </div>
+```
+<div id="foo" data-role="view" data-init="onInit" data-stretch="true">
+    <div id="grid"></div>
+</div>
 
-    <script>
-        var gridConfig = {
-            columns: [
-                { field: "name" },
-                { field: "age" },
-                { command: "destroy" }
-            ],
-            dataSource: [
-                { name: "Jane Doe", age: 30 },
-                { name: "John Doe", age: 33 }
-            ],
-            filterable: true,
-            columnMenu: true,
-            mobile: "phone",
-            height: "auto"
-        };
+<script>
+    var gridConfig = {
+        columns: [
+            { field: "name" },
+            { field: "age" },
+            { command: "destroy" }
+        ],
+        dataSource: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+        ],
+        filterable: true,
+        columnMenu: true,
+        mobile: "phone",
+        height: "100%"
+    };
 
-        function onInit() {
-            $("#grid").kendoGrid(gridConfig);
-        }
+    function onInit() {
+        $("#grid").kendoGrid(gridConfig);
+    }
 
-        var app = new kendo.mobile.Application();
-    </script>
+    var app = new kendo.mobile.Application();
+</script>
 ```
 
 The following example demonstrates how to apply the `height` option.
 
-```dojo
-    <div id="foo" data-role="view" data-init="onInit">
-        <div id="grid"></div>
-    </div>
+```
+<div id="foo" data-role="view" data-init="onInit">
+    <div id="grid"></div>
+</div>
 
-    <script>
-        var gridConfig = {
-            columns: [
-                { field: "name" },
-                { field: "age" },
-                { command: "destroy" }
-            ],
-            dataSource: [
-                { name: "Jane Doe", age: 30 },
-                { name: "John Doe", age: 33 }
-            ],
-            filterable: true,
-            columnMenu: true,
-            mobile: "phone",
-            height: "140px" //grid will be 140px height
-        };
+<script>
+    var gridConfig = {
+        columns: [
+            { field: "name" },
+            { field: "age" },
+            { command: "destroy" }
+        ],
+        dataSource: [
+            { name: "Jane Doe", age: 30 },
+            { name: "John Doe", age: 33 }
+        ],
+        filterable: true,
+        columnMenu: true,
+        mobile: "phone",
+        height: "140px" //grid will be 140px height
+    };
 
-        $("#grid").kendoGrid(gridConfig);
-    </script>
+    $("#grid").kendoGrid(gridConfig);
+</script>
 ```
 
 ### Resizing of Columns
@@ -109,51 +118,6 @@ The column resizing feature on touch screen devices is triggered when the user h
 **Figure 1: A Grid with resizable columns on a mobile device**
 
 ![Grid Resizable Columns on Mobile](adaptive-resizing-icon.png)
-
-## Applying Styles to Parent Grid Elements
-
-The suggested approach applies to the following cases:
-* When multiple adaptive Grids are used on the same page.
-* When the Grid is not the only content on the page.
-
-Each adaptive Grid is rendered inside a separate mobile pane. Because the position of the panes is absolute, they overlap. To avoid pane overlapping, wrap each Grid inside a `<div>` container that is relatively positioned and has a set height. The absolute position is required for the proper functioning of the transition between main and edit views.
-
-The following example demonstrates how to add multiple adaptive Grids to the same page.
-
-```dojo
-    <div class="adaptive-grid-wrapper">
-        <div id="grid1"></div>
-    </div>
-
-    <div class="adaptive-grid-wrapper">
-        <div id="grid2"></div>
-    </div>
-    <style>
-        .adaptive-grid-wrapper {
-            position: relative;
-            height: 130px;
-         }
-    </style>
-    <script>
-        var gridConfig = {
-            columns: [
-                { field: "name" },
-                { field: "age" },
-                { command: "destroy" }
-            ],
-            dataSource: [
-                { name: "Jane Doe", age: 30 },
-                { name: "John Doe", age: 33 }
-            ],
-            filterable: true,
-            columnMenu: true,
-            mobile: "phone"
-        };
-
-        $("#grid1").kendoGrid(gridConfig);
-        $("#grid2").kendoGrid(gridConfig);
-    </script>
-```
 
 ## Destroying Adaptive Grids
 

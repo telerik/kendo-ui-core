@@ -306,7 +306,7 @@ var __meta__ = { // jshint ignore:line
                 result = this.validateInput(this.element);
             }
 
-            this.trigger(VALIDATE, { valid: result });
+            this.trigger(VALIDATE, { valid: result, errors: this.errors() });
 
             if (isValid !== result) {
                 this.trigger(CHANGE);
@@ -362,7 +362,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (wasValid !== valid) {
-                this.trigger(VALIDATE_INPUT, { valid: valid, input: input });
+                this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText });
             }
 
             input.toggleClass(INVALIDINPUT, !valid);

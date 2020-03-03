@@ -2824,33 +2824,7 @@ The text message displayed in the menu header (available in mobile mode only).
         }
       },
       mobile: "phone",
-      sortable: true,
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ]
-    });
-    </script>
-
-### columnMenu.messages.done `String` *(default: "Done")*
-
-The text message displayed in the menu header button (available in mobile mode only).
-
-#### Example - mobile column menu header button text
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      columnMenu: {
-        messages: {
-          done: "Ok",
-        }
-      },
-      mobile: "phone",
+      height: 550,
       sortable: true,
       dataSource: [
         { name: "Jane Doe", age: 30 },
@@ -3264,6 +3238,7 @@ If the grid is in mobile mode this text will be used for the confirm button.
         }
        },
        mobile: "phone",
+       height: 550,
        editable: {
          confirmation: true,
          confirmDelete: "Yes"
@@ -4150,36 +4125,6 @@ The text of the DropDownList displayed in the filter menu for columns whose [val
     });
     </script>
 
-### filterable.messages.cancel `String` *(default: "Cancel")*
-
-The text of the cancel button in the filter menu header (available in mobile mode only).
-
-#### Example - set the cancel button text
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "productName" },
-        { field: "category", values: [
-            { text: "Beverages", value: 1 },
-            { text: "Food", value: 2 },
-          ]
-        }
-      ],
-      dataSource: [
-        { productName: "Tea", category: 1 },
-        { productName: "Ham", category: 2 }
-      ],
-      mobile: "phone",
-      filterable: {
-        messages: {
-          cancel: "Reject"
-        }
-      }
-    });
-    </script>
-
 ### filterable.messages.selectedItemsFormat `String` *(default: "{0} items selected")*
 
 The format string for selected items count in filter menu when [search](columns.filterable.multi) option set to true.
@@ -4232,6 +4177,7 @@ The text displayed in the tooltip of the operator item in filter menu.
         { productName: "Ham", category: 2 }
       ],
       mobile: "phone",
+      height: 550,
       filterable: {
         messages: {
           operator: "Choose operator"
@@ -4262,6 +4208,7 @@ The text displayed in the tooltip of the additional operator item in filter menu
         { productName: "Ham", category: 2 }
       ],
       mobile: "phone",
+      height: 550,
       filterable: {
         messages: {
           additionalOperator: "Choose operator"
@@ -4292,6 +4239,7 @@ The text displayed in the tooltip of the value item in filter menu.
         { productName: "Ham", category: 2 }
       ],
       mobile: "phone",
+      height: 550,
       filterable: {
         messages: {
           value: "Choose value"
@@ -4322,6 +4270,7 @@ The text displayed in the tooltip of the additional value item in filter menu.
         { productName: "Ham", category: 2 }
       ],
       mobile: "phone",
+      height: 550,
       filterable: {
         messages: {
           additionalValue: "Choose value"
@@ -4351,7 +4300,6 @@ The text displayed in the tooltip of the logic item in filter menu.
         { productName: "Tea", category: 1 },
         { productName: "Ham", category: 2 }
       ],
-      mobile: "phone",
       filterable: {
         messages: {
           logic: "Choose logic"
@@ -6277,13 +6225,34 @@ Allows the customization of the text in the column header for the expand or coll
     });
     </script>
 
+### messages.search `String` *(default: "Search...")*
+
+Allows the customization of the placeholder text in the grid search panel.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      messages: {
+        search: "Look for..."
+      },
+      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+      toolbar:["search"]
+    });
+    </script>
+
 ### mobile `Boolean|String` *(default: false)*
 
 If set to `true` and the grid is viewed on mobile browser it will use adaptive rendering.
 
 Can be set to a string `phone` which will force the widget to use adaptive rendering regardless of browser type.
 
-> Important: With the mobile rendering you should make sure to setup the `height` option as well.
+> Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the grid might have a different height.
 
 #### Example - enable adaptive rendering auto detect
 
@@ -6322,7 +6291,8 @@ Can be set to a string `phone` which will force the widget to use adaptive rende
        ],
        filterable: true,
        columnMenu: true,
-       mobile: "phone"
+       mobile: "phone",
+       height: 550
     });
     </script>
 
@@ -8167,6 +8137,28 @@ The text displayed by the command button. If not set the [name](toolbar.name)` o
     });
     </script>
 
+### width `Number|String`
+
+The width of the grid. Numeric values are treated as pixels.
+
+#### Example - set the width as a number
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      width: 1000
+    });
+    </script>
 
 ## Fields
 

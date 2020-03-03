@@ -2075,7 +2075,8 @@ The text similar to "Ends" displayed in the adaptive version of the scheduler re
     <script>
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
-      mobile: true,
+      mobile: "phone",
+      height: 550,
       messages: {
         recurrenceEditor: {
             end: {
@@ -3247,9 +3248,9 @@ The fields which can be used in the template are:
 
 If set to `true` and the scheduler is viewed on mobile browser it will use adaptive rendering.
 
-Can be set to a string `phone` or `tablet` which will force the widget to use adaptive rendering regardless of browser type.
+Can be set to a string `phone` which will force the widget to use adaptive rendering regardless of browser type.
 
-> Important: With the mobile rendering set to `Phone` or `Tablet` mode make sure to setup the `height` option as well.
+> Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the scheduler might have a different height.
 
 #### Example - enable adaptive rendering auto detect
     <div id="scheduler"></div>

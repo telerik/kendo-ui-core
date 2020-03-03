@@ -14,10 +14,11 @@ The Scheduler supports adaptive enhancements such as changes in styling and beha
 For example, when editing on a mobile device, the edit container will slide in a new screen for the user, which is a departure from the more desktop-like popup behaviors.
 
 To enable the adaptive rendering feature, set the [`Mobile`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/SchedulerBuilder#mobile) property to `MobileMode.Auto` or `MobileMode.Phone`:
-* If set to `MobileMode.Auto`, the widget will use adaptive rendering when viewed on a mobile browser.
-* If set to `MobileMode.Phone"`, the widget will be forced to use adaptive rendering regardless of the browser type.
 
-> Important: With the mobile rendering mode make sure to setup the `height` option as well.
+* If set to `MobileMode.Auto`, the component will use adaptive rendering when viewed on a mobile browser.
+* If set to `MobileMode.Phone`, the component will be forced to use adaptive rendering regardless of the browser type.
+
+> Important: With the mobile rendering, we recommend to set up `height` as well. Without setting an explicit height, every view of the scheduler might have a different height.
 
 The following example demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
@@ -47,18 +48,6 @@ The following example demonstrates how to configure the adaptive rendering mode 
         .Destroy("Tasks_Destroy", "Home")
         .Update("Tasks_Update", "Home")
     )
-)
-```
-
-## Configuring Panes on Mobile
-
-The Pane in which the adaptive Scheduler is placed does not automatically expand its height and you need to define an explicit pixel Scheduler height by setting the height option.
-
-```Razor
-@(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
-    ...
-    .Mobile(MobileMode.Phone)
-    .Height(600)
 )
 ```
 
