@@ -1076,5 +1076,23 @@ it("element click calls _focusHandler", function(done) {
 
     combobox.element.trigger(CLICK);
 });
+it("change is not raised with highlightFirst set to false and item already selected", function() {
+    combobox = new ComboBox(input, {
+        dataSource: [{id: 1, text: "foo"}, {id: 2, text: "bar"}],
+        value: 1,
+        dataValueField: "id",
+        dataTextField: "text",
+        highlightFirst: false,
+        change: function() {
+            assert.isOk(false);
+        }
+    });
+
+    combobox.open();
+    combobox.input.trigger({
+        type: "keydown",
+        keyCode: kendo.keys.TAB
+    });
+});
     });
 }());

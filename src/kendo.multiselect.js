@@ -458,7 +458,16 @@ var __meta__ = { // jshint ignore:line
 
         _clearSingleTagValue: function() {
             var that = this;
+            var items = that.dataItems();
+            var tags = that.tagList.children();
             var persistTagList = that.persistTagList;
+
+            for (var i = 0; i < items.length; i += 1) {
+                if (that.trigger(DESELECT, { dataItem: items[i], item: tags.first() })) {
+                    that._close();
+                    return;
+                }
+            }
 
             if (persistTagList) {
                 that.persistTagList = false;
