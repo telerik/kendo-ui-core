@@ -40,7 +40,7 @@ The QRCode supports a set of [encoding conventions]({% slug overview_kendoui_qrc
 
 ## See Also
 
-* [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/inde)
+* [Basic Usage of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/index)
 * [Using the API of the QRCode (Demo)](https://demos.telerik.com/kendo-ui/qrcode/api)
 * [Knowledge Base Section](/knowledge-base)
 * [JavaScript API Reference of the QRCode](/api/javascript/dataviz/ui/qrcode)

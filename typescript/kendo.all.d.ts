@@ -9657,11 +9657,14 @@ declare namespace kendo.ui {
 
     interface ValidatorValidateEvent extends ValidatorEvent {
         valid?: boolean;
+        errors?: any[];
     }
 
     interface ValidatorValidateInputEvent extends ValidatorEvent {
         input?: JQuery;
         valid?: boolean;
+        error?: string;
+        field?: string;
     }
 
 

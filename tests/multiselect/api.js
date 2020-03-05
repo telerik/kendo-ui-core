@@ -368,7 +368,7 @@
 
             assert.equal(multiselect.tagList.children().length, 1);
             assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
-            assert.isOk(!multiselect._innerWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!multiselect._inputWrapper.hasClass("k-state-disabled"));
             assert.isOk(multiselect.input.attr("disabled"));
         });
 

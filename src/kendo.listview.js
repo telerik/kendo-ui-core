@@ -24,6 +24,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",
+        KENDO_KEYDOWN = "kendoKeydown",
         CANCEL = "cancel",
         DATABOUND = "dataBound",
         DATABINDING = "dataBinding",
@@ -93,7 +94,8 @@ var __meta__ = { // jshint ignore:line
             DATABOUND,
             EDIT,
             REMOVE,
-            SAVE
+            SAVE,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -475,7 +477,7 @@ var __meta__ = { // jshint ignore:line
                             that._current.removeClass(FOCUSED);
                         }
                     })
-                    .on("keydown" + NS, function(e) {
+                    .on("keydown" + NS, that, function(e) {
                         var key = e.keyCode,
                             current = that.current(),
                             target = $(e.target),

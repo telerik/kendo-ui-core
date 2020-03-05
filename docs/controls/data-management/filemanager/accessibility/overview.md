@@ -32,7 +32,7 @@ For more information, refer to:
 
 ## See Also
 
-* [Keyboard Navigation by the FileManager (Demo)](https://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation.html)
+* [Keyboard Navigation by the FileManager (Demo)](https://demos.telerik.com/kendo-ui/filemanager/keyboard-navigation)
 * [Keyboard Navigation by the Grid]({% slug keynav_kendoui_grid_widget %})
 * [Keyboard Support in Kendo UI for jQuery]({% slug keyboard_shortcuts_accessibility_support %})
 * [Accessibility in Kendo UI for jQuery]({% slug overview_accessibility_support_kendoui %})

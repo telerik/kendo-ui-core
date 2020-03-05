@@ -335,14 +335,19 @@ var __meta__ = { // jshint ignore:line
                     return true;
 
                 })).hide(),
-                messageText,
+                messageText = !valid ? that._extractMessage(input, result.key) : "",
+                messageLabel = !valid ? parseHtml(template({ message: decode(messageText) })) : "",
                 wasValid = !input.attr("aria-invalid");
             input.removeAttr("aria-invalid");
 
+            if (wasValid !== valid) {
+                if (this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName })) {
+                    return;
+                }
+            }
+
             if (!valid) {
-                messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-                var messageLabel = parseHtml(template({ message: decode(messageText) }));
                 var lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
@@ -359,10 +364,6 @@ var __meta__ = { // jshint ignore:line
                 input.attr("aria-invalid", true);
             } else {
                 delete that._errors[fieldName];
-            }
-
-            if (wasValid !== valid) {
-                this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText });
             }
 
             input.toggleClass(INVALIDINPUT, !valid);

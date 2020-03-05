@@ -1698,6 +1698,19 @@
             validator.validate();
         });
 
+        it("validateInput can be prevented", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" validationMessage="foo1 is required"/><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container, {
+                validateInput: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            validator.validateInput(container.find("#foo1").get(0));
+
+            assert.isOk(!container.find(".k-invalid-msg").length);
+        });
+
         it("setOptions updates options", function() {
             container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
             var validator = setup(container);

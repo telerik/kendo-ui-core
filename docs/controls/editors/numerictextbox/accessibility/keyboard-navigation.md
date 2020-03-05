@@ -10,7 +10,7 @@ position: 2
 
 The keyboard navigation of the NumericTextBox is always available.
 
-For more information on rendering a numeric software keyboard, refer to the article on [known limitations]({% slug limitations_numerictextbox %}#input-type). For a complete example, refer to the [demo on keyboard navigation of the NumericTextBox](https://demos.telerik.com/kendo-ui/NumericTextBox/keyboard-navigation).
+For more information on rendering a numeric software keyboard, refer to the article on [known limitations]({% slug limitations_numerictextbox %}#input-type). For a complete example, refer to the [demo on keyboard navigation of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/keyboard-navigation).
 
 ## See Also
 
