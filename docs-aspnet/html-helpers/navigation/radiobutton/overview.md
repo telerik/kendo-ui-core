@@ -13,7 +13,7 @@ The Telerik UI RadioButton HtmlHelper for {{ site.framework }} is a server-side 
 
 The RadioButton is rendered as an `input type='radio'` element that is immediately followed by a `label` element. The styling is implemented with the `k-radio` class that is attached to the `input` element and the `k-radio-label` class that is attached to the `label` element.
 
-* [Demo page for the RadioButton](https://demos.telerik.com/{{ site.platform }}/styling/index)
+* [Demo page for the RadioButton](https://demos.telerik.com/{{ site.platform }}/radiobutton/index)
 
 ## Initializing the RadioButton
 
