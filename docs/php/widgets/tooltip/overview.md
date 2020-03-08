@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 **Step 2** Create a [Tooltip](/api/php/Kendo/UI/Tooltip), set its container, and add a filter to target all child anchor elements with a title attribute for which the Tooltip will be shown.
 
-###### Example
+
 
         <?php
         $tooltip = new \Kendo\UI\Tooltip('#container');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 **Step 3** Output the Tooltip by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $tooltip->render();
@@ -43,7 +43,7 @@ You can subscribe to all Tooltip [events](/api/javascript/ui/tooltip#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $tooltip = new \Kendo\UI\Tooltip('#container');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
     <?php
     $tooltip = new \Kendo\UI\Tooltip('#container');
@@ -79,9 +79,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Tooltip instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Tooltip API](/api/javascript/ui/tooltip#methods) to control its behavior.
+You are able to reference an existing Tooltip instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Tooltip API](/api/javascript/ui/tooltip#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $tooltip = new \Kendo\UI\Tooltip('#container');

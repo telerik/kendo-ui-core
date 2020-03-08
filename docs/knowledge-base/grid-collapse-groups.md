@@ -2,7 +2,7 @@
 title: Collapse Groups in Grid by Default
 description: An example on how to have groups in a Kendo UI Grid which are collapsed by default.
 type: how-to
-page_title: Set Groups as Collapsed by Default | Kendo UI Grid
+page_title: Set Groups as Collapsed by Default | Kendo UI Grid for jQuery
 slug: grid-collapse-groups
 tags: grid, groups, grouping, collapse, default, expand, prevent, fold
 ticketid: 1144787

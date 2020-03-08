@@ -10,12 +10,12 @@ position: 1
 
 The following example demonstrates how to localize a DatePicker in an AngularJS environment by using [Angular Translate](https://github.com/angular-translate/angular-translate).
 
-###### Example
+
 
 ```dojo
-<script src="http://cdnjs.cloudflare.com/ajax/libs/bower-angular-translate/2.0.1/angular-translate.min.js"></script>
-    <script src="http://cdn.kendostatic.com/2014.2.903/js/cultures/kendo.culture.de-DE.min.js"></script>
-    <script src="http://cdn.kendostatic.com/2014.2.903/js/cultures/kendo.culture.en-US.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bower-angular-translate/2.0.1/angular-translate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com2014.2.903/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com2014.2.903/js/cultures/kendo.culture.en-US.min.js"></script>
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <p>{{ 'TITLE' | translate }}</p>
@@ -72,7 +72,7 @@ The following example demonstrates how to localize a DatePicker in an AngularJS 
             /* We are using the jQuery.getScript method to load the messages file
                     and use the callback function to change the kendo culture, kendo messages and angular-translate language */
 
-            $.getScript("http://cdn.kendostatic.com/2014.2.903/js/messages/kendo.messages." + $scope.lang + ".min.js", function() {
+            $.getScript("https://kendo.cdn.telerik.com2014.2.903/js/messages/kendo.messages." + $scope.lang + ".min.js", function() {
 
               /* $scope.$apply should be used in order to notify the $scope for language change */
               $scope.$apply(function(){

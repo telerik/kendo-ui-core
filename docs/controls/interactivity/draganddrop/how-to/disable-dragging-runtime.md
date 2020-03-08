@@ -17,8 +17,6 @@ To achieve this behavior:
 
 The following example demonstrates how to accomplish this scenario.
 
-###### Example
-
 ```dojo
   <button id="btn">Enable/Disable</button>
   <div id="parent">
@@ -38,7 +36,7 @@ The following example demonstrates how to accomplish this scenario.
 
 ## See Also
 
-* [API Reference of the Draggable](/api/javascript/ui/draggable)
-* [DropTarget API Reference](/api/javascript/ui/droptarget)
-* [DropTargetArea API Reference](/api/javascript/ui/droptargetarea)
-* [Overview of the Drag and Drop Functionality]({% slug overview_kendoui_draganddrop_intercativityandux %})
+* [Basic Usage of the Drag-and-Drop (Demo)](https://demos.telerik.com/kendo-ui/dragdrop/index)
+* [API Reference of Draggable](/api/javascript/ui/draggable)
+* [API Reference of DropTarget](/api/javascript/ui/droptarget)
+* [API Reference of DropTargetArea](/api/javascript/ui/droptargetarea)

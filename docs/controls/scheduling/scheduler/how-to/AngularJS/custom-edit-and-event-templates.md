@@ -10,8 +10,6 @@ position: 1
 
 The following example demonstrates how to create custom templates for the **Events** and **Edit** windows of the Scheduler in AngularJS.
 
-###### Example
-
 ```dojo
 <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
@@ -110,7 +108,7 @@ The following example demonstrates how to create custom templates for the **Even
   <script id="customEditorTemplate" type="text/x-kendo-template">
     <div class="k-edit-label"><label for="title">Title</label></div>
     <div data-container-for="title" class="k-edit-field">
-        <input type="text" class="k-input k-textbox" name="title" required="required" data-bind="value:title">
+        <input type="text" class="k-textbox" name="title" required="required" data-bind="value:title">
       </div>
     <div class="k-edit-label">
         <label for="start">Start</label>
@@ -200,16 +198,6 @@ The following example demonstrates how to create custom templates for the **Even
 
 ## See Also
 
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
-* [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
-* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its **How To** documentation folder.
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

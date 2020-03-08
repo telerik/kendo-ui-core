@@ -9,7 +9,7 @@ slug: howto_use_angularjs_copy_functionality_datepicker
 
 The following example demonstrates how to use the AngularJS copy functionality in a Kendo UI DatePicker.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="KendoDemos">

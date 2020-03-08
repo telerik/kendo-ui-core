@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 **Step 2** Create a [ColorPicker](/api/php/Kendo/UI/ColorPicker).
 
-###### Example
+
 
     <?php
     $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 **Step 3** Output the ColorPicker by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $colorpicker->render();
@@ -43,7 +43,7 @@ You can subscribe to all ColorPicker [events](/api/javascript/ui/colorpicker#eve
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
    <?php
    $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
     <?php
     $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');
@@ -79,9 +79,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing ColorPicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPicker API](/api/javascript/ui/colorpicker#methods) to control its behavior.
+You are able to reference an existing ColorPicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPicker API](/api/javascript/ui/colorpicker#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $colorpicker = new \Kendo\UI\ColorPicker('colorpicker');

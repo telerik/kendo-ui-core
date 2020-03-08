@@ -2,7 +2,7 @@
 title: Set Different Colors Dynamically for Markers Based on Field in Map
 description: An example on how to dynamically change the colors of the markers based on the field value of the Kendo UI Map.
 type: how-to
-page_title: Set Different Colors for Markers Based on Field Value | Kendo UI Map
+page_title: Set Different Colors for Markers Based on Field Value | Kendo UI Map for jQuery
 slug: map-marker-color-from-field
 tags: map, markers, marker color
 ticketid: 1115002
@@ -33,7 +33,7 @@ How can I use this color to the marker on the Map based on the field value?
 
 The Kendo UI Map does not provide a built-in solution for achieving this behavior. However, you can still work around this issue.
 
-After the marker is created, the [`markerActivate`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/markeractivate) event is fired. Although the styles of the markers come from the selected themes styles, handle the `markerActivate` event, get reference to the rendered element, and manually change its color by using jQuery.
+After the marker is created, the [`markerActivate`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/events/markeractivate) event is fired. Although the styles of the markers come from the selected themes styles, handle the `markerActivate` event, get reference to the rendered element, and manually change its color by using jQuery.
 
 ```
 markerActivate: function(e) {

@@ -9,7 +9,7 @@ slug: howto_usefontawesomeicons_toolbar
 
 The example below demonstrates how to use [FontAwesome icons](http://fortawesome.github.io/Font-Awesome/icons/) as Kendo UI ToolBar sprite icons.
 
-###### Example
+
 
 ```dojo
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">

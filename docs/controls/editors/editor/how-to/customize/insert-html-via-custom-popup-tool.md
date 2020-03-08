@@ -12,16 +12,13 @@ The HTML markup in the Window resembles the HTML markup internally used by the K
 
 However, this is not required as demonstrated in the following example. It shows how to use a custom Kendo UI Editor tool and a Kendo UI Window for inserting HTML content in the Editor.
 
-For additional information about the code used in the example, refer to:
-
+For additional information about the code used in the example, refer to the following resources:
 * [How to Configure Editor Tools](/api/javascript/ui/editor/configuration/tools)
 * [How to Execute Editor Commands](/api/javascript/ui/editor/methods/exec)
-* [Editor Custom Tools Demo](http://demos.telerik.com/kendo-ui/editor/custom-tools)
+* [Editor Custom Tools Demo](https://demos.telerik.com/kendo-ui/editor/custom-tools)
 * [How to Configure a Window](/api/javascript/ui/window)
 * [How to Obtain Widget's Element from Its Client Object](/framework/widgets/wrapper-element)
 * [Notes on Destroying Windows]({% slug overview_kendoui_window_widget %}#configuration-Destroy)
-
-###### Example
 
 ```dojo
     <div id="example">
@@ -29,8 +26,7 @@ For additional information about the code used in the example, refer to:
         &lt;p&gt;
         Kendo UI Editor allows your users to edit HTML in a familiar, user-friendly way.&lt;br /&gt;
         It provides the core HTML editing engine, which includes basic text formatting, hyperlinks, lists,
-        and image handling. The widget &lt;strong&gt;outputs identical HTML&lt;/strong&gt; across all major browsers, follows
-        accessibility standards and provides API for content manipulation.
+        and image handling. The widget &lt;strong&gt;outputs identical HTML&lt;/strong&gt; across all major browsers, follows accessibility standards and provides API for content manipulation.
         &lt;/p&gt;
       </textarea>
     </div>
@@ -53,36 +49,36 @@ For additional information about the code used in the example, refer to:
 
             var editor = $(this).data("kendoEditor");
 
-            // Store the editor range object
-            // Needed for IE
+            // Store the Editor range object.
+            // Needed for IE.
             var storedRange = editor.getRange();
 
-            // create a modal Window from a new DOM element
+            // Create a modal Window from a new DOM element.
             var popupWindow = $(popupHtml)
             .appendTo(document.body)
             .kendoWindow({
-                // modality is recommended in this scenario
+                // Modality is recommended in this scenario.
                 modal: true,
                 width: 600,
                 resizable: false,
                 title: "Insert custom content",
-                // ensure opening animation
+                // Ensure the opening animation.
                 visible: false,
-                // remove the Window from the DOM after closing animation is finished
+                // Remove the Window from the DOM after closing animation is finished.
                 deactivate: function(e){ e.sender.destroy(); }
             }).data("kendoWindow")
             .center().open();
 
-            // insert the new content in the Editor when the Insert button is clicked
+            // Insert the new content in the Editor when the Insert button is clicked.
             popupWindow.element.find(".k-dialog-insert").click(function(){
                 var customHtml = popupWindow.element.find("textarea").val();
                 editor.selectRange(storedRange);
                 editor.exec("inserthtml", { value: customHtml });
             });
 
-            // close the Window when any button is clicked
+            // Close the Window when any button is clicked.
             popupWindow.element.find(".k-edit-buttons button").click(function(){
-                // detach custom event handlers to prevent memory leaks
+                // Detach custom event handlers to prevent memory leaks.
                 popupWindow.element.find(".k-edit-buttons button").off();
                 popupWindow.close();
             });
@@ -105,10 +101,6 @@ For additional information about the code used in the example, refer to:
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

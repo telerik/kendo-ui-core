@@ -38,6 +38,9 @@ var __meta__ = { // jshint ignore:line
         SELECTED = "selected",
         REQUESTSTART = "requestStart",
         REQUESTEND = "requestEnd",
+        BLUR = "blur",
+        FOCUS = "focus",
+        FOCUSOUT = "focusout",
         extend = $.extend,
         proxy = $.proxy,
         isArray = $.isArray,
@@ -48,8 +51,9 @@ var __meta__ = { // jshint ignore:line
         isIE8 = isIE && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
-            "ComboBox": "DropDownList",
-            "DropDownList": "ComboBox"
+            "ComboBox": [ "DropDownList", "MultiColumnComboBox" ],
+            "DropDownList": [ "ComboBox", "MultiColumnComboBox" ],
+            "MultiColumnComboBox": [ "ComboBox", "DropDownList" ]
         };
 
     var List = kendo.ui.DataBoundWidget.extend({
@@ -106,7 +110,11 @@ var __meta__ = { // jshint ignore:line
             valuePrimitive: false,
             footerTemplate: "",
             headerTemplate: "",
-            noDataTemplate: "No data found."
+            noDataTemplate: true,
+            messages: {
+                "noData": "No data found.",
+                "clear": "clear"
+            }
         },
 
         setOptions: function(options) {
@@ -177,7 +185,7 @@ var __meta__ = { // jshint ignore:line
             kendo.destroy(columnsHeader);
             columnsHeader.remove();
 
-            var header = "<div class='k-grid-header'><div class='k-grid-header-wrap'><table>";
+            var header = "<div class='k-grid-header'><div class='k-grid-header-wrap'><table role='presentation'>";
             var colGroup = "<colgroup>";
             var row = "<tr>";
 
@@ -218,7 +226,7 @@ var __meta__ = { // jshint ignore:line
         _noData: function() {
             var list = this;
             var noData = $(list.noData);
-            var template = list.options.noDataTemplate;
+            var template = list.options.noDataTemplate === true ?  list.options.messages.noData : list.options.noDataTemplate;
 
             list.angular("cleanup", function() { return { elements: noData }; });
             kendo.destroy(noData);
@@ -559,9 +567,10 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var widgetOptions = that.options;
             var ignoreCase = widgetOptions.ignoreCase;
+            var accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             return {
-                value: ignoreCase ? value.toLowerCase() : value,
+                value: ignoreCase ? (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()) : value,
                 field: field,
                 operator: widgetOptions.filter,
                 ignoreCase: ignoreCase
@@ -570,7 +579,7 @@ var __meta__ = { // jshint ignore:line
 
         _clearButton: function() {
             var list = this;
-            var clearTitle = (list.options.messages && list.options.messages.clear) ? list.options.messages.clear: "clear";
+            var clearTitle = list.options.messages.clear;
 
             if (!list._clear){
                 list._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="' + clearTitle + '"></span>').attr({
@@ -968,6 +977,18 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _refreshScroll: function () {
+            var listView = this.listView;
+            var enableYScroll = listView.element.height() > listView.content.height();
+
+            if (this.options.autoWidth) {
+                listView.content.css({
+                    overflowX: "hidden",
+                    overflowY: enableYScroll ? "scroll" : "auto"
+                });
+            }
+        },
+
         _resizePopup: function(force) {
             if (this.options.virtual) {
                 return;
@@ -979,6 +1000,8 @@ var __meta__ = { // jshint ignore:line
                         this._calculatePopupHeight(force);
                     }, this);
                 }).call(this, force));
+
+                this.popup.one("activate", proxy(this._refreshScroll, this));
             } else {
                 this._calculatePopupHeight(force);
             }
@@ -1057,6 +1080,9 @@ var __meta__ = { // jshint ignore:line
     function unifyType(value, type) {
         if (value !== undefined && value !== "" && value !== null) {
             if (type === "boolean") {
+                if (typeof value !== "boolean") {
+                    value = value.toLowerCase() === "true";
+                }
                 value = Boolean(value);
             } else if (type === "number") {
                 value = Number(value);
@@ -1531,7 +1557,13 @@ var __meta__ = { // jshint ignore:line
             var parent = parentElement.data("kendo" + name);
 
             if (!parent) {
-                parent = parentElement.data("kendo" + alternativeNames[name]);
+                for(var i = 0; i < alternativeNames[name].length; i+=1) {
+                    parent = parentElement.data("kendo" + alternativeNames[name][i]);
+
+                    if (!!parent) {
+                        break;
+                    }
+                }
             }
 
             return parent;
@@ -1585,9 +1617,9 @@ var __meta__ = { // jshint ignore:line
         _toggleCascadeOnFocus: function() {
             var that = this;
             var parent = that._parentWidget();
-            var focusout = isIE ? "blur" : "focusout";
+            var focusout = isIE && parent instanceof ui.DropDownList ? BLUR : FOCUSOUT;
 
-            parent._focused.add(parent.filterInput).bind("focus", function() {
+            parent._focused.add(parent.filterInput).bind(FOCUS, function() {
                 parent.unbind(CASCADE, that._cascadeHandlerProxy);
                 parent.first(CHANGE, that._cascadeHandlerProxy);
             });
@@ -1602,7 +1634,7 @@ var __meta__ = { // jshint ignore:line
             var parent = this._parentWidget();
             var valueBeforeCascade = this.value();
 
-            this._userTriggered = e.userTriggered;
+            this._userTriggered = e.userTriggered || parent._userTriggered;
 
             if (this.listView.bound()) {
                 this._clearSelection(parent, true);
@@ -1979,6 +2011,7 @@ var __meta__ = { // jshint ignore:line
             var selectable = that.options.selectable;
             var singleSelection = selectable !== "multiple" && selectable !== false;
             var selectedIndices = that._selectedIndices;
+            var uiSelectedIndices = [this.element.find(".k-state-selected").index()];
 
             var added = [];
             var removed = [];
@@ -2001,7 +2034,9 @@ var __meta__ = { // jshint ignore:line
                 return deferred;
             }
 
-            if (singleSelection && !filtered && $.inArray(last(indices), selectedIndices) !== -1) {
+            if (singleSelection && !filtered &&
+                $.inArray(last(indices), selectedIndices) !== -1 && $.inArray(last(indices), uiSelectedIndices) !== -1) {
+
                 if (that._dataItems.length && that._view.length) {
                     that._dataItems = [that._view[selectedIndices[0]].item];
                 }
@@ -2423,7 +2458,7 @@ var __meta__ = { // jshint ignore:line
 
             var visibleItem = this._firstVisibleItem();
 
-            if (visibleItem && visibleItem.group) {
+            if (visibleItem && visibleItem.group.toString().length) {
                 this.header.html(template(visibleItem.group));
             }
         },

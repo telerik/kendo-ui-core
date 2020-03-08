@@ -2,7 +2,7 @@
 title: Validate If Value Is in the Correct Format
 description: An example on how to validate whether value is in the correct format in the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: Validate Whether Value Is in the Correct Format | Kendo UI DatePicker
+page_title: Validate Whether Value Is in the Correct Format | Kendo UI DatePicker for jQuery
 slug: datepicker-validate-whether-value-is-in-correct-format
 tags: kendo, ui, datepicker, datetimepicker, validate, format,correct, value,input
 res_type: kb
@@ -57,7 +57,7 @@ Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/
 
         $("#form").kendoValidator({
           rules: {
-            //implement your custom date validation
+            // Implement your custom date validation.
             dateValidation: function (input, params) {
 
               if (input.is("[name='date']") && input.val() != "") {
@@ -74,7 +74,7 @@ Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/
           },
           messages: { //custom rules messages
             datevalidation: function (input) {
-              // return the message text
+              // Return the message text.
               return input.attr("data-val-datevalidation");
             }
           }
@@ -85,6 +85,6 @@ Use the [Kendo UI Validator](https://docs.telerik.com/kendo-ui/controls/editors/
 
 ## See Also
 
-* [API Reference of the DatePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [API Reference of the DateTimePicker](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [API Reference of the Calendar](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [API Reference of the DatePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [API Reference of the DateTimePicker](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [API Reference of the Calendar](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)

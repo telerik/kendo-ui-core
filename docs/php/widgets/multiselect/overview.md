@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 2** Create an array to which the MultiSelect will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -48,7 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 4** Create a [MultiSelect](/api/php/Kendo/UI/MultiSelect).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 5** Output the MultiSelect by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $multiSelect->render();
@@ -73,7 +73,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 When deferred binding (`autoBind: false`) is used, you need to specify a list of data items instead of just a list of strings. This functionality is first supported in Kendo UI Q1 SP1 2013 release and all later versions.
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -98,7 +98,7 @@ You can subscribe to all MultiSelect [events](/api/javascript/ui/autocomplete#ev
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
@@ -118,7 +118,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $multiSelect = new \Kendo\UI\MultiSelect('multiselect');
@@ -134,9 +134,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI MultiSelect instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MultiSelect API](/api/javascript/ui/multiselect#methods) to control its behavior.
+You can reference the client-side Kendo UI MultiSelect instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [MultiSelect API](/api/javascript/ui/multiselect#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $multiSelect = new \Kendo\UI\MultiSelect('multiselect');

@@ -16,8 +16,6 @@ To achieve this behavior:
 3. Create an instance of this class.
 4. Add the applied modification to the `UndoRedoService` of the Diagram.
 
-###### Example
-
 ```dojo
 
     <input type="button" value="Undo" onclick="undoChange(); return false;">
@@ -68,9 +66,8 @@ To achieve this behavior:
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

@@ -8,9 +8,7 @@ slug: howto_make_the_editor_auto_expanding_editor
 
 # Create Auto-Expanding Editors
 
-The following example demonstrates how to create an auto-expanding Kendo UI Editor.
-
-###### Example
+The following example demonstrates how to create an auto-expanding Editor.
 
 ```dojo
   <style>
@@ -32,11 +30,6 @@ The following example demonstrates how to create an auto-expanding Kendo UI Edit
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

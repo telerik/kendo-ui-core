@@ -85,7 +85,7 @@
                 '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">Shared Notes</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Archive</span>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Archive <input /></span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
@@ -142,6 +142,16 @@
             item.find('> .k-link').trigger('click');
 
             assert.isOk(isSelectRaised);
+        });
+
+        it('clicking input should not raise onSelect event', function() {
+            var item = getRootItem(3);
+
+            isSelectRaised = false;
+
+            $(item).find('input').first().trigger("click");
+
+            assert.isOk(!isSelectRaised);
         });
 
         it('collapse should raise onCollapse event', function() {

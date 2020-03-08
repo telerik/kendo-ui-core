@@ -1,23 +1,18 @@
 ---
 title: Server Filtering
-page_title: Server Filtering | Kendo UI AutoComplete
-description: "Learn how to configure server filtering in the Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
+page_title: jQuery AutoComplete Documentation | Server Filtering | Kendo UI
+description: "Get started with the jQuery AutoComplete by Kendo UI and configure its server-filtering functionality."
 slug: server_filtering_kendoui_autocomplete_widget
 position: 4
 ---
 
 # Server Filtering
 
-For more information on how to display only a subset of data in the AutoComplete widget, refer to the article on the [ComboBox server filtering]({% slug server_filtering_kendoui_combobox_widget %}).
+The AutoComplete provides options for filtering its data on the server in an identical way as the Kendo UI ComboBox does.
 
-The approaches described in it are applicable for the AutoComplete.
+For more information, refer to the article on [filtering the data of the ComboBox on the server]({% slug server_filtering_kendoui_combobox_widget %}).
 
 ## See Also
 
-* [Overview of the AutoComplete Widget]({% slug overview_kendoui_autocomplete_widget %})
-* [Grouping]({% slug grouping_kendoui_autocomplete_widget %})
-* [Virtualization]({% slug virtualization_kendoui_autocomplete_widget %})
-* [How to Use Custom AngularJS Templates]({% slug howto_use_custom_angularjs_templates_autocomplete %})
-* [How to Show a No results found Message]({% slug howto_add_customized_templates_autocomplete %})
-* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
+* [Server Filtering in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/serverfiltering)
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)

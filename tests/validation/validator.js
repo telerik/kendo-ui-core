@@ -47,6 +47,17 @@
             validator.validate();
         });
 
+        it("validate event contains errors data", function() {
+            var input = $('<input type="text" required />'),
+                validator = setup(input, {
+                    validate: function(e) {
+                        assert.equal(e.errors.length, 1);
+                    }
+                });
+
+            validator.validate();
+        });
+
         it("validate returns true for non empty input with attribute required", function() {
             var input = $('<input type="text" required />'),
                 validator = setup(input);
@@ -199,14 +210,14 @@
             assert.equal(messages[0], "message");
         });
 
-        it("errors returns title if no validationMessage attribute for single invalid element", function() {
-            var input = $('<input type="text" required  title="message" />'),
+        it("errors returns name plus validator default message if no validationMessage attribute for single invalid element", function() {
+            var input = $('<input type="text" required  name="message" title="message" />'),
                 validator = setup(input);
 
                 validator.validate();
             var messages = validator.errors();
             assert.equal(messages.length, 1);
-            assert.equal(messages[0], "message");
+            assert.equal(messages[0], "message is required");
         });
 
         it("errors returns validationMessage if both validationMessage and title are set for single invalid element", function() {
@@ -238,8 +249,8 @@
 
             var messages = validator.errors();
             assert.equal(messages.length, 2);
-            assert.equal(messages[0], "input1 message");
-            assert.equal(messages[1], "input2 message");
+            assert.equal(messages[0], "input1 is required");
+            assert.equal(messages[1], "input2 is required");
         });
 
         it("errors is cleared if revalidated single input", function() {
@@ -266,7 +277,7 @@
 
             var messages = validator.errors();
             assert.equal(messages.length, 1);
-            assert.equal(messages[0], "input2 message");
+            assert.equal(messages[0], "input2 is required");
         });
 
         it("existing error message element container is reused", function() {
@@ -1674,6 +1685,52 @@
             });
 
             validator.validate();
+        });
+
+        it("validateInput contains data for the error message", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" validationMessage="foo1 is required"/><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container);
+            var input = container.find("#foo1");
+            validator.bind("validateInput", function(e) {
+                assert.equal(e.error, input.attr("validationMessage"));
+            });
+
+            validator.validate();
+        });
+
+        it("validateInput can be prevented", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" validationMessage="foo1 is required"/><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container, {
+                validateInput: function(e) {
+                    e.preventDefault();
+                }
+            });
+
+            validator.validateInput(container.find("#foo1").get(0));
+
+            assert.isOk(!container.find(".k-invalid-msg").length);
+        });
+
+        it("setOptions updates options", function() {
+            container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
+            var validator = setup(container);
+
+            validator.setOptions({
+                errorTemplate: "<span>#=message#</span>",
+                validateOnBlur: false,
+                messages: {
+                    custom: "Please enter valid value for my custom rule"
+                },
+                rules: {
+                    customRule1: function(input) { return false; }
+                }
+            });
+            var options = validator.options;
+
+            assert.equal(options.errorTemplate, "<span>#=message#</span>");
+            assert.equal(options.validateOnBlur, false);
+            assert.equal(options.messages.custom, "Please enter valid value for my custom rule");
+            assert.equal(options.rules.customRule1.length, 1);
         });
     });
 }());

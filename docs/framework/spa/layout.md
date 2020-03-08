@@ -8,15 +8,11 @@ position: 3
 
 # Layout
 
-The Layout class inherits from the `View` one and provides the additional functionality of rendering other views and layouts in a given child element.
+The `Layout` class inherits from the `View` one and provides the additional functionality of rendering other views and layouts in a given child element.
 
-## Functionalities
-
-### Show Views
+## Showing Views
 
 The following example demonstrates a layout showing a view.
-
-###### Example
 
     <div id="app"></div>
 
@@ -34,11 +30,9 @@ As the layout itself is a view, a layout instance can also be passed to the `sho
 
 When a view is rendered in a location already used for the rendering of a view, the previous view is hidden (its element is detached from the DOM), and the previous view `hide` event is triggered.
 
-### Switch Views
+## Switching Views
 
 The following example demonstrates a layout switching views.
-
-###### Example
 
     <div id="app"></div>
 
@@ -54,11 +48,9 @@ The following example demonstrates a layout switching views.
         layout.showIn("#content", bar);
     </script>
 
-### View Transitions
+## Viewing Transitions
 
 If you call the `showIn` method with an additional third parameter, the new view replaces the current one with a [replace effect]({% slug replaceffect_fxeffects_widget %}).
-
-####### Example
 
     <style>
         /* the initial position of the next div */

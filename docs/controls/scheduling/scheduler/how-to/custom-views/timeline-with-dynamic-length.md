@@ -11,8 +11,6 @@ position: 5
 
 The following example demonstrates how to implement a custom Timeline view in a Kendo UI Scheduler which allows to change its length dynamically.
 
-###### Example
-
 ```dojo
     Number of shown days:
     <select id="days">
@@ -35,9 +33,9 @@ The following example demonstrates how to implement a custom Timeline view in a 
           },
           name: "MyCustomTimelistView",
           calculateDateRange: function() {
-            //create the required number of days
+            // Create the required number of days.
             var start = this.options.date,
-              //  start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
+              // start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
               idx, length,
               dates = [];
 
@@ -115,11 +113,11 @@ The following example demonstrates how to implement a custom Timeline view in a 
         }).data("kendoScheduler");
 
         $("#days").change(function() {
-          //change the number of days option of the view
+          // Change the number of the days option of the view.
           scheduler.setOptions({
             numberOfDays: parseInt($(this).val())
           });
-          //reload the view
+          // Reload the view.
           scheduler.view(scheduler.view().name);
         });
       });
@@ -129,18 +127,6 @@ The following example demonstrates how to implement a custom Timeline view in a 
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Modify Editor Template upon New Events]({% slug howto_modifyeditortemplate_wheneventisnew_scheduler %})
-* [How to Prevent Moving AllDay Events outside the AllDay Header]({% slug howto_preventmovingalldayevents_fromalldayheader_scheduler %})
-* [How to Retrieve Current View Date Range]({% slug howto_retrievecurrent_viewdaterange_scheduler %})
-* [How to Set Slot Background Color Using Slot Templates]({% slug howto_setslotbackgroundcolor_usingslottemplates_scheduler %})
-* [How to Show Tooltip with Additional Information over Scheduler Events]({% slug howto_showtooltipwith_additionalinformation_overevents_scheduler %})
-* [How to Update Opposite Picker Value on `model` Change]({% slug howto_updateoppositepickervalue_onmodelchange_scheduler %})
-* [How to Use Different Date Formats]({% slug howto_usedifferentdateformats_scheduler %})
-* [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
-* [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
-* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

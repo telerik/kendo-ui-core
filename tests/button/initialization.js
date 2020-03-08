@@ -207,6 +207,22 @@
         assert.equal(button.data("kendoButton").element.attr("disabled"), "disabled");
     });
 
+    it("enabled:false adds a k-state-disabled class", function() {
+        getButton().kendoButton({
+            enabled: false
+        });
+
+        assert.isOk(button.data("kendoButton").element.hasClass("k-state-disabled"));
+    });
+
+    it("enabled:false adds a disabled attribute", function() {
+        getButton().kendoButton({
+            enabled: false
+        });
+
+        assert.equal(button.data("kendoButton").element.attr("disabled"), "disabled");
+    });
+
     it("disabled attribute adds a k-state-disabled class", function() {
         getButton().attr("disabled", "disabled").kendoButton();
 
@@ -223,6 +239,14 @@
         getButton().attr("tabindex", 1).kendoButton();
 
         assert.equal(button.data("kendoButton").element.attr("tabindex"), 1);
+    });
+
+    it("when badge is enabled a kendo.ui.Badge is initialized", function() {
+        getButton().attr("tabindex", 1).kendoButton({
+            badge: "1"
+        });
+
+        assert.isOk(button.data("kendoButton").badge instanceof kendo.ui.Badge);
     });
     });
 }());

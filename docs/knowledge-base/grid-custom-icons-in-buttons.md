@@ -2,7 +2,7 @@
 title: Change the Icons of Update and Cancel Buttons
 description: An example on how to change the icons of the Update and Cancel buttons in the Kendo UI Grid.
 type: how-to
-page_title: Implement Custom Buttons | Kendo UI Grid
+page_title: Implement Custom Buttons | Kendo UI Grid for jQuery
 slug: grid-custom-icons-in-buttons
 tags: grid, custom, buttons, icons, image, background, update, cancel, edit
 ticketid: 1144053
@@ -21,7 +21,7 @@ res_type: kb
 
 ## Description
 
-I am able to edit the text and styles of the commands&mdash;such as `command.Edit().Text(" ").HtmlAttributes(new { @class = "k-icon k-i-pencil" });`&mdash;but I have not found a way to reach the buttons which show up in the new-item line.
+I can edit the text and styles of the commands&mdash;such as `command.Edit().Text(" ").HtmlAttributes(new { @class = "k-icon k-i-pencil" });`&mdash;but I have not found a way to reach the buttons which show up in the new-item line.
 
 How can I change the text and images of the **Update** and **Cancel** buttons which show up in the line while editing and while adding a new item?
 

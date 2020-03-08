@@ -11,8 +11,6 @@ The following example demonstrates how to implement the editing functionality wi
 
 You need this functionality because assigning a non-default `id` value for the new items is required in order for the item to be accepted as existing by the dataSource and the new shapes to be displayed by the Diagram.
 
-###### Example
-
 ```dojo
 
     <script>       
@@ -276,9 +274,8 @@ You need this functionality because assigning a non-default `id` value for the n
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Drag and Drop on Shapes]({% slug howto_draganddrop_onshapes_diagram %})
 * [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

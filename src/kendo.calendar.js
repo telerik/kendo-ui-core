@@ -87,7 +87,7 @@ var __meta__ = { // jshint ignore:line
             element = that.wrapper = that.element;
             options = that.options;
 
-            options.url = window.unescape(options.url);
+            options.url = kendo.unescape(options.url);
 
             that.options.disableDates = getDisabledExpr(that.options.disableDates);
 
@@ -105,7 +105,7 @@ var __meta__ = { // jshint ignore:line
                     .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
                     .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
                     .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
-                    .on(CLICK, CELLSELECTOR, function(e) {
+                    .on(CLICK + " touchend", CELLSELECTOR, function(e) {
                         var link = e.currentTarget.firstChild,
                             value = toDateObject(link);
 
@@ -216,6 +216,7 @@ var __meta__ = { // jshint ignore:line
             normalize(options);
 
             options.disableDates = getDisabledExpr(options.disableDates);
+            that._destroySelectable();
 
             Widget.fn.setOptions.call(that, options);
 
@@ -264,7 +265,7 @@ var __meta__ = { // jshint ignore:line
         focus: function(table) {
             table = table || this._table;
             this._bindTable(table);
-            table.focus();
+            table.trigger("focus");
         },
 
         min: function(value) {
@@ -659,10 +660,25 @@ var __meta__ = { // jshint ignore:line
 
         _dateInView: function(date) {
             var that = this,
-                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTOR + ":first").find("a")),
-                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTOR + ":last").find("a"));
+                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID + ":first").find("a")),
+                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID + ":last").find("a"));
 
             return +date <= +lastDateInView && +date >= +firstDateInView;
+        },
+
+        _isNavigatable: function(currentValue, cellIndex) {
+            var that = this;
+            var isDisabled = that.options.disableDates;
+            var cell;
+            var index;
+
+            if (that._view.name == "month") {
+                return !isDisabled(currentValue);
+            } else {
+                index = that.wrapper.find("."+FOCUSED).index();
+                cell = that.wrapper.find(".k-content td:eq("+(index+cellIndex)+")");
+                return cell.is(CELLSELECTORVALID) || !isDisabled(currentValue);
+            }
         },
 
         _move: function(e) {
@@ -780,7 +796,7 @@ var __meta__ = { // jshint ignore:line
                         currentValue = restrictValue(currentValue, options.min, options.max);
                     }
 
-                    if (isDisabled(currentValue)) {
+                    if (!that._isNavigatable(currentValue, value)) {
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
 
@@ -993,10 +1009,10 @@ var __meta__ = { // jshint ignore:line
                 value = that._view.toDateString(date),
                 disabledDate;
 
-            if (cell) {
-                cell.removeAttr(ARIA_SELECTED)
-                .removeAttr(ARIA_LABEL)
-                .removeAttr(ID);
+            if (cell && cell.length) {
+                cell[0].removeAttribute(ARIA_SELECTED);
+                cell[0].removeAttribute(ARIA_LABEL);
+                cell[0].removeAttribute(ID);
                 //.removeClass(className);
             }
 
@@ -1019,7 +1035,8 @@ var __meta__ = { // jshint ignore:line
 
             if (id) {
                 cell.attr(ID, id);
-                that._table.removeAttr("aria-activedescendant").attr("aria-activedescendant", id);
+                that._table[0].removeAttribute("aria-activedescendant");
+                that._table.attr("aria-activedescendant", id);
             }
         },
 
@@ -1113,11 +1130,11 @@ var __meta__ = { // jshint ignore:line
 
             links = element.find(".k-link")
             .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
-            .click(false);
+            .on(CLICK + " touchend" + ns, function() { return false; } );
 
-            that._title = links.eq(1).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
-            that[PREVARROW] = links.eq(0).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });
-            that[NEXTARROW] = links.eq(2).on(CLICK, function() { that._active = that.options.focusOnNav !== false; that.navigateToFuture(); });
+            that._title = links.eq(1).on(CLICK + " touchend" + ns, function() { that._active = that.options.focusOnNav !== false; that.navigateUp(); });
+            that[PREVARROW] = links.eq(0).on(CLICK + " touchend" + ns, function() { that._active = that.options.focusOnNav !== false; that.navigateToPast(); });
+            that[NEXTARROW] = links.eq(2).on(CLICK + " touchend" + ns, function() { that._active = that.options.focusOnNav !== false; that.navigateToFuture(); });
         },
 
         _navigate: function(arrow, modifier) {

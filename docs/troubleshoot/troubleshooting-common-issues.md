@@ -39,7 +39,7 @@ Make sure that jQuery is included only before the Kendo UI JavaScript files and 
 
 ### Widgets Are Unavailable or Undefined
 
-If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}) are not included.
+If jQuery is included more than once in the page all existing jQuery plugins (including Kendo UI) will be wiped out. Will also occur if the [required jQuery file]({% slug jquerysupport_kendoui %}) is not included.
 
 Depending on the browser, the following JavaScript errors will be thrown:
 
@@ -54,11 +54,11 @@ Depending on the browser, the following JavaScript errors will be thrown:
 
 **Solution**
 
-Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files]({% slug javascript_prerequisites_kendoui_installation %}).
+Make sure jQuery is not included more than once in your page. Remove any duplicate `script` references to jQuery. Include all [required Kendo JavaScript files]({% slug jquerysupport_kendoui %}).
 
 ### Widgets Cannot Be Initialized in Internet Explorer Compatibility Mode
 
-Kendo widgets provide a WAI-ARIA support, which means that some ARIA-specific attributes are added to the HTML element. When a widget tries to add an ARIA attribute using [jQuery's `attr` method](http://api.jquery.com/attr/), which in turn calls the [`Element.setAttribute` method](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute), the Internet Explorer in Compatibility mode will raise a JavaScript error with the following message:
+Kendo widgets provide a WAI-ARIA support, which means that some ARIA-specific attributes are added to the HTML element. When a widget tries to add an ARIA attribute using [jQuery's `attr` method](https://api.jquery.com/attr/), which in turn calls the [`Element.setAttribute` method](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute), the Internet Explorer in Compatibility mode will raise a JavaScript error with the following message:
 
 * SCRIPT3: Member not found (in Internet Explorer 10+ in Compatibility Mode)
 
@@ -174,7 +174,7 @@ Client libraries that interfere with touch events, such as FastClick, are not co
 
 **Solution**
 
-For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](http://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
+For more information on this issue, refer to [What Exactly Is... The 300ms Click Delay](https://www.telerik.com/blogs/what-exactly-is.....-the-300ms-click-delay).
 
 ### Widget Popup Is Offset Incorrectly in Internet Explorer
 
@@ -212,7 +212,7 @@ By default, IIS does not serve files with unknown extensions. The mime types can
 
 The example below demonstrates how to configure the IIS `Web.config`. Note the mime is removed first to avoid clashes if it is already defined.
 
-###### Example
+
 
 ```xml
     <?xml version="1.0"?>
@@ -240,7 +240,7 @@ Load a partial HTML fragment that does not contain any unneeded jQuery reference
 
 The example below demonstrates a test issue.
 
-###### Example
+
 
     $("#dialog").kendoWinodow({
         // loads complete page
@@ -249,7 +249,7 @@ The example below demonstrates a test issue.
 
 The example below demonstrates the solution of the test issue above.
 
-###### Example
+
 
     $("#dialog").kendoWindow({
         // load complete page...
@@ -311,11 +311,10 @@ To provide for the backward compatibility of any custom icons you add to your pr
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
-* [Validation Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
-* [Scaffolding Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
-* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
-* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshoot/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/upload/troubleshoot/troubleshooting)
+* [Common Issues in Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
+* [Validation Issues in Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
+* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/editors/upload/troubleshooting)

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `menu` tag.
 
-###### Example
+
 
         <kendo:menu name="menu">
             <kendo:menu-items>
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 You can subscribe to all [events exposed by Kendo UI Menu](/api/javascript/ui/menu#events) by the handler name.
 
-###### Example
+
 
         <kendo:menu name="menu" open="menu_open" close="menu_close">
             <kendo:menu-items>
@@ -90,7 +90,7 @@ You can subscribe to all [events exposed by Kendo UI Menu](/api/javascript/ui/me
 
 The following example demonstrates how to subscribe to the `select` event of a single Menu item.
 
-###### Example
+
 
         <kendo:menu name="menu">
             <kendo:menu-items>
@@ -104,9 +104,9 @@ The following example demonstrates how to subscribe to the `select` event of a s
 
 ### Existing Instances
 
-You are able to reference an existing Menu instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
+You are able to reference an existing Menu instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Menu API](/api/javascript/ui/menu#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo Menu tag declaration
         <script>

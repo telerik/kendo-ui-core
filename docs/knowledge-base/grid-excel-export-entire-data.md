@@ -1,8 +1,8 @@
 ---
 title: Export the Entire Grid Data to Excel
-description: How to export the entire data of the grid without the paging, filtering and grouping
+description: An example on how to export the entire data of the Kendo UI Grid for jQuery without the paging, filtering, and grouping.
 type: how-to
-page_title: Export the Entire Data to Excel | Kendo UI Grid
+page_title: Export the Entire Data to Excel | Kendo UI Grid for jQuery
 slug: grid-excel-export-entire-data
 tags: grid, excel, export, whole, data, no filter, group, all pages, complete, entire
 ticketid: 1140199
@@ -26,7 +26,7 @@ How can I export to Excel the complete (unfiltered) content of a filtered Grid i
 
 Use either of the following approaches:
 
-* The [built-in behavior of the Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/excel-export#enable-export-to-excel) is designed to export only the its current state&mdash;filtered, sorted, paged, and grouped. This means that to export all the data (without the query), you need to intercept the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event and modify the created workbook.
+* The [built-in behavior of the Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/export/excel-export) is designed to export only the its current state&mdash;filtered, sorted, paged, and grouped. This means that to export all the data (without the query), you need to intercept the [`excelExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/excelexport) event and modify the created workbook.
 
     ```
     excelExport: function(e){

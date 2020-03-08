@@ -2,9 +2,9 @@
 title: Filter Resources by Using a Kendo UI ComboBox in Scheduler
 description: An example on how to filter the resource of the Kendo UI Scheduler widget by using the Kendo UI ComboBox.
 type: how-to
-page_title: Implement Resource Filtering by Using ComboBox | Kendo UI Scheduler
+page_title: Implement Resource Filtering by Using ComboBox | Kendo UI Scheduler for jQuery
 slug: scheduler-filter-resources-dropdown
-tags: kendo, kendoui, combobox, scheduler, filter, resources,
+tags: kendo, kendoui, combobox, scheduler, filter, resources
 ticketid: 1138727
 res_type: kb
 ---
@@ -42,7 +42,7 @@ How can I filter the events by resources in the Scheduler with a Kendo UI ComboB
 1. Subscribe to the `change` event of the widget.
 1. Filter the data source of the Scheduler by using the selection of the ComboBox or DropDownList.
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/@nenchef/ipuzUN/2).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/@nenchef/ipuzUN/2).
 
 ```dojo
 <div id="example">

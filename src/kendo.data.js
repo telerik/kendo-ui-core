@@ -89,14 +89,14 @@ var __meta__ = { // jshint ignore:line
             return this[index];
         },
 
-        toJSON: function() {
+        toJSON: function(serializeFunctions) {
             var idx, length = this.length, value, json = new Array(length);
 
             for (idx = 0; idx < length; idx++){
                 value = this[idx];
 
                 if (value instanceof ObservableObject) {
-                    value = value.toJSON();
+                    value = value.toJSON(serializeFunctions);
                 }
 
                 json[idx] = value;
@@ -478,8 +478,8 @@ var __meta__ = { // jshint ignore:line
             that.uid = kendo.guid();
         },
 
-        shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && typeof this[field] !== FUNCTION && field !== "uid";
+        shouldSerialize: function(field, serializeFunctions) {
+            return this.hasOwnProperty(field) && field !== "_handlers" && field !== "_events" && ((serializeFunctions && serializeFunctions[field]) || typeof this[field] !== FUNCTION) && field !== "uid";
         },
 
         forEach: function(f) {
@@ -490,15 +490,15 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        toJSON: function() {
+        toJSON: function (serializeFunctions) {
             var result = {}, value, field;
 
             for (field in this) {
-                if (this.shouldSerialize(field)) {
+                if (this.shouldSerialize(field, serializeFunctions)) {
                     value = this[field];
 
                     if (value instanceof ObservableObject || value instanceof ObservableArray) {
-                        value = value.toJSON();
+                        value = value.toJSON(serializeFunctions);
                     }
 
                     result[field] = value;
@@ -775,7 +775,7 @@ var __meta__ = { // jshint ignore:line
             return field ? field.editable !== false : true;
         },
 
-        set: function(field, value, initiator) {
+        set: function(field, value) {
             var that = this;
             var dirty = that.dirty;
 
@@ -786,7 +786,7 @@ var __meta__ = { // jshint ignore:line
                     that.dirty = true;
                     that.dirtyFields[field] = true;
 
-                    if (ObservableObject.fn.set.call(that, field, value, initiator) && !dirty) {
+                    if (ObservableObject.fn.set.call(that, field, value) && !dirty) {
                         that.dirty = dirty;
 
                         if (!that.dirty) {
@@ -1060,7 +1060,7 @@ var __meta__ = { // jshint ignore:line
             return function(a, b, ignore, accentFoldingFiltering) {
                 b += "";
                 if (ignore) {
-                    a = "(" + a + " || '').toString()" + ((accentFoldingFiltering) ? ".toLocaleLowerCase('" + accentFoldingFiltering  +"')" : ".toLowerCase()");
+                    a = "(" + a + " + '').toString()" + ((accentFoldingFiltering) ? ".toLocaleLowerCase('" + accentFoldingFiltering  +"')" : ".toLowerCase()");
                     b = ((accentFoldingFiltering) ? b.toLocaleLowerCase(accentFoldingFiltering) : b.toLowerCase());
                 }
                 return impl(a, quote(b), ignore);
@@ -1261,6 +1261,21 @@ var __meta__ = { // jshint ignore:line
 
             return grep(descriptors, function(d) { return !!d.dir; });
         }
+    }
+
+    function sortFields(sorts, dir) {
+        var sortObject = {};
+
+        if (sorts) {
+            var descriptor = typeof sorts === STRING ? { field: sorts, dir: dir } : sorts,
+            descriptors = isArray(descriptor) ? descriptor : (descriptor !== undefined ? [descriptor] : []);
+
+            for (var i = 0; i < descriptors.length; i++) {
+                sortObject[descriptors[i].field] = { dir: descriptors[i].dir, index: i + 1 };
+            }
+        }
+
+        return sortObject;
     }
 
     var operatorMap = {
@@ -1791,8 +1806,10 @@ var __meta__ = { // jshint ignore:line
             total = query.toArray().length;
         }
 
-        if (sort && !inPlace) {
-            query = query.sort(sort);
+        if (sort) {
+            if (!inPlace) {
+                query = query.sort(sort);
+            }
 
             if (group) {
                 data = query.toArray();
@@ -3869,10 +3886,11 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.sort) {
                     that._sort = options.sort = normalizeSort(options.sort);
+                    that._sortFields = sortFields(options.sort);
                 }
 
                 if (options.filter) {
-                    that._filter = options.filter = that.options.accentFoldingFiltering ? $.extend({}, normalizeFilter(options.filter), { accentFoldingFiltering: that.options.accentFoldingFiltering}) : normalizeFilter(options.filter);
+                    that._filter = options.filter = (that.options.accentFoldingFiltering && !$.isEmptyObject(options.filter)) ? $.extend({}, normalizeFilter(options.filter), { accentFoldingFiltering: that.options.accentFoldingFiltering}) : normalizeFilter(options.filter);
                 }
 
                 if (options.group) {
@@ -4027,6 +4045,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if(val !== undefined) {
+                that.trigger("sort");
                 that._query({ sort: val });
                 return;
             }
@@ -5029,8 +5048,9 @@ var __meta__ = { // jshint ignore:line
             var fields;
             var operators;
             var filter;
+            var accentFoldingFiltering = this.options.accentFoldingFiltering;
 
-            expressions = normalizeFilter(expressions);
+            expressions = accentFoldingFiltering ? $.extend({}, normalizeFilter(expressions), { accentFoldingFiltering: accentFoldingFiltering}) : normalizeFilter(expressions);
 
             if (!expressions || expressions.filters.length === 0) {
                 this._updateHierarchicalFilter(function(){return true;});

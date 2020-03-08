@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 **Step 2** Create a [ProgressBar](/api/javascript/ui/editor).
 
-###### Example
+
 
   	<?php
 		  $pb = new \Kendo\UI\ProgressBar('progressBar');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 **Step 3** Output the ProgressBar by echoing the result of the render method.
 
-###### Example
+
 
  	<?php
 	    echo $pb->render();
@@ -43,7 +43,7 @@ You can subscribe to all ProgressBar [events](/api/javascript/ui/progressbar#eve
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
 		<?php
 	      $pb = new \Kendo\UI\ProgressBar('progressBar');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
 		<?php
 	      $pb = new \Kendo\UI\ProgressBar('progressBar');
@@ -79,9 +79,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing ProgressBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/progressbar#methods) to control its behavior.
+You are able to reference an existing ProgressBar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/progressbar#methods) to control its behavior.
 
-###### Example
+
 
 			<?php
 		      $pb = new \Kendo\UI\ProgressBar('progressBar');

@@ -2,7 +2,7 @@
 title: Create Flowchart from Local Data by Using the Diagram
 description: An example on how to create a flowchart from local data for shapes and connections by using the Kendo UI Diagram.
 type: how-to
-page_title: Create Flowcharts | Kendo UI Diagram
+page_title: Create Flowcharts | Kendo UI Diagram for jQuery
 slug: diagram-create-flowchart
 tags: diagram, flowchart
 ticketid: 1147424

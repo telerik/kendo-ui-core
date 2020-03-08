@@ -9,7 +9,7 @@ component: navbar
 
 # NavBar Overview
 
-The [Hybrid UI NavBar widget](http://demos.telerik.com/kendo-ui/m/index#navbar/index) is used inside a mobile View or Layout `header` element to display an application navigation bar. The mobile NavBar may display the current view title in the center, and optionally some additional left- and right-aligned widgets&mdash;a back button, settings button, etc.
+The [Hybrid UI NavBar widget](https://demos.telerik.com/kendo-ui/m/index#navbar/index) is used inside a mobile View or Layout `header` element to display an application navigation bar. The mobile NavBar may display the current view title in the center, and optionally some additional left- and right-aligned widgets&mdash;a back button, settings button, etc.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ The Kendo UI mobile Application automatically initializes a mobile NavBar for ev
 
 The example below demonstrates how to initialize the Hybrid UI NavBar from markup.
 
-###### Example
+
 
 ```dojo
     <div data-role="view" data-title="Hello world">
@@ -38,7 +38,7 @@ The example below demonstrates how to initialize the Hybrid UI NavBar from marku
 
 The example below demonstrates how to initialize the Hybrid UI by using jQuery plugin syntax.
 
-###### Example
+
 
     var navbar = $("#navbar").kendoMobileNavBar();
 
@@ -50,13 +50,13 @@ The Hybrid UI NavBar background color can be customized by setting its backgroun
 
 The example below demonstrates how to create a green Hybrid UI NavBar.
 
-###### Example
+
 
     <div data-role="navbar" style="background-color: green">My View Title</div>
 
 The example below demonstrates how to create a green Hybrid UI NavBar in iOS and a red one in Android.
 
-###### Example
+
 
     <style>
         .km-ios .checkout { background-color: green; }
@@ -71,7 +71,7 @@ After initialization, the mobile NavBar positions its child elements based on th
 
 The example below demonstrates how to use the `align` data attribute to specify the elements position inside the NavBar.
 
-###### Example
+
 
     <div data-role="navbar">
         <a data-role="backbutton" data-align="left">Back</a>
@@ -83,7 +83,7 @@ The example below demonstrates how to use the `align` data attribute to specify 
 
 By default, the NavBar view title is visible only in iOS and is hidden in the rest of the platforms. Apply the CSS demonstrated in the example below to make it visible on a specific platform such as Android.
 
-###### Example
+
 
     .km-android .km-navbar .km-view-title /* Before Q2 2012 SP1 */
     {
@@ -109,7 +109,7 @@ This feature is particularly useful if the NavBar is inside a layout.
 
 The example below demonstrates how to use the `view-title` data attribute to auto-update the NavBar title.
 
-###### Example
+
 
     <div data-role="layout" data-id="foo">
         <div data-role="header">
@@ -134,7 +134,7 @@ There are three predefined color schemes&mdash;light, dark (default), and accent
 
 The example below demonstrates how to set the `km-light` class in the NavBar.
 
-###### Example
+
 
      <header data-role="header">
         <div data-role="navbar" class="km-light">
@@ -144,7 +144,7 @@ The example below demonstrates how to set the `km-light` class in the NavBar.
 
 The example below demonstrates how to set the `km-accent` class in the NavBar.
 
-###### Example
+
 
      <header data-role="header">
         <div data-role="navbar" class="km-accent">
@@ -156,7 +156,7 @@ The example below demonstrates how to set the `km-accent` class in the NavBar.
 
 To activate the subtitles, add a `span` element with the `km-view-subtitle` class to the NavBar, as demonstrated in the example below.
 
-###### Example
+
 
      <header data-role="header">
         <div data-role="navbar">
@@ -170,7 +170,7 @@ To activate the subtitles, add a `span` element with the `km-view-subtitle` clas
 
 To nest a ButtonGroup, set the `km-navbar-buttongroup` class and add the ButtonGroup component to the NavBar, as demonstrated in the example below.
 
-###### Example
+
 
      <div data-role="navbar" class="km-navbar-buttongroup">
            <!-- ... -->

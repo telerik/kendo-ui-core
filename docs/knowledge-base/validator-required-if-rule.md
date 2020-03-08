@@ -1,7 +1,7 @@
 ---
 title: Validate Required Conditional Fields
 description: An example on how to implement required conditional field validation based on the value of another input on the form when working with the Kendo UI Validator.
-page_title: Validate Required Conditional Fields | Kendo UI Validator
+page_title: Validate Required Conditional Fields | Kendo UI Validator for jQuery
 slug: validator-required-if-rule
 tags: validator, required, required if, required-if, validation, conditional
 ticketid: 1384728
@@ -41,7 +41,7 @@ The code comments contain tips for the suggested implementation. For more inform
 
 * The `form` elements must have a `name` attribute so that the Kendo UI Validator can properly attach to them.
 * The suggested approach is only one out of many ways to implement conditional validation.
-* The suggested approach can also apply to other technologies, such as MVC, as it requires only the setting of an attribute on the DOM element. For example, for the Kendo UI for MVC MultiSelect Html Helper, adding the `.HtmlAttributes(new { requiredIf = "input1" })` setting is equivalent to the markup from the following example.
+* The suggested approach can also apply to other technologies, such as MVC, as it requires only the setting of an attribute on the DOM element. For example, for the Kendo UI MultiSelect for ASP.NET MVC Html helper, adding the `.HtmlAttributes(new { requiredIf = "input1" })` setting is equivalent to the markup from the following example.
 
 ```dojo
 <form id="myform">

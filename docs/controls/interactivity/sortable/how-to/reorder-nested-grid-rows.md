@@ -8,9 +8,7 @@ slug: howto_reorderrowsinnestedgrid_sortable
 
 # Reorder Rows in Nested Grid
 
-The example below demonstrates how to reorder rows in a child Grid using the Kendo UI Sortable widget.
-
-###### Example
+The following example demonstrates how to reorder rows in a child Grid using the Kendo UI Sortable widget.
 
 ```dojo
     <div id="example">
@@ -62,24 +60,24 @@ The example below demonstrates how to reorder rows in a child Grid using the Ken
           var detail;
           $("#grid").data("kendoGrid").table.kendoSortable({
             filter: ">tbody >tr:not(.k-detail-row)",
-            hint: function(element) { //customize the hint
+            hint: function(element) { // Customize the hint.
               var grid = $("#grid").data("kendoGrid"),
-                  table = grid.table.clone(), //clone Grid's table
-                  wrapperWidth = grid.wrapper.width(), //get Grid's width
+                  table = grid.table.clone(), // Clone the Grid table.
+                  wrapperWidth = grid.wrapper.width(), // Get the Grid width.
                   wrapper = $("<div class='k-grid k-widget'></div>").width(wrapperWidth),
                   hint;
 
-              table.find("thead").remove(); //remove Grid's header from the hint
-              table.find("tbody").empty(); //remove the existing rows from the hint
+              table.find("thead").remove(); // Remove Grid header from the hint.
+              table.find("tbody").empty(); // Remove the existing rows from the hint.
               table.wrap(wrapper); //wrap the table
-              table.append(element.clone()); //append the dragged element
+              table.append(element.clone()); // Append the dragged element.
               table.append(element.next().clone());
-              hint = table.parent(); //get the wrapper
+              hint = table.parent(); // Get the wrapper.
 
-              return hint; //return the hint element
+              return hint; // Return the hint element.
             },
 
-            placeholder: function(element) { //customize the placeholder
+            placeholder: function(element) { // Customize the placeholder.
               return element.clone().addClass("k-state-hover").css("opacity", 0.65);
             },
             end: function(e) {
@@ -126,14 +124,14 @@ The example below demonstrates how to reorder rows in a child Grid using the Ken
                   wrapper = $("<div class='k-grid k-widget'></div>").width(wrapperWidth),
                   hint;
 
-              table.find("thead").remove(); //remove Grid's header from the hint
-              table.find("tbody").empty(); //remove the existing rows from the hint
+              table.find("thead").remove(); // Remove the Grid header from the hint.
+              table.find("tbody").empty(); // Remove the existing rows from the hint.
               table.wrap(wrapper); //wrap the table
-              table.append(element.clone()); //append the dragged element
+              table.append(element.clone()); // Append the dragged element.
 
-              hint = table.parent(); //get the wrapper
+              hint = table.parent(); // Get the wrapper.
 
-              return hint; //return the hint element
+              return hint; // Return the hint element.
             },
 
             placeholder: function(element) { //customize the placeholder
@@ -148,10 +146,5 @@ The example below demonstrates how to reorder rows in a child Grid using the Ken
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
-* [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
-* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

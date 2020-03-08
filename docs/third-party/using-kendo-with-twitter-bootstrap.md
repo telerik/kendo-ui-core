@@ -4,14 +4,13 @@ page_title: Twitter Bootstrap | Kendo UI Third-Party Tools
 description: "Learn more about the integration with the Twitter Bootstrap framework that Kendo UI provides to its users and enjoy the full set of resulting functionalities."
 previous_url: /using-kendo-with-twitter-bootstrap
 slug: twitterbootstrapintegration_integration_kendoui
-position: 1
 ---
 
 # Twitter Bootstrap
 
-The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) can be used seamlessly alongside [Twitter Bootstrap](http://getbootstrap.com/), as demonstrated in [this live demo](http://demos.telerik.com/kendo-ui/bootstrap) having its [source on GitHub](https://github.com/telerik/kendo-bootstrap-demo).
+The [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) can be used seamlessly alongside [Twitter Bootstrap](http://getbootstrap.com/), as demonstrated in [this live demo](https://demos.telerik.com/kendo-ui/bootstrap) having its [source on GitHub](https://github.com/telerik/kendo-bootstrap-demo).
 
-## Overview
+## Getting Started
 
 To replicate the look and feel of Bootstrap in Kendo UI, follow the steps below:
 
@@ -20,35 +19,31 @@ To replicate the look and feel of Bootstrap in Kendo UI, follow the steps below:
 
 The following example demonstrates the necessary links to these stylesheets. Make sure you replace **VERSION** with the Kendo UI version that you want to use.
 
-###### Example
-
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/VERSION/styles/kendo.common-bootstrap.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/VERSION/styles/kendo.bootstrap.min.css">
 
 While these files ensure that Kendo UI looks a lot like Bootstrap, it is not mandatory to use them. The default Kendo UI `common.css` and any other theme are going to style the widgets differently, but they will continue to function properly.
 
-Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder).
+Note that the `kendo.bootstrap.min.css` theme styles Kendo UI to match the default Bootstrap look and feel. Other Bootstrap themes should (or can) be used with any other Kendo UI theme, or with a custom Kendo UI theme, such as themes created with the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder).
 
-## How-To Examples
-
-### Use Bootstrap Responsive Features
+## Using Bootstrap Responsive Features
 
 Using the responsive features of Bootstrap does not differ from other responsive sites.
 
 For detailed information on how to use Kendo UI in responsive web pages, refer to [this article on responsive web design]({% slug responsivewebdesign_integration_kendoui %}).
 
-### Use Custom Bootstrap Themes
+## Using Custom Bootstrap Themes
 
 If you have customized the Bootstrap color scheme and need Kendo UI to match it, follow the steps of any of the two options below:
 
-**Option 1**
+### Option One
 
-1. Customize the Bootstrap theme of Kendo UI through the [Kendo UI ThemeBuilder](http://demos.telerik.com/kendo-ui/themebuilder/web.html).
+1. Customize the Bootstrap theme of Kendo UI through the [Kendo UI ThemeBuilder](https://demos.telerik.com/kendo-ui/themebuilder/web.html).
 2. Compile a custom version of the Kendo UI Bootstrap theme by using the Bootstrap Less file and an auxiliary file that Kendo UI provides, which maps Bootstrap Less variables to Kendo UI variables.
 
 This second option assumes that you are familiar with the process of [generating CSS files from Less files](http://lesscss.org/#getting-started).
 
-**Option 2**
+### Option Two
 
 1. Locate the `kendo.bootstrap.less` file in the Kendo UI installation folder. The Less file is placed in `src/styles/web/`. Check the [Less Structure documentation section]({% slug themesandappearnce_kendoui_desktopwidgets %}#less-files).
 1. Open the `kendo.bootstrap.less` file and uncomment the two `@import` statements at the bottom:
@@ -62,7 +57,7 @@ This second option assumes that you are familiar with the process of [generating
 
 For any suggestion how to improve the [`bootstrap-mapper.less` file](https://github.com/telerik/kendo-ui-core/blob/master/styles/web/bootstrap-mapper.less) you are willing to share, feel free to send your [pull request to the Kendo UI Core repository](https://github.com/telerik/kendo-ui-core/#how-to-contribute).
 
-### Nest Widgets and Bootstrap Grid Layout
+## Nesting Widgets and Bootstrap Grid Layout
 
 Kendo UI uses the default `content-box` box model (`box-sizing` CSS property), while Bootstrap uses the non-default `border-box` model and applies it to all elements on the page, including the ones that are unrelated to Bootstrap. This breaks the layout of the Kendo UI widgets, which are placed inside a Bootstrap grid layout, leading to the overriding of the Bootstrap CSS and reapplying the `content-box` box model to the widgets. As a result, a Bootstrap grid layout, placed inside a Kendo UI widget, is not going to work as expected. In general, the multiple-level nesting of the two products is bound to break the one that is on the inside, unless an additional CSS rule is used for each new level of nesting.
 
@@ -103,11 +98,9 @@ You can add the following CSS rules _after_ the Bootstrap and Kendo UI styleshee
         box-sizing: border-box;
     }
 
-### Use FontAwesome Icons
+## Using FontAwesome Icons
 
-You are able to use FontAwesome icons alongside the Kendo UI widgets by adjusting the font-size of the generated content, as demonstrated in the example below.
-
-###### Example
+You can use FontAwesome icons alongside the Kendo UI widgets by adjusting the font-size of the generated content, as demonstrated in the example below.
 
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -121,21 +114,13 @@ You are able to use FontAwesome icons alongside the Kendo UI widgets by adjustin
 
     // use spriteCssClass: "fa fa-some-great-icon"
 
-### Use `form-control` Bootstrap CSS Class
+## Using `form-control` Bootstrap CSS Class
 
 The `form-control` Bootstrap CSS class is normally added to textboxes to apply borders, padding, background, and font styles. However, some Kendo UI widgets copy the custom CSS classes of their originating `<input>` elements to the widget wrapper element. This results in an incorrect padding style applied to a widget element that is not intended to have such. Also, `.form-control` defines a 100% width style, which the widgets may override. Finally, the `.form-control` class applies height, border and other styles that may interfere with the Kendo UI styling.
 
-To resolve this issue, follow some of the possible solutions below.
+**Solution One** Place the Bootstrap stylesheet _before_ the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precedence.
 
-**Solution 1**
-
-* Place the Bootstrap stylesheet _before_ the Kendo UI stylesheet, so that same-specificity Kendo UI selectors can take precedence.
-
-**Solution 2**
-
-* Use custom CSS to fix any other outstanding issues, as demonstrated in the example below.
-
-###### Example
+**Solution Two** Use custom CSS to fix any other outstanding issues.
 
     .form-control.k-widget
     {

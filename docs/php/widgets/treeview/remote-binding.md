@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Create a TreeView, configure its columns and set its data source.
 
-###### Example
+
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 4** Output the TreeView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $treeview->render();
@@ -81,7 +81,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -89,7 +89,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the **Employees** table, children of the sent `EmployeeID`. If the `parameter` is not set, retrieve only the root nodes.
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'), true);
@@ -115,7 +115,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 <!--*-->
 **Step 4** Post-process the data, if necessary. In this case, the `HasEmployees` field needs to be Boolean.
 
-###### Example
+
 
         <?php
         $employees = array();
@@ -128,7 +128,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 5** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type

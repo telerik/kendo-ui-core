@@ -1,20 +1,18 @@
 ---
 title: Table Wizard Dialog
-page_title: Table Wizard Dialog | Kendo UI Editor
-description: "Enable the user to add HTML tables and configure them easily by using the Table Wizard dialog in the Kendo UI Editor."
+page_title: jQuery Editor Documentation | Table Wizard Dialog | Kendo UI
+description: "Get started with the jQuery Editor by Kendo UI and enable the user to add and configure HTML tables with the Table Wizard dialog."
 slug: table_wizard_dialog_editor_widget
-position: 8
+position: 12
 ---
 
 # Table Wizard Dialog
 
-As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool, the user is now able to add and configure tables by using the **Table Wizard** dialog.
+As of the Kendo UI R3 2016 release and in addition to the **Insert Table** tool, the user can add and configure tables by using the **Table Wizard** dialog.
 
 ![Table Wizard](table-wizard.png)
 
-## Getting Started
-
-### Insert Tables
+## Inserting Tables
 
 To insert a new table by using the **Table Wizard** dialog:
 
@@ -25,29 +23,26 @@ To insert a new table by using the **Table Wizard** dialog:
 
 ![Table Wizard Open](table-wizard-open.png)
 
-### Modify Tables
+## Modifying Tables
 
 To modify an existing table or a table cell:
 
 1. Select the table or the table cell to edit.
 1. Click the **Table Wizard** tool in the toolbar.
 
+> You can resize the table rows and columns by dragging the cell border with the mouse and without using the **Table Wizard** dialog.
+
 ![Table Wizard Edit](table-wizard-edit.png)
 
-
-> **Important**
->
-> Even without using the table wizard dialog, you can resize the table rows and columns by dragging the cell border with the mouse.
-
-## Table Wizard Options
+## Available Options
 
 The table and cell options that are available in the **Table Wizard** are displayed in the following three tabs:
 
-* [**Table**](#table)&mdash;The available options for the table element.
-* [**Cell**](#cell)&mdash;The available options for the selected cell or all cells in the table.
-* [**Accessibility**](#accessibility)&mdash;The available options related to accessibility.
+* [**Table**](#table-tab)&mdash;The available options for the table element.
+* [**Cell**](#cell-tab)&mdash;The available options for the selected cell or all cells in the table.
+* [**Accessibility**](#accessibility-tab)&mdash;The available options related to accessibility.
 
-### Table
+### Table Tab
 
 The **Table** tab provides the following options:
 
@@ -65,7 +60,7 @@ The **Table** tab provides the following options:
 * **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
 * **Collapse borders**&mdash;Adds an inline style to that table element with the `border-collapse: collapse` rule ([`border-collapse` property](http://www.w3schools.com/cssref/pr_border-collapse.asp)).
 
-### Cell
+### Cell Tab
 
 The **Cell** tab provides the following options:
 
@@ -82,23 +77,21 @@ The **Cell** tab provides the following options:
 * **Border Style**&mdash;Defines the border style (`none`, `hidden`, `dotted`, `dashed`, `solid`, `double`, `groove`, `ridge`, `inset`, `outset`, `initial`, and `inherit`).
 * **Wrap text**&mdash;When unchecked, applies a `white-space: nowrap` style to the cells ([`white-space` property](http://www.w3schools.com/cssref/pr_text_white-space.asp)).
 
-### Accessibility
+### Accessibility Tab
 
 The **Accessibility** tab provides the following options:
 
-* **Caption**&mdash;Adds a caption text for the table.
+* **Header Rows**&mdash;Allows the user to specify the number of rows in the table that should belong to header and should render `<th>` cell elements instead of `<td>`. When creating a new Table, those rows will be placed within a `<thead>` element.
+* **Header Cols**&mdash;Allows the user to specify the number of columns in the table that would be headers for their respective rows. The cells will be rendered as `<th>` elements instead of `<td>`.
+* **Caption**&mdash;Adds a [`caption` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption) for the table with the respective text.
 * **Alignment**&mdash;Defines the text alignment of the caption.
-* **Summary**&mdash;Adds a [`summary` attribute](http://www.w3schools.com/tags/att_table_summary.asp) with the value defined to the table.
-* **Associate cells with headers**&mdash;Associates the cells with the header id attributes. For more information on using id and header attributes, refer to the article on [using id and header attributes to associate data cells with header cells in data tables](https://www.w3.org/TR/WCAG20-TECHS/H43.html)).
+* **Summary**&mdash;Adds a [`summary` attribute](http://www.w3schools.com/tags/att_table_summary.asp) to the table using value defined. The `summary` attribute has been deprecated in HTML5 and its use should be avoided when possible.
+* **Associate headers**&mdash;Allows the user to specify the mode in which content cells should be associated with their header cells. it provides the following three options:
+    * **None** - Will not explicitly associate cells. That is the default option and it is appropriate for tables with simple structure (no merged cells).
+    * **Associate using 'scope' attribute** - The wizard will add the appropriate [`scope` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) to all header cells.
+    * **Associate using Ids** - The wizard will assign IDs to all header cells and will inject [`headers` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) with the appropriate value to all data (and header, if needed) cells.
 
 ## See Also
 
-* [Overview of the Editor Widget]({% slug overview_kendoui_editor_widget %})
-* [Image Browser]({% slug image_browser_editor_widget %})
-* [Post-Process Content]({% slug post_process_content_editor_widget %})
-* [Set Selections]({% slug set_selections_editor_widget %})
-* [Prevent Cross-Site Scripting]({% slug prevent_xss_editor_widget %})
-* [Troubleshooting]({% slug troubleshooting_editor_widget %})
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How-To Examples]({% slug howto_handleblurandfocuseventsangular_editor %})
-* [Knowledge Base Section](/knowledge-base)
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

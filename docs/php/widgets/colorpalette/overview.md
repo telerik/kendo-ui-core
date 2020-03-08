@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 **Step 2** Create a [ColorPalette](/api/php/Kendo/UI/ColorPalette).
 
-###### Example
+
 
     <?php
     $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 **Step 3** Output the ColorPalette by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $colorpalette->render();
@@ -43,7 +43,7 @@ You can subscribe to all ColorPalette [events](/api/web/colorpalette#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
     <?php
     $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');
@@ -79,9 +79,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing ColorPalette instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
+You are able to reference an existing ColorPalette instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $colorpalette = new \Kendo\UI\ColorPalette('colorpalette');

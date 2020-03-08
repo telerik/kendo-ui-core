@@ -9,7 +9,7 @@ slug: howto_select_additional_metadata_upload
 
 The following example demonstrates how to upload files and select additional metadata by using the Kendo UI Upload.
 
-###### Example
+
 
 ```dojo
 <div id="example">

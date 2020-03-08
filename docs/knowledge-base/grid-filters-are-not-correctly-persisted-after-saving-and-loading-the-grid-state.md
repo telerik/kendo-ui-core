@@ -2,7 +2,7 @@
 title: Filtering Is Not Properly Persisted after Saving and Loading the State of the Grid
 description: "The date filters of the Grid are not correctly persisted after kendo.stringify is applied."
 type: troubleshooting
-page_title: Filters Are Not Correctly Persisted After Saving and Loading the Grid State | Kendo UI Grid
+page_title: Filters Are Not Correctly Persisted After Saving and Loading the Grid State | Kendo UI Grid for jQuery
 slug: grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-stateposition
 previous_url: /knowledge-base/the-grid-filters-are-not-correctly-persisted-after-saving-and-loading-the-grid-state
 tags: grid, filter, persist

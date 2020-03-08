@@ -4,16 +4,14 @@ page_title: 2016 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2016."
 previous_url: /changes-and-backward-compatibility, /install/changes-and-backward-compatibility, /backwards-compatibility/2016/2016-backward-compatibility
 slug: breakingchanges2016_kendoui
-position: 4
+position: 5
 ---
 
 # 2016 Releases
 
+This article lists the breaking changes in the Kendo UI 2016 releases.
+
 ## Kendo UI 2016 R3
-
-### Changes from 2016 R2 SP1
-
-#### Breaking Changes
 
 **AutoComplete**
 
@@ -58,31 +56,19 @@ The email validation rule has been changed to match the [HTML5 specification sug
     });
 ```
 
-### Changes from 2016 R2
-
-#### Breaking Changes
-
 **Scheduler**
 
-The widget will use the `,` separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](http://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
+The widget will use the `,` separator for the `recurrenceException` values to conform the [RFC5545](http://tools.ietf.org/html/rfc5545#page-120) specs. More details can be found in this [forum thread](https://www.telerik.com/forums/breaking-change-recurrence-exceptions-delimiter-change).
 
 ## Kendo UI 2016 R2
 
-### Changes from 2016 Q1 SP1 (2016.1.226)
-
-#### Breaking Changes
-
 **Scheduler**
 
-The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
+The widget will keep the selection state on `blur`. The change was introduced to behave similarly to the Kendo UI Grid. To bring the old behavior back, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/select) method to clear the selection on `blur`.
 
 ## Kendo UI 2016 Q1
 
-### Changes from 2015 Q3 SP1 (2015.3.1111)
-
-#### Breaking Changes
-
-**Grunt was replaced with Gulp as the preferred build tool for Kendo UI. From now on, the `Gruntfile.js` file is replaced with `Gulpfile.js` as part of the Kendo UI distribution.**
+Grunt was replaced with Gulp as the preferred build tool for Kendo UI. From now on, the `Gruntfile.js` file is replaced with `Gulpfile.js` as part of the Kendo UI distribution.
 
 **DropDownList/ComboBox/MultiSelect**
 
@@ -132,10 +118,6 @@ The CategoryAxis `max` and the plotbands `to` values for non-justified axis no l
   });
 </script>
 ```
-
-### Changes from 2015 Q3 (2015.2.930)
-
-#### Breaking Changes
 
 The  **Grid**, **Gantt**, **TreeList**, **Scheduler**, **Toolbar**, and **Spreadsheet** widgets will use the native `click` event for taps on desktop environments. Previously, the `mouseup` event was utilized. For more details and means to revert that behavior, refer to [this issue](https://github.com/telerik/kendo-ui-core/issues/1176).
 

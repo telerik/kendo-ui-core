@@ -9,11 +9,8 @@ slug: howto_showcontextmenu_treelist
 
 The following example demonstrates how to show a context menu for the TreeList rows.
 
-###### Example
-
 ```dojo
   <div id="treelist"></div>
-
 
   <ul id="menu">
     <li><span class='k-icon k-add'></span>Add</li>
@@ -86,13 +83,13 @@ The following example demonstrates how to show a context menu for the TreeList r
 
 
       $("#menu").kendoContextMenu({
-        // listen to right-clicks on the treelist container
+        // Listen to right-clicks on the TreeList container.
         target: "#treelist",
 
-        // show when a row is clicked
+        // Show when a row is clicked.
         filter: "tbody > tr",
 
-        // handle item clicks
+        // Handle the item clicks.
         select: function(e) {
           var button = $(e.item);
           var row = $(e.target);
@@ -107,7 +104,6 @@ The following example demonstrates how to show a context menu for the TreeList r
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
-* [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
-
-For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+* [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
+* [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
+* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

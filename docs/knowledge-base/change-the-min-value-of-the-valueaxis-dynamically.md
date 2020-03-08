@@ -1,8 +1,8 @@
 ---
 title: Set the Min Value of the ValueAxis Dynamically
+page_title: Change the Min Value of the ValueAxis Dynamically | Kendo UI Chart for jQuery
 description: An example on how to dynamically set the min value of the valueAxis in the Kendo UI Chart.
 type: how-to
-page_title: Change the Min Value of the ValueAxis Dynamically | Kendo UI Chart
 slug: change-the-min-value-of-the-valueaxis-dynamically
 tags: chart, valueaxis, min, dynamically
 ticketid: 1125680
@@ -38,9 +38,9 @@ How can I dynamically set the min value of the `valueAxis` when the data or the 
 ## Solution
 
 1. Loop through the visible series values.
-1. Based on the visible lines, set the minimum value on the [`render`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render) event of the Chart.  
+1. Based on the visible lines, set the minimum value on the [`render`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render) event of the Chart.  
 
-For the full implementation, refer to [this Dojo example](http://dojo.telerik.com/ukITOJ/2).
+For the full implementation, refer to [this Dojo example](https://dojo.telerik.com/ukITOJ/2).
 
 ```
    <div id="example">

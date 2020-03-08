@@ -9,8 +9,6 @@ slug: howto_prevent_invalid_values_datetimepicker
 
 The following example demonstrates how to prevent invalid values in a Kendo UI DateTimePicker.
 
-###### Example
-
 ```dojo
   <div id="example">
     <div class="demo-section k-header" style="width: 400px;">
@@ -34,7 +32,7 @@ The following example demonstrates how to prevent invalid values in a Kendo UI D
         function onChange() {
           $(".console").append("<p>Change :: " + kendo.toString(this.value(), 'd') + "<p>");
 
-          //uncomment if you do not want to wire the input change event
+          // If you do not want to wire the input change event, uncomment.
           /*if (this.value() === null) {
                        this.value("");
                       }*/
@@ -47,7 +45,7 @@ The following example demonstrates how to prevent invalid values in a Kendo UI D
           value: new Date()
         });
 
-        //if you don't want to use widget change event
+        // If you do not want to use widget, change the event.
         $("#datetimepicker").on("change", function() {
           var input = $(this);
           var widget = input.data("kendoDateTimePicker");
@@ -63,7 +61,5 @@ The following example demonstrates how to prevent invalid values in a Kendo UI D
 
 ## See Also
 
-* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
-* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
-* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
-* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
+* [Using the API of the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/api)
+* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)

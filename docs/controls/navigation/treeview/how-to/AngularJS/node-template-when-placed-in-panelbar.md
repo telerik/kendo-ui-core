@@ -11,8 +11,6 @@ Kendo UI offers template support in AngularJS applications for both its TreeView
 
 If you define a template through the `k-template` directive, it will not be mapped correctly to the TreeView. To work around this issue, define the template in a `<script type="text/x-kendo-template">` element. As a result, it will be programmatically assigned to the TreeView.
 
-###### Example
-
 ```dojo
 
     <script id="treeview-template" type="text/x-kendo-template">
@@ -74,12 +72,6 @@ If you define a template through the `k-template` directive, it will not be mapp
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Customize Checkbox Templates]({% slug howto_customizecheckboxtemplate_angulartreeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

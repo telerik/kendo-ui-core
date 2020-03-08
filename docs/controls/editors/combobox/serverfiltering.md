@@ -1,30 +1,38 @@
 ---
 title: Server Filtering
-page_title: Server Filtering | Kendo UI ComboBox
-description: "Learn how to configure server filtering in Kendo UI ComboBox, DropDownList, AutoComplete and MultiSelect widgets."
+page_title: jQuery ComboBox Documentation | Server Filtering | Kendo UI
+description: "Get started with the jQuery ComboBox by Kendo UI and configure its server-side filtering."
 slug: server_filtering_kendoui_combobox_widget
 position: 4
 ---
 
 # Server Filtering
 
-The [Kendo UI AutoComplete](http://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](http://demos.telerik.com/kendo-ui/dropdownlist/index) and the [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets support server filtering.
+The [Kendo UI AutoComplete](https://demos.telerik.com/kendo-ui/autocomplete/index), the [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index), the [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/index), and the [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) support server-side filtering.
 
-You can use server filtering for displaying only a subset of data. Basically, the widget displays just the data returned from the server. You can use server filtering to display a subset of data, a reduced portion of the whole dataset. This functionality is convenient for you to apply when the end user cannot or does not want to see the whole dataset in the popup element.
+Server filtering enables you to display a subset of data - a reduced portion of the whole dataset which is returned from the server. The ComboBox supports server filtering by utilizing the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option of the Kendo UI DataSource component.
 
-## Configuration
+The approaches for configuring the server filtering functionality of the ComboBox that are demonstrated in this article are identical for configuring the server filtering functionality of the AutoComplete, DropDownList, and MultiSelect widgets.
 
-Server-filtering is based on the filtering capability of the DataSource component. You also need to be familiar with the filtering configuration of the component. For more information, refer to the DataSource [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option. Once you configure the DataSource to perform server filtering, you only need to additionally define the [`filter`](/api/javascript/ui/combobox/configuration/filter) property of the widget.
+For runnable examples on server filtering, refer to the following demos:
+* [Server Filtering in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/serverfiltering)
+* [Server Filtering in the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/serverfiltering)
+* [Server Filtering in the DropDownList (Demo)](https://demos.telerik.com/kendo-ui/dropdownlist/serverfiltering)
+* [Server Filtering in the MultiSelect (Demo)](https://demos.telerik.com/kendo-ui/multiselect/serverfiltering)
 
-For detailed information on how to configure the server filtering functionality, refer to the [ComboBox server filtering demo](http://demos.telerik.com/kendo-ui/combobox/serverfiltering).
+## Getting Started
 
-## Advantages
+To configure server filtering for the ComboBox, set the [`serverFiltering`](/api/javascript/data/datasource/configuration/serverfiltering) option of the DataSource and define the [`filter`](/api/javascript/ui/combobox/configuration/filter) property of the widget. For a runnable example, refer to the [demo on server filtering the ComboBox](https://demos.telerik.com/kendo-ui/combobox/serverfiltering).
 
-You can use the server-filtering feature to display only a subset of data. This is quite useful when the dataset is large and contains thousands or more records. In such situations, define a minimum filter length by using the [`minLength`](/api/javascript/ui/combobox/configuration/minlength) option. For instance, if you set this option to `3`, the widget will not start filtering the dataset until at least 3 characters are entered.
+To display a subset of data, define a minimum filter length by using the [`minLength`](/api/javascript/ui/combobox/configuration/minlength) option of the ComboBox. For example, if you set `minLength` to `3`, the ComboBox will not start filtering the dataset until the user enters at least three characters.
 
-Another benefit you gain from server filtering is the option to bind the widget to only one data item&mdash;the selected one. In this way, you avoid the need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget. To apply this approach, send the selected value to the server and return only the matching data item. Use the  [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
+When you use server filtering, you can bind the ComboBox only to the selected data item. In this way, you do not need to retrieve the whole dataset when you want to display the selected value or text. This approach boosts the loading time of the widget.
 
-###### Example
+To bind the ComboBox to the selected data item only:
+
+1. Send the selected value to the server.
+1. Return only the matching data item.
+1. Use the  [`data`](/api/javascript/data/datasource/configuration/transport.read.data) callback of the DataSource.
 
 ```javascript
     data: function() {
@@ -37,12 +45,9 @@ Another benefit you gain from server filtering is the option to bind the widget 
 
 ## Known Limitations
 
-The server filtering feature (as its name indicates) filters only the source. To page and filter the data set, use the [Virtualization]({% slug virtualization_kendoui_combobox_widget %}) feature of the ComboBox.
+The server filtering functionality filters only the source. To page and filter the dataset, use [virtualization]({% slug virtualization_kendoui_combobox_widget %}).
 
 ## See Also
 
-* [How to Configure Deferred Value Binding]({% slug howto_configure_deffered_value_binding_combobox %})
-* [How to Expand ComboBox Located in Bootstrap Layout]({% slug howto_expand_widget_bootstrap_widget_combobox %})
-* [How to Implement Cascading with Local Data]({% slug howto_implement_cascading_local_data_combobox %})
-* [How to Disable Child Cascading ComboBoxes]({% slug howto_disable_child_cascading_combobox %})
-* [ComboBox JavaScript API Reference](/api/javascript/ui/combobox)
+* [Server Filtering in the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/serverfiltering)
+* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)

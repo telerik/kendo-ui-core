@@ -2,7 +2,7 @@
 title: Cancel Gantt Task Move If the New Start and End Do Not Pass Server Validation
 description: An example on how to perform server validation on the Kendo UI Gantt task move and cancel the new start and end if it fails.
 type: how-to
-page_title: Save Moved Task Position Only After Server Validation | Kendo UI Gantt
+page_title: Save Moved Task Position Only After Server Validation | Kendo UI Gantt for jQuery
 slug: gantt-cancel-task-move-if-server-check-fails
 tags: kendo, kendoui, gantt, validation, move-task, cancel-move
 ticketid: 1138180
@@ -68,4 +68,4 @@ Perform a custom check on the server in the [`moveEnd`](https://docs.telerik.com
 
 ## See Also
 
-* [API Reference of the Gantt](http://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
+* [API Reference of the Gantt](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)

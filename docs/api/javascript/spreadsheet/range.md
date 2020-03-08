@@ -227,6 +227,34 @@ Any valid [CSS color](https://developer.mozilla.org/en-US/docs/Web/CSS/color_val
 </script>
 ```
 
+### comment
+
+Gets or sets the comment for the cells.  The comment is a text tooltip that appears when the cell is hovered.
+
+#### Parameters
+
+##### value `String` *optional*
+
+Text comment.  Pass `null` to remove the comment.
+
+#### Returns
+
+`String` the current comment of the top-left cell in the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").comment("Test");
+    sheet.range("A1").comment(null); // remove it
+    sheet.range("B2").comment("This is a comment");
+</script>
+```
+
 ### clear
 
 Clears the contents of the range cells.
@@ -311,7 +339,7 @@ Gets or sets the editor of the cells in the range.
 
 ##### value `String` *optional*
 
-The name of the custom cell editor, registered as [described in this help article](http://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
+The name of the custom cell editor, registered as [described in this help article](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/custom-editors)
 
 #### Returns
 
@@ -681,7 +709,7 @@ The function that will be executed against every cell. The function receives the
 
 - **rowIndex** - the row index of the cell
 - **columnIndex** - the column index of the cell
-- **value** - the cell properties
+- **cellProperties** - the cell properties
 
 #### Example
 
@@ -707,8 +735,8 @@ The function that will be executed against every cell. The function receives the
     var sheet = spreadsheet.activeSheet();
     var range = sheet.range("A1:B2");
 
-    range.forEachCell(function (row, column, value) {
-        console.log(row, column, value);
+    range.forEachCell(function (row, column, cellProperties) {
+        console.log(row, column, cellProperties);
     });
 </script>
 ```
@@ -965,7 +993,7 @@ Omit argument to get the existing URL, if any.
     var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
     var sheet = spreadsheet.activeSheet();
     sheet.range("A1").value("Visit telerik.com!");
-    sheet.range("A1").link("http://www.telerik.com/");
+    sheet.range("A1").link("https://www.telerik.com/");
 </script>
 ```
 

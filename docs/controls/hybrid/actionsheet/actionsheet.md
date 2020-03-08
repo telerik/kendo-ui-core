@@ -9,7 +9,7 @@ component: actionsheet_mobile
 
 # ActionSheet Overview
 
-The [Hybrid UI ActionSheet widget](http://demos.telerik.com/kendo-ui/m/index#actionsheet/index) displays a set of choices related to a task the user initiates.
+The [Hybrid UI ActionSheet widget](https://demos.telerik.com/kendo-ui/m/index#actionsheet/index) displays a set of choices related to a task the user initiates.
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ The ActionSheet element should contain one or more `li` elements, each with an `
 
 The example below demonstrates how to define an ActionSheet with two buttons.
 
-###### Example
+
 
     <ul data-role="actionsheet">
       <li><a data-action="foo">Foo</a></li>
@@ -40,7 +40,7 @@ The widget can be opened when any mobile navigational widget, such as ListView l
 
 The example below demonstrates how to open the ActionSheet using the mobile Button.
 
-###### Example
+
 
     <a data-role="button" data-rel="actionsheet" href="#replyActionSheet">Reply</a>
     <ul data-role="actionsheet" id="replyActionSheet">
@@ -57,7 +57,7 @@ The callback receives a object with two fields&mdash;`target` and (optional) `co
 
 The example below demonstrates ActionSheet actions and context.
 
-###### Example
+
 
     <a id="myButton"
        data-role="button"

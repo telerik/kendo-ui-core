@@ -447,6 +447,17 @@
             assert.isOk(multiselect.wrapper.hasClass("k-state-focused"));
         });
 
+        it("focus input when _clear is clicked", function() {
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz", "item1", "item2"],
+                value: ["item1", "bar"]
+            });
+
+            multiselect._clear.click();
+
+            assert.equal(assert.equal(document.activeElement, multiselect.input[0]));
+        });
+
         it("reset value when _clear is clicked", function() {
             var multiselect = new MultiSelect(select, {
                 dataSource: ["foo", "bar", "baz", "item1", "item2"],
@@ -475,8 +486,6 @@
 
             assert.equal(multiselect.wrapper.find(multiselect._clear).length, 0);
         });
-
-        return;
 
         it("MultiSelect removes focused class on blur", function() {
             var multiselect = new MultiSelect(select);
@@ -526,6 +535,27 @@
             });
 
             multiselect.tagList.children(":first").find(".k-i-close").click();
+
+            var selectedItems = multiselect.ul.children(".k-state-selected");
+
+            assert.equal(selectedItems.length, 0);
+        });
+
+        it("MultiSelect unselects item on backspace", function() {
+            populateSelect();
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz"],
+                value: ["bar"]
+            });
+
+            multiselect.setOptions({
+                autoClose: false
+            });
+
+            var evt = new KeyboardEvent('keydown', {'keyCode':8, 'which':8});
+
+            multiselect.open();
+            multiselect.input[0].dispatchEvent(evt);
 
             var selectedItems = multiselect.ul.children(".k-state-selected");
 

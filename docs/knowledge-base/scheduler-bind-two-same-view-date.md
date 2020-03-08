@@ -2,7 +2,7 @@
 title: Bind Two Schedulers Together to Display the Same View and Date
 description: An example on how to bind two Schedulers together so that they always display the same view and date.
 type: how-to
-page_title: Bind Two Schedulers Together to Display Same View and Date | Kendo UI Scheduler
+page_title: Bind Two Schedulers Together to Display Same View and Date | Kendo UI Scheduler for jQuery
 slug: scheduler-bind-two-same-view-date
 tags: scheduler, bind, two, same, view, date
 ticketid: 1156354

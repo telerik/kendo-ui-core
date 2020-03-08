@@ -10,8 +10,6 @@ slug: howto_restrict_user_input_autocomplete
 
 The following example demonstrates how to restrict the user input in the AutoComplete widget.
 
-#### Example:
-
 ```dojo
      <div id="example">
       <div id="shipping">
@@ -74,7 +72,7 @@ The following example demonstrates how to restrict the user input in the AutoCom
             "Vatican City"
           ];
 
-          //create AutoComplete UI component
+          // Create the UI of the AutoComplete.
           $("#countries").kendoAutoComplete({
             dataSource: data,
             filter: "startswith",
@@ -134,8 +132,6 @@ The following example demonstrates how to restrict the user input in the AutoCom
 
 ## See Also
 
-* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
-* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).
+* [Basic Usage of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
+* [Using the API of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)

@@ -3,16 +3,14 @@ title: 2018 Releases
 page_title: 2018 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2019."
 slug: breakingchanges2018_kendoui
-position: 2
+position: 3
 ---
 
 # 2018 Releases
 
+This article lists the breaking changes in the Kendo UI 2018 releases. 
+
 ## Kendo UI 2018 R2 SP1
-
-### Changes from 2018 R2
-
-#### Breaking Changes
 
 **ComboBox**
 

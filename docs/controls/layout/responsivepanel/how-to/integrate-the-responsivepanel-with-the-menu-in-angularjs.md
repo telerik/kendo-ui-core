@@ -11,8 +11,6 @@ When working in AngularJS applications, your project might require you to implem
 
 The following example demonstrates how to achieve this behavior.
 
-###### Example
-
 ```dojo
 <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -160,5 +158,5 @@ The following example demonstrates how to achieve this behavior.
 
 ## See Also
 
-* [Overview of the ResponsivePanel]({% slug overview_kendoui_responsivepanel_widget %})
-* [Overview of the Menu]({% slug overview_kendoui_menu_widget %})
+* [Basic Usage of the ResponsivePanel (Demo)](https://demos.telerik.com/kendo-ui/responsive-panel/index)
+* [JavaScript API Reference of the ResponsivePanel](/api/javascript/ui/responsivepanel)

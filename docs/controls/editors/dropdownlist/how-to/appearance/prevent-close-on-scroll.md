@@ -12,87 +12,52 @@ Normally, when the popup item list is open and the user scrolls it to the end, t
 
 The DropDownList enables you to prevent this behavior and to make the popup remain open in such cases. The following example demonstrates how to achieve this behavior.
 
-> **Important**  
->
-> The Kendo UI 2014.3 and earlier versions require a different approach from the one demonstrated in the example. If you use any of these versions, you can prevent the closure of the popup by implementing the `stopScroll(widget.ul);` configuration instead of the `stopScroll(widget.ul.parent());` one.
 
-###### Example
 
 ```dojo
 <div id="example">
-    <div class="demo-section k-header">
-        <h4>Products</h4>
+    <br/><br/><br/><br/><br/><br/><br/><br/>
+    <div id="example" style="min-height: 2000px; padding: 30px;">
         <input id="products" style="width: 400px" />
     </div>
-
-    <script>
-        function stopScroll(element) {
-          var activeElement;
-
-          $(document).bind('mousewheel DOMMouseScroll', function(e) {
-              var scrollTo = null;
-
-              if (!$(activeElement).closest(".k-popup").length) {
-                return;
-              }
-
-              if (e.type == 'mousewheel') {
-                  scrollTo = (e.originalEvent.wheelDelta * -1);
-              }
-              else if (e.type == 'DOMMouseScroll') {
-                  scrollTo = 40 * e.originalEvent.detail;
-              }
-
-              if (scrollTo) {
-                  e.preventDefault();
-                  element.scrollTop(scrollTo + element.scrollTop());
-              }
-          });
-
-          $(document).on('mouseover', function(e) {
-                activeElement = e.target;
-          });
-        }
-
-        $(document).ready(function() {
-            $("#products").kendoDropDownList({
-                dataTextField: "ProductName",
-                dataValueField: "ProductID",
-                dataSource: {
-                    transport: {
-                        read: {
-                            dataType: "jsonp",
-                            url: "https://demos.telerik.com/kendo-ui/service/Products",
-                        }
-                    }
-                },
-                value: "74"
-            });
-
-            var widget = $("#products").data("kendoDropDownList");
-
-            stopScroll(widget.ul.parent());
-        });
-    </script>
-
-    <style scoped>
-        #example { min-height: 1200px; padding: 30px; }
-
-        .demo-section {
-            width: 400px;
-        }
-        .demo-section h2 {
-            text-transform: uppercase;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-    </style>
 </div>
+
+<script>
+    $(function() {
+          $("#products").kendoDropDownList({
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+              transport: {
+                read: {
+                  dataType: "jsonp",
+                  url: "https://demos.telerik.com/kendo-ui/service/Products",
+                }
+              }
+            },
+            value: "74"
+          });
+
+          var widget = $("#products").data("kendoDropDownList");
+
+          widget.ul.parent().on("wheel", function(e) {
+            var container = this;
+
+            if ((container.scrollTop == 0 && e.originalEvent.deltaY < 0) ||
+                (container.scrollTop == container.scrollHeight - container.offsetHeight &&
+                 e.originalEvent.deltaY > 0)) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+
+          });
+        });
+</script>
 ```
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

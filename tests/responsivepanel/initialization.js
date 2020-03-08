@@ -148,5 +148,14 @@
 
             assert.isOk(dom.hasClass("k-rpanel-expanded"));
         });
+
+        it("touchend event is prevented", function() {
+            new ResponsivePanel(dom);
+            var button = $("<button class='k-rpanel-toggle' />").appendTo(Mocha.fixture);
+
+            button.trigger('touchend');
+
+            assert.isOk(!dom.hasClass("k-rpanel-expanded"));
+        });
     });
 }());

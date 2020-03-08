@@ -2,7 +2,7 @@
 title: Crop DropDownList Text
 description: An example on how to crop the text in the Kendo UI DropDownList and show an ellipsis when the content is longer than the width of the drop-down.
 type: how-to
-page_title: Crop Text and Show Ellipsis for Longer Content | Kendo UI DropDownList
+page_title: Crop Text and Show Ellipsis for Longer Content | Kendo UI DropDownList for jQuery
 slug: crop-dropdown-text-and-show-ellipsis
 tags: crop, dropdownlist, dropdown, ellipsis, overflow
 ticketid: 1084518
@@ -47,4 +47,4 @@ li.k-item {
 }
 ```
 
-For the full implementation, refer to [this Dojo example](http://dojo.telerik.com/IPOga).
+For the full implementation, refer to [this Dojo example](https://dojo.telerik.com/IPOga).

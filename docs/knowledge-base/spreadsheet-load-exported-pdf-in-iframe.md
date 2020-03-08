@@ -2,7 +2,7 @@
 title: Create an Inline PDF from the Spreadsheet and Embed It in an iFrame
 description: An example on how to generate a PDF from the Kendo UI Spreadsheet and load the PDF in an iframe element.
 type: how-to
-page_title: Export Spreadsheet to PDF and Load the File in iFrame | Kendo UI Spreadsheet
+page_title: Export Spreadsheet to PDF and Load the File in iFrame | Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-load-exported-pdf-in-iframe
 tags: kendo, kendoui, spreadsheet, pdf, iframe, base64, embed
 ticketid: 1138153
@@ -26,7 +26,7 @@ How can I generate a PDF from a Kendo UI Spreadsheet and display the PDF in a se
 
 ## Solution
 
-Load the generated base64 PDF data in the `<iframe>` element. To do that, use the `draw()` method of the Spreadsheet `Sheet` object. To properly load the data in the `<iframe>`, opne the following example in the [full screen mode of the Dojo](http://runner.telerik.io/fullscreen/UVAyu/3).
+Load the generated base64 PDF data in the `<iframe>` element. To do that, use the `draw()` method of the Spreadsheet `Sheet` object. To properly load the data in the `<iframe>`, opne the following example in the [full screen mode of the Dojo](https://runner.telerik.io/fullscreen/UVAyu/3).
 
 ```dojo
 <input type="button" id="btn" value="PDF export Spreadsheet" />
@@ -65,5 +65,5 @@ Load the generated base64 PDF data in the `<iframe>` element. To do that, use th
 
 ## See Also
 
-* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 * [`sheet`](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet)

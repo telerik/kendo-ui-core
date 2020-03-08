@@ -7,9 +7,7 @@ slug: howto_createand_set_observablearray_events_angularjs_scheduler
 
 # Create and Set ObservableArray Events
 
-The following example demonstrates how to create events by using the Kendo UI `ObservableArray` configuration, set them using AngularJS, and switch between timezones.
-
-###### Example
+The following example demonstrates how to create events by using the Kendo UI `ObservableArray` configuration, set them by using AngularJS and switch between timezones.
 
 ```dojo
     <div id="example" ng-app="KendoDemos">
@@ -109,14 +107,6 @@ The following example demonstrates how to create events by using the Kendo UI `O
 
 ## See Also
 
-* [How to Customize Edit and Event Templates]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

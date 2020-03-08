@@ -15,9 +15,7 @@ To achieve this behavior:
 1. Locate the center point. For more information, refer to the [`series.visual`](/api/javascript/dataviz/ui/chart/configuration/series.visual) API call.
 2. Plot `Text` or other `Shapes` to achieve this behavior by using the [`render` event](/api/javascript/dataviz/ui/chart/events/render).
 
-The example below demonstrates how to place some text in the center of a Kendo UI Donut Chart.
-
-###### Example
+The following example demonstrates how to place some text in the center of a Kendo UI Donut Chart.
 
 ```dojo
     <div id="chart"></div>
@@ -87,21 +85,21 @@ The example below demonstrates how to place some text in the center of a Kendo U
             // The center and radius are populated by now.
             // We can ask a circle geometry to calculate the bounding rectangle for us.
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/geometry/circle/methods/bbox
+            // https://docs.telerik.com/kendo-ui/api/javascript/geometry/circle/methods/bbox
             var circleGeometry = new geom.Circle(center, radius);
             var bbox = circleGeometry.bbox();
 
             // Render the text
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
             var text = new draw.Text("Foo & Bar", [0, 0], {
               font: "18px Verdana,Arial,sans-serif"
             });
 
             // Align the text in the bounding box
             //
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/vAlign
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/align
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/methods/vAlign
             draw.align([text], bbox, "center");
             draw.vAlign([text], bbox, "center");
 
@@ -115,10 +113,7 @@ The example below demonstrates how to place some text in the center of a Kendo U
     </script>
 ```
 
-
-As an alternative, we can position an overlay using CSS:
-
-#### Example - Overlay Donut Chart
+Alternatively, you can position an overlay using CSS. The following example demonstrates how to render an overlay in the Donut chart.  
 
 ```dojo
     <div class="donut-wrapper">
@@ -211,10 +206,3 @@ As an alternative, we can position an overlay using CSS:
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

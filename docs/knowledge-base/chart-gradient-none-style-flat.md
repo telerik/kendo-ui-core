@@ -1,8 +1,8 @@
 ---
 title: Remove Gradient Effect
+page_title: Implement Two-Dimensional Series Style | Kendo UI Chart for jQuery
 description: An example on how to remove the gradient effect of a Kendo UI Chart series for a two-dimensional style.
 type: how-to
-page_title: Implement Two-Dimensional Series Style | Kendo UI Chart
 slug: chart-gradient-none-style-flat
 tags: chart, gradient, none, style, flat
 ticketid: 1170343

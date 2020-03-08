@@ -11,7 +11,7 @@ You can configure the Kendo UI Window so it acquires the visual effect of a slid
 
 The following example demonstrates how to make the Window behave as a sliding pane.
 
-###### Example
+
 
 ```dojo
 <div id="dialog">

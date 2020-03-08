@@ -227,5 +227,50 @@
 
         assert.equal(selectValue.length, 0);
     });
+
+    it("Clear selected values with esc when delete the tag after filtering", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.search("a");
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ESC
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ESC
+        });
+
+        var selectValue = multiselect.value();
+
+        assert.equal(selectValue.length, 2);
+        var tagList = multiselect.tagList;
+        var tag = tagList.children(":first");
+        assert.equal(tag.children().eq(0).html(), "2 item(s) selected");
+    });
+
+    it("Clear selected values clear button when delete the tag after filtering", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.search("a");
+
+        multiselect._clear.click();
+
+        var selectValue = multiselect.value();
+
+        assert.equal(selectValue.length, 0);
+        var tagList = multiselect.tagList;
+        var tag = tagList.children(":first");
+        assert.equal(tag.children().length, 0);
+    });
+
     });
 }());

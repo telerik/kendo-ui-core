@@ -90,9 +90,11 @@ var __meta__ = { // jshint ignore:line
             if (candidate !== undefined) {
                 if (that._current) {
                     that._current
-                        .removeClass(SELECTED)
-                        .removeAttr(ARIA_SELECTED)
-                        .removeAttr(ID);
+                        .removeClass(SELECTED);
+                        if(that._current && that._current.length) {
+                            that._current[0].removeAttribute(ID);
+                            that._current[0].removeAttribute(ARIA_SELECTED);
+                        }
                 }
 
                 if (candidate) {
@@ -178,6 +180,8 @@ var __meta__ = { // jshint ignore:line
                 format = options.format,
                 offset = dst(),
                 ignoreDST = offset < 0,
+                value = kendo.parseDate(that._value),
+                parsedValue = value ? mergeDateAndTime(value, options.min) : mergeDateAndTime(new Date(), options.min),
                 min = options.min,
                 max = options.max,
                 msMin = getMilliseconds(min),
@@ -186,10 +190,10 @@ var __meta__ = { // jshint ignore:line
                 msInterval = options.interval * MS_PER_MINUTE,
                 toString = kendo.toString,
                 template = that.template,
-                start = new DATE(+min),
+                start = options.useValueToRender ? parsedValue : new Date(+options.min),
                 startDate = new DATE(start),
-                msStart, lastIdx,
-                idx = 0, length,
+                msStart,
+                length,
                 html = "";
 
             if (ignoreDST) {
@@ -206,26 +210,25 @@ var __meta__ = { // jshint ignore:line
                 length = ((msMax - msMin) / msInterval) + 1;
             }
 
-            lastIdx = parseInt(length, 10);
-
-            for (; idx < length; idx++) {
-                if (idx) {
-                    setTime(start, msInterval, ignoreDST);
-                }
-
-                if (msMax && lastIdx == idx) {
+            while (true) {
+                if (msMax && (getMilliseconds(start) >= msMax || startDate.getDate() != start.getDate())) {
                     msStart = getMilliseconds(start);
                     if (startDate < start) {
                         msStart += MS_PER_DAY;
                     }
-
                     if (msStart > msMax) {
                         start = new DATE(+max);
                     }
+                    if (getMilliseconds(start) > 0) {
+                        html += template(toString(start, format, options.culture));
+                    }
+                    break;
                 }
-
-                that._dates.push(getMilliseconds(start));
+                if (startDate.getDate() != start.getDate()) {
+                    break;
+                }
                 html += template(toString(start, format, options.culture));
+                start.setTime(start.getTime() + msInterval);
             }
 
             that._html(html);
@@ -482,18 +485,6 @@ var __meta__ = { // jshint ignore:line
         }
     };
 
-    function setTime(date, time, ignoreDST) {
-        var offset = date.getTimezoneOffset(),
-            offsetDiff;
-
-        date.setTime(date.getTime() + time);
-
-        if (!ignoreDST) {
-            offsetDiff = date.getTimezoneOffset() - offset;
-            date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
-        }
-    }
-
     function dst() {
         var today = new DATE(),
             midnight = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
@@ -586,7 +577,9 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
                 active: function(current) {
-                    element.removeAttr(ARIA_ACTIVEDESCENDANT);
+                    if(element && element.length) {
+                        element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
+                    }
                     if (current) {
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
@@ -631,7 +624,8 @@ var __meta__ = { // jshint ignore:line
                     format: options.format,
                     min: min,
                     max: max,
-                    value: options.value
+                    value: options.value,
+                    interval: options.interval
                 });
             }
             that._old = that._update(options.value || that.element.val());
@@ -690,21 +684,30 @@ var __meta__ = { // jshint ignore:line
                 element = that.element.off(ns),
                 wrapper = that._inputWrapper.off(ns);
 
+            if (that._dateInput) {
+                that._dateInput._unbindInput();
+            }
+
             if (!readonly && !disable) {
                 wrapper
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
-                       .attr(ARIA_DISABLED, false)
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
+                element.attr(ARIA_DISABLED, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
                            that._inputWrapper.addClass(FOCUSED);
                        });
 
+                if (that._dateInput) {
+                    that._dateInput._bindInput();
+                }
                arrow.on(CLICK, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
             } else {
@@ -798,7 +801,7 @@ var __meta__ = { // jshint ignore:line
             that.timeView.toggle();
 
             if (!support.touch && element[0] !== activeElement()) {
-                element.focus();
+                element.trigger("focus");
             }
         },
 
@@ -962,6 +965,16 @@ var __meta__ = { // jshint ignore:line
 
     function preventDefault(e) {
         e.preventDefault();
+    }
+
+    function mergeDateAndTime(date, time) {
+        return new Date(date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),
+            time.getHours(),
+            time.getMinutes(),
+            time.getSeconds(),
+            time.getMilliseconds());
     }
 
     ui.plugin(TimePicker);

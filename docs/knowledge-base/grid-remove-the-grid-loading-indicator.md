@@ -2,7 +2,7 @@
 title: Hide the Grid Loading Indicator
 description: An example on how to hide the loading indicator of a Kendo UI Grid.
 type: how-to
-page_title: Remove the Grid Loading Indicator | Kendo UI Grid
+page_title: Remove the Grid Loading Indicator | Kendo UI Grid for ASP.NET MVC
 slug: grid-remove-the-grid-loading-indicator
 tags: grid, loading, hide
 ticketid: 1141398

@@ -739,5 +739,16 @@ it("visible input inherits select's minlength attribute ", function() {
 
     assert.equal(dom.data("kendoComboBox").input.prop("minlength"), dom.prop("minlength"));
 });
+it("popup option can be successfully set through data attribute", function() {
+    dom = $('<select data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="combobox" />');
+
+    var observable = kendo.observable({});
+
+    kendo.bind(dom, observable);
+    var combobox = dom.data("kendoComboBox");
+
+    assert.equal(combobox.options.popup.origin, "top left");
+    assert.equal(combobox.options.popup.position, "bottom left");
+});
     });
 }());

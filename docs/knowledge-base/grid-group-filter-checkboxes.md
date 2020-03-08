@@ -1,8 +1,8 @@
 ---
 title: Group Filter Checkboxes in Grid by Another Field
-description: An example for grouping the checkboxes in the filter menu by another field
+description: An example on how to group the checkboxes in the filter menu by another field in the Kendo UI Grid.
 type: how-to
-page_title: Grouping the Checkboxes in the Filter Menu by Different Field
+page_title: Group the Checkboxes in the Filter Menu by Different Field | Kendo UI Grid for jQuery
 slug: grid-group-filter-checkboxes
 tags: kendoui, kendo, grid, filtering, checkbox filter
 res_type: kb
@@ -20,11 +20,11 @@ component: grid
 
 ## Description
 
-How to group the checkboxes in the filter menu by a specific field? 
+How to group the checkboxes in the filter menu by a specific field?
 
 ## Solution
 
-Although that sorting the checkboxes dataSource is possible, applying group expression to it will break the built-in functionality of the Grid. However, we can sort the checkboxes dataSource by the field that we want to group by and manually insert group separators. In the example below, the entire logic for grouping the checkboxes is within the __filterMenuOpen__ event of the Grid:
+Although sorting the dataSource of the checkboxes is possible, applying group expression to it will break the built-in functionality of the Grid. However, you can sort the dataSource of the checkboxes by the field that you want to group by and manually insert group separators. In the following example, the entire logic for grouping the checkboxes is within the [`filterMenuOpen`](/api/javascript/ui/grid/events/filtermenuopen) event of the Grid.
 
 ```dojo
 <style>
@@ -86,11 +86,11 @@ Although that sorting the checkboxes dataSource is possible, applying group expr
               if (e.field !== fieldToSortBy) {
                 var filterMultiCheck = this.thead.find("[data-field=" + e.field + "]").data("kendoFilterMultiCheck")
                 filterMultiCheck.container.empty();
-                
-                filterMultiCheck.checkSource.sort([{field: fieldToSortBy, dir: "asc"},{field: e.field, dir: "asc"}]); 
+
+                filterMultiCheck.checkSource.sort([{field: fieldToSortBy, dir: "asc"},{field: e.field, dir: "asc"}]);
                 filterMultiCheck.checkSource.data(filterMultiCheck.checkSource.view().toJSON());
                 filterMultiCheck.createCheckBoxes();
-                
+
                 var listItems = e.container.find("ul").children();
                 var sortedItems = filterMultiCheck.checkSource.view().toJSON();
                 var previousGroupValue = "";

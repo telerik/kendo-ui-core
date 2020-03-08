@@ -9,7 +9,7 @@ slug: howto_show_outofrange_dates_disabled_datepicker
 
 The following example demonstrates how to show the dates that are out of the min-max range as disabled by using the `k-disabled` class.
 
-###### Example
+
 
 ```dojo
     <input id="datepicker" style="width:200px;" />

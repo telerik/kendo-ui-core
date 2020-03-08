@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 **Step 2** Add a [Splitter](/api/php/Kendo/UI/Splitter).
 
-###### Example
+
 
     		<?php
     		// create inner splitter
@@ -118,7 +118,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 **Step 3** Output the Splitter by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $splitter->render();
@@ -132,7 +132,7 @@ You can subscribe to all Splitter [events](/api/javascript/ui/splitter#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $splitter = new \Kendo\UI\Splitter('splitter');
@@ -152,7 +152,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $splitter = new \Kendo\UI\Splitter('splitter');
@@ -168,9 +168,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Splitter instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Splitter API](/api/javascript/ui/splitter#methods) to control its behavior.
+You are able to reference an existing Splitter instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Splitter API](/api/javascript/ui/splitter#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo UI Splitter for PHP declaration
         <script>

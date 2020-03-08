@@ -20,7 +20,9 @@ A collection of objects containing text, action and primary attributes used to s
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
-          actions: [{
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [{                         
               text: "OK",
               action: function(e){
                   // e.sender is a reference to the dialog widget object
@@ -44,7 +46,9 @@ The text to be shown in the action's button.
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
-          actions: [{
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [{             
               text: "OK",
           }]
         });
@@ -59,6 +63,8 @@ The callback function to be called after pressing the action button.
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
           actions: [{
               text: "OK",
               action: function(e){
@@ -80,6 +86,8 @@ A boolean property indicating whether the action button will be decorated as pri
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
           actions: [{
               text: "OK",
               primary: true
@@ -98,6 +106,8 @@ A collection of {Animation} objects, used to change default animations. A value 
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: false
     });
     </script>
@@ -111,6 +121,8 @@ The animation that will be used when a Dialog closes.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: {
         close: false
       }
@@ -126,6 +138,8 @@ Effect to be used for closing of the popup.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: {
         close: {
           effects: "fade:out"
@@ -143,6 +157,8 @@ Defines the close animation duration.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: {
         close: {
           duration: 2000
@@ -160,6 +176,8 @@ The animation that will be used when a Dialog opens.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: {
         open: false
       },
@@ -177,6 +195,8 @@ Effect to be used for opening of the popup.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: {
         open: {
           effects: "fade:in"
@@ -196,6 +216,8 @@ Defines the open animation duration.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       animation: {
         open: {
           duration: 100
@@ -220,7 +242,15 @@ Possible values are:
     <div id="dialog"></div>
     <script>
         $("#dialog").kendoDialog({
-            buttonLayout: "normal"
+            title: "Kendo Dialog Component",
+            content: "This is your Kendo Dialog.",
+            buttonLayout: "normal",
+            actions: [{
+              text: "OK",
+              primary: true
+          },{
+              text: "Cancel"
+          }]
         });
     </script>
 
@@ -233,6 +263,8 @@ Specifies whether a close button should be rendered at the top corner of the dia
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       closable: true
     });
     </script>
@@ -246,6 +278,7 @@ Specifies the content of a **Dialog**.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
       content: "<em>Dialog content</em>"
     });
     </script>
@@ -259,6 +292,8 @@ Specifies height of the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       height: 400
     });
     </script>
@@ -268,6 +303,8 @@ Specifies height of the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       height: "50%"
     });
     </script>
@@ -281,6 +318,8 @@ The maximum height (in pixels) that may be achieved by resizing the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       maxHeight: 300
     });
     </script>
@@ -294,6 +333,8 @@ The maximum width (in pixels) that may be achieved by resizing the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       maxWidth: 300
     });
     </script>
@@ -307,6 +348,8 @@ Defines the text of the labels that are shown within the dialog. Used primarily 
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       messages:{
         close: "Close Me!"
       }
@@ -322,6 +365,8 @@ The title of the close button.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       messages:{
         close: "Close Me!"
       }
@@ -337,6 +382,8 @@ The title of the prompt input.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       messages:{
         promptInput: "Input!"
       }
@@ -352,6 +399,8 @@ The minimum height (in pixels) that may be achieved by resizing the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       minHeight: 100
     });
     </script>
@@ -365,6 +414,8 @@ The minimum width (in pixels) that may be achieved by resizing the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       minWidth: 100
     });
     </script>
@@ -378,6 +429,8 @@ Specifies whether the dialog should show a modal overlay over the page.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       modal: true
     });
     </script>
@@ -391,6 +444,8 @@ Specifies whether the document should stop scrolling when modal dialog is opened
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       modal: {
           preventScroll: true
       }
@@ -406,7 +461,8 @@ The text in the dialog title bar. If `false`, the dialog will be displayed witho
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
-      title: "Customer details"
+      title: "Customer details",
+      content: "This is your Kendo Dialog.",
     });
     </script>
 
@@ -415,7 +471,8 @@ The text in the dialog title bar. If `false`, the dialog will be displayed witho
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
-      title: false
+      title: false,
+      content: "This is your Kendo Dialog.",
     });
     </script>
 
@@ -428,6 +485,8 @@ Specifies whether the dialog will be initially visible.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       visible: false
     });
     setTimeout(function() {
@@ -444,6 +503,8 @@ Specifies width of the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       width: 400
     });
     </script>
@@ -453,6 +514,8 @@ Specifies width of the dialog.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       width: "50%"
     });
     </script>
@@ -474,6 +537,8 @@ Possible values are:
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       size: "wide"
     });
     </script>
@@ -492,7 +557,10 @@ Closes a Dialog.
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
+    });
     var dialog = $("#dialog").data("kendoDialog");
     setTimeout(function() {
       dialog.close();
@@ -517,7 +585,9 @@ The content of the Dialog. Can be an HTML string or jQuery object.
 
     <div id="dialog">foo</div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+    });
     var dialog = $("#dialog").data("kendoDialog");
     console.log(dialog.content()); // logs "foo"
     </script>
@@ -526,7 +596,9 @@ The content of the Dialog. Can be an HTML string or jQuery object.
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component"
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.content("Kendo UI all the things!");
     </script>
@@ -539,7 +611,10 @@ Destroys the dialog and its modal overlay, if necessary. Removes the widget HTML
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.destroy();
     </script>
@@ -557,6 +632,8 @@ Opens a Dialog and brings it on top of any other open Dialog or Window instances
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       visible: false
     });
     var dialog = $("#dialog").data("kendoDialog");
@@ -581,7 +658,10 @@ The title of the Dialog.
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
+    });
     var dialog = $("#dialog").data("kendoDialog");
     var title = dialog.title();
     </script>
@@ -590,9 +670,11 @@ The title of the Dialog.
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      content: "This is your Kendo Dialog."
+    });
     var dialog = $("#dialog").data("kendoDialog");
-    dialog.title("<em>Hello</em>");
+    dialog.title("Hello");
     </script>
 
 ### toFront
@@ -607,7 +689,10 @@ Increases the `z-index` style of a Dialog [`wrapper`](/intro/widget-basics/wrapp
 
     <div id="dialog"></div>
     <script>
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.toFront();
     </script>
@@ -629,6 +714,8 @@ Indicates whether the close action has been triggered by the user (by clicking t
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       close: function(e) {
         // close animation has finished playing
       }
@@ -642,7 +729,10 @@ Indicates whether the close action has been triggered by the user (by clicking t
     function dialog_close(e) {
       // close animation has finished playing
     }
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog."
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.bind("close", dialog_close);
     </script>
@@ -656,6 +746,8 @@ Triggered when a Dialog has finished its closing animation.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       hide: function() {
         // close animation is about to finish
       }
@@ -669,7 +761,10 @@ Triggered when a Dialog has finished its closing animation.
     function dialog_hide() {
       // close animation will start soon
     }
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog."
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.bind("hide", dialog_hide);
     </script>
@@ -683,6 +778,8 @@ Triggered when a Dialog is opened for the first time (i.e. the open() method is 
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       initOpen: function() {
         // open animation will start soon
       }
@@ -696,7 +793,10 @@ Triggered when a Dialog is opened for the first time (i.e. the open() method is 
     function dialog_initOpen() {
       // open animation will start soon
     }
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog."
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.bind("initOpen", dialog_initOpen);
     dialog.open();
@@ -711,6 +811,8 @@ Triggered when a Dialog is opened (i.e. the open() method is called).
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       open: function() {
         // open animation will start soon
       }
@@ -724,7 +826,10 @@ Triggered when a Dialog is opened (i.e. the open() method is called).
     function dialog_open() {
       // open animation will start soon
     }
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog."
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.bind("open", dialog_open);
     </script>
@@ -738,6 +843,8 @@ Triggered when a Dialog has finished its opening animation.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog.",
       show: function() {
         // open animation has finished playing
       }
@@ -751,7 +858,10 @@ Triggered when a Dialog has finished its opening animation.
     function dialog_show() {
       // open animation has finished playing
     }
-    $("#dialog").kendoDialog();
+    $("#dialog").kendoDialog({
+      title: "Kendo Dialog Component",
+      content: "This is your Kendo Dialog."
+    });
     var dialog = $("#dialog").data("kendoDialog");
     dialog.bind("show", dialog_show);
     </script>

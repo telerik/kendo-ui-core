@@ -11,8 +11,6 @@ You can enable the users to slide the Switch to reveal its second value.
 
 The following example demonstrates how to enable the dragging of the Switch drag handle.
 
-###### Example
-
 ```dojo
   <input type="checkbox" id="switch" />
 
@@ -87,4 +85,6 @@ The following example demonstrates how to enable the dragging of the Switch drag
 
 ## See Also
 
-* [Switch JavaScript API Reference](/api/javascript/ui/switch)
+* [Basic Usage of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
+* [Using the API of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/api)
+* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)

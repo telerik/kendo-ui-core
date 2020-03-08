@@ -2,7 +2,7 @@
 title: Show Dialog on TreeView Node Selection
 description: An example on how to show the node data in the Kendo UI Dialog on selecting a TreeView node.
 type: how-to
-page_title: Display Node Data in Dialog | Kendo UI TreeView
+page_title: Display Node Data in Dialog | Kendo UI TreeView for jQuery
 slug: dialog-on-treeview-node
 tags: dialog, treeview, node
 ticketid: 1139187

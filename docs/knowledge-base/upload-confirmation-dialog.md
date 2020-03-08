@@ -2,7 +2,7 @@
 title: Show the Confirm Dialog before Uploading Files
 description: An example on how to display a popup confirmation dialog for saving an uploaded file in the Kendo UI Upload.
 type: how-to
-page_title: Prompt Users before Uploading Files | Kendo UI Upload
+page_title: Prompt Users before Uploading Files | Kendo UI Upload for jQuery
 slug: upload-confirmation-dialog
 tags: kendo, upload, dialog, confirm
 ticketid: 1113102
@@ -25,9 +25,9 @@ Can I implement a **Confirm** dialog before the user uploads a file when the Upl
 
 ## Solution
 
-Use the [Kendo UI **Confirm** Dialog](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs) and an asynchronous Upload with [`AutoUpload`](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoupload) turned off.
+Use the [Kendo UI **Confirm** Dialog](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs) and an asynchronous Upload with [`AutoUpload`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoupload) turned off.
 
-The following example demonstrates how to open the **Confirm** Dialog within the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/select) event handler and display the name of the file.
+The following example demonstrates how to open the **Confirm** Dialog within the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/events/select) event handler and display the name of the file.
 
 ````dojo
   <input name="files" id="files" type="file" />
@@ -67,5 +67,5 @@ The following example demonstrates how to open the **Confirm** Dialog within the
 
 ## See Also
 
-* [Kendo UI Upload JavaScript API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
+* [Kendo UI Upload JavaScript API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload)
 * [Predefined Kendo UI Dialogs Demo](https://demos.telerik.com/kendo-ui/dialog/predefined-dialogs)

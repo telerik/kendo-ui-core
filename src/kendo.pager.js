@@ -112,6 +112,12 @@ var __meta__ = { // jshint ignore:line
                 if (!that.list.length) {
                    that.list = $('<ul class="k-pager-numbers k-reset" />').appendTo(that.element);
                 }
+                if (options.dataSource && !options.dataSource.total()) {
+                    that.list.empty().append(that.currentPageTemplate({ text: 0 })).append(that.selectTemplate({ text: 0 }));
+                }
+                if (!that.list.parent().hasClass("k-pager-numbers-wrap")) {
+                    that.list.wrap('<div class="k-pager-numbers-wrap"></div>');
+                }
             }
 
             if (options.input) {
@@ -222,7 +228,7 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "Pager",
-            selectTemplate: '<li><span class="k-state-selected">#=text#</span></li>',
+            selectTemplate: '<li><span class="k-link k-state-selected">#=text#</span></li>',
             currentPageTemplate: '<li class="k-current-page"><span class="k-link k-pager-nav">#=text#</span></li>',
             linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             buttonCount: 10,
@@ -233,6 +239,7 @@ var __meta__ = { // jshint ignore:line
             previousNext: true,
             pageSizes: false,
             refresh: false,
+            responsive: true,
             messages: {
                 allPages: "All",
                 display: "{0} - {1} of {2} items",
@@ -420,6 +427,7 @@ var __meta__ = { // jshint ignore:line
             } else if ((value + "").toLowerCase() == "all") {
                 dataSource._pageSize = undefined;
                 dataSource._take = undefined;
+                dataSource._skip = 0;
                 dataSource.fetch();
             }
         },
@@ -451,7 +459,7 @@ var __meta__ = { // jshint ignore:line
             e.preventDefault();
 
             if (!target.is(".k-state-disabled")) {
-                this.page(target.attr(kendo.attr("page")));
+                this.page(parseInt(target.attr(kendo.attr("page")), 10));
             }
         },
 
@@ -464,7 +472,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         page: function(page) {
-            if (page !== undefined) {
+            if (page) {
                 if (this.trigger("pageChange", { index: page })) {
                    return;
                 }
@@ -482,9 +490,12 @@ var __meta__ = { // jshint ignore:line
         },
 
         _getWidthSizeClass: function(width) {
-            var sizes = SIZE.split(" ");
+            var that = this,
+                sizes = SIZE.split(" ");
 
-            if (width <= 480) {
+            if (!that.options.responsive) {
+                return null;
+            } else if (width <= 480) {
                 return sizes[2];
             } else if (width <= 640) {
                 return sizes[1];

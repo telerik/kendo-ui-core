@@ -33,11 +33,13 @@ found on the page.
 These include tokens used by ASP.NET, Ruby on Rails and others.
 
 #### Example - Send CSRF tokens in DataSource read request
+
+    <input type="hidden" name="__RequestVerificationToken" value="token" />
     <script>
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "https://demos.telerik.com/kendo-ui/service/twitter/search",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp",
           data: function() {
             return kendo.antiForgeryTokens();
@@ -47,6 +49,7 @@ These include tokens used by ASP.NET, Ruby on Rails and others.
     });
 
     dataSource.fetch();
+    // check the request in the NetworkTab
     </script>
 
 #### Returns
@@ -636,13 +639,16 @@ Such browsers are IE version 9 and lower and Safari.
 
 The developer is responsible for implementing the server-side proxy.
 
+When a proxy is used the `kendo.saveAs()` method includes any CSRF and anti-forgery tokens out of the box as long as they are present on the page. The logic internally uses the [`kendo.antiForgeryTokens()`](/api/javascript/kendo/methods/antiforgerytokens) method and adds that to the request data as it posts to the proxy.
+
 The proxy will receive a POST request with the following parameters in the request body:
 
-* contentType: The MIME type of the file
-* base64: The base-64 encoded file content
-* fileName: The file name, as requested by the caller.
+* `contentType`&mdash;This is the MIME type of the file.
+* `base64`&mdash;The `base-64`-encoded file content.
+* `fileName`&mdash;The file name as requested by the caller.
+* Any anti-forgery tokens if present on the page
 
-The proxy should return the decoded file with set "Content-Disposition" header.
+The proxy should return the decoded file with set `"Content-Disposition"` header.
 
 #### Example - Saving a text file
     <script>
@@ -892,6 +898,29 @@ Unbinds a tree of HTML elements from a View-Model.
 The root element(s) from which the unbinding starts. Can be a valid jQuery string selector, a DOM element or a jQuery object.
 All descendant elements are traversed.
 
+### unescape
+
+Decodes string from UTF-8 or a Unicode character set. Substitutes the native [`unescape`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/unescape) function, which should not be used according to the recommendations of the ECMA-262 standard.
+
+#### Example
+    <script>
+        var result = kendo.unescape("This is a test: %97 %3f %D5 %e5 %U0107 %U123F %u39f5 %uDEe5");
+        console.log(result);
+
+        var second = kendo.unescape("This is a test: %D1%88%D0%B5%D0%BB%D0%BB%D1%8B");
+        console.log(second);
+    </script>
+
+#### Parameters
+
+##### value `String`
+
+The string that needs to be unescaped (decoded).
+
+#### Returns
+
+`String` The unescaped (decoded) string.
+
 ### widgetInstance
 
 Returns a Kendo UI widget instance, attached to the provided element.
@@ -1084,13 +1113,13 @@ The current browser major version, e.g. "7" in Internet Explorer 7.
 Returns the Kendo UI version as a string, for example `"2013.3.1119"` or `"2013.2.918"`, etc. In general, Kendo UI version identifiers provide the following information:
 
 * year in YYYY format (2013, 2012, etc);
-* major release as "1", "2" or "3" (derived from Q1, Q2 and Q3). All service packs and internal builds, which come after a given major release, share the same major release number;
+* major release as "1", "2" or "3" (derived from R1, R2 and R3). All service packs and internal builds, which come after a given major release, share the same major release number;
 * month and day of the release in Mdd format (November 19, September 18, etc);
 
-Q3 service packs and internal builds may be released in the following year. In this case 12 is added to the month number, e.g. 13 means January, 14 means February and so on.
-For example `"2012.3.1315"` means a service pack (internal build) released after Q3 **2012** on January 15, **2013**.
+R3 service packs and internal builds may be released in the following year. In this case 12 is added to the month number, e.g. 13 means January, 14 means February and so on.
+For example `"2012.3.1315"` means a service pack (internal build) released after R3 **2012** on January 15, **2013**.
 
-The returned value does not give clues whether the given Kendo UI version represents a major release, service pack, or the so-called internal (nightly) build.
+The returned value does not indicate if the given Kendo UI version represents a major release, service pack, or the so-called internal (nightly) build.
 
 ## Standard number formats
 

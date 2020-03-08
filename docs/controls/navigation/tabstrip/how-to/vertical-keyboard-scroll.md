@@ -20,7 +20,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
 
 **Step 2.** Scroll the container using JavaScript, as the example below demonstrates.
 
-###### Example
+
 
 ```dojo
     <style>
@@ -56,7 +56,7 @@ To vertically scroll the TabStrip content containers with the help of the keyboa
         $(document).ready(function () {
             // this handler should be attached before the TabStrip is initialized!
             $("#tabstrip").on("keydown", function (e) {
-                // kendo.keys is documented at http://docs.telerik.com/kendo-ui/api/javascript/kendo#fields-keys
+                // kendo.keys is documented at https://docs.telerik.com/kendo-ui/api/javascript/kendo#fields-keys
                 if (e.keyCode == kendo.keys.DOWN || e.keyCode == kendo.keys.UP) {
                     // prevent the built-in TabStrip keyboard navigation
                     e.stopImmediatePropagation();

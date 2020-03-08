@@ -9,7 +9,7 @@ position: 2
 
 # Integration with Kendo UI MVVM
 
-The [Kendo UI hybrid mobile Application](http://demos.telerik.com/kendo-ui/m/index#application/transitions) provides a close integration with the [Kendo UI MVVM framework](http://demos.telerik.com/kendo-ui/mvvm/index). The mobile widgets' configuration options can be bound and managed through a view model.
+The [Kendo UI hybrid mobile Application](https://demos.telerik.com/kendo-ui/m/index#application/transitions) provides a close integration with the [Kendo UI MVVM framework](https://demos.telerik.com/kendo-ui/mvvm/index). The mobile widgets' configuration options can be bound and managed through a view model.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ The [Kendo UI hybrid mobile Application](http://demos.telerik.com/kendo-ui/m/ind
 
 The recommended way to use the Kendo UI MVVM with the Hybrid UI Application is through the `model` configuration option of the [mobile `view`](/api/javascript/mobile/ui/view#configuration).
 
-###### Example
+
 
     <script>
      var foo = { bar: "baz" }
@@ -49,7 +49,7 @@ When initialized, the mobile View calls [`kendo.bind`]({% slug overview_mvvmpatt
 
 As of the Kendo UI Q2 2014 release, the mobile view events may be bound to the view model, too, as demonstrated in the example below.
 
-###### Example
+
 
     <script>
      var foo = {

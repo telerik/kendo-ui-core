@@ -9,8 +9,6 @@ slug: howto_sortableparentandchildcontainers_sortable
 
 The following example demonstrates how to create nested sortable containers.
 
-###### Example
-
 ```dojo
      <div id="baSurveyGroupTemplateListView">
       <div class="panel panel-default baSurveyGroupPanel">
@@ -96,10 +94,5 @@ The following example demonstrates how to create nested sortable containers.
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
-* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

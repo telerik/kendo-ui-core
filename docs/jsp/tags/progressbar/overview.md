@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 **Step 2** Create a new action method.
 
-###### Example
+
 
 		@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 		  public String index() {       
@@ -29,13 +29,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-		<%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+		<%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `progressbar` tag.
 
-###### Example
+
 
 		<kendo:progressBar name="progressBar" type="percent"></kendo:progressBar>
 
@@ -45,7 +45,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Progr
 
 You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascript/ui/progressbar#events) by the handler name.
 
-###### Example
+
 
 		<kendo:progressBar name="progressBar" type="percent" min="0" max="10" change="onChange" complete="onComplete"></kendo:progressBar>
 
@@ -63,9 +63,9 @@ You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascrip
 
 ### Existing Instances
 
-You are able to reference an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ProgressBar API](/api/javascript/ui/progressbar#methods) to control its behavior.
+You are able to reference an existing ProgressBar instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ProgressBar API](/api/javascript/ui/progressbar#methods) to control its behavior.
 
-###### Example
+
 
 			// Put this after your Kendo ProgressBar tag declaration
 			  <script>

@@ -154,7 +154,7 @@ If set to `true`, the widget automatically adjusts the width of the popup elemen
 
 When this options is set to `true` and [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) are enabled, a tristate checkbox appears above the embedded treeview. Clicking that checkbox will check or uncheck all the loaded enabled items of the treeview.
 
-> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'true' because otherwise checkAll may not interact with all subnodes of the treeview.
+> Note: when 'checkAll' is set to 'true' it is recommended that [loadOnDemand](/api/javascript/ui/dropdowntree/configuration/loadondemand) is set to 'false' because otherwise checkAll may not interact with all subnodes of the treeview.
 
 #### Example - disable the clear button
 
@@ -209,7 +209,9 @@ If `true` or an object, renders checkboxes beside each node. In this case the wi
 Indicates whether checkboxes of child items should get checked when the checkbox of a parent item is checked. This
 also enables tri-state checkboxes with an indeterminate state.
 
-> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario not supported by the widget.
+> Note: when [filter](/api/javascript/ui/dropdowntree/configuration/filter) is enabled 'checkboxes.checkChildren' property is reset to 'false' because enabling both at the same time could lead to ambiguous scenarios. Currently this scenario is not supported by the widget.
+
+> When this property is enabled, it should be used with [loadOnDemand](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdowntree/configuration/loadondemand) set to 'false'. Otherwise, after expand of a checked node (and load of its inner items) the value selected in the widget and the checked items in the drop-down will no longer be in sync. Currently, such scenario is not among the supported.
 
 #### Example - enable tri-state checkboxes and propagate checked state to children
 
@@ -708,6 +710,22 @@ The text message shown when hovering delete icon in a selected tag.
         });
     </script>
 
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="dropdowntree" />
+    <script>
+        $("#dropdowntree").kendoDropDownTree({
+            dataSource: [],
+            messages: {
+                noData: "There is no data!"
+            }
+        });
+    </script>
+
 ### messages.singleTag `String` *(default: "item(s) selected")*
 
 The text message shown in the single TagMode tag.
@@ -749,7 +767,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -1398,7 +1416,7 @@ You can overcome this behavior by triggering the `change` event manually using [
 
 ##### value `Array|String`
 
-The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false' and an *Array of strings* when `checkboxes` is true. To clear the value, pass an empty array.
+The value to set. A *String* value, when [checkboxes](/api/javascript/ui/dropdowntree/configuration/checkboxes) is 'false', and an *Array* of items of the value field type (number or string), when `checkboxes` is true. To clear the value, pass an empty array.
 
 #### Returns
 
@@ -1411,16 +1429,16 @@ The value to set. A *String* value when [checkboxes](/api/javascript/ui/dropdown
     <script>
         $("#dropdowntree").kendoDropDownTree({
             dataSource: [{ text: "Item1", value: 1 }, { text: "Item2", value: 2 }],
-            checkboxes:true,
+            checkboxes:true
         });
 
         var dropdowntree = $("#dropdowntree").data("kendoDropDownTree");
 
-        // get the value of the dropdowntree.
-        var value = dropdowntree.value();
+        // set the value of the dropdowntree
+        dropdowntree.value([1, 2]); //select items which have value respectively 1 and 2
 
-        // set the value of the dropdowntree.
-        dropdowntree.value(["1", "2"]); //select items which have value respectively "1" and "2"
+        // get the value of the dropdowntree
+        console.log(dropdowntree.value());
     </script>
 
 ## Events

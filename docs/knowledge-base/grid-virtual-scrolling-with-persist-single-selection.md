@@ -2,7 +2,7 @@
 title: Persist Single-Row Selection on Virtual Scrolling in Grid
 description: An example on how to persist the single-row selection functionality of the Kendo UI Grid when you use it together with virtualization.
 type: how-to
-page_title: Persist Single Row Selection with Virtual Scrolling | Kendo UI Grid
+page_title: Persist Single Row Selection with Virtual Scrolling | Kendo UI Grid for jQuery
 slug: grid-virtual-scrolling-with-persist-single-selection
 tags: grid, selection, virtual
 ticketid: 1139830

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 2** Create a class which will represent the Scheduler event. Call it `Task`.
 
-###### Example
+
 
         @Entity
         @Table(name="Tasks")
@@ -134,13 +134,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 3** Register the Telerik UI for JSP `taglib` in your JSP page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Declare a `scheduler` tag. Configure the fields of its data source model.
 
-###### Example
+
 
         <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
             <kendo:dataSource batch="true">
@@ -165,7 +165,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 5** Specify the action methods which will perform the `create`, `read`, `update` and `destroy` operations.
 
-###### Example
+
 
         <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
             <kendo:dataSource batch="true">
@@ -207,7 +207,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 6** Implement the `create` method.
 
-###### Example
+
 
         @Autowired
         private TaskDao task;
@@ -243,7 +243,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 7** Implement the `read` method.
 
-###### Example
+
 
         // Return a list of Tasks as JSON
         @RequestMapping(value = "/index/read", method = RequestMethod.POST)
@@ -253,7 +253,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 8** Implement the `update` method.
 
-###### Example
+
 
         @RequestMapping(value = "/index/update", method = RequestMethod.POST)
         public @ResponseBody List<Task> update(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
@@ -286,7 +286,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 9** Implement the `destroy` method.
 
-###### Example
+
 
         @RequestMapping(value = "/index/destroy", method = RequestMethod.POST)
         public @ResponseBody List<Task> destroy(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -313,7 +313,7 @@ You can subscribe to all [events exposed by Kendo UI Scheduler](/api/javascript/
 
 The example below demonstrates how to handle Scheduler events by setting their attributes.
 
-###### Example
+
 
     <kendo:scheduler name="scheduler" dataBound="scheduler_dataBound">
         <!-- snip -->
@@ -326,7 +326,7 @@ The example below demonstrates how to handle Scheduler events by setting their a
 
 The example below demonstrates how to handle Scheduler events by setting a nested tag.
 
-###### Example
+
 
     <kendo:scheduler name="scheduler">
         <!-- snip -->
@@ -343,9 +343,9 @@ The example below demonstrates how to handle Scheduler events by setting a neste
 
 ### Existing Instances
 
-You are able to reference an existing Scheduler instance by using [`jQuery.data()`](http://api.jquery.com/jQuery.data/) and then passing `kendoScheduler` as an argument.
+You are able to reference an existing Scheduler instance by using [`jQuery.data()`](https://api.jquery.com/jQuery.data/) and then passing `kendoScheduler` as an argument.
 
-###### Example
+
 
     <kendo:scheduler name="scheduler">
         <!-- snip -->

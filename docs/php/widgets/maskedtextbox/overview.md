@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Maske
 
 **Step 2** Create a [MaskedTextBox](/api/php/Kendo/UI/MaskedTextBox).
 
-###### Example
+
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
@@ -30,7 +30,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Maske
 
 **Step 3** Output the MaskedTextBox by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $maskedtextbox->render();
@@ -44,7 +44,7 @@ The MaskedTextBox has [a list of predefined mask rules]({% slug overview_kendoui
 
 The example below demonstrates how to set a set a `zip code` mask (Web Forms).
 
-###### Example
+
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
@@ -62,7 +62,7 @@ The MaskedTextBox enables you to define custom mask rules if none of the predefi
 
 The example below demonstrates how to define a custom rule for the `-` and `+` symbols.
 
-###### Example
+
 
         <?php
         $rules = array('~' => '/[+-]/');
@@ -85,7 +85,7 @@ You can subscribe to all MaskedTextBox [events](/api/javascript/ui/maskedtextbox
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
@@ -105,7 +105,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');
@@ -120,9 +120,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing MaskedTextBox instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox#methods) to control its behavior.
+You are able to reference an existing MaskedTextBox instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $maskedtextbox = new \Kendo\UI\MaskedTextBox('maskedtextbox');

@@ -218,7 +218,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!options.modal) {
-                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
+                DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy);
                 that._toggleResize(false);
             }
 
@@ -260,8 +260,8 @@ var __meta__ = { // jshint ignore:line
                 that._activated = false;
 
                 if (!options.modal) {
-                    DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy)
-                                .bind(that.downEvent, that._mousedownProxy);
+                    DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy)
+                                .on(that.downEvent, that._mousedownProxy);
 
                     // this binding hangs iOS in editor
                     // all elements in IE7/8 fire resize event, causing mayhem
@@ -421,7 +421,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
 
-                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
+                DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy);
 
                 if (skipEffects) {
                     animation = { hide: true, effects: {} };
@@ -476,11 +476,18 @@ var __meta__ = { // jshint ignore:line
             var method = toggle ? "on" : "off";
             var eventNames = support.resize;
 
-            if (!(support.mobileOS.ios || support.mobileOS.android)) {
+            if (!(support.mobileOS.ios || support.mobileOS.android || support.browser.safari)) {
                 eventNames += " " + SCROLL;
             }
 
-            this._scrollableParents()[method](SCROLL, this._resizeProxy);
+            if (toggle && !this.scrollableParents) {
+                this.scrollableParents = this._scrollableParents();
+            }
+
+            if (this.scrollableParents && this.scrollableParents.length) {
+                this.scrollableParents[method](SCROLL, this._resizeProxy);
+            }
+
             WINDOW[method](eventNames, this._resizeProxy);
         },
 

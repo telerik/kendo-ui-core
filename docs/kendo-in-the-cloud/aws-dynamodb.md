@@ -1,12 +1,12 @@
 ---
-title: Consuming Data from Amazon DynamoDB
-page_title: Create and Consume Data from AWS DynamoDB Table | Kendo UI in the Cloud
+title: Amazon DynamoDB
+page_title: Amazon DynamoDB | Kendo UI in the Cloud
 description: "Learn how to create and implement an Amazon DynamoDB table, and retrieve, write, and edit data in it with the Kendo UI Grid."
 slug: aws_dynamodb
 position: 3
 ---
 
-# Consuming Data from Amazon DynamoDB
+#  Amazon DynamoDB
 
 This article provides a step-by-step tutorial on how to create a table in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) and configure the [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to retrieve, create, update, and destroy items in that table.
 

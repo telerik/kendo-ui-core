@@ -13,7 +13,7 @@ To avoid this behavior and to be able to properly position the popup, it is reco
 
 The example below demonstrates how to position a popup in the center of the browser viewport.
 
-###### Example
+
 
 ```dojo
     <button>Create and open popup</button>

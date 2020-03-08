@@ -22,15 +22,15 @@ For example, if you want to allow the user to trigger RTL support by selecting a
 1. Add a button to your page by using the `<input type="button" id="toggleRTL" value="Activate RTL Support" class="k-button" />` setting.
 1. Add a click handler for the button and toggle RTL support by adding or removing the `k-rtl` class to a form&mdash;in this case, a collection of form fields to which you assigned an ID of `speakerForm`. With that handler in place, the user can now trigger RTL support on demand.
 
-		$('#toggleRTL').on('click', function(event) {
-			var form = $('#speakerForm');
+				$('#toggleRTL').on('click', function(event) {
+					var form = $('#speakerForm');
 
-			if (form.hasClass('k-rtl')) {
-				form.removeClass('k-rtl')
-			} else {
-				form.addClass('k-rtl');
-			}
-		})
+					if (form.hasClass('k-rtl')) {
+						form.removeClass('k-rtl')
+					} else {
+						form.addClass('k-rtl');
+					}
+				})
 
 ## Adding the Styles
 
@@ -42,7 +42,7 @@ You also need to configure your project with the proper styles for the RTL rende
 
 		> You have to register the RTL stylesheet after the common stylesheet and before the theme stylesheet.
 
-		<link rel='stylesheet' href='/stylesheets/kendo.rtl.min.css' />
+				<link rel='stylesheet' href='/stylesheets/kendo.rtl.min.css' />
 
 2. Wrap the Kendo UI widgets in an HTML element with the `k-rtl` CSS class. Assign this class to the `<body>` tag so that no additional DOM elements are required.
 
@@ -52,9 +52,9 @@ You also need to configure your project with the proper styles for the RTL rende
 		* Causes the widgets to change their layout in accordance with the common RTL conventions. The `kendo.rtl.css` stylesheet is required for this to happen.
 		* Helps widget scripts to detect the RTL mode and, accordingly, widgets change their behavior.
 
-		<body class="k-rtl">
-			<!-- Your Amazing App -->
-		</body>
+				<body class="k-rtl">
+					<!-- Your Amazing App -->
+				</body>
 
 ### Known Limitations
 
@@ -66,13 +66,11 @@ For more information on appearance and layout in Kendo UI, refer to [the article
 
 ## Automatic Implementation
 
-Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
+Your project might require you to trigger the RTL support automatically and not upon user interaction. In such cases, you can inspect the [`Accept-Language`](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4) HTTP header to determine if a user prefers an RTL language.
 
 The `Accept-Language` header is provided with every HTTP request, and is typically exposed as a property on a request object in server-side frameworks. If you are using ASP.NET, for instance, you can access the `Accept-Language` header by calling `userLangs = Request.Headers["Accept-Language"];`.
 
-For PHP, use the `$_SERVER` object&mdash;`userLangs = $_SERVER['HTTP_ACCEPT_LANGUAGE'];`.
-
-For Rails applications, use the `request.env` object&mdash;`userLangs = request.env["HTTP_ACCEPT_LANGUAGE"]`.
+For PHP, use the `$_SERVER` object&mdash;`userLangs = $_SERVER['HTTP_ACCEPT_LANGUAGE'];`. For Rails applications, use the `request.env` object&mdash;`userLangs = request.env["HTTP_ACCEPT_LANGUAGE"]`.
 
 The `Accept-Language` header may return a comma-separated list of languages, ordered by preference. In such cases, you have to split the returned value into an array or list and inspect the first element to determine if adding the `k-rtl` class to the returned markup is necessary.
 

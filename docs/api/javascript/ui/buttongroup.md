@@ -104,9 +104,39 @@ Specifies the HTML attributes of a ButtonGroup item.
         .red { background-color: red; }
     </style>
 
-### items.badge `String`
+### items.badge `Boolean|String|Object`
 
-Specifies the badge of a button.
+If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/javascript/ui/badge).
+
+#### Example - boolean badge
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: true },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+#### Example - string badge
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: "99+" },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.badge.appearance  `String` *(default: pill)*
+
+Specifies the shape of the badge - `rectangle` or `pill`.
 
 #### Example
 
@@ -115,7 +145,131 @@ Specifies the badge of a button.
     <script>
         $("#buttonGroup").kendoButtonGroup({
             items: [
-                { text: "foo",  badge: "2" },
+                { text: "foo",  badge: {
+                    appearance: 'rectangle'
+                    }
+                },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.badge.look `String` *(default: flat)*
+
+Specifies the look of the badge - `flat` or `outline`.
+
+#### Example
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: {
+                    look: 'outline'
+                    }
+                },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.badge.template `String|Function`
+
+The template which renders the content of the badge
+
+#### Example - string template
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: {
+                        value: 1234,
+				        template: '#=value > 99? "99+" : value#'
+                    }
+                },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+#### Example - function template
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: {
+                        value: 1234,
+                        template: function (value){
+                            return value > 99 ? '99+' : value;
+                        }
+                    }
+                },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+
+### items.badge.type `String`
+
+Specifies the type of the badge - `primary`, `secondary`, `info`, `success`, `warning` and `error`.
+
+#### Example - string template
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: {
+                        type: 'warning'
+                    }
+                },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.badge.value `String|Number`
+
+The value of the badge
+
+#### Example - string template
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: {
+                        value: 'warning'
+                    }
+                },
+                { text: "bar" }
+            ]
+        });
+    </script>
+
+### items.badge.visible `Boolean`
+
+If set to false the badge will not be displayed.
+
+#### Example - string template
+
+    <div id="buttonGroup"></div>
+
+    <script>
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo",  badge: {
+                        visible: false
+                    }
+                },
                 { text: "bar" }
             ]
         });

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 2** Create an array to which the DropDownList will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 3** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -48,7 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 **Step 4** Create a [DropDownList](/api/php/Kendo/UI/DropDownList), configure its [`dataTextField`](/api/php/Kendo/UI/DropDownList#datatextfield) and
 [`dataValueField`](/api/php/Kendo/UI/DropDownList#datavaluefield) options, and set its [`dataSource`](/api/php/Kendo/UI/DropDownList#datasource).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -62,7 +62,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 5** Output the DropDownList by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $dropdownlist->render();
@@ -76,7 +76,7 @@ You can subscribe to all DropDownList [events](/api/javascript/ui/dropdownlist#e
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
@@ -96,7 +96,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');
@@ -112,9 +112,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI DropDownList instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
+You can reference the client-side Kendo UI DropDownList instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [DropDownList API](/api/javascript/ui/dropdownlist#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $dropdownlist = new \Kendo\UI\DropDownList('dropdownlist');

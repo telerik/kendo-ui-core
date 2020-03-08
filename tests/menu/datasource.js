@@ -83,6 +83,8 @@
             }]
         });
 
+        menu.dataSource.view()[0].load();
+
         var subItem = menu.element.find(".myClass");
 
         assert.equal(subItem.length, 1);
@@ -102,6 +104,8 @@
                 }]
             }]
         });
+
+        menu.dataSource.view()[0].load();
 
         var img = menu.element.find("img");
 
@@ -124,6 +128,8 @@
             }]
         });
 
+        menu.dataSource.view()[0].load();
+
         var content = menu.element.find(".customClass");
 
         assert.equal(content.length, 1);
@@ -143,6 +149,8 @@
                 }]
             }]
         });
+
+        menu.dataSource.view()[0].load();
 
         var content = menu.element.find(".customClass");
 
@@ -168,9 +176,121 @@
             ]
         });
 
+        menu.dataSource.view()[0].load();
+
         var expandArrow = menu.element.find(".k-menu-group .k-icon");
 
         assert.isOk(expandArrow.hasClass("k-menu-expand-arrow"));
+    });
+
+
+    it('HierarchicalDataSource creates menu item', function(){
+        createMenu({
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-link").text(), "RootItem");
+    });
+
+    it('dataTextField configures the item text', function(){
+        createMenu({
+            dataTextField: "Name",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    Name: "RootItem"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-link").text(), "RootItem");
+    });
+
+    it('dataUrlField configures the item URL', function(){
+        createMenu({
+            dataUrlField: "URLTEST",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    URLTEST: "URLTEST"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-link").attr('href'), "URLTEST");
+    });
+
+    it('dataSpriteCssClassField configures the item icon class', function(){
+        createMenu({
+            dataSpriteCssClassField: "spriteClass",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    spriteClass: "TESTCLASS"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.isOk(menu.element.find(".k-sprite").is(".TESTCLASS"));
+    });
+
+    it('dataImageUrlField configures the item image', function(){
+        createMenu({
+            dataImageUrlField: "imgUrl",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    imgUrl: "TESTURL"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-image").attr("src"), "TESTURL");
+    });
+
+    it('dataImageUrlField configures the item image', function(){
+        createMenu({
+            dataImageUrlField: "imgUrl",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    imgUrl: "TESTURL"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-image").attr("src"), "TESTURL");
+    });
+
+    it('dataContentField configures the item content', function(){
+        createMenu({
+            dataContentField: "desc",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    desc: "CONTENT"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-content").text(), "CONTENT");
     });
     });
 }());

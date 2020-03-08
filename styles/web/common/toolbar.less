@@ -8,6 +8,13 @@
     min-height: 2.4375em;
     box-sizing: border-box;
 }
+.k-toolbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
 
 .k-toolbar .k-button .k-sprite,
 .k-overflow-container .k-button .k-sprite {
@@ -35,6 +42,9 @@
 .k-toolbar-resizable {
     white-space: nowrap;
 }
+.k-toolbar-resizable {
+   flex-wrap: nowrap;
+}
 
 .k-toolbar > .k-align-left {
     float: none;
@@ -48,6 +58,20 @@
     display: inline-block;
     vertical-align: middle;
 }
+.k-toolbar > * {
+    display: inline-flex;
+    align-items: stretch;
+    align-content: center;
+    vertical-align: middle;
+    flex: 0 0 auto;
+}
+
+
+// Spacer
+.k-toolbar .k-spacer {
+    flex: 1 1 auto;
+}
+
 
 .k-toolbar .k-separator {
     border-width: 0 0 0 1px;
@@ -76,9 +100,13 @@
 .k-toolbar .k-widget,
 .k-toolbar span:not(.k-maskedtextbox) .k-textbox,
 .k-toolbar label,
-.k-toolbar .k-separator {
+.k-toolbar .k-separator  {
     margin: 0 .2em;
     vertical-align: middle;
+}
+
+.k-toolbar label {
+    align-self: center;
 }
 
 .k-toolbar .k-split-button {

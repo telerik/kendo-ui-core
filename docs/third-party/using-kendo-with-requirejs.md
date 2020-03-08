@@ -4,26 +4,20 @@ page_title: RequireJS | Kendo UI Third-Party Tools
 description: "Learn how to work with Kendo UI and RequireJS compatible loader."
 previous_url: /using-kendo-with-requirejs
 slug: requirejs_integration_kendoui
-position: 4
 ---
 
 # RequireJS
 
->**Important**
-> * As of 2016, the RequireJS project is mostly superseded by solutions like [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
+The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders, such as [RequireJS](http://requirejs.org/), which load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
+
+> * As of 2016, the RequireJS project is mostly superseded by solutions such as [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
 > * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 > * Due to a bug, the examples below do not work with the official Kendo UI Q1 2016 release. They should work as expected with the versions 2016.1.118 and later.
 > * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder) using RequireJS.
 
-The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.org/wiki/Asynchronous_module_definition) and work with compatible loaders such as [RequireJS](http://requirejs.org/). You can use this feature to load only the needed Kendo UI JavaScript files instead of `kendo.all.min.js`.
+## Loading from Local Directories
 
-## Load Kendo UI Using RequireJS
-
-### Load from Local Directory
-
-The code snippet below demonstrates how to load the Kendo UI JavaScript files from a local directory&mdash;for example, `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
-
-###### Example
+The following example demonstrates how to load the Kendo UI JavaScript files from a local directory&mdash;for example, `js/my-kendo-scripts`. It is assumed that all Kendo UI scripts files are available there.
 
 ```pseudo
 <!DOCTYPE HTML>
@@ -60,13 +54,11 @@ The code snippet below demonstrates how to load the Kendo UI JavaScript files fr
 </html>
 ```
 
-### Use Bundle Scripts with RequireJS
+## Using Bundle Scripts
 
-The example below demonstrates how to use a bundle script with RequireJS.
+The following example demonstrates how to use a bundle script with RequireJS.
 
-###### Example
-
-```dojo
+```pseudo
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -80,7 +72,7 @@ The example below demonstrates how to use a bundle script with RequireJS.
 
       require.config({
         paths: {
-          "jquery": "https://code.jquery.com/jquery-1.9.1.min",          
+          "jquery": "https://code.jquery.com/jquery-1.9.1.min",
           "jszip": "https://kendo.cdn.telerik.com/2018.1.221/js/jszip.min",
           "kendo.all.min": "https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min",
         }
@@ -100,13 +92,11 @@ The example below demonstrates how to use a bundle script with RequireJS.
 </html>
 ```
 
-### Use AngularJS and Kendo UI with RequireJS
+## Using AngularJS and Kendo UI
 
-The example below demonstrates how to load AngularJS and initialize it with [`angular.bootsrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all `.js` files are loaded.
+The following example demonstrates how to load AngularJS and initialize it with [`angular.bootsrap`](https://docs.angularjs.org/api/ng/function/angular.bootstrap) when all `.js` files are loaded.
 
-###### Example
-
-```dojo
+```pseudo
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -134,6 +124,58 @@ The example below demonstrates how to load AngularJS and initialize it with [`an
       });
 
       require([ "angular", "kendo.all.min" ], function() {
+        var app = angular.module("app", ["kendo.directives"]);
+
+        app.controller("controller", ["$scope", function($scope) {
+          $scope.options = {
+            dataSource: {
+              data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+            },
+            dataTextField: "name",
+            dataValueField: "value"
+          };
+        }]);
+
+        angular.bootstrap(document, ["app"]);
+      });
+    </script>
+  </body>
+</html>
+```
+
+## Using Custom Kendo Scripts in AngularJS
+
+The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_installation %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `gulp custom dropdownlist,angular`.
+
+```pseudo
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.514/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.514/styles/kendo.default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+  </head>
+  <body>
+    <div ng-controller="controller">
+      <select kendo-drop-down-list k-options="options"></select>
+    </div>
+
+    <script>
+      require.config({
+        paths: {
+          "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.8/angular.min",
+          "jquery": "https://code.jquery.com/jquery-3.1.1.min",
+          "kendo.angular.min": "dist/js/kendo.custom.min",
+          "kendo.dropdownlist.min": "dist/js/kendo.custom.min"
+        },
+        shim: {
+          "angular": { deps: ["jquery"] },
+          "kendo.angular.min": { deps: ["angular"] },
+          "kendo.dropdownlist.min": { deps: ["kendo.angular.min"] },
+        }
+      });
+
+      require([ "jquery", "angular", "kendo.angular.min", "kendo.dropdownlist.min" ], function() {
         var app = angular.module("app", ["kendo.directives"]);
 
         app.controller("controller", ["$scope", function($scope) {

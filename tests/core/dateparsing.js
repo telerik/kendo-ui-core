@@ -984,5 +984,13 @@
             assert.deepEqual(parse('2017-02-23T10:00:00+00:30'), new Date(2017, 1, 23, 10 + date.getTimezoneOffset() * (-1) / 60, -30, 0));
         });
 
+        it('setHours should work correctly when daylight saving time change occurs', function () {
+            var initialDate = new Date(2019, 2, 30, 23, 59, 0);
+            var newDate = new Date(2019, 2, 31, 0, 0, 0);
+            var expectedDate = new Date(2019, 2, 31, 23, 59, 0)
+
+            assert.deepEqual(kendo.date.setHours(newDate, initialDate), expectedDate)
+        });
+
     });
 }());

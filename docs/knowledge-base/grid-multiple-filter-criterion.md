@@ -2,7 +2,7 @@
 title: Create Filter Widgets with Multiple Filter Criteria in Grid
 description: An example on how to create a filter widget with a multiple filter criterion in the Kendo UI Grid.
 type: how-to
-page_title: Create Filter Widgets with Multiple Filter Criteria | Kendo UI Grid
+page_title: Create Filter Widgets with Multiple Filter Criteria | Kendo UI Grid for jQuery
 slug: grid-multiple-filter-criterion
 tags: grid, multiple, filter, filters, criterion, extra, more, filtering, filtratrion, many
 res_type: kb

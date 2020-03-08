@@ -8,19 +8,15 @@ slug: howto_expandto100heightandautoresize_splitter
 
 # Expand to 100% Height and Auto-Resize
 
-This article demonstrates how to make the Kendo UI Splitter expand vertically and resize together with the browser window, and also explains what the standard requirements in such scenarios are.
+You can vertically expand and resize the Splitter together with the browser window.
 
-Web standards require that elements with percentage height have a parent element with an explicit height. The rule applies recursively until an element with a pixel height is reached, or until the `<html>` element is reached. If the requirement is not met, the computed height of the Splitter falls back to `auto` and the widget collapses, depending on its content.
+Web standards require that elements with percentage height have a parent element with an explicit height. The rule applies recursively until an element with a pixel height is reached or until the `<html>` element is reached. If the requirement is not met, the computed height of the Splitter falls back to `auto` and the widget collapses, depending on its content.
 
-Also, make sure you remove the border of the Splitter. Elements that are 100% high cannot have borders, margins, paddings, and sibling elements.
-
-In a nested-Splitter scenario, the inner Splitters remove their borders automatically, given that each Splitter is a direct child of a parent pane.
+You have to also remove the border of the Splitter. Elements that are 100% high cannot have borders, margins, paddings, and sibling elements. In a nested Splitter, the inner Splitters remove their borders automatically given that each Splitter is a direct child of a parent pane.
 
 ## Automatic Resizing to 100% Height
 
-In the first example below, the outer Splitter has no siblings and has a 100% height style applies. Its parent is the `<body>` element, so it receives a `height:100%` style. This in turn requires the `<html>` element to obtain the same style.
-
-###### Example
+In the following example, the outer Splitter has no siblings and has a 100% height style applied. Its parent is the `<body>` element, so it receives a `height:100%` style. This in turn requires the `<html>` element to obtain the same style.
 
 ```dojo
 <style>
@@ -99,11 +95,9 @@ In the first example below, the outer Splitter has no siblings and has a 100% he
 
 ## Manual Resizing to Calculated Heights
 
-If the dimensions of the Splitter do not depend directly on the browser viewport size, or if the Splitter has visible siblings, using a 100% height for it may not be applicable. In this case you will need to set the height of the Splitter [wrapper](/intro/widget-basics/wrapper-element) `<div>` manually and then call the widget's [`resize`](/web/splitter/overview#resizing-a-splitter-manually) method.
+If the dimensions of the Splitter do not depend directly on the browser viewport size or if the Splitter has visible siblings, using a 100% height for it may not be applicable. In this case, you will need to manually set the height of the [wrapper](/intro/widget-basics/wrapper-element) `<div>` and then call the [`resize`](/web/splitter/overview#resizing-a-splitter-manually) method of the widget.
 
-The example below demonstrates a Kendo UI Splitter with a calculated height.
-
-###### Example
+The following example demonstrates a Kendo UI Splitter with a calculated height.
 
 ```dojo
 <style>
@@ -203,7 +197,6 @@ The example below demonstrates a Kendo UI Splitter with a calculated height.
 
 ## See Also
 
-* [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
-* [How to Keep Pane Size in Percentages]({% slug howto_keeppanesizepercentages_splitter %})
-
-For more runnable examples on the Kendo UI Splitter, browse its [**How To** documentation folder]({% slug howto_addautoresizingsplittertowindow_splitter %}).
+* [Basic Usage of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/index)
+* [Using the API of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/api)
+* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)

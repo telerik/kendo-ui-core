@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = "/local-data", method = RequestMethod.GET)
         public String index(Locale locale, Model model) {
@@ -31,13 +31,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a server-bound TreeList.
 
-###### Example
+
 
         <kendo:treeList name="employees" pageable="true">
             <kendo:treeList-columns>
@@ -55,7 +55,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 You can subscribe to all [events exposed by Kendo UI TreeList](/api/javascript/ui/treelist#events) by the handler name.
 
-###### Example
+
 
       <kendo:treeList name="employees" dataBound="employees_dataBound" change="employees_change">
           <kendo:dataSource data="${data}" pageSize="10"/>
@@ -75,9 +75,9 @@ You can subscribe to all [events exposed by Kendo UI TreeList](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing TreeList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TreeList API](/api/javascript/ui/treelist#methods) to control its behavior.
+You are able to reference an existing TreeList instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TreeList API](/api/javascript/ui/treelist#methods) to control its behavior.
 
-###### Example
+
 
       //Put this after your Kendo TreeList tag declaration
       <script>

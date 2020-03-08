@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `tooltip` tag. Use the element with `container` id as container and show a tooltip for the anchor elements within it.
 
-###### Example
+
 
      <kendo:tooltip name="#container" filter="a[title]" />
 
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Toolt
 
 You can subscribe to all [events exposed by Kendo UI Tooltip](/api/javascript/ui/tooltip#events) by the handler name.
 
-###### Example
+
 
     <kendo:tooltip name="#container" show="tooltip_show" hide="tooltip_hide">
     </kendo:tooltip>
@@ -65,9 +65,9 @@ You can subscribe to all [events exposed by Kendo UI Tooltip](/api/javascript/ui
 
 ### Existing Instances
 
-You are able to reference an existing Tooltip instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Tooltip API](/api/javascript/ui/tooltip#methods) to control its behavior.
+You are able to reference an existing Tooltip instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Tooltip API](/api/javascript/ui/tooltip#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo UI Tooltip tag declaration
     <script>
@@ -83,7 +83,7 @@ You are able to load views asynchronously through the `content` attribute.
 
 The example below demonstrates how to load the contents of the Tooltip by using an asynchronous call.
 
-###### Example
+
 
     <c:url value="/web/tooltip/content" var="remoteUrl" />
 

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create an array to which the AutoComplete will be bound.
 
-###### Example
+
 
     <?php
     $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
     <?php
     $dataSource = new \Kendo\Data\DataSource();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 4** Create an [AutoComplete](/api/php/Kendo/UI/AutoComplete), configure its [`dataTextField`](/api/php/Kendo/UI/AutoComplete#datatextfield) option and set its [`DataSource`](/api/php/Kendo/UI/AutoComplete#datasource).
 
-###### Example
+
 
     <?php
     $dataSource = new \Kendo\Data\DataSource();
@@ -60,7 +60,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 5** Output the AutoComplete by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $autoComplete->render();
@@ -74,7 +74,7 @@ You can subscribe to all AutoComplete [events](/api/javascript/ui/autocomplete#e
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
@@ -94,7 +94,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
     <?php
     $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');
@@ -110,9 +110,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI AutoComplete instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [AutoComplete API](/api/javascript/ui/autocomplete#methods) to control its behavior.
+You can reference the client-side Kendo UI AutoComplete instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [AutoComplete API](/api/javascript/ui/autocomplete#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $autoComplete = new \Kendo\UI\AutoComplete('autocomplete');

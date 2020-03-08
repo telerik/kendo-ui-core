@@ -10,8 +10,6 @@ position: 1
 
 The following example demonstrates how to implement [a custom AngularJS directive](https://docs.angularjs.org/guide/directive) to get the unmasked value of the MaskedTextBox.
 
-###### Example
-
 ```dojo
 <div id="example" ng-app="KendoDemos">
     <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -119,8 +117,6 @@ The following example demonstrates how to implement [a custom AngularJS directiv
 
 ## See Also
 
-* [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
-* [How to Customize Masks through MVVM Binding]({% slug howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox %})
-* [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
-
-For more runnable examples on the Kendo UI MaskedTextBox, browse its **How To** documentation folder.
+* [Basic Usage of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
+* [Using the API of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/api)
+* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)

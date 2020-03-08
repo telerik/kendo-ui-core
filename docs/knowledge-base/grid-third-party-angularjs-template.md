@@ -2,7 +2,7 @@
 title: Use a Third-Party Angular Editor Template in the Grid for AngularJS
 description: An example on how to use third-party AngularJS editors in the Kendo UI Grid.
 type: how-to
-page_title: Bind the dataItems in Third-Party AngularJS Templates | Kendo UI Grid
+page_title: Bind the dataItems in Third-Party AngularJS Templates | Kendo UI Grid for jQuery
 slug: grid-third-party-angularjs-template
 tags: grid, angularjs, column template, third party, editor, compile
 ticketid: 1086179

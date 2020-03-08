@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 2** Create a class which will represent the Gantt. Call it `GanttTask`.
 
-###### Example
+
 
         @Entity
         @Table(name="GanttTasks")
@@ -122,13 +122,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
         }
 **Step 3** Register the Telerik UI for JSP `taglib` in your JSP page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Declare a `gantt` tag. Configure the fields of its tasks and dependencies data source model.
 
-###### Example
+
 
         <kendo:gantt name="gantt" height="700" showWorkDays="false" showWorkHours="false" snap="false">
             <kendo:dataSource batch="false">
@@ -164,7 +164,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 5** Specify the action methods which will perform the `create`, `read`, `update` and `destroy` operations for the tasks and dependencies.
 
-###### Example
+
 
         <kendo:gantt name="gantt" height="700" showWorkDays="false" showWorkHours="false" snap="false">
             <kendo:dataSource batch="false">
@@ -226,7 +226,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 6** Implement the `create_task` method.
 
-###### Example
+
 
         @Autowired
         private GanttTaskDao taskDao;
@@ -262,7 +262,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 8** Implement the `read_tasks` method.
 
-###### Example
+
 
         // Return a list of tasks as JSON
         @RequestMapping(value = "/tasks/read", method = RequestMethod.POST)
@@ -272,7 +272,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 9** Implement the `update_task` method.
 
-###### Example
+
 
         @RequestMapping(value = "/tasks/update", method = RequestMethod.POST)
         public @ResponseBody List<GanttTask> update_task(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
@@ -305,7 +305,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 10** Implement the `destroy_task` method.
 
-###### Example
+
 
         @RequestMapping(value = "/tasks/destroy", method = RequestMethod.POST)
         public @ResponseBody List<GanttTask> destroy_task(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -326,7 +326,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 11** Implement the `create_dependency` method.
 
-###### Example
+
 
         @Autowired
         private GanttDependencyDao dependencyDao;
@@ -352,7 +352,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 12** Implement the `read_dependencies` method.
 
-###### Example
+
 
         @RequestMapping(value = "/dependencies/read", method = RequestMethod.POST)
         public @ResponseBody List<GanttDependency> read_dependencies() {
@@ -361,7 +361,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 13** Implement the `update_dependency` method.
 
-###### Example
+
 
         @RequestMapping(value = "/dependencies/update", method = RequestMethod.POST)
         public @ResponseBody List<GanttDependency> update_dependency(@RequestBody ArrayList<Map<String, Object>> models) throws ParseException {
@@ -386,7 +386,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 14** Implement the `destroy_dependency` method.
 
-###### Example
+
 
         @RequestMapping(value = "/dependencies/destroy", method = RequestMethod.POST)
         public @ResponseBody List<GanttDependency> destroy_dependency(@RequestBody ArrayList<Map<String, Object>> models) {
@@ -413,7 +413,7 @@ The Kendo UI Gantt widget supports a set of [events](/api/javascript/ui/gantt#ev
 
 The example below demonstrates how to handle Gantt events by setting their attributes.
 
-###### Example
+
 
           <kendo:gantt name="gantt" dataBound="gantt_dataBound">
               <!-- snip -->
@@ -426,7 +426,7 @@ The example below demonstrates how to handle Gantt events by setting their attri
 
 The example below demonstrates how to handle Gantt events by setting a nested tag.
 
-###### Example
+
 
           <kendo:gantt name="gantt">
               <!-- snip -->
@@ -443,7 +443,7 @@ The example below demonstrates how to handle Gantt events by setting a nested ta
 
 To get a reference to a Kendo UI Gantt instance, use the jQuery `data` and pass `"kendoGantt"` as an argument.
 
-###### Example
+
 
           <kendo:gantt name="gantt">
               <!-- snip -->

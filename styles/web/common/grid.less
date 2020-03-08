@@ -39,9 +39,13 @@
     text-align: left;
 }
 
-.k-grid-header th.k-header
-{
+.k-grid-header th.k-header {
     vertical-align: bottom;
+    cursor: default;
+}
+
+.k-grid-header th.k-header .k-checkbox {
+    vertical-align: top;
 }
 
 .k-filtercell,
@@ -66,15 +70,14 @@
 }
 
 .k-filtercell > span > .k-button,
-.k-filter-row .k-dropdown-operator
-{
+.k-filter-row .k-dropdown-operator {
     position: absolute;
     top: 0;
     right: 0;
+    margin: 0;
 }
 
-.k-filter-row .k-dropdown-operator
-{
+.k-filter-row .k-dropdown-operator {
     width: 2.1em;
     right: 2.5em;
 }
@@ -377,19 +380,6 @@ div.k-grid-footer
     border-width: 1px 0 0;
 }
 
-.k-grid .k-pager-numbers
-{
-    float: left;
-    cursor: default;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 1px;
-}
-
-.k-widget.k-grid .k-pager-numbers {
-    position: relative;
-}
-
 // Grid :: filtering
 
 .k-header > .k-grid-filter,
@@ -501,7 +491,7 @@ form.k-filter-menu .k-textbox
 .k-grouping-row+tr .k-group-cell
 {
     border-top-width: 0;
-    text-overflow: none;
+    text-overflow: clip;
 }
 
 .k-grid .k-hierarchy-cell+td
@@ -525,6 +515,7 @@ form.k-filter-menu .k-textbox
 {
     line-height: 2;
     position: relative;
+    white-space: normal;
 }
 
 .k-grouping-dropclue
@@ -675,8 +666,7 @@ form.k-filter-menu .k-textbox
     background-color: #ffc0cb;
 }
 
-.k-grid-toolbar .k-button
-{
+.k-grid-toolbar .k-button {
     vertical-align: middle;
 }
 
@@ -685,7 +675,8 @@ form.k-filter-menu .k-textbox
     display: inline-block;
 }
 
-.k-grid .k-button {
+.k-grid .k-button,
+.k-grid .k-grid-toolbar > * {
     margin: .16em;
 }
 
@@ -728,18 +719,17 @@ html body .k-grid tbody .k-button-icon
     white-space: normal;
 }
 
-.k-edit-cell>.k-textbox,
-.k-edit-cell>.k-widget,
-.k-grid-edit-row>td>.k-textbox,
-.k-grid-edit-row>td>.k-widget,
-.k-grid-edit-row>td>.text-box
-{
-    width: 100%;
+.k-edit-cell,
+.k-grid-edit-row > td {
+    > .k-textbox,
+    > .k-widget:not(.k-switch),
+    > .text-box {
+        width: 100%;
+    }
 }
 
-html .k-edit-cell .k-tooltip,
-html .k-grid-edit-row .k-tooltip
-{
+html .k-edit-cell .k-widget.k-tooltip,
+html .k-grid-edit-row .k-widget.k-tooltip {
     width: auto;
     max-width: 300px;
 }
@@ -826,6 +816,11 @@ html .k-grid-edit-row .k-tooltip
     width: auto !important;
 }
 
+// Remove scrollbar from Grid with virtual scrolling
+.k-pdf-export-shadow .k-grid-content.k-auto-scrollable {
+    padding-right: 0 !important;
+}
+
 // Remove all sizes and scrolling
 .k-pdf-export-shadow .k-grid,
 .k-pdf-export-shadow .k-grid-content,
@@ -869,8 +864,15 @@ html .k-grid-edit-row .k-tooltip
     right: 0;
 }
 
-.k-pdf-export .k-loading-pdf-mask {
-    display: none;
+.k-pdf-export {
+
+    .k-loading-pdf-mask {
+        display: none;
+    }
+
+    .k-grid-filter {
+        text-decoration: none;
+     }
 }
 
 // responsive styles
@@ -892,24 +894,6 @@ html .k-grid-edit-row .k-tooltip
     display: none !important;
 }
 
-.k-grid {
-    input.k-checkbox + label.k-checkbox-label {
-        cursor: default;
-        outline: 0;
-    }
-
-    .k-checkbox-label.k-no-text {
-        padding: 0;
-    }
-
-    .k-edit-cell {
-        input[type='checkbox'],
-        input.k-checkbox + label.k-checkbox-label {
-            margin-left: .3em;
-        }
-    }
-}
-
 .k-grid .k-grouping-row {
     td {
         border-bottom-width: 0;
@@ -927,25 +911,6 @@ html .k-grid-edit-row .k-tooltip
 .k-grid .k-group-cell {
     border-bottom-width: 0;
     border-top-width: 0;
-}
-
-.k-window .k-popup-edit-form .k-edit-field {
-    input.k-checkbox {
-        position: absolute;
-        margin-left: 1px;
-        margin-top: 0.8em;
-        width: 14px;
-        height: 14px;
-        z-index: 1;
-
-        + label.k-checkbox-label {
-            cursor: default;
-        }
-    }
-
-    label.k-checkbox-label {
-        margin-top: 0.5em;
-    }
 }
 
 .k-grid-header {
@@ -973,60 +938,10 @@ html .k-grid-edit-row .k-tooltip
     }
 }
 
-@media only screen and (max-width: 1024px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        .k-grid .k-pager-numbers {
-            position: absolute;
-            left: 4.8em;
-            display: inline-flex;
-            flex-direction: column-reverse;
-            overflow: visible;
-            height: auto;
-        }
 
-        .k-grid .k-pager-numbers:first-child { // move left when previousNext: false
-            left: .2em;
-        }
-
-        .km-pane-wrapper .k-grid .k-pager-numbers.k-state-expanded {
-            transform: translate(-50%, -100%);
-            -webkit-transform: translate(-50%, -100%);
-        }
-
-        .km-pane-wrapper .k-grid .k-pager-numbers {
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit-transform: translateX(-50%);
-        }
-
-        .k-rtl .k-grid .k-pager-numbers {
-            left: auto;
-            right: 4.8em;
-            width: 4.5em
-        }
-
-        .k-rtl .k-grid .k-pager-numbers:first-child { // move right when previousNext: false
-            left: auto;
-            right: .2em;
-        }
-
-        .k-rtl .km-pane-wrapper .k-grid .k-pager-numbers {
-            right: 5.8em;
-        }
-
-        .k-grid .k-pager-numbers .k-current-page {
-            display: block;
-            border-left: 0;
-        }
-
-        .k-grid .k-pager-number.k-state-expanded .k-current-page {
-            transform: translatey(100%);
-            -webkit-transform: translatey(100%);
-        }
-    }
+// Grid search panel styles
+.k-grid .k-header .k-grid-search {
+    width: @grid-search-width;
+    float: right;
+    .flexbox();
 }

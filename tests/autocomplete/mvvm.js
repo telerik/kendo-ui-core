@@ -480,5 +480,17 @@ it("assign to DataSource as ViewModel field", function() {
     assert.strictEqual(autocomplete.dataSource, dataSource);
 });
 
+it("popup option can be successfully set through data attribute", function() {
+    dom = $('<input data-popup="{ origin: \'top left\', position: \'bottom left\' }" data-role="autocomplete" />');
+
+    var observable = kendo.observable({});
+
+    kendo.bind(dom, observable);
+    var autocomplete = dom.data("kendoAutoComplete");
+
+    assert.equal(autocomplete.options.popup.origin, "top left");
+    assert.equal(autocomplete.options.popup.position, "bottom left");
+});
+
     });
 }());

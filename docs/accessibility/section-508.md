@@ -1,12 +1,12 @@
 ---
-title: Section 508
-page_title: Section 508 | Kendo UI Accessibility Support
+title: Section 508 Support
+page_title: Section 508 Support | Kendo UI Accessibility Support
 description: "Learn more about the Section 508 Accesibility support provided by Kendo UI controls."
 slug: section508_accessibility_support
 position: 2
 ---
 
-# Section 508
+# Section 508 Support
 
 [Section 508](https://www.section508.gov/) is a set of standards ensuring that all users, regardless of their disability status, are able to access technology.
 
@@ -28,9 +28,9 @@ The following table is based on the [Voluntary Product Accessibility Template (V
 |[(h)](https://www.webaccessibility.com/best_practices.php?standard_id=1000750) Markup shall be used to associate data cells and header cells for data tables that have two or more logical levels of row or column headers.|Supports|
 |[(i)](https://www.webaccessibility.com/best_practices.php?standard_id=1000753) Frames shall be titled with text that facilitates frame identification and navigation.|Supports|
 |[(j)](https://www.webaccessibility.com/best_practices.php?standard_id=1000756) Pages shall be designed to avoid causing the screen to flicker with a frequency greater than 2 Hz and lower than 55 Hz.|Supports|Kendo UI does not cause screen flicker with a frequency greater than 2 Hz and lower than 55 Hz.
-|[(k)](https://www.webaccessibility.com/best_practices.php?standard_id=1000759) A text-only page with equivalent information or functionality shall be provided to make a web site comply with the provisions of this part when compliance cannot be accomplished in any other way. The content of the text-only page shall be updated whenever the primary page changes.|Not applicable| Developers are responsible for providing text-only content for pages that use Kendo UI.
+|[(k)](https://www.webaccessibility.com/best_practices.php?standard_id=1000759) A text-only page with equivalent information or functionality shall be provided to make a website comply with the provisions of this part when compliance cannot be accomplished in any other way. The content of the text-only page shall be updated whenever the primary page changes.|Not applicable| Developers are responsible for providing text-only content for pages that use Kendo UI.
 |[(l)](https://www.webaccessibility.com/best_practices.php?standard_id=1000763) When pages utilize scripting languages to display content or to create interface elements, the information provided by the script shall be identified with functional text that can be read by assistive technology.|Supports|Kendo UI is a JavaScript framework and cannot operate when JavaScript is disabled. Kendo UI provides keyboard navigation support and screen reader support through WAI-ARIA attributes.
-|[(m)](https://www.webaccessibility.com/best_practices.php?standard_id=1000782) When a web page requires that an applet, plug-in, or other application be present on the client system to interpret page content, the page has to provide a link to a plug-in or applet that complies with §1194.21(a) through (l).|Supports|Kendo UI does not use any external plug-ins or applets.
+|[(m)](https://www.webaccessibility.com/best_practices.php?standard_id=1000782) When a web page requires that an applet, plugin, or other application be present on the client system to interpret page content, the page has to provide a link to a plugin or applet that complies with §1194.21(a) through (l).|Supports|Kendo UI does not use any external plugins or applets.
 |[(n)](https://www.webaccessibility.com/best_practices.php?standard_id=1000785) When electronic forms are designed to be completed online, the form shall allow people using assistive technology to access the information, field elements, and functionality required for completion and submission of the form, including all directions and cues.|Supports with exceptions|Most forms in Kendo UI are accessible to assistive technologies with some exceptions that will be addressed by a future update.
 |[(o)](https://www.webaccessibility.com/best_practices.php?standard_id=1000794) A method shall be provided that permits users to skip repetitive navigation links.|Supports|Kendo UI does not provide a "skip navigation link" but instead offers keyboard shortcuts to most of the features in the user interface.
 |[(p)](https://www.webaccessibility.com/best_practices.php?standard_id=1000797) When a timed response is required, the user shall be alerted and given sufficient time to indicate that more time is required.|Supports|Kendo UI does not require a timed response as part of its core functionality.

@@ -9,7 +9,7 @@ component: scroller
 
 # Scroller Overview
 
-The [Hybrid UI Scroller widget](http://demos.telerik.com/kendo-ui/m/index#scroller/index) enables touch-friendly kinetic scrolling for the contents of a given DOM element.
+The [Hybrid UI Scroller widget](https://demos.telerik.com/kendo-ui/m/index#scroller/index) enables touch-friendly kinetic scrolling for the contents of a given DOM element.
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ For the scroller to work, its element should have fixed dimensions&mdash;width a
 
 The example below demonstrates how to initialize the Hybrid UI Scroller by using the role data-attribute.
 
-###### Example
+
 
     <div data-role="scroller">
         Foo
@@ -31,7 +31,7 @@ The example below demonstrates how to initialize the Hybrid UI Scroller by using
 
 The example below demonstrates how to initialize the Hybrid UI Scroller by using jQuery plugin syntax.s
 
-###### Example
+
 
     <div id="scroller"></div>
 
@@ -43,7 +43,7 @@ The example below demonstrates how to initialize the Hybrid UI Scroller by using
 
 The example below demonstrates how to obtain the current mobile view scroller.
 
-###### Example
+
 
     <div data-role="view" data-init="getScroller">
         Foo

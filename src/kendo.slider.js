@@ -138,7 +138,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options;
 
             var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
-            var pixelWidths = that._calculateItemsWidth(math.floor(that._distance() / options.smallStep));
+            var pixelWidths = that._calculateItemsWidth(math.floor(removeFraction(that._distance()) / removeFraction(options.smallStep)));
 
             if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
                 $(this.element).parent().find(".k-slider-items").remove();
@@ -250,13 +250,14 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 trackDivSize = parseFloat(that._trackDiv.css(that._sizeFn)) + 1,
                 distance = that._distance(),
-                pixelStep = trackDivSize / distance,
+                preciseItemsCount = removeFraction(distance) / removeFraction(options.smallStep),
+                pixelStep = trackDivSize / removeFraction(distance),
                 itemWidth,
                 pixelWidths,
                 i;
 
-            if ((distance / options.smallStep) - math.floor(distance / options.smallStep) > 0) {
-                trackDivSize -= ((distance % options.smallStep) * pixelStep);
+            if (preciseItemsCount - itemsCount > 0) {
+                trackDivSize -= ((removeFraction(distance) % removeFraction(options.smallStep)) * pixelStep);
             }
 
             itemWidth = trackDivSize / itemsCount;
@@ -307,11 +308,11 @@ var __meta__ = { // jshint ignore:line
                 val = options.min,
                 selection = 0,
                 distance = that._distance(),
-                itemsCount = math.ceil(distance / options.smallStep),
+                itemsCount = math.ceil(removeFraction(distance) / removeFraction(options.smallStep)),
                 i = 1,
                 lastItem;
 
-            itemsCount += (distance / options.smallStep) % 1 === 0 ? 1 : 0;
+            itemsCount += (removeFraction(distance) / removeFraction(options.smallStep)) % 1 === 0 ? 1 : 0;
             pixelWidths.splice(0, 0, pixelWidths[itemsCount - 2] * 2);
             pixelWidths.splice(itemsCount -1, 1, pixelWidths.pop() * 2);
 
@@ -331,7 +332,7 @@ var __meta__ = { // jshint ignore:line
                 i++;
             }
 
-            lastItem = distance % options.smallStep === 0 ? itemsCount - 1 : itemsCount;
+            lastItem = (removeFraction(distance) % removeFraction(options.smallStep)) === 0 ? itemsCount - 1 : itemsCount;
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
@@ -629,8 +630,8 @@ var __meta__ = { // jshint ignore:line
             firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
 
         return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (options.selectionStart || options.min) : options.value || options.min) + "'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (options.selectionEnd || options.max) + "'>Drag</a>" : "") +
+               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (options.selectionStart || options.min) : options.value || options.min) + "'></a>" +
+               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (options.selectionEnd || options.max) + "'></a>" : "") +
                "</div>";
     }
 

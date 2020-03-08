@@ -238,7 +238,9 @@ var __meta__ = { // jshint ignore:line
 
         current: function(date) {
             this._current = date;
-            this.calendar._focus(date);
+            if (this.calendar) {
+                this.calendar._focus(date);
+            }
         },
 
         value: function(value) {
@@ -438,10 +440,11 @@ var __meta__ = { // jshint ignore:line
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
-
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
-                       .attr(ARIA_DISABLED, false)
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
+                element.attr(ARIA_DISABLED, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -466,6 +469,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: readonly === undefined ? true : readonly,
+                    disable: false
+                });
+            }
         },
 
         enable: function(enable) {
@@ -473,6 +482,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: false,
+                    disable: !(enable = enable === undefined ? true : enable)
+                });
+            }
         },
 
         destroy: function() {
@@ -534,6 +549,9 @@ var __meta__ = { // jshint ignore:line
             that.close();
             if (value !== that._oldText) {
                 that._change(value);
+                if (!value) {
+                    that.dateView.current(kendo.calendar.getToday());
+                }
             }
 
             that._inputWrapper.removeClass(FOCUSED);
@@ -550,7 +568,7 @@ var __meta__ = { // jshint ignore:line
             var element = this.element;
 
             if ((!support.touch || (support.mouseAndTouchPresent && !(eventType || "").match(/touch/i))) && element[0] !== activeElement()) {
-                element.focus();
+                element.trigger("focus");
             }
         },
 
@@ -698,7 +716,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             that.wrapper = wrapper.addClass("k-widget k-datepicker")
-                .addClass(element[0].className);
+                .addClass(element[0].className).removeClass('input-validation-error');
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },
@@ -707,11 +725,24 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 element = that.element,
                 formId = element.attr("form"),
-                form = formId ? $("#" + formId) : element.closest("form");
+                options = that.options,
+                disabledDate = options.disableDates,
+                parseFormats = options.parseFormats.length ? options.parseFormats : null,
+                optionsValue = that._initialOptions.value,
+                form = formId ? $("#" + formId) : element.closest("form"),
+                initialValue = element[0].defaultValue;
+
+            if (optionsValue && (disabledDate && disabledDate(optionsValue))) {
+                optionsValue = null;
+            }
+
+            if ((!initialValue || !kendo.parseDate(initialValue, parseFormats, options.culture)) && optionsValue) {
+                element.attr("value", kendo.toString(optionsValue, options.format, options.culture));
+            }
 
             if (form[0]) {
                 that._resetHandler = function() {
-                    that.value(element[0].defaultValue);
+                    that.value(optionsValue || element[0].defaultValue);
                     that.max(that._initialOptions.max);
                     that.min(that._initialOptions.min);
                 };
@@ -744,9 +775,9 @@ var __meta__ = { // jshint ignore:line
             var cell;
             var that = this;
             var calendar = that.dateView.calendar;
-
-            that.element.removeAttr("aria-activedescendant");
-
+            if(that.element && that.element.length) {
+                that.element[0].removeAttribute("aria-activedescendant");
+            }
             if (calendar) {
                 cell = calendar._cell;
                 cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));

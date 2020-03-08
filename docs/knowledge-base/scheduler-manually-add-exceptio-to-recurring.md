@@ -2,7 +2,7 @@
 title: Generate Exception for Recurring Event Using External DatePicker
 description: An example of how to manually add exception date for recurring event in the Kendo Scheduler using the Kendo DatePicker.
 type: how-to
-page_title: Manually Add Exception to recurring Event | Kendo UI Scheduler
+page_title: Manually Add Exception to recurring Event | Kendo UI Scheduler for jQuery
 slug: scheduler-manually-add-exceptio-to-recurring
 tags: kendo, kendoui, scheduler, recurring-events, exception, add-exception
 res_type: kb
@@ -42,29 +42,29 @@ How to manually add exception date for recurring event in the Kendo Scheduler us
         recurrenceRule: "FREQ=DAILY"
       }]
     });
-    
+
     $("#datepicker").kendoDatePicker();
-    
+
     $('#btn').on('click', function() {
       var picker = $("#datepicker").getKendoDatePicker();
       var pickerDate = picker.value();
-      
+
       if (!pickerDate) {
       	return;
       }
-      
+
       pickerDate.setHours(12,0,0,0);
       var pickerString = pickerDate.toISOString();
-      
+
     	var schedulerDataSource = $("#scheduler").getKendoScheduler().dataSource;
       var dataItem = schedulerDataSource.at(0);
-      
+
       if (!dataItem.recurrenceException) {
       	dataItem.recurrenceException = '';
       } else {
       	dataItem.recurrenceException += ',';
       }
-      
+
       dataItem.recurrenceException = dataItem.recurrenceException + pickerString;
 
       schedulerDataSource.sync();
@@ -74,5 +74,5 @@ How to manually add exception date for recurring event in the Kendo Scheduler us
 
 ## See Also
 
-* [Kendo Scheduler API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
-* [Kendo DatePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [Kendo Scheduler API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler)
+* [Kendo DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)

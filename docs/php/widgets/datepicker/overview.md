@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 **Step 2** Create a [DatePicker](/api/javascript/ui/datepicker).
 
-###### Example
+
 
         <?php
         $datepicker = new \Kendo\UI\DatePicker('datepicker');
@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 **Step 3** Output the DatePicker by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $datepicker->render();
@@ -45,7 +45,7 @@ You can subscribe to all DatePicker [events](/api/javascript/ui/datepicker#event
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $datepicker = new \Kendo\UI\DatePicker('datepicker');
@@ -65,7 +65,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $datepicker = new \Kendo\UI\DatePicker('datepicker');
@@ -81,9 +81,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing DatePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DatePicker API](/api/javascript/ui/datepicker#methods) to control its behavior.
+You are able to reference an existing DatePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [DatePicker API](/api/javascript/ui/datepicker#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $datepicker = new \Kendo\UI\DatePicker('datepicker');

@@ -1,16 +1,14 @@
 ---
 title: Week Number Column
-page_title: Week Number Column | Kendo UI MultiViewCalendar
-description: "Render a column displaying the number of the weeks within the current month view when working with the Kendo UI MultiViewCalendar."
+page_title: jQuery Calendar Documentation | Week Numbers | Kendo UI
+description: "Get started with the jQuery Calendar by Kendo UI and render a column displaying the number of the weeks within the current month view."
 slug: week_column_multiviewcalendar
 position: 7
 ---
 
 # Week Number Column
 
-In the MultiViewCalendar, you can render a column which displays the number of the weeks within the current `month` view.
-
-###### Example
+The MultiViewCalendar enables you to render a column which displays the number of the weeks within the current **Month** view.
 
 ```dojo
     <div id="multiViewCalendar"></div>
@@ -26,5 +24,6 @@ In the MultiViewCalendar, you can render a column which displays the number of t
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Basic Usage of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
+* [Using the API of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/api)
+* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)

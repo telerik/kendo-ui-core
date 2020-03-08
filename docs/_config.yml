@@ -15,142 +15,216 @@ navigation:
         position: 0
     "api/javascript/dataviz":
         title: "dataviz"
+    "knowledge-base":
+        title: "Knowledge Base"
+        position: 1
     "intro":
         title: "Getting Started"
-        position: 2
-    "intro/installation":
-        title: "Prerequisites and Installation"
-        position: 1
-    "intro/widget-basics":
-        title: "Widget Basics"
-        position: 2
-    "intro/supporting":
-        title: "Reference and Support Materials"
         position: 3
+    "intro/supporting":
+        title: "Prerequisites"
+        position: 1
+    "intro/installation":
+        title: "Download and Installation"
+        position: 2
+    "intro/widget-basics":
+        title: "Working with Widgets"
+        position: 3
+    "intro/scripts":
+        title: "Widget Script Dependencies"
+        position: 4
     "controls":
         title: "Widgets"
-        position: 3
+        position: 4
     "controls/data-management":
         title: "Data Management"
-        position: 1
-    "controls/data-management/grid/appearance":
-        title: "Appearance"
-        position: 100
-    "controls/data-management/grid/appearance/columns":
-        title: "Columns"
-        position: 8
-    "controls/data-management/grid/appearance/scrolling":
-        title: "Scrolling"
-        position: 9
-    "controls/data-management/grid/how-to":
-        title: "How To"
-        position: 101
-    "controls/data-management/grid/how-to/AngularJS":
-        title: "AngularJS"
-        position: 1
-    "controls/data-management/grid/how-to/Layout":
-        title: "Appearance"
+    "controls/data-management/listview/binding":
+        title: "Data Binding"
         position: 2
-    "controls/data-management/grid/how-to/binding":
-        title: "Binding"
-        position: 3
-    "controls/data-management/grid/how-to/Editing":
-        title: "Editing"
-        position: 4
-    "controls/data-management/grid/how-to/pdf-export":
-        title: "Export in PDF"
+    "controls/data-management/listview/export":
+        title: "Export"
         position: 5
-    "controls/data-management/grid/how-to/excel":
-        title: "Export to Excel"
-        position: 6
-    "controls/data-management/grid/how-to/filtering":
-        title: "Filtering"
-        position: 7
-    "controls/data-management/grid/how-to/hidden":
-        title: "Hidden Containers"
-        position: 8
-    "controls/data-management/grid/how-to/integration":
-        title: "Integration"
-        position: 9
-    "controls/data-management/grid/how-to/Paging":
-        title: "Paging"
-        position: 10
-    "controls/data-management/grid/how-to/Selection":
-        title: "Selection"
+    "controls/data-management/filemanager/binding":
+        title: "Data Binding"
+        position: 2
+    "controls/data-management/grid/binding":
+        title: "Data Binding"
+        position: 2
+    "controls/data-management/grid/editing":
+        title: "Editing"
+        position: 3
+    "controls/data-management/grid/grouping":
+        title: "Grouping"
+        position: 5
+    "controls/data-management/grid/columns":
+        title: "Columns"
         position: 11
-    "controls/data-management/grid/how-to/sorting":
-        title: "Sorting"
+    "controls/data-management/grid/scrolling":
+        title: "Scroll Modes"
         position: 12
-    "controls/data-management/grid/how-to/state":
-        title: "State Management"
+    "controls/data-management/grid/export":
+        title: "Export"
         position: 13
-    "controls/data-management/grid/how-to/Templates":
+    "controls/data-management/grid/Templates":
         title: "Templates"
         position: 14
+    "controls/data-management/grid/appearance":
+        title: "Appearance"
+        position: 15
+    "controls/data-management/grid/performance":
+        title: "Performance Tips"
+        position: 16
+    "controls/data-management/grid/how-to":
+        title: "How To"
+        position: 70
+    "controls/data-management/grid/how-to/AngularJS":
+        title: "AngularJS"
+    "controls/data-management/grid/how-to/Layout":
+        title: "Rendering and Dimensions"
+    "controls/data-management/grid/how-to/binding":
+        title: "Data Binding"
+    "controls/data-management/grid/how-to/Editing":
+        title: "Editing"
+    "controls/data-management/grid/how-to/pdf-export":
+        title: "PDF Export"
+    "controls/data-management/grid/how-to/excel":
+        title: "Excel Export"
+    "controls/data-management/grid/how-to/filtering":
+        title: "Filtering"
+    "controls/data-management/grid/how-to/hidden":
+        title: "Hidden Containers"
+    "controls/data-management/grid/how-to/integration":
+        title: "Integration"
+    "controls/data-management/grid/how-to/Paging":
+        title: "Paging"
+    "controls/data-management/grid/how-to/Selection":
+        title: "Selection"
+    "controls/data-management/grid/how-to/sorting":
+        title: "Sorting"
+    "controls/data-management/grid/how-to/state":
+        title: "State Persistence"
+    "controls/data-management/grid/how-to/Templates":
+        title: "Templates"
     "controls/data-management/grid/how-to/various":
         title: "Various"
-        position: 15
+    "controls/data-management/pivotgrid/binding":
+        title: "Data Binding"
+        position: 2
+    "controls/data-management/pivotgrid/export":
+        title: "Export"
+        position: 5
+    "controls/data-management/pivotgrid/how-to":
+        title: "How To"
+        position: 70
+    "controls/data-management/spreadsheet/import-and-export-data":
+        title: "Data Import and Export"
+        position: 7
+    "controls/data-management/spreadsheet/localization-spreadsh":
+        title: "Localization"
+        position: 8
+    "controls/data-management/spreadsheet/end-user":
+        title: "End User"
+        position: 9
+    "controls/data-management/treelist/editing":
+        title: "Editing"
+        position: 3
     "controls/editors":
         title: "Editors"
+    "controls/editors/datepicker/how-to":
+        title: "How To"
+        position: 70
+    "controls/editors/dropdowntree/binding":
+        title: "Data Binding"
         position: 2
+    "controls/editors/dropdownlist/how-to":
+        title: "How To"
+        position: 70
+    "controls/editors/multiselect/how-to":
+        title: "How To"
+        position: 70
+    "controls/editors/numerictextbox/how-to":
+        title: "How To"
+        position: 70
+    "controls/editors/upload/how-to":
+        title: "How To"
+        position: 70
     "controls/charts":
         title: "Charts"
-        position: 3
-    "controls/charts/features":
-        title: "Features"
-        position: 7
+    "controls/charts/chart":
+        title: "Chart"
+        position: 1
     "controls/charts/chart-types":
         title: "Chart Types"
-        position: 8
-    "controls/charts/stockchart":
-        title: "Stock Charts"
-        position: 9
+        position: 5
+    "controls/charts/elements":
+        title: "Elements"
+        position: 6
     "controls/charts/sparkline":
-        title: "Sparklines"
-        position: 10
+        title: "Sparkline"
+        position: 7
+    "controls/charts/stockchart":
+        title: "StockChart"
+        position: 8
     "controls/charts/treemap":
         title: "TreeMap"
-        position: 11
+        position: 9
     "controls/gauges":
         title: "Gauges"
-        position: 4
     "controls/barcodes":
         title: "Barcodes"
-        position: 5
     "controls/diagrams-and-maps":
         title: "Diagrams and Maps"
-        position: 6
     "controls/scheduling":
         title: "Scheduling"
-        position: 7
     "controls/layout":
         title: "Layout"
-        position: 8
+    "controls/layout/window/how-to":
+        title: "How To"
+        position: 70
     "controls/navigation":
         title: "Navigation"
-        position: 9
+    "controls/navigation/breadcrumb":
+        title: "Breadcrumb"
     "controls/navigation/buttongroup":
         title: "ButtonGroup"
+    "controls/navigation/drawer":
+        title: "Drawer"
+    "controls/navigation/menu/contextmenu":
+        title: "ContextMenu"
+        position: 6
+    "controls/navigation/tabstrip/how-to":
+        title: "How To"
+        position: 70
+    "controls/navigation/toolbar/command-types":
+        title: "Command Types"
+        position: 2
+    "controls/navigation/treeview/binding":
+        title: "Data Binding"
+        position: 2
     "controls/conversational-ui":
         title: "Conversational UI"
-        position: 10
     "controls/conversational-ui/chat":
         title: "Chat"
+    "controls/conversational-ui/chat/integrations":
+        title: "Integrations"
+        position: 4
     "controls/interactivity":
         title: "Interactivity and UX"
-        position: 11
     "controls/interactivity/fx":
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
     "controls/interactivity/ripplecontainer":
-        title: "Ripple Container"
+        title: "RippleContainer"
+    "controls/interactivity/sortable/integration":
+        title: "Integration"
+        position: 6
     "controls/media":
         title: "Media"
-        position: 12
+    "controls/pdf":
+        title: "PDF"
     "controls/hybrid":
         title: "Hybrid UI"
-        position: 13
     "controls/hybrid/styles":
         title: "Styles and Appearance"
         position: 5
@@ -213,113 +287,93 @@ navigation:
     "controls/hybrid/faq":
         title: "Frequently Asked Questions"
         position: 24
-    "styles-and-layout":
-        title: "Styles and Appearance"
-        position: 4
     "framework":
-        title: "Framework and Utilities"
+        title: "Shared Utilities"
         position: 5
     "framework/datasource":
-        title: "DataSource"
+        title: "Data Source"
         position: 1
-    "framework/hierarchicaldatasource":
-        title: "HierarchicalDataSource"
-        position: 2
     "framework/mvvm":
-        title: "MVVM"
-        position: 3
+        title: "MVVM Pattern"
+        position: 2
     "framework/mvvm/bindings":
         title: "Bindings"
-        position: 3
+        position: 4
     "framework/mvvm/how-to":
         title: "How To"
-        position: 4
-    "framework/mvvm/tutorials":
-        title: "Tutorials"
         position: 5
     "framework/templates":
         title: "Templates"
+        position: 3
+    "framework/drawing":
+        title: "Drawing Library"
         position: 4
-    "framework/spa":
-        title: "Single Page Applications"
+    "framework/drawing/dom-elements":
+        title: "Drawing DOM Elements"
+        position: 2
+    "framework/drawing/pdf-output":
+        title: "PDF Output"
+        position: 3
+    "framework/pdf":
+        title: "PDF Export"
         position: 5
     "framework/excel":
         title: "Excel Export"
         position: 6
-    "framework/drawing":
-        title: "Drawing API"
-        position: 7
-    "framework/globalization":
-        title: "Globalization"
-        position: 8
-    "framework/localization":
-        title: "Localization"
-        position: 9
-    "framework/class":
-        title: "Class"
-        position: 10
-    "framework/validator":
-        title: "Validator"
-        position: 11
-    "framework/save-files":
-        title: "Saving Files"
-        position: 12
-    "third-party":
-        title: "Third-Party Frameworks and Utilities"
-        position: 6
-    "third-party/tutorials":
-        title: "Tutorials"
-        position: 100
-    "third-party/tutorials/webforms":
-        title: "ASP.NET Web Forms"
-        position: 1
-    "kendo-in-the-cloud":
-        title: "Kendo UI in the Cloud"
-        position: 7
-        isNew: true
-    "AngularJS":
+    "framework/AngularJS":
         title: "AngularJS Directives"
         position: 8
-    "AngularJS/how-to":
+    "framework/AngularJS/widget-basics":
+        title: "Working with Widgets"
+        position: 2
+    "framework/AngularJS/how-to":
         title: "How To"
-        position: 6
-    "AngularJS/Troubleshooting":
-        title: "Troubleshooting"
         position: 7
-    "AngularJS/tutorials":
-        title: "Tutorials"
-        position: 8
-    "jsp":
-        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
-        position: 9
-    "php":
-        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
-        position: 10
-    "php/widgets":
-        title: "Classes"
-    "troubleshoot":
+    "framework/AngularJS/Troubleshooting":
         title: "Troubleshooting"
+        position: 8
+    "framework/spa":
+        title: "Single-Page Applications"
+        position: 9
+    "styles-and-layout":
+        title: "Styles & Appearance"
+        position: 6
+    "third-party":
+        title: "Third-Party Libraries"
+        position: 7
+    "third-party/webforms":
+        title: "ASP.NET Web Forms"
         position: 20
+    "kendo-in-the-cloud":
+        title: "Cloud Integration"
+        position: 8
+        isNew: true
+    "globalization":
+        title: "Globalization"
+        position: 9
+    "globalization/intl":
+        title: "Internationalization"
+        position: 2
     "accessibility":
         title: "Accessibility"
-        position: 30
+        position: 10
+    "jsp":
+        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP"
+        position: 11
+    "php":
+        title: "Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP"
+        position: 12
+    "php/widgets":
+        title: "Classes"
     "backwards-compatibility":
         title: "Breaking Changes"
-        position: 40
-    "updates":
-        title: "Updates and Contribution"
-        position: 50
-    "knowledge-base":
-        title: "Knowledge Base"
-        position: 10
-    "copyright":
-        title: "Copyright"
-        position: 60
+        position: 20
+    "troubleshoot":
+        title: "Troubleshooting"
+        position: 30
     "*how-to":
         title: "How To"
         position: 200
-    "*localization":
-        title: "Localization"
     "*editing":
         title: "Editing"
     "*interaction":
@@ -460,6 +514,8 @@ navigation:
         title: "AutoComplete"
     "*autocomplete/how-to/input":
         title: "Managing Inputs"
+    "*/badge":
+        title: "Badge"
     "*/button":
         title: "Button"
     "*/radiobutton":
@@ -495,6 +551,11 @@ navigation:
         title: "DropDownTree"
     "*editor":
         title: "Editor"
+    "*filemanager":
+        title: "FileManager"
+        isNew: true
+    "*filter":
+        title: "Filter"
     "*gantt":
         title: "Gantt"
     "*pivotgrid":
@@ -507,15 +568,6 @@ navigation:
         title: "MediaPlayer"
     "*spreadsheet":
         title: "Spreadsheet"
-    "*import-and-export-data":
-        title: "Import and Export of Data"
-        position: 5
-    "*localization-spreadsh":
-        title: "Localization"
-        position: 6
-    "*end-user":
-        title: "End-User Documentation"
-        position: 7
     "*listview":
         title: "ListView"
     "*listbox":
@@ -532,8 +584,12 @@ navigation:
         title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
+    "*rating":
+        title: "Rating"
     "*panelbar":
         title: "PanelBar"
+    "*pdfviewer":
+        title: "PDFViewer"
     "*pivotdatasource":
         title: "PivotDataSource"
     "*pivotconfigurator":
@@ -558,6 +614,8 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*timeline":
+        title: "TimeLine"
     "*timepicker":
         title: "TimePicker"
     "*tooltip":
@@ -580,6 +638,12 @@ navigation:
         title: "Order Page"
     "*localization":
         title: "Localization"
+    "*/globalization":
+        title: "Globalization"
+        position: 40
+    "*/accessibility":
+        title: "Accessibility"
+        position: 50
     "api/javascript":
         title: "JavaScript"
         position: 2
@@ -596,10 +660,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2019.1.220"
+cdnVersion: "2020.1.219"
 
 ## The MVC Core version used
-mvcCoreVersion: "2019.1.220"
+mvcCoreVersion: "2020.1.219"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
@@ -1390,7 +1454,6 @@ api:
 
 product: "Kendo UI for jQuery"
 platform: kendo-ui
-other_platforms: [php-ui, jsp-ui]
 
 ## Assign layout and category per different paths
 
@@ -1408,7 +1471,6 @@ defaults:
         path: "php"
     values:
         product: "php-ui"
-        platform: "php-ui"
 -
     scope:
         path: "api/php"
@@ -1416,7 +1478,6 @@ defaults:
         product: "php-ui"
         editable: false
         has_api_toc: true
-        platform: "php-ui"
 -
     scope:
         path: "api/jsp"
@@ -1424,13 +1485,11 @@ defaults:
         product: "jsp-ui"
         editable: false
         has_api_toc: true
-        platform: "jsp-ui"
 -
     scope:
         path: "jsp"
     values:
         product: "jsp-ui"
-        platform: "jsp-ui"
 -
     scope:
         path: "api"
@@ -1590,6 +1649,12 @@ defaults:
 
 -
     scope:
+        path: "controls/data-management/filemanager"
+    values:
+        component: "filemanager"
+
+-
+    scope:
         path: "controls/data-management/grid"
     values:
         component: "grid"
@@ -1671,6 +1736,12 @@ defaults:
         path: "controls/editors/numerictextbox"
     values:
         component: "numeric-textbox"
+
+-
+    scope:
+        path: "controls/editors/rating"
+    values:
+        component: "rating"
 
 -
     scope:
@@ -1857,19 +1928,19 @@ skip_tabbed_code: true
 code_lang: true
 has_kb_portal: true
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs
-download: http://www.telerik.com/download/kendo-ui
+download: https://www.telerik.com/download/kendo-ui
 nav:
   "Demos": https://demos.telerik.com/kendo-ui/
   "Release History": https://www.telerik.com/support/whats-new/kendo-ui/release-history
-  "About": http://www.telerik.com/kendo-ui
-  "Pricing": http://www.telerik.com/purchase/kendo-ui
+  "About": https://www.telerik.com/kendo-ui
+  "Pricing": https://www.telerik.com/purchase/kendo-ui
 
 footer:
 -
   title: "Getting Started"
   links:
-    "Getting Started": https://docs.telerik.com/kendo-ui/intro/installation/getting-started
-    "Demos": https://demos.telerik.com/aspnet-core/
+    "Getting Started": https://docs.telerik.com/kendo-ui/intro/first-steps
+    "Demos": https://demos.telerik.com/kendo-ui/
     "Whats New": "https://www.telerik.com/support/whats-new/kendo-ui"
     "Roadmap": https://www.telerik.com/support/whats-new/kendo-ui/roadmap
 -

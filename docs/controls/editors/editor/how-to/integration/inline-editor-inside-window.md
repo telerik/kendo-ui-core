@@ -16,15 +16,13 @@ The following example demonstrates how to handle such a scenario by:
 * Enforcing a fixed `z-index` style to the Window that holds the Editor.
 * Using an `!important` clause with the `z-index` style.
 
-###### Example
-
 ```dojo
 <style>
 
 .zIndexEnforce
 {
-    /* '!important' is required to override an existsing inline style */
-    /* the z-index value itself can be arbitrary */
+    /* '!important' is required to override an existing inline style. */
+    /* The z-index value itself can be arbitrary. */
     z-index: 12345 !important;
 }
 
@@ -36,8 +34,8 @@ The following example demonstrates how to handle such a scenario by:
 </div>
 
 <script>
-// the widget initialization code below will be
-// generated automatically when using Kendo UI server wrappers
+// The following initialization code will be
+// generated automatically when using Kendo UI helpers.
 $(function() {
     $("#window").kendoWindow({
         title: "Window",
@@ -50,8 +48,8 @@ $(function() {
 });
 // widget initialization code end
 
-// when using Kendo UI wrappers, place or call the following code
-// after the Window declaration
+// When using Kendo UI helpers, place or call the following code
+// after the Window declaration.
 $(function() {
     var w = $("#window").data("kendoWindow");
     w.wrapper.addClass("zIndexEnforce");
@@ -59,15 +57,10 @@ $(function() {
 });
 
 </script>
-
 ```
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

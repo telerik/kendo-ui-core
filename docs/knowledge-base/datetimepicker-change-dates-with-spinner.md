@@ -2,7 +2,7 @@
 title: Add Spinner for Dates
 description: An example on how to change the dates in the Kendo UI DateTimePicker through a spinner.
 type: how-to
-page_title: Change Dates with Spinner | Kendo UI DateTimePicker
+page_title: Change Dates with Spinner | Kendo UI DateTimePicker for jQuery
 slug: datetimepicker-change-dates-with-spinner
 tags: datetimepicker, datepicker, spinner, change
 ticketid: 1160455

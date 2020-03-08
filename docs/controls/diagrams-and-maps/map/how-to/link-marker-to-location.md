@@ -9,8 +9,6 @@ slug: howto_linkmarkertolocation_map
 
 The following example demonstrates how to draw a straight line between a marker and a location on a Kendo UI Map.
 
-###### Example
-
 ```dojo
     <div id="map"></div>
     <script>
@@ -50,14 +48,14 @@ The following example demonstrates how to draw a straight line between a marker 
       function linkMarker(map, marker) {
         var data = marker.dataItem;
         if (data.pointTo) {
-          // Convert lat/long locations to coordinates on the screen
-          // See: http://docs.telerik.com/kendo-ui/api/dataviz/map#methods-eventToView
+          // Convert the latitude and longitude locations to coordinates on the screen.
+          // See: https://docs.telerik.com/kendo-ui/api/dataviz/map#methods-eventToView
           var from = map.locationToView(marker.location());
           var to = map.locationToView(data.pointTo);
 
-          // Draw a path on the shape layer
-          // See: http://docs.telerik.com/kendo-ui/api/dataviz/drawing/path
-          //      http://docs.telerik.com/kendo-ui/getting-started/dataviz/drawing/basic-shapes
+          // Draw a path on the shape layer.
+          // See: https://docs.telerik.com/kendo-ui/api/dataviz/drawing/path
+          //      https://docs.telerik.com/kendo-ui/getting-started/dataviz/drawing/basic-shapes
           var shapeLayer = map.layers[0];
           var line = new kendo.dataviz.drawing.Path({
             stroke: {
@@ -76,11 +74,6 @@ The following example demonstrates how to draw a straight line between a marker 
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Customize Markers on Map]({% slug howto_customizemarkersonmap_map %})
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
-* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
-* [How to Zoom on Area]({% slug howto_zoomonarea_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

@@ -22,7 +22,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Switc
 
 **Step 2** Create a [Switch](/api/php/Kendo/UI/SwitchButton).
 
-###### Example
+
 
     <?php
       $switchButton = new \Kendo\UI\SwitchButton('switch');
@@ -30,7 +30,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Switc
 
 **Step 3** Output the Switch by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $switchButton->render();
@@ -44,7 +44,7 @@ You can subscribe to all Switch [events](/api/javascript/ui/switch#events).
 
 The following example demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $switchButton = new \Kendo\UI\SwitchButton('switch');
@@ -64,7 +64,7 @@ The following example demonstrates how to subscribe for events by specifying a J
 
 The following example demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
     <?php
     $switchButton = new \Kendo\UI\SwitchButton('switch');
@@ -79,9 +79,9 @@ The following example demonstrates how to subscribe to events by providing inlin
 
 ### Client-Side Instances
 
-You are able to reference an existing Switch instance through [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Switch API](/api/javascript/ui/switch) to control its behavior.
+You are able to reference an existing Switch instance through [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Switch API](/api/javascript/ui/switch) to control its behavior.
 
-###### Example
+
 
     <?php
     $switch = new \Kendo\UI\Switch('switch');

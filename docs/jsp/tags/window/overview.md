@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `window` tag.
 
-###### Example
+
 
     <kendo:window name="window" title="About us" draggable="true" resizable="true">
         <kendo:window-content>
@@ -51,7 +51,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 You can subscribe to all [events exposed by Kendo UI Window](/api/javascript/ui/window#events) by the handler name.
 
-###### Example
+
 
     <kendo:window name="window" orientation="horizontal" open="window_open" close="window_close">
     </kendo:window>
@@ -70,9 +70,9 @@ You can subscribe to all [events exposed by Kendo UI Window](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Window instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
+You are able to reference an existing Window instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Window tag declaration
     <script>
@@ -88,7 +88,7 @@ You are able to load views asynchronously through the `content` attribute.
 
 The example below demonstrates how to load the contents of the Window by using an asynchronous call.
 
-###### Example
+
 
     <c:url value="/web/window/content" var="remoteUrl" />
 

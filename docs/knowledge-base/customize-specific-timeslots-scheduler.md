@@ -2,7 +2,7 @@
 title: Disable and Style Timeslots for Specific Days
 description: An example on how to customize specific days and style them
 type: how-to
-page_title: Customize and Style Specific Days | Kendo UI Scheduler
+page_title: Customize and Style Specific Days | Kendo UI Scheduler for jQuery
 slug: customize-specific-timeslots-scheduler
 tags: kendoui, kendo, scheduler, customize, style, disable
 ticketid: 1119501
@@ -146,6 +146,6 @@ How can I disable timeslots for a specific day and style them?
 
 ## Notes
 
-For more information on modifying the appearance of slots, refer to [this example](http://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
+For more information on modifying the appearance of slots, refer to [this example](https://docs.telerik.com/kendo-ui/controls/scheduling/scheduler/how-to/appearance/set-slot-background-color-using-slot-templates).
 
-The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views.slottemplate).
+The functionality that the example demonstrates is not applicable to `MonthView` because [`slotTemplate` is not supported](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/configuration/views.slottemplate).

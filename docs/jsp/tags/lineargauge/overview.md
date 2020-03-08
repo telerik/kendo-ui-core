@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Add the LinearGauge.
 
-###### Example
+
 
          <kendo:linearGauge name="gauge">
             <kendo:linearGauge-pointer value="10" />
@@ -41,9 +41,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 ### Existing Instances
 
-You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo UI LinearGauge tag
         <script>

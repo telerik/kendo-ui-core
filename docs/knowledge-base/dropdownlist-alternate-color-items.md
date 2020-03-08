@@ -2,7 +2,7 @@
 title: Alternate Colors of DropDownList Items
 description: An example on how to implement alternating colors in a Kendo UI DropDownList.
 type: how-to
-page_title: Alternate Colors of Items | Kendo UI DropDownList
+page_title: Alternate Colors of Items | Kendo UI DropDownList for jQuery
 slug: dropdownlist-alternate-color-items
 tags: dropdownlist, dropdown, list, items, color, alternate, background
 ticketid: 1141949

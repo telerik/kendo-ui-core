@@ -8,20 +8,21 @@
     // Header
     .k-calendar-header {
         padding: @multiviewcalendar-header-padding-y @multiviewcalendar-header-padding-x;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
-        .k-button { .k-button.k-flat(); }
-
-        &::after {
-            content: "";
-            display: block;
-            clear: both;
+        .k-button {
+            white-space: nowrap;
+            .k-button.k-flat();
         }
     }
 
 
     // Navigation
     .k-calendar-nav {
-        float: right;
+        display: inline-block;
+        white-space: nowrap;
     }
 
 
@@ -32,6 +33,11 @@
         min-height: (7 * @multiviewcalendar-cell-size );
         text-align: center;
         white-space: nowrap;
+
+        .k-animation-container-sm & {
+            display: flex;
+            flex-direction: column;
+        }
     }
     &.k-week-number .k-calendar-view {
         width: auto;

@@ -9,8 +9,6 @@ slug: howto_hideeditfieldsondifferentlevels_treelist
 
 The following example demonstrates how to hide editors for different columns on different levels in the TreeList.
 
-###### Example
-
 ```dojo
     <div id="treelist"></div>
 
@@ -80,10 +78,10 @@ The following example demonstrates how to hide editors for different columns on 
           editable: true,
           height: 540,
           edit: function(e) {
-            // determine level from model
+            // Determine the level from the model.
             var level = this.dataSource.level(e.model);
 
-            // hide content in non-editable cells
+            // Hide the content in non-editable cells.
             $(e.container).closest("tr")
               .find("[data-bind]").filter(function() {
                   var name = $(this).attr("name");
@@ -110,8 +108,6 @@ The following example demonstrates how to hide editors for different columns on 
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
-* [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
-* [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
-
-For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+* [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
+* [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
+* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

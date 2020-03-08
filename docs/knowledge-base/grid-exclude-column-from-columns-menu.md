@@ -2,7 +2,7 @@
 title: Exclude Hidden Columns from Column Menu List in Grid
 description: An example on how to remove an item from the list of columns in the column menu of the Kendo UI Grid for jQuery.
 type: how-to
-page_title: Exclude Specific Columns from Column List | Kendo UI Grid
+page_title: Exclude Specific Columns from Column List | Kendo UI Grid for jQuery
 slug: grid-exclude-column-from-columns-menu
 tags: grid, exclude, hidden, column, columns, menu
 ticketid: 1158504

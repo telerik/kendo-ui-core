@@ -9,8 +9,6 @@ slug: howto_use_custom_angularjs_templates_autocomplete
 
 The following example demonstrates how to use AngularJS templates inside the Kendo UI templates of the AutoComplete widget.
 
-###### Example
-
 ```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -109,9 +107,9 @@ The following example demonstrates how to use AngularJS templates inside the Ken
           '<span class="k-widget k-header">Contact info</span>' +
           '</div>',
 
-          // using {{angular}} templates:
-          template: '<span class="k-state-default"><img src=\"https://demos.telerik.com/kendo-ui/content/web/Customers/{{dataItem.CustomerID}}.jpg\" alt=\"{{dataItem.CustomerID}}\" /></span>' +
-          '<span class="k-state-default"><h3>{{dataItem.ContactName}}</h3><p>{{dataItem.CompanyName}}</p></span>',
+          // Using {{angular}} templates:
+          template: '<span class="k-state-default"><img src=\"https://demos.telerik.com/kendo-ui/content/web/Customers/{% raw %}{{dataItem.CustomerID}}{% endraw %}.jpg\" alt=\"{% raw %}{{dataItem.CustomerID}}{% endraw %}\" /></span>' +
+          '<span class="k-state-default"><h3>{% raw %}{{dataItem.ContactName}}{% endraw %}</h3><p>{% raw %}{{dataItem.CompanyName}}{% endraw %}</p></span>',
         };
       });
     </script>
@@ -120,9 +118,6 @@ The following example demonstrates how to use AngularJS templates inside the Ken
 
 ## See Also
 
-* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
-* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
-
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).
+* [Basic Usage of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
+* [Using the API of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)

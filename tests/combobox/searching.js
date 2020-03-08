@@ -533,6 +533,26 @@ it("search method lowers case of the filter value when ignoreCase true", functio
     combobox.search("F");
 });
 
+it("search method lowers case of the filter value when ignoreCase true and correct culture set", function() {
+    combobox = new ComboBox(input, {
+        autoBind: false,
+        dataSource: {
+            transport: {
+                read: "fake url",
+                parameterMap: function(options) {
+                    assert.equal(options.filter.filters[0].value, "kı");
+                }
+            },
+            serverFiltering: true,
+            accentFoldingFiltering: "tr-TR"
+        },
+        filter: "startswith",
+        ignoreCase: true
+    });
+
+    combobox.search("KI");
+});
+
 it("do not remove default filter expression", function() {
     combobox = new ComboBox(input, {
         dataTextField: "text",
@@ -1070,7 +1090,7 @@ it("resize popup on search when autoWidth is enabled", function(done) {
             }
         }
     });
-    
+
     combobox.one("open", function() {
         assert.isOk(combobox.wrapper.width() < combobox.popup.element.width());
         combobox.close();
@@ -1106,6 +1126,55 @@ it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
     combobox.close();
     combobox.open();
     assert.closeTo(combobox.popup.element.parent(".k-animation-container").width(), combobox.popup.element.outerWidth(true) + 1, 0.1);
+});
+
+it("enabled autoWidth disables X scrolling", function() {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+
+        }
+    });
+
+    combobox.open();
+    assert.equal(combobox.listView.content.css("overflow"), "hidden auto")
+});
+
+it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
+    var combobox = new ComboBox(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: [
+                "Short item",
+                "An item with really, really, really, really, really, really, really, really, really, long text",
+                "Short item",
+                "Short item",
+                "Short item",
+                "Short item",
+                "Short item"
+            ]
+        }
+    });
+
+    combobox.open();
+    assert.equal(combobox.listView.content.css("overflow"), "hidden scroll")
 });
 
 it("keep popup opened on empty search result if noDataTemplate", function() {
@@ -1217,6 +1286,24 @@ it("filterFields option should search by multiple columns", function() {
     combobox.search("1");
 
     assert.equal(combobox.ul.find("li").length, 1);
+});
+
+it("clear selection on empty search", function(done) {
+    var select = $("<select></select>");
+
+    combobox = new ComboBox(select, {
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: data,
+        filter: "contains",
+        change: function() {
+            assert.equal(this.value(), "");
+            done()
+        },
+        value: 2
+    });
+
+    combobox.input.val("").trigger({type: "keydown", keyCode: kendo.keys.BACKSPACE});
 });
 
     });

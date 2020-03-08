@@ -2,7 +2,7 @@
 title: Draw a Signature and Export It to SVG
 description: An example on how to allow the user to draw a signature and export it to SVG by using the Kendo UI Drawing API.
 type: how-to
-page_title: Allow Users to Sign Their Names on a Canvas and Export It to SVG | Kendo UI Spreadsheet
+page_title: Allow Users to Sign Their Names on a Canvas and Export It to SVG | Kendo UI Spreadsheet for jQuery
 slug: drawing-draw-signature-and-export-svg
 tags: kendo, kendo-ui, drawing, path, geometry, svg, signature
 ticketid: 1144186

@@ -10,8 +10,6 @@ slug: howto_nest_editorsinside_event_templates_scheduler
 
 The following example demonstrates how to nest editors inside the Scheduler event templates and update the underlying model.
 
-###### Example
-
 ```dojo
     <div id="scheduler"></div>
     <script id="event-template" type="text/x-kendo-template">
@@ -32,10 +30,10 @@ The following example demonstrates how to nest editors inside the Scheduler even
 
         var uid = checkbox.closest("[data-uid]").data("uid");
 
-        //get event instance using scheduler API:
+        // Get the event instance by using the Scheduler API.
         var event = scheduler.occurrenceByUid(uid);
 
-        //update the underlying model:
+        // Update the underlying model.
         event.set("cancelled", checkbox.is(":checked"));
       }
 
@@ -107,15 +105,6 @@ The following example demonstrates how to nest editors inside the Scheduler even
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
-* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-* [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

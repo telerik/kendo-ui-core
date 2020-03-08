@@ -46,8 +46,10 @@ var __meta__ = { // jshint ignore:line
         HIDDENCLASS = "k-hidden",
         HOVERCLASS = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
+        NOCLICKCLASS = "k-no-click",
         DISABLED = "disabled",
         READONLY = "readonly",
+        AUTOCOMPLETEVALUE = "off",
         ns = ".kendoMultiSelect",
         CLICK = "click" + ns,
         KEYDOWN = "keydown" + ns,
@@ -103,7 +105,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialOpen = true;
-            that._aria(id);
+            that._ariaLabel();
+            that._ariaSetLive();
             that._dataSource();
             that._ignoreCase();
             that._popup();
@@ -128,6 +131,8 @@ var __meta__ = { // jshint ignore:line
                 that.enable(false);
             }
 
+            that._ariaSetSize(that.value().length);
+
             kendo.notify(that);
             that._toggleCloseVisibility();
         },
@@ -144,6 +149,12 @@ var __meta__ = { // jshint ignore:line
             filter: "startswith",
             ignoreCase: true,
             minLength: 1,
+            messages: {
+                "singleTag": "item(s) selected",
+                "clear": "clear",
+                "deleteTag": "delete",
+                "noData": "No data found."
+            },
             enforceMinLength: false,
             delay: 100,
             value: null,
@@ -157,7 +168,8 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             clearButton: true,
-            autoWidth: false
+            autoWidth: false,
+            popup: null
         },
 
         events: [
@@ -208,14 +220,17 @@ var __meta__ = { // jshint ignore:line
                         .removeClass(FOCUSEDCLASS)
                         .removeAttr(ID);
 
+                    that._currentTag.find(".k-select").attr("aria-hidden", true);
+
                     that.input.removeAttr("aria-activedescendant");
                 }
 
                 if (candidate) {
                     candidate.addClass(FOCUSEDCLASS).attr(ID, that._tagID);
 
-                    that.input
-                        .attr("aria-activedescendant", that._tagID);
+                    candidate.find(".k-select").removeAttr("aria-hidden");
+
+                    that.input.attr("aria-activedescendant", that._tagID);
                 }
 
                 that._currentTag = candidate;
@@ -313,7 +328,7 @@ var __meta__ = { // jshint ignore:line
                 closeButton = !target.closest(".k-select").children(".k-i-arrow-60-down").length;
             }
 
-            if (notInput && !(closeButton && kendo.support.mobileOS)) {
+            if (notInput && !(closeButton && kendo.support.mobileOS) && e.cancelable) {
                 e.preventDefault();
             }
 
@@ -365,7 +380,9 @@ var __meta__ = { // jshint ignore:line
             var value = listView.value()[position];
             var dataItem = that.listView.selectedDataItems()[position];
             var customIndex = that._customOptions[value];
+            var listViewChildren = listView.element[0].children;
             var option;
+            var listViewChild;
 
             if (that.trigger(DESELECT, { dataItem: dataItem, item: tag })) {
                 that._close();
@@ -384,20 +401,32 @@ var __meta__ = { // jshint ignore:line
                 that._close();
             };
 
-            if (customIndex === undefined) {
+            if (customIndex === undefined && listView.select().length) {
                 that.persistTagList = false;
                 listView.select(listView.select()[position]).done(done);
             } else {
                 option = that.element[0].children[customIndex];
-                option.selected = false;
+                if (option) {
+                    option.selected = false;
+                }
 
                 listView.removeAt(position);
-                tag.remove();
+                listViewChild = listViewChildren[customIndex];
+                if (listViewChild) {
+                    listViewChildren[customIndex].classList.remove("k-state-selected");
+                }
+                if (that.options.tagMode !== "single"){
+                    tag.remove();
+                } else {
+                    that._updateTagListHTML();
+                }
                 done();
             }
         },
 
         _tagListClick: function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             var target = $(e.currentTarget);
 
             if (!target.children(".k-i-arrow-60-down").length) {
@@ -405,11 +434,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _clearClick: function() {
+        _clearValue: function() {
             var that = this;
 
             if (that.options.tagMode === "single"){
-                that.listView.value([]);
+                that._clearSingleTagValue();
             } else{
                 that.tagList.children().each(function(index, tag) {
                     that._removeTag($(tag), false);
@@ -427,6 +456,31 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _clearSingleTagValue: function() {
+            var that = this;
+            var items = that.dataItems();
+            var tags = that.tagList.children();
+            var persistTagList = that.persistTagList;
+
+            for (var i = 0; i < items.length; i += 1) {
+                if (that.trigger(DESELECT, { dataItem: items[i], item: tags.first() })) {
+                    that._close();
+                    return;
+                }
+            }
+
+            if (persistTagList) {
+                that.persistTagList = false;
+            }
+
+            that.listView.value([]);
+            that.persistTagList = persistTagList;
+        },
+
+        _focusHandler: function() {
+            this.input.focus();
+        },
+
         _editable: function(options) {
             var that = this,
                 disable = options.disable,
@@ -438,8 +492,10 @@ var __meta__ = { // jshint ignore:line
             if (!readonly && !disable) {
                 wrapper
                     .removeClass(STATEDISABLED)
+                    .removeClass(NOCLICKCLASS)
                     .on(HOVEREVENTS, that._toggleHover)
-                    .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that));
+                    .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that))
+                    .on(CLICK, proxy(that._focusHandler, that));
 
                 that.input.on(KEYDOWN, proxy(that._keydown, that))
                     .on("paste" + ns, proxy(that._search, that))
@@ -447,7 +503,7 @@ var __meta__ = { // jshint ignore:line
                     .on("focus" + ns, proxy(that._inputFocus, that))
                     .on("focusout" + ns, proxy(that._inputFocusout, that));
 
-                that._clear.on(CLICK + ns + " touchend" + ns, proxy(that._clearClick, that));
+                that._clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
                      .attr(ARIA_DISABLED, false);
@@ -455,13 +511,11 @@ var __meta__ = { // jshint ignore:line
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, LI, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK, "li.k-button .k-select", proxy(that._tagListClick, that));
+                    .on(CLICK + " touchend" + ns, "li.k-button .k-select", proxy(that._tagListClick, that));
             } else {
-                if (disable) {
-                    wrapper.addClass(STATEDISABLED);
-                } else {
-                    wrapper.removeClass(STATEDISABLED);
-                }
+
+                wrapper.toggleClass(STATEDISABLED, disable)
+                       .toggleClass(NOCLICKCLASS, readonly);
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
@@ -513,7 +567,7 @@ var __meta__ = { // jshint ignore:line
 
                 //selects values in autoBind false and non virtual scenario on initial load
                 if (that._initialOpen && !that.options.autoBind && !that.options.virtual && that.options.value && !$.isPlainObject(that.options.value[0])){
-                    that.value(that._initialValues);
+                    that.value(that.value() || that._initialValues);
                 }
 
                 // In some cases when the popup is opened resize is triggered which will cause it to close
@@ -604,11 +658,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             listView.value(value);
-            that._old = that._valueBeforeCascade = listView.value(); //get a new array reference
+            that._old = that._valueBeforeCascade = value.slice(); //get a new array reference
 
             if (!clearFilters) {
                 that._fetchData();
             }
+
+            that._ariaSetSize(that.value().length);
+
             that._toggleCloseVisibility();
         },
 
@@ -735,6 +792,9 @@ var __meta__ = { // jshint ignore:line
                 that.element.trigger(CHANGE);
             }
             that.popup.position();
+
+            that._ariaSetSize(value.length);
+
             that._toggleCloseVisibility();
         },
 
@@ -769,7 +829,6 @@ var __meta__ = { // jshint ignore:line
             var visible = that.popup.visible();
             var dir = 0;
             var activeItemIdx;
-            var persistTagList;
 
             if(key !== keys.ENTER) {
                 this._multipleSelection = false;
@@ -937,17 +996,10 @@ var __meta__ = { // jshint ignore:line
                 that._state = ACCEPT;
 
                 if (that.options.tagMode === "single") {
-                    persistTagList = that.persistTagList;
+                    that._clearSingleTagValue();
 
-                    if (persistTagList) {
-                        that.persistTagList = false;
-                    }
-
-                    listView.value([]);
                     that._change();
                     that._close();
-
-                    that.persistTagList = persistTagList;
                     return;
                 }
 
@@ -1217,7 +1269,6 @@ var __meta__ = { // jshint ignore:line
 
         _selectValue: function (added, removed) {
             var that = this;
-            var values = that.value();
             var total = that.dataSource.total();
             var tagList = that.tagList;
             var getter = that._value;
@@ -1255,16 +1306,7 @@ var __meta__ = { // jshint ignore:line
                     that._maxTotal = total;
                 }
 
-                tagList.html("");
-
-                if (values.length) {
-                    tagList.append(that.tagTemplate({
-                        values: values,
-                        dataItems: that.dataItems(),
-                        maxTotal: that._maxTotal,
-                        currentTotal: total
-                    }));
-                }
+                this._updateTagListHTML();
 
                 for (idx = removed.length - 1; idx > -1; idx--) {
                     that._setOption(getter(removed[idx].dataItem), false);
@@ -1277,6 +1319,24 @@ var __meta__ = { // jshint ignore:line
 
             that._angularTagItems("compile");
             that._placeholder();
+        },
+
+        _updateTagListHTML: function(){
+            var that = this;
+            var values = that.value();
+            var total = that.dataSource.total();
+            var tagList = that.tagList;
+
+            tagList.html("");
+
+            if (values.length) {
+                tagList.append(that.tagTemplate({
+                    values: values,
+                    dataItems: that.dataItems(),
+                    maxTotal: that._maxTotal,
+                    currentTotal: total
+                }));
+            }
         },
 
         _select: function(candidate) {
@@ -1376,29 +1436,31 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var element = that.element;
             var accessKey = element[0].accessKey;
-            var input = that._innerWrapper.children("input.k-input");
+            var input = that._inputWrapper.children("input.k-input");
 
             if (!input[0]) {
-                input = $('<input class="k-input" style="width: 25px" />').appendTo(that._innerWrapper);
+                input = $('<input class="k-input" style="width: 25px" />').appendTo(that._inputWrapper);
             }
 
             element.removeAttr("accesskey");
 
             that._focused = that.input = input.attr({
                 "accesskey": accessKey,
-                "autocomplete": "off",
+                "autocomplete": AUTOCOMPLETEVALUE,
                 "role": "listbox",
                 "title": element[0].title,
-                "aria-expanded": false
+                "aria-expanded": false,
+                "aria-haspopup": "listbox",
+                "aria-autocomplete": "list"
             });
         },
 
         _tagList: function() {
             var that = this,
-                tagList = that._innerWrapper.children("ul");
+                tagList = that._inputWrapper.children("ul");
 
             if (!tagList[0]) {
-                tagList = $('<ul role="listbox" unselectable="on" class="k-reset"/>').appendTo(that._innerWrapper);
+                tagList = $('<ul unselectable="on" class="k-reset"/>').appendTo(that._inputWrapper);
             }
 
             that.tagList = tagList;
@@ -1410,6 +1472,7 @@ var __meta__ = { // jshint ignore:line
             var tagTemplate = options.tagTemplate;
             var hasDataSource = options.dataSource;
             var isMultiple = options.tagMode === "multiple";
+            var singleTag = options.messages.singleTag;
             var defaultTemplate;
 
             if (that.element[0].length && !hasDataSource) {
@@ -1417,15 +1480,15 @@ var __meta__ = { // jshint ignore:line
                 options.dataValueField = options.dataValueField || "value";
             }
 
-            defaultTemplate = isMultiple ? kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false }) : kendo.template("#:values.length# item(s) selected");
+            defaultTemplate = isMultiple ? kendo.template("#:" + kendo.expr(options.dataTextField, "data") + "#", { useWithBlock: false }) : kendo.template("#:values.length# " + singleTag);
 
             that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
             that.tagTemplate = function(data) {
-                return '<li class="k-button" unselectable="on"><span unselectable="on">' +
-                        tagTemplate(data) +
-                        '</span><span unselectable="on" aria-label="' +
-                        (isMultiple ? "delete" : "open") +
+                return '<li role="option" aria-selected="true" class="k-button" unselectable="on"><span unselectable="on">' +
+                        tagTemplate(data) + '</span>' +
+                        '<span aria-hidden="true" unselectable="on" aria-label="' +
+                        (isMultiple ? ('delete" title="' + that.options.messages.deleteTag + '" aria-label="' + that.options.messages.deleteTag) : 'open') +
                         '" class="k-select"><span class="k-icon ' +
                         (isMultiple ? "k-i-close" : "k-i-arrow-60-down") + '">' +
                         '</span></span></li>';
@@ -1466,11 +1529,26 @@ var __meta__ = { // jshint ignore:line
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" role="listbox" unselectable="on" />').insertBefore(element);
             }
 
-            that.wrapper = wrapper.addClass(element[0].className).css("display", "");
-            that._innerWrapper = $(wrapper[0].firstChild);
+            that.wrapper = wrapper.addClass(element[0].className).removeClass('input-validation-error').css("display", "");
+            that._inputWrapper = $(wrapper[0].firstChild);
+        },
+
+        _ariaSetSize: function(value) {
+            var that = this;
+            var selectedItems = that.tagList.children();
+
+            if(value && selectedItems.length) {
+                selectedItems.attr("aria-setsize", value);
+            }
+        },
+
+        _ariaSetLive: function() {
+            var that = this;
+
+            that.ul.attr("aria-live", !that._isFilterEnabled() ? "off" : "polite");
         }
     });
 

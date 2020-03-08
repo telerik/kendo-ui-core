@@ -187,7 +187,7 @@ The axis labels configuration.
 
 ### axisDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 ### axisDefaults.labels.format `String` *(default: "{0}")*
 
@@ -706,7 +706,9 @@ Category index at which the first value axis crosses this axis (when set as an o
 
 Category indices at which the value axes cross the category axis (when set as an array).
 
-> set an index greater than or equal to the number of categories to denote the far end of the axis.
+> Set an index greater than or equal to the number of categories to denote the far end of the axis.
+
+> If the Chart uses multiple panes, the crossing values are not scoped to a pane. To be able to customize the crossing values in a given pane, you first need to provide placeholder values for the previous pane axes and then the crossing values for the current pane.
 
 #### Example - set the category axis crossing values
 
@@ -722,6 +724,36 @@ Category indices at which the value axes cross the category axis (when set as an
         { data: [1, 2, 3] }
       ]
     });
+    </script>
+
+#### Example - set the crossing values in a multi-pane Chart
+
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [
+          { data: [1, 7, 5, 3] },
+          { data: [1, 2, 3, 4], axis: "bottom-2" },
+          { data: [10, 20, 13, 14], axis: "bottom-2" }
+        ],
+        valueAxis: [
+          { pane: "top-pane" },
+          { pane: "bottom-pane", name: "bottom-1" },
+          { pane: "bottom-pane", name: "bottom-2" }
+        ],
+        panes: [
+          { name: "top-pane" },
+          { name: "bottom-pane" }
+        ],
+        categoryAxis: [{
+          pane: "top-pane",
+          categories: [2000, 2001, 2002, 2003]
+        },{
+          axisCrossingValues: [0, 0, 10000],
+          categories: [2002, 2003, 2004, 2005],
+          pane: "bottom-pane"
+        }]
+      });
     </script>
 
 ### categoryAxis.background `String`
@@ -765,7 +797,7 @@ that the total number of categories does not exceed [categoryAxis.maxDateGroups]
 
 Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/chart#configuration-series.aggregate) function.
 
-### categoryAxis.baseUnitStep `Object` *(default: 1)*
+### categoryAxis.baseUnitStep `Number|String` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
 that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.maxDateGroups).
@@ -1957,7 +1989,7 @@ The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#co
 
 ### categoryAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the category axis label font
 
@@ -2697,7 +2729,7 @@ The color of the major grid lines. Accepts a valid CSS color string, including h
           color: "#aa00bb"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2714,7 +2746,7 @@ The color of the major grid lines. Accepts a valid CSS color string, including h
           color: "rgb(128, 0, 255)"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -2731,7 +2763,7 @@ The color of the major grid lines. Accepts a valid CSS color string, including h
           color: "green"
         },
         categories: ["2011", "2012", "2013"]
-      }],
+      },
       series: [{
         data: [1, 2, 3]
       }]
@@ -3050,7 +3082,55 @@ The maximum number of groups (categories) to display when
 
 ### categoryAxis.maxDivisions `Number`
 
-The maximum number of ticks and labels to display. Applicable for date category axis.
+The maximum number of ticks, labels and grid lines to display. Applicable for date category axis. You can combine this property with a bigger value of the [maxDateGroups](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.maxdategroups) property to increase the number of rendered data points in the Chart without drawing too many labels, ticks, and grid lines.
+
+####Example
+
+    <div id="chart"></div>
+    <script>
+      function createChart() {
+        $("#chart").kendoChart({
+          dataSource: {
+            transport: {
+              read: {
+                url: "https://demos.telerik.com/kendo-ui/service/StockData",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                fields: {
+                  Date: {
+                    type: "date"
+                  }
+                }
+              }
+            }
+          },
+          seriesDefaults: {
+            type: "line"
+          },
+          series: [{
+            field: "Open",
+            categoryField: "Date"
+          }],
+          categoryAxis: {
+            maxDivisions: 20,
+            labels: {
+              rotation: -45
+            }
+          },
+          tooltip: {
+            visible: true,
+            format: "C2"
+          },
+          pannable: true,
+          zoomable: true
+        });
+      }
+
+      $(document).ready(createChart);
+    </script>
 
 ### categoryAxis.min `Object`
 
@@ -6442,7 +6522,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### legend.inactiveItems.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart legend label font
 
@@ -6645,7 +6725,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### legend.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart legend label font
 
@@ -10263,8 +10343,8 @@ The error bars value.
 
 The following value types are supported:
 
-* "stderr" - the [standard error](http://en.wikipedia.org/wiki/Standard_error) of the series values will be used to calculate the point low and high value
-* "stddev(n)" - the [standard deviation](http://en.wikipedia.org/wiki/Standard_deviation) of the series values will be used to calculate the point low and high value. A number can be specified between the parentheses, that will be multiplied by the calculated standard deviation.
+* "stderr" - the [standard error](https://en.wikipedia.org/wiki/Standard_error) of the series values will be used to calculate the point low and high value
+* "stddev(n)" - the [standard deviation](https://en.wikipedia.org/wiki/Standard_deviation) of the series values will be used to calculate the point low and high value. A number can be specified between the parentheses, that will be multiplied by the calculated standard deviation.
 * "percentage(n)" - a percentage of the point value
 * A number that will be subtracted/added to the point value
 * An array that holds the low and high difference from the point value
@@ -11632,7 +11712,7 @@ The distance of the labels when [series.type](/api/javascript/dataviz/ui/chart#c
 
 ### series.labels.font `String|Function` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart series label font
     <div id="chart"></div>
@@ -13701,6 +13781,29 @@ Angles increase clockwise and zero is to the left. Negative values are acceptabl
     });
     </script>
 
+
+### series.targetField `String` *(default: "target")*
+
+The data item field containing the target value.
+
+> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
+
+#### Example - set the bullet chart series current field
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        {
+          type: "bullet",
+          targetField: "price",
+          data: [
+            { current: 1, price: 2 }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### series.target `Object`
 
 The configuration options of the target
@@ -13911,28 +14014,6 @@ The width of the line.
           },
           data: [
             [1, 2]
-          ]
-        }
-      ]
-    });
-    </script>
-
-### series.targetField `String` *(default: "target")*
-
-The data item field containing the target value.
-
-> The `currentField` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "bullet" or "verticalBullet".
-
-#### Example - set the bullet chart series current field
-    <div id="chart"></div>
-    <script>
-    $("#chart").kendoChart({
-      series: [
-        {
-          type: "bullet",
-          targetField: "price",
-          data: [
-            { current: 1, price: 2 }
           ]
         }
       ]
@@ -15741,7 +15822,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### seriesDefaults.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the chart series label font
 
@@ -17856,7 +17937,7 @@ A function that can be used to create a custom visual for the notes. The availab
 ### theme `String`
 
 The chart theme. This can be either a built-in theme or "sass".
-When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}). More information on the built-in themes could be found in the [Less-based themes]({% slug themesandappearnce_kendoui_desktopwidgets%}) article.
 
 The supported values are:
 
@@ -19709,7 +19790,7 @@ The text color of the labels. Accepts a valid CSS color string, including hex an
 
 ### valueAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the value axis label font
 
@@ -20622,7 +20703,7 @@ The maximum value of the axis.
 
 ### valueAxis.min `Number` *(default: 0)*
 
-The minimum value of the axis.
+The minimum value of the axis. Under certain conditions, the [narrowRange](/api/javascript/dataviz/ui/chart/configuration/valueaxis.narrowrange) setting can overwrite this setting. To give priority to the `min` setting of your choice, set `valueAxis.narrowRange` to `false`.
 
 #### Example - set the value axis minimum
 
@@ -21241,10 +21322,10 @@ The unique axis name. Used to associate a series with a value axis using the [se
     });
     </script>
 
-### valueAxis.narrowRange `Boolean`
+### valueAxis.narrowRange `Boolean` *(default: true)*
 
-If set to `true` the chart will prevent the automatic axis range from snapping to 0.
-Setting it to `false` will force the automatic axis range to snap to 0.
+If set to `true` the Chart will narrow the value axis range in order to display data points in better detail.
+Setting it to `false` will force the automatic axis range to start from 0 or the explicitly specified [valueAxis.min](/api/javascript/dataviz/ui/chart/configuration/valueaxis.min) value.
 
 #### Example - prevent automatic axis range snapping
 
@@ -23282,6 +23363,51 @@ A function that can be used to create a custom visual for the notes. The availab
       });
     </script>
 
+### valueAxis.zIndex `Number`
+
+An optional Z-index that can be used to change the default stacking position of the valueAxis.
+
+> Available for RadarChart
+
+#### Example - set the value axis note color width
+
+    <div id='chart'></div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Employment candidate review"
+                },
+                seriesDefaults: {
+                    type: "radarArea"
+                },
+                series: [{
+                    name: "Andrew Dodsworth",
+                    data: [10, 3, 3, 10, 2, 10]
+                }],
+                categoryAxis: {
+                    categories: [
+                        "Experience", "Communication", "Friendliness",
+                        "Subject knowledge", "Presentation", "Education"
+                    ]
+                },
+                valueAxis: {
+                  	zIndex:1,
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: true
+                    }
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+
+
 ### xAxis `Array`
 
 The X-axis configuration options of the scatter chart X-axis. Supports all [valueAxis](/api/javascript/dataviz/ui/chart#configuration-valueAxis) options.
@@ -24437,7 +24563,7 @@ The format used when [xAxis.baseUnit](/api/javascript/dataviz/ui/chart#configura
 
 ### xAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the scatter chart x axis label font
 
@@ -26192,7 +26318,7 @@ If set to `true` the value axis direction will be reversed. By default values in
 
 ### xAxis.startAngle `Number` *(default: 0)*
 
-The angle (degrees) where the 0 value is placed.
+The angle (degrees) where the 0 value is placed. Applicable to polar series.
 
 Angles increase counterclockwise and zero is to the right. Negative values are acceptable.
 
@@ -29427,7 +29553,7 @@ The format used when [yAxis.baseUnit](/api/javascript/dataviz/ui/chart#configura
 
 ### yAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels.
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
 
 #### Example - set the scatter chart y axis label font
 
@@ -33406,7 +33532,7 @@ The [configuration](#configuration) options with which the chart is initialized.
     </script>
 
 ### surface `kendo.drawing.Surface`
-The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kendo-ui/api/javascript/drawing).
+The drawing surface of the Chart. See [Drawing API](https://docs.telerik.com/kendo-ui/api/javascript/drawing).
 
 #### Example - bind to surface events
 
@@ -33422,7 +33548,7 @@ The drawing surface of the Chart. See [Drawing API](http://docs.telerik.com/kend
         });
 
         function onShapeMouseEnter(e) {
-            // http://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
+            // https://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
             console.log(e);
         }
     </script>
@@ -33453,7 +33579,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 Exports the chart as an image.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -33516,7 +33642,7 @@ for more details.
 Exports the chart as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -33558,7 +33684,7 @@ Parameters for the exported PDF file.
 Exports the chart as an SVG document.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -34026,10 +34152,10 @@ The callback function which will be called for the points or the category value 
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the chart.
 The returned string is a self-contained SVG document that can be used as is or
 converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/).
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg), but will remain fully functional.
@@ -34085,7 +34211,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);

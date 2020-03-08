@@ -2,7 +2,7 @@
 title: Restrict a Drag Zone in the TreeView
 description: An example on how to restrict a drag zone in the Kendo UI TreeView widget.
 type: how-to
-page_title: Restrict Drag Zones | Kendo UI TreeView
+page_title: Restrict Drag Zones | Kendo UI TreeView for jQuery
 slug: treeview-restrict-drag-zone
 tags: treeview, restrict, drag, zone
 res_type: kb

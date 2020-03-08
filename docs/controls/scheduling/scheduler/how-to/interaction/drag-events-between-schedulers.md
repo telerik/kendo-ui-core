@@ -10,8 +10,6 @@ slug: howto_drag-events-between-schedulers_scheduler
 
 The following example demonstrates how to implement the drag-and-drop functionality in a Kendo UI Scheduler.
 
-###### Example
-
 ```dojo
    <div id="scheduler1"></div>
     <div id="scheduler2"></div>
@@ -125,17 +123,6 @@ The following example demonstrates how to implement the drag-and-drop functional
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
-* [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
-* [How to Create Custom month View with Event Count in Show More Button]({% slug howto_create_custom_monthview_eventcount_showmore_button_scheduler %})
-* [How to Create Custom Restrictions]({% slug howto_create_custom_restrivtions_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Implement Custom Editing in agenda View]({% slug howto_implement_custom_editing_inagenda_view_scheduler %})
-* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

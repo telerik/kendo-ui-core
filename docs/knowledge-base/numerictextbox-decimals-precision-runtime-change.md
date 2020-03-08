@@ -2,7 +2,7 @@
 title: Define Decimals Property at Runtime in NumericTextBox
 description: An example on how to configure the precision of the Kendo UI NumericTextBox during runtime.
 type: how-to
-page_title: Change Decimal Placement at Runtime | Kendo UI NumericTextBox
+page_title: Change Decimal Placement at Runtime | Kendo UI NumericTextBox for jQuery
 slug: numerictextbox-decimals-precision-runtime-change
 tags: numerictextbox, decimals, precision, runtime, change
 ticketid: 1383068

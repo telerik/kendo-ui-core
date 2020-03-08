@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
@@ -29,14 +29,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 **Step 3** Add a barcode with the default [`type`](/api/javascript/dataviz/ui/barcode/configuration/type) (Code39).
 
-###### Example
+
 
         <kendo:barcode name="barcode" value="foo">
         </kendo:barcode>
 
 **Step 4** Change the symbology to match your scenario.
 
-###### Example
+
 
         <kendo:barcode name="barcode" type="ean8" value="2346722">
         </kendo:barcode>
@@ -46,9 +46,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ### Existing Instances
 
-You are able to reference an existing Barcode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
+You are able to reference an existing Barcode instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo UI Barcode tag
         <script>

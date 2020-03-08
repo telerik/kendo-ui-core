@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 2** Create an array to which the Chart will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 4** Create a [Chart](/api/php/Kendo/Dataviz/UI/Chart), configure its [`series`](/api/php/Kendo/Dataviz/UI/Chart#addSeriesItem), [`categoryAxis`](/api/php/Kendo/Dataviz/UI/Chart#addCategoryAxisItem) and set its [`DataSource`](/api/php/Kendo/Dataviz/UI/Chart#datasource).
 
-###### Example
+
 
         <?php
         $ageSeries = new \Kendo\Dataviz\UI\ChartSeriesItem();
@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 5** Output the Chart by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $chart->render();
@@ -78,7 +78,7 @@ You can subscribe to all Chart [events](/api/javascript/dataviz/ui/chart).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\Chart('chart');
@@ -98,7 +98,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\Chart('chart');
@@ -114,9 +114,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI Chart instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+You can reference the client-side Kendo UI Chart instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\Chart('chart');

@@ -190,6 +190,37 @@ it("form reset support", function(done) {
     }, 200);
 });
 
+it("form reset support works correctly using the options value", function(done) {
+    var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+        datepicker = input.kendoDatePicker({ value: new Date(2018, 1, 1) }).data("kendoDatePicker");
+
+    datepicker.value("12/12/2010");
+
+    form[0].reset();
+
+    setTimeout(function() {
+        assert.equal(datepicker.element.val(), "2/1/2018");
+        assert.deepEqual(datepicker.value(), new Date(2018, 1, 1));
+        done();
+    }, 200);
+});
+
+it("form reset support works correctly using the options value and format from server", function(done) {
+    input.attr("value", "M/d/yyyy");
+    var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+        datepicker = input.kendoDatePicker({ value: new Date(2018, 1, 1) }).data("kendoDatePicker");
+
+    datepicker.value("12/12/2010");
+
+    form[0].reset();
+
+    setTimeout(function() {
+        assert.equal(datepicker.element.val(), "2/1/2018");
+        assert.deepEqual(datepicker.value(), new Date(2018, 1, 1));
+        done();
+    }, 200);
+});
+
 it("support for form defined by attribute", function(done) {
     input.attr("form", "form1").attr("value", "12/12/2000");
 

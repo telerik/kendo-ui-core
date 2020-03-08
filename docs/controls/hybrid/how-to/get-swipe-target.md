@@ -9,13 +9,13 @@ slug: howto_gettheswipetarget_hybridui
 
 The example below demonstrates how to save the reference of the swiped element in `touchStart` and then use it in the `swipe` handler.
 
-###### Example
+
 
 ```dojo
     <title>Kendo UI Snippet</title>
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2016.2.607/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2016.2.607/js/kendo.all.min.js"></script>
 
     <div id="grid"></div>
    <script>

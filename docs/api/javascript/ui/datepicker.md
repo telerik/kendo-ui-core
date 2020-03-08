@@ -103,7 +103,7 @@ The duration of the open animation in milliseconds.
 
 ### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar.
 
 #### Example
 
@@ -124,10 +124,10 @@ The duration of the open animation in milliseconds.
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <input id="datepicker" />
@@ -152,7 +152,7 @@ The duration of the open animation in milliseconds.
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/datepicker#configuration-month.content).
+Specifies a list of dates, which will be passed to the [month content](/api/javascript/ui/datepicker/configuration/month#monthcontent).
 
 #### Example - specify a list of dates
 
@@ -262,7 +262,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 > This functionality was added with the Q1 release of 2016.
 
-### footer `String|Function`
+### footer `String|Function|Boolean`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
@@ -414,6 +414,110 @@ The template used for rendering cells in the "month" view, which are outside the
         }
     });
     </script>
+
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="datepicker" />
+    </div>
+    <script>
+    $("#datepicker").kendoDatePicker({
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="datepicker" />
+    </div>
+    <script>
+    $("#datepicker").kendoDatePicker({
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on anchor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+
+    <div id="container">
+        <input id="datepicker" />
+    </div>
+    <script>
+    $("#datepicker").kendoDatePicker({
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+
+    <div id="container">
+        <input id="datepicker" />
+    </div>
+    <script>
+    $("#datepicker").kendoDatePicker({
+      popup: {
+        position: "top center"
+      }
+    });
+    </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
 ### weekNumber `Boolean` *(default: false)*
 

@@ -10,8 +10,6 @@ slug: howto_use_multiselect_with_bootstrap_modal_window_multiselect
 
 The following example demonstrates how to use the Kendo UI MultiSelect widget with a Bootstrap modal window and bind values.
 
-###### Example
-
 ```dojo
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -110,7 +108,6 @@ The following example demonstrates how to use the Kendo UI MultiSelect widget wi
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
-* [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
 

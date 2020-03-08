@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"/", "index"}, method = RequestMethod.GET)
         public String index() {
@@ -33,7 +33,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 **Step 3** Create a new action method to return the data as JSON.
 
-###### Example
+
 
         @RequestMapping(value = "/read", method = RequestMethod.POST)
         public @ResponseBody List<DiagramNode> read() {
@@ -42,7 +42,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 **Step 4** In the view, configure the Diagram to use the action method created in the previous steps.
 
-###### Example
+
 
         <c:url value="/read" var="readUrl" />
         <kendo:diagram name="diagram">
@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 You can subscribe to all [events exposed by Kendo UI Diagram](/api/javascript/dataviz/ui/diagram#events) by the handler name.
 
-###### Example
+
 
         <%= Html.Kendo().Diagram()
                 .Name("diagram")
@@ -90,9 +90,9 @@ You can subscribe to all [events exposed by Kendo UI Diagram](/api/javascript/da
 
 ### Existing Instances
 
-You are able to reference an existing Diagram instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
+You are able to reference an existing Diagram instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
-###### Example
+
 
         // Put this after your Kendo Diagram tag
         <script>

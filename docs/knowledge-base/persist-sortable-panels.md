@@ -2,7 +2,7 @@
 title: Persist Sortable Panels
 description: An example on how to persist the order of panels in the Kendo UI Sortable widget.
 type: how-to
-page_title: Persist the Same Rendering of Panels | Kendo UI Sortable
+page_title: Persist the Same Rendering of Panels | Kendo UI Sortable for jQuery
 slug: persist-sortable-panels
 tags: sortable, panels, persist, order, state
 res_type: kb
@@ -145,4 +145,4 @@ Keep the DOM for the panels in the web storage.
     </script>
 ````
 
-For the complete implementation of this approach, refer to [this runnable example](http://dojo.telerik.com/ixono/7).
+For the complete implementation of this approach, refer to [this runnable example](https://dojo.telerik.com/ixono/7).

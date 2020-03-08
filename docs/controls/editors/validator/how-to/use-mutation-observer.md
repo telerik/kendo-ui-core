@@ -12,8 +12,6 @@ Your project might require you to hide the validation tooltip and add borders ar
 
 The following example demonstrates how to achieve this behavior by using a `MutationObserver`.
 
-###### Example
-
 ```dojo
     <style scoped>
       /*hide validation message*/
@@ -137,8 +135,6 @@ The following example demonstrates how to achieve this behavior by using a `Muta
         </form>
       </div>
 
-
-
       <script>
         $(document).ready(function() {
           var data = [
@@ -228,9 +224,5 @@ The following example demonstrates how to achieve this behavior by using a `Muta
 
 ## See Also
 
-* [Validator JavaScript API Reference](/api/javascript/ui/validator)
-* [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
-* [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
-* [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
-
-For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).
+* [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
+* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)

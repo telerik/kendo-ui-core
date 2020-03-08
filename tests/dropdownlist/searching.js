@@ -87,6 +87,20 @@
             assert.equal(dropdownlist.selectedIndex, 1);
         });
 
+        it("search method supports a case insensitive search", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: {
+                    data: ["KIN", "KAŞ"],
+                    accentFoldingFiltering: "tr-TR"
+                },
+                ignoreCase: true
+            });
+            input.press("k");
+            input.press("ı");
+
+            assert.equal(dropdownlist.selectedIndex, 1);
+        });
+
         it("selects next item if starts with same character", function() {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["text1", "text2", "text3"]
@@ -694,7 +708,7 @@
             dropdownlist.popup.one("open", function() {
                 assert.isOk(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
                 dropdownlist.close();
-                
+
                 dropdownlist.popup.one("activate", function() {
                     assert.isOk(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
                     done();
@@ -727,6 +741,55 @@
             dropdownlist.close();
             dropdownlist.open();
             assert.closeTo(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
+        });
+
+        it("enabled autoWidth disables X scrolling", function() {
+            var dropdownlist = new DropDownList(input, {
+                autoWidth: true,
+                animation:{
+                    open: {
+                        duration:0
+                    },
+                    close: {
+                        duration:0
+                    },
+                },
+                dataSource: {
+                    data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+
+                }
+            });
+
+            dropdownlist.open();
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto")
+        });
+
+        it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
+            var dropdownlist = new DropDownList(input, {
+                autoWidth: true,
+                animation:{
+                    open: {
+                        duration:0
+                    },
+                    close: {
+                        duration:0
+                    },
+                },
+                dataSource: {
+                    data: [
+                        "Short item",
+                        "An item with really, really, really, really, really, really, really, really, really, long text",
+                        "Short item",
+                        "Short item",
+                        "Short item",
+                        "Short item",
+                        "Short item"
+                    ]
+                }
+            });
+
+            dropdownlist.open();
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden scroll")
         });
 
         it("removes filtering expression if field matches the dataTextField", function() {

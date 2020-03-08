@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 2** Create a new action method and pass the `InternetUsers` list as the model.
 
-###### Example
+
 
     	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	    public String index(Model model) {
@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 **Step 3** Add a server-bound chart.
 
-###### Example
+
 
 		<kendo:chart name="chart">
 			 <kendo:dataSource data="${viewModel}" />
@@ -51,7 +51,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Chart
 
 You can subscribe to all [events exposed by Kendo UI Chart](/api/javascript/dataviz/ui/chart#events) by the handler name.
 
-###### Example
+
 
 	<kendo:chart name="chart" dataBound="internetUsersChart_dataBound"
 							  seriesClick="internetUsersChart_seriesClick">
@@ -80,9 +80,9 @@ You can subscribe to all [events exposed by Kendo UI Chart](/api/javascript/data
 
 ### Existing Instances
 
-You are able to reference an existing Chart instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
+You are able to reference an existing Chart instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Chart API](/api/javascript/dataviz/ui/chart#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo StockChart tag
     <script>

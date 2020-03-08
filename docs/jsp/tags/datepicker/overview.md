@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `datepicker` tag.
 
-###### Example
+
 
         <kendo:datePicker name="datepicker" value="<%= new java.util.Date() %>">
         </kendo:datePicker>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateP
 
 You can subscribe to all [events exposed by Kendo UI DatePicker](/api/javascript/ui/datepicker#events) by the handler name.
 
-###### Example
+
 
         <kendo:datePicker name="datepicker" change="datepicker_change"></kendo:datePicker>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI DatePicker](/api/javascript
 
 ### Existing Instances
 
-You are able to reference an existing DatePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DatePicker API](/api/javascript/ui/datepicker#methods) to control its behavior.
+You are able to reference an existing DatePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DatePicker API](/api/javascript/ui/datepicker#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo DatePicker tag declaration
         <script>

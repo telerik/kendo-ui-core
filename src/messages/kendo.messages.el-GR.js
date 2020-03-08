@@ -53,7 +53,7 @@
         "justifyCenter": "Στοίχιση Κέντρο",
         "justifyLeft": "Στοίχιση Αριστερά",
         "justifyRight": "Στοίχιση Δεξιά",
-        "justifyFull": "Justify",
+        "justifyFull": "Ισάζω",
         "insertUnorderedList": "Τοποθετήστε μη διατεταγμένη λίστα",
         "insertOrderedList": "Τοποθετήστε διατεταγμένη λίστα",
         "indent": "Εσοχή",
@@ -447,9 +447,9 @@
     kendo.ui.TreeListPager.prototype.options.messages =
       $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
         "allPages": "Όλα",
+        "page": "Σελίδα",
         "display": "{0} - {1} από {2} αντικείμενα",
         "empty": "Δεν υπάρχουν αντικείμενα",
-        "page": "Σελίδα",
         "of": "από {0}",
         "itemsPerPage": "αντικείμενα ανα σελίδα",
         "first": "Πηγαίντε στην πρώτη σελίδα",
@@ -838,7 +838,7 @@
           "justtifyLeft": "Ευθυγράμμιση Αριστερά",
           "justifyCenter": "Κέντρο",
           "justifyRight": "Ευθυγράμμιση Δεξιά",
-          "justifyFull": "Justify",
+          "justifyFull": "Ισάζω",
           "alignTop": "Ευθυγράμμιση Πάνω",
           "alignMiddle": "Ευθυγράμμιση Μέση",
           "alignBottom": "Ευθυγράμμιση Κάτω"

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
 **Step 2** Create a [DateTimePicker](/api/javascript/ui/datetimepicker).
 
-###### Example
+
 
         <?php
         $datetimepicker = new \Kendo\UI\DateTimePicker('datetimepicker');
@@ -37,7 +37,7 @@ You can subscribe to all DateTimePicker [events](/api/javascript/ui/datetimepick
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $datetimepicker = new \Kendo\UI\DateTimePicker('datetimepicker');
@@ -57,7 +57,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $datetimepicker = new \Kendo\UI\DateTimePicker('datetimepicker');
@@ -73,9 +73,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing DateTimePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DateTimePicker API](/api/javascript/ui/datetimepicker#methods) to control its behavior.
+You are able to reference an existing DateTimePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [DateTimePicker API](/api/javascript/ui/datetimepicker#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $datetimepicker = new \Kendo\UI\DateTimePicker('datetimepicker');

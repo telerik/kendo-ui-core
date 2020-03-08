@@ -34,7 +34,81 @@ var __meta__ = { // jshint ignore:line
         UNDEFINED = "undefined",
         getterCache = {},
         setterCache = {},
-        slice = [].slice;
+        slice = [].slice,
+        // avoid extending the depricated properties in latest verions of jQuery
+        noDepricateExtend = function() {
+            var src, copyIsArray, copy, name, options, clone,
+                target = arguments[ 0 ] || {},
+                i = 1,
+                length = arguments.length,
+                deep = false;
+
+            // Handle a deep copy situation
+            if ( typeof target === "boolean" ) {
+                deep = target;
+
+                // skip the boolean and the target
+                target = arguments[ i ] || {};
+                i++;
+            }
+
+            // Handle case when target is a string or something (possible in deep copy)
+            if ( typeof target !== "object" && !jQuery.isFunction( target ) ) {
+                target = {};
+            }
+
+            // extend jQuery itself if only one argument is passed
+            if ( i === length ) {
+                target = this;
+                i--;
+            }
+
+            for ( ; i < length; i++ ) {
+
+                // Only deal with non-null/undefined values
+                if ( ( options = arguments[ i ] ) != null ) {
+
+                    // Extend the base object
+                    for ( name in options ) {
+                        // filters, concat and : properties are depricated in the jQuery 3.3.0
+                        // accessing these properties throw a warning when jQuery migrate is included
+                        if (name == "filters" || name == "concat" || name == ":") {
+                            continue;
+                        }
+                        src = target[ name ];
+                        copy = options[ name ];
+
+                        // Prevent never-ending loop
+                        if ( target === copy ) {
+                            continue;
+                        }
+
+                        // Recurse if we're merging plain objects or arrays
+                        if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
+                            ( copyIsArray = jQuery.isArray( copy ) ) ) ) {
+
+                            if ( copyIsArray ) {
+                                copyIsArray = false;
+                                clone = src && jQuery.isArray( src ) ? src : [];
+
+                            } else {
+                                clone = src && jQuery.isPlainObject( src ) ? src : {};
+                            }
+
+                            // Never move original objects, clone them
+                            target[ name ] = noDepricateExtend( deep, clone, copy );
+
+                        // Don't bring in undefined values
+                        } else if ( copy !== undefined ) {
+                            target[ name ] = copy;
+                        }
+                    }
+                }
+            }
+
+            // Return the modified object
+            return target;
+        };
 
     kendo.version = "$KENDO_VERSION".replace(/^\s+|\s+$/g, '');
 
@@ -1663,9 +1737,13 @@ function pad(number, digits, end) {
         var browser = support.browser,
             percentage,
             outerWidth = kendo._outerWidth,
-            outerHeight = kendo._outerHeight;
+            outerHeight = kendo._outerHeight,
+            parent = element.parent(),
+            windowOuterWidth = outerWidth(window);
 
-        if (!element.parent().hasClass("k-animation-container")) {
+        parent.removeClass("k-animation-container-sm");
+
+        if (!parent.hasClass("k-animation-container")) {
             var width = element[0].style.width,
                 height = element[0].style.height,
                 percentWidth = percentRegExp.test(width),
@@ -1675,7 +1753,7 @@ function pad(number, digits, end) {
             percentage = percentWidth || percentHeight;
 
             if (!percentWidth && (!autosize || (autosize && width) || forceWidth)) { width = autosize ? outerWidth(element) + 1 : outerWidth(element); }
-            if (!percentHeight && (!autosize || (autosize && height))) { height = outerHeight(element); }
+            if (!percentHeight && (!autosize || (autosize && height)) || element.is(".k-menu-horizontal.k-context-menu")) { height = outerHeight(element); }
 
             element.wrap(
                          $("<div/>")
@@ -1684,6 +1762,7 @@ function pad(number, digits, end) {
                              width: width,
                              height: height
                          }));
+            parent = element.parent();
 
             if (percentage) {
                 element.css({
@@ -1695,27 +1774,13 @@ function pad(number, digits, end) {
                 });
             }
         } else {
-            var wrapper = element.parent(".k-animation-container"),
-                wrapperStyle = wrapper[0].style;
+            wrapResize(element, autosize);
+        }
 
-            if (wrapper.is(":hidden")) {
-                wrapper.css({
-                    display: "",
-                    position: ""
-                });
-            }
+        if(windowOuterWidth < outerWidth(parent)){
+            parent.addClass("k-animation-container-sm");
 
-            percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
-
-            if (!percentage) {
-                wrapper.css({
-                    width: autosize ? outerWidth(element) + 1 : outerWidth(element),
-                    height: outerHeight(element),
-                    boxSizing: "content-box",
-                    mozBoxSizing: "content-box",
-                    webkitBoxSizing: "content-box"
-                });
-            }
+            wrapResize(element, autosize);
         }
 
         if (browser.msie && math.floor(browser.version) <= 7) {
@@ -1723,7 +1788,34 @@ function pad(number, digits, end) {
             element.children(".k-menu").width(element.width());
         }
 
-        return element.parent();
+        return parent;
+    }
+
+    function wrapResize(element, autosize) {
+        var percentage,
+            outerWidth = kendo._outerWidth,
+            outerHeight = kendo._outerHeight,
+            wrapper = element.parent(".k-animation-container"),
+            wrapperStyle = wrapper[0].style;
+
+        if (wrapper.is(":hidden")) {
+            wrapper.css({
+                display: "",
+                position: ""
+            });
+        }
+
+        percentage = percentRegExp.test(wrapperStyle.width) || percentRegExp.test(wrapperStyle.height);
+
+        if (!percentage) {
+            wrapper.css({
+                width: autosize ? outerWidth(element) + 1 : outerWidth(element),
+                height: outerHeight(element),
+                boxSizing: "content-box",
+                mozBoxSizing: "content-box",
+                webkitBoxSizing: "content-box"
+            });
+        }
     }
 
     function deepExtend(destination) {
@@ -1760,7 +1852,8 @@ function pad(number, digits, end) {
 
             if (propInit &&
                 propInit !== Array && propInit !== ObservableArray && propInit !== LazyObservableArray &&
-                propInit !== DataSource && propInit !== HierarchicalDataSource && propInit !== RegExp) {
+                propInit !== DataSource && propInit !== HierarchicalDataSource && propInit !== RegExp &&
+                (!kendo.isFunction(window.ArrayBuffer) || propInit !== ArrayBuffer)) {
 
                 if (propValue instanceof Date) {
                     destination[property] = new Date(propValue.getTime());
@@ -2253,9 +2346,11 @@ function pad(number, digits, end) {
         support.customElements = ("registerElement" in window.document);
 
         var chrome = support.browser.chrome,
-            mozilla = support.browser.mozilla;
+            mobileChrome = support.browser.crios,
+            mozilla = support.browser.mozilla,
+            safari = support.browser.safari;
         support.msPointers = !chrome && window.MSPointerEvent;
-        support.pointers = !chrome && !mozilla && window.PointerEvent;
+        support.pointers = !chrome && !mobileChrome && !mozilla && !safari && window.PointerEvent;
         support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
     })();
 
@@ -2462,6 +2557,23 @@ function pad(number, digits, end) {
         return ("" + value).replace(ampRegExp, "&amp;").replace(ltRegExp, "&lt;").replace(gtRegExp, "&gt;").replace(quoteRegExp, "&quot;").replace(aposRegExp, "&#39;");
     }
 
+    function unescape(value) {
+        var template;
+
+        try {
+            template = window.decodeURIComponent(value);
+        } catch(error) {
+            // If the string contains Unicode characters
+            // the decodeURIComponent() will throw an error.
+            // Therefore: convert to UTF-8 character
+            template = value.replace(/%u([\dA-F]{4})|%([\dA-F]{2})/gi, function(_, m1, m2) {
+                return String.fromCharCode(parseInt("0x" + (m1 || m2), 16));
+            });
+        }
+
+        return template;
+    }
+
     var eventTarget = function (e) {
         return e.target;
     };
@@ -2611,6 +2723,7 @@ function pad(number, digits, end) {
         stringify: proxy(JSON.stringify, JSON),
         eventTarget: eventTarget,
         htmlEncode: htmlEncode,
+        unescape: unescape,
         isLocalUrl: function(url) {
             return url && !localUrlRe.test(url);
         },
@@ -2780,6 +2893,9 @@ function pad(number, digits, end) {
                 e = that.events[idx];
                 if (that.options[e] && options[e]) {
                     that.unbind(e, that.options[e]);
+                    if (that._events && that._events[e]) {
+                        delete that._events[e];
+                    }
                 }
             }
 
@@ -2900,14 +3016,15 @@ function pad(number, digits, end) {
     function parseOptions(element, options, source) {
         var result = {},
             option,
-            value;
+            value,
+            role = element.getAttribute("data-" + kendo.ns + "role");
 
         for (option in options) {
             value = parseOption(element, option);
 
             if (value !== undefined) {
 
-                if (templateRegExp.test(option)) {
+                if (templateRegExp.test(option) && role != "drawer") {
                     if(typeof value === "string") {
                         if($("#" + value).length){
                             value = kendo.template($("#" + value).html());
@@ -3062,7 +3179,7 @@ function pad(number, digits, end) {
 
     function resizableWidget() {
         var widget = $(this);
-        return ($.inArray(widget.attr("data-" + kendo.ns + "role"), ["slider", "rangeslider"]) > -1) || widget.is(":visible");
+        return ($.inArray(widget.attr("data-" + kendo.ns + "role"), ["slider", "rangeslider", "breadcrumb"]) > -1) || widget.is(":visible");
     }
 
     kendo.resize = function(element, force) {
@@ -3290,7 +3407,8 @@ function pad(number, digits, end) {
 
     kendo.widgetInstance = function(element, suites) {
         var role = element.data(kendo.ns + "role"),
-            widgets = [], i, length;
+            widgets = [], i, length,
+            elementData = element.data("kendoView");
 
         if (role) {
             // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
@@ -3305,6 +3423,12 @@ function pad(number, digits, end) {
                 if (editorToolbar) {
                     return editorToolbar;
                 }
+            }
+
+            // kendo.View is not a ui plugin
+
+            if (role === "view" && elementData) {
+                return elementData;
             }
 
             if (suites) {
@@ -3377,13 +3501,13 @@ function pad(number, digits, end) {
     }
 
     function visible(element) {
-        return $.expr.filters.visible(element) &&
+        return $.expr.pseudos.visible(element) &&
             !$(element).parents().addBack().filter(function() {
                 return $.css(this,"visibility") === "hidden";
             }).length;
     }
 
-    $.extend($.expr[ ":" ], {
+    $.extend($.expr.pseudos, {
         kendoFocusable: function(element) {
             var idx = $.attr(element, "tabindex");
             return focusable(element, !isNaN(idx) && idx > -1);
@@ -3516,13 +3640,30 @@ function pad(number, digits, end) {
         return events;
     };
 
+    kendo.keyDownHandler = function(e, widget) {
+        var events = widget._events.kendoKeydown;
+
+        if(!events){
+            return true;
+        }
+
+        events = events.slice();
+        e.sender = widget;
+        e.preventKendoKeydown = false;
+        for (var idx = 0, length = events.length; idx < length; idx++) {
+            events[idx].call(widget, e);
+        }
+
+        return !e.preventKendoKeydown;
+    };
+
     var on = $.fn.on;
 
     function kendoJQuery(selector, context) {
         return new kendoJQuery.fn.init(selector, context);
     }
 
-    extend(true, kendoJQuery, $);
+    noDepricateExtend(true, kendoJQuery, $);
 
     kendoJQuery.fn = kendoJQuery.prototype = new $();
 
@@ -3586,6 +3727,19 @@ function pad(number, digits, end) {
                     {
                         bustClick: bustClick
                     });
+            }
+
+            if(arguments[0].indexOf("keydown") !== -1 && args[1] && args[1].options){
+                args[0] = events;
+                var widget = args[1];
+                var keyDownCallBack = args[args.length - 1];
+                args[args.length - 1]= function(e){
+                    if(kendo.keyDownHandler(e, widget)){
+                       return keyDownCallBack.apply(this, [e]);
+                    }
+                };
+                on.apply(that, args);
+                return that;
             }
 
             if (typeof callback === STRING) {
@@ -3655,6 +3809,13 @@ function pad(number, digits, end) {
                 ourDay = date.getUTCDay();
 
                 date.setUTCDate(date.getUTCDate() + targetDay - ourDay + (targetDay < ourDay ? 7 : 0));
+            } else if (on.indexOf("<=") >= 0) {
+                date = new Date(Date.UTC(year, months[month], on.substr(5), time[0], time[1], time[2], 0));
+
+                targetDay = days[on.substr(0, 3)];
+                ourDay = date.getUTCDay();
+
+                date.setUTCDate(date.getUTCDate() + targetDay - ourDay - (targetDay > ourDay ? 7 : 0));
             }
 
             return cache[year] = date;
@@ -3992,7 +4153,7 @@ function pad(number, digits, end) {
         }
 
         function setHours(date, time) {
-            date = new Date(kendo.date.getDate(date).getTime() + kendo.date.getMilliseconds(time));
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds(), time.getMilliseconds());
             adjustDST(date, time.getHours());
             return date;
         }
@@ -4332,6 +4493,18 @@ function pad(number, digits, end) {
         });
     };
 
+    kendo.focusNextElement = function () {
+        if (document.activeElement) {
+            var focussable = $(":kendoFocusable");
+            var index = focussable.index(document.activeElement);
+
+            if(index > -1) {
+               var nextElement = focussable[index + 1] || focussable[0];
+               nextElement.focus();
+            }
+        }
+    };
+
     kendo.matchesMedia = function(mediaQuery) {
         var media = kendo._bootstrapToMedia(mediaQuery) || mediaQuery;
         return support.matchMedia && window.matchMedia(media).matches;
@@ -4345,6 +4518,55 @@ function pad(number, digits, end) {
             "lg": "(min-width: 992px)",
             "xl": "(min-width: 1200px)"
         }[bootstrapMedia];
+    };
+
+    kendo.fileGroupMap = {
+        audio: [".aif", ".iff", ".m3u", ".m4a", ".mid", ".mp3", ".mpa", ".wav", ".wma", ".ogg", ".wav", ".wma", ".wpl"],
+        video: [".3g2", ".3gp", ".avi", ".asf", ".flv", ".m4u", ".rm", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg",
+                ".rm", ".swf", ".vob", ".wmv"],
+        image: [".ai", ".dds", ".heic", ".jpe", "jfif", ".jif", ".jp2", ".jps", ".eps", ".bmp", ".gif", ".jpeg",
+                ".jpg", ".png", ".ps", ".psd", ".svg", ".svgz", ".tif", ".tiff"],
+        txt: [".doc", ".docx", ".log", ".pages", ".tex", ".wpd", ".wps", ".odt", ".rtf", ".text", ".txt", ".wks"],
+        presentation: [".key", ".odp", ".pps", ".ppt", ".pptx"],
+        data: [".xlr", ".xls", ".xlsx"],
+        programming: [".tmp", ".bak", ".msi", ".cab", ".cpl", ".cur", ".dll", ".dmp", ".drv", ".icns", ".ico", ".link",
+                      ".sys", ".cfg", ".ini", ".asp", ".aspx", ".cer", ".csr", ".css", ".dcr", ".htm", ".html", ".js",
+                      ".php", ".rss", ".xhtml"],
+        pdf: [".pdf"],
+        config: [".apk", ".app", ".bat", ".cgi", ".com", ".exe", ".gadget", ".jar", ".wsf"],
+        zip: [".7z", ".cbr", ".gz", ".sitx", ".arj", ".deb", ".pkg", ".rar", ".rpm", ".tar.gz", ".z", ".zip", ".zipx"],
+        "disc-image": [".dmg", ".iso", ".toast", ".vcd", ".bin", ".cue", ".mdf"]
+    };
+
+    kendo.getFileGroup = function(extension, withPrefix) {
+        var fileTypeMap = kendo.fileGroupMap;
+        var groups = Object.keys(fileTypeMap);
+        var type = "file";
+
+        if (extension === undefined || !extension.length) {
+            return type;
+        }
+
+        for (var i = 0; i < groups.length; i += 1) {
+            var extensions = fileTypeMap[groups[i]];
+
+            if (extensions.indexOf(extension.toLowerCase()) > -1) {
+               return withPrefix ? "file-" + groups[i] : groups[i];
+            }
+        }
+
+        return type;
+    };
+
+    kendo.getFileSizeMessage = function(size) {
+        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+
+        if (size === 0) {
+            return '0 Byte';
+        }
+
+        var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)), 10);
+        return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
     };
 
     // kendo.saveAs -----------------------------------------------

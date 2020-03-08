@@ -10,8 +10,6 @@ slug: howto_updateoppositepickervalue_onmodelchange_scheduler
 
 The following example demonstrates how to update the opposite start/end picker value on model change in a Kendo UI Scheduler widget.
 
-###### Example
-
 ```dojo
 <div id="scheduler"></div>
 <script>
@@ -27,7 +25,7 @@ The following example demonstrates how to update the opposite start/end picker v
         var endInputs = editContainer.find("[data-container-for=end]").find("input");
 
         /*
-			// Update model by using the last values of the widget
+			// Update the model by using the last values of the widget.
 			if (e.field === "start" || e.field === "end") {
 				startInputs.add(endInputs).each(function() {
 					var element = $(this);
@@ -38,7 +36,7 @@ The following example demonstrates how to update the opposite start/end picker v
 			}
 		 */
 
-        // Move the end date on start update
+        // Move the end date on start update.
         if (e.field === "start") {
             var date = new Date(event.start);
             date.setMinutes(date.getMinutes() + 30);
@@ -185,18 +183,6 @@ The following example demonstrates how to update the opposite start/end picker v
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
-* [How to Export to iCal]({% slug howto_exportto_ical_scheduler %})
-* [How to Hide Header and Footer in Adaptive Rendering]({% slug howto_hideheaderandfooter_inadaptiverebdering_scheduler %})
-* [How to Show Only All-Day Events]({% slug howto_showonlyalldayevents_scheduler %})
-* [How to Set Slot Background Color Using Slot Templates]({% slug howto_setslotbackgroundcolor_usingslottemplates_scheduler %})
-* [How to Show Tooltip with Additional Information over Scheduler Events]({% slug howto_showtooltipwith_additionalinformation_overevents_scheduler %})
-* [How to Use Different Date Formats]({% slug howto_usedifferentdateformats_scheduler %})
-* [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
-* [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
-* [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

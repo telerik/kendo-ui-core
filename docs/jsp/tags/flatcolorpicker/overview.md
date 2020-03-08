@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `flatcolorpicker` tag.
 
-###### Example
+
 
         <kendo:flatColorPicker name="flatcolorpicker" value="#ff0000">
         </kendo:flatColorPicker>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 You can subscribe to all [events exposed by Kendo UI FlatColorPicker](/api/javascript/ui/flatcolorpicker#events) by the handler name.
 
-###### Example
+
 
     <kendo:flatColorPicker name="flatcolorpicker" change="flatcolorpicker_change"></kendo:flatColorPicker>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI FlatColorPicker](/api/javas
 
 ### Existing Instances
 
-You are able to reference an existing FlatColorPicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [FlatColorPicker API](/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
+You are able to reference an existing FlatColorPicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [FlatColorPicker API](/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo FlatColorPicker tag declaration
     <script>

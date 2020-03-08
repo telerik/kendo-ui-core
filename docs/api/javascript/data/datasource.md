@@ -18,7 +18,8 @@ See the [DataSource Overview](/framework/datasource/overview) and [Basic Usage](
 
 It allows the filtering operation to be performed considering the diacritic characters for specific language.
 
-> Since these characters are strictly specific for a given language setting the appropriate culture should be set as a value. For example "tr-TR" for Turkish, "es-ES for Spanish or "fr-FR" for French language.
+> * Since these characters are strictly specific for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
+> * Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix English and Turkish in the data, you may observe unexpected behavior.
 
 Introduced in the Kendo UI 2019 R1 SP1 (2019.1.220) release.
 
@@ -420,7 +421,7 @@ The supported operators are:
 * `"isempty"`
 * `"isnotempty"`
 
-The last five are supported only for string fields.
+The last eight are supported only for string fields.
 
 #### Example - set the filter operator
 
@@ -909,7 +910,7 @@ The aggregate results should have the following format:
     var dataSource = new kendo.data.DataSource({
       transport: {
         /* transport configuration */
-      }
+      },
       serverAggregates: true,
       schema: {
         aggregates: "aggregates" // aggregate results are returned in the "aggregates" field of the response
@@ -1135,7 +1136,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
               validation: { required: true }
             },
             UnitPrice: {
-              //data type of the field {Number|String|Boolean|Date} default is String
+              //data type of the field {number|string|boolean|date} default is string
               type: "number",
               // used when new model is created
               defaultValue: 42,
@@ -1164,7 +1165,7 @@ If set to an existing [`kendo.data.Model`](/api/javascript/data/model) instance,
           validation: { required: true }
         },
         UnitPrice: {
-          //data type of the field {Number|String|Boolean|Date} default is String
+          //data type of the field {number|string|boolean|date} default is string
           type: "number",
           // used when new model is created
           defaultValue: 42,

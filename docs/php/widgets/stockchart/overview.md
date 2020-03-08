@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 2** Create an array to which the [StockChart](/api/php/Kendo/Dataviz/UI/StockChart) will be bound to.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 3** Create the [`dataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 4** Create a [StockChart](/api/php/Kendo/Dataviz/UI/StockChart) and configure it.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\StockChart('stock-chart');
@@ -70,7 +70,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 5** Output the StockChart by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php echo $chart->render(); ?>
 
@@ -82,7 +82,7 @@ You can subscribe to all StockChart [events](/api/javascript/dataviz/ui/stock-ch
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\StockChart('stock-chart');
@@ -102,7 +102,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\StockChart('stock-chart');
@@ -118,9 +118,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing StockChart instance through the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+You are able to reference an existing StockChart instance through the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
-###### Example
+
 
           // Put this after your Kendo UI StockChart for PHP render() call
           <script>

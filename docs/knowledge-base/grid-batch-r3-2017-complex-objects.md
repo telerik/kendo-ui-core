@@ -2,7 +2,7 @@
 title: Editing Complex Objects in Grid Is Broken in 2017.3.913
 description: The Kendo UI Grid throws an error while editing a column which is bound to a nested property in the R3 2017 (2017.3.913 version) release.
 type: troubleshooting
-page_title: Editing Complex Objects with Batch Edit Mode Throws an Error in the R3 2017 Release | Kendo UI Grid
+page_title: Editing Complex Objects with Batch Edit Mode Throws an Error in the R3 2017 Release | Kendo UI Grid for jQuery
 slug: grid-batch-r3-2017-complex-objects
 res_type: kb
 ---
@@ -50,4 +50,4 @@ kendo.ui.Grid.fn._dirtyIndicatorTemplate = function(field, paramName) {
 }
 ```
 
-For the complete implementation, refer to [this Dojo example](http://dojo.telerik.com/aFEjIN).
+For the complete implementation, refer to [this Dojo example](https://dojo.telerik.com/aFEjIN).

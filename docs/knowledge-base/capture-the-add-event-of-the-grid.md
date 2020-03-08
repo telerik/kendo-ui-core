@@ -1,8 +1,8 @@
 ---
 title: Capture the Event for Adding New Rows
+page_title: Capture the add Event | Kendo UI Grid for jQuery
 description: An example on how to capture the add event of the Kendo UI Grid.
 type: how-to
-page_title: Capture the add Event | Kendo UI Grid
 slug: how-to-capture-the-add-event-of-the-grid
 previous_url: /knowledge-base/how-to-capture-the-add-event-of-the-grid
 tags: add, event, grid
@@ -100,7 +100,7 @@ Attach an event handler for the **Add New Row** button to the `dataBound` event 
             navigatable: true,
             dataBound:function(e){
               $('.k-grid-add').unbind("click");
-              
+
               $('.k-grid-add').bind("click", function(){
                 console.log("Handle the add button click")
               });

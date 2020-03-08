@@ -22,56 +22,58 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 
 |Component |508|WCAG 2.1|Demo
 |:---          |:---|:---  |:---
-|AutoComplete  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/autocomplete/index)
-|BarCode	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/barcode/index)
-|Button 	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/button/index)
-|ButtonGroup   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/buttongroup/index)
-|Calendar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/calendar/index)
-|Charts        |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/chart-api/index)
-|Chat          |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/chat/index)
-|ComboBox      |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/combobox/index)
-|ColorPicker   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/colorpicker/index)
-|DateInput	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/dateinput/index)
-|DatePicker	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/datepicker/index)
-|DateTimePicker|Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/datetimepicker/index)
-|Diagram	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/diagram/index)
-|Dialog	       |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/dialog/index)
-|DropDownList  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/dropdownlist/index)
-|DropDownTree  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/dropdowntree/index)
-|Editor        |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/editor/index)
-|Gantt         |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/gantt/index)
-|Grid          |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/grid/index)
-|LinearGauge   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/linear-gauge/index)
-|ListBox       |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/listbox/index)
-|ListView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/listview/index)
-|Map	       |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/map/index)
-|MaskedTextbox |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/maskedtextbox/index)
-|Menu          |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/menu/index)
-|MediaPlayer   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/mediaplayer/index)
-|MultiSelect   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/multiselect/index)
-|Notification  |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/notification/index)
-|NumericTextbox|Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/numerictextbox/index)
-|PanelBar	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/panelbar/index)
-|PivotGrid	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/pivotgrid/index)
-|QRCode	   	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/qrcode/index)
-|RadialGauge   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/radial-gauge/index)
-|RadioButton   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/styling/radios)
-|Responsive Panel |Yes |AA |[Browse](http://demos.telerik.com/kendo-ui/responsive-panel/index)
-|ScrollView	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/scrollview/index)
-|Scheduler	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/scheduler/index)
-|Slider	       |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/slider/index)
-|Sortable	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/sortable/index)
-|Splitter      |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/splitter/index)
+|AutoComplete  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/autocomplete/index)
+|BarCode	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/barcode/index)
+|Breadcrumb	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/breadcrumb/index)
+|Button 	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/button/index)
+|ButtonGroup   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/buttongroup/index)
+|Calendar	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/calendar/index)
+|Charts        |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/chart-api/index)
+|Chat          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/chat/index)
+|ComboBox      |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/combobox/index)
+|ColorPicker   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/colorpicker/index)
+|DateInput	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/dateinput/index)
+|DatePicker	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/datepicker/index)
+|DateTimePicker|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/datetimepicker/index)
+|Diagram	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/diagram/index)
+|Dialog	       |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dialog/index)
+|DropDownList  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdownlist/index)
+|DropDownTree  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdowntree/index)
+|Editor        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/editor/index)
+|FileManager   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/filemanager/index)
+|Gantt         |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/gantt/index)
+|Grid          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/grid/index)
+|LinearGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/linear-gauge/index)
+|ListBox       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/listbox/index)
+|ListView	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/listview/index)
+|Map	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/map/index)
+|MaskedTextbox |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
+|Menu          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/menu/index)
+|MediaPlayer   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/mediaplayer/index)
+|MultiSelect   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/multiselect/index)
+|Notification  |No  |-   |[Browse](https://demos.telerik.com/kendo-ui/notification/index)
+|NumericTextbox|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/numerictextbox/index)
+|PanelBar	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/panelbar/index)
+|PivotGrid	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/pivotgrid/index)
+|QRCode	   	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/qrcode/index)
+|RadialGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/radial-gauge/index)
+|RadioButton   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/styling/radios)
+|Responsive Panel |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/responsive-panel/index)
+|ScrollView	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/scrollview/index)
+|Scheduler	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/scheduler/index)
+|Slider	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/slider/index)
+|Sortable	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/sortable/index)
+|Splitter      |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/splitter/index)
 |Spreadsheet   |No  |-   |
-|Switch        |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/switch/index)
-|TabStrip	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/tabstrip/index)
-|TimePicker	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/timepicker/index)
-|ToolBar	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/toolbar/index)
-|Tooltip	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/tooltip/index)
-|TreeList	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/treelist/index)
-|TreeView	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/treeview/index)
-|Upload 	   |Yes |AA  |[Browse](http://demos.telerik.com/kendo-ui/upload/index)
-|Window 	   |Yes |AAA |[Browse](http://demos.telerik.com/kendo-ui/window/index)
+|Switch        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/switch/index)
+|TabStrip	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/tabstrip/index)
+|TimePicker	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/timepicker/index)
+|ToolBar	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/toolbar/index)
+|Tooltip	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/tooltip/index)
+|TreeList	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/treelist/index)
+|TreeView	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/treeview/index)
+|Upload 	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/upload/index)
+|Window 	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/window/index)
 
 ## Special Considerations
 
@@ -81,11 +83,7 @@ Several Kendo UI widgets feature complex rendering which affects their accessibi
 
 Widgets, such as the ComboBox, MultiSelect, and NumericTextBox, hide their initial `input` or `select` element which breaks the [`label.for`](https://developer.mozilla.org/en/docs/Web/HTML/Element/label#attr-for) focus functionality on click. In general, the browser cannot focus hidden elements. This results in the inability of the `label` element to focus the corresponding widget.
 
-**Solution**
-
-Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus. Instead, use the `aria-labelledby` attribute on the input to point to its wrapping `label` element:
-
-###### Example
+**Solution** Place the widget inside the `label` element which in turn focuses the first visible element. Avoid using the `for` attribute because when it is applied to the `label` element, the respective widget does not focus. Instead, use the `aria-labelledby` attribute on the input to point to its wrapping `label` element:
 
 ```
   <label id="label">
@@ -104,8 +102,6 @@ Place the widget inside the `label` element which in turn focuses the first visi
 Widgets, such as the Grid and Calendar, require additional configuration to enable them to successfully pass the Section 508 validation. Due to the fact that they render their content in tables, each table header element has to contain text. To achieve this behavior, use the [`messages.expandCollapseColumnHeader`](/api/javascript/ui/grid/configuration/messages.expandcollapsecolumnheader) and [`messages.weekColumnHeader`](/api/javascript/ui/calendar/configuration/messages.weekcolumnheader) configuration options.
 
 The following example demonstrates how to specify a text for the expand (collapse) column.
-
-###### Example
 
 ```
 	<div id="grid"></div>
@@ -133,8 +129,6 @@ The following example demonstrates how to specify a text for the expand (collaps
 ```
 
 The following example demonstrates how to specify a text for the week column header.
-
-###### Example
 
 ```
     <div id="calendar"></div>

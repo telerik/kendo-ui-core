@@ -2,7 +2,7 @@
 
 **For Support request - Please do not submit support request here, instead see the** [Kendo UI Premium Forums](http://www.telerik.com/forums/kendo-ui) or our [support system](http://www.telerik.com/support) **at Telerik.com** !
 
-**For Feature Requests - please submit those into [our UserVoice feedback portal](http://kendo.uservoice.com/)**
+**For Feature Requests - please submit those into [our feedback portal](https://www.telerik.com/support/feedback)**
 
 ### Reproduction of the problem
 _(bug report only)_

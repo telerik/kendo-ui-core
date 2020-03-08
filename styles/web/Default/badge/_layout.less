@@ -1,0 +1,79 @@
+.k-badge {
+    margin: 0 0 0 .5em;
+    padding: @badge-padding;
+    box-sizing: border-box;
+    border-width: @badge-border-width;
+    border-style: solid;
+    border-radius: @badge-border-radius;
+    font-size: @badge-font-size;
+    line-height: @badge-line-height;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    // RTL
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        margin: 0 .5em 0 0;
+    }
+}
+
+.k-badge > * {
+    color: inherit;
+}
+
+.k-badge.k-badge-pill {
+    min-width: @badge-size;
+    min-height: @badge-size;
+    border-radius: 5rem;
+}
+
+.k-badge.k-badge-pill:empty {
+    min-width: auto;
+    min-height: auto;
+}
+
+a.k-badge,
+.k-badge > a {
+    text-decoration: none;
+}
+
+a.k-badge:hover,
+.k-badge > a:hover {
+    text-decoration: underline;
+}
+
+.k-badge-overlay {
+    position: relative;
+    overflow: visible;
+}
+
+.k-badge-overlay .k-badge {
+    margin: 0;
+    position: absolute;
+    top: @badge-overlay-y;
+    right: @badge-overlay-x;
+    z-index: 9999;
+    transform: translate(100%, -100%);
+
+    &:empty {
+        top: (@badge-padding + @badge-border-width);
+        right: (@badge-padding + @badge-border-width);
+    }
+
+    // RTL
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        right: auto;
+        left: @badge-overlay-x;
+        transform: translate(-100%, -100%);
+
+        &:empty {
+            left: (@badge-padding + @badge-border-width);
+        }
+    }
+}

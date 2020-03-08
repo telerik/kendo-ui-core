@@ -22,7 +22,7 @@ Either of the following scenarios occur:
 
 The following example demonstrates how to automatically adjust the width of a DropDownList depending on its list items.
 
-###### Example
+
 
 ```dojo
 <style>
@@ -113,7 +113,7 @@ The following example demonstrates how to automatically adjust the width of a Dr
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})

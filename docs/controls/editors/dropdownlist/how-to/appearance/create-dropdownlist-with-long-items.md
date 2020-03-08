@@ -12,7 +12,7 @@ The DropDownList enables you to render long items by showing just a part of them
 
 The following example demonstrates how to create a Kendo UI DropDownLists with long items.
 
-###### Example
+
 
 ```dojo
 <div id="div">
@@ -42,7 +42,7 @@ html { font: 12px sans-serif; }
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})

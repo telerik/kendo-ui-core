@@ -10,11 +10,9 @@ slug: howto_add_add_icon_custom_tool
 
 When you create a custom tool, it depends on the further CSS stylization whether to render an image or an icon in its appearance.
 
-To add such visual elements, use the automatically generated class name taken from the tool and follow the `k-i-[ToolName]` pattern.
+To add such visual elements, use the automatically generated class name taken from the tool and follow the `k-i-[ToolName]` pattern. 
 
 The following example demonstrates how to decorate your own custom tool with a background image or a FontAwesome icon.
-
-###### Example
 
 ```dojo
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -47,14 +45,14 @@ The following example demonstrates how to decorate your own custom tool with a b
                     name: "myTool",
                     tooltip: "My tool",
                     exec: function(e) {
-                        // my code
+                        // My code.
                     }
                 },
                 {
                     name: "mySecondTool",
                     tooltip: "My second tool",
                     exec: function(e) {
-                        // my code
+                        // My code.
                     }
                 }
               ]
@@ -64,11 +62,6 @@ The following example demonstrates how to decorate your own custom tool with a b
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

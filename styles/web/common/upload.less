@@ -5,7 +5,7 @@ html .k-upload
     position: relative;
 }
 
-.k-dropzone em,
+.k-dropzone .k-dropzone-hint,
 .k-upload-button
 {
     vertical-align: middle;
@@ -25,7 +25,7 @@ html .k-upload
     background-color: transparent;
 }
 
-.k-dropzone em
+.k-dropzone .k-dropzone-hint
 {
     display: none;
     margin-left: .6em;
@@ -33,7 +33,7 @@ html .k-upload
 
 .k-dropzone-active {
 
-    em {
+    .k-dropzone-hint {
         display: inline-block;
     }
 
@@ -55,18 +55,12 @@ html .k-upload
     margin-right: 1.6em;
 }
 
-.k-upload-sync .k-upload-button {
-    margin: .8em;
-}
-
-.k-upload-button input
-{
+.k-upload-button input {
     position: absolute;
     bottom: 0;
     right: 0;
     z-index: 1;
     font: 170px monospace !important; // critical for correct operation; larger values lead to ignoring or text layout problems in IE
-    filter: alpha(opacity=0);
     opacity: 0;
     margin: 0;
     padding: 0;
@@ -78,7 +72,6 @@ html .k-upload
     line-height: 2.66;
     border-style: solid;
     border-width: 1px 0 0;
-    padding-bottom: 5px;
 }
 
 .k-upload-files .k-button
@@ -138,8 +131,7 @@ html .k-upload
     background-position: -161px -111px;
 }
 
-.k-file
-{
+.k-file {
     border-style: solid;
     border-width: 0 0 1px;
     padding: .65em .17em .65em 1em;
@@ -152,6 +144,9 @@ html .k-upload
         margin-right: 3px;
     }
 }
+.k-file:last-child {
+    border-bottom-width: 0;
+}
 
 .k-file .k-icon
 {
@@ -161,6 +156,8 @@ html .k-upload
 
 .k-file-extension-wrapper,
 .k-file-name-size-wrapper,
+.k-file-group-wrapper,
+.k-multiple-files-group-wrapper,
 .k-multiple-files-extension-wrapper,
 .k-file-invalid-extension-wrapper,
 .k-multiple-files-invalid-extension-wrapper {
@@ -189,6 +186,24 @@ html .k-upload
 .k-multiple-files-extension-wrapper,
 .k-multiple-files-invalid-extension-wrapper {
     margin-top: 4px;
+}
+
+.k-file-group-wrapper,
+.k-file-invalid-group-wrapper,
+.k-multiple-files-group-wrapper,
+.k-multiple-files-invalid-group-wrapper {
+    .k-file-group {
+        font-size: 32px;
+    }
+
+    .k-file-state {
+        position: absolute;
+    }
+}
+
+.k-multiple-files-group-wrapper,
+.k-multiple-files-invalid-group-wrapper {
+    vertical-align: top;
 }
 
 .k-file-state {
@@ -380,3 +395,28 @@ html .k-upload
 .k-rtl .k-file-extension-wrapper {
     margin-left: 14px;
 }
+
+.k-upload .k-action-buttons {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    clear: both;
+
+    .k-button {
+        flex: 1 1 auto;
+        margin: 0;
+    }
+
+    .k-button + .k-button {
+        margin: 0;
+    }
+}
+
+.k-no-flexbox .k-upload .k-action-buttons .k-button {
+    border-width: 0;
+}
+
+
+
+

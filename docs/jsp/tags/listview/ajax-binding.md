@@ -18,7 +18,7 @@ To configure the Kendo UI ListView for Ajax binding, follow the steps below (usi
 
 **Step 1** Add a new action method which will return data to populate the ListView.
 
-###### Example
+
 
         @Autowired
         private ProductDao product;
@@ -30,7 +30,7 @@ To configure the Kendo UI ListView for Ajax binding, follow the steps below (usi
 
 **Step 2** Add a new parameter which will be populated with the current ListView request information&mdash;page, sort, group, and filter.
 
-###### Example
+
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public  DataSourceResult read(@RequestBody DataSourceRequest request) {
@@ -39,7 +39,7 @@ To configure the Kendo UI ListView for Ajax binding, follow the steps below (usi
 
 **Step 3** Use the request information to process the data and return the result as JSON.
 
-###### Example
+
 
         @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
         public @ResponseBody DataSourceResult read(@RequestBody DataSourceRequest request) {
@@ -49,7 +49,7 @@ To configure the Kendo UI ListView for Ajax binding, follow the steps below (usi
 
 The result format in this case is similar to the signature, demonstrated in the example below.
 
-###### Example
+
 
         public class DataSourceResult {
             public long getTotal() {
@@ -79,7 +79,7 @@ The result format in this case is similar to the signature, demonstrated in the 
 
 **Step 4** In the view, configure the ListView to use the action method created in the previous steps.
 
-###### Example
+
 
         <kendo:listView name="listView" template="template" pageable="true">
 			<kendo:dataSource pageSize="12" serverPaging="true">
@@ -104,7 +104,7 @@ The JSON response of the action method contains a single page of data only. The 
 
 In the configuration that enables client data processing during Ajax binding, Kendo UI ListView for JSP requests data from the server every time the user changes the page, filters, sorts, or groups. This behavior can be changed by setting the DataSource server operation options to `false`.
 
-###### Example
+
 
        <kendo:dataSource pageSize="10" serverPaging="false" serverSorting="false" serverFiltering="false" serverGrouping="false">
            <kendo:dataSource-transport>

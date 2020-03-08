@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 **Step 2** Create a [TimePicker](/api/php/Kendo/UI/TimePicker).
 
-###### Example
+
 
         <?php
         $timePicker = new \Kendo\UI\TimePicker('timepicker');
@@ -30,7 +30,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 **Step 3** Output the TimePicker by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $timePicker->render();
@@ -44,7 +44,7 @@ You can subscribe to all TimePicker [events](/api/javascript/ui/tabstrip#events)
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $timepicker = new \Kendo\UI\TimePicker('timepicker');
@@ -64,7 +64,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $timepicker = new \Kendo\UI\TimePicker('timepicker');
@@ -80,9 +80,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing TimePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TimePicker API](/api/javascript/ui/timepicker#methods) to control its behavior.
+You are able to reference an existing TimePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [TimePicker API](/api/javascript/ui/timepicker#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $timepicker = new \Kendo\UI\TimePicker('timepicker');

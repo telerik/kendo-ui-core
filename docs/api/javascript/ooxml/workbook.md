@@ -59,6 +59,88 @@ The date when the workbook is created. Defaults to `new Date()`.
     });
     </script>
 
+### images `Object` *(default: null)*
+
+An object containing any images used in the Spreadsheet.  The keys should be image ID-s (they are referenced by this ID in [`sheets.drawings`](/api/javascript/ooxml/workbook/configuration/sheets.drawings)) and the values should represent binary data.
+
+#### Example - loading images in Workbook
+
+    <script>
+      var images = {
+        testImage: "https://demos.telerik.com/kendo-ui/content/web/spreadsheet/sample-image.png"
+      };
+
+      var ids = Object.keys(images);
+      var count = ids.length;
+
+      if (count) {
+        Object.keys(images).forEach(function(id){
+          var url = images[id];
+
+          loadBinary(url, function(data, contentType){
+            images[id] = { type: contentType, data: data };
+            next();
+          });
+        });
+      } else {
+        createWorkbook(); /* just in case there's no image */
+      }
+
+      function next() {
+        if (--count <= 0) {
+          createWorkbook();
+        }
+      }
+
+      function loadBinary(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          callback(xhr.response, xhr.getResponseHeader("Content-Type"));
+        };
+        xhr.onerror = function() {
+          callback(null);
+        };
+        xhr.open("GET", url);
+        xhr.responseType = "arraybuffer";
+        xhr.send();
+      }
+
+      function createWorkbook() {
+        var workbook = new kendo.ooxml.Workbook({
+          images: images,
+          sheets: [{
+            name: "Food Order",
+            drawings: [{
+              topLeftCell: "E3",
+              offsetX: 30,
+              offsetY: 10,
+              width: 450,
+              height: 330,
+              image: "testImage"
+            }],
+            rows: [
+              {
+                cells: [
+                  {
+                    value: "ID", background: "rgb(167,214,255)", textAlign: "center", color: "rgb(0,62,117)"
+                  },
+                  {
+                    value: "Product", background: "rgb(167,214,255)", textAlign: "center", color: "rgb(0,62,117)"
+                  }
+                ]
+              }]
+          }]
+        });
+
+        kendo.saveAs({
+          dataURI: workbook.toBlob(),
+          fileName: "Test.xlsx"
+        });
+      }
+    </script>
+
+Note, we can reference the same image ID in two different drawings. See the [`sheets.drawings`](/api/javascript/ooxml/workbook/configuration/sheets.drawings) property for more information about a drawing's properties.
+
 ### rtl `Boolean` *(default: false)*
 
 Sets the direction of the workbook. By default, the direction is left-to-right.
@@ -161,6 +243,34 @@ The width (in pixels) of the column.
       fileName: "Test.xlsx"
     });
     </script>
+
+### sheets.drawings `Array`
+
+An array which contains the drawings used in this sheet.
+
+### sheets.drawings.topLeftCell `String`
+
+A cell to which the drawing's top-left corner is anchored.
+
+### sheets.drawings.offsetX `Number`
+
+The horizontal offset from the anchor cell's top-left corner, in pixels.
+
+### sheets.drawings.offsetY `Number`
+
+The vertical offset from the anchor cell's top-left corner, in pixels.
+
+### sheets.drawings.width `Number`
+
+The drawing's width in pixels.
+
+### sheets.drawings.height `Number`
+
+The drawing's height in pixels.
+
+### sheets.drawings.image `String`
+
+The ID of the image to display.
 
 ### sheets.freezePane `Object`
 
@@ -907,6 +1017,16 @@ The row height (in pixels).
       fileName: "Test.xlsx"
     });
     </script>
+
+### sheets.rows.type `String`
+
+Used to distinguish between the various row types in the Grid. The supported values are:
+
+- "header"
+- "footer"
+- "group-header"
+- "group-footer"
+- "data"
 
 ### sheets.showGridLines `Boolean` *(default: true)*
 

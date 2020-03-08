@@ -1,8 +1,8 @@
 ---
 title: Disable Days in the Popup Calendar of the Scheduler
-description: An example on how to disable days in the popup calendar of the kendo UI Scheduler.
+description: An example on how to disable days in the popup calendar of the Kendo UI Scheduler.
 type: how-to
-page_title: Disable Days in Popup Calendars | Kendo UI Scheduler
+page_title: Disable Days in Popup Calendars | Kendo UI Scheduler for jQuery
 slug: disable-days-calendar-scheduler
 tags: kendo, kendoui, scheduler, disable, days, calendar, popup
 ticketid: 1134481

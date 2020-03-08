@@ -1,72 +1,53 @@
 ---
 title: Attribute
-page_title: Attribute | Kendo UI MVVM
+page_title: Attribute Binding | Kendo UI MVVM
 description: "Learn how to populate and update DOM element attributes from the View-Model fields or methods through the attr binding in Kendo UI MVVM."
 slug: attributebinding_mvvm_kendoui
 ---
 
 # Attribute Binding
 
-The [Kendo UI Attribute (`attr`) binding](http://demos.telerik.com/kendo-ui/mvvm/attributes) populates DOM element attributes from View-Model fields or methods. This is useful in many cases, such as setting the `href` and `title` of a hyperlink, setting the `src` attribute of an image, etc. If the View-Model fields change, the attributes get updated.
+The [Kendo UI Attribute (`attr`) binding](https://demos.telerik.com/kendo-ui/mvvm/attributes) populates DOM element attributes from View-Model fields or methods.
+
+This is useful in many cases, such as setting the `href` and `title` of a hyperlink, setting the `src` attribute of an image, etc. If the View-Model fields change, the attributes get updated.
+
+> The [Kendo UI widgets](https://demos.telerik.com/kendo-ui/) do not support the `attr` binding.
 
 ## Getting Started
 
-The `attr` binding is set in the way shown below.
+To set the `attr` binding, use the `attr: { attribute1: field1, attribute2: field2 }` configuration. `attribute1` and `attribute2` are the names of the attributes that will be set, and `field1` and `field2` are the names of the View-Model fields to which those attributes will be bound.
 
-###### Example
-
-    `attr: { attribute1: field1, attribute2: field2 }`
-
-In the example, `attribute1` and `attribute2` are the names of the attributes that are going to be set, and `field1` and `field2` are the names of the View-Model fields to which those attributes are going to be bound.
-
-The following example demonstrates an Attribute binding.
-
-###### Example
+The following example demonstrates how to implement the Attribute binding. The `src` and `alt` attributes of the image are bound to the View-Model.
 
     <img id="logo" data-bind="attr: { src: imageSource, alt: imageAlt }" />
     <script>
     var viewModel = kendo.observable({
-        imageSource: "http://www.telerik.com/image/kendo-logo.png",
+        imageSource: "https://www.telerik.com/image/kendo-logo.png",
         imageAlt: "Kendo Logo"
     });
 
     kendo.bind($("#logo"), viewModel);
     </script>
 
-In the example, the `src` and `alt` attributes of the image are bound to the View-Model. After calling `kendo.bind`, the image looks in the way shown below. Note that the `data-bind` attribute is removed for clarity.
+After calling `kendo.bind`, the image looks in the following way. The `data-bind` attribute is removed for clarity. Changing the `imageSource` or `imageAlt` fields will update the `src` and `alt` attributes respectively.
 
-###### Example
+    <img id="logo" src="https://www.telerik.com/image/kendo-logo.png" alt="Kendo Logo"" />
 
-    <img id="logo" src="http://www.telerik.com/image/kendo-logo.png" alt="Kendo Logo"" />
+## Important Notes
 
-Changing the `imageSource` or `imageAlt` fields would updates the `src` and `alt` attributes respectively.
+* Binding Attributes: value and checked&mdash;To set the `value` or `checked` attributes, use the [`value`](value) and [`checked`](checked) bindings instead.
+* Setting the HTML5 `Data` attributes&mdash;You can also set HTML5 data attributes through the `attr` binding.
 
-### Important Notes
+        <div data-bind="attr: { data-foo: fooValue, data-bar: barValue }"></div>
 
-#### Bind Attributes: value and checked
+        <script>
+        var viewModel = kendo.observable({
+            fooValue: "foo",
+            barValue: "bar"
+        });
 
-If you want to set the `value` or `checked` attributes, use the [`value`](value) and [`checked`](checked) bindings instead.
-
-#### Set HTML5 Data Attributes
-
-You can also set HTML5 data attributes via the `attr` binding, as demonstrated in the example below.
-
-###### Example
-
-    <div data-bind="attr: { data-foo: fooValue, data-bar: barValue }"></div>
-
-    <script>
-    var viewModel = kendo.observable({
-        fooValue: "foo",
-        barValue: "bar"
-    });
-
-    kendo.bind($("div"), viewModel);
-    </script>
-
-## Widget Support
-
-The [Kendo UI widgets](http://demos.telerik.com/kendo-ui/) do not support the `attr` binding.
+        kendo.bind($("div"), viewModel);
+        </script>
 
 ## See Also
 

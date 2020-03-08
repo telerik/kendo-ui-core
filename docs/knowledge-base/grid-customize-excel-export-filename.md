@@ -2,7 +2,7 @@
 title: Customize the Excel Export Filename of the Grid by Adding Current Date and Time
 description: An example on how to customize the Excel export filename of the Grid by adding the current date and time of generation.
 type: how-to
-page_title: Add the Current Date and Time to the Excel Export Filename | Kendo UI Grid
+page_title: Add the Current Date and Time to the Excel Export Filename | Kendo UI Grid for jQuery
 slug: grid-customize-excel-export-filename
 tags: grid, excel, export, datetime, customize, customize
 ticketid: 1130491

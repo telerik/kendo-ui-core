@@ -2,7 +2,7 @@
 title: Prevent Tab Selection When Content Validation Fails
 description: An example on how to prevent the tab selection upon validation errors in the tab content for the Kendo UI TabStrip.
 type: how-to
-page_title: Prevent Tab Selection When Validation Error Occurs | Kendo UI TabStrip
+page_title: Prevent Tab Selection When Validation Error Occurs | Kendo UI TabStrip for jQuery
 slug: tabstrip-prevent-selection-if-content-validation-fails
 tags: kendo, kendo-ui, tabstrip, prevent, selection, validation
 ticketid: 769370

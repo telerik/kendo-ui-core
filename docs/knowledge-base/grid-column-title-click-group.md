@@ -2,7 +2,7 @@
 title: Get Grid Column Title upon Cell Selection
 description: An example on how to get the title of a column when selecting a cell in the Kendo UI Grid.
 type: how-to
-page_title: Obtain Column Name of Grouped Grid When Cell Is Selected | Kendo UI Grid
+page_title: Obtain Column Name of Grouped Grid When Cell Is Selected | Kendo UI Grid for jQuery
 slug: grid-column-title-click-group
 tags: grid, column, title, click, group
 ticketid: 1072636
@@ -30,8 +30,10 @@ How can I get the name of a column when a user clicks one of its cells even if t
 
 During the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event of the Grid:
 1.  Reference the Grid.
-2.  Obtain the [selected cell](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) and its [index](https://api.jquery.com/index/).
+2.  Obtain the [selected cell](/api/javascript/ui/grid/methods/select) and its [index](https://api.jquery.com/index/).
 3.  [Find](https://api.jquery.com/find/) the DOM element of the table header and [get the attribute of the data title](https://www.w3schools.com/jsref/met_element_getattribute.asp).
+
+> The suggested approach is not applicable to multi-column headers.
 
 ```
     change: function(e) {
@@ -40,10 +42,6 @@ During the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/e
       var columnTitle = grid.thead.find('th')[cellIndex].getAttribute("data-title");
     }
 ```
-
-> **Important**
->
-> The suggested approach is not applicable to multi-column headers.
 
 The following example demonstrates how to display the column name in the [console](https://www.w3schools.com/jsref/met_console_log.asp) when the user clicks a Grid cell.
 
@@ -72,13 +70,13 @@ The following example demonstrates how to display the column name in the [consol
         groupable: "true",
         change: function(e) {
 
-          //1 Reference the Grid.
+          // Reference the Grid.
           var grid = e.sender;
 
-          //2 Obtain the selected cell's index.
+          // Obtain the selected cell's index.
           var cellIndex = grid.select().index();
 
-          //3 Find the table header DOM element and get the data-title attribute.
+          // Find the table header DOM element and get the data-title attribute.
           var columnTitle = grid.thead.find('th')[cellIndex].getAttribute("data-title");
           console.log(columnTitle);
         }

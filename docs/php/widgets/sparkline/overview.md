@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 2** Create an array to which the Sparkline will be bound.
 
-###### Example
+
 
         <?php
         $data = array(1, 3, 5, 4, 2);
@@ -35,7 +35,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 3** Create a [Sparkline](/api/php/Kendo/Dataviz/UI/Sparkline), configure its [`data`](/api/php/Kendo/Dataviz/UI/Sparkline#data).
 
-###### Example
+
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
@@ -44,7 +44,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Spark
 
 **Step 4** Output the Sparkline by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $sparkline->render();
@@ -58,7 +58,7 @@ You can subscribe to all Sparkline [events](/api/javascript/dataviz/ui/sparkline
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
@@ -78,7 +78,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');
@@ -94,9 +94,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI Sparkline instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sparkline API](/api/javascript/dataviz/ui/sparkline#methods) to control its behavior.
+You can reference the client-side Kendo UI Sparkline instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sparkline API](/api/javascript/dataviz/ui/sparkline#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $sparkline = new \Kendo\Dataviz\UI\Sparkline('sparkline');

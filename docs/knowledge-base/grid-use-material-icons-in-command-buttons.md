@@ -2,7 +2,7 @@
 title: Display Material Icons in Grid Command Column
 description: An example on how to show Google's Material icons in the Kendo UI Grid edit command buttons.
 type: how-to
-page_title: Use Material Icons in Edit Command Buttons | Kendo UI Grid
+page_title: Use Material Icons in Edit Command Buttons | Kendo UI Grid for jQuery
 slug: grid-use-material-icons
 tags: grid, editing, material-icons
 ticketid: 1139682
@@ -22,7 +22,7 @@ component: grid
 
 ## Description
 
-How can I use Google's [Materal icons](https://material.io/icons/) in the edit command buttons of the Grid?
+How can I use Google [Materal icons](https://material.io/icons/) in the edit command buttons of the Grid?
 
 ## Solution
 

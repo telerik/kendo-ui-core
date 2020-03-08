@@ -69,6 +69,29 @@
 
         });
 
+        it("query should correctly calculate aggregates if inPlaceSort is enabled and filter and grouping are applied", function() {
+            var dataSource = new DataSource({
+                data: [{
+                    "Col1": 97.5690346607209,
+                    "Col2": "USD",
+                    "Col3": 0
+                },
+                {
+                    "Col1": 0.13031241570657351,
+                    "Col2": "USD",
+                    "Col3": 1
+                }],
+                inPlaceSort: true
+            });
+
+            dataSource.query({
+                filter: { value: 1, field: "Col3", operator: "eq" },
+                group: { field: "Col2", dir: "asc", aggregates: [{ field: "Col1", aggregate: "average" }] }
+            });
+
+            assert.equal(dataSource.view()[0].aggregates.Col1.average, 0.1303124157065735);
+        });
+
         it("query should sort the data array when inPlaceSort is enabled and filter is applied", function() {
             var dataSource = new DataSource({
                 data: [{ id: 1, bar: "foo" }, { id: 2, bar: "foo" }],
@@ -1110,6 +1133,24 @@
 
             dataSource.filter({ field: "id", operator: "==", value: 1 });
             assert.equal(dataSource.filter().filters[0].operator, "eq");
+        });
+
+        it("using string filter with zero works correctly", function() {
+            var dataSource = new DataSource({
+                data: [{ id: 1 }, { id: 0 }]
+            });
+
+            dataSource.filter({ field: "id", operator: "contains", value: "0" });
+            assert.equal(dataSource.view().length, 1);
+        });
+
+        it("using string filter with false works correctly", function() {
+            var dataSource = new DataSource({
+                data: [{ id: true }, { id: false }]
+            });
+
+            dataSource.filter({ field: "id", operator: "contains", value: "false" });
+            assert.equal(dataSource.view().length, 1);
         });
 
         it("query should update the total if filtering is enabled", function() {

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 **Step 2** Create a [Dialog](/api/php/Kendo/UI/Dialog).
 
-###### Example
+
 
         <?php
         $dialog = new \Kendo\UI\Dialog('dialog');
@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 **Step 3** Place the content and action buttons.
 
-###### Example
+
 
         <?php
         $dialog = new \Kendo\UI\Dialog('dialog');
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 **Step 4** Output the Dialog by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $dialog->render();
@@ -68,7 +68,7 @@ You can subscribe to all Dialog [events](/api/javascript/ui/dialog#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $dialog = new \Kendo\UI\Dialog('dialog');
@@ -88,7 +88,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $dialog = new \Kendo\UI\Dialog('dialog');
@@ -104,9 +104,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#dialog) to control its behavior.
+To refer to an existing Dialog instance, use [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Dialog API](/api/javascript/ui/dialog#dialog) to control its behavior.
 
-###### Example
+
 
         <?php
         $dialog = new \Kendo\UI\Dialog('dialog');

@@ -1,8 +1,8 @@
 ---
 title: Adjust the Chart Height Dynamically
+page_title: Dynamically Adjust the Height According to the Number of Bars | Kendo UI Chart for jQuery 
 description: An example on how to dynamically adjust the height of a Kendo UI Bar Chart depending on the number of the available bars.
 type: how-to
-page_title: Dynamically Adjust the Height According to the Number of Bars | Kendo UI Chart
 slug: adjust-bar-chart-height-by-number-of-bars
 tags: chart, bar chart, height, adjust, bars
 ticketid: 1097053
@@ -99,7 +99,7 @@ To adjust the height of the Chart container:
     </script>
 ```
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/idiVu).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/idiVu).
 
 ## See Also
 

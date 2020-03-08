@@ -60,6 +60,23 @@
         assert.isOk(notFired);
     });
 
+    it("disabled button does not fire click event (enabled: false)", function() {
+        var notFired = true;
+
+        function clickHandler(e) {
+            notFired = false;
+        }
+
+        getButton().kendoButton({
+            enabled: false,
+            click: clickHandler
+        });
+
+        button.click();
+
+        assert.isOk(notFired);
+    });
+
     it("focus adds focused class", function() {
         getButton().kendoButton();
 

@@ -9,8 +9,6 @@ slug: howto_override_hours_inpopup_datetimepicker
 
 The following example demonstrates how to override hours in the popup of the DateTimePicker.
 
-###### Example
-
 ```dojo
 <input id="datetimepicker" />
 <script>
@@ -26,7 +24,7 @@ The following example demonstrates how to override hours in the popup of the Dat
                 new Date(1970, 0, 1, 15),
                 new Date(1970, 0, 1, 17),
                 new Date(1970, 0, 1, 19),
-                new Date(1970, 0, 1, 21)
+                new Date(1970, 0, 1, )
               ])
             }
         }
@@ -37,7 +35,5 @@ The following example demonstrates how to override hours in the popup of the Dat
 
 ## See Also
 
-* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
-* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
-* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
-* [How to Limit Navigation to Months]({% slug howto_limit_navigation_tomonths_datetimepicker %})
+* [Using the API of the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/api)
+* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)

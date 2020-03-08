@@ -22,7 +22,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 **Step 2** Create a [Diagram](/api/javascript/dataviz/ui/diagram) and configure it.
 
-###### Example
+
 
         // Specify the url of the PHP page which will act as the remote service
         $read = new \Kendo\Data\DataSourceTransportRead();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 **Step 3** Create a Diagram and set its data source.
 
-###### Example
+
 
         $layout = new \Kendo\Dataviz\UI\DiagramLayout();
         $layout->type('layered');
@@ -58,7 +58,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Diagr
 
 **Step 4** Output the Diagram by echoing the result of the `render` method.
 
-###### Example
+
 
         echo $diagram->render();
 
@@ -71,7 +71,7 @@ You can subscribe to all Diagram [events](/api/javascript/dataviz/ui/diagram#eve
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $diagram = new \Kendo\Dataviz\UI\Diagram('diagram');
@@ -93,7 +93,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $diagram = new \Kendo\Dataviz\UI\Diagram('diagram');
@@ -111,9 +111,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Diagram instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
+You are able to reference an existing Diagram instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Diagram API](/api/javascript/dataviz/ui/diagram#methods) to control its behavior.
 
-###### Example
+
 
         // Put this after your Kendo Diagram for PHP
         <script>

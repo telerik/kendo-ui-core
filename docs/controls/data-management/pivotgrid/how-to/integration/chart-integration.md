@@ -9,11 +9,7 @@ slug: howto_integratewith_kendoui_chart_pivotgrid
 
 The following example demonstrates how to integrate a Kendo UI PivotGrid widget with a [Kendo UI Chart]({% slug overview_kendoui_charts_widget %}) widget.
 
-> **Important**
->
 > The example omits the totals from the PivotGrid, so that they are not shown in the Chart data visualization.
-
-###### Example
 
 ```dojo
 <div id="example">

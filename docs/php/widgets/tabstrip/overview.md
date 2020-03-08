@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TabSt
 
 **Step 2** Create a [TabStrip](/api/php/Kendo/UI/TabStrip) and set its [items](/api/php/Kendo/UI/TabStrip#addItem).
 
-###### Example
+
 
         <?php
         $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
@@ -50,7 +50,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TabSt
 
 **Step 3** Output the TabStrip by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $tabstrip->render();
@@ -64,7 +64,7 @@ You can subscribe to all TabStrip [events](/api/javascript/ui/tabstrip#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
@@ -84,7 +84,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $tabstrip = new \Kendo\UI\TabStrip('tabstrip');
@@ -100,9 +100,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing TabStrip instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
+You are able to reference an existing TabStrip instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $tabstrip = new \Kendo\UI\TabStrip('tabstrip');

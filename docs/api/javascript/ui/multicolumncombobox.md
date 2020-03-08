@@ -212,34 +212,34 @@ Defines the field to be used to filter the data source. If not defined the [pare
     <input id="child" />
     <script>
     $("#parent").kendoMultiColumnComboBox({
-        dataTextField: "name",
-        dataValueField: "id",
-        dataSource: [
-            { name: "Parent1", id: 1 },
-            { name: "Parent2", id: 2 }
-        ],
-        columns: [
-          { field: "parentName" },
-          { field: "parentId" }
-        ]
+      dataTextField: "name",
+      dataValueField: "id",
+      dataSource: [
+        { name: "Parent1", id: 1 },
+        { name: "Parent2", id: 2 }
+      ],
+      columns: [
+        { field: "name" },
+        { field: "id" }
+      ]
     });
 
     $("#child").kendoMultiColumnComboBox({
-        cascadeFrom: "parent",
-        cascadeFromField: "parentId",
-        dataTextField: "name",
-        dataValueField: "id",
-        dataSource: [
-            { name: "Child1", id: 1, parentId: 1 },
-            { name: "Child2", id: 2, parentId: 2 },
-            { name: "Child3", id: 3, parentId: 1 },
-            { name: "Child4", id: 4, parentId: 2 }
-        ],
-        columns: [
-          { field: "childName" },
-          { field: "childId" },
-          { field: "parentId" }
-        ]
+      cascadeFrom: "parent",
+      cascadeFromField: "parentId",
+      dataTextField: "name",
+      dataValueField: "id",
+      dataSource: [
+        { name: "Child1", id: 1, parentId: 1 },
+        { name: "Child2", id: 2, parentId: 2 },
+        { name: "Child3", id: 3, parentId: 1 },
+        { name: "Child4", id: 4, parentId: 2 }
+      ],
+      columns: [
+        { field: "id" },
+        { field: "name" },
+        { field: "parentId" }
+      ]
     });
     </script>
 
@@ -252,7 +252,7 @@ Defines the parent field to be used to retain value from. This value will be use
     <input id="parent" />
     <input id="child" />
     <script>
-    $("#parent").kendoMultiColumnBox({
+    $("#parent").kendoMultiColumnComboBox({
         dataTextField: "name",
         dataValueField: "id",
         dataSource: [
@@ -261,7 +261,7 @@ Defines the parent field to be used to retain value from. This value will be use
         ]
     });
 
-    $("#child").kendoMultiColumnBox({
+    $("#child").kendoMultiColumnComboBox({
         cascadeFrom: "parent",
         cascadeFromField: "parentId",
         cascadeFromParentField: "cascadeId",
@@ -851,6 +851,64 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize MultiColumnComboBox messages
+
+    <input id="multicolumncombobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <input id="multicolumncombobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="multicolumncombobox" />
+    <script>
+      $("#multicolumncombobox").kendoMultiColumnComboBox({
+        dataSource: [],
+        index: 1,
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
@@ -866,7 +924,7 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -1037,7 +1095,7 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       },
       columns: [
         {field: "name"},
@@ -1045,6 +1103,17 @@ The available "x" positions are:
       ]
     });
     </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
 ### suggest `Boolean`*(default: false)*
 

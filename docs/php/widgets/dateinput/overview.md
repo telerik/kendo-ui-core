@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateI
 
 **Step 2** Create a [DateInput](/api/javascript/ui/dateinput).
 
-###### Example
+
 
         <?php
         $dateinput = new \Kendo\UI\DateInput('dateinput');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateI
 
 **Step 3** Output the DateInput by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $dateinput->render();
@@ -43,7 +43,7 @@ You can subscribe to all DateInput [events](/api/javascript/ui/dateinput#events)
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $dateinput = new \Kendo\UI\DateInput('dateinput');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $dateinput = new \Kendo\UI\DateInput('dateinput');
@@ -79,9 +79,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing DateInput instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [DateInput API](/api/javascript/ui/dateinput#methods) to control its behavior.
+You are able to reference an existing DateInput instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [DateInput API](/api/javascript/ui/dateinput#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $dateinput = new \Kendo\UI\DateInput('dateinput');

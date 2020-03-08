@@ -9,7 +9,7 @@ slug: howto_make_input_elements_readonly_datepicker
 
 The following example demonstrates how to make an input element read-only and prevent the user from typing.
 
-###### Example
+
 
 ```dojo
     <div id="example">

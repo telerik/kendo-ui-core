@@ -9,7 +9,7 @@ slug: howto_update_valueon_spin_angularjs_numerictextbox
 
 The following example demonstrates how to update the value of the NumericTextBox on `spin`.
 
-###### Example
+
 
 ```dojo
     <div id="example" ng-app="app">

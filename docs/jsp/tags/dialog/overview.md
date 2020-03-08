@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `dialog` tag.
 
-###### Example
+
 
     <kendo:dialog name="dialog" title="Software Update" closable="false" modal="false"
                 content="Do you agree terms and conditions?">
@@ -52,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Dialo
 
 You can subscribe to all [events exposed by Kendo UI Dialog](/api/javascript/ui/dialog#events) by the handler name.
 
-###### Example
+
 
     <kendo:dialog name="dialog"  open="dialog_open" close="dialog_close">
     </kendo:dialog>
@@ -71,9 +71,9 @@ You can subscribe to all [events exposed by Kendo UI Dialog](/api/javascript/ui/
 
 ### Existing Instances
 
-To refer to an existing Dialog instance, use [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Dialog API](/api/javascript/ui/dialog#methods) to control its behavior.
+To refer to an existing Dialog instance, use [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Dialog API](/api/javascript/ui/dialog#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Dialog tag declaration
     <script>

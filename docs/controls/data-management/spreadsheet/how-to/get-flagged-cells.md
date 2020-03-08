@@ -9,8 +9,6 @@ slug: howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget
 
 The following example demonstrates how to get all flagged cells in the Spreadsheet which contain invalid values.
 
-###### Example
-
 ```dojo
 <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
 <div id="example">
@@ -572,6 +570,5 @@ The following example demonstrates how to get all flagged cells in the Spreadshe
 
 ## See Also
 
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
-* [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
-* [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

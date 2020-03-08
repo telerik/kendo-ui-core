@@ -2,7 +2,7 @@
 title: Hide Chart Legends That Have No Visual Appearance
 description: An example on how to hide the Kendo UI Chart legends which have no visual appearance in the widget.
 type: how-to
-page_title: Hide the Non-Visible Legends Items | Kendo UI Chart
+page_title: Hide the Non-Visible Legends Items | Kendo UI Chart for jQuery
 slug: hide-legends-items-that-are-not-visible-in-the-chart
 previous_url: /knowledge-base/how-to-hide-legends-items-that-are-not-visible-in-the-chart
 tags: chart, legend
@@ -41,7 +41,7 @@ How can I hide the specific legend items for which I will not have any data to s
 
 ## Solution
 
-To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend.item.visual) property of the Chart.
+To allow the use of custom logic and determine whether a legend item will be added or not, use the [`legend.item.visual`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/configuration/legend.item.visual) property of the Chart.
 
 ```dojo
   <div id="chart"></div>

@@ -11,8 +11,6 @@ The following example demonstrates how to integrate the Kendo UI Draggable widge
 
 You can drag and drop the markers within the visible area of the Map. The location of the marker is updated on dropping.
 
-###### Example
-
 ```dojo
 <div id="map"></div>
 <script>
@@ -35,11 +33,11 @@ You can drag and drop the markers within the visible area of the Map. The locati
             dataSource: {
                 transport: {
                     read: function(e) {
-                        // Load mock data
+                        // Load mock data.
                         e.success(markers);
                     }
 
-                    // Update method omitted for simplicity
+                    // The update method is omitted for simplicity.
                 }
             },
             locationField: "latlng",
@@ -53,10 +51,10 @@ You can drag and drop the markers within the visible area of the Map. The locati
             var map = e.sender;
 
             element.kendoDraggable({
-                // Move marker "hot point" under the cursor
+                // Move the "hot point" of the marker under the cursor.
                 cursorOffset: { top: -height, left: -width / 2 },
 
-                // Create and style drag hint
+                // Create and style the drag hint.
                 hint: function() {
                     var hint = element.clone().css({
                         width: width,
@@ -68,10 +66,10 @@ You can drag and drop the markers within the visible area of the Map. The locati
                     return hint;
                 },
 
-                // Constrain drag area
+                // Constrain the drag area.
                 container: e.layer.map.element,
 
-                // Update marker location
+                // Update the marker location.
                 dragend: function(e) {
                     e.sender.hint.hide();
 
@@ -86,11 +84,6 @@ You can drag and drop the markers within the visible area of the Map. The locati
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Disable Mousewheel Zoom]({% slug howto_disablemousezoom_map %})
-* [How to Display Shape Tooltips]({% slug howto_displayshapetooltip_map %})
-* [How to Render Custom Symbols for Bubble Layers]({% slug howto_rendercustomsymbols_forbubblelayers_map %})
-* [How to Set 100% Height in Mobile Applications]({% slug howto_set100percentheight_inmobileapps_map %})
-* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

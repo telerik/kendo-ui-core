@@ -10,8 +10,6 @@ slug: drag_and_drop_between_grid_and_scheduler
 
 The following example demonstrates how to implement the drag-and-drop functionality to move items between the Kendo UI Grid and the Kendo UI Scheduler.
 
-###### Example
-
 ```dojo
 
    <div style="width: 50%; margin-left: auto; margin-right: auto;">
@@ -29,7 +27,7 @@ $(function() {
         height: 500,
         views: ["day", "agenda", "week", "month"],
         dataBound: function (e) {
-            //create drop area from current View
+            // Create the drop area from the current View.
             createDropArea(this);
         },
         dataSource: {
@@ -114,17 +112,17 @@ $(function() {
     grid.table.kendoDraggable({
         filter: "tbody > tr",
         dragstart: function (e) {
-            //add margin to position correctly the tooltip under the pointer
+            // Add a margin to position correctly the tooltip under the pointer.
             $("#dragTooltip").css("margin-left", e.clientX - gridRowOffset.left - 50);
         },
         hint: function (row) {
 
-            //remove old selection
+            // Remove the old selection.
             row.parent().find(".k-state-selected").each(function () {
                 $(this).removeClass("k-state-selected")
             })
 
-            //add selected class to the current row
+            // Add the selected class to the current row.
             row.addClass("k-state-selected");
 
             var dataItem = grid.dataItem(row);
@@ -250,18 +248,6 @@ $(function() {
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
-* [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Clone Events on Ctrl + move]({% slug howto_clone_eventson_ctrlplus_move_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
-* [How to Edit Records on touchend]({% slug howto_edit_records_using_touchendonmobile_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get next Occurrence]({% slug howto_getthe_next_occurance_scheduler %})
-* [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

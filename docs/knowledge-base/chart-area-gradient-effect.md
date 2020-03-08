@@ -1,8 +1,8 @@
 ---
 title: Apply Gradient Effect on Area Chart
+page_title: Apply Gradient Color | Kendo UI Chart for jQuery
 description: An example on how to apply a gradient color effect to the Kendo UI Area Chart.
 type: how-to
-page_title: Apply Gradient Color | Kendo UI Chart
 slug: chart-area-gradient-effect
 tags: chart, area, gradient, effect, color
 ticketid: 1158735
@@ -33,7 +33,7 @@ How can I apply a gradient color effect on the Kendo UI Area Chart?
 
 ```dojo
 <div style="height: 0">
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="0" height="0" style="visibility: hidden">
+	<svg xmlns="https://www.w3.org/2000/svg" version="1.1" width="0" height="0" style="visibility: hidden">
 	<defs>
 		<linearGradient id="svg-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
 		<stop offset="0%" style="stop-color:#3bafda; stop-opacity:0.95" />

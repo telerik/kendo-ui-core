@@ -2,7 +2,7 @@
 title: NumericTextBox Throws Error on Initialization
 description: "NumericTextBox throws а *Cannot read property '_move' of undefined* error on initialization."
 type: troubleshooting
-page_title: Error Message When Creating NumericTextBox | Kendo UI for jQuery
+page_title: Error Message Is Thrown When Creating NumericTextBox | Kendo UI NumericTextBox for jQuery
 slug: numerictextbox-error-on-initialization
 tags: numerictextbox, error
 ticketid: 1130422, 1127229, 1122877, 1120172
@@ -27,7 +27,7 @@ When calling the `kendoNumericTextBox()` method to create or customize a Numeric
 
 This error is observed when you initialize a NumericTextBox from the same `input` element more than once. The reason for this behavior is due, but not limited, to the following scenarios:
 
-* You create the NumericTextBox by using an MVC wrapper. Then, you try to call the `kendoNumericTextBox()` method to apply new settings.
+* You create the NumericTextBox by using a Kendo UI for ASP.NET MVC wrapper. Then, you try to call the `kendoNumericTextBox()` method to apply new settings.
 * You create the NumericTextBox by using an MVVM declarative initialization (`data-role='numerictextbox'` setting). Then, you try to call the `kendoNumericTextBox()` method to apply the settings.
 * You create the NumericTextBox by using the `kendoNumericTextBox()` method. Then, you call it again to apply new settings.
 

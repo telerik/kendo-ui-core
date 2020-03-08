@@ -26,7 +26,7 @@ Placing clickable elements with their own special behavior inside the Button, su
 
 The example below demonstrates how to initialize the Button by using the default `button` tag.
 
-###### Example
+
 
     $textButton = new \Kendo\UI\Button('textButton');
     $textButton->attr('type', 'button')
@@ -36,7 +36,7 @@ The example below demonstrates how to initialize the Button by using the default
 
 The example below demonstrates how to initialize the Button by using an `anchor` tag.
 
-###### Example
+
 
     $linkButton = new \Kendo\UI\Button('linkButton');
     $linkButton->tag('a')
@@ -54,13 +54,13 @@ The Button supports three settings that help configure icons&mdash;`icon`, `spri
 
 Background icons are applied via the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The difference between the two settings is that `icon` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite.
 
-For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+For a list of available icon names, refer to the [Icons demo](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 #### The icon Property
 
 The example below demonstrates how to use icons by applying the `icon` property.
 
-###### Example
+
 
     $kendoIconButton = new \Kendo\UI\Button('cancelButton');
     $kendoIconButton->attr('type', 'button')
@@ -71,7 +71,7 @@ The example below demonstrates how to use icons by applying the `icon` property.
 
 The above configuration produces the HTML output shown below.
 
-###### Example
+
 
     <button type="button" id="cancelButton" class="k-button k-button-icontext"><span class="k-icon k-cancel"></span>Cancel</button>
 
@@ -79,7 +79,7 @@ The above configuration produces the HTML output shown below.
 
 The example below demonstrates how to use icons by applying the `spriteCssClass` property.
 
-###### Example
+
 
     $spriteButton = new \Kendo\UI\Button('spriteButton');
     $spriteButton->attr('type', 'button')
@@ -90,7 +90,7 @@ The example below demonstrates how to use icons by applying the `spriteCssClass`
 
 The above configuration produces the HTML output shown below.
 
-###### Example
+
 
     <button type="button" id="spriteButton" class="k-button k-button-icontext"><span class="k-sprite myIconClass"></span>Sprite Button</button>
 
@@ -104,7 +104,7 @@ Image icons are applied via the `imageUrl` property and are displayed as an `img
 
 The example below demonstrates how to use the `imageUrl` property.
 
-###### Example
+
 
     $imageButton = new \Kendo\UI\Button('imageButton');
     $imageButton->attr('type', 'button')
@@ -115,7 +115,7 @@ The example below demonstrates how to use the `imageUrl` property.
 
 The above configuration produces the HTML output shown below.
 
-###### Example
+
 
     <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
 
@@ -123,7 +123,7 @@ The above configuration produces the HTML output shown below.
 
 An `img` tag should be placed inside the **Button** content. The image should have a `k-image` CSS class.
 
-###### Example
+
 
     $imageButton = new \Kendo\UI\Button('imageButton');
     $imageButton->attr('type', 'button')
@@ -136,7 +136,7 @@ An `img` tag should be placed inside the **Button** content. The image should ha
 
 The Button uses an existing `span` element if it is supplied as `content`, e.g. if the goal is to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
 
-###### Example
+
 
     $deleteButton = new \Kendo\UI\Button('deleteButton');
     $deleteButton->attr('type', 'button')
@@ -153,7 +153,7 @@ The business logic of an application often requires a certain button to be tempo
 
 The example below demonstrates how to use the `enable` method.
 
-###### Example
+
 
     $disabledButton = new \Kendo\UI\Button('disabledButton');
     $disabledButton->attr('type', 'button')

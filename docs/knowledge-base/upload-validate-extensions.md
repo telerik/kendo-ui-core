@@ -2,7 +2,7 @@
 title: Validate Files and File Extensions on Upload
 description: An example on how to validate the selection and file extension in the Kendo UI Upload.
 type: how-to
-page_title: Implement File and Extension Validation on Submit | Kendo UI Upload
+page_title: Implement File and Extension Validation on Submit | Kendo UI Upload for jQuery
 slug: upload-validate-extensions
 tags: kendo, kendoui, upload, validate, submit, extension, file
 ticketid: 1138527
@@ -47,11 +47,11 @@ To validate whether a file is selected and that the selected file has the correc
     <meta charset="utf-8" />
     <title>Untitled</title>
     <base href="https://demos.telerik.com/kendo-ui/upload/index">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.621/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.default.min.css">
     <script src="http://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
 </head>
 <body>
     <form method="POST" name="procedureForm" id="myForm">

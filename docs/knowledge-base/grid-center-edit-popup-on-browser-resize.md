@@ -2,9 +2,9 @@
 title: Keep Popup Editor Centered on Browser Resize in Grid
 description: An example on how to center the edit popup window of the Kendo UI Grid on resize.
 type: how-to
-page_title: Keep the Edit Popup Always Centered | Kendo UI Grid
+page_title: Keep the Edit Popup Always Centered | Kendo UI Grid for ASP.NET MVC
 slug: grid-center-edit-popup-on-browser-resize
-tags: grid, popup, edit, kendo, resize, browser, modal, re-size, window, re-centre,
+tags: grid, popup, edit, kendo, resize, browser, modal, re-size, window, re-center
 ticketid: 1138443
 res_type: kb
 component: grid

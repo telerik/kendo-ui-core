@@ -2,7 +2,7 @@
 title: Hide Year Selection from DatePicker and DateTimePicker
 description: An example on how to disable the year view of the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: Remove the Year View | Kendo UI DatePicker
+page_title: Remove the Year View | Kendo UI DatePicker for jQuery
 slug: datepicker-remove-year-view
 tags: kendo ui, datepicker, datetimepicker, year view
 ticketid: 1115942, 1116792
@@ -162,6 +162,6 @@ The following example demonstrates how to hide the year view in a Kendo UI DateT
 
 ## See Also
 
-* [DatePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [DateTimePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [Calendar API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [DateTimePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Calendar API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)

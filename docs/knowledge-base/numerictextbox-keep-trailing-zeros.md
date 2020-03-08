@@ -2,7 +2,7 @@
 title: Keep Trailing Zeros in NumericTextBox
 description: An example on how to always display the entire decimal portion in the Kendo UI NumericTextBox.
 type: how-to
-page_title: Prevent Rounding of Decimals | Kendo UI NumercTextBox
+page_title: Prevent Rounding of Decimals | Kendo UI NumercTextBox for jQuery
 slug: numerictextbox-keep-trailing-zeros
 tags: numeric, numerictextbox, preserve, keep, trailing, zeros, rounding, decimals, round
 ticketid: 1161653
@@ -31,13 +31,13 @@ How can I format the number in a NumericTextBox so that it shows four decimal pl
 
 ## Solution
 
-This functionality is not part of the built-in NumericTextBox settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/6696197-numerictextbox-should-display-decimal-portion-even](http://kendoui-feedback.telerik.com/forums/127393-kendo-ui-feedback/suggestions/6696197-numerictextbox-should-display-decimal-portion-even).
+This functionality is not part of the built-in NumericTextBox settings but is already submitted as a feature request in the UserVoice forum. Popular requests get prioritized on the team's roadmap. To upvote the feature request, refer to [https://feedback.telerik.com/kendo-jquery-ui/1359131-numerictextbox-should-display-decimal-portion-even-when-zero](https://feedback.telerik.com/kendo-jquery-ui/1359131-numerictextbox-should-display-decimal-portion-even-when-zero).
 
 ## Suggested Workaround
 
 Add the trailing zeros programmatically both on [`spin`](/api/javascript/ui/numerictextbox/events/spin) and on `focus` of the input. You can further elaborate on the example so it reflects the globalization practices and check if the decimals are properly rendered when used on multiple NumericTextBoxes.
 
-###### Example
+
 
 ```dojo
 	<input id="numerictextbox" />

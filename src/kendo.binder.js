@@ -1080,6 +1080,54 @@ var __meta__ = { // jshint ignore:line
             }
         }),
 
+        start: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this._change = proxy(this.change, this);
+                this.widget = widget;
+                this.widget.bind(CHANGE, this._change);
+            },
+
+            change: function() {
+                this.bindings.start.set(this.widget.range().start);
+            },
+
+            refresh: function() {
+                var that = this;
+                var start = this.bindings.start.get();
+                var end = that.widget._range ? that.widget._range.end: null;
+                this.widget.range({start: start, end: end});
+            },
+
+            destroy: function() {
+                this.widget.unbind(CHANGE, this._change);
+            }
+        }),
+
+        end: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this._change = proxy(this.change, this);
+                this.widget = widget;
+                this.widget.bind(CHANGE, this._change);
+            },
+
+            change: function() {
+                this.bindings.end.set(this.widget.range().end);
+            },
+
+            refresh: function() {
+                var that = this;
+                var end = this.bindings.end.get();
+                var start = that.widget._range ? that.widget._range.start: null;
+                this.widget.range({start: start, end: end});
+            },
+
+            destroy: function() {
+                this.widget.unbind(CHANGE, this._change);
+            }
+        }),
+
         visible: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
@@ -1545,6 +1593,28 @@ var __meta__ = { // jshint ignore:line
                     var widget = this.widget;
                     var elements = e.addedItems || widget.items();
                     var data, parents;
+
+                    if (elements.length) {
+                        data = e.addedDataItems || widget.dataItems();
+                        parents = this.bindings.source._parents();
+
+                        for (idx = 0, length = data.length; idx < length; idx++) {
+                            bindElement(elements[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
+                        }
+                    }
+                }
+            })
+        },
+
+        grid: {
+            source: dataSourceBinding("source", "dataSource", "setDataSource").extend({
+                dataBound: function(e) {
+                    var idx,
+                    length,
+                    widget = this.widget,
+                    elements = e.addedItems || widget.items(),
+                    parents,
+                    data;
 
                     if (elements.length) {
                         data = e.addedDataItems || widget.dataItems();

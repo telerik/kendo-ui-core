@@ -1,79 +1,70 @@
 ---
-title: NPM Packages
-page_title: NPM Packages | Kendo UI Getting Started
-description: "Install Kendo UI Core and Kendo UI Professional as NPM packages."
+title: Installing with NPM
+page_title: Installing with NPM | Download and Installation | Kendo UI for jQuery
+description: "Get started with Kendo UI for jQuery and install Kendo UI Core or Kendo UI as NPM packages."
 slug: kendoui_npm_packages_kendoui_installation
-position: 3
+position: 5
 ---
 
-# NPM Packages
+# Installing with NPM
 
 The [Node Package Manager (NPM)](http://npmjs.com/) is a popular JavaScript package manager.
 
-This article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Some of the tools that address this issue are Browserify, Webpack, and SystemJS.
+This article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Some of the tools that address this issue are Browserify, Webpack, and SystemJS. For more information on possible setups, refer to the [sample repository on GitHub](https://github.com/telerik/kendo-ui-npm-example).
 
-For more information on possible setups, refer to the [sample repository on GitHub](https://github.com/telerik/kendo-ui-npm-example).
+Kendo UI maintains the [Kendo UI Core](#kendo-ui-core-on-npm) and the [Kendo UI](#kendo-ui-on-npm) NPM packages. All Kendo UI official releases, service packs, and internal builds are uploaded to both of them.
 
-## Overview
+> The Kendo UI NPM package is available only for commercial license holders. For more information, refer to the [list of Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
 
-Kendo UI maintains two NPM packages:
+## Kendo UI Core on NPM
 
-* [Kendo UI Core](#kendo-ui-core)
-* [Kendo UI Professional](#kendo-ui-professional)
+The Kendo UI Core NPM package is available as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/) and is accessible without credentials. To install the package, run `npm install --save kendo-ui-core`.
 
-Official releases, service packs, and internal builds are published for each package.
+## Kendo UI on NPM
 
-> **Important**
-> * The Kendo UI Professional NPM package is available only for commercial license holders. For more information, refer to the [list of Kendo UI components and their bundle support]({% slug bundle_supportfor_kendoui_components %}).
-> * The package is not accessible for trial user accounts.
+The Kendo UI NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry. To install the package, run `npm install --save @progress/kendo-ui`.
 
-## Kendo UI Core
+> * The Progress NPM registry was retired in favor of [npmjs.com](https://www.npmjs.com/). To start using the default registry, remove the two lines which contain `registry.npm.telerik.com` from your `.npmrc` file.
+> * The scripts in the NPM package are not usable in the browser. To work around this issue, use a bundler such as [WebPack]({% slug webpacksupport_integration_kendoui %}).
+> * After May 2017, the `kendo` legacy package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will no longer be updated but will remain active.
 
-The Kendo UI Core NPM Package is published as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/) and is accessible without credentials.
+## NPM Channels for Kendo UI packages
 
-To install the Kendo UI Core NPM package, run `npm install --save kendo-ui-core`.
+As of November 2019, there are two separate channels for the Internal and Official NPM packages. The official releases and Service Packs for Kendo UI and Kendo UI Core are distributed in the "latest" channel. The internal builds are released in the "dev" channel. 
 
-## Kendo UI Professional
+To install the latest internal build, run `npm install --save @progress/kendo-ui@dev`. If you wish to install an older version, run `npm install --save @progress/kendo-ui@2019.3.1115-internal`. 
 
-The Kendo UI Professional NPM Package (@progress/kendo-ui) is available at the NPM registry.
-
-> **Important**
->
-> The Progress NPM registry was retired in favor of [npmjs.com](https://www.npmjs.com/). To start using the default registry, remove the two lines which contain `registry.npm.telerik.com` from your `.npmrc` file.
-
-### Installation
-
-To install the Kendo UI Professional NPM package, run `npm install --save @progress/kendo-ui`.
-
-> **Important**
->
-> The scripts in the NPM package are not usable in the browser. To work around this issue, use a bundler such as [WebPack]({% slug webpacksupport_integration_kendoui %}).
-
-### Legacy Package
-
-The `kendo` legacy package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will not be updated after May 2017. The repository itself will remain active.
+To install the latest official build, run `npm install --save @progress/kendo-ui@latest`.
 
 ## Troubleshooting
 
 This section provides solutions for common issues you might encounter while installing the Kendo UI NPM packages.
 
-### The jQuery Module Is Not Found
+### The jQuery module is not found
 
-During the installation process, you might see the following error:
+**Description** During the installation process, you might see the `Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'` error.
 
-```
-Error: Cannot find module 'jquery' from '/Users/bernhard/Documents/JavaScriptDevelopment/kendo-ui-npm-example/javascript-browserify'
-```
+**Cause** Most probably, you use an earlier NPM version.
 
-The most probable cause of this issue is the usage of an old NPM version.
+**Solution** Update to an NPM ^3.0.0 version.
 
-**Solution**
+## Next Steps
 
-Use an NPM ^3.0.0 version.
+* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
+* [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [Check out the jQuery version support]({% slug jquerysupport_kendoui %})
+* [Check out the web browser support]({% slug wbe_browserand_operating_system_support %})
+* [Check out the operation system support]({% slug ossupport_kendo %})
+* [Check out the PDF and Excel export support]({% slug export_support_kendoui %})
+* [Explore the widget script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Kendo UI Bower Packages]({% slug kendoui_bower_packages_kendoui_installation %})
-* [NuGet Packages]({% slug kendoui_nuget_packages %})
+* [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
+* [Installing Kendo UI with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
+* [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})

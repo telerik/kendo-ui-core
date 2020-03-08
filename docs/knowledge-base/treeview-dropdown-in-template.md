@@ -2,7 +2,7 @@
 title: Initialize DropDownList in the TreeView Template
 description: An example on how to embed a Kendo UI DropDownList for jQuery in the node template of a Kendo UI TreeView for jQuery.
 type: how-to
-page_title: Create DropDownList in Node Template | Kendo UI TreeView
+page_title: Create DropDownList in Node Template | Kendo UI TreeView for jQuery
 slug: treeview-dropdown-in-template
 tags: kendo, kendo-ui, treeview, dropdownlist, template
 res_type: kb
@@ -65,7 +65,7 @@ How can I place DropDownLists in the `<script>` of the TreeView template which w
       }
     }),
     files: kendo.observableHierarchy([
-      { name: "My Web Site", id: "one", expanded: true, items: [
+      { name: "My Website", id: "one", expanded: true, items: [
         { name: "images", id: "two", expanded: true, items: [
           { name: "logo.png", id: "three" },
           { name: "my-photo.jpg", id: "four" }

@@ -2,7 +2,7 @@
 title: Get Checked Nodes in a POST Query
 description: The TreeView checkboxes need unique name attributes when they are used in a POST query.
 type: troubleshooting
-page_title: Upon selection, all TreeView nodes are checked while in the `POST` query only one entry is visible.
+page_title: Get Checked Nodes in POST Queries | Kendo UI TreeView for jQuery
 slug: get-checked-treeview-nodes-in-post
 tags: treeview, node, checked, checkbox, name, post, query, unique
 ticketid: 1363907, 1363212, 1364154
@@ -44,7 +44,7 @@ The following example demonstrates a template that mimics the default TreeView t
 )
 ```
 
-The following example demonstrates the jQuery and MVC initialization.
+The following example demonstrates the jQuery and ASP.NET MVC initialization.
 
 ```dojo
 <form>
@@ -69,7 +69,7 @@ The following example demonstrates the jQuery and MVC initialization.
 					]
 				},
 				{
-					id: 6, text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
+					id: 6, text: "New Website", expanded: true, spriteCssClass: "folder", items: [
 						{ id: 7, text: "mockup.jpg", spriteCssClass: "image" },
 						{ id: 8, text: "Research.pdf", spriteCssClass: "pdf" },
 					]
@@ -114,7 +114,7 @@ The following example demonstrates the jQuery and MVC initialization.
 							project.Add().Text("logo.png").Id("5").SpriteCssClasses("image");
 						});
 
-					root.Add().Text("New Web Site").Id("6")
+					root.Add().Text("New Website").Id("6")
 						.Expanded(true)
 						.SpriteCssClasses("folder")
 						.Items(item =>

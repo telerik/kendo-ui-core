@@ -1,34 +1,34 @@
 ---
 title: Data Binding
-page_title: Data Binding | Kendo UI Charts
-description: "Learn how to handle the Kendo UI Charts data binding to inline data and to a data source."
+page_title: jQuery Chart Documentation | Data Binding | Kendo UI
+description: "Get started with the jQuery Chart by Kendo UI and learn how to bind it to inline data and to a data source."
+previous_url: /controls/charts/chart/data-binding
 slug: databinding_charts_widget
-position: 3
+position: 2
 ---
 
 # Data Binding
 
-## To Inline Data
+You can populate the Kendo UI Chart with data by [binding it to inline data](#inline-data) and [binding it to a data source](#data-source).
 
-The Kendo UI Chart data points can be specified as part of the series definitions. The type of the data points depends on the type of the series.
+## Inline Data
 
-### Bind to Arrays of Values
+You can specify the data points of the Charts as part of the series definitions. The type of the data points depends on the type of the series.
 
-This is the simplest and the fastest form of data binding where the values are provided as an array for each series.
+Binding the Chart to arrays of values is the fastest form of data binding where the values are provided as an array for each series. However, you are not allowed to add metadata to the data points and the array will contain only the values which will be plotted.
 
-A limitation of this approach is that you are not allowed to add metadata to the data points. The array contains only the values which are to be plotted.
+Binding the Chart to arrays of objects is a more flexible alternative which enables you to configure the fields for each series as they cannot be inferred as is the case with the simple arrays. The major benefit of this approach is that you can associate metadata with the series points. It is also possible to combine the data for many series in a single object.
 
-#### Categorical Series
+* [Binding categorical series to inline data](#binding-categorical-series-to-inline-data)
+* [Binding scatter series to inline data](#binding-scatter-series-to-inline-data)
+* [Binding categorical series to arrays of objects](#binding-categorical-series-to-arrays-of-objects)
+* [Binding scatter series to arrays of objects](#binding-scatter-series-to-arrays-of-objects)
 
-Categorical series, such as the [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), the [Line](http://demos.telerik.com/kendo-ui/line-charts/index), the [Area](http://demos.telerik.com/kendo-ui/area-charts/index) and other Kendo UI Charts, expect a data point of type `Number`. The category names are populated independently in the category axis.
+### Binding Categorical Series to Inline Data
 
-> **Important**
->
-> All series must contain the same number of points in an order identical to the category one.
+[Categorical series]({% slug htmlhelpers_categoricalcharts_aspnetcore %}), such as Bar, Line, or Area, expect a data point of a numeric type. The category names are populated independently in the category axis.
 
-The example below demonstrates the inline binding of a column series.
-
-###### Example
+> To keep the Chart consistent, all series have to contain the same number of points in an order that matches the order of the categories which are declared in `categoryAxis`.
 
 ```dojo
     <div id="chart"></div>
@@ -49,11 +49,10 @@ The example below demonstrates the inline binding of a column series.
     });
     </script>
 ```
-#### Scatter Series
 
-This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point has to be an array containing two values&mdash;X and Y, as demonstrated in the example below.
+### Binding Scatter Series to Inline Data
 
-###### Example
+[Scatter series]({% slug scattercharts_widget %}) include the two-dimensional Scatter and ScatterLine series. Each data point in the series has to be an array which contains an X and a Y value.
 
 ```dojo
     <div id="chart"></div>
@@ -68,17 +67,9 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
     </script>
 ```
 
-### Bind to Arrays of Objects
+### Binding Categorical Series to Arrays of Objects
 
-A more flexible and still very performant alternative is to provide the series with an array of objects. Configure the fields for each series, because they cannot be inferred as in the case with the simple arrays.
-
-The major benefit of this approach is that you are able to associate metadata with the series points. It is also possible to combine the data for many series in a single object.
-
-#### Categorical Series
-
-In addition to binding to arrays, you are also able to supply objects and specify fields to bind the series to. This allows you to access additional fields, for example in tooltips.
-
-###### Example
+You can also supply the Chart with objects and specify fields to which the series will be bound. This approach allows you to access additional fields, for example, in tooltips.
 
 ```dojo
     <div id="chart"></div>
@@ -110,11 +101,9 @@ In addition to binding to arrays, you are also able to supply objects and specif
     </script>
 ```
 
-#### Scatter Series
+### Binding Scatter Series to Arrays of Objects
 
-This category of Kendo UI Charts includes the two-dimensional [Scatter](http://demos.telerik.com/kendo-ui/scatter-charts/index) and [Scatter Line](http://demos.telerik.com/kendo-ui/scatter-charts/scatter-line) series. The data point has to be an array containing two values&mdash;X and Y, as demonstrated in the example below.
-
-###### Example
+To bind a scatter series to an array of objects, the data point has to be an array with X and Y values.
 
 ```dojo
     <div id="chart"></div>
@@ -129,19 +118,20 @@ This category of Kendo UI Charts includes the two-dimensional [Scatter](http://d
     </script>
 ```
 
-## Bind Series to Data Source
+## Data Source
 
-The most powerful form of data binding is to use the [Kendo UI DataSource component](/framework/datasource/overview). It supports binding to both local and remote data in a variety of formats and over different transport protocols. Examples include JSON, XML, JSONP and oData.
+The most powerful form of data binding is to use the [Kendo UI DataSource component](/framework/datasource/overview). The Data Source supports binding to both local and remote data in various formats and using various transport protocols such as JSON, XML, JSONP, and oData. The usage of the DataSource incurs a performance overhead. For more information, refer to the article on [performance tips]({% slug tipsandtricks_kendouistyling %}).
 
-The usage of the DataSource abstraction incurs a performance overhead. For more information, refer to the article on [performance tips]({% slug tipsandtricks_kendouistyling %}).
+* [Setting the data source](#setting-the-data-source)
+* [Binding to remote data](#binding-to-remote-data)
+* [Binding to grouped data](#binding-to-grouped-data)
+* [Binding categorical series to a value field](#binding-categorical-series-to-a-value-field)
+* [Binding categorical series to a category field](#binding-categorical-series-to-a-category-field)
+* [Binding scatter series to a data source](#binding-scatter-series-to-a-data-source)
 
-### Set the Data Source
+### Setting the Data Source
 
-The Chart accepts either a DataSource instance, or an object with the DataSource options.
-
-The example below demonstrates how to set the DataSource configuration.
-
-###### Example
+The Chart accepts either a DataSource instance or an object with the DataSource options.
 
 ```dojo
     <div id="chart"></div>
@@ -162,9 +152,7 @@ The example below demonstrates how to set the DataSource configuration.
     </script>
 ```
 
-The example below demonstrates how to set the DataSource instance.
-
-###### Example
+The following example demonstrates how to set the DataSource instance.
 
 ```dojo
     <div id="chart"></div>
@@ -187,23 +175,18 @@ The example below demonstrates how to set the DataSource instance.
     </script>
 ```
 
-### Bind to Remote Data
+### Binding to Remote Data
 
-The Chart can be bound to remote data by configuring the DataSource `transport`. The transport defines the way the DataSource interacts with remote data.
+You can bind the Chart to remote data by configuring the DataSource `transport` which defines the way the DataSource interacts with remote data.
 
-The example below demonstrates how the following JSON string is returned from the `/sales` service.
-
-###### Example
+The following example demonstrates how the following JSON string is returned from the `/sales` service.
 
     [{ "year": "2000", "sales": 200 },
       { "year": "2001", "sales": 450 },
       { "year": "2002", "sales": 300 },
       { "year": "2003", "sales": 125 }]
 
-
-Bind the data source to this service and sort it by year, as demonstrated below.
-
-###### Example
+The following example demonstrates how to bind the data source to this service and sort it by year.
 
     <div id="chart"></div>
     <script>
@@ -223,17 +206,11 @@ Bind the data source to this service and sort it by year, as demonstrated below.
     });
     </script>
 
-### Bind to Grouped Data
+### Binding to Grouped Data
 
-The Chart can be bound to grouped data. In this case the categories are created depending on the first group.
+The Chart enables you to bind it to grouped data and creates the categories depending on the first group.
 
-> **Important**
->
-> All series must contain the same number of points. If there is a different number of points in the `series.categoryField`,use groups instead of `categoryAxis.field`.
-
-The example below demonstrates a grouped chart with different number of points in the groups.
-
-###### Example
+> All series must contain the same number of points. If a different number of points in the `series.categoryField` exists, use groups instead of `categoryAxis.field`.
 
 ```dojo
     <div id="chart"></div>
@@ -268,19 +245,11 @@ The example below demonstrates a grouped chart with different number of points i
     </script>
 ```
 
-### Bind Categorical Series
+### Binding Categorical Series to a Value Field
 
-#### Value Field
+You can bind categorical series to a value field. The category names are populated independently by binding the category axis.
 
-Categorical series, such as [Bar](http://demos.telerik.com/kendo-ui/bar-charts/index), [Line](http://demos.telerik.com/kendo-ui/line-charts/index), [Area](http://demos.telerik.com/kendo-ui/area-charts/index) Kendo UI Charts, are bound to a value field. The category names are populated independently by binding the category axis.
-
-> **Important**
->
-> All series must contain the same number of points in an order identical to the category one.
-
-The example below demonstrates data-bound categorical series.
-
-###### Example
+> All series must contain the same number of points in an identical to the category order.
 
 ```dojo
     <div id="chart"></div>
@@ -313,13 +282,9 @@ The example below demonstrates data-bound categorical series.
     </script>
 ```
 
-#### Category Field
+### Binding Categorical Series to a Category Field
 
-In addition to value fields, each series allows for specifying a category field. The category values from all series are concatenated and each point is mapped to its category. Point order is not significant. Series points are [aggregated](/api/dataviz/chart#configuration-series.aggregate) to produce one value per category.
-
-The example below demonstrates how to bind with `categoryField`.
-
-###### Example
+Categorical series allow you to specify a category field. The category values from all series are concatenated and each point is mapped to its category. The point order is insignificant. Series points are [aggregated](/api/dataviz/chart#configuration-series.aggregate) to produce a single value per category.
 
 ```dojo
     <div id="chart"></div>
@@ -354,11 +319,9 @@ The example below demonstrates how to bind with `categoryField`.
     </script>
 ```
 
-### Bind Scatter Series
+### Binding Scatter Series to a Data Source
 
-Scatter series are bound to the fields specified as `xField` and `yField`, as demonstrated below.
-
-###### Example
+To bind the scatter series to a data source, use the fields that are specified as `xField` and `yField`.
 
 ```dojo
     <div id="chart"></div>
@@ -382,16 +345,7 @@ Scatter series are bound to the fields specified as `xField` and `yField`, as de
     </script>
 ```
 
-
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Date Series]({% slug dateseries_charts_widget %})
-* [Tooltip]({% slug tooltip_charts_widget %})
-* [Chart Notes]({% slug chartnotes_charts_widget %})
-* [Title and Legend]({% slug titlelegend_features_charts %})
-* [Appearance]({% slug appearance_charts_widget %})
-* [Error Bars]({% slug errorbars_charts_widget %})
-* [Data Series]({% slug seriestypeofcharts_widget %})
-* [Types of Kendo UI Charts]({% slug areacharts_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

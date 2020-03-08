@@ -9,13 +9,11 @@ slug: howto_scrolltoselecteditem_treeview
 
 The following example demonstrates how to scroll the TreeView viewport to the selected node.
 
-###### Example
-
 ```dojo
     <div id="tree"></div>
 
     <script>
-      // setup: generate data, select item
+      // Set up: generate the data, select an item.
       var data = [];
       for (var i = 0; i < 1000; i++) {
         data.push({ text: "Item " + i });
@@ -26,7 +24,7 @@ The following example demonstrates how to scroll the TreeView viewport to the se
       var treeview = $("#tree").data("kendoTreeView");
       treeview.select(treeview.findByText("Item 500"));
 
-      // scroll to selected item
+      // Scroll to the selected item.
       var itemScrollTop = treeview.select()[0].offsetTop;
       $("html,body").animate({ scrollTop: itemScrollTop });
     </script>
@@ -34,13 +32,6 @@ The following example demonstrates how to scroll the TreeView viewport to the se
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

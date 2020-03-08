@@ -11,12 +11,9 @@ slug: howto_export_pdf_header_footer
 The following example demonstrates how to use the Template feature of the [Drawing DOM API]({% slug drawingofhtmlelements_drawingapi %}#configuration-Template:) to generate header and footer elements in the exported PDF document.
 
 To style the header and footer elements:
-
-* Use an inline style tag, as in the following example.
+* Use an inline style tag as in the following example.
 * If the Editor is in its [classic mode]({% slug overview_kendoui_editor_widget %}#classic-mode), add an external CSS file to the [`options.stylesheets array`](/api/javascript/ui/editor/configuration/stylesheets) and apply the needed decoration.
 * If the Editor is in its [inline mode]({%slug overview_kendoui_editor_widget%}#inline-mode), directly reference the implemented CSS file to the page.
-
-###### Example
 
 ```dojo
 <script>
@@ -66,8 +63,8 @@ To style the header and footer elements:
     &lt;li&gt;Gracefully degrades to a &lt;code&gt;textarea&lt;/code&gt; when JavaScript is turned off&lt;/li&gt;
     &lt;/ul&gt;
     &lt;p&gt;
-    Read &lt;a href=&quot;http://docs.telerik.com/kendo-ui&quot;&gt;more details&lt;/a&gt; or send us your
-    &lt;a href=&quot;http://www.telerik.com/forums/&quot;&gt;feedback&lt;/a&gt;!
+    Read &lt;a href=&quot;https://docs.telerik.com/kendo-ui&quot;&gt;more details&lt;/a&gt; or send us your
+    &lt;a href=&quot;https://www.telerik.com/forums/&quot;&gt;feedback&lt;/a&gt;!
     &lt;/p&gt;
     Nunc tincidunt erat lorem, ut pretium ipsum faucibus sed. Aenean arcu urna, porta a nulla interdum, mattis auctor sem. Etiam fermentum cursus sapien, vitae facilisis ipsum placerat eget. In ultrices laoreet felis, quis rhoncus nulla posuere et. Aenean quis porta magna. Quisque ut consectetur nulla. Sed nisi elit, eleifend sed pellentesque ut, sagittis quis eros.
     Nullam laoreet convallis augue, a viverra nisi tincidunt ac. Nunc vel commodo sem. In hac habitasse platea dictumst. Mauris ornare ante vulputate molestie dictum. Phasellus nunc sem, consectetur eget risus ac, venenatis consequat massa. Aliquam facilisis vitae turpis quis vehicula. Vivamus ullamcorper elementum vestibulum. Vivamus interdum urna eu enim mollis, nec venenatis risus cursus. Fusce vulputate elit felis, non vestibulum mauris hendrerit sed. Aenean tincidunt sem at mi sollicitudin malesuada. Cras suscipit enim nec commodo lacinia.
@@ -83,11 +80,6 @@ To style the header and footer elements:
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

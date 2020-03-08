@@ -9,7 +9,7 @@ slug: howto_focus_widgeton_label_click_numerictextbox
 
 The following example demonstrates how to focus the NumericTextBox when the `label` element is clicked.
 
-###### Example
+
 
 ```dojo
 <label for="numerictextbox">Number: </label>

@@ -2,7 +2,7 @@
 title: Sort MultiCheck Filter
 description: An example on how to sort the dataSource of the MultiCheck filter in a Kendo UI Grid for MVC.
 type: how-to
-page_title: Sort MultiCheck Filter DataSource in Grid for MVC | UI for ASP.NET MVC
+page_title: Sort MultiCheck Filter DataSource in Kenod UI Grid for ASP.NET MVC | Kendo UI Grid for ASP.NET MVC
 slug: sort-multi-check-filter-mvc-grid
 tags: grid, ASP.NET MVC, filter, multi, multi-filter, multi-checkbox, checkbox, not sorted
 ticketid: 1116585
@@ -27,7 +27,7 @@ How can I sort the values in a multiple select filter in a Kendo UI Grid for MVC
 
 By default, the data source of the Grid is used as is. However, you can still work around this issue.
 
-Provide a separate, [custom data source](http://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#initial-setup) which can be sorted in the desired sort order.
+Provide a separate, [custom data source](https://docs.telerik.com/aspnet-mvc/getting-started/custom-datasource#initial-setup) which can be sorted in the desired sort order.
 
 ```
 columns.Bound(p => p.Details).Filterable(ftb =>
@@ -48,4 +48,4 @@ columns.Bound(p => p.Details).Filterable(ftb =>
 
 ## See Also
 
-* [Sort FilterMenuInit() or FilterMenuOpen() in Grid](http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter)  
+* [Sort FilterMenuInit() or FilterMenuOpen() in Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/sort-multi-checkbox-filter)  

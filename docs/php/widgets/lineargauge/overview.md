@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 **Step 2** Create a [LinearGauge](/api/javascript/dataviz/ui/lineargauge).
 
-###### Example
+
 
         $gauge = new \Kendo\Dataviz\UI\LinearGauge('gauge');
         $gauge->pointer(array('value' => 10))
@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 **Step 3** Output the LinearGauge by echoing the result of the `render` method.
 
-###### Example
+
 
         echo $gauge->render();
 
@@ -36,9 +36,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Linea
 
 ### Client-Side Instances
 
-You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
+You are able to reference an existing LinearGauge instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [LinearGauge API](/api/javascript/dataviz/ui/lineargauge#methods) to control its behavior.
 
-###### Example
+
 
         // Put this after your Kendo LinearGauge for PHP render() call
         <script>

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 2** Create an array to which the Scheduler will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -49,7 +49,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -58,7 +58,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 4** Create a [Scheduler](/api/php/Kendo/UI/Scheduler), set the initial selected [`date`](/api/php/Kendo/UI/Scheduler#date) and its [`dataSource`](/api/php/Kendo/UI/Scheduler#datasource).
 
-###### Example
+
 
         <?php
         $scheduler = new \Kendo\UI\Scheduler('scheduler');
@@ -68,7 +68,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sched
 
 **Step 5** Output the Scheduler by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $scheduler->render();
@@ -82,7 +82,7 @@ You can subscribe to all Scheduler [events](/api/javascript/ui/scheduler#events)
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $scheduler = new \Kendo\UI\Scheduler('scheduler');
@@ -102,7 +102,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $scheduler = new \Kendo\UI\Scheduler('scheduler');
@@ -118,9 +118,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI Scheduler instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Scheduler API](/api/javascript/ui/scheduler#methods) to control its behavior.
+You can reference the client-side Kendo UI Scheduler instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Scheduler API](/api/javascript/ui/scheduler#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $scheduler = new \Kendo\UI\Scheduler('eventScheduler');

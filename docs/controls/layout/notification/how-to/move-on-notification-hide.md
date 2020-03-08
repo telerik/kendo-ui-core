@@ -7,20 +7,15 @@ slug: howto_move_notifications_after_hiding_others
 
 # Move Visible Notifications after Hiding Others
 
-The example below demonstrates how to move the remaining visible notifications after some have been hidden and empty spaces in the stack have been created.
+The following example demonstrates how to move the remaining visible notifications after some have been hidden and empty spaces in the stack have been created.
 
-The idea is to use **static** notification messages inside a **positioned container**. This creates the impression that popup notification messages are used.
+The idea is to use static notification messages inside a positioned container. This approach creates the impression that popup notification messages are used. The position settings, which are normally applied to the Notification widget, have to be replaced by appropriate CSS styles that are applied to the container of the static messages.
 
-The position settings, which are normally applied to the Notification widget, should be replaced by appropriate CSS styles applied to the static messages' container.
-
-The example is based on the following API and widget functionality:
-
-* [`appendTo`](/api/javascript/ui/notification/configuration/appendto) setting
-* [`stacking`](/api/javascript/ui/notification/configuration/stacking) setting
-* [Positioning and Stacking]({% slug overview_kendoui_notification_widget %}#configuration-Position) documentation,
-which also explains how to [change the auto-hide timeout on the fly]({% slug overview_kendoui_notification_widget %}#change-settings-for-specific-notification-messages)
-
-###### Example
+The following example is based on the following API and widget functionality:
+* [`appendTo`](/api/javascript/ui/notification/configuration/appendto)
+* [`stacking`](/api/javascript/ui/notification/configuration/stacking)
+* [Positioning and stacking of messages]({% slug positionstacking_kendoui_notification %})
+* [Changing the auto-hide timeout on the fly]({% slug positionstacking_kendoui_notification %}#rendering-different-messages-for-single-notifications)
 
 ```dojo
 <style>
@@ -44,13 +39,13 @@ which also explains how to [change the auto-hide timeout on the fly]({% slug ove
 
   <script>
     $(function() {
-      // initialize the Notification widget
+      // Initialize the Notification.
       var staticNotification = $("#staticNotification").kendoNotification({
         appendTo: "#appendto",
         stacking: "up"
       }).data("kendoNotification");
 
-      // show some Notification messages with variable hide timeout
+      // Show Notification messages with variable hide timeout.
       function showNotifications() {
         for (var j = 0; j < 10; j++) {
           staticNotification.setOptions({
@@ -63,15 +58,15 @@ which also explains how to [change the auto-hide timeout on the fly]({% slug ove
         }
       }
 
-      // show handler
+      // Show the handler.
       $("#showNotifications").click(showNotifications);
 
-      // hide handler
+      // Hide the handler.
       $("#hideNotifications").click(function(){
         staticNotification.hide();
       });
 
-      // show some Notification messages automatically
+      // Show Notification messages automatically.
       showNotifications();
 
     });
@@ -81,6 +76,6 @@ which also explains how to [change the auto-hide timeout on the fly]({% slug ove
 
 ## See Also
 
-* [Notification JavaScript API Reference](/api/javascript/ui/notification)
-* [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
-* [How to Move Popup Notifications on Window Resize]({% slug howto_move_popup_notifications_onwindow_resize_notification %})
+* [Basic Usage of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/index)
+* [Using the API of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/api)
+* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)

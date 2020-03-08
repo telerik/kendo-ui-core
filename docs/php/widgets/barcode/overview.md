@@ -20,14 +20,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 **Step 2** Add a Barcode with the default [`type`](/api/javascript/dataviz/ui/barcode/configuration/type) (Code39).
 
-###### Example
+
 
     $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
     $barcode->value("foo");
 
 **Step 3** Change the symbology to match your scenario.
 
-###### Example
+
 
     $barcode = new \Kendo\Dataviz\UI\Barcode('barcode');
     $barcode->value("foo");
@@ -35,7 +35,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 **Step 4** Output the chart by echoing the result of the `render` method.
 
-###### Example
+
 
     echo $barcode->render();
 
@@ -43,9 +43,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Barco
 
 ### Existing Instances
 
-You are able to reference an existing Barcode instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
+You are able to reference an existing Barcode instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Barcode API](/api/javascript/dataviz/ui/barcode#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Barcode for PHP render() call
     <script>

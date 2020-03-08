@@ -1,18 +1,15 @@
 ---
-title: Initialize the Grid
-page_title: Initialize the Grid | Kendo UI PanelBar
+title: Initialize a Grid in the PanelBar
+page_title: Initialize a Grid in the PanelBar | Kendo UI PanelBar
 description: "Learn how to initialize the Grid inside the Kendo UI PanelBar by resizing it according to the dimensions of its container."
 slug: initialize_thegrid_panelbar_widget
 ---
 
-# Initialize the Grid
+# Initialize a Grid in the PanelBar
 
-The example below demonstrates how to use the `activate` event when initializing the Grid within the PanelBar so as it is resized according to the dimensions of its container.
+The following example demonstrates how to use the `activate` event when initializing the Grid within the PanelBar so as it is resized according to the dimensions of its container.
 
-> **Important**
 > In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid.
-
-###### Example
 
 ```dojo
     <body>
@@ -50,7 +47,7 @@ The example below demonstrates how to use the `activate` event when initializing
             ]
           }).data("kendoGrid");
 
-          //apply the activate event, which is thrown only after the animation is played out
+          // Apply the activate event which is thrown only after the animation is completed.
           panelbar.one("activate", function() {
           	grid.resize();
           });
@@ -64,8 +61,6 @@ The example below demonstrates how to use the `activate` event when initializing
 
 ## See Also
 
-* [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)
-* [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
-* [JavaScript API Reference: Configure PanelBar Animations](/api/javascript/ui/panelbar/configuration/animation)
-
-For more runnable examples on the Kendo UI PanelBar widget, browse its [**How To** documentation folder]({% slug howto_use_custom_content_containers_in_the_panelbar_widget %}).
+* [Basic Usage of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/index)
+* [Using the API of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/api)
+* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)

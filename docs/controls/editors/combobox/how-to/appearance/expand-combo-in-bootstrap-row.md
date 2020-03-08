@@ -12,7 +12,7 @@ The following example demonstrates how to expand a Kendo UI ComboBox located in 
 
 Basically, the approach is to set the input width to 100%.
 
-###### Example
+
 
 ```dojo
   <div class="row">

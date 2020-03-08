@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 **Step 2** Create an [Editor](/api/javascript/ui/editor).
 
-###### Example
+
 
         <?php
         $editor = new \Kendo\UI\Editor('editor');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 **Step 3** Output the Editor by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $editor->render();
@@ -43,7 +43,7 @@ You can subscribe to all Editor [events](/api/javascript/ui/editor#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $editor = new \Kendo\UI\Editor('editor');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $editor = new \Kendo\UI\Editor('editor');
@@ -83,9 +83,9 @@ The Editor posts its value HTML-encoded by default. You can either disable this 
 
 ### Client-Side Instances
 
-You are able to reference an existing Editor instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
+You are able to reference an existing Editor instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $editor = new \Kendo\UI\Editor('editor');

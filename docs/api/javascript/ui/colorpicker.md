@@ -26,9 +26,9 @@ Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colo
 
     <input id="colorpicker" type="color" />
     <script>
-    $("#colorpicker").kendoColorPicker({
-      buttons: false
-    })
+      $("#colorpicker").kendoColorPicker({
+        buttons: false
+      })
     </script>
 
 ### clearButton `Boolean` *(default: false)*
@@ -41,9 +41,9 @@ Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colo
 
     <input id="colorpicker" type="color" />
     <script>
-    $("#colorpicker").kendoColorPicker({
-      clearButton: false
-    });
+      $("#colorpicker").kendoColorPicker({
+        clearButton: true
+      });
     </script>
 
 ### columns `Number`

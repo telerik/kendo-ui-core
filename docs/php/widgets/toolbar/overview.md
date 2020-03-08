@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 **Step 2** Create a [ToolBar](/api/php/Kendo/UI/ToolBar) and specify the widget's commands.
 
-###### Example
+
 
         <?php
 
@@ -66,7 +66,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 **Step 3** Output the ToolBar by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php echo $toolbar->render(); ?>
 
@@ -78,7 +78,7 @@ You can subscribe to all ToolBar [events](/api/javascript/ui/toolbar#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $toolbar = new \Kendo\UI\ToolBar('#container');
@@ -101,7 +101,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $toolbar = new \Kendo\UI\ToolBar('#container');
@@ -120,9 +120,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing ToolBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
+You are able to reference an existing ToolBar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $toolbar = new \Kendo\UI\ToolBar('#container');

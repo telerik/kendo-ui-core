@@ -9,7 +9,7 @@ slug: howto_createa_split_button_menu
 
 The example below demonstrates how to create a Split button using Kendo UI Menu.
 
-###### Example
+
 
 ```dojo
     <ul id="myMenu">

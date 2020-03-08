@@ -2,7 +2,7 @@
 title: Change the Column Names inside the Column Menu of the Grid
 description: An example on how to change the names of the columns inside the column menu of the Kendo UI Grid.
 type: how-to
-page_title: Alternate Column Names in Column Menu | Kendo UI Grid
+page_title: Alternate Column Names in Column Menu | Kendo UI Grid for jQuery
 slug: grid-column-menu-change-text
 tags: grid, columnmenu, columns
 ticketid: 1135439

@@ -105,5 +105,20 @@
             assert.equal(dateinput.element.val(), "month/day/year");
         });
 
+        it("form reset support", function(done) {
+            var form = $("<form/>").appendTo(Mocha.fixture).append(input),
+                dateInput = input.kendoDateInput({ value: new Date(2018, 1, 1) }).data("kendoDateInput");
+
+            dateInput.value(new Date(2011, 1, 1));
+
+            form[0].reset();
+
+            setTimeout(function() {
+                assert.equal(dateInput.element.val(), "2/1/2018");
+                assert.deepEqual(dateInput.value(), new Date(2018, 1, 1));
+                done();
+            }, 200);
+        });
+
     });
 }());

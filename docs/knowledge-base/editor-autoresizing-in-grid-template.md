@@ -2,7 +2,7 @@
 title: Auto-Resize Editor inside Grid Editor Template
 description: An example on how to render an auto-resizing Kendo UI Editor in a Kendo UI Grid editor template.
 type: how-to
-page_title: Render Editor in Editor Template | Kendo UI Grid
+page_title: Render Editor in Editor Template | Kendo UI Grid for jQuery
 slug: editor-autoresizing-in-grid-template
 tags: grid, editor, template
 ticketid: 1140080  
@@ -44,7 +44,7 @@ How can I render an auto-resizing Kendo UI Editor in a Kendo UI Grid editor temp
 ```dojo
 <div id="grid"></div>
 <script>
-    var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+    var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
         dataSource = new kendo.data.DataSource({
           transport: {
             read: {

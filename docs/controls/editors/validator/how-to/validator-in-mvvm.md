@@ -11,8 +11,6 @@ The following example demonstrates how to fully integrate the Validator in an MV
 
 To achieve this behavior, use the [`change`](/api/javascript/data/observableobject/events/change) event of the Observable and the [`validate`](/api/javascript/ui/validator/methods/validate) method of the Validator.
 
-###### Example
-
 ```dojo
 <div id="example">
   <div class="demo-section k-content" data-bind="visible: confirmed">
@@ -68,11 +66,11 @@ To achieve this behavior, use the [`change`](/api/javascript/data/observableobje
             validateOnBlur: false // Disable the default validation on blur
           });
 
-          // Get the validator instance
+          // Get the Validator instance.
           kendoValidator = $("form").getKendoValidator();
 
           viewModel.bind("change", function(e) {
-              // validate on model change
+              // Validate on model change.
               kendoValidator.validate();
           });
       });
@@ -114,10 +112,5 @@ To achieve this behavior, use the [`change`](/api/javascript/data/observableobje
 
 ## See Also
 
-* [Validator JavaScript API Reference](/api/javascript/ui/validator)
-* [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
-* [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
-* [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
-* [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
-
-For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).
+* [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
+* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)

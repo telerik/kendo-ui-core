@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 **Step 2** Add a [RadialGauge](/api/php/Kendo/Dataviz/UI/RadialGauge).
 
-###### Example
+
 
         $gauge = new \Kendo\Dataviz\UI\RadialGauge('gauge');
         $gauge->pointer(array('value' => 10))
@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 **Step 3** Output the RadialGauge by echoing the result of the `render` method.
 
-###### Example
+
 
         echo $gauge->render();
 
@@ -36,9 +36,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 ### Client-Side Instances
 
-You are able to reference an existing RadialGauge instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [RadialGauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
+You are able to reference an existing RadialGauge instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [RadialGauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
 
-###### Example
+
 
         // Put this after your Kendo RadialGauge for PHP render() call
         <script>

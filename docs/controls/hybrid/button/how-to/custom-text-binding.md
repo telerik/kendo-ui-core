@@ -9,7 +9,7 @@ slug: howto_configuretextbinding_hybridactionsheet
 
 The example below demonstrates how to configure text binding for the Hybrid UI Button in Kendo UI.
 
-###### Example
+
 
 ```dojo
 <div data-role="view" id="view" data-model="viewModel">

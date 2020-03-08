@@ -180,6 +180,26 @@
             assert.equal(multiselect.tagList.children().length, 1);
         });
 
+        it("Multiselect value is not deselected if the value is changed before first open", function() {
+            var multiselect = new MultiSelect(select, {
+                autoBind: false,
+                dataValueField: "value",
+                dataTextField: "text",
+                dataSource: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }],
+                value: [1],
+                dataBound: function() {
+                    this.value([2]);
+                    this.trigger("change");
+                }
+            });
+
+            multiselect.dataSource.read();
+            multiselect.open();
+
+            assert.equal(multiselect.tagList.children().length, 1);
+            assert.equal(multiselect.tagList.children()[0].textContent, "bar");
+        });
+
         it("MultiSelect supports multiple values", function() {
             popuplateSelect();
             var multiselect = new MultiSelect(select);
@@ -348,7 +368,7 @@
 
             assert.equal(multiselect.tagList.children().length, 1);
             assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
-            assert.isOk(!multiselect._innerWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!multiselect._inputWrapper.hasClass("k-state-disabled"));
             assert.isOk(multiselect.input.attr("disabled"));
         });
 
@@ -445,13 +465,13 @@
             assert.isOk(!multiselect.popup.visible());
         });
 
-        it("readonly(false) removes readonly attribute", function() {
+        it("readonly(false) removes k-no-click class from the wrapper", function() {
             var multiselect = new MultiSelect(select);
 
             multiselect.readonly();
             multiselect.readonly(false);
 
-            assert.equal(multiselect.element.attr("readonly"), undefined);
+            assert.ok(!multiselect.wrapper.hasClass("k-no-click"));
         });
 
         it("readonly() removes disabled attribute and disabled class", function() {

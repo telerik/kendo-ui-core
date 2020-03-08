@@ -1,9 +1,9 @@
 ---
 title: Browser Support
-page_title: Browser Support | Kendo UI Upload
-description: "Learn about the browser versions that support the Kendo UI Upload features."
+page_title: jQuery Upload Documentation | Browser Support | Kendo UI
+description: "Get started with the jQuery Upload by Kendo UI and learn which Upload features are supported by the most popular browsers and their versions."
 slug: browsersupport_upload_widget
-position: 7
+position: 8
 ---
 
 # Browser Support
@@ -14,18 +14,13 @@ The following table lists each Kendo UI feature as supported by the respective b
 
 | Feature                                           | IE  | Firefox  | Chrome | Safari      | Opera   |  Works without JavaScript
 | ---                                               | --- | ---      | ---    | ---         | ---     |  ---
-| Styled **Upload** button                          | ✓   | ✓        | ✓     | ✓           | ✓      |  ✓
-| Asynchronous upload                               | ✓   | ✓        | ✓     | ✓           | ✓      |  ✕
+| Rendering of a styled **Upload** button           | ✓   | ✓        | ✓     | ✓           | ✓      |  ✓
+| Asynchronous upload of files                      | ✓   | ✓        | ✓     | ✓           | ✓      |  ✕
 | Multiple file selection from the **Open** dialog  | 10+ | 3.6+     | ✓      | ✓           | ✓      |  ✓
 | Progress tracking                                 | 10+ | 4+       | ✓      | ✓           | ✓      |  ✕
-| File drag-and-drop                                | 10+ | 4+       | ✓      | Mac OS only | ✓      |  ✕
-| In-progress cancellation of upload                | ✓   | ✓        | ✓      | ✓          | ✓      |  ✕
+| Dragging and dropping of files                    | 10+ | 4+       | ✓      | Mac OS only | ✓      |  ✕
+| In-progress cancellation of the upload            | ✓   | ✓        | ✓      | ✓          | ✓      |  ✕
 
 ## See Also
 
-* [Overview of the Upload Widget]({% slug overview_kendoui_upload_widget %})
-* [Drag and Drop]({% slug dragandrop_upload_widget %})
-* [Chunk Upload]({% slug chunkupload_upload_widget %})
-* [Send and Receive Metadata]({% slug metadata_upload_widget %})
-* [Modes of Operation]({% slug modes_upload_widget %})
-* [Troubleshooting]({% slug troubleshooting_upload_widget %})
+* [JavaScript API Reference of the Upload](/api/javascript/ui/upload)

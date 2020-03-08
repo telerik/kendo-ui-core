@@ -2,7 +2,7 @@
 title: Set Different Chart Series Types According to the DataItem Property
 description: An example on how to set different types of the Kendo UI Chart series for different points according to the DataItem property.
 type: how-to
-page_title: Set Different Series Types According to DataItem | Kendo UI Chart
+page_title: Set Different Series Types According to DataItem | Kendo UI Chart for jQuery
 slug: chart-set-series-type-by-point-property
 tags: chart, series, type, dataitem, property, set
 ticketid: 1155950

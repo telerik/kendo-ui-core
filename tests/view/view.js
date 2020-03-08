@@ -1,4 +1,5 @@
 (function() {
+
     describe("View", function () {
         beforeEach(function() {
             var contentElement = $('<script id="content" type="text/x-kendo-template">Foo</script>');
@@ -150,6 +151,22 @@
 
             view.render("#foo");
             view.render("#bar");
+        });
+    });
+
+    describe("View", function () {
+        var view;
+
+        afterEach(function() {
+            if (view) {
+                view.destroy();
+            }
+        });
+
+        it("is rendered on init", function() {
+            view = new kendo.View('<span id="viewContent">content</span>', { renderOnInit: true });
+
+            assert.equal(view.element.html(),'content');
         });
     });
 

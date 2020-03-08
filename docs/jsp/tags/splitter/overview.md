@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `splitter` tag.
 
-###### Example
+
 
     <c:url value="/web/splitter/content/1" var="ajaxContent1" />
 
@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Split
 
 You can subscribe to all [events exposed by Kendo UI Splitter](/api/javascript/ui/splitter#events) by the handler name.
 
-###### Example
+
 
     <kendo:splitter name="splitter" orientation="horizontal" expand="splitter_expand" collapse="splitter_collapse">
         <kendo:splitter-panes>
@@ -94,9 +94,9 @@ You can subscribe to all [events exposed by Kendo UI Splitter](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing Splitter instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Splitter API](/api/javascript/ui/splitter#methods) to control its behavior.
+You are able to reference an existing Splitter instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Splitter API](/api/javascript/ui/splitter#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo Splitter tag declaration
     <script>

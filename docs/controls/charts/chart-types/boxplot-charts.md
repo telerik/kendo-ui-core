@@ -1,23 +1,44 @@
 ---
 title: Box Plot Charts
-page_title: Box Plot Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation | Box Plot Charts | Kendo UI
 description: "Learn how to create a Kendo UI Box Plot Chart and configure its options."
 slug: chart-types-box-plot
 ---
 
 # Box Plot Charts
 
-The [Kendo UI Box Plot Chart widget](http://demos.telerik.com/kendo-ui/box-plot-charts/index) is useful for displaying variation in statistical samples of data. The Box Plot Chart uses seven values—first and third quartile (q1 and q3), median (that is the second quartile), upper and lower value (inner fences), mean and outliers. The advantage of this type of series is that it displays detailed information about a set of data in a small space.
+Box Plot Charts are useful for displaying variations in statistical samples of data and data details in a small space.
 
-If you are not familiar with the usage and terminology of the box plots and want to understand it better, check the [Wikipedia page on box plots](https://en.wikipedia.org/wiki/Box_plot).
+* [Demo page for the Box Plot Chart](https://demos.telerik.com/kendo-ui/box-plot-charts/index)
 
-## Configuration
+## Getting Started
 
-Use the `boxPlot` series type to create a Kendo UI Box Plot Chart.
+The Box Plot Chart uses the following values:
 
-When binding the Box Plot Chart, there are seven special properties of the `series` object that you should set in order to display the chart successfully—`q1Field` (first quartile), `q3Field` (third quartile), `lowerField`, `upperField`, `medianField` (second quartile), `meanField`, `outliersField`. The first five are required, while `meanField` and `outliersField` are optional. All properties have to point to numeric fields in the DataSource, with the exception of `outliersField` which has to point to a field that contains an array of numbers. The example below shows the result of such a configuration
+* First and third quartile (q1 and q3)
+* Median (that is the second quartile)
+* Upper and lower value (inner fences)
+* Mean and outliers
 
-###### Example
+To create a Box Plot series, use `boxPlot` in the `series` configuration.
+
+* [Binding the Box Plot Chart](#binding-the-box-plot-chart)
+* [Setting the orientation](#setting-the-orientation)
+* [Customizing the outliers](#customizing-the-outliers)
+
+## Binding the Box Plot Chart
+
+When you bind the Box Plot Chart, you have to set the following special properties of the `Series` object so that the Chart is successfully displayed:
+
+* (Mandatory) `q1Field` (first quartile)
+* (Mandatory) `q3Field` (third quartile)
+* (Mandatory) `lowerField`
+* (Mandatory) `upperField`
+* (Mandatory) `medianField` (second quartile)
+* (Optional) `meanField`
+* (Optional) `outliersField`
+
+All properties except for `outliersField` have to point to numeric fields in the DataSource. `outliersField` has to point to a field that contains an array of numbers.
 
 ```dojo
     <div id="chart"></div>
@@ -51,11 +72,9 @@ When binding the Box Plot Chart, there are seven special properties of the `seri
     </script>
 ```
 
-### Orientation
+## Setting the Orientation
 
-The Box Plot Chart orientation can be changed by setting the series type to `verticalBoxPlot`.
-
-###### Example
+You can change the orientation of the Box Plot Chart by setting the series type to `verticalBoxPlot`.
 
 ```dojo
     <div id="chart"></div>
@@ -89,11 +108,13 @@ The Box Plot Chart orientation can be changed by setting the series type to `ver
     </script>
 ```
 
-### Customizing Outliers
+## Customizing the Outliers
 
-Outliers are values that appear outside of the range closed by the lower and upper values (inner fences). There are two types of outliers in a box plot based on their distance from the inner fences—mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme). To let you configure them separately, the Chart has two configuration options—[`series.outliers`](/api/javascript/dataviz/ui/chart/configuration/series.outliers) for mild outliers and [`series.extremes`](/api/javascript/dataviz/ui/chart/configuration/series.extremes) for extreme outliers. You can use them to customize the outliers, as shown below:
+Outliers are values that appear outside the range between lower and upper values (inner fences). Based on their distance from the inner fences, the outliers in a box plot are mild and extreme. The Box Plot Chart renders them by default as crosses (mild) and circles (extreme).
 
-###### Example
+You can configure the outliers separately and customize them by using:
+* [`series.outliers`](/api/javascript/dataviz/ui/chart/configuration/series.outliers) for mild outliers.
+* [`series.extremes`](/api/javascript/dataviz/ui/chart/configuration/series.extremes) for extreme outliers.
 
 ```dojo
     <div id="chart"></div>
@@ -142,16 +163,5 @@ Outliers are values that appear outside of the range closed by the lower and upp
 
 ## See Also
 
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bullet Charts]({% slug chart-types-bullet %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Scatter Charts]({% slug scattercharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Box Plot Chart (Demo)](https://demos.telerik.com/kendo-ui/box-plot-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

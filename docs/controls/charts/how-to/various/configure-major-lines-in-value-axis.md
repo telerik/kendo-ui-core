@@ -17,8 +17,6 @@ The API reference for the relevant methods and events that are used in the follo
 * The [`getAxis()` method](/api/javascript/dataviz/ui/chart/methods/getaxis)
 * The [`kendo.dataviz.ChartAxis` API](/api/javascript/dataviz/chart/chart_axis)
 
-###### Example
-
 ```dojo
     <div class="clearfix" id="FirstChart"></div>
 
@@ -90,9 +88,9 @@ The API reference for the relevant methods and events that are used in the follo
             // Effective axis range is available in the render event
             //
             // See
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/getAxis
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/render
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/getAxis
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis
             var range = e.sender.getAxis("value").range();
             var majorUnit = range.max / 3;
             var axis = e.sender.options.valueAxis;
@@ -121,11 +119,3 @@ The API reference for the relevant methods and events that are used in the follo
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

@@ -8,17 +8,17 @@ position: 2
 
 # Native Scrolling
 
-As of Kendo UI Q3 2013, the [hybrid Kendo UI Application widget](http://demos.telerik.com/kendo-ui/m/index#application/loadingpopup) supports the `useNativeScrolling` configuration option, which is set to `false` by default. The introduction of this new feature is mostly due to the changes in browser behavior that were introduced in iOS7. The option, however, can be enabled on other platforms too.
+As of Kendo UI Q3 2013, the [hybrid Kendo UI Application widget](https://demos.telerik.com/kendo-ui/m/index#application/loadingpopup) supports the `useNativeScrolling` configuration option, which is set to `false` by default. The introduction of this new feature is mostly due to the changes in browser behavior that were introduced in iOS7. The option, however, can be enabled on other platforms too.
 
 ## Native vs. Emulated Scrolling
 
-By default, the hybrid Application widget uses [flexbox](http://www.w3.org/TR/css3-flexbox/) for the mobile views layout. Each mobile view is stretched to fit the application container (by default, the `body` DOM element) using the `width: 100%; height: 100%;` CSS declarations. The view header, footer, and the content are positioned using column flex direction. The content element is made scrollable either by initializing a hybrid Kendo UI Scroller or with the browser-supported `overflow: auto` and `-webkit-overflow-scrolling: touch` CSS declarations.
+By default, the hybrid Application widget uses [flexbox](https://www.w3.org/TR/css3-flexbox/) for the mobile views layout. Each mobile view is stretched to fit the application container (by default, the `body` DOM element) using the `width: 100%; height: 100%;` CSS declarations. The view header, footer, and the content are positioned using column flex direction. The content element is made scrollable either by initializing a hybrid Kendo UI Scroller or with the browser-supported `overflow: auto` and `-webkit-overflow-scrolling: touch` CSS declarations.
 
 When the `useNativeScrolling` configuration option is set to `true`, the view header and footer are positioned using `position: fixed` CSS declaration. The view content vertical padding is adjusted to match the header and footer height. The default browser scroller is utilized for the content scrolling.
 
 The example below demonstrates a hybrid application with the native scrolling configuration option enabled.
 
-###### Example
+
 
     <div data-role="view">
         <header data-role="header">

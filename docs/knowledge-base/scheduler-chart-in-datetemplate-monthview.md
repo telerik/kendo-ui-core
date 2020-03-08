@@ -2,7 +2,7 @@
 title: Integrate Month View Scheduler with Charts in Each Date
 description: An AngularJS example on how to inject a Chart into each date of the Kendo UI Scheduler month view.
 type: how-to
-page_title: Inject Chart in the DateTemplate of the Month View | Kendo UI Scheduler
+page_title: Inject Chart in the DateTemplate of the Month View | Kendo UI Scheduler for jQuery
 slug: scheduler-chart-in-datetemplate-monthview
 tags: kendo, kendo-ui, scheduler, chart, datetemplate, month-view, hide
 res_type: kb

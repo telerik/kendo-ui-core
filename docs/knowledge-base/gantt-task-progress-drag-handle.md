@@ -2,7 +2,7 @@
 title: Show Gantt Task Progress Handle When Using Task Template
 description: An example on how to display a progress drag handle for the Kendo UI Gantt tasks when a taskTemplate is set.
 type: how-to
-page_title: Display Task Progress Drag Handle When taskTemplate Is Used | Kendo UI Gantt
+page_title: Display Task Progress Drag Handle When taskTemplate Is Used | Kendo UI Gantt for jQuery
 slug: gantt-task-progress-drag-handle
 tags: gantt, task, progress, drag, handle, template
 ticketid: 1107725
@@ -37,7 +37,7 @@ How can I display a task progress drag handle when I set a `taskTemplate` for th
 
 ## Solution
 
-For the full implementation of the approach, refer to [this Dojo example](http://dojo.telerik.com/OmONA).
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/OmONA).
 
 1. Show the task progress by adding a `div` with the `progress` class in the template.  
 

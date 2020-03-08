@@ -7,9 +7,9 @@ slug: howto_transfergridrows_sortable
 
 # Transfer Grid Rows
 
-The example below demonstrates how to move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa. Reordering the rows within the same Grid in the same way is also supported.
+The following example demonstrates how to move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa.
 
-###### Example
+Reordering the rows within the same Grid in the same way is also supported.
 
 ```dojo
 <div id="grid1" style="width: 400px; float:left"></div>
@@ -35,7 +35,7 @@ The example below demonstrates how to move a row from one Kendo UI Grid to anoth
       "ProductName",
       { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "130px" }
     ],
-    dataBound: insertNoRecordsRow, //required to handle transfer row to empty grid scenario
+    dataBound: insertNoRecordsRow, // Required to handle the transfer row to an empty Grid scenario.
     pageable: true
   });
 
@@ -54,7 +54,7 @@ The example below demonstrates how to move a row from one Kendo UI Grid to anoth
       },
       pageSize: 5
     },
-    dataBound: insertNoRecordsRow, //required to handle transfer row to empty grid scenario
+    dataBound: insertNoRecordsRow, // Required to handle the transfer row to an empty Grid scenario.
     pageable: true,
     columns: [
       "ProductName",
@@ -67,13 +67,13 @@ The example below demonstrates how to move a row from one Kendo UI Grid to anoth
   $(".k-grid table").kendoSortable({
     connectWith: '.k-grid table',
     filter: ">tbody >tr",
-    disabled: ".no-drag", //do not allow transferring the no records row
+    disabled: ".no-drag", // Do not allow the transferring of the no-records row.
     hint: $.noop,
     cursor: "move",
     placeholder: function(element) {
       return element.clone().addClass("k-state-hover").css("opacity", 0.65);
     },
-    change: function(e) { //change event handler implementation may differ according to the scenario
+    change: function(e) { // The change event handler implementation may differ according to the scenario.
       var grid = this.element.closest(".k-grid").data("kendoGrid");
       var skip = grid.dataSource.skip();
       var oldIndex = e.oldIndex + skip;
@@ -106,9 +106,5 @@ The example below demonstrates how to move a row from one Kendo UI Grid to anoth
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
-* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

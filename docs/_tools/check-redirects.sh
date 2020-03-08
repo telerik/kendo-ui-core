@@ -55,15 +55,12 @@ urls="
 /kendo-ui/web/progressbar/overview /kendo-ui/controls/interactivity/progressbar/overview
 /kendo-ui/web/sortable/overview /kendo-ui/controls/interactivity/sortable/overview
 /kendo-ui/mobile/introduction /kendo-ui/controls/hybrid/introduction
-/kendo-ui/webforms/asp-net-hello-jquery /kendo-ui/third-party/tutorials/webforms/asp-net-hello-jquery
+/kendo-ui/webforms/asp-net-hello-jquery /kendo-ui/third-party/webforms/asp-net-hello-jquery
 /kendo-ui/dataviz/drawing/overview /kendo-ui/framework/drawing/overview
-/kendo-ui/framework/drawing/how-to/custom-page-layout /kendo-ui/controls/data-management/grid/how-to/pdf-export/custom-page-layout
+/kendo-ui/framework/drawing/how-to/custom-page-layout /kendo-ui/knowledge-base/custom-page-layout
 /kendo-ui/tutorials/accessibility/accessibility-overview /kendo-ui/accessibility/accessibility-overview
 /kendo-ui/getting-started/introduction /kendo-ui/introduction
 /kendo-ui/using-kendo-with/introduction /kendo-ui/introduction
-/kendo-ui/tutorials/asp.net/kendo-music-store/kendo-music-store-intro /aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
-/kendo-ui/aspnet-mvc/tutorial-kendo-music-store/kendo-music-store-intro /aspnet-mvc/tutorials/tutorial-kendo-music-store/kendo-music-store-intro
-/kendo-ui/aspnet-mvc/tutorial-saleshub/kendo-saleshub-intro /aspnet-mvc/tutorials/tutorial-saleshub/kendo-saleshub-intro
 /kendo-ui/ /kendo-ui/introduction
 /kendo-ui/api/javascript/ui/RangeSlider /kendo-ui/api/javascript/ui/rangeslider
 /kendo-ui/api/javascript/ui/Splitter /kendo-ui/api/javascript/ui/splitter

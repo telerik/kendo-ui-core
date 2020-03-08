@@ -9,7 +9,7 @@ component: button-group
 
 # ButtonGroup Overview
 
-The [Hybrid UI ButtonGroup widget](http://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
+The [Hybrid UI ButtonGroup widget](https://demos.telerik.com/kendo-ui/m/index#buttongroup/mobile) presents a linear set of grouped buttons.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ The Kendo UI mobile Application automatically initializes a mobile ButtonGroup f
 
 The example below demonstrates how to initialize the Hybrid UI ButtonGroup based on the `data-role` attribute.
 
-###### Example
+
 
     <ul id="buttongroup" data-role="buttongroup">
         <li>Option 1</li>
@@ -28,7 +28,7 @@ The example below demonstrates how to initialize the Hybrid UI ButtonGroup based
 
 ### Initialize Using jQuery
 
-###### Example
+
 
     var buttongroup = $("#buttongroup").kendoMobileButtonGroup();
 
@@ -40,7 +40,7 @@ Every Hybrid UI ButtonGroup color can be customized by setting the respective `b
 
 The example below demonstrates how to make a Hybrid UI ButtonGroup green.
 
-###### Example
+
 
     <ul id="buttongroup" data-role="buttongroup">
         <li style="background-color: green">Option1</li>
@@ -53,7 +53,7 @@ Every button can have a badge, which is set by using the `data-badge` attribute 
 
 The example below demonstrates how to set the badges to the buttons of a ButtonGroup.
 
-###### Example
+
 
     <ul id="buttongroup" data-role="buttongroup">
         <li data-badge="5">Option 1</li>
@@ -69,7 +69,7 @@ A Button icon can be set in two ways:
 
 The example below demonstrates how to use font icons with the `data-icon` attribute.
 
-###### Example
+
 
     <ul id="buttongroup" data-role="buttongroup">
         <li data-icon="mostrecent">Most Recent</li>
@@ -88,7 +88,7 @@ Kendo UI ships with several ready to use icons. The full list of predefined icon
 
 To activate the feature set `km-primary` class to the button.
 
-###### Example
+
 
     <ul data-role="buttongroup" data-index="0" class="km-primary">
         <li>One</li>
@@ -102,7 +102,7 @@ There are three predefined sizes - small, medium (default) and large. To apply d
 
 The example below demonstrates a small ButtonGroup.
 
-###### Example
+
 
     <ul data-role="buttongroup" data-index="0" class="km-small">
         <li>One</li>
@@ -112,7 +112,7 @@ The example below demonstrates a small ButtonGroup.
 
 The example below demonstrates a large ButtonGroup.
 
-###### Example
+
 
     <ul data-role="buttongroup" data-index="0" class="km-large">
         <li>One</li>
@@ -126,7 +126,7 @@ To activate this feature set `km-justified` class to the button.
 
 The example below demonstrates how to justify the position of the ButtonGroup.
 
-###### Example
+
 
     <ul data-role="buttongroup" data-index="0" class="km-justified">
         <li>One</li>
@@ -138,7 +138,7 @@ The example below demonstrates how to justify the position of the ButtonGroup.
 
 To achieve this outcome do not set text to the ButtonGroup.
 
-###### Example
+
 
     <ul data-role="buttongroup" data-index="1">
         <li data-icon="play"></li>

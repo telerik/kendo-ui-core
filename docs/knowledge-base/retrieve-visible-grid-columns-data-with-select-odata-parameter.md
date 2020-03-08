@@ -2,7 +2,7 @@
 title: Retrieve Only the Visible Grid Columns Data with the $select oData Parameter
 description: An example on how to retrieve only the visible columns data with the $select oData parameter in the Kendo UI Grid.
 type: how-to
-page_title: Retrieve Visible Columns Data with the $select oData Parameter | Kendo UI Grid
+page_title: Retrieve Visible Columns Data with the $select oData Parameter | Kendo UI Grid for jQuery
 slug: retrieve-visible-grid-columns-data-with-select-odata-parameter
 tags: retrieve, visible, columns, data, $select, odata
 ticketid: 1138950
@@ -105,4 +105,4 @@ How can I retrieve the columns data that is visible only from the remote service
 
 ## See Also
 
-* [API Reference of the Grid](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

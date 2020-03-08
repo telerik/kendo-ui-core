@@ -9,7 +9,7 @@ slug: howto_define_virtual_option_combobox
 
 The following example demonstrates how to define the [`virtual`](/api/javascript/ui/combobox/configuration/virtual) option of the Kendo UI ComboBox widget by using the `data-*` attribute.
 
-###### Example
+
 
 ```dojo
     <div id="example">

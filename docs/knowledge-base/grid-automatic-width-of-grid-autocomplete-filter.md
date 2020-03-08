@@ -2,7 +2,7 @@
 title: Set the Width of the Row Filter Suggestions in Grids
 description: An example on how to set the width of the row filter suggestions in the Kendo UI Grid.
 type: how-to
-page_title: Set Automatic Width to the AutoComplete Filter | Kendo UI Grid
+page_title: Set Automatic Width to the AutoComplete Filter | Kendo UI Grid for jQuery
 slug: grid-automatic-width-of-grid-autocomplete-filter
 tags: grid, filter, width, suggestions
 ticketid: 1144763

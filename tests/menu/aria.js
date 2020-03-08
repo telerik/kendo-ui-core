@@ -91,6 +91,8 @@ it("has-popup attribute is only for the item with no groups when using remove me
 it("menu role is added to the group container", function() {
     setup({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
 
+    menu.getKendoMenu().dataSource.view()[0].load();
+
     assert.equal(menu.find("[role=menu] span:first").text(), "bar");
 });
 
@@ -118,6 +120,8 @@ it("disabled attribute is added if node is disabled via the API", function() {
 
 it("disabled attribute is added if child node is disabled via the API", function() {
     setup({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
+
+    menu.getKendoMenu().dataSource.view()[0].load();
 
     menu.data("kendoMenu").disable(menu.find(".k-group li:first"));
 

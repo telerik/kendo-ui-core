@@ -247,12 +247,12 @@ Defines the animation duration in milliseconds.
         });
     </script>
 
-### dataSource `Object|Array`
+### dataSource `Object|Array|kendo.data.HierarchicalDataSource`
 
-The data source of the widget which is used to render its items. Can be a JSON object/Array that contains an item or an Array of items to be rendered.
+The data source of the widget which is used to render its items. Can be a JSON object/Arra/[kendo.data.HierarchicalDataSource](/api/javascript/data/hierarchicaldatasource) that contains an item or an Array of items to be rendered.
 Refer to the example below for a list of the supported properties.
 
-#### Example
+#### Example - using a local array
 
     <ul id="menu"></ul>
     <script>
@@ -263,7 +263,7 @@ Refer to the example below for a list of the supported properties.
           [{
             text: "Item 1",
             cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-            url: "http://www.kendoui.com",               // Link URL if navigation is needed, optional.
+            url: "https://www.telerik.com/kendo-ui",               // Link URL if navigation is needed, optional.
             attr: {
               custom: 'value',                            // Add attributes with specified values
               other: 'value'
@@ -308,6 +308,161 @@ Refer to the example below for a list of the supported properties.
            }]
         })
       });
+    </script>
+
+#### Example - using kendo.data.HierarchicalDataSource
+
+    <ul id="menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        var menu =  $("#menu").kendoMenu({
+            dataTextField: "FullName",
+            dataSource: dataSource
+        })
+    </script>
+
+### dataTextField `String`
+
+Sets the field of the data item that provides the text of the menu items.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataUrlField `String`
+
+Sets the field of the data item that provides the url of the menu items.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataSpriteCssClassField `String`
+
+Sets the field of the data item that provides the sprite css class of the menu items.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataImageUrlField `String`
+
+Sets the field of the data item that provides the image url of the menu items.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
+    </script>
+
+### dataContentField `String`
+
+Sets the field of the data item that provides the content of the menu items.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        $("#menu").kendoMenu({
+            dataSource: {
+            data: [{
+                    Name: "Item 1",
+                    UrlPath: "urlPath",
+                    Sprite: "spriteCssClass",
+                    imgUrl: "imgUrl",
+                    description: "some description"
+                }]
+            },
+            dataTextField:"Name",
+            dataUrlField:"UrlPath",
+            dataSpriteCssClassField:"Sprite",
+            dataImageUrlField:"imgUrl",
+            dataContentField:"description"
+        });
     </script>
 
 ### direction `String`*(default: "default")*
@@ -548,7 +703,7 @@ The following example demonstrates how to enable the scrolling functionality.
 
 ### scrollable.distance `Number` *(default: 50)*
 
-Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the Menu scrolls with 2x the distance.
+Sets the scroll amount (in pixels) that the Menu scrolls when the scroll buttons are hovered. Each such distance is animated and then another animation starts with the same distance. If clicking a scroll button, the Menu scrolls by doubling the distance.
 
 #### Example
 
@@ -585,7 +740,7 @@ Appends an item to a **Menu** in the specified referenceItem's sub menu.
             {
                 text: "Item 1",
                 cssClass: "myClass",                         // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -735,6 +890,54 @@ Desired state
 
 `kendo.ui.Menu` Returns the Menu object to support chaining.
 
+
+### findByUid
+
+Returns the Menu item by the dataItem's uid.
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        var menu = $("#menu").kendoMenu({
+            dataTextField: "FullName",
+            dataSource: dataSource
+        }).data("kendoMenu");
+
+
+        menu.one("dataBound", function (ev) {
+            var firstItemUid = menu.dataSource.at(0).uid;
+            var item = menu.findByUid(firstItemUid);
+            menu.open(item);
+        });
+    </script>
+
+#### Parameters
+
+##### uid `String`
+
+The uid of the data item.
+
+#### Returns
+
+`jQuery` the item found.
+
+
 ### insertAfter
 
 Inserts an item into a **Menu** after the specified referenceItem.
@@ -765,7 +968,7 @@ Inserts an item into a **Menu** after the specified referenceItem.
         menu.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -833,7 +1036,7 @@ Inserts an item into a **Menu** before the specified referenceItem.
         menu.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -842,7 +1045,7 @@ Inserts an item into a **Menu** before the specified referenceItem.
             },
             {
                 text: "Item 3",
-                imageUrl: "http://www.telerik.com/test.jpg", // Item image URL, optional.
+                imageUrl: "https://www.telerik.com/test.jpg", // Item image URL, optional.
                 items: [{                                    // Sub item collection
                      text: "Sub Item 1"
                 },
@@ -1015,6 +1218,78 @@ The closed item
         // bind to the close event
         menu.bind("close", function(e) {
             // handle event
+        });
+    </script>
+
+
+### dataBound
+
+Fires when the Menu is bound to the set DataSource.
+
+#### Event Data
+
+##### e.item `HTMLElement`
+
+The loaded item (at initial bound this will be the Menu root element).
+
+##### e.dataItem `Object`
+
+The dataItem that is being loaded or bound (at initial bound this should be undefined).
+
+#### Example
+
+    <ul id="menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        var menu =  $("#menu").kendoMenu({
+            dataTextField: "FullName",
+            dataSource: dataSource,
+            dataBound: function(){
+                console.log("dataBound");
+            }
+        })
+    </script>
+
+#### To set after initialization
+
+    <ul id="menu"></ul>
+    <script>
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Employees",
+                    dataType: "jsonp"
+                }
+            },
+            schema: {
+                model: {
+                    id: "EmployeeId",
+                    hasChildren: "HasEmployees"
+                }
+            }
+        });
+
+        var menu =  $("#menu").kendoMenu({
+            dataTextField: "FullName",
+            dataSource: dataSource
+        }).data("kendoMenu");
+
+        menu.bind("dataBound", function() {
+            console.log("dataBound");
         });
     </script>
 

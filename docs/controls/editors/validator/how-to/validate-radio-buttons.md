@@ -10,8 +10,6 @@ slug: howto_validateradiowithonemessage_validator
 
 The following example demonstrates how to validate a group of Kendo UI radio buttons and show only one error message.
 
-###### Example
-
 ```dojo
 <div id="form">
     <span class="k-invalid-msg" data-for="test"></span><br/>
@@ -29,7 +27,7 @@ $(function(){
         rules: {
             radio: function(input) {
                 if (input.filter("[type=radio]") && input.attr("required")) {
-                    return $("#form").find("[type=radio]").is(":checked");
+                    return $("#form").find("[type=radio][name=" + input.attr("name") + "]").is(":checked");
                 }
                 return true;
             }
@@ -48,9 +46,5 @@ $(function(){
 
 ## See Also
 
-* [Validator JavaScript API Reference](/api/javascript/ui/validator)
-* [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
-* [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
-* [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
-
-For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).
+* [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
+* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)

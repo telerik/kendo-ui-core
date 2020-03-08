@@ -2,7 +2,7 @@
 title: Set the Default Filter Operator in the Grid
 description: An example on how to set the default filter operators of the Kendo UI Grid rows.
 type: how-to
-page_title: Set the Default Filter Operator | Kendo UI Grid
+page_title: Set the Default Filter Operator | Kendo UI Grid for jQuery
 slug: default-grid-filter
 tags: grid, default filter, row filter, operator, kendo grid
 ticketid: 1114303
@@ -29,7 +29,6 @@ How can I change the default filter operator and select to display a different o
 ## Solution
 
 1. On the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event of the grid, find the filter dropdown and [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/select) the desired default filter option.
-
 1. On the [`filter`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filter) event of the Grid, if the filter is cleared, select the desired default filter option.
 
 ```dojo

@@ -7,9 +7,7 @@ slug: howto_validation_resource_units_gantt
 
 # Change Validation Options of Resource Units
 
-The example below demonstrates how to configure the validation options of the resource units in the Kendo UI Gantt.
-
-###### Example
+The following example demonstrates how to configure the validation options of the resource units in the Kendo UI Gantt.
 
 ```dojo
      <div id="gantt"></div>
@@ -69,6 +67,5 @@ The example below demonstrates how to configure the validation options of the re
 
 ## See Also
 
-* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
-* [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
-* [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
+* [Basic Usage of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/index)
+* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)

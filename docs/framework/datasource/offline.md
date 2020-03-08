@@ -12,7 +12,7 @@ Offline support enables data-bound Kendo UI widgets to function without an activ
 
 Users can continue to work with the available data until the network connectivity resumes. When the connection becomes available, the DataSource synchronizes all changes with the remote service.
 
-> The offline storage support feature was introduced with and has been available since the Kendo UI 2014 Q2 SP1 release.
+> The offline storage support feature is available as of the Kendo UI 2014 Q2 SP1 release.
 
 **Figure 1: Offline storage mechanism**
 
@@ -25,8 +25,6 @@ To enable the offline storage feature, set the [`offlineStorage`](/api/javascrip
 > To use offline storage, provide the model with a designated `ID` field.
 
 The following example demonstrates how to set the offline storage key.
-
-###### Example
 
     var dataSource = new kendo.data.DataSource({
         offlineStorage: "products-offline",
@@ -43,7 +41,7 @@ The following example demonstrates how to set the offline storage key.
         }
     });
 
-## Switching between Offline and Online Mode
+## Switching the Offline and Online Modes
 
 By default, the DataSource is online. All data item changes, such as create, update, and destroy, are included in the remote service that is configured through the [`transport`](/api/javascript/data/datasource/configuration/transport) option.
 
@@ -51,8 +49,6 @@ By default, the DataSource is online. All data item changes, such as create, upd
 * To switch to offline mode, call the [`online`](/api/javascript/data/datasource/methods/online) method  with `false` as an argument. As a result, the DataSource starts to persist all data item changes in the offline storage.
 
 The following example demonstrates how to go in offline mode.
-
-###### Example
 
     var dataSource = kendo.data.DataSource({
         offlineStorage: "products-offline",
@@ -77,15 +73,15 @@ The following example demonstrates how to go in offline mode.
             }
         }
     });
-    // fetch the data from the remote service
+    // Fetch the data from the remote service.
     dataSource.fetch(function() {
-        // go in offline mode
+        // Go in offline mode.
         dataSource.online(false);
-        // make some changes
+        // Make some changes.
         dataSource.at(0).set("ProductName", "Updated");
-        // sync to accept the changes (the data source persists the change in localStorage)
+        // Sync to accept the changes (the data source persists the change in localStorage).
         dataSource.sync();
-        // optionally go back online (the data source syncs the change with the remote service)
+        // Optionally go back online (the data source syncs the change with the remote service).
         dataSource.online(true);
     });
 
@@ -95,8 +91,6 @@ The [`offlineData`](/api/javascript/data/datasource/methods/offlinedata) method 
 
 > If the [`serverGrouping`](/api/javascript/data/datasource/configuration/servergrouping) option is set to `true` the `offlineData` returns an array of groups in the following way `{ value:"group value", field:"group field", items: [ /* data items in the group */ ] }`.
 
-###### Example
-
     var dataSource = kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
@@ -122,25 +116,23 @@ The [`offlineData`](/api/javascript/data/datasource/methods/offlinedata) method 
     });
 
     dataSource.fetch(function() {
-        // go in offline mode
+        // Go in offline mode.
         dataSource.online(false);
-        // change the ProductName field of the first data item
+        // Change the ProductName field of the first data item.
         dataSource.at(0).set("ProductName", "Updated");
-        // sync to accept the changes
+        // Sync to accept the changes.
         dataSource.sync();
-        // get the offline data
+        // Get the offline data.
         var offlineData = dataSource.offlineData();
-        console.log(offlineData[0].__state__); // displays "update"
+        console.log(offlineData[0].__state__); // Displays "update".
     });
 
 ## Using Custom Offline Storage
 
 To use custom offline storage, set the `offlineStorage` option to a JavaScript object that has the `getItem` method, which returns the data, and the `setItem` method, which saves the data.
 
-###### Example
-
     var dataSource = kendo.data.DataSource({
-        // use sessionStorage instead of localStorage
+        // Use sessionStorage instead of localStorage.
         offlineStorage: {
             getItem: function() {
                 return JSON.parse(sessionStorage.getItem("products-key"));
@@ -167,8 +159,6 @@ To configure the DataSource to automatically detect offline mode, use either han
 
 The `online` and `offline` events behave differently across the browsers. Firefox and Internet Explorer fire those events when the user switches between offline and online mode. However, the `online` and `offline` events work as expected in mobile devices and PhoneGap applications.
 
-###### Example
-
     var dataSource = kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
@@ -190,8 +180,6 @@ The `online` and `offline` events behave differently across the browsers. Firefo
 
 AJAX polling is more robust than using the `online` and `offline` events, works best for desktop browsers but leads to constant HTTP requests (CPU and bandwidth usage). AJAX requests may fail not only because of Internet disconnection but also due to server errors and timeout.
 
-###### Example
-
     var dataSource = kendo.data.DataSource({
         offlineStorage: "products-offline",
         transport: {
@@ -201,18 +189,18 @@ AJAX polling is more robust than using the `online` and `offline` events, works 
             }
         }
     });
-    // make a request to some URL every 5 seconds to see if Internet access is available
+    // Make a request to some URL every 5 seconds to see if Internet access is available.
     var pollId = setInterval(function() {
         $.ajax({
-            // use an URL from the same domain to adhere to the same origin policy
+            // Use an URL from the same domain to adhere to the same origin policy.
             url: "/"
         })
         .done(function() {
-            // the ajax request succeeded - we are probably online.
+            // The ajax request succeeded. You are probably online.
             dataSource.online(true);
         })
         .fail(function() {
-            // the ajax request failed - we are probably offline.
+            // The AJAX request failed. You are probably offline.
             dataSource.offline(false);
         });
     }, 5000);)
@@ -237,9 +225,9 @@ Yes. Moreover, different Kendo UI DataSource instances must use different `offli
 
 Depending on the way you store data and what the desired implementation is, the available approaches vary. To measure the amount of the data stored by a DataSource instance, use the following example.
 
-        // check amount of used offline storage space for a specific key
+        // Check the amount of used offline storage space for a specific key.
         JSON.stringify(localStorage.getItem("your-offlineStorage-key-here")).length
-        // check overall used offline storage space
+        // Check overall used offline storage space.
         JSON.stringify(localStorage).length
 
 ### What happens when the offline storage quota is exceeded?

@@ -10,11 +10,7 @@ slug: howto_make_inline_editor_toolbar_always_visible
 
 By design, the toolbar of the inline Editor shows up when the widget is focused and gets hidden when the Editor is blurred.
 
-It is possible to override this behavior.
-
-The following example demonstrates how to force the toolbar to be always visible.
-
-###### Example
+The following example demonstrates how to override this behavior and force the toolbar to be always visible.
 
 ```dojo
     <p>The Editor toolbar will remain visible after blurring the widget.</p>
@@ -29,15 +25,12 @@ The following example demonstrates how to force the toolbar to be always visible
         $("#editor").kendoEditor({
         });
 
-        // example start
-
-        // retrieve the Editor widget object
+        // The start of the example.
+        // Retrieve the Editor widget object.
         var editor = $("#editor").data("kendoEditor");
-
-        // show the toolbar
+        // Show the toolbar.
         editor.toolbar.show();
-
-        // detach the handler which hides the toolbar
+        // Detach the handler which hides the toolbar.
         $(editor.body).addClass("k-state-active").off("focusout.kendoEditor");
     });
 
@@ -46,11 +39,6 @@ The following example demonstrates how to force the toolbar to be always visible
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

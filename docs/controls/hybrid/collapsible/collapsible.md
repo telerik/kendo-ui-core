@@ -9,7 +9,7 @@ component: collapsible
 
 # Overview Collapsible
 
-The [Hybrid UI Collapsible widget](http://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
+The [Hybrid UI Collapsible widget](https://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
 
 ## Getting Started
 
@@ -23,7 +23,7 @@ By default the content is initially hidden.
 
 The example below demonstrates how to initialize Hybrid UI Collapsible based on the `data-role` attribute.
 
-###### Example
+
 
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible">
@@ -38,7 +38,7 @@ The example below demonstrates how to initialize Hybrid UI Collapsible based on 
 
 ### Initialize Using jQuery
 
-###### Example
+
 
     var collapsible = $("#collapsible").kendoMobileCollapsible();
 
@@ -48,7 +48,7 @@ The example below demonstrates how to initialize Hybrid UI Collapsible based on 
 
 To create some scrollable collapsible content, wrap the content in a `div` element with `data-role="scroller"` and specify its `height`.
 
-###### Example
+
 
 ```dojo
     <div id="home" data-role="view">
@@ -88,7 +88,7 @@ Collapsible widgets can be nested inside each other, as demonstrated in the exam
 >
 > In this scenario the animation of the parent Collapsible content should be disabled.
 
-###### Example
+
 
 ```dojo
     <div id="home" data-role="view" data-init="onInit">

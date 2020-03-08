@@ -9,8 +9,6 @@ slug: howto_set_intial_data_manually_angularjs_scheduler
 
 The following example demonstrates how to manually set initial data in the Kendo UI Scheduler when using AngularJS.
 
-###### Example
-
 ```dojo
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
@@ -113,10 +111,10 @@ The following example demonstrates how to manually set initial data in the Kendo
       $scope.$on("kendoWidgetCreated", function() {
         var ds = $scope.sched.dataSource;
 
-        //set data
+        // Set the data.
         ds.data(transformData(response));
 
-        //set another DataSource using widget setDataSource if like: http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/setDataSource
+        // Set another DataSource by using the widget setDataSource: https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/methods/setDataSource
       });
       }
 
@@ -136,7 +134,7 @@ The following example demonstrates how to manually set initial data in the Kendo
             description: event.Description,
             isAllDay: event.IsAllDay
           }));
-          //add all fields you want to add
+          // Add all fields you want.
         }
 
         return result;
@@ -146,15 +144,6 @@ The following example demonstrates how to manually set initial data in the Kendo
 
 ## See Also
 
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
-* [How to Create Custom Restrictions]({% slug howto_create_custom_restrivtions_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_kendouicontextmenu_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

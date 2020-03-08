@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 **Step 2** Create an array to which the ComboBox will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -37,7 +37,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
         ?>
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 **Step 4** Create an [ComboBox](/api/php/Kendo/UI/ComboBox), configure its [`dataTextField`](/api/php/Kendo/UI/ComboBox#datatextfield) [`dataValueField`](/api/php/Kendo/UI/ComboBox#datavaluefield) options and set its [`DataSource`](/api/php/Kendo/UI/AutoComplete#datasource).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -60,7 +60,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Combo
 
 **Step 5** Output the ComboBox by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $comboBox->render();
@@ -74,7 +74,7 @@ You can subscribe to all ComboBox [events](/api/web/combobox#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $comboBox = new \Kendo\UI\ComboBox('combobox');
@@ -94,7 +94,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $comboBox = new \Kendo\UI\ComboBox('combobox');
@@ -110,9 +110,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI ComboBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ComboBox API](/api/javascript/ui/combobox#methods) to control its behavior.
+You can reference the client-side Kendo UI ComboBox instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [ComboBox API](/api/javascript/ui/combobox#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $comboBox = new \Kendo\UI\ComboBox('combobox');

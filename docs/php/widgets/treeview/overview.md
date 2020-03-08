@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 **Step 2** Create a [TreeView](/api/php/Kendo/UI/TreeView), configure its [items](/api/php/Kendo/UI/TreeView#addItem).
 
-###### Example
+
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeV
 
 **Step 3** Output the TreeView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $treeview->render();
@@ -50,7 +50,7 @@ You can subscribe to all TreeView [events](/api/javascript/ui/treeview#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -70,7 +70,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');
@@ -86,9 +86,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI TreeView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeView API](/api/javascript/ui/treeview#methods) to control its behavior.
+You can reference the client-side Kendo UI TreeView instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeView API](/api/javascript/ui/treeview#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $treeview = new \Kendo\UI\TreeView('treeview');

@@ -2,7 +2,7 @@
 title: Exclude Certain Columns from the Exported PDF File
 description: An example on how to exclude certain columns from the exported PDF file when working with the Kendo UI Grid.
 type: how-to
-page_title: Exclude Certain Columns from the Exported PDF File | Kendo UI Grid
+page_title: Exclude Certain Columns from the Exported PDF File | Kendo UI Grid for jQuery
 slug: grid-exclude-columns-from-exported-pdf
 tags: grid, export, pdf, exclude, remove, column, columns, exported, file,
 res_type: kb
@@ -28,8 +28,114 @@ How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 
 ## Solution
 
-1. Hide the columns by using the [`hideColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler.
-1. When the export is done, display the hidden column by using the [`showColumn`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/showcolumn) method.
+Use either of the following approaches:
+
+*  [Use the `k-pdf-export` class and CSS](#using-the-k-pdf-export-class-and-css)
+*  [Using the showColum() and hideColumn() Grid methods](#using-the-showcolumns-and-hidecolumn-grid-methods)
+
+### Using the k-pdf-export Class and CSS
+
+To hide a Grid column only during the PDF export, use a CSS rule and reduce the width of the target column to zero. This approach is implemented because the Kendo UI Drawing API adds [the `k-pdf-export` class](/framework/drawing/pdf-output/custom-appearance#using-the) on all elements on the page and you can target specific elements in the following way.
+
+```
+<style>
+  .k-pdf-export colgroup > col:nth-child(4) {
+    width:0; /* hides only the 4th column during PDF export */
+  }
+</style>
+```
+
+The following example demonstrates how to hide the last column during PDF Export only with CSS.
+
+```dojo
+<style>
+      .page-template {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      .page-template .header {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        right: 30px;
+        border-bottom: 1px solid #888;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      .page-template .footer {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+      }
+
+      .k-pdf-export colgroup > col:nth-child(4) {
+        width:0;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Load Pako Deflate library to enable PDF compression -->
+    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/pako_deflate.min.js"></script>
+
+    <div id="grid"></div>
+    <script type="x/kendo-template" id="page-template">
+        <div class="page-template">
+            <div class="header">
+                Kendo UI Grid Export
+      </div>
+          <div class="footer">
+              <div style="float: right">Page #: pageNum # of #: totalPages #</div>
+      </div>
+      </div>
+    </script>
+
+    <script>
+      $("#grid").kendoGrid({
+        toolbar: ["pdf"],
+        pdf: {
+          fileName: "Kendo UI Grid Export.pdf",
+          paperSize: "A4",
+          allPages: true,
+          avoidLinks: true,
+          margin: { top: "1.5cm", right: "0.5cm", bottom: "1cm", left: "0.5cm" },
+          landscape: true,
+          repeatHeaders: true,
+          template: $("#page-template").html(),
+          scale: 0.6
+        },
+        dataSource: {
+          type: "odata",
+          transport: {
+            read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+          },
+          pageSize: 10
+        },
+        sortable: true,
+        scrollable: true,
+        pageable: true,
+        filterable: true,
+        columnMenu: true,
+        columns: [
+          { field: "ProductName", title: "Product Name1" },
+          { field: "UnitsOnOrder", title: "Units On Order1" },
+          { field: "UnitsInStock", title: "Units In Stock1" },
+          { command: "custom" }
+        ]
+      });
+    </script>
+```
+
+### Using the showColum() and hideColumn() Grid Methods
+
+1. Hide the columns by using the [`hideColumn`](/api/javascript/ui/grid/methods/hidecolumn) method within the [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) event handler.
+1. When the export is done, display the hidden column by using the [`showColumn`](/api/javascript/ui/grid/methods/showcolumn) method.
 
 ```dojo
     <div id="example">

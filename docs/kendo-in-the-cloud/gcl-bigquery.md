@@ -1,12 +1,12 @@
 ---
-title: Consuming Data from Google Cloud Big Query
-page_title: Consuming Data from Google Cloud Big Query | Kendo UI in the Cloud
+title: Google Cloud Big Query
+page_title: Google Cloud Big Query | Kendo UI in the Cloud
 description: "Learn how to bind the Kendo UI Grid to data that is served through Google Cloud Big Query."
 slug: gcl-bigquery
 position: 4
 ---
 
-# Consuming Data from Google Cloud Big Query
+# Google Cloud Big Query
 
 This article provides a step-by-step tutorial on how to create a table in [Google Cloud Big Query](https://aws.amazon.com/dynamodb/) and configure the [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to retrieve, create, update, and destroy items in that table.
 
@@ -159,8 +159,6 @@ function authenticate() {
         })
     ```
 
-    > **Important**
-    >
     > To manage the BigQuery data, you have to handle the `read`, `create`, `update`, and `destroy` functions of the Grid Data Source. For that purpose, the example uses the [BigQuery Jobs](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs) objects which manage asynchronous tasks such as running queries, loading data, and exporting data. To directly implement the query for the BigQuery data in the functions of the Grid DataSource, use the [Query Job](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) objects.
 
 1. To trigger a `SELECT` query to the BigQuery table, implement the `read` function. Once the response is received, the data is returned in the response. You can manipulate it in a preferable manner and provide it to the Grid.

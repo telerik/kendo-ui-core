@@ -11,8 +11,6 @@ The following example demonstrates how to set a validation rule to a column rang
 
 To apply the validation rule to the specific range, it uses the [`range.validation`](/api/javascript/spreadsheet/range/methods/validation) method.
 
-###### Example
-
 ```dojo
 <div id="spreadsheet" style="width: 100%;"></div>
 <script>
@@ -514,6 +512,5 @@ To apply the validation rule to the specific range, it uses the [`range.validati
 
 ## See Also
 
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
-* [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
-* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a new action method and pass the **Products** table to the View.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index(Model model) {
@@ -38,13 +38,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a server-bound AutoComplete.
 
-###### Example
+
 
         <kendo:autoComplete name="productAutoComplete" dataTextField="productName">
             <kendo:dataSource data="${products}"></kendo:dataSource>
@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 You can subscribe to all [events exposed by Kendo UI AutoComplete](/api/web/autocomplete#events) by the handler name.
 
-###### Example
+
 
     <kendo:autoComplete name="productAutoComplete" dataTextField="productName" change="autocomplete_change">
         <kendo:dataSource data="${products}">
@@ -73,9 +73,9 @@ You can subscribe to all [events exposed by Kendo UI AutoComplete](/api/web/auto
 
 ### Existing Instances
 
-You are able to reference an existing AutoComplete instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [AutoComplete API](/api/javascript/ui/autocomplete#methods) to control its behavior.
+You are able to reference an existing AutoComplete instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [AutoComplete API](/api/javascript/ui/autocomplete#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo AutoComplete tag declaration
     <script>

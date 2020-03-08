@@ -8,32 +8,33 @@ position: 2
 
 # Group Templates
 
-Group rows are used to organize data rows into a tree structure when data grouping is applied.
+When grouping is applied, the group rows of the Grid organize data rows into a tree structure.
 
-A group row contains an expanding and collapsing group icon that enables end-users to expand and collapse a group row, and thus show or hide its child rows. One of the main features of group rows is to display group summary values. Kendo UI Grid provides three different templates that can be used to customize the appearance of the group rows:
+For runnable examples, refer to:
+* [Demo on using the row template of the Grid](https://demos.telerik.com/kendo-ui/grid/rowtemplate)
+* [Demo on using the detail-row template of the Grid](https://demos.telerik.com/kendo-ui/grid/detailtemplate)
+* [Demo on using the toolbar template of the Grid](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
 
-- [`GroupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.groupheadertemplate)&mdash;Renders a template to be displayed for the entire group row. Usually the main objective is to show an information about the entire group. By default if no template is defined the name of the field and the current group value is displayed.
-- [`GroupHeaderColumnTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.groupheadercolumntemplate)&mdash;Renders a template in the group row aligned to the column itself. Usually it is used to show an aggregate value for a specific column in the context of the current group. Visually the template content is displayed aligned to the column itself. This functionality is introduced in R3 2018 release.
-- [`GroupFooterTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.groupfootertemplate)&mdash;Renders a template in the group footer row aligned to the column. Pretty much it works in the same way as the `groupHeaderColumnTemplate` for the group footer row.
+Group rows display group summary values and contain expanding and collapsing group icons which enable users to expand (show the child rows) and collapse (hide the child rows) a group row. The Grid provides the following templates which you can use to customize the appearance of the group rows:
+- [`GroupHeaderTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.groupheadertemplate)&mdash;Renders a template for the entire group row. Usually, the main aim is to display information about the entire group. By default, if you do not define a template, the name of the field and the current group value is displayed.
+- (Available as of the R3 2018 release) [`GroupHeaderColumnTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.groupheadercolumntemplate)&mdash;Renders a template in the group row aligned to the column itself. Usually, it displays an aggregate value for a specific column in the context of the current group. The template content is visually displayed as aligned to the column itself.
+- [`GroupFooterTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.groupfootertemplate)&mdash;Renders a template in the group footer row that is aligned to the column. Works in a similar way to the `groupHeaderColumnTemplate` for the group footer row.
 
-If no template is defined, the name of the field and the current group are displayed in the following way.
+If you do not define a template, the name of the field and the current group are displayed in the following way.
 
-**Figure 1: Grid with no group templates**
+**Figure 1: A Grid with no group templates**
 
 ![Grid with no group templates](../grid-no-group-header-template.png)
 
-The only difference in the use of `GroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value.
+The only difference in the use of `GroupHeaderTemplate` is that the template content is compiled and displayed instead of the field and current group value. Both `GroupHeaderColumnTemplate` and `GroupFooterTemplate` work in a similar way. `GroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `GroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
 
-Both `GroupHeaderColumnTemplate` and `GroupFooterTemplate` work in a similar way. `GroupHeaderColumnTemplate` displays the content as aligned to the column in the group row. `GroupFooterTemplate` displays the content as aligned to the column in the group footer row. Their content is displayed as aligned to the column as shown in the following way.
-
-**Figure 2: Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied**
+**Figure 2: A Grid with defined group header and group footer templates**
 
 ![Grid with GroupHeaderColumnTemplate and GroupFooterTemplate applied](../grid-group-header-column-template.png)
 
-Due to the fact that `GroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `GroupHeaderColumnTemplate` of the first visible column. If you want to show the `GroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `GroupHeaderTemplate` for the group column. The following Grid configuration shows that commenting the `GroupHeaderTemplate` for the **Units In Stock** column shows the `GroupHeaderColumnTemplate` for the **Product Name** column.
+Because `GroupHeaderTemplate` is displayed next to the expanding icon of the group row, it takes precedence over the `GroupHeaderColumnTemplate` of the first visible column. To show the `GroupHeaderColumnTemplate` content for the first column of the Grid, do not set the `GroupHeaderTemplate` for the group column. The following Grid configuration demonstrates that commenting the `GroupHeaderTemplate` for the **Units In Stock** column shows the `GroupHeaderColumnTemplate` for the **Product Name** column.
 
-#### Example
-
+```dojo
     <div id="grid"></div>
     <script>
         $("#grid").kendoGrid({
@@ -68,12 +69,22 @@ Due to the fact that `GroupHeaderTemplate` is displayed next to the expanding ic
             ]
         });
     </script>
+```
 
-**Figure 3: Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate**
+**Figure 3: A Grid with a group header template applied to the first column and no group header template defined**
 
 ![Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../grid-group-header-column-template-first-column.png)
 
+## KB Articles on Templates
+
+* [Editing Records in Child Grids]({% slug howto_edit_recordsin_children_grid %})
+* [Refreshing the Grid in the Detail Template]({% slug howto_refresh_gridin_detail_template_grid %})
+* [Creating a Custom Editor in the Detail Template]({% slug howto_create_custom_editorin_detail_template_grid %})
+* [Find Out More in the Knowledge Base](/knowledge-base)
+
 ## See Also
 
-* [Grid JavaScript API Reference](/api/javascript/ui/grid)
-* [Walkthrough of the Grid]({% slug walkthrough_kendoui_grid_widget %})
+* [Using Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/rowtemplate)
+* [Using Detail-Row Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/detailtemplate)
+* [Using Toolbar Templates in the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/toolbar-template)
+* [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

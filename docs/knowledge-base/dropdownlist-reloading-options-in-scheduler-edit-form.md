@@ -2,7 +2,7 @@
 title: Reload DropDownList Options in Scheduler Edit Form
 description: An example on how to change the items that are available in a resource DropDownList on a Scheduler edit form.
 type: how-to
-page_title: Alter Available Data Placed on Scheduler Edit Form | Kendo UI DropDownList
+page_title: Alter Available Data Placed on Scheduler Edit Form | Kendo UI DropDownList for jQuery
 slug: dropdownlist-reloading-options-in-scheduler-edit-form
 tags: kendoui, kendo, dropdownlist, scheduler, edit, data, options, change
 ticketid: 1118178
@@ -27,7 +27,7 @@ How can I get the instance of the second DropDownList to reload the data of the 
 
 ## Solution
 
-Implement an event handler for the [`edit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/edit) event of the Scheduler. This function adds a [`change`](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event handler to the first of the two DropDownLists. This `change` event handler successfully [changes the available options](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/setdatasource) in the second DropDownList by altering its DataSource.
+Implement an event handler for the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/edit) event of the Scheduler. This function adds a [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event handler to the first of the two DropDownLists. This `change` event handler successfully [changes the available options](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/setdatasource) in the second DropDownList by altering its DataSource.
 
 ```dojo
   <div id="example">
@@ -138,5 +138,5 @@ Implement an event handler for the [`edit`](http://docs.telerik.com/kendo-ui/api
 
 ## See Also
 
-* [JavaScript API Reference of the DropDownList Events](http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#events)
-* [JavaScript API Demo of the Scheduler Events](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events)
+* [JavaScript API Reference of the DropDownList Events](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#events)
+* [JavaScript API Demo of the Scheduler Events](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler#events)

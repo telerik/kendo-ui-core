@@ -259,7 +259,7 @@ span.k-textbox:after {
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-numeric-wrap {
-    .transition("box-shadow .15s ease-out");
+    transition: box-shadow .15s ease-out;
 }
 
 .k-textbox > input,
@@ -684,6 +684,36 @@ textarea.k-textbox {
     height: auto;
 }
 
+// Input with icon
+.k-input-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: @input-icon-width;
+    position: relative;
+
+    .k-icon {
+        position: static;
+        margin: 0;
+    }
+
+    .k-ie9 & {
+        position: absolute;
+        height: 100%;
+        right: 0;
+        top: 0;
+    }
+
+    .k-rtl &,
+    [dir="rtl"] & {
+        .k-ie9 & {
+            left: 0;
+            right: auto;
+        }
+    }
+}
+
+
 // NumericTextBox
 
 span.k-numerictextbox {
@@ -724,17 +754,6 @@ span.k-numerictextbox {
 
 .k-numeric-wrap .k-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-}
-
-.k-disabled-overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    opacity: 0.5;
-    filter: alpha(opacity=50);
 }
 
 .k-rtl .k-multiselect-wrap {

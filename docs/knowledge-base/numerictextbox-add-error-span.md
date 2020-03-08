@@ -2,7 +2,7 @@
 title: Display Additional Error Notification
 description: An example on how to add additional validation span in the Kendo UI NumericTextBox.
 type: how-to
-page_title: Add Error Notification Span | Kendo UI NumericTextBox
+page_title: Add Error Notification Span | Kendo UI NumericTextBox for jQuery
 slug: numerictextbox-add-error-span
 tags: numerictextbox, error, span, validation, notification
 ticketid: 1149027

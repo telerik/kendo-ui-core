@@ -10,8 +10,6 @@ slug: howto_exportto_ical_scheduler
 
 The following example demonstrates how to extract Kendo UI Scheduler events to an `.ical` file.
 
-###### Example
-
 ```dojo
     <script src="https://rawgit.com/nwcell/ics.js/master/ics.js"></script>
     <div id="scheduler"></div>
@@ -124,19 +122,6 @@ The following example demonstrates how to extract Kendo UI Scheduler events to a
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
-* [How to Hide Header and Footer in Adaptive Rendering]({% slug howto_hideheaderandfooter_inadaptiverebdering_scheduler %})
-* [How to Hide Time Headers]({% slug howto_hide_time_headers_scheduler %})
-* [How to Modify Editor Template upon New Events]({% slug howto_modifyeditortemplate_wheneventisnew_scheduler %})
-* [How to Modify Event Styling on databound]({% slug howto_modifyeventstyling_ondatabound_scheduler %})
-* [How to Work with Scheduler Offline]({% slug howto_setupthewidget_toworkoffline_scheduler %})
-* [How to Use Remote Validation]({% slug howto_useremotevalidation_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Show Тooltip on hover]({% slug howto_show_tooltipon_hover_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

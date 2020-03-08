@@ -5,11 +5,6 @@
     direction: rtl;
 }
 
-.k-rtl .k-badge {
-    margin-left: 0;
-    margin-right: 6px;
-}
-
 // AutoComplete
 
 .k-rtl .k-autocomplete .k-i-loading,
@@ -150,6 +145,12 @@
     transform: scaleX(-1);
 }
 
+.k-rtl .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view {
+    text-align: left;
+    padding-left: 1em;
+    text-align: left;
+}
+
 // Editor
 
 .k-rtl .k-form-text-row input
@@ -227,6 +228,22 @@
 .k-rtl .k-i-indent-decrease
 {
     transform: scaleX(-1);
+}
+
+.k-rtl .k-overflow-tools {
+    left: 0;
+    right: auto;
+}
+
+.k-rtl .k-editortoolbar-dragHandle {
+    float: right;
+}
+
+.k-rtl .k-editor-toolbar .k-tool-group .k-widget:last-child {
+    margin-right: 6px;
+}
+.k-rtl .k-editor-toolbar .k-tool-group .k-widget:first-child {
+    margin-right: 0;
 }
 
 // Grid
@@ -331,6 +348,10 @@
     left: 2.5em;
 }
 
+.k-rtl .k-header .k-grid-search {
+    float: left;
+}
+
 // Editing
 
 .k-rtl .k-edit-label,
@@ -352,11 +373,7 @@
     margin-left: 2%;
 }
 
-.k-rtl .k-edit-field > input[type="checkbox"]:first-child,
-.k-rtl .k-edit-field > input[type="radio"]:first-child,
-.k-rtl .k-edit-field > label:first-child > input[type="checkbox"],
-.k-rtl .k-edit-field > .k-button:first-child
-{
+.k-rtl .k-edit-field > .k-button:first-child {
     margin-right: 0;
 }
 
@@ -376,22 +393,6 @@
 .k-webkit .k-rtl .k-dirty
 {
     margin: -0.4em 0.7em 0 0;
-}
-
-// Pager
-
-.k-rtl .k-pager-info,
-.k-rtl .k-pager-wrap .k-pager-refresh
-{
-    float: left;
-}
-
-.k-rtl .k-pager-wrap > .k-link,
-.k-rtl .k-pager-wrap .k-pager-numbers,
-.k-rtl .k-pager-numbers li,
-.k-rtl .k-pager-input
-{
-    float: right;
 }
 
 // Gantt
@@ -510,41 +511,35 @@
 
 // Menu
 
-.k-rtl .k-menu .k-item,
-.k-rtl .k-widget.k-menu-horizontal > .k-item
-{
-    border-width: 0 0 0 1px;
-}
+.k-rtl,
+[dir="rtl"] {
 
-.k-rtl .k-widget.k-menu-horizontal > .k-item
-{
-    float: right;
-}
+    .k-menu.k-menu-vertical .k-item {
+        border: 0;
+    }
 
-.k-rtl .k-menu .k-item > .k-link > .k-i-arrow-60-down
-{
-    margin-right: 0;
-    margin-left: -8px;
-}
+    .k-widget.k-menu-horizontal > .k-item {
+        float: right;
+    }
 
-.k-rtl .k-menu-group .k-item > .k-link > .k-menu-expand-arrow,
-.k-rtl .k-menu-vertical .k-item > .k-link > .k-menu-expand-arrow,
-{
-    right: auto;
-    left: .2rem;
-}
+    .k-menu-group .k-item > .k-link > .k-menu-expand-arrow,
+    .k-menu-vertical .k-item > .k-link > .k-menu-expand-arrow {
+        right: auto;
+        left: .2rem;
+    }
 
-.k-rtl .k-menu .k-menu-group .k-item > .k-link
-{
-    padding-left: 4.929em;
-    padding-right: 1.714em;
-}
+    .k-menu {
+        .k-image,
+        .k-sprite {
+            margin-left: 4px;
+            margin-right: -4px;
+        }
 
-.k-rtl .k-menu .k-image,
-.k-rtl .k-menu .k-sprite
-{
-    margin-left: 4px;
-    margin-right: -4px;
+        .k-item > .k-link > .k-i-arrow-60-down {
+            margin-right: 0;
+            margin-left: -8px;
+        }
+    }
 }
 
 // Multiselect
@@ -570,31 +565,6 @@
 .k-rtl .k-autocomplete > .k-i-close,
 .k-rtl .k-multiselect-wrap > .k-i-close {
     right: auto;
-}
-
-// Notification
-
-.k-rtl .k-notification-button .k-notification-wrap,
-.k-rtl.k-notification-button .k-notification-wrap
-{
-    padding-right: .5em;
-    padding-left: 20px;
-}
-
-.k-rtl .k-notification-wrap > .k-i-information,
-.k-rtl .k-notification-wrap > .k-i-information,
-.k-rtl .k-notification-wrap > .k-i-information,
-.k-rtl .k-notification-wrap > .k-i-warning,
-.k-rtl .k-notification-wrap > .k-i-erorr
-{
-    margin-right: 0;
-    margin-left: 4px;
-}
-
-.k-rtl .k-notification-wrap > .k-i-close
-{
-    right: auto;
-    left: 4px;
 }
 
 // PanelBar
@@ -691,6 +661,11 @@
 {
     border-left-width: 0;
     border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-agendaview .k-scheduler-table td.k-first
+{
+    border-right-width: 0;
 }
 
 .k-rtl .k-scheduler-agendaview .k-scheduler-table td.k-scheduler-datecolumn
@@ -901,31 +876,29 @@
 
 // TabStrip
 
-.k-rtl .k-tabstrip-items .k-item,
-.k-rtl .k-panelbar .k-tabstrip-items .k-item
-{
-    margin-left: -1px;
-    margin-right: 0;
-}
+.k-rtl {
+    .k-tabstrip-items .k-item,
+    .k-panelbar .k-tabstrip-items .k-item {
+        margin-left: -1px;
+        margin-right: 0;
 
-.k-rtl .k-tabstrip-items .k-item .k-image,
-.k-rtl .k-tabstrip-items .k-item .k-sprite,
-.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-image,
-.k-rtl .k-panelbar .k-tabstrip-items .k-item .k-sprite
-{
-    margin: -3px -6px 0 3px;
-}
+        .k-image,
+        .k-sprite {
+            margin: -3px -6px 0 3px;
+        }
+    }
 
-.k-rtl .k-tabstrip-prev
-{
-    left: auto;
-    right: .4em;
-}
+    .k-tabstrip-prev {
+        left: auto;
+        right: .4em;
+        transform: scaleX(-1);
+    }
 
-.k-rtl .k-tabstrip-next
-{
-    right: auto;
-    left: .4em;
+    .k-tabstrip-next {
+        right: auto;
+        left: .4em;
+        transform: scaleX(-1);
+    }
 }
 
 // ToolBar
@@ -1009,11 +982,6 @@
     margin-left: auto;
 }
 
-.k-rtl .k-treeview .k-checkbox-label {
-    padding-left: 0;
-    padding-right: calc(14px + 0.7ex);
-}
-
 //  TreeList
 .k-rtl .k-treelist .k-i-arrow-60-right,
 .k-rtl .k-treelist .k-i-arrow-45-down-right
@@ -1072,6 +1040,11 @@
 {
     margin-right: .8em;
     margin-left: .2em;
+}
+
+.k-rtl .k-file-name-size-wrapper {
+    margin-left: 0;
+    margin-right: 1em;
 }
 
 // Window
@@ -1137,15 +1110,41 @@
     }
 }
 
-.k-rtl .k-grid {
+// Spreadsheet
 
-    th .k-checkbox {
-        margin-top: 0;
-        margin-right: 1px;
-        margin-left: 0;
-    }
+.k-rtl .k-spreadsheet {
 
-    td .k-checkbox {
-        margin-left: 0;
+    .k-spreadsheet-cell {
+
+        .k-dirty {
+            margin: 0;
+        }
+
+        &.k-spreadsheet-has-comment::after {
+            left: 0;
+            right: auto;
+        }
     }
 }
+
+// Colorpicker
+
+.k-rtl .k-flatcolorpicker {
+    .k-selected-color {
+        text-align: left;
+    }
+    .k-selected-color .k-color-value {
+        direction: initial;
+        text-align: right;
+        border-left: 0;
+    }
+
+    .k-transparency-slider .k-slider-track {
+        background-image: url("textures/transparency-reversed.png");
+    }
+
+    .k-hue-slider .k-slider-track {
+        background: linear-gradient(to left,  #ff0000 0%, #ffff00 16%, #00ff00 33%, #00ffff 50%, #0000ff 67%, #ff00ff 84%, #ff0004 100%);
+    }
+}
+

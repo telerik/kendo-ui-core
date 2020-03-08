@@ -28,7 +28,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 **Step 2** Create an array to which the [TreeList](/api/php/Kendo/UI/TreeList) will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -39,7 +39,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 **Step 3** Create a [`dataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -48,7 +48,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 **Step 4** Create a [TreeList](/api/php/Kendo/UI/TreeList), configure its [columns](/api/php/Kendo/UI/TreeList#addcolumn) and set its [`dataSource`](/api/php/Kendo/UI/TreeList#datasource).
 
-###### Example
+
 
         <?php
         $nameColumn = new \Kendo\UI\TreeListColumn();
@@ -64,7 +64,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TreeL
 
 **Step 5** Output the TreeList by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $treelist->render();
@@ -78,7 +78,7 @@ You can subscribe to all TreeList [events](/api/javascript/ui/treelist#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $treelist = new \Kendo\UI\TreeList('treelist');
@@ -98,7 +98,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $treelist = new \Kendo\UI\TreeList('treelist');
@@ -114,9 +114,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing TreeList instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeList API](/api/javascript/ui/treelist#methods) to control its behavior.
+You are able to reference an existing TreeList instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [TreeList API](/api/javascript/ui/treelist#methods) to control its behavior.
 
-###### Example
+
 
           <?php
           $treelist = new \Kendo\UI\TreeList('employees');

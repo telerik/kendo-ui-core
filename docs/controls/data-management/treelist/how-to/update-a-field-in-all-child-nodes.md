@@ -9,8 +9,6 @@ slug: howto_updatefieldinallchildnodes_treelist
 
 The following example demonstrates how to update all child nodes recursively and propagate the row state in the TreeList.
 
-###### Example
-
 ```dojo
   <div id="treelist"></div>
 
@@ -39,7 +37,7 @@ The following example demonstrates how to update all child nodes recursively and
         var node = e.items && e.items[0];
         var propagatedField = "checked";
 
-        // only propagate changes to the desired field
+        // Only propagate changes to the desired field.
         if (!node || e.field != propagatedField) {
           return;
         }
@@ -81,7 +79,6 @@ The following example demonstrates how to update all child nodes recursively and
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
-* [How to Show Context Menu]({% slug howto_showcontextmenu_treelist %})
-
-For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+* [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
+* [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
+* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

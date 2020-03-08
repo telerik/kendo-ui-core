@@ -2,7 +2,7 @@
 title: Persist Filters in Spreadsheet
 description: An example on how to persist the selected filters in the Kendo UI Spreadsheet.
 type: how-to
-page_title: Persist Selected Filters after Reload of Data | Kendo UI Spreadsheet
+page_title: Persist Selected Filters after Reload of Data | Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-persist-filters
 tags: kendo, kendo-ui, spreadsheet, filters, persist-filter
 ticketid: 1156588
@@ -446,4 +446,4 @@ The following example demonstrates the implementation of the suggested approach.
 
 ## See Also
 
-* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)

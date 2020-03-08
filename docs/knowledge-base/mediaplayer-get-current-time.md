@@ -2,7 +2,7 @@
 title: Get Current Time in MediaPlayer
 description: An example on how to get the elapsed time in the Kendo UI MediaPlayer.
 type: how-to
-page_title: Get the Current Time | Kendo UI MediaPlayer
+page_title: Get the Current Time | Kendo UI MediaPlayer for jQuery
 slug: mediaplayer-get-current-time
 tags: mediaplayer, current, time, seek, get, position, seconds, played, elapsed
 res_type: kb

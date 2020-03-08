@@ -9,8 +9,6 @@ slug: howto_draganddrop_onshapes_diagram
 
 The following example demonstrates how to enable the dropping only of new shapes on existing ones in the Diagram.
 
-###### Example
-
 ```dojo
 
     <script>
@@ -185,9 +183,8 @@ The following example demonstrates how to enable the dropping only of new shapes
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Show Shapes Tooltip]({% slug howto_shapestooltip_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

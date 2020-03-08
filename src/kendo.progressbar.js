@@ -26,9 +26,10 @@ var __meta__ = { // jshint ignore:line
         KPROGRESSBARCOMPLETE = "k-complete",
         KPROGRESSWRAPPER = "k-state-selected",
         KPROGRESSSTATUS = "k-progress-status",
+        LABEL_POSITION_END = "k-progress-end",
         KCOMPLETEDCHUNK = "k-state-selected",
         KUPCOMINGCHUNK = "k-state-default",
-        KSTATEDISABLED = "k-state-disabled",
+        STATEDISABLED = "k-state-disabled",
         PROGRESSTYPE = {
             VALUE: "value",
             PERCENT: "percent",
@@ -44,7 +45,7 @@ var __meta__ = { // jshint ignore:line
         DEFAULTANIMATIONDURATION = 400,
         PRECISION = 3,
         templates = {
-            progressStatus: "<span class='k-progress-status-wrap'><span class='k-progress-status'></span></span>"
+            progressStatus: "<span class='k-progress-status-wrap " + LABEL_POSITION_END + "'><span class='k-progress-status'></span></span>"
         };
 
     var ProgressBar = Widget.extend({
@@ -146,7 +147,7 @@ var __meta__ = { // jshint ignore:line
             container.addClass(KPROGRESSBAR + "-" + ((orientation === HORIZONTAL) ? HORIZONTAL : VERTICAL));
 
             if(options.enable === false) {
-                container.addClass(KSTATEDISABLED);
+                container.addClass(STATEDISABLED);
             }
 
             if (options.reverse) {
@@ -211,11 +212,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _roundValue: function(value) {
-            value = parseFloat(value);
+             value = parseFloat(value);
 
-            var power = math.pow(10, PRECISION);
+             var power = math.pow(10, PRECISION);
 
-            return math.floor(value * power) / power;
+             return kendo._round(value * power) / power;
         },
 
         _validateValue: function(value) {
@@ -362,7 +363,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
 
             options.enable = typeof(enable) === "undefined" ? true : enable;
-            that.wrapper.toggleClass(KSTATEDISABLED, !options.enable);
+            that.wrapper.toggleClass(STATEDISABLED, !options.enable);
         },
 
         destroy: function() {

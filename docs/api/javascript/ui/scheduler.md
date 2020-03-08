@@ -90,7 +90,7 @@ If set to `true` the scheduler will display a slot for "all day" events.
 ### autoBind `Boolean` *(default: true)*
 
 If set to `false` the widget will not bind to the data source during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
-data source is fired. By default the widget will bind to the data source specified in the configuration.
+data source is fired. That will also apply for data sources for the [resources](/api/javascript/ui/scheduler/configuration/resources) used in the widget. By default the widget will bind to the data source specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source doesn't make more than one request to the remote service.
 
@@ -2075,7 +2075,8 @@ The text similar to "Ends" displayed in the adaptive version of the scheduler re
     <script>
     $("#scheduler").kendoScheduler({
       date: new Date("2013/6/6"),
-      mobile: true,
+      mobile: "phone",
+      height: 550,
       messages: {
         recurrenceEditor: {
             end: {
@@ -3247,7 +3248,9 @@ The fields which can be used in the template are:
 
 If set to `true` and the scheduler is viewed on mobile browser it will use adaptive rendering.
 
-Can be set to a string `phone` or `tablet` which will force the widget to use adaptive rendering regardless of browser type.
+Can be set to a string `phone` which will force the widget to use adaptive rendering regardless of browser type.
+
+> Important: With the mobile rendering, we recommend to set up the `height` option as well. Without setting an explicit height, every view of the scheduler might have a different height.
 
 #### Example - enable adaptive rendering auto detect
     <div id="scheduler"></div>
@@ -3255,6 +3258,7 @@ Can be set to a string `phone` or `tablet` which will force the widget to use ad
         $("#scheduler").kendoScheduler({
           date: new Date("2013/6/6"),
           mobile: true,
+          height: 600,
           dataSource: [
             {
               id: 1,
@@ -3272,6 +3276,7 @@ Can be set to a string `phone` or `tablet` which will force the widget to use ad
         $("#scheduler").kendoScheduler({
           date: new Date("2013/6/6"),
           mobile: "phone",
+          height: 600,
           dataSource: [
             {
               id: 1,
@@ -4122,7 +4127,7 @@ The timezone which the scheduler will use to display the scheduler appointment d
 scheduler widget is bound to local array of events. It is advisable to specify a timezone if the scheduler is bound to a remote service.
 That way all users would see the same dates and times no matter their configured system timezone.
 
-The complete list of the supported timezones is available in the [List of IANA time zones](http://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
+The complete list of the supported timezones is available in the [List of IANA time zones](https://en.wikipedia.org/wiki/List_of_IANA_time_zones) Wikipedia page.
 
 > The **kendo.timezones.min.js** file must be included in order to use timezones other than "Etc/UTC".
 
@@ -4280,6 +4285,55 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.
           title: "Meeting"
         }
       ]
+    });
+    </script>
+
+### views.adaptiveSlotHeight `Boolean` *(default: false)*
+
+Increases the slot height when containing events up to views.eventsPerDay and reduces its height if there are less events for that specific day.
+
+> The `adaptiveSlotHeight` option is supported when `views.type` is set to "month".
+
+#### Example - set the adaptive slot height in month view
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "month",
+          eventsPerDay: 4,
+          adaptiveSlotHeight: true
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview1"
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview2"
+        },
+        {
+          id: 3,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview3"
+        },
+        {
+          id: 4,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview4"
+        }
+      ],
+      height: 1000
     });
     </script>
 
@@ -4743,11 +4797,11 @@ The fields which can be used in the template are:
     });
     </script>
 
-### views.eventHeight `Number` *(default: 25)*
+### views.eventHeight `String|Number` *(default: 25)*
 
-The height of the scheduler event rendered in month and timeline views.
+The height of the scheduler event rendered in month and timeline views. In month view it could be set to a concrete number or to the string value "auto". When set to "auto" it will automatically set the views.adaptiveSlotHeight property to true.
 
-> The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth".
+> The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth". The "auto" value is supported when views.type is set to "month" and it sets the views.adaptiveSlotHeight to true.
 
 #### Example - set the event height in month view
 
@@ -4767,6 +4821,103 @@ The height of the scheduler event rendered in month and timeline views.
           start: new Date("2013/6/6 08:00 AM"),
           end: new Date("2013/6/6 09:00 AM"),
           title: "Interview"
+        }
+      ],
+      height: 1000
+    });
+    </script>
+
+### views.eventSpacing `Number` *(default: 3)*
+
+Specifies the distance between individual events.
+
+> The`eventSpacing option is supported when `views.type` is set to "month".
+
+#### Example - set the event spacing in month view
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "month",
+          eventsPerDay: 4,
+          eventSpacing: 4
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview1"
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview2"
+        },
+        {
+          id: 3,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview3"
+        },
+        {
+          id: 4,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview4"
+        }
+      ],
+      height: 1000
+    });
+    </script>
+
+### views.eventsPerDay `Number` *(default: 2)*
+
+Indicates how many events could be listed for a day. When there are more events for a specific day a "more" link will be placed at the bottom of the day slot and will navigate to the day view if clicked.
+
+> The `eventsPerDay` option is supported when `views.type` is set to "month". If it is set to 0 it is internally set to 1.
+
+#### Example - set the events per day in month view
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "month",
+          eventsPerDay: 4
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview1"
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview2"
+        },
+        {
+          id: 3,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview3"
+        },
+        {
+          id: 4,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview4"
         }
       ],
       height: 1000
@@ -6348,6 +6499,8 @@ The widget instance which fired the event.
 ### change
 
 Fired when the user selects a cell or event in the scheduler.
+
+> Make sure you enabled the `selectable` option of the Scheduler, in order to be able to trigger a change event.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

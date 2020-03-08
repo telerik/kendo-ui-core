@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 2** Create an array to which the Gantt will be bound.
 
-###### Example
+
 
         <?php
         $tasksData = array(
@@ -54,7 +54,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 3** Create an array of dependencies to which the Gantt will be bound.
 
-###### Example
+
 
         <?php
         $dependenciesData = array(
@@ -69,7 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 4** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) for the tasks and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $tasksDataSource = new \Kendo\Data\DataSource();
@@ -78,7 +78,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 5** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) for the dependencies and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dependenciesDataSource = new \Kendo\Data\DataSource();
@@ -87,7 +87,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 6** Create a [Gantt](/api/php/Kendo/UI/Gantt), set its [`dataSource`](/api/php/Kendo/UI/Gantt#datasource), and the [`dataSource` of the dependencies](/api/php/Kendo/UI/Gantt#dependencies).
 
-###### Example
+
 
         <?php
         $gantt = new \Kendo\UI\Gantt('gantt');
@@ -97,7 +97,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Gantt
 
 **Step 7** Output the Gantt by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $gantt->render();
@@ -111,7 +111,7 @@ You can subscribe to all Gantt [events](/api/javascript/ui/gantt#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $gantt = new \Kendo\UI\Gantt('gantt');
@@ -131,7 +131,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
     <?php
     $gantt = new \Kendo\UI\Gantt('gantt');
@@ -147,9 +147,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI Gantt instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Gantt API](/api/javascript/ui/gantt#methods) to control its behavior.
+You can reference the client-side Kendo UI Gantt instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Gantt API](/api/javascript/ui/gantt#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $gantt = new \Kendo\UI\Gantt('Gantt');

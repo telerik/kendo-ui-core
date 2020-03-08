@@ -457,13 +457,17 @@ var __meta__ = { // jshint ignore:line
             return center;
         },
 
-        _isFloating: function(item) {
-            return (/left|right/).test(item.css("float")) || (/inline|table-cell/).test(item.css("display"));
+        _isFloating: function (item) {
+            var isFloating = /left|right/.test(item.css('float'));
+            var isTable = /inline|table-cell/.test(item.css('display'));
+            var isHorizontalFlex = /flex/.test(item.parent().css('display')) && (/row|row-reverse/.test(item.parent().css('flex-direction')) || !item.parent().css('flex-direction'));
+            return isFloating || isTable || isHorizontalFlex;
         },
 
         _cancel: function() {
             this.draggedElement.show();
             this.placeholder.remove();
+            this.draggable.dropped = true;
         },
 
         _items: function() {

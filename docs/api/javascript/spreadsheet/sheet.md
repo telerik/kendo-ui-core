@@ -40,6 +40,25 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
 
 ## Methods
 
+### addDrawing
+
+Adds a new drawing to this sheet.
+
+#### Parameters
+
+##### drawing `Object`
+
+This can contain the same properties as you can pass to
+[`sheets.drawings`](/api/javascript/ui/spreadsheet#configuration-sheets.drawings)
+configuration options.
+
+#### Returns
+
+`Object` an internal Drawing object containing the passed properties.  The
+internals of this object are not intended to be public API at this point, but
+you can pass this object reference to [`removeDrawing`](#methods-removeDrawing)
+if you want to remove this drawing.
+
 ### clearFilter
 
 Clears the filters for the passed column index. If an array is passed, `clearFilter` will clear the filter for each column index.
@@ -173,6 +192,10 @@ Deletes the contents of the row at the provided index and shifts the remaining c
 ##### index `Number`
 
 The zero-based index of the row
+
+##### skipDataSourceDelete `Boolean` *optional*
+
+If passed `true`, the method does not delete item from the DataSource.
 
 #### Example
 
@@ -412,6 +435,10 @@ Inserts a new, empty row at the provided index. The contents of the spreadsheet 
 
 The zero-based index of the column
 
+##### skipDataSourceInsert `Boolean` *optional*
+
+If passed `true`, the method does not insert item in the DataSource.
+
 #### Example
 
     <div id="spreadsheet"></div>
@@ -480,6 +507,16 @@ If the parameters are `Numbers`, the first two would represent the row index (th
         // select the B3:C6 range
         sheet.range(2,1,4,2).select();
     </script>
+
+### removeDrawing
+
+Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
+
+#### Parameters
+
+##### drawing `Object`
+
+The drawing object.
 
 ### rowHeight
 

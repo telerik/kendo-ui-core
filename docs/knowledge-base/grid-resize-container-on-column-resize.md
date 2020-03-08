@@ -2,7 +2,7 @@
 title: Resize the Grid When a Column Is Resized
 description: An example on how to change the width of the Grid after resizing any of its columns.
 type: how-to
-page_title: Resize the Widget after Its Column Is Resized | Kendo UI Grid
+page_title: Resize the Widget after Its Column Is Resized | Kendo UI Grid for jQuery
 slug: grid-resize-container-on-column-resize
 tags: grid, scroll, scrollbar, vertical
 res_type: kb

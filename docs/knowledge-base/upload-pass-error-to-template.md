@@ -2,7 +2,7 @@
 title: Display Validation Error Message in the Upload File Template
 description: An example on how to display the message from the validation error in a custom file template of a Kendo UI Upload.
 type: how-to
-page_title: Pass Error Message to the File Template | Kendo UI Upload
+page_title: Pass Error Message to the File Template | Kendo UI Upload for jQuery
 slug: upload-pass-error-to-template
 tags: kendo,upload,error,file-template,template
 res_type: kb

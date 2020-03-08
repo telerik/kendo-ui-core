@@ -12,7 +12,7 @@ Depending on your project, you might need to add an image preview before you upl
 
 The following example demonstrates how to add an image preview and read the file in the `select` event of the Upload.
 
-###### Example
+
 
 ```dojo
 <div id="example">

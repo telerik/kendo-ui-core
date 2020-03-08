@@ -2,7 +2,7 @@
 title: Select Items Only with Mouse
 description: An example on how to select multiple items in the Kendo UI ListView only with the mouse.
 type: how-to
-page_title: Select Multiple Items Only with Click | Kendo UI ListView
+page_title: Select Multiple Items Only with Click | Kendo UI ListView for jQuery
 slug: listview-select-with-click
 tags: listview, select, item, items, click, mouse, only, deselect, single
 res_type: kb
@@ -157,5 +157,3 @@ How can I allow the users to select or deselect ListView items only with the mou
     }
 </style>
 ```
-
-

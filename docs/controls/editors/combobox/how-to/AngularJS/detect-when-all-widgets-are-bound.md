@@ -10,7 +10,7 @@ slug: howto_detect_when_widgets_bound_combobox
 
 The following example demonstrates how to use promises to detect when all widgets in a Kendo UI ComboBox are bound.
 
-###### Example
+
 
 ```dojo
   <div id="example">

@@ -102,6 +102,18 @@
 
             assert.isOk(!executed);
         });
+
+        it("restoring a Window sets the correct dimensions when width and height are set in percentages", function() {
+            var dialog = createWindow({ width: "50%", height: "50%" }),
+                initialWidth = dialog.wrapper.width(),
+                initialHeight = dialog.wrapper.height();
+
+            dialog.minimize();
+            dialog.restore();
+
+            assert.equal(initialWidth, dialog.wrapper.width());
+            assert.equal(initialHeight, dialog.wrapper.height());
+        });
     });
 
     describe("resizing", function() {

@@ -42,6 +42,25 @@
             overflow: hidden;
             padding: 1px 3px;
             background-clip: padding-box;
+
+            &.k-spreadsheet-has-comment::after {
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: auto;
+                border-width: 3px;
+                border-style: solid;
+            }
+        }
+
+        .k-spreadsheet-cell-comment {
+            position: absolute;
+            white-space: pre-wrap;
+            text-align: left;
+            border-width: 1px;
+            border-style: solid;
         }
     }
 
@@ -255,11 +274,8 @@
     .k-dirty {
         position: absolute;
         top: 0;
-        right: 0;
-        left: unset;
-        margin: -2px 0 0 -7px;
-        border-width: 4px;
-        border-color: #f00 #f00 transparent transparent;
+        left: 0;
+        right: unset;
     }
 
     .k-single-selection {
@@ -521,16 +537,6 @@ div.k-spreadsheet-window {
     .k-edit-field {
         width: 67%;
         margin: 0 .917em 0 0;
-
-        > .k-radio-label {
-            margin-right: 1.25em;
-            vertical-align: baseline;
-        }
-
-        > .k-radio-label:before,
-        > .k-radio-label:after {
-            margin-top: -1px;
-        }
     }
 
     .k-edit-label,
@@ -554,13 +560,6 @@ div.k-spreadsheet-window {
         width: 40%;
         float: left;
         margin-left: 30px;
-    }
-
-    .k-edit-field > input[type="radio"] {
-        display: inline;
-        opacity: 0;
-        width: 0;
-        margin: 0;
     }
 
     .k-page-orientation {
@@ -947,5 +946,93 @@ div.k-spreadsheet-window {
                 border-bottom: 1px solid #000;
             }
         }
+    }
+}
+
+// Insert image dialog
+.k-spreadsheet-insert-image-dialog {
+    margin: @spreadsheet-insert-image-dialog-margin;
+    border-style: @spreadsheet-insert-image-dialog-border-style;
+    border-width: @spreadsheet-insert-image-dialog-border-width;
+
+    label {
+        position: relative;
+        display: block;
+        width:  @spreadsheet-insert-image-dialog-preview-width;
+        height: @spreadsheet-insert-image-dialog-preview-height;
+        padding: @spreadsheet-insert-image-dialog-preview-padding;
+        background-image: url("../textures/image-default.png");
+        background-size: auto 70%;
+        background-repeat: no-repeat;
+        background-position: 50% 30%;
+
+        div {
+            position: relative;
+            top: 75%;
+            padding: @spreadsheet-insert-image-dialog-text-padding;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    .k-spreadsheet-has-image {
+        background-size: auto 90%;
+        background-position: 50% 50%;
+
+        &:hover div,
+        &.k-state-hovered div {
+            opacity: 1;
+            top: 50%;
+        }
+
+        div {
+            opacity: 0;
+        }
+    }
+}
+
+// Images
+.k-spreadsheet-drawing {
+    position: absolute;
+    box-sizing: border-box;
+    z-index: 101;
+
+    &.k-spreadsheet-active-drawing {
+        outline-style: @spreadsheet-drawing-outline-style;
+        outline-width: @spreadsheet-drawing-outline-width;
+    }
+
+    .k-spreadsheet-drawing-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-position: 50% 50%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        cursor: move;
+    }
+
+    .k-spreadsheet-drawing-handle {
+        position: absolute;
+        width: @spreadsheet-drawing-handle-width;
+        height: @spreadsheet-drawing-handle-height;
+        border-style: @spreadsheet-drawing-handle-border-style;
+        border-width: @spreadsheet-drawing-handle-border-width;
+        transform: translate(-50%, -50%);
+
+        &.N { left: 50%; top: 0; cursor: ns-resize; }
+        &.NE { left: 100%; top: 0; cursor: nesw-resize; }
+        &.E { left: 100%; top: 50%; cursor: ew-resize; }
+        &.SE { left: 100%; top: 100%; cursor: nwse-resize; }
+        &.S { left: 50%; top: 100%; cursor: ns-resize; }
+        &.SW { left: 0; top: 100%; cursor: nesw-resize; }
+        &.W { left: 0; top: 50%; cursor: ew-resize; }
+        &.NW { left: 0; top: 0; cursor: nwse-resize; }
     }
 }

@@ -2,7 +2,7 @@
 title: Export Only the Selected Grid Rows to PDF
 description: An example on how to export to PDF only the selected rows of a Kendo UI Grid.
 type: how-to
-page_title: Export the Selected Rows to PDF | Kendo UI Grid
+page_title: Export the Selected Rows to PDF | Kendo UI Grid for jQuery
 slug: grid-pdf-export-selected-rows-only
 tags: pdf, export, grid, selected rows
 ticketid: 1135051
@@ -29,7 +29,7 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 
 ## Solution
 
-1. In the [`pdfExport`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler, hide the rows that are not selected by using CSS.
+1. In the [`pdfExport`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/pdfexport) event handler, hide the rows that are not selected by using CSS.
 1. When the export promise is done, show the hidden rows.
 
 ```dojo
@@ -45,8 +45,8 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 
         <p>
             The Standard PDF fonts do not include Unicode support. In order for the output to match what you see in the browser you must provide source files for TrueType fonts for embedding. Please read the documentation about
-            <a href="http://docs.telerik.com/kendo-ui/framework/drawing/drawing-dom#custom-fonts-and-pdf">custom fonts</a> and
-            <a href="http://docs.telerik.com/kendo-ui/framework/drawing/pdf-output#using-custom-fonts">drawing</a>.
+            <a href="https://docs.telerik.com/kendo-ui/framework/drawing/drawing-dom#custom-fonts-and-pdf">custom fonts</a> and
+            <a href="https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output#using-custom-fonts">drawing</a>.
         </p>
     </div>
 

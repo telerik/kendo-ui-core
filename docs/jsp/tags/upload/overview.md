@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring an asynchronous up
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
 	    @RequestMapping(value = "/async", method = RequestMethod.GET)
 	    public String index() {
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring an asynchronous up
 
 **Step 3** Add the Upload to the view.
 
-###### Example
+
 
 	    <kendo:upload name="files">
 	        <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
@@ -39,7 +39,7 @@ The name attribute is required and must be unique. It is used as a form field na
 
 **Step 4** Implement the **Save** controller action.
 
-###### Example
+
 
 	    @RequestMapping(value = "/async/save", method = RequestMethod.POST)
 	    public @ResponseBody String save(@RequestParam List<MultipartFile> files) {
@@ -57,7 +57,7 @@ The name attribute is required and must be unique. It is used as a form field na
 
 You can subscribe to all [events exposed by Kendo UI Upload](/api/javascript/ui/upload#events).
 
-###### Example
+
 
 	    <kendo:upload name="files" upload="onUpload" success="onSuccess">
 	        <kendo:upload-async autoUpload="true" saveUrl="${saveUrl}" removeUrl="${removeUrl}"/>
@@ -77,9 +77,9 @@ You can subscribe to all [events exposed by Kendo UI Upload](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Upload instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
+You are able to reference an existing Upload instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
 
-###### Example
+
 
 	    // Put this after your Kendo Upload for ASP.NET MVC declaration
 	    <script>

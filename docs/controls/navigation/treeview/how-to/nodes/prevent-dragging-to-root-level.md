@@ -11,8 +11,6 @@ Your project might require you to prevent the TreeView nodes from being dragged 
 
 The following example demonstrates how to handle the `drag` event to achieve this behavior.
 
-###### Example
-
 ```dojo
     <div id="tree"></div>
 
@@ -30,15 +28,15 @@ The following example demonstrates how to handle the `drag` event to achieve thi
         ],
         drag: function(e) {
           if (e.statusClass == "denied") {
-            // treeview already denies this operation
+            // The TreeView already denies this operation.
             return;
           } else {
-            // whether the action is related to a root node
+            // Whether the action is related to a root node.
             var targetsRoot = $(e.dropTarget).parentsUntil(".k-treeview", ".k-item").length == 1;
 
-            // if targeting a root node, and the operation isn't add
-            // (this means that the operation is to insert before/after the root,
-            //  which will create another root)
+            // If targeting a root node and the operation is not add.
+            // This means that the operation is to insert before or after the root
+            //  which will create another root.
             if (targetsRoot && e.statusClass != "add") {
                 e.setStatusClass("k-denied");
             }
@@ -50,14 +48,6 @@ The following example demonstrates how to handle the `drag` event to achieve thi
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

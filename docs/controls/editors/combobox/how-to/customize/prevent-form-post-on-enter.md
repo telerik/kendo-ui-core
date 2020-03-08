@@ -10,7 +10,7 @@ slug: howto_prevent_post_onpressing_enter_combobox
 
 The following example demonstrates how to prevent POST on an `Enter` key press in a Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
 <div id="example" role="application">

@@ -9,7 +9,7 @@ component: switch
 
 # Switch Overview
 
-The [Hybrid UI Switch widget](http://demos.telerik.com/kendo-ui/m/index#switch/mobile) is used to display two exclusive choices.
+The [Hybrid UI Switch widget](https://demos.telerik.com/kendo-ui/m/index#switch/mobile) is used to display two exclusive choices.
 
 When initialized, it shows the currently selected value. Users are able to slide the control to reveal the second value. The mobile Switch can be created from an `input` element of type `checkbox`.
 
@@ -21,7 +21,7 @@ The mobile Kendo UI Application automatically initializes a mobile Switch for ev
 
 The example below demonstrates how to initialize a Hybrid UI Switch based on a data-role attribute.
 
-###### Example
+
 
     <input type="checkbox" data-role="switch" />
 
@@ -29,7 +29,7 @@ The example below demonstrates how to initialize a Hybrid UI Switch based on a d
 
 The example below demonstrates how to initialize a Hybrid UI Switch by using jQuery plugin syntax.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 
@@ -45,7 +45,7 @@ The checked state of the mobile Switch depends on the [`checked` configuration o
 
 The example below demonstrates how to initialize the Hybrid UI Switch from a checked `input`.
 
-###### Example
+
 
     <input type="checkbox" id="switch" checked="checked" />
 
@@ -55,7 +55,7 @@ The example below demonstrates how to initialize the Hybrid UI Switch from a che
 
 The example below demonstrates how to initialize a checked Hybrid UI Switch using jQuery plugin syntax.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 
@@ -67,7 +67,7 @@ The example below demonstrates how to initialize a checked Hybrid UI Switch usin
 
 The example below demonstrates how to customize the on/off labels of a Hybrid UI Switch.
 
-###### Example
+
 
     <input type="checkbox" id="switch" />
 

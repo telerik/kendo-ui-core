@@ -15,8 +15,6 @@ To achieve this behavior:
 2. Handle the [`open` event](/api/javascript/ui/contextmenu/events/open) of the ContextMenu. If the target is a connection, it is possible to cancel the event. If the target is a shape, it is possible to store the `dataItem` in a variable.
 3. Handle the [`select` event](/api/javascript/ui/contextmenu/events/select) of the ContextMenu where you can perform a custom action based on the context of the shape.
 
-###### Example
-
 ```dojo
 
 <ul id="menu">
@@ -166,9 +164,8 @@ To achieve this behavior:
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

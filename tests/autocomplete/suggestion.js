@@ -122,6 +122,24 @@ it("current popup item completes the value of the input if suggest is enabled", 
     assert.equal(input.selectedText(), "az");
 });
 
+it("current popup item completes the value of the input if suggest is enabled and correct culture is used", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: {
+            data: ["KIZ"],
+            accentFoldingFiltering: "tr-TR"
+        },
+        suggest: true,
+        ignoreCase: true
+    });
+
+    input.focus();
+    input.type("kı");
+    autocomplete.search();
+
+    assert.equal(input.val(), "kıZ");
+    assert.equal(input.selectedText(), "Z");
+});
+
 it("current highlighted item completes the value of the input if suggest is enabled", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
@@ -410,6 +428,38 @@ it("suggest method accepts an object", function() {
     autocomplete.suggest(autocomplete.dataSource.view()[0]);
 
     assert.equal(autocomplete.value(), "Foo");
+});
+
+it("suggest is not triggered after value is cleared", function(done) {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: {
+            transport: {
+                read: function(options) {
+                    setTimeout(function() {
+                        if (options.data.filter && options.data.filter.filters[0]) {
+                            options.success([{ text: "foo", value: 1 }]);
+                        } else {
+                            options.success([{ text: "foo", value: 1 }, { text: "bar", value: 2 }]);
+                        }
+                    });
+                }
+            },
+            serverFiltering: true
+        },
+        dataTextField: "text",
+        suggest: true,
+        filter: "contains",
+        placeholder: "..."
+    });
+
+    autocomplete.suggest("fo");
+    autocomplete._clearValue();
+
+    setTimeout(function() {
+        assert.equal(autocomplete.value(), "");
+        assert.equal(autocomplete.element.val(), "");
+        done();
+    });
 });
 
     });

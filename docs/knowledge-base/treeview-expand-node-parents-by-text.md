@@ -2,7 +2,7 @@
 title: Programmatically Expand Node and Parents
 description: An example on how to find and expand the node by given node text in the Kendo UI TreeView.
 type: how-to
-page_title: Expand Node Parents | Kendo UI TreeView
+page_title: Expand Node Parents | Kendo UI TreeView for jQuery
 slug: treeview-expand-node-parents-by-text
 tags: treeview
 ticketid: 1153697  

@@ -2,7 +2,7 @@
 title: Get the Data of the Last Selected Grid Row
 description: An example on how to get the dataItem for the last selected row in the Kendo UI Grid by using the jQuery click event.
 type: how-to
-page_title: Get the DataItem of the Last Selected Row Only | Kendo UI Grid
+page_title: Get the DataItem of the Last Selected Row Only | Kendo UI Grid for jQuery
 slug: checkbox-selection-dataitem-last-selected-row
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716, 1117204
@@ -33,7 +33,7 @@ To get the `dataItem` for the last selected row:
 
 1. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
 1. In the `click` event handler, get the row by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
-1. Get the row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method of the Grid.
+1. Get the row data by using the [`dataItem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method of the Grid.
 
 ```dojo
 <div id="example">
@@ -112,5 +112,5 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 ## See Also
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
-* [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)
+* [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

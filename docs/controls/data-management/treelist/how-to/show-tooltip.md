@@ -13,8 +13,6 @@ To achieve this behavior, use a Kendo UI Tooltip that displays the information w
 
 The following example demonstrates how to customize the information displayed in the Tooltip depending on the respective data item fields.
 
-###### Example
-
 ```dojo
   <div id="treelist"></div>
   <script>
@@ -98,7 +96,6 @@ The following example demonstrates how to customize the information displayed in
 
 ## See Also
 
-* [JavaScript API Reference of the TreeList](/api/javascript/ui/treelist)
-* [How to Update Field in All Child Nodes]({% slug howto_updatefieldinallchildnodes_treelist %})
-
-For more runnable examples on the Kendo UI TreeList, browse its [**How To** documentation folder]({% slug howto_updatefieldinallchildnodes_angularjs_treelist %}).
+* [Basic Usage of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/index)
+* [Using the API of the TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/api)
+* [TreeList JavaScript API Reference](/api/javascript/ui/treelist)

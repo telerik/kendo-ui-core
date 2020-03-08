@@ -2,7 +2,7 @@
 title: Configure the NoRecords Data Attribute for Empty Grids
 description: An example on how to add a noRecords.template to an MVVM Kendo UI Grid.
 type: how-to
-page_title: Customize the NoRecords Template with MVVM | Kendo UI Grid
+page_title: Customize the NoRecords Template with MVVM | Kendo UI Grid for jQuery
 slug: grid-mvvm-empty-norecords-template
 tags: grid, mvvm, empty, norecords, template
 ticketid: 1123131
@@ -28,7 +28,7 @@ How can I determine the equivalency for the `noRecords.template` which uses data
 
 ## Solution
 
-To set the [`noRecords.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/norecords) use the [`data-no-records` data attribute](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization).
+To set the [`noRecords.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/norecords) use the [`data-no-records` data attribute](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#using-the-data-attributes).
 
 ```
 <div data-role="grid"      
@@ -40,7 +40,7 @@ The following example demonstrates how to implement a custom `noRecords` templat
 
 > **Important**
 >
-> The camelCase `data` attribute options are set by using [dash separators](https://docs.telerik.com/kendo-ui/intro/widget-basics/data-attribute-initialization#set-data--options). For example, the `noRecords` configuration of the Kendo UI Grid is set like `data-no-records`.
+> The camelCase `data` attribute options are set by using [dash separators](https://docs.telerik.com/kendo-ui/intro/widget-basics/mvvm-initialization#setting-the-data-options). For example, the `noRecords` configuration of the Kendo UI Grid is set like `data-no-records`.
 
 
 ```dojo

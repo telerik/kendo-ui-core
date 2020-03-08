@@ -13,8 +13,6 @@ The indeterminate state of the Switch is used only for visual representation and
 
 The following example demonstrates how to set the Switch in an indeterminate state.
 
-###### Example
-
 ```dojo
   <style>
       .k-indeterminate .k-switch-container {
@@ -54,4 +52,6 @@ The following example demonstrates how to set the Switch in an indeterminate sta
 
 ## See Also
 
-* [Switch JavaScript API Reference](/api/javascript/ui/switch)
+* [Basic Usage of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/index)
+* [Using the API of the Switch (Demo)](https://demos.telerik.com/kendo-ui/switch/api)
+* [JavaScript API Reference of the Switch](/api/javascript/ui/switch)

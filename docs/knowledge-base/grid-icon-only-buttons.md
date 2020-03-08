@@ -2,7 +2,7 @@
 title: Use Grid Edit Buttons with Icons Only and No Text
 description: An example on how to remove the text from the Edit buttons of a Kendo UI Grid and leave only the icons.
 type: how-to
-page_title: Use the Grid Edit Buttons only with Icons and without Text | Kendo UI Grid
+page_title: Use the Grid Edit Buttons only with Icons and without Text | Kendo UI Grid for jQuery
 slug: grid-icon-only-buttons
 tags: grid, editing, buttons, kendo ui, icons
 ticketid: 663290
@@ -40,7 +40,7 @@ How can I use the **Edit**, **Delete**, **Update**, **Cancel**, and **Add** butt
         ]
     ```
 
-2. Set [`toolbar.text`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.text) to a space.
+2. Set [`toolbar.text`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/toolbar.text) to a space.
 
     ```
         toolbar: [{name: "create", text: " "}]

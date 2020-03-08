@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 **Step 2** Create a [Window](/api/php/Kendo/UI/Window).
 
-###### Example
+
 
         <?php
         $window = new \Kendo\UI\Window('window');
@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 **Step 3** Place the content between the `startContent` and `endContent` method calls.
 
-###### Example
+
 
         <?php
         $window = new \Kendo\UI\Window('window');
@@ -51,7 +51,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 **Step 4** Output the Window by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $window->render();
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Windo
 
 You are able to load views asynchronously through the `content` method, demonstrated in the example below.
 
-###### Example
+
 
         <?php
         $window = new \Kendo\UI\Window('window');
@@ -81,7 +81,7 @@ You can subscribe to all Window [events](/api/javascript/ui/window#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $window = new \Kendo\UI\Window('window');
@@ -101,7 +101,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $window = new \Kendo\UI\Window('window');
@@ -117,9 +117,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Window instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
+You are able to reference an existing Window instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Window API](/api/javascript/ui/window#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $window = new \Kendo\UI\Window('window');

@@ -10,13 +10,9 @@ slug: howto_showoverlaywhileloading_charts
 
 In some cases, the loading of a Chart might take longer time than the user expects. For such scenarios, you can configure the Kendo UI Chart to show the progress of the process.
 
-The example below demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart/events/render) event.
+The following example demonstrates how to display a loading indicator while the data of a Kendo UI Chart is loading. The loading indicator is cleared in the [`render`](/api/javascript/dataviz/ui/chart/events/render) event.
 
-> **Important**
->
-> Replace it with the [`dataBound`](/api/javascript/dataviz/ui/chart/events/databound) event for Kendo UI versions prior to 2014.3.1119.
-
-###### Example
+> For Kendo UI versions prior to 2014.3.1119, replace it with the [`dataBound`](/api/javascript/dataviz/ui/chart/events/databound) event.
 
 ```dojo
     <div class="chart-wrap" style="position: relative;">
@@ -67,11 +63,3 @@ The example below demonstrates how to display a loading indicator while the data
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

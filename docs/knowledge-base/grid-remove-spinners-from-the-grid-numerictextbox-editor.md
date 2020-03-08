@@ -2,7 +2,7 @@
 title: Remove Up and Down Arrows from the Grid NumericTextBox Editors
 description: An example on how to remove the Up Arrow and Down Arrow from the Kendo UI Grid editor.
 type: how-to
-page_title: Remove Spinners from the NumericTextbox Editor | Kendo UI Grid
+page_title: Remove Spinners from the NumericTextbox Editor | Kendo UI Grid for jQuery
 slug: grid-remove-spinners-from-the-grid-numerictextbox-editor
 tags: grid, numerictextbox, spinners
 ticketid: 1142901
@@ -110,4 +110,4 @@ Set a custom editor for the numeric columns by using the [`column.editor`](https
 
 ## See Also
 
-* [Remove Spinners from NumericTextBox Editors in MVC Grid](https://docs.telerik.com/kendo-ui/knowledge-base/grid-mvc-remove-spinner-numerictextbox-editor)
+* [Remove Spinners from NumericTextBox Editors in Kendo UI Grid for ASP.NET MVC](/knowledge-base/grid-mvc-remove-spinner-numerictextbox-editor)

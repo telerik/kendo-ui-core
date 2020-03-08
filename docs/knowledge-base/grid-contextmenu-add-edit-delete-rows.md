@@ -2,7 +2,7 @@
 title: Use Context Menu to Perform Actions on Grid Rows
 description: An example on how to add, edit, and delete rows by using the ContextMenu in the Kendo UI Grid.
 type: how-to
-page_title: Add, Edit, or Remove Rows with the ContextMenu | Kendo UI Grid
+page_title: Add, Edit, or Remove Rows with the ContextMenu | Kendo UI Grid for jQuery
 slug: grid-contextmenu-add-edit-delete-rows
 tags: grid, add, edit, delete, contextmenu
 ticketid: 1142072

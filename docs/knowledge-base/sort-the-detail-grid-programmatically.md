@@ -2,7 +2,7 @@
 title: Access the Detail Grid Programmatically
 description: An example on how to access and sort the detail Kendo UI Grid programmatically.
 type: how-to
-page_title: Access and Sort the Detail Grid Programmatically | Kendo UI Grid
+page_title: Access and Sort the Detail Grid Programmatically | Kendo UI Grid for jQuery
 previous_url: /knowledge-base/how-to-sort-the-detail-grid-programmatically
 slug: sort-the-detail-grid-programmatically
 ticketid: 1116825
@@ -26,4 +26,4 @@ How can I programmatically access the details row in a Grid?
 
 ## Solution
 
-To programmatically access a detail Grid and apply sorting to its dataSource, refer to [this Dojo example](http://dojo.telerik.com/iSAKi).
+To programmatically access a detail Grid and apply sorting to its dataSource, refer to [this Dojo example](https://dojo.telerik.com/iSAKi).

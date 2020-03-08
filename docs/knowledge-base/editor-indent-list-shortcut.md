@@ -2,7 +2,7 @@
 title: Implement Editor Shortcuts to Indent or Outdent a List
 description: An example on how to implement shortcuts to indent or outdent an ordered list in a Kendo UI Editor.
 type: how-to
-page_title: Implement Shortcuts to Indent or Outdent Ordered Lists | Kendo UI Editor
+page_title: Implement Shortcuts to Indent or Outdent Ordered Lists | Kendo UI Editor for jQuery
 slug: editor-indent-list-shortcut
 tags: kendo, kendoui, editor, shortcuts, tab, ordered, list, indent, outdent
 ticketid: 1136197

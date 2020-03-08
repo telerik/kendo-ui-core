@@ -4,16 +4,14 @@ page_title: 2012 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2012."
 previous_url: /backwards-compatibility/2012/2012-backward-compatibility
 slug: breakingchanges2012_kendoui
-position: 8
+position: 9
 ---
 
 # 2012 Releases
 
+This article lists the breaking changes in the Kendo UI 2012 releases.
+
 ## Kendo UI 2012 Q3 SP1
-
-### Changes from 2012 Q3 (2011.3.1114)
-
-#### Breaking Changes
 
 **Cascading ComboBoxes/DropDownLists**
 
@@ -24,10 +22,6 @@ The `parameterMap` of the child widget dataSource is called before the `change` 
 Removed the Slide effect. Use SlideIn instead.
 
 ## Kendo UI 2012 Q3
-
-### Changes from 2012 Q2 SP1 (2011.2.913)
-
-#### Breaking Changes
 
 **Mobile**
 
@@ -49,7 +43,7 @@ Removed the Slide effect. Use SlideIn instead.
         }
     ```
 
-    Additionally, the mask icons have to use **background-color** for colorization, while the font ones use **color**  and custom colorization (but not on custom icons) **have to be updated** after the upgrade. For example, a rule like this:
+    Additionally, the mask icons have to use `background-color` for colorization, while the font ones use `color`  and custom colorization (but not on custom icons) have to be updated after the upgrade. For example, a rule like this:
 
     ```
         .km-ios .km-tabstrip .km-icon {
@@ -57,7 +51,7 @@ Removed the Slide effect. Use SlideIn instead.
         }
     ```
 
-    should be changed to this:
+    has to be changed to:
 
     ```
         .km-ios .km-tabstrip .km-icon {
@@ -84,10 +78,6 @@ Removed the Slide effect. Use SlideIn instead.
 
 ## Kendo UI 2012 Q2
 
-### Changes from 2012 Q1 SP1 (2012.1.322)
-
-#### Breaking Changes
-
 **All Widgets**
 
 All arrows have been renamed to better reflect their direction and size. For example:
@@ -109,7 +99,7 @@ All arrows have been renamed to better reflect their direction and size. For exa
 	.k-i-seek-e
 ```
 
-For more information, refer to the [demo on styling icons](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+For more information, refer to the [demo on styling icons](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 **Popup**
 
@@ -147,10 +137,6 @@ Popup-based widgets nested in other Popup-based widgets create their Popup conta
     ```
 
 ## Kendo UI 2012 Q1 (2012.1.322)
-
-### Changes from 2011 Q3 SP1 (2011.3.1407)
-
-#### Breaking Changes
 
 > The combined `kendo.all.js` JavaScript file is available only in the Kendo UI Complete package. The corresponding file in Kendo UI Web is called `kendo.web.js`. Use it instead of `kendo.all.js`.
 

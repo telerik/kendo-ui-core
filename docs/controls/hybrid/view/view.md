@@ -9,7 +9,7 @@ component: view
 
 # View Overview
 
-The [Hybrid UI View widget](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
+The [Hybrid UI View widget](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
 
 ## Getting Started
 
@@ -17,7 +17,7 @@ The [Hybrid UI View widget](http://demos.telerik.com/kendo-ui/m/index#mobile-vie
 
 The example below demonstrates how to initialize the View component.
 
-###### Example
+
 
     <div data-role="view">Hello world!</div>
 
@@ -29,7 +29,7 @@ By default, the mobile View content stretches to fit the application element. Al
 
 The example below demonstrates a mobile View with a header and a footer.
 
-###### Example
+
 
     <div data-role="view">
         <div data-role="header">Header</div>
@@ -47,7 +47,7 @@ Navigational widgets can pass additional URL parameters when navigating to Views
 
 The example below demonstrates a button with additional URL parameters.
 
-###### Example
+
 
     <a data-role="button" href="#foo?bar=baz">Link to FOO <strong>View</strong> with bar parameter set to baz</a>
 

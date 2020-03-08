@@ -2,7 +2,7 @@
 title: Remove Extra Whitespace on Enter
 description: An example on how to remove extra whitespace around the text in the Kendo UI Editor when the user presses Enter.
 type: how-to
-page_title: Prevent the Appearance of Extra Whitespace on Enter | Kendo UI Editor
+page_title: Prevent the Appearance of Extra Whitespace on Enter | Kendo UI Editor for ASP.NET MVC
 slug: editor-remove-extra-whitespace-on-enter
 ticketid: 1381664
 res_type: kb

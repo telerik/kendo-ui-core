@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Upload for asy
 
 **Step 2** Create an [Upload](/api/php/Kendo/UI/Upload) and configure its [`async`](/api/php/Kendo/UI/Upload#async) options.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('files[]');
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Upload for asy
 
 **Step 3** Output the Upload by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $upload->render();
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Upload for asy
 
 **Step 4** Create the `save.php` handler.
 
-###### Example
+
 
         <?php
         $files = $_FILES['files'];
@@ -68,7 +68,7 @@ You can subscribe to all Upload [events](/api/javascript/ui/upload#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
 
         <?php
@@ -89,7 +89,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('upload');
@@ -105,9 +105,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Upload instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
+You are able to reference an existing Upload instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Upload API](/api/javascript/ui/upload#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $upload = new \Kendo\UI\Upload('upload');

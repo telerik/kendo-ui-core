@@ -258,8 +258,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "cancel": "Annuler",
   "operator": "Opérateur",
   "value": "Valeur",
-  "logic": "Logique des filtres", 
-  "additionalOperator": "Opérateur supplémentaire", 
+  "logic": "Logique des filtres",
+  "additionalOperator": "Opérateur supplémentaire",
   "additionalValue": "Valeur supplémentaire"
 });
 }
@@ -369,7 +369,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Style de bordure",
   "collapseBorders": "Rétracter bordures",
   "wrapText": "Renvoi à la ligne",
-  "associateCellsWithHeaders": "Cellules associées aux entêtes",
+  "associateCellsWithHeaders": "Entêtes associées",
   "alignLeft": "Aligner à gauche",
   "alignCenter": "Aligner le centre",
   "alignRight": "Aligner à droite",
@@ -544,6 +544,40 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "okText": "OK",
   "cancel": "Annuler"
 });
+}
+
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+  kendo.ui.FlatColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+  kendo.ui.ColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* Numeric text box messages */
+
+if (kendo.ui.NumericTextBox) {
+  kendo.ui.NumericTextBox.prototype.options =
+  $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+    "upArrowText": "Augmenter la valeur",
+    "downArrowText": "Diminuer la valeur"
+  });
 }
 
 })(window.kendo.jQuery);

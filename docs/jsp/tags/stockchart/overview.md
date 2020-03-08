@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 2** Create a new action method and pass the **InternetUsers** list as the model.
 
-###### Example
+
 
     	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
 	    public String index(Model model) {
@@ -31,7 +31,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 **Step 3** Add a server-bound chart.
 
-###### Example
+
 
          <kendo:stockChart name="stockChart" dateField="date">
          	<kendo:stockChart-title text="The Boeing Company (NYSE:BA)" />
@@ -52,7 +52,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Stock
 
 You can subscribe to all [events exposed by Kendo UI StockChart](/api/javascript/dataviz/ui/stock-chart#events) by the handler name.
 
-###### Example
+
 
     	<kendo:chart name="chart" dateField="date"
     							  dataBound="stock_dataBound"
@@ -83,9 +83,9 @@ You can subscribe to all [events exposed by Kendo UI StockChart](/api/javascript
 
 ### Existing Instances
 
-You are able to reference an existing StockChart instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
+You are able to reference an existing StockChart instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [StockChart API](/api/javascript/dataviz/ui/stock-chart#methods) to control its behavior.
 
-###### Example
+
 
       // Put this after your Kendo StockChart tag
       <script>

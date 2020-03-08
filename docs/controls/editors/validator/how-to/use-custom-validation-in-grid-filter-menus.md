@@ -13,9 +13,5 @@ To see the example, refer to [this how-to article]({% slug howto_gridfiltering_c
 
 ## See Also
 
-* [Validator JavaScript API Reference](/api/javascript/ui/validator)
-* [How to Show Tooltip on Mouse Over]({% slug howto_showtooltiponmouseover_validator %})
-* [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
-* [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
-
-For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).
+* [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
+* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)

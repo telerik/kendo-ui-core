@@ -2,7 +2,7 @@
 title: Display Mixed Currencies in Grid
 description: An example on how to show different currencies in the Kendo UI Grid.
 type: how-to
-page_title: Show Different Currencies | Kendo UI Grid
+page_title: Show Different Currencies | Kendo UI Grid for jQuery
 slug: show-different-currencies-in-the-grid
 tags: grid, currencies
 previous_url: /knowledge-base/how-to-show-different-currencies-in-the-grid
@@ -33,7 +33,7 @@ How can I display different currencies in the same Grid?
 
 ## Solution
 
-Use a custom approach by utilizing the [`column.template`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) property of the Grid. This logic requires information about which the correct currency for each displayed data item is and you need to use a manual format for every currency.
+Use a custom approach by utilizing the [`column.template`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.template) property of the Grid. This logic requires information about which the correct currency for each displayed data item is and you need to use a manual format for every currency.
 
 ```dojo
 <div id="example">

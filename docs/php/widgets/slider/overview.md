@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 **Step 2** Create a [Slider](/api/php/Kendo/UI/Slider).
 
-###### Example
+
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 **Step 3** Output the Slider by echoing the result of the `render` method.
 
-###### Example
+
 
     <?php
     echo $slider->render();
@@ -43,7 +43,7 @@ You can subscribe to all Slider [events](/api/javascript/ui/slider#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');
@@ -79,9 +79,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing Slider instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
+You are able to reference an existing Slider instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $slider = new \Kendo\UI\Slider('slider');

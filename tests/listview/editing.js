@@ -457,6 +457,18 @@
             assert.equal(ul.children().eq(1).html(), "bar");
         });
 
+        it("when editing is canceled role attribute is not lost", function() {
+            var listView = setup({
+                editTemplate: '<li><input data-bind="value:foo" /></li>',
+                altTemplate: "<li>bar</li>"
+            });
+
+            listView.edit(ul.children().eq(1));
+            listView.cancel();
+
+            assert.equal(ul.children().eq(1).attr("role"), "option");
+        });
+
         it("save event is triggered", function() {
             var called = false,
                 listView = setup({

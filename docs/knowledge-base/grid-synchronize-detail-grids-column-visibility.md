@@ -2,7 +2,7 @@
 title: Show and Hide Columns in All Detail Grids Simultaneously
 description: An example on how to apply column visibility changes to all detail Kendo UI Grids at the same time when you use a column menu, and keep column visibility in sync.
 type: how-to
-page_title: Apply Column Visibility Changes to All Detail Grids by Using the Column Menu | Kendo UI Grid
+page_title: Apply Column Visibility Changes to All Detail Grids by Using the Column Menu | Kendo UI Grid for jQuery
 slug: grid-show-hide-columns-in-all-detail-grids
 tags: grid, hierarchy, columns, column-menu
 ticketid: 1157518

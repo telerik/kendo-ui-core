@@ -10,7 +10,7 @@ slug: howto_disable_child_cascading_combobox
 
 The following example demonstrates how to disable a cascading child Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
   <div id="example">

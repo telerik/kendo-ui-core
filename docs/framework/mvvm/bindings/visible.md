@@ -1,19 +1,19 @@
 ---
 title: Visible
-page_title: Visible | Kendo UI MVVM
+page_title: Visible Binding | Kendo UI MVVM
 description: "Learn how to hide or make visible the target DOM element or widget in correspondence with the View-model value by using the visible binding in Kendo UI MVVM."
 slug: visiblebinding_mvvm_kendoui
 ---
 
 # Visible Binding
 
-The `visible` binding shows or hides the target DOM element or widget depending on the View-Model value. If the value is `true`, the target DOM element is shown. If the value is `false`, the target DOM element is hidden&mdash;its `display` CSS attribute is set to `none`.
+The `visible` binding shows or hides the target DOM element or widget depending on the View-Model value.
 
-## Getting Started
+If the value is `true`, the target DOM element is shown. If the value is `false`, the target DOM element is hidden&mdash;its `display` CSS attribute is set to `none`.
 
-The following example demonstrates how to use the `visible` binding.
+Non-Boolean values, such as `0`, `null`, `undefined` and `""`, are treated as `false` by the `visible` binding. All other values are treated as `true`.
 
-###### Example
+The following example demonstrates how to use the `visible` binding. The `div` element is initially visible because the value of the `isVisible` field is `true`. When the user clicks the button, the `div` is going to be hidden because the value of the `isVisible` field is set to `false`.
 
     <div id="view">
     <div data-bind="visible: isVisible">some content
@@ -30,12 +30,6 @@ The following example demonstrates how to use the `visible` binding.
     kendo.bind($("div"), viewModel);
     </script>
      </div>
-
-In the example the `div` element is initially visible because the value of the `isVisible` field is `true`. When the user clicks the button, the `div` is going to be hidden because the value of the `isVisible` field is set to `false`.
-
-## Non-Boolean Values
-
-Non-boolean values, such as `0`, `null`, `undefined` and `""`, are treated as `false` by the `visible` binding. All other values are treated as `true`.
 
 ## See Also
 

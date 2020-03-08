@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `calendar` tag.
 
-###### Example
+
 
         <kendo:calendar name="calendar" value="<%= new java.util.Date() %>">
         </kendo:calendar>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Calen
 
 You can subscribe to all [events exposed by Kendo UI Calendar](/api/javascript/ui/calendar#events) by the handler name.
 
-###### Example
+
 
     <kendo:calendar name="calendar" change="calendar_change"></kendo:calendar>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI Calendar](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing Calendar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Calendar API](/api/javascript/ui/calendar#methods) to control its behavior.
+You are able to reference an existing Calendar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Calendar API](/api/javascript/ui/calendar#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo Calendar tag declaration
     <script>

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 2** Create an array to which the ListView will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 3** Create a [`dataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 4** Prepare the ListView item template.
 
-###### Example
+
 
 		<script type="text/x-kendo-tmpl" id="template">
     		<div class="product">
@@ -59,7 +59,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 5** Create a [ListView](/api/php/Kendo/UI/ListView), configure its [`template`](/api/php/Kendo/UI/ListView#template) and set its [`dataSource`](/api/php/Kendo/UI/ListView#datasource).
 
-###### Example
+
 
         <?php        
         $listview = new \Kendo\UI\ListView('listview');		
@@ -69,7 +69,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 6** Optionally, you can configure the [`tagName`](/api/php/Kendo/UI/ListView#tagname) which is used to create an element containing all ListView items once the ListView is bound. By default, a `div` element will be created.
 
-###### Example
+
 
 		<?php
 		$listview->tagName('ul');
@@ -77,7 +77,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ListV
 
 **Step 7** Output the ListView by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $listview->render();
@@ -91,7 +91,7 @@ You can subscribe to all ListView [events](/api/javascript/ui/listview#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
     <?php
     $listview = new \Kendo\UI\ListView('listview');
@@ -111,7 +111,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
     <?php
     $listview = new \Kendo\UI\ListView('listview');
@@ -127,9 +127,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI ListView instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [ListView API](/api/javascript/ui/listview#methods) to control its behavior.
+You can reference the client-side Kendo UI ListView instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [ListView API](/api/javascript/ui/listview#methods) to control its behavior.
 
-###### Example
+
 
     <?php
     $listview = new \Kendo\UI\ListView('listview');

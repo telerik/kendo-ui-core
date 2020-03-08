@@ -7,9 +7,7 @@ slug: howto_colorize_tasks_gantt
 
 # Colorize Tasks
 
-The example below demonstrates how to colorize each task based on a condition in the Kendo UI Gantt widget.
-
-###### Example
+The following example demonstrates how to colorize each task based on a condition in the Kendo UI Gantt widget.
 
 ```dojo
     <div id="gantt"></div>
@@ -21,7 +19,7 @@ The example below demonstrates how to colorize each task based on a condition in
         gantt.element.find(".k-task").each(function(e) {
           var dataItem = gantt.dataSource.getByUid($(this).attr("data-uid"));
 
-          // colorize task per business requirements
+          // Colorize the task per business requirement.
           if (dataItem.percentComplete < .5) {
             this.style.backgroundColor = "#f99";
           } else {
@@ -142,5 +140,5 @@ The example below demonstrates how to colorize each task based on a condition in
 
 ## See Also
 
-* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
-* [How to Create Custom Views]({% slug howto_create_custom_views_gantt %})
+* [Basic Usage of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/index)
+* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)

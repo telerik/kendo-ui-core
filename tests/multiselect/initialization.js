@@ -65,7 +65,7 @@
     it("MultiSelect appends ul to the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect._innerWrapper.children().first()[0], multiselect.tagList[0]);
+        assert.equal(multiselect._inputWrapper.children().first()[0], multiselect.tagList[0]);
     });
 
     it("MultiSelect creates input element", function() {
@@ -78,7 +78,7 @@
     it("MultiSelect appends input to the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect._innerWrapper.children().eq(1)[0], multiselect.input[0]);
+        assert.equal(multiselect._inputWrapper.children().eq(1)[0], multiselect.input[0]);
     });
 
     it("MultiSelect builds templates", function() {
@@ -575,6 +575,12 @@
 
         assert.equal(multiselect.element.attr("readonly"), "readonly");
         assert.equal(multiselect.element.attr("disabled"), undefined);
+    });
+
+    it("MultiSelect adds k-no-click to wrapper element when readonly", function() {
+        var multiselect = new MultiSelect(select.attr("readonly", true));
+
+        assert.isOk(multiselect.wrapper.hasClass('k-no-click'));
     });
 
     it("MultiSelect uses disabled attr over the readonly", function() {

@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 2** Create a new action method and pass the **Products** table to the View.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index(Model model) {
@@ -38,13 +38,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a server-bound MultiSelect.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index(Model model) {
@@ -60,7 +60,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 When deferred binding (`autoBind="false"`) is used, you need to specify a list of data items instead of just a list of strings. This functionality is supported in the Kendo UI Q1 2013 SP1 release and later versions of Kendo UI.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index(Model model) {
@@ -89,7 +89,7 @@ When deferred binding (`autoBind="false"`) is used, you need to specify a list o
 
 You can subscribe to all [events exposed by Kendo UI MultiSelect](/api/javascript/ui/multiselect) by the handler name.
 
-###### Example
+
 
     <kendo:multiSelect name="productMultiSelect" dataTextField="productName" dataValueField="productId" change="multiselect_change">
         <kendo:dataSource data="${products}">
@@ -106,9 +106,9 @@ You can subscribe to all [events exposed by Kendo UI MultiSelect](/api/javascrip
 
 ### Existing Instances
 
-You are able to reference an existing MultiSelect instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [MultiSelect API](/api/javascript/ui/multiselect#methods) to control its behavior.
+You are able to reference an existing MultiSelect instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [MultiSelect API](/api/javascript/ui/multiselect#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo MultiSelect tag declaration
     <script>

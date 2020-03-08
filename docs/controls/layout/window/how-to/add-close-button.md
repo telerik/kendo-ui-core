@@ -9,7 +9,7 @@ slug: howto_addclosebutton_insidemodalwindows_window
 
 The example below demonstrates how to add a **Close** button to a modal Kendo UI Window.
 
-###### Example
+
 
 ```dojo
     <div id="example">

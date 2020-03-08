@@ -20,9 +20,7 @@ Using the Unicode symbols from the font directly is the most common approach to 
 
 ### To Series Labels
 
-The example below demonstrates how to use FontAwesome icons in series labels with Unicode.
-
-###### Example
+The following example demonstrates how to use FontAwesome icons in series labels with Unicode.
 
 ```dojo
     <!-- Include FontAwesome -->
@@ -53,9 +51,7 @@ The example below demonstrates how to use FontAwesome icons in series labels wit
 
 ### To Series Notes
 
-The example below demonstrates how to use FontAwesome icons in series notes with Unicode.
-
-###### Example
+The following example demonstrates how to use FontAwesome icons in series notes with Unicode.
 
 ```dojo
     <!-- Include FontAwesome -->
@@ -102,9 +98,7 @@ The example below demonstrates how to use FontAwesome icons in series notes with
 
 Visual templates are the most flexible way to override the rendering of the Chart elements. They allow you to construct the labels by using the [Drawing API]({% slug overview_kendoui_drawingapi %}).
 
-The example below demonstrates how to construct a visual that uses two [Text](/api/javascript/drawing/text) shapes and to position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
-
-###### Example
+The following example demonstrates how to construct a visual that uses two [Text](/api/javascript/drawing/text) shapes and to position them in a [Layout](/api/javascript/drawing/layout). The first `Text` element contains the FontAwesome icon. The second one is a plain text label.
 
 ```dojo
     <!-- Include FontAwesome -->
@@ -118,7 +112,7 @@ The example below demonstrates how to construct a visual that uses two [Text](/a
           labels: {
             visual: function(e) {
               // Layout text elements. See:
-              // http://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
+              // https://docs.telerik.com/kendo-ui/api/javascript/drawing/layout
               var layout = new kendo.drawing.Layout(e.rect, {
                 orientation: "horizontal",
 
@@ -165,12 +159,7 @@ The example below demonstrates how to construct a visual that uses two [Text](/a
 ## See Also
 
 * [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [API Reference of the Drawing layout](/api/javascript/drawing/layout)
 * [How to Embed Font Awesome in Exported PDF]({% slug howto_embedfontawesome_inexportedpdf_drawingapi %})
-* [Drawing API: layout](/api/javascript/drawing/layout)
 * [How to Display Checkboxes Next to Legend Items]({% slug howto_displaycheckboxes_nexttolegenditems_charts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
-* [How to Render Custom Plot Bands]({% slug howto_rendercustomplotbands_charts %})
-* [How to Shorten Chart Labels]({% slug howto_shortenchartlabels_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

@@ -195,13 +195,16 @@
             assert.deepEqual(popup, tooltip.popup);
         });
 
-        it("popup is hidden when mouse leave the element", function() {
-            var tooltip = new Tooltip(container, {});
+        it("popup is hidden when mouse leave the element", function(done) {
+            var tooltip = new Tooltip(container);
 
             tooltip.show(container);
             triggerEvent(container, "mouseleave");
 
-            assert.isOk(!tooltip.popup.visible());
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                done();
+            }, tooltip.options.hideAfter);
         });
 
         it("popup is shown for elements matched by the filter", function() {
@@ -238,7 +241,7 @@
         });
 
 
-        it("popup is hidden when mouse leaves the matched by the filter element ", function() {
+        it("popup is hidden when mouse leaves the matched by the filter element ", function(done) {
             container.append($("<span/>"));
 
             var tooltip = new Tooltip(container, {
@@ -250,8 +253,11 @@
             tooltip.show(target);
             triggerEvent(target, "mouseleave");
 
-            assert.isOk(!tooltip.popup.visible());
-            assert.equal(tooltip.target()[0], target[0]);
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                assert.equal(tooltip.target()[0], target[0]);
+                done();
+            }, tooltip.options.hideAfter);
         });
 
         it("title attributes are temporary removed", function() {
@@ -275,7 +281,7 @@
             assert.equal(container.attr("title"), "foo");
         });
 
-        it("title attributes is restored on mouse leave", function() {
+        it("title attributes is restored on mouse leave", function(done) {
             container.attr("title", "foo");
 
             var tooltip = new Tooltip(container, {});
@@ -283,7 +289,10 @@
             tooltip.show(container);
             triggerEvent(container, "mouseleave");
 
-            assert.equal(container.attr("title"), "foo");
+            setTimeout(function() {
+                assert.equal(container.attr("title"), "foo");
+                done();
+            }, tooltip.options.hideAfter);
         });
 
         it("title attributes is restored on mouse leave", function() {
@@ -321,7 +330,7 @@
             assert.isOk(!tooltip.popup.visible());
         });
 
-        it("popup hides on mouseleave when shownOn is set to focus and mouseenter", function() {
+        it("popup hides on mouseleave when shownOn is set to focus and mouseenter", function(done) {
             container.append("<input />");
             var input = container.find("input").attr("title", "foo");
 
@@ -330,7 +339,10 @@
             triggerEvent(input, "focus");
             triggerEvent(input, "mouseleave");
 
-            assert.isOk(!tooltip.popup.visible());
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                done();
+            }, tooltip.options.hideAfter);
         });
 
         it("popup stays open on mouseleave when shownOn is set to focus", function() {
@@ -591,7 +603,7 @@
             assert.isOk(!tooltip.popup.visible());
         });
 
-        it("leaving the element closes the popup", function() {
+        it("leaving the element closes the popup", function(done) {
             container.append('<span title="foo"/><span/>');
 
             var tooltip = new Tooltip(container, {
@@ -602,7 +614,10 @@
 
             container.find("span").first().trigger("mouseleave");
 
-            assert.isOk(!tooltip.popup.visible());
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                done();
+            }, tooltip.options.hideAfter);
         });
 
         it("element without title clear the tooltip", function() {
@@ -659,5 +674,117 @@
 
             tempSpan.remove();
         });
+
+        it("is visible when mouse enters the popup", function(done) {
+            var tooltip = new Tooltip(container, {});
+
+            tooltip.show(container);
+
+            triggerEvent(tooltip.popup.element, "mouseenter");
+
+            setTimeout(function() {
+                assert.equal(tooltip.popup._hovered, true);
+                assert.isOk(tooltip.popup.visible());
+                done();
+            }, tooltip.options.hideAfter);
+        });
+
+        it("is hidden when mouse leaves the popup", function(done) {
+            var tooltip = new Tooltip(container, {});
+
+            tooltip.show(container);
+
+            triggerEvent(tooltip.popup.element, "mouseleave");
+
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                done();
+            }, tooltip.options.hideAfter);
+        });
+
+        it("title attribute is restored on mouse leave from popup", function(done) {
+            container.attr("title", "foo");
+
+            var tooltip = new Tooltip(container, {});
+
+            tooltip.show(container);
+
+            triggerEvent(tooltip.popup.element, "mouseleave");
+
+            setTimeout(function() {
+                assert.equal(container.attr("title"), "foo");
+                done();
+            }, tooltip.options.hideAfter);
+        });
+
+        it("is initially offset at the edge of the anchor element", function() {
+            var tooltip = new Tooltip(container);
+            var calloutDefaultBorderWidth = 6;
+            var calloutPosition;
+            var anchorPosition;
+
+            tooltip.show(container);
+            anchorPosition = tooltip.popup.options.anchor.offset().top;
+            calloutPosition = tooltip.popup.wrapper.find(".k-callout").offset().top + calloutDefaultBorderWidth;
+
+            assert.equal(anchorPosition, calloutPosition);
+        });
+
+        it("can be offset from the anchor element", function() {
+            var tooltip = new Tooltip(container, { offset: 10 });
+            var calloutDefaultBorderWidth = 6;
+            var calloutPosition;
+            var anchorPosition;
+
+            tooltip.show(container);
+            anchorPosition = tooltip.popup.options.anchor.offset().top;
+            calloutPosition = tooltip.popup.wrapper.find(".k-callout").offset().top + calloutDefaultBorderWidth;
+
+            assert.equal(anchorPosition, calloutPosition - tooltip.options.offset);
+        });
+
+
+        it("hides tooltip on mouseout with hideAfter delay", function(done) {
+            var tooltip = new Tooltip(container, { hideAfter: 50 });
+
+            tooltip.show(container);
+            triggerEvent(container, "mouseleave");
+
+            setTimeout(function() {
+                assert.isOk(tooltip.popup.visible());
+            }, 20);
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                done();
+            }, 70);
+        });
+
+        it("hides tooltip on mouseout with hideAfter delay", function(done) {
+            var tooltip = new Tooltip(container, { hideAfter: 50 });
+
+            tooltip.show(container);
+            triggerEvent(container, "mouseleave");
+
+            setTimeout(function() {
+                assert.isOk(tooltip.popup.visible());
+            }, 20);
+            setTimeout(function() {
+                assert.isOk(!tooltip.popup.visible());
+                done();
+            }, 70);
+        });
+
+        it("applies offset from the content of the tooltip when callout is not rendered", function() {
+            var tooltip = new Tooltip(container, { callout: false, offset: 10 });
+            var tooltipElementPosition;
+            var anchorPosition;
+
+            tooltip.show(container);
+            anchorPosition = tooltip.popup.options.anchor.offset().top;
+            tooltipElementPosition = tooltip.popup.wrapper.offset().top;
+
+            assert.equal(anchorPosition, tooltipElementPosition - tooltip.options.offset);
+        });
+
     });
 }());

@@ -2,7 +2,7 @@
 title: Set the Width of Details Column with Hierarchy in Grid
 description: An example on how to change the width of the hierarchy column in the Kendo UI Grid.
 type: how-to
-page_title: Change the Width of the Hierarchy Column Cell | Kendo UI Grid
+page_title: Change the Width of the Hierarchy Column Cell | Kendo UI Grid for jQuery
 slug: grid-change-hierarchy-column-width
 tags: grid, hierarchy, column width, change
 ticketid: 1149333

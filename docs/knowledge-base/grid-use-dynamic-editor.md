@@ -2,7 +2,7 @@
 title: Use Dynamic Editor in the Grid
 description: An example on how to use a dynamic editor in the Kendo UI Grid.
 type: how-to
-page_title: Use Dynamic Editor | Kendo UI Grid
+page_title: Use Dynamic Editor | Kendo UI Grid for jQuery
 slug: grid-use-dynamic-editor
 tags: grid, editor, dynamic, different, single, input, textbox
 res_type: kb
@@ -72,7 +72,7 @@ How can I have a column whose editor depends on the value of the Grid record?
             });
           }
           else if(options.model.id == 2){
-            var input = $('<input type="text" class="k-input k-textbox" name="value" data-bind="value:value">');
+            var input = $('<input type="text" class="k-textbox" name="value" data-bind="value:value">');
             input.appendTo(container);
           }else{
             var input = $('<input type="checkbox" name="value" data-bind="value:value">');

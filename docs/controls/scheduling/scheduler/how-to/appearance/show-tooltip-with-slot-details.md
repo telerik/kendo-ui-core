@@ -10,8 +10,6 @@ slug: howto_showtooltipwith_additionalinformation_overslots_scheduler
 
 The following example demonstrates how to use the Kendo UI Tooltip to show slot details in a Kendo UI Scheduler.
 
-###### Example
-
 ```dojo
 <div id="example">
 
@@ -187,16 +185,6 @@ The following example demonstrates how to use the Kendo UI Tooltip to show slot 
 
 ## See Also
 
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Create Recurrence Editor Using Mobile Editor]({% slug howto_createrecurrenceeditor_byusingmobileeditor_scheduler %})
-* [How to Export to iCal]({% slug howto_exportto_ical_scheduler %})
-* [How to Hide Header and Footer in Adaptive Rendering]({% slug howto_hideheaderandfooter_inadaptiverebdering_scheduler %})
-* [How to Hide Time Headers]({% slug howto_hide_time_headers_scheduler %})
-* [How to Modify Editor Template upon New Events]({% slug howto_modifyeditortemplate_wheneventisnew_scheduler %})
-* [How to Prevent Moving AllDay Events outside the AllDay Header]({% slug howto_preventmovingalldayevents_fromalldayheader_scheduler %})
-* [How to Retrieve Current View Date Range]({% slug howto_retrievecurrent_viewdaterange_scheduler %})
-* [How to Set Different Start Weekday]({% slug howto_setdifferent_startweekday_scheduler %})
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

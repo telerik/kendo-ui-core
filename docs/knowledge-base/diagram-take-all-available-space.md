@@ -2,7 +2,7 @@
 title: Make Diagram Take All Available Space
 description: An example on how to make the Kendo UI Diagram take all white space that is available.
 type: how-to
-page_title: Enable the Diagram to Take All Space That Is Available | Kendo UI Diagram
+page_title: Enable the Diagram to Take All Space That Is Available | Kendo UI Diagram for jQuery
 slug: diagram-take-all-available-space
 tags: diagram, resize, adjust, stretch, fit, space, available, width, container, expand
 ticketid: 1146668
@@ -26,7 +26,6 @@ res_type: kb
 ## Description
 
 How can I make the Diagram resize and take all space that is available in the container?
-
 
 ## Solution
 

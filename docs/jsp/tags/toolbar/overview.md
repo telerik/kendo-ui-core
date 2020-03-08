@@ -16,7 +16,7 @@ The ToolBar JSP tag is a server-side wrapper for the [Kendo UI ToolBar](/api/jav
 
 The example below demonstrates how to initialize the ToolBar and also its basic usage.
 
-###### Example
+
 
       <kendo:toolBar name="toolbar">
           <kendo:toolBar-items>
@@ -62,7 +62,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
 **Step 2** Create a new action method.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -72,13 +72,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI ToolB
 
  **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `toolbar` tag and specify the widget controls.
 
-###### Example
+
 
       <kendo:toolBar name="toolbar">
           <kendo:toolBar-items>
@@ -94,7 +94,7 @@ For more information on the supported command types, refer to [this link]({% slu
 
 You can subscribe to all [events exposed by Kendo UI ToolBar](/api/javascript/ui/toolbar#events) by the handler name.
 
-###### Example
+
 
       <kendo:toolBar name="toolbar" click="onClick" toggle="onToggle"></kendo:toolBar>
       <script>
@@ -109,9 +109,9 @@ You can subscribe to all [events exposed by Kendo UI ToolBar](/api/javascript/ui
 
 ### Existing Instances
 
-You are able to reference an existing ToolBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
+You are able to reference an existing ToolBar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ToolBar API](/api/javascript/ui/toolbar#methods) to control its behavior.
 
-###### Example
+
 
       // Put this after your Kendo ToolBar tag declaration
       <script>

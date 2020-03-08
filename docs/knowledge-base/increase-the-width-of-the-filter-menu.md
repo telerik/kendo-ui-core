@@ -2,7 +2,7 @@
 title: Increase Width to Potentially Show Full Column Values
 description: An example on how to increase the width of the filter menu in the Kendo UI Grid for ASP.NET MVC.
 type: how-to
-page_title: Increase the Width of the Filter Menu | Kendo UI Grid
+page_title: Increase the Width of the Filter Menu | Kendo UI Grid for jQuery
 slug: increase-the-width-of-the-filter-menu
 previous_url: /knowledge-base/how-to-increase-the-width-of-the-filter-menu
 tags: grid, filter, width
@@ -62,7 +62,7 @@ Use CSS rules to expand the width of the container and the elements that are loc
 }
 ```
 
-On the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event, you can also set the width of the container per menu.  
+On the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event, you can also set the width of the container per menu.  
 
 ```dojo
 <div id="grid"></div>

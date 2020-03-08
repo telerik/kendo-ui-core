@@ -2,7 +2,7 @@
 title: Sort ListBox Items on Add
 description: An example on how to sort the Kendo UI ListBox items when a new one is added.
 type: how-to
-page_title: Sort Items on Adding a New One | Kendo UI ListBox
+page_title: Sort Items on Adding a New One | Kendo UI ListBox for jQuery
 slug: listbox-sort-items-on-add
 tags: listbox, sort, items, order, drag, add, new, drop
 ticketid: 1141126
@@ -36,11 +36,11 @@ How can I sort the items between connected ListBoxes when I move items from one 
 ```dojo
 <div id="example" role="application">
     <div class="demo-section k-content">
-        <img src="http://demos.telerik.com/kendo-ui/content/web/listbox/arrow-left2right.png" alt="drag-indicator" class="arrow" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/listbox/arrow-left2right.png" alt="drag-indicator" class="arrow" />
         <br />
         <select id="discontinued"></select>
         <select id="available"></select>
-        <img src="http://demos.telerik.com/kendo-ui/content/web/listbox/arrow-right2left.png" alt="drag-indicator" class="arrow" />
+        <img src="https://demos.telerik.com/kendo-ui/content/web/listbox/arrow-right2left.png" alt="drag-indicator" class="arrow" />
     </div>
 </div>
 

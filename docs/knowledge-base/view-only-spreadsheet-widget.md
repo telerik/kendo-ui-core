@@ -2,7 +2,7 @@
 title: Render Read-Only Spreadsheets
 description: An example on how to hide or remove everything but the cells in a Kendo UI Spreadsheet and put them in a read-only mode which only shows the cells but prevents them from being edited or modified.
 type: how-to
-page_title: Set the Read-Only Mode | Kendo UI Spreadsheet
+page_title: Set the Read-Only Mode | Kendo UI Spreadsheet for jQuery
 slug: view-only-spreadsheet-widget
 tags: kendo, spreadsheet, view, view-only, read-only, hide
 ticketid: 1362798, 1356967
@@ -459,5 +459,5 @@ Apply either of the following approaches:
 
 ## See Also
 
- * [API Reference of the Kendo UI Spreadsheet for jQuery](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+ * [API Reference of the Kendo UI Spreadsheet for jQuery](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
  * [`Range` API Reference](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range)

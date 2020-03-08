@@ -17,7 +17,7 @@ the functions below:
 
 We support three color representations: as RGB (where the values are float
 numbers between 0 and 1), as Bytes (where values are integers between 0 and
-255) or as [HSV](http://en.wikipedia.org/wiki/HSL_and_HSV).  They all
+255) or as [HSV](https://en.wikipedia.org/wiki/HSL_and_HSV).  They all
 support transparency via the last argument, a float between 0 and 1.  If
 missing it will default to 1 (fully opaque).
 

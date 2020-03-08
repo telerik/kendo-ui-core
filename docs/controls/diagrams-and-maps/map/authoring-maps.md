@@ -1,70 +1,52 @@
 ---
-title: Map Authoring
-page_title: Map Authoring | Kendo UI Map
-description: "Learn how to process and transform maps from external sources so they can be used with the Kendo UI Map widget."
+title: Creating Maps
+page_title: jQuery Map Documentation | Creating Maps | Kendo UI
+description: "Get started with the jQuery Diagram by Kendo UI, process and transform maps from external sources, and use them with the Map widget."
 slug: mapauthoring_mapwidget
 position: 3
 ---
 
-# Map Authoring
+# Creating Maps
 
-This article illustrates the process of creating a map from scratch and by using freely available datasets. The goal of this tutorial is a map of the Australian states and mainland territories.
+You can create a Kendo UI Map from scratch by using freely available map datasets.
 
-**Figure 1: The expected outlook of a finished map**
+The following examples demonstrate how to construct a map of the Australian states and mainland territories:
 
-![Finished map](images/map-au.png)
+1. [Locate the external data for the map](#locating-an-external-map-dataset)
+1. [Explore the data](#exploring-the-data)
+1. [Process the data](#processing-the-data)
+1. [Load the data](#loading-the-data)
+1. [Add the styles](#adding-the-styles)
 
-## Steps
+The following image demonstrates the expected map.
 
-### Find Data
+![The expected outlook of a finished map](images/map-au.png)
 
-The first step is to locate a map dataset that matches your requirements. The [U.S. Census Bureau](http://www.census.gov) and [Ordnance Survey](http://www.ordnancesurvey.co.uk/) are popular official sources for map data.
+## Locating an External Map Dataset
 
-The data used in this article is from the [Natural Earth project](http://www.naturalearthdata.com/). Natural Earth datasets are in the public domain. The project is supported by [NACIS](http://nacis.org/). It offers different data themes in three levels of detail - 1:10m, 1:50m and 1:110m.
+To locate a map dataset that matches your requirements, use an official source for map data such as the [U.S. Census Bureau](http://www.census.gov) and [Ordnance Survey](http://www.ordnancesurvey.co.uk/).
 
-For the purpose of this project, the [Admin 1 – States, provinces](http://www.naturalearthdata.com/downloads/50m-cultural-vectors) data set is going to be used. A scale of 1:50 000 000 provides good detail/size balance on a country level. The dataset is available for download in [Esri Shapefile format](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_1_states_provinces_lakes.zip).
+The current map project of the Australian states and mainland territories uses data from the [Natural Earth project](http://www.naturalearthdata.com/). Natural Earth datasets cover the public domain and the project is supported by [NACIS](http://nacis.org/). It offers different data themes in the 1:10m, 1:50m, and 1:110m levels of detail. The current map project and examples use the [Admin 1 – States, provinces](http://www.naturalearthdata.com/downloads/50m-cultural-vectors) dataset. A scale of 1:50 000 000 provides a good detail/size balance on a country level. The dataset is available for download in [Esri Shapefile format](http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/cultural/ne_50m_admin_1_states_provinces_lakes.zip). For more information, refer to the website on [global administrative areas](http://www.gadm.org/country).
 
-For more information, refer to the web site on [global administrative areas](http://www.gadm.org/country).
+## Exploring the Data
 
-### Explore Data
+To explore new map datasets, use a traditional [desktop geographic information system (GIS)](https://en.wikipedia.org/wiki/Geographic_information_system) application, for example, the open-source [QGIS](https://www.qgis.org/en/site/) project. [Import the Esri Shapefile](https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/index.html) for the data and by using the [Identify tool](https://docs.qgis.org/testing/en/docs/user_manual/introduction/general_tools.html#identify), inspect the available metadata. For the purpose of this project, you can narrow down your interest in features with the "AU" [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
 
-A traditional [desktop geographic information system (GIS)](https://en.wikipedia.org/wiki/Geographic_information_system) application can be invaluable for exploring new datasets. The open-source [QGIS](https://www.qgis.org/en/site/) project is an excellent choice in this regard.
+![Identifying the results](images/map-qgis-identify.png)
 
-Start by [importing the Esri Shapefile](https://docs.qgis.org/testing/en/docs/user_manual/working_with_vector/index.html) for the data set. With the help of the [Identify tool](https://docs.qgis.org/testing/en/docs/user_manual/introduction/general_tools.html#identify) you can quickly inspect the available metadata.
+## Processing the Data
 
-**Figure 2: Identifying of the results**
+You need to extract the data for the target region and process it in a usable format for the Map widget by converting it to GeoJSON. To convert between different vector formats, you can use the [OGR Library and utilities](https://gdal.org/development/rfc/rfc59.1_utilities_as_a_library.html) project which is part of the [Geospatial Data Abstraction Library](http://www.gdal.org/) and which includes the [ogr2ogr](http://www.gdal.org/ogr2ogr.html) command-line tool. As an alternative, you can also use the [Mapshaper](http://www.mapshaper.org/) tool that allows you to do many edits directly in the browser.
 
-![Identify results](images/map-qgis-identify.png)
-
-You are also able to narrow down your interest to features with the "AU" [ISO 3166-1 alpha-2](http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
-
-### Process Data
-
-You need to extract the data for the target region and convert it to GeoJSON format to make it usable for the Kendo UI Map widget.
-
-When it comes to converting between different vector formats the first project that comes to mind is the [OGR Library and utilities](http://www.gdal.org/ogr/index.html), part of the [Geospatial Data Abstraction Library](http://www.gdal.org/). The [ogr2ogr](http://www.gdal.org/ogr2ogr.html) command-line tool is also included in it.
-
-> **Important**
->
-> [Mapshaper](http://www.mapshaper.org/) is also a great tool that allows you to do many edits directly in the browser. Make sure you check it out.
-
-The example below demonstrates the command that converts the dataset to GeoJSON and filters it out.
-
-###### Example
+The following example demonstrates how to convert the dataset to GeoJSON and filter it out. As a result, your dataset is ready and can be displayed.
 
     ogr2ogr -f GeoJSON -where "iso_a2 = 'AU'" au-states.json ne_50m_admin_1_states_provinces_lakes.shp
 
-Your dataset is now ready and you can display it.
+## Loading the Data
 
-### Load Data
+The following example demonstrates how to set up a simple Map widget and add a single shape layer to it. The GeoJSON data source will point to your processed dataset.
 
-Set up a simple Kendo UI Map and add a single shape layer to it, as demonstrated in the example below. Its GeoJSON data source will point to your processed dataset.
-
-> **Important**
->
 > Make sure the GeoJSON files are properly encoded, preferably in UTF-8.
-
-###### Example
 
     <div id="map" style="width: 600px; height: 600px;"></div>
     <script>
@@ -85,11 +67,9 @@ Set up a simple Kendo UI Map and add a single shape layer to it, as demonstrated
 
 ![Unstyled map](images/map-au-base.png)
 
-### Add Styles
+## Adding the Styles
 
-The example below demonstrates how to define a palette and apply it based on province.
-
-###### Example
+The following example demonstrates how to define a palette and apply it based on the desired province. The `provnum_ne` field goes from 1 to 9 which denotes each mainland state and territory. To set the fill color of the newly created shape, this project uses the [`shapeCreated`](/api/dataviz/map#events-shapeCreated) event.
 
     <div id="map" style="width: 600px; height: 600px;"></div>
     <script>
@@ -116,10 +96,7 @@ The example below demonstrates how to define a palette and apply it based on pro
     });
     </script>
 
-The `provnum_ne` field goes from 1 to 9 denoting each mainland state and territory. This project uses the [`shapeCreated`](/api/dataviz/map#events-shapeCreated) event to set the fill color of the newly created shape.
-
 ## See Also
 
-* [Overview of the Map Widget]({% slug overview_kendoui_mapwidget %})
-* [Map Layers]({% slug maplayers_mapwidget %})
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [Binding the Map to GeoJSON (Demo)](https://demos.telerik.com/kendo-ui/map/geojson)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

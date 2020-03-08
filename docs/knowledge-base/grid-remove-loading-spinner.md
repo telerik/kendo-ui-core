@@ -2,7 +2,7 @@
 title: Hide the Grid Loading Spinner
 description: An example on how to remove the loading indicator in the Kendo UI Grid.
 type: how-to
-page_title: Remove the Loading Icon | Kendo UI Grid
+page_title: Remove the Loading Icon | Kendo UI Grid for jQuery
 slug: grid-remove-loading-spinner
 tags: grid, spinner, loading
 ticketid: 1138280

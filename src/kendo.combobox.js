@@ -43,6 +43,7 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        AUTOCOMPLETEVALUE = "off",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
@@ -151,7 +152,8 @@ var __meta__ = { // jshint ignore:line
             fixedGroupTemplate: "#:data#",
             clearButton: true,
             syncValueAndText: true,
-            autoWidth: false
+            autoWidth: false,
+            popup: null
         },
 
         events:[
@@ -184,6 +186,7 @@ var __meta__ = { // jshint ignore:line
             that.input.off(ns);
             that.input.off(nsFocusEvent);
             that.element.off(ns);
+            that.wrapper.off(ns);
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
@@ -295,14 +298,14 @@ var __meta__ = { // jshint ignore:line
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that))
-                    .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
                     .on("input" + ns, proxy(that._search, that))
                     .on("paste" + ns, proxy(that._inputPaste, that));
 
+                that.wrapper.on(CLICK + ns, proxy(that._focusHandler, that));
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
@@ -539,6 +542,7 @@ var __meta__ = { // jshint ignore:line
 
         _select: function(candidate, keepState) {
             var that = this;
+
             candidate = that._get(candidate);
 
             if (candidate === -1) {
@@ -644,6 +648,7 @@ var __meta__ = { // jshint ignore:line
             var caretIdx = caret(element)[0];
             var key = that._last;
             var idx;
+            var accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             if (key == keys.BACKSPACE || key == keys.DELETE) {
                 that._last = undefined;
@@ -661,12 +666,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (caretIdx <= 0) {
-                caretIdx = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+                caretIdx = (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()).indexOf(accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) + 1;
             }
 
             if (word) {
                 word = word.toString();
-                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                idx = (accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()).indexOf(accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase());
                 if (idx > -1) {
                     value += word.substring(idx + value.length);
                 }
@@ -714,6 +719,10 @@ var __meta__ = { // jshint ignore:line
 
             if (ignoreCase) {
                 loweredText = loweredText.toLowerCase();
+            }
+
+            if(that.dataItem() && that._text(that.dataItem()) === text){
+                return;
             }
 
             that._select(function(data) {
@@ -904,7 +913,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="' + AUTOCOMPLETEVALUE +'"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -1009,8 +1018,12 @@ var __meta__ = { // jshint ignore:line
                         that._accessor(that.input.val());
                     }
 
-                    that.listView.value(that.input.val());
-                    that._blur();
+                    if (that.options.highlightFirst) {
+                        that.listView.value(that.input.val());
+                        that._blur();
+                    } else {
+                        that._oldText = that.text();
+                    }
                 }
             } else if (key != keys.TAB && !that._move(e)) {
                that._search();
@@ -1062,7 +1075,7 @@ var __meta__ = { // jshint ignore:line
             that._typingTimeout = setTimeout(function() {
                 var value = that.text();
 
-                if (that._prev !== value) {
+                if (value !== "" && that._prev !== value) {
                     that._prev = value;
 
                     if (that.options.filter === "none" && that.options.virtual) {
@@ -1070,7 +1083,12 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that.search(value);
+
                     that._toggleCloseVisibility();
+                }
+                else if (value === "" && that._prev !== "") {
+                    that._clearValue();
+                    that.search("");
                 }
 
                 that._typingTimeout = null;
@@ -1094,6 +1112,7 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = wrapper.addClass("k-widget k-combobox")
                 .addClass(element[0].className)
+                .removeClass('input-validation-error')
                 .css("display", "");
         },
 
@@ -1109,8 +1128,6 @@ var __meta__ = { // jshint ignore:line
             if (isFiltered || !hasValue || custom) {
                 that.options.value = "";
                 that.value("");
-                // Reset selected value for cascading
-                that._selectedValue = null;
             }
         },
 
@@ -1127,6 +1144,16 @@ var __meta__ = { // jshint ignore:line
             this._initialIndex = null;
             this._presetValue = true;
             this._toggleCloseVisibility();
+        },
+
+        _clearText: function() {
+            this._old = this.value();
+            this.text("");
+        },
+
+        _clearValue: function() {
+            Select.fn._clearValue.call(this);
+            this.input.focus();
         }
     });
 

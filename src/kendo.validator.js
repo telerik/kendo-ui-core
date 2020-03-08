@@ -306,7 +306,7 @@ var __meta__ = { // jshint ignore:line
                 result = this.validateInput(this.element);
             }
 
-            this.trigger(VALIDATE, { valid: result });
+            this.trigger(VALIDATE, { valid: result, errors: this.errors() });
 
             if (isValid !== result) {
                 this.trigger(CHANGE);
@@ -335,14 +335,19 @@ var __meta__ = { // jshint ignore:line
                     return true;
 
                 })).hide(),
-                messageText,
+                messageText = !valid ? that._extractMessage(input, result.key) : "",
+                messageLabel = !valid ? parseHtml(template({ message: decode(messageText) })) : "",
                 wasValid = !input.attr("aria-invalid");
             input.removeAttr("aria-invalid");
 
+            if (wasValid !== valid) {
+                if (this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName })) {
+                    return;
+                }
+            }
+
             if (!valid) {
-                messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-                var messageLabel = parseHtml(template({ message: decode(messageText) }));
                 var lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
@@ -359,10 +364,6 @@ var __meta__ = { // jshint ignore:line
                 input.attr("aria-invalid", true);
             } else {
                 delete that._errors[fieldName];
-            }
-
-            if (wasValid !== valid) {
-                this.trigger(VALIDATE_INPUT, { valid: valid, input: input });
             }
 
             input.toggleClass(INVALIDINPUT, !valid);
@@ -434,7 +435,7 @@ var __meta__ = { // jshint ignore:line
 
             customMessage = kendo.isFunction(customMessage) ? customMessage(input) : customMessage;
 
-            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || input.attr("title") || customMessage || "",
+            return kendo.format(input.attr(kendo.attr(ruleKey + "-msg")) || input.attr("validationMessage") || nonDefaultMessage || customMessage || input.attr("title") || "",
                 fieldName,
                 input.attr(ruleKey) || input.attr(kendo.attr(ruleKey)));
         },
@@ -461,6 +462,16 @@ var __meta__ = { // jshint ignore:line
                 results.push(errors[error]);
             }
             return results;
+        },
+
+        setOptions: function(options) {
+            var currentOptions = kendo.deepExtend(this.options, options);
+
+            this.destroy();
+
+            this.init(this.element, currentOptions);
+
+            this._setEvents(currentOptions);
         }
     });
 

@@ -52,7 +52,7 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper = element.parent();
             } else {
                 that.wrapper = element.wrap("<span class='k-widget k-dateinput'></span>").parent();
-                that.wrapper.addClass(element[0].className);
+                that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
                 that.wrapper[0].style.cssText = element[0].style.cssText;
                 element.css({
                     width: "100%",
@@ -197,6 +197,9 @@ var __meta__ = { // jshint ignore:line
         _bindInput: function () {
             var that = this;
             that.element
+                .on("focusout" + ns, function () {
+                    that._change();
+                })
                 .on("paste" + ns, proxy(that._paste, that))
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on(INPUT_EVENT_NAME, proxy(that._input, that))
@@ -208,6 +211,7 @@ var __meta__ = { // jshint ignore:line
             this.element
                 .off("keydown" + ns)
                 .off("paste" + ns)
+                .off("focusout" + ns)
                 .off(INPUT_EVENT_NAME)
                 .off("mouseup" + ns)
                 .off("DOMMouseScroll" + ns + " mousewheel" + ns);
@@ -225,9 +229,10 @@ var __meta__ = { // jshint ignore:line
             if (!readonly && !disable) {
                 wrapper.addClass(STATEDEFAULT)
                     .removeClass(STATEDISABLED);
-
-                element.removeAttr(DISABLED)
-                    .removeAttr(READONLY);
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
 
                 that._bindInput();
             } else {
@@ -235,7 +240,9 @@ var __meta__ = { // jshint ignore:line
                     wrapper.addClass(STATEDISABLED)
                     .removeClass(STATEDEFAULT);
                     element.attr(DISABLED, disable);
-                    element.removeAttr(READONLY);
+                    if(element && element.length) {
+                        element[0].removeAttribute(READONLY);
+                    }
                 }
                 if (readonly) {
                     element.attr(READONLY, readonly);
@@ -347,11 +354,16 @@ var __meta__ = { // jshint ignore:line
             var element = that.element;
             var formId = element.attr("form");
             var form = formId ? $("#" + formId) : element.closest("form");
+            var initialValue = element[0].value;
+
+            if (!initialValue && that.options.value) {
+                initialValue = that.options.value;
+            }
 
             if (form[0]) {
                 that._resetHandler = function () {
                     setTimeout(function () {
-                        that.value(element[0].value);
+                        that.value(initialValue);
                     });
                 };
 
@@ -387,7 +399,11 @@ var __meta__ = { // jshint ignore:line
                 selection = caret(this.element[0]);
                 var symbol = this._format[selection[0]];
                 if (knownSymbols.indexOf(symbol) >= 0) {
-                    this._dateTime.modifyPart(symbol, key == 38 ? 1 : -1);
+                    var interval = 1;
+                    if (symbol == 'm') {
+                        interval = this.options.interval || 1;
+                    }
+                    this._dateTime.modifyPart(symbol, key == 38 ? interval * 1 : interval * -1);
                     this._updateElementValue();
                     this._selectSegment(symbol);
                     this.element.trigger(CHANGE);

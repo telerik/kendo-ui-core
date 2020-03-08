@@ -80,7 +80,7 @@ Creates a new instance with the same coordinates.
 
 ### destination
 
-Calculates the [great-circle distance](http://en.wikipedia.org/wiki/Great-circle_distance)
+Calculates the [great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 to the given destination in meters.
 
 #### Parameters

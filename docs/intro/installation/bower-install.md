@@ -1,49 +1,29 @@
 ---
-title: Bower Packages
-page_title: Bower Packages | Kendo UI Getting Started
-description: "Install the Kendo UI Professional or Kendo UI Core Bower package."
+title: Installing with Bower
+page_title: Installing with Bower | Download and Installation | Kendo UI for jQuery
+description: "Get started with Kendo UI for jQuery and install the Kendo UI Professional or Kendo UI Core distributions by using the Bower package manager."
 previous_url: /install/bower
 slug: kendoui_bower_packages_kendoui_installation
 position: 3
 ---
 
-# Bower Packages
+# Installing with Bower
 
 [Bower](https://bower.io/) is a popular package manager for the web that handles frameworks, libraries, assets, and utilities.
 
-## Overview
+Kendo UI maintains the [Kendo UI Core](#kendo-ui-core-on-bower) and the [Kendo UI Professional](#kendo-ui-professional-on-bower) Bower packages. All Kendo UI official releases, service packs, and internal builds are uploaded to both of them.
 
-Kendo UI maintains 2 Bower packages:
-* Kendo UI Core.
-* Kendo UI Professional.
+> The Kendo UI Professional Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
 
-All official releases, service packs, and internal builds are uploaded to both of them.
+## Kendo UI Core on Bower
 
-> **Important**
->
-> The Kendo UI Professional Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug bundle_supportfor_kendoui_components %}).
+The Kendo UI Core Bower package is available as a [public GitHub repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the Bower registry. To install the Kendo UI Core Bower package, run the `bower install kendo-ui-core` command. To check the available versions of Kendo UI Core Bower package, run the `bower info kendo-ui-core --verbose` command.
 
-## Installation
+## Kendo UI Professional on Bower
 
-The Kendo UI Core Bower package is available as a public Git repository while the Kendo UI Professional Bower package&mdash;as a private one.
+The Kendo UI Professional Bower package is available as a private GitHub repository. To access the package, active your subscription for Kendo UI or DevCraft. Bower prompts you to enter your username and password during the installation and update processes. To install the Kendo UI Professional Bower package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. To check the available versions of Kendo UI Professional Bower package, run the `bower info kendo-ui --verbose` command.
 
-### Kendo UI Core
-
-The Kendo UI Core Bower package is hosted on a [public Git repository](https://github.com/kendo-labs/bower-kendo-ui) and is also registered as `kendo-ui-core` in the Bower registry.
-
-To install the Kendo UI Core Bower package, run the `bower install kendo-ui-core` command.
-
-To check the available versions of Kendo UI Core Bower package, run the `bower info kendo-ui-core --verbose` command.
-
-### Kendo UI Professional
-
-The Kendo UI Professional Bower package is hosted on a private Git repository. To access the package, you need an active subscription for Kendo UI or DevCraft. Bower prompts you to enter your username and password during the installation and update processes.
-
-To install the Kendo UI Professional Bower package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command.
-
-You can also add the package to the `bower.json` file, as the following example demonstrates.
-
-###### Example
+You can also add the package to the `bower.json` file.
 
 ```json
 "dependencies": {
@@ -51,100 +31,72 @@ You can also add the package to the `bower.json` file, as the following example 
 }
 ```
 
-To check the available versions of Kendo UI Professional Bower package, run the `bower info kendo-ui --verbose` command.
+> During the installation of the Bower package, you might be requested to confirm your credentials more than once. For further information on how to store your username and password, refer to the following [section on credentials](#storing-your-credentials).
 
-> **Important**
->
-> During the installation of the Bower package, you might be requested to confirm your credentials more than once. For further information on how to store your username and password, refer to the following [section on credentials](#credentials).
+## Storing Your Credentials
 
-## Credentials
+To avoid being asked multiple times to provide your credentials while installing the Kendo UI Bower packages, use either of the following approaches to preserve them for a future reference:
 
-To avoid being asked multiple times to provide your credentials while installing the Kendo UI Bower packages, you can preserve them for a future reference.
+* Cache your credentials by storing them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
+* Store your credentials by using the Git credential helpers. For detailed information on how to do this, refer to Stack Overflow and follow the discussion on [skipping the password typing](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github).
 
-### Choose Storage Options
+### Storing on Windows
 
-**Option 1** Cache your credentials by storing them as plain text in a [.netrc file](http://www.mavetju.org/unix/netrc.php).
+> * Caching your credentials is required if you use the Kendo UI Bower package in an ASP.NET vNext project.
+> * If your home directory contains spaces in its path (for example, `c:\Documents and Settings\jane`), Git might have problems resolving it. That is why you need to update your `%HOME%` environment variable to point to a directory and exclude any spaces in its name.
 
-**Option 2** Store your credentials by using the Git credential helpers. For detailed information on how to do this, refer to Stack Overflow and follow the discussion on [skipping the password typing](http://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github).
+1. Create a text file called `_netrc` in your home directory&mdash;for example, `c:\users\jane\_netrc`.
+1. Declare a `HOME` environment variable.
 
-### Store on Windows
+      ```
+      C:\> SETX HOME %USERPROFILE%
+      ```
 
-> **Important**
->
-> Caching your credentials is required if you use the Kendo UI Bower package in an ASP.NET vNext project.
+1. Add the credentials using the format.
 
-**Step 1** Create a text file called `_netrc` in your home directory&mdash;for example, `c:\users\jane\_netrc`.
+      ```
+      machine bower.telerik.com
+          login my-telerik.identity@example.com
+          password mysecret
+      ```
 
-**Step 2** Declare a `HOME` environment variable.
+### Storing on Unix-Like Systems
 
-###### Example
+1. In your home directory, create a file called `.netrc` (`~/.netrc`). Verify that you modify the file permissions to make it readable only to you.
 
-```
-C:\> SETX HOME %USERPROFILE%
-```
+      ```sh
+      touch ~/.netrc
+      chmod 0600 ~/.netrc
+      ```
 
-**Step 3** Add the credentials using the format demonstrated in the following example.
+1. Add your credentials to the `~/.netrc` file using the format demonstrated in the following example.
 
-###### Example
-
-```
-machine bower.telerik.com
-    login my-telerik.identity@example.com
-    password mysecret
-```
-
-If your home directory contains spaces in its path, Git might have problems resolving it&mdash;for example, `c:\Documents and Settings\jane`. That is why you need to update your `%HOME%` environment variable to point to a directory and have no spaces in its name.
-
-### Store on Linux, OS X, and Unix-Like Systems
-
-**Step 1** In your home directory, create a file called `.netrc` (`~/.netrc`). Verify that you modify the file permissions to make it readable only to you.
-
-###### Example
-
-```sh
-touch ~/.netrc
-chmod 0600 ~/.netrc
-```
-
-**Step 2** Add your credentials to the `~/.netrc` file using the format demonstrated in the following example.
-
-###### Example
-
-```
-machine bower.telerik.com
-    login my-telerik.identity@example.com
-    password mysecret
-```
+      ```
+      machine bower.telerik.com
+          login my-telerik.identity@example.com
+          password mysecret
+      ```
 
 ## Troubleshooting
 
 This section provides solutions for common issues you might encounter while installing the Kendo UI Bower packages.
 
-### SSL Issue Arises on Windows
+### An SSL issue occurs on Windows
 
-Bower on Windows has troubles installing the repository and shows the following error message:
+**Description** Bower on Windows has troubles installing the repository and shows the `fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate` error message.
 
-```
-fatal: unable to access 'https://bower.telerik.com/bower-kendo-ui.git/': SSL certificate problem: unable to get local issuer certificate
-```
+**Cause** The underlying Git installation is missing the certificate bundle.
 
-The cause of this issue is that the underlying Git installation is missing the certificate bundle.
+**Solution** Follow the steps in [this article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
 
-**Solution**
-
-Follow the steps in [this help article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
-
-> **Important**
 > * The 1.9.5 Git build does not work with the Bower package.
-> * If you need to use the `@` symbol in the URL for accessing the Kendo UI Bower repository because of network restrictions or admin rules, for example, make sure you encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/bower-kendo-ui.git`.
+> * To use the `@` symbol in the URL for accessing the Kendo UI Bower repository (because of network restrictions or admin rules, for example), encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/bower-kendo-ui.git`.
 
-### Restore Fails in ASP.NET Core MVC RC Projects in Visual Studio 2015
+### Restore fails in ASP.NET Core MVC RC projects in Visual Studio 2015
 
-The Git client, bundled in Visual Studio, is unable to authenticate with the Kendo UI Bower repository and throws an error messages similar to `ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.com/bower-kendo-ui.git", exit code of #-532462766`.
+**Description** A Git client that is bundled in Visual Studio is unable to authenticate with the Kendo UI Bower repository and throws an error messages similar to `ECMDERR Failed to execute "git ls-remote --tags --heads https://bower.telerik.com/bower-kendo-ui.git", exit code of #-532462766`.
 
-**Solution**
-
-Use a Windows port of Git and your stored credentials instead of the built-in client:
+**Solution** Use a Windows port of Git and your stored credentials instead of the built-in client:
 
 1. Store your [credentials](#store-on-windows).
 1. Install [Git for Windows](https://gitforwindows.org/).
@@ -157,9 +109,23 @@ Use a Windows port of Git and your stored credentials instead of the built-in cl
 
 ![Chart in IE](../../images/vs2015-external-tools.png)
 
+## Next Steps
+
+* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
+* [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
+* [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})
+* [Check out the jQuery version support]({% slug jquerysupport_kendoui %})
+* [Check out the web browser support]({% slug wbe_browserand_operating_system_support %})
+* [Check out the operation system support]({% slug ossupport_kendo %})
+* [Check out the PDF and Excel export support]({% slug export_support_kendoui %})
+* [Explore the widget script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
+
 ## See Also
 
-* [Get Started with Kendo UI]({% slug getting_started_installation_kendoui %})
-* [Kendo UI CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Kendo UI NPM Packages]({% slug kendoui_npm_packages_kendoui_installation %})
-* [NuGet Packages]({% slug kendoui_nuget_packages %})
+* [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
+* [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
+* [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
+* [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})

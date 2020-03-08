@@ -16,9 +16,7 @@ For a list of all available drawing primitives, refer to the introductory articl
 
 ## In Column Charts
 
-The example below demonstrates how to render a custom plot band in a Column Kendo UI Chart.
-
-###### Example
+The following example demonstrates how to render a custom plot band in a Column Kendo UI Chart.
 
 ```dojo
     <div id="chart" />
@@ -39,7 +37,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
         render: function(e) {
           // Locate value slot
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
           var valueAxis = e.sender.getAxis("valueAxis");
           var valueSlot = valueAxis.slot(650);
 
@@ -52,7 +50,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
 
           // Render a line element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var line = new kendo.drawing.Path({
             stroke: {
               color: "red",
@@ -63,7 +61,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
 
           // Render a text element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var labelPos = [maxCategorySlot.origin.x - 50, valueSlot.origin.y - 20];
           var label = new kendo.drawing.Text("MAX", labelPos, {
             fill: {
@@ -77,7 +75,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
 
           // Draw on chart surface
           //
-          // http://docs.telerik.com/kendo-ui/framework/drawing/overview
+          // https://docs.telerik.com/kendo-ui/framework/drawing/overview
           e.sender.surface.draw(group);
         }
       });
@@ -86,9 +84,7 @@ The example below demonstrates how to render a custom plot band in a Column Kend
 
 ## In Bar Charts
 
-The example below demonstrates how to render a custom plot band in a Bar Kendo UI Chart.
-
-###### Example
+The following example demonstrates how to render a custom plot band in a Bar Kendo UI Chart.
 
 ```dojo
     <div id="chart" />
@@ -109,7 +105,7 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
         render: function(e) {
           // Locate value slot
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/chart/chart_axis/methods/slot
           var valueAxis = e.sender.getAxis("valueAxis");
           var valueSlot = valueAxis.slot(650);
 
@@ -122,7 +118,7 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
 
           // Render a line element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var line = new kendo.drawing.Path({
             stroke: {
               color: "red",
@@ -133,7 +129,7 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
 
           // Render a text element
           //
-          // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
+          // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/text
           var labelPos = [valueSlot.origin.x + 10, maxCategorySlot.origin.y - 30];
           var label = new kendo.drawing.Text("MAX", labelPos, {
             fill: {
@@ -147,7 +143,7 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
 
           // Draw on chart surface
           //
-          // http://docs.telerik.com/kendo-ui/framework/drawing/overview
+          // https://docs.telerik.com/kendo-ui/framework/drawing/overview
           e.sender.surface.draw(group);
         }
       });
@@ -161,10 +157,3 @@ The example below demonstrates how to render a custom plot band in a Bar Kendo U
 * [How to Aggregate Data in Pie Charts]({% slug howto_aggregatedata_piecharts %})
 * [How to Draw on Scatter Plots Surface]({% slug howto_drawonscatterplotssurface_charts %})
 * [How to Expand Clickable Area of Points]({% slug howto_extendclickableareaofpoints_charts %})
-* [How to Fit PDF Exported Chart to Page]({% slug howto_fitpdfexportedcharttopage_charts %})
-* [How to Handle Right Click in Charts]({% slug howto_handlerightclick_charts %})
-* [How to Place Text in the Center of Donut Charts]({% slug howto_placetextinthecentre_donutcharts %})
-* [How to Set Different Marker Types for Grouped Line Charts]({% slug howto_setdifrerentmarkers_forgroupedlinecharts_charts %})
-* [How to Use Linear Gradient As Background in Bars]({% slug howto_uselineargradient_inbars_charts %})
-
-For more runnable examples on Kendo UI Charts, browse the [**How To** documentation folder]({% slug howto_implementcolorcodedranges_inbars_charts %}).

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
@@ -29,14 +29,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 **Step 3** Add a `qrcode` tag.
 
-###### Example
+
 
         <kendo:qRCode name="qrcode" value="foo" >
         </kendo:qRCode>
 
 **Step 4** Choose the appropriate [error correction level](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) and [encoding](/api/javascript/dataviz/ui/qrcode/configuration/encoding).
 
-###### Example
+
 
         <kendo:qRCode name="qrcode" value="foo" errorCorrection="H" encoding="UTF_8"  >
         </kendo:qRCode>
@@ -45,9 +45,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 ### Existing Instances
 
-You are able to reference an existing QRCode instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [QRCode API](/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
+You are able to reference an existing QRCode instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [QRCode API](/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo QRCode tag
         <script>

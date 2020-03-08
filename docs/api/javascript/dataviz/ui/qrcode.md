@@ -17,7 +17,7 @@ Represents the Kendo UI QRCode widget. Inherits from [Widget](/api/javascript/ui
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       renderAs: "svg"
     });
     </script>
@@ -31,7 +31,7 @@ The background color of the QR code. Accepts a valid CSS color string, including
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       background: "red"
     });
     </script>
@@ -49,7 +49,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       border: {
         color: "#FF321C",
         width: 2
@@ -66,7 +66,7 @@ The width of the border in pixels. By default the border width is set to zero wh
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       border: {
         width: 5,
         color: "#FF7D05"
@@ -83,7 +83,7 @@ The color of the QR code. Accepts a valid CSS color string, including hex and rg
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       color: "#aa00bb"
     });
     </script>
@@ -94,8 +94,8 @@ The encoding mode used to encode the value.
 
 The possible values are:
 
-* "ISO\_8859\_1" - supports all characters from the [ISO/IEC 8859-1](http://en.wikipedia.org/wiki/ISO/IEC_8859-1) character set.
-* "UTF_8" - supports all [Unicode](http://en.wikipedia.org/wiki/List_of_Unicode_characters) characters.
+* "ISO\_8859\_1" - supports all characters from the [ISO/IEC 8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) character set.
+* "UTF_8" - supports all [Unicode](https://en.wikipedia.org/wiki/List_of_Unicode_characters) characters.
 
 > *Important:* The UTF-8 encoding is not included in the specifications and is not supported by all readers.
 
@@ -125,7 +125,7 @@ The possible values are:
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       errorCorrection: "H"
     });
     </script>
@@ -139,7 +139,7 @@ Sets the minimum distance in pixels that should be left between the border and t
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       size: 240,
       padding: 10
     });
@@ -166,7 +166,7 @@ In case the element has width or height of zero, a default value of 200 pixels w
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       size: 300
     });
     </script>
@@ -176,7 +176,7 @@ In case the element has width or height of zero, a default value of 200 pixels w
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       size: "300px"
     });
     </script>
@@ -190,7 +190,7 @@ The value of the QRCode.
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html"
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html"
     });
     </script>
 
@@ -211,7 +211,7 @@ Removes data entries in order to avoid memory leaks.
 Exports the QRCode as an image.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -249,7 +249,7 @@ The height of the exported image. Defaults to the QRCode height.
 Exports the QRCode as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -281,7 +281,7 @@ Parameters for the exported PDF file.
 Exports the QRCode as an SVG document.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -342,7 +342,7 @@ Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozi
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);
@@ -414,8 +414,8 @@ An object with the new options. All [configuration](/api/javascript/dataviz/ui/q
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
-[ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
 > This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/qrcode/methods/exportsvg), but will remain fully functional.
 

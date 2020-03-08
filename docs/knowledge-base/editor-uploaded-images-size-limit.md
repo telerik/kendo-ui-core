@@ -2,7 +2,7 @@
 title: Set Size Limit for Images Uploaded with Editor ImageBrowser
 description: An example on how to set a size limit for images uploaded with the ImageBrowser in Kendo UI Editor.
 type: how-to
-page_title: Set size limit for images uploaded with ImageBrowser | Kendo UI Editor
+page_title: Set size limit for images uploaded with ImageBrowser | Kendo UI Editor for jQuery
 slug: editor-uploaded-images-size-limit
 tags: editor, set, size, limit, images, imagebrowser
 ticketid: 1135009
@@ -33,21 +33,22 @@ component: editor
 
 ## Description
 
-How can I set a size limit for the images uploaded with the Editor's ImageBrowser?
+How can I set a size limit for the images that are uploaded with the ImageBrowser of the Editor?
 
 ## Solution
 
-You can check the size of the selected file in the select event handler of the Upload embedded in the ImageBrowser and prevent the upload in case the file size exceeds the specified limit.
+1. Check the size of the selected file in the `select` event handler of the Upload that is embedded in the ImageBrowser.
+1. Prevent the upload if the file size exceeds the specified limit.
 
 ```dojo
 <script>
 	$(document).ready(function () {
-		//attach a click handler to the Editor's ImageBrowser tool
+		// Attach a click handler to the ImageBrowser tool of the Editor.
 		$(".k-i-image").click(function () {
 			setTimeout(function(){
-				//attach a select handler to the Upload embedded in the ImageBrowser
+				// Attach a select handler to the Upload embedded in the ImageBrowser.
 				$(".k-imagebrowser .k-upload").find("input").data("kendoUpload").bind("select", function (e) {
-					//prevent the event in case the selected file exceeds the specified limit
+					// Prevent the event if the selected file exceeds the specified limit.
 					if (e.files[0].size > 1048576) {
 						e.preventDefault();
 						alert("Maximum allowed file size: 1MB");

@@ -9,7 +9,7 @@ component: split-view
 
 # SplitView Overview
 
-The [Hybrid UI SplitView widget](http://demos.telerik.com/kendo-ui/m/index#splitview/index) is a tablet-specific view that consists of two or more mobile Pane widgets.
+The [Hybrid UI SplitView widget](https://demos.telerik.com/kendo-ui/m/index#splitview/index) is a tablet-specific view that consists of two or more mobile Pane widgets.
 
 ## Getting Started
 
@@ -21,7 +21,7 @@ The mobile Kendo UI Application automatically initializes a mobile SplitView for
 
 ### Initialize SplitView with Two Panes
 
-###### Example
+
 
     <div data-role="splitview">
 
@@ -60,7 +60,7 @@ Collapsible panes are automatically hidden when the device is in portrait orient
 
 The example below demonstrates a collapsible pane with a button, which expands it.
 
-###### Example
+
 
     <style scoped>
         /* do not show side pane activation button in landscape mode */
@@ -119,7 +119,7 @@ As of Kendo UI Q2 2014, the SplitView supports top-level header and footer eleme
 
 The example below demonstrates a SplitView with a top-level footer.
 
-###### Example
+
 
     <div data-role="splitview">
 
@@ -171,7 +171,7 @@ By default, the Hybrid UI platform is configured to show a horizontal SplitView 
 
 The example below demonstrates how to set the pane width to 300px or change the proportions to 1:3.
 
-###### Example
+
 
     <div data-role="splitview" id="main">
       <div data-role="pane" id="side-pane">
@@ -216,7 +216,7 @@ Additionally, you are able to split your view to more panes by adding them direc
 
 The example below demonstrates how to make the SplitView stack vertically.
 
-###### Example
+
 
     <div data-role="splitview" id="main" data-style="vertical">
       <div data-role="pane" id="side-pane">

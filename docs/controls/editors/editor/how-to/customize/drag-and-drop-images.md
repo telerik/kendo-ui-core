@@ -10,9 +10,7 @@ slug: howto_drag_and_drop_images_editor
 
 The following example demonstrates how to drag and drop images in the Kendo UI Editor.
 
-As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](http://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
-
-###### Example
+As an image source, the demo uses a TreeView. However, you can use any custom HTML markup in combination with the [Kendo UI Drag and Drop framework](https://demos.telerik.com/kendo-ui/web/dragdrop/index.html).
 
 ```dojo
   <style>
@@ -99,8 +97,8 @@ As an image source, the demo uses a TreeView. However, you can use any custom HT
         dataSource: {
           data: [
             {text: "Images", value: null, expanded: true, items: [
-              {text: "Telerik logo", value: "http://www.telerik.com/sfimages/default-source/logos/telerik-logo-reversed.png", spriteCssClass: "k-icon k-i-plus"},
-              {text: "Kendo UI Dojo logo", value: "http://trykendoui.telerik.com/images/logo.png", spriteCssClass: "k-icon k-i-plus"}
+              {text: "Telerik logo", value: "https://www.telerik.com/sfimages/default-source/logos/telerik-logo-reversed.png", spriteCssClass: "k-icon k-i-plus"},
+              {text: "Kendo UI Dojo logo", value: "https://dojo.telerik.com/images/logo.png", spriteCssClass: "k-icon k-i-plus"}
             ]}
           ]
         },
@@ -125,11 +123,6 @@ As an image source, the demo uses a TreeView. However, you can use any custom HT
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

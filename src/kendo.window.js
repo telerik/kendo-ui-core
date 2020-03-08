@@ -91,7 +91,18 @@
         }
 
         function constrain(value, low, high) {
-            return Math.max(Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)), low === -Infinity ? low : parseInt(low, 10));
+            var normalizedValue;
+
+            if (value && isNaN(value) && value.toString().indexOf("px") < 0) {
+                normalizedValue = value;
+            } else {
+                normalizedValue = Math.max(
+                    Math.min(parseInt(value, 10), high === Infinity ? high : parseInt(high, 10)),
+                    low === -Infinity ? low : parseInt(low, 10)
+                );
+            }
+
+            return normalizedValue;
         }
 
         function executableScript() {
@@ -346,22 +357,14 @@
                 }
 
                 if (width) {
-                    if (isNaN(width) && width.toString().indexOf("px") < 0) {
-                        wrapper.width(width);
-                    } else {
-                        wrapper.width(constrain(width, options.minWidth, options.maxWidth));
-                    }
+                    wrapper.width(constrain(width, options.minWidth, options.maxWidth));
                 }
                 else {
                     wrapper.width("");
                 }
 
                 if (height) {
-                    if (isNaN(height) && height.toString().indexOf("px") < 0) {
-                        wrapper.height(height);
-                    } else {
-                        wrapper.height(constrain(height, options.minHeight, options.maxHeight));
-                    }
+                    wrapper.height(constrain(height, options.minHeight, options.maxHeight));
                 }
                 else {
                     wrapper.height("");
@@ -821,6 +824,7 @@
                     newTop = this.minTop + (this.maxTop - this.minTop) / 2;
                     newLeft = this.minLeft + (this.maxLeft - this.minLeft) / 2;
                 } else {
+                    that._scrollIsAppended = true;
                     newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2);
                     newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height() - toInt(wrapper, "paddingTop")) / 2);
                 }
@@ -859,6 +863,7 @@
 
                 if (value === false) {
                     wrapper.addClass("k-window-titleless");
+                    wrapper.css("padding-top", 0);
                     titleBar.remove();
                 } else {
                     if (!titleBar.length) {
@@ -976,6 +981,9 @@
 
                     if (!wrapper.is(VISIBLE)) {
                         contentElement.css(OVERFLOW, HIDDEN);
+
+                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-bare");
+
                         wrapper.show().kendoStop().kendoAnimate({
                             effects: showOptions.effects,
                             duration: showOptions.duration,
@@ -990,8 +998,8 @@
                     that._stopDocumentScrolling();
                 }
 
-                if(options.pinned && !that._isPinned){
-                    that.pin();
+                if(this.options.pinned && !this._isPinned){
+                    this.pin();
                 }
 
                 return that;
@@ -1006,6 +1014,7 @@
 
                 this.element.css(OVERFLOW, scrollable ? "" : "hidden");
                 kendo.resize(this.element.children());
+
                 this.trigger(ACTIVATE);
             },
 
@@ -1068,13 +1077,15 @@
 
                     this._removeOverlay();
 
+                    // Prevent close animation from stopping
+                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-bare");
+
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
                         complete: proxy(this._deactivate, this)
                     });
-
                     $(window).off(MODAL_NS);
                 }
 
@@ -1437,9 +1448,10 @@
                     position.top = top;
                     position.left = left;
 
-                    if (!this.containment || this.containment.css("position") !== "fixed") {
+                    if (that._scrollIsAppended && (!this.containment || this.containment.css("position") !== "fixed")) {
                         position.top -= win.scrollTop();
                         position.left -= win.scrollLeft();
+                        that._scrollIsAppended = false;
                     }
 
                     wrapper.css(extend(position, {position: "fixed"}));
@@ -1470,6 +1482,7 @@
 
                 if (!that.options.isMaximized) {
                     that._isPinned = false;
+                    that._scrollIsAppended = true;
                     that.options.pinned = false;
 
                     if (containment) {

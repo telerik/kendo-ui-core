@@ -2,7 +2,7 @@
 title: Create Custom Editor Tool
 description: An example on how to create a custom tool for the Kendo UI Editor.
 type: how-to
-page_title: Create Custom Tool | Kendo UI Editor
+page_title: Create Custom Tool | Kendo UI Editor for jQuery
 slug: editor-custom-tool
 tags: kendo, kendo-ui, editor, tool, custom-tool
 ticketid: 1142213

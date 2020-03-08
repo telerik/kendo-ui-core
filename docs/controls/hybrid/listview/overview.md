@@ -8,7 +8,7 @@ position: 1
 
 # Hybrid UI ListView Overview
 
-The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
+The [Hybrid UI ListView widget](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
 
 ## Getting Started
 
@@ -18,7 +18,7 @@ The Kendo UI mobile Application automatically initializes a mobile ListView for 
 
 The example below demonstrates how to initialize the Hybrid UI ListView widget from markup.
 
-###### Example
+
 
     <ul data-role="listview">
         <li>Foo</li>
@@ -29,7 +29,7 @@ The example below demonstrates how to initialize the Hybrid UI ListView widget f
 
 The example below demonstrates how to initialize the Hybrid UI ListView widgets using jQuery plugin syntax.
 
-###### Example
+
 
     <div data-role="view" data-init="initListView">
         <ul id="listView"></ul>
@@ -53,7 +53,7 @@ In iOS, the mobile ListView appearance can be changed to `inset`, to achieve an 
 
 The example below demonstrates how to create an inset mobile ListView.
 
-###### Example
+
 
     <ul data-role="listview" data-style="inset">
       <li>Foo</li>
@@ -66,7 +66,7 @@ The mobile ListView can display items in groups, with optional headers. This can
 
 The example below demonstrates how to create a grouped Hybrid UI ListView.
 
-###### Example
+
 
     <ul data-role="listview" data-type="group">
         <li>
@@ -93,7 +93,7 @@ The Hybrid UI ListView widget can be bound to both local JavaScript arrays and r
 
 The example below demonstrates how to bind a Hybrid UI ListView to a local data source.
 
-###### Example
+
 
     function initListView(e) {
         e.view.element.find("#listview").kendoMobileListView({
@@ -113,7 +113,7 @@ The hybrid mobile ListView leverages Kendo UI high-performance Templates to prov
 
 The example below demonstrates basic item template customization.
 
-###### Example
+
 
     <ul id="listview"></ul>
 
@@ -128,7 +128,7 @@ The example below demonstrates basic item template customization.
 
 The example below demonstrates how to set an item template via the data attribute.
 
-###### Example
+
 
     <div id="foo" data-role="view">
         <ul id="list" data-role="listview" data-source="dataSource" data-template="tmp"></ul>
@@ -154,7 +154,7 @@ The mobile ListView automatically styles items with a single link element inside
 
 The example below demonstrates a Hybrid UI ListView with link items.
 
-###### Example
+
 
     <ul data-role="listview">
       <li><a href="#foo">Foo</a></li>
@@ -174,7 +174,7 @@ One row can contain both regular links and detail buttons.
 
 The example below demonstrates a Hybrid UI ListView with detail buttons.
 
-###### Example
+
 
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
@@ -210,7 +210,7 @@ An item icon can be set in two ways:
 
 The example below demonstrates how to use font icons with the `data-icon` attribute.
 
-###### Example
+
 
     <ul data-role="listview" data-style="inset">
       <li data-icon="home">
@@ -234,7 +234,7 @@ To create colorizable icons like the default ones in the hybrid Kendo UI platfor
 
 The example below demonstrates how to defined a custom list item icon.
 
-###### Example
+
 
     <style>
         .km-custom {
@@ -257,7 +257,7 @@ In the Kendo UI Q3 2012 release, due to numerous issues with the WebKit mask ico
 
 The example below demonstrates how to define custom list item icons after the Kendo UI Q3 2012 release. Note that the code from this demo will restyle all font icons.
 
-###### Example
+
 
     <style>
         /* Remove font icons styling, use .km- + data-icon name if only one should be overridden */
@@ -288,7 +288,7 @@ The example below demonstrates how to define custom list item icons after the Ke
 
 If you want to add only one or two custom icons, specify them with their respective classes&mdash;`.km-` and the data-icon name, as shown in the example below.
 
-###### Example
+
 
     .km-root .km-pane .km-view .km-question {
         background-size: 100% 100%;
@@ -307,7 +307,7 @@ When custom icons are used and their names are the same as the integrated Hybrid
 
 The example below demonstrates how to hide all Hybrid UI font icons.
 
-###### Example
+
 
     /* Don't render all internal Kendo UI font icons
     .km-root .km-pane .km-view .km-icon:after,
@@ -320,7 +320,7 @@ The example below demonstrates how to hide all Hybrid UI font icons.
 
 Again if only several icons should be overridden, specify them with their classes instead, as demonstrated in the example below.
 
-###### Example
+
 
     .km-root .km-pane .km-view .km-favorites:after,
     .km-root .km-pane .km-view .km-favorites:before
@@ -334,7 +334,7 @@ Again if only several icons should be overridden, specify them with their classe
 
 To activate this feature add span with `km-badge` class, as demonstrated in the example below.
 
-###### Example
+
 
     <ul data-role="listview" data-style="inset">
   		<li>
@@ -349,7 +349,7 @@ To activate this feature add span with `km-badge` class, as demonstrated in the 
 
 Icons shift the whole ListView to the right. The grouping headers are also indented. To activate this feature, set `km-listview-icons` class, as shown in the example below.
 
-###### Example
+
 
      <ul data-role="listview" class="km-listview-icons">
        <li data-icon="downloads"><a href="#drawer-home">Inbox</a></li>
@@ -360,7 +360,7 @@ Icons shift the whole ListView to the right. The grouping headers are also inden
 
 Thumbnails shift the whole ListView to the right. The grouping headers are also indented. To activate this feature, set `km-thumbnail` to the images, as demonstrated in the example below.
 
-###### Example
+
 
       <ul data-role="listview" class="km-listview-icons">
         <li>

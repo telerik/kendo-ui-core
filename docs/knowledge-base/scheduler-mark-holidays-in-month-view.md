@@ -2,7 +2,7 @@
 title: Mark Holidays in Month View
 description: An example on how to apply different styling on national-holiday time-slots in the Kendo UI Scheduler.
 type: how-to
-page_title: Apply Custom Styling to Holiday Time-Slots | Kendo UI Scheduler
+page_title: Apply Custom Styling to Holiday Time-Slots | Kendo UI Scheduler for jQuery
 slug: scheduler-mark-holidays-in-month-view
 tags: kendo, scheduler, month-view, holidays, slots
 ticketid: 1116454
@@ -25,7 +25,7 @@ How can I apply custom styling to a holiday time-slot in the Scheduler month vie
 
 ## Solution
 
-Implement a [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound) event handler. In the handler, iterate over all the sloths that are available on the screen and alter the styling for the required dates, use the following approach:  
+Implement a [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/scheduler/events/databound) event handler. In the handler, iterate over all the sloths that are available on the screen and alter the styling for the required dates, use the following approach:  
 
 ```dojo
 	<div id="scheduler"></div>

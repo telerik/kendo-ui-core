@@ -1338,7 +1338,7 @@ var __meta__ = { // jshint ignore:line
 
             if (listType === "group") {
                 if (item) {
-                    newGroup = index === 0 || (this._currentGroup && this._currentGroup !== item.group);
+                    newGroup = index === 0 || (this._currentGroup !== false && this._currentGroup !== item.group);
                     this._currentGroup = item.group;
                 }
 
@@ -1387,7 +1387,7 @@ var __meta__ = { // jshint ignore:line
                 item;
 
             this._view = {};
-            this._currentGroup = null;
+            this._currentGroup = false;
 
             for (var i = index, length = index + itemCount; i < length; i++) {
                 item = this._itemMapper(this.getter(i, index), i, value);

@@ -10,7 +10,7 @@ slug: howto_add_option_label_manually_combobox
 
 The following example demonstrates how to manually add an option label in a Kendo UI ComboBox.
 
-###### Example
+
 
 ```dojo
   <div id="example">

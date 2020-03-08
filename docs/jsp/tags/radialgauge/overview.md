@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
         public String index() {
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 **Step 3** Add a `radialGauge` tag.
 
-###### Example
+
 
          <kendo:radialGauge name="gauge">
             <kendo:radialGauge-pointer value="10" />
@@ -40,9 +40,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Radia
 
 ### Existing Instances
 
-You are able to reference an existing Radial Gauge instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Radial Gauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
+You are able to reference an existing Radial Gauge instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Radial Gauge API](/api/javascript/dataviz/ui/radialgauge#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo UI RadialGauge tag
         <script>

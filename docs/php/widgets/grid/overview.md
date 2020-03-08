@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 2** Create an array to which the Grid will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 3** Create a [`DataSource`](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 4** Create a [Grid](/api/php/Kendo/UI/Grid), configure its [columns](/api/php/Kendo/UI/Grid#addcolumn) and set its [`dataSource`](/api/php/Kendo/UI/Grid#datasource).
 
-###### Example
+
 
         <?php
         $nameColumn = new \Kendo\UI\GridColumn();
@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 5** Output the Grid by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $grid->render();
@@ -77,7 +77,7 @@ You can subscribe to all Grid [events](/api/javascript/ui/grid#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -97,7 +97,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $grid = new \Kendo\UI\Grid('grid');
@@ -113,9 +113,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI Grid instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
+You can reference the client-side Kendo UI Grid instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $grid = new \Kendo\UI\Grid('productGrid');

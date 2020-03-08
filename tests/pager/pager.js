@@ -135,9 +135,9 @@
         });
 
         it("change event is fired when clicking a page button", function() {
-            var index = 0,
+            var index,
                 changeHandler = function(e) {
-                    index = parseInt(e.index, 10);
+                    index = e.index;
                 },
                 ul = setup({}, { change: changeHandler });
 
@@ -145,6 +145,7 @@
 
             ul.find("a:eq(0)").click();
             assert.equal(index, 2);
+            assert.equal(typeof index, "number");
         });
 
         it("clicking on the current page does not trigger change event", function() {
@@ -643,6 +644,17 @@
             assert.isOk(!dataSource.pageSize());
         });
 
+        it("selecting all pages from the select changes the skip in the data source", function() {
+            var pager = setup({}, { pageSizes: ["all", 1, 2]});
+            dataSource.read();
+
+            var select = pager.find(".k-pager-sizes select");
+            pager.data("kendoPager").page(2);
+            select.val("all").trigger("change");
+
+            assert.equal(dataSource.page(), 1);
+        });
+
         it("displays refresh button", function() {
             var pager = setup({}, { refresh: true });
 
@@ -718,6 +730,99 @@
 
             assert.isOk(!dataSource._pageSize);
             assert.isOk(!dataSource._take);
+        });
+
+        it("no k-pager-lg/md/sm classes", function() {
+            var pager = setup();
+
+            pager.css("width", "1100px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-lg"));
+            assert.isOk(!pager.hasClass("k-pager-md"));
+            assert.isOk(!pager.hasClass("k-pager-sm"));
+        });
+
+        it("add k-pager-lg class", function() {
+            var pager = setup();
+
+            pager.css("width", "1000px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(pager.hasClass("k-pager-lg"));
+        });
+
+        it("add k-pager-md class", function() {
+            var pager = setup();
+
+            pager.css("width", "600px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(pager.hasClass("k-pager-md"));
+        });
+
+        it("add k-pager-sm class", function() {
+            var pager = setup();
+
+            pager.css("width", "450px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(pager.hasClass("k-pager-sm"));
+        });
+
+        it("no k-pager-lg class when responsive is false", function() {
+            var pager = setup({}, { responsive: false });
+
+            pager.css("width", "1000px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-lg"));
+        });
+
+        it("no k-pager-md class when responsive is false", function() {
+            var pager = setup({}, { responsive: false });
+
+            pager.css("width", "600px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-md"));
+        });
+
+        it("no k-pager-sm class when responsive is false", function() {
+            var pager = setup({}, { responsive: false });
+
+            pager.css("width", "450px");
+            pager.data("kendoPager").resize();
+
+            assert.isOk(!pager.hasClass("k-pager-sm"));
+        });
+
+        it("currentPage li element is present when AutoBind is false", function() {
+            var dataSource = new DataSource({
+                pageSize: 1,
+                data: [1, 2, 3]
+            });
+
+            var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                dataSource: dataSource,
+                autoBind: false
+            });
+
+            assert.equal(pager.find(".k-pager-numbers .k-current-page").length, 1);
+        });
+
+        it("select li is present when AutoBind is false", function() {
+            var dataSource = new DataSource({
+                pageSize: 1,
+                data: [1, 2, 3]
+            });
+
+            var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                dataSource: dataSource,
+                autoBind: false
+            });
+
+            assert.equal(pager.find(".k-pager-numbers .k-state-selected").length, 1);
         });
     });
 }());

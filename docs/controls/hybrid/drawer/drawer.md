@@ -9,7 +9,7 @@ component: drawer
 
 # Drawer Overview
 
-The [Hybrid UI Drawer widget](http://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
+The [Hybrid UI Drawer widget](https://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ The Drawer automatically hides when the user swipes back or taps the remaining v
 
 The example below demonstrates a Drawer and a **Reveal** button.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="drawer" data-role="button">Drawer</a>
@@ -53,7 +53,7 @@ The example below demonstrates a Drawer and a **Reveal** button.
 
 The example below demonstrates a Drawer with view navigation links.
 
-###### Example
+
 
     <div data-role="view" id="foo">
         Foo
@@ -82,7 +82,7 @@ The `views` array allows you to associate the Drawer with a list of view IDs on 
 
 The example below demonstrates a Drawer associated with a remote View.
 
-###### Example
+
 
     <!-- local view -->
     <div id="foo" data-role="view">
@@ -113,7 +113,7 @@ In addition to responding to user swipes, the Drawer widget can be opened when a
 
 The example below demonstrates a button revealing a Drawer.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="drawer" data-role="button">Foo</a>
@@ -141,7 +141,7 @@ The ListView has different styling when placed in a Drawer.
 
 To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip placed in a Drawer, as demonstrated in the example below.
 
-###### Example
+
 
 	<div data-role="drawer">
         <div data-role="tabstrip" class="km-vertical-tabstrip">

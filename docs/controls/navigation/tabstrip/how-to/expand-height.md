@@ -17,7 +17,7 @@ The milestones of the approach are:
 
 The example below demonstrates how to make the TabStrip widget 100% high and resize together with the browser window.
 
-###### Example
+
 
 ```dojo
     <style>

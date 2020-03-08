@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `timepicker` tag.
 
-###### Example
+
 
         <kendo:timePicker name="timepicker" value="<%= new java.util.Date() %>">
         </kendo:timePicker>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TimeP
 
 You can subscribe to all [events exposed by Kendo UI TimePicker](/api/javascript/ui/timepicker#events) by the handler name.
 
-###### Example
+
 
     <kendo:timePicker name="timepicker" change="timepicker_change"></kendo:timePicker>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI TimePicker](/api/javascript
 
 ### Existing Instances
 
-You are able to reference an existing TimePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TimePicker API](/api/javascript/ui/timepicker#methods) to control its behavior.
+You are able to reference an existing TimePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TimePicker API](/api/javascript/ui/timepicker#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo TimePicker tag declaration
     <script>

@@ -1,21 +1,15 @@
 ---
 title: CSS
-page_title: CSS | Kendo UI MVVM
+page_title: CSS Binding | Kendo UI MVVM
 description: "Learn how to update the classes of the DOM element to a View-Model value with CSS binding in Kendo UI MVVM."
 slug: cssbinding_mvvm_kendoui
 ---
 
-# CSS binding
+# CSS Binding
 
-The [Kendo UI CSS (`css`) binding](http://demos.telerik.com/kendo-ui/mvvm/css) sets a predefined CSS class of the target DOM element to a Boolean View-Model value. Changing the View-Model value via code is going to either add, or remove the CSS class of the DOM element.
+The [Kendo UI CSS (`css`) binding](https://demos.telerik.com/kendo-ui/mvvm/css) sets a predefined CSS class of the target DOM element to a Boolean View-Model value.
 
-## Getting Started
-
-### Setup
-
-The following example demonstrates how to use the CSS binding.
-
-###### Example
+Changing the View-Model value via code is going to either add, or remove the CSS class of the DOM element.
 
 ```dojo
 	<span data-bind="css:{online: isOnline, admin: isAdmin}">John Doe</span>
@@ -29,7 +23,8 @@ The following example demonstrates how to use the CSS binding.
     </script>
 ```
 
-The output will be (the data-bind attribute is omitted for clarity):
+The following example demonstrates the expected output (the data-bind attribute is omitted for clarity).
+
 ```dojo
     <span class="online">John Doe</span>
 ```

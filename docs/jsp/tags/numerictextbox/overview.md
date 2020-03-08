@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `numerictextbox` tag.
 
-###### Example
+
 
         <kendo:numericTextBox name="numerictextbox" value="10" max="100" min="-100">
         </kendo:numericTextBox>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Numer
 
 You can subscribe to all [events exposed by Kendo UI NumericTextBox](/api/javascript/ui/numerictextbox#events) by the handler name.
 
-###### Example
+
 
       <kendo:numericTextBox name="numerictextbox" change="numerictextbox_change"></kendo:numericTextBox>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI NumericTextBox](/api/javasc
 
 ### Existing Instances
 
-You are able to reference an existing NumericTextBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [NumericTextBox API](/api/javascript/ui/numerictextbox#methods) to control its behavior.
+You are able to reference an existing NumericTextBox instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [NumericTextBox API](/api/javascript/ui/numerictextbox#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo NumericTextBox tag declaration
     <script>

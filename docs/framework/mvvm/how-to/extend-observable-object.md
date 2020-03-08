@@ -11,8 +11,6 @@ The following example demonstrates how to bind a container to an extended Observ
 
 As an alternative, default values can be defined using the `Observable.fn.set` method.
 
-###### Example
-
 ```dojo
 <div id="form">
     <fieldset>

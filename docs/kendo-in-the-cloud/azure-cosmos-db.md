@@ -1,12 +1,12 @@
 ---
-title: Binding to Azure Cosmos DB
-page_title: Binding to Azure Cosmos DB | Kendo UI in the Cloud
+title: Azure Cosmos DB
+page_title: Azure Cosmos DB | Kendo UI in the Cloud
 description: "Learn how to bind the Kendo UI Grid to Azure Cosmos DB and perform CRUD operations."
 slug: azure_cosmos_db
 position: 0
 ---
 
-# Consuming Data from Azure Cosmos DB
+# Azure Cosmos DB
 
 This article provides a step-by-step tutorial on how to add Kendo UI to an existing web application that is built with Azure Cosmos DB through SQL .NET API and Azure Portal, and how to configure a [Kendo UI Grid]({% slug overview_kendoui_grid_widget %}) to display Cosmos DB data and perform CRUD operations.
 
@@ -14,7 +14,7 @@ The complete implementation of the sample project is available in the [Kendo UI 
 
 ## Prerequisites
 
-Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.com/en-us/azure/azure-portal/).
+Basic knowledge on the organization of [Azure Portal](https://docs.microsoft.com/en-us/azure/azure-portal/).
 
 ## Creating Azure Cosmos DB Applications
 
@@ -26,7 +26,7 @@ Basic knowledge on the organization of [Azure Portal]( https://docs.microsoft.co
 
 ## Adding CSS and JavaScript References
 
-To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references](https://docs.telerik.com/kendo-ui/intro/installation/getting-started#add-css-and-javascript-references) in the head tag of the `_Layout.cshtml` file.
+To use Kendo UI in the sample project, [add the Kendo UI CSS and JavaScript references]({% slug getting_started_installation_kendoui %}) in the head tag of the `_Layout.cshtml` file.
 
 ```HTML
 <head>

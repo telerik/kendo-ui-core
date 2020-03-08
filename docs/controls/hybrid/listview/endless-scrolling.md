@@ -9,7 +9,7 @@ position: 2
 
 # Endless Scrolling
 
-The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) supports displaying large amounts of data by appending additional pages of data on demand. Loading can happen automatically by enabling the [endless scrolling functionality](/api/mobile/listview#configuration-endlessScroll), or by displaying a button at the bottom ([ press to load more ](/api/mobile/listview#configuration-loadMore)).
+The [Hybrid UI ListView widget](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) supports displaying large amounts of data by appending additional pages of data on demand. Loading can happen automatically by enabling the [endless scrolling functionality](/api/mobile/listview#configuration-endlessScroll), or by displaying a button at the bottom ([ press to load more ](/api/mobile/listview#configuration-loadMore)).
 
 ## Virtual Mode
 
@@ -48,13 +48,13 @@ First, decide what the best way to get the additional data is. The possible ways
 
 **Step 1** Define a target HTML element such as a list.
 
-###### Example
+
 
     <ul id="localListView"></ul>
 
 **Step 2** Define a function, which will return a list of generated data, as demonstrated in the example below.
 
-###### Example
+
 
         //generate local data
         function getData() {
@@ -70,14 +70,14 @@ First, decide what the best way to get the additional data is. The possible ways
 
 **Step 3** Create a DataSource instance. Note that the `pageSize` is required.
 
-###### Example
+
 
         //define the DataSource
         var dataSource = new kendo.data.DataSource({ data: getData() });
 
 **Step 4** Initialize the ListView.
 
-###### Example
+
 
         //initialize the Mobile ListView
         $("#listView").kendoMobileListView({
@@ -135,7 +135,7 @@ This is the live example of the representation above:
 
 **Step 1** Define the ListView via a declarative binding.
 
-###### Example
+
 
     <div data-role="view" data-init="viewInit">
          <header data-role="header">
@@ -151,7 +151,7 @@ This is the live example of the representation above:
 
 **Step 2** Define a DataSource instance that will fetch the data from the Northwind oData service.
 
-###### Example
+
 
     var dataSource = new kendo.data.DataSource({
       type: "odata",

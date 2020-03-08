@@ -2,7 +2,7 @@
 title: Move Filter Icons in the Grid to the Left
 description: An example on how to display the filter icon in the leftmost position of the Kendo UI Grid header.
 type: how-to
-page_title: Display Filter Icon before the Title in the Header | Kendo UI Grid
+page_title: Display Filter Icon before the Title in the Header | Kendo UI Grid for jQuery
 slug: grid-filter-icon-to-left
 previous_url: /knowledge-base/grid_filter_icon_to_left
 tags: Grid, Filter icon, Left position

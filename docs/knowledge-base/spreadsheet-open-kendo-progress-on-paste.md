@@ -2,7 +2,7 @@
 title: Load Animation to the Spreadsheet
 description: An example on how to open the Kendo UI Progress Indicator on pasting data in the Kendo UI Spreadsheet.
 type: how-to
-page_title: Open Progress Indicator on Pasting Data | Kendo UI Spreadsheet
+page_title: Open Progress Indicator on Pasting Data | Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-open-kendo-progress-on-paste
 tags: kendo, kendoui, spreadsheet, paste, progress, loader, loading
 ticketid: 1142807
@@ -52,5 +52,5 @@ Implement a jQuery `paste` event handler. To attach the event, use the `render` 
 
 ## See Also
 
-* [API Reference of the Spreadsheet](http://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
+* [API Reference of the Spreadsheet](https://docs.telerik.com/kendo-ui/api/javascript/ui/spreadsheet)
 * [API Reference of the Progress Method](https://docs.telerik.com/kendo-ui/api/javascript/ui/ui/methods/progress)

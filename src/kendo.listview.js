@@ -24,6 +24,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         CHANGE = "change",
+        KENDO_KEYDOWN = "kendoKeydown",
         CANCEL = "cancel",
         DATABOUND = "dataBound",
         DATABINDING = "dataBinding",
@@ -38,7 +39,9 @@ var __meta__ = { // jshint ignore:line
         EDIT = "edit",
         REMOVE = "remove",
         SAVE = "save",
+        MOUSEDOWN = "mousedown",
         CLICK = "click",
+        TOUCHSTART = "touchstart",
         NS = ".kendoListView",
         proxy = $.proxy,
         activeElement = kendo._activeElement,
@@ -75,6 +78,8 @@ var __meta__ = { // jshint ignore:line
 
             that._crudHandlers();
 
+            that._scrollable();
+
             if (that.options.autoBind){
                 that.dataSource.fetch();
             }
@@ -89,7 +94,8 @@ var __meta__ = { // jshint ignore:line
             DATABOUND,
             EDIT,
             REMOVE,
-            SAVE
+            SAVE,
+            KENDO_KEYDOWN
         ],
 
         options: {
@@ -97,6 +103,7 @@ var __meta__ = { // jshint ignore:line
             autoBind: true,
             selectable: false,
             navigatable: false,
+            height: null,
             template: "",
             altTemplate: "",
             editTemplate: ""
@@ -172,8 +179,9 @@ var __meta__ = { // jshint ignore:line
                                 .bind(ERROR, that._errorHandler);
         },
 
-        _progress: function() {
-            progress(this.element, true);
+        _progress: function(toggle) {
+            var element = this.element;
+            progress(element, toggle, { opacity: true});
         },
 
         _error: function() {
@@ -181,7 +189,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _element: function() {
+            var height = this.options.height;
+
             this.element.addClass("k-widget k-listview").attr("role", "listbox");
+
+            if (height) {
+                this.element.css("height", height);
+            }
         },
 
         refresh: function(e) {
@@ -195,7 +209,10 @@ var __meta__ = { // jshint ignore:line
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate,
-                active = activeElement();
+                active = activeElement(),
+                endlessAppend =  that._endlessFetchInProgress,
+                index = endlessAppend ? that._skipRerenderItemsCount : 0,
+                scrollable = that.options.scrollable;
 
             e = e || {};
 
@@ -235,30 +252,46 @@ var __meta__ = { // jshint ignore:line
 
             that._angularItems("cleanup");
 
-            that._destroyEditable();
+            if(!endlessAppend) {
+                that._destroyEditable();
+            }
 
-            for (idx = 0, length = view.length; idx < length; idx++) {
+            for (idx = index, length = view.length; idx < length; idx++) {
                 if (idx % 2) {
                     html += altTemplate(view[idx]);
                 } else {
                     html += template(view[idx]);
                 }
             }
+            if (endlessAppend) {
+                that.element.append(html);
+            }
+            else {
+                that.element.html(html);
+            }
 
-            that.element.html(html);
-
-            items = that.items();
-            for (idx = 0, length = view.length; idx < length; idx++) {
+            items = that.items().not(".k-loading-mask");
+            for (idx = index, length = view.length; idx < length; idx++) {
                 items.eq(idx).attr(kendo.attr("uid"), view[idx].uid)
                              .attr("role", "option")
                              .attr("aria-selected", "false");
             }
 
             if (that.element[0] === active && that.options.navigatable) {
-                that.current(items.eq(0));
+                if (that._focusNext) {
+                    that.current(that.current().next());
+                }
+                else {
+                    if (!scrollable) {
+                        that.current(items.eq(0));
+                    }
+                }
             }
 
             that._angularItems("compile");
+
+            that._progress(false);
+            that._endlessFetchInProgress = null;
 
             that.trigger(DATABOUND, { action: e.action || "rebind", items: e.items, index: e.index });
         },
@@ -326,6 +359,36 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _scrollable: function() {
+            var that = this;
+            var scrollable = that.options.scrollable;
+
+            if (scrollable) {
+
+                that.element.css({
+                    "overflow-y": "scroll",
+                    "position": "relative",
+                    "-webkit-overflow-scrolling": "touch"
+                });
+
+                if (scrollable === "endless") {
+                    var originalPageSize = that._endlessPageSize = that.dataSource.options.pageSize;
+
+                    that.element.off("scroll" + NS).on("scroll" + NS, function () {
+                        if (this.scrollTop + this.clientHeight - this.scrollHeight >= -15 &&
+                        !that._endlessFetchInProgress &&
+                        that._endlessPageSize < that.dataSource.total()) {
+                            that._skipRerenderItemsCount =  that._endlessPageSize;
+                            that._endlessPageSize = that._skipRerenderItemsCount  + originalPageSize;
+                            that.dataSource.options.endless = true;
+                            that._endlessFetchInProgress = true;
+                            that.dataSource.pageSize(that._endlessPageSize);
+                        }
+                    });
+                }
+            }
+        },
+
         current: function(candidate) {
             var that = this,
                 element = that.element,
@@ -363,7 +426,7 @@ var __meta__ = { // jshint ignore:line
                 UseJQueryoffset = false,
                 SCROLL = "scroll";
 
-            if (that.wrapper.css("overflow") == "auto" || that.wrapper.css("overflow") == SCROLL) {
+            if (that.wrapper.css("overflow") == "auto" || that.wrapper.css("overflow") == SCROLL || that.wrapper.css("overflow-y") == SCROLL) {
                 container = that.wrapper[0];
             } else {
                 container = window;
@@ -414,7 +477,7 @@ var __meta__ = { // jshint ignore:line
                             that._current.removeClass(FOCUSED);
                         }
                     })
-                    .on("keydown" + NS, function(e) {
+                    .on("keydown" + NS, that, function(e) {
                         var key = e.keyCode,
                             current = that.current(),
                             target = $(e.target),
@@ -422,24 +485,41 @@ var __meta__ = { // jshint ignore:line
                             isTextBox = target.is(":text,:password"),
                             preventDefault = kendo.preventDefault,
                             editItem = element.find("." + KEDITITEM),
-                            active = activeElement(), idx;
+                            active = activeElement(), idx,
+                            scrollable = that.options.scrollable;
 
                         if ((!canHandle && !isTextBox && keys.ESC != key) || (isTextBox && keys.ESC != key && keys.ENTER != key)) {
                             return;
                         }
 
                         if (keys.UP === key || keys.LEFT === key) {
-                            if (current) {
+                            if (current && current[0]) {
                                 current = current.prev();
                             }
 
-                            that.current(!current || !current[0] ? that._item("last") : current);
+                            if (current && current[0]) {
+                                that.current(current);
+                            }
+                            else if (!scrollable) {
+                                that.current(that._item("last"));
+                            }
                             preventDefault(e);
                         } else if (keys.DOWN === key || keys.RIGHT === key) {
-                            if (current) {
-                                current = current.next();
+                            if (scrollable) {
+                                if(that.options.scrollable === "endless" && !current.next().length) {
+                                    that.element[0].scrollTop = that.element[0].scrollHeight;
+                                    that._focusNext = true;
+                                } else {
+                                    current = current.next();
+                                    if (current && current[0]) {
+                                        that.current(current);
+                                    }
+                                }
                             }
-                            that.current(!current || !current[0] ? that._item("first") : current);
+                            else {
+                                current = current.next();
+                                that.current(!current || !current[0] ? that._item("first") : current);
+                            }
                             preventDefault(e);
                         } else if (keys.PAGEUP === key) {
                             that.current(null);
@@ -482,7 +562,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     });
 
-                element.on("mousedown" + NS + " touchstart" + NS, FOCUSSELECTOR, proxy(clickCallback, that));
+                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, FOCUSSELECTOR, proxy(clickCallback, that));
             }
        },
 
@@ -547,6 +627,7 @@ var __meta__ = { // jshint ignore:line
                editable.element.replaceWith(template(data));
                item = that.items().eq(index);
                item.attr(kendo.attr("uid"), data.uid);
+               item.attr("role", "option");
 
                if (that._hasBindingTarget()) {
                    kendo.bind(item, data);
@@ -649,28 +730,35 @@ var __meta__ = { // jshint ignore:line
 
        _crudHandlers: function() {
            var that = this,
-               clickNS = CLICK + NS;
+               mousedownNs = MOUSEDOWN + NS,
+               touchstartNs = TOUCHSTART + NS,
+               clickNs = CLICK + NS;
 
-           that.element.on(clickNS, ".k-edit-button", function(e) {
+           that.element.on(mousedownNs + " " + touchstartNs, ".k-edit-button", function(e) {
+               e.preventDefault();
                var item = $(this).closest("[" + kendo.attr("uid") + "]");
-               that.edit(item);
-               e.preventDefault();
+                setTimeout(function() {
+                    that.edit(item);
+                });
+            });
+
+
+            that.element.on(mousedownNs + " " + touchstartNs, ".k-delete-button", function(e) {
+                e.preventDefault();
+                var item = $(this).closest("[" + kendo.attr("uid") + "]");
+                 setTimeout(function() {
+                    that.remove(item);
+                 });
+             });
+
+             that.element.on(clickNs, ".k-update-button", function(e) {
+                that.save();
+                e.preventDefault();
            });
 
-           that.element.on(clickNS, ".k-delete-button", function(e) {
-               var item = $(this).closest("[" + kendo.attr("uid") + "]");
-               that.remove(item);
-               e.preventDefault();
-           });
-
-           that.element.on(clickNS, ".k-update-button", function(e) {
-               that.save();
-               e.preventDefault();
-           });
-
-           that.element.on(clickNS, ".k-cancel-button", function(e) {
-               that.cancel();
-               e.preventDefault();
+           that.element.on(clickNs, ".k-cancel-button", function(e) {
+                that.cancel();
+                e.preventDefault();
            });
        },
 
@@ -684,6 +772,8 @@ var __meta__ = { // jshint ignore:line
            that._destroyEditable();
 
            that.element.off(NS);
+
+           that._endlessFetchInProgress = that._endlessPageSize = that._skipRerenderItemsCount = that._focusNext = null;
 
            if (that.pager) {
                that.pager.destroy();

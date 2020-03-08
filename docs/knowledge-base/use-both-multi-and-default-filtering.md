@@ -2,7 +2,7 @@
 title: Use Both Multi-Checkbox and Default Grid Filtering
 description: An example on how to modify the Kendo UI Grid to use both its multi-checkbox and default filtering.
 type: how-to
-page_title: Use Multi-Checkbox and Default Filtering | Kendo UI Grid
+page_title: Use Multi-Checkbox and Default Filtering | Kendo UI Grid for jQuery
 slug: use-both-multi-and-default-filtering
 tags: grid, filtering, multi, default
 ticketid: 1120044
@@ -29,14 +29,14 @@ How can I modify the Kendo UI Grid to use both multi-checkbox and default filter
 
 ## Solution
 
-When the [`filterMenuInit`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event fires, append a Kendo UI ListView, which contains the checkboxes, to the filtering menu.
+When the [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit) event fires, append a Kendo UI ListView, which contains the checkboxes, to the filtering menu.
 
 ```dojo       
         <div id="grid"></div>
 
         <script>
             $(document).ready(function () {
-            var crudServiceBaseUrl = "http://demos.telerik.com/kendo-ui/service",
+            var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
                 dataSource = new kendo.data.DataSource({
                     transport: {
                     read: {

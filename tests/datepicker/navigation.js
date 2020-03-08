@@ -6,7 +6,7 @@ var DateView = kendo.DateView,
     anchor,
     input;
 
-describe("kendo.ui.DatePicker API", function () {
+describe("kendo.ui.DatePicker Navigation", function () {
     beforeEach(function() {
 
 
@@ -23,6 +23,8 @@ describe("kendo.ui.DatePicker API", function () {
         }
 
         kendo.destroy(Mocha.fixture);
+        Mocha.fixture.empty()
+
 
         kendo.ns = "";
     });
@@ -846,5 +848,25 @@ it("navigate should focus min month in year view", function() {
     assert.equal(datepicker.dateView.calendar._table.find(".k-state-focused").text(), kendo.toString(date, "MMM"));
 });
 
+it("deleting the value in the input sets the current day to the dateview", function() {
+    var datepicker = input.kendoDatePicker({value: new Date(2011, 1, 1)}).data("kendoDatePicker");
+    datepicker.open();
+    datepicker.close();
+    input.focus().val("");
+
+    datepicker._blur();
+
+    assert.deepEqual(datepicker.dateView.calendar.current(), kendo.calendar.getToday());
+});
+
+it("deleting the value in the input sets the current day to the dateview and does not cause an error on open", function() {
+    var datepicker = input.kendoDatePicker({value: new Date(2011, 1, 1)}).data("kendoDatePicker");
+    input.focus().val("");
+
+    datepicker._blur();
+    datepicker.open();
+
+    assert.deepEqual(datepicker.dateView.calendar.current(), kendo.calendar.getToday());
+});
     });
 }());

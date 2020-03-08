@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `datetimepicker` tag.
 
-###### Example
+
 
         <kendo:dateTimePicker name="datetimepicker" value="<%=new java.util.Date()%>">
         </kendo:dateTimePicker>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DateT
 
 You can subscribe to all [events exposed by Kendo UI DateTimePicker](/api/javascript/ui/datetimepicker#events) by the handler name.
 
-###### Example
+
 
         <kendo:dateTimePicker name="datetimepicker" change="datetimepicker_change"></kendo:dateTimePicker>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI DateTimePicker](/api/javasc
 
 ### Existing Instances
 
-You are able to reference an existing DateTimePicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DateTimePicker API](/api/javascript/ui/datetimepicker#methods) to control its behavior.
+You are able to reference an existing DateTimePicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [DateTimePicker API](/api/javascript/ui/datetimepicker#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo DateTimePicker tag declaration
         <script>

@@ -2,7 +2,7 @@
 title: Get the Selected Grid Rows Data
 description: An example on how to get the dataItem for every selected row by using the change event of the Kendo UI Grid.
 type: how-to
-page_title: Get the DataItems of the Selected Rows | Kendo UI Grid
+page_title: Get the DataItems of the Selected Rows | Kendo UI Grid for jQuery
 slug: checkbox-selection-dataitems-selected-rows
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716
@@ -31,9 +31,9 @@ How can I get all the data items of the selected rows when using the selectable 
 
 To get the `dataItem` for each selected row:
 
-1. In the [`change`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event handler, get and save the rows in a variable by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method.
+1. In the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/change) event handler, get and save the rows in a variable by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method.
 1. Loop through the rows by using the [`each`](https://api.jquery.com/each/) jQuery method.
-1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
+1. Get every row data by using the [`dataItem`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem) method.
 
 ```dojo
 <div id="example">
@@ -105,5 +105,5 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 ## See Also
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
-* [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)
+* [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

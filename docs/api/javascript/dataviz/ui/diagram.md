@@ -4545,7 +4545,7 @@ The color in any of the following formats:
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 
@@ -4741,7 +4741,7 @@ Defines the minimum width the shape can have. Use this setting to apply a lower 
 
 ### shapeDefaults.path `String`
 
-The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
+The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (https://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
 
 #### Example - making all shapes octagons by default
 
@@ -6108,7 +6108,7 @@ The color in any of the following formats:
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 
@@ -6265,7 +6265,7 @@ Defines the minimum width the shape should have, that is, it cannot be resized t
 
 ### shapes.path `String`
 
-The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (http://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
+The path option of a Shape is a description of a custom geometry. The format follows the standard SVG format (https://www.w3.org/TR/SVG/paths.html#PathData "SVG Path data.").
 
 #### Example - drawing an octagonal shape
 
@@ -7073,7 +7073,7 @@ Whether the addition should be recorded in the undo-redo stack.
 
 ### addShape
 
-Adds a new shape to the diagram.
+Adds a new shape to the diagram. If the diagram is bound to a data source, do not use `addShae(newShape)`. Instead, use `diagram.dataSource.add(newShape);` and optionally `.sync()` the data source.
 
 #### Parameters
 
@@ -8257,7 +8257,7 @@ The full content of the diagram will be exported in 1:1 scale.
 If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing/methods/drawdom)
 method should be called on a container element.
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -8320,7 +8320,7 @@ for more details.
 Exports the diagram content as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -8369,7 +8369,7 @@ The full content of the diagram will be exported in 1:1 scale.
 If exporting the current view is desired then the [kendo.drawing.drawDOM](/api/javascript/drawing/methods/drawdom)
 method should be called on a container element.
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -11144,7 +11144,7 @@ The shape that will be removed.
 
 ##### e.preventDefault `Function`
 
-Prevents the remove action. If called, the element will not be removed to the diagram.
+Prevents the remove action. If called, the element will not be removed from the diagram.
 
 ##### e.sender `kendo.dataviz.ui.Diagram`
 

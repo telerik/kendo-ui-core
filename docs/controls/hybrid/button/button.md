@@ -9,7 +9,7 @@ component: mobile-button
 
 # Hybrid UI Button Overview
 
-The [Hybrid UI Button widget](http://demos.telerik.com/kendo-ui/m/index#mobile-button/index) navigates to a mobile View or executes a custom callback when tapped.
+The [Hybrid UI Button widget](https://demos.telerik.com/kendo-ui/m/index#mobile-button/index) navigates to a mobile View or executes a custom callback when tapped.
 
 ## Getting Started
 
@@ -19,13 +19,13 @@ The Hybrid UI Application automatically initializes a the Hybrid UI Button widge
 
 The example below demonstrates how to initialize the Hybrid UI Button based on the `data-role` attribute.
 
-###### Example
+
 
     <a href="#foo" data-role="button">Foo</a>
 
 ### Initialize Using jQuery
 
-###### Example
+
 
     var button = $("#button").kendoMobileButton();
 
@@ -37,13 +37,13 @@ The Hybrid UI Button color can be customized by setting its `background-color` C
 
 The example below demonstrates how to make a Hybrid UI Button green.
 
-###### Example
+
 
     <a href="#foo" data-role="button" style="background-color: green">Foo</a>
 
 The example below demonstrates how to make the green Button in iOS and a red one in Android.
 
-###### Example
+
 
     <style>
         .km-ios .checkout { background-color: green; }
@@ -61,7 +61,7 @@ A Button icon can be set in two ways:
 
 The example below demonstrates how to use font icons with the `data-icon` attribute.
 
-###### Example
+
 
     <a href="#search" data-role="button" data-icon="search">Search</a>
 
@@ -77,7 +77,7 @@ Kendo UI ships with several ready to use icons. The full list of predefined icon
 
 To activate the feature set `km-primary` class to the button.
 
-###### Example
+
 
     <a data-role="button" class="km-primary">Primary Button</a>
 
@@ -87,13 +87,13 @@ There are three predefined sizes&mdash;small, medium (default) and large. To app
 
 The example below demonstrates a small Button.
 
-###### Example
+
 
     <a data-role="button" class="km-small">Small Button</a>
 
 The example below demonstrates a large Button.
 
-###### Example
+
 
     <a data-role="button" class="km-large">Large Button</a>
 
@@ -103,7 +103,7 @@ To activate this feature set `km-justified` class to the button.
 
 The example below demonstrates how to justify the position of the Button.
 
-###### Example
+
 
     <a data-role="button" class="km-justified">Justified Button</a>
 
@@ -111,7 +111,7 @@ The example below demonstrates how to justify the position of the Button.
 
 To activate this feature set `km-link-button` class.
 
-###### Example
+
 
     <a data-role="button" class="km-link-button">Link Button</a>
 
@@ -119,7 +119,7 @@ To activate this feature set `km-link-button` class.
 
 To achieve this outcome do not set text to the button.
 
-###### Example
+
 
     <a data-role="button" data-icon="home"></a>
 

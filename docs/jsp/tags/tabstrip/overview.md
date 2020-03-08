@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TabSt
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = "index", method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI TabSt
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `tabstrip` tag.
 
-###### Example
+
 
         <kendo:tabStrip name="tabstrip">
             <kendo:tabStrip-items>
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI TabSt
 
 You can subscribe to all [events exposed by Kendo UI TabStrip](/api/javascript/ui/tabstrip#events) by the handler name.
 
-###### Example
+
 
     <kendo:tabStrip name="tabstrip" select="tabstrip_select">
         <kendo:tabStrip-items>
@@ -86,9 +86,9 @@ You can subscribe to all [events exposed by Kendo UI TabStrip](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing TabStrip instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
+You are able to reference an existing TabStrip instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [TabStrip API](/api/javascript/ui/tabstrip#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo TabStrip tag declaration
     <script>

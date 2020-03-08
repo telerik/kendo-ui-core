@@ -472,6 +472,101 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize MultiSelect messages
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.deleteTag `String` *(default: "delete")*
+
+The text message shown when hovering delete icon in a selected tag.
+
+#### Example - customize deleteTag message
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                deleteTag: "delete!"
+            }
+        });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <select id="multiselect" multiple="multiple"></select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.singleTag `String` *(default: "item(s) selected")*
+
+The text message shown in the single TagMode tag.
+
+#### Example - customize singleTag message
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                singleTag: "item(s) selected!",
+            },
+            tagMode: "single"
+        });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
@@ -509,7 +604,7 @@ A zero value means that a request will be made as soon as the user focuses the w
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
 The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
@@ -634,10 +729,21 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       }
     });
     </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
 ### popup.position `String`
 

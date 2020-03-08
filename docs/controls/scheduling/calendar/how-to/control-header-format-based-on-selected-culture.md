@@ -9,10 +9,8 @@ slug: howto_control_header_format_calendar
 
 The following example demonstrates how to control the header format of the Kendo UI Calendar based on a selected culture.
 
-###### Example
-
 ```dojo
-    <script src="http://kendo.cdn.telerik.com/2014.1.528/js/cultures/kendo.culture.ko-KR.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2014.1.528/js/cultures/kendo.culture.ko-KR.min.js"></script>
     <script>
       kendo.culture("ko-KR");
       kendo.calendar.views[0].title = function(date) {

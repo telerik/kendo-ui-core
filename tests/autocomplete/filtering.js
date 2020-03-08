@@ -94,6 +94,24 @@ it("search method lowers case of the filter value when ignoreCase true", functio
     autocomplete.search("F");
 });
 
+it("search method lowers case with correct culture", function() {
+    var autocomplete = new AutoComplete(input, {
+        dataSource: {
+            accentFoldingFiltering: "tr-TR",
+            transport: {
+                read: "fake url",
+                parameterMap: function(options) {
+                    assert.equal(options.filter.filters[0].value, "kı");
+                }
+            },
+            serverFiltering: true
+        },
+        ignoreCase: true
+    });
+
+    autocomplete.search("KI");
+});
+
 it("refresh suggests on every dataSource change", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["text", "Text", "3text"],
@@ -438,7 +456,7 @@ it("resize popup on search when autoWidth is enabled", function(done) {
     autocomplete.one("open", function() {
         assert.isOk(autocomplete.wrapper.width() < autocomplete.popup.element.width());
         autocomplete.close();
-        
+
         autocomplete.one("open", function() {
             assert.isOk(autocomplete.wrapper.width() >= autocomplete.popup.element.width());
             done();
@@ -462,7 +480,7 @@ it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
         },
         dataSource: {
             data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
-        
+
         }
     });
 
@@ -471,6 +489,27 @@ it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
     autocomplete.close();
     autocomplete.search("a");
     assert.closeTo(autocomplete.popup.element.parent(".k-animation-container").width(), autocomplete.popup.element.outerWidth(true) + 1, 0.1);
+});
+
+it("enabled autoWidth disables X scrolling", function() {
+    var autocomplete = new AutoComplete(input, {
+        autoWidth: true,
+        animation:{
+            open: {
+                duration:0
+            },
+            close: {
+                duration:0
+            },
+        },
+        dataSource: {
+            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
+
+        }
+    });
+
+    autocomplete.search("a");
+    assert.equal(autocomplete.listView.content.css("overflow"), "hidden auto")
 });
 
 it("update popup height when no items are found", function(done) {

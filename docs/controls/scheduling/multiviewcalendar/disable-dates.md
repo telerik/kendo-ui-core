@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
-page_title: Disabled Dates | Kendo UI MultiViewCalendar
-description: "Learn how to disable dates in the Kendo UI MultiViewCalendar widget."
+page_title: jQuery MultiViewCalendar Documentation | Disabled Dates | Kendo UI
+description: "Get started with the jQuery MultiViewCalendar by Kendo UI and disable specific dates in the widget."
 slug: disabled_dates_multiviewcalendar
 position: 6
 ---
@@ -10,16 +10,15 @@ position: 6
 
 The MultiViewCalendar allows you to disable certain days which are not intended to be selected by the end user such as weekends, national holidays, and others.
 
-To disable a date, either:
+To disable a date in the MultiViewCalendar, use either of the following approaches:
+* [Set an array of dates](#setting-an-array)
+* [Add a function](#adding-a-function)
 
-* Set an array, or
-* Add a function.
+For a runnable example, refer to the [demo on disabling dates in the MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/disabled-dates).
 
-## Set an Array
+## Setting an Array
 
-When you set an array, list the days that need to be disabled by using the first letters from their names in English.
-
-###### Example
+To disable dates by setting an array, list the names of days that will be disabled by using the first letters from their names in English.
 
 ```dojo
    <div id="multiViewCalendar"></div>
@@ -31,11 +30,9 @@ When you set an array, list the days that need to be disabled by using the first
   </script>
 ```
 
-## Add a Function
+## Adding a Function
 
-When you add a function, determine its return value as `true` for the date that is disabled.
-
-###### Example
+To disable dates by using a function, set the return value for the date that will be disabled to `true`.
 
 ```dojo
     <div id="multiViewCalendar"></div>
@@ -55,5 +52,6 @@ When you add a function, determine its return value as `true` for the date that 
 
 ## See Also
 
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the MultiViewCalendar Widget](/aspnet-mvc/helpers/multiviewcalendar/overview)
-* [MultiViewCalendar JavaScript API Reference](/api/javascript/ui/multiviewcalendar)
+* [Basic Usage of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/index)
+* [Using the API of the MultiViewCalendar (Demo)](https://demos.telerik.com/kendo-ui/multiviewcalendar/api)
+* [JavaScript API Reference of the MultiViewCalendar](/api/javascript/ui/multiviewcalendar)

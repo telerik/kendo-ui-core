@@ -9,7 +9,7 @@ position: 1
 
 # Progress<sup>®</sup> Telerik<sup>®</sup> UI for PHP
 
-[Progress Telerik UI for PHP](http://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP web sites.
+[Progress Telerik UI for PHP](https://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP websites.
 
 ## Getting Started
 
@@ -27,25 +27,25 @@ You can download Progress Telerik UI for PHP from the [official download page](h
 * `/styles`&mdash;The minified CSS files and background images used by the themes.
 * `/src`&mdash;The JavaScript and CSS source files. Not available in the trial version.
 * `/wrappers/php/lib/Kendo/`&mdash;The PHP files required to use Progress Telerik UI for PHP.
-* `/wrappers/php/`&mdash;The sample PHP web site.
+* `/wrappers/php/`&mdash;The sample PHP website.
 
 ## Sample Application Setup
 
 ### Prerequisites
 
-You can find a sample PHP web site in the `/wrappers/php/` directory of the Progress Telerik UI for PHP distribution. To run the web site, copy this directory to your web root. Then navigate to `index.php`.
+You can find a sample PHP website in the `/wrappers/php/` directory of the Progress Telerik UI for PHP distribution. To run the website, copy this directory to your web root. Then navigate to `index.php`.
 
 ### Configuration
 
-To use Progress Telerik UI for PHP in your PHP web site, follow the steps below:
+To use Progress Telerik UI for PHP in your PHP website, follow the steps below:
 
-**Step 1** Copy `/wrappers/php/lib/Kendo` to your web site root, e.g. to your `lib` directory.
+**Step 1** Copy `/wrappers/php/lib/Kendo` to your website root, e.g. to your `lib` directory.
 
-**Step 2** Copy the Kendo UI JavaScript and CSS files from `/js` and `/styles` to your web site root. If you prefer to use [Kendo UI CDN Service]({% slug kendoui_cdn_services_installation %}), skip this step and the following ones, and check the [article on the JavaScript dependencies]({% slug javascript_prerequisites_kendoui_installation %}).
+**Step 2** Copy the Kendo UI JavaScript and CSS files from `/js` and `/styles` to your website root. If you prefer to use [Kendo UI CDN Service]({% slug kendoui_cdn_services_installation %}), skip this step and the following ones, and check the [article on the jQuery dependency]({% slug jquerysupport_kendoui %}) as well as the [article on the export libraries dependencies]({% slug export_support_kendoui %}).
 
 **Step 3** Include the Kendo UI JavaScript and CSS files in your PHP page.
 
-###### Example
+
 
         <link href="styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
@@ -58,13 +58,13 @@ To use Progress Telerik UI for PHP in your PHP web site, follow the steps below:
 
 **Step 4** Include the Kendo PHP [`Autoload`](http://php.net/manual/en/language.oop5.autoload.php) file.
 
-###### Example
+
 
         <?php require_once 'lib/Kendo/Autoload.php'; ?>
 
 **Step 5** Use any Kendo UI PHP wrapper.
 
-###### Example
+
 
         <?php
         // Instantiate a new instance of the DatePicker class and specify its 'id'
@@ -80,7 +80,7 @@ To use Progress Telerik UI for PHP in your PHP web site, follow the steps below:
 
 The example below demonstrates the complete source code.
 
-###### Example
+
 
     <!DOCTYPE html>
     <html>
@@ -108,9 +108,9 @@ The example below demonstrates the complete source code.
 
 ## Next Steps
 
-Watch the video tutorials on getting started with Progress Telerik UI for PHP in the [Kendo UI YouTube channel](http://www.youtube.com/kendouitv):
+Watch the video tutorials on getting started with Progress Telerik UI for PHP in the [Kendo UI YouTube channel](https://www.youtube.com/kendouitv):
 
-* [Get Started with the PHP Wrappers for Kendo UI: Part 1](http://www.youtube.com/watch?v=2Kpgp_nocEI)
+* [Get Started with the PHP Wrappers for Kendo UI: Part 1](https://www.youtube.com/watch?v=2Kpgp_nocEI)
 * [Get Started with the PHP Wrappers for Kendo UI: Part 2](https://www.youtube.com/watch?v=RQCLqA6Pu_E)
 * [Get Started with the PHP Wrappers for Kendo UI: Part 3](https://www.youtube.com/watch?v=zYh6cuU_leQ)
 

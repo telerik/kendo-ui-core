@@ -9,10 +9,10 @@ slug: howto_use_custom_culture_script_numerictextbox
 
 The following example demonstrates how to extend an existing culture script, create a custom script, and use it with the NumericTextBox.
 
-###### Example
+
 
 ```dojo
-<script src="http://kendo.cdn.telerik.com/2014.3.1119/js/cultures/kendo.culture.en-GB.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2014.3.1119/js/cultures/kendo.culture.en-GB.min.js"></script>
 
 <div id="example">
     <input id="initial" value="10" min="1"/>

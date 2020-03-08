@@ -11,8 +11,6 @@ Your project might require you to partially preload TreeView items.
 
 The following example demonstrates how to achieve this behavior and request data from a remote service that has not yet been loaded.
 
-###### Example
-
 ```dojo
   <div id="tree"></div>
 
@@ -50,13 +48,12 @@ The following example demonstrates how to achieve this behavior and request data
             var data = get(localData, id);
 
             if (data) {
-              // item is available in local data
+              // The item is available in the local data.
               options.success(data);
             } else {
 
-              // here you can use $.ajax request and call options.success in success handler
-
-              // for this example, mock call to server with static data
+              // Here you can use $.ajax request and call options.success in a success handler.
+              // For this example, mock the call to the server with static data.
               setTimeout(function() {
                 options.success([
                   { id: id + 1, text: "Remote node 1", hasChildren: false },
@@ -75,14 +72,6 @@ The following example demonstrates how to achieve this behavior and request data
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

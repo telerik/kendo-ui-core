@@ -10,8 +10,6 @@ position: 1
 
 The following example demonstrates how to limit the calendar navigation of the DateTimePicker to months (MVVM).
 
-###### Example
-
 ```dojo
       <input data-role="datetimepicker" />
 
@@ -46,7 +44,5 @@ The following example demonstrates how to limit the calendar navigation of the D
 
 ## See Also
 
-* [DateTimePicker JavaScript API Reference](/api/javascript/ui/datetimepicker)
-* [How to Prevent Invalid Values]({% slug howto_prevent_invalid_values_datetimepicker %})
-* [How to Validate Custom Dates]({% slug howto_validate_custom_dates_datetimepicker %})
-* [How to Override Hours in the Popup]({% slug howto_override_hours_inpopup_datetimepicker %})
+* [Using the API of the DateTimePicker (Demo)](https://demos.telerik.com/kendo-ui/datetimepicker/api)
+* [JavaScript API Reference of the DateTimePicker](/api/javascript/ui/datetimepicker)

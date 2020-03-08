@@ -13,7 +13,7 @@ The example below demonstrates how to use the `activate` event when initializing
 >
 > In addition to the Kendo UI TabStrip, this example can be applied to the PanelBar and Window widgets, which, too, act as hidden containers for the Grid.
 
-###### Example
+
 
 ```dojo
      <body>

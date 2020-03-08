@@ -2,7 +2,7 @@
 title: Share Legend Between Charts
 description: An example on how to create a shared legend to show and hide series in two or more Kendo UI Charts.
 type: how-to
-page_title: Create Common Legend for Two or More Charts | Kendo UI Chart
+page_title: Create Common Legend for Two or More Charts | Kendo UI Chart for jQuery
 slug: share-legend-between-charts
 tags: chart, legend, series, kendo-ui
 ticketid: 1114263
@@ -29,7 +29,7 @@ Can I click on the legend of one Kendo UI Chart and have the series of the other
 
 ## Solution
 
-Handle the [`legendItemClick`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemclick) event of the first Chart and manually toggle the series visibility in the other Charts.
+Handle the [`legendItemClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemclick) event of the first Chart and manually toggle the series visibility in the other Charts.
 
 The following example demonstrates the full implementation of the approach.  
 
@@ -108,4 +108,4 @@ The following example demonstrates the full implementation of the approach.
 
 ## Notes
 
-If the order of the series is different across the Charts, you can also [access the series by their names](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/findseriesbyname).  
+If the order of the series is different across the Charts, you can also [access the series by their names](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/findseriesbyname).  

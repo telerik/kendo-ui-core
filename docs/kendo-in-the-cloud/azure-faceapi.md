@@ -1,12 +1,12 @@
 ---
-title: Integrating Kendo UI with Azure Face API
-page_title: Integrating Kendo UI with Azure Face API | Kendo UI in the Cloud
+title: Azure Face API
+page_title: Azure Face API | Kendo UI in the Cloud
 description: "Learn how to upload images and consume the returned data from Azure Face API when working with Kendo UI."
 slug: azure_faceapi
 position: 2
 ---
 
-# Integrating Kendo UI with Azure Face API
+# Azure Face API
 
 This article provides a sep-by-step tutorial on how to configure the Kendo UI Upload to send images directly to [the Azure Face API](https://azure.microsoft.com/en-us/services/cognitive-services/face/) and then consume the received data from the service.
 

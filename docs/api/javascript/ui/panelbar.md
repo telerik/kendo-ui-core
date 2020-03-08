@@ -325,7 +325,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
     <div id="panelbar"></div>
     <script>
-    $("#panelbar").kendoTreeView({
+    $("#panelbar").kendoPanelBar({
       dataSource: {
         data: [
           { text: "foo", items: [
@@ -345,7 +345,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
               {
                   text: "Item 1 (link)",
                   cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                  url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
+                  url: "https://www.telerik.com/kendo-ui/"                  // link URL if navigation is needed (optional)
               },
               {
                   text: "<b>Item 2</b>",
@@ -542,7 +542,7 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
 The text messages displayed in the widget. Use it to customize or localize the messages.
 
-#### Example - customize TreeView messages
+#### Example - customize PanelBar messages
 
     <div id="panelbar"></div>
     <script>
@@ -677,7 +677,7 @@ Appends an item(s) to the PanelBar.
                 {
                     text: "Item 1",
                     cssClass: "myClass",                            // Add custom CSS class to the item, optional, added 2012 Q3 SP1.
-                    url: "http://www.telerik.com/"                  // link URL if navigation is needed, optional.
+                    url: "https://www.telerik.com/"                  // link URL if navigation is needed, optional.
                 },
                 {
                     text: "<b>Item 2</b>",
@@ -788,7 +788,7 @@ Collapses the specified item(s) of a **PanelBar**.
 ##### element `String|Element|jQuery`
 
 The **PanelBar** item(s) to be collapsed, expressed as a string containing a selector
-expression or represented by a [jQuery selector](http://api.jquery.com/category/selectors/).
+expression or represented by a [jQuery selector](https://api.jquery.com/category/selectors/).
 
 ##### useAnimation `Boolean`
 
@@ -800,6 +800,36 @@ when collapsing items.
 #### Returns
 
 `kendo.ui.PanelBar` Returns the PanelBar object to support chaining.
+
+### dataItem
+
+Returns the data item to which the specified item is bound. The method will return an item only when the PanelBar is populated using a DataSource.
+
+#### Parameters
+
+##### node `jQuery|Element|String`
+
+A string, DOM element or jQuery object which represents the item. A string is treated as a jQuery selector.
+
+#### Returns
+
+`kendo.data.Node` The model of the item that was passed as a parameter.
+
+#### Example - get the data item of the first node
+
+    <div id="panelBar"></div>
+    <script>
+        $("#panelBar").kendoPanelBar({
+            dataSource: [
+                { id: 1, text: "foo" },
+                { id: 2, text: "bar" }
+            ]
+        });
+
+        var panelBar = $("#panelBar").data("kendoPanelBar");
+        var dataItem = panelBar.dataItem(".k-item:first");
+        console.log(dataItem.text); // displays "foo"
+    </script>
 
 ### destroy
 Prepares the **PanelBar** for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls destroy method of any child Kendo widgets.
@@ -874,7 +904,7 @@ Enables (**true**) or disables (**false**) the specified item(s) of the
 
 The **PanelBar** item(s) to be enabled (**true**) or disabled (**false**), expressed as a
 string containing a selector expression or represented by a
-[jQuery selector](http://api.jquery.com/category/selectors/).
+[jQuery selector](https://api.jquery.com/category/selectors/).
 
 ##### enable `Boolean`
 
@@ -961,7 +991,7 @@ Inserts a PanelBar item after the specified referenceItem
         panelBar.insertAfter(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1030,7 +1060,7 @@ Inserts a PanelBar item before the specified referenceItem
         panelBar.insertBefore(
             [{
                 text: "Item 1",
-                url: "http://www.telerik.com"                // Link URL if navigation is needed, optional.
+                url: "https://www.telerik.com"                // Link URL if navigation is needed, optional.
             },
             {
                 text: "<b>Item 2</b>",
@@ -1181,7 +1211,7 @@ Gets or sets the selected item.
 ##### element `String|Element|jQuery` *(optional)*
 
 The **PanelBar** item to be selected, expressed as a string containing a selector expression or
-represented by a [jQuery selector](http://api.jquery.com/category/selectors/).
+represented by a [jQuery selector](https://api.jquery.com/category/selectors/).
 
 #### Returns
 

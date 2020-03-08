@@ -21,6 +21,8 @@ var __meta__ = { // jshint ignore:line
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         POINT = ".",
+        support = kendo.support,
+        AUTOCOMPLETEVALUE = support.browser.chrome ? "disabled" : "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' +
                     '#=message#<div class="k-callout k-callout-n"></div></div>',
@@ -58,7 +60,7 @@ var __meta__ = { // jshint ignore:line
             rule,
             attr = {
                 name: options.field,
-                title: options.title
+                title: options.title ? options.title : options.field
             };
 
         for (ruleName in validation) {
@@ -81,6 +83,8 @@ var __meta__ = { // jshint ignore:line
             }
 
             attr[kendo.attr(ruleName + "-msg")] = rule.message;
+
+            attr.autocomplete = AUTOCOMPLETEVALUE;
         }
 
         if (inArray(type, specialRules) >= 0) {
@@ -88,6 +92,17 @@ var __meta__ = { // jshint ignore:line
         }
 
         attr[BINDING] = (type === "boolean" ? "checked:" : "value:") + options.field;
+
+        return attr;
+    }
+
+    function addIdAttribute(container, attr) {
+        var id = container.attr("id");
+
+        if (id) {
+            attr.id = id;
+            container.removeAttr("id");
+        }
 
         return attr;
     }
@@ -135,7 +150,7 @@ var __meta__ = { // jshint ignore:line
         "string": function(container, options) {
             var attr = createAttributes(options);
 
-            $('<input type="text" class="k-input k-textbox"/>').attr(attr).appendTo(container);
+            $('<input type="text" class="k-textbox"/>').attr(attr).appendTo(container);
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
@@ -148,6 +163,46 @@ var __meta__ = { // jshint ignore:line
                 kendo.attr("source") + "=\'" + (items ? items.replace(/\'/g,"&apos;") : items) +
                 "\'" + kendo.attr("role") + '="dropdownlist"/>') .attr(attr).appendTo(container);
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+        }
+    };
+
+    var mobileEditors = {
+        "number": function (container, options) {
+            var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
+
+            $('<input type="number"/>').attr(attr).appendTo(container);
+        },
+        "date": function (container, options) {
+            var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
+
+            $('<input type="date"/>').attr(attr).appendTo(container);
+        },
+        "string": function (container, options) {
+            var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
+
+            $('<input type="text" />').attr(attr).appendTo(container);
+        },
+        "boolean": function (container, options) {
+            var attr = createAttributes(options);
+            attr = addIdAttribute(container, attr);
+
+            $('<input type="checkbox" />').attr(attr).appendTo(container);
+        },
+        "values": function (container, options) {
+            var attr = createAttributes(options);
+            var items = options.values;
+            var select = $('<select />');
+
+            attr = addIdAttribute(container, attr);
+
+            for (var index in items) {
+                $('<option value="' + items[index].value + '">' + items[index].text + '</option>').appendTo(select);
+            }
+
+            select.attr(attr).appendTo(container);
         }
     };
 
@@ -175,6 +230,10 @@ var __meta__ = { // jshint ignore:line
 
             if (options.target) {
                 options.$angular = options.target.options.$angular;
+
+                if (options.target.pane) {
+                    that._isMobile = true;
+                }
             }
             Widget.fn.init.call(that, element, options);
             that._validateProxy = $.proxy(that._validate, that);
@@ -186,6 +245,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Editable",
             editors: editors,
+            mobileEditors: mobileEditors,
             clearContainer: true,
             errorTemplate: ERRORTEMPLATE,
             skipFocus: false
@@ -193,7 +253,7 @@ var __meta__ = { // jshint ignore:line
 
         editor: function(field, modelField) {
             var that = this,
-                editors = that.options.editors,
+                editors = that._isMobile ? mobileEditors : that.options.editors,
                 isObject = isPlainObject(field),
                 fieldName = isObject ? field.field : field,
                 model = that.options.model || {},

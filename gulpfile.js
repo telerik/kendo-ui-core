@@ -260,12 +260,21 @@ gulp.task('mdspell', shell.task(
 
 [ 'core' ].forEach(function(flavor) {
     gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
-        var js = gulp.src('dist/cjs/**/*').pipe(gulp.dest('dist/npm/js'));
+        var internalOption = "", i = process.argv.indexOf("--channel");
+        if(i>-1) {
+            internalOption = process.argv[i+1];
+        }
+        var js = gulp.src('dist/cjs/**/*')
+                    .pipe(gulp.dest('dist/npm/js'));
+
+        var jsmin = gulp.src('dist/cjs/**/*.js')
+                    .pipe(uglify())
+                    .pipe(gulp.dest('dist/npm/js'));
 
         var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
 
         var pkg = gulp.src('build/package-' + flavor + '.json')
-                    .pipe(replace("$KENDO_VERSION", kendoVersion))
+                    .pipe(replace("$KENDO_VERSION", kendoVersion + internalOption))
                     .pipe(rename('package.json'))
                     .pipe(gulp.dest('dist/npm'));
 
@@ -278,7 +287,7 @@ gulp.task('mdspell', shell.task(
                     .pipe(rename('README.md'))
                     .pipe(gulp.dest('dist/npm'));
 
-        return merge(js, styles, pkg, license, readme);
+        return merge(js, jsmin, styles, pkg, license, readme);
     })
 })
 

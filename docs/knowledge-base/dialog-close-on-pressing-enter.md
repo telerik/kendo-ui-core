@@ -2,7 +2,7 @@
 title: Close Dialog on Pressing Enter
 description: An example on how to close the Kendo UI Dialog on pressing the Enter key.
 type: how-to
-page_title: Close Dialog on Pressing Enter Key | Kendo UI Dialog
+page_title: Close Dialog on Pressing Enter Key | Kendo UI Dialog for jQuery
 slug: dialog-close-on-pressing-enter
 tags: dialog, close, pressing, enter, key
 ticketid: 1129150

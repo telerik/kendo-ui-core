@@ -2,7 +2,7 @@
 title: Sort Displayed Columns Menu Items
 description: An example on how to sort displayed columns menu items in the Kendo UI Grid header.
 type: how-to
-page_title: Implement Sort Displayed Columns Menu Items | Kendo UI Grid
+page_title: Implement Sort Displayed Columns Menu Items | Kendo UI Grid for jQuery
 slug: grid-sort-displayed-columns-menu-items
 tags: grid, columnmenu, menu, column, list, header, checkbox, sort
 ticketid: 1146769, 1384397
@@ -32,7 +32,7 @@ How can I sort the items of the displayed columns submenu?
 
 ## Solution
 
-A possible solution is to sort the li elements of the column menu within the [open](https://docs.telerik.com/kendo-ui/api/javascript/ui/menu/events/open) event of the Menu widget.
+A possible solution is to sort the li elements of the column menu within the [columnMenuInit](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the widget.
 
 ```dojo
     <div id="example">
@@ -79,44 +79,31 @@ A possible solution is to sort the li elements of the column menu within the [op
             },  {
               field: "ShipAddress",
               filterable: false
-            }
-                     ],
+            }],
             columnMenuInit:function(e){
-              var container = e.container;
-              var menu = container.find(".k-menu").data("kendoMenu");
-              menu.bind("open", function(e){
-                debugger
-                if($(e.item).hasClass("k-columns-item")){
-                  var list= container.find('.k-columns-item ul');
-                  var items = list.find('li');
+              var list= e.container.find('.k-columns-item ul')
+              var items = list.find('li');
 
-                  list.empty();
+              items.each(function(x,y){
+                $(y).removeClass('k-first k-last')
+              }) 
 
-                  items.each(function(x,y){
-                    $(y).removeClass('k-first k-last')
-                  });
+              items.sort(function(a,b){
+                a = $(a);
+                b = $(b);
 
-                  items.sort(function(a,b){
-                    a = $(a);
-                    b = $(b);
+                var firstText = a.find('input[data-field]').attr('data-field');
+                var secondText = b.find('input[data-field]').attr('data-field');
 
-                    var firstText = a.find('input[data-field]').attr('data-field');
-                    var secondText = b.find('input[data-field]').attr('data-field');
+                return ((firstText < secondText) ? -1 : ((firstText > secondText) ? 1 : 0));
+              })
 
+              items.first().addClass('k-first');
+              items.last().addClass('k-last');
 
-                    return ((firstText < secondText) ? -1 : ((firstText > secondText) ? 1 : 0));
-
-                  })
-
-                  items.first().addClass('k-first');
-                  items.last().addClass('k-last');
-
-
-                  items.each(function(y,x){
-                    list.append($(x));
-                  })
-                }
-              });
+              items.each(function(y,x){
+                list.append($(x));
+              })
             }
           });
         });

@@ -9,9 +9,7 @@ slug: howto_calculatetooltipcontentlength_tooltip
 
 By default, if the content is too little, the Tooltip width is going to be reduced, and if the displayed content can fit, the Tooltip width is not going to change. Therefore, in some scenarios this results in a Tooltip that is narrower than desired.
 
-The example below demonstrates how to calculate the width of a Kendo UI Tooltip on each opening and allow for a greater flexibility.
-
-###### Example
+The following example demonstrates how to calculate the width of a Kendo UI Tooltip on each opening and allow for a greater flexibility.
 
 ```dojo
     <style>
@@ -56,9 +54,6 @@ The example below demonstrates how to calculate the width of a Kendo UI Tooltip 
 
 ## See Also
 
-* [Content Property of the Tooltip](/api/javascript/ui/tooltip/configuration/content)
-* [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
-* [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
-* [How to Show Only If Text Overflows with Ellipsis]({% slug howto_showonlyiftextoverflowswithellipsis_tooltip %})
-
-For more runnable examples on the Kendo UI Tooltip, browse its [**How To** documentation folder]({% slug howto_calculatetooltipcontentlength_tooltip %}).
+* [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
+* [Using the API of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/api)
+* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)

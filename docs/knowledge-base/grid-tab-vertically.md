@@ -2,7 +2,7 @@
 title: Vertically Tab Cells in Editable Grid
 description: An example on how to vertically tab through the columns of the Kendo UI Grid.
 type: how-to
-page_title: Tab through Columns Vertically | Kendo UI Grid
+page_title: Tab through Columns Vertically | Kendo UI Grid for jQuery
 slug: grid-tab-vertically
 tags: grid, tab, editing, vertical
 ticketid: 1140359

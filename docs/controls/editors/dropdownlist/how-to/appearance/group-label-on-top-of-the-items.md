@@ -10,9 +10,9 @@ slug: howto_move_group_label_ontopof_items_dropdownlist
 
 The DropDownList provides an option for grouping its list items by certain criteria and showing the group labels and grouped items within the drop-down list.
 
-The following example demonstrates how to move the group label on top of the grouped items in a Kendo UI DropDownList. The approach is also applicable to the [ComboBox](http://demos.telerik.com/kendo-ui/combobox/index) and [MultiSelect](http://demos.telerik.com/kendo-ui/multiselect/index) widgets.
+The following example demonstrates how to move the group label on top of the grouped items in a Kendo UI DropDownList. The approach is also applicable to the [ComboBox](https://demos.telerik.com/kendo-ui/combobox/index) and [MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index) widgets.
 
-###### Example
+
 
 ```dojo
 <input id="customers" style="width: 400px" />
@@ -57,7 +57,7 @@ The following example demonstrates how to move the group label on top of the gro
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

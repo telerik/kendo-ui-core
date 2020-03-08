@@ -2,7 +2,7 @@
 title: Set Filter Dialog with Two or More Fields in Grid
 description: An example on how to configure the filter dialog of the Kendo UI Grid to show more than two fields.
 type: how-to
-page_title: Set Filter Dialog with More Than Two Fields | Kendo UI Grid
+page_title: Set Filter Dialog with More Than Two Fields | Kendo UI Grid for jQuery
 slug: grid-filter-dialog-with-more-than-two-fields
 tags: grid, filter, dialog, more, than, two, fields, multiple, filtering
 ticketid: 1147919
@@ -128,5 +128,5 @@ Manually change the content of the filter menu container and its logic by subscr
 
 ## See Also
 
-* [API Reference of the filterMenuInit Event](https://docs.telerik.com/kendo-ui/controls/layout/window/overview)
+* [API Reference of the filterMenuInit Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit)
 * [API Reference of the filterable.extra Property](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable.extra)

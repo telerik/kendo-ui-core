@@ -487,6 +487,23 @@ var __meta__ = { // jshint ignore:line
     }
 
     function bindToKNgModel(widget, scope, kNgModel) {
+        if(kendo.ui.DateRangePicker && widget instanceof kendo.ui.DateRangePicker){
+            var rangePickerModels = kNgModel.split(",");
+            var rangePickerStartModel = rangePickerModels[0].trim();
+            var rangePickerEndModel;
+
+            bindToKNgModel(widget._startDateInput, scope, rangePickerStartModel);
+            if (rangePickerModels[1]) {
+                rangePickerEndModel = rangePickerModels[1].trim();
+                bindToKNgModel(widget._endDateInput, scope, rangePickerEndModel);
+                widget.range({start:scope[rangePickerStartModel], end:scope[rangePickerEndModel] });
+            } else {
+                widget.range({start:scope[rangePickerStartModel], end: null });
+            }
+
+            return;
+        }
+
         if (typeof widget.value != "function") {
             $log.warn("k-ng-model specified on a widget that does not have the value() method: " + (widget.options.name));
             return;

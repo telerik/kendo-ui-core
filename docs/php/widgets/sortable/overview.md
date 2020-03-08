@@ -22,7 +22,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 **Step 2** Create a [Sortable](/api/php/Kendo/UI/Sortable), set its container, and customize the hint and placeholder of the widget.
 
-###### Example
+
 
         <?php
         $sortable = new \Kendo\UI\Sortable('#sortable-basic'); // select the container for the Sortable
@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 **Step 3** Output the Sortable by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $sortable->render();
@@ -40,7 +40,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Sorta
 
 **Step 4** Define the HTML markup and the hint/placeholder JavaScript functions.
 
-###### Example
+
 
         <ul id="sortable-basic">
             <li class="sortable">Papercut <span>3:04</span></li>
@@ -65,7 +65,7 @@ You can subscribe to all Sortable [events](/api/javascript/ui/sortable#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $sortable = new \Kendo\UI\Sortable('#sortable');
@@ -85,7 +85,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $sortable = new \Kendo\UI\Sortable('#sortable');
@@ -99,9 +99,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 <!--*-->
 ## Disable Hints
 
-The Sortable widget can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](http://api.jquery.com/jQuery.noop/)).
+The Sortable widget can operate without a hint. To disable the hint, set it to an empty function ([jQuery.noop](https://api.jquery.com/jQuery.noop/)).
 
-###### Example
+
 
         <?php
             $sortable = new \Kendo\UI\Sortable('#sortable-basic'); // select the container for the Sortable
@@ -116,9 +116,9 @@ The Sortable widget can operate without a hint. To disable the hint, set it to a
 
 ### Client-Side Instances
 
-You are able to reference an existing Sortable instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
+You are able to reference an existing Sortable instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [Sortable API](/api/javascript/ui/sortable#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $sortable = new \Kendo\UI\Sortable('#sortable');

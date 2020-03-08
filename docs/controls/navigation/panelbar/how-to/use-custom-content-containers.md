@@ -7,9 +7,7 @@ slug: howto_use_custom_content_containers_in_the_panelbar_widget
 
 # Use Custom Content Containers in the PanelBar
 
-The example below demonstrates how to use custom content containers in the Kendo UI PanelBar widget.
-
-###### Example
+The following example demonstrates how to use custom content containers in the Kendo UI PanelBar widget.
 
 ```dojo
     <style>
@@ -97,8 +95,6 @@ The example below demonstrates how to use custom content containers in the Kendo
 
 ## See Also
 
-* [PanelBar JavaScript API Reference](/api/javascript/ui/panelbar)
-* [Initialize the Grid inside a Hidden Container]({% slug appearance_kendoui_grid_widget %}#hidden-containers)
-* [JavaScript API Reference: Configure PanelBar Animations](/api/javascript/ui/panelbar/configuration/animation)
-
-For more runnable examples on the Kendo UI PanelBar widget, browse its [**How To** documentation folder]({% slug initialize_thegrid_panelbar_widget %}).
+* [Basic Usage of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/index)
+* [Using the API of the PanelBar (Demo)](https://demos.telerik.com/kendo-ui/panelbar/api)
+* [JavaScript API Reference of the PanelBar](/api/javascript/ui/panelbar)

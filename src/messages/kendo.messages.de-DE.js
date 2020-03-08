@@ -40,7 +40,9 @@
           "isnull": "Null ist",
           "isnotnull": "nicht Null ist",
           "isempty": "leer ist",
-          "isnotempty": "nicht leer ist"
+          "isnotempty": "nicht leer ist",
+          "isnullorempty": "Besitzt keinen Wert",
+          "isnotnullorempty": "Besitzt einen Wert"
         }
       });
   }
@@ -86,7 +88,9 @@
           "isnull": "Null ist",
           "isnotnull": "nicht Null ist",
           "isempty": "leer ist",
-          "isnotempty": "nicht leer ist"
+          "isnotempty": "nicht leer ist",
+          "isnullorempty": "Besitzt keinen Wert",
+          "isnotnullorempty": "Besitzt einen Wert"
         }
       });
   }
@@ -293,7 +297,7 @@
         "borderStyle": "Rahmenstil",
         "collapseBorders": "Collapse rahmen",
         "wrapText": "Texthülle",
-        "associateCellsWithHeaders": "Zellen mit header verbinden",
+        "associateCellsWithHeaders": "Header verbinden",
         "alignLeft": "Ausrichten links",
         "alignCenter": "Ausrichten zentriert",
         "alignRight": "Ausrichten rechts",

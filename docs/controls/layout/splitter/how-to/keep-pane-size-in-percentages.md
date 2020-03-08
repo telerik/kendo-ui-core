@@ -1,15 +1,13 @@
 ---
-title: Keep Pane Size in Percentages
-page_title: Keep Pane Size in Percentages | Kendo UI Splitter
+title: Keep Pane Size in Percentage Points
+page_title: Keep Pane Size in Percentage Points | Kendo UI Splitter
 description: "Learn how to keep the Kendo UI Splitter pane sizes in percentages upon user resize."
 slug: howto_keeppanesizepercentages_splitter
 ---
 
-# Keep Pane Size in Percentages
+# Keep Pane Size in Percentage Points
 
-The example below demonstrates how to keep the Kendo UI Splitter pane sizes in percentages upon user resizes.
-
-###### Example
+The following example demonstrates how to keep the Kendo UI Splitter pane sizes in percentages upon user resizes.
 
 ```dojo
     <div id="splitter" style="height: 400px">
@@ -24,16 +22,16 @@ The example below demonstrates how to keep the Kendo UI Splitter pane sizes in p
     <script>
       $(document).ready(function() {
         function onResize(e) {
-          // prevent endless recursion from resizes
+          // Prevent the endless recursion from resizes.
           if (!this.appliesSizes) {
             this.appliesSizes = true;
 
-            // calculate pane width
+            // Calculate the pane width.
             var element = this.element;
             var pane = element.find(".k-pane:first");
             var ratio = Math.ceil(pane.width() * 100 / element.width());
 
-            // set pane width in percentages
+            // Set the pane width in percentage points.
             this.size(pane, ratio + "%");
 
             this.appliesSizes = false;
@@ -53,7 +51,6 @@ The example below demonstrates how to keep the Kendo UI Splitter pane sizes in p
 
 ## See Also
 
-* [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
-* [How to Expand to 100% Height and Auto-Resize]({% slug howto_expandto100heightandautoresize_splitter %})
-
-For more runnable examples on the Kendo UI Splitter, browse its [**How To** documentation folder]({% slug howto_addautoresizingsplittertowindow_splitter %}).
+* [Basic Usage of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/index)
+* [Using the API of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/api)
+* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)

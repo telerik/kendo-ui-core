@@ -22,6 +22,7 @@ The predefined array values are:
 * `Refresh`
 * `Minimize`
 * `Maximize`
+* `Pin`
 
 #### Example
 
@@ -198,7 +199,7 @@ Specifies a URL or request options from where the Window will load its content.
 
 The template for the content of a Window. Returned data from the server will be given as the `data` of this template.
 
-If the returned data is JSON, the [`dataType`](http://api.jquery.com/jQuery.ajax/) parameter has to be passed so that the data gets parsed by jQuery.
+If the returned data is JSON, the [`dataType`](https://api.jquery.com/jQuery.ajax/) parameter has to be passed so that the data gets parsed by jQuery.
 
 If the URL contains a protocol, set `iframe` to `false`. Otherwise, the JSON response will be injected in the content area of the Window as is.
 
@@ -343,7 +344,7 @@ Explicitly states whether a content `iframe` will be created. For more informati
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
-      content: "http://www.telerik.com/",
+      content: "https://www.telerik.com/",
       iframe: true
     });
     </script>
@@ -1168,11 +1169,11 @@ Triggered when an Ajax request for content fails.
 
 ##### e.xhr `jqXHR`
 
-The XHR request object as returned from [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The XHR request object as returned from [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 ##### e.status `String`
 
-The status of the request as returned from [`jQuery.ajax`](http://api.jquery.com/jQuery.ajax/).
+The status of the request as returned from [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 #### Example - subscribing to the error event during initialization
 

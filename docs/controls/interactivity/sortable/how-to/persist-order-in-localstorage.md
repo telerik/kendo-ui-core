@@ -7,9 +7,7 @@ slug: howto_persistoderinlocalstorage_sortable
 
 # Persist Order in localStorage
 
-The example below demonstrates how to save the order of items in `localStorage` and restore it on page `load` in Kendo UI Sortable.
-
-###### Example
+The following example demonstrates how to save the order of items in `localStorage` and restore it on page `load` in Kendo UI Sortable.
 
 ```dojo
     <div id="sortable"></div>
@@ -27,28 +25,28 @@ The example below demonstrates how to save the order of items in `localStorage` 
             html;
 
         if (localStorageSupport) {
-            //retrieve local storage data if such is available, else use the default order
+            // Retrieve the local storage data if such is available. Otherwise, use the default order.
             data = JSON.parse(localStorage.getItem("sortableData")) || initialData;
         } else {
             alert("your browser does not support local storage");
             data = initialData;
         }
 
-        html = kendo.render(kendo.template($("#tmp").html()), data); //render the HTML with the data
-        $("#sortable").html(html); //append the HTML to the Sortable container
+        html = kendo.render(kendo.template($("#tmp").html()), data); // Render the HTML with the data.
+        $("#sortable").html(html); // Append the HTML to the Sortable container.
 
-        $("#sortable").kendoSortable({ //initialize the sortable widget
+        $("#sortable").kendoSortable({ // Initialize the Sortable.
             filter: ".sortable",
             change: function(e) {
-                var item = data.splice(e.oldIndex, 1)[0]; //remove the item that has changed its order
-                data.splice(e.newIndex, 0, item); //add the item back using the newIndex
+                var item = data.splice(e.oldIndex, 1)[0]; // Remove the item that has changed its order.
+                data.splice(e.newIndex, 0, item); // Add the item back using the newIndex.
 
-                localStorage.setItem("sortableData", kendo.stringify(data)); //set the updated data in the local storage
+                localStorage.setItem("sortableData", kendo.stringify(data)); // Set the updated data in the local storage.
             }
         });
 
         $("#reset").click(function() {
-            localStorage.clear(); //clear the local storage
+            localStorage.clear(); // Clear the local storage.
             alert("Local storage is cleared. Please reload the page!");
         });
     </script>
@@ -76,10 +74,5 @@ The example below demonstrates how to save the order of items in `localStorage` 
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
-* [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
-* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

@@ -34,10 +34,10 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="daterangepicker"></div>
@@ -99,14 +99,14 @@ settings are available for the **depth** value:
 * `"decade"` - Shows the years of the decade.
 * `"century"` - Shows the decades from the century.
 
-> Note the option will not be applied if **start** option is *lower* than **depth**. Always set both **start** and **depth** options.
+> Note the option will not be applied if **start** option is *lower* than **depth**. Always set both **start** and **depth** options. In order to be able to select dates for the range you need to set the `depth` to `month`.
 
 #### Example - set navigation depth of the calendar popup
 
     <div id="daterangepicker"></div>
     <script>
     $("#daterangepicker").kendoDateRangePicker({
-        depth: "year",
+        depth: "month",
         start: "year"
     });
     </script>
@@ -153,6 +153,28 @@ you can also pass a function that will be dynamically resolved for each date of 
 
 note that a check for an empty `date` is needed, as the widget can work with a null value as well.
 
+### endField `String`*(default: "")*
+
+Specifies the end field name for model binding.
+
+#### Example - specify the initial view, which calendar renders
+
+	<div id="example">
+		<div id="daterangepicker" title="daterangepicker"></div>
+		<script>
+			$(document).ready(function () {
+				$("#daterangepicker").kendoDateRangePicker({
+					endField: "endField"
+				});
+
+				var viewModel = kendo.observable({
+					endField: new Date()
+				});
+				kendo.bind($("#example"), viewModel);
+			});
+		</script>
+	</div>
+	
 ### footer `String|Function`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -217,7 +239,7 @@ Allows localization of the strings that are used in the widget.
     $("#daterangepicker").kendoDateRangePicker({
         "messages": {
             "startLabel": "The Start",
-            "startLabel": "The End"
+            "endLabel": "The End"
         }
      })
     </script>
@@ -433,6 +455,28 @@ The following settings are available for the **start** value:
             start: "year"
         });
     </script>
+	
+### startField `String`*(default: "")*
+
+Specifies the start field name for model binding.
+
+#### Example - specify the initial view, which calendar renders
+
+	<div id="example">
+		<div id="daterangepicker" title="daterangepicker"></div>
+		<script>
+			$(document).ready(function () {
+				$("#daterangepicker").kendoDateRangePicker({
+					startField: "startField"
+				});
+
+				var viewModel = kendo.observable({
+					startField: new Date()
+				});
+				kendo.bind($("#example"), viewModel);
+			});
+		</script>
+	</div>
 
 ## Fields
 

@@ -28,7 +28,7 @@ The `input` elements with a picker use the native one from the current platform 
 
 The example below demonstrates how to use the native scroller in all Views that require a text entry.
 
-###### Example
+
 
     <div data-role="view" data-use-native-scrolling="true">
         <form action="./index.html">
@@ -58,7 +58,7 @@ The example below demonstrates how to use the native scroller in all Views that 
 
 Since a number of keyboard features in Android are dependent on the fact that the fake native input rendered on top is visible and on the screen, if you encounter such issues and want to work around them, disable the integrated workaround by adding this CSS after the Kendo UI one, or do it for a specific input only.
 
-###### Example
+
 
     .km-android input
     {
@@ -67,7 +67,7 @@ Since a number of keyboard features in Android are dependent on the fact that th
 
 As of Kendo UI Q3 2012, the needed rules should have more specificity and different selectors, as shown below.
 
-###### Example
+
 
     .km-root .km-on-android input
     {
@@ -78,7 +78,7 @@ As of Kendo UI Q3 2012, the needed rules should have more specificity and differ
 >
 > As of Kendo UI Q2 2013, the Android 2 fake input workaround has been removed from the common CSS as it causes multiple issues with phone keyboards. Add the rule shown in the example below to your CSS to return it.
 
-###### Example
+
 
     .km-on-android.km-2 .km-list > li,
     .km-on-android.km-3 .km-list > li
@@ -90,7 +90,7 @@ As of Kendo UI Q3 2012, the needed rules should have more specificity and differ
 
 Releases before Kendo UI Q2 2013 require the following rule to disable the Android 2 workaround.
 
-###### Example
+
 
     .km-root .km-on-android .km-list > li
     {
@@ -101,7 +101,7 @@ Releases before Kendo UI Q2 2013 require the following rule to disable the Andro
 
 Releases before Kendo UI Q3 2012 require the following rule to disable the Android 2 workaround instead.
 
-###### Example
+
 
     .km-android .km-list > li
     {
@@ -116,7 +116,7 @@ Releases before Kendo UI Q3 2012 require the following rule to disable the Andro
 
 To activate this feature, set the `km-required` class to the `label`. This class renders asterisk (`*`) symbol right after the `label` content.
 
-###### Example
+
 
 	<label class="km-required km-label-above">First Name
         <input value="Eduardo" type="text" />
@@ -130,7 +130,7 @@ To activate this feature, set the `km-required` class to the `label`. This class
 
 There could be more than one input in a row. This outcome requires explicit width and the `km-inline-field` class set to the label.
 
-###### Example
+
 
     <label class="km-inline-field km-label-above" style="width: 200px;">
     	Phone Number
@@ -152,7 +152,7 @@ There could be more than one input in a row. This outcome requires explicit widt
 
 Legend tags can have buttons inside. To achieve this outcome set the `km-legend-button` class.
 
-###### Example
+
 
 	<fieldset>
         <legend><a href="#" class="km-legend-button">+ Email</a></legend>
@@ -167,7 +167,7 @@ Legend tags can have buttons inside. To achieve this outcome set the `km-legend-
 
 Legend can also be used as a first level Label.
 
-###### Example
+
 
 	<fieldset>
         <legend>Volume</legend>
@@ -182,7 +182,7 @@ Legend can also be used as a first level Label.
 
 Labels can only be icons. To get this outcome set the `km-icon-label` and `.km- + data-icon name` classes to the label.
 
-###### Example
+
 
 	<label class="km-icon-label k-i-calendar">
         <input value="Meeting" type="text" />
@@ -196,7 +196,7 @@ Labels can only be icons. To get this outcome set the `km-icon-label` and `.km- 
 
 Labels can be positioned above the fields. To achieve this outcome set the `km-label-above` class to the label.
 
-###### Example
+
 
     <label class="km-label-above">First Name
     	<input value="Eduardo" type="text" />
@@ -212,7 +212,7 @@ The Nova theme provides customized presentation for standalone checkboxes and ra
 
 The example below demonstrates how to show a standalone checkbox in the Nova theme.
 
-###### Example
+
 
     <input type="checkbox" class="km-checkbox" id="chocolate" />
     <label class="km-checkbox-label" for="chocolate">Chocolate</label>
@@ -221,7 +221,7 @@ The example below demonstrates how to show a standalone checkbox in the Nova the
 
 The example below demonstrates how to show a standalone radio button in the Nova theme.
 
-###### Example
+
 
     <input type="radio" class="km-radio" name="sex" id="sex1" checked="checked"/>
     <label class="km-radio-label" class="km-label" for="sex1" >Male</label>

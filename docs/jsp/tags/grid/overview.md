@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 2** Create a new action method and pass the **Products** table to the View.
 
-###### Example
+
 
         @RequestMapping(value = "/local-data", method = RequestMethod.GET)
         public String index(Locale locale, Model model) {
@@ -31,13 +31,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a server-bound Grid.
 
-###### Example
+
 
         <kendo:grid name="productGrid" pageable="true">
             <kendo:grid-columns>
@@ -55,7 +55,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Grid 
 
 You can subscribe to all [events exposed by Kendo UI Grid](/api/javascript/ui/grid#events) by the handler name.
 
-###### Example
+
 
     <kendo:grid name="productGrid" dataBound="productGrid_dataBound" change="productGrid_change">
         <kendo:dataSource data="${data}" pageSize="10"/>
@@ -75,9 +75,9 @@ You can subscribe to all [events exposed by Kendo UI Grid](/api/javascript/ui/gr
 
 ### Existing Instances
 
-You are able to reference an existing Grid instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
+You are able to reference an existing Grid instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Grid API](/api/javascript/ui/grid#methods) to control its behavior.
 
-###### Example
+
 
     //Put this after your Kendo Grid tag declaration
     <script>

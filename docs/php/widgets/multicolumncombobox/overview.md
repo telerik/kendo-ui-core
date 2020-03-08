@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 2** Create an array to which the MultiColumnComboBox will be bound.
 
-###### Example
+
 
         <?php
         $data = array(
@@ -38,7 +38,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 3** Create a [data source](/api/php/Kendo/Data/DataSource) and set its [`data`](/api/php/Kendo/Data/DataSource#data).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 4** Create an [MultiColumnComboBox](/api/php/Kendo/UI/MultiColumnComboBox), configure its [`dataTextField`](/api/php/Kendo/UI/MultiColumnComboBox#datatextfield) [`dataValueField`](/api/php/Kendo/UI/MultiColumnComboBox#datavaluefield) options and set its [`DataSource`](/api/php/Kendo/UI/AutoComplete#datasource).
 
-###### Example
+
 
         <?php
         $dataSource = new \Kendo\Data\DataSource();
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Multi
 
 **Step 5** Output the MultiColumnComboBox by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $comboBox->render();
@@ -75,7 +75,7 @@ You can subscribe to all MultiColumnComboBox [events](https://docs.telerik.com/k
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $comboBox = new \Kendo\UI\MultiColumnComboBox('multicolumncombobox');
@@ -95,7 +95,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to provide inline JavaScript code.
 
-###### Example
+
 
         <?php
         $comboBox = new \Kendo\UI\MultiColumnComboBox('multicolumncombobox');
@@ -111,9 +111,9 @@ The example below demonstrates how to provide inline JavaScript code.
 
 ### Client-Side Instances
 
-You can reference the client-side Kendo UI MultiColumnComboBox instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [MultiColumnComboBox API](/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
+You can reference the client-side Kendo UI MultiColumnComboBox instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [MultiColumnComboBox API](/api/javascript/ui/multicolumncombobox#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $comboBox = new \Kendo\UI\MultiColumnComboBox('multicolumncombobox');

@@ -13,8 +13,6 @@ The aim of the example is to produce a PNG image of a section of the page at 4x 
 
 For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation/methods/scale).
 
-###### Example
-
 ```dojo
     <button class='export-img k-button'>Export as Image</button>
     <div class="content">

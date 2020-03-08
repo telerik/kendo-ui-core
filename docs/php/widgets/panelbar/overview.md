@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Panel
 
 **Step 2** Create a [PanelBar](/api/php/Kendo/UI/PanelBar).
 
-###### Example
+
 
         <?php
         $panelbar = new \Kendo\UI\PanelBar('panelbar');
@@ -46,7 +46,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Panel
 
 **Step 3** Output the PanelBar by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $panelbar->render();
@@ -60,7 +60,7 @@ You can subscribe to all PanelBar [events](/api/javascript/ui/panelbar#events).
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $panelbar = new \Kendo\UI\PanelBar('panelbar');
@@ -80,7 +80,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $panelbar = new \Kendo\UI\PanelBar('panelbar');
@@ -96,9 +96,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing PanelBar instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [PanelBar API](/api/javascript/ui/panelbar#methods) to control its behavior.
+You are able to reference an existing PanelBar instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [PanelBar API](/api/javascript/ui/panelbar#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $panelbar = new \Kendo\UI\PanelBar('panelbar');

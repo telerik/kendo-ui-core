@@ -7,15 +7,12 @@ slug: howto_move_popup_notifications_onwindow_resize_notification
 
 # Move Popup Notifications on Window Resize
 
-The example below demonstrates how to move popup notifications on browser window resize, so that they remain within the viewport boundaries.
+The following example demonstrates how to move popup notifications on browser window resize, so that they remain within the viewport boundaries.
 
 The code from the snippet executes the following actions:
-
 1. Ensures that the `timeOutMoveFunction` function is executed once, some time after browser window resizing is complete.
 1. Calculates the expected position of the first (oldest) notification popup and compare it with the current position.
 1. Moves all notification popups, according to the discrepancy derived from the previous point.
-
-###### Example
 
 ```dojo
     <div id="example">
@@ -55,11 +52,11 @@ The code from the snippet executes the following actions:
             if (allNotificationPopups[0]) {
               var firstPopupInstance = allNotificationPopups.first().data("kendoPopup");
 
-              // calculate the expected notification popup position, according to the widget settings and popup size
+              // Calculate the expected Notification popup position according to the widget settings and popup size.
               var x = $(window).width() - firstPopupInstance.element.width() - notification.options.position.right;
               var y = $(window).height() - firstPopupInstance.element.height() - notification.options.position.bottom;
 
-              // compare the expected and actual popup position
+              // Compare the expected and actual popup position.
               var diff = {
                 top: y - parseInt(firstPopupInstance.wrapper.css("top"), 10),
                 left: x - parseInt(firstPopupInstance.wrapper.css("left"), 10)
@@ -67,7 +64,7 @@ The code from the snippet executes the following actions:
 
               firstPopupInstance.wrapper.css({top: y, left: x});
 
-              // move all notification popup, except the first one
+              // Move all notification popups except for the first one.
               allNotificationPopups.not(allNotificationPopups.first()).each(function(){
                 var element = $(this);
                 element.parent().css({
@@ -78,7 +75,7 @@ The code from the snippet executes the following actions:
             }
           };
 
-          // attach a window.resize handler, which will be executed once, after the browser window resizing is complete
+          // Attach a window.resize handler, which will be executed once, after the browser window resizing is complete.
           $(window).resize(function() {
             if (timeOut != -1) {
               window.clearTimeout(timeOut);
@@ -94,6 +91,6 @@ The code from the snippet executes the following actions:
 
 ## See Also
 
-* [Notification JavaScript API Reference](/api/javascript/ui/notification)
-* [How to Stack Static Notifications to the Left or Right]({% slug howto_stack_static_tothe_leftor_right_notification %})
-* [How to Move Visible Notifications after Hiding Others]({% slug howto_move_notifications_after_hiding_others %})
+* [Basic Usage of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/index)
+* [Using the API of the Notification (Demo)](https://demos.telerik.com/kendo-ui/notification/api)
+* [JavaScript API Reference of the Notification](/api/javascript/ui/notification)

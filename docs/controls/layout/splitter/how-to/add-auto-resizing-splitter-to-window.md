@@ -11,7 +11,6 @@ To see the example on how to add a Kendo UI Splitter that resizes automatically 
 
 ## See Also
 
-* [Splitter JavaScript API Reference](/api/javascript/ui/splitter)
-* [How to Keep Pane Size in Percentages]({% slug howto_keeppanesizepercentages_splitter %})
-
-For more runnable examples on the Kendo UI Splitter, browse its [**How To** documentation folder]({% slug howto_expandto100heightandautoresize_splitter %}).
+* [Basic Usage of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/index)
+* [Using the API of the Splitter (Demo)](https://demos.telerik.com/kendo-ui/splitter/api)
+* [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)

@@ -2,7 +2,7 @@
 title: Sort Scheduler Events in Descending Order
 description: An example on how to sort events in a descending order for the Kendo UI Scheduler AgendaView.
 type: how-to
-page_title: Sort Events in Descending Order | Kendo UI Scheduler
+page_title: Sort Events in Descending Order | Kendo UI Scheduler for jQuery
 slug: scheduler-agenda-view-sort-events-descending
 tags: kendo, kendo-ui, scheduler, agenda, sort, events, descending
 ticketid: 1153690
@@ -29,7 +29,7 @@ How can I sort the events in the Scheduler agenda view in a descending order?
 
 ## Solution
 
-Extend the AgendaView of the Scheduler and implement a custom render function to require the events in a descending order.
+Extend the **Agenda** view of the Scheduler and implement a custom render function to require the events in a descending order.
 
 ```dojo
 <div id="scheduler"></div>

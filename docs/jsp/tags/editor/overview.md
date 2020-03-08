@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 **Step 2** Create a new action method to render the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `editor` tag.
 
-###### Example
+
 
         <kendo:editor name="editor">
         </kendo:editor>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Edito
 
 You can subscribe to all [events exposed by Kendo UI Editor](/api/javascript/ui/editor#events) by the handler name.
 
-###### Example
+
 
     <kendo:editor name="editor" change="editor_change"></kendo:editor>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI Editor](/api/javascript/ui/
 
 ### Existing Instances
 
-You are able to reference an existing Editor instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
+You are able to reference an existing Editor instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Editor API](/api/javascript/ui/editor#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Editor tag declaration
     <script>

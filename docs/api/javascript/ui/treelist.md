@@ -14,12 +14,11 @@ Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false` the widget will not bind to the specified DataSource during initialization. In this case data binding will occur when the [change](/api/javascript/data/datasource/events/change) event of the
-DataSource is fired. By default the widget will bind to the DataSource specified in the configuration.
+If set to `false`, the TreeList will not bind to the specified DataSource during initialization. In this case, data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the DataSource fires. By default, the TreeList will bind to the DataSource that is specified in the configuration.
 
-> Setting `autoBind` to `false` is useful when multiple widgets are bound to the same DataSource. Disabling automatic binding ensures that the shared DataSource doesn't make more than one request to the remote service.
+> Setting `autoBind` to `false` is useful when multiple widgets are bound to the same DataSource. Disabling automatic binding ensures that the shared DataSource makes a single request to the remote service.
 
-#### Example - disable automatic binding
+#### Example - disabling automatic binding
 
     <div id="treelist"></div>
     <button id="btn">Bind TreeList</button>
@@ -59,10 +58,10 @@ DataSource is fired. By default the widget will bind to the DataSource specified
 
 ### columns `Array`
 
-The configuration of the treelist columns. An array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
-[field](/api/javascript/ui/treelist#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
+The configuration of the TreeList columns whcih represents an array of JavaScript objects or strings. JavaScript objects are interpreted as column configurations. Strings are interpreted as the
+[`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the column is bound. The TreeList will create a column for each item of the array.
 
-#### Example - specify treelist columns as array of strings
+#### Example - specifyinging the columns of the TreeList as an array of strings
 
     <div id="treelist"></div>
     <script>
@@ -78,7 +77,7 @@ The configuration of the treelist columns. An array of JavaScript objects or str
       });
     </script>
 
-#### Example - specify treelist columns as array of objects
+#### Example - specifyinging the columns of the TreeList as an array of objects
 
     <div id="treelist"></div>
     <script>
@@ -96,11 +95,11 @@ The configuration of the treelist columns. An array of JavaScript objects or str
 
 ### columns.attributes `Object`
 
-HTML attributes of the table cell (`<td>`) rendered for the column.
+The HTML attributes of the table cell (`<td>`) that is rendered for the column.
 
-> HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
+> Quote all HTML attributes which are JavaScript keywords (for example, `class`).
 
-#### Example - specify column HTML attributes
+#### Example - specifyinging the column HTML attributes
 
     <div id="treelist"></div>
     <script>
@@ -126,16 +125,15 @@ HTML attributes of the table cell (`<td>`) rendered for the column.
         color: red;
       }
     </style>
-
-The table cells would look like this: `<td class="name-cell" style="text-align: right">...</td>`.
+    // The table cells look like `<td class="name-cell" style="text-align: right">...</td>`.
 
 ### columns.columns `Array`
 
-The columns which should be rendered as child columns under this group column header.
+The columns which will be rendered as child columns under this group column header.
 
-**Note that group column cannot be data bound and supports limited number of bound column settings - such as title, locked
+> Group columns cannot be data-bound and support a limited number of bound column settings such as title or locked.
 
-#### Example - set column group column for displaying multicolumn headers
+#### Example - setting the column group column for displaying multicolumn headers
 
     <div id="treelist"></div>
     <script>
@@ -164,23 +162,21 @@ The columns which should be rendered as child columns under this group column he
 
 ### columns.command `Array`
 
-The configuration of the column command(s). If set the column would display a button for every command. Commands can be custom or built-in ("edit", "createChild" or "destroy"):
+The configuration of the column commands. If set, the column will display a button for every command. Commands can be custom or built-in
 
-* The "edit" built-in command switches the current table row to edit mode.
+The built-in commands are:
 
-* The "createChild" built-in command adds a new child item to the current table row and switches to edit mode.
+* `edit` - Switches the current table row to edit mode. Supports the `inline` and `popup` edit modes.
+* `createChild`- Adds a new child item to the current table row and switches to edit mode.
+* `destroy` - Removes the data item to which the current table row is bound.
 
-* The "destroy" built-in command removes the data item to which the current table row is bound.
+Custom commands are supported by specifying the [`click`](/api/javascript/ui/treelist#configuration-columns.command.click) option.
 
-Custom commands are supported by specifying the [click](/api/javascript/ui/treelist#configuration-columns.command.click) option.
+> * Each custom command requires you to explicitly specify its [`name`](/api/javascript/ui/treelist/configuration/columns.command.name).
+> * A command column cannot be [`expandable`](/api/javascript/ui/treelist#configuration-columns.expandable).
+> * The built-in commands work only if editing is enabled through the [`editable`](/api/javascript/ui/treelist#configuration-editable) option and the DataSource of the TreeList is configured for [CRUD operations](https://docs.telerik.com/kendo-ui/framework/datasource/crud).
 
-> Each custom command requires you to explicitly specify its [name](/api/javascript/ui/treelist/configuration/columns.command.name).
->
-> A command column cannot be [expandable](/api/javascript/ui/treelist#configuration-columns.expandable).
->
-> The built-in "edit", "createChild" and "destroy" commands work *only* if editing is enabled via the [editable](/api/javascript/ui/treelist#configuration-editable) option, and the TreeList DataSource is configured for [CRUD operations](http://docs.telerik.com/kendo-ui/framework/datasource/crud). The "edit" command supports "inline" and "popup" editing modes.
-
-#### Example - set command as array of strings
+#### Example - setting the command as an array of strings
 
       <div id="treelist"></div>
 
@@ -234,7 +230,7 @@ Custom commands are supported by specifying the [click](/api/javascript/ui/treel
           });
       </script>
 
-#### Example - set command as array of objects
+#### Example - setting the command as an array of objects
 
     <div id="treelist"></div>
     <script>
@@ -263,9 +259,9 @@ Custom commands are supported by specifying the [click](/api/javascript/ui/treel
 
 ### columns.command.className `String`
 
-The CSS class applied to the command button.
+The CSS class that is applied to the command button.
 
-#### Example - set the CSS class of the command
+#### Example - setting the CSS class of the command
 
     <div id="treelist"></div>
     <script>
@@ -296,9 +292,9 @@ The CSS class applied to the command button.
 
 ### columns.command.imageClass `String`
 
-The CSS class applied to the icon span of the command button.
+The CSS class that is applied to the icon span of the command button.
 
-#### Example - set the CSS class of the command icon
+#### Example - setting the CSS class of the command icon
 
     <div id="treelist"></div>
     <script>
@@ -323,11 +319,9 @@ The CSS class applied to the icon span of the command button.
 
 ### columns.command.click `Function`
 
-The JavaScript function executed when the user clicks the command button. The function receives a [jQuery Event](http://api.jquery.com/category/events/event-object/) as an argument.
+The JavaScript function that is executed when the user clicks the command button. The function receives a [jQuery event](https://api.jquery.com/category/events/event-object/) as an argument. The function context that is available through the `this` keyword will be set to the TreeList instance.
 
-The function context (available via the `this` keyword) will be set to the treelist instance.
-
-#### Example - handle the click event of the custom command button
+#### Example - handling the click event of the custom command button
 
     <div id="treelist"></div>
     <script>
@@ -340,7 +334,7 @@ The function context (available via the `this` keyword) will be set to the treel
               name: "details",
               text: "Details",
               click: function(e) {
-                // e.target is the DOM element representing the button
+                // e.target is the DOM element which represents the button
                 var tr = $(e.target).closest("tr"); // get the current table row (tr)
                 // get the data bound to the current table row
                 var data = this.dataItem(tr);
@@ -358,9 +352,9 @@ The function context (available via the `this` keyword) will be set to the treel
 
 ### columns.command.name `String`
 
-The name of the command. The built-in command names are "edit", "createChild" and "destroy". Check the [`columns.command`](/api/javascript/ui/treelist#configuration-columns.command) section for additional important information. When set to a custom value, the `name` is rendered as a `data-command` attribute.
+The name of the command. Commands can be built-in ("edit", "createChild" and "destroy") or custom. When set to a custom value, the `name` is rendered as a `data-command` attribute. For more information, refer to the [`columns.command`](/api/javascript/ui/treelist#configuration-columns.command) section.
 
-#### Example - set the command name
+#### Example - setting the command name
 
     <div id="treelist"></div>
     <script>
@@ -385,9 +379,9 @@ The name of the command. The built-in command names are "edit", "createChild" an
 
 ### columns.command.text `String`
 
-The text displayed by the command button. If not set the [name](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text.
+The text that is displayed by the command button. If not set, the [`name`](/api/javascript/ui/treelist#configuration-columns.command.name) option is used as the button text.
 
-#### Example - customize the text of the command
+#### Example - customizing the text of the command
 
     <div id="treelist"></div>
     <script>
@@ -411,9 +405,9 @@ The text displayed by the command button. If not set the [name](/api/javascript/
 
 ### columns.editable `Function`
 
-The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
+The JavaScript function that is executed when the cell or row is about to be opened for editing. The returned result will determine whether an editor for the column will be created.
 
-#### Example - conditionally edit a cell
+#### Example - conditionally editing a cell
 
     <div id="treelist"></div>
     <script>
@@ -439,17 +433,16 @@ The JavaScript function executed when the cell/row is about to be opened for edi
 
 ### columns.editor `Function`
 
-Provides a way to specify a custom editing UI for the column. Use the `container` parameter to create the editing UI.
+Provides a way to specify a custom editing UI for the column. To create the editing UI, use the `container` parameter.
 
-> The editing UI should contain an element that has a `name` HTML attribute set and that attribute value should match the [field](/api/javascript/ui/treelist#configuration-columns.field) name.
-
-> Validation settings defined in the `model.fields` configuration will **not** be applied automatically. In order for the validation to work, **the developer is responsible for attaching the corresponding validation attributes to the editor input**. In case the custom editor is a widget, the developer can [customize the validation warning tooltip position](/framework/validator/overview#customizing-the-tooltip-position) to avoid visual issues.
+> * The editing UI has to contain an element with a set `name` HTML attribute. The attribute value has to match the [`field`](/api/javascript/ui/treelist#configuration-columns.field) name.
+> * The validation settings that are defined in the `model.fields` configuration will not be applied automatically. In order for the validation to work, you (the developer) are responsible for attaching the corresponding validation attributes to the editor input. If the custom editor is a widget, to avoid visual issues, you can [customize the tooltip position of the validation warning](/framework/validator/overview#customizing-the-tooltip-position).
 
 #### Parameters
 
 ##### container `jQuery`
 
-The jQuery object representing the container element.
+The jQuery object that represents the container element.
 
 ##### options `Object`
 
@@ -459,13 +452,13 @@ The name of the field to which the column is bound.
 
 ##### options.format `String`
 
-The format string of the column specified via the [format](/api/javascript/ui/treelist#configuration-columns.format) option.
+The format string of the column that is specified through the [`format`](/api/javascript/ui/treelist#configuration-columns.format) option.
 
 ##### options.model `kendo.data.TreeListModel`
 
 The model instance to which the current table row is bound.
 
-#### Example - create a custom column editor using the Kendo UI AutoComplete
+#### Example - creating a custom column editor using the Kendo UI AutoComplete
 
     <div id="treelist"></div>
     <script>
@@ -502,7 +495,7 @@ The model instance to which the current table row is bound.
       });
     </script>
 
-#### Example - create a custom column editor with validation
+#### Example - creating a custom column editor with validation
 
     <div id="treelist"></div>
     <script>
@@ -541,9 +534,9 @@ The model instance to which the current table row is bound.
 
 ### columns.encoded `Boolean` *(default: true)*
 
-If set to `true` the column value will be HTML-encoded before it is displayed. If set to `false` the column value will be displayed as is. By default the column value is HTML-encoded.
+If set to `true`, the column value will be HTML-encoded before it is displayed. If set to `false`, the column value will be displayed as is. By default, the column value is HTML-encoded.
 
-#### Example - prevent HTML encoding
+#### Example - preventing HTML encoding
 
     <div id="treelist"></div>
     <script>
@@ -563,11 +556,11 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 
 ### columns.expandable `Boolean` *(default: false)*
 
-If set to `true` the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.
+If set to `true`, the column will show the icons that are used for expanding and collapsing child rows. By default, the first column of the TreeList is expandable.
 
 > An expandable column cannot hold [commands](/api/javascript/ui/treelist#configuration-columns.command).
 
-#### Example - make the second column expandable
+#### Example - making the second column expandable
 
     <div id="treeList"></div>
     <script>
@@ -588,9 +581,10 @@ If set to `true` the column will show the icons that are used for expanding and 
 ### columns.field `String`
 
 The field to which the column is bound. The value of this field is displayed by the column during data binding.
-**The field name should be a valid Javascript identifier and should contain only alphanumeric characters (or "$" or "_"), and may not start with a digit.**
 
-#### Example - specify the column field
+> The field name has to be a valid Javascript identifier, has to contain only alphanumeric characters, `$`, or `_`, and must not start with a digit.
+
+#### Example - specifyinging the column field
 
     <div id="treelist"></div>
     <script>
@@ -610,12 +604,10 @@ The field to which the column is bound. The value of this field is displayed by 
 
 ### columns.filterable `Boolean|Object` *(default: true)*
 
-If set to `true` a filter menu will be displayed for this column when filtering is enabled. If set to `false` the filter menu will not be displayed. By default a filter menu is displayed
-for all columns when filtering is enabled via the [filterable](/api/javascript/ui/treelist#configuration-filterable) option.
+If set to `true` and if filtering is enabled, a filter menu will be displayed for this column. If set to `false`, the filter menu will not be displayed. By default, a filter menu is displayed
+for all columns when filtering is enabled through the [`filterable`](/api/javascript/ui/treelist#configuration-filterable) option. Can be set to a JavaScript object which represents the filter menu configuration.
 
-Can be set to a JavaScript object which represents the filter menu configuration.
-
-#### Example - disable filtering
+#### Example - disabling filtering
 
     <div id="treelist"></div>
     <script>
@@ -634,9 +626,9 @@ Can be set to a JavaScript object which represents the filter menu configuration
 
 ### columns.filterable.ui `String|Function`
 
-The `role` [data attribute](/framework/data-attribute-initialization) of the widget used in the filter menu or a JavaScript function which initializes that widget.
+The `role` [data attribute](/framework/data-attribute-initialization) of the widget that is used in the filter menu, or a JavaScript function which initializes that widget.
 
-#### Example - specify the filter UI as a string
+#### Example - specifyinging the filter UI as a string
 
     <div id="treelist"></div>
     <script>
@@ -668,7 +660,7 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
       });
     </script>
 
-#### Example - initialize the filter UI
+#### Example - initializing the filter UI
 
     <div id="treelist"></div>
     <script>
@@ -704,17 +696,17 @@ The `role` [data attribute](/framework/data-attribute-initialization) of the wid
 
 ### columns.footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the footer table cell for the column.
+The [`template`](/api/javascript/kendo/methods/template) which renders the footer table cell for the column.
 
-The fields which can be used in the template are:
+The following fields can be used in the template:
 
-* average - the value of the "average" aggregate (if specified)
-* count - the value of the "count" aggregate (if specified)
-* max - the value of the "max" aggregate (if specified)
-* min - the value of the "min" aggregate (if specified)
-* sum - the value of the "sum" aggregate (if specified)
+* `average` - The value of the `average` aggregate (if specified).
+* `count` - The value of the `count` aggregate (if specified).
+* `max` - The value of the `max` aggregate (if specified).
+* `min` - The value of the `min` aggregate (if specified).
+* `sum` - The value of the `sum` aggregate (if specified).
 
-#### Example - specify column footer template
+#### Example - specifyinging a column footer template
 
     <div id="treeList"></div>
     <script>
@@ -741,12 +733,11 @@ The fields which can be used in the template are:
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
-[custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the `{0:format}` form where `format` is a [standard number format](/api/javascript/kendo#standard-number-formats), [custom number format](/api/javascript/kendo#custom-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
 
-> The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
+> The [`kendo.format`](/api/javascript/kendo/methods/format) function is used to format the value.
 
-#### Example - specify the column format string
+#### Example - specifyinging the column format string
 
     <div id="treelist"></div>
     <script>
@@ -767,11 +758,11 @@ The format that is applied to the value before it is displayed. Takes the form "
 
 ### columns.headerAttributes `Object`
 
-HTML attributes of the table header cell (`<th>`) rendered for the column.
+The HTML attributes of the table header cell (`<th>`) that is rendered for the column.
 
-> HTML attributes which are JavaScript keywords (e.g. *class*) must be quoted.
+> Quote the HTML attributes which are JavaScript keywords (for example, `class`).
 
-#### Example - specify column header HTML attributes
+#### Example - specifyinging column header HTML attributes
 
     <div id="treeList"></div>
     <script>
@@ -792,17 +783,16 @@ HTML attributes of the table header cell (`<th>`) rendered for the column.
         dataSource: dataSource
       });
     </script>
+    // The table headers will look like `<th class="name-header" style="text-align: right">...</th>`.
 
-The table headers would look like this: `<th class="name-header" style="text-align: right">...</th>`.
 
 ### columns.headerTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](/api/javascript/ui/treelist/configuration/columns.title) column option
-is displayed in the column header cell.
+The [`template`](/api/javascript/kendo/methods/template) which renders the column header content. By default, the value of the [`title`](/api/javascript/ui/treelist/configuration/columns.title) column option is displayed in the column header cell.
 
-> If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result the template **must** contain only inline elements.
+> If sorting is enabled, the column header content will be wrapped in an `<a>` element. As a result, the template must contain only inline elements.
 
-#### Example - column header template as a string
+#### Example - defining the column header template as a string
 
     <div id="treelist"></div>
     <script>
@@ -822,10 +812,9 @@ is displayed in the column header cell.
 
 ### columns.minScreenWidth `Number`
 
-The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist/configuration/columns.hidden) setting,
-so the two should not be used at the same time.
+The pixel screen width below which the column will be hidden. The setting takes precedence over the [`hidden`](/api/javascript/ui/treelist/configuration/columns.hidden) setting and the two cannot not be used at the same time.
 
-#### Example - Hide columns when screen is smaller than a given width
+#### Example - hiding columns when the screen is smaller than a given width
 
     <div id="treelist"></div>
     <script>
@@ -844,10 +833,9 @@ so the two should not be used at the same time.
 
 ### columns.sortable `Boolean|Object` *(default: true)*
 
-If set to `true` the user can click the column header and sort the treelist by the column [field](/api/javascript/ui/treelist#configuration-columns.field) when sorting is enabled. If set to `false` sorting will
-be disabled for this column. By default all columns are sortable if sorting is enabled via the [sortable](/api/javascript/ui/treelist#configuration-sortable) option.
+If set to `true` and sorting is enabled, the user can click the column header and sort the TreeList by the column [`field`](/api/javascript/ui/treelist#configuration-columns.field). If set to `false`, sorting will be disabled for this column. By default, all columns are sortable if sorting is enabled though the [`sortable`](/api/javascript/ui/treelist#configuration-sortable) option.
 
-#### Example - disable sorting
+#### Example - disabling sorting
 
     <div id="treelist"></div>
     <script>
@@ -869,9 +857,13 @@ be disabled for this column. By default all columns are sortable if sorting is e
 
 ### columns.sortable.compare `Function`
 
-A JavaScript function which is used to compare the values - should return -1 if first argument is less than second one, 0 if both are the same or +1 if the first one is greater than second one.
+A JavaScript function for comparing the values.
 
-#### Example - define custom compare function
+* If the first argument is less than the second one, returns `-1`.
+* If both arguments are the same, returns `0`.
+* If the first argument is greater than the second one, returns `+1`.
+
+#### Example - defining the custom compare function
 
     <div id="treeList"></div>
     <script>
@@ -904,12 +896,12 @@ A JavaScript function which is used to compare the values - should return -1 if 
 
 ### columns.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the column content. The treelist renders table rows (`<tr>`) which represent the data source items.
-Each table row consists of table cells (`<td>`) which represent the treelist columns. By default the HTML-encoded value of the [field](/api/javascript/ui/treelist#configuration-columns.field) is displayed in the column.
+The [`template`](/api/javascript/kendo/methods/template) which renders the column content. The TreeList renders table rows (`<tr>`) which represent the data source items.
+Each table row consists of table cells (`<td>`) which represent the TreeList columns. By default, the HTML-encoded value of the [`field`](/api/javascript/ui/treelist#configuration-columns.field) is displayed in the column.
 
-> Use the `template` to customize the way the column displays its value.
+> To customize the way the column displays its value, use `template`.
 
-#### Example - set the template as a string (wrap the column value in HTML)
+#### Example - setting the template as a string (wrapping the column value in HTML)
 
     <div id="treelist"></div>
     <script>
@@ -927,7 +919,7 @@ Each table row consists of table cells (`<td>`) which represent the treelist col
       });
     </script>
 
-#### Example - external template with conditional formatting and button handler
+#### Example - setting an external template with conditional formatting and a button handler
 
     <div id="treelist"></div>
 
@@ -959,9 +951,9 @@ Each table row consists of table cells (`<td>`) which represent the treelist col
 
 ### columns.title `String`
 
-The text that is displayed in the column header cell. If not set the [field](/api/javascript/ui/treelist#configuration-columns.field) is used.
+The text that is displayed in the column header cell. If not set, the TreeList uses [`field`](/api/javascript/ui/treelist#configuration-columns.field).
 
-#### Example - set the title of the column
+#### Example - setting the title of the column
 
     <div id="treelist"></div>
     <script>
@@ -983,7 +975,7 @@ The text that is displayed in the column header cell. If not set the [field](/ap
 
 The width of the column. Numeric values are treated as pixels.
 
-#### Example - set the column width as a string
+#### Example - setting the column width as a string
 
     <div id="treelist"></div>
     <script>
@@ -1001,7 +993,7 @@ The width of the column. Numeric values are treated as pixels.
       });
     </script>
 
-#### Example - set the column width as a number
+#### Example - setting the column width as a number
 
     <div id="treelist"></div>
     <script>
@@ -1021,9 +1013,9 @@ The width of the column. Numeric values are treated as pixels.
 
 ### columns.hidden `Boolean` *(default: false)*
 
-If set to `true` the column will not be displayed in the treelist. By default all columns are displayed.
+If set to `true`, the TreeList will not display the column. By default, all columns are displayed.
 
-#### Example - hide columns
+#### Example - hiding columns
 
     <div id="treeList"></div>
     <script>
@@ -1043,9 +1035,9 @@ If set to `true` the column will not be displayed in the treelist. By default al
 
 ### columns.menu `Boolean`
 
-If set to `true` the column will be visible in the treelist column menu. By default the column menu includes all data-bound columns (ones that have their [field](/api/javascript/ui/treelist#configuration-columns.field) set).
+If set to `true`, the TreeList will display the column in the column menu. By default, the column menu includes all data-bound columns, that is, the ones with a set [`field`](/api/javascript/ui/treelist#configuration-columns.field) option.
 
-#### Example - hide a column from the column menu
+#### Example - hiding a column from the column menu
 
     <div id="treeList"></div>
     <script>
@@ -1067,9 +1059,9 @@ If set to `true` the column will be visible in the treelist column menu. By defa
 
 ### columns.locked `Boolean` *(default: false)*
 
-If set to `true` the column will be displayed as locked (frozen) in the treelist.
+If set to `true`, the TreeList will display the column as locked (frozen).
 
-#### Example - locked columns
+#### Example - displaying locked columns
 
     <div id="treeList" style="width: 500px"></div>
     <script>
@@ -1090,12 +1082,12 @@ If set to `true` the column will be displayed as locked (frozen) in the treelist
 
 ### columns.lockable `Boolean` *(default: true)*
 
-If set to `false` the column will remain in the side of the TreeList into which its own locked configuration placed it.
+If set to `false`, the column will remain in that side of the TreeList where its own locked configuration placed it.
 
-> This option is meaningful when the treelist has columns which are configured with a [locked](/api/javascript/ui/treelist#configuration-columns.locked) value. Setting it explicitly to `false` will
-prevent the user from locking or unlocking this column using the user interface.
+> This option is useful when the TreeList has columns which are configured with a [`locked`](/api/javascript/ui/treelist#configuration-columns.locked) value. Setting it explicitly to `false` will
+prevent the user from locking or unlocking this column while using the user interface.
 
-#### Example - lockable columns
+#### Example - setting locked columns
 
     <div id="treeList" style="width: 500px"></div>
     <script>
@@ -1117,9 +1109,9 @@ prevent the user from locking or unlocking this column using the user interface.
 
 ### resizable `Boolean` *(default: false)*
 
-If set to `true` allows users to resize columns by dragging their header borders. By default resizing is disabled.
+If set to `true`, the user can resize columns by dragging their header borders. By default, resizing is disabled.
 
-#### Example - enable column resizing
+#### Example - enabling column resizing
 
     <div id="treeList"></div>
     <script>
@@ -1141,9 +1133,9 @@ If set to `true` allows users to resize columns by dragging their header borders
 
 ### reorderable `Boolean` *(default:false)*
 
-If set to `true` the user could reorder the columns by dragging their header cells. By default reordering is disabled.
+If set to `true`, the user can reorder the columns by dragging their header cells. By default, reordering is disabled.
 
-#### Example - enable column reordering
+#### Example - enabling column reordering
 
     <div id="treeList"></div>
     <script>
@@ -1165,12 +1157,9 @@ If set to `true` the user could reorder the columns by dragging their header cel
 
 ### columnMenu `Boolean|Object` *(default: false)*
 
-If set to `true` the treelist will display the column menu when the user clicks the chevron icon in the column headers. The column menu allows the user to show and hide columns, filter and sort (if filtering and sorting are enabled).
-By default the column menu is not enabled.
+If set to `true`, the TreeList displays the column menu when the user clicks the **Chevron** icon in the column headers. The column menu allows the user to show and hide columns, and, if filtering and sorting are enabled, filter and sort the data. By default, the column menu is disabled. Can be set to a JavaScript object which represents the column menu configuration.
 
-Can be set to a JavaScript object which represents the column menu configuration.
-
-#### Example - enable the column menu
+#### Example - enabling the column menu
 
     <div id="treeList"></div>
     <script>
@@ -1191,9 +1180,9 @@ Can be set to a JavaScript object which represents the column menu configuration
 
 ### columnMenu.columns `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to select (show and hide) treelist columns. By default the column menu allows column selection.
+If set to `true`, the column menu allows the user to select (show and hide) TreeList columns. By default, the column menu allows column selection.
 
-#### Example - disable column show/hide using the column menu
+#### Example - disabling the showing or hiding of the columns by using the column menu
 
     <div id="treeList"></div>
     <script>
@@ -1218,9 +1207,9 @@ If set to `true` the column menu would allow the user to select (show and hide) 
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
-If set to `true` the column menu will allow the user to filter the TreeList. By default the column menu allows the user to filter if filtering is enabled via the [filterable](/api/javascript/ui/treelist#configuration-filterable).
+If set to `true`, the column menu will allow the user to filter the TreeList. By default, if filtering is enabled through [`filterable`](/api/javascript/ui/treelist#configuration-filterable), the column menu allows the user to filter.
 
-#### Example - disable column menu filtering
+#### Example - disabling column menu filtering
 
     <div id="treeList"></div>
     <script>
@@ -1244,11 +1233,11 @@ If set to `true` the column menu will allow the user to filter the TreeList. By 
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
-If set to `true` the column menu would allow the user to sort the treelist by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](/api/javascript/ui/treelist#configuration-sortable) option.
+If set to `true`, the column menu will allow the user to sort the TreeList by the column field. By default, if sorting is enabled through [`sortable`](/api/javascript/ui/treelist#configuration-sortable), the column menu allows the user to sort the data.
 
-> If this option is set to `false` the user could still sort by clicking the column header cell.
+> If this option is set to `false`, the user will still be able to sort by clicking the column header cell.
 
-#### Example - disable column menu sorting
+#### Example - disabling the sorting of the column menu
 
     <div id="treeList"></div>
     <script>
@@ -1273,9 +1262,9 @@ If set to `true` the column menu would allow the user to sort the treelist by th
 
 ### columnMenu.messages `Object`
 
-The text messages displayed in the column menu. Use it to customize or localize the column menu messages.
+The text messages that is played in the column menu. Use it to customize or localize the column menu messages.
 
-#### Example - customize column menu messages
+#### Example - customizing column menu messages
 
     <div id="treeList"></div>
     <script>
@@ -1306,9 +1295,9 @@ The text messages displayed in the column menu. Use it to customize or localize 
 
 ### columnMenu.messages.columns `String` *(default: "Columns")*
 
-The text message displayed for the column selection menu item.
+The text message that is displayed for the column selection menu item.
 
-#### Example - set the column selection message
+#### Example - setting the column selection message
 
     <div id="treeList"></div>
     <script>
@@ -1333,9 +1322,9 @@ The text message displayed for the column selection menu item.
 
 ### columnMenu.messages.filter `String` *(default: "Filter")*
 
-The text message displayed for the filter menu item.
+The text message that is displayed for the filter menu item.
 
-#### Example - set the filter message
+#### Example - setting the filter message
 
     <div id="treeList"></div>
     <script>
@@ -1362,9 +1351,9 @@ The text message displayed for the filter menu item.
 
 ### columnMenu.messages.sortAscending `String` *(default: "Sort Ascending")*
 
-The text message displayed for the menu item which performs ascending sort.
+The text message that is displayed for the menu item which performs the ascending sort mode.
 
-#### Example - set the sort ascending message
+#### Example - setting the message for the ascending sort mode
 
     <div id="treeList"></div>
     <script>
@@ -1391,9 +1380,9 @@ The text message displayed for the menu item which performs ascending sort.
 
 ### columnMenu.messages.sortDescending `String` *(default: "Sort Descending")*
 
-The text message displayed for the menu item which performs descending sort.
+The text message that is displayed for the menu item which performs the descending sort mode.
 
-#### Example - set the sort descending message
+#### Example - setting the message for the descending sort mode
 
     <div id="treeList"></div>
     <script>
@@ -1420,9 +1409,9 @@ The text message displayed for the menu item which performs descending sort.
 
 ### columnMenu.messages.settings `String` *(default: "Column Settings")*
 
-The text message displayed in the menu header.
+The text message that is displayed in the menu header.
 
-#### Example - set the sort ascending message
+#### Example - setting the message for the menu header
 
     <div id="treeList"></div>
     <script>
@@ -1449,9 +1438,9 @@ The text message displayed in the menu header.
 
 ### columnMenu.messages.lock `String` *(default: "Lock")*
 
-The text message displayed in the column menu for locking a column.
+The text message that is displayed in the column menu when locking a column.
 
-#### Example - set the sort ascending message
+#### Example - setting the messages for locking a column
 
     <div id="treeList"></div>
     <script>
@@ -1478,9 +1467,9 @@ The text message displayed in the column menu for locking a column.
 
 ### columnMenu.messages.unlock `String` *(default: "Unlock")*
 
-The text message displayed in the column menu for unlocking a column.
+The text message that is displayed in the column menu for unlocking a column.
 
-#### Example - set the sort ascending message
+#### Example - setting the message for unlocking a column
 
     <div id="treeList"></div>
     <script>
@@ -1507,13 +1496,12 @@ The text message displayed in the column menu for unlocking a column.
 
 ### dataSource `Object|Array|kendo.data.TreeListDataSource`
 
-The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource) configuration, a JavaScript array or an existing [kendo.data.TreeListDataSource](/api/javascript/data/treelistdatasource) instance.
+The data source of the widget which is used to render table rows. Can be a JavaScript object which represents a valid [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource) configuration, a JavaScript array, or an existing [`kendo.data.TreeListDataSource`](/api/javascript/data/treelistdatasource) instance.
 
-If the `dataSource` option is set to a JavaScript object or an array the widget will initialize a new [kendo.data.DataSource](/api/javascript/data/treelistdatasource) instance using that value as DataSource configuration.
+* If the `dataSource` option is set to a JavaScript object or an array, the widget will initialize a new [`kendo.data.DataSource`](/api/javascript/data/treelistdatasource) instance and will use that value as the DataSource configuration.
+* If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instance, the widget will use that instance and will not initialize a new one.
 
-If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instance, the widget will use that instance and will **not** initialize a new one.
-
-#### Example - set dataSource as a JavaScript object
+#### Example - setting the dataSource as a JavaScript object
 
     <div id="treeList"></div>
     <script>
@@ -1532,7 +1520,7 @@ If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instan
       });
     </script>
 
-#### Example - set dataSource as a JavaScript array
+#### Example - setting the dataSource as a JavaScript array
 
     <div id="treeList"></div>
     <script>
@@ -1555,7 +1543,7 @@ If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instan
       });
     </script>
 
-#### Example - set dataSource as an existing kendo.data.TreeListDataSource instance
+#### Example - setting the dataSource as an existing dataSource instance
 
       <div id="treelist"></div>
 
@@ -1594,17 +1582,20 @@ If the `dataSource` option is an existing `kendo.data.TreeListDataSource` instan
 
 ### editable `Boolean|Object` *(default: false)*
 
-If set to `true` the user would be able to edit the data to which the TreeList is bound. By default, editing is disabled.
+If set to `true`, the user will be able to edit the data to which the TreeList is bound. By default, editing is disabled.
 
-Can be set to a string ("inline", "popup" or "incell") to specify the editing mode. The default editing mode is "inline".
+`editable` can be set to a JavaScript object (which represents the editing configuration) or to a string (which specifies the edit mode).
 
-Can be set to a JavaScript object which represents the editing configuration.
+The supported string values are:
 
-> The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
->
-> To have edit operations work correctly in the TreeList, the `dataSource` has to be [configured for CRUD operations](/framework/datasource/crud).
+* (Default) `inline`
+* `popup`
+* `incell`
 
-#### Example - enable editing
+> * The inline and popup edit modes are triggered by the `edit` column command. Therefore, in order for these edit modes to work correctly, you need to have a column with the `edit` command.
+> * In order for the edit operations to work correctly, [configure the dataSource for CRUD operations](/framework/datasource/crud).
+
+#### Example - enabling editing
 
       <div id="treelist"></div>
       <script>
@@ -1653,7 +1644,7 @@ Can be set to a JavaScript object which represents the editing configuration.
           });
       </script>
 
-#### Example - enable popup editing
+#### Example - enabling popup editing
 
       <div id="treelist"></div>
       <script>
@@ -1704,11 +1695,17 @@ Can be set to a JavaScript object which represents the editing configuration.
 
 ### editable.mode `String` *(default: "inline")*
 
-The editing mode to use. The supported editing modes are "inline", "popup" and "incell".
+The edit mode that will be used.
 
-> The "inline" and "popup" editing modes are triggered by the "edit" column command. Thus it is required to have a column with an "edit" command.
+The supported edit modes are:
 
-#### Example - specify inline editing mode
+* `inline`
+* `popup`
+* `incell`
+
+> The inline and popup edit modes are triggered by the `edit` column command. Therefore, in order for these edit modes to work correctly, you need to have a column with the `edit` command.
+
+#### Example - specifyinging the inline edit mode
 
       <div id="treelist"></div>
       <script>
@@ -1761,9 +1758,9 @@ The editing mode to use. The supported editing modes are "inline", "popup" and "
 
 ### editable.move `Boolean` *(default: false)*
 
-Enables drag&drop UI of rows between parents.
+Enables the drag-and-drop UI of rows between parents.
 
-#### Example - use drag&drop for editing row parent node
+#### Example - using the drag-and-drop functionality for editing the row parent node
 
       <div id="treelist"></div>
       <script>
@@ -1804,14 +1801,14 @@ Enables drag&drop UI of rows between parents.
 
 ### editable.template `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the popup editor.
+The [`template`](/api/javascript/kendo/methods/template) which renders the popup editor.
 
-The template should contain elements which `name` HTML attribute is set to the name of the editable field. This is how the TreeList will know
-which field to bind each editor to. The other option is to use [MVVM](/framework/mvvm/overview) bindings in order to bind HTML elements to data item fields.
+The template has to contain elements whose `name` HTML attribute is set to the name of the editable field. In this way, the TreeList recognizes
+the field to which it has to bind the each editor. Alternatively, use [MVVM](/framework/mvvm/overview) bindings for binding HTML elements to data item fields.
 
-> Use the `role` data attribute to initialize Kendo UI widgets in the template. Check [data attribute initialization](/framework/data-attribute-initialization) for more info.
+> To initialize Kendo UI widgets in the template, use the `role` data attribute. For more information, refer to the [`data` attribute initialization](/framework/data-attribute-initialization).
 
-#### Example - customize the popup editor
+#### Example - customizing the popup editor
 
       <div id="treelist"></div>
       <script id="popup-editor" type="text/x-kendo-template">
@@ -1931,11 +1928,9 @@ which field to bind each editor to. The other option is to use [MVVM](/framework
 
 ### editable.window `Object`
 
-Configures the Kendo UI Window instance, which is used when the TreeList edit mode is "popup".
+Configures the Kendo UI Window instance which is used when the TreeList edit mode is set to `popup`. For more information, refer to the [configuration API of the Window](/api/javascript/ui/window).
 
-For more information, please refer to the [Window configuration API](/api/javascript/ui/window).
-
-#### Example - TreeList popup Window configuration
+#### Example - configuring the Window in the popup edit mode
 
       <div id="treelist"></div>
       <script>
@@ -1986,13 +1981,13 @@ For more information, please refer to the [Window configuration API](/api/javasc
 
 ### excel `Object`
 
-Configures the Kendo UI TreeList Excel export settings.
+Configures the Excel export settings of the TreeList.
 
 ### excel.fileName `String` *(default: "Export.xslx")*
 
 Specifies the file name of the exported Excel file.
 
-#### Example - set the default Excel file name
+#### Example - setting the default Excel file name
 
     <div id="treelist"></div>
     <script>
@@ -2029,9 +2024,9 @@ Specifies the file name of the exported Excel file.
 
 ### excel.filterable `Boolean` *(default: false)*
 
-Enables or disables column filtering in the Excel file. Not to be mistaken with the treelist filtering feature.
+Enables or disables column filtering in the Excel file. Not to be mistaken with the filtering feature of the TreeList.
 
-#### Example - enable filtering in the output Excel file
+#### Example - enabling filtering in the output Excel file
 
     <div id="treelist"></div>
     <script>
@@ -2068,27 +2063,19 @@ Enables or disables column filtering in the Excel file. Not to be mistaken with 
 
 ### excel.forceProxy `Boolean` *(default: false)*
 
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/treelist#configuration-excel.proxyURL) even if the browser supports saving files locally.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-excel.proxyURL) even if the browser supports local file saving.
 
 ### excel.proxyURL `String` *(default: null)*
 
-The URL of the server-side proxy which will stream the file to the end user.
-
-A proxy will be used when the browser isn't capable of saving files locally.
-Such browsers are IE version 9 and lower and Safari.
-
-The developer is responsible for implementing the server-side proxy.
+The URL of the server-side proxy which will stream the file to the end user. A proxy will be used when the browser is not capable of saving files locally. Such browsers are IE version 9 and earlier and Safari. The developer is responsible for implementing the server-side proxy. The proxy will return the decoded file with the `Content-Disposition` header set to `attachment; filename="<fileName.xslx>"`.
 
 The proxy will receive a POST request with the following parameters in the request body:
 
-* contentType: The MIME type of the file
-* base64: The base-64 encoded file content
-* fileName: The file name, as requested by the caller.
+* `contentType` - The MIME type of the file.
+* `base64` - The base-64 encoded file content.
+* `fileName` - The file name as requested by the caller.
 
-The proxy should return the decoded file with the "Content-Disposition" header set to
-`attachment; filename="<fileName.xslx>"`.
-
-#### Example - set the server proxy URL
+#### Example - setting the server proxy URL
 
     <div id="treelist"></div>
     <script>
@@ -2125,11 +2112,9 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 
 ### filterable `Boolean|Object` *(default: false)*
 
-If set to `true` the user can filter the data source using the treelist filter menu. Filtering is disabled by default.
+If set to `true`, the user can filter the data source by using the TreeList filter menu. By default, filtering is disabled. Can be set to a JavaScript object which represents the filter menu configuration.
 
-Can be set to a JavaScript object which represents the filter menu configuration.
-
-#### Example - enable and configure filtering
+#### Example - enabling and configuring filtering
 
     <div id="treeList"></div>
     <script>
@@ -2195,9 +2180,9 @@ Can be set to a JavaScript object which represents the filter menu configuration
 
 ### filterable.extra `Boolean` *(default: true)*
 
-If set to `true` the filter menu allows the user to input a second criteria.
+If set to `true`, the filter menu will allow the user to input a second criteria.
 
-#### Example - disable the extra filtering criteria
+#### Example - disabling the extra filtering criteria
 
     <div id="treelist"></div>
     <script>
@@ -2219,9 +2204,9 @@ If set to `true` the filter menu allows the user to input a second criteria.
 
 ### filterable.messages `Object`
 
-The text messages displayed in the filter menu. Use it to customize or localize the filter menu messages.
+The text messages that are displayed in the filter menu. Use it to customize or localize the filter menu messages.
 
-#### Example - customize filter menu messages
+#### Example - customizing the filter menu messages
 
     <div id="treelist"></div>
     <script>
@@ -2248,9 +2233,9 @@ The text messages displayed in the filter menu. Use it to customize or localize 
 
 ### filterable.messages.and `String` *(default: "And")*
 
-The text of the option which represents the "and" logical operation.
+The text of the option which represents the `AND` logical operation.
 
-#### Example - set the "and" message
+#### Example - setting the AND message
 
     <div id="treelist"></div>
     <script>
@@ -2276,7 +2261,7 @@ The text of the option which represents the "and" logical operation.
 
 The text of the button which clears the filter.
 
-#### Example - set the "clear" message
+#### Example - setting the clear message
 
     <div id="treelist"></div>
     <script>
@@ -2302,7 +2287,7 @@ The text of the button which clears the filter.
 
 The text of the button which applies the filter.
 
-#### Example - set the "filter" message
+#### Example - setting the filter message
 
     <div id="treelist"></div>
     <script>
@@ -2326,9 +2311,9 @@ The text of the button which applies the filter.
 
 ### filterable.messages.info `String` *(default: "Show items with value that: ")*
 
-The text of the information message on the top of the filter menu.
+The text of the information message on top of the filter menu.
 
-#### Example - set the "info" message
+#### Example - setting the info message
 
     <div id="treelist"></div>
     <script>
@@ -2352,13 +2337,13 @@ The text of the information message on the top of the filter menu.
 
 ### filterable.messages.title `String` *(default: "Show items with value that: ")*
 
-The text rendered for the title attribute of the filter menu form.
+The text that is rendered for the `title` attribute of the filter menu form.
 
 ### filterable.messages.isFalse `String` *(default: "is false")*
 
-The text of the radio button for `false` values. Displayed when filtering `Boolean` fields.
+The text of the radio button for `false` values. Displayed when the user filters Boolean fields.
 
-#### Example - set the "isFalse" message
+#### Example - setting the isFalse message
 
     <div id="treelist"></div>
     <script>
@@ -2391,9 +2376,9 @@ The text of the radio button for `false` values. Displayed when filtering `Boole
 
 ### filterable.messages.isTrue `String` *(default: "is true")*
 
-The text of the radio button for `true` values. Displayed when filtering `Boolean` fields.
+The text of the radio button for `true` values. Displayed when the user filters Boolean fields.
 
-#### Example - set the "isTrue" message
+#### Example - setting the isTrue message
 
     <div id="treelist"></div>
     <script>
@@ -2426,9 +2411,9 @@ The text of the radio button for `true` values. Displayed when filtering `Boolea
 
 ### filterable.messages.or `String` *(default: "Or")*
 
-The text of the option which represents the "or" logical operation.
+The text of the option which represents the `OR` logical operation.
 
-#### Example - set the "or" message
+#### Example - setting the or message
 
     <div id="treelist"></div>
     <script>
@@ -2453,11 +2438,11 @@ The text of the option which represents the "or" logical operation.
 
 ### filterable.operators `Object`
 
-The text of the filter operators displayed in the filter menu.
+The text of the filter operators that are displayed in the filter menu.
 
-> In multiple TreeLists, it is possible to override the filterable options of the Kendo UI FilterMenu before the TreeLists are initialized. Then the new filter options will be available for all TreeLists without further configuration.
+> In multiple TreeLists, you can override the filterable options of the `FilterMenu` before the TreeLists are initialized. Then, the new filter options will be available for all TreeLists without further configuration.
 
-#### Example - override the filterable options in multiple TreeLists
+#### Example - overriding the filterable options in multiple TreeLists
 
     <h4>TreeList One</h4>
     <div id="treeList1"></div>
@@ -2505,11 +2490,13 @@ The text of the filter operators displayed in the filter menu.
 
 ### filterable.operators.string `Object`
 
-The texts of the filter operators displayed for columns bound to string fields.
+The texts of the filter operators that are displayed for columns whcih are bound to string fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
-#### Example - set string operators
+In the following example, only the `Contains...` and `Starts with...` operators will be displayed in the DropDownList.
+
+#### Example - setting the string operators
 
     <div id="treeList"></div>
 
@@ -2537,7 +2524,6 @@ The texts of the filter operators displayed for columns bound to string fields.
       });
     </script>
 
-In this example only two operators will be displayed in the DropDownList - "Contains..." and "Starts with...".
 
 ### filterable.operators.string.eq `String` *(default: "Is equal to")*
 
@@ -2581,11 +2567,13 @@ The text of the `endswith` filter operator.
 
 ### filterable.operators.number `Object`
 
-The texts of the filter operators displayed for columns bound to number fields.
+The texts of the filter operators that are displayed for columns which are bound to number fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
-#### Example - set number operators
+In the following example, only the `Equal to...` and `Not equal to...` operators will be displayed in the operators DropDownList.
+
+#### Example - setting the number operators
 
     <div id="treelist"></div>
     <script>
@@ -2619,8 +2607,6 @@ The texts of the filter operators displayed for columns bound to number fields.
         }
       });
     </script>
-
-In this example only two operators will be displayed in the operators DropDownList - "Equal to..." and "Not equal to...".
 
 ### filterable.operators.number.eq `String` *(default: "Is equal to")*
 
@@ -2656,11 +2642,13 @@ The text of the `lt` (less than) filter operator.
 
 ### filterable.operators.date `Object`
 
-The texts of the filter operators displayed for columns bound to date fields.
+The texts of the filter operators that are displayed for columns which are bound to date fields.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
-#### Example - set date operators
+In the following example, only the `Is before...` and `Is after...` operators will be displayed in the operators DropDownList.
+
+#### Example - setting the date operators
 
     <div id="treelist"></div>
     <script>
@@ -2694,8 +2682,6 @@ The texts of the filter operators displayed for columns bound to date fields.
         }
       });
     </script>
-
-In this example only two operators will be displayed in the operators DropDownList - "Is before..." and "Is after...".
 
 ### filterable.operators.date.eq `String` *(default: "Is equal to")*
 
@@ -2731,9 +2717,9 @@ The text of the `lt` (less than) filter operator.
 
 ### height `Number|String`
 
-The height of the treelist. Numeric values are treated as pixels.
+The height of the TreeList. Numeric values are treated as pixels.
 
-#### Example - set the height as a number
+#### Example - setting the height as a number
 
     <div id="treeList"></div>
     <script>
@@ -2750,7 +2736,7 @@ The height of the treelist. Numeric values are treated as pixels.
         });
     </script>
 
-#### Example - set the height as a string
+#### Example - setting the height as a string
 
     <div id="treeList"></div>
     <script>
@@ -2771,7 +2757,7 @@ The height of the treelist. Numeric values are treated as pixels.
 
 Defines the text of the command buttons that are shown within the TreeList. Used primarily for localization.
 
-#### Example - change the messages
+#### Example - changing the messages
 
     <div id="treeList"></div>
     <script>
@@ -2804,9 +2790,9 @@ Defines the text of the command buttons that are shown within the TreeList. Used
 
 ### messages.commands `Object`
 
-Defines the text for the command buttons used across the widget.
+Defines the text for the command buttons that are used across the widget.
 
-#### Example
+#### Example - setting the command button messages
 
     <div id="treeList"></div>
     <script>
@@ -2835,9 +2821,9 @@ Defines the text for the command buttons used across the widget.
 
 ### messages.commands.canceledit `String` *(default: "Cancel")*
 
-Defines the text of the "Cancel" button that discards the changes during editing.
+Defines the text of the **Cancel** button that discards the changes during editing.
 
-#### Example
+#### Example - setting the text of the **Cancel** button
 
     <div id="treeList"></div>
     <script>
@@ -2858,9 +2844,9 @@ Defines the text of the "Cancel" button that discards the changes during editing
 
 ### messages.commands.create `String` *(default: "Add new record")*
 
-Defines the text of the "Add new record" button that adds new data rows.
+Defines the text of the **Add new record** button that adds new data rows.
 
-#### Example
+#### Example - setting the text of the **Add new record** button
 
     <div id="treeList"></div>
     <script>
@@ -2882,9 +2868,9 @@ Defines the text of the "Add new record" button that adds new data rows.
 
 ### messages.commands.createchild `String` *(default: "Add child record")*
 
-Defines the text of the "Add child record" button that adds new child data rows.
+Defines the text of the **Add child record** button that adds new child data rows.
 
-#### Example
+#### Example - setting the text of the **Add child record** button
 
     <div id="treeList"></div>
     <script>
@@ -2906,9 +2892,9 @@ Defines the text of the "Add child record" button that adds new child data rows.
 
 ### messages.commands.destroy `String` *(default: "Delete")*
 
-Defines the text of the "Delete" button that deletes a data row.
+Defines the text of the **Delete** button that deletes a data row.
 
-#### Example
+#### Example - setting the text of the **Delete** button
 
     <div id="treeList"></div>
     <script>
@@ -2929,9 +2915,9 @@ Defines the text of the "Delete" button that deletes a data row.
 
 ### messages.commands.edit `String` *(default: "Edit")*
 
-Defines the text of the "Edit" button that shows the editable fields for the row.
+Defines the text of the **Edit** button that shows the editable fields for the row.
 
-#### Example
+#### Example - setting the text of the **Edit** button
 
     <div id="treeList"></div>
     <script>
@@ -2952,9 +2938,9 @@ Defines the text of the "Edit" button that shows the editable fields for the row
 
 ### messages.commands.save `String` *(default: "Save Changes")*
 
-Defines the text of the "Save Changes" button that saves modifed data rows.
+Defines the text of the **Save Changes** button that saves modifed data rows.
 
-#### Example
+#### Example - setting the text of the **save Changes** button
 
     <div id="treeList"></div>
     <script>
@@ -2976,9 +2962,9 @@ Defines the text of the "Save Changes" button that saves modifed data rows.
 
 ### messages.commands.cancel `String` *(default: "Cancel Changes")*
 
-Defines the text of the "Cancel Changes" button that cancels all data modifications.
+Defines the text of the **Cancel Changes** button that cancels all data modifications.
 
-#### Example
+#### Example - setting the text of the **Cancel Changes** button
 
     <div id="treeList"></div>
     <script>
@@ -3000,9 +2986,9 @@ Defines the text of the "Cancel Changes" button that cancels all data modificati
 
 ### messages.commands.excel `String` *(default: "Export to Excel")*
 
-Defines the text of the "Export to Excel" button that exports the widget data in spreadsheet format.
+Defines the text of the **Export to Excel** button that exports the widget data in spreadsheet format.
 
-#### Example
+#### Example - setting the text of the **Export to Excel** button
 
     <div id="treeList"></div>
     <script>
@@ -3023,9 +3009,9 @@ Defines the text of the "Export to Excel" button that exports the widget data in
 
 ### messages.commands.pdf `String` *(default: "Export to PDF")*
 
-Defines the text of the "Export to PDF" button that exports the widget data in PDF format.
+Defines the text of the **Export to PDF** button that exports the widget data in PDF format.
 
-#### Example
+#### Example - setting the text of the **Export to PDF** button
 
     <div id="treeList"></div>
     <script>
@@ -3046,9 +3032,9 @@ Defines the text of the "Export to PDF" button that exports the widget data in P
 
 ### messages.commands.update `String` *(default: "Update")*
 
-Defines the text of the "Update" button that applies the changes during editing.
+Defines the text of the **Update** button that applies the changes during editing.
 
-#### Example
+#### Example - setting the text of the **Update** button
 
     <div id="treeList"></div>
     <script>
@@ -3070,9 +3056,9 @@ Defines the text of the "Update" button that applies the changes during editing.
 
 ### messages.loading `String` *(default: "Loading...")*
 
-Defines the text of the "Loading..." message when the widget loads its root-level items.
+Defines the text of the **Loading...** message when the widget loads its root-level items.
 
-#### Example
+#### Example - setting the text of the **Loading...** button
 
     <div id="treeList"></div>
     <script>
@@ -3108,9 +3094,9 @@ Defines the text of the "Loading..." message when the widget loads its root-leve
 
 ### messages.noRows `String` *(default: "No records to display")*
 
-Defines the text of "No records to display" message when the widget does not show any items.
+Defines the text of **No records to display** message when the widget does not show any items.
 
-#### Example
+#### Example - setting the text of the **No records to display** button
 
     <div id="treeList"></div>
     <script>
@@ -3125,9 +3111,9 @@ Defines the text of "No records to display" message when the widget does not sho
 
 ### messages.requestFailed `String` *(default: "Request failed.")*
 
-Defines the text of "Request failed." message when the widget fails to load its root-level items.
+Defines the text of **Request failed** message when the widget fails to load its root-level items.
 
-#### Example
+#### Example - setting the text of the **Request failed** button
 
     <div id="treeList"></div>
     <script>
@@ -3152,9 +3138,9 @@ Defines the text of "Request failed." message when the widget fails to load its 
 
 ### messages.retry `String` *(default: "Retry")*
 
-Defines the text of "Retry" message assigned to the button that tries to load root-level items again.
+Defines the text of **Retry** message for the button which triggers the reloading of the TreeList root-level items.
 
-#### Example
+#### Example - setting the text of the **Retry** button
 
     <div id="treeList"></div>
     <script>
@@ -3179,9 +3165,9 @@ Defines the text of "Retry" message assigned to the button that tries to load ro
 
 ### navigatable `Boolean` *(default: false)*
 
-If set to `true` the user can navigate the widget using the keyboard. By default, keyboard navigation is disabled.
+If set to `true`, the user can navigate the widget with the keyboard. By default, keyboard navigation is disabled. For a runnable example, refer to the [demo on keyboard navigation in the TreeList](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation).
 
-#### Example - enable keyboard navigation
+#### Example - enabling keyboard navigation
 
     <div id="treeList"></div>
     <script>
@@ -3200,19 +3186,13 @@ If set to `true` the user can navigate the widget using the keyboard. By default
       });
     </script>
 
-> Check [Keyboard navigation](http://demos.telerik.com/kendo-ui/treelist/keyboard-navigation) for a live demo.
-
 ### pageable `Boolean|Object` *(default: false)*
 
-If set to `true` the treelist will display a pager. By default paging is disabled.
+If set to `true`, the TreeList displays a pager. By default, paging is disabled. Only client-side paging is supported which means that all data items are expected to be available when the TreeList is initialized. Can be set to a JavaScript object which represents the pager configuration.
 
-Only client-side paging is supported, which means that all data items are expected to be available when the treelist is initialized.
+> Set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) no matter if paging is performed on the client or on the server. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings.
 
-Can be set to a JavaScript object which represents the pager configuration.
-
-> Don't forget to set a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize), no matter if paging is performed client-side or server-side. A `pageSize` can be defined in the `pageable` settings, or in the [`dataSource`](/api/javascript/ui/treelist/configuration/datasource) settings.
-
-#### Example - enable paging
+#### Example - enabling paging
 
     <div id="treeList"></div>
     <script>
@@ -3235,9 +3215,9 @@ Can be set to a JavaScript object which represents the pager configuration.
         });
     </script>
 
-> When client-side paging is used with editing and an item is added, if the "id" field of the model should be nullable, then the model should be configured to have a default "id" field value on the client-side that is **different** from the default "parentId" field value. This is required as root TreeList items have their "parentId" field set to the default value for no parent (by default this is equal to `null`, but can be configured from the `dataSource.schema.model.fields[FIELD_NAME].defaultValue` option). If this is the case, the default value of the "id" field (null) will be equal to the default "parentId" field value (null), which creates a circular dependency. Setting the default "id" field to a different value (e.g. zero) can be done instead.
+If client-side paging is used with editing, an item is added, and the `id` field of the model has to be nullable, then you have to configure the model to a default `id` field value on the client-side that is different from the default `parentId` field value. This approach is required because root TreeList items have their `parentId` field set to the default value for no parent which, by default, is equal to `null` but can be configured from the `dataSource.schema.model.fields[FIELD_NAME].defaultValue` option. In such cases, the default value of the `id` field (`null`) will be equal to the default `parentId` field value (`null`) which creates a circular dependency. You can set the default `id` field to a different value instead, for example, `zero`.
 
-#### Example - enable paging
+#### Example - setting id values that are different from parentId values
 
     <div id="treeList"></div>
     <script>
@@ -3274,18 +3254,16 @@ Can be set to a JavaScript object which represents the pager configuration.
 
 ### pageable.alwaysVisible `Boolean` *(default: true)*
 
-By default the treelist will show the pager even when total amount of items in the DataSource is less than the pageSize.
+(Available as of the Kendo UI 2017 R3 release) By default, the TreeList will render a pager even when total number of items in the DataSource is less than the `pageSize` value.
 
-If set to `false` the treelist will toggle the pager visibility as follows:
+If set to `false` the TreeList will toggle the pager visibility as follows:
 
-* when the total amount of items initially set in the DataSource is less than the pageSize number the pager will be hidden.
-* when the total amount of items initially set in the DataSource is greater than or equal to the pageSize number the pager will be shown.
-* when the total amount of items in the DataSource becomes less than the pageSize number (after delete, filter operation or pageSize change) the pager will be hidden.
-* when the total amount of items in the DataSource becomes greater than or equal to the pageSize number (after an insert, filter operation or pageSize change) the pager will be shown.
+* When the total amount of items initially set in the DataSource is less than the `pageSize` number, the pager will be hidden.
+* When the total amount of items initially set in the DataSource is greater than or equal to the `pageSize` number, the pager will be shown.
+* When the total amount of items in the DataSource becomes less than the `pageSize` number (after a delete or filter operation, or upon changing the `pageSize`), the pager will be hidden.
+* When the total amount of items in the DataSource becomes greater than or equal to the `pageSize` number (after an insert or filter operation, or upon changing the `pageSize`), the pager will be shown.
 
-Introduced in the Kendo UI 2017 R3 release.
-
-#### Example - hide the pager if total items are less than pageSize
+#### Example - hiding the pager if the total number of items is less than the pageSize value
 
     <div id="treeList"></div>
     <script>
@@ -3311,9 +3289,11 @@ Introduced in the Kendo UI 2017 R3 release.
 
 ### pageable.pageSize `Number`
 
-The number of data items which will be displayed in the treelist. **This setting will not work if the TreeList is assigned an already existing Kendo UI DataSource instance.**
+The number of data items which will be displayed in the TreeList.
 
-#### Example - set page size
+> This setting will not work if the TreeList has an already existing DataSource instance.
+
+#### Example - setting the page size
 
     <div id="treeList"></div>
     <script>
@@ -3338,9 +3318,9 @@ The number of data items which will be displayed in the treelist. **This setting
 
 ### pageable.previousNext `Boolean` *(default: true)*
 
-If set to `true` the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.
+If set to `true`, the pager will display buttons for going to the first, previous, next, and last pages. By default, these buttons are displayed.
 
-#### Example - hide the first, previous, next, and last buttons
+#### Example - hiding the first, previous, next, and last page navigation buttons
 
     <div id="treeList"></div>
     <script>
@@ -3366,11 +3346,11 @@ If set to `true` the pager will display buttons for going to the first, previous
 
 ### pageable.numeric `Boolean` *(default: true)*
 
-If set to `true` the pager will display buttons for navigating to specific pages. By default those buttons are displayed.
+If set to `true`, the pager will display buttons for navigating to specific pages. By default, these buttons are displayed.
 
-Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time is not recommended.
+> Avoid using `pageable.numeric` and [`pageable.input`](pageable.input) simultaneously.
 
-#### Example - hide the numeric pager buttons
+#### Example - hiding the numeric pager buttons
 
     <div id="treeList"></div>
     <script>
@@ -3396,9 +3376,9 @@ Using `pageable.numeric` and [`pageable.input`](pageable.input) at the same time
 
 ### pageable.buttonCount `Number` *(default: 10)*
 
-The maximum number of buttons displayed in the numeric pager. The pager will display ellipsis (...) if there are more pages than the specified number.
+The maximum number of buttons that are displayed in the numeric pager. If more pages than the specified number are rendered, the pager will display ellipsis (`...`).
 
-#### Example - set pager button count
+#### Example - setting the pager button count
 
     <div id="treeList"></div>
     <script>
@@ -3424,11 +3404,11 @@ The maximum number of buttons displayed in the numeric pager. The pager will dis
 
 ### pageable.input `Boolean` *(default: false)*
 
-If set to `true` the pager will display an input element which allows the user to type a specific page number. By default the page input is not displayed.
+If set to `true`, the pager will display an `input` element which allows the user to type a specific page number. By default, the page input is not displayed.
 
-Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same time is not recommended.
+> Avoid using `pageable.input` and [`pageable.numeric`](pageable.numeric) simultaneously.
 
-#### Example - show the pager input
+#### Example - showing the pager input
 
     <div id="treeList"></div>
     <script>
@@ -3454,15 +3434,9 @@ Using `pageable.input` and [`pageable.numeric`](pageable.numeric) at the same ti
 
 ### pageable.pageSizes `Boolean|Array` *(default: false)*
 
-If set to `true` the pager will display a drop-down which allows the user to pick a page size.
-By default the page size drop-down is not displayed.
+If set to `true`, the pager will display a drop-down which allows the user to pick a page size. By default, the drop-down for the page size is not displayed. Can be set to an array of predefined page sizes to override the default list. The TreeList supports a special `all` value which sets the page size to the total number of records. If you set a `pageSize` for the data source, then this value will be selected initially.
 
-Can be set to an array of predefined page sizes to override the default list.
-A special `all` value is supported. It sets the page size to the total number of records.
-
-If a `pageSize` setting is provided for the data source then this value will be selected initially.
-
-#### Example - show the page size DropDownList
+#### Example - showing the drop-down list for the page size
 
     <div id="treeList"></div>
     <script>
@@ -3486,7 +3460,7 @@ If a `pageSize` setting is provided for the data source then this value will be 
         });
     </script>
 
-#### Example - specify the page sizes as array
+#### Example - specifyinging the page sizes as an array
 
     <div id="treeList"></div>
     <script>
@@ -3513,9 +3487,9 @@ If a `pageSize` setting is provided for the data source then this value will be 
 
 ### pageable.refresh `Boolean` *(default: false)*
 
-If set to `true` the pager will display the refresh button. Clicking the refresh button will refresh the treelist. By default the refresh button is not displayed.
+If set to `true`, the pager will display the **Refresh** button. Clicking the **Refresh** button will refresh the TreeList. By default, the **Refresh** button is not displayed.
 
-#### Example - show the refresh button
+#### Example - showing the **Refresh** button
 
     <div id="treeList"></div>
     <script>
@@ -3539,11 +3513,39 @@ If set to `true` the pager will display the refresh button. Clicking the refresh
         });
     </script>
 
+### pageable.responsive `Boolean` *(default: false)*
+
+If set to `false`, the pager will not be responsive. By default, the pager is responsive.
+
+#### Example - showing the responsive button
+
+    <div id="treeList"></div>
+    <script>
+        $("#treeList").kendoTreeList({
+            columns: [
+              { field: "id" },
+              { field: "name" }
+            ],
+            dataSource: {
+                data: [
+                  { id: 1, parentId: null, name: "item 1" },
+                  { id: 2, parentId: 1, name: "item 2" },
+                  { id: 3, parentId: 1, name: "item 3" },
+                  { id: 4, parentId: 1, name: "item 4" },
+                ]
+            },
+            pageable: {
+                pageSize: 2,
+                responsive: false
+            }
+        });
+    </script>
+
 ### pageable.info `Boolean` *(default: true)*
 
-If set to `true` the pager will display information about the current page and total number of data items. By default the paging information is displayed.
+If set to `true`, the pager will display information about the current page and the total number of data items. By default, the paging information is displayed.
 
-##### Example - hide the paging information
+##### Example - hiding the paging information
 
     <div id="treeList"></div>
     <script>
@@ -3569,18 +3571,18 @@ If set to `true` the pager will display information about the current page and t
 
 ### pageable.messages `Object`
 
-The text messages displayed in pager. Use this option to customize or localize the pager messages.
+The text messages that are displayed in the pager. Use this option to customize or localize the pager messages.
 
 ### pageable.messages.display `String` *(default: "{0} - {1} of {2} items")*,
 
-The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
+The text with the pager information. Uses [`kendo.format`](/api/javascript/kendo/methods/format).
 
-Contains three placeholders:
-- {0} - the first data item index
-- {1} - the last data item index
-- {2} - the total number of data items
+Contains the following placeholders:
+- `{0}` - The first data item index.
+- `{1}` - The last data item index.
+- `{2}` - The total number of data items.
 
-#### Example - set the "display" pager message
+#### Example - setting the display pager message
 
     <div id="treeList"></div>
     <script>
@@ -3608,9 +3610,9 @@ Contains three placeholders:
 
 ### pageable.messages.empty `String` *(default: "No items to display")*,
 
-The text displayed when the treelist is empty.
+The text that is displayed when the TreeList is empty.
 
-#### Example - set the "empty" pager message
+#### Example - setting the empty pager message
 
     <div id="treeList"></div>
     <script>
@@ -3638,9 +3640,9 @@ The text displayed when the treelist is empty.
 
 ### pageable.messages.page `String` *(default: "Page")*,
 
-The label displayed before the pager input.
+The label that is displayed before the pager input.
 
-#### Example - set the label before the pager input
+#### Example - setting the label before the pager input
 
     <div id="treeList"></div>
     <script>
@@ -3669,9 +3671,9 @@ The label displayed before the pager input.
 
 ### pageable.messages.of `String` *(default: "of {0}")*,
 
-The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
+The label that is displayed before the pager input. Uses [`kendo.format`](/api/javascript/kendo/methods/format). Contains one optional `{0}` placeholder which represents the total number of pages.
 
-#### Example - set the label after the pager input
+#### Example - setting the label after the pager input
 
     <div id="treeList"></div>
     <script>
@@ -3700,9 +3702,9 @@ The label displayed before the pager input. Uses [kendo.format](/api/javascript/
 
 ### pageable.messages.itemsPerPage `String` *(default: "items per page")*,
 
-The label displayed after the page size DropDownList.
+The label that is displayed after the drop-down list for the page size.
 
-#### Example - set the label after the page size DropDownList
+#### Example - setting the label after the drop-down list for the page size
 
     <div id="treeList"></div>
     <script>
@@ -3733,7 +3735,7 @@ The label displayed after the page size DropDownList.
 
 The tooltip of the button which goes to the first page.
 
-#### Example - set the Tooltip of the first page button
+#### Example - setting the Tooltip of the first page button
 
     <div id="treeList"></div>
     <script>
@@ -3763,7 +3765,7 @@ The tooltip of the button which goes to the first page.
 
 The tooltip of the button which goes to the last page.
 
-#### Example - set the Tooltip of the last page button
+#### Example - setting the Tooltip of the last page button
 
     <div id="treeList"></div>
     <script>
@@ -3791,9 +3793,9 @@ The tooltip of the button which goes to the last page.
 
 ### pageable.messages.next `String` *(default: "Go to the next page")*,
 
-The Tooltip of the button which goes to the next page.
+The tooltip of the button which goes to the next page.
 
-#### Example - set the Tooltip of the next page button
+#### Example - setting the Tooltip of the next page button
 
     <div id="treeList"></div>
     <script>
@@ -3821,9 +3823,9 @@ The Tooltip of the button which goes to the next page.
 
 ### pageable.messages.previous `String` *(default: "Go to the previous page")*,
 
-The Tooltip of the button which goes to the previous page.
+The tooltip of the button which goes to the previous page.
 
-#### Example - set the Tooltip of the previous page button
+#### Example - setting the Tooltip of the previous page button
 
     <div id="treeList"></div>
     <script>
@@ -3851,9 +3853,9 @@ The Tooltip of the button which goes to the previous page.
 
 ### pageable.messages.refresh `String` *(default: "Refresh")*,
 
-The Tooltip of the refresh button.
+The tooltip of the **Refresh** button.
 
-#### Example - set the Tooltip of the refresh button
+#### Example - setting the Tooltip of the **Refresh** button
 
     <div id="treeList"></div>
     <script>
@@ -3882,9 +3884,9 @@ The Tooltip of the refresh button.
 
 ### pageable.messages.morePages `String` *(default: "More pages")*,
 
-The Tooltip of the ellipsis ("...") button, which appears when the number of pages is greater than the `buttonCount`.
+The tooltip of the **...** (ellipsis) button which appears when the number of pages is greater than the `buttonCount`.
 
-#### Example - set the Tooltip of the ellipsis button
+#### Example - setting the Tooltip of the ellipsis button
 
     <div id="treeList"></div>
     <script>
@@ -3914,13 +3916,13 @@ The Tooltip of the ellipsis ("...") button, which appears when the number of pag
 
 ### pdf `Object`
 
-Configures the Kendo UI TreeList PDF export settings.
+Configures the PDF export settings of the TreeList.
 
 ### pdf.author `String` *(default: null)*
 
 The author of the PDF document.
 
-#### Example - set the author
+#### Example - setting the author
 
     <div id="treelist"></div>
     <script>
@@ -3957,17 +3959,14 @@ The author of the PDF document.
     </script>
 
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
-A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
-It's also possible to pass a CSS selector as argument. All matching links will be ignored.
-
-> Available in versions 2015.3.1020 and later
+(Available as of the 2015.3.1020 release) A flag which indicates whether to produce actual hyperlinks in the exported PDF file. You can also pass a CSS selector as an argument. All matching links will be ignored.
 
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.
 
-#### Example - set the creator
+#### Example - setting the creator
 
     <div id="treelist"></div>
     <script>
@@ -4007,7 +4006,7 @@ The creator of the PDF document.
 
 The date when the PDF document is created. Defaults to `new Date()`.
 
-#### Example - set the date
+#### Example - setting the date
 
     <div id="treelist"></div>
     <script>
@@ -4047,7 +4046,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
 
 Specifies the file name of the exported PDF file.
 
-#### Example - set the default PDF file name
+#### Example - setting the default PDF file name
 
     <div id="treelist"></div>
     <script>
@@ -4085,13 +4084,13 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 
-If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
 
 ### pdf.keywords `String` *(default: null)*
 
 Specifies the keywords of the exported PDF file.
 
-#### Example - set the keywords
+#### Example - setting the keywords
 
     <div id="treelist"></div>
     <script>
@@ -4129,9 +4128,9 @@ Specifies the keywords of the exported PDF file.
 
 ### pdf.landscape `Boolean` *(default: false)*
 
-Set to `true` to reverse the paper dimensions such that width is the larger edge.
+If set to `true`, reverses the paper dimensions in such a way that the width becomes the larger edge.
 
-#### Example - enable landscape mode
+#### Example - enabling the landscape mode
 
     <div id="treelist"></div>
     <script>
@@ -4169,10 +4168,16 @@ Set to `true` to reverse the paper dimensions such that width is the larger edge
 
 ### pdf.margin `Object`
 
-Specifies the margins of the page (numbers or strings with units). Supported
-units are "mm", "cm", "in" and "pt" (default).
+Specifies the margins of the page and accepts numbers or strings with units.
 
-#### Example - set the margins
+The supported units are:
+
+* `mm`
+* `cm`
+* `in`
+* (Default) `pt`
+
+#### Example - setting the margins
 
     <div id="treelist"></div>
     <script>
@@ -4215,35 +4220,37 @@ units are "mm", "cm", "in" and "pt" (default).
 
 ### pdf.margin.bottom `Number|String` *(default: 0)*
 
-The bottom margin. Numbers are considered as "pt" units.
+The bottom margin. Numbers are considered as `pt` units.
 
 ### pdf.margin.left `Number|String` *(default: 0)*
 
-The left margin. Numbers are considered as "pt" units.
+The left margin. Numbers are considered as `pt` units.
 
 ### pdf.margin.right `Number|String` *(default: 0)*
 
-The right margin. Numbers are considered as "pt" units.
+The right margin. Numbers are considered as `pt` units.
 
 ### pdf.margin.top `Number|String` *(default: 0)*
 
-The top margin. Numbers are considered as "pt" units.
+The top margin. Numbers are considered as `pt` units.
 
 ### pdf.paperSize `String|Array` *(default: "auto")*
 
-Specifies the paper size of the PDF document.
-The default "auto" means the paper size is determined by the content.
+Specifies the paper size of the PDF document. The default `auto` setting means that the paper size is determined by the content.
+
+The supported values are:
+
+* A predefined size such as `A4`, `A3`, and so on.
+* An array of two numbers which specify the width and height in points (1pt = 1/72in).
+* An array of two strings which specify the width and height in units. The supported units are:
+  * `mm`
+  * `cm`
+  * `in`
+  * `pt`
 
 > The size of the content in pixels will match the size of the output in points (1 pixel = 1/72 inch).
 
-Supported values:
-
-* A predefined size: "A4", "A3" etc.
-* An array of two numbers specifying the width and height in points (1pt = 1/72in)
-* An array of two strings specifying the width and height in units.
-  Supported units are "mm", "cm", "in" and "pt".
-
-#### Example - set custom paper size
+#### Example - setting a custom paper size
 
     <div id="treelist"></div>
     <script>
@@ -4281,23 +4288,15 @@ Supported values:
 
 ### pdf.proxyURL `String` *(default: null)*
 
-The URL of the server side proxy which will stream the file to the end user.
-
-A proxy will be used when the browser isn't capable of saving files locally.
-Such browsers are IE version 9 and lower, and Safari.
-
-The developer is responsible for implementing the server-side proxy.
+The URL of the server side proxy which will stream the file to the end user. A proxy will be used when the browser is not capable of saving files locally. Such browsers are IE version 9 and earlier, and Safari. The developer is responsible for implementing the server-side proxy. The proxy will return the decoded file with the `Content-Disposition` header set to `attachment; filename="<fileName.pdf>"`.
 
 The proxy will receive a POST request with the following parameters in the request body:
 
-* contentType: The MIME type of the file
-* base64: The base-64 encoded file content
-* fileName: The file name, as requested by the caller.
+* `contentType` - The MIME type of the file.
+* `base64` - The base-64 encoded file content.
+* `fileName` - The file name, as requested by the caller.
 
-The proxy should return the decoded file with the "Content-Disposition" header set to
-`attachment; filename="<fileName.pdf>"`.
-
-#### Example - set the server proxy URL
+#### Example - setting the server proxy URL
 
     <div id="treelist"></div>
     <script>
@@ -4335,12 +4334,9 @@ The proxy should return the decoded file with the "Content-Disposition" header s
 
 ### pdf.proxyTarget `String` *(default: "_self")*
 
-A name or keyword indicating where to display the document returned from the proxy.
+A name or keyword whcih indicates where to display the document that was returned by the proxy. To display the document in a new window or iframe, the proxy will set the `Content-Disposition` header to `inline; filename="<fileName.pdf>"`.
 
-If you want to display the document in a new window or iframe,
-the proxy should set the "Content-Disposition" header to `inline; filename="<fileName.pdf>"`.
-
-#### Example - open the generated document in a new window
+#### Example - opening the generated document in a new window
 
     <div id="treelist"></div>
     <script>
@@ -4382,7 +4378,7 @@ the proxy should set the "Content-Disposition" header to `inline; filename="<fil
 
 Sets the subject of the PDF file.
 
-#### Example - set the subject
+#### Example - setting the subject
 
     <div id="treelist"></div>
     <script>
@@ -4422,7 +4418,7 @@ Sets the subject of the PDF file.
 
 Sets the title of the PDF file.
 
-#### Example - set the title
+#### Example - setting the title
 
     <div id="treelist"></div>
     <script>
@@ -4460,11 +4456,9 @@ Sets the title of the PDF file.
 
 ### scrollable `Boolean|Object` *(default: true)*
 
-If set to `true` the TreeList will display a scrollbar when the total row height (or width) exceeds the TreeList height (or width). By default scrolling is enabled.
+If set to `true`, the TreeList will display a scrollbar when the total row height or width exceeds the TreeList height or width. By default, scrolling is enabled. Scrolling renders separate tables for the header and data area. For accessibility-conscious applications, disable scrolling.
 
-Scrolling renders separate tables for the header and data area. For accessibility-conscious applications, disable scrolling.
-
-#### Example - disable scrolling
+#### Example - disabling scrolling
 
     <div id="treelist"></div>
     <script>
@@ -4497,18 +4491,26 @@ Scrolling renders separate tables for the header and data area. For accessibilit
       });
     </script>
 
+### search `Object`
+
+Configures the Kendo UI TreeList search bar settings.
+
+### search.fields `Array`
+
+Defines a list of fields which will be included in the search. If values for the property are not defined the treelist will search in all column fields.
+
 ### selectable `Boolean|String` *(default: false)*
 
-If set to `true` the user would be able to select treelist rows. By default selection is disabled.
+If set to `true`, the user will be able to select TreeList rows. By default, selection is disabled.
 
 Can also be set to the following string values:
 
-- "row" - the user can select a single row.
-- "cell" - the user can select a single cell.
-- "multiple, row" - the user can select multiple rows.
-- "multiple, cell" - the user can select multiple cells.
+- `row` - The user can select a single row.
+- `cell` - The user can select a single cell.
+- `multiple, row` - The user can select multiple rows.
+- `multiple, cell` - The user can select multiple cells.
 
-#### Example - set selectable as a boolean
+#### Example - setting selectable as a Boolean
 
     <div id="treeList"></div>
     <script>
@@ -4526,7 +4528,7 @@ Can also be set to the following string values:
       });
     </script>
 
-#### Example - set selectable as a string
+#### Example - setting selectable as a string
 
     <div id="treeList"></div>
     <script>
@@ -4546,11 +4548,9 @@ Can also be set to the following string values:
 
 ### sortable `Boolean|Object` *(default: false)*
 
-If set to `true` the user could sort the treelist by clicking the column header cells. By default sorting is disabled.
+If set to `true`, the user is able to sort the TreeList by clicking the column header cells. By default, sorting is disabled. Can be set to a JavaScript object which represents the sorting configuration.
 
-Can be set to a JavaScript object which represents the sorting configuration.
-
-#### Example - enable sorting
+#### Example - enabling sorting
 
     <div id="treeList"></div>
     <script>
@@ -4570,9 +4570,9 @@ Can be set to a JavaScript object which represents the sorting configuration.
 
 ### sortable.allowUnsort `Boolean` *(default: true)*
 
-If set to `true` the user can get the TreeList in its unsorted state by clicking the sorted column header.
+If set to `true`, the user can get the TreeList in its unsorted state by clicking the sorted column header.
 
-#### Example - do not allow unsorting
+#### Example - preventing unsorting
 
     <div id="treeList"></div>
     <script>
@@ -4597,9 +4597,9 @@ If set to `true` the user can get the TreeList in its unsorted state by clicking
 
 ### sortable.mode `String` *(default: "single")*
 
-The sorting mode. If set to "single" the user can sort by one column at a time. If set to "multiple" the user can sort by multiple columns.
+The sort mode. If set to `single`, the user can sort by one column at a time. If set to `multiple`, the user can sort by multiple columns.
 
-#### Example - allow multiple column sorting
+#### Example - allowing the multiple column sort mode
 
     <div id="treeList"></div>
     <script>
@@ -4625,25 +4625,20 @@ The sorting mode. If set to "single" the user can sort by one column at a time. 
 
 ### toolbar `String|Function|Array`
 
-If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole treelist Toolbar,
-and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
+* If a `String` value is assigned to the `toolbar` configuration option, it will be treated as a single string template for the whole TreeList toolbar and the string value will be passed as an argument to a [`kendo.template()`](/api/javascript/kendo/methods/template) function.
+* If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the contents of the TreeList toolbar.
+* If an `Array` value is assigned, it will be treated as the list of commands which are displayed in the TreeList toolbar. Commands can be custom or built-in. The supported built-in commands are:
+  * `create` - Adds an empty data item to the treelist.
+  * `excel` - Exports the TreeList data in MS Excel format.
+  * `pdf` - Exports the TreeList data in PDF format.
+  * `search` - built-in search panel for the TreeList.
 
-If a `Function` value is assigned (it may be a `kendo.template()` function call or a generic function reference), then the return value of the function will be used to render the treelist Toolbar contents.
-
-If an `Array` value is assigned, it will be treated as the list of commands displayed in the treelist Toolbar. Commands can be custom or built-in ("create", "excel", "pdf").
-
-* The "create" command adds an empty data item to the treelist.
-
-* The "excel" command exports the treelist data in MS Excel format.
-
-* The "pdf" command exports the treelist data in PDF format.
-
-#### Example - configure the TreeList Toolbar as a string template
+#### Example - configuring the TreeList toolbar as a string template
 
       <div id="treeList"></div>
       <script>
         $("#treeList").kendoTreeList({
-            toolbar: "<p>My string template in a paragraph.</p>",
+          toolbar: "<p>My string template in a paragraph.</p>",
           columns: [
             { field: "name" },
             { field: "age" }
@@ -4661,13 +4656,24 @@ If an `Array` value is assigned, it will be treated as the list of commands disp
         });
       </script>
 
-#### Example - configure the TreeList Toolbar template with a function
+#### Example - configuring the TreeList Toolbar template with a function and including the built in search functionality
 
     <div id="treeList"></div>
     <script type="text/x-kendo-template" id="template">
-			<label for="enableChk"><input type="checkbox" id="enableChk"/>Enable</label>
+			<a class="k-button" href="\#" onclick="return toolbar_click()">Command</a>
+      <span class="k-textbox k-grid-search k-display-flex">
+          <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+          <span class="k-input-icon">
+              <span class="k-icon k-i-search"></span>
+          </span>
+      </span>
     </script>
     <script>
+      function toolbar_click() {
+        kendo.alert("Toolbar command is clicked!");
+        return false;
+      }
+
       $("#treeList").kendoTreeList({
         toolbar: kendo.template($("#template").html()),
         columns: [
@@ -4687,12 +4693,12 @@ If an `Array` value is assigned, it will be treated as the list of commands disp
       });
     </script>
 
-#### Example - configure the TreeList Toolbar as an array of commands
+#### Example - configuring the TreeList toolbar as an array of commands
 
     <div id="treeList"></div>
     <script>
       $("#treeList").kendoTreeList({
-        toolbar: ["excel", "pdf"],
+        toolbar: ["excel", "pdf", "search"],
         columns: [
           { field: "name" },
           { field: "age" }
@@ -4712,9 +4718,9 @@ If an `Array` value is assigned, it will be treated as the list of commands disp
 
 ### toolbar.click `Function`
 
-The click handler of the toolbar command. Used for custom toolbar commands.
+The `click` handler of the toolbar command. Used for custom toolbar commands.
 
-#### Example - specify the name of the command
+#### Example - specifying the name of the command
 
     <div id="treeList"></div>
     <script>
@@ -4741,9 +4747,9 @@ The click handler of the toolbar command. Used for custom toolbar commands.
 
 ### toolbar.imageClass `String`
 
-A class name to render inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button, with a class name set to the option value. This allows you to display an icon inside your custom toolbar commands.
+A class name that will be rendered inside the toolbar button. When you set this option, the TreeList renders an additional `span` element inside the toolbar button which has a class name set to the `option` value. This approach allows you to display an icon inside your custom toolbar commands.
 
-#### Example - specify the name of the command
+#### Example - specifying the name of the command
 
     <div id="treeList"></div>
     <script>
@@ -4762,9 +4768,9 @@ A class name to render inside the toolbar button. When you set this option, the 
 
 ### toolbar.name `String`
 
-The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
+The name of the toolbar command. Can be either a built-in ("create", "excel", or "pdf") or a custom string. The `name` is output in the HTML as a value of the `data-command` attribute of the button.
 
-#### Example - specify the name of the command
+#### Example - specifying the name of the command
 
     <div id="treeList"></div>
     <script>
@@ -4791,7 +4797,9 @@ The name of the toolbar command. Either a built-in ("create", "excel", "pdf") or
 
 ### toolbar.text `String`
 
-The text displayed by the command button. If not set the [name](/api/javascript/ui/treelist#configuration-toolbar.name)` option would be used as the button text instead.
+The text that is displayed by the command button. If not set, the TreeList will use the [`name`](/api/javascript/ui/treelist#configuration-toolbar.name)` option as the button text instead.
+
+#### Example - specifying the text for the command button
 
     <div id="treeList"></div>
     <script>
@@ -4820,9 +4828,9 @@ The text displayed by the command button. If not set the [name](/api/javascript/
 
 ### columns `Array`
 
-The columns of the TreeList initialized from the [columns](/api/javascript/ui/treelist#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [columns](/api/javascript/ui/treelist#configuration-columns) option.
+The columns of the TreeList that are initialized from the [`columns`](/api/javascript/ui/treelist#configuration-columns) option. Every item from the `columns` array has the same fields as the corresponding [`columns`](/api/javascript/ui/treelist#configuration-columns) option.
 
-#### Example - iterate the TreeList columns
+#### Example - iterating the TreeList columns
 
     <button id="countBtn">Log Column Names</button>
     <div id="treelist"></div>
@@ -4847,47 +4855,45 @@ The columns of the TreeList initialized from the [columns](/api/javascript/ui/tr
 
 ### table `jQuery`
 
-The jQuery object which represents the treelist table element.
+The jQuery object which represents the TreeList `table` element.
 
 ### tbody `jQuery`
 
-The jQuery object which represents the table body. Contains all treelist table rows.
+The jQuery object which represents the table body. Contains all TreeList table rows.
 
 ### thead `jQuery`
 
-The jQuery object which represents the treelist table header element.
+The jQuery object which represents the TreeList table header element.
 
 ### content `jQuery`
 
-The jQuery object which represents the treelist content element, which holds the scrollable content. Available only in a treelist with locked columns.
+The jQuery object which represents the TreeList `content` element which holds the scrollable content. Available only in a TreeList with locked columns.
 
 ### lockedHeader `jQuery`
 
-The jQuery object which represents the treelist locked header element. Available only in a treelist with locked columns.
+The jQuery object which represents the TreeList locked `header` element. Available only in a TreeList with locked columns.
 
 ### lockedTable `jQuery`
 
-The jQuery object which represents the treelist locked table element. Available only in a treelist with locked columns.
+The jQuery object which represents the TreeList locked `table` element. Available only in a TreeList with locked columns.
 
 ### lockedContent `jQuery`
 
-The jQuery object which represents the treelist locked content element. Available only in a treelist with locked columns.
+The jQuery object which represents the TreeList locked `content` element. Available only in a TreeList with locked columns.
 
 ## Methods
 
 ### addRow
 
-Adds an empty data item to the TreeList. In "inline" editing mode a table row will be appended. A popup window will be displayed in "popup" editing mode.
-
-Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
+Adds an empty data item to the TreeList. In inline edit mode, appends a table row. In the popup edit mode, displays a popup window. Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
 ##### parentRow `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the parent table row. A string is treated as a jQuery selector.
+A string, DOM element, or a jQuery object which represents the parent table row. A string is treated as a jQuery selector.
 
-#### Example - add a new root data item
+#### Example - adding a new root data item
 
       <div id="treelist"></div>
       <script>
@@ -4944,7 +4950,7 @@ A string, DOM element or jQuery object which represents the parent table row. A 
         });
       </script>
 
-#### Example - add a new child data item
+#### Example - adding a new child data item
 
       <button id="add">Add New Row</button>
       <div id="treelist"></div>
@@ -5005,15 +5011,15 @@ A string, DOM element or jQuery object which represents the parent table row. A 
 
 ### autoFitColumn
 
-Applies the minimum possible width for the specified column, so that all text fits without wrapping.
+Applies the minimum possible width for the specified column so that all the text fits without wrapping.
 
 #### Parameters
 
 ##### column `Number|String|Object`
 
-The index of the column, or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound, or the column object obtained from the [columns](/api/javascript/ui/treelist#fields-columns) collection.
+The index of the column, the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound, or the column object that is obtained from the [`columns`](/api/javascript/ui/treelist#fields-columns) collection.
 
-#### Example - autofit a column by index
+#### Example - automatically fitting a column by an index
 
     <div id="treeList"></div>
     <script>
@@ -5032,7 +5038,7 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
       treeList.autoFitColumn(1);
     </script>
 
-#### Example - autofit a column by field
+#### Example - automatically fitting a column by a field
 
     <div id="treeList"></div>
     <script>
@@ -5051,7 +5057,7 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
       treeList.autoFitColumn("Position");
     </script>
 
-#### Example - autofit a column by column object reference
+#### Example - automatically fitting a column by a column object reference
 
     <div id="treeList"></div>
     <script>
@@ -5072,9 +5078,9 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
 
 ### cancelChanges
 
-Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed and updated data items are restored to their initial state.
+Cancels any pending changes in the data source. Deleted data items are restored, new data items are removed, and updated data items are restored to their initial state.
 
-#### Example - cancel any changes
+#### Example - canceling all changes
 
     <div id="treeList"></div>
     <script>
@@ -5099,7 +5105,7 @@ Cancels any pending changes in the data source. Deleted data items are restored,
 
 Cancels editing for the table row which is in edit mode. Reverts any changes made.
 
-#### Example - cancel editing
+#### Example - canceling editing
 
       <button id="cancel">Cancel Editing</button>
       <div id="treelist"></div>
@@ -5160,9 +5166,9 @@ Cancels editing for the table row which is in edit mode. Reverts any changes mad
 
 ### clearSelection
 
-Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/treelist#configuration-selectable)).
+Depending on the current selection [mode](/api/javascript/ui/treelist#configuration-selectable), clears the currently selected table rows or cells.
 
-#### Example - clear selection
+#### Example - clearing selection
 
     <button id="clear">Clear Selection</button>
     <div id="treeList"></div>
@@ -5187,17 +5193,17 @@ Clears the currently selected table rows or cells (depending on the current sele
 
 ### closeCell
 
-Stops editing the table cell which is in edit mode. Requires "incell" [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
+Stops editing the table cell which is in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
 
-> When keyboard navigation is used, the TreeList [`table`](/api/javascript/ui/treelist/fields/table) must be focused programmatically after calling `closeCell`.
+> When the user applies keyboard navigation, [`table`](/api/javascript/ui/treelist/fields/table) must be focused programmatically after calling `closeCell`.
 
 #### Parameters
 
 ##### isCancel `Boolean` *optional*
 
-A flag specifying whether to fire the `cancel` event. By default the event is not fired.
+A flag which specifies whether to fire the `cancel` event. By default, the event is not fired.
 
-#### Example - cancel cell editing
+#### Example - canceling cell editing
 
     <div id="treeList"></div>
     <script>
@@ -5227,19 +5233,19 @@ A flag specifying whether to fire the `cancel` event. By default the event is no
 
 ### collapse
 
-This method collapses the row passed as a parameter.
+This method collapses the row that is passed as a parameter.
 
 #### Parameters
 
 ##### row `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+A string, a DOM element, or a jQuery object which represents the table row. A string is treated as a jQuery selector.
 
 #### Returns
 
 `Promise`
 
-#### Example
+#### Example - returning a promise
 
     <button id="collapse">Collapse TreeList</button>
     <div id="treeList"></div>
@@ -5270,13 +5276,13 @@ Returns the data item to which the specified table row is bound.
 
 ##### row `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+A string, a DOM element, or a jQuery object which represents the table row. A string is treated as a jQuery selector.
 
 #### Returns
 
-`kendo.data.TreeListModel` the data item to which the specified table row is bound.
+`kendo.data.TreeListModel` - The data item to which the specified table row is bound.
 
-#### Example - get the data item to which the first table row is bound
+#### Example - getting the data item to which the first table row is bound
 
     <div id="treeList"></div>
     <script>
@@ -5298,11 +5304,11 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 ### destroy
 
-Prepares the widget for safe removal from DOM. Detaches all event handlers and removes jQuery.data attributes to avoid memory leaks. Calls the `destroy` method of any child Kendo widgets.
+Prepares the widget for safe removal from DOM. Detaches all event handlers and removes `jQuery.data` attributes to avoid memory leaks. Calls the `destroy` method of any child Kendo UI widgets.
 
-> This method does not remove the widget element from DOM.
+> This method does not remove the widget element from the DOM.
 
-#### Example
+#### Example - safely removing the TreeList from the DOM
 
     <button id="destroy">Destroy and remove TreeList</button>
     <div id="treeList"></div>
@@ -5327,9 +5333,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 
 ### editCell
 
-Switches the specified table cell in edit mode. Requires "incell" [edit mode](/api/javascript/ui/treelist/configuration/editable.mode).
-
-Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
+Switches the specified table cell in edit mode. Requires the incell [edit mode](/api/javascript/ui/treelist/configuration/editable.mode). Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
@@ -5337,7 +5341,7 @@ Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
 
 The jQuery object which represents the table cell.
 
-#### Example - switch the first cell to edit mode
+#### Example - switching the first cell to edit mode
 
     <div id="treeList"></div>
     <script>
@@ -5359,9 +5363,7 @@ The jQuery object which represents the table cell.
 
 ### editRow
 
-Switches the specified table row to edit mode.
-
-Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
+Switches the specified table row to edit mode. Fires the [`edit`](/api/javascript/ui/treelist/events/edit) event.
 
 #### Parameters
 
@@ -5369,7 +5371,7 @@ Fires the [edit](/api/javascript/ui/treelist/events/edit) event.
 
 The jQuery object which represents the table row.
 
-#### Example - switch the first row to edit mode
+#### Example - switching the first row to edit mode
 
       <button id="edit">Edit First Row</button>
       <div id="treelist"></div>
@@ -5430,19 +5432,19 @@ The jQuery object which represents the table row.
 
 ### expand
 
-This method expands the row.
+Expands the row.
 
 #### Parameters
 
 ##### row `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+A string, a DOM element, or a jQuery object which represents the table row. A string is treated as a jQuery selector.
 
 #### Returns
 
 `Promise`
 
-#### Example
+#### Example - returning a promise
 
     <button id="expand">Expand TreeList</button>
     <div id="treeList"></div>
@@ -5464,7 +5466,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
       });
     </script>
 
-#### Example - expand row of a data item with a given id
+#### Example - expanding a row of a data item with a given id
 
     <button id="expand">Expand item with ID = 1</button>
     <div id="treeList"></div>
@@ -5496,21 +5498,19 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 ### itemFor
 
-Returns the rendered HTML element for a given model.
-
-> This method is available with versions released after the official Q3 release - 2015.3.930.
+(Available as of the 2015.3.930 release) Returns the rendered HTML element for a given model.
 
 #### Parameters
 
 ##### model `kendo.data.TreeListModel|Object`
 
-A model from the DataSource, or the id of a model in the DataSource.
+A model from the DataSource, or the `id` of a model in the DataSource.
 
 #### Returns
 
-`jQuery` the row that corresponds to the model
+`jQuery` - The row that corresponds to the model.
 
-#### Example - get row from model
+#### Example - getting the row from model
 
     <button id="itemFor">Highlight the row with Jane</button>
     <div id="treeList"></div>
@@ -5539,17 +5539,17 @@ A model from the DataSource, or the id of a model in the DataSource.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
+Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource/methods/view) of the data source.
 
 #### Returns
 
-`Array` The currently rendered data table rows (`<tr>` elements).
+`Array` - The currently rendered data table rows (`<tr>` elements).
 
 ### refresh
 
-Renders all table rows using the current data items.
+Renders all table rows by using the current data items.
 
-#### Example - refresh the widget
+#### Example - refreshing the widget
 
     <button id="btn">Refresh</button>
     <div id="treelist"></div>
@@ -5575,17 +5575,15 @@ Renders all table rows using the current data items.
 
 ### removeRow
 
-Removes the specified table row from the treelist. Also removes the corresponding data item from the data source.
-
-Fires the [remove](/api/javascript/ui/treelist/events/remove) event.
+Removes the specified table row from the TreeList. Also removes the corresponding data item from the data source. Fires the [`remove`](/api/javascript/ui/treelist/events/remove) event.
 
 #### Parameters
 
 ##### row `String|Element|jQuery`
 
-A string, DOM element or jQuery object which represents the table row. A string is treated as a jQuery selector.
+A string, a DOM element, or a jQuery object which represents the table row. A string is treated as a jQuery selector.
 
-#### Example - remove the first table row
+#### Example - removing the first table row
 
     <button id="btn">Remove second row</button>
     <div id="treelist"></div>
@@ -5643,9 +5641,9 @@ A string, DOM element or jQuery object which represents the table row. A string 
 
 Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/treelist/events/excelexport) event.
 
-> Calling this method could trigger the browser built-in popup blocker in some cases. To avoid that, always call it as a response to an end-user action e.g. button click.
+> Calling this method may trigger the built-in browser popup blocker. To avoid that, always call it as a response to an end-user action (for example, a button click).
 
-#### Example - manually initiate Excel export
+#### Example - manually initiating the Excel export
 
     <button id="export">Export to Excel</button>
     <div id="treeList"></div>
@@ -5665,14 +5663,15 @@ Initiates the Excel export. Also fires the [`excelExport`](/api/javascript/ui/tr
 
 ### saveAsPDF
 
-Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/api/javascript/ui/treelist/events/pdfexport) event.
+Initiates the PDF export and returns a promise. Also triggers the [`pdfExport`](/api/javascript/ui/treelist/events/pdfexport) event.
 
-> Calling this method may trip the built-in browser pop-up blocker. To avoid that, call this method as a response to an end-user action, e.g. a button click.
+> Calling this method may trip the built-in browser popup blocker. To avoid that, call this method as a response to an end-user action (foe examlple, a button click).
 
 #### Returns
-`Promise` A promise that will be resolved when the export completes. The same promise is available in the [pdfExport](/api/javascript/ui/treelist/events/pdfexport) event arguments.
 
-#### Example - manually initiate PDF export
+`Promise` - A promise that will be resolved when the export completes. The same promise is available in the [`pdfExport`](/api/javascript/ui/treelist/events/pdfexport) event arguments.
+
+#### Example - manually initiating the PDF export
 
     <button id="export">Export to PDF</button>
     <div id="treeList"></div>
@@ -5692,11 +5691,9 @@ Initiates the PDF export and returns a promise. Also triggers the [pdfExport](/a
 
 ### saveChanges
 
-Saves any pending changes by calling the [sync](/api/javascript/data/datasource/methods/sync) method.
+Saves any pending changes by calling the [`sync`](/api/javascript/data/datasource/methods/sync) method. Fires the [`saveChanges`](/api/javascript/ui/treelist/events/savechanges) event.
 
-Fires the [saveChanges](/api/javascript/ui/treelist/events/savechanges) event.
-
-#### Example - save changes
+#### Example - saving changes
 
     <div id="treeList"></div>
     <script>
@@ -5719,11 +5716,9 @@ Fires the [saveChanges](/api/javascript/ui/treelist/events/savechanges) event.
 
 ### saveRow
 
-Switches the table row which is in edit mode and saves any changes made by the user.
+Switches the table row which is in edit mode and saves any changes that are made by the user. Fires the [`edit`](/api/javascript/ui/treelist/events/save) event.
 
-Fires the [edit](/api/javascript/ui/treelist/events/save) event.
-
-#### Example - save row
+#### Example - saving a row
 
     <button id="save">Save Row</button>
     <div id="treelist"></div>
@@ -5791,13 +5786,13 @@ Gets or sets the table rows (or cells) which are selected.
 
 ##### rows `Element|jQuery`
 
-A DOM element or jQuery object which represents the table row(s) or cell(s).
+A DOM element or a jQuery object which represents the table rows or cells.
 
 #### Returns
 
-`jQuery` the selected table rows or cells.
+`jQuery` - The selected table rows or cells.
 
-#### Example - select the first table cell
+#### Example - selecting the first table cell
 
     <button id="btn">Highlight third row</button>
     <div id="treeList"></div>
@@ -5822,7 +5817,7 @@ A DOM element or jQuery object which represents the table row(s) or cell(s).
       });
     </script>
 
-#### Example - get the selected table row
+#### Example - getting the selected table row
 
     <button id="btn">Get selected row info</button>
     <div id="treeList"></div>
@@ -5858,9 +5853,9 @@ Sets the data source of the widget.
 
 ##### dataSource `kendo.data.TreeListDataSource`
 
-The data source to which the widget should be bound.
+The data source to which the widget will be bound.
 
-#### Example - set the data source
+#### Example - setting the data source
 
     <button id="btn">Change DataSource</button>
     <div id="treeList"></div>
@@ -5897,9 +5892,9 @@ Shows the specified column.
 
 ##### column `Number|String`
 
-The index of the column, or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column, or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
-#### Example - show a hidden column by index
+#### Example - showing a hidden column by an index
 
     <button id="btn">Show Age Column</button>
     <div id="treeList"></div>
@@ -5922,7 +5917,7 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
       });
     </script>
 
-#### Example - show a hidden column by field
+#### Example - showing a hidden column by a field
 
     <button id="btn">Show Age Column</button>
     <div id="treeList"></div>
@@ -5953,9 +5948,9 @@ Hides the specified column.
 
 ##### column `Number|String`
 
-The index of the column, or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
-#### Example - hide a column by index
+#### Example - hiding a column by an index
 
     <button id="btn">Hide Age Column</button>
     <div id="treeList"></div>
@@ -5978,7 +5973,7 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
       });
     </script>
 
-#### Example - hide a column by field
+#### Example - hiding a column by a field
 
     <button id="btn">Hide Age Column</button>
     <div id="treeList"></div>
@@ -6003,17 +5998,17 @@ The index of the column, or the [field](/api/javascript/ui/treelist#configuratio
 
 ### lockColumn
 
-Locks (freezes) a column, allowing users to see it at all times when scrolling.
+Locks (freezes) a column and allows the user to see it at all times when scrolling.
 
 #### Parameters
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
-> In order to use this method, the treelist must be initialized with at least one locked column, and should have unlocked columns left after the target column is locked.
+> To use this method, initialize the TreeList with at least one locked column and render unlocked columns which will remain after the target column is locked.
 
-#### Example - lock a column
+#### Example - locking a column
 
     <button id="btn">Lock Age Column</button>
     <div id="treeList" style="width: 400px"></div>
@@ -6045,9 +6040,9 @@ Unlocks (unfreezes) a column.
 
 ##### column `Number|String`
 
-The index of the column or the [field](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
+The index of the column or the [`field`](/api/javascript/ui/treelist#configuration-columns.field) to which the columns is bound.
 
-> In order to use this method, the treelist must be initialized with at least one locked column, and there should be locked columns left after the target column is unlocked.
+> To use this method, initialize the TreeList with at least one locked column and locked columns which will remain after the target column is unlocked.
 
 #### Example - unlock a column
 
@@ -6081,13 +6076,13 @@ Changes the position of the specified column.
 
 ##### destIndex `Number`
 
-The new position of the column. The destination index should be calculated with regard to all columns, including the hidden ones.
+The new position of the column. The destination index has to be calculated with regard to all columns including the hidden ones.
 
 ##### column `Object`
 
-The column whose position should be changed.
+The column whose position will be changed.
 
-#### Example - move a column
+#### Example - moving a column
 
     <button id="btn">Switch Name and Age Column</button>
     <div id="treeList"></div>
@@ -6115,23 +6110,19 @@ The column whose position should be changed.
 
 ### beforeEdit
 
-Fired when the user try to edit or create a data item, before the editor is created. Can be used for preventing the editing depending on custom logic.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-The event will be fired only when the TreeList is `editable`.
+Fires when the user tries to edit or creates a data item before the editor is created. Can be used for preventing the editing depending on custom logic. The event handler function context (available through the `this` keyword) will be set to the widget instance. The event will be fired only when the TreeList is editable.
 
 #### Event Data
 
 ##### e.model `kendo.data.Model`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
+The data item which will be edited. To check if the data item is new (created) or not (edited), use its [`isNew`](/api/javascript/data/model/methods/isnew) method.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "beforeEdit" event during initialization
+#### Example - subscribing to the beforeEdit event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -6159,9 +6150,7 @@ The widget instance which fired the event.
 
 ### cancel
 
-Fired when the user clicks the "cancel" button (in inline or popup [editing mode](/api/javascript/ui/treelist#configuration-editable.mode)) or closes the popup window.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user clicks the **Cancel** button (in inline or popup [edit mode](/api/javascript/ui/treelist#configuration-editable.mode)) or closes the popup window. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6175,13 +6164,13 @@ The data item to which the table row is bound.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the cancel action. The table row remains in edit mode.
+If invoked, prevents the `cancel` action. The table row remains in edit mode.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "cancel" event before initialization
+#### Example - subscribing to the cancel event before initialization
 
     <div id="treeList"></div>
      <script>
@@ -6202,7 +6191,7 @@ The widget instance which fired the event.
         });
     </script>
 
-#### Example - subscribe to the "cancel" event after initialization
+#### Example - subscribing to the cancel event after initialization
 
     <div id="treeList"></div>
      <script>
@@ -6229,15 +6218,13 @@ The widget instance which fired the event.
 
 ### cellClose
 
-Fired when "incell" edit mode is used and the cell is going to be closed. The event is triggerd after saving or canceling the changes, but before the cell is closed.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the incell edit mode is used and the cell will be closed. The event is triggered after saving or canceling the changes but before the cell is closed. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.container `jQuery`
 
-The jQuery object that represents the edit container element. More information is available in the [edit event arguments' description](edit).
+The jQuery object that represents the edit container element. For more information, refer to the [`edit` event arguments](edit).
 
 ##### e.model `kendo.data.Model`
 
@@ -6245,13 +6232,18 @@ The data item to which the table row is bound.
 
 ##### e.type `String`
 
-The type of the cell close action - can be either "save" or "cancel". The "cancel" type is triggered when the treelist keyboard navigation is enabled by "navigateble: true" and Esc key is used for cell close action.
+The type of the cell close action.
+
+The supported types are:
+
+* `save`
+* `cancel` - Triggered when the TreeList keyboard navigation is enabled by `navigateble: true` and the `Esc` key is used for the `close` action of the cell.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "cancel" event during initialization
+#### Example - subscribing to the cancel event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -6277,9 +6269,7 @@ The widget instance which fired the event.
 
 ### change
 
-Fired when the user selects a table row or cell in the treelist.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user selects a table row or cell in the TreeList. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6287,7 +6277,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 The widget instance which fired the event.
 
-#### Example - get the selected data item(s) when using row selection
+#### Example - getting the selected data items when using row selection
 
     <div id="treeList"></div>
     <script>
@@ -6316,7 +6306,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - get the selected data item(s) when using cell selection
+#### Example - getting the selected data items when using cell selection
 
     <div id="treeList"></div>
     <script>
@@ -6351,9 +6341,7 @@ The widget instance which fired the event.
 
 ### collapse
 
-Fired when an item is about to be collapsed.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when an item is about to be collapsed. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6367,9 +6355,9 @@ The data item to which the table row is bound.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the collapse action. The child table rows will not be hidden.
+If invoked, prevents the collapse action. The child table rows will not be hidden.
 
-#### Example - subscribe to the "collapse" event before initialization
+#### Example - subscribing to the collapse event before initialization
 
     <div id="treeList"></div>
      <script>
@@ -6388,7 +6376,7 @@ If invoked prevents the collapse action. The child table rows will not be hidden
         });
     </script>
 
-#### Example - subscribe to the "collapse" event after initialization
+#### Example - subscribing to the collapse event after initialization
 
     <div id="treeList"></div>
      <script>
@@ -6413,9 +6401,7 @@ If invoked prevents the collapse action. The child table rows will not be hidden
 
 ### dataBinding
 
-Fired before the widget binds to its data source.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires before the widget binds to its data source. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6425,9 +6411,9 @@ The widget instance which fired the event.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the data bind action. The table rows will remain unchanged and `dataBound` event will not fire.
+If invoked, prevents the data bind action. The table rows will remain unchanged and the `dataBound` event will not fire.
 
-#### Example - subscribe to the "dataBinding" event before initialization
+#### Example - subscribing to the dataBinding event before initialization
 
     <div id="treeList"></div>
      <script>
@@ -6446,7 +6432,7 @@ If invoked prevents the data bind action. The table rows will remain unchanged a
         });
     </script>
 
-#### Example - subscribe to the "dataBinding" event after initialization
+#### Example - subscribing to the dataBinding event after initialization
 
     <div id="treeList"></div>
      <script>
@@ -6471,9 +6457,7 @@ If invoked prevents the data bind action. The table rows will remain unchanged a
 
 ### dataBound
 
-Fired when the widget is bound to data from its data source.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the widget is bound to data from its data source. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6481,7 +6465,7 @@ The event handler function context (available via the `this` keyword) will be se
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "dataBound" event before initialization
+#### Example - subscribing to the dataBound event before initialization
 
     <div id="treeList"></div>
      <script>
@@ -6500,7 +6484,7 @@ The widget instance which fired the event.
         });
     </script>
 
-#### Example - subscribe to the "dataBound" event after initialization
+#### Example - subscribing to the dataBound event after initialization
 
     <div id="treeList"></div>
      <script>
@@ -6525,17 +6509,13 @@ The widget instance which fired the event.
 
 ### dragstart
 
-Fired when the user attempts to drag an item. If prevented, the item is not allowed to move.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-Available in builds 2015.3.1014 and later.
+(Available as of the 2015.3.1014 release) Fires when the user attempts to drag an item. If prevented, the item is not allowed to move. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 ##### e.source `kendo.data.TreeListModel`
 
 The model of the source row.
 
-#### Example - subscribe to the "dragstart" event before initialization
+#### Example - subscribing to the dragstart event before initialization
 
     <div id="treelist"></div>
     <script>
@@ -6577,7 +6557,7 @@ The model of the source row.
       });
     </script>
 
-#### Example - subscribe to the "dragstart" event after initialization
+#### Example - subscribing to the dragstart event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -6625,11 +6605,7 @@ The model of the source row.
 
 ### drag
 
-Fired while the user drags and item. This event is triggered on every mouse move.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-Available in builds 2015.3.1014 and later.
+(Available as of the 2015.3.1014 release) Fires while the user is dragging and item. This event is triggered on every mouse move. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6645,7 +6621,7 @@ The element under the cursor.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "drag" event before initialization
+#### Example - subscribing to the drag event before initialization
 
     <div id="treelist"></div>
     <script>
@@ -6687,7 +6663,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "drag" event after initialization
+#### Example - subscribing to the drag event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -6735,11 +6711,7 @@ The widget instance which fired the event.
 
 ### dragend
 
-Fired when the user has finished dragging an item and the model has been updated.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-Available in builds 2015.3.1014 and later.
+(Available as of the 2015.3.1014 release) Fires when the user finishes dragging an item and the model was updated. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6755,7 +6727,7 @@ The model of the new parent row.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "dragend" event before initialization
+#### Example - subscribing to the dragend event before initialization
 
     <div id="treelist"></div>
     <script>
@@ -6797,7 +6769,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "dragend" event after initialization
+#### Example - subscribing to the dragend event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -6845,11 +6817,7 @@ The widget instance which fired the event.
 
 ### drop
 
-Fired when the user drops an item. If prevented, the source row will not be moved.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-Available in builds 2015.3.1014 and later.
+(Available as of the 2015.3.1014 release) Fires when the user drops an item. If prevented, the source row will not be moved. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -6863,7 +6831,7 @@ The model of the new parent row.
 
 ##### e.dropTarget `Element`
 
-The element that the node is placed over.
+The element over which the node is placed.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -6875,16 +6843,16 @@ Indicates whether the drag operation is successful.
 
 ##### e.setValid `Boolean`
 
-Sets the valid state. If set to false, the row will be animated back to its origin, indicating to the user that the operation was invalid.
+Sets the valid state. If set to `false`, the row will be animated back to its origin and will indicate to the user that the operation was invalid.
 
 #### The difference between e.setValid(false) and e.preventDefault()
 
-Both operations cancel the default drag operation, but the indication to the user is different.
-`e.setValid(false)` indicates that the operation was unsuccessful by animating the drag clue to its original position.
-`e.preventDefault()` simply removes the clue, as if it has been dropped.
-As a general rule, use `preventDefault` to manually handle the drag&drop operation, and `setValid(false)` to indicate unsuccessful drag&drops.
+Both operations cancel the default drag operation but the indication to the user is different.
 
-#### Example - subscribe to the "drop" event before initialization
+* `e.setValid(false)` indicates that the operation was unsuccessful by animating the drag clue to its original position. Use `setValid(false)` to indicate unsuccessful drag-and-drop operations.
+* `e.preventDefault()` only removes the clue as if it was dropped. Use `preventDefault` to manually handle the drag-and-drop operation.
+
+#### Example - subscribing to the drop event before initialization
 
     <div id="treelist"></div>
     <script>
@@ -6926,7 +6894,7 @@ As a general rule, use `preventDefault` to manually handle the drag&drop operati
       });
     </script>
 
-#### Example - subscribe to the "drop" event after initialization
+#### Example - subscribing to the drop event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -6975,25 +6943,23 @@ As a general rule, use `preventDefault` to manually handle the drag&drop operati
 
 ### edit
 
-Fired when the user edits or creates a data item.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user edits or creates a data item. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.container `jQuery`
 
-The jQuery object representing the container element. That element contains the editing UI.
+The jQuery object which represents the container element. The container element contains the editing UI.
 
 ##### e.model `kendo.data.TreeListModel`
 
-The data item which is going to be edited. Use its [isNew](/api/javascript/data/model/methods/isnew) method to check if the data item is new (created) or not (edited).
+The data item which will be edited. To check if the data item is new (created) or not (edited), use its [`isNew`](/api/javascript/data/model/methods/isnew) method.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "edit" event before initialization
+#### Example - subscribing to the edit event before initialization
 
     <div id="treelist"></div>
 
@@ -7047,7 +7013,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "edit" event after initialization
+#### Example - subscribing to the edit event after initialization
 
     <div id="treelist"></div>
 
@@ -7107,7 +7073,7 @@ The widget instance which fired the event.
 
 ### excelExport
 
-Fired when the user clicks the "Export to Excel" toolbar button.
+Fires when the user clicks the **Export to Excel** toolbar button.
 
 #### Event Data
 
@@ -7117,17 +7083,17 @@ The widget instance which fired the event.
 
 ##### e.data `Array`
 
-The array of data items used to create the Excel workbook. Available since version 2014.3.1205.
+(Available as of the 2014.3.1205 release) The array of data items that is used to create the Excel workbook.
 
 ##### e.workbook `Object`
 
-The Excel [workbook configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will reflect in the output Excel document.
+The Excel [`workbook` configuration object](/api/javascript/ooxml/workbook#configuration). Used to initialize a `kendo.ooxml.Workbook` class. Modifications of the workbook will be reflected in the output Excel document.
 
 ##### e.preventDefault `Function`
 
-If invoked the treelist will not save the generated file.
+If invoked, the TreeList will not save the generated file.
 
-#### Example - subscribe to the "excelExport" event during initialization
+#### Example - subscribing to the excelExport event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7149,7 +7115,7 @@ If invoked the treelist will not save the generated file.
       treeList.saveAsExcel();
     </script>
 
-#### Example - subscribe to the "excelExport" event after initialization
+#### Example - subscribing to the excelExport event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7176,9 +7142,7 @@ If invoked the treelist will not save the generated file.
 
 ### expand
 
-Fired when an item is about to be expanded.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when an item is about to be expanded. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -7192,9 +7156,9 @@ The data item to which the table row is bound.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the expand action. The child table rows will not be shown.
+If invoked, prevents the expand action. The child table rows will not be shown.
 
-#### Example - subscribe to the "expand" event before initialization
+#### Example - subscribing to the expand event before initialization
 
     <div id="treeList"></div>
      <script>
@@ -7213,7 +7177,7 @@ If invoked prevents the expand action. The child table rows will not be shown.
         });
     </script>
 
-#### Example - subscribe to the "expand" event after initialization
+#### Example - subscribing to the expand event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7237,15 +7201,13 @@ If invoked prevents the expand action. The child table rows will not be shown.
 
 ### filterMenuInit
 
-Fired when the treelist filter menu is initialized.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the TreeList filter menu is initialized. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.container `jQuery`
 
-The jQuery object representing filter menu form element.
+The jQuery object which represents the filter menu form element.
 
 ##### e.field `String`
 
@@ -7255,7 +7217,7 @@ The field of the column for which the filter menu is initialized.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "filterMenuInit" event during initialization
+#### Example - subscribing to the filterMenuInit event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7289,7 +7251,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "filterMenuInit" event during initialization and change the default operators
+#### Example - subscribing to the filterMenuInit event during initialization and changing the default operators
 
     <div id="treelist"></div>
     <script>
@@ -7322,15 +7284,13 @@ The widget instance which fired the event.
 
 ### filterMenuOpen
 
-Fired when the treelist filter menu is opened.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the TreeList filter menu is opened. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.container `jQuery`
 
-The jQuery object representing filter menu form element.
+The jQuery object which represents filter menu form element.
 
 ##### e.field `String`
 
@@ -7340,7 +7300,7 @@ The field of the column for which the filter menu is opened.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "filterMenuOpen" event during initialization
+#### Example - subscribing to the filterMenuOpen event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7362,7 +7322,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "filterMenuOpen" event during initialization and change the default operators
+#### Example - subscribing to the filterMenuOpen event during initialization and change the default operators
 
     <div id="treelist"></div>
     <script>
@@ -7388,7 +7348,7 @@ The widget instance which fired the event.
 
 ### pdfExport
 
-Fired when the user clicks the "Export to PDF" toolbar button.
+Fires  when the user clicks the **Export to PDF** toolbar button.
 
 #### Event Data
 
@@ -7398,13 +7358,13 @@ The widget instance which fired the event.
 
 ##### e.preventDefault `Function`
 
-If invoked the treelist will not save the generated file.
+If invoked, the TreeList will not save the generated file.
 
 ##### e.promise `Promise`
 
 A promise that will be resolved when the export completes.
 
-#### Example - subscribe to the "pdfExport" event during initialization
+#### Example - subscribing to the pdfExport event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7426,7 +7386,7 @@ A promise that will be resolved when the export completes.
       treelist.saveAsPDF();
     </script>
 
-#### Example - subscribe to the "pdfExport" event after initialization
+#### Example - subscribing to the pdfExport event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7450,9 +7410,7 @@ A promise that will be resolved when the export completes.
 
 ### remove
 
-Fired when the user clicks the "destroy" command button.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user clicks the **Destroy** command button. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -7462,7 +7420,7 @@ The data item to which the table row is bound.
 
 ##### e.row `jQuery`
 
-The jQuery object representing the current table row.
+The jQuery object which represents the current table row.
 
 ##### e.sender `kendo.ui.TreeList`
 
@@ -7470,9 +7428,9 @@ The widget instance which fired the event.
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the removal of the data item. The table rows will remain unchanged.
+If invoked, prevents the removal of the data item. The table rows will remain unchanged.
 
-#### Example - subscribe to the "remove" event before initialization
+#### Example - subscribing to the remove event before initialization
 
     <div id="treelist"></div>
     <script>
@@ -7524,7 +7482,7 @@ If invoked prevents the removal of the data item. The table rows will remain unc
       });
     </script>
 
-#### Example - subscribe to the "remove" event after initialization
+#### Example - subscribing to the remove event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7582,9 +7540,7 @@ If invoked prevents the removal of the data item. The table rows will remain unc
 
 ### save
 
-Fired when a data item is saved.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when a data item is saved. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
@@ -7594,13 +7550,13 @@ The data item to which the table row is bound.
 
 ##### e.container `jQuery`
 
-The jQuery object representing the current editor container element. If the [editable.mode](/api/javascript/ui/treelist#configuration-editable.mode) is "inline", the container will be the edited row. If it is "popup" then the container element will be the window element.
+The jQuery object which represents the current editor container element. If the [`editable.mode`](/api/javascript/ui/treelist#configuration-editable.mode) is `inline`, the container will be the edited row. If it is set to `popup`, then the container element will be the window element.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "save" event before initialization
+#### Example - subscribing to the save event before initialization
 
     <div id="treeList"></div>
     <script>
@@ -7651,7 +7607,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "save" event after initialization
+#### Example - subscribing to the save event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7708,21 +7664,19 @@ The widget instance which fired the event.
 
 ### saveChanges
 
-Fired when the user clicks the "save" command button.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user clicks the **Save** command button. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.preventDefault `Function`
 
-If invoked the treelist will not call the [sync](/api/javascript/data/datasource/methods/sync) method of the data source.
+If invoked, the TreeList will not call the [`sync`](/api/javascript/data/datasource/methods/sync) method of the data source.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "saveChanges" event during initialization
+#### Example - subscribing to the saveChanges event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7746,7 +7700,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "saveChanges" event after initialization
+#### Example - subscribing to the saveChanges event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7775,21 +7729,19 @@ The widget instance which fired the event.
 
 ### columnShow
 
-Fired when the user shows a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user shows a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnShow" event during initialization
+#### Example - subscribing to the columnShow event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7812,7 +7764,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "columnShow" event after initialization
+#### Example - subscribing to the columnShow event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7841,21 +7793,19 @@ The widget instance which fired the event.
 
 ### columnHide
 
-Fired when the user hides a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user hides a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnHide" event during initialization
+#### Example - subscribing to the columnHide event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7878,7 +7828,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "columnHide" event after initialization
+#### Example - subscribing to the columnHide event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7907,15 +7857,13 @@ The widget instance which fired the event.
 
 ### columnReorder
 
-Fired when the user changes the order of a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user changes the order of a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.newIndex `Number`
 
@@ -7929,7 +7877,7 @@ The previous column index.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnReorder" event during initialization
+#### Example - subscribing to the columnReorder event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -7951,7 +7899,7 @@ The widget instance which fired the event.
         });
     </script>
 
-#### Example - subscribe to the "columnReorder" event after initialization
+#### Example - subscribing to the columnReorder event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -7979,15 +7927,13 @@ The widget instance which fired the event.
 
 ### columnResize
 
-Fired when the user resizes a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user resizes a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.newWidth `Number`
 
@@ -8001,7 +7947,7 @@ The previous column width.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnResize" event during initialization
+#### Example - subscribing to the columnResize event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -8023,7 +7969,7 @@ The widget instance which fired the event.
         });
     </script>
 
-#### Example - subscribe to the "columnResize" event after initialization
+#### Example - subscribing to the columnResize event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -8051,15 +7997,13 @@ The widget instance which fired the event.
 
 ### columnMenuInit
 
-Fired when the column menu is initialized.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the column menu is initialized. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.container `jQuery`
 
-The jQuery object representing column menu form element.
+The jQuery object which represents column menu form element.
 
 ##### e.field `String`
 
@@ -8069,7 +8013,7 @@ The field of the column for which the column menu is initialized.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnMenuInit" event during initialization
+#### Example - subscribing to the columnMenuInit event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -8098,7 +8042,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "columnMenuInit" event after initialization
+#### Example - subscribing to the columnMenuInit event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -8133,15 +8077,13 @@ The widget instance which fired the event.
 
 ### columnMenuOpen
 
-Fired when the column menu is opened.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the column menu is opened. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.container `jQuery`
 
-The jQuery object representing column menu form element.
+The jQuery object which represents column menu form element.
 
 ##### e.field `String`
 
@@ -8151,7 +8093,7 @@ The field of the column for which the column menu is initialized.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnMenuOpen" event during initialization
+#### Example - subscribing to the columnMenuOpen event during initialization
 
     <div id="treeList"></div>
     <script>
@@ -8174,7 +8116,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "columnMenuOpen" event after initialization
+#### Example - subscribing to the columnMenuOpen event after initialization
 
     <div id="treeList"></div>
     <script>
@@ -8203,21 +8145,19 @@ The widget instance which fired the event.
 
 ### columnLock
 
-Fired when the user lock a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user lock a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnLock" event during initialization
+#### Example - subscribing to the columnLock event during initialization
 
     <div id="treeList" style="width: 400px"></div>
     <script>
@@ -8240,7 +8180,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "columnLock" event after initialization
+#### Example - subscribing to the columnLock event after initialization
 
     <div id="treeList" style="width: 400px"></div>
     <script>
@@ -8269,21 +8209,19 @@ The widget instance which fired the event.
 
 ### columnUnlock
 
-Fired when the user unlock a column.
-
-The event handler function context (available via the `this` keyword) will be set to the widget instance.
+Fires when the user unlock a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
 
 #### Event Data
 
 ##### e.column `Object`
 
-A JavaScript object which represents the [column](/api/javascript/ui/treelist#configuration-columns) configuration.
+A JavaScript object which represents the [`column`](/api/javascript/ui/treelist#configuration-columns) configuration.
 
 ##### e.sender `kendo.ui.TreeList`
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "columnUnlock" event during initialization
+#### Example - subscribing to the columnUnlock event during initialization
 
     <div id="treeList" style="width: 400px"></div>
     <script>
@@ -8306,7 +8244,7 @@ The widget instance which fired the event.
       });
     </script>
 
-#### Example - subscribe to the "columnUnlock" event after initialization
+#### Example - subscribing to the columnUnlock event after initialization
 
     <div id="treeList" style="width: 400px"></div>
     <script>

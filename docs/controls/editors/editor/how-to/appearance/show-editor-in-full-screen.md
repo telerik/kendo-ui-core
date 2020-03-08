@@ -8,17 +8,24 @@ slug: howto_show_infull_screen_editor
 
 # Show Editor in Full Screen
 
-It is possible for you to show the Kendo UI Editor in full screen by using the [Full-screen API](https://fullscreen.spec.whatwg.org/).
+You can render the Editor in full screen by using the [Full-screen API](https://fullscreen.spec.whatwg.org/).
 
 The following example demonstrates how to apply this approach.
-
-###### Example
 
 ```dojo
   <textarea id="editor"></textarea>
 
   <style>
-        .k-fullscreen .k-editor {
+    @media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution: .001dpcm) {
+      .selector:not(*:root), .k-fullscreen .k-editor .k-editable-area {
+        height: auto;
+      }
+
+      .selector:not(*:root), .k-fullscreen .k-editor .k-editor-toolbar-wrap {
+        height: 35px;
+      }
+    }
+    .k-fullscreen .k-editor {
       position: fixed;
       left: 0;
       top: 0;
@@ -78,10 +85,6 @@ The following example demonstrates how to apply this approach.
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its [**How To** documentation folder]({% slug howto_handleblurandfocuseventsangular_editor %}).
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

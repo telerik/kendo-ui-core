@@ -319,7 +319,7 @@
         var item = ul.children().eq(1);
 
         ul.focus();
-        panelbar._click(item.find(".k-link"));
+        item.find(".k-link").click();
         assert.equal(panelbar._focused[0], item[0]);
     });
 
