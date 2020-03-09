@@ -88,7 +88,7 @@ The following example demonstrates how to initialize the ToolBar and apply its b
 
 ## Events
 
-The ToolBar widget exposes a set of [events](/api/javascript/ui/toolbar/events). For a runnable example, refer to the [demo on using the event of the ToolBar](https://demos.telerik.com/kendo-ui/toolbar/events).
+The ToolBar widget exposes a set of [events](/api/javascript/ui/toolbar#events). For a runnable example, refer to the [demo on using the event of the ToolBar](https://demos.telerik.com/kendo-ui/toolbar/events).
 
     <div id="toolbar"></div>
 

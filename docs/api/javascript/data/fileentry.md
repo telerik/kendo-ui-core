@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.data.FileEntry
 
-The `FileEntry` is an extended type of a [`Node`](/api/framework/node) that works with hierarchical data. The [FileManagerDataSource](/api/framework/filemanagerdatasource) contains instances of the `FileEntry` type.
+The `FileEntry` is an extended type of a [`Node`](/api/framework/node) that works with hierarchical data. The [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) contains instances of the `FileEntry` type.
 
 ## Fields
 

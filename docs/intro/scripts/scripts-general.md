@@ -12,6 +12,33 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
+| [FileManager](https://demos.telerik.com/kendo-ui/filemanager/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.columnsorter.js | GridView feature (optional) | 
+| | kendo.userevents.js | |
+| | kendo.draganddrop.js | |
+| | kendo.sortable.js | GridView feature (optional) |
+| | kendo.grid.js | GridView feature (optional) |
+| | kendo.listview.js | |
+| | kendo.toolbar.js | |
+| | kendo.breadcrumb.js | |
+| | kendo.popup.js | |
+| | kendo.data.odata.js | |
+| | kendo.menu.js | |
+| | kendo.treeview.js | |
+| | kendo.upload.js | |
+| | kendo.dialog.js | |
+| | kendo.switch.js | |
+| | kendo.resizable.js | |
+| | kendo.selectable.js | | 
+| | kendo.calendar.js | |
+| | kendo.datepicker.js | |
+| | kendo.numerictextbox.js | |
+| | kendo.validator.js | |
+| | kendo.binder.js | |
+| | kendo.editable.js | |
+| | kendo.filemanager.js | |
 | [Filter](https://demos.telerik.com/kendo-ui/filter/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.buttongroup.js | |

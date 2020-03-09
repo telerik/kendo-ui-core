@@ -42,6 +42,12 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.sortable.js | |
 | | kendo.grid.js | |
 | | kendo.gantt.js | |
+| [MultiViewCalendar](https://demos.telerik.com/kendo-ui/multiviewcalendar/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
+| | kendo.calendar.js | |
+| | kendo.multiviewcalendar.js | |
 | [Scheduler](https://demos.telerik.com/kendo-ui/scheduler/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.data.js | |

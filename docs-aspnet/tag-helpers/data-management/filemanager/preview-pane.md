@@ -89,7 +89,7 @@ The following example demonstrates a singleFileTemplate declaration in the FileM
 ## See Also
 
 * [Overview of {{ site.product }} FileManager]({% slug taghelpers_filemanager_aspnetcore_overview %})
-* [Basic Usage of the {{ site.product }} FileManager (Demo)](https://demos.telerik.com/{{ site.product }}/filemanager/index)
+* [Basic Usage of the {{ site.product }} FileManager (Demo)](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
 * [Client API section](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager)
 * [Sort in {{ site.product }} FileManager]({% slug taghelpers_filemanager_aspnetcore_sort %})
 * [Toolbar Commands in {{ site.product }} FileManager]({% slug taghelpers_filemanager_aspnetcore_toolbar %})

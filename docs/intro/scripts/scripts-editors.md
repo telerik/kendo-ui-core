@@ -43,6 +43,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.combobox.js | |
+| [DateInput](https://demos.telerik.com/kendo-ui/dateinput/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.dateinput.js | |
 | [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
@@ -147,11 +150,17 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.numerictextbox.js | |
+| [Rating](https://demos.telerik.com/kendo-ui/rating/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.rating.js | |
 | [Slider](https://demos.telerik.com/kendo-ui/slider/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.draganddrop.js | |
 | | kendo.slider.js | |
+| [Switch](https://demos.telerik.com/kendo-ui/switch/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.switch.js | |
 | [TimePicker](https://demos.telerik.com/kendo-ui/timepicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
