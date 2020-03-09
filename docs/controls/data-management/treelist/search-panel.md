@@ -30,5 +30,5 @@ In addition it is possible to customize which fields to search when a value is e
 
 ## See Also
 
-* [Search Panel in the Kendo UI TreeList (Demo)](https://demos.telerik.com/kendo-ui/treeList/search-panel)
-* [JavaScript API Reference of the Kendo UI TreeList](/api/javascript/ui/treeList)
+* [Search Panel in the Kendo UI TreeList (Demo)](https://demos.telerik.com/kendo-ui/treelist/search-panel)
+* [JavaScript API Reference of the Kendo UI TreeList](/api/javascript/ui/treelist)

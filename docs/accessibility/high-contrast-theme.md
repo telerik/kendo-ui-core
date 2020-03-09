@@ -27,7 +27,7 @@ To address this issue, apply the high-contrast styles to all or part of a page b
 
 ## WCAG 2.1
 
-The [Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21) sections [1.4.3 Contrast (Minimum)](hhttps://www.w3.org/TR/WCAG21/#contrast-minimum) and [1.4.6 Contrast (Enhanced)](https://www.w3.org/TR/WCAG21/#contrast-enhanced) state that to be compliant, text and images in a web page must adhere to minimum contrast ratios (with respect to their background elements). The Kendo UI High Contrast theme was tested by using an [online color contrast checker](https://www.snook.ca/technical/colour_contrast/colour.html) which yielded the following results:
+The [Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21) sections [1.4.3 Contrast (Minimum)](https://www.w3.org/TR/WCAG21/#contrast-minimum) and [1.4.6 Contrast (Enhanced)](https://www.w3.org/TR/WCAG21/#contrast-enhanced) state that to be compliant, text and images in a web page must adhere to minimum contrast ratios (with respect to their background elements). The Kendo UI High Contrast theme was tested by using an [online color contrast checker](https://www.snook.ca/technical/colour_contrast/colour.html) which yielded the following results:
 
 1. Normal Text Color / Background = 15.9
 2. Selected Text Color / Background = 8.59

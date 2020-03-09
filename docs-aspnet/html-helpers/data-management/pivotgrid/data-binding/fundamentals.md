@@ -23,7 +23,7 @@ For more information, refer to the following resources:
 The OLAP cube is a dataset that is organized in a multidimensional manner. Every cube has 0 (zero) or more dimensions. The cube allows the performance of different operations which answer complex analytical queries. The OLAP cube introduces concepts like facts, measures, and dimensions.
 
 For more information, refer to the following resources:
-* [OLAP cube definition (Wikipedia)](http://en.wikipedia.org/wiki/OLAP_cube)
+* [OLAP cube definition (Wikipedia)](https://en.wikipedia.org/wiki/OLAP_cube)
 * [Understanding OLAP cubes (MSDN)](http://msdn.microsoft.com/en-us/library/aa140038%28v=office.10%29.aspx#odc_da_whatrcubes_topic2)
 
 ## What Are the Basic OLAP Cube Concepts?

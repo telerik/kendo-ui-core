@@ -12,9 +12,17 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
+| [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.breadcrumb.js | |
 | [Button](https://demos.telerik.com/kendo-ui/button/index) | jquery.js | |
 | | kendo.core.js | |
+| | kendo.badge.js | |
 | | kendo.button.js | |
+| [ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.badge.js | |
+| | kendo.buttongroup.js | |
 | [Drawer](https://demos.telerik.com/kendo-ui/drawer/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |
@@ -35,6 +43,10 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.data.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.tabstrip.js | |
+| [Timeline](https://demos.telerik.com/kendo-ui/timeline/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.userevents.js | |
+| | kendo.timeline.js | |
 | [ToolBar](https://demos.telerik.com/kendo-ui/toolbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.toolbar.js | |
