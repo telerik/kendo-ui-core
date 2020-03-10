@@ -1307,11 +1307,40 @@ var __meta__ = { // jshint ignore:line
         },
 
         _nextItem: function() {
-            this.listView.focusNext();
+            return this.listView.focusNext();
         },
 
         _prevItem: function() {
-            this.listView.focusPrev();
+            return this.listView.focusPrev();
+        },
+
+        _getNormalizedDataItem: function(candidate) {
+            var that = this,
+                listView = that.listView,
+                isIndex = typeof candidate === "number",
+                hasOptionLabel = that.optionLabel && that.optionLabel.length,
+                index;
+
+            if (isIndex) {
+                index =  hasOptionLabel ? --candidate : candidate;
+            } else {
+                index = listView.getElementIndex(candidate);
+            }
+
+            return listView.dataItemByIndex(index);
+        },
+
+        _getNormalizedSelectCandidate: function(candidate) {
+            var that = this,
+                hasOptionLabel = that.optionLabel && that.optionLabel.length,
+                isIndex = typeof candidate === "number",
+                normalizedCandidate = candidate;
+
+            if (hasOptionLabel && isIndex) {
+                normalizedCandidate++;
+            }
+
+            return normalizedCandidate;
         },
 
         _move: function(e) {
@@ -1319,9 +1348,12 @@ var __meta__ = { // jshint ignore:line
             var listView = that.listView;
             var key = e.keyCode;
             var down = key === keys.DOWN;
+            var isVirtual = that.options.virtual;
             var dataItem;
             var pressed;
             var current;
+            var moveIndex;
+            var selectCandidate;
 
             if (key === keys.UP || down) {
                 if (e.altKey) {
@@ -1347,35 +1379,39 @@ var __meta__ = { // jshint ignore:line
 
                     if (!that._fetch && (!current || current.hasClass("k-state-selected"))) {
                         if (down) {
-                            that._nextItem();
+                            moveIndex = that._nextItem();
 
-                            if (!that._focus()) {
+                            if ((isVirtual && moveIndex <= 0) || (!that._focus() && !moveIndex) ) {
                                 that._lastItem();
                             }
                         } else {
-                            that._prevItem();
+                            moveIndex = that._prevItem();
 
-                            if (!that._focus()) {
+                            if ((isVirtual && moveIndex >= listView.dataSource.total() - 1) || (!that._focus() && !moveIndex)) {
                                 that._firstItem();
                             }
                         }
                     }
 
-                    dataItem = listView.dataItemByIndex(listView.getElementIndex(that._focus()));
+                    selectCandidate = that._getNormalizedSelectCandidate(that._get(that._focus()) || moveIndex || 0);
 
-                    if (that.trigger(SELECT, { dataItem: dataItem, item: that._focus() })) {
-                        that._focus(current);
-                        return;
-                    }
+                    that._select(selectCandidate, true).done(function() {
+                        var done = function() {
+                            if (!that.popup.visible()) {
+                                that._blur();
+                            }
 
-                    that._select(that._focus(), true).done(function() {
-                        if (!that.popup.visible()) {
-                            that._blur();
-                        }
-                        if (that._cascadedValue === null) {
-                            that._cascadedValue = that.value();
+                            if (that._cascadedValue === null) {
+                                that._cascadedValue = that.value();
+                            } else {
+                                that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
+                            }
+                        };
+
+                        if (that.trigger(SELECT, { dataItem: that._getNormalizedDataItem(selectCandidate), item: that._focus() })) {
+                            that._select(current).done(done);
                         } else {
-                            that._cascadedValue = that.dataItem() ? that.dataItem()[that.options.dataValueField] || that.dataItem() : null;
+                            done();
                         }
                     });
                 }

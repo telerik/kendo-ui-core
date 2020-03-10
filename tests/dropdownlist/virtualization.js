@@ -298,5 +298,78 @@
         dropdownlist.open();
     });
 
+    it("item is selected on DOWN after going to next page", function(done) {
+        var dropdownlist = new DropDownList(select, {
+            height: CONTAINER_HEIGHT,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: generateData(options.data), total: 300 });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 4,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            select: function (e) {
+                assert.equal(e.dataItem.value, "4");
+                done();
+            },
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 200
+            },
+            value: 3
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+        });
+    });
+
+    it("label is selected on UP", function(done) {
+        var dropdownlist = new DropDownList(select, {
+            height: CONTAINER_HEIGHT,
+            dataTextField: "text",
+            dataValueField: "value",
+            optionLabel: "Please Select",
+            dataSource: new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success({ data: generateData(options.data), total: 300 });
+                        }, 0);
+                    }
+                },
+                serverPaging: true,
+                pageSize: 4,
+                schema: {
+                    data: "data",
+                    total: "total"
+                }
+            }),
+            select: function (e) {
+                assert.isOk(e.item.hasClass("k-list-optionlabel"));
+                assert.equal(e.item.text(), "Please Select");
+                done();
+            },
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 200
+            },
+            value: 0
+        });
+
+        dropdownlist.one("dataBound", function() {
+            dropdownlist.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.UP });
+        });
+    });
     });
 }());

@@ -1040,23 +1040,33 @@ var __meta__ = { // jshint ignore:line
         },
 
         _nextItem: function() {
+            var focusIndex;
+
             if (this.optionLabel.hasClass("k-state-focused")) {
                 this._resetOptionLabel();
                 this.listView.focusFirst();
+                focusIndex = 1;
             } else {
-                this.listView.focusNext();
+                focusIndex = this.listView.focusNext();
             }
+
+            return focusIndex;
         },
 
         _prevItem: function() {
+            var focusIndex;
+
             if (this.optionLabel.hasClass("k-state-focused")) {
                 return;
             }
 
-            this.listView.focusPrev();
-            if (!this.listView.focus()) {
+            focusIndex = this.listView.focusPrev();
+
+            if (!this.listView.focus() && !this.options.virtual) {
                 this._focus(this.optionLabel);
             }
+
+            return focusIndex;
         },
 
         _focusItem: function() {
