@@ -22155,6 +22155,10 @@ interface JQuery {
     kendoDialog(options: kendo.ui.DialogOptions): JQuery;
     data(key: "kendoDialog"): kendo.ui.Dialog;
 
+    kendoDrawer(): JQuery;
+    kendoDrawer(options: kendo.ui.DrawerOptions): JQuery;
+    data(key: "kendoDrawer"): kendo.ui.Drawer;
+
     kendoDraggable(): JQuery;
     kendoDraggable(options: kendo.ui.DraggableOptions): JQuery;
     data(key: "kendoDraggable"): kendo.ui.Draggable;

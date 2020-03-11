@@ -551,7 +551,9 @@
         });
 
         combobox.one("dataBound", function() {
-            combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+            setTimeout(function() {
+                combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+            });
         });
     });
     });

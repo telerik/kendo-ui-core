@@ -319,7 +319,7 @@
                 }
             }),
             select: function (e) {
-                assert.equal(e.dataItem.value, "4");
+                assert.isOk(e.dataItem.value, "4");
                 done();
             },
             virtual: {
@@ -330,7 +330,9 @@
         });
 
         dropdownlist.one("dataBound", function() {
-            dropdownlist.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+            setTimeout(function() {
+                dropdownlist.wrapper.trigger({ type: "keydown", keyCode: kendo.keys.DOWN });
+            });
         });
     });
 
