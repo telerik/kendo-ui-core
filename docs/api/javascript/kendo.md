@@ -27,7 +27,7 @@ The text to be shown in the Alert popup.
 
 ### antiForgeryTokens
 Returns an object that contains common
-[CSRF tokens](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)_Prevention_Cheat_Sheet)
+[CSRF tokens](https://owasp.org/www-community/attacks/csrf)
 found on the page.
 
 These include tokens used by ASP.NET, Ruby on Rails and others.
