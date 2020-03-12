@@ -10,33 +10,33 @@ position: 2
 
 The following table provides a list of the formulas and functions the Spreadsheet supports.
 
-| Formulas and functions    | Description 
-| :---                      | :--- 
-| ABS                       | Returns the absolute (nonnegative) value of a number                      
+| Formulas and functions    | Description
+| :---                      | :---
+| ABS                       | Returns the absolute (nonnegative) value of a number
 | ACOS                      | Returns the principal value of the arccosine of a number. The angle is returned in radians.
-| ACOSH                     | Returns the principal value of the inverse hyperbolic cosine of a number  
+| ACOSH                     | Returns the principal value of the inverse hyperbolic cosine of a number
 | ACOT                      | Returns the principal value of the arccotangent of a number. The angle is returned in radians.
-| ACOTH                     | Returns the hyperbolic arccotangent of a number                         
-| ADDRESS                   | Returns a cell address (reference) as a text                    
-| AGGREGATE                 | Returns an aggregate of a list or database                    
-| ARABIC                    | Converts Roman numbers to Arabic as numbers                                
-| AREAS                     | Returns the number of areas in a reference              
+| ACOTH                     | Returns the hyperbolic arccotangent of a number
+| ADDRESS                   | Returns a cell address (reference) as a text
+| AGGREGATE                 | Returns an aggregate of a list or database
+| ARABIC                    | Converts Roman numbers to Arabic as numbers
+| AREAS                     | Returns the number of areas in a reference
 | ASIN                      | Returns the principal value of the arcsine of a number. The angle is returned in radians.
 | ASINH                     | Returns the principal value of the inverse hyperbolic sine of a number
 | ATAN                      | Returns the principal value of the arctangent of a number. The angle is returned in radians.
 | ATAN2                     | Returns the principal value of the arctangent from x- and y- coordinates in radians
-| ATANH                     | Returns the principal value of the inverse hyperbolic tangent of a number               
-| AVEDEV                    | Calculates the average of the absolute deviations of listed values  
+| ATANH                     | Returns the principal value of the inverse hyperbolic tangent of a number
+| AVEDEV                    | Calculates the average of the absolute deviations of listed values
 | AVERAGE                   | Returns the average of a set of numbers
-| AVERAGEA                  | Returns the average of values, including numbers, text, and logical values  
-| AVERAGEIF                 | Returns the average of all cells in a range based on a given criteria  
+| AVERAGEA                  | Returns the average of values, including numbers, text, and logical values
+| AVERAGEIF                 | Returns the average of all cells in a range based on a given criteria
 | AVERAGEIFS                | Returns the average of all cells in a range based on multiple criteria
 | BASE                      | Converts a number into a text representation with the given base
 | BETA.DIST                 | Returns the beta cumulative distribution function
 | BETA.INV                  | Returns the inverse of the cumulative distribution function for a specified beta distribution
-| BETADIST                  | Returns the value of the probability density function or the cumulative distribution function for the beta distribution   
+| BETADIST                  | Returns the value of the probability density function or the cumulative distribution function for the beta distribution
 | BINOM.DIST                | Returns the individual term binomial distribution probability
-| BINOM.DIST.RANGE          | Returns the probability of a trial result using a binomial distribution              
+| BINOM.DIST.RANGE          | Returns the probability of a trial result using a binomial distribution
 | BINOM.INV                 | Returns the smallest value for which the cumulative binomial distribution is less than or equal to a criterion value
 | BINOMDIST                 | Returns the binomial distribution probability
 | CEILING                   | Rounds a number to the nearest integer or to the nearest multiple of significance
@@ -48,7 +48,7 @@ The following table provides a list of the formulas and functions the Spreadshee
 | CHISQ.INV                 | Returns the cumulative beta probability density function
 | CHISQ.INV.RT              | Returns the inverse of the one-tailed probability of the chi-squared distribution
 | CHISQ.TEST                | Returns the test for independence
-| CHOOSE                    | Uses an index to return a value from a list of values       
+| CHOOSE                    | Uses an index to return a value from a list of values
 | CLEAN                     | Removes all nonprintable characters from a text
 | CODE                      | Return a numeric value corresponding to the first character in a text string
 | COLUMN                    | Returns the column number(s) of a reference
@@ -56,7 +56,7 @@ The following table provides a list of the formulas and functions the Spreadshee
 | COMBIN                    | Returns the number of combinations for a given number of objects
 | COMBINA                   | Returns the number of combinations with repetitions for a given number of objects
 | CONCATENATE               | Joins a number of text strings into one text string
-| CONFIDENCE.NORM           | Returns the confidence interval for a population mean    
+| CONFIDENCE.NORM           | Returns the confidence interval for a population mean
 | CONFIDENCE.T              | Returns the confidence interval for a population mean, using a Student's t distribution
 | COS                       | Returns the cosine of a number. The angle is returned in radians.
 | COSH                      | Returns the hyperbolic cosine of a number
@@ -64,17 +64,17 @@ The following table provides a list of the formulas and functions the Spreadshee
 | COTH                      | Returns the hyperbolic cotangent of a number
 | COUNT                     | Counts the number of numbers in a list of arguments
 | COUNTA                    | Counts the number of values in a  list of arguments
-| COUNTBLANK                | Counts the number of blank cells in a range   
+| COUNTBLANK                | Counts the number of blank cells in a range
 | COUNTIF                   | Counts the number of cells in a range that meet a criteria
 | COUNTIFS                  | Counts the number of cells in a range that meet multiple criteria
 | COVAR                     | Calculates the covariance between two cell ranges
-| COVARIANCE.P              | Returns covariance, the average of the products of paired deviations    
+| COVARIANCE.P              | Returns covariance, the average of the products of paired deviations
 | COVARIANCE.S              | Returns the sample covariance, the average of the products deviations for each data point pair in two data sets
 | CRITBINOM                 | Returns the smallest value for which the cumulative binomial distribution is less than or equal to a criterion value
 | CSC                       | Returns the cosecant of an angle, specified in radians
 | CSCH                      | Returns the hyperbolic cosecant of an angle, specified in radians
 | DATE                      | Returns a date value constructed from a year, month, and day values
-| DATEVALUE                 | Returns the date converting it in the form of text to a serial number     
+| DATEVALUE                 | Returns the date converting it in the form of text to a serial number
 | DAY                       | Returns the day by converting it from a serial number
 | DAYS                      | Returns the number of days between two dates
 | DAYS360                   | Returns the number of days between two dates using the 360-day year
@@ -121,9 +121,9 @@ The following table provides a list of the formulas and functions the Spreadshee
 | IF                        | Returns one of two values, depending on a condition
 | IFERROR                   | Returns a specified value if a formula evaluates to an error; otherwise, returns the result of the formula
 | INDEX                     | Returns a value or a reference to a value from within a table or range
-| INDIRECT                  | Returns a reference indicated by a text value    
+| INDIRECT                  | Returns a reference indicated by a text value
 | INT                       | Rounds a number down to the nearest integer
-| INTERCEPT                 | Returns the intercept of the linear regression line for the given data   
+| INTERCEPT                 | Returns the intercept of the linear regression line for the given data
 | ISBLANK                   | Returns `True` if the referenced cell is blank; else returns `False`
 | ISERR                     | Returns `True` if the value is any error except `#N/A`; else returns `False`
 | ISERROR                   | Returns `True` if the value is any error; else returns `False`
@@ -149,7 +149,7 @@ The following table provides a list of the formulas and functions the Spreadshee
 | LOGEST                    | Returns the parameters of an exponential regression equation for the given data obtained by linearizing this intrinsically linear response function and returns, optionally, statistics on this regression
 | LOGNORM.DIST              | Returns the cumulative lognormal distribution
 | LOGNORM.INV               | Returns the inverse of the lognormal cumulative distribution
-| LOWER                     | Converts text to lowercase    
+| LOWER                     | Converts text to lowercase
 | MATCH                     | Finds an item in a range of cells, and returns its relative position (starting from 1)
 | MAX                       | Returns the maximum value in a set of numbers
 | MDETERM                   | Returns the determinant of a matrix
@@ -159,16 +159,16 @@ The following table provides a list of the formulas and functions the Spreadshee
 | MINUTE                    | Converts a serial number into a minute
 | MINVERSE                  | Returns the inverse of a matrix
 | MMULT                     | Returns the matrix output of two arrays
-| MOD                       | Returns the remainder when one number is divided by another number   
+| MOD                       | Returns the remainder when one number is divided by another number
 | MODE.MULT                 | Returns a vertical array of the most frequently occurring, or repetitive values in an array or range of data
 | MODE.SNGL                 | Returns the most common value in a data set
 | MONTH                     | Converts a serial number to a month
 | MROUND                    | Rounds the number to the desired multiple
-| MULTINOMIAL               | Returns the multinomial for a given set of values    
+| MULTINOMIAL               | Returns the multinomial for a given set of values
 | MUNIT                     | Creates a unit matrix of a specified dimension
 | N                         | Returns the number of a value
 | NA                        | Returns the error value `#N/A`
-| NEGBINOM.DIST             | Returns the negative binomial distribution    
+| NEGBINOM.DIST             | Returns the negative binomial distribution
 | NEGBINOMDIST              | Returns the negative binomial distribution
 | NETWORKDAYS               | Returns the number of whole workdays between two dates
 | NORM.DIST                 | Returns the normal cumulative distribution
@@ -181,7 +181,7 @@ The following table provides a list of the formulas and functions the Spreadshee
 | OFFSET                    | Modifies the position and dimension of a reference
 | PEARSON                   | Returns the `Pearson` correlation coefficient of two data sets
 | PERCENTILE                | Calculates the x-th sample percentile of values in a range
-| PERCENTILE.EXC            | Returns the k-th percentile of values in a range, where k is in the range 0..1, exclusive    
+| PERCENTILE.EXC            | Returns the k-th percentile of values in a range, where k is in the range 0..1, exclusive
 | PERCENTILE.INC            | Returns the k-th percentile of values in a range
 | PERCENTRANK               | Returns the percentage rank of a value in a sample
 | PERCENTRANK.EXC           | Returns the rank of a value in a data set as a percentage (0..1, exclusive) of the data set
@@ -195,7 +195,7 @@ The following table provides a list of the formulas and functions the Spreadshee
 | PROPER                    | Capitalizes the first letter in each word of a text value
 | QUARTILE                  | Returns the quartile of a data set
 | QUARTILE.EXC              | Returns the quartile of the data set, based on percentile values from 0..1, exclusive
-| QUARTILE.INC              | Returns the quartile of a data set    
+| QUARTILE.INC              | Returns the quartile of a data set
 | QUOTIENT                  | Returns the integer portion of a division
 | RADIANS                   | Converts degrees to radians
 | RAND                      | Returns a random number between 0 (inclusive) and 1 (exclusive)
@@ -221,14 +221,14 @@ The following table provides a list of the formulas and functions the Spreadshee
 | SIN                       | Returns the sine of an angle specified in radians
 | SINH                      | Returns the hyperbolic sine of a number
 | SLOPE                     | Calculates the slope of the linear regression line
-| SMALL                     | Finds the n-th smallest value in a data set   
+| SMALL                     | Finds the n-th smallest value in a data set
 | SQRT                      | Returns a positive square root of a number
 | SQRTPI                    | Returns the square root of a number multiplied by pi
 | STDEV.P                   | Calculates the standard deviation based on the entire population
 | STDEV.S                   | Estimates the standard deviation based on a sample
 | STEYX                     | Returns the standard error of the predicted y-value for each x in the regression
-| SUBSTITUTE                | Substitutes new text for old text string   
-| SUBTOTAL                  | Evaluates a function on a range   
+| SUBSTITUTE                | Substitutes new text for old text string
+| SUBTOTAL                  | Evaluates a function on a range
 | SUM                       | Sums (adds) the set of numbers, including all numbers in a range
 | SUMIF                     | Sums the values of cells in a range that meet a criteria
 | SUMIFS                    | Sums the values of cells in a range that meet multiple criteria
@@ -254,8 +254,8 @@ The following table provides a list of the formulas and functions the Spreadshee
 | TRIM                      | Removes spaces from text; replaces all internal multiple spaces with a single space
 | TRIMMEAN                  | Returns the mean of the interior of a data set, ignoring a proportion of high and low values
 | TRUE                      | Returns the logical value `True`
-| UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](http://unicode.org/standard/standard.html)
-| UNICODE                   | Returns the [Unicode](http://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
+| UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](https://unicode.org/standard/standard.html)
+| UNICODE                   | Returns the [Unicode](https://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
 | UPPER                     | Converts text to uppercase
 | VALUE                     | Converts a text argument to a number
 | VAR.P                     | Calculates variance based on the entire population

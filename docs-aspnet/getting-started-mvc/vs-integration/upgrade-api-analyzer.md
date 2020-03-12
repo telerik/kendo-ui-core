@@ -9,7 +9,7 @@ permalink: /getting-started/vs-integration/upgrade-api-analyzer
 
 # Upgrading the Project API
 
-Each new Kendo UI release might include changes that affect the public Kendo UI API.  
+Each new Kendo UI release might include changes that affect the public Kendo UI API.
 
 In such cases, you need to avoid possible issues by upgrading your application to the latest Telerik release. To achieve this, use the Telerik Upgrade API Analyzer. The Upgrade API Analyzer aims at making the upgrade process easier by both comparing the versions and determining the problematic areas. You can also use the Upgrade API Analyzer for upgrading desktop applications such as WPF, WinForms, and Silverlight.
 
@@ -19,7 +19,7 @@ Currently, the Upgrade API Analyzer supports Telerik releases starting from Q2 
 
 While it upgrades the Telerik controls to a recent version, the Upgrade API Analyzer analyzes the code of your project. As a result, it provides a list of the differences between the currently used release and the release you are planning to upgrade your application to such as obsolete, removed, or modified methods and properties.
 
-The tool also points out the exact piece of code that is affected by a certain change. In the cases of an obsolete method or property, the tool provides suggestions for you to modify that code.                      
+The tool also points out the exact piece of code that is affected by a certain change. In the cases of an obsolete method or property, the tool provides suggestions for you to modify that code.
 
 > Currently, Telerik Upgrade API Analyzer checks only the C# code of the applications.
 
@@ -38,11 +38,11 @@ Telerik Upgrade API Analyzer is a click-once application. To download the instal
 1. On the screen, select the platform.
 1. Select the current version of the Telerik assemblies you are using.
 1. Select the version to upgrade to. Because the three combo-boxes are populated on the fly upon your selection, choose the values consecutively.
-1. Open the solution you are planning to upgrade.  
+1. Open the solution you are planning to upgrade.
 
 Alternatively, you can also run the Upgrade API Analyzer from the [Upgrade Project Wizard]({% slug projectwizardupgrade_visualstudio_aspnetmvc %}) by clicking the **Compatibility** button as demonstrated on **Figure 2**. As a result, the wizard provides the **Technology**, **Your Version**, and **Version to Upgrade** parameters. When you start the Upgrade API Analyzer directly through the **Compatibility** button without installing the tool first, the installation starts automatically. If the .NET Framework 4.5.2 is not present on your machine, the application prompts you to install it manually at the end of the installation.
 
-![The Compatibility button in the Upgrade API Analyzer](images/upgrade-api-analyzer_5.png)
+![The Compatibility button in the Upgrade API Analyzer](../../getting-started-mvc/vs-integration/images/upgrade-api-analyzer_5.png)
 
 ## Analyzing the Changes
 
