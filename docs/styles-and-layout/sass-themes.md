@@ -689,11 +689,14 @@ The tool renders the same look and feel as the look and feel of all other compon
 To create a new theme:
 
 1. On the initial Sass Theme Builder pane, select the **Start Theming** option.
-1. Choose one of the existing skins to use as a base. The currently available built-in skins are **Default** and **Bootsrap**.
+1. Choose one of the existing themes to serve as a starting point.
+1. Select the widgets which you intend to style. You can also change the selection at a later stage.
 
-    **Figure 2: Selecting a base theme**
+    **Figure 2: Selecting a base theme and widgets**
 
-    ![Theme Builder Create and Download 1](images/theme-builder-create-and-download-1.png)
+    ![Theme Builder Create](images/theme-builder-create.gif)
+
+Complex widgets, such as the Grid, rely on other widgets to deliver their full set of features. If you select the Grid, then all of its widgets dependencies styles (Button, AutoComplete, DropDownList, DatePicker, etc.) will also be included in the final bundle. The Theme Builder automatically updates the styling on all required widgets so that you do not need to customize each of them separately.
 
 ### Modifying Themes
 
@@ -706,9 +709,9 @@ The Sass Theme Builder supports the following options for customization:
 
 To customize an existing theme, use the following Sass Theme Builder features:
 
-1. Color swatches&mdash;Contains predefined color palettes that you can apply to all components in your application.
+1. Color swatches&mdash;Contains predefined color palettes that you can apply to all widgets in your application.
 1. Default&mdash;Provides the applicable color customization options.
-1. Preview components&mdash;Keeps the main view of the components. It reflects the customization changes you make each time you add or remove theme elements.
+1. Selected Widgets&mdash;List of widgets to include in the preview and the final CSS bundle.
 1. Download&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme.
 
 **Figure 3: Available options for customization**
@@ -729,7 +732,7 @@ When you complete the modifications and the theme is ready to be used:
 
 1. Download the theme as a compact archive by clicking the **Download** button.
 1. Add the newly created `Theme` folder to your application.
-1. Include the `all.css` file in the `head` tag of your HTML document.
+1. Include the `THEME_NAME.css` file in the `head` tag of your HTML document.
 
 > Avoid referencing the `kendo.common.min.css` and `kendo.rtl.min.css` files because the exported CSS file contains all styles you need.
 
