@@ -96,6 +96,8 @@ How can I open the popup editor when I double-click a Grid row?
         function onDataBound() {
           var grid = this;
 
+          grid.element.off('dblclick');
+          
           grid.element.on('dblclick','tbody tr[data-uid]',function (e) {
             grid.editRow($(e.target).closest('tr'));
           })

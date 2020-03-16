@@ -150,7 +150,28 @@
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
 @switch-on-left-x: calc(100% - @switch-handle-size);
 
+
 // Pager
+@pager-padding-x: 4px;
+@pager-padding-y: @pager-padding-x;
+@pager-border-width: 1px;
+
+@pager-section-spacing: 1em;
+
+@pager-item-padding-x: @button-padding-y;
+@pager-item-padding-y: @pager-item-padding-x;
+@pager-item-width: 2.3em;
+@pager-item-height: @pager-item-width;
+@pager-item-border-width: 1px;
+@pager-item-border-radius: 0;
+@pager-item-spacing: -1px;
+
+@pager-input-width: 3em;
+
+@pager-page-size-dropdown-width: 5em;
+
+
+// Pager -- old vars
 @pager-button-border-radius-sm: 4px;
 @pager-button-border-radius-lg: @pager-button-border-radius-sm;
 @pager-button-width: 2em;
@@ -578,43 +599,6 @@ input.k-textbox {
 .k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-i-close {
     left: calc(@combobox-clear-icon-offset);
     right: initial;
-}
-
-.k-pager-numbers-wrap {
-    margin-left: -1px;
-
-    .k-rtl &,
-    &[dir="rtl"],
-    [dir="rtl"] & {
-        margin-left: 0;
-    }
-}
-
-.k-pager-wrap,
-.k-pager-numbers .k-link {
-    line-height: 2.3em;
-}
-
-.k-pager-wrap > .k-link {
-    height: 2.3em;
-    line-height: 2.3em;
-}
-
-.k-pager-numbers {
-    .k-link,
-    .k-state-selected {
-        height: 2.3em;
-    }
-}
-
-.k-pager-wrap > .k-link,
-.k-pager-numbers .k-link,
-.k-pager-numbers .k-state-selected {
-    min-width: 2.3em;
-}
-
-.k-pager-sizes .k-dropdown-wrap .k-input {
-    line-height: 2em;
 }
 
 .k-spreadsheet-sheets-bar .k-spreadsheet-sheets-remove {
