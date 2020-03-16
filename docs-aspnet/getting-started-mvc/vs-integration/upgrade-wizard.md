@@ -54,4 +54,4 @@ The **Create Backup** page provides the following options:
 ## See Also
 
 * [Integrating Visual Studio in Your .Net Project]({% slug overview_visualstudio_aspnetmvc %})
-* [Downloading the Latest Telerik UI for ASP.NET Core Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
+* [Downloading the Latest Telerik UI for ASP.NET MVC Versions]({% slug latestversionretrieval_visualstudio_aspnetmvc %})
