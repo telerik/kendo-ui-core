@@ -24,7 +24,7 @@ How can I use AJAX calls to edit items in a Grid HTML helper?
 
 ## Solution
 
-For the complete implementation on how to use AJAX calls to edit the data in a Grid HtmlHelper for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/ajax-editing).
+For the complete implementation on how to use AJAX calls to edit the data in a Grid HtmlHelper for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc).
 
 ## See Also
 

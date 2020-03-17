@@ -25,7 +25,7 @@ How can I use AJAX calls to populate a Grid HTML helper?
 
 ## Solution
 
-For the complete implementation on how to connect a Grid HtmlHelper for ASP.NET Core to its source by using an AJAX binding, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/ajax-binding).
+For the complete implementation on how to connect a Grid HtmlHelper for ASP.NET Core to its source by using an AJAX binding, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc).
 
 ## See Also
 
