@@ -45,6 +45,30 @@ The Grid also provides a built-in functionality for persisting the selection thr
             .Ajax()
             .Model(model => model.Id(p => p.OrderID))
 
+## Getting Selected Rows Data
+
+To get data from the selected rows, use the `Change` event of the Grid
+
+1. Specify the name of the JavaScript function which will handle the event.
+
+        .Events(ev => ev.Change("onChange"))
+
+1. Declare the event handler and access the selected data items.
+
+            <script>
+            function onChange(e) {
+                var selectedRows = this.select();
+                var selectedDataItems = [];
+                for (var i = 0; i < selectedRows.length; i++) {
+                    var dataItem = this.dataItem(selectedRows[i]);
+                    selectedDataItems.push(dataItem);
+                }
+
+                // selectedDataItems contains all selected data items
+                console.log(selectedDataItems);
+            }
+            </script>
+
 ## See Also
 
 * [Multiple Selection by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection)

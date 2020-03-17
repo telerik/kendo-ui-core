@@ -28,7 +28,7 @@ How can I configure a custom DataSource for the Grid HtmlHelper that is used in 
 
 ## Solution
 
-For the complete implementation on how to configure a custom DataSource to properly populate a Telerik UI Grid HtmlHelper for ASP.NET Core in a Razor Page, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/razor-pages-custom-datasource-date-editing).
+For the complete implementation on how to configure a custom DataSource to properly populate a Telerik UI Grid HtmlHelper for ASP.NET Core in a Razor Page, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
 ## See Also
 
