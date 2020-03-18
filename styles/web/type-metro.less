@@ -603,7 +603,7 @@
 // @radio-size: @icon-size;
 @radio-radius: 50%;
 @radio-border-width: 1px;
-// @radio-line-height: @radio-size + @radio-border-width;
+// @radio-line-height: calc(@radio-size + @radio-border-width);
 
 @radio-bg: @checkbox-bg;
 @radio-text: @checkbox-text;
@@ -1494,22 +1494,6 @@ div.k-filebrowser-dropzone em
     color: @tooltip-text-color;
 }
 
-.k-widget.k-tooltip-validation
-{
-    border-color: @validation-border-color;
-    background-color: @validation-background-color;
-    color: @validation-text-color;
-}
-
-// Bootstrap theme fix
-.input-prepend .k-tooltip-validation,
-.input-append .k-tooltip-validation
-{
-    font-size: 12px;
-    position: relative;
-    top: 3px;
-}
-
 .k-callout-n
 {
     border-bottom-color: @tooltip-border-color;
@@ -1528,26 +1512,6 @@ div.k-filebrowser-dropzone em
 .k-callout-e
 {
     border-left-color: @tooltip-border-color;
-}
-
-.k-tooltip-validation .k-callout-n
-{
-    border-bottom-color: @validation-border-color;
-}
-
-.k-tooltip-validation .k-callout-w
-{
-    border-right-color: @validation-border-color;
-}
-
-.k-tooltip-validation .k-callout-s
-{
-    border-top-color: @validation-border-color;
-}
-
-.k-tooltip-validation .k-callout-e
-{
-    border-left-color: @validation-border-color;
 }
 
 // Splitter

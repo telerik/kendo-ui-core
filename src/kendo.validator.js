@@ -19,6 +19,8 @@ var __meta__ = { // jshint ignore:line
         invalidMsgRegExp = new RegExp(INVALIDMSG,'i'),
         INVALIDINPUT = "k-invalid",
         VALIDINPUT = "k-valid",
+        VALIDATIONSUMMARY = "k-validation-summary",
+        MESSAGEBOX = "k-message-box k-message-box-error",
         emailRegExp = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i,
         urlRegExp = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
         INPUTSELECTOR = ":input:not(:button,[type=submit],[type=reset],[disabled],[readonly])",
@@ -109,6 +111,12 @@ var __meta__ = { // jshint ignore:line
         return containers;
     }
 
+    var SUMMARYTEMPLATE = '<ul>' +
+        '#for(var i = 0; i < errors.length; i += 1){#' +
+            '<li><a data-field="#=errors[i].field#" href="\\#">#= errors[i].message #</a></li>' +
+        '# } #' +
+    '</ul>';
+
     var Validator = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -123,6 +131,7 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(that, element, options);
 
             that._errorTemplate = kendo.template(that.options.errorTemplate);
+            that._summaryTemplate = kendo.template(that.options.validationSummary.template || SUMMARYTEMPLATE);
 
             if (that.element.is(FORM)) {
                 that.element.attr(NOVALIDATE, NOVALIDATE);
@@ -140,8 +149,10 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "Validator",
-            errorTemplate: '<span class="k-widget k-tooltip k-tooltip-validation">' +
-                '<span class="k-icon k-i-warning"> </span> #=message#</span>',
+            errorTemplate: '<span class="k-tooltip k-tooltip-error">' +
+                '<span class="k-tooltip-icon k-icon k-i-error"></span>' +
+                '<span class="k-tooltip-content">#=message#</span>' +
+            '</span>',
             messages: {
                 required: "{0} is required",
                 pattern: "{0} is not valid",
@@ -213,13 +224,18 @@ var __meta__ = { // jshint ignore:line
                     return true;
                 }
             },
-            validateOnBlur: true
+            validateOnBlur: true,
+            validationSummary: false
         },
 
         destroy: function() {
             Widget.fn.destroy.call(this);
 
             this.element.off(NS);
+
+            if (this.validationSummary) {
+                this.validationSummary.off(NS);
+            }
         },
 
         value: function() {
@@ -306,6 +322,10 @@ var __meta__ = { // jshint ignore:line
                 result = this.validateInput(this.element);
             }
 
+            if (this.options.validationSummary && !isValid) {
+                this.showValidationSummary();
+            }
+
             this.trigger(VALIDATE, { valid: result, errors: this.errors() });
 
             if (isValid !== result) {
@@ -338,6 +358,7 @@ var __meta__ = { // jshint ignore:line
                 messageText = !valid ? that._extractMessage(input, result.key) : "",
                 messageLabel = !valid ? parseHtml(template({ message: decode(messageText) })) : "",
                 wasValid = !input.attr("aria-invalid");
+
             input.removeAttr("aria-invalid");
 
             if (wasValid !== valid) {
@@ -356,9 +377,26 @@ var __meta__ = { // jshint ignore:line
                     messageLabel.attr('id', lblId);
                 }
 
-                if (!lbl.replaceWith(messageLabel).length) {
-                    messageLabel.insertAfter(input);
+                if (lbl.length !== 0) {
+                    lbl.replaceWith(messageLabel);
+                } else {
+                    var widgetInstance = kendo.widgetInstance(input);
+                    var parentElement = input.parent().get(0);
+                    var nextElement = input.next().get(0);
+
+                    if (parentElement && parentElement.nodeName === "LABEL") {
+                        // Input inside label
+                        messageLabel.insertAfter(parentElement);
+                    } else if (nextElement && nextElement.nodeName === "LABEL") {
+                        // Input before label
+                        messageLabel.insertAfter(nextElement);
+                    } else if (widgetInstance && widgetInstance.wrapper) {
+                        messageLabel.insertAfter(widgetInstance.wrapper);
+                    } else {
+                        messageLabel.insertAfter(input);
+                    }
                 }
+
                 messageLabel.show();
 
                 input.attr("aria-invalid", true);
@@ -376,6 +414,10 @@ var __meta__ = { // jshint ignore:line
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
                 }
+            }
+
+            if (wasValid !== valid && this.options.validationSummary && this.options.validateOnBlur) {
+                this.showValidationSummary();
             }
 
             return valid;
@@ -472,6 +514,117 @@ var __meta__ = { // jshint ignore:line
             this.init(this.element, currentOptions);
 
             this._setEvents(currentOptions);
+        },
+
+        _getInputNames: function() {
+            var that = this,
+                inputs = that.element.find(that._inputSelector),
+                sorted = [];
+
+            for (var idx = 0, length = inputs.length; idx < length; idx++) {
+                var input = $(inputs[idx]);
+
+                if (hasAttribute(input, NAME)) {
+                    sorted.push(input.attr(NAME));
+                }
+            }
+
+            return sorted;
+        },
+
+        _errorsByName: function() {
+            var that = this,
+                inputNames = that._getInputNames(),
+                sorted = [];
+
+            for (var i = 0; i < inputNames.length; i += 1) {
+                var name = inputNames[i];
+
+                if (that._errors[name]) {
+                    sorted.push({
+                        field: name,
+                        message: that._errors[name]
+                    });
+                }
+            }
+
+            return sorted;
+        },
+
+        _renderSummary: function() {
+            var that = this,
+                options = this.options.validationSummary,
+                element = this.element,
+                prevElement = element.prev(),
+                container;
+
+            if (options.container) {
+                container = $(options.container);
+            } else if (prevElement && prevElement.hasClass(VALIDATIONSUMMARY)) {
+                container = prevElement;
+            } else {
+                container = $("<div />").insertBefore(that.element);
+            }
+
+            container.addClass([VALIDATIONSUMMARY, MESSAGEBOX].join(" "));
+            container.attr("role", "alert");
+
+            container.on("click" + NS, proxy(that._summaryClick, that));
+
+            return container;
+        },
+
+        _summaryClick: function(e) {
+            e.preventDefault();
+
+            var that = this,
+                link = $(e.target),
+                target = that.element.find("[name='" + link.data("field") +  "']"),
+                nextFocusable, kendoInstance;
+
+            if (!target.length) {
+                return;
+            }
+
+            nextFocusable = target.closest(":kendoFocusable");
+            kendoInstance = kendo.widgetInstance(target);
+
+            if (nextFocusable.length) {
+                nextFocusable.focus();
+            } else if (kendoInstance) {
+                kendoInstance.focus();
+            } else {
+                target.focus();
+            }
+        },
+
+        showValidationSummary: function() {
+            var that = this,
+                summary = that.validationSummary,
+                errorsList;
+
+            if (!summary) {
+                summary = that.validationSummary = that._renderSummary();
+            }
+
+            errorsList = parseHtml(that._summaryTemplate({
+                errors: that._errorsByName()
+            }));
+
+            summary.html(errorsList);
+
+            summary.show();
+        },
+
+        hideValidationSummary: function() {
+            var that = this,
+                summary = that.validationSummary;
+
+            if (!summary) {
+                return;
+            }
+
+            summary.hide();
         }
     });
 

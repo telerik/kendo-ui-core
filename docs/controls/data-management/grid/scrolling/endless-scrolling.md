@@ -18,6 +18,10 @@ For runnable examples, refer to:
 
 To enable endless scrolling, set the [`scrollable.endless`](/api/javascript/ui/grid/configuration/scrollable.endless) property to `true`.
 
+> For the functionality to work as expected there are two requirements:
+> - There needs to be a vertical scrollbar
+> - The height of the grid should be constant
+
 The Grid supports endless scrolling both when it is bound to local and remote data:
 * When bound to local data arrays, the Grid serializes all items to the client and while the user scrolls, the widget displays new items.
 * When bound to remote data, the Grid serializes only the items for one page. When the user scrolls to the end of the list, the Grid sends an AJAX request to get the items for the next page. When the data is returned, the Grid renders only the new items and appends them to the old ones.

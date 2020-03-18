@@ -20,9 +20,9 @@ For runnable examples, refer to the [demos on implementing the editing approache
         {
             // The example will use this as a unique model Id.
             public int OrderID { get; set; }
-    
+
             public string ShipCountry { get; set; }
-    
+
             public int Freight { get; set; }
         }
 
@@ -130,7 +130,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
                 .Update(update => update.Action("UpdateOrders", "Grid"))  // Action invoked when the user saves an updated data item.
                 .Destroy(destroy => destroy.Action("DestroyOrders", "Grid")); // Action invoked when the user removes a data item.
             })
-        )	  
+        )
 
 ## Handling ModelState Errors
 
@@ -175,7 +175,7 @@ When editing is performed, server validation is often needed. This section demon
                 model.Field(product => product.OrderID).Editable(false);
             })
             .Create(create => create.Action("CreateOrders", "Grid"))
-            .Read(read => read.Action("ReadOrders", "Grid"))  
+            .Read(read => read.Action("ReadOrders", "Grid"))
             .Update(update => update.Action("UpdateOrders", "Grid"))
             .Destroy(destroy => destroy.Action("DestroyOrders", "Grid"))
             .Events(events => events.Error("onError")); // Add the error handler to the DataSource.
@@ -197,8 +197,8 @@ When editing is performed, server validation is often needed. This section demon
                                }
 
                                 // As long as the key matches the field name, this line of code will be displayed as validation message in the popup.
-                               grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
-                        });       
+                               grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
+                        });
                     });
                 }
             }

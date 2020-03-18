@@ -15,7 +15,7 @@ The following example demonstrates how to achieve this behavior by using a `Muta
 ```dojo
     <style scoped>
       /*hide validation message*/
-      .k-tooltip-validation {
+      .k-tooltip-error {
         visibility: hidden;
         /*or*/
         /*display:none !important;*/

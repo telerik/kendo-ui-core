@@ -8,7 +8,7 @@ slug: howto_showcommandbuttonsconditionally_gridaspnetmv
 
 # Show Command Buttons Conditionally
 
-The command buttons in the Kendo UI Grid for ASP.NET MVC feature the `Editable` property that accepts a JavaScript function name.
+The command buttons in the Kendo UI Grid for ASP.NET MVC feature the `Visible` property that accepts a JavaScript function name.
 
 By default, the current `dataItem` is passed to the JavaScript method as an argument. You can use this configuration to access the values from the Model.
 

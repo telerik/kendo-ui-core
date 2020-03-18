@@ -9634,10 +9634,11 @@ declare namespace kendo.ui {
 
         errors(): any;
         hideMessages(): void;
+        hideValidationSummary(): void;
+        showValidationSummary(): void;
         validate(): boolean;
         validateInput(input: Element): boolean;
         validateInput(input: JQuery): boolean;
-
     }
 
     interface ValidatorOptions {
@@ -9646,9 +9647,15 @@ declare namespace kendo.ui {
         messages?: any;
         rules?: any;
         validateOnBlur?: boolean;
+        validationSummary: boolean | ValidationSummary;
         validate?(e: ValidatorValidateEvent): void;
         validateInput?(e: ValidatorValidateInputEvent): void;
     }
+    interface ValidationSummary {
+        container?: string | JQuery;
+        template?: string | Function;
+    }
+
     interface ValidatorEvent {
         sender: Validator;
         preventDefault: Function;

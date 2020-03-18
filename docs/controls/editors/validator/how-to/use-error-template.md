@@ -92,7 +92,7 @@ The following example demonstrates how to use an [`errorTemplate`](/api/framewor
 
       <script>
         $(document).ready(function() {
-          var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-validation"' +
+          var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-error"' +
               'style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
               '#=message#<div class="k-callout k-callout-n"></div></div>'
 

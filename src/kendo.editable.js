@@ -24,8 +24,11 @@ var __meta__ = { // jshint ignore:line
         support = kendo.support,
         AUTOCOMPLETEVALUE = support.browser.chrome ? "disabled" : "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
-        ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' +
-                    '#=message#<div class="k-callout k-callout-n"></div></div>',
+        ERRORTEMPLATE = '<span class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em">' +
+            '<span class="k-icon k-i-error"></span>' +
+            '<span class="k-tooltip-content">#= message #</span>' +
+            '<span class="k-callout k-callout-n"></span>' +
+        '</span>',
         CHANGE = "change";
     var EQUAL_SET = "equalSet";
     var specialRules = ["url", "email", "number", "date", "boolean"];

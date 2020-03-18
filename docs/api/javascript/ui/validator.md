@@ -105,6 +105,75 @@ Set of custom validation rules. Those rules will extend the [built-in ones](/fra
         });
     </script>
 
+### validationSummary `Boolean|Object` *(default: false)*
+
+Determines if validation summary will be displayed. Default value is `false`.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script>
+        $("#myform").kendoValidator({
+          validationSummary: true
+        });
+    </script>
+
+### validationSummary.container `String|jQuery`
+
+Defines the element in which the validation summary will be rendered. By default, the validation summary is rendered before the element on which the Validator is initialized.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+    <div id="summary">
+
+    <script>
+        $("#myform").kendoValidator({
+          validationSummary: {
+            container: "#summary"
+          }
+        });
+    </script>
+
+### validationSummary.template `String|Function`
+
+Specifies the template for rendering the validation summary.
+
+#### Parameters
+
+##### errors `Array`
+
+The validation errors.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Validate</button>
+    </form>
+
+    <script type="x/kendo-template" id="summary-template">
+        <ul>
+            #for(var i = 0; i < errors.length; i += 1){#
+                <li><a data-field="#=errors[i].field#" href="\\#">#= errors[i].message #</a></li>
+            # } #
+        </ul>
+    </script>
+
+    <script>
+        $("#myform").kendoValidator({
+          validationSummary: {
+            template: kendo.template($("#summary-template").html())
+          }
+        });
+    </script>
 
 ### validateOnBlur `Boolean`
 
@@ -176,6 +245,60 @@ Hides the validation messages.
         //hide the validation messages when hide button is clicked
         $("#hide").click(function() {
             validator.hideMessages();
+        });
+    </script>
+
+### hideValidationSummary
+
+Hides the validation summary.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Save</button>
+        <button id="hide" type="button">Hide Summary</button>
+    </form>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator({
+          validationSummary: true
+        }).data("kendoValidator");
+
+        // trigger validation to display the validation summary
+        validator.validate();
+
+        //hide the validation summary when hide button is clicked
+        $("#hide").click(function() {
+            validator.hideValidationSummary();
+        });
+    </script>
+
+### showValidationSummary
+
+Shows the validation summary.
+
+#### Example
+
+    <form id="myform">
+        <input name="username" required /> <br />
+        <button>Save</button>
+        <button id="hide" type="button">Show Summary</button>
+    </form>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator({
+          validationSummary: false
+        }).data("kendoValidator");
+
+        // trigger validation
+        validator.validate();
+
+        //show the validation summary when show button is clicked
+        $("#hide").click(function() {
+            validator.showValidationSummary();
         });
     </script>
 
