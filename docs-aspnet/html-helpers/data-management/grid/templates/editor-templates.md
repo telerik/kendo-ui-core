@@ -67,6 +67,14 @@ Your project may require you to create a custom editor for a specific property. 
             .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
         )
 
+1. In the main view, bind a column of the Grid to the `Employee` property.
+
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Employee).ClientTemplate("#=Employee.EmployeeName#").Sortable(false).Width(180);
+        })
+
 1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees.
 
         public ActionResult Index()
