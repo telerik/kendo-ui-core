@@ -2960,6 +2960,29 @@ Defines the text of the **Save Changes** button that saves modifed data rows.
     });
     </script>
 
+### messages.commands.search `String` *(default: "Search...")*
+
+Allows the customization of the placeholder text in the treelist search panel.
+
+#### Example
+
+    <div id="treeList"></div>
+    <script>
+    $("#treeList").kendoTreeList({
+      columns: [ "name", "age" ],
+      dataSource: [
+        { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+        { id: 2, parentId: 1, name: "John Doe", age: 24 }
+      ],
+      toolbar:["search"],
+      messages: {
+        commands: {
+          search: "Look for..."
+        }
+      }
+    });
+    </script>
+
 ### messages.commands.cancel `String` *(default: "Cancel Changes")*
 
 Defines the text of the **Cancel Changes** button that cancels all data modifications.

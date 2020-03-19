@@ -6139,6 +6139,29 @@ Defines the text of the "Save Changes" button located in the toolbar of the widg
     });
     </script>
 
+### messages.commands.search `String` *(default: "Search...")*
+
+Allows the customization of the placeholder text in the grid search panel.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      messages: {
+        commands: {
+          search: "Look for..."
+        }
+      },
+      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+      toolbar:["search"]
+    });
+    </script>
+
 ### messages.commands.update `String`
 
 Defines the text of the "Update" button that is rendered in `inline` or `popup` editing mode.
@@ -6222,27 +6245,6 @@ Allows the customization of the text in the column header for the expand or coll
       messages: {
         expandCollapseColumnHeader: "E/C"
       }
-    });
-    </script>
-
-### messages.search `String` *(default: "Search...")*
-
-Allows the customization of the placeholder text in the grid search panel.
-
-#### Example
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      messages: {
-        search: "Look for..."
-      },
-      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
-      toolbar:["search"]
     });
     </script>
 
