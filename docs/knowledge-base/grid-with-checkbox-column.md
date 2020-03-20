@@ -42,6 +42,11 @@ The following example demonstrates how to use checkboxes in the Grid column temp
 For more information on how to apply batch editing with a bound Boolean column, check the article about [adding model-bound and batch-editable checkbox columns to the Grid](/knowledge-base/grid-bound-checkbox-editable-column).
 
 ```dojo
+  <style>
+    .k-grid-content td {
+      position:relative;
+    }
+  </style>
    <div id="grid"></div>
     <script>
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
@@ -94,7 +99,7 @@ For more information on how to apply batch editing with a bound Boolean column, 
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
           { field: "UnitsInStock", title: "Units In Stock", width: 110 },
-          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110 },
+          { template: '#=dirtyField(data,"Discontinued")#<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox" />', width: 110 },
           { command: "destroy", title: "&nbsp;", width: 100 }],
         editable: true
       });
