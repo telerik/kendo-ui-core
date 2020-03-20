@@ -28,7 +28,7 @@
 
         it("page size select should have aria label", function() {
             var element = setup(null, { pageSizes: [1, 2] });
-            assert.equal(element.find("select").attr("aria-label"), "1");
+            assert.equal(element.find(".k-pager-sizes select").attr("aria-label"), "1");
         });
 
         it("refresh button should have aria label", function() {

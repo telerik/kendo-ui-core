@@ -699,16 +699,8 @@
                 pageSizes: [10, 20]
             });
 
-            assert.isOk(container.find("select").data("kendoDropDownList")
+            assert.isOk(container.find(".k-pager-sizes select").data("kendoDropDownList")
                 .wrapper.css("display") !== "none");
-        });
-
-        it("kendoPager list is hidden when a click outside is performed", function() {
-            var ul = setup();
-            ul.find(".k-current-page").click();
-            assert.isOk(pager.list.hasClass("k-state-expanded"));
-            $(document.body).trigger("mousedown");
-            assert.isOk(!pager.list.hasClass("k-state-expanded"));
         });
 
         it("page size is correctly calculated when all options is set and total is not set", function() {
@@ -797,7 +789,7 @@
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
 
-        it("currentPage li element is present when AutoBind is false", function() {
+        it("numbers wrap select element is present when AutoBind is false", function() {
             var dataSource = new DataSource({
                 pageSize: 1,
                 data: [1, 2, 3]
@@ -808,10 +800,10 @@
                 autoBind: false
             });
 
-            assert.equal(pager.find(".k-pager-numbers .k-current-page").length, 1);
+            assert.equal(pager.find(".k-pager-numbers-wrap > select.k-dropdown").length, 1);
         });
 
-        it("select li is present when AutoBind is false", function() {
+        it("selected li is present when AutoBind is false", function() {
             var dataSource = new DataSource({
                 pageSize: 1,
                 data: [1, 2, 3]

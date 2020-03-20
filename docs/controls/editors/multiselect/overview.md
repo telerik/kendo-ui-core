@@ -18,7 +18,7 @@ The widget represents a richer version of the `<select>` element and provides su
 
 To initialize the MultiSelect, use the `<option>` tag of an existing `<select>` element with defined data items.
 
-You can also initialize the DropDownList through binding it to local or remote data and then using the `<select>` element. For more information, refer to the [article on data binding]({% slug databinding_multiselect %}).
+You can also initialize the MultiSelect through binding it to local or remote data and then using the `<select>` element. For more information, refer to the [article on data binding]({% slug databinding_multiselect %}).
 
 Regardless of the applied initialization, the performance and functionality of the MultiSelect are consistent. For a complete example, refer to the [demo on the basic usage of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/index).
 

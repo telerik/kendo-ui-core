@@ -24,16 +24,18 @@ The following example demonstrates how to set the template as a string and wrap 
             c.Bound(f => f.ShipCountry).ClientTemplate("<strong>#= ShipCountry # </strong>");
         })
 
-The following example demonstrates how to set column templates as a Kendo UI template.
-
-        .Columns(c =>
-        {
-            c.Bound(f => f.ShipCountry).ClientTemplate("<strong>#= ShipCountry # </strong>");
-        })
+The following example demonstrates how to set column templates as a Kendo UI template. First compile the template, then pass it to the column.
 
         <script type="kendo-template" id="my-template">
-            <em>#= ShipCountry # </em>
+            <em>#= ShipCountry  # </em>
         </script>
+        <script>
+            var myTemplate = kendo.template($('#my-template').html());
+        </script>
+        .Columns(c =>
+        {
+            c.Bound(f => f.ShipCountry ).ClientTemplate("#=myTemplate(data)#");
+        })
 
 The following example demonstrates how to set a column template as a function.
 
