@@ -16,21 +16,49 @@ Telerik maintains a NuGet Feed for registered users.
 
 ## The Telerik Private NuGet Feed
 
-To use the Telerik NuGet Feed as a Package Source, use the [NuGet CLI](http://docs.nuget.org/consume/Command-Line-Reference). As of now, Visual Studio does not provide a UI for configuring authenticated NuGet feeds.
+To use the Telerik NuGet Feed as a Package Source, use the [NuGet CLI](http://docs.nuget.org/consume/Command-Line-Reference). Or, use the UI provided from Visual Studio for configuring authenticated NuGet feeds.
 
-### Setting Up the NuGet Package Source
+The following video explains how you can add the Telerik NuGet feed. If you prefer to do this yourself, follow the rest of this article.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c3m_BLMXNDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Setup with NuGet CLI
 
 1. Download the [latest NuGet executable](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe).
-1. Open a command prompt and change the path to where the `nuget.exe` is downloaded.
-1. Depending on your scenario, execute the following commands respectively.
+1. Open a command prompt and change the path to where the `nuget.exe` is downloaded. 
+1. The command from the example below stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
 
-    * To store encrypted credentials, use the `NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password"` command. As a result, a token is stored in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
+    ```
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password"
+    ```
 
-      > If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text.
+    If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text.
 
-      * To store credentials in clear text, use the `NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText` command. As a result, the password is stored in clear text in the `%AppData%\NuGet\NuGet.config` file. If you are unable to connect to the feed using encrypted credentials, use this alternative approach.
+    ```
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+    ```
 
-      If you have already stored a token instead of storing the credentials as clear text, update the definition in the `%AppData%\NuGet\NuGet.config` file by using the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText` command.
+    If you have already stored a token instead of storing the credentials as clear text, you could update the definition in the `%AppData%\NuGet\NuGet.config` file using the following command:
+
+    ```
+        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+    ```
+
+### Setup with NuGet Package Manager
+
+1. Open Visual Studio.
+
+1. Go to **Tools > NuGet Package Manager > Package Manager Settings**, select Package Manager Sources and then click the + button.
+
+1. Choose feed Name, set the feed URL to: https://nuget.telerik.com/nuget and click OK.
+
+    ![Kendo UI resources](../images/add-nuget-source.png)
+
+1. Choose the `Browse` list of packages.
+
+1. Enter your Telerik credentials in the Windows Authentication dialog.
+
+1. All of the packages that are licensed to the user account are available in Visual Studio Package Manager.
 
 ### Installing the NuGet Packages
 

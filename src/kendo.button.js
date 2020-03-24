@@ -30,6 +30,14 @@
             SELECTEDSTATE = "k-state-active",
             OVERLAY = "k-badge-overlay";
 
+        var BUTTON_DEFAULTS = {
+            icon: "",
+            iconClass: "",
+            spriteCssClass: "",
+            imageUrl: ""
+        };
+        kendo.setDefaults("button", BUTTON_DEFAULTS);
+
         var Button = Widget.extend({
             init: function (element, options) {
                 var that = this;
@@ -83,10 +91,6 @@
 
             options: {
                 name: "Button",
-                icon: "",
-                iconClass: "",
-                spriteCssClass: "",
-                imageUrl: "",
                 enable: true,
                 enabled: true
             },
@@ -233,6 +237,14 @@
                 }
             }
         });
+
+        if (Button.fn.hasOwnProperty("defaults") === false) {
+            Object.defineProperty(Button.fn, "defaults", {
+                get: function() {
+                    return kendo.defaults.button;
+                }
+            });
+        }
 
         kendo.ui.plugin(Button);
 

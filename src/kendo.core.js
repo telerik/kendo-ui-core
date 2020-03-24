@@ -2841,7 +2841,7 @@ function pad(number, digits, end) {
                 options = extend({}, options, { dataSource: {} });
             }
 
-            options = that.options = extend(true, {}, that.options, options);
+            options = that.options = extend(true, {}, that.options, that.defaults, options);
 
             if (dataSource) {
                 options.dataSource = dataSource;
@@ -4670,6 +4670,34 @@ function pad(number, digits, end) {
 
         return observable;
     };
+
+
+    // Kendo defaults
+    (function() {
+
+        kendo.defaults = kendo.defaults || {};
+        kendo.setDefaults = function(key, value) {
+            var path = key.split(".");
+            var curr = kendo.defaults;
+
+            key = path.pop();
+
+            path.forEach(function(part) {
+                if (curr[part] === undefined) {
+                    curr[part] = {};
+                }
+
+                curr = curr[part];
+            });
+
+            if (value.constructor === Object) {
+                curr[key] = deepExtend({}, curr[key], value);
+            } else {
+                curr[key] = value;
+            }
+        };
+
+    })();
 
 })(jQuery, window);
 
