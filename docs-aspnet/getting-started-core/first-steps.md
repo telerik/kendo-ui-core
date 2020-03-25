@@ -123,7 +123,7 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 
 ## Next Steps
 
-* [Use data-bound widgets]({% slug environmentsupport_core %}#json-serialization)
+* [Use data-bound widgets]({% slug json_serialization %})
 * [Ways to download and install UI for ASP.NET Core (overview)]({% slug downloadinstall_aspnetcore %})
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})

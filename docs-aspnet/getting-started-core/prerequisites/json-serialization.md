@@ -1,35 +1,16 @@
 ---
-title: Environment Specifics
-page_title: Environment Specifics
-description: "Learn about IDE or framework specifics while working with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC) and Visual Studio."
-slug: environmentsupport_core
+title: JSON Serialization
+page_title: JSON Serialization
+description: "How to configure JSON Serialization when working with Grid and other data-bound widgets."
+previous_url: /getting-started/prerequisites/environment-support
+slug: json_serialization
 position: 1
-permalink: /getting-started/prerequisites/environment-support
+permalink: /getting-started/prerequisites/json-serialization
 ---
 
-# Environment Specifics
+# Overview
 
-If you use Visual Studio 2015 or when you serialize data in JSON format in .Net Core version 2 or 3, note some specific environment issues that may occur.   
-
-## VS 2015 Support
-
-You can use Visual Studio 2015 only for .NET Core 1.x development. However, this is not recommended because:
-* The .NET Core tooling is in a preview version which is not officially supported.
-* The projects are `project.json`-based which is deprecated.
-
-In VS 2015, to ensure the matching of the ASP.NET Core version which is distributed with the Telerik UI for ASP.NET Core, manually change the `Microsoft.AspNetCore.Routing` and `Microsoft.AspNetCore.Mvc` versions to `1.1.0` in `project.json`.
-
-If you are new to ASP.NET Core and are experiencing any compatibility issues, check [this issue](https://github.com/dotnet/sdk/issues/3124) from the `dotnet/sdk` repository and the compatibility matrix.
-
-If you are using a VS 2015 version prior to R2 2018, locate the `Configure` method and add a call to `app.UseKendo` at the end.
-
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-		{
-			...
-
-			//If using versions older than R2 2018, configure Kendo UI
-			app.UseKendo(env);
-		}
+When you use Grid or other data-bound widgets in your code, make sure that the property name casing doesn't change during serialization. This document describes the recommended approaches.   
 
 ## JSON Serialization
 

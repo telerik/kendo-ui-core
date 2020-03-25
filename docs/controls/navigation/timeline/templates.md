@@ -10,7 +10,7 @@ position: 5
 
 The Timeline enables to define your own template for rendering the events data so that you can customize it to your needs instead of using the default card.
 
-For a runnable example, refer to the [dem on using templates in the Timeline](https://demos.telerik.com/kendo-ui/timeline/templates).
+For a runnable example, refer to the [demo on using templates in the Timeline](https://demos.telerik.com/kendo-ui/timeline/templates).
 
 The following example demonstrates how to customize the template of the Timeline. To render more than one image, use custom fields from your model that will not be recognized by the default template. The classes and HTML structure in this example, except for the custom field, mimic the default card template.
 
@@ -109,5 +109,5 @@ The following example demonstrates how to customize the template of the Timeline
 
 ## See Also
 
-* [Templates in the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/templates).
+* [Templates in the Timeline (Demo)](https://demos.telerik.com/kendo-ui/timeline/templates)
 * [JavaScript API Reference of the Timeline](/api/javascript/ui/timeline)

@@ -10,7 +10,7 @@ position: 3
 
 The Timeline can render links (`<a>` tags) for the items of its `actions` collection in the data source and the user can navigate to the specific pages.
 
-The `href` attribute of an action will be set to the value of the `src` field of the action literal and the text will come from the `text` field.
+The `href` attribute of an action will be set to the value of the `url` field of the action literal and the text will come from the `text` field.
 
 The following example demonstrates how to use a field with a specific name to provide actions for the events.
 

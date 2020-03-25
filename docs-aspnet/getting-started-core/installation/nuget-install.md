@@ -52,7 +52,7 @@ The following video explains how you can add the Telerik NuGet feed. If you pref
 
 1. Choose feed Name, set the feed URL to: https://nuget.telerik.com/nuget and click OK.
 
-    ![Kendo UI resources](../images/add-nuget-source.png)
+    ![Kendo UI resources](../../getting-started-core/images/add-nuget-source.png)
 
 1. Choose the `Browse` list of packages.
 

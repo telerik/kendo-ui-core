@@ -98,7 +98,7 @@ You can have the events render alternatingly on both sides of the axis by settin
 
 ## Horizontal Mode
 
-To use the horizontal rendering, set the `orientation` option f the Timeline to `horizontal`.
+To use the horizontal rendering, set the `orientation` option of the Timeline to `horizontal`.
 
 In the horizontal mode, the Timeline renders buttons which the user can click or tap to navigate between periods. One of the events is always rendered below the time axis and the user can select another event to reveal its details.
 
