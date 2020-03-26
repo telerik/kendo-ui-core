@@ -2923,6 +2923,14 @@ td.k-group-cell,
     }
 }
 
+.k-pager-numbers .k-state-selected,
+.k-pager-numbers .k-state-selected:hover {
+    border-color: @selected-text-color transparent transparent;
+    border-radius: 0;
+    .box-shadow(none);
+    color: @selected-text-color;
+}
+
 .k-scheduler-toolbar > ul li:first-child,
 .k-scheduler-toolbar > ul li:first-child .k-link,
 .k-scheduler-toolbar .k-nav-next,
