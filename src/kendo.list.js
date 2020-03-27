@@ -743,6 +743,7 @@ var __meta__ = { // jshint ignore:line
 
             that._change();
             that.close();
+            that._userTriggered = false;
         },
 
         _change: function() {
@@ -766,6 +767,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (trigger) {
+
                 if (that._old === null || that._old === "" || value === "") {
                     that._valueBeforeCascade = that._old = value;
                 } else {

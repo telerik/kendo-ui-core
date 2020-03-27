@@ -28,6 +28,7 @@ var __meta__ = { // jshint ignore:line
         Select = ui.Select,
         caret = kendo.caret,
         support = kendo.support,
+        isIE = kendo.support.browser.msie,
         placeholderSupported = support.placeholder,
         activeElement = kendo._activeElement,
         keys = kendo.keys,
@@ -228,8 +229,10 @@ var __meta__ = { // jshint ignore:line
                       .on("focusout" + nsFocusEvent, proxy(that._inputFocusout, that));
         },
 
-        _focusHandler: function() {
-            this.input.focus();
+        _focusHandler: function(e) {
+            if(e.target === this.element[0]) {
+                this.input.focus();
+            }
         },
 
         _arrowClick: function() {
@@ -250,6 +253,10 @@ var __meta__ = { // jshint ignore:line
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
+            if(this._userTriggered && isIE){
+                return;
+            }
+
             that.text(that.text());
 
             var item = that._focus();
@@ -261,6 +268,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._placeholder();
+            that._valueBeforeCascade = that._old;
             that._blur();
 
             that.element.blur();
@@ -768,7 +776,8 @@ var __meta__ = { // jshint ignore:line
 
             that.trigger("set", { value: value });
 
-            if (value === options.value && that.input.val() === options.text) {
+            if (value === options.value && that.input.val() === options.text &&
+            !that.options.cascadeFrom) {
                 return;
             }
 
@@ -789,7 +798,12 @@ var __meta__ = { // jshint ignore:line
                         that._placeholder(true);
                     }
 
-                    that._old = that._valueBeforeCascade = that._accessor();
+                    if(that._userTriggered) {
+                         that._old = that._accessor();
+                    } else {
+                         that._old = that._valueBeforeCascade = that._accessor();
+                    }
+
                     that._oldIndex = that.selectedIndex;
 
                     that._prev = that.input.val();

@@ -27,7 +27,7 @@ Bug fixes are then implemented in the product by the Development team and later 
 
 To get a bug fix, you have to upgrade your project to the same release as the release that contains the fix, or later.
 
-* [Upgrading your Kendo UI for jQuery project (new script or style referral)](https://docs.telerik.com/kendo-ui/intro/supporting/scripts-general)
+* [Upgrading your Kendo UI for jQuery project (new script or style referral)]({% slug hosting_kendoui %})
 * [Upgrading your Telerik&reg; UI for ASP.NET MVC project](https://docs.telerik.com/aspnet-mvc/introduction#upgrade)
 * [Upgrading your Telerik&reg; UI for ASP.NET Core project](https://docs.telerik.com/aspnet-core/introduction#upgrade)
 
