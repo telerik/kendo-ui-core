@@ -21,7 +21,7 @@ To set a custom binding, use the `data-bind` attribute.
 
 To register a custom binding, extend the [`kendo.data.Binder`](/api/javascript/data/binder) object.
 
-The following example demonstrates how to register a one-way binding. As a result, the HTML element is updated when the view-model changes.  
+The following example demonstrates how to register a one-way binding. As a result, the HTML element is updated when the view-model changes.
 
 ```dojo
     <p><label><input type="checkbox" data-bind="checked: slideValue" />toggle slideValue</label></p>
@@ -119,35 +119,38 @@ The following example demonstrates how to bind the max value of a Kendo UI Numer
         max: 10
     });
 
-    kendo.bind(document.body, viewModel);    
+    kendo.bind(document.body, viewModel);
     </script>
 ```
 
-## Custom Binding in TypeScript
+## Custom Widget Binding in TypeScript
 
-The following example demonstrates how to bind the max value of a Kendo UI NumericTextBox by using the custom widget biding approach. As a result, the widget is updated when the View-Model changes.
+The following example demonstrates how to use custom widget binding in TypeScript. It shows how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
 
-```
+```html
     <input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
+```
+```ts
+    /// <reference path="../node_modules/@progress/kendo-ui/index.d.ts" />
 
-    // <reference path="jquery.d.ts" />
-    // <reference path="kendo.all.d.ts" />
+    import * as $ from "jquery";
+    import "@progress/kendo-ui";
 
-    module kendo.data.binders.widget {
-
-        export class max extends kendo.data.Binder {
-            init(widget, bindings, options) {
+    $.extend(kendo.data.binders.widget, {
+        max: kendo.data.Binder.extend({
+            init(widget: kendo.ui.Widget, bindings: kendo.data.Bindings, options: kendo.data.BinderOptions) {
                 //call the base constructor
-                kendo.data.Binder.fn.init.call(this, widget.element[0], bindings, options);
-            }
-
+                kendo.data.Binder.fn.init.call(this, widget.element.get(0), bindings, options);
+            },
             refresh() {
-                var that = this,
-                value = that.bindings["max"].get(); //get the value from the View-Model
-                that.element.max(value);
+                var that = this;
+                var value = that.bindings["max"].get(); // get the value from the View-Model
+                var numeric = $(that.element).data("kendoNumericTextBox"); // get the NumeriTextBox widget instance
+
+                numeric.max(value); // set the max value for the NumeriTextBox
             }
-        }
-    }
+        })
+    });
 
     class NumericOptions extends kendo.data.ObservableObject {
         value = 5;
@@ -160,77 +163,8 @@ The following example demonstrates how to bind the max value of a Kendo UI Numer
         }
     }
 
-    class ViewModel extends kendo.data.ObservableObject {
-        person = new NumericOptions();
-
-        constructor() {
-            super();
-
-            super.init(this);
-        }
-    }
-
-    $(function () {
-        var viewModel = new NumericOptions();
-
-        kendo.bind(document.body, viewModel);
-
-    });
-```
-
-## Custom Widget Binding in TypeScript
-
-The following example demonstrates how to use custom widget binding in TypeScript. It shows how to bind the max value of a Kendo UI NumericTextBox widget. As a result, the widget is updated when the View-Model changes.
-
-```
-<input data-role="numerictextbox" id="numeric" data-bind="value: value, max: max" />​
-
-// <reference path="jquery.d.ts" />
-// <reference path="kendo.all.d.ts" />
-
-module kendo.data.binders.widget {
-
-    export class max extends kendo.data.Binder {
-        init(widget, bindings, options) {
-            //call the base constructor
-            kendo.data.Binder.fn.init.call(this, widget.element[0], bindings, options);
-        }
-
-        refresh() {
-            var that = this,
-            value = that.bindings["max"].get(); //get the value from the View-Model
-            that.element.max(value);
-        }
-    }
-}
-
-class NumericOptions extends kendo.data.ObservableObject {
-    value = 5;
-    max = 10;
-
-    constructor() {
-        super();
-
-        super.init(this);
-    }
-}
-
-class ViewModel extends kendo.data.ObservableObject {
-    person = new NumericOptions();
-
-    constructor() {
-        super();
-
-        super.init(this);
-    }
-}
-
-$(function () {
     var viewModel = new NumericOptions();
-
-    kendo.bind(document.body, viewModel);
-
-});
+    kendo.bind($("#example"), viewModel);
 ```
 
 ## Breakdown of Code Elements

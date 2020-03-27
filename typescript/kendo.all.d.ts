@@ -523,7 +523,6 @@ declare namespace kendo.data {
         preventDefault?: Function;
     }
 
-
     class Binding extends Observable {
         source: any;
         parents: any[];
@@ -554,8 +553,6 @@ declare namespace kendo.data {
         render(value: Object): string;
     }
 
-    namespace binders { }
-
     interface Bindings {
         [key: string]: Binding;
     }
@@ -572,6 +569,17 @@ declare namespace kendo.data {
         destroy(): void;
         refresh(): void;
         refresh(attribute: string): void;
+    }
+
+    class TypedBinder extends Binder {
+        dataType(): string;
+        parsedValue(): any;
+    }
+
+    interface DataSourceBinder extends Binder {
+        itemChange(e: any): string;
+        dataBinding(e: any): any;
+        dataBound(e: any): any;
     }
 
     interface BinderOptions {
@@ -1386,6 +1394,114 @@ declare namespace kendo.data {
         response?: any;
         type?: string;
     }
+}
+
+declare namespace kendo.data.binders {
+    class attr extends Binder { }
+
+    class css extends Binder { }
+
+    class style extends Binder { }
+
+    class enabled extends Binder { }
+
+    class disabled extends Binder { }
+
+    class readonly extends Binder { }
+
+    class events extends Binder { }
+
+    class text extends Binder { }
+
+    class visible extends Binder { }
+
+    class invisible extends Binder { }
+
+    class html extends Binder { }
+
+    class value extends TypedBinder {
+        change(): void;
+    }
+
+    class source extends Binder {
+        container(): Element;
+        template(): String;
+        add(index: Number, items: any[]): void;
+        remove(index: Number, items: any[]): void;
+        render(): void;
+    }
+
+    function dataSourceBinding(bindingName: String, fieldName: String, setter: String): DataSourceBinder;
+}
+
+declare namespace kendo.data.binders.input {
+    class checked extends TypedBinder {
+        change(): void;
+        value(): any;
+    }
+}
+
+declare namespace kendo.data.binders.select {
+    class source extends binders.source { }
+
+    class value extends TypedBinder {
+        change(): void;
+    }
+}
+
+declare namespace kendo.data.binders.widget {
+    class events extends Binder { }
+
+    class checked extends Binder {
+        change(): void;
+        value(): any;
+    }
+
+    class start extends Binder {
+        change(): void;
+    }
+
+    class end extends Binder {
+        change(): void;
+    }
+
+    class visible extends Binder { }
+
+    class invisible extends Binder { }
+
+    class enabled extends Binder { }
+
+    class disabled extends Binder { }
+
+    class value extends Binder {
+        change(): void;
+    }
+
+    function source(bindingName: String, fieldName: String, setter: String): DataSourceBinder;
+}
+
+declare namespace kendo.data.binders.widget.dropdowntree {
+    class value extends Binder {
+        change(): void;
+    }
+}
+
+declare namespace kendo.data.binders.widget.gantt {
+    function dependencies(bindingName: String, fieldName: String, setter: String): DataSourceBinder;
+}
+
+declare namespace kendo.data.binders.widget.multiselect {
+    class value extends Binder {
+        change(): void;
+    }
+}
+
+declare namespace kendo.data.binders.widget.scheduler {
+    function source(bindingName: String, fieldName: String, setter: String): DataSourceBinder;
+}
+
+declare namespace kendo.data.binders.widget.grid {
+    function source(bindingName: String, fieldName: String, setter: String): DataSourceBinder;
 }
 
 declare namespace kendo.data.transports {
