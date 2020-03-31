@@ -57,6 +57,6 @@ In order to set up the DropDownList component bindings, you need to configure th
 
 ## See Also
 
-* [Razor Pages Support ]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
-* [DataBinding Overview ]({% slug htmlhelpers_dropdownlist_databinding_aspnetcore %})
+* [Razor Pages Support]({% slug razor_pages_integration_aspnetmvc6_aspnetmvc %})
+* [DataBinding Overview]({% slug htmlhelpers_dropdownlist_databinding_aspnetcore %})
 

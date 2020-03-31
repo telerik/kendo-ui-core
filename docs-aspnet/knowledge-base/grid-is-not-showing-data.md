@@ -4,7 +4,7 @@ description: The Grid HtmlHelper does not load any records in an ASP.NET Core pr
 type: troubleshooting
 page_title: The Grid Does Not Show Any Records
 slug: grid-is-not-showing-data
-tags: grid, data, core, aspnet, not showing, binding, loading
+tags: grid, data, core, aspnet, not showing, binding, loading, empty, no items, records, returned
 ticketid: 1112718
 res_type: kb
 component: grid
@@ -22,7 +22,7 @@ component: grid
 
 ## Description
 
-When the Grid data is sent from the `Controller` to the client, it is impossible to get any records and load them in any of the Grids in my ASP.NET Core project. What is the cause for this issue and its solution?
+When the Grid data is returned from the `Controller` to the client, it is impossible to get any records and load them in any of the Grids in my ASP.NET Core project. What is the cause for this issue and its solution?
 
 ## Cause
 
