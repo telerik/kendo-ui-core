@@ -9639,6 +9639,12 @@ The supported values are:
     });
     </script>
 
+### series.autoFit `Boolean` *(default: false)*
+
+If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series ([see example]({% slug pietypecharts_widget %}#auto-fit-labels)).
+
+> The `autoFit` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "pie" or "donut".
+
 ### series.axis `String` *(default: "primary")*
 
 The name of the value axis to use.
