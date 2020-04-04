@@ -604,7 +604,7 @@
 // @radio-size: @icon-size;
 @radio-radius: 50%;
 @radio-border-width: 1px;
-// @radio-line-height: calc(@radio-size + @radio-border-width);
+// @radio-line-height: @radio-size + @radio-border-width;
 
 @radio-bg: @checkbox-bg;
 @radio-text: @checkbox-text;
@@ -774,6 +774,9 @@
 .k-grid td,
 .k-grid td.k-state-selected,
 .k-grid-footer-wrap,
+.k-pager-wrap,
+.k-pager-wrap .k-link,
+.k-pager-refresh,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
 .k-panelbar > .k-item > .k-link,
@@ -789,12 +792,14 @@
 .k-button-group .k-tool,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
-.k-editor-dialog .k-tabstrip-items {
+.k-editor-dialog .k-tabstrip-items
+{
     border-color: @widget-border-color;
 }
 
 .k-group,
 .k-grouping-header,
+.k-pager-wrap,
 .k-group-footer td,
 .k-grid-footer,
 .k-footer-template td,
@@ -938,6 +943,7 @@ textarea.k-textbox:hover,
 .k-picker-wrap,
 .k-numeric-wrap,
 .k-grouping-header,
+.k-pager-wrap,
 .k-textbox,
 .k-progressbar,
 .k-draghandle,
@@ -973,6 +979,7 @@ textarea.k-textbox:hover,
 .k-state-focused .k-icon,
 .k-column-menu .k-state-hover .k-sprite,
 .k-column-menu .k-state-active .k-sprite,
+.k-pager-numbers .k-current-page .k-link:hover:after,
 .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view.k-state-hover > .k-link:after
 {
     opacity:1;
@@ -981,6 +988,7 @@ textarea.k-textbox:hover,
 //Normal state
 .k-state-disabled .k-icon,
 .k-column-menu .k-sprite,
+.k-pager-numbers .k-current-page .k-link:after,
 .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view > .k-link:after
 {
     opacity: @default-icon-opacity;
@@ -1207,7 +1215,8 @@ textarea.k-textbox:hover,
 .k-draghandle.k-state-selected:hover,
 .k-scheduler .k-scheduler-toolbar .k-state-selected,
 .k-scheduler .k-today.k-state-selected,
-.k-marquee-color {
+.k-marquee-color
+{
     color: @selected-text-color;
     background-color: @selected-background-color;
     border-color: @selected-border-color;
@@ -1287,12 +1296,18 @@ td.k-state-focused.k-state-selected
 .k-splitbar-vertical-hover,
 .k-list>.k-state-hover,
 .k-scheduler .k-scheduler-toolbar ul li.k-state-hover,
+.k-pager-wrap .k-link:hover,
 .k-dropdown .k-state-focused,
 .k-filebrowser-dropzone
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
     border-color: @hover-border-color;
+}
+
+.k-pager-wrap .k-link.k-state-disabled {
+    color: @normal-text-color;
+    border-color: @widget-border-color;
 }
 
 .k-state-hover > .k-select,
@@ -1302,6 +1317,7 @@ td.k-state-focused.k-state-selected
 }
 
 .k-state-hover,
+.k-pager-wrap .k-link:hover,
 div.k-filebrowser-dropzone em,
 .k-draghandle:hover,
 .k-listbox .k-item:hover:not(.k-state-disabled)
@@ -1309,44 +1325,19 @@ div.k-filebrowser-dropzone em,
     .composite-background(@hover-gradient);
 }
 
-
-
-// Pager
-.k-pager-wrap {
-    .composite-background(@widget-gradient);
-    border-color: @widget-border-color;
-    color: @header-text-color;
+.k-pager-wrap
+{
     background-color: @header-background-color;
-    background-position: 50% 50%;
+    color: @header-text-color;
 
-    .k-link {
-        border-color: @widget-border-color;
-    }
-    .k-link:hover {
-        .composite-background(@hover-gradient);
-        border-color: @hover-border-color;
-        color: @hover-text-color;
-        background-color: @hover-background-color;
-    }
-    .k-link.k-state-disabled {
-        color: @normal-text-color;
-        border-color: @widget-border-color;
-    }
-    .k-link.k-state-selected {
-        color: @selected-text-color;
-        background-color: @selected-background-color;
-        border-color: @selected-border-color;
-    }
+    &.k-pager-lg,
+    &.k-pager-md,
+    &.k-pager-sm {
 
-
-    .k-pager-numbers .k-link {
-        border-color: transparent;
+        .k-pager-numbers.k-state-expanded {
+            background-color: @header-background-color;
+        }
     }
-
-    .k-pager-refresh {
-        border-color: transparent;
-    }
-
 }
 
 .k-picker-wrap.k-state-active,
@@ -2453,6 +2444,9 @@ textarea.k-textbox,
 .k-grid-header-wrap,
 .k-grid .k-grouping-header,
 .k-grid-header,
+.k-pager-wrap,
+.k-pager-wrap .k-textbox,
+.k-pager-wrap .k-link,
 .k-grouping-header .k-group-indicator,
 .k-gantt-toolbar .k-state-default
 {
@@ -2460,7 +2454,9 @@ textarea.k-textbox,
 }
 
 // Fix for responsive design
-.k-treeview .k-in {
+.k-pager-numbers .k-link,
+.k-treeview .k-in
+{
     border-color: transparent;
 }
 

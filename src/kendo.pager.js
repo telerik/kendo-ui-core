@@ -26,6 +26,7 @@ var __meta__ = { // jshint ignore:line
         KEYDOWN = "keydown",
         DISABLED = "disabled",
         MOUSEDOWN = "down",
+        DOCUMENT_ELEMENT = $(document.documentElement),
         MAX_VALUE = Number.MAX_VALUE,
         iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
@@ -36,14 +37,6 @@ var __meta__ = { // jshint ignore:line
             ns: kendo.ns,
             numeric: numeric,
             title: title || ""
-        });
-    }
-
-    function selectOption(template, idx, text, selected) {
-        return template( {
-            idx: idx,
-            text: text || idx,
-            selected: selected || false
         });
     }
 
@@ -91,7 +84,6 @@ var __meta__ = { // jshint ignore:line
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
             that.currentPageTemplate = kendo.template(that.options.currentPageTemplate);
-            that.numericSelectItemTemplate = kendo.template(that.options.numericSelectItemTemplate);
 
             page = that.page();
             totalPages = that.totalPages();
@@ -100,7 +92,6 @@ var __meta__ = { // jshint ignore:line
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
             that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
-
             if (options.previousNext) {
                 if (!that.element.find(FIRST).length) {
                     that.element.append(icon(FIRST, options.messages.first, "k-pager-first"));
@@ -116,33 +107,16 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (options.numeric) {
-                if (!that._numericWrap) {
-                    that._numericWrap = that.element.find(".k-pager-numbers-wrap");
+                that.list = that.element.find(".k-pager-numbers");
 
-                    if (that._numericWrap.length === 0) {
-                        that._numericWrap = $("<div class='k-pager-numbers-wrap' />").appendTo(that.element);
-                    }
+                if (!that.list.length) {
+                   that.list = $('<ul class="k-pager-numbers k-reset" />').appendTo(that.element);
                 }
-
-                if (!that._numericSelect) {
-                    that._numericSelect = that._numericWrap.find(".k-dropdown");
-
-                    if (that._numericSelect.length === 0) {
-                       that._numericSelect = $("<select class='k-dropdown' />").appendTo(that._numericWrap);
-                    }
-                }
-
-                if (!that.list) {
-                    that.list = that._numericWrap.find(".k-pager-numbers");
-
-                    if (that.list.length === 0) {
-                       that.list = $('<ul class="k-pager-numbers" />').appendTo(that._numericWrap);
-                    }
-                }
-
                 if (options.dataSource && !options.dataSource.total()) {
-                    that._numericSelect.empty().append("<option value='0' />");
-                    that.list.empty().append(that.selectTemplate({ text: 0 }));
+                    that.list.empty().append(that.currentPageTemplate({ text: 0 })).append(that.selectTemplate({ text: 0 }));
+                }
+                if (!that.list.parent().hasClass("k-pager-numbers-wrap")) {
+                    that.list.wrap('<div class="k-pager-numbers-wrap"></div>');
                 }
             }
 
@@ -215,8 +189,9 @@ var __meta__ = { // jshint ignore:line
 
             that.element
                 .on(CLICK + NS , "a", proxy(that._click, that))
-                .on(CHANGE + NS , "select.k-dropdown", proxy(that._numericSelectChange, that))
                 .addClass("k-pager-wrap k-widget k-floatwrap");
+
+            that.element.on(CLICK + NS , ".k-current-page", proxy(that._toggleActive, that));
 
             if (options.autoBind) {
                 that.refresh();
@@ -226,7 +201,6 @@ var __meta__ = { // jshint ignore:line
             $(window).on("resize" + NS, that._resizeHandler);
 
             sizeClassName = that._getWidthSizeClass(that.element.width());
-
             if (sizeClassName) {
                 that.element.addClass(sizeClassName);
             }
@@ -257,8 +231,6 @@ var __meta__ = { // jshint ignore:line
             selectTemplate: '<li><span class="k-link k-state-selected">#=text#</span></li>',
             currentPageTemplate: '<li class="k-current-page"><span class="k-link k-pager-nav">#=text#</span></li>',
             linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
-            numericItemTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
-            numericSelectItemTemplate: '<option value="#= idx #" #if (selected) {# selected="selected" #}#>#= text #</option>',
             buttonCount: 10,
             autoBind: true,
             numeric: true,
@@ -322,16 +294,15 @@ var __meta__ = { // jshint ignore:line
                 reminder,
                 page = that.page(),
                 html = "",
-                selectHtml = "",
                 options = that.options,
                 pageSize = that.pageSize(),
                 collapsedTotal = that._collapsedTotal(),
                 total = that.dataSource.total(),
                 totalPages = that.totalPages(),
                 linkTemplate = that.linkTemplate,
-                numericSelectItemTemplate = that.numericSelectItemTemplate,
                 buttonCount = options.buttonCount;
 
+            DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
             if (e && e.action == "itemchange") {
                 return;
             }
@@ -340,6 +311,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (page > buttonCount) {
                     reminder = (page % buttonCount);
+
                     start = (reminder === 0) ? (page - buttonCount) + 1 : (page - reminder) + 1;
                 }
 
@@ -347,26 +319,23 @@ var __meta__ = { // jshint ignore:line
 
                 if (start > 1) {
                     html += button(linkTemplate, start - 1, "...", false, options.messages.morePages);
-                    selectHtml += selectOption(numericSelectItemTemplate, start - 1, options.messages.morePages);
                 }
 
                 for (idx = start; idx <= end; idx++) {
                     html += button(idx == page ? that.selectTemplate : linkTemplate, idx, idx, true);
-                    selectHtml += selectOption(numericSelectItemTemplate, idx, idx, idx == page);
                 }
 
                 if (end < totalPages) {
                     html += button(linkTemplate, idx, "...", false, options.messages.morePages);
-                    selectHtml += selectOption(numericSelectItemTemplate, idx, options.messages.morePages);
                 }
 
                 if (html === "") {
                     html = that.selectTemplate({ text: 0 });
-                    selectHtml = $("<option value='0' />");
                 }
 
-                that.list.html(html);
-                that._numericSelect.html(selectHtml);
+                html = this.currentPageTemplate({ text: page }) + html;
+
+                that.list.removeClass("k-state-expanded").html(html);
             }
 
             if (options.info) {
@@ -463,14 +432,25 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _numericSelectChange: function(e) {
-            var target = e.currentTarget;
-            var value = target.value;
-            var page = parseInt(value, 10);
+        _toggleActive: function() {
+            var that = this;
 
-            target.blur();
+            if (that.list.hasClass("k-state-expanded")) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
+            } else {
+                DOCUMENT_ELEMENT.bind(that.downEvent, $.proxy(that._hideList, that));
+            }
+            that.list.toggleClass("k-state-expanded");
+        },
 
-            this.page(page);
+        _hideList: function(e) {
+             var that = this,
+                target = kendo.eventTarget(e);
+
+            if (!$.contains(that.list[0], target)) {
+                DOCUMENT_ELEMENT.unbind(that.downEvent, $.proxy(that._hideList, that));
+                that.list.removeClass("k-state-expanded");
+            }
         },
 
         _click: function(e) {

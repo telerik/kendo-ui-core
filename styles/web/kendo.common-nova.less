@@ -157,28 +157,7 @@
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
 @switch-on-left-x: calc(100% - @switch-handle-size);
 
-
 // Pager
-@pager-padding-x: 6px;
-@pager-padding-y: @pager-padding-x;
-@pager-border-width: 1px;
-
-@pager-section-spacing: 1em;
-
-@pager-item-padding-x: @button-padding-y;
-@pager-item-padding-y: @pager-item-padding-x;
-@pager-item-width: 2.5em;
-@pager-item-height: @pager-item-width;
-@pager-item-border-width: 0;
-@pager-item-border-radius: 0;
-@pager-item-spacing: 0;
-
-@pager-input-width: 3em;
-
-@pager-page-size-dropdown-width: 5em;
-
-
-// Pager -- old vars
 @pager-button-border-radius-sm: 3px;
 @pager-button-border-radius-lg: @pager-button-border-radius-sm;
 @pager-button-width: 2.429em;
@@ -474,7 +453,7 @@
 @radio-size: @icon-size;
 @radio-radius: 50%;
 @radio-border-width: 1px;
-@radio-line-height: calc(@radio-size + @radio-border-width);
+@radio-line-height: @radio-size + @radio-border-width;
 
 
 @import "common/all.less";
@@ -696,6 +675,54 @@
 .k-grid-content .k-group-cell {
     border-right-width: 1px;
     border-bottom-width: 0;
+}
+
+.k-pager-numbers .k-state-selected {
+    line-height: 2.429em;
+    cursor: pointer;
+}
+
+.k-pager-numbers .k-link,
+.k-pager-numbers .k-state-selected {
+    border-width: 2px 0 0;
+}
+
+.k-pager-wrap {
+    line-height: 1.286em;
+    padding: .429em 0 .429em .25em;
+}
+
+.k-pager-wrap .k-pager-numbers .k-state-selected {
+    margin-top: -.4em;
+    padding-top: .46em;
+}
+
+.k-pager-wrap input.k-textbox {
+    height: 2.57142857em;
+}
+
+.k-pager-info {
+    padding: .714em 1.333em .643em 1.333em;
+}
+
+.k-pager-wrap .k-pager-refresh {
+    margin-right: 1.214em;
+}
+
+.k-pager-wrap .k-dropdown {
+    width: 5.2em;
+}
+
+.k-pager-lg,
+.k-pager-md,
+.k-pager-sm {
+
+    .k-pager-numbers.k-state-expanded {
+
+        .k-state-selected {
+            padding: 0;
+        }
+    }
 }
 
 .k-autocomplete .k-i-loading,
@@ -1427,35 +1454,4 @@ div.k-spreadsheet-window {
 
 .k-window-titlebar .k-window-actions {
     top: (@window-titlebar-padding-y * .75);
-}
-
-
-
-
-// Pager
-.k-pager-wrap {
-
-    .k-link:hover .k-icon {
-        opacity: 1;
-    }
-
-    .k-pager-numbers-wrap {
-        margin-top: -@pager-padding-y;
-        margin-bottom: -@pager-padding-y;
-        align-self: stretch;
-    }
-    .k-pager-numbers {
-        align-self: stretch;
-        align-items: stretch;
-
-        li {
-            align-items: stretch;
-        }
-
-        .k-link {
-            height: auto;
-            border-width: 2px 0;
-        }
-    }
-
 }

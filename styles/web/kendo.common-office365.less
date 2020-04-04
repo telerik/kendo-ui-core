@@ -150,28 +150,7 @@
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
 @switch-on-left-x: calc(100% - @switch-handle-size);
 
-
 // Pager
-@pager-padding-x: 4px;
-@pager-padding-y: @pager-padding-x;
-@pager-border-width: 1px;
-
-@pager-section-spacing: 1em;
-
-@pager-item-padding-x: @button-padding-y;
-@pager-item-padding-y: @pager-item-padding-x;
-@pager-item-width: 2em;
-@pager-item-height: @pager-item-width;
-@pager-item-border-width: 0;
-@pager-item-border-radius: 0;
-@pager-item-spacing: 0;
-
-@pager-input-width: 3em;
-
-@pager-page-size-dropdown-width: 5em;
-
-
-// Pager -- old vars
 @pager-button-border-radius-sm: 0;
 @pager-button-border-radius-lg: @pager-button-border-radius-sm;
 @pager-button-width: 2em;
@@ -402,7 +381,7 @@
 @radio-size: @icon-size;
 @radio-radius: 50%;
 @radio-border-width: 1px;
-@radio-line-height: calc(@radio-size + @radio-border-width);
+@radio-line-height: @radio-size + @radio-border-width;
 
 
 // FileManager
@@ -665,6 +644,32 @@ span.k-tooltip {
 .k-grid-content table tr:first-child td,
 .k-grid-content-locked table tr:first-child td {
     border-top: 0;
+}
+
+.k-pager-wrap {
+    padding: 0.357em 0 0.357em 0.250em;
+}
+
+.k-pager-numbers .k-link {
+    border-width: 2px 0 0;
+}
+
+.k-pager-numbers .k-state-selected {
+    margin-top: -0.35em;
+    padding-top: .4em;
+    border-width: 2px 0 0;
+}
+
+.k-pager-lg,
+.k-pager-md,
+.k-pager-sm {
+
+    .k-pager-numbers.k-state-expanded {
+
+        .k-state-selected {
+            padding: 0;
+        }
+    }
 }
 
 .k-filter-menu {
@@ -1134,36 +1139,4 @@ div.k-spreadsheet-window {
 .k-spreadsheet-filter-menu > .k-menu .k-link .k-icon {
     margin-left: -26px;
     margin-right: 0;
-}
-
-
-
-
-// Pager
-.k-pager-wrap {
-
-    .k-link:hover .k-icon {
-        opacity: 1;
-    }
-
-    .k-pager-numbers-wrap {
-        margin-top: -@pager-padding-y;
-        margin-bottom: -@pager-padding-y;
-        align-self: stretch;
-    }
-    .k-pager-numbers {
-        align-self: stretch;
-        align-items: stretch;
-
-        li {
-            align-items: stretch;
-        }
-
-        .k-link {
-            height: auto;
-            min-width: 2.5em;
-            border-width: 2px 0;
-        }
-    }
-
 }

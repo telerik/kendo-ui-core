@@ -601,7 +601,7 @@
 // @radio-size: @icon-size;
 @radio-radius: 50%;
 @radio-border-width: 1px;
-// @radio-line-height: calc(@radio-size + @radio-border-width);
+// @radio-line-height: @radio-size + @radio-border-width;
 
 @radio-bg: @checkbox-bg;
 @radio-text: @checkbox-text;
@@ -758,6 +758,9 @@
 .k-grid td,
 .k-grid td.k-state-selected,
 .k-grid-footer-wrap,
+.k-pager-wrap,
+.k-pager-wrap .k-link,
+.k-pager-refresh,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
 .k-panelbar > .k-item > .k-link,
@@ -785,6 +788,7 @@
 
 .k-group,
 .k-grouping-header,
+.k-pager-wrap,
 .k-group-footer td,
 .k-grid-footer,
 .k-footer-template td,
@@ -928,6 +932,7 @@ textarea.k-textbox:hover,
 .k-picker-wrap,
 .k-numeric-wrap,
 .k-grouping-header,
+.k-pager-wrap,
 .k-textbox,
 .k-progressbar,
 .k-draghandle,
@@ -1237,6 +1242,7 @@ td.k-state-focused.k-state-selected
 .k-splitbar-vertical-hover,
 .k-list>.k-state-hover,
 .k-scheduler .k-scheduler-toolbar ul li.k-state-hover,
+.k-pager-wrap .k-link:hover,
 .k-dropdown .k-state-focused,
 .k-filebrowser-dropzone,
 .k-listbox .k-item:hover:not(.k-state-disabled)
@@ -1244,6 +1250,11 @@ td.k-state-focused.k-state-selected
     color: @hover-text-color;
     background-color: @hover-background-color;
     border-color: @hover-border-color;
+}
+
+.k-pager-wrap .k-link.k-state-disabled {
+    color: @link-text-color;
+    border-color: @secondary-border-color;
 }
 
 .k-state-hover > .k-select,
@@ -1254,6 +1265,7 @@ td.k-state-focused.k-state-selected
 
 .k-textbox:hover,
 .k-state-hover,
+.k-pager-wrap .k-link:hover,
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em,
 .k-draghandle:hover,
@@ -1262,44 +1274,19 @@ div.k-filebrowser-dropzone em,
     .composite-background(@hover-gradient);
 }
 
-
-
-
-// Pager
-.k-pager-wrap {
-    .composite-background(@widget-gradient);
-    border-color: @secondary-border-color;
-    color: @header-text-color;
+.k-pager-wrap
+{
     background-color: @header-background-color;
-    background-position: 50% 50%;
+    color: @header-text-color;
 
-    .k-link {
-        border-color: @secondary-border-color;
-    }
-    .k-link:hover {
-        color: @hover-text-color;
-        background-color: @hover-background-color;
-        border-color: @hover-border-color;
-    }
-    .k-link.k-state-disabled {
-        color: @link-text-color;
-        border-color: @secondary-border-color;
-    }
-    .k-link.k-state-selected {
-        color: @selected-text-color;
-        background-color: @selected-background-color;
-        border-color: @selected-border-color;
-    }
+    &.k-pager-lg,
+    &.k-pager-md,
+    &.k-pager-sm {
 
-
-    .k-pager-numbers .k-link {
-        border-color: transparent;
+        .k-pager-numbers.k-state-expanded {
+            background-color: @header-background-color;
+        }
     }
-
-    .k-pager-refresh {
-        border-color: transparent;
-    }
-
 }
 
 .k-autocomplete.k-state-active,
@@ -2381,6 +2368,9 @@ div.k-filebrowser-dropzone em
 .k-grid-header-wrap,
 .k-grid .k-grouping-header,
 .k-grid-header,
+.k-pager-wrap,
+.k-pager-wrap .k-textbox,
+.k-pager-wrap .k-link,
 .k-grouping-header .k-group-indicator,
 .k-gantt-toolbar .k-state-default
 {
@@ -2388,6 +2378,7 @@ div.k-filebrowser-dropzone em
 }
 
 // Fix for responsive design
+.k-pager-numbers .k-link,
 .k-treeview .k-in
 {
     border-color: transparent;
