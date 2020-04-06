@@ -108,7 +108,7 @@ To get up and running with the project:
 
 ## Next Steps
 
-* [Use data-bound widgets]({% slug json_serialization %})
+* [Use data-bound widgets]({% slug jsonserialization_core %})
 * [Ways to download and install UI for ASP.NET Core (overview)]({% slug downloadinstall_aspnetcore %})
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})

@@ -3,7 +3,7 @@ title: Virtual Classroom
 page_title: Virtual Classroom
 description: "Get started with {{ site.product_short }} and learn about the Virtual Classroom free on-demand technical training program exclusive to active license holders."
 slug: virtualclass_uiforcore
-position: 90
+position: 20
 ---
 {% if site.core %}
     {% assign VirtualClassroom = "https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core" %}

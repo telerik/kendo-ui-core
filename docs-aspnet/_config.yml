@@ -85,44 +85,28 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 2
-     "getting-started/prerequisites":
-        title: "Prerequisites"
+     "installation/vs-integration":
+        title: "Visual Studio Integration"
+        position: 10
+     "installation/scripts":
+        title: "Creating Custom Bundles"
+        position: 11
+     "installation":
+        title: "Installation"
         position: 4
-     "getting-started/installation":
-        title: "Download and Installation"
-        position: 5
+     "compatibility":
+        title: "Compatibility"
+        position: 3
      "getting-started/helper-basics":
         title: "Working with Helpers"
         position: 6
-     "getting-started/vs-integration":
-        title: "Integrating with VS"
-        position: 7
-     "getting-started/scripts":
-        title: "Helper Script Dependencies"
-        position: 8
      "getting-started-core":
         title: "Getting Started"
         position: 2
         include_in_navigation: false
-     "getting-started-core/prerequisites":
-        title: "Prerequisites"
-        position: 4
-        include_in_navigation: false
-     "getting-started-core/installation":
-        title: "Download and Installation"
-        position: 5
-        include_in_navigation: false
      "getting-started-core/helper-basics":
         title: "Working with Helpers"
         position: 6
-        include_in_navigation: false
-     "getting-started-core/vs-integration":
-        title: "Integrating with VS"
-        position: 7
-        include_in_navigation: false
-     "getting-started-core/scripts":
-        title: "Helper Script Dependencies"
-        position: 8
         include_in_navigation: false
      "getting-started-mvc":
         title: "Getting Started"
@@ -180,10 +164,10 @@ navigation:
         position: 60
      "html-helpers":
         title: "Html Helpers"
-        position: 3
+        position: 5
      "tag-helpers":
         title: "Tag Helpers"
-        position: 4
+        position: 6
      "tag-helpers/datasource":
         title: "Data Source"
      "tag-helpers/data-management":
@@ -352,16 +336,16 @@ navigation:
         title: "PDFViewer"
      "styles-and-layout":
         title: "Styles and Appearance"
-        position: 5
+        position: 9
      "globalization":
         title: "Globalization"
-        position: 6
+        position: 8
      "accessibility":
         title: "Accessibility"
         position: 7
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 8
+        position: 12
      "*appearance":
         title: "Appearance"
      "*/binding":
@@ -537,10 +521,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2020.1.219"
+cdnVersion: "2020.1.406"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.1.219"
+mvcCoreVersion: "2020.1.406"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 

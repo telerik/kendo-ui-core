@@ -63,6 +63,7 @@ The following example demonstrates the conditions in the `ClientTemplate`.
         "# } #"
     );
 
+{% if site.mvc %}
 ## How can I apply conditional logic to column templates for server-bound Grids?
 
 The following example demonstrates the syntax when you use a column template in a server-bound Grid.
@@ -75,7 +76,7 @@ The following example demonstrates the syntax when you use a column template in 
         }
         </text>
     );
-
+{% endif %}
 ## How can I display checkboxes in Ajax-bound Grids?
 
 The `checked` attribute specifies whether a checkbox is displayed as checked or not checked. Use a condition to set that attribute.
@@ -92,6 +93,7 @@ The following example demonstrates how to display a checkbox in a bound `ColumnC
 
 ## How can I use action links?
 
+{% if site.mvc %}
 * For server-bound Grids, use the `Template` method. The following example demonstrates an action link in a Grid column.
 
     ```Razor
@@ -99,6 +101,7 @@ The following example demonstrates how to display a checkbox in a bound `ColumnC
             @Html.ActionLink("Show Product Details", "ProductDetails", new { id = @item.ProductID } )>
         </text>);
     ```
+{% endif %}
 
 * For Ajax-bound Grids, use the `ClientTemplate` method. The following example demonstrates an action link in an Ajax-bound Grid column.
 
@@ -137,7 +140,7 @@ The following example demonstrates how to use a JavaScript function in the `Clie
 The `script` tags are not automatically evaluated inside a Grid client column template, so the included widgets are not initialized. The scripts must be evaluated manually in the [Grid's `dataBound` event](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound).
 
 The following example demonstrates how to add a Kendo UI Menu inside a Grid column template. Note that the Menu requires the Grid cells to allow overflowing, which is disabled by default.
-
+{% if site.mvc %}
 ```C#
     @(Html.Kendo().Grid<ModelType>()
         .Name("GridID")
@@ -173,6 +176,44 @@ The following example demonstrates how to add a Kendo UI Menu inside a Grid colu
         overflow: visible;
     }
 ```
+{% endif %}
+{% if site.core %}
+```C#
+    @(Html.Kendo().Grid<ModelType>()
+        .Name("GridID")
+        .Columns(columns => {
+            columns.Bound(x => x.ProductID).HtmlAttributes(new { @class = "templateCell" }).ClientTemplate(
+                    Html.Kendo().Menu()
+                        .Name("menu_#=ProductID#")
+                        .Items(its =>
+                        {
+                            its.Add().Text("foo").Items(nested =>
+                            {
+                                nested.Add().Text("bar");
+                                nested.Add().Text("baz");
+                            });
+
+                        })
+                        .ToClientTemplate().Value
+                    );
+        })
+        .Events(ev => ev.DataBound("initMenus"))
+    )
+```
+```JavaScript
+    function initMenus(e) {
+        $(".templateCell").each(function(){
+            eval($(this).children("script").last().html());
+        });
+    }
+```
+```CSS
+    .k-widget .templateCell
+    {
+        overflow: visible;
+    }
+```
+{% endif %}
 
 ## How can I change the format of bound columns?
 
@@ -198,6 +239,7 @@ The following example demonstrates how to add Kendo UI icons to custom command b
 
 ## How can I send values to my action method when binding the Grid?
 
+{% if site.mvc %}
 If the Grid is server-bound, use the `overload` method which accepts route values.
 
 The following example demonstrates how to send data in a server-bound Grid.
@@ -208,6 +250,7 @@ The following example demonstrates how to send data in a server-bound Grid.
     )
     // Omitted for brevity.
 
+{% endif %}
 If the Grid is Ajax-bound, use the `Data` method to specify the name of the JavaScript function, which will return the additional data.
 
 The following example demonstrates how to send additional data in an Ajax-bound Grid.
@@ -330,7 +373,7 @@ The following example demonstrates how to perform paging, sorting, filtering, an
 ## How can I prevent Ajax response caching?
 
 Prevent the caching and browser re-use of Ajax responses in either of the following ways:
-
+{% if site.mvc %}
 * Use an `OutputCache` attribute for the action method.
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
@@ -338,6 +381,17 @@ Prevent the caching and browser re-use of Ajax responses in either of the follow
         {
             /* ... */
         }
+{% endif %}
+
+{% if site.core %}
+* Use an `ResponseCache` attribute for the action method.
+
+        [ResponseCache(NoStore = true, Duration = 0)]
+        public JsonResult MyReadMethod()
+        {
+            /* ... */
+        }
+{% endif %}
 
 * Configure the Kendo UI DataSource to make `POST` instead of `GET` Ajax requests for the `Read` action.
 * Use jQuery's [`ajaxSetup`](https://api.jquery.com/jquery.ajaxsetup/) configuration method. This influences all Ajax requests that the web application performs.
@@ -424,7 +478,7 @@ The following example demonstrates how to create a custom helper that wraps the 
     @(Html.MyGrid.Name("foo")) // The Grid is already configured to be Scrollable
 ```
 
-> If you want to avoid adding the `using` statement in each view this Html helper is used, add a namespace reference to the `Web.config` file inside the `Views` folder of your MVC project.
+> If you want to avoid adding the `using` statement in each view this Html helper is used, add a namespace reference to the `Web.config` file inside the `Views` folder of your project.
 
 ## How can I mark certain properties as read-only?
 
