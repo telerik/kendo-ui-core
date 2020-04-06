@@ -93,7 +93,7 @@ navigation:
         position: 11
      "installation":
         title: "Installation"
-        position: 4      
+        position: 4
      "compatibility":
         title: "Compatibility"
         position: 3
@@ -521,10 +521,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2020.1.219"
+cdnVersion: "2020.1.406"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.1.219"
+mvcCoreVersion: "2020.1.406"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
