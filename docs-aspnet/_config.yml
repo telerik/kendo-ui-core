@@ -85,6 +85,12 @@ navigation:
      "getting-started":
         title: "Getting Started"
         position: 2
+     "getting-started/prerequisites":
+        title: "Prerequisites"
+        position: 4
+     "getting-started/installation":
+        title: "Download and Installation"
+        position: 5
      "installation/vs-integration":
         title: "Visual Studio Integration"
         position: 10
@@ -100,13 +106,35 @@ navigation:
      "getting-started/helper-basics":
         title: "Working with Helpers"
         position: 6
+     "getting-started/vs-integration":
+        title: "Integrating with VS"
+        position: 7
+     "getting-started/scripts":
+        title: "Helper Script Dependencies"
+        position: 8
      "getting-started-core":
         title: "Getting Started"
         position: 2
         include_in_navigation: false
+     "getting-started-core/prerequisites":
+        title: "Prerequisites"
+        position: 4
+        include_in_navigation: false
+     "getting-started-core/installation":
+        title: "Download and Installation"
+        position: 5
+        include_in_navigation: false
      "getting-started-core/helper-basics":
         title: "Working with Helpers"
         position: 6
+        include_in_navigation: false
+     "getting-started-core/vs-integration":
+        title: "Integrating with VS"
+        position: 7
+        include_in_navigation: false
+     "getting-started-core/scripts":
+        title: "Helper Script Dependencies"
+        position: 8
         include_in_navigation: false
      "getting-started-mvc":
         title: "Getting Started"
@@ -336,13 +364,13 @@ navigation:
         title: "PDFViewer"
      "styles-and-layout":
         title: "Styles and Appearance"
-        position: 9
+        position: 7
      "globalization":
         title: "Globalization"
         position: 8
      "accessibility":
         title: "Accessibility"
-        position: 7
+        position: 9
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 12

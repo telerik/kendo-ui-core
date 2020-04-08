@@ -2,9 +2,8 @@
 title: Upgrade
 page_title: Upgrade
 description: "Upgrade your current version of {{ site.product_long }} and switch from a trial to a developer license."
-previous_url: /aspnet-core/upgrade
 slug: upgrade_aspnetcore
-position: 13
+position: 11
 ---
 
 # Upgrade
