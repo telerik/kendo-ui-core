@@ -7008,6 +7008,68 @@ declare namespace kendo.ui {
     }
 
 
+    class Rating extends kendo.ui.Widget {
+
+        static fn: Rating;
+
+        options: RatingOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+        container: JQuery;
+
+        static extend(proto: Object): Rating;
+
+        constructor(element: Element, options?: RatingOptions);
+
+        value(value: number): void;
+        reset(): void;
+        enable(enable: boolean): void;
+        readonly(enable: boolean): void;
+        setOptions(options: any): void;
+        destroy(): void;
+    }
+
+    interface RatingOptions {
+        name?: string;
+        min?: number;
+        max?: number;
+        selection: string | "continuous" | "single";
+        precision: string | "item" | "half";
+        label?: boolean | RatingLabel;
+        tooltip?: boolean;
+        itemTemplate?: string|Function;
+        selectedTemplate?: string|Function;
+        hoveredTemplate?: string|Function;
+        selectValueOnFocus?: number;
+        enabled?: boolean;
+        readonly?: boolean;
+        change?(e: RatingChangeEvent): void;
+        select?(e: RatingSelectEvent): void;
+    }
+
+    interface RatingLabel {
+        template: string|Function;
+    }
+
+    interface RatingEvent {
+        sender: Rating;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface RatingChangeEvent extends RatingEvent {
+        target?: Element;
+        oldValue?: number;
+        newValue?: number;
+    }
+
+    interface RatingSelectEvent extends RatingEvent {
+        target?: Element;
+    }
+
+
     class ResponsivePanel extends kendo.ui.Widget {
 
         static fn: ResponsivePanel;
@@ -7027,14 +7089,6 @@ declare namespace kendo.ui {
         destroy(): void;
         open(): void;
 
-    }
-
-    interface SchedulerSelectOptions {
-        events?: SchedulerEvent[] | any[];
-        resources? : any[];
-        start?: Date;
-        end?: Date;
-        isAllDay?: boolean;
     }
 
     interface ResponsivePanelOptions {
@@ -7098,6 +7152,14 @@ declare namespace kendo.ui {
         view(type?: string): void;
         viewName(): string;
 
+    }
+
+    interface SchedulerSelectOptions {
+        events?: SchedulerEvent[] | any[];
+        resources? : any[];
+        start?: Date;
+        end?: Date;
+        isAllDay?: boolean;
     }
 
     interface SchedulerCurrentTimeMarker {
@@ -8221,65 +8283,53 @@ declare namespace kendo.ui {
         checked?: any;
     }
 
-    class Rating extends kendo.ui.Widget {
 
-        static fn: Rating;
+    class Stepper extends kendo.ui.Widget {
+        static fn: Stepper;
 
-        options: RatingOptions;
-
+        options: StepperOptions;
 
         element: JQuery;
-        wrapper: JQuery;
-        container: JQuery;
 
-        static extend(proto: Object): Rating;
+        static extend(proto: Object): Stepper;
 
-        constructor(element: Element, options?: RatingOptions);
+        constructor(element: Element, options?: StepperOptions);
 
-        value(value: number): void;
-        reset(): void;
-        enable(enable: boolean): void;
-        readonly(enable: boolean): void;
-        setOptions(options: any): void;
-        destroy(): void;
+        setOptions(options?: StepperOptions): void;
+
+        enable(value: boolean): void;
+        insertAt(index: number, step: kendo.stepper.StepOptions): void;
+        next(): void;
+        previous(): void;
+        removeAt(index: number): void;
+        resize(): void;
+        select(): kendo.stepper.Step;
+        select(index: number): void;
+        steps(): kendo.stepper.Step[];
+        steps(steps: kendo.stepper.StepOptions[]): void;
     }
 
-    interface RatingOptions {
+    interface StepperOptions {
         name?: string;
-        min?: number;
-        max?: number;
-        selection: string | "continuous" | "single";
-        precision: string | "item" | "half";
-        label?: boolean | RatingLabel;
-        tooltip?: boolean;
-        itemTemplate?: string|Function;
-        selectedTemplate?: string|Function;
-        hoveredTemplate?: string|Function;
-        selectValueOnFocus?: number;
-        enabled?: boolean;
-        readonly?: boolean;
-        change?(e: RatingChangeEvent): void;
-        select?(e: RatingSelectEvent): void;
+        orientation?: string | "horizontal" | "vertical";
+        linear?: boolean;
+        indicator?: boolean;
+        label?: boolean;
+        steps: kendo.stepper.StepOptions[] | string[];
+
+        activate?(e: StepperActivateEvent): void;
+        select?(e: StepperSelectEvent): void;
     }
 
-    interface RatingLabel {
-        template: string|Function;
+    interface StepperActivateEvent {
+        sender?: Stepper;
+        originalEvent?: any;
+        step?: kendo.stepper.Step;
     }
 
-    interface RatingEvent {
-        sender: Rating;
+    interface StepperSelectEvent extends StepperActivateEvent {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
-    }
-
-    interface RatingChangeEvent extends RatingEvent {
-        target?: Element;
-        oldValue?: number;
-        newValue?: number;
-    }
-
-    interface RatingSelectEvent extends RatingEvent {
-        target?: Element;
     }
 
 
@@ -19981,6 +20031,43 @@ declare namespace kendo.spreadsheet {
 
 
 }
+
+declare namespace kendo.stepper {
+    class Step extends kendo.Class {
+        options: StepOptions;
+
+        constructor(options?: StepOptions);
+
+        deselect(): void;
+        enable(value: boolean): void;
+        select(): void;
+
+        getEnabled(): boolean;
+        getIndex(): number;
+        setPrevious(value: boolean): void;
+        getSelected(): boolean;
+        getSelectable(): boolean;
+        setValid(value: boolean): void;
+    }
+
+    interface StepOptions {
+        label?: string;
+        icon?: string;
+        successIcon?: string;
+        iconTemplate?: string|Function;
+        enabled?: boolean;
+        error?: boolean;
+        selected?: boolean;
+        isFirstStep?: boolean;
+        isLastStep?: boolean;
+        indicatorVisible?: boolean;
+        labelVisible?: boolean;
+        index?: number;
+        previous?: boolean;
+        selectable?: boolean;
+    }
+}
+
 declare namespace kendo.mobile.ui {
     class ActionSheet extends kendo.mobile.ui.Widget {
 
@@ -22498,6 +22585,10 @@ interface JQuery {
     kendoRangeSlider(options: kendo.ui.RangeSliderOptions): JQuery;
     data(key: "kendoRangeSlider"): kendo.ui.RangeSlider;
 
+    kendoRating(): JQuery;
+    kendoRating(options: kendo.ui.RatingOptions): JQuery;
+    data(key: "kendoRating"): kendo.ui.Rating;
+
     kendoResponsivePanel(): JQuery;
     kendoResponsivePanel(options: kendo.ui.ResponsivePanelOptions): JQuery;
     data(key: "kendoResponsivePanel"): kendo.ui.ResponsivePanel;
@@ -22538,9 +22629,9 @@ interface JQuery {
     kendoSwitch(options: kendo.ui.SwitchOptions): JQuery;
     data(key: "kendoSwitch"): kendo.ui.Switch;
 
-    kendoRating(): JQuery;
-    kendoRating(options: kendo.ui.RatingOptions): JQuery;
-    data(key: "kendoRating"): kendo.ui.Rating;
+    kendoStepper(): JQuery;
+    kendoStepper(options: kendo.ui.StepperOptions): JQuery;
+    data(key: "kendoStepper"): kendo.ui.Stepper;
 
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;
