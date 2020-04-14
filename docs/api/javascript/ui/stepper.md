@@ -71,6 +71,22 @@ Indicates whether the **Stepper** will be rendered vertically or horizontally (d
         });
 	</script>
 
+### selectOnFocus `Boolean` *(default: false)*
+
+Applicable for scenarios when keyboard is used for navigation. Indicates whether the selection will change upon focus change or it will require additional action (Enter or Spacebar key press) in order to select the focused step.
+
+#### Example
+
+	<nav id="stepper"></nav>
+    <p>Use the keyboard arrow keys to change selected step.</p>
+
+	<script>
+        $("#stepper").kendoStepper({
+            selectOnFocus: true,
+            steps: ["Initial step", "Second step", "Third step"]
+        });
+	</script>
+
 ### steps `Array`
 
 Array of steps to be rendered in the **Stepper**. If the array contains objects, their fields will be used for each Step. If the array contains strings, those will be used as Step labels.

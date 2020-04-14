@@ -8315,6 +8315,7 @@ declare namespace kendo.ui {
         linear?: boolean;
         indicator?: boolean;
         label?: boolean;
+        selectOnFocus?: boolean;
         steps: kendo.stepper.StepOptions[] | string[];
 
         activate?(e: StepperActivateEvent): void;

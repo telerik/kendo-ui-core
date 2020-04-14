@@ -112,12 +112,14 @@ var __meta__ = { // jshint ignore:line
             },
 
             show: function() {
-                this.element.removeClass(STATE_HIDDEN).show();
+                this.element.removeClass(STATE_HIDDEN);
+                this.element.removeClass("k-hidden");
                 this.options.hidden = false;
             },
 
             hide: function() {
-                this.element.addClass(STATE_HIDDEN).hide();
+                this.element.addClass(STATE_HIDDEN);
+                this.element.addClass("k-hidden");
                 if(this.overflow && this.overflowHidden){
                     this.overflowHidden();
                 }
@@ -661,12 +663,14 @@ var __meta__ = { // jshint ignore:line
                     this.popup.close();
                 }
 
-                this.element.addClass(STATE_HIDDEN).hide();
+                this.element.addClass(STATE_HIDDEN);
+                this.element.addClass("k-hidden");
                 this.options.hidden = true;
             },
 
             show: function() {
-                this.element.removeClass(STATE_HIDDEN).hide();
+                this.element.removeClass(STATE_HIDDEN);
+                this.element.removeClass("k-hidden");
                 this.options.hidden = false;
             }
         });
@@ -1728,7 +1732,8 @@ var __meta__ = { // jshint ignore:line
             },
 
             _hideItem: function(item) {
-                item.hide();
+                item.addClass("k-hidden");
+
                 if (this.popup) {
                     this.popup.container
                         .find(">li[data-uid='" + item.data("uid") + "']")
@@ -1737,8 +1742,18 @@ var __meta__ = { // jshint ignore:line
             },
 
             _showItem: function(item, containerWidth) {
-                if (item.length && containerWidth > this._childrenWidth() + outerWidth(item, true)) {
-                    item.show();
+                // From jquery.outerWidth docs:
+                //  > jQuery will attempt to temporarily show and then re-hide an element
+                //  > in order to measure its dimensions, but this is unreliable
+                // Thus we show and hide the item
+                item.removeClass("k-hidden");
+                var itemOuterWidth = outerWidth(item, true);
+                item.addClass("k-hidden")
+
+                if (item.length && containerWidth > this._childrenWidth() + itemOuterWidth) {
+
+                    item.removeClass("k-hidden");
+
                     if (this.popup) {
                         this.popup.container
                             .find(">li[data-uid='" + item.data("uid") + "']")
