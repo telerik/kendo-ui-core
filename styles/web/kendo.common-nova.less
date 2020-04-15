@@ -19,11 +19,33 @@
 
 @editor-icon-size: 36px;
 @menu-link-padding: 1.071em;
+
+
+// Button
 @button-padding-x: 14px;
 @button-padding-y: 8px;
 @button-padding: @button-padding-y @button-padding-x;
+@button-border-width: 1px;
+
 @button-line-height: (20 / 14);
+
+@button-calc-size: ~"calc( (@{button-line-height} * 1em) + (@{button-padding-y} * 2) + (@{button-border-width} * 2) )";
+
 @disabled-button-opacity: 0.6;
+
+
+// Toolbar
+@toolbar-padding-x: 6px;
+@toolbar-padding-y: 6px;
+@toolbar-border-width: 1px;
+@toolbar-border-radius: 0;
+
+@toolbar-spacing: @toolbar-padding-x;
+
+@toolbar-font-size: inherit;
+@toolbar-line-height: (20 / 14);
+
+@toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
 @treeview-inner-padding: 0.429em 0.6667em 0.429em 0.5833em;
 @scheduler-link-padding: 0 1.1em;
@@ -483,13 +505,6 @@
     line-height: @line-height;
 }
 
-.k-button-icon,
-.k-split-button-arrow {
-    display: inline-flex; // TODO improve elastic behavior
-    height: ~"calc(@{line-height-em} + (2*@{button-padding-y}) + 2px)"; // ensure inline-flex height
-    width: ~"calc(@{line-height-em} + (2*@{button-padding-y}) + 2px)";
-}
-
 .k-widget.k-tabstrip
 {
     background-image: none;
@@ -883,91 +898,6 @@ table.k-editor {
 
 .k-editor .k-editable-area .k-content {
     border-width: 1px 0 0;
-}
-
-.k-editor .k-editor-toolbar-wrap {
-    padding-left: 10px;
-}
-
-.k-toolbar {
-    padding: 0.35714285em calc(0.35714285em - 0.2em);
-}
-
-.k-toolbar {
-
-    .k-separator {
-        line-height: 2.71428571em;
-    }
-
-    .k-input {
-        text-indent: @input-indent;
-        border: 0;
-        margin: 0;
-    }
-
-    .k-button-group {
-        border-width: 0 1px;
-        border-style: solid;
-    }
-
-    .k-overflow-anchor {
-        width: calc((50/14)*1em);
-    }
-
-    .k-overflow-anchor + .k-button-group,
-    .k-separator + .k-button-group,
-    .k-button-group + .k-button-group {
-        border-left: none;
-    }
-}
-
-.k-button-group .k-tool {
-    margin: 0;
-}
-
-.k-editor-toolbar {
-    > li {
-        margin-right: 0;
-    }
-    .k-button-group .k-tool {
-        width: 48px;
-        height: 48px;
-        line-height: 48px;
-        margin: 0;
-        text-align: center;
-    }
-
-    li.k-tool-group,
-    li.k-overflow-tools {
-        padding: 0;
-    }
-
-    .k-tool-group:first-child {
-        border-right: 0;
-    }
-
-    li.k-tool-group:only-of-type {
-        padding-top: 5px;
-        padding-bottom: 6px;
-    }
-
-    .k-tool,
-    .k-button-group .k-tool.k-group-end {
-        border-width: 0;
-    }
-
-    .k-state-selected {
-        font-weight: bold;
-    }
-
-    .k-tool,
-    .k-button-group .k-tool.k-group-end {
-        border-width: 0;
-    }
-
-    .k-state-selected {
-        font-weight: bold;
-    }
 }
 
 .k-filebrowser {

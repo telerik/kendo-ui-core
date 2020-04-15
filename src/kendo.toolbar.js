@@ -34,6 +34,7 @@ var __meta__ = { // jshint ignore:line
         STATE_ACTIVE = "k-state-active",
         STATE_DISABLED = "k-state-disabled",
         STATE_HIDDEN = "k-state-hidden",
+        HIDDEN = "k-hidden",
         GROUP_START = "k-group-start",
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
@@ -113,14 +114,15 @@ var __meta__ = { // jshint ignore:line
 
             show: function() {
                 this.element.removeClass(STATE_HIDDEN);
-                this.element.removeClass("k-hidden");
+                this.element.removeClass(HIDDEN);
                 this.options.hidden = false;
             },
 
             hide: function() {
                 this.element.addClass(STATE_HIDDEN);
-                this.element.addClass("k-hidden");
-                if(this.overflow && this.overflowHidden){
+                this.element.addClass(HIDDEN);
+
+                if (this.overflow && this.overflowHidden){
                     this.overflowHidden();
                 }
                 this.options.hidden = true;
@@ -664,13 +666,13 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 this.element.addClass(STATE_HIDDEN);
-                this.element.addClass("k-hidden");
+                this.element.addClass(HIDDEN);
                 this.options.hidden = true;
             },
 
             show: function() {
                 this.element.removeClass(STATE_HIDDEN);
-                this.element.removeClass("k-hidden");
+                this.element.removeClass(HIDDEN);
                 this.options.hidden = false;
             }
         });
@@ -1180,10 +1182,10 @@ var __meta__ = { // jshint ignore:line
 
                         item.toolbar.hide();
 
-                        if(buttonGroupInstance) {
+                        if (buttonGroupInstance) {
                             buttonGroupInstance.refresh();
                         }
-                    } else if(!item.toolbar.options.hidden) {
+                    } else if (!item.toolbar.options.hidden) {
                         item.toolbar.hide();
                     }
                 }
@@ -1700,6 +1702,7 @@ var __meta__ = { // jshint ignore:line
             _shrink: function(containerWidth) {
                 var commandElement,
                     visibleCommands;
+
                 if (containerWidth < this._childrenWidth()) {
                     visibleCommands = this.element.children(":visible:not([data-overflow='never'], ." + OVERFLOW_ANCHOR + ")");
 
@@ -1732,7 +1735,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             _hideItem: function(item) {
-                item.addClass("k-hidden");
+                item.addClass(HIDDEN);
 
                 if (this.popup) {
                     this.popup.container
@@ -1746,13 +1749,13 @@ var __meta__ = { // jshint ignore:line
                 //  > jQuery will attempt to temporarily show and then re-hide an element
                 //  > in order to measure its dimensions, but this is unreliable
                 // Thus we show and hide the item
-                item.removeClass("k-hidden");
+                item.removeClass(HIDDEN);
                 var itemOuterWidth = outerWidth(item, true);
-                item.addClass("k-hidden")
+                item.addClass(HIDDEN);
 
                 if (item.length && containerWidth > this._childrenWidth() + itemOuterWidth) {
 
-                    item.removeClass("k-hidden");
+                    item.removeClass(HIDDEN);
 
                     if (this.popup) {
                         this.popup.container

@@ -102,7 +102,7 @@
                 ]
             }).data("kendoToolBar");
 
-            container.width(200);
+            container.width(150);
             toolbar.resize();
 
             var button = toolbar.element.find(".k-button").last();
@@ -146,7 +146,7 @@
                 ]
             }).data("kendoToolBar");
 
-            container.width(100);
+            container.width(80);
             toolbar.resize();
 
             var buttons = toolbar.element.find("#foo, #bar, #baz");
@@ -191,7 +191,7 @@
                 ]
             }).data("kendoToolBar");
 
-            container.width(100);
+            container.width(80);
             toolbar.resize();
 
             var buttons = toolbar.element.find("#foo, #bar, #baz");
@@ -287,7 +287,7 @@
 
             assert.equal(toolbar.overflowAnchor.css("visibility"), "hidden", "Overflow anchor is hidden before the resize");
 
-            container.width(150);
+            container.width(100);
             toolbar.resize();
 
             assert.equal(toolbar.overflowAnchor.css("visibility"), "visible", "Overflow anchor is visible after the resize");

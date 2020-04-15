@@ -17,11 +17,33 @@
 
 @editor-icon-size: 2em;
 @menu-link-padding: .5em 1.1em .4em;
+
+
+// Button
 @button-padding-x: 8px;
 @button-padding-y: 4px;
 @button-padding: @button-padding-y @button-padding-x;
+@button-border-width: 1px;
+
 @button-line-height: (20 / 14);
+
+@button-calc-size: ~"calc( (@{button-line-height} * 1em) + (@{button-padding-y} * 2) + (@{button-border-width} * 2) )";
+
 @disabled-button-opacity: 0.6;
+
+
+// Toolbar
+@toolbar-padding-x: 6px;
+@toolbar-padding-y: 6px;
+@toolbar-border-width: 1px;
+@toolbar-border-radius: 0;
+
+@toolbar-spacing: @toolbar-padding-x;
+
+@toolbar-font-size: inherit;
+@toolbar-line-height: (20 / 14);
+
+@toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
 @treeview-inner-padding: 1px 0.3333em 1px 0.25em;
 @scheduler-link-padding: 0 1.1em;
@@ -549,9 +571,6 @@
     padding: 1px 7px 1px 7px;
 }
 
-.k-overflow-container .k-state-hover,
-.k-overflow-container .k-state-focused,
-.k-overflow-container .k-state-selected,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel.k-state-focused,
 .k-list-optionlabel.k-state-selected {
@@ -824,35 +843,6 @@ span.k-tooltip {
     right: .7rem;
 }
 
-.k-toolbar {
-    padding: 0.35714285em calc(0.35714285em - 0.2em);
-}
-.k-editor-toolbar li {
-    padding: 0.35714285em;
-}
-
-.k-toolbar .k-overflow-anchor {
-    width: 2.143em;
-    height: 2.143em;
-    border-width: 1px;
-    padding: 0;
-    margin: 6px;
-    line-height: inherit;
-}
-
-.k-toolbar .k-button-group .k-button {
-    margin-right: 0.143em;
-}
-
-table.k-editor {
-    border-spacing: 0;
-}
-
-.k-editor .k-editor-toolbar-wrap,
-.k-editor .k-editable-area .k-content {
-    border-width: 1px 0 0;
-}
-
 .k-editor.k-resizable .k-editable-area {
     padding-bottom: 20px;
 }
@@ -1080,9 +1070,6 @@ table.k-editor {
 }
 
 .k-spreadsheet {
-    .k-button-group .k-button {
-        border-width: 1px;
-    }
 
     .k-spreadsheet-sheets-bar {
         height: 36px;

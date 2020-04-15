@@ -1,259 +1,138 @@
 // Editor
-
-table.k-editor
-{
-    width: 100%;
+.k-editor {
     height: 250px;
-    table-layout: fixed;
     border-style: solid;
     border-width: 1px;
-    border-collapse: separate;
-    border-spacing: 4px;
     font-size: 100%;
     vertical-align: top;
     position: relative;
+
+    > .k-content,
+    iframe.k-content,
+    .k-editor-content {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        box-sizing: border-box;
+        background: none;
+        display: block;
+    }
+}
+table.k-editor {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+
+    tbody,
+    tr,
+    td {
+        border-color: inherit;
+    }
+
+    .k-editable-area {
+        color: black;
+        background: white;
+    }
 }
 
-.k-editor-inline
-{
+
+// Editor inline
+.k-editor-inline {
     padding: .3em .5em;
     word-wrap: break-word;
     overflow: auto;
     position: relative;
-    transition: border-color 0.5s;
 
     &.k-editor {
         border: 1px solid transparent;
     }
 }
-
-.k-editortoolbar-dragHandle
-{
+.editorToolbarWindow  {
+    display: flex;
+    align-content: flex-start;
+}
+.k-editortoolbar-dragHandle {
+    margin: 0 3px 0 0;
+    padding: 0;
+    float: left;
+    position: relative;
     cursor: move;
-    box-shadow: none !important;
 }
 
-.k-editor-widget > .k-window-content
-{
-    overflow: hidden;
-}
 
-.k-editor .k-editor-toolbar-wrap
-{
-    border: 0;
-    padding: 0;
-}
-
-.k-editor-toolbar
-{
-    margin: 0;
-    padding: .1em 0;
-    list-style-type: none;
-    line-height: 1.3em;
-    cursor: default;
-    word-wrap: break-word; // allow tools to wrap properly in IE
-}
-
-.k-editor-toolbar li
-{
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.k-webkit .k-editor-toolbar,
-.k-ff .k-editor-toolbar,
-.k-ie9 .k-editor-toolbar,
-.k-edge .k-editor-toolbar
-{
-    padding: 0;
-}
-
-.k-editor-toolbar li
-{
-    display: inline-block;
-    padding: .1em 0;
-}
-
-.k-editor-toolbar .k-editor-widget,
-.k-editor-toolbar > li
-{
-    margin-right: 6px;
-}
-
-.k-group-start.k-group-end .k-editor-widget
-{
-    margin-right: 0;
-}
-
-.k-editor-toolbar .k-editor-dropdown
-{
-    position: relative;
-}
-
-.k-select-overlay
-{
-    -webkit-appearance: none;
-    opacity: 0;
-    z-index: 11000;
-    top: 0;
-    left: 0;
-    position: absolute;
-    height: 26px;
-    width: 100%;
-    margin: -4px 0 0;
-}
-
-.k-editor-toolbar .k-separator
-{
-    position: relative;
-    top: 1px;
-    border-style: solid;
-    border-width: 0 1px 0 0;
-    margin: 0 .3em 0 .1em;
-    padding: 0 0 0 1px;
-    font-size: 1.3em;
-}
-
-.k-editor-toolbar .k-break
-{
-    display: block;
-    height: 1px;
-    font-size: 0;
-    line-height: 0;
-}
-
-.k-editor-toolbar .k-dropdown,
-.k-editor-toolbar .k-combobox,
-.k-editor-toolbar .k-selectbox,
-.k-editor-toolbar .k-colorpicker
-{
-    vertical-align: middle;
-}
-
-.k-button-group .k-tool {
-    margin: 1px -1px 1px 0;
-    width: @editor-icon-size;
-    height: @editor-icon-size;
-    border-width: 1px;
-    border-style: solid;
-    line-height: @editor-icon-size;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-
-    &:focus,
-    &.k-state-hover {
-        z-index: 1;
-    }
-}
-
-.k-button-group .k-tool-icon {
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    .disable-high-contrast();
-}
-
-// default tool widths
-.k-fontName { width: 110px; }
-.k-fontSize { width: 124px; }
-.k-formatBlock { width: 147px; }
-
-.k-editortoolbar-dragHandle
-{
-    float:left;
-    margin: 1px 0 0;
-}
-
-.k-editor-toolbar .k-button-group
-{
-    padding: 1px;
-}
-
-.k-editor .k-editor-toolbar .k-row-break
-{
-    display: block;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-}
-
-.k-editor-toolbar .k-i-login {
-    transform: scaleX(-1);
-}
-
+// Editor toolbar
 .k-editor-toolbar {
+    border-width: 0 0 @toolbar-border-width 0;
+    border-color: inherit;
 
-    .k-button-group .k-state-disabled,
-    .k-button-group.k-state-disabled
-    {
-        display: none !important;
+    // Group
+    .k-tool-group {
+        .k-widget ~ .k-widget {
+            margin-inline-start: @toolbar-spacing;
+        }
     }
 
-    .k-button-group .k-state-hover,
-    .k-button-group .k-state-active
-    {
-        vertical-align: middle;
+    // Tool
+    .k-tool-group > .k-tool {
+        padding: @button-padding-y;
+        width: @editor-icon-size;
+        height: @editor-icon-size;
+    }
+    .k-tool-text {
+        display: none;
     }
 
-    .k-button-group .k-state-disabled
-    {
-        filter: alpha(opacity=30);
-        opacity: .3;
+    // Editor widgets
+    .k-editor-widget {
+        width: auto;
     }
 
+    // default tool widths
+    .k-fontName { width: 110px; }
+    .k-fontSize { width: 124px; }
+    .k-formatBlock { width: 147px; }
+
+    // Overflow tools
+    .k-overflow-tools {
+        margin: 0;
+        border-color: inherit;
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .k-overflow-anchor {
+        position: relative;
+    }
+
+    // Break
+    .k-break,
+    .k-row-break {
+        display: block;
+        height: 1px;
+        font-size: 0;
+        line-height: 0;
+    }
 }
 
-.k-editor .k-editable-area
-{
+
+// Editable area
+.k-editable-area {
     width: 100%;
     height: 100%;
     outline: 0;
-}
 
-.k-editor.k-resizable .k-editable-area
-{
-    padding-bottom: 16px;
-}
-
-.k-editor .k-content
-{
-    display: block;
-    width: 100%;
-    height: 100%;
-    border-width: 0;
-    margin: 0;
-    padding: 0;
-    background: #fff;
-}
-
-.k-editor .k-editable-area .k-content {
-    box-sizing: border-box;
-    border-width: 1px;
-    border-style: solid;
-}
-
-a.k-tool {
-    color: inherit;
-    outline: 0;
-}
-
-.k-editor iframe.k-content
-{
-    display: inline;
-    vertical-align: top; // fixes missing top border caused by the inline display
-}
-
-.k-editor .k-raw-content
-{
-    border: 0;
-    margin: 0;
-    padding: 0;
+    .k-resizable & {
+        padding-bottom: 16px;
+    }
 }
 
 .k-editor .k-raw-content,
-.k-editor-dialog .k-editor-textarea
-{
+.k-editor-dialog .k-editor-textarea {
     font-size: inherit;
     font-family: consolas, "courier new", monospace;
 }
@@ -277,11 +156,6 @@ a.k-tool {
             width: 96%;
         }
     }
-}
-
-.k-viewhtml-dialog
-{
-    width: auto;
 }
 
 .k-filebrowser-dialog
@@ -321,16 +195,6 @@ a.k-tool {
     display: inline-block;
 }
 
-.k-editor-dialog .k-editor-textarea
-{
-    width: 600px;
-    height: 350px;
-    padding: .2em .2em .2em .4em;
-    border-width: 1px;
-    border-style: solid;
-    overflow: auto;
-}
-
 .k-button-wrapper .k-link:hover {
     text-decoration: underline;
 }
@@ -364,65 +228,20 @@ a.k-tool {
 }
 
 .k-editor .k-resize-handle {
+    padding: 0;
     position: absolute;
-    padding: 2px 0;
     right: 0;
     bottom: 0;
     cursor: se-resize;
+}
+.k-editor .k-resize-handle .k-icon {
+    vertical-align: bottom;
 }
 
 .k-editor .k-overlay {
     position: absolute;
     background-color: #fff;
     opacity: 0;
-}
-
-.k-editor .k-toolbar-resizable {
-    min-height: 2.4375em;
-    position: relative
-}
-.k-editor-toolbar {
-    width: 100%;
-    position: relative;
-    flex: 1;
-}
-.editorToolbarWindow  {
-    display: flex;
-    align-content: flex-start;
-}
-.k-editortoolbar-dragHandle {
-    position: relative;
-    padding: 0;
-    margin: 0 3px 0 0;
-}
-.k-editor-toolbar .k-overflow-tools {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 0;
-}
-.k-editor-toolbar .k-tool-group .k-widget:last-child {
-    margin-right: 0;
-}
-
-.k-editor-overflow-popup .k-tool {
-    width: auto;
-    height: auto;
-    display: block;
-    text-align: left;
-    text-decoration: initial;
-    border: 0;
-    padding-right: 0.5em;
-    margin: 0;
-    padding: 0 6px;
-}
-
-.k-editor-overflow-popup .k-tool.k-state-disabled {
-    display: none;
-}
-
-.k-editor-toolbar .k-tool-text {
-    display: none;
 }
 
 .k-editor-inline .k-table-resize-handle-wrapper {
@@ -547,16 +366,40 @@ a.k-tool {
     }
 }
 
-.k-editor-dialog.k-viewhtml-dialog .k-edit-buttons {
-    clear: both;
-    text-align: right;
-    border-width: 1px 0 0;
-    border-style: solid;
-    position: relative;
-    bottom: -1em;
-    padding: .6em;
-    .k-button {
-        margin-right: 0.5em;
+
+.k-viewhtml-dialog {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+
+    .k-editor-textarea {
+        margin: 1em;
+        padding: @input-padding-y @input-padding-y;
+        // width: 100%;
+        height: 100%;
+        border-width: 1px;
+        border-style: solid;
+        box-sizing: border-box;
+        font: inherit;
+        font-family: consolas, monospace;
+        flex-grow: 1;
+        overflow: auto;
+        resize: none;
+    }
+
+    .k-edit-buttons {
+        text-align: right;
+        border-width: 1px 0 0;
+        border-style: solid;
+        position: relative;
+        bottom: -1em;
+        padding: .6em;
+
+        .k-button {
+            margin-right: 0.5em;
+        }
     }
 }
 
@@ -670,31 +513,6 @@ a.k-tool {
     width: 2.57142857em;
     height: 2.57142857em;
     line-height: 2.57142857em;
-}
-
-.k-animation-container .k-editor-toolbar {
-    text-align: center;
-    line-height: 1.3em;
-}
-
-.k-animation-container .k-editor-toolbar .k-tool {
-    display: inline-block;
-    height: 24px;
-    padding: 0 0.5em;
-    text-decoration: none;
-    font-size: 0.85em;
-    color: inherit;
-}
-
-.k-animation-container .k-editor-toolbar .k-i-table-wizard-insert {
-    width: 24px;
-    height: 24px;
-}
-
-.k-animation-container .k-editor-toolbar .k-tool-text {
-    display: inline;
-    vertical-align: sub;
-    padding: 0 0 0 .5em;
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-buttons {

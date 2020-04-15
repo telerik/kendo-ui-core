@@ -17,11 +17,34 @@
 
 @editor-icon-size: 2em;
 @menu-link-padding: .5em 1.1em .4em;
+
+
+// Button
 @button-padding-x: 8px;
 @button-padding-y: 4px;
 @button-padding: @button-padding-y @button-padding-x;
+@button-border-width: 1px;
+
 @button-line-height: (20 / 14);
+
+@button-calc-size: ~"calc( (@{button-line-height} * 1em) + (@{button-padding-y} * 2) + (@{button-border-width} * 2) )";
+
 @disabled-button-opacity: 0.6;
+
+
+
+// Toolbar
+@toolbar-padding-x: 4px;
+@toolbar-padding-y: 4px;
+@toolbar-border-width: 1px;
+@toolbar-border-radius: 0;
+
+@toolbar-spacing: @toolbar-padding-x;
+
+@toolbar-font-size: inherit;
+@toolbar-line-height: (20 / 14);
+
+@toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
 @treeview-inner-padding: 1px 0.3333em 1px 0.25em;
 @scheduler-link-padding: 0 1.1em;

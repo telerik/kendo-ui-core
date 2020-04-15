@@ -86,7 +86,7 @@
     border-radius: @value;
 }
 
-.box-shadow(@shadow; @rest...) when not (@shadow = false) {
+.box-shadow(@shadow; @rest...) when not (@shadow = null) {
     box-shadow: @arguments;
 }
 
@@ -125,7 +125,7 @@
 }
 
 
-.composite-background(@gradient) when not (@gradient = none) and not (@gradient = false) {
+.composite-background(@gradient) when not (@gradient = none) and not (@gradient = null) {
     background-image: @fallback-texture;
     background-image: @texture, ~"linear-gradient(to bottom, @{gradient})";
 }
@@ -190,11 +190,15 @@
 .background-color(@bg) when not (@bg = null) {
     background-color: @bg;
 }
-.border-color(@border) when not (@border = null) {
-    border-color: @border;
+.border-color(@border, @rest...) when not (@border = null) {
+    border-color: @arguments;
 }
-.fill(@text: null, @bg: null, @border: null) {
+.linear-gradient(@gradient; @rest...) when not (@gradient = null) {
+    background-image: linear-gradient( @arguments );
+}
+.fill(@text: null; @bg: null; @border: null; @gradient: null) {
     .border-color(@border);
     .color(@text);
     .background-color(@bg);
+    .linear-gradient(@gradient);
 }

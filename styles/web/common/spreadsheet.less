@@ -762,44 +762,12 @@ div.k-spreadsheet-window {
 }
 
 .k-spreadsheet-toolbar {
-    &.k-toolbar {
-        border-top-width: 0;
-        border-left-width: 0;
-        border-right-width: 0;
-
-        .k-overflow-anchor + * {
-            margin-left: @spreadsheet-first-tool-offset;
-        }
-
-        > .k-button-group {
-            border-width: 0;
-        }
-    }
-
-    // hide button/widget default state
-    > .k-widget,
-    .k-button,
-    > .k-button-group,
-    > .k-widget .k-state-default:not(.k-state-hover):not(.k-state-active) {
-        margin: 0;
-        border-color: transparent;
-        background-color: transparent;
-        background-image: none;
-    }
+    border-width: 0;
 
     > .k-widget {
         &[data-property='fontSize'] { width: 75px; }
         &[data-property='format'] { width: 100px; }
         &[data-property='fontFamily'] { width: 130px; }
-    }
-
-    > .k-combobox .k-state-default:not(.k-state-hover):not(.k-state-active) .k-input {
-        background-color: transparent;
-        box-shadow: none;
-    }
-
-    > .k-widget .k-state-default:not(.k-state-hover):not(.k-state-active) .k-select {
-        border-color: transparent;
     }
 
     [data-tool=alignment],
@@ -809,15 +777,6 @@ div.k-spreadsheet-window {
     [data-tool=merge],
     [data-tool=textColor] {
         width: auto;
-    }
-
-    .k-separator {
-        margin: 0 3px;
-        width: 0;
-        overflow: hidden;
-        height: 1.8em;
-        vertical-align: middle;
-        display: inline-block;
     }
 }
 

@@ -355,6 +355,7 @@
 
             toolbar.hide("#foo");
 
+            assert.isOk($("#foo").hasClass("k-hidden"));
             assert.isOk($("#foo").hasClass("k-state-hidden"));
             assert.isOk($("#foo").is(":hidden"));
 
@@ -472,6 +473,7 @@
 
             toolbar.hide($("#splitButton_wrapper"));
 
+            assert.isOk($("#splitButton_wrapper").hasClass("k-hidden"));
             assert.isOk($("#splitButton_wrapper").hasClass("k-state-hidden"));
         });
 
@@ -485,6 +487,7 @@
 
             toolbar.show("#foo");
 
+            assert.isOk(!($("#foo").hasClass("k-hidden")));
             assert.isOk(!($("#foo").hasClass("k-state-hidden")));
             assert.isOk($("#foo").is(":visible"));
 
@@ -577,6 +580,7 @@
 
             toolbar.show($("#splitButton_wrapper"));
 
+            assert.isOk(!($("#splitButton_wrapper").hasClass("k-hidden")));
             assert.isOk(!($("#splitButton_wrapper").hasClass("k-state-hidden")));
         });
 

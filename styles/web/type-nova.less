@@ -2,63 +2,63 @@
 @widget-background-color: @background;
 @widget-text-color: @normal-text-color;
 @widget-border-color: darken(@background, 12%);
-@widget-gradient: false;
+@widget-gradient: null;
 @widget-shadow: 0 4px 10px 4px rgba(0, 0, 0, 0.2);
 // Button
 @button-text-color: lighten(@hover-text-color, 8%);
 @button-background-color: @normal-background;
 @button-border-color: lighten(@hover-text-color, 8%);
-@button-gradient: false;
-@button-shadow: false;
+@button-gradient: null;
+@button-shadow: null;
 @button-hover-text-color: @button-text-color;
 @button-hover-background-color: @hover-background;
 @button-hover-border-color: @button-border-color;
-@button-hover-gradient: false;
-@button-hover-shadow: false;
+@button-hover-gradient: null;
+@button-hover-shadow: null;
 @button-active-background: @accent-hover-background;
 @button-active-text-color: @inversed-text-color;
 @button-active-border-color: @selected-background;
-@button-active-gradient: false;
-@button-active-shadow: false;
+@button-active-gradient: null;
+@button-active-shadow: null;
 @button-focused-border-color: @accent;
-@button-focused-shadow: false;
-@button-focused-active-shadow: false;
+@button-focused-shadow: null;
+@button-focused-active-shadow: null;
 // Primary button
 @primary-text-color: @inversed-text-color;
 @primary-background-color: @accent;
 @primary-border-color: @accent;
-@primary-gradient: false;
-@primary-shadow: false;
+@primary-gradient: null;
+@primary-shadow: null;
 @primary-hover-text-color: @primary-text-color;
 @primary-hover-background-color: lighten(@accent, 4%);
 @primary-hover-border-color: @primary-hover-background-color;
-@primary-hover-gradient: false;
-@primary-hover-shadow: false;
+@primary-hover-gradient: null;
+@primary-hover-shadow: null;
 @primary-active-text-color: @primary-text-color;
 @primary-active-background-color: @accent-hover-background;
 @primary-active-border-color: @accent-hover-background;
-@primary-active-gradient: false;
-@primary-active-shadow: false;
+@primary-active-gradient: null;
+@primary-active-shadow: null;
 @primary-focused-border-color: multiply(@accent, #dbdbdb);
-@primary-focused-shadow: false;
-@primary-focused-active-shadow: false;
+@primary-focused-shadow: null;
+@primary-focused-active-shadow: null;
 @primary-disabled-text-color: @selected-text-color;
 @primary-disabled-background-color: lighten(@accent, 18%);
 @primary-disabled-border-color: lighten(@accent, 18%);
-@primary-disabled-gradient: false;
+@primary-disabled-gradient: null;
 // Input
 @input-text: @normal-text-color;
 @input-bg: @background;
 @input-border: darken(@normal-background, 12%);
-@input-shadow: false;
+@input-shadow: null;
 @input-hovered-text: @input-text;
 @input-hovered-bg: @input-bg;
 @input-hovered-border: @input-border;
-@input-hovered-shadow: false;
+@input-hovered-shadow: null;
 @input-focused-text: @input-text;
 @input-focused-bg: @input-bg;
 @input-focused-border: lighten(@hover-text-color, 8%);
-@input-focused-shadow: false;
+@input-focused-shadow: null;
 @sprite-image: url('@{image-folder}/sprite.png');
 @inversed-text-color: contrast(@accent);
 @accent-hover-background: multiply(@accent, #e5e5e5);
@@ -93,7 +93,7 @@
 @notification-error-background-color: @error;
 @notification-error-text-color: darken(@error, 25%);
 @notification-error-border-color: @error;
-@notification-gradient: false;
+@notification-gradient: null;
 @cell-border-color: transparent;
 @focused-shadow: none;
 @default-icon-opacity: 1;
@@ -117,6 +117,7 @@
 @toolbar-text: @normal-text-color;
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
+@toolbar-shadow: null;
 
 
 // Cards
@@ -182,7 +183,7 @@
 @grid-header-bg: @secondary-widget-background-color;
 @grid-header-text: lighten(@hover-text-color, 8%);
 @grid-header-border: @grid-border;
-@grid-header-gradient: false;
+@grid-header-gradient: null;
 
 @grid-alt-bg: @grid-bg;
 @grid-alt-text: @grid-text;
@@ -191,12 +192,12 @@
 @grid-hover-bg: @hover-background;
 @grid-hover-text: @grid-text;
 @grid-hover-border: @grid-border;
-@grid-hover-gradient: false;
+@grid-hover-gradient: null;
 
 @grid-selected-bg: lighten(@info, 22%);
 @grid-selected-text: @grid-text;
 @grid-selected-border: @grid-border;
-@grid-selected-gradient: false;
+@grid-selected-gradient: null;
 
 
 // Calendar
@@ -261,16 +262,16 @@
 
 
 // Switch
-@switch-container-shadow: false;
-@switch-container-hovered-shadow: false;
-@switch-container-focused-shadow: false;
+@switch-container-shadow: null;
+@switch-container-hovered-shadow: null;
+@switch-container-focused-shadow: null;
 
 @switch-on-bg: @normal-background;
 @switch-on-text: @primary-background-color;
 @switch-on-border: darken(@base, 12%);
-@switch-on-gradient: false;
-@switch-on-shadow: false;
-@switch-on-focused-shadow: false;
+@switch-on-gradient: null;
+@switch-on-shadow: null;
+@switch-on-focused-shadow: null;
 
 @switch-on-focused-bg: @switch-on-bg;
 @switch-on-focused-text: @switch-on-text;
@@ -280,13 +281,13 @@
 @switch-on-hovered-bg: @switch-on-bg;
 @switch-on-hovered-text: @switch-on-text;
 @switch-on-hovered-border: @switch-on-border;
-@switch-on-hovered-gradient: false;
+@switch-on-hovered-gradient: null;
 
 @switch-on-handle-bg: @primary-background-color;
 @switch-on-handle-text: @switch-on-text;
 @switch-on-handle-border: @primary-border-color;
 @switch-on-handle-gradient: @primary-gradient;
-@switch-on-handle-shadow: false;
+@switch-on-handle-shadow: null;
 
 @switch-on-handle-focused-bg: @switch-on-handle-bg;
 @switch-on-handle-focused-text: @switch-on-handle-text;
@@ -301,8 +302,8 @@
 @switch-off-bg: @switch-on-bg;
 @switch-off-text: @normal-text-color;
 @switch-off-border: @switch-on-border;
-@switch-off-gradient: false;
-@switch-off-shadow: false;
+@switch-off-gradient: null;
+@switch-off-shadow: null;
 @switch-off-focused-shadow: @switch-on-focused-shadow;
 
 @switch-off-focused-bg: @switch-off-bg;
@@ -313,13 +314,13 @@
 @switch-off-hovered-bg: @switch-off-bg;
 @switch-off-hovered-text: @switch-off-text;
 @switch-off-hovered-border: @switch-on-hovered-border;
-@switch-off-hovered-gradient: false;
+@switch-off-hovered-gradient: null;
 
 @switch-off-handle-bg: @button-background-color;
 @switch-off-handle-text: @switch-off-text;
 @switch-off-handle-border: @button-border-color;
 @switch-off-handle-gradient: @button-gradient;
-@switch-off-handle-shadow: false;
+@switch-off-handle-shadow: null;
 
 @switch-off-handle-focused-bg: @switch-off-handle-bg;
 @switch-off-handle-focused-text: @switch-off-handle-text;
@@ -646,6 +647,7 @@
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
+@import "Default/toolbar/_theme.less";
 
 
 // Main colors
@@ -702,7 +704,6 @@
 .k-dropzone-active,
 .k-tiles,
 .k-tooltip,
-.k-button-group .k-tool,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
@@ -767,11 +768,10 @@
 }
 
 .k-input,
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
+.k-textbox,
+.k-textarea,
 .k-textbox > input,
+.k-textarea > textarea,
 .k-multiselect-wrap {
     color: @normal-text-color;
     background-color: @background;
@@ -837,20 +837,14 @@ textarea.k-textbox:hover,
 .k-picker-wrap,
 .k-numeric-wrap,
 .k-tooltip,
-.k-upload,
-.k-split-button {
+.k-upload {
     border-radius: @inputs-border-radius;
 }
 
 .k-dropdown-wrap .k-input,
 .k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-toolbar .k-split-button .k-button {
+.k-numeric-wrap .k-input {
     border-radius: @inputs-border-radius 0 0 @inputs-border-radius;
-}
-
-.k-toolbar .k-split-button .k-split-button-arrow {
-    border-radius: 0 @inputs-border-radius @inputs-border-radius 0;
 }
 
 .k-hr {
@@ -884,7 +878,6 @@ textarea.k-textbox:hover,
 .k-splitbar.k-state-focused .k-icon,
 .k-scheduler-toolbar .k-icon,
 .k-gantt-toolbar .k-icon,
-.k-toolbar .k-overflow-anchor.k-state-border-down .k-i-more-vertical,
 .k-panelbar > .k-state-active > .k-header .k-state-active .k-icon {
     opacity: 1;
 }
@@ -893,10 +886,6 @@ textarea.k-textbox:hover,
 .k-state-disabled .k-button .k-icon,
 .k-button.k-state-disabled .k-icon {
     opacity: .7;
-}
-
-.k-split-button.k-state-disabled .k-icon {
-    opacity: 1;
 }
 
 // Loading indicator
@@ -1786,106 +1775,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     border-color: @widget-border-color;
 }
 
-.k-editor .k-tool.k-state-selected,
-.k-window .k-editor-toolbar .k-tool.k-state-selected {
-    background-color: lighten(@hover-text-color, 8%);
-    border-color: lighten(@hover-text-color, 8%);
-}
-
-.k-window .k-editor-toolbar .k-state-hover {
-    background-color: @hover-background;
-}
-
-// Toolbar
-.k-toolbar {
-    .k-button,
-    .k-button-group {
-        color: @normal-text-color;
-        border-color: @widget-border-color;
-    }
-
-    // Active state
-    .k-button:active,
-    .k-button.k-state-active {
-        color: @inversed-text-color;
-    }
-
-    .k-button-group .k-button {
-        border-color: transparent;
-    }
-
-    .k-button-group .k-button:active,
-    .k-button-group .k-button.k-state-active,
-    .k-overflow-anchor.k-state-active,
-    .k-toggle-button.k-state-active {
-        background-color: lighten(@hover-text-color, 8%);
-    }
-
-    .k-overflow-anchor.k-state-active {
-        border-color: lighten(@hover-text-color, 8%);
-    }
-
-    .k-overflow-anchor.k-state-border-down,
-    .k-overflow-anchor.k-state-border-up {
-        background-color: @selected-background;
-        border-color: @selected-background;
-    }
-
-    // Disabled state
-    .k-button.k-state-disabled,
-    .k-button.k-state-disabled:hover,
-    .k-button.k-state-disabled:active,
-    .k-state-disabled.k-split-button > .k-button {
-        color: @disabled-text-color;
-        border-color: @disabled-border-color;
-        background-color: @widget-background-color;
-    }
-    .k-button-group .k-button.k-state-disabled {
-        border-color: transparent;
-    }
-
-    // Focused state
-    .k-button:focus,
-    .k-button.k-state-disabled:focus,
-    .k-split-button:focus > .k-button {
-        border-color: @button-focused-border-color;
-        .box-shadow(@button-focused-shadow);
-    }
-}
-
-.k-overflow-container .k-button,
-.k-split-container .k-button {
-    color: @link-text-color;
-}
-
-.k-overflow-container  {
-    .k-button {
-        border-radius: 0;
-    }
-
-    .k-overflow-group,
-    .k-separator {
-        border-color: @secondary-border-color;
-    }
-}
-
-    // Active state
-    .k-overflow-container .k-overflow-button.k-state-active,
-    .k-split-container .k-button.k-state-active {
-        color: @selected-text-color;
-    }
-
-    // Disabled state
-    .k-overflow-container .k-state-disabled .k-button,
-    .k-overflow-container .k-state-disabled.k-button,
-    .k-split-container .k-state-disabled .k-button {
-        color: @disabled-text-color;
-
-        &:focus {
-            border-color: @button-focused-border-color;
-        }
-    }
-
 // Upload
 .k-file,
 .k-upload {
@@ -2331,13 +2220,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     }
 }
 
-.k-spreadsheet-toolbar {
-
-    > .k-button {
-        border-color: transparent;
-    }
-}
-
 @spreadsheet-page-orientation-border-color: lighten(@hover-text-color, 8%);
 
 // Dialog
@@ -2635,7 +2517,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: @grid-bg;
 }
 .k-dropdowngrid-popup .k-header {
-    .linear-gradient(~"@{grid-header-gradient}");
     border-color: @grid-header-border;
     color: @grid-header-text;
     background-color: @grid-header-bg;
@@ -2657,13 +2538,11 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: @grid-header-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-hover {
-    .linear-gradient(~"@{grid-hover-gradient}");
     border-color: @grid-hover-border;
     color: @grid-hover-text;
     background-color: @grid-hover-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-selected {
-    .linear-gradient(~"@{grid-selected-gradient}");
     border-color: @grid-selected-border;
     color: @grid-selected-text;
     background-color: @grid-selected-bg;

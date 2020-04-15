@@ -3,23 +3,23 @@
 @widget-text-color: @normal-text-color;
 @widget-border-color: lighten(@background, 26%);
 @widget-gradient: none;
-@widget-shadow: false;
+@widget-shadow: null;
 // Button
 @button-background-color: @base;
 @button-text-color: @normal-text-color;
 @button-border-color: lighten(@background, 26%);
 @button-gradient: @widget-gradient;
-@button-shadow: false;
+@button-shadow: null;
 @button-hover-text-color: @normal-text-color;
 @button-hover-background-color: lighten(@hover-background, 5%);
 @button-hover-border-color: @hover-background;
 @button-hover-gradient: none;
-@button-hover-shadow: false;
+@button-hover-shadow: null;
 @button-active-background: @accent;
 @button-active-text-color: @selected-text-color;
 @button-active-border-color: @hover-background;
 @button-active-gradient: none;
-@button-active-shadow: false;
+@button-active-shadow: null;
 @button-focused-border-color: @normal-text-color;
 @button-focused-shadow: 0 0 3px 1px #fff;
 @button-focused-active-shadow: 0 0 3px 1px #fff;
@@ -28,17 +28,17 @@
 @primary-background-color: @hover-background;
 @primary-border-color: @hover-background;
 @primary-gradient: none;
-@primary-shadow: false;
+@primary-shadow: null;
 @primary-hover-text-color: @normal-text-color;
 @primary-hover-background-color: lighten(@hover-background, 5%);
 @primary-hover-border-color: @hover-background;
 @primary-hover-gradient: none;
-@primary-hover-shadow: false;
+@primary-hover-shadow: null;
 @primary-active-text-color: @normal-text-color;
 @primary-active-background-color: darken(@hover-background, 6%);
 @primary-active-border-color: @hover-background;
 @primary-active-gradient: none;
-@primary-active-shadow: false;
+@primary-active-shadow: null;
 @primary-focused-border-color: @normal-text-color;
 @primary-focused-shadow: 0 0 3px 0 #fff;
 @primary-focused-active-shadow: @primary-focused-shadow;
@@ -50,11 +50,11 @@
 @input-text: @normal-text-color;
 @input-bg: @background;
 @input-border: @drop-down-border-color;
-@input-shadow: false;
+@input-shadow: null;
 @input-hovered-text: @input-text;
 @input-hovered-bg: @input-bg;
 @input-hovered-border: @drop-down-hover-border-color;
-@input-hovered-shadow: false;
+@input-hovered-shadow: null;
 @input-focused-text: @input-text;
 @input-focused-bg: @input-bg;
 @input-focused-border: @drop-down-focused-border-color;
@@ -107,7 +107,7 @@
 @notification-error-background-color: @error;
 @notification-error-text-color: @normal-text-color;
 @notification-error-border-color: @error;
-@notification-gradient: false;
+@notification-gradient: null;
 @tooltip-background-color: @base;
 @tooltip-border-color: darken(@normal-text-color, 21%);
 @tooltip-text-color: @normal-text-color;
@@ -188,6 +188,7 @@
 @toolbar-text: @widget-text-color;
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
+@toolbar-shadow: null;
 
 
 // Cards
@@ -328,15 +329,15 @@
 
 
 // Switch
-@switch-container-shadow: false;
+@switch-container-shadow: null;
 @switch-container-hovered-shadow: none;
 @switch-container-focused-shadow: inset 0 0 0 1px @button-focused-border-color;
 
 @switch-on-bg: @primary-background-color;
 @switch-on-text: @primary-text-color;
 @switch-on-border: @switch-on-bg;
-@switch-on-gradient: false;
-@switch-on-shadow: false;
+@switch-on-gradient: null;
+@switch-on-shadow: null;
 @switch-on-focused-shadow: @focused-shadow;
 
 @switch-on-focused-bg: @primary-hover-background-color;
@@ -347,13 +348,13 @@
 @switch-on-hovered-bg: @primary-hover-background-color;
 @switch-on-hovered-text: @switch-on-text;
 @switch-on-hovered-border: @button-hover-border-color;
-@switch-on-hovered-gradient: false;
+@switch-on-hovered-gradient: null;
 
 @switch-on-handle-bg: lighten(@background, 6%);
 @switch-on-handle-text: @switch-on-text;
 @switch-on-handle-border: @button-border-color;
 @switch-on-handle-gradient: rgba(255,255,255,0.12) 0%,rgba(255,255,255,0.05) 50%,rgba(255,255,255,0) 100%;
-@switch-on-handle-shadow: false;
+@switch-on-handle-shadow: null;
 
 @switch-on-handle-focused-bg: @switch-on-handle-bg;
 @switch-on-handle-focused-text: @switch-on-handle-text;
@@ -368,7 +369,7 @@
 @switch-off-bg: @background;
 @switch-off-text: @normal-text-color;
 @switch-off-border: @button-border-color;
-@switch-off-gradient: false;
+@switch-off-gradient: null;
 @switch-off-shadow: @switch-on-shadow;
 @switch-off-focused-shadow: @switch-on-focused-shadow;
 
@@ -380,13 +381,13 @@
 @switch-off-hovered-bg: @switch-off-bg;
 @switch-off-hovered-text: @switch-off-text;
 @switch-off-hovered-border: @switch-on-hovered-border;
-@switch-off-hovered-gradient: false;
+@switch-off-hovered-gradient: null;
 
 @switch-off-handle-bg: @switch-on-handle-bg;
 @switch-off-handle-text: @switch-off-text;
 @switch-off-handle-border: @switch-on-handle-border;
 @switch-off-handle-gradient: @switch-on-handle-gradient;
-@switch-off-handle-shadow: false;
+@switch-off-handle-shadow: null;
 
 @switch-off-handle-focused-bg: @switch-off-handle-bg;
 @switch-off-handle-focused-text: @switch-off-handle-text;
@@ -714,6 +715,7 @@
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
+@import "Default/toolbar/_theme.less";
 
 
 .k-in,
@@ -777,7 +779,6 @@
 .k-dropzone-active,
 .k-tiles,
 .k-tooltip,
-.k-button-group .k-tool,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
 .k-editor-dialog .k-tabstrip-items,
@@ -856,21 +857,11 @@ td.k-group-cell,
     border-color: @widget-border-color;
 }
 
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
-.k-textbox > input
-{
-    background: none;
-}
-
 .k-input,
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
+.k-textbox,
+.k-textarea,
 .k-textbox > input,
+.k-textarea > textarea,
 .k-multiselect-wrap
 {
     background-color: @input-bg;
@@ -1846,50 +1837,7 @@ div.k-filebrowser-dropzone em
 .k-tile,
 .k-slider-track,
 .k-slider-selection,
-.k-upload,
-.k-split-button
-{
-    border-radius: @border-radius;
-}
-
-.k-tool {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.k-tool.k-group-start,
-.k-toolbar .k-split-button .k-button,
-.k-toolbar .k-button-group .k-group-start
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-rtl .k-tool.k-group-start,
-.k-rtl .k-toolbar .k-split-button .k-button,
-.k-rtl .k-toolbar .k-button-group .k-group-start
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-toolbar .k-button-group > .k-group-end {
-    border-radius: @border-radius;
-}
-
-.k-tool.k-group-end,
-.k-toolbar .k-button-group .k-button + .k-group-end,
-.k-toolbar .k-split-button .k-split-button-arrow
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-rtl .k-tool.k-group-end,
-.k-rtl .k-toolbar .k-button-group .k-group-end,
-.k-rtl .k-toolbar .k-split-button .k-split-button-arrow
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-group-start.k-group-end.k-tool
+.k-upload
 {
     border-radius: @border-radius;
 }
@@ -1935,26 +1883,6 @@ div.k-filebrowser-dropzone em
 .k-numeric-wrap.k-state-border-down
 {
     border-radius: @border-radius @border-radius 0 0;
-}
-
-.k-split-button.k-state-border-down > .k-button
-{
-    border-radius: @border-radius 0 0 0;
-}
-
-.k-split-button.k-state-border-up > .k-button
-{
-    border-radius: 0 0 0 @border-radius;
-}
-
-.k-split-button.k-state-border-down > .k-split-button-arrow
-{
-    border-radius: 0 @border-radius 0 0;
-}
-
-.k-split-button.k-state-border-up > .k-split-button-arrow
-{
-    border-radius: 0 0 @border-radius 0;
 }
 
 .k-dropdown-wrap .k-input,
@@ -2274,36 +2202,9 @@ div.k-filebrowser-dropzone em
 }
 
 .k-column-menu,
-.k-column-menu .k-item,
-.k-overflow-container .k-overflow-group
+.k-column-menu .k-item
 {
     border-color: @secondary-border-color;
-}
-
-.k-overflow-container .k-overflow-group
-{
-    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-.k-toolbar-first-visible.k-overflow-group,
-.k-overflow-container .k-overflow-group + .k-overflow-group
-{
-    box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-.k-overflow-container .k-button-group .k-button {
-    border-radius:  @border-radius;
-}
-
-.k-toolbar-last-visible.k-overflow-group
-{
-    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-
-.k-toolbar .k-button.k-state-disabled:focus {
-    border-color: @button-focused-border-color;
-    .box-shadow(@button-focused-shadow);
 }
 
 .k-column-menu .k-separator
@@ -2397,21 +2298,6 @@ div.k-filebrowser-dropzone em
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
-}
-
-.k-editor .k-tool:focus
-{
-   outline: 0;
-   border-color: @button-focused-border-color;
-   .box-shadow(@button-focused-shadow);
-}
-
-// High contrast mode
-@media screen and (-ms-high-contrast: active) {
-    .k-editor-toolbar-wrap .k-dropdown-wrap.k-state-focused,
-    .k-editor-toolbar-wrap .k-button-group .k-tool:focus {
-        border-color: #fff;
-    }
 }
 
 // Responsive styles
@@ -2803,7 +2689,7 @@ div.k-filebrowser-dropzone em
     background-color: @grid-bg;
 }
 .k-dropdowngrid-popup .k-header {
-    .linear-gradient(~"@{grid-header-gradient}");
+    .linear-gradient(@grid-header-gradient);
     border-color: @grid-header-border;
     color: @grid-header-text;
     background-color: @grid-header-bg;
@@ -2825,13 +2711,13 @@ div.k-filebrowser-dropzone em
     background-color: @grid-header-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-hover {
-    .linear-gradient(~"@{grid-hover-gradient}");
+    .linear-gradient(@grid-hover-gradient);
     border-color: @grid-hover-border;
     color: @grid-hover-text;
     background-color: @grid-hover-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-selected {
-    .linear-gradient(~"@{grid-selected-gradient}");
+    .linear-gradient(@grid-selected-gradient);
     border-color: @grid-selected-border;
     color: @grid-selected-text;
     background-color: @grid-selected-bg;

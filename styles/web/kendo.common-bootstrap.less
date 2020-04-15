@@ -17,11 +17,33 @@
 
 @editor-icon-size: 32px;
 @menu-link-padding: 1.2em 1.2em 1.1em;
+
+
+// button
 @button-padding-x: 12px;
 @button-padding-y: 6px;
 @button-padding: @button-padding-y @button-padding-x;
+@button-border-width: 1px;
+
 @button-line-height: (20 / 14);
+
+@button-calc-size: ~"calc( (@{button-line-height} * 1em) + (@{button-padding-y} * 2) + (@{button-border-width} * 2) )";
+
 @disabled-button-opacity: 0.6;
+
+
+// Toolbar
+@toolbar-padding-x: 8px;
+@toolbar-padding-y: 6px;
+@toolbar-border-width: 1px;
+@toolbar-border-radius: 4px;
+
+@toolbar-spacing: @toolbar-padding-x;
+
+@toolbar-font-size: inherit;
+@toolbar-line-height: (20 / 14);
+
+@toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
 @treeview-inner-padding: 0.4167em 0.6667em 0.3333em 0.5833em;
 @scheduler-link-padding: .16666em 1.1em;
@@ -574,15 +596,6 @@ input.k-textbox {
 
 .k-numerictextbox .k-link {
     height: 1.167em;
-}
-
-.k-toolbar {
-    padding: 0.57142857em calc(0.57142857em - 0.2em);
-    border-radius: 4px;
-}
-
-.k-toolbar .k-overflow-anchor {
-    width: calc((52/14)*1em);
 }
 
 .k-webkit .k-rtl .k-widget .k-dropdown-wrap .k-input,

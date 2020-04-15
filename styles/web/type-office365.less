@@ -2,59 +2,59 @@
 @widget-background-color: @background;
 @widget-text-color: @normal-text-color;
 @widget-border-color: darken(@background, 21%);
-@widget-gradient: false;
-@widget-shadow: false;
+@widget-gradient: null;
+@widget-shadow: null;
 // Button
 @button-text-color: contrast(@button-background-color);
 @button-background-color: @hover-background;
 @button-border-color: @button-background-color;
-@button-gradient: false;
-@button-shadow: false;
+@button-gradient: null;
+@button-shadow: null;
 @button-hover-text-color: contrast(@button-hover-background-color);
 @button-hover-background-color: darken(@hover-background, 7%);
 @button-hover-border-color: @button-hover-background-color;
-@button-hover-gradient: false;
-@button-hover-shadow: false;
+@button-hover-gradient: null;
+@button-hover-shadow: null;
 @button-active-background: @base;
 @button-active-text-color: contrast(@button-active-background);
 @button-active-border-color: @button-active-background;
-@button-active-gradient: false;
-@button-active-shadow: false;
+@button-active-gradient: null;
+@button-active-shadow: null;
 @button-focused-border-color: @base;
-@button-focused-shadow: false;
-@button-focused-active-shadow: false;
+@button-focused-shadow: null;
+@button-focused-active-shadow: null;
 // Primary button
 @primary-text-color: contrast(@primary-background-color);
 @primary-background-color: @base;
 @primary-border-color: @primary-background-color;
-@primary-gradient: false;
-@primary-shadow: false;
+@primary-gradient: null;
+@primary-shadow: null;
 @primary-hover-text-color: contrast(@primary-hover-background-color);
 @primary-hover-background-color: darken(@primary-background-color, 8%);
 @primary-hover-border-color: @primary-hover-background-color;
-@primary-hover-gradient: false;
-@primary-hover-shadow: false;
+@primary-hover-gradient: null;
+@primary-hover-shadow: null;
 @primary-active-text-color: contrast(@primary-active-background-color);
 @primary-active-background-color: darken(@primary-background-color, 13%);
 @primary-active-border-color: darken(@primary-active-background-color, 2%);
-@primary-active-gradient: false;
-@primary-active-shadow: false;
+@primary-active-gradient: null;
+@primary-active-shadow: null;
 @primary-focused-border-color: darken(@primary-active-background-color, 2%);
-@primary-focused-shadow: false;
-@primary-focused-active-shadow: false;
+@primary-focused-shadow: null;
+@primary-focused-active-shadow: null;
 @primary-disabled-text-color: lighten(@normal-text-color, 29%);
 @primary-disabled-background-color: darken(@hover-background, 6%);
 @primary-disabled-border-color: darken(@hover-background, 6%);
-@primary-disabled-gradient: false;
+@primary-disabled-gradient: null;
 // Input
 @input-text: @normal-text-color;
 @input-bg: @background;
 @input-border: @drop-down-border-color;
-@input-shadow: false;
+@input-shadow: null;
 @input-hovered-text: @input-text;
 @input-hovered-bg: @input-bg;
 @input-hovered-border: @drop-down-hover-border-color;
-@input-hovered-shadow: false;
+@input-hovered-shadow: null;
 @input-focused-text: @input-text;
 @input-focused-bg: @input-bg;
 @input-focused-border: @drop-down-focused-border-color;
@@ -204,6 +204,7 @@
 @toolbar-text: @normal-text-color;
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
+@toolbar-shadow: null;
 
 
 // Cards
@@ -269,7 +270,7 @@
 @grid-header-bg: @header-background-color;
 @grid-header-text: @header-text-color;
 @grid-header-border: @grid-border;
-@grid-header-gradient: false;
+@grid-header-gradient: null;
 
 @grid-alt-bg: @alt-background-color;
 @grid-alt-text: @grid-text;
@@ -278,12 +279,12 @@
 @grid-hover-bg: @hover-background-color;
 @grid-hover-text: @grid-text;
 @grid-hover-border: @grid-border;
-@grid-hover-gradient: false;
+@grid-hover-gradient: null;
 
 @grid-selected-bg: @selected-background-color;
 @grid-selected-text: @selected-text-color;
 @grid-selected-border: @grid-border;
-@grid-selected-gradient: false;
+@grid-selected-gradient: null;
 
 
 // Calendar
@@ -344,16 +345,16 @@
 
 
 // Switch
-@switch-container-shadow: false;
-@switch-container-hovered-shadow: false;
-@switch-container-focused-shadow: false;
+@switch-container-shadow: null;
+@switch-container-hovered-shadow: null;
+@switch-container-focused-shadow: null;
 
 @switch-on-bg: @normal-background;
 @switch-on-text: @normal-text-color;
 @switch-on-border: darken(@background, 27%);
-@switch-on-gradient: false;
-@switch-on-shadow: false;
-@switch-on-focused-shadow: false;
+@switch-on-gradient: null;
+@switch-on-shadow: null;
+@switch-on-focused-shadow: null;
 
 @switch-on-focused-bg: @switch-on-bg;
 @switch-on-focused-text: @switch-on-text;
@@ -363,13 +364,13 @@
 @switch-on-hovered-bg: @switch-on-bg;
 @switch-on-hovered-text: @switch-on-text;
 @switch-on-hovered-border: darken(@background, 44%);
-@switch-on-hovered-gradient: false;
+@switch-on-hovered-gradient: null;
 
 @switch-on-handle-bg: @primary-background-color;
 @switch-on-handle-text: @switch-on-text;
 @switch-on-handle-border: @primary-border-color;
 @switch-on-handle-gradient: @primary-gradient;
-@switch-on-handle-shadow: false;
+@switch-on-handle-shadow: null;
 
 @switch-on-handle-focused-bg: @switch-on-handle-bg;
 @switch-on-handle-focused-text: @switch-on-handle-text;
@@ -384,8 +385,8 @@
 @switch-off-bg: @switch-on-bg;
 @switch-off-text: @normal-text-color;
 @switch-off-border: @switch-on-border;
-@switch-off-gradient: false;
-@switch-off-shadow: false;
+@switch-off-gradient: null;
+@switch-off-shadow: null;
 @switch-off-focused-shadow: @switch-on-focused-shadow;
 
 @switch-off-focused-bg: @switch-off-bg;
@@ -396,13 +397,13 @@
 @switch-off-hovered-bg: @switch-off-bg;
 @switch-off-hovered-text: @switch-off-text;
 @switch-off-hovered-border: @switch-on-hovered-border;
-@switch-off-hovered-gradient: false;
+@switch-off-hovered-gradient: null;
 
 @switch-off-handle-bg: @button-background-color;
 @switch-off-handle-text: @switch-off-text;
 @switch-off-handle-border: @button-border-color;
 @switch-off-handle-gradient: @button-gradient;
-@switch-off-handle-shadow: false;
+@switch-off-handle-shadow: null;
 
 @switch-off-handle-focused-bg: @switch-off-handle-bg;
 @switch-off-handle-focused-text: @switch-off-handle-text;
@@ -728,6 +729,7 @@
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
+@import "Default/toolbar/_theme.less";
 
 
 .k-in,
@@ -787,7 +789,6 @@
 .k-dropzone-active,
 .k-tiles,
 .k-tooltip,
-.k-button-group .k-tool,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
 .k-editor-dialog .k-tabstrip-items,
@@ -863,21 +864,11 @@ td.k-group-cell,
     border-color: @widget-border-color;
 }
 
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
-.k-textbox > input
-{
-    background: none;
-}
-
 .k-input,
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
+.k-textbox,
+.k-textarea,
 .k-textbox > input,
+.k-textarea > textarea,
 .k-multiselect-wrap
 {
     background-color: @input-bg;
@@ -1219,7 +1210,6 @@ textarea.k-textbox:hover,
 .k-state-selected,
 .k-state-selected:link,
 .k-state-selected:visited,
-.k-tool.k-state-selected,
 .k-list>.k-state-selected,
 .k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
@@ -1885,44 +1875,6 @@ div.k-filebrowser-dropzone em
     border-radius: @border-radius;
 }
 
-.k-tool {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.k-tool.k-group-start,
-.k-toolbar .k-split-button .k-button,
-.k-toolbar .k-button-group .k-group-start
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-rtl .k-tool.k-group-start,
-.k-rtl .k-toolbar .k-split-button .k-button,
-.k-rtl .k-toolbar .k-button-group .k-group-start
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-tool.k-group-end,
-.k-toolbar .k-button-group .k-group-end,
-.k-toolbar .k-split-button .k-split-button-arrow
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-rtl .k-tool.k-group-end,
-.k-rtl .k-toolbar .k-button-group .k-group-end,
-.k-rtl .k-toolbar .k-split-button .k-split-button-arrow
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-group-start.k-group-end.k-tool
-{
-    border-radius: @border-radius;
-}
-
 .k-calendar-container.k-state-border-up,
 .k-list-container.k-state-border-up,
 .k-autocomplete.k-state-border-up,
@@ -1964,26 +1916,6 @@ div.k-filebrowser-dropzone em
 .k-numeric-wrap.k-state-border-down
 {
     border-radius: @border-radius @border-radius 0 0;
-}
-
-.k-split-button.k-state-border-down > .k-button
-{
-    border-radius: @border-radius 0 0 0;
-}
-
-.k-split-button.k-state-border-up > .k-button
-{
-    border-radius: 0 0 0 @border-radius;
-}
-
-.k-split-button.k-state-border-down > .k-split-button-arrow
-{
-    border-radius: 0 @border-radius 0 0;
-}
-
-.k-split-button.k-state-border-up > .k-split-button-arrow
-{
-    border-radius: 0 0 @border-radius 0;
 }
 
 .k-dropdown-wrap .k-input,
@@ -2300,26 +2232,9 @@ div.k-filebrowser-dropzone em
 }
 
 .k-column-menu,
-.k-column-menu .k-item,
-.k-overflow-container .k-overflow-group
+.k-column-menu .k-item
 {
     border-color: @secondary-border-color;
-}
-
-.k-overflow-container .k-overflow-group
-{
-    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-.k-toolbar-first-visible.k-overflow-group,
-.k-overflow-container .k-overflow-group + .k-overflow-group
-{
-    box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-.k-toolbar-last-visible.k-overflow-group
-{
-    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
 }
 
 .k-column-menu .k-separator
@@ -2395,13 +2310,6 @@ div.k-filebrowser-dropzone em
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
-}
-
-.k-editor .k-tool:focus
-{
-   outline: 0;
-   border-color: @button-focused-border-color;
-   .box-shadow(@button-focused-shadow);
 }
 
 // Responsive styles
@@ -2499,11 +2407,6 @@ div.k-filebrowser-dropzone em
 
 
 .k-button:hover .k-icon,
-.k-tool-icon:hover,
-.k-state-hover .k-tool-icon,
-.k-state-selected .k-tool-icon,
-.k-state-focused .k-tool-icon,
-.k-button:hover .k-tool-icon,
 .k-splitbar.k-splitbar-horizontal-hover .k-icon,
 .k-splitbar.k-splitbar-vertical-hover .k-icon,
 div.k-splitbar.k-state-focused .k-icon,
@@ -2733,88 +2636,6 @@ input.k-textbox:focus {
     }
 }
 
-
-// Toolbar
-.k-toolbar {
-
-    .k-button:focus {
-        border-color: @button-focused-border-color;
-        .box-shadow(@button-focused-shadow);
-    }
-
-    .k-button-group {
-
-        .k-button {
-            border-color: transparent;
-            background: transparent;
-        }
-
-        .k-button:hover {
-            color: @hover-text-color;
-            border-color: @hover-background-color;
-            background-color: @hover-background-color;
-        }
-
-        .k-button.k-state-active,
-        .k-button:active {
-            color: @selected-text-color;
-            border-color: @selected-border-color;
-            background-color: @selected-background-color;
-        }
-
-        .k-button.k-state-disabled {
-            color: @disabled-text-color;
-            border-color: transparent;
-            background: transparent;
-        }
-
-        .k-button:focus {
-            border-color: @focused-border-color;
-        }
-    }
-
-    .k-split-button .k-button {
-        border-color: transparent;
-        background: transparent;
-    }
-
-    .k-overflow-anchor {
-        color: @widget-text-color;
-        background-color: @widget-background-color;
-        border-color: @widget-border-color;
-
-        // Hover
-        &:hover {
-            color: @button-hover-text-color;
-            background-color: @button-hover-background-color;
-            border-color: @button-hover-background-color;
-        }
-
-        // Active
-        &.k-state-active {
-            border-color: @button-hover-background-color;
-        }
-
-        // Expanded
-        &.k-state-border-down,
-        &.k-state-border-up {
-            color: @primary-text-color;
-            background-color: @primary-background-color;
-            border-color: @primary-background-color;
-        }
-    }
-}
-.k-overflow-container {
-    & > .k-state-disabled .k-button:focus,
-    & .k-button.k-state-disabled:focus {
-        border-color: @button-focused-border-color;
-    }
-
-    .k-separator {
-        color: @secondary-border-color;
-    }
-}
-
 .k-tabstrip {
     &.k-header {
         background-color: @button-background-color;
@@ -2991,20 +2812,6 @@ input.k-textbox:focus {
 
 .k-notification {
     .box-shadow(none);
-}
-
-.k-editor {
-    .k-tool {
-        border-color: @header-background-color;
-    }
-
-    .k-tool.k-state-selected {
-        border-color: @selected-border-color;
-    }
-
-    .k-tool.k-state-hover {
-        border-color: @hover-background-color;
-    }
 }
 
 .k-webkit,
@@ -3518,7 +3325,6 @@ input.k-textbox:focus {
     background-color: @grid-bg;
 }
 .k-dropdowngrid-popup .k-header {
-    .linear-gradient(~"@{grid-header-gradient}");
     border-color: @grid-header-border;
     color: @grid-header-text;
     background-color: @grid-header-bg;
@@ -3540,13 +3346,11 @@ input.k-textbox:focus {
     background-color: @grid-header-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-hover {
-    .linear-gradient(~"@{grid-hover-gradient}");
     border-color: @grid-hover-border;
     color: @grid-hover-text;
     background-color: @grid-hover-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-selected {
-    .linear-gradient(~"@{grid-selected-gradient}");
     border-color: @grid-selected-border;
     color: @grid-selected-text;
     background-color: @grid-selected-bg;

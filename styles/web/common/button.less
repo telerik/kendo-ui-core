@@ -3,7 +3,7 @@
     margin: 0;
     padding: @button-padding;
     box-sizing: border-box;
-    border-width: 1px;
+    border-width: @button-border-width;
     border-style: solid;
     background-repeat: repeat-x;
     background-position: 0 center;
@@ -22,11 +22,6 @@
     -webkit-appearance: none;
     position: relative;
 
-    // No flexbox
-    .k-no-flexbox & {
-        display: inline-block;
-    }
-
     &::-moz-focus-inner {
         padding: 0;
         border: 0;
@@ -39,8 +34,10 @@
         outline: 0;
     }
 
-    .k-text {
+    .k-text,
+    .k-button-text {
         overflow: hidden;
+        white-space: nowrap;
     }
 
     .k-icon,
@@ -65,6 +62,16 @@
             margin-left: -.125em;
         }
     }
+    &-icon {
+        width: @button-calc-size;
+        height: @button-calc-size;
+        padding: @button-padding-y;
+
+        .k-text,
+        .k-button-text {
+            display: none;
+        }
+    }
 
     // Disabled state
     &[disabled],
@@ -78,10 +85,6 @@
 
 }
 
-.k-ie9 .k-button {
-    display: inline-block;
-}
-
 a.k-button-expand {
     display: block;
 }
@@ -93,28 +96,11 @@ input[type="reset"].k-button-expand {
     width: 100%;
 }
 
-// TODO improve elastic behavior
-.k-button-icon {
-    height: ~"calc(@{button-line-height}em + (2*@{button-padding-y}) + 2px)"; // proper vertical alignment for elastic behavior
-}
-.k-split-button-arrow {
-    display: inline-block; // fix height
-}
-.k-button-icon,
-.k-split-button-arrow {
-    width: ~"calc(@{button-line-height}em + (2*@{button-padding-y}) + 2px)";
-    padding: @button-padding-y calc(@button-padding-x/2);
-}
-.k-overflow-group .k-button-icon {
-    width: auto;
-}
-
 
 
 
 // Flat button and bare
-.k-button.k-flat,
-.k-button.k-bare {
+.k-button.k-flat {
     border-color: transparent !important; // sass-lint:disable-line no-important
     color: inherit;
     background: none !important; // sass-lint:disable-line no-important
@@ -274,7 +260,7 @@ input[type="reset"].k-button-expand {
         position: relative;
     }
     .k-button + .k-button {
-        margin-left: -1px;
+        margin-left: -@button-border-width;
     }
 
     // stretched button group
@@ -328,32 +314,43 @@ input[type="reset"].k-button-expand {
 
 }
 
-.k-overflow-container .k-overflow-tool-group {
-    display: block;
-}
 
-.k-rtl .k-button-group {
+
+
+// Split button
+.k-split-button {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    border-radius: 0;
+    outline: 0;
+    list-style: none;
+    display: inline-flex;
+    flex: row nowrap;
+    vertical-align: middle;
+
+    > .k-split-button-arrow,
+    > .k-button:last-child {
+        margin-left: -@button-border-width;
+        padding: @button-padding-y;
+        width: auto;
+        flex: none;
+    }
+}
+.k-split-container {
+
+    > li {
+        padding: 1px;
+    }
 
     .k-button {
-        margin-left: 0;
-    }
-    .k-button + .k-button {
-        margin-right: -1px;
-    }
-
-}
-.k-no-flexbox .k-button-group {
-    display: inline-block;
-
-    &:after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-
-    .k-button {
-        display: inline-block;
-        vertical-align: top;
+        width: 100%;
+        border-color: transparent;
+        background-color: transparent;
+        background-image: none !important;
+        text-align: left;
+        white-space: nowrap;
+        justify-content: flex-start;
     }
 }
 
@@ -377,5 +374,59 @@ input[type="reset"].k-button-expand {
     .k-button.k-left {
         float: left;
         margin: 0 0 0 1em;
+    }
+}
+
+
+
+
+// RTL
+.k-rtl {
+
+    .k-button-group {
+
+        .k-button {
+            margin-left: 0;
+        }
+        .k-button + .k-button {
+            margin-right: -@button-border-width
+        }
+    }
+    .k-split-button {
+        .k-split-button-arrow {
+            margin-left: 0;
+            margin-right: -@button-border-width;
+        }
+    }
+    .k-split-container {
+        .k-button {
+            text-align: right;
+        }
+    }
+}
+
+
+
+
+// No flexbox
+.k-no-flexbox {
+
+    .k-button {
+        display: inline-block;
+    }
+
+    .k-button-group {
+        display: inline-block;
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .k-button {
+            display: inline-block;
+            vertical-align: top;
+        }
     }
 }

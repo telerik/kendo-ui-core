@@ -3,23 +3,23 @@
 @widget-text-color: @normal-text-color;
 @widget-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 8%), 0.5);
 @widget-gradient: @normal-gradient;
-@widget-shadow: false;
+@widget-shadow: null;
 //Button
 @button-text-color: @normal-text-color;
 @button-background-color: saturate(@base, 1%);
 @button-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 18%), 0.5);
 @button-gradient: @widget-gradient;
-@button-shadow: false;
+@button-shadow: null;
 @button-hover-text-color: @hover-text-color;
 @button-hover-background-color: contrast(@background, lighten(@hover-background, 5%), darken(@hover-background, 8%), 0.5);
 @button-hover-border-color: contrast(@base, lighten(@base, 1%), darken(@base, 20%), 0.5);
 @button-hover-gradient: @hover-gradient;
-@button-hover-shadow: false;
+@button-hover-shadow: null;
 @button-active-background: contrast(@background, darken(@accent, 2%), darken(@selected-background, 2%), 0.5);
 @button-active-text-color: contrast(@button-active-background, @normal-text-color, @background, 0.4);
 @button-active-border-color: @button-active-background;
 @button-active-gradient: @selected-gradient;
-@button-active-shadow: false;
+@button-active-shadow: null;
 @button-focused-border-color: contrast(@accent, lighten(@accent, 1%), darken(@accent, 4%), 0.5);
 @button-focused-shadow: 0 0 2px 1px contrast(@base, @accent, lighten(@accent, 20%), 0.5);
 @button-focused-active-shadow:  @button-focused-shadow;
@@ -30,17 +30,17 @@
 @primary-background-color: @accent;
 @primary-border-color: contrast(@base, lighten(@primary-color-desatured, 3%), darken(@primary-color-desatured, 3%), 0.5);
 @primary-gradient: @widget-gradient;
-@primary-shadow: false;
+@primary-shadow: null;
 @primary-hover-text-color: @primary-text-color;
 @primary-hover-background-color: contrast(@background, lighten(@accent, 5%), darken(@accent, 5%), 0.5);
 @primary-hover-border-color: @primary-border-color;
 @primary-hover-gradient: @hover-gradient;
-@primary-hover-shadow: false;
+@primary-hover-shadow: null;
 @primary-active-text-color: contrast(@primary-active-background-color, @normal-text-color, @background, 0.4);
 @primary-active-background-color: contrast(@background, darken(@accent, 2%), darken(@selected-background, 2%), 0.5);
 @primary-active-border-color: @primary-active-background-color;
 @primary-active-gradient: @selected-gradient;
-@primary-active-shadow: false;
+@primary-active-shadow: null;
 @primary-focused-border-color: darken(@primary-hover-background-color, 2%);
 @primary-focused-shadow: 0 0 2px 1px contrast(@background, @accent, @selected-background, 0.5);
 @primary-focused-active-shadow: @primary-focused-shadow;
@@ -52,11 +52,11 @@
 @input-text: @normal-text-color;
 @input-bg: contrast(@normal-text-color, @base, #fff, 0.5);
 @input-border: @drop-down-border-color;
-@input-shadow: false;
+@input-shadow: null;
 @input-hovered-text: @input-text;
 @input-hovered-bg: @input-bg;
 @input-hovered-border: @drop-down-hover-border-color;
-@input-hovered-shadow: false;
+@input-hovered-shadow: null;
 @input-focused-text: @input-text;
 @input-focused-bg: @input-bg;
 @input-focused-border: @drop-down-focused-border-color;
@@ -191,6 +191,7 @@
 @toolbar-text: @widget-text-color;
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
+@toolbar-shadow: null;
 
 
 // Cards
@@ -330,15 +331,15 @@
 
 
 // Switch
-@switch-container-shadow: false;
-@switch-container-hovered-shadow: false;
-@switch-container-focused-shadow: false;
+@switch-container-shadow: null;
+@switch-container-hovered-shadow: null;
+@switch-container-focused-shadow: null;
 
 @switch-on-bg: contrast(contrast(@background), @normal-background, @base, .5);
 @switch-on-text: contrast(@background, @accent, white, .5);
 @switch-on-border: contrast(@background, @button-border-color, @switch-on-bg, .5);
-@switch-on-gradient: false;
-@switch-on-shadow: false;
+@switch-on-gradient: null;
+@switch-on-shadow: null;
 @switch-on-focused-shadow: 0 0 3px 1px contrast(@background, rgba( black, .3 ), rgba( white, 1), .5);
 
 @switch-on-focused-bg: @switch-on-bg;
@@ -349,13 +350,13 @@
 @switch-on-hovered-bg: @switch-on-bg;
 @switch-on-hovered-text: @switch-on-text;
 @switch-on-hovered-border: @switch-on-focused-border;
-@switch-on-hovered-gradient: false;
+@switch-on-hovered-gradient: null;
 
 @switch-on-handle-bg: @primary-background-color;
 @switch-on-handle-text: @switch-on-text;
 @switch-on-handle-border: @primary-border-color;
 @switch-on-handle-gradient: rgba(255,255,255,.25) 0%, rgba(255,255,255,.0) 100%;
-@switch-on-handle-shadow: false;
+@switch-on-handle-shadow: null;
 
 @switch-on-handle-focused-bg: @switch-on-handle-bg;
 @switch-on-handle-focused-text: @switch-on-handle-text;
@@ -370,8 +371,8 @@
 @switch-off-bg: @switch-on-bg;
 @switch-off-text: @normal-text-color;
 @switch-off-border: @switch-on-border;
-@switch-off-gradient: false;
-@switch-off-shadow: false;
+@switch-off-gradient: null;
+@switch-off-shadow: null;
 @switch-off-focused-shadow: @switch-on-focused-shadow;
 
 @switch-off-focused-bg: @switch-off-bg;
@@ -382,13 +383,13 @@
 @switch-off-hovered-bg: @switch-off-bg;
 @switch-off-hovered-text: @switch-off-text;
 @switch-off-hovered-border: @switch-on-hovered-border;
-@switch-off-hovered-gradient: false;
+@switch-off-hovered-gradient: null;
 
 @switch-off-handle-bg: @button-background-color;
 @switch-off-handle-text: @switch-off-text;
 @switch-off-handle-border: @button-border-color;
 @switch-off-handle-gradient: @button-gradient;
-@switch-off-handle-shadow: false;
+@switch-off-handle-shadow: null;
 
 @switch-off-handle-focused-bg: @switch-off-handle-bg;
 @switch-off-handle-focused-text: @switch-off-handle-text;
@@ -714,6 +715,7 @@
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
+@import "Default/toolbar/_theme.less";
 
 
 .k-in,
@@ -724,9 +726,6 @@
 }
 
 // main colors
-.k-tool.k-state-hover {
-    color: @selected-text-color;
-}
 
 .k-splitbar .k-resize-handle {
     background-color: @normal-text-color;
@@ -786,7 +785,6 @@
 .k-dropzone-active,
 .k-tiles,
 .k-tooltip,
-.k-button-group .k-tool,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
 .k-editor-dialog .k-tabstrip-items {
@@ -865,21 +863,11 @@ td.k-group-cell,
     border-color: @widget-border-color;
 }
 
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
-.k-textbox > input
-{
-    background: none;
-}
-
 .k-input,
-input.k-textbox,
-textarea.k-textbox,
-input.k-textbox:hover,
-textarea.k-textbox:hover,
+.k-textbox,
+.k-textarea,
 .k-textbox > input,
+.k-textarea > textarea,
 .k-multiselect-wrap {
     background-color: @input-bg;
     color: @input-text;
@@ -1198,7 +1186,6 @@ textarea.k-textbox:hover,
 .k-state-selected,
 .k-state-selected:link,
 .k-state-selected:visited,
-.k-tool.k-state-selected,
 .k-list>.k-state-selected,
 .k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
@@ -1892,51 +1879,8 @@ div.k-filebrowser-dropzone em
 .k-slider-track,
 .k-slider-selection,
 .k-upload,
-.k-split-button
 .k-gantt-views,
 .k-gantt-views > .k-current-view
-{
-    border-radius: @border-radius;
-}
-
-.k-tool {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.k-tool.k-group-start,
-.k-toolbar .k-split-button .k-button,
-.k-toolbar .k-button-group .k-group-start
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-rtl .k-tool.k-group-start,
-.k-rtl .k-toolbar .k-split-button .k-button,
-.k-rtl .k-toolbar .k-button-group .k-group-start
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-toolbar .k-button-group > .k-group-end {
-    border-radius: @border-radius;
-}
-
-.k-tool.k-group-end,
-.k-toolbar .k-button-group .k-button + .k-group-end,
-.k-toolbar .k-split-button .k-split-button-arrow
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-rtl .k-tool.k-group-end,
-.k-rtl .k-toolbar .k-button-group .k-group-end,
-.k-rtl .k-toolbar .k-split-button .k-split-button-arrow
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-group-start.k-group-end.k-tool
 {
     border-radius: @border-radius;
 }
@@ -1984,26 +1928,6 @@ div.k-filebrowser-dropzone em
 .k-gantt-views.k-state-expanded > .k-current-view
 {
     border-radius: @border-radius @border-radius 0 0;
-}
-
-.k-split-button.k-state-border-down > .k-button
-{
-    border-radius: @border-radius 0 0 0;
-}
-
-.k-split-button.k-state-border-up > .k-button
-{
-    border-radius: 0 0 0 @border-radius;
-}
-
-.k-split-button.k-state-border-down > .k-split-button-arrow
-{
-    border-radius: 0 @border-radius 0 0;
-}
-
-.k-split-button.k-state-border-up > .k-split-button-arrow
-{
-    border-radius: 0 0 @border-radius 0;
 }
 
 .k-dropdown-wrap .k-input,
@@ -2210,8 +2134,8 @@ div.k-filebrowser-dropzone em
     color: @input-text;
 }
 
-input.k-textbox,
-textarea.k-textbox,
+.k-textbox,
+.k-textarea,
 .k-multiselect-wrap,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
 .k-dateinput.k-state-disabled > .k-textbox:hover
@@ -2331,45 +2255,9 @@ textarea.k-textbox,
 }
 
 .k-column-menu,
-.k-column-menu .k-item,
-.k-overflow-container .k-overflow-group
+.k-column-menu .k-item
 {
     border-color: @secondary-border-color;
-}
-
-// Toolbar
-.k-toolbar {
-
-    .k-button.k-state-disabled:focus {
-        border-color: @button-focused-border-color;
-        .box-shadow(@button-focused-shadow);
-    }
-}
-
-.k-overflow-container {
-
-    .k-button-group .k-button {
-        border-radius: @border-radius;
-    }
-
-    .k-overflow-group {
-        box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%), 0 1px 0 lighten(@secondary-border-color, 30%);
-    }
-
-    .k-separator {
-        border-color: @secondary-border-color;
-    }
-}
-
-.k-toolbar-first-visible.k-overflow-group,
-.k-overflow-container .k-overflow-group + .k-overflow-group
-{
-    box-shadow: 0 1px 0 lighten(@secondary-border-color, 30%);
-}
-
-.k-toolbar-last-visible.k-overflow-group
-{
-    box-shadow: inset 0 1px 0 lighten(@secondary-border-color, 30%);
 }
 
 .k-column-menu .k-separator
@@ -2439,21 +2327,6 @@ textarea.k-textbox,
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
-}
-
-.k-editor .k-tool:focus
-{
-   outline: 0;
-   border-color: @button-focused-border-color;
-   .box-shadow(@button-focused-shadow);
-}
-
-// High contrast mode
-@media screen and (-ms-high-contrast: active) {
-    .k-editor-toolbar-wrap .k-dropdown-wrap.k-state-focused,
-    .k-editor-toolbar-wrap .k-button-group .k-tool:focus {
-        border-color: #fff;
-    }
 }
 
 // Responsive styles
@@ -2622,29 +2495,6 @@ textarea.k-textbox,
 }
 
 @import "themes/spreadsheet.less";
-
-.k-spreadsheet {
-    .k-widget {
-        &[data-property='fontSize'] { width: 60px; }
-        &[data-property='format'] { width: 100px; }
-        &[data-property='fontFamily'] { width: 130px; }
-    }
-}
-
-.k-spreadsheet-toolbar .k-combobox {
-    .k-input {
-        color: @normal-text-color;
-    }
-
-    .k-state-hover,
-    .k-state-active,
-    .k-state-focused
-    {
-        .k-input {
-            color: @input-text;
-        }
-    }
-}
 
 @spreadsheet-page-orientation-gradient: @primary-gradient;
 
@@ -2863,7 +2713,7 @@ textarea.k-textbox,
     background-color: @grid-bg;
 }
 .k-dropdowngrid-popup .k-header {
-    .linear-gradient(~"@{grid-header-gradient}");
+    .linear-gradient(@grid-header-gradient);
     border-color: @grid-header-border;
     color: @grid-header-text;
     background-color: @grid-header-bg;
@@ -2885,13 +2735,13 @@ textarea.k-textbox,
     background-color: @grid-header-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-hover {
-    .linear-gradient(~"@{grid-hover-gradient}");
+    .linear-gradient(@grid-hover-gradient);
     border-color: @grid-hover-border;
     color: @grid-hover-text;
     background-color: @grid-hover-bg;
 }
 .k-dropdowngrid-popup .k-item.k-state-selected {
-    .linear-gradient(~"@{grid-selected-gradient}");
+    .linear-gradient(@grid-selected-gradient);
     border-color: @grid-selected-border;
     color: @grid-selected-text;
     background-color: @grid-selected-bg;

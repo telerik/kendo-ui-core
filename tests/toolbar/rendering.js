@@ -590,10 +590,12 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#foo");
+            assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.hasClass("k-state-hidden"));
             assert.isOk(button.is(":hidden"));
 
             var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
             assert.isOk(overflowButton.hasClass("k-state-hidden"));
         });
 
@@ -963,9 +965,11 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find("#btn2");
+            assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.hasClass("k-state-hidden"));
 
             var overflowButton = toolbar.popup.element.find("#btn2_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
             assert.isOk(overflowButton.hasClass("k-state-hidden"));
         });
 
@@ -1291,10 +1295,12 @@
             }).data("kendoToolBar");
 
             var button = toolbar.element.find(".k-split-button");
-            assert.isOk(button.hasClass("k-state-hidden"));
+            assert.isOk(button.hasClass("k-hidden"));
+            assert.isOk(button.hasClass("k-hidden"));
             assert.isOk(button.is(":hidden"));
 
             var overflowButton = toolbar.popup.element.find("#foo_overflow");
+            assert.isOk(overflowButton.hasClass("k-hidden"));
             assert.isOk(overflowButton.hasClass("k-state-hidden"));
         });
 

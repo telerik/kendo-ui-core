@@ -7,8 +7,7 @@ span.k-colorpicker,
 span.k-numerictextbox,
 span.k-combobox,
 span.k-dropdown,
-span.k-dropdowntree,
-.k-toolbar .k-split-button {
+span.k-dropdowntree {
     background-image: none;
 }
 
@@ -24,7 +23,6 @@ span.k-dropdowntree,
 .k-selectbox,
 .k-multiselect,
 .k-textbox,
-.k-toolbar .k-split-button,
 .k-listbox {
     position: relative;
     display: inline-block;
@@ -109,8 +107,7 @@ span.k-dropdowntree,
 .k-numerictextbox,
 .k-dropdown,
 .k-dropdowntree,
-.k-selectbox,
-.k-toolbar .k-split-button {
+.k-selectbox {
     white-space: nowrap;
 }
 
@@ -126,8 +123,7 @@ span.k-dropdowntree,
     width: 13.2em;
 }
 
-.k-colorpicker,
-.k-toolbar .k-split-button {
+.k-colorpicker {
     width: auto;
 }
 
@@ -491,24 +487,9 @@ body .k-datetimepicker .k-select {
     padding-right: 22px;
 }
 
-.k-overflow-container .k-item {
-    padding: 1px;
-}
-
-.k-overflow-container > .k-state-disabled .k-button,
-.k-overflow-container > .k-state-disabled .k-button:hover,
-.k-overflow-container .k-button.k-state-disabled,
-.k-overflow-container .k-button.k-state-disabled:hover {
-    border-color: transparent;
-    background: none;
-}
-
 .k-popup .k-list .k-state-hover,
 .k-popup .k-list .k-state-focused,
 .k-popup .k-list .k-state-selected,
-.k-overflow-container .k-state-hover,
-.k-overflow-container .k-state-focused,
-.k-overflow-container .k-state-selected,
 .k-fieldselector .k-list .k-item,
 .k-list-optionlabel.k-state-focused,
 .k-list-optionlabel.k-state-selected,
@@ -656,7 +637,8 @@ body .k-datetimepicker .k-select {
 }
 
 .k-input,
-.k-textbox > input {
+.k-textbox > input,
+.k-textarea > textarea {
     outline: 0;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -666,7 +648,7 @@ body .k-datetimepicker .k-select {
 }
 
 input.k-textbox,
-textarea.k-textbox {
+textarea.k-textarea {
     padding: @input-padding-y @input-padding-x;
 }
 
@@ -680,7 +662,7 @@ input.k-textbox {
     text-indent: (@input-indent / 2);
 }
 
-textarea.k-textbox {
+textarea.k-textarea {
     height: auto;
 }
 
