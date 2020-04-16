@@ -27,6 +27,7 @@ Kendo UI Stepper supports the following keyboard shortcuts:
 | `Tab`               | Move the focus away from the Stepper |
 | `Shift`+`Tab`    | Move the focus away from the Stepper |
 
+> When using keyboard navigation the focusing and selecting behavior of the Stepper can be configured via the [`selectOnFocus`](/api/javascript/ui/stepper/configuration/selectOnFocus) configuration option. By default this option is disabled and additional action is required by the user to select the focused step.
 
 ## See Also
 

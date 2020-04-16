@@ -1244,7 +1244,9 @@
             var arrowButton = splitButton.find(".k-split-button-arrow");
 
             click(arrowButton);
-            assert.equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
+            // Use Math.floor due to chrome 79
+            // assert.equal(splitButton.outerWidth(), splitButton.data("kendoPopup").element.outerWidth());
+            assert.equal(Math.floor(splitButton.outerWidth()), Math.floor(splitButton.data("kendoPopup").element.outerWidth()));
         });
 
         it("options.attribute are attached to the main button", function() {

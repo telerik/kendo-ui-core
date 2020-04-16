@@ -788,14 +788,12 @@ a.k-icon {
 .k-block,
 .k-widget,
 .k-input,
-.k-textbox,
 .k-group,
 .k-content,
 .k-header,
 .k-filter-row > th,
 .k-editable-area,
 .k-separator,
-.k-textbox > input,
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-group-footer td,
@@ -876,6 +874,7 @@ td.k-group-cell,
 }
 
 .k-textbox,
+.k-textarea,
 .k-autocomplete.k-header,
 .k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-active,
@@ -955,7 +954,6 @@ td.k-group-cell,
 .k-picker-wrap,
 .k-numeric-wrap,
 .k-grouping-header,
-.k-textbox,
 .k-progressbar,
 .k-draghandle,
 .k-autocomplete,
@@ -1339,7 +1337,6 @@ td.k-state-focused.k-state-selected
     border-color: @hover-border-color;
 }
 
-.k-textbox:hover,
 .k-state-hover,
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em,
@@ -1668,6 +1665,7 @@ div.k-filebrowser-dropzone em
 }
 
 .k-textbox:hover,
+.k-textarea:hover,
 .k-tiles li.k-state-hover
 {
     border-color: @hover-border-color;
@@ -1711,6 +1709,7 @@ div.k-filebrowser-dropzone em
 }
 
 .k-textbox:focus,
+.k-textarea:focus,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
 .k-picker-wrap.k-state-focused,
@@ -1892,6 +1891,7 @@ div.k-filebrowser-dropzone em
 // Border radius
 .k-block,
 .k-textbox,
+.k-textarea,
 .k-drag-clue,
 .k-touch-scrollbar,
 .k-window,
@@ -2418,7 +2418,8 @@ span.k-colorpicker {
     background-color: @button-background-color;
 }
 
-.k-textbox {
+.k-textbox,
+.k-textarea {
     background-color: @drop-down-background;
     border-color: @drop-down-border-color;
 }
@@ -2455,6 +2456,7 @@ span.k-colorpicker {
 }
 
 .k-textbox:hover,
+.k-textarea:hover,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
@@ -2472,6 +2474,7 @@ span.k-colorpicker {
 }
 
 .k-textbox:focus,
+.k-textarea:focus,
 .k-autocomplete.k-state-focused,
 .k-picker-wrap.k-state-focused,
 .k-numeric-wrap.k-state-focused,
@@ -2490,6 +2493,7 @@ span.k-colorpicker {
 }
 
 .k-textbox:focus,
+.k-textarea:focus,
 .k-autocomplete.k-state-active,
 .k-picker-wrap.k-state-active,
 .k-numeric-wrap.k-state-active,
