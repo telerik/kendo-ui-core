@@ -166,7 +166,6 @@
 @panelbar-items-border: contrast(@base, lighten(@base, 1%), darken(@base, 14%), 0.5);
 @panelbar-content-background: @background;
 @panelbar-content-color: @normal-text-color;
-@window-shadow-style: 1px 1px 7px 1px;
 @filter-menu-content-background: @background;
 @icon-background-color: transparent;
 @disabled-background-color: saturate(@base, 1%);
@@ -311,9 +310,23 @@
 @calendar-cell-focused-shadow: inset @button-focused-shadow;
 
 
+// Window
+@window-border-radius: @border-radius;
+@window-action-border-radius: @border-radius;
+
+@window-bg: @component-bg;
+@window-text: @component-text;
+@window-border: @component-border;
+@window-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .12);
+@window-focus-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .25);
+
+@window-titlebar-bg: @header-background-color;
+@window-titlebar-text: @header-text-color;
+@window-titlebar-border: @secondary-border-color;
+@window-titlebar-gradient: rgba(white, .25), rgba(white, 0);
+
+
 // Dialog
-@dialog-button-stretched-padding-x: 12px;
-@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
 
 // ScrollView
 @scrollview-pagebutton-bg: @button-background-color;
@@ -716,11 +729,12 @@
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
 @import "Default/toolbar/_theme.less";
+@import "Default/window/_theme.less";
+@import "Default/dialog/_theme.less";
 
 
 .k-in,
-.k-item,
-.k-window-action
+.k-item
 {
     border-color: transparent;
 }
@@ -750,7 +764,6 @@
 .k-input,
 .k-group,
 .k-content,
-.k-header,
 .k-filter-row > th,
 .k-editable-area,
 .k-separator,
@@ -1171,10 +1184,6 @@ td.k-group-cell,
 .k-grouping-row .k-state-focused
 {
     border-color: @focused-border-color;
-}
-
-.k-window-titlebar .k-link {
-    border-radius: @border-radius;
 }
 
 .k-calendar-container.k-group {
@@ -1708,21 +1717,6 @@ div.k-filebrowser-dropzone em
     .box-shadow(inset 0 0 0 3px @widget-border-color);
 }
 
-// Window
-
-.k-window
-{
-    .window-shadow(@shadow-color);
-    background-color: @widget-background-color;
-}
-
-.k-window.k-window-maximized,
-.k-window-maximized .k-window-titlebar,
-.k-window-maximized .k-window-content
-{
-    border-radius: 0;
-}
-
 .k-shadow
 {
     .box-shadow(0 1px 2px 0 @shadow-color);
@@ -1853,9 +1847,6 @@ div.k-filebrowser-dropzone em
 .k-textarea,
 .k-drag-clue,
 .k-touch-scrollbar,
-.k-window,
-.k-window-titleless .k-window-content,
-.k-window-action,
 .k-inline-block,
 .k-grid .k-filter-options,
 .k-grouping-header .k-group-indicator,
@@ -1893,7 +1884,6 @@ div.k-filebrowser-dropzone em
 .k-dropdown-wrap.k-state-border-up,
 .k-picker-wrap.k-state-border-up,
 .k-numeric-wrap.k-state-border-up,
-.k-window-content,
 .k-filter-menu
 {
     border-radius: 0 0 @border-radius @border-radius;
@@ -1913,7 +1903,6 @@ div.k-filebrowser-dropzone em
     border-radius: 0 0 @border-radius @border-radius;
 }
 
-.k-window-titlebar,
 .k-block > .k-header,
 .k-tabstrip-items .k-item,
 .k-panelbar .k-tabstrip-items .k-item,
@@ -2499,81 +2488,6 @@ div.k-filebrowser-dropzone em
 
 @spreadsheet-page-orientation-gradient: @primary-gradient;
 
-// Dialog
-
-.k-dialog {
-    .k-content {
-        border-bottom-right-radius: @border-radius;
-        border-bottom-left-radius: @border-radius;
-    }
-    &.k-dialog-titleless .k-content {
-        border-top-right-radius: @border-radius;
-        border-top-left-radius: @border-radius;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button {
-                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            border-top: solid 1px @widget-border-color;
-            background: @header-background-color;
-
-            .k-button {
-                border-radius: @border-radius;
-            }
-        }
-    }
-    &.k-window-sm {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-                flex-direction: column;
-
-                .k-button {
-                    flex: 0 0 auto;
-                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
-                }
-            }
-        }
-    }
-    &.k-window-md {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-
-                .k-button {
-                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
-                }
-            }
-        }
-    }
-}
-
-.k-rtl .k-dialog {
-    a.k-dialog-action.k-dialog-close {
-        left: .5em;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button:first-child {
-                border-bottom-right-radius: @border-radius;
-            }
-            .k-button:last-child {
-                border-bottom-left-radius: @border-radius;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            text-align: left;
-            .k-button {
-                margin-left: 0;
-                margin-right: 0.5em;
-                &:first-child {
-                    margin-right: 0;
-                }
-            }
-        }
-    }
-}
 
 .k-numeric-wrap .k-i-warning {
     color: @input-validation-error;

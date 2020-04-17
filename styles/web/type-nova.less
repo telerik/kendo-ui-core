@@ -237,9 +237,23 @@
 @calendar-cell-focused-shadow: inset 0 0 0 1px lighten(@hover-text-color, 8%);
 
 
+// Window
+@window-border-radius: @border-radius;
+@window-action-border-radius: @border-radius;
+
+@window-bg: @component-bg;
+@window-text: @component-text;
+@window-border: @component-border;
+@window-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .12);
+@window-focus-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .25);
+
+@window-titlebar-bg: @header-background-color;
+@window-titlebar-text: @header-text-color;
+@window-titlebar-border: @secondary-border-color;
+@window-titlebar-gradient: false;
+
+
 // Dialog
-@dialog-button-stretched-padding-x: 1em;
-@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
 
 // Tooltip
 @tooltip-text-color: @normal-text-color;
@@ -648,6 +662,8 @@
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
 @import "Default/toolbar/_theme.less";
+@import "Default/window/_theme.less";
+@import "Default/dialog/_theme.less";
 
 
 // Main colors
@@ -780,7 +796,7 @@
     background-color: fadeout(@info, 75%);
 }
 
-.k-state-focused:not(.k-button) {
+.k-state-focused {
     box-shadow: inset 0 0 0 1px darken(@widget-border-color, 35%);
 }
 
@@ -807,8 +823,6 @@
 .k-block,
 .k-drag-clue,
 .k-touch-scrollbar,
-.k-window,
-.k-window-titleless .k-window-content,
 .k-inline-block,
 .k-grid .k-filter-options,
 .k-grouping-header .k-group-indicator,
@@ -869,7 +883,6 @@
 .k-button:active .k-icon,
 .k-numerictextbox .k-state-selected .k-icon,
 .k-multiselect-wrap .k-icon,
-.k-window-titlebar .k-icon,
 .k-drag-clue .k-icon,
 .k-group-indicator .k-icon,
 .k-pivot-toolbar .k-icon,
@@ -1197,21 +1210,6 @@ input.k-textbox:active {
 .k-splitbar.k-state-focused {
     background-color: @selected-background;
     border-color: @selected-background;
-}
-
-// Window
-.k-window {
-    .box-shadow(@widget-shadow);
-}
-
-.k-window {
-    > .k-header {
-        color: @inversed-text-color;
-    }
-
-    > .k-header .k-state-hover {
-        background-color: @accent-hover-background;
-    }
 }
 
 // PanelBar
@@ -2222,106 +2220,12 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 
 @spreadsheet-page-orientation-border-color: lighten(@hover-text-color, 8%);
 
-// Dialog
-
-.k-dialog {
-
-    .k-dialog-title {
-        font-size: 1.2em;
-    }
-
-    &.k-alert .k-window-titlebar,
-    &.k-confirm .k-window-titlebar,
-    &.k-prompt .k-window-titlebar {
-        .k-dialog-title {
-            color: @normal-text-color;
-        }
-        border-bottom: none;
-    }
-    .k-content {
-        border-bottom-right-radius: @border-radius;
-        border-bottom-left-radius: @border-radius;
-    }
-    &.k-dialog-titleless .k-content {
-        border-top-right-radius: @border-radius;
-        border-top-left-radius: @border-radius;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button {
-                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            border-top: solid 1px @widget-border-color;
-
-            .k-button {
-                border-radius: @border-radius;
-            }
-        }
-    }
-    &.k-window-sm {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-                flex-direction: column;
-
-                .k-button {
-                    flex: 0 0 auto;
-                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
-                }
-            }
-        }
-    }
-    &.k-window-md {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-
-                .k-button {
-                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
-                }
-            }
-        }
-    }
-}
-
 .k-rtl {
     .k-grid-header .k-header:first-child,
     .k-filter-row th:first-child,
     .k-grid tbody td:first-child,
     .k-grid tfoot td:first-child {
         border-left-width: 0;
-    }
-}
-
-.k-rtl .k-dialog {
-    .k-window-titlebar {
-        .k-dialog-title {
-            padding-right: 1em;
-            padding-left: 2em;
-        }
-    }
-    a.k-dialog-action.k-dialog-close {
-        left: 0;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button:first-child {
-                border-bottom-right-radius: @border-radius;
-            }
-            .k-button:last-child {
-                border-bottom-left-radius: @border-radius;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            text-align: left;
-            .k-button {
-                margin-left: 0;
-                margin-right: 0.5em;
-                &:first-child {
-                    margin-right: 0;
-                }
-            }
-        }
     }
 }
 

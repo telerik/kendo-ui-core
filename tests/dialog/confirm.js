@@ -22,7 +22,7 @@
 
             assert.isOk(wrapper.is(".k-confirm.k-widget.k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar"));
-            assert.isOk(wrapperChildren.eq(1).is(".k-content"));
+            assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.isOk(wrapperChildren.eq(2).is(".k-dialog-buttongroup"));
             assert.isOk(wrapperChildren.eq(2).children().eq(0).is(".k-button"));
             assert.isOk(wrapperChildren.eq(2).children().eq(1).is(".k-button"));
@@ -94,7 +94,7 @@
 
     describe("kendo.confirm method", function() {
         afterEach(function() {
-            Mocha.fixture.closest("body").find(".k-confirm .k-content").each(function(idx, element) {
+            Mocha.fixture.closest("body").find(".k-confirm .k-window-content").each(function(idx, element) {
                 $(element).data("kendoConfirm").destroy();
             });
             Mocha.fixture.closest("body").find(".k-overlay").remove();
@@ -107,17 +107,17 @@
 
         it("text argument sets Confirm dialog content", function() {
             kendo.confirm("message");
-            assert.equal($(".k-confirm .k-content").html(), "message");
+            assert.equal($(".k-confirm .k-window-content").html(), "message");
         });
 
         it("ok calls chained done handler", function() {
             kendo.confirm("message").done(function() { assert.isOk(true); });
-            $(".k-confirm .k-content").data("kendoConfirm").wrapper.find(".k-button:first").click();
+            $(".k-confirm .k-window-content").data("kendoConfirm").wrapper.find(".k-button:first").click();
         });
 
         it("cancel calls chained fail handler", function() {
             kendo.confirm("message").fail(function() { assert.isOk(true); });
-            $(".k-confirm .k-content").data("kendoConfirm").wrapper.find(".k-button:eq(1)").click();
+            $(".k-confirm .k-window-content").data("kendoConfirm").wrapper.find(".k-button:eq(1)").click();
         });
     });
 }());

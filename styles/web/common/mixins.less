@@ -90,32 +90,6 @@
     box-shadow: @arguments;
 }
 
-.window-shadow(@shadow-color) when not (@shadow-color = transparent) {
-    border-color: @shadow-color;
-    .box-shadow(@window-shadow-style lighten(@shadow-color, 50%));
-
-    &.k-state-focused {
-        border-color: @shadow-color;
-        .box-shadow(@window-shadow-style @shadow-color);
-    }
-}
-
-.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) < 50%) {
-    border-color: @widget-border-color;
-
-    &.k-state-focused {
-        border-color: lighten(@widget-border-color, 20%);
-    }
-}
-
-.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) >= 50%) {
-    border-color: @widget-border-color;
-
-    &.k-state-focused {
-        border-color: darken(@widget-border-color, 10%);
-    }
-}
-
 .background-clip(@type) {
     background-clip: @type;
 }

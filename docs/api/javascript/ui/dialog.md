@@ -22,7 +22,7 @@ A collection of objects containing text, action and primary attributes used to s
         $("#dialog").kendoDialog({
           title: "Kendo Dialog Component",
           content: "This is your Kendo Dialog.",
-          actions: [{                         
+          actions: [{
               text: "OK",
               action: function(e){
                   // e.sender is a reference to the dialog widget object
@@ -48,7 +48,7 @@ The text to be shown in the action's button.
         $("#dialog").kendoDialog({
           title: "Kendo Dialog Component",
           content: "This is your Kendo Dialog.",
-          actions: [{             
+          actions: [{
               text: "OK",
           }]
         });
@@ -231,6 +231,8 @@ Defines the open animation duration.
 ### buttonLayout `String` *(default: "stretched")*
 
 Specifies the possible layout of the action buttons in the **Dialog**.
+
+Note: Stretched layout has no effect in browsers, like IE9, that do not support flexbox.
 
 Possible values are:
 

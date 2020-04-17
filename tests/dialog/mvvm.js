@@ -8,7 +8,7 @@
             };
         });
         afterEach(function() {
-            Mocha.fixture.closest("body").find(".k-dialog .k-content").each(function(idx, element) {
+            Mocha.fixture.closest("body").find(".k-dialog .k-window-content").each(function(idx, element) {
                 $(element).data("kendoDialog").destroy();
             });
             Mocha.fixture.closest("body").find(".k-overlay").remove();

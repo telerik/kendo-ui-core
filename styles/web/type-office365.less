@@ -162,7 +162,6 @@
 @panelbar-items-border: darken(@background, 21%);
 @panelbar-content-background: @background;
 @panelbar-content-color: @normal-text-color;
-@window-shadow-style: 1px 1px 7px 1px;
 @filter-menu-content-background: @background;
 @icon-background-color: transparent;
 @disabled-background-color: @hover-background;
@@ -324,9 +323,23 @@
 @calendar-cell-focused-shadow: inset 0 0 0px 1px @base;
 
 
+// Window
+@window-border-radius: @border-radius;
+@window-action-border-radius: @border-radius;
+
+@window-bg: @component-bg;
+@window-text: @component-text;
+@window-border: @component-border;
+@window-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .12);
+@window-focus-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .25);
+
+@window-titlebar-bg: @header-background-color;
+@window-titlebar-text: @header-text-color;
+@window-titlebar-border: @secondary-border-color;
+@window-titlebar-gradient: false;
+
+
 // Dialog
-@dialog-button-stretched-padding-x: 12px;
-@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
 
 
 // ScrollView
@@ -730,6 +743,8 @@
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
 @import "Default/toolbar/_theme.less";
+@import "Default/window/_theme.less";
+@import "Default/dialog/_theme.less";
 
 
 .k-in,
@@ -1713,20 +1728,6 @@ div.k-filebrowser-dropzone em
     .box-shadow(inset 0 0 0 3px @widget-border-color);
 }
 
-// Window
-
-.k-window
-{
-    .window-shadow(@shadow-color);
-}
-
-.k-window.k-window-maximized,
-.k-window-maximized .k-window-titlebar,
-.k-window-maximized .k-window-content
-{
-    border-radius: 0;
-}
-
 .k-shadow
 {
     .box-shadow(0 1px 2px 0 @shadow-color);
@@ -1845,8 +1846,6 @@ div.k-filebrowser-dropzone em
 .k-textarea,
 .k-drag-clue,
 .k-touch-scrollbar,
-.k-window,
-.k-window-titleless .k-window-content,
 .k-inline-block,
 .k-grid .k-filter-options,
 .k-grouping-header .k-group-indicator,
@@ -1882,7 +1881,6 @@ div.k-filebrowser-dropzone em
 .k-dropdown-wrap.k-state-border-up,
 .k-picker-wrap.k-state-border-up,
 .k-numeric-wrap.k-state-border-up,
-.k-window-content,
 .k-filter-menu
 {
     border-radius: 0 0 @border-radius @border-radius;
@@ -1902,7 +1900,6 @@ div.k-filebrowser-dropzone em
     border-radius: 0 0 @border-radius @border-radius;
 }
 
-.k-window-titlebar,
 .k-block > .k-header,
 .k-tabstrip-items .k-item,
 .k-panelbar .k-tabstrip-items .k-item,
@@ -2802,15 +2799,6 @@ input.k-textbox:focus {
     border-color: @menu-border-color;
 }
 
-.k-window > .k-header {
-    border-color: transparent;
-}
-
-.k-window-titlebar .k-state-hover {
-    background-color: transparent;
-    border-color: transparent;
-}
-
 .k-notification {
     .box-shadow(none);
 }
@@ -3019,125 +3007,6 @@ input.k-textbox:focus {
 
     .k-item, .k-item.k-state-active {
         border-color: @spreadsheet-header-border;
-    }
-}
-
-// Dialog
-
-.k-dialog {
-    .k-window-title {
-        font-size: 1.2em;
-    }
-    a.k-dialog-action.k-dialog-close.k-button.k-bare {
-        &:before {
-            content: normal;
-        }
-    }
-    &.k-alert .k-window-titlebar,
-    &.k-confirm .k-window-titlebar,
-    &.k-prompt .k-window-titlebar {
-        .k-dialog-title {
-            color: @normal-text-color;
-        }
-        border-bottom: none;
-    }
-    &.k-alert .k-content,
-    &.k-confirm .k-content,
-    .k-content {
-        border-bottom-right-radius: @border-radius;
-        border-bottom-left-radius: @border-radius;
-    }
-    &.k-alert .k-content,
-    &.k-confirm .k-content,
-    &.k-prompt .k-content,
-    &.k-prompt {
-        text-align: left;
-    }
-    &.k-dialog-titleless .k-content {
-        border-top-right-radius: @border-radius;
-        border-top-left-radius: @border-radius;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button {
-                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
-            }
-            .k-button:first-child {
-            border-bottom-left-radius: @border-radius;
-            border-left: 0;
-            }
-            .k-button:last-child {
-                border-bottom-right-radius: @border-radius;
-                border-right: 0;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            border-top: solid 1px @widget-border-color;
-            background: @header-background-color;
-
-            .k-button {
-                padding-left: 2em;
-                padding-right: 2em;
-                margin-left: 1em;
-                border-radius: @border-radius;
-                &:first-child {
-                    margin-left: 0;
-                }
-            }
-        }
-    }
-    &.k-window-sm {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-                flex-direction: column;
-
-                .k-button {
-                    flex: 0 0 auto;
-                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
-                }
-            }
-        }
-    }
-    &.k-window-md {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-
-                .k-button {
-                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
-                }
-            }
-        }
-    }
-}
-.k-rtl .k-dialog {
-        .k-window-titlebar {
-            .k-dialog-title {
-                padding-right: 0;
-                padding-left: 2em;
-            }
-    }
-    a.k-dialog-action.k-dialog-close {
-        left: 0;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button:first-child {
-                border-bottom-right-radius: @border-radius;
-            }
-            .k-button:last-child {
-                border-bottom-left-radius: @border-radius;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            text-align: left;
-            .k-button {
-                margin-left: 0;
-                margin-right: 0.5em;
-                &:first-child {
-                    margin-right: 0;
-                }
-            }
-        }
     }
 }
 

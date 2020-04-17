@@ -42,7 +42,7 @@
             assert.isOk(wrapperChildren.eq(0).children().eq(1).is(".k-window-actions.k-dialog-actions"));
             assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
             assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
-            assert.isOk(wrapperChildren.eq(1).is(".k-content.k-window-content.k-dialog-content"));
+            assert.isOk(wrapperChildren.eq(1).is(".k-window-content.k-dialog-content"));
             assert.equal(wrapper.find(".k-dialog-buttongroup").length, 0);
         });
 
@@ -56,7 +56,7 @@
             assert.isOk(wrapper.is(".k-widget.k-dialog.k-window"));
             assert.isOk(wrapperChildren.eq(0).is(".k-dialog-action.k-dialog-close"));
             assert.isOk(wrapperChildren.eq(0).children().eq(0).is(".k-icon.k-i-close"));
-            assert.isOk(wrapperChildren.eq(1).is(".k-content"));
+            assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.equal(wrapper.find(".k-dialog-buttongroup").length, 0);
         });
 
@@ -104,7 +104,7 @@
                 content: "content text"
             });
 
-            assert.equal(dialog.wrapper.find(".k-content").html(), "content text");
+            assert.equal(dialog.wrapper.find(".k-window-content").html(), "content text");
         });
 
         it("setting actions in options adds buttongroup container", function() {

@@ -165,7 +165,6 @@
 @panelbar-items-border: contrast(@background, lighten(@background, 9%), darken(@background, 10%), 0.5);
 @panelbar-content-background: @background;
 @panelbar-content-color: @normal-text-color;
-@window-shadow-style: 1px 1px 7px 1px;
 @filter-menu-content-background: @background;
 @icon-background-color: transparent;
 @disabled-text-color: #999999;
@@ -335,9 +334,23 @@
 @calendar-cell-focused-shadow: @focused-item-shadow;
 
 
+// Window
+@window-border-radius: @border-radius;
+@window-action-border-radius: @border-radius;
+
+@window-bg: @component-bg;
+@window-text: @component-text;
+@window-border: @component-border;
+@window-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .12);
+@window-focus-shadow: 1px 1px 7px 1px rgba(contrast(@window-bg), .25);
+
+@window-titlebar-bg: @header-background-color;
+@window-titlebar-text: @header-text-color;
+@window-titlebar-border: @secondary-border-color;
+@window-titlebar-gradient: false;
+
+
 // Dialog
-@dialog-button-stretched-padding-x: 15px;
-@dialog-button-stretched-padding-y: @dialog-button-stretched-padding-x;
 
 
 // ScrollView
@@ -741,19 +754,17 @@
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
+@import "Default/window/_theme.less";
+@import "Default/dialog/_theme.less";
 
 
 .k-in,
-.k-item,
-.k-window-action
+.k-item
 {
     border-color: transparent;
 }
 
 // main colors
-.k-header .k-window-actions .k-link {
-    color: inherit;
-}
 a.k-icon {
     color: @normal-text-color;
     &:hover {
@@ -1227,10 +1238,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 
 .k-quality-list {
     margin-left: -25px !important;
-}
-
-.k-window-titlebar .k-link {
-    border-radius: @border-radius;
 }
 
 .k-calendar-container.k-group {
@@ -1759,21 +1766,6 @@ div.k-filebrowser-dropzone em
     .box-shadow(inset 0 0 0 3px @widget-border-color);
 }
 
-// Window
-
-.k-window
-{
-    .window-shadow(@shadow-color);
-    background-color: @widget-background-color;
-}
-
-.k-window.k-window-maximized,
-.k-window-maximized .k-window-titlebar,
-.k-window-maximized .k-window-content
-{
-    border-radius: 0;
-}
-
 .k-shadow
 {
     .box-shadow(0 1px 2px 0 @shadow-color);
@@ -1894,9 +1886,6 @@ div.k-filebrowser-dropzone em
 .k-textarea,
 .k-drag-clue,
 .k-touch-scrollbar,
-.k-window,
-.k-window-titleless .k-window-content,
-.k-window-action,
 .k-inline-block,
 .k-grid .k-filter-options,
 .k-grouping-header .k-group-indicator,
@@ -1932,7 +1921,6 @@ div.k-filebrowser-dropzone em
 .k-dropdown-wrap.k-state-border-up,
 .k-picker-wrap.k-state-border-up,
 .k-numeric-wrap.k-state-border-up,
-.k-window-content,
 .k-filter-menu
 {
     border-radius: 0 0 @border-radius @border-radius;
@@ -1952,7 +1940,6 @@ div.k-filebrowser-dropzone em
     border-radius: 0 0 @border-radius @border-radius;
 }
 
-.k-window-titlebar,
 .k-block > .k-header,
 .k-tabstrip-items .k-item,
 .k-panelbar .k-tabstrip-items .k-item,
@@ -2388,8 +2375,7 @@ div.k-splitbar.k-state-focused .k-icon,
 .k-gantt-toolbar .k-icon,
 .k-field-actions .k-icon,
 .k-notification .k-icon,
-.k-pivot-configurator-settings .k-icon:hover,
-.k-window-titlebar .k-icon
+.k-pivot-configurator-settings .k-icon:hover
 {
     opacity:1;
 }
@@ -2556,16 +2542,6 @@ span.k-colorpicker {
 .k-grid td.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-item-shadow);
-}
-
-.k-window-titlebar .k-link
-{
-    .box-shadow(none);
-}
-
-.k-window-titlebar .k-state-hover {
-    background-color: @secondary-hover-background-color;
-    border-color: @secondary-hover-background-color;
 }
 
 // TabStrip
@@ -3343,123 +3319,12 @@ div.k-scheduler-marquee:after {
 
 @spreadsheet-page-orientation-border-color: @widget-border-color;
 
-// Dialog
-
-.k-dialog {
-    .k-content {
-        border-bottom-right-radius: @border-radius;
-        border-bottom-left-radius: @border-radius;
-    }
-    &.k-dialog-titleless .k-content {
-        border-top-right-radius: @border-radius;
-        border-top-left-radius: @border-radius;
-    }
-    .k-window-titlebar {
-        border-width: 0;
-        color: @normal-text-color;
-    }
-    & > .k-header {
-        background: none;
-    }
-    &.k-alert .k-window-titlebar,
-    &.k-confirm .k-window-titlebar,
-    &.k-prompt .k-window-titlebar {
-        .k-dialog-title {
-            color: @normal-text-color;
-        }
-        border-bottom: none;
-    }
-    a.k-dialog-action.k-dialog-close.k-button.k-bare {
-        &:before {
-            content: normal;
-        }
-    }
-    .k-dialog-buttongroup {
-
-        .k-button {
-            box-shadow: none;
-        }
-
-        .k-button:active,
-        .k-button:focus,
-        .k-button:focus:active {
-            box-shadow: none;
-        }
-        &.k-dialog-button-layout-stretched {
-            .k-button {
-                padding: @dialog-button-stretched-padding-y @dialog-button-stretched-padding-x;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            border-top: solid 1px @widget-border-color;
-            background: @secondary-background-color;
-
-            .k-button {
-                background: none;
-                border: none;
-                margin: 0;
-                &.k-primary {
-                    color: @selected-background;
-                }
-            }
-        }
-    }
-    &.k-window-sm {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-                flex-direction: column;
-
-                .k-button {
-                    flex: 0 0 auto;
-                    padding: (@dialog-button-stretched-padding-y / 2) (@dialog-button-stretched-padding-x / 2);
-                }
-            }
-        }
-    }
-    &.k-window-md {
-        .k-dialog-buttongroup {
-            &.k-dialog-button-layout-stretched {
-
-                .k-button {
-                    padding: (@dialog-button-stretched-padding-y * .7) (@dialog-button-stretched-padding-x * .7);
-                }
-            }
-        }
-    }
-}
-
 .k-rtl {
     .k-grid-header .k-header:first-child,
     .k-filter-row th:first-child,
     .k-grid tbody td:first-child,
     .k-grid tfoot td:first-child {
         border-left-width: 0;
-    }
-}
-
-.k-rtl .k-dialog {
-    a.k-dialog-action.k-dialog-close {
-        left: 0;
-    }
-    .k-dialog-buttongroup {
-        &.k-dialog-button-layout-stretched {
-            .k-button:first-child {
-                border-bottom-right-radius: @border-radius;
-            }
-            .k-button:last-child {
-                border-bottom-left-radius: @border-radius;
-            }
-        }
-        &.k-dialog-button-layout-normal {
-            text-align: left;
-            .k-button {
-                margin-left: 0;
-                margin-right: 0.5em;
-                &:first-child {
-                    margin-right: 0;
-                }
-            }
-        }
     }
 }
 
@@ -3691,4 +3556,9 @@ table.k-editor {
     }
 
 
+}
+
+
+.k-dialog-button-group .k-button {
+    box-shadow: none;
 }

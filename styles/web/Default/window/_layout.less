@@ -1,8 +1,12 @@
+@window-line-height: (20 / 14);
+
+
 // Window
 .k-window {
     padding: 0;
     border-width: @window-border-width;
     border-style: @window-border-style;
+    line-height: @window-line-height;
     display: inline-block;
     position: absolute;
     z-index: 10001;
@@ -11,8 +15,20 @@
         position: absolute;
         opacity: 0;
     }
+
+    &.k-window-maximized {
+        border-radius: 0;
+        box-shadow: none;
+
+        .k-window-titlebar,
+        .k-window-content {
+            border-radius: 0;
+        }
+    }
 }
 
+
+// Window sizes
 each(@window-sizes, {
     .k-window-@{key} {
         width: @value;
@@ -27,8 +43,11 @@ each(@window-sizes, {
     border-style: @window-titlebar-border-style;
     width: 100%;
     box-sizing: border-box;
+    background-position: 0 0;
+    background-repeat: repeat-x;
     white-space: nowrap;
     min-height: 16px; // icon size
+    position: relative;
 }
 
 
@@ -36,6 +55,7 @@ each(@window-sizes, {
 .k-window-title {
     font-size: @window-title-font-size;
     line-height: @window-title-line-height;
+    font-weight: @window-title-font-weight;
     display: block;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -52,7 +72,8 @@ each(@window-sizes, {
 .k-window-titlebar .k-window-actions {
     // margin: -.25em 0;
     position: absolute;
-    top: (@window-titlebar-padding-y / 2);
+    top: 50%;
+    transform: translateY(-50%);
     right: (@window-titlebar-padding-x / 2);
 }
 .k-window-titlebar .k-window-action {
@@ -60,10 +81,15 @@ each(@window-sizes, {
     width: 20px;
     height: 20px;
     border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    color: inherit;
     box-sizing: content-box;
     opacity: .7;
 
     &:hover { opacity: 1; }
+
+    .k-icon { opacity: 1; }
 }
 
 
@@ -72,6 +98,7 @@ each(@window-sizes, {
 .k-prompt-container {
     padding: @window-inner-padding-y @window-inner-padding-x;
     height: 100%;
+    box-sizing: border-box;
     overflow: auto;
     position: relative;
     outline: 0;
@@ -140,4 +167,11 @@ each(@window-sizes, {
 
 .k-ie .k-window-content {
     border-radius: 0;
+}
+
+
+// RTL
+.k-rtl .k-window-titlebar .k-window-actions {
+    right: auto;
+    left: (@window-titlebar-padding-x / 2);
 }

@@ -198,8 +198,8 @@
 
                 wrapper = that.wrapper = element.closest(KWINDOW);
 
-                if (!element.is(".k-content") || !wrapper[0]) {
-                    element.addClass("k-window-content k-content");
+                if (!element.is(".k-window-content") || !wrapper[0]) {
+                    element.addClass("k-window-content");
                     that._createWindow(element, options);
                     wrapper = that.wrapper = element.closest(KWINDOW);
 
@@ -982,7 +982,7 @@
                     if (!wrapper.is(VISIBLE)) {
                         contentElement.css(OVERFLOW, HIDDEN);
 
-                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-bare");
+                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-flat");
 
                         wrapper.show().kendoStop().kendoAnimate({
                             effects: showOptions.effects,
@@ -1706,7 +1706,7 @@
 
                 // Collect the src attributes of all iframes and then set them to empty string.
                 // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
-                iframeSrcAttributes = contentHtml.find("iframe:not(.k-content)").map(function() {
+                iframeSrcAttributes = contentHtml.find("iframe:not(.k-content-frame)").map(function() {
                     var src = this.getAttribute("src");
                     this.src = "";
                     return src;
@@ -1716,7 +1716,7 @@
                 wrapper
                     .toggleClass("k-rtl", isRtl)
                     .append(contentHtml)
-                    .find("iframe:not(.k-content)").each(function(index) {
+                    .find("iframe:not(.k-content-frame)").each(function(index) {
                     // Restore the src attribute of the iframes when they are part of the live DOM tree
                     this.src = iframeSrcAttributes[index];
                 });
@@ -1752,7 +1752,7 @@
                 "</a>"
             ),
             titlebar: template(
-                "<div class='k-window-titlebar k-header'>" +
+                "<div class='k-window-titlebar'>" +
                 "<span class='k-window-title'>#= title #</span>" +
                 "<div class='k-window-actions' />" +
                 "</div>"
