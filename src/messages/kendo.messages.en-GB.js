@@ -391,7 +391,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Export to PDF",
     "save": "Save changes",
     "select": "Select",
-    "update": "Update"
+    "update": "Update",
+    "search": "Search...",
   },
   "editable": {
     "cancelDelete": "Cancel",
@@ -399,7 +400,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Delete"
   },
   "noRecords": "No records available.",
-  "search": "Search...",
   "groupHeader": "Press ctrl + space to group",
   "ungroupHeader": "Press ctrl + space to ungroup"
 });

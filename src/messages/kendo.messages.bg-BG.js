@@ -640,7 +640,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Експорт към PDF",
     "save": "Запази промените",
     "select": "Избери",
-    "update": "Обнови"
+    "update": "Обнови",
+    "search": "Търси..."
   },
   "editable": {
     "cancelDelete": "Откажи",
@@ -648,7 +649,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Изтрий"
   },
   "noRecords": "Няма налични записи.",
-  "search": "Търси...",
   "groupHeader": "Натиснете ctrl + space за да групирате",
   "ungroupHeader": "Натиснете ctrl + space за да разгрупирате"
 });
