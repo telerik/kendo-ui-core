@@ -24,11 +24,11 @@ var __meta__ = { // jshint ignore:line
         support = kendo.support,
         AUTOCOMPLETEVALUE = support.browser.chrome ? "disabled" : "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
-        ERRORTEMPLATE = '<span class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em">' +
-            '<span class="k-icon k-i-error"></span>' +
+        ERRORTEMPLATE = '<div class="k-tooltip k-tooltip-error k-validator-tooltip">' +
+            '<span class="k-tooltip-icon k-icon k-i-warning"></span>' +
             '<span class="k-tooltip-content">#= message #</span>' +
             '<span class="k-callout k-callout-n"></span>' +
-        '</span>',
+        '</div>',
         CHANGE = "change";
     var EQUAL_SET = "equalSet";
     var specialRules = ["url", "email", "number", "date", "boolean"];
@@ -135,7 +135,7 @@ var __meta__ = { // jshint ignore:line
         "number": function(container, options) {
             var attr = createAttributes(options);
             $('<input type="text"/>').attr(attr).appendTo(container).kendoNumericTextBox({ format: options.format });
-            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg k-hidden"/>').appendTo(container);
         },
         "date": function(container, options) {
             var attr = createAttributes(options),
@@ -148,7 +148,7 @@ var __meta__ = { // jshint ignore:line
             attr[kendo.attr("format")] = format;
 
             $('<input type="text"/>').attr(attr).appendTo(container).kendoDatePicker({ format: options.format });
-            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg k-hidden"/>').appendTo(container);
         },
         "string": function(container, options) {
             var attr = createAttributes(options);
@@ -165,7 +165,7 @@ var __meta__ = { // jshint ignore:line
             $('<select ' + kendo.attr("text-field") + '="text"' + kendo.attr("value-field") + '="value"' +
                 kendo.attr("source") + "=\'" + (items ? items.replace(/\'/g,"&apos;") : items) +
                 "\'" + kendo.attr("role") + '="dropdownlist"/>') .attr(attr).appendTo(container);
-            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg  k-hidden"/>').appendTo(container);
         }
     };
 

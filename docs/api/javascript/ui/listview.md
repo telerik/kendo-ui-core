@@ -38,6 +38,20 @@ data source is fired. By default the widget will bind to the data source specifi
       });
     </script>
 
+### bordered `Boolean` *(default: true)*
+
+Renders border around the listview element.
+
+### borders `String` *(default: '')*
+
+Renders border around the listview items. Valid values are:
+
+* `all`: renders borders around listview items.
+* `horizontal`: renders top border of listview items. Useful when setting `layout: "flex"` and `flex.direction: column`.
+* `vertical`: renders top border of listview items. Useful when setting `layout: "flex"` and `flex.direction: row`.
+
+> Note: in order for the property to work, set `k-listview-item` class name to listview items in your template.
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid [kendo.data.DataSource](/api/javascript/data/datasource) configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
@@ -177,6 +191,52 @@ The height of the listview. Numeric values are treated as pixels.
         height: "1em"
     });
     </script>
+
+### layout `String` *(default: '')*
+
+Specify the layout of listview content. Valid options are:
+
+* `flex`: This is equivalent to `display: flex`. It defines a flex container and enables a flex context for all its direct children. Think of flex items as primarily laying out either in horizontal rows or vertical columns.
+* `grid`: This is equivalent to `display: grid`. It defines the element as a grid container and establishes a new grid formatting context for its contents.
+
+> Note: Flex and grid layout are supporteed only on modern browsers. Even so, not all browsers that support flex and grid layout, support all features.
+
+### flex `Object`
+
+Flex layout settings
+
+### flex.direction `String` *(default: 'row')*
+
+Defines the direction flex items are placed in the flex container. Think of flex items as primarily laying out either in horizontal rows or vertical columns. Valid values are:
+
+* `row`: This is equivalent to `flex-direction: row`. This establishes the main-axis to be horizontal, thus defining the direction flex items are placed in the flex container: left to right in `ltr`; right to left in `rtl`.
+* `row-reverse`: This is equivalent to `flex-direction: row-reverse`. This establishes the main-axis to be horizontal, thus defining the direction flex items are placed in the flex container: right to left in `ltr`; left to right in `rtl`.
+* `column`: This is equivalent to `flex-direction: column`. This establishes the main-axis to be vertical, thus defining the direction flex items are placed in the flex container: top to bottom.
+* `column-reverse`: This is equivalent to `flex-direction: column-reverse`. This establishes the main-axis to be vertical, thus defining the direction flex items are placed in the flex container: bottom to top.
+
+### flex.wrap `String` *(default: 'nowrap')*
+
+By default, flex items will all try to fit onto one line. Customizing the property defines how items wrap or not within flex continer. Valid values are:
+
+* `wrap`: This is equivalent to `flex-wrap: wrap`. It allows flex items to wrap as needed onto multiple lines, from top to bottom.
+* `nowrap`: This is equivalent to `flex-wrap: nowrap`. All flex items will be on one line.
+* `wrap-reverse`:This is equivalent to `flex-wrap: wrap-reverse`. It allows flex items to wrap as needed onto multiple lines, from bottom to top.
+
+### grid `Object`
+
+Grid layout settings.
+
+### grid.cols `Number|String`
+
+Defines the columns of the grid.
+
+### grid.rows `Number|String`
+
+Defines the rows of the grid.
+
+### grid.gutter `Number|String`
+
+Defines the width of the gutters between the columns / rows.
 
 ### scrollable `Boolean|String` *(default: false)*
 

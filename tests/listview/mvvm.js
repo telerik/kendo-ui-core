@@ -75,7 +75,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoListView").element.children().first().html()), "<strong>foo</strong>");
+            assert.equal($.trim(dom.data("kendoListView").content.children().first().html()), "<strong>foo</strong>");
         });
 
         it("binding template containing binding attributes", function() {
@@ -85,7 +85,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoListView").element.children().first().html()), '<strong data-bind="text:text">foo</strong>');
+            assert.equal($.trim(dom.data("kendoListView").content.children().first().html()), '<strong data-bind="text:text">foo</strong>');
         });
 
         it("binding altTemplate", function() {
@@ -95,7 +95,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoListView").element.children().eq(1).html()), "<span>bar</span>");
+            assert.equal($.trim(dom.data("kendoListView").content.children().eq(1).html()), "<span>bar</span>");
         });
 
         it("binding editTemplate", function() {
@@ -105,9 +105,9 @@
 
             kendo.bind(dom, observable);
 
-            dom.data("kendoListView").edit(dom.children().eq(0));
+            dom.data("kendoListView").edit(dom.find(".k-listview-content").children().eq(0));
 
-            assert.equal($.trim(dom.data("kendoListView").element.find(":input:first").val()), "foo");
+            assert.equal($.trim(dom.data("kendoListView").content.find(":input:first").val()), "foo");
         });
 
         it("updating an item from the data source updates the corresponding listview item", function() {
@@ -119,7 +119,7 @@
 
             observable.items[0].set("text", "baz");
 
-            assert.equal($.trim(dom.data("kendoListView").element.children().first().text()), "baz");
+            assert.equal($.trim(dom.data("kendoListView").content.children().first().text()), "baz");
         });
 
         it("destroys binding targets when datasource changes", function() {
@@ -221,7 +221,7 @@
             kendo.bind(dom, observable);
             var listView = dom.data("kendoListView");
 
-            assert.isOk(!listView.wrapper.children().length);
+            assert.isOk(!listView.content.children().length);
         });
 
         it("binding selectable to true", function() {
@@ -275,7 +275,7 @@
             listView.setOptions({ template: "<div>template</div>" });
             listView.refresh();
 
-            var firstItemHtml = $.trim(listView.element.children().first().html());
+            var firstItemHtml = $.trim(listView.content.children().first().html());
             assert.equal(firstItemHtml, "template");
         });
 
@@ -295,10 +295,10 @@
 
             kendo.bind(dom, viewmodel);
 
-            dom.data("kendoListView").edit(dom.children().eq(0));
+            dom.data("kendoListView").edit(dom.find(".k-listview-content").children().eq(0));
             dom.data("kendoListView").save();
 
-            assert.equal(dom.children().eq(0).text(), "foo");
+            assert.equal(dom.find(".k-listview-content").children().eq(0).text(), "foo");
         });
 
         it("item is bind ot the model after 'cancel' button is pressed in edit mode", function() {
@@ -317,10 +317,10 @@
 
             kendo.bind(dom, viewmodel);
 
-            dom.data("kendoListView").edit(dom.children().eq(0));
+            dom.data("kendoListView").edit(dom.find(".k-listview-content").children().eq(0));
             dom.data("kendoListView").cancel();
 
-            assert.equal(dom.children().eq(0).text(), "foo");
+            assert.equal(dom.find(".k-listview-content").children().eq(0).text(), "foo");
         });
     });
 }());

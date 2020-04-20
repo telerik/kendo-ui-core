@@ -20,7 +20,7 @@ var __meta__ = { // jshint ignore:line
         INVALIDINPUT = "k-invalid",
         VALIDINPUT = "k-valid",
         VALIDATIONSUMMARY = "k-validation-summary",
-        MESSAGEBOX = "k-message-box k-message-box-error",
+        MESSAGEBOX = "k-messagebox k-messagebox-error",
         emailRegExp = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i,
         urlRegExp = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
         INPUTSELECTOR = ":input:not(:button,[type=submit],[type=reset],[disabled],[readonly])",
@@ -149,10 +149,7 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "Validator",
-            errorTemplate: '<span class="k-tooltip k-tooltip-error">' +
-                '<span class="k-tooltip-icon k-icon k-i-error"></span>' +
-                '<span class="k-tooltip-content">#=message#</span>' +
-            '</span>',
+            errorTemplate: '<span class="k-form-error">#= message #</span>',
             messages: {
                 required: "{0} is required",
                 pattern: "{0} is not valid",
@@ -354,7 +351,7 @@ var __meta__ = { // jshint ignore:line
 
                     return true;
 
-                })).hide(),
+                })).addClass("k-hidden"),
                 messageText = !valid ? that._extractMessage(input, result.key) : "",
                 messageLabel = !valid ? parseHtml(template({ message: decode(messageText) })) : "",
                 wasValid = !input.attr("aria-invalid");
@@ -372,6 +369,7 @@ var __meta__ = { // jshint ignore:line
                 var lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
+                messageLabel.addClass("k-hidden");
 
                 if (lblId) {
                     messageLabel.attr('id', lblId);
@@ -397,7 +395,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
 
-                messageLabel.show();
+                messageLabel.removeClass("k-hidden");
 
                 input.attr("aria-invalid", true);
             } else {
@@ -407,12 +405,12 @@ var __meta__ = { // jshint ignore:line
             input.toggleClass(INVALIDINPUT, !valid);
             input.toggleClass(VALIDINPUT, valid);
 
-            if(kendo.widgetInstance(input)) {
+            if (kendo.widgetInstance(input)) {
                 var inputWrap = kendo.widgetInstance(input)._inputWrapper;
 
                 if (inputWrap) {
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
-                    inputWrap.toggleClass(INVALIDINPUT, !valid);
+                    inputWrap.toggleClass(VALIDINPUT, valid);
                 }
             }
 
@@ -428,11 +426,11 @@ var __meta__ = { // jshint ignore:line
                 className = "." + INVALIDMSG,
                 element = that.element;
 
-            if (!element.is(INPUTSELECTOR)) {
-                element.find(className).hide();
-            } else {
-                element.next(className).hide();
-            }
+                if (!element.is(INPUTSELECTOR)) {
+                    element.find(className).addClass("k-hidden");
+                } else {
+                    element.next(className).addClass("k-hidden");
+                }
         },
 
         _findMessageContainer: function(fieldName) {
@@ -613,7 +611,7 @@ var __meta__ = { // jshint ignore:line
 
             summary.html(errorsList);
 
-            summary.show();
+            summary.removeClasss("k-hidden");
         },
 
         hideValidationSummary: function() {
@@ -624,7 +622,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            summary.hide();
+            summary.addClass("k-hidden");
         }
     });
 

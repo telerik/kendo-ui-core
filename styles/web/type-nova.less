@@ -255,10 +255,15 @@
 
 // Dialog
 
+
 // Tooltip
-@tooltip-text-color: @normal-text-color;
-@tooltip-background-color: @background;
-@tooltip-border-color: darken(@background, 21%);
+@tooltip-border-radius: @inputs-border-radius;
+@tooltip-shadow: @widget-shadow;
+
+@tooltip-bg: @widget-background-color;
+@tooltip-text: @normal-text-color;
+@tooltip-border: @widget-border-color;
+
 
 // ScrollView
 @scrollview-pagebutton-bg: @button-background-color;
@@ -716,8 +721,6 @@
 .k-slider-track,
 .k-splitbar,
 .k-dropzone-active,
-.k-tiles,
-.k-tooltip,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
@@ -762,15 +765,13 @@
 .k-popup,
 .k-menu .k-menu-group,
 .k-grid .k-filter-options,
-.k-time-popup,
-.k-tooltip {
+.k-time-popup {
     .box-shadow(@popups-shadow);
 }
 
 .k-content,
 .k-panelbar > li.k-item,
-.k-panel > li.k-item,
-.k-tiles {
+.k-panel > li.k-item {
     background-color: @background;
 }
 
@@ -814,7 +815,6 @@
 .k-state-disabled,
 .k-state-disabled .k-link,
 .k-dropzone em,
-.k-tile-empty strong,
 .k-slider .k-draghandle {
     color: @disabled-border-color;
 }
@@ -828,7 +828,6 @@
 .k-grouping-header .k-group-indicator,
 .k-treeview .k-in,
 .k-editor-inline,
-.k-tile,
 .k-slider-track,
 .k-slider-selection {
     border-radius: @border-radius;
@@ -849,7 +848,6 @@
 .k-numerictextbox,
 .k-picker-wrap,
 .k-numeric-wrap,
-.k-tooltip,
 .k-upload {
     border-radius: @inputs-border-radius;
 }
@@ -1181,7 +1179,6 @@ input.k-textbox:active {
 @import "themes/notification.less";
 
 // Tooltip
-.k-widget.k-tooltip,
 .k-chart-crosshair-tooltip,
 .k-chart-shared-tooltip {
     color: @normal-text-color;
@@ -2121,10 +2118,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     height: 4px;
 }
 
-.k-chart-tooltip {
-    background-image: none;
-}
-
 // Map
 .k-map {
     border-color: @widget-border-color;
@@ -2484,3 +2477,9 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
         box-shadow: none;
     }
 }
+
+
+
+
+// Themes
+@import "Default/tooltip/_theme.less";

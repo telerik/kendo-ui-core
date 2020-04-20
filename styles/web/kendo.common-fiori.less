@@ -428,67 +428,55 @@
 @radio-line-height: calc(@radio-size + @radio-border-width);
 
 
+// Listview
+@listview-padding-x: 8px;
+@listview-padding-y: 4px;
+@listview-border-width: 1px;
+
+@listview-font-size: inherit;
+@listview-line-height: (20 / 14);
+
+@listview-item-padding-x: 8px;
+@listview-item-padding-y: 4px;
+
+
 // FileManager
-@filemanager-spacer: calc(@button-padding-y * 3);
+@filemanager-spacer: 16px;
 @filemanager-border-width: 1px;
 
-@filemanager-toolbar-border-width: 0 0 @filemanager-border-width 0;
-@filemanager-toolbar-border-style: solid;
-@filemanager-toolbar-font-weight: normal;
-@filemanager-toolbar-spacing: .2em;
+@filemanager-toolbar-border-width: @filemanager-border-width;
 
-@filemanager-toolbar-search-tool-spacing: .2em;
-
+@filemanager-navigation-padding-x: @filemanager-spacer;
+@filemanager-navigation-padding-y: @filemanager-spacer;
 @filemanager-navigation-width: 20%;
-@filemanager-navigation-border-width: 0 @filemanager-border-width 0 0;
-@filemanager-navigation-border-style: solid;
+@filemanager-navigation-border-width: @filemanager-border-width;
 
-@filemanager-navigation-container-padding-x: 0;
-@filemanager-navigation-container-padding-y: @filemanager-spacer;
+@filemanager-breadcrumb-padding-x: (@filemanager-spacer / 2);
+@filemanager-breadcrumb-padding-y: (@filemanager-spacer / 2);
+@filemanager-breadcrumb-border-width: @filemanager-border-width;
 
-@filemanager-treeivew-spacing-x: @filemanager-spacer;
-@filemanager-treeivew-spacing-y: 0;
+@filemanager-listview-item-padding-x: @filemanager-spacer;
+@filemanager-listview-item-padding-y: @filemanager-spacer;
+@filemanager-listview-item-width: 120px;
+@filemanager-listview-item-height: 120px;
 
-@filemanager-breadcrumb-padding-x: @button-padding-x;
-@filemanager-breadcrumb-padding-y: @button-padding-y;
-@filemanager-breadcrumb-border-width: 0 0 @filemanager-border-width 0;
-@filemanager-breadcrumb-border-style: solid;
+@filemanager-listview-item-icon-size: (@icon-size * 3);
 
-@filemanager-listview-border-width: 0;
-
-@filemanager-listview-item-padding-x: @button-padding-x;
-@filemanager-listview-item-padding-y: @filemanager-listview-item-padding-x;
-@filemanager-listview-item-width: 106px;
-@filemanager-listview-item-height: 80px;
-
-@filemanager-listview-item-icon-padding-x: 0;
-@filemanager-listview-item-icon-padding-y: calc(@button-padding-y * 2);
-@filemanager-listview-item-icon-size: calc(@icon-size * 2);
-
-@filemanager-grid-row-height: 46px;
-@filemanager-grid-header-height: @filemanager-grid-row-height;
-@filemanager-grid-icon-spacing: @filemanager-spacer;
-
+@filemanager-preview-padding-x: @filemanager-spacer;
+@filemanager-preview-padding-y: @filemanager-spacer;
 @filemanager-preview-width: 20%;
-@filemanager-preview-border-width: 0 0 0 @filemanager-border-width;
-@filemanager-preview-border-style: solid;
+@filemanager-preview-border-width: @filemanager-border-width;
+@filemanager-preview-spacing: @filemanager-spacer;
 
-@filemanager-preview-container-padding: calc(@filemanager-spacer * 4) 0 @filemanager-spacer 0;
+@filemanager-preview-icon-size: (@icon-size * 6);
 
-@filemanager-preview-file-spacing-x: 20px;
-@filemanager-preview-file-spacing-y: 0;
 
-@filemanager-preview-icon-size: calc(@icon-size * 4);
+// Tooltip
+@tooltip-padding-x: 8px;
+@tooltip-padding-y: 4px;
+@tooltip-border-width: 1px;
 
-@filemanager-preview-title-padding-x: 0;
-@filemanager-preview-title-padding-y: @filemanager-spacer;
-
-@filemanager-preview-line-break-spacing: @filemanager-spacer;
-
-@filemanager-drag-hint-padding-x: @button-padding-x;
-@filemanager-drag-hint-padding-y: @button-padding-y;
-
-@filemanager-drag-hint-icon-spacing: @button-padding-y;
+@tooltip-callout-size: 6px;
 
 
 @import "common/all.less";
@@ -883,11 +871,6 @@ table.k-editor {
 .k-draghandle
 {
     border-width: 2px;
-}
-
-span.k-tooltip
-{
-    padding: 9px 17px;
 }
 
 .k-file {

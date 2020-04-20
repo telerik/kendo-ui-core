@@ -1,97 +1,134 @@
 // File Manager
 .k-filemanager {
+    border-width: @filemanager-border-width;
+    border-style: solid;
     display: flex;
     flex-direction: column;
 }
 
 // Toolbar
+.k-filemanager-header {
+    border-color: inherit;
+}
 .k-filemanager-toolbar {
-    border-width: @filemanager-toolbar-border-width;
-    border-style: @filemanager-toolbar-border-style;
+    border-width: 0;
+    border-bottom-width: @filemanager-toolbar-border-width;
+    border-color: inherit;
+    flex-shrink: 0;
 }
 
-.k-filemanager-details-toggle,
-.k-filemanager-details-toggle .k-switch,
-.k-filemanager-search-tool {
-    margin-left: @filemanager-toolbar-spacing;
-    flex: 0 0 auto;
-}
-
-.k-filemanager-search-tool {
-    margin-right: @filemanager-toolbar-search-tool-spacing;
-}
-
-.k-filemanager-toolbar .k-button,
-.k-filemanager-toolbar .k-slit-button,
-.k-filemanager-toolbar .k-filemanager-details-toggle {
-    font-weight: @filemanager-toolbar-font-weight;
-}
 
 // Content Wrapper
 .k-filemanager-content-container {
+    border-color: inherit;
     box-sizing: border-box;
+    flex: 1 1 0%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row nowrap;
+    align-items: stretch;
     overflow: hidden;
 }
+
 
 // Navigation
 .k-filemanager-navigation {
-    box-sizing: border-box;
     width: @filemanager-navigation-width;
-    overflow-x: auto;
-    border-width: @filemanager-navigation-border-width;
-    border-style: @filemanager-navigation-border-style;
-}
-
-.k-filemanager-navigation-container {
+    border-width: 0;
+    border-right-width: @filemanager-navigation-border-width;
+    border-style: solid;
+    border-color: inherit;
     box-sizing: border-box;
-    padding: @filemanager-navigation-container-padding-y @filemanager-navigation-container-padding-x;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    > .k-treeview {
+        padding: @filemanager-navigation-padding-y @filemanager-navigation-padding-x;
+        height: 100%;
+        box-sizing: border-box;
+    }
+}
+.k-filemanager-treeview {
+    > .k-group > .k-item {
+        padding: 0;
+    }
 }
 
-.k-filemanager-treeview {
-    margin: @filemanager-treeivew-spacing-y @filemanager-treeivew-spacing-x;
-    display: inline-block;
-}
 
 // Content
 .k-filemanager-content {
-    flex: 1;
+    border-color: inherit;
+    flex: 1 1 0%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
     overflow: hidden;
 }
 
+
 // Breadcrumb
 .k-filemanager-breadcrumb {
-    border-width: @filemanager-breadcrumb-border-width;
-    border-style: @filemanager-breadcrumb-border-style;
+    border-width: 0;
+    border-bottom-width: @filemanager-breadcrumb-border-width;
     padding: @filemanager-breadcrumb-padding-y @filemanager-breadcrumb-padding-x;
+    flex-shrink: 0;
 }
 
-// ListView View
-.k-filemanager-view-list {
-    overflow-y: auto;
-}
 
-.k-filemanager-listview {
-    border-width: @filemanager-listview-border-width;
-    position: initial;
+// Filemanager view
+.k-filemanager-view {
     display: flex;
-    flex-flow: row wrap;
+    flex: 1 1 0%;
+    flex-flow: column nowrap;
+    overflow: hidden;
 
-    .k-item {
+    > .k-filemanager-listview,
+    > .k-filemanager-grid {
+        border-width: 0;
+    }
+}
+
+
+// Filemanager listview
+.k-filemanager-listview {
+    height: 100%;
+    flex: 1 1 0%;
+
+    // Listview content
+    .k-listview-content {
+        overflow: auto;
+    }
+
+    // Listview item
+    .k-listview-item {
         padding: @filemanager-listview-item-padding-y @filemanager-listview-item-padding-x;
         width: @filemanager-listview-item-width;
         height: @filemanager-listview-item-height;
+        text-align: center;
     }
 
-    .file-group-icon {
-        padding: @filemanager-listview-item-icon-padding-y @filemanager-listview-item-icon-padding-x;
+    // File preview
+    .k-file-preview {
+        height: @filemanager-listview-item-icon-size;
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
 
-    .file-name {
+    // File icon
+    .k-file-icon {
+        font-size: @filemanager-listview-item-icon-size;
+    }
+
+    // File image
+    .k-file-image {
+        max-width: 100%;
+        max-height: @filemanager-listview-item-icon-size;
+        display: block;
+    }
+
+    // File name
+    .k-file-name {
+        margin-top: (@filemanager-spacer / 2);
         display: block;
         text-align: center;
         overflow: hidden;
@@ -99,112 +136,101 @@
         white-space: nowrap;
     }
 
-    .k-icon {
-        font-size: @filemanager-listview-item-icon-size;
+    // File size
+    .k-file-size {
+        margin-top: (@filemanager-spacer / 2);
+        display: block;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
-    .file-edit-input input {
+    // Edit mode
+    .k-edit-item .k-textbox {
         width: 100%;
     }
 }
 
-// View Wrapper
-.k-filemanager-view {
-    position: relative;
-}
 
-// Grid View
+// Filemanager grid
 .k-filemanager-grid {
-    border-width: 1px 0 0 0;
-    position: initial;
+    flex: 1 1 0%;
 
-    thead tr {
-        height: @filemanager-grid-header-height;
-    }
-
-    tbody tr {
-        height: @filemanager-grid-row-height;
-    }
-
-    .k-header {
-        vertical-align: middle;
-    }
-
-    .file-group-icon,
-    .file-name {
+    // File preview
+    .k-file-preview {
+        margin-right: @icon-spacing;
         display: inline-flex;
         flex-direction: row;
         vertical-align: middle;
     }
 
-    .file-group-icon {
-        margin-right: @filemanager-grid-icon-spacing;
+    // File icon
+    .k-file-icon {}
+
+    // File name
+    .k-file-name {
+        display: inline-flex;
+        flex-direction: row;
+        vertical-align: middle;
     }
 }
 
-// Preview
+
+// Filemanager preview
 .k-filemanager-preview {
-    border-width: @filemanager-preview-border-width;
-    border-style: @filemanager-preview-border-style;
+    padding: (@filemanager-preview-padding-y * 3) @filemanager-preview-padding-x @filemanager-preview-padding-y;
     width: @filemanager-preview-width;
-    overflow-x: auto;
-}
-
-.k-filemanager-preview-container {
+    min-height: calc( (@filemanager-preview-padding-y * 4) + (@filemanager-preview-icon-size * 2) + (@filemanager-preview-spacing * 3) );
+    border-width: 0;
+    border-left-width: @filemanager-preview-border-width;
+    border-style: solid;
+    border-color: inherit;
     box-sizing: border-box;
-    padding: @filemanager-preview-container-padding;
-    width: 100%;
-    height: 100%;
     text-align: center;
+    overflow-x: auto;
+    flex-shrink: 0;
 
-    .k-file-info {
-        margin: @filemanager-preview-file-spacing-y @filemanager-preview-file-spacing-x;
-        display: inline-block;
+    // File preview
+    .k-file-preview {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
 
-    .k-file-preview-wrapper,
-    .k-file-title-wrapper {
-        text-align: center;
-    }
-
-    .k-file-preview-wrapper .k-icon {
+    // File icon
+    .k-file-icon {
         font-size: @filemanager-preview-icon-size;
     }
 
-    .k-file-title-wrapper {
-        padding: @filemanager-preview-title-padding-y @filemanager-preview-title-padding-x;
+    // File name
+    .k-file-name {
+        margin-top: @filemanager-preview-spacing;
+        display: block;
     }
+    .k-no-file-selected {}
+    .k-single-file-selected { font-weight: bold; }
+    .k-multiple-files-selected { font-weight: bold; }
 
-    .k-file-title {
-        font-weight: bold;
-    }
-
-    .k-file-meta-wrapper {
+    // File Meta
+    .k-file-meta {
+        margin: @filemanager-preview-spacing 0 0;
         box-sizing: border-box;
-        margin: 0;
+        text-align: start;
         display: flex;
         flex-flow: row wrap;
     }
-
     .k-file-meta-label {
         display: inline-block;
     }
-
     .k-file-meta-value {
         margin: 0;
     }
-
-    .k-file-size {
-        line-height: normal;
-        font-size: inherit;
-    }
-
     .k-file-type {
         text-transform: capitalize;
     }
-
-    .line-break {
-        margin-top: @filemanager-preview-line-break-spacing;
+    .k-line-break {
+        margin: @filemanager-preview-spacing 0 0;
         width: 100%;
         flex: 1 1 100%;
         flex-direction: row;
@@ -212,14 +238,14 @@
     }
 }
 
+
 // Resizing Handle
 .k-filemanager .k-splitbar {
+    flex-shrink: 0;
     display: inline-flex;
     position: relative;
-    cursor: e-resize;
-    width: 5px;
-    border-width: 0 1px;
 }
+
 
 // Upload Dialog
 .k-filemanager-upload-dialog .k-upload-files {
@@ -228,12 +254,12 @@
 }
 
 // Drag Hint
+// TODO: use drag-hint styles
 .k-filemanager-drag-hint {
-    padding: @filemanager-drag-hint-padding-y @filemanager-drag-hint-padding-x;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 .k-filemanager-drag-hint .k-icon {
-    margin-right: @filemanager-drag-hint-icon-spacing;
+    margin-right: @icon-spacing;
 }

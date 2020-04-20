@@ -15,10 +15,32 @@
 @selected-text-color: #fff;
 @selected-gradient: none;
 
-@error: #ffbfc4;
-@warning: #ffecc7;
-@success: #a5d6a7;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #00acc1;
 @info: #80deea;
+@success: #a5d6a7;
+@warning: #ffecc7;
+@error: #ffbfc4;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #ff4350;
 @series-b: #ff9ea5;

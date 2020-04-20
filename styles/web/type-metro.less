@@ -87,7 +87,17 @@
 @notification-error-text-color: saturate(@normal-text-color, 12%);
 @notification-error-border-color: contrast(@base, lighten(@error, 15%), darken(@error, 20%), 0.5);
 @notification-gradient: null;
-@tooltip-background-color: lighten(@hover-background, 1%);
+
+
+// Tooltip
+@tooltip-border-radius: @border-radius;
+@tooltip-shadow: 0 2px 2px 0 @shadow-color;
+
+@tooltip-bg: lighten(@hover-background, 1%);
+@tooltip-text: #ffffff;
+@tooltip-border: lighten(@hover-background, 1%);
+
+
 @draghandle-border-color: saturate(@hover-background, 1%);
 @draghandle-shadow: 0 1px 1px 0 fadeout(darken(@normal-text-color, 10%), 70%);
 @draghandle-hover-border-color: @accent;
@@ -117,7 +127,6 @@
 @disabled-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 10%), 0.5);
 @disabled-gradient: none;
 @tabstrip-active-background: lighten(@base, 6%);
-@tooltip-texture: none;
 @hover-shadow: none;
 @selected-shadow: none;
 @active-gradient: none;
@@ -147,8 +156,6 @@
 @cell-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
 @scheduler-background-color: @base;
 @current-time-color: #e20000;
-@tooltip-border-color: lighten(@hover-background, 1%);
-@tooltip-text-color: #ffffff;
 @draghandle-background-color: saturate(@hover-background, 1%);
 @draghandle-hover-background-color: @accent;
 @menu-border-color: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
@@ -785,8 +792,6 @@
 .k-slider-track,
 .k-splitbar,
 .k-dropzone-active,
-.k-tiles,
-.k-tooltip,
 .k-upload-files,
 .k-popup.k-align .k-list .k-item:last-child,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
@@ -821,9 +826,7 @@ td.k-group-cell,
 
 .k-content,
 .k-panelbar > li.k-item,
-.k-panel > li.k-item,
-.k-tiles
-{
+.k-panel > li.k-item {
     background-color: @content-background-color;
 }
 
@@ -935,11 +938,6 @@ td.k-group-cell,
     .composite-background(@widget-gradient);
     background-position: 50% 50%;
     background-color: @header-background-color;
-}
-
-.k-widget.k-tooltip
-{
-    background-image: @tooltip-texture;
 }
 
 .k-block,
@@ -1071,7 +1069,7 @@ td.k-group-cell,
 .k-task-complete
 {
     border-color: @event-background-color;
-    background: @event-background-color 0 -257px @tooltip-texture repeat-x;
+    background: @event-background-color;
     color: @event-text-color;
 }
 
@@ -1397,7 +1395,6 @@ div.k-filebrowser-dropzone em
     opacity: .6;
 }
 
-.k-tile-empty.k-state-selected,
 .k-loading-mask.k-state-selected {
     border-width: 0;
     background-image: none;
@@ -1409,7 +1406,6 @@ div.k-filebrowser-dropzone em
 .k-other-month,
 .k-other-month .k-link,
 .k-dropzone em,
-.k-tile-empty strong,
 .k-slider .k-draghandle
 {
     color: @disabled-text-color;
@@ -1482,33 +1478,12 @@ div.k-filebrowser-dropzone em
 }
 
 // Tooltip
-.k-widget.k-tooltip,
 .k-chart-crosshair-tooltip,
 .k-chart-shared-tooltip
 {
-    border-color: @tooltip-border-color;
-    background-color: @tooltip-background-color;
-    color: @tooltip-text-color;
-}
-
-.k-callout-n
-{
-    border-bottom-color: @tooltip-border-color;
-}
-
-.k-callout-w
-{
-    border-right-color: @tooltip-border-color;
-}
-
-.k-callout-s
-{
-    border-top-color: @tooltip-border-color;
-}
-
-.k-callout-e
-{
-    border-left-color: @tooltip-border-color;
+    border-color: @tooltip-border;
+    background-color: @tooltip-bg;
+    color: @tooltip-text;
 }
 
 // Splitter
@@ -1627,23 +1602,9 @@ div.k-filebrowser-dropzone em
     border-color: @widget-border-color;
 }
 
-// ImageBrowser
-
-.k-tile
-{
-    border-color: @content-background-color;
-}
-
 .k-textbox:hover,
-.k-textarea:hover,
-.k-tiles li.k-state-hover
-{
+.k-textarea:hover {
     border-color: @hover-border-color;
-}
-
-.k-tiles li.k-state-selected
-{
-    border-color: @selected-border-color;
 }
 
 // TreeMap
@@ -1706,9 +1667,7 @@ div.k-filebrowser-dropzone em
 .k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-active,
 .k-multiselect.k-state-focused,
-.k-filebrowser .k-image,
-.k-tooltip
-{
+.k-filebrowser .k-image {
     .box-shadow(0 2px 2px 0 @shadow-color);
 }
 
@@ -1856,8 +1815,6 @@ div.k-filebrowser-dropzone em
 .k-calendar-container,
 .k-treeview .k-in,
 .k-editor-inline,
-.k-tooltip,
-.k-tile,
 .k-slider-track,
 .k-slider-selection,
 .k-upload
@@ -2450,11 +2407,8 @@ div.k-filebrowser-dropzone em
     border-radius: @border-radius;
 }
 
-.k-chart .k-tooltip,
-.k-sparkline .k-tooltip,
 .k-chart-crosshair-tooltip,
 .k-chart-shared-tooltip {
-    background-image: none;
     border-radius: @border-radius;
 }
 
@@ -2672,3 +2626,9 @@ div.k-filebrowser-dropzone em
         border-radius: 0;
     }
 }
+
+
+
+
+// Themes
+@import "Default/tooltip/_theme.less";

@@ -15,10 +15,32 @@
 @selected-text-color: #fff;
 @selected-gradient: "rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 100%";
 
-@error: #db4240;
-@warning: #ffb400;
-@success: #37b400;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #0069a5;
 @info: #0066cc;
+@success: #37b400;
+@warning: #ffb400;
+@error: #db4240;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #0069a5;
 @series-b: #0098ee;

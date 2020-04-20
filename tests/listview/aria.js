@@ -92,8 +92,8 @@
                 navigatable: true
             }).data("kendoListView");
 
-            listview.current(listview.element.children().eq(0));
-            var li = listview.element.find(".k-state-focused");
+            listview.current(listview.content.children().eq(0));
+            var li = listview.content.find(".k-state-focused");
 
             assert.equal(li.attr("id"), "custom[1]");
         });
@@ -105,7 +105,7 @@
                 navigatable: true
             }).data("kendoListView");
 
-            listview.current(listview.element.children().eq(0));
+            listview.current(listview.content.children().eq(0));
 
             assert.equal(listview.element.attr("aria-activedescendant"), "custom[1]");
         });

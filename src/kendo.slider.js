@@ -1114,7 +1114,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             $(".k-slider-tooltip").remove(); // if user changes window while tooltip is visible, a second one will be created
-            that.tooltipDiv = $("<div class='k-widget k-tooltip k-slider-tooltip'><!-- --></div>").appendTo(document.body);
+            that.tooltipDiv = $("<div class='k-tooltip k-slider-tooltip'><!-- --></div>").appendTo(document.body);
 
             html = owner._getFormattedValue(that.val || owner.value(), that);
 
