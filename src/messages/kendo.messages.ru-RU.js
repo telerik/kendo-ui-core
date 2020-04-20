@@ -562,7 +562,7 @@ if (kendo.ui.Filter) {
       {
         and: "И",
         or: "Или",
-        apply: "Применить",
+        apply: "Применить"
       }
   );
 }
@@ -578,7 +578,7 @@ kendo.ui.Filter.prototype.options.operators,
     gt: "после",
     lte: "до или равна",
     lt: "до",
-    neq: "не равна",
+    neq: "не равна"
   },
   number: {
     eq: "равно",
@@ -586,7 +586,7 @@ kendo.ui.Filter.prototype.options.operators,
     gt: "больше",
     lte: "меньше или равно",
     lt: "меньше",
-    neq: "не равно",
+    neq: "не равно"
   },
   string: {
     endswith: "оканчивается на",
@@ -594,12 +594,12 @@ kendo.ui.Filter.prototype.options.operators,
     neq: "не равно",
     startswith: "начинающимися на",
     contains: "содержащими",
-    doesnotcontain: "не содержит",
+    doesnotcontain: "не содержит"
   },
   enums: {
     eq: "равно",
-    neq: "не равно",
-  },
+    neq: "не равно"
+  }
 }
 );
 }
