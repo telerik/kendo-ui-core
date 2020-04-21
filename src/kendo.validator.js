@@ -611,7 +611,7 @@ var __meta__ = { // jshint ignore:line
 
             summary.html(errorsList);
 
-            summary.removeClasss("k-hidden");
+            summary.removeClass("k-hidden");
         },
 
         hideValidationSummary: function() {

@@ -321,7 +321,7 @@
         });
 
         it("correct error message element container for the validated element is used", function() {
-            container.append($('<div><span class="k-invalid-msg" data-kendo-for="foo"/><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg" data-kendo-for="someotherfield"/></div>')),
+            container.append($('<div><span class="k-invalid-msg k-hidden" data-kendo-for="foo"/><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg k-hidden" data-kendo-for="someotherfield"/></div>')),
             validator = setup(container);
             validator.validate();
 

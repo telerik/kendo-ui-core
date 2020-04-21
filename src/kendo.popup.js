@@ -294,6 +294,12 @@ var __meta__ = { // jshint ignore:line
                     that._showDirClass(animation);
                 }
 
+                if (!element.is(":visible") && element.data("olddisplay") === undefined) {
+                    element.show();
+                    element.data("olddisplay", element.css("display"));
+                    element.hide();
+                }
+
                 element.data(EFFECTS, animation.effects)
                        .kendoStop(true)
                        .kendoAnimate(animation)

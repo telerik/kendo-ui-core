@@ -9,6 +9,7 @@
     background-repeat: repeat-x;
     display: inline-flex;
     flex-flow: row nowrap;
+    align-items: flex-start;
     position: absolute;
     z-index: 12000;
 }
@@ -54,7 +55,7 @@
 
 .k-callout-n {
     border-bottom-color: inherit;
-    top: 0;
+    top: (-1 * @tooltip-border-width);
     left: 50%;
     transform: translate(-50%, -100%);
     pointer-events: none;
@@ -62,13 +63,13 @@
 .k-callout-e {
     border-left-color: inherit;
     top: 50%;
-    right: 0;
+    right: (-1 * @tooltip-border-width);
     transform: translate(100%, -50%);
     pointer-events: none;
 }
 .k-callout-s {
     border-top-color: inherit;
-    bottom: 0;
+    bottom: (-1 * @tooltip-border-width);
     left: 50%;
     transform: translate(-50%, 100%);
     pointer-events: none;
@@ -76,7 +77,7 @@
 .k-callout-w {
     border-right-color: inherit;
     top: 50%;
-    left: 0;
+    left: (-1 * @tooltip-border-width);
     transform: translate(-100%, -50%);
     pointer-events: none;
 }

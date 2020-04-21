@@ -35,8 +35,8 @@ var __meta__ = { // jshint ignore:line
         REQUESTSTART = "requestStart",
         KCONTENTFRAME = "k-content-frame",
         TEMPLATE = '<div role="tooltip" class="k-widget k-tooltip#if (!autoHide) {# k-tooltip-closable#}#">' +
-            '#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close" title="Close"></a></div> #}#' +
             '<div class="k-tooltip-content"></div>' +
+            '#if (!autoHide) {# <div class="k-tooltip-button"><a href="\\#" class="k-icon k-i-close" title="Close"></a></div> #}#' +
             '#if (callout){ #<div class="k-callout k-callout-#=dir#"></div>#}#' +
         '</div>',
         IFRAMETEMPLATE = kendo.template(
