@@ -4920,6 +4920,7 @@ declare namespace kendo.ui {
         responsive?: boolean;
         info?: boolean;
         messages?: GridPageableMessages;
+        position?: string;
     }
 
     interface GridPdfMargin {

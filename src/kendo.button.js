@@ -27,14 +27,14 @@
             DISABLED = "disabled",
             DISABLEDSTATE = "k-state-disabled",
             FOCUSEDSTATE = "k-state-focused",
-            SELECTEDSTATE = "k-state-active",
-            OVERLAY = "k-badge-overlay";
+            SELECTEDSTATE = "k-state-active";
 
         var BUTTON_DEFAULTS = {
             icon: "",
             iconClass: "",
             spriteCssClass: "",
-            imageUrl: ""
+            imageUrl: "",
+            badge: null
         };
         kendo.setDefaults("button", BUTTON_DEFAULTS);
 
@@ -56,9 +56,7 @@
                     that._tabindex();
                 }
 
-                if (options.badge) {
-                    that.createBadge(options.badge);
-                }
+                that._badge();
 
                 that.iconElement();
 
@@ -78,7 +76,8 @@
                 var that = this;
 
                 that.wrapper.off(NS);
-                if(that.badge){
+
+                if (that.badge){
                     that.badge.destroy();
                 }
 
@@ -218,23 +217,29 @@
                 } catch (err) {}
             },
 
-            createBadge: function (badgeOptions) {
+            _badge: function() {
                 var that = this;
-                var span = $('<span />').appendTo(that.element);
+                var badgeOptions = that.options.badge;
+                var badgeEelement;
 
-                if (badgeOptions.overlay !== false) {
-                    that.element.addClass(OVERLAY);
+                if (badgeOptions === null || badgeOptions === undefined) {
+                    return;
                 }
 
-                if (typeof badgeOptions == "string" || typeof badgeOptions == "number") {
-                    that.badge = new ui.Badge(span, {
-                        value: badgeOptions
-                    });
-                } else if (typeof badgeOptions == "boolean") {
-                    that.badge = new ui.Badge(span);
-                } else {
-                    that.badge = new ui.Badge(span, badgeOptions);
+                if (badgeOptions.constructor !== Object) {
+                    badgeOptions = { text: badgeOptions };
                 }
+
+                if (badgeOptions.position === undefined || badgeOptions.position === "") {
+                    badgeOptions.position = "top end";
+                }
+
+                badgeOptions._classNames = ["k-button-badge"];
+
+                that.element.addClass("k-badge-container");
+
+                badgeEelement = $('<span />').appendTo(that.element);
+                that.badge = new ui.Badge(badgeEelement, badgeOptions);
             }
         });
 

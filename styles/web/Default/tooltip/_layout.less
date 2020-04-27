@@ -95,6 +95,8 @@ span.k-tooltip {
     white-space: normal;
     display: flex;
     align-items: center;
+    // NOTE: This works around popup / tooltip stackin issue
+    z-index: 9999;
 
     .k-callout-n { inset-inline-start: 16px; }
 }

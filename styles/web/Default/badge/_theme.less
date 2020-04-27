@@ -1,103 +1,32 @@
-.k-badge {
+// Solid badges
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
 
-    &.k-badge-secondary {
-        .fill(
-            @badge-secondary-text,
-            @badge-secondary-bg,
-            @badge-secondary-border
-        );
+    .k-badge-@{name} {
+        border-color: @color;
+        color: contrast( @color );
+        background-color: @color;
     }
+});
 
-    &.k-badge-primary {
-        .fill(
-            @badge-primary-text,
-            @badge-primary-bg,
-            @badge-primary-border
-        );
-    }
-
-    &.k-badge-info {
-        .fill(
-            @badge-info-text,
-            @badge-info-bg,
-            @badge-info-border
-        );
-    }
-
-    &.k-badge-success {
-        .fill(
-            @badge-success-text,
-            @badge-success-bg,
-            @badge-success-border
-        );
-    }
-
-    &.k-badge-warning {
-        .fill(
-            @badge-warning-text,
-            @badge-warning-bg,
-            @badge-warning-border
-        );
-    }
-
-    &.k-badge-error {
-        .fill(
-            @badge-error-text,
-            @badge-error-bg,
-            @badge-error-border
-        );
-    }
-
+// Outline badges
+.k-badge-outline {
+    border-color: currentColor;
+    background-color: @component-bg;
 }
 
-.k-badge-outline {
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
 
-    &.k-badge-secondary {
-        .fill(
-            @badge-secondary-text,
-            @background,
-            currentColor
-        );
+    .k-badge-outline-@{name} {
+        color: @color;
     }
+});
 
-    &.k-badge-primary {
-        .fill(
-            @badge-primary-bg,
-            @background,
-            currentColor
-        );
-    }
 
-    &.k-badge-info {
-        .fill(
-            @badge-info-bg,
-            @background,
-            currentColor
-        );
-    }
-
-    &.k-badge-success {
-        .fill(
-            @badge-success-bg,
-            @background,
-            currentColor
-        );
-    }
-
-    &.k-badge-warning {
-        .fill(
-            @badge-warning-bg,
-            @background,
-            currentColor
-        );
-    }
-
-    &.k-badge-error {
-        .fill(
-            @badge-error-bg,
-            @background,
-            currentColor
-        );
-    }
-
+// Border cutout
+.k-badge-border-cutout {
+    box-shadow: 0 0 0 2px @component-bg;
 }

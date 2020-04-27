@@ -401,16 +401,43 @@
 
 
 // Badge
-@badge-font-size: 75%;
+@use-calc-badge-size: boolean(true);
+
+@badge-padding-x: 4px;
+@badge-padding-y: 4px;
+@badge-border-width: 1px;
+@badge-border-radius: 2px;
+@badge-font-size: 10px;
 @badge-line-height: 1;
 
-@badge-padding: 4px;
-@badge-border-width: 1px;
-@badge-border-radius: 4px;
+@badge-padding-x-sm: ( @badge-padding-x / 2 );
+@badge-padding-y-sm: ( @badge-padding-y / 2 );
+@badge-border-width-sm: @badge-border-width;
+@badge-border-radius-sm: 1px;
+@badge-font-size-sm: 10px;
+@badge-line-height-sm: 1;
 
-@badge-size: calc( @badge-line-height * 1em + 2 * @badge-padding + 2 * @badge-border-width );
-@badge-overlay-x: calc( @badge-line-height * .5em + @badge-padding + @badge-border-width );
-@badge-overlay-y: @badge-overlay-x;
+@badge-padding-x-lg: ( @badge-padding-x * 1.5 );
+@badge-padding-y-lg: ( @badge-padding-y * 1.5 );
+@badge-border-width-lg: @badge-border-width;
+@badge-border-radius-lg: 4px;
+@badge-font-size-lg: 12px;
+@badge-line-height-lg: 1;
+
+@badge-fixed-size: 20px;
+@badge-calc-size: calc( (@badge-line-height * 1em) + (@badge-padding-y * 2) + (@badge-border-width * 2) );
+@badge-size: if( @use-calc-badge-size, @badge-calc-size, @badge-fixed-size );
+@badge-dot-size: 10px;
+
+@badge-fixed-size-sm: 16px;
+@badge-calc-size-sm: calc( (@badge-line-height-sm * 1em) + (@badge-padding-y-sm * 2) + (@badge-border-width-sm * 2) );
+@badge-size-sm: if( @use-calc-badge-size, @badge-calc-size-sm, @badge-fixed-size-sm );
+@badge-dot-size-sm: 6px;
+
+@badge-fixed-size-lg: 26px;
+@badge-calc-size-lg: calc( (@badge-line-height-lg * 1em) + (@badge-padding-y-lg * 2) + (@badge-border-width-lg * 2) );
+@badge-size-lg: if( @use-calc-badge-size, @badge-calc-size-lg, @badge-fixed-size-lg );
+@badge-dot-size-lg: 12px;
 
 
 // Checkbox

@@ -6972,6 +6972,32 @@ If a `pageSize` setting is provided for the data source then this value will be 
     });
     </script>
 
+### pageable.position `String` *(default: "bottom")*
+
+Specifies the position in which the grid pager will be rendered. Valid values are "top" and "bottom" (default).
+
+#### Example - place grid pager on top of the grid
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category" }
+      ],
+      dataSource: [
+        { productName: "Tea", category: "Beverages" },
+        { productName: "Coffee", category: "Beverages" },
+        { productName: "Ham", category: "Food" },
+        { productName: "Bread", category: "Food" }
+      ],
+      pageable: {
+        pageSize: 2,
+        position: "top"
+      }
+    });
+    </script>
+
 ### pageable.previousNext `Boolean` *(default: true)*
 
 If set to `true` the pager will display buttons for going to the first, previous, next and last pages. By default those buttons are displayed.

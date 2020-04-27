@@ -9,148 +9,126 @@ component: button
 
 ## Configuration
 
-### badge `Boolean|String|Object`
+### badge `Boolean|String|Number|Object`
 
 If set to true a default overlay badge will be displayed. If set to a string, an ovelay with content set to the specified string will be displayed. Can be set to a JavaScript object which represents the configuration of the [`Badge widget`](/api/javascript/ui/badge).
 
-#### Example - boolean badge
+#### Example - Various badge settings
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: true
-		});
-	</script>
+    <div style="padding: 10px; background: #cccccc;">
+        <button id="button" type="button">Foo</button>
+    </div>
+    <script>
+        $("#button").kendoButton({
+            badge: {
+                text: 1234,
+                max: 99,
+                color: "warning",
+                shape: "circle",
+                cutoutBorder: true
+            }
+        });
+    </script>
 
-#### Example - string badge
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: '99+'
-		});
-	</script>
+### badge.appearance  `String` *(default: rounded)*
 
-### badge.appearance  `String` *(default: pill)*
+**Deprecated!** Use [`badge.shape`](/api/javascript/ui/button/configuration/badge.shape) instead.
 
-Specifies the shape of the badge - `rectangle` or `pill`.
+For compatibility `badge.appearance` maps to `badge.shape`.
 
-#### Example
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				appearance: 'rectangle'
-			}
-		});
-	</script>
+### badge.badgeStyle `String` *(default: 'solid')*
 
-### badge.look `String` *(default: flat)*
+Specifies the structure of a badge. Valid options are `solid` (default) and `outline`.
 
-Specifies the look of the badge - `flat` or `outline`.
 
-#### Example
+### badge.color `String` *(default: 'secondary')*
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				look: 'outline'
-			}
-		});
-	</script>
+Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
+
+
+### badge.cutoutBorder `Boolean` *(default: false)*
+
+Specifies wether or not to render additional "cutout" border around the badge.
+
+
+### badge.icon `String` *(default: '')*
+
+Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
+
+
+### badge.look `String` *(default: solid)*
+
+**Deprecated!** Use [`badge.badgeStyle`](/api/javascript/ui/button/configuration/badge.badgeStyle) instead.
+
+For compatibility `badge.look` maps to `badge.badgeStyle`.
+
+
+### badge.max `Number` *(default: Infinity)*
+
+If `text` is a number, it will cap that number.
+
 
 ### badge.overlay `Boolean` *(default: true)*
 
-If set to false the badge is displayed inside the button.
+**Deprecated!** Use [`badge.position`](/api/javascript/ui/button/configuration/badge.position) instead.
 
-#### Example
+There is no built in mapping between `badge.overlay` and `badge.position`:
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				overlay: false,
-				value: 15
-			}
-		});
-	</script>
+* `badge.overlay: false` can be achieved by setting `badge.position: "inline"`
+* `badge.overlay: true` can be achieved by setting `badge.position: "top end"`, or not setting it at all.
+
+For compatibility `badge.overlay` is kept, even though it has no effect on the badge.
+
+
+### badge.placement `String` *(default: 'edge')*
+
+Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `edge`, `inside`, `outside`.
+
+Note: placement configuration requires the badge to be positioned. See [`badge.position`](/api/javascript/ui/button/configuration/badge.position) for more details.
+
+
+### badge.position `String` *(default: 'inline')*
+
+Specifies position of the badge relative to button. Valid position options are: `inline`, `top start`, `top end`, `bottom start`, `bottom end`.
+
+`badge.position` works in conjunction with [`badge.placement`](/api/javascript/ui/button/configuration/badge.placement).
+
+
+### badge.shape `String` *(default: 'rounded')*
+
+Specifies the shape of the badge. Valid options are: `rectangle`, `rounded`, `pill`, `circle`, `dot`.
+
 
 ### badge.template `String|Function`
 
-The template which renders the content of the badge
+The [template](/api/javascript/kendo/methods/template) which renders the content of the badge.
 
-#### Example - string template
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				value: 1234,
-				template: '#=value > 99? "99+" : value#'
-			}
-		});
-	</script>
+### badge.text `String|Number` *(default: '')*
 
-#### Example - function template
+The text of the badge. Valid input includes `string`, `number` or `object` with `toString` method. Default is empty string.
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				value: 1234,
-				template: function (value){
-					return value > 99 ? '99+' : value;
-				}
-			}
-		});
-	</script>
 
-### badge.type `String`
+### badge.type `String` *(default: 'secondary')*
 
-Specifies the type of the badge - `primary`, `secondary`, `info`, `success`, `warning` and `error`.
+**Deprecated!** Use [`badge.color`](/api/javascript/ui/button/configuration/badge.color) instead.
 
-#### Example - string template
+For compatibility `badge.type` maps to `badge.color`.
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				type: 'warning'
-			}
-		});
-	</script>
 
-### badge.value `String|Number`
+### badge.value `String|Number` *(default: '')*
 
-The value of the badge
+**Deprecated!** Use [`badge.text`](/api/javascript/ui/button/configuration/badge.text) instead.
 
-#### Example - string template
+For compatibility `badge.value` maps to `badge.text`.
 
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				 value: 15
-			}
-		});
-	</script>
 
-### badge.visible `Boolean`
+### badge.visible `Boolean` *(default: true)*
 
 If set to false the badge will not be displayed.
 
-#### Example - string template
-
-	<button id="button" type="button">Foo</button>
-	<script>
-		$("#button").kendoButton({
-			badge: {
-				 visible: false
-			}
-		});
-	</script>
 
 ### enable `Boolean` *(default: true)*
 
@@ -158,12 +136,12 @@ Indicates whether the **Button** should be enabled or disabled. By default, it i
 
 #### Example
 
-	<button id="button" type="button">Foo</button>
-	<script>
-	$("#button").kendoButton({
-		enable: false
-	});
-	</script>
+    <button id="button" type="button">Foo</button>
+    <script>
+    $("#button").kendoButton({
+        enable: false
+    });
+    </script>
 
 ### icon `String`
 
@@ -173,23 +151,23 @@ For a list of available icon names, please refer to the [Icons demo](https://dem
 
 #### Example
 
-	<button id="button" type="button">Cancel</button>
-	<script>
-	$("#button").kendoButton({
-		icon: "cancel"
-	});
-	</script>
+    <button id="button" type="button">Cancel</button>
+    <script>
+    $("#button").kendoButton({
+        icon: "cancel"
+    });
+    </script>
 
 #### Example with an existing span element
 
-	<button id="button" type="button">
-		<span class="k-icon"></span> Cancel
-	</button>
-	<script>
-	$("#button").kendoButton({
-		icon: "cancel"
-	});
-	</script>
+    <button id="button" type="button">
+        <span class="k-icon"></span> Cancel
+    </button>
+    <script>
+    $("#button").kendoButton({
+        icon: "cancel"
+    });
+    </script>
 
 
 ### iconClass `String`
@@ -198,13 +176,13 @@ Defines a CSS class - or multiple classes separated by spaced - which are applie
 
 #### Example
 
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
-	<button id="button" type="button">Cancel</button>
-	<script>
-	$("#button").kendoButton({
-		iconClass: "fa fa-male"
-	});
-	</script>
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+    <button id="button" type="button">Cancel</button>
+    <script>
+    $("#button").kendoButton({
+        iconClass: "fa fa-male"
+    });
+    </script>
 
 ### imageUrl `String`
 
@@ -214,23 +192,23 @@ The `img` element can be added automatically by the widget, or an existing eleme
 
 #### Example
 
-	<button id="button" type="button">Edit</button>
-	<script>
-	$("#button").kendoButton({
-		imageUrl: "/images/edit-icon.gif"
-	});
-	</script>
+    <button id="button" type="button">Edit</button>
+    <script>
+    $("#button").kendoButton({
+        imageUrl: "/images/edit-icon.gif"
+    });
+    </script>
 
 #### Example with an existing img element
 
-	<button id="button" type="button">
-		<img class="k-image" alt="Edit" /> Edit
-	</button>
-	<script>
-	$("#button").kendoButton({
-		imageUrl: "/images/edit-icon.gif"
-	});
-	</script>
+    <button id="button" type="button">
+        <img class="k-image" alt="Edit" /> Edit
+    </button>
+    <script>
+    $("#button").kendoButton({
+        imageUrl: "/images/edit-icon.gif"
+    });
+    </script>
 
 ### spriteCssClass `String`
 
@@ -241,23 +219,23 @@ The `span` element can be added automatically by the widget, or an existing elem
 
 #### Example
 
-	<button id="button" type="button">Edit</button>
-	<script>
-	$("#button").kendoButton({
-		spriteCssClass: "myEditIcon"
-	});
-	</script>
+    <button id="button" type="button">Edit</button>
+    <script>
+    $("#button").kendoButton({
+        spriteCssClass: "myEditIcon"
+    });
+    </script>
 
 #### Example with an existing span element
 
-	<button id="button" type="button">
-		<span class="k-sprite"></span> Edit
-	</button>
-	<script>
-	$("#button").kendoButton({
-		spriteCssClass: "myEditIcon"
-	});
-	</script>
+    <button id="button" type="button">
+        <span class="k-sprite"></span> Edit
+    </button>
+    <script>
+    $("#button").kendoButton({
+        spriteCssClass: "myEditIcon"
+    });
+    </script>
 
 ## Methods
 
@@ -273,15 +251,15 @@ Indicates whether the **Button** should be enabled or disabled. `true` and `fals
 
 #### Example
 
-	<button id="button" type="button">Edit</button>
-	<script>
-	$("#button").kendoButton();
-	var button = $("#button").data("kendoButton");
-	// disable button
-	button.enable(false);
-	// enable button
-	button.enable(true);
-	</script>
+    <button id="button" type="button">Edit</button>
+    <script>
+    $("#button").kendoButton();
+    var button = $("#button").data("kendoButton");
+    // disable button
+    button.enable(false);
+    // enable button
+    button.enable(true);
+    </script>
 
 ## Events
 
@@ -297,22 +275,22 @@ The original DOM event.
 
 #### Example - subscribe to the "click" event during initialization
 
-	<button id="button" type="button">Edit</button>
-	<script>
-	$("#button").kendoButton({
-		click: function(e) {
-			alert(e.event.target.tagName);
-		}
-	});
-	</script>
+    <button id="button" type="button">Edit</button>
+    <script>
+    $("#button").kendoButton({
+        click: function(e) {
+            alert(e.event.target.tagName);
+        }
+    });
+    </script>
 
 #### Example - subscribe to the "click" event after initialization
 
-	<button id="button" type="button">Edit</button>
-	<script>
-	$("#button").kendoButton();
-	var button = $("#button").data("kendoButton");
-	button.bind("click", function(e) {
-		alert(e.event.target.tagName);
-	});
-	</script>
+    <button id="button" type="button">Edit</button>
+    <script>
+    $("#button").kendoButton();
+    var button = $("#button").data("kendoButton");
+    button.bind("click", function(e) {
+        alert(e.event.target.tagName);
+    });
+    </script>

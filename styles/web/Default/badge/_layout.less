@@ -1,79 +1,207 @@
 .k-badge {
-    margin: 0 0 0 .5em;
-    padding: @badge-padding;
-    box-sizing: border-box;
+    padding: @badge-padding-y @badge-padding-y;
     border-width: @badge-border-width;
     border-style: solid;
-    border-radius: @badge-border-radius;
+    border-color: transparent;
+    box-sizing: border-box;
+    color: inherit;
+    background-color: transparent;
     font-size: @badge-font-size;
     line-height: @badge-line-height;
-    display: inline-block;
     text-align: center;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    // RTL
-    .k-rtl &,
-    &[dir="rtl"],
-    [dir="rtl"] & {
-        margin: 0 .5em 0 0;
-    }
 }
-
 .k-badge > * {
     color: inherit;
 }
 
-.k-badge.k-badge-pill {
-    min-width: @badge-size;
-    min-height: @badge-size;
-    border-radius: 5rem;
+
+// Empty badge
+.k-badge:empty {
+    padding: @badge-padding-y;
 }
 
-.k-badge.k-badge-pill:empty {
-    min-width: auto;
-    min-height: auto;
-}
 
+// Links
 a.k-badge,
 .k-badge > a {
     text-decoration: none;
 }
-
 a.k-badge:hover,
 .k-badge > a:hover {
     text-decoration: underline;
 }
 
-.k-badge-overlay {
+
+// Icon
+.k-badge-icon {
+    max-width: 1em;
+    max-height: 1em;
+    font-size: inherit;
+}
+.k-badge-icon.k-svg-icon svg {
+    fill: currentColor;
+}
+
+
+// Badge sizes
+.k-badge-sm {
+    padding: @badge-padding-y-sm @badge-padding-x-sm;
+    border-width: @badge-border-width-sm;
+    font-size: @badge-font-size-sm;
+    line-height: @badge-line-height-sm;
+
+    &:empty { padding: @badge-padding-y-sm; }
+}
+.k-badge-lg {
+    padding: @badge-padding-y-lg @badge-padding-x-lg;
+    border-width: @badge-border-width-lg;
+    font-size: @badge-font-size-lg;
+    line-height: @badge-line-height-lg;
+
+    &:empty { padding: @badge-padding-y-lg; }
+}
+
+
+// Badge shapes
+.k-badge-rounded {
+    .border-radius( @badge-border-radius );
+
+    &-sm { .border-radius( @badge-border-radius-sm ); }
+    &-lg { .border-radius( @badge-border-radius-lg ); }
+}
+.k-badge-pill {
+    border-radius: 5rem;
+}
+.k-badge-circle {
+    padding: 0 !important; // sass-lint:disable-line no-important
+    width: @badge-size;
+    height: @badge-size;
+    border-radius: 100%;
+
+    &-sm {
+        width: @badge-size-sm;
+        height: @badge-size-sm;
+    }
+    &-lg {
+        width: @badge-size-lg;
+        height: @badge-size-lg;
+    }
+}
+.k-badge-dot {
+    padding: 0 !important;  // sass-lint:disable-line no-important
+    width: @badge-dot-size;
+    height: @badge-dot-size;
+    border-radius: 100%;
+    font-size: 0;
+
+    &-sm {
+        width: @badge-dot-size-sm;
+        height: @badge-dot-size-sm;
+    }
+    &-lg {
+        width: @badge-dot-size-lg;
+        height: @badge-dot-size-lg;
+    }
+}
+
+
+// Badge position
+.k-badge-container {
     position: relative;
     overflow: visible;
 }
+@badge-positions: {
+    inside: null;
+    edge: 50;
+    outside: 100;
+}
+each( @badge-positions, {
+    @placement: @key;
+    @translate: @value;
+    @infix: if( @placement = "edge", "", "-@{placement}");
 
-.k-badge-overlay .k-badge {
-    margin: 0;
-    position: absolute;
-    top: @badge-overlay-y;
-    right: @badge-overlay-x;
-    z-index: 9999;
-    transform: translate(100%, -100%);
-
-    &:empty {
-        top: (@badge-padding + @badge-border-width);
-        right: (@badge-padding + @badge-border-width);
-    }
-
-    // RTL
-    .k-rtl &,
-    &[dir="rtl"],
-    [dir="rtl"] & {
-        right: auto;
-        left: @badge-overlay-x;
-        transform: translate(-100%, -100%);
-
-        &:empty {
-            left: (@badge-padding + @badge-border-width);
+    .k-badge@{infix} {
+        &-top-start {
+            position: absolute;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            & when not (@translate = null) {
+                transform: translate( -1% * @translate, -1% * @translate );
+            }
+        }
+        &-top-end {
+            position: absolute;
+            z-index: 9999;
+            top: 0;
+            right: 0;
+            & when not (@translate = null) {
+                transform: translate( 1% * @translate, -1% * @translate );
+            }
+        }
+        &-bottom-start {
+            position: absolute;
+            z-index: 9999;
+            bottom: 0;
+            left: 0;
+            & when not (@translate = null) {
+                transform: translate( -1% * @translate, 1% * @translate );
+            }
+        }
+        &-bottom-end {
+            position: absolute;
+            z-index: 9999;
+            bottom: 0;
+            right: 0;
+            & when not (@translate = null) {
+                transform: translate( 1% * @translate, 1% * @translate );
+            }
         }
     }
+
+    .k-rtl .k-badge@{infix},
+    [dir="rtl"] .k-badge@{infix} {
+        &-top-start {
+            left: auto;
+            right: 0;
+            & when not (@translate = null) {
+                transform: translate( 1% * @translate, -1% * @translate );
+            }
+        }
+        &-top-end {
+            right: auto;
+            left: 0;
+            & when not (@translate = null) {
+                transform: translate( -1% * @translate, -1% * @translate );
+            }
+        }
+        &-bottom-start {
+            left: auto;
+            right: 0;
+            & when not (@translate = null) {
+                transform: translate( 1% * @translate, 1% * @translate );
+            }
+        }
+        &-bottom-end {
+            right: auto;
+            left: 0;
+            & when not (@translate = null) {
+                transform: translate( -1% * @translate, 1% * @translate );
+            }
+        }
+    }
+});
+
+
+// Badge position
+.k-badge-container {
+    position: relative;
+    overflow: visible;
 }

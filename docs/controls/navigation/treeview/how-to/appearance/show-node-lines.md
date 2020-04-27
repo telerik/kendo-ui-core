@@ -39,13 +39,13 @@ The following example demonstrates how to show lines between the nodes of the Tr
       .k-treeview .k-top,
       .k-treeview .k-mid,
       .k-treeview .k-bot {
-        background-image: url('http://aspnet-skins.telerikstatic.com/mvc/2012.2.607/Default/treeview-nodes.png');
+        background-image: url('https://d35islomi5rx1v.cloudfront.net/mvc/2012.2.607/Default/treeview-nodes.png');
         background-repeat: no-repeat;
         margin-left: -16px;
         padding-left: 16px;
       }
 
-      .k-treeview .k-item { background-image: url('http://aspnet-skins.telerikstatic.com/mvc/2012.2.607/Default/treeview-line.png'); }
+      .k-treeview .k-item { background-image: url('https://d35islomi5rx1v.cloudfront.net/mvc/2012.2.607/Default/treeview-line.png'); }
       .k-treeview .k-last { background-image: none; }
 
 

@@ -5512,6 +5512,53 @@ The type of the view. The built-in views are: "day", "week", "workWeek", "month"
     });
     </script>
 
+### views.virtual `Boolean` *(default: false)*
+
+Enables the DOM virtualization for vertical grouping of the view - renders batches of DOM elements as you scroll. The views that support this option are: "day", "week", "workWeek", "month".
+
+#### Example
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      height: 400,
+      views: [
+        { type: "week", virtual: true }
+      ],
+      group: {
+        resources: ["Rooms"],
+        orientation: "vertical"
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview",
+          roomId: 1 // the event is held in "Small meeting room" whose value is 1
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Meeting",
+          roomId: 2 // the event is held in "Big meeting room" whose value is 2
+        }
+      ],
+      resources: [
+        {
+          field: "roomId",
+          name: "Rooms",
+          dataColorField: "key",
+          dataSource: [
+            { text: "Small meeting room", value: 1, key: "#aabbcc" },
+            { text: "Big meeting room", value: 2, key: "green" }
+          ]
+        }
+      ]
+    });
+    </script>
+
 ### views.workWeekStart `Number` *(default: 1)*
 
 The start of working week (index based).

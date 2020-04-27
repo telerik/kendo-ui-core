@@ -1,12 +1,13 @@
-(function(){
+(function() {
 
+    var test = Mocha.test;
     var Badge = kendo.ui.Badge;
     var span;
     var badge;
 
-    describe("kendo.ui.Badge api", function () {
+    describe('kendo.ui.Badge initialization', function () {
         beforeEach(function() {
-            span = $("<span />").appendTo(Mocha.fixture);
+            span = $('<span />').appendTo(Mocha.fixture);
         });
         afterEach(function() {
             badge.destroy();
@@ -14,110 +15,73 @@
             kendo.destroy(Mocha.fixture);
         });
 
-    it("k-badge class is set to the element of the widget", function() {
-        badge = new Badge(span, {
-            value: '99+'
+        test('k-badge class is set to the element of the widget', function() {
+            badge = new Badge(span);
+
+            assert.equal(badge.element.hasClass('k-badge'), true);
         });
 
-        assert.isOk(badge.element.is('.k-badge'));
-    });
+        test('default text is empty string', function () {
+            badge = new Badge(span);
 
-    it("default apperence is 'pill'", function() {
-        badge = new Badge(span, {
-            value: '99+'
+            assert.equal(badge.text(), '');
         });
 
-        assert.isOk(badge.element.is('.k-badge-pill'));
-    });
+        test('default shape is \'rounded\'', function() {
+            badge = new Badge(span);
 
-    it("if apperence is 'rectangle' k-badge-pill class should be removed", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            appearance: 'rectangle'
+            assert.equal(badge.element.hasClass('k-badge-rounded'), true);
         });
 
-        assert.isOk(badge.element.not('.k-badge-pill'));
-    });
+        test('default size is \'medium\'', function() {
+            badge = new Badge(span);
 
-    it("default type is 'primary'", function() {
-        badge = new Badge(span, {
-            value: '99+'
+            assert.equal(badge._size, 'medium');
         });
 
-        assert.isOk(badge.element.is('.k-badge-primary'));
-    });
+        test('default color is \'secondary\'', function() {
+            badge = new Badge(span);
 
-    it("if type is 'primary' the badge element should have a 'k-badge-primary'", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            type: 'primary'
+            assert.equal(badge.element.hasClass('k-badge-secondary'), true);
         });
 
-        assert.isOk(badge.element.is('.k-badge-primary'));
-    });
+        test('default badgeStyle is \'solid\'', function() {
+            badge = new Badge(span);
 
-    it("if type is 'info' the badge element should have a 'k-badge-info'", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            type: 'info'
+            assert.equal(badge.element.hasClass('k-badge-solid'), false);
         });
 
-        assert.isOk(badge.element.is('.k-badge-info'));
-    });
+        test('default visibility is visible', function() {
+            badge = new Badge(span);
 
-    it("if type is 'success' the badge element should have a 'k-badge-success'", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            type: 'success'
+            assert.equal(badge.element.is(':visible'), true);
+            assert.equal(badge.element.hasClass('.k-hidden'), false);
         });
 
-        assert.isOk(badge.element.is('.k-badge-success'));
-    });
+        test('default icon is undefined', function() {
+            badge = new Badge(span);
 
-    it("if type is 'warning ' the badge element should have a 'k-badge-warning'", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            type: 'warning'
+            assert.equal(badge.icon(), undefined);
         });
 
-        assert.isOk(badge.element.is('.k-badge-warning'));
-    });
+        test('default cutout border is false', function() {
+            badge = new Badge(span);
 
-    it("if type is 'error' the badge element should have a 'k-badge-error'", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            type: 'error'
+            assert.equal(badge._cutoutBorder, false);
         });
 
-        assert.isOk(badge.element.is('.k-badge-error'));
-    });
+        test('default position is inline', function() {
+            badge = new Badge(span);
 
-    it("if look is set to 'outline' the badge element should have 'k-badge-outline' class", function() {
-        badge = new Badge(span, {
-            value: '99+',
-            look:'outline'
+            assert.equal(badge._position, 'inline');
         });
 
-        assert.isOk(badge.element.is('.k-badge-outline'));
-    });
+        test('default placement is edge', function() {
+            badge = new Badge(span);
 
-    it("if a template is specified, its content should be rendered within the badge", function() {
-        badge = new Badge(span, {
-            value: 100,
-            template: '#=value - 1#'
+            assert.equal(badge._placement, 'edge');
         });
 
-        assert.isOk(badge.element.text() == '99');
     });
 
-    it("if visible is set to false, the badge should be initially hidden", function() {
-        badge = new Badge(span, {
-            value: 100,
-            visible: false
-        });
-
-        assert.isOk(badge.element.not(':visible'));
-    });
-
-    });
 }());
