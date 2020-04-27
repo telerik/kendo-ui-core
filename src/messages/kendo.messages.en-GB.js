@@ -392,7 +392,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "save": "Save changes",
     "select": "Select",
     "update": "Update",
-    "search": "Search...",
+    "search": "Search..."
   },
   "editable": {
     "cancelDelete": "Cancel",
