@@ -19,7 +19,7 @@ var __meta__ = { // jshint ignore:line
         OPEN = "open",
         CLOSE = "close",
         INIT = "init",
-        WRAP = '<div class="km-modalview-wrapper" />';
+        WRAP = '<div class="km-modalview-wrapper"></div>';
 
     var ModalView = ui.View.extend({
         init: function(element, options) {

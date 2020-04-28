@@ -359,7 +359,7 @@
         });
 
         it("k-rtl class is rendered when in k-rtl container", function() {
-            var element = $("<div class='k-rtl'><div /></div>").appendTo(
+            var element = $("<div class='k-rtl'><div></div></div>").appendTo(
                     Mocha.fixture
                 ),
                 dialog = createWindow({}, element.find("> div"));

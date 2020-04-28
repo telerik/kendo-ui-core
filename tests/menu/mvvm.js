@@ -42,7 +42,7 @@ it("binding containing binding attributes", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.find("span:first").html()), "foo");
+    assert.equal(dom.find("span:first").html().trim(), "foo");
 });
 
 it("updating viewModel updates the content", function() {
@@ -54,7 +54,7 @@ it("updating viewModel updates the content", function() {
 
     observable.set("text", "bar");
 
-    assert.equal($.trim(dom.find("span:first").html()), "bar");
+    assert.equal(dom.find("span:first").html().trim(), "bar");
 });
 
 it("event is raised if attached as option", function() {

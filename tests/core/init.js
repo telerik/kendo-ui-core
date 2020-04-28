@@ -95,7 +95,7 @@
         });
 
         it("initializes multiple widgets based on their role", function() {
-            dom = $('<div data-role="testwidget"/><div data-role="testwidget"/>');
+            dom = $('<div data-role="testwidget"></div><div data-role="testwidget"></div>');
 
             kendo.init(dom);
 
@@ -111,7 +111,7 @@
         });
 
         it("initializes widgets in dom tree", function() {
-            dom = $('<div><div data-role="testwidget"/></div>');
+            dom = $('<div><div data-role="testwidget"></div></div>');
 
             kendo.init(dom);
 

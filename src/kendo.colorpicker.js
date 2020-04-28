@@ -876,7 +876,7 @@ var __meta__ = { // jshint ignore:line
                 delete options.cancel;
 
                 var id = kendo.guid();
-                var selector = that._selector = new selectorType($('<div id="' + id +'"/>').appendTo(document.body), options);
+                var selector = that._selector = new selectorType($('<div id="' + id +'"></div>').appendTo(document.body), options);
 
                 that.wrapper.attr("aria-owns", id);
 

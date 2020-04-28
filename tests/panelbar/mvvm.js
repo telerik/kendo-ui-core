@@ -45,7 +45,7 @@
 
         kendo.bind(dom, observable);
 
-        assert.equal($.trim(dom.find("span:first").html()), "foo");
+        assert.equal(dom.find("span:first").html().trim(), "foo");
     });
 
     it("updating viewModel updates the content", function() {
@@ -57,7 +57,7 @@
 
         observable.set("text", "bar");
 
-        assert.equal($.trim(dom.find("span:first").html()), "bar");
+        assert.equal(dom.find("span:first").html().trim(), "bar");
     });
 
     it("source binding is skipped if set to target element", function() {

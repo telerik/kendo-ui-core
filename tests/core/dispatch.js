@@ -52,7 +52,7 @@
         });
 
         it("invokes the method for all widgets matching the selector", function() {
-            dom = $("<div/><div/>").kendoTestWidget();
+            dom = $("<div></div><div></div>").kendoTestWidget();
 
             var testwidget1 = dom.eq(0).data("kendoTestWidget");
             stub(testwidget1, "value");
@@ -77,7 +77,7 @@
         });
 
         it("calls the method of the first widget only if it returns a result", function() {
-            dom = $("<div/><div/>").kendoTestWidget();
+            dom = $("<div></div><div></div>").kendoTestWidget();
 
             var testwidget = dom.eq(1).data("kendoTestWidget");
             stub(testwidget, "value");

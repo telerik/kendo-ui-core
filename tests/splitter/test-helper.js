@@ -1,7 +1,7 @@
 (function() {
     window.SplitterHelpers = {
         generateHtml: function(paneCount) {
-            return "<div style='width: 207px;height:100px'>" +  new Array((paneCount + 1) || 3).join("<div/>") + "</div>";
+            return "<div style='width: 207px;height:100px'>" +  new Array((paneCount + 1) || 3).join("<div></div>") + "</div>";
         },
 
         create: function(options, paneCount, initCss) {

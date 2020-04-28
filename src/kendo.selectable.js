@@ -29,7 +29,7 @@ var __meta__ = { // jshint ignore:line
 
         (function($) {
             (function() {
-                $('<div class="parent"><span /></div>')
+                $('<div class="parent"><span></span></div>')
                 .on("click", ">*", function() {
                     supportEventDelegation = true;
                 })

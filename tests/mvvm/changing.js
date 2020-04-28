@@ -155,7 +155,7 @@
                 }
             });
 
-            var dom = $('<div><span data-bind="text:foo"/><button data-bind="click:bar"></button></div>');
+            var dom = $('<div><span data-bind="text:foo"></span><button data-bind="click:bar"></button></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -190,7 +190,7 @@
             });
 
 
-            var dom = $('<div><select data-bind="source:current.items"/></div>');
+            var dom = $('<div><select data-bind="source:current.items"></select></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -226,7 +226,7 @@
                 bar: "bar"
             });
 
-            var dom = $('<div><select data-bind="source:foo,value:bar"/><span data-bind="text:bar"/></div>');
+            var dom = $('<div><select data-bind="source:foo,value:bar"></select><span data-bind="text:bar"></span></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -256,7 +256,7 @@
                 bar: "bar"
             });
 
-            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"/></div>');
+            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"></span></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -270,7 +270,7 @@
                 bar: "bar"
             });
 
-            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"/></div>');
+            var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"></span></div>');
 
             kendo.bind(dom, viewModel);
 
@@ -1048,7 +1048,7 @@
 
             viewModel.set("foo", "bar");
 
-            assert.equal($.trim(dom.text()), "bar");
+            assert.equal(dom.text().trim(), "bar");
         });
 
         it("change event is fired once", function() {
@@ -1076,7 +1076,7 @@
 
             viewModel.set("bar", "boo");
 
-            assert.equal($.trim(dom.text()), "boo");
+            assert.equal(dom.text().trim(), "boo");
         });
 
         it("does not attach more than one change handler when monitoring for dependency changes", function() {
@@ -1180,7 +1180,7 @@
 
             viewModel.foo.set("bar", "baz");
 
-            assert.equal($.trim(dom.text()), "baz");
+            assert.equal(dom.text().trim(), "baz");
         });
 
         it("tracking changes when single set is used", function() {
@@ -1196,7 +1196,7 @@
 
             viewModel.set("foo.bar", "boo");
 
-            assert.equal($.trim(dom.text()), "boo");
+            assert.equal(dom.text().trim(), "boo");
         });
 
         it("tracking changes when direct access and set are used (multiple get template)", function() {
@@ -1212,7 +1212,7 @@
 
             viewModel.foo.set("bar", "baz");
 
-            assert.equal($.trim(dom.text()), "baz");
+            assert.equal(dom.text().trim(), "baz");
         });
 
         it("tracking changes when single set is used (multiple get template)", function() {
@@ -1228,7 +1228,7 @@
 
             viewModel.set("foo.bar", "boo");
 
-            assert.equal($.trim(dom.text()), "boo");
+            assert.equal(dom.text().trim(), "boo");
         });
 
         it("tracking changes in dependent fields", function() {
@@ -1246,7 +1246,7 @@
 
             viewModel.set("foo", "boo");
 
-            assert.equal($.trim(dom.text()), "boobar");
+            assert.equal(dom.text().trim(), "boobar");
         });
 
 
@@ -1379,7 +1379,7 @@
         });
 
         it("tracks changes of element bound to parent field within a child template", function() {
-            var dom = $('<div><span data-bind="text:root"/><ul data-bind="source: items" data-template="ul-input-template"></ul></div>');
+            var dom = $('<div><span data-bind="text:root"></span><ul data-bind="source: items" data-template="ul-input-template"></ul></div>');
 
             var viewModel = kendo.observable({
                 root: "foo",
@@ -1394,7 +1394,7 @@
         });
 
         it("tracks changes of element bound to parent nested field within a child template", function() {
-            var dom = $('<div><span data-bind="text:root.child"/><ul data-bind="source: items" data-template="ul-input-child-template"></ul></div>');
+            var dom = $('<div><span data-bind="text:root.child"></span><ul data-bind="source: items" data-template="ul-input-child-template"></ul></div>');
 
             var viewModel = kendo.observable({
                 root: { child: "foo" },

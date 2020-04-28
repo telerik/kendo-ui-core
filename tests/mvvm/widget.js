@@ -54,25 +54,25 @@
         })
 
         it("widgets are initialized", function() {
-            dom = $('<div><span id="foo" data-role="testwidget" /></div>');
+            dom = $('<div><span id="foo" data-role="testwidget"></span></div>');
             kendo.bind(dom, {}, kendo.ui);
             assert.isOk(dom.find("#foo").data("kendoTestWidget"));
         });
 
         it("full path widgets are initialized", function() {
-            dom = $('<div><span id="foo" data-role="kendo.ui.TestWidget" /></div>');
+            dom = $('<div><span id="foo" data-role="kendo.ui.TestWidget"></span></div>');
             kendo.bind(dom, {}, kendo.ui);
             assert.isOk(dom.find("#foo").data("kendoTestWidget"));
         });
 
         it("widgets are initialized from multiple namespaces", function() {
-            dom = $('<div><span id="foo" data-role="testwidget" /><span id="bar" data-role="testwidget2" /></div>');
+            dom = $('<div><span id="foo" data-role="testwidget"></span><span id="bar" data-role="testwidget2"></span></div>');
             kendo.bind(dom, {}, kendo.ui, kendo.mobile.ui);
             assert.isOk(dom.find("#bar").data("kendoMobileTestWidget2"));
         });
 
         it("widget specific binding is allowed", function() {
-            dom = $('<div><span id="foo" data-role="kendo.ui.TestWidget" data-bind="test: test" /></div>');
+            dom = $('<div><span id="foo" data-role="kendo.ui.TestWidget" data-bind="test: test"></span></div>');
             kendo.bind(dom, {}, kendo.ui);
 
             assert.isOk(dom.find("#foo").data("kendoTestWidget"));

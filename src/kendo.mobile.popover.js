@@ -17,9 +17,9 @@ var __meta__ = { // jshint ignore:line
         HIDE = "hide",
         OPEN = "open",
         CLOSE = "close",
-        WRAPPER = '<div class="km-popup-wrapper" />',
-        ARROW = '<div class="km-popup-arrow" />',
-        OVERLAY = '<div class="km-popup-overlay" />',
+        WRAPPER = '<div class="km-popup-wrapper"></div>',
+        ARROW = '<div class="km-popup-arrow"></div>',
+        OVERLAY = '<div class="km-popup-overlay"></div>',
         DIRECTION_CLASSES = "km-up km-down km-left km-right",
         Widget = ui.Widget,
         DIRECTIONS = {

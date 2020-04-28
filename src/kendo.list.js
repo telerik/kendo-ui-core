@@ -604,7 +604,7 @@ var __meta__ = { // jshint ignore:line
             if ((!options.enforceMinLength && !word.length) || word.length >= options.minLength) {
                 this._state = "filter";
                 if (this.listView){
-                    this.listView._emptySearch = !$.trim(word).length;
+                    this.listView._emptySearch = !kendo.trim(word).length;
                 }
 
                 if (!this._isFilterEnabled()) {

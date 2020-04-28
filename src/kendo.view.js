@@ -198,7 +198,7 @@ var __meta__ = { // jshint ignore:line
 
         _createElement: function() {
             var that = this,
-                wrapper = "<" + that.tagName + " />",
+                wrapper = "<" + that.tagName + ">",
                 element,
                 content;
 

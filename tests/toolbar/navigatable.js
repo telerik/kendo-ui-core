@@ -57,7 +57,7 @@
                 }
             });
 
-            container.focus();
+            container[0].focus();
             container.press(keys.ENTER, null, null, container.find(".k-split-button"));
             assert.equal(flag, 1)
         });
@@ -69,7 +69,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "foo");
         });
@@ -87,7 +87,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "foo");
         });
@@ -108,7 +108,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "foo_wrapper", "focuses split button wrapper");
         });
@@ -120,7 +120,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "foo");
         });
@@ -133,7 +133,7 @@
                 ]
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "bar");
         });
@@ -147,7 +147,7 @@
                 resizable: false
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "bar");
         });
@@ -161,7 +161,7 @@
                 resizable: false
             }).data("kendoToolBar");
 
-            toolbar.element.focus();
+            toolbar.element[0].focus();
 
             assert.equal(document.activeElement.id, "toolbar");
         });
@@ -175,7 +175,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $("#bar").focus();
+            $("#bar")[0].focus();
             $("#bar").press(keys.TAB);
 
             assert.isOk($(document.activeElement).is(".k-overflow-anchor"));
@@ -196,7 +196,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $(".k-overflow-anchor").focus();
+            $(".k-overflow-anchor")[0].focus();
             $(".k-overflow-anchor").press(keys.TAB, true);
 
             assert.isOk(document.activeElement.id, "btn2");
@@ -217,7 +217,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $(".k-overflow-anchor").focus();
+            $(".k-overflow-anchor")[0].focus();
             $(".k-overflow-anchor").press(keys.DOWN, false, true);
 
             assert.isOk(toolbar.popup.element.is(":visible"));
@@ -243,7 +243,7 @@
                 done();
             });
 
-            $(".k-overflow-anchor").focus();
+            $(".k-overflow-anchor")[0].focus();
             $(".k-overflow-anchor").press(keys.DOWN, false, true);
         });
 
@@ -255,7 +255,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $("#foo.k-button").focus();
+            $("#foo.k-button")[0].focus();
             $("#foo.k-button").press(keys.TAB, true);
 
             assert.equal(document.activeElement.id, "input2");
@@ -273,7 +273,7 @@
             }).data("kendoToolBar");
             toolbar._getPrevFocusable = getPrevFocusable;
 
-            $("#bar.k-button").focus();
+            $("#bar.k-button")[0].focus();
             $("#bar.k-button").press(keys.TAB, true);
 
             assert.isOk(!getPrevFocusable.calls);
@@ -288,7 +288,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $("#foo").focus();
+            $("#foo")[0].focus();
             $("#foo").press(keys.END);
 
             assert.isOk($(document.activeElement).is("#baz"));
@@ -303,7 +303,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $("#baz").focus();
+            $("#baz")[0].focus();
             $("#baz").press(keys.HOME);
 
             assert.isOk($(document.activeElement).is("#foo"));
@@ -318,7 +318,7 @@
                 ]
             }).data("kendoToolBar");
 
-            $("#field1").focus();
+            $("#field1")[0].focus();
             $("#field1").press(keys.HOME);
 
             assert.isOk($(document.activeElement).is("#field1"));
@@ -350,7 +350,7 @@
             var popupElement = $("#splitButton_optionlist");
             var option = $("#option1")
 
-            splitButton.focus();
+            splitButton[0].focus();
             // open popup
             splitButton.press(keys.DOWN, false, true);
             // close popup
@@ -378,7 +378,7 @@
 
             var splitButton = $("#foo_wrapper");
 
-            splitButton.focus();
+            splitButton[0].focus();
             splitButton.press(keys.DOWN, false, true);
         });
 
@@ -390,7 +390,7 @@
                 ]
             }).data("kendoToolBar");
 
-            container.focus();
+            container[0].focus();
 
             assert.isOk(toolbar.overflowAnchor.is(":focus"));
         });
@@ -405,7 +405,7 @@
             }).data("kendoToolBar");
             toolbar._getPrevFocusable = getPrevFocusable;
 
-            toolbar.overflowAnchor.focus();
+            toolbar.overflowAnchor[0].focus();
             toolbar.overflowAnchor.press(keys.TAB, true)
 
             assert.isOk(getPrevFocusable.calls);

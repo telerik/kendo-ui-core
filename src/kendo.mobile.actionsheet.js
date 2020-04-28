@@ -22,7 +22,7 @@ var __meta__ = { // jshint ignore:line
         COMMAND = "command",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
-        WRAP = '<div class="km-actionsheet-wrapper" />',
+        WRAP = '<div class="km-actionsheet-wrapper"></div>',
         cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>');
 
     var ActionSheet = Widget.extend({

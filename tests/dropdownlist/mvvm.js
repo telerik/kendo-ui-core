@@ -381,7 +381,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase()), "<strong>foo</strong>");
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase().trim(), "<strong>foo</strong>");
         });
 
         it("binding template containing binding attributes", function() {
@@ -391,7 +391,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase()), '<strong data-bind="text:text">foo</strong>');
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase().trim(), '<strong data-bind="text:text">foo</strong>');
         });
 
         it("updating an item from the data source updates the corresponding dropdownlist item", function() {
@@ -403,7 +403,7 @@
 
             observable.items[0].set("text", "baz");
 
-            assert.equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).text()), "baz");
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).text().trim(), "baz");
         });
 
         it("destroying binding targets when the datasource changes", function() {
@@ -540,8 +540,8 @@
 
             assert.strictEqual(dropdownlist.dataSource, dataSource);
 
-            assert.equal($.trim(dropdownlist.ul.children().eq(0).text()), "foo");
-            assert.equal($.trim(dropdownlist.ul.children().eq(1).text()), "bar");
+            assert.equal(dropdownlist.ul.children().eq(0).text().trim(), "foo");
+            assert.equal(dropdownlist.ul.children().eq(1).text().trim(), "bar");
         });
 
         it("ViewModel is updated when source is DataSource", function() {

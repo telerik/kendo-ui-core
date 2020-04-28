@@ -3230,7 +3230,7 @@ function pad(number, digits, end) {
                     containerScrollLeft = container.scrollLeft();
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
-                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'/><div class='k-loading-color'/></div>", cssClass, kendo.ui.progress.messages.loading))
+                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>", cssClass, kendo.ui.progress.messages.loading))
                         .width(options.width).height(options.height)
                         .css("top", options.top)
                         .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
@@ -4502,6 +4502,14 @@ function pad(number, digits, end) {
                var nextElement = focussable[index + 1] || focussable[0];
                nextElement.focus();
             }
+        }
+    };
+
+    kendo.trim = function(value) {
+        if(!!value) {
+            return value.toString().trim();
+        } else {
+            return "";
         }
     };
 

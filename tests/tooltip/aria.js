@@ -75,7 +75,7 @@
         });
 
         it("element id for the described by attribute is used if set", function() {
-            container.append($('<span id="first"/><span id="second"/>'));
+            container.append($('<span id="first"></span><span id="second"></span>'));
 
             var tooltip = new Tooltip(container, {
                 filter: "span"

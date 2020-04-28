@@ -579,7 +579,7 @@
         });
 
         it("binding child elements of template to data item", function() {
-            dom = $('<div><ol data-template="ol-template" data-bind="source:foo"/></div>');
+            dom = $('<div><ol data-template="ol-template" data-bind="source:foo"></ol></div>');
 
             var viewModel = kendo.observable({
                 foo: [{ name: "foo" }]
@@ -605,7 +605,7 @@
 
             kendo.bind(dom, { foo: "foo" });
 
-            assert.equal($.trim(dom.text()), "Hello, foofoo");
+            assert.equal(dom.text().trim(), "Hello, foofoo");
         });
 
         it("template binding without source does not break observable hierarchy", function() {
@@ -1143,7 +1143,7 @@
             };
 
             kendo.bind(dom, viewModel);
-            assert.equal($.trim(dom.text()), "foo")
+            assert.equal(dom.text().trim(), "foo")
         });
 
         it("binding to function", function() {
@@ -1157,7 +1157,7 @@
             };
 
             kendo.bind(dom, viewModel);
-            assert.equal($.trim(dom.text()), "bar")
+            assert.equal(dom.text().trim(), "bar")
         });
 
         it("binding target is assign to the element", function() {
@@ -1317,23 +1317,23 @@
 
             kendo.bind(dom, viewModel);
 
-            assert.equal($.trim(dom.text()), "bar");
+            assert.equal(dom.text().trim(), "bar");
         });
 
         /*
-        
+
         Unsuported!!!
-        
+
         it("binding template to field of the parent object when the source is array of primitive types", function(){
             var viewModel = kendo.observable({
                 foo: "foo",
                 items: [1]
             });
-        
+
             dom = $('<ul data-bind="source: items" data-template="parent-field-template" />');
-        
+
             kendo.bind(dom, viewModel);
-        
+
             assert.equal(dom.find("li").text(), viewModel.foo);
         });
         */

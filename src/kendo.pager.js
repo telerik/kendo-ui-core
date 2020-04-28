@@ -183,7 +183,7 @@ var __meta__ = { // jshint ignore:line
                         return "<option>" + size + "</option>";
                     });
 
-                    $('<span class="k-pager-sizes k-label"><select/>' + options.messages.itemsPerPage + "</span>")
+                    $('<span class="k-pager-sizes k-label"><select></select>' + options.messages.itemsPerPage + "</span>")
                         .appendTo(that.element)
                         .find("select").html(pageItems.join("")).end()
                         .appendTo(that.element);

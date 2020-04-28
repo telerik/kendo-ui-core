@@ -279,7 +279,7 @@ var __meta__ = { // jshint ignore:line
         if (!item.children(LINK_SELECTOR).length) {
             item
                 .contents()      // exclude groups, real links, templates and empty text nodes
-                .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !kendo.trim(this.nodeValue))); })
                 .wrapAll("<span class='" + LINK + "'/>");
         }
 

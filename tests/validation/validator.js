@@ -301,7 +301,7 @@
         });
 
         it("existing error message element in multiple containers is reused", function() {
-            container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"/></div>')),
+            container.append($('<div></div><div><input type="text" name="foo" required validationMessage="invalid" /><span>some text</span><span class="k-invalid-msg" data-kendo-for="foo"></span></div>')),
             validator = setup(container.find("div"), { errorTemplate: "<span>${message}</span>" });
             validator.validate();
 
@@ -321,7 +321,7 @@
         });
 
         it("correct error message element container for the validated element is used", function() {
-            container.append($('<div><span class="k-invalid-msg k-hidden" data-kendo-for="foo"/><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg k-hidden" data-kendo-for="someotherfield"/></div>')),
+            container.append($('<div><span class="k-invalid-msg k-hidden" data-kendo-for="foo"></span><input type="text" name="foo" required validationMessage="invalid" /><span class="k-invalid-msg k-hidden" data-kendo-for="someotherfield"></span></div>')),
             validator = setup(container);
             validator.validate();
 
@@ -1118,7 +1118,7 @@
         });
 
         it("validate skips button elements", function() {
-            container.append("<button type=button /><input type=submit /><input type=submit />");
+            container.append("<button type=button></button><input type=submit /><input type=submit />");
             var calledCount = 0,
                 validator = setup(container, {
                     rules: {

@@ -106,9 +106,9 @@
         });
 
         it("inner splitters get resized after initialization of outer splitters", function() {
-            var outerSplitter = $("<div id='outerSplitter' class='k-splitter' style='height:107px'><div /><div /></div>")
+            var outerSplitter = $("<div id='outerSplitter' class='k-splitter' style='height:107px'><div></div><div></div></div>")
                 .appendTo(Mocha.fixture),
-                innerSplitter = $("<div id='innerSplitter' style='height:100%'><div /><div /></div>")
+                innerSplitter = $("<div id='innerSplitter' style='height:100%'><div></div><div></div></div>")
                     .appendTo(outerSplitter.find("div:first"));
 
             innerSplitter.kendoSplitter({
@@ -134,7 +134,7 @@
         });
 
         //    it("initialization filters out script blocks", function() {
-        //        var dom = $("<div><div /><div /><script><\/script></div>");
+        //        var dom = $("<div><div></div><div></div><script><\/script></div>");
 
         //        dom.kendoSplitter();
 

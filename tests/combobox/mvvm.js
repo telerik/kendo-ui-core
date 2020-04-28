@@ -317,7 +317,7 @@ it("binding template", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.data("kendoComboBox").ul.children().eq(0).html()), "<strong>foo</strong>");
+    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).html().trim(), "<strong>foo</strong>");
 });
 
 it("binding template containing binding attributes", function() {
@@ -327,7 +327,7 @@ it("binding template containing binding attributes", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.data("kendoComboBox").ul.children().eq(0).html()), '<strong data-bind="text:text">foo</strong>');
+    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).html().trim(), '<strong data-bind="text:text">foo</strong>');
 });
 
 it("updating an item from the data source updates the corresponding combobox item", function() {
@@ -339,7 +339,7 @@ it("updating an item from the data source updates the corresponding combobox ite
 
     observable.items[0].set("text", "baz");
 
-    assert.equal($.trim(dom.data("kendoComboBox").ul.children().eq(0).text()), "baz");
+    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).text().trim(), "baz");
 });
 
 it("destroying binding targets when the datasource changes", function() {
@@ -360,7 +360,7 @@ it("binding header template", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.data("kendoComboBox").list.children(":first")[0].outerHTML), "<strong>Title</strong>");
+    assert.equal(dom.data("kendoComboBox").list.children(":first")[0].outerHTML.trim(), "<strong>Title</strong>");
 });
 
 it("removing items from the model updates the UI", function() {
@@ -616,8 +616,8 @@ it("assign to DataSource as ViewModel field", function() {
 
     assert.strictEqual(combobox.dataSource, dataSource);
 
-    assert.equal($.trim(combobox.ul.children().eq(0).text()), "foo");
-    assert.equal($.trim(combobox.ul.children().eq(1).text()), "bar");
+    assert.equal(combobox.ul.children().eq(0).text().trim(), "foo");
+    assert.equal(combobox.ul.children().eq(1).text().trim(), "bar");
 });
 
 it("Enter custom value after re bind", function() {

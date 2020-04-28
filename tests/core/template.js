@@ -128,27 +128,27 @@
 
         it("template defined in a script block", function() {
             var t = template.compile($("#encoded").text());
-            assert.equal($.trim(t({ foo: 1 })), "<strong>1</strong>");
+            assert.equal(t({ foo: 1 }).trim(), "<strong>1</strong>");
         });
 
         it("template preserves whitespace as is", function() {
             var t = template.compile("<p>\n\t<strong>${foo}</strong>\n</p>");
-            assert.equal($.trim(t({ foo: 1 })), "<p>\n\t<strong>1</strong>\n</p>");
+            assert.equal(t({ foo: 1 }).trim(), "<p>\n\t<strong>1</strong>\n</p>");
         });
 
         it("template with raw expression defined in a script block", function() {
             var t = template.compile($("#raw").text());
-            assert.equal($.trim(t({ foo: 1 })), "<strong>1</strong>");
+            assert.equal(t({ foo: 1 }).trim(), "<strong>1</strong>");
         });
 
         it("can execute code in template defined inside a script block", function() {
             var t = template.compile($("#code").text());
-            assert.equal($.trim(t({})), "foo");
+            assert.equal(t({}).trim(), "foo");
         });
 
         it("template executes multiline expression", function() {
             var t = template.compile($("#multiline-expression").text());
-            assert.equal($.trim(t({})), "ab");
+            assert.equal(t({}).trim(), "ab");
         });
 
         it("template throws error on invalid template", function() {

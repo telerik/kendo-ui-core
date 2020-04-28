@@ -172,7 +172,7 @@
 
     describe("Layout", function () {
         it("renders view in a given region", function() {
-            var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+            var layout = new kendo.Layout("<div><span id='container'></span></div>" ),
                 view = new kendo.View('<span id="baz">Baz</span>');
 
             layout.render();
@@ -183,7 +183,7 @@
         });
 
         it("triggers init when the view is available in the DOM", function() {
-            var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+            var layout = new kendo.Layout("<div><span id='container'></span></div>" ),
                 foo = new kendo.View('<span id="foo">Foo</span>', { init: function() { assert.equal(layout.element.find("#foo").length, 1); } });
 
             layout.render();
@@ -192,7 +192,7 @@
         });
 
         it("triggers view show when replacing views", function() {
-            var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+            var layout = new kendo.Layout("<div><span id='container'></span></div>" ),
                 foo = new kendo.View('<span>Foo</span>', { show: function() { assert.isOk(true); } });
 
             layout.render();
@@ -201,7 +201,7 @@
         });
 
         it("triggers view hide when replacing views", function() {
-            var layout = new kendo.Layout("<div><span id='container' /></div>" ),
+            var layout = new kendo.Layout("<div><span id='container'></span></div>" ),
                 foo = new kendo.View('<span>Foo</span>', { hide: function() { assert.isOk(true); } }),
                 bar = new kendo.View('<span>Foo</span>');
 

@@ -516,6 +516,8 @@ navigation:
         title: "StockChart"
      "*tabstrip":
         title: "TabStrip"
+     "*textbox":
+        title: "TextBox"
      "*timeline":
         title: "TimeLine"
      "*timepicker":
@@ -759,6 +761,11 @@ defaults:
         path: "html-helpers/editors/switch"
     values:
         title_prefix: "Core Switch Component"
+-
+    scope:
+        path: "html-helpers/editors/textbox"
+    values:
+        title_prefix: "Core TextBox Component"
 -
     scope:
         path: "html-helpers/editors/timepicker"
@@ -1109,6 +1116,11 @@ defaults:
         path: "tag-helpers/editors/switch"
     values:
         title_prefix: "Core Switch Component"
+-
+    scope:
+        path: "tag-helpers/editors/textbox"
+    values:
+        title_prefix: "Core TextBox Component"
 -
     scope:
         path: "tag-helpers/editors/timepicker"

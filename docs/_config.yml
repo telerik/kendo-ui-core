@@ -616,6 +616,8 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*textbox":
+        title: "TextBox"
     "*timeline":
         title: "TimeLine"
     "*timepicker":
@@ -1833,6 +1835,12 @@ defaults:
         path: "controls/navigation/tabstrip"
     values:
         component: "tabstrip"
+
+-
+    scope:
+        path: "controls/editors/textbox"
+    values:
+        component: "textbox"
 
 -
     scope:

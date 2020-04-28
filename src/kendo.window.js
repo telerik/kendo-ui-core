@@ -1745,7 +1745,7 @@
         });
 
         templates = {
-            wrapper: template("<div class='k-widget k-window' />"),
+            wrapper: template("<div class='k-widget k-window'></div>"),
             action: template(
                 "<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action' aria-label='#= name #'>" +
                 "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
@@ -1754,10 +1754,10 @@
             titlebar: template(
                 "<div class='k-window-titlebar'>" +
                 "<span class='k-window-title'>#= title #</span>" +
-                "<div class='k-window-actions' />" +
+                "<div class='k-window-actions'></div>" +
                 "</div>"
             ),
-            overlay: "<div class='k-overlay' />",
+            overlay: "<div class='k-overlay'></div>",
             contentFrame: template(
                 "<iframe frameborder='0' title='#= title #' class='" + KCONTENTFRAME + "' " +
                 "src='#= content.url #'>" +

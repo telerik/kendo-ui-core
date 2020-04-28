@@ -22,7 +22,7 @@ var __meta__ = { // jshint ignore:line
         keys = kendo.keys,
         map = $.map,
         each = $.each,
-        trim = $.trim,
+        trim = kendo.trim,
         extend = $.extend,
         isFunction = kendo.isFunction,
         template = kendo.template,
@@ -506,7 +506,7 @@ var __meta__ = { // jshint ignore:line
             if (value !== undefined) {
                 if (value != that.value()) {
                    that.tabGroup.children().each(function() {
-                        if ($.trim($(this).text()) == value) {
+                        if (kendo.trim($(this).text()) == value) {
                             that.select(this);
                         }
                    });

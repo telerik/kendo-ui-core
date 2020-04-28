@@ -1383,14 +1383,14 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!item.children(LINKSELECTOR)[0]) {
-                wrapElement = "<span class='" + LINK + "'/>";
+                wrapElement = "<span class='" + LINK + "'></span>";
                 if (contentUrls && contentUrls[index] && item[0].parentNode == root) {
-                    wrapElement = '<a class="k-link k-header" href="' + contentUrls[index] + '"/>';
+                    wrapElement = '<a class="k-link k-header" href="' + contentUrls[index] + '"></a>';
                 }
 
                 item
                     .contents()      // exclude groups, real links, templates and empty text nodes
-                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !$.trim(this.nodeValue))); })
+                    .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !kendo.trim(this.nodeValue.trim))); })
                     .wrapAll(wrapElement);
             }
 

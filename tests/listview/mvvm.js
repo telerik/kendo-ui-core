@@ -75,7 +75,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoListView").content.children().first().html()), "<strong>foo</strong>");
+            assert.equal(dom.data("kendoListView").content.children().first().html().trim(), "<strong>foo</strong>");
         });
 
         it("binding template containing binding attributes", function() {
@@ -85,7 +85,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoListView").content.children().first().html()), '<strong data-bind="text:text">foo</strong>');
+            assert.equal(dom.data("kendoListView").content.children().first().html().trim(), '<strong data-bind="text:text">foo</strong>');
         });
 
         it("binding altTemplate", function() {
@@ -95,7 +95,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal($.trim(dom.data("kendoListView").content.children().eq(1).html()), "<span>bar</span>");
+            assert.equal(dom.data("kendoListView").content.children().eq(1).html().trim(), "<span>bar</span>");
         });
 
         it("binding editTemplate", function() {
@@ -107,7 +107,7 @@
 
             dom.data("kendoListView").edit(dom.find(".k-listview-content").children().eq(0));
 
-            assert.equal($.trim(dom.data("kendoListView").content.find(":input:first").val()), "foo");
+            assert.equal(dom.data("kendoListView").content.find(":input:first").val().trim(), "foo");
         });
 
         it("updating an item from the data source updates the corresponding listview item", function() {
@@ -119,7 +119,7 @@
 
             observable.items[0].set("text", "baz");
 
-            assert.equal($.trim(dom.data("kendoListView").content.children().first().text()), "baz");
+            assert.equal(dom.data("kendoListView").content.children().first().text().trim(), "baz");
         });
 
         it("destroys binding targets when datasource changes", function() {
@@ -260,8 +260,8 @@
             dom.find("div strong").click();
 
             assert.equal(observable.calls("rootHandler"), 1);
-            assert.equal($.trim(dom.find("div span").html()), "foo");
-            assert.equal($.trim(dom.find("div strong").html()), "bar");
+            assert.equal(dom.find("div span").html().trim(), "foo");
+            assert.equal(dom.find("div strong").html().trim(), "bar");
         });
 
         it("setOptions changes template", function() {
@@ -275,7 +275,7 @@
             listView.setOptions({ template: "<div>template</div>" });
             listView.refresh();
 
-            var firstItemHtml = $.trim(listView.content.children().first().html());
+            var firstItemHtml = listView.content.children().first().html().trim();
             assert.equal(firstItemHtml, "template");
         });
 

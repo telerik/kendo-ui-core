@@ -5186,7 +5186,7 @@ var __meta__ = { // jshint ignore:line
 
             if (spriteCssClassField) {
                 className = elements(children, ".k-sprite").prop("className");
-                record[spriteCssClassField] = className && $.trim(className.replace("k-sprite", ""));
+                record[spriteCssClassField] = className && kendo.trim(className.replace("k-sprite", ""));
             }
 
             if (list.length) {

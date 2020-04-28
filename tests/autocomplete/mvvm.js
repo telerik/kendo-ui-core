@@ -183,7 +183,7 @@ it("binding template", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.data("kendoAutoComplete").ul.children().eq(0).html()), "<strong>foo</strong>");
+    assert.equal(dom.data("kendoAutoComplete").ul.children().eq(0).html().trim(), "<strong>foo</strong>");
 });
 
 it("binding template containing binding attributes", function() {
@@ -193,7 +193,7 @@ it("binding template containing binding attributes", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal($.trim(dom.data("kendoAutoComplete").ul.children().eq(0).html()), '<strong data-bind="text:text">foo</strong>');
+    assert.equal(dom.data("kendoAutoComplete").ul.children().eq(0).html().trim(), '<strong data-bind="text:text">foo</strong>');
 });
 
 it("updating an item from the data source updates the corresponding autocomplete item", function() {
@@ -205,7 +205,7 @@ it("updating an item from the data source updates the corresponding autocomplete
 
     observable.items[0].set("text", "baz");
 
-    assert.equal($.trim(dom.data("kendoAutoComplete").ul.children().eq(0).text()), "baz");
+    assert.equal(dom.data("kendoAutoComplete").ul.children().eq(0).text().trim(), "baz");
 });
 
 it("destroying binding targets when the datasource changes", function() {

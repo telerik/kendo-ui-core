@@ -8478,6 +8478,54 @@ declare namespace kendo.ui {
     }
 
 
+    class TextBox extends kendo.ui.Widget {
+
+        static fn: TextBox;
+
+        options: TextBoxOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): TextBox;
+
+        constructor(element: Element, options?: TextBoxOptions);
+
+
+        destroy(): void;
+        enable(enable: boolean): void;
+        focus(): void;
+        readonly(readonly: boolean): void;
+        value(): string;
+        value(value: string): void;
+
+    }
+
+    interface TextBoxLabel {
+        content?: string|Function;
+        floating?: boolean;
+    }
+
+    interface TextBoxOptions {
+        name?: string;
+        enable?: boolean;
+        label?: string | Function | TextBoxLabel;
+        placeholder?: string;
+        readonly?: boolean;
+        value?: string;
+        change?(e: TextBoxChangeEvent): void;
+    }
+    interface TextBoxEvent {
+        sender: TextBox;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TextBoxChangeEvent extends TextBoxEvent {
+    }
+
+
     class TimePicker extends kendo.ui.Widget {
 
         static fn: TimePicker;
@@ -22638,6 +22686,10 @@ interface JQuery {
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;
     data(key: "kendoTabStrip"): kendo.ui.TabStrip;
+
+    kendoTextBox(): JQuery;
+    kendoTextBox(options: kendo.ui.TextBoxOptions): JQuery;
+    data(key: "kendoTextBox"): kendo.ui.TextBox;
 
     kendoTimePicker(): JQuery;
     kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery;

@@ -521,7 +521,7 @@
         });
 
         it("does not bind select element of listbox widget", function() {
-            var editable = div.append($('<div><select name="baz" data-role="listbox"/></div>')).kendoEditable({
+            var editable = div.append($('<div><select name="baz" data-role="listbox"></select></div>')).kendoEditable({
                 model: defaultModel,
                 clearContainer: false
             });

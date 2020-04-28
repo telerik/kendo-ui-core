@@ -343,7 +343,7 @@ var __meta__ = { // jshint ignore:line
         },
         _updateSplitBar: function(splitbar, previousPane, nextPane) {
             var catIconIf = function(iconType, condition) {
-                   return condition ? "<div class='k-icon " + iconType + "' />" : "";
+                   return condition ? "<div class='k-icon " + iconType + "'></div>" : "";
                 },
                 orientation = this.orientation,
                 draggable = (previousPane.resizable !== false) && (nextPane.resizable !== false),
