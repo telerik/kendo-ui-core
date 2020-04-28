@@ -25,7 +25,7 @@
             kendo.destroy(Mocha.fixture);
 
             kendo.ns = "";
-            kendo.ui.validator = { rules: {}, messages: {} };
+            kendo.ui.validator = { rules: {}, messages: {}, allowSubmit: $.noop, validateOnInit: $.noop };
             container.remove();
         });
 
@@ -364,6 +364,16 @@
 
             assert.equal(container.find("span.k-invalid-msg").length, 2);
             assert.isOk(!container.find("span.k-invalid-msg").is(":visible"));
+        });
+
+        it("hideMessages disassociates the validation message", function() {
+            var input = $('<input type="text" required validationMessage="invalid" />'),
+            validator = setup(input, { errorTemplate: "<span>${message}</span>" });
+
+            validator.validate();
+            validator.hideMessages();
+
+            assert.equal(input.attr("aria-describedby"), "");
         });
 
         it("multiple calls to validation does not render multiple messages", function() {
@@ -832,13 +842,24 @@
             assert.isOk(input.filter("[aria-invalid]").length);
         });
 
-        it("aria-alert is added to the invalid input message", function() {
-            var input = $('<input type="text" required />'),
+        it("aria-describedby is added to the validated input", function() {
+            var input = $('<input type="text" name="username" required />'),
                 validator = setup(input);
 
             validator.validate();
 
-            assert.isOk(input.next().filter("[role=alert]").length);
+            assert.equal(input.attr("aria-describedby"), "username-error");
+        });
+
+        it("aria-describedby is removed after input becomes valid", function() {
+            var input = $('<input type="text" name="username" required />'),
+                validator = setup(input);
+
+            validator.validate();
+            input.val("foo");
+            validator.validate();
+
+            assert.isOk(!input.attr("aria-describedby"));
         });
 
         it("aria-invalid is removed after input become valid", function() {
@@ -1732,5 +1753,75 @@
             assert.equal(options.messages.custom, "Please enter valid value for my custom rule");
             assert.equal(options.rules.customRule1.length, 1);
         });
+
+        it("reset hides validation messages and summary", function() {
+            var input = $('<input type="text" required validationMessage="invalid" />'),
+            validator = setup(input, { errorTemplate: "<span>${message}</span>", validationSummary: true });
+
+            validator.validate();
+            validator.reset();
+
+            assert.isOk(!input.next("span").is(":visible"));
+            assert.isOk(!$(".k-validation-summary").is(":visible"));
+            assert.equal(validator.errors().length, 0);
+        });
+
+        it("reset clears registered errors", function() {
+            var input = $('<input type="text" required validationMessage="invalid" />'),
+            validator = setup(input, { errorTemplate: "<span>${message}</span>", validationSummary: true });
+
+            validator.validate();
+            validator.reset();
+
+            assert.equal(validator.errors().length, 0);
+        });
+
+        it("validate returns false with server errors", function() {
+            kendo.ui.validator.allowSubmit = function() {
+                return true;
+
+            };
+            container.append("<input type='text' data-val-server='Server error' name='test' />");
+
+            var validator = setup(container, { rules: { server: function() { return false; } } });
+
+            assert.isOk(!validator.validate());
+        });
+
+        it("form submit is possible if server errors are shown", function() {
+            kendo.ui.validator.allowSubmit = function() {
+                return true;
+            };
+            container.append($("<form><input type='text' data-val-server='Server error' name='test' /></form>"));
+
+            var validator = setup(container.find("form"), { rules: { server: function() { return false; } } });
+            var called = false;
+
+            container.find("form").bind("submit", function(e) {
+                called = true;
+                e.preventDefault();
+            }).trigger("submit");
+
+            assert.isOk(called);
+        });
+
+        it("validation is triggered initially if there are server errors", function() {
+            kendo.ui.validator.validateOnInit = function() {
+                return true;
+            };
+
+            container.append($("<form><input type='text' data-val-server='Server error' name='test' /></form>"));
+
+            var called = false;
+            var validator = setup(container.find("form"), {
+                rules: { server: function() { return false; } },
+                validate: function(ev) {
+                    called = true;
+                }
+            });
+
+            assert.isOk(called);
+        });
+
     });
 }());

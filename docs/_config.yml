@@ -558,6 +558,8 @@ navigation:
         isNew: true
     "*filter":
         title: "Filter"
+    "*form":
+        title: "Form"
     "*gantt":
         title: "Gantt"
     "*pivotgrid":
@@ -1455,6 +1457,11 @@ api:
       - "animation"
       - "content"
       - "position"
+-
+    file: "api/javascript/ui/form"
+    group_parents:
+      - "validatable"
+      - "items"
 
 product: "Kendo UI for jQuery"
 platform: kendo-ui
@@ -1728,6 +1735,12 @@ defaults:
         path: "controls/editors/multicolumncombobox"
     values:
         component: "multicolumn-combobox"
+
+-
+    scope:
+        path: "controls/layout/form"
+    values:
+        component: "form"
 
 -
     scope:

@@ -4238,6 +4238,91 @@ declare namespace kendo.ui {
         value?: string;
     }
 
+    class Form extends kendo.ui.Widget {
+
+        static fn: Form;
+
+        options: FormOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Form;
+
+        constructor(element: Element, options?: FormOptions);
+
+        validate(): void;
+        clear(): void;
+        setOptions(options: any): void;
+        destroy(): void;
+    }
+
+    interface FormOptions {
+        name?: string;
+        orientation?: string | "horizontal" | "vertical";
+        buttonsTemplate?: string|Function;
+        items?: FormItem[];
+        formData?: FormData;
+        validatable?: FormValidatable;
+
+        change?(e: FormChangeEvent): void;
+        validate?(e: FormValidateEvent): void;
+        validateField?(e: FormValidateFieldEvent): void;
+        submit?(e: FormSubmitEvent): void;
+    }
+
+    interface FormData {
+        [key: string]: any;
+    }
+
+    interface FormItem {
+        field?: string;
+        type?: string;
+        name?: string;
+        id?: string;
+        title?: string;
+        editor?: string|Function;
+        editorOptions?: any;
+        label?: string;
+        validation?: any;
+        items?: FormItem[];
+    }
+
+    interface FormValidatable {
+        validateOnBlur: boolean;
+        validationSummary: boolean;
+        errorTemplate: string|Function;
+    }
+
+    interface FormEvent {
+        sender: Form;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface FormChangeEvent extends FormEvent {
+        field?: string;
+        value?: any;
+    }
+
+    interface FormValidateEvent extends FormEvent {
+        model?: kendo.data.Model;
+        valid?: boolean;
+        errors?: any[];
+    }
+
+    interface FormValidateFieldEvent extends FormEvent {
+        model?: kendo.data.Model;
+        valid?: boolean;
+        field?: string;
+        error?: string;
+        input?: Element;
+    }
+
+    interface FormSubmitEvent extends FormEvent {
+        model?: kendo.data.Model;
+    }
+
 
     class Gantt extends kendo.ui.Widget {
 

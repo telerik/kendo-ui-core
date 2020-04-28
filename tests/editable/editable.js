@@ -591,4 +591,267 @@
             assert.equal(kendo._activeElement(), div.find("input")[0]);
         });
     });
+
+    describe("kendo.ui.Editable kendo editors", function() {
+        beforeEach(function() {
+            div = $("<form />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("id attribute can be added from configuration", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo",  id: "foo" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.equal(editable.element.find("input").first().attr("id"), "foo");
+            assert.isOk(editable.element.find("#foo").length);
+        });
+
+        it("options are passed to editors through editorOptions", function() {
+            var editable = div.kendoEditable({
+                fields: {
+                    field: "foo",
+                    id: "foo",
+                    editor: "ComboBox",
+                    editorOptions: {
+                        autoBind: false,
+                        placeholder: "test"
+                    }
+                },
+                model: defaultModel
+            }).getKendoEditable();
+
+            var combo = editable.element.find("#foo").data("kendoComboBox");
+
+            assert.isOk(combo);
+            assert.equal(combo.options.autoBind, false);
+            assert.equal(combo.options.placeholder, "test");
+        });
+
+        it("ComboBox editor is displayed when type option is set as ComboBox", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "ComboBox" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoComboBox"));
+        });
+
+        it("AutoComplete editor is displayed when type option is set as AutoComplete", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "AutoComplete" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoAutoComplete"));
+        });
+
+        it("DateInput editor is displayed when type option is set as DateInput", function() {
+            defaultModel.set("foo", new Date());
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "DateInput" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoDateInput"));
+        });
+
+        it("ColorPicker editor is displayed when type option is set as ColorPicker", function() {
+            defaultModel.set("foo", "#fff");
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "ColorPicker" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(typeof editable.element.find("#foo").data("kendoColorPicker"));
+        });
+
+        it("DatePicker editor is displayed when type option is set as DatePicker", function() {
+            defaultModel.set("foo", new Date());
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "DatePicker" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoDatePicker"));
+        });
+
+        it("DateTimePicker editor is displayed when type option is set as DateTimePicker", function() {
+            defaultModel.set("foo", new Date());
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "DateTimePicker" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            defaultModel.foo = 1;
+
+            assert.isOk(editable.element.find("#foo").data("kendoDateTimePicker"));
+        });
+
+        it("TimePicker editor is displayed when type option is set as TimePicker", function() {
+            defaultModel.set("foo", new Date());
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "TimePicker" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            defaultModel.foo = 1;
+
+            assert.isOk(editable.element.find("#foo").data("kendoTimePicker"));
+        });
+
+        it("Editor editor is displayed when type option is set as Editor", function() {
+            defaultModel.set("foo", "foo");
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "Editor" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoEditor"));
+        });
+
+        it("DropDownTree editor is displayed when type option is set as DropDownTree", function() {
+            defaultModel.set("foo", 1);
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "DropDownTree" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoDropDownTree"));
+        });
+
+        it("MaskedTextBox editor is displayed when type option is set as MaskedTextBox", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "MaskedTextBox" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoMaskedTextBox"));
+        });
+
+        it("MultiColumnComboBox editor is displayed when type option is set as MultiColumnComboBox", function() {
+            defaultModel.set("foo", 1);
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "MultiColumnComboBox" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoMultiColumnComboBox"));
+        });
+
+        it("MultiSelect editor is displayed when type option is set as MultiSelect", function() {
+            defaultModel.set("foo", []);
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "MultiSelect", editorOptions: {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [
+                        { text: "Item1", value: "1" },
+                        { text: "Item2", value: "2" }
+                    ]
+                }},
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoMultiSelect"));
+        });
+
+        it("NumericTextBox editor is displayed when type option is set as NumericTextBox", function() {
+            defaultModel.set("foo", 1);
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "NumericTextBox" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoNumericTextBox"));
+        });
+
+        it("Rating editor is displayed when type option is set as Rating", function() {
+            defaultModel.set("foo", 1);
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "Rating" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoRating"));
+        });
+
+        it("Slider editor is displayed when type option is set as Slider", function() {
+            defaultModel.set("foo", 1);
+
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "Slider" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoSlider"));
+        });
+
+        it("Switch editor is displayed when type option is set as Switch", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo",  editor: "Switch" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").data("kendoSwitch"));
+        });
+
+        it("custom attributes can be added to editors", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo",  attributes: { labelId: "test" }},
+                model:  new (kendo.data.Model.define({
+                    fields: {
+                        foo: {
+                            field: "foo",
+                            attributes: { labelId: "test" }
+                        }}
+                    }
+                ))()
+            }).getKendoEditable();
+
+            assert.equal(editable.element.find("input").first().attr("labelId"), "test");
+        });
+    });
+    describe("kendo.ui.Editable validator", function() {
+        beforeEach(function() {
+            div = $("<form />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("validateOnblur can be passed as an option", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo",  id: "foo" },
+                model: defaultModel,
+                validateOnBlur: false
+            }).getKendoEditable();
+
+            assert.equal(editable.validatable.options.validateOnBlur, false);
+        });
+
+        it("validationSummary can be passed as an option", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo",  id: "foo" },
+                model: defaultModel,
+                validationSummary: true
+            }).getKendoEditable();
+
+            assert.equal(editable.validatable.options.validationSummary, true);
+        });
+    });
 }());

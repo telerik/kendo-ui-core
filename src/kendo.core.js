@@ -4513,6 +4513,46 @@ function pad(number, digits, end) {
         }
     };
 
+    kendo.getWidgetFocusableElement = function(element) {
+        var nextFocusable = element.closest(":kendoFocusable"),
+            widgetInstance = kendo.widgetInstance(element),
+            target;
+
+        if (nextFocusable.length) {
+            target = nextFocusable;
+        } else if (widgetInstance) {
+            target = widgetInstance.wrapper.find(":kendoFocusable").first();
+        } else {
+            target = element;
+        }
+
+        return target;
+    };
+
+    kendo.addAttribute =  function(element, attribute, value) {
+        var current = element.attr(attribute) || "";
+
+        if (current.indexOf(value) < 0) {
+            element.attr(attribute, (current + " " + value).trim());
+        }
+    };
+
+    kendo.removeAttribute = function(element, attribute, value) {
+        var current = element.attr(attribute) || "";
+
+        element.attr(attribute, current.replace(value, "").trim());
+    };
+
+    kendo.toggleAttribute = function(element, attribute, value) {
+        var current = element.attr(attribute) || "";
+
+        if (current.indexOf(value) < 0) {
+            kendo.addAttribute(element, attribute, value);
+        } else {
+            kendo.removeAttribute(element, attribute, value);
+        }
+    };
+
     kendo.matchesMedia = function(mediaQuery) {
         var media = kendo._bootstrapToMedia(mediaQuery) || mediaQuery;
         return support.matchMedia && window.matchMedia(media).matches;

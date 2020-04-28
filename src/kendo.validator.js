@@ -21,6 +21,8 @@ var __meta__ = { // jshint ignore:line
         VALIDINPUT = "k-valid",
         VALIDATIONSUMMARY = "k-validation-summary",
         MESSAGEBOX = "k-messagebox k-messagebox-error",
+        ARIAINVALID = "aria-invalid",
+        ARIADESCRIBEDBY = "aria-describedby",
         emailRegExp = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i,
         urlRegExp = /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
         INPUTSELECTOR = ":input:not(:button,[type=submit],[type=reset],[disabled],[readonly])",
@@ -57,7 +59,7 @@ var __meta__ = { // jshint ignore:line
         };
 
     if (!kendo.ui.validator) {
-        kendo.ui.validator = { rules: {}, messages: {} };
+        kendo.ui.validator = { rules: {}, messages: {}, allowSubmit: $.noop, validateOnInit: $.noop };
     }
 
     function resolveRules(element) {
@@ -143,6 +145,10 @@ var __meta__ = { // jshint ignore:line
             that._errors = {};
             that._attachEvents();
             that._isValidated = false;
+
+            if (that._validateOnInit()) {
+                that.validate();
+            }
         },
 
         events: [ VALIDATE, CHANGE, VALIDATE_INPUT ],
@@ -225,6 +231,14 @@ var __meta__ = { // jshint ignore:line
             validationSummary: false
         },
 
+        _allowSubmit: function() {
+            return kendo.ui.validator.allowSubmit(this.element, this.errors());
+        },
+
+        _validateOnInit: function() {
+            return kendo.ui.validator.validateOnInit(this.element);
+        },
+
         destroy: function() {
             Widget.fn.destroy.call(this);
 
@@ -244,7 +258,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _submit: function(e) {
-            if (!this.validate()) {
+            if (!this.validate() && !this._allowSubmit()) {
                 e.stopPropagation();
                 e.stopImmediatePropagation();
                 e.preventDefault();
@@ -353,10 +367,10 @@ var __meta__ = { // jshint ignore:line
 
                 })).addClass("k-hidden"),
                 messageText = !valid ? that._extractMessage(input, result.key) : "",
-                messageLabel = !valid ? parseHtml(template({ message: decode(messageText) })) : "",
-                wasValid = !input.attr("aria-invalid");
+                messageLabel = !valid ? parseHtml(template({ message: decode(messageText), field: fieldName })) : "",
+                wasValid = !input.attr(ARIAINVALID);
 
-            input.removeAttr("aria-invalid");
+            input.removeAttr(ARIAINVALID);
 
             if (wasValid !== valid) {
                 if (this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName })) {
@@ -397,7 +411,7 @@ var __meta__ = { // jshint ignore:line
 
                 messageLabel.removeClass("k-hidden");
 
-                input.attr("aria-invalid", true);
+                input.attr(ARIAINVALID, true);
             } else {
                 delete that._errors[fieldName];
             }
@@ -414,8 +428,14 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (wasValid !== valid && this.options.validationSummary && this.options.validateOnBlur) {
-                this.showValidationSummary();
+            if (wasValid !== valid) {
+                var errorId = messageLabel ? messageLabel.attr("id") : lbl.attr("id");
+
+                that._associateMessageContainer(input, errorId);
+
+                if (this.options.validationSummary && this.options.validateOnBlur) {
+                    this.showValidationSummary();
+                }
             }
 
             return valid;
@@ -426,11 +446,27 @@ var __meta__ = { // jshint ignore:line
                 className = "." + INVALIDMSG,
                 element = that.element;
 
-                if (!element.is(INPUTSELECTOR)) {
-                    element.find(className).addClass("k-hidden");
-                } else {
-                    element.next(className).addClass("k-hidden");
-                }
+            that._disassociateMessageContainers();
+
+            if (!element.is(INPUTSELECTOR)) {
+                element.find(className).addClass("k-hidden");
+            } else {
+                element.next(className).addClass("k-hidden");
+            }
+        },
+
+        reset: function() {
+            var that = this,
+                inputs = that.element.find("." + INVALIDINPUT);
+
+            that._errors = [];
+
+            that.hideMessages();
+
+            that.hideValidationSummary();
+
+            inputs.removeAttr(ARIAINVALID);
+            inputs.removeClass(INVALIDINPUT);
         },
 
         _findMessageContainer: function(fieldName) {
@@ -456,11 +492,13 @@ var __meta__ = { // jshint ignore:line
             container.addClass(INVALIDMSG)
                 .attr(kendo.attr("for"), fieldName || "");
 
+            if (!container.attr("id")) {
+                container.attr("id", fieldName + "-error");
+            }
+
             for (name in locators) {
                 locators[name].decorate(container, fieldName);
             }
-
-            container.attr("role", "alert");
         },
 
         _extractMessage: function(input, ruleKey) {
@@ -530,6 +568,34 @@ var __meta__ = { // jshint ignore:line
             return sorted;
         },
 
+        _associateMessageContainer: function(input, errorId) {
+            var nextFocusable = kendo.getWidgetFocusableElement(input);
+
+            if (!nextFocusable || !errorId) {
+                return;
+            }
+
+            kendo.toggleAttribute(nextFocusable, ARIADESCRIBEDBY, errorId);
+        },
+
+        _disassociateMessageContainers: function() {
+            var that = this,
+                inputs = that.element.find("." + INVALIDINPUT).addBack(),
+                input, errorId;
+
+            for (var i = 0; i < inputs.length; i += 1) {
+                input = $(inputs[i]);
+
+                if (input.is("input")) {
+                    errorId = that._findMessageContainer(input.attr(NAME))
+                        .add(input.next("." + INVALIDMSG))
+                        .attr("id");
+
+                    that._associateMessageContainer(input, errorId);
+                }
+            }
+        },
+
         _errorsByName: function() {
             var that = this,
                 inputNames = that._getInputNames(),
@@ -578,21 +644,16 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 link = $(e.target),
                 target = that.element.find("[name='" + link.data("field") +  "']"),
-                nextFocusable, kendoInstance;
+                nextFocusable;
 
             if (!target.length) {
                 return;
             }
 
-            nextFocusable = target.closest(":kendoFocusable");
-            kendoInstance = kendo.widgetInstance(target);
+            nextFocusable = kendo.getWidgetFocusableElement(target);
 
-            if (nextFocusable.length) {
+            if (nextFocusable) {
                 nextFocusable.focus();
-            } else if (kendoInstance) {
-                kendoInstance.focus();
-            } else {
-                target.focus();
             }
         },
 

@@ -368,6 +368,32 @@ Input element to be validated.
 
 `Boolean` `true` if all validation rules passed successfully.
 
+### reset
+
+Clears the registered errors and hides the validation messages and validation summary.
+
+#### Example - set sortable feature of the Grid to true
+
+    <div id="myform">
+        <input name="username" required /> <br />
+        <input name="location" required /> <br />
+
+        <button>Validate</button>
+    </div>
+
+    <script>
+        // attach a validator to the container and get a reference
+        var validator = $("#myform").kendoValidator({
+          validationSummary: true
+        }).data("kendoValidator");
+
+        //trigger validation
+        validator.validate();
+
+        //reset
+        validator.reset();
+    </script>
+
 ### setOptions
 
 Sets the options of the Validator. Use this method if you want to enable/disable a particular option dynamically.
@@ -380,7 +406,7 @@ When `setOptions` is called, the Validator widget will be destroyed and recreate
 
 The configuration options to be set.
 
-#### Example - set sortable feature of the Grid to true
+#### Example - set validateOnBlur option of the Validator to true
 
     <div id="myform">
         <input name="username" required /> <br />

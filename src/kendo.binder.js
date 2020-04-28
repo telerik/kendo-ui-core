@@ -1932,7 +1932,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         var children = element.children;
-        if (deep && children) {
+        if (deep && children && !element.getAttribute("data-" + kendo.ns + "stop")) {
             // https://github.com/telerik/kendo/issues/1240 for the weirdness.
             for (idx = 0; idx < children.length; idx++) {
                 childrenCopy[idx] = children[idx];
