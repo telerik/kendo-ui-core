@@ -708,28 +708,6 @@
             assert.isOk(editable.element.find("#foo").data("kendoTimePicker"));
         });
 
-        it("Editor editor is displayed when type option is set as Editor", function() {
-            defaultModel.set("foo", "foo");
-
-            var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "Editor" },
-                model: defaultModel
-            }).getKendoEditable();
-
-            assert.isOk(editable.element.find("#foo").data("kendoEditor"));
-        });
-
-        it("DropDownTree editor is displayed when type option is set as DropDownTree", function() {
-            defaultModel.set("foo", 1);
-
-            var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "DropDownTree" },
-                model: defaultModel
-            }).getKendoEditable();
-
-            assert.isOk(editable.element.find("#foo").data("kendoDropDownTree"));
-        });
-
         it("MaskedTextBox editor is displayed when type option is set as MaskedTextBox", function() {
             var editable = div.kendoEditable({
                 fields: { field: "foo", id: "foo",  editor: "MaskedTextBox" },
@@ -737,17 +715,6 @@
             }).getKendoEditable();
 
             assert.isOk(editable.element.find("#foo").data("kendoMaskedTextBox"));
-        });
-
-        it("MultiColumnComboBox editor is displayed when type option is set as MultiColumnComboBox", function() {
-            defaultModel.set("foo", 1);
-
-            var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "MultiColumnComboBox" },
-                model: defaultModel
-            }).getKendoEditable();
-
-            assert.isOk(editable.element.find("#foo").data("kendoMultiColumnComboBox"));
         });
 
         it("MultiSelect editor is displayed when type option is set as MultiSelect", function() {
@@ -779,17 +746,6 @@
             assert.isOk(editable.element.find("#foo").data("kendoNumericTextBox"));
         });
 
-        it("Rating editor is displayed when type option is set as Rating", function() {
-            defaultModel.set("foo", 1);
-
-            var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "Rating" },
-                model: defaultModel
-            }).getKendoEditable();
-
-            assert.isOk(editable.element.find("#foo").data("kendoRating"));
-        });
-
         it("Slider editor is displayed when type option is set as Slider", function() {
             defaultModel.set("foo", 1);
 
@@ -799,15 +755,6 @@
             }).getKendoEditable();
 
             assert.isOk(editable.element.find("#foo").data("kendoSlider"));
-        });
-
-        it("Switch editor is displayed when type option is set as Switch", function() {
-            var editable = div.kendoEditable({
-                fields: { field: "foo", id: "foo",  editor: "Switch" },
-                model: defaultModel
-            }).getKendoEditable();
-
-            assert.isOk(editable.element.find("#foo").data("kendoSwitch"));
         });
 
         it("custom attributes can be added to editors", function() {

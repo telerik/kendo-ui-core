@@ -660,6 +660,7 @@ var __meta__ = { // jshint ignore:line
         showValidationSummary: function() {
             var that = this,
                 summary = that.validationSummary,
+                errors = that._errorsByName(),
                 errorsList;
 
             if (!summary) {
@@ -667,12 +668,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             errorsList = parseHtml(that._summaryTemplate({
-                errors: that._errorsByName()
+                errors: errors
             }));
 
             summary.html(errorsList);
 
-            summary.removeClass("k-hidden");
+            summary.toggleClass("k-hidden", !errors.length);
         },
 
         hideValidationSummary: function() {
