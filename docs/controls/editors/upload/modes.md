@@ -8,7 +8,7 @@ position: 4
 
 # Modes of Operation
 
-The Upload supports a [synchronous](#synchronous-mode) and [asynchronous](#ssynchronous-mode) modes of operation.
+The Upload supports a [synchronous](#synchronous-mode) and [asynchronous](#asynchronous-mode) modes of operation.
 
 ## Synchronous Mode
 
