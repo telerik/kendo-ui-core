@@ -473,14 +473,14 @@
                     "pdf": "匯出 PDF",
                     "save": "保存",
                     "select": "選擇",
-                    "update": "更新"
+                    "update": "更新",
+                    "search": "搜索..."
                 },
                 "editable": {
                     "cancelDelete": "取消刪除",
                     "confirmation": "你確定要刪除這條資料嗎？",
                     "confirmDelete": "確定刪除"
                 },
-                "search": "搜索...",
                 "noRecords": "無相關資料",
                 "expandCollapseColumnHeader": "...",
                 "groupHeader": "按 Ctrl + 空格 進行分組",

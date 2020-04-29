@@ -383,7 +383,7 @@ var __meta__ = { // jshint ignore:line
                 var lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
-                messageLabel.addClass("k-hidden");
+
 
                 if (lblId) {
                     messageLabel.attr('id', lblId);
