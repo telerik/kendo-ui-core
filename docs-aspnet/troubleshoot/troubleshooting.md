@@ -88,12 +88,10 @@ If an older version of `Kendo.Mvc.dll` is referenced and it uses a version of `S
 1. [Upgrade ASP.NET MVC 5](https://www.nuget.org/packages/Microsoft.AspNet.Mvc/) which is used in the application to the newest version ASP.NET MVC 5 Nuget.
 1. Update the binding redirect for `System.Web.Mvc` in the `web.config` file.
 
-
-
-    <dependentAssembly>
-        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
-        <bindingRedirect oldVersion="0.0.0.0-<latest ASP.NET MVC 5 version>" newVersion="<latest ASP.NET MVC 5 version>" />
-    </dependentAssembly>
+        <dependentAssembly>
+            <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+            <bindingRedirect oldVersion="0.0.0.0-<latest ASP.NET MVC 5 version>" newVersion="<latest ASP.NET MVC 5 version>" />
+        </dependentAssembly>
 
 ### Live Method Is Unavailable, Undefined or Unsupported
 
