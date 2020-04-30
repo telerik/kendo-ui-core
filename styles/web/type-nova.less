@@ -639,6 +639,53 @@
 @filemanager-view-dropzone-hovered-border: false;
 
 
+// Stepper
+@stepper-bg: false;
+@stepper-text: false;
+@stepper-border: false;
+
+@stepper-indicator-bg: @component-bg;
+@stepper-indicator-text: @component-text;
+@stepper-indicator-border: @component-border;
+
+@stepper-indicator-hover-bg: darken( @stepper-indicator-bg, 10% );
+@stepper-indicator-hover-text: false;
+@stepper-indicator-hover-border: false;
+
+@stepper-indicator-disabled-bg: @stepper-indicator-bg;
+@stepper-indicator-disabled-text: mix(@stepper-indicator-text, #ffffff, 60%);
+@stepper-indicator-disabled-border: @stepper-indicator-border;
+
+@stepper-indicator-done-bg: @accent;
+@stepper-indicator-done-text: contrast( @stepper-indicator-done-bg );
+@stepper-indicator-done-border: @stepper-indicator-done-bg;
+
+@stepper-indicator-done-hover-bg: darken( @stepper-indicator-done-bg, 10% );
+@stepper-indicator-done-hover-text: false;
+@stepper-indicator-done-hover-border: false;
+
+@stepper-indicator-done-disabled-bg: mix( @stepper-indicator-done-bg, @component-bg, 60%);
+@stepper-indicator-done-disabled-text: contrast( @stepper-indicator-done-bg );
+@stepper-indicator-done-disabled-border: @stepper-indicator-done-disabled-bg;
+
+@stepper-indicator-current-bg: @stepper-indicator-done-bg;
+@stepper-indicator-current-text: @stepper-indicator-done-text;
+@stepper-indicator-current-border: @stepper-indicator-done-border;
+
+@stepper-indicator-current-hover-bg: @stepper-indicator-done-hover-bg;
+@stepper-indicator-current-hover-text: @stepper-indicator-done-hover-text;
+@stepper-indicator-current-hover-border: @stepper-indicator-done-hover-border;
+
+@stepper-indicator-current-disabled-bg: @stepper-indicator-done-disabled-bg;
+@stepper-indicator-current-disabled-text: @stepper-indicator-done-disabled-text;
+@stepper-indicator-current-disabled-border: @stepper-indicator-done-disabled-border;
+
+@stepper-label-text: @component-text;
+@stepper-label-success-text: darken(@success, 30%);
+@stepper-label-error-text: darken(@error, 30%);
+@stepper-label-disabled-text: mix(@component-text, #ffffff, 60%);
+
+
 // Kendo skin
 
 @theme-name: ~"nova";
@@ -669,6 +716,7 @@
 @import "Default/toolbar/_theme.less";
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
+@import "Default/stepper/_theme.less";
 
 
 // Main colors
@@ -886,7 +934,6 @@
 .k-pivot-toolbar .k-icon,
 .k-grid-content .k-button:active .k-icon,
 .k-splitbar.k-state-focused .k-icon,
-.k-scheduler-toolbar .k-icon,
 .k-gantt-toolbar .k-icon,
 .k-panelbar > .k-state-active > .k-header .k-state-active .k-icon {
     opacity: 1;
@@ -1561,61 +1608,8 @@ input.k-textbox:active {
     background-color: lighten(@info, 22%);
 }
 
-.k-scheduler-toolbar {
-    border-color: @secondary-widget-background-color;
-}
-
-.k-scheduler .k-header .k-button,
-.k-scheduler .k-header li,
-.k-scheduler .k-header .k-link {
-    color: @inversed-text-color;
-}
-
-.k-scheduler .k-header .k-button {
-    color: @inversed-text-color;
-    background-color: @accent-hover-background;
-    border-color: @accent-hover-background;
-}
-
-.k-scheduler .k-header li,
-.k-scheduler .k-header .k-link,
-.k-gantt>.k-header li {
+.k-gantt > .k-header li {
     border-color: @accent;
-}
-
-.k-scheduler .k-scheduler-toolbar ul li.k-state-hover,
-.k-scheduler .k-scheduler-toolbar .k-state-selected {
-    background-color: @selected-background;
-    border-color: @selected-background;
-}
-
-.k-scheduler .k-header .k-button:hover,
-.k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover,
-.k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-hover .k-link {
-    background-color: @accent-hover-background;
-    border-color: @accent-hover-background;
-}
-
-.k-scheduler .k-scheduler-toolbar .k-scheduler-views li.k-state-selected.k-state-hover,
-.k-scheduler-toolbar>.k-scheduler-views>li.k-state-selected {
-    border-bottom-color: @widget-background-color;
-}
-
-.k-scheduler-footer {
-    border-color: @widget-border-color;
-}
-
-.k-scheduler-footer > .k-header li {
-    border-color: transparent;
-}
-
-.k-scheduler-footer > .k-header {
-    background-color: @secondary-widget-background-color;
-    border-color: @widget-border-color;
-}
-
-.k-scheduler-footer > .k-header .k-link {
-    color: @link-text-color;
 }
 
 .k-event,
@@ -1932,59 +1926,15 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 }
 
 // Responsive styles
-@media only screen and (max-width: 1450px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        // Responsive Scheduler
-        .k-scheduler-toolbar .k-nav-current {
-            margin: 0;
-        }
-    }
-}
-
-@media only screen and (max-width: 1400px) {
-    .k-webkit,
-    .k-ff,
-    .k-ie11,
-    .k-edge,
-    .k-safari {
-        // Responsive Scheduler
-        .k-nav-current > .k-link .k-lg-date-format {
-            max-width: 100px;
-            display: inline-block;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            vertical-align: top;
-        }
-
-        .k-nav-current > .k-link .k-sm-date-format {
-            display: none;
-        }
-
-        .k-scheduler-toolbar .k-link {
-            padding: 0 .5em;
-        }
-    }
-}
-
 @media only screen and (max-width: 1024px) {
     .k-webkit,
     .k-ff,
     .k-ie,
     .k-edge,
     .k-safari {
-        .k-scheduler-toolbar > ul.k-scheduler-views {
-            top: 0;
-        }
 
         .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view,
-        .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view:hover,
-        .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view,
-        .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view:hover {
+        .k-gantt-toolbar > ul.k-gantt-views > li.k-current-view:hover {
             background-position: 50% 50%;
             color: @selected-text-color;
             background-color: @selected-background;
@@ -1992,77 +1942,33 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
             text-align: right;
         }
 
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > li {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li {
             border-radius: 0;
         }
 
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > .k-state-hover,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > .k-state-hover {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > .k-state-hover {
             background-color: @hover-background;
         }
 
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded >.k-state-selected,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded >.k-state-selected {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded >.k-state-selected {
             color: @selected-text-color;
             background-color: @selected-background;
         }
 
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded >.k-state-hover .k-link,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded >.k-state-hover .k-link {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded >.k-state-hover .k-link {
             background-color: transparent;
         }
 
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li.k-current-view .k-link,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded > li.k-current-view .k-link {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded > li.k-current-view .k-link {
             color: @inversed-text-color;
         }
 
-        .k-scheduler-toolbar > ul li:first-child, .k-scheduler-toolbar > ul li:first-child .k-link,
-        .k-scheduler-toolbar > ul.k-scheduler-views li,
-        .k-scheduler-toolbar > ul.k-scheduler-views li .k-link {
-            border-radius: 0;
-        }
-
-        .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view > .k-link,
-        .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view:hover > .k-link {
-            min-width: 20px;
-        }
-
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded .k-link,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded .k-link {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded .k-link {
             color: @link-text-color;
         }
 
-        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded .k-state-selected .k-link,
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded .k-state-selected .k-link {
+        .k-gantt-toolbar > ul.k-gantt-views.k-state-expanded .k-state-selected .k-link {
             color: @selected-text-color;
-        }
-
-        .k-scheduler-views > li.k-state-selected > .k-link:after {
-            display: block;
-            content: "";
-            position: absolute;
-            top: 50%;
-            margin-top: -0.5em;
-            right: 0.333em;
-            width: 1.333em;
-            height: 1.333em;
-            opacity: 0.45;
-        }
-
-        .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view .k-link:after {
-            background-position: -14px -30px;
-        }
-
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded {
-            border-width: 1px 1px 0 1px;
-            border-style: solid;
-        }
-
-        .k-scheduler-toolbar > ul.k-scheduler-views.k-state-expanded {
-            border-width: 1px;
-            background-image: none;
         }
 
         .k-gantt-toolbar > ul.k-gantt-views {

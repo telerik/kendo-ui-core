@@ -506,6 +506,43 @@
 @tooltip-callout-size: 6px;
 
 
+// Stepper
+@stepper-margin-x: 0;
+@stepper-margin-y: 0;
+@stepper-padding-x: 0;
+@stepper-padding-y: 0;
+@stepper-label-margin-x: 12px;
+@stepper-label-padding-x: 12px;
+@stepper-label-padding-y: 5px;
+@stepper-border-width: 0;
+
+@stepper-inline-content-padding-x: 20px;
+@stepper-inline-content-padding-y: 10px;
+
+@stepper-font-size: 14px;
+@stepper-line-height: (20 / 14);
+
+@stepper-indicator-width: 28px;
+@stepper-indicator-height: @stepper-indicator-width;
+@stepper-indicator-border-width: 1px;
+@stepper-indicator-border-radius: 50%;
+
+@stepper-indicator-focus-border-width: 1px;
+@stepper-indicator-focus-size: 2px;
+@stepper-indicator-focus-offset: 3px;
+@stepper-indicator-focus-calc-offset: calc( @stepper-indicator-focus-border-width + @stepper-indicator-focus-offset );
+
+@stepper-optional-label-opacity: .35;
+@stepper-disabled-opacity: .6;
+
+@stepper-progressbar-size: 2px;
+@stepper-connector-calc-offset: calc(( @stepper-indicator-height / 2) + @stepper-progressbar-size / 2 + @stepper-indicator-focus-offset);
+
+@stepper-content-transition-property: height;
+@stepper-content-transition-duration: 300ms;
+@stepper-content-transition-timing-function: cubic-bezier(.4, 0, .2, 1) 0ms;
+
+
 @import "common/all.less";
 
 .k-textbox > input,
@@ -1044,54 +1081,14 @@ table.k-editor {
 
 // Scheduler
 
-.k-scheduler-footer .k-icon.k-i-clock {
-    display: none;
-}
-
-.k-scheduler-toolbar > ul.k-scheduler-navigation > li
-{
-    border-width: 0;
-}
-
-.k-scheduler-toolbar .k-i-calendar
-{
-    display: none;
-}
-
-.k-scheduler-toolbar .k-nav-current > .k-link
-{
-    vertical-align: top;
-}
-
-.k-nav-current > .k-link span + span
-{
-    font-size: 1.2em;
-    font-weight: bold;
-    vertical-align: bottom;
-    max-width: 22em;
-}
-
-.k-scheduler-toolbar .k-scheduler-views > li > .k-link,
 .k-gantt-toolbar .k-gantt-views > li > .k-link
 {
     padding: .2em 0 0;
 }
 
-.k-scheduler-toolbar .k-scheduler-views > li,
 .k-gantt-toolbar .k-gantt-views > li
 {
     margin: 0 .928em;
-}
-
-.k-scheduler-toolbar .k-nav-today .k-link
-{
-    padding-left: 0;
-}
-
-.k-rtl .k-scheduler-toolbar .k-nav-today .k-link
-{
-    padding-right: 0;
-    padding-left: 1.1em;
 }
 
 .k-scheduler-header .k-slot-cell
@@ -1112,53 +1109,33 @@ table.k-editor {
     font-weight: bold;
 }
 
-.k-gantt .k-gantt-toolbar,
-.k-scheduler .k-scheduler-toolbar
-{
+.k-gantt .k-gantt-toolbar {
     line-height: 2em;
 }
 
-.k-gantt-toolbar > ul.k-gantt-views > li,
-.k-scheduler-toolbar > ul.k-scheduler-views > li {
+.k-gantt-toolbar > ul.k-gantt-views > li {
     border-width: 0 0 3px 0;
     border-color: transparent;
 }
 
-.k-gantt-toolbar > ul > li:first-child + li,
-.k-scheduler-toolbar > ul.k-scheduler-views > li:first-child + li {
+.k-gantt-toolbar > ul > li:first-child + li {
     border-left-width: 0;
 }
 
-.k-gantt-toolbar li .k-link,
-.k-scheduler-toolbar li .k-link {
+.k-gantt-toolbar li .k-link {
     vertical-align: middle;
     line-height: 36px;
     padding-top: 2px;
 }
 
-.k-gantt-toolbar,
-.k-scheduler-toolbar,
-.k-scheduler-footer {
+.k-gantt-toolbar {
     line-height: 44px;
     vertical-align: middle;
-}
-
-.k-scheduler-footer {
-    padding: 0;
-}
-
-.k-scheduler-toolbar {
-    padding: 0 1.286em;
 }
 
 .k-gantt-toolbar
 {
     padding: 0 1.286em 0 .528em;
-}
-
-.k-scheduler div.k-scheduler-footer ul li
-{
-    border-width: 0;
 }
 
 .k-gantt-actions

@@ -9,6 +9,8 @@ ticketid: 1131816
 res_type: kb
 ---
 
+> **Deprecated** The functionality is available from the API. Check [`column.menu`](/api/javascript/ui/grid/configuration/columns.menu) configuration of the Grid.
+
 ## Environment
 
 <table>
@@ -25,7 +27,7 @@ How can I remove specific columns from the columnMenu of the Grid?
 
 ## Solution
 
-Manipulate the columnMenu within the `columnMenuInit` event of the Grid&mdah;with this approach, the specific elements cannot be found based on the field name that is bound to the column, and removed from the DOM.
+Manipulate the columnMenu within the `columnMenuInit` event of the Grid. With this approach, the specific elements cannot be found based on the field name that is bound to the column, and removed from the DOM.
 
 ````dojo
         <div id="example">
@@ -36,15 +38,15 @@ Manipulate the columnMenu within the `columnMenuInit` event of the Grid&mdah;wit
                 var mylist = eventArg.container.find(".k-columns-item>ul li");
             		var listitems = mylist.children('li').get();
                 columns.forEach(function(col){
-                	mylist.find("[data-field="+ col +"]").closest("li").remove();  
+                	mylist.find("[data-field="+ col +"]").closest("li").addClass("hidden");  
                 })            		
               }
 
             	$(document).ready(function () {
             		$("#grid").kendoGrid({
             			columnMenuInit: function (e) {
-                    //here we pass an array with field names that we want removed from the columnMenu
-                    removeColumnsFromColumnMenu(["OrderID", "ShipCountry"], e);            				
+                    		//here we pass an array with field names that we want removed from the columnMenu
+                    		removeColumnsFromColumnMenu(["OrderID", "ShipCountry"], e);            				
             			},
             			dataSource: {
             				type: "odata",
@@ -83,12 +85,18 @@ Manipulate the columnMenu within the `columnMenuInit` event of the Grid&mdah;wit
             				title: "Ship Name"
             			}, {
             				field: "ShipAddress",
-                    title: "Ship Address",
+                    		title: "Ship Address",
             				filterable: false
             			}
             			]
             		});
             	});
             </script>
+
+			<style>
+        		.hidden {
+          			display: none !important;
+        		}
+      		</style>
         </div>
 ````

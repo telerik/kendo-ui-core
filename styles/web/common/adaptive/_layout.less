@@ -201,44 +201,31 @@
     }
 
     .k-scheduler-toolbar {
-        display: flex;
-        justify-content: space-between;
 
-        .k-scheduler-tools {
+        > * {
             margin: 0;
-
-            .k-button {
-                padding: 4px;
-
-                span {
-                    margin: 0;
-                }
-            }
         }
 
-        .k-i-calendar {
-            display: inline-block;
+        &::before {
+            display: none;
         }
 
         .k-scheduler-navigation {
             width: 100%;
             display: flex;
+            flex-flow: row nowrap;
             justify-content: space-between;
             margin: 0;
 
-            .k-nav-prev,
-            .k-nav-current,
-            .k-nav-next {
-                border: 0;
-                background: none;
+            .k-nav-current {
                 display: flex;
-                line-height: 1.5;
+                flex-flow: column nowrap;
                 align-items: center;
                 justify-content: space-evenly;
             }
-
+            .k-m-date-format {}
             .k-y-date-format {
-                font-size: 9px;
+                font-size: 12px;
             }
 
             .k-nav-current {
@@ -250,6 +237,14 @@
     .k-scheduler-footer {
         display: flex;
         justify-content: space-between;
+
+        > * {
+            margin: 0;
+        }
+
+        &::before {
+            display: none;
+        }
     }
 
     .k-scheduler-monthview {

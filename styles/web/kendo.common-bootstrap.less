@@ -508,6 +508,43 @@
 @tooltip-callout-size: 6px;
 
 
+// Stepper
+@stepper-margin-x: 0;
+@stepper-margin-y: 0;
+@stepper-padding-x: 0;
+@stepper-padding-y: 0;
+@stepper-label-margin-x: 12px;
+@stepper-label-padding-x: 12px;
+@stepper-label-padding-y: 5px;
+@stepper-border-width: 0;
+
+@stepper-inline-content-padding-x: 20px;
+@stepper-inline-content-padding-y: 10px;
+
+@stepper-font-size: 14px;
+@stepper-line-height: (20 / 14);
+
+@stepper-indicator-width: 28px;
+@stepper-indicator-height: @stepper-indicator-width;
+@stepper-indicator-border-width: 1px;
+@stepper-indicator-border-radius: 50%;
+
+@stepper-indicator-focus-border-width: 1px;
+@stepper-indicator-focus-size: 2px;
+@stepper-indicator-focus-offset: 3px;
+@stepper-indicator-focus-calc-offset: calc( @stepper-indicator-focus-border-width + @stepper-indicator-focus-offset );
+
+@stepper-optional-label-opacity: .35;
+@stepper-disabled-opacity: .6;
+
+@stepper-progressbar-size: 2px;
+@stepper-connector-calc-offset: calc(( @stepper-indicator-height / 2) + @stepper-progressbar-size / 2 + @stepper-indicator-focus-offset);
+
+@stepper-content-transition-property: height;
+@stepper-content-transition-duration: 300ms;
+@stepper-content-transition-timing-function: cubic-bezier(.4, 0, .2, 1) 0ms;
+
+
 @import "common/all.less";
 
 .k-widget.k-tabstrip
