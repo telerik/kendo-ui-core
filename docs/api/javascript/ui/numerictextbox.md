@@ -95,6 +95,81 @@ Compare with the [`decimals`](/api/javascript/ui/numerictextbox#configuration-de
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: "First name"
+        });
+    </script>
+
+The function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: function() {
+                return "First name";
+            }
+        });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: {
+                content: "First name"
+            }
+        });
+    </script>
+
+The function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: {
+                content: function() {
+                    return "First name";
+                }
+            }
+        });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/numerictextbox/methods/value) method **does not trigger** the `focusout` event of the input.
+This could affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
+#### Example - create a floating label
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: {
+                content: "First name",
+                floating: true
+            }
+        });
+    </script>
+
 ### max `Number`*(default: null)*
 
  Specifies the largest value the user can enter.
@@ -455,6 +530,10 @@ The step value to set.
 ### value
 
 Gets or sets the value of the NumericTextBox.
+
+> **Important:** This method **does not trigger** the `focusout` event of the input.
+This could affect the [floating label functionality](/api/javascript/ui/numerictextbox/configuration/label.floating).
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
 
 #### Parameters
 

@@ -20,6 +20,7 @@ var __meta__ = { // jshint ignore:line
         INVALIDINPUT = "k-invalid",
         VALIDINPUT = "k-valid",
         VALIDATIONSUMMARY = "k-validation-summary",
+        INVALIDLABEL = "k-text-error",
         MESSAGEBOX = "k-messagebox k-messagebox-error",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
@@ -421,10 +422,14 @@ var __meta__ = { // jshint ignore:line
 
             if (kendo.widgetInstance(input)) {
                 var inputWrap = kendo.widgetInstance(input)._inputWrapper;
+                var inputLabel = kendo.widgetInstance(input)._inputLabel;
 
                 if (inputWrap) {
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
                     inputWrap.toggleClass(VALIDINPUT, valid);
+                }
+                if (inputLabel) {
+                    inputLabel.toggleClass(INVALIDLABEL, !valid);
                 }
             }
 

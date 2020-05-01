@@ -4,6 +4,7 @@
         "./kendo.router",
         "./kendo.touch",
         "./kendo.view",
+        "./kendo.floatinglabel",
         "./kendo.fx",
         "./kendo.data.odata",
         "./kendo.data.xml",

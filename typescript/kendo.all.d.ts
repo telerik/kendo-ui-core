@@ -5517,10 +5517,16 @@ declare namespace kendo.ui {
 
     }
 
+    interface MaskedTextBoxLabel {
+        content?: string|Function;
+        floating?: boolean;
+    }
+
     interface MaskedTextBoxOptions {
         name?: string;
         clearPromptChar?: boolean;
         culture?: string;
+        label?: string | Function | MaskedTextBoxLabel;
         mask?: string;
         promptChar?: string;
         rules?: any;
@@ -6215,6 +6221,11 @@ declare namespace kendo.ui {
 
     }
 
+    interface NumericTextBoxLabel {
+        content?: string|Function;
+        floating?: boolean;
+    }
+
     interface NumericTextBoxOptions {
         name?: string;
         culture?: string;
@@ -6222,6 +6233,7 @@ declare namespace kendo.ui {
         downArrowText?: string;
         factor?: number;
         format?: string;
+        label?: string | Function | NumericTextBoxLabel;
         max?: number;
         min?: number;
         placeholder?: string;

@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
+    define([ "./kendo.core", "./kendo.userevents", "./kendo.floatinglabel" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "NumericTextBox",
     category: "web",
     description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
-    depends: [ "core", "userevents" ]
+    depends: [ "core", "userevents", "floatinglabel" ]
 };
 
 (function($, undefined) {
@@ -36,6 +36,7 @@ var __meta__ = { // jshint ignore:line
         FOCUS = "focus",
         POINT = ".",
         CLASS_ICON = "k-icon",
+        LABELCLASSES = "k-label k-input-label",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
         STATE_INVALID = "k-state-invalid",
@@ -43,6 +44,7 @@ var __meta__ = { // jshint ignore:line
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
         proxy = $.proxy,
+        isPlainObject = $.isPlainObject,
         extend = $.extend;
 
     var NumericTextBox = Widget.extend({
@@ -134,6 +136,8 @@ var __meta__ = { // jshint ignore:line
                  };
              });
 
+             that._label();
+
              kendo.notify(that);
          },
 
@@ -152,7 +156,8 @@ var __meta__ = { // jshint ignore:line
             placeholder: "",
             factor: 1,
             upArrowText: "Increase value",
-            downArrowText: "Decrease value"
+            downArrowText: "Decrease value",
+            label: null
         },
         events: [
             CHANGE,
@@ -176,6 +181,10 @@ var __meta__ = { // jshint ignore:line
                 .off("keyup" + ns)
                 .off("input" + ns)
                 .off("paste" + ns);
+
+            if (that._inputLabel) {
+                that._inputLabel.off(ns);
+            }
 
             if (!readonly && !disable) {
                 wrapper
@@ -205,6 +214,10 @@ var __meta__ = { // jshint ignore:line
                     .on("paste" + ns, proxy(that._paste, that))
                     .on("input" + ns, proxy(that._inputHandler, that));
 
+                if (that._inputLabel) {
+                    that._inputLabel.on("click" + ns, proxy(that.focus, that));
+                }
+
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
@@ -217,17 +230,29 @@ var __meta__ = { // jshint ignore:line
         },
 
         readonly: function(readonly) {
+            var that = this;
+
             this._editable({
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
+            var that = this;
+
             this._editable({
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
         },
 
         setOptions: function (options) {
@@ -252,6 +277,14 @@ var __meta__ = { // jshint ignore:line
 
         destroy: function() {
             var that = this;
+
+            if (that._inputLabel) {
+                that._inputLabel.off(ns);
+
+                if (that.floatingLabel) {
+                    that.floatingLabel.destroy();
+                }
+            }
 
             that.element
                 .add(that._text)
@@ -758,6 +791,44 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.attr("title", this.element.attr("title") || input.val());
+        },
+
+        _label: function() {
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var id = element.attr("id");
+            var floating;
+            var labelText;
+
+            if (options.label !== null) {
+                floating = isPlainObject(options.label) ? options.label.floating : false;
+                labelText = isPlainObject(options.label) ? options.label.content : options.label;
+
+                if (floating) {
+                    that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                }
+
+                if (kendo.isFunction(labelText)) {
+                    labelText = labelText.call(that);
+                }
+
+                if (!labelText) {
+                    labelText = "";
+                }
+
+                if (!id) {
+                    id = options.name + "_" + kendo.guid();
+                    element.attr("id", id);
+                }
+
+                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+
+                if ((that.element.attr("disabled") === undefined) && (that.element.attr("readonly") === undefined)) {
+                    that._inputLabel.on("click" + ns, proxy(that.focus, that));
+                }
+            }
         },
 
         _wrapper: function() {

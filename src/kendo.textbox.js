@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["./kendo.core"], f);
+    define(["./kendo.core", "./kendo.floatinglabel"], f);
 })(function () {
 
 var __meta__ = {// jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = {// jshint ignore:line
     name: "TextBox",
     category: "web",
     description: "The TextBox widget enables you to style and provide a floating label functionality to input elements",
-    depends: ["core"]
+    depends: ["core", "floatinglabel"]
 };
 
 (function ($, undefined) {
@@ -38,13 +38,13 @@ var __meta__ = {// jshint ignore:line
             that.options.enable = options.enable !== undefined ? options.enable : !(Boolean(that.element.attr("disabled")));
             that.options.placeholder = options.placeholder || that.element.attr("placeholder");
 
+            that.value(that.options.value);
             that._wrapper();
+            that._label();
             that._editable({
                 readonly: that.options.readonly,
                 disable: !(that.options.enable)
             });
-            that._label();
-            that.value(that.options.value);
 
             that.element
                 .addClass(INPUT)
@@ -79,17 +79,29 @@ var __meta__ = {// jshint ignore:line
         },
 
         readonly: function(readonly) {
+            var that = this;
+
             this._editable({
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
+            var that = this;
+
             this._editable({
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
         },
 
         focus: function() {
@@ -100,6 +112,10 @@ var __meta__ = {// jshint ignore:line
 
         destroy: function() {
             var that = this;
+
+            if (that.floatingLabel) {
+                that.floatingLabel.destroy();
+            }
 
             that.element.off(NS);
             Widget.fn.destroy.call(that);
@@ -138,10 +154,17 @@ var __meta__ = {// jshint ignore:line
             var element = that.element;
             var options = that.options;
             var id = element.attr("id");
+            var floating;
             var labelText;
 
             if (options.label !== null) {
+                floating = isPlainObject(options.label) ? options.label.floating : false;
                 labelText = isPlainObject(options.label) ? options.label.content : options.label;
+
+                if (floating) {
+                    that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                }
 
                 if (kendo.isFunction(labelText)) {
                     labelText = labelText.call(that);
@@ -156,7 +179,7 @@ var __meta__ = {// jshint ignore:line
                     element.attr("id", id);
                 }
 
-                $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
             }
         },
 

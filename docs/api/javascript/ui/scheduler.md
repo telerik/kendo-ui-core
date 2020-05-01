@@ -5557,6 +5557,31 @@ Enables the DOM virtualization for vertical grouping of the view - renders batch
         }
       ]
     });
+    
+### views.workDays `Array`
+
+Sets the working days (index based).
+
+#### Example - set the workDays of the scheduler
+    <div id="scheduler"></div>
+    <script>
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        views: [
+            { type: "week", workDays: [1,2,4] },
+            { type: "workWeek", selected: true, workDays: [1,2,4] },
+            { type: "timelineWeek", workDays: [1,2,4] },
+            { type: "timelineWorkWeek", workDays: [1,2,4] },
+        ],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview"
+          }
+        ]
+      });
     </script>
 
 ### views.workWeekStart `Number` *(default: 1)*
@@ -5651,6 +5676,33 @@ Sets the start of the work day when the  "Show business hours" button is clicked
         }
       ]
     });
+    </script>
+
+### workDays `Array`
+
+Sets the working days (index based).
+
+#### Example - set the workDays of the scheduler
+    <div id="scheduler"></div>
+    <script>
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        workDays: [1,2,4],
+        views: [
+            { type: "week" },
+            { type: "workWeek", selected: true },
+            { type: "timelineWeek" },
+            { type: "timelineWorkWeek" },
+        ],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/6/6 08:00 AM"),
+            end: new Date("2013/6/6 09:00 AM"),
+            title: "Interview"
+          }
+        ]
+      });
     </script>
 
 ### workDayEnd `Date`

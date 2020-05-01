@@ -1119,10 +1119,12 @@ div.k-dropdowngrid-popup .k-group-header {
 @floating-label-scale: .75;
 @floating-label-height: calc(@input-height * @floating-label-scale);
 
-.k-textbox-container {
-    position: relative;
+.k-textbox-container,
+.k-floating-label-container {
     padding-top: @floating-label-height;
     display: inline-flex;
+    vertical-align: middle;
+    position: relative;
     width: @input-default-width;
     flex-direction: column;
     justify-content: stretch;
@@ -1133,7 +1135,7 @@ div.k-dropdowngrid-popup .k-group-header {
         line-height: @input-height;
         cursor: text;
         top: calc(@floating-label-height + @input-border-width + @input-padding-y);
-        left: calc(@input-padding-x + @input-border-width);
+        left: calc(@input-padding-x + @input-border-width + @input-indent);
         transition: transform @floating-label-transition, color @floating-label-transition;
     }
 
@@ -1147,6 +1149,7 @@ div.k-dropdowngrid-popup .k-group-header {
     &.k-state-empty {
         > .k-label {
             transform: translate( 0, 0 ) scale( 1 );
+            font-style: normal;
         }
     }
 
@@ -1162,10 +1165,14 @@ div.k-dropdowngrid-popup .k-group-header {
         // transform position to top-left corner of the textbox-container
         // do not use single translate + calc() because of IE10/11
         @fls: -@floating-label-scale;
-        transform: translate(-@input-padding-x, calc(@fls * @input-padding-y))
+        transform: translate(calc(-@input-padding-x - @input-indent), calc(@fls * @input-padding-y))
                 translate(-@input-border-width, calc(@fls * @input-height))
                 translate(-@half-scale-percent, calc(@fls * @half-scale-percent))
                 scale(@floating-label-scale);
+    }
+
+    &.k-state-empty:not(.k-state-focused) ::placeholder {
+        color: transparent;
     }
 
     .k-rtl &,
@@ -1173,7 +1180,7 @@ div.k-dropdowngrid-popup .k-group-header {
 
         > .k-label {
             left: auto;
-            right: calc(@input-padding-x + @input-border-width);
+            right: calc(@input-padding-x + @input-border-width + @input-indent);
         }
 
         &.k-state-empty {
@@ -1187,10 +1194,24 @@ div.k-dropdowngrid-popup .k-group-header {
             @half-scale-percent: ((1 - @floating-label-scale) * 100% / 2);
 
             @fls: -@floating-label-scale;
-            transform: translate(@input-padding-x, calc(@fls * @input-padding-y))
+            transform: translate(calc(@input-padding-x + @input-indent), calc(@fls * @input-padding-y))
                     translate(@input-border-width, calc(@fls * @input-height))
                     translate(@half-scale-percent, calc(@fls * @half-scale-percent))
                     scale(@floating-label-scale);
         }
+    }
+}
+
+// Label
+.k-input-label {
+    margin-right: @input-indent;
+    z-index: 1;
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        margin-right: 0;
+        margin-left: @input-indent;
     }
 }

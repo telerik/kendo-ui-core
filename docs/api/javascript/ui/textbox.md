@@ -85,6 +85,10 @@ The function context (available via the `this` keyword) will be set to the widge
 
 If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
 
+> **Important:** The [value](/api/javascript/ui/textbox/methods/value) method **does not trigger** the `focusout` event of the input.
+This could affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
+
 #### Example - create a floating label
 
     <input id="textbox" />
@@ -232,9 +236,13 @@ If set to `true`, the widget will not allow user input. If set to `false`, the w
 
 Gets or sets the value of the widget.
 
-> **Important:** This method **does not trigger** [change](/api/javascript/ui/textbox/events/change) event.
-This could affect [MVVM value binding](/framework/mvvm/bindings/value) or the [floating label functionality](/api/javascript/ui/textbox/configuration/label#floating). The model bound to the widget will not be updated.
+> **Important:** This method **does not trigger** the [change](/api/javascript/ui/textbox/events/change) event.
+This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
 You can overcome this behavior triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
+
+> **Important:** This method **does not trigger** the `focusout` event of the input.
+This could affect the [floating label functionality](/api/javascript/ui/textbox/configuration/label.floating).
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#textbox").data("kendoTextBox").floatingLabel.refresh();`
 
 #### Parameters
 
