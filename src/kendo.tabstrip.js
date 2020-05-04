@@ -1097,8 +1097,8 @@ var __meta__ = { // jshint ignore:line
                 if (tabGroupScrollWidth > wrapperOffsetWidth && !that._scrollableModeActive) {
                     that._nowScrollingTabs = false;
                     that._isRtl = kendo.support.isRtl(that.element);
-                    var mouseDown = kendo.support.mobileOS ? "touchstart" : "mousedown";
-                    var mouseUp = kendo.support.mobileOS ? "touchend" : "mouseup";
+                    var mouseDown = kendo.support.touch ? "touchstart" : "mousedown";
+                    var mouseUp = kendo.support.touch ? "touchend" : "mouseup";
                     var browser = kendo.support.browser;
                     var isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
 

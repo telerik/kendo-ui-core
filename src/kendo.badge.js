@@ -82,6 +82,10 @@ var __meta__ = {// jshint ignore:line
             if (options.badgeStyle === 'solid' && typeof options.look === 'string' && options.look !== '') {
                 options.badgeStyle = options.look;
             }
+
+            if (options.position === 'inline' && typeof options.overlay === 'boolean' && options.overlay === true) {
+                options.position = "top end";
+            }
         },
 
         _content: function() {

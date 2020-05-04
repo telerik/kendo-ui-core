@@ -125,7 +125,7 @@ a.k-badge:hover,
 each( @badge-positions, {
     @placement: @key;
     @translate: @value;
-    @infix: if( @placement = "edge", "", "-@{placement}");
+    @infix: if( @placement = edge, ~"", ~"-@{placement}");
 
     .k-badge@{infix} {
         &-top-start {
@@ -134,7 +134,7 @@ each( @badge-positions, {
             top: 0;
             left: 0;
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, -1% * @translate );
+                transform: translate( (-1% * @translate), (-1% * @translate) );
             }
         }
         &-top-end {
@@ -143,7 +143,7 @@ each( @badge-positions, {
             top: 0;
             right: 0;
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, -1% * @translate );
+                transform: translate( (1% * @translate), (-1% * @translate) );
             }
         }
         &-bottom-start {
@@ -152,7 +152,7 @@ each( @badge-positions, {
             bottom: 0;
             left: 0;
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, 1% * @translate );
+                transform: translate( (-1% * @translate), (1% * @translate) );
             }
         }
         &-bottom-end {
@@ -161,7 +161,7 @@ each( @badge-positions, {
             bottom: 0;
             right: 0;
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, 1% * @translate );
+                transform: translate( (1% * @translate), (1% * @translate) );
             }
         }
     }
@@ -172,28 +172,28 @@ each( @badge-positions, {
             left: auto;
             right: 0;
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, -1% * @translate );
+                transform: translate( (1% * @translate), (-1% * @translate) );
             }
         }
         &-top-end {
             right: auto;
             left: 0;
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, -1% * @translate );
+                transform: translate( (-1% * @translate), (-1% * @translate) );
             }
         }
         &-bottom-start {
             left: auto;
             right: 0;
             & when not (@translate = null) {
-                transform: translate( 1% * @translate, 1% * @translate );
+                transform: translate( (1% * @translate), (1% * @translate) );
             }
         }
         &-bottom-end {
             right: auto;
             left: 0;
             & when not (@translate = null) {
-                transform: translate( -1% * @translate, 1% * @translate );
+                transform: translate( (-1% * @translate), (1% * @translate) );
             }
         }
     }

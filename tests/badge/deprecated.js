@@ -64,6 +64,15 @@
         });
         // #region
 
+
+        // #region overlay
+        test('badge.options.overlay maps to badge.options.position', function() {
+            badge = new Badge(span, { overlay: true });
+
+            assert.equal(badge.element.hasClass('k-badge-top-end'), true);
+        });
+        // #region
+
     });
 
 })();

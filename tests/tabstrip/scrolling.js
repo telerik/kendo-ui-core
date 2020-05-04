@@ -1,7 +1,7 @@
 (function() {
 
     var tabstrip;
-    var mobileOs = false;
+    var touch = false;
 
     function createTabStrip(options) {
         tabstrip = new kendo.ui.TabStrip("#tabstrip", $.extend({
@@ -215,14 +215,14 @@
     describe('tabstrip mobile scrolling', function() {
         beforeEach(function() {
             setupDom();
-            mobileOs = kendo.support.mobileOS;
-            kendo.support.mobileOS = true;
+            touch = kendo.support.touch;
+            kendo.support.touch = true;
         });
 
         afterEach(function() {
 
             tabstrip.destroy();
-            kendo.support.mobileOS = mobileOs;
+            kendo.support.touch = touch;
         });
 
         it('right scrolling button scrolls to the right by delta when clicked', function() {
