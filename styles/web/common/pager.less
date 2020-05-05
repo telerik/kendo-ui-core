@@ -13,6 +13,8 @@
         color: inherit;
         text-decoration: none;
         outline: 0;
+        font: inherit;
+        background-color: inherit;
     }
 
     .k-widget,
@@ -194,8 +196,6 @@
 
 
 // Responsive
-.k-pager-lg,
-.k-pager-md,
 .k-pager-sm {
     overflow: visible;
 
@@ -218,6 +218,7 @@
         select.k-dropdown {
             width: 100%;
             display: flex;
+            box-sizing: border-box;
         }
     }
 
@@ -237,8 +238,6 @@
 .k-pager-md .k-pager-info,
 .k-pager-sm .k-pager-info,
 .k-pager-sm .k-pager-sizes,
-.k-pager-lg .k-pager-numbers,
-.k-pager-md .k-pager-numbers,
 .k-pager-sm .k-pager-numbers {
     display: none;
 }

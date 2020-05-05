@@ -735,19 +735,10 @@
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
 
-        it("add k-pager-lg class", function() {
-            var pager = setup();
-
-            pager.css("width", "1000px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(pager.hasClass("k-pager-lg"));
-        });
-
         it("add k-pager-md class", function() {
             var pager = setup();
 
-            pager.css("width", "600px");
+            pager.css("width", "500px");
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-md"));

@@ -2835,13 +2835,18 @@ function pad(number, digits, end) {
             Observable.fn.init.call(that);
 
             var dataSource = options ? options.dataSource : null;
+            var props;
+
+            if (options) {
+                props = (that.componentTypes || {})[(options || {}).componentType];
+            }
 
             if (dataSource) {
                 // avoid deep cloning the data source
                 options = extend({}, options, { dataSource: {} });
             }
 
-            options = that.options = extend(true, {}, that.options, that.defaults, options);
+            options = that.options = extend(true, {}, that.options, that.defaults, props || {}, options);
 
             if (dataSource) {
                 options.dataSource = dataSource;

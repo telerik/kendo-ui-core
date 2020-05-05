@@ -23,6 +23,7 @@ As a result, the appearance of the widget is alternated.
 ![Comparison between the content types](../../../images/modern-classic-datetimepicker.png)
 
 > The rendered selectors in the time picker of the Kendo UI DateTimePicker depend on the currently applied format. If the format is omitted, the default format from the application's culture is used. 
+
 ## See Also
 
 * [JavaScript API Reference of the DatePicker](/api/javascript/ui/datetimepicker)

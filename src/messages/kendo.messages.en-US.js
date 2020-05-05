@@ -1072,6 +1072,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "failed",
   "headerStatusUploading": "Uploading...",
   "headerStatusUploaded": "Done",
+  "uploadSuccess": "File(s) uploaded successfully.",
+  "uploadFail": "File(s) failed to upload.",
   "invalidMaxFileSize": "File size too large.",
   "invalidMinFileSize": "File size too small.",
   "invalidFileExtension": "File type not allowed."

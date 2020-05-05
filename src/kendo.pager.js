@@ -19,7 +19,7 @@ var __meta__ = { // jshint ignore:line
         LAST = ".k-i-arrow-end-right",
         PREV = ".k-i-arrow-60-left",
         NEXT = ".k-i-arrow-60-right",
-        SIZE = "k-pager-lg k-pager-md k-pager-sm",
+        SIZE = "k-pager-md k-pager-sm",
         CHANGE = "change",
         NS = ".kendoPager",
         CLICK = "click",
@@ -516,10 +516,8 @@ var __meta__ = { // jshint ignore:line
             if (!that.options.responsive) {
                 return null;
             } else if (width <= 480) {
-                return sizes[2];
-            } else if (width <= 640) {
                 return sizes[1];
-            } else if (width <= 1024) {
+            } else if (width <= 600) {
                 return sizes[0];
             }
             return null;

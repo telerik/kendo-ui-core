@@ -79,20 +79,23 @@ var __meta__ = { // jshint ignore:line
         var that = this, id,
             body = document.body,
             div = $(DIV).attr(ARIA_HIDDEN, "true")
-                        .addClass("k-calendar-container")
-                        .appendTo(body);
+                        .addClass("k-calendar-container");
 
         that.options = options = options || {};
         id = options.id;
 
+        if(!options.omitPopup){
+            div.appendTo(body);
+            that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+        } else {
+            div = options.dateDiv;
+        }
         if (id) {
             id += "_dateview";
 
             div.attr(ID, id);
             that._dateViewID = id;
         }
-
-        that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
         that.div = div;
 
         that.value(options.value);
@@ -107,11 +110,11 @@ var __meta__ = { // jshint ignore:line
 
             if (!calendar) {
                 div = $(DIV).attr(ID, kendo.guid())
-                            .appendTo(that.popup.element)
+                            .appendTo(options.omitPopup ? options.dateDiv : that.popup.element)
                             .on(MOUSEDOWN, preventDefault)
                             .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
 
-                that.calendar = calendar = new ui.Calendar(div);
+                that.calendar = calendar = new ui.Calendar(div, { componentType: options.componentType });
                 that._setOptions(options);
 
                 kendo.calendar.makeUnselectable(calendar.element);
@@ -160,7 +163,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-            this.popup.destroy();
+            if(this.popup){
+                this.popup.destroy();
+            }
         },
 
         open: function() {
@@ -218,7 +223,7 @@ var __meta__ = { // jshint ignore:line
                     handled = true;
                 }
 
-            } else if (that.popup.visible()) {
+            } else if (that.popup && that.popup.visible()) {
 
                 if (key == keys.ESC || (selectIsClicked && calendar._cell.hasClass(SELECTED))) {
                     that.close();

@@ -9832,6 +9832,8 @@ declare namespace kendo.ui {
         headerStatusUploaded?: string;
         headerStatusUploading?: string;
         invalidFileExtension?: string;
+        uploadSuccess?: string;
+        uploadFail?: string;
         invalidFiles?: string;
         invalidMaxFileSize?: string;
         invalidMinFileSize?: string;

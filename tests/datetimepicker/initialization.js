@@ -434,5 +434,31 @@
             assert.equal(datetimepicker.element.val(), kendo.toString(value, datetimepicker.options.format));
         });
 
+        it("datetimepicker instantiates its own popup when component type is modern", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            assert.isTrue(datetimepicker.popup instanceof kendo.ui.Popup);
+        });
+
+        it("datetimepicker Popup should contain a div with k-date-tab and k-datetime-wrap classes", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            assert.equal(datetimepicker.popup.element.find('.k-date-tab.k-datetime-wrap').length, 1);
+        });
+
+        it("when time group is selected, date picker should display the time view", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                componentType: "modern"
+            }).data("kendoDateTimePicker");
+
+            datetimepicker.popup.element.find('button.k-group-end').click();
+
+            assert.equal(datetimepicker.popup.element.find('.k-time-tab').length, 1);
+            assert.equal(datetimepicker.popup.element.find('.k-date-tab').length, 0);
+        });
     });
 }());

@@ -30,6 +30,28 @@ Specifies the [template](/api/javascript/kendo/methods/template) which is used f
         });
     </script>
 
+### formatLabel `Function`
+
+Callback function that could be used to change the default format of the automatically generated labels.
+
+> Note: this callback takes effect only if the items option or items.label property are not specified and labels are being automatically generated.
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                Name: "Ivan",
+                ZipCode: 1000
+            },
+            formatLabel: function(field) {
+                return field + ":";
+            }
+        });
+    </script>
+
 ### formData `Object`
 
 Provides the data model of the Form.

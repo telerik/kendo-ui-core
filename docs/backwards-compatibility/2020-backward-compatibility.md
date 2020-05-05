@@ -10,6 +10,13 @@ position: 1
 
 This article lists the breaking changes in the Kendo UI 2020 releases.
 
+## Kendo UI 2020 R2
+
+**Pager**, **Grid**, **TreeList**, **ListView**
+
+* The responsive Pager no longer has the `k-pager-lg` breakpoint and class.
+* The page numbers drop-down of the responsive Pager is now an HTML `select` element. 
+
 ## Kendo UI 2020 R1 SP1
 
 **Grid**, **Spreadsheet**, **Filter**
