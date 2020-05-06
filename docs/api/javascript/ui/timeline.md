@@ -715,6 +715,10 @@ The widget instance which fired the event.
 
 The data item asociated with the event that is going to be expanded.
 
+##### e.preventDefault `Function`
+
+If invoked, prevents the expand action.
+
 #### Example - hooking up to the expand event
 
     <div id="timeline"></div>
@@ -761,6 +765,10 @@ The widget instance which fired the event.
 ##### e.dataItem `kendo.data.Model`
 
 The data item asociated with the event that is going to be expanded.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the collapse action.
 
 #### Example - hooking up to the collapse event
 
@@ -859,6 +867,10 @@ The widget instance which fired the event.
 ##### e.action `String`
 
 next or previous values depending whether user is trying to load next or previous portion of events.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the navigate action.
 
 #### Example - hooking up to the navigate event
 

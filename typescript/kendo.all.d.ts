@@ -8574,6 +8574,71 @@ declare namespace kendo.ui {
         contentElement?: Element;
     }
 
+    class TileLayout extends kendo.ui.Widget {
+
+        static fn: TileLayout;
+
+        options: TileLayoutOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): TileLayout;
+
+        constructor(element: Element, options?: TileLayoutOptions);
+
+
+
+    }
+
+    interface TileLayoutContainerHeader {
+        template?: string|Function;
+        text?: string;
+    }
+
+    interface TileLayoutContainer {
+        bodyTemplate?: string|Function;
+        colSpan?: number;
+        header?: TileLayoutContainerHeader;
+        rowSpan?: number;
+    }
+
+    interface TileLayoutGap {
+        columns?: number;
+        rows?: number;
+    }
+
+    interface TileLayoutOptions {
+        name?: string;
+        columns?: number;
+        columnsWidth?: string|number;
+        containers?: TileLayoutContainer[];
+        gap?: TileLayoutGap;
+        height?: string|number;
+        reorderable?: boolean;
+        resizable?: boolean;
+        rows?: number;
+        rowsHeight?: string|number;
+        width?: string|number;
+        resize?(e: TileLayoutResizeEvent): void;
+        reorder?(e: TileLayoutReorderEvent): void;
+    }
+    interface TileLayoutEvent {
+        sender: TileLayout;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TileLayoutResizeEvent extends TileLayoutEvent {
+        container?: JQuery;
+    }
+
+    interface TileLayoutReorderEvent extends TileLayoutEvent {
+        newIndex?: number;
+        oldIndex?: number;
+        container?: JQuery;
+    }
 
     class TextBox extends kendo.ui.Widget {
 
@@ -22789,6 +22854,10 @@ interface JQuery {
     kendoTextBox(): JQuery;
     kendoTextBox(options: kendo.ui.TextBoxOptions): JQuery;
     data(key: "kendoTextBox"): kendo.ui.TextBox;
+    
+    kendoTileLayout(): JQuery;
+    kendoTileLayout(options: kendo.ui.TileLayoutOptions): JQuery;
+    data(key: "kendoTileLayout"): kendo.ui.TileLayout;
 
     kendoTimePicker(): JQuery;
     kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery;

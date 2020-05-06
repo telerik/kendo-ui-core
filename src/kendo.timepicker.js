@@ -216,6 +216,7 @@ var __meta__ = { // jshint ignore:line
             this.list.find(".k-time-list-wrapper").removeClass(FOCUSED);
             list.addClass(FOCUSED);
             this.list.focus();
+            this._scrollTop = list.scrollTop();
         },
         _createClassicRenderingList: function () {
             var that = this;
@@ -282,7 +283,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            var is12hourFormat = this.options.format.toLowerCase().includes("t");
+            var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
             var hours = value.getHours();
             var minutes = value.getMinutes();
             var seconds = value.getSeconds();
@@ -445,7 +446,7 @@ var __meta__ = { // jshint ignore:line
             var hoursList = this.ul.find('[data-index="1"]');
             var minHours = this._minHours;
             var maxHours = this._maxHours;
-            var is12hourFormat = this.options.format.toLowerCase().includes("t");
+            var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
             var useMax;
             var useMin;
             var firstHourIndex;
@@ -666,7 +667,7 @@ var __meta__ = { // jshint ignore:line
         _nowClickHandler: function () {
             var now = new Date();
             this.value(now);
-            this.options.change(kendo.toString(now, this.options.format, this.options.culture), true);
+            this.options.change(kendo.toString(now, this.options.format, this.options.culture));
         },
 
         _cancelClickHandler: function () {
@@ -686,14 +687,19 @@ var __meta__ = { // jshint ignore:line
             var itemHeight = Math.floor($(e.currentTarget).find(".k-item:visible:eq(0)").outerHeight());
 
             if (e.currentTarget.scrollTop % itemHeight !== 0) {
-                e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                if(e.currentTarget.scrollTop > this._scrollTop){
+                    e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                } else {
+                    e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                }
             }
+            this._scrollTop = e.currentTarget.scrollTop;
             this._updateRanges();
             this._updateCurrentlySelected();
         },
 
         _updateCurrentlySelected: function () {
-            var is12hourFormat = this.options.format.toLowerCase().includes("t");
+            var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
             var hoursList = this.ul.find('[data-index="1"]');
             var minutesList = this.ul.find('[data-index="2"]');
             var secondsList = this.ul.find('[data-index="3"]');
@@ -990,8 +996,9 @@ var __meta__ = { // jshint ignore:line
             if (that.ul[0].firstChild) {
                 if (that.options.timeView && that.options.timeView.list === "scroll") {
                     that.applyValue(value);
+                } else {
+                    that.select(value);
                 }
-                that.select(value);
             }
         },
 
@@ -1715,6 +1722,21 @@ var __meta__ = { // jshint ignore:line
         return nameType;
     }
 
+    function startsWith(text, searchString, position) {
+        position = position || 0;
+        return text.indexOf(searchString, position) === position;
+    }
+
+    function includes(text, subStr) {
+        var returnValue = false;
+
+        if (text.indexOf(subStr) !== -1) {
+            returnValue = true;
+        }
+
+        return returnValue;
+    }
+
     function splitDateFormat(format) {
         var info = kendo.culture();
         var pattern = datePattern(format, info);
@@ -1735,7 +1757,7 @@ var __meta__ = { // jshint ignore:line
                 addLiteral(parts, pattern.substring(lastIndex, match.index));
             }
 
-            if (value.startsWith('"') || value.startsWith("'")) {
+            if (startsWith(value, '"') || startsWith(value, "'")) {
                 addLiteral(parts, value);
             } else {
                 specifier = value[0];

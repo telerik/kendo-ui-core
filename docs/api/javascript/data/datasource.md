@@ -730,6 +730,10 @@ The data item field to group by.
     });
     </script>
 
+### groupPaging `Boolean` *(default: false)*
+
+When set to true, dataSource treats groups as items during pagination.
+
 ### inPlaceSort `Boolean` *(default: false)*
 
 If set to `true`, the original `Array` used as [`data`](/api/javascript/data/datasource#configuration-data) will be sorted when sorting operation is performed. This setting supported only with local data, bound to a JavaScript array via the [`data`](/api/javascript/data/datasource#configuration-data) option.

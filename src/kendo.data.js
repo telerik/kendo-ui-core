@@ -159,11 +159,13 @@ var __meta__ = { // jshint ignore:line
 
             result = push.apply(this, items);
 
-            this.trigger(CHANGE, {
-                action: "add",
-                index: index,
-                items: items
-            });
+            if (!this.omitChangeEvent) {
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: index,
+                    items: items
+                });
+            }
 
             return result;
         },
@@ -1556,7 +1558,7 @@ var __meta__ = { // jshint ignore:line
             return new Query(result);
         },
 
-        group: function(descriptors, allData) {
+        group: function(descriptors, allData, options) {
             descriptors =  normalizeGroup(descriptors || []);
             allData = allData || this.data;
 
@@ -1566,16 +1568,40 @@ var __meta__ = { // jshint ignore:line
 
             if (descriptors.length > 0) {
                 descriptor = descriptors[0];
-                result = result.groupBy(descriptor).select(function(group) {
-                    var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value, ignoreCase: false } ]);
-                    return {
-                        field: group.field,
-                        value: group.value,
-                        items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
-                        hasSubgroups: descriptors.length > 1,
-                        aggregates: data.aggregate(descriptor.aggregates)
-                    };
-                });
+
+                if (options && options.groupPaging) {
+                    result = new Query(allData).groupAllData(descriptor, allData).select(function (group) {
+                        var data = new Query(allData).filter([{
+                            field: group.field,
+                            operator: "eq",
+                            value: group.value,
+                            ignoreCase: false
+                        }]);
+                        var items = descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray(), options).toArray() : group.items;
+                        return {
+                            field: group.field,
+                            value: group.value,
+                            hasSubgroups: descriptors.length > 1,
+                            items: items,
+                            aggregates: data.aggregate(descriptor.aggregates),
+                            uid: kendo.guid(),
+                            itemCount: items.length,
+                            subgroupCount: items.length
+                        };
+                    });
+
+                } else {
+                    result = result.groupBy(descriptor).select(function(group) {
+                        var data = new Query(allData).filter([ { field: group.field, operator: "eq", value: group.value, ignoreCase: false } ]);
+                        return {
+                            field: group.field,
+                            value: group.value,
+                            items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
+                            hasSubgroups: descriptors.length > 1,
+                            aggregates: data.aggregate(descriptor.aggregates)
+                        };
+                    });
+                }
             }
             return result;
         },
@@ -1618,6 +1644,46 @@ var __meta__ = { // jshint ignore:line
             }
 
             result = that._sortGroups(result, descriptor);
+
+            return new Query(result);
+        },
+
+        groupAllData: function (descriptor, allData) {
+            if (isEmptyObject(descriptor) || this.data && !this.data.length) {
+                return new Query([]);
+            }
+
+            var field = descriptor.field,
+                sorted = descriptor.skipItemSorting ? allData : new Query(allData).sort(field, descriptor.dir || "asc", StableComparer).toArray(),
+                accessor = kendo.accessor(field),
+                item,
+                groupValue = accessor.get(sorted[0], field),
+                group = {
+                    field: field,
+                    value: groupValue,
+                    items: []
+                },
+                currentValue,
+                idx,
+                len,
+                result = [group];
+
+            for (idx = 0, len = sorted.length; idx < len; idx++) {
+                item = sorted[idx];
+                currentValue = accessor.get(item, field);
+                if (!groupValueComparer(groupValue, currentValue)) {
+                    groupValue = currentValue;
+                    group = {
+                        field: field,
+                        value: groupValue,
+                        items: []
+                    };
+                    result.push(group);
+                }
+                group.items.push(item);
+            }
+
+            result = this._sortGroups(result, descriptor);
 
             return new Query(result);
         },
@@ -1836,7 +1902,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (group) {
-                query = query.group(group, data);
+                query = query.group(group, data, options);
             }
         }
 
@@ -2077,10 +2143,12 @@ var __meta__ = { // jshint ignore:line
 
             record.value = modelInstance._parse(record.field, record.value);
 
-            if (record.hasSubgroups) {
-                convertGroup(record.items, getters, modelInstance, originalFieldNames, fieldNames);
-            } else {
-                convertRecords(record.items, getters, modelInstance, originalFieldNames, fieldNames);
+            if (record.items) {
+                if (record.hasSubgroups) {
+                    convertGroup(record.items, getters, modelInstance, originalFieldNames, fieldNames);
+                } else {
+                    convertRecords(record.items, getters, modelInstance, originalFieldNames, fieldNames);
+                }
             }
         }
     }
@@ -2301,12 +2369,14 @@ var __meta__ = { // jshint ignore:line
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             var group = data.at(idx);
-            if (group.hasSubgroups) {
-                result = result.concat(flattenGroups(group.items));
-            } else {
-                items = group.items;
-                for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
-                    result.push(items.at(itemIndex));
+            if (group.items) {
+                if (group.hasSubgroups) {
+                    result = result.concat(flattenGroups(group.items));
+                } else {
+                    items = group.items;
+                    for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
+                        result.push(items.at(itemIndex));
+                    }
                 }
             }
         }
@@ -2318,11 +2388,12 @@ var __meta__ = { // jshint ignore:line
         if (model) {
             for (idx = 0, length = data.length; idx < length; idx++) {
                 group = data.at(idx);
-
-                if (group.hasSubgroups) {
-                    wrapGroupItems(group.items, model);
-                } else {
-                    group.items = new LazyObservableArray(group.items, model, group.items._events);
+                if (group.items) {
+                    if (group.hasSubgroups) {
+                        wrapGroupItems(group.items, model);
+                    } else {
+                        group.items = new LazyObservableArray(group.items, model, group.items._events);
+                    }
                 }
             }
         }
@@ -2385,6 +2456,9 @@ var __meta__ = { // jshint ignore:line
     }
 
     function removeModel(data, model) {
+        if (!data) {
+            return;
+        }
         var length = data.length;
         var dataItem;
         var idx;
@@ -2419,6 +2493,9 @@ var __meta__ = { // jshint ignore:line
 
     function indexOf(data, comparer) {
         var idx, length;
+        if (!data) {
+            return;
+        }
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             if (comparer(data[idx])) {
@@ -2521,7 +2598,11 @@ var __meta__ = { // jshint ignore:line
             that._group = normalizeGroup(options.group);
             that._aggregate = options.aggregate;
             that._total = options.total;
+            that._groupPaging = options.groupPaging;
 
+            if (that._groupPaging) {
+                that._groupsState = {};
+            }
             that._shouldDetachObservableParents = true;
 
             Observable.fn.init.call(that);
@@ -2616,6 +2697,16 @@ var __meta__ = { // jshint ignore:line
             var group = this.group() || [];
 
             return this.options.serverGrouping && group.length;
+        },
+
+        _isServerGroupPaged: function(){
+            return this._isServerGrouped() && this._groupPaging;
+        },
+
+        _isGroupPaged: function(){
+            var group = this.group() || [];
+
+            return this._groupPaging && group.length;
         },
 
         _pushCreate: function(result) {
@@ -3025,6 +3116,10 @@ var __meta__ = { // jshint ignore:line
                     that._change({ action: "sync" });
 
                     that.trigger(SYNC);
+
+                    if (that._isServerGroupPaged()) {
+                        that.read();
+                    }
                 });
             } else {
                 that._storeData(true);
@@ -3060,6 +3155,10 @@ var __meta__ = { // jshint ignore:line
                 that._change();
 
                 that._markOfflineUpdatesAsDirty();
+
+                if (that._isServerGrouped()) {
+                    that.read();
+                }
             }
         },
 
@@ -3417,6 +3516,11 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that._total = that.reader.total(data);
+
+                if (that._isServerGroupPaged()) {
+                    that._serverGroupsTotal = that._total;
+                }
+
                 if (that._pageSize > that._total) {
                     that._pageSize = that._total;
                     if (that.options.pageSize && that.options.pageSize > that._pageSize) {
@@ -3569,20 +3673,56 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _addRange: function(data, skip) {
+        _addRange: function (data, skip) {
             var that = this,
-                start = typeof(skip) !== "undefined" ? skip : (that._skip || 0),
+                start = typeof (skip) !== "undefined" ? skip : (that._skip || 0),
+                end,
+                range = {
+                    data: data,
+                    pristineData: data.toJSON(),
+                    timestamp: that._timeStamp()
+                };
+
+            if (this._isGroupPaged()) {
+                end = start + data.length;
+                range.outerStart = start;
+                range.outerEnd = end;
+            } else {
                 end = start + that._flatData(data, true).length;
+            }
 
-            that._ranges.push({
-                start: start,
-                end: end,
-                data: data,
-                pristineData: data.toJSON(),
-                timestamp: that._timeStamp()
-            });
-
+            range.start = start;
+            range.end = end;
+            that._ranges.push(range);
             that._sortRanges();
+
+            if (that._isGroupPaged()) {
+                if (!that._groupsFlat) {
+                    that._groupsFlat = [];
+                }
+                that._appendToGroupsFlat(range.data);
+                that._updateOuterRangesLength();
+            }
+        },
+
+        _appendToGroupsFlat: function (data) {
+            var length = data.length;
+
+            for (var i = 0; i < length; i++) {
+                this._groupsFlat.push(data[i]);
+            }
+        },
+
+        _getGroupByUid: function(uid){
+            var length = this._groupsFlat.length;
+            var group;
+
+            for (var i = 0; i < length; i++) {
+                group = this._groupsFlat[i];
+                if (group.uid === uid) {
+                    return group;
+                }
+            }
         },
 
         _sortRanges: function() {
@@ -3607,7 +3747,8 @@ var __meta__ = { // jshint ignore:line
                     sort: that._sort,
                     filter: that._filter,
                     group: that._group,
-                    aggregate: that._aggregate
+                    aggregate: that._aggregate,
+                    groupPaging: !!that._groupPaging
                 }, data);
 
             if (!that.options.serverPaging) {
@@ -3639,6 +3780,10 @@ var __meta__ = { // jshint ignore:line
                 delete options.aggregate;
             } else if (that.reader.model && options.aggregate) {
                 options.aggregate = convertDescriptorsField(options.aggregate, that.reader.model);
+            }
+
+            if (!that.options.groupPaging) {
+                delete options.groupPaging;
             }
 
             return options;
@@ -3820,7 +3965,15 @@ var __meta__ = { // jshint ignore:line
                 that._clearEmptyGroups(data);
             }
 
-            result = that._queryProcess(data, options);
+            options.groupPaging = that._groupPaging;
+
+            if (that._isGroupPaged() && e && (e.action === "page" || e.action === "expandGroup" || e.action === "collapseGroup")) {
+                result = that._queryProcess(data, {
+                    aggregate: that._aggregate
+                });
+            } else {
+                result = that._queryProcess(data, options);
+            }
 
             if (that.options.serverAggregates !== true) {
                 // for performance reasons, calculate aggregates for part of the data only after query process
@@ -3828,7 +3981,7 @@ var __meta__ = { // jshint ignore:line
                 that._aggregateResult = that._calculateAggregates(result.dataToAggregate || data, options);
             }
 
-            that.view(result.data);
+            that._setView(result, options, e);
 
             that._setFilterTotal(result.total, false);
 
@@ -3837,6 +3990,30 @@ var __meta__ = { // jshint ignore:line
             e.items = e.items || that._view;
 
             that.trigger(CHANGE, e);
+        },
+
+        _setView: function (result, options, e) {
+            var that = this;
+
+            if (that._isGroupPaged() && !that._isServerGrouped()) {
+                if (e && (e.action === "page" || e.action === "expandGroup" || e.action === "collapseGroup")) {
+                    that.view(result.data);
+                    that._updateOuterRangesLength();
+                } else {
+                    that._ranges = [];
+                    var query = new Query(result.data);
+                    that._addRange(that._observe(result.data));
+
+                    if (options.skip > (result.data.length / options.take + 1)) {
+                        options.skip = 0;
+                    }
+
+                    that.view(query.range(options.skip, options.take).toArray());
+                }
+
+            } else {
+                that.view(result.data);
+            }
         },
 
         _clearEmptyGroups: function(data) {
@@ -3925,18 +4102,401 @@ var __meta__ = { // jshint ignore:line
             var isPrevented = this.trigger(REQUESTSTART, { type: "read" });
             if (!isPrevented) {
                 this.trigger(PROGRESS);
-
+                if (options) {
+                    options.groupPaging = this._groupPaging;
+                }
                 result = this._queryProcess(this._data, this._mergeState(options));
 
                 this._setFilterTotal(result.total, true);
 
                 this._aggregateResult = this._calculateAggregates(result.dataToAggregate || this._data, options);
-                this.view(result.data);
+                this._setView(result, options);
                 this.trigger(REQUESTEND, { type: "read" });
-                this.trigger(CHANGE, { items: result.data });
+                this.trigger(CHANGE, { items: result.data, action: options ? options.action : "" });
             }
 
             return $.Deferred().resolve(isPrevented).promise();
+        },
+
+        _hasExpandedSubGroups: function (group) {
+            var result = false;
+            var length = group.items ? group.items.length : 0;
+
+            if (!group.hasSubgroups) {
+                return false;
+            }
+
+            for (var i = 0; i < length; i++) {
+                if (this._groupsState[group.items[i].uid]) {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        },
+
+        _findGroupedRange: function (data, result, options, parents, callback) {
+            var that = this;
+            var length = data.length;
+            var group;
+            var current;
+            var itemsLength;
+            var hasNotRequestedItems;
+            var groupCount;
+            var itemsToSkip;
+
+            for (var i = 0; i < length; i++) {
+                group = data[i];
+
+                if (options.taken >= options.take) {
+                    break;
+                }
+
+                if (!that._getGroupByUid(group.uid)) {
+                    that._groupsFlat.push(group);
+                }
+
+                if (that._groupsState[group.uid]) {
+                    if (that._isServerGroupPaged()) {
+                        if (group.hasSubgroups && !group.subgroupCount) {
+                            that.getGroupSubGroupCount(group, options, parents, callback);
+                            that._fetchingGroupItems = true;
+                            return;
+                        }
+                        groupCount = (group.subgroupCount || group.itemCount) + 1;
+                        itemsToSkip = options.skip - options.skipped;
+                        hasNotRequestedItems = (group.items.length - itemsToSkip) < (options.take - options.taken);
+
+                        if (!that._hasExpandedSubGroups(group) && itemsToSkip > groupCount) {
+                            options.skipped += groupCount;
+                            continue;
+                        }
+
+                        if ((group.hasSubgroups && (!group.items || hasNotRequestedItems && group.items.length < group.subgroupCount)) ||
+                            (!group.hasSubgroups && (!group.items || hasNotRequestedItems && group.items.length < group.itemCount))) {
+                            that.getGroupItems(group, options, parents, callback);
+                            that._fetchingGroupItems = true;
+                            return;
+                        }
+                    }
+
+                    if (options.includeParents && options.skipped < options.skip) {
+                        options.skipped++;
+                        group.excludeHeader = true;
+                    } else if (options.includeParents) {
+                        options.taken++;
+                    }
+
+                    if (group.hasSubgroups && group.items && group.items.length) {
+                        group.currentItems = [];
+
+                        if (!parents) {
+                            parents = [];
+                        }
+                        parents.push(group);
+
+                        that._findGroupedRange(group.items, group.currentItems, options, parents, callback);
+                        parents.pop();
+
+                        if (group.currentItems.length || options.taken > 0) {
+                            result.push(group);
+                        } else {
+                            group.excludeHeader = false;
+                        }
+                    } else {
+                        current = [];
+                        itemsLength = group.items.length;
+
+                        for (var j = 0; j < itemsLength; j++) {
+                            if (options.skipped < options.skip) {
+                                options.skipped++;
+                                continue;
+                            }
+
+                            if (options.taken >= options.take) {
+                                break;
+                            }
+                            current.push(group.items[j]);
+                            options.taken++;
+                        }
+
+                        if (current.length || options.taken > 0) {
+                            group.currentItems = current;
+                            result.push(group);
+                        } else {
+                            group.excludeHeader = false;
+                        }
+                    }
+                } else {
+                    if (options.skipped < options.skip) {
+                        options.skipped++;
+                        continue;
+                    }
+                    result.push(group);
+                    options.taken++;
+                }
+            }
+        },
+
+        getGroupItems: function (group, options, parents, callback) {
+            var that = this;
+            var skip;
+            var take;
+            var filter;
+            var data;
+            var subgroups;
+
+            if (!group.items) {
+                group.items = [];
+            }
+
+            skip = group.items.length;
+            take = that.take();
+            filter = this._composeItemsFilter(group, parents);
+            data = {
+                page: math.floor((skip || 0) / (take || 1)) || 1,
+                pageSize: take,
+                skip: skip,
+                take: take,
+                filter: filter,
+                aggregate: that._aggregate,
+                sort: that._sort
+            };
+            subgroups = that.findSubgroups(group);
+
+            if (subgroups && subgroups.length) {
+                data.group = subgroups;
+                data.groupPaging = true;
+            }
+
+            clearTimeout(that._timeout);
+            that._timeout = setTimeout(function () {
+                that._queueRequest(data, function () {
+                    if (!that.trigger(REQUESTSTART, {
+                            type: "read"
+                        })) {
+                        that.transport.read({
+                            data: data,
+                            success: that._groupItemsSuccessHandler(group, options.skip, that.take(), callback),
+                            error: function () {
+                                var args = slice.call(arguments);
+                                that.error.apply(that, args);
+                            }
+                        });
+                    } else {
+                        that._dequeueRequest();
+                    }
+                });
+            }, 100);
+        },
+
+        getGroupSubGroupCount: function (group, options, parents, callback) {
+            var that = this;
+            var filter;
+            var groupIndex;
+            var data;
+
+            if (!group.items) {
+                group.items = [];
+            }
+
+            filter = this._composeItemsFilter(group, parents);
+            groupIndex = this._group.map(function (g) {
+                return g.field;
+            }).indexOf(group.field);
+            data = {
+                filter: filter,
+                group: [that._group[groupIndex + 1]],
+                groupPaging: true,
+                includeSubGroupCount: true
+            };
+
+            clearTimeout(that._timeout);
+            that._timeout = setTimeout(function () {
+                that._queueRequest(data, function () {
+                    if (!that.trigger(REQUESTSTART, {
+                            type: "read"
+                        })) {
+                        that.transport.read({
+                            data: data,
+                            success: that._subGroupCountSuccessHandler(group, options.skip, that.take(), callback),
+                            error: function () {
+                                var args = slice.call(arguments);
+                                that.error.apply(that, args);
+                            }
+                        });
+                    } else {
+                        that._dequeueRequest();
+                    }
+                });
+            }, 100);
+        },
+
+        _subGroupCountSuccessHandler: function (group, skip, take, callback) {
+            var that = this;
+            callback = isFunction(callback) ? callback : noop;
+
+            return function (data) {
+
+                that._dequeueRequest();
+
+                that.trigger(REQUESTEND, {
+                    response: data,
+                    type: "read"
+                });
+                that._fetchingGroupItems = false;
+                group.subgroupCount = data.Total;
+                that.range(skip, take, callback, "expandGroup");
+            };
+        },
+
+        _groupItemsSuccessHandler: function (group, skip, take, callback) {
+            var that = this;
+            var timestamp = that._timeStamp();
+            callback = isFunction(callback) ? callback : noop;
+
+            return function (data) {
+                var temp;
+                var model = Model.define(that.options.schema.model);
+
+                that._dequeueRequest();
+
+                that.trigger(REQUESTEND, {
+                    response: data,
+                    type: "read"
+                });
+
+                data = that.reader.parse(data);
+
+                if (group.hasSubgroups) {
+                    temp = that.reader.groups(data);
+                } else {
+                    temp = that.reader.data(data);
+                    temp = temp.map(function (item) {
+                        return new model(item);
+                    });
+                }
+
+                group.items.omitChangeEvent = true;
+                for (var i = 0; i < temp.length; i++) {
+                    group.items.push(temp[i]);
+                }
+                group.items.omitChangeEvent = false;
+
+                that._updateRangePristineData(group);
+                that._fetchingGroupItems = false;
+                that._serverGroupsTotal += temp.length;
+                that.range(skip, take, callback, "expandGroup");
+
+                if (timestamp >= that._currentRequestTimeStamp || !that._skipRequestsInProgress) {
+                    that.trigger(CHANGE, {});
+                }
+            };
+
+        },
+
+        findSubgroups: function (group) {
+            var indexOfCurrentGroup = this._group.map(function (g) {
+                return g.field;
+            }).indexOf(group.field);
+
+            return this._group.slice(indexOfCurrentGroup + 1, this._group.length);
+        },
+
+        _composeItemsFilter: function (group, parents) {
+            var filter = this.filter() || {
+                logic: "and",
+                filters: []
+            };
+
+            filter = extend(true, {}, filter);
+            filter.filters.push({
+                field: group.field,
+                operator: "eq",
+                value: group.value
+            });
+
+            if (parents) {
+                for (var i = 0; i < parents.length; i++) {
+                    filter.filters.push({
+                        field: parents[i].field,
+                        operator: "eq",
+                        value: parents[i].value
+                    });
+                }
+            }
+
+            return filter;
+        },
+
+        _updateRangePristineData: function (group) {
+            var that = this;
+            var ranges = that._ranges;
+            var rangesLength = ranges.length;
+            var temp;
+            var currentGroup;
+            var range;
+            var dataLength;
+            var indexes;
+
+            for (var i = 0; i < rangesLength; i++) {
+                range = ranges[i];
+                dataLength = range.data.length;
+                indexes = [];
+
+                for (var j = 0; j < dataLength; j++) {
+                    currentGroup = range.data[j];
+                    indexes.push(j);
+
+                    if ((currentGroup.uid === group.uid) || (currentGroup.hasSubgroups && currentGroup.items.length && that._containsSubGroup(currentGroup, group, indexes))) {
+                        break;
+                    }
+                    indexes.pop();
+                }
+
+                if (indexes.length) {
+                    temp = ranges[i].pristineData;
+
+                    while (indexes.length > 1) {
+                        temp = temp[indexes.splice(0, 1)[0]].items;
+                    }
+                    temp[indexes[0]] = that._cloneGroup(group);
+                    break;
+                }
+            }
+        },
+
+        _containsSubGroup: function (group, subgroup, indexes) {
+            var that = this;
+            var length = group.items.length;
+            var currentSubGroup;
+
+            if (group.hasSubgroups && length) {
+                for (var i = 0; i < length; i++) {
+                    currentSubGroup = group.items[i];
+                    indexes.push(i);
+                    if (currentSubGroup.uid === subgroup.uid) {
+                        return true;
+                    } else if (currentSubGroup.hasSubgroups && currentSubGroup.items.length) {
+                        return that._containsSubGroup(currentSubGroup, subgroup, indexes);
+                    }
+                    indexes.pop();
+                }
+            }
+
+        },
+
+        _cloneGroup: function (group) {
+            var that = this;
+            group = typeof group.toJSON == "function" ? group.toJSON() : group;
+
+            if (group.items && group.items.length) {
+                group.items = group.items.map(function (item) {
+                    return that._cloneGroup(item);
+                });
+            }
+
+            return group;
         },
 
         _setFilterTotal: function(filterTotal, setDefaultValue) {
@@ -4022,6 +4582,13 @@ var __meta__ = { // jshint ignore:line
 
             if(val !== undefined) {
                 val = math.max(math.min(math.max(val, 1), that.totalPages()), 1);
+                var take = that.take();
+
+                if (that._isGroupPaged()) {
+                    val -= 1;
+                    that.range(val * take, take, null, "page");
+                    return;
+                }
                 that._query(that._pageableQueryOptions({ page: val }));
                 return;
             }
@@ -4075,8 +4642,101 @@ var __meta__ = { // jshint ignore:line
             return that._group;
         },
 
+        getGroupsFlat: function (data) {
+            var idx,
+                result = [],
+                length;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                var group = data[idx];
+                if (group.hasSubgroups) {
+                    result = result.concat(this.getGroupsFlat(group.items));
+                }
+
+                result.push(group);
+            }
+
+            return result;
+        },
+
         total: function() {
             return parseInt(this._total || 0, 10);
+        },
+
+        groupsTotal: function (includeExpanded) {
+            var that = this;
+
+            if (!that._group.length) {
+                return that.total();
+            }
+
+            if (that._isServerGrouped()) {
+                if (that._serverGroupsTotal) {
+                    return that._serverGroupsTotal;
+                }
+                that._serverGroupsTotal = that.total();
+
+                return that._serverGroupsTotal;
+            }
+
+            return that._calculateGroupsTotal(that._ranges.length ? that._ranges[0].data : [], includeExpanded);
+        },
+
+        _calculateGroupsTotal: function (groups, includeExpanded, itemsField, ignoreState) {
+            var that = this;
+            itemsField = itemsField || "items";
+            var total;
+            var length;
+
+            if (that._group.length && groups) {
+                total = 0;
+                length = groups.length;
+
+                for (var i = 0; i < length; i++) {
+                    total += that.groupCount(groups[i], includeExpanded, itemsField, ignoreState);
+                }
+                that._groupsTotal = total;
+                return total;
+            }
+
+            that._groupsTotal = that._data.length;
+            return that._groupsTotal;
+        },
+
+        groupCount: function (group, includeExpanded, itemsField, ignoreState) {
+            var that = this;
+            var total = 0;
+
+            if (group.hasSubgroups && that._groupsState[group.uid]) {
+                if (includeExpanded && !group.excludeHeader || ignoreState) {
+                    total += 1;
+                }
+
+                group[itemsField].forEach(function (subgroup) {
+                    total += that.groupCount(subgroup, includeExpanded, itemsField, ignoreState);
+                });
+            } else {
+                if (that._groupsState[group.uid]) {
+                    if (includeExpanded && !group.excludeHeader || ignoreState) {
+                        total++;
+                    }
+                    total += group[itemsField] ? group[itemsField].length : 0;
+                } else {
+                    total++;
+                }
+            }
+            return total;
+        },
+
+        countGroupRange: function (range) {
+            var total = 0;
+            var length = range.length;
+
+            for (var i = 0; i < length; i++) {
+                total += this.groupCount(range[i], true);
+            }
+
+            return total;
         },
 
         aggregate: function(val) {
@@ -4146,9 +4806,10 @@ var __meta__ = { // jshint ignore:line
 
         totalPages: function() {
             var that = this,
-            pageSize = that.pageSize() || that.total();
+                pageSize = that.pageSize() || that.total(),
+                total = that._isGroupPaged() ? that.groupsTotal(true) : that.total();
 
-            return math.ceil((that.total() || 0) / pageSize);
+            return math.ceil((total || 0) / pageSize);
         },
 
         inRange: function(skip, take) {
@@ -4180,28 +4841,45 @@ var __meta__ = { // jshint ignore:line
             return new Date().getTime();
         },
 
-        range: function(skip, take, callback) {
+        range: function(skip, take, callback, action) {
             this._currentRequestTimeStamp = this._timeStamp();
             this._skipRequestsInProgress = true;
+            var total = this._isGroupPaged() ? this.groupsTotal(true) : this.total();
 
-            skip = math.min(skip || 0, this.total());
+            if (action === "expandGroup" || action === "collapseGroup") {
+                this._updateOuterRangesLength();
+            }
+
+            skip = math.min(skip || 0, total);
             callback = isFunction(callback) ? callback : noop;
 
             var that = this,
                 pageSkip = math.max(math.floor(skip / take), 0) * take,
-                size = math.min(pageSkip + take, that.total()),
+                size = math.min(pageSkip + take, total),
                 data;
 
-            data = that._findRange(skip, math.min(skip + take, that.total()));
+            data = that._findRange(skip, math.min(skip + take, total), callback);
 
-            if (data.length || that.total() === 0) {
-                that._processRangeData(data, skip, take, pageSkip, size);
+            if ((data.length || total === 0) && !that._fetchingGroupItems) {
+                that._processRangeData(data, skip, take, that._originalPageSkip || pageSkip, that._originalSize || size, {
+                    action: action
+                });
+                that._originalPageSkip = null;
+                that._originalSize = null;
                 callback();
                 return;
             }
 
-            if (take !== undefined) {
-                if (!that._rangeExists(pageSkip, size)) {
+            if (that._isGroupPaged()) {
+                that._originalPageSkip = pageSkip;
+                that._originalSize = size;
+
+                pageSkip = math.max(math.floor(that._adjustPageSkip(skip, take) / take), 0) * take;
+                size = math.min(pageSkip + take, total);
+            }
+
+            if (take !== undefined && !that._fetchingGroupItems) {
+                if ((that._isGroupPaged() && !that._groupRangeExists(pageSkip, take)) || !that._rangeExists(pageSkip, size)) {
                     that.prefetch(pageSkip, take, function() {
                         if (skip > pageSkip && size < that.total() && !that._rangeExists(size, math.min(size + take, that.total()))) {
                             that.prefetch(size, take, function() {
@@ -4219,7 +4897,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _findRange: function(start, end) {
+        _findRange: function(start, end, callback) {
             var that = this,
                 ranges = that._ranges,
                 range,
@@ -4235,11 +4913,67 @@ var __meta__ = { // jshint ignore:line
                 remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates,
                 flatData,
                 count,
-                length;
+                length,
+                groupMapOptions = {
+                        take: end - start,
+                        skip: start,
+                        skipped: 0,
+                        taken: 0,
+                        includeParents: true
+                    },
+                prevRangeEnd,
+                isGroupPaged = that._isGroupPaged(),
+                startField = isGroupPaged ? "outerStart" : "start",
+                endField = isGroupPaged ? "outerEnd" : "end",
+                currentDataLength;
 
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
                 range = ranges[skipIdx];
-                if (start >= range.start && start <= range.end) {
+
+                if (isGroupPaged) {
+                    if (range.outerStart >= end) {
+                        return [];
+                    }
+
+                    if (start > range.outerEnd) {
+                        groupMapOptions.skipped += range.outerEnd - (prevRangeEnd || 0);
+                        prevRangeEnd = range.outerEnd;
+                        continue;
+                    }
+
+                    if (typeof prevRangeEnd !== "undefined" && prevRangeEnd != range.outerStart) {
+                        groupMapOptions.skipped += range.outerStart - prevRangeEnd;
+                    }
+
+                    if (groupMapOptions.skipped > groupMapOptions.skip) {
+                        return [];
+                    }
+
+                    if (typeof prevRangeEnd === "undefined" && start > 0 && range.start > 0) {
+                        groupMapOptions.skipped = range.outerStart;
+                    }
+
+                    takeIdx = skipIdx;
+                    while (true) {
+                        this._findGroupedRange(range.data, data, groupMapOptions, null, callback);
+                        currentDataLength = that._calculateGroupsTotal(data, true, "currentItems");
+
+                        if (currentDataLength >= groupMapOptions.take) {
+                            return data;
+                        }
+
+                        if (that._fetchingGroupItems) {
+                            return [];
+                        }
+                        takeIdx++;
+
+                        if (ranges[takeIdx] && ranges[takeIdx].outerStart === range.outerEnd) {
+                            range = ranges[takeIdx];
+                        } else {
+                            break;
+                        }
+                    }
+                } else if (start >= range[startField] && start <= range[endField]) {
                     count = 0;
 
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
@@ -4282,8 +5016,30 @@ var __meta__ = { // jshint ignore:line
                     }
                     break;
                 }
+                prevRangeEnd = range.outerEnd;
             }
             return [];
+        },
+
+        _getRangesMismatch: function (pageSkip) {
+            var that = this;
+            var ranges = that._ranges;
+            var mismatch = 0;
+            var i = 0;
+
+            while (true) {
+                var range = ranges[i];
+                if (!range || range.outerStart > pageSkip) {
+                    break;
+                }
+
+                if (range.outerEnd != range.end) {
+                    mismatch = range.outerEnd - range.end;
+                }
+                i++;
+            }
+
+            return mismatch;
         },
 
         _mergeGroups: function(data, range, skip, take) {
@@ -4302,12 +5058,12 @@ var __meta__ = { // jshint ignore:line
             return data.concat(range.slice(skip, take));
         },
 
-        _processRangeData: function(data, skip, take, pageSkip, size) {
+        _processRangeData: function(data, skip, take, pageSkip, size, eventData) {
             var that = this;
 
             that._pending = undefined;
 
-            that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
+            that._skip = skip > that.skip() && !that._omitPrefetch ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
 
             that._currentRangeStart = skip;
 
@@ -4330,7 +5086,7 @@ var __meta__ = { // jshint ignore:line
                     that._detachObservableParents();
                     that._data = data = that._observe(data);
                 }
-                that._process(data);
+                that._process(data, eventData);
             } finally {
                 that.options.serverPaging = paging;
                 that.options.serverSorting = sorting;
@@ -4381,10 +5137,12 @@ var __meta__ = { // jshint ignore:line
                             found = true;
                             range = that._ranges[idx];
 
-                            range.pristineData = temp;
-                            range.data = that._observe(temp);
-                            range.end = range.start + that._flatData(range.data, true).length;
-                            that._sortRanges();
+                            if (!that._isGroupPaged()) {
+                                range.pristineData = temp;
+                                range.data = that._observe(temp);
+                                range.end = range.start + that._flatData(range.data, true).length;
+                                that._sortRanges();
+                            }
 
                             break;
                         }
@@ -4421,12 +5179,23 @@ var __meta__ = { // jshint ignore:line
                     aggregate: that._aggregate
                 };
 
-            if (!that._rangeExists(skip, size)) {
+
+            if ((that._isGroupPaged() && !that._isServerGrouped() && that._groupRangeExists(skip, size))) {
+                if (callback) {
+                    callback();
+                }
+                return;
+            }
+
+            if ((that._isServerGroupPaged() && !that._groupRangeExists(skip, size)) || !that._rangeExists(skip, size)) {
                 clearTimeout(that._timeout);
 
                 that._timeout = setTimeout(function() {
                     that._queueRequest(options, function() {
                         if (!that.trigger(REQUESTSTART, { type: "read" })) {
+                            if (that._omitPrefetch) {
+                                that.trigger(PROGRESS);
+                            }
                             that.transport.read({
                                 data: that._params(options),
                                 success: that._prefetchSuccessHandler(skip, size, callback),
@@ -4471,6 +5240,65 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _adjustPageSkip: function (start, take) {
+            var that = this;
+            var prevRange = that._getPrevRange(start);
+            var result;
+            var total = that.total();
+            var mismatch;
+
+            if (prevRange) {
+                mismatch = that._getRangesMismatch(start);
+
+                if (!mismatch) {
+                    return start;
+                }
+                start -= mismatch;
+            }
+            result = math.max(math.floor(start / take), 0) * take;
+
+            if (result > total) {
+                while (true) {
+                    result -= take;
+                    if (result < total) {
+                        break;
+                    }
+                }
+            }
+            return result;
+        },
+
+        _getNextRange: function (end) {
+            var that = this,
+                ranges = that._ranges,
+                idx,
+                length;
+
+            for (idx = 0, length = ranges.length; idx < length; idx++) {
+                if (ranges[idx].start <= end && ranges[idx].end >= end) {
+                    return ranges[idx];
+                }
+            }
+        },
+
+        _getPrevRange: function (start) {
+            var that = this,
+                ranges = that._ranges,
+                idx,
+                range,
+                length = ranges.length;
+
+            for (idx = length - 1; idx >= 0; idx--) {
+                if (ranges[idx].outerStart <= start) {
+                    range = ranges[idx];
+                    break;
+                }
+
+            }
+
+            return range;
+        },
+
         _rangeExists: function(start, end) {
             var that = this,
                 ranges = that._ranges,
@@ -4484,6 +5312,30 @@ var __meta__ = { // jshint ignore:line
             }
 
             return false;
+        },
+
+        _groupRangeExists: function (start, end) {
+            var that = this,
+                ranges = that._ranges,
+                idx,
+                length,
+                availableItemsCount = 0,
+                total = that.groupsTotal(true);
+
+            if (end > total && !that._isServerGrouped()) {
+                end = total;
+            }
+
+            for (idx = 0, length = ranges.length; idx < length; idx++) {
+                var range = ranges[idx];
+                if (range.outerStart <= start && range.outerEnd >= start) {
+                    availableItemsCount += range.outerEnd - start;
+                } else if (range.outerStart <= end && range.outerEnd >= end) {
+                    availableItemsCount += end - range.outerStart;
+                }
+            }
+
+            return availableItemsCount >= end - start;
         },
 
         _getCurrentRangeSpan: function() {
@@ -4522,6 +5374,9 @@ var __meta__ = { // jshint ignore:line
 
         _removeModelFromRange: function(range, model) {
             this._eachItem(range.data, function(data) {
+                if (!data) {
+                    return;
+                }
                 for (var idx = 0; idx < data.length; idx++) {
                     var dataItem = data[idx];
 
@@ -4566,12 +5421,14 @@ var __meta__ = { // jshint ignore:line
             var mismatchFound = false;
             var mismatchLength = 0;
             var lengthDifference = 0;
+            var rangeLength;
             var range;
             var i;
 
             for (i = 0; i < rangesLength; i++) {
                 range = ranges[i];
-                lengthDifference = that._flatData(range.data, true).length - math.abs(range.end - range.start);
+                rangeLength = that._isGroupPaged() ? range.data.length : that._flatData(range.data, true).length;
+                lengthDifference = rangeLength - math.abs(range.end - range.start);
 
                 if (!mismatchFound && lengthDifference !== 0) {
                     mismatchFound = true;
@@ -4584,6 +5441,35 @@ var __meta__ = { // jshint ignore:line
                     range.start += mismatchLength;
                     range.end += mismatchLength;
                 }
+            }
+        },
+
+        _updateOuterRangesLength: function () {
+            var that = this;
+            var ranges = that._ranges || [];
+            var rangesLength = ranges.length;
+            var mismatchLength = 0;
+            var range;
+            var i;
+            var prevRange;
+            var rangeLength;
+
+            for (i = 0; i < rangesLength; i++) {
+                range = ranges[i];
+                rangeLength = that._isGroupPaged() ? that._calculateGroupsTotal(range.data, true, "items", true) : that._flatData(range.data, true).length;
+
+                if (prevRange) {
+                    if (prevRange.end != range.start) {
+                        mismatchLength = range.start - prevRange.end;
+                    }
+                    range.outerStart = prevRange.outerEnd + mismatchLength;
+                    mismatchLength = 0;
+                } else {
+                    range.outerStart = range.start;
+                }
+
+                range.outerEnd = range.outerStart + rangeLength;
+                prevRange = range;
             }
         }
     });

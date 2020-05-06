@@ -410,6 +410,8 @@ navigation:
         title: "Validation"
     "*selection":
         title: "Selection"
+    "*tilelayout":
+        title: "Tile Layout"
     "*various":
         title: "Various"
     "*nodes":

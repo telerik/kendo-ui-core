@@ -91,6 +91,13 @@
             assert.isOk(textbox.wrapper.hasClass("test"));
         });
 
+        it("sets the width of the input to 100%", function() {
+            var textbox = new TextBox(input.css("width", "200px"));
+
+            assert.equal(textbox.wrapper[0].style.width, "200px");
+            assert.equal(textbox.element[0].style.width, "100%");
+        });
+
         it("form reset support", function(done) {
             input.attr("value", "test");
 

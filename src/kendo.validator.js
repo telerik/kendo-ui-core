@@ -247,6 +247,7 @@ var __meta__ = { // jshint ignore:line
 
             if (this.validationSummary) {
                 this.validationSummary.off(NS);
+                this.validationSummary = null;
             }
         },
 
@@ -373,12 +374,6 @@ var __meta__ = { // jshint ignore:line
 
             input.removeAttr(ARIAINVALID);
 
-            if (wasValid !== valid) {
-                if (this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName })) {
-                    return;
-                }
-            }
-
             if (!valid) {
                 that._errors[fieldName] = messageText;
                 var lblId = lbl.attr('id');
@@ -415,6 +410,10 @@ var __meta__ = { // jshint ignore:line
                 input.attr(ARIAINVALID, true);
             } else {
                 delete that._errors[fieldName];
+            }
+
+            if (wasValid !== valid) {
+                this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName });
             }
 
             input.toggleClass(INVALIDINPUT, !valid);
@@ -548,13 +547,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         setOptions: function(options) {
-            var currentOptions = kendo.deepExtend(this.options, options);
+            if (options.validationSummary) {
+                this.hideValidationSummary();
+            }
+
+            kendo.deepExtend(this.options, options);
 
             this.destroy();
 
-            this.init(this.element, currentOptions);
+            this.init(this.element, this.options);
 
-            this._setEvents(currentOptions);
+            this._setEvents(this.options);
         },
 
         _getInputNames: function() {

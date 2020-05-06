@@ -100,7 +100,7 @@ A JavaScript array that contains the Form's items configuration.
 
 ### items.type `String`
 
-Defines the type of the item - "fieldset" or "group".
+Defines the type of the item. Available options: "group".
 
 ### items.field `String`
 
@@ -110,7 +110,7 @@ Maps to the model field which will be configured and sets the name of the input.
 
 Defines the editor widget type. Available options are:
 
-* DropDown widgets - "AutoComplete", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
+* DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
 * Input widgets - "NumericTextBox", "MaskedTextBox", "Switch", "Rating", "Slider", "ColorPicker"
 * Editor widget - "Editor"
@@ -241,7 +241,7 @@ Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/vali
         });
     </script>
 
-### validatable.validationSummary `Boolean|Object` *(default: true)*
+### validatable.validationSummary `Boolean|Object` *(default: false)*
 
 Configures the Form Validator [validationSummary](/api/javascript/ui/validator/validationSummary) option.
 

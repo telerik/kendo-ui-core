@@ -374,7 +374,8 @@ var __meta__ = { // jshint ignore:line
                 future = value && +value > +currentValue,
                 vertical = view !== undefined && view !== that._index,
                 to, currentView, compare,
-                disabled;
+                disabled,
+                viewWrapper = that.element.children(".k-calendar-view");
 
             if (!value) {
                 value = currentValue;
@@ -442,8 +443,10 @@ var __meta__ = { // jshint ignore:line
                     replace: replace
                 });
 
-                that.wrapper.removeClass("k-calendar-monthview k-calendar-yearview k-calendar-decadeview k-calendar-centuryview");
-                that.wrapper.addClass("k-calendar-" + currentView.name + "view");
+                if(that.options.componentType === "modern"){
+                    viewWrapper.removeClass("k-calendar-monthview k-calendar-yearview k-calendar-decadeview k-calendar-centuryview");
+                    viewWrapper.addClass("k-calendar-" + currentView.name + "view");
+                }
 
                 that.trigger(NAVIGATE);
 

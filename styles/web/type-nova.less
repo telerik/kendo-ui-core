@@ -159,6 +159,13 @@
 @card-info-border: mix(white, @card-info);
 
 
+//TileLayout
+@tilelayout-bg: darken(@background, 4%);
+
+@tilelayout-hint-bg: rgba(255, 255, 255, .2);
+@tilelayout-hint-border: @component-border;
+
+
 // Chat
 @chat-bg: @component-bg;
 @chat-text: @component-text;
@@ -696,6 +703,7 @@
 @import "themes/type.less";
 @import "themes/button.less";
 @import "Default/card/_theme.less";
+@import "Default/tilelayout/_theme.less";
 @import "Default/chat/_theme.less";
 @import "Default/calendar/_theme.less";
 @import "Default/multiviewcalendar/_theme.less";
@@ -842,6 +850,10 @@
     color: @normal-text-color;
     background-color: @background;
     border-color: @widget-border-color;
+}
+
+.k-input-label {
+    color: @input-text;
 }
 
 .k-state-selected {

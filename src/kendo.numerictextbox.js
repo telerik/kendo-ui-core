@@ -514,7 +514,7 @@ var __meta__ = { // jshint ignore:line
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
+                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME).attr("aria-hidden", "true");
             }
 
             try {
