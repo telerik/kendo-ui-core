@@ -6,21 +6,21 @@
 @widget-shadow: null;
 // Button
 @button-text-color: @normal-text-color;
-@button-background-color: contrast(@background, lighten(@background, 17%), darken(@background, 4%), 0.5);
+@button-background-color: contrast(@background, lighten(@background, 16%), darken(@background, 4%), 0.5);
 @button-border-color: @button-background-color;
 @button-gradient: null;
 @button-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
 @button-hover-text-color: @normal-text-color;
-@button-hover-background-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
-@button-hover-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 8%), 0.5);
+@button-hover-background-color: contrast(@background, lighten(@background, 24%), darken(@background, 8%), 0.5);
+@button-hover-border-color: contrast(@background, lighten(@background, 24%), darken(@background, 8%), 0.5);
 @button-hover-gradient: null;
 @button-hover-shadow: 0 2px 6px rgba(0,0,0,.2), 0 2px 3px rgba(0,0,0,.05);
 @button-active-text-color: contrast(@button-active-background);
-@button-active-background: contrast(@background, lighten(@background, 23%), darken(@background, 16%), 0.5);
+@button-active-background: contrast(@background, lighten(@background, 24%), darken(@background, 16%), 0.5);
 @button-active-border-color: @button-active-background;
 @button-active-gradient: null;
 @button-active-shadow: 0 6px 17px 0 rgba(0, 0, 0, 0.3);
-@button-focused-border-color: contrast(@background, lighten(@background, 23%), darken(@background, 20%), 0.5);
+@button-focused-border-color: contrast(@background, lighten(@background, 24%), darken(@background, 20%), 0.5);
 @button-focused-shadow: @button-hover-shadow;
 @button-focused-active-color: @button-active-text-color;
 @button-focused-active-background: @button-background-color;
@@ -94,18 +94,18 @@
 @error-background-color: #f2dede;
 @error-border-color: #eed3d7;
 @notification-border-radius: @border-radius;
-@notification-info-background-color: @info;
-@notification-info-text-color: contrast(@info, lighten(@info, 70%), darken(@info, 30%), 0.5);
-@notification-info-border-color: @info;
-@notification-success-background-color: @success;
-@notification-success-text-color: contrast(@success, lighten(@success, 70%), darken(@success, 30%), 0.5);
-@notification-success-border-color: @success;
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: contrast(@warning, lighten(@warning, 70%), darken(@warning, 35%), 0.5);
-@notification-warning-border-color: @warning;
-@notification-error-background-color: @error;
-@notification-error-text-color: contrast(@error, lighten(@error, 70%), darken(@error, 30%), 0.5);
-@notification-error-border-color: @error;
+@notification-info-bg: @info;
+@notification-info-text: contrast(@info);
+@notification-info-border: @info;
+@notification-success-bg: @success;
+@notification-success-text: contrast(@success);
+@notification-success-border: @success;
+@notification-warning-bg: @warning;
+@notification-warning-text: contrast(@warning);
+@notification-warning-border: @warning;
+@notification-error-bg: @error;
+@notification-error-text: contrast(@error);
+@notification-error-border: @error;
 @notification-gradient: null;
 
 
@@ -812,6 +812,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -819,6 +820,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -869,7 +871,6 @@ a.k-icon {
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -1248,33 +1249,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     border-color: @focused-border-color;
 }
 
-.k-button.k-bare {
-    position: relative;
-
-    &:before {
-        content: "";
-        background-color: currentcolor;
-        opacity: 0.12;
-        border-radius: inherit;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        display: none;
-    }
-
-    &.k-state-focused,
-    &:focus {
-
-        &:before {
-            display: block;
-        }
-    }
-}
-
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1792,6 +1767,10 @@ div.k-filebrowser-dropzone em
 // Selection
 .k-editor-inline {
     .selection(@accent);
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification
@@ -3347,8 +3326,6 @@ table.k-editor {
     border-color: @widget-border-color;
 }
 
-.k-editor.k-header,
-.editorToolbarWindow.k-header,
 .k-filebrowser .k-header {
     color: @normal-text-color;
     background-color: @alt-background-color;
@@ -3416,6 +3393,23 @@ table.k-editor {
 
 .k-dialog-button-group .k-button {
     box-shadow: none;
+}
+
+// Button
+.k-button:focus,
+.k-button.k-state-focus,
+.k-button.k-state-focused {
+    color: @button-hover-text-color;
+    border-color: @button-hover-border-color;
+    background-color: @button-hover-background-color;
+}
+.k-split-button:focus,
+.k-split-button.k-state-focus {
+    > .k-button {
+        color: @button-hover-text-color;
+        border-color: @button-hover-border-color;
+        background-color: @button-hover-background-color;
+    }
 }
 
 

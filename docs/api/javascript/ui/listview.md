@@ -744,7 +744,7 @@ Puts the specified ListView item in edit mode. Fires the [edit](/api/javascript/
         // get a reference to the ListView widget
         var listView = $("#listView").data("kendoListView");
         // edit the first ListView item
-        listView.edit(listView.element.children().first());
+        listView.edit(listView.content.children().first());
       });
     </script>
 
@@ -831,7 +831,7 @@ Removes the specified item from the ListView. Triggers [remove](/api/javascript/
         // get a reference to the list view widget
         var listView = $("#listView").data("kendoListView");
         // remove first list view item
-        listView.remove(listView.element.children().first());
+        listView.remove(listView.content.children().first());
       });
     </script>
 
@@ -942,7 +942,7 @@ Gets/sets the selected ListView item(s).
         // get a reference to the ListView widget
         var listView = $("#listView").data("kendoListView");
         // selects first ListView item
-        listView.select(listView.element.children().first());
+        listView.select(listView.content.children().first());
       });
     </script>
 
@@ -1043,7 +1043,7 @@ The event handler function context (available via the `this` keyword) will be se
         }
       });
       var listView = $("#listView").data("kendoListView");
-      listView.edit(listView.element.children().first());
+      listView.edit(listView.content.children().first());
     </script>
 
 #### To set after initialization
@@ -1089,7 +1089,7 @@ The event handler function context (available via the `this` keyword) will be se
       listView.bind("cancel", function(e) {
         console.log("Cancelled editing of item with id " + e.model.id);
       });
-      listView.edit(listView.element.children().first());
+      listView.edit(listView.content.children().first());
     </script>
 
 #### Event Data

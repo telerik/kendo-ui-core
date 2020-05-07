@@ -47,6 +47,16 @@
     flex: 1 1 0%;
     align-content: flex-start;
     position: relative;
+
+    &::after {
+        height: 0;
+        clear: both;
+        display: block;
+    }
+}
+.k-listview-content.k-d-flex,
+.k-listview-content.k-d-grid {
+    &::after { display: none; }
 }
 .k-listview-content-padding-rectangle {
     padding: @listview-padding-y @listview-padding-x;

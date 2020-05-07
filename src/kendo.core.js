@@ -3113,7 +3113,7 @@ function pad(number, digits, end) {
 
         dataSource = parseOption(element, "dataSource");
 
-        options = $.extend({}, parseOptions(element, widget.fn.options), options);
+        options = $.extend({}, parseOptions(element, $.extend({}, widget.fn.options, widget.fn.defaults) ), options);
 
         if (dataSource) {
             if (typeof dataSource === STRING) {

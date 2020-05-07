@@ -94,18 +94,18 @@
 @error-border-color: darken(@error, 29%);
 @disabled-text-color: contrast(@base, lighten(@base, 40%), darken(@base, 15%), 0.5);
 @notification-border-radius: @border-radius;
-@notification-info-background-color: @info;
-@notification-info-text-color: #fff;
-@notification-info-border-color: @notification-info-background-color;
-@notification-success-background-color: @success;
-@notification-success-text-color: @notification-info-text-color;
-@notification-success-border-color: @notification-success-background-color;
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: #000;
-@notification-warning-border-color: @notification-warning-background-color;
-@notification-error-background-color: @error;
-@notification-error-text-color: @notification-info-text-color;
-@notification-error-border-color: @notification-error-background-color;
+@notification-info-bg: @info;
+@notification-info-text: contrast( @notification-info-bg );
+@notification-info-border: @notification-info-bg;
+@notification-success-bg: @success;
+@notification-success-text: contrast( @notification-success-bg );
+@notification-success-border: @notification-success-bg;
+@notification-warning-bg: @warning;
+@notification-warning-text: contrast( @notification-warning-bg );
+@notification-warning-border: @notification-warning-bg;
+@notification-error-bg: @error;
+@notification-error-text: contrast( @notification-error-bg );
+@notification-error-border: @notification-error-bg;
 @notification-gradient: rgba(255,255,255,.25) 0%, rgba(255,255,255,0) 100%;
 
 
@@ -786,6 +786,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -794,6 +795,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -831,7 +833,6 @@
 .k-group,
 .k-content,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -1203,7 +1204,7 @@ td.k-group-cell,
     background-color: transparent;
 }
 
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1756,6 +1757,10 @@ div.k-filebrowser-dropzone em
     &.k-state-active {
         border-color: @widget-border-color;
     }
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification

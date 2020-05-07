@@ -21,11 +21,11 @@ The Sortable reorders the HTML DOM elements. It does not automatically update th
 
 ## Reordering of ListView Items
 
-To reorder the items of the ListView, initialize the Sortable on the ListView element. Normally, the `filter` property selects all elements that are direct children of the ListView element, for example, `.filter(">div")`.
+To reorder the items of the ListView, initialize the Sortable on the ListView element. Specify the list items using the `filter` property -- select all elements that are direct children of the ListView content element, for example, `.filter(".k-listview-content > div")`.
 
 ## Reordering in Editable ListViews
 
-If the editing functionality of the ListView is enabled, use a more specific filter selector that excludes the item which is currently in editing mode, for example, `.filter(">div:not(.k-edit-item)"`. In this way, the Sortable functionality will not interfere with the editing feature of the ListView.
+If the editing functionality of the ListView is enabled, use a more specific filter selector that excludes the item which is currently in editing mode, for example, `.filter(".k-listview-item > div:not(.k-edit-item)"`. In this way, the Sortable functionality will not interfere with the editing feature of the ListView.
 
 To reorder the data items of the ListView, use the [approach for reordering the Grid data items]({% slug sortable_aspnetcore_integration_grid %}#reordering-of-grid-table-rows). For more information on the Sortable events, refer to the [Sortable server-side API](/api/sortable#eventssystemactionkendomvcuifluentsortableeventbuilder).
 

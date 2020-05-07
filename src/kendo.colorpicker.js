@@ -612,12 +612,12 @@ var __meta__ = { // jshint ignore:line
                     '# } #' +
                     '#= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #>' +
                 '# if (clearButton && !_standalone) { #' +
-                    '<span class="k-clear-color k-button k-bare" title="#: messages.clearColor #"></span>' +
+                    '<span class="k-clear-color k-button k-flat" title="#: messages.clearColor #"></span>' +
                 '# } #' +
                 '</div></div></div>' +
             '# } #' +
              '# if (clearButton && !_standalone && !preview) { #' +
-                    '<div class="k-clear-color-container"><span class="k-clear-color k-button k-bare">#: messages.clearColor #</span></div>' +
+                    '<div class="k-clear-color-container"><span class="k-clear-color k-button k-flat">#: messages.clearColor #</span></div>' +
              '# } #' +
             '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
             '<div class="k-sliders-wrap k-vbox">' +

@@ -81,18 +81,18 @@
 @column-highlight-background-color: darken(@background, 4%);
 @scheduler-nonwork-background-color: darken(@background, 2%);
 @notification-border-radius: @border-radius;
-@notification-info-background-color: @info;
-@notification-info-text-color: darken(@info, 38%);
-@notification-info-border-color: @info;
-@notification-success-background-color: @success;
-@notification-success-text-color: darken(@success, 27%);
-@notification-success-border-color: @success;
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: darken(@warning, 27%);
-@notification-warning-border-color: @warning;
-@notification-error-background-color: @error;
-@notification-error-text-color: darken(@error, 25%);
-@notification-error-border-color: @error;
+@notification-info-bg: @info;
+@notification-info-text: contrast(@info);
+@notification-info-border: @info;
+@notification-success-bg: @success;
+@notification-success-text: contrast(@success);
+@notification-success-border: @success;
+@notification-warning-bg: @warning;
+@notification-warning-text: contrast(@warning);
+@notification-warning-border: @warning;
+@notification-error-bg: @error;
+@notification-error-text: contrast(@error);
+@notification-error-border: @error;
 @notification-gradient: null;
 @cell-border-color: transparent;
 @focused-shadow: none;
@@ -113,7 +113,7 @@
 
 
 // Toolbar
-@toolbar-bg: @header-background-color;
+@toolbar-bg: @widget-background-color;
 @toolbar-text: @normal-text-color;
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
@@ -717,6 +717,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -725,6 +726,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -752,7 +754,6 @@
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -973,33 +974,7 @@
     border-radius: @inputs-border-radius;
 }
 
-// Bare Button
-.k-button.k-bare {
-    position: relative;
-
-    &:before {
-        content: "";
-        background-color: currentcolor;
-        opacity: 0.12;
-        border-radius: inherit;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: none;
-    }
-
-    &.k-state-focused,
-    &:focus {
-
-        &:before {
-            display: block;
-        }
-    }
-}
-
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1771,8 +1746,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 }
 
 // Editor
-.k-editor.k-header,
-.editorToolbarWindow.k-header,
 .k-filebrowser .k-header {
     color: @widget-text-color;
     background-color: @widget-background-color;
@@ -2397,6 +2370,13 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     td.k-state-focused {
         box-shadow: none;
     }
+}
+
+
+// Editor
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 

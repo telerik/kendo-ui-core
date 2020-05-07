@@ -92,18 +92,18 @@
 @error-border-color: lighten(@normal-text-color, 20%);
 @disabled-text-color: lighten(@normal-text-color, 29%);
 @notification-border-radius: @border-radius;
-@notification-info-background-color: @info;
-@notification-info-text-color: @normal-text-color;
-@notification-info-border-color: @accent;
-@notification-success-background-color: @success;
-@notification-success-text-color: @normal-text-color;
-@notification-success-border-color: darken(@success, 40%);
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: @normal-text-color;
-@notification-warning-border-color: darken(@warning, 35%);
-@notification-error-background-color: @error;
-@notification-error-text-color: @normal-text-color;
-@notification-error-border-color: darken(@error, 20%);
+@notification-info-bg: tint(@info, 80%);
+@notification-info-text: shade(@info, 48%);
+@notification-info-border: tint(@info, 8%);
+@notification-success-bg: tint(@success, 80%);
+@notification-success-text: shade(@success, 48%);
+@notification-success-border: tint(@success, 8%);
+@notification-warning-bg: tint(@warning, 80%);
+@notification-warning-text: shade(@warning, 48%);
+@notification-warning-border: tint(@warning, 8%);
+@notification-error-bg: tint(@error, 80%);
+@notification-error-text: shade(@error, 48%);
+@notification-error-border: tint(@error, 8%);
 @notification-gradient: null;
 
 
@@ -796,6 +796,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -804,6 +805,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -832,7 +834,6 @@
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -898,7 +899,6 @@ td.k-group-cell,
 }
 
 .k-content,
-.k-editable-area,
 .k-panelbar > li.k-item,
 .k-panel > li.k-item {
     background-color: @content-background-color;
@@ -1219,32 +1219,7 @@ td.k-group-cell,
     background-color: @active-background-color;
 }
 
-.k-button.k-bare {
-    position: relative;
-
-    &:before {
-        content: "";
-        background-color: currentcolor;
-        opacity: 0.12;
-        border-radius: inherit;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: none;
-    }
-
-    &.k-state-focused,
-    &:focus {
-
-        &:before {
-            display: block;
-        }
-    }
-}
-
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1785,6 +1760,10 @@ div.k-filebrowser-dropzone em
 // Selection
 .k-editor-inline {
     .selection(@selected-border-color);
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification
@@ -2840,13 +2819,6 @@ div.k-filebrowser-dropzone em
 .k-grid-list > .k-item.k-last > .k-group-cell,
 .k-grid-list > .k-item.k-last > .k-spacer-cell {
     border-bottom-color: @grid-text;
-}
-
-// PDF Viewer
-.k-pdf-viewer {
-    .k-toolbar {
-
-    }
 }
 
 

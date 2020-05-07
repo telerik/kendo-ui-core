@@ -19,6 +19,47 @@
 @menu-link-padding: 1.2em 1.2em 1.1em;
 
 
+// Messagebox
+@messagebox-margin: 0 0 16px 0;
+@messagebox-padding-x: 8px; //@padding-x;
+@messagebox-padding-y: 4px; //@padding-y;
+@messagebox-border-width: 0 0 0 4px;
+
+@messagebox-font-size: inherit; //@font-size;
+@messagebox-line-height: (20 / 14);//@line-height;
+
+@messagebox-link-font-style: italic;
+@messagebox-link-text-decoration: underline;
+
+
+// Form
+@form-font-size: inherit;
+@form-line-height: (20 / 14);
+
+@form-label-margin: 0 0 8px;
+
+@form-fieldset-margin: 32px 0 0;
+@form-fieldset-padding-x: 0;
+@form-fieldset-padding-y: 0;
+
+@form-legend-margin: 0 0 16px;
+@form-legend-padding-x: 0;
+@form-legend-padding-y: 0;
+@form-legend-font-size: inherit;
+@form-legend-line-height: (20 / 14);
+
+@form-field-margin: 0 0 16px;
+
+@form-hint-margin: 0 0 4px;
+@form-hint-font-size: 12px;
+
+@form-buttons-margin: 16px 0 0;
+@form-buttons-padding-x: 0;
+@form-buttons-padding-y: 0;
+@form-buttons-border-width: 0;
+@form-buttons-spacing: 8px;
+
+
 // button
 @button-padding-x: 12px;
 @button-padding-y: 6px;
@@ -572,16 +613,10 @@
     padding: 8px .92em;
 }
 
-.k-tabstrip > .k-button {
+.k-tabstrip > .k-button.k-flat {
     top: 0;
-
-    &.k-bare {
-        top: 0;
-    }
 }
-
-.k-tabstrip-bottom > .k-button.k-bare
-{
+.k-tabstrip-bottom > .k-button.k-flat {
     top: auto;
 }
 

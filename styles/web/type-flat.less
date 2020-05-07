@@ -98,18 +98,18 @@
 
 
 @notification-border-radius: @border-radius;
-@notification-info-background-color:lighten(@info, 55%);
-@notification-info-text-color: @info;
-@notification-info-border-color: @info;
-@notification-success-background-color: lighten(@success, 52%);
-@notification-success-text-color: @success;
-@notification-success-border-color: @success;
-@notification-warning-background-color: lighten(@warning, 30%);
-@notification-warning-text-color: @warning;
-@notification-warning-border-color: @warning;
-@notification-error-background-color: lighten(@error, 30%);
-@notification-error-text-color: @error;
-@notification-error-border-color: @error;
+@notification-info-bg: tint(@info, 80%);
+@notification-info-text: @info;
+@notification-info-border: @info;
+@notification-success-bg: tint(@success, 80%);
+@notification-success-text: @success;
+@notification-success-border: @success;
+@notification-warning-bg: tint(@warning, 80%);
+@notification-warning-text: @warning;
+@notification-warning-border: @warning;
+@notification-error-bg: tint(@error, 80%);
+@notification-error-text: @error;
+@notification-error-border: @error;
 @notification-gradient: null;
 @draghandle-border-radius: 13px;
 @draghandle-border-color: @accent;
@@ -190,7 +190,7 @@
 
 // Toolbar
 @toolbar-bg: @header-background-color;
-@toolbar-text: @widget-text-color;
+@toolbar-text: contrast(@toolbar-bg);
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
 @toolbar-shadow: null;
@@ -784,14 +784,15 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
 @import "Default/filemanager/_theme.less";
-@import "Default/toolbar/_theme.less";
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -821,7 +822,6 @@
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -951,14 +951,12 @@ td.k-group-cell,
 .k-widget,
 .k-popup,
 .k-content,
-.k-toolbar,
 .k-dropdown .k-input
 {
     color: @widget-text-color;
 }
 
-.k-inverse,
-.k-toolbar label
+.k-inverse
 {
     color: @inverse-text-color;
 }
@@ -987,7 +985,6 @@ td.k-group-cell,
 
 .k-header,
 .k-grid-header,
-.k-toolbar,
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-numeric-wrap,
@@ -1191,7 +1188,7 @@ td.k-group-cell,
     border-color: @focused-border-color;
 }
 
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1695,6 +1692,10 @@ div.k-filebrowser-dropzone em
 // Selection
 .k-editor-inline {
     .selection(@selected-border-color);
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification
@@ -2252,7 +2253,6 @@ div.k-filebrowser-dropzone em
 }
 
 
-.k-toolbar,
 .k-grid-toolbar .k-button
 {
     border-color: @secondary-border-color;
@@ -2615,4 +2615,5 @@ div.k-filebrowser-dropzone em
 
 
 // Themes
+@import "Default/toolbar/_theme.less";
 @import "Default/tooltip/_theme.less";

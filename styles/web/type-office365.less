@@ -92,18 +92,18 @@
 @error-border-color: darken(@background, 14%);
 @disabled-text-color: darken(@hover-background, 31%);
 @notification-border-radius: @border-radius;
-@notification-info-background-color: lighten(@info, 39%);
-@notification-info-text-color: lighten(@normal-text-color, 10%);
-@notification-info-border-color: @notification-info-background-color;
-@notification-success-background-color: lighten(@success, 41%);
-@notification-success-text-color: lighten(@normal-text-color, 10%);
-@notification-success-border-color: @notification-success-background-color;
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: lighten(@normal-text-color, 10%);
-@notification-warning-border-color: @warning;
-@notification-error-background-color: lighten(@error, 30%);
-@notification-error-text-color: lighten(@normal-text-color, 10%);
-@notification-error-border-color: @notification-error-background-color;
+@notification-info-bg: @info;
+@notification-info-text: contrast(@info);
+@notification-info-border: @info;
+@notification-success-bg: @success;
+@notification-success-text: contrast(@success);
+@notification-success-border: @success;
+@notification-warning-bg: @warning;
+@notification-warning-text: contrast(@warning);
+@notification-warning-border: @warning;
+@notification-error-bg: @error;
+@notification-error-text: contrast(@error);
+@notification-error-border: @error;
 
 
 // Tooltip
@@ -800,6 +800,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -808,6 +809,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -837,7 +839,6 @@
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -1232,32 +1233,7 @@ td.k-group-cell,
     border-color: @focused-border-color;
 }
 
-.k-button.k-bare {
-    position: relative;
-
-    &:before {
-        content: "";
-        background-color: currentcolor;
-        opacity: 0.12;
-        border-radius: inherit;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: none;
-    }
-
-    &.k-state-focused,
-    &:focus {
-
-        &:before {
-            display: block;
-        }
-    }
-}
-
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1758,6 +1734,10 @@ div.k-filebrowser-dropzone em
 // Selection
 .k-editor-inline {
     .selection(@selected-border-color);
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification

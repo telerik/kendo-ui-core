@@ -74,18 +74,18 @@
 @validation-border-color: @warning;
 @validation-text-color: contrast(@validation-background-color, lighten(@warning, 80%), darken(@warning, 60%), 0.5);
 @notification-border-radius: @border-radius;
-@notification-info-background-color: @info;
-@notification-info-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 7%), 0.5);
-@notification-info-border-color: contrast(@base, lighten(@info, 1%), darken(@info, 11%), 0.5);
-@notification-success-background-color: @success;
-@notification-success-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 3%), 0.5);
-@notification-success-border-color: contrast(@base, lighten(@success, 1%), darken(@success, 11%), 0.5);
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: contrast(@base, lighten(@normal-text-color, 1%), darken(@normal-text-color, 7%), 0.5);
-@notification-warning-border-color: darken(@warning, 15%);
-@notification-error-background-color: contrast(@base, lighten(@error, 15%), darken(@error, 9%), 0.5);
-@notification-error-text-color: saturate(@normal-text-color, 12%);
-@notification-error-border-color: contrast(@base, lighten(@error, 15%), darken(@error, 20%), 0.5);
+@notification-info-bg: @info;
+@notification-info-text: contrast(@info);
+@notification-info-border: @info;
+@notification-success-bg: @success;
+@notification-success-text: contrast(@success);
+@notification-success-border: @success;
+@notification-warning-bg: @warning;
+@notification-warning-text: contrast(@warning);
+@notification-warning-border: @warning;
+@notification-error-bg: @error;
+@notification-error-text: contrast(@error);
+@notification-error-border: @error;
 @notification-gradient: null;
 
 
@@ -784,6 +784,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -792,6 +793,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -821,7 +823,6 @@
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -1185,7 +1186,7 @@ td.k-group-cell,
     background-color: @active-background-color;
 }
 
-.k-tabstrip-scrollable .k-button.k-bare:hover {
+.k-tabstrip-scrollable .k-button.k-flat:hover {
     background: @button-hover-background-color !important;
 }
 
@@ -1194,7 +1195,7 @@ td.k-group-cell,
     background-color: transparent;
 }
 
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1738,6 +1739,10 @@ div.k-filebrowser-dropzone em
 // Selection
 .k-editor-inline {
     .selection(@selected-border-color);
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification

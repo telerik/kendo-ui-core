@@ -107,6 +107,7 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.upload.js | Image Browser feature (optional) |
 | | kendo.filebrowser.js | Image Browser feature (optional) |
 | | kendo.imagebrowser.js | Image Browser feature (optional) |
+| | kendo.breadcrumb.js | Image Browser feature (optional) |
 | | kendo.resizable.js | Resize handle feature (optional) |
 | | kendo.tabstrip.js | Table wizard dialog feature (optional) |
 | | kendo.numerictextbox.js | Table wizard dialog feature (optional) |

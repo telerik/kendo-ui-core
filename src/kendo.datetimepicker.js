@@ -254,15 +254,15 @@ var __meta__ = { // jshint ignore:line
                            that._inputWrapper.addClass(FOCUSED);
                        })
                        .on("focusout" + ns, function() {
-                           if(that.options.singlePopup){
-                               return;
-                           }
                            that._inputWrapper.removeClass(FOCUSED);
                            if (element.val() !== that._oldText) {
                                that._change(element.val());
                                if (!element.val()) {
                                    that.dateView.current(kendo.calendar.getToday());
                                }
+                           }
+                           if (that.options.singlePopup) {
+                               return;
                            }
                            that.close("date");
                            that.close("time");
@@ -366,6 +366,15 @@ var __meta__ = { // jshint ignore:line
                 that.popup._hovered = true;
 
                 that.popup.open();
+
+                if (view === "time") {
+                    that._switchToTimeView();
+                } else {
+                    that._switchToDateView();
+                }
+
+                this._dateIcon.toggle(view !== "time");
+                this._timeIcon.toggle(view === "time");
 
                 setTimeout(function() {
                     that.popup._hovered = popupHovered;
@@ -653,10 +662,14 @@ var __meta__ = { // jshint ignore:line
                 id: id,
                 anchor: that.wrapper,
                 change: function() {
+                    var value = that._applyDateValue();
+
                     if(options.singlePopup){
+                        that.timeView._value.setFullYear(value.getFullYear());
+                        that.timeView._value.setMonth(value.getMonth());
+                        that.timeView._value.setDate(value.getDate());
                         that._switchToTimeView();
                     } else {
-                        var value = that._applyDateValue();
                         that._change(value);
                         that.close("date");
                     }
@@ -710,6 +723,7 @@ var __meta__ = { // jshint ignore:line
                 max: options.componentType === "modern" ? options.max : new DATE(MAX),
                 dates: msMin === options.max.getTime() ? [new Date(msMin)] : [],
                 parseFormats: options.parseFormats,
+                validateDate: true,
                 change: function(value, trigger) {
                     value = that._applyTimeValue(value);
 
@@ -995,6 +1009,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _switchToTimeView: function() {
+            this.timeView._updateRanges();
             this.popup.element.find(".k-group-start, .k-group-end").removeClass(STATE_ACTIVE).eq(1).addClass(STATE_ACTIVE);
             this.popup.element.find(".k-datetime-wrap").removeClass("k-date-tab").addClass("k-time-tab");
         },
@@ -1011,8 +1026,9 @@ var __meta__ = { // jshint ignore:line
 
         _setClickHandler: function() {
             var value = this._applyDateValue();
-            var time = this.timeView._currentlySelected;
+            var time = this.timeView._currentlySelected || new Date();
 
+            value = value || new Date();
             this.timeView._updateCurrentlySelected();
             value.setHours(time.getHours());
             value.setMinutes(time.getMinutes());

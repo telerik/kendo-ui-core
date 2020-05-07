@@ -1078,7 +1078,7 @@
                     this._removeOverlay();
 
                     // Prevent close animation from stopping
-                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-bare");
+                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-flat");
 
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
@@ -1747,7 +1747,7 @@
         templates = {
             wrapper: template("<div class='k-widget k-window'></div>"),
             action: template(
-                "<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action' aria-label='#= name #'>" +
+                "<a role='button' href='\\#' class='k-button k-flat k-button-icon k-window-action' aria-label='#= name #'>" +
                 "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
                 "</a>"
             ),

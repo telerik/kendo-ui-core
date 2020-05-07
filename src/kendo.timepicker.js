@@ -115,7 +115,7 @@ var __meta__ = { // jshint ignore:line
         MODERN_RENDERING_TEMPLATE = '<div tabindex="0" class="k-timeselector">' +
             '<div class="k-time-header">' +
                 '<span class="k-title"></span>' +
-                '<button class="k-button k-bare k-time-now" title="Select now" aria-label="Select now">Now</button>' +
+                '<button class="k-button k-flat k-time-now" title="Select now" aria-label="Select now">Now</button>' +
             '</div>' +
             '<div class="k-time-list-container">' +
                 '<span class="k-time-highlight"></span>' +
@@ -511,7 +511,7 @@ var __meta__ = { // jshint ignore:line
             var minHours = this._minHours;
             var maxHours = this._maxHours;
             var minMinutes = this._minMinutes;
-            var maxMinutes = this._minMinutes;
+            var maxMinutes = this._maxMinutes;
             var selectedHour = this._selectedHour;
             var firstIndex;
 
@@ -594,6 +594,9 @@ var __meta__ = { // jshint ignore:line
             if (!this.options.specifiedRange) {
                 return;
             }
+            if (!this._value) {
+                this._value = new Date();
+            }
 
             var max = this.options.max;
             var min = this.options.min;
@@ -605,12 +608,16 @@ var __meta__ = { // jshint ignore:line
                     max.getMonth() === this._value.getMonth() &&
                     max.getDate() === this._value.getDate()) {
                     this._validateMax = true;
+                } else {
+                    this._validateMax = false;
                 }
 
                 if (min.getFullYear() === this._value.getFullYear() &&
                     min.getMonth() === this._value.getMonth() &&
                     min.getDate() === this._value.getDate()) {
                     this._validateMin = true;
+                } else {
+                    this._validateMax = true;
                 }
 
                 if (!this._validateMax && !this._validateMin) {
@@ -1478,11 +1485,10 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 value = that.element.val();
 
-           if (that.options.timeView && that.options.timeView.list === "scroll") {
-               return;
+           if (!(that.options.timeView && that.options.timeView.list === "scroll")) {
+               that.close();
            }
 
-            that.close();
             if (value !== that._oldText) {
                 that._change(value);
             }

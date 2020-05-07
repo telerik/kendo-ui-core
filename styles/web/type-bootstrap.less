@@ -1,3 +1,4 @@
+@color-level-step: 8%;
 // Widget
 @widget-background-color: @background;
 @widget-text-color: @normal-text-color;
@@ -91,18 +92,18 @@
 @error-background-color: darken(@base, 3%);
 @error-border-color: darken(@background, 14%);
 @notification-border-radius: @border-radius;
-@notification-info-background-color: @info;
-@notification-info-text-color: darken(@info, 50%);
-@notification-info-border-color: darken(@info, 10%);
-@notification-success-background-color: @success;
-@notification-success-text-color: darken(@success, 50%);
-@notification-success-border-color: darken(@success, 10%);
-@notification-warning-background-color: @warning;
-@notification-warning-text-color: darken(@warning, 50%);
-@notification-warning-border-color: darken(@warning, 10%);
-@notification-error-background-color: @error;
-@notification-error-text-color: darken(@error, 50%);
-@notification-error-border-color: darken(@error, 10%);
+@notification-info-bg: tint(@info, 80%);
+@notification-info-text: shade(@info, 48%);
+@notification-info-border: tint(@info, 72%);
+@notification-success-bg: tint(@success, 80%);
+@notification-success-text: shade(@success, 48%);
+@notification-success-border: tint(@success, 72%);
+@notification-warning-bg: tint(@warning, 80%);
+@notification-warning-text: shade(@warning, 48%);
+@notification-warning-border: tint(@warning, 72%);
+@notification-error-bg: tint(@error, 80%);
+@notification-error-text: shade(@error, 48%);
+@notification-error-border: tint(@error, 72%);
 @notification-gradient: null;
 
 
@@ -800,6 +801,7 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
 @import "Default/radio/_theme.less";
@@ -808,6 +810,7 @@
 @import "Default/window/_theme.less";
 @import "Default/dialog/_theme.less";
 @import "Default/stepper/_theme.less";
+@import "Default/forms/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -837,7 +840,6 @@
 .k-content,
 .k-header,
 .k-filter-row > th,
-.k-editable-area,
 .k-separator,
 .k-autocomplete,
 .k-dropdown-wrap,
@@ -1213,7 +1215,7 @@ thead.k-grid-header tr:first-child {
     border-color: @focused-border-color;
 }
 
-.k-mediaplayer-toolbar .k-button.k-bare {
+.k-mediaplayer-toolbar .k-button.k-flat {
     &:active,
     &.k-state-active,
     &.k-state-active:hover {
@@ -1730,6 +1732,10 @@ div.k-filebrowser-dropzone em
 // Selection
 .k-editor-inline {
     .selection(@selected-border-color);
+}
+.k-window-content.editorToolbarWindow {
+    color: @toolbar-text;
+    background-color: @toolbar-bg;
 }
 
 // Notification

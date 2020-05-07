@@ -4165,7 +4165,7 @@ var __meta__ = { // jshint ignore:line
                         }
                         groupCount = (group.subgroupCount || group.itemCount) + 1;
                         itemsToSkip = options.skip - options.skipped;
-                        hasNotRequestedItems = (group.items.length - itemsToSkip) < (options.take - options.taken);
+                        hasNotRequestedItems = !group.items || (group.items.length - itemsToSkip) < (options.take - options.taken);
 
                         if (!that._hasExpandedSubGroups(group) && itemsToSkip > groupCount) {
                             options.skipped += groupCount;

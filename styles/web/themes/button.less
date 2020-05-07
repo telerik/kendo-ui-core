@@ -201,9 +201,11 @@
     // Focus state
     &:focus {
         .box-shadow(@button-focused-shadow);
+        border-color: @button-focused-border-color;
 
         .k-button {
             .box-shadow(none);
+            border-color: inherit;
         }
     }
 }

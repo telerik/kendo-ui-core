@@ -121,7 +121,7 @@
         it('scrolling buttons are rendered if tabs do not fit', function() {
             createTabStrip();
 
-            var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
+            var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-flat");
 
             assert.equal(buttons.length, 2);
             assert.isOk(buttons.eq(0).is(".k-tabstrip-prev"));
@@ -131,7 +131,7 @@
         it('scrolling buttons are not rendered if tabs fit', function() {
             createNonScrollableTabStrip();
 
-            var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-bare");
+            var buttons = tabstrip.wrapper.children(".k-button.k-button-icon.k-flat");
 
             assert.equal(buttons.length, 0);
         });
