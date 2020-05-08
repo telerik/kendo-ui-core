@@ -195,6 +195,33 @@
 
     }
 
+    // Calendar Modern
+
+    .k-calendar-header {
+        padding: @calendar-modern-header-padding-y @calendar-modern-header-padding-x;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 0 0 auto;
+
+        .k-button {
+            white-space: nowrap;
+            .k-button.k-flat();
+        }
+    }
+
+    .k-calendar-monthview,
+    .k-calendar-yearview,
+    .k-calendar-decadeview,
+    .k-calendar-decadeview {
+        padding: 0 @calendar-modern-header-padding-x;
+
+        th {
+            border-bottom-width: 0;
+            background-color: transparent;
+        }
+    }
+
 }
 
 

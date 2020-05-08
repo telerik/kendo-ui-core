@@ -4526,7 +4526,9 @@ function pad(number, digits, end) {
         if (nextFocusable.length) {
             target = nextFocusable;
         } else if (widgetInstance) {
-            target = widgetInstance.wrapper.find(":kendoFocusable").first();
+            target = widgetInstance instanceof kendo.ui.Editor ?
+                $(widgetInstance.body) :
+                widgetInstance.wrapper.find(":kendoFocusable").first();
         } else {
             target = element;
         }
@@ -4620,6 +4622,10 @@ function pad(number, digits, end) {
 
         var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)), 10);
         return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    };
+
+    kendo.selectorFromClasses = function(classes) {
+        return "."+classes.split(" ").join(".");
     };
 
     // kendo.saveAs -----------------------------------------------

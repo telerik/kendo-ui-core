@@ -320,6 +320,12 @@
 @calendar-cell-focused-shadow: @focused-item-shadow;
 
 
+// Timepicker
+@time-list-highlight-color: @widget-border-color;
+@time-list-focused-bg: rgba(contrast(@background), .04);
+@time-list-title-focus: contrast(@background);
+
+
 // Window
 @window-border-radius: @border-radius;
 @window-action-border-radius: @border-radius;
@@ -2519,6 +2525,81 @@ div.k-filebrowser-dropzone em
         .k-icon.k-i-warning {
             margin-right: 0;
             margin-left: 4.3em;
+        }
+    }
+}
+
+// Timepicker infinite
+// Timepicker header
+.k-time-header {
+    color: lighten(@component-text, 30%);
+
+    .k-time-now {
+        color: @accent;
+        background: transparent;
+
+        &:hover,
+        &:focus {
+            color: @link-hovered-text;
+        }
+    }
+}
+
+// Timepicker content
+.k-time-list-wrapper {
+    background-color: @group-background-color;
+
+    .k-title {
+        .fill(
+            @disabled-text-color,
+            @header-background-color,
+            @widget-border-color,
+        );
+
+        background: @group-background-color;
+    }
+
+    &.k-state-focused {
+        .k-title {
+            color: @time-list-title-focus;
+            opacity: 1;
+        }
+
+        &::before,
+        &::after {
+            background-color: @time-list-focused-bg;
+        }
+    }
+}
+
+.k-time-list {
+    &::before,
+    &::after {
+        @shadow-size: 3em;
+        box-shadow: 0 0 @shadow-size (@shadow-size / 2) @group-background-color;
+    }
+
+    .k-item:hover {
+        color: @accent;
+    }
+}
+
+.k-time-container {
+    color: lighten(@component-text, 30%);
+    background: transparent;
+}
+
+.k-time-highlight {
+    background-color: @component-bg;
+    border-color: @time-list-highlight-color;
+}
+
+.k-datetime-container {
+    .k-date-tab {
+
+        .k-datetime-buttongroup,
+        .k-datetime-selector {
+            background-color: @component-bg;
         }
     }
 }

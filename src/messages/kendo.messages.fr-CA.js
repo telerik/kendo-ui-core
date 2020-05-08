@@ -177,7 +177,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Exporter vers PDF",
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
-    "save": "Enregistrer les modifications"
+    "save": "Enregistrer les modifications",
+    "search": "Recherche"
   },
   "editable": {
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",

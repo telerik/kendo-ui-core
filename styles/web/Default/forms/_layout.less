@@ -87,8 +87,20 @@
 
 // Horizontal forms
 .k-form-horizontal {
+    .k-label:not(.k-checkbox-label),
+    .k-label:not(.k-radio-label) {
+        margin-right: @horizontal-form-label-margin-x;
+        padding-top: @horizontal-form-label-padding-top;
+        width: @horizontal-form-label-width;
+        justify-content: @horizontal-form-label-justify-content;
+    }
+
     .k-form-field {
         flex-flow: row nowrap;
+    }
+
+    .k-form-field-wrap {
+        flex: 1;
     }
 }
 
@@ -109,7 +121,12 @@
     > :first-child {
         margin-inline-start: 0;
     }
+
+    &.k-buttons-end {
+        justify-content: flex-end;
+    }
 }
+
 
 
 

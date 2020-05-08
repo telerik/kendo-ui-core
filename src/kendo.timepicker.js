@@ -205,6 +205,10 @@ var __meta__ = { // jshint ignore:line
             } else if (key == keys.DOWN) {
                 container.scrollTop(container.scrollTop() + itemHeight);
                 e.preventDefault();
+            } else if (key === keys.ENTER) {
+                that._setClickHandler();
+            } else if (key === keys.ESC) {
+                that._cancelClickHandler();
             }
         },
 
@@ -216,7 +220,7 @@ var __meta__ = { // jshint ignore:line
             this.list.find(".k-time-list-wrapper").removeClass(FOCUSED);
             list.addClass(FOCUSED);
             this.list.focus();
-            this._scrollTop = list.scrollTop();
+            this._scrollTop = list.find('.k-scrollable').scrollTop();
         },
         _createClassicRenderingList: function () {
             var that = this;
@@ -1112,6 +1116,7 @@ var __meta__ = { // jshint ignore:line
                             that.addTranslate();
                             that.applyValue(that._value);
                             that._updateRanges();
+                            that._focusList(that.list.find(".k-time-list-wrapper:eq(0)"));
                         }
                     }
                 }));

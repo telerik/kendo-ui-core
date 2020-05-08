@@ -6,6 +6,8 @@
 @input-indent: .8em;
 @input-offset: (@input-height + .35em);
 
+@line-height: (20 / 14);
+
 @icon-size: 16px;
 @input-icon-width: calc(@input-height + .35em);
 
@@ -58,6 +60,11 @@
 @form-buttons-padding-y: 0;
 @form-buttons-border-width: 0;
 @form-buttons-spacing: 8px;
+
+@horizontal-form-label-margin-x: 10px;
+@horizontal-form-label-padding-top: 5px;
+@horizontal-form-label-width: 25%;
+@horizontal-form-label-justify-content: flex-end;
 
 
 // button
@@ -161,6 +168,10 @@
 
 @calendar-meta-cell-size: ( (60px / @calendar-font-size) * 1em );
 
+@calendar-modern-header-padding-x: 16px;
+@calendar-modern-header-padding-y: 8px;
+
+
 // Multiviewcalendar
 @multiviewcalendar-font-size: @calendar-font-size;
 @multiviewcalendar-line-height: @calendar-line-height;
@@ -181,6 +192,26 @@
 @multiviewcalendar-centuryview-cell-padding-y: @multiviewcalendar-cell-padding-y;
 
 @multiviewcalendar-header-cell-font-size: 12px;
+
+
+// DateTimePickers
+@timepicker-padding-x: 8px;
+@timepicker-padding-y: 4px;
+
+@time-highlight-size: 1px;
+
+@time-header-padding: null;
+@timepicker-header-height: 2em;
+
+@time-list-padding: 20px;
+@time-list-focus-size: 2px;
+@time-list-width: 5em;
+@time-list-height: calc( 7 * (@line-height * 1em + 2 * @timepicker-padding-y));
+
+@time-font-size-xs: 10px;
+
+@datetime-width: ((4 * @time-list-width) + 1em);
+
 
 // ScrollView
 @scrollview-pagebutton-size: 8px;
