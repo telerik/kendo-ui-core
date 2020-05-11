@@ -73,19 +73,13 @@
 
 .k-filebrowser {
 
-    .k-filebrowser-toolbar
-    {
+    .k-filebrowser-toolbar {
         border-style: solid;
         border-width: 1px;
         margin: 8px 0 0;
         padding: .25em;
         line-height: 23px;
         white-space: nowrap; // required by WebKit
-
-        .k-button.k-state-disabled
-        {
-            display: none;
-        }
     }
 
     .k-tiles-arrange
@@ -98,22 +92,19 @@
         }
     }
 
-    .k-upload
-    {
-        float: left;
-        z-index: 10010;
+    .k-upload {
         border-width: 0;
         background-color: transparent;
 
-        .k-upload-status
-        {
+        .k-upload-status,
+        .k-upload-files {
             display: none;
         }
 
-        .k-upload-button
-        {
+        .k-upload-button {
+            margin: 0;
             width: auto;
-            margin-left: 0;
+            min-width: auto;
         }
     }
 

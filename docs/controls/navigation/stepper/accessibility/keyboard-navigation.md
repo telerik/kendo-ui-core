@@ -16,16 +16,14 @@ Kendo UI Stepper supports the following keyboard shortcuts:
 
 | SHORTCUT						| DESCRIPTION				                                                        |
 |:---                 |:---                                                                                |
-| `Left arrow`               | Focuses previous Step |
-| `Up arrow`               | Focuses previous Step |
-| `Right arrow`               | Focuses next Step |
-| `Down arrow`               | Focuses next Step |
+| `Left arrow` or `Up arrow` or `Shift`+`Tab`               | Focuses previous Step |
+| `Right arrow` or `Down arrow` or `Tab`              | Focuses next Step |
 | `Home`               | Focuses first Step |
 | `End`               | Focuses last Step |
 | `Enter`             | Selects the focused Step|
 | `Space`             | Selects the focused Step|
-| `Tab`               | Move the focus away from the Stepper |
-| `Shift`+`Tab`    | Move the focus away from the Stepper |
+| `Tab`               | To move the focus away from the Stepper select last step and press `Tab` |
+| `Shift`+`Tab`    | To move the focus away from the Stepper select first step and press `Shift`+`Tab` |
 
 > When using keyboard navigation the focusing and selecting behavior of the Stepper can be configured via the [`selectOnFocus`](/api/javascript/ui/stepper/configuration/selectOnFocus) configuration option. By default this option is disabled and additional action is required by the user to select the focused step.
 

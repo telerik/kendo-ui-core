@@ -886,7 +886,7 @@
 .k-state-disabled .k-link,
 .k-dropzone em,
 .k-slider .k-draghandle {
-    color: @disabled-border-color;
+    color: @disabled-text-color;
 }
 
 // Border radius
@@ -1780,55 +1780,37 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: darken(@info, 25%);
 }
 
-.k-file-success .k-file-name,
-.k-file-success .k-upload-pct {
-    color: darken(@success, 25%);
-}
+.k-file-success {
 
-.k-file-success .k-progress {
-    background-color: darken(@success, 25%);
+    .k-file-validation-message,
+    .k-upload-pct {
+        color: darken(@success, 25%);
+    }
+
+    .k-progress {
+        background-color: darken(@success, 25%);
+    }
 }
 
 .k-file-error {
-    color: darken(@error, 25%);
 
-    .k-file-extension-wrapper,
-    .k-multiple-files-extension-wrapper,
-    .k-file-group-wrapper,
-    .k-multiple-files-group-wrapper {
+    .k-file-validation-message,
+    .k-upload-pct {
         color: darken(@error, 25%);
-        border-color: darken(@error, 25%);
     }
 
-    .k-file-extension-wrapper:before,
-    .k-multiple-files-extension-wrapper:before {
-        background-color: @widget-background-color;
-        border-color: transparent transparent darken(@error, 25%) darken(@error, 25%);
+    .k-progress {
+        background-color: @accent;
     }
-}
-
-.k-file-error .k-progress {
-    background-color: @accent;
 }
 
 .k-file-extension-wrapper,
 .k-multiple-files-extension-wrapper,
 .k-file-group-wrapper,
-.k-multiple-files-group-wrapper {
+.k-multiple-files-group-wrapper,
+.k-file-invalid-group-wrapper {
     color: @disabled-text-color;
     border-color: @disabled-text-color;
-}
-
-.k-file-invalid .k-file-name-invalid {
-    color: darken(@error, 25%);
-}
-
-.k-file-invalid-extension-wrapper,
-.k-multiple-files-invalid-extension-wrapper,
-.k-file-invalid-group-wrapper,
-.k-multiple-files-invalid-group-wrapper {
-    color: darken(@error, 25%);
-    border-color: darken(@error, 25%);
 }
 
 .k-file-extension-wrapper:before,
@@ -1837,20 +1819,9 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     border-color: transparent transparent @disabled-text-color @disabled-text-color;
 }
 
-.k-file-invalid-extension-wrapper:before,
-.k-multiple-files-invalid-extension-wrapper:before {
-    background-color: @widget-background-color;
-    border-color: transparent transparent darken(@error, 25%) darken(@error, 25%);
-}
-
 .k-multiple-files-extension-wrapper:after {
     border-top-color: @disabled-text-color;
     border-left-color: @disabled-text-color;
-}
-
-.k-multiple-files-invalid-extension-wrapper:after {
-    border-top-color: darken(@error, 25%);
-    border-left-color: darken(@error, 25%);
 }
 
 .k-file-size,

@@ -81,9 +81,8 @@
 // Filemanager view
 .k-filemanager-view {
     display: flex;
-    flex: 1 1 0%;
-    flex-flow: column nowrap;
-    overflow: hidden;
+    flex: 1 1 auto;
+    flex-flow: row nowrap;
 
     > .k-filemanager-listview,
     > .k-filemanager-grid {
@@ -244,10 +243,27 @@
 
 
 // Resizing Handle
+.k-filemanager-resizable {
+
+    .k-filemanager-navigation,
+    .k-filemanager-preview {
+        border-width: 0;
+    }
+}
 .k-filemanager .k-splitbar {
+    // border-width: 0;
     flex-shrink: 0;
     display: inline-flex;
     position: relative;
+}
+.k-filemanager .k-splitbar-horizontal {
+    width: 6px;
+    flex-direction: column;
+    align-items: center;
+
+    .k-resize-handle {
+        width: 2px;
+    }
 }
 
 

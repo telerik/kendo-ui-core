@@ -1424,6 +1424,10 @@ div.k-filebrowser-dropzone em,
         color: @primary-disabled-text-color;
     }
 
+    .k-dropdown {
+        color: @normal-text-color;
+    }
+
 }
 
 .k-autocomplete.k-state-active,
@@ -1587,59 +1591,39 @@ div.k-filebrowser-dropzone em
     background-color: @upload-progress-background-color;
 }
 
-.k-file-success .k-file-name,
-.k-file-success .k-upload-pct
-{
-    color: @upload-success-text-color;
+.k-file-success {
+
+    .k-file-validation-message,
+    .k-upload-pct {
+        color: @upload-success-text-color;
+    }
+
+    .k-progress {
+        background-color: @upload-success-background-color;
+    }
+
 }
 
-.k-file-success .k-progress
-{
-    background-color: @upload-success-background-color;
-}
+.k-file-error {
 
-.k-file-error
-{
-    color: @upload-error-text-color;
-
-    .k-file-extension-wrapper,
-    .k-multiple-files-extension-wrapper,
-    .k-file-group-wrapper,
-    .k-multiple-files-group-wrapper {
+    .k-file-validation-message,
+    .k-upload-pct {
         color: @upload-error-text-color;
-        border-color: @upload-error-text-color;
     }
 
-    .k-file-extension-wrapper:before,
-    .k-multiple-files-extension-wrapper:before {
-        background-color: @widget-background-color;
-        border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
+    .k-progress {
+        background-color: @upload-error-background-color;
     }
 }
 
-.k-file-error .k-progress
-{
-    background-color: @upload-error-background-color;
-}
 
 .k-file-extension-wrapper,
 .k-multiple-files-extension-wrapper,
 .k-file-group-wrapper,
-.k-multiple-files-group-wrapper {
+.k-multiple-files-group-wrapper,
+.k-file-invalid-group-wrapper {
     color: @disabled-text-color;
     border-color: @disabled-text-color;
-}
-
-.k-file-invalid .k-file-name-invalid {
-    color: @upload-error-text-color;
-}
-
-.k-file-invalid-extension-wrapper,
-.k-multiple-files-invalid-extension-wrapper,
-.k-file-invalid-group-wrapper,
-.k-multiple-files-invalid-group-wrapper {
-    color: @upload-error-text-color;
-    border-color: @upload-error-text-color;
 }
 
 .k-file-extension-wrapper:before,
@@ -1648,21 +1632,11 @@ div.k-filebrowser-dropzone em
     border-color: transparent transparent @disabled-text-color @disabled-text-color;
 }
 
-.k-file-invalid-extension-wrapper:before,
-.k-multiple-files-invalid-extension-wrapper:before {
-    background-color: @widget-background-color;
-    border-color: transparent transparent @upload-error-text-color @upload-error-text-color;
-}
-
 .k-multiple-files-extension-wrapper:after {
     border-top-color: @disabled-text-color;
     border-left-color: @disabled-text-color;
 }
 
-.k-multiple-files-invalid-extension-wrapper:after {
-    border-top-color: @upload-error-text-color;
-    border-left-color: @upload-error-text-color;
-}
 
 .k-file-size,
 .k-file-information,
@@ -1798,10 +1772,10 @@ div.k-filebrowser-dropzone em
     background-color: @hover-background;
 }
 
-.k-gantt .k-treelist .k-state-selected,
-.k-gantt .k-treelist .k-state-selected td,
-.k-gantt .k-treelist .k-alt.k-state-selected,
-.k-gantt .k-treelist .k-alt.k-state-selected > td
+.k-gantt .k-treelist tr.k-state-selected,
+.k-gantt .k-treelist tr.k-state-selected td,
+.k-gantt .k-treelist tr.k-alt.k-state-selected,
+.k-gantt .k-treelist tr.k-alt.k-state-selected > td
 {
     background-color: @selected-background-color;
 }
@@ -2647,8 +2621,8 @@ td.k-group-cell,
 .k-grid td.k-state-selected,
 .k-grid td.k-state-selected.k-state-focused,
 .k-marquee-color,
-.k-gantt .k-treelist .k-state-selected,
-.k-gantt .k-treelist .k-state-selected td,
+.k-gantt .k-treelist tr.k-state-selected,
+.k-gantt .k-treelist tr.k-state-selected td,
 .k-gantt .k-treelist .k-alt.k-state-selected,
 .k-gantt .k-treelist .k-alt.k-state-selected > td,
 .k-listview > .k-state-selected,
@@ -2801,10 +2775,10 @@ td.k-group-cell,
     background: @selected-background;
 }
 
-.k-treelist .k-state-selected,
-.k-treelist .k-state-selected td,
-.k-treelist .k-alt.k-state-selected,
-.k-treelist .k-alt.k-state-selected > td
+.k-treelist tr.k-state-selected,
+.k-treelist tr.k-state-selected td,
+.k-treelist tr.k-alt.k-state-selected,
+.k-treelist tr.k-alt.k-state-selected > td
 {
     background-color: @selected-background;
     border-color: @selected-background;

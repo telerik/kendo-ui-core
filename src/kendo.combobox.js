@@ -28,7 +28,6 @@ var __meta__ = { // jshint ignore:line
         Select = ui.Select,
         caret = kendo.caret,
         support = kendo.support,
-        isIE = kendo.support.browser.msie,
         placeholderSupported = support.placeholder,
         activeElement = kendo._activeElement,
         keys = kendo.keys,
@@ -252,10 +251,6 @@ var __meta__ = { // jshint ignore:line
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
-
-            if(this._userTriggered && isIE){
-                return;
-            }
 
             that.text(that.text());
 
@@ -806,7 +801,7 @@ var __meta__ = { // jshint ignore:line
 
                     that._oldIndex = that.selectedIndex;
 
-                    that._prev = that.input.val();
+                    that._prev = that._oldText = that.input.val();
 
                     if (that._state === STATE_FILTER) {
                         that._state = STATE_ACCEPT;
