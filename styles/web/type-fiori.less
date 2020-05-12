@@ -139,12 +139,12 @@
 @event-inverse-text-color: contrast( @event-text-color );
 @scheduler-nonwork-background-color: darken(@hover-background, 2%);
 @resize-background-color: @background;
-@upload-progress-background-color: darken(@info, 50%);
-@upload-progress-text-color: darken(@info, 50%);
-@upload-success-background-color: darken(@success, 40%);
-@upload-success-text-color: darken(@success, 40%);
+@upload-progress-background-color: @info;
+@upload-progress-text-color: @info;
+@upload-success-background-color: @success;
+@upload-success-text-color: @success;
 @upload-error-background-color: @error;
-@upload-error-text-color: darken(@error, 50%);
+@upload-error-text-color: @error;
 @task-summary-color: darken(@background, 20%);
 @task-summary-selected-color: lighten(@info, 4%);
 @loading-panel-color: @background;
@@ -938,6 +938,7 @@ td.k-group-cell,
 .k-textbox > input,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
+.k-textbox.k-state-focused,
 .k-autocomplete.k-state-focused .k-input,
 .k-dropdown-wrap.k-state-focused .k-input,
 .k-picker-wrap.k-state-focused .k-input,
@@ -1595,13 +1596,7 @@ div.k-filebrowser-dropzone em
     border-radius: 0 0 @border-radius @border-radius;
 }
 
-.k-file-progress
-{
-    color: @upload-progress-text-color;
-}
-
-.k-file-progress .k-progress
-{
+.k-file-progress .k-progress {
     background-color: @upload-progress-background-color;
 }
 
@@ -1617,7 +1612,8 @@ div.k-filebrowser-dropzone em
     }
 }
 
-.k-file-error {
+.k-file-error,
+.k-file-invalid {
 
     .k-file-validation-message,
     .k-upload-pct {
@@ -1684,6 +1680,7 @@ div.k-filebrowser-dropzone em
 
 .k-textbox:focus,
 .k-textarea:focus,
+.k-textbox.k-state-focused,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
 .k-picker-wrap.k-state-focused,
@@ -2262,8 +2259,8 @@ div.k-filebrowser-dropzone em
 .k-textbox:hover,
 .k-textarea:hover,
 .k-textbox:focus,
-.k-textarea:focus
-{
+.k-textarea:focus,
+.k-textbox.k-state-focused {
     border-color: @drop-down-hover-border-color;
 }
 

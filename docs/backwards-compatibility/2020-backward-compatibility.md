@@ -17,6 +17,32 @@ This article lists the breaking changes in the Kendo UI 2020 releases.
 * The responsive Pager no longer has the `k-pager-lg` breakpoint and class.
 * The page numbers drop-down of the responsive Pager is now an HTML `select` element. 
 
+**Validator**
+
+ As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved styling for messages, which differ significantly from the existing. While not recommended, reverting to the previous behaviour is possible by tweaking the errorTemplate and some styles:
+
+ ```
+ $(container).kendoValidator({
+    ...
+    errorTemplate: '' +
+        '<span class="k-tooltip k-tooltip-error k-validator-tooltip">' +
+            '<span class="k-tooltip-icon k-icon k-i-warning"></span>' +
+            '<span class="k-tooltip-content">#= message #</span>' +
+        '</span>',
+    ...
+})
+ ```
+
+ ```
+    /* Styles for validation messages */
+    span.k-widget.k-tooltip-validation {
+        margin: 0; /* removes margin */
+        width: 160px; /* set width */
+        display; inline-flex; /* changes the appearance from block to inline */
+        text-align: left; /* aligns the text */
+    }
+ ```
+
 ## Kendo UI 2020 R1 SP1
 
 **Grid**, **Spreadsheet**, **Filter**

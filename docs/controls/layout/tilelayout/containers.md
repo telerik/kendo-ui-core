@@ -1,13 +1,13 @@
 ---
 title: Tile Containers
-page_title: Kendo UI for jQuery Tile Layout Documentation | Tile Layout Containers | Kendo UI
-description: "Learn how to define the content and headers of the Kendo UI for jQuery Tile Layout containers."
+page_title: Kendo UI for jQuery TileLayout Documentation | TileLayout Containers | Kendo UI
+description: "Learn how to define the content and headers of the Kendo UI for jQuery TileLayout containers."
 slug: containers_kendoui_tilelayout_widget
 ---
 
 # Layout Containers
 
-The Kendo UI Tile Layout widget tiles are configured by using an array of container objects. 
+The Kendo UI TileLayout widget tiles are configured by using an array of container objects. 
 
 ## Dimensions
 
@@ -27,7 +27,7 @@ The main tile content is rendered from the [`bodyTemplate`](/api/javascript/ui/t
 
 ## See Also
 
-* [Basic Usage of the Tile Layout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the Tile Layout](/api/javascript/ui/tilelayout)
+* [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
+* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
 * [Resizing]({% slug resizing_kendoui_tilelayout_widget %})
 * [Reordering]({% slug reordering_kendoui_tilelayout_widget %})

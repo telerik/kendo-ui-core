@@ -37,7 +37,9 @@ Setting the `items` configuration maps the model fields and allows you to:
 * group the editors
 * set validation rules for specific fields
 
-The following example shows the Form initialized with the `items` configuration set.
+## Configure Label
+
+The following example shows how to set the `label` of an item. Enabling the `optional` setting, indicates that the field is optional (not required).
 
 ```dojo
     <form id="form"></form>
@@ -46,50 +48,140 @@ The following example shows the Form initialized with the `items` configuration 
         $(document).ready(function () {
             $("#form").kendoForm({
                 formData: {
-                    Username: "",
-                    Email: "",
-                    Password: "",
-                    Birth: new Date(),
-                    Agree: false
+                    FirstName: "",
+                    LastName: "",
+                    Birth: new Date()
                 },
                 items: [
                     { 
-                        field: "Username", 
-                        label: "Username:", 
+                        field: "FirstName", 
+                        label: "First Name:", 
                         validation: { required: true } 
                     },
                     { 
-                        field: "Email", 
-                        label: "Email", 
-                        validation: { required: true, email: true }
+                        field: "LastName", 
+                        label: "Last Name:", 
+                        validation: { required: true } 
+                    },
+                    {
+                        field: "Birth",
+                        label: { text: "Date of Birth:", optional: true }
+                    }
+                ]
+            });
+        });
+    </script>
+```
+
+## Configure Hint
+
+The following example shows how to set the `hint` of an item. The hint is displayed below the editor of the field. 
+
+```dojo
+    <form id="form"></form>
+
+    <script>
+        $(document).ready(function () {
+            $("#form").kendoForm({
+                formData: {
+                    FirstName: "",
+                    LastName: "",
+                    Password: "",
+                    Birth: new Date()
+                },
+                items: [
+                    { 
+                        field: "FirstName", 
+                        label: "First Name:", 
+                        validation: { required: true } 
+                    },
+                    { 
+                        field: "LastName", 
+                        label: "Last Name:", 
+                        validation: { required: true } 
                     },
                     { 
                         field: "Password", 
                         label: "Password:", 
                         validation: { required: true }, 
                         hint: "Hint: enter alphanumeric characters only." 
-                    },
-                    { 
-                        field: "Birth", 
-                        label: { text: "Date of birth:", optional: true } 
+                    }
+                ]
+            });
+        });
+    </script>
+```
+
+## Configure Editor
+
+With the `editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors. 
+
+```dojo
+    <form id="form"></form>
+
+    <script>
+        $(document).ready(function () {
+            $("#form").kendoForm({
+                formData: {
+                    FirstName: "",
+                    LastName: "",
+                    Password: "",
+                    Birth: new Date()
+                },
+                items: [
+                    {
+                        field: "TextBox",
+                        label: "TextBox:",
+                        validation: { required: true }
                     },
                     {
-                        field: "JobFunction", editor: "DropDownList", label: "Job Function", validation: { required: true }, editorOptions: {
-                        optionLabel: "Select job function...",
-                        dataSource: [
-                            { Name: "Management", Id: 1 },
-                            { Name: "Finance", Id: 2 },
-                            { Name: "Sales", Id: 3 }
-                        ],
-                        dataTextField: "Name",
-                        dataValueField: "Id"
+                        field: "NumericTextBox",
+                        editor: "NumericTextBox",
+                        label: "NumericTextBox:",
+                        validation: { required: true }
+                    },
+                    {
+                        field: "MaskedTextBox",
+                        editor: "MaskedTextBox",
+                        label: "MaskedTextBox:",
+                        validation: { required: true }
+                    },
+                    {
+                        field: "DatePicker",
+                        editor: "DatePicker",
+                        label: "DatePicker:",
+                        validation: { required: true }
+                    },
+                    {
+                        field: "DateTimePicker",
+                        editor: "DateTimePicker",
+                        label: "DateTimePicker:",
+                        validation: { required: true }
+                    },
+                    {
+                        field: "Switch",
+                        editor: "Switch",
+                        label: "Switch:",
+                        validation: { required: true }
+                    },
+                    {
+                        field: "ComboBox", editor: "ComboBox", label: "ComboBox:", validation: { required: true },
+                        editorOptions: {
+                            placeholder: "Select product",
+                            dataTextField: "ProductName",
+                            dataValueField: "ProductID",
+                            filter: "contains",
+                            dataSource: {
+                                type: "odata",
+                                serverFiltering: true,
+                                transport: {
+                                    read: {
+                                        url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                                    }
+                                }
+                            }
                         }
-                    },
-                    { 
-                        field: "Agree", 
-                        label: "Agree to Terms", 
-                        validation: { required: true } 
-                    },
+                    }
                 ]
             });
         });
@@ -98,4 +190,5 @@ The following example shows the Form initialized with the `items` configuration 
 
 ## See Also
 
-* [JavaScript API Reference of the Form](/api/javascript/ui/from)
+* [Items configuration of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/items)
+* [JavaScript API Reference of the Form](/api/javascript/ui/form)

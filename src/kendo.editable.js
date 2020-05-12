@@ -21,8 +21,7 @@ var __meta__ = { // jshint ignore:line
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
         POINT = ".",
-        support = kendo.support,
-        AUTOCOMPLETEVALUE = support.browser.chrome ? "disabled" : "off",
+        AUTOCOMPLETEVALUE = "off",
         nameSpecialCharRegExp = /("|\%|'|\[|\]|\$|\.|\,|\:|\;|\+|\*|\&|\!|\#|\(|\)|<|>|\=|\?|\@|\^|\{|\}|\~|\/|\||`)/g,
         ERRORTEMPLATE = '<div class="k-tooltip k-tooltip-error k-validator-tooltip">' +
             '<span class="k-tooltip-icon k-icon k-i-warning"></span>' +

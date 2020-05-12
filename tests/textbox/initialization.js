@@ -98,6 +98,23 @@
             assert.equal(textbox.element[0].style.width, "100%");
         });
 
+        it("sets the k-state-focused class on focusin", function() {
+            var textbox = new TextBox(input);
+
+            textbox.element[0].focus();
+
+            assert.isOk(textbox.wrapper.hasClass("k-state-focused"));
+        });
+
+        it("removes the k-state-focused class on focusout", function() {
+            var textbox = new TextBox(input);
+
+            textbox.element[0].focus();
+            textbox.element.blur();
+
+            assert.isNotOk(textbox.wrapper.hasClass("k-state-focused"));
+        });
+
         it("form reset support", function(done) {
             input.attr("value", "test");
 

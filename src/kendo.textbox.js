@@ -20,6 +20,7 @@ var __meta__ = {// jshint ignore:line
         DISABLED = "disabled",
         READONLY = "readonly",
         INPUT = "k-input",
+        FOCUSED = "k-state-focused",
         LABELCLASSES = "k-label k-input-label",
         STATEDISABLED = "k-state-disabled",
         NOCLICKCLASS = "k-no-click",
@@ -138,6 +139,7 @@ var __meta__ = {// jshint ignore:line
                 wrapper.removeClass(STATEDISABLED)
                         .removeClass(NOCLICKCLASS);
 
+                element.on("focusin" + NS, proxy(that._focusin, that));
                 element.on("focusout" + NS, proxy(that._focusout, that));
             } else {
                 element.attr(DISABLED, disable)
@@ -183,10 +185,18 @@ var __meta__ = {// jshint ignore:line
             }
         },
 
+        _focusin: function() {
+            var that = this;
+
+            that.wrapper.addClass(FOCUSED);
+        },
+
         _focusout: function() {
             var that = this;
             var value = that._value;
             var newValue = that.element.val();
+
+            that.wrapper.removeClass(FOCUSED);
 
             if (value !== newValue) {
                 that._value = newValue;

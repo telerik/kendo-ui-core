@@ -1,19 +1,19 @@
 ---
 title: Resizing
-page_title: Kendo UI for jQuery Tile Layout Documentation | Tile Layout Resizing | Kendo UI
-description: "Learn how to enable and use the resizing functionality of the Kendo UI for jQuery Tile Layout."
+page_title: Kendo UI for jQuery TileLayout Documentation | TileLayout Resizing | Kendo UI
+description: "Learn how to enable and use the resizing functionality of the Kendo UI for jQuery TileLayout."
 slug: resizing_kendoui_tilelayout_widget
 ---
 
-# Tile Layout Resizing
+# TileLayout Resizing
 
-The Kendo UI Tile Layout widget allows you resize the containers by snapping to the available columns and row units. When enabled the user is able to alter the width or the height of а current item. 
+The Kendo UI TileLayout widget allows you resize the containers by snapping to the available columns and row units. When enabled the user is able to alter the width or the height of а current item. 
 
 The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism, meaning that the widget increases how the element spans and the browser takes care of how to re-arrange the items if necessary.
 
-## Enabling the resizable feature of the Tile Layout
+## Enabling the resizable feature of the TileLayout
 
-To enable the resizable feature of the Tile Layout, set the [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) property to `true`.
+To enable the resizable feature of the TileLayout, set the [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) property to `true`.
 
 The example below will render a grid with two rows and two columns which can be resized both vertically and horizontally.
 
@@ -51,7 +51,7 @@ The widget triggers a [`resize`](/api/javascript/ui/tilelayout/events/resize) ev
 
 ## See Also
 
-* [Basic Usage of the Tile Layout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the Tile Layout](/api/javascript/ui/tilelayout)
+* [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
+* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
 * [Reordering]({% slug reordering_kendoui_tilelayout_widget %})
 * [Containers]({% slug containers_kendoui_tilelayout_widget %})

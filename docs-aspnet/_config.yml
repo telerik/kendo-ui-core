@@ -462,6 +462,8 @@ navigation:
         title: "FlatColorPicker"
      "*filemanager":
         title: "FileManager"
+     "*form":
+        title: "Form"
      "*gantt":
         title: "Gantt"
      "*lineargauge":
@@ -518,6 +520,8 @@ navigation:
         title: "TabStrip"
      "*textbox":
         title: "TextBox"
+     "*tilelayout":
+        title: "TileLayout"
      "*timeline":
         title: "TimeLine"
      "*timepicker":
@@ -816,6 +820,11 @@ defaults:
         path: "html-helpers/layout/badge"
     values:
         title_prefix: "Core Badge Component"
+-
+    scope:
+        path: "html-helpers/layout/form"
+    values:
+        title_prefix: "Core Form Component"
 -
     scope:
         path: "html-helpers/layout/dialog"

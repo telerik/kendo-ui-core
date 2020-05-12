@@ -402,7 +402,7 @@ var __meta__ = { // jshint ignore:line
                 if (this.popup.visible()) {
                     this.close();
                 } else {
-                    this.open();
+                    this.open(view);
                 }
             } else {
                 var secondView = "timeView";
@@ -665,10 +665,14 @@ var __meta__ = { // jshint ignore:line
                     var value = that._applyDateValue();
 
                     if(options.singlePopup){
-                        that.timeView._value.setFullYear(value.getFullYear());
-                        that.timeView._value.setMonth(value.getMonth());
-                        that.timeView._value.setDate(value.getDate());
+                        if (!that.timeView._currentlySelected) {
+                            that.timeView._currentlySelected = new Date();
+                        }
+                        that.timeView._currentlySelected.setFullYear(value.getFullYear());
+                        that.timeView._currentlySelected.setMonth(value.getMonth());
+                        that.timeView._currentlySelected.setDate(value.getDate());
                         that._switchToTimeView();
+                        that._toggleIcons();
                     } else {
                         that._change(value);
                         that.close("date");
@@ -1020,7 +1024,10 @@ var __meta__ = { // jshint ignore:line
         },
 
         _cancelClickHandler: function () {
-            this.value(this._value);
+            if (this._value) {
+                this.value(this._value);
+                this.dateView.value(this._value);
+            }
             this.popup.close();
         },
 

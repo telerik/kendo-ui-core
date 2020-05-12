@@ -411,7 +411,7 @@ navigation:
     "*selection":
         title: "Selection"
     "*tilelayout":
-        title: "Tile Layout"
+        title: "TileLayout"
     "*various":
         title: "Various"
     "*nodes":

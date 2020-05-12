@@ -367,24 +367,26 @@ html .k-upload
     line-height: normal;
 }
 
-.k-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-}
-
-.k-progressbar {
-    height: 2px;
-    position: absolute;
-    bottom: .32em;
-    // successed
-    width: calc(100% - 2em);
-
+.k-upload {
     .k-progress {
-        width: 100%;
-        max-width: 100%;
-        height: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+    }
+
+    .k-progressbar {
+        height: 2px;
+        position: absolute;
+        bottom: .32em;
+        // successed
+        width: calc(100% - 2em);
+
+        .k-progress {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+        }
     }
 }
 

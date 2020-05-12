@@ -207,6 +207,9 @@ Specifies position of the badge relative to button. Valid position options are: 
 
 Specifies the shape of the badge. Valid options are: `rectangle`, `rounded`, `pill`, `circle`, `dot`.
 
+### items.badge.size  `String` *(default: 'medium')*
+
+Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
 
 ### items.badge.template `String|Function`
 

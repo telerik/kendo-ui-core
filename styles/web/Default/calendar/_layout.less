@@ -113,6 +113,7 @@
     }
     &.k-week-number .k-calendar-view {
         width: (8 * @calendar-cell-size);
+        padding: 0;
     }
 
 
@@ -208,6 +209,10 @@
             white-space: nowrap;
             .k-button.k-flat();
         }
+
+        .k-today {
+            cursor: pointer;
+        }
     }
 
     .k-calendar-monthview,
@@ -220,14 +225,12 @@
             border-bottom-width: 0;
             background-color: transparent;
         }
+
+        .k-alt {
+            opacity: .5;
+            background-color: transparent;
+        }
+
     }
 
-}
-
-
-
-
-// Adjust for week
-.k-week-number {
-    width: (@calendar-cell-size * 8);
 }

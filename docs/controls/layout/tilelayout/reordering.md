@@ -1,19 +1,19 @@
 ---
 title: Reordering
-page_title: Kendo UI for jQuery Tile Layout Documentation | Tile Layout reordering | Kendo UI
-description: "Learn how to enable and use the reordering functionality of the Kendo UI for jQuery Tile Layout."
+page_title: Kendo UI for jQuery TileLayout Documentation | TileLayout reordering | Kendo UI
+description: "Learn how to enable and use the reordering functionality of the Kendo UI for jQuery TileLayout."
 slug: reordering_kendoui_tilelayout_widget
 ---
 
-# Tile Layout Reordering
+# TileLayout Reordering
 
-The Kendo UI Tile Layout widget allows you rearrange the position of the tile containers with drag and drop. 
+The Kendo UI TileLayout widget allows you rearrange the position of the tile containers with drag and drop. 
 
 The reordering takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism and changes the [css order](https://www.w3schools.com/cssref/css3_pr_order.asp) of the item and lets the browser handle the rest.
 
-## Enabling the reorderable functionality of the Tile Layout
+## Enabling the reorderable functionality of the TileLayout
 
-To enable the reorderable feature of the Tile Layout, set the [`reorderable`](/api/javascript/ui/tilelayout/configuration/reorderable) property to `true`.
+To enable the reorderable feature of the TileLayout, set the [`reorderable`](/api/javascript/ui/tilelayout/configuration/reorderable) property to `true`.
 
 > To use the `reorderable` functionality, define headers.
 
@@ -66,7 +66,7 @@ The widget triggers a [`reorder`](/api/javascript/ui/tilelayout/events/reorder) 
 
 ## See Also
 
-* [Basic Usage of the Tile Layout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the Tile Layout](/api/javascript/ui/tilelayout)
+* [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
+* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
 * [Resizing]({% slug resizing_kendoui_tilelayout_widget %})
 * [Containers]({% slug containers_kendoui_tilelayout_widget %})

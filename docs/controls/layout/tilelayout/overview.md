@@ -1,21 +1,21 @@
 ---
 title: Overview
-page_title: Kendo UI for jQuery Tile Layout Documentation | Tile Layout Overview | Kendo UI
-description: "Get started with the Kendo UI for jQuery Tile Layout and learn about its features and how to initialize the widget."
+page_title: Kendo UI for jQuery TileLayout Documentation | TileLayout Overview | Kendo UI
+description: "Get started with the Kendo UI for jQuery TileLayout and learn about its features and how to initialize the widget."
 slug: overview_kendoui_tilelayout_widget
 ---
 
-# Tile Layout Overview
+# TileLayout Overview
 
-The Kendo UI Tile Layout widget allows you configure a two-dimensional grid-based sandbox surface to display content in tiles which can be dragged around and rearranged to create any modern page design.
+The Kendo UI TileLayout widget allows you configure a two-dimensional grid-based sandbox surface to display content in tiles which can be dragged around and rearranged to create any modern page design.
 
 It is based on the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)(with all its features) which covers the majority of cases and uses additional JavaScript logic to provide resizing, reordering and templates customizations.
 
-* [Demo page for the Tile Layout](https://demos.telerik.com/kendo-ui/tilelayout/index) 
+* [Demo page for the TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index) 
 
-## Initializing the Tile Layout
+## Initializing the TileLayout
 
-To initialize the Tile Layout, use the `<div>` tag. Specify the number of columns at root level and use the `rowSpan` and `colSpan` of the containers to position the content in the available grid space.
+To initialize the TileLayout, use the `<div>` tag. Specify the number of columns at root level and use the `rowSpan` and `colSpan` of the containers to position the content in the available grid space.
 
 The example below will render a grid with two columns which can be resized both vertically and horizontally.
 
@@ -49,11 +49,11 @@ The example below will render a grid with two columns which can be resized both 
 
 ## Grid Layout configuration 
 
-The Kendo UI Tile Layout available grid space is defined by using the [`columns`](/api/javascript/ui/tilelayout/configuration/columns) property. The number of rows in which the tiles will be displayed will automatically adjust. The columns and rows have a default width of `1fr` which can be modified by using the [`columnsWidth`](/api/javascript/ui/tilelayout/configuration/columnswidth) and [`rowsHeight`](/api/javascript/ui/tilelayout/configuration/rowsheight) properties.
+The Kendo UI TileLayout available grid space is defined by using the [`columns`](/api/javascript/ui/tilelayout/configuration/columns) property. The number of rows in which the tiles will be displayed will automatically adjust. The columns and rows have a default width of `1fr` which can be modified by using the [`columnsWidth`](/api/javascript/ui/tilelayout/configuration/columnswidth) and [`rowsHeight`](/api/javascript/ui/tilelayout/configuration/rowsheight) properties.
 
 > The `rowsHeight` and `columnsWidth` properties value sets the maximum height/width the rows or columns of the widget will stretch to. Dependent on resizing, content and user interactions with the layout, they may be less than the set value.
 
-## Tile Layout configuration
+## TileLayout configuration
 
 Each tile can span across several rows and columns. The space that the tile takes up is determined by its container [`rowSpan`](/api/javascript/ui/tilelayout/configuration/containers.rowspan) and [`colSpan`](/api/javascript/ui/tilelayout/configuration/containers.colspan). For more information about the containers and their configurable properties, see the [containers]({% slug containers_kendoui_tilelayout_widget %}) article.
 
@@ -65,10 +65,10 @@ These properties are also known as the gutters between the rows/columns.
 
 ## Referencing Existing Instances
 
-To get a reference to an existing Tile Layout instance:
+To get a reference to an existing TileLayout instance:
 
 1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
-1. Once a reference is established, use the [Tile Layout API](/api/javascript/ui/tilelayout) to control its behavior.
+1. Once a reference is established, use the [TileLayout API](/api/javascript/ui/tilelayout) to control its behavior.
 
         var tilelayout = $("#tilelayout").data("kendoTileLayout");
 
@@ -80,5 +80,5 @@ To get a reference to an existing Tile Layout instance:
 
 ## See Also
 
-* [Basic Usage of the Tile Layout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
-* [JavaScript API Reference of the Tile Layout](/api/javascript/ui/tilelayout)
+* [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
+* [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)

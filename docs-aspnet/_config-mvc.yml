@@ -333,6 +333,11 @@ defaults:
         title_prefix: "MVC Badge Component"
 -
     scope:
+        path: "html-helpers/layout/form"
+    values:
+        title_prefix: "MVC Form Component"
+-
+    scope:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "MVC Dialog Component"

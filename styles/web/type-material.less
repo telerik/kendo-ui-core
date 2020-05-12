@@ -968,6 +968,7 @@ td.k-group-cell,
 .k-textbox > input,
 .k-autocomplete .k-input,
 .k-dropdown-wrap .k-input,
+.k-textbox.k-state-focused,
 .k-autocomplete.k-state-focused .k-input,
 .k-dropdown-wrap.k-state-focused .k-input,
 .k-picker-wrap.k-state-focused .k-input,
@@ -1581,13 +1582,7 @@ div.k-filebrowser-dropzone em
     border-radius: 0 0 @border-radius @border-radius;
 }
 
-.k-file-progress
-{
-    color: @upload-progress-text-color;
-}
-
-.k-file-progress .k-progress
-{
+.k-file-progress .k-progress {
     background-color: @upload-progress-background-color;
 }
 
@@ -1604,7 +1599,8 @@ div.k-filebrowser-dropzone em
 
 }
 
-.k-file-error {
+.k-file-error,
+.k-file-invalid {
 
     .k-file-validation-message,
     .k-upload-pct {
@@ -1687,6 +1683,7 @@ div.k-filebrowser-dropzone em
 
 .k-textbox:focus,
 .k-textarea:focus,
+.k-textbox.k-state-focused,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
 .k-picker-wrap.k-state-focused,

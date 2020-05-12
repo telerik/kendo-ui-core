@@ -91,16 +91,23 @@
 
 // Horizontal forms
 .k-form-horizontal {
-    .k-label:not(.k-checkbox-label),
-    .k-label:not(.k-radio-label) {
-        margin-right: @horizontal-form-label-margin-x;
-        padding-top: @horizontal-form-label-padding-top;
-        width: @horizontal-form-label-width;
-        justify-content: @horizontal-form-label-justify-content;
-    }
-
     .k-form-field {
+        display: flex;
         flex-flow: row nowrap;
+
+        > .k-label,
+        > .k-form-label {
+            margin-right: @horizontal-form-label-margin-x;
+            padding-top: @horizontal-form-label-padding-top;
+            width: @horizontal-form-label-width;
+            flex-direction: column;
+            align-items: @horizontal-form-label-align;
+            justify-content: flex-end;
+        }
+        .k-label-optional {
+            margin: 0;
+            align-self: inherit;
+        }
     }
 
     .k-form-field-wrap {

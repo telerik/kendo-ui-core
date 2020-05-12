@@ -1144,8 +1144,10 @@
     background-color: @widget-background-color;
 }
 
-input.k-textbox:focus {
+input.k-textbox:focus,
+.k-textbox.k-state-focused {
     border-color: lighten(@hover-text-color, 8%);
+    box-shadow: none;
 }
 
 input.k-textbox:active {
@@ -1710,7 +1712,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 }
 
 .k-task-milestone {
-    background-color: darken(@success, 25%);
+    background-color: lighten(@success, 5%);
 }
 
 .k-task-summary-complete {
@@ -1772,31 +1774,28 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     color: @normal-text-color;
 }
 
-.k-file-progress {
-    color: @normal-text-color;
-}
-
 .k-file-progress .k-progress {
-    background-color: darken(@info, 25%);
+    background-color: @info;
 }
 
 .k-file-success {
 
     .k-file-validation-message,
     .k-upload-pct {
-        color: darken(@success, 25%);
+        color: @success;
     }
 
     .k-progress {
-        background-color: darken(@success, 25%);
+        background-color: @success;
     }
 }
 
-.k-file-error {
+.k-file-error,
+.k-file-invalid {
 
     .k-file-validation-message,
     .k-upload-pct {
-        color: darken(@error, 25%);
+        color: @error;
     }
 
     .k-progress {

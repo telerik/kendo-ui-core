@@ -491,6 +491,8 @@ fonts in fonts/
     <li><span class="k-icon k-i-file-programming"></span> .k-i-file-programming</li>
     <li><span class="k-icon k-i-file-error"></span> .k-i-file-error</li>
     <li><span class="k-icon k-i-files-error"></span> .k-i-files-error</li>
+    <li><span class="k-icon k-i-data-rest"></span> .k-i-data-rest</li>
+    <li><span class="k-icon k-i-file-typescript"></span> .k-i-file-typescript</li>
 </ul>
 
 ### Images
@@ -533,6 +535,28 @@ fonts in fonts/
     <li><span class="k-icon k-i-align-top-element"></span> .k-i-align-top-element</li>
     <li><span class="k-icon k-i-align-middle-element"></span> .k-i-align-middle-element</li>
     <li><span class="k-icon k-i-align-bottom-element"></span> .k-i-align-bottom-element</li>
+    <li><span class="k-icon k-i-align-stretch-element-horizontal"></span> .k-i-align-stretch-element-horizontal</li>
+    <li><span class="k-icon k-i-align-stretch-element-vertical"></span> .k-i-align-stretch-element-vertical</li>
+    <li><span class="k-icon k-i-align-align-left-elements"></span> .k-i-align-align-left-elements</li>
+    <li><span class="k-icon k-i-align-center-elements"></span> .k-i-align-center-elements</li>
+    <li><span class="k-icon k-i-align-right-elements"></span> .k-i-align-right-elements</li>
+    <li><span class="k-icon k-i-align-stretch-elements-horizontal"></span> .k-i-align-stretch-elements-horizontal</li>
+    <li><span class="k-icon k-i-align-baseline-horizontal"></span> .k-i-align-baseline-horizontal</li>
+    <li><span class="k-icon k-i-align-top-elements"></span> .k-i-align-top-elements</li>
+    <li><span class="k-icon k-i-align-middle-elements"></span> .k-i-align-middle-elements</li>
+    <li><span class="k-icon k-i-align-bottom-elements"></span> .k-i-align-bottom-elements</li>
+    <li><span class="k-icon k-i-align-stretch-elements-vertical"></span> .k-i-align-stretch-elements-vertical</li>
+    <li><span class="k-icon k-i-align-baseline-vertical"></span> .k-i-align-baseline-vertical</li>
+    <li><span class="k-icon k-i-justify-start-horizontal"></span> .k-i-justify-start-horizontal</li>
+    <li><span class="k-icon k-i-justify-center-horizontal"></span> .k-i-justify-center-horizontal</li>
+    <li><span class="k-icon k-i-justify-end-horizontal"></span> .k-i-justify-end-horizontal</li>
+    <li><span class="k-icon k-i-justify-between-horizontal"></span> .k-i-justify-between-horizontal</li>
+    <li><span class="k-icon k-i-justify-around-horizontal"></span> .k-i-justify-around-horizontal</li>
+    <li><span class="k-icon k-i-justify-start-vertical"></span> .k-i-justify-start-vertical</li>
+    <li><span class="k-icon k-i-justify-center-vertical"></span> .k-i-justify-center-vertical</li>
+    <li><span class="k-icon k-i-justify-end-vertical"></span> .k-i-justify-end-vertical</li>
+    <li><span class="k-icon k-i-justify-between-vertical"></span> .k-i-justify-between-vertical</li>
+    <li><span class="k-icon k-i-justify-around-vertical"></span> .k-i-justify-around-vertical</li>
     <li><span class="k-icon k-i-thumbnails-up"></span> .k-i-thumbnails-up</li>
     <li><span class="k-icon k-i-thumbnails-right"></span> .k-i-thumbnails-right</li>
     <li><span class="k-icon k-i-thumbnails-down"></span> .k-i-thumbnails-down</li>

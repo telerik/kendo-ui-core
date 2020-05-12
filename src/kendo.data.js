@@ -4335,6 +4335,7 @@ var __meta__ = { // jshint ignore:line
         _subGroupCountSuccessHandler: function (group, skip, take, callback) {
             var that = this;
             callback = isFunction(callback) ? callback : noop;
+            var totalField = that.options.schema && that.options.schema.total ? that.options.schema.total : "Total";
 
             return function (data) {
 
@@ -4345,7 +4346,7 @@ var __meta__ = { // jshint ignore:line
                     type: "read"
                 });
                 that._fetchingGroupItems = false;
-                group.subgroupCount = data.Total;
+                group.subgroupCount = data[totalField];
                 that.range(skip, take, callback, "expandGroup");
             };
         },

@@ -8,48 +8,9 @@ position: 4
 
 # Layout
 
-To configure layout, use either of the following settings:
-
-* `flex`
-* `grid`
+In addition the default layout, the Form offers an option to use `Grid` layout. It can be set through the `Layout` option.
 
 > Grid layout is supported only on modern browsers. Even so, not all browsers that support grid layout support all features.
-
-## Flex Layout
-
-Flex is the default layout of the form.
-
-The following example shows the Form with `flex` layout.
-
-```dojo
-    <form id="form"></form>
-  
-    <script>
-        $(document).ready(function () {
-            $("#form").kendoForm({
-                layout: "flex",
-                formData: {
-                    Username: "",
-                    Email: "",
-                    Password: "",
-                    Birth: new Date(),
-                    Agree: false
-                },
-                items: [{
-                    type: "group",
-                    label: "Registration Form",
-                    items: [
-                        { field: "Username", label: "Username:", validation: { required: true } },
-                        { field: "Email", label: "Email", validation: { required: true } },
-                        { field: "Password", label: "Password:", validation: { required: true }, hint: "Hint: enter alphanumeric characters only." },
-                        { field: "Birth", label: { text: "Date of birth:", optional: true } },
-                        { field: "Agree", label: "Agree to Terms", validation: { required: true } },
-                    ]
-                }]
-            });
-        });
-    </script>
-```
 
 ## Grid Layout
 
@@ -168,4 +129,5 @@ The following example shows the Form with `grid` layout set.
 
 ## See Also
 
-* [JavaScript API Reference of the Form](/api/javascript/ui/from)
+* [Layout of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/layout)
+* [JavaScript API Reference of the Form](/api/javascript/ui/form)
