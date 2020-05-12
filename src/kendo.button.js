@@ -91,7 +91,12 @@
             options: {
                 name: "Button",
                 enable: true,
-                enabled: true
+                enabled: true,
+                icon: "",
+                iconClass: "",
+                spriteCssClass: "",
+                imageUrl: "",
+                badge: null
             },
 
             _isNativeButton: function() {

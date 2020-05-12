@@ -118,7 +118,7 @@ var __meta__ = { // jshint ignore:line
 
             that._viewWrapper();
 
-            if (that.options.footer) {
+            if (that.options.hasFooter) {
                 that._footer(that.footer);
             }
 
@@ -236,7 +236,7 @@ var __meta__ = { // jshint ignore:line
                 header: {
                     template: CLASSIC_HEADER_TEMPLATE
                 },
-                footer: true,
+                hasFooter: true,
                 linksSelector: ".k-link",
                 contentClasses: "k-content"
             },
@@ -244,7 +244,7 @@ var __meta__ = { // jshint ignore:line
                 header: {
                     template: MODERN_HEADER_TEMPLATE
                 },
-                footer: false,
+                hasFooter: false,
                 linksSelector: ".k-button",
                 contentClasses: "k-content k-calendar-content"
             }
@@ -266,7 +266,7 @@ var __meta__ = { // jshint ignore:line
 
             that._viewWrapper();
 
-            if (that.options.footer) {
+            if (that.options.hasFooter) {
                 that._footer(that.footer);
             } else {
                 that.element.find(".k-footer").hide();
