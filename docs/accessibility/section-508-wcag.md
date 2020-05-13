@@ -41,6 +41,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |DropDownTree  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdowntree/index)
 |Editor        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/editor/index)
 |FileManager   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/filemanager/index)
+|Form          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/form/index)
 |Gantt         |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/gantt/index)
 |Grid          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/grid/index)
 |LinearGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/linear-gauge/index)
@@ -65,6 +66,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Sortable	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/sortable/index)
 |Splitter      |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/splitter/index)
 |Spreadsheet   |No  |-   |
+|Stepper	   |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/stepper/index)
 |Switch        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/switch/index)
 |TabStrip	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/tabstrip/index)
 |TextBox	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textbox/index)

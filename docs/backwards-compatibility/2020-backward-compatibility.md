@@ -17,6 +17,18 @@ This article lists the breaking changes in the Kendo UI 2020 releases.
 * The responsive Pager no longer has the `k-pager-lg` breakpoint and class.
 * The page numbers drop-down of the responsive Pager is now an HTML `select` element. 
 
+**Disabled buttons in Editor toolbar**
+
+Starting with 2020 R2, disabled buttons in editor toolbar will no longer be hidden, but instead be visible. The change is percurser to replacing the custom editor toolbar with the actual Kendo UI for jQuery toolbar and is part of a bigger story to reuse components and enforce consitency, instead of creating ad-hoc ones that differ ever so slightly.
+
+**Visual changes in Scheduler toolbar**
+
+A part of the same story is changing the shceduler toolbar to be visually identical to the stand alone toolbar. Agian, this is a percursor to changing the scheduler toolbar.
+
+**Visual changes in Scheduler events**
+
+Working in the direction of improving visual accessibility, we have removed a white overlay from scheduler events when using Default v2 theme (kendo-theme-default). While visually appealing, the white overlay reduced contrast between the event background and event text and in terms reduce visual accessibility.
+
 **Validator**
 
  As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved styling for messages, which differ significantly from the existing. While not recommended, reverting to the previous behaviour is possible by tweaking the errorTemplate and some styles:

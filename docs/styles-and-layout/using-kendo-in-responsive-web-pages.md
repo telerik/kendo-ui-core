@@ -4,7 +4,7 @@ page_title: Responsive Web Design | Kendo UI Styles and Appearance
 description: "Learn how to implement responsive web design in Kendo UI widgets."
 previous_url: /using-kendo-in-responsive-web-pages
 slug: responsivewebdesign_integration_kendoui
-position: 3
+position: 4
 ---
 
 # Responsive Web Design
