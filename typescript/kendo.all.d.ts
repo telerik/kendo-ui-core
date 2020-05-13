@@ -10027,7 +10027,7 @@ declare namespace kendo.ui {
         messages?: any;
         rules?: any;
         validateOnBlur?: boolean;
-        validationSummary: boolean | ValidationSummary;
+        validationSummary?: boolean | ValidationSummary;
         validate?(e: ValidatorValidateEvent): void;
         validateInput?(e: ValidatorValidateInputEvent): void;
     }
