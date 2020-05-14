@@ -78,7 +78,11 @@ To get a reference to an existing TileLayout instance:
 * [Reordering]({% slug reordering_kendoui_tilelayout_widget %})
 * [Containers]({% slug containers_kendoui_tilelayout_widget %})
 
+## Known Limitations
+
+Currently, the component is not supported in Internet Explorer as the browser does not support gutters.
+
 ## See Also
 
-* [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
+* [Overview of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
 * [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)

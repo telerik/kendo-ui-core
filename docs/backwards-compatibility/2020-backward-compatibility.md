@@ -19,19 +19,19 @@ This article lists the breaking changes in the Kendo UI 2020 releases.
 
 **Disabled buttons in Editor toolbar**
 
-Starting with 2020 R2, disabled buttons in editor toolbar will no longer be hidden, but instead be visible. The change is percurser to replacing the custom editor toolbar with the actual Kendo UI for jQuery toolbar and is part of a bigger story to reuse components and enforce consitency, instead of creating ad-hoc ones that differ ever so slightly.
+Starting with 2020 R2, disabled buttons in editor toolbar will no longer be hidden, but instead be visible. The change is a preparation for the replacing of the custom editor toolbar with the actual Kendo UI for jQuery toolbar and is part of a bigger story to reuse components and enforce consistency, instead of creating ad-hoc ones that differ ever so slightly.
 
 **Visual changes in Scheduler toolbar**
 
-A part of the same story is changing the shceduler toolbar to be visually identical to the stand alone toolbar. Agian, this is a percursor to changing the scheduler toolbar.
+A part of the same story is changing the Scheduler toolbar to be visually identical to the stand-alone toolbar. Again, this is a preparation for future changes in the Scheduler toolbar.
 
 **Visual changes in Scheduler events**
 
-Working in the direction of improving visual accessibility, we have removed a white overlay from scheduler events when using Default v2 theme (kendo-theme-default). While visually appealing, the white overlay reduced contrast between the event background and event text and in terms reduce visual accessibility.
+Working in the direction of improving visual accessibility, we have removed a white overlay from Scheduler events when using Default v2 theme (kendo-theme-default). While visually appealing, the white overlay reduced contrast between the event background and event text and in terms reduce visual accessibility.
 
 **Validator**
 
- As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved styling for messages, which differ significantly from the existing. While not recommended, reverting to the previous behaviour is possible by tweaking the errorTemplate and some styles:
+As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved styling for messages, which differ significantly from the existing. While not recommended, reverting to the previous behavior is possible by tweaking the errorTemplate and some styles:
 
  ```
  $(container).kendoValidator({
@@ -54,6 +54,24 @@ Working in the direction of improving visual accessibility, we have removed a wh
         text-align: left; /* aligns the text */
     }
  ```
+
+ **Badge**
+
+ As of Kendo UI 2020 R2 the `template` property does not receive `value` as parameter. The `text` option can be used instead.
+
+ ```
+<button>Button <span id="badge"></span></button>
+<script>
+    $('#badge').kendoBadge({
+        text: 1234,
+        template: function() {
+            var text = this.options.text;
+            return text > 99 ? 'A lot' : text;
+        }
+    });
+</script>
+ ```
+
 
 ## Kendo UI 2020 R1 SP1
 
