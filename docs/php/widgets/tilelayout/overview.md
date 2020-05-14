@@ -9,6 +9,10 @@ slug: overview_tilelayout_uiforphp
 
 The Kendo UI TileLayout for PHP is a server-side wrapper for the [Kendo UI TileLayout](/api/javascript/ui/tilelayout) widget.
 
+The Kendo UI TileLayout widget allows you configure a two-dimensional grid-based sandbox surface to display content in tiles which can be dragged around and rearranged to create any modern page design.
+
+It is based on the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)(with all its features) which covers the majority of cases and uses additional JavaScript logic to provide resizing, reordering and templates customizations.
+
 ## Getting Started
 
 ### Configuration
@@ -60,6 +64,31 @@ Below are listed the steps for you to follow when configuring the Kendo UI TileL
 
        <?php echo $tilelayout->render(); ?>
         
+## Container Styles
+
+The TileLayout exposes an object that allows you to override the following styles:
+
+```
+    var tileLayoutStyles = {
+        wrapper: "k-widget k-tilelayout",
+        item: "k-tilelayout-item k-card",
+        itemHeader: "k-tilelayout-item-header k-card-header",
+        itemHeaderTitle: "k-card-title",
+        itemBody: "k-tilelayout-item-body k-card-body",
+        reorderHint: "k-layout-item-hint k-layout-item-hint-reorder",
+        resizeHint: "k-layout-item-hint k-layout-item-hint-resize"
+    };
+```
+
+To override any of the classes, add your own or remove some, insert the new definition before the widget is initialized:
+
+```
+    kendo.ui.TileLayout.styles.item = "k-tilelayout-item k-card my-own-class";
+```
+
+## Known Limitations
+
+Currently, the component is not supported in Internet Explorer as the browser does not support gutters.
 
 ## Event Handling
 

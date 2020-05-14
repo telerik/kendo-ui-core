@@ -69,11 +69,71 @@ To get a reference to an existing TileLayout instance:
 
         var tilelayout = $("#tilelayout").data("kendoTileLayout");
 
-## Functionality and Features
+## Resizing
 
-* [Resizing]
-* [Reordering]
-* [Containers]
+To enable resizing both horizontally and vertically, use the `resizable` attribute:
+
+```
+     <kendo-tilelayout name="tilelayout" columns="3" resizable="true">     
+```
+
+## Reordering
+
+To enable reordering of the tiles, use the `reorderable` attribute:
+
+```
+     <kendo-tilelayout name="tilelayout" columns="3" reorderable="true">     
+```
+
+## Containers
+
+To define the containers, use the `<containers>` tag and nest the number of `<container>` tags necessary to achieve the desired design.
+
+```
+    <containers>
+         <container body-template-id="crayons" col-span="1" row-span="1">
+                <container-header text="Crayons" />
+    </container>
+```
+
+## Container Styles
+
+The TileLayout exposes an object that allows you to override the following styles:
+
+```
+    var tileLayoutStyles = {
+        wrapper: "k-widget k-tilelayout",
+        item: "k-tilelayout-item k-card",
+        itemHeader: "k-tilelayout-item-header k-card-header",
+        itemHeaderTitle: "k-card-title",
+        itemBody: "k-tilelayout-item-body k-card-body",
+        reorderHint: "k-layout-item-hint k-layout-item-hint-reorder",
+        resizeHint: "k-layout-item-hint k-layout-item-hint-resize"
+    };
+```
+
+To override any of the classes, add your own or remove some, insert the new definition before the widget is initialized:
+
+```
+    kendo.ui.TileLayout.styles.item = "k-tilelayout-item k-card my-own-class";
+```
+
+## Event handling
+
+The TileLayout emits two events `resize` and `reorder`. To capture them, use the `on-[eventName]` attribute.
+
+```
+    <kendo-tilelayout name="tilelayout" columns="3" reorderable="true" on-reorder="onReorder">
+    <script>
+        function onReorder(e) {
+            console.log(e.newIndex, e.oldIndex);
+        }
+    </script>
+```
+
+## Known Limitations
+
+Currently, the component is not supported in Internet Explorer as the browser does not support gutters.
 
 ## See Also
 

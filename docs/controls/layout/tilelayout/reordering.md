@@ -66,7 +66,7 @@ The widget triggers a [`reorder`](/api/javascript/ui/tilelayout/events/reorder) 
 
 ## See Also
 
-* [Basic Usage of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
+* [Overview of the TileLayout (Demo)](https://demos.telerik.com/kendo-ui/tilelayout/index)
 * [JavaScript API Reference of the TileLayout](/api/javascript/ui/tilelayout)
 * [Resizing]({% slug resizing_kendoui_tilelayout_widget %})
 * [Containers]({% slug containers_kendoui_tilelayout_widget %})
