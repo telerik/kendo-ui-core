@@ -4293,6 +4293,7 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.
 Increases the slot height when containing events up to views.eventsPerDay and reduces its height if there are less events for that specific day.
 
 > The `adaptiveSlotHeight` option is supported when `views.type` is set to "month".
+> The `adaptiveSlotHeight` option is not supported in resource grouping or date grouping scenarios.
 
 #### Example - set the adaptive slot height in month view
 
@@ -4802,6 +4803,7 @@ The fields which can be used in the template are:
 The height of the scheduler event rendered in month and timeline views. In month view it could be set to a concrete number or to the string value "auto". When set to "auto" it will automatically set the views.adaptiveSlotHeight property to true.
 
 > The `eventHeight` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "month", "timeline", "timelineWeek", "timelineWorkWeek" or "timelineMonth". The "auto" value is supported when views.type is set to "month" and it sets the views.adaptiveSlotHeight to true.
+> The `eventHeight` option is not supported in resource grouping or date grouping scenarios.
 
 #### Example - set the event height in month view
 
