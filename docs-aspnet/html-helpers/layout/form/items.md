@@ -8,7 +8,7 @@ position: 2
 
 # Items
 
-The `Items` configuration options allows you to customize the appearance and behavior of the Form. The `Items` configuration maps the model fields and through it you can: 
+The `Items` configuration options allows you to customize the appearance and behavior of the Form. The `Items` configuration maps the model fields and through it you can:
 
 * customize the editors
 * customize the labels and hints of the editors
@@ -39,7 +39,7 @@ The following example shows how to set the `Label` of an item. Enabling the `Opt
 
 ## Configure Hint
 
-The following example shows how to set the `Hint` of an item. The hint is displayed below the editor of the field. 
+The following example shows how to set the `Hint` of an item. The hint is displayed below the editor of the field.
 
 ```Razor
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
@@ -63,7 +63,7 @@ The following example shows how to set the `Hint` of an item. The hint is displa
 
 ## Configure Editor
 
-With the `Editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors. 
+With the `Editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors.
 
 ```Razor
     @(Html.Kendo().Form<MyApplication.Models.FormItemsViewModels>()
@@ -135,6 +135,31 @@ With the `Editor` option you can explicitly configure an editor to be used for a
                 });
         })
     )
+```
+
+## Custom Editor
+
+You can implement custom editor by using the editor option as a function as follows:
+
+```Razor
+    @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
+        .Name("formExample")
+        .HtmlAttributes(new { action = "Index", method = "POST" })
+        .Items(items =>
+        {
+            items.Add()
+                .Field(f => f.Description)
+                .Label(l => l.Text("Description:"))
+                .EditorTemplateHandler("customTextareaEditor");
+        })
+    )
+
+    <script>
+    function customTextareaEditor(container, options) {
+        $('<textarea class="k-textarea" data-bind="value: ' + options.field + '" name="' + options.field + '"/>')
+            .appendTo(container);
+    }
+    </script>
 ```
 
 ## See Also
