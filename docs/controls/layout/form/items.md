@@ -8,13 +8,13 @@ position: 2
 
 # Items
 
-The `items` configuration options allows you to customize the appearance and behavior of the Form. If it is not set, the Form will render default editors based on the data provided in its `formData` configuration. 
+The `items` configuration options allows you to customize the appearance and behavior of the Form. If it is not set, the Form will render default editors based on the data provided in its `formData` configuration.
 
 The following example shows the Form initialized with the `items` option not set.
 
 ```dojo
     <form id="form"></form>
-  
+
     <script>
         $(document).ready(function () {
             $("#form").kendoForm({
@@ -30,7 +30,7 @@ The following example shows the Form initialized with the `items` option not set
     </script>
 ```
 
-Setting the `items` configuration maps the model fields and allows you to: 
+Setting the `items` configuration maps the model fields and allows you to:
 
 * customize the editors
 * customize the labels and hints of the editors
@@ -53,15 +53,15 @@ The following example shows how to set the `label` of an item. Enabling the `opt
                     Birth: new Date()
                 },
                 items: [
-                    { 
-                        field: "FirstName", 
-                        label: "First Name:", 
-                        validation: { required: true } 
+                    {
+                        field: "FirstName",
+                        label: "First Name:",
+                        validation: { required: true }
                     },
-                    { 
-                        field: "LastName", 
-                        label: "Last Name:", 
-                        validation: { required: true } 
+                    {
+                        field: "LastName",
+                        label: "Last Name:",
+                        validation: { required: true }
                     },
                     {
                         field: "Birth",
@@ -75,7 +75,7 @@ The following example shows how to set the `label` of an item. Enabling the `opt
 
 ## Configure Hint
 
-The following example shows how to set the `hint` of an item. The hint is displayed below the editor of the field. 
+The following example shows how to set the `hint` of an item. The hint is displayed below the editor of the field.
 
 ```dojo
     <form id="form"></form>
@@ -90,21 +90,21 @@ The following example shows how to set the `hint` of an item. The hint is displa
                     Birth: new Date()
                 },
                 items: [
-                    { 
-                        field: "FirstName", 
-                        label: "First Name:", 
-                        validation: { required: true } 
+                    {
+                        field: "FirstName",
+                        label: "First Name:",
+                        validation: { required: true }
                     },
-                    { 
-                        field: "LastName", 
-                        label: "Last Name:", 
-                        validation: { required: true } 
+                    {
+                        field: "LastName",
+                        label: "Last Name:",
+                        validation: { required: true }
                     },
-                    { 
-                        field: "Password", 
-                        label: "Password:", 
-                        validation: { required: true }, 
-                        hint: "Hint: enter alphanumeric characters only." 
+                    {
+                        field: "Password",
+                        label: "Password:",
+                        validation: { required: true },
+                        hint: "Hint: enter alphanumeric characters only."
                     }
                 ]
             });
@@ -114,7 +114,7 @@ The following example shows how to set the `hint` of an item. The hint is displa
 
 ## Configure Editor
 
-With the `editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors. 
+With the `editor` option you can explicitly configure an editor to be used for a specific field. See the [editor](https://docs.telerik.com/kendo-ui/api/javascript/ui/form/configuration/items#itemseditor) configuration option in the client-side API documentation, for a list of the supported editors.
 
 ```dojo
     <form id="form"></form>
@@ -183,6 +183,33 @@ With the `editor` option you can explicitly configure an editor to be used for a
                         }
                     }
                 ]
+            });
+        });
+    </script>
+```
+
+## Custom Editor
+
+You can implement custom editor by using the editor option as a function as follows:
+
+```dojo
+    <form id="form"></form>
+
+    <script>
+        $(document).ready(function () {
+            $("#form").kendoForm({
+                formData: {
+                    Description: "",
+                },
+                items: [{
+                    field: "Description",
+                    label: "Description:",
+                    editor: function(container, options) {
+                        $("<textarea class='k-textarea' name='" + options.field + "' required data-bind='value: " +  options.field + "'></textarea>")
+                            .appendTo(container);
+                    },
+                    validation: { required: true }
+                }],
             });
         });
     </script>
