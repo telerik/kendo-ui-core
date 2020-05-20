@@ -547,6 +547,10 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 key = e.keyCode;
 
+            if (key === keys.NUMPAD_DOT) {
+                that._numPadDot = true;
+            }
+
             if (key == keys.DOWN) {
                 that._step(-1);
                 return;
@@ -572,9 +576,15 @@ var __meta__ = { // jshint ignore:line
             var element = this.element;
             var value = element.val();
             var numberFormat = this._format(this.options.format);
-            var isValid = this._numericRegex(numberFormat).test(value);
+            var decimalSeparator = numberFormat[POINT];
+            
+            if (this._numPadDot && decimalSeparator !== POINT) {
+                value = value.replace(POINT, decimalSeparator);
+                this.element.val(value);
+                this._numPadDot = false;
+            }
 
-            if (isValid) {
+            if (this._numericRegex(numberFormat).test(value)) {
                 this._oldText = value;
             } else {
                 this._blinkInvalidState();

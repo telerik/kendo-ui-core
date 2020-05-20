@@ -168,6 +168,15 @@
 
             assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
         });
+
+        it("picker inner wrapper has correct class", function() {
+            expect(0);
+
+            var dom = $("<input />").appendTo(Mocha.fixture).kendoColorPicker();
+            var cp = dom.data("kendoColorPicker");
+
+            assert.isOk(cp._inputWrapper.hasClass("k-picker-wrap"));
+        });
     });
 }());
 

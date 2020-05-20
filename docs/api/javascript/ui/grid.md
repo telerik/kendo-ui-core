@@ -9848,8 +9848,6 @@ Fired when the user try to edit or create a data item, before the editor is crea
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-The event will be fired only when the Grid is `selectable`.
-
 #### Event Data
 
 ##### e.model `kendo.data.Model`
@@ -10104,6 +10102,8 @@ The widget instance which fired the event.
 Fired when the user selects a table row or cell in the grid.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/grid/configuration/selectable).
 
 #### Event Data
 
