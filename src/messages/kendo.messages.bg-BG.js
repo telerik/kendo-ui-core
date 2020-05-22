@@ -1117,4 +1117,45 @@ if (kendo.ui.Chat) {
     });
 }
 
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+    kendo.ui.TimePicker.prototype.options.messages =
+    $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+        "set": "Приложи",
+        "cancel": "Отмени",
+        "hour": "час",
+        "minute": "минути",
+        "second": "секунди",
+        "milisecond": "милисекунди",
+        "now": "Сега"
+    });
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+  kendo.ui.DateTimePicker.prototype.options.messages =
+  $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+      "set": "Приложи",
+      "cancel": "Отмени",
+      "hour": "час",
+      "minute": "минути",
+      "second": "секунди",
+      "milisecond": "милисекунди",
+      "now": "Сега",
+      "date": "Дата",
+      "time": "Час"
+  });
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+  kendo.ui.Calendar.prototype.options.messages =
+  $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+    "today": "Днес"
+  });
+}
+
 })(window.kendo.jQuery);

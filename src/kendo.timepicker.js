@@ -115,15 +115,15 @@ var __meta__ = { // jshint ignore:line
         MODERN_RENDERING_TEMPLATE = '<div tabindex="0" class="k-timeselector">' +
             '<div class="k-time-header">' +
                 '<span class="k-title"></span>' +
-                '<button class="k-button k-flat k-time-now" title="Select now" aria-label="Select now">Now</button>' +
+                '<button class="k-button k-flat k-time-now" title="Select now" aria-label="Select now">#=messages.now#</button>' +
             '</div>' +
             '<div class="k-time-list-container">' +
                 '<span class="k-time-highlight"></span>' +
             '</div>' +
         '</div>',
         NEW_RENDERING_FOOTER = '<div class="k-time-footer k-action-buttons">' +
-            '<button class="k-button k-time-cancel" title="Cancel changes" aria-label="Cancel changes">Cancel</button>' +
-            '<button class="k-time-accept k-button k-primary" title="Set time" aria-label="Set time">Set</button>' +
+            '<button class="k-button k-time-cancel" title="Cancel changes" aria-label="Cancel changes">#=messages.cancel#</button>' +
+            '<button class="k-time-accept k-button k-primary" title="Set time" aria-label="Set time">#=messages.set#</button>' +
             '</div>',
         HIGHLIGHTCONTAINER = '<span class="k-time-highlight"></span>';
 
@@ -160,11 +160,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
         _createScrollList: function () {
-            this.list = $(MODERN_RENDERING_TEMPLATE)
+            this.list = $(kendo.template(MODERN_RENDERING_TEMPLATE)(this.options))
                 .on(MOUSEDOWN, preventDefault);
 
             if (!this.options.omitPopup) {
-                this.list.append(NEW_RENDERING_FOOTER);
+                this.list.append(kendo.template(NEW_RENDERING_FOOTER)(this.options));
             }
 
             this.ul = this.list.find(".k-time-list-container");
@@ -816,7 +816,7 @@ var __meta__ = { // jshint ignore:line
                     result += this._literalTemplate(part);
                 } else {
                     values = this._getValues(part, true);
-                    result += this._itemTemplate(values.values, part, part.type, values.index);
+                    result += this._itemTemplate(values.values, part, this.options.messages[part.type], values.index);
                 }
             }
 
@@ -1335,7 +1335,16 @@ var __meta__ = { // jshint ignore:line
             interval: 30,
             height: 200,
             animation: {},
-            dateInput: false
+            dateInput: false,
+            messages: {
+                set: "Set",
+                cancel: "Cancel",
+                hour: "hour",
+                minute: "minute",
+                second: "second",
+                millisecond: "millisecond",
+                now: "Now"
+            }
         },
 
         events: [

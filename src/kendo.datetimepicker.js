@@ -55,8 +55,8 @@ var __meta__ = { // jshint ignore:line
         SINGLE_POPUP_TEMPLATE = '<div class="k-date-tab k-datetime-wrap">' +
                                     '<div class="k-datetime-buttongroup">'+
                                         '<div class="k-button-group k-button-group-stretched">'+
-                                            '<button class="k-button k-state-active k-group-start">Date</button>'+
-                                            '<button class="k-button k-group-end">Time</button>'+
+                                            '<button class="k-button k-state-active k-group-start">#=messages.date#</button>'+
+                                            '<button class="k-button k-group-end">#=messages.time#</button>'+
                                         '</div>'+
                                     '</div>'+
                                     '<div class="k-datetime-selector">'+
@@ -66,8 +66,8 @@ var __meta__ = { // jshint ignore:line
                                         '</div>'+
                                     '</div>'+
                                     '<div class="k-datetime-footer k-action-buttons">'+
-                                        '<button class="k-button k-time-cancel" title="Cancel" aria-label="Cancel">Cancel</button>'+
-                                        '<button class="k-time-accept k-button k-primary" title="Set" aria-label="Set">Set</button>'+
+                                        '<button class="k-button k-time-cancel" title="Cancel" aria-label="Cancel">#=messages.cancel#</button>'+
+                                        '<button class="k-time-accept k-button k-primary" title="Set" aria-label="Set">#=messages.set#</button>'+
                                     '</div>'+
                                 '</div>',
         STATE_ACTIVE = "k-state-active";
@@ -161,7 +161,19 @@ var __meta__ = { // jshint ignore:line
             dateButtonText: "Open the date view",
             timeButtonText: "Open the time view",
             dateInput: false,
-            weekNumber: false
+            weekNumber: false,
+            messages: {
+                set: "Set",
+                cancel: "Cancel",
+                hour: "hour",
+                minute: "minute",
+                second: "second",
+                millisecond: "millisecond",
+                now: "Now",
+                date: "Date",
+                time: "Time",
+                today: "Today"
+            }
         },
 
         events: [
@@ -790,7 +802,8 @@ var __meta__ = { // jshint ignore:line
                 specifiedRange: that._specifiedRange,
                 omitPopup: omitPopup,
                 timeDiv: timeDiv,
-                timeView: timeViewOptions
+                timeView: timeViewOptions,
+                messages: that.options.messages
             });
             ul = timeView.ul;
         },
@@ -972,7 +985,7 @@ var __meta__ = { // jshint ignore:line
                 .addClass("k-datetime-container k-group k-reset")
                 .appendTo(document.body);
 
-            div.append(SINGLE_POPUP_TEMPLATE);
+            div.append(kendo.template(SINGLE_POPUP_TEMPLATE)(that.options));
             that.popup = new ui.Popup(div, extend(options.popup, options, { 
                 name: "Popup", 
                 isRtl: kendo.support.isRtl(that.wrapper),

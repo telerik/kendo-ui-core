@@ -183,7 +183,7 @@ Determines if validation will be triggered when element loses focus. Default val
 
     <form id="myform">
         <input name="username"/> <br />
-        <button>Validate</button>
+        <button onclick="event.preventDefault()">Validate</button>
     </form>
 
     <script>
