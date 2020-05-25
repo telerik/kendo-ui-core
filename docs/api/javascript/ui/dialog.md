@@ -95,6 +95,25 @@ A boolean property indicating whether the action button will be decorated as pri
         });
     </script>
 
+### actions.cssClass `String`
+
+Adds a custom class to the action button.
+
+#### Example
+
+    <div id="dialog"></div>
+    <script>
+        $("#dialog").kendoDialog({
+          title: "Kendo Dialog Component",
+          content: "This is your Kendo Dialog.",
+          actions: [{
+              text: "OK",
+              primary: true,
+              cssClass: "k-button-ok"
+          }]
+        });
+    </script>
+
 ### animation `Boolean|Object`
 
 A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.
