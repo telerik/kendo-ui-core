@@ -203,12 +203,10 @@
                 var that = this,
                     element = that.element,
                     maxHeight = that.options.maxHeight,
-                    paddingBox,
                     elementMaxHeight;
 
                 if (maxHeight != Infinity) {
-                    paddingBox = that._paddingBox(element);
-                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight() - paddingBox.vertical;
+                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight();
                     if (elementMaxHeight > 0) {
                         element.css({
                             maxHeight: ceil(elementMaxHeight) + "px"
@@ -218,24 +216,11 @@
 
             },
 
-            _paddingBox: function(element) {
-                var paddingTop = parseFloat(element.css("padding-top"), 10),
-                    paddingLeft = parseFloat(element.css("padding-left"), 10),
-                    paddingBottom = parseFloat(element.css("padding-bottom"), 10),
-                    paddingRight = parseFloat(element.css("padding-right"), 10);
-
-                return {
-                    vertical: paddingTop + paddingBottom,
-                    horizontal: paddingLeft + paddingRight
-                };
-            },
-
             _setElementHeight: function() {
                 var that = this,
                     element = that.element,
                     height = that.options.height,
-                    paddingBox = that._paddingBox(element),
-                    elementHeight = parseFloat(height, 10) - that._uiHeight() - paddingBox.vertical;
+                    elementHeight = parseFloat(height, 10) - that._uiHeight();
 
                 if (elementHeight < 0) {
                     elementHeight = 0;
@@ -433,6 +418,7 @@
                         .autoApplyNS(NS)
                         .html(text)
                         .appendTo(actionbar)
+                        .addClass(action.cssClass)
                         .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
@@ -819,6 +805,8 @@
                 that._destroy();
 
                 Widget.fn.destroy.call(that);
+
+                kendo.destroy(that.wrapper);
 
                 that.wrapper.remove();
                 that.wrapper = that.element = $();
