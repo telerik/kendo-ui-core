@@ -491,13 +491,16 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "repeatEvery": "Repeat every: ",
     "repeatOn": "Repeat on: ",
     "interval": " month(s)",
-    "day": "Day "
+    "day": "Day ",
+    "date": "Date"
   },
   "yearly": {
     "repeatEvery": "Repeat every: ",
     "repeatOn": "Repeat on: ",
     "interval": " year(s)",
-    "of": " of "
+    "of": " of ",
+    "month": "month",
+    "day": "day"
   },
   "end": {
     "label": "End:",
