@@ -135,7 +135,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "Giorno",
     "interval": "mese(i)",
     "repeatEvery": "Ripeti ogni: ",
-    "repeatOn": "Repeti quando:: "
+    "repeatOn": "Repeti quando:: ",
+    "date": "Data"
   },
   "offsetPositions": {
     "first": "primo",
@@ -153,7 +154,10 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "of": "di",
     "repeatEvery": "Ripeti ogni:",
     "repeatOn": "Ripeti quando:",
-    "interval": "anno(i)"
+    "interval": "anno(i)",
+    "month": "mese",
+    "day": "giorno",
+    "date": "Data"
   },
   "weekdays": {
     "day": "giorno",

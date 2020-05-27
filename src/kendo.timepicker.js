@@ -695,18 +695,25 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listScrollHandler: function (e) {
+            var that = this;
             var itemHeight = Math.floor($(e.currentTarget).find(".k-item:visible:eq(0)").outerHeight());
 
-            if (e.currentTarget.scrollTop % itemHeight !== 0) {
-                if(e.currentTarget.scrollTop > this._scrollTop){
-                    e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                } else {
-                    e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                }
+            if (that._scrollingTimeout) {
+                clearTimeout(that._scrollingTimeout);
             }
-            this._scrollTop = e.currentTarget.scrollTop;
-            this._updateRanges();
-            this._updateCurrentlySelected();
+
+            that._scrollingTimeout = setTimeout(function () {
+                if (e.currentTarget.scrollTop % itemHeight !== 0) {
+                    if (e.currentTarget.scrollTop > that._scrollTop) {
+                        e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                    } else {
+                        e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                    }
+                }
+                that._scrollTop = e.currentTarget.scrollTop;
+                that._updateRanges();
+                that._updateCurrentlySelected();
+            }, 100);
         },
 
         _updateCurrentlySelected: function () {

@@ -1889,6 +1889,10 @@ The text similar to "Title of the event" displayed in the scheduler event editor
 
 The configuration of the scheduler recurrence editor messages. Use this option to customize or localize the scheduler recurrence editor messages.
 
+### messages.recurrenceEditor.cancel `String`
+
+Applicable in Scheduler Adaptive rendering scenario. The text for the cancel button on the scheduler recurrence editor header.
+
 ### messages.recurrenceEditor.daily `Object`
 
 The configuration of the scheduler recurrence editor daily messages. Use this option to customize or localize the scheduler recurrence editor daily messages.
@@ -2123,6 +2127,10 @@ The text similar to "On " displayed in the scheduler recurrence editor.
     });
     </script>
 
+### messages.recurrenceEditor.endTitle `String`
+
+Applicable in Scheduler Adaptive rendering scenario. The text for the endTitle (end repeat on) on the scheduler recurrence editor.
+
 ### messages.recurrenceEditor.frequencies `Object`
 
 The configuration of the scheduler recurrence editor frequencies messages. Use this option to customize or localize the scheduler recurrence editor frequencies messages.
@@ -2267,6 +2275,10 @@ The text similar to "Yearly" displayed in the scheduler recurrence editor.
     });
     </script>
 
+### messages.recurrenceEditor.headerTitle `String`
+
+Applicable in Scheduler Adaptive rendering scenario. The text for the headerTitle (text in the header) on the scheduler recurrence editor.
+
 ### messages.recurrenceEditor.monthly `Object`
 
 The configuration of the scheduler recurrence editor monthly messages. Use this option to customize or localize the scheduler recurrence editor monthly messages.
@@ -2285,6 +2297,34 @@ The text similar to "Day " displayed in the scheduler recurrence editor.
         recurrenceEditor: {
             monthly: {
                 day: "day "
+            }
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.recurrenceEditor.monthly.date `String`
+
+The text similar to "Date " displayed in the scheduler recurrence editor. Also used for titles of the appropriate inputs.
+
+#### Example - set the "date" scheduler recurrence editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        recurrenceEditor: {
+            monthly: {
+                date: "Exact date "
             }
         }
       },
@@ -2531,6 +2571,14 @@ The text similar to "last" displayed in the scheduler recurrence editor.
 
 The text of the Recurence editor dropdown title.
 
+### messages.recurrenceEditor.repeatTitle `String`
+
+Applicable in Scheduler Adaptive rendering scenario. The text for the repeatTitle (repeat on) on the scheduler recurrence editor.
+
+### messages.recurrenceEditor.update `String`
+
+Applicable in Scheduler Adaptive rendering scenario. The text for the update button on the scheduler recurrence editor header.
+
 ### messages.recurrenceEditor.weekly `Object`
 
 The configuration of the scheduler recurrence editor weekly messages. Use this option to customize or localize the scheduler recurrence editor weekly messages.
@@ -2710,6 +2758,62 @@ The text similar to "weekend" displayed in the repeat by section of the monthly 
 ### messages.recurrenceEditor.yearly `Object`
 
 The configuration of the scheduler recurrence editor yearly messages. Use this option to customize or localize the scheduler recurrence editor yearly messages.
+
+### messages.recurrenceEditor.yearly.day `String`
+
+The text similar to "day" displayed in the scheduler recurrence editor. Also used for titles of the appropriate inputs.
+
+#### Example - set the "day" scheduler recurrence editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        recurrenceEditor: {
+            yearly: {
+                day: "on day"
+            }
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.recurrenceEditor.yearly.month `String`
+
+The text similar to "month" displayed in the scheduler recurrence editor. Also used for titles of the appropriate inputs.
+
+#### Example - set the "month" scheduler recurrence editor message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      messages: {
+        recurrenceEditor: {
+            yearly: {
+                day: "exact month"
+            }
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
 
 ### messages.recurrenceEditor.yearly.of `String`
 
@@ -5559,7 +5663,7 @@ Enables the DOM virtualization for vertical grouping of the view - renders batch
         }
       ]
     });
-    
+
 ### views.workDays `Array`
 
 Sets the working days (index based).

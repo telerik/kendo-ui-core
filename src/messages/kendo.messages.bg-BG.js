@@ -597,7 +597,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "Ден ",
     "interval": " месец(и)",
     "repeatEvery": "Повтаряй всеки: ",
-    "repeatOn": "Повтаряй на: "
+    "repeatOn": "Повтаряй на: ",
+    "date": "Дата"
   },
   "offsetPositions": {
     "first": "първи(а)",
@@ -615,7 +616,10 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "of": " от ",
     "repeatEvery": "Повтаряй всеки: ",
     "repeatOn": "Повтаряй на: ",
-    "interval": " година(ни)"
+    "interval": " година(ни)",
+    "month": "месец",
+    "day": "ден",
+    "date": "Дата"
   },
   "weekdays": {
     "day": "ден",
