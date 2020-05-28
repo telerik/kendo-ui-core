@@ -598,8 +598,8 @@ var __meta__ = { // jshint ignore:line
             if (!this.options.specifiedRange) {
                 return;
             }
-            if (!this._value) {
-                this._value = new Date();
+            if (!this._currentlySelected) {
+                this._currentlySelected = new Date();
             }
 
             var max = this.options.max;
@@ -608,20 +608,20 @@ var __meta__ = { // jshint ignore:line
             this._selectedDesignator = this._selectedHour = this._selectedMinutes = this._selectedSeconds = null;
 
             if (this.options.validateDate) {
-                if (max.getFullYear() === this._value.getFullYear() &&
-                    max.getMonth() === this._value.getMonth() &&
-                    max.getDate() === this._value.getDate()) {
+                if (max.getFullYear() === this._currentlySelected.getFullYear() &&
+                    max.getMonth() === this._currentlySelected.getMonth() &&
+                    max.getDate() === this._currentlySelected.getDate()) {
                     this._validateMax = true;
                 } else {
                     this._validateMax = false;
                 }
 
-                if (min.getFullYear() === this._value.getFullYear() &&
-                    min.getMonth() === this._value.getMonth() &&
-                    min.getDate() === this._value.getDate()) {
+                if (min.getFullYear() === this._currentlySelected.getFullYear() &&
+                    min.getMonth() === this._currentlySelected.getMonth() &&
+                    min.getDate() === this._currentlySelected.getDate()) {
                     this._validateMin = true;
                 } else {
-                    this._validateMax = true;
+                    this._validateMin = false;
                 }
 
                 if (!this._validateMax && !this._validateMin) {
