@@ -30,6 +30,25 @@ Specifies the [template](/api/javascript/kendo/methods/template) which is used f
         });
     </script>
 
+### focusFirst `Boolean` *(default: false)*
+
+Specifies if the first editor of the form will be focused on initialization.
+
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                Name: "Ivan",
+                ZipCode: 1000
+            },
+            focusFirst: true
+        });
+    </script>
+
 ### formatLabel `Function`
 
 Callback function that could be used to change the default format of the automatically generated labels.
