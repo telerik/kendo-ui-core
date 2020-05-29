@@ -992,6 +992,11 @@ The format of the cell text. For more information, refer to the article on [crea
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
 
+### sheets.rows.cells.html `Boolean`
+
+If set to `true`, renders the cell value as HTML. 
+An important thing in this case is to sanitized the value of the cell on the server for passing save html because there is no client-side sanitizing.
+
 ### sheets.rows.cells.index `Number`
 
 The zero-based index of the cell. Required to ensure correct positioning.

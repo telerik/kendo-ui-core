@@ -219,7 +219,7 @@
             _setElementHeight: function() {
                 var that = this,
                     element = that.element,
-                    height = that.options.height,
+                    height = that.wrapper.outerHeight(true),
                     elementHeight = parseFloat(height, 10) - that._uiHeight();
 
                 if (elementHeight < 0) {

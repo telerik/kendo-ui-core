@@ -165,11 +165,11 @@ var __meta__ = { // jshint ignore:line
         "string": function(container, options) {
             var attr = createAttributes(options);
 
-            $('<input type="text" class="k-textbox"/>').attr(attr).appendTo(container);
+            $('<input type="text" />').attr(attr).addClass("k-textbox").appendTo(container);
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="checkbox" class="k-checkbox" />').attr(attr).appendTo(container);
+            $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
         },
         "values": function(container, options) {
             var attr = createAttributes(options);
