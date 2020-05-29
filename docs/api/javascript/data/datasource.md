@@ -421,7 +421,11 @@ The supported operators are:
 * `"isempty"`
 * `"isnotempty"`
 
+
 The last eight are supported only for string fields.
+
+The operator may also be a function with a single argument representing a data element. The function should return a boolean value indicating if the data matches. For example: `function(model){return model.name==='John Doe'}`
+
 
 #### Example - set the filter operator
 
