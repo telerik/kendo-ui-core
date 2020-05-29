@@ -170,6 +170,10 @@ Defines the hint text that will be shown underneath the form editor.
 
 Defines the field size when grid layout is used.
 
+### items.attributes `Object`
+
+Defines the attributes that are applied to the input element.
+
 ### orientation `String`
 
 Configures the Form orientation. Available options are `"horizontal"` and `"vertical"`.
