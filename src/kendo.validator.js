@@ -461,7 +461,8 @@ var __meta__ = { // jshint ignore:line
 
         reset: function() {
             var that = this,
-                inputs = that.element.find("." + INVALIDINPUT);
+                inputs = that.element.find("." + INVALIDINPUT),
+                labels = that.element.find("." + INVALIDLABEL);
 
             that._errors = [];
 
@@ -471,6 +472,7 @@ var __meta__ = { // jshint ignore:line
 
             inputs.removeAttr(ARIAINVALID);
             inputs.removeClass(INVALIDINPUT);
+            labels.removeClass(INVALIDLABEL);
         },
 
         _findMessageContainer: function(fieldName) {

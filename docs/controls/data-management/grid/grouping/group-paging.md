@@ -13,7 +13,7 @@ By default, the groups are rendered collapsed and each row signifies one item fr
 
 ## Getting Started
 
-To enable group paging, set the dataSource [`groupPaging`](/api/javascript/data/datasource/configuration/grouppaging) option to `true`, add a [`group`](/api/javascript/data/datasource/configuration/group) and a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) to see the result.
+To enable group paging, set the dataSource [`groupPaging`](/api/javascript/data/datasource/configuration/group#groupPaging) option to `true`, add a [`group`](/api/javascript/data/datasource/configuration/group) and a [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) to see the result.
 
     $("#grid").kendoGrid({
          dataSource: new kendo.data.DataSource({

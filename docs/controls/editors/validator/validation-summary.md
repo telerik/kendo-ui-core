@@ -8,7 +8,7 @@ position: 5
 
 # Validation Summary
 
-The Validator provides the ability to list validation errors in a separate container through the [`validationSummary`](/api/javascript/ui/validator/configuration/validationSummary) option. The listed errors link to the corresponding form elements and focus them upon clicking an error message from the validation summary list.
+The Validator provides the ability to list validation errors in a separate container through the [`validationSummary`](/api/javascript/ui/validator/configuration/validationsummary) option. The listed errors link to the corresponding form elements and focus them upon clicking an error message from the validation summary list.
 
 ## Default
 
@@ -32,7 +32,7 @@ The option could be enabled by setting the `validationSummary` option to true. T
 
 ## Specify Where To Render
 
-The validation summary can be rendered in a container of choice by utilizing the [`validationSummary.container`](/api/javascript/ui/validator/configuration/validationSummary.container) option. For example, the summary could be displayed below the validated content with the following configuration:
+The validation summary can be rendered in a container of choice by utilizing the [`validationSummary.container`](/api/javascript/ui/validator/configuration/validationsummary.container) option. For example, the summary could be displayed below the validated content with the following configuration:
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -50,7 +50,7 @@ The validation summary can be rendered in a container of choice by utilizing the
 
 ## Customize Validation Messages
 
-The default template of the validation summary could be changed through the [`validationSummary.template`](/api/javascript/ui/validator/configuration/validationSummary.template) option.
+The default template of the validation summary could be changed through the [`validationSummary.template`](/api/javascript/ui/validator/configuration/validationsummary.template) option.
 
     <form id="myform">
         <input name="username" required /> <br />
@@ -77,7 +77,7 @@ The `data-field` attribute is used to link the error message to the correspondin
 
 ## Programmatically Show/Hide the Summary
 
-The visibility of the summary container could be controlled through the [`showValidationSummary()`](/api/javascript/ui/validator/methods/showValidationSummary) and [`hideValidationSummary()`](/api/javascript/ui/validator/methods/hideValidationSummary) methods.
+The visibility of the summary container could be controlled through the [`showValidationSummary()`](/api/javascript/ui/validator/methods/showvalidationsummary) and [`hideValidationSummary()`](/api/javascript/ui/validator/methods/hidevalidationsummary) methods.
 
 Consider the following specifics when using these methods:
 

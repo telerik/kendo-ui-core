@@ -575,8 +575,10 @@ var __meta__ = { // jshint ignore:line
         _inputHandler: function () {
             var element = this.element;
             var value = element.val();
+            var min = this.options.min;
             var numberFormat = this._format(this.options.format);
             var decimalSeparator = numberFormat[POINT];
+            var minInvalid = (min !== null && min >= 0 && value.charAt(0) === "-");
             
             if (this._numPadDot && decimalSeparator !== POINT) {
                 value = value.replace(POINT, decimalSeparator);
@@ -584,7 +586,7 @@ var __meta__ = { // jshint ignore:line
                 this._numPadDot = false;
             }
 
-            if (this._numericRegex(numberFormat).test(value)) {
+            if (this._numericRegex(numberFormat).test(value) && !minInvalid) {
                 this._oldText = value;
             } else {
                 this._blinkInvalidState();

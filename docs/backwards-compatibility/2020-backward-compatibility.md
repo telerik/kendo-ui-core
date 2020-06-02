@@ -54,6 +54,9 @@ As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved stylin
         text-align: left; /* aligns the text */
     }
  ```
+**Window**
+
+As of Kendo UI 2020 R2, the k-header class has been removed from the Window rendering.
 
  **Badge**
 

@@ -95,7 +95,7 @@ To boost the performance of your project:
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
 * Windows Universal apps and [Cordova for Windows 10](https://cordova.apache.org/docs/en/5.1.1/guide/platforms/win8/win10-support.html) environments are not supported, due to the [sandbox restrictions of the environment](https://msdn.microsoft.com/en-us/library/windows/apps/hh849625.aspx#Automatic_script_filtering). The recommended UI suite for this environment is [UI for Windows Universal](https://www.telerik.com/windows-universal-ui).
 * Unexpected behaviors that occur only in a hybrid application, but not in a standalone supported browser, are by default considered to be triggered by the hybrid environment and unrelated to Kendo UI.
-* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) over a META tag or an HTTP header:
+* It is highly advisable to use [Internet Explorer Edge mode](https://docs.microsoft.com/en-us/archive/blogs/ie/ies-compatibility-features-for-site-developers) over a META tag or an HTTP header:
 
     ```
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

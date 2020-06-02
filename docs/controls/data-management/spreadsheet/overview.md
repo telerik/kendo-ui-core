@@ -34,7 +34,7 @@ The Spreadsheet instance exposes [methods](/api/javascript/ui/spreadsheet#method
 
 * A common method is the [`activeSheet`](/api/javascript/ui/spreadsheet/methods/activesheet) method.
 * The [`sheet`](/api/javascript/spreadsheet/sheet) object instance interface enables you to configure the settings and data on the sheet level.
-* You can use the `range` method for retrieval of a [`range`](/api/javascript/spreadsheet/range) instance that you can use to manipulate one or more cell regions of the sheet. To retrieve the `range` method, use a string with an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or an [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html).
+* You can use the `range` method for retrieval of a [`range`](/api/javascript/spreadsheet/range) instance that you can use to manipulate one or more cell regions of the sheet. To retrieve the `range` method, use a string with an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or an [RC notation](https://excelribbon.tips.net/T008803_Understanding_R1C1_References.html).
 
 The following example demonstrates how to set the value for a range of cells.
 

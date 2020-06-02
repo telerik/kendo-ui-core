@@ -15,7 +15,7 @@ This article provides solutions for common issues you may encounter while workin
 * [Asynchronous uploads randomly fail](#asynchronouos-uploads-randomly-fail)
 * [The upload progress indicator incorrectly renders the progress of the upload](#the-upload-progress-indicator-incorrectly-renders-the-progress-of-the-upload)
 * [The Upload demonstrates general performance issues](#the-upload-demonstrates-general-performance-issues)
-* [Cannot access the error message console](cannot-access-the-error-message-console)
+* [Cannot access the error message console](#cannot-access-the-error-message-console)
 
 ## The Select button is partially visible and has no text
 

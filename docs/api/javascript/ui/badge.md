@@ -121,7 +121,7 @@ See [web font icons help article](/kendo-ui/styles-and-layout/icons-web) for mor
 
 ### look `String` *(default: 'solid')*
 
-**Deprecated!** Use [`badge.options.badgeStyle`](/api/javascript/ui/badge/configuration/badgeStyle) instead.
+**Deprecated!** Use [`badge.options.badgeStyle`](/api/javascript/ui/badge/configuration/badgestyle) instead.
 
 For compatibility `badge.options.look` maps to `badge.options.badgeStyle`.
 

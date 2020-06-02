@@ -1983,6 +1983,49 @@ Configures the Kendo UI Window instance which is used when the TreeList edit mod
 
 Configures the Excel export settings of the TreeList.
 
+### excel.allPages `Boolean` *(default: false)*
+
+If set to `true` the TreeList will export all pages of data. By default the TreeList exports only the current page.
+
+#### Example - export all pages of data
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        toolbar: ["excel"],
+        columns: [
+          { field: "FirstName", title: "First Name" },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        excel: {
+          allPages: true
+        },        
+        pageable: {
+          pageSize: 10
+        },
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              fields: {
+                parentId: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        }
+      });
+    </script>
+
 ### excel.fileName `String` *(default: "Export.xslx")*
 
 Specifies the file name of the exported Excel file.
@@ -3940,6 +3983,55 @@ The tooltip of the **...** (ellipsis) button which appears when the number of pa
 ### pdf `Object`
 
 Configures the PDF export settings of the TreeList.
+
+### pdf.allPages `Boolean` *(default: false)*
+
+Exports all TreeList pages, starting from the first one.
+
+> **Note:** Chrome is known to crash when generating very large PDF-s.  A solution to this is to include the
+> [Pako](http://nodeca.github.io/pako/) library, which is bundled with Kendo as `pako_deflate.min.js`.  Simply loading
+> this library with a `<script>` tag will enable compression in PDF, e.g.:
+>
+> `<script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>`
+
+#### Example - export all pages
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        toolbar: ["pdf"],
+        columns: [
+          { field: "FirstName", title: "First Name" },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        pdf: {
+            allPages: true
+        },
+        pageable: {
+          pageSize: 10
+        },
+        dataSource: {
+          transport: {
+            read: {
+              url: "https://demos.telerik.com/kendo-ui/service/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              fields: {
+                parentId: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        }
+      });
+    </script>
 
 ### pdf.author `String` *(default: null)*
 

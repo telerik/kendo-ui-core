@@ -81,11 +81,10 @@
                 min: 0
             });
 
-            input.pressKey("-", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.val("-");
+            input.pressKey("-", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
         });
 
         it("Spacebar is not allowed", function() {

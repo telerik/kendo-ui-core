@@ -60,7 +60,7 @@ We'll talk about handling old Opera versions more in a minute, but let's first a
 
 #### Internet Explorer and XDomainRequest
 
-Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of WebKit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://msdn.microsoft.com/en-us/library/cc288060(v=vs.85).aspx).
+Internet Explorer, pre IE10, approaches cross-origin resource sharing a bit differently. Rather than go the route of WebKit and Gecko, IE 8 and 9 do not reuse the standard Ajax `XMLHttpRequest` object for CORS requests. Instead, they introduce a brand new object for cross-origin resource sharing called [`XDomainRequest`](https://developer.mozilla.org/en-US/docs/Web/API/XDomainRequest).
 
 This means your Ajax code for cross-domain calls looks 100% identical to `same-domain` calls in Chrome and Firefox, but it will have to fork in Internet Explorer to use the new XDR object with CORS requests. A pain, but a solvable problem. There are some other limits with XDR, [but we'll leave that to you to research](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx).
 
