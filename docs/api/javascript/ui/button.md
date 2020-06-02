@@ -60,7 +60,7 @@ Defines the name for an existing icon in a Kendo UI theme or SVG content. The ic
 
 ### badge.look `String` *(default: solid)*
 
-**Deprecated!** Use [`badge.badgeStyle`](/api/javascript/ui/button/configuration/badge.badgeStyle) instead.
+**Deprecated!** Use [`badge.badgeStyle`](/api/javascript/ui/button/configuration/badge.badgestyle) instead.
 
 For compatibility `badge.look` maps to `badge.badgeStyle`.
 

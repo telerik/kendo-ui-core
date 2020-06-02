@@ -59,7 +59,7 @@ instance.
 
 ### expression `Object`
 
-An object which represents a [filter](javascript/data/datasource/configuration/filter) expression which the [kendo.data.DataSource](/api/javascript/data/datasource) can use to filter the data.
+An object which represents a [filter](/api/javascript/ui/filter/configuration/expression) expression which the [kendo.data.DataSource](/api/javascript/data/datasource) can use to filter the data.
 
 #### Example - set expression
 

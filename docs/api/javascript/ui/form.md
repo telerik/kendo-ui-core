@@ -236,7 +236,7 @@ Configures the built-in Validator options.
 
 ### validatable.validateOnBlur `Boolean` *(default: true)*
 
-Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/validateOnBlur) option.
+Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/configuration/validateonblur) option.
 
 #### Example - set validateOnBlur
 
@@ -266,7 +266,7 @@ Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/vali
 
 ### validatable.validationSummary `Boolean|Object` *(default: false)*
 
-Configures the Form Validator [validationSummary](/api/javascript/ui/validator/validationSummary) option.
+Configures the Form Validator [validationSummary](/api/javascript/ui/validator/configuration/validationsummary) option.
 
 #### Example - set validationSummary to false
 
@@ -325,7 +325,7 @@ Configures the Form Validator [validationSummary](/api/javascript/ui/validator/v
 
 ### validatable.errorTemplate `String|Function`
 
-Configures the Form Validator [errorTemplate](/api/javascript/ui/validator/errorTemplate) option.
+Configures the Form Validator [errorTemplate](/api/javascript/ui/validator/configuration/errortemplate) option.
 
 #### Example - change validation message
 
@@ -377,7 +377,7 @@ Defines the width of the gutters between the columns / rows.
 
 ### validate
 
-Validates the form by executing the Form Validator [validate() method](/api/javascript/ui/validator/validate).
+Validates the form by executing the Form Validator [validate() method](/api/javascript/ui/validator/methods/validate).
 
 #### Example
 
