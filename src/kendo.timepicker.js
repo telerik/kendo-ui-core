@@ -299,9 +299,11 @@ var __meta__ = { // jshint ignore:line
             var item;
 
             if (is12hourFormat) {
-                if (hours > 12) {
+                if (hours >= 12) {
                     designator = "PM";
-                    hours -= 12;
+                    if (hours > 12) {
+                        hours -= 12;
+                    }
                 } else {
                     designator = "AM";
                 }
@@ -755,6 +757,9 @@ var __meta__ = { // jshint ignore:line
             if (is12hourFormat) {
                 if (selectedDesignator == "PM") {
                     selectedHour += 12;
+                    if (selectedHour == 24) {
+                        selectedHour = 12;
+                    }
                 }
 
                 if (selectedDesignator === "AM" && selectedHour === 12) {
@@ -862,8 +867,9 @@ var __meta__ = { // jshint ignore:line
             var end;
 
             if (part.type === "hour") {
+                start = 1;
                 index = 1;
-                end = part.hour12 ? 12 : 23;
+                end = part.hour12 ? 12 : 24;
             } else if (part.type === "minute") {
                 index = 2;
                 end = 59;

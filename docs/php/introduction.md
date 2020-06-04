@@ -11,10 +11,60 @@ position: 1
 
 [Progress Telerik UI for PHP](https://www.telerik.com/php-ui) is a set of PHP classes which help you configure Kendo UI widgets by using server-side code in PHP websites.
 
+<style>
+/* Xamarin download trial button */
+div#kendo_trial {
+	text-align: center !important;
+}
+
+div#kendo_trial .kendo_download_btn {	
+	color: #fff;
+	background-color: #e74b3c;
+	padding:.44em .9em .52em;
+	font-size: 20px;
+	font-weight:400;
+	letter-spacing:-.025em;
+	position:relative;
+	display:inline-block;
+	line-height:1.2;
+	-webkit-transition:color .2s ease,background-color .2s ease;
+	transition:color .2s ease,background-color .2s ease;
+	border-radius:2px;
+	-webkit-appearance:none;
+	font-family:Metric,Arial,Gadget,sans-serif;
+	text-align:center	
+}
+</style>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+	  var mac = navigator.userAgent.match(/(Mac)/i);
+	  var $btnWin = $(".js-btnWin");
+	  var $btnOSX = $(".js-btnOSX");
+
+	  if (mac) {
+		$btnOSX.show();
+		$btnWin.hide();
+	  } else {
+		$btnOSX.hide();
+		$btnWin.show();
+	  }
+  });
+
+</script>
+
+<div id="kendo_trial">
+<br />
+<a href="https://www.telerik.com/download-trial-file/v2/ui-for-php" class="kendo_download_btn js-btnWin" style="display: none">Download Free Trial</a>
+<a href="https://www.telerik.com/download-trial-file/v2/ui-for-php" class="kendo_download_btn js-btnOSX" style="display: none">Download Free Trial</a>
+</div>
+
 ## Getting Started
 
 ### Requirements
 
+* [Download the controls](https://www.telerik.com/download-trial-file/v2/ui-for-php)
 * Progress Telerik UI for PHP requires a PHP 5.3.3+ version.
 * The sample application uses [PDO](http://www.php.net/manual/en/intro.pdo.php) and [SQLite](http://www.php.net/manual/en/ref.pdo-sqlite.php). Both extensions should be enabled in the PHP configuration (php.ini).
 * The [`phpinfo`](http://php.net/manual/en/function.phpinfo.php) function can be used to verify that PDO and the SQLite extensions are successfully installed.
@@ -105,6 +155,25 @@ The example below demonstrates the complete source code.
         ?>
         </body>
     </html>
+
+## Trial Version and Commercial License
+
+This Progress Telerik UI for PHP library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Progress Telerik UI for PHP [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
+
+## Support Options
+
+For any issues you might encounter while working with the Progress Telerik UI for PHP, use any of the available support channels:
+
+* Kendo UI Professional license holders and active trialists can take advantage of our outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [Progress Telerik UI for PHP dedicated support](https://www.telerik.com/account/support-tickets/) system.
+* [Progress Telerik UI for PHP forums](https://www.telerik.com/forums/php) are part of the free support you can get from the community and UI for PHP team on all kinds of general issues.
+* [Progress Telerik UI for PHP feedback portal](https://feedback.telerik.com/php-ui) and [Progress Telerik UI for PHP roadmap](https://www.telerik.com/support/whats-new/php-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
+* Progress Telerik UI for PHP uses GitHub Issues as its bug tracker and you can submit any related reports there. 
+* You may still need a tailor-made solution for your project. In such cases, go straight to [Progress Services](https://www.progress.com/services).
+
+## Learning Resources
+
+* [Progress Telerik UI for PHP forum](https://www.telerik.com/forums/php)
+* [Progress Telerik UI for PHP feedback portal](https://feedback.telerik.com/php-ui)
 
 ## Next Steps
 

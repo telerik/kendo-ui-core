@@ -629,6 +629,38 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 });
 }
 
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+    $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "endTitle": "Повтарянето завършва",
+      "repeatTitle": "Вид повторение",
+      "headerTitle": "Повтори събитието",
+      "end": {
+        "patterns": {
+            "never": "Никога",
+            "after": "След...",
+            "on": "На..."
+        }
+      },
+      "monthly": {
+        "repeatBy": "Повтори според: ",
+        "dayOfMonth": "Дата от месеца",
+        "dayOfWeek": "Ден от седмицата",
+        "every": "Всеки"
+      },
+      "yearly": {
+        "repeatBy": "Повтори според: ",
+        "dayOfMonth": "Дата от месеца",
+        "dayOfWeek": "Ден от седмицата",
+        "every": "Всеки",
+        "month": "Месец",
+        "day": "Ден"
+      }
+    });
+}
+
 /* Grid messages */
 
 if (kendo.ui.Grid) {
@@ -1160,6 +1192,20 @@ if (kendo.ui.Calendar) {
   $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
     "today": "Днес"
   });
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+    $.extend(true, kendo.ui.Wizard.prototype.options.messages,{
+        "reset": "Нулиране",
+        "previous": "Предишна",
+        "next": "Следваща",
+        "done": "Готово",
+        "step": "Стъпка",
+        "of": "от"
+    });
 }
 
 })(window.kendo.jQuery);

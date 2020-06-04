@@ -18,6 +18,7 @@ The suggested approach is platform-agnostic&mdash;you can apply it for macOS, Li
 
 To get up and running with the project:
 
+1. [Download the controls](https://www.telerik.com/download-trial-file/v2/aspnet-core-ui)
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Integrate UI for ASP.NET Core in the project](#integrating-ui-for-aspnet-core)

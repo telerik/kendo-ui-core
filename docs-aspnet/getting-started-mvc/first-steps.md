@@ -20,6 +20,7 @@ To configure an ASP.NET MVC web application to use UI for ASP.NET MVC, you can u
 
 To get up and running with the project:
 
+1. [Download the controls](https://www.telerik.com/download-trial-file/v2-b/ui-for-asp.net-mvc)
 1. [Create the ASP.NET MVC Web Application](#creating-the-application)
 1. [Include the Telerik UI for ASP.NET MVC client-side resources](#including-the-client-side-resources)
 1. [Reference the `Kendo.Mvc.dll` assembly](#adding-the-kendo.mvc.dll-reference)

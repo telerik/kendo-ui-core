@@ -17,6 +17,7 @@ The guide creates a use-case scenario which demonstrates how to start working wi
 
 To get up and running with the project:
 
+1. [Download the controls](https://www.telerik.com/download-trial-file/v2/aspnet-core-ui)
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)

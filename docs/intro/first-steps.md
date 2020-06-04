@@ -15,6 +15,7 @@ This guide demonstrates how to start working with the suite and implements a use
 
 The process draws on the following milestones:
 
+ 1. [Download the controls](https://www.telerik.com/download-login-v2-kendoui)
  1. [Required JavaScript and CSS files](#1-adding-the-required-javascript-and-css-files)
  1. [Data binding](#2-binding-to-data)
  1. [Widget initialization](#3-Initializing-the-widgets)
