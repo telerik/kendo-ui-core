@@ -13,6 +13,26 @@ The Telerik UI Tag Helpers for ASP.NET Core enable you to configure the correspo
 
 Tag Helpers can be added and further configured through predefined strongly typed attributes and also allow you to handle the events of the widgets in ASP.NET Core projects.
 
+## Widgets vs. Helpers
+
+The Kendo UI widgets:
+
+* Allow for a complete server-platform independence.
+* Provide full control over the placement of the initialization scripts.
+* Support the integration with the [MVVM](https://docs.telerik.com/kendo-ui/framework/mvvm/overview), [AngularJS](https://docs.telerik.com/kendo-ui/framework/AngularJS/introduction), and [Single-Page Application](https://docs.telerik.com/kendo-ui/framework/spa/overview) development patterns.
+* Support [Visual Studio IntelliSense](https://docs.telerik.com/kendo-ui/third-party/vs-intellisense) for the client-side API.
+
+The {{ site.product_short }} helpers:
+
+* Allow you to create widgets with no HTML and JavaScript coding.
+* Provide for server-side data binding.
+* Allow you to use the `ToDataSourceResult()` extension method for binding Kendo UI widgets to server-side collections and for performing data operations (paging, sorting, filtering, and grouping).
+* Provide integration with some {{ site.framework }} features such as security trimming.
+* Enable a simple implementation of CRUD operations.
+* Support Visual Studio IntelliSense for the server-side configuration syntax.
+* Enable Visual Studio Extensions for automatic creation of new {{ site.product }} applications and for automatic updating of the Telerik UI version.
+* Enable you to use scaffolding to generate widget declarations and related controller action methods.
+
 ## Adding Tag Helpers
 
 To configure an ASP.NET Core project that enables you to use a Telerik UI tag helper, add the @addTagHelper directive to your `cshtml` file.

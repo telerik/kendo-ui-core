@@ -27,6 +27,7 @@ In addition it is possible to customize which fields to search when a value is e
 ## Known Limitations
 
 * When filtering is enabled in the filter textboxes for all TreeList columns will be populated with the value entered in the search textbox.
+* When the server operations are enabled, you can search only by using string fields. Using the `Contains` filter operation is available only for string types.
 
 ## See Also
 

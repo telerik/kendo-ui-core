@@ -537,6 +537,38 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 });
 }
 
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+    $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "endTitle": "Repeat ends",
+      "repeatTitle": "Repeat pattern",
+      "headerTitle": "Repeat event",
+      "end": {
+        "patterns": {
+            "never": "Never",
+            "after": "After...",
+            "on": "On..."
+        }
+      },
+      "monthly": {
+        "repeatBy": "Repeat by: ",
+        "dayOfMonth": "Day of the month",
+        "dayOfWeek": "Day of the week",
+        "every": "Every"
+      },
+      "yearly": {
+        "repeatBy": "Repeat by: ",
+        "dayOfMonth": "Day of the month",
+        "dayOfWeek": "Day of the week",
+        "every": "Every",
+        "month": "Month",
+        "day": "Day"
+      }
+    });
+}
+
 /* Scheduler messages */
 
 if (kendo.ui.Scheduler) {
@@ -1091,6 +1123,20 @@ if (kendo.ui.Chat) {
         "placeholder": "Type a message...",
         "toggleButton": "Toggle toolbar",
         "sendButton": "Send message"
+    });
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+    $.extend(true, kendo.ui.Wizard.prototype.options.messages,{
+        "reset": "Reset",
+        "previous": "Previous",
+        "next": "Next",
+        "done": "Done",
+        "step": "Step",
+        "of": "of"
     });
 }
 

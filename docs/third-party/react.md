@@ -15,7 +15,7 @@ To use any jQuery component in a React application, you need a trial of the [Ken
 ## KendoReact Suite
 
 If you are looking for native React components (no jQuery dependency), please visit [KendoReact](https://www.telerik.com/kendo-react-ui/).
-KendoReact a separate suite of 55+ native React components, from Grid and Charts to TimePicker, DatePicker and Menus.
+KendoReact a separate suite of 85+ native React components, from Grid and Charts to TimePicker, DatePicker and Menus.
 
 To access the native components, you need to sign up for a [KendoReact trial](https://www.telerik.com/kendo-react-ui/) or purchase a [KendoReact license](https://www.telerik.com/kendo-react-ui/#pricing).
 

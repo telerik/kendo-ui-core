@@ -629,6 +629,38 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 });
 }
 
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+    $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "endTitle": "Повтарянето завършва",
+      "repeatTitle": "Вид повторение",
+      "headerTitle": "Повтори събитието",
+      "end": {
+        "patterns": {
+            "never": "Никога",
+            "after": "След...",
+            "on": "На..."
+        }
+      },
+      "monthly": {
+        "repeatBy": "Повтори според: ",
+        "dayOfMonth": "Дата от месеца",
+        "dayOfWeek": "Ден от седмицата",
+        "every": "Всеки"
+      },
+      "yearly": {
+        "repeatBy": "Повтори според: ",
+        "dayOfMonth": "Дата от месеца",
+        "dayOfWeek": "Ден от седмицата",
+        "every": "Всеки",
+        "month": "Месец",
+        "day": "Ден"
+      }
+    });
+}
+
 /* Grid messages */
 
 if (kendo.ui.Grid) {
@@ -1118,6 +1150,61 @@ if (kendo.ui.Chat) {
         "placeholder": "Напиши съобщение...",
         "toggleButton": "Отвори/затвори лентата с инструменти",
         "sendButton": "Изпрати съобщение"
+    });
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+    kendo.ui.TimePicker.prototype.options.messages =
+    $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+        "set": "Приложи",
+        "cancel": "Отмени",
+        "hour": "час",
+        "minute": "минути",
+        "second": "секунди",
+        "milisecond": "милисекунди",
+        "now": "Сега"
+    });
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+  kendo.ui.DateTimePicker.prototype.options.messages =
+  $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+      "set": "Приложи",
+      "cancel": "Отмени",
+      "hour": "час",
+      "minute": "минути",
+      "second": "секунди",
+      "milisecond": "милисекунди",
+      "now": "Сега",
+      "date": "Дата",
+      "time": "Час"
+  });
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+  kendo.ui.Calendar.prototype.options.messages =
+  $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+    "today": "Днес"
+  });
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+    $.extend(true, kendo.ui.Wizard.prototype.options.messages,{
+        "reset": "Нулиране",
+        "previous": "Предишна",
+        "next": "Следваща",
+        "done": "Готово",
+        "step": "Стъпка",
+        "of": "от"
     });
 }
 

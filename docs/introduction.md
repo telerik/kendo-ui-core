@@ -15,6 +15,57 @@ Kendo UI is a comprehensive HTML5 user interface framework for building interact
 
 Kendo UI for jQuery provides AngularJS and Bootstrap integration and is also distributed as part of several product units that you can choose from depending on your project requirements. The suite includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
+To read more about the benefits of using Kendo UI for jQuery, please visit the [product overview page](http://www.telerik.com/kendo-jquery-ui).
+
+<style>
+/* Kendo UI for jQuery download trial button */
+div#kendo_trial {
+	text-align: center !important;
+}
+
+div#kendo_trial .kendo_download_btn {	
+	color: #fff;
+	background-color: #e74b3c;
+	padding:.44em .9em .52em;
+	font-size: 20px;
+	font-weight:400;
+	letter-spacing:-.025em;
+	position:relative;
+	display:inline-block;
+	line-height:1.2;
+	-webkit-transition:color .2s ease,background-color .2s ease;
+	transition:color .2s ease,background-color .2s ease;
+	border-radius:2px;
+	-webkit-appearance:none;
+	font-family:Metric,Arial,Gadget,sans-serif;
+	text-align:center	
+}
+</style>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+	  var mac = navigator.userAgent.match(/(Mac)/i);
+	  var $btnWin = $(".js-btnWin");
+	  var $btnOSX = $(".js-btnOSX");
+
+	  if (mac) {
+		$btnOSX.show();
+		$btnWin.hide();
+	  } else {
+		$btnOSX.hide();
+		$btnWin.show();
+	  }
+  });
+
+</script>
+
+<div id="kendo_trial">
+<br />
+<a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnWin" style="display: none">Download Free Trial</a>
+<a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnOSX" style="display: none">Download Free Trial</a>
+</div>
+
 ## Getting Started
 
 If you are newcomer, follow the [First Steps guide on getting started with Kendo UI for jQuery]({% slug getting_started_installation_kendoui %}).

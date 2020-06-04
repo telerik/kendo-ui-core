@@ -52,26 +52,28 @@
                     assert.isOk(false);
                 }
             });
+            input.val("4");
+            input.pressKey("4", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(), "4");
         });
 
         it("typing letter is not allowed", function() {
             var textbox = new NumericTextBox(input);
 
-            input.pressKey("a", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.val("a");
+            input.pressKey("a", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
         });
 
         it("'-' is allowed", function() {
             var textbox = new NumericTextBox(input);
 
-            input.pressKey("-", {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
+            input.val("-");
+            input.pressKey("-", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(), "-");
         });
 
         it("Do not allow '-' if min is bigger than 0", function() {
@@ -79,70 +81,48 @@
                 min: 0
             });
 
-            input.pressKey("-", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.val("-");
+            input.pressKey("-", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
         });
 
         it("Spacebar is not allowed", function() {
             var textbox = new NumericTextBox(input);
 
-            input.pressKey(" ", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.val(" ");
+            input.pressKey(" ", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
         });
 
         it("Non-visual keys are allowed", function() {
-            var textbox = new NumericTextBox(input);
+            var textbox = new NumericTextBox(input, { value: 1 });
 
-            input.val(1).pressKey(0, {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
+            input.val("1a")
+            input.pressKey("a", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(), "1");
         });
 
-        it("Backspace in Firefox is allowed", function() {
-            var textbox = new NumericTextBox(input);
-
-            input.pressKey(kendo.keys.BACKSPACE, {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
-        });
-
-        it("Enter in IE is allowed", function() {
-            var textbox = new NumericTextBox(input);
-            input.pressKey(kendo.keys.ENTER, {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
-        });
+    
 
         it("Allow decimal separator '.'", function() {
             var textbox = new NumericTextBox(input);
 
-            input.pressKey(".", {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
+            input.val(".");
+            input.pressKey(".", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(), ".");
         });
 
         it("Do not allow decimal separator ','", function() {
             var textbox = new NumericTextBox(input);
 
-            input.pressKey(",", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.val(",");
+            input.pressKey(",", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
         });
 
         it("Allow decimal separator ',' in bg-BG culture", function() {
@@ -150,11 +130,10 @@
 
             kendo.culture("bg-BG");
 
-            input.pressKey(",", {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
+            input.val(",");
+            input.pressKey(",", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(), ",");
 
             kendo.culture("en-US");
         });
@@ -164,12 +143,10 @@
 
             kendo.culture("bg-BG");
 
-            input.pressKey(".", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
-
+            input.val(".");
+            input.pressKey(".", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
             kendo.culture("en-US");
         });
 
@@ -177,15 +154,13 @@
             var textbox = new NumericTextBox(input);
 
             kendo.culture("bg-BG");
-
             input.focus();
-            input.pressKey(110, "keydown");
-            input.pressKey(".", {
-                preventDefault: function() {
-                    assert.equal(input.val(), ",");
-                }
-            });
+            
+            input.val(".");
+            input.pressKey(kendo.keys.NUMPAD_DOT, "keydown");
+            input.trigger("input");
 
+            assert.equal(input.val(), ",");
             kendo.culture("en-US");
         });
 
@@ -195,11 +170,10 @@
                 restrictDecimals: true
             });
 
-            input.pressKey(".", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.val(".");
+            input.pressKey(".", "keydown");
+            input.trigger("input");
+            assert.isOk(!input.val());
         });
 
         it("Allow decimal separator if decimals is set to 0 and restrictDecimals is disabled", function() {
@@ -208,11 +182,10 @@
                 value: 1
             });
 
-            var period = ".";
-            var event = jQuery.Event('keypress', { keyCode: period.charCodeAt(0), which: period.charCodeAt(0) });
-
-            input.trigger(event);
-            assert.isOk(!event.isDefaultPrevented())
+            input.val("1.");
+            input.pressKey(".", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(),"1.");
         });
 
         it("Avoid exception when group separator is empty string", function(done) {
@@ -346,17 +319,6 @@
             }, 100);
         });
 
-        it("Allow infinite decimal digits", function() {
-            var textbox = new NumericTextBox(input);
-
-            input.val("2.22222");
-
-            input.pressKey("4", {
-                preventDefault: function() {
-                    assert.isOk(false);
-                }
-            });
-        });
 
         it("Prevent decimals digits after precision is reached", function() {
             if (kendo.support.browser.mozilla) {
@@ -368,16 +330,15 @@
 
             var textbox = new NumericTextBox(input, {
                 decimals: 3,
+                value: 2.222,
                 restrictDecimals: true
             });
 
-            input.val("2.222");
+            input.val("2.2224");
 
-            input.pressKey("4", {
-                preventDefault: function() {
-                    assert.isOk(true);
-                }
-            });
+            input.pressKey("4", "keydown");
+            input.trigger("input");
+            assert.equal(input.val(),"2.222");
         });
 
         it("Focus origin input on touched", function() {

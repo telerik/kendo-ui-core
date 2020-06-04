@@ -10187,7 +10187,124 @@ declare namespace kendo.ui {
         status?: string;
     }
 
+    class Wizard extends kendo.ui.Widget {
+        static fn: Wizard;
 
+        options: WizardOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Wizard;
+        constructor(element: Element, options?: WizardOptions);
+
+        activeStep(): void;
+        enableStep(index: number, enable: boolean): void;
+        insertAt(index: number, step: any): void;
+        next(): void;
+        previous(): void;
+        removeAt(index: number): void;
+        select(index: number): void;
+        steps(): void;
+    }
+
+    interface WizardMessages {
+        done?: string;
+        next?: string;
+        of?: string;
+        previous?: string;
+        reset?: string;
+        step?: string;
+    }
+
+    interface WizardStepper {
+        indicator?: boolean;
+        label?: boolean;
+        linear?: boolean;
+    }
+
+    interface WizardStepButton {
+        click?: Function;
+        enabled?: boolean;
+        name?: string;
+        primary?: string;
+        text?: string;
+    }
+
+    interface WizardStep {
+        buttons?: WizardStepButton[];
+        content?: string;
+        contentId?: string;
+        contentUrl?: string;
+        className?: string;
+        enabled?: boolean;
+        form?: any;
+        pager?: boolean;
+        title?: string;
+    }
+
+    interface WizardOptions {
+        name?: string;
+        actionBar?: boolean;
+        contentPosition?: string;
+        formTag?: string;
+        loadOnDemand?: boolean;
+        messages?: WizardMessages;
+        pager?: boolean;
+        reloadOnSelect?: boolean;
+        stepper?: WizardStepper;
+        validateForms?: boolean;
+        steps?: WizardStep[];
+        activate?(e: WizardActivateEvent): void;
+        contentLoad?(e: WizardContentLoadEvent): void;
+        done?(e: WizardDoneEvent): void;
+        error?(e: WizardErrorEvent): void;
+        reset?(e: WizardResetEvent): void;
+        select?(e: WizardSelectEvent): void;
+        formValidateFailed?(e: WizardFormValidateFailedEvent): void;
+    }
+    interface WizardEvent {
+        sender: Wizard;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface WizardActivateEvent extends WizardEvent {
+        step?: kendo.wizard.Step;
+    }
+
+    interface WizardContentLoadEvent extends WizardEvent {
+        step?: kendo.wizard.Step;
+    }
+
+    interface WizardDoneEvent extends WizardEvent {
+        originalEvent?: any;
+        button?: kendo.ui.Button;
+        forms?: any;
+    }
+
+    interface WizardErrorEvent extends WizardEvent {
+        xhr?: JQueryXHR;
+        status?: string;
+        step?: kendo.wizard.Step;
+    }
+
+    interface WizardResetEvent extends WizardEvent {
+        originalEvent?: any;
+        button?: kendo.ui.Button;
+    }
+
+    interface WizardSelectEvent extends WizardEvent {
+        originalEvent?: any;
+        step?: kendo.wizard.Step;
+        button?: kendo.ui.Button;
+        stepper?: kendo.ui.Stepper;
+    }
+
+    interface WizardFormValidateFailedEvent extends WizardEvent {
+        form?: kendo.ui.Form;
+        step?: kendo.wizard.Step;
+    }
 }
 declare namespace kendo.drawing {
     class Arc extends kendo.drawing.Element {
@@ -20282,6 +20399,35 @@ declare namespace kendo.stepper {
     }
 }
 
+declare namespace kendo.wizard {
+    class Step extends kendo.Class {
+        options: WizardStepOptions;
+
+        buttons(): any[];
+        load(): void;
+        resetButtons(): void;
+    }
+
+    interface WizardStepOptions {
+        index?: number;
+        content?: string;
+        contentUrl?: string;
+        contentId?: string;
+        markupContainer?: JQuery;
+        form?: any;
+        formTag?: string;
+        actionBar?: boolean;
+        buttons?: any[];
+        pager?: boolean;
+        selected?: boolean;
+        enabled?: boolean;
+        className?: string;
+        totalSteps: number;
+        wizardId?: string;
+        messages?: any;
+    }
+}
+
 declare namespace kendo.mobile.ui {
     class ActionSheet extends kendo.mobile.ui.Widget {
 
@@ -22902,5 +23048,9 @@ interface JQuery {
     kendoWindow(): JQuery;
     kendoWindow(options: kendo.ui.WindowOptions): JQuery;
     data(key: "kendoWindow"): kendo.ui.Window;
+
+    kendoWizard(): JQuery;
+    kendoWizard(options: kendo.ui.WizardOptions): JQuery;
+    data(key: "kendoWizard"): kendo.ui.Wizard;
 
 }
