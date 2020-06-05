@@ -115,15 +115,15 @@ var __meta__ = { // jshint ignore:line
         MODERN_RENDERING_TEMPLATE = '<div tabindex="0" class="k-timeselector">' +
             '<div class="k-time-header">' +
                 '<span class="k-title"></span>' +
-                '<button class="k-button k-flat k-time-now" title="Select now" aria-label="Select now">Now</button>' +
+                '<button class="k-button k-flat k-time-now" title="Select now" aria-label="Select now">#=messages.now#</button>' +
             '</div>' +
             '<div class="k-time-list-container">' +
                 '<span class="k-time-highlight"></span>' +
             '</div>' +
         '</div>',
         NEW_RENDERING_FOOTER = '<div class="k-time-footer k-action-buttons">' +
-            '<button class="k-button k-time-cancel" title="Cancel changes" aria-label="Cancel changes">Cancel</button>' +
-            '<button class="k-time-accept k-button k-primary" title="Set time" aria-label="Set time">Set</button>' +
+            '<button class="k-button k-time-cancel" title="Cancel changes" aria-label="Cancel changes">#=messages.cancel#</button>' +
+            '<button class="k-time-accept k-button k-primary" title="Set time" aria-label="Set time">#=messages.set#</button>' +
             '</div>',
         HIGHLIGHTCONTAINER = '<span class="k-time-highlight"></span>';
 
@@ -160,11 +160,11 @@ var __meta__ = { // jshint ignore:line
             }
         },
         _createScrollList: function () {
-            this.list = $(MODERN_RENDERING_TEMPLATE)
+            this.list = $(kendo.template(MODERN_RENDERING_TEMPLATE)(this.options))
                 .on(MOUSEDOWN, preventDefault);
 
             if (!this.options.omitPopup) {
-                this.list.append(NEW_RENDERING_FOOTER);
+                this.list.append(kendo.template(NEW_RENDERING_FOOTER)(this.options));
             }
 
             this.ul = this.list.find(".k-time-list-container");
@@ -299,9 +299,11 @@ var __meta__ = { // jshint ignore:line
             var item;
 
             if (is12hourFormat) {
-                if (hours > 12) {
+                if (hours >= 12) {
                     designator = "PM";
-                    hours -= 12;
+                    if (hours > 12) {
+                        hours -= 12;
+                    }
                 } else {
                     designator = "AM";
                 }
@@ -598,8 +600,8 @@ var __meta__ = { // jshint ignore:line
             if (!this.options.specifiedRange) {
                 return;
             }
-            if (!this._value) {
-                this._value = new Date();
+            if (!this._currentlySelected) {
+                this._currentlySelected = new Date();
             }
 
             var max = this.options.max;
@@ -608,20 +610,20 @@ var __meta__ = { // jshint ignore:line
             this._selectedDesignator = this._selectedHour = this._selectedMinutes = this._selectedSeconds = null;
 
             if (this.options.validateDate) {
-                if (max.getFullYear() === this._value.getFullYear() &&
-                    max.getMonth() === this._value.getMonth() &&
-                    max.getDate() === this._value.getDate()) {
+                if (max.getFullYear() === this._currentlySelected.getFullYear() &&
+                    max.getMonth() === this._currentlySelected.getMonth() &&
+                    max.getDate() === this._currentlySelected.getDate()) {
                     this._validateMax = true;
                 } else {
                     this._validateMax = false;
                 }
 
-                if (min.getFullYear() === this._value.getFullYear() &&
-                    min.getMonth() === this._value.getMonth() &&
-                    min.getDate() === this._value.getDate()) {
+                if (min.getFullYear() === this._currentlySelected.getFullYear() &&
+                    min.getMonth() === this._currentlySelected.getMonth() &&
+                    min.getDate() === this._currentlySelected.getDate()) {
                     this._validateMin = true;
                 } else {
-                    this._validateMax = true;
+                    this._validateMin = false;
                 }
 
                 if (!this._validateMax && !this._validateMin) {
@@ -695,18 +697,25 @@ var __meta__ = { // jshint ignore:line
         },
 
         _listScrollHandler: function (e) {
+            var that = this;
             var itemHeight = Math.floor($(e.currentTarget).find(".k-item:visible:eq(0)").outerHeight());
 
-            if (e.currentTarget.scrollTop % itemHeight !== 0) {
-                if(e.currentTarget.scrollTop > this._scrollTop){
-                    e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                } else {
-                    e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                }
+            if (that._scrollingTimeout) {
+                clearTimeout(that._scrollingTimeout);
             }
-            this._scrollTop = e.currentTarget.scrollTop;
-            this._updateRanges();
-            this._updateCurrentlySelected();
+
+            that._scrollingTimeout = setTimeout(function () {
+                if (e.currentTarget.scrollTop % itemHeight !== 0) {
+                    if (e.currentTarget.scrollTop > that._scrollTop) {
+                        e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                    } else {
+                        e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
+                    }
+                }
+                that._scrollTop = e.currentTarget.scrollTop;
+                that._updateRanges();
+                that._updateCurrentlySelected();
+            }, 100);
         },
 
         _updateCurrentlySelected: function () {
@@ -748,6 +757,9 @@ var __meta__ = { // jshint ignore:line
             if (is12hourFormat) {
                 if (selectedDesignator == "PM") {
                     selectedHour += 12;
+                    if (selectedHour == 24) {
+                        selectedHour = 12;
+                    }
                 }
 
                 if (selectedDesignator === "AM" && selectedHour === 12) {
@@ -816,7 +828,7 @@ var __meta__ = { // jshint ignore:line
                     result += this._literalTemplate(part);
                 } else {
                     values = this._getValues(part, true);
-                    result += this._itemTemplate(values.values, part, part.type, values.index);
+                    result += this._itemTemplate(values.values, part, this.options.messages[part.type], values.index);
                 }
             }
 
@@ -855,8 +867,9 @@ var __meta__ = { // jshint ignore:line
             var end;
 
             if (part.type === "hour") {
+                start = 1;
                 index = 1;
-                end = part.hour12 ? 12 : 23;
+                end = part.hour12 ? 12 : 24;
             } else if (part.type === "minute") {
                 index = 2;
                 end = 59;
@@ -1335,7 +1348,16 @@ var __meta__ = { // jshint ignore:line
             interval: 30,
             height: 200,
             animation: {},
-            dateInput: false
+            dateInput: false,
+            messages: {
+                set: "Set",
+                cancel: "Cancel",
+                hour: "hour",
+                minute: "minute",
+                second: "second",
+                millisecond: "millisecond",
+                now: "Now"
+            }
         },
 
         events: [

@@ -783,6 +783,10 @@
 @stepper-label-error-text: darken(@error, 30%);
 @stepper-label-disabled-text: mix(@component-text, #ffffff, 60%);
 
+
+// Wizard
+@wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+
 // Kendo skin
 
 @theme-name: ~"bootstrap";
@@ -818,6 +822,7 @@
 @import "Default/stepper/_theme.less";
 @import "Default/forms/_theme.less";
 @import "Default/tooltip/_theme.less";
+@import "Default/wizard/_theme.less";
 
 .k-text-error {
     color: @error;
@@ -1637,7 +1642,8 @@ div.k-filebrowser-dropzone em
 .k-rating,
 .k-breadcrumb
 .k-stepper,
-.k-form
+.k-form,
+.k-wizard
 {
     .box-shadow(none);
 }
@@ -2512,7 +2518,8 @@ thead.k-grid-header th.k-header:last-child,
 .k-widget.k-menu,
 .k-widget.k-progressbar,
 .k-progressbar > .k-state-selected,
-.k-widget.k-stepper
+.k-widget.k-stepper,
+.k-widget.k-wizard
 {
     .box-shadow(none);
 }

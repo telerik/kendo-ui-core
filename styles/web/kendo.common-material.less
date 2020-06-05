@@ -535,6 +535,11 @@
 @radio-border-width: 1px;
 @radio-line-height: calc(@radio-size + @radio-border-width);
 
+@radio-list-margin: 0;
+@radio-list-padding: 0;
+@radio-list-item-margin-top: 16px;
+@radio-list-horizontal-item-margin-x: 32px;
+
 
 // Listview
 @listview-padding-x: 8px;
@@ -622,6 +627,22 @@
 @stepper-content-transition-property: height;
 @stepper-content-transition-duration: 300ms;
 @stepper-content-transition-timing-function: cubic-bezier(.4, 0, .2, 1) 0ms;
+
+
+// Wizard
+@wizard-spacer: 16px;
+
+@wizard-padding-x: calc( @wizard-spacer * 2 );
+@wizard-padding-y: @wizard-padding-x;
+
+@wizard-border-width: 0;
+@wizard-font-size: inherit;
+@wizard-line-height: @line-height;
+
+@wizard-content-padding-x: calc( @wizard-spacer * 4 );
+@wizard-content-padding-y: @wizard-content-padding-x;
+
+@wizard-buttons-margin-x: @wizard-spacer;
 
 
 @import "common/all.less";

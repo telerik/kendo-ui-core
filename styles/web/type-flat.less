@@ -766,6 +766,10 @@
 @stepper-label-disabled-text: mix(@component-text, #ffffff, 60%);
 
 
+// Wizard
+@wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+
+
 // Kendo skin
 
 @theme-name: ~"flat";
@@ -801,6 +805,8 @@
 @import "Default/forms/_theme.less";
 @import "Default/toolbar/_theme.less";
 @import "Default/tooltip/_theme.less";
+@import "Default/wizard/_theme.less";
+
 
 .k-text-error {
     color: @error;

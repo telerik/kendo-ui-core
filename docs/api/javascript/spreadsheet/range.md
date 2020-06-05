@@ -461,13 +461,13 @@ Gets or sets the html rendering of the cells in the range.
 ##### value `Boolean` *optional*
 
 True to make the cell render the value as HTML. 
-An important thing in this case is to sanitized the value of the cell on the server for passing save html because there is no client-side sanitizing.
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
-> When the value is 'true ' the value of the cell should be always sanitized on the server for passing save html.
+> When the value is 'true ' the value of the cell should be always sanitized on the server for passing safe html.
 
 #### Returns
 
-`Boolean` the current disabled state of the top-left cell of the range.
+`Boolean` the current html state of the top-left cell of the range.
 
 #### Example
 
@@ -477,8 +477,8 @@ An important thing in this case is to sanitized the value of the cell on the ser
     $("#spreadsheet").kendoSpreadsheet();
     var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
     var sheet = spreadsheet.activeSheet();
-    sheet.range("A1").value("disabled");
-    sheet.range("A1").enable(false);
+    sheet.range("A1").value("<b>bold</b>");
+    sheet.range("A1").html(true);
 </script>
 ```
 
