@@ -995,7 +995,7 @@ The cell formula without the leading equals sign, for example, `A1 * 10`.
 ### sheets.rows.cells.html `Boolean`
 
 If set to `true`, renders the cell value as HTML. 
-An important thing in this case is to sanitized the value of the cell on the server for passing save html because there is no client-side sanitizing.
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
 

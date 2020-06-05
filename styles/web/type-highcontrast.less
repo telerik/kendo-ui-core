@@ -768,6 +768,10 @@
 @stepper-label-disabled-text: @disabled-text-color;
 
 
+// Wizard
+@wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+
+
 // Kendo skin
 
 @theme-name: ~"highcontrast";
@@ -803,6 +807,8 @@
 @import "Default/stepper/_theme.less";
 @import "Default/forms/_theme.less";
 @import "Default/tooltip/_theme.less";
+@import "Default/wizard/_theme.less";
+
 
 .k-in,
 .k-item
@@ -2589,8 +2595,8 @@ div.k-filebrowser-dropzone em
     box-shadow: none;
 }
 
-// Stepper
-.k-stepper {
+.k-stepper,
+.k-wizard {
     background-color: inherit;
 }
 

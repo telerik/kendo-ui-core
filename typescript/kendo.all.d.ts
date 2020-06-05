@@ -10247,7 +10247,6 @@ declare namespace kendo.ui {
         name?: string;
         actionBar?: boolean;
         contentPosition?: string;
-        formTag?: string;
         loadOnDemand?: boolean;
         messages?: WizardMessages;
         pager?: boolean;
