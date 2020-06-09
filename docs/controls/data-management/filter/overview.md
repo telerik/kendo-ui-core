@@ -96,7 +96,7 @@ The following example demonstrates how to:
 
 ## Events
 
-You can subscribe to all [Filter events](/api/javascript/ui/timeline#events).
+You can subscribe to all [Filter events](/api/javascript/ui/filter#events).
 
 ## Referencing Existing Instances
 

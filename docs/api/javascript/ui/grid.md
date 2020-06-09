@@ -669,6 +669,8 @@ The JavaScript function executed on initialization of the row which will determi
 The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
 instance.
 
+> **Note:** When the dataSource property is set one should also set the [dataTextField](columns.dataTextField) and [dataValueField](columns.dataValueField).
+
 ### columns.dataTextField `String`
 
 The data text field of the foreign key item.

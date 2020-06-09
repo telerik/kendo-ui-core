@@ -586,6 +586,8 @@ navigation:
         title: "MultiSelect"
     "*notification":
         title: "Notification"
+    "*pager":
+        title: "Pager"
     "*popup":
         title: "Popup"
     "*numerictextbox":
