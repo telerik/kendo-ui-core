@@ -42,47 +42,6 @@ Indicates the position of the step content element according to the [Stepper](/a
         });
 	</script>
 
-### formTag `String` *(default: "form")*
-
-Specifies the HTML tag name that should be used for all [Form](/api/javascript/ui/form) widgets initialized in the Wizard steps. Using a "div" HTML element and placing the Wizard in a custom "form" element will allow you to simultaneously submit the fields populated on all steps (forms) with a form data request.
-
-#### Example
-
-	<div id="wizard"></div>
-
-	<script>
-        $("#wizard").kendoWizard({
-            formTag: "div",
-            steps: [{
-                title: "first",
-                form: {
-                    formData: {
-                        name: null
-                    },
-                    items: [{
-                        field: "name",
-                        validation: {
-                            required: true
-                        }
-                    }]
-                }
-            },{
-                title: "second",
-                form: {
-                    formData: {
-                        title: null
-                    },
-                    items: [{
-                        field: "title",
-                        validation: {
-                            required: true
-                        }
-                    }]
-                }
-            }]
-        });
-	</script>
-
 ### loadOnDemand `Boolean` *(default: false)*
 
 Indicates whether the step content will be loaded on demand when a given step is selected. Applicable when the step configuration has "contentUrl" set.

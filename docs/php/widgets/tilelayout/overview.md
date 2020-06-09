@@ -121,7 +121,7 @@ You are able to reference an existing TileLayout instance via the [`jQuery.data(
 
         <script>
         $(function() {
-            // The constructor parameter is used as the 'id' HTML attribute of the treeview
+            // The constructor parameter is used as the 'id' HTML attribute of the tilelayout
             var TileLayout = $("#tilelayout").data("kendoTileLayout");
         });
         </script>
