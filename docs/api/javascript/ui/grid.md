@@ -664,6 +664,21 @@ The JavaScript function executed on initialization of the row which will determi
     });
     </script>
 
+### columns.dataSource `Object|kendo.data.DataSource`
+
+The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+instance.
+
+> **Note:** When the dataSource property is set one should also set the [dataTextField](columns.dataTextField) and [dataValueField](columns.dataValueField).
+
+### columns.dataTextField `String`
+
+The data text field of the foreign key item.
+
+### columns.dataValueField `String`
+
+The data value field of the foreign key item.
+
 ### columns.editable `Function`
 
 The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
