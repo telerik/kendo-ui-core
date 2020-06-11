@@ -1468,6 +1468,7 @@ api:
       - "items"
 
 product: "Kendo UI for jQuery"
+product_url: https://www.telerik.com/kendo-ui#jquery
 platform: kendo-ui
 
 ## Assign layout and category per different paths

@@ -74,6 +74,7 @@ ff-sheet-id: 17DDhsKyPUgO6GlvL8WEfCCN6tikyInp4qpRGCvvs794
 product_long: "Progress Telerik UI for ASP.NET MVC"
 product: "Telerik UI for ASP.NET MVC"
 product_short: "UI for ASP.NET MVC"
+product_url: https://www.telerik.com/aspnet-mvc
 framework: "ASP.NET MVC"
 framework_short: "MVC"
 platform: aspnet-mvc

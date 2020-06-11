@@ -570,6 +570,7 @@ ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 product_long: "Progress Telerik UI for ASP.NET Core"
 product: "Telerik UI for ASP.NET Core"
 product_short: "UI for ASP.NET Core"
+product_url: https://www.telerik.com/aspnet-core-ui
 framework: "ASP.NET Core"
 framework_short: "Core"
 platform: aspnet-core

@@ -608,10 +608,10 @@
 
 @checkbox-bg: @input-bg;
 @checkbox-text: @accent;
-@checkbox-border: @input-border;
+@checkbox-border: contrast(@base, lighten(@base, 14%), darken(@base, 14%), 0.5);
 @checkbox-hovered-bg: @checkbox-bg;
 @checkbox-hovered-text: @checkbox-text;
-@checkbox-hovered-border: @input-hovered-border;
+@checkbox-hovered-border: @checkbox-border;
 @checkbox-checked-bg: @checkbox-bg;
 @checkbox-checked-text: @checkbox-text;
 @checkbox-checked-border: @checkbox-border;
