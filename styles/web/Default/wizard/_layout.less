@@ -53,6 +53,7 @@
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    flex-shrink: 0;
 
     .k-button {
         margin-right: @wizard-buttons-margin-x;
@@ -84,9 +85,14 @@
 
 // Vertical
 .k-wizard-vertical {
-    .k-wizard-steps,
-    .k-wizard-content {
+    .k-wizard-steps {
         flex: 1 0 0%;
+    }
+
+    .k-wizard-content {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: auto;
     }
 
     .k-wizard-steps {
