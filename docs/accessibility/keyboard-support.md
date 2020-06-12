@@ -65,6 +65,7 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [TreeList](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation)
 - [TreeView](https://demos.telerik.com/kendo-ui/treeview/keyboard-navigation)
 - [Window](https://demos.telerik.com/kendo-ui/window/keyboard-navigation)
+- [Wizard](https://demos.telerik.com/kendo-ui/wizard/keyboard-navigation)
 
 ## In-Widget Keyboard Navigation
 

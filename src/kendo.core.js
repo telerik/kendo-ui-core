@@ -4526,7 +4526,7 @@ function pad(number, digits, end) {
         if (nextFocusable.length) {
             target = nextFocusable;
         } else if (widgetInstance) {
-            target = widgetInstance instanceof kendo.ui.Editor ?
+            target = widgetInstance.options.name === 'Editor' ?
                 $(widgetInstance.body) :
                 widgetInstance.wrapper.find(":kendoFocusable").first();
         } else {

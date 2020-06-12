@@ -2,7 +2,6 @@
 title: Wizard
 description: Configuration, methods and events of the Kendo UI Wizard
 res_type: api
-published: false
 component: wizard
 ---
 

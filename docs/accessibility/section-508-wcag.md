@@ -77,6 +77,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |TreeView	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/treeview/index)
 |Upload 	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/upload/index)
 |Window 	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/window/index)
+|Wizard		   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/wizard/index)
 
 ## Special Considerations
 
