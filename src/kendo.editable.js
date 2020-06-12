@@ -457,9 +457,6 @@ var __meta__ = { // jshint ignore:line
 
             if (!that.options.skipFocus) {
                 var focusable = container.find(":kendoFocusable").eq(0).focus();
-
-                kendo.caret(focusable, 0 ,0);
-
                 if (oldIE) {
                     focusable.focus();
                 }
