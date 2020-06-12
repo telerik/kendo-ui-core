@@ -99,7 +99,7 @@ var __meta__ = { // jshint ignore:line
             attr[DATATYPE] = type;
         }
 
-        attr[BINDING] = ("value:") + options.field;
+        attr[BINDING] = (type === "boolean" ? "checked:" : "value:") + options.field;
 
         return attr;
     }
@@ -183,7 +183,9 @@ var __meta__ = { // jshint ignore:line
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
+            var element = $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
+
+            renderHiddenForМvcCheckbox(element, container, options);
         },
         "values": function(container, options) {
             var attr = createAttributes(options);
@@ -198,12 +200,14 @@ var __meta__ = { // jshint ignore:line
             var type = options.editor;
             var editor = "kendo" + type;
             var editorOptions = options.editorOptions;
-            var tag = getEditorTag(type, editorOptions);
+            var tagElement = getEditorTag(type, editorOptions);
 
-            $(tag)
+            var element = $(tagElement)
                 .attr(attr)
                 .appendTo(container)
                 [editor](editorOptions);
+
+            renderHiddenForМvcCheckbox(element, container, options);
         }
     };
 
@@ -262,6 +266,15 @@ var __meta__ = { // jshint ignore:line
             if (isFunction(descriptor)) {
                 rules[rule] = descriptor;
             }
+        }
+    }
+
+    function renderHiddenForМvcCheckbox(tag, container, field) {
+        var addHidden = field ? (field.shouldRenderHidden || false) : false;
+
+        if (addHidden) {
+            tag.val(true);
+            container.append($("<input type='hidden' name='" + field.field +"' value='false' data-skip='true' data-validate='false'/>"));
         }
     }
 
@@ -457,9 +470,6 @@ var __meta__ = { // jshint ignore:line
 
             if (!that.options.skipFocus) {
                 var focusable = container.find(":kendoFocusable").eq(0).focus();
-
-                kendo.caret(focusable, 0 ,0);
-
                 if (oldIE) {
                     focusable.focus();
                 }
