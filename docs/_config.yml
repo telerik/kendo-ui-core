@@ -193,7 +193,9 @@ navigation:
         title: "ContextMenu"
         position: 6
     "controls/navigation/stepper":
-        title: "Stepper"    
+        title: "Stepper"
+    "controls/navigation/wizard":
+        title: "Wizard"    
     "controls/navigation/tabstrip/how-to":
         title: "How To"
         position: 70
