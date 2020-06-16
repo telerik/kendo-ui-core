@@ -3774,7 +3774,7 @@ var __meta__ = { // jshint ignore:line
             if (!that.options.serverSorting) {
                 delete options.sort;
             } else if (that.reader.model && options.sort) {
-                options.sort = convertDescriptorsField(options.sort, that.reader.model);             
+                options.sort = convertDescriptorsField(options.sort, that.reader.model);
             }
 
             if (!that.options.serverAggregates) {
@@ -5717,7 +5717,7 @@ var __meta__ = { // jshint ignore:line
                     data[that.idField || "id"] = that.id;
 
                     if (parameterMap) {
-                        data = parameterMap(data, type);
+                        data = parameterMap.call(that, data, type);
                     }
 
                     return data;

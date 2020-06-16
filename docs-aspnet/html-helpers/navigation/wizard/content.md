@@ -12,7 +12,7 @@ The {{ site.product }} Wizard provides options for loading content via AJAX or d
 
 ## Loading Content with AJAX
 
-The {{ site.product }} Wizard provides built-in support for asynchronously loading content from remote URLs via the `ContentUrl` configuration option. Those endpoints should return HTML content that will be loaded in the content area of respective step of the Wizard. When content is loaded via AJAX the Wizard allows the user to configure whether each step content will be loaded only when it is selected via the `LoadOnDemand` configuration option. Otherwise, all steps will be initially laded with the Wizard rendering. It is possible to also configure whether the step content will be reloaded on each navigation to a given Step via the `ReloadOnSelect` configuration option.
+The {{ site.product }} Wizard provides built-in support for asynchronously loading content from remote URLs via the `ContentUrl` configuration option. Those endpoints should return HTML content that will be loaded in the content area of respective step of the Wizard. When content is loaded via AJAX the Wizard allows the user to configure whether each step content will be loaded only when it is selected via the `LoadOnDemand` configuration option. Otherwise, all steps will be initially loaded with the Wizard rendering. It is possible to also configure whether the step content will be reloaded on each navigation to a given Step via the `ReloadOnSelect` configuration option.
 For a complete example, refer to the [demo on loading Wizard content with AJAX](https://demos.telerik.com/{{ site.platform }}/wizard/ajax).
 
 ## Loading Local Content
