@@ -36,7 +36,7 @@ Alternatively, you can also use the TypeScript definitions in JavaScript code by
 
 Each bundle package includes a `vsdoc` directory which contains a `vsdoc.js` and an `intellisense.js` file for JavaScript.
 
-* For Visual Studio 2008 SP1 and Visual Studio 2019, place the `vsdoc.js` file next to the `kendoui` bundle script.
+* For Visual Studio 2008 SP1 and Visual Studio 2010, place the `vsdoc.js` file next to the `kendoui` bundle script.
 * For Visual Studio 2012 and later, place the `intellisense.js` file next to the `kendoui` bundle script.
 
 Make sure the naming prefix of the IntelliSense file matches the `kendoui` bundle name.

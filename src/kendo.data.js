@@ -5716,7 +5716,7 @@ var __meta__ = { // jshint ignore:line
                     data[that.idField || "id"] = that.id;
 
                     if (parameterMap) {
-                        data = parameterMap(data, type);
+                        data = parameterMap.call(that, data, type);
                     }
 
                     return data;

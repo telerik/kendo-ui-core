@@ -8,7 +8,11 @@ position: 2
 
 # Form Integration
 
-The {{ site.product }} Wizard can be initialized as a `<form>` element or as a `<div>` element. The configuration is set via the `.Tag()` configuration option.
+The {{ site.product }} Wizard provides integration with the [{{ site.product }} Form]({% slug htmlhelpers_form_aspnetcore_overview  %}).
+
+Each step of the Wizard accepts a `Form()` configuration method which defines the options as they are available in the {{ site.product }} Form itself. Each Form defined within the Wizard configuration will have all the functionality available in the stand-alone Form component.
+
+In order to facilitate the scenarios where Forms are integrated within the Wizard, the {{ site.product }} Wizard can be initialized either from a `<form>` element or a `<div>` element. The configuration is set via the `.Tag()` configuration option.
 
 ## Initialization as a `<form>` Element
 
@@ -100,6 +104,10 @@ When the {{ site.product }} Wizard is initialized as a `<div>` element any forms
         }
     </script>
 ```
+
+## Separate Forms
+
+Forms can be defined with the Wizard configuration (the build-in Form integration explained above), could be initialized directly as content of any step of the Wizard, or could be loaded as a content via Ajax call to a remote end-point. When Form is separately initialized (without using the Wizard configuration) or loaded as a remote content on any of the Wizard steps, there will be no built-in connection between the Wizard and the Form. The Form will act as a separate component. For further details refer to the [Content]({% slug htmlhelpers_wizard_aspnetcore_content %}) section.
 
 ## See Also
 

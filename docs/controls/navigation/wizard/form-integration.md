@@ -8,7 +8,11 @@ position: 2
 
 # Form Integration
 
-The Wizard can be initialized from a `<form>` element or a `<div>` element. Forms can be defined with the Wizard configuration, could be initialized directly as content of any step of the Wizard, or could be loaded as a content via Ajax call to a remote end-point.
+The Wizard provides integration with the [Kendo UI Form]({% slug overview_kendoui_form_widget  %}) widget.
+
+Each step of the Wizard accepts a `form` configuration object which defines the options as they are available in the [Form](/api/javascript/ui/form) widget itself. Each Form defined within the Wizard configuration will have all the functionality available in the stand-alone Form component.
+
+In order to facilitate the scenarios where Forms are integrated within the Wizard, the widget can be initialized either from a `<form>` element or a `<div>` element.
 
 ## Initialization from a `<form>` Element
 
@@ -105,7 +109,7 @@ When the Wizard is initialized from a `<div>` element any forms initialized via 
 
 ## Separate Forms
 
-When Form is separately initialized (without using the Wizard configuration) or loaded as a remote content on any of the Wizard steps, there is no connection between the Wizard widget and the Form itself. The Form will act as a separate component. For further details refer to the [Content]({% slug content_wizard_widget %}) section.
+Forms can be defined with the Wizard configuration (the build-in Form integration explained above), could be initialized directly as content of any step of the Wizard, or could be loaded as a content via Ajax call to a remote end-point. When Form is separately initialized (without using the Wizard configuration) or loaded as a remote content on any of the Wizard steps, there is no connection between the Wizard widget and the Form itself. The Form will act as a separate component. For further details refer to the [Content]({% slug content_wizard_widget %}) section.
 
 ## See Also
 
