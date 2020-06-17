@@ -672,10 +672,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2020.2.513"
+cdnVersion: "2020.2.617"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.2.513"
+mvcCoreVersion: "2020.2.617"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
