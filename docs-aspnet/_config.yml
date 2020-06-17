@@ -561,10 +561,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2020.2.513"
+cdnVersion: "2020.2.617"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.2.513"
+mvcCoreVersion: "2020.2.617"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
