@@ -30,7 +30,7 @@ The Wizard integrates the Kendo UI Form component and supports all its configura
         validateForms: true,
         steps:[{
                 title: "Start",
-                content: '<h1>Start Registration/h1><br/><br/><br/><h3>Click "Next" to start filling-in the form</h3>'
+                content: '<h1>Start Registration</h1><br/><br/><br/><h3>Click "Next" to start filling-in the form</h3>'
             },{
                 title: "Attendee Details",
                 form: {
@@ -59,7 +59,7 @@ The Wizard integrates the Kendo UI Form component and supports all its configura
                 }
             },{
                 title: "Finish",
-                content: '<h1>Thank you for registering/h1><br/><br/><br/><h3>Click "Done" to complete the registration process</h3>'
+                content: '<h1>Thank you for registering</h1><br/><br/><br/><h3>Click "Done" to complete the registration process</h3>'
             }
         ]
     });

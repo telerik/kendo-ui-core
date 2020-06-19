@@ -26,7 +26,7 @@ When the Wizard is initialized from a `<form>` element the Done button at the la
         validateForms: true,
         steps:[{
                 title: "Start",
-                content: '<h1>Start Registration/h1><br/><br/><br/><h3>Click "Next" to start filling-in the form</h3>'
+                content: '<h1>Start Registration</h1><br/><br/><br/><h3>Click "Next" to start filling-in the form</h3>'
             },{
                 title: "Attendee Details",
                 form: {
@@ -39,10 +39,11 @@ When the Wizard is initialized from a `<form>` element the Done button at the la
                         { field: "FirstName", label: "First Name:", validation: { required: true } },
                         { field: "LastName", label: "Last Name:", validation: { required: true } },
                         { field: "Email", label: "Email:", validation: { required: true, email: true } }
+                    ]
                 }
             },{
                 title: "Finish",
-                content: '<h1>Thank you for registering/h1><br/><br/><br/><h3>Click "Done" to submit the form</h3>'
+                content: '<h1>Thank you for registering</h1><br/><br/><br/><h3>Click "Done" to submit the form</h3>'
             }
         ]
     })
@@ -61,7 +62,7 @@ When the Wizard is initialized from a `<div>` element any forms initialized via 
         validateForms: true,
         steps:[{
                 title: "Start",
-                content: '<h1>Start Registration/h1><br/><br/><br/><h3>Click "Next" to start filling-in the form</h3>'
+                content: '<h1>Start Registration</h1><br/><br/><br/><h3>Click "Next" to start filling-in the form</h3>'
             },{
                 title: "Attendee Details",
                 form: {
@@ -94,7 +95,7 @@ When the Wizard is initialized from a `<div>` element any forms initialized via 
                 }
             },{
                 title: "Finish",
-                content: '<h1>Thank you for registering/h1><br/><br/><br/><h3>Click "Done" to complete the registration process</h3>'
+                content: '<h1>Thank you for registering</h1><br/><br/><br/><h3>Click "Done" to complete the registration process</h3>'
             }
         ]
     })
