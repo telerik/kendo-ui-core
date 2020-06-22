@@ -2594,6 +2594,7 @@ var __meta__ = { // jshint ignore:line
             that._pageSize = options.pageSize;
             that._page = options.page  || (options.pageSize ? 1 : undefined);
             that._sort = normalizeSort(options.sort);
+            that._sortFields = sortFields(options.sort);
             that._filter = normalizeFilter(options.filter);
             that._group = normalizeGroup(options.group);
             that._aggregate = options.aggregate;
@@ -3773,7 +3774,7 @@ var __meta__ = { // jshint ignore:line
             if (!that.options.serverSorting) {
                 delete options.sort;
             } else if (that.reader.model && options.sort) {
-                options.sort = convertDescriptorsField(options.sort, that.reader.model);
+                options.sort = convertDescriptorsField(options.sort, that.reader.model);             
             }
 
             if (!that.options.serverAggregates) {
