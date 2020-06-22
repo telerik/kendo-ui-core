@@ -1944,6 +1944,136 @@ type_links:
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"
 
+intro_columns:
+-
+  categories:
+  - 
+    title: "Barcodes"
+    items:
+      "Barcode": "overview_kendoui_barcode_widget"
+      "QRCode": "overview_kendoui_qrcode_widget"
+  -
+    title: "Charts"
+    items: 
+      "Charts": "overview_kendoui_charts_widget"
+  -
+    title: "Data Management"  
+    items:
+      "FileManager": "overview_kendoui_filemanager_widget"
+      "Filter": "overview_kendoui_filter_widget"
+      "Grid": "overview_kendoui_grid_widget"
+      "ListView": "overview_kendoui_listview_widget"
+      "Pager": "overview_kendoui_pager_widget"
+      "PivotGrid": "overview_kendoui_pivotgrid_widget"
+      "Spreadsheet": "overview_spreadsheet_widget"
+      "TreeList": "overview_kendoui_treelist_widget"
+  -
+    title: "Scheduling"
+    items:
+      "Calendar": "overview_kendoui_calendar_widget"
+      "Gantt": "overview_kendoui_gantt_widget"
+      "MultiViewCalendar": "overview_kendoui_multiviewcalendar_widget"
+      "Scheduler": "overview_kendoui_scheduler_widget"
+  -
+    title: "Interactivity & UX"
+    items:
+      "Drag and Drop": "overview_kendoui_draganddrop_intercativityandux"
+      "Effects": "overview_kendoui_fxeffects_widget"
+      "ProgressBar": "overview_kendoui_progressbar_widget"
+      "RippleContainer": "overview_kendoui_ripplecontainer_widget"
+      "Sortable": "overview_kendoui_sortable_widget"
+  -
+
+-
+  categories:
+  -
+    title: "Editors"
+    items:
+      "AutoComplete": "overview_kendoui_autocomplete_widget"
+      "Color Picker": "overview_kendoui_colorpicker_widget"
+      "ComboBox": "overview_kendoui_combobox_widget"
+      "DateInput": "overview_kendoui_dateinput_widget"
+      "DatePicker": "overview_kendoui_datepicker_widget"
+      "DateRangePicker": "overview_kendoui_daterangepicker_widget"
+      "DropDownList": "overview_kendoui_dropdownlist_widget"
+      "DropDownTree": "overview_kendoui_dropdowntree_widget"
+      "Editor": "overview_kendoui_editor_widget"
+      "ListBox": "overview_kendoui_listbox_widget"
+      "MaskedTextBox": "overview_kendoui_maskedtextbox_widget"
+      "MultiColumnComboBox": "overview_kendoui_multicolumncombobox_widget"
+      "MultiSelect": "overview_kendoui_multiselect_widget"
+      "NumericTextBox": "overview_kendoui_numerictextbox_widget"
+      "RangeSlider": "overview_kendoui_rangeslider_widget"
+      "Rating": "overview_kendoui_rating_widget"
+      "Slider": "overview_kendoui_slider_widget"
+      "Switch": "overview_kendoui_switch_widget"
+      "TextBox": "overview_kendoui_textbox_widget"
+      "TimePicker": "overview_kendoui_timepicker_widget"
+      "Upload": "overview_kendoui_upload_widget"
+      "Validator": "overview_kendoui_validator_widget"
+
+-
+  categories:
+  -
+    title: "Conversational UI"
+    items:
+      "Chat": "overview_kendoui_chat_widget"
+  -
+    title: "PDF"
+    items:
+      "PDFViewer": "overview_kendoui_pdfviewer_widget"     
+
+  -
+    title: "Diagrams & Maps"
+    items:
+      "Diagram": "overview_kendoui_diagram_widget"
+      "Map": "overview_kendoui_mapwidget"
+  -
+    title: "Navigation"
+    items:
+      "Breadcrumb": "overview_kendoui_breadcrumb_widget"
+      "Button": "overview_kendoui_button_widget"
+      "ButtonGroup": "overview_kendoui_buttongroup_widget"
+      "Drawer": "overview_kendoui_drawer_widget"
+      "Menu": "overview_kendoui_menu_widget"
+      "PanelBar": "overview_kendoui_panelbar_widget"
+      "Stepper": "overview_stepper_widget"
+      "TabStrip": "overview_kendoui_tabstrip_widget"
+      "Timeline": "overview_kendoui_timeline_widget"
+      "ToolBar": "overview_kendoui_toolbar_widget"
+      "TreeView": "overview_kendoui_treeview_widget"
+      "Wizard": "overview_wizard_widget"
+  -
+    title: "Hybrid UI"
+    items:
+      "Hybrid": "overview_hybridkendoui"
+-
+  categories:
+  -
+    title: "Media"
+    items:
+      "Media Player": "overview_kendoui_mediaplayer_widget"
+      "ScrollView": "overview_kendoui_scrollview_widget"
+  -
+    title: "Gauges"
+    items: 
+      "ArcGauge": "overview_kendoui_arcgaugewidget"
+      "LinearGauge": "overview_kendoui_lineargauge_widget"
+      "RadialGauge": "overview_kendoui_radialgaugewidget"
+  -
+    title: "Layout"
+    items:
+      "Badge": "overview_kendoui_badge_widget"
+      "Dialog": "overview_kendoui_dialog_widget"
+      "Form": "overview_kendoui_form_widget"
+      "Notification": "overview_kendoui_notification_widget"
+      "Popup": "overview_kendoui_popup_widget"
+      "ResponsivePanel": "overview_kendoui_responsivepanel_widget"
+      "Splitter": "overview_kendoui_splitter_widget"
+      "ToolTip": "overview_kendoui_tooltip_widget"
+      "TileLayout": "overview_kendoui_tilelayout_widget"
+      "Window": "overview_kendoui_window_widget"
+
 ff-sheet-id: 14zzclhdh7dMLpg0iq4-2hweCdEiuxxqP3tHdr42-_Cs
 
 # The google services configuration
