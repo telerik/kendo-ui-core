@@ -18459,6 +18459,25 @@ The chart series tooltip configuration options.
     });
     </script>
 
+### tooltip.autoHide `Boolean`*(default: true)*
+
+Specifies if the tooltip will be hidden when the mouse leaves the target element. If set to `false`, a **Close** button will be shown within tooltip.
+
+#### Example - preventing the tooltip from closing automatically
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      tooltip: {
+        visible: true,
+        autoHide: false
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
 ### tooltip.background `String`
 
 The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
