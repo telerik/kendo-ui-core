@@ -73,28 +73,29 @@ The following example demonstrates how to use the VB syntax in the TabStrip.
 
 The following example demonstrates how to use the VB syntax in the Grid.
 
-   @Code
+    @Code
         Html.Kendo().Grid(Of TelerikMvcAppVB.Person)() _
-    .Name("Grid") _
-    .Columns(Sub(c)
-            c.Bound(Function(p) p.PersonID)
-            c.Bound(Function(p) p.PersonName)
-            c.Bound(Function(p) p.PersonBirthDate)
-            c.Template(Sub()
-                        @<text>server template</text>
-                                End Sub).Title("Template column").ClientTemplate("client template")
-                 End Sub) _
-                    .Pageable() _
-                    .Sortable() _
-                    .Filterable() _
-                        .DataSource(Function(d)
-                                        d.Ajax() _
-                                        .Read(Function(read) read.Action("Person_Read", "GridList")) _
-                                        .Model(Sub(m)
-                                                   m.Id(Function(i) i.PersonID)
-                                               End Sub)
-                                    End Function) _
-                        .Render()
+            .Name("Grid") _
+            .Columns(Sub(c)
+                c.Bound(Function(p) p.PersonID)
+                c.Bound(Function(p) p.PersonName)
+                c.Bound(Function(p) p.PersonBirthDate)
+                c.Template(Sub()
+                            @<text>server template</text>
+                                    End Sub).Title("Template column").ClientTemplate("client template")
+                     End Sub) _
+            .Pageable() _
+            .Sortable() _
+            .Filterable() _
+            .DataSource(Function(d)
+                d.Ajax() _
+                .Read(Function(read) read.Action("Person_Read", "GridList")) _
+                    .Model(Sub(m)
+                        m.Id(Function(i) i.PersonID)
+                        m.Field(Function(p) p.PersonBirthDate).Editable(False)
+                        End Sub)
+                End Function) _
+            .Render()
     End Code
 
 The following example demonstrates alternative ToolBar configurations.
