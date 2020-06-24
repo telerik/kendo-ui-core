@@ -753,6 +753,23 @@
             assert.isOk(pager.hasClass("k-pager-sm"));
         });
 
+        it("no k-pager-sm class on breakpoint width", function() {
+            var dataOptions = {
+                data: [1, 2, 3, 4, 5],
+                page: 1,
+                pageSize: 1
+            };
+            var dataSource = new DataSource(dataOptions);
+            var options = {
+                dataSource: dataSource,
+                previousNext: false
+            };
+            var element = $("<div style='width: 480px;' />").appendTo(Mocha.fixture).kendoPager(options);
+            var pager = element.data("kendoPager");
+
+            assert.isOk(!pager.element.hasClass("k-pager-sm"));
+        });
+
         it("no k-pager-lg class when responsive is false", function() {
             var pager = setup({}, { responsive: false });
 

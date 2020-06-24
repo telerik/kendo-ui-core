@@ -1763,6 +1763,48 @@
             assert.equal(validator.errors().length, 0);
         });
 
+        it("reset clears invalid TextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoTextBox({
+                label: "text"
+            }).data("kendoTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("reset clears invalid NumericTextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoNumericTextBox({
+                label: "text"
+            }).data("kendoNumericTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("reset clears invalid MaskedTextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoMaskedTextBox({
+                label: "text"
+            }).data("kendoMaskedTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
         it("validate returns false with server errors", function() {
             kendo.ui.validator.allowSubmit = function() {
                 return true;
