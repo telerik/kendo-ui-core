@@ -13,7 +13,7 @@ Each new Kendo UI release might include changes that affect the public Kendo UI 
 
 In such cases, you need to avoid possible issues by upgrading your application to the latest Telerik release. To achieve this, use the Telerik Upgrade API Analyzer. The Upgrade API Analyzer aims at making the upgrade process easier by both comparing the versions and determining the problematic areas. You can also use the Upgrade API Analyzer for upgrading desktop applications such as WPF, WinForms, and Silverlight.
 
-Currently, the Upgrade API Analyzer supports Telerik releases starting from Q2 2013 SP1 (2013.2.918) to Q1 2017 (2017.1.118). Upon request, additional releases can also be added.
+The Upgrade API Analyzer supports Telerik UI for ASP.NET MVC releases starting from Q2 2013 SP1 (2013.2.918).
 
 ## Overview
 
@@ -27,13 +27,14 @@ The tool also points out the exact piece of code that is affected by a certain c
 
 Telerik Upgrade API Analyzer is a click-once application. To download the installation, refer to its [setup page](https://demos.telerik.com/UpgradeAPIAnalyzer/setup.exe).
 
-> The tool relies on Microsoft .NET Framework 4.5.2. If not installed on your machine, the setup of the tool installs it automatically.
+> The tool relies on Microsoft .NET Framework 4.5.2. If not installed on your machine, the setup of the tool would try to install it automatically.
+> In case of the following error "Unable to install or run the application. The application requires that assembly System.Threading.Tasks.Dataflow Version 4.5.24.0 be installed in the Global Assembly Cache (GAC) first." install [Microsoft Build Tools 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48159) manually to resolve the error.
 
 ## Running the Tool
 
 1. Run the Upgrade API Analyzer. As a result, the tool opens the following screen:
 
-		![The initial screen of Telerik Upgrade API Analyzer](../../getting-started-mvc/vs-integration/images/upgrade-api-analyzer_0.png)
+![The initial screen of Telerik Upgrade API Analyzer](../../getting-started-mvc/vs-integration/images/upgrade-api-analyzer_0.png)
 
 1. On the screen, select the platform.
 1. Select the current version of the Telerik assemblies you are using.
