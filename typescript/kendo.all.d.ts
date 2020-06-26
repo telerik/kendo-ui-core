@@ -4691,7 +4691,7 @@ declare namespace kendo.ui {
         collapseRow(row: string): void;
         collapseRow(row: Element): void;
         collapseRow(row: JQuery): void;
-        current(): JQuery;
+        current(): JQuery | undefined;
         current(cell: JQuery): void;
         dataItem(row: string): kendo.data.ObservableObject;
         dataItem(row: Element): kendo.data.ObservableObject;
