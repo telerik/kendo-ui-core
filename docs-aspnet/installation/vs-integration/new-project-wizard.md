@@ -38,7 +38,7 @@ As of the 2018 R2 release, the **Create New Project Wizard** in Visual Studio 20
 
 You can modify the settings of the project by configuring the options on the **Create New Project** page.
 
-* The **Project type** options allows you to select the desired project type (**Blank**, **Standard**, or **Grid and Menu**).
+* The **Project type** options allows you to select the desired project type (**Blank**, **Standard**, **Grid and Menu**, **Grid Razor Pages** or **Dashboard**).
 * The **Version** option allows you to select the desired version of Telerik UI for ASP.NET Core.
 
 ## Creating the Application
