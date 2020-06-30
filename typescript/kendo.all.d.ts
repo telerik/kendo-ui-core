@@ -3033,6 +3033,7 @@ declare namespace kendo.ui {
 
         element: JQuery;
         wrapper: JQuery;
+        visible: boolean;
 
         static extend(proto: Object): Drawer;
 
