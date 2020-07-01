@@ -306,6 +306,9 @@ var __meta__ = { // jshint ignore:line
                     }
                 } else {
                     designator = "AM";
+                    if (hours === 0) {
+                        hours = 12;
+                    }
                 }
             }
 
