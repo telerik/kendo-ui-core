@@ -1603,6 +1603,14 @@ var __meta__ = { // jshint ignore:line
                 overflowWrapper = that._overflowWrapper(),
                 shouldCloseTheRootItem;
 
+            if(targetElement && !targetElement.parentNode){
+                return;
+            }
+
+            if($(target).hasClass('k-menu-expand-arrow')){
+                this._lastClickedElement = targetElement.parentElement;
+            }
+
             while (targetElement && targetElement.parentNode != itemElement) {
                 targetElement = targetElement.parentNode;
             }
@@ -1718,8 +1726,10 @@ var __meta__ = { // jshint ignore:line
 
         _documentClick: function (e) {
             var that = this;
+            var target = $(e.target).hasClass('k-menu-expand-arrow') ? that._lastClickedElement : e.target;
 
-            if (contains((that._overflowWrapper() || that.element)[0], e.target)) {
+            if (contains((that._overflowWrapper() || that.element)[0], target)) {
+                that._lastClickedElement = undefined;
                 return;
             }
 

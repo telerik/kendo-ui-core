@@ -10,12 +10,18 @@ position: 1
 
 This article lists the breaking changes in the Kendo UI 2020 releases.
 
+## Kendo UI 2020 R3
+
+**Scheduler**
+
+As of the Kendo UI 2020 R3 release, the Scheduler RecurrenceEditor will be rendered as a ButtonGroup and not a DropDownList. Apart from that, in the Weekly recurrence view the days selection is also displayed as a ButtonGroup instead of checkboxes.
+
 ## Kendo UI 2020 R2
 
 **Pager**, **Grid**, **TreeList**, **ListView**
 
 * The responsive Pager no longer has the `k-pager-lg` breakpoint and class.
-* The page numbers drop-down of the responsive Pager is now an HTML `select` element. 
+* The page numbers drop-down of the responsive Pager is now an HTML `select` element.
 
 **Disabled buttons in Editor toolbar**
 
