@@ -47,7 +47,7 @@ As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved stylin
 
  ```
     /* Styles for validation messages */
-    span.k-widget.k-tooltip-validation {
+    span.k-widget.k-validator-tooltip {
         margin: 0; /* removes margin */
         width: 160px; /* set width */
         display; inline-flex; /* changes the appearance from block to inline */
