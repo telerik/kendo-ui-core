@@ -55,7 +55,8 @@ knowledge-base/treelist-checkbox-column.md,
 knowledge-base/upload-resize-image-before-upload.md,
 knowledge-base/validator-basic-form-validation.md,
 knowledge-base/vs-online-continuous-integration-login-problem.md,
-html-helpers/editors/dropdownlist/binding/razor-page.md]
+html-helpers/editors/dropdownlist/binding/razor-page.md,
+html-helpers/layout/form/razor-page.md]
 
 exclude_navigation: ["knowledge-base/*",
 api/Kendo.Mvc/*,
