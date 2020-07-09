@@ -40,6 +40,9 @@ You can modify the settings of the project by configuring the options on the **C
 
 * The **Project type** options allows you to select the desired project type (**Blank**, **Standard**, **Grid and Menu**, **Grid Razor Pages** or **Dashboard**).
 * The **Version** option allows you to select the desired version of Telerik UI for ASP.NET Core.
+* The **Select Theme** option allows you to select the desired Telerik UI for ASP.NET Core theme.
+
+    ![Project Wizard Select Theme](../../installation/vs-integration/images/select-theme-core.png)
 
 ## Creating the Application
 

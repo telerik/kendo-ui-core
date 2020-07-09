@@ -10878,6 +10878,210 @@ The data item field which contains the series q1 value.
       }]
     });
 
+### series.median `Object`
+
+The configuration of the Box Plot median value indicator (line).
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.color `String`
+
+The color of the median visual. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+          }
+        }]
+      });
+    </script>
+
+### series.median.dashType `String` *(default: "solid")*
+
+The dash type of the median visual.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.opacity `Number` *(default: 1)*
+
+The opacity of the median visual. By default the border is opaque.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.width `Number` *(default: 1)*
+
+The width of the median visual in pixels.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20
+          }
+        }]
+      });
+    </script>
+
 ### series.medianField `String` *(default: "median")*
 
 The data item field which contains the series median value.
@@ -10967,6 +11171,210 @@ The data item field which contains the series upper value.
          outliersField: "outliers"
       }]
     });
+
+### series.mean `Object`
+
+The configuration of the Box Plot mean value indicator (line).
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.color `String`
+
+The color of the mean visual. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+          }
+        }]
+      });
+    </script>
+
+### series.mean.dashType `String` *(default: "dash")*
+
+The dash type of the mean visual.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.opacity `Number` *(default: 1)*
+
+The opacity of the mean visual. By default the border is opaque.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.width `Number` *(default: 1)*
+
+The width of the mean visual in pixels.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20
+          }
+        }]
+      });
+    </script>
 
 ### series.meanField `String` *(default: "mean")*
 

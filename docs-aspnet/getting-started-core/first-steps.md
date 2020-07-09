@@ -25,6 +25,7 @@ To get up and running with the project:
 1. [Download the controls](https://www.telerik.com/download-trial-file/v2/aspnet-core-ui)
 1. [Meet the requirements](#meeting-the-requirements)
 1. [Create the ASP.NET Core application](#creating-the-application)
+1. [Add the Telerik NuGet Feed to Visual Studio](#add-the-telerik-nuget-feed-to-visual-studio)
 1. [Add the UI for ASP.NET Core NuGet package](#adding-the-nuget-package)
 1. [Add reference to Kendo.Mvc.UI](#adding-reference-to-kendomvcui)
 1. [Include the Telerik UI for ASP.NET Core client-side resources](#including-the-telerik-ui-for-aspnet-core-client-side-resources)
@@ -40,6 +41,37 @@ Follow the instructions from the [official .NET Core documentation site](https:/
 1. Set a name and location for the project and click **Create**.
 1. Select **Web Application (Model-View-Controller)** and click **Create**.
 
+## Add the Telerik NuGet Feed to Visual Studio
+
+ * Add the Telerik NuGet Feed for Trial License Users
+ * Add the Telerik NuGet Feed for Users with Commercial License
+ 
+Note that when the Nuget Feed is added to Visual Studio through the Progress Trial Installer or through the Progress Control Panel, steps 2 and 3 from the [Add the UI for ASP.NET Core NuGet package section](#adding-the-nuget-package) will be set up automatically. 
+	
+### Add the Telerik NuGet Feed for Trial License Users
+
+1. If you don't have an active license, download an [UI for ASP.NET CORE trial](https://www.telerik.com/aspnet-core-ui). During the installation of the components, you can setup the [Telerik NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) feed to be added automatically - check the "Set up Telerik NuGet package source" checkbox:
+
+	![NuGet checkbox in Progress Trial Installer](../getting-started-core/images/check-nuget.png)
+	
+1. On the next step select the Telerik UI for ASP.NET Core in the Progress Trial Installer. 
+
+	![Select product in Progress Trial Installer](../getting-started-core/images/install-core.png)
+	
+### Add the Telerik NuGet Feed for Users with Commercial License
+
+1. If you have an active commercial UI for ASP.NET Core license, you can automatically set up the NuGet Feed through the Progress Control Panel. Download the Progress Control Panel from the Overview page of your Telerik account. 
+
+	![Download Progress Control Panel](../getting-started-core/images/download-control-panel.png)
+	
+1. When logging in the Progress Control Panel, check the "set up Telerik NuGet package source" option.
+
+	![Set Up Nuget on Progress Control Panel Login](../getting-started-core/images/login-control-panel.png)
+	
+	If you miss to set up the Nuget Feed on login, go to the Progress Control Panel options and scroll to **Nuget setting**. Enter your Telerik credentials and click `Save and Close` button.
+	
+	![Set Up Nuget on Progress Control Panel options](../getting-started-core/images/nuget-control-panel-options.png)
+	
 ## Adding the NuGet Package
 
 1. Open the NuGet Package Manager.
