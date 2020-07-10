@@ -643,7 +643,7 @@ Fired when a tile item is resized.
 
 #### Event Data
 
-##### e.container `jQuery`
+##### e.item `jQuery`
 
 A jQuery object representing the resized item.
 
@@ -682,7 +682,7 @@ The widget instance which fired the event.
         columns: 4,
         resizable: true,
         resize: function (e) {
-            console.log(e.container[0]);
+            console.log(e.item[0]);
         }
     });
     </script>
