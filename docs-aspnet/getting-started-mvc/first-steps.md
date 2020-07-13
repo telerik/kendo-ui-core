@@ -22,6 +22,8 @@ To get up and running with the project:
 
 1. [Download the controls](https://www.telerik.com/download-trial-file/v2-b/ui-for-asp.net-mvc)
 1. [Create the ASP.NET MVC Web Application](#creating-the-application)
+1. [Add the Telerik NuGet Feed to Visual Studio](#add-the-telerik-nuget-feed-to-visual-studio)
+1. [Add the UI for ASP.NET MVC NuGet package](#adding-the-nuget-package)
 1. [Include the Telerik UI for ASP.NET MVC client-side resources](#including-the-client-side-resources)
 1. [Reference the `Kendo.Mvc.dll` assembly](#adding-the-kendo.mvc.dll-reference)
 1. [Update the `web.config` file of the application](#updating-the-web.config-file)
@@ -33,6 +35,41 @@ To get up and running with the project:
 1. Select **ASP.NET Web Application (.NET Framework)** and click **Next**.
 1. Set a name and location for the project and click **Create**.
 1. Select **MVC** and click **Create**.
+
+## Add the Telerik NuGet Feed to Visual Studio
+
+ * Add the Telerik NuGet Feed for Trial License Users
+ * Add the Telerik NuGet Feed for Users with Commercial License 
+	
+### Add the Telerik NuGet Feed for Trial License Users
+
+1. If you don't have an active license, download an [UI for ASP.NET MVC trial](https://www.telerik.com/aspnet-mvc). During the installation of the components, you can setup the [Telerik NuGet]({% slug aspnetmvc_nuget %}) feed to be added automatically - check the "Set up Telerik NuGet package source" checkbox:
+
+	![NuGet checkbox in Progress Trial Installer](../getting-started-mvc/images/check-nuget.png)
+	
+### Add the Telerik NuGet Feed for Users with Commercial License
+
+1. If you have an active commercial UI for ASP.NET MVC license, you can automatically set up the NuGet Feed through the Progress Control Panel. Download the Progress Control Panel from the Overview page of your Telerik account. 
+
+	![Download Progress Control Panel](../getting-started-mvc/images/download-control-panel.png)
+	
+1. When logging in the Progress Control Panel, check the "set up Telerik NuGet package source" option.
+
+	![Set Up Nuget on Progress Control Panel Login](../getting-started-mvc/images/login-control-panel.png)
+	
+	If you miss to set up the Nuget Feed on login, go to the Progress Control Panel options and scroll to **Nuget Settings**. Enter your Telerik credentials and click `Save and Close` button.
+	
+	![Set Up Nuget on Progress Control Panel options](../getting-started-mvc/images/nuget-control-panel-options.png)
+	
+	## Adding the NuGet Package
+
+1. Open the NuGet Package Manager.
+
+	![Locating and opening the NuGet package manager menu](../getting-started-mvc/images/manage-nuget.png)
+
+1. Click the **Browse** tab and search for `Telerik.UI.for.AspNet.MVC` to install it. 
+
+	![Selecting and installing the NuGet package](../getting-started-mvc/images/install-nuget-mvc.png)
 
 ## Including the Client-Side Resources
 
