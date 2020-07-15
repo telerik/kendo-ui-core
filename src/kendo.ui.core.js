@@ -37,6 +37,7 @@
         "./kendo.listview",
         "./kendo.listbox",
         "./kendo.textbox",
+        "./kendo.textarea",
         "./kendo.numerictextbox",
         "./kendo.maskedtextbox",
         "./kendo.menu",
