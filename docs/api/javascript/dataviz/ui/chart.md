@@ -3636,6 +3636,134 @@ The start position of the plot band in axis units.
     });
     </script>
 
+### categoryAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [categoryAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.plotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### categoryAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### categoryAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### categoryAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### categoryAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### categoryAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### categoryAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### categoryAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### categoryAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### categoryAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### categoryAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### categoryAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### categoryAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### categoryAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### categoryAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### categoryAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### categoryAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### categoryAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### categoryAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### categoryAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### categoryAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
 ### categoryAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
@@ -21881,6 +22009,134 @@ The start position of the plot band in axis units.
     });
     </script>
 
+### valueAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [valueAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/valueAxis.plotbands#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### valueAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### valueAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### valueAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### valueAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### valueAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### valueAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### valueAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### valueAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### valueAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### valueAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### valueAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### valueAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### valueAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### valueAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### valueAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### valueAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### valueAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### valueAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### valueAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### valueAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
 ### valueAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
@@ -26697,6 +26953,134 @@ The start position of the plot band in axis units.
       }
     });
     </script>
+
+### xAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [xAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/xAxis.plotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### xAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### xAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### xAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### xAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### xAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### xAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### xAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### xAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### xAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### xAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### xAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### xAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### xAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### xAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### xAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### xAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### xAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### xAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### xAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### xAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### xAxis.plotBands.opacity `Number`
 
@@ -31644,6 +32028,134 @@ The start position of the plot band in axis units.
       }
     });
     </script>
+
+### yAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [yAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/yAxis.plotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### yAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### yAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### yAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### yAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### yAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### yAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### yAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### yAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### yAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### yAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### yAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### yAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### yAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### yAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### yAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### yAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### yAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### yAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### yAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### yAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### yAxis.plotBands.opacity `Number`
 
