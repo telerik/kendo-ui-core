@@ -522,6 +522,8 @@ navigation:
         title: "StockChart"
      "*tabstrip":
         title: "TabStrip"
+     "*textarea":
+        title: "TextArea"
      "*textbox":
         title: "TextBox"
      "*tilelayout":
@@ -770,6 +772,11 @@ defaults:
         path: "html-helpers/editors/switch"
     values:
         title_prefix: "Core Switch Component"
+-
+    scope:
+        path: "html-helpers/editors/textarea"
+    values:
+        title_prefix: "Core TextArea Component"
 -
     scope:
         path: "html-helpers/editors/textbox"
@@ -1135,6 +1142,11 @@ defaults:
         path: "tag-helpers/editors/switch"
     values:
         title_prefix: "Core Switch Component"
+-
+    scope:
+        path: "tag-helpers/editors/textarea"
+    values:
+        title_prefix: "Core TextArea Component"
 -
     scope:
         path: "tag-helpers/editors/textbox"

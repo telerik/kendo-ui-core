@@ -276,6 +276,11 @@ defaults:
         title_prefix: "MVC Switch Component"
 -
     scope:
+        path: "html-helpers/editors/textarea"
+    values:
+        title_prefix: "MVC TextArea Component"
+-
+    scope:
         path: "html-helpers/editors/textbox"
     values:
         title_prefix: "MVC TextBox Component"

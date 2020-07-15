@@ -624,6 +624,8 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*textarea":
+        title: "TextArea"
     "*textbox":
         title: "TextBox"
     "*timeline":
@@ -1855,6 +1857,12 @@ defaults:
         path: "controls/navigation/tabstrip"
     values:
         component: "tabstrip"
+
+-
+    scope:
+        path: "controls/editors/textarea"
+    values:
+        component: "textarea"
 
 -
     scope:

@@ -4821,6 +4821,9 @@ declare namespace kendo.ui {
     }
 
     interface GridColumn {
+		dataTextField?: string;
+        dataValueField?: string;
+        dataSource?: kendo.data.DataSource | kendo.data.DataSourceOptions;
         aggregates?: any;
         attributes?: any;
         columns?: any;
@@ -8639,6 +8642,57 @@ declare namespace kendo.ui {
         newIndex?: number;
         oldIndex?: number;
         container?: JQuery;
+    }
+
+    class TextArea extends kendo.ui.Widget {
+
+        static fn: TextArea;
+
+        options: TextAreaOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): TextArea;
+
+        constructor(element: Element, options?: TextAreaOptions);
+
+
+        destroy(): void;
+        enable(enable: boolean): void;
+        focus(): void;
+        readonly(readonly: boolean): void;
+        value(): string;
+        value(value: string): void;
+
+    }
+
+    interface TextAreaLabel {
+        content?: string|Function;
+        floating?: boolean;
+    }
+
+    interface TextAreaOptions {
+        name?: string;
+        cols?: number;
+        enable?: boolean;
+        label?: string | Function | TextAreaLabel;
+        maxLength?: number;
+        placeholder?: string;
+        readonly?: boolean;
+        resizable?: string;
+        rows?: number;
+        value?: string;
+        change?(e: TextAreaChangeEvent): void;
+    }
+    interface TextAreaEvent {
+        sender: TextArea;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TextAreaChangeEvent extends TextAreaEvent {
     }
 
     class TextBox extends kendo.ui.Widget {
@@ -22996,6 +23050,10 @@ interface JQuery {
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;
     data(key: "kendoTabStrip"): kendo.ui.TabStrip;
+
+    kendoTextArea(): JQuery;
+    kendoTextArea(options: kendo.ui.TextAreaOptions): JQuery;
+    data(key: "kendoTextArea"): kendo.ui.TextArea;
 
     kendoTextBox(): JQuery;
     kendoTextBox(options: kendo.ui.TextBoxOptions): JQuery;
