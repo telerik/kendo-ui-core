@@ -172,6 +172,9 @@ fonts in fonts/
    <li><span class="k-icon k-i-unlink-vertical"></span> .k-i-unlink-vertical</li>
    <li><span class="k-icon k-i-lock"></span> .k-i-lock</li>
    <li><span class="k-icon k-i-unlock"></span> .k-i-unlock</li>
+   <li><span class="k-icon k-i-set-column-position"></span> .k-i-set-column-position</li>
+   <li><span class="k-icon k-i-stick"></span> .k-i-stick</li>
+   <li><span class="k-icon k-i-unstick"></span> .k-i-unstick</li>
    <li><span class="k-icon k-i-cancel"></span> .k-i-cancel</li>
    <li><span class="k-icon k-i-cancel-outline"></span> .k-i-cancel-outline</li>
    <li><span class="k-icon k-i-cancel-circle"></span> .k-i-cancel-circle</li>

@@ -560,12 +560,16 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "filter": "Филтрирай",
   "column": "Колона",
   "columns": "Колони",
+  "columnVisibility": "Видими колони",
   "clear": "Премахни",
   "cancel": "Откажи",
   "done": "Готово",
   "settings": "Настройки на колоната",
   "lock": "Заключи",
-  "unlock": "Отключи"
+  "unlock": "Отключи",
+  "stick" : "Залепи",
+  "unstick": "Отлепи",
+  "setColumnPosition": "Задай позиция на колоната"
 });
 }
 

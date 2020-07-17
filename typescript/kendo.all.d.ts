@@ -4734,8 +4734,12 @@ declare namespace kendo.ui {
         showColumn(column: number): void;
         showColumn(column: string): void;
         showColumn(column: any): void;
+        stickColumn(column: number): void;
+        stickColumn(column: string): void;
         unlockColumn(column: number): void;
         unlockColumn(column: string): void;
+        unstickColumn(column: number): void;
+        unstickColumn(column: string): void;
 
     }
 
@@ -4748,7 +4752,10 @@ declare namespace kendo.ui {
         filter?: string;
         sortAscending?: string;
         sortDescending?: string;
+        setColumnPosition?: string;
         settings?: string;
+        stick?: string;
+        unstick?: string;
         done?: string;
         lock?: string;
         unlock?: string;
@@ -4849,6 +4856,8 @@ declare namespace kendo.ui {
         minScreenWidth?: number;
         selectable?: boolean;
         sortable?: boolean | GridColumnSortable;
+        sticky?: boolean;
+        stickable?: boolean;
         template?: string|Function;
         title?: string;
         width?: string|number;
@@ -5099,7 +5108,9 @@ declare namespace kendo.ui {
         columnReorder?(e: GridColumnReorderEvent): void;
         columnResize?(e: GridColumnResizeEvent): void;
         columnShow?(e: GridColumnShowEvent): void;
+        columnStick?(e: GridColumnStickEvent): void;
         columnUnlock?(e: GridColumnUnlockEvent): void;
+        columnUnstick?(e: GridColumnUnstickEvent): void;
         dataBinding?(e: GridDataBindingEvent): void;
         dataBound?(e: GridDataBoundEvent): void;
         detailCollapse?(e: GridDetailCollapseEvent): void;
@@ -5180,7 +5191,15 @@ declare namespace kendo.ui {
         column?: any;
     }
 
+    interface GridColumnStickEvent extends GridEvent {
+        column?: any;
+    }
+
     interface GridColumnUnlockEvent extends GridEvent {
+        column?: any;
+    }
+
+    interface GridColumnUnstickEvent extends GridEvent {
         column?: any;
     }
 

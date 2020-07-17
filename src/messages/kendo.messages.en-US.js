@@ -39,7 +39,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "done": "Done",
   "settings": "Edit Column Settings",
   "lock": "Lock",
-  "unlock": "Unlock"
+  "unlock": "Unlock",
+  "stick" : "Stick",
+  "unstick": "Unstick",
+  "setColumnPosition": "Set Column Position"
 });
 }
 
