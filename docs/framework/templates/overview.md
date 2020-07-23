@@ -40,7 +40,7 @@ The following example demonstrates what consuming the template in an application
         <script>
             var template = kendo.template("<div id='box'>#= firstName #</div>");
             var data = { firstName: "Todd" }; //A value in JavaScript/JSON
-            var result = template(data); /Pass the data to the compiled template
+            var result = template(data); //Pass the data to the compiled template
             $("#example").html(result); //display the result
         </script>
 
