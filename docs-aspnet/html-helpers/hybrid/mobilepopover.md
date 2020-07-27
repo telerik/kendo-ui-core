@@ -28,42 +28,6 @@ The PopOver represents a transient view which is displayed when the user taps on
 
 1. Add a hybrid Telerik UI PopOver to the `Index` view. Like most hybrid controls, the PopOver must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("popover-view")
-            .Title("Inbox")
-            .Header(() =>
-            {
-                %>
-                <%: Html.Kendo().MobileButton()
-                    .Align(MobileButtonAlign.Right)
-                    .Url("#popover") // The id of the PopOver.
-                    .Text("Select location")
-                    .Rel(MobileButtonRel.PopOver) // Rel must be set to open the PopOver.
-                %>
-                <%
-            })
-            .Content(() =>
-            {
-                %>
-
-                <% Html.Kendo().MobilePopOver()
-                    .Name("popover")
-                        .Popup(popup => popup.Width("20em").Height("10.6em"))
-                        .Content(() =>
-                        {
-                            %>
-                            PopOver content
-                            <%
-                        })
-                        .Render();
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("popover-view")
             .Title("Inbox")
@@ -84,20 +48,12 @@ The PopOver represents a transient view which is displayed when the user taps on
                         </text>)
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -107,28 +63,6 @@ You can subscribe to all hybrid PopOver [events](https://docs.telerik.com/kendo-
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <% Html.Kendo().MobilePopOver()
-            .Name("popOver")
-            .Content(() =>
-            {
-                %>
-                PopOver content
-                <%
-            })
-            .Events(events => events
-                .Close("onClose")
-            )
-            .Render();
-    %>
-
-    <script>
-        function onClose() {
-            // Handle the close event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobilePopOver()
         .Name("popOver")
         .Content(
@@ -145,7 +79,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the close event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

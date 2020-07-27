@@ -831,6 +831,28 @@ The pixel screen width below which the column will be hidden. The setting takes 
         });
     </script>
 
+### columns.selectable `Boolean` *(default: false)*
+
+If set to `true` the treelist will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+        $("#treelist").kendoTreeList({
+          columns: [
+            { selectable: true }
+            { field: "id", width: 250},
+            { field: "name", width: 250 },
+            { field: "age", width: 250}
+          ],
+          dataSource: [
+              { id: 1, parentId: null, name: "Jane Doe", age: 31, city: "Boston" },
+              { id: 2, parentId: 1, name: "John Doe", age: 55, city: "New York" }
+          ]
+        });
+    </script>
+
 ### columns.sortable `Boolean|Object` *(default: true)*
 
 If set to `true` and sorting is enabled, the user can click the column header and sort the TreeList by the column [`field`](/api/javascript/ui/treelist#configuration-columns.field). If set to `false`, sorting will be disabled for this column. By default, all columns are sortable if sorting is enabled though the [`sortable`](/api/javascript/ui/treelist#configuration-sortable) option.
@@ -1030,6 +1052,28 @@ If set to `true`, the TreeList will not display the column. By default, all colu
                     { id: 2, parentId: 1, name: "John Doe", age: 24 }
                 ]
             }
+        });
+    </script>
+
+### columns.includeChildren `Boolean` *(default: false)*
+
+If set to `true`, the TreeList will select all child rows upon parent row selection when checkbox selection is used.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+        $("#treelist").kendoTreeList({
+          columns: [
+            { selectable: true, includeChildren: true }
+            { field: "id", width: 250},
+            { field: "name", width: 250 },
+            { field: "age", width: 250}
+          ],
+          dataSource: [
+              { id: 1, parentId: null, name: "Jane Doe", age: 31, city: "Boston" },
+              { id: 2, parentId: 1, name: "John Doe", age: 55, city: "New York" }
+          ]
         });
     </script>
 

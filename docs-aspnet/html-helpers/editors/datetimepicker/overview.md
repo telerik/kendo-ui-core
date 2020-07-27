@@ -71,6 +71,26 @@ The following example demonstrates how to subscribe to events by a handler name.
       </script>
 ```
 
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+    @(Html.Kendo().DateTimePicker()
+        .Name("datetimepicker")
+        .Events(e => e
+            .Open(@<text>
+                function() {
+                    // Handle the open event inline.
+                }
+            </text>)
+            .Change(@<text>
+                function() {
+                    // Handle the change event inline.
+                }
+                </text>)
+        )
+    )
+
 ## Referencing Existing Instances
 
 To reference an existing  DateTimePicker instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateTimePicker client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker#methods) to control its behavior.

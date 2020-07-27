@@ -103,7 +103,8 @@ The following example demonstrates how to define the Grid by using the Grid Html
     * [State persistence]({% slug persiststate_grid_aspnetcore %})
     * [Hierarchy]({% slug hierarchy_grid_htmlhelper_aspnetcore %})
     * [Templates]({% slug clientdetailtemplate_grid_aspnetcore %})
-* More settings
+* More settings{% if site.mvc %}
+    * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %}){% endif %}
     * [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
     * [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %})
     * [Rendering and dimensions]({% slug width_grid_aspnetcore %})

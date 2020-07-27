@@ -28,25 +28,6 @@ The Button navigates to a mobile View or executes a custom callback when tapped.
 
 1. Add a hybrid Telerik UI Button to the `Index` view. Like most hybrid controls, the Button must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("button-view")
-            .Title("Inbox")
-            .Content(() =>
-            {
-                %>
-
-                <%: Html.Kendo().MobileButton()
-                        .Name("mobile-button2")
-                        .Text("Trigger Event 2")
-                        .HtmlAttributes(new { style = "margin: 2em; text-align: center;" })
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("button-view")
             .Title("Inbox")
@@ -61,20 +42,12 @@ The Button navigates to a mobile View or executes a custom callback when tapped.
 
             </text>)
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -84,22 +57,6 @@ You can subscribe to all hybrid Button [events](https://docs.telerik.com/kendo-u
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileButton()
-            .Name("MobileButton")
-            .Text("Button Text")
-            .Events(events => events
-                .Click("onClick")
-            )
-    %>
-
-    <script>
-        function onClick() {
-            // Handle the open event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileButton()
         .Name("MobileButton")
         .Text("Button Text")
@@ -113,7 +70,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the click event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

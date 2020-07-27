@@ -28,23 +28,6 @@ The ModalView presents a self-contained functionality in the context of the curr
 
 1. Add a hybrid Telerik UI Button to open the ModalView.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("modalview-view")
-            .Content(() =>
-            {
-                %>
-                <%: Html.Kendo().MobileButton()
-                        .Text("Open")
-                        .Rel(MobileButtonRel.ModalView)
-                        .Url("#ModalView")
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("modalview-view")
             .Content(
@@ -56,24 +39,9 @@ The ModalView presents a self-contained functionality in the context of the curr
                     )
                 </text>)
         )
-    ```
 
 1. Add a Telerik UI ModalView to the `Index` view.
 
-    ```ASPX
-        <% Html.Kendo().MobileModalView()
-            .Name("ModalView")
-            .HtmlAttributes(new { style = "width: 95%; height: 18em;"  })
-            .Content(() =>
-            {
-                %>
-                ModalView Content
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileModalView()
             .Name("ModalView")
             .HtmlAttributes(new { style = "width: 95%; height: 18em;"  })
@@ -83,20 +51,12 @@ The ModalView presents a self-contained functionality in the context of the curr
                 </text>
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -106,29 +66,6 @@ You can subscribe to all hybrid ModalView [events](https://docs.telerik.com/kend
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <% Html.Kendo().MobileModalView()
-        .Name("ModalView")
-        .HtmlAttributes(new { style = "width: 95%; height: 18em;"  })
-        .Content(() =>
-        {
-            %>
-            ModalView Content
-            <%
-        })
-        .Events(events => events
-            .Close("onClose")
-        )
-        .Render();
-    %>
-
-    <script>
-        function onClose() {
-            // Handle the close event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileModalView()
             .Name("ModalView")
             .HtmlAttributes(new { style = "width: 95%; height: 18em;"  })
@@ -147,7 +84,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the close event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

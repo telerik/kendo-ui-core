@@ -41,25 +41,6 @@ To implement navigation, use either of the available approaches:
 
 1. Add the default hybrid Telerik UI View for ASP.NET MVC. The mobile application expects that the immediate child of the application element is a `MobileView`.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("Index")
-            .Title("Index")
-            .Content(() =>
-            {
-                %>
-                    View Content Template
-                    <!--Add a button that will `server navigate` the application.-->
-                    <%: Html.Kendo().MobileButton()
-                            .Text("Navigate to Details")
-                            .Url("Details", "Home")
-                    %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("Index")
             .Title("Index")
@@ -76,28 +57,9 @@ To implement navigation, use either of the available approaches:
                 </text>
             )
         )
-    ```
 
 1. Create a new `Details` ASP.NET MVC View file under the `/Views/Home/` folder.
 
-    ```ASPX
-        <%Html.Kendo().MobileView()
-            .Title("Details")
-            .Name("Details")
-            .Content(() =>
-            {
-                %>
-                View Details Template
-                <!--Add a Back button that will `server navigate` the application to `Index`.-->
-                <%: Html.Kendo().MobileButton()
-                        .Text("Go Back")
-                        .Url("./")
-                %>
-                <%
-            })
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Title("Details")
             .Name("Details")
@@ -112,20 +74,12 @@ To implement navigation, use either of the available approaches:
                 </text>
             )
         )
-    ```
 
 1. Initialize the Application inside the `Master/Layout` page and enable the server navigation.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the Application.
 
@@ -148,25 +102,6 @@ To implement navigation, use either of the available approaches:
 
 1. Add the default hybrid Telerik UI View for ASP.NET MVC. The mobile application expects that the immediate child of the application element is a `MobileView`.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("Index")
-            .Title("Index")
-            .Content(() =>
-            {
-                %>
-                    View Content Template
-                    <!--Add a button that will `server navigate` the application.-->
-                    <%: Html.Kendo().MobileButton()
-                            .Text("Navigate to Details")
-                            .Url("Details", "Home")
-                    %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("Index")
             .Title("Index")
@@ -183,28 +118,9 @@ To implement navigation, use either of the available approaches:
                 </text>
             )
         )
-    ```
 
 1. Create a new `Details` ASP.NET MVC View file under the `/Views/Home/` folder.
 
-    ```ASPX
-        <%Html.Kendo().MobileView()
-            .Title("Details")
-            .Name("Details")
-            .Content(() =>
-            {
-                %>
-                View Details Template
-                <!--Add a back button that will `server navigate` the application to `Index`.-->
-                <%: Html.Kendo().MobileButton()
-                        .Text("Go Back")
-                        .Url("#:back")
-                %>
-                <%
-            })
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Title("Details")
             .Name("Details")
@@ -219,22 +135,13 @@ To implement navigation, use either of the available approaches:
                 </text>
             )
         )
-    ```
 
 1. Initialize the mobile application inside the `Master/Layout` page.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .PushState(true)
-            .ServerNavigation(false)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .PushState(true)
             .ServerNavigation(false)
         )
-    ```
 
 1. Build and run the application.
 

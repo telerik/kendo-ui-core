@@ -3,7 +3,7 @@ title: Resizing
 page_title: Resizing of Columns
 description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to enable column resizing in order to modify the width of columns."
 slug: column_resizing_aspnetcore_grid
-position: 4
+position: 5
 ---
 
 # Resizing of Columns

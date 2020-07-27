@@ -114,7 +114,9 @@ public class HomeController : Controller
     public ActionResult GetScrollViewData([DataSourceRequest]DataSourceRequest request)
     {
         IEnumerable<MyModel> data = Enumerable.Range(1, 5).Select(x => new MyModel { SomeField = "item " + x + " from page " + request.Page });
-        return Json(data.ToDataSourceResult(request));
+        {% if site.core %}
+        return Json(data.ToDataSourceResult(request));{% else %}
+        return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);{% endif %}
     }
 }
 ```

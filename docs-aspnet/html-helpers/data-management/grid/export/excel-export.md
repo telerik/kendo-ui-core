@@ -181,6 +181,16 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
             }
         </script>
 
+{% if site.mvc %}
+## Use the Detail Template
+
+The Kendo UI Grid does not export its `DetailTemplate` for the same reason it does not export the column templates. If the detail template contains another Grid, follow [this runnable how-to example]({% slug howto_detailgridexcelexport_aspnetmvcgrid %}).
+
+## Export Multiple Grids
+
+For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
+{% endif %}
+
 ## Server-Side Processing
 
 To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).

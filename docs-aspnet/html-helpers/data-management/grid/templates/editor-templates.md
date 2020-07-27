@@ -15,7 +15,7 @@ For runnable examples, refer to the [demos on templates in the Grid](https://dem
 
 ## Getting Started
 
-The Telerik UI Grid for {{ site.framework }} relies on {{ site.framework }} editor templates to create an editing UI. If the Grid is configured for in-line or in-cell editing, it uses the `Html.EditorFor` method to get the editor HTML for every property which is editable.
+The Telerik UI Grid for {{ site.framework }} relies on {{ site.framework }} editor templates to create an editing UI. If the Grid is configured for in-line or in-cell editing, it uses the [`Html.EditorForModel`]({% if site.mvc %}https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx{% else %}https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper-1.editorfor?view=aspnetcore-3.1{% endif %}) method to get the editor HTML for every property which is editable.
 
 The configuration later in this article will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
@@ -33,7 +33,9 @@ The following example demonstrates the code that will be used to get the editor 
         @(Html.EditorFor(o => o.OrderDate);
         @(Html.EditorFor(o => o.ShipCountry);
 
-If the Grid is configured for popup editing, it will use the `Html.EditorForModel` to get the editor HTML for the whole model.
+If the Grid is configured for popup editing, it will use the [`Html.EditorForModel`]({% if site.mvc %}https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx{% else %}https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper-1.editorfor?view=aspnetcore-3.1{% endif %}) to get the editor HTML for the whole model.
+
+{% if site.mvc %}For more information on ASP.NET MVC editor templates, refer to [this blog post series on {{ site.framework }} 2 templates](http://bradwilson.typepad.com/blog/2009/10/aspnet-mvc-2-templates-part-1-introduction.html). For a runnable example on using custom popup templates, refer to [this demo](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-popup-editor).{% endif %}
 
 ## Creating Custom Editors for Bound Properties
 

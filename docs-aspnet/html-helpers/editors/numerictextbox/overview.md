@@ -19,11 +19,13 @@ The NumericTextBox allows the user to select numeric values through direct input
 
 The following example demonstrates the basic configuration for the NumericTextBox.
 
-```
+
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the widget.
+          .Min(-100) // Set the min value of the NumericTextBox.
+          .Max(100) // Set the min value of the NumericTextBox.
+          .Value(10) // Set the value of the NumericTextBox.
     )
-```
 
 ## Functionality and Features
 
@@ -38,7 +40,6 @@ You can subscribe to all NumericTextBox events. For a complete example on basic 
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox")
           .Events(e => e
@@ -55,7 +56,27 @@ The following example demonstrates how to subscribe to events by a handler name.
         // Handle the change event.
     }
     </script>
-```
+
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+    @(Html.Kendo().NumericTextBox()
+        .Name("numerictextbox")
+        .Events(e => e
+            .Change(@<text>
+                function() {
+                    // Handle the change event inline.
+                }
+            </text>)
+            .Spin(@<text>
+                function() {
+                    // Handle the spin event inline.
+                }
+            </text>)
+        )
+    )
+
 
 ## Referencing Existing Instances
 

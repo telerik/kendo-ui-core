@@ -9,7 +9,7 @@ position: 4
 
 # Dragging and Dropping
 
-To enable the drag-and-drop feature of the ListBox, set its `Draggable` property to `true`.
+To enable the drag-and-drop feature of the ListBox, call its `Draggable()` method with `true` as a parameter.
 
 You can also customize the drag-and-drop appearance of the ListBox by using its `Draggable.Placeholder` and `Draggable.Hint` options.
 

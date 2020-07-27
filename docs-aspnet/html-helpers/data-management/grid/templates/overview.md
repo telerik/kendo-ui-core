@@ -18,6 +18,7 @@ The Grid provides the following templating options:
 * [Client detail templates]({% slug clientdetailtemplate_grid_aspnetcore %})
 * [Group templates]({% slug group_templates_grid_aspnetcore %})
 * [Editor templates]({% slug editortemplates_grid_aspnetcore %})
+* [No Records templates]({% slug htmlhelpers_norecordstemplate_grid %})
 
 ## See Also
 

@@ -86,7 +86,7 @@ using Kendo.Mvc.UI;
 
 public class FilterController : BaseController
 {
-    public IActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
+    public ActionResult GetPeople([DataSourceRequest]DataSourceRequest request)
     {
         var people = new List<SampleData>() {
              new SampleData()  { Name = "Jane Doe", Age = 25, IsOnLeave = false },
@@ -97,7 +97,7 @@ public class FilterController : BaseController
         return Json(people.ToDataSourceResult(request));
     }
 
-    public IActionResult Index()
+    public ActionResult Index()
     {
         return View();
     }

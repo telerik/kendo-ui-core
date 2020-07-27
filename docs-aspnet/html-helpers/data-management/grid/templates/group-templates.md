@@ -60,6 +60,9 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 ![A Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../images/grid-group-header-column-template-first-column.png)
 
+{% if site.mvc %}In a server-binding scenario, you can set the group templates without the `Client` prefix&mdash;`GroupHeaderTemplate`, `GroupHeaderColumnTemplate`, and `GroupFooterTemplate`. For more information, refer to the demo on [server aggregates of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serveraggregates).
+{% endif %}
+
 ## See Also
 
 * [Templates by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-template)

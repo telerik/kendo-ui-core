@@ -26,38 +26,6 @@ The NavBar displays an application navigation bar. It provides options for showi
 
 1. Add a hybrid Telerik UI NavBar to the `Index` view. Like most hybrid controls, the NavBar must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("navbar-home")
-            .Title("Index")
-            .Header(() =>
-            {
-                %>
-                <% Html.Kendo().MobileNavBar()
-                        .Content(navbar =>
-                        {
-                            %>
-                            <%: Html.Kendo().MobileBackButton()
-                                    .Align(MobileButtonAlign.Left)
-                                    .Text("Back")
-                            %>
-                            <%: navbar.ViewTitle("") %>
-                            <%
-                        })
-                        .Render();
-                %>
-                <%
-            })
-            .Content(() =>
-            {
-                %>
-                View Content
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("navbar-home")
             .Title("Index")
@@ -73,20 +41,12 @@ The NavBar displays an application navigation bar. It provides options for showi
                 )
             .Content(@<text>View Content</text>)
         )
-    ```
 
 1. Initialize the mobile applic1.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
