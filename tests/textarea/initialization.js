@@ -139,14 +139,6 @@
             assert.equal(widget.element.attr("maxlength"), 42);
         });
 
-        it("Should set cols", function() {
-            var widget = new TextArea(textarea, {
-                cols: 42
-            });
-
-            assert.equal(widget.element.attr("cols"), 42);
-        });
-
         it("Should set rows", function() {
             var widget = new TextArea(textarea, {
                 rows: 42

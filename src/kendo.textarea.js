@@ -25,6 +25,7 @@ var __meta__ = {// jshint ignore:line
         STATEDISABLED = "k-state-disabled",
         NOCLICKCLASS = "k-no-click",
         ARIA_DISABLED = "aria-disabled",
+        TEXTAREACONTAINER = "k-textarea-container",
         proxy = $.proxy;
 
     var TextArea = Widget.extend({
@@ -67,7 +68,6 @@ var __meta__ = {// jshint ignore:line
 
         attributes: [
             "maxLength",
-            "cols",
             "rows",
             "placeholder"
         ],
@@ -195,6 +195,7 @@ var __meta__ = {// jshint ignore:line
                 if (floating) {
                     that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
                     that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                    that._floatingLabelContainer.addClass(TEXTAREACONTAINER);
                 }
 
                 if (kendo.isFunction(labelText)) {

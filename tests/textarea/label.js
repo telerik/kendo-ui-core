@@ -164,5 +164,16 @@
 
             assert.equal(widget.calls("destroy"), 1);
         });
+
+        it("k-textarea-container class is added to the floating label element", function() {
+            var widget = new TextArea(textarea, {
+                label: {
+                    content: "test",
+                    floating: true
+                }
+            });
+
+            assert.isOk(widget.floatingLabel.element.hasClass("k-textarea-container"));
+        });
     });
 }());
