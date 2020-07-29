@@ -11172,7 +11172,7 @@ The opacity of the median visual. By default the border is opaque.
       });
     </script>
 
-### series.median.width `Number` *(default: 1)*
+### series.median.width `Number` *(default: 2)*
 
 The width of the median visual in pixels.
 
@@ -11466,7 +11466,7 @@ The opacity of the mean visual. By default the border is opaque.
       });
     </script>
 
-### series.mean.width `Number` *(default: 1)*
+### series.mean.width `Number` *(default: 2)*
 
 The width of the mean visual in pixels.
 
