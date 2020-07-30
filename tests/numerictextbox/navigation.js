@@ -356,5 +356,16 @@
 
             kendo.support.mobileOS = true;
         });
+
+        it("text is selected after focus when selectOnFocus is enabled", function(done) {
+            var textbox = new NumericTextBox(input, { selectOnFocus: true, value: 15 });
+
+            textbox._click({ target: textbox._text[0] });
+
+            setTimeout(function() {
+                assert.equal(document.getSelection().toString(), "15");
+                done();
+            }, 100);
+        });
     });
 }());

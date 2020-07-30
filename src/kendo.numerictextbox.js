@@ -437,6 +437,10 @@ var __meta__ = { // jshint ignore:line
                 that._focusin();
 
                 caret(that.element[0], caretPosition);
+
+                if (that.options.selectOnFocus) {
+                    that.element[0].select();
+                }
             });
         },
 
