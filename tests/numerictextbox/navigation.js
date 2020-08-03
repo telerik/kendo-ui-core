@@ -363,7 +363,7 @@
             textbox._click({ target: textbox._text[0] });
 
             setTimeout(function() {
-                assert.equal(document.getSelection().toString(), "15");
+                assert.equal(input[0].value.substring(input[0].selectionStart, input[0].selectionEnd), "15");
                 done();
             }, 100);
         });

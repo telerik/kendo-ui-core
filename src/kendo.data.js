@@ -2705,7 +2705,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _isGroupPaged: function(){
-            var group = this.group() || [];
+            var group = this._group || [];
 
             return this._groupPaging && group.length;
         },
@@ -4005,8 +4005,8 @@ var __meta__ = { // jshint ignore:line
                     var query = new Query(result.data);
                     that._addRange(that._observe(result.data));
 
-                    if (options.skip > (result.data.length / options.take + 1)) {
-                        options.skip = 0;
+                    if (options.skip + options.take > result.data.length) {
+                        options.skip = result.data.length - options.take;
                     }
 
                     that.view(query.range(options.skip, options.take).toArray());
@@ -4635,9 +4635,14 @@ var __meta__ = { // jshint ignore:line
 
         group: function(val) {
             var that = this;
+            var options = { group: val };
+
+            if (that._groupPaging) {
+                options.page = 1;
+            }
 
             if(val !== undefined) {
-                that._query({ group: val });
+                that._query(options);
                 return;
             }
 

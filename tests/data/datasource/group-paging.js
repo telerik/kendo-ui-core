@@ -1748,5 +1748,20 @@
             }, "page");
         });
 
+        it("group method should reset the page when new group is added/removed and group paging is enabled", function() {
+            var data = [{ age: 1 }, { age: 3 }, { age: 1 }];
+
+            var dataSource = new DataSource({
+                data: data,
+                page: 1,
+                pageSize: 2,
+                groupPaging: true
+            });
+            dataSource.read();
+            dataSource.page(2);
+            dataSource.group({ field: "age" });
+
+            assert.equal(dataSource.page(), 1);
+        });
     });
 }());
