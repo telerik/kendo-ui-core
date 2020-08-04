@@ -701,19 +701,15 @@ var __meta__ = { // jshint ignore:line
 
         _listScrollHandler: function (e) {
             var that = this;
-            var itemHeight = Math.floor($(e.currentTarget).find(".k-item:visible:eq(0)").outerHeight());
+            var itemHeight = $(e.currentTarget).find(".k-item:visible:eq(0)")[0].getBoundingClientRect().height;
 
             if (that._scrollingTimeout) {
                 clearTimeout(that._scrollingTimeout);
             }
 
             that._scrollingTimeout = setTimeout(function () {
-                if (e.currentTarget.scrollTop % itemHeight !== 0) {
-                    if (e.currentTarget.scrollTop > that._scrollTop) {
-                        e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                    } else {
-                        e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                    }
+                if (e.currentTarget.scrollTop % itemHeight > 1) {
+                    e.currentTarget.scrollTop += itemHeight - e.currentTarget.scrollTop % itemHeight;
                 }
                 that._scrollTop = e.currentTarget.scrollTop;
                 that._updateRanges();
