@@ -156,7 +156,18 @@ There are two ways to get the source code for Kendo UI Core. You can either down
 
 ### Installing Dependencies
 
-In order to build Kendo UI Core, you need to have **Node.js 4.x** and **git 2.x**.
+In order to build Kendo UI Core, you need to have **Node.js 4.x**, **git 2.x** and **gulp 3.x**.
+
+**To build Kendo UI Core using latest node version** (tested with v14.6.0), [add npm-shrinkwrap.json and ping graceful-fs to 4.2.2](https://timonweb.com/posts/how-to-fix-referenceerror-primordials-is-not-defined-error/):
+```json
+{
+  "dependencies": {
+    "graceful-fs": {
+        "version": "4.2.2"
+     }
+  }
+}
+```
 
 For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
