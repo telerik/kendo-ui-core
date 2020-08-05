@@ -6,16 +6,16 @@ slug: virtualclass_uiforcore
 position: 20
 ---
 {% if site.core %}
-    {% assign VirtualClassroom = "https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core" %}
+    {% assign VirtualClassroom = "https://learn.telerik.com/learn/course/8/telerik-ui-for-aspnet-core" %}
 {% else %}
-    {% assign VirtualClassroom = "https://progress.exceedlms.com/student/path/498054-telerik-ui-for-asp-net-mvc" %}
+    {% assign VirtualClassroom = "https://learn.telerik.com/learn/course/3/telerik-ui-for-aspnet-mvc" %}
 {% endif %}
 
 # Virtual Classroom
 
-The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represent a free on-demand technical training program exclusive to active license holders.
+The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represents a free on-demand technical training program exclusive to active license holders.
 
-Each session provides practical knowledge combined with helpful approaches to application development which are suitable for both junior and senior developers.
+Each session provides practical knowledge combined with helpful approaches to application development, which are suitable for both junior and senior developers.
 
 The Virtual Classroom program aims at:
 * Empowering your developer productivity.
