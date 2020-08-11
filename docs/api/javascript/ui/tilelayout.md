@@ -406,7 +406,7 @@ A value in pixels determining the space between horizontal spacing between the l
         ],
         gap: {
             columns: 30
-        }
+        },
         columns: 4
     });
     </script>
@@ -445,7 +445,7 @@ A value in pixels determining the space between vertical spacing between the lay
         ],
         gap: {
             rows: 30
-        }
+        },
         columns: 4
     });
     </script>
@@ -482,7 +482,7 @@ Determines the height of the layout. Numeric values are treated as pixels.
                 bodyTemplate: kendo.template($("#second").html())
             }
         ],
-        height: 400;
+        height: 400,
         columns: 4
     });
     </script>
@@ -526,7 +526,7 @@ Determines whether the reordering functionality will be enabled.
 
 ### resizable `Boolean` *(default: false)*
 
-Determines whether the reordering functionality will be enabled.
+Determines whether the resizing functionality will be enabled.
 
 #### Example - enable resizing
     <script id="first" type="text/x-kendo-template">
@@ -600,7 +600,7 @@ Determines the height of the rows. Numeric values are treated as pixels.
 
 ### width `String|Number`
 
-Determines the height of the rows. Numeric values are treated as pixels.
+Determines the width of the layout. Numeric values are treated as pixels.
 
 #### Example - sets the width of the layout
     <script id="first" type="text/x-kendo-template">
@@ -680,6 +680,7 @@ The widget instance which fired the event.
             }
         ],
         columns: 4,
+        resizable: true,
         resize: function (e) {
             console.log(e.container[0]);
         }
@@ -737,6 +738,7 @@ The widget instance which fired the event.
             }
         ],
         columns: 4,
+        reorderable: true,
         reorder: function (e) {
             console.log(e.newIndex, e.oldIndex);
         }
