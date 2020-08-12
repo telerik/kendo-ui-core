@@ -49,9 +49,15 @@ To customize the filter:
 $("#grid").kendoGrid({
   filter: function(e){
     if(e.field == "someField"){
-    	e.filter.filters.forEach(function(f){
-        f.operator = "contains";
-      })
+     if(e.filter){
+    	  e.filter.filters.forEach(function(f){
+         f.operator = "contains";
+       })
+       $(e.sender.thead).find('th#grid_active_cell.k-header > .k-grid-filter').addClass('k-state-active');
+     }
+     else{
+       $(e.sender.thead).find('th#grid_active_cell.k-header > .k-grid-filter').removeClass('k-state-active');
+     }
     }
   },
   filterMenuOpen: function(e){
