@@ -20,6 +20,14 @@ The date when the PDF document is created. Defaults to `new Date()`.
 The forced resolution (in dpi) of the images in the exported PDF document.
 By default, the images are exported at their full resolution.
 
+### jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
+
 ### keywords `String` *(default: null)*
 Specifies the keywords of the exported PDF file.
 
