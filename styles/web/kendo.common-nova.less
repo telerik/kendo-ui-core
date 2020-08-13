@@ -653,6 +653,17 @@
 @wizard-buttons-margin-x: @wizard-spacer;
 
 
+// TextArea
+@textarea-default-width: 18em;
+@textarea-border-width: @input-border-width;
+@textarea-padding-x: 8px;
+@textarea-padding-y: 4px;
+@textarea-font-family: inherit;
+@textarea-font-size: 14px;
+@textarea-line-height: (20 / 14);
+@textarea-calc-height: calc( (@textarea-line-height * 1em) + (@textarea-padding-y * 2) + (@textarea-border-width * 2) );
+
+
 @import "common/all.less";
 
 .k-button {
@@ -858,7 +869,7 @@
     border-top: 0;
 }
 
-.k-grid-content tr td {
+.k-grid-content tr td:not(.k-grid-content-sticky) {
     border-left-width: 0;
 }
 

@@ -646,6 +646,17 @@
 @wizard-buttons-margin-x: @wizard-spacer;
 
 
+// TextArea
+@textarea-default-width: 18em;
+@textarea-border-width: @input-border-width;
+@textarea-padding-x: 12px;
+@textarea-padding-y: 6px;
+@textarea-font-family: inherit;
+@textarea-font-size: 14px;
+@textarea-line-height: (20 / 14);
+@textarea-calc-height: calc( (@textarea-line-height * 1em) + (@textarea-padding-y * 2) + (@textarea-border-width * 2) );
+
+
 @import "common/all.less";
 
 .k-widget.k-tabstrip

@@ -481,6 +481,8 @@ A boolean flag that indicates whether the widget should be enabled or disabled.
 
 Select a Button.
 
+> **Note:** Starting from R3 2020 release, calling the `select()` method will no longer trigger the `select` event. That is the expected by design behavior of the widget. If you need to trigger the `select` event upon the method call, you should do that manually by calling the `buttongroup.trigger('select')`.
+
 #### Parameters
 
 ##### li `jQuery | Number`

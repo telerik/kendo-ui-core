@@ -286,6 +286,10 @@
 @grid-selected-border: @grid-border;
 @grid-selected-gradient: @selected-gradient;
 
+@grid-sticky-border: darken(@grid-border, 30%);
+
+@grid-selected-hover-bg: saturate(@selected-background-color, 7%);
+
 
 // Calendar
 @calendar-bg: @component-bg;
@@ -772,6 +776,32 @@
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
 
 
+// Textarea
+@textarea-bg: @input-bg;
+@textarea-text: @input-text;
+@textarea-border: @input-border;
+@textarea-shadow: @input-shadow;
+
+@textarea-hovered-text: @input-hovered-text;
+@textarea-hovered-bg: @input-hovered-bg;
+@textarea-hovered-border: @input-hovered-border;
+@textarea-hovered-shadow: @input-hovered-shadow;
+
+@textarea-focused-text: @input-focused-text;
+@textarea-focused-bg: @input-focused-bg;
+@textarea-focused-border: @input-focused-border;
+@textarea-focused-shadow: @input-focused-shadow;
+
+@textarea-placeholder-text: rgba( @input-text, .5 );
+@textarea-placeholder-opacity: 1;
+
+@textarea-selected-text: contrast(@accent);
+@textarea-selected-bg: @accent;
+
+@textarea-invalid-border: rgba( @error, .5 );;
+@textarea-invalid-shadow: null;
+
+
 // Kendo skin
 
 @theme-name: ~"default";
@@ -808,6 +838,7 @@
 @import "Default/forms/_theme.less";
 @import "Default/tooltip/_theme.less";
 @import "Default/wizard/_theme.less";
+@import "Default/textarea/_theme.less";
 
 .k-in,
 .k-item
@@ -924,7 +955,6 @@ td.k-group-cell,
 }
 
 .k-textbox,
-.k-textarea,
 .k-autocomplete.k-header,
 .k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-active,
@@ -949,9 +979,7 @@ td.k-group-cell,
 
 .k-input,
 .k-textbox,
-.k-textarea,
 .k-textbox > input,
-.k-textarea > textarea,
 .k-multiselect-wrap {
     background-color: @input-bg;
     color: @input-text;
@@ -1622,8 +1650,7 @@ div.k-filebrowser-dropzone em
     box-shadow: @button-focused-shadow;
 }
 
-.k-textbox:hover,
-.k-textarea:hover {
+.k-textbox:hover {
     border-color: @hover-border-color;
 }
 
@@ -1658,7 +1685,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-textbox:focus,
-.k-textarea:focus,
 .k-textbox.k-state-focused,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
@@ -1691,7 +1717,7 @@ div.k-filebrowser-dropzone em
 
 .k-grid tr.k-state-selected:hover,
 .k-grid td.k-state-selected:hover {
-    background-color: saturate(@selected-background-color, 7%);
+    background-color: @grid-selected-hover-bg;
     .composite-background(none);
 }
 
@@ -1772,7 +1798,7 @@ div.k-filebrowser-dropzone em
 .k-gantt .k-treelist .k-state-selected:hover,
 .k-gantt .k-treelist .k-state-selected:hover td
 {
-    background-color: saturate(@selected-background-color, 7%);
+    background-color: @grid-selected-hover-bg;
     .composite-background(none);
 }
 
@@ -1845,7 +1871,6 @@ div.k-filebrowser-dropzone em
 // Border radius
 .k-block,
 .k-textbox,
-.k-textarea,
 .k-drag-clue,
 .k-touch-scrollbar,
 .k-inline-block,
@@ -2081,7 +2106,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-textbox,
-.k-textarea,
 .k-multiselect-wrap,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
 .k-dateinput.k-state-disabled > .k-textbox:hover
@@ -2608,3 +2632,39 @@ div.k-filebrowser-dropzone em
     border-bottom-color: @grid-text;
 }
 
+// Grid Sticky columns
+.k-master-row {
+    .k-grid-content-sticky {
+        background-color: @grid-bg;
+    }
+
+    &.k-alt .k-grid-content-sticky {
+        background-color: @grid-alt-bg;
+    }
+
+    &.k-state-selected .k-grid-content-sticky {
+        .composite-background(@grid-selected-gradient);
+        background-color: @grid-selected-bg;
+        background-position: 50% 50%;
+    }
+
+    &:hover .k-grid-content-sticky,
+    &.k-state-hover .k-grid-content-sticky {
+        .composite-background(@grid-hover-gradient);
+        background-color: @grid-hover-bg;
+    }
+
+    &.k-state-selected:hover .k-grid-content-sticky,
+    &.k-state-selected.k-state-hover .k-grid-content-sticky {
+        background-color: @grid-selected-hover-bg;
+        .composite-background(none);
+    }
+}
+
+.k-grid-header .k-grid-header-sticky,
+.k-master-row .k-grid-content-sticky,
+.k-grouping-row .k-grid-content-sticky,
+.k-footer-template .k-grid-content-sticky {
+    border-left-color: @grid-sticky-border;
+    border-right-color: @grid-sticky-border;
+}
