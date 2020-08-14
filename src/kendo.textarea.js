@@ -211,7 +211,7 @@ var __meta__ = {// jshint ignore:line
                     element.attr("id", id);
                 }
 
-                that._label = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
             }
         },
 

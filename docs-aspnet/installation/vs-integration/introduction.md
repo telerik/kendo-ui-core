@@ -16,7 +16,7 @@ As their major advantage, the VS extensions handle the [creation of projects]({%
 
 * To access the VS extensions, use the **Telerik | Telerik UI for ASP.NET Core** menu on the VS **Start Page**.
 
-    ![The Start Page Visual Studio dialog without projects](../../installation/vs-integration/images/create-project-core.png)
+    ![The Start Page Visual Studio dialog without projects](../../installation/vs-integration/images/create-project-core-new.PNG)
 
 * To add the project template, select it from the drop-down list of options. As a result, the added project template becomes available in the language-specific nodes of the dialog as well. Under the **CSharp\Web** node, the **Add New Project** dialog contains the Telerik UI for ASP.NET Core web application.
 
