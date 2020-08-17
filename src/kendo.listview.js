@@ -206,7 +206,14 @@ var __meta__ = { // jshint ignore:line
             var options = this.options;
             var height = options.height;
 
-            this.element.addClass("k-widget k-listview").attr("role", "listbox");
+            this.element.addClass("k-widget k-listview");
+
+            if (options.navigatable || options.selectable) {
+                this.element.attr("role", "listbox");
+            } else {
+                this.element.attr("role", "list");
+            }
+
             this.content = $("<div />").appendTo(this.element);
 
             if (height) {
@@ -295,6 +302,8 @@ var __meta__ = { // jshint ignore:line
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate,
+                options = that.options,
+                role = (options.selectable || options.navigatable) ? "option" : "listitem",
                 active = activeElement(),
                 endlessAppend =  that._endlessFetchInProgress,
                 index = endlessAppend ? that._skipRerenderItemsCount : 0,
@@ -361,7 +370,7 @@ var __meta__ = { // jshint ignore:line
             for (idx = index, length = view.length; idx < length; idx++) {
                 items.eq(idx)
                     .attr(kendo.attr("uid"), view[idx].uid)
-                    .attr("role", "option")
+                    .attr("role", role)
                     .attr("aria-selected", "false");
             }
 
@@ -724,6 +733,8 @@ var __meta__ = { // jshint ignore:line
         _closeEditable: function() {
             var that = this,
                 editable = that.editable,
+                options = that.options,
+                role = (options.selectable || options.navigatable) ? "option" : "listitem",
                 data,
                 item,
                 index,
@@ -745,7 +756,7 @@ var __meta__ = { // jshint ignore:line
                 editable.element.replaceWith(template(data));
                 item = that.items().eq(index);
                 item.attr(kendo.attr("uid"), data.uid);
-                item.attr("role", "option");
+                item.attr("role", role);
 
                 if (that._hasBindingTarget()) {
                     kendo.bind(item, data);

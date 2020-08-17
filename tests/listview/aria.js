@@ -29,6 +29,12 @@
             assert.equal(ul.attr("role"), "listbox");
         });
 
+        it("ListView adds role list when not navigatable and selectable", function() {
+            var ul = setup({ navigatable: false, selectable: false });
+
+            assert.equal(ul.attr("role"), "list");
+        });
+
         it("ListView adds aria-multiselectable if selectable=multiple", function() {
             var ul = setup({
                 selectable: "multiple"
@@ -41,6 +47,12 @@
             var ul = setup();
 
             assert.equal(ul.find("li").attr("role"), "option");
+        });
+
+        it("ListView adds role listitem to all child elements when not navigatable and selectable", function() {
+            var ul = setup({ navigatable: false, selectable: false });
+
+            assert.equal(ul.find("li").attr("role"), "listitem");
         });
 
         it("ListView adds aria-selected=false to all child elements", function() {
