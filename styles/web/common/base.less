@@ -548,7 +548,66 @@ html .k-error-colored
     color: inherit;
 }
 
-.k-i-drag-and-drop,
+// Drop Hint
+.k-drop-hint {
+    display: flex;
+    gap: @drop-hint-arrow-spacing;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+
+.k-drop-hint-start,
+.k-drop-hint-end {
+    flex-shrink: 0;
+    border-width: (@drop-hint-arrow-size / 2);
+    border-style: solid;
+    border-color: transparent;
+}
+
+.k-drop-hint-line {
+    flex-grow: 1;
+}
+
+.k-drop-hint-h {
+    .k-drop-hint-start {
+        border-left-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-right-width: 0;
+    }
+
+    .k-drop-hint-line {
+        width: @drop-hint-line-h-width;
+        height: @drop-hint-line-h-height;
+    }
+
+    .k-drop-hint-end {
+        border-right-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-left-width: 0;
+    }
+}
+
+.k-drop-hint-v {
+    flex-direction: column;
+
+    .k-drop-hint-start {
+        border-top-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-bottom-width: 0;
+    }
+
+    .k-drop-hint-line {
+        width: @drop-hint-line-v-width;
+        height: @drop-hint-line-v-height;
+    }
+
+    .k-drop-hint-end {
+        border-bottom-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-top-width: 0;
+    }
+}
+
+
 .k-column-menu .k-sprite,
 .k-grid-mobile .k-resize-handle-inner:before,
 .k-grid-mobile .k-resize-handle-inner:after,

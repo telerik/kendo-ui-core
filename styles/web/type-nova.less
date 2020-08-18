@@ -1510,7 +1510,7 @@ input.k-textbox:active {
 }
 
 .k-filter-menu .k-primary,
-.k-edit-form-container .k-primary {
+.k-edit-form-container :not(.k-button-group) > .k-primary {
     color: @accent;
 }
 
@@ -1625,6 +1625,32 @@ input.k-textbox:active {
     }
 
 }
+
+// Drop Hint
+.k-drop-hint-line {
+    background-color: @accent;
+}
+
+.k-drop-hint-h {
+    .k-drop-hint-start {
+        border-left-color: @accent;
+    }
+
+    .k-drop-hint-end {
+        border-right-color: @accent;
+    }
+}
+
+.k-drop-hint-v {
+    .k-drop-hint-start {
+        border-top-color: @accent;
+    }
+
+    .k-drop-hint-end {
+        border-bottom-color: @accent;
+    }
+}
+
 
 
 // Scheduler
