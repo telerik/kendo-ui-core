@@ -112,5 +112,4 @@ Forms can be defined with the Wizard configuration (the build-in Form integratio
 ## See Also
 
 * [Basic Usage of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/index)
-* [Using the API of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/api)
 * [Configure the Content of the Wizard HtmlHelper for {{ site.framework }} ]({% slug htmlhelpers_wizard_aspnetcore_content %})
