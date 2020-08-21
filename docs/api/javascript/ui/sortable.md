@@ -321,8 +321,6 @@ The item will also be activated by pressing, holding and lifting the finger with
 
 Selector that determines which elements inside the sorted item's container will be ignored. *Useful if the sortable item contains input elements.*
 
-> **Important** The `ignore` option is available in the latest internal build! This feature is **not** included in Q1 2014 (v2014.1.318).
-
 #### Example - Sortable widget with input elements
 
     <ul id="sortable">

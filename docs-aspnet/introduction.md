@@ -114,12 +114,12 @@ For any issues you might encounter while working with {{ site.product_short }}, 
 ## Learning Resources
 
 {% if site.core %} 
-* [Virtual Classroom](https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core)
+* [Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/8/telerik-ui-for-aspnet-core)
 * [Knowledge Base](https://docs.telerik.com/aspnet-core/knowledge-base.html)
 * [Support Resources Hub Page](https://www.telerik.com/support/aspnet-core)
 * [Collected Examples on Telerik UI for ASP.NET Core](https://github.com/telerik/ui-for-aspnet-core-examples)
 {% else %}
-* [Virtual Classroom](https://progress.exceedlms.com/student/path/498054-telerik-ui-for-asp-net-mvc)
+* [Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/3/telerik-ui-for-aspnet-mvc)
 * [Tutorials]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Support Resources Hub Page](https://www.telerik.com/support/aspnet-mvc)
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)

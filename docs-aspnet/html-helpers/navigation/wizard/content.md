@@ -100,4 +100,3 @@ The content of each Wizard step can be specified via the Wizard Step `Content` o
 ## See Also
 
 * [Basic Usage of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/index)
-* [Using the API of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/api)

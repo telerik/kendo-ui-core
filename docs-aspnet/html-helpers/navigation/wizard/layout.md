@@ -50,4 +50,3 @@ The following example demonstrates how to initialize a Wizard with a vertical St
 ## See Also
 
 * [Basic Usage of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/index)
-* [Using the API of the Wizard HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/wizard/api)
