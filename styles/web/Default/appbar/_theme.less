@@ -1,0 +1,18 @@
+.k-appbar {
+    .box-shadow(@appbar-box-shadow);
+
+    &.k-appbar-bottom {
+        .box-shadow(@appbar-bottom-box-shadow);
+    }
+}
+
+// AppBar theme colors
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-appbar-@{name} {
+        color: contrast( @value );
+        background-color: @value;
+    }
+});
