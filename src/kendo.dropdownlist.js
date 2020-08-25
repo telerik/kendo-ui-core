@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         DEFAULT = "k-state-default",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         CLICKEVENTS = "click" + ns + " touchend" + ns,
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         TABINDEX = "tabindex",
@@ -662,6 +663,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .attr(TABINDEX, wrapper.data(TABINDEX))
                     .attr(ARIA_DISABLED, false)
+                    .attr(ARIA_READONLY, false)
                     .on("keydown" + ns, that, proxy(that._keydown, that))
                     .on(kendo.support.mousedown + ns, proxy(that._wrapperMousedown, that))
                     .on("paste" + ns, proxy(that._filterPaste, that));
@@ -688,7 +690,8 @@ var __meta__ = { // jshint ignore:line
             element.attr(DISABLED, disable)
                    .attr(READONLY, readonly);
 
-            wrapper.attr(ARIA_DISABLED, disable);
+            wrapper.attr(ARIA_DISABLED, disable)
+                    .attr(ARIA_READONLY, readonly);
         },
 
         _keydown: function(e) {

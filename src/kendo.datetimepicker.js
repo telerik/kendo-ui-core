@@ -46,6 +46,7 @@ var __meta__ = { // jshint ignore:line
         ARIA_HIDDEN = "aria-hidden",
         ARIA_OWNS = "aria-owns",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         DATE = Date,
         MIN = new DATE(1800, 0, 1),
         MAX = new DATE(2099, 11, 31),
@@ -260,6 +261,7 @@ var __meta__ = { // jshint ignore:line
                     element[0].removeAttribute(DISABLED);
                     element[0].removeAttribute(READONLY, false);
                     element[0].removeAttribute(ARIA_DISABLED, false);
+                    element[0].removeAttribute(ARIA_READONLY, false);
                 }
                 element.on("keydown" + ns, $.proxy(that._keydown, that))
                        .on("focus" + ns, function() {
@@ -299,7 +301,8 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable);
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 

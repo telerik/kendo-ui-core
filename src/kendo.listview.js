@@ -31,7 +31,7 @@ var __meta__ = { // jshint ignore:line
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
         EMPTY_STRING = "",
-        FOCUSSELECTOR =  ".k-listview-content > *:not(.k-loading-mask)",
+        FOCUSSELECTOR = "> *:not(.k-loading-mask)",
         PROGRESS = "progress",
         ERROR = "error",
         FOCUSED = "k-state-focused",
@@ -111,6 +111,7 @@ var __meta__ = { // jshint ignore:line
             altTemplate: EMPTY_STRING,
             editTemplate: EMPTY_STRING,
             contentTemplate: "<div data-content='true' />",
+            contentElement: "div",
             bordered: true,
             borders: "",
             layout: "",
@@ -214,7 +215,11 @@ var __meta__ = { // jshint ignore:line
                 this.element.attr("role", "list");
             }
 
-            this.content = $("<div />").appendTo(this.element);
+            if (options.contentElement) {
+                this.content = $(document.createElement(options.contentElement)).appendTo(this.element);
+            } else {
+                this.content = this.element;
+            }
 
             if (height) {
                 this.element.css("height", height);
@@ -422,7 +427,7 @@ var __meta__ = { // jshint ignore:line
                 that.selectable = new kendo.ui.Selectable(that.element, {
                     aria: true,
                     multiple: multi,
-                    filter: FOCUSSELECTOR,
+                    filter: that.options.contentElement ? ".k-listview-content " + FOCUSSELECTOR : FOCUSSELECTOR,
                     change: function() {
                         that.trigger(CHANGE);
                     }
@@ -688,7 +693,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     });
 
-                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, FOCUSSELECTOR, proxy(clickCallback, that));
+                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, that.options.contentElement ? ".k-listview-content " + FOCUSSELECTOR : FOCUSSELECTOR, proxy(clickCallback, that));
             }
         },
 

@@ -43,6 +43,14 @@
             dom.remove();
         });
 
+        it("when contentElement is an empty string content wrapper is not rendered", function() {
+            var dom = setup({
+                contentElement: ''
+            });
+
+            assert.equal(dom.find(".k-listview-content").length, 0);
+        });
+
         it("kendoListView attaches listView to element", function() {
             var dom = setup();
 
@@ -125,6 +133,12 @@
 
             assert.equal(dom.children(".k-listview-content").children().eq(0).html(), "1");
             assert.equal(dom.children(".k-listview-content").children().eq(1).html(), "2");
+        });
+
+        it("contentElement is rendered correctly", function() {
+            var dom = setup({ contentElement:"ul", template: "<li>1</li>", altTemplate: "<li>2</li>"});
+
+            assert.equal(dom.find(".k-listview-content")[0].nodeName.toLocaleLowerCase(), "ul");
         });
 
         it("progress mask is shown when request starts", function() {

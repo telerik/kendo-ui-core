@@ -41,6 +41,7 @@ var __meta__ = { // jshint ignore:line
         SELECT = "select",
         DESELECT = "deselect",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         FOCUSEDCLASS = "k-state-focused",
         SELECTEDCLASS = "k-state-selected",
         HIDDENCLASS = "k-hidden",
@@ -506,7 +507,8 @@ var __meta__ = { // jshint ignore:line
                 that._clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false);
+                     .attr(ARIA_DISABLED, false)
+                     .attr(ARIA_READONLY, false);
 
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
@@ -519,7 +521,8 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable);
+                     .attr(ARIA_DISABLED, disable)
+                     .attr(ARIA_READONLY, readonly);
             }
         },
 

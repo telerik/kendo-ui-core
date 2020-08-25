@@ -52,6 +52,10 @@ Renders border around the listview items. Valid values are:
 
 > Note: in order for the property to work, set `k-listview-item` class name to listview items in your template.
 
+### contentElement `String` *(default: 'div')*
+
+Defines the type of element that holds the listview content.
+
 ### dataSource `Object|Array|kendo.data.DataSource`
 
 The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid [kendo.data.DataSource](/api/javascript/data/datasource) configuration, a JavaScript array or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
