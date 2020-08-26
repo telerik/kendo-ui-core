@@ -6,6 +6,10 @@ slug: virtualclass_uiforcore
 position: 20
 ---
 {% if site.core %}
+    {% assign VirtualClassroom = "https://learn.telerik.com/learn/course/internal/view/elearning/8/telerik-ui-for-aspnet-core" %}
+{% else %}
+    {% assign VirtualClassroom = "https://learn.telerik.com/learn/course/internal/view/elearning/3/telerik-ui-for-aspnet-mvc" %}
+{% endif %}
   
 # Online Technical Training
 
@@ -25,15 +29,11 @@ The Telerik UI for ASP.NET Core technical online training has an approximate dur
 
 To get started with the Telerik UI for ASP.NET Core online training, visit our learning portal with all [All-Progress Products Virtual Classroom Courses](https://learn.telerik.com/learn) or jump directly to [Telerik UI for ASP.NET Core Online Training](https://learn.telerik.com/learn/course/external/view/elearning/8/telerik-ui-for-aspnet-core).
 
-{% else %}
-    {% assign VirtualClassroom = "https://learn.telerik.com/learn/course/external/view/elearning/3/telerik-ui-for-aspnet-mvc" %}
-
-
 # Online Technical Training
 
-The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represent a free on-demand technical training program exclusive to active license holders.
+The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represents a free on-demand technical training program exclusive to active license holders.
 
-Each session provides practical knowledge combined with helpful approaches to application development which are suitable for both junior and senior developers.
+Each session provides practical knowledge combined with helpful approaches to application development, which are suitable for both junior and senior developers.
 
 The Online Technical Training program aims at:
 * Empowering your developer productivity.
@@ -47,4 +47,3 @@ The Online Technical Training program aims at:
 To get started with the trainings, refer to:
 * [{{ site.product_short }} Technical Online Training]({{ VirtualClassroom }})
 * [All-Progress Products Online Technical Trainings](https://learn.telerik.com/learn)
-{% endif %}

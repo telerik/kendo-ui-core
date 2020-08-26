@@ -250,6 +250,19 @@ The hint displayed by the widget when it is empty. Not set by default.
     });
     </script>
 
+### selectOnFocus `Boolean`*(default: false)*
+
+ When set to true, the text of the input will be selected after the widget is focused.
+
+#### Example
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        selectOnFocus: true
+    });
+    </script>
+
 ### spinners `Boolean`*(default: true)*
 
  Specifies whether the up and down spin buttons should be rendered
