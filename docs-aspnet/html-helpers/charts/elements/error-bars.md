@@ -5,15 +5,15 @@ description: "Learn how to configure the error bars of Telerik UI Charts, bind t
 slug: htmlhelpers_charts_errorbars_aspnetcore
 ---
 {% if site.core %}
-    {% assign ErrorLowField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorlowfieldsystemstring" %}
-    {% assign ErrorHighField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorhighfieldsystemstring" %}
-    {% assign XErrorLowField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorlowfieldsystemstring" %}
-    {% assign XErrorHighField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorhighfieldsystemstring" %}
-    {% assign YErrorLowField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorlowfieldsystemstring" %}
-    {% assign YErrorHighField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorhighfieldsystemstring" %}
-    {% assign ErrorBarsValue = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#valuesystemstring" %}
-    {% assign ErrorBarsXValue = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#xvaluesystemstring" %}
-    {% assign ErrorBarsYValue = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#yvaluesystemstring" %}
+    {% assign ErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorlowfieldsystemstring" %}
+    {% assign ErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#errorhighfieldsystemstring" %}
+    {% assign XErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorlowfieldsystemstring" %}
+    {% assign XErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#xerrorhighfieldsystemstring" %}
+    {% assign YErrorLowField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorlowfieldsystemstring" %}
+    {% assign YErrorHighField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#yerrorhighfieldsystemstring" %}
+    {% assign ErrorBarsValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#valuesystemstring" %}
+    {% assign ErrorBarsXValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#xvaluesystemstring" %}
+    {% assign ErrorBarsYValue = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesErrorBarsSettingsBuilder#yvaluesystemstring" %}
 {% else %}
     {% assign ErrorLowField = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#lowfieldsystemstring" %}
     {% assign ErrorHighField = "/api/Kendo.Mvc.UI.Fluent/CategoricalErrorBarsBuilder#highfieldsystemstring" %}
