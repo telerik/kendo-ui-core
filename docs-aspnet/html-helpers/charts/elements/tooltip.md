@@ -5,7 +5,7 @@ description: "Learn how to configure the tooltip in Telerik UI Charts, make it v
 slug: htmlhelpers_charts_tooltip_aspnetcore
 ---
 {% if site.core %}
-    {% assign TemplateId = "/api//Kendo.Mvc.UI.Fluent/ChartAxisDefaultsCrosshairTooltipSettingsBuilder#templateidsystemstring" %}
+    {% assign TemplateId = "/api/Kendo.Mvc.UI.Fluent/ChartAxisDefaultsCrosshairTooltipSettingsBuilder#templateidsystemstring" %}
 {% else %}
     {% assign TemplateId = "/api/Kendo.Mvc.UI.Fluent/ChartAxisCrosshairTooltipBuilder#templatesystemstring" %}
 {% endif %}
