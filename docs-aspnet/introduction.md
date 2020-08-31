@@ -26,10 +26,10 @@ To read more about the benefits of using {{ site.product }}, please visit the {%
 
 <style>
 /* UI for ASP.NET download trial button */
-div#aspnet_trial {
+div#cta-placeholder {
 	text-align: center !important;
 }
-div#aspnet_trial .aspnet_download_btn {	
+div#cta-placeholder .aspnet_download_btn {	
 	color: #fff;
 	background-color: #e74b3c;
 	padding:.44em .9em .52em;
@@ -48,7 +48,7 @@ div#aspnet_trial .aspnet_download_btn {
 }
 </style>
 
-<div id="aspnet_trial">
+<div id="cta-placeholder">
 <br />
     <a href="https://www.telerik.com/download-trial-file/v2/{{ telerik_product_url }}" class="aspnet_download_btn">Download Free Trial</a>
 </div>
