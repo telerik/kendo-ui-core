@@ -40,7 +40,7 @@ Telerik Document Processing supports [.NET Standard 2.0](https://github.com/dotn
 * `Telerik.Documents.Flow.FormatProviders.Pdf.nupkg`&mdash;The package allows for exporting flow documents, such as `DOCX` and `RTF`, to PDF.
 * `Telerik.Documents.SpreadsheetStreaming.nupkg`&mdash;The main package for generating huge spreadsheet files while using minimum resources.
 * `Telerik.Documents.Fixed.nupkg`&mdash;The package is required when processing PDF documents.
-* `Telerik.Documents.CMapUtils.nupkg`&mdash;This package provides you with access to predefined CMap tables. It is optional an you will need it only if you have to work with documents that contain CMap tables.
+* `Telerik.Documents.CMapUtils.nupkg`&mdash;This package provides you with access to predefined CMap tables. It is optional an you will need it only if you have to work with documents that contain [CMap tables](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/concepts/cmaps).
 * `Telerik.Documents.ImageUtils.nupkg`&mdash;To export images different than Jpeg and Jpeg2000 or ImageQuality different than High you will need to add a reference to this package. Depends on [Magick.NET](https://github.com/dlemstra/Magick.NET).
 * `Telerik.Documents.Spreadsheet.nupkg`&mdash;The main assembly for the spreadsheet processing. It is needed for processing XLSX, XLS, CSV, TXT documents.
 * `Telerik.Documents.Spreadsheet.FormatProviders.OpenXml.nupkg`&mdash;Allows import/export of spreadsheet document model from/to XLSX.
