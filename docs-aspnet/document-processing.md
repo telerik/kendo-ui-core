@@ -55,6 +55,7 @@ Telerik Document Processing supports [.NET Standard 2.0](https://github.com/dotn
 Telerik Document Processing is available as part of the following suites:
 
 * DevCraft
+* Telerik UI for Blazor
 * Telerik UI for ASP.NET AJAX
 * Telerik UI for ASP.NET MVC
 * Telerik UI for ASP.NET Core
