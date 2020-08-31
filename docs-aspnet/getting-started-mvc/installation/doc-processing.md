@@ -49,6 +49,7 @@ Telerik Document Processing supports [.NET Framework 4.0](https://dotnet.microso
 * `Telerik.Windows.Documents.Fixed.dll`&mdash;The assembly is required when processing PDF documents.* `Telerik.Windows.Documents.Spreadsheet.dll`&mdash;The main assembly for spreadsheet processing. Required when processing `XLSX`, `CSV`, and `TXT` documents.
 * `Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll`&mdash;The assembly is required when processing `XLSX` documents.
 * `Telerik.Windows.Documents.Fixed.dll`&mdash;The assembly is required when processing PDF documents.
+* `Telerik.Windows.Documents.CMapUtils.dll`&mdash;Provides a default implementation for getting the data of a predefined CMap table by a given name. The assembly is optional and you will need to include a reference to it only if you need to process documents with [CMap tables](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/concepts/cmaps).
 * `Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll`&mdash;The assembly is required when processing PDF documents.
 * `Telerik.Windows.Zip.dll`&mdash;The assembly of the [**Telerik Zip Library**](https://demos.telerik.com/aspnet-ajax/ziplibrary/examples/overview/defaultcs.aspx). Required when working with zipped formats, such as `DOCX` and `XLSX`, and PDF.
 * `Telerik.Windows.Zip.Extensions.dll`&mdash;The assembly extends `Telerik.Windows.Zip` with additional helper methods (Zip Extensions).
