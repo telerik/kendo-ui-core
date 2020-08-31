@@ -19,11 +19,11 @@ To read more about the benefits of using Kendo UI for jQuery, please visit the [
 
 <style>
 /* Kendo UI for jQuery download trial button */
-div#kendo_trial {
+div#cta-placeholder {
 	text-align: center !important;
 }
 
-div#kendo_trial .kendo_download_btn {	
+div#cta-placeholder .kendo_download_btn {	
 	color: #fff;
 	background-color: #e74b3c;
 	padding:.44em .9em .52em;
@@ -60,7 +60,7 @@ div#kendo_trial .kendo_download_btn {
 
 </script>
 
-<div id="kendo_trial">
+<div id="cta-placeholder">
 <br />
 <a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnWin" style="display: none">Download Free Trial</a>
 <a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnOSX" style="display: none">Download Free Trial</a>
