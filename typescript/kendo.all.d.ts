@@ -4261,19 +4261,35 @@ declare namespace kendo.ui {
     interface FormOptions {
         name?: string;
         orientation?: string | "horizontal" | "vertical";
+        focusFirst?: boolean;
+        formatLabel?: Function;
         buttonsTemplate?: string|Function;
         items?: FormItem[];
         formData?: FormData;
+        layout?: string | "grid";
+        grid?: FormGridOptions;
         validatable?: FormValidatable;
 
         change?(e: FormChangeEvent): void;
         validate?(e: FormValidateEvent): void;
         validateField?(e: FormValidateFieldEvent): void;
         submit?(e: FormSubmitEvent): void;
+        clear?(e: FormClearEvent): void;
     }
 
     interface FormData {
         [key: string]: any;
+    }
+
+    interface FormItemLabel {
+        text?: string;
+        optional?: boolean;
+        encoded?: boolean;
+    }
+
+    interface FormGridOptions {
+        cols?: string | number;
+        gutter?: string | number;
     }
 
     interface FormItem {
@@ -4281,10 +4297,13 @@ declare namespace kendo.ui {
         type?: string;
         name?: string;
         id?: string;
+        hint?: string;
         title?: string;
+        colSpan?: number;
+        attributes?: any;
         editor?: string|Function;
         editorOptions?: any;
-        label?: string;
+        label?: string | FormItemLabel;
         validation?: any;
         items?: FormItem[];
     }
@@ -4322,6 +4341,9 @@ declare namespace kendo.ui {
 
     interface FormSubmitEvent extends FormEvent {
         model?: kendo.data.Model;
+    }
+
+    interface FormClearEvent extends FormEvent {
     }
 
 
