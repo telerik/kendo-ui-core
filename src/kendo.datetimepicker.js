@@ -174,7 +174,8 @@ var __meta__ = { // jshint ignore:line
                 date: "Date",
                 time: "Time",
                 today: "Today"
-            }
+            },
+            componentType: "classic"
         },
 
         events: [

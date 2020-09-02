@@ -712,6 +712,8 @@ declare namespace kendo.data {
         title: string;
         start: Date;
         end: Date;
+        plannedStart: Date;
+        plannedEnd: Date;
         percentComplete: number;
         summary: boolean;
         expanded: boolean;
@@ -4396,13 +4398,32 @@ declare namespace kendo.ui {
         dataValueField?: string;
     }
 
+    interface GanttColumnFilterable {
+        ui?: string|Function;
+    }
+
+    interface GanttColumnSortable {
+        compare?: Function;
+    }
+
     interface GanttColumn {
-        field?: string;
-        title?: string;
-        format?: string;
-        width?: string|number;
+        attributes?: any;
+        columns?: any;
         editable?: boolean;
-        sortable?: boolean;
+        editor?: Function;
+        expandable?: boolean;
+        field?: string;
+        filterable?: boolean | GanttColumnFilterable;
+        format?: string;
+        headerAttributes?: any;
+        headerTemplate?: string|Function;
+        hidden?: boolean;
+        menu?: boolean;
+        minScreenWidth?: number;
+        sortable?: boolean | GanttColumnSortable;
+        template?: string|Function;
+        title?: string;
+        width?: string|number;
     }
 
     interface GanttCurrentTimeMarker {
@@ -4421,6 +4442,7 @@ declare namespace kendo.ui {
         resize?: boolean;
         template?: string|Function;
         update?: boolean;
+        plannedTasks?: boolean;
     }
 
     interface GanttMessagesActions {
@@ -4436,12 +4458,24 @@ declare namespace kendo.ui {
         editorTitle?: string;
         end?: string;
         percentComplete?: string;
+        plannedEnd?: string;
+        plannedStart?: string;
         resources?: string;
         resourcesEditorTitle?: string;
         resourcesHeader?: string;
         start?: string;
         title?: string;
         unitsHeader?: string;
+    }
+
+    interface GanttMessagesPlannedTasks {
+        switchText?: string;
+        offsetTooltipAdvanced?: string;
+        offsetTooltipDelay?: string;
+        seconds?: string;
+        minutes?: string;
+        hours?: string;
+        days?: string;
     }
 
     interface GanttMessagesViews {
@@ -4462,6 +4496,7 @@ declare namespace kendo.ui {
         deleteTaskWindowTitle?: string;
         destroy?: string;
         editor?: GanttMessagesEditor;
+        plannedTasks?: GanttMessagesPlannedTasks;
         save?: string;
         views?: GanttMessagesViews;
     }
@@ -4538,12 +4573,15 @@ declare namespace kendo.ui {
         assignments?: GanttAssignments;
         autoBind?: boolean;
         columnResizeHandleWidth?: number;
+        columnMenu?: boolean|any;
         columns?: GanttColumn[];
         currentTimeMarker?: boolean | GanttCurrentTimeMarker;
         dataSource?: any|any|kendo.data.GanttDataSource;
         date?: Date;
         dependencies?: any|any|kendo.data.GanttDependencyDataSource;
         editable?: boolean | GanttEditable;
+        filterable?: boolean|any;
+        reorderable?: boolean;
         navigatable?: boolean;
         workDayStart?: Date;
         workDayEnd?: Date;

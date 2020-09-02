@@ -405,12 +405,23 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
     "editorTitle": "Задача",
     "end": "Край",
     "percentComplete": "Завършено",
+    "plannedStart": "Планирано начало",
+    "plannedEnd": "Планиран край",
     "resources": "Ресурси",
     "resourcesEditorTitle": "Ресурси",
     "resourcesHeader": "Ресурси",
     "start": "Начало",
     "title": "Заглавие",
     "unitsHeader": "Единици"
+  },
+  "plannedTasks": {
+    "switchText": "Планирана задача",
+    "offsetTooltipAdvanced": "Изпълнена предварително",
+    "offsetTooltipDelay": "Закъснение",
+    "seconds": "секунди",
+    "minutes": "минути",
+    "hours": "часa",
+    "days": "дни"
   },
   "save": "Запази",
   "views": {

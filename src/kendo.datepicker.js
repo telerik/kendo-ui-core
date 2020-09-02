@@ -405,7 +405,8 @@ var __meta__ = { // jshint ignore:line
             disableDates: null,
             ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#',
             dateInput: false,
-            weekNumber: false
+            weekNumber: false,
+            componentType: "classic"
         },
 
         setOptions: function(options) {

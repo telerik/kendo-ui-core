@@ -1357,7 +1357,8 @@ var __meta__ = { // jshint ignore:line
                 second: "second",
                 millisecond: "millisecond",
                 now: "Now"
-            }
+            },
+            componentType: "classic"
         },
 
         events: [

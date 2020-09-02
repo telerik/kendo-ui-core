@@ -224,7 +224,8 @@ var __meta__ = { // jshint ignore:line
             messages: {
                 weekColumnHeader: "",
                 today: "Today"
-            }
+            },
+            componentType: "classic"
         },
 
         events: [

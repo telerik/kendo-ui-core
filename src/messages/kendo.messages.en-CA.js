@@ -333,12 +333,23 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
     "editorTitle": "Task",
     "end": "End",
     "percentComplete": "Complete",
+    "plannedStart": "Planned Start",
+    "plannedEnd": "Planned End",
     "resources": "Resources",
     "resourcesEditorTitle": "Resources",
     "resourcesHeader": "Resources",
     "start": "Start",
     "title": "Title",
     "unitsHeader": "Units"
+  },
+  "plannedTasks": {
+    "switchText": "Planned Tasks",
+    "offsetTooltipAdvanced": "Met deadline earlier",
+    "offsetTooltipDelay": "Delay",
+    "seconds": "seconds",
+    "minutes": "minutes",
+    "hours": "hours",
+    "days": "days"
   },
   "save": "Save",
   "views": {
