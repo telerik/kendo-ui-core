@@ -8,7 +8,7 @@ position: 2
 
 # Selection
 
-The Rating allows to control the selection behavior of the items by configuring the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property:
+The Rating allows to control the selection behavior of the items by configuring the [`Selection`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property:
 
 * single - allows selecting a single item.
 
@@ -16,7 +16,7 @@ The Rating allows to control the selection behavior of the items by configuring 
 
 ## Continuous Selection
 
-This is the default selection behavior of the Rating. If not configured, the widget will automatically set the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"continuous"`:
+This is the default selection behavior of the Rating. If not configured, the widget will automatically set the [`Selection`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"continuous"`:
 
 ```tagHelper
     <kendo-rating name="rating" selection="continuous"></kendo-rating>
@@ -24,7 +24,7 @@ This is the default selection behavior of the Rating. If not configured, the wid
 
 ## Single Selection
 
-Single selection can be configured by setting the [`Selection`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"single"`:
+Single selection can be configured by setting the [`Selection`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"single"`:
 
 ```tagHelper
     <kendo-rating name="rating" min="1" max="6" value="3" selection="single"></kendo-rating>

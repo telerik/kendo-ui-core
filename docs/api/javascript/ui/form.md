@@ -154,6 +154,10 @@ Defines the text of the label.
 
 Specifies if the field is optional by rendering additional text next to the label.
 
+### items.label.encoded `Boolean` *(default: true)*
+
+Specifies if the label text will HTML-encoded before it is displayed. If set to `false` the label text will be displayed as is.
+
 ### items.id `String`
 
 Defines the field id.

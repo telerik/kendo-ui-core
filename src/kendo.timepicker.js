@@ -42,6 +42,7 @@ var __meta__ = { // jshint ignore:line
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ID = "id",
         isArray = $.isArray,
@@ -701,19 +702,15 @@ var __meta__ = { // jshint ignore:line
 
         _listScrollHandler: function (e) {
             var that = this;
-            var itemHeight = Math.floor($(e.currentTarget).find(".k-item:visible:eq(0)").outerHeight());
+            var itemHeight = $(e.currentTarget).find(".k-item:visible:eq(0)")[0].getBoundingClientRect().height;
 
             if (that._scrollingTimeout) {
                 clearTimeout(that._scrollingTimeout);
             }
 
             that._scrollingTimeout = setTimeout(function () {
-                if (e.currentTarget.scrollTop % itemHeight !== 0) {
-                    if (e.currentTarget.scrollTop > that._scrollTop) {
-                        e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                    } else {
-                        e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                    }
+                if (e.currentTarget.scrollTop % itemHeight > 1) {
+                    e.currentTarget.scrollTop += itemHeight - e.currentTarget.scrollTop % itemHeight;
                 }
                 that._scrollTop = e.currentTarget.scrollTop;
                 that._updateRanges();
@@ -1360,7 +1357,8 @@ var __meta__ = { // jshint ignore:line
                 second: "second",
                 millisecond: "millisecond",
                 now: "Now"
-            }
+            },
+            componentType: "classic"
         },
 
         events: [
@@ -1427,6 +1425,7 @@ var __meta__ = { // jshint ignore:line
                     element[0].removeAttribute(READONLY);
                 }
                 element.attr(ARIA_DISABLED, false)
+                       .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -1445,7 +1444,8 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable);
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 

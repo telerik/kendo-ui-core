@@ -3,7 +3,7 @@ title: Column Menu
 page_title: jQuery Grid Documentation | Column Menu | Kendo UI
 description: "Get started with the jQuery Grid by Kendo UI and learn how to modify its column widths."
 slug: columnmenu_kendoui_grid_widget
-position: 4
+position: 5
 ---
 
 # Column Menu

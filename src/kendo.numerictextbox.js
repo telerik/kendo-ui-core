@@ -102,6 +102,7 @@ var __meta__ = { // jshint ignore:line
                          that._toggleText(false);
                          element.focus();
                      }
+                     that.selectValue();
                  });
              }
 
@@ -437,11 +438,14 @@ var __meta__ = { // jshint ignore:line
                 that._focusin();
 
                 caret(that.element[0], caretPosition);
-
-                if (that.options.selectOnFocus) {
-                    that.element[0].select();
-                }
+                that.selectValue();
             });
+        },
+
+        selectValue: function(){
+            if (this.options.selectOnFocus) {
+                this.element[0].select();
+            }
         },
 
         _change: function(value) {

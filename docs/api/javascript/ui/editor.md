@@ -1837,6 +1837,14 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
+
 ### pdf.keywords `String` *(default: null)*
 
 Specifies the keywords of the exported PDF file.

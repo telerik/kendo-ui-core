@@ -7,7 +7,7 @@ slug: overview_tilelayout_uiforjsp
 
 # TileLayout JSP Tag Overview
 
-The TileLayout JSP tag is a server-side wrapper for the [Kendo UI TileLayout](/api/javascript/ui/tilelayout) widget.
+The TileLayout JSP tag is a server-side wrapper for the [Kendo UI TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index) widget.
 
 The Kendo UI TileLayout widget allows you configure a two-dimensional grid-based sandbox surface to display content in tiles which can be dragged around and rearranged to create any modern page design.
 

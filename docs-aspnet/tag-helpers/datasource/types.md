@@ -17,7 +17,9 @@ The available DataSource types of data binding are:
 
 ## Ajax DataSource
 
-You have to set the server operations together by using the `server-operation` property. This approach is also applicable for the WebAPI type of binding.
+Use the `server-operation` property to enable or disable server operations:
+* When enabled, all data operations like paging, sorting, grouping, etc. will be performed server-side. 
+* When disabled, all data operations will be performed on the client, and the entire data set will be available for the DataSource. This approach is also applicable for the WebAPI type of binding.
 
     <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
         <transport>

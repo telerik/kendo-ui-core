@@ -543,6 +543,17 @@
 @radio-list-horizontal-item-margin-x: 32px;
 
 
+// Drop Hint
+@equilateral-index: 1.7320508076;
+
+@drop-hint-arrow-size: 8px;
+@drop-hint-arrow-spacing: (@drop-hint-arrow-size / 2);
+@drop-hint-line-h-width: 20px;
+@drop-hint-line-h-height: 1px;
+@drop-hint-line-v-width: @drop-hint-line-h-height;
+@drop-hint-line-v-height: @drop-hint-line-h-width;
+
+
 // Listview
 @listview-padding-x: 8px;
 @listview-padding-y: 4px;
@@ -646,5 +657,57 @@
 @wizard-content-padding-y: @wizard-content-padding-x;
 
 @wizard-buttons-margin-x: @wizard-spacer;
+
+
+// TextArea
+@textarea-default-width: 18em;
+@textarea-border-width: @input-border-width;
+@textarea-padding-x: 8px;
+@textarea-padding-y: 4px;
+@textarea-font-family: inherit;
+@textarea-font-size: 14px;
+@textarea-line-height: (20 / 14);
+@textarea-calc-height: calc( (@textarea-line-height * 1em) + (@textarea-padding-y * 2) + (@textarea-border-width * 2) );
+
+
+// Appbar
+@appbar-padding-y: 4px;
+@appbar-padding-x: 16px;
+@appbar-border-width: 0px;
+
+@appbar-font-size: inherit;
+@appbar-line-height: @line-height;
+@appbar-font-family: inherit;
+@appbar-gap: 4px;
+
+
+// Loader
+@loader-segment-border-radius: 50%;
+@loader-segment-size-sm: 6px;
+@loader-segment-size-md: 10px;
+@loader-segment-size-lg: 20px;
+
+@loader-padding-sm: calc( @loader-segment-size-sm / 2 );
+@loader-padding-md: calc( @loader-segment-size-md / 2 );
+@loader-padding-lg: calc( @loader-segment-size-lg / 2 );
+
+@loader-pulsing-2-segment-margin-x-sm: 1.5px;
+@loader-pulsing-2-segment-margin-x-md: 2.5px;
+@loader-pulsing-2-segment-margin-x-lg: 5px;
+
+@loader-spinner-3-width-sm: calc( @loader-segment-size-sm * 4 );
+@loader-spinner-3-height-sm: 20px;
+@loader-spinner-3-width-md: calc( @loader-segment-size-md * 4 );
+@loader-spinner-3-height-md: 34px;
+@loader-spinner-3-width-lg: calc( @loader-segment-size-lg * 4 );
+@loader-spinner-3-height-lg: 65px;
+
+@loader-spinner-4-width-sm: calc( @loader-segment-size-sm * 4 );
+@loader-spinner-4-height-sm: @loader-spinner-4-width-sm;
+@loader-spinner-4-width-md: calc( @loader-segment-size-md * 4 );
+@loader-spinner-4-height-md: @loader-spinner-4-width-md;
+@loader-spinner-4-width-lg: calc( @loader-segment-size-lg * 4 );
+@loader-spinner-4-height-lg: @loader-spinner-4-width-lg;
+
 
 @import "common/all.less";

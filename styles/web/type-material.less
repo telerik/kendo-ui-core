@@ -310,6 +310,9 @@
 @grid-selected-border: @grid-border;
 @grid-selected-gradient: null;
 
+@grid-sticky-border: contrast(@background, lighten(@grid-border, 30%), darken(@grid-border, 30%), 0.5);
+
+@grid-selected-hover-bg: darken(@selected-background, 4%);
 
 // Calendar
 @calendar-bg: @component-bg;
@@ -798,6 +801,37 @@
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
 
 
+// Textarea
+@textarea-bg: @input-bg;
+@textarea-text: @input-text;
+@textarea-border: @input-border;
+@textarea-shadow: @input-shadow;
+
+@textarea-hovered-text: @input-hovered-text;
+@textarea-hovered-bg: @input-hovered-bg;
+@textarea-hovered-border: @input-hovered-border;
+@textarea-hovered-shadow: @input-hovered-shadow;
+
+@textarea-focused-text: @input-focused-text;
+@textarea-focused-bg: @input-focused-bg;
+@textarea-focused-border: @input-focused-border;
+@textarea-focused-shadow: @input-focused-shadow;
+
+@textarea-placeholder-text: rgba( @input-text, .5 );
+@textarea-placeholder-opacity: 1;
+
+@textarea-selected-text: contrast(@accent);
+@textarea-selected-bg: @accent;
+
+@textarea-invalid-border: rgba( @error, .5 );;
+@textarea-invalid-shadow: 0 0 0 1px @error;
+
+
+// Appbar
+@appbar-box-shadow: 0px 2px 3px rgba(0, 0, 0, .24);
+@appbar-bottom-box-shadow:  0px -2px 3px rgba(0, 0, 0, .24);
+
+
 // Kendo skin
 
 @theme-name: ~"material";
@@ -833,6 +867,10 @@
 @import "Default/forms/_theme.less";
 @import "Default/tooltip/_theme.less";
 @import "Default/wizard/_theme.less";
+@import "Default/textarea/_theme.less";
+@import "Default/appbar/_theme.less";
+@import "Default/loader/_theme.less";
+
 
 .k-in,
 .k-item
@@ -957,7 +995,6 @@ td.k-group-cell,
 }
 
 .k-textbox,
-.k-textarea,
 .k-autocomplete.k-header,
 .k-dropdown-wrap.k-state-active,
 .k-picker-wrap.k-state-active,
@@ -981,9 +1018,7 @@ td.k-group-cell,
 
 .k-input,
 .k-textbox,
-.k-textarea,
 .k-textbox > input,
-.k-textarea > textarea,
 .k-multiselect-wrap {
     background-color: @input-bg;
     color: @input-text;
@@ -1103,6 +1138,32 @@ td.k-group-cell,
     background-color: @draghandle-hover-background-color;
     .box-shadow(@draghandle-hover-shadow);
 }
+
+// Drop Hint
+.k-drop-hint-line {
+    background-color: @accent;
+}
+
+.k-drop-hint-h {
+    .k-drop-hint-start {
+        border-left-color: @accent;
+    }
+
+    .k-drop-hint-end {
+        border-right-color: @accent;
+    }
+}
+
+.k-drop-hint-v {
+    .k-drop-hint-start {
+        border-top-color: @accent;
+    }
+
+    .k-drop-hint-end {
+        border-bottom-color: @accent;
+    }
+}
+
 
 // Scheduler
 
@@ -1650,8 +1711,7 @@ div.k-filebrowser-dropzone em
     border-color: @widget-border-color;
 }
 
-.k-textbox:hover,
-.k-textarea:hover {
+.k-textbox:hover {
     border-color: @hover-border-color;
 }
 
@@ -1688,7 +1748,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-textbox:focus,
-.k-textarea:focus,
 .k-textbox.k-state-focused,
 .k-autocomplete.k-state-focused,
 .k-dropdown-wrap.k-state-focused,
@@ -1786,7 +1845,7 @@ div.k-filebrowser-dropzone em
 .k-gantt .k-treelist .k-alt.k-state-selected:hover,
 .k-gantt .k-treelist .k-alt.k-state-selected:hover td
 {
-    background-color: darken(@selected-background, 4%);
+    background-color: @grid-selected-hover-bg;
 }
 
 .k-task-dot:after
@@ -1858,7 +1917,6 @@ div.k-filebrowser-dropzone em
 // Border radius
 .k-block,
 .k-textbox,
-.k-textarea,
 .k-drag-clue,
 .k-touch-scrollbar,
 .k-inline-block,
@@ -2332,8 +2390,7 @@ span.k-colorpicker {
     background-color: @button-background-color;
 }
 
-.k-textbox,
-.k-textarea {
+.k-textbox {
     background-color: @drop-down-background;
     border-color: @drop-down-border-color;
 }
@@ -2370,7 +2427,6 @@ span.k-colorpicker {
 }
 
 .k-textbox:hover,
-.k-textarea:hover,
 .k-autocomplete.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
@@ -2388,7 +2444,6 @@ span.k-colorpicker {
 }
 
 .k-textbox:focus,
-.k-textarea:focus,
 .k-autocomplete.k-state-focused,
 .k-picker-wrap.k-state-focused,
 .k-numeric-wrap.k-state-focused,
@@ -2407,7 +2462,6 @@ span.k-colorpicker {
 }
 
 .k-textbox:focus,
-.k-textarea:focus,
 .k-autocomplete.k-state-active,
 .k-picker-wrap.k-state-active,
 .k-numeric-wrap.k-state-active,
@@ -2661,7 +2715,7 @@ td.k-group-cell,
 
 .k-grid td.k-state-selected:hover,
 .k-grid tr.k-state-selected:hover td {
-    background-color: darken(@selected-background, 4%);
+    background-color: @grid-selected-hover-bg;
 }
 
 .k-grid-header .k-header .k-link,
@@ -3468,3 +3522,39 @@ table.k-editor {
     }
 }
 
+// Grid Sticky columns
+.k-master-row {
+    .k-grid-content-sticky {
+        background-color: @grid-bg;
+    }
+
+    &.k-alt .k-grid-content-sticky {
+        background-color: @grid-bg;
+    }
+
+    &.k-state-selected .k-grid-content-sticky {
+        .composite-background(@grid-selected-gradient);
+        background-color: @grid-selected-bg;
+        background-position: 50% 50%;
+    }
+
+    &:hover .k-grid-content-sticky,
+    &.k-state-hover .k-grid-content-sticky {
+        .composite-background(@grid-hover-gradient);
+        background-color: @grid-hover-bg;
+    }
+
+    &.k-state-selected:hover .k-grid-content-sticky,
+    &.k-state-selected.k-state-hover .k-grid-content-sticky {
+        background-color: @grid-selected-hover-bg;
+        .composite-background(none);
+    }
+}
+
+.k-grid-header .k-grid-header-sticky,
+.k-master-row .k-grid-content-sticky,
+.k-grouping-row .k-grid-content-sticky,
+.k-footer-template .k-grid-content-sticky {
+    border-left-color: @grid-sticky-border;
+    border-right-color: @grid-sticky-border;
+}

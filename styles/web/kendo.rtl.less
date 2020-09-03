@@ -70,11 +70,6 @@
     right: auto;
 }
 
-.k-rtl .k-datetimepicker .k-picker-wrap .k-icon
-{
-    margin: 0 2px 0 0;
-}
-
 .k-rtl.k-popup > .k-static-header
 {
     text-align: left;
@@ -110,21 +105,6 @@
     }
 }
 
-.k-rtl .k-datetimepicker .k-select
-{
-
-    .k-link-date
-    {
-        margin-right: -.285em;
-        margin-left: auto;
-    }
-
-    .k-link-time
-    {
-        margin-right: .428em;
-        margin-left: -.285em;
-    }
-}
 
 // Calendar
 
@@ -228,12 +208,30 @@
     padding-right: .6em;
 }
 
+.k-rtl .k-grid-header th.k-header,
+.k-rtl .k-filter-row th
+{
+    border-width: 0 1px 1px 0;
+}
+
+.k-rtl .k-grid td {
+    border-width: 0 1px 0 0;
+}
+
 .k-rtl .k-grid-header .k-header:first-child,
 .k-rtl .k-filter-row th:first-child,
 .k-rtl .k-grid tbody td:first-child,
 .k-rtl .k-grid tfoot td:first-child
 {
-    border-left-width: 1px;
+    border-right-width: 0;
+}
+
+.k-rtl .k-grid-header .k-header.k-first,
+.k-rtl .k-filter-row th.k-first,
+.k-rtl .k-grid tbody td.k-first,
+.k-rtl .k-grid tfoot td.k-first
+{
+    border-right-width: 1px;
 }
 
 .k-rtl div.k-grid td.k-hierarchy-cell

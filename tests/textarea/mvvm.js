@@ -305,7 +305,7 @@
 
             kendo.bind(dom);
 
-            assert.equal(dom.data("kendoTextArea")._label[0].innerHTML, "test");
+            assert.equal(dom.data("kendoTextArea")._inputLabel[0].innerHTML, "test");
         });
 
         it("floating label wraps the widget", function() {

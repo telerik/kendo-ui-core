@@ -464,7 +464,7 @@
             listView.edit(listView.content.children().eq(1));
             listView.cancel();
 
-            assert.equal(listView.content.children().eq(1).attr("role"), "option");
+            assert.equal(listView.content.children().eq(1).attr("role"), "listitem");
         });
 
         it("save event is triggered", function() {

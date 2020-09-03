@@ -39,6 +39,9 @@ To add arbitrary fields when binding the TreeView, use the `dataSource` configur
         // Applicable when the item has child nodes.
         expanded: true,
 
+        // Specifies whether the item is initially enabled.
+        enabled: true,
+
         // Specifies whether the item checkbox is initially checked.
         // Applicable for items with checkboxes using the default checkbox template.
         checked: true,

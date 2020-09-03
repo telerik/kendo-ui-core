@@ -1800,7 +1800,7 @@ The supported edit modes are:
           });
       </script>
 
-### editable.move `Boolean` *(default: false)*
+### editable.move `Boolean|Object` *(default: false)*
 
 Enables the drag-and-drop UI of rows between parents.
 
@@ -1834,6 +1834,51 @@ Enables the drag-and-drop UI of rows between parents.
           height: 540,
           editable: {
             move: true
+          },
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
+
+### editable.move.reorderable `Boolean` *(default: false)*
+
+Enables reordering of rows via a drag-and-drop UI.
+
+#### Example - using the drag-and-drop functionality for editing the row parent node
+
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
+          editable: {
+            move: {
+              reorderable: true
+            }
           },
           columns: [
             { field: "FirstName", title: "First Name", width: 220 },
@@ -4244,6 +4289,14 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 

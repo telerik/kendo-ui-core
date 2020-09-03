@@ -4347,7 +4347,13 @@ var __meta__ = { // jshint ignore:line
                     type: "read"
                 });
                 that._fetchingGroupItems = false;
-                group.subgroupCount = data[totalField];
+
+                if (isFunction(totalField)) {
+                    group.subgroupCount = totalField(data);
+                } else {
+                    group.subgroupCount = data[totalField];
+                }
+
                 that.range(skip, take, callback, "expandGroup");
             };
         },

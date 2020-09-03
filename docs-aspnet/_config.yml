@@ -528,6 +528,7 @@ navigation:
         title: "TabStrip"
      "*textarea":
         title: "TextArea"
+        isNew: true
      "*textbox":
         title: "TextBox"
      "*tilelayout":

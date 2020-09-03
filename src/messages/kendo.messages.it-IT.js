@@ -112,6 +112,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "repeat": "Ripeti",
   "daily": {
     "interval": "giorno(i)",
     "repeatEvery": "Ripeti ogni: "

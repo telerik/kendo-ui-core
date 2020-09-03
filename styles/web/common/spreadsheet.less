@@ -455,6 +455,11 @@ textarea.k-spreadsheet-clipboard {
     -webkit-overflow-scrolling: touch;
     position: absolute;
     z-index: 1;
+
+    @media (hover: none), (pointer: coarse) {
+      // on touch devices we want this to stay on top.
+      z-index: 3;
+    }
 }
 
 .k-spreadsheet-fixed-container {

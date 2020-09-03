@@ -25,7 +25,7 @@ To get a table row in the Grid by the ID of the data item:
 
 You can manually add a table row with a user-friendly message when the DataSource does not return any data, for example, as a result of filtering. For more information, refer to the article on [row templates]({% slug row_templates_aspnetcore_grid %}).
 
-The following example demonstrates how to add a table row in the [`DataBound()`](https://docs.telerik.com/{{ site.platform }}/api//Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event handler of the Grid.
+The following example demonstrates how to add a table row in the [`DataBound()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event handler of the Grid.
 
     @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
         .Name("grid")

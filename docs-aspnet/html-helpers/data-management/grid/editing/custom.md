@@ -39,6 +39,10 @@ The following example demonstrates how to use the NumericTextBox as a custom edi
 
 To define a validation rule on the client-side, extend the Kendo UI for jQuery Validator. The Validator is initialized when an item is in edit mode. For a runnable example, refer to the [demo on custom validator editing in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom-validation).
 
+## Editor Templates
+
+Your project may require you to create a custom editor template. For more details, refer to the following [article](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/templates/editor-templates).
+
 ## See Also
 
 * [Custom Editing by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/editing-custom)

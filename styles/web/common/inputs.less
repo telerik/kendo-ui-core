@@ -666,6 +666,10 @@ body .k-datetimepicker .k-select {
         justify-content: center;
     }
 
+    .k-timeselector {
+        outline: none;
+    }
+
     .k-time-tab .k-datetime-selector {
         transform: translateX(-100%);
     }
@@ -675,6 +679,18 @@ body .k-datetimepicker .k-select {
 
         .k-action-buttons {
             margin-bottom: 0;
+        }
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        .k-time-tab {
+
+            .k-datetime-selector {
+                transform: translateX(100%);
+            }
         }
     }
 }
@@ -768,6 +784,13 @@ body .k-datetimepicker .k-select {
     > ul {
         height: auto;
         width: @time-list-width;
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"]  {
+        .hide-scrollbar("left");
     }
 }
 

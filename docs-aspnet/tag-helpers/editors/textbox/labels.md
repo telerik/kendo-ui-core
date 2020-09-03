@@ -46,7 +46,7 @@ The following example demonstrates how to set a Floating Label for a TextBox Tag
 
     <kendo-textbox name="FirstName">
         <textbox-label content="First Name" floating="true" />
-    </kendo-textbox
+    </kendo-textbox>
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 

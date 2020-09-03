@@ -7,11 +7,11 @@ position: 2
 ---
 
 {% if site.core %}
-    {% assign Position = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#positionkendomvcuichartaxislabelsposition" %}
-    {% assign ValueAxis = "/api//Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisbuildert" %}
+    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisbuildert" %}
 {% else %}
-    {% assign Position = "/api//Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
-    {% assign ValueAxis = "/api//Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}
+    {% assign Position = "/api/Kendo.Mvc.UI.Fluent/ChartAxisLabelsBuilder#positionkendomvcuichartaxislabelsposition" %}
+    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}
 {% endif %}
 
 # Categorical Charts

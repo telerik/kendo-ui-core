@@ -19,11 +19,11 @@ To read more about the benefits of using Kendo UI for jQuery, please visit the [
 
 <style>
 /* Kendo UI for jQuery download trial button */
-div#kendo_trial {
+div#cta-placeholder {
 	text-align: center !important;
 }
 
-div#kendo_trial .kendo_download_btn {	
+div#cta-placeholder .kendo_download_btn {	
 	color: #fff;
 	background-color: #e74b3c;
 	padding:.44em .9em .52em;
@@ -60,7 +60,7 @@ div#kendo_trial .kendo_download_btn {
 
 </script>
 
-<div id="kendo_trial">
+<div id="cta-placeholder">
 <br />
 <a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnWin" style="display: none">Download Free Trial</a>
 <a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnOSX" style="display: none">Download Free Trial</a>
@@ -201,7 +201,8 @@ For any issues you might encounter while working with Kendo UI for jQuery, use a
 ## Learning Resources
 
 * [Kendo UI Dojo Interactive Learning Platform](https://dojo.telerik.com/)
-* [Kendo UI for jQuery Virtual Classroom](https://progress.exceedlms.com/student/path/366724-kendo-ui-jquery)
+* [Kendo UI for jQuery Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/23/kendo-ui-for-jquery)
+* [Kendo UI for jQuery with TypeScript Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/22/kendo-ui-for-jquery-with-typescript)
 * [Kendo UI YouTube Channel](https://www.youtube.com/user/kendouiTV)
 * [Other Kendo UI Support and Learning Resources](https://www.telerik.com/support/kendo-ui)
 

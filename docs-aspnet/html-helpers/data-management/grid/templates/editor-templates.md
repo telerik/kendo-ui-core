@@ -59,7 +59,7 @@ Your project may require you to create a custom editor for a specific property. 
             public string EmployeeName { get; set; }
         }
 
-1. Create an editor template for the `Employee` property which will display a Kendo UI for jQuery DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`.
+1. Create an editor template for the `Employee` property. The template will display a Kendo UI for jQuery DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`. In case the Editor Templates folder does not exist, you must add it manually.
 1. Add the DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
         @(Html.Kendo().DropDownList()
