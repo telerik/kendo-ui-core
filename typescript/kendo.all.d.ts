@@ -5114,6 +5114,10 @@ declare namespace kendo.ui {
         endless?: boolean;
     }
 
+    interface GridSearch {
+        fields?: any;
+    }
+
     interface GridSortable {
         allowUnsort?: boolean;
         showIndexes?: boolean;
@@ -5154,6 +5158,7 @@ declare namespace kendo.ui {
         resizable?: boolean;
         rowTemplate?: string|Function;
         scrollable?: boolean | GridScrollable;
+        search?: GridSearch;
         selectable?: boolean|string;
         sortable?: boolean | GridSortable;
         toolbar?: string | Function | (string | GridToolbarItem)[];
@@ -5575,6 +5580,39 @@ declare namespace kendo.ui {
         item?: JQuery;
     }
 
+    class Loader extends kendo.ui.Widget {
+
+        static fn: Loader;
+
+        options: LoaderOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Loader;
+
+        constructor(element: Element, options?: LoaderOptions);
+
+
+        show(): void;
+        hide(): void;
+        setOptions(options: any): void;
+    }
+
+    interface LoaderOptions {
+        name?: string;
+        themeColor?: string;
+        type?: string;
+        size?: string;
+        visible?: boolean;
+    }
+
+    interface LoaderEvent {
+        sender: Loader;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
 
     class MaskedTextBox extends kendo.ui.Widget {
 
@@ -21031,7 +21069,6 @@ declare namespace kendo.mobile.ui {
         button?: kendo.mobile.ui.Button;
     }
 
-
     class Loader extends kendo.mobile.ui.Widget {
 
         static fn: Loader;
@@ -21060,7 +21097,6 @@ declare namespace kendo.mobile.ui {
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
-
 
     class ModalView extends kendo.mobile.ui.Widget {
 
@@ -22917,6 +22953,10 @@ interface JQuery {
     kendoListView(): JQuery;
     kendoListView(options: kendo.ui.ListViewOptions): JQuery;
     data(key: "kendoListView"): kendo.ui.ListView;
+
+    kendoLoader(): JQuery;
+    kendoLoader(options: kendo.ui.LoaderOptions): JQuery;
+    data(key: "kendoLoader"): kendo.ui.Loader;
 
     kendoMap(): JQuery;
     kendoMap(options: kendo.dataviz.ui.MapOptions): JQuery;

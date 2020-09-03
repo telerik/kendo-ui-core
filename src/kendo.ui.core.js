@@ -36,6 +36,7 @@
         "./kendo.colorpicker",
         "./kendo.listview",
         "./kendo.listbox",
+        "./kendo.loader",
         "./kendo.textbox",
         "./kendo.textarea",
         "./kendo.numerictextbox",

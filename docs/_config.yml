@@ -351,7 +351,6 @@ navigation:
     "kendo-in-the-cloud":
         title: "Cloud Integration"
         position: 8
-        isNew: true
     "globalization":
         title: "Globalization"
         position: 9
@@ -520,10 +519,14 @@ navigation:
         title: "AutoComplete"
     "*autocomplete/how-to/input":
         title: "Managing Inputs"
-    "*/badge":
+    "*badge":
         title: "Badge"
-    "*/button":
+    "*button":
         title: "Button"
+    "*buttongroup":
+        title: "ButtonGroup"
+    "*calendar":
+        title: "Calendar"
     "*/radiobutton":
         title: "RadioButton"
     "controls/scheduling/calendar":
@@ -536,8 +539,7 @@ navigation:
         title: "FlatColorPicker"
     "*colorpicker":
         title: "ColorPicker"
-    "*/multicolumncombobox":
-        isNew: true
+    "*multicolumncombobox":
         title: "MultiColumnComboBox"
     "*combobox":
         title: "ComboBox"
@@ -625,6 +627,7 @@ navigation:
     "*tabstrip":
         title: "TabStrip"
     "*textarea":
+        isNew: true
         title: "TextArea"
     "*textbox":
         title: "TextBox"
@@ -1638,7 +1641,7 @@ defaults:
         component: "dropdownlist"
 
 
-        scope:
+    scope:
         path: "controls/editors/editor"
     values:
         component: "editor"
@@ -1872,6 +1875,12 @@ defaults:
 
 -
     scope:
+        path: "controls/editors/textarea"
+    values:
+        component: "textarea"
+
+-
+    scope:
         path: "api/javascript/kendo/methods/template"
     values:
         component: "templates"
@@ -2015,6 +2024,7 @@ intro_columns:
       "Rating": "overview_kendoui_rating_widget"
       "Slider": "overview_kendoui_slider_widget"
       "Switch": "overview_kendoui_switch_widget"
+      "TextArea": "overview_kendoui_textarea_widget"
       "TextBox": "overview_kendoui_textbox_widget"
       "TimePicker": "overview_kendoui_timepicker_widget"
       "Upload": "overview_kendoui_upload_widget"
