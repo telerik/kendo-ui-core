@@ -31,14 +31,14 @@
                 days: {
                     names: ["e diel","e hënë","e martë","e mërkurë","e enjte","e premte","e shtunë"],
                     namesAbbr: ["Die","Hën","Mar","Mër","Enj","Pre","Sht"],
-                    namesShort: ["Die","Hën","Mar","Mër","Enj","Pre","Sht"]
+                    namesShort: ["die","hën","mar","mër","enj","pre","sht"]
                 },
                 months: {
-                    names: ["Janar","Shkurt","Mars","Prill","Maj","Qershor","Korrik","Gusht","Shtator","Tetor","Nëntor","Dhjetor"],
-                    namesAbbr: ["Jan","Shk","Mar","Pri","Maj","Qer","Kor","Gsh","Sht","Tet","Nën","Dhj"]
+                    names: ["janar","shkurt","mars","prill","maj","qershor","korrik","gusht","shtator","tetor","nëntor","dhjetor"],
+                    namesAbbr: ["jan","shk","mar","pri","maj","qer","korr","gush","sht","tet","nën","dhj"]
                 },
-                AM: ["e paradites","e paradites","E PARADITES"],
-                PM: ["e pasdites","e pasdites","E PASDITES"],
+                AM: ["p.d.","p.d.","P.D."],
+                PM: ["m.d.","m.d.","M.D."],
                 patterns: {
                     d: "d.M.yyyy",
                     D: "dddd, d MMMM yyyy",

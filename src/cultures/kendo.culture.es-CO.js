@@ -8,7 +8,7 @@
             ".": ",",
             groupSize: [3],
             percent: {
-                pattern: ["-n%","n%"],
+                pattern: ["-n %","n %"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -19,7 +19,7 @@
                 name: "Colombian Peso",
                 abbr: "COP",
                 pattern: ["-$ n","$ n"],
-                decimals: 0,
+                decimals: 2,
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
@@ -37,8 +37,8 @@
                     names: ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"],
                     namesAbbr: ["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sept.","oct.","nov.","dic."]
                 },
-                AM: ["a.m.","a.m.","A.M."],
-                PM: ["p.m.","p.m.","P.M."],
+                AM: ["a. m.","a. m.","A. M."],
+                PM: ["p. m.","p. m.","P. M."],
                 patterns: {
                     d: "d/MM/yyyy",
                     D: "dddd, d 'de' MMMM 'de' yyyy",

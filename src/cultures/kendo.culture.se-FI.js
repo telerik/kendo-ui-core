@@ -30,7 +30,7 @@
             standard: {
                 days: {
                     names: ["sotnabeaivi","vuossárga","maŋŋebárga","gaskavahkku","duorastat","bearjadat","lávvardat"],
-                    namesAbbr: ["sotn","vuos","maŋ","gask","duor","bear","láv"],
+                    namesAbbr: ["so","má","di","ga","du","be","lá"],
                     namesShort: ["s","v","m","g","d","b","l"]
                 },
                 months: {

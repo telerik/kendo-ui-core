@@ -576,10 +576,10 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "cancel": "Откажи",
   "done": "Готово",
   "settings": "Настройки на колоната",
-  "lock": "Заключи",
-  "unlock": "Отключи",
-  "stick" : "Залепи",
-  "unstick": "Отлепи",
+  "lock": "Заключи колоната",
+  "unlock": "Отключи колоната",
+  "stick" : "Залепи колоната",
+  "unstick": "Отлепи колоната",
   "setColumnPosition": "Задай позиция на колоната"
 });
 }

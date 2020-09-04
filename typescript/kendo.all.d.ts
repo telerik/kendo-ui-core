@@ -1785,6 +1785,43 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class AppBar extends kendo.ui.Widget {
+
+        static fn: AppBar;
+
+        options: AppBarOptions;
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): AppBar;
+
+        constructor(element: Element, options?: AppBarOptions);
+    }
+
+    interface AppBarItem {
+        className?: string;
+        template?: string|Function;
+        type?: string;
+        width?: string|number;
+    }
+
+    interface AppBarOptions {
+        name?: string;
+        themeColor?: string;
+        items?: AppBarItem[];
+        position?: string;
+        positionMode?: string;
+        resize?(e: AppBarResizeEvent): void;
+    }
+
+    interface AppBarEvent {
+        sender: AppBar;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface AppBarResizeEvent extends AppBarEvent {
+    }
 
     class AutoComplete extends kendo.ui.Widget {
 
@@ -22817,6 +22854,10 @@ interface JQuery {
     kendoAlert(): JQuery;
     kendoAlert(options: kendo.ui.AlertOptions): JQuery;
     data(key: "kendoAlert"): kendo.ui.Alert;
+
+    kendoAppBar(): JQuery;
+    kendoAppBar(options: kendo.ui.AppBarOptions): JQuery;
+    data(key: "kendoAppBar"): kendo.ui.AppBar;
 
     kendoArcGauge(): JQuery;
     kendoArcGauge(options: kendo.dataviz.ui.ArcGaugeOptions): JQuery;

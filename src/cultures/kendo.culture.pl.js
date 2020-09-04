@@ -31,7 +31,7 @@
                 days: {
                     names: ["niedziela","poniedziałek","wtorek","środa","czwartek","piątek","sobota"],
                     namesAbbr: ["niedz.","pon.","wt.","śr.","czw.","pt.","sob."],
-                    namesShort: ["niedz.","pon.","wt.","śr.","czw.","pt.","sob."]
+                    namesShort: ["nie","pon","wto","śro","czw","pią","sob"]
                 },
                 months: {
                     names: ["styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień"],

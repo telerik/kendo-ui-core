@@ -37,8 +37,8 @@
                     names: ["Zenâr","Fevrâr","Març","Avrîl","Mai","Jugn","Lui","Avost","Setembar","Otubar","Novembar","Dicembar"],
                     namesAbbr: ["Zen","Fev","Mar","Avr","Mai","Jug","Lui","Avo","Set","Otu","Nov","Dic"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["a.","a.","A."],
+                PM: ["p.","p.","P."],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd d 'di' MMMM 'dal' yyyy",

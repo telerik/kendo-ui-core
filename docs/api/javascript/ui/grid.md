@@ -2913,7 +2913,7 @@ The text message displayed in the menu header (available in mobile mode only).
     });
     </script>
 
-### columnMenu.messages.stick `String` *(default: "Stick")*
+### columnMenu.messages.stick `String` *(default: "Stick Column")*
 
 The text message displayed in the column menu for sticking a column.
 
@@ -2939,7 +2939,7 @@ The text message displayed in the column menu for sticking a column.
     });
     </script>
 
-### columnMenu.messages.unstick `String` *(default: "Unstick")*
+### columnMenu.messages.unstick `String` *(default: "Unstick Column")*
 
 The text message displayed in the column menu for unsticking a column.
 
@@ -2965,7 +2965,7 @@ The text message displayed in the column menu for unsticking a column.
     });
     </script>
 
-### columnMenu.messages.lock `String` *(default: "Lock")*
+### columnMenu.messages.lock `String` *(default: "Lock Column")*
 
 The text message displayed in the column menu for locking a column.
 
@@ -2992,7 +2992,7 @@ The text message displayed in the column menu for locking a column.
     });
     </script>
 
-### columnMenu.messages.unlock `String` *(default: "Unlock")*
+### columnMenu.messages.unlock `String` *(default: "Unlock Column")*
 
 The text message displayed in the column menu for unlocking a column.
 

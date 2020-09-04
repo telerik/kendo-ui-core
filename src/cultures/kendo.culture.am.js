@@ -41,8 +41,8 @@
                 PM: ["ከሰዓት","ከሰዓት","ከሰዓት"],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dddd ፣d MMMM yyyy",
-                    F: "dddd ፣d MMMM yyyy h:mm:ss tt",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd h:mm:ss tt",
                     g: "dd/MM/yyyy h:mm tt",
                     G: "dd/MM/yyyy h:mm:ss tt",
                     m: "MMMM d",

@@ -16,14 +16,14 @@
                 symbol: "%"
             },
             currency: {
-                name: "Peruvian Nuevo Sol",
+                name: "Peruvian Sol",
                 abbr: "PEN",
                 pattern: ["$ -n","$ n"],
                 decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
-                symbol: "S/."
+                symbol: "S/"
             }
         },
         calendars: {

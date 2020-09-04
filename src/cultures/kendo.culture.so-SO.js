@@ -34,11 +34,11 @@
                     namesShort: ["Axd","Isn","Tal","Arb","Kha","Jim","Sab"]
                 },
                 months: {
-                    names: ["Bisha Koobaad","Bisha Labaad","Bisha Saddexaad","Bisha Afraad","Bisha Shanaad","Bisha Lixaad","Bisha Todobaad","Bisha Sideedaad","Bisha Sagaalaad","Bisha Tobnaad","Bisha Kow iyo Tobnaad","Bisha Laba iyo Tobnaad"],
-                    namesAbbr: ["Kob","Lab","Sad","Afr","Sha","Lix","Tod","Sid","Sag","Tob","KIT","LIT"]
+                    names: ["Jannaayo","Febraayo","Maarso","Abriil","May","Juun","Luuliyo","Ogost","Sebtembar","Oktoobar","Nofembar","Desembar"],
+                    namesAbbr: ["Jan","Feb","Mar","Abr","May","Juun","Luuliyo","Og","Seb","Okt","Nof","Des"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["sn.","sn.","SN."],
+                PM: ["gn.","gn.","GN."],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, MMMM dd, yyyy",

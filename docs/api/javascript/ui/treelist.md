@@ -1480,7 +1480,7 @@ The text message that is displayed in the menu header.
       });
     </script>
 
-### columnMenu.messages.lock `String` *(default: "Lock")*
+### columnMenu.messages.lock `String` *(default: "Lock Column")*
 
 The text message that is displayed in the column menu when locking a column.
 
@@ -1509,7 +1509,7 @@ The text message that is displayed in the column menu when locking a column.
       });
     </script>
 
-### columnMenu.messages.unlock `String` *(default: "Unlock")*
+### columnMenu.messages.unlock `String` *(default: "Unlock Column")*
 
 The text message that is displayed in the column menu for unlocking a column.
 

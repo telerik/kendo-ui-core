@@ -31,14 +31,14 @@
                 days: {
                     names: ["Yanass","Sanass","Kraḍass","Kuẓass","Samass","Sḍisass","Sayass"],
                     namesAbbr: ["Yan","San","Kraḍ","Kuẓ","Sam","Sḍis","Say"],
-                    namesShort: ["Yan","San","Kraḍ","Kuẓ","Sam","Sḍis","Say"]
+                    namesShort: ["Cr","Ri","Ra","Hd","Mh","Sm","Sd"]
                 },
                 months: {
-                    names: ["Yennayer","Fuṛar","Meɣres","Yebrir","Mayyu","Yunyu","Yulyu","Ɣuct","Ctembeṛ","Tubeṛ","Nunembeṛ","Duǧembeṛ"],
-                    namesAbbr: ["Yen","Fur","Meɣ","Yeb","May","Yun","Yul","Ɣuc","Cte","Tub","Nun","Duǧ"]
+                    names: ["Yennayer","Fuṛar","Meɣres","Yebrir","Mayyu","Yunyu","Yulyu","Ɣuct","Ctembeṛ","Tubeṛ","Wambeṛ","Duǧembeṛ"],
+                    namesAbbr: ["Yen","Fur","Meɣ","Yeb","May","Yun","Yul","Ɣuc","Cte","Tub","Wam","Duj"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["n tufat","n tufat","N TUFAT"],
+                PM: ["n tmeddit","n tmeddit","N TMEDDIT"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd d MMMM yyyy",

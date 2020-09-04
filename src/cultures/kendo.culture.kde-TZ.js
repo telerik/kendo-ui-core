@@ -19,7 +19,7 @@
                 name: "Tanzanian Shilling",
                 abbr: "TZS",
                 pattern: ["-$n","$n"],
-                decimals: 0,
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
@@ -37,8 +37,8 @@
                     names: ["Mwedi Ntandi","Mwedi wa Pili","Mwedi wa Tatu","Mwedi wa Nchechi","Mwedi wa Nnyano","Mwedi wa Nnyano na Umo","Mwedi wa Nnyano na Mivili","Mwedi wa Nnyano na Mitatu","Mwedi wa Nnyano na Nchechi","Mwedi wa Nnyano na Nnyano","Mwedi wa Nnyano na Nnyano na U","Mwedi wa Nnyano na Nnyano na M"],
                     namesAbbr: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["Muhi","muhi","MUHI"],
+                PM: ["Chilo","chilo","CHILO"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

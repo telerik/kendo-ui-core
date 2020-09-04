@@ -43,6 +43,14 @@
             assert.equal(ul.attr("aria-multiselectable"), "true");
         });
 
+        it("aria-selected attribute is not rendered if selection is not enabled", function() {
+            var ul = setup({
+                selectable: false
+            });
+
+            assert.isOk(!ul.data("kendoListView").wrapper.find("[aria-selected='false']").length);
+        });
+
         it("ListView adds role listitem to all child elements", function() {
             var ul = setup();
 

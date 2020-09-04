@@ -42,6 +42,17 @@
             transform: translate(-50%, -50%) rotate(-135deg);
         }
     }
+
+    .k-avatar {
+        width: @card-avatar-size;
+        height: @card-avatar-size;
+        margin-right: @card-avatar-spacing;
+
+        &.k-avatar-image > * {
+            width: @card-avatar-size;
+            height: @card-avatar-size;
+        }
+    }
 }
 .k-card.k-card-flat {
     box-shadow: none;
@@ -84,12 +95,12 @@
         .border-bottom-radius( @card-border-radius );
     }
 
-    > h1,
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         margin: 0;
     }
 
@@ -179,9 +190,6 @@
     margin: 0 0 @card-subtitle-margin-bottom;
     opacity: .6;
 }
-.k-card-title + .k-card-subtitle {
-    margin-top: ( -@card-title-margin-bottom * .75 );
-}
 
  // Separator
  .k-card-separator {
@@ -224,11 +232,6 @@
     }
     .k-card > &:last-child {
         .border-bottom-radius( @card-border-radius );
-    }
-
-    .k-card > & {
-        border-top-width: @card-actions-border-width;
-        border-color: inherit;
     }
 
     .k-card-horizontal &,
@@ -320,8 +323,23 @@
         border-left-width: @card-actions-border-width;
     }
 
+    .k-card & {
+        border-top-width: @card-actions-border-width;
+        border-style: solid;
+    }
+
+    .k-card-horizontal > & {
+        border-left-width: @card-actions-border-width;
+        border-top-width: 0;
+    }
+
     &.k-card-actions-vertical {
         flex-direction: column;
+
+        .k-card-action + .k-card-action {
+            border-top-width: @card-actions-border-width;
+            border-left-width: 0;
+        }
     }
 }
 
@@ -442,6 +460,21 @@
         .k-card + .k-card {
             margin-left: 0;
             margin-right: @card-deck-gap;
+        }
+    }
+
+    .k-card-actions-stretched {
+        .k-card-action + .k-card-action {
+            border-right-width: @card-actions-border-width;
+            border-left-width: 0;
+        }
+    }
+
+    .k-card-horizontal {
+        .k-card-actions-vertical,
+        > .k-card-actions-stretched {
+            border-right-width: @card-actions-border-width;
+            border-left-width: 0;
         }
     }
 }

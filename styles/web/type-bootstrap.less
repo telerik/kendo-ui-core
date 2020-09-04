@@ -215,6 +215,11 @@
 @toolbar-shadow: null;
 
 
+// Avatar
+@avatar-bg: @accent;
+@avatar-text: contrast( @avatar-bg );
+
+
 // Cards
 @card-bg: @component-bg;
 @card-text: @component-text;
@@ -831,6 +836,7 @@
 @import "mixins/border-radius.less";
 @import "themes/type.less";
 @import "themes/button.less";
+@import "Default/avatar/_theme.less";
 @import "Default/card/_theme.less";
 @import "Default/tilelayout/_theme.less";
 @import "Default/chat/_theme.less";
@@ -3165,7 +3171,16 @@ td.k-state-focused.k-state-selected,
 .k-grid-header .k-grid-header-sticky,
 .k-master-row .k-grid-content-sticky,
 .k-grouping-row .k-grid-content-sticky,
-.k-footer-template .k-grid-content-sticky {
+.k-footer-template .k-grid-footer-sticky {
+    border-left-color: @grid-sticky-border;
+    border-right-color: @grid-sticky-border;
+}
+
+// Locked columns
+.k-grid-header-locked,
+.k-grid-content-locked,
+.k-grid-header-locked .k-header,
+.k-grid-content-locked td {
     border-left-color: @grid-sticky-border;
     border-right-color: @grid-sticky-border;
 }

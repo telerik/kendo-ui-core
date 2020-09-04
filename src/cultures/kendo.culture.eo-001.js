@@ -37,8 +37,8 @@
                     names: ["januaro","februaro","marto","aprilo","majo","junio","julio","aŭgusto","septembro","oktobro","novembro","decembro"],
                     namesAbbr: ["jan","feb","mar","apr","maj","jun","jul","aŭg","sep","okt","nov","dec"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["atm","atm","ATM"],
+                PM: ["ptm","ptm","PTM"],
                 patterns: {
                     d: "yyyy-MM-dd",
                     D: "dddd, d-'a' 'de' MMMM yyyy",

@@ -6423,6 +6423,7 @@ var __meta__ = { // jshint ignore:line
         DataSource: DataSource,
         HierarchicalDataSource: HierarchicalDataSource,
         Node: Node,
+        Comparer: Comparer,
         ObservableObject: ObservableObject,
         ObservableArray: ObservableArray,
         LazyObservableArray: LazyObservableArray,

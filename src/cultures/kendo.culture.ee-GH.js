@@ -37,8 +37,8 @@
                     names: ["dzove","dzodze","tedoxe","afɔfĩe","dama","masa","siamlɔm","deasiamime","anyɔnyɔ","kele","adeɛmekpɔxe","dzome"],
                     namesAbbr: ["dzv","dzd","ted","afɔ","dam","mas","sia","dea","any","kel","ade","dzm"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["ŋdi","ŋdi","ŊDI"],
+                PM: ["ɣetrɔ","ɣetrɔ","ƔETRƆ"],
                 patterns: {
                     d: "M/d/yyyy",
                     D: "dddd, MMMM d 'lia' yyyy",

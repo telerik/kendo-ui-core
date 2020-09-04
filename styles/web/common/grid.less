@@ -948,6 +948,11 @@ html body .k-grid tbody .k-button-icon
     .k-grid-footer-sticky {
         position: sticky;
         z-index: 2;
+
+        &.k-edit-cell {
+            overflow: visible;
+            z-index: 3;
+        }
     }
 
     .k-hierarchy-cell + td.k-grid-content-sticky {
@@ -959,8 +964,8 @@ html body .k-grid tbody .k-button-icon
     td.k-grid-footer-sticky {
         border-right-width: 1px;
 
-        + td,
-        + th {
+        &:not([style*='display: none']) + td,
+        &:not([style*='display: none']) + th {
             border-left-width: 0;
         }
     }
@@ -978,10 +983,11 @@ html body .k-grid tbody .k-button-icon
             border-left-width: 1px;
         }
 
-        th.k-grid-header-sticky + td,
-        th.k-grid-header-sticky + th,
-        td.k-grid-content-sticky + td,
-        td.k-grid-content-sticky + th {
+        th.k-grid-header-sticky:not([style*='display: none']) + td,
+        th.k-grid-header-sticky:not([style*='display: none']) + th,
+        td.k-grid-content-sticky:not([style*='display: none']) + td,
+        td.k-grid-content-sticky:not([style*='display: none']) + th {
+            border-left-width: 1px;
             border-right-width: 0;
         }
 

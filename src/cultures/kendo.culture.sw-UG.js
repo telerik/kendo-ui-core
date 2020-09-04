@@ -18,7 +18,7 @@
             currency: {
                 name: "Ugandan Shilling",
                 abbr: "UGX",
-                pattern: ["-$n","$n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 0,
                 ",": ",",
                 ".": ".",

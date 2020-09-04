@@ -373,10 +373,13 @@ var __meta__ = { // jshint ignore:line
             items = that.items().not(".k-loading-mask");
 
             for (idx = index, length = view.length; idx < length; idx++) {
-                items.eq(idx)
-                    .attr(kendo.attr("uid"), view[idx].uid)
-                    .attr("role", role)
-                    .attr("aria-selected", "false");
+                item = items.eq(idx);
+                item.attr(kendo.attr("uid"), view[idx].uid)
+                    .attr("role", role);
+
+                if (that.options.selectable) {
+                    item.attr("aria-selected", "false");
+                }
             }
 
             if (that.content[0] === active && that.options.navigatable) {

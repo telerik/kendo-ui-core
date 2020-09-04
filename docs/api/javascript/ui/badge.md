@@ -9,8 +9,6 @@ component: badge
 
 Represents the Kendo UI Badge widget. Inherits from [Widget](/api/javascript/ui/widget).
 
-> **Important** Note about changes in API
-
 
 
 
@@ -136,6 +134,7 @@ If `text` is a number, it will cap that number.
     <script>
         $('#badge').kendoBadge({
             text: 1234,
+            color: 'primary',
             max: 1024
         });
     </script>
@@ -169,9 +168,9 @@ Note: placement configuration requires the badge to be positioned. See [`positio
     <button class="k-button">Edge badge <span id="badge-edge"></span></button>
     <button class="k-button">Outside badge <span id="badge-outside"></span></button>
     <script>
-        $('#badge-inside').kendoBadge({position: 'top end', placement: 'inside'});
-        $('#badge-edge').kendoBadge({position: 'top end', placement: 'edge'});
-        $('#badge-outside').kendoBadge({position: 'top end', placement: 'outside'});
+        $('#badge-inside').kendoBadge({position: 'top end', placement: 'inside', color: 'primary'});
+        $('#badge-edge').kendoBadge({position: 'top end', placement: 'edge', color: 'primary'});
+        $('#badge-outside').kendoBadge({position: 'top end', placement: 'outside', color: 'primary'});
     </script>
 
 
@@ -197,11 +196,11 @@ Note: when using position other than `inline`, make sure the badge container has
     <button class="k-button">Bottom Start Badge <span id="badge-bottom-start"></span></button>
     <button class="k-button">Bottom End Badge <span id="badge-bottom-end"></span></button>
     <script>
-        $('#badge-inline').kendoBadge({position: 'inline'});
-        $('#badge-top-start').kendoBadge({position: 'top start'});
-        $('#badge-top-end').kendoBadge({position: 'top end'});
-        $('#badge-bottom-start').kendoBadge({position: 'bottom start'});
-        $('#badge-bottom-end').kendoBadge({position: 'bottom end'});
+        $('#badge-inline').kendoBadge({position: 'inline', color: 'primary'});
+        $('#badge-top-start').kendoBadge({position: 'top start', color: 'primary'});
+        $('#badge-top-end').kendoBadge({position: 'top end', color: 'primary'});
+        $('#badge-bottom-start').kendoBadge({position: 'bottom start', color: 'primary'});
+        $('#badge-bottom-end').kendoBadge({position: 'bottom end', color: 'primary'});
     </script>
 
 
@@ -221,6 +220,7 @@ Specifies the shape of the badge
     <script>
         $('#badge').kendoBadge({
             text: 'badge',
+            color: 'primary',
             shape: 'rounded'
         });
     </script>
@@ -236,9 +236,9 @@ Specifies the size of the badge. Valid options are `small`, `medium` and `large`
     <span id="badge-medium">Medium badge</span>
     <span id="badge-large">Large badge</span>
     <script>
-        $('#badge-small').kendoBadge({ size: 'small' });
-        $('#badge-medium').kendoBadge({ size: 'medium' });
-        $('#badge-large').kendoBadge({ size: 'large' });
+        $('#badge-small').kendoBadge({ size: 'small', color: 'primary' });
+        $('#badge-medium').kendoBadge({ size: 'medium', color: 'primary' });
+        $('#badge-large').kendoBadge({ size: 'large', color: 'primary' });
     </script>
 
 
@@ -255,6 +255,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the content
                 current: 2,
                 total: 10
             },
+            color: 'primary',
             template: '#= current # of #= total #'
         });
     </script>
@@ -265,6 +266,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the content
     <script>
         $('#badge').kendoBadge({
             text: 1234,
+            color: 'primary',
             template: function() {
                 var text = this.options.text;
                 return text > 99 ? 'A lot' : text;
@@ -283,6 +285,7 @@ The text of the badge. Valid input includes `string`, `number` or `object` with 
     <span id="notext-badge"></span>
     <script>
         $('#text-badge').kendoBadge({
+            color: 'primary',
             text: 'Badge'
         });
         $('#notext-badge').kendoBadge();
@@ -312,7 +315,7 @@ If set to false the badge will not be displayed.
     <button>Button <span id="badge"></span></button>
     <script>
         $('#badge').kendoBadge({
-            text: 1234
+            text: 1234,
             visible: false
         });
     </script>

@@ -37,8 +37,8 @@
                     names: ["Amajjii","Guraandhala","Bitooteessa","Elba","Caamsa","Waxabajjii","Adooleessa","Hagayya","Fuulbana","Onkololeessa","Sadaasa","Muddee"],
                     namesAbbr: ["Ama","Gur","Bit","Elb","Cam","Wax","Ado","Hag","Ful","Onk","Sad","Mud"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["WD","wd","WD"],
+                PM: ["WB","wb","WB"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, MMMM d, yyyy",
