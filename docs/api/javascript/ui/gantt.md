@@ -6934,3 +6934,47 @@ The widget instance which fired the event.
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("resizeEnd", gantt_resizeEnd);
     </script>
+
+### togglePlannedTasks
+
+The event will be raised upon Toolbar PlannedTasks Switch click. As a result, the planned tasks will be either hidden or shown in the Gantt Timeline view. The event is preventable.
+
+The event handler function context (available via the this keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.showPlannedTasks `Boolean`
+
+Indicates whether the planned tasks are about to be shown (true) or hidden (false).
+
+##### e.preventDefault `Function`
+
+If invoked prevents the action.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      toolbar: ["plannedTasks"],
+      dataSource: [
+        {
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          plannedStart: new Date("2014/6/17 9:00"),
+          plannedEnd: new Date("2014/6/17 11:00"),
+          start: new Date("2014/6/17 10:00"),
+          end: new Date("2014/6/17 12:00")
+        }
+      ],
+      togglePlannedTasks: function(e) {
+        console.log(e.showPlannedTasks);
+      }
+    });
+    </script>

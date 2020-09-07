@@ -742,6 +742,29 @@
 @appbar-bottom-box-shadow:  0px -1px 1px rgba(0, 0, 0, .16);
 
 
+//Gantt
+@event-text-color: @inversed-text-color;
+@gantt-task-selected-bg: lighten(@info, 4%);
+@gantt-task-completed-selected-bg: darken(@info, 21%);
+@gantt-summary-completed-selected-bg: lighten(@info, 22%);
+
+@gantt-delayed-advanced-text: #FFFFFF;
+
+@gantt-planned-bg: @primary;
+@gantt-planned-border: @gantt-planned-bg;
+@gantt-planned-tooltip-text: #FFFFFF;
+
+@gantt-delayed-bg: @error;
+@gantt-delayed-bg-lighter: tint(@gantt-delayed-bg, 20);
+@gantt-delayed-tooltip-text: #FFFFFF;
+
+@gantt-advanced-bg: @success;
+@gantt-advanced-bg-lighter: tint(@gantt-advanced-bg, 20);
+
+@gantt-task-offset-border: @gantt-delayed-bg;
+@gantt-task-offset-text: #000000;
+
+
 // Kendo skin
 
 @theme-name: ~"nova";
@@ -782,6 +805,7 @@
 @import "Default/textarea/_theme.less";
 @import "Default/appbar/_theme.less";
 @import "Default/loader/_theme.less";
+@import "Default/gantt/_theme.less";
 
 // Main colors
 .k-splitbar .k-resize-handle {
@@ -1791,7 +1815,7 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 }
 
 .k-state-selected.k-task-summary {
-    background: lighten(@info, 4%);;
+    background: lighten(@info, 4%);
 }
 
 .k-state-selected.k-task-milestone,

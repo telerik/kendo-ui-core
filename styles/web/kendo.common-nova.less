@@ -725,6 +725,27 @@
 @loader-spinner-4-height-lg: @loader-spinner-4-width-lg;
 
 
+// Gantt
+@gantt-planned-row-height: 4.8em;
+
+@gantt-planned-margin-y: .35em;
+@gantt-planned-border-width: 2px;
+@gantt-planned-line-height: .75em;
+
+@gantt-planned-dependency-margin-y: .6em;
+@gantt-planned-resource-margin-y: 0.9em;
+@gantt-planned-dot-margin-y: 1.4em;
+
+@gantt-planned-moment-width: 6px;
+@gantt-planned-moment-height: @gantt-planned-moment-width;
+@gantt-planned-moment-border-radius: calc( ( @gantt-planned-border-width * 2 + @gantt-planned-moment-width ) / 2 );
+@gantt-planned-moment-margin-x: calc( @gantt-planned-border-width / 2 - @gantt-planned-moment-border-radius );
+@gantt-planned-milestone-moment-margin-x: @gantt-planned-moment-width / 2;
+
+@gantt-planned-duration-height: @gantt-planned-border-width;
+@gantt-planned-duration-hover-height: calc( @gantt-planned-border-width + 1px );
+
+
 @import "common/all.less";
 
 .k-button {
@@ -1204,6 +1225,20 @@ div.editorToolbarWindow.k-window-content {
 
     .k-gantt-timeline .k-header {
         text-align: left;
+    }
+
+    &.k-gantt-planned {
+        .k-task-single {
+            margin-top: 0;
+        }
+
+        .k-task-offset-wrap .k-task-single + .k-task-offset {
+            height: 2.4em;
+        }
+
+        .k-summary-wrap .k-task-planned {
+            margin-bottom: .8em;
+        }
     }
 }
 

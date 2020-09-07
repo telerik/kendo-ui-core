@@ -1,0 +1,134 @@
+// Planned metrics
+
+.k-gantt-planned .k-gantt-rows tr,
+.k-gantt-planned .k-gantt-tasks tr,
+.k-gantt.k-gantt-planned .k-grid-content tr {
+    height: @gantt-planned-row-height;
+}
+
+.k-gantt-planned {
+    .k-gantt-dependencies {
+        margin-top: @gantt-planned-dependency-margin-y;
+    }
+
+    .k-task-dot {
+        margin-top: @gantt-planned-dot-margin-y;
+    }
+
+    .k-resources-wrap {
+        margin-top: @gantt-planned-resource-margin-y;
+    }
+
+    .k-task-offset-wrap {
+        display: inline-flex;
+
+        + .k-task-dot {
+            margin-top: 1.3em;
+        }
+
+        + .k-task-dot + .k-task-dot {
+            margin-top: 1.3em;
+        }
+    }
+}
+
+// Planned element
+
+.k-task-planned {
+    margin: 0 0 @gantt-planned-margin-y;
+    line-height: @gantt-planned-line-height;
+    display: flex;
+    align-items: center;
+
+    .k-task-moment {
+        border-width: @gantt-planned-border-width;
+        border-radius: @gantt-planned-moment-border-radius;
+        border-style: solid;
+        height: @gantt-planned-moment-height;
+        width: @gantt-planned-moment-width;
+
+        &.k-moment-left {
+            margin-left: @gantt-planned-moment-margin-x;
+        }
+    }
+
+    .k-task-duration {
+        height: @gantt-planned-duration-height;
+    }
+
+    &:hover .k-task-duration {
+        height: @gantt-planned-duration-hover-height;
+    }
+}
+
+// Planned Tooltip
+
+.k-planned-tooltip .k-task-content {
+    display: block;
+}
+
+// Delay offset element
+
+.k-task-offset {
+    flex-direction: row-reverse;
+    display: flex;
+    line-height: normal;
+
+    .k-resize-e {
+        top: auto;
+        right: auto;
+        width: .3em;
+        height: 1.5em;
+    }
+
+    .k-resize-e::before {
+        border-left-width: 1px;
+        height: 1.5em;
+        visibility: hidden;
+    }
+}
+
+.k-summary-wrap .k-task-offset {
+    height: 10px;
+    margin: 3px 0 0;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px;
+    }
+}
+
+.k-rtl .k-summary-wrap .k-task-offset:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px;
+}
+
+.k-ie {
+    .k-summary-wrap .k-task-offset {
+        &:after {
+            right: 20px;
+        }
+    }
+
+    .k-rtl .k-summary-wrap .k-task-offset:before {
+        left: 20px;
+    }
+}
+
+.k-task-offset .k-task-actions {
+    visibility: hidden;
+}
+
+.k-task-single:hover + .k-task-offset .k-task-actions,
+.k-task-offset:hover .k-task-actions {
+    visibility: visible;
+}
+

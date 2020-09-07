@@ -4658,6 +4658,7 @@ declare namespace kendo.ui {
         resizeStart?(e: GanttResizeStartEvent): void;
         resize?(e: GanttResizeEvent): void;
         resizeEnd?(e: GanttResizeEndEvent): void;
+        togglePlannedTasks?(e: GanttTogglePlannedTasks): void;
     }
     interface GanttEvent {
         sender: Gantt;
@@ -4743,6 +4744,10 @@ declare namespace kendo.ui {
         task?: kendo.data.GanttTask;
         start?: Date;
         end?: Date;
+    }
+
+    interface GanttTogglePlannedTasks extends GanttEvent {
+        showPlannedTasks?: boolean;
     }
 
 
@@ -5400,6 +5405,158 @@ declare namespace kendo.ui {
         sort?: any;
     }
 
+    class ImageEditor extends kendo.ui.Widget {
+
+        static fn: ImageEditor;
+
+        options: ImageEditorOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ImageEditor;
+
+        constructor(element: Element, options?: ImageEditorOptions);
+
+
+        drawImage(imageUrl: string): JQueryPromise<any>;
+        drawCanvas(image: any): void;
+        getCanvasElement(): HTMLElement;
+        getCurrent2dContext(): any;
+        getCurrentImage(): number;
+        getZoomLevel(): any;
+        executeCommand(command: string, args?: any): void;
+
+    }
+
+    interface ImageEditorMessagesCommon {
+        width?: string;
+        height?: string;
+        cancel?: string;
+        confirm?: string;
+        lockAspectRatio?: string;
+    }
+
+    interface ImageEditorMessagesPanesCropAspectRatioItems {
+        originalRatio?: string;
+    }
+
+    interface ImageEditorMessagesPanesCrop {
+        title?: string;
+        aspectRatio?: string;
+        aspectRatioItems?: ImageEditorMessagesPanesCropAspectRatioItems;
+        orientation?: string;
+        portrait?: string;
+        landscape?: string;
+    }
+
+    interface ImageEditorMessagesPanesResize {
+        title?: string;
+        pixels?: string;
+        percents?: string;
+    }
+
+    interface ImageEditorMessagesPanes {
+        crop?: ImageEditorMessagesPanesCrop;
+        resize?: ImageEditorMessagesPanesResize;
+    }
+
+    interface ImageEditorMessagesToolbar {
+        open?: string;
+        save?: string;
+        undo?: string;
+        redo?: string;
+        crop?: string;
+        resize?: string;
+        zoomIn?: string;
+        zoomOut?: string;
+        zoomDropdown?: string;
+        zoomActualSize?: string;
+        zoomFitToScreen?: string;
+    }
+
+    interface ImageEditorMessages {
+        toolbar?: ImageEditorMessagesToolbar;
+        panes?: ImageEditorMessagesPanes;
+        common?: ImageEditorMessagesCommon;
+    }
+
+    interface ImageEditorSaveAs {
+        fileName?: string;
+        forceProxy?: boolean;
+        proxyURL?: boolean;
+        proxyTarget?: string;
+    }
+
+    interface ImageEditorToolbarItem {
+        type?: string;
+        overflow?: string;
+        click?: Function;
+        command?: string;
+        options?: string;
+        name?: string;
+        togglable?: boolean;
+        text?: string;
+        template?: string|Function;
+        showText?: string;
+        primary?: boolean;
+        attributes?: any;
+        enable?: boolean;
+        hidden?: boolean;
+        spriteCssClass?: string;
+        imageUrl?: string;
+        showIcon?: string;
+        icon?: string;
+        id?: string;
+    }
+
+    interface ImageEditorToolbar {
+        items?: ImageEditorToolbarItem[];
+        click?: Function;
+        close?: Function;
+        open?: Function;
+        toggle?: Function;
+        overflowClose?: Function;
+        overflowOpen?: Function;
+    }
+
+    interface ImageEditorOptions {
+        name?: string;
+        width?: number|string;
+        height?: number|string;
+        imageUrl?: string;
+        saveAs?: ImageEditorSaveAs;
+        toolbar?: boolean | ImageEditorToolbar;
+        messages?: ImageEditorMessages;
+        imageLoaded?(e: ImageEditorImageLoadedEvent): void;
+        imageRendered?(e: ImageEditorImageRenderedEvent): void;
+        execute?(e: ImageEditorExecuteEvent): void;
+        error?(e: ImageEditorErrorEvent): void;
+    }
+    interface ImageEditorEvent {
+        sender: ImageEditor;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ImageEditorImageLoadedEvent extends ImageEditorEvent {
+        image?: any;
+    }
+
+    interface ImageEditorImageRenderedEvent extends ImageEditorEvent {
+        image?: any;
+        canvas?: HTMLElement;
+        ctx?: any;
+    }
+
+    interface ImageEditorExecuteEvent extends ImageEditorEvent {
+        command?: string;
+        options?: any;
+    }
+
+    interface ImageEditorErrorEvent extends ImageEditorEvent {
+    }
 
     class ListBox extends kendo.ui.Widget {
 
@@ -22982,6 +23139,10 @@ interface JQuery {
     kendoGrid(): JQuery;
     kendoGrid(options: kendo.ui.GridOptions): JQuery;
     data(key: "kendoGrid"): kendo.ui.Grid;
+
+    kendoImageEditor(): JQuery;
+    kendoImageEditor(options: kendo.ui.ImageEditorOptions): JQuery;
+    data(key: "kendoImageEditor"): kendo.ui.ImageEditor;
 
     kendoLinearGauge(): JQuery;
     kendoLinearGauge(options: kendo.dataviz.ui.LinearGaugeOptions): JQuery;

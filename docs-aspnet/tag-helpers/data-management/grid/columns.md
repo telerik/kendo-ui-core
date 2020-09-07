@@ -219,6 +219,35 @@ To enable both virtualized columns and rows:
     </kendo-grid>
 
 ```
+
+## Sticky Columns
+
+Sticky columns enable you to display specific columns at all times while the user scrolls the Grid horizontally. This specific column will be scrollable as well, however, it will fix its position to the left/right when it reaches left/right Grid border.
+
+For a runnable example, refer to the demo on [implementing sticky columns in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns).
+
+```tagHelper
+    <column-menu enabled="true"/>
+    <columns>
+        <column field="ContactName" sticky="true" stickable="true" title="Contact Name" width="240" />
+        <column field="ContactTitle" stickable="true" title="Contact Title" />
+        <column field="CompanyName" stickable="true" title="Company Name" />
+        <column field="Country" stickable="true" title="Country" width="150" />
+    </columns>
+```
+```cshtml
+    .ColumnMenu()
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.ContactName).Sticky(true).Stickable(true).Width(150);
+        columns.Bound(o => o.ContactTitle).Stickable(true).Width(250);
+        columns.Bound(o => o.CompanyName).Stickable(true).Width(350);
+        columns.Bound(o => o.Country).Stickable(true).Width(300);
+
+    })
+```
+> When it comes to the Grid Sticky Columns there are some known limitation. For more information please refer to [this section of the documentation.](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/columns/sticky#known-limitations)
+
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)
