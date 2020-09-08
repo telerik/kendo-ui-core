@@ -2049,7 +2049,6 @@ intro_columns:
   -
     title: "Navigation"
     items:
-      "AppBar": "overview_kendoui_appbar_widget"
       "Breadcrumb": "overview_kendoui_breadcrumb_widget"
       "Button": "overview_kendoui_button_widget"
       "ButtonGroup": "overview_kendoui_buttongroup_widget"

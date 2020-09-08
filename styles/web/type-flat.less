@@ -830,6 +830,29 @@
 @gantt-task-offset-border: @gantt-delayed-bg;
 @gantt-task-offset-text: #000000;
 
+
+// ImageEditor
+@imageeditor-bg: @component-bg;
+@imageeditor-text: @component-text;
+@imageeditor-border: @component-border;
+
+@imageeditor-content-bg: darken(@component-bg, 22.5%);
+@imageeditor-content-text: false;
+@imageeditor-content-border: false;
+
+@imageeditor-action-pane-text: false;
+@imageeditor-action-pane-bg: @component-bg;
+@imageeditor-action-pane-border: @component-border;
+
+@imageeditor-crop-text: false;
+@imageeditor-crop-bg: false;
+@imageeditor-crop-border: white;
+
+@imageeditor-resize-handle-text: false;
+@imageeditor-resize-handle-bg: false;
+@imageeditor-resize-handle-border: white;
+
+
 // Kendo skin
 
 @theme-name: ~"flat";
@@ -871,6 +894,7 @@
 @import "Default/appbar/_theme.less";
 @import "Default/loader/_theme.less";
 @import "Default/gantt/_theme.less";
+@import "Default/imageeditor/_theme.less";
 
 
 .k-in,
