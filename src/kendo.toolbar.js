@@ -74,7 +74,7 @@ var __meta__ = { // jshint ignore:line
         kendo.toolbar = {};
 
         var components = {
-            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button"></div>',
+            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button" title="More tools" role="button"></div>',
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 

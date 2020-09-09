@@ -10,7 +10,7 @@ position: 2
 
 The keyboard navigation of the ButtonGroup is always available.
 
-To change the focused Button in the ButtonGroup, use the `Left Arrow` or `Right Arrow` keys.
+To change the focused Button in the ButtonGroup, use the `Left Arrow` or `Right Arrow` keys. Another option to switch between the Buttons in the ButtonGroup is to use `Tab` or `Shift` and `Tab`.
 
 For a complete example, refer to the [demo on keyboard navigation of the ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/keyboard-navigation).
 

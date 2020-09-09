@@ -8,9 +8,11 @@ position: 4
 
 # Editing by Dragging and Dropping
 
-> Currently, the dragging and dropping of items (`editable.move = true`) is not supported with the incell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
+> Currently, the dragging and dropping of items (`editable.move = true` and `editable.move.reorderable`) is not supported with the incell edit mode of the TreeList because the draggable functionality prevents the `mousedown` event. As a result, the `change` event of the editor input does not fire, which in turn prevents the MVVM binding from saving the updated value. To work around this problem, refer to [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/4673).
 
-When the [`editable.move`](/api/javascript/ui/treelist/configuration/editable#editable.move) option is set to `true`, the user can drag and drop the rows and the TreeList internally updates the `parentId` field. To persist the new hierarchy, configure the TreeList data source for CRUD operations and set `transport.update` as a bare minimum. For a runnable example, refer to the [demo on editing by dragging and dropping the rows of the TreeList](https://demos.telerik.com/kendo-ui/treelist/dragdrop).
+When the [`editable.move`](/api/javascript/ui/treelist/configuration/editable#editable.move) option is set to `true`, the user can drag and drop the rows and the TreeList internally updates the `parentId` field. Setting the [`editable.move.reorderable`](/api/javascript/ui/treelist/configuration/editable#editable.move.reorderable) property to `true` enables users not only to move items to a different level in the hierarchy but also allows users to reorder items within a particular hierarchy level.
+
+To persist the new hierarchy, configure the TreeList data source for CRUD operations and set `transport.update` as a bare minimum. For a runnable example, refer to the [demo on editing by dragging and dropping the rows of the TreeList](https://demos.telerik.com/kendo-ui/treelist/dragdrop).
 
 The following example demonstrates how to enable the batch data source and the editable move configuration.
 

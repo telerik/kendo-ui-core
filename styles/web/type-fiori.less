@@ -2125,14 +2125,6 @@ div.k-filebrowser-dropzone em
     border-radius: @draghandle-border-radius;
 }
 
-.k-gantt-toolbar li:first-child + li {
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-rtl .k-gantt-toolbar li:last-child {
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
 .k-more-events,
 .k-event,
 .k-task-single,
@@ -2145,13 +2137,6 @@ div.k-filebrowser-dropzone em
 .k-scheduler-mobile .k-event
 {
     border-radius: (@inner-border-radius - 1);
-}
-
-// RTL Scheduler & Gantt
-
-.k-rtl .k-gantt-toolbar > ul.k-gantt-views > li {
-    border-width: 0 0 3px 0;
-    border-color: transparent;
 }
 
 // /Column Menu
@@ -2499,21 +2484,6 @@ div.k-filebrowser-dropzone em
     padding: 0.714em;
 }
 
-.k-gantt .k-gantt-views .k-state-selected
-{
-    background: none;
-}
-
-.k-gantt .k-gantt-views > li
-{
-    border-radius: 0;
-}
-
-.k-gantt .k-gantt-views .k-state-selected
-{
-    border-color: @selected-border-color;
-}
-
 .k-task-summary-complete
 {
     border-color: @selected-border-color;
@@ -2543,36 +2513,9 @@ div.k-filebrowser-dropzone em
     background-color: #444;
 }
 
-.k-gantt-views .k-link:link,
-.k-gantt-views .k-link:visited,
 .k-group-indicator .k-link
 {
     color: @widget-text-color;
-}
-
-.k-gantt .k-gantt-views > .k-state-selected > .k-link
-{
-    color: @selected-border-color;
-}
-
-.k-gantt-toolbar .k-gantt-views > li > .k-link {
-    background: none;
-}
-
-.k-gantt .k-gantt-toolbar ul li.k-state-hover
-{
-    background: none;
-    border-color: transparent;
-}
-
-.k-gantt .k-gantt-toolbar ul li.k-state-selected
-{
-    border-color: @selected-border-color;
-}
-
-.k-gantt .k-gantt-toolbar .k-state-hover .k-link
-{
-    color: @selected-background-color;
 }
 
 .k-scheduler-table .k-other-month,
