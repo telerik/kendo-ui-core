@@ -126,6 +126,7 @@ The following example demonstrates how to define the TreeList by using the TreeL
 * More settings
     * [Column enhancements]({% slug htmlhelpers_treelist_aspnetcore_locked_columns %})
     * [Scrolling]({% slug htmlhelpers_treelist_aspnetcore_scrolling %})
+    * [Row Selection]({% slug htmlhelpers_treelist_selection %})
     * [Globalization]({% slug globalization_htmlhelpers_treelist %})
     * [Accessibility]({% slug htmlhelpers_treelist_aspnetcore_accessibility %})
 

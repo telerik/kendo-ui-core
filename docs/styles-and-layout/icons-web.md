@@ -789,6 +789,16 @@ fonts in fonts/
     });
 </script>
 
+<style>
+    article:not(.api-reference) ul:not(.docs-tabstrip):not(.k-reset):not(.k-pager-numbers)>li:before { 
+        content: none; 
+    }
+
+    article > ul.WebComponentsIcons > li {
+        line-height: 15px;
+    }
+</style>
+
 ## See Also
 
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
