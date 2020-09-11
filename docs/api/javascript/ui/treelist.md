@@ -6391,7 +6391,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
         var dataItem = treeList.dataSource.get(1);
 
         // find row for data item
-        var row = treeList.content.find("tr[data-uid=" + dataItem.uid + "]")
+        var row = treeList.element.find("tr[data-uid=" + dataItem.uid + "]")
 
         treeList.expand(row);
       });
