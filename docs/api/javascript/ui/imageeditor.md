@@ -44,6 +44,8 @@ Configures the width of the ImageEditor.
 
 Sets the url (or base64 string) for the image to open.
 
+> If imageUrl sets image hosted on another domain, the image editing tools will be disabled.
+
 #### Example
 
     <div id="imageEditor"></div>

@@ -214,6 +214,8 @@ navigation:
         title: "PivotGrid"
      "tag-helpers/editors":
         title: "Editors"
+     "tag-helpers/editors/imageeditor":
+        title: "Image Editor"
      "tag-helpers/charts":
         title: "Charts"
      "tag-helpers/charts/treemap":
@@ -309,6 +311,8 @@ navigation:
         position: 2
      "html-helpers/editors/flatcolorpicker":
         title: "FlatColorPicker"
+     "html-helpers/editors/imageeditor":
+        title: "Image Editor"
      "html-helpers/charts":
         title: "Charts"
      "html-helpers/charts/chart":
@@ -472,6 +476,8 @@ navigation:
         title: "Form"
      "*gantt":
         title: "Gantt"
+     "*imageeditor":
+        title: "Image Editor"
      "*lineargauge":
         title: "LinearGauge"
      "*listbox":
@@ -737,6 +743,11 @@ defaults:
         path: "html-helpers/editors/flatcolorpicker"
     values:
         title_prefix: "Core FlatColorPicker Component"
+-
+    scope:
+        path: "html-helpers/editors/imageeditor"
+    values:
+        title_prefix: "Core Image Editor Component"
 -
     scope:
         path: "html-helpers/editors/listbox"
@@ -1107,6 +1118,11 @@ defaults:
         path: "tag-helpers/editors/flatcolorpicker"
     values:
         title_prefix: "Core FlatColorPicker Component"
+-
+    scope:
+        path: "tag-helpers/editors/imageeditor"
+    values:
+        title_prefix: "Core Image Editor Component"
 -
     scope:
         path: "tag-helpers/editors/listbox"

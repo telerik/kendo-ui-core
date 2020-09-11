@@ -205,6 +205,8 @@ navigation:
     "controls/navigation/treeview/binding":
         title: "Data Binding"
         position: 2
+    "controls/editors/imageeditor":
+        title: "Image Editor"
     "controls/conversational-ui":
         title: "Conversational UI"
     "controls/conversational-ui/chat":
@@ -568,6 +570,8 @@ navigation:
         title: "Form"
     "*gantt":
         title: "Gantt"
+    "*imageeditor":
+        title: "Image Editor"
     "*pivotgrid":
         title: "PivotGrid"
     "*grid":
@@ -1996,6 +2000,7 @@ intro_columns:
     items:
       "Drag and Drop": "overview_kendoui_draganddrop_intercativityandux"
       "Effects": "overview_kendoui_fxeffects_widget"
+      "Loader": "overview_kendoui_loader_widget"
       "ProgressBar": "overview_kendoui_progressbar_widget"
       "RippleContainer": "overview_kendoui_ripplecontainer_widget"
       "Sortable": "overview_kendoui_sortable_widget"
