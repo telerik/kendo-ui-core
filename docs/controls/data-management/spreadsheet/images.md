@@ -108,7 +108,7 @@ The Spreadsheet Sheet API exposes a method that allows you to programmatically a
                 offsetY: 10,
                 width: 320,
                 height: 220,
-                image: spread.addImage("../images/1.jpg")
+                image: spreadsheet.addImage("../images/1.jpg")
             });
 
             sheet.addDrawing(drawing);

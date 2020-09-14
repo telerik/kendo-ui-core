@@ -97,8 +97,8 @@
 .k-task-offset {
     .repeating-striped-gradient( @gantt-delayed-bg, #FFF, 135deg, 4px, 2px);
 
-    .k-resize-e::before {
-        border-color: @gantt-task-offset-text;
+    .k-resize-handle::after {
+        background-color: @gantt-task-offset-text;
     }
 
     &:hover {
@@ -143,6 +143,10 @@
     &:after {
         border-right-color: transparent;
     }
+}
+
+.k-pdf-export .k-task-offset {
+    background-color: @gantt-delayed-bg;
 }
 
 // Tooltips
