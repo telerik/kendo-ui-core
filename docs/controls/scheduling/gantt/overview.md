@@ -115,8 +115,10 @@ If your remote service stores and returns the Gantt dependencies in a different 
 
 ## Functionality and Features
 
+* [Layout]({% slug layout_kendoui_gantt %})
 * [Data binding]({% slug databinding_kendoui_gantt %})
 * [Columns]({% slug columns_kendoui_gantt %})
+* [Planned vs Actual]({% slug planned_vs_actual_kendoui_gantt %})
 * [Views]({% slug views_kendoui_gantt %})
 
 ## Referencing Existing Instances

@@ -84,11 +84,18 @@
 
 // Delay offset element
 
-.k-task-offset-wrap .k-task {
-    display: inline-block;
+.k-task-offset-wrap {
 
-    .k-task-content .k-resize-e {
-        display: none;
+    .k-task {
+        display: inline-block;
+
+        .k-task-content .k-resize-e {
+            display: none;
+        }
+    }
+
+    .k-task-single + .k-task-offset {
+        height: @gantt-offset-height;
     }
 }
 

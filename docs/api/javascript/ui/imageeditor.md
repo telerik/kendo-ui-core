@@ -446,7 +446,7 @@ Returns the Image instance
 
 #### Returns
 
-`Number`
+`HTMLElement`
 
 ### getZoomLevel
 
@@ -454,7 +454,7 @@ Returns the current zoom level
 
 #### Returns
 
-`Object`
+`Number`
 
 ### executeCommand
 

@@ -10,7 +10,7 @@ position: 1
 
 The Loader component is a visual indicator that expresses an indeterminate wait time. It informs users about the status of ongoing processes, such as loading an application, submitting a form, saving updates or fetching data.
 
-## Initializing the Badge
+## Initializing the Loader
 
 To initialize the Loader, you can use virtually any `span` element. The following example demonstrates how to initialize the Loader.
 

@@ -235,8 +235,10 @@ The following example demonstrates the basic configuration of the Gantt HtmlHelp
 
 ## Functionality and Features
 
+* [Layout]({% slug htmlhelpers_gantt_layout_aspnetcore %})
 * [Data binding]({% slug htmlhelpers_gantt_binding_aspnetcore %})
 * [Columns]({% slug htmlhelpers_gantt_columns_aspnetcore %})
+* [Planned vs Actual]({% slug htmlhelpers_gantt_planned_vs_actual_aspnetcore %})
 * [Resources]({% slug htmlhelpers_gantt_resources_aspnetcore %})
 * [Templates]({% slug htmlhelpers_gantt_templates_aspnetcore %})
 * [Accessibility]({% slug accessibility_aspnetcore_gantt %})

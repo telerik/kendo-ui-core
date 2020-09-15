@@ -12,7 +12,7 @@ The Telerik UI Loader HtmlHelper for {{ site.framework }} is a server-side wrapp
 
 The Loader component is a visual indicator that expresses an indeterminate wait time. It informs users about the status of ongoing processes, such as loading an application, submitting a form, saving updates or fetching data.
 
-## Initializing the Badge
+## Initializing the Loader
 
 The following example demonstrates how to define the Loader by using the Loader HtmlHelper.
 

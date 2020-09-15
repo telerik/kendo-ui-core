@@ -4,7 +4,7 @@ page_title: Data Binding
 description: "Learn the binding options for the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/scheduling/gantt/server-binding
 slug: htmlhelpers_gantt_binding_aspnetcore
-position: 2
+position: 3
 ---
 
 # Data Binding
@@ -22,6 +22,7 @@ The following example demonstrates how to bind the Gantt through the `TaskViewMo
     public class TaskViewModel : IGanttTask
     {
         public int TaskID { get; set; }
+        //ParentID should be nullable:
         public int? ParentID { get; set; }
 
         public string Title { get; set; }

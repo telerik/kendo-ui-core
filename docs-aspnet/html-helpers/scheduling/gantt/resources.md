@@ -3,7 +3,7 @@ title: Resources
 page_title: Resources
 description: "Use resources in the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
 slug: htmlhelpers_gantt_resources_aspnetcore
-position: 4
+position: 5
 ---
 
 # Resources
