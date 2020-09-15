@@ -432,6 +432,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploading": "téléchargement",
   "uploadSelectedFiles": "Télécharger des fichiers",
   "headerStatusUploaded":  "Complété",
+  "uploadSuccess": "Fichier(s) téléchargé(s) avec succès.",
   "headerStatusUploading": "Téléchargement..."
 });
 }
