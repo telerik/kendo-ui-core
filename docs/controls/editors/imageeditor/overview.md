@@ -1,20 +1,20 @@
 ---
 title: Overview
-page_title: jQuery Image Editor Documentation |  Image Editor Overview | Kendo UI
-description: "Get started with the jQuery Image Editor by Kendo UI and learn how to create, initialize, and enable the widget."
+page_title: jQuery ImageEditor Documentation |  ImageEditor Overview | Kendo UI
+description: "Get started with the jQuery ImageEditor by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_imageeditor_widget
 position: 1
 ---
 
-# Image Editor Overview
+# ImageEditor Overview
 
-The Image Editor utilizes a canvas element and enables image editing. It allows you to open, edit and save edited images.
+The ImageEditor utilizes a canvas element and enables image editing. It allows you to open, edit and save edited images.
 
-* [Demo page for the Image Editor](https://demos.telerik.com/kendo-ui/imageeditor/index)
+* [Demo page for the ImageEditor](https://demos.telerik.com/kendo-ui/imageeditor/index)
 
-## Initializing the Image Editor
+## Initializing the ImageEditor
 
-To initialize the Image Editor, use an existing `div` element and a jQuery selector.
+To initialize the ImageEditor, use an existing `div` element and a jQuery selector.
 ```dojo
     <div id="imageEditor"></div>
     <script>
@@ -30,11 +30,11 @@ To initialize the Image Editor, use an existing `div` element and a jQuery selec
 
 ## Events
 
-For an example on the Image Editor events, refer to the [demo on using the events of the Image Editor](https://demos.telerik.com/kendo-ui/imageeditor/events).
+For an example on the ImageEditor events, refer to the [demo on using the events of the ImageEditor](https://demos.telerik.com/kendo-ui/imageeditor/events).
 
 ## Referencing Existing Instances
 
-You can access an existing Image Editor instance by using the `.data()` jQuery method. After the reference is established, use the [JavaScript API reference of the Image Editor](/api/javascript/ui/imageeditor) to control its behavior.
+You can access an existing ImageEditor instance by using the `.data()` jQuery method. After the reference is established, use the [JavaScript API reference of the ImageEditor](/api/javascript/ui/imageeditor) to control its behavior.
 
 ```
     var imageEditor = $("#imageEditor").data("kendoImageEditor");
@@ -42,6 +42,6 @@ You can access an existing Image Editor instance by using the `.data()` jQuery m
 
 ## See Also
 
-* [Overview of the Image Editor functionality (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/index)
-* [Using the API of the Image Editor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/api)
-* [JavaScript API Reference of the Image Editor](/api/javascript/ui/imageeditor)
+* [Overview of the ImageEditor functionality (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/index)
+* [Using the API of the ImageEditor (Demo)](https://demos.telerik.com/kendo-ui/imageeditor/api)
+* [JavaScript API Reference of the ImageEditor](/api/javascript/ui/imageeditor)
