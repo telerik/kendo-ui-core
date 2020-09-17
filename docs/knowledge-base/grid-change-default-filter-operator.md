@@ -29,7 +29,7 @@ How can I change the default filter operator of the Grid?
 
 ## Solution
 
-Within [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit), change the value of the DropDownList by using its API.
+Within [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/filtermenuinit), change the value of the DropDownList by using the [`value`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/methods/value) method and trigger the [`change`](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist/events/change) event to reflect this internally.
 
 ```dojo
     <div id="example">
@@ -84,8 +84,13 @@ Within [`filterMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gr
         });
 
         function onFilterMenuInit(e) {
-          e.container.find('[data-bind="value: filters[0].operator"]').data('kendoDropDownList').value("neq")
-          e.container.find('[data-bind="value: filters[1].operator"]').data('kendoDropDownList').value("neq")
+          var firstValueDropDown = e.container.find('[data-bind="value: filters[0].operator"]').data('kendoDropDownList');
+          firstValueDropDown.value("neq");
+          firstValueDropDown.trigger("change");
+          
+          var secondValueDropDown = e.container.find('[data-bind="value: filters[1].operator"]').data('kendoDropDownList');
+          secondValueDropDown.value("neq");
+          secondValueDropDown.trigger("change");
         }
 
       </script>

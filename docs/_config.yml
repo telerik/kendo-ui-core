@@ -2022,6 +2022,7 @@ intro_columns:
       "DropDownList": "overview_kendoui_dropdownlist_widget"
       "DropDownTree": "overview_kendoui_dropdowntree_widget"
       "Editor": "overview_kendoui_editor_widget"
+      "ImageEditor": "overview_kendoui_imageeditor_widget"
       "ListBox": "overview_kendoui_listbox_widget"
       "MaskedTextBox": "overview_kendoui_maskedtextbox_widget"
       "MultiColumnComboBox": "overview_kendoui_multicolumncombobox_widget"
