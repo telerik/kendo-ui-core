@@ -4930,7 +4930,7 @@ declare namespace kendo.ui {
     }
 
     interface GridColumn {
-		dataTextField?: string;
+        dataTextField?: string;
         dataValueField?: string;
         dataSource?: kendo.data.DataSource | kendo.data.DataSourceOptions;
         aggregates?: any;
