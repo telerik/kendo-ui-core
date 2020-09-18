@@ -23,7 +23,7 @@ We’ve made the Adobe XD files to be intuitive to use and require no additional
 
 Download the resources to help you design faster and implement with precision.
 
-![XD-icon](images/design-files/XD.png) [Download Kendo UI Design Files for Adobe XD](https://github.com/telerik/kendo-ux/tree/master/Kendo%20UI%20Design%20Filer%20for%20Adobe%20XD)
+<img src="images/design-files/XD.png" alt="XD-logo" style="padding-right:20px;"> [Download Kendo UI Design Files for Adobe XD](https://github.com/telerik/kendo-ux/tree/master/Kendo%20UI%20Design%20Filer%20for%20Adobe%20XD)
 
 Download and navigate to **kendo-default-masters.xd** file.
 This master file contains KendoUI colors, typography and the most used icons.
@@ -83,7 +83,7 @@ In all components with icons, the “WebComponentsIcons” font is used. It is p
 
 ![used-icon-font](images/design-files/09-used-icon-font.png)
 
-![XD-icon](images/design-files/XD.png) [Download Kendo UI Design Files for Adobe XD](https://github.com/telerik/kendo-ux/tree/master/Kendo%20UI%20Design%20Filer%20for%20Adobe%20XD)
+<img src="images/design-files/XD.png" alt="XD-logo" style="padding-right:20px;"> [Download Kendo UI Design Files for Adobe XD](https://github.com/telerik/kendo-ux/tree/master/Kendo%20UI%20Design%20Filer%20for%20Adobe%20XD)
 
 We’ll continue to release Adobe XD resources to fully cover the Kendo UI framework.
 Please, use the form below, if you chose to leave your feedback and comments.
