@@ -489,6 +489,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             value = parse(value, options.parseFormats, options.culture);
+            timeViewOptions.maxSet = false;
 
             if (!value) {
                 return;
@@ -521,6 +522,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     } else if (!minDateEqual) {
                         timeViewOptions.min = MIN;
+                        timeViewOptions.maxSet = true;
                     }
                 }
             } else {
@@ -580,6 +582,7 @@ var __meta__ = { // jshint ignore:line
             if (date) {
                 old = that._old;
                 timeViewOptions = timeView.options;
+                timeViewOptions.maxSet = false;
 
                 if (dates[0]) {
                     dates = $.grep(dates, function(d) { return isEqualDatePart(date, d); });
@@ -603,6 +606,7 @@ var __meta__ = { // jshint ignore:line
                             skip = true;
                         } else {
                             timeViewOptions.max = max;
+                            timeViewOptions.maxSet = true;
                             if (!rebind) {
                                 timeViewOptions.min = MIN;
                             }

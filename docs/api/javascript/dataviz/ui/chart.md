@@ -9077,6 +9077,9 @@ The author of the PDF document.
       chart.saveAsPDF();
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 The creator of the PDF document.
 

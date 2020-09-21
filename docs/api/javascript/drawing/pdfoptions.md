@@ -10,6 +10,10 @@ PDF generation options.
 
 ## Fields
 
+
+### autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
 ### creator `String` *(default: "Kendo UI PDF Generator")*
 The creator of the PDF document.
 

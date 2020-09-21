@@ -170,5 +170,21 @@
 
             assert.equal(picker.timeView.list.find('[data-index]').length, 4);
         });
+
+        it("_updateCurrentlySelected selected calls _findSelectedValue method", function () {
+            var picker = new TimePicker(input, {
+                componentType: 'modern',
+                format: "hh:mm:ss tt"
+            });
+
+            var pickerStub = stub(picker.timeView, {
+                _findSelectedValue: $.noop
+            });
+
+            picker.open();
+            picker.timeView._updateCurrentlySelected();
+
+            assert.isTrue(pickerStub.calls('_findSelectedValue') > 0);
+        });
     });
 }());

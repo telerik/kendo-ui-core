@@ -902,5 +902,17 @@
             assert.equal(datetimepicker.dateView._current.getMinutes(), 0);
             assert.equal(datetimepicker.dateView._current.getSeconds(), 0);
         });
+
+        it("time is correctly selected when disabledDates are specified", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                value: new Date(2015,9,3),
+                disableDates: [new Date(2015,9,12), new Date(2015,9,22)]
+            });
+            debugger
+            datetimepicker.timeView.refresh();
+            datetimepicker.timeView.ul.find("li:eq(4)").trigger("click");
+
+            assert.equal(datetimepicker.element.val(), "10/3/2015 2:00 AM");
+        });
     });
 }());

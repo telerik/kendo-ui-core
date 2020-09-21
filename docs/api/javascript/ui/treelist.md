@@ -4162,6 +4162,9 @@ The author of the PDF document.
       });
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 
 (Available as of the 2015.3.1020 release) A flag which indicates whether to produce actual hyperlinks in the exported PDF file. You can also pass a CSS selector as an argument. All matching links will be ignored.

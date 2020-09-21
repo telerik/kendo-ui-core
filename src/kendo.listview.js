@@ -119,7 +119,8 @@ var __meta__ = { // jshint ignore:line
                 direction: "row",
                 wrap: "nowrap"
             },
-            grid: {}
+            grid: {},
+            scrollable: false
         },
 
         setOptions: function(options) {
@@ -166,6 +167,10 @@ var __meta__ = { // jshint ignore:line
 
             if (this.options.autoBind) {
                 dataSource.fetch();
+            }
+
+            if (this.options.scrollable === "endless") {
+                this._bindScrollable();
             }
         },
 
@@ -478,23 +483,28 @@ var __meta__ = { // jshint ignore:line
                 });
 
                 if (scrollable === "endless") {
-                    var originalPageSize = that._endlessPageSize = that.dataSource.options.pageSize;
-
-                    that.content
-                        .off("scroll" + NS)
-                        .on("scroll" + NS, function () {
-                            if (this.scrollTop + this.clientHeight - this.scrollHeight >= -15 &&
-                            !that._endlessFetchInProgress &&
-                            that._endlessPageSize < that.dataSource.total()) {
-                                that._skipRerenderItemsCount =  that._endlessPageSize;
-                                that._endlessPageSize = that._skipRerenderItemsCount  + originalPageSize;
-                                that.dataSource.options.endless = true;
-                                that._endlessFetchInProgress = true;
-                                that.dataSource.pageSize(that._endlessPageSize);
-                            }
-                        });
+                    that._bindScrollable();
                 }
             }
+        },
+
+        _bindScrollable: function (){
+            var that = this;
+            var originalPageSize = that._endlessPageSize = that.dataSource.options.pageSize;
+
+            that.content
+                .off("scroll" + NS)
+                .on("scroll" + NS, function () {
+                    if (this.scrollTop + this.clientHeight - this.scrollHeight >= -15 &&
+                    !that._endlessFetchInProgress &&
+                    that._endlessPageSize < that.dataSource.total()) {
+                        that._skipRerenderItemsCount =  that._endlessPageSize;
+                        that._endlessPageSize = that._skipRerenderItemsCount  + originalPageSize;
+                        that.dataSource.options.endless = true;
+                        that._endlessFetchInProgress = true;
+                        that.dataSource.pageSize(that._endlessPageSize);
+                    }
+                });
         },
 
         current: function(candidate) {
