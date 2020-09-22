@@ -12,6 +12,47 @@ This article lists the breaking changes in the Kendo UI 2020 releases.
 
 ## Kendo UI 2020 R3
 
+**Badge**
+
+Deprecated configuration options and methods:
+
+<table>
+    <thead>
+        <tr>
+            <th>Old configuration/method</th><th>New configuration/method</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>appearance</code></td><td><code>shape</code></td>
+        </tr>
+        <tr>
+            <td><code>badgeStyle</code></td><td><code>fill</code></td>
+        </tr>
+        <tr>
+            <td><code>color</code></td><td><code>themeColor</code></td>
+        </tr>
+        <tr>
+            <td><code>look</code></td><td><code>fill</code></td>
+        </tr>
+      <tr>
+            <td><code>overlay</code></td><td>use <code>position: "edge"</code> and <code>align:"top end"</code></td>
+        </tr>
+        <tr>
+            <td><code>placement</code></td><td><code>position</code></td>
+        </tr>
+        <tr>
+            <td><code>position</code></td><td><code>align</code></td>
+        </tr>
+        <tr>
+            <td><code>value</code></td><td><code>text</code></td>
+        </tr>
+        <tr>
+            <td><code>value()</code></td><td><code>text()</code></td>
+        </tr>        
+    </tbody>
+</table>
+
 **Scheduler**
 
 As of the Kendo UI 2020 R3 release, the Scheduler RecurrenceEditor will be rendered as a ButtonGroup and not a DropDownList. Apart from that, in the Weekly recurrence view the days selection is also displayed as a ButtonGroup instead of checkboxes.

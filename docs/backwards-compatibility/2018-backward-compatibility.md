@@ -18,6 +18,7 @@ In the [ComboBox]({% slug overview_kendoui_combobox_widget %}), the `Tab` key no
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
