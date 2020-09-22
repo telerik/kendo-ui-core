@@ -152,6 +152,7 @@ fonts in fonts/
 
 ## See Also
 
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
 * [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
 * [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})

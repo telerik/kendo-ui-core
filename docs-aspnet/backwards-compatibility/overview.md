@@ -18,5 +18,6 @@ The [breaking changes in the vanilla Kendo UI for jQuery suite](https://docs.tel
 
 ## See Also
 
+* [Kendo UI 2020 Breaking Changes](https://docs.telerik.com/kendo-ui/backwards-compatibility/2020-backward-compatibility)
 * [Kendo UI 2019 Breaking Changes](https://docs.telerik.com/kendo-ui/backwards-compatibility/2019-backward-compatibility)
 * [Kendo UI 2018 Breaking Changes](https://docs.telerik.com/kendo-ui/backwards-compatibility/2018-backward-compatibility)
