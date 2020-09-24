@@ -42,28 +42,9 @@ div#cta-placeholder .kendo_download_btn {
 }
 </style>
 
-<script type="text/javascript">
-
-  $(document).ready(function(){
-	  var mac = navigator.userAgent.match(/(Mac)/i);
-	  var $btnWin = $(".js-btnWin");
-	  var $btnOSX = $(".js-btnOSX");
-
-	  if (mac) {
-		$btnOSX.show();
-		$btnWin.hide();
-	  } else {
-		$btnOSX.hide();
-		$btnWin.show();
-	  }
-  });
-
-</script>
-
 <div id="cta-placeholder">
 <br />
-<a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnWin" style="display: none">Download Free Trial</a>
-<a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn js-btnOSX" style="display: none">Download Free Trial</a>
+<a href="https://www.telerik.com/download-login-v2-kendoui" class="kendo_download_btn">Download Free Trial</a>
 </div>
 
 ## Getting Started

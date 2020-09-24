@@ -67,10 +67,13 @@ The following example demonstrates how the Loader can be used as a building bloc
     
     $("button").click(function(){
         loadingPanelVisible = !loadingPanelVisible;
+        var loader = $("#loader").data("kendoLoader");
         if (loadingPanelVisible) {
             $("button").text('Hide Loading Panel');
+            loader.show();
         } else {
             $("button").text('Show Loading Panel');
+            loader.hide();
         }
     })
     </script>

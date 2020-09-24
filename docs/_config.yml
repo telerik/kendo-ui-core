@@ -222,6 +222,8 @@ navigation:
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
+    "controls/interactivity/loader":
+        title: "Loader"
     "controls/interactivity/ripplecontainer":
         title: "RippleContainer"
     "controls/interactivity/sortable/integration":
