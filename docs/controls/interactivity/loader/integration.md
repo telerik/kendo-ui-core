@@ -60,16 +60,21 @@ The following example demonstrates how the Loader can be used as a building bloc
     </div>
     <div>
     <script>
-    var loadingPanelVisible = false;
-    $("#loader").kendoLoader();
-    $("button").click(function(){
-        loadingPanelVisible = !loadingPanelVisible;
-        if (loadingPanelVisible) {
-        $("button").text('Hide Loading Panel');
-        } else {
-        $("button").text('Show Loading Panel');
-        }
-    })
+        var loadingPanelVisible = false;
+        $("#loader").kendoLoader({
+        	visible:false
+        });
+        $("button").click(function(){
+          var loader = $("#loader").data("kendoLoader");
+          loadingPanelVisible = !loadingPanelVisible;
+          if (loadingPanelVisible) {
+            $("button").text('Hide Loading Panel');
+            loader.show();
+          } else {
+            $("button").text('Show Loading Panel');
+            loader.hide();
+          }
+        })
     </script>
     <style>
     .example-inner {
