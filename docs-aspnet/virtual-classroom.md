@@ -1,3 +1,4 @@
+
 ---
 title: Online Technical Training
 page_title: Online Technical Training
@@ -19,31 +20,12 @@ The training format and syllabus allow learning at your own pace and referring t
 
 The Telerik UI for ASP.NET Core technical online training has an approximate duration of 2,5 hours, split into seven modules with the following learning path:
 
-* **Module 1: Introduction** (Resources, Prerequisites, Tour of Demo Application for Telerik UI for ASP.NET Core)
-* **Module 2: Installing Telerik UI for ASP.NET Core** (Installation and Creating First Telerik UI for ASP.NET Core application, Solution structure)
-* **Module 3: UI for ASP.NET Core Project Fundamentals** (Server-side setup, Tag and HTML helpers, Script rendering, Scripts and Styles)
-* **Module 4: Basic UI ASP.NET Core Components**
-* **Module 5: Charts in ASP.NET Core Applications**
-* **Module 6: Grid in ASP.NET Core Applications**
-* **Module 7: Styling and Theming in ASP.NET Core Applications** (Built-In Themes, Creating Custom Theme, Styling and Icons)
+* **Chapter 1: Welcome** (Prerequisites, Resources, Tour of Demo Application for Telerik UI for ASP.NET Core)
+* **Chapter 2: Getting Started** (Installation and Creating First Telerik UI for ASP.NET Core application, Solution structure)
+* **Chapter 3: Fundamentals** (Server-side setup, Tag and HTML helpers, Script rendering, Kendo Scripts and Styles)
+* **Chapter 4: Basic UI Components** (DropDownList, Slider, TabStrip, ComboBox)
+* **Chapter 5: Chart** (Chart setup, data, categories, series and styling)
+* **Chapter 6: Grid** (Grid setup and rendering, Grid columns, paging and sorting, Grid events)
+* **Chapter 7: Styling and Theming** (Built-In Themes, Creating Custom Theme, Styling and Icons)
 
 To get started with the Telerik UI for ASP.NET Core online training, visit our learning portal with all [All-Progress Products Virtual Classroom Courses](https://learn.telerik.com/learn) or jump directly to [Telerik UI for ASP.NET Core Online Training](https://learn.telerik.com/learn/course/external/view/elearning/8/telerik-ui-for-aspnet-core).
-
-# Online Technical Training
-
-The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represents a free on-demand technical training program exclusive to active license holders.
-
-Each session provides practical knowledge combined with helpful approaches to application development, which are suitable for both junior and senior developers.
-
-The Online Technical Training program aims at:
-* Empowering your developer productivity.
-* Helping you gain new skills.
-* Growing your product know-how.
-* Improving your getting started experience.
-* Letting you learn at your own pace.
-* Letting you choose your own learning path.
-* Exploring common development practices, code examples, and sample applications.
-
-To get started with the trainings, refer to:
-* [{{ site.product_short }} Technical Online Training]({{ VirtualClassroom }})
-* [All-Progress Products Online Technical Trainings](https://learn.telerik.com/learn)

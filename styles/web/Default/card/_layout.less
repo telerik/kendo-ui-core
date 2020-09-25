@@ -58,29 +58,19 @@
     box-shadow: none;
 }
 
-
-// Placeholder selectors
-// %top-rounded-child {
-//     .k-card > &:first-child {
-//         .border-top-radius( @card-border-radius );
-//     }
-// }
-// %bottom-rounded-child {
-//     .k-card > &:last-child {
-//         .border-bottom-radius( @card-border-radius );
-//     }
-// }
-
- // Orientation
- .k-card-horizontal {
+// Orientation
+.k-card-horizontal {
     flex-direction: row;
 }
 
+.k-card-inner {
+    display: flex;
+    flex-direction: inherit;
+    overflow: hidden;
+}
 
 // Header
 .k-card-header {
-    // @extend %top-rounded-child;
-    // @extend %bottom-rounded-child;
     padding: @card-header-padding-y @card-header-padding-x;
     border-width: 0 0 @card-header-border-width;
     border-style: solid;
@@ -146,8 +136,6 @@
 // Card image
 .k-card-image,
 .k-card-media {
-    // @extend %top-rounded-child;
-    // @extend %bottom-rounded-child;
     border: 0;
     max-width: 100%;
     overflow: hidden;
@@ -215,8 +203,6 @@
 
 // Card actions
 .k-card-actions {
-    // @extend %top-rounded-child;
-    // @extend %bottom-rounded-child;
     padding: @card-actions-padding-y @card-actions-padding-x;
     border-width: 0;
     border-style: solid;
