@@ -8307,6 +8307,7 @@ declare namespace kendo.ui {
         refresh(): void;
         removeSheet(sheet: kendo.spreadsheet.Sheet): void;
         renameSheet(sheet: kendo.spreadsheet.Sheet, newSheetName: string): kendo.spreadsheet.Sheet;
+        saveJSON(): JQueryPromise<any>;
         toJSON(): any;
         fromJSON(data: any): void;
         defineName(name: string, value: string, hidden: boolean): void;
