@@ -958,6 +958,7 @@ declare namespace kendo.data {
         destroy?: string | DataSourceTransportDestroy | ((options: DataSourceTransportOptions) => void);
         push?: Function;
         submit?: Function;
+        batch?: DataSourceTransportBatch | ((options: DataSourceTransportOptions) => void);
         read?: string | DataSourceTransportRead | ((options: DataSourceTransportOptions) => void);
         signalr?: DataSourceTransportSignalr | ((options: DataSourceTransportOptions) => void);
         update?: string | DataSourceTransportUpdate | ((options: DataSourceTransportOptions) => void);
@@ -1246,6 +1247,15 @@ declare namespace kendo.data {
     interface DataSourceSortItem {
         field?: string;
         dir?: string;
+    }
+
+    interface DataSourceTransportBatch extends JQueryAjaxSettings {
+        cache?: boolean;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
     }
 
     interface DataSourceTransportCreate extends JQueryAjaxSettings {

@@ -1,4 +1,3 @@
-
 ---
 title: Online Technical Training
 page_title: Online Technical Training
@@ -6,6 +5,7 @@ description: "Get started with {{ site.product_short }} and learn about the Onli
 slug: virtualclass_uiforcore
 position: 20
 ---
+
 {% if site.core %}
     {% assign VirtualClassroom = "https://learn.telerik.com/learn/course/internal/view/elearning/8/telerik-ui-for-aspnet-core" %}
 {% else %}
