@@ -452,6 +452,7 @@
 
             _actionKeyHandler: function(e) {
                 if (buttonKeyTrigger(e)) {
+                    e.preventDefault();
                     this._runActionBtn(e.currentTarget);
                 } else if (e.keyCode == keys.ESC) {
                     this.close(false);
