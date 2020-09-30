@@ -2652,7 +2652,7 @@ Can be set to a JavaScript object which represents the column menu configuration
 
 > Check [Column menu](https://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
 
-### columnMenu.columns `Boolean` *(default: true)*
+### columnMenu.columns `Boolean|Object` *(default: true)*
 
 If set to `true` the column menu would allow the user to select (show and hide) grid columns. By default the column menu allows column selection.
 
@@ -2675,6 +2675,15 @@ If set to `true` the column menu would allow the user to select (show and hide) 
       ]
     });
     </script>
+
+### columnMenu.columns.sort `String` *(default: null)*
+
+The sort order which will be applied over the columns list. By default, the columns menu items are in the same order as the columns in the grid.
+
+The supported values are:
+
+* `"asc"` (ascending order)
+* `"desc"` (descending order)
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
