@@ -373,7 +373,7 @@ Set badge shape after initialization.
             shape: 'rounded',
         }).data('kendoBadge');
 
-        window.setTiemout(function() {
+        window.setTimeout(function() {
             badge.shape('pill')
         }, 1000);
     </script>
