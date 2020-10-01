@@ -91,7 +91,6 @@ defaults:
         category: "default"
         product: "aspnet-mvc"
         editable: true
-        title_prefix: "MVC"
 -
     scope:
         path: "aspnet-mvc"

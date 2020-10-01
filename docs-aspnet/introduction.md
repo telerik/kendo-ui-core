@@ -50,7 +50,7 @@ div#cta-placeholder .aspnet_download_btn {
 
 <div id="cta-placeholder">
 <br />
-    <a href="https://www.telerik.com/download-trial-file/v2/{{ telerik_product_url }}" class="aspnet_download_btn">Download Free Trial</a>
+    <a href="{% if site.core %}https://www.telerik.com/download-trial-file/v2/aspnet-core-ui{% else %}https://www.telerik.com/download-trial-file/v2-b/ui-for-asp.net-mvc{% endif %}" class="aspnet_download_btn">Download Free Trial</a>
 </div>
 
 ## Getting Started

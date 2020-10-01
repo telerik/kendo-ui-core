@@ -602,7 +602,6 @@ defaults:
         category: "default"
         product: "aspnet-core"
         editable: true
-        title_prefix: "Core"
 -
     scope:
         path: "aspnet-core"

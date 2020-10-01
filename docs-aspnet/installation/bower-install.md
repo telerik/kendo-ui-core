@@ -90,7 +90,7 @@ This section provides solutions for common issues you might encounter while inst
 
 **Cause** The underlying Git installation is missing the certificate bundle.
 
-**Solution** Follow the steps in [this article](http://blogs.msdn.com/b/phkelley/archive/2014/01/20/adding-a-corporate-or-self-signed-certificate-authority-to-git-exe-s-store.aspx).
+**Solution** Follow the steps in [this article](https://docs.microsoft.com/en-us/archive/blogs/phkelley/adding-a-corporate-or-self-signed-certificate-authority-to-git-exes-store).
 
 > * The 1.9.5 Git build does not work with the Bower package.
 > * To use the `@` symbol in the URL for accessing the Kendo UI Bower repository (because of network restrictions or admin rules, for example), encode it as `https://firstname.lasname%40domain.com@bower.telerik.com/bower-kendo-ui.git`.
