@@ -23,7 +23,7 @@ The following example demonstrates how to define the Upload widget by using the 
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
-        .Save("SaveAsync", "Upload")
+        .Save("Save", "Upload")
         .Remove("Remove", "Upload")
         .AutoUpload(true)
     )
