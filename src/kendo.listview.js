@@ -150,7 +150,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         items: function() {
-            return this.content.children();
+            return this.content.children(":not(.k-loading-mask)");
         },
 
         dataItem: function(element) {

@@ -19567,7 +19567,7 @@ declare namespace kendo.dataviz.diagram {
         targetConnector: kendo.dataviz.diagram.Connector;
         to: kendo.dataviz.diagram.Shape;
 
-        constructor(options?: ConnectionOptions);
+        constructor(from?: kendo.dataviz.diagram.Shape, to?: kendo.dataviz.diagram.Shape, options?: ConnectionOptions);
 
 
         source(): any;
@@ -20087,7 +20087,7 @@ declare namespace kendo.dataviz.diagram {
         options: RectOptions;
 
 
-        constructor(options?: RectOptions);
+        constructor(x?: number, y?: number, width?: number, height?: number);
 
 
         position(): void;
