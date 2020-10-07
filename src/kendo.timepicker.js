@@ -1128,7 +1128,11 @@ var __meta__ = { // jshint ignore:line
                     activate: function () {
                         if (that.options.timeView && that.options.timeView.list === "scroll") {
                             that.addTranslate();
-                            that.applyValue(that._value);
+                            if (that._value) {
+                                that.applyValue(that._value);
+                            } else {
+                                that._updateCurrentlySelected();
+                            }
                             that._updateRanges();
                             that._focusList(that.list.find(".k-time-list-wrapper:eq(0)"));
                         }
