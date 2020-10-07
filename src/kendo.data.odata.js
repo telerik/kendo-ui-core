@@ -489,6 +489,13 @@ var __meta__ = { // jshint ignore:line
                         result.$count = true;
                         delete result.$inlinecount;
                     }
+					
+					if (result.$filter) {
+						// Remove the single quotation marks around the GUID (OData v4).
+						result.$filter = result.$filter.replace(/('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')/ig, function (x) {
+							return x.substring(1, x.length - 1);
+						});
+					}
 
                     return result;
                 },
