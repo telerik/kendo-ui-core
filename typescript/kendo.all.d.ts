@@ -8515,6 +8515,7 @@ declare namespace kendo.ui {
         sheets?: SpreadsheetSheet[];
         sheetsbar?: boolean;
         toolbar?: boolean | SpreadsheetToolbar;
+        useCultureDecimals?: boolean;
         insertSheet?(e: SpreadsheetInsertSheetEvent): void;
         removeSheet?(e: SpreadsheetRemoveSheetEvent): void;
         renameSheet?(e: SpreadsheetRenameSheetEvent): void;
