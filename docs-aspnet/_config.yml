@@ -240,6 +240,8 @@ navigation:
         title: "Chat"
      "tag-helpers/interactivity":
         title: "Interactivity and UX"
+     "tag-helpers/interactivity/loader":
+        title: "Loader"
      "tag-helpers/media":
         title: "Media"
      "tag-helpers/pdf":
@@ -367,6 +369,8 @@ navigation:
         title: "Chat"
      "html-helpers/interactivity":
         title: "Interactivity and UX"
+     "html-helpers/interactivity/loader":
+        title: "Loader"
      "html-helpers/interactivity/sortable/integration":
         title: "Integration"
         position: 6
@@ -480,6 +484,8 @@ navigation:
         title: "Gantt"
      "*imageeditor":
         title: "Image Editor"
+     "*loader":
+        title: "Loader"
      "*lineargauge":
         title: "LinearGauge"
      "*listbox":
@@ -837,7 +843,7 @@ defaults:
         title_prefix: "Core DragAndDrop Component"
 -
     scope:
-        path: "html-helpers/interactivity/loder"
+        path: "html-helpers/interactivity/loader"
     values:
         title_prefix: "Core Loader Component"       
 -

@@ -137,7 +137,6 @@ var __meta__ = { // jshint ignore:line
         that.options = options;
         that._dates = [];
 
-
         that._createList(options.timeView && options.timeView.list === "scroll");
 
         if (id) {
@@ -810,6 +809,9 @@ var __meta__ = { // jshint ignore:line
                 }
                 result.push(new Date(start));
                 start.setTime(start.getTime() + msInterval);
+                if (!msMax && this.options.maxSet){
+                    break;
+                }
             }
 
             return result;
@@ -1286,7 +1288,8 @@ var __meta__ = { // jshint ignore:line
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
                 },
-                specifiedRange: that._specifiedRange
+                specifiedRange: that._specifiedRange,
+                maxSet: +options.max != +TODAY
             }));
             ul = timeView.ul;
 
@@ -1492,6 +1495,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         max: function (value) {
+            if (value && this.timeView) {
+                this.timeView.options.maxSet = true;
+            } else if (this.timeView) {
+                this.timeView.options.maxSet = false;
+            }
             return this._option("max", value);
         },
 

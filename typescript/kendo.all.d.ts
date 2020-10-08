@@ -958,6 +958,7 @@ declare namespace kendo.data {
         destroy?: string | DataSourceTransportDestroy | ((options: DataSourceTransportOptions) => void);
         push?: Function;
         submit?: Function;
+        batch?: DataSourceTransportBatch | ((options: DataSourceTransportOptions) => void);
         read?: string | DataSourceTransportRead | ((options: DataSourceTransportOptions) => void);
         signalr?: DataSourceTransportSignalr | ((options: DataSourceTransportOptions) => void);
         update?: string | DataSourceTransportUpdate | ((options: DataSourceTransportOptions) => void);
@@ -1246,6 +1247,15 @@ declare namespace kendo.data {
     interface DataSourceSortItem {
         field?: string;
         dir?: string;
+    }
+
+    interface DataSourceTransportBatch extends JQueryAjaxSettings {
+        cache?: boolean;
+        contentType?: string;
+        data?: any;
+        dataType?: string;
+        type?: string;
+        url?: any;
     }
 
     interface DataSourceTransportCreate extends JQueryAjaxSettings {
@@ -1944,6 +1954,73 @@ declare namespace kendo.ui {
     interface AutoCompleteSelectEvent extends AutoCompleteEvent {
         dataItem?: any;
         item?: JQuery;
+    }
+
+
+    class Breadcrumb extends kendo.ui.Widget {
+
+        static fn: Breadcrumb;
+
+        options: BreadcrumbOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Breadcrumb;
+
+        constructor(element: Element, options?: BreadcrumbOptions);
+
+        value(path: string): void;
+        items(items: BreadcrumbItem[]): void;
+        destroy(): void;
+    }
+
+    interface BreadcrumbOptions {
+        name?: string;
+        items?: BreadcrumbItem[];
+        bindToLocation?: boolean;
+        delimiterIcon?: string;
+        editable?: boolean;
+        gap?: number;
+        messages?: BreadcrumbMessages;
+        navigational?: boolean;
+        rootIcon?: string;
+        value?: string;
+
+        change?(e: BreadcrumbChangeEvent): void;
+        click?(e: BreadcrumbClickEvent): void;
+    }
+
+    interface BreadcrumbMessages {
+        rootTitle?: string;
+    }
+
+    interface BreadcrumbItem {
+        type?: string;
+        href?: string;
+        text?: string;
+        icon?: string;
+        itemClass?: string;
+        linkClass?: string;
+        iconClass?: string;
+        showIcon?: boolean;
+        showText?: boolean;
+    }
+
+    interface BreadcrumbEvent {
+        sender: Breadcrumb;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface BreadcrumbChangeEvent extends BreadcrumbEvent {
+        value?: string;
+    }
+
+    interface BreadcrumbClickEvent extends BreadcrumbEvent {
+        originalEvent?: any;
+        isRoot?: boolean;
+        item?: BreadcrumbItem;
     }
 
 
