@@ -1957,6 +1957,73 @@ declare namespace kendo.ui {
     }
 
 
+    class Breadcrumb extends kendo.ui.Widget {
+
+        static fn: Breadcrumb;
+
+        options: BreadcrumbOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Breadcrumb;
+
+        constructor(element: Element, options?: BreadcrumbOptions);
+
+        value(path: string): void;
+        items(items: BreadcrumbItem[]): void;
+        destroy(): void;
+    }
+
+    interface BreadcrumbOptions {
+        name?: string;
+        items?: BreadcrumbItem[];
+        bindToLocation?: boolean;
+        delimiterIcon?: string;
+        editable?: boolean;
+        gap?: number;
+        messages?: BreadcrumbMessages;
+        navigational?: boolean;
+        rootIcon?: string;
+        value?: string;
+
+        change?(e: BreadcrumbChangeEvent): void;
+        click?(e: BreadcrumbClickEvent): void;
+    }
+
+    interface BreadcrumbMessages {
+        rootTitle?: string;
+    }
+
+    interface BreadcrumbItem {
+        type?: string;
+        href?: string;
+        text?: string;
+        icon?: string;
+        itemClass?: string;
+        linkClass?: string;
+        iconClass?: string;
+        showIcon?: boolean;
+        showText?: boolean;
+    }
+
+    interface BreadcrumbEvent {
+        sender: Breadcrumb;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface BreadcrumbChangeEvent extends BreadcrumbEvent {
+        value?: string;
+    }
+
+    interface BreadcrumbClickEvent extends BreadcrumbEvent {
+        originalEvent?: any;
+        isRoot?: boolean;
+        item?: BreadcrumbItem;
+    }
+
+
     class Button extends kendo.ui.Widget {
 
         static fn: Button;

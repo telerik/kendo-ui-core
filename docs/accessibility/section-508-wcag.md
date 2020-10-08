@@ -45,6 +45,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Gantt         |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/gantt/index)
 |Grid          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/grid/index)
 |ImageEditor   |Yes |AА  |[Browse](https://demos.telerik.com/kendo-ui/imageeditor/index)
+|Loader        |Yes |AАA |[Browse](https://demos.telerik.com/kendo-ui/loader/index)
 |LinearGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 |ListBox       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/listbox/index)
 |ListView	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/listview/index)

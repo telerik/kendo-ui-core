@@ -3664,6 +3664,10 @@ For more information, please refer to the [Window configuration API](/api/javasc
       });
     </script>
 
+### encodeTitles `Boolean` *(default: false)*
+
+If set to `true` the column title will be HTML-encoded before it is displayed. If set to `false` the column title will be displayed as is.
+
 ### excel `Object`
 
 Configures the Kendo UI Grid Excel export settings.
