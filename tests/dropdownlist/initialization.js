@@ -1627,6 +1627,12 @@
 
         it("unifyType parses booleans correctly", function() {
             assert.equal(kendo.ui.List.unifyType("false", "boolean"), false);
+            assert.equal(kendo.ui.List.unifyType("true", "boolean"), true);
+        });
+
+        it("unifyType parses numbers to booleans correctly", function() {
+            assert.equal(kendo.ui.List.unifyType(0, "boolean"), false);
+            assert.equal(kendo.ui.List.unifyType(1, "boolean"), false);
         });
     });
 }());
