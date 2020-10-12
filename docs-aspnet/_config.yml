@@ -607,8 +607,9 @@ defaults:
         layout: "documentation"
         category: "default"
         product: "aspnet-core"
-        editable: true
-        title_prefix: "Core"
+        editable: troubleshoot
+        title_prefix: "ASP.NET Core"
+        title_prefix_separator: " "
 -
     scope:
         path: "aspnet-core"
