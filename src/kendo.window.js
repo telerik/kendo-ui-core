@@ -63,6 +63,7 @@
             RESIZEEND = "resizeEnd",
             DRAGSTART = "dragstart",
             DRAGEND = "dragend",
+            KENDOKEYDOWN = "kendoKeydown",
             ERROR = "error",
             OVERFLOW = "overflow",
             DATADOCOVERFLOWRULE = "original-overflow-rule",
@@ -220,7 +221,6 @@
                 }
 
                 windowContent = wrapper.children(KWINDOWCONTENT);
-                that._tabindex(windowContent);
 
                 if (options.visible && options.modal) {
                     that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
@@ -230,14 +230,12 @@
                     .on("mouseenter" + NS, TITLEBAR_BUTTONS, proxy(that._buttonEnter, that))
                     .on("mouseleave" + NS, TITLEBAR_BUTTONS, proxy(that._buttonLeave, that))
                     .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that))
-                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("keydown" + NS, that, proxy(that._keydown, that))
                     .on("focus" + NS, proxy(that._focus, that))
                     .on("blur" + NS, proxy(that._blur, that));
 
                 windowContent
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("focus" + NS, proxy(that._focus, that))
-                    .on("blur" + NS, proxy(that._blur, that));
+                    .on("keydown" + NS, that, proxy(that._keydownContent, that));
 
                 windowFrame = windowContent.find("." + KCONTENTFRAME)[0];
 
@@ -304,7 +302,7 @@
                     this._tabKeyTrap = new TabKeyTrap(wrapper);
                     this._tabKeyTrap.trap();
                     this._tabKeyTrap.shouldTrap = function () {
-                        return windowContent.data("isFront");
+                        return wrapper.data("isFront");
                     };
                 }
             },
@@ -553,6 +551,7 @@
                 RESIZEEND,
                 DRAGSTART,
                 DRAGEND,
+                KENDOKEYDOWN,
                 ERROR
             ],
 
@@ -596,6 +595,17 @@
                 return $.inArray("close", $.map(this.options.actions, function(x) { return x.toLowerCase(); })) > -1;
             },
 
+            _keydownContent: function(e) {
+                var that = this,
+                    keys = kendo.keys,
+                    keyCode = e.keyCode;
+
+                if (keyCode == keys.ESC && that._closable()) {
+                    e.stopPropagation();
+                    that._close(false);
+                }
+            },
+
             _keydown: function(e) {
                 var that = this,
                     options = that.options,
@@ -635,19 +645,20 @@
                 if(e.altKey && keyCode == keys.UP){
                     if (isMinimized) {
                         that.restore();
-                        that.element.focus();
+                        that.wrapper.focus();
                     } else if (!isMaximized) {
                         that.maximize();
-                        that.element.focus();
+                        that.wrapper.focus();
                     }
+
                 } else if (e.altKey && keyCode == keys.DOWN){
                     if (!isMinimized && !isMaximized) {
                         that.minimize();
                         that.wrapper.focus();
                     } else if (isMaximized) {
                         that.restore();
-                        that.element.focus();
                     }
+
                 }
 
                 offset = kendo.getOffset(wrapper);
@@ -950,7 +961,7 @@
                     that.toFront();
 
                     if (options.autoFocus) {
-                        that.element.focus();
+                        that.wrapper.focus();
                     }
 
                     options.visible = true;
@@ -973,8 +984,8 @@
                         overlay.show();
 
                         $(window).on("focus" + MODAL_NS, function() {
-                            if (contentElement.data("isFront") && !$(document.activeElement).closest(contentElement).length) {
-                               that.element.focus();
+                            if (wrapper.data("isFront") && !$(document.activeElement).closest(wrapper).length) {
+                               that.wrapper.focus();
                             }
                         });
                     }
@@ -1009,7 +1020,7 @@
                 var scrollable = this.options.scrollable !== false;
 
                 if (this.options.autoFocus) {
-                    this.element.focus();
+                    this.wrapper.focus();
                 }
 
                 this.element.css(OVERFLOW, scrollable ? "" : "hidden");
@@ -1123,7 +1134,7 @@
 
             _shouldFocus: function(target) {
                 var active = activeElement(),
-                    element = this.element;
+                    element = this.wrapper;
 
                 return this.options.autoFocus &&
                     !$(active).is(element) &&
@@ -1149,7 +1160,7 @@
                         zIndex = Math.max(+zIndexNew, zIndex);
                     }
 
-                    contentElement.data("isFront", element == currentWindow);
+                    wrapper.data("isFront", element == currentWindow);
                     // Add overlay to windows with iframes and lower z-index to prevent
                     // trapping of events when resizing / dragging
                     if (element != currentWindow && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
@@ -1163,15 +1174,9 @@
                 that.element.find("> .k-overlay").remove();
 
                 if (that._shouldFocus(target)) {
-                    if (that.isMinimized()) {
+                    setTimeout(function(){
                         that.wrapper.focus();
-                    } else if ($(target).is(KOVERLAY)) {
-                        setTimeout(function(){
-                            that.element.focus();
-                        });
-                    } else {
-                        that.element.focus();
-                    }
+                    });
 
                     var scrollTop = containmentContext ? that.containment.scrollTop() : $(window).scrollTop(),
                         windowTop = parseInt(wrapper.position().top, 10);
@@ -1265,7 +1270,6 @@
 
                 options.isMaximized = options.isMinimized = false;
 
-                that.wrapper.removeAttr("tabindex");
                 that.wrapper.removeAttr("aria-labelled-by");
 
                 that.resize();
@@ -1423,7 +1427,6 @@
                     that.options.isMinimized = true;
                 });
 
-                this.wrapper.attr("tabindex", 0);
                 this.wrapper.attr("aria-labelled-by", this.element.attr("aria-labelled-by"));
 
                 this._updateBoundaries();
@@ -1715,6 +1718,7 @@
                 // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
                 wrapper
                     .toggleClass("k-rtl", isRtl)
+                    .attr("tabindex", 0)
                     .append(contentHtml)
                     .find("iframe:not(.k-content-frame)").each(function(index) {
                     // Restore the src attribute of the iframes when they are part of the live DOM tree

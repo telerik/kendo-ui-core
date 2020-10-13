@@ -1695,11 +1695,13 @@ declare namespace kendo.mobile {
         replace(url: string, transition?: string): void;
         scroller(): kendo.mobile.ui.Scroller;
         showLoading(): void;
+        skin(skin: string): string;
         view(): kendo.mobile.ui.View;
     }
 
     interface ApplicationOptions {
         browserHistory?: boolean;
+        hashBang?: boolean;
         hideAddressBar?: boolean;
         updateDocumentTitle?: boolean;
         initial?: string;
@@ -1707,12 +1709,15 @@ declare namespace kendo.mobile {
         loading?: string;
         modelScope?: Object;
         platform?: string;
+        pushState?: boolean;
+        root?: string;
         retina?: boolean;
         serverNavigation?: boolean;
         skin?: string;
         statusBarStyle?: string;
         transition?: string;
         useNativeScrolling?: boolean;
+        webAppCapable?: boolean;
         init?(e: ApplicationEvent): void;
     }
 
@@ -7892,6 +7897,7 @@ declare namespace kendo.ui {
         type?: string;
         workWeekStart?: number;
         workWeekEnd?: number;
+        startDate?(): Date;
     }
 
     interface SchedulerOptions {
@@ -9308,6 +9314,7 @@ declare namespace kendo.ui {
 
         element: JQuery;
         wrapper: JQuery;
+        overflowAnchor: JQuery;
 
         popup: kendo.ui.Popup;
 
