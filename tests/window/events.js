@@ -315,7 +315,7 @@
 
         it("up arrow moves window up", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -330,7 +330,7 @@
 
         it("down arrow moves window down", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -345,7 +345,7 @@
 
         it("left arrow moves window left", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -356,7 +356,7 @@
 
         it("right arrow moves window right", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -423,7 +423,7 @@
 
         it("ctrl+down arrow expands window", function() {
             var dialogObject = createWindow({ height: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.DOWN, { ctrlKey: true });
 
@@ -432,7 +432,7 @@
 
         it("ctrl+up arrow shrinks window", function() {
             var dialogObject = createWindow({ height: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.UP, { ctrlKey: true });
 
@@ -441,7 +441,7 @@
 
         it("ctrl+left arrow shrinks window", function() {
             var dialogObject = createWindow({ width: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.LEFT, { ctrlKey: true });
 
@@ -450,7 +450,7 @@
 
         it("ctrl+right arrow expands window", function() {
             var dialogObject = createWindow({ width: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.RIGHT, { ctrlKey: true });
 
@@ -462,7 +462,7 @@
                 width: 100,
                 minWidth: 95
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.LEFT, { ctrlKey: true });
 
@@ -474,7 +474,7 @@
                 width: 100,
                 maxWidth: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.RIGHT, { ctrlKey: true });
 
@@ -486,7 +486,7 @@
                 height: 100,
                 minHeight: 95
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.UP, { ctrlKey: true });
 
@@ -498,7 +498,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.DOWN, { ctrlKey: true });
 
@@ -510,7 +510,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(80, { altKey: true });
 
@@ -526,7 +526,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.UP, { altKey: true });
 
@@ -538,7 +538,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
             dialogObject.maximize();
             dialog.press(keys.DOWN, { altKey: true });
 
@@ -550,7 +550,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.DOWN, { altKey: true });
 
@@ -562,7 +562,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
             dialogObject.minimize();
             dialog.press(keys.UP, { altKey: true });
 
@@ -593,8 +593,8 @@
                     height: initialSize
                 });
 
-            dialog.element.press(keys.RIGHT, { ctrlKey: true });
-            dialog.element.press(keys.DOWN, { ctrlKey: true });
+            dialog.wrapper.press(keys.RIGHT, { ctrlKey: true });
+            dialog.wrapper.press(keys.DOWN, { ctrlKey: true });
 
             assert.equal(dialog.options.width, initialSize + 10 + "px");
             assert.equal(dialog.options.height, initialSize + 10 + "px");

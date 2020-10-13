@@ -9891,9 +9891,47 @@ The supported values are:
 
 ### series.autoFit `Boolean` *(default: false)*
 
-If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series ([see example]({% slug pietypecharts_widget %}#auto-fit-labels)).
+If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series.
 
 > The `autoFit` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "pie" or "donut".
+
+##### Example - set the chart series autoFit
+
+    <div id="chart" style="width: 200px;"></div>
+    <script>
+    var data = [{
+      kind: 'Solar', share: 0.052
+    }, {
+      kind: 'Wind', share: 0.225
+    }, {
+      kind: 'Other', share: 0.192
+    }, {
+      kind: 'Hydroelectric', share: 0.175
+    }, {
+      kind: 'Nuclear', share: 0.238
+    }, {
+      kind: 'Coal', share: 0.118
+    }];
+
+    $("#chart").kendoChart({
+      dataSource: { data: data },
+      series: [{
+          type: "pie",
+          field: "share",
+          categoryField: "kind",
+          autoFit: true,
+          labels: {
+            color: "#000",
+            position: "outsideEnd",
+            template: "#: category #",
+            visible: true
+          }
+      }],
+      legend: {
+        visible: false
+      }
+    });
+    </script>
 
 ### series.axis `String` *(default: "primary")*
 
