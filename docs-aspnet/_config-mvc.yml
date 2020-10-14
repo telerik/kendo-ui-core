@@ -109,394 +109,394 @@ defaults:
     scope:
         path: "html-helpers/barcodes/barcode"
     values:
-        title_prefix: "MVC BarCode Component"
+        title_prefix: "ASP.NET MVC BarCode Component"
 -
     scope:
         path: "html-helpers/barcodes/qrcode"
     values:
-        title_prefix: "MVC QRCode Component"
+        title_prefix: "ASP.NET MVC QRCode Component"
 -
     scope:
         path: "html-helpers/charts"
     values:
-        title_prefix: "MVC Chart Component"
+        title_prefix: "ASP.NET MVC Chart Component"
 -
     scope:
         path: "html-helpers/conversational-ui/chat"
     values:
-        title_prefix: "MVC Chat Component"
+        title_prefix: "ASP.NET MVC Chat Component"
 -
     scope:
         path: "html-helpers/data-management/filemanager"
     values:
-        title_prefix: "MVC FileManager Component"
+        title_prefix: "ASP.NET MVC FileManager Component"
 -
     scope:
         path: "html-helpers/data-management/filter"
     values:
-        title_prefix: "MVC Filter Component"
+        title_prefix: "ASP.NET MVC Filter Component"
 -
     scope:
         path: "html-helpers/data-management/grid"
     values:
-        title_prefix: "MVC Data Grid Component"
+        title_prefix: "ASP.NET MVC Data Grid Component"
 -
     scope:
         path: "html-helpers/data-management/listview"
     values:
-        title_prefix: "MVC ListView Component"
+        title_prefix: "ASP.NET MVC ListView Component"
 -
     scope:
         path: "html-helpers/data-management/pivotgrid"
     values:
-        title_prefix: "MVC PivotGrid Component"
+        title_prefix: "ASP.NET MVC PivotGrid Component"
 -
     scope:
         path: "html-helpers/data-management/spreadsheet"
     values:
-        title_prefix: "MVC Spreadsheet Component"
+        title_prefix: "ASP.NET MVC Spreadsheet Component"
 -
     scope:
         path: "html-helpers/data-management/treelist"
     values:
-        title_prefix: "MVC TreeList Component"
+        title_prefix: "ASP.NET MVC TreeList Component"
 -
     scope:
         path: "html-helpers/datasource"
     values:
-        title_prefix: "MVC Data Source Component"
+        title_prefix: "ASP.NET MVC Data Source Component"
 -
     scope:
         path: "html-helpers/diagrams-and-maps/diagram"
     values:
-        title_prefix: "MVC Diagram Component"
+        title_prefix: "ASP.NET MVC Diagram Component"
 -
     scope:
         path: "html-helpers/diagrams-and-maps/map"
     values:
-        title_prefix: "MVC Map Component"
+        title_prefix: "ASP.NET MVC Map Component"
 -
     scope:
         path: "html-helpers/editors/autocomplete"
     values:
-        title_prefix: "MVC AutoComplete Component"
+        title_prefix: "ASP.NET MVC AutoComplete Component"
 -
     scope:
         path: "html-helpers/editors/colorpalette"
     values:
-        title_prefix: "MVC ColorPalette Component"
+        title_prefix: "ASP.NET MVC ColorPalette Component"
 -
     scope:
         path: "html-helpers/editors/colorpicker"
     values:
-        title_prefix: "MVC ColorPicker Component"
+        title_prefix: "ASP.NET MVC ColorPicker Component"
 -
     scope:
         path: "html-helpers/editors/combobox"
     values:
-        title_prefix: "MVC ComboBox Component"
+        title_prefix: "ASP.NET MVC ComboBox Component"
 -
     scope:
         path: "html-helpers/editors/dateinput"
     values:
-        title_prefix: "MVC DateInput Component"
+        title_prefix: "ASP.NET MVC DateInput Component"
 -
     scope:
         path: "html-helpers/editors/datepicker"
     values:
-        title_prefix: "MVC DatePicker Component"
+        title_prefix: "ASP.NET MVC DatePicker Component"
 -
     scope:
         path: "html-helpers/editors/daterangepicker"
     values:
-        title_prefix: "MVC DateRangePicker Component"
+        title_prefix: "ASP.NET MVC DateRangePicker Component"
 -
     scope:
         path: "html-helpers/editors/datetimepicker"
     values:
-        title_prefix: "MVC DateTimePicker Component"
+        title_prefix: "ASP.NET MVC DateTimePicker Component"
 -
     scope:
         path: "html-helpers/editors/dropdownlist"
     values:
-        title_prefix: "MVC DropDownList Component"
+        title_prefix: "ASP.NET MVC DropDownList Component"
 -
     scope:
         path: "html-helpers/editors/dropdowntree"
     values:
-        title_prefix: "MVC DropDownTree Component"
+        title_prefix: "ASP.NET MVC DropDownTree Component"
 -
     scope:
         path: "html-helpers/editors/editor"
     values:
-        title_prefix: "MVC Editor Component"
+        title_prefix: "ASP.NET MVC Editor Component"
 -
     scope:
         path: "html-helpers/editors/flatcolorpicker"
     values:
-        title_prefix: "MVC FlatColorPicker Component"
+        title_prefix: "ASP.NET MVC FlatColorPicker Component"
 -
     scope:
         path: "html-helpers/editors/imageeditor"
     values:
-        title_prefix: "MVC Image Editor Component"
+        title_prefix: "ASP.NET MVC Image Editor Component"
 -
     scope:
         path: "html-helpers/editors/listbox"
     values:
-        title_prefix: "MVC ListBox Component"
+        title_prefix: "ASP.NET MVC ListBox Component"
 -
     scope:
         path: "html-helpers/editors/maskedtextbox"
     values:
-        title_prefix: "MVC MaskedTextBox Component"
+        title_prefix: "ASP.NET MVC MaskedTextBox Component"
 -
     scope:
         path: "html-helpers/editors/multicolumncombobox"
     values:
-        title_prefix: "MVC MultiColumnComboBox Component"
+        title_prefix: "ASP.NET MVC MultiColumnComboBox Component"
 -
     scope:
         path: "html-helpers/editors/multiselect"
     values:
-        title_prefix: "MVC MultiSelect Component"
+        title_prefix: "ASP.NET MVC MultiSelect Component"
 -
     scope:
         path: "html-helpers/editors/numerictextbox"
     values:
-        title_prefix: "MVC NumericTextBox Component"
+        title_prefix: "ASP.NET MVC NumericTextBox Component"
 -
     scope:
         path: "html-helpers/editors/rating"
     values:
-        title_prefix: "MVC Rating Component"
+        title_prefix: "ASP.NET MVC Rating Component"
 -
     scope:
         path: "html-helpers/editors/slider"
     values:
-        title_prefix: "MVC Slider Component"
+        title_prefix: "ASP.NET MVC Slider Component"
 -
     scope:
         path: "html-helpers/editors/switch"
     values:
-        title_prefix: "MVC Switch Component"
+        title_prefix: "ASP.NET MVC Switch Component"
 -
     scope:
         path: "html-helpers/editors/textarea"
     values:
-        title_prefix: "MVC TextArea Component"
+        title_prefix: "ASP.NET MVC TextArea Component"
 -
     scope:
         path: "html-helpers/editors/textbox"
     values:
-        title_prefix: "MVC TextBox Component"
+        title_prefix: "ASP.NET MVC TextBox Component"
 -
     scope:
         path: "html-helpers/editors/timepicker"
     values:
-        title_prefix: "MVC TimePicker Component"
+        title_prefix: "ASP.NET MVC TimePicker Component"
 -
     scope:
         path: "html-helpers/editors/upload"
     values:
-        title_prefix: "MVC Upload Component"
+        title_prefix: "ASP.NET MVC Upload Component"
 -
     scope:
         path: "html-helpers/editors/validator"
     values:
-        title_prefix: "MVC Validator Component"
+        title_prefix: "ASP.NET MVC Validator Component"
 -
     scope:
         path: "html-helpers/gauges/arcgauge"
     values:
-        title_prefix: "MVC ArcGauge Component"
+        title_prefix: "ASP.NET MVC ArcGauge Component"
 -
     scope:
         path: "html-helpers/gauges/lineargauge"
     values:
-        title_prefix: "MVC LinearGauge Component"
+        title_prefix: "ASP.NET MVC LinearGauge Component"
 -
     scope:
         path: "html-helpers/gauges/radialgauge"
     values:
-        title_prefix: "MVC RadialGauge Component"
+        title_prefix: "ASP.NET MVC RadialGauge Component"
 -
     scope:
         path: "html-helpers/hybrid"
     values:
-        title_prefix: "MVC Hybrid"
+        title_prefix: "ASP.NET MVC Hybrid"
 -
     scope:
         path: "html-helpers/interactivity/draganddrop"
     values:
-        title_prefix: "MVC DragAndDrop Component"
+        title_prefix: "ASP.NET MVC DragAndDrop Component"
 -
     scope:
         path: "html-helpers/interactivity/loader"
     values:
-        title_prefix: "MVC Loader Component"        
+        title_prefix: "ASP.NET MVC Loader Component"        
 -
     scope:
         path: "html-helpers/interactivity/progressbar"
     values:
-        title_prefix: "MVC ProgressBar Component"
+        title_prefix: "ASP.NET MVC ProgressBar Component"
 -
     scope:
         path: "html-helpers/interactivity/sortable"
     values:
-        title_prefix: "MVC Sortable Component"
+        title_prefix: "ASP.NET MVC Sortable Component"
 -
     scope:
         path: "html-helpers/layout/badge"
     values:
-        title_prefix: "MVC Badge Component"
+        title_prefix: "ASP.NET MVC Badge Component"
 -
     scope:
         path: "html-helpers/layout/form"
     values:
-        title_prefix: "MVC Form Component"
+        title_prefix: "ASP.NET MVC Form Component"
 -
     scope:
         path: "html-helpers/layout/dialog"
     values:
-        title_prefix: "MVC Dialog Component"
+        title_prefix: "ASP.NET MVC Dialog Component"
 -
     scope:
         path: "html-helpers/layout/notification"
     values:
-        title_prefix: "MVC Notification Component"
+        title_prefix: "ASP.NET MVC Notification Component"
 -
     scope:
         path: "html-helpers/layout/popup"
     values:
-        title_prefix: "MVC Popup Component"
+        title_prefix: "ASP.NET MVC Popup Component"
 -
     scope:
         path: "html-helpers/layout/responsivepanel"
     values:
-        title_prefix: "MVC ResponsivePanel Component"
+        title_prefix: "ASP.NET MVC ResponsivePanel Component"
 -
     scope:
         path: "html-helpers/layout/splitter"
     values:
-        title_prefix: "MVC Splitter Component"
+        title_prefix: "ASP.NET MVC Splitter Component"
 -
     scope:
         path: "html-helpers/layout/tooltip"
     values:
-        title_prefix: "MVC Tooltip Component"
+        title_prefix: "ASP.NET MVC Tooltip Component"
 -
     scope:
         path: "html-helpers/layout/window"
     values:
-        title_prefix: "MVC Window Component"
+        title_prefix: "ASP.NET MVC Window Component"
 -
     scope:
         path: "html-helpers/media/mediaplayer"
     values:
-        title_prefix: "MVC MediaPlayer Component"
+        title_prefix: "ASP.NET MVC MediaPlayer Component"
 -
     scope:
         path: "html-helpers/media/scrollview"
     values:
-        title_prefix: "MVC ScrollView Component"
+        title_prefix: "ASP.NET MVC ScrollView Component"
 -
     scope:
         path: "html-helpers/navigation/appbar"
     values:
-        title_prefix: "MVC AppBar Component"
+        title_prefix: "ASP.NET MVC AppBar Component"
         title: "AppBar"
 
     scope:
         path: "html-helpers/navigation/breadcrumb"
     values:
-        title_prefix: "MVC Breadcrumb Component"
+        title_prefix: "ASP.NET MVC Breadcrumb Component"
         title: "Breadcrumb"
 -
     scope:
         path: "html-helpers/navigation/stepper"
     values:
-        title_prefix: "MVC Stepper Component"
+        title_prefix: "ASP.NET MVC Stepper Component"
 -
     scope:
         path: "html-helpers/navigation/wizard"
     values:
-        title_prefix: "MVC Wizard Component"
+        title_prefix: "ASP.NET MVC Wizard Component"
 -
     scope:
         path: "html-helpers/navigation/button"
     values:
-        title_prefix: "MVC Button Component"
+        title_prefix: "ASP.NET MVC Button Component"
 -
     scope:
         path: "html-helpers/navigation/buttongroup"
     values:
-        title_prefix: "MVC ButtonGroup Component"
+        title_prefix: "ASP.NET MVC ButtonGroup Component"
 -
     scope:
         path: "html-helpers/navigation/drawer"
     values:
-        title_prefix: "MVC Drawer Component"
+        title_prefix: "ASP.NET MVC Drawer Component"
 -
     scope:
         path: "html-helpers/navigation/menu"
     values:
-        title_prefix: "MVC Menu Component"
+        title_prefix: "ASP.NET MVC Menu Component"
 -
     scope:
         path: "html-helpers/navigation/panelbar"
     values:
-        title_prefix: "MVC PanelBar Component"
+        title_prefix: "ASP.NET MVC PanelBar Component"
 -
     scope:
         path: "html-helpers/navigation/radiobutton"
     values:
-        title_prefix: "MVC RadioButton Component"
+        title_prefix: "ASP.NET MVC RadioButton Component"
 -
     scope:
         path: "html-helpers/navigation/tabstrip"
     values:
-        title_prefix: "MVC TabStrip Component"
+        title_prefix: "ASP.NET MVC TabStrip Component"
 -
     scope:
         path: "html-helpers/navigation/timeline"
     values:
-        title_prefix: "MVC TimeLine Component"
+        title_prefix: "ASP.NET MVC TimeLine Component"
 -
     scope:
         path: "html-helpers/navigation/toolbar"
     values:
-        title_prefix: "MVC ToolBar Component"
+        title_prefix: "ASP.NET MVC ToolBar Component"
 -
     scope:
         path: "html-helpers/navigation/treeview"
     values:
-        title_prefix: "MVC TreeView Component"
+        title_prefix: "ASP.NET MVC TreeView Component"
 -
     scope:
         path: "html-helpers/pdf/pdfviewer"
     values:
-        title_prefix: "MVC PDFViewer Component"
+        title_prefix: "ASP.NET MVC PDFViewer Component"
 -
     scope:
         path: "html-helpers/scheduling/calendar"
     values:
-        title_prefix: "MVC Calendar Component"
+        title_prefix: "ASP.NET MVC Calendar Component"
 -
     scope:
         path: "html-helpers/scheduling/gantt"
     values:
-        title_prefix: "MVC Gantt Component"
+        title_prefix: "ASP.NET MVC Gantt Component"
 -
     scope:
         path: "html-helpers/scheduling/multiviewcalendar"
     values:
-        title_prefix: "MVC MultiViewCalendar Component"
+        title_prefix: "ASP.NET MVC MultiViewCalendar Component"
 -
     scope:
         path: "html-helpers/scheduling/scheduler"
     values:
-        title_prefix: "MVC Scheduler Component"
+        title_prefix: "ASP.NET MVC Scheduler Component"
 
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"
