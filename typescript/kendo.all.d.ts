@@ -1660,6 +1660,82 @@ declare namespace kendo.ui {
         hold?(e: DraggableEvent): void;
     }
 
+    type AllEditorOptions = AutoCompleteOptions |
+        ColorPickerOptions |
+        ComboBoxOptions |
+        DateInputOptions |
+        DatePickerOptions |
+        DropDownTreeOptions |
+        EditorOptions |
+        MaskedTextBoxOptions |
+        MultiColumnComboBoxOptions |
+        MultiSelectOptions |
+        NumericTextBoxOptions |
+        RatingOptions |
+        SliderOptions |
+        SwitchOptions |
+        TimePickerOptions |
+        DropDownListOptions;
+
+    interface EditorDefinitionOptions {
+        id?: string;
+        field: string;
+        title?: string;
+        model: kendo.data.Model;
+        editor?: string;
+        editorOptions?: AllEditorOptions;
+        format?: string;
+    }
+
+
+    interface EditorDefinition {
+        (container: JQuery | Element | string, options: EditorDefinitionOptions): void;
+    }
+    interface EditorDefinitions {
+        number: EditorDefinition;
+        date: EditorDefinition;
+        string: EditorDefinition;
+        boolean: EditorDefinition;
+        values: EditorDefinition;
+        kendoEditor: EditorDefinition;
+    }
+
+    interface MobileEditorDefinitions {
+        number: EditorDefinition;
+        date: EditorDefinition;
+        string: EditorDefinition;
+        boolean: EditorDefinition;
+        values: EditorDefinition;
+    }
+
+    interface EditableOptions {
+        name: string;
+        editors: EditorDefinitions;
+        mobileEditors: MobileEditorDefinitions;
+        clearContainer: boolean;
+        validateOnBlur: boolean;
+        validationSummary: boolean;
+        errorTemplate: string;
+        skipFocus: boolean;
+    }
+    interface EditorField {
+        field?: string;
+        values?: any[];
+        editor?: string;
+    }
+
+    interface Editable extends Widget {
+        options: EditableOptions;
+        validatable?: kendo.ui.Validator;
+
+        init(element: Element, options?: Object): void;
+        init(element: JQuery, options?: Object): void;
+        init(selector: String, options?: Object): void;
+        editor(field: string | EditorField, modelField: string | kendo.data.DataSourceSchemaModelField): void;
+        refresh(): void;
+        end(): void;
+    }
+
     interface GridColumnEditorOptions {
         field?: string;
         format?: string;
@@ -4854,6 +4930,7 @@ declare namespace kendo.ui {
         options: GridOptions;
 
         dataSource: kendo.data.DataSource;
+        editable?: kendo.ui.Editable;
         columns: GridColumn[];
         footer: JQuery;
         pager: kendo.ui.Pager;
