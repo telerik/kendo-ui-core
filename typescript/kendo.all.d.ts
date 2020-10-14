@@ -314,6 +314,8 @@ declare namespace kendo {
 
         trigger(eventName: string, e?: any): boolean;
         unbind(eventName?: string, handler?: any): Observable;
+
+        angular(eventName: string, handler: Function): void;
     }
 
     interface ViewOptions {
@@ -746,7 +748,7 @@ declare namespace kendo.data {
 
         append(model: any): void;
         level(): number;
-        load(id: any): void;
+        load(): void;
         loaded(value: boolean): void;
         loaded(): boolean;
         parentNode(): Node;
@@ -1520,6 +1522,16 @@ declare namespace kendo.data.binders.widget.grid {
 
 declare namespace kendo.data.transports {
     var odata: DataSourceTransport;
+    var filebrowser: DataSourceTransport;
+    var imagebrowser: DataSourceTransport;
+    var signalr: DataSourceTransport;
+}
+
+declare namespace kendo.data.schemas {
+    var odata: DataSourceSchema;
+    var filemanager: DataSourceSchema;
+    var filebrowser: DataSourceSchema;
+    var imagebrowser: DataSourceSchema;
 }
 
 declare namespace kendo.ui {
@@ -1673,7 +1685,9 @@ declare namespace kendo.ui {
 
 declare namespace kendo.ui.editor {
     class Toolbar extends kendo.ui.Widget{
-        window: kendo.ui.Window;
+        element: JQuery;
+        options: any;
+        tools: any[];
     }
 }
 
@@ -6674,7 +6688,7 @@ declare namespace kendo.ui {
         activatePage(): void;
         loadPage(): void;
         execute(): void;
-        setOptions(): void;
+        setOptions(options: any): void;
         destroy(): void;
 
     }
@@ -10561,6 +10575,9 @@ declare namespace kendo.ui {
     }
 
     interface WindowContent {
+        url?: string;
+        dataType?: string;
+        iframe?: boolean;
         template?: string;
     }
 
@@ -11186,25 +11203,19 @@ declare namespace kendo.drawing {
 
 
     interface PDFOptions  {
-
-
-
         creator?: string;
         date?: Date;
         imgDPI?: number;
         keywords?: string;
         landscape?: boolean;
         margin?: any;
+        multiPage?: boolean;
         paperSize?: any;
+        jpegQuality?: number;
+        keepPNG?: boolean;
         subject?: string;
         title?: string;
-
-
-
-
     }
-
-
 
     class Path extends kendo.drawing.Element {
 
@@ -13322,6 +13333,7 @@ declare namespace kendo.dataviz.ui {
         padding?: number | ChartSeriesDefaultsLabelsPadding;
         rotation?: string|number;
         template?: string|Function;
+        position?: string|Function;
         visible?: boolean;
         visual?: Function;
         from?: ChartSeriesDefaultsLabelsFrom;
@@ -20537,10 +20549,10 @@ declare namespace kendo {
         function guid(): string;
         function htmlEncode(value: string): string;
         function observableHierarchy(array: any): void;
-        function parseDate(value: string, formats?: string, culture?: string): Date;
-        function parseDate(value: string, formats?: any, culture?: string): Date;
-        function parseExactDate(value: string, formats?: string, culture?: string): Date;
-        function parseExactDate(value: string, formats?: any, culture?: string): Date;
+        function parseDate(value: string, formats?: string, culture?: string): Date | null;
+        function parseDate(value: string, formats?: any, culture?: string): Date | null;
+        function parseExactDate(value: string, formats?: string, culture?: string): Date | null;
+        function parseExactDate(value: string, formats?: any, culture?: string): Date| null;
         function parseFloat(value: string, culture?: string): number;
         function parseInt(value: string, culture?: string): number;
         function parseColor(color: string, noerror: boolean): kendo.Color;
@@ -20585,56 +20597,39 @@ declare namespace kendo {
 }
 declare namespace kendo.spreadsheet {
     class CustomFilter extends Observable {
-
-
         options: CustomFilterOptions;
 
-
-
-
         init(options: any): void;
-
     }
 
     interface CustomFilterOptions {
         name?: string;
     }
+
     interface CustomFilterEvent {
         sender: CustomFilter;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
 
-
     class DynamicFilter extends Observable {
-
-
         options: DynamicFilterOptions;
 
-
-
-
         init(options: any): void;
-
     }
 
     interface DynamicFilterOptions {
         name?: string;
     }
+
     interface DynamicFilterEvent {
         sender: DynamicFilter;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
 
-
     class Range extends Observable {
-
-
         options: RangeOptions;
-
-
-
 
         background(): string;
         background(value?: string): void;
@@ -20702,26 +20697,20 @@ declare namespace kendo.spreadsheet {
         verticalAlign(value?: string): void;
         wrap(): boolean;
         wrap(value?: boolean): void;
-
     }
 
     interface RangeOptions {
         name?: string;
     }
+
     interface RangeEvent {
         sender: Range;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
 
-
     class Sheet extends Observable {
-
-
         options: SheetOptions;
-
-
-
 
         clearFilter(indexes: number): void;
         clearFilter(indexes: any): void;
@@ -20750,13 +20739,13 @@ declare namespace kendo.spreadsheet {
         toJSON(): void;
         unhideColumn(index: number): void;
         unhideRow(index: number): void;
-
     }
 
     interface SheetOptions {
         name?: string;
         change?(e: SheetChangeEvent): void;
     }
+
     interface SheetEvent {
         sender: Sheet;
         preventDefault: Function;
@@ -20766,51 +20755,39 @@ declare namespace kendo.spreadsheet {
     interface SheetChangeEvent extends SheetEvent {
     }
 
-
     class TopFilter extends Observable {
-
-
         options: TopFilterOptions;
 
-
-
-
         init(options: any): void;
-
     }
 
     interface TopFilterOptions {
         name?: string;
     }
+
     interface TopFilterEvent {
         sender: TopFilter;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
 
-
     class ValueFilter extends Observable {
-
-
         options: ValueFilterOptions;
 
-
-
-
         init(options: any): void;
-
     }
 
     interface ValueFilterOptions {
         name?: string;
     }
+
     interface ValueFilterEvent {
         sender: ValueFilter;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
     }
 
-
+    function defineFunction(name: String, handler: Function): any;
 }
 
 declare namespace kendo.stepper {
@@ -21983,6 +21960,7 @@ declare namespace kendo.ooxml {
         cells?: WorkbookSheetRowCell[];
         index?: number;
         height?: number;
+        type?: string;
     }
 
     interface WorkbookSheet {

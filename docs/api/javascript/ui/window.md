@@ -191,7 +191,62 @@ Specifies a URL or request options from where the Window will load its content.
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
-      content: "/details"
+      content: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"
+    });
+    </script>
+
+### content.url `String`
+
+Specifies the url from which the content is fetched
+
+#### Example - fetching JSON and displaying it through a template
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        content: {
+          url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html",
+        }
+      });
+    </script>
+
+### content.dataType `String` *(default: "html")*
+
+The type of result expected from the remote service. Used values are "html" and "json".
+
+#### Example - fetching and displaying JSON content it in the Window
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        content: {
+          url: "https://demos.telerik.com/kendo-ui/content/shared/js/products.js",
+          dataType: "json"
+        }
+      });
+    </script>
+
+### content.iframe `Boolean`
+
+If the URL for the Window content contains a protocol, the Window creates an iframe for the content and assumes that the nested page resides in another domain.
+
+If the URL does not contain a protocol, the URL is treated as a local URL which will load a partial view and the Window does not create an iframe for the content.
+
+To control the creation of iframe Window content, you have to explicitly configure the option.
+
+#### Example - Explicitly configure an iframe
+
+    <div id="dialog"></div>
+
+    <script>
+    $("#dialog").kendoWindow({
+      content: {
+        url: "https://demos.telerik.com/kendo-ui/content/shared/js/products.js",
+        dataType: "json",
+        iframe: true
+      }
     });
     </script>
 
