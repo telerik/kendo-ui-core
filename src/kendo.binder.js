@@ -1626,6 +1626,24 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             })
+        },
+
+        badge: {
+            text: Binder.extend({
+                init: function(widget, bindings, options) {
+                    Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                    this.widget = widget;
+                },
+                refresh: function() {
+                    var text = this.bindings.text.get();
+
+                    if (text == null) {
+                        text = "";
+                    }
+                    this.widget.text(text);
+                }
+            })
         }
     };
 

@@ -1223,4 +1223,72 @@ if (kendo.ui.Wizard) {
     });
 }
 
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+    kendo.ui.PDFViewer.prototype.options.messages =
+    $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+        defaultFileName: "Document",
+        toolbar: {
+            zoom: {
+                zoomLevel: "zoom level",
+                zoomOut: "Zoom Out",
+                zoomIn: "Zoom In",
+                actualWidth: "Actual Width",
+                autoWidth: "Automatic Width",
+                fitToWidth: "Fit to Width",
+                fitToPage: "Fit to Page"
+            },
+            open: "Open",
+            exportAs: "Export",
+            download: "Download",
+            pager:  {
+                first: "Go to the first page",
+                previous: "Go to the previous page",
+                next: "Go to the next page",
+                last: "Go to the last page",
+                of: " of {0} ",
+                page: "page",
+                pages: "pages"
+            },
+            print: "Print",
+            toggleSelection: "Enable Selection",
+            togglePan: "Enable Panning",
+            search: "Search"
+        },
+        errorMessages: {
+            notSupported: "Only pdf files allowed.",
+            parseError: "PDF file fails to process.",
+            notFound: "File is not found.",
+            popupBlocked: "Popup is blocked."
+        },
+        dialogs: {
+            exportAsDialog: {
+                title: "Export...",
+                defaultFileName: "Document",
+                pdf: "Portable Document Format (.pdf)",
+                png: "Portable Network Graphics (.png)",
+                svg: "Scalable Vector Graphics (.svg)",
+                labels: {
+                    fileName: "File name",
+                    saveAsType: "Save as",
+                    page: "Page"
+                }
+            },
+            okText: "OK",
+            save: "Save",
+            cancel: "Cancel",
+            search: {
+                inputLabel: "Search Text",
+                matchCase: "Match Case",
+                next: "Next Match",
+                previous: "Previous Match",
+                close: "Close",
+                of: "of"
+            }
+        }
+    });
+}
+
 })(window.kendo.jQuery);

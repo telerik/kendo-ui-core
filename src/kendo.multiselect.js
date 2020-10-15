@@ -1304,6 +1304,8 @@ var __meta__ = { // jshint ignore:line
 
                     that._setOption(getter(addedItem.dataItem), true);
                 }
+
+                that._updateTagListAria();
             } else {
                 if (!that._maxTotal || that._maxTotal < total) {
                     that._maxTotal = total;
@@ -1340,6 +1342,15 @@ var __meta__ = { // jshint ignore:line
                     currentTotal: total
                 }));
             }
+
+            that._updateTagListAria();
+        },
+
+        _updateTagListAria: function () {
+            var that = this;
+            var tagList = that.tagList;
+
+            tagList.attr("role", tagList.children().length ? "listbox" : "presentation");
         },
 
         _select: function(candidate) {
@@ -1450,10 +1461,10 @@ var __meta__ = { // jshint ignore:line
             that._focused = that.input = input.attr({
                 "accesskey": accessKey,
                 "autocomplete": AUTOCOMPLETEVALUE,
-                "role": "listbox",
+                "role": "textbox",
                 "title": element[0].title,
                 "aria-expanded": false,
-                "aria-haspopup": "listbox",
+                "aria-haspopup": "true",
                 "aria-autocomplete": "list"
             });
         },
@@ -1532,7 +1543,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" role="listbox" unselectable="on" />').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" />').insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).removeClass('input-validation-error').css("display", "");

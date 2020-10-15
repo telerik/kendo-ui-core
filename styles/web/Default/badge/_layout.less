@@ -1,13 +1,12 @@
 .k-badge {
-    padding: @badge-padding-y @badge-padding-y;
-    border-width: @badge-border-width;
+    padding: 0;
+    border-width: 0;
     border-style: solid;
     border-color: transparent;
     box-sizing: border-box;
     color: inherit;
     background-color: transparent;
-    font-size: @badge-font-size;
-    line-height: @badge-line-height;
+    font: inherit;
     text-align: center;
     white-space: nowrap;
     display: inline-flex;
@@ -20,13 +19,6 @@
 .k-badge > * {
     color: inherit;
 }
-
-
-// Empty badge
-.k-badge:empty {
-    padding: @badge-padding-y;
-}
-
 
 // Links
 a.k-badge,
@@ -59,6 +51,14 @@ a.k-badge:hover,
 
     &:empty { padding: @badge-padding-y-sm; }
 }
+.k-badge-md {
+    padding: @badge-padding-y @badge-padding-x;
+    border-width: @badge-border-width;
+    font-size: @badge-font-size;
+    line-height: @badge-line-height;
+
+    &:empty { padding: @badge-padding-y; }
+}
 .k-badge-lg {
     padding: @badge-padding-y-lg @badge-padding-x-lg;
     border-width: @badge-border-width-lg;
@@ -71,52 +71,55 @@ a.k-badge:hover,
 
 // Badge shapes
 .k-badge-rounded {
-    .border-radius( @badge-border-radius );
-
-    &-sm { .border-radius( @badge-border-radius-sm ); }
-    &-lg { .border-radius( @badge-border-radius-lg ); }
+    &.k-badge-sm { .border-radius( @badge-border-radius-sm ); }
+    &.k-badge-md { .border-radius( @badge-border-radius ); }
+    &.k-badge-lg { .border-radius( @badge-border-radius-lg ); }
 }
 .k-badge-pill {
     border-radius: 5rem;
 }
 .k-badge-circle {
-    padding: 0 !important; // sass-lint:disable-line no-important
-    width: @badge-size;
-    height: @badge-size;
+    padding: 0 !important;
     border-radius: 100%;
 
-    &-sm {
+    &.k-badge-sm {
         width: @badge-size-sm;
         height: @badge-size-sm;
     }
-    &-lg {
+    &.k-badge-md {
+        width: @badge-size;
+        height: @badge-size;
+    }
+    &.k-badge-lg {
         width: @badge-size-lg;
         height: @badge-size-lg;
     }
 }
 .k-badge-dot {
-    padding: 0 !important;  // sass-lint:disable-line no-important
-    width: @badge-dot-size;
-    height: @badge-dot-size;
+    padding: 0 !important;
     border-radius: 100%;
     font-size: 0;
 
-    &-sm {
+    &.k-badge-sm {
         width: @badge-dot-size-sm;
         height: @badge-dot-size-sm;
     }
-    &-lg {
+    &.k-badge-md {
+        width: @badge-dot-size;
+        height: @badge-dot-size;
+    }
+    &.k-badge-lg {
         width: @badge-dot-size-lg;
         height: @badge-dot-size-lg;
     }
 }
-
 
 // Badge position
 .k-badge-container {
     position: relative;
     overflow: visible;
 }
+
 @badge-positions: {
     inside: null;
     edge: 50;
@@ -125,83 +128,55 @@ a.k-badge:hover,
 each( @badge-positions, {
     @placement: @key;
     @translate: @value;
-    @infix: if( @placement = edge, ~"", ~"-@{placement}");
 
-    .k-badge@{infix} {
-        &-top-start {
-            position: absolute;
-            z-index: 9999;
-            top: 0;
-            left: 0;
+    .k-badge-@{placement} {
+        position: absolute;
+        z-index: 9999;
+
+        &.k-top-start {
             & when not (@translate = null) {
                 transform: translate( (-1% * @translate), (-1% * @translate) );
             }
         }
-        &-top-end {
-            position: absolute;
-            z-index: 9999;
-            top: 0;
-            right: 0;
+        &.k-top-end {
             & when not (@translate = null) {
                 transform: translate( (1% * @translate), (-1% * @translate) );
             }
         }
-        &-bottom-start {
-            position: absolute;
-            z-index: 9999;
-            bottom: 0;
-            left: 0;
+        &.k-bottom-start {
             & when not (@translate = null) {
                 transform: translate( (-1% * @translate), (1% * @translate) );
             }
         }
-        &-bottom-end {
-            position: absolute;
-            z-index: 9999;
-            bottom: 0;
-            right: 0;
+        &.k-bottom-end {
             & when not (@translate = null) {
                 transform: translate( (1% * @translate), (1% * @translate) );
             }
         }
     }
 
-    .k-rtl .k-badge@{infix},
-    [dir="rtl"] .k-badge@{infix} {
-        &-top-start {
-            left: auto;
-            right: 0;
+    .k-rtl .k-badge-@{placement},
+    [dir="rtl"].k-badge-@{placement},
+    [dir="rtl"] .k-badge-@{placement} {
+        &.k-top-start {
             & when not (@translate = null) {
                 transform: translate( (1% * @translate), (-1% * @translate) );
             }
         }
-        &-top-end {
-            right: auto;
-            left: 0;
+        &.k-top-end {
             & when not (@translate = null) {
                 transform: translate( (-1% * @translate), (-1% * @translate) );
             }
         }
-        &-bottom-start {
-            left: auto;
-            right: 0;
+        &.k-bottom-start {
             & when not (@translate = null) {
                 transform: translate( (1% * @translate), (1% * @translate) );
             }
         }
-        &-bottom-end {
-            right: auto;
-            left: 0;
+        &.k-bottom-end {
             & when not (@translate = null) {
                 transform: translate( (-1% * @translate), (1% * @translate) );
             }
         }
     }
 });
-
-
-// Badge position
-.k-badge-container {
-    position: relative;
-    overflow: visible;
-}
