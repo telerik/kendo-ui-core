@@ -1883,7 +1883,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         if (customGroupSort) {
-            query = query.group(group, data);
+            query = query.group(group, data, options);
 
             if (skip !== undefined && take !== undefined) {
                 query = new Query(flatGroups(query.toArray())).range(skip, take);
@@ -1894,7 +1894,7 @@ var __meta__ = { // jshint ignore:line
                     });
                 });
 
-                query = query.group(groupDescriptorsWithoutSort, data);
+                query = query.group(groupDescriptorsWithoutSort, data, options);
             }
         } else {
             if (skip !== undefined && take !== undefined) {

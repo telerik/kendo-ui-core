@@ -1,0 +1,65 @@
+@pos: static, relative, absolute, fixed, sticky;
+@side: top, right, bottom, left;
+
+each( @pos, {
+    .k-@{value},
+    .k-pos-@{value} {
+         position: @value;
+    }
+});
+
+each( @side, {
+    .k-@{value},
+    .k-pos-@{value} {
+        @{value}: 0;
+    }
+});
+
+.k-top-start,
+.k-pos-top-start {
+    top: 0;
+    left: 0;
+
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        left: auto;
+        right: 0;
+    }
+}
+.k-top-end,
+.k-pos-top-end {
+    top: 0;
+    right: 0;
+
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        right: auto;
+        left: 0;
+    }
+}
+.k-bottom-start,
+.k-pos-bottom-start {
+    bottom: 0;
+    left: 0;
+
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        left: auto;
+        right: 0;
+    }
+}
+.k-bottom-end,
+.k-pos-bottom-end {
+    bottom: 0;
+    right: 0;
+
+    .k-rtl &,
+    &[dir="rtl"],
+    [dir="rtl"] & {
+        right: auto;
+        left: 0;
+    }
+}

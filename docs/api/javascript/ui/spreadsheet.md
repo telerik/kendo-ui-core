@@ -262,6 +262,8 @@ The author of the PDF document.
 ### pdf.autoPrint `Boolean` *(default: false)*
 Specifies if the Print dialog should be opened immediately after loading the document.
 
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.

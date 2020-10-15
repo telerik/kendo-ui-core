@@ -20,7 +20,7 @@
     it("MultiSelect adds role to the input", function() {
         var multiselect = new MultiSelect(input);
 
-        assert.equal(multiselect.input[0].getAttribute("role"), "listbox");
+        assert.equal(multiselect.input[0].getAttribute("role"), "textbox");
     });
 
     it("MultiSelect adds aria-disabled='true'", function() {
@@ -199,10 +199,9 @@
 
     it("MultiSelect adds aria-haspopup that takes value equal to the role", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"));
-        var role = multiselect.input.attr("role");
 
-        assert.equal(multiselect.input.attr("role"), "listbox");
-        assert.equal(multiselect.input.attr("aria-haspopup"), role);
+        assert.equal(multiselect.input.attr("role"), "textbox");
+        assert.equal(multiselect.input.attr("aria-haspopup"), "true");
     });
 
     it("MultiSelect adds aria-autocomplete", function() {
@@ -253,6 +252,19 @@
         });
 
         assert.isOk(!tag.attr("aria-hidden"));
+    });
+
+    it("MultiSelect toggles listbox role according to selected items", function() {
+        var multiselect = new MultiSelect(input, {
+            dataSource: ["item1", "item2"],
+            value: "item1"
+        });
+
+        assert.isOk(multiselect.tagList.attr("role") === "listbox");
+
+        multiselect.value([]);
+
+        assert.isOk(multiselect.tagList.attr("role") === "presentation");
     });
     });
 }());

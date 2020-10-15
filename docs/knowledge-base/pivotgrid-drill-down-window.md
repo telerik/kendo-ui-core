@@ -45,7 +45,7 @@ The key part is creating a secondary **drillDownDataSource**, which will request
       }
     </style>
 
-    <script src="../content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div class='drill-down-container'></div>
 

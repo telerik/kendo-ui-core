@@ -1224,4 +1224,72 @@ if (kendo.ui.Wizard) {
     });
 }
 
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+    kendo.ui.PDFViewer.prototype.options.messages =
+    $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+        defaultFileName: "Документ",
+        toolbar: {
+            zoom: {
+                zoomLevel: "ниво на приближение",
+                zoomOut: "Отдалечи",
+                zoomIn: "Приближи",
+                actualWidth: "Действителна ширина",
+                autoWidth: "Автоматична ширина",
+                fitToWidth: "Изпълни ширината",
+                fitToPage: "Покажи цяла страница"
+            },
+            open: "Отвори",
+            exportAs: "Експортирай",
+            download: "Свали",
+            pager:  {
+                first: "Отиди на първата страница",
+                previous: "Отиди на предишната страница",
+                next: "Отиди на следващата страница",
+                last: "Отиди на последната страница",
+                of: " от {0} ",
+                page: "страница",
+                pages: "страници"
+            },
+            print: "Разпечатай",
+            toggleSelection: "Активирай селектиране",
+            togglePan: "Активирай местене",
+            search: "Търси"
+        },
+        errorMessages: {
+            notSupported: "Разрешени са само файлове в PDF.",
+            parseError: "Неуспешно обработване на PDF файлът.",
+            notFound: "Файлът не беше открит.",
+            popupBlocked: "Изскачащият прозорец беше блокиран."
+        },
+        dialogs: {
+            exportAsDialog: {
+                title: "Експортирай...",
+                defaultFileName: "Документ",
+                pdf: "Portable Document Format (.pdf)",
+                png: "Portable Network Graphics (.png)",
+                svg: "Scalable Vector Graphics (.svg)",
+                labels: {
+                    fileName: "Име на файла",
+                    saveAsType: "Сапази като",
+                    page: "Страница"
+                }
+            },
+            okText: "ОК",
+            save: "Сапази",
+            cancel: "Отмени",
+            search: {
+                inputLabel: "Търси текст",
+                matchCase: "Търси според малки/големи букви",
+                next: "Следващо съвпадение",
+                previous: "Предишно съвпадение",
+                close: "Затвори",
+                of: "от"
+            }
+        }
+    });
+}
+
 })(window.kendo.jQuery);
