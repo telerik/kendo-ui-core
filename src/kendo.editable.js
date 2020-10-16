@@ -185,7 +185,7 @@ var __meta__ = { // jshint ignore:line
             var attr = createAttributes(options);
             var element = $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
 
-            renderHiddenForМvcCheckbox(element, container, options);
+            renderHiddenForMvcCheckbox(element, container, options);
         },
         "values": function(container, options) {
             var attr = createAttributes(options);
@@ -207,7 +207,7 @@ var __meta__ = { // jshint ignore:line
                 .appendTo(container)
                 [editor](editorOptions);
 
-            renderHiddenForМvcCheckbox(element, container, options);
+            renderHiddenForMvcCheckbox(element, container, options);
         }
     };
 
@@ -269,7 +269,7 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function renderHiddenForМvcCheckbox(tag, container, field) {
+    function renderHiddenForMvcCheckbox(tag, container, field) {
         var addHidden = field ? (field.shouldRenderHidden || false) : false;
 
         if (addHidden) {

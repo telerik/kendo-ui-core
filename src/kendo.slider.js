@@ -1128,7 +1128,7 @@ var __meta__ = { // jshint ignore:line
 
             that._scrollOffset = {
                 top: wnd.scrollTop(),
-                left: wnd.scrollLeft()
+                left: kendo.scrollLeft(wnd)
             };
 
             that.moveTooltip();

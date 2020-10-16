@@ -8844,7 +8844,9 @@ A string, DOM element or jQuery object which represents the table cell. A string
 
 ### clearSelection
 
-Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/grid/configuration/selectable)).
+Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/grid/configuration/selectable)). 
+
+> By default clearSelection will clear the selected rows on the current page only when [persistSelection](/api/javascript/ui/grid/configuration/persistselection) is enabled. In order to clear all selected rows follow the approach in [this Knowledge Base article](https://docs.telerik.com/kendo-ui/knowledge-base/clear-selection-all-pages-grid).
 
 #### Example - clear selection
 

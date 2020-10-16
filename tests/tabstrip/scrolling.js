@@ -139,22 +139,22 @@
         it('right scrolling button scrolls to the right by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(0);
+            kendo.scrollLeft(tabstrip.tabGroup, 0);
             tabstrip.wrapper.children(".k-tabstrip-next").trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), tabstrip.options.scrollable.distance);
         });
 
         it('left scrolling button scrolls to the left by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(999);
-            var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+            kendo.scrollLeft(tabstrip.tabGroup, 999);
+            var initialScrollPosition = kendo.scrollLeft(tabstrip.tabGroup);
             tabstrip.wrapper.children(".k-tabstrip-prev").trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), initialScrollPosition - tabstrip.options.scrollable.distance);
         });
 
         it('left scrolling button disappears and appears when (not) needed', function() {
@@ -163,7 +163,7 @@
             var buttonPrev = tabstrip.wrapper.children(".k-tabstrip-prev");
             var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
 
-            tabstrip.tabGroup.scrollLeft(0);
+            kendo.scrollLeft(tabstrip.tabGroup, 0);
             buttonPrev.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
@@ -181,7 +181,7 @@
             var buttonPrev = tabstrip.wrapper.children(".k-tabstrip-prev");
             var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
 
-            tabstrip.tabGroup.scrollLeft(tabstrip.tabGroup[0].scrollWidth + 100);
+            kendo.scrollLeft(tabstrip.tabGroup, tabstrip.tabGroup[0].scrollWidth + 100);
             buttonNext.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
@@ -198,7 +198,7 @@
 
             var buttonNext = tabstrip.wrapper.children(".k-tabstrip-next");
 
-            tabstrip.tabGroup.scrollLeft(tabstrip.tabGroup[0].scrollWidth + 100);
+            kendo.scrollLeft(tabstrip.tabGroup, tabstrip.tabGroup[0].scrollWidth + 100);
             buttonNext.trigger("mousedown").trigger("mouseup");
             tabstrip.tabGroup.finish();
 
@@ -228,34 +228,34 @@
         it('right scrolling button scrolls to the right by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(0);
+            kendo.scrollLeft(tabstrip.tabGroup, 0);
             tabstrip.wrapper.children(".k-tabstrip-next").trigger("touchstart").trigger("touchend");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), tabstrip.options.scrollable.distance);
         });
 
         it('left scrolling button scrolls to the left by delta when clicked', function() {
             createTabStrip();
 
-            tabstrip.tabGroup.scrollLeft(999);
-            var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+            kendo.scrollLeft(tabstrip.tabGroup, 999);
+            var initialScrollPosition = kendo.scrollLeft(tabstrip.tabGroup);
             tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), initialScrollPosition - tabstrip.options.scrollable.distance);
         });
 
         it('scrolling succeeds when jQuert.fx is off', function() {
             createTabStrip();
             jQuery.fx.off = true;
 
-            tabstrip.tabGroup.scrollLeft(999);
-            var initialScrollPosition = tabstrip.tabGroup.scrollLeft();
+            kendo.scrollLeft(tabstrip.tabGroup, 999);
+            var initialScrollPosition = kendo.scrollLeft(tabstrip.tabGroup);
             tabstrip.wrapper.children(".k-tabstrip-prev").trigger("touchstart").trigger("touchend");
             tabstrip.tabGroup.finish();
 
-            assert.equal(tabstrip.tabGroup.scrollLeft(), initialScrollPosition - tabstrip.options.scrollable.distance);
+            assert.equal(kendo.scrollLeft(tabstrip.tabGroup), initialScrollPosition - tabstrip.options.scrollable.distance);
 
             jQuery.fx.off = false;
         });
