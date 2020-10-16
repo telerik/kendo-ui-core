@@ -91,7 +91,7 @@ Sets the filename of the saved file.
 
 If set to true, the content will be forwarded to proxyURL even if the browser supports saving files locally.
 
-### saveAs.proxyURL `Boolean` *(default: false)*
+### saveAs.proxyURL `String` *(default: null)*
 
 The URL of the server side proxy which will stream the file to the end user. A proxy will be used when the browser isn't capable of saving files locally. Such browsers are IE version 9 and lower and Safari.
 
@@ -346,7 +346,7 @@ Defines the localization for the crop pane field.
 Defines the localization for the resize pane.
 
 ### messages.panes.resize.title  `String` *(default: "Resize image")*
-Defines the localization for the resize pane field. 
+Defines the localization for the resize pane field.
 
 ### messages.panes.resize.pixels  `String` *(default: "Pixels")*
 Defines the localization for the resize pane field.
@@ -481,7 +481,7 @@ The command arguments.
                 var imageEditor = ev.sender;
                 imageEditor.executeCommand({ command: "ZoomImageEditorCommand", options: imageEditor.getZoomLevel() - 0.01 });
             }
-        });  
+        });
     </script>
 
 ## Events
@@ -502,7 +502,7 @@ The Image instance.
 
 ### imageRendered
 
-Fired when canvas is rendered with the image. This event is triggered by commands and when `drawCanvas` method is called. 
+Fired when canvas is rendered with the image. This event is triggered by commands and when `drawCanvas` method is called.
 
 #### Event Data
 

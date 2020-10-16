@@ -1338,5 +1338,70 @@ The drop target's id.
 
 The items dragged and dropped over the target.
 
+### command
+
+Fired when server command is executed (copy, move, delete or rename). 
+
+The event is useful to get feedback when server commands has failed or succeeded and take additional actions based on the status. 
+
+#### Event Data
+
+##### e.sender `kendo.ui.FileManager`
+
+The widget instance which fired the event.
+
+##### e.status `String`
+
+The status of the command executed (success, fail or cancel).
+
+##### e.action `String`
+
+The action performed by the command (add, remove or itemchange).
+
+##### e.data `Object`
+
+Retrieves contextual data that holds information about the item(s) involved in the command's action.
+
+##### e.response `Object`
+
+The returned response by the service. 
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "post",
+                        url: baseUrl + "Read"
+                    },
+                    update: {
+                        type: "post",
+                        url: baseUrl + "Update"
+                    },
+                    create: {
+                        type: "post",
+                        url: baseUrl + "Create"
+                    },
+                    destroy: {
+                        type: "post",
+                        url: baseUrl + "Destroy"
+                    }
+                }
+            },
+            command: function (ev) {
+                console.log("Command " + ev.action + " - item:" + ev.data.item.path + "; status: " + ev.status);
+
+                if (ev.status === "fail") { // Refresh the FileManager if a command has failed.
+                    ev.sender.refresh()
+                }
+            }
+        });
+    </script>
+
 
 

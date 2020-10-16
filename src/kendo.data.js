@@ -70,7 +70,8 @@ var __meta__ = { // jshint ignore:line
         unshift = [].unshift,
         toString = {}.toString,
         stableSort = kendo.support.stableSort,
-        dateRegExp = /^\/Date\((.*?)\)\/$/;
+        dateRegExp = /^\/Date\((.*?)\)\/$/,
+        objectKeys = [];
 
     var ObservableArray = Observable.extend({
         init: function(array, type) {
@@ -454,11 +455,30 @@ var __meta__ = { // jshint ignore:line
         };
     }
 
+    function ownKeys (value, ignoreObjectKeys) {
+        var props = [];
+
+        value = value || {};
+
+        while (value) {
+            Object.getOwnPropertyNames(value).forEach(function (prop) {
+                if (props.indexOf(prop) === -1 && (!ignoreObjectKeys || objectKeys.indexOf(prop) < 0)) {
+                    props.push(prop);
+                }
+            });
+            value = Object.getPrototypeOf(value);
+        }
+
+        return props;
+    }
+
+    objectKeys = ownKeys({}, false);
+
     var ObservableObject = Observable.extend({
         init: function(value) {
             var that = this,
                 member,
-                field,
+                keys = ownKeys(value, true),
                 parent = function() {
                     return that;
                 };
@@ -467,7 +487,7 @@ var __meta__ = { // jshint ignore:line
 
             this._handlers = {};
 
-            for (field in value) {
+            keys.forEach(function(field){
                 member = value[field];
 
                 if (typeof member === "object" && member && !member.getTime && field.charAt(0) != "_") {
@@ -475,7 +495,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 that[field] = member;
-            }
+            });
 
             that.uid = kendo.guid();
         },
