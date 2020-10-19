@@ -10,6 +10,62 @@ position: 1
 
 This article lists the breaking changes in the Kendo UI 2020 releases.
 
+## Kendo UI 2020 R3 SP1
+
+**Upload**
+
+Changed appearance in `Less-based themes` of the Upload action buttons that are rendered when the [async.autoUpload option](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoupload) is set to `false`.
+
+Reverting to the previous appearance is possible by utilizing the following styles:
+
+```
+<style>
+.k-upload .k-action-buttons {
+    padding: 0;
+    align-items: stretch;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-width: 1px 0 0;
+    border-top-width: 1px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-basis: auto;
+    overflow: hidden;
+    border-color: transparent;
+}
+
+.k-upload .k-action-buttons .k-button {
+    background-clip: border-box;
+    border-radius: 0;
+    margin: 0;
+    padding: 12px 16px;
+    border-width: 0;
+    text-overflow: ellipsis;
+    flex: 1 0 0%;
+    flex-grow: 1;
+    flex-grow: 1;
+    display: inline-block;
+    overflow: hidden;
+    width: auto;
+    max-width: 100%;
+}
+</style>
+
+<input type="file" name="files" id="photos" />
+
+<script>
+    $("#photos").kendoUpload({
+        async: {
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove",
+            autoUpload: false
+        }
+    });
+</script>
+```
+
 ## Kendo UI 2020 R3
 
 **Badge**
@@ -49,7 +105,7 @@ Deprecated configuration options and methods:
         </tr>
         <tr>
             <td><code>value()</code></td><td><code>text()</code></td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
 

@@ -23,30 +23,30 @@
         });
 
     it("PanelBar sets role to the wrapper", function() {
-        assert.equal(ul.attr("role"), "menu");
+        assert.equal(ul.attr("role"), "tree");
     });
 
     it("PanelBar adds tab role to the panelbar items", function() {
         addItems(2);
 
         var items = ul.find(".k-item");
-        assert.equal(items.eq(0).attr("role"), "menuitem");
-        assert.equal(items.eq(1).attr("role"), "menuitem");
+        assert.equal(items.eq(0).attr("role"), "treeitem");
+        assert.equal(items.eq(1).attr("role"), "treeitem");
     });
 
     it("PanelBar adds tab role to items during init", function() {
         var panel = $("<ul id='test'><li>Test</li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
 
         var items = panel.find(".k-item");
-        assert.equal(items.eq(0).attr("role"), "menuitem");
+        assert.equal(items.eq(0).attr("role"), "treeitem");
     });
 
     it("PanelBar adds tab role to the added items", function() {
         addItems(2);
 
         var items = ul.find(".k-item");
-        assert.equal(items.eq(0).attr("role"), "menuitem");
-        assert.equal(items.eq(1).attr("role"), "menuitem");
+        assert.equal(items.eq(0).attr("role"), "treeitem");
+        assert.equal(items.eq(1).attr("role"), "treeitem");
     });
 
     it("PanelBar adds role group to the k-group elements", function() {
@@ -55,24 +55,6 @@
 
         var items = ul.find(".k-group");
         assert.equal(items.eq(0).attr("role"), "group");
-    });
-
-    it("PanelBar adds role 'region' to the .k-content elements", function() {
-        addItems(2);
-        panelbar.append({
-            text: "test",
-            content: "text"
-        });
-
-        var items = ul.find(".k-content");
-        assert.equal(items.eq(0).attr("role"), "region");
-    });
-
-    it("PanelBar adds role region during init", function() {
-        var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
-
-        var items = panel.find(".k-content");
-        assert.equal(items.eq(0).attr("role"), "region");
     });
 
     it("PanelBar adds role group during init", function() {

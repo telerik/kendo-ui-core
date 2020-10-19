@@ -307,5 +307,15 @@
 
             assert.equal(textbox.value(), 10.55);
         });
+
+        it("enable false disables the widget", function() {
+            var textbox = new NumericTextBox(input, {
+                enable: false
+            });
+
+            assert.isOk(textbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.equal(textbox._text.attr("disabled"), "disabled");
+            assert.equal(textbox._text.attr("aria-disabled"), "true");
+        });
     });
 }());

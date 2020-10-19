@@ -1691,6 +1691,69 @@ declare namespace kendo.ui.editor {
     }
 }
 
+declare namespace kendo.ui.filemanager {
+
+    class FileManagerCommand extends kendo.Class {
+         static fn: any;
+         static extend(prototype: Object): any;
+         exec?(): void;
+    }
+}
+
+declare namespace kendo.ui.filemanager.commands {
+    class CreateFolderCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class RenameCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class DeleteCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+        removeItems?(items: any): void;
+    }
+
+    class MoveCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class CopyCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class SortCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class SearchCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class ChangeViewCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class OpenDialogCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+    }
+
+    class TogglePaneCommand extends  kendo.Class {
+        init?(options: any): void;
+        exec?(): void;
+        getResizable(): void;
+    }
+}
+
 declare namespace kendo.mobile {
     function init(selector: string): void;
     function init(element: JQuery): void;
