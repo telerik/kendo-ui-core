@@ -123,7 +123,7 @@ var __meta__ = { // jshint ignore:line
 
              that.value(value);
 
-             disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
+             disabled = !options.enable || element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 
              if (disabled) {
                  that.enable(false);
@@ -145,6 +145,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "NumericTextBox",
             decimals: NULL,
+            enable: true,
             restrictDecimals: false,
             min: NULL,
             max: NULL,
@@ -587,7 +588,7 @@ var __meta__ = { // jshint ignore:line
             var numberFormat = this._format(this.options.format);
             var decimalSeparator = numberFormat[POINT];
             var minInvalid = (min !== null && min >= 0 && value.charAt(0) === "-");
-            
+
             if (this._numPadDot && decimalSeparator !== POINT) {
                 value = value.replace(POINT, decimalSeparator);
                 this.element.val(value);

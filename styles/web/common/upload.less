@@ -85,30 +85,6 @@ html .k-upload
     vertical-align: text-bottom;
 }
 
-.k-upload .k-clear-selected ,
-.k-upload .k-upload-selected {
-    display: inline-block;
-    width: 50%;
-    margin: 0;
-    line-height: 1em;
-    padding: 1.214em 0;
-    border: 0;
-}
-
-.k-upload .k-upload-selected {
-    border-left-width: 1px;
-    border-left-style: solid;
-    margin-left: -1px;
-}
-
-.k-upload .k-clear-selected {
-    border-radius: 0 0 0 4px;
-}
-
-.k-upload .k-upload-selected {
-    border-radius: 0 0 4px 0;
-}
-
 .k-upload-files ~ .k-clear-selected,
 .k-upload-files ~ .k-upload-selected {
     margin-top: -5px;
@@ -394,45 +370,14 @@ html .k-upload
     width: 100%;
 }
 
-.k-upload-selected
-{
-    min-width: 7.167em;
-    margin: 0.25em 0 0;
-
-    .box-sizing(content-box);
-}
-
-.k-upload-selected,
-.k-upload-cancel
-{
-    margin-bottom: .8em;
-}
-
-.k-upload-selected
-{
-    margin-left: .8em;
-    margin-right: .2em;
-}
-
 .k-rtl .k-file-extension-wrapper {
     margin-left: 14px;
 }
 
 .k-upload .k-action-buttons {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    clear: both;
+    border-width: 1px 0 0 0;
+    border-style: solid;
 
-    .k-button {
-        flex: 1 1 auto;
-        margin: 0;
-    }
-
-    .k-button + .k-button {
-        margin: 0;
-    }
 }
 
 .k-no-flexbox .k-upload .k-action-buttons .k-button {

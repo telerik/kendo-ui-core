@@ -8,6 +8,61 @@ position: 1
 
 # 2020 Releases
 
+## {{ site.product }} R3 2020 SP1
+
+**Upload**
+
+Changed appearance in `Less-based themes` of the Upload action buttons that are rendered when the `Async.AutoUpload` option is set to `false`.
+
+Reverting to the previous appearance is possible by utilizing the following styles:
+
+```
+<style>
+.k-upload .k-action-buttons {
+    padding: 0;
+    align-items: stretch;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-width: 1px 0 0;
+    border-top-width: 1px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-basis: auto;
+    overflow: hidden;
+    border-color: transparent;
+}
+
+.k-upload .k-action-buttons .k-button {
+    background-clip: border-box;
+    border-radius: 0;
+    margin: 0;
+    padding: 12px 16px;
+    border-width: 0;
+    text-overflow: ellipsis;
+    flex: 1 0 0%;
+    flex-grow: 1;
+    flex-grow: 1;
+    display: inline-block;
+    overflow: hidden;
+    width: auto;
+    max-width: 100%;
+}
+</style>
+
+
+@(Html.Kendo().Upload()
+    .Name("files")
+    .Async(a => a
+        .Save("Async_Save", "Upload")
+        .Remove("Async_Remove", "Upload")
+        .AutoUpload(false)
+    )
+)
+
+```
+
 ## {{ site.product }} R3 2020
 
 **Badge**
@@ -48,7 +103,7 @@ Deprecated configuration options and methods:
         </tr>
         <tr>
             <td>client-side API method<code>value()</code></td><td>client-side API method<code>text()</code></td>
-        </tr>        
+        </tr>
     </tbody>
 </table>
 

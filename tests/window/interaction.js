@@ -114,6 +114,21 @@
             assert.equal(initialWidth, dialog.wrapper.width());
             assert.equal(initialHeight, dialog.wrapper.height());
         });
+
+        it("closing an iframe Window removes focused state", function() {
+            var dialog = createWindow({
+                iframe: true,
+                modal: true,
+                visible: false
+            });
+            var dialogWrapper = dialog.wrapper;
+
+            dialog.open();
+            dialog.close();
+
+            assert.isOk(!dialogWrapper.hasClass("k-state-focused"));
+            assert.isOk(document.activeElement !== dialogWrapper);
+        });
     });
 
     describe("resizing", function() {

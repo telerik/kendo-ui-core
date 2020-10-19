@@ -183,7 +183,7 @@ var __meta__ = { // jshint ignore:line
                 length = lists.length,
                 index = lists.index(list),
                 isRtl = kendo.support.isRtl(that.wrapper),
-                itemHeight = list.find(".k-item:visible:eq(0)").outerHeight(),
+                itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)")),
                 container = list.find(".k-time-container.k-content.k-scrollable");
 
             if (!list.length) {
@@ -296,7 +296,6 @@ var __meta__ = { // jshint ignore:line
             var minutessList = this.ul.find('[data-index="2"]');
             var secondsList = this.ul.find('[data-index="3"]');
             var designatorList = this.ul.find('[data-index="4"]');
-            var item;
 
             if (is12hourFormat) {
                 if (hours >= 12) {
@@ -313,24 +312,27 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (hoursList.length) {
-                item = hoursList.find('.k-item[data-value="' + pad(hours) + '"]');
-                hoursList.scrollTop(hoursList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(hoursList, hours);
             }
 
             if (minutessList.length) {
-                item = minutessList.find('.k-item[data-value="' + pad(minutes) + '"]');
-                minutessList.scrollTop(minutessList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(minutessList, minutes);
             }
 
             if (secondsList.length) {
-                item = secondsList.find('.k-item[data-value="' + pad(seconds) + '"]');
-                secondsList.scrollTop(secondsList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(secondsList, seconds);
             }
 
             if (designatorList.length) {
-                item = designatorList.find('.k-item[data-value="' + pad(designator) + '"]');
-                designatorList.scrollTop(designatorList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(designatorList, designator);
             }
+        },
+
+        _scrollListToPosition: function(list, value) {
+            var item = list.find('.k-item[data-value="' + pad(value) + '"]');
+            var itemHeight = getItemHeight(item);
+
+            list.scrollTop(list.find(".k-item:visible").index(item) * itemHeight);
         },
 
         close: function() {
@@ -442,7 +444,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _updateListBottomOffset: function (list) {
-            var itemHeight = list.find(".k-item:visible:eq(0)").outerHeight();
+            var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
             var listHeight = list.outerHeight();
             var bottomOffset = listHeight - itemHeight;
             list.find(".k-scrollable-placeholder").css({
@@ -458,17 +460,15 @@ var __meta__ = { // jshint ignore:line
             var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
             var useMax;
             var useMin;
-            var firstHourIndex;
+            var selectedDesignator = this._findSelectedValue(this.ul.find('[data-index="4"]'));
 
             if (!hoursList.length) {
                 return;
             }
-            firstHourIndex = firstItemIndex(hoursList.scrollTop(), hoursList.find(".k-item:visible:eq(0)").outerHeight());
-            this._selectedHour = +hoursList.find(".k-item:visible").eq(firstHourIndex).attr("data-value");
 
-            if (is12hourFormat && this._selectedDesignator) {
+            if (is12hourFormat && selectedDesignator) {
 
-                if (this._selectedDesignator === "AM") {
+                if (selectedDesignator === "AM") {
                     if (minHours < 12) {
                         useMin = true;
                     }
@@ -476,7 +476,7 @@ var __meta__ = { // jshint ignore:line
                     if (maxHours < 12) {
                         useMax = true;
                     }
-                } else if (this._selectedDesignator === "PM") {
+                } else if (selectedDesignator === "PM") {
 
                     if (minHours > 12) {
                         useMin = true;
@@ -521,15 +521,17 @@ var __meta__ = { // jshint ignore:line
             var maxHours = this._maxHours;
             var minMinutes = this._minMinutes;
             var maxMinutes = this._maxMinutes;
-            var selectedHour = this._selectedHour;
-            var firstIndex;
+            var selectedHour = +this._findSelectedValue(this.ul.find('[data-index="1"]'));
+            var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
+            var selectedDesignator = this._findSelectedValue(this.ul.find('[data-index="4"]'));
+
+            if (is12hourFormat && selectedDesignator === "PM") {
+                selectedHour += 12;
+            }
 
             if (!minutesList.length) {
                 return;
             }
-
-            firstIndex = firstItemIndex(minutesList.scrollTop(), minutesList.find(".k-item:visible:eq(0)").outerHeight());
-            this._selectedMinutes = +minutesList.find(".k-item:visible").eq(firstIndex).attr("data-value");
 
             minutesList.find(".k-item").each(function (_, item) {
                 item = $(item);
@@ -552,7 +554,7 @@ var __meta__ = { // jshint ignore:line
             var maxSeconds = this._minSeconds;
             var minMinutes = this._minMinutes;
             var maxMinutes = this._maxMinutes;
-            var selectedMinutes = this._selectedMinutes;
+            var selectedMinutes = +this._findSelectedValue(this.ul.find('[data-index="2"]'));
 
             if (!secondsList.length) {
                 return;
@@ -576,14 +578,10 @@ var __meta__ = { // jshint ignore:line
             var minHours = this._minHours;
             var maxHours = this._maxHours;
             var designatorList = this.ul.find('[data-index="4"]');
-            var firstIndex;
 
             if (!designatorList.length) {
                return;
             }
-
-            firstIndex = firstItemIndex(designatorList.scrollTop(), designatorList.find(".k-item:visible:eq(0)").outerHeight());
-            this._selectedDesignator = designatorList.find(".k-item:visible").eq(firstIndex).attr("data-value");
 
             if (this._validateMin && minHours >= 12) {
                 designatorList.find('.k-item[data-value="AM"]').hide();
@@ -609,8 +607,6 @@ var __meta__ = { // jshint ignore:line
 
             var max = this.options.max;
             var min = this.options.min;
-
-            this._selectedDesignator = this._selectedHour = this._selectedMinutes = this._selectedSeconds = null;
 
             if (this.options.validateDate) {
                 if (max.getFullYear() === this._currentlySelected.getFullYear() &&
@@ -662,7 +658,7 @@ var __meta__ = { // jshint ignore:line
 
             for (var i = 0; i < length; i++) {
                 list = lists.eq(i);
-                itemHeight = list.find(".k-item:visible:eq(0)").outerHeight();
+                itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
                 listHeight = list.outerHeight();
                 topOffset = (listHeight - itemHeight) / 2;
                 translate = "translateY(" + topOffset + "px)";
@@ -693,15 +689,14 @@ var __meta__ = { // jshint ignore:line
 
         _setClickHandler: function () {
             this._value = new Date(this._currentlySelected);
-            this._updateCurrentlySelected();
 
-            this.options.change(kendo.toString(this._value, this.options.format, this.options.culture), true);
+            this.options.change(kendo.toString(this._currentlySelected, this.options.format, this.options.culture), true);
             this.popup.close();
         },
 
         _listScrollHandler: function (e) {
             var that = this;
-            var itemHeight = $(e.currentTarget).find(".k-item:visible:eq(0)")[0].getBoundingClientRect().height;
+            var itemHeight = getItemHeight($(e.currentTarget).find(".k-item:visible:eq(0)"));
 
             if (that._scrollingTimeout) {
                 clearTimeout(that._scrollingTimeout);
@@ -712,8 +707,8 @@ var __meta__ = { // jshint ignore:line
                     e.currentTarget.scrollTop += itemHeight - e.currentTarget.scrollTop % itemHeight;
                 }
                 that._scrollTop = e.currentTarget.scrollTop;
-                that._updateRanges();
                 that._updateCurrentlySelected();
+                that._updateRanges();
             }, 100);
         },
 
@@ -725,32 +720,31 @@ var __meta__ = { // jshint ignore:line
             var designatorList = this.ul.find('[data-index="4"]');
             var selectedHour;
             var selectedMinutes;
-            var firstOccurence;
             var selectedSeconds;
             var selectedDesignator;
+
+            if (!this.ul.is(":visible")) {
+                return;
+            }
 
             if (!this._currentlySelected) {
                 this._currentlySelected = this._value ? new Date(this._value) : new Date();
             }
 
             if (hoursList.length) {
-                firstOccurence = firstItemIndex(hoursList.scrollTop(), Math.floor(hoursList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedHour = +hoursList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedHour = +this._findSelectedValue(hoursList);
             }
 
             if (minutesList.length) {
-                firstOccurence = firstItemIndex(minutesList.scrollTop(), Math.floor(minutesList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedMinutes = +minutesList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedMinutes = +this._findSelectedValue(minutesList);
             }
 
             if (secondsList.length) {
-                firstOccurence = firstItemIndex(secondsList.scrollTop(), Math.floor(secondsList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedSeconds = +secondsList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedSeconds = +this._findSelectedValue(secondsList);
             }
 
             if (designatorList.length) {
-                firstOccurence = firstItemIndex(designatorList.scrollTop(), Math.floor(designatorList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedDesignator = designatorList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedDesignator = this._findSelectedValue(designatorList);
             }
 
             if (is12hourFormat) {
@@ -779,10 +773,15 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _findSelectedValue: function(list) {
+           var firstOccurence = firstItemIndex(list.scrollTop(), getItemHeight(list.find(".k-item:visible:eq(0)")));
+           return list.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+        },
+
         _itemClickHandler: function (e) {
             var list = $(e.originalEvent.currentTarget);
             var index = list.find(".k-item:visible").index($(e.currentTarget));
-            var itemHeight = list.find(".k-item:visible:eq(0)").outerHeight();
+            var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
 
             list.scrollTop(index * itemHeight);
         },
@@ -1129,7 +1128,11 @@ var __meta__ = { // jshint ignore:line
                     activate: function () {
                         if (that.options.timeView && that.options.timeView.list === "scroll") {
                             that.addTranslate();
-                            that.applyValue(that._value);
+                            if (that._value) {
+                                that.applyValue(that._value);
+                            } else {
+                                that._updateCurrentlySelected();
+                            }
                             that._updateRanges();
                             that._focusList(that.list.find(".k-time-list-wrapper:eq(0)"));
                         }
@@ -1853,7 +1856,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     function firstItemIndex(scrollTop, itemHeight) {
-        return Math.max(Math.floor(scrollTop / itemHeight), 0);
+        return Math.max(Math.round(scrollTop / itemHeight), 0);
+    }
+
+    function getItemHeight (item){
+        return item.length && item[0].getBoundingClientRect().height;
     }
 
     ui.plugin(TimePicker);

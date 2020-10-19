@@ -379,13 +379,25 @@
 
             _position: function() {
                 var wrapper = this.wrapper,
-                    position = this.options.position;
+                    position = this.options.position,
+                    containmentTop, containmentLeft;
 
                 this._updateBoundaries();
 
                 if (this.containment) {
-                    position.top = Math.min(this.minTop + (position.top || 0), this.maxTop);
-                    position.left = Math.min(this.minLeft + (position.left || 0), this.maxLeft);
+                    position.top = position.top || 0;
+                    position.left = position.left || 0;
+
+                    containmentTop = position.top.toString().indexOf("%") > 0 ?
+                        parseInt(this.containment.height * (parseFloat(position.top) / 100), 10) :
+                        position.top;
+
+                    containmentLeft = position.left.toString().indexOf("%") > 0 ?
+                        parseInt(this.containment.width * (parseFloat(position.left) / 100), 10) :
+                        position.left;
+
+                    position.top = constrain(containmentTop, this.minTop, this.maxTop);
+                    position.left = constrain(containmentLeft, this.minLeft, this.maxLeft);
                 }
 
                 if (position.top === 0) {
@@ -1108,6 +1120,10 @@
                     if (that._containerScrollLeft && that._containerScrollLeft > 0) {
                         doc.scrollLeft(that._containerScrollLeft);
                     }
+                }
+
+                if (that.options.iframe) {
+                    that.wrapper.blur();
                 }
             },
 
