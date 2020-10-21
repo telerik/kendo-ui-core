@@ -582,10 +582,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2020.3.915"
+cdnVersion: "2020.3.1021"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.3.915"
+mvcCoreVersion: "2020.3.1021"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -846,7 +846,7 @@ defaults:
     scope:
         path: "html-helpers/interactivity/loader"
     values:
-        title_prefix: "ASP.NET Core Loader Component"       
+        title_prefix: "ASP.NET Core Loader Component"
 -
     scope:
         path: "html-helpers/interactivity/progressbar"
@@ -1231,7 +1231,7 @@ defaults:
     scope:
         path: "tag-helpers/interactivity/loader"
     values:
-        title_prefix: "ASP.NET Core Loader Component"        
+        title_prefix: "ASP.NET Core Loader Component"
 -
     scope:
         path: "tag-helpers/interactivity/progressbar"
