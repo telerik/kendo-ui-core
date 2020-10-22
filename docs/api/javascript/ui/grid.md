@@ -817,6 +817,19 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
     });
     </script>
 
+### columns.exportable `Boolean|Object` *(default: true)*
+
+If set to `false` the column will be excluded from the exported Excel/PDF files.
+
+Can be set to a JavaScript object which specifies whether the column should be exported per format.
+
+### columns.exportable.excel `Boolean` *(default: true)*
+
+If set to `false` the column will be excluded from the exported Excel file.
+
+### columns.exportable.pdf `Boolean` *(default: true)*
+
+If set to `false` the column will be excluded from the exported PDF file.
 
 ### columns.field `String`
 
