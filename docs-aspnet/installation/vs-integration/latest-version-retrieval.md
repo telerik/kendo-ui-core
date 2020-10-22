@@ -4,7 +4,7 @@ page_title: Downloading New Versions
 description: "Learn how to keep your projects updated when using Progress&reg; Telerik&reg; UI for ASP.NET Core."
 previous_url: /getting-started/vs-integration/latest-version-retrieval
 slug: latestversionretrieval_visualstudio_aspnetcore
-position: 3
+position: 4
 ---
 
 # Downloading New Versions
