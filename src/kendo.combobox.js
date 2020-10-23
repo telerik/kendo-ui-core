@@ -488,8 +488,6 @@ var __meta__ = { // jshint ignore:line
 
             that._buildOptions(data);
 
-            that._makeUnselectable();
-
             that._updateSelection();
 
             if (data.length && isFirstPage) {

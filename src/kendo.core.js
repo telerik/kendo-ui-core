@@ -1734,8 +1734,7 @@ function pad(number, digits, end) {
     }
 
     function wrap(element, autosize) {
-        var browser = support.browser,
-            percentage,
+        var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
             parent = element.parent(),
@@ -1781,11 +1780,6 @@ function pad(number, digits, end) {
             parent.addClass("k-animation-container-sm");
 
             wrapResize(element, autosize);
-        }
-
-        if (browser.msie && math.floor(browser.version) <= 7) {
-            element.css({ zoom: 1 });
-            element.children(".k-menu").width(element.width());
         }
 
         return parent;
@@ -2239,8 +2233,6 @@ function pad(number, digits, end) {
             }
         };
 
-        support.cssBorderSpacing = typeof docStyle.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
-
         (function(browser) {
             // add browser-specific CSS class
             var cssClass = "",
@@ -2351,11 +2343,9 @@ function pad(number, digits, end) {
 
         support.pushState = window.history && window.history.pushState;
 
-        var documentMode = document.documentMode;
+        support.hashChange = "onhashchange" in window;
 
-        support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
-
-        support.customElements = ("registerElement" in window.document);
+        support.customElements = "registerElement" in window.document;
 
         var chrome = support.browser.chrome,
             mobileChrome = support.browser.crios,

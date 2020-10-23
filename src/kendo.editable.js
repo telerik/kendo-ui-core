@@ -16,7 +16,6 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         Widget = ui.Widget,
         extend = $.extend,
-        oldIE = kendo.support.browser.msie && kendo.support.browser.version < 9,
         isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
@@ -469,10 +468,7 @@ var __meta__ = { // jshint ignore:line
                 rules: rules });
 
             if (!that.options.skipFocus) {
-                var focusable = container.find(":kendoFocusable").eq(0).focus();
-                if (oldIE) {
-                    focusable.focus();
-                }
+                container.find(":kendoFocusable").eq(0).focus();
             }
         }
    });

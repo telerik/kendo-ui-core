@@ -29,8 +29,6 @@ var __meta__ = { // jshint ignore:line
         emptyCellTemplate = template('<td role="gridcell" class="k-out-of-range"><a class="k-link"></a></td>', { useWithBlock: false }),
         otherMonthCellTemplate = template('<td role="gridcell" class="k-out-of-range">&nbsp;</td>', { useWithBlock: false }),
         weekNumberTemplate = template('<td class="k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
-        browser = kendo.support.browser,
-        isIE8 = browser.msie && browser.version < 9,
         outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
@@ -435,7 +433,6 @@ var __meta__ = { // jshint ignore:line
                 }, that[currentView.name])));
 
                 addClassToViewContainer(to, currentView.name);
-                makeUnselectable(to);
                 var replace = from && from.data("start") === to.data("start");
                 that._animate({
                     from: from,
@@ -1907,12 +1904,6 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function makeUnselectable(element) {
-        if (isIE8) {
-            element.find("*").attr("unselectable", "on");
-        }
-    }
-
     function addClassToViewContainer(element, currentView) {
         element.addClass("k-" + currentView);
     }
@@ -2013,7 +2004,6 @@ var __meta__ = { // jshint ignore:line
 
     calendar.isEqualDatePart = isEqualDatePart;
     calendar.isEqualDate = isEqualDate;
-    calendar.makeUnselectable =  makeUnselectable;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
     calendar.addClassToViewContainer = addClassToViewContainer;

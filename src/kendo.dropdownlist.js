@@ -547,8 +547,6 @@ var __meta__ = { // jshint ignore:line
 
             that._buildOptions(data);
 
-            that._makeUnselectable();
-
             if (!filtered) {
                 if (that._open) {
                     that.toggle(that._allowOpening());

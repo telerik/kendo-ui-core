@@ -48,7 +48,6 @@ var __meta__ = { // jshint ignore:line
         HIDDENCLASS = "k-hidden",
         WIDTH = "width",
         isIE = browser.msie,
-        isIE8 = isIE && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
             "ComboBox": [ "DropDownList", "MultiColumnComboBox" ],
@@ -1020,12 +1019,6 @@ var __meta__ = { // jshint ignore:line
                 isRtl: support.isRtl(list.wrapper),
                 autosize :list.options.autoWidth
             }));
-        },
-
-        _makeUnselectable: function() {
-            if (isIE8) {
-                this.list.find("*").not(".k-textbox").attr("unselectable", "on");
-            }
         },
 
         _toggleHover: function(e) {

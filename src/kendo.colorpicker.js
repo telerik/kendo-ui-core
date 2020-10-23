@@ -35,10 +35,8 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
-        DISABLED = "k-state-disabled",
+        DISABLED = "k-state-disabled";
 
-        browser = kendo.support.browser,
-        isIE8 = browser.msie && browser.version < 9;
 
     var ColorSelector = Widget.extend({
         init: function(element, options) {
@@ -366,11 +364,6 @@ var __meta__ = { // jshint ignore:line
                     that._updateUI(that.color());
                     that._cancel();
                 });
-
-            if (isIE8) {
-                // IE filters require absolute URLs
-                that._applyIEFilter();
-            }
         },
         destroy: function() {
             this._hsvEvents.destroy();
@@ -393,13 +386,7 @@ var __meta__ = { // jshint ignore:line
             autoupdate : true,
             messages   : MESSAGES
         },
-        _applyIEFilter: function() {
-            var track = this.element.find(".k-hue-slider .k-slider-track")[0],
-                url = track.currentStyle.backgroundImage;
 
-            url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
-            track.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
-        },
         _sliders: function() {
             var that = this,
                 element = that.element,

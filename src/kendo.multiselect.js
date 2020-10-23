@@ -621,7 +621,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._hideBusy();
-            that._makeUnselectable();
 
             that.trigger("dataBound");
         },

@@ -118,8 +118,6 @@ var __meta__ = { // jshint ignore:line
                 that.calendar = calendar = new ui.Calendar(div, { componentType: options.componentType });
                 that._setOptions(options);
 
-                kendo.calendar.makeUnselectable(calendar.element);
-
                 calendar.navigate(that._value || that._current, options.start);
 
                 that.value(that._value);

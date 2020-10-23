@@ -1072,11 +1072,7 @@ var __meta__ = { // jshint ignore:line
                                     ul.css({maxHeight: windowHeight - (kendo._outerHeight(ul) - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
                                 };
 
-                            if (kendo.support.browser.msie && kendo.support.browser.version <= 7) {
-                                setTimeout(setScrolling, 0); // timeout required by IE7
-                            } else {
-                                setScrolling();
-                            }
+                            setScrolling();
                         } else {
                             ul.css({maxHeight: "", overflow: ""});
                         }
