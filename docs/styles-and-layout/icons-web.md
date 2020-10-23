@@ -781,12 +781,16 @@ fonts in fonts/
 </ul>
 
 <script>
-    $(".WebComponentsIcons .k-icon").each(function() {
+    var icons = document.querySelectorAll('.WebComponentsIcons .k-icon');
+
+    for (var i = 0, len = icons.length; i < len; i++) {
+        var icon = icons[i];
+    
         function iconGlyph(el) {
             return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
         }
-        $(this.parentNode).append("<br />Unicode: " + iconGlyph(this) + "")
-    });
+        icon.parentNode.insertAdjacentHTML("beforeend","<br />Unicode: " + iconGlyph(icon) + "");
+    }
 </script>
 
 <style>
