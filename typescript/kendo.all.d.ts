@@ -1665,6 +1665,7 @@ declare namespace kendo.ui {
         ComboBoxOptions |
         DateInputOptions |
         DatePickerOptions |
+        DateTimePickerOptions |
         DropDownTreeOptions |
         EditorOptions |
         MaskedTextBoxOptions |
@@ -1728,12 +1729,10 @@ declare namespace kendo.ui {
         options: EditableOptions;
         validatable?: kendo.ui.Validator;
 
-        init(element: Element, options?: Object): void;
-        init(element: JQuery, options?: Object): void;
-        init(selector: String, options?: Object): void;
         editor(field: string | EditorField, modelField: string | kendo.data.DataSourceSchemaModelField): void;
         refresh(): void;
         end(): void;
+        destroy(): void;
     }
 
     interface GridColumnEditorOptions {
