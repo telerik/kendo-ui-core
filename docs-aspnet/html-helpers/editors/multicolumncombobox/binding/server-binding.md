@@ -4,7 +4,7 @@ page_title: Server Binding
 description: "Learn how to implement server binding in the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/server-binding
 slug: htmlhelpers_multicolumncombobox_serverbinding_aspnetcore
-position: 3
+position: 4
 ---
 
 # Server Binding

@@ -4,7 +4,7 @@ page_title: Model Binding
 description: "Learn how to implement Model Binding with Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/combobox/binding/model-binding
 slug: htmlhelpers_combobox_modelbinding_aspnetcore
-position: 5
+position: 6
 ---
 
 # Model Binding
