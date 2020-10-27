@@ -4076,7 +4076,7 @@ declare namespace kendo.ui {
         getSize(): void;
         destroy(): void;
         setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
-
+        items(): any;
     }
 
     interface FileManagerBreadcrumb {
@@ -20689,6 +20689,7 @@ declare namespace kendo {
         function guid(): string;
         function htmlEncode(value: string): string;
         function observableHierarchy(array: any): void;
+        function observableFileManagerData(array: any): void;
         function parseDate(value: string, formats?: string, culture?: string): Date | null;
         function parseDate(value: string, formats?: any, culture?: string): Date | null;
         function parseExactDate(value: string, formats?: string, culture?: string): Date | null;

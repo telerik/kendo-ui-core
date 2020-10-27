@@ -745,6 +745,10 @@ var __meta__ = { // jshint ignore:line
             that._userTriggered = false;
         },
 
+        _isValueChanged: function(value) {
+            return value !== unifyType(this._old, typeof value);
+        },
+
         _change: function() {
             var that = this;
             var index = that.selectedIndex;
@@ -756,8 +760,7 @@ var __meta__ = { // jshint ignore:line
                 value = optionValue;
             }
 
-            if (value !== unifyType(that._old, typeof value) &&
-                value !== unifyType(that._oldText, typeof value)) { // _oldText should be compared for ComboBox when arbitrary text is added https://github.com/telerik/kendo-ui-core/issues/4496
+            if (that._isValueChanged(value)) {
                 trigger = true;
             } else if (that._valueBeforeCascade !== undefined && that._valueBeforeCascade !== unifyType(that._old, typeof that._valueBeforeCascade) && that._userTriggered) {
                 trigger = true;
@@ -777,8 +780,6 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
                 that._oldIndex = index;
-                // _oldText should be compared for ComboBox when arbitrary text is added https://github.com/telerik/kendo-ui-core/issues/4496
-                that._oldText = that.text && that.text();
 
                 if (!that._typing) {
                     // trigger the DOM change event so any subscriber gets notified

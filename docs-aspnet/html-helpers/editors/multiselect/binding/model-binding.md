@@ -4,7 +4,7 @@ page_title: Model Binding
 description: "Learn how to implement model binding with Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/binding/model-binding
 slug: htmlhelpers_multiselect_modelbinding_aspnetcore
-position: 5
+position: 6
 ---
 
 # Model Binding
