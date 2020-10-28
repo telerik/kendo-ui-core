@@ -1,6 +1,6 @@
 ---
 title: Funnel Charts
-page_title: jQuery Chart Documentation | Funnel Charts | Kendo UI
+page_title: jQuery Chart Documentation | Funnel Charts
 description: "Learn how to create a Kendo UI Funnel Chart and use the different options it provides."
 slug: funnelcharts_widget
 ---

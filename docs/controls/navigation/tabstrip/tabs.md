@@ -1,6 +1,6 @@
 ---
 title: Tabs
-page_title: jQuery TabStrip Documentation | Tabs | Kendo UI
+page_title: jQuery TabStrip Documentation | Tabs
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to dynamically add and remove tabs, implement scrollable and sortable tabs, control the tab position, and select tabs on initial load."
 slug: tabs_tabstrip
 position: 3

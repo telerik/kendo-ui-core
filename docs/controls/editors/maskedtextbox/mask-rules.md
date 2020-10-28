@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: jQuery MaskedTextBox Documentation | Validation | Kendo UI
+page_title: jQuery MaskedTextBox Documentation | Validation
 description: "Get started with the jQuery MaskedTextBox by Kendo UI and use its predefined and custom masks."
 slug: masks_kendoui_maskedtextbox_widget
 position: 2

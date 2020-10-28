@@ -193,8 +193,8 @@ fonts in fonts/
    <li><span class="k-icon k-i-divide"></span> .k-i-divide</li>
    <li><span class="k-icon k-i-equal"></span> .k-i-equal</li>
    <li><span class="k-icon k-i-not-equal"></span> .k-i-not-equal</li>
-   <li><span class="k-icon k-less-or-equal"></span> .k-i-less-or-equal</li>
-   <li><span class="k-icon k-greater-or-equal"></span> .k-i-greater-or-equal</li>
+   <li><span class="k-icon k-i-less-or-equal"></span> .k-i-less-or-equal</li>
+   <li><span class="k-icon k-i-greater-or-equal"></span> .k-i-greater-or-equal</li>
    <li><span class="k-icon k-i-sort-asc"></span> .k-i-sort-asc</li>
    <li><span class="k-icon k-i-sort-desc"></span> .k-i-sort-desc</li>
    <li><span class="k-icon k-i-unsort"></span> .k-i-unsort</li>

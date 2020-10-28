@@ -1,6 +1,6 @@
 ---
 title: Virtualization
-page_title: jQuery ComboBox Documentation | Virtualization | Kendo UI
+page_title: jQuery ComboBox Documentation | Virtualization
 description: "Get started with the jQuery ComboBox by Kendo UI and configure its virtualization functionality."
 slug: virtualization_kendoui_combobox_widget
 position: 6

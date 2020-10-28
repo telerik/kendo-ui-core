@@ -41,6 +41,14 @@ If after you apply the described approaches the issue persists, contact the Supp
 1. Reproduce the issue.
 1. Attach the `Activitylog` files when you contact our support.
 
+## The target framework dropdown is disabled
+
+If the target **Framework** dropdown doesn't allow you to select the desired framework, make sure that [.Net Framework version 4.6.2](https://dotnet.microsoft.com/download/dotnet-framework/net462) is installed.
+
+1. Check the .Net version in the list of Individual components. 
+1. Go to **Tools** > **Get Tools and Features**. 
+1. In Visual Studio Installer, select the **Individual components** tab and check the .NET Framework 4.6.2 targeting pack and .NET Framework 4.6.2 SDK
+
 ## See Also
 
 * [Integrating Visual Studio in Your .Net Project (Overview)]({% slug overview_visualstudio_aspnetcore %})

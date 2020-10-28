@@ -115,23 +115,6 @@ it("selects first if last is selected", function() {
     assert.isOk(div.find(".k-item:first").hasClass("k-state-active"));
 });
 
-it("remove activedescendant id when passing through disabled item", function() {
-    div.kendoTabStrip({animation: false});
-    addItems(3);
-    var tabstrip = div.data("kendoTabStrip");
-    tabstrip.disable(tabstrip.items()[1]);
-    div.focus();
-
-    for (var i = 0; i < 3; i++) {
-        div.trigger({
-            type: "keydown",
-            keyCode: keys.RIGHT
-        });
-    }
-
-    assert.equal(tabstrip.tabGroup.children("#" + tabstrip._ariaId).length, 1);
-});
-
 it("add activedescendant id on disabled item when navigating on it", function() {
     div.kendoTabStrip({animation: false});
     addItems(3);
@@ -145,10 +128,11 @@ it("add activedescendant id on disabled item when navigating on it", function() 
         keyCode: keys.RIGHT
     });
 
-    assert.isOk(tabstrip.tabGroup.children("#" + tabstrip._ariaId).hasClass("k-state-disabled"));
+    assert.equal(div.attr("aria-activedescendant"), tabstrip.tabGroup.children("#test-tab-2").attr("id"));
+    assert.isOk(tabstrip.tabGroup.children("#test-tab-2").hasClass("k-state-disabled"));
 });
 
-it("add activedescendant id when navigation from disabled item to active item", function() {
+it("adjust activedescendant id when navigation from disabled item to active item", function() {
     div.kendoTabStrip({animation: false});
     addItems(3);
     var tabstrip = div.data("kendoTabStrip");
@@ -166,7 +150,7 @@ it("add activedescendant id when navigation from disabled item to active item", 
         keyCode: keys.LEFT
     });
 
-    assert.isOk(div.find(".k-item:first").is("#" +  tabstrip._ariaId));
+    assert.equal(div.find(".k-item:first").attr("id"), div.attr("aria-activedescendant"));
 });
 
 it("selects prev item on key UP", function() {
@@ -184,7 +168,7 @@ it("selects prev item on key UP", function() {
     });
 
     assert.isOk(div.find(".k-item:first").hasClass("k-state-active"));
-    assert.equal(div.attr("aria-activedescendant"), "test_ts_active");
+    assert.equal(div.attr("aria-activedescendant"), div.find(".k-item:first").attr("id"));
 });
 
 it("selects last if current is first", function() {

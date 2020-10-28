@@ -1,6 +1,6 @@
 ---
 title: Selected Dates
-page_title: jQuery DatePicker Documentation | Selected Dates | Kendo UI
+page_title: jQuery DatePicker Documentation | Selected Dates
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to set selected dates and date ranges in the widget."
 slug: selecteddates_datepicker
 position: 3

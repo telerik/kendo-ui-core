@@ -1,6 +1,6 @@
 ---
 title: Views
-page_title: jQuery FileManager Documentation | Grid and List Views in FileManager | Kendo UI
+page_title: jQuery FileManager Documentation | Grid and List Views in FileManager
 description: "Get familiar with Grid and List Views in FileManager."
 slug: views_kendoui_filemanager_widget
 position: 4

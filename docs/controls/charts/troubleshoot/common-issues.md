@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: jQuery Chart Documentation | Common Issues | Kendo UI
+page_title: jQuery Chart Documentation | Common Issues
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart widget."
 previous_url: /dataviz/troubleshooting
 slug: troubleshooting_chart_widget

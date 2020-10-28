@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ListView Documentation | ListView Overview | Kendo UI
+page_title: jQuery ListView Documentation | ListView Overview
 description: "Get started with the jQuery ListView by Kendo UI and initialize the widget."
 slug: overview_kendoui_listview_widget
 position: 1

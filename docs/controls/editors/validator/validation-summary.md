@@ -1,6 +1,6 @@
 ---
 title: Validation Summary
-page_title: jQuery Validator Documentation | Validation Summary | Kendo UI
+page_title: jQuery Validator Documentation | Validation Summary
 description: "Get started with the jQuery Validator by Kendo UI and use the built-in validation summary functionality."
 slug: validationsummary_kendoui_validator
 position: 5

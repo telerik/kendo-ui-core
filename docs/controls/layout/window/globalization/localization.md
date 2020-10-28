@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: jQuery Window Documentation | Window Localization | Kendo UI
+page_title: jQuery Window Documentation | Window Localization
 description: "Get started with the jQuery Window by Kendo UI and translate its messages for different culture locales."
 slug: localization_window
 position: 3

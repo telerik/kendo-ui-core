@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: jQuery Charts Documentation | StockChart Data Binding | Kendo UI
+page_title: jQuery Charts Documentation | StockChart Data Binding
 description: "Get started with the jQuery StockChart by Kendo UI and learn how to bind it to data."
 slug: databinding_kendoui_stockcharts
 position: 2

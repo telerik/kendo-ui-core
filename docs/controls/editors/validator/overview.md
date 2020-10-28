@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Validator Documentation | Validator Overview | Kendo UI
+page_title: jQuery Validator Documentation | Validator Overview
 description: "Get started with the jQuery Validator by Kendo UI and learn how to create, initialize, and enable the widget."
 previous_url: /framework/validator/overview
 slug: overview_kendoui_validator_widget

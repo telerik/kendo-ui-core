@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery FX Documentation | FX Overview | Kendo UI
+page_title: jQuery FX Documentation | FX Overview
 description: "Get started with the jQuery FX by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_fxeffects_widget
 position: 1

@@ -63,7 +63,7 @@ var __meta__ = { // jshint ignore:line
 
         templates = {
             content: template(
-                "<div class='k-content'#= contentAttributes(data) # role='tabpanel'>#= content(item) #</div>"
+                "<div class='k-content'#= contentAttributes(data) # role='tabpanel' tabindex='0'>#= content(item) #</div>"
             ),
             itemWrapper: template(
                 "<#= tag(item) # class='k-link'#= contentUrl(item) ##= textAttributes(item) #>" +
@@ -265,9 +265,6 @@ var __meta__ = { // jshint ignore:line
 
             that.element.attr("role", "tablist");
 
-            if (that.element[0].id) {
-                that._ariaId = that.element[0].id + "_ts_active";
-            }
             that.value(value);
             kendo.notify(that);
         },
@@ -319,15 +316,13 @@ var __meta__ = { // jshint ignore:line
 
         _current: function (candidate) {
             var that = this,
-                focused = that._focused,
-                id = that._ariaId;
+                focused = that._focused;
 
             if (candidate === undefined) {
                 return focused;
             }
 
             if (focused) {
-                that.tabGroup.children("#" + id).removeAttr("id");
                 focused.removeClass(FOCUSEDSTATE);
             }
 
@@ -336,13 +331,8 @@ var __meta__ = { // jshint ignore:line
                     candidate.addClass(FOCUSEDSTATE);
                 }
 
-                that.element.removeAttr("aria-activedescendant");
-
-                id = candidate[0].id || id;
-
-                if (id) {
-                    candidate.attr("id", id);
-                    that.element.attr("aria-activedescendant", id);
+                if (candidate[0].id) {
+                    that.element.attr("aria-activedescendant", candidate[0].id);
                 }
             }
 
@@ -635,7 +625,7 @@ var __meta__ = { // jshint ignore:line
             return this;
         },
 
-          reload: function (element) {
+        reload: function (element) {
             element = this.tabGroup.find(element);
             var that = this;
             var contentUrls = that._contentUrls;
@@ -885,12 +875,16 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _elementId: function(element, idx) {
+        _elementId: function(element, idx, tab) {
             var elementId = element.attr("id");
-            var wrapperId = this.element.attr("id");
+            var wrapperId = this.element.attr("id") || kendo.guid();
 
-            if (!elementId || elementId.indexOf(wrapperId + "-") > -1) {
-                var tabStripID = (wrapperId || kendo.guid()) + "-";
+            if (!elementId) {
+                var tabStripID = wrapperId + "-";
+
+                if(tab) {
+                    tabStripID += "tab-";
+                }
 
                 return tabStripID + (idx + 1);
             }
@@ -907,36 +901,52 @@ var __meta__ = { // jshint ignore:line
 
             if (contentElements.length && (items.length > contentElements.length)) {
                 contentElements.each(function(idx) {
-                    var id = _elementId($(this), idx);
-                    var item = items.filter("[aria-controls=" + (this.id || 0) + "]")[0];
+                    // Generate an ID for each content element
+                    var contentId = _elementId($(this), idx),
+                        item = items.filter("[aria-controls=" + (contentId || 0) + "]")[0],
+                        tabId;
 
                     if (!item && isInitialUpdate) {
-                         item = items[idx];
+                        // On initialization of the widget get the tab by its index
+                        item = items[idx];
                     }
 
                     if (item) {
-                        item.setAttribute("aria-controls", id);
+                        // set the tab aria-controls attribute to the content ID
+                        item.setAttribute("aria-controls", contentId);
+                        tabId = item.id = _elementId($(item), idx, true);
+                        this.setAttribute("aria-labelledby", tabId);
                     }
 
-                    this.setAttribute("id", id);
+                    // set the get (possibly existing) ID on the content element
+                    this.setAttribute("id", contentId);
                 });
             } else {
                 items.each(function(idx) {
-                    var currentContent = contentElements.eq(idx);
-                    var id = _elementId(currentContent, idx);
+                    var currentContent = contentElements.eq(idx),
+                        contentId = _elementId(currentContent, idx),
+                        tabId;
 
-                    this.setAttribute("aria-controls", id);
+                    // set the tab aria-controls attribute to the content ID
+                    this.setAttribute("aria-controls", contentId);
+
+                    tabId = this.id = _elementId($(this), idx, true);
 
                     if (!currentContent.length && contentUrls[idx]) {
-                        $("<div class='" + CONTENT + "'/>").appendTo(that.wrapper).attr("id", id);
+                        // Append content element in case contentUrl is used
+                        $("<div class='" + CONTENT + "'/>").appendTo(that.wrapper).attr("id", contentId);
                     } else {
-                        currentContent.attr("id", id);
+                        // set the ID on the content element
+                        currentContent.attr("id", contentId);
 
                         if (!$(this).children(".k-loading")[0] && !contentUrls[idx]) {
                             $("<span class='k-loading k-complete'/>").prependTo(this);
                         }
                     }
+
                     currentContent.attr("role", "tabpanel");
+                    currentContent.attr("tabindex", "0");
+                    currentContent.attr("aria-labelledby", tabId);
                     currentContent.filter(":not(." + ACTIVESTATE + ")").attr("aria-hidden", true).attr("aria-expanded", false);
                     currentContent.filter("." + ACTIVESTATE).attr("aria-expanded", true);
                 });
@@ -1313,7 +1323,7 @@ var __meta__ = { // jshint ignore:line
 
             item.attr("data-animating", true);
 
-          var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || that._contentUrls[itemIndex] || false) && contentHolder.is(EMPTY),
+            var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || that._contentUrls[itemIndex] || false) && contentHolder.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeAttr("aria-selected");
                     item.attr("aria-selected", true);

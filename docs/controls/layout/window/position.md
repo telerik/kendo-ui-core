@@ -1,6 +1,6 @@
 ---
 title: Positioning
-page_title: jQuery Window Documentation | Positioning | Kendo UI
+page_title: jQuery Window Documentation | Positioning
 description: "Get started with the jQuery Window by Kendo UI, learn how to position and drag the widget and also how to constrain its movement within containers."
 slug: positiondrag_window
 position: 3

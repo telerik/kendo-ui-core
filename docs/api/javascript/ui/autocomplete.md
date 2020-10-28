@@ -351,7 +351,7 @@ The height of the suggestion popup in pixels. The default value is 200 pixels.
     });
     </script>
 
-### highlightFirst `Boolean` *(default: true)*
+### highlightFirst `Boolean` *(default: false)*
 
 If set to `true` the first suggestion will be automatically highlighted.
 

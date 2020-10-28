@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery DropDownList Documentation | DropDownList Overview | Kendo UI
+page_title: jQuery DropDownList Documentation | DropDownList Overview
 description: "Get started with the jQuery DropDownList by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_dropdownlist_widget
 position: 1

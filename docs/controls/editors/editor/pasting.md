@@ -1,6 +1,6 @@
 ---
 title: Pasting Content
-page_title: jQuery Editor Documentation | Pasting Content | Kendo UI
+page_title: jQuery Editor Documentation | Pasting Content
 description: "Get started with the jQuery Editor by Kendo UI and paste content from HTML and MS Word documents."
 slug: pasting_editor_widget
 position: 9

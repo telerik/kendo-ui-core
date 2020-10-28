@@ -1,6 +1,6 @@
 ---
 title: Internationalization
-page_title: jQuery MultiSelect Documentation | MultiSelect Internationalization | Kendo UI
+page_title: jQuery MultiSelect Documentation | MultiSelect Internationalization
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
 slug: intl_multiselect
 position: 2

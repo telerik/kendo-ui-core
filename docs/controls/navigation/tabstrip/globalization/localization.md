@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: jQuery TabStrip Documentation | TabStrip Localization | Kendo UI
+page_title: jQuery TabStrip Documentation | TabStrip Localization
 description: "Get started with the jQuery TabStrip by Kendo UI and translate its messages for different culture locales."
 slug: localization_tabstrip
 position: 3

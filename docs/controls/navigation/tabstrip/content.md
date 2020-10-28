@@ -1,6 +1,6 @@
 ---
 title: Content Operations
-page_title: jQuery TabStrip Documentation | Content Operations | Kendo UI
+page_title: jQuery TabStrip Documentation | Content Operations
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to load its content with AJAX and implement scrolling for its content."
 slug: content_tabstrip
 position: 5

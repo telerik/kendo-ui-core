@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Menu Documentation | Menu Overview | Kendo UI
+page_title: jQuery Menu Documentation | Menu Overview
 description: "Get started with the jQuery Menu by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_menu_widget
 position: 1

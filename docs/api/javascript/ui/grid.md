@@ -1,6 +1,6 @@
 ---
 title: Grid
-page_title: jQuery Grid Documentation | Configuration, Methods, Events | Kendo UI
+page_title: jQuery Grid Documentation | Configuration, Methods, Events
 description: Get started with code examples for the jQuery Grid by Kendo UI and learn how to use methods and which events to set once the widget detail is initialized.
 res_type: api
 component: grid

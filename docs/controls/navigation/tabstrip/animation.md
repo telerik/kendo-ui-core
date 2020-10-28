@@ -1,6 +1,6 @@
 ---
 title: Animations
-page_title: jQuery TabStrip Documentation | Animations | Kendo UI
+page_title: jQuery TabStrip Documentation | Animations
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to add animation effects upon user selection of its tabs."
 slug: animations_tabstrip
 position: 4
