@@ -1,6 +1,6 @@
 ---
 title: Images
-page_title: jQuery Spreadsheet Documentation | Images | Kendo UI
+page_title: jQuery Spreadsheet Documentation | Images
 description: "Get started with the jQuery Spreadsheet by Kendo UI and place an image in the widget."
 slug: images_spreadsheet_widget
 position: 2

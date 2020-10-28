@@ -1,6 +1,6 @@
 ---
 title: RTL Support
-page_title: jQuery Grid Documentation | Grid Right-to-Left Support | Kendo UI
+page_title: jQuery Grid Documentation | Grid Right-to-Left Support
 description: "Get started with the jQuery Grid by Kendo UI and learn about the RTL supports it provides."
 slug: rtl_kendoui_grid_widget
 position: 4

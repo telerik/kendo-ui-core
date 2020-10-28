@@ -1,6 +1,6 @@
 ---
 title: Title and Legend
-page_title: jQuery Chart Documentation | Title and Legend | Kendo UI
+page_title: jQuery Chart Documentation | Title and Legend
 description: "Get started with the jQuery Chart by Kendo UI and learn how to control its appearance, change its themes and manage its animated transitions."
 slug: titlelegend_features_charts
 ---

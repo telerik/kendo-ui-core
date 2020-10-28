@@ -1,6 +1,6 @@
 ---
 title: Metadata
-page_title: jQuery Upload Documentation | Metadata | Kendo UI
+page_title: jQuery Upload Documentation | Metadata
 description: "Get started with the jQuery Upload by Kendo UI and learn how to send and receive metadata during the asynchronous mode of Upload operation."
 slug: metadata_upload_widget
 position: 6

@@ -1,6 +1,6 @@
 ---
 title: PDFjs Processing
-page_title: jQuery PDFViewer Documentation | PDFjs Processing | Kendo UI
+page_title: jQuery PDFViewer Documentation | PDFjs Processing
 description: "Get started with the jQuery PDFViewer by Kendo UI and use PDF.JS processing in the Kendo UI PDFViewer widget"
 slug: pdfjs_processing_pdfviewer_widget
 position: 2

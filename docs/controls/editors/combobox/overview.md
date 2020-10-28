@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery ComboBox Documentation | ComboBox Overview | Kendo UI
+page_title: jQuery ComboBox Documentation | ComboBox Overview
 description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_combobox_widget
 position: 1

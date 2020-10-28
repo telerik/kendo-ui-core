@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery DropDownList Documentation | Troubleshooting | Kendo UI
+page_title: jQuery DropDownList Documentation | Troubleshooting
 description: "Learn how to handle possible issues while working with the Kendo UI DropDownList widget."
 previous_url: /controls/editors/dropdownlist/troubleshoot/troubleshooting
 slug: troubleshooting_common_issues_dropdownlist_kendoui

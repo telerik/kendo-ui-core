@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Scheduler Documentation | Troubleshooting | Kendo UI
+page_title: jQuery Scheduler Documentation | Troubleshooting
 description: "Get started with the jQuery Scheduler by Kendo UI and learn how to deal with issues you may encounter while using the widget."
 previous_url: /web/scheduler/troubleshooting, /controls/scheduling/scheduler/troubleshoot/troubleshooting
 slug: troubleshooting_scheduler_widget

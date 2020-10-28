@@ -1,6 +1,6 @@
 ---
 title: Tools
-page_title: jQuery Editor Documentation | Tools | Kendo UI
+page_title: jQuery Editor Documentation | Tools
 description: "Get started with the jQuery Editor by Kendo UI and use and customize its tools."
 slug: tools_kendoui_editor_widget
 position: 4

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Upload Documentation | Troubleshooting | Kendo UI
+page_title: jQuery Upload Documentation | Troubleshooting
 description: "Get started with the jQuery Upload by Kendo UI and learn how to handle some of the common issues that may occur when you work with the widget."
 previous_url: /controls/editors/upload/troubleshoot/troubleshooting
 slug: troubleshooting_upload_widget

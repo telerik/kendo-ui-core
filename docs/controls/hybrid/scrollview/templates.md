@@ -1,6 +1,6 @@
 ---
 title: Templates
-page_title: Hybrid ScrollView Documentation | Templates | Kendo UI
+page_title: Hybrid ScrollView Documentation | Templates
 description: "Get started with the Hybrid ScrollView by Kendo UI and use its templates."
 slug: templates_hybridscrollview
 position: 4

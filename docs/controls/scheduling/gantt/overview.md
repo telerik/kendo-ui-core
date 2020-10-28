@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Gantt Documentation | Gantt Overview | Kendo UI
+page_title: jQuery Gantt Documentation | Gantt Overview
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_gantt_widget
 position: 1

@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: Hybrid ScrollView Documentation | Troubleshooting | Kendo UI
+page_title: Hybrid ScrollView Documentation | Troubleshooting
 description: "Get started with the Hybrid ScrollView by Kendo UI and handle some of the display an dperformance issues that may occur while working with the widget."
 slug: troubleshooting_hybridscrollview
 position: 70

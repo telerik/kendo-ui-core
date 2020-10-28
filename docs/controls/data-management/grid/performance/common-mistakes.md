@@ -1,6 +1,6 @@
 ---
 title: Common Mistakes
-page_title: jQuery Grid Documentation | Common Mistakes | Kendo UI
+page_title: jQuery Grid Documentation | Common Mistakes
 description: "Get started with the jQuery Grid by Kendo UI and learn how to avoid and handle the most common performance mistakes."
 slug: performance_kendoui_grid_widget
 position: 2

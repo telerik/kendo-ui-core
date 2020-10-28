@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Button Documentation | Button Overview | Kendo UI
+page_title: jQuery Button Documentation | Button Overview
 description: "Get started with the jQuery Button by Kendo UI, initialize single or multiple buttons, and reference existing Button instances."
 slug: overview_kendoui_button_widget
 position: 1

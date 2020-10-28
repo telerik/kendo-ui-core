@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Overview | Kendo UI
+page_title: jQuery NumericTextBox Documentation | NumericTextBox Overview
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create and initialize the widget."
 slug: overview_kendoui_numerictextbox_widget
 position: 1

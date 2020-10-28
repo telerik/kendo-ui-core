@@ -1,6 +1,6 @@
 ---
 title: Browser Support
-page_title: jQuery Upload Documentation | Browser Support | Kendo UI
+page_title: jQuery Upload Documentation | Browser Support
 description: "Get started with the jQuery Upload by Kendo UI and learn which Upload features are supported by the most popular browsers and their versions."
 slug: browsersupport_upload_widget
 position: 8

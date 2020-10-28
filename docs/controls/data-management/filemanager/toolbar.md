@@ -1,6 +1,6 @@
 ---
 title: Toolbar
-page_title: jQuery FileManager Documentation | FileManager Toolbar Commands | Kendo UI
+page_title: jQuery FileManager Documentation | FileManager Toolbar Commands
 description: "Get familiar with the Toolbar Commands in the FileManager and how you can use them."
 slug: toolbar_kendoui_filemanager_widget
 position: 9

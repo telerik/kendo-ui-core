@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery ComboBox Documentation | Troubleshooting | Kendo UI
+page_title: jQuery ComboBox Documentation | Troubleshooting
 description: "Get started with the jQuery ComboBox by Kendo UI and solve troubleshooting issues you might encounter while working with the widget."
 previous_url: /controls/editors/combobox/troubleshooting/troubleshooting
 slug: troubleshooting_common_issues_combobox_kendoui

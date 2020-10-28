@@ -1,6 +1,6 @@
 ---
 title: Content Operations
-page_title: jQuery Tooltip Documentation | Content Operations | Kendo UI
+page_title: jQuery Tooltip Documentation | Content Operations
 description: "Get started with the jQuery Tooltip by Kendo UI and load its content with AJAX."
 slug: content_kendoui_tooltip
 position: 2

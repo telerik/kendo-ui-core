@@ -1,6 +1,6 @@
 ---
 title: Internationalization
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Internationalization | Kendo UI
+page_title: jQuery NumericTextBox Documentation | NumericTextBox Internationalization
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
 slug: intl_numerictextbox
 position: 2

@@ -1,6 +1,6 @@
 ---
 title: RTL Support
-page_title: jQuery MultiSelect Documentation | MultiSelect Right-to-Left Support | Kendo UI
+page_title: jQuery MultiSelect Documentation | MultiSelect Right-to-Left Support
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn about the RTL supports it provides."
 slug: rtl_multiselect
 position: 3

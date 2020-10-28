@@ -318,6 +318,28 @@ declare namespace kendo {
         angular(eventName: string, handler: Function): void;
     }
 
+    class UserEvents extends Observable {
+        static defaultThreshold(value: number): void;
+        static minHold(value: number): void;
+
+        init(...args: any[]): void;
+        preventIfMoving(e?: any): void;
+        destroy(): void;
+
+        capture(): void;
+
+        cancel(): void;
+
+        notify(eventName?: string, data?: any): boolean;
+
+        // API
+        press(x: any, y: any, target: any): void;
+
+        move(x: any, y: any): void;
+
+        end(x: any, y: any): void;
+    }
+
     interface ViewOptions {
         tagName?: string;
         wrap?: boolean;

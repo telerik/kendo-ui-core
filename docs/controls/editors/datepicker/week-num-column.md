@@ -1,6 +1,6 @@
 ---
 title: Week Number Column
-page_title: jQuery DatePicker Documentation | Week Number Column | Kendo UI
+page_title: jQuery DatePicker Documentation | Week Number Column
 description: "Get started with the jQuery DatePicker by Kendo UI and learn how to render a column for the number of weeks within the current month."
 slug: weeknumcolumn_datepicker
 position: 7

@@ -1,6 +1,6 @@
 ---
 title: Icon Button
-page_title: jQuery Button Documentation | Icon Button | Kendo UI
+page_title: jQuery Button Documentation | Icon Button
 description: "Get started with the jQuery Button by Kendo UI and add background, image, or font icons to enhance the visualization of the widget."
 slug: icons_button
 position: 3

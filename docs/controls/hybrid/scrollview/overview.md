@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: Hybrid ScrollView Documentation | ScrollView Overview | Kendo UI
+page_title: Hybrid ScrollView Documentation | ScrollView Overview
 description: "Get started with the Hybrid ScrollView by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_hybridscrollview
 position: 1
