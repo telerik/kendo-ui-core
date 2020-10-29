@@ -206,6 +206,110 @@ By default, the Form is rendered with vertical orientation.
         });
     </script>
 
+### messages `Object`
+
+Configures text messages displayed in the Form. Use it to customize or localize the Form messages.
+
+#### Example - customize form submit and clear buttons messages
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }],
+            messages: {
+                submit: "Custom Submit Button Text",
+                clear: "Custom Clear Button Text"
+            }
+        });
+    </script>
+
+### messages.submit `String` *(default: "Submit")*
+
+The text message displayed for the Form submit button.
+
+#### Example - set the submit button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }],
+            messages: {
+                submit: "Custom Submit Button Text"
+            }
+        });
+    </script>
+
+### messages.clear `String` *(default: "Clear")*
+
+The text message displayed for the Form clear button.
+
+#### Example - set the clear button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }],
+            messages: {
+                clear: "Custom Clear Button Text"
+            }
+        });
+    </script>
+
+### messages.optional `String` *(default: "(Optional)")*
+
+The text message displayed next to a field label when the [items.label.optional](items.label.optional) option is set to `true`.
+
+#### Example - set the clear button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: {
+                    text: "Name:",
+                    optional: true
+                }
+            }],
+            messages: {
+                optional: "(Optional field)"
+            }
+        });
+    </script>
+
 ### validatable `Object`
 
 Configures the built-in Validator options.
