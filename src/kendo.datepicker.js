@@ -540,7 +540,7 @@ var __meta__ = { // jshint ignore:line
 
             that._old = that._update(value);
 
-            if (that._old === null) {
+            if (that._old === null && !that._dateInput) {
                 that.element.val("");
             }
 
@@ -681,7 +681,7 @@ var __meta__ = { // jshint ignore:line
             if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
-                if (formattedValue !== value) {
+                if (formattedValue !== value && !(that._dateInput && !date)) {
                     that.element.val(date === null ? value : formattedValue);
                 }
 
