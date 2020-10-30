@@ -400,10 +400,12 @@ var __meta__ = { // jshint ignore:line
                         "# } #" +
                     "</li>"
                 ),
-                loading: template("<div class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</div>"),
+                loading: template("<li class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</li>"),
                 retry: template(
-                    "#: data.messages.requestFailed # " +
-                    "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
+                    "<li class='k-item'>" +
+                        "#: data.messages.requestFailed # " +
+                        "<button class='k-button k-request-retry'>#: data.messages.retry #</button>" +
+                    "</li>"
                 ),
                 arrow: template("<span class='#= arrowClass(item) #'></span>"),
                 empty: template("")

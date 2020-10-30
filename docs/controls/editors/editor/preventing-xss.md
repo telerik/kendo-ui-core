@@ -47,34 +47,35 @@ To allow the execution of scripts inside the Editor content:
 
 ## Serialization and Deserialization
 
-Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/javascript/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/javascript/ui/editor/configuration/deserialization.custom) options of the Editor, to implement your own sanitizing functionality.
+Script tags and DOM event attributes stripping, as well as value encoding, are built-in functionalities of the Editor. In addition, you can use the [`serialization.custom`](/api/javascript/ui/editor/configuration/serialization.custom) and [`deserialization.custom`](/api/javascript/ui/editor/configuration/deserialization.custom) options of the Editor.
 
-The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor and remove `object` tags.
+The following example demonstrates how to use the serialization and deserialization custom otpions, to sanitize the value of the Editor by using [DOMPurify](https://github.com/cure53/DOMPurify) library.
 
 ```dojo
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.0.12/purify.min.js"></script>
+ 
 <textarea id="editor"></textarea>
 <script>
-  function sanitizeHtml(html) {
-    var temp = $("<div></div>").html(html);
-    temp.find("object").remove();
-    return temp.html() || "\ufeff";
-  }
-
-  $("#editor").kendoEditor({
-    tools: [
-      "viewHtml"
-    ],
-    deserialization: {
-      custom: function(html) {
-        return sanitizeHtml(html);
-      }
-    },
-    serialization: {
-      custom: function(html) {
-        return sanitizeHtml(html);
-      }
+    function sanitizeHtml(html) {
+		var temp = $("<div></div>").html(window.DOMPurify.sanitize(html));
+		return temp.html() || "\ufeff";
     }
-  });
+
+    $("#editor").kendoEditor({
+		tools: [
+			"viewHtml"
+		],
+		deserialization: {
+			custom: function(html) {
+				return sanitizeHtml(html);
+			}
+		},
+		serialization: {
+			custom: function(html) {
+				return sanitizeHtml(html);
+			}
+		}
+    });
 
   var editor = $("#editor").getKendoEditor();
 
