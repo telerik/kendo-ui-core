@@ -258,7 +258,7 @@ data source is fired. By default the widget will bind to the data source specifi
 
 #### Example - disable automatic binding
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var dataSource = new kendo.data.HierarchicalDataSource({
       data: [ { text: "Jane Doe" }, { text: "John Doe" }]
@@ -301,7 +301,7 @@ Sets the field of the data item that provides the image URL of the **PanelBar** 
 
 #### Example - specify custom image URL field
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { text: "Baseball", image: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/baseball.png" },
@@ -323,7 +323,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
 #### Example - set dataSource as a JavaScript object
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -378,7 +378,7 @@ If the `dataSource` option is an existing [kendo.data.HierarchicalDataSource](/a
 
 #### Example - set dataSource as an existing kendo.data.HierarchicalDataSource instance
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var dataSource = new kendo.data.HierarchicalDataSource({
       transport: {
@@ -413,7 +413,7 @@ If an array, each level uses the field that is at the same index in the array, o
             background-image: url("https://demos.telerik.com/kendo-ui/content/shared/styles/flags.png");
         }
     </style>
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { text: "Brazil", sprite: "brazilFlag" },
@@ -432,7 +432,7 @@ If an array, each level uses the field that is at the same index in the array, o
 
 #### Example
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { ProductName: "Tea", items: [
@@ -449,7 +449,7 @@ If an array, each level uses the field that is at the same index in the array, o
 
 #### Example - using different fields on different levels
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { CategoryName: "Tea", items: [
@@ -470,7 +470,7 @@ Sets the field of the data item that provides the link URL of the nodes.
 
 #### Example
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     var items = [
       { text: "Tea", LinksTo: "http://tea.example.com" },
@@ -526,7 +526,7 @@ Setting this to false causes all child DataSources to be loaded at initializatio
 
 #### Example - force lazy loading of sublevels
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       loadOnDemand: true,
@@ -544,7 +544,7 @@ The text messages displayed in the widget. Use it to customize or localize the m
 
 #### Example - customize PanelBar messages
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -571,7 +571,7 @@ The text message shown while the root level items are loading.
 
 #### Example - customize loading message
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -596,7 +596,7 @@ The text message shown when an error occurs while fetching the content.
 
 #### Example - customize requestFailed message
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -621,7 +621,7 @@ The text message shown in the retry button.
 
 #### Example - customize retry message
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: {
@@ -646,7 +646,7 @@ Template for rendering each node.
 
 #### Example
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       template: "#= item.text # (#= item.inStock #)",
@@ -817,7 +817,7 @@ A string, DOM element or jQuery object which represents the item. A string is tr
 
 #### Example - get the data item of the first node
 
-    <div id="panelBar"></div>
+    <ul id="panelBar"></ul>
     <script>
         $("#panelBar").kendoPanelBar({
             dataSource: [
@@ -1450,7 +1450,7 @@ The node whose children have been changed. If the changes have occurred on the r
 
 #### Example - subscribe to the "dataBound" event during initialization
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     $("#panelbar").kendoPanelBar({
       dataSource: [
@@ -1466,7 +1466,7 @@ The node whose children have been changed. If the changes have occurred on the r
 
 #### Example - subscribe to the "dataBound" event after initialization
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
     function panelbar_dataBound(e) {
       console.log("DataBound", e.node);
@@ -1484,7 +1484,7 @@ The node whose children have been changed. If the changes have occurred on the r
 
 #### Example - show an empty message when no items have been loaded from the server
 
-    <div id="panelbar"></div>
+    <ul id="panelbar"></ul>
     <script>
       $("#panelbar").kendoPanelBar({
         dataSource: [],

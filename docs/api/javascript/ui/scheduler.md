@@ -4305,16 +4305,16 @@ The complete list of the supported timezones is available in the [List of IANA t
 
 ### toolbar `Array`
 
-List of commands that the scheduler will display in its toolbar as buttons. Currently supports only the "pdf" command.
+List of commands that the scheduler will display in its toolbar as buttons. Currently supports only the "pdf" and "search" commands.
 
-The "pdf" command exports the scheduler in PDF format.
+The "pdf" command exports the scheduler in PDF format. The "search" option allows searching through Scheduler events titles.
 
 #### Example - specify the toolbar commands as array of strings
 
     <div id="scheduler"></div>
     <script>
     $("#scheduler").kendoScheduler({
-      toolbar: ["pdf"],
+      toolbar: ["pdf", "search"],
       date: new Date("2013/6/6"),
       dataSource: [
         {

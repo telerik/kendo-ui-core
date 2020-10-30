@@ -828,7 +828,7 @@ Defines the localization messages for the toolbar.
 
 ### messages.toolbar.createFolder `String`
 
-### messages.toolbar.uploadDialog `String`
+### messages.toolbar.upload `String`
 
 ### messages.toolbar.sortDirection `String`
 

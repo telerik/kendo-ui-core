@@ -161,19 +161,19 @@
         });
 
         it("resizing window horizontally does not update vertical positioning", function() {
-            var initialWidth = dialog.wrapper.width();
+            var initialHeight= dialog.wrapper.outerHeight();
 
-            resize("w", 0, 100);
+            resize("w", 100, 0);
 
-            assert.equal(dialog.wrapper.width(), initialWidth);
+            assert.equal(dialog.wrapper.outerHeight(), initialHeight);
         });
 
         it("resizing window vertically does not update horizontal positioning", function() {
-            var initialHeight = dialog.wrapper.height();
+            var initialWidth = dialog.wrapper.outerWidth();
 
-            resize("n", 100, 0);
+            resize("n", 0, 100);
 
-            assert.equal(dialog.wrapper.height(), initialHeight);
+            assert.equal(dialog.wrapper.outerWidth(), initialWidth);
         });
     });
 

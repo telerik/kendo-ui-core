@@ -1827,8 +1827,8 @@
                 that.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "");
 
                 that.initialSize = {
-                    width: wrapper.width(),
-                    height: wrapper.height()
+                    width: wrapper.outerWidth(),
+                    height: wrapper.outerHeight()
                 };
 
                 wnd._updateBoundaries();
@@ -1949,6 +1949,7 @@
                 if (this._preventDragging) {
                     return;
                 }
+
                 var that = this,
                     wnd = that.owner,
                     wrapper = wnd.wrapper;
