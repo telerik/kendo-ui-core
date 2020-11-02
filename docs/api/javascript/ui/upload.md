@@ -450,6 +450,25 @@ Sets the hint of the drop-zone.
         });
     </script>
 
+### localization.headerStatusPaused `String`
+
+Sets the paused status message of the header.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                headerStatusPaused: "customHeaderStatusPaused"
+            }
+        });
+    </script>
+
 ### localization.headerStatusUploaded `String`
 
 Sets the status message of the header for the uploaded files.
