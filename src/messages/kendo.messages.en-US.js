@@ -1121,6 +1121,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "uploaded",
   "statusWarning": "warning",
   "statusFailed": "failed",
+  "headerStatusPaused": "Paused",
   "headerStatusUploading": "Uploading...",
   "headerStatusUploaded": "Done",
   "uploadSuccess": "File(s) uploaded successfully.",
