@@ -76,7 +76,7 @@ function arrayClose(a, b, tolerance) {
 function tzTest(tzAlias, testName, expected, callback) {
     var TZ_NAMES = {
         "Brazil": ["BRST", "BRT", "South America Daylight Time", "South America Standard Time"],
-        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time", "FLE"],
+        "Sofia": ["EET", "EEST", "Eastern European Time", "Eastern European Summer Time", "Eastern European Standard Time", "FLE"],
         "Moscow": ["MSK", "RTZ2", "Russia TZ 2 Standard Time"],
         "Pacific": ["PDT", "PST"]
     };
@@ -258,7 +258,7 @@ var ngTestModule = $.noop, ngTest = $.noop, ngScope;
             angular.bootstrap(Mocha.fixture.children()[0], ['kendo.tests']);
             setTimeout(function() {
                 check(done);
-                
+
                 if (!async) {
                     done();
                 }

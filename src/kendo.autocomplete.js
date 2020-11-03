@@ -437,7 +437,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var data = that.dataSource.flatView();
             var length = data.length;
-            var groupsLength = that.dataSource._group.length;
+            var groupsLength = that.dataSource._group ? that.dataSource._group.length : 0;
             var isActive = that.element[0] === activeElement();
             var action;
 
