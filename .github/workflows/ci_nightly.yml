@@ -1,0 +1,56 @@
+name: CI | Nightly
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  CI: true
+
+on:
+  schedule:
+    # Run at midnight every working day
+    - cron: '0 0 * * Mon-Fri'
+
+jobs:
+
+  ci-nightly:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x]
+
+    steps:
+
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup node cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install
+        run: npm install
+
+      - name: Lint
+        run: gulp jshint
+
+      - name: Build styles
+        run: gulp styles
+
+      - name: Build scripts
+        run: gulp scripts
+
+      - name: Karma
+        run: gulp karma-travis
