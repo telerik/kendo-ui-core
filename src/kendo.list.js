@@ -395,7 +395,7 @@ var __meta__ = { // jshint ignore:line
             this._clearFilterExpressions(expression);
 
             if ((filter || removed) && that.trigger("filtering", { filter: filter })) {
-                return;
+                return $.Deferred().reject().promise();
             }
 
             var newExpression = {

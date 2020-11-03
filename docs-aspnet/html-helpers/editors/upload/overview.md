@@ -23,7 +23,7 @@ The following example demonstrates how to define the Upload widget by using the 
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
-        .Save("SaveAsync", "Upload")
+        .Save("Save", "Upload")
         .Remove("Remove", "Upload")
         .AutoUpload(true)
     )
@@ -37,7 +37,7 @@ public UploadController(IHostingEnvironment hostingEnvironment)
     HostingEnvironment = hostingEnvironment;
 }
 
-public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
+public async Task<ActionResult> Save(IEnumerable<IFormFile> files)
 {
     // The Name of the Upload component is "files".
     if (files != null)
