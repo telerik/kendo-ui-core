@@ -9324,7 +9324,7 @@ Whether the removal should be recorded in the undo-redo stack.
 
 ### resize
 
-Adjusts the diagram size to match the size of the container.
+Adjusts the diagram viewport to match the size of the container.
 
 #### Example - resize Diagram on window resize
 

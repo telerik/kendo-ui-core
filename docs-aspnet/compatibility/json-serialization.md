@@ -39,6 +39,7 @@ There are three ways to configure JSON Serialization in ASP.NET Core 3:
 
 * The recommended approach is to use the default serialization that is delivered with ASP.NET Core. To configure it, locate the `ConfigureServices` method and update it by adding the code below.
 
+	```
     public void ConfigureServices(IServiceCollection services)
 	{
 		...
@@ -50,9 +51,11 @@ There are three ways to configure JSON Serialization in ASP.NET Core 3:
 		// Add the Kendo UI services to the services container.
 		services.AddKendo();
 	}
+	```
 
 * The first alternative approach is to maintain the property names casing globally, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
 
+	```
 	...
 	  	using Newtonsoft.Json.Serialization;
 	...
@@ -68,9 +71,11 @@ There are three ways to configure JSON Serialization in ASP.NET Core 3:
 		// Add the Kendo UI services to the services container.
 		services.AddKendo();
 	}
+	```
 
 * The second alternative approach is to use the default Json serialization throughout the application and include the built-in `System.Text.Json.JsonSerializerOptions` in the controller action method response.
 
+	```
 	...
 		using System.Text.Json;
 	...
@@ -80,7 +85,8 @@ There are three ways to configure JSON Serialization in ASP.NET Core 3:
 
         DataSourceResult result =  orders.ToDataSourceResult(request);
         return Json(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = false });
-    }	
+    }
+	```
 
 ## See Also
 
