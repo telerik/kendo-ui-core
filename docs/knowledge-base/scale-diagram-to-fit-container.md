@@ -25,12 +25,13 @@ How can I scale Kendo UI Diagram to fit its container upon resizing?
 
 ## Solution
 
-Create a method to dynamically calculate the Diagram viewport dimensions and scale the Diagram accordingly. Use the [`scale()`](/api/javascript/dataviz/ui/diagram/methods/scale) method of the Diagram.
+Create a method to dynamically calculate the Diagram viewport dimensions and scale the Diagram accordingly. Use the [`zoom()`](/api/javascript/dataviz/ui/diagram/methods/zoom) method of the Diagram.
 
 ```dojo
 <div class="diagram-wrapper">
       <div id="diagram"></div>
-</div
+</div>
+
     <script>
       $("#diagram").kendoDiagram({
         shapes:[
