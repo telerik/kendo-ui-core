@@ -4073,6 +4073,59 @@ declare namespace kendo.ui {
         promise?: JQueryPromise<any>;
     }
 
+    class ExpansionPanel extends kendo.ui.Widget {
+
+        static fn: ExpansionPanel;
+
+        options: ExpansionPanelOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ExpansionPanel;
+
+        constructor(element: Element, options?: ExpansionPanelOptions);
+
+
+        destroy(): void;
+        enable(enable: boolean): void;
+        toggle(expand: boolean, animation: boolean): void;
+
+    }
+
+    interface ExpansionPanelAnimationCollapse {
+        duration?: number;
+        effects?: string;
+    }
+
+    interface ExpansionPanelAnimationExpand {
+        duration?: number;
+        effects?: string;
+    }
+
+    interface ExpansionPanelAnimation {
+        collapse?: ExpansionPanelAnimationCollapse;
+        expand?: ExpansionPanelAnimationExpand;
+    }
+
+    interface ExpansionPanelOptions {
+        name?: string;
+        animation?: boolean | ExpansionPanelAnimation;
+        disabled?: boolean;
+        expanded?: boolean;
+        height?: number|string;
+        toggleable?: boolean;
+        expand?(e: ExpansionPanelEvent): void;
+        collapse?(e: ExpansionPanelEvent): void;
+        complete?(e: ExpansionPanelEvent): void;
+    }
+    interface ExpansionPanelEvent {
+        sender: ExpansionPanel;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
     class FileManager extends kendo.ui.Widget {
 
         static fn: FileManager;
@@ -23345,6 +23398,10 @@ interface JQuery {
     kendoEditor(): JQuery;
     kendoEditor(options: kendo.ui.EditorOptions): JQuery;
     data(key: "kendoEditor"): kendo.ui.Editor;
+
+    kendoExpansionPanel(): JQuery;
+    kendoExpansionPanel(options: kendo.ui.ExpansionPanelOptions): JQuery;
+    data(key: "kendoExpansionPanel"): kendo.ui.ExpansionPanel;
 
     kendoFilter(): JQuery;
     kendoFilter(options: kendo.ui.FilterOptions): JQuery;

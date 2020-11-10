@@ -16,11 +16,13 @@ position: 1
 
 Thank you for choosing Progress<sup>®</sup> Telerik<sup>®</sup> {{ site.product_short }}!  
 
-[{{ site.product }}](https://www.telerik.com/{{ telerik_product_url }}) is a set of server-side wrappers (HTML{% if site.core %} and Tag{% endif %} helpers) that allow you to use the Kendo UI widgets in .NET {{ site.framework_short }}. From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their {{ site.framework }} helpers represent the same functionalities and provide the same capabilities.
+[{{ site.product }}](https://www.telerik.com/{{ telerik_product_url }}) is a set of server-side wrappers that bring the [HTML/JavaScript Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) to .NET {{ site.framework_short }}. Our server-side wrappers come in the form of HTML{% if site.core %} and Tag{% endif %} helpers. 
+From client-side perspective, the vanilla HTML/JavaScript Kendo UI widgets and their {{ site.framework }} server-side wrappers represent the same functionalities and provide the same capabilities.
 
 The {{ site.product }} HTML{% if site.core %} and Tag{% endif %} helpers:
-* Allow you to configure a Kendo UI widget through the C# or VB.NET code&mdash;for example, to set its value, data source, and so on.
-* Render the HTML and JavaScript that are needed to initialize a Kendo UI widget whose options propagate to the client-side through its initialization script.
+* Allow you to configure a Kendo UI widget through  C# or VB.NET code&mdash;for example, to set its value, data source, and so on.
+* Render the HTML and JavaScript that are needed to initialize a Kendo UI widget.
+* Propagate the widget’s options to the client-side through its initialization script.
 
 To read more about the benefits of using {{ site.product }}, please visit the {% if site.core %}[product overview page](https://www.telerik.com/aspnet-core-ui){% else %}[product overview page](https://www.telerik.com/aspnet-mvc){% endif %}.
 

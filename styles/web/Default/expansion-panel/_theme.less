@@ -1,0 +1,26 @@
+.k-expander {
+    .fill(
+        @expander-text,
+        @expander-bg,
+        @expander-border
+    );
+
+    .k-expander-header {
+        .fill(
+            @expander-header-text,
+            @expander-header-bg,
+            @expander-header-border
+        );
+
+        .k-expander-sub-title {
+            opacity: @expander-header-sub-title-opacity;
+        }
+
+        &.k-state-focused {
+            .fill(
+                @bg: @expander-header-focused-bg
+            );
+            .box-shadow(@expander-header-focused-shadow);
+        }
+    }
+}
