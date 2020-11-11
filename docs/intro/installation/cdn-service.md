@@ -18,16 +18,16 @@ Only the official Kendo UI releases and serviced packs are uploaded to the CDN. 
 > The http://cdn.kendostatic.com/ URL is still active but is no longer recommended for new projects.
 
 The minified versions of all JavaScript files are available at the following locations:
-* `https://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
-* `https://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
+* `http://kendo.cdn.telerik.com/VERSION/js/FILENAME.min.js`
+* `http://kendo.cdn.telerik.com/VERSION/styles/FILENAME.min.css`
 
 For example, the `{{ site.cdnVersion }}` version can be loaded from the following locations:  
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
+* `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
+* `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
 
 The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release.
 
-To load the scripts, use the `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+To load the scripts, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
 
 ## Using the HTTPS Protocol
 

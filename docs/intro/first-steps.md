@@ -242,6 +242,7 @@ The following Chart configuration includes:
 * An [axis title](/api/javascript/dataviz/ui/chart/configuration/valueaxis.title#valueaxis.title) for the vertical axis.
 * [Tooltips](/api/javascript/dataviz/ui/chart/configuration/tooltip) on series hover.
 
+```
 	$("#ordersChart").kendoChart({
 	  dataSource: {
 		data: [],
@@ -285,6 +286,7 @@ The following Chart configuration includes:
 		template: "#= category #: #= value # t"
 	  }
 	});
+```
 
 ## 9. Handling the Events
 
@@ -315,7 +317,7 @@ including the widget instance that fired the event (`e.sender`).
             grid.unbind("dataBound");
           },
 
-		  //height: 500,
+		  //height: 400,
 		  // ...
 		//});
 
