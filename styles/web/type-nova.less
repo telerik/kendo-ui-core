@@ -804,6 +804,22 @@
 @expander-header-focused-shadow: inset 0 0 0 2px rgba(0, 0, 0, .13);
 
 
+// FloatingActionButton
+@fab-shadow: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .2);
+@fab-focus-shadow: 0 1px 10px rgba(#000000, .22), 0 4px 5px rgba(#000000, .24), 0 2px 4px rgba(#000000, .2);
+
+@fab-item-text: @component-text;
+@fab-item-bg: @component-bg;
+@fab-item-border: @component-border;
+
+@fab-item-icon-text: contrast( #ebebeb );
+@fab-item-icon-bg: #ebebeb;
+@fab-item-icon-border: #ebebeb;
+
+@fab-item-shadow: @fab-shadow;
+@fab-item-focus-shadow: @fab-focus-shadow;
+
+
 // Kendo skin
 
 @theme-name: ~"nova";
@@ -847,6 +863,7 @@
 @import "Default/gantt/_theme.less";
 @import "Default/imageeditor/_theme.less";
 @import "Default/expansion-panel/_theme.less";
+@import "Default/floatingactionbutton/_theme.less";
 
 
 // Main colors

@@ -97,9 +97,9 @@ The Kendo UI for jQuery widgets are integrated with the Vue JavaScript framework
 * [Get a License](https://www.telerik.com/purchase/kendo-ui)
 * [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui)
 
-### Progress<sup>®</sup> Kendo UI Wrappers for Vue
+### Progress<sup>®</sup> Kendo UI for Vue
 
-[Kendo UI Wrappers for Vue](https://docs.telerik.com/kendo-ui-wrappers-vue/introduction) are part of the Kendo UI suite. They provide an easy way to use and configure Kendo UI widgets in your Vue.js application.
+Kendo UI for Vue comes in two flavors: we offer [native Kendo UI for Vue](https://www.telerik.com/kendo-vue-ui/components/introduction/) components and [Kendo UI Wrappers for Vue](https://docs.telerik.com/kendo-ui-wrappers-vue/introduction). These flavors provide an easy way to use and configure Kendo UI components or Kendo UI widgets in your Vue.js application.
 
 * [Docs & Demos](https://www.telerik.com/kendo-vue-ui/components/)
 * [Get a License](https://www.telerik.com/purchase/kendo-ui)
@@ -107,7 +107,7 @@ The Kendo UI for jQuery widgets are integrated with the Vue JavaScript framework
 
 ### Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core
 
-[Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime. It includes all Kendo UI widgets as well as the Kendo UI Tag Helpers which allow you to configure the Kendo UI widgets by using the new Tag Helpers feature in ASP.NET Core.
+[Telerik UI for ASP.NET Core](https://docs.telerik.com/aspnet-core/introduction) supports the .NET Core runtime and includes all Kendo UI widgets as well as server-side wrappers (Telerik UI Tag Helpers and Telerik UI HTML Helpers). With the server-side wrappers, you can configure Kendo UI widgets in ASP.NET Core.
 
 * [Demos](https://demos.telerik.com/aspnet-core/)
 * [Docs](https://docs.telerik.com/aspnet-core/introduction)
@@ -116,7 +116,7 @@ The Kendo UI for jQuery widgets are integrated with the Vue JavaScript framework
 
 ### Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC
 
-[Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI components as well as HtmlHelper extension methods (server-side wrappers) which allow you to configure the Kendo UI widgets by using C# code.
+[Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/introduction) is a Kendo UI product flavor which targets ASP.NET MVC developers. It includes all Kendo UI widgets as well as HtmlHelper extension methods (server-side wrappers) which allow you to configure the Kendo UI widgets by using C# code.
 
 * [Demos](https://demos.telerik.com/aspnet-mvc/)
 * [Docs](https://docs.telerik.com/aspnet-mvc/introduction)

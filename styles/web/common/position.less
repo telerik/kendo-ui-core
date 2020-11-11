@@ -27,6 +27,12 @@ each( @side, {
         right: 0;
     }
 }
+.k-top-center,
+.k-pos-top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
 .k-top-end,
 .k-pos-top-end {
     top: 0;
@@ -51,6 +57,12 @@ each( @side, {
         right: 0;
     }
 }
+.k-bottom-center,
+.k-pos-bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
 .k-bottom-end,
 .k-pos-bottom-end {
     bottom: 0;
@@ -62,4 +74,17 @@ each( @side, {
         right: auto;
         left: 0;
     }
+}
+
+.k-middle-start,
+.k-pos-middle-start {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+.k-middle-end ,
+.k-pos-middle-end {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
 }

@@ -64,7 +64,7 @@ See the implementation details in the example below, and for the full project wi
                     xhr.setRequestHeader("RequestVerificationToken",
                         $('input:hidden[name="__RequestVerificationToken"]').val());
                 },
-                data: form.serialize(),
+                data: e.model, // The serialized model bound to the form
                 dataType: 'json'
             });
         }
