@@ -28,7 +28,7 @@
         it("DropDownList renders aria-haspopup", function() {
             var dropdownlist = new DropDownList(input);
 
-            assert.equal(dropdownlist.wrapper.attr("aria-haspopup"), "true");
+            assert.equal(dropdownlist.wrapper.attr("aria-haspopup"), "listbox");
         });
 
         it("DropDownList renders aria-expanded", function() {
@@ -48,7 +48,7 @@
                 dataSource: ["Item", "Item2"]
             });
 
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input")[0].id);
         });
 
         it("DropDownList renders aria-selected", function() {
@@ -73,7 +73,7 @@
                 filter: "startswith"
             });
 
-            assert.equal(dropdownlist.filterInput.attr("aria-haspopup"), "true");
+            assert.equal(dropdownlist.filterInput.attr("aria-haspopup"), "listbox");
         });
 
         it("DropDownList renders aria-expanded to filter input", function() {
@@ -117,7 +117,7 @@
 
             assert.isOk(current.attr("id"));
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input")[0].id);
         });
 
         it("widget removes aria id from the optionLabel", function() {

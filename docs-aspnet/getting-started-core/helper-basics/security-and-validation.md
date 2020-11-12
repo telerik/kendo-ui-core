@@ -37,7 +37,7 @@ The Columns [`.Encoded()`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnBuilder#encod
 
 ### Spreadsheet
 
-When the [`Html()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetRowCellBuilder#htmlsystemboolean) configuration option is set to `true` or the client-side [`html` method](/api/javascript/spreadsheet/range/methods/html) is used the user is allowed to input HTML. In such scenarios it is important to sanitize cell values on the server to ensure only safe html is passed.
+When the [`Html()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetRowCellBuilder#htmlsystemboolean) configuration option is set to `true` or the client-side [`html` method](https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/range/methods/html) is used the user is allowed to input HTML. In such scenarios it is important to sanitize cell values on the server to ensure only safe html is passed.
 
 ### PanelBar
 
@@ -58,7 +58,7 @@ In such scenarios the use of HTML for the item text is allowed. The developer sh
 
 ### Menu
 
-The Menu [`Items`](/api/javascript/ui/menu/configuration/datasource#datasource) configuration option allows the developer to disable the encoding for a menu item. 
+The Menu [`Items`](/api/Kendo.Mvc.UI.Fluent/MenuBuilder#itemssystemactionkendomvcuifluentmenuitemfactory) configuration option allows the developer to disable the encoding for a menu item. 
 
 ```
     @(Html.Kendo().Menu()
