@@ -10,7 +10,7 @@ position: 3
 # ContextMenu in FileManager
 The {{ site.product }} FileManager's ContextMenu enables you to easily execute FileManager commands on the selected file or folder. 
 
-The component uses the {{ site.product }} ContextMenu, enabling you to get full advantage of its [Client API](/api/javascript/ui/filemanager). Once an item is selected, the corresponding command is executed. 
+The component uses the {{ site.product }} ContextMenu, enabling you to get full advantage of its [Client API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager). Once an item is selected, the corresponding command is executed. 
 
 The default items in the ContextMenu are `rename` and `delete`. You can define your custom items which can execute custom commands. You can also manage what items should be visible, by enumerating the needed ones in the initialization of the component (see Example below)
 
