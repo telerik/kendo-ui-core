@@ -25,6 +25,24 @@
     var SELECTED_STATE_CLASS = "k-state-selected";
     var DOT = ".";
 
+    function createListBoxCRUD(options, html) {
+        var listbox = createListBoxFromHtml(html, $.extend({
+            dataSource: {
+                transport: {
+                    read: function (e) {
+                        e.success(dataItems);
+                    },
+                    destroy: $.noop,
+                    create: $.noop,
+                    update: $.noop
+                }
+            },
+            dataTextField: "text"
+        }, options || {}));
+
+        return listbox;
+    }
+
     function createListBox(options, html) {
         var listbox = createListBoxFromHtml(html, $.extend({
             dataSource: {
@@ -182,6 +200,22 @@
 
             assert.equal(items.length, 1);
             assert.equal(items.first().text(), "newText1");
+        });
+    });
+
+    describe("ListBox api", function() {
+        beforeEach(function() {
+            listbox = createListBoxCRUD();
+        });
+        afterEach(function() {
+            destroyListBox(listbox);
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("removing item pushes it in the destroyed collection", function() {
+            listbox.remove(FIRST_ITEM_SELECTOR);
+
+            assert.equal(listbox.dataSource._destroyed.length, 1);
         });
     });
 

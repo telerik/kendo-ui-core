@@ -151,7 +151,7 @@ A whitespace-delimited string of animation effects that are used when an item is
         });
     </script>
 
-### collapseiconclass `string` *(default: "k-icon k-i-arrow-chevron-up")*
+### collapseiconclass `String` *(default: "k-icon k-i-arrow-chevron-up")*
 
 The class of the collapse icon.
 
@@ -183,7 +183,7 @@ If set to true the widget will be expanded by default.
         });
     </script>
 
-### expandIconClass `string` *(default: "k-icon k-i-arrow-chevron-down")*
+### expandIconClass `String` *(default: "k-icon k-i-arrow-chevron-down")*
 
 The class of the collapse icon.
 
@@ -191,7 +191,7 @@ The class of the collapse icon.
 
 The height of the widget. Numeric values are treated as pixels.
 
-### subTitle `string` *(default: null)*
+### subTitle `String` *(default: null)*
 
 The subtitle of the widget.
 
@@ -205,7 +205,7 @@ The subtitle of the widget.
         });
     </script>
 
-### title `string` *(default: null)*
+### title `String` *(default: null)*
 
 The title of the widget.
 

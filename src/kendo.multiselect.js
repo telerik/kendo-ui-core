@@ -595,15 +595,13 @@ var __meta__ = { // jshint ignore:line
         _listBound: function() {
             var that = this;
             var data = that.dataSource.flatView();
-            var skip = that.listView.skip();
 
             that._render(data);
-
             that._renderFooter();
             that._renderNoData();
             that._toggleNoData(!data.length);
-
             that._resizePopup();
+            that._updateItemFocus();
 
             if (that._open) {
                 that._open = false;
@@ -612,10 +610,6 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.position();
 
-            if (that.options.highlightFirst && (skip === undefined || skip === 0)) {
-                that.listView.focusFirst();
-            }
-
             if (that._touchScroller) {
                 that._touchScroller.reset();
             }
@@ -623,6 +617,21 @@ var __meta__ = { // jshint ignore:line
             that._hideBusy();
 
             that.trigger("dataBound");
+        },
+
+        _updateItemFocus: function() {
+            var that = this,
+                data = that.dataSource.flatView(),
+                skip = that.listView.skip(),
+                isFirstPage = skip === undefined || skip === 0;
+
+            if (data.length && isFirstPage) {
+                if (!that.options.highlightFirst) {
+                    that.listView.focus(-1);
+                } else {
+                    that.listView.focusFirst();
+                }
+            }
         },
 
         _inputValue: function() {

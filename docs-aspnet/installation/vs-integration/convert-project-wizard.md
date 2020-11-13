@@ -16,7 +16,6 @@ To use the **Convert Project Wizard**, install the Telerik UI for ASP.NET Core V
 
 - [Visual Studio MarketPlace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikASPNETCoreVSExtensions) (for Windows) 
 - **Telerik UI for ASP.NET Core automated installer** - from the `Downloads` tab of your [Telerik.com account](https://www.telerik.com/account/product-download?product=UIASPCORE) choose the [.msi (for Windows)]({% slug msi_install_aspnetmvc6_aspnetmvc %}) or .pkg (for Mac) installer.
-- **Visual Studio Extensions** archived files - from the `Downloads` tab of your [Telerik.com account](https://www.telerik.com/account/product-download?product=UIASPCORE) download Visual Studio Extensions `.zip` or `7z`.
 
 ## Start the Wizard
 
