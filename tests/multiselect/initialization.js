@@ -554,6 +554,18 @@
         assert.equal(multiselect.listView.calls("focusFirst"), 1);
     });
 
+    it("do not highlight first item when autoBind is false", function() {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, {
+            highlightFirst: false,
+            autoBind: false
+        });
+
+        multiselect.open();
+
+        assert.equal(multiselect.current(), null);
+    });
+
     it("Copy accesskey to the visible input", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select.attr("accesskey", "w"), { highlightFirst: false });
