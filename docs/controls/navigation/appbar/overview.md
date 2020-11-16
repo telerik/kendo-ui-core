@@ -4,6 +4,7 @@ page_title: jQuery AppBar Documentation | AppBar Overview
 description: "Get started with the jQuery AppBar by Kendo UI and learn how to initialize the widget."
 slug: overview_kendoui_appbar_widget
 position: 1
+CTAControlName: AppBar
 ---
 
 # AppBar Overview
@@ -14,6 +15,10 @@ The AppBar widget is used mainly for navigation. At the same time, it is templat
 * Actions (like redirect buttons)
 
 Visit the [AppBar demo page](https://demos.telerik.com/kendo-ui/appbar/index) to see it in action.
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-overview.html %}
+{% endif %}
 
 ## Initializing the AppBar
 
