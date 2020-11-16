@@ -197,6 +197,20 @@ To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](ht
 
 > The {{ site.framework }} version is in development. For updates, check [this](https://feedback.telerik.com/document-processing/1356226-document-processing-provide-version-for-net-core) feature request.
 
+## Exclude Column From Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+```Razor
+columns.Bound(p => p.ProductName).Exportable(false);
+```
+
+It can also be set in a detailed fashion containing different values for Excel and PDF exporting modes, providing separate options for each:
+
+```Razor
+columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
+```
+
 ## Known Limitations
 
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.

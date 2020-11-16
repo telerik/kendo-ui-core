@@ -245,6 +245,8 @@ fonts in fonts/
    <li><span class="k-icon k-i-barcode-qr-code-scanner"></span> .k-i-barcode-qr-code-scanner</li>
    <li><span class="k-icon k-i-signature"></span> .k-i-signature</li>
    <li><span class="k-icon k-i-accessibility"></span> .k-i-accessibility</li>
+   <li><span class="k-icon k-i-export"></span> .k-i-export</li>
+   <li><span class="k-icon k-i-import"></span> .k-i-import</li>
 </ul>
 
 ### Alerts and Notifications
@@ -280,6 +282,8 @@ fonts in fonts/
     <li><span class="k-icon k-i-h6"></span> .k-i-h6</li>
     <li><span class="k-icon k-i-list-ordered"></span> .k-i-list-ordered<br /> .k-i-list-numbered</li>
     <li><span class="k-icon k-i-list-unordered"></span> .k-i-list-unordered<br /> .k-i-list-bulleted</li>
+    <li><span class="k-icon k-i-list-roman-big"></span> .k-i-list-roman-big</li>
+    <li><span class="k-icon k-i-list-roman-small"></span> .k-i-list-roman-small</li>
     <li><span class="k-icon k-i-indent-increase"></span> .k-i-indent-increase<br /> .k-i-indent</li>
     <li><span class="k-icon k-i-indent-decrease"></span> .k-i-indent-decrease<br /> .k-i-outdent</li>
     <li><span class="k-icon k-i-insert-up"></span> .k-i-insert-up<br /> .k-i-insert-top</li>
@@ -295,6 +299,9 @@ fonts in fonts/
     <li><span class="k-icon k-i-align-remove"></span> .k-i-align-remove</li>
     <li><span class="k-icon k-i-text-wrap"></span> .k-i-text-wrap</li>
     <li><span class="k-icon k-i-rule-horizontal"></span> .k-i-rule-horizontal</li>
+    <li><span class="k-icon k-i-table-position-left"></span> .k-i-table-position-left</li>
+    <li><span class="k-icon k-i-table-position-center"></span> .k-i-table-position-center</li>
+    <li><span class="k-icon k-i-table-position-right"></span> .k-i-table-position-right</li>
     <li><span class="k-icon k-i-table-align-top-left"></span> .k-i-table-align-top-left</li>
     <li><span class="k-icon k-i-table-align-top-center"></span> .k-i-table-align-top-center</li>
     <li><span class="k-icon k-i-table-align-top-right"></span> .k-i-table-align-top-right</li>

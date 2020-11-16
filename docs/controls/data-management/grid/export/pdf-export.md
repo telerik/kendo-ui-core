@@ -341,6 +341,21 @@ The following example demonstrates how to handle custom fonts.
     </script>
 ```
 
+## Exclude Column From Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+It can also be set to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
+
+```javascript
+columns: [
+   { 
+       field: 'ContactTitle',
+       exportable: { pdf: true, excel: false }
+   }
+]
+```
+
 ## Known Limitations
 
 * All [known limitations]({% slug supportedbrowsers_drawingapi %}) of the HTML Drawing module apply.
