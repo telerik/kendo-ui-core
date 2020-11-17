@@ -352,9 +352,15 @@ navigation:
         title: "Appbar"
      "html-helpers/navigation/breadcrumb":
         title: "Breadcrumb"
+     "tag-helpers/navigation/breadcrumb":
+        title: "Breadcrumb"
      "html-helpers/navigation/stepper":
         title: "Stepper"
+     "tag-helpers/navigation/stepper":
+        title: "Stepper"
      "html-helpers/navigation/wizard":
+        title: "Wizard"
+     "tag-helpers/navigation/wizard":
         title: "Wizard"
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
@@ -1415,6 +1421,7 @@ has_web_api_index: true
 skip_tabbed_code: true
 code_lang: true
 has_kb_portal: true
+has_cta_panels: true
 api_columns_count: 2
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs-aspnet
 download: https://www.telerik.com/download-trial-file/v2/aspnet-core-ui

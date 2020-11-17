@@ -5713,6 +5713,11 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
       });
     </script>
 
+### getOptions
+
+Retrieves the options that are currently enabled or disabled on the Treelist, also gives the current state of the dataSource.
+Use this method if you want to save the state of the Treelist into a variable. It is also possible to extract and store only some of the Treelist options.
+
 ### itemFor
 
 (Available as of the 2015.3.930 release) Returns the rendered HTML element for a given model.
@@ -6100,6 +6105,22 @@ The data source to which the widget will be bound.
         treeList.setDataSource(dsNew);
       });
     </script>
+
+### setOptions
+
+Sets the options of the Treelist. Use this method if you want to enable/disable a particular feature/option or to load
+the complete state obtained previously with the [`getOptions`](getoptions) method.
+
+When `setOptions` is called, the Treelist widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
+
+> There are a few important things to keep in mind when using `getOptions` and `setOptions`.
+>
+> * **calling `setOptions()` in a Treelist event handler is not possible.**
+> * **calling `setOptions()` in a function, which is related to the Treelist's databinding mechanism may cause an endless loop.**
+> * `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Treelist state,
+> all configuration fields, which represent function references, will be lost. You have two options to avoid this limitation:
+> use a [custom implementation](https://github.com/tarruda/super-json) to serialize JavaScript functions, or
+> add the function references back to the deserialized configuration object before passing it to the `setOptions` method.
 
 ### showColumn
 

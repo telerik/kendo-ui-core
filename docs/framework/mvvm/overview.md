@@ -6,6 +6,10 @@ slug: overview_mvvmpattern_kendoui
 position: 1
 ---
 
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
+
 # MVVM Pattern Overview
 
 [Model View ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model_View_ViewModel) is a design pattern which helps developers separate the Model, which is the data, from the View, which is the user interface (UI).

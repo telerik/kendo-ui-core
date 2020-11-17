@@ -7,6 +7,10 @@ slug: overview_charttypes_charts
 position: 1
 ---
 
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
+
 # Chart Types Overview
 
 The Charts support a wide range of series types.
