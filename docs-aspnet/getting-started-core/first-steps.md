@@ -167,20 +167,20 @@ Before you can use a Telerik UI component, you must include the theme, the jQuer
 
 Utilize the Telerik UI DatePicker component by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
-	```tab-HtmlHelper
-		<div class="text-center">
-    		<h2>Kendo UI DatePicker</h2>
-    		@(Html.Kendo().DatePicker()
-       			.Name("my-picker")
-    		)
-		</div>
-	```
-	```tab-TagHelper
-		<div class="text-center">
-    		<h2>Kendo UI DatePicker</h2>
-			<kendo-datepicker name="my-picker"/>
-		</div>
-	```
+```cshtml
+	<div class="text-center">
+		<h2>Kendo UI DatePicker</h2>
+		@(Html.Kendo().DatePicker()
+			.Name("my-picker")
+		)
+	</div>
+```
+```tagHelper
+	<div class="text-center">
+		<h2>Kendo UI DatePicker</h2>
+		<kendo-datepicker name="my-picker"/>
+	</div>
+```
 
 Now you are ready to run the web app.
 

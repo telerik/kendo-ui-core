@@ -13629,6 +13629,27 @@ The rotation angle of the markers.
       }]
     });
 
+### series.markers.zIndex `Number|Function`
+
+An optional Z-index that can be used to change the default stacking order of the markers.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        data: [200, 450, 300, 125],
+        markers: {
+          type: "square",
+          rotation: 45,
+          zIndex: 5
+        }
+      }]
+    });
+    </script>
+
 ### series.outliers `Object`
 
 The chart series outliers configuration. Applies to **mild** outliers. Also check [`series.extremes`](/api/javascript/dataviz/ui/chart#configuration-series.extremes).
