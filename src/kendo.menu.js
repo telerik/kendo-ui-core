@@ -244,6 +244,11 @@ var __meta__ = { // jshint ignore:line
 
     function updateItemClasses(item) {
         item = $(item);
+        var omitWrap = item.attr(kendo.attr("omit-wrap"));
+
+        if (omitWrap) {
+            return;
+        }
 
         item.addClass("k-item k-menu-item")
             .children(IMG)

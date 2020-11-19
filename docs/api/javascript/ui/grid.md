@@ -2698,6 +2698,68 @@ The supported values are:
 * `"asc"` (ascending order)
 * `"desc"` (descending order)
 
+### columnMenu.columns.groups `Array` *(default: null)*
+
+The user defined groups of the columns visibility list.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", title: 'Name' },
+        { field: "age", title: 'Age' }
+      ],
+      columnMenu: {
+        columns: {
+          groups: [
+            { title: 'first group', columns: ['Age'] },
+            { title: 'second group', columns: ['Name'] }
+          ]
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.columns.groups.columns `Array` *(default: null)*
+
+The titles of the columns that are part of the group. In case some column does not have a specified title, you can use the field instead. Columns that don't have specified either a title or a field, are not displayed in the column menu.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", title: 'Name' },
+        { field: "age" }
+      ],
+      columnMenu: {
+        columns: {
+          groups: [
+            { title: 'first group', columns: ['age'] }, // field is used instead of title, as the age column does not have a specified title
+            { title: 'second group', columns: ['Name'] }
+          ]
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.columns.groups.title `String` *(default: null)*
+
+The text displayed in the header of the group.
+
 ### columnMenu.filterable `Boolean` *(default: true)*
 
 If set to `true` the column menu would allow the user to filter the grid. By default the column menu allows the user to filter if filtering is enabled via the [filterable](filterable).

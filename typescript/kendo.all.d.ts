@@ -5159,6 +5159,16 @@ declare namespace kendo.ui {
         delimeter?: string|any;
     }
 
+    interface GridColumnMenuColumnsGroup {
+        columns?: any;
+        title?: string;
+    }
+
+    interface GridColumnMenuColumns {
+        sort?: string;
+        groups?: GridColumnMenuColumnsGroup[];
+    }
+
     interface GridColumnMenuMessages {
         columns?: string;
         filter?: string;
@@ -5174,7 +5184,7 @@ declare namespace kendo.ui {
     }
 
     interface GridColumnMenu {
-        columns?: boolean;
+        columns?: boolean | GridColumnMenuColumns;
         filterable?: boolean;
         sortable?: boolean;
         messages?: GridColumnMenuMessages;
