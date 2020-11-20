@@ -51,14 +51,14 @@ Telerik UI for ASP.NET Core contains the following directories:
 
 ## Sample Application
 
-Telerik UI for ASP.NET Core comes with a sample .NET Core application, built with Visual Studio 2017, which is an offline version of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core).
+Telerik UI for ASP.NET Core comes with a sample .NET Core application, built with Visual Studio 2019, which is an offline version of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core).
 
 > As of the Kendo UI R2 2018 release, the Visual Studio 2015 version of the sample application is no longer distributed because of its deprecated format and limited tooling support.
 
 To run the sample application:
 
 1. Navigate to the installation directory of Telerik UI for ASP.NET Core.
-1. Open the Visual Studio 2017 sample project `wrappers\aspnetcore\Examples\AspNet.Core\VS2017\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
+1. Open the Visual Studio 2019 sample project `wrappers\aspnetcore\Examples\AspNet.Core\VS2019\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
 1. Press `CTRL+F5` to build and run the application.
 
 The sample application Visual Studio Project contains the following items:
