@@ -42,8 +42,9 @@ Go to the [`{{ site.product_long }} Extension`](https://marketplace.visualstudio
 1. Click **Online** to the left and select **Visual Studio Marketplace**
 1. Enter `Telerik {{ site.framework }} VSExtensions` in the **Search** text box
 1. Select the extension and click **Download**
+1. Visual Studio will apply the changes automatically when all Microsoft Visual Studio windows are closed
 
-The **VSIX Installer** will handle any missing prerequisites in Visual Studio for you.
+The **VSIX Installer** will handle any missing prerequisites in Visual Studio for you. Click **Modify** when the installer starts.
 
 ## Use the Telerik VS Extensions
 
