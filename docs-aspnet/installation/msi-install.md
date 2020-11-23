@@ -9,35 +9,37 @@ position: 2
 
 # Installation Overview
 
-To set up and install Telerik UI for ASP.NET Core, you first need to add the prerequisites.
+This article describes how to download and install Telerik UI for ASP.NET Core on a Windows machine. 
 
 ## Prerequisites
 
-Telerik UI for ASP.NET Core requires .NET Core.
+* Telerik UI for ASP.NET Core requires .NET Core. To install .NET core, follow the instructions on [Microsoft's .NET Core documentation site](https://docs.microsoft.com/en-us/dotnet/core/windows-prerequisites).
 
-The offline sample application requires:
+* The Telerik UI for ASP.NET Core **Sample Application** distributed with the same package requires:
 
-* [.NET Core](https://www.microsoft.com/net/learn/get-started)
-* [Visual Studio](https://www.visualstudio.com/downloads/) with a whole `.NET Core cross-platform development` workload installed
+  * [.NET Core](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/install)
+  * [Visual Studio](https://www.visualstudio.com/downloads/) with completely installed `.NET Core cross-platform development` workload.
 
 ## Download
 
 To download Telerik UI for ASP.NET Core:
 
-1. Log in to your [Telerik account](https://www.telerik.com/login/).
-1. Click **Downloads** in the top navigation.
+1. Log into your [Telerik account](https://www.telerik.com/login/).
+1. Click **Downloads** in the top navigation bar.
 1. Click **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core**.
-1. In the **Installation**  section select to download the Telerik online installer (`exe` file), the `MSI` installer file directly.
+1. In the **Installation**  section, select the `msi` installer file.
 
-The Telerik UI for ASP.NET Core suite can be included in a project via NuGet without locally installing the suite on the machine. Further information on how to configure such application could be found in the [Getting Started article]({% slug gettingstarted_aspnetmvc6_aspnetmvc %}#configuration-Add).
+>**Tip**
+>
+> If you don't want to install UI for ASP.NET Core on your machine, you can include Telerik UI controls in your project via NuGet. See [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) for more information.
 
 ## Installation
 
-Run the Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation. The setup installs Telerik UI for ASP.NET Core in `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
+Run the Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation. The default installation directory is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
 
 ## Distribution Contents
 
-Telerik UI for ASP.NET Core contains the following directories:
+You will find the following in the Telerik UI for ASP.NET Core installation directory:
 
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The minified CSS files and images used by the themes.
@@ -51,22 +53,28 @@ Telerik UI for ASP.NET Core contains the following directories:
 
 ## Sample Application
 
-Telerik UI for ASP.NET Core comes with a sample .NET Core application, built with Visual Studio 2019, which is an offline version of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core).
+Telerik UI for ASP.NET Core comes with a sample .NET Core application, which is available in two versions:
 
-> As of the Kendo UI R2 2018 release, the Visual Studio 2015 version of the sample application is no longer distributed because of its deprecated format and limited tooling support.
+ * A Sample Application built with Visual Studio 2019
+ 
+ * A Sample Application built with Visual Studio 2017
+ 
+Both versions represent an offline alternative of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core). You can use the sample application as an inspiration, or you can experiment with it while you get accustomed to the product.
 
-To run the sample application:
+To run the sample application in Visual Studio 2019:
 
-1. Navigate to the installation directory of Telerik UI for ASP.NET Core.
-1. Open the Visual Studio 2019 sample project `wrappers\aspnetcore\Examples\AspNet.Core\VS2019\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
+1. Navigate to the Telerik UI for ASP.NET Core installation directory.
+
+1. Open the Visual Studio 2019 sample project: `wrappers\aspnetcore\Examples\AspNet.Core\VS2019\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
+
 1. Press `CTRL+F5` to build and run the application.
 
-The sample application Visual Studio Project contains the following items:
+The sample application project for Visual Studio contains the following items:
 
 * `Views`&mdash;The Razor views.
 * `Controllers`&mdash;The Controller classes.
 * `Models`&mdash;The Model classes.
-* `wwwroot`&mdash;The web application root which, in the **App_Data** folder, contains the LocalDB sample database and the other client resources such as libraries, scripts, styles, and others.
+* `wwwroot`&mdash;The web application root with the in the `App_Data` folder, which contains the LocalDB sample database and the other client resources such as libraries, scripts, styles, and others.
 
 ## Next Steps
 
@@ -74,7 +82,6 @@ The sample application Visual Studio Project contains the following items:
 * [CDN Services]({% slug cdnservices_core %})
 * [Helper Basics]({% slug fundamentals_core %})
 * [Helper Methods and Events]({% slug methodevents_core %})
-* [Visual Studio Support]({% slug visualstudiosupport_core %})
 
 ## See Also
 
