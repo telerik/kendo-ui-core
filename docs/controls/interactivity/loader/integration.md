@@ -46,19 +46,21 @@ The following example demonstrates how the Loader can be integrated in a button.
 The following example demonstrates how the Loader can be used as a building block in a Loading Panel.
 
 ```dojo
+
     <button class='k-button'>Show Loading Panel</button>
-    <div class="example-inner">
-    <div class="k-loading-panel">
-        <div class="k-loading-panel-mask"></div>
-        <div class="k-loading-panel-wrapper">
-        <span id="loader">
-        </span>
-        <div class="k-loading-panel-text">Loading...</div>
+    <div class="loader">
+        <div class="example-inner">
+        <div class="k-loading-panel">
+            <div class="k-loading-panel-mask"></div>
+            <div class="k-loading-panel-wrapper">
+                <span id="loader">
+                </span>
+                <div class="k-loading-panel-text">Loading...</div>
+            </div>
+        </div>
+        <div class="example-text">Example Container</div>
         </div>
     </div>
-    <div class="example-text">Example Container</div>
-    </div>
-    <div>
     <script>
         var loadingPanelVisible = false;
         $("#loader").kendoLoader({
@@ -77,6 +79,13 @@ The following example demonstrates how the Loader can be used as a building bloc
         })
     </script>
     <style>
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:450px;
+    }
+
     .example-inner {
         display: flex;
         align-items: center;

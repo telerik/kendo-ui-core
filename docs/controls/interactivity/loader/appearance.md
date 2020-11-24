@@ -20,10 +20,11 @@ The available [`types`](/api/javascript/ui/loader/type) values are:
 * `converging-spinner`&mdash;Applies converging-spinner animation on the Loader.
 
 ```dojo
-    <span id="pulsing"></span>
-    <span id="infinite-spinner"></span>
-    <span id="converging-spinner"></span>
-
+    <div class="loader">
+        <span id="pulsing"></span>
+        <span id="infinite-spinner"></span>
+        <span id="converging-spinner"></span>
+    </div>
     <script>
         $(document).ready(function(){
             $("#pulsing").kendoLoader({
@@ -39,6 +40,18 @@ The available [`types`](/api/javascript/ui/loader/type) values are:
             });
         });
     </script>
+    <style>
+      .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:450px;
+      }
+
+      .loader>span {        
+        margin: 50px;
+      }
+    </style>
 ```
 
 ## Theme Color
@@ -59,9 +72,10 @@ The available [`themeColor`](/api/javascript/ui/loader/themeColor) values are:
 * `inverse`&mdash; Applies coloring based on inverted theme color.
 
 ```dojo
-    <input id='themeColor'/>
-    <span id="loader"></span>
-    
+    <div class="loader">
+        <input id='themeColor'/>
+        <span id="loader"></span>
+    </div>
     <script>
         $(document).ready(function(){
             var loader = $("#loader").kendoLoader({
@@ -76,6 +90,14 @@ The available [`themeColor`](/api/javascript/ui/loader/themeColor) values are:
             });
         });
     </script>
+    <style>
+      .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:450px;
+      }     
+    </style>
 ```
 
 ## Size
@@ -89,9 +111,11 @@ The available [`size`](/api/javascript/ui/loader/size) values are:
 * `large`
 
 ```dojo
-    <span id="loader-small"></span>
-    <span id="loader-medium"></span>
-    <span id="loader-large"></span>
+    <div class="loader">
+        <span id="loader-small"></span>
+        <span id="loader-medium"></span>
+        <span id="loader-large"></span>
+    </div>
     <script>
         $(document).ready(function(){
             $("#loader-small").kendoLoader({
@@ -107,6 +131,18 @@ The available [`size`](/api/javascript/ui/loader/size) values are:
             });
         });
     </script>
+    <style>
+      .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:450px;
+      }
+
+      .loader>span {        
+        margin: 50px;
+      }
+    </style>
 ```
 
 ## See Also

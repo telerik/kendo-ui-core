@@ -15,13 +15,22 @@ The Loader component is a visual indicator that expresses an indeterminate wait 
 To initialize the Loader, you can use virtually any `span` element. The following example demonstrates how to initialize the Loader.
 
 ```dojo
-    <span id="loader"></span>
-
+    <div class="loader">
+      <span id="loader"></span>
+    </div>
     <script>
-        $(document).ready(function(){
-            $("#loader").kendoLoader();
-        });
+      $(document).ready(function(){
+        $("#loader").kendoLoader();
+      });
     </script>
+    <style>
+      .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:450px;
+      }
+    </style>
 ```
 
 ## Basic Configuration
@@ -29,8 +38,9 @@ To initialize the Loader, you can use virtually any `span` element. The followin
 The following example demonstrates the Loader in action.
 
 ```dojo
-    <span id="loader"></span>
-
+    <div class="loader">
+      <span id="loader"></span>
+    </div>
     <script>
         $(document).ready(function(){
             $("#loader").kendoLoader({
@@ -40,6 +50,14 @@ The following example demonstrates the Loader in action.
             });
         });
     </script>
+    <style>
+      .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:450px;
+      }
+    </style>
 ```
 
 ## Functionality and Features
