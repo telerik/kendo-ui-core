@@ -4147,8 +4147,8 @@ declare namespace kendo.ui {
         navigate(): void;
         refresh(): void;
         executeCommand(): void;
-        getSelected(): void;
-        getSize(): void;
+        getSelected(): any | any[];
+        getSize(): any;
         destroy(): void;
         setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
         items(): any;
