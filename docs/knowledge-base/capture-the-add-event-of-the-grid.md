@@ -32,7 +32,7 @@ component: grid
  </tr>
   <tr>
   <td>Made with version</td>
-  <td>2017.3.913</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -112,16 +112,11 @@ Attach an event handler for the **Add New Row** button to the `dataBound` event 
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
               { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: "destroy", title: "&nbsp;", width: 150 }],
             editable: true
           });
         });
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ```

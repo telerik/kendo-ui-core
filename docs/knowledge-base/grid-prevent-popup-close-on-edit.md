@@ -18,7 +18,7 @@ component: grid
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>2017.3.1026</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -89,7 +89,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
                 { field: "ProductName", title: "Product Name" },
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
                 { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "popup",
             edit: function (e) {
@@ -113,11 +113,5 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
     $(".k-grid-cancel").on("mousedown", function (e) {
         preventCloseOnSave = false;
     });
-
-    function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 </script>
 ```

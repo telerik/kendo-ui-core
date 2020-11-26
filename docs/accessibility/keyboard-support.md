@@ -36,6 +36,7 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [DateRangePicker](https://demos.telerik.com/kendo-ui/daterangepicker/keyboard-navigation)
 - [DateTimePicker](https://demos.telerik.com/kendo-ui/datetimepicker/keyboard-navigation)
 - [Dialog](https://demos.telerik.com/kendo-ui/dialog/keyboard-navigation)
+- [Drawer](https://demos.telerik.com/kendo-ui/drawer/keyboard-navigation)
 - [DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/keyboard-navigation)
 - [DropDownTree](https://demos.telerik.com/kendo-ui/dropdowntree/keyboard-navigation)
 - [Editor](https://demos.telerik.com/kendo-ui/editor/keyboard-navigation)

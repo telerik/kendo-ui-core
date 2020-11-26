@@ -18,7 +18,7 @@ res_type: kb
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>2018.2.620</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -86,7 +86,7 @@ The following example demonstrates how to display a toolbar above the pager and 
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
               { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-              { field: "Discontinued", width: "120px", editor: customBoolEditor },
+              { field: "Discontinued", width: "120px" },
               { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "inline"
           });
@@ -94,11 +94,6 @@ The following example demonstrates how to display a toolbar above the pager and 
           // Sets toolbar under the Grid body
           $("#grid").find(".k-grid-toolbar").insertAfter($("#grid .k-grid-content"));
         });
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ```

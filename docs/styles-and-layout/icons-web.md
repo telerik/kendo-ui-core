@@ -282,8 +282,8 @@ fonts in fonts/
     <li><span class="k-icon k-i-h6"></span> .k-i-h6</li>
     <li><span class="k-icon k-i-list-ordered"></span> .k-i-list-ordered<br /> .k-i-list-numbered</li>
     <li><span class="k-icon k-i-list-unordered"></span> .k-i-list-unordered<br /> .k-i-list-bulleted</li>
-    <li><span class="k-icon k-i-list-roman-big"></span> .k-i-list-roman-big</li>
-    <li><span class="k-icon k-i-list-roman-small"></span> .k-i-list-roman-small</li>
+    <li><span class="k-icon k-i-list-roman-upper"></span> .k-i-list-roman-upper</li>
+    <li><span class="k-icon k-i-list-roman-lower"></span> .k-i-list-roman-lower</li>
     <li><span class="k-icon k-i-indent-increase"></span> .k-i-indent-increase<br /> .k-i-indent</li>
     <li><span class="k-icon k-i-indent-decrease"></span> .k-i-indent-decrease<br /> .k-i-outdent</li>
     <li><span class="k-icon k-i-insert-up"></span> .k-i-insert-up<br /> .k-i-insert-top</li>

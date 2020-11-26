@@ -38,6 +38,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |DateTimePicker|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/datetimepicker/index)
 |Diagram	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/diagram/index)
 |Dialog	       |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dialog/index)
+|Drawer	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/drawer/index)
 |DropDownList  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdownlist/index)
 |DropDownTree  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdowntree/index)
 |Editor        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/editor/index)
