@@ -22,8 +22,8 @@ each( @theme-colors, {
 
     .k-state-hover.k-fab-@{name},
     .k-fab.k-fab-@{name}:hover {
-        border-color: darken( @color, .7 );
-        background-color: darken( @color, .7 );
+        border-color: darken( @color, 5% );
+        background-color: darken( @color, 5% );
     }
 });
 
@@ -41,8 +41,8 @@ each( @theme-colors, {
     .k-state-active.k-fab-@{name},
     .k-state-selected.k-fab-@{name},
     .k-fab-@{name}:active {
-        border-color: darken( @color, 1);
-        background-color: darken( @color, 1);
+        border-color: darken( @color, 10%);
+        background-color: darken( @color, 10%);
         box-shadow: @fab-shadow, 0px 3px 4px rgba(@color, .4);
     }
 });
@@ -66,10 +66,17 @@ each( @theme-colors, {
 }
 
 // Hover state
+.k-fab-item.k-state-hover {
+    background-image: none;
+    color: inherit;
+    background-color: inherit;
+    border-color: inherit;
+}
+
 .k-fab-item.k-state-hover .k-fab-item-icon,
 .k-fab-item:hover .k-fab-item-icon {
-    border-color: darken( @fab-item-icon-border, .5 );
-    background-color: darken( @fab-item-icon-bg, .5 );
+    border-color: darken( @fab-item-icon-border, 5% );
+    background-color: darken( @fab-item-icon-bg, 5% );
 }
 
 // Focus state
@@ -83,8 +90,8 @@ each( @theme-colors, {
 // Active state
 .k-fab-item.k-state-active .k-fab-item-icon,
 .k-fab-item:active .k-fab-item-icon {
-    border-color: darken( @fab-item-icon-border, 1);
-    background-color: darken( @fab-item-icon-bg, 1);
+    border-color: darken( @fab-item-icon-border, 10%);
+    background-color: darken( @fab-item-icon-bg, 10%);
     box-shadow: @fab-shadow, 0px 3px 4px rgba(@fab-item-icon-bg, .4);
 }
 

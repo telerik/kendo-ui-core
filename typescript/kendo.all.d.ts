@@ -4587,6 +4587,113 @@ declare namespace kendo.ui {
         value?: string;
     }
 
+    class FloatingActionButton extends kendo.ui.Widget {
+
+        static fn: FloatingActionButton;
+
+        options: FloatingActionButtonOptions;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): FloatingActionButton;
+
+        constructor(element: Element, options?: FloatingActionButtonOptions);
+
+        text(text: string): void;
+        icon(icon: string): void;
+        themeColor(themeColor: string): void;
+        shape(shape: string): void;
+        enable(enable: boolean): void;
+        show(): void;
+        hide(): void;
+        setOptions(options: any): void;
+        destroy(): void;
+    }
+
+    interface FloatingActionButtonAlignOffset {
+        x?: number;
+        y?: number;
+    }
+
+    enum FloatingActionButtonPositionMode {
+        fixed,
+        absolute,
+    }
+
+    enum FloatingActionButtonShape {
+        rounded,
+        pill,
+        circle
+    }
+
+    enum FloatingActionButtonSize {
+        small,
+        medium,
+        large
+    }
+
+    enum FloatingActionButtonThemeColor {
+        primary,
+        secondary,
+        tertiary,
+        info,
+        success,
+        warning,
+        error,
+        dark,
+        light,
+        inverse
+    }
+
+    interface FloatingActionButtonOptions {
+        icon?: string;
+        text?: string;
+        themeColor?: string | FloatingActionButtonThemeColor;
+        size?: string | FloatingActionButtonSize;
+        shape?: string | FloatingActionButtonShape;
+        align?: string;
+        alignOffset?: FloatingActionButtonAlignOffset;
+        positionMode?: string | FloatingActionButtonPositionMode
+        visible?: boolean;
+        enabled?: boolean;
+        items?: FloatingActionButtonItem[];
+
+        click?(e: FloatingActionButtonClickEvent): void;
+        expand?(e: FloatingActionButtonExpandEvent): void;
+        collapse?(e: FloatingActionButtonCollapseEvent): void;
+    }
+
+    interface FloatingActionButtonItem {
+        label?: string;
+        icon?: string;
+        title?: string;
+        enabled?: boolean;
+        cssClass?: string;
+
+        click?(e: FloatingActionButtonItemClickEvent): void;
+    }
+
+    interface FloatingActionButtonEvent {
+        sender: FloatingActionButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface FloatingActionButtonExpandEvent extends FloatingActionButtonEvent {
+    }
+
+    interface FloatingActionButtonCollapseEvent extends FloatingActionButtonEvent {
+    }
+
+    interface FloatingActionButtonClickEvent extends FloatingActionButtonEvent {
+    }
+
+    interface FloatingActionButtonItemClickEvent extends FloatingActionButtonEvent {
+        target: JQuery;
+        item: FloatingActionButtonItem | any;
+    }
+
     class Form extends kendo.ui.Widget {
 
         static fn: Form;
@@ -5212,6 +5319,11 @@ declare namespace kendo.ui {
         visible?: Function;
     }
 
+    interface GridColumnExportable {
+        excel?: boolean;
+        pdf?: boolean;
+    }
+
     interface GridColumnFilterableCell {
         dataSource?: any|kendo.data.DataSource;
         dataTextField?: string;
@@ -5259,6 +5371,7 @@ declare namespace kendo.ui {
         command?: string | string[] | GridColumnCommandItem | GridColumnCommandItem[];
         editable?: Function;
         encoded?: boolean;
+        exportable?: boolean | GridColumnExportable;
         field?: string;
         filterable?: boolean | GridColumnFilterable;
         footerAttributes?: any;
@@ -23424,6 +23537,10 @@ interface JQuery {
     kendoFlatColorPicker(): JQuery;
     kendoFlatColorPicker(options: kendo.ui.FlatColorPickerOptions): JQuery;
     data(key: "kendoFlatColorPicker"): kendo.ui.FlatColorPicker;
+
+    kendoFloatingActionButton(): JQuery;
+    kendoFloatingActionButton(options: kendo.ui.FloatingActionButtonOptions): JQuery;
+    data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton;
 
     kendoGantt(): JQuery;
     kendoGantt(options: kendo.ui.GanttOptions): JQuery;
