@@ -64,7 +64,7 @@ Telerik {{ site.product_short }} supports:
 * [.NET Framework v3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
 * [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later.
 * Visual Studio 2012 and later.
-* [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later.
+* [IIS](https://www.iis.net/) 5 and later.
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx)  and [VB.NET](http://www.tutorialspoint.com/vb.net/).
 * [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later.
 
