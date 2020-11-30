@@ -40,5 +40,5 @@ By default, users can only navigate to links, buttons, and form controls with a 
 ## Suggested Links
 
 * [Accessibility Support by {{ site.product }}]({% slug compliance_accessibility %})
-* [GSA Government-Wide Section 508 Accessibility Program](https://www.access-board.gov/the-board/laws/rehabilitation-act-of-1973#508)
+* [GSA Government-Wide Section 508 Accessibility Program](https://www.access-board.gov/law/ra.html#section-508-federal-electronic-and-information-technology)
 * [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices/)

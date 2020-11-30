@@ -42,5 +42,5 @@ In order to select or deselect all of the child items of the currently selected 
 
 ## See Also
 
-[Selection of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/selection)
+[Selection of the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/checkbox-selection)
 * [Server-Side API](/api/selection)

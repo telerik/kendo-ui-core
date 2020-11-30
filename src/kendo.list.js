@@ -581,7 +581,7 @@ var __meta__ = { // jshint ignore:line
             var clearTitle = list.options.messages.clear;
 
             if (!list._clear){
-                list._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="' + clearTitle + '"></span>').attr({
+                list._clear = $('<span unselectable="on" class="k-clear-value" title="' + clearTitle + '"><span class="k-icon k-i-x"></span></span>').attr({
                     "role": "button",
                     "tabIndex": -1
                 });

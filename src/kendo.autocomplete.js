@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         READONLY = "readonly",
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
+        HIDDENCLASS = "k-hidden",
         STATEDISABLED = "k-state-disabled",
         AUTOCOMPLETEVALUE = "off",
         HOVER = "k-state-hover",
@@ -670,7 +671,7 @@ var __meta__ = { // jshint ignore:line
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that._loading.hide();
+            that._loading.addClass(HIDDENCLASS);
             that.element.attr("aria-busy", false);
             that._busy = null;
             that._showClear();
@@ -685,7 +686,7 @@ var __meta__ = { // jshint ignore:line
 
             that._busy = setTimeout(function () {
                 that.element.attr("aria-busy", true);
-                that._loading.show();
+                that._loading.removeClass(HIDDENCLASS);
                 that._hideClear();
             }, 100);
         },
@@ -770,7 +771,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-i-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.element);
         },
 
         _clearButton: function() {
