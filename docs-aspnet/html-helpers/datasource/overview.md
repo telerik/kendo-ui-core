@@ -19,6 +19,11 @@ The DataSource is an abstraction for using local data or remote data. In most ca
 > * As of the R1 2017 SP1 release, you can use the `ToDataSourceResultAsync` extension method to provide the asynchronous functionality of `ToDataSourceResult` by leveraging the `async` and `await` features of the .NET Framework.
 > * If impersonation is enabled, use the `ToDataSourceResultAsync` extension method with only one thread in your ASP.NET application. If you create a new thread, the impersonation in the newly created child thread decreases because, by default, all newly created child threads in ASP.NET run under the ASP.NET identity of the worker process. To change this behavior, explicitly impersonate the current identity within the code of the child thread.
 
+To use `DataSourceRequest` and `ToDataSourceResult()`, add the following namespaces with `using` directives in the controller:
+
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
 ## Initialize the DataSource
 
 The following example demonstrates how to define the DataSource by using the DataSource HtmlHelper. You can use `Name()` to access the DataSource instance on the client and utilize the [API methods and events of the Kendo UI for jQuery DataSource widget](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource).

@@ -8,7 +8,7 @@ component: scrollview
 
 # kendo.ui.ScrollView
 
-Represents the Kendo UI ScrollView widget. Inherits from [kendo.ui.Widget](/api/javascript/ui/widget).
+Represents the Kendo UI ScrollView widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 

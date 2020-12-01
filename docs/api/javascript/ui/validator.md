@@ -8,6 +8,8 @@ component: validation
 
 # kendo.ui.Validator
 
+Represents the Kendo UI Validator widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### errorTemplate `String`

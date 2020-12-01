@@ -7,6 +7,8 @@ component: listbox
 
 # kendo.ui.ListBox
 
+Represents the Kendo UI ListBox widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### autoBind `Boolean` *(default: true)*

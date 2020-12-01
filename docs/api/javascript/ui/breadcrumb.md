@@ -7,6 +7,8 @@ component: breadcrumb
 
 # kendo.ui.Breadcrumb
 
+Represents the Kendo UI Breadcrumb widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### bindToLocation `Boolean` *(default: false)*

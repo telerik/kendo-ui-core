@@ -9,6 +9,8 @@ component: drag-and-drop
 
 # kendo.ui.Draggable
 
+Represents the Kendo UI Draggable widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### axis `String`*(default: null)*
