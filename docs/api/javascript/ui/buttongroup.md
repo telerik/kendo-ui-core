@@ -7,6 +7,8 @@ res_type: api
 
 # kendo.ui.ButtonGroup
 
+Represents the Kendo UI ButtonGroup widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### enable `Boolean` *(default: true)*

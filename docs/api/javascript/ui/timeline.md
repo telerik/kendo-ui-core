@@ -8,7 +8,7 @@ component: timeline
 
 # kendo.ui.Timeline
 
-Represents the Kendo UI Timeline widget. Inherits from [kendo.ui.Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Timeline widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 

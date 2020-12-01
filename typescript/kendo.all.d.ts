@@ -3926,6 +3926,8 @@ declare namespace kendo.ui {
         insertImage?: string;
         insertOrderedList?: string;
         insertUnorderedList?: string;
+        insertUpperRomanList?: string;
+        insertLowerRomanList?: string;
         italic?: string;
         overflowAnchor?: string;
         justifyCenter?: string;
@@ -3944,6 +3946,9 @@ declare namespace kendo.ui {
         subscript?: string;
         summary?: string;
         superscript?: string;
+        tableAlignLeft?: string;
+        tableAlignCenter?: string;
+        tableAlignRight?: string;
         tableTab?: string;
         tableWizard?: string;
         underline?: string;

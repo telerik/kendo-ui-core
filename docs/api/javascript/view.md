@@ -5,6 +5,8 @@ res_type: api
 
 # kendo.View
 
+The View class instantiates and handles the events of a certain screen from the application.
+
 ## Configuration
 
 ### evalTemplate `Boolean`*(default: false)*

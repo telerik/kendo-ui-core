@@ -7,6 +7,9 @@ component: button
 
 # kendo.ui.Button
 
+Represents the Kendo UI Button widget. Inherits from [Widget](/api/javascript/ui/widget).
+
+
 ## Configuration
 
 ### badge `Boolean|String|Number|Object`
