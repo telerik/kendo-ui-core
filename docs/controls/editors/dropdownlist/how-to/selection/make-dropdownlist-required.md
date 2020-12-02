@@ -12,11 +12,10 @@ The DropDownList enables you to initialize it by using the `input` or the `selec
 
 ```dojo
     <form id="myForm" action="someAction" method="post">
-      <input id="ddl" />
+      <input id="ddl" name="color" required/>
     </form>
-    <button id="submitBtn" type="submit" class="k-button">Submit</button>
-    <p></p>
-    <button id="submitBtn" type="submit" class="k-button">Submit</button>
+    <button id="submitBtn" type="submit"  class="k-button">Submit</button>
+   
     <script>
       $("#ddl").kendoDropDownList({
         dataTextField: "text",
