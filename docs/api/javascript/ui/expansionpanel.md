@@ -80,7 +80,7 @@ The number of milliseconds used for the visual animation when a **ExpansionPanel
 ### animation.collapse.effects `String`
 
 A whitespace-delimited string of animation effects that are utilized when a **ExpansionPanel** item
-is closed. Options include **"fadeOut"**.
+is closed. Available options are **"fadeOut"** and **"zoomOut"**.
 
 #### Example
 
@@ -136,8 +136,8 @@ The number of milliseconds used for the visual animation when an item is opened.
 
 ### animation.expand.effects `String`*(default: "expandVertical")*
 
-A whitespace-delimited string of animation effects that are used when an item is expanded. Options include
-**"expandVertical"** and **"fadeIn"**.
+A whitespace-delimited string of animation effects that are used when an item is expanded. Available options are
+**"expandVertical"**, **"zoomIn"** and **"fadeIn"**.
 
     <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
@@ -151,7 +151,7 @@ A whitespace-delimited string of animation effects that are used when an item is
         });
     </script>
 
-### collapseiconclass `String` *(default: "k-icon k-i-arrow-chevron-up")*
+### collapseIconclass `String` *(default: "k-icon k-i-arrow-chevron-up")*
 
 The class of the collapse icon.
 
