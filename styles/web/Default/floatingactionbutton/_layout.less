@@ -20,6 +20,10 @@
     text-overflow: ellipsis;
     cursor: pointer;
     outline: none;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 // FAB Icon
@@ -86,6 +90,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    cursor: pointer;
 
     &.k-text-right {
         flex-direction: row;
@@ -115,7 +120,7 @@
     padding: @fab-item-icon-padding-y @fab-item-icon-padding-x;
     border-width: @fab-item-icon-border-width;
     border-radius: @fab-item-icon-border-radius;
-    cursor: pointer;
+    box-sizing: content-box;
     outline: none;
 }
 

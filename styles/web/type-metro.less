@@ -873,17 +873,19 @@
 // FloatingActionButton
 @fab-shadow: 0 4px 5px rgba(0, 0, 0, .14), 0 1px 10px rgba(0, 0, 0, .12), 0 2px 4px rgba(0, 0, 0, .2);
 @fab-focus-shadow: 0 1px 10px rgba(#000000, .22), 0 4px 5px rgba(#000000, .24), 0 2px 4px rgba(#000000, .2);
+@fab-disabled-shadow:  0 4px 5px rgba(0, 0, 0, .06), 0 1px 10px rgba(0, 0, 0, .06), 0 2px 4px rgba(0, 0, 0, .08);
 
 @fab-item-text: if(@is-dark-theme, @badge-secondary-text, @component-text);
-@fab-item-bg: if(@is-dark-theme, @badge-secondary-bg, @component-bg);
+@fab-item-bg: if(@is-dark-theme, lighten(@badge-secondary-bg, 30%), @component-bg);
 @fab-item-border: if(@is-dark-theme, @badge-secondary-border, @component-border);
 
 @fab-item-icon-text: if(@is-dark-theme, @badge-secondary-text, contrast( #ebebeb ));
-@fab-item-icon-bg: if(@is-dark-theme, @badge-secondary-bg, #ebebeb);
+@fab-item-icon-bg: if(@is-dark-theme, lighten(@badge-secondary-bg, 20%), #ebebeb);
 @fab-item-icon-border: if(@is-dark-theme, @badge-secondary-border, #ebebeb);
 
 @fab-item-shadow: if(@is-dark-theme, @focused-shadow, @fab-shadow);
 @fab-item-focus-shadow: if(@is-dark-theme, @focused-item-shadow, @fab-focus-shadow);
+@fab-item-disabled-shadow: fab-disabled-shadow;
 
 
 // Kendo skin
