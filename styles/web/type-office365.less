@@ -372,20 +372,27 @@
 
 
 // ScrollView
+
+@scrollview-light-bg: rgba(255, 255, 255, .2);
+@scrollview-dark-bg: rgba(0, 0, 0, .2);
+
+@scrollview-bg: @component-bg;
+@scrollview-text: @component-text;
+@scrollview-border: @component-border;
+
 @scrollview-pagebutton-bg: @button-background-color;
 @scrollview-pagebutton-border: @button-border-color;
 @scrollview-pagebutton-primary-bg: @primary-background-color;
 @scrollview-pagebutton-primary-border: @primary-border-color;
-@scrollview-pagebutton-shadow: @button-shadow;
+@scrollview-pagebutton-shadow: 0 0 0 2px rgba(0, 0, 0, .13);
 
 @scrollview-navigation-color: @selected-text-color;
 @scrollview-navigation-icon-shadow: rgba(0, 0, 0, .3) 0 0 15px;
-@scrollview-navigation-background: rgba(0, 0, 0, 0);
+@scrollview-navigation-bg: rgba(0, 0, 0, 0);
 @scrollview-navigation-default-opacity: .7;
 @scrollview-navigation-hover-opacity: 1;
-@scrollview-navigation-hover-span-bg: transparent;
-
-
+@scrollview-navigation-hover-span-bg: @scrollview-light-bg;
+@scrollview-arrow-tap-highlight-color: transparent;
 // Switch
 @switch-container-shadow: null;
 @switch-container-hovered-shadow: null;
@@ -500,7 +507,7 @@
 
 
 // Drawer
-@drawer-text:  @widget-text-color;
+@drawer-text: @widget-text-color;
 @drawer-bg: @widget-background-color;
 @drawer-border: @widget-border-color;
 
@@ -519,6 +526,7 @@
 @drawer-selected-bg: @selected-background;
 @drawer-selected-hover-bg: contrast(@background, lighten(@selected-background, 5%), darken(@selected-background, 5%), 0.5);
 @drawer-selected-hover-text: @selected-text-color;
+
 
 // Rating
 @rating-icon-text: @widget-border-color;
@@ -539,7 +547,7 @@
 @spreadsheet-drawing-handle-border-radius: 50%;
 @spreadsheet-drawing-handle-outline: @spreadsheet-selection-border;
 
-@spreadsheet-drawing-anchor-bg:  @spreadsheet-selection-background;
+@spreadsheet-drawing-anchor-bg: @spreadsheet-selection-background;
 
 
 // Filter
@@ -589,6 +597,7 @@
 @breadcrumb-root-link-focused-border: false;
 @breadcrumb-root-link-focused-shadow: @breadcrumb-link-focused-shadow;
 
+
 // Listgroup
 @listgroup-border-radius: @border-radius;
 
@@ -621,6 +630,7 @@
 @badge-error-bg: @error;
 @badge-error-text: contrast( @badge-error-bg );
 @badge-error-border: @badge-error-bg;
+
 
 //Checkboxes
 @checkbox-icon-size: 12px;
@@ -817,13 +827,13 @@
 @textarea-selected-text: contrast(@accent);
 @textarea-selected-bg: @accent;
 
-@textarea-invalid-border: rgba( @error, .5 );;
+@textarea-invalid-border: rgba( @error, .5 );
 @textarea-invalid-shadow: null;
 
 
 // Appbar
 @appbar-box-shadow: 0px 1px 1px rgba(0, 0, 0, .16);
-@appbar-bottom-box-shadow:  0px -1px 1px rgba(0, 0, 0, .16);
+@appbar-bottom-box-shadow: 0px -1px 1px rgba(0, 0, 0, .16);
 
 
 //Gantt
@@ -903,7 +913,6 @@
 @fab-item-shadow: @fab-shadow;
 @fab-item-focus-shadow: @fab-focus-shadow;
 @fab-item-disabled-shadow: @fab-disabled-shadow;
-@fab-item-disabled-shadow: @fab-disabled-shadow;
 
 
 // Kendo skin
@@ -953,8 +962,7 @@
 
 
 .k-in,
-.k-item
-{
+.k-item {
     border-color: transparent;
 }
 

@@ -216,13 +216,18 @@
 
 
 // ScrollView
-@scrollview-pagebutton-size: 8px;
+@scrollview-border-width: 1px;
+@scrollview-font-family: inherit;
+@scrollview-font-size: inherit;
+@scrollview-line-height: @line-height;
+
+@scrollview-pagebutton-size: 10px;
 @scrollview-navigation-size: 4.5em;
 
-@scrollview-pager-offset: 20px;
+@scrollview-pager-offset: 0;
 @scrollview-pager-item-spacing: 20px;
 @scrollview-pager-item-border-width: 0;
-@scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
+@scrollview-pager-height: calc( @scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (2 * @scrollview-pager-item-spacing) );
 
 // Switch
 @switch-size: 5.4em;

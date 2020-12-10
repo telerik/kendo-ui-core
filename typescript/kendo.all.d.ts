@@ -8428,8 +8428,18 @@ declare namespace kendo.ui {
 
     }
 
+    interface ScrollViewMessages {
+        nextButtonLabel?: string;
+        previousButtonLabel?: string;
+    }
+
+    interface ScrollViewPageable {
+        ARIATemplate?: string;
+    }
+
     interface ScrollViewOptions {
         name?: string;
+        ARIATemplate?: string;
         autoBind?: boolean;
         bounceVelocityThreshold?: number;
         contentHeight?: number|string;
@@ -8437,6 +8447,9 @@ declare namespace kendo.ui {
         duration?: number;
         emptyTemplate?: string;
         enablePager?: boolean;
+        messages?: ScrollViewMessages;
+        navigatable?: boolean;
+        pageable?: boolean | ScrollViewPageable;
         page?: number;
         template?: string;
         velocityThreshold?: number;
@@ -9620,6 +9633,7 @@ declare namespace kendo.ui {
         dataDescriptionField?: string;
         dataDateField?: string;
         dataImagesField?: string;
+        dataImagesAltField?: string;
         dataSubTitleField?: string;
         dataTitleField?: string;
         dataSource?: kendo.data.DataSource|any;

@@ -216,14 +216,18 @@
 
 
 // ScrollView
-@scrollview-pagebutton-size: 8px;
+@scrollview-border-width: 1px;
+@scrollview-font-family: inherit;
+@scrollview-font-size: inherit;
+@scrollview-line-height: @line-height;
+
+@scrollview-pagebutton-size: 10px;
 @scrollview-navigation-size: 4.5em;
 
-@scrollview-pager-offset: 20px;
+@scrollview-pager-offset: 0;
 @scrollview-pager-item-spacing: 20px;
-@scrollview-pager-item-border-width: 1px;
-@scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
-
+@scrollview-pager-item-border-width: 0;
+@scrollview-pager-height: calc( @scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (2 * @scrollview-pager-item-spacing) );
 // Switch
 @switch-size: 5em;
 @switch-border-radius: @switch-size;
@@ -322,7 +326,7 @@
 @card-deck-gap: 16px;
 
 @card-avatar-size: 45px;
-@card-avatar-spacing:  @card-header-padding-x;
+@card-avatar-spacing: @card-header-padding-x;
 
 @card-deck-scroll-button-radius: 0;
 @card-deck-scroll-button-offset: -1px;
@@ -404,6 +408,7 @@
 @filter-padding-x: 8px;
 @filter-padding-y: 4px;
 @filter-operator-dropdown-width: 15em;
+
 
 // Timeline
 @timeline-border-radius: 2px;
@@ -613,7 +618,6 @@
 @tooltip-border-width: 1px;
 
 @tooltip-callout-size: 6px;
-
 
 
 // Stepper

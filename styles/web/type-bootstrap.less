@@ -373,18 +373,27 @@
 
 
 // ScrollView
+@scrollview-light-bg: rgba(255, 255, 255, .2);
+@scrollview-dark-bg: rgba(0, 0, 0, .2);
+
+@scrollview-bg: @component-bg;
+@scrollview-text: @component-text;
+@scrollview-border: @component-border;
+
 @scrollview-pagebutton-bg: @button-background-color;
 @scrollview-pagebutton-border: @button-border-color;
 @scrollview-pagebutton-primary-bg: @primary-background-color;
 @scrollview-pagebutton-primary-border: @primary-border-color;
-@scrollview-pagebutton-shadow: @button-shadow;
+@scrollview-pagebutton-shadow: 0 0 0 2px rgba(0, 0, 0, .13);
 
 @scrollview-navigation-color: @selected-text-color;
 @scrollview-navigation-icon-shadow: rgba(0, 0, 0, .3) 0 0 15px;
-@scrollview-navigation-background: rgba(0, 0, 0, 0);
+@scrollview-navigation-bg: rgba(0, 0, 0, 0);
 @scrollview-navigation-default-opacity: .7;
 @scrollview-navigation-hover-opacity: 1;
 @scrollview-navigation-hover-span-bg: transparent;
+@scrollview-arrow-tap-highlight-color: transparent;
+@scrollview-arrow-tap-highlight-color: transparent;
 
 
 // Switch
@@ -500,7 +509,7 @@
 @adaptive-scheduler-base-text: inherit;
 
 // Drawer
-@drawer-text:  @widget-text-color;
+@drawer-text: @widget-text-color;
 @drawer-bg: @widget-background-color;
 @drawer-border: @widget-border-color;
 
@@ -521,6 +530,7 @@
 @drawer-selected-hover-bg: contrast(@background, lighten(@selected-background, 5%), darken(@selected-background, 5%), 0.5);
 @drawer-selected-hover-text: @selected-text-color;
 
+
 // Rating
 @rating-icon-text: @widget-border-color;
 @rating-icon-selected-text: @accent;
@@ -529,6 +539,7 @@
 
 @rating-icon-focused-shadow: 0 2px 3.6px rgba(0, 0, 0, .1);
 @rating-icon-focused-selected-shadow: 0 2px 3.6px fade(@accent, 50);
+
 
 // Spreadsheet
 @spreadsheet-insert-image-dialog-preview-overlay: inset 0 0 0 2000px rgba(0,0,0, 0.5);
@@ -539,7 +550,7 @@
 @spreadsheet-drawing-handle-border-radius: 50%;
 @spreadsheet-drawing-handle-outline: @spreadsheet-selection-border;
 
-@spreadsheet-drawing-anchor-bg:  @spreadsheet-selection-background;
+@spreadsheet-drawing-anchor-bg: @spreadsheet-selection-background;
 
 
 // Filter
@@ -622,6 +633,7 @@
 @badge-error-bg: darken(@error, 30%);
 @badge-error-text: contrast( @badge-error-bg );
 @badge-error-border: @badge-error-bg;
+
 
 //Checkboxes
 @checkbox-icon-size: 12px;
@@ -818,13 +830,13 @@
 @textarea-selected-text: contrast(@accent);
 @textarea-selected-bg: @accent;
 
-@textarea-invalid-border: rgba( @error, .5 );;
+@textarea-invalid-border: rgba( @error, .5 );
 @textarea-invalid-shadow: null;
 
 
 // Appbar
 @appbar-box-shadow: 0px 1px 1px rgba(0, 0, 0, .16);
-@appbar-bottom-box-shadow:  0px -1px 1px rgba(0, 0, 0, .16);
+@appbar-bottom-box-shadow: 0px -1px 1px rgba(0, 0, 0, .16);
 
 
 //Gantt
@@ -952,8 +964,7 @@
 @import "Default/floatingactionbutton/_theme.less";
 
 .k-in,
-.k-item
-{
+.k-item {
     border-color: transparent;
 }
 

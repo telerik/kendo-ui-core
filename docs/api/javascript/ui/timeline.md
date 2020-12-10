@@ -152,6 +152,10 @@ Sets the field of the data item that provides information when the given event h
 
 > The value for this field should be either JavaScript Date object or serialized date.
 
+### dataImagesAltField `String`*(default: "altField")*
+
+Sets the field of the data item that provides the value for the alt attribute of the images.
+
 ### dataImagesField `String`*(default: "images")*
 
 Sets the field of the data item that provides the images information for the event.
