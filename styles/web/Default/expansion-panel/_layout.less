@@ -2,6 +2,7 @@
     border-width: @expander-border-width;
     border-style: solid;
     box-sizing: border-box;
+    overflow: hidden;
     outline: 0;
     font-family: @expander-font-family;
     font-size: @expander-font-size;
@@ -30,6 +31,7 @@
 
     // Title
     .k-expander-title {
+        font-weight: bold;
         text-transform: uppercase;
     }
 
@@ -41,6 +43,7 @@
     // Expander content
     .k-expander-content {
         padding: @expander-content-padding-y @expander-content-padding-x;
+        box-sizing: border-box;
     }
 
     // Multiple expansion panels immediately one after another

@@ -4,9 +4,12 @@
     // .box-shadow( @card-box-shadow );
     border-width: @card-border-width;
     border-style: solid;
+    outline: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
 
     .k-card-callout {
         position: absolute;

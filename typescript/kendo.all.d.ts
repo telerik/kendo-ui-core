@@ -9389,6 +9389,7 @@ declare namespace kendo.ui {
         containers?: TileLayoutContainer[];
         gap?: TileLayoutGap;
         height?: string|number;
+        navigatable?: boolean;
         reorderable?: boolean;
         resizable?: boolean;
         rows?: number;

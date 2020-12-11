@@ -7,6 +7,12 @@
     );
 }
 
+.k-tilelayout-item:focus,
+.k-tilelayout-item.k-state-focus,
+.k-tilelayout-item.k-state-focused {
+    .box-shadow(@tilelayout-card-focus-shadow);
+}
+
 .k-layout-item-hint {
     .fill(
         @bg: @tilelayout-hint-bg,
