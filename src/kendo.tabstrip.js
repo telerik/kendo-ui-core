@@ -876,11 +876,12 @@ var __meta__ = { // jshint ignore:line
         },
 
         _elementId: function(element, idx, tab) {
-            var elementId = element.attr("id");
-            var wrapperId = this.element.attr("id") || kendo.guid();
+            var elementId = element.attr("id"),
+                wrapperId = this.element.attr("id"),
+                guid = kendo.guid();
 
-            if (!elementId) {
-                var tabStripID = wrapperId + "-";
+            if (!elementId || elementId.indexOf(wrapperId + "-") > -1) {
+                var tabStripID = (wrapperId || guid) + "-";
 
                 if(tab) {
                     tabStripID += "tab-";
