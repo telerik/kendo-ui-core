@@ -33,7 +33,6 @@ For a complete example, refer to the [demo on binding the Scheduler to remote da
                 m.RecurrenceId(f => f.RecurrenceID);
                 m.Field(f => f.Title).DefaultValue("No title");
                 m.Field(f => f.OwnerID).DefaultValue(1);
-                m.Field(f => f.Title).DefaultValue("No title");
             })
             .Read("Read", "Scheduler")
             .Create("Create", "Scheduler")

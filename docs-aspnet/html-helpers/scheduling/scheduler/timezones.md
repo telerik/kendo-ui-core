@@ -39,7 +39,6 @@ The following example demonstrates how to set `"Etc/UTC"` timezone to the Schedu
                     m.Id(f => f.MeetingID);
                     m.Field(f => f.Title).DefaultValue("No title");
                     m.RecurrenceId(f => f.RecurrenceID);
-                    m.Field(f => f.Title).DefaultValue("No title");
                 })
             .Read("Meetings_Read", "Scheduler")
             .Create("Meetings_Create", "Scheduler")

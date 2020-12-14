@@ -41,7 +41,6 @@ The following example demonstrates how to define the Scheduler by using the Sche
                 m.RecurrenceId(f => f.RecurrenceID);
                 m.Field(f => f.Title).DefaultValue("No title");
                 m.Field(f => f.OwnerID).DefaultValue(1);
-                m.Field(f => f.Title).DefaultValue("No title");
             })
             .Read("Read", "Scheduler")
             .Create("Create", "Scheduler")
@@ -156,7 +155,6 @@ The following example demonstrates the basic configuration of the Scheduler Html
                     m.Id(f => f.MeetingID);
                     m.Field(f => f.Title).DefaultValue("No title");
                     m.RecurrenceId(f => f.RecurrenceID);
-                    m.Field(f => f.Title).DefaultValue("No title");
                 })
                 .Read("Date_Grouping_Read", "Scheduler")
                 .Create("Date_Grouping_Create", "Scheduler")

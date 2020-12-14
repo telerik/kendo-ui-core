@@ -47,7 +47,6 @@ A single instance resource is a resource of which only one instance can be assig
                     m.Id(f => f.MeetingID);
                     m.Field(f => f.Title).DefaultValue("No title");
                     m.RecurrenceId(f => f.RecurrenceID);
-                    m.Field(f => f.Title).DefaultValue("No title");
                 })
             .Read("Meetings_Read", "Scheduler")
             .Create("Meetings_Create", "Scheduler")
@@ -96,7 +95,6 @@ A multiple instance resource is a resource of which more than one instance can b
                     m.Id(f => f.MeetingID);
                     m.Field(f => f.Title).DefaultValue("No title");
                     m.RecurrenceId(f => f.RecurrenceID);
-                    m.Field(f => f.Title).DefaultValue("No title");
                 })
             .Read("Meetings_Read", "Scheduler")
             .Create("Meetings_Create", "Scheduler")
@@ -156,7 +154,6 @@ The Scheduler supports multiple resource types. For example, you can combine sin
                     m.Id(f => f.MeetingID);
                     m.Field(f => f.Title).DefaultValue("No title");
                     m.RecurrenceId(f => f.RecurrenceID);
-                    m.Field(f => f.Title).DefaultValue("No title");
                 })
             .Read("Meetings_Read", "Scheduler")
             .Create("Meetings_Create", "Scheduler")
