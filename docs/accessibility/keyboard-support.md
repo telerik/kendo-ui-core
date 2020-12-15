@@ -62,6 +62,7 @@ In addition to the `accesskey` attribute support, most Kendo UI widgets also off
 - [Stepper](https://demos.telerik.com/kendo-ui/stepper/keyboard-navigation)
 - [Switch](https://demos.telerik.com/kendo-ui/switch/keyboard-navigation)
 - [TabStrip](https://demos.telerik.com/kendo-ui/tabstrip/keyboard-navigation)
+- [TimeLine](https://demos.telerik.com/kendo-ui/timeline/keyboard-navigation)
 - [TimePicker](https://demos.telerik.com/kendo-ui/timepicker/keyboard-navigation)
 - [ToolBar](https://demos.telerik.com/kendo-ui/toolbar/keyboard-navigation)
 - [TreeList](https://demos.telerik.com/kendo-ui/treelist/keyboard-navigation)

@@ -27,7 +27,7 @@ Specifies a template is used to populate an aria-live element that anounces whic
     <script>
     $("#scrollView").kendoScrollView({
         navigatable: true,
-        ARIATemplate: "Item #=data.index#"
+        ARIATemplate: "Item #=data.index#",
 		    contentHeight: "100%"
     });
     </script>
@@ -169,7 +169,7 @@ The duration (in milliseconds) for the ScrollView to snap to the current page af
     <script>
     $("#scrollView").kendoScrollView({
         duration: "800",
-		contentHeight: "100%"
+		    contentHeight: "100%"
     });
     </script>
 
@@ -213,7 +213,7 @@ The template for rendering the pages without content. By default, the ScrollView
         dataSource: dataSource,
         template: "scrollview-template",
         emptyTemplate: "scrollview-empty",
-		contentHeight: "100%"
+		    contentHeight: "100%"
     });
     </script>
 
@@ -273,7 +273,7 @@ Defines the messages that are set as aria-lables for the previous and next butto
         messages: {
           previousButtonLabel: "prev",
           nextButtonLabel: "next"
-        }
+        },
 		    contentHeight: "100%"
     });
     </script>
@@ -295,7 +295,7 @@ Defines the aria-label for the next button.
         navigatable: true,
         messages: {
           nextButtonLabel: "Next button"
-        }
+        },
 		    contentHeight: "100%"
     });
     </script>

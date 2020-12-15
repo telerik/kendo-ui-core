@@ -2773,9 +2773,11 @@ function pad(number, digits, end) {
         },
 
         guid: function() {
-            var id = "", i, random;
+            var id = "", i, random, chars = "abcdefghijklmnopqrstuvwxyz";
 
-            for (i = 0; i < 32; i++) {
+            id += chars[Math.floor(Math.random() * Math.floor(chars.length))];
+
+            for (i = 1; i < 32; i++) {
                 random = math.random() * 16 | 0;
 
                 if (i == 8 || i == 12 || i == 16 || i == 20) {

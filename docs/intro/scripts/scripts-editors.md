@@ -23,6 +23,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.mobile.scroller.js | Mobile scroller feature (optional) |
 | | kendo.virtuallist.js | VirtualList feature (optional) |
 | | kendo.autocomplete.js | |
+| [CheckBoxGroup](https://demos.telerik.com/kendo-ui/checkboxgroup/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.inputgroupbase.js | |
 | [Color tools](https://demos.telerik.com/kendo-ui/colorpicker/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.color.js | |
@@ -151,6 +154,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.numerictextbox.js | |
+| [RadioGroup](https://demos.telerik.com/kendo-ui/radiogroup/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.inputgroupbase.js | |
 | [Rating](https://demos.telerik.com/kendo-ui/rating/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.rating.js | |

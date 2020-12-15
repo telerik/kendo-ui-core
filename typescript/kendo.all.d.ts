@@ -2476,6 +2476,69 @@ declare namespace kendo.ui {
     interface ChatTypingStartEvent extends ChatEvent {
     }
 
+    class CheckBoxGroup extends kendo.ui.Widget {
+
+        static fn: CheckBoxGroup;
+
+        options: CheckBoxGroupOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): CheckBoxGroup;
+
+        constructor(element: Element, options?: CheckBoxGroupOptions);
+
+
+        checkAll(select: boolean): void;
+        enable(enable: boolean): void;
+        enableItem(enable: boolean, index: number): void;
+        item(index: number): JQuery;
+        items(): JQuery;
+        value(): any;
+        value(value: any): void;
+
+    }
+
+    interface CheckBoxGroupItem {
+        attributes?: any;
+        cssClass?: string;
+        enabled?: boolean;
+        encoded?: boolean;
+        label?: string;
+        value?: string;
+    }
+
+    interface CheckBoxGroupOptions {
+        name?: string;
+        enabled?: boolean;
+        inputName?: string;
+        items?: CheckBoxGroupItem[];
+        labelPosition?: string;
+        layout?: string;
+        value?: any;
+        change?(e: CheckBoxGroupChangeEvent): void;
+        focus?(e: CheckBoxGroupFocusEvent): void;
+        select?(e: CheckBoxGroupSelectEvent): void;
+    }
+    interface CheckBoxGroupEvent {
+        sender: CheckBoxGroup;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface CheckBoxGroupChangeEvent extends CheckBoxGroupEvent {
+        target?: JQuery;
+    }
+
+    interface CheckBoxGroupFocusEvent extends CheckBoxGroupEvent {
+        target?: JQuery;
+    }
+
+    interface CheckBoxGroupSelectEvent extends CheckBoxGroupEvent {
+        target?: JQuery;
+    }
 
     class ColorPalette extends kendo.ui.Widget {
 
@@ -7800,6 +7863,72 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class RadioGroup extends kendo.ui.Widget {
+
+        static fn: RadioGroup;
+
+        options: RadioGroupOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): RadioGroup;
+
+        constructor(element: Element, options?: RadioGroupOptions);
+
+
+        enable(enable: boolean): void;
+        enableItem(enable: boolean, index: number): void;
+        item(index: number): JQuery;
+        items(): JQuery;
+        value(): string;
+        value(value: string): void;
+
+    }
+
+    interface RadioGroupItem {
+        attributes?: any;
+        cssClass?: string;
+        enabled?: boolean;
+        encoded?: boolean;
+        label?: string;
+        value?: string;
+    }
+
+    interface RadioGroupOptions {
+        name?: string;
+        enabled?: boolean;
+        items?: RadioGroupItem[];
+        labelPosition?: string;
+        layout?: string;
+        inputName?: string;
+        value?: string;
+        change?(e: RadioGroupChangeEvent): void;
+        focus?(e: RadioGroupFocusEvent): void;
+        select?(e: RadioGroupSelectEvent): void;
+    }
+
+    interface RadioGroupEvent {
+        sender: RadioGroup;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface RadioGroupChangeEvent extends RadioGroupEvent {
+        target?: JQuery;
+        oldValue?: number;
+        newValue?: number;
+    }
+
+    interface RadioGroupFocusEvent extends RadioGroupEvent {
+        target?: JQuery;
+    }
+
+    interface RadioGroupSelectEvent extends RadioGroupEvent {
+        target?: JQuery;
+    }
+
 
     class RangeSlider extends kendo.ui.Widget {
 
@@ -9642,6 +9771,7 @@ declare namespace kendo.ui {
         dateformat?: string;
         eventHeight?: number;
         eventWidth?: number;
+        navigatable?: boolean;
         showDateLabels?: boolean;
         change?(e: TimelineChangeEvent): void;
         dataBound?(e: TimelineDataBoundEvent): void;
@@ -23474,6 +23604,10 @@ interface JQuery {
     kendoChat(options: kendo.ui.ChatOptions): JQuery;
     data(key: "kendoChat"): kendo.ui.Chat;
 
+    kendoCheckBoxGroup(): JQuery;
+    kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
+    data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup;
+
     kendoColorPalette(): JQuery;
     kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery;
     data(key: "kendoColorPalette"): kendo.ui.ColorPalette;
@@ -23749,6 +23883,10 @@ interface JQuery {
     kendoRadialGauge(): JQuery;
     kendoRadialGauge(options: kendo.dataviz.ui.RadialGaugeOptions): JQuery;
     data(key: "kendoRadialGauge"): kendo.dataviz.ui.RadialGauge;
+
+    kendoRadioGroup(): JQuery;
+    kendoRadioGroup(options: kendo.ui.RadioGroupOptions): JQuery;
+    data(key: "kendoRadioGroup"): kendo.ui.RadioGroup;
 
     kendoRangeSlider(): JQuery;
     kendoRangeSlider(options: kendo.ui.RangeSliderOptions): JQuery;

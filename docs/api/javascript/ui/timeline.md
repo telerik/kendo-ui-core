@@ -289,6 +289,37 @@ Sets specific width for the event in vertical mode.
 
 > This method is supported only in vertical mode.
 
+### navigatable `Boolean`*(default: false)*
+
+If set to `true`, will enable the keyboard navigation for the component.
+
+#### Example
+
+    <div id="timeline"></div>
+
+    <script>
+
+    $("#timeline").kendoTimeline({
+        dataSource: {
+            data:[ {"id":1,"title":"Bowling tournament","subtitle":"Location: Sterling Lanes","description":"Summer Bowling tournament in Michigan","date":"2025-06-30T21:00:00.000Z","actions":[{"text":"Visit the Bowling tournament page"}] },
+                    {"id":2,"title":"Charlie's first football game","subtitle":"Location: City Football Stadium","description":"Call coach Williams","date":"2022-10-22T21:00:00.000Z"},
+                    {"id":3,"title":"Alex's Birthday","subtitle":"Location: Alex's House","description":"Buy birthday cake and some fruits","date":"2010-01-09T22:00:00.000Z","images":[{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/4.jpg"},{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/16.jpg"}]},
+                    {"id":4,"title":"Vacation in Mexico","subtitle": "Location: Cabo San Lucas","description":"Check-in for the flight","date":"2017-12-24T22:00:00.000Z"}],
+            schema: {
+                model: {
+                fields: {
+                    date: {
+                    type: "date"
+                    }
+                }
+                }
+            }
+        },
+        orientation: "horizontal",
+        navigatable: true
+    });
+    </script>
+
 ### showDateLabels `Boolean`*(default: true)*
 
 If set to `false`, the event's date label will be hidden.

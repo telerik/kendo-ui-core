@@ -37,7 +37,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function convertToValueBinding(container) {
-        container.find(":input:not(:button, .k-combobox .k-input, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
+        container.find(":input:not(:button, .k-combobox .k-input, .k-checkbox-list .k-checkbox, .k-radio-list .k-radio, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" || this.type === "radio" ? "checked:" : "value:",
@@ -142,6 +142,8 @@ var __meta__ = { // jshint ignore:line
 
         if ((type === "DropDownTree" && options && options.checkboxes) || type === "MultiSelect") {
             tag = "<select />";
+        } else if (type === "RadioGroup" || type === "CheckBoxGroup") {
+            tag = "<ul />";
         } else {
             tag = type === "Editor" ? "<textarea />" : "<input />";
         }
@@ -150,10 +152,10 @@ var __meta__ = { // jshint ignore:line
     }
 
     var kendoEditors = [
-        "AutoComplete", "ColorPicker", "ComboBox", "DateInput",
+        "AutoComplete", "CheckBoxGroup", "ColorPicker", "ComboBox", "DateInput",
         "DatePicker", "DateTimePicker", "DropDownTree",
         "Editor", "MaskedTextBox", "MultiColumnComboBox","MultiSelect",
-        "NumericTextBox", "Rating", "Slider", "Switch", "TimePicker", "DropDownList"
+        "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList"
     ];
 
     var editors = {

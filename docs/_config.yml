@@ -197,7 +197,7 @@ navigation:
     "controls/navigation/stepper":
         title: "Stepper"
     "controls/navigation/wizard":
-        title: "Wizard"    
+        title: "Wizard"
     "controls/navigation/tabstrip/how-to":
         title: "How To"
         position: 70
@@ -533,6 +533,9 @@ navigation:
         title: "ButtonGroup"
     "*calendar":
         title: "Calendar"
+    "*checkboxgroup":
+        isNew: true
+        title: "CheckBoxGroup"
     "*/radiobutton":
         title: "RadioButton"
     "controls/scheduling/calendar":
@@ -604,6 +607,9 @@ navigation:
         title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
+    "*radiogroup":
+        isNew: true
+        title: "RadioGroup"
     "*rating":
         title: "Rating"
     "*panelbar":
@@ -1586,6 +1592,12 @@ defaults:
 
 -
     scope:
+        path: "controls/editors/checkboxgroup"
+    values:
+        component: "checkboxgroup"
+
+-
+    scope:
         path: "controls/editors/colorpicker"
     values:
         component: "color-picker"
@@ -1775,6 +1787,12 @@ defaults:
         path: "controls/editors/numerictextbox"
     values:
         component: "numeric-textbox"
+
+-
+    scope:
+        path: "controls/editors/radiogroup"
+    values:
+        component: "radiogroup"
 
 -
     scope:
@@ -1974,17 +1992,17 @@ type_links:
 intro_columns:
 -
   categories:
-  - 
+  -
     title: "Barcodes"
     items:
       "Barcode": "overview_kendoui_barcode_widget"
       "QRCode": "overview_kendoui_qrcode_widget"
   -
     title: "Charts"
-    items: 
+    items:
       "Charts": "overview_kendoui_charts_widget"
   -
-    title: "Data Management"  
+    title: "Data Management"
     items:
       "FileManager": "overview_kendoui_filemanager_widget"
       "Filter": "overview_kendoui_filter_widget"
@@ -2018,6 +2036,7 @@ intro_columns:
     title: "Editors"
     items:
       "AutoComplete": "overview_kendoui_autocomplete_widget"
+      "CheckBoxGroup": "overview_kendoui_checkboxgroup_widget"
       "Color Picker": "overview_kendoui_colorpicker_widget"
       "ComboBox": "overview_kendoui_combobox_widget"
       "DateInput": "overview_kendoui_dateinput_widget"
@@ -2032,6 +2051,7 @@ intro_columns:
       "MultiColumnComboBox": "overview_kendoui_multicolumncombobox_widget"
       "MultiSelect": "overview_kendoui_multiselect_widget"
       "NumericTextBox": "overview_kendoui_numerictextbox_widget"
+      "RadioGroup": "overview_kendoui_radiogroup_widget"
       "RangeSlider": "overview_kendoui_rangeslider_widget"
       "Rating": "overview_kendoui_rating_widget"
       "Slider": "overview_kendoui_slider_widget"
@@ -2051,7 +2071,7 @@ intro_columns:
   -
     title: "PDF"
     items:
-      "PDFViewer": "overview_kendoui_pdfviewer_widget"     
+      "PDFViewer": "overview_kendoui_pdfviewer_widget"
 
   -
     title: "Diagrams & Maps"
@@ -2087,7 +2107,7 @@ intro_columns:
       "ScrollView": "overview_kendoui_scrollview_widget"
   -
     title: "Gauges"
-    items: 
+    items:
       "ArcGauge": "overview_kendoui_arcgaugewidget"
       "LinearGauge": "overview_kendoui_lineargauge_widget"
       "RadialGauge": "overview_kendoui_radialgaugewidget"

@@ -447,6 +447,9 @@ navigation:
         title: "MultiViewCalendar"
      "*badge":
         title: "Badge"
+     "*checkboxgroup":
+        title: "CheckBoxGroup"
+        isNew: true
      "*colorpalette":
         title: "ColorPalette"
      "*colorpicker":
@@ -513,6 +516,9 @@ navigation:
         title: "NumericTextBox"
      "*rating":
         title: "Rating"
+     "*radiogroup":
+        title: "RadioGroup"
+        isNew: true
      "*progressbar":
         title: "ProgressBar"
      "*qrcode":
@@ -704,6 +710,11 @@ defaults:
         title_prefix: "ASP.NET Core AutoComplete Component"
 -
     scope:
+        path: "html-helpers/editors/checkboxgroup"
+    values:
+        title_prefix: "ASP.NET Core CheckBoxGroup Component"
+-
+    scope:
         path: "html-helpers/editors/colorpalette"
     values:
         title_prefix: "ASP.NET Core ColorPalette Component"
@@ -792,6 +803,11 @@ defaults:
         path: "html-helpers/editors/rating"
     values:
         title_prefix: "ASP.NET Core Rating Component"
+-
+    scope:
+        path: "html-helpers/editors/radiogroup"
+    values:
+        title_prefix: "ASP.NET Core RadioGroup Component"
 -
     scope:
         path: "html-helpers/editors/slider"
@@ -1089,6 +1105,11 @@ defaults:
         title_prefix: "ASP.NET Core AutoComplete Component"
 -
     scope:
+        path: "tag-helpers/editors/checkboxgroup"
+    values:
+        title_prefix: "ASP.NET Core CheckBoxGroup Component"
+-
+    scope:
         path: "tag-helpers/editors/colorpalette"
     values:
         title_prefix: "ASP.NET Core ColorPalette Component"
@@ -1177,6 +1198,11 @@ defaults:
         path: "tag-helpers/editors/rating"
     values:
         title_prefix: "ASP.NET Core Rating Component"
+-
+    scope:
+        path: "tag-helpers/editors/radiogroup"
+    values:
+        title_prefix: "ASP.NET Core RadioGroup Component"
 -
     scope:
         path: "tag-helpers/editors/slider"

@@ -69,6 +69,14 @@ Specifies the horizontal and vertical offset of the FloatingActionButton.
         });
     </script>
 
+### alignOffset.x `Number|String`
+
+Specifies the initial horizontal offset of the FloatingActionButton. Numeric values are treated as pixels. String values can specify pixels, percentages, ems, or other valid values.
+
+### alignOffset.y `Number|String`
+
+Specifies the initial vertical offset of the FloatingActionButton. Numeric values are treated as pixels. String values can specify pixels, percentages, ems or other valid values.
+
 ### enabled `Boolean` *(default: true)*
 
 Specifies whether the FloatingActionButton is enabled (true) or disabled (false).

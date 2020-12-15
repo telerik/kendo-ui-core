@@ -187,10 +187,13 @@ var __meta__ = { // jshint ignore:line
             },
             rules: {
                 required: function(input) {
-                    var checkbox = input.filter("[type=checkbox]").length && !input.is(":checked"),
+                    var noNameCheckbox = !input.attr("name") && !input.is(":checked"),
+                        namedCheckbox = input.attr("name") && !this.element.find("input[name='" + input.attr("name") + "']:checked").length,
+                        checkbox = input.filter("[type=checkbox]").length && (noNameCheckbox || namedCheckbox),
+                        radio = input.filter("[type=radio]").length && !this.element.find("input[name='" + input.attr("name") + "']:checked").length,
                         value = input.val();
 
-                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox));
+                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search],[type=password]").filter("[pattern]").length && input.val() !== "") {
@@ -410,6 +413,16 @@ var __meta__ = { // jshint ignore:line
                     var nextElement = input.next().get(0);
                     var prevElement = input.prev().get(0);
 
+                    // Get the instance of the RadioGroup which is not initialized on the input element
+                    if(!widgetInstance && input.is("[type=radio]")) {
+                        widgetInstance = kendo.widgetInstance(input.closest(".k-radio-list"));
+                    }
+
+                    // Get the instance of the CheckBoxGroup which is not initialized on the input element
+                    if(!widgetInstance && input.is("[type=checkbox]")) {
+                        widgetInstance = kendo.widgetInstance(input.closest(".k-checkbox-list"));
+                    }
+
                     if (widgetInstance && widgetInstance.wrapper) {
                         messageLabel.insertAfter(widgetInstance.wrapper);
                     } else if (parentElement && parentElement.nodeName === "LABEL") {
@@ -592,7 +605,14 @@ var __meta__ = { // jshint ignore:line
                 var input = $(inputs[idx]);
 
                 if (hasAttribute(input, NAME)) {
-                    sorted.push(input.attr(NAME));
+                    // Add current name if:
+                    // - not present so far;
+                    // - present but not part of CheckBoxGroup or RadioGroup.
+                    if(sorted.indexOf(input.attr(NAME)) === -1 ||
+                        (input.closest(".k-checkbox-list").length === 0 &&
+                        input.closest(".k-radio-list").length === 0)) {
+                            sorted.push(input.attr(NAME));
+                    }
                 }
             }
 
