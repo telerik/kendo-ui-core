@@ -34,19 +34,6 @@ To start the wizard, use either of the following approaches:
 
 ## Configurations
 
-### .NET Core version
-
-Click on the desired **{{ site.framework }}** version.
-
-![The ASP.NET version options](../../installation/vs-integration/images/core-version.png)
-
-### Helper Selection
-
-You can choose if you want the template project to use [HTMLHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}) or [TagHelpers]({% slug taghelpers_aspnetmvc6_aspnetmvc %}) in its Views.
-In this article, we use the **Html/Tag** dropdown.
-
-![The HTML/Tag helper options](../../installation/vs-integration/images/tag-html-dropdown.png)
-
 ### Target Framework
 
 The **Create New Project Wizard** allows you to select a target **Framework**. 
@@ -56,6 +43,19 @@ The **Create New Project Wizard** allows you to select a target **Framework**.
 >If the target **Framework** dropdown is disabled check the troubleshooting [section]({% slug troubleshooting_visualstudio_aspnetcore%}#the-target-framework-dropdown-is-disabled).
 
 ![The Create New Project Wizard](../../installation/vs-integration/images/target-dropdown.png)
+
+### .NET Core version
+
+Click on the desired **{{ site.framework }}** version.
+
+![The ASP.NET version options](../../installation/vs-integration/images/core-version.png)
+
+### Helper Selection
+
+You can choose if you want the template project to use [HTMLHelpers]({% slug knownissues_aspnetmvc6_aspnetmvc %}) or [TagHelpers]({% slug taghelpers_aspnetmvc6_aspnetmvc %}) in its Views.
+In this article, we use the **Tag** option.
+
+![The HTML/Tag helper options](../../installation/vs-integration/images/tag-html-dropdown.png)
 
 ### {{ site.product_short}} version
 

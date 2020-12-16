@@ -4632,6 +4632,52 @@ function pad(number, digits, end) {
         return "."+classes.split(" ").join(".");
     };
 
+    // Standardized Properties and CSS classes
+
+    var themeColorValues = ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'];
+    var fillValues = ['solid', 'outline', 'flat'];
+    var postitionValues = ['edge', 'outside', 'inside'];
+    var shapeValues = ['circle', 'rectangle', 'rounded', 'dot', 'pill'];
+    var sizeValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
+    var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
+    var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
+
+    kendo.propertyToCssClassMap = {};
+
+    kendo.registerCssClass = function (propName, value, shorthand) {
+        if (!kendo.propertyToCssClassMap[propName]) {
+            kendo.propertyToCssClassMap[propName] = {};
+        }
+
+        kendo.propertyToCssClassMap[propName][value] = shorthand || value;
+    };
+
+    kendo.registerCssClasses = function (propName, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (isArray(arr[i])) {
+                kendo.registerCssClass(propName, arr[i][0], arr[i][1]);
+            } else {
+                kendo.registerCssClass(propName, arr[i]);
+            }
+        }
+    };
+
+    kendo.getValidCssClass = function (prefix, propName, value) {
+        var validValue = kendo.propertyToCssClassMap[propName][value];
+
+        if (validValue) {
+            return prefix + validValue;
+        }
+    };
+
+    kendo.registerCssClasses("themeColor", themeColorValues);
+    kendo.registerCssClasses("fill", fillValues);
+    kendo.registerCssClasses("postition", postitionValues);
+    kendo.registerCssClasses("shape", shapeValues);
+    kendo.registerCssClasses("size", sizeValues);
+    kendo.registerCssClasses("align", alignValues);
+    kendo.registerCssClasses("positionMode", positionModeValues);
+
     // jQuery deferred helpers
 
     // influenced from: https://gist.github.com/fearphage/4341799

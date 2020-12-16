@@ -20,6 +20,7 @@
         "./kendo.selectable",
         "./kendo.badge",
         "./kendo.button",
+        "./kendo.bottomnavigation",
         "./kendo.pager",
         "./kendo.popup",
         "./kendo.notification",

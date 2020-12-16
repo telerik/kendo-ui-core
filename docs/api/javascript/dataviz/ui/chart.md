@@ -11910,6 +11910,26 @@ The highlight color. Accepts a valid CSS color string, including hex and rgb.
     });
     </script>
 
+### series.highlight.inactiveOpacity `Number`
+
+The opacity of the series when another series is highlighted.
+
+#### Example - set the chart highlight inactive opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+          type: "donut",
+          data: [1, 2],
+          highlight: {
+            inactiveOpacity: 0.2
+          }
+      }]
+    });
+    </script>
+
+
 ### series.highlight.line `Object`
 
 The line of the highlighted chart series. The color is computed automatically from the base point color.

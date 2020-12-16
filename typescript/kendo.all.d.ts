@@ -2135,7 +2135,74 @@ declare namespace kendo.ui {
         item?: JQuery;
     }
 
+    class BottomNavigation extends kendo.ui.Widget {
 
+        static fn: BottomNavigation;
+
+        options: BottomNavigationOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): BottomNavigation;
+
+        constructor(element: Element, options?: BottomNavigationOptions);
+
+
+        add(item: any, beforeElement?: HTMLElement): void;
+        add(item: any, beforeElement?: JQuery): void;
+        enable(element: HTMLElement, state?: boolean): void;
+        enable(element: JQuery, state?: boolean): void;
+        item(index: number): JQuery;
+        item(index: string): JQuery;
+        itemById(id: string): JQuery;
+        items(): JQuery;
+        remove(element: HTMLElement): void;
+        remove(element: JQuery): void;
+        select(element: HTMLElement, state?: boolean): JQuery;
+        select(element: JQuery, state?: boolean): JQuery;
+        showText(show: boolean): void;
+
+    }
+
+    interface BottomNavigationItem {
+        url?: string;
+        data?: any;
+        icon?: string;
+        text?: string;
+        encoded?: boolean;
+        iconClass?: string;
+        cssClass?: string;
+        attributes?: any;
+        enabled?: boolean;
+        selected?: boolean;
+        template?: string|Function;
+    }
+
+    interface BottomNavigationOptions {
+        name?: string;
+        border?: boolean;
+        shadow?: boolean;
+        fill?: string;
+        itemFlow?: string;
+        themeColor?: string;
+        items?: BottomNavigationItem[];
+        template?: string|Function;
+        positionMode?: string;
+        select?(e: BottomNavigationSelectEvent): void;
+    }
+    interface BottomNavigationEvent {
+        sender: BottomNavigation;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface BottomNavigationSelectEvent extends BottomNavigationEvent {
+        originalEvent?: any;
+        data?: any;
+        item?: JQuery;
+    }
     class Breadcrumb extends kendo.ui.Widget {
 
         static fn: Breadcrumb;
@@ -13357,6 +13424,7 @@ declare namespace kendo.dataviz.ui {
     interface ChartSeriesItemHighlight {
         border?: ChartSeriesItemHighlightBorder;
         color?: string;
+        inactiveOpacity?: number;
         line?: ChartSeriesItemHighlightLine;
         opacity?: number;
         toggle?: Function;
@@ -23583,6 +23651,10 @@ interface JQuery {
     kendoBarcode(): JQuery;
     kendoBarcode(options: kendo.dataviz.ui.BarcodeOptions): JQuery;
     data(key: "kendoBarcode"): kendo.dataviz.ui.Barcode;
+
+    kendoBottomNavigation(): JQuery;
+    kendoBottomNavigation(options: kendo.ui.BottomNavigationOptions): JQuery;
+    data(key: "kendoBottomNavigation"): kendo.ui.BottomNavigation;
 
     kendoButton(): JQuery;
     kendoButton(options: kendo.ui.ButtonOptions): JQuery;
