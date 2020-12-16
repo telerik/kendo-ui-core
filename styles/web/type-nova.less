@@ -130,6 +130,11 @@
 @card-text: @component-text;
 @card-border: @component-border;
 
+@card-focus-bg: null;
+@card-focus-text: null;
+@card-focus-border: null;
+@card-focus-shadow: 0 3px 4px 0 rgba(black, .06);
+
 @card-header-bg: @header-background-color;
 @card-header-text: contrast(@card-header-bg);
 @card-header-border: @card-border;
@@ -162,6 +167,11 @@
 @card-info-bg: mix( white, @card-info, 70%);
 @card-info-text: mix(black, @card-info);
 @card-info-border: mix(white, @card-info);
+
+@card-focus-callout-box-shadow-n: 1px -1px 4px 0 rgba(black, .06);
+@card-focus-callout-box-shadow-e: 2px -1px 4px 0 rgba(black, .06);
+@card-focus-callout-box-shadow-s: 2px -2px 4px 0 rgba(black, .06);
+@card-focus-callout-box-shadow-w: 2px -1px 4px 0 rgba(black, .06);
 
 
 //TileLayout
@@ -479,6 +489,8 @@
 
 @timeline-track-bg: @button-background-color;
 @timeline-track-border-color: @button-border-color;
+
+@timeline-track-item-focus-shadow: 0 3px 4px 0 rgba(@primary, .4);
 
 @timeline-flag-background: @accent;
 @timeline-flag-text: contrast(@accent);
@@ -1566,10 +1578,6 @@ input.k-textbox:active {
     background-color: @background;
 }
 
-.k-grid-toolbar .k-button:hover {
-    border-color: @hover-background;
-}
-
 .k-grid .k-button-icontext {
     background-color: transparent;
 }
@@ -1584,11 +1592,6 @@ input.k-textbox:active {
     color: @inversed-text-color;
     background-color: @selected-background;
     border-color: @selected-background;
-}
-
-.k-header.k-grid-toolbar {
-    background-color: @widget-background-color;
-    border-color: @widget-border-color;
 }
 
 .k-grid .k-grouping-header {
@@ -1666,12 +1669,6 @@ input.k-textbox:active {
 
 .k-grid .k-state-selected:hover .k-group-cell {
     background-color: @secondary-widget-background-color;
-}
-
-.k-grid .k-header .k-grid-search {
-    background: none;
-    background-color: @input-bg;
-    color: @input-text;
 }
 
 .k-marquee-color {

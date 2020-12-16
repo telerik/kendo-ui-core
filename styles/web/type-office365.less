@@ -223,6 +223,11 @@
 @card-text: @component-text;
 @card-border: @component-border;
 
+@card-focus-bg: null;
+@card-focus-text: null;
+@card-focus-border: null;
+@card-focus-shadow: 0 3px 4px 0 rgba(black, .06);
+
 @card-header-bg: @header-background-color;
 @card-header-text: @header-text-color;
 @card-header-border: @card-border;
@@ -255,6 +260,11 @@
 @card-info-bg: mix( white, @card-info, 70%);
 @card-info-text: mix(black, @card-info);
 @card-info-border: mix(white, @card-info);
+
+@card-focus-callout-box-shadow-n: 1px -1px 4px 0 rgba(black, .06);
+@card-focus-callout-box-shadow-e: 2px -1px 4px 0 rgba(black, .06);
+@card-focus-callout-box-shadow-s: 2px -2px 4px 0 rgba(black, .06);
+@card-focus-callout-box-shadow-w: 2px -1px 4px 0 rgba(black, .06);
 
 
 //TileLayout
@@ -562,6 +572,8 @@
 
 @timeline-track-bg: @button-background-color;
 @timeline-track-border-color: @button-border-color;
+
+@timeline-track-item-focus-shadow: 0 3px 4px 0 rgba(@primary, .4);
 
 @timeline-flag-background: @base;
 @timeline-flag-text: contrast(@base);
@@ -2423,11 +2435,6 @@ div.k-splitbar.k-state-focused .k-icon,
 .k-grouping-header .k-link:hover > .k-icon.k-i-arrow-60-down,
 .k-grouping-header .k-i-arrow-60-down,
 .k-grouping-header .k-link:hover > .k-icon.k-i-arrow-60-down,
-.k-grid-toolbar .k-i-file-pdf,
-.k-grid-toolbar .k-button:hover > .k-i-file-pdf,
-.k-grid-toolbar .k-i-file-excel,
-.k-grid-toolbar .k-button:hover > .k-i-file-excel,
-.k-grid-toolbar .k-icon,
 .k-scheduler-content .k-icon,
 .k-gantt-toolbar .k-icon,
 .k-field-actions .k-icon,
@@ -2584,19 +2591,12 @@ input.k-textbox:focus,
 
 .k-grid td,
 .k-grid .k-grouping-header,
-.k-header.k-grid-toolbar,
 .k-grid-header-wrap {
     border-color: transparent;
 }
 
 .k-grid tr th {
     border-left-color: transparent;
-}
-
-.k-grid .k-header .k-grid-search {
-    background: none;
-    background-color: @input-bg;
-    color: @input-text;
 }
 
 .k-pivot .k-grid-header th.k-header,

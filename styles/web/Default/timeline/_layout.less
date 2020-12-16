@@ -59,7 +59,7 @@
         padding: 0;
         border-radius: 50%;
         position: absolute;
-        bottom: calc(@timeline-track-size + 2 * @timeline-track-border-width);
+        bottom: calc(@timeline-track-size + @timeline-track-wrap-padding-bottom + 2 * @timeline-track-border-width);
         z-index: 3;
         display: flex;
         align-items: center;
@@ -341,7 +341,7 @@
 
         &::after {
             top: auto;
-            bottom: calc(@timeline-track-arrow-height / 2);
+            bottom: @timeline-track-bottom-calc;
             left: @timeline-track-start-calc;
             right: @timeline-track-end-calc;
             transform: translateY(-50%);
@@ -377,7 +377,9 @@
     }
 
     .k-timeline-scrollable-wrap {
+        padding-bottom: @timeline-track-wrap-padding-bottom;
         display: flex;
+        outline: 0;
     }
 }
 

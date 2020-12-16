@@ -207,6 +207,11 @@
 @card-text: @component-text;
 @card-border: @component-border;
 
+@card-focus-bg: null;
+@card-focus-text: null;
+@card-focus-border: null;
+@card-focus-shadow: 0 3px 4px 0 contrast(@background);
+
 @card-header-bg: @header-background-color;
 @card-header-text: @header-text-color;
 @card-header-border: @card-border;
@@ -239,6 +244,11 @@
 @card-info-bg: mix( white, @card-info, 70%);
 @card-info-text: mix(black, @card-info);
 @card-info-border: mix(white, @card-info);
+
+@card-focus-callout-box-shadow-n: 1px -1px 4px 0 contrast(@background);
+@card-focus-callout-box-shadow-e: 2px -1px 4px 0 contrast(@background);
+@card-focus-callout-box-shadow-s: 2px -2px 4px 0 contrast(@background);
+@card-focus-callout-box-shadow-w: 2px -1px 4px 0 contrast(@background);
 
 
 //TileLayout
@@ -548,6 +558,8 @@
 
 @timeline-track-bg: @button-background-color;
 @timeline-track-border-color: @button-border-color;
+
+@timeline-track-item-focus-shadow: 0 3px 4px 0 rgba(white, .4);
 
 @timeline-flag-background: @accent;
 @timeline-flag-text: contrast(@accent);
@@ -2399,12 +2411,6 @@ div.k-filebrowser-dropzone em
 .k-grid td.k-state-selected:hover,
 .k-grid tr.k-state-selected:hover td {
     background-color: @grid-selected-hover-bg;
-}
-
-.k-grid .k-header .k-grid-search {
-    background: none;
-    background-color: @input-bg;
-    color: @input-text;
 }
 
 .k-header,

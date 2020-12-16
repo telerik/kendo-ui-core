@@ -1,7 +1,6 @@
 // Card
 .k-card {
     .border-radius( @card-border-radius );
-    // .box-shadow( @card-box-shadow );
     border-width: @card-border-width;
     border-style: solid;
     outline: 0;
@@ -77,6 +76,7 @@
     padding: @card-header-padding-y @card-header-padding-x;
     border-width: 0 0 @card-header-border-width;
     border-style: solid;
+    outline: 0;
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -107,6 +107,7 @@
     padding: @card-footer-padding-y @card-footer-padding-x;
     border-width: @card-footer-border-width 0 0;
     border-style: solid;
+    outline: 0;
     display: block;
 }
 
@@ -116,6 +117,7 @@
     // @extend %top-rounded-child;
     // @extend %bottom-rounded-child;
     padding: @card-body-padding-y @card-body-padding-x;
+    outline: 0;
     flex: 1 1 auto;
 
     .k-card > &:first-child {

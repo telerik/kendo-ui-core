@@ -234,6 +234,11 @@
 @card-text: @component-text;
 @card-border: @component-border;
 
+@card-focus-bg: null;
+@card-focus-text: null;
+@card-focus-border: null;
+@card-focus-shadow: 0 5px 5px -3px rgba(contrast(@background), 0.2), 0 8px 10px 1px rgba(contrast(@background), 0.14), 0 3px 14px 2px rgba(contrast(@background), 0.12);
+
 @card-header-bg: @header-background-color;
 @card-header-text: @header-text-color;
 @card-header-border: @card-border;
@@ -266,6 +271,11 @@
 @card-info-bg: mix( white, @card-info, 70%);
 @card-info-text: mix(black, @card-info);
 @card-info-border: mix(white, @card-info);
+
+@card-focus-callout-box-shadow-n: null;
+@card-focus-callout-box-shadow-e: null;
+@card-focus-callout-box-shadow-s: null;
+@card-focus-callout-box-shadow-w: null;
 
 
 //TileLayout
@@ -574,6 +584,8 @@
 
 @timeline-track-bg: @button-background-color;
 @timeline-track-border-color: @button-border-color;
+
+@timeline-track-item-focus-shadow: 0 3px 4px 0 contrast(@background, rgba(black, .06), rgba(white, .6), 0.5);
 
 @timeline-flag-background: @accent;
 @timeline-flag-text: contrast(@accent);
@@ -2459,11 +2471,6 @@ div.k-splitbar.k-state-focused .k-icon,
 .k-grouping-header .k-link:hover > .k-icon.k-i-arrow-60-down,
 .k-grouping-header .k-i-arrow-60-down,
 .k-grouping-header .k-link:hover > .k-icon.k-i-arrow-60-down,
-.k-grid-toolbar .k-i-file-pdf,
-.k-grid-toolbar .k-button:hover > .k-i-file-pdf,
-.k-grid-toolbar .k-i-file-excel,
-.k-grid-toolbar .k-button:hover > .k-i-file-excel,
-.k-grid-toolbar .k-icon,
 .k-scheduler-content .k-icon,
 .k-gantt-toolbar .k-icon,
 .k-field-actions .k-icon,
@@ -2813,12 +2820,6 @@ td.k-group-cell,
     color: @primary-disabled-text-color;
 }
 
-.k-grid .k-header .k-grid-search {
-    background: none;
-    background-color: @input-bg;
-    color: @input-text;
-}
-
 .k-gantt {
     .k-task-draghandle {
         border-color: @selected-background;
@@ -2857,10 +2858,6 @@ td.k-group-cell,
 .k-panel > li.k-item,
 .k-panelbar .k-state-selected {
     background-color: @secondary-background-color;
-}
-
-.k-panelbar .k-grid-toolbar {
-    background-color: @header-background-color;
 }
 
 .k-panelbar > li > .k-state-hover {

@@ -133,7 +133,7 @@
 @grid-cell-padding-x: @grid-padding-x;
 @grid-cell-padding-y: @grid-padding-y;
 
-@grid-search-width: 15.7em;
+@grid-search-width: @input-default-width;
 
 // Calendar
 @calendar-padding-x: 0;
@@ -418,8 +418,10 @@
 @timeline-track-arrow-height: 30px;
 
 @timeline-track-size: 6px;
+@timeline-track-wrap-padding-bottom: 3px;
 @timeline-track-border-width: 1px;
 @timeline-track-margin-bottom: 16px;
+@timeline-track-bottom-calc: calc((@timeline-track-arrow-width / 2) + @timeline-track-wrap-padding-bottom);
 @timeline-track-start-calc: calc(@timeline-track-arrow-width - 2 * @timeline-track-border-width);
 @timeline-track-end-calc: calc(@timeline-track-arrow-width - 2 * @timeline-track-border-width);
 
@@ -793,7 +795,7 @@
 @expander-header-border-width: 2px;
 
 @expander-content-padding-x: 20px;
-@expander-content-padding-y: 32px;
+@expander-content-padding-y: 20px;
 
 
 // FloatingActionButton
@@ -959,8 +961,7 @@
     width: 6px;
 }
 
-.k-grouping-header,
-.k-grid-toolbar {
+.k-grouping-header {
     padding: 0.429em;
 }
 
