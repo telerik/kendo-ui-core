@@ -2784,6 +2784,13 @@ If set to `true` the column menu would allow the user to filter the grid. By def
     });
     </script>
 
+### columnMenu.componentType `String`*(default: "classic")*
+
+ Specifies the component type of the column menu.
+
+* `"classic"` - Uses the standard rendering of the column menu.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
 ### columnMenu.sortable `Boolean` *(default: true)*
 
 If set to `true` the column menu would allow the user to sort the grid by the column field. By default the column menu allows the user to sort if sorting is enabled via the [sortable](sortable) option.

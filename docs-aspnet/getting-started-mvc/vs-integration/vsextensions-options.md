@@ -42,7 +42,7 @@ Set the project upgrade notifications for detected local distributions by using 
 
 ## Telerik UI for ASP.NET MVC Settings
 
-All settings under the Kendo UI category affect only the Telerik UI for ASP.NET MVC VS Extensions.
+The Telerik UI for ASP.NET MVC VS Extensions settings can be found in the standard options dialog in Visual Studio under the Telerik node.
 
 ![The Options dialog](../../getting-started-mvc/vs-integration/images/options_kendo.png)
 

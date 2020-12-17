@@ -248,6 +248,27 @@ For a runnable example, refer to the demo on [implementing sticky columns in the
 ```
 > When it comes to the Grid Sticky Columns there are some known limitation. For more information please refer to [this section of the documentation.](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/columns/sticky#known-limitations)
 
+## Column Menu
+
+The Grid provides a built-in option for triggering column operations through a menu.
+
+To enable the column menu, use the `column-menu` tag helper. As a result, the column headers of the Grid render a column menu which allows the user to sort, filter, or change the visibility of the column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/aspnet-core/grid/tag-helper).
+
+The columns are not sorted by default, they have the same order as the columns in the grid. To sort the columns, nest the `column-menu-columns` child tag helper with the `sort` attribute and pass `asc` or `desc` as a value. 
+
+To create groups, use the nested `column-menu-columns-groups` tag helper. The `columns` attribute expects a collection of the model properties. The menu will automatically use the title from the grid columns if such is defined.
+
+```tagHelper
+    <column-menu>
+        <column-menu-columns sort="asc">
+            <column-menu-columns-groups>
+                <column-menu-columns-group title="Company Info" columns='new string[] { "CompanyName", "Country" }' />
+                <column-menu-columns-group title="Contact Info" columns='new string[] { "ContactName", "ContactTitle" }' />
+            </column-menu-columns-groups>
+        </column-menu-columns>
+    </column-menu>
+```
+
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)

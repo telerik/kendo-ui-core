@@ -5434,6 +5434,7 @@ declare namespace kendo.ui {
         filterable?: boolean;
         sortable?: boolean;
         messages?: GridColumnMenuMessages;
+        componentType?: string;
     }
 
     interface GridColumnCommandItemIconClass {

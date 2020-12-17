@@ -3,7 +3,7 @@ title: ForeignKey Column
 page_title: ForeignKey Column
 description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to set up the ForeignKey column."
 slug: foreignkeycolumn_aspnetcore_grid
-position: 9
+position: 10
 ---
 
 # ForeignKey Column

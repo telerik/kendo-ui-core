@@ -73,6 +73,12 @@ There are two project wizards available:
 
     ![New project Template](../../installation/vs-integration/images/new-project-template-core-vs2017.png)
 
+## Telerik UI for ASP.NET Core Settings
+
+The Telerik UI for ASP.NET Core VS Extensions settings can be found in the standard options dialog in Visual Studio under the Telerik node.
+
+![The Options dialog](../../installation/vs-integration/images/asp_core_settings.png)
+
 ## See Also
 
 * [Creating New Projects with Visual Studio]({% slug newprojectwizards_visualstudio_aspnetcore %})

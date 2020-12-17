@@ -3,7 +3,7 @@ title: Reordering
 page_title: Reordering of Columns
 description: "With the Telerik UI Grid HtmlHelper component for {{ site.framework }}, you can enable end-users to effortlessly reorder columns."
 slug: reordercols_aspnetcore_grid
-position: 6
+position: 8
 ---
 
 # Reordering of Columns
