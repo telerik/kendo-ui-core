@@ -1,3 +1,5 @@
+@import "Nova/_variables.less";
+
 @line-height: (20/14);
 @line-height-em: ((20/14)*1em);
 @input-height: 2.214285714em;
@@ -873,6 +875,20 @@
 @bottom-nav-shadow: 0px 0px 5px rgba(0, 0, 0, .12);
 
 
+// Grid column menu
+@grid-column-menu-popup-padding-x: 0;
+@grid-column-menu-popup-padding-y: @padding-y;
+
+@grid-column-menu-item-padding-x: @padding-x-lg;
+@grid-column-menu-item-padding-y: @padding-y-sm;
+
+@grid-column-menu-list-item-padding-x: @padding-x-lg;
+@grid-column-menu-list-item-padding-y: @padding-y-sm;
+
+@grid-column-menu-filter-container-padding-x: @padding-x-lg;
+@grid-column-menu-filter-container-padding-y: @padding-y-sm;
+
+
 @import "common/all.less";
 
 .k-button {
@@ -1000,19 +1016,6 @@
 .k-filter-row .k-dropdown-operator {
     width: 2.714em;
     right: 2.857em;
-}
-
-.k-filter-menu>div>div:last-child {
-    margin: 1em -0.5em -.5em;
-    border-top-width: 1px;
-    border-top-style: solid;
-}
-
-.k-filter-menu .k-action-buttons .k-button {
-    margin: 0;
-    width: 50%;
-    padding-top: 15px;
-    padding-bottom: 15px;
 }
 
 .k-edit-form-container .k-button {

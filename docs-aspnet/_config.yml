@@ -354,6 +354,12 @@ navigation:
         title: "Breadcrumb"
      "tag-helpers/navigation/breadcrumb":
         title: "Breadcrumb"
+     "html-helpers/navigation/floatingactionbutton":
+        title: "FloatingActionButton"
+        isNew: true
+     "tag-helpers/navigation/floatingactionbutton":
+        title: "FloatingActionButton"
+        isNew: true
      "html-helpers/navigation/stepper":
         title: "Stepper"
      "tag-helpers/navigation/stepper":
@@ -938,11 +944,16 @@ defaults:
         path: "html-helpers/navigation/appbar"
     values:
         title_prefix: "ASP.NET Core AppBar Component"
-
+-
     scope:
         path: "html-helpers/navigation/breadcrumb"
     values:
         title_prefix: "ASP.NET Core Breadcrumb Component"
+-
+    scope:
+        path: "html-helpers/navigation/floatingactionbutton"
+    values:
+        title_prefix: "ASP.NET Core FloatingActionButton Component"
 -
     scope:
         path: "html-helpers/navigation/stepper"
@@ -1328,11 +1339,16 @@ defaults:
         path: "tag-helpers/navigation/appbar"
     values:
         title_prefix: "ASP.NET Core AppBar Component"
-
+-
     scope:
         path: "tag-helpers/navigation/breadcrumb"
     values:
         title_prefix: "ASP.NET Core Breadcrumb Component"
+-
+    scope:
+        path: "tag-helpers/navigation/floatingactionbutton"
+    values:
+        title_prefix: "ASP.NET Core FloatingActionButton Component"
 -
     scope:
         path: "tag-helpers/navigation/stepper"

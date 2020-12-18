@@ -62,11 +62,15 @@ html-helpers/editors/combobox/binding/razor-page.md,
 html-helpers/editors/dropdowntree/binding/razor-page.md,
 html-helpers/editors/multicolumncombobox/binding/razor-page.md,
 html-helpers/editors/multiselect/binding/razor-page.md,
+html-helpers/editors/slider/razor-page.md,
+html-helpers/editors/upload/razor-page.md,
 html-helpers/layout/form/razor-page.md,
 html-helpers/layout/dialog/razor-page.md,
 html-helpers/layout/notification/razor-page.md,
+html-helpers/layout/splitter/razor-page.md,
 html-helpers/layout/window/razor-page.md,
 html-helpers/navigation/button/razor-page.md,
+html-helpers/navigation/buttongroup/razor-page.md,
 html-helpers/navigation/menu/binding/razor-page.md,
 html-helpers/navigation/menu/contextmenu/razor-page.md,
 html-helpers/navigation/panelbar/binding/razor-page.md,
@@ -435,6 +439,11 @@ defaults:
     values:
         title_prefix: "ASP.NET MVC Breadcrumb Component"
         title: "Breadcrumb"
+-
+    scope:
+        path: "html-helpers/navigation/floatingactionbutton"
+    values:
+        title_prefix: "ASP.NET MVC FloatingActionButton Component"
 -
     scope:
         path: "html-helpers/navigation/stepper"

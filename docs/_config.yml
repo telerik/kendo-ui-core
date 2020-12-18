@@ -575,6 +575,9 @@ navigation:
         title: "Filter"
     "*form":
         title: "Form"
+    "controls/navigation/floatingactionbutton":
+        title: "FloatingActionButton"
+        isnew: true
     "*gantt":
         title: "Gantt"
     "*imageeditor":
@@ -1778,6 +1781,12 @@ defaults:
 
 -
     scope:
+        path: "controls/navigation/floatingactionbutton"
+    values:
+        component: "floatingactionbutton"
+        
+-
+    scope:
         path: "controls/layout/notification"
     values:
         component: "notification"
@@ -2086,6 +2095,7 @@ intro_columns:
       "Button": "overview_kendoui_button_widget"
       "ButtonGroup": "overview_kendoui_buttongroup_widget"
       "Drawer": "overview_kendoui_drawer_widget"
+      "FloatingActionButton": "overview_kendoui_floatingactionbutton_widget"
       "Menu": "overview_kendoui_menu_widget"
       "PanelBar": "overview_kendoui_panelbar_widget"
       "Stepper": "overview_stepper_widget"

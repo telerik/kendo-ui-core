@@ -10,7 +10,7 @@ position: 8
 
 This article describes how to configure the Telerik UI Window HtmlHelper for {{ site.framework }} in a RazorPage scenario.
 
-The example below demonstrates how to load content in Window from another Page and pass antiforgery token. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+The example below demonstrates how to load content in Window from the server. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
 ```tab-RazorPage(csthml)  	
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -21,7 +21,7 @@ The example below demonstrates how to load content in Window from another Page a
 		.Title("Window title")
 		.Content(@<text>
 			<p>
-            //The content of the Window
+             @Model.Text
 			</p>        
 		</text>)
 		.Actions(actions => actions
@@ -34,10 +34,11 @@ The example below demonstrates how to load content in Window from another Page a
 ```
 ```tab-PageModel(cshtml.cs)      
 
+    public string Text = String.Empty;
     public void OnGet()
-        {
-			....
-        }
+    {
+        Text = "Lorem ipsum dolor sit amet...";
+    }
 ```
 
 ## See Also

@@ -30,6 +30,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.drawer.js | |
+| [FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.fx.js | |
+| | kendo.floatingactionbutton.js | |
 | [Menu](https://demos.telerik.com/kendo-ui/menu/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

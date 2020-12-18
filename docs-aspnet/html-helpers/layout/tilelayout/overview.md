@@ -3,6 +3,7 @@ title: Overview
 page_title: Telerik UI TileLayout HtmlHelper for {{ site.framework }} Overview 
 description: "Get started with the {{ site.framework }} TileLayout and learn about its features and how to initialize the component."
 slug: htmlhelpers_aspnet_tilelayout_overview
+position: 1
 ---
 
 # TileLayout Overview

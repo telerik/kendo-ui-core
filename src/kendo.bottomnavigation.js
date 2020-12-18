@@ -244,6 +244,10 @@ var __meta__ = { // jshint ignore:line
             if (key === keys.ENTER || key === keys.SPACEBAR) {
                 if(that._isItem(target)) {
                     that._triggerSelect(target, ev);
+
+                    if (key === keys.SPACEBAR) {
+                        ev.preventDefault();
+                    }
                 }
             }
         },

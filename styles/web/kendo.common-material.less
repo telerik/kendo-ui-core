@@ -1,3 +1,5 @@
+@import "Material/_variables.less";
+
 @input-height: 2.07142857em;
 @input-default-width: 12.4em;
 @input-border-width: 1px;
@@ -865,6 +867,20 @@
 @bottom-nav-shadow: 0px 0px 5px rgba(0, 0, 0, .12);
 
 
+// Grid column menu
+@grid-column-menu-popup-padding-x: 0;
+@grid-column-menu-popup-padding-y: @padding-y-lg;
+
+@grid-column-menu-item-padding-x: @padding-x;
+@grid-column-menu-item-padding-y: @padding-y-lg;
+
+@grid-column-menu-list-item-padding-x: @padding-x;
+@grid-column-menu-list-item-padding-y: 0;
+
+@grid-column-menu-filter-container-padding-x: @padding-x;
+@grid-column-menu-filter-container-padding-y: @padding-y;
+
+
 @import "common/all.less";
 
 @spreadsheet-first-tool-offset: 0;
@@ -991,28 +1007,7 @@
 }
 
 .k-filter-menu {
-    padding: .5em .5em 0;
-}
-
-.k-filter-menu .k-action-buttons .k-button {
-    margin: 0;
-    width: 50%;
-    border-radius: 0;
-}
-
-.k-filter-menu .k-primary {
-    float: right;
-}
-
-.k-filter-menu > div > div:last-child {
-    margin: .5em -.5em 0;
-    border-top-width: 1px;
-    border-top-style: solid;
-}
-
-.k-filter-menu .k-primary {
-   border-left-width: 1px;
-   border-left-style: solid;
+    padding: .5em;
 }
 
 .k-grouping-header .k-group-indicator
