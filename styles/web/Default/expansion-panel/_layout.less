@@ -15,7 +15,7 @@
 
     // Header
     .k-expander-header {
-        padding: 0 @expander-header-padding-x @expander-header-padding-y;
+        padding: @expander-header-padding-y @expander-header-padding-x;
         border-width: 0 0 @expander-header-border-width;
         border-style: solid;
         display: flex;
@@ -44,11 +44,6 @@
     .k-expander-content {
         padding: @expander-content-padding-y @expander-content-padding-x;
         box-sizing: border-box;
-    }
-
-    // Multiple expansion panels immediately one after another
-    + .k-expander .k-expander-header {
-        padding-top: @expander-padding-y;
     }
 
     &[dir = "rtl"],

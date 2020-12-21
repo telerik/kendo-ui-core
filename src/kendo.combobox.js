@@ -990,7 +990,8 @@ var __meta__ = { // jshint ignore:line
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                textField = that.options.dataTextField || "text";
 
             that._last = key;
 
@@ -1033,7 +1034,9 @@ var __meta__ = { // jshint ignore:line
                     });
                 } else {
                     if(that._syncValueAndText() || that._isSelect){
-                        that._accessor(that.input.val());
+                        if(!that.dataItem() || that.dataItem()[textField] !== that.input.val()) {
+                            that._accessor(that.input.val());
+                        }
                     }
 
                     if (that.options.highlightFirst) {

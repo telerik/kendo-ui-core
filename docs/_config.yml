@@ -527,18 +527,16 @@ navigation:
         title: "Managing Inputs"
     "*badge":
         title: "Badge"
-    "*button":
+    "*/button":
         title: "Button"
     "*buttongroup":
         title: "ButtonGroup"
-    "*calendar":
-        title: "Calendar"
     "*checkboxgroup":
         isNew: true
         title: "CheckBoxGroup"
     "*/radiobutton":
         title: "RadioButton"
-    "controls/scheduling/calendar":
+    "*/calendar":
         title: "Calendar"
     "controls/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
@@ -575,8 +573,11 @@ navigation:
         title: "Filter"
     "*form":
         title: "Form"
-    "controls/navigation/floatingactionbutton":
+    "*/floatingactionbutton":
         title: "FloatingActionButton"
+        isnew: true
+    "*/expansionpanel":
+        title: "ExpansionPanel"
         isnew: true
     "*gantt":
         title: "Gantt"
@@ -1785,6 +1786,12 @@ defaults:
     values:
         component: "floatingactionbutton"
         
+-
+    scope:
+        path: "controls/layout/expansionpanel"
+    values:
+        component: "expansionpanel"
+
 -
     scope:
         path: "controls/layout/notification"

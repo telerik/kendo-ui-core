@@ -7218,7 +7218,7 @@ The widget instance which fired the event.
 
 ### navigate
 
-Fired when the user changes the selected date, or view of the scheduler
+Fired when the user changes the selected date, selected Scheduler view or switches between show full day and show business hours. 
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -7233,6 +7233,7 @@ Name of the action. Possible values are:
 * previous - navigate to previous time period
 * today - select today's date
 * changeDate - a date is selected via the Calendar
+* changeWorkDay - switch between full day or business hours shown
 
 ##### e.date `Date`
 
@@ -7244,11 +7245,11 @@ Name of the view
 
 ##### e.preventDefault `Function`
 
-If invoked prevents the action.
+If invoked, prevents the action.
 
 ##### e.sender `kendo.ui.Scheduler`
 
-The widget instance which fired the event.
+The widget instance, which fired the event.
 
 #### Example - subscribe to the "navigate" event during initialization
     <div id="scheduler"></div>

@@ -198,11 +198,13 @@ var __meta__ = { // jshint ignore:line
             result = splice.apply(this, [index, howMany].concat(items));
 
             if (result.length) {
-                this.trigger(CHANGE, {
-                    action: "remove",
-                    index: index,
-                    items: result
-                });
+                if (!this.omitChangeEvent) {
+                    this.trigger(CHANGE, {
+                        action: "remove",
+                        index: index,
+                        items: result
+                    });
+                }
 
                 for (i = 0, len = result.length; i < len; i++) {
                     if (result[i] && result[i].children) {
@@ -212,11 +214,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (item) {
-                this.trigger(CHANGE, {
-                    action: "add",
-                    index: index,
-                    items: items
-                });
+                if (!this.omitChangeEvent) {
+                    this.trigger(CHANGE, {
+                        action: "add",
+                        index: index,
+                        items: items
+                    });
+                }
             }
             return result;
         },
@@ -4162,7 +4166,6 @@ var __meta__ = { // jshint ignore:line
             var group;
             var current;
             var itemsLength;
-            var hasNotRequestedItems;
             var groupCount;
             var itemsToSkip;
 
@@ -4179,26 +4182,16 @@ var __meta__ = { // jshint ignore:line
 
                 if (that._groupsState[group.uid]) {
                     if (that._isServerGroupPaged()) {
-                        if (group.hasSubgroups && !group.subgroupCount) {
-                            that.getGroupSubGroupCount(group, options, parents, callback);
+                       if (that._fetchGroupItems(group, options, parents, callback)) {
                             that._fetchingGroupItems = true;
                             return;
-                        }
-                        groupCount = (group.subgroupCount || group.itemCount) + 1;
-                        itemsToSkip = options.skip - options.skipped;
-                        hasNotRequestedItems = !group.items || (group.items.length - itemsToSkip) < (options.take - options.taken);
-
-                        if (!that._hasExpandedSubGroups(group) && itemsToSkip > groupCount) {
-                            options.skipped += groupCount;
-                            continue;
-                        }
-
-                        if ((group.hasSubgroups && (!group.items || hasNotRequestedItems && group.items.length < group.subgroupCount)) ||
-                            (!group.hasSubgroups && (!group.items || hasNotRequestedItems && group.items.length < group.itemCount))) {
-                            that.getGroupItems(group, options, parents, callback);
-                            that._fetchingGroupItems = true;
-                            return;
-                        }
+                       }
+                       groupCount = (group.subgroupCount || group.itemCount) + 1;
+                       itemsToSkip = options.skip - options.skipped;
+                       if (!that._hasExpandedSubGroups(group) && itemsToSkip > groupCount) {
+                           options.skipped += groupCount;
+                           continue;
+                       }
                     }
 
                     if (options.includeParents && options.skipped < options.skip) {
@@ -4259,9 +4252,47 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        getGroupItems: function (group, options, parents, callback) {
+        _fetchGroupItems: function(group, options, parents, callback) {
             var that = this;
-            var skip;
+            var groupItemsSkip;
+            var firstItem;
+            var lastItem;
+            var groupItemCount = group.hasSubgroups ? group.subgroupCount : group.itemCount;
+            var take = options.take;
+            var skipped = options.skipped;
+            var pageSize = that.take();
+
+            if (options.includeParents) {
+                take -= 1;
+                skipped += 1;
+            }
+
+            if (!group.items || (group.items && !group.items.length)) {
+                that.getGroupItems(group, options, parents, callback, 0);
+                return true;
+            } else {
+                groupItemsSkip = Math.max(options.skip - skipped, 0);
+                firstItem = group.items[groupItemsSkip];
+                lastItem = group.items[Math.min(groupItemsSkip + take - 1, groupItemCount - 1)];
+
+                if (groupItemsSkip >= groupItemCount) {
+                    return false;
+                }
+
+                if (firstItem.notFetched) {
+                    that.getGroupItems(group, options, parents, callback, math.max(math.floor(groupItemsSkip / pageSize), 0) * pageSize);
+                    return true;
+                }
+
+                if (lastItem.notFetched) {
+                    that.getGroupItems(group, options, parents, callback, math.max(math.floor((groupItemsSkip + pageSize) / pageSize), 0) * pageSize);
+                    return true;
+                }
+            }
+        },
+
+        getGroupItems: function(group, options, parents, callback, groupItemsSkip) {
+            var that = this;
             var take;
             var filter;
             var data;
@@ -4271,13 +4302,12 @@ var __meta__ = { // jshint ignore:line
                 group.items = [];
             }
 
-            skip = group.items.length;
             take = that.take();
             filter = this._composeItemsFilter(group, parents);
             data = {
-                page: math.floor((skip || 0) / (take || 1)) || 1,
+                page: math.floor((groupItemsSkip || 0) / (take || 1)) || 1,
                 pageSize: take,
-                skip: skip,
+                skip: groupItemsSkip,
                 take: take,
                 filter: filter,
                 aggregate: that._aggregate,
@@ -4298,7 +4328,7 @@ var __meta__ = { // jshint ignore:line
                         })) {
                         that.transport.read({
                             data: data,
-                            success: that._groupItemsSuccessHandler(group, options.skip, that.take(), callback),
+                            success: that._groupItemsSuccessHandler(group, options.skip, that.take(), callback, groupItemsSkip),
                             error: function () {
                                 var args = slice.call(arguments);
                                 that.error.apply(that, args);
@@ -4311,81 +4341,16 @@ var __meta__ = { // jshint ignore:line
             }, 100);
         },
 
-        getGroupSubGroupCount: function (group, options, parents, callback) {
+        _groupItemsSuccessHandler: function(group, skip, take, callback, groupItemsSkip) {
             var that = this;
-            var filter;
-            var groupIndex;
-            var data;
-
-            if (!group.items) {
-                group.items = [];
-            }
-
-            filter = this._composeItemsFilter(group, parents);
-            groupIndex = this._group.map(function (g) {
-                return g.field;
-            }).indexOf(group.field);
-            data = {
-                filter: filter,
-                group: [that._group[groupIndex + 1]],
-                groupPaging: true,
-                includeSubGroupCount: true
-            };
-
-            clearTimeout(that._timeout);
-            that._timeout = setTimeout(function () {
-                that._queueRequest(data, function () {
-                    if (!that.trigger(REQUESTSTART, {
-                            type: "read"
-                        })) {
-                        that.transport.read({
-                            data: data,
-                            success: that._subGroupCountSuccessHandler(group, options.skip, that.take(), callback),
-                            error: function () {
-                                var args = slice.call(arguments);
-                                that.error.apply(that, args);
-                            }
-                        });
-                    } else {
-                        that._dequeueRequest();
-                    }
-                });
-            }, 100);
-        },
-
-        _subGroupCountSuccessHandler: function (group, skip, take, callback) {
-            var that = this;
+            var timestamp = that._timeStamp();
             callback = isFunction(callback) ? callback : noop;
             var totalField = that.options.schema && that.options.schema.total ? that.options.schema.total : "Total";
 
             return function (data) {
-
-                that._dequeueRequest();
-
-                that.trigger(REQUESTEND, {
-                    response: data,
-                    type: "read"
-                });
-                that._fetchingGroupItems = false;
-
-                if (isFunction(totalField)) {
-                    group.subgroupCount = totalField(data);
-                } else {
-                    group.subgroupCount = data[totalField];
-                }
-
-                that.range(skip, take, callback, "expandGroup");
-            };
-        },
-
-        _groupItemsSuccessHandler: function (group, skip, take, callback) {
-            var that = this;
-            var timestamp = that._timeStamp();
-            callback = isFunction(callback) ? callback : noop;
-
-            return function (data) {
                 var temp;
                 var model = Model.define(that.options.schema.model);
+                var totalCount;
 
                 that._dequeueRequest();
 
@@ -4393,11 +4358,18 @@ var __meta__ = { // jshint ignore:line
                     response: data,
                     type: "read"
                 });
+
+                if (isFunction(totalField)) {
+                    totalCount = totalField(data);
+                } else {
+                    totalCount = data[totalField];
+                }
 
                 data = that.reader.parse(data);
 
                 if (group.hasSubgroups) {
                     temp = that.reader.groups(data);
+                    group.subgroupCount = totalCount;
                 } else {
                     temp = that.reader.data(data);
                     temp = temp.map(function (item) {
@@ -4406,24 +4378,34 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 group.items.omitChangeEvent = true;
-                for (var i = 0; i < temp.length; i++) {
-                    group.items.push(temp[i]);
+                for (var i = 0; i < totalCount; i++) {
+                    if (i >= groupItemsSkip && i < (groupItemsSkip + take) ) {
+                        group.items.splice(i, 1, temp[i - groupItemsSkip]);
+                    } else {
+                        if (!group.items[i]) {
+                            group.items.splice(i, 0, { notFetched: true });
+                        }
+                    }
                 }
                 group.items.omitChangeEvent = false;
 
                 that._updateRangePristineData(group);
                 that._fetchingGroupItems = false;
-                that._serverGroupsTotal += temp.length;
+
+                if (!group.countAdded) {
+                    that._serverGroupsTotal += totalCount;
+                    group.countAdded = true;
+                }
+
                 that.range(skip, take, callback, "expandGroup");
 
                 if (timestamp >= that._currentRequestTimeStamp || !that._skipRequestsInProgress) {
                     that.trigger(CHANGE, {});
                 }
             };
-
         },
 
-        findSubgroups: function (group) {
+        findSubgroups: function(group) {
             var indexOfCurrentGroup = this._group.map(function (g) {
                 return g.field;
             }).indexOf(group.field);
@@ -4431,7 +4413,7 @@ var __meta__ = { // jshint ignore:line
             return this._group.slice(indexOfCurrentGroup + 1, this._group.length);
         },
 
-        _composeItemsFilter: function (group, parents) {
+        _composeItemsFilter: function(group, parents) {
             var filter = this.filter() || {
                 logic: "and",
                 filters: []
@@ -4457,7 +4439,7 @@ var __meta__ = { // jshint ignore:line
             return filter;
         },
 
-        _updateRangePristineData: function (group) {
+        _updateRangePristineData: function(group) {
             var that = this;
             var ranges = that._ranges;
             var rangesLength = ranges.length;
@@ -4494,7 +4476,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _containsSubGroup: function (group, subgroup, indexes) {
+        _containsSubGroup: function(group, subgroup, indexes) {
             var that = this;
             var length = group.items.length;
             var currentSubGroup;
@@ -4514,7 +4496,7 @@ var __meta__ = { // jshint ignore:line
 
         },
 
-        _cloneGroup: function (group) {
+        _cloneGroup: function(group) {
             var that = this;
             group = typeof group.toJSON == "function" ? group.toJSON() : group;
 

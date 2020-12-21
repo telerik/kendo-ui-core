@@ -1763,5 +1763,94 @@
 
             assert.equal(dataSource.page(), 1);
         });
+
+        it("_findGroupedRange should call _fetchGroupItems when proccessing a group with enabled server operations", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            var result = [];
+            dataSource.read();
+            dataSource._groupsState[dataSource._ranges[0].data[0].uid] = true;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                _fetchGroupItems: function(){return true},
+                getGroupItems: $.noop
+            });
+
+            dataSource._findGroupedRange(dataSource._ranges[0].data, result, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 10
+            });
+
+            assert.equal(dataSourceStub.calls("_fetchGroupItems"), 1);
+        });
+
+        it("_fetchGroupItems should call getGroupItems when group items are not fetched", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            group.items = null;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                getGroupItems: $.noop
+            });
+            dataSource._fetchGroupItems(group, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 10
+            });
+
+            assert.equal(dataSourceStub.calls("getGroupItems"), 1);
+        });
+
+        it("_fetchGroupItems should call getGroupItems when a group item is not yet fetched", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            group.items[0].notFetched = true;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                getGroupItems: $.noop
+            });
+            dataSource._fetchGroupItems(group, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 3
+            });
+
+            assert.equal(dataSourceStub.calls("getGroupItems"), 1);
+        });
     });
 }());
