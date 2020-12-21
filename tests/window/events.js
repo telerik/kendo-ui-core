@@ -29,11 +29,11 @@
 
         it("clicking on window brings it in front of other windows and adds k-state-focused", function() {
             jasmine.clock().install();
-            var firstWindow = createWindow(),
+            var firstWindow = createWindow({ animation: { open: { duration: 50 } } }),
                 secondWindow = createWindow();
 
             firstWindow.element.trigger("mousedown");
-            jasmine.clock().tick();
+            jasmine.clock().tick(50);
             assert.equal(
                 +firstWindow.wrapper.css("zIndex"),
                 +secondWindow.wrapper.css("zIndex") + 2
@@ -44,12 +44,12 @@
 
         it("clicking on minimized window brings it in front of other windows and adds k-state-focused", function() {
             jasmine.clock().install();
-            var firstWindow = createWindow(),
+            var firstWindow = createWindow({ animation: { open: { duration: 50 } } }),
                 secondWindow = createWindow();
 
             firstWindow.minimize();
             firstWindow.wrapper.trigger("mousedown");
-            jasmine.clock().tick();
+            jasmine.clock().tick(50);
             assert.equal(
                 +firstWindow.wrapper.css("zIndex"),
                 +secondWindow.wrapper.css("zIndex") + 2
@@ -62,15 +62,17 @@
             jasmine.clock().install();
             var firstWindow = createWindow({
                     content: "/base/tests/window/blank.html",
-                    iframe: true
+                    iframe: true,
+                    animation: { open: { duration: 50 } }
                 }),
                 secondWindow = createWindow({
                     content: "/base/tests/window/blank.html",
-                    iframe: true
+                    iframe: true,
+                    animation: { open: { duration: 50 } }
                 });
 
             firstWindow.element.find(".k-overlay").trigger("mousedown");
-            jasmine.clock().tick();
+            jasmine.clock().tick(50);
             assert.isOk(firstWindow.wrapper.is(".k-state-focused"));
             jasmine.clock().uninstall();
         });

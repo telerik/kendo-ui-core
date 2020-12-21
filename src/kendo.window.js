@@ -1163,6 +1163,7 @@
                     wrapper = that.wrapper,
                     currentWindow = wrapper[0],
                     containmentContext = that.containment && !that._isPinned,
+                    openAnimation = this._animationOptions("open"),
                     zIndex = +wrapper.css(ZINDEX),
                     originalZIndex = zIndex,
                     target = (e && e.target) || null;
@@ -1190,9 +1191,9 @@
                 that.element.find("> .k-overlay").remove();
 
                 if (that._shouldFocus(target)) {
-                    setTimeout(function(){
+                    setTimeout(function() {
                         that.wrapper.focus();
-                    });
+                    }, openAnimation ? openAnimation.duration : 0);
 
                     var scrollTop = containmentContext ? that.containment.scrollTop() : $(window).scrollTop(),
                         windowTop = parseInt(wrapper.position().top, 10);
@@ -1468,6 +1469,7 @@
                     position.left = left;
 
                     if (that._scrollIsAppended && (!this.containment || this.containment.css("position") !== "fixed")) {
+
                         position.top -= win.scrollTop();
                         position.left -= win.scrollLeft();
                         that._scrollIsAppended = false;
