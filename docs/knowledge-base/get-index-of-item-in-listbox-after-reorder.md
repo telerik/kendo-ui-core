@@ -45,3 +45,6 @@ The Kendo UI dataSource features the `indexOf` method but the data items are not
 For more information on the API settings, refer to the documentation on the [`insert`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/insert) and [`indexOf`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/indexof) methods.  
 
 For a working demo, refer to [this example](https://dojo.telerik.com/Edeco/4). Although the demo uses the jQuery version, the logic applies client-side methods and the implementation for the AngularJS version is similar.
+
+## See also
+[Get Data Index in the ListBox on Add]({% slug listbox-get-index-of-item-on-add %})
