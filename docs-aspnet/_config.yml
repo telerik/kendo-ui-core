@@ -97,9 +97,12 @@ navigation:
      "installation/vs-integration":
         title: "Visual Studio Integration"
         position: 10
+     "installation/vs-code-integration":
+        title: "Visual Studio Code Integration"
+        position: 11
      "installation/scripts":
         title: "Creating Custom Bundles"
-        position: 11
+        position: 12
      "installation":
         title: "Installation"
         position: 4
