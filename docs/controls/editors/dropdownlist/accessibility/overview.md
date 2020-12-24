@@ -24,7 +24,7 @@ The DropDownList is compliant with the Section 508 requirements. For more inform
 
 ## WCAG 2.1
 
-The DropDownList supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %})
+The DropDownList supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
 ## See Also
 

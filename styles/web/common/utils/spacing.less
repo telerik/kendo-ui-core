@@ -54,8 +54,7 @@
     @name: extract(@pair, 1);
     @prop: extract(@pair, 2);
 
-    .k-@{name}-@{size} { @{prop}: @val };
-    .k-@{name}-@{size}-f { @{prop}: @val !important; }
+    .k-@{name}-@{size} { @{prop}: @val !important; };
 
     .props( @array, @size, @val, (@i + 1) );
 }
@@ -66,4 +65,22 @@ each( @spacing, {
 
     .props( @paddings, @size, @val );
     .props( @margins, @size, @val );
+
+    .k-px-@{size} {
+        padding-left: @val !important;
+        padding-right: @val !important;
+    }
+    .k-py-@{size} {
+        padding-top: @val !important;
+        padding-bottom: @val !important;
+    }
+
+    .k-mx-@{size} {
+        padding-left: @val !important;
+        padding-right: @val !important;
+    }
+    .k-my-@{size} {
+        padding-top: @val !important;
+        padding-bottom: @val !important;
+    }
 });

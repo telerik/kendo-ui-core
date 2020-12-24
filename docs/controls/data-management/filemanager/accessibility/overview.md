@@ -28,7 +28,7 @@ The FileManager supports the standards for providing accessible web content whic
 
 For more information, refer to:
 * [WCAG 2.1 support by the FileManager (demo)](https://demos.telerik.com/kendo-ui/filemanager/index)
-* [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %})
+* [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
 ## See Also
 

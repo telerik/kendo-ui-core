@@ -2,7 +2,7 @@
 title: Section 508 and WCAG 2.1 Compliance
 page_title: Section 508 and WCAG 2.1 Compliance | Kendo UI Accessibility Support
 description: "Learn more about the Section 508 and WCAG 2.1 Accesibility support provided by Kendo UI controls."
-slug: section508_wcag20_accessibility_support
+slug: section508_wcag21_accessibility_support
 position: 3
 ---
 

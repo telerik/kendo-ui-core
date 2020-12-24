@@ -83,7 +83,7 @@ Kendo UI supports the second suggested approach and uses an `aria-activedescenda
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})
 * [Working with the Kendo UI High-Contrast Theme]({% slug high_contrast_theme_accessibility_support %})
