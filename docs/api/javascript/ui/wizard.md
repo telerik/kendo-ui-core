@@ -194,9 +194,9 @@ Specifies whether the [Stepper](/api/javascript/ui/stepper) will allow non-linea
         });
 	</script>
 
-### validateForms `Boolean` *(default: true)*
+### validateForms `Boolean | Object` *(default: true)*
 
-Indicates whether the Wizard will automatically validate any Kendo [Form](/api/javascript/ui/form) configured for a Step.
+Indicates whether the Wizard will automatically validate any Kendo [Form](/api/javascript/ui/form) configured for a Step. Validation will be executed upon Step navigation.
 
 #### Example
 
@@ -220,6 +220,50 @@ Indicates whether the Wizard will automatically validate any Kendo [Form](/api/j
                 }
             },{
                 title: "second"
+            }]
+        });
+	</script>
+
+
+### validateForms.validateOnPrevious `Boolean`
+
+Indicates whether navigation to previous Step will trigger current Step Form validation. By default, Form validation is enabled for any step navigation.
+
+#### Example
+
+	<div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            validateForms: {
+                validateOnPrevious: false
+            },
+            steps: [{
+                title: "first",
+                form: {
+                    formData: {
+                        name: null
+                    },
+                    items: [{
+                        field: "name",
+                        validation: {
+                            required: true
+                        }
+                    }]
+                }
+            },{
+                title: "second",
+                form: {
+                    formData: {
+                        title: null
+                    },
+                    items: [{
+                        field: "title",
+                        validation: {
+                            required: true
+                        }
+                    }]
+                }
             }]
         });
 	</script>

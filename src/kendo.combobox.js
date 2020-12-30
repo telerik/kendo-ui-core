@@ -252,16 +252,19 @@ var __meta__ = { // jshint ignore:line
             this._placeholder(false);
         },
 
-        _inputFocusout: function() {
+        _inputFocusout: function(e) {
             var that = this;
             var value = that.value();
+            var isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length;
 
             that._userTriggered = true;
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            that.text(that.text());
+            if (isClearButton) {
+              that.text(that.text());
+            }
 
             var item = that._focus();
             var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
@@ -273,9 +276,12 @@ var __meta__ = { // jshint ignore:line
 
             that._placeholder();
             that._valueBeforeCascade = that._old;
-            that._blur();
 
-            that.element.blur();
+            if (isClearButton) {
+                that._blur();
+
+                that.element.blur();
+            }
         },
 
         _inputPaste: function() {
