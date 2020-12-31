@@ -387,6 +387,12 @@ defaults:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET MVC Dialog Component"
+
+    scope:
+        path: "html-helpers/layout/expansionpanel"
+    values:
+        title_prefix: "ASP.NET MVC ExpansionPanel Component"
+        title: "ExpansionPanel"
 -
     scope:
         path: "html-helpers/layout/notification"

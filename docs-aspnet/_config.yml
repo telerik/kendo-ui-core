@@ -491,6 +491,9 @@ navigation:
         title: "DropDownTree"
      "*editor":
         title: "Editor"
+     "*expansionpanel":
+        title: "ExpansionPanel"
+        isNew: true
      "*flatcolorpicker":
         title: "FlatColorPicker"
      "*filemanager":
@@ -902,6 +905,11 @@ defaults:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET Core Dialog Component"
+
+    scope:
+        path: "html-helpers/layout/expansionpanel"
+    values:
+        title_prefix: "ASP.NET Core ExpansionPanel Component"
 -
     scope:
         path: "html-helpers/layout/notification"
@@ -1297,6 +1305,11 @@ defaults:
         path: "tag-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET Core Dialog Component"
+
+    scope:
+        path: "tag-helpers/layout/expansionpanel"
+    values:
+        title_prefix: "ASP.NET Core ExpansionPanel Component"
 -
     scope:
         path: "tag-helpers/layout/notification"
