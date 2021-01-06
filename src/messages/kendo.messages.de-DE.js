@@ -645,6 +645,22 @@ $.extend(true, kendo.ui.ListBox.prototype.options.messages,{
         "cancel": "Abbrechen"
       });
   }
+  
+  /* DateInput */
+  
+  if (kendo.ui.DateInput) {
+    kendo.ui.DateInput.prototype.options.messages =
+      $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
+        "year": "Jahr",
+        "month": "Monat",
+        "day": "Tag",
+        "weekday": "Wochentag",
+        "hour": "Stunde",
+        "minute": "Minute",
+        "second": "Sekunde",
+        "dayperiod": "AM/PM"
+       });
+    }
 
   /* FlatColorPicker messages */
 
