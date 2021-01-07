@@ -151,7 +151,7 @@ A whitespace-delimited string of animation effects that are used when an item is
         });
     </script>
 
-### collapseIconclass `String` *(default: "k-icon k-i-arrow-chevron-up")*
+### collapseIconClass `String` *(default: "k-icon k-i-arrow-chevron-up")*
 
 The class of the collapse icon.
 

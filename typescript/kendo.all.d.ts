@@ -4247,7 +4247,7 @@ declare namespace kendo.ui {
     interface ExpansionPanelOptions {
         name?: string;
         animation?: boolean | ExpansionPanelAnimation;
-        collapseIconclass?: string;
+        collapseIconClass?: string;
         disabled?: boolean;
         expanded?: boolean;
         expandIconClass?: string;

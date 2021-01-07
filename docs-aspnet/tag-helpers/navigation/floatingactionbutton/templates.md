@@ -36,5 +36,5 @@ The `template` and `templateId` configuration options allow you to manage the wa
 
 ## See Also
 
-* [Templates of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/templates)
+* [Templates of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/templates)
 * [Server-Side API](/api/floatingactionbutton)

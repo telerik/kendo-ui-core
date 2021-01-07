@@ -48,6 +48,6 @@ The `position-mode` configuration option specifies the CSS position of the Float
 
 ## See Also
 
-* [Alignment of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/alignment)
+* [Alignment of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/alignment)
 * [Using the API of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
 * [Server-Side API](/api/floatingactionbutton)

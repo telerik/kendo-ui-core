@@ -439,6 +439,12 @@ defaults:
     values:
         title_prefix: "ASP.NET MVC AppBar Component"
         title: "AppBar"
+-
+    scope:
+        path: "html-helpers/navigation/bottomnavigation"
+    values:
+        title_prefix: "ASP.NET MVC AppBar BottomNavigation"
+        title: "BottomNavigation"
 
     scope:
         path: "html-helpers/navigation/breadcrumb"

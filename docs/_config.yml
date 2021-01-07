@@ -185,6 +185,8 @@ navigation:
         title: "Navigation"
     "controls/navigation/appbar":
         title: "AppBar"
+    "controls/navigation/bottomnavigation":
+        title: "BottomNavigation"
     "controls/navigation/breadcrumb":
         title: "Breadcrumb"
     "controls/navigation/buttongroup":
@@ -527,6 +529,9 @@ navigation:
         title: "Managing Inputs"
     "*badge":
         title: "Badge"
+    "*bottomnavigation":
+        isNew: true
+        title: "BottomNavigation"
     "*/button":
         title: "Button"
     "*buttongroup":
@@ -2098,6 +2103,7 @@ intro_columns:
     title: "Navigation"
     items:
       "AppBar": "overview_kendoui_appbar_widget"
+      "BottomNavigation": "overview_kendoui_bottomnavigation_widget"
       "Breadcrumb": "overview_kendoui_breadcrumb_widget"
       "Button": "overview_kendoui_button_widget"
       "ButtonGroup": "overview_kendoui_buttongroup_widget"

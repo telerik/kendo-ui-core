@@ -2,7 +2,6 @@
 title: Overview
 page_title: Overview
 description: "Learn the basics when working with the Telerik UI ExpansionPanel HtmlHelper for {{ site.framework }}."
-previous_url: /helpers/navigation/expansionpanel/overview
 slug: htmlhelpers_expansionpanel_aspnetcore
 position: 1
 ---
@@ -14,7 +13,7 @@ The Telerik UI ExpansionPanel HtmlHelper for {{ site.framework }} is a layout co
 The Telerik UI ExpansionPanel HtmlHelper is a server-side wrapper for the [Kendo UI ExpansionPanel](/api/javascript/ui/expansionpanel) widget.
 
 
-* [Demo page for the Drawer](https://demos.telerik.com/{{ site.platform }}/expansionpanel/index)
+Visit the [ExpansionPanel demo page](https://demos.telerik.com/{{ site.platform }}/expansionpanel/index) to see it in action.
 
 ## Initializing the ExpansionPanel
 
@@ -45,15 +44,19 @@ The following example demonstrates how to get an instance of the ExpansionPanel.
 
     <script type="text/javascript">
         $(function () {
-            // The Name() of the Drawer is used to get its client-side instance.
+            // The Name() of the ExpansionPanel is used to get its client-side instance.
             var expansionPanel = $("#brazil").data("kendoExpansionPanel");
             console.log(expansionPanel);
         });
     </script>
 ```
 
+## Functionality and Features
+
+* [Default State]({% state_htmlhelpers_expansionpanel_aspnetcore %})
+
 ## See Also
 
-* [Basic Usage of the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel)
-* [Using the API of the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel/api)
+* [Basic Usage of the ExpansionPanel HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel)
+* [Using the API of the ExpansionPanel HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel/api)
 * [Server-Side API](/api/expansionpanel)

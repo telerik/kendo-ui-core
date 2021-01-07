@@ -1,12 +1,12 @@
 ---
-title: Temlpates
+title: Templates
 page_title: jQuery FloatingActionButton Documentation
 description: "Learn about hoe to use Kendo UI templates with the jQuery FloatingActionButton by Kendo UI"
 slug: templates_floatingactionbutton_widget
 position: 4
 ---
 
-# Tempalates
+# Templates
 
 The FloatingActionButton provides full control over the rendering of the speed dial action items by using [Kendo UI templates]({% slug overview_kendoui_templatescomponent %}).
 

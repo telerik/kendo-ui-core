@@ -12,9 +12,9 @@ The Kendo UI ExpansionPanel control is a layout widget that provides the user wi
 
 * [Demo page for the ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index)
 
-## Basic Configuration
+## Initializing the ExpansionPanel
 
-To initialize an ExpansionPanel use a `div` element where its content will be used as a content for the ExpansionPanel. 
+To initialize an ExpansionPanel, use a `div` element where its content will be used as a content for the ExpansionPanel. 
 
 The following example demonstrates how to initialize an expanded ExpansionPanel widget.
 
@@ -31,6 +31,19 @@ The following example demonstrates how to initialize an expanded ExpansionPanel 
         });
     </script>
 ```
+
+## Referencing Existing Instances
+
+To get a reference to an existing ExpansionPanel instance:
+
+1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
+1. Once a reference is established, use the [ExpansionPanel API](/api/javascript/ui/expansionpanel) to control its behavior:
+
+        var expansionpanel = $("#brazil").data("kendoExpansionPanel");
+
+## Functionality and Features
+
+* [Default State]({% slug state_kendoui_expansionpanel_widget %})
 
 ## See Also
 
