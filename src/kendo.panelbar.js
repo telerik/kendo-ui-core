@@ -1251,6 +1251,7 @@ var __meta__ = { // jshint ignore:line
                 });
                 if (isReferenceItem) {
                     var dataItem = that.dataItem(referenceItem);
+
                     if (dataItem) {
                         dataItem.hasChildren = true;
                         referenceItem
@@ -1302,6 +1303,7 @@ var __meta__ = { // jshint ignore:line
             expanded = (dataItem && dataItem.expanded) || false;
 
             panels.parent()
+                  .not("[" + ARIA_EXPANDED + "]")
                   .attr(ARIA_EXPANDED, expanded)
                   .not("." + ACTIVECLASS)
                   .children("ul")

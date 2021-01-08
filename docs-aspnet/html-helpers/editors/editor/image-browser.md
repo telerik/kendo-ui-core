@@ -66,6 +66,123 @@ The following list provides information about the default requests and responses
 
 You can update all of these requests and responses through the [`ImageBrowser()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#imagebrowsersystemactionkendomvcuifluenteditorimagebrowsersettingsbuilder) configuration. Each of them exposes more options that you can tweak.
 
+{% if site.core %}
+## ImageBrowser in Razor Page scenario
+
+In order to set up the ImageBrowser of the Telerik UI Editor HtmlHelper for {{ site.framework }} component in Razor page scenario, you need to configure the `Read` , `Create`, `Update` and `Destroy` methods of the ImageBrowser `Transport` configuration. The URL in these methods should refer the name of the handler in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+
+```tab-RazorPage(csthml)
+    @(Html.Kendo().Editor()
+            .Name("editor")
+            .ImageBrowser(imageBrowser => imageBrowser
+                .Transport(transport => {
+                    transport.Read(r => r.Url("/Editor/ImageBrowser?handler=Read"));
+                    transport.Create(c => c.Url("/Editor/ImageBrowser?handler=Create"));
+                    transport.Destroy(d => d.Url("/Editor/ImageBrowser?handler=Destroy"));
+                    transport.UploadUrl("/Editor/ImageBrowser?handler=Upload");
+                    transport.ImageUrl("/Images/{0}");
+                    
+                })
+                .Schema(schema => schema.Model(
+                    model => model.Fields(fields => fields
+                        .Name(name => name.Field("Name"))
+                        .Size(size => size.Field("Size"))
+                        .Type(type => type.Field("EntryType"))
+                        )
+                    )
+                )
+            )
+        )
+```
+```tab-PageModel(cshtml.cs)
+    public JsonResult OnPostRead(string path)
+    {
+        var fullPath = NormalizePath(path);
+
+        if (AuthorizeRead(fullPath))
+        {
+            try
+            {
+                var files = directoryBrowser.GetFiles(fullPath, Filter);
+                var directories = directoryBrowser.GetDirectories(fullPath);
+                var result = files.Concat(directories);
+
+                return new JsonResult(result.ToArray());
+            }
+            catch (DirectoryNotFoundException)
+            {
+                throw new Exception("File Not Found");
+            }
+        }
+
+        throw new Exception("Forbidden");
+    }
+
+    public JsonResult OnPostCreate(string path, FileBrowserEntry entry)
+    {
+        var fullPath = NormalizePath(path);
+        var name = entry.Name;
+
+        if (name.HasValue() && AuthorizeCreateDirectory(fullPath, name))
+        {
+            var physicalPath = Path.Combine(fullPath, name);
+
+            if (!Directory.Exists(physicalPath))
+            {
+                Directory.CreateDirectory(physicalPath);
+            }
+
+            return new JsonResult(entry);
+        }
+
+        throw new Exception("Forbidden");
+    }
+
+    public JsonResult OnPostDestroy(string path, FileBrowserEntry entry)
+    {
+        var fullPath = NormalizePath(path);
+
+        if (entry != null)
+        {
+            fullPath = Path.Combine(fullPath, entry.Name);
+
+            if (entry.EntryType == "f")
+            {
+                DeleteFile(fullPath);
+            }
+            else
+            {
+                DeleteDirectory(fullPath);
+            }
+
+            return new JsonResult(new object[0]);
+        }
+
+        throw new Exception("File Not Found");
+    }
+
+    public virtual ActionResult OnPostUpload(string path, IFormFile file)
+    {
+        var fullPath = NormalizePath(path);
+
+        if (AuthorizeUpload(fullPath, file))
+        {
+            SaveFile(file, fullPath);
+
+            var result = new FileBrowserEntry
+            {
+                Size = file.Length,
+                Name = GetFileName(file)
+            };
+
+            return new JsonResult(result);
+        }
+
+        throw new Exception("Forbidden");
+    }
+```
+
+{% endif %}
 ## See Also
 
 * [File and Image Browser by the Editor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/imagebrowser)

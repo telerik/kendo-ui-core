@@ -336,20 +336,6 @@
             assert.isOk(dialog.wrapper.is(".k-window-titleless"));
         });
 
-        it("window has margin and padding that match the titlebar height", function() {
-            var dialog = createWindow({
-                title: "foo"
-            });
-
-            var titleBar = dialog.wrapper.children(".k-window-titlebar");
-            var titleBarHeight = parseInt(titleBar.outerHeight(), 10);
-            var margin = parseInt(titleBar.css("margin-top"), 10);
-            var padding = parseInt(dialog.wrapper.css("padding-top"), 10);
-
-            assert.equal(margin, -titleBarHeight);
-            assert.equal(padding, titleBarHeight);
-        });
-
         it("k-rtl class is not rendered by default", function() {
             var dialog = createWindow({
                 title: "foo"
