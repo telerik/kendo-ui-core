@@ -6303,6 +6303,84 @@ The widget instance which fired the event.
     gantt.bind("change", gantt_change);
     </script>
 
+### columnHide
+
+Fires when the user hides a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [`column`](/api/javascript/ui/gantt#configuration-columns) configuration.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+      $("#gantt").kendoGantt({
+        columns: ["title", "start", "end"],
+        dataSource: [{
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }],
+        columnMenu: true,
+        columnHide: function(e) {
+          console.log(e.column.field); // displays the field of the hidden column
+        }
+      });
+    </script>
+
+### columnReorder
+
+Fires when the user changes the order of a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [`column`](/api/javascript/ui/gantt#configuration-columns) configuration.
+
+##### e.newIndex `Number`
+
+The new column index.
+
+##### e.oldIndex `Number`
+
+The previous column index.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+      $("#gantt").kendoGantt({
+        columns: ["title", "start", "end"],
+        dataSource: [{
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }],
+        reorderable: true,
+        columnReorder: function(e) {
+          console.log(e.column.field, e.newIndex, e.oldIndex);
+        }
+      });
+    </script>
+
 ### columnResize
 
 Fired when the user resizes a column.
@@ -6369,6 +6447,42 @@ The widget instance which fired the event.
     });
     var gantt = $("#gantt").data("kendoGantt");
     gantt.bind("columnResize", gantt_columnResize);
+    </script>
+
+### columnShow
+
+Fires when the user shows a column. The event handler function context (available through the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [`column`](/api/javascript/ui/ganttt#configuration-columns) configuration.
+
+##### e.sender `kendo.ui.Gantt`
+
+The widget instance which fired the event.
+
+#### Example
+
+    <div id="gantt"></div>
+    <script>
+
+      $("#gantt").kendoGantt({
+        columns: ["title", "start", "end"],
+        dataSource: [{
+          id: 1,
+          orderId: 0,
+          parentId: null,
+          title: "Task1",
+          start: new Date("2014/6/17 9:00"),
+          end: new Date("2014/6/17 11:00")
+        }],
+        columnMenu: true,
+        columnShow: function(e) {
+          console.log(e.column.field); // displays the field of the shown column
+        }
+      });
     </script>
 
 ### navigate

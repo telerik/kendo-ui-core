@@ -62,4 +62,4 @@ You can disable the ExpansionPanel visual animations that appear when the user e
 
 * [Basic Usage of the ExpansionPanel TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/expansionpanel/tag-helper)
 * [Client-side API Reference of the ExpansionPanel](/api/expansionpanel)
-* [Keyboard navigation]({% slug keynav_taghelpers_expansionpanel_aspnetcore %})
+* [Keyboard Navigation]({% slug keynav_taghelpers_expansionpanel_aspnetcore %})

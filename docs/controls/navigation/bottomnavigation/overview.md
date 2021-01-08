@@ -37,7 +37,7 @@ The following example demonstrates how to initialize the BottomNavigation from a
 * [Items]({% slug items_bottomnavigation_widget %}) - the configuration allows you to set various attributes like icons and text.
 * [Appearance]({% slug appearance_bottomnavigation_widget %}) - the configuration allows you to modify the appearance of the component.
 * [Templates]({% slug templates_bottomnavigation_widget %}) - the configuration allows you to customize how the items will be rendered.
-* [Accessibility]({% slug accessibility_kendoui_bottomnavigation_widget}) - the BottomNavigation supports various accessibility standards.
+* [Accessibility]({% slug accessibility_kendoui_bottomnavigation_widget %}) - the BottomNavigation supports various accessibility standards.
 
 ## See Also
 

@@ -70,4 +70,4 @@ You can disable the ExpansionPanel visual animations that appear when the user e
 
 * [Overview of the ExpansionPanel (Demo)](https://demos.telerik.com/{{ site.platform }}/expansionpanel/index)
 * [Client-side API Reference of the TileLayout](/api/expansionpanel)
-* [Keyboard navigation]({% keynav_taghelpers_expansionpanel_aspnetcore %})
+* [Keyboard Navigation]({% slug keynav_htmlhelpers_expansionpanel_aspnetcore %})

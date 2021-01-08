@@ -85,8 +85,8 @@ The following example demonstrates how to get an instance of the ExpansionPanel.
 
 ## Functionality and Features
 
-* [Default State]({% state_htmlhelpers_expansionpanel_aspnetcore %})
-* [Keyboard Navigation]({% keynav_taghelpers_expansionpanel_aspnetcore %})
+* [Default State]({% slug state_taghelpers_expansionpanel_aspnetcore %})
+* [Keyboard Navigation]({% slug keynav_taghelpers_expansionpanel_aspnetcore %})
 
 ## See Also
 

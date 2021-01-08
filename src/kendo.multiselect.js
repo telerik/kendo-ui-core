@@ -346,7 +346,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _inputFocus: function() {
-            this._placeholder(false);
+            this._placeholder(false, true);
             this.wrapper.addClass(FOCUSEDCLASS);
         },
 
