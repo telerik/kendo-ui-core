@@ -10,6 +10,15 @@ position: 2
 
 The keyboard navigation of the BottomNavigation is always available.
 
+Kendo UI BottomNavigation supports the following keyboard shortcuts:
+
+| SHORTCUT						| DESCRIPTION				                                                        |
+|:---                 |:---                                                                                |
+| `Enter`             | Selects the focused item|
+| `Space`             | Selects the focused item|
+| `Tab`               | Navigates to the next item|
+| `Shift`+`Tab`    | Navigates to the previous item|
+
 For a complete example, refer to the [demo on keyboard navigation of the BottomNavigation](https://demos.telerik.com/kendo-ui/bottomnavigation/keyboard-navigation).
 
 ## See Also
