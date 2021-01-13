@@ -30,11 +30,11 @@ The following example demonstrates how to define the Upload widget by using the 
 )
 ```
 ```Controller
-public IHostingEnvironment HostingEnvironment { get; set; }
+public IWebHostEnvironment WebHostEnvironment { get; set; }
 
-public UploadController(IHostingEnvironment hostingEnvironment)
+public UploadController(IWebHostEnvironment webHostEnvironment)
 {
-    HostingEnvironment = hostingEnvironment;
+    WebHostEnvironment = webHostEnvironment;
 }
 
 public async Task<ActionResult> Save(IEnumerable<IFormFile> files)
@@ -49,9 +49,8 @@ public async Task<ActionResult> Save(IEnumerable<IFormFile> files)
             // Some browsers send file names with full path.
             // The sample is interested only in the file name.
             var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
 
-            // The files are not actually saved in this demo.
             using (var fileStream = new FileStream(physicalPath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -72,14 +71,13 @@ public ActionResult Remove(string[] fileNames)
         foreach (var fullName in fileNames)
         {
             var fileName = Path.GetFileName(fullName);
-            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
 
             // TODO: Verify user permissions.
 
             if (System.IO.File.Exists(physicalPath))
             {
-                // The files are not actually removed in this demo.
-                // System.     IO.File.Delete(physicalPath);
+                System.     IO.File.Delete(physicalPath);
             }
         }
     }

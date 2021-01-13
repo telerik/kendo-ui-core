@@ -37,6 +37,13 @@ To enable the chunk upload:
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
 
     ```
+    public IWebHostingEnvironment WebHostEnvironment { get; set; }
+
+    public UploadController(IWebHostEnvironment webHostEnvironment)
+    {
+        WebHostEnvironment = webHostEnvironment;
+    }
+
     public class ChunkMetaData
     {
         public string UploadUid { get; set; }
@@ -94,7 +101,7 @@ To enable the chunk upload:
         {
             foreach (var file in files)
             {
-                path = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", chunkData.FileName);
+                path = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", chunkData.FileName);
 
                 // AppendToFile(path, file);
             }
@@ -123,7 +130,7 @@ To enable the chunk upload:
                 // Some browsers send file names with full path.
                 // The demo is interested only in the file name.
                 var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-                var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+                var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
 
                 file.SaveAs(physicalPath);
             }
