@@ -11,9 +11,9 @@
   "version": "1.0.0",
   "dependencies": {},
   "devDependencies": {
-    "@progress/kendo-theme-bootstrap": "4.24.0",
-    "@progress/kendo-theme-default": "4.26.0",
-    "@progress/kendo-theme-material": "3.22.0",
+    "@progress/kendo-theme-bootstrap": "4.30.0",
+    "@progress/kendo-theme-default": "4.32.0",
+    "@progress/kendo-theme-material": "3.28.0",
     "amd-optimize": "0.6.1",
     "autoprefixer": "^9.1.5",
     "bootstrap": "^4.0.0",

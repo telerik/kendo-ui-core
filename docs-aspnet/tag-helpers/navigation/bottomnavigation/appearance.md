@@ -8,7 +8,7 @@ position: 3
 
 # Appearance
 
-The Telerik BottomNavigation HtmlHelper for {{ site.framework }} allows you to alter the appearance of the widget by setting its [itemFlow](/api/javascript/ui/bottomnavigation/configuration/itemflow), [themeColor](/api/javascript/ui/bottomnavigation/configuration/themeColor), [border](/api/javascript/ui/bottomnavigation/configuration/border), [shadow](/api/javascript/ui/bottomnavigation/configuration/shadow) and [fill](/api/javascript/ui/bottomnavigation/configuration/fill) options.
+The Telerik BottomNavigation TagHelper for {{ site.framework }} allows you to alter the appearance of the component by setting its [item-flow](/api/javascript/ui/bottomnavigation/configuration/itemflow), [theme-color](/api/javascript/ui/bottomnavigation/configuration/themeColor), [border](/api/javascript/ui/bottomnavigation/configuration/border), [shadow](/api/javascript/ui/bottomnavigation/configuration/shadow) and [fill](/api/javascript/ui/bottomnavigation/configuration/fill) options.
 
 The example below demonstrates how to modify the appearance by using the above settings:
 

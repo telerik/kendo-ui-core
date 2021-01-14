@@ -131,6 +131,9 @@ Enables or disables the drag and drop features of the FileManager.
 
 Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of the FileManager. Can be bound to a remote service or local data.
 
+> When using the transport options as functions the target parameter will not be sent automatically due to the DataSource not calling the [parameterMap method](/api/javascript/data/datasource/configuration/transport.parametermap).
+> You can call it within your function to pass the required data - Example - read as function.
+
 #### Example
 
     <div id="fileManager"></div>
@@ -155,6 +158,72 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
                     destroy: {
                         type: "post",
                         url: baseUrl + "Destroy"
+                    }
+                }
+            }
+        });
+    </script>
+
+#### Example - transport with functions.
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Read",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
+                    },
+                    update: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Update",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
+                    },
+                    create: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Update",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
+                    },
+                    destroy: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Destroy",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
                     }
                 }
             }

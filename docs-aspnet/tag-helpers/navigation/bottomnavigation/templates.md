@@ -8,7 +8,7 @@ position: 4
 
 # Templates
 
-The Telerik BottomNavigation HtmlHelper for {{ site.framework }} provides full control over the rendering of the items by using Kendo UI templates.
+The Telerik BottomNavigation TagHelper for {{ site.framework }} provides full control over the rendering of the items by using Kendo UI templates.
 
 Visit the [Demo page for the BottomNavigation](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/templates) to see it in action.
 

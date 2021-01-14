@@ -8,11 +8,11 @@ position: 2
 
 # Items
 
-The `items` configuration allows you to set specific attributes of the BottomNavigation items. You can set their text (optionally) and icon. The configuration also allows you to add classes for the different items that are rendered when initializing the component. You can also set the selected and enabled state for the items.
+The `Items` configuration allows you to set specific attributes of the BottomNavigation items. You can set their text (optionally) and icon. The configuration also allows you to add classes for the different items that are rendered when initializing the component. You can also set the selected and enabled state for the items.
 
 > **Note:** When the `Items.Url` configuration is set, the items will be rendered as `<a>` tags. Otherwise, they will be rendered as `<span>` tags.
 
-The following example demonstrates how to set the attributes of the BottomNavigation items through the `items` configuration:
+The following example demonstrates how to set the attributes of the BottomNavigation items through the `Items` configuration:
 
 ```Razor
     @(Html.Kendo().BottomNavigation()

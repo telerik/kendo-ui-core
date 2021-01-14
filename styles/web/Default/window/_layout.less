@@ -78,7 +78,8 @@ each(@window-sizes, {
 
 // Title bar actions
 .k-window-titlebar .k-window-actions {
-    // margin: -.25em 0;
+    margin: 0 calc( @window-titlebar-padding-x / -2 );
+    margin-inline-end: calc( @window-titlebar-padding-x / -2 );
     display: flex;
     flex-flow: row nowrap;
     flex-shrink: 0;
