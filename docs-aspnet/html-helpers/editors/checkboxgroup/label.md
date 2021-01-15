@@ -28,7 +28,7 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/checkbo
 
 ## Configure the Label Position
 
-The labels of all radio buttons in the CheckBoxGroup could be rendered before or after the radio buttons.
+The labels of all checkboxes in the CheckBoxGroup could be rendered before or after each checkbox.
 
 ```Razor
     @(Html.Kendo().CheckBoxGroup()

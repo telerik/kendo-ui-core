@@ -24,7 +24,7 @@ The following example demonstrates how to configure different icons.
         $(document).ready(function () {
             $("#stepper").kendoStepper({
                 steps: [{
-                    label: "First step"
+                    label: "First step",
                     icon:"home"
                 },{
                     label: "Second step",

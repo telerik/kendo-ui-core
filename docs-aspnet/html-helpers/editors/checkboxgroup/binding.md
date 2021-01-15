@@ -8,11 +8,11 @@ position: 2
 
 # Binding
 
-When using the Html helpers you can bind the checkbox items by using the [Items()](#items) method or the [Bindto()](#bindto) method.
+When using the Html helpers you can bind the checkbox items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
 
 ## Items method
 
-The example below demonstrates how to use the Items() method to configure the radio buttons in the CheckBoxGroup widget.
+The example below demonstrates how to use the Items() method to configure the checkboxes in the CheckBoxGroup widget.
 
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")

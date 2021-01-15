@@ -8,7 +8,7 @@ position: 3
 
 # Layout
 
-The CheckBoxGroup supports two types of [`layout`](/api/javascript/ui/checkboxgroup/configuration/layout) - "horizontal" and "vertical". By default the radio buttons are rendered vertically.
+The CheckBoxGroup supports two types of [`layout`](/api/javascript/ui/checkboxgroup/configuration/layout) - "horizontal" and "vertical". By default the checkboxes are rendered vertically.
 
 The following example shows how to set the CheckBoxGroup layout:
 
