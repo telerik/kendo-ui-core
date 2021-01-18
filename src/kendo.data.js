@@ -4199,6 +4199,7 @@ var __meta__ = { // jshint ignore:line
                         group.excludeHeader = true;
                     } else if (options.includeParents) {
                         options.taken++;
+                        group.excludeHeader = false;
                     }
 
                     if (group.hasSubgroups && group.items && group.items.length) {
@@ -4252,6 +4253,55 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _expandedSubGroupItemsCount: function (group, end, includeCurrentItems) {
+            var that = this;
+            var result = 0;
+            var subGroup;
+            var endSpecified = typeof end === "number";
+            var length = endSpecified ? end : group.subgroupCount;
+            var temp;
+
+            if (!group.hasSubgroups) {
+                return result;
+            }
+
+            for (var i = 0; i < length; i++) {
+                subGroup = group.items[i];
+
+                if (!subGroup) {
+                    break;
+                }
+
+                if (subGroup.hasSubgroups && that._groupsState[group.uid]) {
+                    temp = that._expandedSubGroupItemsCount(subGroup, length, true);
+                    result += temp;
+
+                    if (endSpecified) {
+                        length -= temp;
+                    }
+                } else if (!subGroup.hasSubgroups && that._groupsState[subGroup.uid]) {
+                    temp = subGroup.items ? subGroup.items.length : 0;
+                    result += temp;
+                    if (endSpecified) {
+                        length -= temp;
+                    }
+                }
+
+                if (includeCurrentItems) {
+                    result += 1;
+                    if (endSpecified) {
+                        length -= 1;
+                    }
+                }
+
+                if (endSpecified && result > length) {
+                    return result;
+                }
+            }
+
+            return result;
+        },
+
         _fetchGroupItems: function(group, options, parents, callback) {
             var that = this;
             var groupItemsSkip;
@@ -4261,23 +4311,29 @@ var __meta__ = { // jshint ignore:line
             var take = options.take;
             var skipped = options.skipped;
             var pageSize = that.take();
+            var expandedSubGroupItemsCount;
 
             if (options.includeParents) {
-                take -= 1;
-                skipped += 1;
+                if (skipped < options.skip) {
+                    skipped += 1;
+                } else {
+                    take -= 1;
+                }
             }
 
             if (!group.items || (group.items && !group.items.length)) {
                 that.getGroupItems(group, options, parents, callback, 0);
                 return true;
             } else {
-                groupItemsSkip = Math.max(options.skip - skipped, 0);
-                firstItem = group.items[groupItemsSkip];
-                lastItem = group.items[Math.min(groupItemsSkip + take - 1, groupItemCount - 1)];
+                expandedSubGroupItemsCount = this._expandedSubGroupItemsCount(group, options.skip - skipped);
+                groupItemsSkip = Math.max(options.skip - (skipped + expandedSubGroupItemsCount), 0);
 
                 if (groupItemsSkip >= groupItemCount) {
                     return false;
                 }
+
+                firstItem = group.items[groupItemsSkip];
+                lastItem = group.items[Math.min(groupItemsSkip + take, groupItemCount - 1)];
 
                 if (firstItem.notFetched) {
                     that.getGroupItems(group, options, parents, callback, math.max(math.floor(groupItemsSkip / pageSize), 0) * pageSize);
@@ -4448,11 +4504,13 @@ var __meta__ = { // jshint ignore:line
             var range;
             var dataLength;
             var indexes;
+            var currIdx;
 
             for (var i = 0; i < rangesLength; i++) {
                 range = ranges[i];
                 dataLength = range.data.length;
                 indexes = [];
+                temp = null;
 
                 for (var j = 0; j < dataLength; j++) {
                     currentGroup = range.data[j];
@@ -4468,7 +4526,8 @@ var __meta__ = { // jshint ignore:line
                     temp = ranges[i].pristineData;
 
                     while (indexes.length > 1) {
-                        temp = temp[indexes.splice(0, 1)[0]].items;
+                        currIdx = indexes.splice(0, 1)[0];
+                        temp = temp[currIdx].items;
                     }
                     temp[indexes[0]] = that._cloneGroup(group);
                     break;

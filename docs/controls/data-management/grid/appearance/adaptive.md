@@ -4,7 +4,7 @@ page_title: jQuery Grid Documentation | Adaptive Rendering
 description: "Get started with the jQuery Grid by Kendo UI which provides consistency to the customer experience on any device by supporting adaptive rendering."
 previous_url: /controls/data-management/grid/adaptive
 slug: adaptive_rendering_kendoui_grid_widget
-position: 6
+position: 5
 ---
 
 # Adaptive Rendering

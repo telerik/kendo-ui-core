@@ -10,11 +10,14 @@ position: 5
 
 The Grid provides a built-in option for triggering column operations through a menu.
 
-To enable the column-menu implementation, set [`columnMenu:true`](/api/javascript/ui/grid/configuration/columnmenu). As a result, the column headers of the Grid render a column menu which allows the user to sort, filter, or change the visibility of the column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/kendo-ui/grid/column-menu).
+To enable the column menu implementation, set [`columnMenu:true`](/api/javascript/ui/grid/configuration/columnmenu). As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/kendo-ui/grid/column-menu).
+
+Further information about the available columnMenu configuration properties can be obtained from this [`API article`](/api/javascript/ui/grid/configuration/columnmenu).
+
 
 ## Sort
 
-To sort the columns in the column menu, use the `columns.sort` configuration with `asc` or `desc` as the value. The columns are not sorted by default, they have the same order as the columns in the grid:
+By default, the Grid column titles in the child column menu are not sorted. They have the same order as the columns in the Grid. To sort the column titles in the child menu, use the `columns.sort` configuration with `asc` or `desc` as the value..
 
 ```
     columnMenu: {
@@ -37,6 +40,20 @@ The `columnMenu` configuration setting accepts a `columns.groups` array that ena
           ]
         }
     }
+```
+
+# Column Menu Types
+
+As of R1 2021 version of the Kendo UI suite, the Grid widget introduces the `modern` render mode that aims to deliver a fresh look and feel. It aims to enhance the existing rendering and deliver a fresh and modern look and feel. 
+
+By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern`, configure the options of the widget as follows:
+
+```
+    $("#grid").kendoGrid({
+        columnMenu:{
+            componentType:"modern"
+        }
+    });
 ```
 
 ## KB Articles on Column Menu
