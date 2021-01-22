@@ -13,6 +13,7 @@ The following table describes which versions of the Kendo UI for jQuery are comp
 
 | Kendo UI for jQuery | Kendo Sass Themes |
 |:---         |:---                     |
+| Kendo UI 2021.1.119 (R1 2021) | @progress/kendo-theme-bootstrap@4.30.0<br>@progress/kendo-theme-default@4.32.0<br>@progress/kendo-theme-material@3.28.0 |
 | Kendo UI 2020.3.1118 (R3 2020 SP2) | @progress/kendo-theme-bootstrap@4.24.0<br>@progress/kendo-theme-default@4.26.0<br>@progress/kendo-theme-material@3.22.0 |
 | Kendo UI 2020.3.1021 (R3 2020 SP1) | @progress/kendo-theme-bootstrap@4.23.0<br>@progress/kendo-theme-default@4.25.0<br>@progress/kendo-theme-material@3.21.0 |
 | Kendo UI 2020.3.915 (R3 2020) | @progress/kendo-theme-bootstrap@4.21.0<br>@progress/kendo-theme-default@4.22.1<br>@progress/kendo-theme-material@3.19.1 |

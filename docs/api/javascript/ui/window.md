@@ -314,7 +314,7 @@ Enables (`true`) or disables (`false`) the dragging of the widget.
 
 ### draggable.containment `String|Element|jQuery` *default: ""*
 
-Defines the element in which the window will be able to move. The window is appended to this element and in this way overrides the [`appendTo`](/api/javascript/ui/window/configuration/draggable.containment) option. Accepts either a selector or an element.
+Defines the element in which the window will be able to move. The containment option overrides the [`appendTo`](/api/javascript/ui/window/configuration/draggable.containment) setting and attaches the Window to the specified DOM element. Accepts either a selector or an element.
 
 > The containment element has to be positioned, that is, its CSS `position` attribute has to be set to `relative`, `absolute`, or `fixed`.
 

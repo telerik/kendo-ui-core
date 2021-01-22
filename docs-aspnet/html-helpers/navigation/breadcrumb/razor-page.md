@@ -2,7 +2,7 @@
 title:  Razor Page
 page_title: Configure a Breadcrumb in Razor Page.
 description: "An example on how to configure the Telerik UI Breadcrumb HtmlHelper for {{ site.framework }} in a Razor Page."
-slug: htmlhelpers_stepper_razorpage_aspnetcore
+slug: htmlhelpers_breadcrumb_razorpage_aspnetcore
 position: 6
 ---
 
