@@ -292,10 +292,11 @@ var __meta__ = { // jshint ignore:line
             var minutes = value.getMinutes();
             var seconds = value.getSeconds();
             var designator;
-            var hoursList = this.ul.find('[data-index="1"]');
-            var minutessList = this.ul.find('[data-index="2"]');
-            var secondsList = this.ul.find('[data-index="3"]');
-            var designatorList = this.ul.find('[data-index="4"]');
+            var indexAttr = kendo.attr('index');
+            var hoursList = this.ul.find('[' + indexAttr + '="1"]');
+            var minutessList = this.ul.find('[' + indexAttr + '="2"]');
+            var secondsList = this.ul.find('[' + indexAttr + '="3"]');
+            var designatorList = this.ul.find('[' + indexAttr + '="4"]');
 
             if (is12hourFormat) {
                 if (hours >= 12) {
@@ -311,6 +312,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
+            this._internalScroll = true;
             if (hoursList.length) {
                 this._scrollListToPosition(hoursList, hours);
             }
@@ -326,6 +328,7 @@ var __meta__ = { // jshint ignore:line
             if (designatorList.length) {
                 this._scrollListToPosition(designatorList, designator);
             }
+            this._internalScroll = false;
         },
 
         _scrollListToPosition: function(list, value) {
@@ -443,6 +446,18 @@ var __meta__ = { // jshint ignore:line
             that._html(html);
         },
 
+        _showAllHiddenItems: function() {
+            var items = this.list.find('.k-time-container');
+            var length = items.length;
+            var item;
+
+            for (var i = 0; i < length; i++) {
+                item = $(items[i]);
+                item.find('.k-item:hidden').show();
+                this._updateListBottomOffset(item);
+            }
+        },
+
         _updateListBottomOffset: function (list) {
             var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
             var listHeight = list.outerHeight();
@@ -454,13 +469,14 @@ var __meta__ = { // jshint ignore:line
 
         _updateHoursRange: function () {
             var that = this;
-            var hoursList = this.ul.find('[data-index="1"]');
+            var indexAttr = kendo.attr('index');
+            var hoursList = this.ul.find('[' + indexAttr + '="1"]');
             var minHours = this._minHours;
             var maxHours = this._maxHours;
             var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
             var useMax;
             var useMin;
-            var selectedDesignator = this._findSelectedValue(this.ul.find('[data-index="4"]'));
+            var selectedDesignator = this._findSelectedValue(this.ul.find('[' + indexAttr + '="4"]'));
 
             if (!hoursList.length) {
                 return;
@@ -516,14 +532,15 @@ var __meta__ = { // jshint ignore:line
 
         _updateMinutesRange: function () {
             var that = this;
-            var minutesList = this.ul.find('[data-index="2"]');
+            var indexAttr = kendo.attr('index');
+            var minutesList = this.ul.find('[' + indexAttr + '="2"]');
             var minHours = this._minHours;
             var maxHours = this._maxHours;
             var minMinutes = this._minMinutes;
             var maxMinutes = this._maxMinutes;
-            var selectedHour = +this._findSelectedValue(this.ul.find('[data-index="1"]'));
+            var selectedHour = +this._findSelectedValue(this.ul.find('[' + indexAttr + '="1"]'));
             var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
-            var selectedDesignator = this._findSelectedValue(this.ul.find('[data-index="4"]'));
+            var selectedDesignator = this._findSelectedValue(this.ul.find('[' + indexAttr + '="4"]'));
 
             if (is12hourFormat && selectedDesignator === "PM") {
                 selectedHour += 12;
@@ -549,12 +566,13 @@ var __meta__ = { // jshint ignore:line
 
         _updateSecondsRange: function () {
             var that = this;
-            var secondsList = this.ul.find('[data-index="3"]');
+            var indexAttr = kendo.attr('index');
+            var secondsList = this.ul.find('[' + indexAttr + '="3"]');
             var minSeconds = this._minSeconds;
             var maxSeconds = this._minSeconds;
             var minMinutes = this._minMinutes;
             var maxMinutes = this._maxMinutes;
-            var selectedMinutes = +this._findSelectedValue(this.ul.find('[data-index="2"]'));
+            var selectedMinutes = +this._findSelectedValue(this.ul.find('[' + indexAttr + '="2"]'));
 
             if (!secondsList.length) {
                 return;
@@ -577,7 +595,8 @@ var __meta__ = { // jshint ignore:line
         _updateDesignatorRange: function () {
             var minHours = this._minHours;
             var maxHours = this._maxHours;
-            var designatorList = this.ul.find('[data-index="4"]');
+            var indexAttr = kendo.attr('index');
+            var designatorList = this.ul.find('[' + indexAttr + '="4"]');
 
             if (!designatorList.length) {
                return;
@@ -626,6 +645,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (!this._validateMax && !this._validateMin) {
+                    this._showAllHiddenItems();
                     return;
                 }
             } else {
@@ -698,6 +718,10 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var itemHeight = getItemHeight($(e.currentTarget).find(".k-item:visible:eq(0)"));
 
+            if (that._internalScroll) {
+                return;
+            }
+
             if (that._scrollingTimeout) {
                 clearTimeout(that._scrollingTimeout);
             }
@@ -714,10 +738,11 @@ var __meta__ = { // jshint ignore:line
 
         _updateCurrentlySelected: function () {
             var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
-            var hoursList = this.ul.find('[data-index="1"]');
-            var minutesList = this.ul.find('[data-index="2"]');
-            var secondsList = this.ul.find('[data-index="3"]');
-            var designatorList = this.ul.find('[data-index="4"]');
+            var indexAttr = kendo.attr('index');
+            var hoursList = this.ul.find('[' + indexAttr + '="1"]');
+            var minutesList = this.ul.find('[' + indexAttr + '="2"]');
+            var secondsList = this.ul.find('[' + indexAttr + '="3"]');
+            var designatorList = this.ul.find('[' + indexAttr + '="4"]');
             var selectedHour;
             var selectedMinutes;
             var selectedSeconds;
@@ -839,11 +864,12 @@ var __meta__ = { // jshint ignore:line
         _itemTemplate: function (values, part, title, index) {
             var result ="";
             var length = values.length;
+            var indexAttr = kendo.attr('index');
 
             result += '<div class="k-time-list-wrapper" role="presentation">' +
                         '<span class="k-title">' + (title || part.type) + '</span>' +
                         '<div class="k-time-list">' +
-                            '<div class="k-time-container k-content k-scrollable" role="presentation" data-index="' + index + '">' +
+                            '<div class="k-time-container k-content k-scrollable" role="presentation" ' + indexAttr + '="' + index + '">' +
                                 '<ul class="k-reset">';
 
             for( var i = 0;i < length; i++){
@@ -868,9 +894,9 @@ var __meta__ = { // jshint ignore:line
             var end;
 
             if (part.type === "hour") {
-                start = 1;
+                start = part.hour12 ? 1 : 0;
                 index = 1;
-                end = part.hour12 ? 12 : 24;
+                end = part.hour12 ? 12 : 23;
             } else if (part.type === "minute") {
                 index = 2;
                 end = 59;
@@ -1393,6 +1419,10 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.setOptions.call(that, options);
             options = that.options;
 
+            if (+options.max != +TODAY || +options.min != +TODAY) {
+                this._specifiedRange = true;
+            }
+
             normalize(options);
 
             that.timeView.setOptions(options);
@@ -1494,11 +1524,16 @@ var __meta__ = { // jshint ignore:line
         },
 
         min: function (value) {
+            if (value) {
+                this._specifiedRange = true;
+            }
+
             return this._option("min", value);
         },
 
         max: function (value) {
             if (value && this.timeView) {
+                this._specifiedRange = true;
                 this.timeView.options.maxSet = true;
             } else if (this.timeView) {
                 this.timeView.options.maxSet = false;

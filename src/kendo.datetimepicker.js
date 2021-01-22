@@ -1000,9 +1000,11 @@ var __meta__ = { // jshint ignore:line
                 anchor: that.wrapper,
                 activate: function () {
                     if (that.options.timeView && that.options.timeView.list === "scroll") {
-                        that.timeView.addTranslate();
-                        that.timeView.applyValue(that._value);
-                        that.timeView._updateRanges();
+                        if (that.popup.element.find(".k-datetime-wrap.k-time-tab").length) {
+                            that.timeView.addTranslate();
+                            that.timeView.applyValue(that._value);
+                            that.timeView._updateRanges();
+                        }
                     }
                 },
                 open: function(){
@@ -1034,6 +1036,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _switchToTimeView: function() {
+            this.timeView.addTranslate();
+            this.timeView.applyValue(this._value);
             this.timeView._updateRanges();
             this.popup.element.find(".k-group-start, .k-group-end").removeClass(STATE_ACTIVE).eq(1).addClass(STATE_ACTIVE);
             this.popup.element.find(".k-datetime-wrap").removeClass("k-date-tab").addClass("k-time-tab");
