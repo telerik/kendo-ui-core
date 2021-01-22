@@ -43,24 +43,44 @@ Implement the `dataBound` event handler for the widget.
     var items = combo.items();
     var inputText = $('.k-input').val().toLowerCase();
 
-	for (var i = 0; i < items.length; i += 1) {
+    for (var i = 0; i < items.length; i += 1) {
       var item = $(items[i]);
       var itemHtml = item.html();
       var startIndex = itemHtml.toLowerCase().indexOf(inputText);
-      var endIndex = startIndex + inputText.length;
+      if(startIndex>=0){  // Only highlighted the items which contain the search text
+        var endIndex = startIndex + inputText.length;
+        var outputHtml = [
+          itemHtml.slice(0, startIndex),
+          '<span class="highlight">',
+          itemHtml.slice(startIndex, endIndex),
+          '</span>',
+          itemHtml.slice(endIndex)
+        ].join('');
 
-	  var outputHtml = [
-		itemHtml.slice(0, startIndex),
-		'<span class="highlight">',
-		itemHtml.slice(startIndex, endIndex),
-		'</span>',
-		itemHtml.slice(endIndex)
-	  ].join('');
-
-	  item.html(outputHtml);
+        item.html(outputHtml);
+      }
     }
   }
 
+  // Remove highlight after seleting the event. Otherwise dropdown always highlighted the item which has been selected frist time after searching text.
+  function removeHighlight(e) {
+    var combo = e.sender;
+    var items = combo.items();
+    var inputText = $('.k-input').val().toLowerCase();
+    
+    for (var i = 0; i < items.length; i += 1) {
+      var item = $(items[i]);
+      var itemHtml = item.html();
+      var startIndex = itemHtml.toLowerCase().indexOf(inputText);
+      if (startIndex > 0) {
+        if (item.find('span.highlight').length > 0) { 
+          var itemText = item.text();
+          item.html(itemText);
+        }
+      }
+    }
+  }
+  
   $(document).ready(function() {
     $("#products").kendoComboBox({
       placeholder: "Select product",
@@ -76,6 +96,13 @@ Implement the `dataBound` event handler for the widget.
           read: {
             url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
           }
+        }
+      },
+      select: function (e) {
+      	var item = e.dataItem;
+	// This checking is required. issue in kendo dropdown : the select event is triggered on blur, although it is not needed
+        if (item !== null) {
+          removeHighlight(e);
         }
       }
     });
