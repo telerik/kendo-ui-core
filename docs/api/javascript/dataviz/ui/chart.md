@@ -7650,6 +7650,516 @@ The legend width when the [legend.orientation](/api/javascript/dataviz/ui/chart#
     });
     </script>
 
+
+### paneDefaults `Object`
+
+The default options for all panes.
+
+### paneDefaults.background `String`
+
+The background color of all chart panes. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the default panes background
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        background: "#00ff00"
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.border `Object`
+
+The border of all chart panes.
+
+#### Example - set the default pane border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          border: {
+            color: "red",
+            width: 2
+          }
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### paneDefaults.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### paneDefaults.clip `Boolean`
+
+Specifies whether the charts in the panes should be clipped. By default all charts except radar, polar and 100% stacked charts are clipped.
+
+#### Example - set the chart pane clip option
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        type: "line"
+      },
+      series: [
+        { data: [1, 100, 1] },
+        { data: [1, 100, 1], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane", max: 70 },
+        { pane: "bottom-pane", name: "bottom", max: 70 }
+      ],
+      paneDefaults: {
+        clip: false
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.height `Number`
+
+The default pane height in pixels.
+
+#### Example - set the default pane height
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        height: 200
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane"  }
+      ]
+    });
+    </script>
+
+### paneDefaults.margin `Number|Object` *(default: 0)*
+
+The margin of the panes. A numeric value will set all margins.
+
+#### Example - set the default pane margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        margin: 10
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the chart panes.
+
+### paneDefaults.margin.left `Number` *(default: 0)*
+
+The left margin of the chart panes.
+
+### paneDefaults.margin.right `Number` *(default: 0)*
+
+The right margin of the chart panes.
+
+### paneDefaults.margin.top `Number` *(default: 0)*
+
+The top margin of the chart panes.
+
+### paneDefaults.padding `Number|Object` *(default: 0)*
+
+The padding of the panes. A numeric value will set all paddings.
+
+#### Example - set the default pane padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        padding: 10
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the chart panes.
+
+### paneDefaults.padding.left `Number` *(default: 0)*
+
+The left padding of the chart panes.
+
+### paneDefaults.padding.right `Number` *(default: 0)*
+
+The right padding of the chart panes.
+
+### paneDefaults.padding.top `Number` *(default: 0)*
+
+The top padding of the chart panes.
+
+### paneDefaults.title `String|Object`
+
+The title configuration of the all panes.
+
+#### Example - set the font for all pane titles
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            font: "700 14px sans-serif"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.background `String`
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.title.border `Object`
+
+The border of the title.
+
+#### Example - set the default pane title border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            border: {
+              color: "red",
+              width: 2
+            }
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### paneDefaults.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### paneDefaults.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the default pane title color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            color: "#aa00bb"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the title.
+
+#### Example - set the default pane title font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            font: "20px sans-serif"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+#### Example - set the default pane title margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            margin: 10
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### paneDefaults.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### paneDefaults.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### paneDefaults.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### paneDefaults.title.position `String` *(default: "center")*
+
+The position of the title.
+
+The supported values are:
+
+* "left" - the axis title is positioned on the left (applicable to horizontal axis)
+* "right" - the axis title is positioned on the right (applicable to horizontal axis)
+* "center" - the axis title is positioned in the center
+
+#### Example - set the default pane title position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            position: "left"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.visual `Function`
+
+A function that can be used to create a custom visual for the title. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
 ### panes `Array`
 
 The chart panes configuration.
