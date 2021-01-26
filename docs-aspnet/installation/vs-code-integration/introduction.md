@@ -10,7 +10,7 @@ position: 1
 
 The **Telerik UI for ASP.NET Core Template Wizard** [Visual Studio Code](https://code.visualstudio.com/) Extension enhances the experience in developing ASP.NET Core web applications with Telerik UI for ASP.NET Core.
 
-As its primary advantage, the VS Code extension facilitate the creation of projects through a wizard directly in Visual Studio Code.
+As its primary advantage, the VS Code extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
 
 ## Get the Extension
 

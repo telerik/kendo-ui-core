@@ -71,6 +71,8 @@ var __meta__ = { // jshint ignore:line
 
             that._dataSource();
 
+            that._setContentHeight();
+
             that._templates();
 
             that._navigatable();
@@ -301,6 +303,18 @@ var __meta__ = { // jshint ignore:line
 
         },
 
+        _setContentHeight: function() {
+            var that = this,
+                options = that.options,
+                height;
+
+            if (options.scrollable && that.wrapper.is(":visible")) {
+
+                height = that.wrapper.innerHeight();
+                that.content.height(height);
+            }
+        },
+
         refresh: function(e) {
             var that = this,
                 view = that.dataSource.view(),
@@ -397,6 +411,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
+            that._setContentHeight();
             that._angularItems("compile");
 
             that._progress(false);

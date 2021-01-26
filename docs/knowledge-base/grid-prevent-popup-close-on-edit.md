@@ -28,7 +28,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
 
 ## Solution
 
-1. Handle the [`edit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/edit) event of the Grid and attach an event handler for the [`close`](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/events/close) event of the Popup window.
+1. Handle the [`edit`](/api/javascript/ui/grid/events/edit) event of the Grid and attach an event handler for the [`close`](/api/javascript/ui/window/events/close) event of the Popup window.
 1. In the `close` handler, the `e.preventDefault()` method will be called to prevent the popup from closing.
 1. To allow the user to close the editor, set the flag when the **Cancel** and **Close** buttons are clicked.
 
@@ -115,3 +115,7 @@ How can I keep the popup editor of the Grid open after I update or insert a reco
     });
 </script>
 ```
+
+## See Also
+
+* [Prevent Grid Popup Editor from Closing on Validation Errors]({% slug grid-prevent-popup-close-on-validation-errors-from-server %})

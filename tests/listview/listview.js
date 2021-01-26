@@ -498,5 +498,35 @@
 
             assert.equal(initialScrollTop, wrapper.scrollTop());
         });
+
+        it("_setContentHeight sets the height of the content when listview is scrollable", function() {
+            var lv = createListView(element, {scrollable:{endless: true}, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+
+            assert.equal(lv.content.height(), lv.wrapper.innerHeight());
+        });
+
+        it("init calls _setContentHeight", function() {
+            var lv = createListView(element, {scrollable:{endless: true}, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+
+            var lvStub = stub(lv, {
+                _setContentHeight: $.noop
+            });
+
+            lv.init(lv.element, lv.options);
+
+            assert.equal(lvStub.calls('_setContentHeight'), 2);
+        });
+
+        it("refresh calls _setContentHeight", function() {
+            var lv = createListView(element, {scrollable:{endless: true}, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+
+            var lvStub = stub(lv, {
+                _setContentHeight: $.noop
+            });
+
+            lv.refresh();
+
+            assert.equal(lvStub.calls('_setContentHeight'), 1);
+        });
     });
 }());

@@ -59,4 +59,4 @@ How can I make the options on the TimePicker list start at a specific time while
 
 ## See Also
 
-* [API Reference of the open Event](https://docs.telerik.com/kendo-ui/api/javascript/ui/timepicker/events/open)
+* [API Reference of the open Event](/api/javascript/ui/timepicker/events/open)
