@@ -13,7 +13,7 @@ Represents the Kendo UI Form widget. Inherits from [Widget](/api/javascript/ui/w
 
 ### buttonsTemplate `String|Function`
 
-Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the From buttons.
+Specifies the [template](/api/javascript/kendo/methods/template) which is used for rendering the Form buttons.
 
 #### Example
 
