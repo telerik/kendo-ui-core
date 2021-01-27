@@ -355,17 +355,17 @@
                 }
 
                 if (width) {
-                    wrapper.width(constrain(width, options.minWidth, options.maxWidth));
+                    wrapper.outerWidth(constrain(width, options.minWidth, options.maxWidth));
                 }
                 else {
-                    wrapper.width("");
+                    wrapper.outerWidth("");
                 }
 
                 if (height) {
-                    wrapper.height(constrain(height, options.minHeight, options.maxHeight));
+                    wrapper.outerHeight(constrain(height, options.minHeight, options.maxHeight));
                 }
                 else {
-                    wrapper.height("");
+                    wrapper.outerHeight("");
                 }
 
                 if (!options.visible) {
@@ -699,27 +699,27 @@
                 if (options.resizable && e.ctrlKey && !isMaximized && !isMinimized) {
                     if (keyCode == keys.UP) {
                         handled = true;
-                        newHeight = wrapper.height() - distance;
+                        newHeight = wrapper.outerHeight() - distance;
                     } else if (keyCode == keys.DOWN) {
                         handled = true;
                         if (that.containment && !that._isPinned) {
-                            newHeight = Math.min(wrapper.height() + distance,
+                            newHeight = Math.min(wrapper.outerHeight() + distance,
                                 that.containment.height - offset.top - toInt(wrapper, "padding-top") -
                                 toInt(wrapper, "borderBottomWidth") - toInt(wrapper, "borderTopWidth"));
                         } else {
-                            newHeight = wrapper.height() + distance;
+                            newHeight = wrapper.outerHeight() + distance;
                         }
                     } if (keyCode == keys.LEFT) {
                         handled = true;
-                        newWidth = wrapper.width() - distance;
+                        newWidth = wrapper.outerWidth() - distance;
                     } else if (keyCode == keys.RIGHT) {
                         handled = true;
                         if (that.containment && !that._isPinned) {
-                            newWidth = Math.min(wrapper.width() + distance,
+                            newWidth = Math.min(wrapper.outerWidth() + distance,
                                                 that.containment.width - offset.left -
                                                 toInt(wrapper, "borderLeftWidth") - toInt(wrapper, "borderRightWidth"));
                         } else {
-                            newWidth = wrapper.width() + distance;
+                            newWidth = wrapper.outerWidth() + distance;
                         }
                     }
 
@@ -728,11 +728,11 @@
                         h = constrain(newHeight, options.minHeight, options.maxHeight);
 
                         if (!isNaN(w)) {
-                            wrapper.width(w);
+                            wrapper.outerWidth(w);
                             that.options.width = w + "px";
                         }
                         if (!isNaN(h)) {
-                            wrapper.height(h);
+                            wrapper.outerHeight(h);
                             that.options.height = h + "px";
                         }
 
@@ -848,8 +848,8 @@
                     newLeft = this.minLeft + (this.maxLeft - this.minLeft) / 2;
                 } else {
                     that._scrollIsAppended = true;
-                    newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.width()) / 2);
-                    newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.height() - toInt(wrapper, "paddingTop")) / 2);
+                    newLeft = scrollLeft + Math.max(0, (documentWindow.width() - wrapper.outerWidth()) / 2);
+                    newTop = scrollTop + Math.max(0, (documentWindow.height() - wrapper.outerHeight() - toInt(wrapper, "paddingTop")) / 2);
                 }
 
                 wrapper.css({
@@ -1162,7 +1162,10 @@
                     wrapper.data("isFront", element == currentWindow);
                     // Add overlay to windows with iframes and lower z-index to prevent
                     // trapping of events when resizing / dragging
-                    if (element != currentWindow && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
+
+                    if (element != currentWindow &&
+                        contentElement.find("." + KCONTENTFRAME).length &&
+                        !contentElement.find(KOVERLAY).length) {
                         contentElement.append(templates.overlay);
                     }
                 });
@@ -1875,7 +1878,7 @@
                             newWidth = x - initialPosition.left - containerOffset.left;
                         }
 
-                        wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
+                        wrapper.outerWidth(constrain(newWidth, options.minWidth, options.maxWidth));
                     } else if (direction.indexOf("w") >= 0) {
                         windowRight = initialPosition.left + initialSize.width + containerOffset.left;
                         newWidth = constrain(windowRight - x, options.minWidth, options.maxWidth);
@@ -1903,7 +1906,7 @@
                             newHeight = wnd.maxTop - initialPosition.top + initialSize.height - scrollOffset.top;
                         }
 
-                        wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
+                        wrapper.outerHeight(constrain(newHeight, options.minHeight, options.maxHeight));
                     } else if (direction.indexOf("n") >= 0) {
                         windowBottom = initialPosition.top + initialSize.height + containerOffset.top;
                         newHeight = constrain(windowBottom - newWindowTop, options.minHeight, options.maxHeight);

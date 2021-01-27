@@ -2773,7 +2773,7 @@ function pad(number, digits, end) {
         },
 
         guid: function() {
-            var id = "", i, random, chars = "abcdefghijklmnopqrstuvwxyz";
+            var id = "", i, random, chars = "abcdef";
 
             id += chars[Math.floor(Math.random() * Math.floor(chars.length))];
 

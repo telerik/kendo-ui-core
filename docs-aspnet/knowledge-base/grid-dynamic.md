@@ -25,7 +25,7 @@ I am trying to bind a DataTable to a ASP.NET Kendo Grid. The main reason for thi
 
 1. [Basic dynamic grid binding to DataTable](#basic-dynamic-binding)
 1. [Dynamic name of column as per model value from backend](#dynamic-column-titles)
-1. [Add editors](#dynamic-editors)
+1. [Dynamic editing](#dynamic-editing)
 1. [Bind to a DataTable in a Razor page](#dynamic-grid-in-razor-page)
 
 ## Solution
@@ -100,20 +100,114 @@ I am trying to bind a DataTable to a ASP.NET Kendo Grid. The main reason for thi
     })
 ```
 
-### Dynamic Editors
+### Dynamic Editing
 
-Since the dynamic editing is not part of the official built-in options which utilized strongly typed models for ASP.NET Core, there are different solutions that can be applied. The first thing is to add the model Id - the primary key of the table and define the editors based on the column types:
+Since the dynamic editing is not part of the official built-in options which utilized strongly typed models for ASP.NET Core, there are different solutions that can be applied. For a runnable example go to the [examples repository](https://github.com/telerik/ui-for-aspnet-core-examples). [View.cshtml](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/Dynamic.cshtml) and [Controller](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Controllers/Grid/DynamicController.cs).
+
+The first thing is to add the model Id - the primary key of the table and define the editors based on the column types:
 
 ```
     .Model(model =>
     {
         var id = Model.PrimaryKey[0].ColumnName;
         model.Id(id);
+        foreach (System.Data.DataColumn column in Model.Columns)
+        {
+            var field = model.Field(column.ColumnName, column.DataType);
+            if (column.ColumnName == id) {
+                field.Editable(false);
+            }
+
+        }
+    })
 ```
 
-The most popular one that comes to mind is to post the model and values to the controller in a preferred format for you, so that you can process them on the server and update the corresponding table accordingly.
+1. You can use `IFormCollection` to intecept the updated item.
 
-For example in a grid with popup editing shared by another programmer with us:
+    ```Inline_Popup
+        public IActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
+    ```
+    ```InCell
+        public JsonResult OnPostUpdate([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")] IFormCollection models)
+    ```
+    ```Controller_Inline_Popup
+        public static DataTable db = new DataTable();
+        public IActionResult Index()
+        {
+            db = GetDataTable(50);
+
+            return View(db);
+        }
+
+        private DataTable GetDataTable(int howMany)
+        {
+            DataTable dt = GetDataTableColumns();
+
+            for (int i = 0; i < howMany; i++)
+            {
+                int index = i + 1;
+
+                DataRow row = dt.NewRow();
+
+                row["OrderID"] = index;
+                row["OrderDate"] = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0).AddHours(index);
+                row["Freight"] = index * 0.1 + index * 0.01;
+                row["ShipName"] = "Name " + index;
+                row["ShipCity"] = "City " + index;
+                row["ShipCountry"] = "Country " + index;
+
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+        }
+        public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(db.ToDataSourceResult(request));
+        }
+
+        public IActionResult Customers_Update([DataSourceRequest] DataSourceRequest request, IFormCollection data)
+        {
+            var dt = GetDataTableColumns();
+            var updatedRow = dt.NewRow();
+            for (int i = 0; i < db.Rows.Count; i++)
+            {
+                var itemToBeUpdatedId = data[db.PrimaryKey[0].ToString()][0];
+                var row = db.Rows[i];
+                if (row[db.PrimaryKey[0]].ToString() == itemToBeUpdatedId)
+                {
+                    for (var j = 0; j < db.Columns.Count; j++) 
+                    {
+                        if(data[db.Columns[j].ColumnName][0] != null)
+                        { 
+                            TypeConverter typeConverter = TypeDescriptor.GetConverter(db.Columns[j].DataType);
+                            row[db.Columns[j].ColumnName] = typeConverter.ConvertFromString(data[db.Columns[j].ColumnName][0]);
+                            updatedRow[db.Columns[j].ColumnName] = row[db.Columns[j].ColumnName];
+                        }
+                    }
+
+                }
+            }
+            return Json(dt.ToDataSourceResult(request));
+        }
+
+        private DataTable GetDataTableColumns()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn("OrderID", typeof(int)));
+            dt.Columns.Add(new DataColumn("OrderDate", typeof(DateTime)));
+            dt.Columns.Add(new DataColumn("Freight", typeof(decimal)));
+            dt.Columns.Add(new DataColumn("ShipName", typeof(string)));
+            dt.Columns.Add(new DataColumn("ShipCity", typeof(string)));
+            dt.Columns.Add(new DataColumn("ShipCountry", typeof(string)));
+            dt.PrimaryKey = new DataColumn[] { dt.Columns["OrderID"] };
+            return dt;
+        }
+    ```
+
+1. Alternatively, you can post the model and values to the controller in a preferred format for you, so that you can process them on the server and update the corresponding table accordingly.
+
+For example in a grid with inline editing shared by another programmer with us:
 
 ```View
     // grid Save event and editable mode
@@ -182,7 +276,7 @@ To define editors based on a condition, you can use a switch case as shown below
                             columns.Bound(dcolumn.ColumnName).Title(dcolumn.Caption).EditorTemplateName("Boolean");                                 
                             break;
                         case "System.DateTime":
-                            columns.Bound(dcolumn.ColumnName).Title(dcolumn.Caption).Format("{0:d}");
+                            columns.Bound(dcolumn.ColumnName).Title(dcolumn.Caption).Format("{0:d}").EditorTemplateName("Date");
                             break;
                         default:
                             columns.Bound(dcolumn.ColumnName).Title(dcolumn.Caption).EditorTemplateName("String");                               
@@ -258,3 +352,4 @@ To define editors based on a condition, you can use a switch case as shown below
 ## See Also
 
 * [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)
+* [A runnable example of a dynamic grid with editing](https://github.com/telerik/ui-for-aspnet-core-examples)

@@ -429,7 +429,7 @@
 
             dialog.press(keys.DOWN, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.height(), 210);
+            assert.equal(dialogObject.wrapper.outerHeight(), 210);
         });
 
         it("ctrl+up arrow shrinks window", function() {
@@ -438,7 +438,7 @@
 
             dialog.press(keys.UP, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.height(), 190);
+            assert.equal(dialogObject.wrapper.outerHeight(), 190);
         });
 
         it("ctrl+left arrow shrinks window", function() {
@@ -447,7 +447,7 @@
 
             dialog.press(keys.LEFT, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.width(), 190);
+            assert.equal(dialogObject.wrapper.outerWidth(), 190);
         });
 
         it("ctrl+right arrow expands window", function() {
@@ -456,7 +456,7 @@
 
             dialog.press(keys.RIGHT, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.width(), 210);
+            assert.equal(dialogObject.wrapper.outerWidth(), 210);
         });
 
         it("ctrl+left takes minWidth into account", function() {
@@ -468,7 +468,7 @@
 
             dialog.press(keys.LEFT, { ctrlKey: true });
 
-            assert.closeTo(dialogObject.wrapper.width(), 95, 1);
+            assert.closeTo(dialogObject.wrapper.outerWidth(), 95, 1);
         });
 
         it("ctrl+right takes maxWidth into account", function() {
@@ -480,7 +480,7 @@
 
             dialog.press(keys.RIGHT, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.width(), 105);
+            assert.equal(dialogObject.wrapper.outerWidth(), 105);
         });
 
         it("ctrl+up takes minHeight into account", function() {
@@ -492,7 +492,7 @@
 
             dialog.press(keys.UP, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.height(), 95);
+            assert.equal(dialogObject.wrapper.outerHeight(), 95);
         });
 
         it("ctrl+down takes maxHeight into account", function() {
@@ -504,7 +504,7 @@
 
             dialog.press(keys.DOWN, { ctrlKey: true });
 
-            assert.closeTo(dialogObject.wrapper.height(), 105, 1);
+            assert.closeTo(dialogObject.wrapper.outerHeight(), 105, 1);
         });
 
         it("alt+p toggles pin", function() {
