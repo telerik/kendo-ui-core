@@ -500,6 +500,18 @@
             assert.isOk(secondWindow.element.find("> .k-overlay").length);
         });
 
+        it("toFront() appends only one overlay element to dom", function() {
+            var firstWindow = createWindow(),
+                secondWindow = createWindow({
+                    content: "http://google.com/"
+                });
+
+            firstWindow.toFront();
+            firstWindow.toFront();
+
+            assert.equal(secondWindow.element.find("> .k-overlay").length, 1);
+        });
+
         it("toFront() removes overlay on foremost window", function() {
             var firstWindow = createWindow({
                     content: "http://www.telerik.com/"

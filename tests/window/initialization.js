@@ -450,27 +450,27 @@
 
         it("width is constrained by minWidth", function() {
             var dialog = createWindow({ minWidth: 100, width: 90 });
-            assert.equal(dialog.wrapper.width(), 100);
+            assert.equal(dialog.wrapper.outerWidth(), 100);
         });
 
         it("width is constrained by maxWidth", function() {
             var dialog = createWindow({ maxWidth: 100, width: 190 });
-            assert.equal(dialog.wrapper.width(), 100);
+            assert.equal(dialog.wrapper.outerWidth(), 100);
         });
 
         it("height is constrained by minHeight", function() {
             var dialog = createWindow({ minHeight: 100, height: 90 });
-            assert.equal(dialog.wrapper.height(), 100);
+            assert.equal(dialog.wrapper.outerHeight(), 100);
         });
 
         it("height is constrained by maxHeight", function() {
             var dialog = createWindow({ maxHeight: 100, height: 190 });
-            assert.equal(dialog.wrapper.height(), 100);
+            assert.equal(dialog.wrapper.outerHeight(), 100);
         });
 
         it("creating window with string width", function() {
             var dialog = createWindow({ width: "190px" });
-            assert.equal(dialog.wrapper.width(), 190);
+            assert.equal(dialog.wrapper.outerWidth(), 190);
         });
 
         it("creating window with percent width", function() {
@@ -490,7 +490,7 @@
 
         it("creating window with literal string height", function() {
             var dialog = createWindow({ height: "190px" });
-            assert.equal(dialog.wrapper.height(), 190);
+            assert.equal(dialog.wrapper.outerHeight(), 190);
         });
 
         it("creating window with percent height", function() {

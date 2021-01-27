@@ -169,8 +169,8 @@
 
             var window = dom.data("kendoWindow");
 
-            assert.equal(window.wrapper.width(), 144);
-            assert.closeTo(window.wrapper.height(), 233, 1);
+            assert.equal(window.wrapper.outerWidth(), 144);
+            assert.closeTo(window.wrapper.outerHeight(), 233, 1);
         });
 
         it("set content through data attribute", function() {

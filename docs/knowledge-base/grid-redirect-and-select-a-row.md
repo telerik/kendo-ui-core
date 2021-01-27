@@ -38,7 +38,7 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
 - The anchor element will create a URL with a dynamic query id parameter:
 
 ```
-    <a href="http://runner.telerik.io/fullscreen/oDUzU?id=#:data.EmployeeID#"/>                
+    <a href="https://runner.telerik.io/fullscreen/oDUzU?id=#:data.EmployeeID#"/>                
         <img src="../content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
     </a>
 ```
@@ -75,7 +75,7 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
 
 ```dojo
     <h3>Redirect to a new page with a grid and select a row</h3>
-  <p>Click on the Employee picture to see it selected ona different page</p>
+    <p>Click on the Employee picture to see it selected on a different page</p>
         <div id="example">
             <table id="grid">
                 <colgroup>
@@ -108,7 +108,7 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
             <script id="rowTemplate" type="text/x-kendo-tmpl">
 	            <tr data-uid="#: uid #">
 		            <td class="photo">
-                <a href="http://runner.telerik.io/fullscreen/oDUzU?id=#:data.EmployeeID#"/>
+                <a href="https://runner.telerik.io/fullscreen/orayUwed?id=#:data.EmployeeID#"/>
                 
                        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
                        </a>
@@ -128,7 +128,7 @@ To add a link to the grid, you can use the `rowTemplate` and pass the dataItem i
             <script id="altRowTemplate" type="text/x-kendo-tmpl">
 	            <tr class="k-alt" data-uid="#: uid #">
 		            <td class="photo">
-                  <a href="http://runner.telerik.io/fullscreen/oDUzU?id=#:data.EmployeeID#"/>
+                  <a href="https://runner.telerik.io/fullscreen/orayUwed?id=#:data.EmployeeID#"/>
                        <img src="https://demos.telerik.com/kendo-ui/content/web/Employees/#:data.EmployeeID#.jpg" alt="#: data.EmployeeID #" />
                        </a>
 		            </td>

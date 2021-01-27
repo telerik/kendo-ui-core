@@ -156,8 +156,8 @@
         it("resizing window updates widget options", function() {
             resize("se", 100, 100);
 
-            assert.equal(dialog.options.width, dialog.wrapper.width() + "px");
-            assert.equal(dialog.options.height, dialog.wrapper.height() + "px");
+            assert.equal(dialog.options.width, dialog.wrapper.outerWidth() + "px");
+            assert.equal(dialog.options.height, dialog.wrapper.outerHeight() + "px");
         });
 
         it("resizing window horizontally does not update vertical positioning", function() {

@@ -296,7 +296,7 @@
             assert.isOk(buttons.eq(1).hasClass("k-state-active"), "Second button is selected");
         });
 
-        it("click on splitButton triggers click event", function() {
+        it("click on splitButton triggers click event", function(done) {
             container.kendoToolBar({
                 items: [
                     {
@@ -308,10 +308,78 @@
                 ],
                 click: function(e) {
                     assert.isOk(true, "Click event is fired");
+                    done();
                 }
             });
 
             var button = container.find("#foo");
+
+            click(button);
+        });
+
+        it("click on splitButton item triggers click event", function(done) {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton",
+                        id: "foo",
+                        text: "foo",
+                        menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function() {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            });
+
+            var popup = container.find("#foo_wrapper").data("kendoPopup");
+            var button = popup.element.find("#option1");
+
+            click(button);
+        });
+
+        it("click on splitButton triggers click event when in overflow", function(done) {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "foo", text: "foo", overflow: "always", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function(e) {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var button = toolbar.popup.element.find("#foo_overflow");
+
+            click(button);
+        });
+
+        it("click on splitButton item triggers click event when in overflow", function(done) {
+            var toolbar = container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "foo", text: "foo", overflow: "always", menuButtons: [
+                            { id: "option1", text: "option1" },
+                            { id: "option2", text: "option2" }
+                        ],
+                        click: function(e) {
+                            assert.isOk(true, "Click event is fired");
+                            done();
+                        }
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            var button = toolbar.popup.element.find("#option1_overflow");
 
             click(button);
         });
