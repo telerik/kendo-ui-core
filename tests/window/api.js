@@ -101,6 +101,28 @@
             assert.isOk(!window.options.isMaximized);
         });
 
+        it("close updates scroll position when window is maximized", function() {
+            var container = $("<div style='height:2000px' />").appendTo(Mocha.fixture.height(2010)),
+                document = $(Mocha.fixture[0].ownerDocument),
+                window = createWindow({ visible: false }),
+                scrollPosition = 200;
+
+            document.scrollTop(0);
+            window.setOptions({});
+            window.open().maximize();
+            window.close();
+
+            document.scrollTop(scrollPosition);
+            window.setOptions({});
+            window.open().maximize();
+            window.close();
+
+            assert.equal(
+                document.scrollTop(),
+                scrollPosition
+            );
+        });
+
         it("document vertical scroll position is preserved on maximize and restore", function() {
             var window = createWindow();
 
@@ -345,6 +367,17 @@
             });
         });
 
+        it("refresh() sets `content` option", function() {
+            var dialog = createWindow({
+                content: "http://example.com/"
+            });
+
+            dialog.refresh({ url: "test" });
+            dialog.refresh();
+
+            assert.equal(dialog.options.content.url, "test");
+        });
+
         it("refresh() uses `content` object combined with URL", function(done) {
             $.mockjax(function(settings) {
                 return {};
@@ -568,6 +601,17 @@
             dialog.open();
 
             assert.isOk(dialog.options.visible);
+        });
+
+        it("open() adds k-display-inline-flex class to wrapper", function() {
+            var dialog = createWindow({
+                visible: false,
+                animation: false
+            });
+
+            dialog.open();
+
+            assert.isOk(dialog.wrapper.hasClass("k-display-inline-flex"));
         });
 
         it("close() sets options.visible", function() {

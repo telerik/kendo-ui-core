@@ -390,6 +390,7 @@
             clientObject = div.data("kendoWindow");
 
             assert.isOk(clientObject.wrapper.is(":hidden"));
+            assert.isOk(!clientObject.wrapper.hasClass("k-display-inline-flex"));
             assert.equal(div.css("display"), "block");
             assert.isOk(!clientObject.options.visible);
         });
@@ -422,6 +423,7 @@
             clientObject = div.data("kendoWindow");
 
             assert.isOk(!clientObject.wrapper.is(":visible"));
+            assert.isOk(!clientObject.wrapper.hasClass("k-display-inline-flex"));
             assert.isOk(!div.is(":visible"));
             assert.isOk(!clientObject.options.visible);
         });
