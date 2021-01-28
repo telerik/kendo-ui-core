@@ -46,6 +46,7 @@
             KHOVERSTATE = "k-state-hover",
             KFOCUSEDSTATE = "k-state-focused",
             MAXIMIZEDSTATE = "k-window-maximized",
+            INLINE_FLEX = "k-display-inline-flex",
             // constants
             VISIBLE = ":visible",
             HIDDEN = "hidden",
@@ -281,7 +282,7 @@
                 }
 
                 wrapper.add(wrapper.children(".k-resize-handle," + KWINDOWTITLEBAR))
-                    .on("mousedown" + NS, proxy(that.toFront, that));
+                    .on(kendo.support.mousedown + NS, proxy(that.toFront, that));
 
                 that.touchScroller = kendo.touchScroller(element);
 
@@ -369,7 +370,7 @@
                 }
 
                 if (!options.visible) {
-                    wrapper.hide();
+                    wrapper.removeClass(INLINE_FLEX).hide();
                 }
 
                 if (sizeClass && SIZE[sizeClass]) {
@@ -520,10 +521,14 @@
             setOptions: function(options) {
                 var that = this;
                 var sizeClass = that.options.size;
+                var doc = this.containment && !that._isPinned ? this.containment : $(document);
                 // make a deep extend over options.position telerik/kendo-ui-core#844
                 var cachedOptions = JSON.parse(JSON.stringify(options));
                 extend(options.position, that.options.position);
                 extend(options.position, cachedOptions.position);
+
+                that._containerScrollTop = doc.scrollTop();
+                that._containerScrollLeft = doc.scrollLeft();
 
                 Widget.fn.setOptions.call(that, options);
                 var scrollable = that.options.scrollable !== false;
@@ -989,7 +994,7 @@
 
                         that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-flat");
 
-                        wrapper.show().kendoStop().kendoAnimate({
+                        wrapper.addClass(INLINE_FLEX).kendoStop().kendoAnimate({
                             effects: showOptions.effects,
                             duration: showOptions.duration,
                             complete: proxy(this._activate, this)
@@ -1111,8 +1116,14 @@
 
             _deactivate: function () {
                 var that = this;
-                that.wrapper.hide().css("opacity", "");
+
+                that.wrapper
+                    .removeClass(INLINE_FLEX)
+                    .hide()
+                    .css("opacity", "");
+
                 that.trigger(DEACTIVATE);
+
                 if (that.options.modal) {
                     var lastModal = that._object(that._modals().last());
                     if (lastModal) {
@@ -1574,7 +1585,7 @@
                     options = { url: options };
                 }
 
-                options = extend({}, initOptions.content, options);
+                options = extend(initOptions.content, options);
 
                 showIframe = defined(initOptions.iframe) ? initOptions.iframe : options.iframe;
 
