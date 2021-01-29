@@ -4281,15 +4281,16 @@ declare namespace kendo.ui {
         constructor(element: Element, options?: FileManagerOptions);
 
 
-        path(): void;
-        view(): void;
-        navigate(): void;
+        path(): string;
+        view(): string;
+        view(view?: string): void;
+        navigate(path: string): void;
         refresh(): void;
-        executeCommand(): void;
+        executeCommand(command: string, args?: any): void;
         getSelected(): any | any[];
         getSize(): any;
-        destroy(): void;
         setDataSource(dataSource: kendo.data.FileManagerDataSource): void;
+        destroy(): void;
         items(): any;
     }
 
@@ -4307,6 +4308,12 @@ declare namespace kendo.ui {
 
     interface FileManagerContextMenu {
         items?: FileManagerContextMenuItem[];
+
+        close?(e: ContextMenuCloseEvent): void;
+        open?(e: ContextMenuOpenEvent): void;
+        activate?(e: ContextMenuActivateEvent): void;
+        deactivate?(e: ContextMenuDeactivateEvent): void;
+        select?(e: ContextMenuSelectEvent): void;
     }
 
     interface FileManagerDialogs {

@@ -1010,7 +1010,11 @@ Defines the localization messages for the preview pane.
 
 ### path
 
-Gets the path that teh FileManager is navigated to
+Gets the path that the FileManager is navigated to.
+
+#### Returns
+
+`String` The current active path.
 
 #### Example
 
@@ -1069,6 +1073,10 @@ Gets or sets the view of the FileManager.
 
 The name of the view.
 
+#### Returns
+
+`String` The current view.
+
 #### Example
 
     <div id="fileManager"></div>
@@ -1111,10 +1119,6 @@ The name of the view.
 
       	fileManager.view("grid");
     </script>
-
-#### Returns
-
-`String` The current view.
 
 ### navigate
 
@@ -1260,8 +1264,16 @@ The command arguments.
 ### getSelected
 Gets the selected files (the JSON representation of the files).
 
+#### Returns
+
+`Object` The currently selected files.
+
 ### getSize
 Gets the size of the FileManager wrapper.
+
+#### Returns
+
+`Object` The width and height of the FileManager wrapper in pixels.
 
 ### setDataSource
 
