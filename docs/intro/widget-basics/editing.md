@@ -213,7 +213,7 @@ This section provides solutions for common issues you might encounter while conf
 * The model gets the new value, compares it to the current one and, if they are different, the new value is ready to be set.
 * UI validation is triggered. Note that it uses the editor element value to perform the validation check. However, it is invalid and hence the new value that we try to set is ignored.
 
-**Solution** Define a valid `defaulValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/define).
+**Solution** Define a valid `defaultValue` by using the [`schema.model.fields.defaultValue` option](/api/javascript/data/model/methods/define).
 
 ## See Also
 
