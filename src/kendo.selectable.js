@@ -83,7 +83,8 @@ var __meta__ = { // jshint ignore:line
             filter: ">*",
             inputSelectors: INPUTSELECTOR,
             multiple: false,
-            relatedTarget: $.noop
+            relatedTarget: $.noop,
+            ignoreOverlapped: false
         },
 
         _isElement: function(target) {
@@ -243,7 +244,7 @@ var __meta__ = { // jshint ignore:line
                         if(ctrlKey && target !== toSelect[0]) {
                             related.removeClass(SELECTED).addClass(UNSELECTING);
                         }
-                    } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING)) {
+                    } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING) && !this._collidesWithActiveElement(related, position)) {
                         related.addClass(ACTIVE);
                     }
                 } else {
@@ -252,6 +253,31 @@ var __meta__ = { // jshint ignore:line
                     } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
                         related.removeClass(UNSELECTING).addClass(SELECTED);
                     }
+                }
+            }
+        },
+
+        _collidesWithActiveElement: function (element, marqueeRect) {
+            if (!this.options.ignoreOverlapped) {
+                return false;
+            }
+
+            var that = this;
+            var activeElements = that.element.find(that.options.filter + "." + ACTIVE);
+            var elemRect = element[0].getBoundingClientRect();
+            var activeElementRect;
+
+            marqueeRect.right = marqueeRect.left + marqueeRect.width;
+            marqueeRect.bottom = marqueeRect.top + marqueeRect.height;
+
+            for (var i = 0; i < activeElements.length; i++) {
+                activeElementRect = activeElements[i].getBoundingClientRect();
+                if (overlaps(elemRect, activeElementRect)) {
+                    elemRect = $.extend({}, elemRect, {left: activeElementRect.right});
+                    if (elemRect.left > elemRect.right) {
+                        return true;
+                    }
+                    return !overlaps(elemRect, marqueeRect);
                 }
             }
         },
@@ -396,7 +422,8 @@ var __meta__ = { // jshint ignore:line
     });
 
     Selectable.parseOptions = function(selectable) {
-        var asLowerString = typeof selectable === "string" && selectable.toLowerCase();
+        var selectableMode = selectable.mode || selectable;
+        var asLowerString = typeof selectableMode === "string" && selectableMode.toLowerCase();
 
         return {
             multiple: asLowerString && asLowerString.indexOf("multiple") > -1,
@@ -420,6 +447,13 @@ var __meta__ = { // jshint ignore:line
             elementPosition.right < position.left ||
             elementPosition.top > bottom ||
             elementPosition.bottom < position.top);
+    }
+
+    function overlaps(firstRect, secondRect) {
+        return !(firstRect.right <= secondRect.left ||
+            firstRect.left >= secondRect.right ||
+            firstRect.bottom <= secondRect.top ||
+            firstRect.top >= secondRect.bottom);
     }
 
     kendo.ui.plugin(Selectable);
