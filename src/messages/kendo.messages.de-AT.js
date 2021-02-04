@@ -392,6 +392,7 @@
           "edit": "Bearbeiten",
           "excel": "Exportieren als Excel",
           "pdf": "Exportieren als PDF",
+          "search": "Suchtext eingeben ...",
           "save": "Änderungen speichern",
           "select": "Wähle",
           "update": "Aktualisieren"
