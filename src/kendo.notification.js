@@ -42,7 +42,7 @@ var __meta__ = { // jshint ignore:line
         TEMPLATE = '<div class="k-notification-wrap">' +
                 '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
                 '<div class="k-notification-content">#=content#</div>' +
-                '<span class="k-icon k-i-close" title="Hide"></span>' +
+                '<span class="#: closeButton ? "" : "k-hidden"# k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
@@ -365,7 +365,7 @@ var __meta__ = { // jshint ignore:line
                     content = content();
                 }
 
-                defaultArgs = {typeIcon: type, content: ""};
+                defaultArgs = {typeIcon: type, content: "", closeButton: options.button};
 
                 if ($.isPlainObject(content)) {
                     args = extend(defaultArgs, content);

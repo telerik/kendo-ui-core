@@ -954,7 +954,8 @@ var __meta__ = { // jshint ignore:line
             input.addClass(element.className)
                  .css({
                     width: "",
-                    height: element.style.height
+                    height: element.style.height,
+                    position: ""
                  })
                  .attr({
                      "role": "combobox",

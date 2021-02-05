@@ -1959,6 +1959,59 @@ The expanded node
     treeview.bind("expand", tree_expand);
     </script>
 
+### kendoKeydown
+
+Triggered when the user presses a keyboard key while the TreeView is focused.
+
+#### Event Data
+
+##### e.sender `kendo.ui.TreeView`
+
+The **TreeView** instance that triggered the event.
+
+##### e.preventKendoKeydown `Boolean`
+
+If set to `true` prevents the TreeView keydown logic.
+
+##### e.preventDefault `Function`
+
+If invoked cancels the default action that belongs to the keydown event.
+
+#### Example - subscribe to the "kendoKeydown" event during initialization
+
+    <div id="treeview"></div>
+
+    <script>
+      $("#treeview").kendoTreeView({
+        dataSource: [{
+          text: "foo",
+          items: [{ text: "bar" }]
+        }],
+        kendoKeydown: function(e) {
+          e.preventKendoKeydown = true;
+        }
+      });
+    </script>
+
+#### Example - prevent only the TreeView Enter keydown logic
+
+    <div id="treeview"></div>
+
+    <script>
+      $("#treeview").kendoTreeView({
+        dataSource: [{
+          text: "foo",
+          items: [{ text: "bar" }]
+        }],
+        kendoKeydown: function(e) {
+          if(e.keyCode === kendo.keys.ENTER){
+            e.preventKendoKeydown = true;
+            // add custom code here to handle the event
+          }
+        }
+      });
+    </script>
+
 ### navigate
 
 Triggered when the user moves the focus on another node

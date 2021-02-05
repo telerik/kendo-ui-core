@@ -591,6 +591,15 @@ it("copy input className to the wrapper", function() {
    assert.isOk(combobox.wrapper.hasClass("test"));
 });
 
+it("copy position style to the wrapper only", function() {
+    input.css("position", "absolute").kendoComboBox();
+
+    var combobox = input.data("kendoComboBox");
+
+    assert.equal(combobox.wrapper.css("position"), "absolute");
+    assert.equal(combobox.input.css("position"), "static");
+ });
+
 it("set height if items height is bigger than options.height", function() {
    var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
    dataSource.read();
