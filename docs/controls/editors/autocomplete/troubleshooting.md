@@ -19,17 +19,20 @@ If the input name matches any of the predefined autofill fields, the Chrome brow
 1. Use a `name` attribute that is not contained in the predefined auto-fill fields of Chrome.
 1. Toggle the `name` attribute on `focus` and `focusout`.
 
+```
     <form>
         <input name="city" ID="City" required />
     </form>
     <script>
         var data = [
-			"Toronto",
-			"New York",
-			"London",
+            "Toronto",
+            "New York",
+            "London",
             "Paris"
         ];
+
         var name;
+
         var CityAutoComplete = $("#City").kendoAutoComplete({
             dataSource: data,
             filter: "startswith",
@@ -41,10 +44,12 @@ If the input name matches any of the predefined autofill fields, the Chrome brow
             name = this.name;
             this.name = kendo.guid().substr(0, 8);
         });
+        
         CityAutoComplete.element.on("focusout", function () {
             this.name = name;
         });
     </script>
+```
 
 ## See Also
 
