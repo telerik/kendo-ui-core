@@ -10489,6 +10489,10 @@ declare namespace kendo.ui {
         title?: string;
     }
 
+    interface TreeListSearch {
+        fields?: any;
+    }
+
     interface TreeListSortable {
         allowUnsort?: boolean;
         mode?: string;
@@ -10500,9 +10504,9 @@ declare namespace kendo.ui {
         name?: string;
         text?: string;
     }
-
     interface TreeListOptions {
         name?: string;
+        altRowTemplate?: string|Function;
         autoBind?: boolean;
         columns?: TreeListColumn[];
         resizable?: boolean;
@@ -10517,7 +10521,9 @@ declare namespace kendo.ui {
         navigatable?: boolean;
         pageable?: boolean | TreeListPageable;
         pdf?: TreeListPdf;
+        rowTemplate?: string|Function;
         scrollable?: boolean|any;
+        search?: TreeListSearch;
         selectable?: boolean|string;
         sortable?: boolean | TreeListSortable;
         toolbar?: TreeListToolbarItem[] | any;

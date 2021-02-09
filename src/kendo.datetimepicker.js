@@ -1007,7 +1007,10 @@ var __meta__ = { // jshint ignore:line
                         }
                     }
                 },
-                open: function(){
+                open: function(e){
+                    if (that.trigger(OPEN, {view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that})) {
+                        e.preventDefault();
+                    }
                     that.timeView._updateTitle();
                 }
             }));

@@ -12,6 +12,64 @@ Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### altRowTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. Be default the treelist renders a table row (`<tr>`) for every data source item.
+
+> The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
+> Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
+
+#### Example - specify alternating row template as a function
+
+    <div id="treelist"></div>
+    <script id="template" type="text/x-kendo-template">
+        <tr data-uid="#= data.model.uid #">
+            <td colspan="2">
+                #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                    <span class="k-icon k-i-none"></span>
+                #}#
+                #if(data.hasChildren){#
+                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                #}#
+
+                <strong>#: data.model.lastName # </strong>
+                <strong>#: data.model.position #</strong>
+            </td>
+        </tr>
+    </script>
+    <script id="altTemplate" type="text/x-kendo-template">
+        <tr data-uid="#= data.model.uid #" class="k-alt">
+            <td colspan="2">
+                #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                    <span class="k-icon k-i-none"></span>
+                #}#
+                #if(data.hasChildren){#
+                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                #}#
+
+                <strong>#: data.model.lastName # </strong>
+                <strong>#: data.model.position #</strong>
+            </td>
+        </tr>
+    </script>
+    <script>
+      $("#treelist").kendoTreeList({
+        rowTemplate: kendo.template($("#template").html()),
+        altRowTemplate: kendo.template($("#altTemplate").html()),
+        columns: [
+          { field: "lastName" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+            { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" }
+
+          ]
+        }
+      });
+    </script>
+
 ### autoBind `Boolean` *(default: true)*
 
 If set to `false`, the TreeList will not bind to the specified DataSource during initialization. In this case, data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the DataSource fires. By default, the TreeList will bind to the DataSource that is specified in the configuration.
@@ -4670,6 +4728,63 @@ Sets the title of the PDF file.
         }
       });
     </script>
+
+### rowTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
+
+> The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
+
+#### Example - specify row template as a function
+
+        <div id="treelist"></div>
+        <script id="template" type="text/x-kendo-template">
+            <tr data-uid="#= data.model.uid #">
+                <td colspan="2">
+                    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                        <span class="k-icon k-i-none"></span>
+                    #}#
+                    #if(data.hasChildren){#
+                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    #}#
+
+                    <strong>#: data.model.lastName # </strong>
+                    <strong>#: data.model.position #</strong>
+                </td>
+            </tr>
+        </script>
+        <script id="altTemplate" type="text/x-kendo-template">
+            <tr data-uid="#= data.model.uid #" class="k-alt">
+                <td colspan="2">
+                    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                        <span class="k-icon k-i-none"></span>
+                    #}#
+                    #if(data.hasChildren){#
+                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    #}#
+
+                    <strong>#: data.model.lastName # </strong>
+                    <strong>#: data.model.position #</strong>
+                </td>
+            </tr>
+        </script>
+        <script>
+          $("#treelist").kendoTreeList({
+            rowTemplate: kendo.template($("#template").html()),
+            altRowTemplate: kendo.template($("#altTemplate").html()),
+            columns: [
+              { field: "lastName" }
+            ],
+            dataSource: {
+              data: [
+                { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+                { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+                { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" }
+
+              ]
+            }
+          });
+        </script>
 
 ### scrollable `Boolean|Object` *(default: true)*
 

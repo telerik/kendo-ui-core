@@ -161,5 +161,18 @@
                 .trigger($.Event("keydown", { keyCode: 13 }));
         });
 
+        it("DateTimePicker triggers close event when dateView is opened", function() {
+            var count = 0;
+            var datetimepicker = new DateTimePicker(input, {
+                componentType: "modern",
+                open: function () {
+                    count++;
+                }
+            });
+
+            datetimepicker.open();
+            assert.equal(count, 1);
+        });
+
     });
 }());
