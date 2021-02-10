@@ -296,19 +296,19 @@ The supported values are:
 
 ### Example - Render as Canvas, if supported
 
-    <div id="gauge"></div>
-    <script>
-    $("#gauge").kendoLinearGauge({
-        renderAs: "canvas",
-        pointer: {
-            value: 50
-        },
-        scale: {
-            min: 0,
-            max: 100
-        }
-    });
-    </script>
+<div id="gauge"><div>
+<script>
+$("#gauge").kendoLinearGauge({
+    renderAs: "canvas",
+    pointer: {
+        value: 50
+    },
+    scale: {
+        min: 0,
+        max: 100
+    }
+});
+</script>
 
 ### scale `Object`
 
@@ -430,14 +430,17 @@ The format of the labels.
 
 #### Example
 
+  <div id="linear-gauge"><div>
+  <script>
     $("#linear-gauge").kendoLinearGauge({
         scale: {
-           labels: {
-               // set the format to currency
-               format: "C"
-           }
+        labels: {
+           // set the format to currency
+            format: "C"
+        }
         }
     });
+    </script>
 
 ### scale.labels.margin `Number|Object`*(default: 5)*
 
@@ -497,8 +500,9 @@ Template variables:
 *   **value** - the value
 
 #### Example
-
-    // chart initialization
+    <div id="linear-gauge"></div>
+    <script>
+      // chart initialization
     $("#linear-gauge").kendoLinearGauge({
          scale: {
              labels: {
@@ -507,6 +511,7 @@ Template variables:
              }
          }
     });
+    </script>
 
 ### scale.labels.visible `Boolean`*(default: true)*
 
@@ -583,15 +588,18 @@ The ranges of the scale.
 
 #### Example
 
-    $("#linear-gauge").kendoLinearGauge({
-        scale: {
+    <div id="linear-gauge"><div>
+    <script>
+        $("#linear-gauge").kendoLinearGauge({
+          scale: {
             ranges: [{
-                from: 10,
-                to: 20,
-                color: "green"
+              from: 10,
+              to: 20,
+              color: "green"
             }]
-        }
-     });
+          }
+        });
+    </script>
 
 ### scale.ranges.from `Number`
 
