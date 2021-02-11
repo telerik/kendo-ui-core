@@ -2141,7 +2141,7 @@ If set to `true` the default pop-up editor of the Gantt will render the `planned
           parentId: null,
           title: "Task2",
           plannedStart: new Date("2014/6/17 12:00"),
-          plannedEnd: new Date("2014/6/17 16:00")
+          plannedEnd: new Date("2014/6/17 16:00"),
           start: new Date("2014/6/17 12:00"),
           end: new Date("2014/6/17 14:00")
         }

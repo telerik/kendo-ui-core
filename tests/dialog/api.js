@@ -183,6 +183,23 @@
             assert.isOk(dialog1.wrapper.prev("div").is(".k-overlay"));
         });
 
+        it("closing dialog removes overlay if previous modal has containment enabled", function() {
+            $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(Mocha.fixture);
+            var dialog1 = createWindow({
+                modal: true,
+                draggable: {
+                    containment: "#container"
+                },
+                animation: false
+            });
+            var dialog2 = createDialog({ animation: false });
+
+            dialog2.close();
+            dialog1.close();
+
+            assert.equal($(".k-overlay").length, 0);
+        });
+
         it("closing dialog from close handler", function() {
             var dialog = createDialog({
                 close: function(e) {

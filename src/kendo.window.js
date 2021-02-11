@@ -801,11 +801,15 @@
                 var that = this;
 
                 var zStack = $(KWINDOW).filter(function() {
-                    var dom = $(this);
-                    var object = that._object(dom);
-                    var options = object && object.options;
+                    var modal = that._object($(this));
 
-                    return options && options.modal && options.visible && options.appendTo === that.options.appendTo && dom.is(VISIBLE);
+                    return modal &&
+                        modal.options &&
+                        modal.options.modal &&
+                        modal.options.visible &&
+                        modal.options.appendTo === that.options.appendTo &&
+                        !modal.containment &&
+                        $(modal.element).is(VISIBLE);
                 }).sort(function(a, b){
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
