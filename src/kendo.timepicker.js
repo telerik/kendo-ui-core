@@ -959,20 +959,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            var content = this.list[0],
-                itemOffsetTop = item.offsetTop,
-                itemOffsetHeight = item.offsetHeight,
-                contentScrollTop = content.scrollTop,
-                contentOffsetHeight = content.clientHeight,
-                bottomDistance = itemOffsetTop + itemOffsetHeight;
-
-                if (contentScrollTop > itemOffsetTop) {
-                    contentScrollTop = itemOffsetTop;
-                } else if (bottomDistance > (contentScrollTop + contentOffsetHeight)) {
-                    contentScrollTop = (bottomDistance - contentOffsetHeight);
-                }
-
-                content.scrollTop = contentScrollTop;
+            item.scrollIntoView();
         },
 
         select: function(li) {

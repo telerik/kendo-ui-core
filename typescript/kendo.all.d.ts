@@ -10317,6 +10317,24 @@ declare namespace kendo.ui {
         ui?: string|Function;
     }
 
+    interface TreeListColumnFilterableCell {
+        dataSource?: any|kendo.data.DataSource;
+        dataTextField?: string;
+        delay?: number;
+        inputWidth?: number;
+        suggestionOperator?: string;
+        minLength?: number;
+        enabled?: boolean;
+        operator?: string;
+        showOperators?: boolean;
+        template?: Function;
+    }
+
+    interface TreeListColumnFilterable {
+        cell?: TreeListColumnFilterableCell;
+        ui?: string|Function;
+    }
+
     interface TreeListColumnSortable {
         compare?: Function;
     }
@@ -10335,11 +10353,13 @@ declare namespace kendo.ui {
         headerAttributes?: any;
         headerTemplate?: string|Function;
         minScreenWidth?: number;
+        selectable?: boolean;
         sortable?: boolean | TreeListColumnSortable;
         template?: string|Function;
         title?: string;
         width?: string|number;
         hidden?: boolean;
+        includeChildren?: boolean;
         menu?: boolean;
         locked?: boolean;
         lockable?: boolean;
@@ -10414,6 +10434,7 @@ declare namespace kendo.ui {
     interface TreeListFilterable {
         extra?: boolean;
         messages?: TreeListFilterableMessages;
+        mode?: string;
         operators?: TreeListFilterableOperators;
     }
 

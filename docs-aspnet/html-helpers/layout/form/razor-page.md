@@ -60,18 +60,29 @@ See the implementation details in the example below, and for the full project wi
     </script>
 ```
 ```tab-PageModel(cshtml.cs)
-    public IActionResult OnPost()
+    [BindProperty]
+    public OrderViewModel Order { get; set; }
+
+    public void OnGet()
+    {
+        if (Order == null)
         {
-            var model = Request.Form;
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            return RedirectToPage("Success");
-
+            Order = new OrderViewModel();
         }
+    }
+
+    public IActionResult OnPost()
+    {
+        var model = Request.Form;
+
+        if (!ModelState.IsValid)
+        {
+            return Page();
+        }
+
+        return RedirectToPage("Success");
+
+    }
 ```
 
 ## Submitting the Form with Ajax

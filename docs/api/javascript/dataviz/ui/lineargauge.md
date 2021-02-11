@@ -109,6 +109,7 @@ horizontal gauge is 200px.
 The pointer configuration options. It accepts an `Array` of pointers, each with it's own configuration options.
 
 #### Example - specify single pointer
+
     <div id="gauge"></div>
     <script>
 	  $("#gauge").kendoLinearGauge({
@@ -116,9 +117,10 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
           value: 40
         }
       });
-    <script>
+    </script>
 
 #### Example - specify multiple pointers
+
 	<div id="gauge"></div>
     <script>
 	  $("#gauge").kendoLinearGauge({
@@ -128,7 +130,7 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
           value: 40
         }]
       });
-    <script>
+    </script>
 
 ### pointer.border `Object`
 
@@ -296,19 +298,19 @@ The supported values are:
 
 ### Example - Render as Canvas, if supported
 
-<div id="gauge"><div>
-<script>
-$("#gauge").kendoLinearGauge({
-    renderAs: "canvas",
-    pointer: {
-        value: 50
-    },
-    scale: {
-        min: 0,
-        max: 100
-    }
-});
-</script>
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        renderAs: "canvas",
+        pointer: {
+            value: 50
+        },
+        scale: {
+            min: 0,
+            max: 100
+        }
+    });
+    </script>
 
 ### scale `Object`
 
@@ -430,14 +432,14 @@ The format of the labels.
 
 #### Example
 
-  <div id="linear-gauge"><div>
-  <script>
+    <div id="linear-gauge"></div>
+    <script>
     $("#linear-gauge").kendoLinearGauge({
         scale: {
-        labels: {
-           // set the format to currency
-            format: "C"
-        }
+            labels: {
+                // set the format to currency
+                format: "C"
+            }
         }
     });
     </script>
@@ -500,16 +502,17 @@ Template variables:
 *   **value** - the value
 
 #### Example
+
     <div id="linear-gauge"></div>
     <script>
-      // chart initialization
+      // gauge initialization
     $("#linear-gauge").kendoLinearGauge({
-         scale: {
-             labels: {
-                 // labels template
-                 template: "#= value #%"
-             }
-         }
+        scale: {
+            labels: {
+                // labels template
+                template: "#= value #%"
+            }
+        }
     });
     </script>
 
@@ -588,7 +591,7 @@ The ranges of the scale.
 
 #### Example
 
-    <div id="linear-gauge"><div>
+    <div id="linear-gauge"></div>
     <script>
         $("#linear-gauge").kendoLinearGauge({
           scale: {
@@ -674,32 +677,32 @@ An array of values to be set.
 #### Example - setting multiple values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoLinearGauge({
+	$("#gauge").kendoLinearGauge({
         pointer: [{
-          value: 20
+            value: 20
         }, {
-          value: 40
+            value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoLinearGauge");
-      gauge.allValues([60, 10]);
-    <script>
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    gauge.allValues([60, 10]);
+    </script>
 
 #### Example - retrieving all values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoLinearGauge({
+	$("#gauge").kendoLinearGauge({
         pointer: [{
-          value: 20
+            value: 20
         }, {
-          value: 40
+            value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoLinearGauge");
-      var allValues = gauge.allValues();
-    <script>
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    var allValues = gauge.allValues();
+    </script>
 
 ### destroy
 
@@ -729,6 +732,7 @@ The height of the exported image. Defaults to the Gauge height.
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
 #### Example - Exporting a Gauge to an image
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -750,7 +754,6 @@ The height of the exported image. Defaults to the Gauge height.
         });
     </script>
 
-
 ### exportPDF
 Exports the Gauge as a PDF file.
 The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
@@ -767,6 +770,7 @@ Parameters for the exported PDF file.
 `Promise` A promise that will be resolved with a PDF file encoded as a Data URI.
 
 #### Example - Exporting a chart to a PDF file
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -808,6 +812,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
 #### Example - Exporting a chart to an SVG document
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -886,13 +891,13 @@ The gauge settings to update.
 
     <div id="gauge"></div>
     <script>
-        $("#gauge").kendoLinearGauge({
-            pointer: [{
-                value: 20
-            }]
-        });
+    $("#gauge").kendoLinearGauge({
+        pointer: [{
+            value: 20
+        }]
+    });
 
-        $("#gauge").data("kendoLinearGauge").setOptions({ theme: 'metro' });
+    $("#gauge").data("kendoLinearGauge").setOptions({ theme: 'metro' });
     </script>
 
 ### svg

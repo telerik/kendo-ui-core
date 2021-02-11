@@ -219,6 +219,26 @@
             assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
         });
 
+        it("closing a modal window removes overlay if previous modal has containment enabled", function() {
+            $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(Mocha.fixture);
+            var dialog = createWindow({
+                    modal: true,
+                    draggable: {
+                        containment: "#container"
+                    },
+                    animation: false
+                }),
+                overlappingDialog = createWindow({
+                    modal: true,
+                    animation: false
+                });
+
+            overlappingDialog.close();
+            dialog.close();
+
+            assert.equal($(".k-overlay").length, 0);
+        });
+
         it("destroying a modal window removes overlay if other open window has different appendTo", function() {
             var dialog = createWindow({
                     modal: true,

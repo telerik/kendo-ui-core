@@ -682,6 +682,389 @@ for all columns when filtering is enabled through the [`filterable`](/api/javasc
       });
     </script>
 
+### columns.filterable.cell `Object`
+
+Specifies options for the filter header cell when filter mode is set to 'row'.
+
+Can be set to a JavaScript object which represents the filter cell configuration.
+
+#### Example - cell filtering options
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    enabled: true,
+                    delay: 1500
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.dataSource `Object|kendo.data.DataSource`
+
+Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
+
+It is not recommended that you use the same `dataSource` instance for the TreeList and the AutoComplete because it causes negative side effects.
+
+If the `dataSource` options is missing, a new cloned instance of the TreeList's dataSource will be used.
+
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
+
+#### Example - custom cell filter autocomplete dataSource
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    dataSource: new kendo.data.DataSource({
+                        data: [
+                            { someField: "CEO" },
+                            { someField: "VP, Engineering" },
+                            { someField: "Software Engineer" }
+                        ]
+                    }),
+                    dataTextField: "someField"
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.dataTextField `String`
+
+Specifies the name of the field which will provide the text representation for the AutoComplete suggestion (when using String type column) when CustomDataSource is provided. By default the name of the field bound to the column will be used.
+
+#### Example - Using custom dataSource and providing dataTextField option
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    dataSource: new kendo.data.DataSource({
+                        data: [
+                            { someField: "CEO" },
+                            { someField: "VP, Engineering" },
+                            { someField: "Software Engineer" }
+                        ]
+                    }),
+                    dataTextField: "someField"
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.delay `Number` *(default: 200)*
+
+Specifies the delay of the AutoComplete widget which will provide the suggest functionality (when using String type column).
+
+#### Example - Specifying delay option for the AutoComplete widget used to make suggestions while filtering.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    dataSource: new kendo.data.DataSource({
+                        data: [
+                            { someField: "CEO" },
+                            { someField: "VP, Engineering" },
+                            { someField: "Software Engineer" }
+                        ]
+                    }),
+                    dataTextField: "someField"
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.inputWidth `Number`
+
+Specifies the width of the input before it is initialized or turned into a widget. Provides convenient way to set the width according to the column width.
+
+#### Example - Specifying inputWidth option for the filter cell of a column
+
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  inputWidth: 333
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
+
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter.operator) option.
+
+> This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
+
+#### Example - Specifying suggestionOperator option for the filter cell of a column
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  suggestionOperator: "contains"
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.minLength `Number` *(default: 1)*
+
+Specifies the minLength option of the AutoComplete widget when column is of type string.
+
+#### Example - Specifying minLength of the AutoComplete widget when using filter cell.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                   minLength: 3
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.enabled `Boolean` *(default: true)*
+
+When set to false the TreeList will not render the cell filtering widget for that specific column.
+
+#### Example - Disable the cell filtering for a specific column.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  enabled: false
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.operator `String` *(default: "eq")*
+
+Specifies the default operator that will be used for the cell filtering.
+
+> If you want to change how the AutoComplete suggestions are filtered use [suggestionOperator](columns.filterable.cell.suggestionoperator).
+
+#### Example - Specifying default operator for cell filtering.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  operator: "neq"
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.showOperators `Boolean` *(default: true)*
+
+Specifies whether to show or hide the DropDownList with the operators.
+
+#### Example - Hide the operators dropdownlist for cell filtering.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  showOperators: false,
+                  operator: "contains"
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.template `Function`
+
+JavaScript function which will customize how the input for the filter value is rendered.
+The function receives an object argument with two fields:
+
+* **`element`** - the default input inside the filter cell;
+* **`dataSource`** - a Kendo UI DataSource instance, which has the same settings as the TreeList dataSource, but will only contain data items with unique values for the current column.
+This instance is also used by the default AutoComplete widget, which is used inside the filter cell if no template is set. Keep in mind that the passed dataSource instance may still not be
+populated at the time the template function is called, if the TreeList uses remote binding.
+
+#### Example - Using template for the filter cell
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  template: function (args) {
+                      // create a DropDownList of unique values (colors)
+                      args.element.kendoDropDownList({
+                          dataSource: args.dataSource,
+                          dataTextField: "position",
+                          dataValueField: "position",
+                          valuePrimitive: true
+                      });
+
+                  },
+                  showOperators: false
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+              { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+              { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+              { id: 3, parentId: null, lastName: "Jason", position: "Contractor" }
+        ]
+      });
+    </script>
+
 ### columns.filterable.ui `String|Function`
 
 The `role` [data attribute](/framework/data-attribute-initialization) of the widget that is used in the filter menu, or a JavaScript function which initializes that widget.
@@ -2622,6 +3005,41 @@ The text of the option which represents the `OR` logical operation.
           messages: {
             or: "or"
           }
+        }
+      });
+    </script>
+
+### filterable.mode `String` *(default: "menu")*
+
+If set to `row` the user would be able to filter via extra row added below the headers. By default filtering is using the `menu` mode.
+
+Can also be set to the following string values:
+
+- "row" - the user can filter via extra row within the header.
+- "menu" - the user can filter via the menu after clicking the filter icon.
+- "menu, row" - the user can filter with both modes above enabled.
+
+> When the `filterable.mode` property is set to `"row"` or `"menu, row"`, the TreeList dataSource instance is copied and applied to the Kendo UI AutoComplete widgets used for string filtering.
+This will cause one additional read request per string column. The AutoComplete dataSources do not perform paging and will use a collection of the unique column values only.
+
+#### Example - set mode option to use both "menu" and "row" modes simultaneously
+
+    <div id="treeList"></div>
+
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          "lastName",
+          "position"
+        ],
+        filterable: {
+            mode: "menu, row"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+          ]
         }
       });
     </script>
