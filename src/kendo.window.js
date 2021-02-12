@@ -1835,7 +1835,7 @@
 
                 wnd._updateBoundaries();
 
-                that.containerOffset = wnd.containment ? wnd.containment.position : kendo.getOffset(wnd.appendTo, "position");
+                that.containerOffset = wnd.containment ? wnd.containment.position : kendo.getOffset(wnd.appendTo);
 
                 var offsetParent = wrapper.offsetParent();
 
