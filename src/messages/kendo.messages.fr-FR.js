@@ -452,9 +452,15 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusFailed": "échoué",
   "statusUploaded": "téléchargé",
   "statusUploading": "téléchargement",
+  "clearSelectedFiles": "Vider",
   "uploadSelectedFiles": "Télécharger des fichiers",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded": "Terminé",
+  "headerStatusUploading": "Envoi...",
+  "uploadSuccess": "Fichier(s) envoyé(s) avec succès.",
+  "uploadFail": "Echec de l'envoi de(s) fichier(s).",
+  "invalidMaxFileSize": "Taille du fichier trop grande.",
+  "invalidMinFileSize": "Taille du fichier trop petite.",
+  "invalidFileExtension": "Type de fichier invalide."
 });
 }
 
@@ -569,7 +575,17 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
-/* ListBox messaages */
+/* Slider messages */
+
+if (kendo.ui.Slider) {
+    kendo.ui.Slider.prototype.options =
+        $.extend(true, kendo.ui.Slider.prototype.options, {
+            "increaseButtonTitle": "Augmenter",
+            "decreaseButtonTitle": "Diminuer"
+        });
+}
+
+/* ListBox messages */
 
 if (kendo.ui.ListBox) {
 kendo.ui.ListBox.prototype.options.messages =
