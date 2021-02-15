@@ -120,6 +120,19 @@
             assert.isNotOk(widget.floatingLabel.element.hasClass("k-state-focused"));
         });
 
+        it("floating label adds k-state-readonly when textarea is set to readonly", function() {
+            var widget = new TextArea(textarea, {
+                label: {
+                    content: "test",
+                    floating: true
+                }
+            });
+
+            widget.readonly();
+
+            assert.isOk(widget.floatingLabel.element.hasClass("k-state-readonly"));
+        });
+
         it("widget enable calls floating label enable", function() {
             var widget = new TextArea(textarea, {
                 label: {

@@ -27,7 +27,7 @@
             assert.equal(textarea.attr("disabled"), undefined);
         });
 
-        it("enable(false) removes readonly attribute and no-click class", function() {
+        it("enable(false) removes readonly attribute and k-state-readonly class", function() {
             var widget = textarea.kendoTextArea().data("kendoTextArea");
 
             widget.readonly();
@@ -35,7 +35,7 @@
 
             assert.equal(widget.element.attr("readonly"), undefined);
             assert.equal(widget.element.attr("disabled"), "disabled");
-            assert.isOk(!widget.wrapper.hasClass("k-no-click"));
+            assert.isOk(!widget.wrapper.hasClass("k-state-readonly"));
             assert.isOk(widget.wrapper.hasClass("k-state-disabled"));
         });
 
@@ -45,7 +45,7 @@
             widget.readonly(true);
 
             assert.equal(textarea.attr("readonly"), "readonly");
-            assert.isOk(widget.wrapper.hasClass("k-no-click"));
+            assert.isOk(widget.wrapper.hasClass("k-state-readonly"));
         });
 
         it("readonly(false) should remove readonly attributes", function() {
@@ -55,7 +55,7 @@
             widget.readonly(false);
 
             assert.equal(textarea.attr("readonly"), undefined);
-            assert.isNotOk(widget.wrapper.hasClass("k-no-click"));
+            assert.isNotOk(widget.wrapper.hasClass("k-state-readonly"));
         });
 
         it("readonly() removes disabled attribute and disabled class", function() {
@@ -66,7 +66,7 @@
 
             assert.equal(widget.element.attr("readonly"), "readonly");
             assert.equal(widget.element.attr("disabled"), undefined);
-            assert.isOk(widget.wrapper.hasClass("k-no-click"));
+            assert.isOk(widget.wrapper.hasClass("k-state-readonly"));
             assert.isOk(!widget.wrapper.hasClass("k-state-disabled"));
         });
 
