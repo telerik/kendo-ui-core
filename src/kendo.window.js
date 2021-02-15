@@ -752,7 +752,9 @@
 
             _overlay: function (visible) {
                 var overlay = this.containment ? this.containment.children(KOVERLAY) : this.appendTo.children(KOVERLAY),
-                    wrapper = this.wrapper;
+                    wrapper = this.wrapper,
+                    display = visible ? "block" : "none",
+                    zIndex = parseInt(wrapper.css(ZINDEX), 10) - 1;
 
                 if (!overlay.length) {
                     overlay = $("<div class='k-overlay' />");
@@ -760,8 +762,10 @@
 
                 overlay
                     .insertBefore(wrapper[0])
-                    .toggle(visible)
-                    .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
+                    .css({
+                        zIndex: zIndex,
+                        display: display
+                    });
 
                 if (this.options.modal.preventScroll && !this.containment) {
                     this._stopDocumentScrolling();
@@ -798,25 +802,31 @@
             },
 
             _modals: function() {
-                var that = this;
+                var that = this,
+                    windowElements = $(KWINDOW + VISIBLE),
+                    windowInstance,
+                    modals = [];
 
-                var zStack = $(KWINDOW).filter(function() {
-                    var modal = that._object($(this));
+                for (var i = 0; i < windowElements.length; i += 1) {
+                    windowInstance = that._object($(windowElements[i]));
 
-                    return modal &&
-                        modal.options &&
-                        modal.options.modal &&
-                        modal.options.visible &&
-                        modal.options.appendTo === that.options.appendTo &&
-                        !modal.containment &&
-                        $(modal.element).is(VISIBLE);
-                }).sort(function(a, b){
-                    return +$(a).css("zIndex") - +$(b).css("zIndex");
+                    if (windowInstance &&
+                        windowInstance.options &&
+                        windowInstance.options.modal &&
+                        windowInstance.options.visible &&
+                        windowInstance.options.appendTo === that.options.appendTo &&
+                        !windowInstance.containment) {
+                            modals.push(windowInstance.wrapper[0]);
+                    }
+                }
+
+                modals.sort(function(a, b) {
+                    return a.style.zIndex - b.style.zIndex;
                 });
 
                 that = null;
 
-                return zStack;
+                return $(modals);
             },
 
             _object: function(element) {
@@ -1036,12 +1046,11 @@
                 var modals = this._modals();
                 var options = this.options;
                 var hideOverlay = options.modal && !modals.length;
-                var overlay = options.modal ? this._overlay(true) : $(undefined);
                 var hideOptions  = this._animationOptions("close");
 
                 if (hideOverlay) {
                     if (!suppressAnimation && hideOptions.duration && kendo.effects.Fade) {
-                        var overlayFx = kendo.fx(overlay).fadeOut();
+                        var overlayFx = kendo.fx(options.modal ? this._overlay(true) : $(undefined)).fadeOut();
                         overlayFx.duration(hideOptions.duration || 0);
                         overlayFx.startValue(0.5);
                         overlayFx.play();
@@ -1700,12 +1709,14 @@
                 this.unbind(undefined);
 
                 kendo.destroy(this.wrapper);
-
-                this._removeOverlay(true);
             },
 
             destroy: function() {
                 this._destroy();
+
+                if (this.options.modal) {
+                    this._removeOverlay(true);
+                }
 
                 this.wrapper.empty().remove();
 
