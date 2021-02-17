@@ -34,9 +34,9 @@ The filter condition is applied to the DataSource. In order to remove the curren
 The following example demonstrates how to implement the suggested approach:
 
 ```dojo
-    <div id="grid"></div>
+ <div id="grid"></div>
     <script type="text/x-kendo-template" id="template">
-            <button id="clearFiltersButton">Clear Filters</button>
+            <button id="clearFiltersButton" class="k-button">Clear Filters</button>
     </script>
     <script>
       $("#grid").kendoGrid({
@@ -45,14 +45,41 @@ The following example demonstrates how to implement the suggested approach:
           { field: "name", filterable: false },
           { field: "age" }
         ],
-        filterable: true,
-        dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }]
+        dataSource: {
+          data: [
+          { name: "Jane", age: 30 }, 
+          { name: "John", age: 33 },
+          { name: "Ana", age: 23 },
+          { name: "Bob", age: 27 },
+          { name: "Helen", age: 62 },
+          { name: "Michaele", age: 54 },
+          { name: "Susan", age: 18 },
+          { name: "Charlie", age: 71 },
+          { name: "Steve", age: 33 },
+          ],
+          schema: {
+            model: {
+              fields: {
+                age: { type: "number" }
+              }
+            }
+          }
+        },
+        filterable: {
+          operators: {
+            number: {
+              eq: "Equal to",
+              neq: "Not equal to",
+              lt: "Less than",
+              gt: "Greater than"
+            }
+          }
+        }
       });
 
-      $( "#clearFiltersButton" ).click(function() {
+      $("#clearFiltersButton").click(function() {
         var gridDataSource = $("#grid").data("kendoGrid").dataSource;
         gridDataSource.filter({});
       });
-
     </script>
 ```
