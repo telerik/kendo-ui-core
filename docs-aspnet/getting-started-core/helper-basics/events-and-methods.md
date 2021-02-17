@@ -3,7 +3,7 @@ title: Methods and Events
 page_title: Methods and Events
 description: "Get started with Telerik UI for ASP.NET Core, obtain a reference to initialized helper instances, and call their methods and events."
 slug: methodevents_core
-position: 2
+position: 3
 permalink: /getting-started/helper-basics/events-and-methods
 ---
 

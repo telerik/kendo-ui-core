@@ -3,7 +3,7 @@ title: Security and Validation
 page_title: Security and Validation
 description: "Get started with Telerik UI for ASP.NET Core and learn the fundamentals for XSS and CSRF attacks."
 slug: aspnetcore_security_gettingstarted
-position: 4
+position: 5
 permalink: /getting-started/helper-basics/security-and-validation
 ---
 
