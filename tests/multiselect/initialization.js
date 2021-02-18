@@ -574,6 +574,12 @@
         assert.equal(multiselect.input.attr("accesskey"), "w");
     });
 
+    it("should not render accesskey on its input when none is configuerd", function() {
+        var multiselect = new MultiSelect(select);
+
+        assert.isOk(!multiselect.input[0].hasAttribute("accesskey"));
+    });
+
     it("Scales correctly input element when init in hidden element", function() {
         var div = $("<div style='display:none'/>").appendTo(document.documentElement);
         div.append(select);

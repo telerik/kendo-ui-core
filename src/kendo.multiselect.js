@@ -1456,7 +1456,6 @@ var __meta__ = { // jshint ignore:line
             element.removeAttr("accesskey");
 
             that._focused = that.input = input.attr({
-                "accesskey": accessKey,
                 "autocomplete": AUTOCOMPLETEVALUE,
                 "role": "textbox",
                 "title": element[0].title,
@@ -1464,6 +1463,10 @@ var __meta__ = { // jshint ignore:line
                 "aria-haspopup": "listbox",
                 "aria-autocomplete": "list"
             });
+
+            if(accessKey) {
+                that._focused.attr("accesskey", accessKey);
+            }
         },
 
         _tagList: function() {

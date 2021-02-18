@@ -25,7 +25,8 @@ var __meta__ = { // jshint ignore:line
         UNSELECTING = "k-state-unselecting",
         INPUTSELECTOR = "input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-collapse,.k-icon.k-i-expand,span.k-numeric-wrap,.k-focusable",
         msie = kendo.support.browser.msie,
-        supportEventDelegation = false;
+        supportEventDelegation = false,
+        extend = $.extend;
 
         (function($) {
             (function() {
@@ -235,6 +236,8 @@ var __meta__ = { // jshint ignore:line
                 related,
                 toSelect;
 
+            this._currentlyActive = [];
+
             for (idx = 0, length = items.length; idx < length; idx ++) {
                 toSelect = items.eq(idx);
                 related = toSelect.add(this.relatedTarget(toSelect));
@@ -247,6 +250,7 @@ var __meta__ = { // jshint ignore:line
                     } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING) && !this._collidesWithActiveElement(related, position)) {
                         related.addClass(ACTIVE);
                     }
+                    this._currentlyActive.push(related[0]);
                 } else {
                     if (toSelect.hasClass(ACTIVE)) {
                         related.removeClass(ACTIVE);
@@ -262,10 +266,10 @@ var __meta__ = { // jshint ignore:line
                 return false;
             }
 
-            var that = this;
-            var activeElements = that.element.find(that.options.filter + "." + ACTIVE);
+            var activeElements = this._currentlyActive;
             var elemRect = element[0].getBoundingClientRect();
             var activeElementRect;
+            var collision = false;
 
             marqueeRect.right = marqueeRect.left + marqueeRect.width;
             marqueeRect.bottom = marqueeRect.top + marqueeRect.height;
@@ -273,13 +277,14 @@ var __meta__ = { // jshint ignore:line
             for (var i = 0; i < activeElements.length; i++) {
                 activeElementRect = activeElements[i].getBoundingClientRect();
                 if (overlaps(elemRect, activeElementRect)) {
-                    elemRect = $.extend({}, elemRect, {left: activeElementRect.right});
+                    elemRect = extend({}, elemRect, {left: activeElementRect.right});
                     if (elemRect.left > elemRect.right) {
                         return true;
                     }
-                    return !overlaps(elemRect, marqueeRect);
+                    collision = !overlaps(elemRect, marqueeRect);
                 }
             }
+            return collision;
         },
 
         value: function(val, e) {

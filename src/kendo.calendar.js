@@ -118,6 +118,9 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.hasFooter) {
                 that._footer(that.footer);
+            } else {
+                that._today = that.element.find('a.k-today');
+                that._toggle();
             }
 
             id = element
@@ -270,6 +273,7 @@ var __meta__ = { // jshint ignore:line
                 that._footer(that.footer);
             } else {
                 that.element.find(".k-footer").hide();
+                that._toggle();
             }
             that._index = views[that.options.start];
 
