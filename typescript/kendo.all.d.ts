@@ -11074,6 +11074,7 @@ declare namespace kendo.ui {
         errors(): any;
         hideMessages(): void;
         hideValidationSummary(): void;
+        reset(): void;
         showValidationSummary(): void;
         validate(): boolean;
         validateInput(input: Element): boolean;

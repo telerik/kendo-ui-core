@@ -110,5 +110,56 @@ it("DatePicker removes aria-label from previous cell", function() {
     assert.equal(cell.length, 1);
 });
 
+});
+
+describe("kendo.ui.DatePicker ARIA defaults", function () {
+    beforeEach(function() {
+
+        input = $("<input id='test' />").appendTo(Mocha.fixture);
     });
+    afterEach(function() {
+
+        instance.destroy();
+        kendo.destroy(Mocha.fixture);
+    });
+
+it("DatePicker add correct aria-label for date", function() {
+    instance = new DatePicker(input);
+    instance.open();
+
+    var date = kendo.date.today();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+    assert.equal(cell.attr("aria-label"), "Current focused date is "+kendo.toString(date, "D"));
+});
+
+it("DatePicker add correct aria-label for year", function() {
+    var date = kendo.date.today();
+    instance = new DatePicker(input, { start: "year"});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+    assert.equal(cell.attr("aria-label"), "Current focused month is "+kendo.toString(date, "MMMM"));
+});
+
+it("DatePicker add correct aria-label for decade", function() {
+    var date = kendo.date.today();
+    instance = new DatePicker(input, { start: "decade"});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+    assert.equal(cell.attr("aria-label"),  "Current focused year is "+kendo.toString(date, "yyyy"));
+});
+
+it("DatePicker add correct aria-label for century", function() {
+    instance = new DatePicker(input, { start: "century", value: new Date(2021, 0, 1)});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+    assert.equal(cell.attr("aria-label"), "Current focused decade is 2020 - 2029");
+});
+
+});
 }());

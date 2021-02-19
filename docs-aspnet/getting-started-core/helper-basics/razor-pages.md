@@ -4,6 +4,7 @@ page_title: Razor Pages
 description: "Get started with Razor Pages and Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /getting-started/razor-pages-integration, /getting-started/installation/razor-pages-integration, /compatibility/razor-pages-integration
 slug: razor_pages_integration_aspnetmvc6_aspnetmvc
+permalink: /getting-started/helper-basics/razor-pages
 position: 2
 ---
 

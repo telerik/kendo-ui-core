@@ -50,7 +50,8 @@ var __meta__ = { // jshint ignore:line
         STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         proxy = $.proxy,
-        newLineRegEx = /(\r\n|\n|\r)/gm;
+        newLineRegEx = /(\r\n|\n|\r)/gm,
+        NON_PRINTABLE_KEYS = [16,17,18,19,20,33,34,37,39,45,91,92,144,145];
 
     var ComboBox = Select.extend({
         init: function(element, options) {
@@ -998,7 +999,9 @@ var __meta__ = { // jshint ignore:line
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                textField = that.options.dataTextField || "text";
+                textField = that.options.dataTextField || "text",
+                isFkey = key >= 112 && key <= 135,
+                isNonPrintableKey = NON_PRINTABLE_KEYS.indexOf(key) > -1;
 
             that._last = key;
 
@@ -1053,7 +1056,7 @@ var __meta__ = { // jshint ignore:line
                         that._oldText = that.text();
                     }
                 }
-            } else if (key != keys.TAB && !that._move(e)) {
+            } else if (key != keys.TAB && !that._move(e) && !isNonPrintableKey && !isFkey && !e.ctrlKey) {
                that._search();
             } else if (key === keys.ESC && !that.popup.visible() && that.text()) {
                 that._clearValue();
@@ -1114,7 +1117,7 @@ var __meta__ = { // jshint ignore:line
 
                     that._toggleCloseVisibility();
                 }
-                else if (value === "" && that._prev !== "") {
+                else if (value === "" && that._prev !== "" && that._prev !== undefined) {
                     that._clearValue();
                     that.search("");
                 }
