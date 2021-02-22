@@ -270,6 +270,9 @@ var __meta__ = { // jshint ignore:line
             var elemRect = element[0].getBoundingClientRect();
             var activeElementRect;
             var collision = false;
+            var isRtl = kendo.support.isRtl(element);
+            var leftRight = isRtl ? "right" : "left";
+            var tempRect = {};
 
             marqueeRect.right = marqueeRect.left + marqueeRect.width;
             marqueeRect.bottom = marqueeRect.top + marqueeRect.height;
@@ -277,7 +280,8 @@ var __meta__ = { // jshint ignore:line
             for (var i = 0; i < activeElements.length; i++) {
                 activeElementRect = activeElements[i].getBoundingClientRect();
                 if (overlaps(elemRect, activeElementRect)) {
-                    elemRect = extend({}, elemRect, {left: activeElementRect.right});
+                    tempRect[leftRight] = leftRight === "left" ? activeElementRect.right : activeElementRect.left;
+                    elemRect = extend({}, elemRect, tempRect);
                     if (elemRect.left > elemRect.right) {
                         return true;
                     }

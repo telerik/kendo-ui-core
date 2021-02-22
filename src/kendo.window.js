@@ -64,6 +64,7 @@
             RESIZEEND = "resizeEnd",
             DRAGSTART = "dragstart",
             DRAGEND = "dragend",
+            RESTORE = "restore",
             KENDOKEYDOWN = "kendoKeydown",
             ERROR = "error",
             OVERFLOW = "overflow",
@@ -563,6 +564,7 @@
                 MINIMIZE,
                 MAXIMIZE,
                 REFRESH,
+                RESTORE,
                 RESIZESTART,
                 RESIZE,
                 RESIZEEND,
@@ -1299,6 +1301,8 @@
                 that.wrapper.removeAttr("aria-labelled-by");
 
                 that.resize();
+
+                that.trigger(RESTORE);
 
                 return that;
             },

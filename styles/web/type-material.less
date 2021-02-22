@@ -912,10 +912,13 @@
 
 @expander-header-bg: @expander-bg;
 @expander-header-text: @expander-text;
-@expander-header-border: @expander-text;
+@expander-header-border: null;
 
-@expander-header-sub-title-opacity: .65;
+@expander-title-text: if(@is-dark-theme, lighten(@primary, 30%), @primary);
 
+@expander-header-sub-title-opacity: .62;
+
+@expander-header-hover-bg: rgba( black, .04 );
 @expander-header-focused-bg: rgba( black, .12 );
 @expander-header-focused-shadow: inset 0 0 0 2px contrast(@background, rgba(black, .13), rgba(white, .6), 0.5);
 

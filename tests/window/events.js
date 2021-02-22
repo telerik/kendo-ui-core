@@ -715,5 +715,63 @@
             assert.isOk(!dialog.initialWindowPosition);
             assert.isOk(!handler.calls);
         });
+
+        it("restore() triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                    actions: ["Maximize", "Restore"],
+                    restore: function() {
+                        triggers++;
+                    }
+                });
+
+            dialog.maximize();
+            dialog.restore();
+
+            assert.equal(triggers, 1);
+        });
+
+        it("restore() triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                    restore: function() {
+                        triggers++;
+                    }
+                });
+
+            dialog.maximize();
+            dialog.restore();
+
+            assert.equal(triggers, 1);
+        });
+
+        it("alt+up triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                restore: function(ev) {
+                    triggers++;
+                }
+            });
+
+            dialog.minimize();
+            dialog.wrapper.press(keys.UP, { altKey: true });
+
+            assert.isOk(triggers, 1);
+        });
+
+        it("alt+down triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                restore: function(ev) {
+                    triggers++;
+                }
+            });
+
+
+            dialog.maximize();
+            dialog.wrapper.press(keys.DOWN, { altKey: true });
+
+            assert.isOk(triggers, 1);
+        });
     });
 })();

@@ -942,7 +942,7 @@ Indicates whether the content will be fetched within an `iframe` or with AJAX, a
 
 ### restore
 
-Restores a maximized or minimized Window to its previous state. Triggers the `resize` event.
+Restores a maximized or minimized Window to its previous state. Triggers the `resize` and `restore` events.
 
 #### Returns
 
@@ -1388,4 +1388,34 @@ Triggered when the user resizes the Window.
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
     dialog.bind("resize", window_resize);
+    </script>
+
+### restore
+
+Triggered when the Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/javascript/ui/window/methods/restore) method is called.
+
+#### Example - subscribing to the restore event during initialization
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        restore: function() {
+          // the Window is back to its previous state
+        }
+      });
+    </script>
+
+#### Example - subscribing to the restore event after initialization
+
+    <div id="dialog"></div>
+
+    <script>
+      function window_restore() {
+        // the Window is back to its previous state
+      }
+
+      var dialog = $("#dialog").kendoWindow().getKendoWindow();
+
+      dialog.bind("restore", window_restore);
     </script>

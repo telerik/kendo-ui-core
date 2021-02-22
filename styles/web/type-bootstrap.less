@@ -905,11 +905,14 @@
 
 @expander-header-bg: @expander-bg;
 @expander-header-text: @expander-text;
-@expander-header-border: @expander-text;
+@expander-header-border: null;
 
-@expander-header-sub-title-opacity: .65;
+@expander-title-text: @primary;
 
-@expander-header-focused-bg: null;
+@expander-header-sub-title-opacity: .5;
+
+@expander-header-hover-bg: darken(@expander-header-bg, 10%);
+@expander-header-focused-bg: darken(@expander-header-bg, 30%);
 @expander-header-focused-shadow: inset 0 0 0 3px rgba(33, 37, 41, .15);
 
 
