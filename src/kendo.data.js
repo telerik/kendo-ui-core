@@ -1909,7 +1909,7 @@ var __meta__ = { // jshint ignore:line
         if (customGroupSort) {
             query = query.group(group, data, options);
 
-            if (skip !== undefined && take !== undefined) {
+            if (skip !== undefined && take !== undefined && !options.groupPaging) {
                 query = new Query(flatGroups(query.toArray())).range(skip, take);
 
                 groupDescriptorsWithoutSort = map(groupDescriptorsWithoutCompare, function(groupDescriptor) {

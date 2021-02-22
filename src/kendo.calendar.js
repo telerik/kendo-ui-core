@@ -118,6 +118,9 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.hasFooter) {
                 that._footer(that.footer);
+            } else {
+                that._today = that.element.find('a.k-today');
+                that._toggle();
             }
 
             id = element
@@ -270,6 +273,7 @@ var __meta__ = { // jshint ignore:line
                 that._footer(that.footer);
             } else {
                 that.element.find(".k-footer").hide();
+                that._toggle();
             }
             that._index = views[that.options.start];
 
@@ -1262,7 +1266,8 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 options = that.options,
                 isTodayDisabled = that.options.disableDates(getToday()),
-                link = that._today;
+                link = that._today,
+                todayClass = that._todayClass();
 
             if (toggle === undefined) {
                 toggle = isInRange(getToday(), options.min, options.max);
@@ -1272,15 +1277,19 @@ var __meta__ = { // jshint ignore:line
                 link.off(CLICK);
 
                 if (toggle && !isTodayDisabled) {
-                    link.addClass(TODAY)
+                    link.addClass(todayClass)
                     .removeClass(DISABLED)
                     .on(CLICK, proxy(that._todayClick, that));
                 } else {
-                    link.removeClass(TODAY)
+                    link.removeClass(todayClass)
                     .addClass(DISABLED)
                     .on(CLICK, prevent);
                 }
             }
+        },
+
+        _todayClass: function() {
+            return this.options.componentType === "modern" ? "k-today" : TODAY;
         },
 
         _todayClick: function(e) {

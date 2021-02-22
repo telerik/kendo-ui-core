@@ -187,7 +187,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function() {
-            this.popup.close();
+            if (this.popup) {
+                this.popup.close();
+            }
         },
 
         min: function(value) {

@@ -994,8 +994,8 @@ var __meta__ = { // jshint ignore:line
                 .appendTo(document.body);
 
             div.append(kendo.template(SINGLE_POPUP_TEMPLATE)(that.options));
-            that.popup = new ui.Popup(div, extend(options.popup, options, { 
-                name: "Popup", 
+            that.popup = new ui.Popup(div, extend(options.popup, options, {
+                name: "Popup",
                 isRtl: kendo.support.isRtl(that.wrapper),
                 anchor: that.wrapper,
                 activate: function () {
@@ -1005,7 +1005,10 @@ var __meta__ = { // jshint ignore:line
                         that.timeView._updateRanges();
                     }
                 },
-                open: function(){
+                open: function(e){
+                    if (that.trigger(OPEN, {view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that})) {
+                        e.preventDefault();
+                    }
                     that.timeView._updateTitle();
                 }
             }));
@@ -1034,6 +1037,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _switchToTimeView: function() {
+            this.timeView.addTranslate();
+            this.timeView.applyValue(this._value);
             this.timeView._updateRanges();
             this.popup.element.find(".k-group-start, .k-group-end").removeClass(STATE_ACTIVE).eq(1).addClass(STATE_ACTIVE);
             this.popup.element.find(".k-datetime-wrap").removeClass("k-date-tab").addClass("k-time-tab");
@@ -1054,9 +1059,10 @@ var __meta__ = { // jshint ignore:line
 
         _setClickHandler: function() {
             var value = this._applyDateValue();
-            var time = this.timeView._currentlySelected || new Date();
+            var time;
 
             value = value || new Date();
+            time = this.timeView._currentlySelected || value;
             this.timeView._updateCurrentlySelected();
             value.setHours(time.getHours());
             value.setMinutes(time.getMinutes());

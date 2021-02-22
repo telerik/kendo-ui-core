@@ -43,7 +43,25 @@
                     url: "foo/baz"
                 }
             });
-            
+
+            tooltip.show(container);
+        });
+
+        it("ajax request content is appended to popup element before it is opened", function(done) {
+            $.mockjax({
+                url: "foo/baz",
+                response: function(request) {
+                    assert.isOk(!tooltip.popup.visible());
+                    done();
+                }
+            });
+
+            var tooltip = new Tooltip(container, {
+                content: {
+                    url: "foo/baz"
+                }
+            });
+
             tooltip.show(container);
         });
 

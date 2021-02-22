@@ -7995,7 +7995,7 @@ Defines a list of fields which will be included in the search. If values for the
     </script>
 
 
-### selectable `Boolean|String` *(default: false)*
+### selectable `Boolean|String|Object` *(default: false)*
 
 If set to `true` the user would be able to select grid rows. By default selection is disabled.
 
@@ -8043,6 +8043,62 @@ Can also be set to the following string values:
     </script>
 
 > Check [Selection](https://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
+
+### selectable.mode `String`
+
+Can be set to the following string values:
+
+- "row" - the user can select a single row.
+- "cell" - the user can select a single cell.
+- "multiple, row" - the user can select multiple rows.
+- "multiple, cell" - the user can select multiple cells.
+
+> When the selectable property is set to "multiple, row" or "multiple, cell" the Grid cannot be scrollable on mobile devices as both are listening on the same event.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      selectable: {
+        mode: "multiple, row"
+      }
+    });
+    </script>
+
+### selectable.ignoreOverlapped `Boolean`
+
+When set to true, visually hidden elements that match by the filter option criteria but are overlapped by other elements that also can be selected, are ignored.
+
+> Applies only for multiple cell selection.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      selectable: {
+        mode: "multiple, cell",
+        ignoreOverlapped: true
+      }
+    });
+    </script>
 
 ### sortable `Boolean|Object` *(default: false)*
 

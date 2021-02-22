@@ -768,5 +768,24 @@
             assert.isOk(!ul.is("[aria-multiselectable]"));
         });
 
+        it("_invalidateSelectables calls _collidesWithActiveElement", function() {
+            var selectable =  new Selectable(ul, { multiple: true });
+
+            var selectableStub = stub(selectable, {
+                _collidesWithActiveElement: $.noop
+            });
+
+            selectable._downTarget = {};
+            selectable._items = selectable.element.find(selectable.options.filter);
+
+            selectable._invalidateSelectables({
+                height: 1000,
+                left: 0,
+                top: 0,
+                width: 1000
+            })
+
+            assert.isOk(selectableStub.calls('_collidesWithActiveElement') > 0);
+        });
     });
 }());

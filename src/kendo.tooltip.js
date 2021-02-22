@@ -278,6 +278,8 @@ var __meta__ = { // jshint ignore:line
         _ajaxRequest: function(options) {
             var that = this;
 
+            that.contentLoading = true;
+
             jQuery.ajax(extend({
                 type: "GET",
                 dataType: "html",
@@ -292,7 +294,11 @@ var __meta__ = { // jshint ignore:line
 
                     that.content.html(data);
 
+                    that.contentLoading = false;
+
                     that.trigger(CONTENTLOAD);
+
+                    that._openPopup();
                 }, that)
             }, options));
         },
@@ -354,8 +360,18 @@ var __meta__ = { // jshint ignore:line
                 DOCUMENT.off("keydown" + NS, that._documentKeyDownHandler);
             });
 
-            that.popup._hovered = true;
-            that.popup.open();
+            if (!that.contentLoading) {
+                that._openPopup();
+            }
+        },
+
+        _openPopup: function() {
+            if (!this.popup) {
+                return;
+            }
+
+            this.popup._hovered = true;
+            this.popup.open();
         },
 
         _initPopup: function() {
