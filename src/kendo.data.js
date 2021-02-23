@@ -2296,7 +2296,7 @@ var __meta__ = { // jshint ignore:line
                 currOriginal = originalGroup.items[i];
                 currentNew = newGroup.items[i];
                 if (currOriginal && currentNew) {
-                    if (currOriginal.hasSubgroups) {
+                    if (currOriginal.hasSubgroups && currOriginal.value == currentNew.value) {
                         fillLastGroup(currOriginal, currentNew);
                     } else if (currOriginal.field && currOriginal.value == currentNew.value) {
                         currOriginal.items.push.apply(currOriginal.items, currentNew.items);

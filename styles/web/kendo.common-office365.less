@@ -783,18 +783,15 @@
 
 
 // Expansion panel
-@expander-padding-y: 8px;
-@expander-font-family: inherit;
-@expander-font-size: inherit;
+@expander-spacing-y: 8px;
+@expander-font-family: @font-family;
+@expander-font-size: @font-size;
 @expander-line-height: @line-height;
-@expander-border-width: 0;
+@expander-border-width: 1px;
 
-@expander-header-padding-x: 0;
-@expander-header-padding-y: 8px;
-
-@expander-indicator-margin-x: 12px;
-
-@expander-header-border-width: 2px;
+@expander-header-padding-x: (@padding-x * 2);
+@expander-header-padding-y: (@padding-y * 3);
+@expander-indicator-margin-x: (@padding-x * 1.5);
 
 @expander-content-padding-x: 20px;
 @expander-content-padding-y: 20px;

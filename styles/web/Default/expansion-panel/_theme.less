@@ -4,24 +4,37 @@
         @expander-bg,
         @expander-border
     );
+}
 
-    .k-expander-header {
+.k-expander-header {
+    .fill(
+        @expander-header-text,
+        @expander-header-bg,
+        @expander-header-border
+    );
+    outline: none;
+
+    &:hover,
+    &.k-state-hover {
         .fill(
-            @expander-header-text,
-            @expander-header-bg,
-            @expander-header-border
+            @bg: @expander-header-hover-bg
         );
-        outline: none;
-
-        .k-expander-sub-title {
-            opacity: @expander-header-sub-title-opacity;
-        }
-
-        &.k-state-focused {
-            .fill(
-                @bg: @expander-header-focused-bg
-            );
-            .box-shadow(@expander-header-focused-shadow);
-        }
     }
+
+    &:focus,
+    &.k-state-focused {
+        .fill(
+            @bg: @expander-header-focused-bg
+        );
+        .box-shadow(@expander-header-focused-shadow);
+    }
+}
+
+.k-expander-title {
+    color: @expander-title-text;
+}
+
+
+.k-expander-sub-title {
+    opacity: @expander-header-sub-title-opacity;
 }

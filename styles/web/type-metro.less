@@ -886,8 +886,11 @@
 @expander-header-text: @expander-text;
 @expander-header-border: @expander-text;
 
+@expander-title-text: if(@is-dark-theme, lighten(@primary, 30%), @primary);
+
 @expander-header-sub-title-opacity: .65;
 
+@expander-header-hover-bg: null;
 @expander-header-focused-bg: null;
 @expander-header-focused-shadow: inset 0 0 0 2px contrast(@background, rgba(black, .13), rgba(white, .6), 0.5);
 
