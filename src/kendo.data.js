@@ -2296,12 +2296,10 @@ var __meta__ = { // jshint ignore:line
                 currOriginal = originalGroup.items[originalGroup.items.length - 1];
                 currentNew = newGroup.items[i];
                 if (currOriginal && currentNew) {
-                    if (currOriginal.value == currentNew.value) {
-                        if (currOriginal.hasSubgroups) {
-                            fillLastGroup(currOriginal, currentNew);
-                        } else if (currOriginal.field) {
-                            currOriginal.items.push.apply(currOriginal.items, currentNew.items);
-                        }
+                    if (currOriginal.hasSubgroups && currOriginal.value == currentNew.value) {
+                        fillLastGroup(currOriginal, currentNew);
+                    } else if (currOriginal.field && currOriginal.value == currentNew.value) {
+                        currOriginal.items.push.apply(currOriginal.items, currentNew.items);
                     } else {
                         originalGroup.items.push.apply(originalGroup.items, [currentNew]);
                     }

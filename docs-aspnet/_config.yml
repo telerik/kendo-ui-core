@@ -356,6 +356,9 @@ navigation:
      "html-helpers/navigation/bottomnavigation":
         title: "BottomNavigation"
         isNew: true
+     "tag-helpers/navigation/appbar":
+        title: "AppBar"
+        isNew: true
      "tag-helpers/navigation/bottomnavigation":
         title: "BottomNavigation"
         isNew: true

@@ -353,6 +353,7 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
+
                 if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
@@ -1119,7 +1120,8 @@ var __meta__ = { // jshint ignore:line
                 }
                 else if (value === "" && that._prev !== "" && that._prev !== undefined) {
                     that._clearValue();
-                    that.search("");
+                    that._open = true;
+                    that._state = STATE_REBIND;
                 }
 
                 that._typingTimeout = null;
