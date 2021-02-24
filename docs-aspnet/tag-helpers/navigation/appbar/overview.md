@@ -32,8 +32,8 @@ The following example demonstrates how to initialize the AppBar using the TagHel
 
 ## Functionality and Features
 
-* [Items]({% slug taghelpers_items_appbar_aspnetcore %}) - the configuration allows you to set various attributes like templates, classes and titles.
-* [Positioning]({% slug taghelpers_positioning_appbar_aspnetcore %}) - the configuration allows you to modify the position of the component and how it is changed when the page is scrolled.
+* [Items]({% slug taghelpers_items_appbar_aspnetcore %}) - items can have various attributes like templates, classes and titles
+* [Positioning]({% slug taghelpers_positioning_appbar_aspnetcore %}) - the AppBar supports different placements and also change its position when the page is scrolled
 
 ## Events
 

@@ -15,11 +15,11 @@ The `items` represent the content of the AppBar. The [`items`](/api/javascript/u
 
 ## Content Items
 
-There are two approaches to using templates with **Content Items**:
-* You can use the the `template` option exposed by `AppBarItemType.ContentItem` to consume and render HTML. 
-* You can supply a `kendo.template` reference to the configuration.
+There are two ways to use templates with **Content Items**. Both are exposed as options of `AppBarItemType.ContentItem`:
+* Use the `template` option to consume and render HTML via an inline Kendo UI template.
+* Use the `template-id` option to provide a `kendo.template` reference.
 
-The following example shows how to utilize both approaches:
+The following example shows how to utilize both options:
 
 ```tagHelper
     @addTagHelper *, Kendo.Mvc
@@ -43,7 +43,7 @@ The following example shows how to utilize both approaches:
 
 ## Spacer
 
-The `AppBarItemType.Spacer` item could be utilized to easily separate the content items from one another.
+The `AppBarItemType.Spacer` is used to easily separate content items from one another. It returns a `span` element with no height or width. Therefore, if the `span` has no width set in pixels, it will take up all available space and push all remaining content items towards the end of the parent element. 
 
 ```tagHelper
     @addTagHelper *, Kendo.Mvc
