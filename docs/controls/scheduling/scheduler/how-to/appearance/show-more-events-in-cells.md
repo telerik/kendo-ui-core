@@ -8,12 +8,10 @@ slug: howto_showmoreevents_inviewcells_scheduler
 
 # Show More Events in View Cells
 
-    > Starting with 2020 R1, developers can now use [`views.eventsPerDay`](/api/javascript/ui/scheduler/configuration/views.eventsperday) to set the number of events in monthview.
-    > For versions of Kendo UI prior to 2020 R1, where the `eventsPerDay` property is not available, increasing the number of events in the month view cells must be achieved by using CSS.
+Starting with 2020 R1, developers can now use the [views.eventsPerDay](/api/javascript/ui/scheduler/configuration/views.eventsperday) option, to set the number of events in the `month` view.
+For versions of Kendo UI prior to 2020 R1, where the `eventsPerDay` property is not available, increasing the number of events in the `month` view cells must be achieved by using CSS.
 
-Your project might require you to show more events in the Scheduler.
-
-The following example demonstrates how to achieve this by increasing the height of the cells.
+Your project might require you to show more events in the Scheduler. The following example demonstrates how to achieve this by increasing the height of the cells.
 
 ```dojo
     <style>
