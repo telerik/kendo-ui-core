@@ -1112,13 +1112,17 @@ Triggered when a Window is closed either by the user or through the `close()` me
 
 Indicates whether the close action was triggered by the user either by clicking the **Close** button or by pressing `Esc`. When the `close` method was called, this field is `false`.
 
+##### e.preventDefault `Function`
+
+If invoked prevents the Window from closing.
+
 #### Example - subscribing to the close event during initialization
 
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
       close: function(e) {
-        // the closing animation has finished
+        // the closing animation is about to start
       }
     });
     </script>
@@ -1128,7 +1132,7 @@ Indicates whether the close action was triggered by the user either by clicking 
     <div id="dialog"></div>
     <script>
     function window_close(e) {
-      // the closing animation has finished
+      // the closing animation is about to start
     }
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
@@ -1145,7 +1149,7 @@ Triggered when a Window has finished its closing animation.
     <script>
     $("#dialog").kendoWindow({
       deactivate: function() {
-        // the closing animation is about to finish
+        // the closing animation has finished
       }
     });
     </script>
@@ -1155,7 +1159,7 @@ Triggered when a Window has finished its closing animation.
     <div id="dialog"></div>
     <script>
     function window_deactivate() {
-      // the closing animation is about to start
+      // the closing animation has finished
     }
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
