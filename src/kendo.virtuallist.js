@@ -277,6 +277,12 @@ var __meta__ = { // jshint ignore:line
             that.wrapper = that.content.wrap("<div class='" + WRAPPER + "'></div>").parent();
             that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
 
+            if(options.ariaLabel) {
+                this.element.attr("aria-label", options.ariaLabel);
+            } else if(options.ariaLabelledBy) {
+                this.element.attr("aria-labelledby", options.ariaLabelledBy);
+            }
+
             if (options.columns && options.columns.length) {
                 that.element.removeClass(LIST);
             }
@@ -321,7 +327,9 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             mapValueTo: "index",
-            valueMapper: null
+            valueMapper: null,
+            ariaLabel: null,
+            ariaLabelledBy: null
         },
 
         events: [

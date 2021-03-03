@@ -158,6 +158,7 @@
 @tabstrip-items-border: transparent;
 @tabstrip-active-background: @background;
 @tabstrip-tabs-color: @normal-text-color;
+@tabstrip-content-border-focused: #656565;
 @form-widget-color: @normal-text-color;
 @drop-down-border-color: darken(@background, 25%);
 @drop-down-hover-border-color: @accent;
@@ -810,6 +811,7 @@
 
 // Wizard
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+@wizard-step-border-focused: #656565;
 
 
 // Textarea
@@ -2333,6 +2335,11 @@ div.k-filebrowser-dropzone em
 {
     background-color: @tabstrip-active-background;
     color: @widget-text-color;
+}
+
+.k-tabstrip .k-content:focus,
+.k-tabstrip .k-content.k-state-focused {
+    outline-color: @tabstrip-content-border-focused;
 }
 
 .k-menu.k-header,

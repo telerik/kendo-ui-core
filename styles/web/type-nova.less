@@ -731,6 +731,7 @@
 
 // Wizard
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+@wizard-step-border-focused: #656565;
 
 
 // Textarea
@@ -852,6 +853,8 @@
 @bottom-nav-flat-text: @component-text;
 @bottom-nav-flat-border: @component-border;
 
+// TabStrip
+@tabstrip-content-border-focused: #656565;
 
 // Kendo skin
 
@@ -1481,6 +1484,11 @@ input.k-textbox:active {
 
 .k-tabstrip-bottom > .k-tabstrip-items > .k-item.k-state-active {
     border-top-color: @selected-background;
+}
+
+.k-tabstrip .k-content:focus,
+.k-tabstrip .k-content.k-state-focused {
+    outline-color: @tabstrip-content-border-focused;
 }
 
 // ProgressbBar

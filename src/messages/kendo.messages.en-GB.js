@@ -682,7 +682,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timezoneTitle": "Time zones",
     "noTimezone": "No timezone",
     "editorTitle": "Event"
-  }
+  },
+  "search": "Search..."
 });
 }
 

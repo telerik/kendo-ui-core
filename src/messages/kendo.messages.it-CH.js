@@ -430,7 +430,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "deleteWindowTitle": "Rimuovi evento",
   "showFullDay": "Mostra il giorno completo",
-  "showWorkDay": "Mostra solo le ore lavorative"
+  "showWorkDay": "Mostra solo le ore lavorative",
+  "search": "Cerca..."
 });
 }
 
