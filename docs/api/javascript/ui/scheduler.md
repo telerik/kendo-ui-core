@@ -3165,6 +3165,31 @@ The title of the prompt dialog opened to confirm the resetting of a series event
     });
     </script>
 
+### messages.search `String`
+
+The Search input title and placeholder text.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      toolbar: [ "search" ],
+      messages: {
+        search: "test"
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.views `Object`
 
 The configuration of the scheduler views messages. Use this option to customize or localize the scheduler views messages.
@@ -7272,7 +7297,7 @@ The widget instance which fired the event.
 
 ### navigate
 
-Fired when the user changes the selected date, selected Scheduler view or switches between show full day and show business hours. 
+Fired when the user changes the selected date, selected Scheduler view or switches between show full day and show business hours.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 

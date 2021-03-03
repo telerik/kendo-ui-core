@@ -177,6 +177,10 @@ Returns a list of all direct child tasks.
 
 The parent task. If this parameter is not specified, all root-level tasks will be returned.
 
+##### fromView `bool` *(optional)*
+
+Whether the data should be taken from the `dataSource.view()` (only the filtered items) or from the `.data()` call (all items in the DataSource). If this parameter is not specified, the `data()` call will be used and filter would not be taken into account.
+
 #### Returns
 
 `Array`&mdash;The list of all direct child tasks.
