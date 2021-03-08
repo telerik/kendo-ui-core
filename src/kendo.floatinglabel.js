@@ -20,6 +20,7 @@ var __meta__ = {// jshint ignore:line
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         NOCLICKCLASS = "k-no-click",
+        STATEREADONLY = "k-state-readonly",
         proxy = $.proxy;
 
     var FloatingLabel = Widget.extend({
@@ -42,7 +43,8 @@ var __meta__ = {// jshint ignore:line
 
         options: {
             name: 'FloatingLabel',
-            widget: null
+            widget: null,
+            useReadOnlyClass: false
         },
 
         readonly: function(readonly) {
@@ -95,14 +97,14 @@ var __meta__ = {// jshint ignore:line
             if (!readonly && !disable) {
                 element
                     .removeClass(STATEDISABLED)
-                    .removeClass(NOCLICKCLASS);
+                    .removeClass(that.options.useReadOnlyClass ? STATEREADONLY : NOCLICKCLASS);
 
                 element.on("focusin" + NS, proxy(that.refresh, that));
                 element.on("focusout" + NS, proxy(that.refresh, that));
             } else {
                 element
                     .toggleClass(STATEDISABLED, disable)
-                    .toggleClass(NOCLICKCLASS, readonly);
+                    .toggleClass(that.options.useReadOnlyClass ? STATEREADONLY : NOCLICKCLASS, readonly);
             }
         }
     });

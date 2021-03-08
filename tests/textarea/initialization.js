@@ -46,7 +46,7 @@
                 readonly: true
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-no-click"));
+            assert.isOk(widget.wrapper.hasClass("k-state-readonly"));
         });
 
         it("Should get value from textarea", function() {
