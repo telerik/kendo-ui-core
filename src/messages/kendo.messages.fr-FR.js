@@ -104,7 +104,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "sortAscending": "Tri croissant",
   "sortDescending": "Tri décroissant",
   "settings": "Paramètres de colonne",
-  "done": "Fini",
+  "done": "Terminé",
   "lock": "Bloquer",
   "unlock": "Ouvrir"
 });
@@ -220,7 +220,7 @@ kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "Tous",
   "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
+  "display": "Afficher les éléments {0} - {1} de {2}",
   "of": "de {0}",
   "empty": "Aucun enregistrement à afficher.",
   "refresh": "Actualiser",
@@ -240,7 +240,7 @@ kendo.ui.TreeListPager.prototype.options.messages =
 $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "Tous",
   "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
+    "display": "Afficher les éléments {0} - {1} de {2}",
   "of": "de {0}",
   "empty": "Aucun enregistrement à afficher.",
   "refresh": "Actualiser",
@@ -367,11 +367,11 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "addRowBelow": "Ajouter ligne au-dessous",
   "deleteColumn": "Supprimer la colonne",
   "deleteRow": "Supprimer la ligne",
-  "dropFilesHere": "drop files here to upload",
-  "formatting": "Format",
-  "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insérer un Fichier",
+  "dropFilesHere": "Déposer des fichiers ici pour les télécharger",
+  "formatting": "Formatage",
+  "viewHtml": "Voire le HTML",
+  "dialogUpdate": "Mise à jour",
+  "insertFile": "Insérer un fichier",
   "dialogOk": "OK",
   "tableWizard": "Assistant de tableau",
   "tableTab": "Table",
@@ -453,8 +453,8 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "statusUploaded": "téléchargé",
   "statusUploading": "téléchargement",
   "uploadSelectedFiles": "Télécharger des fichiers",
-  "headerStatusUploaded": "Done",
-  "headerStatusUploading": "Uploading..."
+  "headerStatusUploaded": "Terminé",
+  "headerStatusUploading": "Transmission..."
 });
 }
 
@@ -473,13 +473,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "editor": {
     "allDayEvent": "Toute la journée",
     "description": "Description",
-    "editorTitle": "Evènement",
+    "editorTitle": "Évènement",
     "end": "Fin",
-    "endTimezone": "End timezone",
+    "endTimezone": "Fuseau horaire de fin",
     "repeat": "Répéter",
-    "separateTimezones": "Use separate start and end time zones",
+    "separateTimezones": "Utiliser des fuseaux horaires différents pour le début et la fin",//"Use separate start and end time zones",
     "start": "Début",
-    "startTimezone": "Start timezone",
+    "startTimezone": "Fuseau horaire de début",
     "timezone": " ",
     "timezoneEditorButton": "Fuseau horaire",
     "timezoneEditorTitle": "Fuseaux horaires",
@@ -498,7 +498,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowTitle": "Modification de l'élément courant"
   },
   "save": "Sauvegarder",
-  "time": "Time",
+  "time": "Heure",
   "today": "Aujourd'hui",
   "views": {
     "agenda": "Agenda",
