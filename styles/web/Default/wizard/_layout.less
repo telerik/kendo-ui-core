@@ -39,6 +39,13 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
+
+    &:focus,
+    &.k-state-focused {
+        outline-width: 1px;
+        outline-style: dotted;
+        outline-offset: -1px;
+    }
 }
 
 //  Content

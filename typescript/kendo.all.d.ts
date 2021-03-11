@@ -3589,6 +3589,7 @@ declare namespace kendo.ui {
         height?: number;
         ignoreCase?: boolean;
         index?: number;
+        filterTitle?: string;
         minLength?: number;
         noDataTemplate?: string|Function|boolean;
         popup?: DropDownListPopup;

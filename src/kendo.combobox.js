@@ -954,16 +954,16 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.addClass(element.className)
-                 .css({
+                .css({
                     width: "",
                     height: element.style.height,
                     position: ""
-                 })
-                 .attr({
-                     "role": "combobox",
-                     "aria-expanded": false
-                 })
-                 .show();
+                })
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false
+                })
+                .show();
 
             if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);

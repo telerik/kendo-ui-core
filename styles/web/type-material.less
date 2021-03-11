@@ -181,6 +181,7 @@
 @treeview-text-color: #428bca;
 @treeview-hover-text-color: #428bca;
 @tabstrip-tabs-hover-color: #428bca;
+@tabstrip-content-border-focused: #656565;
 @pager-hover-color: #428bca;
 @slider-selection-background-color: @accent;
 @form-widgets-border-color: desaturate(@hover-background, 1%);
@@ -826,6 +827,7 @@
 
 // Wizard
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+@wizard-step-border-focused: #656565;
 
 
 // Textarea
@@ -2352,6 +2354,11 @@ div.k-filebrowser-dropzone em
 {
     background-color: @tabstrip-active-background;
     color: @widget-text-color;
+}
+
+.k-tabstrip .k-content:focus,
+.k-tabstrip .k-content.k-state-focused {
+    outline-color: @tabstrip-content-border-focused;
 }
 
 .k-menu.k-header,

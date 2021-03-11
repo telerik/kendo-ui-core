@@ -461,12 +461,18 @@ var __meta__ = { // jshint ignore:line
 
     function ownKeys (value, ignoreObjectKeys) {
         var props = [];
+        var keys, filteredObjectKeys;
 
         value = value || {};
 
+        keys = Object.getOwnPropertyNames(value);
+        filteredObjectKeys = objectKeys.filter(function(key){
+            return keys.indexOf(key) < 0;
+        });
+
         while (value) {
             Object.getOwnPropertyNames(value).forEach(function (prop) {
-                if (props.indexOf(prop) === -1 && (!ignoreObjectKeys || objectKeys.indexOf(prop) < 0)) {
+                if (props.indexOf(prop) === -1 && (!ignoreObjectKeys || filteredObjectKeys.indexOf(prop) < 0)) {
                     props.push(prop);
                 }
             });
