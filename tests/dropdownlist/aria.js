@@ -198,6 +198,15 @@
             assert.equal(dropdownlist.filterInput.attr("title"), "custom");
         });
 
+        it("DropDownList adds custom title to filter input", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                filterTitle: "custom"
+            });
+
+            assert.equal(dropdownlist.filterInput.attr("title"), "custom");
+        });
+
         it("DropDownList renders aria-activedescendant", function() {
             var dropdownlist = new DropDownList(input.attr("id", "test"), {
                 filter: "startswith",

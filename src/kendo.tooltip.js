@@ -351,7 +351,8 @@ var __meta__ = { // jshint ignore:line
 
             that.popup.one("deactivate", function() {
                 restoreTitle(target);
-                target.removeAttr(DESCRIBEDBY);
+
+                that._removeDescribedBy(target);
 
                 this.element
                     .removeAttr("id")
@@ -387,10 +388,16 @@ var __meta__ = { // jshint ignore:line
                 autosize:true,
                 activate: function() {
                     var anchor = this.options.anchor,
-                        ariaId = anchor[0].id || that.element[0].id;
+                        ariaId = anchor[0].id || that.element[0].id || kendo.guid(),
+                        describedBy = [];
+
+                    if(anchor.attr(DESCRIBEDBY)) {
+                        describedBy.push(anchor.attr(DESCRIBEDBY));
+                    }
 
                     if (ariaId) {
-                        anchor.attr(DESCRIBEDBY, ariaId + ARIAIDSUFFIX);
+                        describedBy.push(ariaId + ARIAIDSUFFIX);
+                        anchor.attr(DESCRIBEDBY, describedBy.join(" "));
                         this.element.attr("id", ariaId + ARIAIDSUFFIX);
                     }
 
@@ -481,6 +488,25 @@ var __meta__ = { // jshint ignore:line
                .removeClass("k-callout-n k-callout-s k-callout-w k-callout-e")
                .addClass("k-callout-" + cssClass)
                .css(offset, offsetAmount);
+        },
+
+        _removeDescribedBy: function(target) {
+            var tooltipId = this.popup.element.attr("id"),
+                arrayAttr = target.attr(DESCRIBEDBY).split(" "),
+                finalArray, finalDescribedbyAttr;
+
+            if(arrayAttr && arrayAttr.length > 0) {
+                finalArray = arrayAttr.filter(function (val) {
+                    return val !== tooltipId;
+                });
+            }
+
+            if(finalArray && finalArray.length > 0) {
+                finalDescribedbyAttr = finalArray.join(" ");
+                target.attr(DESCRIBEDBY, finalDescribedbyAttr);
+            } else {
+                target.removeAttr(DESCRIBEDBY);
+            }
         },
 
         destroy: function() {
