@@ -1925,7 +1925,7 @@ function pad(number, digits, end) {
         }
 
         var overflow = getComputedStyles(element, ["overflow"]).overflow;
-        return overflow == "auto" || overflow == "scroll";
+        return overflow.indexOf("auto") > -1 || overflow.indexOf("scroll") > -1;
     }
 
     function scrollLeft(element, value) {
