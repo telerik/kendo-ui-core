@@ -1952,6 +1952,11 @@ defaults:
     values:
         component: "tooltip"
 
+    scope:
+        path: "controls/layout/tilelayout"
+    values:
+        component: "tilelayout"
+
 -
     scope:
         path: "controls/data-management/treelist"
@@ -2139,6 +2144,7 @@ intro_columns:
     items:
       "Badge": "overview_kendoui_badge_widget"
       "Dialog": "overview_kendoui_dialog_widget"
+      "ExpansionPanel": "overview_kendoui_expansionpanel_widget"
       "Form": "overview_kendoui_form_widget"
       "Notification": "overview_kendoui_notification_widget"
       "Popup": "overview_kendoui_popup_widget"

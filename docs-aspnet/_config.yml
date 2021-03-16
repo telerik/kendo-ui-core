@@ -914,7 +914,7 @@ defaults:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET Core Dialog Component"
-
+-
     scope:
         path: "html-helpers/layout/expansionpanel"
     values:
@@ -939,6 +939,11 @@ defaults:
         path: "html-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET Core Splitter Component"
+-
+    scope:
+        path: "html-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET Core TileLayout Component"
 -
     scope:
         path: "html-helpers/layout/tooltip"
@@ -1319,7 +1324,7 @@ defaults:
         path: "tag-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET Core Dialog Component"
-
+-
     scope:
         path: "tag-helpers/layout/expansionpanel"
     values:
@@ -1344,6 +1349,11 @@ defaults:
         path: "tag-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET Core Splitter Component"
+-
+    scope:
+        path: "tag-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET Core TileLayout Component"
 -
     scope:
         path: "tag-helpers/layout/tooltip"

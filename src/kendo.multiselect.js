@@ -355,7 +355,7 @@ var __meta__ = { // jshint ignore:line
                     that.input.focus();
                 }
 
-                if (that.options.minLength === 1) {
+                if (that.options.minLength === 1 && !that.popup.visible()) {
                     that.open();
                 }
             }
@@ -568,13 +568,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         open: function() {
-            var that = this;
+            var that = this,
+                filterValue = that.input.val().toLowerCase(),
+                listViewFilter = that.listView.dataSource.filter(),
+                listViewFilterValue;
+
+            if(listViewFilter && listViewFilter.filters.length > 0) {
+                listViewFilterValue = listViewFilter.filters[0].value.toLowerCase();
+            }
 
             if (that._request) {
                 that._retrieveData = false;
             }
 
-            if (that._retrieveData || !that.listView.bound() || that._state === ACCEPT) {
+            if (that._retrieveData || !that.listView.bound() || (that._state === ACCEPT && filterValue !== listViewFilterValue)) {
                 that._open = true;
                 that._state = REBIND;
 

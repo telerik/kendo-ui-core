@@ -415,7 +415,7 @@ defaults:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET MVC Dialog Component"
-
+-
     scope:
         path: "html-helpers/layout/expansionpanel"
     values:
@@ -441,6 +441,11 @@ defaults:
         path: "html-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET MVC Splitter Component"
+-
+    scope:
+        path: "html-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET MVC TileLayout Component"
 -
     scope:
         path: "html-helpers/layout/tooltip"
