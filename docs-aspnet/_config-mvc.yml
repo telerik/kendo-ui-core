@@ -59,6 +59,7 @@ knowledge-base/treelist-checkbox-column.md,
 knowledge-base/upload-resize-image-before-upload.md,
 knowledge-base/validator-basic-form-validation.md,
 knowledge-base/vs-online-continuous-integration-login-problem.md,
+knowledge-base/grid-toggle-editable-mode.md,
 html-helpers/data-management/filemanager/binding/razor-page.md,
 html-helpers/datasource/razor-page.md,
 html-helpers/conversational-ui/chat/razor-page.md,
@@ -419,7 +420,7 @@ defaults:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET MVC Dialog Component"
-
+-
     scope:
         path: "html-helpers/layout/expansionpanel"
     values:
@@ -445,6 +446,11 @@ defaults:
         path: "html-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET MVC Splitter Component"
+-
+    scope:
+        path: "html-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET MVC TileLayout Component"
 -
     scope:
         path: "html-helpers/layout/tooltip"
