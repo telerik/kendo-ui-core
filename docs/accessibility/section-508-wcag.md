@@ -42,7 +42,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Dialog	       |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dialog/index)
 |Drawer	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/drawer/index)
 |DropDownList  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdownlist/index)
-|DropDownTree  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdowntree/index)
+|DropDownTree  |No  |-  |
 |Editor        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/editor/index)
 |ExpansionPanel|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/expansionpanel/index)
 |FileManager   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/filemanager/index)
