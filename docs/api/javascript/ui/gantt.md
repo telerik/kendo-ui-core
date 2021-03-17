@@ -440,7 +440,7 @@ The columns which will be rendered as child columns under this group column head
         }
       ],
       columns: [{
-        title: grouped column,
+        title: "Grouped column",
         columns: [{
           field: "title"
         }, {
