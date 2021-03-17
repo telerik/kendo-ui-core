@@ -131,7 +131,7 @@ Defines the editor widget type. Available options are:
 
 * DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
-* Input widgets - "NumericTextBox", "MaskedTextBox", "Switch", "Rating", "Slider", "ColorPicker"
+* Input widgets - "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker"
 * Editor widget - "Editor"
 
 ### items.editorOptions `Object`
