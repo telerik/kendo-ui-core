@@ -55,7 +55,7 @@ You can configure the MultiSelect to get its data from a remote source by making
 
 1. Create an action that returns the data as a JSON result.
 
-       public IActionResult Index()
+        public IActionResult Index()
         {
             return View(new ProductViewModel
             {
