@@ -870,6 +870,14 @@ body .k-datetimepicker .k-select {
     padding: 0.25em 0;
 }
 
+.k-input-separator {
+    margin: 0;
+    width: 0;
+    height: @icon-size;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+}
+
 .k-input,
 .k-textbox > input,
 .k-textarea > textarea {
@@ -1451,5 +1459,50 @@ div.k-dropdowngrid-popup .k-group-header {
     &[dir="rtl"] {
         margin-right: 0;
         margin-left: @input-indent;
+    }
+}
+
+// Input prefix and suffix
+.k-input-prefix,
+.k-input-suffix {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: @button-inner-calc-size;
+
+    > * {
+        flex-shrink: 0;
+    }
+
+    > .k-icon {
+        width: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        height: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    > .k-clear-value {
+        width: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        height: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        position: relative;
+
+        &::after {
+            content: "";
+            opacity: 0;
+            display: none;
+            pointer-events: none;
+            position: absolute;
+            left: -1px;
+            right: -1px;
+            top: -1px;
+            bottom: -1px;
+        }
+
+        &.k-state-focused::after,
+        &:focus::after {
+            display: block;
+        }
     }
 }

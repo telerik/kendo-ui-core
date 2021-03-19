@@ -986,6 +986,7 @@
 @import "Default/expansion-panel/_theme.less";
 @import "Default/floatingactionbutton/_theme.less";
 @import "Default/bottom-navigation/_theme.less";
+@import "Default/searchbox/_theme.less";
 
 .k-in,
 .k-item {
@@ -3293,6 +3294,10 @@ td.k-state-focused.k-state-selected,
     border-right-color: @grid-sticky-border;
 }
 
+.k-grid-header .k-filter-row .k-grid-header-sticky {
+    background-color: @header-background-color;
+}
+
 // Locked columns
 .k-grid-header-locked,
 .k-grid-content-locked,
@@ -3300,4 +3305,9 @@ td.k-state-focused.k-state-selected,
 .k-grid-content-locked td {
     border-left-color: @grid-sticky-border;
     border-right-color: @grid-sticky-border;
+}
+
+// Grid Multi Filter Select All Checkbox
+.k-check-all-wrap {
+    border-color: @widget-border-color;
 }

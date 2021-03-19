@@ -237,6 +237,46 @@
 }
 
 
+// Clear button
+.k-button.k-button-clear {
+    border-color: transparent !important;
+    color: @button-text-color;
+    background: none !important;
+    box-shadow: none !important;
+
+    &::before {
+        display: none;
+    }
+
+    &::after {
+        display: block;
+    }
+
+    &:hover,
+    &.k-state-hover,
+    &:active,
+    &.k-state-active,
+    &:focus,
+    &.k-state-focused {
+        color: darken(@button-text-color, 13%);
+    }
+
+    &:active,
+    &.k-state-active {
+        &::after {
+            background: transparent;
+        }
+    }
+
+    &.k-state-focused,
+    &.k-state-focused:active {
+        &::after {
+            background-color: @button-text-color;
+            opacity: .1;
+        }
+    }
+}
+
 
 
 // RTL

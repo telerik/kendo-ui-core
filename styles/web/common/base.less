@@ -61,10 +61,27 @@
     -webkit-appearance: none;
 }
 
-// Refactor after R1 2020; After unifying inputs features/rendering.
+// TODO: Refactor after R1 2020; After unifying inputs features/rendering.
 .k-textbox > .k-input,
-.k-textarea > .k-input {
+.k-textarea > .k-input,
+.k-searchbox > .k-input {
+    margin: 0;
+    width: 100%;
+    min-width: 0;
     border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    box-shadow: none;
+    color: inherit;
+    background: none;
+    font: inherit;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-appearance: none;
 }
 
 .k-widget,
@@ -727,4 +744,10 @@ html .k-error-colored
 .k-text-align-justify,
 .k-text-justify {
     text-align: justify;
+}
+
+// Hide Script tags
+// see https://github.com/telerik/kendo-themes/issues/2360
+script {
+    display: none !important;
 }
