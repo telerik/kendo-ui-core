@@ -34,6 +34,16 @@
             assert.equal(numerictextbox.options.format, "p0");
         });
 
+        it("initializes a selectOnFocus from data attributes", function() {
+            dom = $('<input data-role="numerictextbox" data-select-on-focus="true" />');
+
+            kendo.bind(dom);
+
+            var numerictextbox = dom.data("kendoNumericTextBox");
+
+            assert.equal(numerictextbox.options.selectOnFocus, true);
+        });
+
         it("initializes value from view model", function() {
             dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
 
