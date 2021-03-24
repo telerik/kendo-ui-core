@@ -145,6 +145,14 @@ describe("kendo.ui.DateTimePicker ARIA defaults", function () {
     
         assert.equal(cell.attr("aria-label"), "Current focused date is "+kendo.toString(date, "D"));
     });
+
+    it("DateTimePicker add evaluates ariatemplate in correct context", function() {
+        instance = new DateTimePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #"});
+        instance.open();
+        instance.element.trigger("focus");
+        var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+        assert.equal(cell.attr("aria-label"), "Current focused date is test");
+    });
     
     it("DateTimePicker add correct aria-label for year", function() {
         var date = kendo.date.today();

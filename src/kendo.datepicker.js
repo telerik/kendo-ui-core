@@ -761,7 +761,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = template(this.options.ARIATemplate);
+            this._ariaTemplate = proxy(template(this.options.ARIATemplate), this);
         },
 
         _createDateInput: function(options) {

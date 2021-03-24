@@ -496,7 +496,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusHandler: function() {
-            this.input.focus();
+            var input = this.input;
+            var active = activeElement();
+            var isActive = input[0] === active;
+
+            if(!isActive) {
+                this.input.focus();
+            }
         },
 
         _editable: function(options) {

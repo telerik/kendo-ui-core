@@ -143,6 +143,15 @@ it("DatePicker add correct aria-label for year", function() {
     assert.equal(cell.attr("aria-label"), "Current focused month is "+kendo.toString(date, "MMMM"));
 });
 
+it("DatePicker add evaluates ariatemplate in correct context", function() {
+    var date = kendo.date.today();
+    instance = new DatePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #"});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+    assert.equal(cell.attr("aria-label"), "Current focused date is test");
+});
+
 it("DatePicker add correct aria-label for decade", function() {
     var date = kendo.date.today();
     instance = new DatePicker(input, { start: "decade"});

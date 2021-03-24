@@ -14,7 +14,7 @@ Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/
 
 ### altRowTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. Be default the treelist renders a table row (`<tr>`) for every data source item.
+The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. By default the treelist renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
 > Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
@@ -5149,7 +5149,7 @@ Sets the title of the PDF file.
 
 ### rowTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
+The [template](/api/javascript/kendo/methods/template) which renders rows. By default renders a table row (`<tr>`) for every data source item.
 
 > The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
 
