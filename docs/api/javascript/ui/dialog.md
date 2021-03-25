@@ -560,7 +560,7 @@ Possible values are:
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
       content: "This is your Kendo Dialog.",
-      size: "wide"
+      size: "medium"
     });
     </script>
 
