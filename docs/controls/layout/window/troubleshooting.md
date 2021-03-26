@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Window Documentation | Troubleshooting | Kendo UI
+page_title: jQuery Window Documentation | Troubleshooting
 description: "Get started with the jQuery Window by Kendo UI and learn how to handle possible issues while working with the widget."
 slug: troubleshoot_window
 position: 60

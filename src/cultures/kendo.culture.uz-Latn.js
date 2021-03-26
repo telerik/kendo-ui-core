@@ -19,7 +19,7 @@
                 name: "",
                 abbr: "",
                 pattern: ["-n $","n $"],
-                decimals: 0,
+                decimals: 2,
                 ",": " ",
                 ".": ",",
                 groupSize: [3],
@@ -30,19 +30,19 @@
             standard: {
                 days: {
                     names: ["yakshanba","dushanba","seshanba","chorshanba","payshanba","juma","shanba"],
-                    namesAbbr: ["Ya","Du","Se","Ch","Pa","Ju","Sh"],
+                    namesAbbr: ["Yak","Dush","Sesh","Chor","Pay","Jum","Shan"],
                     namesShort: ["Ya","Du","Se","Ch","Pa","Ju","Sh"]
                 },
                 months: {
                     names: ["Yanvar","Fevral","Mart","Aprel","May","Iyun","Iyul","Avgust","Sentabr","Oktabr","Noyabr","Dekabr"],
-                    namesAbbr: ["Yanv","Fev","Mar","Apr","May","Iyun","Iyul","Avg","Sen","Okt","Noya","Dek"]
+                    namesAbbr: ["Yan","Fev","Mar","Apr","May","Iyn","Iyl","Avg","Sen","Okt","Noy","Dek"]
                 },
                 AM: ["TO","to","TO"],
                 PM: ["TK","tk","TK"],
                 patterns: {
                     d: "dd/MM/yyyy",
-                    D: "dddd, yyyy MMMM dd",
-                    F: "dddd, yyyy MMMM dd HH:mm:ss",
+                    D: "dddd, d-MMMM, yyyy",
+                    F: "dddd, d-MMMM, yyyy HH:mm:ss",
                     g: "dd/MM/yyyy HH:mm",
                     G: "dd/MM/yyyy HH:mm:ss",
                     m: "d-MMMM",

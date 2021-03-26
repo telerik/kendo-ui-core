@@ -1,3 +1,5 @@
+@import "Default/_variables.less";
+
 @input-height: 1.65em;
 @input-default-width: 12.4em;
 @input-border-width: 1px;
@@ -5,6 +7,8 @@
 @input-padding-y: 0.17857143em;
 @input-indent: .571em;
 @input-offset: (@input-height + .35em);
+
+@line-height: (20 / 14);
 
 @icon-size: 16px;
 @input-icon-width: calc(@input-height + .35em);
@@ -17,6 +21,53 @@
 
 @editor-icon-size: 2em;
 @menu-link-padding: .5em 1.1em .4em;
+@menu-vertical-link-padding: 2em;
+
+
+// Messagebox
+@messagebox-margin: 0 0 16px 0;
+@messagebox-padding-x: 8px; //@padding-x;
+@messagebox-padding-y: 4px; //@padding-y;
+@messagebox-border-width: 0 0 0 4px;
+
+@messagebox-font-size: inherit; //@font-size;
+@messagebox-line-height: (20 / 14);//@line-height;
+
+@messagebox-link-font-style: italic;
+@messagebox-link-text-decoration: underline;
+
+
+// Form
+@form-font-size: inherit;
+@form-line-height: (20 / 14);
+
+@form-label-margin: 0 0 4px;
+
+@form-fieldset-margin: 32px 0 0;
+@form-fieldset-padding-x: 0;
+@form-fieldset-padding-y: 0;
+
+@form-legend-margin: 0 0 16px;
+@form-legend-padding-x: 0;
+@form-legend-padding-y: 0;
+@form-legend-font-size: inherit;
+@form-legend-line-height: (20 / 14);
+
+@form-field-margin: 0 0 16px;
+
+@form-hint-margin: 0 0 4px;
+@form-hint-font-size: 12px;
+
+@form-buttons-margin: 16px 0 0;
+@form-buttons-padding-x: 0;
+@form-buttons-padding-y: 0;
+@form-buttons-border-width: 0;
+@form-buttons-spacing: 8px;
+
+@horizontal-form-label-margin-x: 10px;
+@horizontal-form-label-padding-top: 5px;
+@horizontal-form-label-width: 25%;
+@horizontal-form-label-align: flex-end;
 
 
 // Button
@@ -85,7 +136,7 @@
 @grid-cell-padding-x: @grid-padding-x;
 @grid-cell-padding-y: @grid-padding-y;
 
-@grid-search-width: 15.7em;
+@grid-search-width: @input-default-width;
 
 // Calendar
 @calendar-padding-x: 0;
@@ -121,6 +172,10 @@
 
 @calendar-meta-cell-size: ( (60px / @calendar-font-size) * 1em );
 
+@calendar-modern-header-padding-x: 16px;
+@calendar-modern-header-padding-y: 8px;
+
+
 // Multiviewcalendar
 @multiviewcalendar-font-size: @calendar-font-size;
 @multiviewcalendar-line-height: @calendar-line-height;
@@ -142,15 +197,39 @@
 
 @multiviewcalendar-header-cell-font-size: 12px;
 
+
+// DateTimePickers
+@timepicker-padding-x: 8px;
+@timepicker-padding-y: 4px;
+
+@time-highlight-size: 1px;
+
+@time-header-padding: null;
+@timepicker-header-height: 2em;
+
+@time-list-padding: 20px;
+@time-list-focus-size: 2px;
+@time-list-width: 5em;
+@time-list-height: calc( 7 * (@line-height * 1em + 2 * @timepicker-padding-y));
+
+@time-font-size-xs: 10px;
+
+@datetime-width: ((4 * @time-list-width) + 1em);
+
+
 // ScrollView
-@scrollview-pagebutton-size: 8px;
+@scrollview-border-width: 1px;
+@scrollview-font-family: inherit;
+@scrollview-font-size: inherit;
+@scrollview-line-height: @line-height;
+
+@scrollview-pagebutton-size: 10px;
 @scrollview-navigation-size: 4.5em;
 
-@scrollview-pager-offset: 20px;
+@scrollview-pager-offset: 0;
 @scrollview-pager-item-spacing: 20px;
-@scrollview-pager-item-border-width: 1px;
-@scrollview-pager-height: calc(@scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (@scrollview-pager-item-spacing / 2 ));
-
+@scrollview-pager-item-border-width: 0;
+@scrollview-pager-height: calc( @scrollview-pagebutton-size + (2 * @scrollview-pager-item-border-width) + (2 * @scrollview-pager-item-spacing) );
 // Switch
 @switch-size: 5em;
 @switch-border-radius: @switch-size;
@@ -217,6 +296,12 @@
 @pdf-viewer-search-dialog-spacing: 0.28571428em;
 @pdf-viewer-search-dialog-button-spacing: @pdf-viewer-search-dialog-spacing;
 
+
+// Avatar
+@avatar-size: 32px;
+@avatar-rounded-radius: 5px;
+
+
 // Card
 @form-line-height: (20 / 14);
 @card-title-font-size: 19px;
@@ -242,11 +327,22 @@
 @card-img-max-width: 100px;
 @card-deck-gap: 16px;
 
+@card-avatar-size: 45px;
+@card-avatar-spacing: @card-header-padding-x;
+
 @card-deck-scroll-button-radius: 0;
 @card-deck-scroll-button-offset: -1px;
 
 @card-callout-width: 20px;
 @card-callout-height: 20px;
+
+
+// TileLayout
+@tilelayout-border-width: 0;
+
+@tilelayout-hint-border-width: 1px;
+@tilelayout-hint-border-radius: @card-border-radius;
+
 
 // Drawer
 @drawer-border-width: 1px;
@@ -315,6 +411,7 @@
 @filter-padding-y: 4px;
 @filter-operator-dropdown-width: 15em;
 
+
 // Timeline
 @timeline-border-radius: 2px;
 @timeline-border-radius-lg: 4px;
@@ -328,8 +425,10 @@
 @timeline-track-arrow-height: 30px;
 
 @timeline-track-size: 6px;
+@timeline-track-wrap-padding-bottom: 3px;
 @timeline-track-border-width: 1px;
 @timeline-track-margin-bottom: 16px;
+@timeline-track-bottom-calc: calc((@timeline-track-arrow-width / 2) + @timeline-track-wrap-padding-bottom);
 @timeline-track-start-calc: calc(@timeline-track-arrow-width - 2 * @timeline-track-border-width);
 @timeline-track-end-calc: calc(@timeline-track-arrow-width - 2 * @timeline-track-border-width);
 
@@ -451,11 +550,33 @@
 @checkbox-border-width: 1px;
 @checkbox-line-height: (@checkbox-size + @checkbox-border-width);
 
+@checkbox-list-margin: 0;
+@checkbox-list-padding: 0;
+@checkbox-list-item-margin-top: 16px;
+@checkbox-list-horizontal-item-margin-x: 32px;
+
+// Radio
 @radio-icon-size: 12px;
 @radio-size: @icon-size;
 @radio-radius: 50%;
 @radio-border-width: 1px;
 @radio-line-height: calc(@radio-size + @radio-border-width);
+
+@radio-list-margin: 0;
+@radio-list-padding: 0;
+@radio-list-item-margin-top: 16px;
+@radio-list-horizontal-item-margin-x: 32px;
+
+
+// Drop Hint
+@equilateral-index: 1.7320508076;
+
+@drop-hint-arrow-size: 8px;
+@drop-hint-arrow-spacing: (@drop-hint-arrow-size / 2);
+@drop-hint-line-h-width: 20px;
+@drop-hint-line-h-height: 1px;
+@drop-hint-line-v-width: @drop-hint-line-h-height;
+@drop-hint-line-v-height: @drop-hint-line-h-width;
 
 
 // Listview
@@ -507,6 +628,256 @@
 @tooltip-border-width: 1px;
 
 @tooltip-callout-size: 6px;
+
+
+// Stepper
+@stepper-margin-x: 0;
+@stepper-margin-y: 0;
+@stepper-padding-x: 0;
+@stepper-padding-y: 0;
+@stepper-label-margin-x: 12px;
+@stepper-label-padding-x: 12px;
+@stepper-label-padding-y: 5px;
+@stepper-border-width: 0;
+
+@stepper-inline-content-padding-x: 20px;
+@stepper-inline-content-padding-y: 10px;
+
+@stepper-font-size: 14px;
+@stepper-line-height: (20 / 14);
+
+@stepper-indicator-width: 28px;
+@stepper-indicator-height: @stepper-indicator-width;
+@stepper-indicator-border-width: 1px;
+@stepper-indicator-border-radius: 50%;
+
+@stepper-indicator-focus-border-width: 1px;
+@stepper-indicator-focus-size: 2px;
+@stepper-indicator-focus-offset: 3px;
+@stepper-indicator-focus-calc-offset: calc( @stepper-indicator-focus-border-width + @stepper-indicator-focus-offset );
+
+@stepper-optional-label-opacity: .35;
+@stepper-disabled-opacity: .6;
+
+@stepper-progressbar-size: 2px;
+@stepper-connector-calc-offset: calc(( @stepper-indicator-height / 2) + @stepper-progressbar-size / 2 + @stepper-indicator-focus-offset);
+
+@stepper-content-transition-property: height;
+@stepper-content-transition-duration: 300ms;
+@stepper-content-transition-timing-function: cubic-bezier(.4, 0, .2, 1) 0ms;
+
+
+// Wizard
+@wizard-spacer: 8px;
+
+@wizard-padding-x: calc( @wizard-spacer * 2 );
+@wizard-padding-y: @wizard-padding-x;
+
+@wizard-border-width: 0;
+@wizard-font-size: inherit;
+@wizard-line-height: @line-height;
+
+@wizard-content-padding-x: calc( @wizard-spacer * 4 );
+@wizard-content-padding-y: @wizard-content-padding-x;
+
+@wizard-buttons-margin-x: @wizard-spacer;
+
+
+// TextArea
+@textarea-default-width: 18em;
+@textarea-border-width: @input-border-width;
+@textarea-padding-x: 8px;
+@textarea-padding-y: 4px;
+@textarea-line-height: (20 / 14);
+@textarea-calc-height: calc( (@textarea-line-height * 1em) + (@textarea-padding-y * 2) + (@textarea-border-width * 2) );
+
+
+// Appbar
+@appbar-padding-y: 8px;
+@appbar-padding-x: 16px;
+@appbar-border-width: 0px;
+
+@appbar-font-size: inherit;
+@appbar-line-height: @line-height;
+@appbar-font-family: inherit;
+@appbar-gap: 8px;
+
+
+// Loader
+@loader-segment-border-radius: 50%;
+@loader-segment-size-sm: 6px;
+@loader-segment-size-md: 10px;
+@loader-segment-size-lg: 20px;
+
+@loader-padding-sm: calc( @loader-segment-size-sm / 2 );
+@loader-padding-md: calc( @loader-segment-size-md / 2 );
+@loader-padding-lg: calc( @loader-segment-size-lg / 2 );
+
+@loader-pulsing-2-segment-margin-x-sm: 1.5px;
+@loader-pulsing-2-segment-margin-x-md: 2.5px;
+@loader-pulsing-2-segment-margin-x-lg: 5px;
+
+@loader-spinner-3-width-sm: calc( @loader-segment-size-sm * 4 );
+@loader-spinner-3-height-sm: 20px;
+@loader-spinner-3-width-md: calc( @loader-segment-size-md * 4 );
+@loader-spinner-3-height-md: 34px;
+@loader-spinner-3-width-lg: calc( @loader-segment-size-lg * 4 );
+@loader-spinner-3-height-lg: 65px;
+
+@loader-spinner-4-width-sm: calc( @loader-segment-size-sm * 4 );
+@loader-spinner-4-height-sm: @loader-spinner-4-width-sm;
+@loader-spinner-4-width-md: calc( @loader-segment-size-md * 4 );
+@loader-spinner-4-height-md: @loader-spinner-4-width-md;
+@loader-spinner-4-width-lg: calc( @loader-segment-size-lg * 4 );
+@loader-spinner-4-height-lg: @loader-spinner-4-width-lg;
+
+
+// Gantt
+@gantt-planned-row-height: 3.3em;
+
+@gantt-planned-margin-y: .35em;
+@gantt-planned-milestone-margin-y: .7em;
+@gantt-planned-summary-margin-y: .6em;
+@gantt-planned-border-width: 2px;
+@gantt-planned-line-height: .75em;
+
+@gantt-planned-dependency-margin-y: .6em;
+@gantt-planned-resource-margin-y: 0.9em;
+@gantt-planned-dot-margin-y: 1.1em;
+@gantt-planned-dot-summary-milestone-margin-y: 1.3em;
+@gantt-planned-dot-start-milestone-margin-x: -.2em;
+
+@gantt-planned-moment-width: 6px;
+@gantt-planned-moment-height: @gantt-planned-moment-width;
+@gantt-planned-moment-border-radius: calc( ( @gantt-planned-border-width * 2 + @gantt-planned-moment-width ) / 2 );
+@gantt-planned-moment-margin-x: calc( @gantt-planned-border-width / 2 - @gantt-planned-moment-border-radius );
+@gantt-planned-milestone-moment-margin-x: @gantt-planned-moment-width / 2;
+
+@gantt-planned-duration-height: @gantt-planned-border-width;
+@gantt-planned-duration-hover-height: calc( @gantt-planned-border-width + 1px );
+
+@gantt-task-offset-line-height: 1.46em;
+@gantt-offset-height: 1.65em;
+
+
+// ImageEditor
+@imageeditor-spacer: 8px;
+
+@imageeditor-margin-y: 0px;
+@imageeditor-margin-x: 0px;
+@imageeditor-padding-y: 0px;
+@imageeditor-padding-x: 0px;
+
+@imageeditor-border-width: 0px;
+@imageeditor-font-size: inherit;
+@imageeditor-line-height: @line-height;
+@imageeditor-font-family: inherit;
+
+@imageeditor-content-border-width: 1px;
+
+@imageeditor-action-pane-padding-y: calc( @imageeditor-spacer * 4 );
+@imageeditor-action-pane-padding-x: calc( @imageeditor-spacer * 2 );
+
+@imageeditor-crop-border-width: 1px;
+@imageeditor-crop-border-style: dashed;
+
+@imageeditor-resize-handle-margin-x: 1px;
+@imageeditor-resize-handle-margin-y: 1px;
+@imageeditor-resize-handle-border-width: 0px 2px 2px 0px;
+@imageeditor-resize-handle-size: 15px;
+
+
+// Expansion panel
+@expander-spacing-y: (@padding-y * 2);
+@expander-font-family: @font-family;
+@expander-font-size: @font-size;
+@expander-line-height: @line-height;
+@expander-border-width: 1px;
+
+@expander-header-padding-x: (@padding-x * 2);
+@expander-header-padding-y: (@padding-y * 3);
+@expander-indicator-margin-x: (@padding-x * 1.5);
+
+@expander-content-padding-x: (@padding-x * 2);
+@expander-content-padding-y: (@padding-y * 4);
+
+
+// FloatingActionButton
+@fab-spacer: 16px;
+
+@fab-padding-x: @fab-spacer;
+@fab-padding-y: @fab-padding-x;
+@fab-border-width: 0;
+@fab-border-radius: 4px;
+@fab-font-family: inherit;
+@fab-font-size: inherit;
+@fab-line-height: @line-height;
+
+@fab-padding-x-sm: calc( @fab-padding-x / 2 );
+@fab-padding-y-sm: calc( @fab-padding-y / 2 );
+
+@fab-padding-x-lg: calc( @fab-padding-x * 1.5 );
+@fab-padding-y-lg: calc( @fab-padding-y * 1.5 );
+
+@fab-icon-width: 20px;
+@fab-icon-height: @fab-icon-width;
+@fab-icon-spacing: 8px;
+
+@fab-items-padding-x: 0;
+@fab-items-padding-y: @fab-spacer;
+
+@fab-item-spacer: 8px;
+@fab-item-text-padding-x: 4px;
+@fab-item-text-padding-y: @fab-item-text-padding-x;
+@fab-item-text-border-width: 1px;
+@fab-item-text-border-radius: 2px;
+@fab-item-text-font-size: 10px;
+@fab-item-text-line-height: 1;
+
+@fab-item-icon-padding-x: @fab-item-spacer;
+@fab-item-icon-padding-y: @fab-item-icon-padding-x;
+@fab-item-icon-border-width: 0;
+@fab-item-icon-border-radius: 50%;
+
+
+// BottomNavigation
+@bottom-nav-padding-x: 4px;
+@bottom-nav-padding-y: @bottom-nav-padding-x;
+@bottom-nav-gap: @bottom-nav-padding-x;
+@bottom-nav-border-width: 1px 0px 0px 0px;
+
+@bottom-nav-font-family: inherit;
+@bottom-nav-font-size: inherit;
+@bottom-nav-line-height: @line-height;
+@bottom-nav-letter-spacing: .2px;
+
+@bottom-nav-item-padding-x: 8px;
+@bottom-nav-item-padding-y: 0;
+@bottom-nav-item-min-width: 72px;
+@bottom-nav-item-min-height: calc( (@icon-size * 2.5) + (@bottom-nav-padding-y * 2) );
+@bottom-nav-item-gap: 0 8px;
+@bottom-nav-item-border-radius: 4px;
+
+@bottom-nav-item-icon-margin-y: 8px;
+@bottom-nav-item-icon-margin-x: @bottom-nav-item-icon-margin-y;
+@bottom-nav-item-icon-size: 24px;
+@bottom-nav-item-disabled-opacity: .5;
+
+@bottom-nav-shadow: 0px 0px 5px rgba(0, 0, 0, .12);
+
+
+// Grid column menu
+@grid-column-menu-popup-padding-x: 0;
+@grid-column-menu-popup-padding-y: @padding-y-sm;
+
+@grid-column-menu-item-padding-x: @padding-x;
+@grid-column-menu-item-padding-y: @padding-y;
+
+@grid-column-menu-list-item-padding-x: @padding-x;
+@grid-column-menu-list-item-padding-y: @padding-y-sm;
+
+@grid-column-menu-filter-container-padding-x: @padding-x;
+@grid-column-menu-filter-container-padding-y: @padding-y;
 
 
 @import "common/all.less";

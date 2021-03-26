@@ -4,6 +4,8 @@ page_title: Excel Export Overview | Kendo UI Excel Export
 description: "Learn how to create Excel documents with Kendo UI."
 slug: introduction_excelexport_kendoui
 position: 1
+CTAControlName: Excel Export
+
 ---
 
 # Excel Export Overview
@@ -11,6 +13,10 @@ position: 1
 As of the Kendo UI 2014 Q3 release, Kendo UI has provided Excel generation support.
 
 Excel export allows you to create Excel documents in JavaScript and save them on the client machine.
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-overview.html %}
+{% endif %}
 
 ## Requirements
 

@@ -28,29 +28,6 @@ The ButtonGroup presents a linear set of grouped buttons.
 
 1. Add a hybrid Telerik UI ButtonGroup to the `Index` view. Like most hybrid controls, the ButtonGroup must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("buttongroup-view")
-            .Title("Inbox")
-            .Content(() =>
-            {
-                %>
-                <%: Html.Kendo().MobileButtonGroup()
-                    .Name("select-period")
-                    .Items(items =>
-                    {
-                        items.Add().Text("Month");
-                        items.Add().Text("Quarter");
-                        items.Add().Text("Year");
-                    })
-                    .Index(0)
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("buttongroup-view")
             .Title("Inbox")
@@ -67,20 +44,12 @@ The ButtonGroup presents a linear set of grouped buttons.
                 )
             </text>)
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -90,26 +59,6 @@ You can subscribe to all hybrid ButtonGroup [events](https://docs.telerik.com/ke
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileButtonGroup()
-        .Name("select-period")
-        .Items(items =>
-        {
-            items.Add().Text("Month");
-            items.Add().Text("Quarter");
-            items.Add().Text("Year");
-        })
-        .Index(0)
-        .Events(events => events.Select("onSelect"))
-    %>
-
-    <script>
-        function onSelect() {
-            // Handle the select event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileButtonGroup()
         .Name("select-period")
         .Items(items =>
@@ -127,7 +76,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the select event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

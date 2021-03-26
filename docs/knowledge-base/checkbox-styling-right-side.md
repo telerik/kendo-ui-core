@@ -30,6 +30,10 @@ res_type: kb
  </tr>
 </table>
 
+> **Important**
+>
+> Deprecated. This approach is applicable only on versions before Kendo UI R1 2020.
+
 ## Description
 
 When I use the checkbox styling [as shown in this demo](https://demos.telerik.com/kendo-ui/styling/checkboxes) and if I move the `input` element to the right of the `label` tag, the example stops working.
@@ -38,7 +42,7 @@ How can I place move the `input` element to the right of the `label` tag in the 
 
 ## Solution
 
-You are requires to place the checkbox first and the `label` tag second, so that the `label` tag can be styled, based on the checkbox state.
+You are required to place the checkbox first and the `label` tag second, so that the `label` tag can be styled, based on the checkbox state.
 
 ````css
 .k-checkbox:checked + .k-checkbox-label {}

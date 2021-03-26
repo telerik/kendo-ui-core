@@ -55,8 +55,9 @@ public partial class Timeline : BaseController
                     new TimelineEventActionModel() { text = "More info about New York City", url="https://en.wikipedia.org/wiki/New_York_City" }
                 }
             });
-
-            return Json(events);
+            {% if site.core %}
+            return Json(events);{% else %}
+            return Json(events, JsonRequestBehavior.AllowGet);{% endif %}
         }
 }
 ```

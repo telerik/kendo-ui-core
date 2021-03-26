@@ -1,6 +1,6 @@
 ---
 title: Formats
-page_title: jQuery NumericTextBox Documentation | Formats | Kendo UI
+page_title: jQuery NumericTextBox Documentation | Formats
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create currency and percentage NumericTextBoxes."
 slug: formats_numerictextbox
 position: 2

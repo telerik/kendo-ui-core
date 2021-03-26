@@ -20,7 +20,7 @@ The schema configuration. See the [`DataSource.schema` configuration](/api/frame
 
 The data item (model) configuration. See the [`DataSource.schema.model` configuration](/api/framework/datasource#configuration-schema.model) for all available options.
 
-> The model must inherit from [`kendo.data.FileEntry`](/api/framework/fileentry).
+> The model must inherit from [`kendo.data.FileEntry`](/api/javascript/data/fileentry).
 
 ### schema.model.isDirectory `Boolean|String|Function` *(default: false)*
 

@@ -35,10 +35,8 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
-        DISABLED = "k-state-disabled",
+        DISABLED = "k-state-disabled";
 
-        browser = kendo.support.browser,
-        isIE8 = browser.msie && browser.version < 9;
 
     var ColorSelector = Widget.extend({
         init: function(element, options) {
@@ -366,11 +364,6 @@ var __meta__ = { // jshint ignore:line
                     that._updateUI(that.color());
                     that._cancel();
                 });
-
-            if (isIE8) {
-                // IE filters require absolute URLs
-                that._applyIEFilter();
-            }
         },
         destroy: function() {
             this._hsvEvents.destroy();
@@ -393,13 +386,7 @@ var __meta__ = { // jshint ignore:line
             autoupdate : true,
             messages   : MESSAGES
         },
-        _applyIEFilter: function() {
-            var track = this.element.find(".k-hue-slider .k-slider-track")[0],
-                url = track.currentStyle.backgroundImage;
 
-            url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
-            track.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
-        },
         _sliders: function() {
             var that = this,
                 element = that.element,
@@ -612,12 +599,12 @@ var __meta__ = { // jshint ignore:line
                     '# } #' +
                     '#= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #>' +
                 '# if (clearButton && !_standalone) { #' +
-                    '<span class="k-clear-color k-button k-bare" title="#: messages.clearColor #"></span>' +
+                    '<span class="k-clear-color k-button k-flat" title="#: messages.clearColor #"></span>' +
                 '# } #' +
                 '</div></div></div>' +
             '# } #' +
              '# if (clearButton && !_standalone && !preview) { #' +
-                    '<div class="k-clear-color-container"><span class="k-clear-color k-button k-bare">#: messages.clearColor #</span></div>' +
+                    '<div class="k-clear-color-container"><span class="k-clear-color k-button k-flat">#: messages.clearColor #</span></div>' +
              '# } #' +
             '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
             '<div class="k-sliders-wrap k-vbox">' +
@@ -667,6 +654,8 @@ var __meta__ = { // jshint ignore:line
 
             var content = that.wrapper = $(that._template(options));
             element.hide().after(content);
+
+            that._inputWrapper = $(that.wrapper[0].firstChild);
 
             if (element.is("input")) {
                 element.appendTo(content);

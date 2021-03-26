@@ -18,8 +18,8 @@
             currency: {
                 name: "Tanzanian Shilling",
                 abbr: "TZS",
-                pattern: ["-$n","$n"],
-                decimals: 0,
+                pattern: ["-$ n","$ n"],
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],

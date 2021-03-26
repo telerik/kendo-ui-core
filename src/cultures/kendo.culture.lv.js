@@ -22,7 +22,7 @@
                 decimals: 2,
                 ",": " ",
                 ".": ",",
-                groupSize: [2],
+                groupSize: [3],
                 symbol: "€"
             }
         },
@@ -30,15 +30,15 @@
             standard: {
                 days: {
                     names: ["svētdiena","pirmdiena","otrdiena","trešdiena","ceturtdiena","piektdiena","sestdiena"],
-                    namesAbbr: ["Sv","Pr","Ot","Tr","Ce","Pk","Se"],
+                    namesAbbr: ["svētd.","pirmd.","otrd.","trešd.","ceturtd.","piektd.","sestd."],
                     namesShort: ["Sv","Pr","Ot","Tr","Ce","Pk","Se"]
                 },
                 months: {
-                    names: ["Janvāris","Februāris","Marts","Aprīlis","Maijs","Jūnijs","Jūlijs","Augusts","Septembris","Oktobris","Novembris","Decembris"],
-                    namesAbbr: ["Janv.","Febr.","Marts","Apr.","Maijs","Jūn.","Jūl.","Aug.","Sept.","Okt.","Nov.","Dec."]
+                    names: ["janvāris","februāris","marts","aprīlis","maijs","jūnijs","jūlijs","augusts","septembris","oktobris","novembris","decembris"],
+                    namesAbbr: ["janv.","febr.","marts","apr.","maijs","jūn.","jūl.","aug.","sept.","okt.","nov.","dec."]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["priekšp.","priekšp.","PRIEKŠP."],
+                PM: ["pēcp.","pēcp.","PĒCP."],
                 patterns: {
                     d: "dd.MM.yyyy",
                     D: "dddd, yyyy. 'gada' d. MMMM",

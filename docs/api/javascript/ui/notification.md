@@ -519,7 +519,7 @@ If this argument is not supplied, then `"info"` is assumed.
 		}]
 	}).data("kendoNotification");
 
-	notificationWidget.show(getNotificationMessage(), "myAlert");
+	notificationWidget.show(getNotificationMessage, "myAlert");
     </script>
 
 ### showText

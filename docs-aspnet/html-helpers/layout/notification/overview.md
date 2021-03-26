@@ -17,6 +17,10 @@ The Notification provides a styled UI widget with arbitrary content which can pr
 
 ## Initializing the Notification
 
+You can initialize the Notification from any element because it does not manipulate its content. The element will be hidden if the widget uses popup notifications or if the static notifications are not appended to the Notification element. In such cases, the element is not needed.
+
+If the Notification element contains static (non-popup) notifications, enable its tag to allow nesting the elements inside the template of the notifications. For example, inline elements, such as `span`, `a`, or `em` cannot contain block elements such as `div`, `p`, `ul`, `li`, or headings. However, you can use a `div` element.
+
 The following example demonstrates how to define the Notification by using the Notification HtmlHelper.
 
 ```

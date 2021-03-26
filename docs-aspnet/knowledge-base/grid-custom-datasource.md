@@ -28,7 +28,7 @@ How can I configure a custom DataSource for the Grid HtmlHelper?
 
 ## Solution
 
-For the complete implementation on how to configure a custom DataSource to properly populate a Telerik UI Grid HtmlHelper for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/custom-data-source).
+For the complete implementation on how to configure a custom DataSource to properly populate a Telerik UI Grid HtmlHelper for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/CustomDataSource.cshtml).
 
 ## See Also
 

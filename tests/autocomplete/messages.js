@@ -38,7 +38,7 @@
                 }
             });
 
-            var clearTitle = autoComplete.wrapper.find('.k-icon.k-clear-value.k-i-close').attr("title");
+            var clearTitle = autoComplete.wrapper.find('.k-clear-value').attr("title");
             assert.equal(clearTitle, "custom");
         });
     });

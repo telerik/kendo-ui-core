@@ -84,7 +84,7 @@ Handle the `mousedown` event for the Grid header. In the handler, check if an ed
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "120px" },
                 { field: "UnitsInStock", title: "Units In Stock", width: "120px" },
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
             editable: "inline"
         });
@@ -103,11 +103,5 @@ Handle the `mousedown` event for the Grid header. In the handler, check if an ed
             }
         });
     });
-
-    function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
 </script>
 ````

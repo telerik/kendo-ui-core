@@ -39,13 +39,16 @@ var __meta__ = { // jshint ignore:line
         DEFAULT = "k-state-default",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         CLICKEVENTS = "click" + ns + " touchend" + ns,
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         TABINDEX = "tabindex",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         MSG_INVALID_OPTION_LABEL = "The `optionLabel` option is not valid due to missing fields. Define a custom optionLabel as shown here http://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#configuration-optionLabel",
-        proxy = $.proxy;
+        proxy = $.proxy,
+        OPEN = "open",
+        CLOSE = "close";
 
     var DropDownList = Select.extend( {
         init: function(element, options) {
@@ -109,6 +112,7 @@ var __meta__ = { // jshint ignore:line
 
             that.requireValueMapper(that.options);
             that._initList();
+            that.listView.one("dataBound", proxy(that._attachAriaActiveDescendant, that));
 
             that._cascade();
 
@@ -173,7 +177,8 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             autoWidth: false,
-            popup: null
+            popup: null,
+            filterTitle: null
         },
 
         events: [
@@ -230,6 +235,7 @@ var __meta__ = { // jshint ignore:line
         open: function() {
             var that = this;
             var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
+            var listView = this.listView;
 
             if (that.popup.visible()) {
                 return;
@@ -247,6 +253,7 @@ var __meta__ = { // jshint ignore:line
                 if (that.filterInput && that.options.minLength !== 1 && !isFiltered) {
                     that.refresh();
                     that.popup.one("activate", that._focusInputHandler);
+                    that.wrapper.attr("aria-activedescendant", listView._optionID);
                     that.popup.open();
                     that._resizeFilterInput();
                 } else {
@@ -258,10 +265,23 @@ var __meta__ = { // jshint ignore:line
                 // In some cases when the popup is opened resize is triggered which will cause it to close
                 // Setting the below flag will prevent this from happening
                 that.popup._hovered = true;
+                that.wrapper.attr("aria-activedescendant", listView._optionID);
                 that.popup.open();
                 that._resizeFilterInput();
                 that._focusItem();
             }
+        },
+
+        close: function() {
+            this._attachAriaActiveDescendant();
+            this.popup.close();
+        },
+
+        _attachAriaActiveDescendant: function() {
+            var wrapper = this.wrapper,
+                inputId = wrapper.find(".k-input").attr('id');
+
+            wrapper.attr("aria-activedescendant", inputId);
         },
 
         _focusInput: function () {
@@ -546,8 +566,6 @@ var __meta__ = { // jshint ignore:line
 
             that._buildOptions(data);
 
-            that._makeUnselectable();
-
             if (!filtered) {
                 if (that._open) {
                     that.toggle(that._allowOpening());
@@ -662,6 +680,7 @@ var __meta__ = { // jshint ignore:line
                 wrapper
                     .attr(TABINDEX, wrapper.data(TABINDEX))
                     .attr(ARIA_DISABLED, false)
+                    .attr(ARIA_READONLY, false)
                     .on("keydown" + ns, that, proxy(that._keydown, that))
                     .on(kendo.support.mousedown + ns, proxy(that._wrapperMousedown, that))
                     .on("paste" + ns, proxy(that._filterPaste, that));
@@ -688,7 +707,8 @@ var __meta__ = { // jshint ignore:line
             element.attr(DISABLED, disable)
                    .attr(READONLY, readonly);
 
-            wrapper.attr(ARIA_DISABLED, disable);
+            wrapper.attr(ARIA_DISABLED, disable)
+                    .attr(ARIA_READONLY, readonly);
         },
 
         _keydown: function(e) {
@@ -1220,11 +1240,12 @@ var __meta__ = { // jshint ignore:line
                 this.filterInput = $('<input class="k-textbox"/>')
                                       .attr({
                                           placeholder: this.element.attr("placeholder"),
-                                          title: this.element.attr("title"),
-                                          role: "listbox",
-                                          "aria-haspopup": true,
-                                          "aria-expanded": false
+                                          title: this.options.filterTitle || this.element.attr("title"),
+                                          role: "searchbox",
+                                          "aria-haspopup": "listbox",
+                                          "aria-autocomplete": "list"
                                       });
+
                 this.list
                     .prepend($('<span class="k-list-filter" />')
                     .append(this.filterInput.add(icon)));
@@ -1235,12 +1256,13 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 wrapper = that.wrapper,
                 SELECTOR = "span.k-input",
+                id = kendo.guid(),
                 span;
 
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">&nbsp;</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span id="' + id + '" unselectable="on" role="option" aria-selected="true" class="k-input">&nbsp;</span><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
                        .append(that.element);
 
                 span = wrapper.find(SELECTOR);
@@ -1275,7 +1297,7 @@ var __meta__ = { // jshint ignore:line
                     accesskey: element.attr("accesskey"),
                     unselectable: "on",
                     role: "listbox",
-                    "aria-haspopup": true,
+                    "aria-haspopup": "listbox",
                     "aria-expanded": false
                 });
 
@@ -1284,6 +1306,26 @@ var __meta__ = { // jshint ignore:line
 
         _clearSelection: function(parent) {
             this.select(parent.value() ? 0 : -1);
+        },
+
+        _openHandler: function(e) {
+            this._adjustListWidth();
+
+            if (this.trigger(OPEN)) {
+                e.preventDefault();
+            } else {
+                this.wrapper.attr("aria-expanded", true);
+                this.ul.attr("aria-hidden", false);
+            }
+        },
+
+        _closeHandler: function(e) {
+            if (this.trigger(CLOSE)) {
+                e.preventDefault();
+            } else {
+                this.wrapper.attr("aria-expanded", false);
+                this.ul.attr("aria-hidden", true);
+            }
         },
 
         _inputTemplate: function() {

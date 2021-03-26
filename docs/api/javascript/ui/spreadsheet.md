@@ -259,6 +259,11 @@ The author of the PDF document.
         spreadsheet.saveAsPDF();
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.
@@ -426,6 +431,14 @@ Indicates whether to center the content horizontally. For more information, refe
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -991,6 +1004,11 @@ The format of the cell text. For more information, refer to the article on [crea
 ### sheets.rows.cells.formula `String`
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.
+
+### sheets.rows.cells.html `Boolean`
+
+If set to `true`, renders the cell value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
 
@@ -1624,7 +1642,7 @@ Returns an array with the sheets in the workbook.
 
 Clears the spreadsheet and populates it with data from the specified Excel (`.xlsx`) file.
 
-> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/installation/prerequisites#jszip-library) for the import from file functionality.
+> Requires Internet Explorer 10 or a recent version of other browsers. The JSZip library is a [prerequisite](/intro/supporting/export-support#jszip-library) for the import from file functionality.
 
 #### Parameters
 

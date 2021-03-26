@@ -7,6 +7,8 @@ res_type: api
 
 # kendo.ui.ButtonGroup
 
+Represents the Kendo UI ButtonGroup widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### enable `Boolean` *(default: true)*
@@ -15,16 +17,16 @@ Defines if the widget is initially enabled or disabled. By default, it is enable
 
 #### Example
 
-      <ul id="buttongroup">
+    <ul id="buttongroup">
         <li>Option 1</li>
         <li>Option 2</li>
         <li>Option 3</li>
-      </ul>
+    </ul>
 
     <script>
-		$("#buttongroup").kendoButtonGroup({
-			enable: false
-		});
+        $("#buttongroup").kendoButtonGroup({
+            enable: false
+        });
     </script>
 
 ### index `Number`
@@ -33,16 +35,16 @@ Defines the initially selected Button (zero based index).
 
 #### Example
 
-      <ul id="buttongroup">
+    <ul id="buttongroup">
         <li>Option 1</li>
         <li>Option 2</li>
         <li>Option 3</li>
-      </ul>
+    </ul>
 
     <script>
-		$("#buttongroup").kendoButtonGroup({
-			index: 1
-		});
+        $("#buttongroup").kendoButtonGroup({
+            index: 1
+        });
     </script>
 
 ### selection `String` *(default "single")*
@@ -51,16 +53,16 @@ Defines the selection type.
 
 #### Example
 
-      <ul id="buttongroup">
+    <ul id="buttongroup">
         <li>Option 1</li>
         <li>Option 2</li>
         <li>Option 3</li>
-      </ul>
+    </ul>
 
     <script>
-		$("#buttongroup").kendoButtonGroup({
-			selection: "multiple"
-		});
+        $("#buttongroup").kendoButtonGroup({
+            selection: "multiple"
+        });
     </script>
 
 ### items `Array`
@@ -122,7 +124,7 @@ If set to true a default overlay badge will be displayed. If set to a string, an
                     badge: {
                         text: 1234,
                         max: 99,
-                        color: "warning",
+                        themeColor: "warning",
                         position: "inline"
                     }
                 },
@@ -130,7 +132,7 @@ If set to true a default overlay badge will be displayed. If set to a string, an
                     text: "bar",
                     badge: {
                         icon: "add",
-                        color: "success",
+                        themeColor: "success",
                         cutoutBorder: true
                     }
                 }
@@ -139,21 +141,11 @@ If set to true a default overlay badge will be displayed. If set to a string, an
     </script>
 
 
-### items.badge.appearance `String` *(default: pill)*
+### items.badge.align `String` *(default: '')*
 
-**Deprecated!** Use [`items.badge.shape`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeshape) instead.
+Specifies position of the badge relative to button. Valid position options are: `top start`, `top end`, `bottom start`, `bottom end`.
 
-For compatibility `items.badge.appearance` maps to `items.badge.shape`.
-
-
-### items.badge.badgeStyle `String` *(default: 'solid')*
-
-Specifies the structure of a badge. Valid options are `solid` (default) and `outline`.
-
-
-### items.badge.color `String` *(default: 'secondary')*
-
-Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
+`items.badge.align` works in conjunction with [`items.badge.position`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeposition).
 
 
 ### items.badge.cutoutBorder `Boolean` *(default: false)*
@@ -161,15 +153,14 @@ Specifies the color of the component. Valid options are `inherit`, `default`, `p
 Specifies wether or not to render additional "cutout" border around the badge.
 
 
+### items.badge.fill `String` *(default: 'solid')*
+
+Specifies the structure of a badge. Valid options are `solid` (default) and `outline`.
+
+
 ### items.badge.icon `String` *(default: '')*
 
 Defines the name for an existing icon in a Kendo UI theme or SVG content. The icon is rendered inside the badge by a `span.k-icon` or `span.k-svg-icon` element.
-
-### items.badge.look `String` *(default: solid)*
-
-**Deprecated!** Use [`items.badge.badgeStyle`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgebadgeStyle) instead.
-
-For compatibility `badge.look` maps to `badge.badgeStyle`.
 
 
 ### items.badge.max `Number` *(default: Infinity)*
@@ -177,35 +168,21 @@ For compatibility `badge.look` maps to `badge.badgeStyle`.
 If `text` is a number, it will cap that number.
 
 
-### items.badge.overlay `Boolean` *(default: true)*
+### items.badge.position `String` *(default: 'edge')*
 
-**Deprecated!** Use [`items.badge.position`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeposition) instead.
+Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `inline`, `edge`, `inside`, `outside`.
 
-There is no built in mapping between `items.badge.overlay` and `items.badge.position`:
-
-* `items.badge.overlay: false` can be achieved by setting `items.badge.position: "inline"`
-* `items.badge.overlay: true` can be achieved by setting `items.badge.position: "top end"`, or not setting it at all.
-
-For compatibility `items.badge.overlay` is kept, even though it has no effect on the badge.
-
-
-### items.badge.placement `String` *(default: 'edge')*
-
-Specifies position of the badge relative to the edge of the button. Valid placemnt options are: `edge`, `inside`, `outside`.
-
-Note: placement configuration requires the badge to be positioned. See [`items.badge.position`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeposition) for more details.
-
-
-### items.badge.position `String` *(default: 'inline')*
-
-Specifies position of the badge relative to button. Valid position options are: `inline`, `top start`, `top end`, `bottom start`, `bottom end`.
-
-`badge.position` works in conjunction with [`items.badge.placement`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgeplacement).
+Note: position configuration, other than `inline` requires the badge to be aligned. See [`items.badge.align`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgealign) for more details.
 
 
 ### items.badge.shape `String` *(default: 'rounded')*
 
 Specifies the shape of the badge. Valid options are: `rectangle`, `rounded`, `pill`, `circle`, `dot`.
+
+
+### items.badge.size  `String` *(default: 'medium')*
+
+Specifies the size of the badge. Valid options are `small`, `medium` and `large`.
 
 
 ### items.badge.template `String|Function`
@@ -218,18 +195,9 @@ The [template](/api/javascript/kendo/methods/template) which renders the content
 The text of the badge. Valid input includes `string`, `number` or `object` with `toString` method. Default is empty string.
 
 
-### items.badge.type `String` *(default: 'secondary')*
+### items.badge.themeColor `String` *(default: 'secondary')*
 
-**Deprecated!** Use [`items.badge.color`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgecolor) instead.
-
-For compatibility `items.badge.type` maps to `items.badge.color`.
-
-
-### items.badge.value `String|Number` *(default: '')*
-
-**Deprecated!** Use [`items.badge.text`](/api/javascript/ui/buttongroup/configuration/items#itemsbadgetext) instead.
-
-For compatibility `items.badge.value` maps to `items.badge.text`.
+Specifies the color of the component. Valid options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted`.
 
 
 ### items.badge.visible `Boolean` *(default: true)*
@@ -263,13 +231,13 @@ Defines the name of an existing icon in a Kendo theme.
     <div id="buttonGroup"></div>
 
     <script>
-    $("#buttonGroup").kendoButtonGroup({
-      items: [
-        { icon: "align-left" },
-        { icon: "align-center" },
-        { icon: "align-right" }
-      ]
-    });
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { icon: "align-left" },
+                { icon: "align-center" },
+                { icon: "align-right" }
+            ]
+        });
     </script>
 
 ### items.iconClass `String`
@@ -281,13 +249,13 @@ Allows the usage of custom icons. Defines CSS classes which are to be applied to
     <div id="buttonGroup"></div>
 
     <script>
-    $("#buttonGroup").kendoButtonGroup({
-      items: [
-        { iconClass: "fa fa-male" },
-        { icon: "align-center" },
-        { icon: "align-right" }
-      ]
-    });
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { iconClass: "fa fa-male" },
+                { icon: "align-center" },
+                { icon: "align-right" }
+            ]
+        });
     </script>
 
 ### items.imageUrl `String`
@@ -299,13 +267,13 @@ If set, the ButtonGroup will render an image with the specified URL in the butto
     <div id="buttonGroup"></div>
 
     <script>
-    var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
-    $("#buttonGroup").kendoButtonGroup({
-      items: [
-					{ text: "foo", imageUrl: baseUrl + "/sports/snowboarding.png" },
-					{ text: "bar", imageUrl: baseUrl + "/sports/snowboarding.png" }
-      ]
-    });
+        var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
+        $("#buttonGroup").kendoButtonGroup({
+            items: [
+                { text: "foo", imageUrl: baseUrl + "/sports/snowboarding.png" },
+                { text: "bar", imageUrl: baseUrl + "/sports/snowboarding.png" }
+            ]
+        });
     </script>
 
 ### items.selected `Boolean` *(default: false)*
@@ -379,21 +347,21 @@ The target value to be set or false to be removed.
 
 #### Example
 
-	<ul id="buttongroup">
-		<li>Option 1</li>
-		<li>Option 2</li>
-		<li>Option 3</li>
-	</ul>
+    <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+    </ul>
 
     <script>
-		var buttonGroup = $("#buttongroup").kendoButtonGroup({
-			select: function(e) {
-				console.log("selected index:" + e.indices);
-			},
-			index: 0
-		}).data("kendoButtonGroup");
+        var buttonGroup = $("#buttongroup").kendoButtonGroup({
+            select: function(e) {
+                console.log("selected index:" + e.indices);
+            },
+            index: 0
+        }).data("kendoButtonGroup");
 
-		buttonGroup.badge(0,5);
+        buttonGroup.badge(0,5);
     </script>
 
 ### current
@@ -406,19 +374,19 @@ Get the currently selected Button.
 
 #### Example - get the index of the currently selected Button
 
-	<ul id="buttongroup">
-		<li>Option 1</li>
-		<li>Option 2</li>
-		<li>Option 3</li>
-	</ul>
+    <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+    </ul>
 
     <script>
-		$("#buttongroup").kendoButtonGroup({
-			select: function(e) {
-				var index = this.current().index();
-				console.log(index);
-			}
-		});
+        $("#buttongroup").kendoButtonGroup({
+            select: function(e) {
+                var index = this.current().index();
+                console.log(index);
+            }
+        });
     </script>
 
 ### destroy
@@ -429,21 +397,21 @@ Prepares the **ButtonGroup** for safe removal from DOM. Detaches all event handl
 
 #### Example
 
-      <ul id="buttongroup">
+    <ul id="buttongroup">
         <li>Option 1</li>
         <li>Option 2</li>
         <li>Option 3</li>
-      </ul>
+    </ul>
 
-      <a onclick="destroy">Destroy the ButtonGroup</a>
+    <a onclick="destroy">Destroy the ButtonGroup</a>
 
     <script>
-		$("#buttongroup").kendoButtonGroup();
+        $("#buttongroup").kendoButtonGroup();
 
-		function destroy() {
-			$("#buttongroup").data("kendoButtonGroup").destroy(); //detach events
-			$("#buttongroup").remove(); //remove the button group from the DOM
-		}
+        function destroy() {
+            $("#buttongroup").data("kendoButtonGroup").destroy(); //detach events
+            $("#buttongroup").remove(); //remove the button group from the DOM
+        }
     </script>
 
 ### enable
@@ -458,25 +426,27 @@ A boolean flag that indicates whether the widget should be enabled or disabled.
 
 #### Example
 
-	<a onclick="enable">Enable</a>
-	<ul id="buttongroup">
-		<li>Option 1</li>
-		<li>Option 2</li>
-		<li>Option 3</li>
-	</ul>
+    <a onclick="enable">Enable</a>
+    <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+    </ul>
 
     <script>
-	$("#buttongroup").kendoButtonGroup({
-		enable: false
-	});
-    function enable() {
-        $("#btnGroup").data("kendoButtonGroup").enable(true);
-    }
+        $("#buttongroup").kendoButtonGroup({
+            enable: false
+        });
+        function enable() {
+            $("#btnGroup").data("kendoButtonGroup").enable(true);
+        }
     </script>
 
 ### select
 
 Select a Button.
+
+> **Note:** Starting from R3 2020 release, calling the `select()` method will no longer trigger the `select` event. That is the expected by design behavior of the widget. If you need to trigger the `select` event upon the method call, you should do that manually by calling the `buttongroup.trigger('select')`.
 
 #### Parameters
 
@@ -486,20 +456,20 @@ LI element or index of the Button.
 
 #### Example
 
-	<ul id="buttongroup">
-		<li>Option 1</li>
-		<li>Option 2</li>
-		<li>Option 3</li>
-	</ul>
+    <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+    </ul>
 
 
     <script>
-      var buttongroup = $("#buttongroup").kendoButtonGroup().data("kendoButtonGroup");
+        var buttongroup = $("#buttongroup").kendoButtonGroup().data("kendoButtonGroup");
 
-      // selects by jQuery object
-      buttongroup.select(buttongroup.element.children().eq(0));
-      // selects by index
-      buttongroup.select(1);
+        // selects by jQuery object
+        buttongroup.select(buttongroup.element.children().eq(0));
+        // selects by index
+        buttongroup.select(1);
     </script>
 
 ## Events
@@ -510,19 +480,19 @@ Fires when a Button is selected.
 
 #### Example - get the index of the currently selected Button
 
-	<ul id="buttongroup">
-		<li>Option 1</li>
-		<li>Option 2</li>
-		<li>Option 3</li>
-	</ul>
+    <ul id="buttongroup">
+        <li>Option 1</li>
+        <li>Option 2</li>
+        <li>Option 3</li>
+    </ul>
 
     <script>
-		$("#buttongroup").kendoButtonGroup({
-			select: function(e) {
-				var index = this.current().index();
-				console.log(index);
-			}
-		});
+        $("#buttongroup").kendoButtonGroup({
+            select: function(e) {
+                var index = this.current().index();
+                console.log(index);
+            }
+        });
     </script>
 
 #### Event Data

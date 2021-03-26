@@ -19,6 +19,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.dialog.js | |
+| [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.expansionpanel.js | |
 | [Notification](https://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
@@ -33,6 +36,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.draganddrop.js | |
 | | kendo.resizable.js | |
 | | kendo.splitter.js | |
+| [TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.draganddrop.js | |
+| | kendo.resizable.js | |
+| | kendo.tilelayout.js | |
 | [Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

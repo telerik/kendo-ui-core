@@ -1,6 +1,6 @@
 ---
 title: Appearance
-page_title: jQuery ComboBox Documentation | Appearance | Kendo UI
+page_title: jQuery ComboBox Documentation | Appearance
 description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: appearance_kendoui_combobox
 position: 7

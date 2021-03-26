@@ -1,6 +1,5 @@
 // Editor
 .k-editor {
-    height: 250px;
     border-style: solid;
     border-width: 1px;
     font-size: 100%;
@@ -22,6 +21,7 @@
 }
 table.k-editor {
     width: 100%;
+    height: 250px;
     table-layout: fixed;
     border-collapse: separate;
     border-spacing: 0;
@@ -42,6 +42,7 @@ table.k-editor {
 // Editor inline
 .k-editor-inline {
     padding: .3em .5em;
+    background: none;
     word-wrap: break-word;
     overflow: auto;
     position: relative;
@@ -50,16 +51,30 @@ table.k-editor {
         border: 1px solid transparent;
     }
 }
+
+.k-window.k-editor-widget {
+    min-height: 0;
+}
 .editorToolbarWindow  {
+    padding: @toolbar-padding-y @toolbar-padding-x;
+    font-size: 14px;
     display: flex;
     align-content: flex-start;
+
+    .k-editor-toolbar {
+        padding: 0;
+        border-width: 0;
+        background: none;
+    }
 }
 .k-editortoolbar-dragHandle {
-    margin: 0 3px 0 0;
+    margin: 0 @toolbar-spacing 0 0;
     padding: 0;
-    float: left;
     position: relative;
     cursor: move;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
 
@@ -78,8 +93,8 @@ table.k-editor {
     // Tool
     .k-tool-group > .k-tool {
         padding: @button-padding-y;
-        width: @editor-icon-size;
-        height: @editor-icon-size;
+        width: @button-calc-size;
+        height: @button-calc-size;
     }
     .k-tool-text {
         display: none;
@@ -114,6 +129,13 @@ table.k-editor {
         height: 1px;
         font-size: 0;
         line-height: 0;
+    }
+
+    .k-editor-export {
+        .k-icon {
+            margin-right: .25em;
+            margin-top: -.25em;
+        }
     }
 }
 
@@ -375,7 +397,7 @@ table.k-editor {
     .k-editor-textarea {
         margin: 1em;
         padding: @input-padding-y @input-padding-y;
-        // width: 100%;
+        width: calc(100% - 2em); // exclude margin
         height: 100%;
         border-width: 1px;
         border-style: solid;

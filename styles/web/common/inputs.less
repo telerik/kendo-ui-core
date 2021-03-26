@@ -24,43 +24,45 @@ span.k-dropdowntree {
 .k-multiselect,
 .k-textbox,
 .k-listbox {
+    width: @input-default-width;
+    border-width: 0;
     position: relative;
     display: inline-block;
-    width: @input-default-width;
-    overflow: visible;
-    border-width: 0;
     vertical-align: middle;
+    overflow: visible;
 }
 
-.k-autocomplete > .k-i-close,
-.k-dropdown-wrap > .k-i-close,
-.k-multiselect-wrap > .k-i-close {
+.k-autocomplete > .k-clear-value,
+.k-dropdown-wrap > .k-clear-value,
+.k-multiselect-wrap > .k-clear-value {
+    outline: 0;
     font-size: 100%;
-    display: none;
+    display: inline-block;
     position: absolute;
+    visibility: hidden;
     cursor: pointer;
 }
 
-.k-autocomplete > .k-i-close {
+.k-autocomplete > .k-clear-value {
     right: calc(@input-clear-icon-offset);
 }
 
-.k-multiselect-wrap > .k-i-close {
+.k-multiselect-wrap > .k-clear-value {
     right: calc(@input-clear-icon-offset + 1px);
 }
 
-.k-autocomplete > .k-i-close,
-.k-dropdown-wrap > .k-i-close {
+.k-autocomplete > .k-clear-value,
+.k-dropdown-wrap > .k-clear-value {
     top: 50%;
     transform: translateY(-50%);
 }
 
-.k-dropdown-wrap > .k-i-close {
+.k-dropdown-wrap > .k-clear-value {
     right: calc(@combobox-clear-icon-offset);
 }
 
-.k-multiselect-wrap > .k-i-close,
-.k-dropdowntree > .k-multiselect-wrap > .k-i-close  {
+.k-multiselect-wrap > .k-clear-value,
+.k-dropdowntree > .k-multiselect-wrap > .k-clear-value  {
     top: calc(@multiselect-clear-icon-top-offset);
 }
 
@@ -75,9 +77,8 @@ span.k-dropdowntree {
 .k-multiselect-wrap {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-i-close {
-            display: inline-block;
-            outline: none;
+        > .k-clear-value {
+            visibility: visible;
         }
     }
 }
@@ -85,9 +86,8 @@ span.k-dropdowntree {
 .k-multiselect {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-multiselect-wrap > .k-i-close {
-            display: inline-block;
-            outline: none;
+        > .k-multiselect-wrap > .k-clear-value {
+            visibility: visible;
         }
     }
 }
@@ -270,7 +270,8 @@ span.k-textbox:after {
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
 .k-dropdown-wrap .k-input,
-.k-selectbox .k-input {
+.k-selectbox .k-input,
+.k-multiselect-wrap .k-input {
     font-family: inherit;
     border-width: 0;
     outline: 0;
@@ -343,6 +344,16 @@ span.k-datetimepicker .k-select + .k-select {
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.k-textbox,
+.k-textarea,
+.k-textbox > input,
+.k-textarea > textarea,
+.k-input {
+    &::placeholder {
+        user-select: none;
+    }
 }
 
 .k-dropdown-wrap .k-input:before {
@@ -630,11 +641,241 @@ body .k-datetimepicker .k-select {
     padding: 1px 3px;
 }
 
+.k-datetime-container {
+
+    .k-datetime-wrap {
+        width: @datetime-width;
+        overflow: hidden;
+    }
+
+    .k-datetime-buttongroup {
+        padding: @button-padding-x;
+    }
+
+    .k-datetime-selector {
+        display: flex;
+        transition: transform .2s;
+    }
+
+    .k-datetime-calendar-wrap,
+    .k-datetime-time-wrap {
+        text-align: center;
+        flex: 0 0 @datetime-width;
+    }
+
+    .k-time-list-container {
+        justify-content: center;
+    }
+
+    .k-timeselector {
+        outline: none;
+    }
+
+    .k-time-tab .k-datetime-selector {
+        transform: translateX(-100%);
+    }
+
+    > .k-popup {
+        padding-bottom: 0;
+
+        .k-action-buttons {
+            margin-bottom: 0;
+        }
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        .k-time-tab {
+
+            .k-datetime-selector {
+                transform: translateX(100%);
+            }
+        }
+    }
+}
+
+
+// Infinite timepicker
+// Header
+.k-time-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(2 * @timepicker-padding-y) calc(@timepicker-padding-x * 2);
+    line-height: @timepicker-header-height;
+
+    .k-title {
+        font-weight: bold;
+    }
+
+    .k-time-now {
+        border-width: 0;
+        line-height: inherit;
+        cursor: pointer;
+    }
+}
+
+// Content
+.k-time-list-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: content-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: @time-list-padding 0;
+    text-align: center;
+    width: @time-list-width;
+    height: @time-list-height;
+
+    .k-title {
+        display: block;
+        text-align: center;
+        font-size: @time-font-size-xs;
+        position: absolute;
+        text-transform: capitalize;
+        font-weight: bold;
+        min-width: 100%;
+        height: 1.5em;
+        line-height: 1.5em;
+        margin-top: calc(-1 * @time-list-padding);
+        z-index: 12;
+    }
+
+    &.k-state-focused {
+        &::before,
+        &::after {
+            display: block;
+            content: " ";
+            position: absolute;
+            width: 100%;
+            left: 0;
+            pointer-events: none;
+            height: calc(50% - 1em);
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            bottom: 0;
+        }
+    }
+}
+
+.k-time-container {
+    position: absolute;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    line-height: @line-height;
+    left: 0;
+    right: 0;
+    top: @time-list-padding;
+    bottom: @time-list-padding;
+
+    .hide-scrollbar(right);
+
+    > ul {
+        height: auto;
+        width: @time-list-width;
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"]  {
+        .hide-scrollbar(left);
+    }
+}
+
+.k-time-list-container {
+    display: flex;
+    position: relative;
+}
+
+.k-time-list {
+    position: absolute;
+    display: flex;
+    z-index: 10;
+    outline: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+
+    &::before,
+    &::after {
+        display: block;
+        position: absolute;
+        content: " ";
+        height: 0;
+        line-height: 0;
+        z-index: 1;
+        width: 200%;
+        left: -50%;
+    }
+
+    &::before { top: 0; }
+    &::after { bottom: 0;}
+}
+
+.k-time-list .k-item {
+    padding: @timepicker-padding-y @timepicker-padding-x;
+}
+
+.k-time-highlight {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: calc( @button-line-height * 1em + @button-padding-y * 2 );
+    z-index: 1;
+    border-width: @time-highlight-size 0;
+    border-style: solid;
+    border-radius: .1px; // workaround for https://bugs.webkit.org/show_bug.cgi?id=175117
+}
+
+.k-time-container .k-scrollable-placeholder {
+    position: absolute;
+    width: 1px;
+    top: 0;
+    right: 0;
+}
+
+.k-time-separator {
+    display: inline-flex;
+    align-self: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 11;
+}
+
+.k-time-footer {
+    margin-top: 0;
+}
+
 // inputs
 
 .k-input {
     font-size: inherit;
     padding: 0.25em 0;
+}
+
+.k-input-separator {
+    margin: 0;
+    width: 0;
+    height: @icon-size;
+    border-width: 0 0 0 1px;
+    border-style: solid;
 }
 
 .k-input,
@@ -669,11 +910,12 @@ textarea.k-textarea {
 
 // Input with icon
 .k-input-icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: @input-icon-width;
     position: relative;
+    flex-shrink: 0;
 
     .k-icon {
         position: static;
@@ -928,15 +1170,15 @@ span.k-numerictextbox {
         padding-left: calc(@input-offset);
     }
 
-    .k-dropdown-wrap > .k-i-close {
+    .k-dropdown-wrap > .k-clear-value {
         left: calc(@combobox-clear-icon-offset);
     }
 
-    .k-autocomplete > .k-i-close {
+    .k-autocomplete > .k-clear-value {
         left: calc(@input-clear-icon-offset);
     }
 
-    .k-multiselect-wrap > .k-i-close {
+    .k-multiselect-wrap > .k-clear-value {
         left: calc(@input-clear-icon-offset + 1px);
     }
 
@@ -1119,22 +1361,28 @@ div.k-dropdowngrid-popup .k-group-header {
 @floating-label-scale: .75;
 @floating-label-height: calc(@input-height * @floating-label-scale);
 
-.k-textbox-container {
-    position: relative;
+.k-textbox-container,
+.k-floating-label-container {
     padding-top: @floating-label-height;
     display: inline-flex;
+    vertical-align: middle;
+    position: relative;
     width: @input-default-width;
     flex-direction: column;
     justify-content: stretch;
 
     > .k-label {
-        pointer-events: none;
-        position: absolute;
+        max-width: 90%;
         line-height: @input-height;
-        cursor: text;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        position: absolute;
         top: calc(@floating-label-height + @input-border-width + @input-padding-y);
-        left: calc(@input-padding-x + @input-border-width);
+        left: calc(@input-padding-x + @input-border-width + @input-indent);
+        overflow: hidden;
+        cursor: text;
         transition: transform @floating-label-transition, color @floating-label-transition;
+        pointer-events: none;
     }
 
     > .k-textbox,
@@ -1147,6 +1395,7 @@ div.k-dropdowngrid-popup .k-group-header {
     &.k-state-empty {
         > .k-label {
             transform: translate( 0, 0 ) scale( 1 );
+            font-style: normal;
         }
     }
 
@@ -1162,10 +1411,14 @@ div.k-dropdowngrid-popup .k-group-header {
         // transform position to top-left corner of the textbox-container
         // do not use single translate + calc() because of IE10/11
         @fls: -@floating-label-scale;
-        transform: translate(-@input-padding-x, calc(@fls * @input-padding-y))
+        transform: translate(calc(-@input-padding-x - @input-indent), calc(@fls * @input-padding-y))
                 translate(-@input-border-width, calc(@fls * @input-height))
                 translate(-@half-scale-percent, calc(@fls * @half-scale-percent))
                 scale(@floating-label-scale);
+    }
+
+    &.k-state-empty:not(.k-state-focused) ::placeholder {
+        color: transparent;
     }
 
     .k-rtl &,
@@ -1173,7 +1426,7 @@ div.k-dropdowngrid-popup .k-group-header {
 
         > .k-label {
             left: auto;
-            right: calc(@input-padding-x + @input-border-width);
+            right: calc(@input-padding-x + @input-border-width + @input-indent);
         }
 
         &.k-state-empty {
@@ -1187,10 +1440,69 @@ div.k-dropdowngrid-popup .k-group-header {
             @half-scale-percent: ((1 - @floating-label-scale) * 100% / 2);
 
             @fls: -@floating-label-scale;
-            transform: translate(@input-padding-x, calc(@fls * @input-padding-y))
+            transform: translate(calc(@input-padding-x + @input-indent), calc(@fls * @input-padding-y))
                     translate(@input-border-width, calc(@fls * @input-height))
                     translate(@half-scale-percent, calc(@fls * @half-scale-percent))
                     scale(@floating-label-scale);
+        }
+    }
+}
+
+// Label
+.k-input-label {
+    margin-right: @input-indent;
+    z-index: 1;
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        margin-right: 0;
+        margin-left: @input-indent;
+    }
+}
+
+// Input prefix and suffix
+.k-input-prefix,
+.k-input-suffix {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: @button-inner-calc-size;
+
+    > * {
+        flex-shrink: 0;
+    }
+
+    > .k-icon {
+        width: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        height: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    > .k-clear-value {
+        width: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        height: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        position: relative;
+
+        &::after {
+            content: "";
+            opacity: 0;
+            display: none;
+            pointer-events: none;
+            position: absolute;
+            left: -1px;
+            right: -1px;
+            top: -1px;
+            bottom: -1px;
+        }
+
+        &.k-state-focused::after,
+        &:focus::after {
+            display: block;
         }
     }
 }

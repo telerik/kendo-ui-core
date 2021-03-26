@@ -450,6 +450,25 @@ Sets the hint of the drop-zone.
         });
     </script>
 
+### localization.headerStatusPaused `String`
+
+Sets the paused status message of the header.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                headerStatusPaused: "customHeaderStatusPaused"
+            }
+        });
+    </script>
+
 ### localization.headerStatusUploaded `String`
 
 Sets the status message of the header for the uploaded files.
@@ -484,6 +503,44 @@ Sets the status message of the header for the files that are in the process of u
             },
             localization: {
                 headerStatusUploading: "customHeaderStatusUploading"
+            }
+        });
+    </script>
+
+### localization.uploadSuccess `String`
+
+Sets the text of the validation message when a file is succesfully uploaded.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                uploadSuccess: "customUploadSuccess"
+            }
+        });
+    </script>
+
+### localization.uploadFail `String`
+
+Sets the text of the validation message when a file fails to upload.
+
+#### Example
+
+    <input type="file" name="files" id="photos" />
+    <script>
+        $("#photos").kendoUpload({
+            async: {
+                saveUrl: "http://my-app.localhost/save",
+                removeUrl: "http://my-app.localhost/remove"
+            },
+            localization: {
+                uploadFail: "customUploadFail"
             }
         });
     </script>

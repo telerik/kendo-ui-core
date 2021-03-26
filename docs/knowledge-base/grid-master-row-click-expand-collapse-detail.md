@@ -140,3 +140,7 @@ How can I expand and collapse the details by clicking the relevant master row in
     </script>
 </div>
 ```
+
+## See Also
+
+* [Expand and Collapse Group on Group Row Click in Grid]({% slug grid-group-row-click-expand-collapse %})

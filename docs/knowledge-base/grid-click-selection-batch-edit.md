@@ -97,7 +97,7 @@ Use the `closeCell` and `editCell` methods of the Grid on single or double click
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
           { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-          { field: "Discontinued", width: 120, editor: customBoolEditor },
+          { field: "Discontinued", width: 120 },
           { command: "destroy", title: "&nbsp;", width: 150 }],
         editable: true,
         selectable: true
@@ -111,11 +111,6 @@ Use the `closeCell` and `editCell` methods of the Grid on single or double click
         grid.editCell($(this));
       });
     });
-
-    function customBoolEditor(container, options) {
-      $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-      $('<label class="k-checkbox-label">​</label>').appendTo(container);
-    }
   </script>
 </div>
 ```

@@ -27,6 +27,8 @@ The toolbar collection includes the following built-in tools:
 
 > Running an Adblock extension in Chrome might treat the new browser tab for the print dialog as a potential ad and block it.
 
+The `zoom`, `toggleSelection`, `search` and `print` tools are available only with PDFjs processing.
+
 The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools. 
 
 ```  

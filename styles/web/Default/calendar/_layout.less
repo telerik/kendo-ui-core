@@ -113,6 +113,7 @@
     }
     &.k-week-number .k-calendar-view {
         width: (8 * @calendar-cell-size);
+        padding: 0;
     }
 
 
@@ -148,7 +149,7 @@
     .k-month {
         .k-link {
             width: @calendar-cell-size;
-            height: @calendar-cell-size;;
+            height: @calendar-cell-size;
         }
 
         th {
@@ -195,12 +196,41 @@
 
     }
 
-}
+    // Calendar Modern
 
+    .k-calendar-header {
+        padding: @calendar-modern-header-padding-y @calendar-modern-header-padding-x;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 0 0 auto;
 
+        .k-button {
+            white-space: nowrap;
+            .k-button.k-flat();
+        }
 
+        .k-today {
+            cursor: pointer;
+        }
+    }
 
-// Adjust for week
-.k-week-number {
-    width: (@calendar-cell-size * 8);
+    .k-calendar-monthview,
+    .k-calendar-yearview,
+    .k-calendar-decadeview,
+    .k-calendar-decadeview {
+        padding: 0 @calendar-modern-header-padding-x;
+
+        th {
+            border-bottom-width: 0;
+            background-color: transparent;
+        }
+
+        .k-alt {
+            opacity: .5;
+            background-color: transparent;
+        }
+
+    }
+
 }

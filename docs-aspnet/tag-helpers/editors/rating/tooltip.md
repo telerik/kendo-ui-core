@@ -18,7 +18,7 @@ Each Rating item displays a tooltip that is enabled by default and contains text
 
 ## Disabling the Tooltips
 
-Setting the [`Tooltip`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) to false prevents the items to display tooltips when hovered.
+Setting the [`Tooltip`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#tooltipsystemstring) to false prevents the items to display tooltips when hovered.
 
 ```tagHelper
     <kendo-rating name="rating" min="1" max="6" value="3" tooltip="false"></kendo-rating>

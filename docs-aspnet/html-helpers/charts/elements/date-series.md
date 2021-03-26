@@ -5,33 +5,33 @@ description: "Learn how to display dates in the Telerik UI Charts for {{ site.fr
 slug: htmlhelpers_charts_dateseries_aspnetcore
 ---
 {% if site.core %}
-    {% assign CategoryAxisType = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#typekendomvcuichartcategoryaxistype" %}
-    {% assign CategoryField = "/api//Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#categoryfieldsystemstring" %}
-    {% assign BaseUnit = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitkendomvcuichartaxisbaseunit" %}
-    {% assign BaseUnitStep = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitstepsystemint32" %}
-    {% assign MaxDateGroups = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#maxdategroupssystemdouble" %}
-    {% assign AutoBaseUnitSteps = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisAutoBaseUnitStepsSettingsBuilder" %}
-    {% assign LabelsFormat = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#formatsystemstring" %}
-    {% assign LabelsCulture = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#culturesystemstring" %}
-    {% assign Min = "/api//Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minsystemobject" %}
-    {% assign Max = "/api//Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#maxsystemobject" %}
-    {% assign AxisCrossingValue = "/api//Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#axiscrossingvaluesystemobject" %}
-    {% assign MinorUnit = "/api//Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minorunitsystemdouble" %}
-    {% assign MajorUnit = "/api//Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#majorunitsystemdouble" %}
+    {% assign CategoryAxisType = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#typekendomvcuichartcategoryaxistype" %}
+    {% assign CategoryField = "/api/Kendo.Mvc.UI.Fluent/ChartSeriesBuilder#categoryfieldsystemstring" %}
+    {% assign BaseUnit = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitkendomvcuichartaxisbaseunit" %}
+    {% assign BaseUnitStep = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitstepsystemint32" %}
+    {% assign MaxDateGroups = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#maxdategroupssystemdouble" %}
+    {% assign AutoBaseUnitSteps = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisAutoBaseUnitStepsSettingsBuilder" %}
+    {% assign LabelsFormat = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#formatsystemstring" %}
+    {% assign LabelsCulture = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisLabelsSettingsBuilder#culturesystemstring" %}
+    {% assign Min = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minsystemobject" %}
+    {% assign Max = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#maxsystemobject" %}
+    {% assign AxisCrossingValue = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#axiscrossingvaluesystemobject" %}
+    {% assign MinorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#minorunitsystemdouble" %}
+    {% assign MajorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartXAxisBuilder#majorunitsystemdouble" %}
 {% else %}
     {% assign CategoryAxisType = "/api/Kendo.Mvc.UI/ChartCategoryAxis#type" %}
-    {% assign CategoryField = "/api//Kendo.Mvc.UI.Fluent/ChartPieSeriesBuilder#categoryfieldsystemstring" %}
+    {% assign CategoryField = "/api/Kendo.Mvc.UI.Fluent/ChartPieSeriesBuilder#categoryfieldsystemstring" %}
     {% assign BaseUnit = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunit" %}
     {% assign BaseUnitStep = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunitstep" %}
     {% assign MaxDateGroups = "/api/Kendo.Mvc.UI/ChartCategoryAxis#maxdategroups" %}
     {% assign AutoBaseUnitSteps = "/api/Kendo.Mvc.UI/ChartCategoryAxis#autobaseunitsteps" %}
     {% assign LabelsFormat = "/api/Kendo.Mvc.UI.Fluent/ChartLabelsBuilderBase#formatsystemstring" %}
     {% assign LabelsCulture = "/api/Kendo.Mvc.UI.Fluent/ChartDateAxisLabelsBuilder#culturesystemglobalizationcultureinfo" %}
-    {% assign Min = "/api//Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#minsystemdouble" %}
-    {% assign Max = "/api//Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#maxsystemdouble" %}
-    {% assign AxisCrossingValue = "/api//Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#axiscrossingvaluesystemdouble" %}
-    {% assign MinorUnit = "/api//Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#minorunitsystemdouble" %}
-    {% assign MajorUnit = "/api//Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#majorunitsystemdouble" %}
+    {% assign Min = "/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#minsystemdouble" %}
+    {% assign Max = "/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#maxsystemdouble" %}
+    {% assign AxisCrossingValue = "/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#axiscrossingvaluesystemdouble" %}
+    {% assign MinorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#minorunitsystemdouble" %}
+    {% assign MajorUnit = "/api/Kendo.Mvc.UI.Fluent/ChartNumericAxisBuilder#majorunitsystemdouble" %}
 {% endif %}
 
 # Date Series

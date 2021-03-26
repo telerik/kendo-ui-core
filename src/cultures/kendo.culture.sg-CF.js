@@ -37,8 +37,8 @@
                     names: ["Nyenye","Fulundïgi","Mbängü","Ngubùe","Bêläwü","Föndo","Lengua","Kükürü","Mvuka","Ngberere","Nabändüru","Kakauka"],
                     namesAbbr: ["Nye","Ful","Mbä","Ngu","Bêl","Fön","Len","Kük","Mvu","Ngb","Nab","Kak"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["ND","nd","ND"],
+                PM: ["LK","lk","LK"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd d MMMM yyyy",

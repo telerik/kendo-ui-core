@@ -1,11 +1,41 @@
-.k-scrollview {
+// ScrollView
+kendo-scrollview.k-scrollview-wrap,
+div.k-scrollview {
+    box-sizing: border-box;
+    outline: 0;
+    font-family: @scrollview-font-family;
+    font-size: @scrollview-font-size;
+    line-height: @scrollview-line-height;
     position: relative;
     overflow: hidden;
-    outline: 0;
     display: block;
+    -webkit-touch-callout: none;
+
+    &.k-scrollview-multidot .k-scrollview-pageable > .k-button,
+    &.k-scrollview-multidot .k-scrollview-nav > .k-link {
+
+        &:nth-last-of-type(1),
+        &:nth-of-type(1) {
+            width: calc( @scrollview-pagebutton-size - 6px );
+            height: calc( @scrollview-pagebutton-size - 6px );
+        }
+
+        &:nth-last-of-type(2),
+        &:nth-of-type(2) {
+            width: calc( @scrollview-pagebutton-size - 4px );
+            height: calc( @scrollview-pagebutton-size - 4px );
+        }
+
+        &:nth-last-of-type(3),
+        &:nth-of-type(3) {
+            width: calc( @scrollview-pagebutton-size - 2px );
+            height: calc( @scrollview-pagebutton-size - 2px );
+        }
+    }
 }
 
-ul.k-scrollview-wrap {
+kendo-scrollview.k-scrollview-wrap .k-scrollview,
+div.k-scrollview .k-scrollview-wrap {
     list-style-type: none;
     position: absolute;
     margin: 0;
@@ -13,6 +43,7 @@ ul.k-scrollview-wrap {
     width: 100%;
     height: 100%;
     cursor: default;
+    white-space: nowrap;
 
     img {
         user-select: none;
@@ -25,63 +56,75 @@ ul.k-scrollview-wrap {
         top: 0;
         left: 0;
     }
-}
 
-div.k-scrollview-wrap {
-    white-space: nowrap;
-
-    & > [data-role=page] {
+    & > [data-role="page"] {
         vertical-align: top;
         display: inline-block;
         min-height: 1px;
     }
 }
 
-.k-scrollview-nav-wrap {
+kendo-scrollview.k-scrollview-wrap kendo-scrollview-pager,
+.k-scrollview .k-scrollview-nav-wrap {
+    padding: 0;
+    margin: 0;
     position: absolute;
-    bottom: (@scrollview-pager-offset - (@scrollview-pager-item-spacing / 4));
-    left: (@scrollview-pager-item-spacing / 2);
-    right: (@scrollview-pager-item-spacing / 2);
+    left: 0;
+    right: 0;
+    bottom: @scrollview-pager-offset;
     height: @scrollview-pager-height;
-    overflow: hidden;
 }
 
-.k-scrollview-nav {
+kendo-scrollview.k-scrollview-wrap .k-scrollview-pageable,
+.k-scrollview .k-scrollview-nav {
     margin: 0;
-    padding: (@scrollview-pager-item-spacing / 4) 0 0 0;;
-    display: block;
-    white-space: nowrap;
+    padding: @scrollview-pager-item-spacing;
     overflow-x: scroll;
     overflow-y: hidden;
+    width: calc( 100% - (@scrollview-pager-item-spacing * 2));
+    line-height: 0;
+    display: block;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     list-style: none;
+    white-space: nowrap;
     pointer-events: initial;
+
+    &:focus,
+    &.k-state-focused {
+        outline: none;
+    }
 }
 
-.k-scrollview-nav > li.k-link {
-    margin: 0 @scrollview-pager-item-spacing;
+kendo-scrollview.k-scrollview-wrap .k-scrollview-pageable > .k-button,
+.k-scrollview .k-scrollview-nav > .k-link {
+    margin: 0 (@scrollview-pager-item-spacing / 2);
     padding: 0;
     width: @scrollview-pagebutton-size;
     height: @scrollview-pagebutton-size;
     box-sizing: content-box;
-    vertical-align: top;
     display: inline-block;
     position: relative;
+    flex: 0 0 auto;
     border-width: @scrollview-pager-item-border-width;
     border-style: solid;
     border-radius: 50%;
     cursor: pointer;
     pointer-events: all;
+    vertical-align: top;
 
     &::before {
         content: "";
         width: (@scrollview-pagebutton-size + @scrollview-pager-item-spacing);
-        height: @scrollview-pager-height;
+        height: (@scrollview-pagebutton-size + @scrollview-pager-item-spacing);
         display: block;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        pointer-events: initial;
+        border-radius: 0;
     }
 }
 
@@ -95,7 +138,16 @@ div.k-scrollview-wrap {
     text-decoration: none;
     user-select: none;
     cursor: pointer;
-    overflow: hidden;
+
+    .k-icon {
+        display: table-cell;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        font-size: @scrollview-navigation-size;
+        font-weight: normal;
+    }
 }
 
 .k-scrollview-prev {
@@ -106,43 +158,23 @@ div.k-scrollview-wrap {
     right: 0;
 }
 
-.k-scrollview-next span,
-.k-scrollview-prev span {
-    display: table-cell;
-    margin: 0;
-    padding: 0;
-    vertical-align: middle;
-    font-size: @scrollview-navigation-size;
-    font-weight: normal;
-    //IE11 override:
-    position: static;
-}
-
-.k-scrollview-elements {
-    width: 100%;
-}
 
 .k-scrollview-animation {
     transition-duration: .3s;
     transition-timing-function: ease-in-out;
 }
 
-.k-i-arrowhead-e::before {
-    content: "\e014";
-}
-
-.k-i-arrowhead-w::before {
-    content: "\e016";
-}
 
 @supports (-webkit-user-select: none) {
-    div.k-scrollview ul.k-scrollview-wrap li > *  {
+    kendo-scrollview.k-scrollview-wrap ul.k-scrollview li > *,
+    div.k-scrollview ul.k-scrollview-wrap li > * {
         pointer-events: auto;
     }
 }
 
 @supports (not (-webkit-user-select: none)) {
-    div.k-scrollview ul.k-scrollview-wrap li > *  {
+    kendo-scrollview.k-scrollview-wrap ul.k-scrollview li > *,
+    div.k-scrollview ul.k-scrollview-wrap li > * {
         pointer-events: none;
     }
 }

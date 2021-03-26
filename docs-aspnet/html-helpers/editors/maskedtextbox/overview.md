@@ -53,6 +53,21 @@ The following example demonstrates how to subscribe to events by a handler name.
   </script>
 ```
 
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+    @(Html.Kendo().MaskedTextBox()
+        .Name("maskedtextbox")
+        .Events(e => e
+            .Change(@<text>
+                function() {
+                    // Handle the change event inline.
+                }
+            </text>)
+        )
+    )
+
 ## Referencing Existing Instances
 
 To reference an existing Telerik UI MaskedTextBox instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [MaskedTextBox client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/maskedtextbox#methods) to control its behavior.

@@ -19,7 +19,7 @@ var __meta__ = { // jshint ignore:line
         LAST = ".k-i-arrow-end-right",
         PREV = ".k-i-arrow-60-left",
         NEXT = ".k-i-arrow-60-right",
-        SIZE = "k-pager-lg k-pager-md k-pager-sm",
+        SIZE = "k-pager-md k-pager-sm",
         CHANGE = "change",
         NS = ".kendoPager",
         CLICK = "click",
@@ -225,7 +225,7 @@ var __meta__ = { // jshint ignore:line
             that._resizeHandler = proxy(that.resize, that, true);
             $(window).on("resize" + NS, that._resizeHandler);
 
-            sizeClassName = that._getWidthSizeClass(that.element.width());
+            sizeClassName = that._getWidthSizeClass(that.element.outerWidth());
 
             if (sizeClassName) {
                 that.element.addClass(sizeClassName);
@@ -326,7 +326,7 @@ var __meta__ = { // jshint ignore:line
                 options = that.options,
                 pageSize = that.pageSize(),
                 collapsedTotal = that._collapsedTotal(),
-                total = that.dataSource.total(),
+                total = that.dataSource._isGroupPaged() ? that.dataSource.groupsTotal(true) : that.dataSource.total(),
                 totalPages = that.totalPages(),
                 linkTemplate = that.linkTemplate,
                 numericSelectItemTemplate = that.numericSelectItemTemplate,
@@ -516,10 +516,8 @@ var __meta__ = { // jshint ignore:line
             if (!that.options.responsive) {
                 return null;
             } else if (width <= 480) {
-                return sizes[2];
-            } else if (width <= 640) {
                 return sizes[1];
-            } else if (width <= 1024) {
+            } else if (width <= 600) {
                 return sizes[0];
             }
             return null;

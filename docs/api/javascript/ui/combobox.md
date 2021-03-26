@@ -165,6 +165,8 @@ Use it to set the Id of the parent ComboBox widget.
 Defines the field to be used to filter the data source. If not defined, it is set to a field with the same name as the [parent's dataValueField option](/api/javascript/ui/combobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
 
+ > Note: As the dataItems of the dataSource inherit from the kendo.ObservableObject class and this class has a method named [parent](/api/javascript/data/observableobject/methods/parent), setting the cascadeFromField to a field named "parent" is not supported.
+
 #### Example
 
     <input id="parent" />

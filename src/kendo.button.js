@@ -91,7 +91,12 @@
             options: {
                 name: "Button",
                 enable: true,
-                enabled: true
+                enabled: true,
+                icon: "",
+                iconClass: "",
+                spriteCssClass: "",
+                imageUrl: "",
+                badge: null
             },
 
             _isNativeButton: function() {
@@ -231,7 +236,11 @@
                 }
 
                 if (badgeOptions.position === undefined || badgeOptions.position === "") {
-                    badgeOptions.position = "top end";
+                    badgeOptions.position = "edge";
+
+                    if (badgeOptions.align === undefined || badgeOptions.align === "") {
+                        badgeOptions.align = "top end";
+                    }
                 }
 
                 badgeOptions._classNames = ["k-button-badge"];

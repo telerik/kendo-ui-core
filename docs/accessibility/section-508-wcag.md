@@ -2,7 +2,7 @@
 title: Section 508 and WCAG 2.1 Compliance
 page_title: Section 508 and WCAG 2.1 Compliance | Kendo UI Accessibility Support
 description: "Learn more about the Section 508 and WCAG 2.1 Accesibility support provided by Kendo UI controls."
-slug: section508_wcag20_accessibility_support
+slug: section508_wcag21_accessibility_support
 position: 3
 ---
 
@@ -22,14 +22,17 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 
 |Component |508|WCAG 2.1|Demo
 |:---          |:---|:---  |:---
+|AppBar	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/appbar/index)
 |AutoComplete  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/autocomplete/index)
 |BarCode	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/barcode/index)
+|BottomNavigation |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/bottomnavigation/index)
 |Breadcrumb	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/breadcrumb/index)
 |Button 	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/button/index)
 |ButtonGroup   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/buttongroup/index)
 |Calendar	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/calendar/index)
 |Charts        |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/chart-api/index)
 |Chat          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/chat/index)
+|CheckBoxGroup |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/checkboxgroup/index)
 |ComboBox      |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/combobox/index)
 |ColorPicker   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/colorpicker/index)
 |DateInput	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/dateinput/index)
@@ -37,12 +40,18 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |DateTimePicker|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/datetimepicker/index)
 |Diagram	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/diagram/index)
 |Dialog	       |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dialog/index)
+|Drawer	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/drawer/index)
 |DropDownList  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdownlist/index)
-|DropDownTree  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdowntree/index)
+|DropDownTree  |No  |-  |
 |Editor        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/editor/index)
+|ExpansionPanel|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/expansionpanel/index)
 |FileManager   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/filemanager/index)
+|FloatingActionButton   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/floatingactionbutton/index)
+|Form          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/form/index)
 |Gantt         |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/gantt/index)
 |Grid          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/grid/index)
+|ImageEditor   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/imageeditor/index)
+|Loader        |Yes |AАA |[Browse](https://demos.telerik.com/kendo-ui/loader/index)
 |LinearGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/linear-gauge/index)
 |ListBox       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/listbox/index)
 |ListView	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/listview/index)
@@ -50,6 +59,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |MaskedTextbox |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
 |Menu          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/menu/index)
 |MediaPlayer   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/mediaplayer/index)
+|MultiColumnComboBox |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/multicolumncombobox/index)
 |MultiSelect   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/multiselect/index)
 |Notification  |No  |-   |[Browse](https://demos.telerik.com/kendo-ui/notification/index)
 |NumericTextbox|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/numerictextbox/index)
@@ -58,6 +68,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |QRCode	   	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/qrcode/index)
 |RadialGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/radial-gauge/index)
 |RadioButton   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/styling/radios)
+|RadioGroup    |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/radiogroup/index)
 |Responsive Panel |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/responsive-panel/index)
 |ScrollView	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/scrollview/index)
 |Scheduler	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/scheduler/index)
@@ -65,9 +76,13 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Sortable	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/sortable/index)
 |Splitter      |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/splitter/index)
 |Spreadsheet   |No  |-   |
+|Stepper	   |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/stepper/index)
 |Switch        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/switch/index)
 |TabStrip	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/tabstrip/index)
+|TextArea	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textarea/index)
 |TextBox	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textbox/index)
+|TileLayout	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/tilelayout/index)
+|TimeLine	   |Yes |A |[Browse](https://demos.telerik.com/kendo-ui/timeline/index)
 |TimePicker	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/timepicker/index)
 |ToolBar	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/toolbar/index)
 |Tooltip	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/tooltip/index)
@@ -75,6 +90,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |TreeView	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/treeview/index)
 |Upload 	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/upload/index)
 |Window 	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/window/index)
+|Wizard		   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/wizard/index)
 
 ## Special Considerations
 

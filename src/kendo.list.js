@@ -48,7 +48,6 @@ var __meta__ = { // jshint ignore:line
         HIDDENCLASS = "k-hidden",
         WIDTH = "width",
         isIE = browser.msie,
-        isIE8 = isIE && browser.version < 9,
         quotRegExp = /"/g,
         alternativeNames = {
             "ComboBox": [ "DropDownList", "MultiColumnComboBox" ],
@@ -265,6 +264,14 @@ var __meta__ = { // jshint ignore:line
             var virtual = currentOptions.virtual;
             var changeEventOption = {change: proxy(that._listChange, that)};
             var listBoundHandler = proxy(that._listBound, that);
+            var focusedElm = that._focused;
+            var inputId = that.element.attr("id");
+            var labelElm = $("label[for=\"" + that.element.attr("id")  + "\"]");
+            var labelledBy = focusedElm.attr("aria-labelledby");
+
+            if(!labelledBy && labelElm.length) {
+                labelledBy = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || kendo.guid());
+            }
 
             virtual = typeof virtual === "object" ? virtual : {};
 
@@ -285,7 +292,9 @@ var __meta__ = { // jshint ignore:line
                 dataTextField: currentOptions.dataTextField,
                 groupTemplate: currentOptions.groupTemplate,
                 fixedGroupTemplate: currentOptions.fixedGroupTemplate,
-                template: currentOptions.template
+                template: currentOptions.template,
+                ariaLabel: focusedElm.attr("aria-label"),
+                ariaLabelledBy: labelledBy
             }, options, virtual, changeEventOption);
 
             if (!options.template) {
@@ -395,7 +404,7 @@ var __meta__ = { // jshint ignore:line
             this._clearFilterExpressions(expression);
 
             if ((filter || removed) && that.trigger("filtering", { filter: filter })) {
-                return;
+                return $.Deferred().reject().promise();
             }
 
             var newExpression = {
@@ -582,7 +591,7 @@ var __meta__ = { // jshint ignore:line
             var clearTitle = list.options.messages.clear;
 
             if (!list._clear){
-                list._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="' + clearTitle + '"></span>').attr({
+                list._clear = $('<span unselectable="on" class="k-clear-value" title="' + clearTitle + '"><span class="k-icon k-i-x"></span></span>').attr({
                     "role": "button",
                     "tabIndex": -1
                 });
@@ -693,15 +702,37 @@ var __meta__ = { // jshint ignore:line
         _aria: function(id) {
             var that = this,
                 options = that.options,
-                element = that._focused.add(that.filterInput);
+                element = that._focused,
+                autocomplete;
 
             if (options.suggest !== undefined) {
-                element.attr("aria-autocomplete", options.suggest ? "both" : "list");
+                if(options.filter === "none") {
+                    if(options.suggest === true) {
+                        autocomplete = "inline";
+                    } else {
+                        autocomplete = "none";
+                    }
+                } else {
+                    if(options.suggest === true) {
+                        autocomplete = "both";
+                    } else {
+                        autocomplete = "list";
+                    }
+                }
+
+                element.attr("aria-autocomplete", autocomplete);
             }
 
             id = id ? id + " " + that.ul[0].id : that.ul[0].id;
 
-            element.attr("aria-owns", id);
+            element.attr({
+                "aria-owns": id,
+                "aria-controls": id
+            });
+
+            if(that.filterInput && that.filterInput.length > 0) {
+                that.filterInput.attr("aria-controls", id);
+            }
 
             that.ul.attr("aria-live", !that._isFilterEnabled() ? "off" : "polite");
 
@@ -746,6 +777,10 @@ var __meta__ = { // jshint ignore:line
             that._userTriggered = false;
         },
 
+        _isValueChanged: function(value) {
+            return value !== unifyType(this._old, typeof value);
+        },
+
         _change: function() {
             var that = this;
             var index = that.selectedIndex;
@@ -757,8 +792,7 @@ var __meta__ = { // jshint ignore:line
                 value = optionValue;
             }
 
-            if (value !== unifyType(that._old, typeof value) &&
-                value !== unifyType(that._oldText, typeof value)) { // _oldText should be compared for ComboBox when arbitrary text is added https://github.com/telerik/kendo-ui-core/issues/4496
+            if (that._isValueChanged(value)) {
                 trigger = true;
             } else if (that._valueBeforeCascade !== undefined && that._valueBeforeCascade !== unifyType(that._old, typeof that._valueBeforeCascade) && that._userTriggered) {
                 trigger = true;
@@ -778,8 +812,6 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
                 that._oldIndex = index;
-                // _oldText should be compared for ComboBox when arbitrary text is added https://github.com/telerik/kendo-ui-core/issues/4496
-                that._oldText = that.text && that.text();
 
                 if (!that._typing) {
                     // trigger the DOM change event so any subscriber gets notified
@@ -1022,12 +1054,6 @@ var __meta__ = { // jshint ignore:line
             }));
         },
 
-        _makeUnselectable: function() {
-            if (isIE8) {
-                this.list.find("*").not(".k-textbox").attr("unselectable", "on");
-            }
-        },
-
         _toggleHover: function(e) {
             $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
@@ -1083,7 +1109,7 @@ var __meta__ = { // jshint ignore:line
         if (value !== undefined && value !== "" && value !== null) {
             if (type === "boolean") {
                 if (typeof value !== "boolean") {
-                    value = value.toLowerCase() === "true";
+                    value = value.toString().toLowerCase() === "true";
                 }
                 value = Boolean(value);
             } else if (type === "number") {
@@ -1770,6 +1796,12 @@ var __meta__ = { // jshint ignore:line
                         .on("mouseenter" + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on("mouseleave" + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
+            if(options && options.ariaLabel) {
+                this.element.attr("aria-label", options.ariaLabel);
+            } else if(options && options.ariaLabelledBy) {
+                this.element.attr("aria-labelledby", options.ariaLabelledBy);
+            }
+
             if (support.touch) {
                 this._touchHandlers();
             }
@@ -1819,7 +1851,9 @@ var __meta__ = { // jshint ignore:line
             selectable: true,
             template: null,
             groupTemplate: null,
-            fixedGroupTemplate: null
+            fixedGroupTemplate: null,
+            ariaLabel: null,
+            ariaLabelledBy: null
         },
 
         events: [
@@ -2265,12 +2299,15 @@ var __meta__ = { // jshint ignore:line
 
                         if (selectedIndex === index) {
                             $(children[selectedIndex]).removeClass("k-state-selected").attr("aria-selected", false);
+                            var dataItem = this._view[index].item;
+                            var position = this._dataItemPosition(dataItem, this._values);
 
                             removed.push({
-                                position: j + removedIndices,
-                                dataItem: dataItems.splice(j, 1)[0]
+                                position: position,
+                                dataItem: dataItem
                             });
 
+                            dataItems.splice(j, 1);
                             selectedIndices.splice(j, 1);
                             indices.splice(i, 1);
                             values.splice(j, 1);
@@ -2298,6 +2335,7 @@ var __meta__ = { // jshint ignore:line
 
             for (; idx < indices.length; idx++) {
                 index = indices[idx];
+
                 dataItem = this._view[index].item;
                 position = this._dataItemPosition(dataItem, this._values);
 

@@ -1,0 +1,12 @@
+.k-wizard-step {
+    &:focus,
+    &.k-state-focused {
+        outline-color: @wizard-step-border-focused;
+    }
+
+    .k-ie &:focus,
+    .k-ie &.k-state-focused {
+        .box-shadow(@wizard-focused-shadow);
+        outline: none;
+    }
+}

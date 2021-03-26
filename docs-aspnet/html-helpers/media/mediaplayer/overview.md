@@ -17,6 +17,10 @@ To respond to cutting-end design practices and trends, the MediaPlayer component
 
 * [Demo page for the MediaPlayer](https://demos.telerik.com/{{ site.platform }}/mediaplayer/index)
 
+The following image demonstrates a template of the MediaPlayer.
+
+![Template of the MediaPlayer](images/mediaplayer-overview1.png)
+
 ## Initializing the MediaPlayer
 
 Once your video files are ready, initialize the MediaPlayer HtmlHelper. It will render a `div` element as its wrapper container.

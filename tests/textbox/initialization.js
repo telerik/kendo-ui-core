@@ -91,6 +91,30 @@
             assert.isOk(textbox.wrapper.hasClass("test"));
         });
 
+        it("sets the width of the input to 100%", function() {
+            var textbox = new TextBox(input.css("width", "200px"));
+
+            assert.equal(textbox.wrapper[0].style.width, "200px");
+            assert.equal(textbox.element[0].style.width, "100%");
+        });
+
+        it("sets the k-state-focused class on focusin", function() {
+            var textbox = new TextBox(input);
+
+            textbox.element[0].focus();
+
+            assert.isOk(textbox.wrapper.hasClass("k-state-focused"));
+        });
+
+        it("removes the k-state-focused class on focusout", function() {
+            var textbox = new TextBox(input);
+
+            textbox.element[0].focus();
+            textbox.element.blur();
+
+            assert.isNotOk(textbox.wrapper.hasClass("k-state-focused"));
+        });
+
         it("form reset support", function(done) {
             input.attr("value", "test");
 
@@ -105,46 +129,6 @@
                 assert.equal(textbox.element.val(), "test");
                 done();
             }, 200);
-        });
-
-        it("create a label with inner HTML equal to configuration text", function() {
-            var textbox = new TextBox(input, {
-                label: "<b>text</b>"
-            });
-
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>text</b>");
-        });
-
-        it("create a label with inner HTML equal to configuration function", function() {
-            var textbox = new TextBox(input, {
-                label: function() {
-                    return "<b>function</b>"
-                }
-            });
-
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>function</b>");
-        });
-
-        it("create a label with inner HTML equal to configuration object text", function() {
-            var textbox = new TextBox(input, {
-                label: {
-                    content: "<b>content text</b>"
-                }
-            });
-
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>content text</b>");
-        });
-
-        it("create a label with inner HTML equal to configuration object function", function() {
-            var textbox = new TextBox(input, {
-                label: {
-                    content: function() {
-                        return "<b>content function</b>"
-                    }
-                }
-            });
-
-            assert.equal(textbox.wrapper.parent().find(".k-label")[0].innerHTML, "<b>content function</b>");
         });
     });
 }());

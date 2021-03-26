@@ -99,6 +99,7 @@ The following example demonstrates the full implementation of the suggested appr
   });
 
   $('#itemlist').kendoSortable({
+    filter: ".k-listview-content > div",
     connectWith: "#newlist",
     change: function(e) {
       var sender = e.draggableEvent.sender;
@@ -113,6 +114,7 @@ The following example demonstrates the full implementation of the suggested appr
   });
 
   $('#newlist').kendoSortable({
+    filter: ".k-listview-content > div",
     connectWith: "#itemlist",
     change: function(e) {
       var sender = e.draggableEvent.sender;

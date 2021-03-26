@@ -42,7 +42,10 @@ The following example demonstrates a possible way to implement your own methods 
   function myalert(content){
     $("<div></div>").kendoAlert({
       title: "My Title",
-      content: content
+      content: content,
+      messages:{
+        okText: "Ok"
+      }
     }).data("kendoAlert").open();
   }
 

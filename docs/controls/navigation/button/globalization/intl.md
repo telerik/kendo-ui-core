@@ -1,6 +1,6 @@
 ---
 title: Internationalization
-page_title: jQuery Button Documentation | Button Internationalization | Kendo UI
+page_title: jQuery Button Documentation | Button Internationalization
 description: "Get started with the jQuery Button by Kendo UI and learn about the options it supports for parsing and formatting of dates and numbers."
 slug: intl_button
 position: 2

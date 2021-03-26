@@ -6,9 +6,9 @@ slug: localization_timepicker_aspnetcore
 position: 2
 ---
 {% if site.core %}
-    {% assign Culture = "/api//Kendo.Mvc.UI.Fluent/TimePickerBuilder#culturesystemstring" %}
+    {% assign Culture = "/api/Kendo.Mvc.UI.Fluent/TimePickerBuilder#culturesystemstring" %}
 {% else %}
-    {% assign Culture = "/api//Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#culturesystemstring" %}
+    {% assign Culture = "/api/Kendo.Mvc.UI.Fluent/DatePickerBuilderBase#culturesystemstring" %}
 {% endif %}
 
 # Localization

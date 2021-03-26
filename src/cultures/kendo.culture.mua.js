@@ -37,8 +37,8 @@
                     names: ["Fĩi Loo","Cokcwaklaŋne","Cokcwaklii","Fĩi Marfoo","Madǝǝuutǝbijaŋ","Mamǝŋgwãafahbii","Mamǝŋgwãalii","Madǝmbii","Fĩi Dǝɓlii","Fĩi Mundaŋ","Fĩi Gwahlle","Fĩi Yuru"],
                     namesAbbr: ["FLO","CLA","CKI","FMF","MAD","MBI","MLI","MAM","FDE","FMU","FGW","FYU"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["comme","comme","COMME"],
+                PM: ["lilli","lilli","LILLI"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd d MMMM yyyy",

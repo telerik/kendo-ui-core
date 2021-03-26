@@ -19,7 +19,7 @@ component: grid
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.1026 version</td>
+  <td>Created with the 2020.3.1021 version</td>
  </tr>
 </table>
 
@@ -130,8 +130,7 @@ $.fn.kendoWindow.widget.prototype.options.animation = false;
                     },
                     {
                         field: "Discontinued",
-                        width: "120px",
-                        editor: customBoolEditor
+                        width: "120px"
                     },
                     {
                         command: ["edit", "destroy"],
@@ -142,12 +141,6 @@ $.fn.kendoWindow.widget.prototype.options.animation = false;
                 editable: "popup"
             });
         });
-
-        function customBoolEditor(container, options) {
-            var guid = kendo.guid();
-            $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-            $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-        }
     </script>
 </div>
 ```

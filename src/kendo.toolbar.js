@@ -74,7 +74,7 @@ var __meta__ = { // jshint ignore:line
         kendo.toolbar = {};
 
         var components = {
-            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button"></div>',
+            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button" title="More tools" role="button"></div>',
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
@@ -694,7 +694,7 @@ var __meta__ = { // jshint ignore:line
                 this.mainButton.element.appendTo(element);
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId, isChild: true }, items[i]), this.toolbar);
+                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId, isChild: true }, items[i], { click: options.click }), this.toolbar);
                     item.element.appendTo(element);
                 }
 
@@ -1209,11 +1209,16 @@ var __meta__ = { // jshint ignore:line
 
             show: function(candidate) {
                 var item = this._getItem(candidate);
+                var buttonGroupInstance;
 
                 if (item.toolbar) {
                     if (item.toolbar.options.type === "button" && item.toolbar.options.isChild) {
+                        buttonGroupInstance = item.toolbar.getParentGroup();
                         item.toolbar.show();
-                        item.toolbar.getParentGroup().refresh();
+
+                        if (buttonGroupInstance) {
+                            buttonGroupInstance.refresh();
+                        }
                     } else if(item.toolbar.options.hidden) {
                         item.toolbar.show();
                     }
@@ -1221,8 +1226,13 @@ var __meta__ = { // jshint ignore:line
 
                 if (item.overflow) {
                     if (item.overflow.options.type === "button" && item.overflow.options.isChild) {
+                        buttonGroupInstance = item.overflow.getParentGroup();
+
                         item.toolbar.show();
-                        item.overflow.getParentGroup().refresh();
+
+                        if (buttonGroupInstance) {
+                            buttonGroupInstance.refresh();
+                        }
                     } else if(item.overflow.options.hidden) {
                         item.overflow.show();
                     }

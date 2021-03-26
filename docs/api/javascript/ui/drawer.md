@@ -53,6 +53,28 @@ Determines how the Kendo UI Drawer will interact with the associated content. Th
         });
     </script>
 
+### navigatable `Boolean` *(default: false)*
+
+If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Navigation
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var drawerInstance = $("#drawer").kendoDrawer({
+                mode: "push",
+                navigatable: true,
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                position: 'left'
+            }).data("kendoDrawer");
+
+            drawerInstance.show();
+        });
+    </script>
+
 ### template `String`
 
 Specifies the drawer's content.

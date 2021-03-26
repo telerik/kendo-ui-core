@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.core", "./kendo.userevents" ], f);
+    define([ "./kendo.core", "./kendo.userevents", "./kendo.floatinglabel" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = { // jshint ignore:line
     name: "NumericTextBox",
     category: "web",
     description: "The NumericTextBox widget can format and display numeric, percentage or currency textbox.",
-    depends: [ "core", "userevents" ]
+    depends: [ "core", "userevents", "floatinglabel" ]
 };
 
 (function($, undefined) {
@@ -36,6 +36,7 @@ var __meta__ = { // jshint ignore:line
         FOCUS = "focus",
         POINT = ".",
         CLASS_ICON = "k-icon",
+        LABELCLASSES = "k-label k-input-label",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
         STATE_INVALID = "k-state-invalid",
@@ -43,6 +44,7 @@ var __meta__ = { // jshint ignore:line
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
         proxy = $.proxy,
+        isPlainObject = $.isPlainObject,
         extend = $.extend;
 
     var NumericTextBox = Widget.extend({
@@ -100,6 +102,7 @@ var __meta__ = { // jshint ignore:line
                          that._toggleText(false);
                          element.focus();
                      }
+                     that.selectValue();
                  });
              }
 
@@ -120,7 +123,7 @@ var __meta__ = { // jshint ignore:line
 
              that.value(value);
 
-             disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
+             disabled = !options.enable || element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 
              if (disabled) {
                  that.enable(false);
@@ -134,12 +137,15 @@ var __meta__ = { // jshint ignore:line
                  };
              });
 
+             that._label();
+
              kendo.notify(that);
          },
 
         options: {
             name: "NumericTextBox",
             decimals: NULL,
+            enable: true,
             restrictDecimals: false,
             min: NULL,
             max: NULL,
@@ -150,9 +156,11 @@ var __meta__ = { // jshint ignore:line
             format: "n",
             spinners: true,
             placeholder: "",
+            selectOnFocus: false,
             factor: 1,
             upArrowText: "Increase value",
-            downArrowText: "Decrease value"
+            downArrowText: "Decrease value",
+            label: null
         },
         events: [
             CHANGE,
@@ -176,6 +184,10 @@ var __meta__ = { // jshint ignore:line
                 .off("keyup" + ns)
                 .off("input" + ns)
                 .off("paste" + ns);
+
+            if (that._inputLabel) {
+                that._inputLabel.off(ns);
+            }
 
             if (!readonly && !disable) {
                 wrapper
@@ -205,6 +217,10 @@ var __meta__ = { // jshint ignore:line
                     .on("paste" + ns, proxy(that._paste, that))
                     .on("input" + ns, proxy(that._inputHandler, that));
 
+                if (that._inputLabel) {
+                    that._inputLabel.on("click" + ns, proxy(that.focus, that));
+                }
+
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
@@ -217,17 +233,29 @@ var __meta__ = { // jshint ignore:line
         },
 
         readonly: function(readonly) {
+            var that = this;
+
             this._editable({
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
+            var that = this;
+
             this._editable({
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
         },
 
         setOptions: function (options) {
@@ -252,6 +280,14 @@ var __meta__ = { // jshint ignore:line
 
         destroy: function() {
             var that = this;
+
+            if (that._inputLabel) {
+                that._inputLabel.off(ns);
+
+                if (that.floatingLabel) {
+                    that.floatingLabel.destroy();
+                }
+            }
 
             that.element
                 .add(that._text)
@@ -404,7 +440,14 @@ var __meta__ = { // jshint ignore:line
                 that._focusin();
 
                 caret(that.element[0], caretPosition);
+                that.selectValue();
             });
+        },
+
+        selectValue: function(){
+            if (this.options.selectOnFocus) {
+                this.element[0].select();
+            }
         },
 
         _change: function(value) {
@@ -481,7 +524,7 @@ var __meta__ = { // jshint ignore:line
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
+                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME).attr("aria-hidden", "true");
             }
 
             try {
@@ -514,6 +557,10 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 key = e.keyCode;
 
+            if (key === keys.NUMPAD_DOT) {
+                that._numPadDot = true;
+            }
+
             if (key == keys.DOWN) {
                 that._step(-1);
                 return;
@@ -538,10 +585,18 @@ var __meta__ = { // jshint ignore:line
         _inputHandler: function () {
             var element = this.element;
             var value = element.val();
+            var min = this.options.min;
             var numberFormat = this._format(this.options.format);
-            var isValid = this._numericRegex(numberFormat).test(value);
+            var decimalSeparator = numberFormat[POINT];
+            var minInvalid = (min !== null && min >= 0 && value.charAt(0) === "-");
 
-            if (isValid) {
+            if (this._numPadDot && decimalSeparator !== POINT) {
+                value = value.replace(POINT, decimalSeparator);
+                this.element.val(value);
+                this._numPadDot = false;
+            }
+
+            if (this._numericRegex(numberFormat).test(value) && !minInvalid) {
                 this._oldText = value;
             } else {
                 this._blinkInvalidState();
@@ -758,6 +813,44 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.attr("title", this.element.attr("title") || input.val());
+        },
+
+        _label: function() {
+            var that = this;
+            var element = that.element;
+            var options = that.options;
+            var id = element.attr("id");
+            var floating;
+            var labelText;
+
+            if (options.label !== null) {
+                floating = isPlainObject(options.label) ? options.label.floating : false;
+                labelText = isPlainObject(options.label) ? options.label.content : options.label;
+
+                if (floating) {
+                    that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                }
+
+                if (kendo.isFunction(labelText)) {
+                    labelText = labelText.call(that);
+                }
+
+                if (!labelText) {
+                    labelText = "";
+                }
+
+                if (!id) {
+                    id = options.name + "_" + kendo.guid();
+                    element.attr("id", id);
+                }
+
+                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+
+                if ((that.element.attr("disabled") === undefined) && (that.element.attr("readonly") === undefined)) {
+                    that._inputLabel.on("click" + ns, proxy(that.focus, that));
+                }
+            }
         },
 
         _wrapper: function() {

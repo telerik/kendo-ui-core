@@ -3,7 +3,7 @@ title: Locked
 page_title: Locked Columns
 description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} (Demo) supporting locked columns that are visible at all times while the user scrolls the Grid horizontally."
 slug: locked_columns_aspnetcore_grid
-position: 2
+position: 3
 ---
 
 # Locked Columns

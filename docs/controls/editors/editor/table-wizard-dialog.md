@@ -1,6 +1,6 @@
 ---
 title: Table Wizard Dialog
-page_title: jQuery Editor Documentation | Table Wizard Dialog | Kendo UI
+page_title: jQuery Editor Documentation | Table Wizard Dialog
 description: "Get started with the jQuery Editor by Kendo UI and enable the user to add and configure HTML tables with the Table Wizard dialog."
 slug: table_wizard_dialog_editor_widget
 position: 12

@@ -104,6 +104,7 @@ To set the incell edit mode of the TreeList:
                 ).Width(240);
             })
             .Editable(e => e.Mode(TreeListEditMode.InCell).Move(false))
+            .Events(ev => ev.DataBound("onDataBound"))
             .DataSource(dataSource => dataSource
                 .Batch(true)
                 .Read(read => read.Action("All_InCell", "TreeList"))
@@ -117,6 +118,24 @@ To set the incell edit mode of the TreeList:
                 })
             )
         )
+        <script>
+            // The following code removes the 'Add child' button from the new records,
+            // because they will receive an ID after saving the changes, which means that
+            // no child records can be added until that.
+            function onDataBound(e) {
+                var items = e.sender.items();
+                for (var i = 0; i < items.length; i++) {
+                    var row = $(items[i]);
+                    var dataItem = e.sender.dataItem(row);
+                    if (dataItem.isNew()) {
+                        row.find("[data-command='createchild']").hide();
+                    }
+                    else {
+                        row.find("[data-command='createchild']").show();
+                    }
+                }
+            }
+        </script>
 
 ## See Also
 

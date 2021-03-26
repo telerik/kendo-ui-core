@@ -56,7 +56,9 @@ public partial class Timeline : BaseController
             }
         });
 
-        return Json(events);
+        {% if site.core %}
+        return Json(events);{% else %}
+        return Json(events, JsonRequestBehavior.AllowGet);{% endif %}
     }
 }
 ```

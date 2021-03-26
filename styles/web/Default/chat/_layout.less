@@ -31,10 +31,6 @@
 @chat-quick-reply-spacing: 8px;
 @chat-quick-reply-line-height: @chat-bubble-line-height;
 
-.k-hidden {
-    display: none !important;
-}
-
 .k-chat {
     height: 600px;
     max-height: 100%;
@@ -193,22 +189,14 @@
 
 
 // Avatar
-.k-avatar {
+.k-chat .k-avatar {
     .border-radius(100%);
     width: @chat-avatar-size;
     height: @chat-avatar-size;
     position: absolute;
-
-    .k-message-group:not(.k-alt) > & {
-        left: 0;
-        bottom: 0;
-    }
-    .k-message-group.k-alt > & {
-        right: 0;
-        bottom: 0;
-    }
 }
-.k-avatars {
+
+.k-chat .k-avatars {
     .k-message-group:not(.k-alt):not(.k-no-avatar) {
         padding-left: calc( ~"@{chat-avatar-size} + @{chat-avatar-spacing}" );
     }
@@ -217,6 +205,14 @@
     }
 }
 
+.k-chat .k-message-group:not(.k-alt) > .k-avatar {
+    left: 0;
+    bottom: 0;
+}
+.k-chat .k-message-group.k-alt > .k-avatar {
+    right: 0;
+    bottom: 0;
+}
 
 // Author
 .k-author {
@@ -508,14 +504,6 @@
 
 
     // Avatar
-    .k-message-group:not(.k-alt) > .k-avatar {
-        left: auto;
-        right: 0;
-    }
-    .k-message-group.k-alt > .k-avatar {
-        right: auto;
-        left: 0;
-    }
     .k-avatars {
         .k-message-group:not(.k-alt):not(.k-no-avatar) {
             padding-left: 0;

@@ -101,9 +101,13 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar.
+ Specifies a template used to populate the value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -112,6 +116,22 @@ The duration of the open animation in milliseconds.
     $("#datepicker").kendoDatePicker({
         ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
     });
+    </script>
+
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <input id="datepicker" />
+    <script>
+        $("#datepicker").kendoDatePicker({
+            componentType: "modern"
+        });
     </script>
 
 ### culture `String`*(default: "en-US")*

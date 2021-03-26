@@ -24,7 +24,7 @@ How can I use a ListBox as an editor in the Telerik UI Grid for ASP.NET Core?
 
 ## Solution
 
-For the complete implementation on how to use a ListBox as an editor in the Telerik UI Grid for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/listbox-as-editor).
+For the complete implementation on how to use a ListBox as an editor in the Telerik UI Grid for ASP.NET Core, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/ListBoxAsEditor.cshtml).
 
 ## See Also
 

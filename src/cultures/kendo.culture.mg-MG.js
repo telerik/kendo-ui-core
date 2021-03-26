@@ -18,7 +18,7 @@
             currency: {
                 name: "Malagasy Ariary",
                 abbr: "MGA",
-                pattern: ["-$n","$n"],
+                pattern: ["-$ n","$ n"],
                 decimals: 0,
                 ",": ",",
                 ".": ".",
@@ -40,11 +40,11 @@
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "d/M/yyyy",
+                    d: "yyyy-MM-dd",
                     D: "dddd d MMMM yyyy",
                     F: "dddd d MMMM yyyy HH:mm:ss",
-                    g: "d/M/yyyy HH:mm",
-                    G: "d/M/yyyy HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
                     m: "d MMMM",
                     M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -54,7 +54,7 @@
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 1
             }

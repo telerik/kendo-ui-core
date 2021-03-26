@@ -1734,8 +1734,7 @@ function pad(number, digits, end) {
     }
 
     function wrap(element, autosize) {
-        var browser = support.browser,
-            percentage,
+        var percentage,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
             parent = element.parent(),
@@ -1781,11 +1780,6 @@ function pad(number, digits, end) {
             parent.addClass("k-animation-container-sm");
 
             wrapResize(element, autosize);
-        }
-
-        if (browser.msie && math.floor(browser.version) <= 7) {
-            element.css({ zoom: 1 });
-            element.children(".k-menu").width(element.width());
         }
 
         return parent;
@@ -1931,31 +1925,43 @@ function pad(number, digits, end) {
         }
 
         var overflow = getComputedStyles(element, ["overflow"]).overflow;
-        return overflow == "auto" || overflow == "scroll";
+        return overflow.indexOf("auto") > -1 || overflow.indexOf("scroll") > -1;
     }
 
     function scrollLeft(element, value) {
         var webkit = support.browser.webkit;
         var mozila = support.browser.mozilla;
-        var el = element instanceof $ ? element[0] : element;
-        var isRtl;
+        var browserVersion = support.browser.version;
+        var el, isRtl;
 
-        if (!element) {
+        if(element instanceof $ && value !== undefined) {
+            element.each(function(i, e) {
+                scrollLeft(e, value);
+            });
+
+            return;
+        } else {
+            el = element instanceof $ ? element[0] : element;
+        }
+
+        if (!el) {
             return;
         }
 
         isRtl = support.isRtl(element);
 
+        // After updating browser detection,
+        // Test in which if should the Safari browsers go
         if (value !== undefined) {
-            if (isRtl && webkit) {
+            if (isRtl && webkit && (browserVersion < 85 || support.browser.safari)) {
                 el.scrollLeft = el.scrollWidth - el.clientWidth - value;
-            } else if (isRtl && mozila) {
+            } else if (isRtl && (mozila || webkit) && value > 0) {
                 el.scrollLeft = -value;
             } else {
                 el.scrollLeft = value;
             }
         } else {
-            if (isRtl && webkit) {
+            if (isRtl && webkit && (browserVersion < 85 || support.browser.safari)) {
                 return el.scrollWidth - el.clientWidth - el.scrollLeft;
             } else {
                 return Math.abs(el.scrollLeft);
@@ -2227,8 +2233,6 @@ function pad(number, digits, end) {
             }
         };
 
-        support.cssBorderSpacing = typeof docStyle.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
-
         (function(browser) {
             // add browser-specific CSS class
             var cssClass = "",
@@ -2339,11 +2343,9 @@ function pad(number, digits, end) {
 
         support.pushState = window.history && window.history.pushState;
 
-        var documentMode = document.documentMode;
+        support.hashChange = "onhashchange" in window;
 
-        support.hashChange = ("onhashchange" in window) && !(support.browser.msie && (!documentMode || documentMode <= 8)); // old IE detection
-
-        support.customElements = ("registerElement" in window.document);
+        support.customElements = "registerElement" in window.document;
 
         var chrome = support.browser.chrome,
             mobileChrome = support.browser.crios,
@@ -2771,9 +2773,11 @@ function pad(number, digits, end) {
         },
 
         guid: function() {
-            var id = "", i, random;
+            var id = "", i, random, chars = "abcdef";
 
-            for (i = 0; i < 32; i++) {
+            id += chars[Math.floor(Math.random() * Math.floor(chars.length))];
+
+            for (i = 1; i < 32; i++) {
                 random = math.random() * 16 | 0;
 
                 if (i == 8 || i == 12 || i == 16 || i == 20) {
@@ -2835,13 +2839,18 @@ function pad(number, digits, end) {
             Observable.fn.init.call(that);
 
             var dataSource = options ? options.dataSource : null;
+            var props;
+
+            if (options) {
+                props = (that.componentTypes || {})[(options || {}).componentType];
+            }
 
             if (dataSource) {
                 // avoid deep cloning the data source
                 options = extend({}, options, { dataSource: {} });
             }
 
-            options = that.options = extend(true, {}, that.options, that.defaults, options);
+            options = that.options = extend(true, {}, that.options, that.defaults, props || {}, options);
 
             if (dataSource) {
                 options.dataSource = dataSource;
@@ -3108,7 +3117,7 @@ function pad(number, digits, end) {
 
         dataSource = parseOption(element, "dataSource");
 
-        options = $.extend({}, parseOptions(element, widget.fn.options), options);
+        options = $.extend({}, parseOptions(element, $.extend({}, widget.fn.options, widget.fn.defaults) ), options);
 
         if (dataSource) {
             if (typeof dataSource === STRING) {
@@ -3227,7 +3236,7 @@ function pad(number, digits, end) {
                 if (!mask.length) {
                     isRtl = support.isRtl(container);
                     leftRight = isRtl ? "right" : "left";
-                    containerScrollLeft = container.scrollLeft();
+                    containerScrollLeft = kendo.scrollLeft(container);
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
                     mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>", cssClass, kendo.ui.progress.messages.loading))
@@ -4521,7 +4530,9 @@ function pad(number, digits, end) {
         if (nextFocusable.length) {
             target = nextFocusable;
         } else if (widgetInstance) {
-            target = widgetInstance.wrapper.find(":kendoFocusable").first();
+            target = widgetInstance.options.name === 'Editor' ?
+                $(widgetInstance.body) :
+                widgetInstance.wrapper.find(":kendoFocusable").first();
         } else {
             target = element;
         }
@@ -4615,6 +4626,108 @@ function pad(number, digits, end) {
 
         var i = parseInt(Math.floor(Math.log(size) / Math.log(1024)), 10);
         return Math.round(size / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    };
+
+    kendo.selectorFromClasses = function(classes) {
+        return "."+classes.split(" ").join(".");
+    };
+
+    // Standardized Properties and CSS classes
+
+    var themeColorValues = ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'];
+    var fillValues = ['solid', 'outline', 'flat'];
+    var postitionValues = ['edge', 'outside', 'inside'];
+    var shapeValues = ['circle', 'rectangle', 'rounded', 'dot', 'pill'];
+    var sizeValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
+    var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
+    var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
+
+    kendo.propertyToCssClassMap = {};
+
+    kendo.registerCssClass = function (propName, value, shorthand) {
+        if (!kendo.propertyToCssClassMap[propName]) {
+            kendo.propertyToCssClassMap[propName] = {};
+        }
+
+        kendo.propertyToCssClassMap[propName][value] = shorthand || value;
+    };
+
+    kendo.registerCssClasses = function (propName, arr) {
+        for (var i = 0; i < arr.length; i++) {
+            if (isArray(arr[i])) {
+                kendo.registerCssClass(propName, arr[i][0], arr[i][1]);
+            } else {
+                kendo.registerCssClass(propName, arr[i]);
+            }
+        }
+    };
+
+    kendo.getValidCssClass = function (prefix, propName, value) {
+        var validValue = kendo.propertyToCssClassMap[propName][value];
+
+        if (validValue) {
+            return prefix + validValue;
+        }
+    };
+
+    kendo.registerCssClasses("themeColor", themeColorValues);
+    kendo.registerCssClasses("fill", fillValues);
+    kendo.registerCssClasses("postition", postitionValues);
+    kendo.registerCssClasses("shape", shapeValues);
+    kendo.registerCssClasses("size", sizeValues);
+    kendo.registerCssClasses("align", alignValues);
+    kendo.registerCssClasses("positionMode", positionModeValues);
+
+    // jQuery deferred helpers
+
+    // influenced from: https://gist.github.com/fearphage/4341799
+    kendo.whenAll = function(array) {
+        var resolveValues = arguments.length == 1 && $.isArray(array) ? array : Array.prototype.slice.call(arguments),
+            length = resolveValues.length,
+            remaining = length,
+            deferred = $.Deferred(),
+            i = 0,
+            failed = 0,
+            rejectContexts = Array(length),
+            rejectValues = Array(length),
+            resolveContexts = Array(length),
+            value;
+
+        function updateFunc (index, contexts, values) {
+            return function() {
+                if(values != resolveValues) {
+                    failed++;
+                }
+
+                deferred.notifyWith(
+                    contexts[index] = this,
+                    values[index] = Array.prototype.slice.call(arguments)
+                );
+
+                if (!(--remaining)) {
+                    deferred[(!failed ? 'resolve' : 'reject') + 'With'](contexts, values);
+                }
+            };
+        }
+
+        for (; i < length; i++) {
+            if ((value = resolveValues[i]) && $.isFunction(value.promise)) {
+                value.promise()
+                    .done(updateFunc(i, resolveContexts, resolveValues))
+                    .fail(updateFunc(i, rejectContexts, rejectValues));
+            }
+
+            else {
+                deferred.notifyWith(this, value);
+                --remaining;
+            }
+        }
+
+        if (!remaining) {
+            deferred.resolveWith(resolveContexts, resolveValues);
+        }
+
+        return deferred.promise();
     };
 
     // kendo.saveAs -----------------------------------------------

@@ -37,8 +37,8 @@
                     names: ["Mwai wa mbee","Mwai wa kelĩ","Mwai wa katatũ","Mwai wa kana","Mwai wa katano","Mwai wa thanthatũ","Mwai wa muonza","Mwai wa nyaanya","Mwai wa kenda","Mwai wa ĩkumi","Mwai wa ĩkumi na ĩmwe","Mwai wa ĩkumi na ilĩ"],
                     namesAbbr: ["Mbe","Kel","Ktũ","Kan","Ktn","Tha","Moo","Nya","Knd","Ĩku","Ĩkm","Ĩkl"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["Ĩyakwakya","ĩyakwakya","ĨYAKWAKYA"],
+                PM: ["Ĩyawĩoo","ĩyawĩoo","ĨYAWĨOO"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

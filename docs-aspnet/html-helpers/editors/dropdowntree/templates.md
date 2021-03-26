@@ -116,7 +116,7 @@ The header template manages the way the pop-up header of a DropDownTree is rende
 
 ## Footer Template
 
-The footer template manages the way the pop-up footer of a DropDownList is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
+The footer template manages the way the pop-up footer of a DropDownTree is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
 ```
     <!-- Template -->
@@ -137,7 +137,7 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
 
 ## No-Data Templates
 
-The DropDownList displays `noDataTemplate` in the popup when the data source is empty.
+The DropDownTree displays `noDataTemplate` in the popup when the data source is empty.
 
 ```
     <!-- Template -->

@@ -1,6 +1,6 @@
 ---
 title: Selection
-page_title: jQuery Grid Documentation | Selection | Kendo UI
+page_title: jQuery Grid Documentation | Selection
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: selection_kendoui_grid_widget
 position: 8

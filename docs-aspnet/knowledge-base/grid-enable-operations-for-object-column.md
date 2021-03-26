@@ -24,7 +24,7 @@ How can I enable sorting, filtering, and grouping for a column which holds compl
 
 ## Solution
 
-For the complete implementation on how to enable sorting, filtering, and grouping in a Kendo UI Grid for ASP.NET Core when a Grid column represents complex object values, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/grid/enable-operations-for-object-column) demonstrates how to .
+For the complete implementation on how to enable sorting, filtering, and grouping in a Kendo UI Grid for ASP.NET Core when a Grid column represents complex object values, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Grid/EnableOperationsForObjectColumn.cshtml) demonstrates how to.
 
 ## See Also
 

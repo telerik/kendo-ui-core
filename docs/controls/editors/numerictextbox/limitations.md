@@ -1,9 +1,9 @@
 ---
 title: Known Limitations
-page_title: jQuery NumericTextBox Documentation | Known Limitations | Kendo UI
+page_title: jQuery NumericTextBox Documentation | Known Limitations
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: limitations_numerictextbox
-position: 4
+position: 5
 ---
 
 # Known Limitations

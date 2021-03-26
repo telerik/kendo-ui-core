@@ -22,7 +22,6 @@
 window.kendo = window.kendo || {};
 
 var Class = kendo.Class;
-var support = kendo.support;
 
 var namedColors = {
     aliceblue: "f0f8ff", antiquewhite: "faebd7", aqua: "00ffff",
@@ -76,8 +75,6 @@ var namedColors = {
     whitesmoke: "f5f5f5", yellow: "ffff00", yellowgreen: "9acd32"
 };
 
-var browser = support.browser;
-
 var matchNamedColor = function (color) {
     var colorNames = Object.keys(namedColors);
     colorNames.push("transparent");
@@ -107,9 +104,6 @@ var BaseColor = Class.extend({
     },
 
     toDisplay: function() {
-        if (browser.msie && browser.version < 9) {
-            return this.toCss(); // no RGBA support; does it support any opacity in colors?
-        }
         return this.toCssRgba();
     },
 
@@ -424,6 +418,8 @@ function parseColor(value, safe) {
     return ret;
 }
 
+var DARK_TRESHOLD = 180;
+
 var Color = Class.extend({
     init: function(value) {
         var this$1 = this;
@@ -502,6 +498,10 @@ var Color = Class.extend({
 
     percBrightness: function() {
         return Math.sqrt(0.241 * this.r * this.r + 0.691 * this.g * this.g + 0.068 * this.b * this.b);
+    },
+
+    isDark: function() {
+        return this.percBrightness() < DARK_TRESHOLD;
     }
 });
 
@@ -550,6 +550,7 @@ Color.namedColors = namedColors;
 
 kendo.deepExtend(kendo, {
     parseColor: parseColor,
+    namedColors: namedColors,
     Color: Color
 });
 

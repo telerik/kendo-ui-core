@@ -5,6 +5,8 @@ res_type: api
 
 # kendo.Router
 
+Router class is responsible for tracking the application state and navigating between the application states.
+
 ## Configuration
 
 ### ignoreCase `Boolean` *(default: true)*

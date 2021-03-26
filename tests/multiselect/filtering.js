@@ -775,5 +775,24 @@
 
         multiselect.input.focus().val("test").keydown();
     });
+
+    it("MultiSelect caret is not moved on input focus", function(done) {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            filter: "startswith",
+            autoClose: false
+        });
+
+        multiselect.input.val("Option1");
+        kendo.caret(multiselect.input[0], 3);
+        multiselect.input.focus();
+
+        setTimeout(function() {
+            assert.equal(kendo.caret(multiselect.input[0])[0], 3);
+            done();
+        });
+    });
+
     });
 }());

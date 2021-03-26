@@ -169,3 +169,4 @@ To achieve this behavior:
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
+* [Load shapes from context menu]({% slug diagram-add-shapes-from-context-menu %})

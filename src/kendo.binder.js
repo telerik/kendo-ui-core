@@ -281,7 +281,7 @@ var __meta__ = { // jshint ignore:line
 
     var TypedBinder = Binder.extend({
         dataType: function() {
-            var dataType = this.element.getAttribute("data-type") || this.element.type || "text";
+            var dataType = this.element.getAttribute("data-" + kendo.ns + "type") || this.element.type || "text";
             return dataType.toLowerCase();
         },
 
@@ -400,7 +400,7 @@ var __meta__ = { // jshint ignore:line
     binders.text = Binder.extend({
         refresh: function() {
             var text = this.bindings.text.get();
-            var dataFormat = this.element.getAttribute("data-format") || "";
+            var dataFormat = this.element.getAttribute("data-" + kendo.ns + "format") || "";
             if (text == null) {
                 text = "";
             }
@@ -1624,6 +1624,24 @@ var __meta__ = { // jshint ignore:line
                             bindElement(elements[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
                         }
                     }
+                }
+            })
+        },
+
+        badge: {
+            text: Binder.extend({
+                init: function(widget, bindings, options) {
+                    Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                    this.widget = widget;
+                },
+                refresh: function() {
+                    var text = this.bindings.text.get();
+
+                    if (text == null) {
+                        text = "";
+                    }
+                    this.widget.text(text);
                 }
             })
         }

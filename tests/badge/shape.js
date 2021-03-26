@@ -17,24 +17,24 @@
         });
 
         var shapes = [ 'rounded', 'pill', 'circle', 'dot', 'custom' ]
-        var defaultShapes = [ 'rectangle', '' ];
 
         // #region badge.options.shape
         shapes.forEach(function(shape) {
             test(`badge.options.shape '${shape}' sets correct classNames`, function() {
                 badge = new Badge(span, { shape: shape });
 
+                assert.equal(badge._shape, shape);
                 assert.equal(badge.shape(), shape);
                 assert.equal(badge.element.hasClass(`k-badge-${shape}`), true);
             });
         });
-        defaultShapes.forEach(function(shape) {
-            test(`badge.options.shape '${shape}' does not sets classNames`, function() {
-                badge = new Badge(span, { shape: shape });
 
-                assert.equal(badge.shape(), shape);
-                assert.equal(badge.element.hasClass(`k-badge-${shape}`), false);
-            });
+        test(`badge.options.shape '' does not set classNames`, function() {
+            badge = new Badge(span, { shape: '' });
+
+            assert.equal(badge._shape, '');
+            assert.equal(badge.shape(), '');
+            assert.equal(badge.element.hasClass(`k-badge-`), false);
         });
         // #endregion
 
@@ -42,23 +42,25 @@
         // #region badge.shape()
         shapes.forEach(function(shape) {
             test(`badge.shape('${shape}') sets correct classNames`, function() {
-                badge = new Badge(span);
+                badge = new Badge(span, { shape: 'shape' });
 
                 badge.shape(shape);
 
+                assert.equal(badge._shape, shape);
                 assert.equal(badge.shape(), shape);
+                assert.equal(badge.element.hasClass(`k-badge-shape`), false);
                 assert.equal(badge.element.hasClass(`k-badge-${shape}`), true);
             });
         });
-        defaultShapes.forEach(function(shape) {
-            test(`badge.shape('${shape}') does not sets classNames`, function() {
-                badge = new Badge(span);
+        test(`badge.shape('') does not sets classNames`, function() {
+            badge = new Badge(span, { shape: 'shape' });
 
-                badge.shape(shape);
+            badge.shape('');
 
-                assert.equal(badge.shape(), shape);
-                assert.equal(badge.element.hasClass(`k-badge-${shape}`), false);
-            });
+            assert.equal(badge._shape, '');
+            assert.equal(badge.shape(), '');
+            assert.equal(badge.element.hasClass(`k-badge-shape`), false);
+            assert.equal(badge.element.hasClass(`k-badge-`), false);
         });
         // #endregion
 
@@ -70,19 +72,21 @@
 
                 badge.setOptions({shape: shape});
 
+                assert.equal(badge._shape, shape);
                 assert.equal(badge.shape(), shape);
+                assert.equal(badge.element.hasClass(`k-badge-shape`), false);
                 assert.equal(badge.element.hasClass(`k-badge-${shape}`), true);
             });
         });
-        defaultShapes.forEach(function(shape) {
-            test(`badge.setOptions({shape: '${shape}'}) does not sets classNames`, function() {
-                badge = new Badge(span, { shape: 'shape' });
+        test(`badge.setOptions({shape: ''}) does not sets classNames`, function() {
+            badge = new Badge(span, { shape: 'shape' });
 
-                badge.setOptions({shape: shape});
+            badge.setOptions({shape: ''});
 
-                assert.equal(badge.shape(), shape);
-                assert.equal(badge.element.hasClass(`k-badge-${shape}`), false);
-            });
+            assert.equal(badge._shape, '');
+            assert.equal(badge.shape(), '');
+            assert.equal(badge.element.hasClass(`k-badge-shape`), false);
+            assert.equal(badge.element.hasClass(`k-badge-`), false);
         });
         // #endregion
 

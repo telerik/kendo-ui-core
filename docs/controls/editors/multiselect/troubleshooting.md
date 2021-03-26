@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery MultiSelect Documentation | Troubleshooting | Kendo UI
+page_title: jQuery MultiSelect Documentation | Troubleshooting
 description: "Learn how to handle possible issues while working with the Kendo UI MultiSelect widget."
 previous_url: /controls/editors/multiselect/troubleshooting/troubleshooting
 slug: troubleshooting_common_issues_multiselect_kendoui

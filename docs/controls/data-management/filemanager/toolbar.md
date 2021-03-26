@@ -1,6 +1,6 @@
 ---
 title: Toolbar
-page_title: jQuery FileManager Documentation | FileManager Toolbar Commands | Kendo UI
+page_title: jQuery FileManager Documentation | FileManager Toolbar Commands
 description: "Get familiar with the Toolbar Commands in the FileManager and how you can use them."
 slug: toolbar_kendoui_filemanager_widget
 position: 9
@@ -21,6 +21,95 @@ The toolbar has a predefined set of tools which you can show or hide, depending 
 
 **Inbuilt Sort  functionality in FileManager:** 
 <img src="toolbar.png">
+
+## Customizing the Toolbar Commands
+
+To enable/disable a Toolbar command button or update the its text you can use the  `toolbar.items` configuration option:
+```
+    toolbar: {
+        items: [
+            { type:"button", text:"Create Folder custom name", enable:false, command:"CreateFolderCommand" },
+        ]
+    }
+```
+
+## Adding Custom Commands to the Toolbar
+
+As of Kendo UI R1 2020 SP1 the kendo.ui.filemanager namespace exposes the FileManagerCommand class that could be extended to implement a custom FileManager command. The example below demonstrates how to create a custom command that shows the total size of the selected files.
+```dojo
+    <div id="filemanager"></div>
+
+    <script>
+      $("#filemanager").kendoFileManager({
+        dataSource: {
+          schema: kendo.data.schemas.filemanager,
+          transport: {
+            read: {
+              url: "/kendo-ui/service/FileManager/Read",
+              method: "POST"
+            },
+            create: {
+              url: "/kendo-ui/service/FileManager/Create",
+              method: "POST"
+            },
+            update: {
+              url: "/kendo-ui/service/FileManager/Update",
+              method: "POST"
+            },
+            destroy: {
+              url: "/kendo-ui/service/FileManager/Destroy",
+              method: "POST"
+            }
+          }
+        },
+        uploadUrl: "/kendo-ui/service/FileManager/Upload",
+        toolbar: {
+          items: [
+            { name: "createFolder" },
+            { name: "upload" },
+            { name: "custom", type: "button", text: "Get Info", command: "MyCustomCommand" },
+            { name: "sortDirection" },
+            { name: "sortField" },
+            { name: "changeView" },
+            { name: "spacer" },
+            { name: "details" },
+            { name: "search" }
+          ]
+        },
+        contextMenu: {
+          items: [
+            { name: "rename" },
+            { name: "delete" },
+            { name: "custom", text: "Get Info", command: "MyCustomCommand", spriteCssClass:"k-icon k-i-info" }
+          ]
+        },
+        draggable: true,
+        resizable: true
+      });
+
+      $(document).ready(function () {
+
+        var filemanagerNS = kendo.ui.filemanager;
+
+        filemanagerNS.commands.MyCustomCommand = filemanagerNS.FileManagerCommand.extend({
+          exec: function(){
+            var that = this,
+                filemanager = that.filemanager,
+                options = that.options, 
+                target = options.target,
+                selectedFiles = filemanager.getSelected(); 
+            var totalSize = 0;
+            selectedFiles.forEach(function(fileEntry){
+              totalSize += fileEntry.size;
+            });
+
+            kendo.alert('Selected files size: ' + kendo.getFileSizeMessage(totalSize))
+          }
+        });
+      })
+    </script>
+
+```
 
 ## See Also
 

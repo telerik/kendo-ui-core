@@ -244,6 +244,11 @@ var __meta__ = { // jshint ignore:line
 
     function updateItemClasses(item) {
         item = $(item);
+        var omitWrap = item.attr(kendo.attr("omit-wrap"));
+
+        if (omitWrap) {
+            return;
+        }
 
         item.addClass("k-item k-menu-item")
             .children(IMG)
@@ -633,10 +638,12 @@ var __meta__ = { // jshint ignore:line
                 initialCssWidth = initialCssWidth === "auto" ? "" : initialCssWidth;
 
                 if (isHorizontal) {
-                    $(window).on(RESIZE, kendo.throttle(function(){
-                        that._setOverflowWrapperWidth(initialWidth, initialCssWidth);
-                        that._toggleScrollButtons(that.element, backwardBtn, forwardBtn, isHorizontal);
-                    }, 100));
+                    $(window).on(RESIZE, function() {
+                        setTimeout(function(){
+                            that._setOverflowWrapperWidth(initialWidth, initialCssWidth);
+                            that._toggleScrollButtons(that.element, backwardBtn, forwardBtn, isHorizontal);
+                        }, 100);
+                    });
                 }
 
                 that._setOverflowWrapperWidth(initialWidth, initialCssWidth);
@@ -782,7 +789,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleScrollButtons: function(scrollElement, backwardBtn, forwardBtn, horizontal) {
-            var currentScroll = horizontal ? scrollElement.scrollLeft() : scrollElement.scrollTop();
+            var currentScroll = horizontal ? kendo.scrollLeft(scrollElement) : scrollElement.scrollTop();
             var scrollSize = horizontal ? SCROLLWIDTH : SCROLLHEIGHT;
             var offset = horizontal ? OFFSETWIDTH : OFFSETHEIGHT;
 
@@ -1072,11 +1079,7 @@ var __meta__ = { // jshint ignore:line
                                     ul.css({maxHeight: windowHeight - (kendo._outerHeight(ul) - ul.height()) - kendo.getShadows(ul).bottom, overflow: "auto"});
                                 };
 
-                            if (kendo.support.browser.msie && kendo.support.browser.version <= 7) {
-                                setTimeout(setScrolling, 0); // timeout required by IE7
-                            } else {
-                                setScrolling();
-                            }
+                            setScrolling();
                         } else {
                             ul.css({maxHeight: "", overflow: ""});
                         }
@@ -1117,7 +1120,7 @@ var __meta__ = { // jshint ignore:line
                                 },
                                 open: proxy(that._popupOpen, that),
                                 close: function (e) {
-                                    that._closing = true;
+                                    that._closing = e.sender.element;
                                     var li = e.sender.wrapper.parent();
 
                                     if (overflowWrapper) {
@@ -1426,12 +1429,17 @@ var __meta__ = { // jshint ignore:line
             var hasChildren = that._itemHasChildren(element);
             var popupId = element.data(POPUP_OPENER_ATTR) || element.parent().data(POPUP_ID_ATTR);
             var pointerTouch = isPointerTouch(e);
+            var isParentClosing = false;
 
             if (popupId) {
                 that._openedPopups[popupId.toString()] = true;
             }
 
-            if (that._closing || (e.delegateTarget != element.parents(menuSelector)[0] && e.delegateTarget != element.parents(".k-menu-scroll-wrapper,.k-popups-wrapper")[0])) {
+            if(that._closing) {
+                isParentClosing = !!that._closing.find(element).length;
+            }
+
+            if (isParentClosing || (e.delegateTarget != element.parents(menuSelector)[0] && e.delegateTarget != element.parents(".k-menu-scroll-wrapper,.k-popups-wrapper")[0])) {
                 return;
             }
 
@@ -1446,6 +1454,7 @@ var __meta__ = { // jshint ignore:line
                 (that.options.openOnClick.rootMenuItems === false && that._isRootItem(element.closest(allItemsSelector))) ||
                 (that.options.openOnClick.subMenuItems === false && !that._isRootItem(element.closest(allItemsSelector))) || that.clicked) && !touch &&
                 !(pointerTouch && that._isRootItem(element.closest(allItemsSelector)))) {
+
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     that.open(element);
                 }
@@ -1603,6 +1612,14 @@ var __meta__ = { // jshint ignore:line
                 overflowWrapper = that._overflowWrapper(),
                 shouldCloseTheRootItem;
 
+            if(targetElement && !targetElement.parentNode){
+                return;
+            }
+
+            if($(target).hasClass('k-menu-expand-arrow')){
+                this._lastClickedElement = targetElement.parentElement;
+            }
+
             while (targetElement && targetElement.parentNode != itemElement) {
                 targetElement = targetElement.parentNode;
             }
@@ -1718,8 +1735,10 @@ var __meta__ = { // jshint ignore:line
 
         _documentClick: function (e) {
             var that = this;
+            var target = $(e.target).hasClass('k-menu-expand-arrow') ? that._lastClickedElement : e.target;
 
-            if (contains((that._overflowWrapper() || that.element)[0], e.target)) {
+            if (contains((that._overflowWrapper() || that.element)[0], target)) {
+                that._lastClickedElement = undefined;
                 return;
             }
 

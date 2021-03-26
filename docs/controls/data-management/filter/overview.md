@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Filter Documentation | Filter Overview | Kendo UI
+page_title: jQuery Filter Documentation | Filter Overview
 description: "Get started with the jQuery Filter by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_filter_widget
 position: 1
@@ -96,7 +96,7 @@ The following example demonstrates how to:
 
 ## Events
 
-You can subscribe to all [Filter events](/api/javascript/ui/timeline#events).
+You can subscribe to all [Filter events](/api/javascript/ui/filter#events).
 
 ## Referencing Existing Instances
 

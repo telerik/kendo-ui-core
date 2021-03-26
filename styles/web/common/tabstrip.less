@@ -19,16 +19,14 @@
     overflow: hidden;
 }
 
-.k-tabstrip > .k-button.k-bare
-{
+.k-tabstrip > .k-button.k-flat {
     position: absolute;
     top: .27em;
     z-index: 2;
     user-select: none;
 }
 
-.k-tabstrip-bottom > .k-button.k-bare
-{
+.k-tabstrip-bottom > .k-button.k-flat {
     top: auto;
     bottom: .15em;
 }
@@ -149,6 +147,12 @@
 {
     display: none;
     overflow: auto;
+}
+
+.k-tabstrip > .k-content:focus {
+    outline-width: 1px;
+    outline-style: dotted;
+    outline-offset: -1px;
 }
 
 .k-tabstrip > .k-content.km-scroll-wrapper

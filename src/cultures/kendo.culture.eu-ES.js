@@ -34,17 +34,17 @@
                     namesShort: ["ig.","al.","ar.","az.","og.","or.","lr."]
                 },
                 months: {
-                    names: ["Urtarrila","Otsaila","Martxoa","Apirila","Maiatza","Ekaina","Uztaila","Abuztua","Iraila","Urria","Azaroa","Abendua"],
-                    namesAbbr: ["Urt.","Ots.","Mar.","Api.","Mai.","Eka.","Uzt.","Abu.","Ira.","Urr.","Aza.","Abe."]
+                    names: ["urtarrila","otsaila","martxoa","apirila","maiatza","ekaina","uztaila","abuztua","iraila","urria","azaroa","abendua"],
+                    namesAbbr: ["urt.","ots.","mar.","api.","mai.","eka.","uzt.","abu.","ira.","urr.","aza.","abe."]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "yyyy/MM/dd",
-                    D: "yyyy('e')'ko' MMMM d, dddd",
-                    F: "yyyy('e')'ko' MMMM d, dddd HH:mm:ss",
-                    g: "yyyy/MM/dd HH:mm",
-                    G: "yyyy/MM/dd HH:mm:ss",
+                    d: "yyyy/M/d",
+                    D: "yyyy('e')'ko' MMMM'ren' d('a'), dddd",
+                    F: "yyyy('e')'ko' MMMM'ren' d('a'), dddd HH:mm:ss",
+                    g: "yyyy/M/d HH:mm",
+                    G: "yyyy/M/d HH:mm:ss",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",

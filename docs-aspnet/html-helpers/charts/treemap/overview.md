@@ -93,6 +93,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     }
     </script>
 
+{% if site.core %}
 ### Handling Events by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
@@ -115,6 +116,7 @@ The following example demonstrates how to subscribe to events by a template dele
                 </text>)
             )
     )
+{% endif %}
 
 ## Referencing Existing Instances
 

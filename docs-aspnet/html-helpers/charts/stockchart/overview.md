@@ -116,24 +116,30 @@ The StockChart provides options for [binding it to data]({% slug databinding_sto
 
 ## Events
 
-You can subscribe to all StockChart [events](/api/stockchart).
+You can subscribe to all StockChart [events](/api/Kendo.Mvc.UI.Fluent/ChartEventBuilder).
 
 ### Handling Events by Handler Name
 
 The following example demonstrates how to subscribe to events by a handler name.
 
 ```
-    @(Html.Kendo().StockChart(Model)
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
     	.Name("stockChart")
     	.Title("The Boeing Company (NYSE:BA)")
     	.DateField("Date")
     	.Series(series => {
     	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	})
+    	}){% if site.core %}
+        .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(x => 
+            x.DataBound("stockChart_dataBound")
+            .SeriesClick("stockChart_seriesClick")
+            )
+        )
+        {% else %}
     	.Events(e => e
     	  .DataBound("stockChart_dataBound")
     	  .SeriesClick("stockChart_seriesClick")
-    	)
+    	){% endif %}
     )
 
     <script>
@@ -152,13 +158,26 @@ The following example demonstrates how to subscribe to events by a handler name.
 The following example demonstrates how to subscribe to events by a template delegate.
 
 ```
-    @(Html.Kendo().StockChart(Model)
+    @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
     	.Name("stockChart")
     	.Title("The Boeing Company (NYSE:BA)")
     	.DateField("Date")
     	.Series(series => {
     	    series.Candlestick(s => s.Open, s => s.High, s => s.Low, s => s.Close);
-    	})
+    	}){% if site.core %}
+        .Events((Action<Kendo.Mvc.UI.Fluent.StockChartEventBuilder>)(e => e
+    	  .DataBound(@<text>
+    	       function(e) {
+    	           //Handle the dataBound event inline.
+    	       }
+    	  </text>)
+    	  .SeriesClick(@<text>
+    	       function(e) {
+    	           //Handle the seriesClick event inline.
+    	       }
+    	  </text>)
+    	 )
+        ){% else %}
     	.Events(e => e
     	  .DataBound(@<text>
     	       function(e) {
@@ -170,7 +189,7 @@ The following example demonstrates how to subscribe to events by a template dele
     	           //Handle the seriesClick event inline.
     	       }
     	  </text>)
-    	)
+    	){% endif %}
     )
 ```
 

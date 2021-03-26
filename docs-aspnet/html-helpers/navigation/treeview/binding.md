@@ -148,6 +148,34 @@ public IActionResult Read_TreeViewData(int? id)
 }
 ```
 
+{% if site.core %}
+## Razor Pages
+
+In order to set up the TreeView component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+
+```tab-RazorPage(csthml)
+@(Html.Kendo().TreeView()
+    .Name("treeview")
+    .DataTextField("Name")
+    .DataSource(dataSource => dataSource
+        .Read(r => r.Url(Url.Page("TreeViewIndex", "TreeViewRead")))
+    )
+)
+```
+```tab-PageModel(cshtml.cs)
+    public JsonResult OnGetTreeViewRead(int? id)
+    {
+        var data = result.Where(x => id.HasValue ? x.ParentID == id : x.ParentID == null)
+            .Select(item => new {
+                id = item.ID,
+                Name = item.Name,
+                hasChildren = item.HasChildren
+            });
+
+        return new JsonResult(data);
+    }
+```
+{% endif %}
 ## See Also
 
 * [Local Data Binding by the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/local-data-binding)

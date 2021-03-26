@@ -101,6 +101,28 @@
             assert.isOk(!window.options.isMaximized);
         });
 
+        it("close updates scroll position when window is maximized", function() {
+            var container = $("<div style='height:2000px' />").appendTo(Mocha.fixture.height(2010)),
+                document = $(Mocha.fixture[0].ownerDocument),
+                window = createWindow({ visible: false }),
+                scrollPosition = 200;
+
+            document.scrollTop(0);
+            window.setOptions({});
+            window.open().maximize();
+            window.close();
+
+            document.scrollTop(scrollPosition);
+            window.setOptions({});
+            window.open().maximize();
+            window.close();
+
+            assert.equal(
+                document.scrollTop(),
+                scrollPosition
+            );
+        });
+
         it("document vertical scroll position is preserved on maximize and restore", function() {
             var window = createWindow();
 
@@ -195,6 +217,26 @@
 
             overlappingDialog.close();
             assert.isOk(dialog.wrapper.prev("div").is(".k-overlay"));
+        });
+
+        it("closing a modal window removes overlay if previous modal has containment enabled", function() {
+            $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(Mocha.fixture);
+            var dialog = createWindow({
+                    modal: true,
+                    draggable: {
+                        containment: "#container"
+                    },
+                    animation: false
+                }),
+                overlappingDialog = createWindow({
+                    modal: true,
+                    animation: false
+                });
+
+            overlappingDialog.close();
+            dialog.close();
+
+            assert.equal($(".k-overlay").length, 0);
         });
 
         it("destroying a modal window removes overlay if other open window has different appendTo", function() {
@@ -343,6 +385,17 @@
                 url: "foo",
                 data: data
             });
+        });
+
+        it("refresh() sets `content` option", function() {
+            var dialog = createWindow({
+                content: "http://example.com/"
+            });
+
+            dialog.refresh({ url: "test" });
+            dialog.refresh();
+
+            assert.equal(dialog.options.content.url, "test");
         });
 
         it("refresh() uses `content` object combined with URL", function(done) {
@@ -500,6 +553,18 @@
             assert.isOk(secondWindow.element.find("> .k-overlay").length);
         });
 
+        it("toFront() appends only one overlay element to dom", function() {
+            var firstWindow = createWindow(),
+                secondWindow = createWindow({
+                    content: "http://google.com/"
+                });
+
+            firstWindow.toFront();
+            firstWindow.toFront();
+
+            assert.equal(secondWindow.element.find("> .k-overlay").length, 1);
+        });
+
         it("toFront() removes overlay on foremost window", function() {
             var firstWindow = createWindow({
                     content: "http://www.telerik.com/"
@@ -556,6 +621,17 @@
             dialog.open();
 
             assert.isOk(dialog.options.visible);
+        });
+
+        it("open() adds k-display-inline-flex class to wrapper", function() {
+            var dialog = createWindow({
+                visible: false,
+                animation: false
+            });
+
+            dialog.open();
+
+            assert.isOk(dialog.wrapper.hasClass("k-display-inline-flex"));
         });
 
         it("close() sets options.visible", function() {

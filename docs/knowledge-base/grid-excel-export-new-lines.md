@@ -4,7 +4,7 @@ description: An example on how to export new lines to Excel within the data of a
 type: how-to
 page_title: Export Data with Line Breaks to Excel | Kendo UI Grid for jQuery
 slug: grid-excel-export-new-lines
-tags: grid, excel, export, new liens
+tags: grid, excel, export, new lines
 res_type: kb
 ---
 

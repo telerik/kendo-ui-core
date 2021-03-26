@@ -9,72 +9,90 @@ permalink: /getting-started/installation/overview
 
 # Download and Installation Overview
 
-To set up and install Telerik UI for ASP.NET MVC, you first need to add the prerequisites.
+This article describes how to install UI for ASP.NET MVC by using the installer file. This installation method offers the following advantages:
+
+* It allows you to install the Telerik UI [extensions for Visual Studio]({% slug overview_visualstudio_aspnetmvc %}).
+
+* You can configure the Telerik NuGet feed during the setup.
+
+* It allows you to install the Telerik UI for ASP.NET MVC [Sample Application](#sample-application).
+
+An alternative approach is to use [NuGet]({% slug aspnetmvc_nuget %}) and to install only the packages that you need for your application.
 
 ## Prerequisites
 
-Telerik UI for ASP.NET MVC requires .NET MVC.
+* Telerik UI for ASP.NET MVC requires the .NET Framework. [Download the current version of the .NET Framework from Microsoft's website.](https://dotnet.microsoft.com/download/dotnet-framework)
 
-The offline sample application requires:
+* The Telerik UI for ASP.NET MVC **Sample Application** that is distributed with the same package requires:
 
-* [.NET 4.6.2](https://www.microsoft.com/en-us/download/details.aspx?id=53321)
-* [ASP.NET MVC 4](http://www.asp.net/mvc/mvc4) or [ASP.NET MVC 5](http://www.asp.net/mvc/mvc5)
-* [Visual Studio](https://www.visualstudio.com/downloads/)
-* LocalDB
+   * [A current .NET Framework version](https://dotnet.microsoft.com/download/dotnet-framework)
+   
+   * [Visual Studio](https://www.visualstudio.com/downloads/)
+   
+   * Microsoft SQL Server Express LocalDB
 
 ## Download
 
-To download Telerik UI for ASP.NET MVC:
+Follow these steps to download Telerik UI for ASP.NET MVC installer:
 
-1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik?ReturnUrl=https://www.telerik.com/v2/oauth/telerik/authorize%3Fclient_id%3Dhttp://www.lean.telerik.com%26redirect_uri%3Dhttps://www.telerik.com/account/default.aspx%26response_type%3Dcode%26state%3DBC61727E88E19B88D8471959A1CD745B15A7E71498002F0383A966A0200E7FDA).
-1. Click **Downloads** in the top navigation.
-1. Click **UI for ASP.NET MVC**. If this option is not available, click **DevCraft UI Edition**, **DevCraft Complete**, or **DevCraft Ultimate**.
-1. Click **Download Installer and other resources**.
-1. Navigate to the **UI for ASP.NET MVC**  item. Click **Browse all product files** and select to download the Telerik online installer (`exe` file), the `MSI` installer file directly, or the `.zip` file.
+1. Log into your [Telerik account](https://www.telerik.com/login/v2/telerik).
+
+1. Click **Downloads** in the top navigation bar.
+
+1. Click **UI for ASP.NET MVC**.
+
+1. In the **Installation** section, select the msi installer file.
+
+>**Tip**
+>
+> If you don't want to install Telerik UI for ASP.NET MVC on your machine, you can include Telerik UI controls in your project via NuGet. See [Installing with NuGet]({% slug aspnetmvc_nuget %})
 
 ## Installation
 
-Run the Telerik UI for ASP.NET MVC installer. The automatic setup will guide you through the rest of the installation. If you chose to download the `.zip` file, extract it to a location of your preference.
+Run the Telerik UI for ASP.NET MVC installer. The automatic setup will guide you through the rest of the installation.
 
-The setup installs Telerik UI for ASP.NET MVC in `C:\Program Files (x86)\Progress\UI for ASP.NET MVC<version>`. For versions prior to R3 2017, the default installation folder for Telerik UI for ASP.NET MVC is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC<version>`.
+The default installation directory is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET MVC<version>`. For versions prior to R3 2017, the default installation folder for Telerik UI for ASP.NET MVC is `C:\Program Files (x86)\Telerik\UI for ASP.NET MVC<version>`.
 
 ## Distribution Contents
 
-Telerik UI for ASP.NET MVC contains the following directories:
+You will find the following in the Telerik UI for ASP.NET MVC installation directory:
 
 * `js`&mdash;These are the minified JavaScript files.
 * `styles`&mdash;The minified CSS files and images used by the themes.
 * `src`&mdash;A `README` file which states that as of R2 2016 the source code is distributed in separate `.source.zip` packages that are located in your account.
-* `Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables the generation of the Kendo UI MVC wrapper widget declarations inside Visual Studio projects and is added to the Kendo UI Q1 2015 release.
+* `license-agreements`&mdash;End-user license agreements files.
+* `Scaffolding`&mdash;The Kendo UI Scaffolder Visual Studio extension. It enables the generation of the Kendo UI MVC wrapper widget declarations inside Visual Studio projects.
+* `dpl`&mdash;Telerik Document Processing library NuGet packages.
+* `export`&mdash;The Kendo.Mvc.Export assembly that allows exporting IEnumerable sources to XLSX and CSV formats.
 * `spreadsheet`&mdash;The [`Telerik.Web.Spreadsheet`](https://docs.telerik.com/kendo-ui/controls/data-management/spreadsheet/import-and-export-data/server-side-processing) assembly and its dependencies from Telerik Document Processing library.
 * `pdfviewer`&mdash;The `Telerik.Web.PDF` assembly and its dependencies from Telerik Document Processing library.
+* `typescript`&mdash;Kendo UI typescript definitions.
+* `vsdoc`&mdash;Client-side intellisense files.
+* `VSExtensions`&mdash;Visual Studio extensions files.
 * `wrappers\aspnetmvc\Binaries\MVC3`&mdash;The assemblies for the ASP.NET MVC 3 applications.
 * `wrappers\aspnetmvc\Binaries\MVC4`&mdash;The assemblies for the ASP.NET MVC 4 applications.
 * `wrappers\aspnetmvc\Binaries\MVC5`&mdash;The assemblies for the ASP.NET MVC 5 applications.
-* `wrappers\aspnetmvc\Examples\VS2012`&mdash;The ASP.NET MVC 4 sample application built with Visual Studio 2012.
-* `wrappers\aspnetmvc\Examples\VS2013`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2013.
-* `wrappers\aspnetmvc\Examples\VS2015`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2015.
-* `wrappers\aspnetmvc\Examples\VS2017`&mdash;The ASP.NET MVC 5 sample application built with Visual Studio 2017.
 * `wrappers\aspnetmvc\EditorTemplates`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
+* `wrappers\aspnetmvc\Examples\MVC4`&mdash;The ASP.NET MVC 4 sample application.
+* `wrappers\aspnetmvc\Examples\MVC5`&mdash;The ASP.NET MVC 5 sample application.
+
 
 ## Sample Application
 
-Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application which is available in the following versions:
+Telerik UI for ASP.NET MVC comes with a sample ASP.NET MVC application, which is available in the following versions:
 
-* The ASP.NET MVC 4 application built with Visual Studio 2012.
-* The ASP.NET MVC 5 application built with Visual Studio 2013.
-* The ASP.NET MVC 5 application built with Visual Studio 2015.
-* The ASP.NET MVC 5 application built with Visual Studio 2017.
+* The ASP.NET MVC 4 application.
+* The ASP.NET MVC 5 application.
 
 To run the sample application:
 
 1. Navigate to the installation directory of Telerik UI for ASP.NET MVC.
 1. Open the sample Visual Studio Solution:
 
-    * To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\VS2012\Kendo.Mvc.Examples.sln` with Visual Studio 2012.
-    * To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\VS2013\Kendo.Mvc.Examples.sln` with Visual Studio 2013, 2015, and 2017.
+    * To run the ASP.NET MVC 4 version, open `wrappers\aspnetmvc\Examples\MVC4\Kendo.Mvc.Examples.sln`.
+    * To run the ASP.NET MVC 5 version, open `wrappers\aspnetmvc\Examples\MVC5\Kendo.Mvc.Examples.sln`.
 
-1. Install Microsoft .NET 4.6.2 Framework Developer Pack.
+1. Install Microsoft .NET Framework version 4.6.2 or later.
 1. Press `CTRL+F5` to build and run the application.
 1. A browser loads the start page of the sample application.
 

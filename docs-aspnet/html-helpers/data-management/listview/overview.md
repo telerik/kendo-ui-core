@@ -21,6 +21,9 @@ The ListView enables you to control the display of data. It does not provide a d
 
 The following example demonstrates how to define the ListView by using the ListView HtmlHelper.
 
+* The `TagName` of the ListView for {{ site.framework }} is used to create an element to contain all ListView items once the ListView is bound.
+* The `ClientTemplateId` is mandatory for the ListView. It contains the `id` of the `script` element which accommodates the item template.
+
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
         <div class="product">

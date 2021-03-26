@@ -296,6 +296,62 @@ Optional namespace too look in when instantiating Kendo UI widgets. The valid na
      </script>
 
 
+### observableFileManagerData
+
+Creates an ObservableArray instance that is bound to a FileManagerDataSource. Required to bind a FileManagerDataSource-enabled widget (such as the Kendo UI FileManager) to a view-model.
+
+#### Example
+
+    <div id="example">      
+        <div name="files"               
+            data-role="filemanager"              
+            data-bind="source: localData"></div>
+    </div>
+    <script>
+        var myData = [{
+            name: "Folder",
+            isDirectory: true,
+            hasDirectories: false,
+            path: "Folder",
+            extension: "",
+            size: 0,
+            createdUtc: new Date(),
+            items: [
+                {
+                    name: "Image.jpg",
+                    isDirectory: false,
+                    hasDirectories: false,
+                    path: "Folder/Image.jpg",
+                    extension: ".jpg",
+                    size: 20,
+                    createdUtc: new Date(),
+                },
+                {
+                    name: "Image2.jpg",
+                    isDirectory: false,
+                    hasDirectories: false,
+                    path: "Folder/Image2.jpg",
+                    extension: ".jpg", 
+                    size: 20,
+                    createdUtc: new Date(),
+                }
+            ]}
+        ];
+        
+        var viewModel = kendo.observable({        
+            localData: kendo.observableFileManagerData(myData),
+        });
+
+        kendo.bind($("#example"), viewModel);
+    </script>
+
+#### Parameters
+
+##### array `Array`
+
+The array that will be converted to an ObservableArray.
+
+
 ### observableHierarchy
 
 Creates an ObservableArray instance that is bound to a HierarchicalDataSource. Required to bind a HierarchicalDataSource-enabled widget (such as the Kendo UI TreeView) to a view-model.

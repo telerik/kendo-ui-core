@@ -30,7 +30,7 @@
             standard: {
                 days: {
                     names: ["Lahadi","Litinin","Talata","Laraba","Alhamis","Jummaʼa","Asabar"],
-                    namesAbbr: ["Lh","Li","Ta","Lr","Al","Ju","As"],
+                    namesAbbr: ["Lah","Lit","Tal","Lar","Alh","Jum","Asa"],
                     namesShort: ["Lh","Li","Ta","Lr","Al","Ju","As"]
                 },
                 months: {

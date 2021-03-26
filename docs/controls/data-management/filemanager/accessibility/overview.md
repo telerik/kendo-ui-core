@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery FileManager Documentation | FileManager Accessibility | Kendo UI
+page_title: jQuery FileManager Documentation | FileManager Accessibility
 description: "Get started with the jQuery FileManager by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_kendoui_filemanager_widget
 position: 1
@@ -28,7 +28,7 @@ The FileManager supports the standards for providing accessible web content whic
 
 For more information, refer to:
 * [WCAG 2.1 support by the FileManager (demo)](https://demos.telerik.com/kendo-ui/filemanager/index)
-* [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %})
+* [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
 ## See Also
 

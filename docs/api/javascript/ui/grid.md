@@ -1,6 +1,6 @@
 ---
 title: Grid
-page_title: jQuery Grid Documentation | Configuration, Methods, Events | Kendo UI
+page_title: jQuery Grid Documentation | Configuration, Methods, Events
 description: Get started with code examples for the jQuery Grid by Kendo UI and learn how to use methods and which events to set once the widget detail is initialized.
 res_type: api
 component: grid
@@ -664,6 +664,21 @@ The JavaScript function executed on initialization of the row which will determi
     });
     </script>
 
+### columns.dataSource `Object|kendo.data.DataSource`
+
+The data source of the values for the foreign key columns. Can be a JavaScript object which represents a valid data source configuration or an existing [kendo.data.DataSource](/api/javascript/data/datasource)
+instance.
+
+> **Note:** When the dataSource property is set one should also set the [dataTextField](columns.dataTextField) and [dataValueField](columns.dataValueField).
+
+### columns.dataTextField `String`
+
+The data text field of the foreign key item.
+
+### columns.dataValueField `String`
+
+The data value field of the foreign key item.
+
 ### columns.editable `Function`
 
 The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
@@ -802,6 +817,19 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
     });
     </script>
 
+### columns.exportable `Boolean|Object` *(default: true)*
+
+If set to `false` the column will be excluded from the exported Excel/PDF files.
+
+Can be set to a JavaScript object which specifies whether the column should be exported per format.
+
+### columns.exportable.excel `Boolean` *(default: true)*
+
+If set to `false` the column will be excluded from the exported Excel file.
+
+### columns.exportable.pdf `Boolean` *(default: true)*
+
+If set to `false` the column will be excluded from the exported PDF file.
 
 ### columns.field `String`
 
@@ -2409,6 +2437,45 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
     });
     </script>
 
+### columns.sticky `Boolean` *(default: false)*
+
+If set to `true` the column will be displayed as sticky in the grid. Also see [Sticky Columns](/controls/data-management/grid/columns/sticky-columns) help section for additional information.
+
+> **Important**: Row template and detail features are not supported in combination with sticky columns. If [multi-column headers](https://demos.telerik.com/kendo-ui/grid/multicolumnheaders) are used, it is possible to stick a column at the topmost level only.
+
+#### Example - sticky columns
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400, sticky: true },
+        { field: "age", width: 800 }
+      ],
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    </script>
+
+### columns.stickable `Boolean` *(default: false)*
+
+If set to `true` the user will be able to stick or unstick the column from the column menu.
+
+#### Example - stickable columns
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800 }
+      ],
+      columnMenu: true,
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    </script>
+
 ### columns.template `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) which renders the column content. The grid renders table rows (`<tr>`) which represent the data source items.
@@ -2598,7 +2665,7 @@ Can be set to a JavaScript object which represents the column menu configuration
 
 > Check [Column menu](https://demos.telerik.com/kendo-ui/grid/column-menu) for a live demo.
 
-### columnMenu.columns `Boolean` *(default: true)*
+### columnMenu.columns `Boolean|Object` *(default: true)*
 
 If set to `true` the column menu would allow the user to select (show and hide) grid columns. By default the column menu allows column selection.
 
@@ -2621,6 +2688,77 @@ If set to `true` the column menu would allow the user to select (show and hide) 
       ]
     });
     </script>
+
+### columnMenu.columns.sort `String` *(default: null)*
+
+The sort order which will be applied over the columns list. By default, the columns menu items are in the same order as the columns in the grid.
+
+The supported values are:
+
+* `"asc"` (ascending order)
+* `"desc"` (descending order)
+
+### columnMenu.columns.groups `Array` *(default: null)*
+
+The user defined groups of the columns visibility list.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", title: 'Name' },
+        { field: "age", title: 'Age' }
+      ],
+      columnMenu: {
+        columns: {
+          groups: [
+            { title: 'first group', columns: ['Age'] },
+            { title: 'second group', columns: ['Name'] }
+          ]
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.columns.groups.columns `Array` *(default: null)*
+
+The titles of the columns that are part of the group. In case some column does not have a specified title, you can use the field instead. Columns that don't have specified either a title or a field, are not displayed in the column menu.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", title: 'Name' },
+        { field: "age" }
+      ],
+      columnMenu: {
+        columns: {
+          groups: [
+            { title: 'first group', columns: ['age'] }, // field is used instead of title, as the age column does not have a specified title
+            { title: 'second group', columns: ['Name'] }
+          ]
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.columns.groups.title `String` *(default: null)*
+
+The text displayed in the header of the group.
 
 ### columnMenu.filterable `Boolean` *(default: true)*
 
@@ -2645,6 +2783,13 @@ If set to `true` the column menu would allow the user to filter the grid. By def
       ]
     });
     </script>
+
+### columnMenu.componentType `String`*(default: "classic")*
+
+ Specifies the component type of the column menu.
+
+* `"classic"` - Uses the standard rendering of the column menu.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
 
 ### columnMenu.sortable `Boolean` *(default: true)*
 
@@ -2805,6 +2950,32 @@ The text message displayed for the menu item which performs descending sort.
     });
     </script>
 
+### columnMenu.messages.setColumnPosition `String` *(default: "Set Column Position")*
+
+The text message displayed in the column menu for the column position item.
+
+#### Example - column menu set column position text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800 }
+      ],
+      columnMenu: {
+        messages: {
+          setColumnPosition: "Change Position"
+        }
+      },
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
 ### columnMenu.messages.settings `String` *(default: "Column Settings")*
 
 The text message displayed in the menu header (available in mobile mode only).
@@ -2833,7 +3004,59 @@ The text message displayed in the menu header (available in mobile mode only).
     });
     </script>
 
-### columnMenu.messages.lock `String` *(default: "Lock")*
+### columnMenu.messages.stick `String` *(default: "Stick Column")*
+
+The text message displayed in the column menu for sticking a column.
+
+#### Example - column menu stick button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800 }
+      ],
+      columnMenu: {
+        messages: {
+          stick: "Stick this column"
+        }
+      },
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.unstick `String` *(default: "Unstick Column")*
+
+The text message displayed in the column menu for unsticking a column.
+
+#### Example - column menu unstick button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800 }
+      ],
+      columnMenu: {
+        messages: {
+          unstick: "Unstick this column"
+        }
+      },
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.lock `String` *(default: "Lock Column")*
 
 The text message displayed in the column menu for locking a column.
 
@@ -2860,7 +3083,7 @@ The text message displayed in the column menu for locking a column.
     });
     </script>
 
-### columnMenu.messages.unlock `String` *(default: "Unlock")*
+### columnMenu.messages.unlock `String` *(default: "Unlock Column")*
 
 The text message displayed in the column menu for unlocking a column.
 
@@ -3522,6 +3745,10 @@ For more information, please refer to the [Window configuration API](/api/javasc
         }
       });
     </script>
+
+### encodeTitles `Boolean` *(default: false)*
+
+If set to `true` the column title will be HTML-encoded before it is displayed. If set to `false` the column title will be displayed as is.
 
 ### excel `Object`
 
@@ -7142,6 +7369,12 @@ The author of the PDF document.
     });
     </script>
 
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -7256,6 +7489,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](pdf.proxyurl) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -7754,7 +7995,7 @@ Defines a list of fields which will be included in the search. If values for the
     </script>
 
 
-### selectable `Boolean|String` *(default: false)*
+### selectable `Boolean|String|Object` *(default: false)*
 
 If set to `true` the user would be able to select grid rows. By default selection is disabled.
 
@@ -7802,6 +8043,62 @@ Can also be set to the following string values:
     </script>
 
 > Check [Selection](https://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
+
+### selectable.mode `String`
+
+Can be set to the following string values:
+
+- "row" - the user can select a single row.
+- "cell" - the user can select a single cell.
+- "multiple, row" - the user can select multiple rows.
+- "multiple, cell" - the user can select multiple cells.
+
+> When the selectable property is set to "multiple, row" or "multiple, cell" the Grid cannot be scrollable on mobile devices as both are listening on the same event.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      selectable: {
+        mode: "multiple, row"
+      }
+    });
+    </script>
+
+### selectable.ignoreOverlapped `Boolean`
+
+When set to true, visually hidden elements that match by the filter option criteria but are overlapped by other elements that also can be selected, are ignored.
+
+> Applies only for multiple cell selection.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      selectable: {
+        mode: "multiple, cell",
+        ignoreOverlapped: true
+      }
+    });
+    </script>
 
 ### sortable `Boolean|Object` *(default: false)*
 
@@ -8704,7 +9001,9 @@ A string, DOM element or jQuery object which represents the table cell. A string
 
 ### clearSelection
 
-Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/grid/configuration/selectable)).
+Clears the currently selected table rows or cells (depending on the current selection [mode](/api/javascript/ui/grid/configuration/selectable)). 
+
+> By default clearSelection will clear the selected rows on the current page only when [persistSelection](/api/javascript/ui/grid/configuration/persistselection) is enabled. In order to clear all selected rows follow the approach in [this Knowledge Base article](https://docs.telerik.com/kendo-ui/knowledge-base/clear-selection-all-pages-grid).
 
 #### Example - clear selection
 
@@ -8809,6 +9108,10 @@ Collapses the specified master table row. This hides its detail table row.
 ##### row `String|Element|jQuery`
 
 A string, DOM element or jQuery object which represents the master table row. A string is treated as a jQuery selector.
+
+##### omitAnimations `Boolean`
+
+If set to false, the detail template is hidden without animations.
 
 #### Example - collapse the first master table row
 
@@ -9047,6 +9350,10 @@ Expands the specified master table row. This shows its detail table row.
 
 A string, DOM element or jQuery object which represents the master table row. A string is treated as a jQuery selector.
 Expands specified master row.
+
+##### omitAnimations `Boolean`
+
+If set to false, the detail template is displayed without animations.
 
 #### Example - expand the first master table row
 
@@ -9808,6 +10115,32 @@ When using multicolumn headers, using an index will hide a top-level column toge
     grid.hideColumn(grid.columns[0].columns[1]);
     </script>
 
+### stickColumn
+
+Sticks a column.
+
+#### Parameters
+
+##### column `Number|String`
+
+The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
+
+#### Example - stick a column
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400 },
+        { field: "age", width: 800 }
+      ],
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.stickColumn("name");
+    </script>
+
 ### unlockColumn
 
 Unlocks (unfreezes) a column.
@@ -9840,6 +10173,32 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
     grid.unlockColumn("name");
     </script>
 
+### unstickColumn
+
+Unsticks a column.
+
+#### Parameters
+
+##### column `Number|String`
+
+The index of the column or the [field](/api/javascript/ui/grid/configuration/columns.field) to which the columns is bound.
+
+#### Example - unstick a column
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800 },
+        { field: "name", width: 400, sticky: true },
+        { field: "age", width: 800 }
+      ],
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.unstickColumn("name");
+    </script>
+
 ## Events
 
 ### beforeEdit
@@ -9847,8 +10206,6 @@ The index of the column or the [field](/api/javascript/ui/grid/configuration/col
 Fired when the user try to edit or create a data item, before the editor is created. Can be used for preventing the editing depending on custom logic.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
-
-The event will be fired only when the Grid is `selectable`.
 
 #### Event Data
 
@@ -10104,6 +10461,8 @@ The widget instance which fired the event.
 Fired when the user selects a table row or cell in the grid.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+The event will be fired only when the Grid is [`selectable`](/api/javascript/ui/grid/configuration/selectable).
 
 #### Event Data
 
@@ -10623,6 +10982,60 @@ The widget instance which fired the event.
     grid.bind("columnShow", grid_columnShow);
     </script>
 
+### columnStick
+
+Fired when the user sticks a column.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnStick" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800, stickable: true },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800, stickable: true }
+      ],
+      columnMenu: true,
+      columnStick: function(e) {
+        console.log(e.column.field); // displays the field of the just sticked column
+      },
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    </script>
+
+#### Example - subscribe to the "columnStick" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_columnStick(e) {
+      console.log(e.column.field); // displays the field of the just sticked column
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800, stickable: true },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800, stickable: true }
+      ],
+      columnMenu: true,
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("columnStick", grid_columnStick);
+    </script>
+
 ### columnUnlock
 
 Fired when the user unlock a column.
@@ -10681,6 +11094,60 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("columnUnlock", grid_columnUnlock);
+    </script>
+
+### columnUnstick
+
+Fired when the user unsticks a column.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.column `Object`
+
+A JavaScript object which represents the [column](/api/javascript/ui/grid/configuration/columns) configuration.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+#### Example - subscribe to the "columnUnstick" event during initialization
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800, stickable: true },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800, stickable: true }
+      ],
+      columnMenu: true,
+      columnUnstick: function(e) {
+        console.log(e.column.field); // displays the field of the just unsticked column
+      },
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    </script>
+
+#### Example - subscribe to the "columnUnstick" event after initialization
+
+    <div id="grid"></div>
+    <script>
+    function grid_columnUnstick(e) {
+      console.log(e.column.field); // displays the field of the just unsticked column
+    }
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width: 800, stickable: true },
+        { field: "name", width: 400, sticky: true, stickable: true },
+        { field: "age", width: 800, stickable: true }
+      ],
+      columnMenu: true,
+      dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
+    });
+    var grid = $("#grid").data("kendoGrid");
+    grid.bind("columnUnstick", grid_columnUnstick);
     </script>
 
 ### dataBinding

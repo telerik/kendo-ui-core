@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Accessibility | Kendo UI
+page_title: jQuery NumericTextBox Documentation | NumericTextBox Accessibility
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: accessibility_numerictextbox
 position: 1
@@ -24,11 +24,14 @@ The NumericTextBox is compliant with the Section 508 requirements. For more info
 
 ## WCAG 2.1
 
-The NumericTextBox supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag20_accessibility_support %}).
+The NumericTextBox supports the standards for providing accessible web content which are set by the [Web Content Accessibility Guidelines 2.1](https://www.w3.org/TR/WCAG/). For more information, refer to the article on [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %}).
 
-## label Element Support
+## Label Element Support
 
-Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need additional implementation. For a runnable example, refer to [this demo](https://dojo.telerik.com/uSeho).
+Because of the NumericTextBox complex rendering, to focus the widget through the `label` element, you need to manually handle the `click` event of the label and `focus` the NumericTextBox.
+
+Another possible solution is to use the NumericTextBox [`Label` property]({% slug labels_numerictextbox %}), which automatically focuses on the input.
+
 
 ## See Also
 

@@ -1,6 +1,6 @@
 ---
 title: Data Binding
-page_title: Hybrid ScrollView Documentation | Data Binding | Kendo UI
+page_title: Hybrid ScrollView Documentation | Data Binding
 description: "Get started with the Hybrid ScrollView by Kendo UI and bind the widget to data."
 slug: databinding_hybridscrollview
 position: 2

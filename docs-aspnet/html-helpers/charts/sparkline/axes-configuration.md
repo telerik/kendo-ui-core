@@ -6,11 +6,11 @@ slug: axesconfig_sparklines_aspnetcore
 position: 3
 ---
 {% if site.core %}
-    {% assign BaseUnit = "/api//Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitkendomvcuichartaxisbaseunit" %}
-    {% assign ValueAxis = "/api//Kendo.Mvc.UI.Fluent/SparklineBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisbuildert" %}
+    {% assign BaseUnit = "/api/Kendo.Mvc.UI.Fluent/ChartCategoryAxisBuilder#baseunitkendomvcuichartaxisbaseunit" %}
+    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/SparklineBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisbuildert" %}
 {% else %}
     {% assign BaseUnit = "/api/Kendo.Mvc.UI/ChartCategoryAxis#baseunit" %}
-    {% assign ValueAxis = "/api//Kendo.Mvc.UI.Fluent/SparklineBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}
+    {% assign ValueAxis = "/api/Kendo.Mvc.UI.Fluent/SparklineBuilder#valueaxissystemactionkendomvcuifluentchartvalueaxisfactoryt" %}
 {% endif %}
 
 # Axes Configuration

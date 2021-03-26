@@ -34,6 +34,16 @@
             assert.equal(numerictextbox.options.format, "p0");
         });
 
+        it("initializes a selectOnFocus from data attributes", function() {
+            dom = $('<input data-role="numerictextbox" data-select-on-focus="true" />');
+
+            kendo.bind(dom);
+
+            var numerictextbox = dom.data("kendoNumericTextBox");
+
+            assert.equal(numerictextbox.options.selectOnFocus, true);
+        });
+
         it("initializes value from view model", function() {
             dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
 
@@ -320,6 +330,23 @@
 
             dom.data("kendoNumericTextBox").value(42);
             dom.data("kendoNumericTextBox").trigger("change");
+        });
+
+        it("creates label", function() {
+            dom = $('<input data-role="numerictextbox" data-label="test"/>');
+
+            kendo.bind(dom);
+
+            assert.equal(dom.data("kendoNumericTextBox")._inputLabel[0].innerHTML, "test");
+        });
+
+        it("floating label wraps the widget", function() {
+            dom = $('<input data-role="numerictextbox" data-label="{ floating: true }"/>');
+
+            kendo.bind(dom);
+
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.parent().hasClass("k-floating-label-container"));
+            assert.isOk(dom.data("kendoNumericTextBox").wrapper.parent().hasClass("k-state-empty"));
         });
     });
 }());

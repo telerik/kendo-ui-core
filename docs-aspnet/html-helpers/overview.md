@@ -15,6 +15,27 @@ HTML Helpers can be added and further configured through predefined strongly typ
 
 {% if site.core %}
 
+## Widgets vs. Helpers
+
+The Kendo UI widgets:
+
+* Allow for a complete server-platform independence.
+* Provide full control over the placement of the initialization scripts.
+* Support the integration with the [MVVM](https://docs.telerik.com/kendo-ui/framework/mvvm/overview), [AngularJS](https://docs.telerik.com/kendo-ui/framework/AngularJS/introduction), and [Single-Page Application](https://docs.telerik.com/kendo-ui/framework/spa/overview) development patterns.
+* Support [Visual Studio IntelliSense](https://docs.telerik.com/kendo-ui/third-party/vs-intellisense) for the client-side API.
+
+The {{ site.product_short }} helpers:
+
+* Allow you to create widgets with no HTML and JavaScript coding.
+* Provide for server-side data binding and, in some cases, server-side rendering.
+* Allow you to use the `ToDataSourceResult()` extension method for binding Kendo UI widgets to server-side collections and for performing data operations (paging, sorting, filtering, and grouping).
+* Provide integration with some {{ site.framework }} features such as security trimming and editor templates.
+* Support unobtrusive validation based on Data Annotation attributes.
+* Enable a simple implementation of CRUD operations.
+* Support Visual Studio IntelliSense for the server-side configuration syntax.
+* Enable Visual Studio Extensions for automatic creation of new {{ site.product }} applications and for automatic updating of the Telerik UI version.
+* Enable you to use scaffolding to generate widget declarations and related controller action methods.
+
 ## Known Issues
 
 * Currently, {{ site.product }} does not support localization resources. For more information and discussion on this issue, refer to [dotnet/coreclr#2007](https://github.com/dotnet/coreclr/issues/2007) and [aspnet/Home/issues/1124](https://github.com/aspnet/Home/issues/1142).

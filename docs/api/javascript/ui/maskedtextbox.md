@@ -50,6 +50,82 @@ Specifies the culture info used by the widget.
     });
     </script>
 
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            label: "First name"
+        });
+    </script>
+
+The function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            label: function() {
+                return "First name";
+            }
+        });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            label: {
+                content: "First name"
+            }
+        });
+    </script>
+
+The function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            label: {
+                content: function() {
+                    return "First name";
+                }
+            }
+        });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/maskedtextbox/methods/value) method **does not trigger** the `focusout` event of the input.
+This could affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
+
+#### Example - create a floating label
+
+    <input id="maskedtextbox" />
+    <script>
+        $("#maskedtextbox").kendoMaskedTextBox({
+            label: {
+                content: "First name",
+                floating: true
+            }
+        });
+    </script>
+
 ### mask `String`*(default: "")*
 
 Specifies the input mask. The following mask rules are supported:
@@ -268,6 +344,10 @@ Gets the unmasked value of the MaskedTextBox.
 ### value
 
 Gets or sets the value of the MaskedTextBox.
+
+> **Important:** This method **does not trigger** the `focusout` event of the input.
+This could affect the [floating label functionality](/api/javascript/ui/maskedtextbox/configuration/label.floating).
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#maskedtextbox").data("kendoMaskedTextBox").floatingLabel.refresh();`
 
 #### Parameters
 

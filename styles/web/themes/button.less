@@ -24,14 +24,16 @@
 
     // Pressed state
     &:active,
-    &.k-state-active {
+    &.k-state-active,
+    &.k-state-selected {
         color: @button-active-text-color;
         background-color: @button-active-background;
         border-color: @button-active-border-color;
         .composite-background(@button-active-gradient);
         .box-shadow(@button-active-shadow);
     }
-    &.k-state-active {
+    &.k-state-active,
+    &.k-state-selected {
         &:hover {
             color: @primary-hover-text-color;
             border-color: @primary-hover-border-color;
@@ -199,9 +201,11 @@
     // Focus state
     &:focus {
         .box-shadow(@button-focused-shadow);
+        border-color: @button-focused-border-color;
 
         .k-button {
             .box-shadow(none);
+            border-color: inherit;
         }
     }
 }
@@ -233,10 +237,50 @@
 }
 
 
+// Clear button
+.k-button.k-button-clear {
+    border-color: transparent !important;
+    color: @button-text-color;
+    background: none !important;
+    box-shadow: none !important;
+
+    &::before {
+        display: none;
+    }
+
+    &::after {
+        display: block;
+    }
+
+    &:hover,
+    &.k-state-hover,
+    &:active,
+    &.k-state-active,
+    &:focus,
+    &.k-state-focused {
+        color: darken(@button-text-color, 13%);
+    }
+
+    &:active,
+    &.k-state-active {
+        &::after {
+            background: transparent;
+        }
+    }
+
+    &.k-state-focused,
+    &.k-state-focused:active {
+        &::after {
+            background-color: @button-text-color;
+            opacity: .1;
+        }
+    }
+}
+
 
 
 // RTL
-.rtl{
+.k-rtl {
     .k-button-group {
         .k-button {
             .border-radius( 0 );

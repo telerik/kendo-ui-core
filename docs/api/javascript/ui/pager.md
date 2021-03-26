@@ -240,7 +240,8 @@ Defines if an input element which allows the user to navigate to given page will
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          input: true
+          input: true,
+          numeric: false
         });
 
         dataSource.read();
@@ -653,7 +654,8 @@ The tooltip of the button which navigates to the first page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -685,7 +687,8 @@ The tooltip of the button which navigates to the previous page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -788,7 +791,8 @@ The tooltip of the refresh button.
           dataSource: dataSource,
           messages: {
             refresh: "Refresh data"
-          }
+          },
+          refresh: true
         });
 
         dataSource.read();

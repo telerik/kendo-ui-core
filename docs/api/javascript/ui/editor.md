@@ -474,6 +474,51 @@ The title of the tool that aligns the cell text.
     });
     </script>
 
+### messages.tableAlignLeft `String` *(default: 'Table Align Left')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignLeft: "Table Align Left"
+      }
+    });
+    </script>
+
+### messages.tableAlignCenter `String` *(default: 'Table Align Center')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignCenter: "Table Align Center"
+      }
+    });
+    </script>
+
+### messages.tableAlignRight `String` *(default: 'Table Align Right')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignRight: "Table Align Right"
+      }
+    });
+    </script>
+
 ### messages.alignment `String` *(default: 'Alignment')*
 
 The title of the tool that aligns the cell text.
@@ -1209,6 +1254,36 @@ The title of the tool that inserts an unordered list.
     });
     </script>
 
+### messages.insertUpperRomanList `String` *(default: "Insert upper roman list")*
+
+The title of the tool that inserts an upper roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertUpperRomanList: "Insert upper roman list"
+      }
+    });
+    </script>
+
+### messages.insertLowerRomanList `String` *(default: "Insert lower roman list")*
+
+The title of the tool that inserts an lower roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertLowerRomanList: "Insert lower roman list"
+      }
+    });
+    </script>
+
 ### messages.italic `String` *(default: "Italic")*
 
 The title of the tool that makes text italicized.
@@ -1779,6 +1854,12 @@ The author of the PDF document.
         });
     </script>
 
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -1836,6 +1917,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 

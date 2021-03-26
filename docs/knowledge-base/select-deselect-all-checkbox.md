@@ -123,9 +123,9 @@ You can also select multiple rows by using the checkboxes and apply custom styli
                 //define template column with checkbox and attach click event handler
                 {
                     title: 'Select All',
-                    headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox header-checkbox'><label class='k-checkbox-label' for='header-chb'></label>",
+                    headerTemplate: "<input type='checkbox' id='header-chb' class='k-checkbox header-checkbox'>",
                     template: function (dataItem) {
-                        return "<input type='checkbox' id='" + dataItem.ProductID + "' class='k-checkbox row-checkbox'><label class='k-checkbox-label' for='" + dataItem.ProductID + "'></label>";
+                        return "<input type='checkbox' id='" + dataItem.ProductID + "' class='k-checkbox row-checkbox'>";
                     },
                     width: 80
                 },

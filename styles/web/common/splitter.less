@@ -37,12 +37,11 @@
     border-style: solid;
     font-size: 0;
     outline: 0;
-    .prohibit-selection;
+    .prohibit-selection();
 }
 
-.k-splitter .k-ghost-splitbar-horizontal,
-.k-splitter .k-splitbar-horizontal
-{
+.k-ghost-splitbar-horizontal,
+.k-splitbar-horizontal {
     top: 0;
     width: 5px;
     border-width: 0 1px;
@@ -50,8 +49,7 @@
 }
 
 .k-ghost-splitbar-vertical,
-.k-splitbar-vertical
-{
+.k-splitbar-vertical {
     left: 0;
     height: 5px;
     border-width: 1px 0;
@@ -163,24 +161,19 @@
 }
 
 .k-splitbar-draggable-vertical .k-resize-handle,
-.k-splitbar-draggable-horizontal .k-resize-handle
-{
+.k-splitbar-draggable-horizontal .k-resize-handle {
     display: inline-block;
     border-radius: 1px;
 }
 
-.k-splitbar-draggable-horizontal .k-resize-handle
-{
+.k-splitbar-draggable-horizontal .k-resize-handle {
     width: 3px;
-    height: 16px;
-    margin-left: 1px;
+    height: 20px;
 }
 
-.k-splitbar-draggable-vertical .k-resize-handle
-{
-    width: 16px;
+.k-splitbar-draggable-vertical .k-resize-handle {
+    width: 20px;
     height: 3px;
-    margin-top: 1px;
 }
 
 .k-splitbar {
@@ -202,10 +195,6 @@
 {
     .k-splitbar-horizontal
     {
-        .k-resize-handle
-        {
-            margin-right: 1px;
-        }
 
         .k-i-arrow-60-right {
             margin-top: 13px;

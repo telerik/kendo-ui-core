@@ -530,6 +530,23 @@
             assert.isOk($("#splitButton_wrapper").is(":visible"));
         });
 
+        it("Show method shows hidden button in SplitButton", function() {
+            var toolbar = container.kendoToolBar({
+                items: [{
+                    type: "splitButton",
+                    id: "splitButton",
+                    text: "split button",
+                    menuButtons: [
+                        { text: "foo", id: "foo" },
+                        { text: "bar", id: "bar", hidden: true }
+                    ]
+                }]
+            }).data("kendoToolBar");
+
+            toolbar.show($("#bar"));
+            assert.isOk(!$("#bar").hasClass(".k-hidden"));
+        });
+
         it("After showing hidden button the button group updates k-group-start button", function() {
             var toolbar = container.kendoToolBar({
                 items: [

@@ -8,7 +8,7 @@ component: timeline
 
 # kendo.ui.Timeline
 
-Represents the Kendo UI Timeline widget. Inherits from [kendo.ui.Widget](/api/javascript/ui/widget).
+Represents the Kendo UI Timeline widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 
@@ -152,6 +152,10 @@ Sets the field of the data item that provides information when the given event h
 
 > The value for this field should be either JavaScript Date object or serialized date.
 
+### dataImagesAltField `String`*(default: "altField")*
+
+Sets the field of the data item that provides the value for the alt attribute of the images.
+
 ### dataImagesField `String`*(default: "images")*
 
 Sets the field of the data item that provides the images information for the event.
@@ -284,6 +288,37 @@ Sets specific height for the event in horizontal mode.
 Sets specific width for the event in vertical mode. 
 
 > This method is supported only in vertical mode.
+
+### navigatable `Boolean`*(default: false)*
+
+If set to `true`, will enable the keyboard navigation for the component.
+
+#### Example
+
+    <div id="timeline"></div>
+
+    <script>
+
+    $("#timeline").kendoTimeline({
+        dataSource: {
+            data:[ {"id":1,"title":"Bowling tournament","subtitle":"Location: Sterling Lanes","description":"Summer Bowling tournament in Michigan","date":"2025-06-30T21:00:00.000Z","actions":[{"text":"Visit the Bowling tournament page"}] },
+                    {"id":2,"title":"Charlie's first football game","subtitle":"Location: City Football Stadium","description":"Call coach Williams","date":"2022-10-22T21:00:00.000Z"},
+                    {"id":3,"title":"Alex's Birthday","subtitle":"Location: Alex's House","description":"Buy birthday cake and some fruits","date":"2010-01-09T22:00:00.000Z","images":[{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/4.jpg"},{"src":"https://demos.telerik.com/kendo-ui/content/web/foods/16.jpg"}]},
+                    {"id":4,"title":"Vacation in Mexico","subtitle": "Location: Cabo San Lucas","description":"Check-in for the flight","date":"2017-12-24T22:00:00.000Z"}],
+            schema: {
+                model: {
+                fields: {
+                    date: {
+                    type: "date"
+                    }
+                }
+                }
+            }
+        },
+        orientation: "horizontal",
+        navigatable: true
+    });
+    </script>
 
 ### showDateLabels `Boolean`*(default: true)*
 
@@ -715,6 +750,10 @@ The widget instance which fired the event.
 
 The data item asociated with the event that is going to be expanded.
 
+##### e.preventDefault `Function`
+
+If invoked, prevents the expand action.
+
 #### Example - hooking up to the expand event
 
     <div id="timeline"></div>
@@ -761,6 +800,10 @@ The widget instance which fired the event.
 ##### e.dataItem `kendo.data.Model`
 
 The data item asociated with the event that is going to be expanded.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the collapse action.
 
 #### Example - hooking up to the collapse event
 
@@ -859,6 +902,10 @@ The widget instance which fired the event.
 ##### e.action `String`
 
 next or previous values depending whether user is trying to load next or previous portion of events.
+
+##### e.preventDefault `Function`
+
+If invoked, prevents the navigate action.
 
 #### Example - hooking up to the navigate event
 

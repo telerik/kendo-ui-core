@@ -28,7 +28,6 @@ var __meta__ = { // jshint ignore:line
         Select = ui.Select,
         caret = kendo.caret,
         support = kendo.support,
-        isIE = kendo.support.browser.msie,
         placeholderSupported = support.placeholder,
         activeElement = kendo._activeElement,
         keys = kendo.keys,
@@ -44,13 +43,15 @@ var __meta__ = { // jshint ignore:line
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         AUTOCOMPLETEVALUE = "off",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         proxy = $.proxy,
-        newLineRegEx = /(\r\n|\n|\r)/gm;
+        newLineRegEx = /(\r\n|\n|\r)/gm,
+        NON_PRINTABLE_KEYS = [16,17,18,19,20,33,34,37,39,45,91,92,144,145];
 
     var ComboBox = Select.extend({
         init: function(element, options) {
@@ -197,6 +198,11 @@ var __meta__ = { // jshint ignore:line
             Select.fn.destroy.call(that);
         },
 
+        _isValueChanged: function(value) {
+            return value !== List.unifyType(this._old, typeof value) &&
+                value !== List.unifyType(this._oldText, typeof value);
+        },
+
         _change: function() {
             var that = this;
             var text = that.text();
@@ -220,6 +226,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             Select.fn._change.call(that);
+
+            that._oldText = that.text && that.text();
+
             that._toggleCloseVisibility();
         },
 
@@ -244,20 +253,19 @@ var __meta__ = { // jshint ignore:line
             this._placeholder(false);
         },
 
-        _inputFocusout: function() {
+        _inputFocusout: function(e) {
             var that = this;
             var value = that.value();
+            var isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length;
 
             that._userTriggered = true;
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            if(this._userTriggered && isIE){
-                return;
+            if (isClearButton) {
+              that.text(that.text());
             }
-
-            that.text(that.text());
 
             var item = that._focus();
             var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
@@ -269,9 +277,12 @@ var __meta__ = { // jshint ignore:line
 
             that._placeholder();
             that._valueBeforeCascade = that._old;
-            that._blur();
 
-            that.element.blur();
+            if (isClearButton) {
+                that._blur();
+
+                that.element.blur();
+            }
         },
 
         _inputPaste: function() {
@@ -301,7 +312,8 @@ var __meta__ = { // jshint ignore:line
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false);
+                     .attr(ARIA_DISABLED, false)
+                     .attr(ARIA_READONLY, false);
 
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
@@ -321,7 +333,8 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable);
+                     .attr(ARIA_DISABLED, disable)
+                     .attr(ARIA_READONLY, readonly);
             }
 
             that._toggleCloseVisibility();
@@ -340,6 +353,7 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
+
                 if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
@@ -489,8 +503,6 @@ var __meta__ = { // jshint ignore:line
             that.popup.position();
 
             that._buildOptions(data);
-
-            that._makeUnselectable();
 
             that._updateSelection();
 
@@ -806,7 +818,7 @@ var __meta__ = { // jshint ignore:line
 
                     that._oldIndex = that.selectedIndex;
 
-                    that._prev = that.input.val();
+                    that._prev = that._oldText = that.input.val();
 
                     if (that._state === STATE_FILTER) {
                         that._state = STATE_ACCEPT;
@@ -942,15 +954,16 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.addClass(element.className)
-                 .css({
+                .css({
                     width: "",
-                    height: element.style.height
-                 })
-                 .attr({
-                     "role": "combobox",
-                     "aria-expanded": false
-                 })
-                 .show();
+                    height: element.style.height,
+                    position: ""
+                })
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false
+                })
+                .show();
 
             if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);
@@ -986,7 +999,10 @@ var __meta__ = { // jshint ignore:line
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                textField = that.options.dataTextField || "text",
+                isFkey = key >= 112 && key <= 135,
+                isNonPrintableKey = NON_PRINTABLE_KEYS.indexOf(key) > -1;
 
             that._last = key;
 
@@ -1029,7 +1045,9 @@ var __meta__ = { // jshint ignore:line
                     });
                 } else {
                     if(that._syncValueAndText() || that._isSelect){
-                        that._accessor(that.input.val());
+                        if(!that.dataItem() || that.dataItem()[textField] !== that.input.val()) {
+                            that._accessor(that.input.val());
+                        }
                     }
 
                     if (that.options.highlightFirst) {
@@ -1039,7 +1057,7 @@ var __meta__ = { // jshint ignore:line
                         that._oldText = that.text();
                     }
                 }
-            } else if (key != keys.TAB && !that._move(e)) {
+            } else if (key != keys.TAB && !that._move(e) && !isNonPrintableKey && !isFkey && !e.ctrlKey) {
                that._search();
             } else if (key === keys.ESC && !that.popup.visible() && that.text()) {
                 that._clearValue();
@@ -1100,9 +1118,10 @@ var __meta__ = { // jshint ignore:line
 
                     that._toggleCloseVisibility();
                 }
-                else if (value === "" && that._prev !== "") {
+                else if (value === "" && that._prev !== "" && that._prev !== undefined) {
                     that._clearValue();
-                    that.search("");
+                    that._open = true;
+                    that._state = STATE_REBIND;
                 }
 
                 that._typingTimeout = null;

@@ -51,7 +51,7 @@ The NuGet config file allows you to set package sources as well as where to get 
         <?xml version="1.0" encoding="utf-8"?>
         <configuration>
             <packageSources>
-                <add key="Telerik" value="https://nuget.telerik.com/nuget/" />
+                <add key="Telerik" value="https://nuget.telerik.com/nuget" />
                 <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
             </packageSources>
             <packageSourceCredentials>

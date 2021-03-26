@@ -12,6 +12,22 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            componentType: "modern"
+        });
+    </script>
+
 ### culture `String`*(default: "en-US")*
 
  Specifies the culture info used by the widget.

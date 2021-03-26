@@ -117,6 +117,48 @@ it('menu renders aria-haspopup on items with submenu', function() {
     m.destroy();
 });
 
+it('menu does not wrap content of items with omit-wrap', function() {
+    var dom = '<ul id="menu">' +
+    '   <li ' + kendo.attr("omit-wrap") + '="true">' +
+    '       Item 1' +
+    '       <ul>' +
+    '           <li>Sub Item 1</li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 2' +
+    '       <ul>' +
+    '           <li>Sub Item 1'+
+    '               <ul>' +
+    '                   <li>Sub Item 1</li>' +
+    '               </ul>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 3' +
+    '       <ul>' +
+    '           <li>' +
+    '               <div>' +
+    '                   <ul>' +
+    '                       <li>Item 1</li>' +
+    '                       <li>Item 2</li>' +
+    '                   </ul>' +
+    '               </div>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '</ul>';
+
+
+    var m = new kendo.ui.Menu(dom);
+
+    assert.isNotOk(m.element.find("["+kendo.attr("omit-wrap")+"]").hasClass('k-menu-item'));
+    assert.isNotOk(m.element.find("["+kendo.attr("omit-wrap")+"] > span").length);
+
+    m.destroy();
+});
+
     });
 }());
 

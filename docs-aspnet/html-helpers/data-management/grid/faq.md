@@ -359,6 +359,22 @@ The following example demonstrates how to handle errors in the Ajax binding mode
 
 The Kendo UI Grid makes `HTTP` requests. Use the developer tools of your browser to inspect the communication between the browser and the web server. In case of a server-side exception, the `HTTP` status code is `500` and the server response contains the detailed exception stack-trace.
 
+## How can I implement paging, sorting, filtering, and grouping?
+
+If your model supports the `IQueryable` interface or is `DataTable`, the Grid does paging, sorting, filtering, grouping{% if site.mvc %}, and aggregates&mdash;`DataTable` binding supports only the `count` aggregate&mdash;automatically.
+
+For server-binding scenarios, no additional steps are required. Just pass the `IQueryable` to the `Grid` constructor. For additional information on the Grid server binding, refer to [this article]({% slug serverbinding_grid_aspnetmvc %}){% endif %}.
+
+For Ajax-binding scenarios, the `ToDataSourceResult` extension method must be used to perform the data processing. For additional information on the Grid Ajax binding, refer to [this article]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %}).
+
+If your model does not implement `IQueryable`, implement custom binding. This means that you are responsible for the paging, sorting, filtering, and grouping of the data. For more information on the Grid custom binding, refer to [this article]({% slug custombinding_grid_aspnetmvc %}).
+
+> All data operations are performed at database server level if the underlying `IQueryable` provider supports translation of expression trees to SQL. Kendo UI Grid for {{ site.framework }} has been tested with the following frameworks:
+> - Entity Framework
+> - Linq to SQL
+> - Telerik OpenAccess
+> - NHibernate
+
 ## How can I configure Grids to perform paging, sorting, filtering, and grouping in memory?
 
 By default, paging, sorting, filtering and grouping initiate the making of Ajax requests. The `ToDataSourceResult` extension method processes the data source server-side. To prevent this, call the `ServerOperation` method and pass `false` as the argument.

@@ -35,26 +35,26 @@
                 },
                 months: {
                     names: ["januar","februar","marts","april","maj","juni","juli","august","september","oktober","november","december"],
-                    namesAbbr: ["jan","feb","mar","apr","maj","jun","jul","aug","sep","okt","nov","dec"]
+                    namesAbbr: ["jan.","feb.","mar.","apr.","maj","jun.","jul.","aug.","sep.","okt.","nov.","dec."]
                 },
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "dd/MM/yyyy",
+                    d: "dd.MM.yyyy",
                     D: "dddd 'den' d. MMMM yyyy",
-                    F: "dddd 'den' d. MMMM yyyy h.mm.ss tt",
-                    g: "dd/MM/yyyy h.mm tt",
-                    G: "dd/MM/yyyy h.mm.ss tt",
+                    F: "dddd 'den' d. MMMM yyyy HH.mm.ss",
+                    g: "dd.MM.yyyy HH.mm",
+                    G: "dd.MM.yyyy HH.mm.ss",
                     m: "d. MMMM",
                     M: "d. MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "h.mm tt",
-                    T: "h.mm.ss tt",
+                    t: "HH.mm",
+                    T: "HH.mm.ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"
                 },
-                "/": "/",
+                "/": ".",
                 ":": ".",
                 firstDay: 1
             }

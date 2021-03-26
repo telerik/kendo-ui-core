@@ -1,6 +1,6 @@
 ---
 title: Height
-page_title: jQuery Grid Documentation | Height | Kendo UI
+page_title: jQuery Grid Documentation | Height
 description: "Get started with the jQuery Grid by Kendo UI and learn how to apply different heights to the widget."
 slug: height_kendoui_grid_widget
 position: 1
@@ -10,7 +10,7 @@ position: 1
 
 By default, the Grid has no set height and expands to fit all table rows.
 
-## Getting Sarted 
+## Getting Started 
 
 > Set the height to the Grid only when its scrolling is enabled. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).  
 

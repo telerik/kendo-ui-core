@@ -15,7 +15,7 @@ component: grid
 <table>
 	<tr>
 		<td>Product Version</td>
-		<td>2017.3 1026</td>
+		<td>2020.3.1021</td>
 	</tr>
 	<tr>
 		<td>Product</td>
@@ -93,7 +93,7 @@ How can I select rows with checkboxes by clicking anywhere on the row of the Gri
         };
 
         function onClick(e) {
-            if ($(e.target).hasClass("k-checkbox-label")) {
+            if ($(e.target).hasClass("k-checkbox")) {
                 return;
             }
             var row = $(e.target).closest("tr");

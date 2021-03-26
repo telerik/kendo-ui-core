@@ -56,23 +56,18 @@
     border-bottom-right-radius: 4px;
 }
 
-.k-rtl .k-autocomplete > .k-i-close,
-.k-rtl .k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-rtl .k-autocomplete > .k-clear-value,
+.k-rtl .k-multiselect > .k-multiselect-wrap > .k-clear-value {
     right: auto;
     margin-right: 0;
 }
 
-.k-rtl .k-combobox > .k-dropdown-wrap > .k-i-close {
+.k-rtl .k-combobox > .k-dropdown-wrap > .k-clear-value {
     right: auto;
 }
 
-.k-rtl .k-dropdowntree > .k-dropdown-wrap > .k-i-close {
+.k-rtl .k-dropdowntree > .k-dropdown-wrap > .k-clear-value {
     right: auto;
-}
-
-.k-rtl .k-datetimepicker .k-picker-wrap .k-icon
-{
-    margin: 0 2px 0 0;
 }
 
 .k-rtl.k-popup > .k-static-header
@@ -110,21 +105,6 @@
     }
 }
 
-.k-rtl .k-datetimepicker .k-select
-{
-
-    .k-link-date
-    {
-        margin-right: -.285em;
-        margin-left: auto;
-    }
-
-    .k-link-time
-    {
-        margin-right: .428em;
-        margin-left: -.285em;
-    }
-}
 
 // Calendar
 
@@ -135,20 +115,6 @@
 .k-rtl .k-calendar .k-i-arrow-60-left
 {
     transform: scaleX(-1);
-}
-
-// Scheduler
-
-.k-rtl .k-scheduler .k-scheduler-navigation .k-i-arrow-60-right,
-.k-rtl .k-scheduler .k-scheduler-navigation .k-i-arrow-60-left
-{
-    transform: scaleX(-1);
-}
-
-.k-rtl .k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view {
-    text-align: left;
-    padding-left: 1em;
-    text-align: left;
 }
 
 // Editor
@@ -211,10 +177,6 @@
 .k-rtl .k-overflow-tools {
     left: 0;
     right: auto;
-}
-
-.k-rtl .k-editortoolbar-dragHandle {
-    float: right;
 }
 
 // Grid
@@ -283,9 +245,9 @@
 }
 
 .k-rtl .k-grid-header-locked,
-.k-rtl .k-grid-content-locked
-{
-    border-width: 0;
+.k-rtl .k-grid-content-locked {
+    border-right-width: 0;
+    border-left-width: 1px;
 }
 
 .k-rtl .k-grid-header th.k-with-icon .k-link
@@ -317,10 +279,6 @@
 {
     right: auto;
     left: 2.5em;
-}
-
-.k-rtl .k-header .k-grid-search {
-    float: left;
 }
 
 // Editing
@@ -533,8 +491,8 @@
     padding: .03em .2em;
 }
 
-.k-rtl .k-autocomplete > .k-i-close,
-.k-rtl .k-multiselect-wrap > .k-i-close {
+.k-rtl .k-autocomplete > .k-clear-value,
+.k-rtl .k-multiselect-wrap > .k-clear-value {
     right: auto;
 }
 
@@ -569,40 +527,6 @@
 }
 
 // Scheduler
-
-.k-rtl .k-scheduler-toolbar > ul
-{
-    float: left;
-}
-
-.k-rtl .k-scheduler-toolbar > ul:first-child
-{
-    float: right;
-}
-
-.k-rtl .k-scheduler-toolbar > ul > li,
-.k-rtl .k-scheduler-footer > ul > li
-{
-    border-width: 1px 0 1px 1px;
-}
-
-.k-rtl .k-scheduler-toolbar > ul > li:first-child
-{
-    border-right-width: 1px;
-}
-
-.k-rtl .k-scheduler div.k-scheduler-footer ul li
-{
-    margin-right: 0;
-    margin-left: .6em;
-}
-
-.k-rtl .k-scheduler-toolbar .k-i-calendar,
-.k-rtl .k-scheduler-footer .k-icon
-{
-    margin-right: 0;
-    margin-left: 6px;
-}
 
 .k-rtl .k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
 {
@@ -944,10 +868,10 @@
     right: 0;
 }
 
-.k-rtl .k-upload-selected
+.k-rtl .k-upload .k-action-buttons .k-button + .k-button
 {
-    margin-right: .8em;
-    margin-left: .2em;
+    margin-right: 6px;
+    margin-left: 0;
 }
 
 .k-rtl .k-file-name-size-wrapper {

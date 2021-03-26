@@ -29,6 +29,12 @@
             assert.equal(ul.attr("role"), "listbox");
         });
 
+        it("ListView adds role list when not navigatable and selectable", function() {
+            var ul = setup({ navigatable: false, selectable: false });
+
+            assert.equal(ul.attr("role"), "list");
+        });
+
         it("ListView adds aria-multiselectable if selectable=multiple", function() {
             var ul = setup({
                 selectable: "multiple"
@@ -37,10 +43,24 @@
             assert.equal(ul.attr("aria-multiselectable"), "true");
         });
 
+        it("aria-selected attribute is not rendered if selection is not enabled", function() {
+            var ul = setup({
+                selectable: false
+            });
+
+            assert.isOk(!ul.data("kendoListView").wrapper.find("[aria-selected='false']").length);
+        });
+
         it("ListView adds role listitem to all child elements", function() {
             var ul = setup();
 
             assert.equal(ul.find("li").attr("role"), "option");
+        });
+
+        it("ListView adds role listitem to all child elements when not navigatable and selectable", function() {
+            var ul = setup({ navigatable: false, selectable: false });
+
+            assert.equal(ul.find("li").attr("role"), "listitem");
         });
 
         it("ListView adds aria-selected=false to all child elements", function() {

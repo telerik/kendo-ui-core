@@ -37,8 +37,8 @@
                     names: ["Januari","Februari","Machi","Epreo","Mei","Juni","Julai","Ogasti","Septemba","Oktoba","Novemba","Disemba"],
                     namesAbbr: ["Jan","Feb","Mac","Epr","Mei","Jun","Jul","Oga","Sep","Okt","Nov","Dis"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["uluchelo","uluchelo","ULUCHELO"],
+                PM: ["akasuba","akasuba","AKASUBA"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

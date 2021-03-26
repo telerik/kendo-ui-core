@@ -20,6 +20,7 @@ var __meta__ = { // jshint ignore:line
         INVALIDINPUT = "k-invalid",
         VALIDINPUT = "k-valid",
         VALIDATIONSUMMARY = "k-validation-summary",
+        INVALIDLABEL = "k-text-error",
         MESSAGEBOX = "k-messagebox k-messagebox-error",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
@@ -113,6 +114,23 @@ var __meta__ = { // jshint ignore:line
         return containers;
     }
 
+    function isLabelFor(label, element) {
+        if (!label) {
+            return false;
+        }
+        if (typeof label.nodeName !== 'string' || label.nodeName !== 'LABEL') {
+            return false;
+        }
+        if (typeof label.getAttribute('for') !== 'string' || typeof element.getAttribute('id') !== 'string') {
+            return false;
+        }
+        if (label.getAttribute('for') !== element.getAttribute('id')) {
+            return false;
+        }
+
+        return true;
+    }
+
     var SUMMARYTEMPLATE = '<ul>' +
         '#for(var i = 0; i < errors.length; i += 1){#' +
             '<li><a data-field="#=errors[i].field#" href="\\#">#= errors[i].message #</a></li>' +
@@ -169,10 +187,13 @@ var __meta__ = { // jshint ignore:line
             },
             rules: {
                 required: function(input) {
-                    var checkbox = input.filter("[type=checkbox]").length && !input.is(":checked"),
+                    var noNameCheckbox = !input.attr("name") && !input.is(":checked"),
+                        namedCheckbox = input.attr("name") && !this.element.find("input[name='" + input.attr("name") + "']:checked").length,
+                        checkbox = input.filter("[type=checkbox]").length && (noNameCheckbox || namedCheckbox),
+                        radio = input.filter("[type=radio]").length && !this.element.find("input[name='" + input.attr("name") + "']:checked").length,
                         value = input.val();
 
-                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox));
+                    return !(hasAttribute(input, "required") && (!value || value === "" || value.length === 0 || checkbox || radio));
                 },
                 pattern: function(input) {
                     if (input.filter("[type=text],[type=email],[type=url],[type=tel],[type=search],[type=password]").filter("[pattern]").length && input.val() !== "") {
@@ -246,6 +267,7 @@ var __meta__ = { // jshint ignore:line
 
             if (this.validationSummary) {
                 this.validationSummary.off(NS);
+                this.validationSummary = null;
             }
         },
 
@@ -372,18 +394,12 @@ var __meta__ = { // jshint ignore:line
 
             input.removeAttr(ARIAINVALID);
 
-            if (wasValid !== valid) {
-                if (this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName })) {
-                    return;
-                }
-            }
-
             if (!valid) {
                 that._errors[fieldName] = messageText;
                 var lblId = lbl.attr('id');
 
                 that._decorateMessageContainer(messageLabel, fieldName);
-                messageLabel.addClass("k-hidden");
+
 
                 if (lblId) {
                     messageLabel.attr('id', lblId);
@@ -395,15 +411,29 @@ var __meta__ = { // jshint ignore:line
                     var widgetInstance = kendo.widgetInstance(input);
                     var parentElement = input.parent().get(0);
                     var nextElement = input.next().get(0);
+                    var prevElement = input.prev().get(0);
 
-                    if (parentElement && parentElement.nodeName === "LABEL") {
+                    // Get the instance of the RadioGroup which is not initialized on the input element
+                    if(!widgetInstance && input.is("[type=radio]")) {
+                        widgetInstance = kendo.widgetInstance(input.closest(".k-radio-list"));
+                    }
+
+                    // Get the instance of the CheckBoxGroup which is not initialized on the input element
+                    if(!widgetInstance && input.is("[type=checkbox]")) {
+                        widgetInstance = kendo.widgetInstance(input.closest(".k-checkbox-list"));
+                    }
+
+                    if (widgetInstance && widgetInstance.wrapper) {
+                        messageLabel.insertAfter(widgetInstance.wrapper);
+                    } else if (parentElement && parentElement.nodeName === "LABEL") {
                         // Input inside label
                         messageLabel.insertAfter(parentElement);
-                    } else if (nextElement && nextElement.nodeName === "LABEL") {
+                    } else if (nextElement && isLabelFor(nextElement, input[0])) {
                         // Input before label
                         messageLabel.insertAfter(nextElement);
-                    } else if (widgetInstance && widgetInstance.wrapper) {
-                        messageLabel.insertAfter(widgetInstance.wrapper);
+                    } else if (prevElement && isLabelFor(prevElement, input[0])) {
+                        // Input after label
+                        messageLabel.insertAfter(input);
                     } else {
                         messageLabel.insertAfter(input);
                     }
@@ -416,15 +446,23 @@ var __meta__ = { // jshint ignore:line
                 delete that._errors[fieldName];
             }
 
+            if (wasValid !== valid) {
+                this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName });
+            }
+
             input.toggleClass(INVALIDINPUT, !valid);
             input.toggleClass(VALIDINPUT, valid);
 
             if (kendo.widgetInstance(input)) {
                 var inputWrap = kendo.widgetInstance(input)._inputWrapper;
+                var inputLabel = kendo.widgetInstance(input)._inputLabel;
 
                 if (inputWrap) {
                     inputWrap.toggleClass(INVALIDINPUT, !valid);
                     inputWrap.toggleClass(VALIDINPUT, valid);
+                }
+                if (inputLabel) {
+                    inputLabel.toggleClass(INVALIDLABEL, !valid);
                 }
             }
 
@@ -457,7 +495,8 @@ var __meta__ = { // jshint ignore:line
 
         reset: function() {
             var that = this,
-                inputs = that.element.find("." + INVALIDINPUT);
+                inputs = that.element.find("." + INVALIDINPUT),
+                labels = that.element.find("." + INVALIDLABEL);
 
             that._errors = [];
 
@@ -467,6 +506,7 @@ var __meta__ = { // jshint ignore:line
 
             inputs.removeAttr(ARIAINVALID);
             inputs.removeClass(INVALIDINPUT);
+            labels.removeClass(INVALIDLABEL);
         },
 
         _findMessageContainer: function(fieldName) {
@@ -543,13 +583,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         setOptions: function(options) {
-            var currentOptions = kendo.deepExtend(this.options, options);
+            if (options.validationSummary) {
+                this.hideValidationSummary();
+            }
+
+            kendo.deepExtend(this.options, options);
 
             this.destroy();
 
-            this.init(this.element, currentOptions);
+            this.init(this.element, this.options);
 
-            this._setEvents(currentOptions);
+            this._setEvents(this.options);
         },
 
         _getInputNames: function() {
@@ -561,7 +605,14 @@ var __meta__ = { // jshint ignore:line
                 var input = $(inputs[idx]);
 
                 if (hasAttribute(input, NAME)) {
-                    sorted.push(input.attr(NAME));
+                    // Add current name if:
+                    // - not present so far;
+                    // - present but not part of CheckBoxGroup or RadioGroup.
+                    if(sorted.indexOf(input.attr(NAME)) === -1 ||
+                        (input.closest(".k-checkbox-list").length === 0 &&
+                        input.closest(".k-radio-list").length === 0)) {
+                            sorted.push(input.attr(NAME));
+                    }
                 }
             }
 

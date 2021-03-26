@@ -203,12 +203,10 @@
                 var that = this,
                     element = that.element,
                     maxHeight = that.options.maxHeight,
-                    paddingBox,
                     elementMaxHeight;
 
                 if (maxHeight != Infinity) {
-                    paddingBox = that._paddingBox(element);
-                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight() - paddingBox.vertical;
+                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight();
                     if (elementMaxHeight > 0) {
                         element.css({
                             maxHeight: ceil(elementMaxHeight) + "px"
@@ -218,24 +216,11 @@
 
             },
 
-            _paddingBox: function(element) {
-                var paddingTop = parseFloat(element.css("padding-top"), 10),
-                    paddingLeft = parseFloat(element.css("padding-left"), 10),
-                    paddingBottom = parseFloat(element.css("padding-bottom"), 10),
-                    paddingRight = parseFloat(element.css("padding-right"), 10);
-
-                return {
-                    vertical: paddingTop + paddingBottom,
-                    horizontal: paddingLeft + paddingRight
-                };
-            },
-
             _setElementHeight: function() {
                 var that = this,
                     element = that.element,
-                    height = that.options.height,
-                    paddingBox = that._paddingBox(element),
-                    elementHeight = parseFloat(height, 10) - that._uiHeight() - paddingBox.vertical;
+                    height = that.wrapper.outerHeight(true),
+                    elementHeight = parseFloat(height, 10) - that._uiHeight();
 
                 if (elementHeight < 0) {
                     elementHeight = 0;
@@ -433,6 +418,7 @@
                         .autoApplyNS(NS)
                         .html(text)
                         .appendTo(actionbar)
+                        .addClass(action.cssClass)
                         .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
@@ -466,6 +452,7 @@
 
             _actionKeyHandler: function(e) {
                 if (buttonKeyTrigger(e)) {
+                    e.preventDefault();
                     this._runActionBtn(e.currentTarget);
                 } else if (e.keyCode == keys.ESC) {
                     this.close(false);
@@ -789,11 +776,15 @@
                 var that = this;
 
                 var zStack = $(KWINDOW).filter(function() {
-                    var dom = $(this);
-                    var object = that._object(dom);
-                    var options = object && object.options;
+                    var modal = that._object($(this));
 
-                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
+                    return modal &&
+                        modal.options &&
+                        modal.options.modal &&
+                        modal.options.visible &&
+                        modal.options.appendTo === that.options.appendTo &&
+                        !modal.containment &&
+                        $(modal.element).is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -819,6 +810,8 @@
                 that._destroy();
 
                 Widget.fn.destroy.call(that);
+
+                kendo.destroy(that.wrapper);
 
                 that.wrapper.remove();
                 that.wrapper = that.element = $();

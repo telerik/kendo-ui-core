@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["./kendo.core"], f);
+    define(["./kendo.core", "./kendo.floatinglabel"], f);
 })(function () {
 
 var __meta__ = {// jshint ignore:line
@@ -7,7 +7,7 @@ var __meta__ = {// jshint ignore:line
     name: "TextBox",
     category: "web",
     description: "The TextBox widget enables you to style and provide a floating label functionality to input elements",
-    depends: ["core"]
+    depends: ["core", "floatinglabel"]
 };
 
 (function ($, undefined) {
@@ -20,6 +20,7 @@ var __meta__ = {// jshint ignore:line
         DISABLED = "disabled",
         READONLY = "readonly",
         INPUT = "k-input",
+        FOCUSED = "k-state-focused",
         LABELCLASSES = "k-label k-input-label",
         STATEDISABLED = "k-state-disabled",
         NOCLICKCLASS = "k-no-click",
@@ -38,13 +39,13 @@ var __meta__ = {// jshint ignore:line
             that.options.enable = options.enable !== undefined ? options.enable : !(Boolean(that.element.attr("disabled")));
             that.options.placeholder = options.placeholder || that.element.attr("placeholder");
 
+            that.value(that.options.value);
             that._wrapper();
+            that._label();
             that._editable({
                 readonly: that.options.readonly,
                 disable: !(that.options.enable)
             });
-            that._label();
-            that.value(that.options.value);
 
             that.element
                 .addClass(INPUT)
@@ -79,17 +80,29 @@ var __meta__ = {// jshint ignore:line
         },
 
         readonly: function(readonly) {
+            var that = this;
+
             this._editable({
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.readonly(readonly === undefined ? true : readonly);
+            }
         },
 
         enable: function(enable) {
+            var that = this;
+
             this._editable({
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+
+            if (that.floatingLabel) {
+                that.floatingLabel.enable(enable = enable === undefined ? true : enable);
+            }
         },
 
         focus: function() {
@@ -100,6 +113,10 @@ var __meta__ = {// jshint ignore:line
 
         destroy: function() {
             var that = this;
+
+            if (that.floatingLabel) {
+                that.floatingLabel.destroy();
+            }
 
             that.element.off(NS);
             Widget.fn.destroy.call(that);
@@ -122,6 +139,7 @@ var __meta__ = {// jshint ignore:line
                 wrapper.removeClass(STATEDISABLED)
                         .removeClass(NOCLICKCLASS);
 
+                element.on("focusin" + NS, proxy(that._focusin, that));
                 element.on("focusout" + NS, proxy(that._focusout, that));
             } else {
                 element.attr(DISABLED, disable)
@@ -138,10 +156,17 @@ var __meta__ = {// jshint ignore:line
             var element = that.element;
             var options = that.options;
             var id = element.attr("id");
+            var floating;
             var labelText;
 
             if (options.label !== null) {
+                floating = isPlainObject(options.label) ? options.label.floating : false;
                 labelText = isPlainObject(options.label) ? options.label.content : options.label;
+
+                if (floating) {
+                    that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                }
 
                 if (kendo.isFunction(labelText)) {
                     labelText = labelText.call(that);
@@ -156,14 +181,22 @@ var __meta__ = {// jshint ignore:line
                     element.attr("id", id);
                 }
 
-                $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
+                that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
             }
+        },
+
+        _focusin: function() {
+            var that = this;
+
+            that.wrapper.addClass(FOCUSED);
         },
 
         _focusout: function() {
             var that = this;
             var value = that._value;
             var newValue = that.element.val();
+
+            that.wrapper.removeClass(FOCUSED);
 
             if (value !== newValue) {
                 that._value = newValue;
@@ -180,6 +213,7 @@ var __meta__ = {// jshint ignore:line
 
             wrapper = element.wrap("<span class='k-widget k-textbox'></span>").parent();
             wrapper[0].style.cssText = DOMElement.style.cssText;
+            DOMElement.style.width = "100%";
             that._inputWrapper = that.wrapper = wrapper.addClass(DOMElement.className).removeClass('input-validation-error');
         }
     });

@@ -28,26 +28,6 @@ The Switch displays two exclusive choices.
 
 1. Add a hybrid Telerik UI Switch to the `Index` view. Like most hybrid controls, the Switch must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("switch-view")
-            .Title("Inbox")
-            .Content(() =>
-            {
-                %>
-
-                <%: Html.Kendo().MobileSwitch()
-                    .Name("subscription-switch")
-                    .Checked(true)
-                    .OnLabel("YES")
-                    .OffLabel("NO")
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("switch-view")
             .Title("Inbox")
@@ -63,20 +43,12 @@ The Switch displays two exclusive choices.
 
             </text>)
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -86,19 +58,6 @@ You can subscribe to all hybrid Switch [events](https://docs.telerik.com/kendo-u
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileSwitch()
-        .Name("mobile-switch")
-        .Events(events => events.Change("onChange"))
-    %>
-
-    <script>
-        function onChange() {
-            // Handle the change event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileSwitch()
         .Name("mobile-switch")
         .Events(events => events.Change("onChange"))
@@ -109,7 +68,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the change event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

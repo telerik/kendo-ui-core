@@ -540,7 +540,7 @@ var __meta__ = { // jshint ignore:line
 
         scrollTo: function(x, y) {
             if (this._native) {
-                this.scrollElement.scrollLeft(abs(x));
+                kendo.scrollLeft(this.scrollElement, abs(x));
                 this.scrollElement.scrollTop(abs(y));
             } else {
                 this.dimensions.refresh();

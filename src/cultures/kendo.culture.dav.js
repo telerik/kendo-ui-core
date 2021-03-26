@@ -37,8 +37,8 @@
                     names: ["Mori ghwa imbiri","Mori ghwa kawi","Mori ghwa kadadu","Mori ghwa kana","Mori ghwa kasanu","Mori ghwa karandadu","Mori ghwa mfungade","Mori ghwa wunyanya","Mori ghwa ikenda","Mori ghwa ikumi","Mori ghwa ikumi na imweri","Mori ghwa ikumi na iwi"],
                     namesAbbr: ["Imb","Kaw","Kad","Kan","Kas","Kar","Mfu","Wun","Ike","Iku","Imw","Iwi"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["Luma lwa K","luma lwa k","LUMA LWA K"],
+                PM: ["luma lwa p","luma lwa p","LUMA LWA P"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

@@ -620,6 +620,14 @@ it("readonly calls dateinput _editable method", function() {
     assert.equal(atStub.calls("_editable"), 1);
 });
 
+it("value method should not clear DateInput format", function() {
+    var datepicker = new DatePicker(input, {
+        dateInput: true
+    });
+    datepicker.value("");
+    assert.isOk(datepicker.element.val());
+});
+
 it("enable calls dateinput _editable method", function() {
     var datepicker = new DatePicker(input, {
         dateInput: true

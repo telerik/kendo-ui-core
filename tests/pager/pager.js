@@ -735,19 +735,10 @@
             assert.isOk(!pager.hasClass("k-pager-sm"));
         });
 
-        it("add k-pager-lg class", function() {
-            var pager = setup();
-
-            pager.css("width", "1000px");
-            pager.data("kendoPager").resize();
-
-            assert.isOk(pager.hasClass("k-pager-lg"));
-        });
-
         it("add k-pager-md class", function() {
             var pager = setup();
 
-            pager.css("width", "600px");
+            pager.css("width", "500px");
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-md"));
@@ -760,6 +751,23 @@
             pager.data("kendoPager").resize();
 
             assert.isOk(pager.hasClass("k-pager-sm"));
+        });
+
+        it("no k-pager-sm class on breakpoint width", function() {
+            var dataOptions = {
+                data: [1, 2, 3, 4, 5],
+                page: 1,
+                pageSize: 1
+            };
+            var dataSource = new DataSource(dataOptions);
+            var options = {
+                dataSource: dataSource,
+                previousNext: false
+            };
+            var element = $("<div style='width: 480px;' />").appendTo(Mocha.fixture).kendoPager(options);
+            var pager = element.data("kendoPager");
+
+            assert.isOk(!pager.element.hasClass("k-pager-sm"));
         });
 
         it("no k-pager-lg class when responsive is false", function() {
@@ -815,6 +823,33 @@
             });
 
             assert.equal(pager.find(".k-pager-numbers .k-state-selected").length, 1);
+        });
+
+        it("info message is correct with dataSource with groupPaging enabled", function() {
+            var dataSource = new DataSource({
+                pageSize: 10,
+                data: [
+                    { name: "Tea", category: "Beverages" },
+                    { name: "Coffee", category: "Beverages" },
+                    { name: "Ham", category: "Food" }
+                  ],
+                  // group by the "category" field
+                  group: { field: "category" },
+                  groupPaging: true
+            });
+
+            dataSource.fetch(function(){
+                var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                    dataSource: dataSource
+                }).data('kendoPager');
+                debugger
+                dataSource._groupsState[dataSource.view()[0].uid] = true
+                pager.refresh();
+
+                assert.equal(pager.element.find(".k-pager-info").text(), "1 - 3 of 4 items");
+
+            });
+
         });
     });
 }());

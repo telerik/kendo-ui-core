@@ -3636,6 +3636,134 @@ The start position of the plot band in axis units.
     });
     </script>
 
+### categoryAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [categoryAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.plotbands#categoryaxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### categoryAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### categoryAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### categoryAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### categoryAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### categoryAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### categoryAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### categoryAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### categoryAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### categoryAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### categoryAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### categoryAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### categoryAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### categoryAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### categoryAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### categoryAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### categoryAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### categoryAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### categoryAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### categoryAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### categoryAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### categoryAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
+
 ### categoryAxis.plotBands.opacity `Number`
 
 The opacity of the plot band.
@@ -7357,6 +7485,113 @@ The spacing between the labels in pixels when the [legend.orientation](/api/java
     });
     </script>
 
+### legend.title `Object`
+
+The legend title configuration options or text.
+
+### legend.title.align `String` *(default: "center")*
+
+The alignment of the title.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+### legend.title.background `String` *(default: "white")*
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border `Object`
+
+The border of the title.
+
+### legend.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the legend title border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### legend.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+### legend.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### legend.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### legend.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### legend.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### legend.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### legend.title.padding `Number|Object` *(default: 5)*
+
+The padding of the title. A numeric value will set all margins.
+
+### legend.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### legend.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### legend.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### legend.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### legend.title.position `String` *(default: "top")*
+
+The position of the title.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+### legend.title.text `String`
+
+The text of the legend title. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### legend.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the title. By default the title will be displayed.
+
 ### legend.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the legend. By default the chart legend is visible.
@@ -7414,6 +7649,516 @@ The legend width when the [legend.orientation](/api/javascript/dataviz/ui/chart#
       ]
     });
     </script>
+
+
+### paneDefaults `Object`
+
+The default options for all panes.
+
+### paneDefaults.background `String`
+
+The background color of all chart panes. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the default panes background
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        background: "#00ff00"
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.border `Object`
+
+The border of all chart panes.
+
+#### Example - set the default pane border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          border: {
+            color: "red",
+            width: 2
+          }
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### paneDefaults.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### paneDefaults.clip `Boolean`
+
+Specifies whether the charts in the panes should be clipped. By default all charts except radar, polar and 100% stacked charts are clipped.
+
+#### Example - set the chart pane clip option
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        type: "line"
+      },
+      series: [
+        { data: [1, 100, 1] },
+        { data: [1, 100, 1], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane", max: 70 },
+        { pane: "bottom-pane", name: "bottom", max: 70 }
+      ],
+      paneDefaults: {
+        clip: false
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.height `Number`
+
+The default pane height in pixels.
+
+#### Example - set the default pane height
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        height: 200
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane"  }
+      ]
+    });
+    </script>
+
+### paneDefaults.margin `Number|Object` *(default: 0)*
+
+The margin of the panes. A numeric value will set all margins.
+
+#### Example - set the default pane margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        margin: 10
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the chart panes.
+
+### paneDefaults.margin.left `Number` *(default: 0)*
+
+The left margin of the chart panes.
+
+### paneDefaults.margin.right `Number` *(default: 0)*
+
+The right margin of the chart panes.
+
+### paneDefaults.margin.top `Number` *(default: 0)*
+
+The top margin of the chart panes.
+
+### paneDefaults.padding `Number|Object` *(default: 0)*
+
+The padding of the panes. A numeric value will set all paddings.
+
+#### Example - set the default pane padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+        padding: 10
+      },
+      panes: [
+        { name: "top-pane" },
+        { name: "bottom-pane" }
+      ]
+    });
+    </script>
+
+### paneDefaults.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the chart panes.
+
+### paneDefaults.padding.left `Number` *(default: 0)*
+
+The left padding of the chart panes.
+
+### paneDefaults.padding.right `Number` *(default: 0)*
+
+The right padding of the chart panes.
+
+### paneDefaults.padding.top `Number` *(default: 0)*
+
+The top padding of the chart panes.
+
+### paneDefaults.title `String|Object`
+
+The title configuration of the all panes.
+
+#### Example - set the font for all pane titles
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            font: "700 14px sans-serif"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.background `String`
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.title.border `Object`
+
+The border of the title.
+
+#### Example - set the default pane title border
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            border: {
+              color: "red",
+              width: 2
+            }
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### paneDefaults.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### paneDefaults.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### paneDefaults.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the default pane title color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            color: "#aa00bb"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the title.
+
+#### Example - set the default pane title font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            font: "20px sans-serif"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+#### Example - set the default pane title margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            margin: 10
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### paneDefaults.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### paneDefaults.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### paneDefaults.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### paneDefaults.title.position `String` *(default: "center")*
+
+The position of the title.
+
+The supported values are:
+
+* "left" - the axis title is positioned on the left (applicable to horizontal axis)
+* "right" - the axis title is positioned on the right (applicable to horizontal axis)
+* "center" - the axis title is positioned in the center
+
+#### Example - set the default pane title position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [
+        { data: [1, 2, 3] },
+        { data: [1, 2, 3, 4], axis: "bottom" }
+      ],
+      valueAxis: [
+        { pane: "top-pane" },
+        { pane: "bottom-pane", name: "bottom" }
+      ],
+      paneDefaults: {
+          title: {
+            position: "left"
+          }
+      },
+      panes: [
+        { name: "top-pane",
+          title: {
+            text: "Top"
+          }
+        },
+        { name: "bottom-pane",
+          title: {
+            text: "Bottom"
+          }
+        }
+      ]
+    });
+    </script>
+
+### paneDefaults.title.visual `Function`
+
+A function that can be used to create a custom visual for the title. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### panes `Array`
 
@@ -8842,6 +9587,11 @@ The author of the PDF document.
       chart.saveAsPDF();
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 The creator of the PDF document.
 
@@ -8934,6 +9684,14 @@ Specifies the file name of the exported PDF file.
       var chart = $("#chart").getKendoChart();
       chart.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 Specifies the keywords of the exported PDF file.
@@ -9648,9 +10406,47 @@ The supported values are:
 
 ### series.autoFit `Boolean` *(default: false)*
 
-If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series ([see example]({% slug pietypecharts_widget %}#auto-fit-labels)).
+If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series.
 
 > The `autoFit` option is supported when [series.type](/api/javascript/dataviz/ui/chart#configuration-series.type) is set to "pie" or "donut".
+
+##### Example - set the chart series autoFit
+
+    <div id="chart" style="width: 200px;"></div>
+    <script>
+    var data = [{
+      kind: 'Solar', share: 0.052
+    }, {
+      kind: 'Wind', share: 0.225
+    }, {
+      kind: 'Other', share: 0.192
+    }, {
+      kind: 'Hydroelectric', share: 0.175
+    }, {
+      kind: 'Nuclear', share: 0.238
+    }, {
+      kind: 'Coal', share: 0.118
+    }];
+
+    $("#chart").kendoChart({
+      dataSource: { data: data },
+      series: [{
+          type: "pie",
+          field: "share",
+          categoryField: "kind",
+          autoFit: true,
+          labels: {
+            color: "#000",
+            position: "outsideEnd",
+            template: "#: category #",
+            visible: true
+          }
+      }],
+      legend: {
+        visible: false
+      }
+    });
+    </script>
 
 ### series.axis `String` *(default: "primary")*
 
@@ -10878,6 +11674,210 @@ The data item field which contains the series q1 value.
       }]
     });
 
+### series.median `Object`
+
+The configuration of the Box Plot median value indicator (line).
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.color `String`
+
+The color of the median visual. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+          }
+        }]
+      });
+    </script>
+
+### series.median.dashType `String` *(default: "solid")*
+
+The dash type of the median visual.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.opacity `Number` *(default: 1)*
+
+The opacity of the median visual. By default the border is opaque.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.median.width `Number` *(default: 2)*
+
+The width of the median visual in pixels.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          median: {
+            color: 'yellow',
+            width: 20
+          }
+        }]
+      });
+    </script>
+
 ### series.medianField `String` *(default: "median")*
 
 The data item field which contains the series median value.
@@ -10967,6 +11967,210 @@ The data item field which contains the series upper value.
          outliersField: "outliers"
       }]
     });
+
+### series.mean `Object`
+
+The configuration of the Box Plot mean value indicator (line).
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.color `String`
+
+The color of the mean visual. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+          }
+        }]
+      });
+    </script>
+
+### series.mean.dashType `String` *(default: "dash")*
+
+The dash type of the mean visual.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.opacity `Number` *(default: 1)*
+
+The opacity of the mean visual. By default the border is opaque.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20,
+            opacity: 0.5,
+            dashType: "dot"
+          }
+        }]
+      });
+    </script>
+
+### series.mean.width `Number` *(default: 2)*
+
+The width of the mean visual in pixels.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+
+      $("#chart").kendoChart({
+        dataSource: {
+          data: [{
+            lower: 1,
+            q1: 2,
+            median: 3,
+            q3: 4,
+            upper: 5,
+            mean: 3.5,
+            outliers: [0,0,0.5,6,7,11]
+          }]
+        },
+        series: [{
+          type: "boxPlot",
+          lowerField: "lower",
+          q1Field: "q1",
+          medianField: "median",
+          q3Field: "q3",
+          upperField: "upper",
+          meanField: "mean",
+          outliersField: "outliers",
+          mean: {
+            color: 'yellow',
+            width: 20
+          }
+        }]
+      });
+    </script>
 
 ### series.meanField `String` *(default: "mean")*
 
@@ -11215,6 +12419,26 @@ The highlight color. Accepts a valid CSS color string, including hex and rgb.
       }]
     });
     </script>
+
+### series.highlight.inactiveOpacity `Number`
+
+The opacity of the series when another series is highlighted.
+
+#### Example - set the chart highlight inactive opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+          type: "donut",
+          data: [1, 2],
+          highlight: {
+            inactiveOpacity: 0.2
+          }
+      }]
+    });
+    </script>
+
 
 ### series.highlight.line `Object`
 
@@ -12934,6 +14158,27 @@ The rotation angle of the markers.
          }
       }]
     });
+
+### series.markers.zIndex `Number|Function`
+
+An optional Z-index that can be used to change the default stacking order of the markers.
+
+#### Example
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        data: [200, 450, 300, 125],
+        markers: {
+          type: "square",
+          rotation: 45,
+          zIndex: 5
+        }
+      }]
+    });
+    </script>
 
 ### series.outliers `Object`
 
@@ -18459,6 +19704,25 @@ The chart series tooltip configuration options.
     });
     </script>
 
+### tooltip.autoHide `Boolean`*(default: true)*
+
+Specifies if the tooltip will be hidden when the mouse leaves the target element. If set to `false`, a **Close** button will be shown within tooltip.
+
+#### Example - preventing the tooltip from closing automatically
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      tooltip: {
+        visible: true,
+        autoHide: false
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
 ### tooltip.background `String`
 
 The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.
@@ -21453,6 +22717,134 @@ The start position of the plot band in axis units.
       ]
     });
     </script>
+
+### valueAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [valueAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/valueAxis.plotbands#valueaxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### valueAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### valueAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### valueAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### valueAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### valueAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### valueAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### valueAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### valueAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### valueAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### valueAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### valueAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### valueAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### valueAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### valueAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### valueAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### valueAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### valueAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### valueAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### valueAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### valueAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### valueAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### valueAxis.plotBands.opacity `Number`
 
@@ -26270,6 +27662,134 @@ The start position of the plot band in axis units.
       }
     });
     </script>
+
+### xAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [xAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/xAxis.plotbands#xAxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### xAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### xAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### xAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### xAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### xAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### xAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### xAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### xAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### xAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### xAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### xAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### xAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### xAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### xAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### xAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### xAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### xAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### xAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### xAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### xAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### xAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### xAxis.plotBands.opacity `Number`
 
@@ -31217,6 +32737,134 @@ The start position of the plot band in axis units.
       }
     });
     </script>
+
+### yAxis.plotBands.label `Object`
+
+The label configuration of the plotband.
+
+> The [yAxis.plotBands.label.text](/api/javascript/dataviz/ui/chart/configuration/yAxis.plotbands#yAxisplotbandslabeltext) option must be set in order to display the plotband label.
+
+### yAxis.plotBands.label.align `String` *(default: "left")*
+
+The position of the plotband label.
+
+The supported values are:
+
+* "left" - the plotband label is positioned on the left
+* "right" - the plotband label is positioned on the right
+* "center" - the plotband label is positioned in the center
+
+### yAxis.plotBands.label.background `String`
+
+The background color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.border `Object`
+
+The border of the label.
+
+### yAxis.plotBands.label.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### yAxis.plotBands.label.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### yAxis.plotBands.label.color `String`
+
+The text color of the label. Accepts a valid CSS color string, including hex and rgb.
+
+### yAxis.plotBands.label.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font style of the label.
+
+### yAxis.plotBands.label.margin `Number|Object` *(default: 5)*
+
+The margin of the label. A numeric value will set all margins.
+
+### yAxis.plotBands.label.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the label.
+
+### yAxis.plotBands.label.margin.left `Number` *(default: 0)*
+
+The left margin of the label.
+
+### yAxis.plotBands.label.margin.right `Number` *(default: 0)*
+
+The right margin of the label.
+
+### yAxis.plotBands.label.margin.top `Number` *(default: 0)*
+
+The top margin of the label.
+
+### yAxis.plotBands.label.padding `Number|Object` *(default: 0)*
+
+The padding of the label. A numeric value will set all paddings.
+
+### yAxis.plotBands.label.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the label.
+
+### yAxis.plotBands.label.padding.left `Number` *(default: 0)*
+
+The left padding of the label.
+
+### yAxis.plotBands.label.padding.right `Number` *(default: 0)*
+
+The right padding of the label.
+
+### yAxis.plotBands.label.padding.top `Number` *(default: 0)*
+
+The top padding of the label.
+
+### yAxis.plotBands.label.position `String` *(default: "center")*
+
+The position of the label.
+
+The supported values are:
+
+* "top" - the axis label is positioned on the top
+* "bottom" - the axis label is positioned on the bottom
+* "center" - the axis label is positioned in the center
+
+### yAxis.plotBands.label.rotation `Number` *(default: 0)*
+
+The rotation angle of the label. By default the label is not rotated.
+
+### yAxis.plotBands.label.text `String`
+
+The text of the label.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### yAxis.plotBands.label.visible `Boolean` *(default: true)*
+
+If set to `false` the chart will not display the label.
+
+### yAxis.plotBands.label.visual `Function`
+
+A function that can be used to create a custom visual for the label. The available argument fields are:
+
+* text - the label text.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* options - the label options.
+* createVisual - a function that can be used to get the default visual.
 
 ### yAxis.plotBands.opacity `Number`
 

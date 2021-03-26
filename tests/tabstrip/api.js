@@ -361,6 +361,31 @@
             }
         });
 
+        it('insertAfter regenerates tabs and content IDs', function() {
+            var tabStrip = $("<div id='tabstrip'><ul><li>Tab 1</li><li>Tab 2</li></ul><div>Content 1</div><div>Content 2</div></div>").kendoTabStrip().data("kendoTabStrip");
+
+            assert.equal(tabStrip.wrapper.find(".k-item").length, 2);
+            assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
+            assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
+            assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
+            assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
+
+            try {
+                tabStrip.insertAfter({ text: "new", content: "inserted" }, "li:last-child");
+
+                assert.equal(tabStrip.wrapper.find(".k-item").length, 3);
+                assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
+                assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
+                assert.equal(tabStrip.wrapper.find(".k-item")[2].id, "tabstrip-tab-3");
+
+                assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
+                assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
+                assert.equal(tabStrip.wrapper.find(".k-content")[2].id, "tabstrip-3");
+            } finally {
+                tabStrip.destroy();
+            }
+        });
+
         it('insertAfter method moves a tab and its content elements when contentUrls option is used', function() {
             var tabStrip = $("<div><ul><li>Tab 1</li><li>Tab 2</li></ul></div>").kendoTabStrip({
                 contentUrls: [
@@ -418,6 +443,31 @@
                 assert.equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
                 assert.equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
                 assert.equal(tabStrip._contentUrls[0], 'index2.html');
+            } finally {
+                tabStrip.destroy();
+            }
+        });
+
+        it('insertBefore regenerates tabs and content IDs', function() {
+            var tabStrip = $("<div id='tabstrip'><ul><li>Tab 1</li><li>Tab 2</li></ul><div>Content 1</div><div>Content 2</div></div>").kendoTabStrip().data("kendoTabStrip");
+
+            assert.equal(tabStrip.wrapper.find(".k-item").length, 2);
+            assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
+            assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
+            assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
+            assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
+
+            try {
+                tabStrip.insertBefore({ text: "new", content: "inserted" }, "li:first-child");
+
+                assert.equal(tabStrip.wrapper.find(".k-item").length, 3);
+                assert.equal(tabStrip.wrapper.find(".k-item")[0].id, "tabstrip-tab-1");
+                assert.equal(tabStrip.wrapper.find(".k-item")[1].id, "tabstrip-tab-2");
+                assert.equal(tabStrip.wrapper.find(".k-item")[2].id, "tabstrip-tab-3");
+
+                assert.equal(tabStrip.wrapper.find(".k-content")[0].id, "tabstrip-1");
+                assert.equal(tabStrip.wrapper.find(".k-content")[1].id, "tabstrip-2");
+                assert.equal(tabStrip.wrapper.find(".k-content")[2].id, "tabstrip-3");
             } finally {
                 tabStrip.destroy();
             }

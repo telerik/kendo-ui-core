@@ -60,6 +60,13 @@ Due to the fact that `ClientGroupHeaderTemplate` is displayed next to the expand
 
 ![A Grid with GroupHeaderColumnTemplate for first column applied and no GroupHeaderTemplate](../images/grid-group-header-column-template-first-column.png)
 
+{% if site.mvc %}In a server-binding scenario, you can set the group templates without the `Client` prefix&mdash;`GroupHeaderTemplate`, `GroupHeaderColumnTemplate`, and `GroupFooterTemplate`. For more information, refer to the demo on [server aggregates of the Grid](https://demos.telerik.com/aspnet-mvc/grid/serveraggregates).
+{% else %}
+## Limitations
+
+Тhe Grid for Core is not rendered on the server. Therefore, it is not possible to define server-side templates which makes the usage of `.ServerOperations(true)` in this case incompatible.
+{% endif %}
+
 ## See Also
 
 * [Templates by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/toolbar-template)

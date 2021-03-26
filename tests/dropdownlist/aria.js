@@ -2,6 +2,93 @@
     var DropDownList = kendo.ui.DropDownList,
         input;
 
+        describe("kendo.ui.DropDownList WAI-ARIA with AXE", function () {
+            beforeEach(function() {
+                kendo.ns = "kendo-";
+                input = $("<input id='ddl' />").appendTo(Mocha.fixture);
+                $("<label for='ddl'>Label</label>").appendTo(Mocha.fixture);
+            });
+            afterEach(function() {
+                kendo.ns = "";
+                var ddl = input.data("kendoDropDownList");
+
+                if (ddl) {
+                    ddl.destroy();
+                    ddl.wrapper.remove();
+                } else {
+                    input.remove();
+                }
+            });
+
+            it("DropDownList is accessible", function(done) {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["test"]
+                });
+
+                axeRunFixture(done);
+            });
+
+            it("DropDownList with optionLabel is accessible", function(done) {
+                var ddl = new DropDownList(input, {
+                    optionLabel: "Select",
+                    dataSource: ["test"]
+                });
+
+                axeRunFixture(done);
+            });
+
+            it("DropDownList with DataSource is accessible", function(done) {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"]
+                });
+
+                axeRunFixture(done);
+            });
+
+            // Fails because of the aria-expanded attribute on a role="textbox" element
+            it("DropDownList with search term is accessible", function(done) {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"],
+                    filter: "contains"
+                });
+
+                ddl.search("I");
+
+                axeRunFixture(done);
+            });
+
+            it("DropDownList with search term has accessible popup", function(done) {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"]
+                });
+
+                ddl.search("I");
+
+                axeRun(ddl.popup.element[0], done);
+            });
+
+            it("DropDownList with value is accessible", function(done) {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"],
+                    value: "Item"
+                });
+
+                axeRunFixture(done);
+            });
+
+            it("DropDownList with templates has accessible popup", function(done) {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"],
+                    footerTemplate: 'Total items found',
+                    headerTemplate: 'Total items found'
+                });
+
+                ddl.search("I");
+
+                axeRun(ddl.popup.element[0], done);
+            });
+        });
+
     describe("kendo.ui.DropDownList Aria", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
@@ -28,7 +115,7 @@
         it("DropDownList renders aria-haspopup", function() {
             var dropdownlist = new DropDownList(input);
 
-            assert.equal(dropdownlist.wrapper.attr("aria-haspopup"), "true");
+            assert.equal(dropdownlist.wrapper.attr("aria-haspopup"), "listbox");
         });
 
         it("DropDownList renders aria-expanded", function() {
@@ -48,7 +135,7 @@
                 dataSource: ["Item", "Item2"]
             });
 
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input")[0].id);
         });
 
         it("DropDownList renders aria-selected", function() {
@@ -65,7 +152,7 @@
                 filter: "startswith"
             });
 
-            assert.equal(dropdownlist.filterInput.attr("role"), "listbox");
+            assert.equal(dropdownlist.filterInput.attr("role"), "searchbox");
         });
 
         it("DropDownList renders aria-haspopup to filter input", function() {
@@ -73,23 +160,51 @@
                 filter: "startswith"
             });
 
-            assert.equal(dropdownlist.filterInput.attr("aria-haspopup"), "true");
+            assert.equal(dropdownlist.filterInput.attr("aria-haspopup"), "listbox");
         });
 
-        it("DropDownList renders aria-expanded to filter input", function() {
-            var dropdownlist = new DropDownList(input, {
-                filter: "startswith"
-            });
-
-            assert.equal(dropdownlist.filterInput.attr("aria-expanded"), "false");
-        });
-
-        it("DropDownList renders aria-owns to filter input", function() {
+        it("DropDownList renders aria-owns to wrapper element", function() {
             var dropdownlist = new DropDownList(input.attr("id", "test"), {
                 filter: "startswith"
             });
 
-            assert.equal(dropdownlist.filterInput.attr("aria-owns"), dropdownlist.ul.attr("id"));
+            assert.equal(dropdownlist.wrapper.attr("aria-owns"), dropdownlist.ul.attr("id"));
+        });
+
+        it("DropDownList adds custom title to filter input", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                filterTitle: "custom"
+            });
+
+            assert.equal(dropdownlist.filterInput.attr("title"), "custom");
+        });
+
+        it("DropDownList adds aria-autocomplete to filter input", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                filterTitle: "custom"
+            });
+
+            assert.equal(dropdownlist.filterInput.attr("aria-autocomplete"), "list");
+        });
+
+        it("DropDownList adds custom title to filter input", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                filterTitle: "custom"
+            });
+
+            assert.equal(dropdownlist.filterInput.attr("title"), "custom");
+        });
+
+        it("DropDownList adds custom title to filter input", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                filterTitle: "custom"
+            });
+
+            assert.equal(dropdownlist.filterInput.attr("title"), "custom");
         });
 
         it("DropDownList renders aria-activedescendant", function() {
@@ -117,7 +232,7 @@
 
             assert.isOk(current.attr("id"));
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.current()[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input")[0].id);
         });
 
         it("widget removes aria id from the optionLabel", function() {

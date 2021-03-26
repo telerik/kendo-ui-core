@@ -261,19 +261,13 @@ Get the unique URL for each of the functions by clicking the **Get Function URL*
 <div id="grid"></div>
 <script>
   $(document).ready(function () {
-    function customBoolEditor(container, options) {
-      var guid = kendo.guid();
-      $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-      $('<label class="k-checkbox-label" for="' + guid + '">&#8203;</label>').appendTo(container);
-    }
-
     $("#grid").kendoGrid({
       toolbar: ["create"],
       columns: [
         { field:"ProductName", title: "Product Name", width: "150px" },
         { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "110px" },
         { field: "UnitsInStock", title:"Units In Stock", width: "110px" },
-        { field: "Discontinued", width: "110px", editor: customBoolEditor },
+        { field: "Discontinued", width: "110px" },
         { command: ["edit", "destroy"], title: "&nbsp;", width: "190px" }],
       editable: "popup",
       dataSource: {

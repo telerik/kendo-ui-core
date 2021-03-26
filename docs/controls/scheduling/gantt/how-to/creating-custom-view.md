@@ -82,9 +82,8 @@ The following example demonstrates how to create a custom view in the Kendo UI G
           ],
           listWidth: 500,
           dataBound: function() {
-            var height = this.timeline.view()._slots.length * 2.5;
-            this.list.header.find("tr").height(height + "em");
-            this.list._adjustHeight();
+            var height = this.timeline.view().header.height();
+						this.list.thead.find('tr').css('height',height);
           },
           dataSource: {
             data: [{ id: 1, parentId: null, percentComplete: 0.2, orderId: 0, title: "foo", start: new Date("05/05/2014 09:00"), end: new Date("06/06/2014 10:00") },

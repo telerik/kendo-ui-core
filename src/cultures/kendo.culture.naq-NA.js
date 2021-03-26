@@ -37,8 +37,8 @@
                     names: ["ǃKhanni","ǃKhanǀgôab","ǀKhuuǁkhâb","ǃHôaǂkhaib","ǃKhaitsâb","Gamaǀaeb","ǂKhoesaob","Aoǁkhuumûǁkhâb","Taraǀkhuumûǁkhâb","ǂNûǁnâiseb","ǀHooǂgaeb","Hôasoreǁkhâb"],
                     namesAbbr: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["ǁgoagas","ǁgoagas","ǁGOAGAS"],
+                PM: ["ǃuias","ǃuias","ǃUIAS"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

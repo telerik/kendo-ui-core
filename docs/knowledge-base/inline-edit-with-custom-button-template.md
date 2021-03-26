@@ -112,15 +112,10 @@ Use the `addRow` and `removeRow` methods of the Grid.
                 { field: "UnitsInStock", title:"Units In Stock"},
                 { template: "<button class='customEdit'>My Edit</button>", title:"Custom Edit"},
                 { template: "<button class='customDelete'>My Delete</button>", title:"Custom Delete"},
-                { field: "Discontinued", width: "120px", editor: customBoolEditor },
+                { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }]
             });
           });
-
-          function customBoolEditor(container, options) {
-            $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-            $('<label class="k-checkbox-label">​</label>').appendTo(container);
-          }
         </script>
     ```
 

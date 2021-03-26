@@ -76,7 +76,7 @@ On mobile devices where a scrollbar that can be grabbed and dragged is not visib
 
 * Horizontal scrolling is not virtualized.
 * Either enable virtual scrolling or paging. Do not apply both features at the same time.
-* Virtual scrolling is not compatible with grouping and hierarchy. Editing is supported as of R3 2017.
+* Virtual scrolling is not compatible with hierarchy. Editing is supported as of R3 2017. [Group paging]({% slug htmlhelpers_grid_aspnet_grouping %}) is supported as of R2 2020.
 * Virtual scrolling relies on calculating the average row height based on already loaded data. Having a large variance of row heights or an unknown number of rows that are not bound to data (such as group headers) might cause unexpected behavior.
 * Provide for a page size of the Grid that is large enough, so that the table rows do not fit in the scrollable data area. Otherwise the vertical virtual scrollbar will not be created. The page size of the Grid must be over three times larger than the number of visible table rows in the data area.
 * A scrollable Grid with a set height needs to be visible when initialized. In this way the Grid adjusts the height of its scrollable data area in accordance with the total height of the widget. In certain scenarios the Grid might be invisible when initialized - for example, when placed inside an initially inactive TabStrip tab or in another widget. In such cases use either of the following options:

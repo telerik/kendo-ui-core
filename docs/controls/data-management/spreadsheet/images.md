@@ -1,6 +1,6 @@
 ---
 title: Images
-page_title: jQuery Spreadsheet Documentation | Images | Kendo UI
+page_title: jQuery Spreadsheet Documentation | Images
 description: "Get started with the jQuery Spreadsheet by Kendo UI and place an image in the widget."
 slug: images_spreadsheet_widget
 position: 2
@@ -108,7 +108,7 @@ The Spreadsheet Sheet API exposes a method that allows you to programmatically a
                 offsetY: 10,
                 width: 320,
                 height: 220,
-                image: spread.addImage("../images/1.jpg")
+                image: spreadsheet.addImage("../images/1.jpg")
             });
 
             sheet.addDrawing(drawing);

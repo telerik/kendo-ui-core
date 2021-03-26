@@ -1,0 +1,94 @@
+// Textarea
+.k-textarea {
+    .fill(
+        @textarea-text,
+        @textarea-bg,
+        @textarea-border
+    );
+
+    // Placeholder
+    &::placeholder,
+    > .k-input::placeholder {
+        color: @textarea-placeholder-text;
+        opacity: @textarea-placeholder-opacity;
+        user-select: none;
+    }
+
+    // Selection
+    &::selection,
+    .k-input::selection {
+        .fill (
+            @text: @textarea-selected-text,
+            @bg: @textarea-selected-bg
+        );
+    }
+
+    // Focused
+    &:focus,
+    &:focus-within,
+    &.k-state-focus,
+    &.k-state-focused {
+        .fill (
+            @textarea-focused-text,
+            @textarea-focused-bg,
+            @textarea-focused-border
+        );
+        .box-shadow( @textarea-focused-shadow );
+    }
+
+    // Hovered
+    &:hover,
+    &.k-state-hover {
+        .fill(
+            @textarea-hovered-text,
+            @textarea-hovered-bg,
+            @textarea-hovered-border
+        );
+    }
+
+    // Invalid
+    &.k-invalid,
+    &.k-state-invalid,
+    &.ng-invalid.ng-touched,
+    &.ng-invalid.ng-dirty {
+        border-color: @textarea-invalid-border;
+
+        &:focus,
+        &:focus-within,
+        &.k-state-focus,
+        &.k-state-focused {
+            .box-shadow(@textarea-invalid-shadow);
+        }
+    }
+
+    // Disabled
+    &:disabled,
+    &[disabled],
+    &.k-state-disabled {
+
+        &::selection {
+            color: @textarea-text;
+            background-color: transparent;
+        }
+    }
+}
+
+// Textarea Floating label
+.k-floating-label-container.k-textarea-container,
+.k-textbox-container.k-textarea-container {
+
+    > .k-label {
+        .fill( @text: @textarea-text );
+    }
+}
+
+// TODO: Remove once we drop IE support
+.k-ie {
+    .k-textarea {
+        :-ms-input-placeholder,
+        &:-ms-input-placeholder {
+            color: @textarea-placeholder-text;
+        }
+
+    }
+}

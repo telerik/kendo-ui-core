@@ -405,12 +405,23 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
     "editorTitle": "Задача",
     "end": "Край",
     "percentComplete": "Завършено",
+    "plannedStart": "Планирано начало",
+    "plannedEnd": "Планиран край",
     "resources": "Ресурси",
     "resourcesEditorTitle": "Ресурси",
     "resourcesHeader": "Ресурси",
     "start": "Начало",
     "title": "Заглавие",
     "unitsHeader": "Единици"
+  },
+  "plannedTasks": {
+    "switchText": "Планирана задача",
+    "offsetTooltipAdvanced": "Изпълнена предварително",
+    "offsetTooltipDelay": "Закъснение",
+    "seconds": "секунди",
+    "minutes": "минути",
+    "hours": "часa",
+    "days": "дни"
   },
   "save": "Запази",
   "views": {
@@ -560,12 +571,16 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "filter": "Филтрирай",
   "column": "Колона",
   "columns": "Колони",
+  "columnVisibility": "Видими колони",
   "clear": "Премахни",
   "cancel": "Откажи",
   "done": "Готово",
   "settings": "Настройки на колоната",
-  "lock": "Заключи",
-  "unlock": "Отключи"
+  "lock": "Заключи колоната",
+  "unlock": "Отключи колоната",
+  "stick" : "Залепи колоната",
+  "unstick": "Отлепи колоната",
+  "setColumnPosition": "Задай позиция на колоната"
 });
 }
 
@@ -574,6 +589,7 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "repeat": "Повторение",
   "daily": {
     "interval": " ден(дни)",
     "repeatEvery": "Повтаряй всеки: "
@@ -597,7 +613,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "day": "Ден ",
     "interval": " месец(и)",
     "repeatEvery": "Повтаряй всеки: ",
-    "repeatOn": "Повтаряй на: "
+    "repeatOn": "Повтаряй на: ",
+    "date": "Дата"
   },
   "offsetPositions": {
     "first": "първи(а)",
@@ -615,7 +632,10 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "of": " от ",
     "repeatEvery": "Повтаряй всеки: ",
     "repeatOn": "Повтаряй на: ",
-    "interval": " година(ни)"
+    "interval": " година(ни)",
+    "month": "месец",
+    "day": "ден",
+    "date": "Дата"
   },
   "weekdays": {
     "day": "ден",
@@ -623,6 +643,38 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "weekend": "почивен ден"
   }
 });
+}
+
+/* MobileRecurrenceEditor messages */
+
+if (kendo.ui.MobileRecurrenceEditor) {
+    kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
+    $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "endTitle": "Повтарянето завършва",
+      "repeatTitle": "Вид повторение",
+      "headerTitle": "Повтори събитието",
+      "end": {
+        "patterns": {
+            "never": "Никога",
+            "after": "След...",
+            "on": "На..."
+        }
+      },
+      "monthly": {
+        "repeatBy": "Повтори според: ",
+        "dayOfMonth": "Дата от месеца",
+        "dayOfWeek": "Ден от седмицата",
+        "every": "Всеки"
+      },
+      "yearly": {
+        "repeatBy": "Повтори според: ",
+        "dayOfMonth": "Дата от месеца",
+        "dayOfWeek": "Ден от седмицата",
+        "every": "Всеки",
+        "month": "Месец",
+        "day": "Ден"
+      }
+    });
 }
 
 /* Grid messages */
@@ -640,7 +692,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Експорт към PDF",
     "save": "Запази промените",
     "select": "Избери",
-    "update": "Обнови"
+    "update": "Обнови",
+    "search": "Търси..."
   },
   "editable": {
     "cancelDelete": "Откажи",
@@ -648,7 +701,6 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "confirmDelete": "Изтрий"
   },
   "noRecords": "Няма налични записи.",
-  "search": "Търси...",
   "groupHeader": "Натиснете ctrl + space за да групирате",
   "ungroupHeader": "Натиснете ctrl + space за да разгрупирате"
 });
@@ -980,7 +1032,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "deleteWindowTitle": "Изтрий събитие",
   "showFullDay": "Покажи цял ден",
-  "showWorkDay": "Покажи работни часове"
+  "showWorkDay": "Покажи работни часове",
+  "search": "Намери..."
 });
 }
 
@@ -1114,6 +1167,129 @@ if (kendo.ui.Chat) {
         "placeholder": "Напиши съобщение...",
         "toggleButton": "Отвори/затвори лентата с инструменти",
         "sendButton": "Изпрати съобщение"
+    });
+}
+
+/* TimePicker */
+
+if (kendo.ui.TimePicker) {
+    kendo.ui.TimePicker.prototype.options.messages =
+    $.extend(true, kendo.ui.TimePicker.prototype.options.messages, {
+        "set": "Приложи",
+        "cancel": "Отмени",
+        "hour": "час",
+        "minute": "минути",
+        "second": "секунди",
+        "milisecond": "милисекунди",
+        "now": "Сега"
+    });
+}
+
+/* DateTimePicker */
+
+if (kendo.ui.DateTimePicker) {
+  kendo.ui.DateTimePicker.prototype.options.messages =
+  $.extend(true, kendo.ui.DateTimePicker.prototype.options.messages, {
+      "set": "Приложи",
+      "cancel": "Отмени",
+      "hour": "час",
+      "minute": "минути",
+      "second": "секунди",
+      "milisecond": "милисекунди",
+      "now": "Сега",
+      "date": "Дата",
+      "time": "Час"
+  });
+}
+
+/* Calendar */
+
+if (kendo.ui.Calendar) {
+  kendo.ui.Calendar.prototype.options.messages =
+  $.extend(true, kendo.ui.Calendar.prototype.options.messages, {
+    "today": "Днес"
+  });
+}
+
+/* Wizard messages */
+
+if (kendo.ui.Wizard) {
+    kendo.ui.Wizard.prototype.options.messages =
+    $.extend(true, kendo.ui.Wizard.prototype.options.messages,{
+        "reset": "Нулиране",
+        "previous": "Предишна",
+        "next": "Следваща",
+        "done": "Готово",
+        "step": "Стъпка",
+        "of": "от"
+    });
+}
+
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+    kendo.ui.PDFViewer.prototype.options.messages =
+    $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+        defaultFileName: "Документ",
+        toolbar: {
+            zoom: {
+                zoomLevel: "ниво на приближение",
+                zoomOut: "Отдалечи",
+                zoomIn: "Приближи",
+                actualWidth: "Действителна ширина",
+                autoWidth: "Автоматична ширина",
+                fitToWidth: "Изпълни ширината",
+                fitToPage: "Покажи цяла страница"
+            },
+            open: "Отвори",
+            exportAs: "Експортирай",
+            download: "Свали",
+            pager:  {
+                first: "Отиди на първата страница",
+                previous: "Отиди на предишната страница",
+                next: "Отиди на следващата страница",
+                last: "Отиди на последната страница",
+                of: " от {0} ",
+                page: "страница",
+                pages: "страници"
+            },
+            print: "Разпечатай",
+            toggleSelection: "Активирай селектиране",
+            togglePan: "Активирай местене",
+            search: "Търси"
+        },
+        errorMessages: {
+            notSupported: "Разрешени са само файлове в PDF.",
+            parseError: "Неуспешно обработване на PDF файлът.",
+            notFound: "Файлът не беше открит.",
+            popupBlocked: "Изскачащият прозорец беше блокиран."
+        },
+        dialogs: {
+            exportAsDialog: {
+                title: "Експортирай...",
+                defaultFileName: "Документ",
+                pdf: "Portable Document Format (.pdf)",
+                png: "Portable Network Graphics (.png)",
+                svg: "Scalable Vector Graphics (.svg)",
+                labels: {
+                    fileName: "Име на файла",
+                    saveAsType: "Сапази като",
+                    page: "Страница"
+                }
+            },
+            okText: "ОК",
+            save: "Сапази",
+            cancel: "Отмени",
+            search: {
+                inputLabel: "Търси текст",
+                matchCase: "Търси според малки/големи букви",
+                next: "Следващо съвпадение",
+                previous: "Предишно съвпадение",
+                close: "Затвори",
+                of: "от"
+            }
+        }
     });
 }
 

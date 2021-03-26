@@ -60,6 +60,7 @@ it("_change raises the change event if value has changed", function(done) {
 
     combobox.value("bar");
     combobox._old = "foo";
+    combobox._oldText = "foo";
     combobox._change();
 });
 
@@ -75,6 +76,7 @@ it("_change raises the input change event", function(done) {
 
     combobox.value("bar");
     combobox._old = "foo";
+    combobox._oldText = "foo";
     combobox._change();
 });
 

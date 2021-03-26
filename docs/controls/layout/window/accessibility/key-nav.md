@@ -1,6 +1,6 @@
 ---
 title: Keyboard Navigation
-page_title: jQuery Window Documentation | Keyboard Navigation | Kendo UI
+page_title: jQuery Window Documentation | Keyboard Navigation
 description: "Get started with the jQuery Window by Kendo UI and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: keynav_window
 position: 2

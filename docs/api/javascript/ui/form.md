@@ -30,6 +30,47 @@ Specifies the [template](/api/javascript/kendo/methods/template) which is used f
         });
     </script>
 
+### focusFirst `Boolean` *(default: false)*
+
+Specifies if the first editor of the form will be focused on initialization.
+
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                Name: "Ivan",
+                ZipCode: 1000
+            },
+            focusFirst: true
+        });
+    </script>
+
+### formatLabel `Function`
+
+Callback function that could be used to change the default format of the automatically generated labels.
+
+> Note: this callback takes effect only if the items option or items.label property are not specified and labels are being automatically generated.
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                Name: "Ivan",
+                ZipCode: 1000
+            },
+            formatLabel: function(field) {
+                return field + ":";
+            }
+        });
+    </script>
+
 ### formData `Object`
 
 Provides the data model of the Form.
@@ -78,7 +119,7 @@ A JavaScript array that contains the Form's items configuration.
 
 ### items.type `String`
 
-Defines the type of the item - "fieldset" or "group".
+Defines the type of the item. Available options: "group".
 
 ### items.field `String`
 
@@ -88,9 +129,9 @@ Maps to the model field which will be configured and sets the name of the input.
 
 Defines the editor widget type. Available options are:
 
-* DropDown widgets - "AutoComplete", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
+* DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
-* Input widgets - "NumericTextBox", "MaskedTextBox", "Switch", "Rating", "Slider", "ColorPicker"
+* Input widgets - "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker"
 * Editor widget - "Editor"
 
 ### items.editorOptions `Object`
@@ -113,6 +154,10 @@ Defines the text of the label.
 
 Specifies if the field is optional by rendering additional text next to the label.
 
+### items.label.encoded `Boolean` *(default: true)*
+
+Specifies if the label text will HTML-encoded before it is displayed. If set to `false` the label text will be displayed as is.
+
 ### items.id `String`
 
 Defines the field id.
@@ -128,6 +173,10 @@ Defines the hint text that will be shown underneath the form editor.
 ### items.colSpan `Number`
 
 Defines the field size when grid layout is used.
+
+### items.attributes `Object`
+
+Defines the attributes that are applied to the input element.
 
 ### orientation `String`
 
@@ -154,6 +203,110 @@ By default, the Form is rendered with vertical orientation.
                 field: "Address",
                 label: "Address:"
             }]
+        });
+    </script>
+
+### messages `Object`
+
+Configures text messages displayed in the Form. Use it to customize or localize the Form messages.
+
+#### Example - customize form submit and clear buttons messages
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }],
+            messages: {
+                submit: "Custom Submit Button Text",
+                clear: "Custom Clear Button Text"
+            }
+        });
+    </script>
+
+### messages.submit `String` *(default: "Submit")*
+
+The text message displayed for the Form submit button.
+
+#### Example - set the submit button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }],
+            messages: {
+                submit: "Custom Submit Button Text"
+            }
+        });
+    </script>
+
+### messages.clear `String` *(default: "Clear")*
+
+The text message displayed for the Form clear button.
+
+#### Example - set the clear button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: "Name:"
+            }],
+            messages: {
+                clear: "Custom Clear Button Text"
+            }
+        });
+    </script>
+
+### messages.optional `String` *(default: "(Optional)")*
+
+The text message displayed next to a field label when the [items.label.optional](items.label.optional) option is set to `true`.
+
+#### Example - set the clear button message
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            orientation: "horizontal",
+            formData: {
+                ID: 1,
+                Name: "Ivan"
+            },
+            items: [{
+                field: "Name",
+                label: {
+                    text: "Name:",
+                    optional: true
+                }
+            }],
+            messages: {
+                optional: "(Optional field)"
+            }
         });
     </script>
 
@@ -191,7 +344,7 @@ Configures the built-in Validator options.
 
 ### validatable.validateOnBlur `Boolean` *(default: true)*
 
-Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/validateOnBlur) option.
+Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/configuration/validateonblur) option.
 
 #### Example - set validateOnBlur
 
@@ -219,9 +372,9 @@ Configures the Form Validator [validateOnBlur](/api/javascript/ui/validator/vali
         });
     </script>
 
-### validatable.validationSummary `Boolean|Object` *(default: true)*
+### validatable.validationSummary `Boolean|Object` *(default: false)*
 
-Configures the Form Validator [validationSummary](/api/javascript/ui/validator/validationSummary) option.
+Configures the Form Validator [validationSummary](/api/javascript/ui/validator/configuration/validationsummary) option.
 
 #### Example - set validationSummary to false
 
@@ -280,7 +433,7 @@ Configures the Form Validator [validationSummary](/api/javascript/ui/validator/v
 
 ### validatable.errorTemplate `String|Function`
 
-Configures the Form Validator [errorTemplate](/api/javascript/ui/validator/errorTemplate) option.
+Configures the Form Validator [errorTemplate](/api/javascript/ui/validator/configuration/errortemplate) option.
 
 #### Example - change validation message
 
@@ -332,7 +485,7 @@ Defines the width of the gutters between the columns / rows.
 
 ### validate
 
-Validates the form by executing the Form Validator [validate() method](/api/javascript/ui/validator/validate).
+Validates the form by executing the Form Validator [validate() method](/api/javascript/ui/validator/methods/validate).
 
 #### Example
 

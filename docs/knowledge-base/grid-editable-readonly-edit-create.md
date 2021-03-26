@@ -18,7 +18,7 @@ res_type: kb
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>2018.2.516</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -123,7 +123,7 @@ The following example demonstrates how, upon creating a new record, `ProductName
             { field: "ProductName", editable: isEditable},
             { field: "UnitPrice", editable: isEditable, title: "Unit Price", format: "{0:c}", width: "120px" },
             { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-            { field: "Discontinued", width: "120px", editor: customBoolEditor },
+            { field: "Discontinued", width: "120px" },
             { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
           editable: "inline"
         });
@@ -133,12 +133,6 @@ The following example demonstrates how, upon creating a new record, `ProductName
         var dataSource = $("#grid").data("kendoGrid").dataSource;
         // If the id(ProductID) is null, then it is editable.
         return e.ProductID == null;
-      }
-
-      function customBoolEditor(container, options) {
-        var guid = kendo.guid();
-        $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-        $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
       }
     </script>
 ```

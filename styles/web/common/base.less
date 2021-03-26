@@ -8,9 +8,9 @@
 
 .k-no-click { pointer-events: none; }
 
-.k-floatwrap:after,.k-slider-items:after,.k-grid-toolbar:after {content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
-.k-floatwrap,.k-slider-items,.k-grid-toolbar {display:inline-block;}
-.k-floatwrap,.k-slider-items,.k-grid-toolbar {display:block;}
+.k-floatwrap:after,.k-slider-items:after {content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
+.k-floatwrap,.k-slider-items {display:inline-block;}
+.k-floatwrap,.k-slider-items {display:block;}
 
 // main gradient
 
@@ -22,11 +22,9 @@
 .k-pager-wrap,
 .k-tabstrip-items .k-item,
 .k-link.k-state-hover,
-.k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
 .k-numeric-wrap,
-.k-autocomplete.k-state-hover,
 .k-dropdown-wrap.k-state-hover,
 .k-picker-wrap.k-state-hover,
 .k-numeric-wrap.k-state-hover,
@@ -35,8 +33,7 @@
     background-position: 0 center;
 }
 
-.k-link:hover
-{
+.k-link:hover {
     text-decoration: none;
 }
 
@@ -47,18 +44,43 @@
 
 // widget
 
+.k-textbox,
 .k-textbox > input,
+.k-textbox > .k-input,
+.k-textarea,
 .k-textarea > textarea,
+.k-textarea > .k-input
 .k-multiselect .k-input,
 .k-input[type="text"],
 .k-input[type="number"],
-.k-textbox,
-.k-textarea,
 .k-picker-wrap .k-input {
     font-size: 100%;
     font-family: inherit;
     border-style: solid;
     border-width: 1px;
+    -webkit-appearance: none;
+}
+
+// TODO: Refactor after R1 2020; After unifying inputs features/rendering.
+.k-textbox > .k-input,
+.k-textarea > .k-input,
+.k-searchbox > .k-input {
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+    box-shadow: none;
+    color: inherit;
+    background: none;
+    font: inherit;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
     -webkit-appearance: none;
 }
 
@@ -482,7 +504,6 @@ html .k-error-colored
 }
 
 .k-textbox,
-.k-textarea,
 .k-autocomplete,
 .k-tabstrip > .k-content > .km-scroll-container,
 .k-block,
@@ -551,12 +572,70 @@ html .k-error-colored
     color: inherit;
 }
 
-.k-i-drag-and-drop,
+// Drop Hint
+.k-drop-hint {
+    display: flex;
+    gap: @drop-hint-arrow-spacing;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+
+.k-drop-hint-start,
+.k-drop-hint-end {
+    flex-shrink: 0;
+    border-width: (@drop-hint-arrow-size / 2);
+    border-style: solid;
+    border-color: transparent;
+}
+
+.k-drop-hint-line {
+    flex-grow: 1;
+}
+
+.k-drop-hint-h {
+    .k-drop-hint-start {
+        border-left-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-right-width: 0;
+    }
+
+    .k-drop-hint-line {
+        width: @drop-hint-line-h-width;
+        height: @drop-hint-line-h-height;
+    }
+
+    .k-drop-hint-end {
+        border-right-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-left-width: 0;
+    }
+}
+
+.k-drop-hint-v {
+    flex-direction: column;
+
+    .k-drop-hint-start {
+        border-top-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-bottom-width: 0;
+    }
+
+    .k-drop-hint-line {
+        width: @drop-hint-line-v-width;
+        height: @drop-hint-line-v-height;
+    }
+
+    .k-drop-hint-end {
+        border-bottom-width: ((@drop-hint-arrow-size / 2) * @equilateral-index);
+        border-top-width: 0;
+    }
+}
+
+
 .k-column-menu .k-sprite,
 .k-grid-mobile .k-resize-handle-inner:before,
 .k-grid-mobile .k-resize-handle-inner:after,
 .k-pager-numbers .k-current-page .k-link:after,
-.k-scheduler-toolbar > ul.k-scheduler-views > li.k-current-view > .k-link:after,
 .k-gantt-views > .k-current-view > .k-link:after {
     .use-font-icon();
 }
@@ -665,4 +744,10 @@ html .k-error-colored
 .k-text-align-justify,
 .k-text-justify {
     text-align: justify;
+}
+
+// Hide Script tags
+// see https://github.com/telerik/kendo-themes/issues/2360
+script {
+    display: none !important;
 }

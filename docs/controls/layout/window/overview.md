@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Window Documentation | Window Overview | Kendo UI
+page_title: jQuery Window Documentation | Window Overview
 description: "Get started with the jQuery Window by Kendo UI, get to know its basic usage, initialize and reference its existing instances, and use its events."
 slug: overview_kendoui_window_widget
 position: 1

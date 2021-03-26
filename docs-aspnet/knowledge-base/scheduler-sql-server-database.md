@@ -24,7 +24,7 @@ How can I connect a Scheduler HtmlHelper so that it works with an MS SQL Server 
 
 ## Solution
 
-For the complete implementation on how to connect a Telerik UI Scheduler for ASP.NET Core to an SQL Server database by using the `LocalDB` instance, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/scheduler/SqlServerDataBase).
+For the complete implementation on how to connect a Telerik UI Scheduler for ASP.NET Core to an SQL Server database by using the `LocalDB` instance, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc).
 
 ## See Also
 

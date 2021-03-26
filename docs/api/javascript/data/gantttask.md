@@ -112,6 +112,40 @@ The completion percentage of the task. A value between 0 and 1 representing how 
     });
     </script>
 
+### plannedEnd `Date`
+
+The date at which the Gantt task ends as per the planned schedule. The `plannedEnd` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+
+#### Example - set the plannedEnd date of a task
+
+    <script>
+    var task = new kendo.data.GanttTask({
+        id: 1,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 10:00"),
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+    });
+    </script>
+
+### plannedStart `Date`
+
+The date at which the Gantt task starts as per the planned schedule. The `plannedStart` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+
+#### Example - set the plannedStart date of a task
+
+    <script>
+    var task = new kendo.data.GanttTask({
+        id: 1,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 10:00"),
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+    });
+    </script>
+
 ### start `Date`
 
 The date at which the Gantt task starts. The `start` date is mandatory.

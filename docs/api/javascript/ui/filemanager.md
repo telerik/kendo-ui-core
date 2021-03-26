@@ -129,7 +129,10 @@ Enables or disables the drag and drop features of the FileManager.
 
 ### dataSource `Object | Array | kendo.data.FileManagerDataSource`
 
-Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of the FileManager. Can be bound to a remote service or local data. 
+Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of the FileManager. Can be bound to a remote service or local data.
+
+> When using the transport options as functions the target parameter will not be sent automatically due to the DataSource not calling the [parameterMap method](/api/javascript/data/datasource/configuration/transport.parametermap).
+> You can call it within your function to pass the required data - Example - read as function.
 
 #### Example
 
@@ -155,6 +158,72 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
                     destroy: {
                         type: "post",
                         url: baseUrl + "Destroy"
+                    }
+                }
+            }
+        });
+    </script>
+
+#### Example - transport with functions.
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Read",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
+                    },
+                    update: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Update",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
+                    },
+                    create: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Update",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
+                    },
+                    destroy: function(options) {
+                        var that = this;
+
+                        $.ajax({
+                            url: baseUrl + "Destroy",
+                            dataType: "json", 
+                            method: "POST",
+                            data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
+                            success: function(result) {
+                                options.success(result);
+                            }
+                        });
                     }
                 }
             }
@@ -189,17 +258,17 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
                 isDirectory: false,
                 hasDirectories: false,
                 path: "folder/Image2.jpg",
-                extension: ".jpg", 
+                extension: ".jpg",
                 size: 20,
                 createdUtc: new Date(),
               }
-          ]        
+          ]
         }
       ];
 
-    $("#fileManager").kendoFileManager({               
+    $("#fileManager").kendoFileManager({
         dataSource: myData
-    });     
+    });
     </script>
 
 ### upload `Object`
@@ -228,6 +297,51 @@ Sets the upload url for the Upload widget.
             }
         });
     </script>
+
+### upload.cancel `Function`
+
+Fires when the upload was cancelled while in progress. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.clear `Function`
+
+Fires when the files are cleared by clicking on the **Clear** button. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.complete `Function`
+
+Fires when all active uploads complete&mdash;either successfully or with errors. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.error `Function`
+
+Fires when an `upload` or `remove` operation fails. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.pause `Function`
+
+Fires when the files are cleared by clicking the **Pause** button. The button is visible if `chunksize` is set. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.progress `Function`
+
+Fires when the data about the progress of the upload is available. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.resume `Function`
+
+Fires when the files are resumed through clicking the **Resume** button. The button is visible if `chunksize` is set and the file upload is paused. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.remove `Function`
+
+Fires when an uploaded file is about to be removed. If the event is canceled, the `remove` operation is prevented. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.select `Function`
+
+Fires when a file is selected. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.success `Function`
+
+Fires when an `upload` or `remove` operation is completed successfully. [Upload Events](/api/javascript/ui/upload#events).
+
+### upload.upload `Function`
+
+Fires when one or more files are about to be uploaded. The canceling of the event prevents the upload. [Upload Events](/api/javascript/ui/upload#events).
+
 
 ### toolbar `Boolean | Object` *(default: true)*
 
@@ -542,7 +656,7 @@ Configures every view registered for the FileManager.
 
 ### views.grid `Object`
 
-Configures the built-in grid view - accepts [kendoGrid options](/api/javascript/ui/grid) 
+Configures the built-in grid view - accepts [kendoGrid options](/api/javascript/ui/grid)
 
 #### Example
 
@@ -569,7 +683,7 @@ Configures the built-in grid view - accepts [kendoGrid options](/api/javascript/
 
 ### views.list `Object`
 
-Configures the built-in list view (thumbnails) - accepts [kendoListView options](/api/javascript/ui/listview) 
+Configures the built-in list view (thumbnails) - accepts [kendoListView options](/api/javascript/ui/listview)
 
 #### Example
 
@@ -596,7 +710,7 @@ Configures the built-in list view (thumbnails) - accepts [kendoListView options]
 
 ### views.tree `Object`
 
-Configures the built-in tree view - accepts [kendoTreeView options](/api/javascript/ui/treeview) 
+Configures the built-in tree view - accepts [kendoTreeView options](/api/javascript/ui/treeview)
 
 #### Example
 
@@ -783,7 +897,7 @@ Defines the localization messages for the toolbar.
 
 ### messages.toolbar.createFolder `String`
 
-### messages.toolbar.uploadDialog `String`
+### messages.toolbar.upload `String`
 
 ### messages.toolbar.sortDirection `String`
 
@@ -814,7 +928,7 @@ Defines the localization messages for the toolbar.
 ### messages.toolbar.delete `String`
 
 ### messages.toolbar.rename `String`
-        
+
 ### messages.views  `Object`
 Defines the localization messages for the views.
 
@@ -839,7 +953,7 @@ Defines the localization messages for the dialogs.
 
 ### messages.dialogs.upload.clear `String`
 
-### messages.dialogs.upload.done `String` 
+### messages.dialogs.upload.done `String`
 
 ### messages.dialogs.moveConfirm `Object`
 
@@ -896,7 +1010,11 @@ Defines the localization messages for the preview pane.
 
 ### path
 
-Gets the path that teh FileManager is navigated to
+Gets the path that the FileManager is navigated to.
+
+#### Returns
+
+`String` The current active path.
 
 #### Example
 
@@ -925,21 +1043,21 @@ Gets the path that teh FileManager is navigated to
                     isDirectory: false,
                     hasDirectories: false,
                     path: "folder/Image2.jpg",
-                    extension: ".jpg", 
+                    extension: ".jpg",
                     size: 20,
                     createdUtc: new Date(),
                 }
             ]}
         ];
 
-        $("#fileManager").kendoFileManager({               
+        $("#fileManager").kendoFileManager({
             dataSource: myData
-        });     
+        });
 
         var fileManager = $("#fileManager").data("kendoFileManager");
-      
+
       	fileManager.navigate("folder");
-      
+
         var path = fileManager.path();
 
         console.log(path);
@@ -955,6 +1073,10 @@ Gets or sets the view of the FileManager.
 
 The name of the view.
 
+#### Returns
+
+`String` The current view.
+
 #### Example
 
     <div id="fileManager"></div>
@@ -982,25 +1104,21 @@ The name of the view.
                     isDirectory: false,
                     hasDirectories: false,
                     path: "folder/Image2.jpg",
-                    extension: ".jpg", 
+                    extension: ".jpg",
                     size: 20,
                     createdUtc: new Date(),
                 }
             ]}
         ];
 
-        $("#fileManager").kendoFileManager({               
+        $("#fileManager").kendoFileManager({
             dataSource: myData
-        });     
+        });
 
         var fileManager = $("#fileManager").data("kendoFileManager");
-      
+
       	fileManager.view("grid");
     </script>
-
-#### Returns
-
-`String` The current view.
 
 ### navigate
 
@@ -1039,19 +1157,19 @@ The path to navigate.
                     isDirectory: false,
                     hasDirectories: false,
                     path: "folder/Image2.jpg",
-                    extension: ".jpg", 
+                    extension: ".jpg",
                     size: 20,
                     createdUtc: new Date(),
                 }
             ]}
         ];
 
-        $("#fileManager").kendoFileManager({               
+        $("#fileManager").kendoFileManager({
             dataSource: myData
-        });     
+        });
 
         var fileManager = $("#fileManager").data("kendoFileManager");
-      
+
       	fileManager.navigate("folder");
     </script>
 
@@ -1086,19 +1204,19 @@ Refreshes the current view of the FileManager. Rebinds the data.
                     isDirectory: false,
                     hasDirectories: false,
                     path: "folder/Image2.jpg",
-                    extension: ".jpg", 
+                    extension: ".jpg",
                     size: 20,
                     createdUtc: new Date(),
                 }
             ]}
         ];
 
-        $("#fileManager").kendoFileManager({               
+        $("#fileManager").kendoFileManager({
             dataSource: myData
-        });     
+        });
 
         var fileManager = $("#fileManager").data("kendoFileManager");
-      
+
       	fileManager.refresh();
     </script>
 
@@ -1137,17 +1255,25 @@ The command arguments.
                 }
             }
         });
-        
+
         var fileManager = $("#fileManager").data("kendoFileManager");
-      
+
       	fileManager.executeCommand("CreateFolderCommand");
     </script>
 
 ### getSelected
 Gets the selected files (the JSON representation of the files).
 
+#### Returns
+
+`Object` The currently selected files.
+
 ### getSize
 Gets the size of the FileManager wrapper.
+
+#### Returns
+
+`Object` The width and height of the FileManager wrapper in pixels.
 
 ### setDataSource
 
@@ -1185,7 +1311,7 @@ Sets the dataSource of an existing FileManager and rebinds it.
             }
             }
         });
-        
+
         var myData = [{
             name: "Folder",
             isDirectory: true,
@@ -1208,7 +1334,7 @@ Sets the dataSource of an existing FileManager and rebinds it.
             data: myData,
             schema: kendo.data.schemas.filemanager
         });
-      
+
         var filemanager = $("#fileManager").data("kendoFileManager");
         filemanager.setDataSource(dataSource);
     </script>
@@ -1337,6 +1463,71 @@ The drop target's id.
 ##### e.items `Array`
 
 The items dragged and dropped over the target.
+
+### command
+
+Fired when server command is executed (copy, move, delete or rename).
+
+The event is useful to get feedback when server commands has failed or succeeded and take additional actions based on the status.
+
+#### Event Data
+
+##### e.sender `kendo.ui.FileManager`
+
+The widget instance which fired the event.
+
+##### e.status `String`
+
+The status of the command executed (success, fail or cancel).
+
+##### e.action `String`
+
+The action performed by the command (add, remove or itemchange).
+
+##### e.data `Object`
+
+Retrieves contextual data that holds information about the item(s) involved in the command's action.
+
+##### e.response `Object`
+
+The returned response by the service.
+
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "post",
+                        url: baseUrl + "Read"
+                    },
+                    update: {
+                        type: "post",
+                        url: baseUrl + "Update"
+                    },
+                    create: {
+                        type: "post",
+                        url: baseUrl + "Create"
+                    },
+                    destroy: {
+                        type: "post",
+                        url: baseUrl + "Destroy"
+                    }
+                }
+            },
+            command: function (ev) {
+                console.log("Command " + ev.action + " - item:" + ev.data.item.path + "; status: " + ev.status);
+
+                if (ev.status === "fail") { // Refresh the FileManager if a command has failed.
+                    ev.sender.refresh()
+                }
+            }
+        });
+    </script>
 
 
 

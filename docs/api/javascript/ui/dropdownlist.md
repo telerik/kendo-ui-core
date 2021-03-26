@@ -391,6 +391,21 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterTitle `String`
+
+When filtering is enabled, allows custom title to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterTitle: "custom title"
+    });
+    </script>
+
 ### fixedGroupTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.

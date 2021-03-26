@@ -7,7 +7,6 @@
     outline: 0;
     font-size: @listview-font-size;
     line-height: @listview-line-height;
-    display: flex;
     flex-flow: column nowrap;
     position: relative;
 }
@@ -44,9 +43,20 @@
     padding: 0;
     border-color: inherit;
     list-style: none;
-    flex: 1 1 0%;
+    flex: 1 1 auto;
     align-content: flex-start;
     position: relative;
+    overflow: auto;
+
+    &::after {
+        height: 0;
+        clear: both;
+        display: block;
+    }
+}
+.k-listview-content.k-d-flex,
+.k-listview-content.k-d-grid {
+    &::after { display: none; }
 }
 .k-listview-content-padding-rectangle {
     padding: @listview-padding-y @listview-padding-x;

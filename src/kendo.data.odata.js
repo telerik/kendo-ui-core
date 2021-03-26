@@ -267,7 +267,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function createBatchRequest(transport, colections) {
-        var options = {};
+		var options = extend({}, transport.options.batch);
         var boundary = createBoundary("sf_batch_");
         var requestBody = "";
         var changeId = 0;
@@ -276,9 +276,9 @@ var __meta__ = { // jshint ignore:line
 
         options.type = transport.options.batch.type;
         options.url = isFunction(batchURL) ? batchURL() : batchURL;
-        options.headers = {
-            "Content-Type": "multipart/mixed; boundary=" + boundary
-        };
+		options.headers = extend(options.headers || {}, {
+			"Content-Type": "multipart/mixed; boundary=" + boundary
+		});
 
         if (colections.updated.length) {
             requestBody += processCollection(colections.updated, boundary, changeset, changeId, transport, "update", false);
@@ -489,6 +489,13 @@ var __meta__ = { // jshint ignore:line
                         result.$count = true;
                         delete result.$inlinecount;
                     }
+					
+					if (result && result.$filter) {
+						// Remove the single quotation marks around the GUID (OData v4).
+						result.$filter = result.$filter.replace(/('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')/ig, function (x) {
+							return x.substring(1, x.length - 1);
+						});
+					}
 
                     return result;
                 },

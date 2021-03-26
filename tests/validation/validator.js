@@ -1719,19 +1719,6 @@
             validator.validate();
         });
 
-        it("validateInput can be prevented", function() {
-            container.append($('<input type="text" id="foo1" name="foo1" required="required" validationMessage="foo1 is required"/><input type="text" id="foo2" name="foo2" />'));
-            var validator = setup(container, {
-                validateInput: function(e) {
-                    e.preventDefault();
-                }
-            });
-
-            validator.validateInput(container.find("#foo1").get(0));
-
-            assert.isOk(!container.find(".k-invalid-msg").length);
-        });
-
         it("setOptions updates options", function() {
             container.append($('<input type="text" id="foo1" name="foo1" required="required" /><input type="text" id="foo2" name="foo2" />'));
             var validator = setup(container);
@@ -1774,6 +1761,48 @@
             validator.reset();
 
             assert.equal(validator.errors().length, 0);
+        });
+
+        it("reset clears invalid TextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoTextBox({
+                label: "text"
+            }).data("kendoTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("reset clears invalid NumericTextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoNumericTextBox({
+                label: "text"
+            }).data("kendoNumericTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
+        });
+
+        it("reset clears invalid MaskedTextBox label color", function() {
+            var form = $('<form><input required /></form>');
+            var validator = setup(form);
+            var textbox = form.find("input").kendoMaskedTextBox({
+                label: "text"
+            }).data("kendoMaskedTextBox");
+
+            validator.validate();
+            assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
+
+            validator.reset();
+            assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
         });
 
         it("validate returns false with server errors", function() {

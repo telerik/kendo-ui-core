@@ -37,8 +37,8 @@
                     names: ["Qunxa Garablu","Kudo","Ciggilta Kudo","Agda Baxis","Caxah Alsa","Qasa Dirri","Qado Dirri","Leqeeni","Waysu","Diteli","Ximoli","Kaxxa Garablu"],
                     namesAbbr: ["Qun","Nah","Cig","Agd","Cax","Qas","Qad","Leq","Way","Dit","Xim","Kax"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["saaku","saaku","SAAKU"],
+                PM: ["carra","carra","CARRA"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, MMMM dd, yyyy",

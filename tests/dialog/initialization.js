@@ -201,7 +201,7 @@
         it("set zero content height by creating dialog with string insufficient height", function() {
             var dialog = createDialog({ height: "10px", buttonLayout: "normal" });
 
-            assert.equal(dialog.element.prop("style").getPropertyValue("height"), "0px");
+            assert.equal(dialog.element.height(), 0);
         });
 
         it("apply scroll class name to dialog content", function() {

@@ -1,6 +1,6 @@
 ---
 title: Rows
-page_title: jQuery Grid Documentation | Rows | Kendo UI
+page_title: jQuery Grid Documentation | Rows
 description: "Get started with the jQuery Grid by Kendo UI and learn how to handle the most common scenarios when configuring the behavior of its rows."
 slug: rows_kendoui_grid_widget
 position: 3

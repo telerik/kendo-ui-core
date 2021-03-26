@@ -170,11 +170,11 @@ it("Month view title honors options.culture", function() {
 });
 
 it("month view renders days", function() {
-    var today = new Date(),
+    var currDate = new Date(2010, 10, 10),
         days = kendo.culture().calendar.days;
 
     div.html(calendar.views[0].content({
-        date: today,
+        date: currDate,
         empty: template.empty,
         otherMonth: true,
         content: template.content,

@@ -1,6 +1,6 @@
 ---
 title: List of Keyboard Shortcuts
-page_title: jQuery Spreadsheet Documentation | List of Keyboard Shortcuts | Kendo UI
+page_title: jQuery Spreadsheet Documentation | List of Keyboard Shortcuts
 description: "Get started with the jQuery Spreadsheet by Kendo UI and check out the list of its keyboard shortcuts."
 slug: list_ofkeyboard_shortcuts_spreadsheet_widget
 position: 3
@@ -24,18 +24,20 @@ The following table provides a list of the keyboard shortcuts the Spreadsheet su
 | `Ctrl` + select cells | Selects a range of adjacent or nonadjacent cells. To simultaneously select more than one range of cells, repeat this command. The selected ranges can also overlap. |
 | `Ctrl` + select a row or column | Selects an adjacent or nonadjacent row or column. |
 | `Ctrl` + select rows or columns | Selects a range of adjacent or nonadjacent rows or columns. To simultaneously select more than one range of rows or columns, repeat this command. The selected ranges can also overlap. |
-| `Esc` | Cancels an entry in a cell or in the **Formula Bar** |
 | `Arrow` keys | Move a cell up, down, left, or right in a worksheet |
 | `Ctrl` + `Arrow` key | Navigates to the last cell of the current series of data. If there is another set of data afterwards, the first cell of the new series will be selected. Otherwise, you will be navigated to the last cell of the worksheet in the corresponding direction |
 | `Shift` + `Arrow` key | Selects (a range of) adjacent cells, rows, or columns, by extending the selection by one cell, row, or column |
 | `Ctrl` + `Shift` + `Arrow` key | Extends the selection of cells to the last cell of the current series of data. If there is another set of data afterwards, the cell selection will be extended to the first cell of the new series of data. Otherwise, the cell selection will be extended to the last cell of the worksheet in the corresponding direction |
 | `Down Arrow` / `Up Arrow` key | <ul><li>In a menu or a submenu, selects the next or previous command</li> <li>In a dialog box, the arrow keys move between options in an active drop-down list, or between options in a group of options</li></ul> |
+| `F2` | Enters editing mode for the currently selected cell |
+| `F10` | Focuses the first tool of Spreadsheet toolbar |
 | `Backspace` | <ul><li>In the Formula bar, it deletes one character to the left from the formula text</li> <li>In cell selection mode, it removes the content of the active cell</li> <li>In cell editing mode, it deletes the character to the left of the insertion point</li></ul> |
 | `Delete` | <ul><li>In the Formula bar, it deletes the character to the right of the insertion point from the formula text</li><li>In cell selection mode, it removes the content from selected cells without affecting cell formats</li> <li>In cell editing mode, it deletes the character to the right of the insertion point</li></ul> |
 | `End` | <ul><li>In cell selection mode, moves to the far right cell of the active row</li> <li>In a menu or submenu, selects the last command</li></ul>
 | `Ctrl` + `End` | <ul><li>In cell selection mode, moves to the last cell on a worksheet, in the lowest used row of the used column on the bottom-right</li> <li>In the formula bar, `Ctrl` + `End` moves the cursor to the end of the text</li> </ul> |
 | `Ctrl` + `Shift` + `End` | <ul><li>In cell selection mode, extends the selection of cells to the last cell on the worksheet located in lower-right corner</li> <li>In the formula bar, `Ctrl` + `Shift` + `End` selects all text in the formula bar from the cursor position to the end</li></ul> |
 | `Enter` | <ul><li>In cell editing mode or in the **Formula bar**, completes a cell entry and selects the cell below</li> <li>In a data form, it moves to the first field in the next record</li> <li>In the command toolbar, opens a selected menu or performs the action for a selected command</li> <li>In a dialog box, it performs the action for the default command button in the dialog box (the button with the bold outline)</li></ul> |
+| `Alt` + `Enter` | In cell editing mode or in the **Formula bar** creates a new row within the cell |
 | `Esc` | <ul><li>In cell editing mode or in the **Formula bar**, cancels an entry in the cell or **Formula Bar**</li> <li>Closes an open menu or submenu, dialog box, or message window</li></ul> |
 | `Home` | <ul><li>In cell selection mode, moves to the beginning of a row in a worksheet</li> <li>In a menu or submenu, selects the first command</li></ul> |
 | `Ctrl` + `Home` | <ul><li>In cell selection mode, moves to the first cell (the top-left cell) on a worksheet</li> <li>In the formula bar, `Ctrl` + `Home` moves the cursor to the beginning of the text</li> </ul> |

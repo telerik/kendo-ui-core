@@ -15,6 +15,7 @@ This guide demonstrates how to start working with the suite and implements a use
 
 The process draws on the following milestones:
 
+ 1. [Download the controls](https://www.telerik.com/download-login-v2-kendoui)
  1. [Required JavaScript and CSS files](#1-adding-the-required-javascript-and-css-files)
  1. [Data binding](#2-binding-to-data)
  1. [Widget initialization](#3-Initializing-the-widgets)
@@ -241,6 +242,7 @@ The following Chart configuration includes:
 * An [axis title](/api/javascript/dataviz/ui/chart/configuration/valueaxis.title#valueaxis.title) for the vertical axis.
 * [Tooltips](/api/javascript/dataviz/ui/chart/configuration/tooltip) on series hover.
 
+```
 	$("#ordersChart").kendoChart({
 	  dataSource: {
 		data: [],
@@ -284,6 +286,7 @@ The following Chart configuration includes:
 		template: "#= category #: #= value # t"
 	  }
 	});
+```
 
 ## 9. Handling the Events
 
@@ -314,7 +317,7 @@ including the widget instance that fired the event (`e.sender`).
             grid.unbind("dataBound");
           },
 
-		  //height: 500,
+		  //height: 400,
 		  // ...
 		//});
 

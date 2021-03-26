@@ -46,17 +46,39 @@ var __meta__ = { // jshint ignore:line
         ARIA_HIDDEN = "aria-hidden",
         ARIA_OWNS = "aria-owns",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         DATE = Date,
         MIN = new DATE(1800, 0, 1),
         MAX = new DATE(2099, 11, 31),
         dateViewParams = { view: "date" },
         timeViewParams = { view: "time" },
-        extend = $.extend;
+        extend = $.extend,
+        SINGLE_POPUP_TEMPLATE = '<div class="k-date-tab k-datetime-wrap">' +
+                                    '<div class="k-datetime-buttongroup">'+
+                                        '<div class="k-button-group k-button-group-stretched">'+
+                                            '<button class="k-button k-state-active k-group-start">#=messages.date#</button>'+
+                                            '<button class="k-button k-group-end">#=messages.time#</button>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="k-datetime-selector">'+
+                                        '<div class="k-datetime-calendar-wrap">'+
+                                        '</div>'+
+                                        '<div class="k-datetime-time-wrap">'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="k-datetime-footer k-action-buttons">'+
+                                        '<button class="k-button k-time-cancel" title="Cancel" aria-label="Cancel">#=messages.cancel#</button>'+
+                                        '<button class="k-time-accept k-button k-primary" title="Set" aria-label="Set">#=messages.set#</button>'+
+                                    '</div>'+
+                                '</div>',
+        STATE_ACTIVE = "k-state-active";
 
     var DateTimePicker = Widget.extend({
         init: function(element, options) {
             var that = this, disabled;
 
+            options = options || {};
+            options.componentType = options.componentType || "classic";
             Widget.fn.init.call(that, element, options);
 
             element = that.element;
@@ -66,11 +88,19 @@ var __meta__ = { // jshint ignore:line
             options.min = parse(element.attr("min")) || parse(options.min);
             options.max = parse(element.attr("max")) || parse(options.max);
 
+            if (+options.max != +MAX || +options.min != +MIN) {
+                this._specifiedRange = true;
+            }
+
             normalize(options);
 
             that._initialOptions = extend({}, options);
 
             that._wrapper();
+
+            if(options.singlePopup){
+                that._popup();
+            }
 
             that._views();
 
@@ -128,11 +158,24 @@ var __meta__ = { // jshint ignore:line
             depth: MONTH,
             animation: {},
             month : {},
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#',
+            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateButtonText: "Open the date view",
             timeButtonText: "Open the time view",
             dateInput: false,
-            weekNumber: false
+            weekNumber: false,
+            messages: {
+                set: "Set",
+                cancel: "Cancel",
+                hour: "hour",
+                minute: "minute",
+                second: "second",
+                millisecond: "millisecond",
+                now: "Now",
+                date: "Date",
+                time: "Time",
+                today: "Today"
+            },
+            componentType: "classic"
         },
 
         events: [
@@ -140,6 +183,21 @@ var __meta__ = { // jshint ignore:line
             CLOSE,
             CHANGE
         ],
+
+        componentTypes: {
+            "classic": {
+                singlePopup: false,
+                timeView: {
+                    list: "list"
+                }
+            },
+            "modern": {
+                singlePopup: true,
+                timeView: {
+                    list: "scroll"
+                }
+            }
+        },
 
         setOptions: function(options) {
             var that = this,
@@ -204,6 +262,7 @@ var __meta__ = { // jshint ignore:line
                     element[0].removeAttribute(DISABLED);
                     element[0].removeAttribute(READONLY, false);
                     element[0].removeAttribute(ARIA_DISABLED, false);
+                    element[0].removeAttribute(ARIA_READONLY, false);
                 }
                 element.on("keydown" + ns, $.proxy(that._keydown, that))
                        .on("focus" + ns, function() {
@@ -216,6 +275,9 @@ var __meta__ = { // jshint ignore:line
                                if (!element.val()) {
                                    that.dateView.current(kendo.calendar.getToday());
                                }
+                           }
+                           if (that.options.singlePopup) {
+                               return;
                            }
                            that.close("date");
                            that.close("time");
@@ -240,7 +302,8 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable);
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 
@@ -273,6 +336,11 @@ var __meta__ = { // jshint ignore:line
             that.dateView.destroy();
             that.timeView.destroy();
 
+            if (that.options.singlePopup) {
+                that.popup.element.off(ns);
+                that.popup.destroy();
+            }
+
             that.element.off(ns);
             that._dateIcon.off(ns);
             that._timeIcon.off(ns);
@@ -284,19 +352,57 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function(view) {
-            if (view !== "time") {
-                view = "date";
-            }
+            if (this.options.singlePopup) {
+                this.popup.close();
+            } else {
+                if (view !== "time") {
+                    view = "date";
+                }
 
-            this[view + "View"].close();
+                this[view + "View"].close();
+            }
         },
 
         open: function(view) {
-            if (view !== "time") {
-                view = "date";
-            }
+            var that = this;
+            var popupHovered;
 
-            this[view + "View"].open();
+            if (that.options.singlePopup) {
+
+                that.dateView._calendar();
+
+                if (that.timeView.ul.find("li").length < 1) {
+                    that.timeView.bind();
+                }
+
+                // In some cases when the popup is opened resize is triggered which will cause it to close
+                // Setting the below flag will prevent this from happening
+                // Reference: https://github.com/telerik/kendo/pull/7553
+                popupHovered = that.popup._hovered;
+                that.popup._hovered = true;
+
+                that.popup.open();
+
+                if (view === "time") {
+                    that._switchToTimeView();
+                } else {
+                    that._switchToDateView();
+                }
+
+                this._dateIcon.toggle(view !== "time");
+                this._timeIcon.toggle(view === "time");
+
+                setTimeout(function() {
+                    that.popup._hovered = popupHovered;
+                }, 1);
+
+            } else {
+                if (view !== "time") {
+                    view = "date";
+                }
+
+                this[view + "View"].open();
+            }
         },
 
         min: function(value) {
@@ -308,16 +414,25 @@ var __meta__ = { // jshint ignore:line
         },
 
         toggle: function(view) {
-            var secondView = "timeView";
-
-            if (view !== "time") {
-                view = "date";
+            if (this.options.singlePopup) {
+                if (this.popup.visible()) {
+                    this.close();
+                } else {
+                    this.open(view);
+                }
             } else {
-                secondView = "dateView";
+                var secondView = "timeView";
+
+                if (view !== "time") {
+                    view = "date";
+                } else {
+                    secondView = "dateView";
+                }
+
+                this[view + "View"].toggle();
+                this[secondView].close();
             }
 
-            this[view + "View"].toggle();
-            this[secondView].close();
         },
 
         value: function(value) {
@@ -374,6 +489,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             value = parse(value, options.parseFormats, options.culture);
+            timeViewOptions.maxSet = false;
 
             if (!value) {
                 return;
@@ -406,6 +522,7 @@ var __meta__ = { // jshint ignore:line
                         return;
                     } else if (!minDateEqual) {
                         timeViewOptions.min = MIN;
+                        timeViewOptions.maxSet = true;
                     }
                 }
             } else {
@@ -465,6 +582,7 @@ var __meta__ = { // jshint ignore:line
             if (date) {
                 old = that._old;
                 timeViewOptions = timeView.options;
+                timeViewOptions.maxSet = false;
 
                 if (dates[0]) {
                     dates = $.grep(dates, function(d) { return isEqualDatePart(date, d); });
@@ -488,6 +606,7 @@ var __meta__ = { // jshint ignore:line
                             skip = true;
                         } else {
                             timeViewOptions.max = max;
+                            timeViewOptions.maxSet = true;
                             if (!rebind) {
                                 timeViewOptions.min = MIN;
                             }
@@ -520,14 +639,14 @@ var __meta__ = { // jshint ignore:line
                 dateView = that.dateView,
                 timeView = that.timeView,
                 value = that.element.val(),
-                isDateViewVisible = dateView.popup.visible();
+                isDateViewVisible = that.options.singlePopup ? that.popup.visible() : dateView.popup.visible();
             var stopPropagation = that._dateInput && e.stopImmediatePropagation;
             if (e.altKey && e.keyCode === kendo.keys.DOWN) {
                 that.toggle(isDateViewVisible ? "time" : "date");
             } else if (isDateViewVisible) {
                 dateView.move(e);
                 that._updateARIA(dateView._current);
-            } else if (timeView.popup.visible()) {
+            } else if (!that.options.singlePopup && timeView.popup.visible()) {
                 timeView.move(e);
             } else if (e.keyCode === kendo.keys.ENTER && value !== that._oldText) {
                 that._change(value);
@@ -547,39 +666,37 @@ var __meta__ = { // jshint ignore:line
                 id = element.attr("id"),
                 dateView, timeView,
                 div, ul, msMin,
-                date;
+                date,
+                timeDiv,
+                omitPopup,
+                timeViewOptions;
+
+            if (options.singlePopup) {
+                options.dateDiv = that.popup.element.find(".k-datetime-calendar-wrap");
+                timeDiv = that.popup.element.find(".k-datetime-time-wrap");
+                options.omitPopup = omitPopup = true;
+                timeViewOptions = options.timeView;
+            }
 
             that.dateView = dateView = new kendo.DateView(extend({}, options, {
                 id: id,
                 anchor: that.wrapper,
                 change: function() {
-                    var value = dateView.calendar.value(),
-                        msValue = +value,
-                        msMin = +options.min,
-                        msMax = +options.max,
-                        current, adjustedDate;
+                    var value = that._applyDateValue();
 
-                    if (msValue === msMin || msValue === msMax) {
-                        current = msValue === msMin ? msMin : msMax;
-                        current = new DATE(that._value || current);
-                        current.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
-
-                        if (isInRange(current, msMin, msMax)) {
-                            value = current;
+                    if(options.singlePopup){
+                        if (!that.timeView._currentlySelected) {
+                            that.timeView._currentlySelected = new Date();
                         }
+                        that.timeView._currentlySelected.setFullYear(value.getFullYear());
+                        that.timeView._currentlySelected.setMonth(value.getMonth());
+                        that.timeView._currentlySelected.setDate(value.getDate());
+                        that._switchToTimeView();
+                        that._toggleIcons();
+                    } else {
+                        that._change(value);
+                        that.close("date");
                     }
-
-                    if (that._value) {
-
-                       adjustedDate = kendo.date.setHours(new Date(value), that._value);
-
-                       if (isInRange(adjustedDate, msMin, msMax)) {
-                           value = adjustedDate;
-                       }
-                    }
-
-                    that._change(value);
-                    that.close("date");
                 },
                 close: function(e) {
                     if (that.trigger(CLOSE, dateViewParams)) {
@@ -588,7 +705,7 @@ var __meta__ = { // jshint ignore:line
                         element.attr(ARIA_EXPANDED, false);
                         div.attr(ARIA_HIDDEN, true);
 
-                        if (!timeView.popup.visible()) {
+                        if (!that.options.singlePopup && !timeView.popup.visible()) {
                             if(element && element.length) {
                                 element[0].removeAttribute(ARIA_OWNS);
                             }
@@ -624,22 +741,15 @@ var __meta__ = { // jshint ignore:line
                 animation: options.animation,
                 format: options.timeFormat,
                 culture: options.culture,
-                height: options.height,
+                height: options.componentType === "modern" ? null : options.height,
                 interval: options.interval,
-                min: new DATE(MIN),
-                max: new DATE(MAX),
+                min: options.componentType === "modern" ? options.min : new DATE(MIN),
+                max: options.componentType === "modern" ? options.max : new DATE(MAX),
                 dates: msMin === options.max.getTime() ? [new Date(msMin)] : [],
                 parseFormats: options.parseFormats,
+                validateDate: true,
                 change: function(value, trigger) {
-                    value = timeView._parse(value);
-
-                    if (value < options.min) {
-                        value = new DATE(+options.min);
-                        timeView.options.min = value;
-                    } else if (value > options.max) {
-                        value = new DATE(+options.max);
-                        timeView.options.max = value;
-                    }
+                    value = that._applyTimeValue(value);
 
                     if (trigger) {
                         that._timeSelected = true;
@@ -665,7 +775,12 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
                 open:  function(e) {
-                    timeView._adjustListWidth();
+                    if (that.options.componentType !=="modern") {
+                        timeView._adjustListWidth();
+                    } else {
+                        that.timeView._updateTitle();
+                    }
+
                     if (that.trigger(OPEN, timeViewParams)) {
                         e.preventDefault();
                     } else {
@@ -691,9 +806,63 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
                 popup: options.popup,
-                useValueToRender: true
+                useValueToRender: true,
+                specifiedRange: that._specifiedRange,
+                omitPopup: omitPopup,
+                timeDiv: timeDiv,
+                timeView: timeViewOptions,
+                messages: that.options.messages
             });
             ul = timeView.ul;
+        },
+
+        _applyDateValue: function () {
+            var that = this;
+            var options = that.options;
+            var dateView = that.dateView;
+            var value = dateView.calendar.value();
+            var msValue = +value;
+            var msMin = +options.min;
+            var msMax = +options.max;
+            var current, adjustedDate;
+
+            if (msValue === msMin || msValue === msMax) {
+                current = msValue === msMin ? msMin : msMax;
+                current = new DATE(that._value || current);
+                current.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
+
+                if (isInRange(current, msMin, msMax)) {
+                    value = current;
+                }
+            }
+
+            if (that._value) {
+
+                adjustedDate = kendo.date.setHours(new Date(value), that._value);
+
+                if (isInRange(adjustedDate, msMin, msMax)) {
+                    value = adjustedDate;
+                }
+            }
+
+            return value;
+        },
+
+        _applyTimeValue: function(value){
+            var timeView = this.timeView;
+            var options = this.options;
+
+            value = timeView._parse(value);
+
+            if (value < options.min) {
+                value = new DATE(+options.min);
+                timeView.options.min = value;
+            } else if (value > options.max) {
+                value = new DATE(+options.max);
+                timeView.options.max = value;
+            }
+
+            return value;
         },
 
         _icons: function() {
@@ -716,6 +885,10 @@ var __meta__ = { // jshint ignore:line
 
             that._dateIcon = icons.eq(0).attr("aria-controls", that.dateView._dateViewID);
             that._timeIcon = icons.eq(1).attr("aria-controls", that.timeView._timeViewID);
+
+            if (options.singlePopup) {
+                that._timeIcon.hide();
+            }
         },
 
         _wrapper: function() {
@@ -773,7 +946,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+            this._ariaTemplate = $.proxy(kendo.template(this.options.ARIATemplate), this);
         },
 
         _createDateInput: function(options) {
@@ -798,20 +971,102 @@ var __meta__ = { // jshint ignore:line
         },
 
         _updateARIA: function(date) {
-            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
 
-            if(that.element && that.element.length) {
+            if (that.element && that.element.length) {
                 that.element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
             }
 
             if (calendar) {
-                cell = calendar._cell;
-                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
-
-                that.element.attr(ARIA_ACTIVEDESCENDANT, cell.attr("id"));
+                that.element.attr(ARIA_ACTIVEDESCENDANT, calendar._updateAria(that._ariaTemplate, date));
             }
+        },
+        _popup: function(){
+            var that = this;
+            var options = that.options;
+            var div = $("<div></div>").attr(ARIA_HIDDEN, "true")
+                .addClass("k-datetime-container k-group k-reset")
+                .appendTo(document.body);
+
+            div.append(kendo.template(SINGLE_POPUP_TEMPLATE)(that.options));
+            that.popup = new ui.Popup(div, extend(options.popup, options, {
+                name: "Popup",
+                isRtl: kendo.support.isRtl(that.wrapper),
+                anchor: that.wrapper,
+                activate: function () {
+                    if (that.options.timeView && that.options.timeView.list === "scroll") {
+                        that.timeView.addTranslate();
+                        that.timeView.applyValue(that._value);
+                        that.timeView._updateRanges();
+                    }
+                },
+                open: function(e){
+                    if (that.trigger(OPEN, {view: this.element.find('.k-date-tab').length ? 'date' : 'time', sender: that})) {
+                        e.preventDefault();
+                    }
+                    that.timeView._updateTitle();
+                }
+            }));
+
+            div.on(CLICK + ns, ".k-datetime-buttongroup .k-button", $.proxy(that._groupChangeClick, that));
+            div.on(CLICK + ns, ".k-datetime-footer button.k-time-cancel", $.proxy(that._cancelClickHandler, that));
+            div.on(CLICK + ns, ".k-datetime-footer button.k-time-accept", $.proxy(that._setClickHandler, that));
+        },
+
+        _groupChangeClick: function(e) {
+            preventDefault(e);
+            var button =  $(e.currentTarget);
+            var index = button.index();
+
+            if (index) {
+                this._switchToTimeView();
+            } else {
+                this._switchToDateView();
+            }
+            this._toggleIcons();
+        },
+
+        _switchToDateView: function() {
+            this.popup.element.find(".k-group-start, .k-group-end").removeClass(STATE_ACTIVE).eq(0).addClass(STATE_ACTIVE);
+            this.popup.element.find(".k-datetime-wrap").removeClass("k-time-tab").addClass("k-date-tab");
+        },
+
+        _switchToTimeView: function() {
+            this.timeView.addTranslate();
+            this.timeView.applyValue(this._value);
+            this.timeView._updateRanges();
+            this.popup.element.find(".k-group-start, .k-group-end").removeClass(STATE_ACTIVE).eq(1).addClass(STATE_ACTIVE);
+            this.popup.element.find(".k-datetime-wrap").removeClass("k-date-tab").addClass("k-time-tab");
+        },
+
+        _toggleIcons: function() {
+            this._dateIcon.toggle();
+            this._timeIcon.toggle();
+        },
+
+        _cancelClickHandler: function () {
+            if (this._value) {
+                this.value(this._value);
+                this.dateView.value(this._value);
+            }
+            this.popup.close();
+        },
+
+        _setClickHandler: function() {
+            var value = this._applyDateValue();
+            var time;
+
+            value = value || new Date();
+            time = this.timeView._currentlySelected || value;
+            this.timeView._updateCurrentlySelected();
+            value.setHours(time.getHours());
+            value.setMinutes(time.getMinutes());
+            value.setSeconds(time.getSeconds());
+            value = this._applyTimeValue(value);
+
+            this._change(value);
+            this.popup.close();
         }
     });
 

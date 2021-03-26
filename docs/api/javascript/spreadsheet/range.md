@@ -454,6 +454,35 @@ True to make the cell enabled; false to disable it.
 </script>
 ```
 
+### html
+
+Gets or sets the html rendering of the cells in the range.
+
+##### value `Boolean` *optional*
+
+True to make the cell render the value as HTML. 
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
+
+> When the value is 'true ' the value of the cell should be always sanitized on the server for passing safe html.
+
+#### Returns
+
+`Boolean` the current html state of the top-left cell of the range.
+
+#### Example
+
+```
+<div id="spreadsheet"></div>
+<script type="text/javascript" charset="utf-8">
+    $("#spreadsheet").kendoSpreadsheet();
+    var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+    var sheet = spreadsheet.activeSheet();
+    sheet.range("A1").value("<b>bold</b>");
+    sheet.range("A1").html(true);
+</script>
+```
+
+
 ### fillFrom
 
 Fills a range with values inferred from a source range.  This method employs some heuristics similar to what Excel's auto-filling algorithm does when you select a range of cells and drag the bottom-right handle.  The range to be filled is the current object, and you must pass a source range containing data as first argument.

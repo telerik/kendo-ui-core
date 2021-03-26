@@ -4,7 +4,7 @@ page_title: Troubleshooting
 description: "Troubleshooting steps for Progress&reg; Telerik&reg; UI for ASP.NET Core Visual Studio extensions."
 previous_url: /getting-started/vs-integration/troubleshooting
 slug: troubleshooting_visualstudio_aspnetcore
-position: 4
+position: 6
 ---
 
 # Troubleshooting
@@ -40,6 +40,14 @@ If after you apply the described approaches the issue persists, contact the Supp
 1. Execute the `devenv /log %userprofile%\desktop\ActivityLog.xml` command to start Visual Studio and create logs on your Desktop.
 1. Reproduce the issue.
 1. Attach the `Activitylog` files when you contact our support.
+
+## The target framework dropdown is disabled
+
+If the target **Framework** dropdown doesn't allow you to select the desired framework, make sure that [.Net Framework version 4.6.2](https://dotnet.microsoft.com/download/dotnet-framework/net462) is installed.
+
+1. Check the .Net version in the list of Individual components. 
+1. Go to **Tools** > **Get Tools and Features**. 
+1. In Visual Studio Installer, select the **Individual components** tab and check the .NET Framework 4.6.2 targeting pack and .NET Framework 4.6.2 SDK
 
 ## See Also
 
