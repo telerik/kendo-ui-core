@@ -450,7 +450,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "associateScope": "Associer à l'aide de l'attribut 'scope'",
   "associateIds": "Associer à l'aide d'identifiants",
   "copyFormat": "Copier le format",
-  "applyFormat": "Appliquer le format",
+  "applyFormat": "Appliquer le format"
 });
 }
 
@@ -465,7 +465,7 @@ $.extend(true, kendo.ui.FileBrowser.prototype.options.messages,{
   "orderBySize": "Taille",
   "directoryNotFound": "Aucun répértoire de ce nom.",
   "emptyFolder": "Répertoire vide",
-  "deleteFile": 'Etes-vous sûr de vouloir supprimer "{0}"?',
+  "deleteFile": "Etes-vous sûr de vouloir supprimer \"{0}\"?",
   "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
   "overwriteFile": "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
   "dropFilesHere": "glissez les fichiers ici pour les charger",
