@@ -158,7 +158,7 @@ var __meta__ = { // jshint ignore:line
             depth: MONTH,
             animation: {},
             month : {},
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#',
+            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateButtonText: "Open the date view",
             timeButtonText: "Open the time view",
             dateInput: false,
@@ -946,7 +946,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+            this._ariaTemplate = $.proxy(kendo.template(this.options.ARIATemplate), this);
         },
 
         _createDateInput: function(options) {
@@ -971,19 +971,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _updateARIA: function(date) {
-            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
 
-            if(that.element && that.element.length) {
+            if (that.element && that.element.length) {
                 that.element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
             }
 
             if (calendar) {
-                cell = calendar._cell;
-                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
-
-                that.element.attr(ARIA_ACTIVEDESCENDANT, cell.attr("id"));
+                that.element.attr(ARIA_ACTIVEDESCENDANT, calendar._updateAria(that._ariaTemplate, date));
             }
         },
         _popup: function(){

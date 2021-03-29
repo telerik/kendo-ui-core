@@ -1340,6 +1340,26 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.footer = footer !== false ? template(footerTemplate, { useWithBlock: false }) : null;
+        },
+
+        _updateAria: function (ariaTemplate, date) {
+            var that = this;
+            var cell = that._cell;
+            var valueType = that.view().valueType();
+            var current = date || that.current();
+            var text;
+
+            if (valueType === "month") {
+                text = kendo.toString(current, "MMMM");
+            } else if (valueType === "date") {
+                text = kendo.toString(current, "D");
+            } else {
+                text = cell.text();
+            }
+
+            cell.attr("aria-label", ariaTemplate({ current: current, valueType: valueType, text: text }));
+
+            return cell.attr("id");
         }
     });
 
@@ -1526,6 +1546,9 @@ var __meta__ = { // jshint ignore:line
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+            },
+            valueType: function () {
+                return "date";
             }
         },
         {
@@ -1601,6 +1624,9 @@ var __meta__ = { // jshint ignore:line
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/1";
+            },
+            valueType: function () {
+                return "month";
             }
         },
         {
@@ -1652,6 +1678,9 @@ var __meta__ = { // jshint ignore:line
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/0/1";
+            },
+            valueType: function () {
+                return "year";
             }
         },
         {
@@ -1726,6 +1755,9 @@ var __meta__ = { // jshint ignore:line
             toDateString: function(date) {
                 var year = date.getFullYear();
                 return (year - year % 10) + "/0/1";
+            },
+            valueType: function () {
+                return "decade";
             }
         }]
     };
