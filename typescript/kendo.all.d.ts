@@ -6283,6 +6283,7 @@ declare namespace kendo.ui {
         dataSource: kendo.data.DataSource;
 
         element: JQuery;
+        content: JQuery;
         wrapper: JQuery;
 
         static extend(proto: Object): ListView;

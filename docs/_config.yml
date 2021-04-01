@@ -532,6 +532,8 @@ navigation:
     "*bottomnavigation":
         isNew: true
         title: "BottomNavigation"
+    "*breadcrumb":
+        title: "Breadcrumb"
     "*/button":
         title: "Button"
     "*buttongroup":
@@ -602,6 +604,8 @@ navigation:
         title: "ListView"
     "*listbox":
         title: "ListBox"
+    "*loader":
+        title: "Loader"
     "*maskedtextbox":
         title: "MaskedTextBox"
     "*menu":
