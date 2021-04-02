@@ -4504,6 +4504,7 @@ declare namespace kendo.ui {
         label?: string;
         name?: string;
         type?: string;
+        previewFormat?: string;
     }
 
     interface FilterMessages {
