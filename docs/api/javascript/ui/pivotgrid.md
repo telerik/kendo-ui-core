@@ -2279,6 +2279,7 @@ The fields of the result object:
 
             var info = pivotgrid.cellInfo(columnIndex, rowIndex); //retrieve data cell information
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(info);
         });
     });
@@ -2338,6 +2339,7 @@ The fields of the result object:
         pivotgrid.wrapper.on("mouseenter", ".k-grid-content td", function(e){
             var info = pivotgrid.cellInfoByElement(e.currentTarget);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(info);
         });
     });
@@ -2676,6 +2678,7 @@ The widget instance which fired the event.
     $("#pivotgrid").kendoPivotGrid({
         height: 550,
         dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data bound");
         },
         dataSource: {
@@ -2707,6 +2710,7 @@ The widget instance which fired the event.
     <div id="pivotgrid"></div>
     <script>
     function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("data bound");
     }
 
@@ -2769,6 +2773,7 @@ The path to the field that will be expanded.
     $("#pivotgrid").kendoPivotGrid({
         height: 550,
         expandMember: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand member");
         },
         dataSource: {
@@ -2800,6 +2805,7 @@ The path to the field that will be expanded.
     <div id="pivotgrid"></div>
     <script>
     function expandMember(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("expand member");
     }
 
@@ -2862,6 +2868,7 @@ The path to the field that will be collapsed.
     $("#pivotgrid").kendoPivotGrid({
         height: 550,
         collapseMember: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("collapse member");
         },
         dataSource: {
@@ -2893,6 +2900,7 @@ The path to the field that will be collapsed.
     <div id="pivotgrid"></div>
     <script>
     function collapseMember(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("collapse member");
     }
 

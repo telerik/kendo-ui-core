@@ -396,6 +396,7 @@ The JavaScript function that is executed when the user clicks the command button
                 var tr = $(e.target).closest("tr"); // get the current table row (tr)
                 // get the data bound to the current table row
                 var data = this.dataItem(tr);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Details for: " + data.lastName);
               }
             }
@@ -5598,6 +5599,7 @@ The columns of the TreeList that are initialized from the [`columns`](/api/javas
       $("#countBtn").click(function(e){
         var treelist = $("#treelist").data("kendoTreeList");
         for (var i = 0; i < treelist.columns.length; i++) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(treelist.columns[i].field); // displays "lastName" and then "position"
         }
       });
@@ -6049,6 +6051,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
         });
         var treeList = $("#treeList").data("kendoTreeList");
         var data = treeList.dataItem("tbody>tr:eq(1)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(data.age); // displays "22"
     </script>
 
@@ -6595,6 +6598,7 @@ A DOM element or a jQuery object which represents the table rows or cells.
         var row = treeList.select();
         if(row.length > 0){
           var data = treeList.dataItem(row);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(data.name);
         }
       });
@@ -6910,6 +6914,7 @@ The widget instance which fired the event.
         editable: "incell",
         toolbar:["create"],
         beforeEdit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("beforeEdit");
 
           if (!e.model.isNew()) {
@@ -6957,6 +6962,7 @@ The widget instance which fired the event.
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("cancel");
           }
         });
@@ -6967,6 +6973,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
      <script>
         function cancel(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("cancel");
         }
         $("#treeList").kendoTreeList({
@@ -7031,6 +7038,7 @@ The widget instance which fired the event.
         editable: "incell",
         toolbar:["create"],
         cellClose:  function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.type);
         }
       });
@@ -7072,6 +7080,7 @@ The widget instance which fired the event.
             selectedDataItems.push(dataItem);
           }
           // selectedDataItems contains all selected data items
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(selectedDataItems.length);
         }
       });
@@ -7091,6 +7100,7 @@ The widget instance which fired the event.
           }
         }
         // selectedDataItems contains all selected data items
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(selectedDataItems.length + " data items selected.");
       }
       $("#treeList").kendoTreeList({
@@ -7142,6 +7152,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("collapse");
           }
         });
@@ -7152,6 +7163,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
     <div id="treeList"></div>
      <script>
         function collapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("collapse");
         }
         $("#treeList").kendoTreeList({
@@ -7198,6 +7210,7 @@ If invoked, prevents the data bind action. The table rows will remain unchanged 
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBinding");
           }
         });
@@ -7208,6 +7221,7 @@ If invoked, prevents the data bind action. The table rows will remain unchanged 
     <div id="treeList"></div>
      <script>
         function dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBinding");
         }
         $("#treeList").kendoTreeList({
@@ -7250,6 +7264,7 @@ The widget instance which fired the event.
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
           }
         });
@@ -7260,6 +7275,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
      <script>
         function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         }
         $("#treeList").kendoTreeList({
@@ -7323,6 +7339,7 @@ The model of the source row.
           { field: "Position" }
         ],
         dragstart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("dragstart", e.source);
         }
       });
@@ -7335,6 +7352,7 @@ The model of the source row.
       var service = "https://demos.telerik.com/kendo-ui/service";
 
       function dragstart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragstart");
       }
 
@@ -7429,6 +7447,7 @@ The widget instance which fired the event.
           { field: "Position" }
         ],
         drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("dragging", e.source, e.target);
         }
       });
@@ -7441,6 +7460,7 @@ The widget instance which fired the event.
       var service = "https://demos.telerik.com/kendo-ui/service";
 
       function drag(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragging");
       }
 
@@ -7535,6 +7555,7 @@ The widget instance which fired the event.
           { field: "Position" }
         ],
         dragend: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("drag ended", e.source, e.destination);
         }
       });
@@ -7547,6 +7568,7 @@ The widget instance which fired the event.
       var service = "https://demos.telerik.com/kendo-ui/service";
 
       function dragend(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("drag ended");
       }
 
@@ -7660,6 +7682,7 @@ Both operations cancel the default drag operation but the indication to the user
           { field: "Position" }
         ],
         drop: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("drop", e.source, e.destination, e.valid);
         }
       });
@@ -7673,6 +7696,7 @@ Both operations cancel the default drag operation but the indication to the user
 
       function drop(e) {
         debugger
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("row dropped");
       }
 
@@ -7779,6 +7803,7 @@ The widget instance which fired the event.
           { command: ["edit"] }
         ],
         edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("edit");
         }
       });
@@ -7792,6 +7817,7 @@ The widget instance which fired the event.
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
       function edit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("edit");
       }
 
@@ -7943,6 +7969,7 @@ If invoked, prevents the expand action. The child table rows will not be shown.
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand");
           }
         });
@@ -7953,6 +7980,7 @@ If invoked, prevents the expand action. The child table rows will not be shown.
     <div id="treeList"></div>
     <script>
       function expand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("expand");
       }
       $("#treeList").kendoTreeList({
@@ -8150,6 +8178,7 @@ A promise that will be resolved when the export completes.
           { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
         ],
         pdfExport: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("exporting PDF");
         }
       });
@@ -8174,6 +8203,7 @@ A promise that will be resolved when the export completes.
       });
       var treelist = $("#treeList").data("kendoTreeList");
       treelist.bind("pdfExport", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("exporting pdf");
       });
       treelist.saveAsPDF();
@@ -8248,6 +8278,7 @@ If invoked, prevents the removal of the data item. The table rows will remain un
           { command: ["destroy"] }
         ],
         remove: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("remove");
         }
       });
@@ -8302,6 +8333,7 @@ If invoked, prevents the removal of the data item. The table rows will remain un
       });
 
       function remove(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("remove");
       }
 
@@ -8373,6 +8405,7 @@ The widget instance which fired the event.
           { command: ["edit"] }
         ],
         save: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("save row");
         }
       });
@@ -8426,6 +8459,7 @@ The widget instance which fired the event.
       });
 
       function save(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("save row");
       }
 
@@ -8530,6 +8564,7 @@ The widget instance which fired the event.
         },
         columnMenu: true,
         columnShow: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the shown column
         }
       });
@@ -8540,6 +8575,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
       function treelist_columnShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the shown column
       }
 
@@ -8594,6 +8630,7 @@ The widget instance which fired the event.
         },
         columnMenu: true,
         columnHide: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the hidden column
         }
       });
@@ -8604,6 +8641,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
       function treelist_columnHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the hidden column
       }
 
@@ -8665,6 +8703,7 @@ The widget instance which fired the event.
             },
             reorderable: true,
             columnReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.column.field, e.newIndex, e.oldIndex);
             }
         });
@@ -8675,6 +8714,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
         function treelist_columnReorder(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field, e.newIndex, e.oldIndex);
         }
 
@@ -8735,6 +8775,7 @@ The widget instance which fired the event.
             },
             resizable: true,
             columnResize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.column[0].field, e.newWidth, e.oldWidth);
             }
         });
@@ -8745,6 +8786,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
         function treelist_columnResize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column[0].field, e.newWidth, e.oldWidth);
         }
 
@@ -8806,6 +8848,7 @@ The widget instance which fired the event.
           menu.append({ text: "Custom" });
           menu.bind("select", function(e) {
             if ($(e.item).text() == "Custom") {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
               console.log("Custom button for", field);
             }
           });
@@ -8823,6 +8866,7 @@ The widget instance which fired the event.
         menu.append({ text: "Custom" });
         menu.bind("select", function(e) {
           if ($(e.item).text() == "Custom") {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Custom button for", field);
           }
         });
@@ -8946,6 +8990,7 @@ The widget instance which fired the event.
         scrollable: true,
         columnMenu: true,
         columnLock: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the just locked column
         }
       });
@@ -8956,6 +9001,7 @@ The widget instance which fired the event.
     <div id="treeList" style="width: 400px"></div>
     <script>
       function treeList_columnLock(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just locked column
       }
 
@@ -9010,6 +9056,7 @@ The widget instance which fired the event.
         scrollable: true,
         columnMenu: true,
         columnUnlock: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the just locked column
         }
       });
@@ -9020,6 +9067,7 @@ The widget instance which fired the event.
     <div id="treeList" style="width: 400px"></div>
     <script>
       function treeList_columnUnlock(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just locked column
       }
 

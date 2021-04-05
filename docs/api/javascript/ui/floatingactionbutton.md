@@ -126,10 +126,12 @@ Specifies the speed-dial items that will be rendered in a popup container anchor
             items: [{
                 label: 'Save',
                 icon: 'save',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('save action'); }
             }, {
                 label: 'Print',
                 icon: 'print',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }]
         });
@@ -150,10 +152,12 @@ Specifies whether the Item is enabled or not. By default all items are enabled.
             items: [{
                 label: 'Save',
                 icon: 'save',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('save action'); }
             }, {
                 label: 'Print',
                 icon: 'print',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); },
                 enabled: false
             }]
@@ -175,6 +179,7 @@ Specifies the click event handler of the speed-dial item.
             items: [{
                 label: 'Download',
                 icon: 'download',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('download action'); }
             }]
         });
@@ -196,6 +201,7 @@ Specifies a set of CSS classes for the speed-dial item.
                 label: 'Download',
                 icon: 'download',
                 cssClass: 'fab-download-action',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('download action'); }
             }]
         });
@@ -217,6 +223,7 @@ See [`the Web Font Icons help article`](https://docs.telerik.com/kendo-ui/styles
             icon: 'home',
             items: [{
                 icon: 'download',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('download action'); }
             }]
         });
@@ -237,6 +244,7 @@ Specifies the label for the speed-dial item.
             items: [{
                 label: 'Save',
                 icon: 'save',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('save action'); }
             }]
         });
@@ -261,6 +269,7 @@ The fields which can be used inside the template are:
             items: [{
                 label: 'print',
                 template: '#:text#',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }]
         });
@@ -278,6 +287,7 @@ The fields which can be used inside the template are:
                 template: function(e) {
                     return '<strong>' + e.text + '</strong>';
                 },
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }]
         });
@@ -298,6 +308,7 @@ Specifies the label for the speed-dial item that will be read by assistive techn
             items: [{
                 icon: 'print',
                 title: 'print action title',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }]
         });
@@ -355,6 +366,7 @@ Specifies the shape of the FloatingActionButton.
             items: [{
                 icon: 'print',
                 title: 'print action title',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }]
         });
@@ -470,6 +482,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
             items: [{
                 icon: 'print',
                 title: 'print action title',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }]
         }).getKendoFloatingActionButton();
@@ -685,6 +698,7 @@ If invoked prevents the click .
         var fab = $('#fab').kendoFloatingActionButton({
             text: 'Print',
             click: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log('print');
             }
         });
@@ -712,9 +726,11 @@ The **FloatingActionButton** instance that triggered the event.
             items: [{
                 icon: 'print',
                 title: 'print action title',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }],
             collapse: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log('collapse event triggered');
             }
         }).getKendoFloatingActionButton();
@@ -744,9 +760,11 @@ The **FloatingActionButton** instance that triggered the event.
             items: [{
                 icon: 'print',
                 title: 'print action title',
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 click: function() { console.log('print action'); }
             }],
             expand: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log('expand event triggered');
             }
         }).getKendoFloatingActionButton();

@@ -35210,6 +35210,7 @@ The drawing surface of the Chart. See [Drawing API](https://docs.telerik.com/ken
 
         function onShapeMouseEnter(e) {
             // https://docs.telerik.com/kendo-ui/api/javascript/drawing/surface/events/mouseenter
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         }
     </script>
@@ -35836,6 +35837,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var chart = $("#chart").data("kendoChart");
     var svg = chart.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -36039,6 +36041,7 @@ The label value or category name.
         { data: [1, 2] }
       ],
       axisLabelClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.axis.type, e.value);
       }
     });
@@ -36048,6 +36051,7 @@ The label value or category name.
     <div id="chart"></div>
     <script>
     function chart_axisLabelClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.axis.type, e.value);
     }
     $("#chart").kendoChart({
@@ -36085,6 +36089,7 @@ The widget instance which fired the event.
         { field: "value" }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -36094,6 +36099,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBound");
     }
     $("#chart").kendoChart({
@@ -36138,6 +36144,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("drag");
       }
     });
@@ -36147,6 +36154,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_drag(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("drag");
     }
     $("#chart").kendoChart({
@@ -36186,6 +36194,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       dragEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragEnd");
       }
     });
@@ -36195,6 +36204,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_dragEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dragEnd");
     }
     $("#chart").kendoChart({
@@ -36238,6 +36248,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       dragStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragStart");
       }
     });
@@ -36247,6 +36258,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_dragStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dragStart");
     }
     $("#chart").kendoChart({
@@ -36302,6 +36314,7 @@ The DOM element of the plot area.
           { data: [1, 5, 2], name: "Task 2" }
         ],
         legendItemClick: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log("Clicked an item with text: " + e.text);
 
           //prevent toggling the series visibility on legend item click
@@ -36314,6 +36327,7 @@ The DOM element of the plot area.
     <div id="chart"></div>
     <script>
       function chart_legendClick(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Clicked an item with text: " + e.text);
 
         //prevent toggling the series visibility on legend item click
@@ -36370,6 +36384,7 @@ The name of the series.
           { data: [1, 5, 2], name: "Task 2" }
         ],
         legendItemHover: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log("Hovered an item with text: " + e.text);
         }
       });
@@ -36380,6 +36395,7 @@ The name of the series.
     <div id="chart"></div>
     <script>
       function chart_legendHover(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Hovered an item with text: " + e.text);
       }
       $("#chart").kendoChart({
@@ -36432,6 +36448,7 @@ The name of the series.
           { data: [1, 5, 2], name: "Task 2" }
         ],
         legendItemLeave: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Left an item with text: " + e.text);
         }
       });
@@ -36449,6 +36466,7 @@ The name of the series.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("legendItemLeave", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Left an item with text: " + e.text);
       });
     </script>
@@ -36497,6 +36515,7 @@ The note visual element.
         data: [{ value: 1, noteText: "a" }]
       }],
       noteClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.text);
       }
     });
@@ -36506,6 +36525,7 @@ The note visual element.
     <div id="chart"></div>
     <script>
     function chart_noteClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.text);
     }
     $("#chart").kendoChart({
@@ -36561,6 +36581,7 @@ The note visual element.
         data: [{ value: 1, noteText: "a" }]
       }],
       noteHover: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.text);
       }
     });
@@ -36570,6 +36591,7 @@ The note visual element.
     <div id="chart"></div>
     <script>
     function chart_noteHover(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.text);
     }
     $("#chart").kendoChart({
@@ -36625,6 +36647,7 @@ The note visual element.
         data: [{ value: 1, noteText: "a" }]
       }],
       noteLeave: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.text);
       }
     });
@@ -36634,6 +36657,7 @@ The note visual element.
     <div id="chart"></div>
     <script>
     function chart_noteLeave(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.text);
     }
     $("#chart").kendoChart({
@@ -36752,6 +36776,7 @@ The Y axis value or array of values for multi-axis charts.
         { data: [1, 2] }
       ],
       plotAreaClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -36761,6 +36786,7 @@ The Y axis value or array of values for multi-axis charts.
     <div id="chart"></div>
     <script>
     function chart_plotAreaClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
     $("#chart").kendoChart({
@@ -36814,6 +36840,7 @@ The Y axis value or array of values for multi-axis charts.
         { data: [1, 2] }
       ],
       plotAreaHover: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -36823,6 +36850,7 @@ The Y axis value or array of values for multi-axis charts.
     <div id="chart"></div>
     <script>
     function chart_plotAreaHover(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
     $("#chart").kendoChart({
@@ -36885,6 +36913,7 @@ The widget instance which fired the event.
         { field: "value" }
       ],
       render: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("render");
       }
     });
@@ -36894,6 +36923,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_render(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("re");
     }
     $("#chart").kendoChart({
@@ -36954,6 +36984,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
         }
       },
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.from, e.to);
       }
     });
@@ -36964,6 +36995,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
     <div id="chart"></div>
     <script>
     function chart_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.from, e.to);
     }
     $("#chart").kendoChart({
@@ -37028,6 +37060,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
         }
       },
       selectEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.from, e.to);
       }
     });
@@ -37038,6 +37071,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
     <div id="chart"></div>
     <script>
     function chart_selectEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.from, e.to);
     }
     $("#chart").kendoChart({
@@ -37102,6 +37136,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
         }
       },
       selectStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.from, e.to);
       }
     });
@@ -37111,6 +37146,7 @@ The last selected category is at index [to - 1] unless the axis is justified. In
     <div id="chart"></div>
     <script>
     function chart_selectStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.from, e.to);
     }
     $("#chart").kendoChart({
@@ -37209,6 +37245,7 @@ The data point value.
         { data: [1, 2] }
       ],
       seriesClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -37224,6 +37261,7 @@ The data point value.
     });
 
     functino chart_seriesClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
 
@@ -37302,6 +37340,7 @@ The data point value.
         { data: [1, 2] }
       ],
       seriesHover: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       }
     });
@@ -37310,6 +37349,7 @@ The data point value.
 #### Example - subscribe to the "seriesHover" event after initialization
     <div id="chart"></div>
     functino chart_seriesHover(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.value);
     }
     <script>
@@ -37384,6 +37424,7 @@ The data point value.
           { data: [1, 2] }
         ],
         seriesOver: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.value);
         }
       });
@@ -37399,6 +37440,7 @@ The data point value.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("seriesOver", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       });
     </script>
@@ -37465,6 +37507,7 @@ The data point value.
           { data: [1, 2] }
         ],
         seriesLeave: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.value);
         }
       });
@@ -37480,6 +37523,7 @@ The data point value.
       });
       var chart = $("#chart").data("kendoChart");
       chart.bind("seriesLeave", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.value);
       });
     </script>
@@ -37516,6 +37560,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       zoom: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("zoom");
       }
     });
@@ -37525,6 +37570,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_zoom(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("zoom");
     }
     $("#chart").kendoChart({
@@ -37564,6 +37610,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       zoomEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("zoomEnd");
       }
     });
@@ -37573,6 +37620,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_zoomEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("zoomEnd");
     }
     $("#chart").kendoChart({
@@ -37616,6 +37664,7 @@ The widget instance which fired the event.
         { data: [1, 2] }
       ],
       zoomStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("zoomStart");
       }
     });
@@ -37625,6 +37674,7 @@ The widget instance which fired the event.
     <div id="chart"></div>
     <script>
     function chart_zoomStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("zoomStart");
     }
     $("#chart").kendoChart({

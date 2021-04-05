@@ -65,6 +65,7 @@ Note that if the `parentId` type is `number`, its `defaultValue` should be set t
     });
     dataSource.fetch(function() {
       var task = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(task.title);
     });
     </script>
@@ -297,6 +298,7 @@ The reference task.
 
       dataSource.fetch();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.taskLevel(dataSource.at(1))) // outputs "1"
     </script>
 
@@ -341,6 +343,7 @@ The reference task.
 
       dataSource.fetch();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.taskParent(dataSource.at(1)).title) // outputs "Task1"
     </script>
 
@@ -371,6 +374,7 @@ The reference task.
 
       dataSource.fetch();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dataSource.taskParent(dataSource.at(0))) // outputs "null"`
     </script>
 
@@ -608,5 +612,6 @@ The new values which will be used to update the task.
       dataSource.update(task, { title: "New Title" });
 
       document.write(task.title); // outputs "New Title"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(task.title); // outputs "New Title"
     </script>

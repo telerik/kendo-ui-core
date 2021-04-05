@@ -1083,6 +1083,7 @@ The widget instance which fired the event.
       $("#filter").kendoFilter({
       	dataSource: dataSource,
         change: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.expression);
         }
       });

@@ -132,6 +132,7 @@ Retrieves the current content holder of the View - this is the content element i
     <script>
     function getContentElement() {
         var view = $("#myView").data("kendoMobileView");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.contentElement());
     }
 
@@ -204,6 +205,7 @@ Fires after the mobile View becomes visible. If the view is displayed with trans
     var app = new kendo.mobile.Application();
 
     function afterShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.view);
     }
     </script>
@@ -231,6 +233,7 @@ Fires before the mobile View becomes hidden.
     <script>
     var app = new kendo.mobile.Application();
     function beforeHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log('foo hidden');
     }
     </script>
@@ -287,6 +290,7 @@ Fires when the mobile View becomes hidden.
     <script>
     var app = new kendo.mobile.Application();
     function onHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log('foo hidden');
     }
     </script>
@@ -311,6 +315,7 @@ Fires after the mobile View and its child widgets are initialized.
     var app = new kendo.mobile.Application();
 
     function init(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log('init');
     }
     </script>
@@ -334,6 +339,7 @@ Fires when the mobile View becomes visible.
     <script>
     var app = new kendo.mobile.Application();
     function show(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log('show');
     }
     </script>

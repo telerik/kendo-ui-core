@@ -753,6 +753,7 @@ A string, DOM element, or jQuery object which represents the item. A string is t
 
     var listbox = $("#listBox").data("kendoListBox");
     var dataItem = listbox.dataItem(".k-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>
 
@@ -773,6 +774,7 @@ A string, DOM element, or jQuery object which represents the item. A string is t
             dataSource: dataSource,
             template: "<div>#:name#</div>"
         }).data("kendoListBox");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(listBox.dataItems()) //will output the bound array
     </script>
 
@@ -853,6 +855,7 @@ Obtains an array of the DOM elements which correspond to the data items from the
     // get a reference to the first list box widget
     var listBox = $("#listBox").data("kendoListBox");
     var items = listBox.items();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(items); // logs the items
     </script>
 
@@ -1105,6 +1108,7 @@ The function context of the event handler (available through the `this` keyword)
        ],
        dataBound: function() {
            //handle event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
            console.log("data bound");
        }
     });
@@ -1181,6 +1185,7 @@ If invoked, prevents the `dragstart` action. The element will remain at its orig
     $("#listBox").kendoListBox({
          draggable: true,
          drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log("drag event");
          }
     });
@@ -1216,6 +1221,7 @@ If invoked, prevents the `drop` action. The element will remain at its original 
     $("#listBox").kendoListBox({
          draggable: true,
          drop: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log("drop event");
          }
     });
@@ -1251,7 +1257,9 @@ The original `drag` event data of `draggable`.
     $("#listBox").kendoListBox({
         draggable: true,
         dragend: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.items);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.dataItems);
         }
     });
@@ -1330,6 +1338,7 @@ The data items that are to be removed.
     // bind to the remove event
     listBox.bind("remove", function(e) {
         // handle event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("remove");
         e.preventDefault();
     });

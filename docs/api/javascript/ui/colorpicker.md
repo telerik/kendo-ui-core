@@ -392,6 +392,7 @@ The value of the colorpicker.
     <script>
     $("#colorpicker").kendoColorPicker({
       change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The picked color is ", e.value);
       }
     });
@@ -402,6 +403,7 @@ The value of the colorpicker.
     <div id="colorpicker"></div>
     <script>
     function picker_change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The picked color is ", e.value);
     }
     $("#colorpicker").kendoColorPicker();
@@ -427,6 +429,7 @@ The value of the colorpicker.
     <script>
     $("#colorpicker").kendoColorPicker({
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The selected color is ", e.value);
       }
     });
@@ -437,6 +440,7 @@ The value of the colorpicker.
     <div id="colorpicker"></div>
     <script>
     function picker_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The selected color is ", e.value);
     }
     $("#colorpicker").kendoColorPicker();
@@ -454,6 +458,7 @@ Fires when the picker popup is opening.
     <script>
     $("#colorpicker").kendoColorPicker({
       open: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Picker popup opened");
       }
     });
@@ -464,6 +469,7 @@ Fires when the picker popup is opening.
     <div id="colorpicker"></div>
     <script>
     function picker_open() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Picker popup opened");
     }
     $("#colorpicker").kendoColorPicker();
@@ -481,6 +487,7 @@ Fires when the picker popup is closing.
     <script>
     $("#colorpicker").kendoColorPicker({
       close: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Picker popup closed");
       }
     });
@@ -491,6 +498,7 @@ Fires when the picker popup is closing.
     <div id="colorpicker"></div>
     <script>
     function picker_close() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Picker popup closed");
     }
     $("#colorpicker").kendoColorPicker();

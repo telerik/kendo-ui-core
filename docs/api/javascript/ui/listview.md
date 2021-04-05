@@ -973,6 +973,7 @@ A string, DOM element or jQuery object which represents the ListView item. A str
       }).data("kendoListView")
 
       var row = $('#listView > div').first();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(listview.dataItem(row));
     </script>
 
@@ -995,6 +996,7 @@ Returns the array of data items that the widget is bound to.
         dataSource: dataSource,
         template: "<div>#:name#</div>"
       }).data("kendoListView")
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(listview.dataItems()) //will output the bound array
     </script>
 
@@ -1381,6 +1383,7 @@ The event handler function context (available via the `this` keyword) will be se
           }
         },
         cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 					console.log("Cancelled editing of item with id " + e.model.id);
         }
       });
@@ -1429,6 +1432,7 @@ The event handler function context (available via the `this` keyword) will be se
       var listView = $("#listView").data("kendoListView");
       // bind to the cancel event
       listView.bind("cancel", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Cancelled editing of item with id " + e.model.id);
       });
       listView.edit(listView.content.children().first());
@@ -1483,6 +1487,7 @@ The event handler function context (available via the `this` keyword) will be se
         change: function(e){
           // get ListView selection
           var selectedItems = e.sender.select();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(selectedItems);
         }
       }).data("kendoListView");
@@ -1519,6 +1524,7 @@ The event handler function context (available via the `this` keyword) will be se
       listView.bind("change", function(e){
         // get ListView selection
         var selectedItems = e.sender.select();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(selectedItems);
       });
     </script>
@@ -1539,6 +1545,7 @@ The event handler function context (available via the `this` keyword) will be se
           { name: "John Doe", age: 30 }
         ],
         dataBound: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("ListView is bound and ready to render.");
         }
       });
@@ -1561,6 +1568,7 @@ The event handler function context (available via the `this` keyword) will be se
         ],
         dataBinding: function(e) {
           // call e.preventDefault() if you want to cancel binding.
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("ListView is ready to bind to data");
         }
       });
@@ -1614,6 +1622,7 @@ The event handler function context (available via the `this` keyword) will be se
           }
         },
         edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Editing of item with id " + e.model.id);
         }
       });
@@ -1664,6 +1673,7 @@ The event handler function context (available via the `this` keyword) will be se
       var listView = $("#listView").data("kendoListView");
       // bind to the edit event
       listView.bind("edit", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing of item with id " + e.model.id);
       });
     </script>
@@ -1710,6 +1720,7 @@ The event handler function context (available via the `this` keyword) will be se
         },
         template: kendo.template($("#template").html()),
         remove: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Item with id "+ e.model.id + " deleted.");
         }
       });
@@ -1744,6 +1755,7 @@ The event handler function context (available via the `this` keyword) will be se
 
       var listView = $("#listview").data("kendoListView");
       listView.bind("remove", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Item with id "+ e.model.id + " deleted.");
       });
     </script>
@@ -1820,6 +1832,7 @@ The ListView instance which fired the event.
         template: kendo.template($("#template").html()),
         editTemplate: kendo.template($("#editTemplate").html()),
         save: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Changes saved.");
         }
       });

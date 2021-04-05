@@ -192,6 +192,7 @@ The source widget instance.
         textField: "category",
         colorField: "color",
         dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("DataBound");
         }
       });
@@ -201,6 +202,7 @@ The source widget instance.
     <div id="treemap"></div>
     <script>
       function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("DataBound");
       }
 
@@ -270,6 +272,7 @@ The text that is being searched for.
     var treemap = $("#treemap").getKendoTreeMap();
     var fooDataItem = treemap.dataSource.get(1);
     var fooElement = treemap.findByUid(fooDataItem.uid);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(fooElement);
     </script>
 
@@ -307,6 +310,7 @@ A string, DOM element or jQuery object which represents the tile. A string is tr
 
     var treemap = $("#treemap").getKendoTreeMap();
     var dataItem = treemap.dataItem(".k-treemap-tile:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>
 

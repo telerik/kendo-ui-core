@@ -31,7 +31,9 @@ A function to execute each time the event is triggered. That function should hav
     <script>
     var obj = new kendo.Observable();
     obj.bind("myevent", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sender === obj); // outputs "true"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(this === obj); // also outputs "true"
     });
     obj.trigger("myevent"); // causes the handler to be executed
@@ -63,6 +65,7 @@ A function to execute each time the event is triggered. That function should hav
     });
     obj.trigger("myevent"); // fire the event
     obj.trigger("myevent"); // fire the event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(numberOfCalls); // outputs "1"
     </script>
 
@@ -85,6 +88,7 @@ Optional event data which will be passed as an argument to the event handlers.
     <script>
     var obj = new kendo.Observable();
     obj.bind("myevent", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.data); // outputs "data"
     });
     obj.trigger("myevent", { data: "data" });
@@ -115,5 +119,6 @@ The handler which should no longer be executed. If not specified all handlers li
     obj.trigger("myevent"); // fire the event
     obj.unbind("myevent", handler); // unsubscribe from the event
     obj.trigger("myevent"); // fire the event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(numberOfCalls); // outputs "1"
     </script>

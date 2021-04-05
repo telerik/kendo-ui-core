@@ -243,6 +243,7 @@ The max date to set.
 
     var max = dateinput.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -281,6 +282,7 @@ The min date to set.
 
     var min = dateinput.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -359,6 +361,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var dateinput = $("#dateinput").data("kendoDateInput");
 
     var value = dateinput.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -394,6 +397,7 @@ The widget instance which fired the event.
     $("#dateinput").kendoDateInput({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the dateinput
         }
     });
@@ -409,6 +413,7 @@ The widget instance which fired the event.
 
     dateinput.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the dateinput
     });
     </script>

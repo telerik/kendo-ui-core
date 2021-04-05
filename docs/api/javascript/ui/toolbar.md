@@ -151,6 +151,7 @@ Specifies the click event handler of the button. Applicable only for the childre
 
     <script>
     function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("click");
     }
 
@@ -411,6 +412,7 @@ Specifies the toggle event handler of the button. Applicable only for the childr
 
     <script>
         function toggle(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.group);
         }
 
@@ -508,6 +510,7 @@ Specifies the click event handler of the button. Applicable only for commands of
                 type: "button",
                 text: "foo",
                 click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e.target.text() + " is clicked");
                 }
             }
@@ -1079,6 +1082,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
                 text: "Foo",
                 togglable: true,
                 toggle: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log("toggle!");
                 }
             }
@@ -1267,6 +1271,7 @@ The name of the group.
         var toolbar = $("#toolbar").data("kendoToolBar");
         var selected = toolbar.getSelectedFromGroup("radio");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(selected.attr("id"));
     </script>
 
@@ -1416,6 +1421,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2" }
             ],
             click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("click", e.target.text());
             }
         });
@@ -1434,6 +1440,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("click", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("click", e.target.text());
         });
     </script>
@@ -1470,6 +1477,7 @@ The widget instance which fired the event.
                 ] }
             ],
             close: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("close", e);
             }
         });
@@ -1492,6 +1500,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("close", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("close", e);
         });
     </script>
@@ -1528,6 +1537,7 @@ The widget instance which fired the event.
                 ] }
             ],
             open: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("open", e);
             }
         });
@@ -1550,6 +1560,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("open", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("open", e);
         });
     </script>
@@ -1592,6 +1603,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", togglable: true }
             ],
             toggle: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("toggle", e.target.text(), e.checked);
             }
         });
@@ -1610,6 +1622,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("toggle", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("toggle", e.target.text(), e.checked);
         });
     </script>
@@ -1638,6 +1651,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", overflow: "always" }
             ],
             overflowClose: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("close");
             }
         });
@@ -1656,6 +1670,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("overflowClose", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("close");
         });
     </script>
@@ -1684,6 +1699,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", overflow: "always" }
             ],
             overflowOpen: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("open");
             }
         });
@@ -1702,6 +1718,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("overflowOpen", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("open");
         });
     </script>

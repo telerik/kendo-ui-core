@@ -340,6 +340,7 @@ The index of the requested radio button.
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(radioGroup.item(1));
     </script>
 
@@ -361,6 +362,7 @@ Returns all radio buttons in the RadioGroup.
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(radioGroup.items());
     </script>
 
@@ -391,6 +393,7 @@ The value to set.
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
         radioGroup.value("two");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(radioGroup.value());
     </script>
 
@@ -426,8 +429,11 @@ The new value of the widget.
         $("#radiogroup").kendoRadioGroup({
             items: [ "one", "two", "three" ]
             change: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Old value: " + e.oldValue);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("New value: " + e.newValue);
             }
         });
@@ -455,6 +461,7 @@ The `<input type="radio">` DOM element that triggered the change.
         $("#radiogroup").kendoRadioGroup({
             items: [ "one", "two", "three" ]
             focus: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
             }
         });

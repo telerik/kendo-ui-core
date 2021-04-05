@@ -802,6 +802,7 @@ Fires when selection is changed.
         $("#multiViewCalendar").kendoMultiViewCalendar({
             change: function() {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value); //value is the selected date in the multiViewCalendar
             }
         });
@@ -817,6 +818,7 @@ Fires when selection is changed.
 
         multiViewCalendar.bind("change", function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the multiViewCalendar
         });
     </script>
@@ -832,9 +834,11 @@ Fires when multiViewCalendar navigates.
         $("#multiViewCalendar").kendoMultiViewCalendar({
             navigate: function() {
                 var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(view.name); //name of the current view
 
                 var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(current); //currently focused date
             }
         });
@@ -850,9 +854,11 @@ Fires when multiViewCalendar navigates.
 
         multiViewCalendar.bind("navigate", function() {
             var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view.name); //name of the current view
 
             var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(current); //currently focused date
         });
     </script>

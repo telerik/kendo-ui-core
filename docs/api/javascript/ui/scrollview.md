@@ -729,6 +729,7 @@ If invoked, prevents the change action.
     }
 
     function change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("page ", e.page, "data: ", e.data);
       //handle event
     }
@@ -769,6 +770,7 @@ If invoked, prevents the `change` event. The ScrollView stays on the current pag
     });
 
     function refresh(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Total: ", e.pageCount, " Current: ", e.page);
       //handle event
     }

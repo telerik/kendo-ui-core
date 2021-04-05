@@ -338,6 +338,7 @@ Gets the unmasked value of the MaskedTextBox.
 
     var raw = maskedtextbox.raw(); //the result value will be "123456"
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(raw);
     </script>
 
@@ -372,6 +373,7 @@ The value to set.
 
     var value = maskedtextbox.value();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -409,6 +411,7 @@ The widget instance which fired the event.
     $("#maskedtextbox").kendoMaskedTextBox({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the maskedtextbox
         }
     });
@@ -424,6 +427,7 @@ The widget instance which fired the event.
 
     maskedtextbox.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the maskedtextbox
     });
     </script>

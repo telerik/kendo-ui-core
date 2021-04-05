@@ -304,6 +304,7 @@ The current value of the **ProgressBar**.
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 	      console.log("Value is " + e.value);
 	    }
 	  });
@@ -314,6 +315,7 @@ The current value of the **ProgressBar**.
 	<div id="progressbar"></div>
 	<script>
 	  function onChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 	    console.log("Value is " + e.value);
 	  }
 
@@ -341,6 +343,7 @@ The current value of the **ProgressBar**.
 	<script>
 	  $("#progressbar").kendoProgressBar({
 	    complete: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 	      console.log("Value is " + e.value);
 	    }
 	  });
@@ -351,6 +354,7 @@ The current value of the **ProgressBar**.
 	<div id="progressbar"></div>
 	<script>
 	  function onComplete(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 	    console.log("Value is " + e.value);
 	  }
 

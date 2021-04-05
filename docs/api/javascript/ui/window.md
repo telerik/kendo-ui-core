@@ -749,6 +749,7 @@ The content of the Window. Can be an HTML string or a jQuery object.
     <script>
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dialog.content()); // logs "foo"
     </script>
 
@@ -1240,6 +1241,7 @@ The status of the request as returned from [`jQuery.ajax`](https://api.jquery.co
     <script>
     $("#dialog").kendoWindow({
       error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Request failed with status " + e.status)
       }
     });
@@ -1250,6 +1252,7 @@ The status of the request as returned from [`jQuery.ajax`](https://api.jquery.co
     <div id="dialog"></div>
     <script>
     function window_error(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Request failed with status " + e.status)
     }
     $("#dialog").kendoWindow();
@@ -1268,6 +1271,7 @@ Triggered when the user maximizes the Window. Introduced in 2016.Q1.SP1.
     $("#dialog").kendoWindow({
       actions: ["Maximize"],
       maximize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Window was maximized")
       }
     });
@@ -1278,6 +1282,7 @@ Triggered when the user maximizes the Window. Introduced in 2016.Q1.SP1.
     <div id="dialog"></div>
     <script>
     function window_maximize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Window was maximized")
     }
     $("#dialog").kendoWindow({ actions: ["Maximize"] });
@@ -1296,6 +1301,7 @@ Triggered when the user minimizes the Window. Introduced in 2016.Q1.SP1.
     $("#dialog").kendoWindow({
       actions: ["Minimize"],
       minimize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Window was minimized")
       }
     });
@@ -1306,6 +1312,7 @@ Triggered when the user minimizes the Window. Introduced in 2016.Q1.SP1.
     <div id="dialog"></div>
     <script>
     function window_minimize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Window was minimized")
     }
     $("#dialog").kendoWindow({ actions: ["Minimize"] });

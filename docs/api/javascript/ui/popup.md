@@ -383,6 +383,7 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         activate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.sender.element[0]);
         }
     }).data("kendoPopup").open();
@@ -397,6 +398,7 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("activate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sender.element[0]);
     });
 
@@ -455,6 +457,7 @@ The widget instance which fired the event.
     <script>
     $("#popup").kendoPopup({
         deactivate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.sender.element[0]);
         }
     }).data("kendoPopup").open();
@@ -469,6 +472,7 @@ The widget instance which fired the event.
     var popup = $("#popup").data("kendoPopup");
 
     popup.bind("deactivate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sender.element[0]);
     });
 

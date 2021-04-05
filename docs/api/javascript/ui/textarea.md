@@ -334,9 +334,11 @@ The value to set.
         }).data('kendoTextArea');
         var value = textarea.value();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); // Displays "a very good description"
         textarea.value("even better description");
         value = textarea.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); // Displays "even better description"
     </script>
 
@@ -363,6 +365,7 @@ The widget instance which fired the event.
         $("#description").kendoTextArea({
             change: function(e){
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value);
                 // Use the value of the widget
             }
@@ -376,6 +379,7 @@ The widget instance which fired the event.
     <script>
         function textarea_change(e) {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value);
             // Use the value of the widget
         };

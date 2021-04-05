@@ -610,6 +610,7 @@ The content of the Dialog. Can be an HTML string or jQuery object.
       title: "Kendo Dialog Component",
     });
     var dialog = $("#dialog").data("kendoDialog");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dialog.content()); // logs "foo"
     </script>
 

@@ -784,6 +784,7 @@ The maximum time value to set for a DateTimePicker, expressed as a Date object o
 
     var max = datetimepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -822,6 +823,7 @@ The minimum time value to set for a DateTimePicker, expressed as a Date object o
 
     var min = datetimepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -978,6 +980,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
 
     var value = datetimepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -1013,6 +1016,7 @@ The widget instance which fired the event.
     $("#datetimepicker").kendoDateTimePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datetimepicker
         }
     });
@@ -1028,6 +1032,7 @@ The widget instance which fired the event.
 
     datetimepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datetimepicker
     });
     </script>

@@ -432,6 +432,7 @@ Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the qrcode
     });
     var qrcode = $("#qrcode").data("kendoQRCode");
     var svg = qrcode.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 

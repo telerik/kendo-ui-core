@@ -1483,6 +1483,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
             dataTextField: "FullName",
             dataSource: dataSource,
             dataBound: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("dataBound");
             }
         })
@@ -1515,6 +1516,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         }).data("kendoContextMenu");
 
         contextMenu.bind("dataBound", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         });
     </script>
@@ -1646,10 +1648,12 @@ The current target of the ContextMenu - either the init target or the current el
             target: "#target",
             activate: function(e){
                 $('li.k-item.k-state-hover').css('font-weight','bold');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item);
             },
             deactivate: function(e) {
                 $('li.k-item').css('font-weight','');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item);
             }
         });
@@ -1729,10 +1733,12 @@ The current target of the ContextMenu - either the init target or the current el
             target: "#target",
             activate: function(e){
                 $('li.k-item.k-state-hover').css('font-weight','bold');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.item);
             },
             deactivate: function(e) {
                 $('li.k-item').css('font-weight','');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.item);
             }
         });

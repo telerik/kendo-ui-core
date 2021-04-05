@@ -77,9 +77,11 @@ The title of the Cancel button.
       okText: "OK"
     }
     }).data("kendoPrompt").result.done(function(data){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("User accepted with text: " + data);
       })
       .fail(function(data){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("User rejected with text: " + data);
       });
     </script>

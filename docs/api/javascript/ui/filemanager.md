@@ -1060,6 +1060,7 @@ Gets the path that the FileManager is navigated to.
 
         var path = fileManager.path();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(path);
     </script>
 
@@ -1520,6 +1521,7 @@ The returned response by the service.
                 }
             },
             command: function (ev) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Command " + ev.action + " - item:" + ev.data.item.path + "; status: " + ev.status);
 
                 if (ev.status === "fail") { // Refresh the FileManager if a command has failed.

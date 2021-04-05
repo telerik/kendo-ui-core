@@ -225,6 +225,7 @@ The value of the ColorPicker.
     <script>
     $("#flatpicker").kendoFlatColorPicker({
       change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The newly selected color is ", e.value);
       }
     });
@@ -235,6 +236,7 @@ The value of the ColorPicker.
     <div id="flatpicker"></div>
     <script>
     function picker_change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The newly selected color is ", e.value);
     }
     $("#flatpicker").kendoFlatColorPicker();

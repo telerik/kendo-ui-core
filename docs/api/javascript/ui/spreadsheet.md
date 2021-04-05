@@ -1445,6 +1445,7 @@ This flag only affects the presentation - the way formulas are entered by the en
     sheet.range('B1').input('=SUM(A1, A2, 3.14)');
 
     // prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 To make the API functions obey `useCultureDecimals`, wrap your code in a call to `sheet.withCultureDecimals`. Assuming a culture where the comma is used for decimals, compare the previous example with the following one.
@@ -1455,10 +1456,12 @@ To make the API functions obey `useCultureDecimals`, wrap your code in a call to
         sheet.range('B1').input('=SUM(A1; A2; 3,14)');
 
         // prints: SUM(A1; A2; 3,14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(sheet.range('B1').formula());
     });
 
     // back to canonical form; this prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 ## Methods
@@ -2488,6 +2491,7 @@ The [progress handler](https://api.jquery.com/deferred.progress/) of the promise
             excelImport: function(e) {
                 e.promise
                 .progress(function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(kendo.format("{0:P} complete", e.progress));
                 })
                 .done(function() {

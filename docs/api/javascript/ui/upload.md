@@ -1123,6 +1123,7 @@ Retrieves the files that are currently selected.
               files = upload.getFiles();
 
           alert("You have selected " + files.length  + " files");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(files);
         })
       });
@@ -1583,6 +1584,7 @@ Fires when the data about the progress of the upload is available.
             // An array with information about the uploaded files
             var files = e.files;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.percentComplete);
         }
     </script>
@@ -1693,8 +1695,11 @@ Fires when a file is selected.
 
         function onSelect(e) {
             $.each(e.files, function (index, value) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Name: " + value.name);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Size: " + value.size + " bytes");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Extension: " + value.extension);
             });
         };

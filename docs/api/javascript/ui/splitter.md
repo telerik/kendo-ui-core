@@ -574,6 +574,7 @@ The collapsing pane of the Splitter.
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true }, {} ],
       collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log($(e.pane).html() + " has been collapsed");
       }
     });
@@ -587,6 +588,7 @@ The collapsing pane of the Splitter.
     </div>
     <script>
     function splitter_collapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($(e.pane).html() + " has been collapsed");
     }
     $("#splitter").kendoSplitter({
@@ -616,6 +618,7 @@ The pane whose content has been loaded.
     $("#splitter").kendoSplitter({
       panes: [ { content: "/foo" }, {} ],
       contentLoad: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log($(e.pane).html() + " has been loaded");
       }
     });
@@ -629,6 +632,7 @@ The pane whose content has been loaded.
     </div>
     <script>
     function splitter_contentLoad(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($(e.pane).html() + " has been loaded");
     }
     $("#splitter").kendoSplitter({
@@ -661,6 +665,7 @@ The status of the request, as returned from [jQuery.ajax](https://api.jquery.com
     <script>
     $("#splitter").kendoSplitter({
       error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(
             "Pane #" + $(e.pane).index() + " could not be loaded from server" +
             " (status " + e.xhr.status + ")"
@@ -677,6 +682,7 @@ The status of the request, as returned from [jQuery.ajax](https://api.jquery.com
     </div>
     <script>
     function splitter_error(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(
             "Pane #" + $(e.pane).index() + " could not be loaded from server" +
             " (status " + e.xhr.status + ")"
@@ -707,6 +713,7 @@ The expanding pane of the Splitter.
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true, collapsed: true}, {} ],
       expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log($(e.pane).html() + " has been expanded");
       }
     });
@@ -720,6 +727,7 @@ The expanding pane of the Splitter.
     </div>
     <script>
     function splitter_expand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($(e.pane).html() + " has been expanded");
     }
     $("#splitter").kendoSplitter({
@@ -745,6 +753,7 @@ Fires when the splitter layout has changed
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true }, {} ],
       layoutChange: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Splitter layout has changed");
       }
     });
@@ -758,6 +767,7 @@ Fires when the splitter layout has changed
     </div>
     <script>
     function splitter_layoutChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Splitter layout has changed");
     }
     $("#splitter").kendoSplitter({
@@ -781,6 +791,7 @@ Triggered when a pane is resized.
     $("#splitter").kendoSplitter({
       panes: [ { collapsible: true }, {} ],
       resize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Splitter pane has been resized");
       }
     });
@@ -794,6 +805,7 @@ Triggered when a pane is resized.
     </div>
     <script>
     function splitter_resize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Splitter pane has been resized");
     }
     $("#splitter").kendoSplitter({

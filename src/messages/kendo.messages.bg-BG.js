@@ -954,7 +954,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "associateScope": "Асоцииране чрез 'scope' атрибут",
   "associateIds": "Асоцииране чрез Id",
   "copyFormat": "Копирай форматирането",
-  "applyFormat": "Приложи форматирането"
+  "applyFormat": "Приложи форматирането",
+  "borderNone": "Без рамка"
 });
 }
 

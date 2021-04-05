@@ -625,6 +625,7 @@ The max date to set.
 
     var max = daterangepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -663,6 +664,7 @@ The min date to set.
 
     var min = daterangepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -783,6 +785,7 @@ The widget instance which fired the event.
     $("#daterangepicker").kendoDateRangePicker({
         change: function() {
             var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(range);
         }
     });
@@ -798,6 +801,7 @@ The widget instance which fired the event.
 
     daterangepicker.bind("change", function() {
         var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(range);
     });
     </script>

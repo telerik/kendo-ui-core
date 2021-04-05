@@ -401,6 +401,7 @@ Fired while dragging. The `drag` event represents a jQuery `mousemove` event and
           return element.clone();
         },
         drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("x: ", e.screenX, "y: ", e.screenY);
         }
       });
@@ -426,6 +427,7 @@ Fired while dragging. The `drag` event represents a jQuery `mousemove` event and
       });
 
       $("#draggable").data("kendoDraggable").bind("drag", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("x: ", e.screenX, "y: ", e.screenY);
       });
     </script>
@@ -463,6 +465,7 @@ The `dragcancel` event represents a jQuery `keyup` event and contains all the ev
           return element.clone();
         },
         dragcancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("'Esc' key pressed! Dragging is cancelled.");
         }
       });

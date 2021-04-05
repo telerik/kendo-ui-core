@@ -1259,6 +1259,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
             dataTextField: "FullName",
             dataSource: dataSource,
             dataBound: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("dataBound");
             }
         })
@@ -1289,6 +1290,7 @@ The dataItem that is being loaded or bound (at initial bound this should be unde
         }).data("kendoMenu");
 
         menu.bind("dataBound", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         });
     </script>

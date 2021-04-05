@@ -744,6 +744,7 @@ The max date to set.
 
     var max = datepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -782,6 +783,7 @@ The min date to set.
 
     var min = datepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -878,6 +880,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datepicker = $("#datepicker").data("kendoDatePicker");
 
     var value = datepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -913,6 +916,7 @@ The widget instance which fired the event.
     $("#datepicker").kendoDatePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datepicker
         }
     });
@@ -928,6 +932,7 @@ The widget instance which fired the event.
 
     datepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datepicker
     });
     </script>

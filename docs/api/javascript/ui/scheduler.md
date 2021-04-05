@@ -6123,6 +6123,7 @@ Gets currently expanded scheduler events.
 
     scheduler.saveEvent();
     //get second occurrence
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(scheduler.data()[1]);
     </script>
 
@@ -6257,6 +6258,7 @@ The `uid` of the occurrence to look for.
     var uid = scheduler.wrapper.find(".k-event:last").data("uid");
     var event = scheduler.occurrenceByUid(uid);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event);
     </script>
 
@@ -6303,6 +6305,7 @@ The end date of the period.
 
     var events = scheduler.occurrencesInRange(new Date("2013/6/5"), new Date("2013/6/10"));
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(events);
     </script>
 
@@ -6398,6 +6401,7 @@ Get the relevant resources for a given slot.
     var resource = scheduler.resourcesBySlot(slot);
 
     for (var key in resource) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("resouce - {" + key + ": " + resource[key] + " }");
     }
 
@@ -6563,7 +6567,9 @@ The vertical position.
     var scheduler = $("#scheduler").data("kendoScheduler");
     var slot = scheduler.slotByPosition(100,100);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot startDate: " + slot.startDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot endDate: " + slot.endDate);
     </script>
 
@@ -6589,7 +6595,9 @@ Get the time slot from given element.
     var element = scheduler.view().content.find("tr:first td:first");
     var slot = scheduler.slotByElement(element);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot startDate: " + slot.startDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot endDate: " + slot.endDate);
     </script>
 
@@ -6699,6 +6707,7 @@ The widget instance which fired the event.
         }
       ],
       add: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Add", e.event.title);
       }
     });
@@ -6709,6 +6718,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_add(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Add", e.start);
     }
     $("#scheduler").kendoScheduler({
@@ -6766,6 +6776,7 @@ The widget instance which fired the event.
         }
       ],
       cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Cancelling", e.event.title);
       }
     });
@@ -6776,6 +6787,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_cancel(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Cancelling", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -6856,6 +6868,7 @@ The widget instance which fired the event.
         var start = e.start;
         var end = e.end;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Selection between {0:g} and {1:g}", start, end));
       }
     });
@@ -6869,6 +6882,7 @@ The widget instance which fired the event.
         var start = e.start;
         var end = e.end;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Selection between {0:g} and {1:g}", start, end));
     }
 
@@ -6916,6 +6930,7 @@ The widget instance which fired the event.
         }
       ],
       dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
       }
     });
@@ -6926,6 +6941,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
     }
     $("#scheduler").kendoScheduler({
@@ -6971,6 +6987,7 @@ The widget instance which fired the event.
         }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -6981,6 +6998,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
     }
     $("#scheduler").kendoScheduler({
@@ -7038,6 +7056,7 @@ The widget instance which fired the event.
         }
       ],
       edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing", e.event.title);
       }
     });
@@ -7048,6 +7067,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_edit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Editing", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7101,6 +7121,7 @@ The widget instance which fired the event.
         }
       ],
       moveStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Move Start", e.event.title);
       }
     });
@@ -7111,6 +7132,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_moveStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Move Start", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7176,6 +7198,7 @@ The widget instance which fired the event.
         }
       ],
       move: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Move", e.slot.start);
       }
     });
@@ -7186,6 +7209,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_move(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Move", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7267,6 +7291,7 @@ The widget instance which fired the event.
         }
       ],
       moveEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("MoveEnd", e.slot.start);
       }
     });
@@ -7277,6 +7302,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_moveEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("MoveEnd", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7345,6 +7371,7 @@ The widget instance, which fired the event.
         }
       ],
       navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("navigate", e.date);
       }
     });
@@ -7355,6 +7382,7 @@ The widget instance, which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_navigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("navigate", e.date);
     }
     $("#scheduler").kendoScheduler({
@@ -7468,6 +7496,7 @@ The widget instance which fired the event.
         }
       ],
       remove: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing", e.event.title);
       }
     });
@@ -7478,6 +7507,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_remove(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Removing", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7531,6 +7561,7 @@ The widget instance which fired the event.
         }
       ],
       resizeStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize Start", e.event.title);
       }
     });
@@ -7541,6 +7572,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_resizeStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize Start", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7610,6 +7642,7 @@ The widget instance which fired the event.
         }
       ],
       resize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize", e.slot.start);
       }
     });
@@ -7620,6 +7653,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_resize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7697,6 +7731,7 @@ The widget instance which fired the event.
         }
       ],
       resizeEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize End", e.slot.start);
       }
     });
@@ -7707,6 +7742,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_resizeEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize End", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7764,6 +7800,7 @@ The widget instance which fired the event.
         }
       ],
       save: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Saving", e.event.title);
       }
     });
@@ -7774,6 +7811,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_save(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Saving", e.event.title);
     }
     $("#scheduler").kendoScheduler({

@@ -837,6 +837,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var gauge = $("#gauge").data("kendoRadialGauge");
     var svg = gauge.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
