@@ -151,7 +151,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "associateScope": "Associate using 'scope' attribute",
   "associateIds": "Associate using Ids",
   "copyFormat": "Copy format",
-  "applyFormat": "Apply format"
+  "applyFormat": "Apply format",
+  "borderNone": "None"
 });
 }
 

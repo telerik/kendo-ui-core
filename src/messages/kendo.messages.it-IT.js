@@ -395,7 +395,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "dialogUpdate": "Aggiorna",
   "insertFile": "Inserisci file",
   "insertFile1": "Inserisci file",
-  "print": "Stampa"
+  "print": "Stampa",
+  "borderNone": "Nessuno"
 });
 }
 
