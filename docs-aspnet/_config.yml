@@ -84,7 +84,7 @@ navigation:
         position: 280
      "api":
         title: "API Reference"
-        position: 0
+        position: 0    
      "getting-started":
         title: "Getting Started"
         position: 2
@@ -412,6 +412,9 @@ navigation:
      "accessibility":
         title: "Accessibility"
         position: 9
+     "deployment":
+        title: "Deployment"
+        position: 10
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 12

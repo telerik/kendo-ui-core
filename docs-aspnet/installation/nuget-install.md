@@ -89,7 +89,36 @@ If you have already stored a token instead of storing the credentials as clear t
 
 ### Setup with nuget.config
 
-An alternative way to add the Telerik NuGet feed is to directly edit the nuget.config file. Refer to [this video](https://youtu.be/c3m_BLMXNDk?t=129) for more details.
+An alternative way to add the Telerik NuGet feed is to directly edit the `nuget.config` file. You can read more about it in the [Nuget Config File - Package Sources](https://docs.microsoft.com/en-us/nuget/reference/nuget-config-file#packagesources) article.
+
+Make sure you are familiar with how such configurations work. The [Common NuGet Configurations](https://docs.microsoft.com/en-us/nuget/consume-packages/configuring-nuget-behavior#creating-a-new-config-file) article is a reference document you can use.
+
+To use a `nuget.config` file for the Telerik feed, you need to:
+
+1. Ensure you have the relevant config file: `%AppData%\NuGet\NuGet.Config`. You can create a new one by via the [dotnet new command](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-new) by calling `dotnet new nugetconfig`.
+
+2. Add the Telerik feed to it, and make sure to use plain-text credentials, because the .NET Core NuGet tooling does not fully support encrypted credentials. Here is an example of how your config file can look like:
+
+    **nuget.config**
+    
+        <?xml version="1.0" encoding="utf-8"?>
+        <configuration>
+         <packageSources>
+            <!--To inherit the global NuGet package sources remove the <clear/> line below -->
+            <clear />
+            <add key="nuget" value="https://api.nuget.org/v3/index.json" />
+            <add key="telerik" value="https://nuget.telerik.com/nuget" />
+         </packageSources>
+         <packageSourceCredentials>
+            <telerik>
+              <add key="Username" value="your telerik account email" />
+              <add key="ClearTextPassword" value="your plain text password" />
+           </telerik>
+         </packageSourceCredentials>
+        </configuration>
+
+
+You could refer to [this video](https://youtu.be/c3m_BLMXNDk?t=129) for more details.
 
 ### Setup with the Progress Control Panel Application
 
@@ -138,6 +167,16 @@ The password must contain only ASCII characters.
 [Include the Kendo UI client-side resources in your project]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
 
 [How to use data-bound Telerik UI controls in your code]({% slug jsonserialization_core %})
+
+## Further Reading
+
+You may find useful the following Microsoft articles on securing your NuGet feed setup and supply chain as general best practices:
+
+* [Lock down your dependencies using configurable trust policies - Blog Post](https://devblogs.microsoft.com/nuget/lock-down-your-dependencies-using-configurable-trust-policies/)
+
+* [How to Scan NuGet Packages for Security Vulnerabilities - Blog Post](https://devblogs.microsoft.com/nuget/how-to-scan-nuget-packages-for-security-vulnerabilities/)
+
+* [Best practices for a secure software supply chain - MSDN docs](https://docs.microsoft.com/en-us/nuget/concepts/security-best-practices)
 
 ## See Also
 
