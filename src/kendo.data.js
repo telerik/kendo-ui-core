@@ -739,7 +739,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     var Model = ObservableObject.extend({
-        init: function(data) {
+        init: function(data, isModelLocked) {
             var that = this;
 
             if (!data || $.isEmptyObject(data)) {
@@ -752,9 +752,52 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             }
+            
+            //PREVENTS MODEL SCHEMA FROM CHANGING
+            if(isModelLocked === true){
+                Object.keys(data).forEach(prop => {
+                    if(!that.defaults.hasOwnProperty(prop)){
+                        console.log("Removing", prop, data[prop]);
+                        delete data[prop];
+                    }
+                });    
+            }
 
             ObservableObject.fn.init.call(that, data);
 
+            //REPLACES FIELDS WITH GETTERS AND SETTERS
+            //Setters allow dot notation syntax assignment to still trigger change notifications
+            //SO Model.set('prop', 'value') AND Model.prop = 'value' are interoperalbe
+            Object.keys(that.defaults).forEach((key, i) => {
+                var value = that.defaults[key];
+                if(data.hasOwnProperty(key)){
+                    value = data[key];
+                }
+                //RENAMES SCHEMA FIELDS AS PRIVATE _
+                Object.defineProperty(that, `_${key}`, {
+                    enumerable: false,
+                    writable: true,
+                    value: value
+                });
+                //POPULATES GETTERS AND SETTER WITH SCHEMA DEFINED FIELDS
+                Object.defineProperty(that, key, {
+                    enumerable: true,
+                    get(){
+                        that.trigger("get", {field: key});
+                        return that.get(`_${key}`);
+                    },
+                    set(value){
+                        if(that[`_${key}`] != value){
+                            var previous = that[`_${key}`];
+                            that[`_${key}`] = that.wrap(value);
+                            that.trigger("set", {field: key, value: value});
+                            that.trigger("change", {field: key, value: value, oldValue: previous});
+                        }
+                    }
+                });
+            });            
+            
+            
             that.dirty = false;
             that.dirtyFields = {};
 
@@ -764,6 +807,11 @@ var __meta__ = { // jshint ignore:line
                 if (that.id === undefined) {
                     that.id = that._defaultId;
                 }
+            }
+            
+            //PREVENTS MODEL SCHEMA FROM CHANGING
+            if(isModelLocked === true){
+                Object.seal(that);
             }
         },
 
