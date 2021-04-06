@@ -364,6 +364,7 @@ var __meta__ = { // jshint ignore:line
                 .attr({
                     role: "combobox",
                     "aria-expanded": false,
+                    "aria-haspopup": "grid",
                     "aria-owns": that.dateView._dateViewID,
                     "autocomplete": "off"
                 });

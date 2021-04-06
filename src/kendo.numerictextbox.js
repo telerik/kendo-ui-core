@@ -524,7 +524,7 @@ var __meta__ = { // jshint ignore:line
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME).attr("aria-hidden", "true");
+                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
             }
 
             try {
@@ -748,6 +748,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that._text.toggle(toggle);
+            if (toggle) {
+                that._text.removeAttr("aria-hidden");
+            } else {
+                that._text.attr("aria-hidden", "true");
+            }
             that.element.toggle(!toggle);
         },
 

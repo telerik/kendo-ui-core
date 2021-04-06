@@ -54,7 +54,6 @@
             assert.isOk(text.hasClass("k-input"));
             assert.isOk(text.hasClass("custom"));
             assert.isOk(text.hasClass("k-formatted-value"));
-            assert.equal(text.attr("aria-hidden"), "true");
             assert.isOk(text[0].style.cssText.indexOf("color: red") != -1);
             assert.equal(text.next()[0].nodeName, "INPUT");
         });

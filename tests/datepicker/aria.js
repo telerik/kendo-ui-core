@@ -38,6 +38,11 @@ it("DatePicker sets aria-expanded to true", function() {
     assert.equal(input.attr("aria-expanded"), "true");
 });
 
+it("DatePicker sets aria-haspopup to grid", function() {
+    instance.open();
+    assert.equal(input.attr("aria-haspopup"), "grid");
+});
+
 it("DatePicker sets aria-hidden=false to the popup element", function() {
     instance.open();
     assert.equal(instance.dateView.popup.element.attr("aria-hidden"), "false");
@@ -170,5 +175,31 @@ it("DatePicker add correct aria-label for century", function() {
     assert.equal(cell.attr("aria-label"), "Current focused decade is 2020 - 2029");
 });
 
+});
+
+describe("kendo.ui.DatePicker aria with AXE", function() {
+    beforeEach(function() {
+        $("<label>Hire date:<input id='test' /></label>").appendTo(Mocha.fixture);
+        input = $(Mocha.fixture).find("input");
+    });
+
+    afterEach(function() {
+        instance.destroy();
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("DatePicker is accessible", function(done) {
+        instance = new DatePicker(input);
+
+        axeRunFixture(done);
+    });
+
+    it("DatePicker has accessible popup", function(done) {
+        instance = new DatePicker(input);
+
+        instance.open();
+
+        axeRun(instance.dateView.popup.element[0], done);
+    });
 });
 }());
