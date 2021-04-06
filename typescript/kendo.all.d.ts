@@ -631,6 +631,7 @@ declare namespace kendo.data {
         };
         id: any;
         dirty: boolean;
+        dirtyFields: any[];
 
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof Model;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof Model;
@@ -7869,7 +7870,7 @@ declare namespace kendo.ui {
 
         enable(enable: boolean): void;
         value(): number;
-        value(value: number): void;
+        value(value: boolean|number): void;
 
     }
 
@@ -8439,9 +8440,11 @@ declare namespace kendo.ui {
         allDaySlot?: boolean;
         allDaySlotTemplate?: string|Function;
         columnWidth?: number;
+        content?: JQuery;
         dateHeaderTemplate?: string|Function;
         dayTemplate?: string|Function;
         editable?: boolean | SchedulerViewEditable;
+        endDate?(): Date;
         endTime?: Date;
         eventHeight?: number | string;
         eventSpacing?: number;
@@ -8459,12 +8462,12 @@ declare namespace kendo.ui {
         selectedShortDateFormat?: string;
         showWorkHours?: boolean;
         slotTemplate?: string|Function;
+        startDate?(): Date;
         startTime?: Date;
         title?: string;
         type?: string;
         workWeekStart?: number;
         workWeekEnd?: number;
-        startDate?(): Date;
     }
 
     interface SchedulerOptions {
@@ -14993,12 +14996,14 @@ declare namespace kendo.dataviz.ui {
         type?: string;
         name?: string;
         data?: any;
+        field?: string;
     }
 
     interface ChartSeriesHoverEventSeries {
         type?: string;
         name?: string;
         data?: any;
+        field?: string;
     }
 
     interface ChartSeriesOverEventSeries {
