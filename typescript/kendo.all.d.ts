@@ -1596,8 +1596,9 @@ declare namespace kendo.ui {
         cancelHold(): void;
     }
 
-    interface DraggableEvent {
+    interface DraggableEvent extends JQueryEventObject {
         sender?: Draggable;
+        originalEvent: MouseEvent;
     }
 
     class DropTarget extends kendo.ui.Widget{
