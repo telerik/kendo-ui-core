@@ -35,19 +35,19 @@ You can configure the items in the RadioGroup widget by using the BindTo method.
 
         public IActionResult Index()
         {
-            var itemsList = new List<RadioGroupItem>()
+            var itemsList = new List<InputGroupItemModel>()
             {
-                new RadioGroupItem()
+                new InputGroupItemModel()
                 {
                     Label = "Yes",
                     Value = "one"
                 },
-                 new RadioGroupItem()
+                 new InputGroupItemModel()
                 {
                     Label = "No",
                     Value = "two"                    
                 },
-                  new RadioGroupItem()
+                  new InputGroupItemModel()
                 {
                     Label = "N/A",
                     Value = "three"
@@ -59,8 +59,23 @@ You can configure the items in the RadioGroup widget by using the BindTo method.
 
         public class RadioGroupViewModel
         {
-            public List<RadioGroupItem> Items { get; set; }
+            public List<InputGroupItemModel> Items { get; set; }
         }
+		
+		public class InputGroupItemModel : IInputGroupItem
+		{
+			public IDictionary<string, object> HtmlAttributes { get; set; }
+	
+			public string CssClass { get; set; }
+	
+			public bool? Enabled { get; set; }
+	
+			public bool? Encoded { get; set; }
+	
+			public string Label { get; set; }
+	
+			public string Value { get; set; }
+		}
 
 
 

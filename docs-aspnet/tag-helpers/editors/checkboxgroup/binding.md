@@ -34,19 +34,19 @@ You can configure the items in the CheckBoxGroup widget by using the BindTo meth
 
         public IActionResult Index()
         {
-            var itemsList = new List<InputGroupItem>()
+            var itemsList = new List<InputGroupItemModel>()
             {
-                new InputGroupItem()
+                new InputGroupItemModel()
                 {
                     Label = "Yes",
                     Value = "one"
                 },
-                 new InputGroupItem()
+                 new InputGroupItemModel()
                 {
                     Label = "No",
                     Value = "two"
                 },
-                  new InputGroupItem()
+                  new InputGroupItemModel()
                 {
                     Label = "N/A",
                     Value = "three"
@@ -58,9 +58,23 @@ You can configure the items in the CheckBoxGroup widget by using the BindTo meth
 
         public class CheckBoxGroupViewModel
         {
-            public List<InputGroupItem> Items { get; set; }
+            public List<InputGroupItemModel> Items { get; set; }
         }
-
+		
+		public class InputGroupItemModel : IInputGroupItem
+		{
+			public IDictionary<string, object> HtmlAttributes { get; set; }
+	
+			public string CssClass { get; set; }
+	
+			public bool? Enabled { get; set; }
+	
+			public bool? Encoded { get; set; }
+	
+			public string Label { get; set; }
+	
+			public string Value { get; set; }
+		}
 
 
 1. Add the CheckBoxGroup to the view and bind it to a property of the view model.

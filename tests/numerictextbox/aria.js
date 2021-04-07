@@ -123,5 +123,11 @@
 
             axeRunFixture(done);
         });
+
+        it("NumericTextBox is accessible when label is defined", function(done) {
+            var numeric = new NumericTextBox(input, { label: "Price" });
+
+            axeRunFixture(done);
+        });
     });
 }());

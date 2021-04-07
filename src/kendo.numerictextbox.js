@@ -138,6 +138,7 @@ var __meta__ = { // jshint ignore:line
              });
 
              that._label();
+             that._ariaLabel();
 
              kendo.notify(that);
          },
@@ -700,6 +701,32 @@ var __meta__ = { // jshint ignore:line
                 .attr("aria-value" + option, value);
 
             element.attr(option, value);
+        },
+
+        _ariaLabel: function(){
+            var that = this;
+            var text = that._text;
+            var inputElm = that.element;
+            var id = inputElm.attr("id");
+            var labelElm = $("label[for=\'" + id  + "\']");
+            var ariaLabel = inputElm.attr("aria-label");
+            var ariaLabelledBy = inputElm.attr("aria-labelledby");
+            var labelId;
+
+            if (ariaLabel) {
+                text.attr("aria-label", ariaLabel);
+            } else if (ariaLabelledBy){
+                text.attr("aria-labelledby", ariaLabelledBy);
+            } else if (labelElm.length){
+                labelId = labelElm.attr("id");
+                if (labelId) {
+                    text.attr("aria-labelledby", labelId);
+                } else {
+                    labelId = kendo.guid();
+                    labelElm.attr("id", labelId);
+                    text.attr("aria-labelledby", labelId);
+                }
+            }
         },
 
         _spin: function(step, timeout) {
