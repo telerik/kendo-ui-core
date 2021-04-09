@@ -184,7 +184,8 @@ var __meta__ = { // jshint ignore:line
                     duration: 100,
                     hide: true
                 }
-            }
+            },
+            omitOriginOffsets: false
         },
 
         _animationClose: function() {
@@ -695,8 +696,8 @@ var __meta__ = { // jshint ignore:line
                 height = outerHeight(element) || outerHeight(element.children().first()),
                 anchorWidth = outerWidth(anchor),
                 anchorHeight = outerHeight(anchor),
-                top = anchorOffset.top,
-                left = anchorOffset.left,
+                top = that.options.omitOriginOffsets ? 0 : anchorOffset.top,
+                left = that.options.omitOriginOffsets ? 0 : anchorOffset.left,
                 round = Math.round;
 
             if (appendTo[0] != document.body) {

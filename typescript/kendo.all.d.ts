@@ -1944,6 +1944,49 @@ declare namespace kendo.drawing.pdf {
 }
 
 declare namespace kendo.ui {
+
+    class ActionSheet extends kendo.ui.Widget {
+
+        static fn: ActionSheet;
+
+        options: ActionSheetOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ActionSheet;
+
+        constructor(element: Element, options?: ActionSheetOptions);
+
+
+        close(): void;
+        destroy(): void;
+        open(): void;
+
+    }
+
+    interface ActionSheetItem {
+        click?: Function;
+        description?: string;
+        group?: string;
+        iconClass?: string;
+        text?: string;
+    }
+
+    interface ActionSheetOptions {
+        name?: string;
+        items?: ActionSheetItem[];
+        title?: string;
+        close?(e: ActionSheetEvent): void;
+        open?(e: ActionSheetEvent): void;
+    }
+    interface ActionSheetEvent {
+        sender: ActionSheet;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
     class Alert extends kendo.ui.Dialog {
 
         static fn: Alert;
@@ -23676,6 +23719,10 @@ interface JQueryPromise<T> {
 interface JQuery {
 
     data(key: any): any;
+
+    kendoActionSheet(): JQuery;
+    kendoActionSheet(options: kendo.ui.ActionSheetOptions): JQuery;
+    data(key: "kendoActionSheet"): kendo.ui.ActionSheet;
 
     kendoAlert(): JQuery;
     kendoAlert(options: kendo.ui.AlertOptions): JQuery;

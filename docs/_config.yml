@@ -610,6 +610,8 @@ navigation:
         title: "MaskedTextBox"
     "*menu":
         title: "Menu"
+    "*actionsheet":
+        title: "ActionSheet"
     "*multiselect":
         title: "MultiSelect"
     "*notification":
@@ -1773,6 +1775,12 @@ defaults:
 
 -
     scope:
+        path: "controls/navigation/actionsheet"
+    values:
+        component: "ActionSheet"
+
+-
+    scope:
         path: "controls/editors/multiselect"
     values:
         component: "multi-select"
@@ -2111,6 +2119,7 @@ intro_columns:
   -
     title: "Navigation"
     items:
+      "ActionSheet": "overview_kendoui_actionsheet_widget"
       "AppBar": "overview_kendoui_appbar_widget"
       "BottomNavigation": "overview_kendoui_bottomnavigation_widget"
       "Breadcrumb": "overview_kendoui_breadcrumb_widget"

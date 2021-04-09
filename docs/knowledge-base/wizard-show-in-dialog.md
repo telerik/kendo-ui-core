@@ -4,7 +4,6 @@ description: Initialize a Kendo UI Wizard in a Kendo UI Dialog.
 type: how-to
 page_title: Display a Kendo UI Wizard in a Dialog component
 slug: wizard-show-in-dialog
-position: 
 tags: wizard, dialog
 res_type: kb
 ---

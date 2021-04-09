@@ -43,8 +43,7 @@ After the user interacts with the selector, recreate the secondary chart in orde
 The following example demonstrates how to implement a stock navigator with the categorical Kendo UI LineChart.
 
 ```dojo
-    <script src="../content/shared/js/console.js">
-    <div id="example">
+<div id="example">
       <div class="demo-section k-content">
         <div id="chart"></div>
         <div id="detailchart"></div>
@@ -177,15 +176,21 @@ The following example demonstrates how to implement a stock navigator with the c
         }
 
         function onSelectStart(e) {
-          kendoConsole.log(kendo.format("Select start :: {0}", formatRange(e)));
+          setTimeout(function(){ // ensure that the selection has finished before rendering the seconary chart
+            formatRange(e);
+          });
         }
 
         function onSelect(e) {
-          kendoConsole.log(kendo.format("Select :: {0}", formatRange(e)));
+         setTimeout(function(){ // ensure that the selection has finished before rendering the seconary chart
+            formatRange(e)
+          });
         }
 
-        function onSelectEnd(e) {
-          kendoConsole.log(kendo.format("Select end :: {0}", formatRange(e)));
+        function onSelectEnd(e) { 
+         setTimeout(function(){ // ensure that the selection has finished before rendering the seconary chart
+            formatRange(e)
+          });
         }
 
         function setOptions() {
@@ -211,10 +216,6 @@ The following example demonstrates how to implement a stock navigator with the c
         $("#example").bind("kendo:skinChange", createChart);
 
       </script>
-      <div class="demo-section">
-        <h4>Console log</h4>
-        <div class="console"></div>
-      </div>
 ```
 
 ## See Also

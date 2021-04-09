@@ -530,6 +530,9 @@ navigation:
         title: "MediaPlayer"
      "*menu":
         title: "Menu"
+        isNew: true
+     "*actionsheet":
+        title: "ActionSheet"
      "*multiselect":
         title: "MultiSelect"
      "*notification":
@@ -1019,6 +1022,11 @@ defaults:
         title_prefix: "ASP.NET Core Menu Component"
 -
     scope:
+        path: "html-helpers/navigation/actionsheet"
+    values:
+        title_prefix: "ASP.NET Core ActionSheet Component"
+-
+    scope:
         path: "html-helpers/navigation/panelbar"
     values:
         title_prefix: "ASP.NET Core PanelBar Component"
@@ -1427,6 +1435,11 @@ defaults:
         path: "tag-helpers/navigation/menu"
     values:
         title_prefix: "ASP.NET Core Menu Component"
+-
+    scope:
+        path: "tag-helpers/navigation/actionsheet"
+    values:
+        title_prefix: "ASP.NET Core ActionSheet Component"
 -
     scope:
         path: "tag-helpers/navigation/panelbar"
