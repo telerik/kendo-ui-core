@@ -642,7 +642,7 @@ var __meta__ = { // jshint ignore:line
                         setTimeout(function(){
                             that._setOverflowWrapperWidth(initialWidth, initialCssWidth);
                             that._toggleScrollButtons(that.element, backwardBtn, forwardBtn, isHorizontal);
-                        }, 100);
+                        }, 300);
                     });
                 }
 
