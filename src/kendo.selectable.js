@@ -85,7 +85,8 @@ var __meta__ = { // jshint ignore:line
             inputSelectors: INPUTSELECTOR,
             multiple: false,
             relatedTarget: $.noop,
-            ignoreOverlapped: false
+            ignoreOverlapped: false,
+            addIdToRanges: false
         },
 
         _isElement: function(target) {
@@ -211,7 +212,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _end: function(e) {
-            var that = this;
+            var that = this,
+            rangeSelectedAttr = kendo.attr("range-selected"),
+            uid = kendo.guid();
 
             that._marquee.remove();
 
@@ -222,6 +225,12 @@ var __meta__ = { // jshint ignore:line
 
             var target = that.element.find(that.options.filter + "." + ACTIVE);
             target = target.add(that.relatedTarget(target));
+
+            if (that.options.addIdToRanges) {
+                for (var i = 0; i < that._currentlyActive.length; i++) {
+                    $(that._currentlyActive[i]).attr(rangeSelectedAttr, uid);
+                }
+            }
 
             that.value(target, e);
             that._lastActive = that._downTarget;
@@ -307,6 +316,34 @@ var __meta__ = { // jshint ignore:line
             return that.element.find(that.options.filter + "." + SELECTED);
         },
 
+        selectedRanges: function () {
+            var that = this;
+            var rangeSelectedAttr = kendo.attr("range-selected");
+            var map = {};
+
+            that.element.find("[" + rangeSelectedAttr + "]").each(function (_, elem) {
+                var rangeId = $(elem).attr(rangeSelectedAttr);
+                var mapLocation = map[rangeId];
+
+                if (!mapLocation) {
+                    mapLocation = map[rangeId] = [];
+                }
+
+                mapLocation.push($(elem));
+            });
+
+            return map;
+        },
+
+        selectedSingleItems: function () {
+            var that = this;
+            var rangeSelectedAttr = kendo.attr("range-selected");
+
+            return that.element.find(that.options.filter + "." + SELECTED + ":not([" + rangeSelectedAttr + "])").toArray().map(function (elem) {
+                return $(elem);
+            });
+        },
+
         _firstSelectee: function() {
             var that = this,
                 selected;
@@ -345,7 +382,9 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            element.removeClass(SELECTED);
+            var rangeSelectedAttr = kendo.attr("range-selected");
+
+            element.removeClass(SELECTED).removeAttr(rangeSelectedAttr);
 
             if (this.options.aria) {
                 element.attr(ARIASELECTED, false);

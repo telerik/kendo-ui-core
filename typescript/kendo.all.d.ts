@@ -16887,6 +16887,13 @@ declare namespace kendo.dataviz.ui {
         width?: number;
     }
 
+    interface QRCodeOverlay {
+        height?: number;
+        type?: string;
+        url?: string;
+        width?: string;
+    }
+
     interface QRCodeExportImageOptions {
         width?: string;
         height?: string;
@@ -16903,6 +16910,7 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         encoding?: string;
         errorCorrection?: string;
+        overlay?: QRCodeOverlay;
         padding?: number;
         renderAs?: string;
         size?: number|string;

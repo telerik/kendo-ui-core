@@ -130,6 +130,97 @@ The possible values are:
     });
     </script>
 
+### overlay `Object`
+
+The overlay configuration which alows you to choose from predefined layouts or insert a custom image.
+
+> **Note:** Always test if the code reads correctly with the overlay. Depending on the length of the value and the size of the overlay, you might need to raise the [errorCorrection](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) to "M" or "H".
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           width: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.height `Number`
+
+The height of the overlay in pixels.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           height: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.type `String` *(default: "custom")*
+
+Available options are `image` and `swiss`. When set to `image` you have to specify the url source of the image. If set to `swiss` a Swiss QR Code is created.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+          type: "swiss"
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.imageUrl `String`
+
+The URL of the displayed overlay image.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           height: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.width `Number`
+
+The width of the overlay in pixels.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           width: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
 ### padding `Number` *(default: 0)*
 
 Sets the minimum distance in pixels that should be left between the border and the QR modules.

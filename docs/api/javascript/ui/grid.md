@@ -9142,6 +9142,44 @@ If set to false, the detail template is hidden without animations.
     grid.collapseRow(".k-master-row:first");
     </script>
 
+### copySelectionToClipboard
+
+Copies the selected items to the clipboard.
+
+#### Parameters
+
+##### includeHeaders `Boolean`
+
+If set to true, the copied items will include the column headers.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="selectAndCopy()">Select and copy</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                selectable: "multiple, cell"
+            });
+
+        function selectAndCopy() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.select('td');
+            grid.copySelectionToClipboard(true);
+        }
+
+     </script>
 ### current
 
 Gets or sets the current cell for keyboard navigation.
@@ -9383,6 +9421,46 @@ If set to false, the detail template is displayed without animations.
     grid.expandRow(".k-master-row:first");
     </script>
 
+### exportSelectedToExcel
+
+Exports the selected items to an Excel file.
+
+#### Parameters
+
+##### includeHeaders `Boolean`
+
+If set to true, the exported items will include the column headers.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="selectAndExport()">Select and export</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                selectable: "multiple, cell"
+            });
+
+        function selectAndExport() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.select($('#grid tbody td').slice(0,2).add($('#grid tbody td').slice(4,6)));
+
+            grid.exportSelectedToExcel(true);
+        }
+
+     </script>
+
 ### getOptions
 
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
@@ -9419,6 +9497,44 @@ Use this method if you want to save the state of the Grid into a variable. It is
     // get only the Grid column settings
     var columnOptionsForSaving = kendo.stringify(options.columns);
     </script>
+
+### getSelectedData
+
+Returns the selected elements mapped to objects.
+#### Returns
+
+`Array` The selected items.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="printSelected()">Select and print</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                groupable: true,
+                selectable: "multiple, cell"
+            });
+
+        function printSelected() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.select($('#grid tbody td').slice(0,2).add($('#grid tbody td').slice(4,6)));
+
+            console.log(grid.getSelectedData());
+        }
+
+     </script>
 
 ### hideColumn
 
