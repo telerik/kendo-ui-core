@@ -920,6 +920,54 @@
 @bottom-nav-flat-border: @component-border;
 
 
+// TaskBoard
+@taskboard-bg: null;
+@taskboard-text: null;
+@taskboard-border: null;
+
+@taskboard-toolbar-bg: null;
+@taskboard-toolbar-text: null;
+@taskboard-toolbar-border: null;
+
+@taskboard-column-bg: @alt-background-color;
+@taskboard-column-text: null;
+@taskboard-column-border: transparent;
+
+@taskboard-column-focus-bg: null;
+@taskboard-column-focus-text: null;
+@taskboard-column-focus-border: shade( @component-border, 20% );
+
+@taskboard-pane-bg: @component-bg;
+@taskboard-pane-text: @component-text;
+@taskboard-pane-border: @component-border;
+
+@taskboard-card-bg: @card-bg;
+@taskboard-card-text: @card-text;
+@taskboard-card-border: @card-border;
+
+@taskboard-card-header-bg: @taskboard-card-bg;
+@taskboard-card-header-text: null;
+@taskboard-card-header-border: null;
+
+@taskboard-card-title-text: @primary;
+@taskboard-card-title-focus-text: darken( @primary, 13% );
+@taskboard-card-title-hover-text: lighten( @primary, 13% );
+
+@taskboard-card-footer-bg: @taskboard-card-bg;
+@taskboard-card-footer-text: null;
+@taskboard-card-footer-border: null;
+
+@taskboard-card-focus-border: shade( @taskboard-card-border, 18% );
+@taskboard-card-hover-border: shade( @taskboard-card-border, 10% );
+
+@taskboard-card-selected-text: @taskboard-card-text;
+@taskboard-card-selected-bg: @taskboard-card-bg;
+@taskboard-card-selected-border: lighten( @primary, 13% );
+
+@taskboard-drag-placeholder-bg: rgba(255, 255, 255, .2);
+@taskboard-drag-placeholder-border: @component-border;
+
+
 // Kendo skin
 
 @theme-name: ~"flat";
@@ -967,6 +1015,7 @@
 @import "Default/bottom-navigation/_theme.less";
 @import "Default/searchbox/_theme.less";
 @import "Default/skeleton/_theme.less";
+@import "Default/taskboard/_theme.less";
 
 
 .k-in,

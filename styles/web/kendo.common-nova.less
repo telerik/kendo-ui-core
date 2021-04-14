@@ -886,6 +886,66 @@
 @grid-column-menu-filter-container-padding-y: @padding-y-sm;
 
 
+// TaskBoard
+@taskboard-spacer: 16px;
+@taskboard-padding-y: null;
+@taskboard-padding-x: null;
+@taskboard-font-family: inherit;
+@taskboard-font-size: inherit;
+@taskboard-line-height: @line-height;
+
+@taskboard-toolbar-padding-y: @taskboard-spacer;
+@taskboard-toolbar-padding-x: @taskboard-toolbar-padding-y;
+
+@taskboard-content-padding-y: @taskboard-spacer;
+@taskboard-content-padding-x: @taskboard-content-padding-y;
+
+@taskboard-column-container-spacing-y: calc(@taskboard-spacer / 2);
+@taskboard-column-container-padding-y: 0;
+@taskboard-column-container-padding-x: calc(@taskboard-spacer / 2);
+@taskboard-columns-container-gap: @taskboard-spacer;
+
+@taskboard-column-width: 320px;
+@taskboard-column-border-width: 1px;
+@taskboard-column-border-radius: 4px;
+
+@taskboard-column-header-padding-y: calc(@taskboard-spacer / 2);
+@taskboard-column-header-padding-x: @taskboard-column-header-padding-y;
+@taskboard-column-header-gap: calc(@taskboard-spacer / 4);
+@taskboard-column-header-actions-gap: calc(@taskboard-spacer / 2);
+@taskboard-column-header-font-weight: 500;
+
+@taskboard-column-cards-padding-y: 0;
+@taskboard-column-cards-padding-x: 0;
+@taskboard-column-cards-gap: calc(@taskboard-spacer / 2);
+
+@taskboard-column-new-calc-height: calc( @input-offset + (@taskboard-column-header-padding-y * 2) );
+
+@taskboard-pane-width: @taskboard-column-width;
+@taskboard-pane-padding-y: @taskboard-spacer;
+@taskboard-pane-padding-x: @taskboard-pane-padding-y;
+@taskboard-pane-border-width: 1px;
+@taskboard-pane-gap: @taskboard-spacer;
+
+@taskboard-pane-header-font-weight: 500;
+
+@taskboard-pane-content-padding-y: 0;
+@taskboard-pane-content-padding-x: @taskboard-spacer;
+
+@taskboard-pane-actions-padding-y: 0;
+@taskboard-pane-actions-padding-x: @taskboard-pane-actions-padding-y;
+
+@taskboard-card-padding-y: @taskboard-spacer;
+@taskboard-card-padding-x: @taskboard-card-padding-y;
+@taskboard-card-border-width: @card-border-width;
+@taskboard-card-border-radius: 4px;
+
+@taskboard-card-category-border-width: 4px;
+
+@taskboard-drag-placeholder-border-width: 1px;
+@taskboard-drag-placeholder-border-radius: @taskboard-card-border-radius;
+
+
 @import "common/all.less";
 
 .k-button {
