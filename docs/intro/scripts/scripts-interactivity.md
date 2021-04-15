@@ -19,9 +19,15 @@ The following table lists the individual script files for the Kendo UI widgets u
 | [Effects](https://demos.telerik.com/kendo-ui/fx/expand) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.fx.js | |
+| [Loader](https://demos.telerik.com/kendo-ui/loader/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.loader.js | |
 | [ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.progressbar.js | |
+| [SkeletonContainer](https://demos.telerik.com/kendo-ui/skeletoncontainer/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.skeletoncontainer.js | |
 | [Sortable](https://demos.telerik.com/kendo-ui/sortable/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.userevents.js | |

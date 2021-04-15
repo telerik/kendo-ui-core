@@ -8728,6 +8728,58 @@ declare namespace kendo.ui {
         page?: number;
     }
 
+    class SkeletonContainer extends kendo.ui.Widget {
+
+        static fn: SkeletonContainer;
+
+        options: SkeletonContainerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): SkeletonContainer;
+
+        constructor(element: Element, options?: SkeletonContainerOptions);
+
+
+
+    }
+
+    interface SkeletonContainerGridGap {
+        columns?: number;
+        rows?: number;
+    }
+
+    interface SkeletonContainerGridItem {
+        colStart?: number;
+        colSpan?: number;
+        rowStart?: number;
+        rowSpan?: number;
+        shape?: string;
+    }
+
+    interface SkeletonContainerGrid {
+        columns?: number;
+        gap?: SkeletonContainerGridGap;
+        items?: SkeletonContainerGridItem[];
+        rows?: number;
+    }
+
+    interface SkeletonContainerOptions {
+        name?: string;
+        animation?: string;
+        grid?: SkeletonContainerGrid;
+        height?: string|number;
+        template?: string|Function;
+        width?: string|number;
+    }
+    interface SkeletonContainerEvent {
+        sender: SkeletonContainer;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
     class Slider extends kendo.ui.Widget {
 
         static fn: Slider;
@@ -24079,6 +24131,10 @@ interface JQuery {
     kendoScrollView(): JQuery;
     kendoScrollView(options: kendo.ui.ScrollViewOptions): JQuery;
     data(key: "kendoScrollView"): kendo.ui.ScrollView;
+
+    kendoSkeletonContainer(): JQuery;
+    kendoSkeletonContainer(options: kendo.ui.SkeletonContainerOptions): JQuery;
+    data(key: "kendoSkeletonContainer"): kendo.ui.SkeletonContainer;
 
     kendoSlider(): JQuery;
     kendoSlider(options: kendo.ui.SliderOptions): JQuery;

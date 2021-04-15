@@ -12,6 +12,26 @@ Represents the Kendo UI Drawer widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
+### autoCollapse `Boolean` *(default: true)*
+
+Specifies if the Drawer will be automatically collapsed when an item is clicked.
+
+#### Specifying autoCollapse
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var drawerInstance = $("#drawer").kendoDrawer({
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                autoCollapse: false
+            }).data("kendoDrawer");
+
+            drawerInstance.show();
+        });
+    </script>
+
 ### position `String` *(default: 'left')*
 
 The position of the drawer. Can be `left` (default) or `right`.
