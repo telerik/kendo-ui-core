@@ -492,8 +492,14 @@ var __meta__ = { // jshint ignore:line
 
         _removeDescribedBy: function(target) {
             var tooltipId = this.popup.element.attr("id"),
-                arrayAttr = target.attr(DESCRIBEDBY).split(" "),
-                finalArray, finalDescribedbyAttr;
+                currentDescribedBy = target.attr(DESCRIBEDBY),
+                arrayAttr, finalArray, finalDescribedbyAttr;
+
+            if(!currentDescribedBy) {
+                return;
+            }
+
+            arrayAttr = currentDescribedBy.split(" ");
 
             if(arrayAttr && arrayAttr.length > 0) {
                 finalArray = arrayAttr.filter(function (val) {
