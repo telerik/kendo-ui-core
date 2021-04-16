@@ -24,18 +24,18 @@ component: map
 
 ## Description
 
-I have a Kendo UI Map.
-
-How can I implement Azure maps' geospatial capabilities?
+How can I implement Azure maps' geospatial capabilities with Kendo Map?
 
 ## Solution
 
 The Kendo UI Map is fully compatible with Azure's png tile API. Use the Url of the Asure service in the [urlTemplate](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/configuration/layers.urltemplate) property of the Map and observe the result.
 
+Make sure that the API version is specified in the URL. In order to use Azure maps you need to have an [Azure Maps account and key](https://docs.microsoft.com/en-us/azure/azure-maps/how-to-manage-authentication).
+
 
 The following example demonstrates the full implementation of the approach.
 
-```dojo
+```
  <div id="example">
 
       <div id="map"></div>
@@ -47,7 +47,7 @@ The following example demonstrates the full implementation of the approach.
             zoom: 3,
             layers: [{
               type: "tile",
-              urlTemplate:"https://atlas.microsoft.com/map/tile/png?subscription-key=jXumf_aF2qoph5K7hjXH6UFq2vd2exT0XkgyO2iQYlM&api-version=1.0&layer=basic&style=main&x=#=x#&y=#=y#&zoom=#=zoom#"
+              urlTemplate: "https://atlas.microsoft.com/map/tile/png?subscription-key=[your-key-here]&api-version=1.0&layer=basic&style=main&x=#=x#&y=#=y#&zoom=#=zoom#"
             }],
             markers: [{
               location: [30.268107, -97.744821],

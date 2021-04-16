@@ -18,6 +18,7 @@ The tile layers in the Map are suitable for:
 
 * Displaying raster maps from popular online providers such as [OpenStreetMap](http://www.openstreetmap.org/), [OpenWeatherMap](http://openweathermap.org/), [ArcGIS](https://developers.arcgis.com/en/), and so on.
 * Any other Map tile service that supports the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System). [Microsoft Bing](https://msdn.microsoft.com/en-us/library/ff701713.aspx) provides dedicated support for Map layers. However, it requires you to [obtain an API key](https://msdn.microsoft.com/en-us/library/ff428642.aspx).
+* Azure maps tiles is compatible with Kendo UI Map. You need to have an active [Azure Maps account and key](https://docs.microsoft.com/en-us/azure/azure-maps/how-to-manage-authentication).
 
 The following example demonstrates how to display an OpenStreetMap tile layer.
 
