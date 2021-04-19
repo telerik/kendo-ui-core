@@ -30,14 +30,14 @@ Defines a value determining whether the items will be animated. Valid options ar
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -66,14 +66,14 @@ Defines the number of columns.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -105,14 +105,14 @@ A value in pixels determining the space between horizontal spacing between the i
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             gap: {
@@ -142,14 +142,14 @@ A value in pixels determining the space between vertical spacing between the ite
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "circle"
+                    shape: "circle"
                 }
             ],
             gap: {
@@ -175,14 +175,14 @@ An array with objects representing the settings of the component items.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -206,14 +206,14 @@ A value that determines the start position of the item on the column axis.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -237,14 +237,14 @@ A value that determines how many columns will the item span.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -268,14 +268,14 @@ A value that determines the start position of the item on the row axis.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -299,14 +299,14 @@ A value that determines how many rows will the item span.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -334,14 +334,14 @@ A value that determines the shape of the item. Valid options are
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "circle"
+                    shape: "circle"
                 }
             ],
             columns: 4,
@@ -365,14 +365,14 @@ Defines the number of rows.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,
@@ -400,14 +400,14 @@ Determines the height of the component. Numeric values are treated as pixels.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ]
         }
@@ -448,14 +448,14 @@ Determines the width of the component. Numeric values are treated as pixels.
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 },
                 {
                     colStart: 2,
                     colSpan: 1,
                     rowStart: 1,
                     rowSpan: 1,
-                    share: "rectangle"
+                    shape: "rectangle"
                 }
             ],
             columns: 4,

@@ -46,6 +46,7 @@ A JavaScript array that contains the ActionSheet's items configuration.
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -87,6 +88,7 @@ Specifies the click event handler of the item.
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -129,6 +131,7 @@ Specifies the description of the item.
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -170,6 +173,7 @@ Specifies the group of the item. Items can be segregated in two groups - `top` a
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -211,6 +215,94 @@ Specifies the icon's class of the item.
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+    </script>
+
+### items.iconColor `String`
+
+The icon color. Available options are `inherit`, `default`, `primary`, `secondary`, `tertiary`, `info`, `success`, `warning`, `error`, `dark`, `light`, `inverted` or any hexadecimal value.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title:'Select item',
+          items:[
+              {
+                  text: 'Edit Item',
+                  iconClass: 'k-icon k-i-edit',
+                  iconColor: "info"
+                  click: onClick
+              },
+              {
+                  text: 'Add to Favorites',
+                  iconClass: 'k-icon k-i-heart',
+                  click: onClick
+              },
+              {
+                  text: 'Upload New',
+                  iconClass: 'k-icon k-i-upload',
+                  click: onClick
+              },
+              {
+                  text: 'Cancel',
+                  iconClass: 'k-icon k-i-cancel',
+                  group: 'bottom',
+                  click: onClick
+              },
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+    </script>
+
+### items.iconSize `Number`
+
+The icon size in pixels.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title:'Select item',
+          items:[
+              {
+                  text: 'Edit Item',
+                  iconClass: 'k-icon k-i-edit',
+                  iconColor: "info",
+                  iconSize: 40,
+                  click: onClick
+              },
+              {
+                  text: 'Add to Favorites',
+                  iconClass: 'k-icon k-i-heart',
+                  click: onClick
+              },
+              {
+                  text: 'Upload New',
+                  iconClass: 'k-icon k-i-upload',
+                  click: onClick
+              },
+              {
+                  text: 'Cancel',
+                  iconClass: 'k-icon k-i-cancel',
+                  group: 'bottom',
+                  click: onClick
+              },
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -252,6 +344,7 @@ Specifies the main text of the item
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -293,6 +386,7 @@ Specifies the title of the component
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();
@@ -381,6 +475,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
           ]
       }).data('kendoActionSheet');
 
+      actionsheet.open();
       function onClick(e) {
           e.preventDefault();
           actionsheet.close();

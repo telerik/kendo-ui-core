@@ -84,7 +84,7 @@ navigation:
         position: 280
      "api":
         title: "API Reference"
-        position: 0    
+        position: 0
      "getting-started":
         title: "Getting Started"
         position: 2
@@ -244,6 +244,8 @@ navigation:
         title: "Interactivity and UX"
      "tag-helpers/interactivity/loader":
         title: "Loader"
+     "tag-helpers/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
      "tag-helpers/media":
         title: "Media"
      "tag-helpers/pdf":
@@ -394,6 +396,8 @@ navigation:
         title: "Interactivity and UX"
      "html-helpers/interactivity/loader":
         title: "Loader"
+     "html-helpers/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
      "html-helpers/interactivity/sortable/integration":
         title: "Integration"
         position: 6
@@ -452,6 +456,8 @@ navigation:
         title: "Spreadsheet"
      "*arcgauge":
         title: "ArcGauge"
+     "*circulargauge":
+        title: "CircularGauge"
      "*autocomplete":
         title: "AutoComplete"
      "*barcode":
@@ -518,6 +524,8 @@ navigation:
         title: "Image Editor"
      "*loader":
         title: "Loader"
+     "*SkeletonContainer":
+        title: "SkeletonContainer"
      "*lineargauge":
         title: "LinearGauge"
      "*listbox":
@@ -877,6 +885,11 @@ defaults:
         title_prefix: "ASP.NET Core ArcGauge Component"
 -
     scope:
+        path: "html-helpers/gauges/circulargauge"
+    values:
+        title_prefix: "ASP.NET Core CircularGauge Component"
+-
+    scope:
         path: "html-helpers/gauges/lineargauge"
     values:
         title_prefix: "ASP.NET Core LinearGauge Component"
@@ -895,6 +908,11 @@ defaults:
         path: "html-helpers/interactivity/loader"
     values:
         title_prefix: "ASP.NET Core Loader Component"
+
+    scope:
+        path: "html-helpers/interactivity/skeletoncontainer"
+    values:
+        title_prefix: "ASP.NET Core SkeletonContainer Component"
 -
     scope:
         path: "html-helpers/interactivity/progressbar"
@@ -1297,6 +1315,11 @@ defaults:
         title_prefix: "ASP.NET Core ArcGauge Component"
 -
     scope:
+        path: "tag-helpers/gauges/circulargauge"
+    values:
+        title_prefix: "ASP.NET Core CircularGauge Component"
+-
+    scope:
         path: "tag-helpers/gauges/lineargauge"
     values:
         title_prefix: "ASP.NET Core LinearGauge Component"
@@ -1316,6 +1339,11 @@ defaults:
     values:
         title_prefix: "ASP.NET Core Loader Component"
 -
+    scope:
+        path: "tag-helpers/interactivity/skeletoncontainer"
+    values:
+        title_prefix: "ASP.NET Core SkeletonContainer Component"
+
     scope:
         path: "tag-helpers/interactivity/progressbar"
     values:

@@ -3804,6 +3804,1422 @@ The end position of the plot band in axis units.
     });
     </script>
 
+### categoryAxis.rangeLabels `Object`
+
+The configuration of the date axis date range labels.
+
+#### Example - configure the category axis date range labels
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.background `String`
+
+The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the category axis date range label background as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          background: "#aa00bb",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border `Object`
+
+The border of the labels.
+
+#### Example - set the category axis date range label border
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            dashType: "dashDot",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the category axis date range label border color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border.dashType `String` *(default: "solid")*
+
+The dash type of the border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the category axis date range label border dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            dashType: "dashDot",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+#### Example - set the category axis date range label border width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          border: {
+            color: "green",
+            dashType: "dashDot",
+            width: 1
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.color `String`
+
+The text color of the labels. Accepts a valid CSS color string, including hex and rgb.
+
+#### Example - set the category axis date range label color as a hex string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "d",
+          color: "#aa00bb",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.culture `String`
+
+The culture to use when formatting date values. See the [globalization overview](/framework/globalization/overview) for more information.
+
+### categoryAxis.rangeLabels.dateFormats `Object`
+
+The format used to display date range labels for [date category axis](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.type).
+The `{0}` placeholder represents the category value.
+
+The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit).
+Setting the [categoryAxis.rangeLabels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) option will override the date formats.
+
+See also: [kendo.format](/api/javascript/kendo/methods/format).
+
+> Not supported for radar charts. Use [categoryAxis.rangeLabels.format](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.rangeLabels.format) instead.
+
+#### Example - set category axis date formats
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            days: "d"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.days `String` *(default: "M/d")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "days".
+
+#### Example - set the days format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            days: "d"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.hours `String` *(default: "HH:mm")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "hours".
+
+#### Example - set the hours format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            hours: "HH:mm:ss"
+          },
+          visible: true
+        },
+        labels: {
+            format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.months `String` *(default: "MMM 'yy")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "months".
+
+#### Example - set the months format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            months: "MMM-yy"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.weeks `String` *(default: "M/d")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "weeks".
+
+#### Example - set the weeks format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            weeks: "M-d"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.dateFormats.years `String` *(default: "yyyy")*
+
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "years".
+
+#### Example - set the years format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          dateFormats: {
+            years: "yy"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
+
+The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+
+#### Example - set the category axis date range label font
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          font: "20px sans-serif",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.format `String`
+
+The format used to display the labels. Uses [kendo.format](/api/javascript/kendo/methods/format).
+
+#### Example - set the category axis date range label format
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          format: "MM/dd",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin `Number|Object` *(default: 0)*
+
+The margin of the labels. A numeric value will set all margins.
+
+#### Example - set the category axis date range label margin as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: 20,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the labels.
+
+#### Example - set the category axis date range label bottom margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            bottom: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.left `Number` *(default: 0)*
+
+The left margin of the labels.
+
+#### Example - set the category axis date range label left margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            left: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.right `Number` *(default: 0)*
+
+The right margin of the labels.
+
+#### Example - set the category axis date range label right margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            right: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.margin.top `Number` *(default: 0)*
+
+The top margin of the labels.
+
+#### Example - set the category axis date range label top margin
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          margin: {
+            top: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.mirror `Boolean` *(default: false)*
+
+If set to `true` the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.
+
+#### Example - mirror the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          mirror: true,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      valueAxis: {
+        visible: false
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding `Object|Number` *(default: 0)*
+
+The padding of the labels. A numeric value will set all paddings.
+
+#### Example - set the category axis date range label padding as a number
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: 20,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the labels.
+
+#### Example - set the category axis date range label bottom padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: [{
+        labels: {
+          padding: {
+            bottom: 20
+          }
+        },
+        categories: ["2011", "2012", "2013"]
+      }],
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.left `Number` *(default: 0)*
+
+The left padding of the labels.
+
+#### Example - set the category axis date range label left padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: {
+            left: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.right `Number` *(default: 0)*
+
+The right padding of the labels.
+
+#### Example - set the category axis date range label right padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: {
+            right: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.padding.top `Number` *(default: 0)*
+
+The top padding of the labels.
+
+#### Example - set the category axis date range label top padding
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          padding: {
+            top: 20
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.rotation `Number|String|Object` *(default: 0)*
+
+The rotation angle of the date range labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - rotate the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: 90,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+#### Example - enable auto rotation for the category axis date range labels
+
+    <div id="chart" style="width:200px;"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: "auto",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.rotation.align `String` *(default: "end")*
+
+The alignment of the rotated labels relative to the slot center. The supported values are `"end"` and `"center"`. By default the closest end of the label will be aligned to the center. If set to `"center"`, the center of the rotated label will be aligned instead.
+
+#### Example - align the rotated category axis date range labels center
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: {
+            angle: 45,
+            align: "center"
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.rotation.angle `Number|String` *(default: 0)*
+
+The rotation angle of the labels. By default the labels are not rotated. Can be set to `"auto"` if the axis is horizontal in which case the labels will be rotated only if the slot size is not sufficient for the entire labels.
+
+#### Example - rotate the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          rotation: {
+            angle: 90
+          },
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.template `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the labels.
+
+The fields which can be used in the template are:
+
+* value - the category value
+* dataItem - the data item, in case a field has been specified. If the category does not have a corresponding item in the data then an empty object will be passed.
+* format - the default format of the label
+* culture - the default culture (if set) on the label
+* text - The default label text.
+* index - The index of the label.
+* count - The total number of rendered labels.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+#### Example - set the category axis template as a string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          template: "Year: #: value.getFullYear() #",
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+#### Example - set the category axis template as a function
+
+    <div id="chart"></div>
+    <script>
+    function rangeLabelTemplate(e) {
+      return "Year: " + e.value.getFullYear();
+    }
+
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          template: rangeLabelTemplate,
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.visible `Boolean` *(default: false)*
+
+If set to `true`, the Chart displays the category axis date range labels.
+By default, the category axis date range labels are not visible.
+
+#### Example - hide the category axis date range labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+          visible: true
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
+### categoryAxis.rangeLabels.visual `Function`
+
+A function that can be used to create a custom visual for the date range labels. The available argument fields are:
+
+* createVisual - a function that can be used to get the default visual.
+* culture - the default culture (if set) on the label
+* dataItem - the data item, in case a field has been specified
+* format - the default format of the label
+* options - the label options.
+* rect - the `kendo.geometry.Rect` that defines where the visual should be rendered.
+* sender - the chart instance (may be undefined).
+* text - the label text.
+* value - the category value
+
+#### Example - using custom visual for the labels
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        type: "date",
+        justified: true,
+        baseUnit: "days",
+        rangeLabels: {
+            format: 'dd-MMM',
+            visible: true,
+            visual: function(e) {
+                var rect = new kendo.geometry.Rect(e.rect.origin, [e.rect.size.width, 100]);
+                var layout = new kendo.drawing.Layout(rect, {
+                    orientation: "vertical",
+                    alignContent: "center"
+                });
+                var words = e.text.split("-");
+                for (var i = 0; i < words.length; i++) {
+                    layout.append(new kendo.drawing.Text(words[i]));
+                }
+                layout.reflow();
+                return layout;
+            }
+        },
+        labels: {
+          format: "M-d"
+        }
+      },
+      series: [{
+        type: 'line',
+        field: 'value',
+        categoryField: 'date',
+        data: [{
+          value: 1,
+          date: new Date("2012/01/01")
+        }, {
+          value: 2,
+          date: new Date("2012/01/04")
+        }, {
+          value: 3,
+          date: new Date("2012/01/07")
+        }]
+      }]
+    });
+    </script>
+
 ### categoryAxis.reverse `Boolean` *(default: false)*
 
 If set to `true` the category axis direction will be reversed. By default categories are listed from left to right and from bottom to top.

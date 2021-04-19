@@ -226,6 +226,8 @@ navigation:
         title: "Drag and Drop"
     "controls/interactivity/loader":
         title: "Loader"
+    "controls/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
     "controls/interactivity/ripplecontainer":
         title: "RippleContainer"
     "controls/interactivity/sortable/integration":
@@ -493,6 +495,8 @@ navigation:
         title: "QRCode"
     "*arcgauge":
         title: "ArcGauge"
+    "*circulargauge":
+        title: "CircularGauge"
     "*radialgauge":
         title: "RadialGauge"
     "*sparkline":
@@ -606,6 +610,9 @@ navigation:
         title: "ListBox"
     "*loader":
         title: "Loader"
+    "*skeletoncontainer":
+        isNew: true
+        title: "SkeletonContainer"
     "*maskedtextbox":
         title: "MaskedTextBox"
     "*menu":
@@ -2063,6 +2070,7 @@ intro_columns:
       "Drag and Drop": "overview_kendoui_draganddrop_intercativityandux"
       "Effects": "overview_kendoui_fxeffects_widget"
       "Loader": "overview_kendoui_loader_widget"
+      "SkeletonContainer": "overview_kendoui_skeletoncontainer_widget"
       "ProgressBar": "overview_kendoui_progressbar_widget"
       "RippleContainer": "overview_kendoui_ripplecontainer_widget"
       "Sortable": "overview_kendoui_sortable_widget"
@@ -2150,6 +2158,7 @@ intro_columns:
     title: "Gauges"
     items:
       "ArcGauge": "overview_kendoui_arcgaugewidget"
+      "CircularGauge": "overview_kendoui_circulargaugewidget"
       "LinearGauge": "overview_kendoui_lineargauge_widget"
       "RadialGauge": "overview_kendoui_radialgaugewidget"
   -

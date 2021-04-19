@@ -1971,6 +1971,8 @@ declare namespace kendo.ui {
         description?: string;
         group?: string;
         iconClass?: string;
+        iconColor?: string;
+        iconSize?: number;
         text?: string;
     }
 
@@ -19818,6 +19820,153 @@ declare namespace kendo.dataviz.ui {
         originalEvent?: any;
     }
 
+    class CircularGauge extends kendo.ui.Widget {
+
+        static fn: CircularGauge;
+
+        options: CircularGaugeOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): CircularGauge;
+
+        constructor(element: Element, options?: CircularGaugeOptions);
+
+
+        destroy(): void;
+        exportImage(options: any): JQueryPromise<any>;
+        exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
+        exportSVG(options: any): JQueryPromise<any>;
+        redraw(): void;
+        resize(force?: boolean): void;
+        setOptions(options: any): void;
+        svg(): void;
+        imageDataURL(): string;
+        value(): void;
+        value(): void;
+
+    }
+
+    interface CircularGaugeColor {
+        color?: string;
+        from?: number;
+        to?: number;
+    }
+
+    interface CircularGaugeGaugeAreaBorder {
+        color?: string;
+        dashType?: string;
+        opacity?: number;
+        width?: number;
+    }
+
+    interface CircularGaugeGaugeAreaMargin {
+        top?: number;
+        bottom?: number;
+        left?: number;
+        right?: number;
+    }
+
+    interface CircularGaugeGaugeArea {
+        background?: string;
+        border?: CircularGaugeGaugeAreaBorder;
+        height?: number;
+        margin?: CircularGaugeGaugeAreaMargin;
+        width?: number;
+    }
+
+    interface CircularGaugeScaleLabelsBorder {
+        color?: string;
+        dashType?: string;
+        opacity?: number;
+        width?: number;
+    }
+
+    interface CircularGaugeScaleLabelsMargin {
+        top?: number;
+        bottom?: number;
+        left?: number;
+        right?: number;
+    }
+
+    interface CircularGaugeScaleLabelsPadding {
+        top?: number;
+        bottom?: number;
+        left?: number;
+        right?: number;
+    }
+
+    interface CircularGaugeScaleLabels {
+        background?: string;
+        border?: CircularGaugeScaleLabelsBorder;
+        color?: string;
+        font?: string;
+        format?: string;
+        margin?: CircularGaugeScaleLabelsMargin;
+        padding?: CircularGaugeScaleLabelsPadding;
+        position?: string;
+        template?: string|Function;
+        visible?: boolean;
+    }
+
+    interface CircularGaugeScaleMajorTicks {
+        color?: string;
+        size?: number;
+        visible?: boolean;
+        width?: number;
+    }
+
+    interface CircularGaugeScaleMinorTicks {
+        color?: string;
+        size?: number;
+        visible?: boolean;
+        width?: number;
+    }
+
+    interface CircularGaugeScale {
+        labels?: CircularGaugeScaleLabels;
+        majorTicks?: CircularGaugeScaleMajorTicks;
+        majorUnit?: number;
+        max?: number;
+        min?: number;
+        minorTicks?: CircularGaugeScaleMinorTicks;
+        minorUnit?: number;
+        rangePlaceholderColor?: string;
+        rangeSize?: number;
+        rangeDistance?: number;
+        reverse?: boolean;
+        startAngle?: number;
+    }
+
+    interface CircularGaugeExportImageOptions {
+        width?: string;
+        height?: string;
+    }
+
+    interface CircularGaugeExportSVGOptions {
+        raw?: boolean;
+    }
+
+    interface CircularGaugeOptions {
+        name?: string;
+        centerTemplate?: string|Function;
+        color?: string;
+        colors?: CircularGaugeColor[];
+        gaugeArea?: CircularGaugeGaugeArea;
+        opacity?: number;
+        renderAs?: string;
+        scale?: CircularGaugeScale;
+        theme?: string;
+        transitions?: boolean;
+        value?: number;
+    }
+    interface CircularGaugeEvent {
+        sender: CircularGauge;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
 
     class TreeMap extends kendo.ui.Widget {
 
@@ -23832,6 +23981,10 @@ interface JQuery {
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
     data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup;
 
+    kendoCircularGauge(): JQuery;
+    kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
+    data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge;
+
     kendoColorPalette(): JQuery;
     kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery;
     data(key: "kendoColorPalette"): kendo.ui.ColorPalette;
@@ -23923,6 +24076,10 @@ interface JQuery {
     kendoFloatingActionButton(): JQuery;
     kendoFloatingActionButton(options: kendo.ui.FloatingActionButtonOptions): JQuery;
     data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton;
+
+    kendoForm(): JQuery;
+    kendoForm(options: kendo.ui.FormOptions): JQuery;
+    data(key: "kendoForm"): kendo.ui.Form;
 
     kendoGantt(): JQuery;
     kendoGantt(options: kendo.ui.GanttOptions): JQuery;

@@ -68,6 +68,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Waterfall Charts](https://demos.telerik.com/kendo-ui/waterfall-charts/index) | :x: | :white_check_mark: | :white_check_mark:     |
 | **Gauges**                |
 | [ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)         | :x:  | :white_check_mark: | :white_check_mark:           |
+| [CircularGauge](https://demos.telerik.com/kendo-ui/circular-gauge/index)         | :x:  | :white_check_mark: | :white_check_mark:           |
 | [LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | [RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | **Barcodes**              |
