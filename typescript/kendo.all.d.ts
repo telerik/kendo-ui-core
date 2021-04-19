@@ -23782,6 +23782,10 @@ interface JQuery {
     kendoFloatingActionButton(options: kendo.ui.FloatingActionButtonOptions): JQuery;
     data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton;
 
+    kendoForm(): JQuery;
+    kendoForm(options: kendo.ui.FormOptions): JQuery;
+    data(key: "kendoForm"): kendo.ui.Form;
+
     kendoGantt(): JQuery;
     kendoGantt(options: kendo.ui.GanttOptions): JQuery;
     data(key: "kendoGantt"): kendo.ui.Gantt;
