@@ -6111,6 +6111,30 @@ The height of the grid. Numeric values are treated as pixels.
     });
     </script>
 
+### loaderType `String` *(default: "loadingPanel")*
+
+Defines what loader will be used while loading the data. Possible values are:
+
+- "loadingPanel" - a panel with a circular loading indicator.
+- "skeleton" - a skeleton enabled loader.
+
+#### Example - set the loaderType
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      loaderType: "skeleton"
+    });
+    </script>
+
 ### messages `Object`
 
 Defines the text of the command buttons that are shown within the Grid. Used primarily for localization.

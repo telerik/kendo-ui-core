@@ -1853,6 +1853,63 @@ declare namespace kendo.ui.filemanager.commands {
     }
 }
 
+declare namespace kendo.ui.taskboard {
+
+    class Command extends kendo.Class {
+         static fn: any;
+         static extend(prototype: Object): any;
+         exec?(): void;
+    }
+}
+
+declare namespace kendo.ui.taskboard.commands {
+    class AddColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class EditColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class DeleteColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SaveColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class CancelEditColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class OpenPaneCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class ClosePaneCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SelectCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class MoveFocusCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SaveChangesCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class DeleteCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class MoveCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class EditCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class AddCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SearchCommand extends kendo.ui.taskboard.Command {
+    }
+}
+
+
 declare namespace kendo.mobile {
     function init(selector: string): void;
     function init(element: JQuery): void;
@@ -5818,6 +5875,7 @@ declare namespace kendo.ui {
         filterable?: boolean | GridFilterable;
         groupable?: boolean | GridGroupable;
         height?: number|string;
+        loaderType?: string;
         messages?: GridMessages;
         mobile?: boolean|string;
         navigatable?: boolean;
@@ -9653,6 +9711,319 @@ declare namespace kendo.ui {
     interface TabStripShowEvent extends TabStripEvent {
         item?: Element;
         contentElement?: Element;
+    }
+
+    class TaskBoard extends kendo.ui.Widget {
+
+        static fn: TaskBoard;
+
+        options: TaskBoardOptions;
+
+        dataSource: kendo.data.DataSource;
+        columnsDataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): TaskBoard;
+
+        constructor(element: Element, options?: TaskBoardOptions);
+
+
+        addCard(data: any): void;
+        addColumn(data: any): void;
+        columns(): JQuery;
+        columnByStatus(status: string): JQuery;
+        deleteCard(cardElm: JQuery): void;
+        deleteColumn(columnElm: JQuery): void;
+        editCard(cardElm: JQuery): void;
+        editColumn(columnElm: JQuery): void;
+        enable(cardElm: JQuery): void;
+        enableByColumn(columnElm: JQuery, state: boolean): void;
+        readOnly(cardElm: JQuery): void;
+        readOnlyByColumn(columnElm: JQuery, state: boolean): void;
+        items(): JQuery;
+        itemsByStatus(status: string): JQuery;
+        itemsByColumn(columnElm: JQuery): JQuery;
+        load(): void;
+        previewCard(cardElm: JQuery): void;
+        registerShortcut(selector: string, shortcut: any, options: any): void;
+        dataItem(cardElm: JQuery): kendo.data.ObservableObject;
+        columnDataItem(columnElm: JQuery): kendo.data.ObservableObject;
+        saveCard(): void;
+        saveColumn(): void;
+        select(cardElm: JQuery): JQuery;
+        setDataSource(dataSource: kendo.data.DataSource): void;
+        setDataSource(dataSource: any): void;
+        setColumnsDataSource(dataSource: kendo.data.DataSource): void;
+        setColumnsDataSource(dataSource: any): void;
+
+    }
+
+    interface TaskBoardCardMenuItem {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+    }
+
+    interface TaskBoardColumnSettingsButton {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+    }
+
+    interface TaskBoardColumnSettings {
+        buttons?: TaskBoardColumnSettingsButton[];
+        dataStatusField?: string;
+        dataTextField?: string;
+        dataOrderField?: string;
+        width?: string|number;
+        template?: string|Function;
+    }
+
+    interface TaskBoardEditableButton {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+        primary?: boolean;
+    }
+
+    interface TaskBoardEditable {
+        buttons?: TaskBoardEditableButton[];
+        form?: any;
+        headerTemplate?: string|Function;
+    }
+
+    interface TaskBoardMessages {
+        edit?: string;
+        createNewCard?: string;
+        create?: string;
+        search?: string;
+        previewCard?: string;
+        addCard?: string;
+        editCard?: string;
+        deleteCard?: string;
+        addColumn?: string;
+        editColumn?: string;
+        deleteColumn?: string;
+        close?: string;
+        cancel?: string;
+        delete?: string;
+        saveChanges?: string;
+        title?: string;
+        description?: string;
+        newColumn?: string;
+        deleteColumnConfirm?: string;
+        deleteCardConfirm?: string;
+    }
+
+    interface TaskBoardPreviewPaneButton {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+        primary?: boolean;
+    }
+
+    interface TaskBoardPreviewPane {
+        buttons?: TaskBoardPreviewPaneButton[];
+        template?: string|Function;
+        headerTemplate?: string|Function;
+    }
+
+    interface TaskBoardResource {
+        dataColorField?: string;
+        dataSource?: any|any|kendo.data.DataSource;
+        dataTextField?: string;
+        dataValueField?: string;
+        field?: string;
+        multiple?: boolean;
+        name?: string;
+        title?: string;
+        valuePrimitive?: boolean;
+    }
+
+    interface TaskBoardToolbarItem {
+        type?: string;
+        overflow?: string;
+        click?: Function;
+        command?: string;
+        options?: string;
+        name?: string;
+        togglable?: boolean;
+        text?: string;
+        template?: string|Function;
+        showText?: string;
+        primary?: boolean;
+        attributes?: any;
+        enable?: boolean;
+        hidden?: boolean;
+        spriteCssClass?: string;
+        imageUrl?: string;
+        showIcon?: string;
+        icon?: string;
+        id?: string;
+    }
+
+    interface TaskBoardToolbar {
+        items?: TaskBoardToolbarItem[];
+    }
+
+    interface TaskBoardRegisterShortcutOptions {
+        command?: string;
+        options?: string;
+        handler?: Function;
+    }
+
+    interface TaskBoardOptions {
+        name?: string;
+        autoBind?: boolean;
+        cardMenu?: TaskBoardCardMenuItem[];
+        columns?: any|any|kendo.data.DataSource;
+        columnSettings?: TaskBoardColumnSettings;
+        dataOrderField?: string;
+        dataCategoryField?: string;
+        dataDescriptionField?: string;
+        dataSource?: any|any|kendo.data.DataSource;
+        dataStatusField?: string;
+        dataTitleField?: string;
+        editable?: boolean | TaskBoardEditable;
+        height?: string|number;
+        previewPane?: boolean | TaskBoardPreviewPane;
+        reorderable?: boolean;
+        resources?: TaskBoardResource[];
+        selectable?: boolean;
+        template?: string|Function;
+        toolbar?: boolean | TaskBoardToolbar;
+        width?: string|number;
+        messages?: TaskBoardMessages;
+        columnsDataBinding?(e: TaskBoardColumnsDataBindingEvent): void;
+        columnsDataBound?(e: TaskBoardColumnsDataBoundEvent): void;
+        select?(e: TaskBoardSelectEvent): void;
+        dataBinding?(e: TaskBoardDataBindingEvent): void;
+        dataBound?(e: TaskBoardDataBoundEvent): void;
+        deleteCard?(e: TaskBoardDeleteCardEvent): void;
+        deleteColumn?(e: TaskBoardDeleteColumnEvent): void;
+        editCard?(e: TaskBoardEditCardEvent): void;
+        editColumn?(e: TaskBoardEditColumnEvent): void;
+        executeCommand?(e: TaskBoardExecuteCommandEvent): void;
+        move?(e: TaskBoardMoveEvent): void;
+        moveEnd?(e: TaskBoardMoveEndEvent): void;
+        moveStart?(e: TaskBoardMoveStartEvent): void;
+        change?(e: TaskBoardChangeEvent): void;
+        saveCard?(e: TaskBoardSaveCardEvent): void;
+        saveColumn?(e: TaskBoardSaveColumnEvent): void;
+    }
+    interface TaskBoardEvent {
+        sender: TaskBoard;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TaskBoardColumnsDataBindingEvent extends TaskBoardEvent {
+        action?: string;
+        index?: number;
+        items?: any;
+    }
+
+    interface TaskBoardColumnsDataBoundEvent extends TaskBoardEvent {
+    }
+
+    interface TaskBoardSelectEvent extends TaskBoardEvent {
+        card?: JQuery;
+    }
+
+    interface TaskBoardDataBindingEvent extends TaskBoardEvent {
+        action?: string;
+        index?: number;
+        items?: any;
+    }
+
+    interface TaskBoardDataBoundEvent extends TaskBoardEvent {
+    }
+
+    interface TaskBoardDeleteCardEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+    }
+
+    interface TaskBoardDeleteColumnEvent extends TaskBoardEvent {
+        column?: kendo.data.Model;
+    }
+
+    interface TaskBoardEditCardEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+    }
+
+    interface TaskBoardEditColumnEvent extends TaskBoardEvent {
+        column?: kendo.data.Model;
+    }
+
+    interface TaskBoardExecuteCommandEvent extends TaskBoardEvent {
+        command?: string;
+        options?: any;
+    }
+
+    interface TaskBoardMoveEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        item?: JQuery;
+        target?: JQuery;
+        list?: kendo.ui.Sortable;
+        draggableEvent?: any;
+    }
+
+    interface TaskBoardMoveEndEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        action?: string;
+        item?: JQuery;
+        oldIndex?: number;
+        newIndex?: number;
+        draggableEvent?: any;
+    }
+
+    interface TaskBoardMoveStartEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        draggableEvent?: any;
+        item?: JQuery;
+    }
+
+    interface TaskBoardChangeEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        action?: string;
+        item?: JQuery;
+        oldIndex?: number;
+        newIndex?: number;
+        draggableEvent?: any;
+    }
+
+    interface TaskBoardSaveCardEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+    }
+
+    interface TaskBoardSaveColumnEvent extends TaskBoardEvent {
+        column?: kendo.data.Model;
     }
 
     class TileLayout extends kendo.ui.Widget {
