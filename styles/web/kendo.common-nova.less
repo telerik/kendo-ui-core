@@ -983,6 +983,36 @@
 @taskboard-drag-placeholder-border-radius: @taskboard-card-border-radius;
 
 
+// Scheduler
+@scheduler-yearview-padding-x: 12px;
+@scheduler-yearview-padding-y: @scheduler-yearview-padding-x;
+
+@scheduler-yearview-month-header-font-weight: bold;
+@scheduler-yearview-month-header-font-size: inherit;
+@scheduler-yearview-month-header-opacity: 1;
+
+@scheduler-yearview-indicator-size: 3px;
+@scheduler-yearview-indicator-calc-offset-top: ~"calc( 100% - @{calendar-cell-padding-y} )";
+@scheduler-yearview-indicator-calc-offset-left: ~"calc( 50% - (@{scheduler-yearview-indicator-size} / 2) )";
+@scheduler-yearview-indicator-border-radius: 50%;
+
+@scheduler-tooltip-padding-x: @padding-x;
+@scheduler-tooltip-padding-y: @scheduler-tooltip-padding-x;
+@scheduler-tooltip-border-width: 0;
+
+@scheduler-tooltip-title-margin-y: @padding-y;
+@scheduler-tooltip-month-font-size: @font-size-sm;
+@scheduler-tooltip-day-font-size: calc( @scheduler-tooltip-month-font-size * 2 );
+
+@scheduler-tooltip-events-max-height: 250px;
+@scheduler-tooltip-events-gap: @padding-y;
+
+@scheduler-tooltip-event-padding-x: @padding-x;
+@scheduler-tooltip-event-padding-y: @padding-y;
+@scheduler-tooltip-event-border-radius: @border-radius;
+@scheduler-tooltip-event-gap: @padding-x-sm;
+
+
 @import "common/all.less";
 
 .k-button {

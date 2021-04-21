@@ -40,6 +40,7 @@ The following example demonstrates how to define the Drawer by using the Drawer 
 * [Display modes]({% slug displaymodes_drawer_aspnetcore %})
 * [Interaction modes]({% slug interactionmodes_drawer_aspnetcore %})
 * [Templates]({% slug templates_drawer_aspnetcore %})
+* [Hierarchy]({% slug hierarchy_drawer_aspnetcore %})
 
 ## Referencing Existing Instances
 

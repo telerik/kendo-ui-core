@@ -8460,6 +8460,7 @@ declare namespace kendo.ui {
         week?: string;
         month?: string;
         agenda?: string;
+        year?: string;
     }
 
     interface SchedulerMessages {
@@ -8513,6 +8514,7 @@ declare namespace kendo.ui {
 
     interface SchedulerResource {
         dataColorField?: string;
+        dataParentValueField?: string;
         dataSource?: any|any|kendo.data.DataSource;
         dataTextField?: string;
         dataValueField?: string;
@@ -8572,6 +8574,8 @@ declare namespace kendo.ui {
         type?: string;
         workWeekStart?: number;
         workWeekEnd?: number;
+        months?: number;
+        tooltipTemplate?: string|Function;
     }
 
     interface SchedulerOptions {

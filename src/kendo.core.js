@@ -4043,6 +4043,14 @@ function pad(number, digits, end) {
             return last;
         }
 
+        function firstDayOfYear(date) {
+            return new Date(date.getFullYear(), 0, 1);
+        }
+
+        function lastDayOfYear(date) {
+            return new Date(date.getFullYear(), 11, 31);
+        }
+
         function moveDateToWeekStart(date, weekStartDay) {
             if (weekStartDay !== 1) {
                 return addDays(dayOfWeek(date, weekStartDay, -1), 4);
@@ -4185,6 +4193,12 @@ function pad(number, digits, end) {
             return staticDate;
         }
 
+        function addYear(date, offset) {
+            var currentDate = new Date(date);
+
+            return new Date(currentDate.setFullYear(currentDate.getFullYear() + offset));
+        }
+
         return {
             adjustDST: adjustDST,
             dayOfWeek: dayOfWeek,
@@ -4211,7 +4225,15 @@ function pad(number, digits, end) {
             firstDayOfMonth: firstDayOfMonth,
             lastDayOfMonth: lastDayOfMonth,
             weekInYear: weekInYear,
-            getMilliseconds: getMilliseconds
+            getMilliseconds: getMilliseconds,
+            firstDayOfYear: firstDayOfYear,
+            lastDayOfYear: lastDayOfYear,
+            nextYear: function(date) {
+                return addYear(date, 1);
+            },
+            previousYear: function(date) {
+                return addYear(date, -1);
+            }
         };
     })();
 
