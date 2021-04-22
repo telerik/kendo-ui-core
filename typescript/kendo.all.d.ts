@@ -3476,7 +3476,7 @@ declare namespace kendo.ui {
 
         constructor(element: Element, options?: DialogOptions);
 
-
+        center(): kendo.ui.Dialog;    
         close(): kendo.ui.Dialog;
         content(): string;
         content(content?: string): kendo.ui.Dialog;
@@ -11740,14 +11740,14 @@ declare namespace kendo.ui {
         static extend(proto: Object): Wizard;
         constructor(element: Element, options?: WizardOptions);
 
-        activeStep(): void;
+        activeStep(): kendo.wizard.Step;
         enableStep(index: number, enable: boolean): void;
         insertAt(index: number, step: any): void;
         next(): void;
         previous(): void;
         removeAt(index: number): void;
         select(index: number): void;
-        steps(): void;
+        steps(): kendo.wizard.Step[];
     }
 
     interface WizardMessages {

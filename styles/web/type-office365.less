@@ -994,6 +994,8 @@
 @taskboard-column-focus-text: null;
 @taskboard-column-focus-border: shade( @component-border, 20% );
 
+@taskboard-column-header-text: @component-text;
+
 @taskboard-pane-bg: @component-bg;
 @taskboard-pane-text: @component-text;
 @taskboard-pane-border: @component-border;
@@ -1006,9 +1008,9 @@
 @taskboard-card-header-text: null;
 @taskboard-card-header-border: null;
 
-@taskboard-card-title-text: @primary;
-@taskboard-card-title-focus-text: darken( @primary, 13% );
-@taskboard-card-title-hover-text: lighten( @primary, 13% );
+@taskboard-card-title-text: @card-primary-text;
+@taskboard-card-title-focus-text: darken( @card-primary-text, 13% );
+@taskboard-card-title-hover-text: lighten( @card-primary-text, 13% );
 
 @taskboard-card-footer-bg: @taskboard-card-bg;
 @taskboard-card-footer-text: null;
@@ -1017,9 +1019,9 @@
 @taskboard-card-focus-border: shade( @taskboard-card-border, 18% );
 @taskboard-card-hover-border: shade( @taskboard-card-border, 10% );
 
-@taskboard-card-selected-text: @taskboard-card-text;
+@taskboard-card-selected-text: darken( @taskboard-card-text, 15% );
 @taskboard-card-selected-bg: @taskboard-card-bg;
-@taskboard-card-selected-border: lighten( @primary, 13% );
+@taskboard-card-selected-border: darken( @card-primary-text, 15% );
 
 @taskboard-drag-placeholder-bg: rgba(255, 255, 255, .2);
 @taskboard-drag-placeholder-border: @component-border;

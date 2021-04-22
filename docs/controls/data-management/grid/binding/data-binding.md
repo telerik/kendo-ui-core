@@ -283,6 +283,18 @@ The following example demonstrates how to fully customize the Grid by applying a
     </style>
 ```
 
+## Loading Overlay Types
+
+The Kendo UI Grid exposes two types of loading indicators:
+
+* The `loadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
+
+* The `skeleton` uses the [SkeletonContainer widget]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+
+Check the `skeleton` loading type in action in the live demo below:
+
+* [Skeleton Loading Type Demo](https://demos.telerik.com/kendo-ui/skeletoncontainer/grid-integration)
+
 ## KB Articles on Remote Data Binding
 
 * [Binding the Grid to XML Data]({% slug howto_bindgridtoxmldata_grid %})

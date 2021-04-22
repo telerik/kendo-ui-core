@@ -566,6 +566,12 @@ Possible values are:
 
 ## Methods
 
+### center
+
+Centers the Dialog within the viewport.
+#### Returns
+
+`kendo.ui.Dialog` - Returns the Dialog object to support chaining. 
 ### close
 
 Closes a Dialog.

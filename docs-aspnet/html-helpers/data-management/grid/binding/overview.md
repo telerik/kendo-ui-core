@@ -30,6 +30,18 @@ The following table lists the basic feature differences between the server and A
 |**Full-Page Updates** |The Grid makes HTTP GET requests to ASP.NET MVC action methods which cause a full-page refresh. |The Grid makes Ajax requests which cause partial page update. The Grid retrieves only the data needed for the current page.|
 {% endif %}
 
+## Loading Overlay Types
+
+The Telerik UI Grid for {{ site.framework }} exposes two types of loading indicators:
+
+* The `GridLoaderType.LoadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
+
+* The `GridLoaderType.Skeleton` uses the [SkeletonContainer widget]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `Skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+
+Check the `Skeleton` loading type in action in the live demo below:
+
+* [Skeleton Loading Type Demo](https://demos.telerik.com/{{ site.platform }}/skeletoncontainer/grid-integration)
+
 ## See Also
 
 * [Remote Ajax Binding by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding)
