@@ -99,6 +99,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **PDF**              |
 | [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/index)        | :x: | :white_check_mark: | :white_check_mark:           |
 | **Navigation**            |
+| [ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index)      | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/index)      | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Button](https://demos.telerik.com/kendo-ui/button/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
