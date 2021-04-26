@@ -25,7 +25,7 @@ The Telerik Document Processing libraries for .NET Core support the following fi
 * `DOC` & `DOT` (import only)
 * `DOCX`
 * `HTML`
-* `PDF` (export only)
+* `PDF`
 * `RTF`
 * `TXT`
 * `XLSX`
