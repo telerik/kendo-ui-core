@@ -889,7 +889,7 @@ The data item of the column to be edited.
 
 If invoked prevents the edit action.
 
-### executeCommand
+### execute
 
 Fires when a command is executed.
 

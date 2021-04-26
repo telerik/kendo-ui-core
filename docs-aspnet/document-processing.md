@@ -37,6 +37,7 @@ Telerik Document Processing supports [.NET Standard 2.0](https://github.com/dotn
 
 * `Telerik.Documents.Core.nupkg`&mdash;The main NuGet package from the Telerik Document Processing libraries. Required when you plan to use the library.
 * `Telerik.Documents.Flow.nupkg`&mdash;The package is part of the Word (text) processing library. Required for processing `HTML`, `DOCX`, `RTF`, and `TXT` documents.
+* `Telerik.Documents.Flow.FormatProviders.Doc.nupkg`&mdash;The package allows for importing flow documents from `DOC` files.
 * `Telerik.Documents.Flow.FormatProviders.Pdf.nupkg`&mdash;The package allows for exporting flow documents, such as `DOCX` and `RTF`, to PDF.
 * `Telerik.Documents.SpreadsheetStreaming.nupkg`&mdash;The main package for generating huge spreadsheet files while using minimum resources.
 * `Telerik.Documents.Fixed.nupkg`&mdash;The package is required when processing PDF documents.
