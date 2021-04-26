@@ -112,7 +112,7 @@ To start using the import and export functionality:
             .Import()
         )
         .Import(import => import
-            .AllowedExtensions(new[] { "docx", "rtf", "html", "txt" })
+            .AllowedExtensions(new[] { "docx", "doc", "dot", "rtf", "html", "txt" })
             .Proxy("Import","Editor")
         )
     )
