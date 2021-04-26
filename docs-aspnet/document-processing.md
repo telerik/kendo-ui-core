@@ -12,9 +12,9 @@ position: 11
 Telerik Document Processing provides the RadPdfProcessing, RadSpreadProcessing, RadSpreadStreamProcessing, RadWordsProcessing, and RadZipLibrary UI-independent and cross-platform libraries which enable you to process content between different formats and work with archive files.
 
 * The [RadPdfProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview) library enables you to create, import, and export PDF documents.
-* The [RadSpreadProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) enables you to effortlessly convert documents from one to another file format among XLSX, XLS, CSV and TXT. .
+* The [RadSpreadProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview) enables you to effortlessly convert documents from one to another file format among XLSX, XLS, CSV and TXT.
 * The [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) library enables you to export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
-* The [RadWordsProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview) library enables you to create, import, and export `DOCX`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
+* The [RadWordsProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview) library enables you to create, import, and export `DOCX`, `DOC` & `DOT` (import only), `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
 * The [RadZipLibrary](https://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview) library enables you to compress and decompress `ZIP` files.
 
 ## Supported File Formats
@@ -22,9 +22,10 @@ Telerik Document Processing provides the RadPdfProcessing, RadSpreadProcessing, 
 The Telerik Document Processing libraries for .NET Core support the following file formats:
 
 * `CSV`
+* `DOC` & `DOT` (import only)
 * `DOCX`
 * `HTML`
-* `PDF`
+* `PDF` (export only)
 * `RTF`
 * `TXT`
 * `XLSX`
@@ -37,7 +38,7 @@ Telerik Document Processing supports [.NET Standard 2.0](https://github.com/dotn
 
 * `Telerik.Documents.Core.nupkg`&mdash;The main NuGet package from the Telerik Document Processing libraries. Required when you plan to use the library.
 * `Telerik.Documents.Flow.nupkg`&mdash;The package is part of the Word (text) processing library. Required for processing `HTML`, `DOCX`, `RTF`, and `TXT` documents.
-* `Telerik.Documents.Flow.FormatProviders.Doc.nupkg`&mdash;The package allows for importing flow documents from `DOC` files.
+* `Telerik.Documents.Flow.FormatProviders.Doc.nupkg`&mdash;The package allows for importing flow documents from `DOC` or `DOT` files.
 * `Telerik.Documents.Flow.FormatProviders.Pdf.nupkg`&mdash;The package allows for exporting flow documents, such as `DOCX` and `RTF`, to PDF.
 * `Telerik.Documents.SpreadsheetStreaming.nupkg`&mdash;The main package for generating huge spreadsheet files while using minimum resources.
 * `Telerik.Documents.Fixed.nupkg`&mdash;The package is required when processing PDF documents.
