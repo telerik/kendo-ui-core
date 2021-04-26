@@ -19,7 +19,7 @@ Telerik Document Processing includes the following libraries:
 * [RadPdfProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radpdfprocessing/overview)&mdash;Create, import, and export PDF documents.
 * [RadSpreadProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview)&mdash;Create, modify, and save spreadsheet documents.
 * [RadSpreadStreamProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview)&mdash;Export large `XLSX` and `CSV` spreadsheet documents with low memory footprint and great performance.
-* [RadWordsProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview)&mdash;Create, import, and export `DOCX`, `DOC`, `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
+* [RadWordsProcessing](https://docs.telerik.com/devtools/document-processing/libraries/radwordsprocessing/overview)&mdash;Create, import, and export `DOCX`, `DOC` & `DOT` (import only), `HTML`, `RTF`, and `TXT` documents, and export them to PDF.
 * [RadZipLibrary](https://docs.telerik.com/devtools/document-processing/libraries/radziplibrary/overview)&mdash;Compress and decompress `ZIP` files.
 
 ## Supported File Formats
@@ -27,12 +27,13 @@ Telerik Document Processing includes the following libraries:
 The Telerik Document Processing libraries support the following file formats:
 
 * `CSV`
+* `DOC` & `DOT` (import only)
 * `DOCX`
 * `HTML`
 * `PDF`
 * `RTF`
 * `TXT`
-* `PDF`
+* `PDF` (export only)
 * `XLSX`
 * `XLS`
 * `CSV`
@@ -44,7 +45,7 @@ Telerik Document Processing supports [.NET Framework 4.0](https://dotnet.microso
 
 * `Telerik.Windows.Documents.Core.dll`&mdash;The main assembly from the Telerik Document Processing libraries. Required when you plan to use the library.
 * `Telerik.Windows.Documents.Flow.dll`&mdash;The assembly is part of the Word (text) processing library. Required for processing `HTML`, `DOCX`, `RTF`, and `TXT` documents.
-* `Telerik.Windows.Documents.Flow.FormatProviders.Doc`&mdash;The assembly allows for importing flow documents from `DOC` files.
+* `Telerik.Windows.Documents.Flow.FormatProviders.Doc`&mdash;The assembly allows for importing flow documents from `DOC` and `DOT` files.
 * `Telerik.Windows.Documents.Flow.FormatProviders.Pdf`&mdash;The assembly allows for exporting of flow documents, such as `DOCX` and `RTF`, to PDF.
 * `Telerik.Windows.Documents.Spreadsheet.dll`&mdash;The main assembly for spreadsheet processing. Required when processing `XLSX`, `CSV`, and `TXT` documents.
 * `Telerik.Documents.SpreadsheetStreaming.dll`&mdash;The main assembly for generating huge spreadsheet files and using minimum resources.
