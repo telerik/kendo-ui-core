@@ -33,7 +33,7 @@ The Telerik Document Processing libraries support the following file formats:
 * `PDF`
 * `RTF`
 * `TXT`
-* `PDF` (export only)
+* `PDF`
 * `XLSX`
 * `XLS`
 * `ZIP`
