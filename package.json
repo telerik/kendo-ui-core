@@ -16,7 +16,7 @@
     "@progress/kendo-theme-material": "3.31.0",
     "amd-optimize": "0.6.1",
     "autoprefixer": "^9.1.5",
-    "axe-core": "^4.1.2",
+    "axe-core": "4.1.2",
     "bootstrap": "^4.0.0",
     "browser-sync": "~2.9.10",
     "chai": "^4.1.2",
