@@ -1,12 +1,12 @@
 ---
-title: Selection Export
-page_title: Selection Export
+title: Selection & Export
+page_title: Selection & Export
 description: "With Telerik UI Grid for {{ site.framework }} you can enable users to select specific cells and export them to Excel or Telerik UI Chart"
 slug: exportingselection_gridhelper_aspnetcore
 position: 6
 ---
 
-# Selection Export
+# Selection & Export
 
 The Grid widget allows users to select specific cells and then to export them to Excel or a Telerik UI Chart for {{ site.framework }} .
 
@@ -15,6 +15,8 @@ For runnable example, refer to the [Demo on copying/exporting selected cells](ht
 ## Getting Started
 
 The following sections provide step-by-step instructions and examples on getting started with the Grid Selection Export functionality.
+
+> The selection export functionality relies on the client-side Grid API. In this example, a Telerik UI ContextMenu is used to execute Grid methods related to copying and exporting of the selected cells.
 
 ### Enabling Excel Export
 
@@ -30,9 +32,6 @@ The following sections provide step-by-step instructions and examples on getting
 
         @(Html.Kendo().Grid<OrderViewModel>()
             .Name("grid")
-            .ToolBar(tools => {
-                tools.Custom().Name("copy").Text("Copy Selected").IconClass("k-icon k-i-copy");
-            })
             .Selectable(selectable => selectable
                 .Mode(GridSelectionMode.Multiple)
                 .Type(GridSelectionType.Cell))
@@ -41,150 +40,194 @@ The following sections provide step-by-step instructions and examples on getting
                 .Read(read => read.Action("Orders_Read", "Grid"))
             )
         )
+
+### Initializing a ContextMenu
+
+1. Add an icon for the ContextMenu.
+
+    ```html
+        <span class='k-primary k-bg-primary k-icon k-i-menu contextMenuIcon'></span>
+    ```
+
+1. Create the widget.
+
+        @(Html.Kendo().ContextMenu()
+            .Name("contextmenu")
+            .Target(".contextMenuIcon")
+            .ShowOn("click")
+            .AlignToAnchor(true)
+            .Items(items =>
+            {
+                items.Add().Text("Copy").HtmlAttributes(new { id = "copy" });
+                items.Add().Text("Copy with Headers").HtmlAttributes(new { id = "copyWithHeaders" });
+                items.Add().Separator(true);
+                items.Add().Text("Export").HtmlAttributes(new { id = "export" });
+                items.Add().Text("Export with Headers").HtmlAttributes(new { id = "exportWithHeaders" });
+                items.Add().Text("Export to Chart").HtmlAttributes(new { id = "exportToChart" });
+            })
+            .Events(ev => ev.Select("onSelect"))
+        )
+
+1. Define the event handling function.
+
+    ```javascript
+        function onSelect(e) {
+            var item = e.item.id;
+
+            switch (item) {
+                case "copy":
+                    copySelected();
+                    break;
+                case "copyWithHeaders":
+                    copySelectedWithHeaders();
+                    break;
+                case "export":
+                    exportSelected();
+                    break;
+                case "exportWithHeaders":
+                    exportSelectedWithHeaders();
+                    break;
+                case "exportToChart":
+                    exportToChart();
+                    break;
+                default:
+                    break;
+            };
+        }
+    ```
 
 ### Copying Selected Data
 
 To enable users to copy the selected data, call the [`copySelectionToClipboard`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/copyselectiontoclipboard) method.
 
-1. Define a custom command in the toolbar:
+```javascript
+    function copySelected() {
+        let selected = grid.select();
 
-        @(Html.Kendo().Grid<OrderViewModel>()
-            .Name("grid")
-            .ToolBar(tools => {
-                tools.Custom().Name("copy").Text("Copy Selected").IconClass("k-icon k-i-copy");
-            })
-            .Selectable(selectable => selectable
-                .Mode(GridSelectionMode.Multiple)
-                .Type(GridSelectionType.Cell))
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .Read(read => read.Action("Orders_Read", "Grid"))
-            )
-        )
+        if (selected.length === 0) {
+            kendo.alert("Please select cells before copying.");
+            return;
+        }
 
-1. On click of the `Copy Selected` button, copy the selected cells:
+        grid.copySelectionToClipboard(false);
+    }
 
-        <script>
-            $(".k-grid-copy").on("click", function (e) {
-                e.preventDefault();
-                var grid = $("#grid").data("kendoGrid");
-                let selected = grid.select();
+    function copySelectedWithHeaders() {
+        let selected = grid.select();
 
-                /* Set to true in order to copy the headers as well. */
-                grid.copySelectionToClipboard(false);
-            });
-        </script>
+        if (selected.length === 0) {
+            kendo.alert("Please select cells before copying.");
+            return;
+        }
 
-### Exporting Selected Data
+        grid.copySelectionToClipboard(true);
+    }
+```
+
+### Exporting Selected Data to Excel
 
 To enable users to export the selected data, call the [`exportSelectedToExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/exportselectedtoexcel) method.
 
-1. Define a custom command in the toolbar.
+```javascript
+    function exportSelected() {
+        let selected = grid.select();
 
-        @(Html.Kendo().Grid<OrderViewModel>()
-            .Name("grid")
-            .ToolBar(tools => {
-                tools.Custom().Name("export").Text("Export Selected").IconClass("k-icon k-i-excel");
-            })
-            .Selectable(selectable => selectable
-                .Mode(GridSelectionMode.Multiple)
-                .Type(GridSelectionType.Cell))
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .Read(read => read.Action("Orders_Read", "Grid"))
-            )
-        )
+        if (selected.length === 0) {
+            kendo.alert("Please select cells before exporting.");
+            return;
+        }
+        grid.exportSelectedToExcel(false);
+    }
 
-1. On click of the `Export Selected` button, export the selected cells.
+    function exportSelectedWithHeaders() {
+        let selected = grid.select();
 
-        <script>
-            $(".k-grid-export").on("click", function (e) {
-                e.preventDefault();
-                var grid = $("#grid").data("kendoGrid");
-                let selected = grid.select();
+        if (selected.length === 0) {
+            kendo.alert("Please select cells before exporting.");
+            return;
+        }
 
-                /* Set to true in order to export the headers as well. */
-                grid.exportSelectedToExcel(false);
-            });
-        </script>
+        grid.exportSelectedToExcel(true);
+    }
+```
 
 ### Exporting Selected Data to Chart
 
-To enable users to export the selected data to a Telerik UI Chart, call the [`getSelectedData`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getselecteddata) method and initialize a Chart widget with the data.
+To enable users to export the selected data to a Kendo UI Chart, call the [`getSelectedData`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/getselecteddata) method and initialize a Chart widget with the data.
 
 1. Add an empty div before initializing the Grid.
 
         <div id="chart-container"></div>
 
-1. Define a custom command in the toolbar.
+1. Define the `exportToChart` method as demonstrated below.
 
-        @(Html.Kendo().Grid<OrderViewModel>()
-            .Name("grid")
-            .ToolBar(tools => {
-                tools.Custom().Name("exportChart").Text("Export Selected To Chart").IconClass("k-icon k-i-column-clustered");
-            })
-            .Selectable(selectable => selectable
-                .Mode(GridSelectionMode.Multiple)
-                .Type(GridSelectionType.Cell))
-            .DataSource(dataSource => dataSource
-                .Ajax()
-                .Read(read => read.Action("Orders_Read", "Grid"))
-            )
-        )
-
-1. On click of the `Export Selected To Chart` button, initialize a Kendo UI Chart inside a Kendo UI Window with the selected data.
-
-        <script>
-            $(".k-grid-exportChart").on("click", function (e) {
-                var grid = $('#grid').data('kendoGrid');
-
+    ```javascript
+            function exportToChart() {
                 var container = $('#chart-container');
-
-                /* Get a reference to the Kendo Window widget if it has been initialized. */
                 var windowInstance = $('#chart-container').data('kendoWindow');
                 var currInstance = container.find('.k-chart').data('kendoChart');
-
-                /* Get the data from the selected cells. */
+                /* Get the selected data. */
                 var data = grid.getSelectedData();
-                var categoryField;
 
                 if (!data.length) {
                     kendo.alert('Please select cells before exporting.');
                     return;
                 }
 
-                /* Set the categoryField of the chart using one of the grid fields. */
-                categoryField = data[0].ShipCountry ? 'ShipCountry' : 'ShipCity';
+                /* If the user selects only a value(Freight) without a category(ShipCountry), set the ShipCountry name to Uknown.*/
+                let unknownCountries = $.extend(true, [], data);
+                unknownCountries.forEach(function (item, index, array) {
+                    if (!array[index].ShipCountry) {
+                        array[index].ShipCountry = "Unknown"
+                    }
+                });
 
-                /* If the Kendo Window widget is undefined, initialize it. */
-                if (!windowInstance) {
-                    windowInstance = container.kendoWindow({ width: 800 }).data('kendoWindow');
+                /* Destroy the window instance. */
+                if (windowInstance) {
+                    windowInstance.destroy();
                 }
 
-                /* If the chart widget already exists, destroy it. */
+                /* Destroy the chart instance. */
                 if (currInstance) {
                     currInstance.destroy();
                 }
 
-                /* Empty the div element. */
+                /* Initialize a new window instance and increase it's width for every row that has been selected. This way the chart can fit properly. */
+                let windowWidth = data.length > 5 ? data.length * 75 : 500;
+                windowInstance = container.kendoWindow({ width: windowWidth }).data('kendoWindow');
                 container.empty();
-                /* Append an empty div to the container. */
+
+                /* Create a chart using the data and append it to the window. */
                 var element = $('<div></div>').appendTo(container);
                 windowInstance.open().center();
-
-                /* Initialize a Chart from the appended div. */
                 element.kendoChart({
+                    dataSource: {
+                        data: unknownCountries
+                    },
                     series: [{
                         type: "column",
-                        categoryField: categoryField,
-                        field: 'Freight',
-                        data: data
-                    }]
+                        field: 'Freight'
+                    }],
+                    categoryAxis: {field: "ShipCountry"}
                 });
-            });
-        </script>
+            }
+    ```
+
+## Selection Types
+
+The following selection types are supported:
+
+- Cell selection - the user holds down the `CTRL` key (`Command` key on Mac) and uses the `left-click` of the mouse to select cells.
+- Range selection - the user holds down the `left-click` on the mouse and drags across a range of cells.
+- Range and Cell selection - the user can combine the two approaches from above and select both a range and separate cells.
+- Range combination selection - the user performs a range selection and while holding the `CTRL` key (`Command` key on Mac), they perform another range selection.
+
+## Known Limitations
+
+- The `copySelectionToClipboard`, `exportSelectedToExcel` and `getSelectedData` methods do not work with rows that are persisted across different pages.
+- The Export to Chart method does not work with `Range and Cell selection` type.
 
 ## See Also
 
-* [Selection Copy/Export by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/advanced-export)
+* [Selection Copy/Export by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/selection-export)
 * [Server-Side API](/api/grid)

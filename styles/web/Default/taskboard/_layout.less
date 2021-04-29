@@ -159,6 +159,14 @@
 
     &.k-taskboard-card-category {
         border-left-width: @taskboard-card-category-border-width;
+
+        .k-rtl &,
+        &.k-rtl,
+        [dir="rtl"] &,
+        &[dir="rtl"] {
+            border-left-width: @taskboard-card-border-width;
+            border-right-width: @taskboard-card-category-border-width;
+        }
     }
 
     .k-card-header
@@ -197,14 +205,6 @@
     border-width: @taskboard-drag-placeholder-border-width;
     border-style: solid;
     position: relative;
-}
-
-.k-rtl,
-[dir="rtl"] {
-    .k-taskboard-card.k-taskboard-card-category {
-        border-left-width: @taskboard-card-border-width;
-        border-right-width: @taskboard-card-category-border-width;
-    }
 }
 
 .k-ie {
