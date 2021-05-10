@@ -163,6 +163,70 @@ The Scheduler supports multiple resource types. For example, you can combine sin
     )
 ```
 
+## Hierarchical Resource Grouping
+
+Starting with <strong>2021 R2</strong> release Scheduler supports hierarchical resource grouping. With this improvement, it is allowed to have different child resource groups for each parent resource member. For example, if Scheduler has 'Rooms' as parent resource, different Attendees could be assigned to each room. 
+The `DataParentValueField` can be used to configure which is the field in the child resource that holds the parent value. If the child resource member has no parent value specified, it will be rendered for each of the parent resources. 
+
+The order of the resources should follow the parent-child relation. The last resource could not be a parent. 
+Only the last one of the resources could be configured to allow multiple instance resource.
+
+```
+	@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
+		.Name("scheduler")
+		.Date(new DateTime(2020,6 ,13))
+		.Height(600)
+		.Views(views =>
+		{
+			views.DayView();
+			views.WeekView();
+			views.MonthView(weekView => weekView.Selected(true));
+			views.AgendaView();
+			views.TimelineView();
+		})
+		.MajorTick(720)
+		.Timezone("Etc/UTC")
+		.Group(group => group.Resources("Rooms", "Attendees").Orientation(SchedulerGroupOrientation.Vertical))
+		.Resources(resource =>
+		{
+			resource.Add(m => m.RoomID)
+				.Title("Room")
+				.Name("Rooms")
+				.DataTextField("Text")
+				.DataValueField("Value")
+				.DataColorField("Color")
+				.BindTo(new[] {
+						new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
+						new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" }
+				});
+			resource.Add(m => m.Attendees)
+				.Title("Attendees")
+				.Name("Attendees")
+				.Multiple(true)
+				.DataTextField("Text")
+				.DataValueField("Value")
+				.DataColorField("Color")
+				.DataParentValueField("Parent")
+				.BindTo(new List<SchedulerResourceModel>() {
+						new SchedulerResourceModel(){ Text = "Alex", Color="red", Value = 1},
+						new SchedulerResourceModel(){ Text = "Bob", Color="green",  Value = 2, Parent = 1 } ,
+						new SchedulerResourceModel(){ Text = "Charlie",Color="yellow",  Value = 3, Parent = 2 }
+				});
+		})
+		.DataSource(d => d
+				.Model(m => {
+					m.Id(f => f.MeetingID);
+					m.Field(f => f.Title).DefaultValue("No title");
+					m.RecurrenceId(f => f.RecurrenceID);
+				})
+				.Read("Grouping_Hierarchical_Read", "Scheduler")
+					.Create("Grouping_Hierarchical_Create", "Scheduler")
+					.Destroy("Grouping_Hierarchical_Destroy", "Scheduler")
+					.Update("Grouping_Hierarchical_Update", "Scheduler")
+		)
+	)
+```
+
 ## See Also
 
 * [Server-Side API](/api/scheduler)

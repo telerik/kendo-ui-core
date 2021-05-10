@@ -12,9 +12,9 @@ The Kendo UI ActionSheet exposes events which provide easy configuration or exte
 
 ## Open
 
-The open event fires when the ActionSheet is opened.
+The `open` event fires when the ActionSheet is opened.
 
-The following example demonstrates how you can subscribe to the open event of the widget: 
+The following example demonstrates how you can subscribe to the `open` event of the widget:
 
 ```dojo
     <div id="actionsheet"></div>
@@ -64,9 +64,9 @@ The following example demonstrates how you can subscribe to the open event of th
 
 ## Close
 
-The close event fires when the ActionSheet is closed.
+The `close` event fires when the ActionSheet is closed.
 
-The following example demonstrates how you can subscribe to the open event of the widget: 
+The following example demonstrates how you can subscribe to the `open` event of the widget:
 
 ```dojo
     <div id="actionsheet"></div>

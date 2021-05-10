@@ -8,7 +8,16 @@ position: 1
 
 # 2021 Releases
 
-This article lists the breaking changes in the 2021 releases of Kendo UI.
+This article lists the breaking or important changes in the 2021 releases of Kendo UI.
+
+## Kendo UI 2021 R2
+
+> Important change
+
+**Scheduler**
+
+As of the 2021 R2 release the events that are 24 hours or longer and do not have their `isAllDay` field set to `true` will be rendered in the regular (non all day) slots. In the previous versions such events were rendered in the allDaySlot. With the introduced change the `allDaySlot` will display only those events that have their `isAllDay` field set to `true`.
+
 
 ## Kendo UI 2021 R1
 

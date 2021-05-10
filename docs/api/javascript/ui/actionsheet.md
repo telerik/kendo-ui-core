@@ -138,6 +138,50 @@ Specifies the description of the item.
       }
     </script>
 
+### items.disabled `Boolean`
+
+If set to true, the item will be disabled.
+
+#### Example
+
+    <div id="actionsheet"></div>
+    <script>
+      var actionsheet = $('#actionsheet').kendoActionSheet({
+          title:'Select item',
+          items:[
+              {
+                  text: 'Edit Item',
+                  iconClass: 'k-icon k-i-edit',
+                  click: onClick,
+                  description: "Select to enter edit mode.",
+                  disabled: true
+              },
+              {
+                  text: 'Add to Favorites',
+                  iconClass: 'k-icon k-i-heart',
+                  click: onClick
+              },
+              {
+                  text: 'Upload New',
+                  iconClass: 'k-icon k-i-upload',
+                  click: onClick
+              },
+              {
+                  text: 'Cancel',
+                  iconClass: 'k-icon k-i-cancel',
+                  group: 'bottom',
+                  click: onClick
+              },
+          ]
+      }).data('kendoActionSheet');
+
+      actionsheet.open();
+      function onClick(e) {
+          e.preventDefault();
+          actionsheet.close();
+      }
+    </script>
+
 ### items.group `String`
 
 Specifies the group of the item. Items can be segregated in two groups - `top` and `bottom`.

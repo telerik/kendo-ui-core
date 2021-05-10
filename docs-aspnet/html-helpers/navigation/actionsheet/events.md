@@ -12,9 +12,9 @@ The Kendo UI ActionSheet exposes events that provide easy configuration or exten
 
 ## Open
 
-The open event fires when the ActionSheet is opened.
+The `open` event fires when the ActionSheet is opened.
 
-The following example demonstrates how you can subscribe to the open event of the component: 
+The following example demonstrates how you can subscribe to the `open` event of the component: 
 
 ```Razor
     @(Html.Kendo().ActionSheet()
@@ -40,9 +40,9 @@ The following example demonstrates how you can subscribe to the open event of th
 
 ## Close
 
-The close event fires when the ActionSheet is closed.
+The `close` event fires when the ActionSheet is closed.
 
-The following example demonstrates how you can subscribe to the open event of the widget: 
+The following example demonstrates how you can subscribe to the `close` event of the widget:
 
 ```Razor
     @(Html.Kendo().ActionSheet()

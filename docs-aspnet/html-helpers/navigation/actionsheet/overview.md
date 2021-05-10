@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI ActionSheet HtmlHelper for {{ site.framework }}."
+description: "Discover the features and functionalities of the Telerik UI ActionSheet HtmlHelper for {{ site.framework }}. Learn how to initialize and configure the ActionSheet control." 
 slug: htmlhelpers_actionsheet_aspnetcore
 position: 1
 ---
@@ -10,7 +10,7 @@ position: 1
 
 The Telerik ActionSheet HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ActionSheet widget.
 
-The ActionSheet is a dialog that displays a set of options for the user to choose from. It appears on top of the app's content, and must be manually dismissed by the user before they can resume interaction with the app.
+The ActionSheet is a dialog that displays a set of options for the user to choose from. It appears on top of the app's content, and the user must manually dismiss it before resuming the interaction with the app.
 
 Visit the [Demo page for the ActionSheet](https://demos.telerik.com/{{ site.platform }}/actionsheet/index) to see it in action.
 

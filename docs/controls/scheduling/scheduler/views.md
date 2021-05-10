@@ -19,7 +19,12 @@ The Scheduler provides the following built-in views:
 - `week`&mdash;Displays the events in a whole week.
 - `workWeek`&mdash;Displays the events in a work week.
 - `month`&mdash;Displays the events in a single month.
+- `year`&mdash;Displays the events in a twelve months period.
 - `agenda`&mdash;Displays the events from the current date until the next week (seven days).
+- `timeline`&mdash;Displays the events for the day in line.
+- `timelineWeek`&mdash;Displays the events in a whole week in line.
+- `timelineWorkWeek`&mdash;Displays the events in a work week in line.
+- `timelineMonth`&mdash;Displays the events for a month in line.
 
 By default, the **Day** and **Week** views are enabled. To enable other views or configure them, use the [`views`](/api/web/scheduler#configuration-views) option.
 
@@ -35,6 +40,7 @@ The following example demonstrates how to enable all Scheduler views.
         "day", // A view configuration can be a string (the view type) or an object (the view configuration).
         { type: "week", selected: true }, // The "week" view will appear as initially selected.
         "month",
+		    "year",
         "agenda"
       ],
       dataSource: [
@@ -63,6 +69,7 @@ The following source-code files contain the views implementation:
 * `kendo.scheduler.view.js`&mdash;Contains the basic logic of the Scheduler views. Each of the other predefined views extends the `kendo.ui.SchedulerView` class.
 * `kendo.scheduler.dayview.js`&mdash;Contains the logic which implements the `MultiDayView`. The `MultiDayView` class is further extended to create the `DayView`, the `WeekView`, and the `WorkWeekView`.
 * `kendo.scheduler.monthview.js`&mdash;Contains the implementation of the `MonthView` which extends the `SchedulerView`.
+* `kendo.scheduler.yearview.js`&mdash;Contains the implementation of the `YearView` which extends the `SchedulerView`.
 * `kendo.scheduler.timelineview.js`&mdash;Implements the `TimelineView`, the `TimelineWeekView`, the `TimelineWorkWeekView`, and the `TimelineMonthView`. The `TimelineWeekView`, the `TimelineWorkWeekView`, and the `TimelineMonthView` extend the `TimelineView` class.
 * `kendo.scheduler.agendaview.js`&mdash;Implements the `AgendaView` which extends the `SchedulerView`.
 

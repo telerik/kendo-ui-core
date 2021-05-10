@@ -204,6 +204,11 @@ defaults:
         title_prefix: "ASP.NET MVC PivotGrid Component"
 -
     scope:
+        path: "html-helpers/data-management/taskboard"
+    values:
+        title_prefix: "ASP.NET MVC TaskBoard Component"
+-
+    scope:
         path: "html-helpers/data-management/spreadsheet"
     values:
         title_prefix: "ASP.NET MVC Spreadsheet Component"

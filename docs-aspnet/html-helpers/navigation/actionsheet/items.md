@@ -8,6 +8,8 @@ position: 2
 
 # Items
 
+The ActionSheet items are set of options that users can choose from.
+
 The `Items` configuration allows you to set specific attributes of the ActionSheet items. You can set their:
 
 - Text
@@ -16,7 +18,7 @@ The `Items` configuration allows you to set specific attributes of the ActionShe
 - Description 
 - Click event handler name
 
-The following example demonstrates the possible options for the *items* configuration of the ActionSheet widget: 
+The following example demonstrates the possible options for the `Items` configuration of the ActionSheet widget:
 
 ```Razor
     @(Html.Kendo().ActionSheet()

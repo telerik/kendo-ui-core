@@ -664,6 +664,9 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*taskboard":
+        isNew: true
+        title: "TaskBoard"    
     "*textarea":
         isNew: true
         title: "TextArea"
@@ -1931,6 +1934,12 @@ defaults:
 
 -
     scope:
+        path: "controls/data-management/taskboard"
+    values:
+        component: "taskboard"
+
+-
+    scope:
         path: "controls/editors/textarea"
     values:
         component: "textarea"
@@ -2056,6 +2065,7 @@ intro_columns:
       "Pager": "overview_kendoui_pager_widget"
       "PivotGrid": "overview_kendoui_pivotgrid_widget"
       "Spreadsheet": "overview_spreadsheet_widget"
+      "TaskBoard": "overview_kendoui_taskboard_widget"
       "TreeList": "overview_kendoui_treelist_widget"
   -
     title: "Scheduling"

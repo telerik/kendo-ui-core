@@ -10,7 +10,7 @@ position: 1
 
 The Kendo UI ActionSheet JSP tag is a server-side wrapper for the [Kendo UI ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index) widget.
 
-The Kendo UI ActionSheet is a dialog that displays a set of options for the user to choose from. It appears on top of the app's content, and must be manually dismissed by the user before they can resume interaction with the app.
+The Kendo UI ActionSheet is a dialog that displays a set of options for the user to choose from. It appears on top of the app's content, and the user must manually dismiss it before resuming the interaction with the app.
 
 ## Getting Started
 

@@ -214,6 +214,8 @@ navigation:
         title: "Grid"
      "tag-helpers/data-management/pivotgrid":
         title: "PivotGrid"
+     "tag-helpers/data-management/taskboard":
+        title: "TaskBoard"
      "tag-helpers/editors":
         title: "Editors"
      "tag-helpers/editors/imageeditor":
@@ -287,6 +289,8 @@ navigation:
      "html-helpers/data-management/grid/performance":
         title: "Performance Tips"
         position: 17
+     "html-helpers/data-management/taskboard":
+        title: "TaskBoard"
      "html-helpers/data-management/treelist/editing":
         title: "Editing"
         position: 3
@@ -586,6 +590,8 @@ navigation:
         title: "StockChart"
      "*tabstrip":
         title: "TabStrip"
+     "*taskboard":
+        title: "TaskBoard"   
      "*textarea":
         title: "TextArea"
         isNew: true
@@ -853,6 +859,11 @@ defaults:
         path: "html-helpers/editors/switch"
     values:
         title_prefix: "ASP.NET Core Switch Component"
+-
+    scope:
+        path: "html-helpers/data-management/taskboard"
+    values:
+        title_prefix: "ASP.NET Core TaskBoard Component"
 -
     scope:
         path: "html-helpers/editors/textarea"
@@ -1283,6 +1294,11 @@ defaults:
         path: "tag-helpers/editors/switch"
     values:
         title_prefix: "ASP.NET Core Switch Component"
+-
+    scope:
+        path: "tag-helpers/data-management/taskboard"
+    values:
+        title_prefix: "ASP.NET Core TaskBoard Component"
 -
     scope:
         path: "tag-helpers/editors/textarea"
