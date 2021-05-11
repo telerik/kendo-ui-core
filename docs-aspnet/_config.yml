@@ -591,7 +591,7 @@ navigation:
      "*tabstrip":
         title: "TabStrip"
      "*taskboard":
-        title: "TaskBoard"   
+        title: "TaskBoard"
      "*textarea":
         title: "TextArea"
         isNew: true
@@ -634,10 +634,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2021.1.330"
+cdnVersion: "2021.2.511"
 
 ## The MVC Core version used
-mvcCoreVersion: "2021.1.330"
+mvcCoreVersion: "2021.2.511"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 

@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2021.1.119
+// Type definitions for Kendo UI Professional v2021.2.511
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -3476,7 +3476,7 @@ declare namespace kendo.ui {
 
         constructor(element: Element, options?: DialogOptions);
 
-        center(): kendo.ui.Dialog;    
+        center(): kendo.ui.Dialog;
         close(): kendo.ui.Dialog;
         content(): string;
         content(content?: string): kendo.ui.Dialog;
