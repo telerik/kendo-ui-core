@@ -418,6 +418,34 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TaskBoard messages */
+
+if (kendo.ui.TaskBoard) {
+kendo.ui.TaskBoard.prototype.options.messages =
+$.extend(true, kendo.ui.TaskBoard.prototype.options.messages,{
+    "edit": "Edit",
+    "createNewCard": "Create new card",
+    "create": "Create",
+    "search": "Search",
+    "previewCard": "Preview card",
+    "addCard": "Add card",
+    "editCard": "Edit card",
+    "deleteCard": "Delete Card",
+    "addColumn": "Add column",
+    "editColumn": "Edit column",
+    "deleteColumn": "Delete column",
+    "close": "Close",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "saveChanges": "Save changes",
+    "title": "Title:",
+    "description": "Description:",
+    "newColumn": "New column",
+    "deleteColumnConfirm": "Are you sure you want to delete this column?",
+    "deleteCardConfirm": "Are you sure you want to delete this card?"
+});
+}
+
 /* TreeListPager messages */
 
 if (kendo.ui.TreeListPager) {

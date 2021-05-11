@@ -80,6 +80,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Stepper	   |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/stepper/index)
 |Switch        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/switch/index)
 |TabStrip	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/tabstrip/index)
+|TaskBoard	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/taskboard/index)
 |TextArea	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textarea/index)
 |TextBox	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textbox/index)
 |TileLayout	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/tilelayout/index)
