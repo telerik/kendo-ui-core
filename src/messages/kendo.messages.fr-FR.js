@@ -455,7 +455,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "clearSelectedFiles": "Vider",
   "uploadSelectedFiles": "Télécharger des fichiers",
   "headerStatusUploaded": "Terminé",
-  "headerStatusUploading": "Envoi...",
+  "headerStatusUploading": "Transmission...",
   "uploadSuccess": "Fichier(s) envoyé(s) avec succès.",
   "uploadFail": "Echec de l'envoi de(s) fichier(s).",
   "invalidMaxFileSize": "Taille du fichier trop grande.",
