@@ -91,6 +91,7 @@ The unique identifier of the dependency.
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.id); // outputs "1"
     </script>
 
@@ -107,6 +108,7 @@ The `id` of the predecessor task.
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.predecessorId); // outputs "1"
     </script>
 
@@ -123,6 +125,7 @@ The `id` of the successor task.
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.successorId); // outputs "2"
     </script>
 
@@ -144,6 +147,7 @@ The type of the dependency. The type is a value between 0 and 3, representing th
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.type); // outputs "0"
     </script>
 

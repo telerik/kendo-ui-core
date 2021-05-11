@@ -373,6 +373,7 @@ The function context (available via the `this` keyword) will be set to the grid 
                 var tr = $(e.target).closest("tr"); // get the current table row (tr)
                 // get the data bound to the current table row
                 var data = this.dataItem(tr);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Details for: " + data.name);
             }
           }]
@@ -6110,6 +6111,30 @@ The height of the grid. Numeric values are treated as pixels.
     });
     </script>
 
+### loaderType `String` *(default: "loadingPanel")*
+
+Defines what loader will be used while loading the data. Possible values are:
+
+- "loadingPanel" - a panel with a circular loading indicator.
+- "skeleton" - a skeleton enabled loader.
+
+#### Example - set the loaderType
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      loaderType: "skeleton"
+    });
+    </script>
+
 ### messages `Object`
 
 Defines the text of the command buttons that are shown within the Grid. Used primarily for localization.
@@ -8393,6 +8418,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     </script>
     <script>
     function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Toolbar command is clicked!");
       return false;
     }
@@ -8418,6 +8444,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     <div id="grid"></div>
     <script>
     function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Toolbar command is clicked!");
       return false;
     }
@@ -8507,6 +8534,7 @@ The columns of the grid initialized from the [columns](/api/javascript/ui/grid/c
     });
     var grid = $("#grid").data("kendoGrid");
     for (var i = 0; i < grid.columns.length; i++) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(grid.columns[i].field); // displays "name" and then "age"
     }
     </script>
@@ -8659,6 +8687,7 @@ The jQuery object which represents the table body. Contains all grid table rows.
     var grid = $("#grid").data("kendoGrid");
     var row = grid.tbody.find("tr:eq(0)");
     var data = grid.dataItem(row);f
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(data.name); // displays "Jane Doe"
     </script>
 
@@ -8771,6 +8800,7 @@ The jQuery object which represents the grid locked content element. Available on
 
       var lockedHeaderElement = grid.lockedHeader;
       var lockedHeaderField = lockedHeaderElement.find("th").attr('data-field');
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(lockedHeaderField); // logs "name"
     </script>
 
@@ -8977,6 +9007,7 @@ A string, DOM element or jQuery object which represents the table cell. A string
     });
     var grid = $("#grid").data("kendoGrid");
     var cell = $("#grid td:eq(1)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(grid.cellIndex(cell));
     </script>
 
@@ -8996,6 +9027,7 @@ A string, DOM element or jQuery object which represents the table cell. A string
       detailTemplate: "<div>Name: #: name #</div><div>Age: #: age #</div>"
     });
     var grid = $("#grid").data("kendoGrid");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(grid.cellIndex("td:eq(1)"));
     </script>
 
@@ -9134,6 +9166,44 @@ If set to false, the detail template is hidden without animations.
     grid.collapseRow(".k-master-row:first");
     </script>
 
+### copySelectionToClipboard
+
+Copies the selected items to the clipboard.
+
+#### Parameters
+
+##### includeHeaders `Boolean`
+
+If set to true, the copied items will include the column headers.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="selectAndCopy()">Select and copy</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                selectable: "multiple, cell"
+            });
+
+        function selectAndCopy() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.select('td');
+            grid.copySelectionToClipboard(true);
+        }
+
+     </script>
 ### current
 
 Gets or sets the current cell for keyboard navigation.
@@ -9208,6 +9278,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
     });
     var grid = $("#grid").data("kendoGrid");
     var dataItem = grid.dataItem("tbody tr:eq(0)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "Jane Doe"
     </script>
 
@@ -9374,6 +9445,46 @@ If set to false, the detail template is displayed without animations.
     grid.expandRow(".k-master-row:first");
     </script>
 
+### exportSelectedToExcel
+
+Exports the selected items to an Excel file.
+
+#### Parameters
+
+##### includeHeaders `Boolean`
+
+If set to true, the exported items will include the column headers.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="selectAndExport()">Select and export</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                selectable: "multiple, cell"
+            });
+
+        function selectAndExport() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.select($('#grid tbody td').slice(0,2).add($('#grid tbody td').slice(4,6)));
+
+            grid.exportSelectedToExcel(true);
+        }
+
+     </script>
+
 ### getOptions
 
 Retrieves the options that are currently enabled or disabled on the Grid, also gives the current state of the dataSource.
@@ -9404,11 +9515,50 @@ Use this method if you want to save the state of the Grid into a variable. It is
     });
     var grid = $("#grid").data("kendoGrid");
     var options = grid.getOptions();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(options.sortable); //outputs true
 
     // get only the Grid column settings
     var columnOptionsForSaving = kendo.stringify(options.columns);
     </script>
+
+### getSelectedData
+
+Returns the selected elements mapped to objects.
+#### Returns
+
+`Array` The selected items.
+
+#### Example
+
+     <div id="grid"></div>
+     <a class="k-button" onclick="printSelected()">Select and print</a>
+     <script>
+            $("#grid").kendoGrid({
+                columns: [
+                    { field: "productName" },
+                    { field: "category" }
+                ],
+                dataSource: {
+                    data: [
+                    { productName: "Tea", category: "Beverages" },
+                    { productName: "Coffee", category: "Beverages" },
+                    { productName: "Ham", category: "Food" },
+                    { productName: "Bread", category: "Food" }
+                    ]
+                },
+                groupable: true,
+                selectable: "multiple, cell"
+            });
+
+        function printSelected() {
+            var grid = $("#grid").data("kendoGrid");
+            grid.select($('#grid tbody td').slice(0,2).add($('#grid tbody td').slice(4,6)));
+
+            console.log(grid.getSelectedData());
+        }
+
+     </script>
 
 ### hideColumn
 
@@ -9859,6 +10009,7 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
           selectedIds.push($(this).attr("data-uid"))
         });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Selected row Ids: " + selectedIds.join(", "));
       })
     </script>
@@ -9899,6 +10050,7 @@ Gets an array that holds the id field values of the selected rows.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.select("tr:eq(2)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(grid.selectedKeyNames()); // displays the id field value for the selected row
     </script>
 
@@ -9960,6 +10112,7 @@ Gets an array that holds the id field values of the selected rows.
     grid.select("tr:eq(1)");
     var row = grid.select();
     var data = grid.dataItem(row);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(data.name); // displays "Jane Doe"
     </script>
 
@@ -10418,6 +10571,7 @@ The widget instance which fired the event.
       },
       editable: "incell",
       cellClose:  function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.type);
       }
     });
@@ -10430,6 +10584,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_cellClose(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.type);
     }
 
@@ -10493,6 +10648,7 @@ The widget instance which fired the event.
           }
 
           // selectedDataItems contains all selected data items
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Selected data items' name: " + selectedDataItems.map(e => e.name).join(", "));
         }
       });
@@ -10559,6 +10715,7 @@ The widget instance which fired the event.
       ],
       columnMenu: true,
       columnHide: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the hidden column
       }
     });
@@ -10569,6 +10726,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field); // displays the field of the hidden column
     }
     $("#grid").kendoGrid({
@@ -10618,6 +10776,7 @@ The widget instance which fired the event.
       ],
       columnMenu: true,
       columnLock: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just locked column
       }
     });
@@ -10628,6 +10787,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnLock(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field); // displays the field of the just locked column
     }
     $("#grid").kendoGrid({
@@ -10686,6 +10846,7 @@ The widget instance which fired the event.
         menu.append({ text: "Custom" });
         menu.bind("select", function(e) {
           if ($(e.item).text() == "Custom") {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Custom button for", field);
           }
         });
@@ -10703,6 +10864,7 @@ The widget instance which fired the event.
       menu.append({ text: "Custom" });
       menu.bind("select", function(e) {
         if ($(e.item).text() == "Custom") {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Custom button for", field);
         }
       });
@@ -10831,6 +10993,7 @@ The widget instance which fired the event.
       ],
       reorderable: true,
       columnReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field, e.newIndex, e.oldIndex);
       }
     });
@@ -10841,6 +11004,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnReorder(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field, e.newIndex, e.oldIndex);
     }
     $("#grid").kendoGrid({
@@ -10897,6 +11061,7 @@ The widget instance which fired the event.
       ],
       resizable: true,
       columnResize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field, e.newWidth, e.oldWidth);
       }
     });
@@ -10907,6 +11072,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnResize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field, e.newWidth, e.oldWidth);
     }
     $("#grid").kendoGrid({
@@ -10955,6 +11121,7 @@ The widget instance which fired the event.
       ],
       columnMenu: true,
       columnShow: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the hidden column
       }
     });
@@ -10965,6 +11132,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field); // displays the field of the hidden column
     }
     $("#grid").kendoGrid({
@@ -11010,6 +11178,7 @@ The widget instance which fired the event.
       ],
       columnMenu: true,
       columnStick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just sticked column
       },
       dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
@@ -11021,6 +11190,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnStick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field); // displays the field of the just sticked column
     }
     $("#grid").kendoGrid({
@@ -11068,6 +11238,7 @@ The widget instance which fired the event.
       ],
       columnMenu: true,
       columnUnlock: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just unlocked column
       }
     });
@@ -11078,6 +11249,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnUnlock(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field); // displays the field of the just unlocked column
     }
     $("#grid").kendoGrid({
@@ -11124,6 +11296,7 @@ The widget instance which fired the event.
       ],
       columnMenu: true,
       columnUnstick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just unsticked column
       },
       dataSource: [ { id: 1, name: "Jane Doe", age: 30 }, { id: 2, name: "John Doe", age: 33 } ]
@@ -11135,6 +11308,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_columnUnstick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field); // displays the field of the just unsticked column
     }
     $("#grid").kendoGrid({
@@ -11193,6 +11367,7 @@ The array of items that shows the elements that are going to be added/removed fr
         { name: "John Doe", age: 33 }
       ],
       dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
       }
     });
@@ -11203,6 +11378,7 @@ The array of items that shows the elements that are going to be added/removed fr
     <div id="grid"></div>
     <script>
     function grid_dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBinding");
     }
     $("#grid").kendoGrid({
@@ -11247,6 +11423,7 @@ The widget instance which fired the event.
         { name: "John Doe", age: 33 }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -11257,6 +11434,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBound");
     }
     $("#grid").kendoGrid({
@@ -11310,6 +11488,7 @@ The widget instance which fired the event.
       ],
       detailTemplate: "<div>Name: #: name #</div><div>Age: #: age #</div>",
       detailCollapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.masterRow, e.detailRow);
       }
     });
@@ -11320,6 +11499,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_detailCollapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.masterRow, e.detailRow);
     }
     $("#grid").kendoGrid({
@@ -11372,6 +11552,7 @@ The widget instance which fired the event.
       ],
       detailTemplate: "<div>Name: #: name #</div><div>Age: #: age #</div>",
       detailExpand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.masterRow, e.detailRow);
       }
     });
@@ -11382,6 +11563,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_detailExpand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.masterRow, e.detailRow);
     }
     $("#grid").kendoGrid({
@@ -11810,11 +11992,16 @@ The widget instance which fired the event.
         filterable: true,
         filter: function(e) {
           if (e.filter == null) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("filter has been cleared");
           } else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.filter.logic);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.filter.filters[0].field);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.filter.filters[0].operator);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.filter.filters[0].value);
           }
         }
@@ -11844,11 +12031,16 @@ The widget instance which fired the event.
       var grid = $("#grid").data("kendoGrid");
       grid.bind("filter", function(e) {
         if (e.filter == null) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("filter has been cleared");
         } else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.filter.logic);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.filter.filters[0].field);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.filter.filters[0].operator);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.filter.filters[0].value);
         }
       });
@@ -12042,7 +12234,9 @@ The widget instance which fired the event.
         groupable: true,
         group: function(e) {
           if (e.groups.length) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.groups[0].field);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.groups[0].dir);
           }
         }
@@ -12072,7 +12266,9 @@ The widget instance which fired the event.
       var grid = $("#grid").data("kendoGrid");
       grid.bind("group", function(e) {
         if (e.groups.length) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.groups[0].field);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.groups[0].dir);
         }
       });
@@ -12119,6 +12315,7 @@ The widget instance which fired the event.
         { name: "John Doe", age: 33 }
       ],
       groupCollapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.element, e.group);
       }
     });
@@ -12129,6 +12326,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_groupCollapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.element, e.group);
     }
     $("#grid").kendoGrid({
@@ -12187,6 +12385,7 @@ The widget instance which fired the event.
         { name: "John Doe", age: 33 }
       ],
       groupExpand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.element, e.group);
       }
     });
@@ -12197,6 +12396,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_groupExpand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.element, e.group);
     }
     $("#grid").kendoGrid({
@@ -12249,6 +12449,7 @@ The widget instance which fired the event.
       ],
       navigatable: true,
       navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.element); // displays the newly highlighted cell
       }
     });
@@ -12259,6 +12460,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_navigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.element); // displays the newly highlighted cell
     }
     $("#grid").kendoGrid({
@@ -12320,6 +12522,7 @@ The widget instance which fired the event.
         },
         pageable: true,
         page: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.page);
         }
       });
@@ -12348,6 +12551,7 @@ The widget instance which fired the event.
       });
       var grid = $("#grid").data("kendoGrid");
       grid.bind("page", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.page);
       });
     </script>
@@ -12401,6 +12605,7 @@ This allows you to change paper size, orientation and apply transformations on e
       pdfExport: function(e) {
         e.promise
         .progress(function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(kendo.format("{0:P} complete", e.progress));
         })
         .done(function() {
@@ -12489,6 +12694,7 @@ The widget instance which fired the event.
       },
       editable: true,
       remove: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing", e.model.name);
       }
     });
@@ -12499,6 +12705,7 @@ The widget instance which fired the event.
     <div id="grid"></div>
     <script>
     function grid_remove(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Removing", e.model.name);
     }
     $("#grid").kendoGrid({
@@ -12574,10 +12781,12 @@ If invoked, prevents the save action. In "incell" [editable.mode](/api/javascrip
         if (e.values.name !== "") {
           // the user changed the name field
           if (e.values.name !== e.model.name) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("name is modified");
           }
         } else {
             e.preventDefault();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("name cannot be empty");
         }
       }
@@ -12592,10 +12801,12 @@ If invoked, prevents the save action. In "incell" [editable.mode](/api/javascrip
         if (e.values.name !== "") {
           // the user changed the name field
           if (e.values.name !== e.model.name) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("name is modified");
           }
         } else {
             e.preventDefault();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("name cannot be empty");
         }
     }
@@ -12738,7 +12949,9 @@ The widget instance which fired the event.
         },
         sortable: true,
         sort: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.sort.field);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.sort.dir);
         }
       });
@@ -12766,7 +12979,9 @@ The widget instance which fired the event.
       });
       var grid = $("#grid").data("kendoGrid");
       grid.bind("sort", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sort.field);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sort.dir);
       });
     </script>

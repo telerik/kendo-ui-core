@@ -265,5 +265,6 @@ columns: [
 ## See Also
 
 * [Exporting the Grid to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/excel-export)
+* [Export Images to Excel]({% slug export-images-in-grid %})
 * [Copying Data to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

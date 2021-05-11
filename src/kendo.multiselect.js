@@ -106,7 +106,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialOpen = true;
-            that._ariaLabel();
+            that._aria();
             that._ariaSetLive();
             that._dataSource();
             that._ignoreCase();
@@ -206,7 +206,7 @@ var __meta__ = { // jshint ignore:line
             this.listView.setOptions(listOptions);
 
             this._accessors();
-            this._aria(this.tagList.attr(ID));
+            this._aria();
             this._tagTemplate();
             this._placeholder();
             this._clearButton();
@@ -257,6 +257,23 @@ var __meta__ = { // jshint ignore:line
             that._clear.off(ns);
 
             List.fn.destroy.call(that);
+        },
+
+        _aria: function() {
+            var that = this,
+                element = that.wrapper.find(".k-multiselect-wrap"),
+                id = that.ul[0].id;
+
+            element.attr({
+                "aria-owns": id,
+                "aria-controls": id
+            });
+            that.ul.attr({
+                "aria-live": !that._isFilterEnabled() ? "off" : "polite",
+                "aria-multiselectable": true
+            });
+            that.input.attr("aria-controls", id);
+            that._ariaLabel();
         },
 
         _activateItem: function() {
@@ -338,7 +355,7 @@ var __meta__ = { // jshint ignore:line
                     that.input.focus();
                 }
 
-                if (that.options.minLength === 1) {
+                if (that.options.minLength === 1 && !that.popup.visible()) {
                     that.open();
                 }
             }
@@ -479,7 +496,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusHandler: function() {
-            this.input.focus();
+            var input = this.input;
+            var active = activeElement();
+            var isActive = input[0] === active;
+
+            if(!isActive) {
+                this.input.focus();
+            }
         },
 
         _editable: function(options) {
@@ -551,13 +574,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         open: function() {
-            var that = this;
+            var that = this,
+                filterValue = that.input.val().toLowerCase(),
+                listViewFilter = that.listView.dataSource.filter(),
+                listViewFilterValue;
+
+            if(listViewFilter && listViewFilter.filters.length > 0) {
+                listViewFilterValue = listViewFilter.filters[0].value.toLowerCase();
+            }
 
             if (that._request) {
                 that._retrieveData = false;
             }
 
-            if (that._retrieveData || !that.listView.bound() || that._state === ACCEPT) {
+            if (that._retrieveData || !that.listView.bound() || (that._state === ACCEPT && filterValue !== listViewFilterValue)) {
                 that._open = true;
                 that._state = REBIND;
 
@@ -1448,6 +1478,7 @@ var __meta__ = { // jshint ignore:line
             var element = that.element;
             var accessKey = element[0].accessKey;
             var input = that._inputWrapper.children("input.k-input");
+            var autocomplete = this.options.filter === "none" ? "none" : "list";
 
             if (!input[0]) {
                 input = $('<input class="k-input" style="width: 25px" />').appendTo(that._inputWrapper);
@@ -1456,14 +1487,15 @@ var __meta__ = { // jshint ignore:line
             element.removeAttr("accesskey");
 
             that._focused = that.input = input.attr({
-                "accesskey": accessKey,
                 "autocomplete": AUTOCOMPLETEVALUE,
                 "role": "textbox",
                 "title": element[0].title,
-                "aria-expanded": false,
-                "aria-haspopup": "listbox",
-                "aria-autocomplete": "list"
+                "aria-autocomplete": autocomplete
             });
+
+            if(accessKey) {
+                that._focused.attr("accesskey", accessKey);
+            }
         },
 
         _tagList: function() {
@@ -1496,7 +1528,7 @@ var __meta__ = { // jshint ignore:line
             that.tagTextTemplate = tagTemplate = tagTemplate ? kendo.template(tagTemplate) : defaultTemplate;
 
             that.tagTemplate = function(data) {
-                return '<li aria-selected="true" class="k-button" unselectable="on"><span unselectable="on">' +
+                return '<li class="k-button" unselectable="on"><span unselectable="on">' +
                         tagTemplate(data) + '</span>' +
                         '<span aria-hidden="true" unselectable="on" aria-label="' +
                         (isMultiple ? ('delete" title="' + that.options.messages.deleteTag + '" aria-label="' + that.options.messages.deleteTag) : 'open') +
@@ -1540,7 +1572,11 @@ var __meta__ = { // jshint ignore:line
                 wrapper[0].style.cssText = element[0].style.cssText;
                 wrapper[0].title = element[0].title;
 
-                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" role="listbox"/>').insertBefore(element);
+                $('<div class="k-multiselect-wrap k-floatwrap" unselectable="on" role="combobox"/>')
+                    .attr({
+                        "aria-expanded": false
+                    })
+                    .insertBefore(element);
             }
 
             that.wrapper = wrapper.addClass(element[0].className).removeClass('input-validation-error').css("display", "");
@@ -1560,6 +1596,26 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.ul.attr("aria-live", !that._isFilterEnabled() ? "off" : "polite");
+        },
+
+        _closeHandler: function(e) {
+            if (this.trigger(CLOSE)) {
+                e.preventDefault();
+            } else {
+                this.wrapper.find(".k-multiselect-wrap").attr("aria-expanded", false);
+                this.ul.attr("aria-hidden", true);
+            }
+        },
+
+        _openHandler: function(e) {
+            this._adjustListWidth();
+
+            if (this.trigger(OPEN)) {
+                e.preventDefault();
+            } else {
+                this.wrapper.find(".k-multiselect-wrap").attr("aria-expanded", true);
+                this.ul.attr("aria-hidden", false);
+            }
         }
     });
 

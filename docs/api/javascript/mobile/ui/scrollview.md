@@ -687,6 +687,7 @@ The data collection. **Available only in data bound mode.** Parameter will be un
     }
 
     function change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("page ", e.page, "data: ", e.data);
       //handle event
     }
@@ -720,6 +721,7 @@ The current page number (zero based index)
     <script>
     var app = new kendo.mobile.Application();
     function refresh(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Total: ", e.pageCount, " Current: ", e.page);
       //handle event
     }

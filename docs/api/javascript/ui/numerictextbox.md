@@ -444,6 +444,7 @@ The max value to set.
 
     var max = numerictextbox.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -484,6 +485,7 @@ The min value to set.
 
     var min = numerictextbox.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -524,6 +526,7 @@ The step value to set.
 
     var step = numerictextbox.step();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(step);
     </script>
 
@@ -568,6 +571,7 @@ The value to set.
 
     var value = numerictextbox.value();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -603,6 +607,7 @@ The widget instance which fired the event.
     $("#numerictextbox").kendoNumericTextBox({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the numerictextbox
         }
     });
@@ -618,6 +623,7 @@ The widget instance which fired the event.
 
     numerictextbox.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the numerictextbox
     });
     </script>
@@ -639,6 +645,7 @@ The widget instance which fired the event.
     $("#numerictextbox").kendoNumericTextBox({
         spin: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the numerictextbox
         }
     });
@@ -654,6 +661,7 @@ The widget instance which fired the event.
 
     numerictextbox.bind("spin", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the numerictextbox
     });
     </script>

@@ -29,6 +29,7 @@ The Charts and Diagram provide PDF export by using their implementation of the `
 
 The Gauges and Barcodes can be exported to PDF by using the `exportPDF()` method together with the `kendo.saveAs()` method to save the file.
 * [ArcGauge (demo)](https://demos.telerik.com/kendo-ui/arc-gauge/export)
+* [CircularGauge (demo)](https://demos.telerik.com/kendo-ui/circular-gauge/export)
 * [LinearGauge (demo)](https://demos.telerik.com/kendo-ui/linear-gauge/export)
 * [RadialGauge (demo)](https://demos.telerik.com/kendo-ui/radial-gauge/export)
 * [BarCode (demo)](/api/javascript/dataviz/ui/barcode/methods/exportpdf)

@@ -10,6 +10,8 @@ position: 3
 
 Enhance existing ASP.NET Core applications with Telerik UI Components such as [Grid, Chart, DropDownList, etc.](https://demos.telerik.com/aspnet-core) with just a few mouse clicks. The Convert Wizard does the necessary NuGet packages and resources setup for you and once completed you can directly reference specific release version of Telerik UI for ASP.NET Core components to your app.
 
+> The Convert Project Wizard does not support converting Razor Pages projects and projects with .Net version 5.
+
 ## Get the Wizard
 
 To use the **Convert Project Wizard**, install the Telerik UI for ASP.NET Core Visual Studio Extensions. You can get them from the:

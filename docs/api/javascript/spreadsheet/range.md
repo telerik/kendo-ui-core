@@ -537,6 +537,7 @@ Possible values for direction:
         } catch(ex) {
             if (ex instanceof kendo.spreadsheet.Range.FillError) {
                 // can be "incompatibleRanges" or "noFillDirection"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ex.code);
             } else {
                 throw ex;
@@ -765,6 +766,7 @@ The function that will be executed against every cell. The function receives the
     var range = sheet.range("A1:B2");
 
     range.forEachCell(function (row, column, cellProperties) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(row, column, cellProperties);
     });
 </script>
@@ -831,6 +833,7 @@ The new formula of the cell. The string may optionally start with `=`.
 
     sheet.range("A1").input("1000");
     sheet.range("A2").formula("A1*2");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range("A2").formula()); // "A1*2"
 </script>
 ```
@@ -873,6 +876,7 @@ Returns `true` if the sheet of the range has filter enabled.
         { column: 1, filter: filter2 }
     ]);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range("A1:C4").hasFilter());
 </script>
 ```

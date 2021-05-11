@@ -894,6 +894,7 @@ The [Step](/api/javascript/wizard/step) instance that has been selected.
                 title: "Second step"
             }],
             activate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step.options.title + " step activated.");
             }
         });
@@ -926,6 +927,7 @@ The [Step](/api/javascript/wizard/step) instance that has been populated from re
                 title: "Second step"
             }],
             contentLoad: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step.options.title + " has been loaded.");
             }
         });
@@ -965,6 +967,7 @@ An array of all Kendo UI [Form](/api/javascript/ui/button) widgets (if any) conf
                 title: "Second step"
             }],
             done: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.button);
             }
         });
@@ -1005,6 +1008,7 @@ The [Step](/api/javascript/wizard/step) instance that is attempted to be populat
                 title: "Second step"
             }],
             error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step.options.title + " failed.");
             }
         });
@@ -1040,6 +1044,7 @@ The [Button](/api/javascript/ui/button) instance that has been clicked in order 
                 title: "Second step"
             }],
             reset: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.button);
             }
         });
@@ -1087,7 +1092,9 @@ If invoked prevents the selection.
                 title: "Second step"
             }],
             select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.button);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.stepper);
                 e.preventDefault();
             }
@@ -1136,6 +1143,7 @@ The [Step](/api/javascript/wizard/step) where is placed the Form with failed val
                 title: "second"
             }],
             formValidateFailed: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Validation failed for step " + e.step.options.title);
             }
         });

@@ -274,6 +274,7 @@ The configuration which is used when the data source discovers the schema inform
       }
     });
     dataSource.schemaDimensions().done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dimensions.length);
     });
     </script>
@@ -511,6 +512,7 @@ A set of key/value pairs which specifies the field-dimension mapping that is ava
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -557,6 +559,7 @@ A set of key/value pairs which specifies the available measures. The key specifi
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -629,6 +632,7 @@ The context for the current aggregate call. Includes the current data item and i
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -659,6 +663,7 @@ The context for the current aggregate call. Includes the current data item and i
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -715,6 +720,7 @@ The last aggregated result of the function for already processed records.
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -1078,6 +1084,7 @@ The name of the catalog.
     });
 
     var catalogName = dataSource.catalog();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(catalogName);// prints "Adventure Works DW 2008R2"
     </script>
 
@@ -1133,6 +1140,7 @@ The columns configuration. Accepts the same values as the [`columns`](/api/javas
     });
 
     var columns = dataSource.columns();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(columns);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
@@ -1191,6 +1199,7 @@ The name of the cube.
     });
 
     var cubeName = dataSource.cube();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(cubeName);// prints "Adventure Works"
     </script>
 
@@ -1232,6 +1241,7 @@ The options of the discover request.
             cubeName: dataSource.cube()
           }
         }).done(function(response) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(response);
         });
     </script>
@@ -1376,6 +1386,7 @@ The measures configuration. Accepts the same values as the [`measures`](/api/jav
     });
 
     var measures = dataSource.measures();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(measures);// [{ name: "[Measures].[Internet Order Lines Count]" }]
     </script>
 
@@ -1409,6 +1420,7 @@ Gets the name of the axis on which the measures are displayed.
     });
 
     var axis = dataSource.measuresAxis();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(axis); // "rows"
     </script>
 
@@ -1464,6 +1476,7 @@ The rows configuration. Accepts the same values as the [`row`](/api/javascript/d
     });
 
     var rows = dataSource.rows();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(rows);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
@@ -1490,6 +1503,7 @@ Requests the catalogs information.
 
     dataSource.schemaCatalogs()
         .done(function(catalogs) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(catalogs);
         });
     </script>
@@ -1520,6 +1534,7 @@ Requests the cubes schema information.
 
     dataSource.schemaCubes()
         .done(function(cubes) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(cubes);
         });
     </script>
@@ -1550,6 +1565,7 @@ Requests the dimensions schema information.
 
     dataSource.schemaDimensions()
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
@@ -1588,6 +1604,7 @@ The name of the dimensions which is the "owner" of the hierarchy.
 
     dataSource.schemaHierarchies(dimensionName)
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
@@ -1626,6 +1643,7 @@ The name of the hierarchy which is the "owner" of the level.
 
     dataSource.schemaLevels(hierarchyName)
         .done(function(levels) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(levels);
         });
     </script>
@@ -1656,6 +1674,7 @@ Requests the measures schema information.
 
     dataSource.schemaMeasures()
         .done(function(measures) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(measures);
         });
     </script>

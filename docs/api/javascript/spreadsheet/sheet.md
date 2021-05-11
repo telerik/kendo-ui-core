@@ -34,6 +34,7 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
       var sheet = spreadsheet.activeSheet();
       sheet.setDataSource(dataSource);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(sheet.dataSource);
 
     </script>
@@ -803,6 +804,7 @@ The sheet instance.
         var sheet = spreadsheet.activeSheet();
 
         sheet.bind("change", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("sheet state changed");
         });
 

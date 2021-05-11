@@ -91,5 +91,42 @@
 
             assert.equal(cal.element.find(".k-calendar-content").length, 0);
         });
+
+        it("calendar should disable today link when todays date is disabled", function () {
+            var cal = new Calendar(div, {
+                componentType: "modern",
+                value: new Date("2/7/2021"),
+                dates: [
+                    new Date(),
+                ],
+                disableDates: function (date) {
+                    function compareDates(date, dates) {
+                        for (var i = 0; i < dates.length; i++) {
+                            if (dates[i].getDate() == date.getDate() &&
+                                dates[i].getMonth() == date.getMonth() &&
+                                dates[i].getYear() == date.getYear()) {
+                            return true
+                            }
+                        }
+                    }
+                    var dates = div.data("kendoCalendar").options.dates;
+                    if (date && compareDates(date, dates)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
+
+            assert.isTrue(cal._today.is('.k-state-disabled'));
+        });
+
+        it("calendar today link should not have k-nav-today class when component type is modern", function () {
+            var cal = new Calendar(div, {
+                componentType: 'modern'
+            });
+
+            assert.equal(cal.element.find(".k-nav-today").length, 0);
+        });
     });
 }());

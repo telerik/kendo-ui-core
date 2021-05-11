@@ -116,8 +116,8 @@ var __meta__ = { // jshint ignore:line
                 })
                 .attr({
                     autocomplete: AUTOCOMPLETEVALUE,
-                    role: "textbox",
-                    "aria-haspopup": true
+                    role: "combobox",
+                    "aria-expanded": false
                 });
 
             that._clear.on("click" + ns + " touchend" + ns, proxy(that._clearValue, that));
@@ -266,6 +266,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.popup.close();
+            that._deactivateItem();
         },
 
         destroy: function() {
@@ -808,7 +809,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             wrapper.attr("tabindex", -1);
-            wrapper.attr("role", "presentation");
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({

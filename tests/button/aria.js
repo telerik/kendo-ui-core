@@ -1,4 +1,42 @@
 (function() {
+    describe("Button accessibility with AXE", function () {
+        afterEach(function() {
+            if (button && button.data("kendoButton")) {
+                button.data("kendoButton").destroy();
+                button.remove();
+                button = null;
+            }
+            if (buttonContainer && buttonContainer.length) {
+                kendo.destroy(buttonContainer);
+                buttonContainer.remove();
+                buttonContainer = null;
+            }
+        });
+
+        it("Button is accessible", function(done) {
+            getButton().kendoButton();
+
+            axeRunFixture(done);
+        });
+
+        it("disabled Button is accessible", function(done) {
+            getButton().kendoButton({
+                enable: false
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("icon Button is accessible", function(done) {
+            getButton().kendoButton({
+                icon: "refresh"
+            });
+
+            axeRunFixture(done);
+        });
+
+    });
+
     describe("aria", function () {
         afterEach(function() {
             if (button && button.data("kendoButton")) {

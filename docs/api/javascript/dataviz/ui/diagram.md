@@ -1217,6 +1217,7 @@ Specifies the the toolbar tools. Supports all options supported for the [toolbar
       });
 
       function showMoreInfo(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Clicked custom tool with id: " + e.id);
       }
     </script>
@@ -7216,6 +7217,7 @@ Defaults to all items if not specified.
       $("#btn").on("click", function(){
         var diagram = $("#diagram").getKendoDiagram();
         var shapes = diagram.shapes;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(diagram.boundingBox([shapes[0], shapes[1]]));
       });
     </script>
@@ -7536,6 +7538,7 @@ A Shape in the diagram.
         var shapes = diagram.shapes;
         if(shapes.length >= 3){
           var state = diagram.connected(shapes[1], shapes[2]) ? "connected" : "disconnected";
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Shapes 2 and 3 are " + state);
         }
       });
@@ -8088,6 +8091,7 @@ The point in Page document coordinates.
           drop: function (e) {
             if (e.draggable.hint) {
               var position = diagram.documentToView({ x: e.pageX, y: e.pageY });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
               console.log("Dropped element at visible position: " + position);
             }
           }
@@ -8454,6 +8458,7 @@ The model id value.
       $("#getConnBtn").on("click", function(){
         var diagram = $("#diagram").getKendoDiagram();
         var conn = diagram.getConnectionByModelId(1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Connection between shapes " + conn.from + " and " + conn.to);
       });
       var serviceRoot = "https://demos.telerik.com/kendo-ui/service";
@@ -8849,6 +8854,7 @@ The point in layer coordinates.
         var diagram = $("#diagram").getKendoDiagram();
         var point = new kendo.dataviz.diagram.Point(200, 100);
         var modelCoordinates = diagram.layerToModel(point);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(modelCoordinates);
       });
       $("#diagram").kendoDiagram({
@@ -8995,6 +9001,7 @@ The point in Model coordinates.
       $("#convertBtn").on("click", function(){
         var diagram = $("#diagram").getKendoDiagram();
         var documentCoordinates = diagram.modelToDocument(diagram.shapes[0].position());
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(documentCoordinates);
       });
       $("#diagram").kendoDiagram({
@@ -9047,6 +9054,7 @@ The point in Model coordinates.
       $("#convertBtn").on("click", function(){
         var diagram = $("#diagram").getKendoDiagram();
         var layerCoordinates = diagram.modelToLayer(diagram.shapes[0].position());
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(layerCoordinates);
       });
       $("#diagram").kendoDiagram({
@@ -9099,6 +9107,7 @@ The point in Model coordinates.
       $("#convertBtn").on("click", function(){
         var diagram = $("#diagram").getKendoDiagram();
         var layerCoordinates = diagram.modelToView(diagram.shapes[0].position());
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(layerCoordinates);
       });
       $("#diagram").kendoDiagram({
@@ -10110,6 +10119,7 @@ The point in Page document coordinates.
         var diagram = $("#diagram").getKendoDiagram();
         var point = new kendo.dataviz.diagram.Point(200, 100);
         var documentCoordinates = diagram.viewToDocument(point);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("(200, 100) = > " + documentCoordinates);
       });
       $("#diagram").kendoDiagram({
@@ -10163,6 +10173,7 @@ The point in View coordinates.
         var diagram = $("#diagram").getKendoDiagram();
         var point = new kendo.dataviz.diagram.Point(200, 100);
         var documentCoordinates = diagram.viewToModel(point);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("(200, 100) = > " + documentCoordinates);
       });
       $("#diagram").kendoDiagram({
@@ -10209,6 +10220,7 @@ The bounds of the diagramming canvas.
       $("#viewportBtn").on("click", function(){
         var diagram = $("#diagram").getKendoDiagram();
         var viewport = diagram.viewport();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(viewport);
       });
       $("#diagram").kendoDiagram({
@@ -10351,6 +10363,7 @@ The widget instance which fired the event.
         });
 
         function onAdd(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.shape.id);
         }
       </script>
@@ -10410,6 +10423,7 @@ The widget instance which fired the event.
         });
 
         function onCancel(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.shape.id);
         }
       </script>
@@ -10437,6 +10451,7 @@ The widget instance which fired the event.
     <div id="diagram"></div>
     <script>
       function onChange(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Added items: " + e.added.length + "; Removed items: " + e.removed.length);
       }
 
@@ -10520,8 +10535,10 @@ The widget instance which fired the event.
         },
         click: function(e) {
           if(e.item instanceof kendo.dataviz.diagram.Shape)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.item.options.content? e.item.options.content.text: "No content.");
           else
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Clicked a connection.");
         },
         shapeDefaults: {
@@ -10583,6 +10600,7 @@ The event handler function context (available via the `this` keyword) will be se
       });
 
       function onDataBound(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Bound a Diagram with " + this.shapes.length + " shapes.");
       }
     </script>
@@ -10643,9 +10661,11 @@ The widget instance which fired the event.
 
       function onDrag(e){
         if(e.connections.length > 0){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Dragging connection(s)");
         }
         if(e.shapes.length > 0){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Dragging shape(s)");
         }
       }
@@ -10711,9 +10731,11 @@ A function that can be used prevent the default action. If invoked, the dragged 
 
       function onDragEnd(e){
         if(e.connections.length > 0){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Finished dragging " + e.connections.length + " connections");
         }
         if(e.shapes.length > 0){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Finished dragging " + e.shapes.length + " shapes");
         }
       }
@@ -10779,9 +10801,11 @@ A function that can be used prevent the default action. If invoked, the element(
 
       function onDragStart(e){
         if(e.connections.length > 0){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Started dragging " + e.connections.length + " connections");
         }
         if(e.shapes.length > 0){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Started dragging " + e.shapes.length + " shapes");
         }
       }
@@ -10842,6 +10866,7 @@ The widget instance which fired the event.
       });
 
       function onEdit(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing shape with model id: " + e.shape.id);
       }
     </script>
@@ -10897,6 +10922,7 @@ The widget instance which fired the event.
       });
 
       function onItemBoundsChange(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("New item bounds (x, y, width, height): " + e.bounds);
       }
     </script>
@@ -10953,6 +10979,7 @@ The widget instance which fired the event.
       });
 
       function onItemRotate(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Rotated item: " + e.item + "at angle: " + e.item.options.rotation.angle);
       }
     </script>
@@ -11009,9 +11036,11 @@ The diagram instance which fired the event.
 
       function onMouseEnter(e){
         if(e.item instanceof kendo.dataviz.diagram.Shape){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Hovered shape: " + e.item);
         }
         else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Hovered connection: " + e.item);
         }
       }
@@ -11069,9 +11098,11 @@ The diagram instance which fired the event.
 
       function onMouseLeave(e){
         if(e.item instanceof kendo.dataviz.diagram.Shape){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Mouse left shape: " + e.item);
         }
         else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Mouse left connection: " + e.item);
         }
       }
@@ -11124,6 +11155,7 @@ The widget instance which fired the event.
       });
 
       function onPan(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Pan distance: " + e.pan);
       }
     </script>
@@ -11185,10 +11217,12 @@ The widget instance which fired the event.
       function onRemove(e){
         if(e.shape){
           debugger
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Removing shape with text: " + e.shape.options.content.text);
         }
 
         if(e.connection){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Removing connection with id: " + e.connection.id);
         }
       }
@@ -11264,9 +11298,11 @@ The widget instance which fired the event.
 
       function onSave(e){
         if(e.shape){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Saved shape with id: " + e.shape.id);
         }
         if(e.connection){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Saved connection with id: " + e.connection.id);
         }
       }
@@ -11297,6 +11333,7 @@ The widget instance which fired the event.
       function onSelect(e){
         var selectedItem = e.selected[0]; // first element in selection
         if(selectedItem instanceof kendo.dataviz.diagram.Shape){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Selected shape with text: " + selectedItem.options.content.text);
         }
       }
@@ -11403,6 +11440,7 @@ The widget instance which fired the event.
       });
 
       function onToolBarClick(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Selected action '" + e.action + "' for shapes: " + e.shapes);
       }
     </script>
@@ -11458,6 +11496,7 @@ The current zoom level.
       });
 
       function onZoomEnd(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Zoom level changed to: " + e.zoom);
       }
     </script>
@@ -11513,6 +11552,7 @@ The current zoom level.
       });
 
       function onZoomStart(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Zoom level changed to: " + e.zoom);
       }
     </script>

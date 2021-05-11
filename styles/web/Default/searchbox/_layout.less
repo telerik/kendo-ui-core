@@ -1,0 +1,20 @@
+// Searchbox
+.k-searchbox {
+    .border-radius( 4px );
+    border-width: 1px;
+    border-style: solid;
+    font-family: @font-family;
+    font-size: @font-size;
+    line-height: @line-height;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    flex-flow: row nowrap;
+    position: relative;
+    overflow: hidden;
+    background-clip: padding-box;
+
+    > .k-input {
+        padding: @textarea-padding-y  @textarea-padding-x;
+    }
+}

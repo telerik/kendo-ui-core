@@ -8,7 +8,7 @@ position: 40
 
 # Virtual Classroom
 
-The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represent a free on-demand technical training program exclusive to active license holders.
+The Progress<sup>®</sup> Virtual Classroom contains product-focused training courses and represents a free on-demand technical training program which is available for both active trial users and active license holders.
 
 Each session provides practical knowledge combined with helpful approaches to application development which are suitable for both junior and senior developers.
 

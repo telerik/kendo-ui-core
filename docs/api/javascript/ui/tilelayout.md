@@ -721,6 +721,7 @@ The widget instance which fired the event.
         columns: 4,
         resizable: true,
         resize: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.container[0]);
         }
     });
@@ -779,6 +780,7 @@ The widget instance which fired the event.
         columns: 4,
         reorderable: true,
         reorder: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.newIndex, e.oldIndex);
         }
     });

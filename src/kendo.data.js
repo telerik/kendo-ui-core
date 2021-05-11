@@ -461,12 +461,18 @@ var __meta__ = { // jshint ignore:line
 
     function ownKeys (value, ignoreObjectKeys) {
         var props = [];
+        var keys, filteredObjectKeys;
 
         value = value || {};
 
+        keys = Object.getOwnPropertyNames(value);
+        filteredObjectKeys = objectKeys.filter(function(key){
+            return keys.indexOf(key) < 0;
+        });
+
         while (value) {
             Object.getOwnPropertyNames(value).forEach(function (prop) {
-                if (props.indexOf(prop) === -1 && (!ignoreObjectKeys || objectKeys.indexOf(prop) < 0)) {
+                if (props.indexOf(prop) === -1 && (!ignoreObjectKeys || filteredObjectKeys.indexOf(prop) < 0)) {
                     props.push(prop);
                 }
             });
@@ -2293,10 +2299,10 @@ var __meta__ = { // jshint ignore:line
 
         if (newGroup.items && newGroup.items.length) {
             for (var i = 0; i < newGroup.items.length; i++) {
-                currOriginal = originalGroup.items[i];
+                currOriginal = originalGroup.items[originalGroup.items.length - 1];
                 currentNew = newGroup.items[i];
                 if (currOriginal && currentNew) {
-                    if (currOriginal.hasSubgroups) {
+                    if (currOriginal.hasSubgroups && currOriginal.value == currentNew.value) {
                         fillLastGroup(currOriginal, currentNew);
                     } else if (currOriginal.field && currOriginal.value == currentNew.value) {
                         currOriginal.items.push.apply(currOriginal.items, currentNew.items);

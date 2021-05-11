@@ -43,6 +43,7 @@ The following example demonstrates how to add a basic tile layer to the Map that
 
 * [Layers]({% slug maplayers_mapwidget %})
 * [Creating maps]({% slug mapauthoring_mapwidget %})
+* [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)
 
 ## Events
 

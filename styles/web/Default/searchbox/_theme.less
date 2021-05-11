@@ -1,0 +1,53 @@
+// Searchbox
+.k-searchbox {
+    .fill(
+        @textarea-text,
+        @textarea-bg,
+        @textarea-border
+    );
+
+
+    // Hover state
+    &:hover,
+    &.k-state-hover {
+        .fill(
+            @textarea-hovered-text,
+            @textarea-hovered-bg,
+            @textarea-hovered-border
+        );
+    }
+
+
+    // Focus state
+    &:focus,
+    // &:focus-within,
+    &.k-state-focus {
+        .fill(
+            @textarea-focused-text,
+            @textarea-focused-bg,
+            @textarea-focused-border
+        );
+        .box-shadow( @textarea-focused-shadow );
+    }
+    &:focus-within {
+        .fill(
+            @textarea-focused-text,
+            @textarea-focused-bg,
+            @textarea-focused-border
+        );
+        .box-shadow( @textarea-focused-shadow );
+    }
+
+
+    // Disabled
+    &:disabled,
+    &.k-state-disabled {
+        outline: none;
+        cursor: default;
+        opacity: .6;
+        filter: grayscale(.1);
+        pointer-events: none;
+        box-shadow: none;
+    }
+
+}

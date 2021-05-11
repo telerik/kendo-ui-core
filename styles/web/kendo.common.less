@@ -788,21 +788,18 @@
 
 
 // Expansion panel
-@expander-padding-y: 8px;
-@expander-font-family: inherit;
-@expander-font-size: inherit;
+@expander-spacing-y: (@padding-y * 2);
+@expander-font-family: @font-family;
+@expander-font-size: @font-size;
 @expander-line-height: @line-height;
-@expander-border-width: 0;
+@expander-border-width: 1px;
 
-@expander-header-padding-x: 0;
-@expander-header-padding-y: 8px;
+@expander-header-padding-x: (@padding-x * 2);
+@expander-header-padding-y: (@padding-y * 3);
+@expander-indicator-margin-x: (@padding-x * 1.5);
 
-@expander-indicator-margin-x: 12px;
-
-@expander-header-border-width: 2px;
-
-@expander-content-padding-x: 20px;
-@expander-content-padding-y: 20px;
+@expander-content-padding-x: (@padding-x * 2);
+@expander-content-padding-y: (@padding-y * 4);
 
 
 // FloatingActionButton
@@ -869,6 +866,43 @@
 @bottom-nav-shadow: 0px 0px 5px rgba(0, 0, 0, .12);
 
 
+// ActionSheet
+@actionsheet-padding-x: null;
+@actionsheet-padding-y: null;
+@actionsheet-width: 360px;
+@actionsheet-max-width: 100%;
+@actionsheet-max-height: 50vh;
+
+@actionsheet-border-width: 0;
+@actionsheet-border-radius: 0;
+
+@actionsheet-font-size: 14px;
+@actionsheet-font-family: @font-family;
+@actionsheet-line-height: ( 20 / 14 );
+
+// Actionsheet header
+@actionsheet-header-padding-x: 16px;
+@actionsheet-header-padding-y: 8px;
+@actionsheet-header-border-width: null;
+@actionsheet-header-font-size: null;
+@actionsheet-header-font-family: null;
+@actionsheet-header-line-height: null;
+
+// Actionsheet item
+@actionsheet-item-min-height: 40px;
+@actionsheet-item-padding-x: 16px;
+@actionsheet-item-padding-y: 8px;
+@actionsheet-item-border-width: 1px;
+@actionsheet-item-spacing: 12px;
+
+@actionsheet-item-icon-size: null;
+
+@actionsheet-item-title-font-weight: null;
+@actionsheet-item-title-text-transform: null;
+@actionsheet-item-description-font-size: .875em;
+@actionsheet-item-description-opacity: .75;
+
+
 // Grid column menu
 @grid-column-menu-popup-padding-x: 0;
 @grid-column-menu-popup-padding-y: @padding-y-sm;
@@ -881,6 +915,96 @@
 
 @grid-column-menu-filter-container-padding-x: @padding-x;
 @grid-column-menu-filter-container-padding-y: @padding-y;
+
+
+// TaskBoard
+@taskboard-spacer: 16px;
+@taskboard-padding-y: null;
+@taskboard-padding-x: null;
+@taskboard-font-family: inherit;
+@taskboard-font-size: inherit;
+@taskboard-line-height: @line-height;
+
+@taskboard-toolbar-padding-y: @taskboard-spacer;
+@taskboard-toolbar-padding-x: @taskboard-toolbar-padding-y;
+
+@taskboard-content-padding-y: @taskboard-spacer;
+@taskboard-content-padding-x: @taskboard-content-padding-y;
+
+@taskboard-column-container-spacing-y: calc(@taskboard-spacer / 2);
+@taskboard-column-container-padding-y: 0;
+@taskboard-column-container-padding-x: calc(@taskboard-spacer / 2);
+@taskboard-columns-container-gap: @taskboard-spacer;
+
+@taskboard-column-width: 320px;
+@taskboard-column-border-width: 1px;
+@taskboard-column-border-radius: 4px;
+
+@taskboard-column-header-padding-y: calc(@taskboard-spacer / 2);
+@taskboard-column-header-padding-x: @taskboard-column-header-padding-y;
+@taskboard-column-header-gap: calc(@taskboard-spacer / 4);
+@taskboard-column-header-actions-gap: calc(@taskboard-spacer / 2);
+@taskboard-column-header-font-weight: 500;
+
+@taskboard-column-cards-padding-y: 0;
+@taskboard-column-cards-padding-x: 0;
+@taskboard-column-cards-gap: calc(@taskboard-spacer / 2);
+
+@taskboard-column-new-calc-height: calc( @input-offset + (@taskboard-column-header-padding-y * 2) );
+
+@taskboard-pane-width: @taskboard-column-width;
+@taskboard-pane-padding-y: @taskboard-spacer;
+@taskboard-pane-padding-x: @taskboard-pane-padding-y;
+@taskboard-pane-border-width: 1px;
+@taskboard-pane-gap: @taskboard-spacer;
+
+@taskboard-pane-header-font-weight: 500;
+
+@taskboard-pane-content-padding-y: 0;
+@taskboard-pane-content-padding-x: @taskboard-spacer;
+
+@taskboard-pane-actions-padding-y: 0;
+@taskboard-pane-actions-padding-x: @taskboard-pane-actions-padding-y;
+
+@taskboard-card-padding-y: @taskboard-spacer;
+@taskboard-card-padding-x: @taskboard-card-padding-y;
+@taskboard-card-border-width: @card-border-width;
+@taskboard-card-border-radius: 4px;
+
+@taskboard-card-category-border-width: 4px;
+
+@taskboard-drag-placeholder-border-width: 1px;
+@taskboard-drag-placeholder-border-radius: @taskboard-card-border-radius;
+
+
+// Scheduler
+@scheduler-yearview-padding-x: 12px;
+@scheduler-yearview-padding-y: @scheduler-yearview-padding-x;
+
+@scheduler-yearview-month-header-font-weight: bold;
+@scheduler-yearview-month-header-font-size: inherit;
+@scheduler-yearview-month-header-opacity: 1;
+
+@scheduler-yearview-indicator-size: 3px;
+@scheduler-yearview-indicator-calc-offset-top: ~"calc( 100% - @{calendar-cell-padding-y} )";
+@scheduler-yearview-indicator-calc-offset-left: ~"calc( 50% - (@{scheduler-yearview-indicator-size} / 2) )";
+@scheduler-yearview-indicator-border-radius: 50%;
+
+@scheduler-tooltip-padding-x: @padding-x;
+@scheduler-tooltip-padding-y: @scheduler-tooltip-padding-x;
+@scheduler-tooltip-border-width: 0;
+
+@scheduler-tooltip-title-margin-y: @padding-y;
+@scheduler-tooltip-month-font-size: @font-size-sm;
+@scheduler-tooltip-day-font-size: calc( @scheduler-tooltip-month-font-size * 2 );
+
+@scheduler-tooltip-events-max-height: 250px;
+@scheduler-tooltip-events-gap: @padding-y;
+
+@scheduler-tooltip-event-padding-x: @padding-x;
+@scheduler-tooltip-event-padding-y: @padding-y;
+@scheduler-tooltip-event-border-radius: @border-radius;
+@scheduler-tooltip-event-gap: @padding-x-sm;
 
 
 @import "common/all.less";

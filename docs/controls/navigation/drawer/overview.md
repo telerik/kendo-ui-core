@@ -84,6 +84,7 @@ The following example demonstrates how to initialize a Drawer with MVVM.
 * [Display modes]({% slug displaymodes_kendoui_drawer %})
 * [Interaction modes]({% slug interaction_kendoui_drawer %})
 * [Templates]({% slug templates_kendoui_drawer %})
+* [Hierarchy]({% slug hierarchy_kendoui_drawer %})
 
 ## See Also
 

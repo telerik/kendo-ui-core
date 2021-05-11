@@ -363,6 +363,7 @@ The index of the requested checkbox.
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(checkGroup.item(1));
     </script>
 
@@ -384,6 +385,7 @@ Returns all checkboxes in the CheckBoxGroup.
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(checkGroup.items());
     </script>
 
@@ -414,6 +416,7 @@ The value to set.
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
         checkGroup.value(["two", "one"]);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(checkGroup.value());
     </script>
 
@@ -441,6 +444,7 @@ The `<input type="checkbox">` element that triggered the change.
         $("#checkboxgroup").kendoCheckBoxGroup({
             items: [ "one", "two", "three" ]
             change: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
             }
         });
@@ -468,6 +472,7 @@ The `<input type="checkbox">` element that triggered the change.
         $("#checkboxgroup").kendoCheckBoxGroup({
             items: [ "one", "two", "three" ]
             focus: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
             }
         });

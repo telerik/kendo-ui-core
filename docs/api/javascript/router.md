@@ -32,6 +32,7 @@ Applicable if `pushState` is used and the application is deployed to a path diff
         $(function() {
           router.start();
           router.route("bar", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
               console.log("navigated to bar");
           });
 
@@ -56,6 +57,7 @@ which [should be SEO friendly](http://googlewebmastercentral.blogspot.com/2009/1
       router.start();
 
       router.route("bar", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("navigated to bar");
       });
     });
@@ -87,6 +89,7 @@ Activates the router binding to the URL changes.
     var router = new kendo.Router();
 
     router.route("/items/:category/:id", function(category, id, params) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(category, "item with id", id, "was requested by", params.user);
     });
 
@@ -128,6 +131,7 @@ If set to true, the router callbacks will not be called.
     var router = new kendo.Router();
 
     router.route("/items/:category/:id", function(category, id) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(category, "item with", id, " was requested");
     });
 
@@ -223,10 +227,12 @@ The parsed query string parameters of the URL
     var router = new kendo.Router();
 
     router.route("/items/:category/:id", function(category, id, params) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(category, "item with", id, " was requested by", params.user);
     });
 
     router.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("change event", e);
     });
 
@@ -247,6 +253,7 @@ Triggered when the URL does not match any of the provided routes.
 #### Example
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     var router = new kendo.Router({ routeMissing: function(e) { console.log(e.url, e.params) } });
 
     $(function() {

@@ -158,7 +158,7 @@ var __meta__ = { // jshint ignore:line
             depth: MONTH,
             animation: {},
             month : {},
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "d")#',
+            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateButtonText: "Open the date view",
             timeButtonText: "Open the time view",
             dateInput: false,
@@ -946,7 +946,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = kendo.template(this.options.ARIATemplate);
+            this._ariaTemplate = $.proxy(kendo.template(this.options.ARIATemplate), this);
         },
 
         _createDateInput: function(options) {
@@ -971,19 +971,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _updateARIA: function(date) {
-            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
 
-            if(that.element && that.element.length) {
+            if (that.element && that.element.length) {
                 that.element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
             }
 
             if (calendar) {
-                cell = calendar._cell;
-                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
-
-                that.element.attr(ARIA_ACTIVEDESCENDANT, cell.attr("id"));
+                that.element.attr(ARIA_ACTIVEDESCENDANT, calendar._updateAria(that._ariaTemplate, date));
             }
         },
         _popup: function(){
@@ -994,17 +990,15 @@ var __meta__ = { // jshint ignore:line
                 .appendTo(document.body);
 
             div.append(kendo.template(SINGLE_POPUP_TEMPLATE)(that.options));
-            that.popup = new ui.Popup(div, extend(options.popup, options, { 
-                name: "Popup", 
+            that.popup = new ui.Popup(div, extend(options.popup, options, {
+                name: "Popup",
                 isRtl: kendo.support.isRtl(that.wrapper),
                 anchor: that.wrapper,
                 activate: function () {
                     if (that.options.timeView && that.options.timeView.list === "scroll") {
-                        if (that.popup.element.find(".k-datetime-wrap.k-time-tab").length) {
-                            that.timeView.addTranslate();
-                            that.timeView.applyValue(that._value);
-                            that.timeView._updateRanges();
-                        }
+                        that.timeView.addTranslate();
+                        that.timeView.applyValue(that._value);
+                        that.timeView._updateRanges();
                     }
                 },
                 open: function(e){
@@ -1061,9 +1055,10 @@ var __meta__ = { // jshint ignore:line
 
         _setClickHandler: function() {
             var value = this._applyDateValue();
-            var time = this.timeView._currentlySelected || new Date();
+            var time;
 
             value = value || new Date();
+            time = this.timeView._currentlySelected || value;
             this.timeView._updateCurrentlySelected();
             value.setHours(time.getHours());
             value.setMinutes(time.getMinutes());

@@ -259,6 +259,7 @@ The widget instance.
     $("#appbar").kendoAppBar({
         positionMode: "sticky",
         resize: function () {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Resize fired!");
         },
         items: [

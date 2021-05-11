@@ -48,7 +48,6 @@ You will find the following in the Telerik UI for ASP.NET Core installation dire
 * `vsdoc`&mdash;The intellisense definitions for the Kendo combined scripts (as the above).
 * `VSExtensions`&mdash;The extensions for Visual Studio 2017.
 * `wrappers\aspnetcore\Binaries\AspNet.Core`&mdash;Containing the .nupkg NuGet package file.
-* `wrappers\aspnetcore\Examples\AspNet.Core\VS2017`&mdash;The ASP.NET Core sample application built with Visual Studio 2017.
 * `wrappers\aspnetcore\EditorTemplates\razor`&mdash;The ready-to-use editor templates based on the Kendo UI widgets.
 
 ## Sample Application
@@ -56,8 +55,6 @@ You will find the following in the Telerik UI for ASP.NET Core installation dire
 Telerik UI for ASP.NET Core comes with a sample .NET Core application, which is available in two versions:
 
  * A Sample Application built with Visual Studio 2019
- 
- * A Sample Application built with Visual Studio 2017
  
 Both versions represent an offline alternative of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core). You can use the sample application as an inspiration, or you can experiment with it while you get accustomed to the product.
 

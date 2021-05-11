@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2021.1.119
+// Type definitions for Kendo UI Professional v2021.2.511
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -631,6 +631,7 @@ declare namespace kendo.data {
         };
         id: any;
         dirty: boolean;
+        dirtyFields: any[];
 
         static define(options: DataSourceSchemaModelWithFieldsObject): typeof Model;
         static define(options: DataSourceSchemaModelWithFieldsArray): typeof Model;
@@ -1595,8 +1596,9 @@ declare namespace kendo.ui {
         cancelHold(): void;
     }
 
-    interface DraggableEvent {
+    interface DraggableEvent extends JQueryEventObject {
         sender?: Draggable;
+        originalEvent: MouseEvent;
     }
 
     class DropTarget extends kendo.ui.Widget{
@@ -1851,6 +1853,63 @@ declare namespace kendo.ui.filemanager.commands {
     }
 }
 
+declare namespace kendo.ui.taskboard {
+
+    class Command extends kendo.Class {
+         static fn: any;
+         static extend(prototype: Object): any;
+         exec?(): void;
+    }
+}
+
+declare namespace kendo.ui.taskboard.commands {
+    class AddColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class EditColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class DeleteColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SaveColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class CancelEditColumnCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class OpenPaneCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class ClosePaneCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SelectCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class MoveFocusCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SaveChangesCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class DeleteCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class MoveCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class EditCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class AddCardCommand extends kendo.ui.taskboard.Command {
+    }
+
+    class SearchCommand extends kendo.ui.taskboard.Command {
+    }
+}
+
+
 declare namespace kendo.mobile {
     function init(selector: string): void;
     function init(element: JQuery): void;
@@ -1942,6 +2001,51 @@ declare namespace kendo.drawing.pdf {
 }
 
 declare namespace kendo.ui {
+
+    class ActionSheet extends kendo.ui.Widget {
+
+        static fn: ActionSheet;
+
+        options: ActionSheetOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ActionSheet;
+
+        constructor(element: Element, options?: ActionSheetOptions);
+
+
+        close(): void;
+        destroy(): void;
+        open(): void;
+
+    }
+
+    interface ActionSheetItem {
+        click?: Function;
+        description?: string;
+        group?: string;
+        iconClass?: string;
+        iconColor?: string;
+        iconSize?: number;
+        text?: string;
+    }
+
+    interface ActionSheetOptions {
+        name?: string;
+        items?: ActionSheetItem[];
+        title?: string;
+        close?(e: ActionSheetEvent): void;
+        open?(e: ActionSheetEvent): void;
+    }
+    interface ActionSheetEvent {
+        sender: ActionSheet;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
     class Alert extends kendo.ui.Dialog {
 
         static fn: Alert;
@@ -3372,7 +3476,7 @@ declare namespace kendo.ui {
 
         constructor(element: Element, options?: DialogOptions);
 
-
+        center(): kendo.ui.Dialog;
         close(): kendo.ui.Dialog;
         content(): string;
         content(content?: string): kendo.ui.Dialog;
@@ -3589,6 +3693,7 @@ declare namespace kendo.ui {
         height?: number;
         ignoreCase?: boolean;
         index?: number;
+        filterTitle?: string;
         minLength?: number;
         noDataTemplate?: string|Function|boolean;
         popup?: DropDownListPopup;
@@ -4503,6 +4608,7 @@ declare namespace kendo.ui {
         label?: string;
         name?: string;
         type?: string;
+        previewFormat?: string;
     }
 
     interface FilterMessages {
@@ -5769,6 +5875,7 @@ declare namespace kendo.ui {
         filterable?: boolean | GridFilterable;
         groupable?: boolean | GridGroupable;
         height?: number|string;
+        loaderType?: string;
         messages?: GridMessages;
         mobile?: boolean|string;
         navigatable?: boolean;
@@ -6282,6 +6389,7 @@ declare namespace kendo.ui {
         dataSource: kendo.data.DataSource;
 
         element: JQuery;
+        content: JQuery;
         wrapper: JQuery;
 
         static extend(proto: Object): ListView;
@@ -7866,7 +7974,7 @@ declare namespace kendo.ui {
 
         enable(enable: boolean): void;
         value(): number;
-        value(value: number): void;
+        value(value: boolean|number): void;
 
     }
 
@@ -8352,6 +8460,7 @@ declare namespace kendo.ui {
         week?: string;
         month?: string;
         agenda?: string;
+        year?: string;
     }
 
     interface SchedulerMessages {
@@ -8405,6 +8514,7 @@ declare namespace kendo.ui {
 
     interface SchedulerResource {
         dataColorField?: string;
+        dataParentValueField?: string;
         dataSource?: any|any|kendo.data.DataSource;
         dataTextField?: string;
         dataValueField?: string;
@@ -8436,9 +8546,11 @@ declare namespace kendo.ui {
         allDaySlot?: boolean;
         allDaySlotTemplate?: string|Function;
         columnWidth?: number;
+        content?: JQuery;
         dateHeaderTemplate?: string|Function;
         dayTemplate?: string|Function;
         editable?: boolean | SchedulerViewEditable;
+        endDate?(): Date;
         endTime?: Date;
         eventHeight?: number | string;
         eventSpacing?: number;
@@ -8456,12 +8568,14 @@ declare namespace kendo.ui {
         selectedShortDateFormat?: string;
         showWorkHours?: boolean;
         slotTemplate?: string|Function;
+        startDate?(): Date;
         startTime?: Date;
         title?: string;
         type?: string;
         workWeekStart?: number;
         workWeekEnd?: number;
-        startDate?(): Date;
+        months?: number;
+        tooltipTemplate?: string|Function;
     }
 
     interface SchedulerOptions {
@@ -8676,6 +8790,58 @@ declare namespace kendo.ui {
     interface ScrollViewRefreshEvent extends ScrollViewEvent {
         pageCount?: number;
         page?: number;
+    }
+
+    class SkeletonContainer extends kendo.ui.Widget {
+
+        static fn: SkeletonContainer;
+
+        options: SkeletonContainerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): SkeletonContainer;
+
+        constructor(element: Element, options?: SkeletonContainerOptions);
+
+
+
+    }
+
+    interface SkeletonContainerGridGap {
+        columns?: number;
+        rows?: number;
+    }
+
+    interface SkeletonContainerGridItem {
+        colStart?: number;
+        colSpan?: number;
+        rowStart?: number;
+        rowSpan?: number;
+        shape?: string;
+    }
+
+    interface SkeletonContainerGrid {
+        columns?: number;
+        gap?: SkeletonContainerGridGap;
+        items?: SkeletonContainerGridItem[];
+        rows?: number;
+    }
+
+    interface SkeletonContainerOptions {
+        name?: string;
+        animation?: string;
+        grid?: SkeletonContainerGrid;
+        height?: string|number;
+        template?: string|Function;
+        width?: string|number;
+    }
+    interface SkeletonContainerEvent {
+        sender: SkeletonContainer;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
     }
 
     class Slider extends kendo.ui.Widget {
@@ -9549,6 +9715,319 @@ declare namespace kendo.ui {
     interface TabStripShowEvent extends TabStripEvent {
         item?: Element;
         contentElement?: Element;
+    }
+
+    class TaskBoard extends kendo.ui.Widget {
+
+        static fn: TaskBoard;
+
+        options: TaskBoardOptions;
+
+        dataSource: kendo.data.DataSource;
+        columnsDataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): TaskBoard;
+
+        constructor(element: Element, options?: TaskBoardOptions);
+
+
+        addCard(data: any): void;
+        addColumn(data: any): void;
+        columns(): JQuery;
+        columnByStatus(status: string): JQuery;
+        deleteCard(cardElm: JQuery): void;
+        deleteColumn(columnElm: JQuery): void;
+        editCard(cardElm: JQuery): void;
+        editColumn(columnElm: JQuery): void;
+        enable(cardElm: JQuery): void;
+        enableByColumn(columnElm: JQuery, state: boolean): void;
+        readOnly(cardElm: JQuery): void;
+        readOnlyByColumn(columnElm: JQuery, state: boolean): void;
+        items(): JQuery;
+        itemsByStatus(status: string): JQuery;
+        itemsByColumn(columnElm: JQuery): JQuery;
+        load(): void;
+        previewCard(cardElm: JQuery): void;
+        registerShortcut(selector: string, shortcut: any, options: any): void;
+        dataItem(cardElm: JQuery): kendo.data.ObservableObject;
+        columnDataItem(columnElm: JQuery): kendo.data.ObservableObject;
+        saveCard(): void;
+        saveColumn(): void;
+        select(cardElm: JQuery): JQuery;
+        setDataSource(dataSource: kendo.data.DataSource): void;
+        setDataSource(dataSource: any): void;
+        setColumnsDataSource(dataSource: kendo.data.DataSource): void;
+        setColumnsDataSource(dataSource: any): void;
+
+    }
+
+    interface TaskBoardCardMenuItem {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+    }
+
+    interface TaskBoardColumnSettingsButton {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+    }
+
+    interface TaskBoardColumnSettings {
+        buttons?: TaskBoardColumnSettingsButton[];
+        dataStatusField?: string;
+        dataTextField?: string;
+        dataOrderField?: string;
+        width?: string|number;
+        template?: string|Function;
+    }
+
+    interface TaskBoardEditableButton {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+        primary?: boolean;
+    }
+
+    interface TaskBoardEditable {
+        buttons?: TaskBoardEditableButton[];
+        form?: any;
+        headerTemplate?: string|Function;
+    }
+
+    interface TaskBoardMessages {
+        edit?: string;
+        createNewCard?: string;
+        create?: string;
+        search?: string;
+        previewCard?: string;
+        addCard?: string;
+        editCard?: string;
+        deleteCard?: string;
+        addColumn?: string;
+        editColumn?: string;
+        deleteColumn?: string;
+        close?: string;
+        cancel?: string;
+        delete?: string;
+        saveChanges?: string;
+        title?: string;
+        description?: string;
+        newColumn?: string;
+        deleteColumnConfirm?: string;
+        deleteCardConfirm?: string;
+    }
+
+    interface TaskBoardPreviewPaneButton {
+        name?: string;
+        text?: string;
+        icon?: string;
+        spriteCssClass?: string;
+        command?: string;
+        options?: string;
+        primary?: boolean;
+    }
+
+    interface TaskBoardPreviewPane {
+        buttons?: TaskBoardPreviewPaneButton[];
+        template?: string|Function;
+        headerTemplate?: string|Function;
+    }
+
+    interface TaskBoardResource {
+        dataColorField?: string;
+        dataSource?: any|any|kendo.data.DataSource;
+        dataTextField?: string;
+        dataValueField?: string;
+        field?: string;
+        multiple?: boolean;
+        name?: string;
+        title?: string;
+        valuePrimitive?: boolean;
+    }
+
+    interface TaskBoardToolbarItem {
+        type?: string;
+        overflow?: string;
+        click?: Function;
+        command?: string;
+        options?: string;
+        name?: string;
+        togglable?: boolean;
+        text?: string;
+        template?: string|Function;
+        showText?: string;
+        primary?: boolean;
+        attributes?: any;
+        enable?: boolean;
+        hidden?: boolean;
+        spriteCssClass?: string;
+        imageUrl?: string;
+        showIcon?: string;
+        icon?: string;
+        id?: string;
+    }
+
+    interface TaskBoardToolbar {
+        items?: TaskBoardToolbarItem[];
+    }
+
+    interface TaskBoardRegisterShortcutOptions {
+        command?: string;
+        options?: string;
+        handler?: Function;
+    }
+
+    interface TaskBoardOptions {
+        name?: string;
+        autoBind?: boolean;
+        cardMenu?: TaskBoardCardMenuItem[];
+        columns?: any|any|kendo.data.DataSource;
+        columnSettings?: TaskBoardColumnSettings;
+        dataOrderField?: string;
+        dataCategoryField?: string;
+        dataDescriptionField?: string;
+        dataSource?: any|any|kendo.data.DataSource;
+        dataStatusField?: string;
+        dataTitleField?: string;
+        editable?: boolean | TaskBoardEditable;
+        height?: string|number;
+        previewPane?: boolean | TaskBoardPreviewPane;
+        reorderable?: boolean;
+        resources?: TaskBoardResource[];
+        selectable?: boolean;
+        template?: string|Function;
+        toolbar?: boolean | TaskBoardToolbar;
+        width?: string|number;
+        messages?: TaskBoardMessages;
+        columnsDataBinding?(e: TaskBoardColumnsDataBindingEvent): void;
+        columnsDataBound?(e: TaskBoardColumnsDataBoundEvent): void;
+        select?(e: TaskBoardSelectEvent): void;
+        dataBinding?(e: TaskBoardDataBindingEvent): void;
+        dataBound?(e: TaskBoardDataBoundEvent): void;
+        deleteCard?(e: TaskBoardDeleteCardEvent): void;
+        deleteColumn?(e: TaskBoardDeleteColumnEvent): void;
+        editCard?(e: TaskBoardEditCardEvent): void;
+        editColumn?(e: TaskBoardEditColumnEvent): void;
+        executeCommand?(e: TaskBoardExecuteCommandEvent): void;
+        move?(e: TaskBoardMoveEvent): void;
+        moveEnd?(e: TaskBoardMoveEndEvent): void;
+        moveStart?(e: TaskBoardMoveStartEvent): void;
+        change?(e: TaskBoardChangeEvent): void;
+        saveCard?(e: TaskBoardSaveCardEvent): void;
+        saveColumn?(e: TaskBoardSaveColumnEvent): void;
+    }
+    interface TaskBoardEvent {
+        sender: TaskBoard;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface TaskBoardColumnsDataBindingEvent extends TaskBoardEvent {
+        action?: string;
+        index?: number;
+        items?: any;
+    }
+
+    interface TaskBoardColumnsDataBoundEvent extends TaskBoardEvent {
+    }
+
+    interface TaskBoardSelectEvent extends TaskBoardEvent {
+        card?: JQuery;
+    }
+
+    interface TaskBoardDataBindingEvent extends TaskBoardEvent {
+        action?: string;
+        index?: number;
+        items?: any;
+    }
+
+    interface TaskBoardDataBoundEvent extends TaskBoardEvent {
+    }
+
+    interface TaskBoardDeleteCardEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+    }
+
+    interface TaskBoardDeleteColumnEvent extends TaskBoardEvent {
+        column?: kendo.data.Model;
+    }
+
+    interface TaskBoardEditCardEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+    }
+
+    interface TaskBoardEditColumnEvent extends TaskBoardEvent {
+        column?: kendo.data.Model;
+    }
+
+    interface TaskBoardExecuteCommandEvent extends TaskBoardEvent {
+        command?: string;
+        options?: any;
+    }
+
+    interface TaskBoardMoveEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        item?: JQuery;
+        target?: JQuery;
+        list?: kendo.ui.Sortable;
+        draggableEvent?: any;
+    }
+
+    interface TaskBoardMoveEndEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        action?: string;
+        item?: JQuery;
+        oldIndex?: number;
+        newIndex?: number;
+        draggableEvent?: any;
+    }
+
+    interface TaskBoardMoveStartEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        draggableEvent?: any;
+        item?: JQuery;
+    }
+
+    interface TaskBoardChangeEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+        cardElement?: JQuery;
+        column?: kendo.data.Model;
+        columnElement?: JQuery;
+        action?: string;
+        item?: JQuery;
+        oldIndex?: number;
+        newIndex?: number;
+        draggableEvent?: any;
+    }
+
+    interface TaskBoardSaveCardEvent extends TaskBoardEvent {
+        card?: kendo.data.Model;
+    }
+
+    interface TaskBoardSaveColumnEvent extends TaskBoardEvent {
+        column?: kendo.data.Model;
     }
 
     class TileLayout extends kendo.ui.Widget {
@@ -11074,6 +11553,7 @@ declare namespace kendo.ui {
         errors(): any;
         hideMessages(): void;
         hideValidationSummary(): void;
+        reset(): void;
         showValidationSummary(): void;
         validate(): boolean;
         validateInput(input: Element): boolean;
@@ -11260,14 +11740,14 @@ declare namespace kendo.ui {
         static extend(proto: Object): Wizard;
         constructor(element: Element, options?: WizardOptions);
 
-        activeStep(): void;
+        activeStep(): kendo.wizard.Step;
         enableStep(index: number, enable: boolean): void;
         insertAt(index: number, step: any): void;
         next(): void;
         previous(): void;
         removeAt(index: number): void;
         select(index: number): void;
-        steps(): void;
+        steps(): kendo.wizard.Step[];
     }
 
     interface WizardMessages {
@@ -14989,12 +15469,14 @@ declare namespace kendo.dataviz.ui {
         type?: string;
         name?: string;
         data?: any;
+        field?: string;
     }
 
     interface ChartSeriesHoverEventSeries {
         type?: string;
         name?: string;
         data?: any;
+        field?: string;
     }
 
     interface ChartSeriesOverEventSeries {
@@ -16834,6 +17316,13 @@ declare namespace kendo.dataviz.ui {
         width?: number;
     }
 
+    interface QRCodeOverlay {
+        height?: number;
+        type?: string;
+        url?: string;
+        width?: string;
+    }
+
     interface QRCodeExportImageOptions {
         width?: string;
         height?: string;
@@ -16850,6 +17339,7 @@ declare namespace kendo.dataviz.ui {
         color?: string;
         encoding?: string;
         errorCorrection?: string;
+        overlay?: QRCodeOverlay;
         padding?: number;
         renderAs?: string;
         size?: number|string;
@@ -19705,6 +20195,153 @@ declare namespace kendo.dataviz.ui {
         originalEvent?: any;
     }
 
+    class CircularGauge extends kendo.ui.Widget {
+
+        static fn: CircularGauge;
+
+        options: CircularGaugeOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): CircularGauge;
+
+        constructor(element: Element, options?: CircularGaugeOptions);
+
+
+        destroy(): void;
+        exportImage(options: any): JQueryPromise<any>;
+        exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
+        exportSVG(options: any): JQueryPromise<any>;
+        redraw(): void;
+        resize(force?: boolean): void;
+        setOptions(options: any): void;
+        svg(): void;
+        imageDataURL(): string;
+        value(): void;
+        value(): void;
+
+    }
+
+    interface CircularGaugeColor {
+        color?: string;
+        from?: number;
+        to?: number;
+    }
+
+    interface CircularGaugeGaugeAreaBorder {
+        color?: string;
+        dashType?: string;
+        opacity?: number;
+        width?: number;
+    }
+
+    interface CircularGaugeGaugeAreaMargin {
+        top?: number;
+        bottom?: number;
+        left?: number;
+        right?: number;
+    }
+
+    interface CircularGaugeGaugeArea {
+        background?: string;
+        border?: CircularGaugeGaugeAreaBorder;
+        height?: number;
+        margin?: CircularGaugeGaugeAreaMargin;
+        width?: number;
+    }
+
+    interface CircularGaugeScaleLabelsBorder {
+        color?: string;
+        dashType?: string;
+        opacity?: number;
+        width?: number;
+    }
+
+    interface CircularGaugeScaleLabelsMargin {
+        top?: number;
+        bottom?: number;
+        left?: number;
+        right?: number;
+    }
+
+    interface CircularGaugeScaleLabelsPadding {
+        top?: number;
+        bottom?: number;
+        left?: number;
+        right?: number;
+    }
+
+    interface CircularGaugeScaleLabels {
+        background?: string;
+        border?: CircularGaugeScaleLabelsBorder;
+        color?: string;
+        font?: string;
+        format?: string;
+        margin?: CircularGaugeScaleLabelsMargin;
+        padding?: CircularGaugeScaleLabelsPadding;
+        position?: string;
+        template?: string|Function;
+        visible?: boolean;
+    }
+
+    interface CircularGaugeScaleMajorTicks {
+        color?: string;
+        size?: number;
+        visible?: boolean;
+        width?: number;
+    }
+
+    interface CircularGaugeScaleMinorTicks {
+        color?: string;
+        size?: number;
+        visible?: boolean;
+        width?: number;
+    }
+
+    interface CircularGaugeScale {
+        labels?: CircularGaugeScaleLabels;
+        majorTicks?: CircularGaugeScaleMajorTicks;
+        majorUnit?: number;
+        max?: number;
+        min?: number;
+        minorTicks?: CircularGaugeScaleMinorTicks;
+        minorUnit?: number;
+        rangePlaceholderColor?: string;
+        rangeSize?: number;
+        rangeDistance?: number;
+        reverse?: boolean;
+        startAngle?: number;
+    }
+
+    interface CircularGaugeExportImageOptions {
+        width?: string;
+        height?: string;
+    }
+
+    interface CircularGaugeExportSVGOptions {
+        raw?: boolean;
+    }
+
+    interface CircularGaugeOptions {
+        name?: string;
+        centerTemplate?: string|Function;
+        color?: string;
+        colors?: CircularGaugeColor[];
+        gaugeArea?: CircularGaugeGaugeArea;
+        opacity?: number;
+        renderAs?: string;
+        scale?: CircularGaugeScale;
+        theme?: string;
+        transitions?: boolean;
+        value?: number;
+    }
+    interface CircularGaugeEvent {
+        sender: CircularGauge;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
 
     class TreeMap extends kendo.ui.Widget {
 
@@ -23667,6 +24304,10 @@ interface JQuery {
 
     data(key: any): any;
 
+    kendoActionSheet(): JQuery;
+    kendoActionSheet(options: kendo.ui.ActionSheetOptions): JQuery;
+    data(key: "kendoActionSheet"): kendo.ui.ActionSheet;
+
     kendoAlert(): JQuery;
     kendoAlert(options: kendo.ui.AlertOptions): JQuery;
     data(key: "kendoAlert"): kendo.ui.Alert;
@@ -23714,6 +24355,10 @@ interface JQuery {
     kendoCheckBoxGroup(): JQuery;
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
     data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup;
+
+    kendoCircularGauge(): JQuery;
+    kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
+    data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge;
 
     kendoColorPalette(): JQuery;
     kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery;
@@ -23806,6 +24451,10 @@ interface JQuery {
     kendoFloatingActionButton(): JQuery;
     kendoFloatingActionButton(options: kendo.ui.FloatingActionButtonOptions): JQuery;
     data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton;
+
+    kendoForm(): JQuery;
+    kendoForm(options: kendo.ui.FormOptions): JQuery;
+    data(key: "kendoForm"): kendo.ui.Form;
 
     kendoGantt(): JQuery;
     kendoGantt(options: kendo.ui.GanttOptions): JQuery;
@@ -24014,6 +24663,10 @@ interface JQuery {
     kendoScrollView(): JQuery;
     kendoScrollView(options: kendo.ui.ScrollViewOptions): JQuery;
     data(key: "kendoScrollView"): kendo.ui.ScrollView;
+
+    kendoSkeletonContainer(): JQuery;
+    kendoSkeletonContainer(options: kendo.ui.SkeletonContainerOptions): JQuery;
+    data(key: "kendoSkeletonContainer"): kendo.ui.SkeletonContainer;
 
     kendoSlider(): JQuery;
     kendoSlider(options: kendo.ui.SliderOptions): JQuery;

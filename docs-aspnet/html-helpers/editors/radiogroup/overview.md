@@ -56,5 +56,5 @@ The following example demonstrates the basic configuration for the RadioGroup Ht
 ## See Also
 
 * [Basic Usage of the RadioGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup/index)
-* [Using the API of the Rating HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup/api)
+* [Using the API of the RadioGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radiogroup/api)
 * [Server-Side API](/api/radiogroup)

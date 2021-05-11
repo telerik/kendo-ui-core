@@ -172,5 +172,6 @@ Accepts the same values as the [DataSource query](/api/javascript/data/datasourc
         });
 
         // print the result
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(query.data);
     </script>

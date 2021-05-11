@@ -829,6 +829,7 @@ Returns the number of pages.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.totalPages()); // displays "2"
     </script>
     <style>
@@ -865,6 +866,7 @@ Returns the page size - maximum number of items allowed on one page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.pageSize()); // displays "2"
     </script>
     <style>
@@ -901,6 +903,7 @@ Gets or sets the current page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.page()); // displays "1"
     </script>
     <style>
@@ -1043,6 +1046,7 @@ The widget instance which fired the event.
         $("#pager").kendoPager({
           dataSource: dataSource,
           change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pager change event");
           }
         });
@@ -1058,6 +1062,7 @@ The widget instance which fired the event.
 
     <script>
         function pager_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("pager change event");
         }
 

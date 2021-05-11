@@ -226,6 +226,8 @@ navigation:
         title: "Drag and Drop"
     "controls/interactivity/loader":
         title: "Loader"
+    "controls/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
     "controls/interactivity/ripplecontainer":
         title: "RippleContainer"
     "controls/interactivity/sortable/integration":
@@ -493,6 +495,8 @@ navigation:
         title: "QRCode"
     "*arcgauge":
         title: "ArcGauge"
+    "*circulargauge":
+        title: "CircularGauge"
     "*radialgauge":
         title: "RadialGauge"
     "*sparkline":
@@ -532,6 +536,8 @@ navigation:
     "*bottomnavigation":
         isNew: true
         title: "BottomNavigation"
+    "*breadcrumb":
+        title: "Breadcrumb"
     "*/button":
         title: "Button"
     "*buttongroup":
@@ -602,10 +608,17 @@ navigation:
         title: "ListView"
     "*listbox":
         title: "ListBox"
+    "*loader":
+        title: "Loader"
+    "*skeletoncontainer":
+        isNew: true
+        title: "SkeletonContainer"
     "*maskedtextbox":
         title: "MaskedTextBox"
     "*menu":
         title: "Menu"
+    "*actionsheet":
+        title: "ActionSheet"
     "*multiselect":
         title: "MultiSelect"
     "*notification":
@@ -651,6 +664,9 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*taskboard":
+        isNew: true
+        title: "TaskBoard"    
     "*textarea":
         isNew: true
         title: "TextArea"
@@ -702,10 +718,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2021.1.119"
+cdnVersion: "2021.2.511"
 
 ## The MVC Core version used
-mvcCoreVersion: "2021.1.119"
+mvcCoreVersion: "2021.2.511"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
@@ -1769,6 +1785,12 @@ defaults:
 
 -
     scope:
+        path: "controls/navigation/actionsheet"
+    values:
+        component: "ActionSheet"
+
+-
+    scope:
         path: "controls/editors/multiselect"
     values:
         component: "multi-select"
@@ -1912,6 +1934,12 @@ defaults:
 
 -
     scope:
+        path: "controls/data-management/taskboard"
+    values:
+        component: "taskboard"
+
+-
+    scope:
         path: "controls/editors/textarea"
     values:
         component: "textarea"
@@ -1951,6 +1979,11 @@ defaults:
         path: "controls/layout/tooltip"
     values:
         component: "tooltip"
+
+    scope:
+        path: "controls/layout/tilelayout"
+    values:
+        component: "tilelayout"
 
 -
     scope:
@@ -2032,6 +2065,7 @@ intro_columns:
       "Pager": "overview_kendoui_pager_widget"
       "PivotGrid": "overview_kendoui_pivotgrid_widget"
       "Spreadsheet": "overview_spreadsheet_widget"
+      "TaskBoard": "overview_kendoui_taskboard_widget"
       "TreeList": "overview_kendoui_treelist_widget"
   -
     title: "Scheduling"
@@ -2046,6 +2080,7 @@ intro_columns:
       "Drag and Drop": "overview_kendoui_draganddrop_intercativityandux"
       "Effects": "overview_kendoui_fxeffects_widget"
       "Loader": "overview_kendoui_loader_widget"
+      "SkeletonContainer": "overview_kendoui_skeletoncontainer_widget"
       "ProgressBar": "overview_kendoui_progressbar_widget"
       "RippleContainer": "overview_kendoui_ripplecontainer_widget"
       "Sortable": "overview_kendoui_sortable_widget"
@@ -2102,6 +2137,7 @@ intro_columns:
   -
     title: "Navigation"
     items:
+      "ActionSheet": "overview_kendoui_actionsheet_widget"
       "AppBar": "overview_kendoui_appbar_widget"
       "BottomNavigation": "overview_kendoui_bottomnavigation_widget"
       "Breadcrumb": "overview_kendoui_breadcrumb_widget"
@@ -2132,6 +2168,7 @@ intro_columns:
     title: "Gauges"
     items:
       "ArcGauge": "overview_kendoui_arcgaugewidget"
+      "CircularGauge": "overview_kendoui_circulargaugewidget"
       "LinearGauge": "overview_kendoui_lineargauge_widget"
       "RadialGauge": "overview_kendoui_radialgaugewidget"
   -
@@ -2139,6 +2176,7 @@ intro_columns:
     items:
       "Badge": "overview_kendoui_badge_widget"
       "Dialog": "overview_kendoui_dialog_widget"
+      "ExpansionPanel": "overview_kendoui_expansionpanel_widget"
       "Form": "overview_kendoui_form_widget"
       "Notification": "overview_kendoui_notification_widget"
       "Popup": "overview_kendoui_popup_widget"

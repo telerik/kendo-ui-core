@@ -364,6 +364,7 @@ var __meta__ = { // jshint ignore:line
                 .attr({
                     role: "combobox",
                     "aria-expanded": false,
+                    "aria-haspopup": "grid",
                     "aria-owns": that.dateView._dateViewID,
                     "autocomplete": "off"
                 });
@@ -403,7 +404,7 @@ var __meta__ = { // jshint ignore:line
             month: {},
             dates: [],
             disableDates: null,
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#',
+            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateInput: false,
             weekNumber: false,
             componentType: "classic"
@@ -761,7 +762,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = template(this.options.ARIATemplate);
+            this._ariaTemplate = proxy(template(this.options.ARIATemplate), this);
         },
 
         _createDateInput: function(options) {
@@ -781,17 +782,15 @@ var __meta__ = { // jshint ignore:line
         },
 
         _updateARIA: function(date) {
-            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
-            if(that.element && that.element.length) {
+
+            if (that.element && that.element.length) {
                 that.element[0].removeAttribute("aria-activedescendant");
             }
-            if (calendar) {
-                cell = calendar._cell;
-                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
 
-                that.element.attr("aria-activedescendant", cell.attr("id"));
+            if (calendar) {
+                that.element.attr("aria-activedescendant", calendar._updateAria(that._ariaTemplate, date));
             }
         }
     });

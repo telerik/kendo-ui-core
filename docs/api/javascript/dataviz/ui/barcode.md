@@ -539,6 +539,7 @@ Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the barcod
     });
     var barcode = $("#barcode").data("kendoBarcode");
     var svg = barcode.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -559,6 +560,7 @@ Gets/Sets the value of the barcode.
 
     // get the value of the barcode.
     var value = barcode.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
 
     // sets the value of the barcode and redraws it.

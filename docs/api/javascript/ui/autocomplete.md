@@ -919,6 +919,7 @@ An object, which holds the options of the widget.
     var element = autocomplete.element;
     var options = autocomplete.options;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(options);
     </script>
 
@@ -934,6 +935,7 @@ A jQuery object of the drop-down list element.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     var list = autocomplete.list;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(list);
     </script>
 
@@ -949,6 +951,7 @@ A jQuery object of the `ul` element, which holds the available options.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     var ul = autocomplete.ul;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(ul);
     </script>
 
@@ -996,6 +999,7 @@ The zero-based index of of the data item.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     // Search for items starting with "A" - will open the suggestion popup and show "Apples"
     autocomplete.search("A");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(autocomplete.dataItem(0)); // Displays "Apples" in the browser console
     </script>
 
@@ -1242,6 +1246,7 @@ The value to set.
     var autocomplete = $("#autocomplete").data("kendoAutoComplete");
     autocomplete.value("Apples");
     var value = autocomplete.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value); // Displays "Apples"
     </script>
 
@@ -1268,6 +1273,7 @@ The widget instance which fired the event.
     $("#autocomplete").kendoAutoComplete({
       change: function(e) {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value);
         // Use the value of the widget
       }
@@ -1390,6 +1396,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           //get filter descriptor
           var filter = e.filter;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(filter);
 
           // handle the event
@@ -1404,6 +1411,7 @@ The filter descriptor that will be used to filter the data source.
     function autocomplete_filtering(e) {
       //get filter descriptor
       var filter = e.filter;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(filter);
 
       // handle the event
@@ -1499,6 +1507,7 @@ The widget instance which fired the event.
       select: function(e) {
         var item = e.item;
         var text = item.text();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(text);
         // Use the selected item or its text
       }

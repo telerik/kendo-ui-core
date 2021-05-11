@@ -4830,6 +4830,7 @@ The DOM or jQuery mouse event.
         var map = $("#map").data("kendoMap");
         $("#map").click(function(e) {
             var proj = map.eventToLayer(e);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Projected coordinates: ", proj.toString());
         });
     </script>
@@ -5003,6 +5004,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
 
         var map = $("#map").data("kendoMap");
         var loc = map.layerToLocation([0, 0]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // -180.000000,85.000000
     </script>
@@ -5022,6 +5024,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
         var map = $("#map").data("kendoMap");
         var point = new kendo.geometry.Point(0, 0);
         var loc = map.layerToLocation(point).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // -180.000000,85.000000
     </script>
@@ -5059,6 +5062,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
 
         var map = $("#map").data("kendoMap");
         var point = map.locationToLayer([0, 0]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(point.toString());
         // 256,256
     </script>
@@ -5078,6 +5082,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
         var map = $("#map").data("kendoMap");
         var loc = new kendo.dataviz.map.Location(0, 0);
         var point = map.locationToLayer(loc).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(point.toString());
         // 256,256
     </script>
@@ -5112,6 +5117,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
 
         var map = $("#map").data("kendoMap");
         var view = map.locationToView([0, 0]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.toString());
         // 512,512
     </script>
@@ -5132,6 +5138,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
         var map = $("#map").data("kendoMap");
         var loc = new kendo.dataviz.map.Location(0, 0);
         var view = map.locationToView(loc).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.toString());
         // 512,512
     </script>
@@ -5214,6 +5221,7 @@ Retrieves the size of the visible portion of the map.
 
         var map = $("#map").data("kendoMap");
         var viewSize = map.viewSize();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(viewSize);
         // { width: 1024, height: 512 }
     </script>
@@ -5252,6 +5260,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
 
         var map = $("#map").data("kendoMap");
         var loc = map.viewToLocation([512, 512]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // 0.000000,0.000000
     </script>
@@ -5272,6 +5281,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
         var map = $("#map").data("kendoMap");
         var view = new kendo.geometry.Point(512, 512);
         var loc = map.viewToLocation(view).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // 0.000000,0.000000
     </script>
@@ -5377,6 +5387,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("click", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("You clicked at " + e.location.toString());
         });
     </script>
@@ -5520,6 +5531,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             pan: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("pan to " + e.center.toString());
             }
         });
@@ -5540,6 +5552,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("pan", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pan to " + e.center.toString());
         });
     </script>
@@ -5578,6 +5591,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             panEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("pan ended at " + e.center.toString());
             }
         });
@@ -5598,6 +5612,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("panEnd", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pan ended at " + e.center.toString());
         });
     </script>
@@ -5625,6 +5640,7 @@ The source widget instance.
                 attribution: "&copy; OpenStreetMap"
             }],
             reset: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("map reset");
             }
         });
@@ -5645,6 +5661,7 @@ The source widget instance.
 
         var map = $("#map").data("kendoMap");
         map.bind("reset", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("map reset");
         });
     </script>
@@ -5683,6 +5700,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             shapeClick: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("shape clicked");
             }
         });
@@ -5703,6 +5721,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("shapeClick", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("shape clicked");
         });
     </script>
@@ -5761,6 +5780,7 @@ The source jQuery event instance
       });
 
       function onShapeCreated(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("shape created: ", e.shape.dataItem.properties.name);
       }
     </script>
@@ -5823,6 +5843,7 @@ The source widget instance.
       });
 
       function onShapeFeatureCreated(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("feature created: ", e.properties.name);
       }
     </script>
@@ -5883,6 +5904,7 @@ The source jQuery event instance
               }
             }],
             shapeMouseEnter: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("shape mouseenter");
             }
         });
@@ -5920,6 +5942,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("shapeMouseEnter", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("shape mouseenter");
         });
     </script>
@@ -6018,6 +6041,7 @@ The source jQuery event instance
               }
             }],
             shapeMouseLeave: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("shape mouseleave");
             }
         });
@@ -6055,6 +6079,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("shapeMouseLeave", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("shape mouseleave");
         });
     </script>
@@ -6086,6 +6111,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomStart: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("zoom start");
             }
         });
@@ -6106,6 +6132,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("zoomStart", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("zoom start");
         });
     </script>
@@ -6153,6 +6180,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("zoom end @ " + e.sender.zoom());
             }
         });
@@ -6173,6 +6201,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("zoomEnd", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("zoom end @ " + e.sender.zoom());
         });
     </script>

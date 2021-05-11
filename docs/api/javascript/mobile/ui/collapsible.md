@@ -298,6 +298,7 @@ Fires when the user collapses the content.
         var app = new kendo.mobile.Application();
 
         function collapseHandler() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand");
         }
     </script>
@@ -319,6 +320,7 @@ Fires when the user expands the content.
         var app = new kendo.mobile.Application();
 
         function expandHandler() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand");
         }
     </script>

@@ -749,6 +749,7 @@ The content of the Window. Can be an HTML string or a jQuery object.
     <script>
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dialog.content()); // logs "foo"
     </script>
 
@@ -942,7 +943,7 @@ Indicates whether the content will be fetched within an `iframe` or with AJAX, a
 
 ### restore
 
-Restores a maximized or minimized Window to its previous state. Triggers the `resize` event.
+Restores a maximized or minimized Window to its previous state. Triggers the `resize` and `restore` events.
 
 #### Returns
 
@@ -1112,13 +1113,17 @@ Triggered when a Window is closed either by the user or through the `close()` me
 
 Indicates whether the close action was triggered by the user either by clicking the **Close** button or by pressing `Esc`. When the `close` method was called, this field is `false`.
 
+##### e.preventDefault `Function`
+
+If invoked prevents the Window from closing.
+
 #### Example - subscribing to the close event during initialization
 
     <div id="dialog"></div>
     <script>
     $("#dialog").kendoWindow({
       close: function(e) {
-        // the closing animation has finished
+        // the closing animation is about to start
       }
     });
     </script>
@@ -1128,7 +1133,7 @@ Indicates whether the close action was triggered by the user either by clicking 
     <div id="dialog"></div>
     <script>
     function window_close(e) {
-      // the closing animation has finished
+      // the closing animation is about to start
     }
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
@@ -1145,7 +1150,7 @@ Triggered when a Window has finished its closing animation.
     <script>
     $("#dialog").kendoWindow({
       deactivate: function() {
-        // the closing animation is about to finish
+        // the closing animation has finished
       }
     });
     </script>
@@ -1155,7 +1160,7 @@ Triggered when a Window has finished its closing animation.
     <div id="dialog"></div>
     <script>
     function window_deactivate() {
-      // the closing animation is about to start
+      // the closing animation has finished
     }
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
@@ -1236,6 +1241,7 @@ The status of the request as returned from [`jQuery.ajax`](https://api.jquery.co
     <script>
     $("#dialog").kendoWindow({
       error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Request failed with status " + e.status)
       }
     });
@@ -1246,6 +1252,7 @@ The status of the request as returned from [`jQuery.ajax`](https://api.jquery.co
     <div id="dialog"></div>
     <script>
     function window_error(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Request failed with status " + e.status)
     }
     $("#dialog").kendoWindow();
@@ -1264,6 +1271,7 @@ Triggered when the user maximizes the Window. Introduced in 2016.Q1.SP1.
     $("#dialog").kendoWindow({
       actions: ["Maximize"],
       maximize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Window was maximized")
       }
     });
@@ -1274,6 +1282,7 @@ Triggered when the user maximizes the Window. Introduced in 2016.Q1.SP1.
     <div id="dialog"></div>
     <script>
     function window_maximize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Window was maximized")
     }
     $("#dialog").kendoWindow({ actions: ["Maximize"] });
@@ -1292,6 +1301,7 @@ Triggered when the user minimizes the Window. Introduced in 2016.Q1.SP1.
     $("#dialog").kendoWindow({
       actions: ["Minimize"],
       minimize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Window was minimized")
       }
     });
@@ -1302,6 +1312,7 @@ Triggered when the user minimizes the Window. Introduced in 2016.Q1.SP1.
     <div id="dialog"></div>
     <script>
     function window_minimize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Window was minimized")
     }
     $("#dialog").kendoWindow({ actions: ["Minimize"] });
@@ -1388,4 +1399,34 @@ Triggered when the user resizes the Window.
     $("#dialog").kendoWindow();
     var dialog = $("#dialog").data("kendoWindow");
     dialog.bind("resize", window_resize);
+    </script>
+
+### restore
+
+Triggered when the Window is restored to its previous state(maximized or minimized) by pressing the restore button, or when the [`restore()`](/api/javascript/ui/window/methods/restore) method is called.
+
+#### Example - subscribing to the restore event during initialization
+
+    <div id="dialog"></div>
+
+    <script>
+      $("#dialog").kendoWindow({
+        restore: function() {
+          // the Window is back to its previous state
+        }
+      });
+    </script>
+
+#### Example - subscribing to the restore event after initialization
+
+    <div id="dialog"></div>
+
+    <script>
+      function window_restore() {
+        // the Window is back to its previous state
+      }
+
+      var dialog = $("#dialog").kendoWindow().getKendoWindow();
+
+      dialog.bind("restore", window_restore);
     </script>

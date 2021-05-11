@@ -18,7 +18,7 @@ The following example demonstrates how to achieve such behavior. Note that the `
       <div class="overlay"><div>No data available</div></div>
     </div>
 
-    <script>  
+    <script>
      $("#chart").kendoChart({
         dataSource: {
           transport: {
@@ -47,7 +47,7 @@ The following example demonstrates how to achieve such behavior. Note that the `
       });
     </script>
 
-	<style>
+    <style>
       .container {
         position: relative;
       }
@@ -59,8 +59,7 @@ The following example demonstrates how to achieve such behavior. Note that the `
         top: 0;
         left: 0;
         opacity: .2;
-        filter: alpha(opacity=60);
-        background-color: #6495ed;      
+        background-color: #6495ed;
         text-align: center;
       }
 

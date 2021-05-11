@@ -828,6 +828,7 @@ A string, DOM element or jQuery object which represents the item. A string is tr
 
         var panelBar = $("#panelBar").data("kendoPanelBar");
         var dataItem = panelBar.dataItem(".k-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataItem.text); // displays "foo"
     </script>
 
@@ -1459,6 +1460,7 @@ The node whose children have been changed. If the changes have occurred on the r
         ] }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("DataBound", e.node);
       }
     });
@@ -1469,6 +1471,7 @@ The node whose children have been changed. If the changes have occurred on the r
     <ul id="panelbar"></ul>
     <script>
     function panelbar_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("DataBound", e.node);
     }
     $("#panelbar").kendoPanelBar({

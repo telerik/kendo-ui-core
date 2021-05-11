@@ -356,6 +356,7 @@ The target value to be set or false to be removed.
     <script>
         var buttonGroup = $("#buttongroup").kendoButtonGroup({
             select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("selected index:" + e.indices);
             },
             index: 0
@@ -384,6 +385,7 @@ Get the currently selected Button.
         $("#buttongroup").kendoButtonGroup({
             select: function(e) {
                 var index = this.current().index();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(index);
             }
         });
@@ -490,6 +492,7 @@ Fires when a Button is selected.
         $("#buttongroup").kendoButtonGroup({
             select: function(e) {
                 var index = this.current().index();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(index);
             }
         });

@@ -11,9 +11,13 @@ Represents the Kendo UI DateRangePicker widget. Inherits from [Widget](/api/java
 
 ## Configuration
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'D')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar..The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -621,6 +625,7 @@ The max date to set.
 
     var max = daterangepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -659,6 +664,7 @@ The min date to set.
 
     var min = daterangepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -779,6 +785,7 @@ The widget instance which fired the event.
     $("#daterangepicker").kendoDateRangePicker({
         change: function() {
             var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(range);
         }
     });
@@ -794,6 +801,7 @@ The widget instance which fired the event.
 
     daterangepicker.bind("change", function() {
         var range = this.range();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(range);
     });
     </script>

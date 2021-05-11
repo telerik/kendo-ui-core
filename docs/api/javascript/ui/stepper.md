@@ -601,6 +601,7 @@ The [Step](/api/javascript/stepper/step) instance that has been selected.
                 label: "Third step"
             }],
             activate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step);
             }
         });

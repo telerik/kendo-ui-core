@@ -136,4 +136,43 @@ it("Calendar with enabled week has not empty th if not message is set", function
 });
 
     });
+
+describe("kendo.ui.Calendar aria with AXE", function() {
+    beforeEach(function() {
+        div = $("<div id='test' />").appendTo(Mocha.fixture);
+    });
+
+    afterEach(function() {
+        instance.destroy();
+
+
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("Calendar is accessible", function(done) {
+        instance = new Calendar(div);
+
+        axeRunFixture(done);
+    });
+
+    it("Calendar is accessible when focused", function(done) {
+        instance = new Calendar(div);
+
+        instance.focus();
+
+        axeRunFixture(done);
+    });
+
+    it("Calendar is accessible when selection is performed", function(done) {
+        instance = new Calendar(div);
+
+        instance.focus();
+        $(instance.element.find("tr:eq(2) td:has(.k-link)")[0]).trigger("click");
+
+        axeRunFixture(done);
+    });
+
+});
 }());
+
+

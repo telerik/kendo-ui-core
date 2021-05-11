@@ -131,7 +131,7 @@ Defines the editor widget type. Available options are:
 
 * DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
-* Input widgets - "NumericTextBox", "MaskedTextBox", "Switch", "Rating", "Slider", "ColorPicker"
+* Input widgets - "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker"
 * Editor widget - "Editor"
 
 ### items.editorOptions `Object`
@@ -635,6 +635,7 @@ Contains the validation errors if form is not valid.
                 validation: { required: true }
             }],
             validate: function(ev) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ev);
             }
         });
@@ -663,6 +664,7 @@ Contains the validation errors if form is not valid.
         }).getKendoForm();
 
         form.bind("validate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("valid" + e.valid);
         });
     </script>
@@ -714,6 +716,7 @@ The validated input.
                 validation: { required: true }
             }],
             validateField: function(ev) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ev);
             }
         });
@@ -742,6 +745,7 @@ The validated input.
         }).getKendoForm();
 
         form.bind("validateField", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("valid" + e.valid);
         });
     </script>
@@ -787,6 +791,7 @@ The new value.
                 validation: { required: true }
             }],
             change: function(ev) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ev);
             }
         });
@@ -815,6 +820,7 @@ The new value.
         }).getKendoForm();
 
         form.bind("change", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         });
     </script>
@@ -854,6 +860,7 @@ The form model.
                 validation: { required: true }
             }],
             submit: function(ev) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ev.model);
             }
         });
@@ -882,6 +889,7 @@ The form model.
         }).getKendoForm();
 
         form.bind("submit", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         });
     </script>
@@ -917,6 +925,7 @@ The Form instance which fired the event.
                 validation: { required: true }
             }],
             clear: function(ev) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ev.sender);
             }
         });

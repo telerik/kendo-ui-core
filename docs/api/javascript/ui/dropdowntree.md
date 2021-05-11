@@ -1438,6 +1438,7 @@ The value to set. A *String* value, when [checkboxes](/api/javascript/ui/dropdow
         dropdowntree.value([1, 2]); //select items which have value respectively 1 and 2
 
         // get the value of the dropdowntree
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dropdowntree.value());
     </script>
 
@@ -1689,6 +1690,7 @@ The selected node
     $("#dropdowntree").kendoDropDownTree({
       dataSource: [{ text: "item1", value: 1 }, { text: "item2", value: 2 }],
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Select", e.node);
       }
     });
@@ -1699,6 +1701,7 @@ The selected node
     <input id="dropdowntree"/>
     <script>
     function dropdowntree_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("select", e.node);
     }
     $("#dropdowntree").kendoDropDownTree({

@@ -13,20 +13,89 @@
         }
     }
 
+    describe("tabstrip accessibility with AXE", function () {
+        beforeEach(function() {
+            div = $('<div id="test">');
+            div.appendTo(Mocha.fixture);
+        });
+
+        afterEach(function() {
+            kendo.destroy(div);
+        });
+
+        it("TabStrip is accessible", function(done) {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ]
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("collapsible TabStrip is accessible", function(done) {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ],
+                collapsible: true
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("vertical TabStrip is accessible", function(done) {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ],
+                tabPosition: "left"
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("scrollable TabStrip is accessible", function(done) {
+            div.width("100px");
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ]
+            });
+
+            axeRunFixture(done);
+        });
+    });
+
     describe("tabstrip aria", function () {
         beforeEach(function() {
-
             div = $('<div id="test">');
+            div.appendTo(Mocha.fixture);
         });
         afterEach(function() {
-
             kendo.destroy(div);
         });
 
         it("tablist role is added to the wrapper", function() {
-            div.kendoTabStrip();
+            var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
-            assert.isOk(div.filter("[role=tablist]").length);
+            assert.equal(tabstrip.tabGroup.attr("role"), "tablist");
         });
 
         it("tab role is set to items", function() {
@@ -42,6 +111,17 @@
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul></div>').kendoTabStrip();
 
             assert.equal(div.find("li[role=tab]").length, 2);
+        });
+
+        it("aria-orientation is set to 'vertical' for vertical TabStrip", function() {
+            var tabstrip = div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [ { text: "foo", content: "bar"} ],
+                tabPosition: "left"
+            }).data("kendoTabStrip");
+
+            assert.equal(tabstrip.tabGroup.attr("aria-orientation"), "vertical");
         });
 
         it("tabpanel role is set to the content items", function() {

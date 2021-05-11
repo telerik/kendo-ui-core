@@ -440,7 +440,7 @@ The columns which will be rendered as child columns under this group column head
         }
       ],
       columns: [{
-        title: grouped column,
+        title: "Grouped column",
         columns: [{
           field: "title"
         }, {
@@ -4240,6 +4240,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     </script>
     <script>
     function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Toolbar command is clicked!");
       return false;
     }
@@ -4264,6 +4265,7 @@ The [template](/api/javascript/kendo/methods/template) which renders the command
     <div id="gantt"></div>
     <script>
     function toolbar_click() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Toolbar command is clicked!");
       return false;
     }
@@ -5244,6 +5246,7 @@ A string, DOM element or jQuery object which represents the table row. A string 
     });
     var gantt = $("#gantt").data("kendoGantt");
     var task = gantt.dataItem("tr:eq(0)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.title); // displays "Task1"
     </script>
 
@@ -5751,6 +5754,7 @@ If invoked prevents the data bind action and `dataBound` event will not fire.
         }
       ],
       dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
       }
     });
@@ -5761,6 +5765,7 @@ If invoked prevents the data bind action and `dataBound` event will not fire.
     <div id="gantt"></div>
     <script>
     function gantt_dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBinding");
     }
     $("#gantt").kendoGantt({
@@ -5807,6 +5812,7 @@ The widget instance which fired the event.
         }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -5817,6 +5823,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("dataBound");
     }
     $("#gantt").kendoGantt({
@@ -5873,6 +5880,7 @@ If invoked prevents the add action.
         }
       ],
       add: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Add", e.task.title);
       }
     });
@@ -5883,6 +5891,7 @@ If invoked prevents the add action.
     <div id="gantt"></div>
     <script>
     function gantt_add(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Add", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -5942,6 +5951,7 @@ The widget instance which fired the event.
       ],
       columns: [ { field: "title", title: "Title", editable: true } ],
       edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing task: ", e.task.title);
       }
     });
@@ -5952,6 +5962,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_edit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Editing task: ", e.task.title)
     }
     $("#gantt").kendoGantt({
@@ -6028,9 +6039,12 @@ The widget instance which fired the event.
       ],
       remove: function(e) {
         if (e.task) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Removing task:", e.task.title);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(kendo.format("Removing {0} related dependencies", e.dependencies.length));
         } else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("Removing dependency with id:", e.dependencies[0].id);
         }
       }
@@ -6043,9 +6057,12 @@ The widget instance which fired the event.
     <script>
     function gantt_remove(e) {
       if (e.task) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing task:", e.task.title);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Removing {0} related dependencies", e.dependencies.length));
       } else {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing dependency with id:", e.dependencies[0].id);
       }
     }
@@ -6122,6 +6139,7 @@ The widget instance which fired the event.
       ],
       columns: [ { field: "title", title: "Title", editable: true } ],
       cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Cancel editing task: ", e.task.title);
       }
     });
@@ -6132,6 +6150,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_cancel(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Cancel editing task: ", e.task.title)
     }
     $("#gantt").kendoGantt({
@@ -6191,6 +6210,7 @@ The widget instance which fired the event.
         }
       ],
       save: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Save task:", e.task.title);
       }
     });
@@ -6201,6 +6221,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_save(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Save task:", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -6260,6 +6281,7 @@ The widget instance which fired the event.
 
         if (selection) {
           task = this.dataItem(selection);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(kendo.format("{0} is selected", task.title));
         }
       }
@@ -6276,6 +6298,7 @@ The widget instance which fired the event.
 
         if (selection) {
           task = this.dataItem(selection);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(kendo.format("{0} is selected", task.title));
         }
     }
@@ -6333,6 +6356,7 @@ The widget instance which fired the event.
         }],
         columnMenu: true,
         columnHide: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the hidden column
         }
       });
@@ -6376,6 +6400,7 @@ The widget instance which fired the event.
         }],
         reorderable: true,
         columnReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field, e.newIndex, e.oldIndex);
         }
       });
@@ -6421,6 +6446,7 @@ The widget instance which fired the event.
       }],
       resizable: true,
       columnResize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field, e.newWidth, e.oldWidth);
       }
     });
@@ -6431,6 +6457,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_columnResize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.column.field, e.newWidth, e.oldWidth);
     }
     $("#gantt").kendoGantt({
@@ -6480,6 +6507,7 @@ The widget instance which fired the event.
         }],
         columnMenu: true,
         columnShow: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the shown column
         }
       });
@@ -6534,6 +6562,7 @@ The widget instance which fired the event.
         }
       ],
       navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Navigate to {0} view", e.view.charAt(0).toUpperCase() + e.view.slice(1)));
       }
     });
@@ -6544,6 +6573,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
       function gantt_navigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Navigate to {0} view", e.view.charAt(0).toUpperCase() + e.view.slice(1)));
       }
       $("#gantt").kendoGantt({
@@ -6606,6 +6636,7 @@ The widget instance which fired the event.
         }
       ],
       moveStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Move start ", e.task.title);
       }
     });
@@ -6616,6 +6647,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_moveStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Move start ", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -6678,7 +6710,9 @@ The widget instance which fired the event.
         }
       ],
       move: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren End {0:g}", e.end));
       }
     });
@@ -6689,7 +6723,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_move(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's curren End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -6752,7 +6788,9 @@ The widget instance which fired the event.
         }
       ],
       moveEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new End {0:g}", e.end));
       }
     });
@@ -6763,7 +6801,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function moveEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -6880,6 +6920,7 @@ The widget instance which fired the event.
         }
       ],
       resizeStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize start ", e.task.title);
       }
     });
@@ -6890,6 +6931,7 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function resizeStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize start ", e.task.title);
     }
     $("#gantt").kendoGantt({
@@ -6950,7 +6992,9 @@ The widget instance which fired the event.
         }
       ],
       resize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's curren End {0:g}", e.end));
       }
     });
@@ -6961,7 +7005,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_resize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's curren Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's current End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -7024,7 +7070,9 @@ The widget instance which fired the event.
         }
       ],
       resizeEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("task's new End {0:g}", e.end));
       }
     });
@@ -7035,7 +7083,9 @@ The widget instance which fired the event.
     <div id="gantt"></div>
     <script>
     function gantt_resizeEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new Start {0:g}", e.start));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("task's new End {0:g}", e.end));
     }
     $("#gantt").kendoGantt({
@@ -7093,6 +7143,7 @@ The widget instance which fired the event.
         }
       ],
       togglePlannedTasks: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.showPlannedTasks);
       }
     });

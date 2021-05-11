@@ -533,6 +533,7 @@ The data item, if any, for the connection.
         var diagram = $("#diagram").getKendoDiagram();
 
         var dataItem = diagram.connections[0].dataItem;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("First connection text: " + dataItem.label);
       });
     </script>
@@ -561,6 +562,7 @@ The shape, if any, that the connection originates from.
       diagram.addConnection(connection);
 
       $("#getShapeBtn").on("click", function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Source shape id: " + diagram.connections[0].from.id);
       });
     </script>
@@ -590,6 +592,7 @@ The connector, if any, that the connection originates from.
 
       $("#getConnectorBtn").on("click", function(){
         var connector = diagram.connections[0].sourceConnector;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Source connector name: " + connector.options.name);
       });
     </script>
@@ -619,6 +622,7 @@ The connector, if any, that the connection points to.
 
       $("#getConnectorBtn").on("click", function(){
         var connector = diagram.connections[0].targetConnector;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Target connector name: " + connector.options.name);
       });
     </script>
@@ -647,6 +651,7 @@ The shape, if any, that the connection points to.
       diagram.addConnection(connection);
 
       $("#getShapeBtn").on("click", function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Target shape id: " + diagram.connections[0].to.id);
       });
     </script>
@@ -736,6 +741,7 @@ The method returns a Point independently of the object to which the source is at
       $("#getSourceBtn").on("click", function(){
         var connection = diagram.connections[0];
         var point = connection.sourcePoint();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Connection source point: x = " + point.x + "; y = " + point.y);
       });
     </script>
@@ -817,6 +823,7 @@ Similar to the sourcePoint, this gets the coordinates of the target of the Conne
       $("#getTargetBtn").on("click", function(){
         var connection = diagram.connections[0];
         var point = connection.targetPoint();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Connection target point: x = " + point.x + "; y = " + point.y);
       });
     </script>
@@ -932,6 +939,7 @@ Gets the intermediate points of the connection.
 
       $("#getPointsBtn").on("click", function(){
         var connection = diagram.connections[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(connection.points());
       });
     </script>
@@ -975,6 +983,7 @@ This is the union of the endpoints and the intermediate points.
 
       $("#getPointsBtn").on("click", function(){
         var connection = diagram.connections[0];
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(connection.points());
       });
     </script>

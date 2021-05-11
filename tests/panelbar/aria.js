@@ -1,5 +1,6 @@
 (function() {
     var PanelBar = kendo.ui.PanelBar,
+        createPanelBar = PanelBarHelpers.fromOptions,
         panelbar,
         ul;
 
@@ -12,6 +13,31 @@
             }, parent);
         }
     }
+
+    describe("PanelBar accessibility with AXE", function() {
+        beforeEach(function() {
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("PanelBar with content is accessible", function(done) {
+            var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").appendTo(Mocha.fixture).kendoPanelBar();
+
+            axeRunFixture(done);
+        });
+
+        it("PanelBar with DataSource is accessible", function(done) {
+            createPanelBar([
+                { text: "foo" },
+                { text: "bar", expanded: true, items: [
+                    { text: "ber" }
+                ]}
+            ]);
+
+            axeRunFixture(done);
+        });
+    });
 
     describe("PanelBar aria", function () {
         beforeEach(function() {

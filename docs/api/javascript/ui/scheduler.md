@@ -1314,6 +1314,36 @@ The tooltip of the next navigation button.
     });
     </script>
 
+### messages.noData `String`
+
+The text displayed in the Scheduler year view Tooltip when there are no events on the selected date.
+
+#### Example - set the "noData" message 
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "year",
+          months: 10
+        },
+      ],
+      messages: {
+        noData: "No appointments on this date."
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/1/1 08:00 AM"),
+          end: new Date("2013/1/1 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.pdf `String`
 
 The text displayed by the PDF export button.
@@ -3165,6 +3195,31 @@ The title of the prompt dialog opened to confirm the resetting of a series event
     });
     </script>
 
+### messages.search `String`
+
+The Search input title and placeholder text.
+
+#### Example
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      toolbar: [ "search" ],
+      messages: {
+        search: "test"
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.views `Object`
 
 The configuration of the scheduler views messages. Use this option to customize or localize the scheduler views messages.
@@ -3314,6 +3369,33 @@ The text similar to "Timelnie Week" displayed as scheduler "timelineWeek" view t
       messages: {
         views: {
             timelineWeek: "Week, but sideways"
+        }
+      },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.views.year `String`
+
+The text similar to "Year" displayed as scheduler "year" view title.
+
+#### Example - set the "year" view title
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [ "day", "month", "year" ],
+      messages: {
+        views: {
+            year: "Year, but sideways"
         }
       },
       dataSource: [
@@ -3908,6 +3990,61 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
           ]
         }
       ]
+    });
+    </script>
+
+### resources.dataParentValueField `String` *(default: "parentValue")*
+
+The field of the resource data item which represents the parent resource item value where the current resource should be nested in. Used in hierarchical grouping scenarios where only part of the members of one resource should be grouped within a member of the previous (parent) resource.
+
+#### Example - set the resource data parentValue field
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview",
+          roomId: 1,
+          attendees: [ 1, 2 ]
+        },
+        {
+          id: 2,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Meeting",
+          roomId: 2,
+          attendees: [ 3 ]
+        }
+      ],
+      resources: [{
+        field: "roomId",
+        name: "Rooms",
+        dataSource: [
+            { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+            { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+        ],
+        title: "Room"
+      }, {
+        field: "attendees",
+        name: "Attendees",
+        dataParentValueField: "room",
+        dataSource: [
+            { text: "Alex", value: 1, room: 1 },
+            { text: "Bob", value: 2, room: 1 },
+            { text: "Charlie", value: 3, room: 2 }
+        ],
+        multiple: true,
+        title: "Attendees"
+      }],
+      group: {
+          resources: ["Rooms", "Attendees"],
+          orientation: "vertical"
+      }
     });
     </script>
 
@@ -5429,6 +5566,35 @@ The fields which can be used in the template are:
     });
     </script>
 
+### views.months `Number` *(default: 12)*
+
+Configures the number of months that will be displayed in the year view calendar.
+
+> The `months` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
+
+#### Example - set the number of months rendered in the year view calendar
+    <div id="scheduler"></div>
+
+    <script>
+      $("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),
+        views: [
+          {
+            type: "year",
+            months: 10
+          },
+        ],
+        dataSource: [
+          {
+            id: 1,
+            start: new Date("2013/1/1 08:00 AM"),
+            end: new Date("2013/1/1 09:00 AM"),
+            title: "Interview"
+          }
+        ]
+      });
+    </script>
+
 ### views.name `String`
 
 The name of the view. Typically, used to get the name of the currently selected view via the [view method](/api/javascript/ui/scheduler/methods/view).
@@ -5608,6 +5774,34 @@ The fields which can be used in the template are:
     });
     </script>
 
+### views.startDate `Date`
+
+Configures the start date of the year view. The Scheduler will display [12 months](/api/javascript/ui/scheduler#configuration-views.months) starting from the `startDate`.
+
+> The `startDate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
+
+#### Example - set the start date
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      views: [
+        {
+          type: "year",
+          startDate: new Date("2021/2/1")
+        }
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2021/2/2 08:00 AM"),
+          end: new Date("2021/2/2 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### views.startTime `Date`
 
 The start time of the view. The scheduler will display events starting after the `startTime`.
@@ -5662,9 +5856,53 @@ The user-friendly title of the view displayed by the scheduler.
     });
     </script>
 
+### views.tooltipTemplate `String|Function`
+
+Configures the [template](/api/javascript/kendo/methods/template) used to render the Tooltip in the Scheduler year view.
+
+> The `tooltipTemplate` option is supported when [views.type](/api/javascript/ui/scheduler#configuration-views.type) is set to "year".
+
+The fields which can be used in the template are:
+
+* date `Date` - the selected date from the calendar
+* events `Array` - list of the events and their respective resource for the selected date
+* messages `Object` - the configuration of the Scheduler messages used for localization.
+
+#### Example - set the tooltip template for the year view
+
+#### Example - set the view title
+    <div id="scheduler"></div>
+    <script id="tooltip-template" type="text/x-kendo-template">
+      <div>Events: </div>
+      <div>
+          # for (var i = 0; i < events.length; i++) { #
+            #: events[i].title #
+          # } #
+      </div>
+    </script>
+    <script>
+    $("#scheduler").kendoScheduler({
+      date: new Date("2013/6/6"),
+      views: [
+        {
+          type: "year",
+          tooltipTemplate:  $("#tooltip-template").html()
+        },
+      ],
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### views.type `String`
 
-The type of the view. The built-in views are: "day", "week", "workWeek", "month", "agenda", "timeline", "timelineWeek", "timelineWorkWeek" and "timelineMonth".
+The type of the view. The built-in views are: "day", "week", "workWeek", "month", "agenda", "timeline", "timelineWeek", "timelineWorkWeek", "timelineMonth" and "year".
 
 #### Example - set the view type
 
@@ -6098,6 +6336,7 @@ Gets currently expanded scheduler events.
 
     scheduler.saveEvent();
     //get second occurrence
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(scheduler.data()[1]);
     </script>
 
@@ -6232,6 +6471,7 @@ The `uid` of the occurrence to look for.
     var uid = scheduler.wrapper.find(".k-event:last").data("uid");
     var event = scheduler.occurrenceByUid(uid);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(event);
     </script>
 
@@ -6278,6 +6518,7 @@ The end date of the period.
 
     var events = scheduler.occurrencesInRange(new Date("2013/6/5"), new Date("2013/6/10"));
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(events);
     </script>
 
@@ -6373,6 +6614,7 @@ Get the relevant resources for a given slot.
     var resource = scheduler.resourcesBySlot(slot);
 
     for (var key in resource) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("resouce - {" + key + ": " + resource[key] + " }");
     }
 
@@ -6538,7 +6780,9 @@ The vertical position.
     var scheduler = $("#scheduler").data("kendoScheduler");
     var slot = scheduler.slotByPosition(100,100);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot startDate: " + slot.startDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot endDate: " + slot.endDate);
     </script>
 
@@ -6564,7 +6808,9 @@ Get the time slot from given element.
     var element = scheduler.view().content.find("tr:first td:first");
     var slot = scheduler.slotByElement(element);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot startDate: " + slot.startDate);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log("slot endDate: " + slot.endDate);
     </script>
 
@@ -6674,6 +6920,7 @@ The widget instance which fired the event.
         }
       ],
       add: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Add", e.event.title);
       }
     });
@@ -6684,6 +6931,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_add(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Add", e.start);
     }
     $("#scheduler").kendoScheduler({
@@ -6741,6 +6989,7 @@ The widget instance which fired the event.
         }
       ],
       cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Cancelling", e.event.title);
       }
     });
@@ -6751,6 +7000,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_cancel(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Cancelling", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -6831,6 +7081,7 @@ The widget instance which fired the event.
         var start = e.start;
         var end = e.end;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Selection between {0:g} and {1:g}", start, end));
       }
     });
@@ -6844,6 +7095,7 @@ The widget instance which fired the event.
         var start = e.start;
         var end = e.end;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.format("Selection between {0:g} and {1:g}", start, end));
     }
 
@@ -6891,6 +7143,7 @@ The widget instance which fired the event.
         }
       ],
       dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
       }
     });
@@ -6901,6 +7154,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBinding");
     }
     $("#scheduler").kendoScheduler({
@@ -6946,6 +7200,7 @@ The widget instance which fired the event.
         }
       ],
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
       }
     });
@@ -6956,6 +7211,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dataBound");
     }
     $("#scheduler").kendoScheduler({
@@ -7013,6 +7269,7 @@ The widget instance which fired the event.
         }
       ],
       edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Editing", e.event.title);
       }
     });
@@ -7023,6 +7280,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_edit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Editing", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7076,6 +7334,7 @@ The widget instance which fired the event.
         }
       ],
       moveStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Move Start", e.event.title);
       }
     });
@@ -7086,6 +7345,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_moveStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Move Start", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7151,6 +7411,7 @@ The widget instance which fired the event.
         }
       ],
       move: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Move", e.slot.start);
       }
     });
@@ -7161,6 +7422,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_move(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Move", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7242,6 +7504,7 @@ The widget instance which fired the event.
         }
       ],
       moveEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("MoveEnd", e.slot.start);
       }
     });
@@ -7252,6 +7515,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_moveEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("MoveEnd", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7272,7 +7536,7 @@ The widget instance which fired the event.
 
 ### navigate
 
-Fired when the user changes the selected date, selected Scheduler view or switches between show full day and show business hours. 
+Fired when the user changes the selected date, selected Scheduler view or switches between show full day and show business hours.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -7320,6 +7584,7 @@ The widget instance, which fired the event.
         }
       ],
       navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("navigate", e.date);
       }
     });
@@ -7330,6 +7595,7 @@ The widget instance, which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_navigate(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("navigate", e.date);
     }
     $("#scheduler").kendoScheduler({
@@ -7443,6 +7709,7 @@ The widget instance which fired the event.
         }
       ],
       remove: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Removing", e.event.title);
       }
     });
@@ -7453,6 +7720,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_remove(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Removing", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7506,6 +7774,7 @@ The widget instance which fired the event.
         }
       ],
       resizeStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize Start", e.event.title);
       }
     });
@@ -7516,6 +7785,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_resizeStart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize Start", e.event.title);
     }
     $("#scheduler").kendoScheduler({
@@ -7585,6 +7855,7 @@ The widget instance which fired the event.
         }
       ],
       resize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize", e.slot.start);
       }
     });
@@ -7595,6 +7866,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_resize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7672,6 +7944,7 @@ The widget instance which fired the event.
         }
       ],
       resizeEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Resize End", e.slot.start);
       }
     });
@@ -7682,6 +7955,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_resizeEnd(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Resize End", e.slot.start);
     }
     $("#scheduler").kendoScheduler({
@@ -7739,6 +8013,7 @@ The widget instance which fired the event.
         }
       ],
       save: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Saving", e.event.title);
       }
     });
@@ -7749,6 +8024,7 @@ The widget instance which fired the event.
     <div id="scheduler"></div>
     <script>
     function scheduler_save(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Saving", e.event.title);
     }
     $("#scheduler").kendoScheduler({

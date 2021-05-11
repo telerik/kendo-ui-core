@@ -27,7 +27,7 @@ You can define the `Checkboxes` configuration option by:
 
 * Using inner (detailed) configuration options.
   * The `Name()` configuration sets the `name` attribute of the checkbox inputs. That name will be used when a form is being posted to the server.
-  * The `CheckChildren()` option indicates whether checkboxes of child items will be checked when the checkbox of a parent item is checked. This option also enables tri-state checkboxes with an indeterminate state.
+  * The `CheckChildren()` option indicates whether checkboxes of child items will be checked when the checkbox of a parent item is checked. This option also enables tri-state checkboxes with an indeterminate state.  `CheckChildren()` is disabled automatically, if filtering is enabled. Enabling both filtering and `CheckChildren()` at the same time could lead to ambiguous scenarios. Currently this scenario is not supported by the DropDownTree.
   * The `TemplateId()` option allows you to define a script template which will be used for the rendering of the checkboxes. Similarly, the `Template()` option allows the setting of an inline string template.
 
         @(Html.Kendo().DropDownTree()

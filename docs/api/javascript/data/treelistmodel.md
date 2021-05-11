@@ -59,6 +59,7 @@ Indicates whether an item has children. When the `hasChildren` field value is `t
           dataSource.read().then(function() {
             var root = dataSource.at(0);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(root.hasChildren);
           });
       </script>

@@ -23,7 +23,7 @@ var __meta__ = {// jshint ignore:line
         FOCUSED = "k-state-focused",
         LABELCLASSES = "k-label k-input-label",
         STATEDISABLED = "k-state-disabled",
-        NOCLICKCLASS = "k-no-click",
+        STATEREADONLY = "k-state-readonly",
         ARIA_DISABLED = "aria-disabled",
         TEXTAREACONTAINER = "k-textarea-container",
         proxy = $.proxy;
@@ -166,7 +166,7 @@ var __meta__ = {// jshint ignore:line
                        .attr(ARIA_DISABLED, false);
 
                 wrapper.removeClass(STATEDISABLED)
-                        .removeClass(NOCLICKCLASS);
+                        .removeClass(STATEREADONLY);
 
                 element.on("focusin" + NS, proxy(that._focusin, that));
                 element.on("focusout" + NS, proxy(that._focusout, that));
@@ -176,7 +176,7 @@ var __meta__ = {// jshint ignore:line
                        .attr(ARIA_DISABLED, disable);
 
                 wrapper.toggleClass(STATEDISABLED, disable)
-                        .toggleClass(NOCLICKCLASS, readonly);
+                        .toggleClass(STATEREADONLY, readonly);
             }
         },
 
@@ -194,7 +194,7 @@ var __meta__ = {// jshint ignore:line
 
                 if (floating) {
                     that._floatingLabelContainer = that.wrapper.wrap("<span></span>").parent();
-                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that });
+                    that.floatingLabel = new kendo.ui.FloatingLabel(that._floatingLabelContainer, { widget: that, useReadOnlyClass: true });
                     that._floatingLabelContainer.addClass(TEXTAREACONTAINER);
                 }
 

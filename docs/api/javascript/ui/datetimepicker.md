@@ -100,9 +100,13 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'G')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -780,6 +784,7 @@ The maximum time value to set for a DateTimePicker, expressed as a Date object o
 
     var max = datetimepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -818,6 +823,7 @@ The minimum time value to set for a DateTimePicker, expressed as a Date object o
 
     var min = datetimepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -974,6 +980,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
 
     var value = datetimepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -1009,6 +1016,7 @@ The widget instance which fired the event.
     $("#datetimepicker").kendoDateTimePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datetimepicker
         }
     });
@@ -1024,6 +1032,7 @@ The widget instance which fired the event.
 
     datetimepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datetimepicker
     });
     </script>

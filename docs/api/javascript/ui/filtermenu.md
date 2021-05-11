@@ -519,6 +519,7 @@ Resets the filter configurations and the dataSource to their initial state.
           }
         },
         change: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log(5)
         }
       });

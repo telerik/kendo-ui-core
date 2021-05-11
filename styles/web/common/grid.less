@@ -464,7 +464,6 @@ form.k-filter-menu .k-textbox
 .k-multicheck-wrap
 {
     overflow: auto;
-    overflow-x: hidden;
     white-space: nowrap;
     max-height: 300px;
 }
@@ -764,7 +763,6 @@ html body .k-grid tbody .k-button-icon
 
 .k-marquee-color
 {
-    filter: alpha(opacity=60);
     opacity: .6;
 }
 
@@ -796,6 +794,42 @@ html body .k-grid tbody .k-button-icon
 {
     max-height: 200px;
     overflow: auto;
+}
+
+.k-filter-menu.k-popup,
+.k-grid-filter-popup.k-popup {
+    padding: @grid-column-menu-popup-padding-y @grid-column-menu-popup-padding-x;
+
+    .k-filter-menu-container {
+        width: 230px;
+    }
+
+    .k-multicheck-wrap {
+        padding: 0 3px; //Checkbox focus shadow
+
+        .k-item {
+            padding: @grid-column-menu-list-item-padding-y 0;
+        }
+
+        .k-check-all-wrap {
+            padding-bottom: (@grid-column-menu-list-item-padding-y * 2);
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+        }
+    }
+}
+
+.k-filter-menu {
+
+    .k-filter-menu-container {
+        padding: @grid-column-menu-filter-container-padding-y @grid-column-menu-filter-container-padding-x;
+        box-sizing: border-box;
+    }
+
+    .k-searchbox {
+        margin-bottom: 8px;
+        width: 100%;
+    }
 }
 
 .k-grid-columnmenu-popup {
@@ -972,6 +1006,7 @@ html body .k-grid tbody .k-button-icon
     }
 
     .k-expander {
+        border: 0;
         background: inherit;
 
         .k-columnmenu-item {
@@ -1048,7 +1083,6 @@ html body .k-grid tbody .k-button-icon
 }
 
 .k-loading-pdf-mask .k-loading-color {
-    filter: alpha(opacity=50);
     opacity: 0.5;
 }
 

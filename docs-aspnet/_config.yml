@@ -214,6 +214,8 @@ navigation:
         title: "Grid"
      "tag-helpers/data-management/pivotgrid":
         title: "PivotGrid"
+     "tag-helpers/data-management/taskboard":
+        title: "TaskBoard"
      "tag-helpers/editors":
         title: "Editors"
      "tag-helpers/editors/imageeditor":
@@ -244,6 +246,8 @@ navigation:
         title: "Interactivity and UX"
      "tag-helpers/interactivity/loader":
         title: "Loader"
+     "tag-helpers/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
      "tag-helpers/media":
         title: "Media"
      "tag-helpers/pdf":
@@ -285,6 +289,8 @@ navigation:
      "html-helpers/data-management/grid/performance":
         title: "Performance Tips"
         position: 17
+     "html-helpers/data-management/taskboard":
+        title: "TaskBoard"
      "html-helpers/data-management/treelist/editing":
         title: "Editing"
         position: 3
@@ -356,6 +362,9 @@ navigation:
      "html-helpers/navigation/bottomnavigation":
         title: "BottomNavigation"
         isNew: true
+     "tag-helpers/navigation/appbar":
+        title: "AppBar"
+        isNew: true
      "tag-helpers/navigation/bottomnavigation":
         title: "BottomNavigation"
         isNew: true
@@ -391,6 +400,8 @@ navigation:
         title: "Interactivity and UX"
      "html-helpers/interactivity/loader":
         title: "Loader"
+     "html-helpers/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
      "html-helpers/interactivity/sortable/integration":
         title: "Integration"
         position: 6
@@ -409,6 +420,9 @@ navigation:
      "accessibility":
         title: "Accessibility"
         position: 9
+     "deployment":
+        title: "Deployment"
+        position: 10
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 12
@@ -446,6 +460,8 @@ navigation:
         title: "Spreadsheet"
      "*arcgauge":
         title: "ArcGauge"
+     "*circulargauge":
+        title: "CircularGauge"
      "*autocomplete":
         title: "AutoComplete"
      "*barcode":
@@ -512,6 +528,8 @@ navigation:
         title: "Image Editor"
      "*loader":
         title: "Loader"
+     "*SkeletonContainer":
+        title: "SkeletonContainer"
      "*lineargauge":
         title: "LinearGauge"
      "*listbox":
@@ -524,6 +542,9 @@ navigation:
         title: "MediaPlayer"
      "*menu":
         title: "Menu"
+        isNew: true
+     "*actionsheet":
+        title: "ActionSheet"
      "*multiselect":
         title: "MultiSelect"
      "*notification":
@@ -569,6 +590,8 @@ navigation:
         title: "StockChart"
      "*tabstrip":
         title: "TabStrip"
+     "*taskboard":
+        title: "TaskBoard"
      "*textarea":
         title: "TextArea"
         isNew: true
@@ -611,10 +634,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2021.1.119"
+cdnVersion: "2021.2.511"
 
 ## The MVC Core version used
-mvcCoreVersion: "2021.1.119"
+mvcCoreVersion: "2021.2.511"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -838,6 +861,11 @@ defaults:
         title_prefix: "ASP.NET Core Switch Component"
 -
     scope:
+        path: "html-helpers/data-management/taskboard"
+    values:
+        title_prefix: "ASP.NET Core TaskBoard Component"
+-
+    scope:
         path: "html-helpers/editors/textarea"
     values:
         title_prefix: "ASP.NET Core TextArea Component"
@@ -868,6 +896,11 @@ defaults:
         title_prefix: "ASP.NET Core ArcGauge Component"
 -
     scope:
+        path: "html-helpers/gauges/circulargauge"
+    values:
+        title_prefix: "ASP.NET Core CircularGauge Component"
+-
+    scope:
         path: "html-helpers/gauges/lineargauge"
     values:
         title_prefix: "ASP.NET Core LinearGauge Component"
@@ -886,6 +919,11 @@ defaults:
         path: "html-helpers/interactivity/loader"
     values:
         title_prefix: "ASP.NET Core Loader Component"
+
+    scope:
+        path: "html-helpers/interactivity/skeletoncontainer"
+    values:
+        title_prefix: "ASP.NET Core SkeletonContainer Component"
 -
     scope:
         path: "html-helpers/interactivity/progressbar"
@@ -911,7 +949,7 @@ defaults:
         path: "html-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET Core Dialog Component"
-
+-
     scope:
         path: "html-helpers/layout/expansionpanel"
     values:
@@ -936,6 +974,11 @@ defaults:
         path: "html-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET Core Splitter Component"
+-
+    scope:
+        path: "html-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET Core TileLayout Component"
 -
     scope:
         path: "html-helpers/layout/tooltip"
@@ -1006,6 +1049,11 @@ defaults:
         path: "html-helpers/navigation/menu"
     values:
         title_prefix: "ASP.NET Core Menu Component"
+-
+    scope:
+        path: "html-helpers/navigation/actionsheet"
+    values:
+        title_prefix: "ASP.NET Core ActionSheet Component"
 -
     scope:
         path: "html-helpers/navigation/panelbar"
@@ -1248,6 +1296,11 @@ defaults:
         title_prefix: "ASP.NET Core Switch Component"
 -
     scope:
+        path: "tag-helpers/data-management/taskboard"
+    values:
+        title_prefix: "ASP.NET Core TaskBoard Component"
+-
+    scope:
         path: "tag-helpers/editors/textarea"
     values:
         title_prefix: "ASP.NET Core TextArea Component"
@@ -1278,6 +1331,11 @@ defaults:
         title_prefix: "ASP.NET Core ArcGauge Component"
 -
     scope:
+        path: "tag-helpers/gauges/circulargauge"
+    values:
+        title_prefix: "ASP.NET Core CircularGauge Component"
+-
+    scope:
         path: "tag-helpers/gauges/lineargauge"
     values:
         title_prefix: "ASP.NET Core LinearGauge Component"
@@ -1298,6 +1356,11 @@ defaults:
         title_prefix: "ASP.NET Core Loader Component"
 -
     scope:
+        path: "tag-helpers/interactivity/skeletoncontainer"
+    values:
+        title_prefix: "ASP.NET Core SkeletonContainer Component"
+
+    scope:
         path: "tag-helpers/interactivity/progressbar"
     values:
         title_prefix: "ASP.NET Core ProgressBar Component"
@@ -1316,7 +1379,7 @@ defaults:
         path: "tag-helpers/layout/dialog"
     values:
         title_prefix: "ASP.NET Core Dialog Component"
-
+-
     scope:
         path: "tag-helpers/layout/expansionpanel"
     values:
@@ -1341,6 +1404,11 @@ defaults:
         path: "tag-helpers/layout/splitter"
     values:
         title_prefix: "ASP.NET Core Splitter Component"
+-
+    scope:
+        path: "tag-helpers/layout/tilelayout"
+    values:
+        title_prefix: "ASP.NET Core TileLayout Component"
 -
     scope:
         path: "tag-helpers/layout/tooltip"
@@ -1411,6 +1479,11 @@ defaults:
         path: "tag-helpers/navigation/menu"
     values:
         title_prefix: "ASP.NET Core Menu Component"
+-
+    scope:
+        path: "tag-helpers/navigation/actionsheet"
+    values:
+        title_prefix: "ASP.NET Core ActionSheet Component"
 -
     scope:
         path: "tag-helpers/navigation/panelbar"

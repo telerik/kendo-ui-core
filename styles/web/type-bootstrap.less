@@ -158,6 +158,7 @@
 @tabstrip-items-border: transparent;
 @tabstrip-active-background: @background;
 @tabstrip-tabs-color: @accent;
+@tabstrip-content-border-focused: #656565;
 @form-widget-color: @normal-text-color;
 @drop-down-border-color: darken(@base, 12%);
 @drop-down-hover-border-color: darken(@base, 24%);
@@ -819,6 +820,7 @@
 
 // Wizard
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
+@wizard-step-border-focused: #656565;
 
 
 // Textarea
@@ -905,11 +907,14 @@
 
 @expander-header-bg: @expander-bg;
 @expander-header-text: @expander-text;
-@expander-header-border: @expander-text;
+@expander-header-border: null;
 
-@expander-header-sub-title-opacity: .65;
+@expander-title-text: @primary;
 
-@expander-header-focused-bg: null;
+@expander-header-sub-title-opacity: .5;
+
+@expander-header-hover-bg: darken(@expander-header-bg, 10%);
+@expander-header-focused-bg: darken(@expander-header-bg, 30%);
 @expander-header-focused-shadow: inset 0 0 0 3px rgba(33, 37, 41, .15);
 
 
@@ -931,10 +936,109 @@
 @fab-item-disabled-shadow: @fab-disabled-shadow;
 
 
+// ActionSheet
+@actionsheet-bg: @component-bg;
+@actionsheet-text: @component-text;
+@actionsheet-border: @component-border;
+@actionsheet-box-shadow: 0 8px 10px -5px rgba(0, 0, 0, .2), 0 16px 24px 2px rgba(0, 0, 0, .14), 0 6px 30px 5px rgba(0, 0, 0, .12);
+
+@actionsheet-border-width: 0px;
+@actionsheet-border-radius: 0px;
+
+// Action sheet header
+@actionsheet-header-bg: null;
+@actionsheet-header-text: null;
+@actionsheet-header-border: null;
+@actionsheet-header-gradient: null;
+@actionsheet-header-shadow: null;
+
+// Action sheet item
+@actionsheet-item-hover-bg: @hover-background;
+@actionsheet-item-hover-text: null;
+@actionsheet-item-hover-border: null;
+@actionsheet-item-hover-gradient: null;
+@actionsheet-item-hover-shadow: null;
+
+@actionsheet-item-focus-bg: null;
+@actionsheet-item-focus-text: null;
+@actionsheet-item-focus-border: null;
+@actionsheet-item-focus-gradient: null;
+@actionsheet-item-focus-shadow: @focused-shadow;
+
+@actionsheet-item-disabled-bg: null;
+@actionsheet-item-disabled-text: null;
+@actionsheet-item-disabled-border: null;
+@actionsheet-item-disabled-gradient: null;
+@actionsheet-item-disabled-shadow: null;
+
+
 // BottomNavigation
 @bottom-nav-flat-bg: @background;
 @bottom-nav-flat-text: @component-text;
 @bottom-nav-flat-border: @component-border;
+
+
+// TaskBoard
+@taskboard-bg: null;
+@taskboard-text: null;
+@taskboard-border: null;
+
+@taskboard-toolbar-bg: null;
+@taskboard-toolbar-text: null;
+@taskboard-toolbar-border: null;
+
+@taskboard-column-bg: @alt-background-color;
+@taskboard-column-text: null;
+@taskboard-column-border: transparent;
+
+@taskboard-column-focus-bg: null;
+@taskboard-column-focus-text: null;
+@taskboard-column-focus-border: shade( @component-border, 20% );
+
+@taskboard-column-header-text: @component-text;
+
+@taskboard-pane-bg: @component-bg;
+@taskboard-pane-text: @component-text;
+@taskboard-pane-border: @component-border;
+
+@taskboard-card-bg: @card-bg;
+@taskboard-card-text: @card-text;
+@taskboard-card-border: @card-border;
+
+@taskboard-card-header-bg: @taskboard-card-bg;
+@taskboard-card-header-text: null;
+@taskboard-card-header-border: null;
+
+@taskboard-card-title-text: @primary;
+@taskboard-card-title-focus-text: darken( @primary, 13% );
+@taskboard-card-title-hover-text: lighten( @primary, 13% );
+
+@taskboard-card-footer-bg: @taskboard-card-bg;
+@taskboard-card-footer-text: null;
+@taskboard-card-footer-border: null;
+
+@taskboard-card-focus-border: shade( @taskboard-card-border, 18% );
+@taskboard-card-hover-border: shade( @taskboard-card-border, 10% );
+
+@taskboard-card-selected-text: @taskboard-card-text;
+@taskboard-card-selected-bg: @taskboard-card-bg;
+@taskboard-card-selected-border: lighten( @primary, 13% );
+
+@taskboard-drag-placeholder-bg: rgba(255, 255, 255, .2);
+@taskboard-drag-placeholder-border: @component-border;
+
+
+// Scheduler
+@scheduler-yearview-calendar-bg: @scheduler-background-color;
+
+@scheduler-yearview-month-header-text: @component-text;
+
+@scheduler-yearview-indicator-bg: @primary;
+@scheduler-yearview-indicator-selected-bg: contrast(@primary);
+
+@scheduler-tooltip-bg: null;
+@scheduler-tooltip-day-text: @link-text-color;
+
 
 // Kendo skin
 
@@ -980,7 +1084,12 @@
 @import "Default/imageeditor/_theme.less";
 @import "Default/expansion-panel/_theme.less";
 @import "Default/floatingactionbutton/_theme.less";
+@import "Default/action-sheet/_theme.less";
 @import "Default/bottom-navigation/_theme.less";
+@import "Default/searchbox/_theme.less";
+@import "Default/skeleton/_theme.less";
+@import "Default/taskboard/_theme.less";
+@import "Default/scheduler/_theme.less";
 
 .k-in,
 .k-item {
@@ -2350,6 +2459,11 @@ div.k-filebrowser-dropzone em
     color: @widget-text-color;
 }
 
+.k-tabstrip .k-content:focus,
+.k-tabstrip .k-content.k-state-focused {
+    outline-color: @tabstrip-content-border-focused;
+}
+
 .k-menu.k-header,
 .k-menu .k-item
 {
@@ -3283,6 +3397,10 @@ td.k-state-focused.k-state-selected,
     border-right-color: @grid-sticky-border;
 }
 
+.k-grid-header .k-filter-row .k-grid-header-sticky {
+    background-color: @header-background-color;
+}
+
 // Locked columns
 .k-grid-header-locked,
 .k-grid-content-locked,
@@ -3290,4 +3408,9 @@ td.k-state-focused.k-state-selected,
 .k-grid-content-locked td {
     border-left-color: @grid-sticky-border;
     border-right-color: @grid-sticky-border;
+}
+
+// Grid Multi Filter Select All Checkbox
+.k-check-all-wrap {
+    border-color: @widget-border-color;
 }

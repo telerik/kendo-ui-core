@@ -718,6 +718,7 @@ If invoked, prevents the change action.
         },
         orientation: "horizontal",
         change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("eventContainer ", e.eventContainer, "data: ", e.dataItem);
         //handle event
         }
@@ -779,6 +780,7 @@ If invoked, prevents the expand action.
         collapsibleEvents: true,
         orientation: "vertical",
         expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data: ", e.dataItem);
             //handle event
         }
@@ -830,6 +832,7 @@ If invoked, prevents the collapse action.
         collapsibleEvents: true,
         orientation: "vertical",
         collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data: ", e.dataItem);
             //handle event
         }
@@ -883,6 +886,7 @@ The action DOM element that is clicked.
         collapsibleEvents: true,
         orientation: "vertical",
         actionClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data: ", e.dataItem);
             //handle event
         }
@@ -932,6 +936,7 @@ If invoked, prevents the navigate action.
         collapsibleEvents: true,
         orientation: "horizontal",
         navigate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("action: ", e.action);
             //handle event
         }

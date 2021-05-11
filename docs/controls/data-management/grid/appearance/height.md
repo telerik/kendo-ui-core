@@ -10,7 +10,7 @@ position: 1
 
 By default, the Grid has no set height and expands to fit all table rows.
 
-## Getting Sarted 
+## Getting Started 
 
 > Set the height to the Grid only when its scrolling is enabled. For more information on the supported scroll modes by the Grid, refer to the [section on scrolling]({% slug scrolling_kendoui_grid_widget %}).  
 

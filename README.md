@@ -68,6 +68,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Waterfall Charts](https://demos.telerik.com/kendo-ui/waterfall-charts/index) | :x: | :white_check_mark: | :white_check_mark:     |
 | **Gauges**                |
 | [ArcGauge](https://demos.telerik.com/kendo-ui/arc-gauge/index)         | :x:  | :white_check_mark: | :white_check_mark:           |
+| [CircularGauge](https://demos.telerik.com/kendo-ui/circular-gauge/index)         | :x:  | :white_check_mark: | :white_check_mark:           |
 | [LinearGauge](https://demos.telerik.com/kendo-ui/linear-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | [RadialGauge](https://demos.telerik.com/kendo-ui/radial-gauge/index)   | :x: | :white_check_mark: | :white_check_mark:            |
 | **Barcodes**              |
@@ -84,6 +85,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **Layout**                |
 | [Badge](https://demos.telerik.com/kendo-ui/badge/index)                | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Dialog](https://demos.telerik.com/kendo-ui/dialog/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index)              | :x: | :white_check_mark: | :white_check_mark:           |
 | [Form](https://demos.telerik.com/kendo-ui/form/index)                  | :x: | :white_check_mark: | :white_check_mark:           |
 | [Notification](https://demos.telerik.com/kendo-ui/notification/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [Responsive Panel](https://demos.telerik.com/kendo-ui/responsive-panel/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:     |
@@ -97,6 +99,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | **PDF**              |
 | [PDFViewer](https://demos.telerik.com/kendo-ui/pdfviewer/index)        | :x: | :white_check_mark: | :white_check_mark:           |
 | **Navigation**            |
+| [ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index)      | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/index)      | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Button](https://demos.telerik.com/kendo-ui/button/index)              | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [ButtonGroup](https://demos.telerik.com/kendo-ui/buttongroup/index)    | :white_check_mark: | :white_check_mark: | :white_check_mark:           |

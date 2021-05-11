@@ -158,6 +158,72 @@ The Scheduler supports unlimited resource types. For instance, you can combine t
       ]
     });
     </script>
+	
+## Hierarchical Resource Grouping
+
+Starting with <strong>2021 R2</strong> release Scheduler supports hierarchical resource grouping. With this improvement, it is allowed to have different child resource groups for each parent resource member. For example, if Scheduler has 'Rooms' as parent resource, different Attendees could be assigned to each room. 
+The `parentValue` field in the child resource points to the respective parent resource. The `dataParentValueField` can be used to configure which is the field in the child resource that holds the parent value. If the child resource member has no parent value specified, it will be rendered for each of the parent resources.
+
+The order of the resources should follow the parent-child relation. The last resource could not be a parent. 
+Only the last one of the resources could be configured to allow multiple instance resource.
+
+	<div id="scheduler"></div>
+	<script>
+	$("#scheduler").kendoScheduler({
+        date: new Date("2013/6/6"),            
+        majorTick: 720,
+        dataSource: [
+            {
+                id: 1,
+                start: new Date("2013/6/6 11:00 AM"),
+                end: new Date("2013/6/6 1:00 PM"),
+                title: "Meeting with investors",
+                roomId: 1, 
+                attendees: [1, 2] 
+            },
+            {
+                id: 2,
+                start: new Date("2013/6/6 10:15 AM"),
+                end: new Date("2013/6/6 12:30 PM"),
+                title: "Job Interview",
+                roomId: 2, 
+                attendees: [3] 
+            },
+            {
+                id: 2,
+                start: new Date("2013/6/6 2:15 PM"),
+                end: new Date("2013/6/6 4:30 PM"),
+                title: "Presentation",
+                roomId: 2, 
+                attendees: [1, 3] 
+            }
+        ],
+        group: {
+            resources: ["Rooms", "Attendees"],
+        },
+        resources: [
+            {
+                field: "roomId",
+                name: "Rooms",
+                dataSource: [
+                    { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                    { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                ],
+                title: "Room"
+            },
+            {
+                field: "attendees",
+                name: "Attendees",
+                dataSource: [
+                    { text: "Alex", value: 1, color: "#f8a398" },
+                    { text: "Bob", value: 2, color: "#51a0ed", parentValue: 1 },
+                    { text: "Charlie", value: 3, color: "#56ca85", parentValue: 2 }
+                ],
+                multiple: true,
+                title: "Attendees"
+            }
+        ]
+    });
 
 ## See  Also
 
