@@ -21,7 +21,7 @@ From client-side perspective, the vanilla HTML/JavaScript Kendo UI widgets and t
 
 
 The {{ site.product }} HTML{% if site.core %} and Tag{% endif %} helpers:
-* Allow you to configure a Kendo UI widget through  C# or VB.NET code&mdash;for example, to set its value, data source, and so on.
+* Allow you to configure a Kendo UI widget through  [C#](https://www.tutlane.com/tutorial/csharp) or [VB.NET](https://www.tutlane.com/tutorial/visual-basic) code&mdash;for example, to set its value, data source, and so on.
 * Render the HTML and JavaScript that are needed to initialize a Kendo UI widget.
 * Propagate the widget’s options to the client-side through its initialization script.
 
