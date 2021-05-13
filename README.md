@@ -159,7 +159,7 @@ There are two ways to get the source code for Kendo UI Core. You can either down
 
 ### Installing Dependencies
 
-In order to build Kendo UI Core, you need to have **Node.js 4.x** and **git 2.x**.
+In order to build Kendo UI Core, you need to have **Node.js 6.x** and **git 2.x**.
 
 For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
@@ -291,6 +291,6 @@ This project has been released under the [Apache License, version 2.0](http://ww
    See the License for the specific language governing permissions and
    limitations under the License.
 
-*Copyright © 2020 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.*
+*Copyright © 2021 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.*
 
 *Progress, Telerik, and certain product names used herein are trademarks or registered trademarks of Progress Software Corporation and/or one of its subsidiaries or affiliates in the U.S. and/or other countries.*
