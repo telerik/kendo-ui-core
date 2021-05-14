@@ -24,4 +24,24 @@
             assert.equal(widget.element.attr("aria-disabled"), "true");
         });
     });
+
+    describe("kendo.ui.TextArea AXE", function() {
+        beforeEach(function() {
+            $("<textarea />").appendTo(Mocha.fixture);
+            textarea = $(Mocha.fixture).find("textarea");
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("TextArea is accessible", function(done) {
+            var widget = new TextArea(textarea, {
+                label: {
+                    content: "Text"
+                }
+            });
+
+            axeRunFixture(done);
+        });
+    });
 }());

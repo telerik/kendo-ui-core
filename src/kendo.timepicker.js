@@ -147,7 +147,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         that._heightHandler = proxy(that._height, that);
-
+        that._ariaLabel();
         that._popup();
     };
 
@@ -173,6 +173,32 @@ var __meta__ = { // jshint ignore:line
             this.list.on("click"+ns, ".k-time-footer button.k-time-accept", proxy(this._setClickHandler, this));
             this.list.on("mouseover"+ns, ".k-time-list-wrapper", proxy(this._mouseOverHandler, this));
             this.list.on("keydown"+ns, proxy(this._scrollerKeyDownHandler, this));
+        },
+
+        _ariaLabel: function(){
+            var that = this;
+            var inputElm = $("#"+that.options.id);
+            var ul = that.ul;
+            var id = inputElm.attr("id");
+            var labelElm = $("label[for=\'" + id  + "\']");
+            var ariaLabel = inputElm.attr("aria-label");
+            var ariaLabelledBy = inputElm.attr("aria-labelledby");
+            var labelId;
+
+            if (ariaLabel) {
+                ul.attr("aria-label", ariaLabel);
+            } else if (ariaLabelledBy){
+                ul.attr("aria-labelledby", ariaLabelledBy);
+            } else if (labelElm.length){
+                labelId = labelElm.attr("id");
+                if (labelId) {
+                    ul.attr("aria-labelledby", labelId);
+                } else {
+                    labelId = kendo.guid();
+                    labelElm.attr("id", labelId);
+                    ul.attr("aria-labelledby", labelId);
+                }
+            }
         },
 
         _scrollerKeyDownHandler: function (e) {

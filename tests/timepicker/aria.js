@@ -99,4 +99,29 @@
 
 
     });
+
+    describe("kendo.ui.TimePicker aria with AXE", function() {
+        beforeEach(function() {
+            $("<label for='hiredate'>Deliver hour</label><input id='hiredate' />").appendTo(Mocha.fixture);
+            input = $(Mocha.fixture).find("input");
+        });
+
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("TimePicker is accessible", function(done) {
+            var timepicker = new TimePicker(input);
+
+            axeRunFixture(done);
+        });
+
+        it("TimePicker has accessible time popup", function(done) {
+            instance = new TimePicker(input);
+
+            instance.open();
+
+            axeRun(instance.timeView.popup.element[0], done, ["scrollable-region-focusable"]);
+        });
+    });
 }());
