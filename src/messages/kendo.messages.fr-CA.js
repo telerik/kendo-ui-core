@@ -34,7 +34,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "isnull": "Est nulle",
     "isnotnull": "N’est pas nulle",
     "isempty": "Est vide",
-    "isnotempty": "N’est pas vide"
+    "isnotempty": "N’est pas vide",
+    "isnullorempty": "A une valeur",
+    "isnotnullorempty": "N'a pas de valeur"
   },
   "enums": {
     "eq": "Est égal à",
@@ -80,7 +82,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "isnull": "Est nulle",
     "isnotnull": "N’est pas nulle",
     "isempty": "Est vide",
-    "isnotempty": "N’est pas vide"
+    "isnotempty": "N’est pas vide",
+    "isnullorempty": "A une valeur",
+    "isnotnullorempty": "N'a pas de valeur"
   },
   "enums": {
     "eq": "Est égal à",
@@ -188,6 +192,27 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
   "noRecords": "Aucun enregistrement disponible."
 });
 }
+  /* TreeList messages */
+
+if (kendo.ui.TreeList) {
+kendo.ui.TreeList.prototype.options.messages =
+$.extend(true, kendo.ui.TreeList.prototype.options.messages,{
+  "noRows": "Aucun enregistrement à afficher",
+  "loading": "Chargement...",
+  "requestFailed": "La requête a échoué.",
+  "retry": "Réessayer",
+  "commands": {
+      "edit": "Modifier",
+      "update": "Mettre à jour",
+      "canceledit": "Annuler",
+      "create": "Créer",
+      "createchild": "Créer un élément enfant",
+      "destroy": "Supprimer",
+      "excel": "Export Excel",
+      "pdf": "Export PDF"
+  }
+});
+}
 
 /* Pager messages */
 
@@ -216,7 +241,7 @@ kendo.ui.TreeListPager.prototype.options.messages =
 $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "Tous",
   "page": "Page",
-  "display": "Afficher les items {0} - {1} de {2}",
+  "display": "Afficher les éléments {0} - {1} de {2}",
   "of": "de {0}",
   "empty": "Aucun enregistrement à afficher.",
   "refresh": "Actualiser",
@@ -273,7 +298,8 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "checkAll": "Choisir toutes",
   "clear": "Effacer filtre",
   "filter": "Filtrer",
-  "search": "Recherche"
+  "search": "Recherche",
+  "selectedItemsFormat": "{0} éléments(s) sélectionné(s)"
 });
 }
 
@@ -339,17 +365,17 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "linkWebAddress": "Adresse Web",
   "search": "Search",
   "createTable": "Insérer un tableau",
-  "addColumnLeft": "Add column on the left",
-  "addColumnRight": "Add column on the right",
-  "addRowAbove": "Add row above",
-  "addRowBelow": "Add row below",
+  "addColumnLeft": "Ajouter colonne à gauche",
+  "addColumnRight": "Ajouter colonne à droite",
+  "addRowAbove": "Ajouter ligne au-dessus",
+  "addRowBelow": "Ajouter ligne au-dessous",
   "deleteColumn": "Supprimer la colonne",
-  "deleteRow": "Supprimer ligne",
-  "dropFilesHere": "drop files here to upload",
-  "formatting": "Format",
-  "viewHtml": "View HTML",
-  "dialogUpdate": "Update",
-  "insertFile": "Insert file",
+  "deleteRow": "Supprimer la ligne",
+  "dropFilesHere": "Déposer des fichiers ici pour les télécharger",
+  "formatting": "Formatage",
+  "viewHtml": "Visualiser le HTML",
+  "dialogUpdate": "Mise à jour",
+  "insertFile": "Insérer un fichier",
   "dialogOk": "OK",
   "tableWizard": "Assistant de tableau",
   "tableTab": "Table",
@@ -451,13 +477,13 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "editor": {
     "allDayEvent": "Toute la journée",
     "description": "Description",
-    "editorTitle": "Evènement",
+    "editorTitle": "Évènement",
     "end": "Fin",
-    "endTimezone": "End timezone",
+    "endTimezone": "Fuseau horaire de fin",
     "repeat": "Répéter",
     "separateTimezones": "Use separate start and end time zones",
     "start": "Début",
-    "startTimezone": "Start timezone",
+    "startTimezone": "Fuseau horaire de début",
     "timezone": " ",
     "timezoneEditorButton": "Fuseau horaire",
     "timezoneEditorTitle": "Fuseaux horaires",
@@ -476,7 +502,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "editWindowTitle": "Modification de l'élément courant"
   },
   "save": "Sauvegarder",
-  "time": "Time",
+  "time": "Heure",
   "today": "Aujourd'hui",
   "views": {
     "agenda": "Agenda",
@@ -547,9 +573,26 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
 });
 }
 
-/* FlatColorPicker messages */
+/* ListBox messaages */
 
-if (kendo.ui.FlatColorPicker) {
+if (kendo.ui.ListBox) {
+kendo.ui.ListBox.prototype.options.messages =
+$.extend(true, kendo.ui.ListBox.prototype.options.messages,{
+  "tools": {
+    "remove": "Supprimer",
+    "moveUp": "Déplacer vers le haut",
+    "moveDown": "Déplacer vers le bas",
+    "transferTo": "Transférer à",
+    "transferFrom": "Transférer de",
+    "transferAllTo": "Transférer tout à",
+    "transferAllFrom": "Transférer tout de"
+  }
+});
+}
+
+ /* FlatColorPicker messages */
+
+ if (kendo.ui.FlatColorPicker) {
   kendo.ui.FlatColorPicker.prototype.options.messages =
   $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
       "apply": "Appliquer",
