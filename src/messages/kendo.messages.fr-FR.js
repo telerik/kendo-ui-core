@@ -523,180 +523,241 @@
   if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
     kendo.spreadsheet.messages.borderPalette =
       $.extend(true, kendo.spreadsheet.messages.borderPalette, {
-        "allBorders": "All borders",
-        "insideBorders": "Inside borders",
-        "insideHorizontalBorders": "Inside horizontal borders",
-        "insideVerticalBorders": "Inside vertical borders",
-        "outsideBorders": "Outside borders",
-        "leftBorder": "Left border",
-        "topBorder": "Top border",
-        "rightBorder": "Right border",
-        "bottomBorder": "Bottom border",
-        "noBorders": "No border",
-        "reset": "Reset color",
-        "customColor": "Custom color...",
-        "apply": "Apply",
-        "cancel": "Cancel"
+        "allBorders": "Toutes les bordures",
+        "insideBorders": "Bordures intérieures",
+        "insideHorizontalBorders": "Bordures horizontales intérieures",
+        "insideVerticalBorders": "Bordures verticales intérieures",
+        "outsideBorders": "Bordures extérieures",
+        "leftBorder": "Bordure gauche",
+        "topBorder": "Bordure supérieure",
+        "rightBorder": "Bordure droite",
+        "bottomBorder": "Bordure inférieure",
+        "noBorders": "Sans bordure",
+        "reset": "Réinitialiser la couleur",
+        "customColor": "Couleur personnalisée...",
+        "apply": "Appliquer",
+        "cancel": "Annuler"
       });
   }
 
   if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
     kendo.spreadsheet.messages.dialogs =
       $.extend(true, kendo.spreadsheet.messages.dialogs, {
-        "apply": "Apply",
-        "save": "Save",
-        "cancel": "Cancel",
-        "remove": "Remove",
-        "retry": "Retry",
-        "revert": "Revert",
+        "apply": "Appliquer",
+        "save": "Enregistrer les modifications",
+        "cancel": "Annuler",
+        "remove": "Retirer",
+        "retry": "Réessayer",
+        "revert": "Rétablir",
         "okText": "OK",
         "formatCellsDialog": {
           "title": "Format",
           "categories": {
-            "number": "Number",
-            "currency": "Currency",
+            "number": "Nombre",
+            "currency": "Devise",
             "date": "Date"
           }
         },
         "fontFamilyDialog": {
-          "title": "Font"
+          "title": "Police"
         },
         "fontSizeDialog": {
-          "title": "Font size"
+          "title": "Taille de la police"
         },
         "bordersDialog": {
-          "title": "Borders"
+          "title": "Bordures"
         },
         "alignmentDialog": {
           "title": "Alignment",
           "buttons": {
-            "justtifyLeft": "Align left",
-            "justifyCenter": "Center",
-            "justifyRight": "Align right",
-            "justifyFull": "Justify",
-            "alignTop": "Align top",
-            "alignMiddle": "Align middle",
-            "alignBottom": "Align bottom"
+            "justtifyLeft": "Aligner à gauche",
+            "justifyCenter": "Centrer",
+            "justifyRight": "Aligner à droite",
+            "justifyFull": "Justifier",
+            "alignTop": "Aligner le haut",
+            "alignMiddle": "Aligner le centre",
+            "alignBottom": "Aligner le bas"
           }
         },
         "mergeDialog": {
-          "title": "Merge cells",
+          "title": "Fusionner les cellules",
           "buttons": {
-            "mergeCells": "Merge all",
-            "mergeHorizontally": "Merge horizontally",
-            "mergeVertically": "Merge vertically",
-            "unmerge": "Unmerge"
+            "mergeCells": "Fusionner tout",
+            "mergeHorizontally": "Fusionner horizontalement",
+            "mergeVertically": "Fusionner verticalement",
+            "unmerge": "Annuler la fusion des cellules"
           }
         },
         "freezeDialog": {
-          "title": "Freeze panes",
+          "title": "Figer les volets",
           "buttons": {
-            "freezePanes": "Freeze panes",
-            "freezeRows": "Freeze rows",
-            "freezeColumns": "Freeze columns",
-            "unfreeze": "Unfreeze panes"
+            "freezePanes": "Figer les volets",
+            "freezeRows": "Figer les lignes",
+            "freezeColumns": "Figer les colonnes",
+            "unfreeze": "Libérer les volets"
           }
         },
         "confirmationDialog": {
-          "text": "Are you sure you want to remove this sheet?",
-          "title": "Sheet remove"
+          "text": "Êtes-vous sûr de vouloir supprimer cette feuille ?",
+          "title": "Suppression de la feuille"
         },
         "validationDialog": {
-          "title": "Data Validation",
-          "hintMessage": "Please enter a valid {0} value {1}.",
+          "title": "Validation des données",
+          "hintMessage": "Veuillez entrer une valeur {0} valide {1}.",
           "hintTitle": "Validation {0}",
           "criteria": {
-            "any": "Any value",
-            "number": "Number",
-            "text": "Text",
+            "any": "Toute value",
+            "number": "Nombre",
+            "text": "Texte",
             "date": "Date",
-            "custom": "Custom Formula",
-            "list": "List"
+            "custom": "Formule personnalisée",
+            "list": "Liste"
           },
           "comparers": {
-            "greaterThan": "greater than",
-            "lessThan": "less than",
-            "between": "between",
-            "notBetween": "not between",
-            "equalTo": "equal to",
-            "notEqualTo": "not equal to",
-            "greaterThanOrEqualTo": "greater than or equal to",
-            "lessThanOrEqualTo": "less than or equal to"
+            "greaterThan": "supérieur(e) à",
+            "lessThan": "inférieur(e) à",
+            "between": "entre",
+            "notBetween": "pas entre",
+            "equalTo": "égal(e) à",
+            "notEqualTo": "different(e) de",
+            "greaterThanOrEqualTo": "supérieur(e) ou égal(e) à",
+            "lessThanOrEqualTo": "inférieur(e) ou égal(e) à"
           },
           "comparerMessages": {
-            "greaterThan": "greater than {0}",
-            "lessThan": "less than {0}",
-            "between": "between {0} and {1}",
-            "notBetween": "not between {0} and {1}",
-            "equalTo": "equal to {0}",
-            "notEqualTo": "not equal to {0}",
-            "greaterThanOrEqualTo": "greater than or equal to {0}",
-            "lessThanOrEqualTo": "less than or equal to {0}",
-            "custom": "that satisfies the formula: {0}"
+            "greaterThan": "supérieur(e) à {0}",
+            "lessThan": "inférieur(e) à {0}",
+            "between": "entre {0} et {1}",
+            "notBetween": "pas entre {0} et {1}",
+            "equalTo": "égal(e) à {0}",
+            "notEqualTo": "different(e) de {0}",
+            "greaterThanOrEqualTo": "supérieur(e) ou égal(e) à {0}",
+            "lessThanOrEqualTo": "inférieur(e) ou égal(e) à {0}",
+            "custom": "qui satisfait à la formule : {0}"
           },
           "labels": {
-            "criteria": "Criteria",
-            "comparer": "Comparer",
+            "criteria": "Critère",
+            "comparer": "Comparateur",
             "min": "Min",
             "max": "Max",
-            "value": "Value",
-            "start": "Start",
-            "end": "End",
-            "onInvalidData": "On invalid data",
-            "rejectInput": "Reject input",
-            "showWarning": "Show warning",
-            "showHint": "Show hint",
-            "hintTitle": "Hint title",
-            "hintMessage": "Hint message",
-            "ignoreBlank": "Ignore blank"
+            "value": "Valeur",
+            "start": "Début",
+            "end": "Fin",
+            "onInvalidData": "Sur les données invalides",
+            "rejectInput": "Rejeter l'entrée",
+            "showWarning": "Afficher l'avertissement",
+            "showHint": "Afficher la note",
+            "hintTitle": "Afficher le titre",
+            "hintMessage": "Afficher le message",
+            "ignoreBlank": "Ignorer l'espace vide",
+            "showListButton": "Afficher le bouton pour montrer la liste",
+            "showCalendarButton": "Afficher le bouton pour afficher le calendrier"
           },
           "placeholders": {
-            "typeTitle": "Type title",
-            "typeMessage": "Type message"
+            "typeTitle": "Tapez le titre",
+            "typeMessage": "Tapez le message"
           }
         },
         "exportAsDialog": {
-          "title": "Export...",
+          "title": "Exporter...",
+          "defaultFileName": "Classeur",
+          "xlsx": {
+            "description": "Classeur Excel (.xlsx)"
+          },
+          "pdf": {
+            "description": "Portable Document Format (.pdf)",
+            "area": {
+              "workbook": "Tout le classeur",
+              "sheet": "Feilule active",
+              "selection": "Sélection"
+            },
+            "paper": {
+              "a2": "A2 (420 mm × 594 mm)",
+              "a3": "A3 (297 mm x 420 mm)",
+              "a4": "A4 (210 mm x 297 mm)",
+              "a5": "A5 (148 mm x 210 mm)",
+              "b3": "B3 (353 mm × 500 mm)",
+              "b4": "B4 (250 mm x 353 mm)",
+              "b5": "B5 (176 mm x 250 mm)",
+              "folio": 'Folio (8.5" x 13")',
+              "legal": 'Legal (8.5" x 14")',
+              "letter": 'Letter (8.5" x 11")',
+              "tabloid": 'Tabloid (11" x 17")',
+              "executive": 'Executive (7.25" x 10.5")'
+            },
+            "margin": {
+              "normal": "Normale",
+              "narrow": "Etroite",
+              "wide": "Large"
+            }
+          },
           "labels": {
-            "fileName": "File name",
-            "saveAsType": "Save as type",
-            "exportArea": "Export",
-            "paperSize": "Paper size",
-            "margins": "Margins",
+            "scale": "Mettre à l'échelle",
+            "fit": "Ajuster à la page",
+            "fileName": "Nom du fichier",
+            "saveAsType": "Enregistrer comme type",
+            "exportArea": "Exporter",
+            "paperSize": "Taille du papier",
+            "margins": "Marges",
             "orientation": "Orientation",
-            "print": "Print",
-            "guidelines": "Guidelines",
-            "center": "Center",
-            "horizontally": "Horizontally",
-            "vertically": "Vertically"
+            "print": "Imprimer",
+            "guidelines": "Lignes directrices",
+            "center": "Centrer",
+            "horizontally": "Horizontalement",
+            "vertically": "Verticalement"
           }
         },
         "modifyMergedDialog": {
-          "errorMessage": "Cannot change part of a merged cell."
+          "errorMessage": "Impossible de modifier une partie d'une cellule fusionnée."
+        },
+        "rangeDisabledDialog": {
+          "errorMessage": "La plage de destination contient des cellules désactivées."
+        },
+        "intersectsArrayDialog": {
+          "errorMessage": "Vous ne pouvez pas modifier une partie d'un tableau"
+        },
+        "incompatibleRangesDialog": {
+          "errorMessage": "Plages incompatibles"
+        },
+        "noFillDirectionDialog": {
+          "errorMessage": "Impossible de déterminer la direction du remplissage"
+        },
+        "duplicateSheetNameDialog": {
+          "errorMessage": "Nom de la feuille en double"
+        },
+        "overflowDialog": {
+          "errorMessage": "Impossible de coller, car la zone de copie et la zone de collage n'ont pas la même taille et/ou forme."
         },
         "useKeyboardDialog": {
-          "title": "Copying and pasting",
-          "errorMessage": "These actions cannot be invoked through the menu. Please use the keyboard shortcuts instead:",
+          "title": "Le copier/coller",
+          "errorMessage": "Ces actions ne peuvent pas être invoquées via le menu. Veuillez utiliser les raccourcis clavier à la place :",
           "labels": {
-            "forCopy": "for copy",
-            "forCut": "for cut",
-            "forPaste": "for paste"
+            "forCopy": "pour copier",
+            "forCut": "pour couper",
+            "forPaste": "pour coller"
           }
         },
         "unsupportedSelectionDialog": {
-          "errorMessage": "That action cannot be performed on multiple selection."
+          "errorMessage": "Cette action ne peut pas être effectuée sur une sélection multiple."
+        },
+        "linkDialog": {
+          "title": "Lien hypertexte",
+          "labels": {
+            "text": "Texte",
+            "url": "Adresse",
+            "removeLink": "Supprimer le lien"
+          }
         },
         "insertCommentDialog": {
-          "title": "Insert comment",
+          "title": "Insérer un commentaire",
           "labels": {
-            "comment": "Comment",
-            "removeComment": "Remove comment"
+            "comment": "Commentaire",
+            "removeComment": "Supprimer le commentaire"
           }
         },
         "insertImageDialog": {
-          "title": "Insert image",
-          "info": "Drag an image here, or click to select",
-          "typeError": "Please select a JPEG, PNG or GIF image"
+          "title": "Insérer une image",
+          "info": "Faites glisser une image ici, ou cliquez pour la sélectionner",
+          "typeError": "Veuillez sélectionner une image JPEG, PNG ou GIF."
         }
       });
   }
@@ -704,38 +765,38 @@
   if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
     kendo.spreadsheet.messages.filterMenu =
       $.extend(true, kendo.spreadsheet.messages.filterMenu, {
-        "sortAscending": "Sort range A to Z",
-        "sortDescending": "Sort range Z to A",
-        "filterByValue": "Filter by value",
-        "filterByCondition": "Filter by condition",
-        "apply": "Apply",
-        "search": "Search",
-        "addToCurrent": "Add to current selection",
-        "clear": "Clear",
+        "sortAscending": "Trier de A à Z",
+        "sortDescending": "Trier de Z à A",
+        "filterByValue": "Filtrer par valeur",
+        "filterByCondition": "Filtrer par condition",
+        "apply": "Appliquer",
+        "search": "Recherche",
+        "addToCurrent": "Ajouter à la sélection en cours",
+        "clear": "Effacer",
         "blanks": "(Blanks)",
         "operatorNone": "None",
         "and": "AND",
         "or": "OR",
         "operators": {
           "string": {
-            "contains": "Text contains",
-            "doesnotcontain": "Text does not contain",
-            "startswith": "Text starts with",
-            "endswith": "Text ends with"
+            "contains": "Le texte contient",
+            "doesnotcontain": "Le texte ne contient pas",
+            "startswith": "Le texte commence par",
+            "endswith": "Le texte se termine par"
           },
           "date": {
-            "eq": "Date is",
-            "neq": "Date is not",
-            "lt": "Date is before",
-            "gt": "Date is after"
+            "eq": "La date est",
+            "neq": "La date est différente de",
+            "lt": "La date est antérieure à",
+            "gt": "La date est postérieure à"
           },
           "number": {
-            "eq": "Is equal to",
-            "neq": "Is not equal to",
-            "gte": "Is greater than or equal to",
-            "gt": "Is greater than",
-            "lte": "Is less than or equal to",
-            "lt": "Is less than"
+            "eq": "Est égal à",
+            "neq": "Est different de",
+            "gte": "Est supérieur ou égal à",
+            "gt": "Est supérieur à",
+            "lte": "Est inférieur ou égal à",
+            "lt": "Est inférieur à"
           }
         }
       });
@@ -744,96 +805,96 @@
   if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
     kendo.spreadsheet.messages.colorPicker =
       $.extend(true, kendo.spreadsheet.messages.colorPicker, {
-        "reset": "Reset color",
-        "customColor": "Custom color...",
-        "apply": "Apply",
-        "cancel": "Cancel"
+        "reset": "Réinitialiser la couleur",
+        "customColor": "Couleur personnalisée...",
+        "apply": "Appliquer",
+        "cancel": "Annuler"
       });
   }
 
   if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
     kendo.spreadsheet.messages.toolbar =
       $.extend(true, kendo.spreadsheet.messages.toolbar, {
-        "addColumnLeft": "Add column left",
-        "addColumnRight": "Add column right",
-        "addRowAbove": "Add row above",
-        "addRowBelow": "Add row below",
-        "alignment": "Alignment",
+        "addColumnLeft": "Ajouter une colonne à gauche",
+        "addColumnRight": "Ajouter une colonne à droite",
+        "addRowAbove": "Ajouter une ligne au-dessus",
+        "addRowBelow": "Ajouter une rangée en dessous",
+        "alignment": "Alignement",
         "alignmentButtons": {
-          "justtifyLeft": "Align left",
-          "justifyCenter": "Center",
-          "justifyRight": "Align right",
-          "justifyFull": "Justify",
-          "alignTop": "Align top",
-          "alignMiddle": "Align middle",
-          "alignBottom": "Align bottom"
+          "justtifyLeft": "Aligner à gauche",
+          "justifyCenter": "Centrer",
+          "justifyRight": "Aligner à droite",
+          "justifyFull": "Justifier",
+          "alignTop": "Aligner le haut",
+          "alignMiddle": "Aligner le centre",
+          "alignBottom": "Aligner le bas"
         },
-        "backgroundColor": "Background",
-        "bold": "Bold",
-        "borders": "Borders",
+        "backgroundColor": "Couleur de fond",
+        "bold": "Gras",
+        "borders": "Bordures",
         "colorPicker": {
-          "reset": "Reset color",
-          "customColor": "Custom color..."
+          "reset": "Réinitialiser la couleur",
+          "customColor": "Couleur personnalisée..."
         },
-        "copy": "Copy",
-        "cut": "Cut",
-        "deleteColumn": "Delete column",
-        "deleteRow": "Delete row",
-        "excelImport": "Import from Excel...",
-        "filter": "Filter",
-        "fontFamily": "Font",
-        "fontSize": "Font size",
-        "format": "Custom format...",
+        "copy": "Copier",
+        "cut": "Couper",
+        "deleteColumn": "Supprimer la colonne",
+        "deleteRow": "Supprimer la ligne",
+        "excelImport": "Importer d'Excel...",
+        "filter": "Filtrer",
+        "fontFamily": "Police",
+        "fontSize": "Taille de la police",
+        "format": "Format personnalisé...",
         "formatTypes": {
-          "automatic": "Automatic",
-          "number": "Number",
-          "percent": "Percent",
-          "financial": "Financial",
-          "currency": "Currency",
+          "automatic": "Automatique",
+          "number": "Nombre",
+          "percent": "Pourcentage",
+          "financial": "Financier",
+          "currency": "Devise",
           "date": "Date",
-          "time": "Time",
-          "dateTime": "Date time",
-          "duration": "Duration",
-          "moreFormats": "More formats..."
+          "time": "Temps",
+          "dateTime": "Date et heure",
+          "duration": "Durée",
+          "moreFormats": "Plus de formats..."
         },
-        "formatDecreaseDecimal": "Decrease decimal",
-        "formatIncreaseDecimal": "Increase decimal",
-        "freeze": "Freeze panes",
+        "formatDecreaseDecimal": "Moins de décimales",
+        "formatIncreaseDecimal": "Plus de décimales",
+        "freeze": "Figer les volets",
         "freezeButtons": {
-          "freezePanes": "Freeze panes",
-          "freezeRows": "Freeze rows",
-          "freezeColumns": "Freeze columns",
-          "unfreeze": "Unfreeze panes"
+          "freezePanes": "Figer les volets",
+          "freezeRows": "Figer les lignes",
+          "freezeColumns": "Figer les colonnes",
+          "unfreeze": "Libérer les volets"
         },
-        "insertComment": "Insert comment",
-        "insertImage": "Insert image",
-        "italic": "Italic",
-        "merge": "Merge cells",
+        "insertComment": "Ajouter un commentaire",
+        "insertImage": "Ajouter une image",
+        "italic": "Italique",
+        "merge": "Fusionner les cellules",
         "mergeButtons": {
-          "mergeCells": "Merge all",
-          "mergeHorizontally": "Merge horizontally",
-          "mergeVertically": "Merge vertically",
-          "unmerge": "Unmerge"
+          "mergeCells": "Fusionner tout",
+          "mergeHorizontally": "Fusionner horizontalement",
+          "mergeVertically": "Fusionner verticalement",
+          "unmerge": "Annuler la fusion des cellules"
         },
-        "open": "Open...",
-        "paste": "Paste",
+        "open": "Ouvrir...",
+        "paste": "Coller",
         "quickAccess": {
-          "redo": "Redo",
-          "undo": "Undo"
+          "redo": "Refaire",
+          "undo": "Annuler"
         },
-        "saveAs": "Save As...",
-        "sortAsc": "Sort ascending",
-        "sortDesc": "Sort descending",
+        "saveAs": "Enregistrer sous...",
+        "sortAsc": "Trier en ordre croissant",
+        "sortDesc": "Tri décroissant",
         "sortButtons": {
-          "sortSheetAsc": "Sort sheet A to Z",
-          "sortSheetDesc": "Sort sheet Z to A",
-          "sortRangeAsc": "Sort range A to Z",
-          "sortRangeDesc": "Sort range Z to A"
+          "sortSheetAsc": "Trier la feuille de A à Z",
+          "sortSheetDesc": "Trier la feuille de Z à A",
+          "sortRangeAsc": "Trier la plage de A à Z",
+          "sortRangeDesc": "Trier la plage de Z à A"
         },
-        "textColor": "Text Color",
-        "textWrap": "Wrap text",
-        "underline": "Underline",
-        "validation": "Data validation..."
+        "textColor": "Couleur du texte",
+        "textWrap": "Retour du texte à la ligne",
+        "underline": "Souligner",
+        "validation": "Validation des données..."
       });
   }
 
@@ -841,14 +902,14 @@
     kendo.spreadsheet.messages.view =
       $.extend(true, kendo.spreadsheet.messages.view, {
         "errors": {
-          "shiftingNonblankCells": "Cannot insert cells due to data loss possibility. Select another insert location or delete the data from the end of your worksheet.",
-          "filterRangeContainingMerges": "Cannot create a filter within a range containing merges",
-          "validationError": "The value that you entered violates the validation rules set on the cell."
+          "shiftingNonblankCells": "Impossible d'insérer des cellules en raison d'une possibilité de perte de données. Sélectionnez un autre emplacement d'insertion ou supprimez les données à la fin de votre feuille de calcul.",
+          "filterRangeContainingMerges": "Impossible de créer un filtre dans une plage contenant des fusions",
+          "validationError": "La valeur que vous avez saisie enfreint les règles de validation définies pour la cellule."
         },
         "tabs": {
           "home": "Home",
-          "insert": "Insert",
-          "data": "Data"
+          "insert": "Insertion",
+          "data": "Données"
         }
       });
   }
