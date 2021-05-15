@@ -117,12 +117,12 @@ kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "daily": {
     "interval": "jour(s)",
-    "repeatEvery": "Répéter chaque:"
+    "repeatEvery": "Répéter chaque :"
   },
   "end": {
     "after": " Après",
     "occurrence": "occurrence(s)",
-    "label": "Finir:",
+    "label": "Finir :",
     "never": "Jamais",
     "on": "Sur",
     "mobileLabel": "Ends"
@@ -137,8 +137,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "monthly": {
     "day": "Jour",
     "interval": "mois",
-    "repeatEvery": "Répéter chaque:",
-    "repeatOn": "Répéter l'opération sur:"
+    "repeatEvery": "Répéter chaque :",
+    "repeatOn": "Répéter l'opération sur :"
   },
   "offsetPositions": {
     "first": "premier",
@@ -148,14 +148,14 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
     "third": "troisième"
   },
   "weekly": {
-    "repeatEvery": "Répéter chaque:",
-    "repeatOn": "Répéter l'opération sur:",
+    "repeatEvery": "Répéter chaque :",
+    "repeatOn": "Répéter l'opération sur :",
     "interval": "semaine(s)"
   },
   "yearly": {
     "of": "de",
-    "repeatEvery": "Répéter chaque:",
-    "repeatOn": "Répéter l'opération sur:",
+    "repeatEvery": "Répéter chaque :",
+    "repeatOn": "Répéter l'opération sur :",
     "interval": "année(ans)"
   },
   "weekdays": {
@@ -182,10 +182,10 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
     "save": "Enregistrer les modifications",
-    "search": "Rechercher...",
+    "search": "Rechercher..."
   },
   "editable": {
-    "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
+    "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement ?",
     "cancelDelete": "Annuler",
     "confirmDelete": "Effacer"
   },
@@ -338,14 +338,14 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "superscript": "Superscript",
   "underline": "Souligné",
   "unlink": "Supprimer le lien hypertexte",
-  "deleteFile": "Êtes-vous sûr de vouloir supprimer \"{0}\"?",
+  "deleteFile": "Êtes-vous sûr de vouloir supprimer \"{0}\" ?",
   "directoryNotFound": "Un répertoire avec ce nom n'a pas été trouvé.",
   "emptyFolder": "Vider le dossier",
   "invalidFileType": "Le fichier sélectionné \"{0}\" n'est pas valide. Les types de fichiers supportés sont {1}.",
-  "orderBy": "Organiser par:",
+  "orderBy": "Organiser par :",
   "orderByName": "Nom",
   "orderBySize": "Taille",
-  "overwriteFile": "Un fichier avec le nom \"{0}\" existe déjà dans le répertoire courant. Voulez-vous le remplacer?",
+  "overwriteFile": "Un fichier avec le nom \"{0}\" existe déjà dans le répertoire courant. Voulez-vous le remplacer ?",
   "uploadFile": "Télécharger",
   "backColor": "Couleur de fond",
   "foreColor": "Couleur",
@@ -424,7 +424,7 @@ var browserMessages = {
   "emptyFolder" : "Répertoire vide",
   "deleteFile" : 'Etes-vous sûr de vouloir supprimer "{0}"?',
   "invalidFileType" : "Le fichier sélectionné \"{0}\" n'est pas valide. Les type fichiers supportés sont {1}.",
-  "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer?",
+  "overwriteFile" : "Un fichier du nom \"{0}\" existe déjà dans ce répertoire. Voulez-vous le remplacer ?",
   "dropFilesHere" : "glissez les fichiers ici pour les charger",
   "search" : "Recherche"
 };
@@ -467,7 +467,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "allDay": "toute la journée",
   "cancel": "Annuler",
   "editable": {
-    "confirmation": "Etes-vous sûr de vouloir supprimer cet élément?"
+    "confirmation": "Etes-vous sûr de vouloir supprimer cet élément ?"
   },
   "date": "Date",
   "destroy": "Effacer",
@@ -489,11 +489,11 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "event": "Evènement",
   "recurrenceMessages": {
-    "deleteRecurring": "Voulez-vous supprimer seulement cet évènement ou toute la série?",
+    "deleteRecurring": "Voulez-vous supprimer seulement cet évènement ou toute la série ?",
     "deleteWindowOccurrence": "Suppression de l'élément courant",
     "deleteWindowSeries": "Suppression de toute la série",
     "deleteWindowTitle": "Suppression d'un élément récurrent",
-    "editRecurring": "Voulez-vous modifier seulement cet évènement ou toute la série?",
+    "editRecurring": "Voulez-vous modifier seulement cet évènement ou toute la série ?",
     "editWindowOccurrence": "Modifier l'occurrence courante",
     "editWindowSeries": "Modifier la série",
     "editWindowTitle": "Modification de l'élément courant"

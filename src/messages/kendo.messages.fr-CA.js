@@ -178,7 +178,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
     "save": "Enregistrer les modifications",
-    "search": "Recherche"
+    "search": "Rechercher..."
   },
   "editable": {
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
