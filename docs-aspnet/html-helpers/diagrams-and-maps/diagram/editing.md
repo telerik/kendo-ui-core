@@ -16,41 +16,41 @@ To enable the editing functionality of the Diagram:
 
 1. Configure the DataSource for remote CRUD operations. You have to include the model declaration. The `Id` is mandatory to indicate which of the fields is the unique identifier.
 
-      .DataSource(d => d
-          .ShapeDataSource()
-          .Model(m =>
-          {
-              m.Id(s => s.Id);
-              m.Field(s => s.Id).Editable(false);
-              m.Field(s => s.JobTitle);
-              m.Field(s => s.Color);
-          })
-          .Read("ReadShapes", "DiagramData")
-          .Create("CreateShape", "DiagramData")
-          .Destroy("DestroyShape", "DiagramData")
-          .Update("UpdateShape", "DiagramData")
-      )
+        .DataSource(d => d
+            .ShapeDataSource()
+            .Model(m =>
+            {
+                m.Id(s => s.Id);
+                m.Field(s => s.Id).Editable(false);
+                m.Field(s => s.JobTitle);
+                m.Field(s => s.Color);
+            })
+            .Read("ReadShapes", "DiagramData")
+            .Create("CreateShape", "DiagramData")
+            .Destroy("DestroyShape", "DiagramData")
+            .Update("UpdateShape", "DiagramData")
+        )
 
 1. Configure the `ConnectionsDataSource` for remote CRUD operations. Without setting the `ConnectionsDataSource`, editing is disabled.
 
-      .ConnectionsDataSource(d => d
-          .Model(m =>
-          {
-              m.Id(c => c.Id);
-              m.Field(c => c.Id).Editable(false);
-              m.Field(c => c.Text).Editable(false);
-              m.From(c => c.FromShapeId);
-              m.To(c => c.ToShapeId);
-              m.FromX(c => c.FromPointX);
-              m.FromY(c => c.FromPointY);
-              m.ToX(c => c.ToPointX);
-              m.ToY(c => c.ToPointY);
-          })
-          .Read("ReadConnections", "DiagramData")
-          .Create("CreateConnection", "DiagramData")
-          .Destroy("DestroyConnection", "DiagramData")
-          .Update("UpdateConnection", "DiagramData")
-      )
+        .ConnectionsDataSource(d => d
+            .Model(m =>
+            {
+                m.Id(c => c.Id);
+                m.Field(c => c.Id).Editable(false);
+                m.Field(c => c.Text).Editable(false);
+                m.From(c => c.FromShapeId);
+                m.To(c => c.ToShapeId);
+                m.FromX(c => c.FromPointX);
+                m.FromY(c => c.FromPointY);
+                m.ToX(c => c.ToPointX);
+                m.ToY(c => c.ToPointY);
+            })
+            .Read("ReadConnections", "DiagramData")
+            .Create("CreateConnection", "DiagramData")
+            .Destroy("DestroyConnection", "DiagramData")
+            .Update("UpdateConnection", "DiagramData")
+        )
 
 ## Model Fields
 

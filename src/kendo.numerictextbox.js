@@ -95,12 +95,10 @@ var __meta__ = { // jshint ignore:line
                  that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function() {
                      if (kendo.support.browser.edge) {
                          that._text.one(FOCUS + ns, function() {
-                             that._toggleText(false);
-                             element.focus();
+                            that._focusin();
                          });
                      } else {
-                         that._toggleText(false);
-                         element.focus();
+                        that._focusin();
                      }
                      that.selectValue();
                  });
@@ -451,17 +449,24 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _change: function(value) {
+        _getFactorValue: function (value) {
             var that = this,
                 factor = that.options.factor;
 
-            if(factor && factor !== 1){
+            if (factor && factor !== 1) {
                 value = kendo.parseFloat(value);
-                if(value !== null) {
+                if (value !== null) {
                     value = value/factor;
                 }
             }
 
+            return value;
+        },
+
+        _change: function(value) {
+            var that = this;
+
+            value = that._getFactorValue(value);
             that._update(value);
             value = that._value;
 
@@ -674,6 +679,7 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     element.value = result.toString().replace(POINT, numberFormat[POINT]);
                     if (that._adjust(result) !== result || !that._numericRegex(numberFormat).test(element.value)) {
+                        value = that._getFactorValue(element.value);
                         that._update(value);
                     }
                 }

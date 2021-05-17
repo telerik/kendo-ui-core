@@ -13,30 +13,56 @@ The Kendo UI TreeList supports a row template that enables you to place custom c
 For runnable example, refer to:
 * [Demo on using the row template of the TreeList HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/treelist/rowtemplate)
 
-The following example demonstrates how to implement a row template by using its Id:
+The following example demonstrates how to implement row and alter row templates by using their Ids:
 
-    .Columns(columns =>
-    {
-        columns.Add().Field(e => e.FirstName).Title("Employee").Width(280).TemplateId("photo-template").Width(180);
-        columns.Add().Field(e => e.Country).Title("Country").Width(160).TemplateId("country-template");
-        columns.Add().Field(e => e.HireDate).Title("Length of Service").Width(160).TemplateId("lengthOfService-template");
-    })
+    .RowTemplateId("rowTemplate")
+    .AltRowTemplateId("altRowTemplate")
 
 The following scripts will generate the content for the templates:
 
  ```   
-<script id="photo-template" type="text/x-kendo-template">
-   <div class='employee-photo'
-        style='background-image: url(@Url.Content("~/content/web/treelist/people")/#: EmployeeId #.jpg);'></div>
-   <div class='employee-name'>#: FirstName # #: LastName # <span class = 'employee-position'>#: Position #</span></div>
+<script id="rowTemplate" type="text/x-kendo-template">
+    <tr data-uid='#: data.model.uid #' role="row">
+    <td role="gridcell">
+    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                <span class="k-icon k-i-none"></span>
+            #}#
+            #if(data.hasChildren){#
+                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+            #}#
+       <div class='employee-photo'
+        style='background-image: url(@Url.Content("~/content/web/treelist/people")/#: data.model.EmployeeId #.jpg);'></div>
+       <div class='employee-name'>#: data.model.FirstName # #: data.model.LastName # <span class = 'employee-position'>#: data.model.Position #</span></div>
+    </td>
+    <td role="gridcell">
+        <img class= "county-flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
+    </td>
+    <td role="gridcell">
+         <span class='badgeTemplate'>#: Math.floor((kendo.date.today() - data.model.HireDate)/(365*24*60*60*1000)) #</span>
+    </td>
+    </tr>
 </script>
 
-<script id="country-template" type="text/x-kendo-template">
-    <img class= "county-flag" src="../Content/web/country-flags/#: CountryFlag #.png" />
-</script>
-
-<script id="lengthOfService-template" type="text/x-kendo-template">
-    <span id='badge_#=EmployeeId#' class='badgeTemplate'>#: Math.floor((kendo.date.today() - HireDate)/(365*24*60*60*1000)) #</span>
+<script id="altRowTemplate" type="text/x-kendo-template">
+    <tr data-uid='#: data.model.uid #' role="row" class="k-alt">
+    <td role="gridcell">
+    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                <span class="k-icon k-i-none"></span>
+            #}#
+            #if(data.hasChildren){#
+                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+            #}#
+       <div class='employee-photo'
+        style='background-image: url(@Url.Content("~/content/web/treelist/people")/#: data.model.EmployeeId #.jpg);'></div>
+       <div class='employee-name'>#: data.model.FirstName # #: data.model.LastName # <span class = 'employee-position'>#: data.model.Position #</span></div>
+    </td>
+    <td role="gridcell">
+        <img class= "county-flag" src="../Content/web/country-flags/#: data.model.CountryFlag #.png" />
+    </td>
+    <td role="gridcell">
+         <span class='badgeTemplate'>#: Math.floor((kendo.date.today() - data.model.HireDate)/(365*24*60*60*1000)) #</span>
+    </td>
+    </tr>
 </script>
 ```
 

@@ -79,42 +79,42 @@ To enable the editing functionality of the Diagram:
 
 1. Declare fields definition by using the `schema` of the `connectionsDataSource`.
 
-    var connectionsDataSource = new kendo.data.DataSource({
-      //..
-      model: {
-        id: "id",
-        fields: {
-		  // This field will not be editable. The default value is true.
-          id: { from: "Id", type: "number", editable: false },
-          from: { from: "FromShapeId", type: "number" },
-          to: { from: "ToShapeId", type: "number" },
-          fromX: { from: "FromPointX", type: "number" },
-          fromY: { from: "FromPointY", type: "number" },
-          toX: { from: "ToPointX", type: "number" },
-          toY: { from: "ToPointY", type: "number" }
-        }
-      }
-    });
+		var connectionsDataSource = new kendo.data.DataSource({
+		//..
+		model: {
+			id: "id",
+			fields: {
+			// This field will not be editable. The default value is true.
+			id: { from: "Id", type: "number", editable: false },
+			from: { from: "FromShapeId", type: "number" },
+			to: { from: "ToShapeId", type: "number" },
+			fromX: { from: "FromPointX", type: "number" },
+			fromY: { from: "FromPointY", type: "number" },
+			toX: { from: "ToPointX", type: "number" },
+			toY: { from: "ToPointY", type: "number" }
+			}
+		}
+		});
 
 1. Enable the insertion of new record by configuring the toolbar. The `createShape` is added by default.
 
-    $("#diagram").kendoDiagram({
-      dataSource: dataSource,
-      connectionsDataSource: connectionsDataSource,
-      editable: {
-        tools: ["createShape", "createConnection"]       
-	  }
-    });
+		$("#diagram").kendoDiagram({
+		dataSource: dataSource,
+		connectionsDataSource: connectionsDataSource,
+		editable: {
+			tools: ["createShape", "createConnection"]       
+		}
+		});
 
 1. Enable the deletion of records by adding a delete tool.
 
-    $("#diagram").kendoDiagram({
-      dataSource: dataSource,
-      connectionsDataSource: connectionsDataSource,
-      editable: {
-        tools: ["delete"]       
-	  }
-    });
+		$("#diagram").kendoDiagram({
+		dataSource: dataSource,
+		connectionsDataSource: connectionsDataSource,
+		editable: {
+			tools: ["delete"]       
+		}
+		});
 
 ## Model Fields
 
