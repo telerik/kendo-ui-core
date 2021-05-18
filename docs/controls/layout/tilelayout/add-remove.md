@@ -110,6 +110,93 @@ The example below demonstrates how you can enable users to remove a tile from th
   </style>
 ```
 
+The following example demonstrates how you can enable users to add a tile to the TileLayout by clicking on a button.
+
+```dojo
+        <base href="https://demos.telerik.com/kendo-ui/tilelayout/reordering">
+
+        <button id="addNew" class="k-button">Add tile</button>
+        <div id="tilelayout"></div>
+
+        <!-- container templates -->
+        <script id="barcelona" type="text/x-kendo-template">
+            <img class="k-card-image" draggable="false" src="../content/web/cards/barcelona.jpg")" />
+        </script>
+        <script id="sofia" type="text/x-kendo-template">
+            <img class="k-card-image" draggable="false" src="../content/web/cards/sofia.jpg")" />
+        </script>
+        <script id="rome" type="text/x-kendo-template">
+            <img class="k-card-image" draggable="false" src="../content/web/cards/rome.jpg")" />
+        </script>
+        <script id="sa" type="text/x-kendo-template">
+            <img class="k-card-image" draggable="false" src="../content/web/cards/south-africa.jpg")" />
+        </script>
+        <script id="sanfran" type="text/x-kendo-template">
+            <img class="k-card-image" draggable="false" src="../content/web/cards/sanfran.jpg")" />
+        </script>
+
+        <script>
+          $("#tilelayout").kendoTileLayout({
+            containers: [{
+              colSpan: 1,
+              rowSpan: 1,
+              header: {
+                text: "Barcelona"
+              },
+              bodyTemplate: kendo.template($("#barcelona").html())
+            }, {
+              colSpan: 1,
+              rowSpan: 1,
+              header: {
+                text: "Sofia"
+              },
+              bodyTemplate: kendo.template($("#sofia").html())
+            }, {
+              colSpan: 1,
+              rowSpan: 1,
+              header: {
+                text: "Rome"
+              },
+              bodyTemplate: kendo.template($("#rome").html())
+            }, {
+              colSpan: 1,
+              rowSpan: 1,
+              header: {
+                text: "South Africa"
+              },
+              bodyTemplate: kendo.template($("#sa").html())
+            }],
+            columns: 2,
+            columnsWidth: 285,
+            rowsHeight: 285,
+            reorderable: true
+          });
+
+          $("#addNew").click(function() {
+            var tileLayout = $("#tilelayout").data("kendoTileLayout");
+            var items = tileLayout.items;
+            var item = {
+              colSpan: 1,
+              rowSpan: 1,
+              header: {
+                text: "San Francisco"
+              },
+              bodyTemplate: kendo.template($("#sanfran").html())
+            };
+
+            items.push(item);
+            tileLayout.setOptions({ containers: items });
+          });
+        </script>
+
+    <style>
+      .k-card-image {
+        width: 285px;
+        height: 189px;
+      }
+    </style>
+```
+
 For a full implementation of the Add/Remove functionality please refer to the official [`Add/Remove demo`](https://demos.telerik.com/kendo-ui/tilelayout/add-remove) page.
 
 

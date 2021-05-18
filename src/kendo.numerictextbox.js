@@ -602,6 +602,12 @@ var __meta__ = { // jshint ignore:line
                 this._numPadDot = false;
             }
 
+            if (this._isPasted) {
+                value = this._parse(value)
+                    .toString()
+                    .replace(POINT, numberFormat[POINT]);
+            }
+
             if (this._numericRegex(numberFormat).test(value) && !minInvalid) {
                 this._oldText = value;
             } else {
@@ -612,6 +618,8 @@ var __meta__ = { // jshint ignore:line
                     this._cachedCaret = null;
                 }
             }
+
+            this._isPasted = false;
         },
 
         _blinkInvalidState: function () {
@@ -671,7 +679,9 @@ var __meta__ = { // jshint ignore:line
             var value = element.value;
             var numberFormat = that._format(that.options.format);
 
-            setTimeout(function() {
+            that._isPasted = true;
+
+           setTimeout(function() {
                 var result = that._parse(element.value);
 
                 if (result === NULL) {

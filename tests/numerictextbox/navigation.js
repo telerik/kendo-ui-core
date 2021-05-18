@@ -105,8 +105,6 @@
             assert.equal(input.val(), "1");
         });
 
-
-
         it("Allow decimal separator '.'", function() {
             var textbox = new NumericTextBox(input);
 
@@ -252,6 +250,48 @@
             setTimeout(function() {
                 assert.equal(textbox.calls("_update"), 0);
                 assert.equal(input.val(), "0.33");
+                done();
+            }, 100);
+        });
+
+        it("Apply pasted value with different decimal separator", function(done) {
+            var textbox = new NumericTextBox(input),
+                textboxEl = textbox.element;
+
+            textboxEl.focus();
+
+            textboxEl.val("3,321");
+
+            textboxEl.trigger("paste", {
+                target: input[0]
+            });
+
+            textboxEl.trigger("input");
+
+            setTimeout(function() {
+                assert.equal(textboxEl.val(), 3321);
+                done();
+            }, 100);
+        });
+
+        it("Apply pasted value with different decimal separator based on culture", function(done) {
+            var textbox = new NumericTextBox(input, {
+                culture: "de-DE"
+            }),
+            textboxEl = textbox.element;
+
+            textboxEl.focus();
+
+            textboxEl.val("1.012,56");
+
+            textboxEl.trigger("paste", {
+                target: input[0]
+            });
+
+            textboxEl.trigger("input");
+
+            setTimeout(function() {
+                assert.equal(textboxEl.val(), "1012,56");
                 done();
             }, 100);
         });
