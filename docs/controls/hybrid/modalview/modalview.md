@@ -4,11 +4,12 @@ page_title: Overview | Hybrid UI ModalView
 description: "Initialize and use the Hybrid UI ModalView widget in the Kendo UI framework."
 slug: overview_hybridmodalview
 position: 1
+component: modal-view
 ---
 
 # ModalView Overview
 
-The [Hybrid UI ModalView widget](http://demos.telerik.com/kendo-ui/m/index#modalview/index) is used to present a self-contained functionality in the context of the current task.
+The [Hybrid UI ModalView widget](https://demos.telerik.com/kendo-ui/m/index#modalview/index) is used to present a self-contained functionality in the context of the current task.
 
 > **Important**
 >
@@ -20,7 +21,7 @@ The Kendo UI mobile Application automatically initializes a mobile ModalView com
 
 The example below demonstrates a ModalView with a header and a footer.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="modalview" data-role="button">Foo</a>
@@ -53,7 +54,7 @@ The widget can be opened when any mobile navigational widget, such as the ListVi
 
 The example below demonstrates how to create a button that opens a ModalView.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="modalview" data-role="button">Foo</a>
@@ -67,7 +68,7 @@ The example below demonstrates how to create a button that opens a ModalView.
 
 The example below demonstrates how to create a button that closes a ModalView.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="modalview" data-role="button">Foo</a>
@@ -91,8 +92,6 @@ The example below demonstrates how to create a button that closes a ModalView.
     </script>
 
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI components and on the ModalView:
 
 * [Hybrid UI ModalView JavaScript API Reference](/api/javascript/mobile/ui/modalview)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

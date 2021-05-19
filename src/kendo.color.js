@@ -1,3 +1,9 @@
+/***********************************************************************
+ * WARNING: this file is auto-generated.  If you change it directly,
+ * your modifications will eventually be lost.  The source code is in
+ * `kendo-drawing` repository, you should make your changes there and
+ * run `src-modules/sync.sh` in this repository.
+ */
 (function(f, define){
     define([ "./kendo.core" ], f);
 })(function(){
@@ -16,7 +22,6 @@
 window.kendo = window.kendo || {};
 
 var Class = kendo.Class;
-var support = kendo.support;
 
 var namedColors = {
     aliceblue: "f0f8ff", antiquewhite: "faebd7", aqua: "00ffff",
@@ -70,16 +75,15 @@ var namedColors = {
     whitesmoke: "f5f5f5", yellow: "ffff00", yellowgreen: "9acd32"
 };
 
-var browser = support.browser;
-var namedColorRegexp = [ "transparent" ];
+var matchNamedColor = function (color) {
+    var colorNames = Object.keys(namedColors);
+    colorNames.push("transparent");
 
-for (var i in namedColors) {
-    if (namedColors.hasOwnProperty(i)) {
-        namedColorRegexp.push(i);
-    }
-}
+    var regexp = new RegExp("^(" + colorNames.join("|") + ")(\\W|$)", "i");
+    matchNamedColor = function (color) { return regexp.exec(color); };
 
-namedColorRegexp = new RegExp("^(" + namedColorRegexp.join("|") + ")(\\W|$)", "i");
+    return regexp.exec(color);
+};
 
 var BaseColor = Class.extend({
     init: function() {  },
@@ -100,9 +104,6 @@ var BaseColor = Class.extend({
     },
 
     toDisplay: function() {
-        if (browser.msie && browser.version < 9) {
-            return this.toCss(); // no RGBA support; does it support any opacity in colors?
-        }
         return this.toCssRgba();
     },
 
@@ -200,13 +201,9 @@ var RGB = BaseColor.extend({
                 case b: h = (r - g) / d + 4; break;
                 default: break;
             }
-
-            h *= 60;
-            s *= 100;
-            l *= 100;
         }
 
-        return new HSL(h, s, l, this.a);
+        return new HSL(h * 60, s * 100, l * 100, this.a);
     },
 
     toBytes: function() {
@@ -312,19 +309,14 @@ var HSL = BaseColor.extend({
     },
 
     toRGB: function() {
-        var ref = this;
-        var h = ref.h;
-        var s = ref.s;
-        var l = ref.l;
+        var h = this.h / 360;
+        var s = this.s / 100;
+        var l = this.l / 100;
         var r, g, b;
 
         if (s === 0) {
             r = g = b = l; // achromatic
         } else {
-            h /= 360;
-            s /= 100;
-            l /= 100;
-
             var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
             var p = 2 * l - q;
             r = hue2rgb(p, q, h + 1 / 3);
@@ -382,7 +374,7 @@ function parseColor(value, safe) {
     }
 
     var color = value.toLowerCase();
-    if ((m = namedColorRegexp.exec(color))) {
+    if ((m = matchNamedColor(color))) {
         if (m[1] === "transparent") {
             color = new RGB(1, 1, 1, 0);
         } else {
@@ -425,6 +417,8 @@ function parseColor(value, safe) {
 
     return ret;
 }
+
+var DARK_TRESHOLD = 180;
 
 var Color = Class.extend({
     init: function(value) {
@@ -504,6 +498,10 @@ var Color = Class.extend({
 
     percBrightness: function() {
         return Math.sqrt(0.241 * this.r * this.r + 0.691 * this.g * this.g + 0.068 * this.b * this.b);
+    },
+
+    isDark: function() {
+        return this.percBrightness() < DARK_TRESHOLD;
     }
 });
 
@@ -552,6 +550,7 @@ Color.namedColors = namedColors;
 
 kendo.deepExtend(kendo, {
     parseColor: parseColor,
+    namedColors: namedColors,
     Color: Color
 });
 

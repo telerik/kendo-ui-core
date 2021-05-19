@@ -4,16 +4,14 @@ page_title: 2013 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2013."
 previous_url: /backwards-compatibility/2013/2013-backward-compatibility
 slug: breakingchanges2013_kendoui
-position: 5
+position: 9
 ---
 
 # 2013 Releases
 
+This article lists the breaking changes in the Kendo UI 2013 releases.
+
 ## Kendo UI 2013 Q3
-
-### Changes from 2013 Q2 SP1 (2013.2.918)
-
-#### Breaking Changes
 
 **Core**
 
@@ -21,7 +19,7 @@ The `kendo.support.pointers` now only shows support for Internet Explorer (IE) 1
 
 **Splitter**
 
-* The internal `trigger("resize")` method, which has been provided as a workaround in certain scenarios, no longer works. It is now replaced with the [`resize()`]({% slug responsivewebdesign_integration_kendoui %}) public API method, which is now available in all Kendo UI widgets. For more information, refer to [`kendo.resize()`](/api/javascript/kendo#methods-resize).
+* The internal `trigger("resize")` method, which has been provided as a workaround in certain scenarios, no longer works. It is now replaced with the [`resize()`]({% slug responsivewebdesign_integration_kendoui %}) public API method, which is now available in all Kendo UI widgets. For more information, refer to [`kendo.resize()`](/api/javascript/kendo/methods/resize).
 
 * The `layoutChange` event is now obsolete and will be removed in the future. Use the `resize` event instead.
 
@@ -31,17 +29,17 @@ The `"ISchedulerEvent"` interface now includes two additional fields&mdash;`Star
 
 **Scheduler**
 
-Changes in the `recurrenceEditor` messages:  
+Changes in the `recurrenceEditor` messages:
 
- -  `daily.days` becomes `daily.interval`.  
- -  `weekly.weeks` becomes `weekly.interval`.  
- -  `monthly.months` becomes `monthly.interval`.  
- -  `yearly.years` becomes `yearly.interval`.  
- -  `end.endLabel` becomes `end.label`.  
- -  `end.endNever` becomes `end.never`.  
- -  `end.endCountAfter` becomes `end.after`.  
- -  `end.endCountOccurrence` becomes `end.occurrence`.  
- -  `end.endUntilOn` becomes `end.on`.  
+ -  `daily.days` becomes `daily.interval`.
+ -  `weekly.weeks` becomes `weekly.interval`.
+ -  `monthly.months` becomes `monthly.interval`.
+ -  `yearly.years` becomes `yearly.interval`.
+ -  `end.endLabel` becomes `end.label`.
+ -  `end.endNever` becomes `end.never`.
+ -  `end.endCountAfter` becomes `end.after`.
+ -  `end.endCountOccurrence` becomes `end.occurrence`.
+ -  `end.endUntilOn` becomes `end.on`.
 
 **MVC DataSource**
 
@@ -52,10 +50,6 @@ The MVC DataSource transport now serializes numbers based on the used Kendo UI c
 The ModalView now supports auto-sizing when its content changes and when no height is set. Unfortunately, we were able to implement this at the expense of the possibility to set the ModalView size in a CSS stylesheet. As a workaround, use the ModalView `width` and `height` options or set them through inline CSS instead.
 
 ## Kendo UI 2013 Q2
-
-### Changes from 2013 Q1 SP1 (2013.1.514)
-
-#### Breaking Changes
 
 **Themes**
 
@@ -81,7 +75,7 @@ The icons in the sprite image have been rearranged to include more icons in two 
       });
     ```
 
-* Initializing the editor from a `div` element triggers the [inline editing mode](http://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
+* Initializing the editor from a `div` element triggers the [inline editing mode](https://demos.telerik.com/kendo-ui/web/editor/inline-editing.html). To revert to the old behavior, initialize it from a `<textarea>` element.
 
 **Mobile ListView**
 
@@ -95,7 +89,7 @@ The enabling of the endless scrolling or the press-to-load-more configuration op
 
 1. The `lastPageReached` event is no longer triggered because of the same reasons.
 
-#### Deprecated Functionality
+### Deprecated Functionality
 
 **Editor**
 
@@ -135,10 +129,6 @@ The **formatBlock** and **style** tools have been deprecated in favor of the uni
 
 ## Kendo UI 2013 Q1
 
-### Changes from 2012 Q3 SP1 (2012.3.1315)
-
-#### Breaking Changes
-
 **jQuery**
 
 jQuery is updated to 1.9.1.
@@ -161,8 +151,9 @@ Some ASP.NET MVC applications may be broken if using other libraries incompatibl
 
 ## See Also
 
-Other articles on Kendo UI breaking changes and backwards compatibility:
-
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
+* [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
+* [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2015 Breaking Changes]({% slug breakingchanges2015_kendoui %})

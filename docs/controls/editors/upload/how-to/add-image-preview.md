@@ -12,9 +12,9 @@ Depending on your project, you might need to add an image preview before you upl
 
 The following example demonstrates how to add an image preview and read the file in the `select` event of the Upload.
 
-###### Example
 
-```html
+
+```dojo
 <div id="example">
     <h3>Add image preview before uploading file</h3>
 		<input type="file" id="files">

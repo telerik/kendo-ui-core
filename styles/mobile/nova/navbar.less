@@ -1,7 +1,7 @@
 @import "../common/navbar.less";
 @import "base.less";
 
-/* NavBar */
+// NavBar
 .km-nova .km-navbar .km-no-title {
     padding-top: .45rem;
     padding-bottom: .45rem;
@@ -47,7 +47,7 @@
     display: inline-block;
 }
 
-/* NavBar with title and ButtonGroup */
+// NavBar with title and ButtonGroup
 .km-nova .km-navbar .km-buttongroup {
     margin: 0;
 }
@@ -106,7 +106,7 @@
     right: 0;
 }
 
-/* iOS 7 transitions styles */
+// iOS 7 transitions styles
 .km-nova.k-fx-slide {
     &.k-fx-end .k-fx-next .km-view-title,
     &.k-fx-end .k-fx-next .km-leftitem,
@@ -116,7 +116,7 @@
         .transition(all @duration ease-out);
     }
 
-    /* left */
+    // left
     &.k-fx-start .k-fx-next .km-view-title {
         .transform(translatex(100%));
     }
@@ -134,7 +134,7 @@
         .transform(translatex(-100%));
     }
 
-    /* left reverse */
+    // left reverse
     &.k-fx-reverse {
         &.k-fx-start .k-fx-next .km-leftitem {
             .transform(translatex(-100%));
@@ -162,9 +162,9 @@
         }
     }
 
-    /* right */
+    // right
     &.k-fx-right {
-        /* left */
+        // left
         &.k-fx-start .k-fx-next .km-view-title {
             .transform(translatex(-100%));
         }
@@ -181,7 +181,7 @@
             .transform(translatex(100%));
         }
 
-        /* right reverse */
+        // right reverse
         &.k-fx-reverse {
             &.k-fx-start .k-fx-next .km-leftitem {
                 .transform(translatex(100%));

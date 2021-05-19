@@ -9,86 +9,86 @@
         element.data("kendoDraggable").trigger(type, e);
     }
 
-    module("Sortable - placeholder and hint customization", {
-        setup: function() {
-            QUnit.fixture.append(
+    describe("Sortable - placeholder and hint customization", function() {
+        beforeEach(function() {
+            Mocha.fixture.append(
                 '<ul id="sortable">' +
-                    '<li>foo</li>' +
-                    '<li>bar</li>' +
-                    '<li>baz</li>' +
-                    '<li>qux</li>' +
+                '<li>foo</li>' +
+                '<li>bar</li>' +
+                '<li>baz</li>' +
+                '<li>qux</li>' +
                 '</ul>'
             );
 
             element = $("#sortable");
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("hint can be initialized as jQuery object", 1, function() {
-        var draggedElement = element.children().eq(0),
-            draggableOffset = kendo.getOffset(draggedElement);
-
-        element.kendoSortable({
-            hint: $("<li class='hint'>hint</li>")
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, 100, 100);
+        it("hint can be initialized as jQuery object", function() {
+            var draggedElement = element.children().eq(0),
+                draggableOffset = kendo.getOffset(draggedElement);
 
-        equal($(".hint").length, 1, "Hint is initialized");
-    });
+            element.kendoSortable({
+                hint: $("<li class='hint'>hint</li>")
+            });
 
-    test("placeholder can be initialized as jQuery object", 1, function() {
-        var draggedElement = element.children().eq(0),
-            draggableOffset = kendo.getOffset(draggedElement);
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, 100, 100);
 
-        element.kendoSortable({
-            placeholder: $("<li class='placeholder'>placeholder</li>")
+            assert.equal($(".hint").length, 1, "Hint is initialized");
         });
 
-        press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, 100, 100);
+        it("placeholder can be initialized as jQuery object", function() {
+            var draggedElement = element.children().eq(0),
+                draggableOffset = kendo.getOffset(draggedElement);
 
-        equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
-    });
+            element.kendoSortable({
+                placeholder: $("<li class='placeholder'>placeholder</li>")
+            });
 
-    test("hint can be initialized as function and is run when user moves an item", 2, function() {
-        var draggedElement = element.children().eq(0),
-            draggableOffset = kendo.getOffset(draggedElement);
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, 100, 100);
 
-        element.kendoSortable({
-            hint: function(element) {
-                ok(element[0] == $("#sortable").children()[0], "hint function received the correct argument");
-
-                return element.clone().addClass('hint');
-            }
+            assert.equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
         });
 
-        press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, 100, 100);
+        it("hint can be initialized as function and is run when user moves an item", function() {
+            var draggedElement = element.children().eq(0),
+                draggableOffset = kendo.getOffset(draggedElement);
 
-        equal($(".hint").length, 1, "Hint is appended to the DOM");
-    });
+            element.kendoSortable({
+                hint: function(element) {
+                    assert.isOk(element[0] == $("#sortable").children()[0], "hint function received the correct argument");
 
-    test("Placeholder can be initialized as function and is run when user moves an item", 2, function() {
-        var draggedElement = element.children().eq(0),
-            draggableOffset = kendo.getOffset(draggedElement);
+                    return element.clone().addClass('hint');
+                }
+            });
 
-        element.kendoSortable({
-            placeholder: function(element) {
-                ok(element[0] == $("#sortable").children()[0], "Placeholder function received the correct argument");
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, 100, 100);
 
-                return element.clone().addClass('placeholder');
-            }
+            assert.equal($(".hint").length, 1, "Hint is appended to the DOM");
         });
 
-        press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, 100, 100);
+        it("Placeholder can be initialized as function and is run when user moves an item", function() {
+            var draggedElement = element.children().eq(0),
+                draggableOffset = kendo.getOffset(draggedElement);
 
-        equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
+            element.kendoSortable({
+                placeholder: function(element) {
+                    assert.isOk(element[0] == $("#sortable").children()[0], "Placeholder function received the correct argument");
+
+                    return element.clone().addClass('placeholder');
+                }
+            });
+
+            press(draggedElement, draggableOffset.left, draggableOffset.top);
+            move(draggedElement, 100, 100);
+
+            assert.equal(element.find(".placeholder").length, 1, "Placeholder is appended to the sortable container");
+        });
+
     });
-
-})();
+}());

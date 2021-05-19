@@ -223,6 +223,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Exibir linhas com valores que",
+  "title": "Exibir linhas com valores que",
   "isTrue": "É verdade",
   "isFalse": "É falso",
   "filter": "Filtrar",
@@ -398,6 +399,26 @@ $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "Todos",
+  "display": "Exibindo itens {0} - {1} de {2}",
+  "empty": "Nenhum registro encontrado.",
+  "page": "Página",
+  "of": "de {0}",
+  "itemsPerPage": "itens por página",
+  "first": "Ir para a primeira página",
+  "previous": "Ir para a página anterior",
+  "next": "Ir para a próxima página",
+  "last": "Ir para a última página",
+  "refresh": "Atualizar",
+  "morePages": "Mais páginas"
+});
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "Todos",
   "display": "Exibindo itens {0} - {1} de {2}",
   "empty": "Nenhum registro encontrado.",
@@ -700,13 +721,6 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "typeMessage": "Escreva a mensagem"
     }
   },
-  "saveAsDialog": {
-    "title": "Salvar como...",
-    "labels": {
-      "fileName": "Nome do arquivo",
-      "saveAsType": "Salvar como tipo"
-    }
-  },
   "exportAsDialog": {
     "title": "Exportar...",
     "labels": {
@@ -910,18 +924,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
       "excel": "Exportar para Excel",
       "pdf": "Exportar para PDF"
   }
-});
-}
-
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Escolher colunas",
-        "filter": "Aplicar filtro",
-        "sortAscending": "Classificar (asc)",
-        "sortDescending": "Classificar (desc)"
-    }
 });
 }
 

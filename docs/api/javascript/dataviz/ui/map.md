@@ -3,6 +3,7 @@ title: Map
 page_title: Configuration, methods and events of Kendo UI DataViz Map
 description: Learn how to configure Kendo UI Javascript chart widget in a few easy steps, use and change methods and events.
 res_type: api
+component: map
 ---
 
 # kendo.dataviz.ui.Map
@@ -242,7 +243,7 @@ The default marker shape for all marker layers. The following pre-defined marker
 * pin
 
 Marker shapes are implemented as CSS classes on the marker element (span.k-marker).
-For example "pinTarget" is rendered as "k-marker-pin-target".
+For example "pinTarget" is rendered as "k-i-marker-pin-target".
 
 #### Example - setting default marker shape
     <div id="map"></div>
@@ -600,7 +601,7 @@ versions, so it is advisable to always use the [iframe configuration option](#if
                 marker: {
                     tooltip: {
                           content: {
-                            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                           },
                           width: 220,
                           height: 280
@@ -716,7 +717,7 @@ Explicitly states whether content iframe should be created.
                     tooltip: {
                           iframe: true,
                           content: {
-                            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                           },
                           width: 220,
                           height: 280
@@ -1806,7 +1807,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](#configuration-layers-tile-subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map/configuration/layers.subdomains)
 
 #### Example - set default URL template for all tile layers
     <div id="map"></div>
@@ -2234,7 +2235,7 @@ The culture to be used for the bing map tiles.
 The data item field which contains the marker (symbol) location.
 The field should be an array with two numbers - latitude and longitude in decimal degrees.
 
-Requires the [dataSource](#configuration-layers-dataSource) option to be set.
+Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-dataSource) option to be set.
 
 Only applicable to "marker" and "bubble" layers.
 
@@ -2289,7 +2290,7 @@ The size of the image tile in pixels.
 ### layers.titleField `String` *(default: "title")*
 
 The data item field which contains the marker title.
-Requires the [dataSource](#configuration-layers-dataSource) option to be set.
+Requires the [dataSource](/api/javascript/dataviz/ui/map#configuration-layers-dataSource) option to be set.
 
 #### Example - bind marker title
     <div id="map"></div>
@@ -2593,7 +2594,7 @@ versions, so it is advisable to always use the [iframe configuration option](#if
                 type: "marker",
                 tooltip: {
                       content: {
-                        url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                        url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                       },
                       width: 220,
                       height: 280
@@ -2695,7 +2696,7 @@ Explicitly states whether content iframe should be created.
                 tooltip: {
                       iframe: true,
                       content: {
-                        url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                        url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                       },
                       width: 220,
                       height: 280
@@ -2877,7 +2878,7 @@ The minimum symbol size for bubble layer symbols.
         });
     </script>
 
-### layers.maxZoom
+### layers.maxZoom `Number`
 
 The maximum zoom level at which to show this layer.
 
@@ -2901,7 +2902,7 @@ The maximum zoom level at which to show this layer.
         });
     </script>
 
-### layers.minZoom
+### layers.minZoom `Number`
 
 The minimum zoom level at which to show this layer.
 
@@ -3305,7 +3306,7 @@ The URL template for tile layers. Template variables:
 * x - X coordinate of the tile
 * y - Y coordinate of the tile
 * zoom - zoom level
-* subdomain - Subdomain for this tile. See [subdomains](#configuration-layers-tile-subdomains)
+* subdomain - Subdomain for this tile. See [subdomains](/api/javascript/dataviz/ui/map/configuration/layers.subdomains)
 
 #### Example - setting URL template for tile layer
     <div id="map"></div>
@@ -3762,7 +3763,7 @@ versions, so it is advisable to always use the [iframe configuration option](#if
             markerDefaults: {
                 tooltip: {
                       content: {
-                        url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                        url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                       },
                       width: 220,
                       height: 280
@@ -3853,7 +3854,7 @@ Explicitly states whether content iframe should be created.
                 tooltip: {
                       iframe: true,
                       content: {
-                        url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                        url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                       },
                       width: 220,
                       height: 280
@@ -4372,7 +4373,7 @@ versions, so it is advisable to always use the [iframe configuration option](#if
                 location: [42, 27],
                 tooltip: {
                       content: {
-                        url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                        url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                       },
                       width: 220,
                       height: 280
@@ -4451,7 +4452,7 @@ Explicitly states whether content iframe should be created.
                 tooltip: {
                       iframe: true,
                       content: {
-                        url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+                        url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
                       },
                       width: 220,
                       height: 280
@@ -4581,7 +4582,7 @@ The event on which the tooltip will be shown. Predefined values are "mouseenter"
 The minimum zoom level.
 Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
 
-> The map [zoom](#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
+> The map [zoom](/api/javascript/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
 
 #### Example - limit zoom out to level 3
     <div id="map"></div>
@@ -4602,7 +4603,7 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
 The maximum zoom level.
 Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
 
-> The map [zoom](#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
+> The map [zoom](/api/javascript/dataviz/ui/map#configuration-zoom) is clamped to the [minZoom, maxZoom] interval.
 
 #### Example - limit zoom in to level 10
     <div id="map"></div>
@@ -4829,6 +4830,7 @@ The DOM or jQuery mouse event.
         var map = $("#map").data("kendoMap");
         $("#map").click(function(e) {
             var proj = map.eventToLayer(e);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Projected coordinates: ", proj.toString());
         });
     </script>
@@ -4875,7 +4877,7 @@ The DOM or jQuery mouse event.
 Retrieves relative (view) coordinates that correspond to this mouse event.
 Layer elements positioned on these coordinates will appear under the mouse cursor.
 
-View coordinates are no longer valid after a map [reset](#events-reset).
+View coordinates are no longer valid after a map [reset](/api/javascript/dataviz/ui/map/events/reset).
 
 #### Parameters
 
@@ -5002,6 +5004,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
 
         var map = $("#map").data("kendoMap");
         var loc = map.layerToLocation([0, 0]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // -180.000000,85.000000
     </script>
@@ -5021,6 +5024,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
         var map = $("#map").data("kendoMap");
         var point = new kendo.geometry.Point(0, 0);
         var loc = map.layerToLocation(point).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // -180.000000,85.000000
     </script>
@@ -5058,6 +5062,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
 
         var map = $("#map").data("kendoMap");
         var point = map.locationToLayer([0, 0]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(point.toString());
         // 256,256
     </script>
@@ -5077,6 +5082,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
         var map = $("#map").data("kendoMap");
         var loc = new kendo.dataviz.map.Location(0, 0);
         var point = map.locationToLayer(loc).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(point.toString());
         // 256,256
     </script>
@@ -5111,6 +5117,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
 
         var map = $("#map").data("kendoMap");
         var view = map.locationToView([0, 0]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.toString());
         // 512,512
     </script>
@@ -5131,6 +5138,7 @@ An array argument is assumed to be in [Latitude, Longitude] order.
         var map = $("#map").data("kendoMap");
         var loc = new kendo.dataviz.map.Location(0, 0);
         var view = map.locationToView(loc).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(view.toString());
         // 512,512
     </script>
@@ -5213,6 +5221,7 @@ Retrieves the size of the visible portion of the map.
 
         var map = $("#map").data("kendoMap");
         var viewSize = map.viewSize();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(viewSize);
         // { width: 1024, height: 512 }
     </script>
@@ -5251,6 +5260,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
 
         var map = $("#map").data("kendoMap");
         var loc = map.viewToLocation([512, 512]).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // 0.000000,0.000000
     </script>
@@ -5271,6 +5281,7 @@ Optional. Assumed zoom level. Defaults to the current zoom level.
         var map = $("#map").data("kendoMap");
         var view = new kendo.geometry.Point(512, 512);
         var loc = map.viewToLocation(view).round();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(loc.toString());
         // 0.000000,0.000000
     </script>
@@ -5285,7 +5296,7 @@ The setter is chainable, i.e. returns the map instance.
 ##### level `Number`
 
 The new zoom level. The value is clamped to the
- [[minZoom](#configuration-minZoom), [maxZoom](#configuration-maxZoom)] interval.
+ [[minZoom](/api/javascript/dataviz/ui/map#configuration-minZoom), [maxZoom](/api/javascript/dataviz/ui/map#configuration-maxZoom)] interval.
 
 #### Returns
 
@@ -5376,6 +5387,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("click", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("You clicked at " + e.location.toString());
         });
     </script>
@@ -5426,7 +5438,7 @@ The source widget instance.
 Fired when a marker has been created and is about to be displayed.
 Cancelling the event will prevent the marker from being shown.
 
-Use [markerActivate](#events-markerActivate) if you need to access the marker DOM element.
+Use [markerActivate](/api/javascript/dataviz/ui/map/events/markeractivate) if you need to access the marker DOM element.
 
 > Markers are automatically created for GeoJSON Point geometries. If the markerCreated event is cancelled a regular shape (circle) will be created instead.
 
@@ -5519,6 +5531,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             pan: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("pan to " + e.center.toString());
             }
         });
@@ -5539,6 +5552,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("pan", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pan to " + e.center.toString());
         });
     </script>
@@ -5577,6 +5591,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             panEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("pan ended at " + e.center.toString());
             }
         });
@@ -5597,6 +5612,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("panEnd", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pan ended at " + e.center.toString());
         });
     </script>
@@ -5624,6 +5640,7 @@ The source widget instance.
                 attribution: "&copy; OpenStreetMap"
             }],
             reset: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("map reset");
             }
         });
@@ -5644,6 +5661,7 @@ The source widget instance.
 
         var map = $("#map").data("kendoMap");
         map.bind("reset", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("map reset");
         });
     </script>
@@ -5682,6 +5700,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             shapeClick: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("shape clicked");
             }
         });
@@ -5702,6 +5721,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("shapeClick", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("shape clicked");
         });
     </script>
@@ -5760,6 +5780,7 @@ The source jQuery event instance
       });
 
       function onShapeCreated(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("shape created: ", e.shape.dataItem.properties.name);
       }
     </script>
@@ -5822,6 +5843,7 @@ The source widget instance.
       });
 
       function onShapeFeatureCreated(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("feature created: ", e.properties.name);
       }
     </script>
@@ -5882,6 +5904,7 @@ The source jQuery event instance
               }
             }],
             shapeMouseEnter: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("shape mouseenter");
             }
         });
@@ -5919,6 +5942,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("shapeMouseEnter", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("shape mouseenter");
         });
     </script>
@@ -6017,6 +6041,7 @@ The source jQuery event instance
               }
             }],
             shapeMouseLeave: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("shape mouseleave");
             }
         });
@@ -6054,6 +6079,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("shapeMouseLeave", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("shape mouseleave");
         });
     </script>
@@ -6085,6 +6111,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomStart: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("zoom start");
             }
         });
@@ -6105,6 +6132,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("zoomStart", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("zoom start");
         });
     </script>
@@ -6152,6 +6180,7 @@ The source jQuery event instance
                 attribution: "&copy; OpenStreetMap"
             }],
             zoomEnd: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("zoom end @ " + e.sender.zoom());
             }
         });
@@ -6172,6 +6201,7 @@ The source jQuery event instance
 
         var map = $("#map").data("kendoMap");
         map.bind("zoomEnd", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("zoom end @ " + e.sender.zoom());
         });
     </script>

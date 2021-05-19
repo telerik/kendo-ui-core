@@ -8,11 +8,11 @@ position: 6
 
 # Sheets
 
-To create multiple sheets in an Excel workbook, use the [`sheets`](/api/javascript/ooxml/workbook#configuration-sheets) option, as demonstrated in the example below. Every item from that array represents a new sheet with its own rows and cells.
+To create multiple sheets in an Excel workbook, use the [`sheets`](/api/javascript/ooxml/workbook/configuration/sheets) option.
 
-###### Example
+Every item from that array represents a new sheet with its own rows and cells.
 
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -81,11 +81,9 @@ kendo.saveAs({
 
 ## See Also
 
-Articles on the Excel export functionality in Kendo UI:
-
 * [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
-* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
-* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
-* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
-* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
-* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})
+* [Customizing the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Freezing Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Setting the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Spanning Cells across Rows and Columns]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Exporting the Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})

@@ -37,8 +37,8 @@
                     names: ["innayr","bṛayṛ","maṛṣ","ibrir","mayyu","yunyu","yulyuz","ɣuct","cutanbir","ktubr","nuwanbir","dujanbir"],
                     namesAbbr: ["inn","bṛa","maṛ","ibr","may","yun","yul","ɣuc","cut","ktu","nuw","duj"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["tifawt","tifawt","TIFAWT"],
+                PM: ["tadggʷat","tadggʷat","TADGGʷAT"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd d MMMM yyyy",
@@ -56,7 +56,7 @@
                 },
                 "/": "/",
                 ":": ":",
-                firstDay: 6
+                firstDay: 1
             }
         }
     }

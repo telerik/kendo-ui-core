@@ -22,8 +22,9 @@
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",
             KICONCLOSE = ".k-dialog-close",
-            KCONTENTCLASS = "k-content k-window-content k-dialog-content",
-            KCONTENT = ".k-content",
+            KCONTENTCLASS = "k-window-content k-dialog-content",
+            KCONTENTSELECTOR = ".k-window-content",
+            KSCROLL = "k-scroll",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
             KDIALOGTITLEBAR = KDIALOGTITLE + "bar",
@@ -38,12 +39,21 @@
             ZINDEX = "zIndex",
             BODY = "body",
             INITOPEN = "initOpen",
+            TOUCHSTART = "touchstart",
+            TOUCHMOVE = "touchmove",
             OPEN = "open",
             CLOSE = "close",
             SHOW = "show",
             HIDE = "hide",
-            WIDTH = "width",
-            HUNDREDPERCENT = 100,
+            SIZE = {
+                small: "k-window-sm",
+                medium: "k-window-md",
+                large: "k-window-lg"
+            },
+            HIDDEN = "hidden",
+            OVERFLOW = "overflow",
+            DATADOCOVERFLOWRULE = "original-overflow-rule",
+            DATAHTMLTAPYRULE = "tap-y",
             messages = {
                 okText  : "OK",
                 cancel : "Cancel",
@@ -103,24 +113,48 @@
                 if (!that.options.visible) {
                     that.wrapper.hide();
                 } else {
-                    that.toFront();
-                    that._triggerInitOpen();
-                    that.trigger(OPEN);
-                    if (options.modal) {
-                        that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
-                        that._focusDialog();
-                    }
+                    that._triggerOpen();
+                }
+            },
+
+            setOptions: function(options) {
+                var that = this;
+                var sizeClass = that.options.size;
+
+                options = $.extend(that.options, options);
+
+                Widget.fn.setOptions.call(that, options);
+
+                if (options.title !== undefined) {
+                    that.title(options.title);
                 }
 
-                if (options.closable) {
-                    wrapper.autoApplyNS(NS);
-                    element.autoApplyNS(NS);
+                if (options.content) {
+                    kendo.destroy(that.element.children());
+                    that.element.html(options.content);
+                }
 
-                    wrapper.find(KICONCLOSE)
-                        .on("click", proxy(that._closeClick, that))
-                        .on("keydown", proxy(that._closeKeyHandler, that));
+                if (options.actions) {
+                    that.wrapper.children(KBUTTONGROUP).remove();
+                    that._createActionbar(that.wrapper);
+                }
 
-                    element.on("keydown", proxy(that._keydown, that));
+                that.wrapper.show();
+                that._closable(that.wrapper);
+
+                that.wrapper.removeClass(SIZE[sizeClass]);
+                that._dimensions();
+
+                if (!options.visible) {
+                    that.wrapper.hide();
+                } else {
+                    that._triggerOpen();
+                }
+
+                if (typeof options.modal !== "undefined") {
+                    var visible = that.options.visible !== false;
+                    that._enableDocumentScrolling();
+                    that._overlay(options.modal && visible);
                 }
             },
 
@@ -130,6 +164,7 @@
                     options = that.options,
                     width = options.width,
                     height = options.height,
+                    sizeClass = options.size,
                     dimensions = ["minWidth", "minHeight", "maxWidth", "maxHeight"];
 
                 for (var i = 0; i < dimensions.length; i++) {
@@ -145,7 +180,7 @@
                     if (width.toString().indexOf("%") > 0) {
                         wrapper.width(width);
                     } else {
-                        wrapper.width(constrain(width, options.minWidth, options.maxWidth));
+                        wrapper.outerWidth(constrain(width, options.minWidth, options.maxWidth));
                     }
                 }
 
@@ -153,10 +188,14 @@
                     if (height.toString().indexOf("%") > 0) {
                         wrapper.height(height);
                     } else {
-                        wrapper.height(constrain(height, options.minHeight, options.maxHeight));
+                        wrapper.outerHeight(constrain(height, options.minHeight, options.maxHeight));
                     }
 
                     this._setElementHeight();
+                }
+
+                if (sizeClass && SIZE[sizeClass]) {
+                    wrapper.addClass(SIZE[sizeClass]);
                 }
             },
 
@@ -164,47 +203,45 @@
                 var that = this,
                     element = that.element,
                     maxHeight = that.options.maxHeight,
-                    paddingBox,
                     elementMaxHeight;
 
                 if (maxHeight != Infinity) {
-                    paddingBox = that._paddingBox(element);
-                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight() - paddingBox.vertical;
+                    elementMaxHeight = parseFloat(maxHeight, 10) - that._uiHeight();
                     if (elementMaxHeight > 0) {
                         element.css({
-                            maxHeight: ceil(elementMaxHeight) + "px",
-                            overflow: "hidden"
+                            maxHeight: ceil(elementMaxHeight) + "px"
                         });
                     }
                 }
 
             },
 
-            _paddingBox: function(element) {
-                var paddingTop = parseFloat(element.css("padding-top"), 10),
-                    paddingLeft = parseFloat(element.css("padding-left"), 10),
-                    paddingBottom = parseFloat(element.css("padding-bottom"), 10),
-                    paddingRight = parseFloat(element.css("padding-right"), 10);
-
-                return {
-                    vertical: paddingTop + paddingBottom,
-                    horizontal: paddingLeft + paddingRight
-                };
-            },
-
             _setElementHeight: function() {
                 var that = this,
                     element = that.element,
-                    height = that.options.height,
-                    paddingBox = that._paddingBox(element),
-                    elementHeight = parseFloat(height, 10) - that._uiHeight() - paddingBox.vertical;
+                    height = that.wrapper.outerHeight(true),
+                    elementHeight = parseFloat(height, 10) - that._uiHeight();
 
-                if (elementHeight > 0) {
-                    that.element.css({
-                        height: ceil(elementHeight) + "px",
-                        overflow: "hidden"
-                    });
+                if (elementHeight < 0) {
+                    elementHeight = 0;
                 }
+
+                element.css({
+                    height: ceil(elementHeight) + "px"
+                });
+
+                this._applyScrollClassName(element);
+
+            },
+
+            _applyScrollClassName: function(element) {
+                    var hasScroll = element.get(0).scrollHeight > element.outerHeight();
+
+                    if (hasScroll){
+                        element.addClass(KSCROLL);
+                    } else {
+                        element.removeClass(KSCROLL);
+                    }
             },
 
             _uiHeight: function() {
@@ -239,6 +276,10 @@
                     this._removeWaiAriaOverlay();
                 }
 
+                if (this.options.modal.preventScroll) {
+                    this._stopDocumentScrolling();
+                }
+
                 return overlay;
             },
 
@@ -268,12 +309,12 @@
 
             _closeClick: function(e) {
                 e.preventDefault();
-                this.close();
+                this.close(false);
             },
 
             _closeKeyHandler: function(e) {
                 if (buttonKeyTrigger(e) || e.keyCode == keys.ESC) {
-                    this.close();
+                    this.close(false);
                 }
             },
 
@@ -283,7 +324,7 @@
                     keyCode = e.keyCode;
 
                 if (keyCode == keys.ESC && !that._closing && options.closable) {
-                    that.close();
+                    that.close(false);
                 }
             },
 
@@ -293,7 +334,6 @@
                     options = that.options,
                     isRtl = kendo.support.isRtl(content),
                     titlebar = $(templates.titlebar(options)),
-                    titlebarActions = titlebar.find(".k-window-actions"),
                     titleId = (content.id || kendo.guid()) + "_title",
                     wrapper = $(that.wrapperTemplate(options));
 
@@ -302,15 +342,6 @@
                 content.addClass(KCONTENTCLASS);
                 that.appendTo.append(wrapper);
 
-                if (options.closable !== false) {
-                    if (options.title !== false) {
-                        titlebarActions.append(templates.close(options));
-                    }
-                    else {
-                        wrapper.append(templates.close(options));
-                    }
-                }
-
                 if (options.title !== false) {
                     wrapper.append(titlebar);
                     titlebar.attr("id", titleId);
@@ -318,6 +349,8 @@
                 } else {
                     wrapper.addClass(KTITLELESS);
                 }
+
+                that._closable(wrapper);
 
                 wrapper.append(content);
 
@@ -331,59 +364,70 @@
                 }
             },
 
+            _closable: function (wrapper) {
+                var that = this;
+                var options = that.options;
+                var titlebar = wrapper.children(KDIALOGTITLEBAR);
+                var titlebarActions = titlebar.find(".k-window-actions");
+                var closeAction = titlebarActions.length ? titlebarActions.find(".k-dialog-close") : wrapper.find(".k-dialog-close");
+
+                closeAction.remove();
+
+                if (options.closable !== false) {
+                    if (options.title !== false && titlebarActions.length) {
+                        titlebarActions.append(templates.close(options));
+                    }
+                    else {
+                        wrapper.prepend(templates.close(options));
+                    }
+
+                    wrapper.autoApplyNS(NS);
+                    that.element.autoApplyNS(NS);
+
+                    wrapper.find(KICONCLOSE)
+                        .on("click", proxy(that._closeClick, that))
+                        .on("keydown", proxy(that._closeKeyHandler, that));
+
+                    that.element.on("keydown", proxy(that._keydown, that));
+                }
+            },
+
             _createActionbar: function(wrapper) {
                 var isStretchedLayout = (this.options.buttonLayout === "stretched");
                 var buttonLayout = isStretchedLayout ? "stretched" : "normal";
                 var actionbar = $(templates.actionbar({ buttonLayout: buttonLayout }));
+
                 this._addButtons(actionbar);
-                if(isStretchedLayout) {
-                    this._normalizeButtonSize(actionbar);
-                }
                 wrapper.append(actionbar);
             },
 
             _addButtons: function(actionbar) {
                 var that = this,
-                    o = that.options,
                     actionClick = proxy(that._actionClick, that),
                     actionKeyHandler = proxy(that._actionKeyHandler, that),
                     actions = that.options.actions,
                     length = actions.length,
-                    buttonSize = HUNDREDPERCENT / length,
                     action,
                     text;
 
                 for (var i = 0; i < length; i++) {
                     action = actions[i];
                     text = that._mergeTextWithOptions(action);
-                    var btn = $(templates.action(action))
+
+                    $(templates.action(action))
                         .autoApplyNS(NS)
                         .html(text)
                         .appendTo(actionbar)
+                        .addClass(action.cssClass)
                         .data("action", action.action)
                         .on("click", actionClick)
                         .on("keydown", actionKeyHandler);
-                    if(o.buttonLayout === "stretched") {
-                        btn.css(WIDTH, buttonSize + "%");
-                    }
                 }
             },
 
             _mergeTextWithOptions : function(action) {
                 var text = action.text;
                 return text ? template(text)(this.options) : "";
-            },
-
-            _normalizeButtonSize: function(actionbar) {
-                var that = this,
-                    options = that.options,
-                    lastButton = actionbar.children(KBUTTON + ":last"),
-                    currentSize = parseFloat(lastButton[0].style[WIDTH]),
-                    difference = HUNDREDPERCENT - (options.actions.length * currentSize);
-
-                if (difference > 0) {
-                    lastButton.css(WIDTH, (currentSize + difference) + "%");
-                }
             },
 
             _tabindex: function(target) {
@@ -401,14 +445,17 @@
             },
 
             _actionClick: function(e) {
-                this._runActionBtn(e.currentTarget);
+                if (this.wrapper.is(VISIBLE)) {
+                    this._runActionBtn(e.currentTarget);
+                }
             },
 
             _actionKeyHandler: function(e) {
                 if (buttonKeyTrigger(e)) {
+                    e.preventDefault();
                     this._runActionBtn(e.currentTarget);
                 } else if (e.keyCode == keys.ESC) {
-                    this.close();
+                    this.close(false);
                 }
             },
 
@@ -422,7 +469,21 @@
                     preventClose = (isFunction(action) && action({ sender: that }) === false);
 
                 if (!preventClose) {
-                    that.close();
+                    that.close(false);
+                }
+            },
+
+            _triggerOpen: function() {
+                var that = this;
+                var options = that.options;
+                var wrapper = that.wrapper;
+
+                that.toFront();
+                that._triggerInitOpen();
+                that.trigger(OPEN);
+                if (options.modal) {
+                    that._overlay(wrapper.is(VISIBLE)).css({ opacity: 0.5 });
+                    that._focusDialog();
                 }
             },
 
@@ -525,8 +586,12 @@
                 return that;
             },
 
-            close: function() {
-                this._close(true);
+            close: function(systemTriggered) {
+                if(!arguments.length) {
+                    systemTriggered = true;
+                }
+
+                this._close(systemTriggered);
                 this._stopCenterOnResize();
                 return this;
             },
@@ -601,8 +666,94 @@
 
                 if (hideOverlay) {
                     this._overlay(false).remove();
+
+                    if (options.modal.preventScroll) {
+                        this._enableDocumentScrolling();
+                    }
                 } else if (modals.length) {
                     this._object(modals.last())._overlay(true);
+
+                    if (options.modal.preventScroll) {
+                        this._stopDocumentScrolling();
+                    }
+                }
+            },
+
+            _stopDocumentScrolling: function(){
+                var that = this;
+
+                var $body = $("body");
+                that._storeOverflowRule($body);
+                $body.css(OVERFLOW, HIDDEN);
+
+                var $html = $("html");
+                var html = $html[0];
+                that._storeOverflowRule($html);
+                $html.css(OVERFLOW, HIDDEN);
+
+                // prevent touch due to bug in ios
+                if (kendo.support.mobileOS.ios) {
+                    html.addEventListener(TOUCHSTART, that._touchStart, { passive: false });
+                    html.addEventListener(TOUCHMOVE, that._touchMove, { passive: false });
+                }
+            },
+
+            _touchStart: function (e) {
+                $(this).data(DATAHTMLTAPYRULE, e.changedTouches[0].pageY);
+            },
+
+            _touchMove: function (e) {
+                var target = e.target;
+                var $target = $(e.target);
+                var upScroll = e.changedTouches[0].pageY - $(this).data(DATAHTMLTAPYRULE) > 0;
+                var preventYScroll = $target.is(KCONTENTSELECTOR) &&
+                    (upScroll && $target.scrollTop() === 0) ||
+                    (!upScroll && $target.scrollTop() === target.scrollHeight - target.clientHeight);
+                if (!$target.is(KCONTENTSELECTOR) || preventYScroll) {
+                    e.preventDefault();
+                }
+            },
+
+            _enableDocumentScrolling: function(){
+                var that = this;
+                var $body = $(document.body);
+                var $html = $("html");
+                var html = $html[0];
+
+                that._restoreOverflowRule($body);
+                that._restoreOverflowRule($html);
+
+                if (kendo.support.mobileOS.ios) {
+                    $html.removeData(DATAHTMLTAPYRULE);
+                    html.removeEventListener(TOUCHSTART, that._touchStart, { passive: false });
+                    html.removeEventListener(TOUCHMOVE, that._touchMove, { passive: false });
+                }
+            },
+
+            _storeOverflowRule: function($element){
+                if(this._isOverflowStored($element)){
+                    return;
+                }
+
+                var overflowRule = $element.get(0).style.overflow;
+
+                if(typeof overflowRule === "string"){
+                    $element.data(DATADOCOVERFLOWRULE, overflowRule);
+                }
+            },
+
+            _isOverflowStored: function ($element){
+                return typeof $element.data(DATADOCOVERFLOWRULE) === "string";
+            },
+
+            _restoreOverflowRule: function($element){
+                var overflowRule = $element.data(DATADOCOVERFLOWRULE);
+
+                if(overflowRule !== null && overflowRule !== undefined){
+                    $element.css(OVERFLOW, overflowRule);
+                    $element.removeData(DATADOCOVERFLOWRULE);
+                } else {
+                    $element.css(OVERFLOW, "");
                 }
             },
 
@@ -625,11 +776,15 @@
                 var that = this;
 
                 var zStack = $(KWINDOW).filter(function() {
-                    var dom = $(this);
-                    var object = that._object(dom);
-                    var options = object && object.options;
+                    var modal = that._object($(this));
 
-                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
+                    return modal &&
+                        modal.options &&
+                        modal.options.modal &&
+                        modal.options.visible &&
+                        modal.options.appendTo === that.options.appendTo &&
+                        !modal.containment &&
+                        $(modal.element).is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -640,7 +795,7 @@
             },
 
             _object: function(element) {
-                var content = element.children(KCONTENT);
+                var content = element.children(KCONTENTSELECTOR);
                 var widget = kendo.widgetInstance(content);
 
                 if (widget) {
@@ -655,6 +810,8 @@
                 that._destroy();
 
                 Widget.fn.destroy.call(that);
+
+                kendo.destroy(that.wrapper);
 
                 that.wrapper.remove();
                 that.wrapper = that.element = $();
@@ -701,7 +858,7 @@
 
             content: function(html, data) {
                 var that = this,
-                    content = that.wrapper.children(KCONTENT);
+                    content = that.wrapper.children(KCONTENTSELECTOR);
 
                 if (!defined(html)) {
                     return content.html();
@@ -756,6 +913,7 @@
                 buttonLayout: "stretched",
                 actions: [],
                 modal: true,
+                size: "auto",
                 width: null,
                 height: null,
                 minWidth: 0,
@@ -944,21 +1102,21 @@
         };
 
         templates = {
-            wrapper: template("<div class='k-widget k-window k-dialog' role='dialog' />"),
+            wrapper: template("<div class='k-widget k-window k-dialog' role='dialog'></div>"),
             action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
             titlebar: template(
-                "<div class='k-window-titlebar k-dialog-titlebar k-header'>" +
+                "<div class='k-window-titlebar k-dialog-titlebar'>" +
                     "<span class='k-window-title k-dialog-title'>#: title #</span>" +
-                    "<div class='k-window-actions k-dialog-actions' />" +
+                    "<div class='k-window-actions k-dialog-actions'></div>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button k-bare k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
-            actionbar: template("<div class='k-button-group k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar' />"),
-            overlay: "<div class='k-overlay' />",
-            alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog' />"),
-            alert: "<div />",
-            confirm: "<div />",
-            prompt: "<div />",
+            close: template("<a role='button' href='\\#' class='k-button k-flat k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
+            actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar'></div>"),
+            overlay: "<div class='k-overlay'></div>",
+            alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
+            alert: "<div></div>",
+            confirm: "<div></div>",
+            prompt: "<div></div>",
             promptInputContainer: template("<div class='k-prompt-container'><input type='text' class='k-textbox' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
         };
 

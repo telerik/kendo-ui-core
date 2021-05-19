@@ -230,6 +230,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Filter wissen",
   "filter": "Filter",
   "info": "Toon items met waarde:",
+  "title": "Toon items met waarde",
   "isFalse": "is niet waar",
   "isTrue": "is waar",
   "operator": "Operator",
@@ -302,6 +303,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "All",
+  "display": "items {0} - {1} van {2}",
+  "empty": "Geen items om te tonen",
+  "first": "Ga naar eerste pagina",
+  "itemsPerPage": "items per pagina",
+  "last": "Ga naar laatste pagina",
+  "next": "Ga naar volgende pagina",
+  "of": "van {0}",
+  "page": "Pagina",
+  "previous": "Ga naar vorige pagina",
+  "refresh": "Verversen",
+  "morePages": "Meer pagina"
+});
+}
+
 /* Scheduler messages */
 
 if (kendo.ui.Scheduler) {
@@ -356,6 +377,80 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "timeline": "Tijdlijn"
   }
 });
+}
+
+/* FileManager messages */ 
+
+if (kendo.ui.FileManager) {
+  kendo.ui.FileManager.prototype.options.messages = $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
+    "toolbar": {
+      "createFolder": "Nieuwe map",
+      "upload": "Uploaden",
+      "sortDirection": "Sorteer richting",
+      "sortDirectionAsc": "Sorteer richting oplopend",
+      "sortDirectionDesc": "Sorteer richting aflopend",
+      "sortField": "Sorteren op",
+      "nameField": "Naam",
+      "sizeField": "Bestandsgrootte",
+      "typeField": "Type",
+      "dateModifiedField": "Datum gewijzigd",
+      "dateCreatedField": "Datum gecreeërd",
+      "listView": "Lijstweergave",
+      "gridView": "Rasterweergave",
+      "search" : "zoek",
+      "details": "Details bekijken",
+      "detailsChecked": "Aan",
+      "detailsUnchecked": "Uit",
+      "delete": "Verwijderen",
+      "rename": "Naam wijzigen"
+    },
+    "views": {
+      "nameField": "Naam",
+      "sizeField": "Bestandsgrootte",
+      "typeField": "Type",
+      "dateModifiedField": "Datum gewijzigd",
+      "dateCreatedField": "Datum gecreeërd",
+      "items": "Items"
+    },
+    "dialogs": {
+      "upload": {
+        "title": "Bestanden uploaden",
+        "clear": "Lijst wissen",
+        "done": "Klaar"
+      },
+      "moveConfirm": {
+        "title": "Bevestigen",
+        "content": "<p style = 'text-align: center;'> Wilt u verplaatsen of kopiëren? </p>",
+        "okText": "Kopiëren",
+        "cancel": "Annuleren",
+        "close": "Sluiten"
+      },
+      "deleteConfirm": {
+        "title": "Bevestigen",
+        "content": "<p style = 'text-align: center;'> Weet u zeker dat u de geselecteerde bestanden wilt verwijderen? </br> U kunt deze actie niet ongedaan maken. </p>",
+        "okText": "Verwijderen",
+        "cancel": "Annuleren",
+        "close": "Sluiten"
+      },
+      "renamePrompt": {
+        "title": "Bevestigen",
+        "content": "<p style = 'text-align: center;'> Voer een nieuwe naam in voor het bestand. </p>",
+        "okText": "Naam wijzigen",
+        "cancel": "Annuleren",
+        "close": "Sluiten"
+      }
+    },
+    "previewPane": {
+      "noFileSelected": "Geen bestand geselecteerd",
+      "extension": "Type",
+      "size": "Grootte",
+      "created": "Datum gecreeërd",
+      "createdUtc": "Datum gecreeërd UTC",
+      "modified": "datum gewijzigd",
+      "modifiedUtc": "datum gewijzigd UTC",
+      "items": "items"
+    }
+  });
 }
 
 /* Upload messages */

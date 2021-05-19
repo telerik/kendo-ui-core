@@ -26,9 +26,9 @@
         return items;
     }
 
-    module("VirtualList API: ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("VirtualList API: ", function () {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -54,19 +54,18 @@
                 template: "#=text#",
                 dataValueField: "value"
             };
-        },
+        });
 
-        teardown: function() {
+        afterEach(function() {
             if (container.data("kendoVirtualList")) {
                 container.data("kendoVirtualList").destroy();
             }
 
-            QUnit.fixture.empty();
-        }
-    });
+            Mocha.fixture.empty();
+        });
     //events
 
-    asyncTest("widget triggers selectedItemChange event when the selected item has changed (single selection)", 3, function() {
+    it("widget triggers selectedItemChange event when the selected item has changed (single selection)", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             value: [0]
         }));
@@ -74,12 +73,12 @@
         virtualList.one("listBound", function() {
 
             virtualList.one("selectedItemChange", function(e) {
-                start();
                 var items = e.items;
 
-                equal(items.length, 1);
-                equal(items[0].index, 0);
-                equal(items[0].item, this.dataSource.view()[0]);
+                assert.equal(items.length, 1);
+                assert.equal(items[0].index, 0);
+                assert.equal(items[0].item, this.dataSource.view()[0]);
+                done();
             });
 
             virtualList.dataSource.view()[0].set("text", "updated");
@@ -88,7 +87,7 @@
         virtualList.dataSource.read();
     });
 
-    test("widget does not trigger selectedItemChange event when updated item is not updated", 0, function() {
+    it("widget does not trigger selectedItemChange event when updated item is not updated", function() {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             value: [0]
         }));
@@ -96,18 +95,18 @@
         virtualList.one("listBound", function() {
 
             virtualList.one("selectedItemChange", function(e) {
-                ok(false);
+                assert.isOk(false);
             });
 
             virtualList.dataSource.view()[1].set("text", "updated");
 
-            start();
+            done();
         });
 
         virtualList.dataSource.read();
     });
 
-    asyncTest("widget passes only the changed items in the selectedItemChange event (multiple selection)", 3, function() {
+    it("widget passes only the changed items in the selectedItemChange event (multiple selection)", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [0, 1]
@@ -118,20 +117,20 @@
             virtualList.one("selectedItemChange", function(e) {
                 var items = e.items;
 
-                equal(items.length, 1);
-                equal(items[0].index, 1);
-                equal(items[0].item, this.dataSource.view()[1]);
+                assert.equal(items.length, 1);
+                assert.equal(items[0].index, 1);
+                assert.equal(items[0].item, this.dataSource.view()[1]);
             });
 
             virtualList.dataSource.view()[1].set("text", "updated");
 
-            start();
+            done();
         });
 
         virtualList.dataSource.read();
     });
 
-    asyncTest("widget triggers change event if selected item is removed", 1, function() {
+    it("widget triggers change event if selected item is removed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [0]
@@ -140,8 +139,8 @@
         virtualList.one("listBound", function() {
 
             virtualList.one("change", function(e) {
-                start();
-                equal(virtualList.value().length, 0);
+                assert.equal(virtualList.value().length, 0);
+                done();
             });
 
             virtualList.dataSource.remove(virtualList.dataSource.at(0));
@@ -150,51 +149,44 @@
         virtualList.dataSource.read();
     });
 
-    asyncTest("widget does not trigger change event if selected item is not removed", 0, function() {
+    it("widget does not trigger change event if selected item is not removed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [0]
         }));
 
-        virtualList.one("listBound", function() {
-
+        virtualList.dataSource.read().done(function () {
             virtualList.one("change", function(e) {
-                ok(false);
+                assert.isOk(false);
             });
-
             virtualList.dataSource.remove(virtualList.dataSource.at(1));
-
-            setTimeout(function() {
-                start();
-            });
+            done();
         });
-
-        virtualList.dataSource.read();
     });
 
-    asyncTest("fires the itemChange event", 1, function() {
+    it("fires the itemChange event", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             itemChange: function() {
-                start();
-                ok(true, "itemChange event is fired");
+                assert.isOk(true, "itemChange event is fired");
                 this.unbind("itemChange");
+                done();
             }
         }));
         asyncDataSource.read();
     });
 
-    asyncTest("fires the listBound event", 1, function() {
+    it("fires the listBound event", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             listBound: function() {
-                start();
-                ok(true, "listBound event is fired");
+                assert.isOk(true, "listBound event is fired");
                 this.unbind("listBound");
+                done();
             }
         }));
         asyncDataSource.read();
     });
 
-    asyncTest("listBound event is fired after all values are prefetched", 2, function() {
+    it("listBound event is fired after all values are prefetched", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             valueMapper: function(o) {
@@ -204,9 +196,9 @@
         }));
 
         virtualList.one("listBound", function() {
-            start();
-            equal(virtualList.value()[0], 256);
-            equal(virtualList.select()[0], 256);
+            assert.equal(virtualList.value()[0], 256);
+            assert.equal(virtualList.select()[0], 256);
+            done();
         });
 
         asyncDataSource.read();
@@ -214,7 +206,7 @@
 
     // fails because select(-1) resolves the promise
     /*
-    asyncTest("listBound event is fired after all values are prefetched (multi selection)", 3, function() {
+    it("listBound event is fired after all values are prefetched (multi selection)", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             valueMapper: function(o) {
@@ -222,16 +214,16 @@
             },
             value: [7, 256],
             listBound: function() {
-                start();
-                equal(virtualList.value().length, 2);
-                equal(virtualList.select().length, 2);
-                equal(virtualList.selectedDataItems().length, 2);
+                done();
+                assert.equal(virtualList.value().length, 2);
+                assert.equal(virtualList.select().length, 2);
+                assert.equal(virtualList.selectedDataItems().length, 2);
             }
         }));
         asyncDataSource.read();
     });
 
-    asyncTest("listBound event is fired when range is changed", 3, function() {
+    it("listBound event is fired when range is changed", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             valueMapper: function(o) {
@@ -243,22 +235,22 @@
             var page = asyncDataSource.page();
 
             virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.value()[0], 256);
-                equal(virtualList.select()[0], 256);
+                done();
+                assert.equal(virtualList.value()[0], 256);
+                assert.equal(virtualList.select()[0], 256);
 
-                notEqual(asyncDataSource.page(), page);
+                assert.notEqual(asyncDataSource.page(), page);
             });
 
             virtualList.value(256);
         });
     });
 
-    asyncTest("fires the activate event", 1, function() {
+    it("fires the activate event", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             activate: function() {
-                start();
-                ok(true, "activate event is fired");
+                done();
+                assert.isOk(true, "activate event is fired");
                 this.unbind("activate");
             },
             selectable: true
@@ -270,11 +262,11 @@
         });
     });
 
-    asyncTest("fires the deactivate event", 1, function() {
+    it("fires the deactivate event", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             deactivate: function() {
-                start();
-                ok(true, "deactivate event is fired");
+                done();
+                assert.isOk(true, "deactivate event is fired");
                 this.unbind("deactivate");
             },
             selectable: true
@@ -288,11 +280,11 @@
         });
     });
 
-    asyncTest("fires the change event on select", 1, function() {
+    it("fires the change event on select", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             change: function() {
-                start();
-                ok(true, "change event is fired");
+                done();
+                assert.isOk(true, "change event is fired");
             },
             selectable: true
         }));
@@ -302,7 +294,7 @@
         });
     });
 
-    asyncTest("fires the change event when list is filtered", 1, function() {
+    it("fires the change event when list is filtered", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             valueMapper: function(options) {
@@ -314,8 +306,8 @@
             virtualList.select(0);
 
             virtualList.bind("change", function() {
-                start();
-                ok(true);
+                done();
+                assert.isOk(true);
             });
 
             virtualList.dataSource.filter({
@@ -328,7 +320,7 @@
         });
     });
 
-    asyncTest("select method deselects selected item and return correct dataitem", 4, function() {
+    it("select method deselects selected item and return correct dataitem", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             valueMapper: function(options) {
@@ -339,23 +331,23 @@
 
         asyncDataSource.read().done(function() {
             virtualList.bind("change", function(e) {
-                start()
+                done()
 
                 var added = e.added;
                 var removed = e.removed;
 
-                equal(added.length, 0);
-                equal(removed.length, 1);
+                assert.equal(added.length, 0);
+                assert.equal(removed.length, 1);
 
-                equal(removed[0].position, 0);
-                equal(removed[0].dataItem.text, "Item 0");
+                assert.equal(removed[0].position, 0);
+                assert.equal(removed[0].dataItem.text, "Item 0");
             });
 
             virtualList.select(0);
         });
     });
 
-    asyncTest("select method deselects selected item when filtered (multiple)", 5, function() {
+    it("select method deselects selected item when filtered (multiple)", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             valueMapper: function(options) {
@@ -372,17 +364,17 @@
 
             virtualList.dataSource.one("change", function() {
                 virtualList.bind("change", function(e) {
-                    start()
+                    done()
 
                     var added = e.added;
                     var removed = e.removed;
 
-                    equal(added.length, 0);
-                    equal(removed.length, 1);
+                    assert.equal(added.length, 0);
+                    assert.equal(removed.length, 1);
 
-                    equal(removed[0].position, 1);
-                    equal(removed[0].dataItem.text, "Item 2");
-                    equal(virtualList.element.find(".k-state-selected").length, 0);
+                    assert.equal(removed[0].position, 1);
+                    assert.equal(removed[0].dataItem.text, "Item 2");
+                    assert.equal(virtualList.element.find(".k-state-selected").length, 0);
                 });
 
                 virtualList.select(0);
@@ -393,7 +385,7 @@
         asyncDataSource.read()
     });
 
-    asyncTest("fires the change event on deselect", 1, function() {
+    it("fires the change event on deselect", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             value: 0
@@ -401,14 +393,14 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function() {
-                start();
-                ok(true, "change event is fired");
+                done();
+                assert.isOk(true, "change event is fired");
             })
             virtualList.select(-1);
         });
     });
 
-    asyncTest("removes selected class when all items are de-selected", 1, function() {
+    it("removes selected class when all items are de-selected", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             value: 0
@@ -416,15 +408,15 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function() {
-                start();
+                done();
 
-                equal(container.find(".k-state-selected").length, 0);
+                assert.equal(container.find(".k-state-selected").length, 0);
             })
             virtualList.select(-1);
         });
     });
 
-    asyncTest("select method selects same index when filtered (multiple selection)", 2, function() {
+    it("select method selects same index when filtered (multiple selection)", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             valueMapper: function(options) {
@@ -437,13 +429,13 @@
 
             virtualList.dataSource.one("change", function() {
                 virtualList.bind("change", function(e) {
-                    start();
+                    done();
 
                     var added = e.added;
                     var removed = e.removed;
 
-                    equal(added.length, 1);
-                    equal(removed.length, 0);
+                    assert.equal(added.length, 1);
+                    assert.equal(removed.length, 0);
                 });
 
                 virtualList.select(0);
@@ -458,7 +450,7 @@
         });
     });
 
-    asyncTest("in the change event widget passes deselected index", 2, function() {
+    it("in the change event widget passes deselected index", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             value: 0
@@ -466,17 +458,17 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
-                start();
+                done();
                 var removed = e.removed;
 
-                equal(removed.length, 1);
-                equal(removed[0].index, 0);
+                assert.equal(removed.length, 1);
+                assert.equal(removed[0].index, 0);
             });
             virtualList.select(-1);
         });
     });
 
-    asyncTest("in the change event widget passes deselected indices when multiple selection is enabled", 3, function() {
+    it("in the change event widget passes deselected indices when multiple selection is enabled", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [2, 7]
@@ -484,36 +476,36 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
-                start();
+                done();
                 var removed = e.removed;
 
-                equal(removed.length, 2);
-                equal(removed[0].index, 2);
-                equal(removed[1].index, 7);
+                assert.equal(removed.length, 2);
+                assert.equal(removed[0].index, 2);
+                assert.equal(removed[1].index, 7);
             });
             virtualList.select([2, 7]);
         });
     });
 
-    asyncTest("in the change event widget passes the selected indicies", 3, function() {
+    it("in the change event widget passes the selected indicies", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple"
         }));
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
-                start();
+                done();
                 var added = e.added;
 
-                equal(added.length, 2);
-                equal(added[0].index, 2);
-                equal(added[1].index, 7);
+                assert.equal(added.length, 2);
+                assert.equal(added[0].index, 2);
+                assert.equal(added[1].index, 7);
             });
             virtualList.select([2, 7]);
         });
     });
 
-    asyncTest("widget passes deselected order index", 1, function() {
+    it("widget passes deselected order index", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             value: 0
@@ -521,15 +513,15 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
-                start();
+                done();
                 var removed = e.removed;
-                equal(removed[0].position, 0);
+                assert.equal(removed[0].position, 0);
             });
             virtualList.select(-1);
         });
     });
 
-    asyncTest("widget passes deselected order indices when multiple selection is enabled", 3, function() {
+    it("widget passes deselected order indices when multiple selection is enabled", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: "multiple",
             value: [1, 2, 8, 10]
@@ -537,22 +529,22 @@
 
         asyncDataSource.read().then(function() {
             virtualList.bind("change", function(e) {
-                start();
+                done();
                 var removed = e.removed;
 
-                equal(removed.length, 2);
-                equal(removed[0].position, 0);
-                equal(removed[1].position, 2);
+                assert.equal(removed.length, 2);
+                assert.equal(removed[0].position, 0);
+                assert.equal(removed[1].position, 2);
             });
             virtualList.select([1, 8]);
         });
     });
 
-    asyncTest("fires the click event", 1, function() {
+    it("fires the click event", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             click: function() {
-                start();
-                ok(true, "click event is fired");
+                done();
+                assert.isOk(true, "click event is fired");
             },
             selectable: true
         }));
@@ -563,11 +555,11 @@
         });
     });
 
-    asyncTest("passes the item in click event handler", 1, function() {
+    it("passes the item in click event handler", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             click: function(e) {
-                start();
-                equal(e.item.text(), this.items().first().text());
+                done();
+                assert.equal(e.item.text(), this.items().first().text());
             },
             selectable: true
         }));
@@ -578,11 +570,11 @@
         });
     });
 
-    asyncTest("click event is not triggered if item does not have data-uid", 0, function() {
+    it("click event is not triggered if item does not have data-uid", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             selectable: true,
             click: function() {
-                ok(false);
+                assert.isOk(false);
             }
         }));
 
@@ -590,13 +582,13 @@
             scroll(virtualList.content, 5000);
             var item = virtualList.items().first();
 
-            start();
+            done();
             item.trigger("click");
         });
     });
 
 /*
-    asyncTest("click event fires after rapid scrolling forward and backwards of onloaded items", 1, function() {
+    it("click event fires after rapid scrolling forward and backwards of onloaded items", function(done) {
 
         var dataSource = new kendo.data.DataSource({
             transport: {
@@ -619,7 +611,7 @@
             dataSource: dataSource,
             selectable: true,
             click: function() {
-                ok(true);
+                assert.isOk(true);
             }
         }));
 
@@ -638,7 +630,7 @@
                     item.trigger("click"); //trigger the 'click' before item is loaded
 
                     virtualList.one("listBound", function() {
-                        start();
+                        done();
                         console.log("VirtualList rapid scrolling: after transport success");
                         item.trigger("click"); //trigger the 'click' after item is loaded
                     });
@@ -648,4 +640,5 @@
     });
 */
 
-})();
+    });
+}());

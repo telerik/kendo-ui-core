@@ -11,57 +11,56 @@
         select.html(options);
     }
 
-    module("kendo.ui.MultiSelect Placeholder", {
-        setup: function() {
+    describe("kendo.ui.MultiSelect Placeholder", function () {
+        beforeEach(function() {
             kendo.ns = "kendo-";
-            select = $("<select multiple />").appendTo(QUnit.fixture);
+            select = $("<select multiple />").appendTo(Mocha.fixture);
             populateSelect();
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.ns = "";
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }
 
             select.parents(".k-widget").remove();
-        }
-    });
+        });
 
-    test("MultiSelect gets placeholder from data-placeholder attr", function() {
+    it("MultiSelect gets placeholder from data-placeholder attr", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
 
-        equal(multiselect.options.placeholder, "Select...");
+        assert.equal(multiselect.options.placeholder, "Select...");
     });
 
-    test("MultiSelect shows placeholder on init", function() {
+    it("MultiSelect shows placeholder on init", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
-        equal(multiselect.input.val(), "Select...");
-        ok(multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.val(), "Select...");
+        assert.isOk(multiselect.input.hasClass("k-readonly"));
     });
 
-    test("MultiSelect scales input on placeholder shows", function() {
+    it("MultiSelect scales input on placeholder shows", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
 
-        ok(multiselect.input.width() > 35);
+        assert.isOk(multiselect.input.width() > 35);
     });
 
-    test("MultiSelect hides placeholder if any value", function() {
+    it("MultiSelect hides placeholder if any value", function() {
         var multiselect = new MultiSelect(select.val("0").data("placeholder", "Select..."));
 
-        equal(multiselect.input.val(), "");
-        ok(!multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.val(), "");
+        assert.isOk(!multiselect.input.hasClass("k-readonly"));
     });
 
-    test("MultiSelect hides placeholder if any item is selected", function() {
+    it("MultiSelect hides placeholder if any item is selected", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
 
         multiselect.ul.children().first().click();
 
-        equal(multiselect.input.val(), "");
-        ok(!multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.val(), "");
+        assert.isOk(!multiselect.input.hasClass("k-readonly"));
     });
 
-    test("MultiSelect does not show placeholder if items are deleted", function() {
+    it("MultiSelect does not show placeholder if items are deleted", function() {
         var multiselect = new MultiSelect(select.val("0").data("placeholder", "Select..."));
 
         multiselect.input.focus().trigger({
@@ -69,29 +68,29 @@
             keyCode: kendo.keys.BACKSPACE
         });
 
-        equal(multiselect.input.val(), "");
-        ok(!multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.val(), "");
+        assert.isOk(!multiselect.input.hasClass("k-readonly"));
     });
 
-    test("MultiSelect hides placeholder on focus", function() {
+    it("MultiSelect hides placeholder on focus", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
 
         multiselect.input.focus();
 
-        equal(multiselect.input.val(), "");
-        ok(!multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.val(), "");
+        assert.isOk(!multiselect.input.hasClass("k-readonly"));
     });
 
-    test("MultiSelect shows placeholder on focus", function() {
+    it("MultiSelect shows placeholder on focus", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."));
 
         multiselect.input.blur();
 
-        equal(multiselect.input.val(), "Select...");
-        ok(multiselect.input.hasClass("k-readonly"));
+        assert.equal(multiselect.input.val(), "Select...");
+        assert.isOk(multiselect.input.hasClass("k-readonly"));
     });
 
-    test("MultiSelect keeps the filter value when autoClose is false", function() {
+    it("MultiSelect keeps the filter value when autoClose is false", function() {
         var multiselect = new MultiSelect(select.data("placeholder", "Select..."), { autoClose: false });
         var input = multiselect.input;
         var filterText = "2";
@@ -101,11 +100,11 @@
 
         multiselect.ul.children().first().click();
 
-        equal(input.val(), filterText);
-        equal(kendo.caret(input[0])[1], 1);
+        assert.equal(input.val(), filterText);
+        assert.equal(kendo.caret(input[0])[1], 1);
     });
 
-    test("MultiSelect clears filter value on blur when autoClose is false", function() {
+    it("MultiSelect clears filter value on blur when autoClose is false", function() {
         var filterText = "2";
         var placeholder = "Select...";
         var multiselect = new MultiSelect(select.data("placeholder", placeholder), { autoClose: false });
@@ -117,7 +116,8 @@
 
         multiselect.input.blur();
 
-        equal(multiselect.input.val(), "");
+        assert.equal(multiselect.input.val(), "");
     });
 
-})();
+    });
+}());

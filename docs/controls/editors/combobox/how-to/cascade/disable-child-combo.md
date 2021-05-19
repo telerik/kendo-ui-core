@@ -10,9 +10,9 @@ slug: howto_disable_child_cascading_combobox
 
 The following example demonstrates how to disable a cascading child Kendo UI ComboBox.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>View Order Details</h4>
@@ -57,7 +57,7 @@ The following example demonstrates how to disable a cascading child Kendo UI Com
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             }
           }
         }).data("kendoComboBox");
@@ -72,7 +72,7 @@ The following example demonstrates how to disable a cascading child Kendo UI Com
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
             }
           },
           dataBound: function() {

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -56,7 +56,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 3** Create a DropDownList, configure its `dataTextField` option and set its `dataSource`.
 
-###### Example
+
 
         <?php
         $dropdownlist = new \Kendo\UI\DropDownList('DropDownList');
@@ -67,7 +67,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI DropD
 
 **Step 4** Output the DropDownList by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $dropdownlist->render();
@@ -81,7 +81,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -89,7 +89,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the **Products** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT * FROM Products');
@@ -98,7 +98,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -126,7 +126,7 @@ Below are listed the steps for you to follow when configuring the DropDownList f
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -173,7 +173,7 @@ Below are listed the steps for you to follow when configuring the DropDownList f
 
 **Step 3** Create a DropDownList, configure its `dataTextField` option and set its `dataSource`.
 
-###### Example
+
 
         <?php
         $dropdownlist = new \Kendo\UI\DropDownList('DropDownList');
@@ -184,7 +184,7 @@ Below are listed the steps for you to follow when configuring the DropDownList f
 
 **Step 4** Output the DropDownList by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $dropdownlist->render();
@@ -196,15 +196,15 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 1** Create a new PHP file called `products.php`. This file will return data in JSON format. The data source is configured to request it via the [`url`](/api/php/Kendo/Data/DataSourceTransportRead#url) setting.
 
-**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your web site root and include it.
+**Step 2** Copy `/wrappers/php/lib/DataSourceResult.php` to your website root and include it.
 
-###### Example
+
 
         <?php require_once 'lib/DataSourceResult.php'; ?>
 
 **Step 3** Read the request body and parse it as JSON. In the previous example we configured the Kendo UI DataSource to submit its parameters as JSON via the [`parameterMap`](/api/php/Kendo/Data/DataSourceTransport#parametermap).
 
-###### Example
+
 
         <?php
         $request = json_decode(file_get_contents('php://input'));
@@ -212,7 +212,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Create a new instance of the `DataSourceResult` class and call its `read` method.
 
-###### Example
+
 
         <?php
         $result = new DataSourceResult('sqlite:../sample.db');
@@ -223,7 +223,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 5** Return the result of the `read` method as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -234,8 +234,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
         ?>
 
 ## See Also
-
-Other articles on Telerik UI for PHP and on the DropDownList:
 
 * [Overview of the DropDownList PHP Class]({% slug overview_dropdownlist_uiforphp %})
 * [Local Binding of the DropDownList PHP Class]({% slug localbinding_dropdownlist_uiforphp %})

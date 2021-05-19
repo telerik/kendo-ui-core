@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.list", "./kendo.mobile.scroller" ], f);
+    define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -32,20 +32,26 @@ var __meta__ = { // jshint ignore:line
         activeElement = kendo._activeElement,
         keys = kendo.keys,
         ns = ".kendoComboBox",
+        nsFocusEvent = ns + "FocusEvent",
         CLICK = "click" + ns,
         MOUSEDOWN = "mousedown" + ns,
         DISABLED = "disabled",
         READONLY = "readonly",
         CHANGE = "change",
+        LOADING = "k-i-loading",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
+        AUTOCOMPLETEVALUE = "off",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
         STATE_REBIND = "rebind",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
-        proxy = $.proxy;
+        proxy = $.proxy,
+        newLineRegEx = /(\r\n|\n|\r)/gm,
+        NON_PRINTABLE_KEYS = [16,17,18,19,20,33,34,37,39,45,91,92,144,145];
 
     var ComboBox = Select.extend({
         init: function(element, options) {
@@ -78,6 +84,8 @@ var __meta__ = { // jshint ignore:line
             that._ignoreCase();
 
             that._enable();
+
+            that._attachFocusEvents();
 
             that._oldIndex = that.selectedIndex = -1;
 
@@ -137,6 +145,7 @@ var __meta__ = { // jshint ignore:line
             suggest: false,
             cascadeFrom: "",
             cascadeFromField: "",
+            cascadeFromParentField: "",
             ignoreCase: true,
             animation: {},
             virtual: false,
@@ -144,7 +153,9 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             clearButton: true,
-            syncValueAndText: true
+            syncValueAndText: true,
+            autoWidth: false,
+            popup: null
         },
 
         events:[
@@ -160,19 +171,24 @@ var __meta__ = { // jshint ignore:line
         ],
 
         setOptions: function(options) {
+            var listOptions = this._listOptions(options);
+
             Select.fn.setOptions.call(this, options);
 
-            this.listView.setOptions(options);
+            this.listView.setOptions(listOptions);
 
             this._accessors();
             this._aria();
+            this._clearButton();
         },
 
         destroy: function() {
             var that = this;
 
             that.input.off(ns);
+            that.input.off(nsFocusEvent);
             that.element.off(ns);
+            that.wrapper.off(ns);
             that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
@@ -180,6 +196,11 @@ var __meta__ = { // jshint ignore:line
             that._clear.off(CLICK + " " + MOUSEDOWN);
 
             Select.fn.destroy.call(that);
+        },
+
+        _isValueChanged: function(value) {
+            return value !== List.unifyType(this._old, typeof value) &&
+                value !== List.unifyType(this._oldText, typeof value);
         },
 
         _change: function() {
@@ -205,11 +226,22 @@ var __meta__ = { // jshint ignore:line
             }
 
             Select.fn._change.call(that);
+
+            that._oldText = that.text && that.text();
+
             that._toggleCloseVisibility();
         },
 
-        _focusHandler: function() {
-            this.input.focus();
+        _attachFocusEvents: function() {
+            var that = this;
+            that.input.on("focus" + nsFocusEvent, proxy(that._inputFocus, that))
+                      .on("focusout" + nsFocusEvent, proxy(that._inputFocusout, that));
+        },
+
+        _focusHandler: function(e) {
+            if(e.target === this.element[0]) {
+                this.input.focus();
+            }
         },
 
         _arrowClick: function() {
@@ -221,15 +253,19 @@ var __meta__ = { // jshint ignore:line
             this._placeholder(false);
         },
 
-        _inputFocusout: function() {
+        _inputFocusout: function(e) {
             var that = this;
             var value = that.value();
+            var isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length;
 
+            that._userTriggered = true;
             that._inputWrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
-            that.text(that.text());
+            if (isClearButton) {
+              that.text(that.text());
+            }
 
             var item = that._focus();
             var dataItem = this.listView.dataItemByIndex(this.listView.getElementIndex(item));
@@ -240,9 +276,13 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._placeholder();
-            that._blur();
+            that._valueBeforeCascade = that._old;
 
-            that.element.blur();
+            if (isClearButton) {
+                that._blur();
+
+                that.element.blur();
+            }
         },
 
         _inputPaste: function() {
@@ -272,20 +312,20 @@ var __meta__ = { // jshint ignore:line
 
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
-                     .attr(ARIA_DISABLED, false);
+                     .attr(ARIA_DISABLED, false)
+                     .attr(ARIA_READONLY, false);
 
                 arrow.on(CLICK, proxy(that._arrowClick, that))
                      .on(MOUSEDOWN, function(e) { e.preventDefault(); });
 
-                clear.on(CLICK, proxy(that._clearValue, that))
-                    .on(MOUSEDOWN, function(e) { e.preventDefault(); });
+                clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
 
                 that.input
                     .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("focus" + ns, proxy(that._inputFocus, that))
-                    .on("focusout" + ns, proxy(that._inputFocusout, that))
+                    .on("input" + ns, proxy(that._search, that))
                     .on("paste" + ns, proxy(that._inputPaste, that));
 
+                that.wrapper.on(CLICK + ns, proxy(that._focusHandler, that));
             } else {
                 wrapper
                     .addClass(disable ? STATEDISABLED : DEFAULT)
@@ -293,13 +333,18 @@ var __meta__ = { // jshint ignore:line
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
-                     .attr(ARIA_DISABLED, disable);
+                     .attr(ARIA_DISABLED, disable)
+                     .attr(ARIA_READONLY, readonly);
             }
+
+            that._toggleCloseVisibility();
         },
 
         open: function() {
             var that = this;
             var state = that._state;
+            var isFiltered = that.dataSource.filter() ? that.dataSource.filter().filters.length > 0 : false;
+            var reinitialized = !that.ul.find(that.listView.focus()).length;
 
             if (that.popup.visible()) {
                 return;
@@ -308,15 +353,26 @@ var __meta__ = { // jshint ignore:line
             if ((!that.listView.bound() && state !== STATE_FILTER) || state === STATE_ACCEPT) {
                 that._open = true;
                 that._state = STATE_REBIND;
-                if (that.options.minLength !== 1) {
+
+                if ((that.options.minLength !== 1 && !isFiltered) || (isFiltered && that.value() && that.selectedIndex === -1 )) {
                     that.refresh();
                     that._openPopup();
+                    if (!this.options.virtual) {
+                        that.listView.bound(false);
+                    }
                 } else {
                     that._filterSource();
                 }
             } else if (that._allowOpening()) {
+                // In some cases when the popup is opened resize is triggered which will cause it to close
+                // Setting the below flag will prevent this from happening
+                that.popup._hovered = true;
                 that._openPopup();
-                that._focusItem();
+                if(that.options.virtual) {
+                    that._focusItem();
+                } else if (reinitialized && that.options.highlightFirst) {
+                    that.listView.focus(0);
+                }
             }
         },
 
@@ -368,7 +424,7 @@ var __meta__ = { // jshint ignore:line
             that._customOption = undefined;
             that._options(data, "", that.value());
 
-            if (custom && custom[0].selected) {
+            if (custom && custom[0].selected && !that.listView._emptySearch) {
                 that._custom(custom.val());
             }
         },
@@ -398,7 +454,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._initialIndex = null;
-
             var dataItem = listView.selectedDataItems()[0];
 
             if (!dataItem) {
@@ -407,6 +462,8 @@ var __meta__ = { // jshint ignore:line
 
             if (that._value(dataItem) !== that.value()) {
                 that._custom(that._value(dataItem));
+            } else if (that._value(dataItem) !== that.element[0].value){
+                that._accessor(that._value(dataItem));
             }
 
             if (that.text() && that.text() !== that._text(dataItem)) {
@@ -446,8 +503,6 @@ var __meta__ = { // jshint ignore:line
             that.popup.position();
 
             that._buildOptions(data);
-
-            that._makeUnselectable();
 
             that._updateSelection();
 
@@ -507,6 +562,7 @@ var __meta__ = { // jshint ignore:line
 
         _select: function(candidate, keepState) {
             var that = this;
+
             candidate = that._get(candidate);
 
             if (candidate === -1) {
@@ -518,6 +574,7 @@ var __meta__ = { // jshint ignore:line
                 if (!keepState && that._state === STATE_FILTER) {
                     that._state = STATE_ACCEPT;
                 }
+                that._toggleCloseVisibility();
             });
         },
 
@@ -533,12 +590,22 @@ var __meta__ = { // jshint ignore:line
 
             this.selectedIndex = idx;
 
+            if (this.listView.isFiltered() && idx !== -1) {
+                this._valueBeforeCascade = this._old;
+            }
+
             if (idx === -1 && !dataItem) {
-                text = this.input[0].value;
                 if (this.options.syncValueAndText) {
+                    if (this.options.dataTextField === this.options.dataValueField) {
+                        text = this._accessor();
+                    } else {
+                        text = this.input[0].value;
+                    }
                     value = text;
                 }
-
+                else {
+                    text = this.text();
+                }
                 this.listView.focus(-1);
             } else {
                 if (dataItem || dataItem === 0) {
@@ -585,7 +652,9 @@ var __meta__ = { // jshint ignore:line
         },
 
         _toggleCloseVisibility: function() {
-            if (this.text()) {
+            var preventShow = this.element.is(":disabled") || this.element.is("[readonly]");
+
+            if (this.text() && !preventShow) {
                 this._showClear();
             } else {
                 this._hideClear();
@@ -599,6 +668,7 @@ var __meta__ = { // jshint ignore:line
             var caretIdx = caret(element)[0];
             var key = that._last;
             var idx;
+            var accentFoldingFiltering = that.dataSource.options.accentFoldingFiltering;
 
             if (key == keys.BACKSPACE || key == keys.DELETE) {
                 that._last = undefined;
@@ -616,12 +686,12 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (caretIdx <= 0) {
-                caretIdx = value.toLowerCase().indexOf(word.toLowerCase()) + 1;
+                caretIdx = (accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase()).indexOf(accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()) + 1;
             }
 
             if (word) {
                 word = word.toString();
-                idx = word.toLowerCase().indexOf(value.toLowerCase());
+                idx = (accentFoldingFiltering ? word.toLocaleLowerCase(accentFoldingFiltering) : word.toLowerCase()).indexOf(accentFoldingFiltering ? value.toLocaleLowerCase(accentFoldingFiltering) : value.toLowerCase());
                 if (idx > -1) {
                     value += word.substring(idx + value.length);
                 }
@@ -658,7 +728,7 @@ var __meta__ = { // jshint ignore:line
 
             dataItem = that.dataItem();
 
-            if (dataItem && that._text(dataItem) === text) {
+            if (dataItem && that._text(dataItem).replace && that._text(dataItem).replace(newLineRegEx,"") === text) {
                 value = that._value(dataItem);
 
                 if (value === List.unifyType(that._old, typeof value)) {
@@ -667,13 +737,17 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            if (ignoreCase && !that.listView.value().length) {
+            if (ignoreCase) {
                 loweredText = loweredText.toLowerCase();
+            }
+
+            if(that.dataItem() && that._text(that.dataItem()) === text){
+                return;
             }
 
             that._select(function(data) {
                 data = that._text(data);
-                if (ignoreCase && !that.listView.value().length) {
+                if (ignoreCase) {
                     data = (data + "").toLowerCase();
                 }
 
@@ -686,11 +760,14 @@ var __meta__ = { // jshint ignore:line
                         that._accessor(text);
                     }
 
+                    that._cascadeTriggered = true;
                     that._triggerCascade();
                 }
 
                 that._prev = input.value;
             });
+
+            that._toggleCloseVisibility();
         },
 
         toggle: function(toggle) {
@@ -711,7 +788,8 @@ var __meta__ = { // jshint ignore:line
 
             that.trigger("set", { value: value });
 
-            if (value === options.value && that.input.val() === options.text) {
+            if (value === options.value && that.input.val() === options.text &&
+            !that.options.cascadeFrom) {
                 return;
             }
 
@@ -726,31 +804,54 @@ var __meta__ = { // jshint ignore:line
             listView
                 .value(value)
                 .done(function() {
-                    if (that.selectedIndex === -1) {
+                    if (that.selectedIndex === -1 && (!listView._selectedDataItems || !listView._selectedDataItems.length)) {
                         that._accessor(value);
                         that.input.val(value);
                         that._placeholder(true);
                     }
 
-                    that._old = that._accessor();
+                    if(that._userTriggered) {
+                         that._old = that._accessor();
+                    } else {
+                         that._old = that._valueBeforeCascade = that._accessor();
+                    }
+
                     that._oldIndex = that.selectedIndex;
 
-                    that._prev = that.input.val();
+                    that._prev = that._oldText = that.input.val();
 
                     if (that._state === STATE_FILTER) {
                         that._state = STATE_ACCEPT;
                     }
+                    that._toggleCloseVisibility();
                 });
+        },
+
+        _hideBusy: function () {
+            var that = this;
+            clearTimeout(that._busy);
+            that._arrowIcon.removeClass(LOADING);
+            that._focused.attr("aria-busy", false);
+            that._busy = null;
+            that._toggleCloseVisibility();
         },
 
         _click: function(e) {
             var that = this;
             var item = e.item;
             var dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(item));
-
+            var shouldTrigger = true;
             e.preventDefault();
 
-            if (that.trigger("select", { dataItem: dataItem, item: item })) {
+            if(dataItem){
+                shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+
+                if(!shouldTrigger){
+                   that.input.val(that._text(dataItem));
+                }
+            }
+
+            if (shouldTrigger && that.trigger("select", { dataItem: dataItem, item: item })) {
                 that.close();
                 return;
             }
@@ -760,6 +861,10 @@ var __meta__ = { // jshint ignore:line
             that._select(item).done(function() {
                 that._blur();
             });
+        },
+
+        _syncValueAndText: function () {
+            return this.options.syncValueAndText;
         },
 
         _inputValue: function() {
@@ -834,7 +939,7 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
+                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="' + AUTOCOMPLETEVALUE +'"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -849,15 +954,16 @@ var __meta__ = { // jshint ignore:line
             }
 
             input.addClass(element.className)
-                 .css({
-                    width: "100%",
-                    height: element.style.height
-                 })
-                 .attr({
-                     "role": "combobox",
-                     "aria-expanded": false
-                 })
-                 .show();
+                .css({
+                    width: "",
+                    height: element.style.height,
+                    position: ""
+                })
+                .attr({
+                    "role": "combobox",
+                    "aria-expanded": false
+                })
+                .show();
 
             if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);
@@ -883,10 +989,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _clearButton: function() {
-            this._clear = $('<span unselectable="on" class="k-icon k-clear-value k-i-close" title="clear"></span>').attr({
-                "role": "button",
-                "tabIndex": -1
-            });
+            List.fn._clearButton.call(this);
+
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
                 this.wrapper.addClass("k-combobox-clearable");
@@ -895,7 +999,10 @@ var __meta__ = { // jshint ignore:line
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                textField = that.options.dataTextField || "text",
+                isFkey = key >= 112 && key <= 135,
+                isNonPrintableKey = NON_PRINTABLE_KEYS.indexOf(key) > -1;
 
             that._last = key;
 
@@ -906,9 +1013,53 @@ var __meta__ = { // jshint ignore:line
                 that._firstItem();
             } else if (key === keys.END) {
                 that._lastItem();
-            } else if (key != keys.TAB && !that._move(e)) {
+            } else if (key === keys.ENTER || (key === keys.TAB && that.popup.visible())) {
+                var current = that.listView.focus();
+                var dataItem = that.dataItem();
+                var shouldTrigger = true;
+
+                if (!that.popup.visible() && (!dataItem || that.text() !== that._text(dataItem))) {
+                    current = null;
+                }
+
+                if (current) {
+                    if (that.popup.visible()) {
+                        e.preventDefault();
+                    }
+
+                    dataItem = that.listView.dataItemByIndex(that.listView.getElementIndex(current));
+
+                    if(dataItem){
+                        shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+                    }
+
+                    if (shouldTrigger && that.trigger("select", { dataItem: dataItem, item: current })) {
+                        return;
+                    }
+
+                    that._userTriggered = true;
+
+                    that._select(current).done(function() {
+                        that._blur();
+                        that._valueBeforeCascade = that._old = that.value();
+                    });
+                } else {
+                    if(that._syncValueAndText() || that._isSelect){
+                        if(!that.dataItem() || that.dataItem()[textField] !== that.input.val()) {
+                            that._accessor(that.input.val());
+                        }
+                    }
+
+                    if (that.options.highlightFirst) {
+                        that.listView.value(that.input.val());
+                        that._blur();
+                    } else {
+                        that._oldText = that.text();
+                    }
+                }
+            } else if (key != keys.TAB && !that._move(e) && !isNonPrintableKey && !isFkey && !e.ctrlKey) {
                that._search();
-            } else if (key === keys.ESC && !that.popup.visible()) {
+            } else if (key === keys.ESC && !that.popup.visible() && that.text()) {
                 that._clearValue();
             }
         },
@@ -951,18 +1102,26 @@ var __meta__ = { // jshint ignore:line
         _search: function() {
             var that = this;
 
+            clearTimeout(that._typingTimeout);
+
             that._typingTimeout = setTimeout(function() {
                 var value = that.text();
 
-                if (that._prev !== value) {
+                if (value !== "" && that._prev !== value) {
                     that._prev = value;
 
-                    if (that.options.filter === "none") {
+                    if (that.options.filter === "none" && that.options.virtual) {
                         that.listView.select(-1);
                     }
 
                     that.search(value);
+
                     that._toggleCloseVisibility();
+                }
+                else if (value === "" && that._prev !== "" && that._prev !== undefined) {
+                    that._clearValue();
+                    that._open = true;
+                    that._state = STATE_REBIND;
                 }
 
                 that._typingTimeout = null;
@@ -984,9 +1143,10 @@ var __meta__ = { // jshint ignore:line
                 wrapper[0].style.cssText = element[0].style.cssText;
             }
 
-            that.wrapper = wrapper.addClass("k-widget k-combobox k-header")
-                                  .addClass(element[0].className)
-                                  .css("display", "");
+            that.wrapper = wrapper.addClass("k-widget k-combobox")
+                .addClass(element[0].className)
+                .removeClass('input-validation-error')
+                .css("display", "");
         },
 
         _clearSelection: function(parent, isFiltered) {
@@ -1017,6 +1177,16 @@ var __meta__ = { // jshint ignore:line
             this._initialIndex = null;
             this._presetValue = true;
             this._toggleCloseVisibility();
+        },
+
+        _clearText: function() {
+            this._old = this.value();
+            this.text("");
+        },
+
+        _clearValue: function() {
+            Select.fn._clearValue.call(this);
+            this.input.focus();
         }
     });
 

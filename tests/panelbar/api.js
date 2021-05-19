@@ -15,9 +15,9 @@
         isExpandRaised = true;
     }
 
-   function Activate(sender, args) {
-       isActivateRaised = true;
-   }
+    function Activate(sender, args) {
+        isActivateRaised = true;
+    }
 
     function Collapse(sender, args) {
         isCollapseRaised = true;
@@ -27,14 +27,12 @@
         isSelectRaised = true;
     }
 
-    module("api", {
-        setup: function() {
-            kendo.effects.disable();
+    describe("api", function() {
+        beforeEach(function() {
 
-            QUnit.fixture.append(
-                '<ul id="panelbar">' +
+            ul = $('<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul style="display: none;" class="k-group">' +
                 '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
                 '            </li>' +
@@ -53,7 +51,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
                 '            </li>' +
@@ -66,7 +64,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
                 '            </li>' +
@@ -79,7 +77,7 @@
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
-                '            class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                '            class="k-icon k-i-arrow-60-up k-panelbar-collapse"></span></span>' +
                 '        <ul class="k-group" style="display: block;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
                 '            </li>' +
@@ -87,12 +85,12 @@
                 '            </li>' +
                 '            <li class="k-item k-state-default"><span class="k-link">Shared Notes</span>' +
                 '            </li>' +
-                '            <li class="k-item k-state-default"><span class="k-link">Archive</span>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Archive <input /></span>' +
                 '            </li>' +
                 '        </ul>' +
                 '    </li>' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
-                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
                 '        <ul class="k-group" style="display: none;">' +
                 '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
                 '            </li>' +
@@ -108,10 +106,10 @@
                 '        </ul>' +
                 '    </li>' +
                 '</ul>' +
-                '<ul id="empty_panelbar"></ul>'
-            );
+                '<ul id="empty_panelbar"></ul>');
 
-            ul = $("#panelbar");
+            ul.appendTo(Mocha.fixture);
+
             empty_panelbar = $("#empty_panelbar");
 
             panelbar = new PanelBar(ul, {
@@ -120,215 +118,224 @@
                 select: Select,
                 activate: Activate
             });
-        },
-        teardown: function() {
-            kendo.effects.enable();
+        });
+        afterEach(function() {
+            kendo.destroy(empty_panelbar);
+            kendo.destroy(Mocha.fixture);
+        });
 
-            kendo.destroy(QUnit.fixture);
-        }
-    });
+        it('trigger input select should not bubble', function() {
+            var item = getRootItem(4);
 
-    test('trigger input select should not bubble', function() {
-        var item = getRootItem(4);
+            isSelectRaised = false;
 
-        isSelectRaised = false;
+            $(item).find('input').first().trigger('select');
 
-        $(item).find('input').first().trigger('select');
+            assert.isOk(!isSelectRaised);
+        });
 
-        ok(!isSelectRaised);
-    });
+        it('clicking should raise onSelect event', function() {
+            var item = getRootItem(0);
 
-    test('clicking should raise onSelect event', function() {
-        var item = getRootItem(0);
+            isSelectRaised = false;
 
-        isSelectRaised = false;
+            item.find('> .k-link').trigger('click');
 
-        item.find('> .k-link').trigger('click');
+            assert.isOk(isSelectRaised);
+        });
 
-        ok(isSelectRaised);
-    });
+        it('clicking input should not raise onSelect event', function() {
+            var item = getRootItem(3);
 
-    test('collapse should raise onCollapse event', function() {
-        isCollapseRaised = false;
+            isSelectRaised = false;
 
-        var item = getRootItem(3);
+            $(item).find('input').first().trigger("click");
 
-        item.find('> .k-link').click();
+            assert.isOk(!isSelectRaised);
+        });
 
-        ok(isCollapseRaised);
-    });
+        it('collapse should raise onCollapse event', function() {
+            isCollapseRaised = false;
 
-    test('expand should raise onExpand event', function() {
-        isExpandRaised = false;
+            var item = getRootItem(3);
 
-        var item = getRootItem(2);
+            item.find('> .k-link').click();
 
-        item.find('> .k-link').trigger('click');
+            assert.isOk(isCollapseRaised);
+        });
 
-        ok(isExpandRaised);
-    });
+        it('expand should raise onExpand event', function() {
+            isExpandRaised = false;
 
-    asyncTest('expand should raise onActivate event after duration', 1, function() {
-        isActivateRaised = false;
+            var item = getRootItem(2);
 
-        var item = getRootItem(4);
+            item.find('> .k-link').trigger('click');
 
-        item.find('> .k-link').trigger('click');
+            assert.isOk(isExpandRaised);
+        });
 
-        setTimeout(function () {
-            start();
-            ok(isActivateRaised);
-        }, 400);
-    });
+        it('expand should raise onActivate event after duration', function(done) {
+            isActivateRaised = false;
 
-    test('disable method should disable disabled item', function() {
-        var item = getRootItem(2);
+            var item = getRootItem(4);
 
-        panelbar.disable(item);
+            item.find('> .k-link').trigger('click');
 
-        ok(item.hasClass('k-state-disabled'));
-    });
+            setTimeout(function() {
+                assert.isOk(isActivateRaised);
+                done();
+            }, 400);
+        });
 
-    test('enable method should enable disabled item', function() {
-        var item = getRootItem(2);
+        it('disable method should disable disabled item', function() {
+            var item = getRootItem(2);
 
-        panelbar.enable(item);
+            panelbar.disable(item);
 
-        ok(item.hasClass('k-state-default'));
-    });
+            assert.isOk(item.hasClass('k-state-disabled'));
+        });
 
-    test('collapse method should collapse last item', function() {
-        var item = getRootItem(4);
+        it('enable method should enable disabled item', function() {
+            var item = getRootItem(2);
 
-        panelbar.collapse(item);
+            panelbar.enable(item);
 
-        equal(item.find('> .k-group').css("display"), "none");
-    });
+            assert.isOk(item.hasClass('k-state-default'));
+        });
 
-    test('expand method should toggle only one icon', function() {
-        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", items: [{ text: "Child 1", items: [{text:"SubChild"}] }] } ] });
-        empty_panelbar.data("kendoPanelBar").expand(empty_panelbar.find("li:first"));
+        it('collapse method should collapse last item', function() {
+            var item = getRootItem(4);
 
-        equal(empty_panelbar.find(".k-panelbar-collapse").length, 1);
-    });
+            panelbar.collapse(item);
 
-    test('dataSource should create items with the text specified', function () {
-        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
+            assert.equal(item.find('> .k-group').css("display"), "none");
+        });
 
-        equal(empty_panelbar.find(".k-item > .k-link:contains(Item 1)").length, 1);
-    });
+        it('expand method should toggle only one icon', function() {
+            new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", items: [{ text: "Child 1", items: [{ text: "SubChild" }] }] }] });
+            empty_panelbar.data("kendoPanelBar").expand(empty_panelbar.find("li:first"));
 
-    test('dataSource should spawn arrows for items with group, content or contentUrl', function () {
-        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [{text:"SubChild"}] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
+            assert.equal(empty_panelbar.find(".k-panelbar-collapse").length, 1);
+        });
 
-        var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
+        it('dataSource should create items with the text specified', function() {
+            new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1" }] });
 
-        ok(icons.eq(0).is(".k-panelbar-expand.k-i-arrow-s"));
-        ok(icons.eq(1).is(".k-panelbar-expand.k-i-arrow-s"));
-        ok(icons.eq(2).is(".k-panelbar-expand.k-i-arrow-s"));
-    });
+            assert.equal(empty_panelbar.find(".k-item > .k-link:contains(Item 1)").length, 1);
+        });
 
-    test('dataSource should show collapse arrows for expanded items', function () {
-        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test", expanded: true } ] });
+        it('dataSource should spawn arrows for items with group, content or contentUrl', function() {
+            new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", content: "Test" }, { text: "Item 2", items: [{ text: "SubChild" }] }, { text: "Item 3", contentUrl: "http://www.google.com" }] });
 
-        ok(empty_panelbar.find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-n"));
-    });
+            var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
 
-    test('setOptions resets the animation', function() {
-        panelbar = new PanelBar(empty_panelbar);
+            assert.isOk(icons.eq(0).is(".k-panelbar-expand.k-i-arrow-60-down"));
+            assert.isOk(icons.eq(1).is(".k-panelbar-expand.k-i-arrow-60-down"));
+            assert.isOk(icons.eq(2).is(".k-panelbar-expand.k-i-arrow-60-down"));
+        });
 
-        equal(panelbar.options.animation.expand.effects, "expand:vertical");
+        it('dataSource should show collapse arrows for expanded items', function() {
+            new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1", content: "Test", expanded: true }] });
 
-        panelbar.setOptions({ animation: false });
+            assert.isOk(empty_panelbar.find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-60-up"));
+        });
 
-        ok("effects" in panelbar.options.animation.expand);
-        ok(kendo.size(panelbar.options.animation.expand.effects) == 0);
-    });
+        it('setOptions resets the animation', function() {
+            panelbar = new PanelBar(empty_panelbar);
 
-    test('setOptions resets the dataSource object', function() {
-        panelbar = new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
+            assert.equal(panelbar.options.animation.expand.effects, "expand:vertical");
 
-        equal(panelbar.element.find("li").text(), "Item 1");
+            panelbar.setOptions({ animation: false });
 
-        panelbar.setOptions({ dataSource: [ { text: "Changed" } ] });
+            assert.isOk("effects" in panelbar.options.animation.expand);
+            assert.isOk(kendo.size(panelbar.options.animation.expand.effects) == 0);
+        });
 
-        equal(panelbar.element.find("li").text(), "Changed");
-    });
+        it('setOptions resets the dataSource object', function() {
+            panelbar = new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1" }] });
 
-    test("Add dynamic item with cssClass", function () {
-        panelbar = new PanelBar(empty_panelbar);
+            assert.equal(panelbar.element.find("li").text(), "Item 1");
 
-        panelbar.append({ text: "test", cssClass: "cssClass" });
+            panelbar.setOptions({ dataSource: [{ text: "Changed" }] });
 
-        ok(panelbar.element.find(".cssClass")[0]);
-    });
+            assert.equal(panelbar.element.find("li").text(), "Changed");
+        });
 
-    test("clearSelection removes the PanelBar selection", 2, function () {
-        panelbar = new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
+        it("Add dynamic item with cssClass", function() {
+            panelbar = new PanelBar(empty_panelbar);
 
-        panelbar.select("li");
-        ok(panelbar.select());
+            panelbar.append({ text: "test", cssClass: "cssClass" });
 
-        panelbar.clearSelection();
-        ok(!panelbar.select()[0]);
-    });
+            assert.isOk(panelbar.element.find(".cssClass")[0]);
+        });
 
-    test("Adding dynamic content element renders properly on root and inner levels", function () {
-        panelbar = new PanelBar(empty_panelbar);
+        it("clearSelection removes the PanelBar selection", function() {
+            panelbar = new PanelBar(empty_panelbar, { dataSource: [{ text: "Item 1" }] });
 
-        panelbar.append([
-            {
-                text: "Item 1",
-                content: "Item 1 Content"
-            },
-            {
-                text: "Item 2",
-                items: [
-                    {
-                        text: "Sub Item 1",
-                        content: "Sub Item 1 Content"
-                    }
-                ]
+            panelbar.select("li");
+            assert.isOk(panelbar.select());
+
+            panelbar.clearSelection();
+            assert.isOk(!panelbar.select()[0]);
+        });
+
+        it("Adding dynamic content element renders properly on root and inner levels", function() {
+            panelbar = new PanelBar(empty_panelbar);
+
+            panelbar.append([
+                {
+                    text: "Item 1",
+                    content: "Item 1 Content"
+                },
+                {
+                    text: "Item 2",
+                    items: [
+                        {
+                            text: "Sub Item 1",
+                            content: "Sub Item 1 Content"
+                        }
+                    ]
+                }
+            ]);
+
+            assert.isOk(empty_panelbar.children("li:first").children("div.k-content")[0]);
+            assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
+        });
+
+        it("Adding dynamic contentUrl element renders contents on root and inner levels", function() {
+            panelbar = new PanelBar(empty_panelbar);
+
+            panelbar.append([
+                {
+                    text: "Item 1",
+                    contentUrl: "AjaxView1.html"
+                },
+                {
+                    text: "Item 2",
+                    items: [
+                        {
+                            text: "Sub Item 1",
+                            contentUrl: "AjaxView2.html"
+                        }
+                    ]
+                }
+            ]);
+
+            assert.isOk(empty_panelbar.children("li:first").children("div.k-content")[0]);
+            assert.isOk(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
+        });
+
+        it('insertAfter method moves an item if called with existing item', function() {
+            var panel = $("<ul><li>Item 1</li><li>Item 2</li></ul>").kendoPanelBar().data("kendoPanelBar");
+
+            try {
+                panel.insertAfter("li:first-child", "li:last-child");
+
+                assert.isOk(panel.element.children("li:last-child").text() == "Item 1");
+            } finally {
+                panel.destroy();
             }
-        ]);
+        });
 
-        ok(empty_panelbar.children("li:first").children("div.k-content")[0]);
-        ok(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
     });
-
-    test("Adding dynamic contentUrl element renders contents on root and inner levels", function () {
-        panelbar = new PanelBar(empty_panelbar);
-
-        panelbar.append([
-            {
-                text: "Item 1",
-                contentUrl: "AjaxView1.html"
-            },
-            {
-                text: "Item 2",
-                items: [
-                    {
-                        text: "Sub Item 1",
-                        contentUrl: "AjaxView2.html"
-                    }
-                ]
-            }
-        ]);
-
-        ok(empty_panelbar.children("li:first").children("div.k-content")[0]);
-        ok(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
-    });
-
-    test('insertAfter method moves an item if called with existing item', 1, function() {
-        var panel = $("<ul><li>Item 1</li><li>Item 2</li></ul>").kendoPanelBar().data("kendoPanelBar");
-
-        try {
-            panel.insertAfter("li:first-child", "li:last-child");
-
-            ok(panel.element.children("li:last-child").text() == "Item 1");
-        } finally {
-            panel.destroy();
-        }
-    });
-
-})();
+}());

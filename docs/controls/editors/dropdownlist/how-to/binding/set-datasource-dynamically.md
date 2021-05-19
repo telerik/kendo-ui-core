@@ -10,9 +10,9 @@ slug: howto_set_datasource_dynamically_dropdownlist
 
 The following example demonstrates how to dynamically set the DataSource in a Kendo UI DropDownList widget.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>View Order Details</h4>
@@ -61,7 +61,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             }
           }
         }).data("kendoDropDownList");
@@ -84,7 +84,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Order_Details?$expand=Order"
             }
           }
         }).data("kendoDropDownList");
@@ -94,7 +94,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
             }
           });
         });
@@ -105,7 +105,7 @@ The following example demonstrates how to dynamically set the DataSource in a Ke
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

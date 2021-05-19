@@ -1,13 +1,13 @@
 (function() {
     window.SplitterHelpers = {
         generateHtml: function(paneCount) {
-            return "<div style='width: 207px;height:100px'>" +  new Array((paneCount + 1) || 3).join("<div/>") + "</div>";
+            return "<div style='width: 207px;height:100px'>" +  new Array((paneCount + 1) || 3).join("<div></div>") + "</div>";
         },
 
         create: function(options, paneCount, initCss) {
             var splitter = $(window.SplitterHelpers.generateHtml(paneCount || 2))
                     .css(initCss || {})
-                    .appendTo(QUnit.fixture)
+                    .appendTo(Mocha.fixture)
                     .kendoSplitter(options);
 
             return {
@@ -32,7 +32,7 @@
             },
 
             teardown: function() {
-                kendo.destroy(QUnit.fixture);
+                kendo.destroy(Mocha.fixture);
             }
         }
     };

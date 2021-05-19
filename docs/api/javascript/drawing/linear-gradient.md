@@ -5,9 +5,11 @@ res_type: api
 ---
 
 # kendo.drawing.LinearGradient : kendo.drawing.Gradient
+
 Represents a linear color gradient.
 
 #### Example - creating a linear gradient
+
     <div id="surface" />
     <script>
       var draw = kendo.drawing;
@@ -53,19 +55,19 @@ The configuration of this LinearGradient.
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Fields
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](gradient-stop) instances.
+Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Methods
 
 ### addStop
 Adds a color stop to the gradient.
-Inherited from [Gradient.addStop](gradient#methods-addStop)
+Inherited from [Gradient.addStop](/api/javascript/drawing/gradient/methods/addstop)
 
 #### Parameters
 
@@ -113,7 +115,7 @@ For example [0, 0] is top left and [1, 1] is bottom right.
 
 ### removeStop
 Removes a color stop from the gradient.
-Inherited from [Gradient.removeStop](gradient#methods-removeStop)
+Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient/methods/removestop)
 
 #### Parameters
 

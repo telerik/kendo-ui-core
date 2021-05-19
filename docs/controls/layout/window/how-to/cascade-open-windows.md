@@ -9,9 +9,9 @@ slug: howto_cascadeopenwindows_window
 
 The example below demonstrates how to cascade open Kendo UI Windows on top of each other.
 
-###### Example
 
-```html
+
+```dojo
    <script>
       $(document).ready(function() {
         for (var i = 0; i < 6; i++){
@@ -50,8 +50,6 @@ The example below demonstrates how to cascade open Kendo UI Windows on top of ea
 ```
 
 ## See Also
-
-Other articles and how-to examples on the Kendo UI Window:
 
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Post to Iframe]({% slug howto_posttoiframe_window %})

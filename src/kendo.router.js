@@ -442,7 +442,7 @@ var __meta__ = { // jshint ignore:line
             this.root = options.root;
             this.ignoreCase = options.ignoreCase !== false;
 
-            this.bind([INIT, ROUTE_MISSING, CHANGE, SAME], options);
+            this.bind([INIT, ROUTE_MISSING, CHANGE, SAME, BACK], options);
         },
 
         destroy: function() {
@@ -501,7 +501,7 @@ var __meta__ = { // jshint ignore:line
 
         _urlChanged: function(e) {
             var url = e.url;
-            var decode = typeof e.decode === 'undefined';
+            var decode = !!e.decode;
             var back = e.backButtonPressed;
 
             if (!url) {

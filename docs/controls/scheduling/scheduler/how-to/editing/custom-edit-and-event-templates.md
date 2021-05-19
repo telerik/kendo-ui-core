@@ -10,9 +10,7 @@ slug: howto_customize_editand_event_templates_scheduler
 
 The following example demonstrates how to create and use custom templates for the Scheduler events and the **Edit** window.
 
-###### Example
-
-```html
+```dojo
     <div id="example">
       <div id="team-schedule">
         <div id="people">
@@ -35,7 +33,7 @@ The following example demonstrates how to create and use custom templates for th
     <script id="customEditorTemplate" type="text/x-kendo-template">
     <div class="k-edit-label"><label for="title">Title</label></div>
     <div data-container-for="title" class="k-edit-field">
-        <input type="text" class="k-input k-textbox" name="title" required="required" data-bind="value:title">
+        <input type="text" class="k-textbox" name="title" required="required" data-bind="value:title">
       </div>
     <div class="k-edit-label">
         <label for="start">Start</label>
@@ -101,7 +99,7 @@ The following example demonstrates how to create and use custom templates for th
           edit: function(e) {
               var recurrenceEditor = e.container.find("[data-role=recurrenceeditor]").data("kendoRecurrenceEditor");
 
-              //set start option value, used to define the week 'Repeat on' selected checkboxes
+              // Set the start option value. Used to define the week 'Repeat on' selected checkboxes.
               recurrenceEditor.setOptions({
                 start: new Date(e.event.start)
               });
@@ -111,19 +109,19 @@ The following example demonstrates how to create and use custom templates for th
             batch: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks",
                 dataType: "jsonp"
               },
               update: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
                 dataType: "jsonp"
               },
               create: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
                 dataType: "jsonp"
               },
               destroy: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
                 dataType: "jsonp"
               },
               parameterMap: function(options, operation) {
@@ -231,23 +229,6 @@ The following example demonstrates how to create and use custom templates for th
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
-* [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
-* [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Clone Events on Ctrl + move]({% slug howto_clone_eventson_ctrlplus_move_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Hide Edit Buttons]({% slug howto_hidethe_editbutons_scheduler %})
-* [How to Implement Custom Editing in agenda View]({% slug howto_implement_custom_editing_inagenda_view_scheduler %})
-* [How to Nest Editors inside Event Templates]({% slug howto_nest_editorsinside_event_templates_scheduler %})
-* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Wrap Scheduler in Custom Directives]({% slug howto_wrap_schedulerin_custom_directives_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

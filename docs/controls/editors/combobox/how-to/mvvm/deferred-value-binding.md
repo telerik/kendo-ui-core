@@ -10,9 +10,9 @@ slug: howto_configure_deffered_value_binding_combobox
 
 The following example demonstrates how to configure a deferred value binding in a Kendo UI ComboBox.
 
-###### Example
 
-```html
+
+```dojo
   <h2>Combobox Server Side Filter</h2>
 
 	<input id="productID" name="productID"
@@ -81,7 +81,7 @@ The following example demonstrates how to configure a deferred value binding in 
           serverFiltering: true,
           transport: {
               read: {
-                  url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                  url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
           }
         });

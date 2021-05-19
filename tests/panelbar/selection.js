@@ -2,11 +2,11 @@
     var panelbar;
     var ul;
 
-    module("panelbar selection", {
-        setup: function() {
-            kendo.effects.disable();
+    describe("panelbar selection", function () {
+        beforeEach(function() {
 
-            QUnit.fixture.append(
+
+            Mocha.fixture.append(
                 '<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
                 '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
@@ -100,33 +100,33 @@
             ul = $("#panelbar");
 
             panelbar = new kendo.ui.PanelBar(ul);
-        },
-        teardown: function() {
-            kendo.effects.enable();
+        });
+        afterEach(function() {
+
 
             panelbar.destroy();
-        }
-    });
+        });
 
     function getRootItem(index) {
         return ul.find('.k-header').parent().eq(index)
     }
 
-    test('clicking root items selects them', function() {
+    it('clicking root items selects them', function() {
         var firstLink = getRootItem(0).find('> .k-link');
 
         firstLink.trigger({ type: 'click' });
 
-        ok(firstLink.hasClass('k-state-selected'));
+        assert.isOk(firstLink.hasClass('k-state-selected'));
     });
 
-    test('selecting root items deselects their siblings', function() {
+    it('selecting root items deselects their siblings', function() {
         var firstLink = getRootItem(0).find('> .k-link');
         var secondLink = getRootItem(1).find('> .k-link');
 
         firstLink.trigger({ type: 'click' });
         secondLink.trigger({ type: 'click' });
 
-        equal(ul.find('.k-state-selected').length, 1);
+        assert.equal(ul.find('.k-state-selected').length, 1);
     });
-})();
+    });
+}());

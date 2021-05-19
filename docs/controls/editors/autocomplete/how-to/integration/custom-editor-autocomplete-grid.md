@@ -12,9 +12,6 @@ To see the example, refer to the article on [using the Kendo UI AutoComplete wid
 
 ## See Also
 
-* [AutoComplete JavaScript API Reference](/api/javascript/ui/autocomplete)
-* [How to Dynamically Change DataSource Based on User Selections]({% slug howto_change_datasource_dynamically_autocomplete %})
-* [How to Highlight Matched Values]({% slug howto_highlight_matched_values_autocomplete %})
-* [How to Restrict Other Users]({% slug howto_restrict_user_input_autocomplete %})
-
-For more runnable examples on the Kendo UI AutoComplete, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_autocomplete %}).
+* [Basic Usage of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/index)
+* [Using the API of the AutoComplete (Demo)](https://demos.telerik.com/kendo-ui/autocomplete/api)
+* [JavaScript API Reference of the AutoComplete](/api/javascript/ui/autocomplete)

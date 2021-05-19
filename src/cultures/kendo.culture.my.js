@@ -18,7 +18,7 @@
             currency: {
                 name: "",
                 abbr: "",
-                pattern: ["-$ n","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 0,
                 ",": ",",
                 ".": ".",
@@ -35,24 +35,24 @@
                 },
                 months: {
                     names: ["ဇန်နဝါရီ","ဖေဖော်ဝါရီ","မတ်","ဧပြီ","မေ","ဇွန်","ဇူလိုင်","ဩဂုတ်","စက်တင်ဘာ","အောက်တိုဘာ","နိုဝင်ဘာ","ဒီဇင်ဘာ"],
-                    namesAbbr: ["ဇန်","ဖေ","မတ်","ဧပြီ","မေ","ဇွန်","ဇူ","ဩ","စက်","အောက်","နို","ဒီ"]
+                    namesAbbr: ["ဇန်","ဖေ","မတ်","ဧ","မေ","ဇွန်","ဇူ","ဩ","စက်","အောက်","နို","ဒီ"]
                 },
                 AM: ["နံနက်","နံနက်","နံနက်"],
                 PM: ["ညနေ","ညနေ","ညနေ"],
                 patterns: {
                     d: "dd-MM-yyyy",
-                    D: "dddd၊ dd MMMM yyyy",
-                    F: "dddd၊ dd MMMM yyyy HH:mm:ss",
-                    g: "dd-MM-yyyy HH:mm",
+                    D: "yyyy၊ MMMM d၊ dddd",
+                    F: "yyyy၊ MMMM d၊ dddd HH:mm:ss",
+                    g: "dd-MM-yyyy H:mm",
                     G: "dd-MM-yyyy HH:mm:ss",
-                    m: "d MMMM",
-                    M: "d MMMM",
+                    m: "MMMM d",
+                    M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "HH:mm",
+                    t: "H:mm",
                     T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "MMMM yyyy",
-                    Y: "MMMM yyyy"
+                    y: "yyyy MMMM",
+                    Y: "yyyy MMMM"
                 },
                 "/": "-",
                 ":": ":",

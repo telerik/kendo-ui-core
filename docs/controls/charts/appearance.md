@@ -1,37 +1,23 @@
 ---
 title: Appearance
-page_title: Appearance | Kendo UI Charts
-description: "Learn how to control the appearance of Kendo UI Charts, change their themes and manage their animated transitions."
+page_title: jQuery Chart Documentation | Appearance
+description: "Get started with the jQuery Chart by Kendo UI and learn how to control its appearance, change the themes, and manage the animated transitions."
+previous_url: /controls/charts/chart/appearance
 slug: appearance_charts_widget
-position: 5
+position: 4
 ---
 
 # Appearance
 
-The appearance of Kendo UI Charts is controlled mostly by JavaScript style options, unlike the other Kendo UI components in the suite, which use only CSS for styling.
+Unlike other Kendo UI widgets which use only CSS for styling, you can mainly control the appearance of the Chart elements by using JavaScript style options.
 
-## Chart Structure
+For more information on the structure of the Chart, refer to the articles on the [Chart building elements]({% slug seriestypeofcharts_widget %}).   
 
-The main building blocks of a Kendo UI Chart are:
+## Predefined Themes
 
-*   Title
-*   Legend
-*   Chart Area
-*   Plot Area
-*   Axes
-*   Series
+The Charts come with [a set of predefined themes]({% slug themesandappearnce_kendoui_desktopwidgets %}). To select a theme, use the `theme` option. The theme name is case-insensitive.
 
-For detailed information on [Chart titles and legends, refer to the article about them]({% slug titlelegend_features_charts %}).
-
-**Figure 1: The structure of a Chart**
-
-![Chart Structure](/controls/charts/chart-structure.png)
-
-### Themes
-
-The Kendo UI Chart widgets come with [a set of predefined themes](/styles-and-layout/appearance-styling). Use the `theme` option to select a theme, as demonstrated in the example below. The theme name is case insensitive.
-
-###### Example
+> As of the Kendo UI R2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization widgets (Gauges, Charts, Barcodes, Diagrams, and Maps) is now moved to the CSS files of the widgets]({% slug breakingchanges2015_kendoui %}). As a result, you need to remove all legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
 
     $("#chart").kendoChart({
         theme: "blueOpal",
@@ -45,17 +31,10 @@ The Kendo UI Chart widgets come with [a set of predefined themes](/styles-and-la
         }
     });
 
-> **Important**
->
-> As of the Kendo UI R2 2015 (2015.2.624) release, [all CSS code related to the rendering of data visualization, i.e. referring to Gauges, Charts, Barcodes, Diagrams, and Maps, has been moved to the web widgets' CSS files]({% slug breakingchanges2015_kendoui %}). Please remove any legacy references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`.
 
-### Sass Themes
+## Sass Themes
 
-As of the Kendo UI R2 2017 SP1 release, the Chart provides styling options through [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
-
-When the theme is set to `"inherit"`, the component reads colors and fonts from the theme variables.
-
-###### Example
+As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-based themes]({% slug sassbasedthemes_kendoui %}). When the theme is set to `inherit`, the Chart reads colors and fonts from the theme variables.
 
     $("#chart").kendoChart({
         theme: "inherit",
@@ -70,11 +49,9 @@ When the theme is set to `"inherit"`, the component reads colors and fonts from 
     });
 
 
-### Transitions
+## Animated Transitions
 
-Kendo UI Charts use animated transitions to display new and updated data. These transitions can be disabled through the `transitions` option, as demonstrated below.
-
-###### Example
+Kendo UI Charts use animated transitions to display new and updated data. To disable these transitions, use the `transitions` option.
 
     $("#chart").kendoChart({
         series: [{
@@ -90,15 +67,5 @@ Kendo UI Charts use animated transitions to display new and updated data. These 
 
 ## See Also
 
-Other articles on Kendo UI Charts:
-
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Binding]({% slug databinding_charts_widget %})
-* [Date Series]({% slug dateseries_charts_widget %})
-* [Tooltip]({% slug tooltip_charts_widget %})
-* [Chart Notes]({% slug chartnotes_charts_widget %})
-* [Title and Legend]({% slug titlelegend_features_charts %})
-* [Error Bars]({% slug errorbars_charts_widget %})
-* [Data Series]({% slug seriestypeofcharts_widget %})
-* [Types of Kendo UI Charts]({% slug areacharts_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Using the API of the Chart (Demo)](https://demos.telerik.com/kendo-ui/chart-api/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

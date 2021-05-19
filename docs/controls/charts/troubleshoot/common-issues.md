@@ -1,6 +1,6 @@
 ---
 title: Common Issues
-page_title: Common Issues | Kendo UI Charts
+page_title: jQuery Chart Documentation | Common Issues
 description: "Learn how to deal with issues you may encounter while using the Kendo UI Chart widget."
 previous_url: /dataviz/troubleshooting
 slug: troubleshooting_chart_widget
@@ -9,37 +9,117 @@ position: 1
 
 # Common Issues
 
-This page provides solutions for common problems related to the Kendo UI Charts.
+This article provides solutions for issues you might encounter while working with the Kendo UI Charts for jQuery.
 
-## Rendering
+## Chart labels overlap after refresh in Internet Explorer
 
-### Chart Graphics Do Not Render in Internet Explorer
+This limitation is browser-specific and is due to the lack of events that can be handled in regards to the font loading of the browser.
 
-**Figure 1: Chart in the Internet Explorer with its graphics failing to render**
+**Solution** To work around this issue, either:
 
-![Chart in IE](/styles-and-layout/chart-ie.png)
+* Delay the initialization of the Chart, or
+* Add the [`@telerik/kendo-pack-fonts`](https://www.npmjs.com/package/@telerik/kendo-pack-fonts) module. For more information on how to implement this approach, refer to the article on [packing fonts for export]({% slug howto_packfontsforpdfexport_drawingapi %}).
 
-> **Important**
->
-> A security message suggesting that you enable the Intranet settings might appear. If you choose to do so, then you do not need to follow the steps below.
+The following Dojo example demonstrates how to handle the issue by using `kendo-pack-fonts`. In Internet Explorer, open the implementation in full-screen mode.
 
-**Solution**
+```dojo
+ <script src="https://cdn.rawgit.com/telerik/kendo-pack-fonts/8dc63142/sample/fonts.js"></script>
+    <div id="example">
+      <div class="demo-section k-content wide">
+        <div id="chart"></div>
+      </div>
+       <script>
+        function createChart() {
+          $("#chart").kendoChart({
+            title: {
+              text: "Gross domestic product growth \n /GDP annual %/"
+            },
+            legend: {
+              position: "bottom",
+              labels: {
+                font: "10px 'DejaVu Sans'"
+              }
+            },
+            chartArea: {
+              background: ""
+            },
+            seriesDefaults: {
+              type: "line",
+              style: "smooth"
+            },
+            series: [{
+              name: "India Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+              data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+            },{
+              name: "World Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+              data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+            },{
+              name: "Russian Federation Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+              data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3]
+            },{
+              name: "Haiti  Lorem ipsum dolor sit amet, consectetur adipisicing elits",
+              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            },{
+              name: "Haiti  Lorem ipsum dolor sit amet, consectetur adipisicing elits",
+              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            },{
+              name: "Haiti  Lorem ipsum dolor sit amet, consectetur adipisicing elits",
+              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            },{
+              name: "Haiti  Lorem ipsum dolor sit amet, consectetur adipisicing elits",
+              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            },{
+              name: "Haiti  Lorem ipsum dolor sit amet, consectetur adipisicing elits",
+              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            },{
+              name: "Haiti  Lorem ipsum dolor sit amet, consectetur adipisicing elits",
+              data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            }],
+            valueAxis: {
+              labels: {
+                format: "{0}%"
+              },
+              line: {
+                visible: false
+              },
+              axisCrossingValue: -10
+            },
+            categoryAxis: {
+              categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+              majorGridLines: {
+                visible: false
+              },
+              labels: {
+                rotation: "auto"
+              }
+            },
+            tooltip: {
+              visible:false
+            }
+          });
+        }
+        $(document).ready(createChart);
+      </script>
+    </div>
+```
 
-Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
+## Chart graphics do not render in Internet Explorer
 
-**Figure 2: Options and settings to apply to render the chart graphics**
+![A Chart in the Internet Explorer with its graphics failing to render](../../../styles-and-layout/chart-ie.png)
 
-![IEscript behaviors](/styles-and-layout/chart-ie-script-behaviors.png)
+> A security message which prompts you to enable the Intranet settings might appear. If you do so, skip the following steps.
 
-### Chart Does Not Render with JavaScript Disabled
+**Solution** Select **Internet Options** > **Security** > **Internet** (or **Local intranet**) > **Custom Level**  and enable **Binary and script behaviors** by ticking the **Enable** radio button.
+
+![Options and settings to apply to render the chart graphics](../../../styles-and-layout/chart-ie-script-behaviors.png)
+
+## The Chart does not render when JavaScript is disabled
 
 The Kendo UI Chart widgets requires JavaScript to run.
 
-**Solution**
+**Solution** Enable JavaScript.
 
-Enable JavaScript.
-
-### Chart Does Not Render on Mobile Device or Tablet
+## The Chart does not render on mobile devices or tablets
 
 The browser must support SVG as the below ones do:
 
@@ -47,25 +127,15 @@ The browser must support SVG as the below ones do:
 2.  Opera Mobile 10.0 and later versions
 3.  Android 3.0 and later versions
 
-## Export
+## The layout of the Chart is different in the exported PDF files
 
-### Layout Is Different in Exported PDF Files
+Such issues are typically caused by the different fonts that are used on screen and in the PDF. For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font which leads to layout and encoding issues.
 
-Such issues are typically caused by the different fonts that are used on screen and in the PDF.
+**Solution** [Make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-custom). This means that the fonts have to be available as binary TTF files and registered for export which is demonstrated in the [PDF Export demo on Charts](https://demos.telerik.com/kendo-ui/pdf-export/index) as well.
 
-For display, the browser will substitute the selected font with whatever is provided by the system. During export, you will take the metrics from the actual font in use and determine the PDF layout from that. It is likely that the resulting PDF will be displayed with a different font, leading to layout and encoding issues.
+The following example demonstrates how to embed fonts in exported PDF.
 
-**Solution**
-
-The solution is to [make the fonts available for embedding]({% slug pdfderawingexport_drawingapi %}#configuration-Custom). This means that the fonts should be available as binary TTF files and registered for export.
-
-This is demonstrated in the [PDF Export demo on Charts](http://demos.telerik.com/kendo-ui/pdf-export/index) as well.
-
-The example below demonstrates how to embed fonts in exported PDF.
-
-###### Example
-
-```html
+```dojo
 <button class='export-pdf k-button'>Save as PDF</button>
 
 <div id="chart"></div>
@@ -92,7 +162,7 @@ The example below demonstrates how to embed fonts in exported PDF.
      $("#chart").kendoChart({
         pdf: {
             fileName: "Kendo UI Chart Export.pdf",
-            proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
         },
         title: {
             text: "Gross domestic product growth \n /GDP annual %/",
@@ -122,31 +192,9 @@ The example below demonstrates how to embed fonts in exported PDF.
 
 ## See Also
 
-Other articles on styling, appearance, and rendering of Kendo UI widgets:
-
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Rendering Modes for Data Visualization]({% slug renderingmodesfor_datavisualization_kendouistyling %})
-
-Other articles on troubleshooting:
-
 * [Performance Issues in Kendo UI Widgets for Data Visualization]({% slug tipsandtricks_kendouistyling %})
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Kendo UI JavaScript Errors]({% slug troubleshooting_javascript_errors_kendoui %})
 * [Kendo UI Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
-* [Kendo UI Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
-* [Common Issues in Kendo UI Excel Export]({% slug troubleshooting_excel_export_kendoui %})
-* [Common Issues in Kendo UI ComboBox]({% slug troubleshooting_common_issues_combobox_kendoui %})
-* [Common Issues in Kendo UI Diagram]({% slug troubleshooting_diagram_widget %})
-* [Common Issues in Kendo UI DropDownList]({% slug troubleshooting_common_issues_dropdownlist_kendoui %})
-* [Common Issues in Kendo UI Editor]({% slug troubleshooting_editor_widget %})
-* [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
-* [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
-* [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
-* [Validation Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
-* [Scaffolding Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
-* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
-* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshoot/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/upload/troubleshoot/troubleshooting)

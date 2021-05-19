@@ -1,23 +1,22 @@
 ---
 title: Scatter Charts
-page_title: Scatter Charts | Kendo UI Charts
+page_title: jQuery Chart Documentation | Scatter Charts
 description: "Learn how to create a Kendo UI Scatter Chart and use the different options it provides."
 slug: scattercharts_widget
+position: 3
 ---
 
 # Scatter Charts
 
-The [Kendo UI Scatter Chart widget](http://demos.telerik.com/kendo-ui/scatter-charts/index) shows data as points defined by the values of their items. Scatter Charts are useful for displaying the relation between different sets of data, such as scientific experimental results, and plotting two-dimensional data.
+Scatter charts display data as points that are defined by the values of their items.
 
-## Getting Started
+Scatter Charts are useful for displaying the relation between different sets of data (for example, scientific experimental results) and plotting two-dimensional data.
 
-### Create the Scatter Chart
+* [Demo page for the Scatter Charts](https://demos.telerik.com/kendo-ui/scatter-charts/index)
 
-Each data point is an array that contains two values&mdash;`X` and `Y`.
+## Creating the Scatter Chart
 
-The example below demonstrates how to create a Scatter Line Chart.
-
-###### Example
+Each data point of a Scatter Chart is an array that contains the `X` and `Y` values.
 
     $("#chart").kendoChart({
         title: {
@@ -59,18 +58,11 @@ The example below demonstrates how to create a Scatter Line Chart.
         }
     });
 
+![A sample Scatter Line Chart](chart-scatter-line.png)
 
-**Figure 1: A sample Scatter Line Chart.**
+## Setting the Line Type
 
- ![Scatter Line Chart](/controls/charts/chart-types/chart-scatter-line.png)
-
-## Configuration
-
-### Types of Lines
-
-The default line type is solid. However, dash styles are also available through the `dashType` option, as demonstrated in the example below.
-
-###### Example
+The default line type of a Scatter Chart is solid. You can implement the dash line styles by using the `dashType` option.
 
   series: [{
       type: "scatterLine",
@@ -79,31 +71,15 @@ The default line type is solid. However, dash styles are also available through 
       dashType: "dot"
   }]
 
-**Figure 2: Dash line types**
+![A Scatter Chart with a dash type of line](chart-dash-types.png)
 
-![Dash Type](/controls/charts/chart-types/chart-dash-types.png)
+## Removing Connecting Lines
 
-### Removal of Connecting Lines
+To remove the connecting lines, specify `"scatter"` instead of `"scatterLine"`.
 
-To remove the connecting lines, specify `"scatter"` instead of `"scatterLine"`, which results in the Scatter Chart below.
-
-**Figure 3: A Scatter Chart with removed connecting lines**
-
-![Scatter Chart](/controls/charts/chart-types/chart-scatter.png)
+![A Scatter Chart with removed connecting lines](chart-scatter.png)
 
 ## See Also
 
-Other articles on Kendo UI Charts and chart types:
-
-* [Overview of the Chart Widgets]({% slug overview_kendoui_charts_widget %})
-* [Data Series Charts]({% slug seriestypeofcharts_widget %})
-* [Area Charts]({% slug areacharts_widget %})
-* [Bar Charts]({% slug bartypeofcharts_widget %})
-* [Bubble Charts]({% slug bubblecharts_widget %})
-* [Funnel Charts]({% slug funnelcharts_widget %})
-* [Line Charts]({% slug linetypeoscharts_widget %})
-* [Pie Charts]({% slug pietypecharts_widget %})
-* [Sparklines]({% slug overview_kendoui_sparklinescharts %})
-* [Stock Charts]({% slug overview_kendoui_stockcharts %})
-* [TreeMap]({% slug overview_treemap_widget %})
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Scatter Chart (Demo)](https://demos.telerik.com/kendo-ui/scatter-charts/index)
+* [JavaScript API Reference of the Chart](/api/javascript/dataviz/ui/chart)

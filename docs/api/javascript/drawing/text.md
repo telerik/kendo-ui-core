@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Text : kendo.drawing.Element
+
 Draws a single line of text at the given position.
 
 #### Example - creating a text
@@ -35,11 +36,11 @@ The configuration options.
 
 ### clip `kendo.drawing.Path`
 The element clipping path.
-Inherited from [Element.clip](element#configuration-clip)
+Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
 
 ### cursor `String`
 The element cursor.
-Inherited from [Element.cursor](element#configuration-cursor)
+Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
 
 ### fill `kendo.drawing.FillOptions`
 The fill options of the text.
@@ -54,7 +55,7 @@ Examples of valid font values:
 
 ### opacity `Number`
 The element opacity.
-Inherited from [Element.opacity](element#configuration-opacity)
+Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
 ### stroke `kendo.drawing.StrokeOptions`
 The stroke options of the text.
@@ -64,17 +65,17 @@ The tooltip options of the shape.
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this element.
-Inherited from [Element.transform](element#configuration-transform)
+Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
 
 ### visible `Boolean`
 A flag, indicating if the element is visible.
-Inherited from [Element.visible](element#configuration-visible)
+Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
 
 ## Methods
 
 ### bbox
 Returns the bounding box of the element with transformations applied.
-Inherited from [Element.bbox](element#methods-bbox)
+Inherited from [Element.bbox](/api/javascript/drawing/element#methods-bbox)
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with transformations applied.
@@ -82,7 +83,7 @@ Inherited from [Element.bbox](element#methods-bbox)
 
 ### clip
 Gets or sets the element clipping path.
-Inherited from [Element.clip](element#methods-clip)
+Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
 
 #### Parameters
 
@@ -95,7 +96,7 @@ The element clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](element#methods-clippedBBox)
+Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
@@ -141,15 +142,15 @@ The new text content to set.
 
 
 ### fill
-Sets the text [fill](#configuration-fill).
+Sets the text [fill](/api/javascript/drawing/text#configuration-fill).
 
 #### Parameters
 
 ##### color `String`
-The [fill color](fill-options#fields-color) to set.
+The [fill color](/api/javascript/drawing/fill-options#fields-color) to set.
 
 ##### opacity `Number` *optional*
-The [fill opacity](fill-options#fields-opacity) to set.
+The [fill opacity](/api/javascript/drawing/fill-options#fields-opacity) to set.
 
 #### Returns
 `kendo.drawing.Text` The current instance to allow chaining.
@@ -157,7 +158,7 @@ The [fill opacity](fill-options#fields-opacity) to set.
 
 ### opacity
 Gets or sets the element opacity.
-Inherited from [Element.opacity](element#methods-opacity)
+Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
 
 If set, the stroke and fill opacity will be multiplied by the element opacity.
 
@@ -200,18 +201,18 @@ The new position of the text upper left corner.
 
 
 ### stroke
-Sets the text [stroke](#configuration-stroke).
+Sets the text [stroke](/api/javascript/drawing/text#configuration-stroke).
 
 #### Parameters
 
 ##### color `String`
-The [stroke color](stroke-options#fields-color) to set.
+The [stroke color](/api/javascript/drawing/stroke-options#fields-color) to set.
 
 ##### width `Number` *optional*
-The [stroke width](stroke-options#fields-width) to set.
+The [stroke width](/api/javascript/drawing/stroke-options#fields-width) to set.
 
 ##### opacity `Number` *optional*
-The [stroke opacity](stroke-options#fields-opacity) to set.
+The [stroke opacity](/api/javascript/drawing/stroke-options#fields-opacity) to set.
 
 #### Returns
 `kendo.drawing.Text` The current instance to allow chaining.
@@ -219,7 +220,7 @@ The [stroke opacity](stroke-options#fields-opacity) to set.
 
 ### transform
 Gets or sets the transformation of the element.
-Inherited from [Element.transform](element#methods-transform)
+Inherited from [Element.transform](/api/javascript/drawing/element#methods-transform)
 
 #### Parameters
 
@@ -232,7 +233,7 @@ The transformation to apply to the element.
 
 ### visible
 Gets or sets the visibility of the element.
-Inherited from [Element.visible](element#methods-visible)
+Inherited from [Element.visible](/api/javascript/drawing/element#methods-visible)
 
 #### Parameters
 

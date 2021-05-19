@@ -1,7 +1,7 @@
 @import "button.less";
 @import "navbar.less";
 
-/* Toolbar */
+// Toolbar
 
 .km-root .k-toolbar
 {
@@ -17,6 +17,17 @@
 
 .km-root .km-widget.k-toolbar
 {
+    .box-sizing(border-box);
+}
+
+.km-root .k-scheduler-toolbar.k-toolbar,
+.km-root .k-scheduler-footer.k-toolbar {
+    .box-sizing(border-box);
+    padding: 0.8em;
+    display: flex;
+}
+
+.km-root .k-scheduler-toolbar [class^="k-"] {
     .box-sizing(border-box);
 }
 

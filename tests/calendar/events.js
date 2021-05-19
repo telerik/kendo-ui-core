@@ -4,57 +4,56 @@ var Calendar = kendo.ui.Calendar,
     instance,
     div;
 
-module("kendo.ui.Calendar events", {
-    setup: function() {
-        kendo.effects.disable();
-        div = $("<div />").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.effects.enable();
-        instance.destroy();
-        kendo.destroy(QUnit.fixture);
-    }
-});
+describe("kendo.ui.Calendar events", function () {
+    beforeEach(function() {
 
-test("click on cell raise change event", 1, function() {
+        div = $("<div />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+
+        instance.destroy();
+        kendo.destroy(Mocha.fixture);
+    });
+
+it("click on cell raise change event", function() {
     instance = new Calendar(div, {
         change: function() {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 
     var cell = div.find("tbody").find("td:not(.k-other-month)").eq(0);
     cell.click();
 });
 
-test("click on selected cell does not raise change event", 0, function() {
+it("click on selected cell does not raise change event", function() {
     var date = new Date(2000, 10, 1);
 
     instance = new Calendar(div, {
         value: date,
         change: function() {
-            ok(false);
+            assert.isOk(false);
         }
-    });
+        });
 
     div.find("tbody").find("td:not(.k-other-month)").eq(0).click();
 });
 
-test("click on empty cell does not raise change event", 0, function() {
+it("click on empty cell does not raise change event", function() {
     var date = new Date(2000, 10, 1);
 
     instance = new Calendar(div, {
         value: date,
         max: date,
         change: function() {
-            ok(false);
+            assert.isOk(false);
         }
-    });
+        });
 
     div.find("tbody").find("td:has(.k-link):last").next().click();
 });
 
-test("click on cell put in range", function() {
+it("click on cell put in range", function() {
     var date = new Date(2000, 10, 1);
 
     instance = new Calendar(div, {
@@ -68,20 +67,20 @@ test("click on cell put in range", function() {
 
     div.find("tbody").find("td:has(.k-link)").last().click();
 
-    deepEqual(instance.args("navigateDown")[0], date);
+    assert.deepEqual(instance.args("navigateDown")[0], date);
 });
 
-test("navigate event should raise navigate event when change view", 2, function() {
+it("navigate event should raise navigate event when change view", function() {
     instance = new Calendar(div, {
         navigate: function(e) {
-            ok(true);
+            assert.isOk(true);
         }
-    });
+        });
 
     div.find(".k-nav-prev").click();
 });
 
-test("click on cell should persist _viewedValue", function() {
+it("click on cell should persist _viewedValue", function() {
     var date = new Date(2000, 10, 22, 22, 22, 22),
         instance = new Calendar(div, {
             value: date
@@ -93,7 +92,8 @@ test("click on cell should persist _viewedValue", function() {
     div.find("tbody").find("td:not(.k-other-month):first").click(); //click "2000" cell
     div.find("tbody").find("td:last").prev().click(); //click "Nov" cell
 
-    deepEqual(instance.current(), date);
+    assert.deepEqual(instance.current(), date);
 });
 
-})();
+    });
+}());

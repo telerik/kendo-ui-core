@@ -2,6 +2,7 @@
 title: effects
 page_title: API reference for Kendo UI Effects
 res_type: api
+component: effects
 ---
 
 # kendo.effects
@@ -25,6 +26,7 @@ The element to calculate dimensions for.
     <div id="foo" style="position: absolute; top:10px; left: 10px; height: 200px; width: 200px"></div>
     <script>
         var fooBox = kendo.effects.box($("#foo"));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(fooBox); // { top: 10, left: 10, width: 200, height: 200 }
     </script>
 
@@ -50,6 +52,7 @@ The second element.
         var fooBox = kendo.effects.box($("#foo"));
         var barBox = kendo.effects.box($("#bar"));
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.effects.fillScale(barBox, fooBox)); // 0.25;
     </script>
 
@@ -75,6 +78,7 @@ The second element.
         var fooBox = kendo.effects.box($("#foo"));
         var barBox = kendo.effects.box($("#bar"));
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.effects.fitScale(barBox, fooBox)); // 0.5;
     </script>
 
@@ -97,6 +101,7 @@ The second element.
     <div id="foo" style="position: absolute; top:10px; left: 10px; height: 200px; width: 200px; border: 1px solid red;">foo</div>
     <div id="bar" style="position: absolute; top:60px; left: 60px; height: 100px; width: 100px; border: 1px solid blue;">bar</div>
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(kendo.effects.transformOrigin(kendo.effects.box("#bar"), kendo.effects.box("#foo"))); // x: 101, y: 101
     </script>
 

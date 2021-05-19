@@ -11,9 +11,7 @@ Your project might require you to filter the ListView dataSource based on a Slid
 
 The following example demonstrates how to achieve this behavior and display the inclusive or exclusive filtering functionality.
 
-###### Example
-
-```html
+```dojo
     <div id="rangeslider1" class="slider">
       <input />
       <input />
@@ -29,7 +27,7 @@ The following example demonstrates how to achieve this behavior and display the 
 
     <script type="text/x-kendo-tmpl" id="template">
     <div class="product">
-      <img src="http://demos.kendoui.com/content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
+      <img src="https://demos.telerik.com/kendo-ui/content/web/foods/${ProductID}.jpg" alt="${ProductName} image" />
         <h3>${ProductName}, $${UnitPrice}</h3>
           <p>${kendo.toString(UnitPrice, "c")}</p>
       </div>
@@ -86,7 +84,7 @@ The following example demonstrates how to achieve this behavior and display the 
       var dataSource = new kendo.data.DataSource({
         transport: {
           read: {
-            url: "http://demos.kendoui.com/service/Products",
+            url: "https://demos.telerik.com/kendo-ui/service/Products",
             dataType: "jsonp"
           }
         }
@@ -107,8 +105,6 @@ The following example demonstrates how to achieve this behavior and display the 
 
 ## See Also
 
-* [ListView JavaScript API Reference](/api/javascript/ui/listview)
+* [JavaScript API Reference of the ListView](/api/javascript/ui/listview)
 * [How to Persist Row Selection during Data Operations]({% slug howto_persists_row_selection_listview %})
 * [How to Reorder Using Drag-and-Drop and Kendo UI Touch]({% slug howto_reorder_using_draganddrop_kendouitouch_listview %})
-
-For more runnable examples on Kendo UI ListView, browse its [**How To** documentation folder]({% slug add_custom_delete_confirmation_dialog %}).

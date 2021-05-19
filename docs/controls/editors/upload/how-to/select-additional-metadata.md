@@ -9,9 +9,9 @@ slug: howto_select_additional_metadata_upload
 
 The following example demonstrates how to upload files and select additional metadata by using the Kendo UI Upload.
 
-###### Example
 
-```html
+
+```dojo
 <div id="example">
           <h3>Upload files and select additional metadata</h3>
             <div class="demo-section k-header">

@@ -84,7 +84,10 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper = that.element;
 
-            isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
+            if(that.options.orientation){
+                isHorizontal = that.options.orientation.toLowerCase() != VERTICAL;
+            }
+
             that.orientation = isHorizontal ? HORIZONTAL : VERTICAL;
             that._dimension = isHorizontal ? "width" : "height";
             that._keys = {
@@ -340,7 +343,7 @@ var __meta__ = { // jshint ignore:line
         },
         _updateSplitBar: function(splitbar, previousPane, nextPane) {
             var catIconIf = function(iconType, condition) {
-                   return condition ? "<div class='k-icon " + iconType + "' />" : "";
+                   return condition ? "<div class='k-icon " + iconType + "'></div>" : "";
                 },
                 orientation = this.orientation,
                 draggable = (previousPane.resizable !== false) && (nextPane.resizable !== false),
@@ -578,9 +581,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         remove: function(pane) {
-            pane = $(pane);
-
             var that = this;
+            pane = that.wrapper.find(pane);
 
             if (pane.length) {
                 kendo.destroy(pane);

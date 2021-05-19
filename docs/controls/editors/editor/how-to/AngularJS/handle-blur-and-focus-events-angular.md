@@ -20,9 +20,7 @@ The Editor can be initialized from a `<textarea>` HTML element&mdash;[the classi
 
 The following example demonstrates how to handle the `blur` and the `focus` events in AngularJS when the Editor is in the classic mode.
 
-###### Example
-
-```html
+```dojo
     <style>
         #editor{
           position: absolute;
@@ -42,8 +40,8 @@ The following example demonstrates how to handle the `blur` and the `focus` even
               restrict: 'A',
               link: function (scope, element, attrs) {
                 scope.$on("kendoWidgetCreated", function(event, widget){
-                  // the event is emitted for every widget; if you have multiple
-                  // widgets, check that the event
+                  // The event is emitted for every widget.
+                  // If you have multiple widgets, check that the event
                   // is for the one you are interested in.
                   if (widget === scope.Editor) {
                     $(widget.body).focus(function(){
@@ -67,9 +65,7 @@ The Editor can be initialized from a `<div>` HTML element&mdash;[the inline mode
 
 The following example demonstrates how to handle the `blur` and the `focus` events in AngularJS when the Editor is in the inline mode.
 
-###### Example
-
-```html
+```dojo
     <style>
       #editor{
         position: absolute;
@@ -102,11 +98,6 @@ The following example demonstrates how to handle the `blur` and the `focus` even
 
 ## See Also
 
-* [Editor JavaScript API Reference](/api/javascript/ui/editor)
-* [How to Get Reference to Child Widgets]({% slug howto_get_referenceto_child_widgets_editor %})
-* [How to Insert HTML Content via Custom Popup Tools]({% slug howto_insert_html_content_custom_popup_tool_editor %})
-* [How to Set Caret Position]({% slug howto_set_caret_position_editor %})
-* [How to Show Editor in Full Screen]({% slug howto_show_infull_screen_editor %})
-* [How to Use Inline Editor inside Windows]({% slug howto_use_inline_editor_inside_windows_editor %})
-
-For more runnable examples on the Kendo UI Editor, browse its **How To** documentation folder.
+* [Basic Usage of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/index)
+* [Using the API of the Editor (Demo)](https://demos.telerik.com/kendo-ui/editor/api)
+* [JavaScript API Reference of the Editor](/api/javascript/ui/editor)

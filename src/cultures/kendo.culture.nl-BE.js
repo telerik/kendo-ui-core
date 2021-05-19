@@ -4,13 +4,13 @@
         numberFormat: {
             pattern: ["-n"],
             decimals: 2,
-            ",": " ",
+            ",": ".",
             ".": ",",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
                 decimals: 2,
-                ",": " ",
+                ",": ".",
                 ".": ",",
                 groupSize: [3],
                 symbol: "%"
@@ -18,7 +18,7 @@
             currency: {
                 name: "Euro",
                 abbr: "EUR",
-                pattern: ["-n $","n $"],
+                pattern: ["-$ n","$ n"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",

@@ -1,7 +1,3 @@
-.transition(@transition) {
-    transition: ~"@{transition}";
-}
-
 .flexbox() {
     display: flex;
 }
@@ -62,6 +58,14 @@
     box-sizing: @sizing;
 }
 
+.button-inner-size( @multiplier: 1 ) {
+    @button-inner-size: ~"calc( (2 * @{button-padding-y} + @{line-height}) * @{multiplier} )";
+}
+
+.button-size( @multiplier: 1, @button-border-width: 1px ) {
+    @button-size: ~"calc( (2 * @{button-border-width} + 2 * @{button-padding-y} + @{line-height}) * @{multiplier} )";
+}
+
 .transform(...) {
     transform: @arguments;
 }
@@ -74,10 +78,6 @@
     transform-style: @arguments;
 }
 
-.transition(...) {
-    transition: @arguments;
-}
-
 .guarded-border-radius(@value) when (@value < 0) {
     border-radius: 0;
 }
@@ -86,34 +86,8 @@
     border-radius: @value;
 }
 
-.box-shadow(...) {
+.box-shadow(@shadow; @rest...) when not (@shadow = null) {
     box-shadow: @arguments;
-}
-
-.window-shadow(@shadow-color) when not (@shadow-color = transparent) {
-    border-color: @shadow-color;
-    .box-shadow(@window-shadow-style lighten(@shadow-color, 50%));
-
-    &.k-state-focused {
-        border-color: @shadow-color;
-        .box-shadow(@window-shadow-style @shadow-color);
-    }
-}
-
-.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) < 50%) {
-    border-color: @widget-border-color;
-
-    &.k-state-focused {
-        border-color: lighten(@widget-border-color, 20%);
-    }
-}
-
-.window-shadow(@shadow-color) when (@shadow-color = transparent) and (lightness(@widget-background-color) >= 50%) {
-    border-color: @widget-border-color;
-
-    &.k-state-focused {
-        border-color: darken(@widget-border-color, 10%);
-    }
 }
 
 .background-clip(@type) {
@@ -124,7 +98,8 @@
     background-image: @texture;
 }
 
-.composite-background(@gradient) when not (@gradient = none) {
+
+.composite-background(@gradient) when not (@gradient = none) and not (@gradient = null) {
     background-image: @fallback-texture;
     background-image: @texture, ~"linear-gradient(to bottom, @{gradient})";
 }
@@ -159,4 +134,59 @@
     text-indent: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+
+.border-radius( @border-radius ) {
+    border-radius: @border-radius;
+}
+.border-top-radius( @border-radius ) {
+    border-top-left-radius: @border-radius;
+    border-top-right-radius: @border-radius;
+}
+.border-right-radius( @border-radius ) {
+    border-top-right-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+}
+.border-bottom-radius( @border-radius ) {
+    border-bottom-right-radius: @border-radius;
+    border-bottom-left-radius: @border-radius;
+}
+.border-left-radius( @border-radius ) {
+    border-bottom-left-radius: @border-radius;
+    border-top-left-radius: @border-radius;
+}
+
+
+.color(@text) when not (@text = null) {
+    color: @text;
+}
+.background-color(@bg) when not (@bg = null) {
+    background-color: @bg;
+}
+.border-color(@border, @rest...) when not (@border = null) {
+    border-color: @arguments;
+}
+.linear-gradient(@gradient; @rest...) when not (@gradient = null) {
+    background-image: linear-gradient( @arguments );
+}
+.fill(@text: null; @bg: null; @border: null; @gradient: null) {
+    .border-color(@border);
+    .color(@text);
+    .background-color(@bg);
+    .linear-gradient(@gradient);
+}
+
+
+.hide-scrollbar(@dir: right, @max-scrollbar: 100px) {
+    // anything larger than the scrollbar width will do
+    @scrollbar-size: 17px;
+    @margin: calc(-@max-scrollbar - @scrollbar-size);
+
+    padding-right: @max-scrollbar;
+    padding-left: @max-scrollbar;
+    margin-left: -@max-scrollbar;
+    margin-right: -@max-scrollbar;
+
+    margin-@{dir}: @margin;
 }

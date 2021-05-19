@@ -1,38 +1,31 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Single-Page Application
+page_title: Single-Page Application Overview | Kendo UI Single-Page Application
 description: "Learn how to create a Kendo UI Single-Page Application."
 slug: overview_kendoui_singlepageapplication
 position: 1
 ---
 
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
+
 # Single-Page Application Overview
 
-The [Kendo UI Single-Page Application (SPA)](http://demos.telerik.com/kendo-ui/spa/index) is a set of classes which aim at simplifying the building of rich client-side based web applications.
+The [Kendo UI Single-Page Application (SPA)](https://demos.telerik.com/kendo-ui/spa/index) is a set of classes which aim at simplifying the building of rich client-side based web applications.
 
-For more information about the Single-page Application pattern, refer to the [Single-page Application Wikipedia article](http://en.wikipedia.org/wiki/Single-page_application).
+For more information about the SPA pattern, refer to the [Wikipedia article](https://en.wikipedia.org/wiki/Single-page_application).
 
-## Basics
+## Basic Concepts
 
-### Router Class
+* The `Router` class is responsible for tracking the application state and navigating between the application states. The router integrates into the browser history using the fragment version of the URL (`#page`), making the application states book-markable and linkable. The router instance is also used for programmatic navigation to a given state. For more information on Kendo UI `Router` class, refer to [its overview article]({% slug router_kendoui_singlepageapplication %}).
+* The `View` and `Layout` classes are used for the UI rendering. UI event handling and data binding can be performed either through MVVM or through declarative data attribute initialization.
 
-The `Router` class is responsible for tracking the application state and navigating between the application states. The router integrates into the browser history using the fragment version of the URL (`#page`), making the application states book-markable and linkable. The router instance is also used for programmatic navigation to a given state.
+## Creating the SPA
 
-For detailed information on Kendo UI `Router` class, refer to [its overview article]({% slug router_kendoui_singlepageapplication %}).
+The following example demonstrates how to create a Kendo UI SPA.
 
-### View and Layout Classes
-
-The `View` and `Layout` classes are used for the UI rendering. UI event handling and data binding can be performed either through MVVM or through declarative data attribute initialization.
-
-## Getting Started
-
-### Create the SPA
-
-The example below demonstrates how to create a Kendo UI Single-Page Application.
-
-###### Example
-
-```html
+```dojo
     <div id="app"></div>
 
     <script id="index" type="text/x-kendo-template">
@@ -42,7 +35,7 @@ The example below demonstrates how to create a Kendo UI Single-Page Application.
     </script>
 
     <script>
-        // models
+        // Models.
       	var viewModel = kendo.observable({
           foo: "World!",
 
@@ -65,7 +58,7 @@ The example below demonstrates how to create a Kendo UI Single-Page Application.
         });
 
 
-        // views, layouts
+        // Views, layouts.
         var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer>Footer</footer>");
 
         var index = new kendo.View("index", { model: viewModel, init: viewModel.init.bind(viewModel), show: viewModel.show.bind(viewModel) });
@@ -73,7 +66,7 @@ The example below demonstrates how to create a Kendo UI Single-Page Application.
         var detail = new kendo.View("<span>Detail - press your browser back button to navigate back.</span>");
 
 
-        // routing
+        // Routing.
         var router = new kendo.Router();
 
       	router.bind("init", function() {
@@ -97,8 +90,6 @@ The example below demonstrates how to create a Kendo UI Single-Page Application.
 ```
 
 ## See Also
-
-Other articles on Kendo UI Single-Page Application:
 
 * [Single-Page Application Router]({% slug router_kendoui_singlepageapplication %})
 * [SPA Layout]({% slug layout_kendoui_singlepageapplication %})

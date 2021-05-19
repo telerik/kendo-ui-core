@@ -1,20 +1,18 @@
 ---
-title: Encodings
-page_title: Encodings | Kendo UI Barcode
-description: "Learn more about the character set and length, and check the digits of the Barcode symbologies when configuring the Kendo UI Barcode widget."
+title: Encoding
+page_title: jQuery Barcode Documentation | Encoding
+description: "Get started with the jQuery Barcode by Kendo UI and learn more about the character set and length and check the digits of the symbologies."
 slug: encodings_kendoui_barcode_widget
 position: 2
 ---
 
-# Encodings
+# Encoding
 
-The mapping between messages and barcodes is called symbology (encoding).
+Encoding (symbology) represents the mapping between messages and barcodes.
 
-The symbology specification includes the encoding of the individual digits or characters of the message, the start and stop markers in the bars and the space, the size of the quiet zone required to be before and after the barcode, as well as the computation of a checksum.
+The symbology specification includes the encoding of the individual digits or characters of the message, the start and stop markers in the bars and the space, the size of the quiet zone before and after the Barcode, and the computation of a checksum.
 
-## Supported Symbologies
-
-The following table lists the symbologies and their specifications that the [Barcode](http://demos.telerik.com/kendo-ui/barcode/index) supports.
+The following table lists the available symbologies and their specifications supported by the Barcode.
 
 <style scoped>
     .stripes
@@ -42,9 +40,7 @@ The following table lists the symbologies and their specifications that the [Bar
     }
 </style>
 
-> **Important**
->
-> If the value for a particular encoding you provide does not meet the expected length or character set, it will throw an error.
+> If the value of a particular encoding does not meet the expected length or character set, it will throw an error.
 
 <table class="stripes" style="margin-top: 1.2em;">
    <tbody>
@@ -61,7 +57,7 @@ The following table lists the symbologies and their specifications that the [Bar
            <td>optional (Mod. 43)</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Code_39#Full_ASCII_Code_39">Code39Extended</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_39#Full_ASCII_Code_39">Code39Extended</a></td>
            <td>ASCII (128 characters)</td>
            <td>variable</td>
            <td>optional (Mod. 43)</td>
@@ -73,37 +69,37 @@ The following table lists the symbologies and their specifications that the [Bar
            <td>2 check digits</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Code_93">Code93Extended</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Code_93">Code93Extended</a></td>
            <td>ASCII(128 characters)</td>
            <td>variable</td>
            <td>2 check digits</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/International_Article_Number_(EAN)">EAN-13</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/International_Article_Number_(EAN)">EAN-13</a></td>
            <td>numeric [0..9]</td>
            <td>12 usable digits</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/EAN-8">EAN-8</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/EAN-8">EAN-8</a></td>
            <td>numeric [0..9]</td>
            <td>7 usable digits</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Universal_Product_Code">UPC-A</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Universal_Product_Code">UPC-A</a></td>
            <td>numeric [0..9]</td>
            <td>11 usable digits (first is always 0)</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/Universal_Product_Code">UPC-E</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/Universal_Product_Code">UPC-E</a></td>
            <td>numeric [0..9]</td>
            <td>6 usable digits (first is always 0)</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/POSTNET">POSTNET</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/POSTNET">POSTNET</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
@@ -116,7 +112,7 @@ The following table lists the symbologies and their specifications that the [Bar
         </tr>
         <tr>
            <td><a href="https://en.wikipedia.org/wiki/Code_128">Code128</a></td>
-           <td>LATIN-1 (<a href="http://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO-8859-1</a>)</td>
+           <td>LATIN-1 (<a href="https://en.wikipedia.org/wiki/ISO/IEC_8859-1">ISO-8859-1</a>)</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
@@ -139,31 +135,31 @@ The following table lists the symbologies and their specifications that the [Bar
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/GS1-128">GS1-128</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/GS1-128">GS1-128</a></td>
            <td>depending on Application Identifier</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod10</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod10</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod11</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod11</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod1010</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod1010</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
         </tr>
         <tr>
-           <td><a href="http://en.wikipedia.org/wiki/MSI_Barcode">MSImod1110</a></td>
+           <td><a href="https://en.wikipedia.org/wiki/MSI_Barcode">MSImod1110</a></td>
            <td>numeric [0..9]</td>
            <td>variable</td>
            <td>1 check digit</td>
@@ -173,5 +169,5 @@ The following table lists the symbologies and their specifications that the [Bar
 
 ## See Also
 
-* [Overview of the Barcode Widget]({% slug overview_kendoui_barcode_widget %})
-* [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
+* [Basic Usage of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/index)
+* [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)

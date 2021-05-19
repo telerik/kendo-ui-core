@@ -5,9 +5,11 @@ res_type: api
 ---
 
 # kendo.drawing.RadialGradient : kendo.drawing.Gradient
+
 Represents a radial color gradient.
 
 #### Example - creating a radial gradient
+
     <div id="surface" />
     <script>
       var draw = kendo.drawing;
@@ -63,19 +65,19 @@ The radius of the radial gradient relative to the shape bounding box.
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Fields
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](gradient-stop) instances.
+Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Methods
 
 ### addStop
 Adds a color stop to the gradient.
-Inherited from [Gradient.addStop](gradient#methods-addStop)
+Inherited from [Gradient.addStop](/api/javascript/drawing/gradient#methods-addStop)
 
 #### Parameters
 
@@ -120,7 +122,7 @@ The new radius of the gradient.
 
 ### removeStop
 Removes a color stop from the gradient.
-Inherited from [Gradient.removeStop](gradient#methods-removeStop)
+Inherited from [Gradient.removeStop](/api/javascript/drawing/gradient#methods-removeStop)
 
 #### Parameters
 

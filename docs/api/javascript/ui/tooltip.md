@@ -2,6 +2,7 @@
 title: Tooltip
 page_title: Configuration, methods and events of Kendo UI Tooltip
 res_type: api
+component: tooltip
 ---
 
 # kendo.ui.Tooltip
@@ -12,9 +13,9 @@ Represents the Kendo UI Tooltip. Inherits from [Widget](/api/javascript/ui/widge
 
 ### autoHide `Boolean`*(default: true)*
 
-Specifies if the Tooltip will be hidden when mouse leaves the target element. If set to false a close button will be shown within Tooltip. If set to false, showAfter is specified and the showOn is set to "mouseenter" the Tooltip will be displayed after the given timeout even if the element is no longer hovered.
+Specifies if the Tooltip will be hidden when the mouse leaves the target element. If set to `false`, a **Close** button will be shown within Tooltip. If set to `false`, `showAfter` is specified, and `showOn` is set to `mouseenter`, the Tooltip will be displayed after the given timeout even if the element is no longer hovered.
 
-#### Example - prevent the Tooltip from closing automatically
+#### Example - preventing the Tooltip from closing automatically
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -30,11 +31,9 @@ Specifies if the Tooltip will be hidden when mouse leaves the target element. If
 
 ### animation `Boolean|Object`
 
-A collection of {Animation} objects, used to change default animations. A value of `false` will disable all animations in the widget.
+A collection of `{Animation}` objects which are used to change the default animations. If set to `false`, all widget animations will be disabled. `animation:true` is not a valid configuration.
 
-`animation:true` is not a valid configuration.
-
-#### Example - disable animations
+#### Example - disabling animations
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -50,9 +49,9 @@ A collection of {Animation} objects, used to change default animations. A value 
 
 ### animation.close `Object`
 
-The animation that will be used when a Tooltip closes.
+The animation that will be used when the Tooltip closes.
 
-#### Example - set close animation
+#### Example - setting the close animation
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -72,9 +71,9 @@ The animation that will be used when a Tooltip closes.
 
 ### animation.close.effects `String`
 
-Effect to be used for closing of the Tooltip.
+The effect that will be used for closing the Tooltip.
 
-#### Example - set close animation effect
+#### Example - setting the close animation effect
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -94,9 +93,9 @@ Effect to be used for closing of the Tooltip.
 
 ### animation.close.duration `Number`
 
-Defines the animation duration.
+Defines the duration of the close animation.
 
-#### Example - set close animation duration
+#### Example - setting the duration of the close animation
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -116,9 +115,9 @@ Defines the animation duration.
 
 ### animation.open `Object`
 
-The animation that will be used when a Tooltip opens.
+The animation that will be used when the Tooltip opens.
 
-#### Example - set open animation
+#### Example - setting the open animation
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -139,9 +138,9 @@ The animation that will be used when a Tooltip opens.
 
 ### animation.open.effects `String`
 
-Effect to be used for opening of the Tooltip.
+The effect that will be used for opening the Tooltip.
 
-#### Example - set open animation effect
+#### Example - setting the open animation effect
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -161,9 +160,9 @@ Effect to be used for opening of the Tooltip.
 
 ### animation.open.duration `Number`
 
-Defines the animation duration.
+Defines the duration of the open animation.
 
-#### Example - set open animation duration
+#### Example - setting the duration of the open animation
 
     <span id="target" title="Tooltip content">
         Some Content
@@ -183,14 +182,11 @@ Defines the animation duration.
 
 ### content `Object|String|Function`
 
-The text or a function which result will be shown within the Tooltip.
-By default the Tooltip will display the target element title attribute content.
+The text or the function whose result will be shown within the Tooltip. By default, the Tooltip will display the content of the `title` attribute of the target element. To retrieve the `title` attribute of the target from inside the `content` function, use `target.data("title")`.
 
-If you need to retrieve the `title` attribute of the target from inside the `content` function, then use `target.data("title")`, as shown below.
+> If the content that is passed to the Tooltip includes scripts, they will be executed. If this is not desired, strip any undesired content in advance.
 
-> If the content passed to the Tooltip includes scripts, they will be executed. If this is not desired, make sure to strip any undesired content in advance.
-
-#### Example - extract the content from target element content
+#### Example - extracting the content from the target element content
 
     <div id="container">
         <span title="foo">Some content</span>
@@ -209,7 +205,7 @@ If you need to retrieve the `title` attribute of the target from inside the `con
         });
     </script>
 
-#### Example - content as static text
+#### Example - implementing the content as static text
 
     <span id="target">
         Some content
@@ -225,13 +221,11 @@ If you need to retrieve the `title` attribute of the target from inside the `con
 
 ### content.url `String`
 
-Specifies a URL or request options that the Tooltip should load its content from.
+Specifies a URL or a request option from which the Tooltip will load its content.
 
->Note: For URLs starting with a protocol (e.g. http://),
-a container iframe element is automatically created. This behavior may change in future
-versions, so it is advisable to always use the [iframe configuration option](#iframe).
+> For URLs which start with a protocol (for example, `http://`), an iframe container element will be automatically created. This behavior may change in future versions, so it is advisable to always use the [`iframe` configuration option](#iframe).
 
-#### Example - load content from remote URL
+#### Example - loading content from a remote URL
 
     <span id="target" title="Tooltip content">
       Some content
@@ -241,7 +235,7 @@ versions, so it is advisable to always use the [iframe configuration option](#if
       $(document).ready(function() {
         $("#target").kendoTooltip({
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280
@@ -253,7 +247,7 @@ versions, so it is advisable to always use the [iframe configuration option](#if
 
 Specifies if the Tooltip callout will be displayed.
 
-#### Example - hide the Tooltip callout
+#### Example - hiding the callout of the Tooltip
 
     <span id="target" title="Tooltip content">
         Some content
@@ -269,9 +263,9 @@ Specifies if the Tooltip callout will be displayed.
 
 ### filter `String`
 
-Specifies a selector for elements, within the container, for which the Tooltip will be displayed.
+Specifies a selector for the elements within the container which will display the Tooltip.
 
-#### Example - show Tooltip only for strong elements in a text
+#### Example - showing a Tooltip only for strong elements in a text
 
     <div id="container">
         I'm a <strong title="First target">tooltip target</strong>. I'm also a
@@ -288,13 +282,13 @@ Specifies a selector for elements, within the container, for which the Tooltip w
 
 ### iframe `Boolean`
 
-Explicitly states whether content iframe should be created.
+Explicitly states whether a content `iframe` will be created.
 
 ### height `Number`*(default: Infinity)*
 
 The height (in pixels) of the Tooltip.
 
-#### Example - set the height of the Tooltip
+#### Example - setting the height of the Tooltip
 
     <span id="target" title="Tooltip long content">
       Some content
@@ -312,7 +306,7 @@ The height (in pixels) of the Tooltip.
 
 The width (in pixels) of the Tooltip.
 
-#### Example - set the width of the Tooltip
+#### Example - setting the width of the Tooltip
 
     <span id="target" title="Tooltip long content">
       Some content
@@ -328,9 +322,17 @@ The width (in pixels) of the Tooltip.
 
 ### position `String`*(default: "bottom")*
 
-The position relative to the target element, at which the Tooltip will be shown. Predefined values are "bottom", "top", "left", "right", "center".
+The position that is relative to the target element at which the Tooltip will be shown.
 
-#### Example - set Tooltip position
+The supported values are:
+
+* `bottom`
+* `top`
+* `left`
+* `right`
+* `center`
+
+#### Example - setting the position of the Tooltip
 
     <span id="target" title="Tooltip content">
       Some content
@@ -346,9 +348,9 @@ The position relative to the target element, at which the Tooltip will be shown.
 
 ### showAfter `Number`*(default: 100)*
 
-Specify the delay in milliseconds before the Tooltip is shown. This option is ignored if `showOn` is set to "click" or "focus".
+Specifies the delay (in milliseconds) before the Tooltip shows. This option is ignored if `showOn` is set to `click` or `focus`.
 
-#### Example - set show delay
+#### Example - setting the show delay
 
     <span id="target" title="Tooltip content">
       Some content
@@ -364,9 +366,15 @@ Specify the delay in milliseconds before the Tooltip is shown. This option is ig
 
 ### showOn `String`*(default: "mouseenter")*
 
-The event on which the Tooltip will be shown. Predefined values are "mouseenter", "click" and "focus".
+The event on which the Tooltip will be shown.
 
-#### Example - set event on which the Tooltip will be shown
+The supported values are:
+
+* `mouseenter`
+* `click`
+* `focus`
+
+#### Example - setting the event on which the Tooltip will be shown
 
     <span id="target" title="Tooltip content">
       Click Me
@@ -379,8 +387,8 @@ The event on which the Tooltip will be shown. Predefined values are "mouseenter"
         });
       });
     </script>
-    
-#### Example - set multiple events on which the Tooltip will be shown
+
+#### Example - setting the multiple events on which the Tooltip will be shown
 
     <span id="target" title="Tooltip content">
       Click Me
@@ -394,21 +402,55 @@ The event on which the Tooltip will be shown. Predefined values are "mouseenter"
       });
     </script>
 
+### hideAfter `Number`*(default: 100)*
+
+Specifies the delay (in milliseconds) before the Tooltip is hidden.
+
+#### Example - setting the hide delay
+
+    <span id="target" title="Tooltip long content">
+      Some content
+    </span>
+
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoTooltip({
+          hideAfter: 500
+        });
+      });
+    </script>
+
+### offset `Number`*(default: 0)*
+
+Specifies the offset (in pixels) between the Tooltip and the anchor. If the `callout` property is set to `true`, the offset is rendered from the callout arrow. If the `callout` property is set to `false`, the offset is rendered from the content of the Tooltip.
+
+#### Example - setting the Tooltip offset
+
+    <span id="target" title="Tooltip long content">
+      Some content
+    </span>
+
+    <script>
+      $(document).ready(function() {
+        $("#target").kendoTooltip({
+          offset: 10
+        });
+      });
+    </script>
+
 ## Fields
 
 ### popup `kendo.ui.Popup`
 
-Holds the Kendo UI [`Popup`](/api/javascript/ui/popup) instance, which manages the showing and hiding of the tooltips at the appropriate position.
+Contains the Kendo UI [`Popup`](/api/javascript/ui/popup) instance which manages the showing and hiding of the tooltips at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
 
-The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the Popup's [`element` or `wrapper`](/intro/widget-basics/wrapper-element).
-    
 ## Methods
 
 ### show
 
-Shows the Tooltip for given target.
+Shows the Tooltip for a specific target.
 
-#### Example - show Tooltip for target element
+#### Example - showing the Tooltip for the target element
 
     <div id="container">
       <span id="target" title="Tooltip content">Tooltip target</span>
@@ -425,13 +467,13 @@ Shows the Tooltip for given target.
 
 ##### element `jQuery`
 
-The target element for which the Tooltip should be shown.
+The target element for which the Tooltip will be shown.
 
 ### hide
 
 Hides the Tooltip.
 
-#### Example - manually close the Tooltip
+#### Example - manually closing the Tooltip
 
     <div id="container">
       <span title="Tooltip content">Tooltip target</span>
@@ -455,9 +497,9 @@ Hides the Tooltip.
 
 ### refresh
 
-Refresh the Tooltip content.
+Refreshes the content of the Tooltip.
 
-#### Example force refresh of the Tooltip content
+#### Example - forcing the refreshing of the Tooltip content
 
     <div id="container">
       <span id="target" title="Tooltip content">Tooltip target</span>
@@ -484,9 +526,9 @@ Refresh the Tooltip content.
 
 ### target
 
-Gets the Tooltip current target.
+Gets the current target of the Tooltip.
 
-#### Example
+#### Example - getting the current target of the tooltip
 
     <div id="container">
       <span id="target1" title="Tooltip1 content">Tooltip target1</span> <br />
@@ -508,6 +550,7 @@ Gets the Tooltip current target.
         $("#targetButton").click(function() {
           var target = tooltip.target();
           if (target) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(target.attr("id"));
           }
         });
@@ -516,15 +559,15 @@ Gets the Tooltip current target.
 
 #### Returns
 
-`jQuery` The target element or null.
+`jQuery` - The target element or `null`.
 
 ## Events
 
 ### contentLoad
 
-Triggered when an AJAX request for content completes.
+Fires when an AJAX request for the content completes.
 
-#### Example - subscribe to the "contentLoad" event during initialization
+#### Example - subscribing to the contentLoad event during initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -534,18 +577,19 @@ Triggered when an AJAX request for content completes.
       $(document).ready(function() {
         $("#target").kendoTooltip({
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280,
           contentLoad: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("content is loaded");
           }
         });
       });
     </script>
 
-#### Example - subscribe to the "contentLoad" event after initialization
+#### Example - subscribing to the contentLoad event after initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -555,13 +599,14 @@ Triggered when an AJAX request for content completes.
       $(document).ready(function() {
         var tooltip = $("#target").kendoTooltip({
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280
         }).data("kendoTooltip");
 
         tooltip.bind("contentLoad", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("content is loaded");
         });
       });
@@ -569,9 +614,9 @@ Triggered when an AJAX request for content completes.
 
 ### show
 
-Triggered when a Tooltip is shown.
+Fires when a Tooltip is shown.
 
-#### Example - subscribe to "show" event during initialization
+#### Example - subscribing to the show event during initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -581,6 +626,7 @@ Triggered when a Tooltip is shown.
       $(document).ready(function() {
         $("#target").kendoTooltip({
           show: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is shown");
           }
         });
@@ -588,7 +634,7 @@ Triggered when a Tooltip is shown.
       });
     </script>
 
-#### Example - subscribe to "show" event after initialization
+#### Example - subscribing to the show event after initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -600,12 +646,13 @@ Triggered when a Tooltip is shown.
         }).data("kendoTooltip");
 
         tooltip.bind("show", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("tooltip is shown");
         });
       });
     </script>
 
-#### Example - force refresh every time the Tooltip is shown
+#### Example - forcing refresh every time the Tooltip is shown
 
     <div id="container">
       <span id="target" title="Tooltip content">Tooltip target</span>
@@ -628,9 +675,9 @@ Triggered when a Tooltip is shown.
 
 ### hide
 
-Triggered when a Tooltip is hidden
+Fires when a Tooltip is hidden.
 
-#### Example - subscribe to "hide" event during initialization
+#### Example - subscribing to the hide event during initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -640,6 +687,7 @@ Triggered when a Tooltip is hidden
       $(document).ready(function() {
         $("#target").kendoTooltip({
           hide: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is hidden!");
           }
         });
@@ -647,7 +695,7 @@ Triggered when a Tooltip is hidden
       });
     </script>
 
-#### Example - subscribe to "hide" event after initialization
+#### Example - subscribing to the hide event after initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -658,6 +706,7 @@ Triggered when a Tooltip is hidden
         var tooltip = $("#target").kendoTooltip().data("kendoTooltip");
 
         tooltip.bind("hide", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("tooltip is hidden!");
         });
       });
@@ -665,9 +714,9 @@ Triggered when a Tooltip is hidden
 
 ### requestStart
 
-Triggered before an AJAX request started. Note that this event is triggered only when an AJAX request, instead of an iframe, is used.
+Fires before an AJAX request starts. Note that this event is triggered only when an AJAX request is used instead of an `iframe`.
 
-#### Example - subscribe to "requestStart" event during initialization
+#### Example - subscribing to the requestStart event during initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -678,18 +727,19 @@ Triggered before an AJAX request started. Note that this event is triggered only
         $("#target").kendoTooltip({
           iframe: false,
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280,
           requestStart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("request is started");
           }
         });
       });
     </script>
 
-#### Example - subscribe to "requestStart" event after initialization
+#### Example - subscribing to the requestStart event after initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -700,13 +750,14 @@ Triggered before an AJAX request started. Note that this event is triggered only
         var tooltip = $("#target").kendoTooltip({
           iframe: false,
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280
         }).data("kendoTooltip");
 
         tooltip.bind("requestStart", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("request is started");
         });
       });
@@ -716,17 +767,17 @@ Triggered before an AJAX request started. Note that this event is triggered only
 
 ##### e.target `jQuery`
 
-The target element, for which the Tooltip is shown.
+The target element for which the Tooltip is shown.
 
 ##### e.options `Object`
 
-The request options which will be set to [jQuery.ajax](http://api.jquery.com/jQuery.ajax/) or to the iframe
+The request options which will be set to [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/) or to the `iframe`.
 
 ### error
 
-Triggered when an AJAX request for content fails.
+Fires when an AJAX request for content fails.
 
-#### Example - subscribe to "error" event during initialization
+#### Example - subscribing to the error event during initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -737,18 +788,19 @@ Triggered when an AJAX request for content fails.
         $("#target").kendoTooltip({
           iframe: false,
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280,
           error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("error");
           }
         });
       });
     </script>
 
-#### Example - subscribe to "error" event after initialization
+#### Example - subscribing to the error event after initialization
 
     <span id="target" title="Tooltip content">
       Some content
@@ -759,13 +811,14 @@ Triggered when an AJAX request for content fails.
         var tooltip = $("#target").kendoTooltip({
           iframe: false,
           content: {
-            url: "http://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
+            url: "https://demos.telerik.com/kendo-ui/content/web/tooltip/ajax/ajaxContent3.html"
           },
           width: 220,
           height: 280
         }).data("kendoTooltip");
 
         tooltip.bind("error", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("error");
         });
       });
@@ -775,8 +828,8 @@ Triggered when an AJAX request for content fails.
 
 ##### e.xhr `jqXHR`
 
-The XHR request object, as returned from [jQuery.ajax](http://api.jquery.com/jQuery.ajax/)
+The XHR request object as returned by [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).
 
 ##### e.status `String`
 
-The status of the request, as returned from [jQuery.ajax](http://api.jquery.com/jQuery.ajax/)
+The status of the request as returned by [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax/).

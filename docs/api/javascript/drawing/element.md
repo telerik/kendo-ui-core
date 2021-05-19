@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Element : kendo.Class
+
 An abstract base class representing common members of all drawing elements.
 
 ## Constructor Parameters
@@ -18,7 +19,7 @@ The configuration of this element.
 The clipping path for this element.
 
 The path instance will be monitored for changes.
-It can be replaced by calling the [clip](#methods-clip) method.
+It can be replaced by calling the [clip](/api/javascript/drawing/element/methods/clip) method.
 
 #### Example - setting clipping path on an element
     <div id="surface"></div>

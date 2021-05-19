@@ -13,6 +13,9 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         extend = $.extend,
+        NEWLINE = "\r\n",
+        DOUBLELINE = "\r\n\r\n",
+        isFunction = kendo.isFunction,
         odataFilters = {
             eq: "eq",
             neq: "ne",
@@ -26,6 +29,8 @@ var __meta__ = { // jshint ignore:line
             startswith: "startswith",
             isnull: "eq",
             isnotnull: "ne",
+            isnullorempty: "eq",
+            isnotnullorempty: "ne",
             isempty: "eq",
             isnotempty: "ne"
         },
@@ -104,7 +109,11 @@ var __meta__ = { // jshint ignore:line
                     filter = odataFiltersVersionFour[operator];
                 }
 
-                if (operator === "isnull" || operator === "isnotnull") {
+                if (operator === "isnullorempty") {
+                    filter = kendo.format("{0} {1} null or {0} {1} ''", field, filter);
+                } else if(operator === "isnotnullorempty") {
+                    filter = kendo.format("{0} {1} null and {0} {1} ''", field, filter);
+                } else if (operator === "isnull" || operator === "isnotnull") {
                     filter = kendo.format("{0} {1} null", field, filter);
                 } else if (operator === "isempty" || operator === "isnotempty") {
                     filter = kendo.format("{0} {1} ''", field, filter);
@@ -169,6 +178,174 @@ var __meta__ = { // jshint ignore:line
                 delete obj[name];
             }
         }
+    }
+
+    function hex16() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substr(1);
+    }
+
+    function createBoundary(prefix) {
+        return prefix + hex16() + '-' + hex16() + '-' + hex16();
+    }
+
+    function createDelimeter(boundary, close) {
+        var result = NEWLINE + "--" + boundary;
+
+        if (close) {
+            result += "--";
+        }
+
+        return result;
+    }
+
+    function createCommand(transport, item, httpVerb, command) {
+         var transportUrl = transport.options[command].url;
+         var commandPrefix = kendo.format("{0} ", httpVerb);
+
+         if (isFunction(transportUrl)) {
+             return commandPrefix + transportUrl(item);
+         } else {
+             return commandPrefix + transportUrl;
+         }
+    }
+
+    function getOperationHeader(changeset, changeId) {
+        var header = "";
+
+        header += createDelimeter(changeset, false);
+        header += NEWLINE + 'Content-Type: application/http';
+        header += NEWLINE + 'Content-Transfer-Encoding: binary';
+        header += NEWLINE + 'Content-ID: ' + changeId;
+
+        return header;
+    }
+
+    function getOperationContent(item) {
+        var content = "";
+
+        content += NEWLINE + "Content-Type: application/json;odata=minimalmetadata";
+        content += NEWLINE + "Prefer: return=representation";
+        content += DOUBLELINE + kendo.stringify(item);
+
+        return content;
+    }
+
+    function getOperations(collection, changeset, changeId, command, transport, skipContent) {
+        var requestBody = "";
+
+        for (var i = 0; i < collection.length; i++) {
+            requestBody += getOperationHeader(changeset, changeId);
+            requestBody += DOUBLELINE + createCommand(transport, collection[i], transport.options[command].type, command) + ' HTTP/1.1';
+            if (!skipContent) {
+                requestBody += getOperationContent(collection[i]);
+            }
+            requestBody += NEWLINE;
+            changeId++;
+        }
+
+        return requestBody;
+    }
+
+    function processCollection(colection, boundary, changeset, changeId, transport, command, skipContent) {
+        var requestBody = "";
+
+        requestBody += getBoundary(boundary, changeset);
+        requestBody += getOperations(colection, changeset, changeId, command, transport, skipContent);
+        requestBody += createDelimeter(changeset, true);
+        requestBody += NEWLINE;
+
+        return requestBody;
+    }
+
+    function getBoundary(boundary,changeset) {
+        var requestBody = "";
+
+        requestBody += "--" + boundary + NEWLINE;
+        requestBody += "Content-Type: multipart/mixed; boundary=" + changeset + NEWLINE;
+
+        return requestBody;
+    }
+
+    function createBatchRequest(transport, colections) {
+		var options = extend({}, transport.options.batch);
+        var boundary = createBoundary("sf_batch_");
+        var requestBody = "";
+        var changeId = 0;
+        var batchURL = transport.options.batch.url;
+        var changeset = createBoundary("sf_changeset_");
+
+        options.type = transport.options.batch.type;
+        options.url = isFunction(batchURL) ? batchURL() : batchURL;
+		options.headers = extend(options.headers || {}, {
+			"Content-Type": "multipart/mixed; boundary=" + boundary
+		});
+
+        if (colections.updated.length) {
+            requestBody += processCollection(colections.updated, boundary, changeset, changeId, transport, "update", false);
+            changeId += colections.updated.length;
+            changeset = createBoundary("sf_changeset_");
+        }
+
+        if (colections.destroyed.length) {
+            requestBody += processCollection(colections.destroyed, boundary, changeset, changeId, transport, "destroy", true);
+            changeId += colections.destroyed.length;
+            changeset = createBoundary("sf_changeset_");
+        }
+
+        if (colections.created.length) {
+            requestBody += processCollection(colections.created, boundary, changeset, changeId, transport, "create", false);
+        }
+
+        requestBody += createDelimeter(boundary, true);
+
+        options.data = requestBody;
+
+        return options;
+    }
+
+    function parseBatchResponse(responseText) {
+        var responseMarkers = responseText.match(/--changesetresponse_[a-z0-9-]+$/gm);
+        var markerIndex = 0;
+        var collections = [];
+        var changeBody;
+        var status;
+        var code;
+        var marker;
+        var jsonModel;
+
+        collections.push({ models: [], passed: true });
+
+        for (var i = 0; i < responseMarkers.length; i++) {
+            marker = responseMarkers[i];
+            if (marker.lastIndexOf('--', marker.length - 1)) {
+                if (i < responseMarkers.length - 1) {
+                    collections.push({ models: [], passed: true });
+                }
+                continue;
+            }
+
+            if (!markerIndex) {
+                markerIndex = responseText.indexOf(marker);
+            } else {
+                markerIndex = responseText.indexOf(marker, markerIndex + marker.length);
+            }
+
+            changeBody = responseText.substring(markerIndex, responseText.indexOf("--", markerIndex + 1));
+            status = changeBody.match(/^HTTP\/1\.\d (\d{3}) (.*)$/gm).pop();
+            code = kendo.parseFloat(status.match(/\d{3}/g).pop());
+
+            if (code >= 200 && code <= 299) {
+                jsonModel = changeBody.match(/\{.*\}/gm);
+                if (jsonModel) {
+                    collections[collections.length - 1].models.push(JSON.parse(jsonModel[0]));
+                }
+            } else {
+                collections[collections.length - 1].passed = false;
+            }
+
+        }
+
+        return collections;
     }
 
     extend(true, kendo.data, {
@@ -260,13 +437,20 @@ var __meta__ = { // jshint ignore:line
             "odata-v4": {
                 type: "json",
                 data: function(data) {
-                    data = $.extend({}, data);
-                    stripMetadata(data);
+                    if ($.isArray(data)) {
+                        for (var i = 0; i < data.length; i++) {
+                            stripMetadata(data[i]);
+                        }
+                        return data;
+                    } else {
+                        data = $.extend({}, data);
+                        stripMetadata(data);
 
-                    if (data.value) {
-                        return data.value;
+                        if (data.value) {
+                            return data.value;
+                        }
+                        return [data];
                     }
-                    return [data];
                 },
                 total: function(data) {
                     return data["@odata.count"];
@@ -275,6 +459,9 @@ var __meta__ = { // jshint ignore:line
         },
         transports: {
             "odata-v4": {
+                batch: {
+                    type: "POST"
+                },
                 read: {
                     cache: true, // to prevent jQuery from adding cache buster
                     dataType: "json"
@@ -302,8 +489,59 @@ var __meta__ = { // jshint ignore:line
                         result.$count = true;
                         delete result.$inlinecount;
                     }
+					
+					if (result && result.$filter) {
+						// Remove the single quotation marks around the GUID (OData v4).
+						result.$filter = result.$filter.replace(/('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')/ig, function (x) {
+							return x.substring(1, x.length - 1);
+						});
+					}
 
                     return result;
+                },
+                submit: function(e) {
+                    var that = this;
+                    var options = createBatchRequest(that, e.data);
+                    var collections = e.data;
+
+                    if (!collections.updated.length && !collections.destroyed.length && !collections.created.length) {
+                        return;
+                    }
+
+                    $.ajax(extend(true, {}, {
+                        success: function (response) {
+                            var responses = parseBatchResponse(response);
+                            var index = 0;
+                            var current;
+
+                            if (collections.updated.length) {
+                                current = responses[index];
+                                if (current.passed) {
+                                    // Pass either the obtained models or an empty array if only status codes are returned.
+                                    e.success(current.models.length ? current.models : [], "update");
+                                }
+                                index++;
+                            }
+                            if (collections.destroyed.length) {
+                                current = responses[index];
+                                if (current.passed) {
+                                    // For delete operations OData returns only status codes.
+                                    // Passing empty array to datasource will force it to correctly remove the deleted items from the pristine collection.
+                                    e.success([], "destroy");
+                                }
+                                index++;
+                            }
+                            if (collections.created.length) {
+                                current = responses[index];
+                                if (current.passed) {
+                                    e.success(current.models, "create");
+                                }
+                            }
+                        },
+                        error: function (response, status, error) {
+                            e.error(response, status, error);
+                        }
+                    }, options));
                 }
             }
         }

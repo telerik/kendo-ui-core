@@ -9,9 +9,9 @@ slug: howto_integrate_withdatejs_library_datepicker
 
 The following example demonstrates how to integrate the DatePicker with DateJS and use its syntactic sugar.
 
-###### Example
 
-```html
+
+```dojo
     <div id="email-settings">
         <div class="display-picker">
             <input id="datepicker" placeholder="type 'next friday'" style="width:150px;" />

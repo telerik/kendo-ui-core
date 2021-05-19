@@ -1,397 +1,411 @@
-(function(){
+(function() {
 
-var parameterMap = kendo.data.transports["odata"].parameterMap;
-var DataSource = kendo.data.DataSource;
+    var parameterMap = kendo.data.transports["odata"].parameterMap;
+    var DataSource = kendo.data.DataSource;
 
-test("datasource with type odata creates remote transport with parameterMap", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            read: "foo"
-        }
-    });
+    describe("Odata", function() {
 
-    ok(dataSource.transport.parameterMap === parameterMap);
-});
+        it("datasource with type odata creates remote transport with parameterMap", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    read: "foo"
+                }
+            });
 
-test("datasource with type odata creates remote transport and sets default values for read", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            read: "foo"
-        }
-    });
+            assert.isOk(dataSource.transport.parameterMap === parameterMap);
+        });
 
-    var read = dataSource.transport.options.read;
-    equal(read.dataType, "jsonp");
-    equal(read.cache, true);
-    equal(read.jsonp, "$callback");
-});
+        it("datasource with type odata creates remote transport and sets default values for read", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    read: "foo"
+                }
+            });
 
-test("datasource with type odata creates remote transport and sets default values for update", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            update: {
-                url: "foo"
-            }
-        }
-    });
+            var read = dataSource.transport.options.read;
+            assert.equal(read.dataType, "jsonp");
+            assert.equal(read.cache, true);
+            assert.equal(read.jsonp, "$callback");
+        });
 
-    var update = dataSource.transport.options.update;
-    equal(update.url, "foo");
-    equal(update.dataType, "json");
-    equal(update.cache, true);
-    equal(update.contentType, "application/json");
-    equal(update.type, "PUT");
-});
+        it("datasource with type odata creates remote transport and sets default values for update", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    update: {
+                        url: "foo"
+                    }
+                }
+            });
 
-test("datasource with type odata creates remote transport and sets default values for create", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            create: {
-                url: "foo"
-            }
-        }
-    });
+            var update = dataSource.transport.options.update;
+            assert.equal(update.url, "foo");
+            assert.equal(update.dataType, "json");
+            assert.equal(update.cache, true);
+            assert.equal(update.contentType, "application/json");
+            assert.equal(update.type, "PUT");
+        });
 
-    var create = dataSource.transport.options.create;
-    equal(create.url, "foo");
-    equal(create.dataType, "json");
-    equal(create.cache, true);
-    equal(create.contentType, "application/json");
-    equal(create.type, "POST");
-});
+        it("datasource with type odata creates remote transport and sets default values for create", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    create: {
+                        url: "foo"
+                    }
+                }
+            });
 
-test("datasource with type odata creates remote transport and sets default values for destroy", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            destroy: {
-                url: "foo"
-            }
-        }
-    });
+            var create = dataSource.transport.options.create;
+            assert.equal(create.url, "foo");
+            assert.equal(create.dataType, "json");
+            assert.equal(create.cache, true);
+            assert.equal(create.contentType, "application/json");
+            assert.equal(create.type, "POST");
+        });
 
-    var destroy = dataSource.transport.options.destroy;
-    equal(destroy.url, "foo");
-    equal(destroy.dataType, "json");
-    equal(destroy.cache, true);
-    equal(destroy.type, "DELETE");
-});
+        it("datasource with type odata creates remote transport and sets default values for destroy", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    destroy: {
+                        url: "foo"
+                    }
+                }
+            });
 
-test("datasource with type odata initializes odata schema", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            read: "foo"
-        }
-    });
+            var destroy = dataSource.transport.options.destroy;
+            assert.equal(destroy.url, "foo");
+            assert.equal(destroy.dataType, "json");
+            assert.equal(destroy.cache, true);
+            assert.equal(destroy.type, "DELETE");
+        });
 
-    var schema = dataSource.options.schema;
-    equal(schema.total, "d.__count");
-    ok($.isFunction(schema.data));
-});
+        it("datasource with type odata initializes odata schema", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    read: "foo"
+                }
+            });
 
-test("parameterMap adds $format and $inlinecount to the request", function() {
-    var result = parameterMap();
-    equal(result.$format, "json");
-    equal(result.$inlinecount, "allpages");
-});
+            var schema = dataSource.options.schema;
+            assert.equal(schema.total, "d.__count");
+            assert.isOk($.isFunction(schema.data));
+        });
 
-test("$format is not set if dataType is json", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            read: {
-                url: "foo",
-                dataType: "json"
-            }
-        }
-    });
+        it("parameterMap adds $format and $inlinecount to the request", function() {
+            var result = parameterMap();
+            assert.equal(result.$format, "json");
+            assert.equal(result.$inlinecount, "allpages");
+        });
 
-    var result = dataSource.transport.parameterMap();
-    ok(!result.$format);
-});
+        it("$format is not set if dataType is json", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    read: {
+                        url: "foo",
+                        dataType: "json"
+                    }
+                }
+            });
 
-test("parameterMap adds $skip when skip is specified", function() {
-    var result = parameterMap({ skip: 1 });
-    equal(result.$skip, 1);
-});
+            var result = dataSource.transport.parameterMap();
+            assert.isOk(!result.$format);
+        });
 
-test("parameterMap does not add $skip when skip is not specified", function() {
-    var result = parameterMap();
-    ok(!result.hasOwnProperty("$skip"), "Skip is not set");
-});
+        it("parameterMap adds $skip when skip is specified", function() {
+            var result = parameterMap({ skip: 1 });
+            assert.equal(result.$skip, 1);
+        });
 
-test("parameterMap adds $top when take is specified", function() {
-    var result = parameterMap({take: 1});
-    equal(result.$top, 1);
-});
+        it("parameterMap does not add $skip when skip is not specified", function() {
+            var result = parameterMap();
+            assert.isOk(!result.hasOwnProperty("$skip"), "Skip is not set");
+        });
 
-test("parameterMap does not add $top when take is not specified", function() {
-    var result = parameterMap();
-    ok(!result.hasOwnProperty("$top"), "Top is not set");
-});
+        it("parameterMap adds $top when take is specified", function() {
+            var result = parameterMap({ take: 1 });
+            assert.equal(result.$top, 1);
+        });
 
-test("parameterMap adds $orderby when sort is specified", function() {
-    var result = parameterMap({ sort: [ { field:"foo", dir: "asc" } ]});
-    equal(result.$orderby, "foo");
-});
+        it("parameterMap does not add $top when take is not specified", function() {
+            var result = parameterMap();
+            assert.isOk(!result.hasOwnProperty("$top"), "Top is not set");
+        });
 
-test("$orderby with nested field", function() {
-    var result = parameterMap({ sort: [ { field:"foo.bar", dir: "asc" } ]});
-    equal(result.$orderby, "foo/bar");
-});
+        it("parameterMap adds $orderby when sort is specified", function() {
+            var result = parameterMap({ sort: [{ field: "foo", dir: "asc" }] });
+            assert.equal(result.$orderby, "foo");
+        });
 
-test("parameterMap does not add $orderby if sort is not specified", function() {
-    var result = parameterMap();
-    ok(!result.hasOwnProperty("$orderby"), "orderby is not set");
-});
+        it("$orderby with nested field", function() {
+            var result = parameterMap({ sort: [{ field: "foo.bar", dir: "asc" }] });
+            assert.equal(result.$orderby, "foo/bar");
+        });
 
-test("parameterMap does not add $orderby if sort is empty list", function() {
-    var result = parameterMap({ sort: [] });
-    ok(!result.hasOwnProperty("$orderby"), "orderby is not set");
-});
+        it("parameterMap does not add $orderby if sort is not specified", function() {
+            var result = parameterMap();
+            assert.isOk(!result.hasOwnProperty("$orderby"), "orderby is not set");
+        });
 
-test("$orderby when direction is descending", function() {
-    var result = parameterMap({ sort: [ { field:"foo", dir: "desc" } ]});
-    equal(result.$orderby, "foo desc");
-});
+        it("parameterMap does not add $orderby if sort is empty list", function() {
+            var result = parameterMap({ sort: [] });
+            assert.isOk(!result.hasOwnProperty("$orderby"), "orderby is not set");
+        });
 
-test("$orderby when there are multiple order by expressions", function() {
-    var result = parameterMap({ sort: [ { field:"bar", dir: "desc" }, { field:"foo", dir: "asc" } ]});
+        it("$orderby when direction is descending", function() {
+            var result = parameterMap({ sort: [{ field: "foo", dir: "desc" }] });
+            assert.equal(result.$orderby, "foo desc");
+        });
 
-    equal(result.$orderby, "bar desc,foo");
-});
+        it("$orderby when there are multiple order by expressions", function() {
+            var result = parameterMap({ sort: [{ field: "bar", dir: "desc" }, { field: "foo", dir: "asc" }] });
 
-test("parametterMap does not add $filter if no filters is applied", function() {
-    var result = parameterMap({ filter: null });
-    equal(typeof result["$filter"], "undefined");
-});
+            assert.equal(result.$orderby, "bar desc,foo");
+        });
 
-test("parametterMap does not add $filter if empty filter object is applied", function() {
-    var result = parameterMap({ filter: {logic: "and", filters: []} });
-    equal(typeof result["$filter"], "undefined");
-});
+        it("parametterMap does not add $filter if no filters is applied", function() {
+            var result = parameterMap({ filter: null });
+            assert.equal(typeof result["$filter"], "undefined");
+        });
 
-test("parameterMap adds $filter if filter is specified", function() {
-    var result = parameterMap({ filter: { filters:[ {field: "Name", operator: "startswith", value: "bar"} ]} });
-    equal(result.$filter, "startswith(Name,'bar')");
-});
+        it("parametterMap does not add $filter if empty filter object is applied", function() {
+            var result = parameterMap({ filter: { logic: "and", filters: [] } });
+            assert.equal(typeof result["$filter"], "undefined");
+        });
 
-test("parameterMap adds tolower(field) if ignoreCase is true", function() {
-    var result = parameterMap({ filter: { filters:[ {field: "Name", operator: "startswith", value: "bar", ignoreCase: true} ]} });
-    equal(result.$filter, "startswith(tolower(Name),'bar')");
-});
+        it("parameterMap adds $filter if filter is specified", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "startswith", value: "bar" }] } });
+            assert.equal(result.$filter, "startswith(Name,'bar')");
+        });
 
-test("parameterMap does not add $filter if filter is not specified", function() {
-    var result = parameterMap();
-    ok(!result.hasOwnProperty("$filter"), "Filter is not present");
-});
+        it("parameterMap adds tolower(field) if ignoreCase is true", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "startswith", value: "bar", ignoreCase: true }] } });
+            assert.equal(result.$filter, "startswith(tolower(Name),'bar')");
+        });
 
-test("$filter and endswith operator", function() {
-    var result = parameterMap({ filter: {filters:[ {field: "Name", operator: "endswith", value: "bar"} ]}});
-    equal(result.$filter, "endswith(Name,'bar')");
-});
+        it("parameterMap does not add $filter if filter is not specified", function() {
+            var result = parameterMap();
+            assert.isOk(!result.hasOwnProperty("$filter"), "Filter is not present");
+        });
 
-test("$filter on string that contains ' symbol", function() {
-    var result = parameterMap({ filter: {filters:[ {field: "Name", operator: "contains", value: "bar'foo"} ]}});
-    equal(result.$filter, "substringof('bar''foo',Name)");
-});
+        it("$filter and endswith operator", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "endswith", value: "bar" }] } });
+            assert.equal(result.$filter, "endswith(Name,'bar')");
+        });
 
-test("$filter and contains operator uses substringof", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "contains", value: "bar"} ]}});
-    ok(result.$filter, "substringof('bar',Name)");
-});
+        it("$filter on string that contains ' symbol", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "contains", value: "bar'foo" }] } });
+            assert.equal(result.$filter, "substringof('bar''foo',Name)");
+        });
 
-test("$filter and doesnotcontain operator uses substringof", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "doesnotcontain", value: "bar"} ]}});
-    equal(result.$filter, "substringof('bar',Name) eq false");
-});
+        it("$filter and contains operator uses substringof", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "contains", value: "bar" }] } });
+            assert.isOk(result.$filter, "substringof('bar',Name)");
+        });
 
-test("$filter and neq operator", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "neq", value: "bar"} ]} });
+        it("$filter and doesnotcontain operator uses substringof", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "doesnotcontain", value: "bar" }] } });
+            assert.equal(result.$filter, "substringof('bar',Name) eq false");
+        });
 
-    equal(result.$filter, "Name ne 'bar'");
-});
+        it("$filter and neq operator", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "neq", value: "bar" }] } });
 
-test("$filter and isempty operator uses eq", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isempty" } ]}});
-    equal(result.$filter, "Name eq ''");
-});
+            assert.equal(result.$filter, "Name ne 'bar'");
+        });
 
-test("$filter and isnotempty operator uses eq", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnotempty" } ]}});
-    equal(result.$filter, "Name ne ''");
-});
+        it("$filter and isempty operator uses eq", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isempty" }] } });
+            assert.equal(result.$filter, "Name eq ''");
+        });
 
-test("$filter and isnull operator uses eq", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnull" } ]}});
-    equal(result.$filter, "Name eq null");
-});
+        it("$filter and isnotempty operator uses eq", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnotempty" }] } });
+            assert.equal(result.$filter, "Name ne ''");
+        });
 
-test("$filter and isnotnull operator uses ne", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "Name", operator: "isnotnull" } ]}});
-    equal(result.$filter, "Name ne null");
-});
+        it("$filter and isnull operator uses eq", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnull" }] } });
+            assert.equal(result.$filter, "Name eq null");
+        });
 
-test("$filter with nested field", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "foo.bar", operator: "neq", value: "bar"} ]} });
+        it("$filter and isnullorempty operator uses eq", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnullorempty" }] } });
+            assert.equal(result.$filter, "Name eq null or Name eq ''");
+        });
 
-    equal(result.$filter, "foo/bar ne 'bar'");
-});
 
-test("$filter does not quote apostrophe when numberic value is specifed", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: 10} ]} });
+        it("$filter and isnotnull operator uses ne", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnotnull" }] } });
+            assert.equal(result.$filter, "Name ne null");
+        });
 
-    equal(result.$filter, "ID ne 10");
-});
+        it("$filter and isnotnullorempty operator uses ne", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "Name", operator: "isnotnullorempty" }] } });
+            assert.equal(result.$filter, "Name ne null and Name ne ''");
+        });
 
-test("$filter does not honour ignoreCase if value is number", function() {
-    var result = parameterMap({ filter: { filters: [ {ignoreCase: true, field: "ID", operator: "neq", value: 10} ]} });
+        it("$filter with nested field", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "foo.bar", operator: "neq", value: "bar" }] } });
 
-    equal(result.$filter, "ID ne 10");
-});
+            assert.equal(result.$filter, "foo/bar ne 'bar'");
+        });
 
-test("$filter and null value", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: null} ]} });
+        it("$filter does not quote apostrophe when numberic value is specifed", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "ID", operator: "neq", value: 10 }] } });
 
-    equal(result.$filter, "ID ne null");
-});
+            assert.equal(result.$filter, "ID ne 10");
+        });
 
-test("$filter or", function() {
-    var result = parameterMap({ filter: { logic: "or", filters: [ {field: "ID", operator: "neq", value: 1}, {field: "ID", operator: "eq", value: 1} ]} });
+        it("$filter does not honour ignoreCase if value is number", function() {
+            var result = parameterMap({ filter: { filters: [{ ignoreCase: true, field: "ID", operator: "neq", value: 10 }] } });
 
-    equal(result.$filter, "(ID ne 1 or ID eq 1)");
-});
+            assert.equal(result.$filter, "ID ne 10");
+        });
 
-test("$filter and", function() {
-    var result = parameterMap({ filter: { filters: [ {field: "ID", operator: "neq", value: null}, {field: "ID", operator: "neq", value: null} ]} });
+        it("$filter and null value", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "ID", operator: "neq", value: null }] } });
 
-    equal(result.$filter, "(ID ne null and ID ne null)");
-});
+            assert.equal(result.$filter, "ID ne null");
+        });
 
-test("$filter and nested expressions", function() {
-    var result = parameterMap({
-        filter: {
-            logic:"and",
-            filters: [ {
-                logic: "or",
-                filters: [{
-                        field: "ID",
-                        operator: "neq",
-                        value: 1
+        it("$filter or", function() {
+            var result = parameterMap({ filter: { logic: "or", filters: [{ field: "ID", operator: "neq", value: 1 }, { field: "ID", operator: "eq", value: 1 }] } });
+
+            assert.equal(result.$filter, "(ID ne 1 or ID eq 1)");
+        });
+
+        it("$filter and", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "ID", operator: "neq", value: null }, { field: "ID", operator: "neq", value: null }] } });
+
+            assert.equal(result.$filter, "(ID ne null and ID ne null)");
+        });
+
+        it("$filter and nested expressions", function() {
+            var result = parameterMap({
+                filter: {
+                    logic: "and",
+                    filters: [{
+                        logic: "or",
+                        filters: [{
+                            field: "ID",
+                            operator: "neq",
+                            value: 1
+                        }, {
+                            field: "ID",
+                            operator: "neq",
+                            value: 2
+                        }]
                     }, {
                         field: "ID",
-                        operator: "neq",
-                        value: 2
-                    }]
-                }, {
-                    field: "ID",
-                    operator:"eq",
-                    value: 3
+                        operator: "eq",
+                        value: 3
+                    }
+                    ]
                 }
-            ]
-        }
+            });
+
+            assert.equal(result.$filter, "((ID ne 1 or ID ne 2) and ID eq 3)");
+        });
+
+        it("$filter date encoding", function() {
+            var result = parameterMap({ filter: { filters: [{ field: "foo", operator: "eq", value: new Date(2011, 1, 1) }] } });
+
+            assert.equal(result.$filter, "foo eq datetime'2011-02-01T00:00:00'");
+        });
+
+        it("$filter adjust date to UTC TZ (odata-v4)", function() {
+            var useVersionFour = true;
+            var date = new Date(2011, 1, 1);
+            var result = parameterMap({ filter: { filters: [{ field: "foo", operator: "eq", value: date }] } }, "read", useVersionFour);
+
+            date = kendo.timezone.apply(date, "Etc/UTC");
+
+            assert.equal(result.$filter, "foo eq " + kendo.toString(date, "yyyy-MM-ddTHH:mm:ss+00:00"));
+        });
+
+        it("custom arguments are preserved", function() {
+            var result = parameterMap({ foo: "bar" });
+
+            assert.equal(result.foo, "bar");
+        });
+
+        it("model is stringified if type is update", function() {
+            var result = parameterMap({ foo: "bar" }, "update");
+
+            assert.equal(result, kendo.stringify({ foo: "bar" }));
+        });
+
+        it("model is stringified if type is create", function() {
+            var result = parameterMap({ foo: "bar" }, "create");
+
+            assert.equal(result, kendo.stringify({ foo: "bar" }));
+        });
+
+        it("does not proccess the arguments if type is destroy", function() {
+            var result = parameterMap({ foo: "bar" }, "destroy");
+
+            assert.isOk(!result);
+        });
+
+        it("number values is serialized as string", function() {
+            var result = parameterMap({ foo: 1 }, "update");
+
+            assert.equal(result, '{"foo":"1"}');
+        });
+
+        it("update with dataType set to jsonp throws an error", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    update: {
+                        url: "foo",
+                        dataType: "jsonp"
+                    }
+                }
+            });
+
+            assert.throws(function() {
+                dataSource.transport.parameterMap({ foo: 1 }, "update");
+            }, "Only json dataType can be used for update operation.");
+        });
+
+        it("create with dataType set to jsonp throws an error", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    create: {
+                        url: "foo",
+                        dataType: "jsonp"
+                    }
+                }
+            });
+
+            assert.throws(function() {
+                dataSource.transport.parameterMap({ foo: 1 }, "create");
+            }, "Only json dataType can be used for create operation.");
+        });
+
+        it("destroy with dataType set to jsonp throws an error", function() {
+            var dataSource = new DataSource({
+                type: "odata",
+                transport: {
+                    destroy: {
+                        url: "foo",
+                        dataType: "jsonp"
+                    }
+                }
+            });
+
+            assert.throws(function() {
+                dataSource.transport.parameterMap({ foo: 1 }, "destroy");
+            }, "Only json dataType can be used for destroy operation.");
+        });
+
     });
-
-    equal(result.$filter, "((ID ne 1 or ID ne 2) and ID eq 3)");
-});
-
-test("$filter date encoding", function() {
-    var result = parameterMap({ filter: { filters: [ { field: "foo", operator: "eq", value: new Date(2011, 1, 1) }] } });
-
-    equal(result.$filter, "foo eq datetime'2011-02-01T00:00:00'");
-});
-
-test("$filter adjust date to UTC TZ (odata-v4)", function() {
-    var useVersionFour = true;
-    var date = new Date(2011, 1, 1);
-    var result = parameterMap({ filter: { filters: [ { field: "foo", operator: "eq", value: date }] } }, "read", useVersionFour);
-
-    date = kendo.timezone.apply(date, "Etc/UTC");
-
-    equal(result.$filter, "foo eq " + kendo.toString(date, "yyyy-MM-ddTHH:mm:ss+00:00"));
-});
-
-test("custom arguments are preserved", function() {
-    var result = parameterMap({ foo: "bar" });
-
-    equal(result.foo, "bar");
-});
-
-test("model is stringified if type is update", function() {
-    var result = parameterMap({ foo: "bar" }, "update");
-
-    equal(result, kendo.stringify({ foo: "bar" }));
-});
-
-test("model is stringified if type is create", function() {
-    var result = parameterMap({ foo: "bar" }, "create");
-
-    equal(result, kendo.stringify({ foo: "bar" }));
-});
-
-test("does not proccess the arguments if type is destroy", function() {
-    var result = parameterMap({ foo: "bar" }, "destroy");
-
-    ok(!result);
-});
-
-test("number values is serialized as string", function() {
-    var result = parameterMap({ foo: 1 }, "update");
-
-    equal(result, '{"foo":"1"}');
-});
-
-test("update with dataType set to jsonp throws an error", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            update: {
-                url: "foo",
-                dataType: "jsonp"
-            }
-        }
-    });
-
-    throws(function() {
-        dataSource.transport.parameterMap({ foo: 1 }, "update");
-    }, "dataType for update should be json");
-});
-
-test("create with dataType set to jsonp throws an error", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            create: {
-                url: "foo",
-                dataType: "jsonp"
-            }
-        }
-    });
-
-    throws(function() {
-        dataSource.transport.parameterMap({ foo: 1 }, "create");
-    }, "dataType for create should be json");
-});
-
-test("destroy with dataType set to jsonp throws an error", function() {
-    var dataSource = new DataSource({
-        type: "odata",
-        transport: {
-            destroy: {
-                url: "foo",
-                dataType: "jsonp"
-            }
-        }
-    });
-
-    throws(function() {
-        dataSource.transport.parameterMap({ foo: 1 }, "destroy");
-    }, "dataType for destroy should be json");
-});
-
 }());

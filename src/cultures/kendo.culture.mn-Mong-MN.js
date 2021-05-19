@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Tugrik",
+                name: "Mongolian Tugrik",
                 abbr: "MNT",
                 pattern: ["$-n","$n"],
                 decimals: 2,

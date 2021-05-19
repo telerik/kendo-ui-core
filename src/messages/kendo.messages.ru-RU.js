@@ -87,6 +87,16 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 });
 }
 
+/* DateRangePicker messages */
+
+if (kendo.ui.DateRangePicker) {
+kendo.ui.DateRangePicker.prototype.options.messages =
+$.extend(true, kendo.ui.DateRangePicker.prototype.options.messages,{
+  "startLabel": "Начало",
+  "endLabel": "Конец"
+});
+}
+
 /* RecurrenceEditor messages */
 
 if (kendo.ui.RecurrenceEditor) {
@@ -165,7 +175,7 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "cancelDelete": "Отмена",
     "confirmDelete": "Удалить"
   },
-  "noRecords": "Нет записей доступны."
+  "noRecords": "Нет доступных записей."
 });
 }
 
@@ -174,6 +184,26 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "Все",
+  "page": "Страница",
+  "display": "Отображены записи {0} - {1} из {2}",
+  "of": "из {0}",
+  "empty": "Нет записей для отображения",
+  "refresh": "Обновить",
+  "first": "Вернуться на первую страницу",
+  "itemsPerPage": "элементов на странице",
+  "last": "К последней странице",
+  "next": "Перейдите на следующую страницу",
+  "previous": "Перейти на предыдущую страницу",
+  "morePages": "Больше страниц"
+});
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "Все",
   "page": "Страница",
   "display": "Отображены записи {0} - {1} из {2}",
@@ -211,6 +241,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "И",
   "clear": "очистить",
   "info": "Строки со значениями",
+  "title": "Строки со значениями",
   "selectValue": "-выберите-",
   "isFalse": "ложь",
   "isTrue": "истина",
@@ -235,7 +266,7 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
 if (kendo.ui.Groupable) {
 kendo.ui.Groupable.prototype.options.messages =
 $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
-  "empty": "Переместите сюда заголовок столбца, чтобы сгрупировать записи по этому столбцу"
+  "empty": "Переместите сюда заголовок столбца, чтобы сгруппировать записи по этому столбцу"
 });
 }
 
@@ -245,6 +276,7 @@ if (kendo.ui.Editor) {
 kendo.ui.Editor.prototype.options.messages =
 $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "bold": "Полужирный",
+  "cleanFormatting": "Очистить формат",
   "createLink": "Вставить гиперссылку",
   "fontName": "Шрифт",
   "fontNameInherit": "(шрифт как в документе)",
@@ -255,7 +287,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "insertHtml": "Вставить HTML",
   "insertImage": "Изображение",
   "insertOrderedList": "Нумерованный список",
-  "insertUnorderedList": "Маркированныйсписок",
+  "insertUnorderedList": "Маркированный список",
   "italic": "Курсив",
   "justifyCenter": "По центру",
   "justifyFull": "По ширине",
@@ -281,7 +313,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "createTable": "Вставить таблицу",
   "addColumnLeft": "Добавить столбец слева",
   "addColumnRight": "Добавить столбец справа",
-  "addRowAbove": "Добавить стороку выше",
+  "addRowAbove": "Добавить строку выше",
   "addRowBelow": "Добавить строку ниже",
   "deleteColumn": "Удалить столбец",
   "deleteRow": "Удалить строку",
@@ -340,7 +372,7 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "description": "Описание",
     "editorTitle": "Событие",
     "end": "Окончание",
-    "endTimezone": "Часовой поис окончания",
+    "endTimezone": "Часовой пояс окончания",
     "repeat": "Повторение",
     "separateTimezones": "Для начала и окончания используйте свой часовой пояс",
     "start": "Начало",
@@ -444,6 +476,132 @@ $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
   "second": "секунда",
   "dayperiod": "AM/PM"
 });
+}
+
+/* PivotGrid messages */
+
+if (kendo.ui.PivotGrid) {
+kendo.ui.PivotGrid.prototype.options.messages =
+$.extend(true, kendo.ui.PivotGrid.prototype.options.messages, {
+  "measureFields": "Перетащите поля с данными сюда",
+  "columnFields": "Перетащите колонки сюда",
+  "rowFields": "Перетащите строки сюда"
+});
+}
+
+/* PivotFieldMenu messages */
+
+if (kendo.ui.PivotFieldMenu) {
+kendo.ui.PivotFieldMenu.prototype.options.messages =
+$.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
+  "info": "Показать поля такие, что:",
+  "filterFields": "Фильтр по полям",
+  "filter": "Фильтровать",
+  "include": "Включить поля...",
+  "title": "Включить поля",
+  "clear": "Очистить",
+  "ok": "Ok",
+  "cancel": "Отмена",
+  "operators": {
+    "contains": "Содержит",
+    "doesnotcontain": "Не содержит",
+    "startswith": "Начинается с",
+    "endswith": "Заканчивается на",
+    "eq": "Равно",
+    "neq": "Не равно"
+  }
+});
+}
+
+/* Gantt */
+
+if (kendo.ui.Gantt) {
+kendo.ui.Gantt.prototype.options.messages =
+$.extend(true, kendo.ui.Gantt.prototype.options.messages, {
+  "actions": {
+    "addChild": "Добавить подзадачу",
+    "append": "Добавить задачу",
+    "insertAfter": "Добавить после",
+    "insertBefore": "Добавить до",
+    "pdf": "Экспорт в PDF"
+  },
+  "cancel": "Отмена",
+  "deleteDependencyWindowTitle": "Удалить зависимость",
+  "deleteTaskWindowTitle": "Удалить задачу",
+  "destroy": "Удалить",
+  "editor": {
+    "assingButton": "Задать",
+    "editorTitle": "Задача",
+    "end": "Окончание",
+    "percentComplete": "Завершено",
+    "resources": "Ресурсы",
+    "resourcesEditorTitle": "Ресурсы",
+    "resourcesHeader": "Ресурсы",
+    "start": "Начало",
+    "title": "Название",
+    "unitsHeader": "Единицы"
+  },
+  "save": "Сохранить",
+  "views": {
+    "day": "День",
+    "end": "Окончание",
+    "month": "Месяц",
+    "start": "Начало",
+    "week": "Неделя",
+    "year": "Год"
+  }
+});
+}
+
+/* Filter messages */
+  
+if (kendo.ui.Filter) {
+  kendo.ui.Filter.prototype.options.messages = $.extend(
+  true,
+    kendo.ui.Filter.prototype.options.messages,
+      {
+        and: "И",
+        or: "Или",
+        apply: "Применить"
+      }
+  );
+}
+
+if (kendo.ui.Filter) {
+kendo.ui.Filter.prototype.options.operators = $.extend(
+true,
+kendo.ui.Filter.prototype.options.operators,
+{
+  date: {
+    eq: "равна",
+    gte: "после или равна",
+    gt: "после",
+    lte: "до или равна",
+    lt: "до",
+    neq: "не равна"
+  },
+  number: {
+    eq: "равно",
+    gte: "больше или равно",
+    gt: "больше",
+    lte: "меньше или равно",
+    lt: "меньше",
+    neq: "не равно"
+  },
+  string: {
+    endswith: "оканчивается на",
+    eq: "равно",
+    neq: "не равно",
+    startswith: "начинающимися на",
+    contains: "содержащими",
+    doesnotcontain: "не содержит"
+  },
+  enums: {
+    eq: "равно",
+    neq: "не равно"
+  }
+}
+);
 }
 
 })(window.kendo.jQuery);

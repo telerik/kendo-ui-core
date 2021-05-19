@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = {"index"}, method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `colorPalette` tag.
 
-###### Example
+
 
         <kendo:colorPalette name="colorpalette" value="#ff0000">
         </kendo:colorPalette>
@@ -47,7 +47,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Color
 
 You can subscribe to all [events exposed by Kendo UI ColorPalette](/api/javascript/ui/colorpalette#events) by the handler name.
 
-###### Example
+
 
     <kendo:colorPalette name="colorpalette" change="colorpalette_change"></kendo:colorPalette>
 
@@ -61,9 +61,9 @@ You can subscribe to all [events exposed by Kendo UI ColorPalette](/api/javascri
 
 ### Existing Instances
 
-You are able to reference an existing ColorPalette instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
+You are able to reference an existing ColorPalette instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [ColorPalette API](/api/javascript/ui/colorpalette#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo ColorPalette tag declaration
     <script>
@@ -74,8 +74,6 @@ You are able to reference an existing ColorPalette instance via the [`jQuery.dat
     </script>
 
 ## See Also
-
-Other articles on Telerik UI for JSP and on the ColorPalette:
 
 * [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
 * [Overview of the ColorPicker JSP Tag]({% slug overview_colorpicker_uiforjsp %})

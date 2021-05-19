@@ -3,6 +3,7 @@ title: Switch
 page_title: Configuration, methods and events of Kendo UI Mobile Switch
 description: How to quickly configure the checked and unchecked state of Mobile Switch widget.
 res_type: api
+component: switch
 ---
 
 # kendo.mobile.ui.Switch
@@ -99,9 +100,11 @@ Whether to turn the widget on or off.
       var switchInstance = $("#switch").data("kendoMobileSwitch");
 
       // get the checked state of the switch.
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(switchInstance.check());
       // set the checked state of the switch.
       switchInstance.check(true);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(switchInstance.check());
     }
     </script>
@@ -225,6 +228,7 @@ The checked state of the widget.
     var app = new kendo.mobile.Application();
 
     function onChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.checked);//true of false
     }
     </script>

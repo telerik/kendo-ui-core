@@ -9,7 +9,7 @@ position: 3
 
 # Pull-to-Refresh Pattern
 
-The [Hybrid UI ListView widget](http://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
+The [Hybrid UI ListView widget](https://demos.telerik.com/kendo-ui/m/index#mobile-listview/index) is used to display flat or grouped lists of items. It can be either used in the unbound mode by enhancing an HTML `ul` element, or bound to a DataSource instance.
 
 The Pull-to-refresh pattern solves the issue that occurs when you have to display data of dynamic character.
 
@@ -19,7 +19,7 @@ The Pull-to-refresh pattern solves the issue that occurs when you have to displa
 
 **Step 1** Define a target HTML element such as a list.
 
-###### Example
+
 
     <ul id="localListView"></ul>
 
@@ -37,7 +37,7 @@ The Pull-to-refresh pattern solves the issue that occurs when you have to displa
 <!--_-->
 **Step 2** Initialize the ListView by referring the template and a result set from the Twitter API to be displayed.
 
-###### Example
+
 
     var dataSource = new kendo.data.DataSource({
         serverPaging: true,
@@ -67,17 +67,13 @@ The Pull-to-refresh pattern solves the issue that occurs when you have to displa
         template: $("#pull-to-refresh-template").text(),
     });
 
-This is the live example of the representation above:
-
-<a class="jsbin-embed" href="http://jsbin.com/ukitas/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
-
 ### Send Additional Parameters
 
 The Hybrid UI ListView provides a way to define the [`pullParameters`](/api/mobile/listview#pullparameters-function) function, which will add its result to the data that is sent to the server. This data will be available in the DataSource's [`parameterMap`](/api/framework/datasource#transportparametermap-function) function.
 
-**Step 1** Modify the above example to send [an additional parameter](https://dev.twitter.com/docs/api/1.1/get/search/tweets#api-param-since_id) to the Twitter service.
+**Step 1** Modify the above example to send an additional parameter to the Twitter service.
 
-###### Example
+
 
     $("#pull-to-refresh-listview").kendoMobileListView({
         dataSource: dataSource,
@@ -95,7 +91,7 @@ The Hybrid UI ListView provides a way to define the [`pullParameters`](/api/mobi
 
 **Step 2** Use this additional parameter in the `parameterMap` function of the DataSource.
 
-###### Example
+
 
     var dataSource = new kendo.data.DataSource({
         serverPaging: true,
@@ -119,13 +115,7 @@ The Hybrid UI ListView provides a way to define the [`pullParameters`](/api/mobi
         }
     });
 
-This is the live example of the representation above:
-
-<a class="jsbin-embed" href="http://jsbin.com/iloqid/1/embed?live">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
-
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI ListView:
 
 * [Hybrid UI ListView JavaScript API Reference](/api/javascript/mobile/ui/listview)
 * [Overview of the Hybrid UI ListView]({% slug overview_hybridlistview %})

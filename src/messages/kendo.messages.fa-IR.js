@@ -176,6 +176,7 @@
         kendo.ui.FilterMenu.prototype.options.messages =
         $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
             "info": "ردیف های را نشان بده که:",
+            "title": "ردیف های را نشان بده که:",
             "isTrue": "درست باشد",
             "isFalse": "درست نباشد",
             "filter": "فیلتر",
@@ -326,6 +327,26 @@
     if (kendo.ui.Pager) {
         kendo.ui.Pager.prototype.options.messages =
         $.extend(true, kendo.ui.Pager.prototype.options.messages, {
+            "allPages": "همه",
+            "display": "ردیف {0} تا {1} از {2} ردیف",
+            "empty": "ردیفی برای نمایش وجود ندارد",
+            "page": "صفحه",
+            "of": "از {0}",
+            "itemsPerPage": "ردیف های هر صفحه",
+            "first": "برو به صفحه اول",
+            "previous": "برو به صفحه قبل",
+            "next": "برو به صفحه بعد",
+            "last": "برو به صفحه آخر",
+            "refresh": "بارگزاری مجدد",
+            "morePages": "صفحات بیشتر"
+        });
+    }
+
+    /* TreeListPager messages */
+
+    if (kendo.ui.TreeListPager) {
+        kendo.ui.TreeListPager.prototype.options.messages =
+        $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
             "allPages": "همه",
             "display": "ردیف {0} تا {1} از {2} ردیف",
             "empty": "ردیفی برای نمایش وجود ندارد",

@@ -189,6 +189,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+  "allPages": "Բոլորը",
+  "page": "Էջ",
+  "display": "Ցուցադրված են {0}-{1} տողերը {2}-ից",
+  "of": "{0}-ից",
+  "empty": "Տվյալներ չկան",
+  "refresh": "Թարմացնել",
+  "first": "Վերադառնալ առաջին էջ",
+  "itemsPerPage": "տողերի քանակ էջում",
+  "last": "Անցնել վերջին էջ",
+  "next": "Անցնել հաջորդ էջ",
+  "previous": "Վերադառնալ նախորդ էջ",
+  "morePages": "Ավելի շատ էջեր"
+});
+}
+
 /* FilterCell messages */
 
 if (kendo.ui.FilterCell) {
@@ -211,6 +231,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "և",
   "clear": "Մաքրել",
   "info": "Նշված արժեքներով տողերը",
+  "title": "Նշված արժեքներով տողերը",
   "selectValue": "-ընտրել-",
   "isFalse": "սխալ է",
   "isTrue": "ճիշտ է",

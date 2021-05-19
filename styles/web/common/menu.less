@@ -1,4 +1,4 @@
-/* Menu */
+// Menu
 
 .k-menu
 {
@@ -7,6 +7,9 @@
 
 .k-menu .k-link {
     white-space: nowrap;
+}
+.k-menu .k-item > .k-link {
+    color: inherit;
 }
 
 .k-menu,
@@ -20,7 +23,7 @@
     zoom: 1;
 }
 
-.k-menu:after /* clear fix to expand content */
+.k-menu:after // clear fix to expand content
 {
     content: '';
     display: block;
@@ -37,13 +40,6 @@
     -webkit-user-select: none;
     -moz-user-select: -moz-none;
     user-select: none;
-}
-
-.k-menu-scroll-wrapper .k-item div,
-.k-popups-wrapper .k-item div,
-.k-menu .k-item div
-{
-    user-select: default;
 }
 
 .k-popups-wrapper .k-item .k-item,
@@ -72,13 +68,6 @@ ul.k-menu-vertical > .k-item
     vertical-align: middle;
 }
 
-.k-menu-scroll-wrapper .k-item > .k-link > .k-menu-expand-arrow,
-.k-popups-wrapper .k-item > .k-link > .k-menu-expand-arrow,
-.k-menu .k-item > .k-link > .k-menu-expand-arrow
-{
-    margin: -2px 0 0;
-}
-
 .k-menu-scroll-wrapper .k-item > .k-link,
 .k-popups-wrapper .k-item > .k-link,
 .k-menu .k-item > .k-link
@@ -86,7 +75,11 @@ ul.k-menu-vertical > .k-item
     display: block;
     padding: @menu-link-padding;
     line-height: 1.34em;
-    .prohibit-selection;
+    .prohibit-selection();
+}
+
+.k-menu-vertical > .k-menu-item > .k-menu-link {
+    padding-right: @menu-vertical-link-padding;
 }
 
 .k-menu-scroll-wrapper .k-menu-group,
@@ -124,11 +117,11 @@ ul.k-menu-vertical > .k-item
     .box-sizing(content-box);
 }
 
+.k-column-menu-group-header,
 .k-menu-scroll-wrapper .k-menu-group .k-item > .k-link,
 .k-popups-wrapper.vertical > .k-item > .k-link,
 .k-context-menu.k-menu-vertical > .k-item > .k-link,
-.k-menu .k-menu-group .k-item > .k-link
-{
+.k-menu .k-menu-group .k-item > .k-link {
     padding: .28em 1.8em .38em .9em;
 }
 
@@ -150,6 +143,11 @@ ul.k-menu-vertical > .k-item
     border: 0;
 }
 
+.k-popups-wrapper .k-item > .k-link > .k-menu-expand-arrow,
+.k-menu-horizontal > .k-item > .k-link > .k-menu-expand-arrow {
+    margin: -2px 0 0;
+}
+
 .k-menu-scroll-wrapper .k-item > .k-link > .k-i-arrow-60-down,
 .k-popups-wrapper .k-item > .k-link > .k-i-arrow-60-down,
 .k-menu .k-item > .k-link > .k-i-arrow-60-down
@@ -159,12 +157,11 @@ ul.k-menu-vertical > .k-item
 
 .k-menu-scroll-wrapper .k-item > .k-link > .k-i-arrow-60-right,
 .k-popups-wrapper .k-item > .k-link > .k-i-arrow-60-right,
-.k-menu .k-item > .k-link > .k-i-arrow-60-right
-{
+.k-menu-group .k-item > .k-link > .k-menu-expand-arrow,
+.k-menu-vertical .k-item > .k-link > .k-menu-expand-arrow {
     position: absolute;
     top: 50%;
     margin-top: -8px;
-    right: 2px;
     right: .2rem;
 }
 
@@ -312,17 +309,17 @@ ul.k-menu-vertical .k-separator,
     .k-scroll-up {
         top: 0;
         left: 0;
-        width: 100%;
     }
 
     .k-scroll-down {
         bottom: 0;
         left: 0;
-        width: 100%;
     }
 
     .k-scroll-up,
     .k-scroll-down {
+        width: 100%;
+        height: 16px;
         padding: 0em 0.7em;
         line-height: 0.2em;
     }
@@ -330,18 +327,17 @@ ul.k-menu-vertical .k-separator,
     .k-scroll-left {
         top: 0;
         left: 0;
-        height: 100%;
     }
 
     .k-scroll-right {
         top: 0;
         right: 0;
-        height: 100%;
     }
 
     .k-scroll-left,
     .k-scroll-right {
         width: 16px;
+        height: 100%;
         padding-left: 0;
         padding-right: 0;
 
@@ -354,7 +350,43 @@ ul.k-menu-vertical .k-separator,
     }
 }
 
-/* Context Menu */
+
+.k-rtl,
+[dir="rtl"] {
+    .k-menu .k-item,
+    .k-widget.k-menu-horizontal > .k-item {
+        border-width: 0 0 0 1px;
+    }
+
+    .k-menu-scroll-wrapper,
+    .k-popups-wrapper,
+    .k-menu {
+        .k-item > .k-link > .k-icon,
+        .k-image,
+        .k-sprite {
+            margin-right: -4px;
+            margin-left: 4px;
+        }
+
+        .k-menu-group > .k-item {
+            border: 0;
+        }
+    }
+
+    .k-column-menu-group-header,
+    .k-menu-scroll-wrapper .k-menu-group .k-item > .k-link,
+    .k-popups-wrapper.vertical > .k-item > .k-link,
+    .k-context-menu.k-menu-vertical > .k-item > .k-link,
+    .k-menu .k-menu-group .k-item > .k-link {
+        padding: .28em .9em .38em 1.8em;
+    }
+
+    .k-menu-vertical > .k-menu-item > .k-menu-link {
+        padding: @menu-link-padding;
+        padding-left: @menu-vertical-link-padding;
+    }
+}
+// Context Menu
 
 .k-context-menu
 {

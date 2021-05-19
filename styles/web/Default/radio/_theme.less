@@ -1,0 +1,62 @@
+// Radio
+.k-radio {
+    .fill(
+        @radio-text,
+        @radio-bg,
+        @radio-border
+    );
+    .border-radius( @radio-radius );
+
+    &::before {
+        .border-radius( @radio-radius );
+    }
+}
+
+
+// Hover state
+.k-radio:hover {
+    .fill(
+        @radio-hovered-text,
+        @radio-hovered-bg,
+        @radio-hovered-border
+    );
+}
+
+
+// Focus state
+.k-radio:focus {
+    .box-shadow( @radio-focused-shadow );
+    border-color: @radio-focused-border;
+}
+
+
+// Checked
+.k-radio:checked {
+    .fill(
+        @radio-checked-text,
+        @radio-checked-bg,
+        @radio-checked-border
+    );
+}
+
+.k-radio:checked:focus {
+    .box-shadow( @radio-focused-checked-shadow );
+    border-color: @radio-focused-checked-border;
+}
+
+
+// Disabled
+.k-radio:disabled {
+    .fill(
+        @radio-disabled-text,
+        @radio-disabled-bg,
+        @radio-disabled-border
+    );
+}
+.k-radio:checked:disabled {
+    .fill(
+        @radio-disabled-checked-text,
+        @radio-disabled-checked-bg,
+        @radio-disabled-checked-border
+    );
+}

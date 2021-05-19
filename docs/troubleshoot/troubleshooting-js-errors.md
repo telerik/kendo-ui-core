@@ -31,8 +31,6 @@ For a solution, see the [Application Does Not Function at All](#application-does
 
 ## See Also
 
-Other articles on troubleshooting:
-
 * [Common Issues in Kendo UI]({% slug troubleshooting_common_issues_kendoui %})
 * [Performance Issues]({% slug troubleshooting_system_memory_symptoms_kendoui %})
 * [Content Security Policy]({% slug troubleshooting_content_security_policy_kendoui %})
@@ -46,11 +44,10 @@ Other articles on troubleshooting:
 * [Common Issues in Kendo UI MultiSelect]({% slug troubleshooting_common_issues_multiselect_kendoui %})
 * [Common Issues in Kendo UI Scheduler]({% slug troubleshooting_scheduler_widget %})
 * [Common Issues in Kendo UI Upload]({% slug troubleshooting_upload_widget %})
-* [Common Issues Related to Styling, Appearance, and Rendering]({% slug commonissues_troubleshooting_kendouistyling %})
-* [Common Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
-* [Validation Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
-* [Scaffolding Issues in Telerik UI for ASP.NET MVC](http://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
-* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
-* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
-* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshoot/troubleshooting)
-* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](http://docs.telerik.com/aspnet-mvc/helpers/upload/troubleshoot/troubleshooting)
+* [Common Issues in Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting)
+* [Validation Issues in Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-validation)
+* [Scaffolding Issues in Telerik UI for ASP.NET MVC](https://docs.telerik.com/aspnet-mvc/troubleshoot/troubleshooting-scaffolding)
+* [Common Issues in the Grid ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/troubleshooting)
+* [Excel Export with the Grid ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/grid/troubleshoot/excel-export-issues)
+* [Common Issues in the Spreadsheet ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/spreadsheet/troubleshoot/troubleshooting)
+* [Common Issues in the Upload ASP.NET MVC HtmlHelper Extension](https://docs.telerik.com/aspnet-mvc/helpers/upload/troubleshoot/troubleshooting)

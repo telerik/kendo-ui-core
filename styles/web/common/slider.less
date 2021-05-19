@@ -1,4 +1,4 @@
-/* Slider */
+// Slider
 
 div.k-slider
 {
@@ -6,19 +6,19 @@ div.k-slider
     border-width: 0;
     background-color: transparent;
 
-    .prohibit-selection;
+    .prohibit-selection();
 }
 
 .k-slider-vertical
 {
     width: 26px;
-    height: 200px; /* default height */
+    height: 200px; // default height
 }
 
 .k-slider-horizontal
 {
     display: inline-block;
-    width: 200px; /* default width */
+    width: 200px; // default width
     height: 26px;
 }
 
@@ -41,15 +41,8 @@ div.k-slider
     outline: 0;
 }
 
-.k-slider .k-button .k-icon
-{
-    margin-top: 3px;
-    vertical-align: top;
-}
-
 .k-state-disabled .k-slider-wrap
 {
-    filter: alpha(opacity=60);
     opacity: .6;
 }
 
@@ -300,7 +293,7 @@ div.k-slider
     right: 120%;
 }
 
-.k-slider-tooltip
-{
-    top:-4444px; /*prevent window resize in IE8 when appending*/
+.k-slider-tooltip {
+    display: inline-block;
+    text-align: center;
 }

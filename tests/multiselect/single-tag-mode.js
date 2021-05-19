@@ -2,36 +2,35 @@
     var MultiSelect = kendo.ui.MultiSelect,
         select;
 
-    module("kendo.ui.MultiSelect Single Tag mode", {
-        setup: function() {
-            kendo.effects.disable();
+    describe("kendo.ui.MultiSelect Single Tag mode", function () {
+        beforeEach(function() {
+
             kendo.ns = "kendo-";
-            select = $("<select multiple />").appendTo(QUnit.fixture);
+            select = $("<select multiple />").appendTo(Mocha.fixture);
 
             for (var idx = 0; idx < 15; idx++) {
                 select.append("<option value=" + idx + ">" + idx + "</option>");
             }
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.ns = "";
-            kendo.effects.enable();
+
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }
-        }
-    });
+        });
 
-    test("Widget renders nothing if no value", function() {
+    it("Widget renders nothing if no value", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: []
         });
         var tagList = multiselect.tagList;
 
-        equal(tagList.children().length, 0);
+        assert.equal(tagList.children().length, 0);
     });
 
-    test("Widget renders a single tag using the default 'single' tag template", function() {
+    it("Widget renders a single tag using the default 'single' tag template", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1]
@@ -39,16 +38,16 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(":first");
 
-        equal(tagList.children().length, 1);
+        assert.equal(tagList.children().length, 1);
 
-        equal(tag.children().length, 2);
-        equal(tag.children().eq(0).html(), "1 item(s) selected");
-        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
-        equal(tag.find(".k-select").attr("aria-label"), "open");
-        equal(tag.find(".k-select").children(".k-i-arrow-60-down").html(), "");
+        assert.equal(tag.children().length, 2);
+        assert.equal(tag.children().eq(0).html(), "1 item(s) selected");
+        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.find(".k-select").attr("aria-label"), "open");
+        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").html(), "");
     });
 
-    test("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
+    it("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
         var multiselect = new MultiSelect(select, {
             tagTemplate: "#:values.length# selected of #:maxTotal#",
             tagMode: "single",
@@ -57,14 +56,14 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(":first");
 
-        equal(tagList.children().length, 1);
+        assert.equal(tagList.children().length, 1);
 
-        equal(tag.children().length, 2);
-        equal(tag.children().eq(0).html(), "1 selected of 15");
-        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.children().length, 2);
+        assert.equal(tag.children().eq(0).html(), "1 selected of 15");
+        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
     });
 
-    test("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
+    it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
         var multiselect = new MultiSelect(select, {
             tagTemplate: "#:dataItems.length# (#:dataItems[0].text#) selected of #:currentTotal#",
             tagMode: "single",
@@ -73,14 +72,14 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(":first");
 
-        equal(tagList.children().length, 1);
+        assert.equal(tagList.children().length, 1);
 
-        equal(tag.children().length, 2);
-        equal(tag.children().eq(0).html(), "1 (1) selected of 15");
-        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.children().length, 2);
+        assert.equal(tag.children().eq(0).html(), "1 (1) selected of 15");
+        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
     });
 
-    test("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
+    it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
         var multiselect = new MultiSelect(select, {
             tagTemplate: "#:dataItems.length# (#:dataItems[0].text#) selected of #:currentTotal#",
             tagMode: "single",
@@ -89,14 +88,14 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(":first");
 
-        equal(tagList.children().length, 1);
+        assert.equal(tagList.children().length, 1);
 
-        equal(tag.children().length, 2);
-        equal(tag.children().eq(0).html(), "1 (1) selected of 15");
-        equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.children().length, 2);
+        assert.equal(tag.children().eq(0).html(), "1 (1) selected of 15");
+        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
     });
 
-    test("Updates the text of the selected tag when value is changed", function() {
+    it("Updates the text of the selected tag when value is changed", function() {
         var multiselect = new MultiSelect(select, {
             tagTemplate: "#:dataItems.length#,#:currentTotal#,#:maxTotal#",
             tagMode: "single",
@@ -108,10 +107,10 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(":first");
 
-        equal(tag.children().eq(0).html(), "3,15,15");
+        assert.equal(tag.children().eq(0).html(), "3,15,15");
     });
 
-    test("Removes tag when no value", function() {
+    it("Removes tag when no value", function() {
         var multiselect = new MultiSelect(select, {
             tagTemplate: "#:dataItems.length#,#:currentTotal#,#:maxTotal#",
             tagMode: "single",
@@ -121,10 +120,10 @@
         multiselect.value([]);
 
         var tagList = multiselect.tagList;
-        equal(tagList.children().length, 0);
+        assert.equal(tagList.children().length, 0);
     });
 
-    test("Passes maxTotal value to the template different than currentTotal", function() {
+    it("Passes maxTotal value to the template different than currentTotal", function() {
         var multiselect = new MultiSelect(select, {
             tagTemplate: "#:dataItems.length#,#:currentTotal#,#:maxTotal#",
             tagMode: "single",
@@ -137,10 +136,10 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(":first");
 
-        equal(tag.children().eq(0).html(), "1,1,15");
+        assert.equal(tag.children().eq(0).html(), "1,1,15");
     });
 
-    test("Do not remove tag when click 'arrow' icon", function() {
+    it("Do not remove tag when click 'arrow' icon", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1]
@@ -150,10 +149,10 @@
 
         tagList.children(":first").children(":last").click();
 
-        equal(tagList.children().length, 1);
+        assert.equal(tagList.children().length, 1);
     });
 
-    test("Open popup when click 'arrow' icon", function() {
+    it("Open popup when click 'arrow' icon", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1]
@@ -163,10 +162,10 @@
 
         tagList.children(":first").children(":last").mousedown();
 
-        ok(multiselect.popup.visible());
+        assert.isOk(multiselect.popup.visible());
     });
 
-    test("Update underlying select element on item select", 3, function() {
+    it("Update underlying select element on item select", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1]
@@ -176,12 +175,12 @@
 
         var value = select.val();
 
-        equal(value.length, 2);
-        equal(value[0], 1);
-        equal(value[1], 2);
+        assert.equal(value.length, 2);
+        assert.equal(value[0], 1);
+        assert.equal(value[1], 2);
     });
 
-    test("Update underlying select element on item remove", 2, function() {
+    it("Update underlying select element on item remove", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1,2,3]
@@ -191,11 +190,11 @@
 
         var value = select.val();
 
-        equal(value.length, 1);
-        equal(value[0], 2);
+        assert.equal(value.length, 1);
+        assert.equal(value[0], 2);
     });
 
-    test("Clear selected values when delete the tag", 1, function() {
+    it("Clear selected values when delete the tag", function() {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1,2,3]
@@ -208,6 +207,70 @@
 
         var selectValue = multiselect.element.val() || [];
 
-        equal(selectValue.length, 0);
+        assert.equal(selectValue.length, 0);
     });
-})();
+
+    it("Clear selected values when delete the tag after filtering", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.search("a");
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.BACKSPACE
+        });
+
+        var selectValue = multiselect.element.val() || [];
+
+        assert.equal(selectValue.length, 0);
+    });
+
+    it("Clear selected values with esc when delete the tag after filtering", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.search("a");
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ESC
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ESC
+        });
+
+        var selectValue = multiselect.value();
+
+        assert.equal(selectValue.length, 2);
+        var tagList = multiselect.tagList;
+        var tag = tagList.children(":first");
+        assert.equal(tag.children().eq(0).html(), "2 item(s) selected");
+    });
+
+    it("Clear selected values clear button when delete the tag after filtering", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            value: [1,2,3]
+        });
+
+        multiselect.search("a");
+
+        multiselect._clear.click();
+
+        var selectValue = multiselect.value();
+
+        assert.equal(selectValue.length, 0);
+        var tagList = multiselect.tagList;
+        var tag = tagList.children(":first");
+        assert.equal(tag.children().length, 0);
+    });
+
+    });
+}());

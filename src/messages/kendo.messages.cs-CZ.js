@@ -193,7 +193,9 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "isnull": "Je null",
     "isnotnull": "Není null",
     "isempty": "Je prázdná",
-    "isnotempty": "Není prázdná"
+    "isnotempty": "Není prázdná",
+    "isnullorempty": "Nemá hodnotu",
+    "isnotnullorempty": "Má hodnotu"
   },
   "number": {
     "eq": "Je rovno",
@@ -230,9 +232,10 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Zobrazit položky s hodnotou, která:",
+  "title": "Zobrazit položky s hodnotou, která",
   "isTrue": "je pravda",
   "isFalse": "není pravda",
-  "filter": "Filtrovat",  
+  "filter": "Filtrovat",
   "clear": "Zrušit",
   "and": "A zároveň",
   "or": "Nebo",
@@ -258,7 +261,9 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.operators,{
     "isnull": "Je null",
     "isnotnull": "Není null",
     "isempty": "Je prázdná",
-    "isnotempty": "Není prázdná"
+    "isnotempty": "Není prázdná",
+    "isnullorempty": "Nemá hodnotu",
+    "isnotnullorempty": "Má hodnotu"
   },
   "number": {
     "eq": "Je rovno",
@@ -442,6 +447,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "morePages": "Další stránky"
 });
 }
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+      "allPages": "All",
+      "display": "{0} - {1} z {2} celkem",
+      "empty": "Žádný záznam nenalezen",
+      "page": "Strana",
+      "of": "z {0}",
+      "itemsPerPage": "záznamů na stránku",
+      "first": "Na první stránku",
+      "previous": "Na předchozí stránku",
+      "next": "Na další stránku",
+      "last": "Na poslední stránku",
+      "refresh": "Obnovit",
+      "morePages": "Další stránky"
+    });
+    }
 
 /* PivotGrid messages */
 
@@ -965,18 +990,6 @@ $.extend(true, kendo.ui.TreeList.prototype.options.messages,{
 });
 }
 
-if (kendo.ui.TreeList) {
-kendo.ui.TreeList.prototype.options.columnMenu =
-$.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-    "messages": {
-        "columns": "Zvolit sloupce",
-        "filter": "Použít filtr",
-        "sortAscending": "Setřídit (vzest.)",
-        "sortDescending": "Setřídit (sest.)"
-    }
-});
-}
-
 /* TreeView messages */
 
 if (kendo.ui.TreeView) {
@@ -1000,6 +1013,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "clearSelectedFiles": "Smazat",
   "uploadSelectedFiles": "Nahrát soubory",
   "dropFilesHere": "Pro nahrání přetáhněte soubory sem",
+  "invalidFiles": "Neplatné soubory. Zkontrolujte požadavky na nahrání souborů.",
   "statusUploading": "nahrávám",
   "statusUploaded": "nahráno",
   "statusWarning": "varování",
@@ -1008,7 +1022,7 @@ $.extend(true, kendo.ui.Upload.prototype.options.localization,{
   "headerStatusUploaded": "Hotovo",
   "invalidMaxFileSize": "Soubor je příliš velký.",
   "invalidMinFileSize": "Soubor je příliš malý.",
-  "invalidFileExtension": "tento typ souboru není povolen."
+  "invalidFileExtension": "Tento typ souboru není povolen."
 });
 }
 

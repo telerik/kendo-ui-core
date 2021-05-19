@@ -27,7 +27,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 **Step 2** Create a new action method.
 
-###### Example
+
 
         @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
         public String index() {
@@ -36,13 +36,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add a `slider` tag.
 
-###### Example
+
 
         <kendo:slider name="slider" class="temperature" min="0" max="30" smallStep="1" largeStep="10" value="18">
 	    </kendo:slider>
@@ -51,9 +51,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI Slide
 
 ### Subscribe to Events
 
-You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascript/ui/slider#events) by the handler name.
+You can subscribe to all [events exposed by Kendo UI Slider](/api/javascript/ui/slider#events) by the handler name.
 
-###### Example
+
 
       <kendo:slider name="slider" change="sliderOnChange" slide="sliderOnSlide">
       </kendo:slider>
@@ -72,9 +72,9 @@ You can subscribe to all [events exposed by Kendo UI ProgressBar](/api/javascrip
 
 ### Existing Instances
 
-You are able to reference an existing Slider instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
+You are able to reference an existing Slider instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [Slider API](/api/javascript/ui/slider#methods) to control its behavior.
 
-###### Example
+
 
     // Put this after your Kendo Slider tag declaration
     <script>
@@ -85,8 +85,6 @@ You are able to reference an existing Slider instance via [`jQuery.data()`](http
     </script>
 
 ## See Also
-
-Other articles on Telerik UI for JSP and on the Slider:
 
 * [Overview of the Kendo UI Slider Widget]({% slug overview_kendoui_slider_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

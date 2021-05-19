@@ -35,9 +35,8 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
+        DISABLED = "k-state-disabled";
 
-        browser = kendo.support.browser,
-        isIE8 = browser.msie && browser.version < 9;
 
     var ColorSelector = Widget.extend({
         init: function(element, options) {
@@ -93,10 +92,9 @@ var __meta__ = { // jshint ignore:line
             if (arguments.length === 0) {
                 enable = true;
             }
-            $(".k-disabled-overlay", this.wrapper).remove();
-            if (!enable) {
-                this.wrapper.append("<div class='k-disabled-overlay'></div>");
-            }
+
+            this.wrapper.toggleClass(DISABLED, !enable);
+
             this._onEnable(enable);
         },
         _select: function(color, nohooks) {
@@ -209,7 +207,9 @@ var __meta__ = { // jshint ignore:line
             }
         },
         focus: function(){
-            this.wrapper.focus();
+            if (this.wrapper && !this.wrapper.is("[unselectable='on']")) {
+                this.wrapper.focus();
+            }
         },
         options: {
             name: "ColorPalette",
@@ -316,7 +316,7 @@ var __meta__ = { // jshint ignore:line
             that.wrapper = element.addClass("k-widget k-flatcolorpicker")
                 .append(that._template(options));
 
-            that._hueElements = $(".k-hsv-rectangle, .k-transparency-slider .k-slider-track", element);
+            that._hueElements = $(".k-hsv-rectangle, .k-alpha-slider .k-slider-track", element);
 
             that._selectedColor = $(".k-selected-color-display", element);
 
@@ -364,13 +364,10 @@ var __meta__ = { // jshint ignore:line
                     that._updateUI(that.color());
                     that._cancel();
                 });
-
-            if (isIE8) {
-                // IE filters require absolute URLs
-                that._applyIEFilter();
-            }
         },
         destroy: function() {
+            this._hsvEvents.destroy();
+
             this._hueSlider.destroy();
             if (this._opacitySlider) {
                 this._opacitySlider.destroy();
@@ -389,18 +386,12 @@ var __meta__ = { // jshint ignore:line
             autoupdate : true,
             messages   : MESSAGES
         },
-        _applyIEFilter: function() {
-            var track = this.element.find(".k-hue-slider .k-slider-track")[0],
-                url = track.currentStyle.backgroundImage;
 
-            url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
-            track.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
-        },
         _sliders: function() {
             var that = this,
                 element = that.element,
                 hueSlider = element.find(".k-hue-slider"),
-                opacitySlider = element.find(".k-transparency-slider");
+                opacitySlider = element.find(".k-alpha-slider");
 
             function hueChange(e) {
                 that._updateUI(that._getHSV(e.value, null, null, null));
@@ -608,18 +599,20 @@ var __meta__ = { // jshint ignore:line
                     '# } #' +
                     '#= !data.input ? \'style=\"visibility: hidden;\"\' : \"\" #>' +
                 '# if (clearButton && !_standalone) { #' +
-                    '<span class="k-clear-color k-button k-bare" title="#: messages.clearColor #"></span>' +
+                    '<span class="k-clear-color k-button k-flat" title="#: messages.clearColor #"></span>' +
                 '# } #' +
                 '</div></div></div>' +
             '# } #' +
              '# if (clearButton && !_standalone && !preview) { #' +
-                    '<div class="k-clear-color-container"><span class="k-clear-color k-button k-bare">#: messages.clearColor #</span></div>' +
+                    '<div class="k-clear-color-container"><span class="k-clear-color k-button k-flat">#: messages.clearColor #</span></div>' +
              '# } #' +
             '<div class="k-hsv-rectangle"><div class="k-hsv-gradient"></div><div class="k-draghandle"></div></div>' +
-            '<input class="k-hue-slider" />' +
-            '# if (opacity) { #' +
-                '<input class="k-transparency-slider" />' +
-            '# } #' +
+            '<div class="k-sliders-wrap k-vbox">' +
+                '<input class="k-hue-slider" />' +
+                '# if (opacity) { #' +
+                    '<input class="k-alpha-slider k-transparency-slider" />' +
+                '# } #' +
+            '</div>' +
             '# if (buttons) { #' +
                 '<div unselectable="on" class="k-controls"><button class="k-button k-primary apply">#: messages.apply #</button> <button class="k-button cancel">#: messages.cancel #</button></div>' +
             '# } #'
@@ -661,6 +654,8 @@ var __meta__ = { // jshint ignore:line
 
             var content = that.wrapper = $(that._template(options));
             element.hide().after(content);
+
+            that._inputWrapper = $(that.wrapper[0].firstChild);
 
             if (element.is("input")) {
                 element.appendTo(content);
@@ -745,7 +740,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: kendo.template(
-            '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker k-header">' +
+            '<span role="textbox" aria-haspopup="true" class="k-widget k-colorpicker">' +
                 '<span class="k-picker-wrap k-state-default">' +
                     '# if (toolIcon) { #' +
                         '<span class="k-icon k-tool-icon #= toolIcon #">' +
@@ -870,7 +865,7 @@ var __meta__ = { // jshint ignore:line
                 delete options.cancel;
 
                 var id = kendo.guid();
-                var selector = that._selector = new selectorType($('<div id="' + id +'"/>').appendTo(document.body), options);
+                var selector = that._selector = new selectorType($('<div id="' + id +'"></div>').appendTo(document.body), options);
 
                 that.wrapper.attr("aria-owns", id);
 
@@ -929,7 +924,7 @@ var __meta__ = { // jshint ignore:line
                         var options = selector.options;
                         if (!color) {
                             setTimeout(function(){
-                                if (that.wrapper) {
+                                if (that.wrapper && !that.wrapper.is("[unselectable='on']")) {
                                     that.wrapper.focus();
                                 }
                             });

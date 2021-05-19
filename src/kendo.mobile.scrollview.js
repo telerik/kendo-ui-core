@@ -77,7 +77,7 @@ var __meta__ = { // jshint ignore:line
             var pageHTML = "";
 
             for (var idx = 0; idx < e.pageCount; idx ++) {
-                pageHTML += "<li/>";
+                pageHTML += "<li></li>";
             }
 
             this.element.html(pageHTML);

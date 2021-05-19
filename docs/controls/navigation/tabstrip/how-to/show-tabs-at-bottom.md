@@ -11,11 +11,11 @@ The example below demonstrates how to display the tab buttons at the bottom of t
 
 > **Important**
 >
-> This example is now obsolete unless you are working with a very old Kendo UI version. For recent versions, use the [`tabPosition` property](/api/javascript/ui/tabstrip#configuration-tabPosition) instead.
+> This example is now obsolete unless you are working with a very old Kendo UI version. For recent versions, use the [`tabPosition` property](/api/javascript/ui/tabstrip/configuration/tabposition) instead.
 
-###### Example
 
-```html
+
+```dojo
     <style>
         html{font:12px sans-serif;}
 
@@ -77,8 +77,6 @@ The example below demonstrates how to display the tab buttons at the bottom of t
 ```
 
 ## See Also
-
-Other articles on the Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})

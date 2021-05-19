@@ -3,6 +3,7 @@ title: Sparkline
 page_title: Configuration, methods and events of Kendo UI DataViz Sparkline
 description: Learn how to configure Kendo UI Javascript sparkline widget in a few easy steps, use and change methods and events.
 res_type: api
+component: sparkline
 ---
 
 # kendo.dataviz.ui.Sparkline
@@ -677,6 +678,10 @@ Use the *kendo.days* constants to specify the day by name.
 
 Specifies the maximum number of groups (categories) to produce when
 either**baseUnit**is set to "fit" or**baseUnitStep**is set to "auto".
+
+### categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display. Applicabable for date category axis.
 
 This option is ignored in all other cases.
 
@@ -2694,7 +2699,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "area".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area".
 
 ### series.markers `Object`
 
@@ -2756,7 +2761,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
+> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "area", "line", "scatterLine", "radarLine", "radarArea", "polarLine" or "polarArea".
 
 #### Example - set the missing values behavior
     <div id="chart"></div>
@@ -2780,7 +2785,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "line".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "line".
 
 ### series.negativeColor `String`
 
@@ -2835,9 +2840,9 @@ Space between points as proportion of the point width.
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A Boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/sparkline#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 > Stack settings of the first series are applied to the rest of the series.
 
@@ -2876,7 +2881,7 @@ The type of stack to plot. The following types are supported:
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [series.type](#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar" or "column".
 
 #### Example - configure stack groups
 
@@ -3381,7 +3386,7 @@ The default options for all pie series. For more details see the series options.
 
 A Boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/sparkline#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 #### Example - configure stack series
 
@@ -5461,7 +5466,7 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](chart#methods-exportImage)
+Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart/methods/exportimage)
 
 #### Parameters
 
@@ -5481,7 +5486,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](chart#methods-exportPDF)
+Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart/methods/exportpdf)
 
 #### Parameters
 
@@ -5495,7 +5500,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](chart#methods-exportSVG)
+Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart/methods/exportsvg)
 
 #### Parameters
 
@@ -5545,13 +5550,13 @@ The chart settings to update.
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the chart.
 The returned string is a self-contained SVG document that can be used as is or
-converted to other formats using tools like [Inkscape](http://inkscape.org/) and
-[ImageMagick](http://www.imagemagick.org/).
+converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/sparkline/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 
@@ -5567,6 +5572,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var sparkline = $("#sparkline").data("kendoSparkline");
     var svg = sparkline.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -5574,7 +5580,7 @@ Both programs provide command-line interface suitable for server-side processing
 
 Returns a PNG image of the sparkline encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/sparkline/methods/exportimage).
 
 #### Returns
 
@@ -5602,7 +5608,7 @@ Returns a PNG image of the sparkline encoded as a [Data URL](https://developer.m
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);
@@ -5730,6 +5736,28 @@ The axis name is used as a key.
 
 The original user event that triggered the drag action.
 
+### paneRender
+
+Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
+
+#### Event Data
+
+##### pane `kendo.dataviz.ChartPane`
+
+The chart pane that was rendered.
+
+##### name `String`
+
+The pane name.
+
+##### index `Number`
+
+The pane index.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
 ### plotAreaClick
 
 Fires when plot area is clicked.
@@ -5763,6 +5791,40 @@ The X axis value or array of values for multi-axis charts.
 ##### e.y `Object`
 
 The X axis value or array of values for multi-axis charts.
+
+### plotAreaHover
+
+Fired when the user hovers the plot area.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
+##### e.value `Object`
+
+The data point value.
+
+### plotAreaLeave
+
+Fired when the cursor leaves the plotArea.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
 
 ### seriesClick
 
@@ -5859,6 +5921,114 @@ The DOM element of the data point.
 ##### e.percentage `Object`
 
 The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+### seriesOver
+
+Fired when the cursor is over the chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
+
+### seriesLeave
+
+Fired when the cursor leaves a chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for donut, pie and 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.Sparkline`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
 
 ### zoomStart
 

@@ -10,9 +10,9 @@ slug: howto_setinitiaviewpriortoinitialization_angular_hybridui
 
 The example below demonstrates how to set the initial view at runtime prior to the initialization of the application in AngularJS when working with the Hybrid UI components of Kendo UI.
 
-###### Example
 
-```html
+
+```dojo
      <style>
       html, body {
         height: 100%;

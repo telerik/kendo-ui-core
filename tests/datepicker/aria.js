@@ -3,77 +3,81 @@
 var DatePicker = kendo.ui.DatePicker,
     input, instance;
 
-module("kendo.ui.DatePicker ARIA", {
-    setup: function() {
-        kendo.effects.disable();
-        input = $("<input id='test' />").appendTo(QUnit.fixture);
+describe("kendo.ui.DatePicker ARIA", function () {
+    beforeEach(function() {
+
+        input = $("<input id='test' />").appendTo(Mocha.fixture);
         instance = new DatePicker(input, {
             ARIATemplate: "#=kendo.toString(current, 'D')#"
         });
-    },
-    teardown: function() {
-        kendo.effects.enable();
+    });
+    afterEach(function() {
+
         instance.destroy();
-        kendo.destroy(QUnit.fixture);
-    }
+        kendo.destroy(Mocha.fixture);
+    });
+
+it("DatePicker adds role to the input element", function() {
+    assert.equal(input.attr("role"), "combobox");
 });
 
-test("DatePicker adds role to the input element", function() {
-    equal(input.attr("role"), "combobox");
+it("DatePicker adds aria-owns", function() {
+    assert.equal(input.attr("aria-owns"), "test_dateview");
 });
 
-test("DatePicker adds aria-owns", function() {
-    equal(input.attr("aria-owns"), "test_dateview");
+it("DatePicker sets id to the popup element", function() {
+    assert.equal(instance.dateView.popup.element.attr("id"), "test_dateview");
 });
 
-test("DatePicker sets id to the popup element", function() {
-    equal(instance.dateView.popup.element.attr("id"), "test_dateview");
+it("DatePicker adds aria-expanded", function() {
+    assert.equal(input.attr("aria-expanded"), "false");
 });
 
-test("DatePicker adds aria-expanded", function() {
-    equal(input.attr("aria-expanded"), "false");
-});
-
-test("DatePicker sets aria-expanded to true", function() {
+it("DatePicker sets aria-expanded to true", function() {
     instance.open();
-    equal(input.attr("aria-expanded"), "true");
+    assert.equal(input.attr("aria-expanded"), "true");
 });
 
-test("DatePicker sets aria-hidden=false to the popup element", function() {
+it("DatePicker sets aria-haspopup to grid", function() {
     instance.open();
-    equal(instance.dateView.popup.element.attr("aria-hidden"), "false");
+    assert.equal(input.attr("aria-haspopup"), "grid");
 });
 
-test("DatePicker sets aria-hidden=true to the popup element", function() {
+it("DatePicker sets aria-hidden=false to the popup element", function() {
+    instance.open();
+    assert.equal(instance.dateView.popup.element.attr("aria-hidden"), "false");
+});
+
+it("DatePicker sets aria-hidden=true to the popup element", function() {
     instance.open();
     instance.close();
-    equal(instance.dateView.popup.element.attr("aria-hidden"), "true");
+    assert.equal(instance.dateView.popup.element.attr("aria-hidden"), "true");
 });
 
-test("DatePicker adds aria-disabled=false", function() {
-    equal(input.attr("aria-disabled"), "false");
+it("DatePicker adds aria-disabled=false", function() {
+    assert.equal(input.attr("aria-disabled"), "false");
 });
 
-test("DatePicker sets aria-disabled=true", function() {
+it("DatePicker sets aria-disabled=true", function() {
     instance.enable(false);
-    equal(input.attr("aria-disabled"), "true");
+    assert.equal(input.attr("aria-disabled"), "true");
 });
 
-test("DatePicker adds role to the toggle button", function() {
-    equal(instance._dateIcon.attr("role"), "button");
+it("DatePicker adds role to the toggle button", function() {
+    assert.equal(instance._dateIcon.attr("role"), "button");
 });
 
-test("DatePicker adds aria-controls to the toggle button", function() {
-    equal(instance._dateIcon.attr("aria-controls"), "test_dateview");
+it("DatePicker adds aria-controls to the toggle button", function() {
+    assert.equal(instance._dateIcon.attr("aria-controls"), "test_dateview");
 });
 
-test("DatePicker sets id to the calendar", function() {
+it("DatePicker sets id to the calendar", function() {
     instance.dateView._calendar();
 
-    ok(instance.dateView.calendar.element.attr("id"));
+    assert.isOk(instance.dateView.calendar.element.attr("id"));
 });
 
-test("DatePicker sets aria-activedescendant after navigation", function() {
+it("DatePicker sets aria-activedescendant after navigation", function() {
     instance.open();
 
     instance.element.focus().trigger({
@@ -84,19 +88,19 @@ test("DatePicker sets aria-activedescendant after navigation", function() {
 
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");
 
-    equal(instance.element.attr("aria-activedescendant"), cell.attr("id"));
+    assert.equal(instance.element.attr("aria-activedescendant"), cell.attr("id"));
 });
 
-test("DatePicker sets aria-label to focused cell", function() {
+it("DatePicker sets aria-label to focused cell", function() {
     instance.open();
 
     var date = kendo.date.today();
     var cell = instance.dateView.calendar.element.find("td.k-state-focused");
 
-    equal(cell.attr("aria-label"), kendo.toString(date, "D"));
+    assert.equal(cell.attr("aria-label"), kendo.toString(date, "D"));
 });
 
-test("DatePicker removes aria-label from previous cell", function() {
+it("DatePicker removes aria-label from previous cell", function() {
     instance.open();
 
     instance.element.focus().trigger({
@@ -108,7 +112,94 @@ test("DatePicker removes aria-label from previous cell", function() {
     var date = kendo.date.today();
     var cell = instance.dateView.calendar.element.find("td[aria-label]");
 
-    equal(cell.length, 1);
+    assert.equal(cell.length, 1);
 });
 
-})();
+});
+
+describe("kendo.ui.DatePicker ARIA defaults", function () {
+    beforeEach(function() {
+
+        input = $("<input id='test' />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+
+        instance.destroy();
+        kendo.destroy(Mocha.fixture);
+    });
+
+it("DatePicker add correct aria-label for date", function() {
+    instance = new DatePicker(input);
+    instance.open();
+
+    var date = kendo.date.today();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+    assert.equal(cell.attr("aria-label"), "Current focused date is "+kendo.toString(date, "D"));
+});
+
+it("DatePicker add correct aria-label for year", function() {
+    var date = kendo.date.today();
+    instance = new DatePicker(input, { start: "year"});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+    assert.equal(cell.attr("aria-label"), "Current focused month is "+kendo.toString(date, "MMMM"));
+});
+
+it("DatePicker add evaluates ariatemplate in correct context", function() {
+    var date = kendo.date.today();
+    instance = new DatePicker(input, { ARIATemplate: "Current focused date is #= this.dateView.calendar.view().name === 'month' ? 'test': kendo.toString(data.current, 'MMM yyyy') #"});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+    assert.equal(cell.attr("aria-label"), "Current focused date is test");
+});
+
+it("DatePicker add correct aria-label for decade", function() {
+    var date = kendo.date.today();
+    instance = new DatePicker(input, { start: "decade"});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+    assert.equal(cell.attr("aria-label"),  "Current focused year is "+kendo.toString(date, "yyyy"));
+});
+
+it("DatePicker add correct aria-label for century", function() {
+    instance = new DatePicker(input, { start: "century", value: new Date(2021, 0, 1)});
+    instance.open();
+    instance.element.trigger("focus");
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+    assert.equal(cell.attr("aria-label"), "Current focused decade is 2020 - 2029");
+});
+
+});
+
+describe("kendo.ui.DatePicker aria with AXE", function() {
+    beforeEach(function() {
+        $("<label>Hire date:<input id='test' /></label>").appendTo(Mocha.fixture);
+        input = $(Mocha.fixture).find("input");
+    });
+
+    afterEach(function() {
+        instance.destroy();
+        kendo.destroy(Mocha.fixture);
+    });
+
+    it("DatePicker is accessible", function(done) {
+        instance = new DatePicker(input);
+
+        axeRunFixture(done);
+    });
+
+    it("DatePicker has accessible popup", function(done) {
+        instance = new DatePicker(input);
+
+        instance.open();
+
+        axeRun(instance.dateView.popup.element[0], done);
+    });
+});
+}());

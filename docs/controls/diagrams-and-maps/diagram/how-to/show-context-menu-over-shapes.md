@@ -10,13 +10,12 @@ slug: howto_show_context_menu_over_shapes
 The following example demonstrates how to show a Kendo UI ContextMenu when pressing the right button of the mouse over the Diagram shapes.
 
 To achieve this behavior:
+
 1. Initialize a [Kendo UI ContextMenu]({% slug overview_kendoui_contextmenu_widget %}) setting its target as the ID of the Diagram and filter it by a `g` element.
-2. Handle the [`open` event](/api/javascript/ui/contextmenu#events-open) of the ContextMenu. If the target is a connection, it is possible to cancel the event. If the target is a shape, it is possible to store the `dataItem` in a variable.
-3. Handle the [`select` event](/api/javascript/ui/contextmenu#events-select) of the ContextMenu where you can perform a custom action based on the context of the shape.
+2. Handle the [`open` event](/api/javascript/ui/contextmenu/events/open) of the ContextMenu. If the target is a connection, it is possible to cancel the event. If the target is a shape, it is possible to store the `dataItem` in a variable.
+3. Handle the [`select` event](/api/javascript/ui/contextmenu/events/select) of the ContextMenu where you can perform a custom action based on the context of the shape.
 
-###### Example
-
-```html
+```dojo
 
 <ul id="menu">
 <li>
@@ -165,9 +164,9 @@ To achieve this behavior:
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).
+* [Load shapes from context menu]({% slug diagram-add-shapes-from-context-menu %})

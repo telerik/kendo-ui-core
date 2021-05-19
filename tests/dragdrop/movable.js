@@ -14,67 +14,67 @@
         element,
         movable;
 
-    module("movable", {
-        setup: function() {
+    describe("movable", function() {
+        beforeEach(function() {
             fixture = $("#qunit-fixture");
             fixture.append("<div />");
             element = fixture.children().first();
             movable = new Movable(element);
-        },
+        });
 
-        teardown: function() {
+        afterEach(function() {
             fixture.empty()
-        }
-    });
+        });
 
-    test("sets x", 1, function() {
-        movable.moveAxis("x", 10.5);
-        equal(elementLocation()["x"], 10.5);
-    });
+        it("sets x", function() {
+            movable.moveAxis("x", 10.5);
+            assert.equal(elementLocation()["x"], 10.5);
+        });
 
-    test("sets y", 1, function() {
-        movable.moveAxis("y", 10.5);
-        equal(elementLocation()["y"], 10.5);
-    });
+        it("sets y", function() {
+            movable.moveAxis("y", 10.5);
+            assert.equal(elementLocation()["y"], 10.5);
+        });
 
-    test("rounds x", 1, function() {
-        movable.round = true;
-        movable.moveAxis("x", 10.5);
-        equal(elementLocation()["x"], 11);
-    });
+        it("rounds x", function() {
+            movable.round = true;
+            movable.moveAxis("x", 10.5);
+            assert.equal(elementLocation()["x"], 11);
+        });
 
-    test("rounds y", 1, function() {
-        movable.round = true;
-        movable.moveAxis("y", 10.5);
-        equal(elementLocation()["y"], 11);
+        it("rounds y", function() {
+            movable.round = true;
+            movable.moveAxis("y", 10.5);
+            assert.equal(elementLocation()["y"], 11);
+        });
     });
 
     // ------------------------------------------------------------
     var browser;
 
-    module("movable / IE legacy", {
-        setup: function() {
+    describe("movable / IE legacy", function() {
+        beforeEach(function() {
             browser = kendo.support.browser;
             kendo.support.browser = { msie: true, version: 9 };
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.support.browser = browser;
-        }
-    });
+        });
 
-    test("sets x", function() {
-        movable.moveAxis("x", 10.5);
-        equal(element.css("left"), "10.5px");
-    });
+        it("sets x", function() {
+            movable.moveAxis("x", 10.5);
+            assert.equal(element.css("left"), "10.5px");
+        });
 
-    test("sets y", function() {
-        movable.moveAxis("y", 10.5);
-        equal(element.css("top"), "10.5px");
-    });
+        it("sets y", function() {
+            movable.moveAxis("y", 10.5);
+            assert.equal(element.css("top"), "10.5px");
+        });
 
-    test("sets position", function() {
-        movable.moveAxis("y", 10.5);
-        equal(element.css("position"), "absolute");
-    });
+        it("sets position", function() {
+            movable.moveAxis("y", 10.5);
+            assert.equal(element.css("position"), "absolute");
+        });
 
-})();
+    });
+}());

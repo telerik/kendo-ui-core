@@ -24,19 +24,18 @@ $.fn.type = function(value) {
             textRange.collapse(false);
             textRange.select();
         }
-    });
+        });
 }
 
-module("kendo.ui.AutoComplete separator", {
-    setup: function() {
-        input = $("<input>").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+describe("kendo.ui.AutoComplete separator", function () {
+    beforeEach(function() {
+        input = $("<input>").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("separator", function() {
+it("separator", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         separator: ", "
@@ -47,10 +46,10 @@ test("separator", function() {
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first());
 
-    equal(input.val(), "baz, ");
+    assert.equal(input.val(), "baz, ");
 });
 
-test("search uses the last word", function() {
+it("search uses the last word", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         separator: ", "
@@ -59,10 +58,10 @@ test("search uses the last word", function() {
     input.focus();
     input.type("foo, b");
     autocomplete.search();
-    equal(autocomplete.ul.children().first().text(), "bar");
+    assert.equal(autocomplete.ul.children().first().text(), "bar");
 });
 
-test("search uses the word at the caret position", function() {
+it("search uses the word at the caret position", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar"],
         separator: ", "
@@ -72,10 +71,10 @@ test("search uses the word at the caret position", function() {
     input.val("foo, bar, ");
     input[0].selectionStart = 0;
     autocomplete.search();
-    equal(autocomplete.ul.children().first().text(), "foo");
+    assert.equal(autocomplete.ul.children().first().text(), "foo");
 });
 
-test("select replaces the word at the caret position", function() {
+it("select replaces the word at the caret position", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["foo", "bar", "baz"],
         separator: ", "
@@ -86,10 +85,10 @@ test("select replaces the word at the caret position", function() {
     input[0].selectionStart = 0;
     autocomplete.dataSource.read();
     autocomplete.select(autocomplete.ul.children().eq(2));
-    equal(input.val(), "baz, bar, ");
+    assert.equal(input.val(), "baz, bar, ");
 });
 
-    test("multiple separators, use first one as default", function() {
+    it("multiple separators, use first one as default", function() {
         var autocomplete = new AutoComplete(input, {
             dataSource: ["baz", "bar"],
             separator: [", ", "; "]
@@ -100,18 +99,17 @@ test("select replaces the word at the caret position", function() {
         autocomplete.search();
         autocomplete.select(autocomplete.ul.children().first());
 
-        equal(input.val(), "baz, ");
+        assert.equal(input.val(), "baz, ");
     });
 
-    test("multiple separators", function(assert) {
+    it("multiple separators", function(done) {
         var autocomplete = new AutoComplete(input, {
             dataSource: ["baz", "bar"],
             separator: [", ", "; "]
         });
 
-        var done = assert.async();
         autocomplete.popup.one("open", function() {
-            assert.ok(true);
+            assert.isOk(true);
             done();
         });
         input.focus();
@@ -119,7 +117,7 @@ test("select replaces the word at the caret position", function() {
         autocomplete.search();
     });
 
-    test("multiple separators, replace all with default separator", function(assert) {
+    it("multiple separators, replace all with default separator", function() {
         var autocomplete = new AutoComplete(input, {
             dataSource: ["baz", "bar"],
             separator: [", ", "; ", "/ "],
@@ -129,5 +127,6 @@ test("select replaces the word at the caret position", function() {
         input.focus();
         input.trigger("focusout");
         assert.equal(autocomplete.value(), "foo, bar, baz, boo");
+    });
     });
 }());

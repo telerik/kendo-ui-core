@@ -1,21 +1,21 @@
 ---
 title: Text
-page_title: Text | Kendo UI MVVM
+page_title: Text Binding | Kendo UI MVVM
 description: "Learn how to update the text of the DOM element to a View-Model value by using the text binding in Kendo UI MVVM."
 slug: textbinding_mvvm_kendoui
 ---
 
 # Text Binding
 
-The `text` binding sets the text content of the target DOM element to a View-Model value. Changing the View-Model value via code updates the text of the DOM element. If the View-Model value is not of primitive type, such as `Text`, `Number` or `Date`, the result returned by the `toString` JavaScript method is used as the value.
+The `text` binding sets the text content of the target DOM element to a View-Model value.
+
+Changing the View-Model value via code updates the text of the DOM element. If the View-Model value is not of primitive type, such as `Text`, `Number` or `Date`, the result returned by the `toString` JavaScript method is used as the value.
 
 ## Getting Started
 
-To set the value displayed by an `input`, `textarea` or `select` use the [value](value) binding instead.
+To set the value that is displayed by an `input`, `textarea`, or `select`, use the [`value`](value) binding instead.
 
-The example below demonstrates how to use the `text` binding.
-
-###### Example
+The following example demonstrates how to use the `text` binding.
 
     <span data-bind="text: name"></span>
     <script>
@@ -26,15 +26,11 @@ The example below demonstrates how to use the `text` binding.
     kendo.bind($("span"), viewModel);
     </script>
 
-This results in the output below. Note that the data-bind attribute is removed for clarity.
-
-###### Example
+The following example demonstrates the expected output. The data-bind attribute is removed for clarity.
 
     <span>John Doe</span>
 
-If the View-Model value contains HTML tags, those are output verbatim.
-
-###### Example
+If the View-Model value contains HTML tags, those are output verbatim. The following example outputs visible HTML tags.
 
     <span data-bind="text: name"></span>
     <script>
@@ -45,16 +41,11 @@ If the View-Model value contains HTML tags, those are output verbatim.
     kendo.bind($("span"), viewModel);
     </script>
 
-
-This example outputs visible HTML tags.
-
 ## Text Formatting
 
-Since the 2015 Q2 release, custom formats can be applied by using the `data-format` attribute, as demonstrated in the example below.
+As of the 2015 Q2 release, you can apply custom formats by using the `data-format` attribute.
 
-###### Example
-
-```html
+```dojo
 <div id="view">
     <span data-format="c2" data-bind="text: price"></span><br/>
     <span data-format="dd-MM-yyyy" data-bind="text: purchaseDate"></span>
@@ -70,8 +61,6 @@ Since the 2015 Q2 release, custom formats can be applied by using the `data-form
 ```
 
 ## See Also
-
-Other articles on the Kendo UI MVVM component and bindings:
 
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})

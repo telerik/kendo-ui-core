@@ -1,0 +1,221 @@
+// Form
+.k-form {
+    border-width: 0;
+    box-sizing: border-box;
+    font-size: @form-font-size;
+    line-height: @form-line-height;
+}
+
+
+// Form fieldset
+.k-form-fieldset {
+    margin: @form-fieldset-margin;
+    padding: @form-fieldset-padding-y @form-fieldset-padding-x;
+    border-width: 0;
+    box-sizing: border-box;
+
+    > * {
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+.k-form-legend {
+    margin: @form-legend-margin;
+    padding: @form-legend-padding-y @form-legend-padding-x;
+    border-width: 0 0 2px;
+    border-style: solid;
+    width: 100%;
+    border-width: 0 0 2px;
+    box-sizing: border-box;
+    font-size: @form-legend-font-size;
+    line-height: @form-legend-line-height;
+    text-transform: uppercase;
+}
+
+
+// Form field
+.k-form-field {
+    margin: @form-field-margin;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column nowrap;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    // Labels inside forms
+    > .k-label,
+    > .k-form-label {
+        margin: @form-label-margin;
+        display: inline-flex;
+        flex-direction: row;
+        flex-shrink: 0;
+    }
+
+    .k-checkbox-label,
+    .k-radio-label {
+        display: inline-flex;
+    }
+
+    // Inputs inside form
+    .k-textbox,
+    .k-textarea,
+    .k-autocomplete,
+    .k-combobox,
+    .k-dropdown,
+    .k-dropdowntree,
+    .k-dateinput,
+    .k-datepicker,
+    .k-datetimepicker,
+    .k-daterangepicker-wrap,
+    .k-maskedtextbox,
+    .k-multiselect,
+    .k-numerictextbox,
+    .k-timepicker,
+    .k-textbox-container,
+    .k-floating-label-container {
+        width: 100%;
+        // display: flex;
+        // flex-flow: row nowrap;
+    }
+}
+
+
+// Form Hint/Error Messages
+.k-form-hint,
+.k-form-error {
+    padding: 4px 0 0;
+    margin: @form-hint-margin;
+    font-size: @form-hint-font-size;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+
+// Horizontal forms
+.k-form-horizontal {
+    .k-form-field {
+        display: flex;
+        flex-flow: row nowrap;
+
+        > .k-label,
+        > .k-form-label {
+            margin-right: @horizontal-form-label-margin-x;
+            padding-top: @horizontal-form-label-padding-top;
+            width: @horizontal-form-label-width;
+            flex-direction: column;
+            align-items: @horizontal-form-label-align;
+            justify-content: flex-end;
+        }
+        .k-label-optional {
+            margin: 0;
+            align-self: inherit;
+        }
+    }
+
+    .k-form-field-wrap {
+        flex: 1;
+    }
+}
+
+
+// Form Buttons
+.k-form-buttons {
+    margin: @form-buttons-margin;
+    padding: @form-buttons-padding-y @form-buttons-padding-x;
+    border-width: 0;
+    border-top-width: @form-buttons-border-width;
+    border-style: solid;
+    display: flex;
+    flex-flow: row nowrap;
+
+    > * {
+        margin-inline-start: @form-buttons-spacing;
+    }
+    > :first-child {
+        margin-inline-start: 0;
+    }
+
+    &.k-buttons-end {
+        justify-content: flex-end;
+    }
+}
+
+
+
+
+
+// Legacy styles
+.k-edit-form
+{
+    margin: 0;
+    padding: 0;
+}
+
+.k-window > div.k-popup-edit-form
+{
+    padding: 1em 0;
+}
+
+.k-grid-edit-row .k-edit-form td
+{
+    border-bottom-width: 0;
+}
+
+.k-edit-form-container
+{
+    position: relative;
+    width: 400px;
+}
+
+.k-edit-label,
+.k-edit-form-container .editor-label
+{
+    float: left;
+    clear: both;
+    width: 30%;
+    padding: .4em 0 1em;
+    margin-left: 2%;
+    text-align: right;
+}
+
+.k-edit-field,
+.k-edit-form-container .editor-field
+{
+    float: right;
+    clear: right;
+    width: 60%;
+    margin-right: 2%;
+    padding: 0 0 .6em;
+
+    &.k-no-editor {
+        padding: .4em 0 1em;
+    }
+}
+
+.k-edit-form-container .k-button
+{
+    margin: 0 .16em;
+}
+
+.k-edit-form-container .k-button-group .k-button {
+    margin-right: 0;
+}
+
+.k-edit-field > .k-button:first-child {
+    margin-left: 0;
+}
+
+.k-edit-form-container .k-edit-buttons
+{
+    clear: both;
+    text-align: right;
+    border-width: 1px 0 0;
+    border-style: solid;
+    position: relative;
+    bottom: -1em;
+    padding: .6em;
+}
+

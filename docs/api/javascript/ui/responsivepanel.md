@@ -3,6 +3,7 @@ title: ResponsivePanel
 page_title: Configuration, methods and events of Kendo UI ResponsivePanel
 description: Configure the ResponsivePanel UI widget, use methods and explore the events which are triggered upon certain behaviors.
 res_type: api
+component: responsivepanel
 ---
 
 # kendo.ui.ResponsivePanel
@@ -13,7 +14,7 @@ Represents the Kendo UI ResponsivePanel widget. Inherits from [Widget](/api/java
 
 ### autoClose `Boolean` *(default: true)*
 
-If set to `false` the widget will not close when the page content is touched, after it was opened on a mobile device. You will need to call the [close method](#methods-close) when the panel needs to close.
+If set to `false` the widget will not close when the page content is touched, after it was opened on a mobile device. You will need to call the [close method](/api/javascript/ui/responsivepanel/methods/close) when the panel needs to close.
 
 #### Example
 
@@ -225,6 +226,7 @@ Triggered before the responsive panel is closed. Cancellable.
         // event handler for close event
         var onClose = function() {
             // the responsive panel is closing
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("closing");
         };
 
@@ -253,6 +255,7 @@ Triggered before the responsive panel is closed. Cancellable.
         // event handler for close event
         var onClose = function() {
             // the responsive panel is closing
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("closing");
         };
 
@@ -281,6 +284,7 @@ Triggered before the responsive panel is opened. Cancellable.
         // event handler for open event
         var onOpen = function() {
             // the responsive panel is opening
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("opening");
         };
 
@@ -309,6 +313,7 @@ Triggered before the responsive panel is opened. Cancellable.
         // event handler for open event
         var onOpen = function() {
             // the responsive panel is opening
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("opening");
         };
 

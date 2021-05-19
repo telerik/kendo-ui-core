@@ -3,6 +3,7 @@ title: TreeMap
 page_title: Configuration, methods and events of Kendo UI DataViz TreeMap
 description: Learn how to configure Kendo UI Javascript TreeMap widget in a few easy steps, use and change methods and events.
 res_type: api
+component: treemap
 ---
 
 # kendo.dataviz.ui.TreeMap
@@ -176,46 +177,54 @@ The source widget instance.
 
     <div id="treemap"></div>
     <script>
-    $("#treemap").kendoTreeMap({
+      $("#treemap").kendoTreeMap({
         dataSource: {
-            data: [{
-                name: "foo",
-                value: 1,
-                color: "red"
+          data: [{
+            name: "test",
+            items: [{
+              category: "foo",
+              value: 1,
+              color: "#3073ad"
             }]
+          }]
         },
         valueField: "value",
-        textField: "name",
+        textField: "category",
         colorField: "color",
         dataBound: function(e) {
-            console.log("DataBound");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+          console.log("DataBound");
         }
-    });
+      });
     </script>
 
 #### Example - subscribe to the "dataBound" event after initialization
     <div id="treemap"></div>
     <script>
-    function dataBound(e) {
-      console.log("DataBound");
-    }
+      function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("DataBound");
+      }
 
-    $("#treemap").kendoTreeMap({
+      $("#treemap").kendoTreeMap({
         dataSource: {
-            data: [{
-                name: "foo",
-                value: 1,
-                color: "red"
+          data: [{
+            name: "test",
+            items: [{
+              category: "foo",
+              value: 1,
+              color: "#3073ad"
             }]
+          }]
         },
         autoBind: false,
         valueField: "value",
-        textField: "name",
+        textField: "category",
         colorField: "color"
-    });
-    var treemap = $("#treemap").getKendoTreeMap();
-    treemap.bind("dataBound", dataBound);
-    treemap.dataSource.fetch();
+      });
+      var treemap = $("#treemap").getKendoTreeMap();
+      treemap.bind("dataBound", dataBound);
+      treemap.dataSource.fetch();
     </script>
 
 ## Methods
@@ -263,6 +272,7 @@ The text that is being searched for.
     var treemap = $("#treemap").getKendoTreeMap();
     var fooDataItem = treemap.dataSource.get(1);
     var fooElement = treemap.findByUid(fooDataItem.uid);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(fooElement);
     </script>
 
@@ -300,6 +310,7 @@ A string, DOM element or jQuery object which represents the tile. A string is tr
 
     var treemap = $("#treemap").getKendoTreeMap();
     var dataItem = treemap.dataItem(".k-treemap-tile:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>
 

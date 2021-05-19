@@ -1,23 +1,21 @@
 ---
 title: Disabled
-page_title: Disabled | Kendo UI MVVM
+page_title: Disabled Binding | Kendo UI MVVM
 description: "Learn how to disable the target DOM widget or element in Kendo UI MVVM."
 slug: disabledbinding_mvvm_kendoui
 ---
 
 # Disabled Binding
 
-The Kendo UI Disabled (`disabled`) binding disables the target DOM element or widget if the View-Model value is `true`. If the View-Model value is `false`, the target DOM element or widget is enabled.
+The Kendo UI Disabled (`disabled`) binding disables the target DOM element or widget if the View-Model value is `true`.
 
-## Getting Started
+If the View-Model value is `false`, the target DOM element or widget is enabled.
 
-The `disabled` binding supports only input HTML elements: `input`, `select` and `textarea`. When an `input` element is disabled, the end user cannot change its value, i.e. type in text or choose a different option.
+The `disabled` binding supports only input HTML elements&mdash;`input`, `select`, and `textarea`. When an `input` element is disabled, the end user cannot change its value, that is, type in text or choose a different option.
 
-### Setup
+Non-Boolean values, such as `0`, `null`, `undefined` and `""`, are treated as `false` by the `disabled` binding. All other values are treated as `true`.
 
-The example below demonstrates how to use the `disabled` binding.
-
-###### Example
+The following example demonstrates how to use the `disabled` binding. The `input` element is initially enabled because the value of the `isNameDisabled` field is `false`. When the user presses the button, the `input` is disabled because the value of the `isNameDisabled` field is set to `true`.
 
     <div id="view">
     <input type="text" data-bind="value: name, disabled: isNameDisabled" />
@@ -36,15 +34,7 @@ The example below demonstrates how to use the `disabled` binding.
     </script>
      </div>
 
-In the example, the `input` element is initially enabled because the value of the `isNameDisabled` field is `false`. When the user presses the button, the `input` is disabled because the value of the `isNameDisabled` field is set to `true`.
-
-### Non-Boolean Values
-
-Non-Boolean values, such as `0`, `null`, `undefined` and `""`, are treated as `false` by the `disabled` binding. All other values are treated as `true`.
-
 ## See Also
-
-Other articles on the Kendo UI MVVM component and bindings:
 
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})

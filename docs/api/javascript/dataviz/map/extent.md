@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.Extent : kendo.Class
+
 Represents a geographic region defined by two extreme locations (North West and South East).
 
 ## Constructor Parameters
@@ -16,7 +17,7 @@ The North West extreme location.
 The South East extreme location.
 
 
-## Class methods
+## Class Methods
 
 ### create
 Creates a Location instance.
@@ -57,6 +58,7 @@ Tests if a location is contained within the extent.
 The location to test for.
 
 #### Returns
+
 `Boolean` true if the extent contains the location, false otherwise.
 
 
@@ -66,9 +68,10 @@ Tests if any of the locations is contained within the extent.
 #### Parameters
 
 ##### locations `Array`
-An array of [locations](location) to test for.
+An array of [locations](/api/javascript/dataviz/map/location) to test for.
 
 #### Returns
+
 `Boolean` true if the extent contains any of the locations, false otherwise.
 
 
@@ -76,6 +79,7 @@ An array of [locations](location) to test for.
 Returns the center of the extent.
 
 #### Returns
+
 `kendo.dataviz.map.Location` The extent center location.
 
 
@@ -101,14 +105,16 @@ The locations to include in the extent.
 Returns the four extreme locations of the extent.
 
 #### Returns
-`Object` An object with `nw`, `ne`, `se` and `sw` [locations](location).
+
+`Object` An object with `nw`, `ne`, `se` and `sw` [locations](/api/javascript/dataviz/map/location).
 
 
 ### toArray
 Returns the four extreme locations of the extent as an array.
 
 #### Returns
-`Array` An array with [NW, NE, SE, SW] [locations](location).
+
+`Array` An array with [NW, NE, SE, SW] [locations](/api/javascript/dataviz/map/location).
 
 
 ### overlaps
@@ -120,5 +126,6 @@ Tests if the given extent overlaps with this instance.
 The extent to test with.
 
 #### Returns
+
 `Boolean` true if the extents overlap, false otherwise.
 

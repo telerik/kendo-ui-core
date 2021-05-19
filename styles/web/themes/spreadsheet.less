@@ -72,7 +72,7 @@
 .k-auto-fill,
 .k-spreadsheet-selection {
     border-color: @spreadsheet-selection-border;
-    box-shadow: inset 0 0 0 1px @background, 0 0 0 1px @spreadsheet-selection-border;
+    box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
 }
 
 .k-spreadsheet-selection {
@@ -80,9 +80,20 @@
 }
 
 .k-spreadsheet-active-cell {
-    // enforce border color of active cell to match selection
-    border-color: @spreadsheet-selection-border !important;
+    box-shadow: inset 0 0 0 1px @spreadsheet-selection-border;
     background-color: @background;
+
+        &.k-right {
+            box-shadow: inset 0 0 0 1px @spreadsheet-selection-border, inset -1px 0 0 1px @spreadsheet-selection-border;
+        }
+
+        &.k-bottom {
+            box-shadow: inset 0 0 0 1px @spreadsheet-selection-border, inset 0 -1px 0 1px @spreadsheet-selection-border;
+        }
+
+        &.k-bottom.k-right {
+            box-shadow: inset 0 0 0 1px @spreadsheet-selection-border, inset -1px -1px 0 1px @spreadsheet-selection-border;
+        }
 }
 
 .k-spreadsheet-active-cell.k-single {
@@ -132,6 +143,20 @@
     .k-single-selection.k-dim-auto-fill-handle::after {
         background-color: fadeout(@spreadsheet-selection-border, 50%);
     }
+
+    .k-spreadsheet-cell-comment {
+        color: @tooltip-text;
+        background-color: @tooltip-bg;
+        border-color: @tooltip-border;
+    }
+
+    .k-spreadsheet-has-comment:after {
+        border-color: @spreadsheet-selection-border @spreadsheet-selection-border transparent transparent;
+    }
+
+    .k-dirty {
+        border-color: @input-validation-error transparent transparent @input-validation-error;
+    }
 }
 
 .k-spreadsheet-format-cells .k-spreadsheet-preview {
@@ -158,6 +183,7 @@
 
 .k-action-window .k-action-buttons {
     border-color: @widget-border-color;
+    background: @header-background-color;
 }
 
 .k-spreadsheet-sample {
@@ -168,61 +194,9 @@
     }
 }
 
-.k-spreadsheet-window .k-list-wrapper,
 .k-spreadsheet-window .k-list {
     border-color: @widget-border-color;
     border-radius: @border-radius;
-}
-
-.k-spreadsheet-window {
-
-    .k-edit-field > input[type="radio"]:checked+.k-orientation-label {
-        .composite-background(@spreadsheet-page-orientation-gradient);
-        background-color: @accent;
-        color: lighten(@selected-text-color, 12%);
-    }
-
-    .k-page-orientation {
-        border-color: @spreadsheet-page-orientation-border-color;
-        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1)
-    }
-
-    .k-page-orientation:before {
-        background: @spreadsheet-page-orientation-background;
-        border-color: transparent;
-        border-bottom-color: @spreadsheet-page-orientation-border-color;
-        border-left-color: @spreadsheet-page-orientation-border-color;
-    }
-
-    .k-margins-horizontal,
-    .k-margins-vertical {
-        background: transparent;
-        border-color: @widget-border-color;
-    }
-
-    .hint-wrapper:before {
-        background: @widget-border-color;
-    }
-}
-
-.k-spreadsheet-toolbar {
-    &.k-toolbar .k-button-group .k-button {
-        border-radius: @border-radius;
-    }
-
-    > .k-widget,
-    > .k-button,
-    > .k-button-group {
-        border-radius: @border-radius;
-    }
-
-    > .k-separator {
-        border-color: @widget-border-color;
-    }
-
-    .k-overflow-anchor {
-        border-radius: 0;
-    }
 }
 
 .k-spreadsheet-popup {
@@ -282,27 +256,27 @@
 
 .k-series-b {
     border-color: @series-b;
-    background-color: fade(@series-b, 15%);;
+    background-color: fade(@series-b, 15%);
 }
 
 .k-series-c {
     border-color: @series-c;
-    background-color: fade(@series-c, 15%);;
+    background-color: fade(@series-c, 15%);
 }
 
 .k-series-d {
     border-color: @series-d;
-    background-color: fade(@series-d, 15%);;
+    background-color: fade(@series-d, 15%);
 }
 
 .k-series-e {
     border-color: @series-e;
-    background-color: fade(@series-e, 15%);;
+    background-color: fade(@series-e, 15%);
 }
 
 .k-series-f {
     border-color: @series-f;
-    background-color: fade(@series-f, 15%);;
+    background-color: fade(@series-f, 15%);
 }
 
 
@@ -314,5 +288,53 @@
     .k-state-focused {
         background-color: @selected-background;
         color: @selected-text-color;
+    }
+}
+
+
+// Images
+.k-spreadsheet-insert-image-dialog {
+    border-color: @widget-border-color;
+    border-radius: @border-radius;
+
+    .k-spreadsheet-has-image {
+        &:hover,
+        &.k-state-hovered {
+            box-shadow: @spreadsheet-insert-image-dialog-preview-overlay;
+            border-radius: @border-radius;
+        }
+
+        &:hover div,
+        &.k-state-hovered div {
+            color: @spreadsheet-insert-image-dialog-hovered-text;
+        }
+    }
+}
+
+.k-spreadsheet-drawing {
+    &.k-spreadsheet-active-drawing {
+        outline-color: @spreadsheet-drawing-handle-outline;
+    }
+
+    .k-spreadsheet-drawing-handle {
+        border-color: @spreadsheet-drawing-handle-border-color;
+        background-color: @spreadsheet-drawing-handle-bg;
+        border-radius: @spreadsheet-drawing-handle-border-radius;
+    }
+}
+
+.k-spreadsheet-drawing-anchor-cell {
+    background: @spreadsheet-drawing-anchor-bg;
+}
+
+
+// RTL
+.k-rtl .k-spreadsheet {
+    .k-spreadsheet-has-comment::after {
+        border-color: @spreadsheet-selection-border transparent transparent @spreadsheet-selection-border;
+    }
+
+    .k-dirty {
+        border-color: @input-validation-error @input-validation-error transparent transparent;
     }
 }

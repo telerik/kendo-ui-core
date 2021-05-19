@@ -2,15 +2,18 @@
 title: ListBox
 description: Configuration, methods and events of the Kendo UI ListBox
 res_type: api
+component: listbox
 ---
 
 # kendo.ui.ListBox
+
+Represents the Kendo UI ListBox widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
 
 ### autoBind `Boolean` *(default: true)*
 
-If set to `false`, the widget will not bind to the data source during initialization. In this case, the data binding will occur when the [`change`](/api/javascript/data/datasource#events-change) event of the data source is fired. By default, the ListBox will bind to the data source that is specified in the configuration.
+If set to `false`, the widget will not bind to the data source during initialization. In this case, the data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the data source is fired. By default, the ListBox will bind to the data source that is specified in the configuration.
 
 > Setting `autoBind` to `false` is useful when multiple widgets are bound to the same data source. Disabling automatic binding ensures that the shared data source does not make more than one request to the remote service.
 
@@ -33,8 +36,8 @@ If set to `false`, the widget will not bind to the data source during initializa
 
  The `id` of the target ListBox to which items from the source ListBox will be transferred and vice versa. If you have to transfer items from the target ListBox over its toolbar, then you also need to set its `connectWith` option.
 
-> * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) is not deterministic.
-> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox#configuration-toolbar.tools) option.
+> * It is not recommended to set the same `connectWith` option on two or more ListBoxes because the behavior of the `transferFrom` and `transferAllFrom` [tools](/api/javascript/ui/listbox/configuration/toolbar.tools) is not deterministic.
+> * Configuring a bi-directional relationship between two ListBoxes results in duplicated behavior of their `transferTo` and `transferFrom` options, and `transferAllTo` and `transferAllFrom` tools. If your project does not require such behavior, remove some of the relationships from the [tools](/api/javascript/ui/listbox/configuration/toolbar.tools) option.
 
 #### Example - set up a one-way connection from ListBoxA to ListBoxB
 
@@ -670,10 +673,10 @@ The built-in tools are:
 - `"moveUp"` - Moves up the selected ListBox items.
 - `"moveDown"` - Moves down the selected ListBox items.
 - `"remove"` - Removes the selected ListBox items.
-- `"transferTo"` - Moves the selected items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option.
-- `"transferFrom"` - Moves the selected items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option to the current ListBox.
-- `"transferAllTo"` - Moves all items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option.
-- `"transferAllFrom"` - Moves all items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox#configuration-connectWith) option to the current ListBox.
+- `"transferTo"` - Moves the selected items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option.
+- `"transferFrom"` - Moves the selected items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option to the current ListBox.
+- `"transferAllTo"` - Moves all items from the current ListBox to the target that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option.
+- `"transferAllFrom"` - Moves all items from the ListBox that is defined in the [`connectWith`](/api/javascript/ui/listbox/configuration/connectwith) option to the current ListBox.
 
 #### Example
 
@@ -750,6 +753,7 @@ A string, DOM element, or jQuery object which represents the item. A string is t
 
     var listbox = $("#listBox").data("kendoListBox");
     var dataItem = listbox.dataItem(".k-item:first");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dataItem.name); // displays "foo"
     </script>
 
@@ -770,6 +774,7 @@ A string, DOM element, or jQuery object which represents the item. A string is t
             dataSource: dataSource,
             template: "<div>#:name#</div>"
         }).data("kendoListBox");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(listBox.dataItems()) //will output the bound array
     </script>
 
@@ -832,7 +837,7 @@ Indicates whether the items should be enabled or disabled.
 
 ### items
 
-Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource#methods-view) method of the Kendo UI DataSource.
+Obtains an array of the DOM elements which correspond to the data items from the [`view`](/api/javascript/data/datasource/methods/view) method of the Kendo UI DataSource.
 
 #### Returns
 
@@ -850,12 +855,13 @@ Obtains an array of the DOM elements which correspond to the data items from the
     // get a reference to the first list box widget
     var listBox = $("#listBox").data("kendoListBox");
     var items = listBox.items();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(items); // logs the items
     </script>
 
 ### refresh
 
-Reloads the data and repaints the ListBox. Triggers the [`dataBound`](#events-dataBound) event.
+Reloads the data and repaints the ListBox. Triggers the [`dataBound`](/api/javascript/ui/listbox/events/databound) event.
 
 #### Example
 
@@ -1102,6 +1108,7 @@ The function context of the event handler (available through the `this` keyword)
        ],
        dataBound: function() {
            //handle event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
            console.log("data bound");
        }
     });
@@ -1137,7 +1144,7 @@ If invoked, prevents the `dragstart` action. The element will remain at its orig
     $("#listBox").kendoListBox({
          draggable: true,
          dragstart: function(e) {
-             if (e.item.text() === "Orange") {
+             if (e.dataItems.text === "Orange") {
                  e.preventDefault();
              }
          }
@@ -1178,6 +1185,7 @@ If invoked, prevents the `dragstart` action. The element will remain at its orig
     $("#listBox").kendoListBox({
          draggable: true,
          drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log("drag event");
          }
     });
@@ -1213,6 +1221,7 @@ If invoked, prevents the `drop` action. The element will remain at its original 
     $("#listBox").kendoListBox({
          draggable: true,
          drop: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log("drop event");
          }
     });
@@ -1248,12 +1257,10 @@ The original `drag` event data of `draggable`.
     $("#listBox").kendoListBox({
         draggable: true,
         dragend: function(e) {
-            console.log("from " + e.oldIndex + " to " + e.newIndex);
-
-            //prevent first item to be placed at the end of the list
-            if(e.newIndex == 2 && e.oldIndex == 0) {
-                e.preventDefault();
-            }
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log(e.items);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log(e.dataItems);
         }
     });
     </script>
@@ -1297,7 +1304,6 @@ The data items that are to be removed.
         },
         remove: function(e) {
             //handle event
-            e.preventDefault();
         }
     });
     // get a reference to the list box
@@ -1332,6 +1338,7 @@ The data items that are to be removed.
     // bind to the remove event
     listBox.bind("remove", function(e) {
         // handle event
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("remove");
         e.preventDefault();
     });

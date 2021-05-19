@@ -4,11 +4,12 @@ page_title: Overview | Hybrid UI PopOver
 description: "Open and configure the Hybrid UI Pane widget to change mobile views within the main view application in the Kendo UI framework."
 slug: overview_hybridpopover
 position: 1
+component: pop-over
 ---
 
 # PopOver Overview
 
-The [Hybrid UI PopOver widget](http://demos.telerik.com/kendo-ui/m/index#popover/index) represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. It can contain one or more mobile views which can be navigated to, if needed.
+The [Hybrid UI PopOver widget](https://demos.telerik.com/kendo-ui/m/index#popover/index) represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. It can contain one or more mobile views which can be navigated to, if needed.
 
 ## Getting Started
 
@@ -18,7 +19,7 @@ The Kendo UI mobile Application automatically instantiates a mobile PopOver for 
 
 The Mobile PopOver widget can be opened when any mobile navigational widget, such as a ListView link item, Button, and TabStrip among others, is tapped. To do so, add the `data-rel="popover"` attribute and a `href` attribute equal to the PopOver `id` to the navigational widget DOM element, prefixed with `#`, like an anchor.
 
-###### Example
+
 
     <div data-role="view">
      <a data-role="button" href="#foo" data-rel="popover">Say Hello</a>
@@ -37,8 +38,6 @@ The Mobile PopOver widget implicitly instantiates a Pane widget for its contents
 The dimensions and direction of the Popover can be configured from the `popup` configuration option.
 
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI components and on the PopOver:
 
 * [Hybrid UI PopOver JavaScript API Reference](/api/javascript/mobile/ui/popover)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

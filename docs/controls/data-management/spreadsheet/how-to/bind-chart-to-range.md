@@ -9,11 +9,9 @@ slug: howto_bindcharttosheet_spreadsheet_widget
 
 The following example demonstrates how to extract the Spreadsheet data and populate a Kendo UI Chart with it.
 
-The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet#events-change) event.
+The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet/events/change) event.
 
-###### Example
-
-```html
+```dojo
 <style>
     #spreadsheet, #chart {
         height: 500px;
@@ -82,7 +80,7 @@ The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/shee
 
     function bindChart(chart, sheet, range) {
         // Change will fire when the sheet data changes
-        // http://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet#events-change
+        // https://docs.telerik.com/kendo-ui/api/javascript/spreadsheet/sheet/events/change
         sheet.bind("change", function(e) {
             if (e.recalc) {
                update();
@@ -897,7 +895,5 @@ The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/shee
 
 ## See Also
 
-* [Chart JavaScript API Reference](/api/javascript/dataviz/ui/chart)
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
-* [How to Get Flagged Cells Containing Invalid Values]({% slug howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget %})
-* [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

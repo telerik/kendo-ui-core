@@ -7,11 +7,9 @@ slug: howto_freeformdrawing_drawingapi
 
 # Implement Free-Form Drawing
 
-The example below demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
+The following example demonstrates how to implement a free-form drawing surface while working with the Kendo UI Drawing API.
 
-###### Example
-
-```html
+```dojo
     <div id="surface" style="width: 1000px; height: 1000px;border: 1px solid black;cursor: crosshair"></div>
     <script>
       var draw = kendo.drawing;
@@ -53,8 +51,6 @@ The example below demonstrates how to implement a free-form drawing surface whil
 ```
 
 ## See Also
-
-Other articles and how-to examples on Kendo UI Drawing API:
 
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)

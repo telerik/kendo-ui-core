@@ -60,10 +60,10 @@ The  mandatory `id` of the successor task.
 
 The type of the dependency. The type is a value between 0 and 3, representing the four different dependency types:
 
-* 0 - Finish-Finish
-* 1 - Finish-Start
-* 2 - Start-Finish
-* 3 - Start-Start
+* `0` - Finish-Finish
+* `1` - Finish-Start
+* `2` - Start-Finish
+* `3` - Start-Start
 
 #### Example - set the type of a dependency
 
@@ -91,6 +91,7 @@ The unique identifier of the dependency.
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.id); // outputs "1"
     </script>
 
@@ -107,6 +108,7 @@ The `id` of the predecessor task.
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.predecessorId); // outputs "1"
     </script>
 
@@ -123,6 +125,7 @@ The `id` of the successor task.
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.successorId); // outputs "2"
     </script>
 
@@ -130,10 +133,10 @@ The `id` of the successor task.
 
 The type of the dependency. The type is a value between 0 and 3, representing the four different dependency types:
 
-* 0 - Finish-Finish
-* 1 - Finish-Start
-* 2 - Start-Finish
-* 3 - Start-Start
+* `0` - Finish-Finish
+* `1` - Finish-Start
+* `2` - Start-Finish
+* `3` - Start-Start
 
 #### Example - get the dependency type
 
@@ -144,6 +147,7 @@ The type of the dependency. The type is a value between 0 and 3, representing th
         successorId: 2,
         type: 0
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dependency.type); // outputs "0"
     </script>
 
@@ -151,7 +155,7 @@ The type of the dependency. The type is a value between 0 and 3, representing th
 
 See the [Model methods](/api/framework/model#methods) for all inherited methods.
 
-### GanttDependency.define
+### define
 
 Defines a new `GanttDependency` type using the provided options.
 
@@ -171,7 +175,7 @@ A set of key/value pairs the configure the model fields. The key specifies the n
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the value which will be used for the field when a new model instance is created. Default settings depend on the type of the field.
+Specifies the value which will be used for the field when a new model instance is created. The default settings depend on the type of the field.
 
 The default for:
 
@@ -181,11 +185,11 @@ The default for:
 
 ##### options.fields.fieldName.editable `Boolean`
 
-Specifies if the field is editable or not. The default value is `true`.
+Specifies if the field is editable or not. Defaults to `true`.
 
 ##### options.fields.fieldName.nullable `Boolean`
 
-Specifies if the `defaultValue` setting should be used. The default is `false`.
+Specifies if the `defaultValue` setting should be used. Defaults to `false`.
 
 ##### options.fields.fieldName.parse `Function`
 
@@ -197,16 +201,14 @@ Specifies the type of the field.
 
 The available options are:
 
-* `"string"`
+* (Default) `"string"`
 * `"number"`
 * `"boolean"`
 * `"date`"
 
-The default is `"string"`.
-
 ##### options.fields.fieldName.validation `Object`
 
-Specifies the validation options which will be used by the [Kendo Validator](/api/framework/validator).
+Specifies the validation options which will be used by the [Kendo UI Validator](/api/framework/validator).
 
 #### Example - define custom Gantt dependency
 

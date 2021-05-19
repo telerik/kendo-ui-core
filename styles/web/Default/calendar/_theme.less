@@ -1,0 +1,113 @@
+// Calendar
+.k-calendar {
+    .fill(
+        @calendar-text,
+        @calendar-bg,
+        @calendar-border
+    );
+
+
+    // Header
+    > .k-header {
+        .fill(
+            @calendar-header-text,
+            @calendar-header-bg,
+            @calendar-header-border
+        );
+        .composite-background(@calendar-header-gradient);
+
+        .k-link.k-state-hover when (@theme-name = material) {
+            color: inherit;
+            background-color: shade(@calendar-header-bg, 20);
+            box-shadow: none;
+        }
+        .k-nav-fast when (@theme-name = material) {
+            border-radius: 0;
+        }
+    }
+
+
+    // Header cell
+    th {
+        .fill(
+            @calendar-header-cell-text,
+            @calendar-header-cell-bg,
+            @calendar-header-cell-border
+        );
+    }
+
+
+    // Week cell
+    .k-alt {
+        .fill(
+            @calendar-week-cell-text,
+            @calendar-week-cell-bg,
+            @calendar-week-cell-border
+        );
+    }
+
+
+    // Weekend
+    .k-weekend {
+        background-color: @calendar-weekend-cell-bg;
+    }
+
+
+    // Other month
+    .k-other-month {
+        color: @calendar-othermonth-cell-text;
+        background-color: transparent;
+    }
+
+    // Out of range
+    .k-out-of-range {
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    // Today
+    .k-today {
+        .k-link {
+            color: @accent;
+            box-shadow: inset 0 0 0 1px @accent;
+        }
+    }
+
+
+    // States
+    td.k-state-hover {
+        .k-link {
+            .fill(
+                @calendar-cell-hovered-text,
+                @calendar-cell-hovered-bg,
+                @calendar-cell-hovered-border
+            );
+            .composite-background(@hover-gradient);
+        }
+    }
+    td.k-state-selected {
+        .k-link {
+            .fill(
+                @calendar-cell-selected-text,
+                @calendar-cell-selected-bg,
+                @calendar-cell-selected-border
+            );
+            .composite-background(@selected-gradient);
+        }
+    }
+    td.k-state-focused {
+        .k-link {
+            box-shadow: @calendar-cell-focused-shadow;
+        }
+    }
+
+    .k-footer .k-nav-today,
+    .k-calendar-header .k-today {
+        color: @link-text;
+
+        &:hover,
+        &:focus {
+            color: @link-hovered-text;
+        }
+    }
+}

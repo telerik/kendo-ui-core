@@ -5,11 +5,11 @@
     }
 
     var menu;
-    var assertOk = function() { ok(true); };
+    var assertOk = function() { assert.isOk(true); };
 
-    module("menu api", {
-        setup: function () {
-            QUnit.fixture.append(
+    describe("menu api", function () {
+        beforeEach(function () {
+            Mocha.fixture.append(
                     '<div id="target" style="width: 100px; height: 100px;">' +
                     '    <div class="filter" style="width: 20px; height: 20px;">1</div>' +
                     '    <div class="filter" style="width: 20px; height: 20px;">2</div>' +
@@ -42,63 +42,98 @@
                     '</ul>'
             );
             menu = new kendo.ui.ContextMenu("#menu", { animation: false, target: "#target" });
-        },
-        teardown: function () {
+        });
+        afterEach(function () {
             kendo.destroy(menu.element);
-        }
+        });
+
+    it('.k-context-menu is placed on root element', function () {
+        assert.isOk(menu.element.is(".k-context-menu"));
     });
 
-    test('.k-context-menu is placed on root element', function () {
-        ok(menu.element.is(".k-context-menu"));
+    it('Popup widget is initialized on the root element', function () {
+        assert.isOk(menu.popup == menu.element.data("kendoPopup"))
     });
 
-    test('Popup widget is initialized on the root element', function () {
-        ok(menu.popup == menu.element.data("kendoPopup"))
-    });
-
-    test('right click on target opens menu', function () {
+    it('right click on target opens menu', function () {
         $("#target").trigger("contextmenu");
 
-        ok(menu.popup.visible());
+        assert.isOk(menu.popup.visible());
     });
 
-    test('right click on body doesn\'t open menu', function () {
+    it('right click on body doesn\'t open menu', function () {
         $("body").trigger("contextmenu");
 
-        ok(!menu.popup.visible());
+        assert.isOk(!menu.popup.visible());
     });
 
-    test('right click on filter opens menu', function () {
+    it('right click on filter opens menu', function () {
         menu.setOptions({
             filter: ".filter"
         });
 
         $(".filter").eq(0).trigger("contextmenu");
 
-        ok(menu.popup.visible());
+        assert.isOk(menu.popup.visible());
     });
 
-    test('right click on target with filter doesn\'t open menu', function () {
+    it('right click on target with filter doesn\'t open menu', function () {
         menu.setOptions({
             filter: ".filter"
         });
 
         $(".target").trigger("contextmenu");
 
-        ok(!menu.popup.visible());
+        assert.isOk(!menu.popup.visible());
     });
 
-    test('click on target opens menu when showOn is click', function () {
+    it('right click on jquery filter selector opens menu', function () {
+        menu.setOptions({
+            filter: ".filter:not('.exclude')"
+        });
+
+        $(".filter").eq(0).trigger("contextmenu");
+        assert.isOk(menu.popup.visible());
+    });
+
+    it('right click on excluded element from filter selector does not open menu', function () {
+        menu.setOptions({
+            filter: ".filter:not('.exclude')"
+        });
+
+        $(".filter").eq(2).trigger("contextmenu");
+        assert.isOk(!menu.popup.visible());
+    });
+
+    it('right click on complex jquery filter selector opens menu', function () {
+        menu.setOptions({
+            filter: ".filter:not(div:has(.exclude))"
+        });
+
+        $(".filter").eq(0).trigger("contextmenu");
+        assert.isOk(menu.popup.visible());
+    });
+
+    it('right click on excluded element from complex filter selector does not open menu', function () {
+        menu.setOptions({
+            filter: ".filter:not(div:has(.exclude))"
+        });
+
+        $(".filter").eq(2).trigger("contextmenu");
+        assert.isOk(!menu.popup.visible());
+    });
+
+    it('click on target opens menu when showOn is click', function () {
         menu.setOptions({
             showOn: "click"
         });
 
         $("#target").click();
 
-        ok(menu.popup.visible());
+        assert.isOk(menu.popup.visible());
     });
 
-    test('menu is aligned to the target if alignToAnchor is true', 3, function () {
+    it('menu is aligned to the target if alignToAnchor is true', function () {
         menu.setOptions({
             alignToAnchor: true
         });
@@ -109,12 +144,12 @@
             targetOffset = $("#target").offset();
 
 
-        ok(menu.popup.visible());
-        ok(popupOffset.left == targetOffset.left);
-        ok(popupOffset.top == targetOffset.top + $("#target").height());
+        assert.isOk(menu.popup.visible());
+        assert.isOk(popupOffset.left == targetOffset.left);
+        assert.isOk(popupOffset.top == targetOffset.top + $("#target").height());
     });
 
-    test('menu is aligned to the filter item if alignToAnchor is true', 3, function () {
+    it('menu is aligned to the filter item if alignToAnchor is true', function () {
         menu.setOptions({
             filter: ".filter",
             alignToAnchor: true
@@ -126,88 +161,88 @@
             targetOffset = $(".filter").eq(1).offset();
 
 
-        ok(menu.popup.visible());
-        ok(popupOffset.left == targetOffset.left);
-        ok(popupOffset.top == targetOffset.top + $(".filter").eq(1).height());
+        assert.isOk(menu.popup.visible());
+        assert.isOk(popupOffset.left == targetOffset.left);
+        assert.isOk(popupOffset.top == targetOffset.top + $(".filter").eq(1).height());
     });
 
     /* API */
 
-    test('calling open raises open event', function () {
+    it('calling open raises open event', function () {
         menu.bind("open", function () {
-            ok(true);
+            assert.isOk(true);
         });
 
         menu.open();
     });
 
-    test('Overflow context menu - calling open raises open event', function () {
+    it('Overflow context menu - calling open raises open event', function () {
         menu.options.scrollable = true;
         menu._initOverflow({scrollable: true, orientation:"vertical"});
 
         menu.bind("open", function () {
-            ok(true);
+            assert.isOk(true);
         });
 
         menu.open();
     });
 
-    test('calling close raises close event if popup is visible', function () {
+    it('calling close raises close event if popup is visible', function () {
         menu.bind("close", function () {
-            ok(true);
+            assert.isOk(true);
         });
 
         menu.open();
         menu.close();
     });
 
-    test('Overflow context menu - calling close raises close event if popup is visible', 1, function () {
+    it('Overflow context menu - calling close raises close event if popup is visible', function () {
         menu.options.scrollable = true;
         menu._initOverflow({scrollable: true, orientation:"vertical"});
 
         menu.bind("close", function () {
-            ok(true);
+            assert.isOk(true);
         });
 
         menu.open();
         menu.close();
     });
 
-    test('calling open shows the popup', function () {
+    it('calling open shows the popup', function () {
         menu.open();
 
-        ok(menu.popup.visible());
+        assert.isOk(menu.popup.visible());
     });
 
-    test('Overflow context menu - calling open shows the popup', 2, function () {
+    it('Overflow context menu - calling open shows the popup', function () {
         menu.options.scrollable = true;
         menu._initOverflow({scrollable: true, orientation:"vertical"});
 
         menu.open();
 
-        ok(menu.popup.visible());
-        ok(menu.popup.element.height() > 0);
+        assert.isOk(menu.popup.visible());
+        assert.isOk(menu.popup.element.height() > 0);
     });
 
-    test('calling open with position shows the popup at that position', function () {
+    it('calling open with position shows the popup at that position', function () {
         menu.open(100, 100);
 
         var offset = menu.popup.element.offset();
-        ok(offset.left == 100);
-        ok(offset.top == 100);
+        assert.isOk(offset.left == 100);
+        assert.isOk(offset.top == 100);
     });
 
-    test('preventing open should not open the popup', function () {
+    it('preventing open should not open the popup', function () {
         menu.bind("open", function (e) {
             e.preventDefault();
         });
 
         menu.open();
 
-        ok(!menu.popup.visible());
+        assert.isOk(!menu.popup.visible());
     });
 
-    test('preventing close should not close the popup', function () {
+    it('preventing close should not close the popup', function () {
         menu.bind("close", function (e) {
             e.preventDefault();
         });
@@ -215,17 +250,17 @@
         menu.open();
         menu.close();
 
-        ok(menu.popup.visible());
+        assert.isOk(menu.popup.visible());
     });
 
-    test('events should pass the current target regardless of alignToAnchor', function () {
+    it('events should pass the current target regardless of alignToAnchor', function () {
         menu.setOptions({
             filter: ".filter",
             showOn: "click"
         });
 
         menu.bind("select", function (e) {
-            ok(e.target = $(".filter")[0]);
+            assert.isOk(e.target = $(".filter")[0]);
         });
 
         $(".filter").click();
@@ -243,7 +278,7 @@
     });
 
 
-    test("open event's target argument should point to the DOM element that was clicked, no align",2, function(){
+    it("open event's target argument should point to the DOM element that was clicked, no align", function(){
         var target;
         menu.setOptions({
             alignToAnchor: false,
@@ -252,7 +287,7 @@
         });
 
         menu.bind("open", function (e) {
-            equal($(e.target).text(), $(target).text());
+            assert.equal($(e.target).text(), $(target).text());
         });
 
         target = $(".filter:first");
@@ -261,7 +296,7 @@
         target = $(".filter:last");
         target.click();
     });
-    test("open event's target argument should point to the DOM element that was clicked",2, function(){
+    it("open event's target argument should point to the DOM element that was clicked", function(){
         var target;
         menu.setOptions({
             alignToAnchor: true,
@@ -270,7 +305,7 @@
         });
 
         menu.bind("open", function (e) {
-            equal($(e.target).text(), $(target).text());
+            assert.equal($(e.target).text(), $(target).text());
         });
 
         target = $(".filter:first");
@@ -280,17 +315,17 @@
         target.click();
     });
 
-    test("the element containing the context menu should be the element it was appended to",1, function(){
-        var menuContainer = $('<div id="menu-container">&nbsp;</div>').appendTo(QUnit.fixture);
-        var secondContextMenu = $('<div id="context-menu">&nbsp;</div>').appendTo(QUnit.fixture);
+    it("the element containing the context menu should be the element it was appended to", function(){
+        var menuContainer = $('<div id="menu-container">&nbsp;</div>').appendTo(Mocha.fixture);
+        var secondContextMenu = $('<div id="context-menu">&nbsp;</div>').appendTo(Mocha.fixture);
         var contextMenu = new kendo.ui.ContextMenu("#context-menu", { target: "#menu-container", appendTo: "#menu-container"});
 
-        ok($('#context-menu').parent().is("#menu-container"));
+        assert.isOk($('#context-menu').parent().is("#menu-container"));
         contextMenu.destroy();
         menuContainer.remove();
     });
 
-    test('overflow context menu - setOptions reattach events', 4, function() {
+    it('overflow context menu - setOptions reattach events', function() {
         mockFunc(kendo.ui.ContextMenu.fn, "_detachMenuEventsHandlers", assertOk);
         mockFunc(kendo.ui.ContextMenu.fn, "_destroyOverflow", assertOk);
         mockFunc(kendo.ui.ContextMenu.fn, "_initOverflow", assertOk);
@@ -301,25 +336,26 @@
         removeMocksIn(kendo.ui.ContextMenu.fn);
     });
 
-    test('overflow context menu - remove oveflow', 1, function() {
+    it('overflow context menu - remove oveflow', function() {
         menu.setOptions({scrollable: true, orientation:"vertical"});
         menu.setOptions({scrollable: false, orientation:"vertical"});
 
         menu.open();
 
-        ok(menu.popup.visible());
+        assert.isOk(menu.popup.visible());
     });
 
-    test('overflow context menu - destroy oveflow', 2, function() {
+    it('overflow context menu - destroy oveflow', function() {
         menu.setOptions({scrollable: true, orientation:"vertical"});
         mockFunc(kendo.ui.ContextMenu.fn, "_detachMenuEventsHandlers", assertOk);
 
         menu.destroy();
 
-        ok(!menu._overflowWrapper());
+        assert.isOk(!menu._overflowWrapper());
 
         removeMocksIn(kendo.ui.ContextMenu.fn);
     });
 
-})();
+    });
+}());
 

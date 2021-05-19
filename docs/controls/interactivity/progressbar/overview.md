@@ -1,48 +1,38 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI ProgressBar
-description: "Learn how to initialize the Kendo UI ProgressBar widget and configure its behaviors."
+page_title: jQuery ProgressBar Documentation | ProgressBar Overview
+description: "Get started with the jQuery ProgressBar by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_progressbar_widget
 position: 1
 ---
 
 # ProgressBar Overview
 
-The [Kendo UI ProgressBar widget](http://demos.telerik.com/kendo-ui/progressbar/index) offers rich functionalities for displaying and tracking the progress of a task. It supports multiple types, horizontal and vertical orientation, and also different directions.
+The ProgressBar delivers rich functionality for displaying and tracking the progress of a task.
 
-## Types
+The widget provides the following types:
 
-Kendo UI ProgressBar supports three different types:
+* `value`&mdash;Represents a regular ProgressBar which displays the progress status as an absolute value.
+* `percent`&mdash;Represents a regular ProgressBar which displays the progress status in percentage.
+* `chunk`&mdash;Represents a ProgressBar which is divided in chunks and displays the progress status in steps.
 
-* `value` - this is a regular ProgressBar which displays the progress status as an absolute value.
-* `percent` - a regular ProgressBar that displays the progress status in percentage.
-* `chunk` - a ProgressBar divided in chunks, in this way displaying the progress status in steps.
+The ProgressBar also supports horizontal and vertical orientation, reversed direction, minimum and maximum values, and animation duration.
 
-## Getting Started
+* [Demo page for the ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index)
 
-### Create the ProgressBar
+## Basic Configuration
 
-Create the ProgressBar by using a `<div>` element as demonstrated in the example below.
-
-###### Example
+The following example demonstrates how to create the ProgressBar by using a `<div>` element.
 
 	<div id="progressbar"></div>
 
-### Initialize the ProgressBar
-
-Initialize the ProgressBar by using a jQuery selector as shown in the example below.
-
-###### Example
+The following example demonstrates how to initialize the ProgressBar by using a jQuery selector.
 
 	$(document).ready(function(){
       $("#progressbar").kendoProgressBar();
 	});
 
-### Initialize a chunk ProgressBar
-
-Initialize a chunk ProgressBar in the way displayed in the example below.
-
-###### Example
+The following example demonstrates how to initialize a chunk ProgressBar.
 
 	<div id="progressbar"></div>
 	<script>
@@ -52,20 +42,7 @@ Initialize a chunk ProgressBar in the way displayed in the example below.
 	  });
 	</script>
 
-## Configuration
-
-### Properties
-
-Many of the options delivered by the ProgressBar can be configured through its properties, which include:
-
-* Horizontal or vertical orientation
-* Reversed direction
-* Minimum and maximum value
-* Animation duration
-
-The example below demonstrates how to configure the properties of the ProgressBar.
-
-###### Example
+The following example demonstrates how to configure the basic properties of the ProgressBar.
 
 	$("#progressbar").kendoProgressBar({
       min: 100,
@@ -82,69 +59,28 @@ The example below demonstrates how to configure the properties of the ProgressBa
       }
     });
 
-### Display
+## Functionality and Features
 
-#### Set a 100% Width and Auto-Resize
+You can [set the appearance]({% slug appearance_kendoui_progressbar %}) of the ProgressBar.
 
-By default, the ProgressBar is a `27em` wide `inline-block` element. The easiest cross-browser technique to make it expand and resize automatically is to apply a couple of CSS styles to the originating element.
+## Events
 
-The example below demonstrates how to make the ProgressBar 100% wide and automatically resizeable.
+The ProgressBar supports the `change` and `complete` events. `change` fires each time a new value is set. `complete` fires when the progress of the task is completed, that is, each time the ProgressBar reaches its maximum value.
 
-###### Example
+To handle these events, you can specify the JavaScript function which will handle the event during the initialization of the widget or use the `bind` method of the widget after its initialization.
 
-    <style>
+For a runnable example, refer to the [demo on using the events of the ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/events).
 
-    #progressbar
-    {
-        width: auto;
-        display: block;
-    }
+## Referencing Existing Instances
 
-    </style>
+Make a reference to an existing ProgressBar instance through [`jQuery.data()`](https://api.jquery.com/jQuery.data/) and use the [ProgressBar API](/api/web/progressbar) to control its behavior.
 
-    <div id="progressbar"></div>
-
-    <script>
-
-    $(function(){
-        $("#progressbar").kendoProgressBar();
-    });
-
-    </script>
-
-## ProgressBar API
-
-### Events
-
-Kendo UI ProgressBar supports the following [events](/api/web/progressbar#events):
-
-* `change` - the event us fired each time a new value is set.
-* `complete` - fired when progress is completed, i.e. each time it reaches the maximum value.
-
-There are two ways to handle events:
-
-* Specify the JavaScript function which will handle the event during the initialization of the widget.
-* Use the `bind` method of the widget after initialization.
-
-For examples demonstrating these two approaches, refer to the [ProgressBar API reference](/api/web/progressbar#events).
-
-## Reference
-
-### Existing Instances
-
-Make a reference to an existing ProgressBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once done, use the [ProgressBar API](/api/web/progressbar) to control its behavior.
-
-The example below demonstrates how to access an existing ProgressBar instance.
-
-###### Example
+The following example demonstrates how to access an existing ProgressBar instance.
 
 	var progressbar = $("#progressbar").data("kendoProgressBar");
 
 ## See Also
 
-Other articles on Kendo UI ProgressBar:
-
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the ProgressBar Widget](/aspnet-mvc/helpers/progressbar/overview)
-* [Overview of the ProgressBar JSP Tag]({% slug overview_progressbar_uiforjsp %})
-* [Overview of the ProgressBar PHP Class](/php/widgets/progressbar/overview)
-* [ProgressBar JavaScript API Reference](/api/javascript/ui/progressbar)
+* [Basic Usage of the ProgressBar (Demo)](https://demos.telerik.com/kendo-ui/progressbar/index)
+* [Using the API of the ProgressBar (Demo)](https://demos.telerik.com/kendo-ui/progressbar/api)
+* [JavaScript API Reference of the ProgressBar](/api/javascript/ui/progressbar)

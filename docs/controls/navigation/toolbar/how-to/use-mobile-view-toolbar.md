@@ -15,9 +15,9 @@ To enable the mobile view of the ToolBar widget:
 
 The example below demonstrates how to use the mobile view of the Toolbar. It is recommended that you open it in Dojo.
 
-###### Example
 
-```html
+
+```dojo
 <div id="toolbar"></div>
 <script>
   $("#toolbar").kendoToolBar({
@@ -34,8 +34,6 @@ The example below demonstrates how to use the mobile view of the Toolbar. It is 
 ```
 
 ## See Also
-
-Other articles on the Kendo UI ToolBar:
 
 * [ToolBar JavaScript API Reference](/api/javascript/ui/toolbar)
 * [How to Close ToolBar Popup Manually]({% slug howto_closetoolbarpopupmanually_toolbar %})

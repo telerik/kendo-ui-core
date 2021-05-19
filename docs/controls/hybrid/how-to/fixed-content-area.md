@@ -9,9 +9,9 @@ slug: howto_createfixedcontentarea_hybridui
 
 The example below demonstrates how to create fixed/scrollable areas in the content part of a mobile view when working with the Hybrid UI components of Kendo UI.
 
-###### Example
 
-```html
+
+```dojo
     <div data-role="view" data-title="Flexbox Demo" id="scroller-view" data-init="listViewInit" data-stretch="true">
       <header data-role="header">
         <div data-role="navbar">

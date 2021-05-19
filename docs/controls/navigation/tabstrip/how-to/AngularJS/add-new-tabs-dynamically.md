@@ -7,15 +7,15 @@ slug: howto_addnewtabsdynamically_tabstrip
 
 # Add New Tabs Dynamically by Manual HTML Content Compilation
 
-Out of the box, the Kendo UI TabStrip does not support the execution of dynamic Angular templates&mdash;directives and bindings. For more information on this issue, refer to [this forum thread](http://www.telerik.com/forums/use-angularjs-directive-in-tab-content).
+Out of the box, the Kendo UI TabStrip does not support the execution of dynamic Angular templates&mdash;directives and bindings. For more information on this issue, refer to [this forum thread](https://www.telerik.com/forums/use-angularjs-directive-in-tab-content).
 
 However, it is possible to use a workaround and to compile the HTML content manually after adding a new tab by targeting the element that needs to be compiled through `$compile`.
 
 The example below demonstrates how to add new tabs by using the [`$compile` AngularJS service](https://docs.angularjs.org/api/ng/service/$compile) and load content dynamically.
 
-###### Example
 
-```html
+
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content">
         <div ng-controller="MyCtrl">
@@ -85,8 +85,6 @@ The example below demonstrates how to add new tabs by using the [`$compile` Angu
 ```
 
 ## See Also
-
-Other articles on the Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Add Close Button to Tabs]({% slug howto_addclosebuttontotabs_tabstrip %})

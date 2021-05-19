@@ -9,9 +9,9 @@ slug: howto_set_first_weekday_datepicker
 
 The following example demonstrates how to set the first day of the week on a DatePicker width in AngularJS projects.
 
-###### Example
 
-```html
+
+```dojo
 	<div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div>

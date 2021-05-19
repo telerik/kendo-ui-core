@@ -53,21 +53,20 @@
         });
     }
 
-    module("kendo.ui.MultiSelect Initialization", {
-        setup: function() {
+    describe("kendo.ui.MultiSelect Initialization", function () {
+        beforeEach(function() {
             kendo.ns = "";
-            select = $("<select multiple />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+            select = $("<select multiple />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }
 
             select.parents(".k-widget").remove();
-        }
-    });
+        });
 
-    asyncTest("MultiSelect renders option value if only values are available", 3, function() {
+    it("MultiSelect renders option value if only values are available", function(done) {
         var multiselect = new MultiSelect(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -86,13 +85,13 @@
             scroll(multiselect.listView.content, 4 * CONTAINER_HEIGHT);
 
             setTimeout(function() {
-                start();
                 var options = multiselect.element.children(":selected");
 
-                equal(options.length, 1);
+                assert.equal(options.length, 1);
 
-                equal(options[0].text, "Item 0");
-                equal(options[0].value, "0");
+                assert.equal(options[0].text, "Item 0");
+                assert.equal(options[0].value, "0");
+                done();
             }, 300);
 
         });
@@ -101,7 +100,7 @@
         multiselect.open();
     });
 
-    asyncTest("MultiSelect renders part of the selected data items and values", 5, function() {
+    it("MultiSelect renders part of the selected data items and values", function(done) {
         var multiselect = new MultiSelect(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -120,18 +119,18 @@
             scroll(multiselect.listView.content, 4 * CONTAINER_HEIGHT);
 
             setTimeout(function() {
-                start();
                 var options = multiselect.element.children(":selected");
 
-                options = options.sort(function(a, b) { return parseInt(a.value) > parseInt(b.value) });
+                options = options.sort(function(a, b) { return parseInt(a.value) - parseInt(b.value) });
 
-                equal(options.length, 2);
+                assert.equal(options.length, 2);
 
-                equal(options[0].text, "Item 0");
-                equal(options[0].value, "0");
+                assert.equal(options[0].text, "Item 0");
+                assert.equal(options[0].value, "0");
 
-                equal(options[1].text, "Item 15");
-                equal(options[1].value, "15");
+                assert.equal(options[1].text, "Item 15");
+                assert.equal(options[1].value, "15");
+                done();
             }, 300);
 
         });
@@ -140,7 +139,7 @@
         multiselect.open();
     });
 
-    asyncTest("MultiSelect can display values that are not part of the first data page and are set through the API after initial dataBinding", 1, function() {
+    it("MultiSelect can display values that are not part of the first data page and are set through the API after initial dataBinding", function(done) {
         var multiselect = new MultiSelect(select, {
             height: CONTAINER_HEIGHT,
             autoBind: false,
@@ -158,15 +157,15 @@
             multiselect.close();
             multiselect.value([300]);
             setTimeout(function() {
-                start();
-                equal(multiselect.tagList.children().length, 1, "Selected tag is rendered");
+                assert.equal(multiselect.tagList.children().length, 1, "Selected tag is rendered");
+                done();
             }, 300)
         });
 
         multiselect.open();
     });
 
-    asyncTest("MultiSelect renders <select> tag if the corresponding dataItem is not part of the current data view", 2, function() {
+    it("MultiSelect renders <select> tag if the corresponding dataItem is not part of the current data view", function(done) {
         var multiselect = new MultiSelect(select, {
             height: CONTAINER_HEIGHT,
             autoBind: false,
@@ -186,9 +185,9 @@
             multiselect.close();
             multiselect.value([299]);
             setTimeout(function() {
-                start();
-                equal(multiselect.value()[0], [299]);
-                equal(multiselect.element.children().last().attr("value"), "299", "Custom option is rendered");
+                assert.equal(multiselect.value()[0], [299]);
+                assert.equal(multiselect.element.children().last().attr("value"), "299", "Custom option is rendered");
+                done();
             }, 300)
         });
 
@@ -196,7 +195,7 @@
     });
 
     //unstable
-    /*asyncTest("dataItem returns correct object based on LI element", 2, function() {
+    /*it("dataItem returns correct object based on LI element", function(done) {
         var multiselect = new MultiSelect(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -230,21 +229,21 @@
         multiselect.open();
         multiselect.one("dataBound", function() {
                 setTimeout(function() {
-                    start();
+                    done();
                     var item49 = multiselect.listView.content.find("li")
                                          .filter(function(_, li) { return $(li).data("offsetIndex") == 49 });
 
                     var dataItem = multiselect.dataItem(item49);
 
-                    equal(dataItem.value, 49);
-                    equal(dataItem.text, item49.text());
+                    assert.equal(dataItem.value, 49);
+                    assert.equal(dataItem.text, item49.text());
                 }, 400);
 
             multiselect.listView.content.scrollTop(5 * CONTAINER_HEIGHT);
         });
     });*/
 
-    asyncTest("MultiSelect triggers change on item select", 1, function() {
+    it("MultiSelect triggers change on item select", function(done) {
         var multiselect = new MultiSelect(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -258,8 +257,8 @@
                 itemHeight: 40
             },
             change: function() {
-                start();
-                ok(true, "change is fired");
+                assert.isOk(true, "change is fired");
+                done();
             }
         });
 
@@ -270,7 +269,7 @@
         multiselect.open();
     });
 
-    asyncTest("clear filter when set new value", 1, function() {
+    it("clear filter when set new value", function(done) {
         var multiselect = new MultiSelect(select, {
             close: function(e) { e.preventDefault(); },
             height: CONTAINER_HEIGHT,
@@ -295,18 +294,43 @@
             });
 
             multiselect.one("dataBound", function() {
-                start();
 
                 multiselect.value("");
 
-                equal(multiselect.dataSource.filter().filters.length, 0);
+                assert.equal(multiselect.dataSource.filter().filters.length, 0);
+                done();
             });
         });
 
         multiselect.value(10);
     });
 
-    test("request only pages related to the values after filter reset", 5, function() {
+    it("MultiSelect selects values after open when autoBind false", function(done) {
+        var multiselect = new MultiSelect(select, {
+            close: function(e) { e.preventDefault(); },
+            height: CONTAINER_HEIGHT,
+            autoBind: false,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            },
+            value: ["0", "15"]
+        });
+
+        multiselect.one("dataBound", function() {
+            assert.equal(multiselect.tagList.children().length, 2);
+            done();
+        });
+
+        multiselect.open();
+    });
+
+
+    it("request only pages related to the values after filter reset", function() {
         jasmine.clock().install();
 
         var callsAfterFilter = [];
@@ -355,16 +379,16 @@
 
         jasmine.clock().tick(300);
 
-        equal(callsAfterFilter.length, 3);
-        equal(callsAfterFilter[0].pageSize, multiselect.dataSource.options.pageSize);
-        equal(callsAfterFilter[0].skip, 0);
-        equal(callsAfterFilter[1].skip, 80);
-        equal(callsAfterFilter[2].skip, 200);
+        assert.equal(callsAfterFilter.length, 3);
+        assert.equal(callsAfterFilter[0].pageSize, multiselect.dataSource.options.pageSize);
+        assert.equal(callsAfterFilter[0].skip, 0);
+        assert.equal(callsAfterFilter[1].skip, 80);
+        assert.equal(callsAfterFilter[2].skip, 200);
 
         jasmine.clock().uninstall();
     });
 
-    test("reset page size when start filtering after rebind", 2, function() {
+    it("reset page size when start filtering after rebind", function() {
         jasmine.clock().install();
 
         var requests = [];
@@ -435,10 +459,92 @@
 
         jasmine.clock().tick(400);
 
-        equal(requests[0].page, 1);
-        equal(requests[0].pageSize, multiselect.dataSource.options.pageSize);
+        assert.equal(requests[0].page, 1);
+        assert.equal(requests[0].pageSize, multiselect.dataSource.options.pageSize);
 
         jasmine.clock().uninstall();
     });
 
-})();
+    it("highlight selected when filtering", function() {
+        jasmine.clock().install();
+
+        var requests = [];
+        var watchRequests = false;
+
+        var transport = {
+            read: function(options) {
+                //gatter requests after rebind
+                if (watchRequests) {
+                    requests.push(options.data);
+                }
+
+                setTimeout(function() {
+                    if (options.data.filter && options.data.filter.filters.length) {
+                        options.success({ data: [{ id: 200, value: 200, text: "Item 200" }], total: 1 });
+                    } else {
+                        options.success({ data: generateData(options.data), total: 300 });
+                    }
+                }, 0);
+            }
+        };
+
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            height: CONTAINER_HEIGHT,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource({ transport: transport }),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+        multiselect.value([200]);
+        jasmine.clock().tick(1);
+        multiselect.search("Item 200");
+        jasmine.clock().tick(1);
+        assert.equal($(".k-state-selected").length, 1);
+        jasmine.clock().uninstall();
+    });
+
+
+
+    it("deselecting item persists scroll position", function(done) {
+        var multiselect = new MultiSelect(select, {
+            animation: false,
+            autoClose: false,
+            height: CONTAINER_HEIGHT,
+            filter: "contains",
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 20
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+            multiselect.listView.content.scrollTop(4 * CONTAINER_HEIGHT);
+
+            setTimeout(function() {
+                var scrollPosition;
+
+                //selects the item
+                multiselect.ul.children().last().click();
+
+                scrollPosition = multiselect.listView.content.scrollTop();
+
+                //deselects the item
+                multiselect.ul.children().last().click();
+
+                assert.equal(multiselect.listView.content.scrollTop(), scrollPosition);
+                done();
+            }, 300);
+        });
+
+    });
+    });
+}());

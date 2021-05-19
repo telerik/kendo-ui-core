@@ -100,9 +100,13 @@ The effect(s) to use when playing the open animation. Multiple effects should be
 
 The duration of the open animation in milliseconds.
 
-### ARIATemplate `String`*(default: "Current focused date is #=kendo.toString(data.current, 'G')#")*
+### ARIATemplate `String`*(default: "Current focused #=data.valueType# is #=data.text#")*
 
- Specifies a template used to populate value of the aria-label attribute.
+ Specifies a template used to populate value of the aria-label attribute of the currently focused cell of the calendar. The parameters available for the template are:
+
+* `current` - The current focused date.
+* `valueType` - The focused item value type - month, year and etc.
+* `text` - A text representing the focused value.
 
 #### Example
 
@@ -111,6 +115,22 @@ The duration of the open animation in milliseconds.
     $("#datetimepicker").kendoDateTimePicker({
         ARIATemplate: "Date: #=kendo.toString(data.current, 'G')#"
     });
+    </script>
+
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <input id="datetimepicker" />
+    <script>
+        $("#datetimepicker").kendoDateTimePicker({
+            componentType: "modern"
+        });
     </script>
 
 ### culture `String`*(default: "en-US")*
@@ -123,10 +143,10 @@ The duration of the open animation in milliseconds.
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <input id="datetimepicker" />
@@ -144,14 +164,14 @@ The duration of the open animation in milliseconds.
 
     <input id="datetimepicker" />
     <script>
-    $("#datetimepicker").DateTimePicker({
+    $("#datetimepicker").kendoDateTimePicker({
         dateInput: true
     });
     </script>
 
 ### dates `Array`
 
-Specifies a list of dates, which will be passed to the [month template](#configuration-month.content) of the DateView.
+Specifies a list of dates, which will be passed to the [month template](/api/javascript/ui/datetimepicker#configuration-month.content) of the DateView.
 All dates, which match the date portion of the selected date will be used to re-bind the TimeView.
 
 #### Example - specify a list of dates
@@ -263,7 +283,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String`
 
- The [template](/api/javascript/kendo#methods-template) which renders the footer of the calendar. If false, the footer will not be rendered.
+ The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
 
 #### Example - specify footer template as a function
 
@@ -289,6 +309,8 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 ### format `String`*(default: "M/d/yyyy h:mm tt")*
 
  Specifies the format, which is used to format the value of the DateTimePicker displayed in the input. The format also will be used to parse the input.
+
+For more information on date and time formats please refer to [Date Formatting](/framework/globalization/dateformatting).
 
 #### Example - specify a custom date format
 
@@ -363,13 +385,13 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### month.weekNumber `String`
 
- The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year. 
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year.
  The properties available in the data object are:
 
  * currentDate - returns the first date of the current week.
  * weekNumber - calculated week number.
 
- These properties can be used in the template to make additional calculations.  
+ These properties can be used in the template to make additional calculations.
 
 #### Example - specify week number template as a string
 
@@ -419,9 +441,113 @@ The template used for rendering cells in the calendar "month" view, which are ou
     });
     </script>
 
+### popup `Object`
+
+The options that will be used for the popup initialization. For more details about the available options
+refer to [Popup](/api/javascript/ui/popup) documentation.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="datetimepicker" />
+    </div>
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.appendTo `String`
+
+Defines a jQuery selector that will be used to find a container element, where the popup will be appended to.
+
+#### Example - append the popup to a specific element
+
+    <div id="container">
+        <input id="datetimepicker" />
+    </div>
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+      popup: {
+        appendTo: $("#container")
+      }
+    });
+    </script>
+
+### popup.origin `String`
+
+Specifies how to position the popup element based on anchor point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+
+    <div id="container">
+        <input id="datetimepicker" />
+    </div>
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+      popup: {
+        origin: "top left"
+      }
+    });
+    </script>
+
+### popup.position `String`
+
+Specifies which point of the popup element to attach to the anchor's origin point. The value is
+space separated "y" plus "x" position.
+
+The available "y" positions are:
+- "bottom"
+- "center"
+- "top"
+
+The available "x" positions are:
+- "left"
+- "center"
+- "right"
+
+#### Example - append the popup to a specific element
+
+
+    <div id="container">
+        <input id="datetimepicker" />
+    </div>
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+      popup: {
+        position: "top center"
+      }
+    });
+    </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+
 ### weekNumber `Boolean` *(default: false)*
 
-If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
+If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.
 
 #### Example - enable the week of the year option
 
@@ -658,6 +784,7 @@ The maximum time value to set for a DateTimePicker, expressed as a Date object o
 
     var max = datetimepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -696,6 +823,7 @@ The minimum time value to set for a DateTimePicker, expressed as a Date object o
 
     var min = datetimepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -828,9 +956,9 @@ The time value to set for a DateTimePicker, expressed as a Date object or as a s
 
 `Date` The time value of a DateTimePicker.
 
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/datetimepicker/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="datetimepicker" />
     <script>
@@ -852,6 +980,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var datetimepicker = $("#datetimepicker").data("kendoDateTimePicker");
 
     var value = datetimepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -887,6 +1016,7 @@ The widget instance which fired the event.
     $("#datetimepicker").kendoDateTimePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the datetimepicker
         }
     });
@@ -902,6 +1032,7 @@ The widget instance which fired the event.
 
     datetimepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the datetimepicker
     });
     </script>

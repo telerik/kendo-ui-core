@@ -27,14 +27,14 @@ Placing clickable elements with their own special behavior inside the Button, su
 
 The example below demonstrates how to initialize the Button by using the default `button` tag.
 
-###### Example
+
 
     <kendo:button name="textButton" type="button" content="Text button">
     </kendo:button>
 
 The example below demonstrates how to initialize the Button by using an `anchor` tag.
 
-###### Example
+
 
     <kendo:button name="linkButton" tag="a" content="Link button">
     </kendo:button>
@@ -49,20 +49,20 @@ The Button supports three settings that help configure icons&mdash;`icon`, `spri
 
 Background icons are applied via the `icon` or `spriteCssClass` properties and are displayed as a background of a `span` element. The difference between the two settings is that `icon` is intended to be used for built-in Kendo UI icons, which are part of the theme sprite.
 
-For a list of available icon names, refer to the [Icons demo](http://demos.telerik.com/kendo-ui/web/styling/icons.html).
+For a list of available icon names, refer to the [Icons demo](https://demos.telerik.com/kendo-ui/web/styling/icons.html).
 
 #### The icon Property
 
 The example below demonstrates how to use icons by applying the `icon` property.
 
-###### Example
+
 
     <kendo:button name="cancelButton" type="button" icon="cancel" content="Cancel">
     </kendo:button>
 
 The above configuration produces the HTML output shown below.
 
-###### Example
+
 
     <button type="button" id="cancelButton" class="k-button k-button-icontext"><span class="k-icon k-cancel"></span>Cancel</button>
 
@@ -70,14 +70,14 @@ The above configuration produces the HTML output shown below.
 
 The example below demonstrates how to use icons by applying the `spriteCssClass` property.
 
-###### Example
+
 
     <kendo:button name="spriteButton" type="button" spriteCssClass="myIconClass" content="Sprite icon">
     </kendo:button>
 
 The above configuration produces the HTML output shown below.
 
-###### Example
+
 
     <button type="button" id="spriteButton" class="k-button k-button-icontext"><span class="k-sprite myIconClass"></span>Sprite button</button>
 
@@ -91,14 +91,14 @@ Image icons are applied via the `imageUrl` property and are displayed as an `img
 
 The example below demonstrates how to use the `imageUrl` property.
 
-###### Example
+
 
     <kendo:button name="imageButton" type="button" imageUrl="${myIcon}" content="Image button">
     </kendo:button>
 
 The above configuration produces the HTML output shown below.
 
-###### Example
+
 
     <button type="button" id="imageButton" class="k-button k-button-icontext"><img class="k-image" src="/images/myIcon.gif" alt="icon" />Image button</button>
 
@@ -108,7 +108,7 @@ An `img` tag should be placed inside the Button content. The image should have a
 
 The example below demonstrates how to use the `imageUrl` property with no text.
 
-###### Example
+
 
     <kendo:button name="imageButton" type="button" imageUrl="${myIcon}" content="<img class='k-image' alt='my icon' />">
     </kendo:button>
@@ -117,7 +117,7 @@ The example below demonstrates how to use the `imageUrl` property with no text.
 
 The Button uses an existing `span` element if it is supplied as `content`, e.g. if the goal is to have a Button with no text. The `span` element must have a `k-sprite` CSS class.
 
-###### Example
+
 
     <kendo:button name="deleteButton" type="button" spriteCssClass="myDeleteClass" content="<span class='k-sprite'>Delete</span>">
     </kendo:button>
@@ -130,12 +130,12 @@ The business logic of an application often requires a certain button to be tempo
 
 The example below demonstrates how to use the `enable` method.
 
-###### Example
+
 
     <kendo:button name="disabledButton" type="button" enable="false" content="Disabled button">
     </kendo:button>
 
-For more information on the [`enable` method of the Button](/api/javascript/ui/button#methods-enable), refer to the [Button API](/api/javascript/ui/button).
+For more information on the [`enable` method of the Button](/api/javascript/ui/button/methods/enable), refer to the [Button API](/api/javascript/ui/button).
 
 ## Reference
 
@@ -144,8 +144,6 @@ For more information on the [`enable` method of the Button](/api/javascript/ui/b
 To reference an existing Button instance, refer to the [introductory article on the Button]({% slug overview_kendoui_button_widget %}#reference).
 
 ## See Also
-
-Other articles on Telerik UI for JSP and on the Button:
 
 * [Overview of the Kendo UI Button Widget]({% slug overview_kendoui_button_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

@@ -15,7 +15,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
-        SHIM = '<div class="km-shim"/>',
+        SHIM = '<div class="km-shim"></div>',
         HIDE = "hide",
         Widget = ui.Widget;
 

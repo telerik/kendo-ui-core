@@ -4,28 +4,22 @@ page_title: 2015 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2015."
 previous_url: /backwards-compatibility/2015/2015-backward-compatibility
 slug: breakingchanges2015_kendoui
-position: 3
+position: 7
 ---
 
 # 2015 Releases
 
+This article lists the breaking changes in the Kendo UI 2015 releases.
+
 ## Kendo UI 2015 Q3
 
-### Changes from 2015 Q2 SP2 (2015.2.902)
-
-Widgets **will not initialize** if any of the defined attribute options are `undefined`. For example, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined`, it will not initialize.
+Widgets will not initialize if any of the defined attribute options are `undefined`. For example, if the NumericTextBox `k-max` attribute points to a `$scope.maxNumber` field which is `undefined`, it will not initialize.
 
 ## Kendo UI 2015 Q2
-
-### Changes from 2015 Q1 SP2 (2015.1.429)
 
 All DataViz-related CSS code, that is, referring to Gauges, Charts, Barcodes, Diagrams, and Maps, has been moved into the web widgets CSS files. Please remove any references to `kendo.dataviz.css` and `kendo.dataviz.[theme].css`. For more information, refer to [the article on styles and appearance for the Kendo UI widgets rendering data visualization](/dataviz/appearance-styling#themes-and-stylesheets).
 
 ## Kendo UI 2015 Q1 SP2
-
-### Changes from 2015 Q1 (2015.1.318)
-
-#### Breaking Changes
 
 **AutoComplete/DropDownList/ComboBox/MultiSelect**
 
@@ -49,10 +43,6 @@ Change in rendering the widget list. The `ul` element of the widget is wrapped i
 ```
 
 ## Kendo UI 2015 Q1
-
-### Changes from 2014 Q3 SP2 (2014.3.1411)
-
-#### Breaking Changes
 
 **AutoComplete/DropDownList/ComboBox/MultiSelect**
 
@@ -266,8 +256,9 @@ The argument of the `add` and `remove` events now contains the `Shape` or `Conne
 
 ## See Also
 
-Other articles on Kendo UI breaking changes and backwards compatibility:
-
+* [2020 Breaking Changes]({% slug breakingchanges2020_kendoui %})
+* [2019 Breaking Changes]({% slug breakingchanges2019_kendoui %})
+* [2018 Breaking Changes]({% slug breakingchanges2018_kendoui %})
 * [2017 Breaking Changes]({% slug breakingchanges2017_kendoui %})
 * [2016 Breaking Changes]({% slug breakingchanges2016_kendoui %})
 * [2014 Breaking Changes]({% slug breakingchanges2014_kendoui %})

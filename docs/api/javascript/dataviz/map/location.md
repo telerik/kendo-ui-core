@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.dataviz.map.Location : kendo.Class
+
 Represents a geographic location.
 
 ## Constructor Parameters
@@ -16,7 +17,7 @@ The location latitude in decimal degrees.
 The location longitude in decimal degrees.
 
 
-## Class methods
+## Class Methods
 
 ### create
 Creates a Location instance from various input types.
@@ -79,7 +80,7 @@ Creates a new instance with the same coordinates.
 
 ### destination
 
-Calculates the [great-circle distance](http://en.wikipedia.org/wiki/Great-circle_distance)
+Calculates the [great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance)
 to the given destination in meters.
 
 #### Parameters

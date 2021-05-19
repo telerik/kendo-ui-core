@@ -2,11 +2,12 @@
 title: Show and Hide Detail Rows Based on Master Row Value
 description: An example on how to disable the detail Grid row based on the checkbox in the master row and how to persist expanded rows after the Grid is refreshed.
 type: how-to
-page_title: Disable Detail Rows With Checkboxes | Kendo UI Grid
+page_title: Disable Detail Rows With Checkboxes | Kendo UI Grid for jQuery
 slug: disable-detail-rows-with-checkboxes
 tags: kendo ui, grid, detail template
 ticketid: 1110784
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -22,6 +23,7 @@ res_type: kb
  </tr>
 </table>
  
+
 ## Description
 
 When I change a value, all detail Grid rows collapse. How can I show and hide detail rows based on the checkbox in the master row of a Kendo UI Grid?
@@ -35,7 +37,7 @@ In the handler function of the `dataBound` event:
 1. Disable the expanding button based on the checkbox value.
 1. Expand all master rows from the global array.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script type="text/x-kendo-template" id="template">

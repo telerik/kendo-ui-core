@@ -1,0 +1,168 @@
+// Container box
+.k-checkbox {
+    margin: 0;
+    padding: 0;
+    width: @checkbox-size;
+    height: @checkbox-size;
+    line-height: initial;
+    border-width: @checkbox-border-width;
+    border-style: solid;
+    outline: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    -webkit-appearance: none;
+}
+
+// Checkmark
+.k-checkbox::before {
+    content: "\e118";
+    width: @checkbox-icon-size;
+    height: @checkbox-icon-size;
+    font-size: @checkbox-icon-size;
+    font-family: "WebComponentsIcons", monospace;
+    transform: scale(0) translate(-50%, -50%);
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+
+// Hover state
+.k-checkbox:hover {
+    cursor: pointer;
+}
+
+
+// Checked state
+.k-checkbox:checked::before {
+    transform: scale(1) translate(-50%, -50%);
+}
+
+
+// Indeterminate state
+.k-checkbox:indeterminate::before,
+.k-checkbox.k-state-indeterminate::before {
+    content: "";
+    width: (@checkbox-size / 2);
+    height: (@checkbox-size / 2);
+    background-color: currentColor;
+    transform: scale(1) translate(-50%, -50%);
+}
+
+
+// Disabled state
+.k-checkbox:disabled,
+.k-checkbox:disabled + .k-checkbox-label {
+    opacity: .6;
+    filter: grayscale(.8);
+    cursor: default;
+}
+
+.k-checkbox + .k-checkbox-label {
+    display: inline;
+}
+
+// Checkbox label
+.k-checkbox-label {
+    margin: 0;
+    padding: 0;
+    line-height: @checkbox-line-height;
+    display: inline-flex;
+    align-items: flex-start;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+
+    // Hide empty label
+    &:empty {
+        display: none;
+    }
+
+    // Keep it "visible" in jquery grid
+    &.k-no-text {
+        min-width: 1px;
+    }
+
+    .k-ripple {
+        visibility: hidden !important;
+    }
+}
+.k-checkbox + .k-checkbox-label,
+.k-checkbox-label + .k-checkbox {
+    margin-left: @icon-spacing;
+}
+.k-checkbox-label > .k-checkbox {
+    margin-right: @icon-spacing;
+    flex-shrink: 0;
+}
+
+.k-checkbox-list {
+    margin: @checkbox-list-margin;
+    padding: @checkbox-list-padding;
+    list-style: none;
+
+    .k-checkbox-item {
+        margin-top: @checkbox-list-item-margin-top;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.k-list-horizontal {
+    .k-checkbox-item {
+        display: inline-block;
+        margin: 0 @checkbox-list-horizontal-item-margin-x 0 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+
+// RTL
+.k-rtl,
+[dir="rtl"] {
+    .k-checkbox + .k-checkbox-label {
+        margin-left: 0;
+        margin-right: @icon-spacing;
+    }
+    .k-checkbox-label > .k-checkbox {
+        margin-right: 0;
+        margin-left: @icon-spacing;
+    }
+
+    .k-list-horizontal {
+        .k-checkbox-item {
+            margin-right: 0;
+            margin-left: @checkbox-list-horizontal-item-margin-x;
+
+            &:last-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+
+
+// IE / Edge hack
+.k-checkbox::-ms-check {
+    border-width: 0;
+    border-color: inherit;
+    border-radius: inherit;
+    color: inherit;
+    background-color: inherit;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .k-checkbox::-ms-check {
+        border-width: @checkbox-border-width;
+    }
+}

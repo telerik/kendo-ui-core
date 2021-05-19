@@ -10,9 +10,9 @@ slug: howto_detect_wrapper_blur_events_dropdownlist
 
 The following example demonstrates how to detect the `blur` event of the Kendo UI DropDownList wrapper.
 
-###### Example
 
-```html
+
+```dojo
 <div id="example">
     <div class="demo-section k-header">
       <h4 class="title">DropDownList</h4>
@@ -74,7 +74,7 @@ The following example demonstrates how to detect the `blur` event of the Kendo U
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

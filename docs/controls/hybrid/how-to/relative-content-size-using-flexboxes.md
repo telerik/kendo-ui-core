@@ -11,9 +11,9 @@ slug: howto_createrelative_contentsize_usingflexboxes_hybridui
 
 The example below demonstrates how to create a relative content size by using CSS3 flexboxes when working with the Hybrid UI components of Kendo UI.
 
-###### Example
 
-```html
+
+```dojo
      <div data-role="view" data-title="Percents" data-stretch="true">
       <div data-role="header">
         <div data-role="navbar">

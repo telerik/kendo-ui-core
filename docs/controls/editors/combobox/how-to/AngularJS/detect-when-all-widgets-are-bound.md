@@ -10,9 +10,9 @@ slug: howto_detect_when_widgets_bound_combobox
 
 The following example demonstrates how to use promises to detect when all widgets in a Kendo UI ComboBox are bound.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>View Order Details</h4>
@@ -61,7 +61,7 @@ The following example demonstrates how to use promises to detect when all widget
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
             },
             requestStart: function() {
               this.deferred = $.Deferred();
@@ -77,7 +77,7 @@ The following example demonstrates how to use promises to detect when all widget
             type: "odata",
             serverFiltering: true,
             transport: {
-              read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+              read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
             },
             requestStart: function() {
               this.deferred = $.Deferred();

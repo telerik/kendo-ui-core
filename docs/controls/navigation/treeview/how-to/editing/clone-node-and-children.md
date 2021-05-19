@@ -10,18 +10,16 @@ slug: howto_clonenodeandchildren_treeview
 The following example demonstrates how to clone (copy) a TreeView node together with its children.
 
 To achieve this behavior:
-* Use the [`select`](/api/javascript/ui/treeview#methods-select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a Context Menu instead.
-* Use the [`parent`](/api/javascript/ui/treeview#methods-parent) method to get the parent node of the selected node.
-* Use the [`dataItem`](/api/javascript/ui/treeview#methods-dataItem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
-* Use the [`toJSON`](/api/javascript/data/model#methods-toJSON) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
+* Use the [`select`](/api/javascript/ui/treeview/methods/select) method of the TreeView to obtain the selected node as a jQuery object. The second example below uses a Context Menu instead.
+* Use the [`parent`](/api/javascript/ui/treeview/methods/parent) method to get the parent node of the selected node.
+* Use the [`dataItem`](/api/javascript/ui/treeview/methods/dataitem) method to obtain the data item (Kendo UI Model), which corresponds to the selected node.
+* Use the [`toJSON`](/api/javascript/data/model/methods/tojson) method of the Model to strip proprietary information from the data item and its children, and convert them to a plain JavaScript object.
 * (Optional) Deselect and collapse the cloned node before appending it to the TreeView.
-* Use the [`append`](/api/javascript/ui/treeview#methods-append), [`insertAfter`](/api/javascript/ui/treeview#methods-insertAfter), or [`insertBefore`](/api/javascript/ui/treeview#methods-insertBefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, nodes are cloned at the same level.
+* Use the [`append`](/api/javascript/ui/treeview/methods/append), [`insertAfter`](/api/javascript/ui/treeview/methods/insertafter), or [`insertBefore`](/api/javascript/ui/treeview/methods/insertbefore) method of the TreeView to add the cloned node to the desired location in the item structure of the widget. In this example, nodes are cloned at the same level.
 
 The following example demonstrates how to copy the selected node together with its children.
 
-###### Example
-
-```html
+```dojo
     <p><button class="k-button" id="cloneNode">Clone selected node</button></p>
 
     <div id="treeview"></div>
@@ -54,19 +52,19 @@ The following example demonstrates how to copy the selected node together with i
             selectedNode = treeview.wrapper.find("li.k-item").first();
           }
 
-          // find the parent node of the selected node;
-          // passing a falsy value as the second append() parameter
-          // will append the node to the root group
+          // Find the parent node of the selected node.
+          // Passing a falsy value as the second append() parameter
+          // will append the node to the root group.
           var referenceNode = treeview.parent(selectedNode);
           if (!referenceNode[0]) {
             referenceNode = null
           }
 
-          // remove selection from the cloned node (optional)
+          // (Optional) Remove the selection from the cloned node.
           var clonedNode = treeview.dataItem(selectedNode).toJSON();
           clonedNode.selected = false;
 
-          // collapse the cloned node (optional)
+          // (Optional) Collapse the cloned node.
           delete clonedNode.expanded;
 
           treeview.append(
@@ -80,9 +78,7 @@ The following example demonstrates how to copy the selected node together with i
 
 The following example provides a variation of the previous approach and demonstrates how to copy the right-clicked node. It relies on a Context Menu click instead of a selection.
 
-###### Example
-
-```html
+```dojo
 <div id="treeview"></div>
 <ul id="context-menu">
     <li>Clone</li>
@@ -121,19 +117,19 @@ The following example provides a variation of the previous approach and demonstr
             select: function (e) {
                 var selectedNode = e.target;
 
-                // find the parent node of the selected node;
-                // passing a falsy value as the second append() parameter
-                // will append the node to the root group
+                // Find the parent node of the selected node.
+                // Passing a falsy value as the second append() parameter
+                // will append the node to the root group.
                 var referenceNode = treeview.parent(selectedNode);
                 if (!referenceNode[0]) {
                     referenceNode = null
                 }
 
-                // remove selection from the cloned node (optional)
+                // (Optional) Remove the selection from the cloned node.
                 var clonedNode = treeview.dataItem(selectedNode).toJSON();
                 clonedNode.selected = false;
 
-                // collapse the cloned node (optional)
+                // (Optional) Collapse the cloned node.
                 delete clonedNode.expanded;
 
                 treeview.append(
@@ -148,13 +144,6 @@ The following example provides a variation of the previous approach and demonstr
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

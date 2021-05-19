@@ -16,7 +16,7 @@
                 symbol: "%"
             },
             currency: {
-                name: "Turkmen manat",
+                name: "Turkmenistani Manat",
                 abbr: "TMT",
                 pattern: ["-n$","n$"],
                 decimals: 2,

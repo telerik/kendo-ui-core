@@ -20,7 +20,7 @@ By default, navigational widgets change views in the containing pane. To target 
 
 The example below demonstrates how to implement navigation between Hybrid UI Panes.
 
-###### Example  
+  
 
     <div data-role="splitview" id="main">
        <div data-role="pane" id="side-pane">
@@ -46,8 +46,6 @@ The example below demonstrates how to implement navigation between Hybrid UI Pan
 
 <!--_-->
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI components and on the Pane:
 
 * [Hybrid UI Pane JavaScript API Reference](/api/javascript/mobile/ui/pane)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

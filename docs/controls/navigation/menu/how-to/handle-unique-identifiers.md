@@ -7,7 +7,7 @@ slug: howto_handleuniqueidentifiers_menu
 
 # Handle Unique Identifiers with Menu Items
 
-Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](/api/javascript/ui/menu#events-select) event.
+Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](/api/javascript/ui/menu/events/select) event.
 
 To provide for the functionality, the Kendo UI Menu mainly uses the HTML elements that are rendered. That is why you can use custom HTML attributes to serve you as unique identifiers in your code.  
 
@@ -22,13 +22,13 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ## Bound with JSON Data
 
-###### Example
 
-```html
+
+```dojo
 <ul id="menu"></ul>
 
 <script>
-  var imgUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
+  var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
   $(document).ready(function() {
     $("#menu").kendoMenu({
       dataSource:
@@ -71,9 +71,9 @@ The following examples demonstrate how to handle a custom command attribute to a
 
 ## Created with HTML Elements
 
-###### Example
 
-```html
+
+```dojo
 <ul id="menu">
     <li data-command="command1">Command 1</li>
     <li data-command="command2">Command 2</li>
@@ -81,7 +81,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 </ul>
 
 <script>
-  var imgUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
+  var imgUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/swimming.png";
   $(document).ready(function() {
     $("#menu").kendoMenu({
         select: function (ev){

@@ -13,12 +13,10 @@ The examples below demonstrate how to use the Kendo UI Sortable widget with a Ke
 
 ## Non-Editable Grid Mode
 
-The example below demonstrates how to reorder the rows of a Kendo UI Grid in a non-editable mode by using the Kendo UI Sortable in AngularJS.
+The following example demonstrates how to reorder the rows of a Kendo UI Grid in a non-editable mode by using the Kendo UI Sortable in AngularJS.
 
-###### Example
-
-```html
-  <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+```dojo
+  <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   <div id="example" ng-app="KendoDemos">
     <div ng-controller="MyCtrl">
@@ -79,12 +77,10 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in a n
 
 ## Editable Grid Mode
 
-The example below demonstrates how to reorder the rows of a Kendo UI Grid in an editable mode by using the Kendo UI Sortable in AngularJS.
+The following example demonstrates how to reorder the rows of a Kendo UI Grid in an editable mode by using the Kendo UI Sortable in AngularJS.
 
-###### Example
-
-```html
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+```dojo
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
     <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <kendo-sortable options="sortableOptions">
@@ -134,7 +130,7 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in an 
             { command: "destroy", title: " ", width: "150px" }],
           editable: true,
           edit: function(e) {
-            // Find and update the numerictextbox value
+            // Find and update the NumericTextBox value.
             var input = e.container.find("[data-role=numerictextbox]");
             var widget = input.data("kendoNumericTextBox");
             var model = e.model;
@@ -173,10 +169,5 @@ The example below demonstrates how to reorder the rows of a Kendo UI Grid in an 
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
-* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder Rows in Nested Grid]({% slug howto_reorderrowsinnestedgrid_sortable %})
-* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its **How To** documentation folder.
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

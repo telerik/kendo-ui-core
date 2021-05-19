@@ -9,10 +9,10 @@ slug: howto_use_fontawesome_icons_menu
 
 The example below demonstrates how to include custom [FontAwesome](http://fortawesome.github.io/Font-Awesome/) icons in the Kendo UI Menu
 
-###### Example
 
-```html
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+```dojo
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <h3>Menu with font awesome icons</h3>
     <div id="menu"></div>
     <script>

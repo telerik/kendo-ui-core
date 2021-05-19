@@ -1,39 +1,39 @@
-(function () {
-    module("Sortable AngularJS integration", {
-        teardown: function() {
-             kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    ngTest("dropdown recognizes selected primitive items with k-ng-model", 1, function() {
-        angular.module("kendo.tests").controller("mine", function($scope, $timeout) {
-            $scope.options = {
-                filter: ".item"
-            };
-
-            $scope.fooClick = function() {
-                $scope.options.filter = ".foo";
-            };
-
-            $scope.barClick = function() {
-                $scope.options.filter = ".bar";
-            };
+(function() {
+    describe("Sortable AngularJS integration", function() {
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        QUnit.fixture.html(
-            '<div ng-controller=mine>' +
+        ngTest("dropdown recognizes selected primitive items with k-ng-model", function() {
+            angular.module("kendo.tests").controller("mine", function($scope, $timeout) {
+                $scope.options = {
+                    filter: ".item"
+                };
+
+                $scope.fooClick = function() {
+                    $scope.options.filter = ".foo";
+                };
+
+                $scope.barClick = function() {
+                    $scope.options.filter = ".bar";
+                };
+            });
+
+            Mocha.fixture.html(
+                '<div ng-controller=mine>' +
                 '<kendo-sortable k-options="options" k-rebind="options"></kendo-sortable>' +
-            '</div>'
-        );
-    },
+                '</div>'
+            );
+        },
 
-    function() {
-        var element = QUnit.fixture.find("[kendo-sortable]");
-        var scope = element.scope();
+            function() {
+                var element = Mocha.fixture.find("[kendo-sortable]");
+                var scope = element.scope();
 
-        scope.fooClick();
-        scope.barClick();
+                scope.fooClick();
+                scope.barClick();
 
-        ok(element.getKendoSortable() instanceof kendo.ui.Sortable);
+                assert.isOk(element.getKendoSortable() instanceof kendo.ui.Sortable);
+            });
     });
-})();
+}());

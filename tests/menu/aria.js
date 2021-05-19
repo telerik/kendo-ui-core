@@ -2,116 +2,168 @@
 var menu;
 
 function setup(options) {
-    menu = $("<ul />").appendTo(QUnit.fixture).kendoMenu(options);
+    menu = $("<ul />").appendTo(Mocha.fixture).kendoMenu(options);
     return menu;
 }
 
-module("ARIA support", {
-    setup: function() {
+describe("ARIA support", function () {
+    beforeEach(function() {
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         };
-    },
-    teardown: function () {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+    });
+    afterEach(function () {
+        kendo.destroy(Mocha.fixture);
+    });
 
-test("menubar role is added to the wrapper", function() {
+it("menubar role is added to the wrapper", function() {
     setup();
-    ok(menu.filter("[role=menubar]").length);
+    assert.isOk(menu.filter("[role=menubar]").length);
 });
 
-test("menuitem role is added to the items of bound menu", function() {
+it("menuitem role is added to the items of bound menu", function() {
     setup({ dataSource: [ {text: "foo" } ] });
-    ok(menu.find("[role=menuitem]").length);
+    assert.isOk(menu.find("[role=menuitem]").length);
 });
 
-test("menuitem role is added to the items of html created menu", function() {
+it("menuitem role is added to the items of html created menu", function() {
     menu = $("<ul><li>foo</li></ul>")
-        .appendTo(QUnit.fixture)
+        .appendTo(Mocha.fixture)
         .kendoMenu();
 
-    ok(menu.find("[role=menuitem]").length);
+    assert.isOk(menu.find("[role=menuitem]").length);
 });
 
-test("has-popup attribute is added if node has childs", function() {
+it("has-popup attribute is added if node has childs", function() {
     setup({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
 
-    equal(menu.find("[aria-haspopup=true] span:first").text(), "foo");
+    assert.equal(menu.find("[aria-haspopup=true] span:first").text(), "foo");
 });
 
-test("menu role is added to the group container", function() {
+it("has-popup attribute is added when using append method", function() {
+    menu = $("<ul><li id='firstItem'>item 1</li></ul>")
+        .appendTo(Mocha.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").append({text: 'item'}, $("#firstItem"));
+    assert.isOk($("#firstItem").is("[aria-haspopup]"));
+})
+
+it("has-popup attribute is not removed when using remove method and there is still group", function() {
+    menu = $("<ul><li id='firstItem'>item<ul><li>item 1</li><li id='item2'>item 2</li></ul></li></ul>")
+        .appendTo(Mocha.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").remove($("#item2"));
+    assert.isOk($("#firstItem").is("[aria-haspopup]"));
+})
+
+it("has-popup attribute is removed when using remove method and there no group", function() {
+    menu = $("<ul><li id='firstItem'>item<ul><li id='item1'>item 1</li></ul></li></ul>")
+        .appendTo(Mocha.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").remove($("#item1"));
+    assert.isOk($("#firstItem").not("[aria-haspopup]"));
+})
+
+it("has-popup attribute is only for the item with no groups when using remove method", function() {
+    menu = $("<ul>" +
+                "<li id='firstItem'>item" +
+                    "<ul>" +
+                        "<li id='item1'>item 1" +
+                            "<ul>" +
+                                "<li id='subitem1'>item 1</li>" +
+                            "</ul>" +
+                        "</li>" +
+                    "</ul>" +
+                "</li>" +
+            "</ul>")
+        .appendTo(Mocha.fixture)
+        .kendoMenu();
+
+    menu.data("kendoMenu").remove($("#subitem1"));
+
+    assert.isOk($("#item1").not("[aria-haspopup]"));
+    assert.isOk($("#firstItem").is("[aria-haspopup]"));
+})
+
+it("menu role is added to the group container", function() {
     setup({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
 
-    equal(menu.find("[role=menu] span:first").text(), "bar");
+    menu.getKendoMenu().dataSource.view()[0].load();
+
+    assert.equal(menu.find("[role=menu] span:first").text(), "bar");
 });
 
-test("menu role is added to the group container when created from html", function() {
+it("menu role is added to the group container when created from html", function() {
     menu = $("<ul><li>foo<ul><li>bar</li></ul></li></ul>")
-        .appendTo(QUnit.fixture)
+        .appendTo(Mocha.fixture)
         .kendoMenu();
 
-    equal(menu.find("[role=menu] span:first").text(), "bar");
+    assert.equal(menu.find("[role=menu] span:first").text(), "bar");
 });
 
-test("disabled attribute is added if node is disabled", function() {
+it("disabled attribute is added if node is disabled", function() {
     setup({ dataSource: [ { text: "foo", enabled: false } ] });
 
-    equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
+    assert.equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
 });
 
-test("disabled attribute is added if node is disabled via the API", function() {
+it("disabled attribute is added if node is disabled via the API", function() {
     setup({ dataSource: [ { text: "foo" } ] });
 
     menu.data("kendoMenu").disable(menu.find("li:first"));
 
-    equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
+    assert.equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
 });
 
-test("disabled attribute is added if child node is disabled via the API", function() {
+it("disabled attribute is added if child node is disabled via the API", function() {
     setup({ dataSource: [ { text: "foo", items: [{ text: "bar" }] } ] });
+
+    menu.getKendoMenu().dataSource.view()[0].load();
 
     menu.data("kendoMenu").disable(menu.find(".k-group li:first"));
 
-    equal(menu.find("[aria-disabled=true] span:first").text(), "bar");
+    assert.equal(menu.find("[aria-disabled=true] span:first").text(), "bar");
 });
 
-test("disabled attribute is added if node is disabled when created from html", function() {
+it("disabled attribute is added if node is disabled when created from html", function() {
     menu = $("<ul><li disabled='disabled'>foo</li></ul>")
-        .appendTo(QUnit.fixture)
+        .appendTo(Mocha.fixture)
         .kendoMenu();
 
-    equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
+    assert.equal(menu.find("[aria-disabled=true] span:first").text(), "foo");
 });
 
-test("hidden attribute is added to the group when created from html", function() {
+it("hidden attribute is added to the group when created from html", function() {
     menu = $("<ul><li>foo<ul><li>bar</li></ul></li></ul>")
-        .appendTo(QUnit.fixture)
+        .appendTo(Mocha.fixture)
         .kendoMenu();
 
-    ok(menu.find(".k-group[aria-hidden=true]").length);
+    assert.isOk(menu.find(".k-group[aria-hidden=true]").length);
 });
 
-test("aria-activedescendant is added to the wrapper when item is focused", function() {
+it("aria-activedescendant is added to the wrapper when item is focused", function() {
     menu = $("<ul id=\"foo\"/>")
-        .appendTo(QUnit.fixture)
+        .appendTo(Mocha.fixture)
         .kendoMenu({ dataSource: [ {text: "foo", items: [{ text: "bar" }] } ] });
 
     menu[0].focus();
 
-    ok(menu.filter("[aria-activedescendant]").length);
-    ok(menu.find("li#" + menu.data("kendoMenu")._ariaId).length);
+    assert.isOk(menu.filter("[aria-activedescendant]").length);
+    assert.isOk(menu.find("li#" + menu.data("kendoMenu")._ariaId).length);
 });
 
-test("aria-activedescendant is added to the wrapper when item is focused", function() {
+it("aria-activedescendant is added to the wrapper when item is focused", function() {
     menu = $("<ul id=\"foo\"><li id=\"bar\">foo</li></ul>")
-        .appendTo(QUnit.fixture)
+        .appendTo(Mocha.fixture)
         .kendoMenu();
 
     menu[0].focus();
 
-    ok(menu.filter("[aria-activedescendant=bar]").length);
-    ok(menu.find("li#bar").length);
+    assert.isOk(menu.filter("[aria-activedescendant=bar]").length);
+    assert.isOk(menu.find("li#bar").length);
 });
-})();
+    });
+}());

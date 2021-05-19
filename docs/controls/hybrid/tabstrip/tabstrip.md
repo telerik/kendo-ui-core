@@ -4,11 +4,12 @@ page_title: Overview | Hybrid UI TabStrip
 description: "Initialize the hybrid mobile Kendo UI TabStrip widget and create custom icons."
 slug: overview_hybridtabstrip
 position: 1
+component: mobile-tabstrip
 ---
 
 # TabStrip Overview
 
-The [Hybrid UI TabStrip widget](http://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index) is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons. The look of the Hybrid UI TabStrip changes depending on the user mobile device and operating system.
+The [Hybrid UI TabStrip widget](https://demos.telerik.com/kendo-ui/m/index#mobile-tabstrip/index) is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons. The look of the Hybrid UI TabStrip changes depending on the user mobile device and operating system.
 
 ## Getting Started
 
@@ -22,7 +23,7 @@ The tabs of the TabStrip navigate to the mobile application's views. When the mo
 
 The example below demonstrates how to initialize the Hybrid UI TabStrip based on the `data-role` attribute.
 
-###### Example
+
 
     <div data-role="tabstrip">
         <a href="#index">Home</a>
@@ -37,7 +38,7 @@ Every tab can have a badge, which is set using the `badge` data-attribute of the
 
 The example below demonstrates how to set badges to tabs.
 
-###### Example
+
 
     <div data-role="tabstrip">
         <a data-badge="5" href="#index">Home</a>
@@ -53,7 +54,7 @@ A tab icon can be set in two ways:
 
 The example below demonstrates how to use font icons with the `data-icon` attribute.
 
-###### Example
+
 
     <div data-role="tabstrip">
         <a data-icon="home" href="#index">Home</a>
@@ -67,8 +68,6 @@ Kendo UI ships with several ready to use icons. The full list of predefined icon
 > For detailed information on how you can use custom icons, refer to the [article on Hybrid UI font icons]({% slug hybridiconfonts_hybridkendoui %}).
 
 ## See Also
-
-Other articles on the Hybrid UI TabStrip:
 
 * [Hybrid UI TabStrip JavaScript API Reference](/api/javascript/mobile/ui/tabstrip)
 * [How to Show Tab Text in Android Skin]({% slug howto_showtabtextandroidskin_hybridtabstrip %})

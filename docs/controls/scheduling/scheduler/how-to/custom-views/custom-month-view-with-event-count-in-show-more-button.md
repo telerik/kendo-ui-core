@@ -4,24 +4,23 @@ page_title: Create Custom Month Views with Event Count in the Show More Button |
 description: "Learn how to inherit some of the built-in views and implement specific custom logic in a Kendo UI Scheduler."
 previous_url: /controls/scheduling/scheduler/how-to/custom-month-view-with-event-count-in-show-more-button
 slug: howto_create_custom_monthview_eventcount_showmore_button_scheduler
+position: 3
 ---
 
 # Create Custom Month Views with Event Count in the Show More Button
 
 The following example demonstrates how to inherit the built-in Month view and implement showing the hidden events count when the **Show More** button is rendered.
 
-###### Example
-
-```html
+```dojo
     <div id="scheduler"></div>
     <script>
         var MORE_BUTTON_TEMPLATE = kendo.template(
-            '<div style="width:#=width#px;left:#=left#px;top:#=top#px" class="k-more-events k-button"><span style="font-size:8pt; margin-top: 0;"> #=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
-
+            '<div style="width:#=width#px;left:#=left#px;top:#=top#px"' +
+            'class="k-more-events k-button"><span style="font-size:8pt; margin-top: 0;">' +
+            '#=getEventCountForRange(startSlot, endSlot, rowsCount)# more events..</span></div>');
 
         function getEventCountForRange(startSlot, endSlot, rowsCount) {
             var scheduler = $(startSlot.element).closest("[data-role=scheduler]").getKendoScheduler();
-
             var currentTimezoneOffset = kendo.date.MS_PER_MINUTE * new Date().getTimezoneOffset();
             var rangeStart = new Date(startSlot.start + currentTimezoneOffset);
             var rangeEnd = new Date(endSlot.end + currentTimezoneOffset);
@@ -66,7 +65,6 @@ The following example demonstrates how to inherit the built-in Month view and im
                     }
                 }
 
-
                 if (rows.length > eventCount) {
                     for (var slotIndex = startIndex; slotIndex <= endIndex; slotIndex++) {
                         var collection = slotRange.collection;
@@ -88,7 +86,6 @@ The following example demonstrates how to inherit the built-in Month view and im
                             left: slot.offsetLeft + 2,
                             top: slot.offsetTop + slot.firstChildHeight + eventCount * eventHeight + 3 * eventCount
                         }));
-
 
                         this.content[0].appendChild(slot.more[0]);
                     }
@@ -122,9 +119,8 @@ The following example demonstrates how to inherit the built-in Month view and im
                 date: new Date("2013/6/13"),
                 startTime: new Date("2013/6/13 07:00 AM"),
                 height: 600,
-                views: [{
-                        type: "CustomMonthView"
-                    },
+                views: [
+                    { type: "CustomMonthView", selected: true },
                     "day"
                 ],
                 timezone: "Etc/UTC",
@@ -132,19 +128,19 @@ The following example demonstrates how to inherit the built-in Month view and im
                     batch: true,
                     transport: {
                         read: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                            url: "https://demos.telerik.com/kendo-ui/service/tasks",
                             dataType: "jsonp"
                         },
                         update: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                            url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
                             dataType: "jsonp"
                         },
                         create: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                            url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
                             dataType: "jsonp"
                         },
                         destroy: {
-                            url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                            url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
                             dataType: "jsonp"
                         },
                         parameterMap: function(options, operation) {
@@ -159,118 +155,29 @@ The following example demonstrates how to inherit the built-in Month view and im
                         model: {
                             id: "taskId",
                             fields: {
-                                taskId: {
-                                    from: "TaskID",
-                                    type: "number"
-                                },
-                                title: {
-                                    from: "Title",
-                                    defaultValue: "No title",
-                                    validation: {
-                                        required: true
-                                    }
-                                },
-                                start: {
-                                    type: "date",
-                                    from: "Start"
-                                },
-                                end: {
-                                    type: "date",
-                                    from: "End"
-                                },
-                                startTimezone: {
-                                    from: "StartTimezone"
-                                },
-                                endTimezone: {
-                                    from: "EndTimezone"
-                                },
-                                description: {
-                                    from: "Description"
-                                },
-                                recurrenceId: {
-                                    from: "RecurrenceID"
-                                },
-                                recurrenceRule: {
-                                    from: "RecurrenceRule"
-                                },
-                                recurrenceException: {
-                                    from: "RecurrenceException"
-                                },
-                                ownerId: {
-                                    from: "OwnerID",
-                                    defaultValue: 1
-                                },
-                                isAllDay: {
-                                    type: "boolean",
-                                    from: "IsAllDay"
-                                }
+                                taskId: { from: "TaskID", type: "number" },
+                                title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                                start: { type: "date", from: "Start" },
+                                end: { type: "date", from: "End" },
+                                startTimezone: { from: "StartTimezone" },
+                                endTimezone: { from: "EndTimezone" },
+                                description: { from: "Description" },
+                                recurrenceId: { from: "RecurrenceID" },
+                                recurrenceRule: { from: "RecurrenceRule" },
+                                recurrenceException: { from: "RecurrenceException" },
+                                ownerId: { from: "OwnerID", defaultValue: 1 },
+                                isAllDay: { type: "boolean", from: "IsAllDay" }
                             }
                         }
-                    },
-                    filter: {
-                        logic: "or",
-                        filters: [{
-                            field: "ownerId",
-                            operator: "eq",
-                            value: 1
-                        }, {
-                            field: "ownerId",
-                            operator: "eq",
-                            value: 2
-                        }]
                     }
-                },
-                resources: [{
-                    field: "ownerId",
-                    title: "Owner",
-                    dataSource: [{
-                        text: "Alex",
-                        value: 1,
-                        color: "#f8a398"
-                    }, {
-                        text: "Bob",
-                        value: 2,
-                        color: "#51a0ed"
-                    }, {
-                        text: "Charlie",
-                        value: 3,
-                        color: "#56ca85"
-                    }]
-                }]
+                }
             }).data("kendoScheduler");
-
-            $("#days").change(function() {
-                //change the number of days option of the view
-                scheduler.setOptions({
-                    numberOfDays: parseInt($(this).val())
-                });
-                //reload the view
-                scheduler.view(scheduler.view().name);
-            });
         });
     </script>
 ```
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Scheduler:
-
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Add Events Programmatically]({% slug howto_add_events_programatically_scheduler %})
-* [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
-* [How to Calculate Scheduler Height Dynamically on Mobile]({% slug howto_calculate_scheduler_height_dunamically_onmobile_scheduler %})
-* [How to Clone Events on Ctrl + move]({% slug howto_clone_eventson_ctrlplus_move_scheduler %})
-* [How to Create Custom Views Inheriting Built-In Views]({% slug howto_create_custom_view_inheriting_builtinview_scheduler %})
-* [How to Create Custom Restrictions]({% slug howto_create_custom_restrivtions_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
-* [How to Edit Records on touchend]({% slug howto_edit_records_using_touchendonmobile_scheduler %})
-* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-
-How-to examples on the Kendo UI Scheduler in AngularJS:
-
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Edit Using ContextMenu]({% slug howto_edit_using_contectmenu_angularjs_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

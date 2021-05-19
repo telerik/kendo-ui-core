@@ -6,13 +6,13 @@ var menu,
 
 var keys = kendo.keys;
 
-module("menu keyboard navigation", {
-    setup: function () {
+describe("menu keyboard navigation", function () {
+    beforeEach(function () {
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         };
 
-        QUnit.fixture.append(
+        Mocha.fixture.append(
             '<ul id="menu" data-role="menu" class="k-widget k-reset k-header k-menu k-menu-horizontal" tabindex="0">' +
             '    <li class="k-item k-state-default k-first"><span class="k-link">' +
             '        First Item' +
@@ -61,68 +61,67 @@ module("menu keyboard navigation", {
         menu._oldHoverItem = null;
         menu.wrapper.find(FOCUSEDCLASS).removeClass(FOCUSEDSTATE);
 
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
         openedItem = null;
-    }
 });
 
-test('Menu focus makes first root item active', function() {
+it('Menu focus makes first root item active', function() {
     menu.wrapper[0].focus();
 
-    ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
+    assert.isOk(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
 });
 
-asyncTest("Template focus focuses the parent Menu item", function () {
+it("Template focus focuses the parent Menu item", function(done) {
     var template = menu.element.find("#template");
     menu.open("#menuItem4");
 
     setTimeout(function() {
-        start();
         template[0].focus();
-        ok(template.parents(".k-item").eq(1).hasClass(FOCUSEDSTATE));
+        assert.isOk(template.parents(".k-item").eq(1).hasClass(FOCUSEDSTATE));
+        done();
     }, 100);
 });
 
-test('Left and right arrows move focus between first and second item', function() {
+it('Left and right arrows move focus between first and second item', function() {
     menu.wrapper.focus().press(keys.RIGHT);
     var firstItem = menu.wrapper.children(".k-item").first();
 
-    ok(firstItem.next().hasClass(FOCUSEDSTATE));
+    assert.isOk(firstItem.next().hasClass(FOCUSEDSTATE));
 
     menu.wrapper.press(keys.LEFT);
-    ok(firstItem.hasClass(FOCUSEDSTATE));
+    assert.isOk(firstItem.hasClass(FOCUSEDSTATE));
 });
 
-test('Down arrow opens subitems group', function() {
+it('Down arrow opens subitems group', function() {
     menu.open = function(item) { openedItem = item; };
     menu.wrapper.focus().press(keys.DOWN);
 
-    equal(openedItem[0], menu.wrapper.children(".k-item").first()[0]);
+    assert.equal(openedItem[0], menu.wrapper.children(".k-item").first()[0]);
 });
 
-test('Left arrow moves focus from first to last item', function() {
+it('Left arrow moves focus from first to last item', function() {
     menu.wrapper.focus().press(keys.LEFT);
 
-    ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
+    assert.isOk(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
 });
 
 
-test('Home moves focus to first item', function() {
+it('Home moves focus to first item', function() {
     menu.wrapper.focus().press(keys.RIGHT);
     menu.wrapper.focus().press(keys.HOME);
 
-    ok(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
+    assert.isOk(menu.wrapper.children(".k-item").first().hasClass(FOCUSEDSTATE));
 });
 
-test('End moves focus from to last item', function() {
+it('End moves focus from to last item', function() {
     menu.wrapper.focus().press(keys.LEFT);
 
-    ok(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
+    assert.isOk(menu.wrapper.children(".k-item").last().hasClass(FOCUSEDSTATE));
 });
 
-test('Mouse events reset the keyboard navigation active item', function() {
+it('Mouse events reset the keyboard navigation active item', function() {
     menu.wrapper.focus().press(keys.RIGHT);
 
     var firstItem = menu.wrapper.children(".k-item").first(),
@@ -130,14 +129,14 @@ test('Mouse events reset the keyboard navigation active item', function() {
 
     firstItem.children(".k-link").mouseenter();
 
-    ok(!secondItem.hasClass(FOCUSEDSTATE));
+    assert.isOk(!secondItem.hasClass(FOCUSEDSTATE));
 
     menu.wrapper.press(keys.RIGHT);
 
-    ok(secondItem.hasClass(FOCUSEDSTATE));
+    assert.isOk(secondItem.hasClass(FOCUSEDSTATE));
 });
 
-test('Hitting Enter key navigates an item hyperlink', function() {
+it('Hitting Enter key navigates an item hyperlink', function() {
     var fired = false;
     menu.wrapper.find("#fooLink").click(function(e){
         e.preventDefault();
@@ -145,6 +144,7 @@ test('Hitting Enter key navigates an item hyperlink', function() {
     });
     menu.wrapper.focus().press(keys.RIGHT).press(keys.ENTER);
 
-    ok(fired);
+    assert.isOk(fired);
 });
-})();
+    });
+}());

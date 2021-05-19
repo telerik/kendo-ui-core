@@ -2,43 +2,52 @@
 
 var dom;
 
-module("kendo.ui.Calendar MVVM", {
-    setup: function() {
+describe("kendo.ui.Calendar MVVM", function () {
+    beforeEach(function() {
         window.change = function() {
-            ok(true);
+            assert.isOk(true);
         };
-    },
-    teardown: function() {
+    });
+    afterEach(function() {
         delete window.change;
 
         kendo.destroy(dom);
-    }
-});
+    });
 
-test("initializes a datepicker when data role is datepicker", function() {
+it("initializes a datepicker when data role is datepicker", function() {
     dom = $('<input data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     kendo.bind(dom);
 
-    ok(dom.data("kendoDatePicker") instanceof kendo.ui.DatePicker);
+    assert.isOk(dom.data("kendoDatePicker") instanceof kendo.ui.DatePicker);
 });
 
-test("initializes a options from data attributes", function() {
+it("initializes a options from data attributes", function() {
     dom = $('<input data-role="datepicker" data-start="year" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     kendo.bind(dom);
 
     var datepicker = dom.data("kendoDatePicker");
 
-    equal(datepicker.options.start, "year");
-    equal(datepicker.dateView.options.start, "year");
+    assert.equal(datepicker.options.start, "year");
+    assert.equal(datepicker.dateView.options.start, "year");
 });
 
-test("Preserve options after widget init", function() {
+it("initializes a disabledDates from data attributes", function() {
+    dom = $('<input data-role="datepicker" data-disable-dates="[\'sa\', \'su\']" />');
+
+    kendo.bind(dom);
+
+    var datepicker = dom.data("kendoDatePicker");
+
+    assert.isOk(datepicker.options.disableDates != $.noop);
+});
+
+it("Preserve options after widget init", function() {
     dom = $('<input data-role="datepicker" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
     dom.kendoDatePicker({
         start: "decade",
         depth: "decade"
@@ -48,91 +57,91 @@ test("Preserve options after widget init", function() {
 
     var datepicker = dom.data("kendoDatePicker");
 
-    equal(datepicker.options.start, "decade");
-    equal(datepicker.dateView.options.start, "decade");
+    assert.equal(datepicker.options.start, "decade");
+    assert.equal(datepicker.dateView.options.start, "decade");
 });
 
-test("initializes options from data attributes after init of the widget", function() {
+it("initializes options from data attributes after init of the widget", function() {
     dom = $('<input data-role="datepicker" data-format="{0:MM yyyy}" data-start="year" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
     dom.kendoDatePicker();
 
     kendo.bind(dom);
 
     var datepicker = dom.data("kendoDatePicker");
 
-    equal(datepicker.options.format, "MM yyyy");
-    equal(datepicker.dateView.options.format, "MM yyyy");
+    assert.equal(datepicker.options.format, "MM yyyy");
+    assert.equal(datepicker.dateView.options.format, "MM yyyy");
 
-    equal(datepicker.options.start, "year");
-    equal(datepicker.dateView.options.start, "year");
+    assert.equal(datepicker.options.start, "year");
+    assert.equal(datepicker.dateView.options.start, "year");
 });
 
-test("initializes min and max options from data attributes", function() {
+it("initializes min and max options from data attributes", function() {
     dom = $('<input data-role="datepicker" data-min="2000-10-10" data-max="2010-10-10" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     kendo.bind(dom);
 
     var datepicker = dom.data("kendoDatePicker");
 
-    deepEqual(datepicker.min(), new Date(2000, 9, 10));
-    deepEqual(datepicker.max(), new Date(2010, 9, 10));
+    assert.deepEqual(datepicker.min(), new Date(2000, 9, 10));
+    assert.deepEqual(datepicker.max(), new Date(2010, 9, 10));
 });
 
-test("initializes min and max options from data attributes after init of the widget", function() {
+it("initializes min and max options from data attributes after init of the widget", function() {
     dom = $('<input data-role="datepicker" data-min="2000-10-10" data-max="2010-10-10" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
     dom.kendoDatePicker();
 
     kendo.bind(dom);
 
     var datepicker = dom.data("kendoDatePicker");
 
-    deepEqual(datepicker.min(), new Date(2000, 9, 10));
-    deepEqual(datepicker.max(), new Date(2010, 9, 10));
+    assert.deepEqual(datepicker.min(), new Date(2000, 9, 10));
+    assert.deepEqual(datepicker.max(), new Date(2010, 9, 10));
 });
 
-test("initializes a parseFormats option from data attributes", function() {
+it("initializes a parseFormats option from data attributes", function() {
     dom = $('<input data-role="datepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     dom.kendoDatePicker();
     kendo.bind(dom);
 
     var datepicker = dom.data("kendoDatePicker");
 
-    equal(datepicker.options.parseFormats[0], "MM yyyy");
-    equal(datepicker.options.parseFormats[1], "MM/dd/yyyy");
+    assert.equal(datepicker.options.parseFormats[0], "MM yyyy");
+    assert.equal(datepicker.options.parseFormats[1], "MM/dd/yyyy");
 });
 
-test("initializes a parseFormats option from data attribute with array value", function() {
+it("initializes a parseFormats option from data attribute with array value", function() {
     dom = $('<input data-role="datepicker" data-format="MM yyyy" data-parse-formats=\'["MM/dd/yyyy", "dd/MM/yyyy"]\' />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     kendo.bind(dom);
 
     var datepicker = dom.data("kendoDatePicker");
 
-    equal(datepicker.options.parseFormats[0], "MM yyyy");
-    equal(datepicker.options.parseFormats[1], "MM/dd/yyyy");
-    equal(datepicker.options.parseFormats[2], "dd/MM/yyyy");
+    assert.equal(datepicker.options.parseFormats[0], "MM yyyy");
+    assert.equal(datepicker.options.parseFormats[1], "MM/dd/yyyy");
+    assert.equal(datepicker.options.parseFormats[2], "dd/MM/yyyy");
 });
 
-test("initializes value from view model", function() {
+it("initializes value from view model", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var value = new Date();
 
     kendo.bind(dom, { value: value } );
 
-    equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
 });
 
-test("changing a value updates the view model", function() {
+it("changing a value updates the view model", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({ value: null });
 
@@ -142,25 +151,25 @@ test("changing a value updates the view model", function() {
     dom.data("kendoDatePicker").value(value);
     dom.data("kendoDatePicker").trigger("change");
 
-    equal(observable.value.getTime(), value.getTime());
+    assert.equal(observable.value.getTime(), value.getTime());
 });
 
-test("changing to invalid value does not clear widget", function() {
+it("changing to invalid value does not clear widget", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({ value: new Date() });
 
     kendo.bind(dom, observable);
     dom.val("10/10/0099").focus().blur();
 
-    equal(observable.value, null);
-    equal(dom.val(), "10/10/0099");
+    assert.equal(observable.value, null);
+    assert.equal(dom.val(), "10/10/0099");
 });
 
-test("binding datepicker initialized before binding", function() {
+it("binding datepicker initialized before binding", function() {
     dom = $('<input data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var value = new Date(2011, 1, 2);
     var observable = kendo.observable({ value: null });
@@ -170,12 +179,12 @@ test("binding datepicker initialized before binding", function() {
 
     kendo.bind(dom, observable);
 
-    equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
 });
 
-test("binding datepicker initialized after binding", function() {
+it("binding datepicker initialized after binding", function() {
     dom = $('<input data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({ value: null });
     var value = new Date(2011, 1, 2);
@@ -185,12 +194,12 @@ test("binding datepicker initialized after binding", function() {
 
     dom.kendoDatePicker();
 
-    equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
 });
 
-test("updating model value updates the UI", function() {
+it("updating model value updates the UI", function() {
     dom = $('<input data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({ value: value });
 
@@ -200,12 +209,12 @@ test("updating model value updates the UI", function() {
 
     var value = new Date(2011, 1, 2);
     observable.set("value", value)
-    equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
 });
 
-test("bindings are removed if element is rebind", 1, function() {
+it("bindings are removed if element is rebind", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({ value: new Date(2011, 1, 2) });
 
@@ -215,12 +224,12 @@ test("bindings are removed if element is rebind", 1, function() {
 
     kendo.bind(dom, observable);
 
-    equal(destroy.calls("destroy"), 1);
+    assert.equal(destroy.calls("destroy"), 1);
 });
 
-test("binding target is destroyed", 1, function() {
+it("binding target is destroyed", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({ value: null });
 
@@ -230,12 +239,12 @@ test("binding target is destroyed", 1, function() {
 
     kendo.bind(dom, observable);
 
-    equal(destroy.calls("destroy"), 1);
+    assert.equal(destroy.calls("destroy"), 1);
 });
 
-test("dataBound event is raised if attached as option", 1, function() {
+it("dataBound event is raised if attached as option", function() {
     dom = $('<input data-role="datepicker" data-change="change" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -245,9 +254,9 @@ test("dataBound event is raised if attached as option", 1, function() {
     dom.data("kendoDatePicker").trigger("change");
 });
 
-test("dataBound event is raised if attached as option to a already initialized datepicker", 1, function() {
+it("dataBound event is raised if attached as option to a already initialized datepicker", function() {
     dom = $('<input data-change="change" />').kendoDatePicker();
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -257,9 +266,9 @@ test("dataBound event is raised if attached as option to a already initialized d
     dom.data("kendoDatePicker").trigger("change");
 });
 
-test("binding enabled to false disables the widget", function() {
+it("binding enabled to false disables the widget", function() {
     dom = $('<input data-bind="enabled:enabled" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         enabled: false
@@ -267,12 +276,12 @@ test("binding enabled to false disables the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(dom.is(":disabled"));
+    assert.isOk(dom.is(":disabled"));
 });
 
-test("binding enabled to true enables the widget", function() {
+it("binding enabled to true enables the widget", function() {
     dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="datepicker" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         enabled: true
@@ -280,12 +289,12 @@ test("binding enabled to true enables the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(!dom.is(":disabled"));
+    assert.isOk(!dom.is(":disabled"));
 });
 
-test("binding disable to true disables the widget", function() {
+it("binding disable to true disables the widget", function() {
     dom = $('<input data-bind="disabled:disabled" disabled="disabled" data-role="datepicker" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         disabled: false
@@ -293,12 +302,12 @@ test("binding disable to true disables the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(!dom.is(":disabled"));
+    assert.isOk(!dom.is(":disabled"));
 });
 
-test("binding disabled to false enables the widget", function() {
+it("binding disabled to false enables the widget", function() {
     dom = $('<input data-bind="disabled:disabled" data-role="datepicker" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         disabled: true
@@ -306,12 +315,12 @@ test("binding disabled to false enables the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(dom.is(":disabled"));
+    assert.isOk(dom.is(":disabled"));
 });
 
-test("binding visible to false hides the widget", function() {
+it("binding visible to false hides the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         visible: false
@@ -319,12 +328,12 @@ test("binding visible to false hides the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "Display is 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") == "none", "Display is 'none'");
 });
 
-test("binding visible to true shows the widget", function() {
+it("binding visible to true shows the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker" style="display:none"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         visible: true
@@ -332,12 +341,12 @@ test("binding visible to true shows the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "Display is not 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") != "none", "Display is not 'none'");
 });
 
-test("changing visible to false hides the widget", function() {
+it("changing visible to false hides the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         visible: true
@@ -346,12 +355,12 @@ test("changing visible to false hides the widget", function() {
     kendo.bind(dom, observable);
     observable.set("visible", false);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "Display is 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") == "none", "Display is 'none'");
 });
 
-test("changing visible to true shows the widget", function() {
+it("changing visible to true shows the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         visible: false
@@ -360,12 +369,12 @@ test("changing visible to true shows the widget", function() {
     kendo.bind(dom, observable);
     observable.set("visible", true);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "Display is not 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") != "none", "Display is not 'none'");
 });
 
-test("binding invisible to true hides the widget", function() {
+it("binding invisible to true hides the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         invisible: true
@@ -373,12 +382,12 @@ test("binding invisible to true hides the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "display is 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") == "none", "display is 'none'");
 });
 
-test("binding invisible to false shows the widget", function() {
+it("binding invisible to false shows the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker" style="display:none"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         invisible: false
@@ -386,12 +395,12 @@ test("binding invisible to false shows the widget", function() {
 
     kendo.bind(dom, observable);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
 });
 
-test("changing invisible to true hides the widget", function() {
+it("changing invisible to true hides the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         invisible: false
@@ -400,12 +409,12 @@ test("changing invisible to true hides the widget", function() {
     kendo.bind(dom, observable);
     observable.set("invisible", true);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "display is 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") == "none", "display is 'none'");
 });
 
-test("changing invisible to false shows the widget", function() {
+it("changing invisible to false shows the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var observable = kendo.observable({
         invisible: true
@@ -414,12 +423,12 @@ test("changing invisible to false shows the widget", function() {
     kendo.bind(dom, observable);
     observable.set("invisible", false);
 
-    ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
+    assert.isOk(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
 });
 
-test("binding datepicker initialized before binding does not override change event handler of calendar", 1, function() {
+it("binding datepicker initialized before binding does not override change event handler of calendar", function() {
     dom = $('<input data-bind="value: value" />');
-    dom.appendTo(QUnit.fixture);
+    dom.appendTo(Mocha.fixture);
 
     var value = new Date(2011, 1, 2);
     var observable = kendo.observable({ value: null });
@@ -429,7 +438,7 @@ test("binding datepicker initialized before binding does not override change eve
 
     dom.kendoDatePicker({
         change: function() {
-            equal(this, dom.data("kendoDatePicker"));
+            assert.equal(this, dom.data("kendoDatePicker"));
         }
     });
 
@@ -438,4 +447,5 @@ test("binding datepicker initialized before binding does not override change eve
     dom.data("kendoDatePicker").dateView.calendar.trigger("change");
 });
 
-})();
+    });
+}());

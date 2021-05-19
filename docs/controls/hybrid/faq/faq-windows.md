@@ -22,7 +22,7 @@ By default, WP8 highlights all links when they are active (hold down). Stopping 
 
 The example below demonstrates the meta tag you need to add to work around this issue.
 
-###### Example
+
 
     <meta name="msapplication-tap-highlight" content="no" />
 
@@ -31,8 +31,6 @@ The example below demonstrates the meta tag you need to add to work around this 
 The Hybrid UI framework adapts to the current theme in WP8 and changes the background and highlight colors of your application. In the browser this is semi-automatic when you click inside the application to focus it, but in PhoneGap it happens automatically on the application resume after you change the theme.
 
 ## See Also
-
-Other articles on frequently asked questions about the Hybrid UI components:
 
 * [All Platforms FAQ]({% slug all_platforms_faq %})
 * [iOS-Specific FAQ]({% slug ios_specific_faq %})

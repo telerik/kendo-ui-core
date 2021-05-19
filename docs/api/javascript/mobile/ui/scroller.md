@@ -3,6 +3,7 @@ title: Scroller
 page_title: Configuration, methods and events of Kendo UI Mobile Scroller
 description: How to configure a mobile scroller in Kendo UI HTML5 mobile framework, use methods to scroll the container to a specified location and control behavior with events.
 res_type: api
+component: scroller
 ---
 
 # kendo.mobile.ui.Scroller
@@ -230,7 +231,7 @@ Updates the scroller dimensions. Should be called after the contents of the scro
 
 #### Example
 
-``` html
+```
     <div data-role="view">
         <a data-role="button" data-click="addContent">Append content</a>
 
@@ -331,6 +332,7 @@ Returns the viewport height of the scrollable element.
 
     <script>
     function getHeight() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($("#scroller").data("kendoMobileScroller").height());
     }
 
@@ -430,6 +432,7 @@ Returns the height in pixels of the scroller content.
 
     <script>
     function getHeight() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($("#scroller").data("kendoMobileScroller").scrollHeight());
     }
 
@@ -484,6 +487,7 @@ Returns the width in pixels of the scroller content.
 
     <script>
     function getWidth() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log($("#scroller").data("kendoMobileScroller").scrollWidth());
     }
 
@@ -531,6 +535,7 @@ Fires when the pull option is set to true, and the user pulls the scrolling cont
 
     <script>
     function foo() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("foo!");
     }
     new kendo.mobile.Application();
@@ -554,6 +559,7 @@ Fires when the scroller dimensions change (e.g. orientation change or resize)
 
     <script>
     function foo() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("foo!");
     }
     new kendo.mobile.Application();
@@ -572,7 +578,9 @@ Fires when the user scrolls through the content.
         function attachToScroller(e) {
           var scroller = e.view.scroller;
           scroller.bind("scroll", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log(e.scrollTop);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
              console.log(e.scrollLeft);
           });
         }

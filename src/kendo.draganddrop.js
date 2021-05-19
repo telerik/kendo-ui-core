@@ -641,6 +641,10 @@ var __meta__ = { // jshint ignore:line
                 select: proxy(that._select, that)
             });
 
+            if (kendo.support.touch) {
+                that.element.find(that.options.filter).css('touch-action', 'none');
+            }
+
             that._afterEndHandler = proxy(that._afterEnd, that);
             that._captureEscape = proxy(that._captureEscape, that);
         },
@@ -725,7 +729,7 @@ var __meta__ = { // jshint ignore:line
         _start: function(e) {
             var that = this,
                 options = that.options,
-                container = options.container,
+                container = options.container ? $(options.container): null,
                 hint = options.hint;
 
             if (this._shouldIgnoreTarget(e.touch.initialTouch) || (options.holdToDrag && !that._activated)) {
@@ -1064,7 +1068,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function scrollableRoot() {
-        return $(kendo.support.browser.chrome ? document.body : document.documentElement);
+        return $(kendo.support.browser.edge || kendo.support.browser.safari ? document.body : document.documentElement);
     }
 
     function findScrollableParent(element) {

@@ -12,7 +12,7 @@ The following example demonstrates how to make the dropdown list of a Kendo UI C
 
 #### Example:
 
-```html
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Fabrics</h4>

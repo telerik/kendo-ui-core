@@ -164,6 +164,7 @@ if (kendo.ui.FilterMenu) {
         "clear": "Fjern",
         "filter": "Filtrere",
         "info": "Vis poster med verdi:",
+        "title": "Vis poster med verdi",
         "isFalse": "Er usann",
         "isTrue": "Er sant",
         "or": "Eller",
@@ -222,6 +223,26 @@ if (kendo.ui.Groupable) {
 if (kendo.ui.Pager) {
     kendo.ui.Pager.prototype.options.messages =
     $.extend(true, kendo.ui.Pager.prototype.options.messages, {
+        "allPages": "Alle",
+        "display": "{0} - {1} av {2} poster",
+        "empty": "Det finnes ingen poster",
+        "first": "Gå til første side",
+        "itemsPerPage": "poster per side",
+        "last": "Gå til siste siden",
+        "next": "Gå til neste side",
+        "of": "av {0}",
+        "page": "Side",
+        "previous": "Gå til forrige side",
+        "refresh": "Oppdatere",
+        "morePages": "Flere sider"
+    });
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
         "allPages": "Alle",
         "display": "{0} - {1} av {2} poster",
         "empty": "Det finnes ingen poster",

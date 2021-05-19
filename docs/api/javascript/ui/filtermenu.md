@@ -208,6 +208,10 @@ The text of the information message on the top of the filter menu.
         dataSource: dataSource
       });
 
+### messages.title `String` *(default: "Show items with value that: ")*
+
+The text rendered for the title attribute of the filter menu form.
+
 ### messages.additionalValue `String` *(default: "Additional value")*
 
 The text of the additional filter value editor.
@@ -234,7 +238,7 @@ The text of the option which represents the "or" logical operation.
 
 ### messages.selectValue `String` *(default: "-Select value-")*
 
-The text of the DropDownList displayed in the filter menu for columns whose [values](#configuration-columns.values) option is set.
+The text of the DropDownList displayed in the filter menu for columns whose [values](/api/javascript/ui/filtermenu#configuration-columns.values) option is set.
 
 #### Example - set the "selectValue" message
 
@@ -324,6 +328,14 @@ The text of the "does not contain" filter operator.
 ### operators.string.endswith `String` *(default: "Ends with")*
 
 The text of the "ends with" filter operator.
+
+### operators.string.isnullorempty `String` *(default: "Has no value")*
+
+The text of the "isnullorempty" filter operator.
+
+### operators.string.isnotnullorempty `String` *(default: "Has value")*
+
+The text of the "isnotnullorempty" filter operator.
 
 ### operators.number `Object`
 
@@ -447,7 +459,7 @@ The text of the "less than" filter operator.
 
 ### operators.enums `Object`
 
-The texts of the filter operators displayed for columns which have their [values](#configuration-columns.values) option set.
+The texts of the filter operators displayed for columns which have their [values](/api/javascript/ui/filtermenu#configuration-columns.values) option set.
 
 > Omitting an operator will exclude it from the DropDownList with the available operators.
 
@@ -471,7 +483,7 @@ The text of the "isnotnull" filter operator.
 
 ### dataSource `kendo.data.DataSource`
 The [data source](/api/javascript/data/datasource) of the widget.
-Configured via the [dataSource](#configuration-dataSource) option.
+Configured via the [dataSource](/api/javascript/ui/filtermenu#configuration-dataSource) option.
 
 ### field `String`
 
@@ -507,6 +519,7 @@ Resets the filter configurations and the dataSource to their initial state.
           }
         },
         change: function(){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         	console.log(5)
         }
       });

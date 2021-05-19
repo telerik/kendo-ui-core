@@ -1,31 +1,26 @@
 ---
-title: Map Layers
-page_title: Map Layers | Kendo UI Map
-description: "Learn how to create and configure tile layers for the Kendo UI Map widget."
+title: Layers
+page_title: jQuery Map Documentation | Layers
+description: "Get started with the jQuery Map by Kendo UI and configure its tile layers."
 slug: maplayers_mapwidget
 position: 2
 ---
 
-# Map Layers
+# Layers
 
-The information that the [Kendo UI Map widget](http://demos.telerik.com/kendo-ui/map/index) renders is organized into layers.
+The information that the Map renders is organized into layers.
 
-They are stacked from bottom to top in the order of definition and are oblivious of each other. To keep their content in sync, the Map layers respond to [the Map events](/api/javascript/dataviz/ui/map#events).
+These layers are stacked from bottom to top in the order of definition and are oblivious of each other. To keep their content in sync, use the [events of the Map](/api/javascript/dataviz/ui/map#events).
 
-## Tile Layers
+## Getting Started
 
-### Basic Usage
+The tile layers in the Map are suitable for:
 
-Tile layers are suitable for:
-
-* Displaying raster maps from popular online providers such as [OpenStreetMap](http://www.openstreetmap.org/), [OpenWeatherMap](http://openweathermap.org/), [ArcGIS](https://developers.arcgis.com/en/), [Here (Nokia) Maps](https://developer.here.com/rest-apis/documentation/enterprise-map-tile), and many more.
-* Any other Map Tile service that supports the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System).
-
-[Microsoft Bing](http://msdn.microsoft.com/en-us/library/ff701713.aspx) provides dedicated support. Note that it requires you to [obtain an API key](http://msdn.microsoft.com/en-us/library/ff428642.aspx).
+* Displaying raster maps from popular online providers such as [OpenStreetMap](http://www.openstreetmap.org/), [OpenWeatherMap](http://openweathermap.org/), [ArcGIS](https://developers.arcgis.com/en/), and so on.
+* Any other Map tile service that supports the [WGS 84 projection standards](https://en.wikipedia.org/wiki/World_Geodetic_System). [Microsoft Bing](https://msdn.microsoft.com/en-us/library/ff701713.aspx) provides dedicated support for Map layers. However, it requires you to [obtain an API key](https://msdn.microsoft.com/en-us/library/ff428642.aspx).
+* Azure maps tiles is compatible with Kendo UI Map. You need to have an active [Azure Maps account and key](https://docs.microsoft.com/en-us/azure/azure-maps/how-to-manage-authentication).
 
 The following example demonstrates how to display an OpenStreetMap tile layer.
-
-###### Example
 
     <div id="map"></div>
     <script>
@@ -39,18 +34,16 @@ The following example demonstrates how to display an OpenStreetMap tile layer.
     });
     </script>
 
-### Zoom Levels
+## Zoom Levels
 
-Raster maps are divided into images (tiles) for serving over the web. Tiles are typically 256px squares. The top level (zoom level 0) displays the whole world as a single tile. Each progressive zoom level doubles the size of the map in the following way:
+Raster maps are divided into images (tiles) for serving over the web. Tiles are typically 256px squares. The top level (zoom level 0) displays the whole world as a single tile. Each progressive zoom level doubles the size of the Map in the following way:
 
-- Zoom level 0: 1x1 tiles (256px).
-- Zoom level 1: 2x2 tiles (512px).
-- Zoom level 2: 4x4 tiles (1024px) and so on.
+- Zoom level 0&mdash;1x1 tiles (256px).
+- Zoom level 1&mdash;2x2 tiles (512px).
+- Zoom level 2&mdash;4x4 tiles (1024px) and so on.
 
 ## See Also
 
-Other articles on the Kendo UI Map:
-
-* [Overview of the Map Widget]({% slug overview_kendoui_mapwidget %})
-* [Map Authoring]({% slug mapauthoring_mapwidget %})
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
+* [Bing Tile Layer in the Map (Demo)](https://demos.telerik.com/kendo-ui/map/bing)
+* [Bubble Tile Layer in the Map (Demo)](https://demos.telerik.com/kendo-ui/map/bubble-layer)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

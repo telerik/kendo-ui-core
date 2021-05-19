@@ -10,9 +10,9 @@ slug: howto_select_items_ontab_combobox
 
 The following example demonstrates how to select an item in a Kendo UI ComboBox on pressing the `Tab` key.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
 
     <div id="shipping">

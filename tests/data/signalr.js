@@ -1,4 +1,5 @@
 (function() {
+    var stub = window.stub;
 
     function SignalR(options) {
         return new kendo.data.transports.signalr(options);
@@ -7,7 +8,7 @@
     var transport;
 
     function promise() {
-        return  {
+        return {
             done: function(callback) {
                 if (callback) {
                     callback();
@@ -18,982 +19,1461 @@
         };
     }
 
-    function hub() {
+    function nativePromise() {
+        return {
+            then: function(callback) {
+                if (callback) {
+                    callback();
+                }
+                return this;
+            },
+            "catch": $.noop
+        };
+    }
+
+    function hub(customPromise) {
         return {
             on: $.noop,
             invoke: function() {
-                return promise();
+                return customPromise || promise();
             }
         };
     }
 
-    module("SignalR", {
-        setup: function() {
+    describe("SignalR", function() {
+        beforeEach(function() {
             transport = SignalR({
                 signalr: {
                     promise: promise(),
                     hub: hub()
                 }
             });
-        }
-    });
+        });
 
-    test("signalr transport inherits from remote transport", function() {
-        ok(transport instanceof kendo.data.RemoteTransport);
-    });
+        it("signalr transport inherits from remote transport", function() {
+            assert.isOk(transport instanceof kendo.data.RemoteTransport);
+        });
 
-    test("signalr transport requires the promise option to be set", 1, function() {
-        try {
-            SignalR();
-        } catch(e) {
-            equal(e.toString(), 'Error: The "promise" option must be set.');
-        }
-    });
+        it("signalr transport requires the promise option to be set", function() {
+            try {
+                SignalR();
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "promise" option must be set.');
+            }
+        });
 
-    test("the promise option must be a Promise", 1, function() {
-        try {
-            SignalR({
-                signalr: {
-                    promise: {}
-                }
+        it("the promise option must be a Promise", function() {
+            try {
+                SignalR({
+                    signalr: {
+                        promise: {}
+                    }
+                });
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "promise" option must be a Promise.');
+            }
+        });
+
+        it("signalr transport requires the hub option to be set", function() {
+            try {
+                SignalR({
+                    signalr: {
+                        promise: promise()
+                    }
+                });
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "hub" option must be set.');
+            }
+        });
+
+        it("the hub object must have on and invoke methods", function() {
+            try {
+                SignalR({
+                    signalr: {
+                        promise: promise(),
+                        hub: {}
+                    }
+                });
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "hub" option is not a valid SignalR hub proxy.');
+            }
+        });
+
+        it("the push method listens for create notifications from the hub", function() {
+            var proxy = stub({}, {
+                on: $.noop,
+                invoke: $.noop
             });
-        } catch(e) {
-            equal(e.toString(), 'Error: The "promise" option must be a Promise.');
-        }
-    });
 
-    test("signalr transport requires the hub option to be set", 1, function() {
-        try {
-            SignalR({
-                signalr: {
-                    promise: promise()
-                }
-            });
-        } catch(e) {
-            equal(e.toString(), 'Error: The "hub" option must be set.');
-        }
-    });
-
-    test("the hub object must have on and invoke methods", 1, function() {
-        try {
-            SignalR({
+            transport = SignalR({
                 signalr: {
                     promise: promise(),
-                    hub: {}
+                    hub: proxy,
+                    client: {
+                        create: "create"
+                    }
                 }
             });
-        } catch(e) {
-            equal(e.toString(), 'Error: The "hub" option is not a valid SignalR hub proxy.');
-        }
-    });
 
-    test("the push method listens for create notifications from the hub", function() {
-        var proxy = stub({}, {
-            on: $.noop,
-            invoke: $.noop
+            transport.push({});
+
+            assert.equal(proxy.calls("on"), 1);
+            assert.equal(proxy.args("on", 0)[0], "create");
         });
 
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: proxy,
-                client: {
-                    create: "create"
-                }
-            }
-        });
+        it("the push method listens for update notifications from the hub", function() {
+            var proxy = stub({}, {
+                on: $.noop,
+                invoke: $.noop
+            });
 
-        transport.push({});
-
-        equal(proxy.calls("on"), 1);
-        equal(proxy.args("on", 0)[0], "create");
-    });
-
-    test("the push method listens for update notifications from the hub", function() {
-        var proxy = stub({}, {
-            on: $.noop,
-            invoke: $.noop
-        });
-
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: proxy,
-                client: {
-                    update: "update"
-                }
-            }
-        });
-
-        transport.push({});
-
-        equal(proxy.calls("on"), 1);
-        equal(proxy.args("on", 0)[0], "update");
-    });
-
-    test("the push method listens for destroy notifications from the hub", function() {
-        var proxy = stub({}, {
-            on: $.noop,
-            invoke: $.noop
-        });
-
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: proxy,
-                client: {
-                    destroy: "destroy"
-                }
-            }
-        });
-
-        transport.push({});
-
-        equal(proxy.calls("on"), 1);
-        equal(proxy.args("on", 0)[0], "destroy");
-    });
-
-    test("transport calls pushCreate when the create method is triggered by the hub", function() {
-        var result = {};
-
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
-                    invoke: $.noop,
-                    on: function(method, callback) {
-                        callback(result);
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: proxy,
+                    client: {
+                        update: "update"
                     }
-                },
-                client: {
-                    create: "c"
                 }
-            }
+            });
+
+            transport.push({});
+
+            assert.equal(proxy.calls("on"), 1);
+            assert.equal(proxy.args("on", 0)[0], "update");
         });
 
-        var options = stub({}, "pushCreate");
+        it("the push method listens for destroy notifications from the hub", function() {
+            var proxy = stub({}, {
+                on: $.noop,
+                invoke: $.noop
+            });
 
-        transport.push(options);
-
-        equal(options.calls("pushCreate"), 1);
-        equal(options.args("pushCreate", 0)[0], result);
-    });
-
-    test("transport calls pushUpdate when the update method is triggered by the hub", function() {
-        var result = {};
-
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
-                    invoke: $.noop,
-                    on: function(method, callback) {
-                        callback(result);
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: proxy,
+                    client: {
+                        destroy: "destroy"
                     }
-                },
-                client: {
-                    update: "c"
                 }
-            }
+            });
+
+            transport.push({});
+
+            assert.equal(proxy.calls("on"), 1);
+            assert.equal(proxy.args("on", 0)[0], "destroy");
         });
 
-        var options = stub({}, "pushUpdate");
+        it("transport calls pushCreate when the create method is triggered by the hub", function() {
+            var result = {};
 
-        transport.push(options);
-
-        equal(options.calls("pushUpdate"), 1);
-        equal(options.args("pushUpdate", 0)[0], result);
-    });
-
-    test("transport calls pushDestroy when the destroy method is triggered by the hub", function() {
-        var result = {};
-
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
-                    invoke: $.noop,
-                    on: function(method, callback) {
-                        callback(result);
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: $.noop,
+                        on: function(method, callback) {
+                            callback(result);
+                        }
+                    },
+                    client: {
+                        create: "c"
                     }
-                },
-                client: {
-                    destroy: "c"
                 }
-            }
+            });
+
+            var options = stub({}, "pushCreate");
+
+            transport.push(options);
+
+            assert.equal(options.calls("pushCreate"), 1);
+            assert.equal(options.args("pushCreate", 0)[0], result);
         });
 
-        var options = stub({}, "pushDestroy");
+        it("transport calls pushUpdate when the update method is triggered by the hub", function() {
+            var result = {};
 
-        transport.push(options);
-
-        equal(options.calls("pushDestroy"), 1);
-        equal(options.args("pushDestroy", 0)[0], result);
-    });
-
-    test("can override the push method from the options", function() {
-        var push = $.noop;
-
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-            },
-            push: push
-        });
-
-        equal(transport.push, push);
-    });
-
-    test("the context of the custom push method is the transport itself", 1, function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-            },
-            push: function() {
-                strictEqual(this, transport);
-            }
-        });
-
-        transport.push();
-    });
-
-    test("the read method invokes the read server method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.calls("invoke"), 1);
-                        equal(hub.args("invoke", 0)[0], "r");
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: $.noop,
+                        on: function(method, callback) {
+                            callback(result);
+                        }
                     },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    read: "r"
+                    client: {
+                        update: "c"
+                    }
                 }
-            }
+            });
+
+            var options = stub({}, "pushUpdate");
+
+            transport.push(options);
+
+            assert.equal(options.calls("pushUpdate"), 1);
+            assert.equal(options.args("pushUpdate", 0)[0], result);
         });
 
-        transport.read({});
-    });
+        it("transport calls pushDestroy when the destroy method is triggered by the hub", function() {
+            var result = {};
 
-    test("the read method throws error if server configuration is not specified", 1, function() {
-        try {
-            transport.read();
-        } catch (e) {
-            equal(e.toString(), 'Error: The "server.read" option must be set.');
-        }
-    });
-
-    test("the read method passes the data field of the options to the server read method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        var options = { data: "data" };
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.args("invoke", 0)[1], options.data);
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: $.noop,
+                        on: function(method, callback) {
+                            callback(result);
+                        }
                     },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    read: "r"
+                    client: {
+                        destroy: "c"
+                    }
                 }
-            }
+            });
+
+            var options = stub({}, "pushDestroy");
+
+            transport.push(options);
+
+            assert.equal(options.calls("pushDestroy"), 1);
+            assert.equal(options.args("pushDestroy", 0)[0], result);
         });
 
-        transport.read(options);
-    });
+        it("can override the push method from the options", function() {
+            var push = $.noop;
 
-    test("the read method invokes the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    read: "r"
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: hub()
+                },
+                push: push
+            });
+
+            assert.equal(transport.push, push);
+        });
+
+        it("the context of the custom push method is the transport itself", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: hub()
+                },
+                push: function() {
+                    assert.strictEqual(this, transport);
                 }
-            }
-        };
+            });
 
-        stub(transportOptions, "parameterMap");
+            transport.push();
+        });
 
-        transport = SignalR(transportOptions);
-
-        transport.read({});
-
-        equal(transportOptions.calls("parameterMap"), 1);
-    });
-
-    test("the read method passes options.data to the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    read: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        var options = { data: "foo" };
-
-        transport.read(options);
-
-        equal(transportOptions.args("parameterMap", 0)[0], options.data);
-    });
-
-    test("the read method invokes parameterMap and passes 'read' as the type of operation", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    read: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.read({});
-
-        equal(transportOptions.args("parameterMap", 0)[1], "read");
-    });
-
-    test("read calls options.success when invoke is done", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
+        it("the read method invokes the read server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
                     invoke: function() {
                         return promise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        fail: $.noop
                     },
-                    on: $.noop
-                },
-                server: {
-                    read: "r"
+                    hub: hub,
+                    server: {
+                        read: "r"
+                    }
                 }
+            });
+
+            transport.read({});
+        });
+
+        it("the read method throws error if server configuration is not specified", function() {
+            try {
+                transport.read();
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "server.read" option must be set.');
             }
         });
 
-        var options = stub({}, "success");
-
-        transport.read(options);
-
-        equal(options.calls("success"), 1);
-    });
-
-    test("read calls options.error when invoke fails", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
-                    invoke: function() {
-                        return {
-                            done: function() {
-                                return this;
-                            },
-                            fail: function(callback) {
-                                callback();
-                            }
-                        };
-                    },
-                    on: $.noop
-                },
-                server: {
-                    read: "r"
-                }
-            }
-        });
-
-        var options = stub({}, "error");
-
-        transport.read(options);
-
-        equal(options.calls("error"), 1);
-    });
-
-    test("the create method invokes the create server method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.calls("invoke"), 1);
-                        equal(hub.args("invoke", 0)[0], "r");
-                    },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    create: "r"
-                }
-            }
-        });
-
-        transport.create({});
-    });
-
-    test("the create method throws error if server configuration is not specified", 1, function() {
-        try {
-            transport.create();
-        } catch (e) {
-            equal(e.toString(), 'Error: The "server.create" option must be set.');
-        }
-    });
-
-    test("the create method passes the data field of the options to the server create method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        var options = { data: "foo" };
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.args("invoke", 0)[1], options.data);
-                    },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    create: "r"
-                }
-            }
-        });
-
-        transport.create(options);
-    });
-
-    test("the create method invokes the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    create: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.create({});
-
-        equal(transportOptions.calls("parameterMap"), 1);
-    });
-
-    test("the create method passes options.data to the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    create: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        var options = { data: "foo" };
-
-        transport.create(options);
-
-        equal(transportOptions.args("parameterMap", 0)[0], options.data);
-    });
-
-    test("the create method invokes parameterMap and passes 'create' as the type of operation", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    create: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.create({});
-
-        equal(transportOptions.args("parameterMap", 0)[1], "create");
-    });
-
-    test("create calls options.success when invoke is done", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
+        it("the read method passes the data field of the options to the server read method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
                     invoke: function() {
                         return promise();
+                    }
+                });
+
+            var options = { data: "data" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        fail: $.noop
                     },
-                    on: $.noop
-                },
-                server: {
-                    create: "r"
+                    hub: hub,
+                    server: {
+                        read: "r"
+                    }
                 }
-            }
+            });
+
+            transport.read(options);
         });
 
-        var options = stub({}, "success");
+        it("the read method invokes the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        read: "r"
+                    }
+                }
+            };
 
-        transport.create(options);
+            stub(transportOptions, "parameterMap");
 
-        equal(options.calls("success"), 1);
-    });
+            transport = SignalR(transportOptions);
 
-    test("create calls options.error when invoke fails", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
-                    invoke: function() {
-                        return {
-                            done: function() {
-                                return this;
-                            },
-                            fail: function(callback) {
-                                callback();
-                            }
-                        };
+            transport.read({});
+
+            assert.equal(transportOptions.calls("parameterMap"), 1);
+        });
+
+        it("the read method passes options.data to the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        read: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            var options = { data: "foo" };
+
+            transport.read(options);
+
+            assert.equal(transportOptions.args("parameterMap", 0)[0], options.data);
+        });
+
+        it("the read method invokes parameterMap and passes 'read' as the type of operation", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        read: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            transport.read({});
+
+            assert.equal(transportOptions.args("parameterMap", 0)[1], "read");
+        });
+
+        it("read calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return promise();
+                        },
+                        on: $.noop
                     },
-                    on: $.noop
-                },
-                server: {
-                    create: "r"
+                    server: {
+                        read: "r"
+                    }
                 }
-            }
+            });
+
+            var options = stub({}, "success");
+
+            transport.read(options);
+
+            assert.equal(options.calls("success"), 1);
         });
 
-        var options = stub({}, "error");
-
-        transport.create(options);
-
-        equal(options.calls("error"), 1);
-    });
-
-
-    test("the update method invokes the update server method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.calls("invoke"), 1);
-                        equal(hub.args("invoke", 0)[0], "r");
+        it("read calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                done: function() {
+                                    return this;
+                                },
+                                fail: function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
                     },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    update: "r"
+                    server: {
+                        read: "r"
+                    }
                 }
-            }
+            });
+
+            var options = stub({}, "error");
+
+            transport.read(options);
+
+            assert.equal(options.calls("error"), 1);
         });
 
-        transport.update({});
-    });
-
-    test("the update method throws error if server configuration is not specified", 1, function() {
-        try {
-            transport.update();
-        } catch (e) {
-            equal(e.toString(), 'Error: The "server.update" option must be set.');
-        }
-    });
-
-    test("the update method passes the data field of the options to the server update method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        var options = { data: "foo" };
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.args("invoke", 0)[1], options.data);
-                    },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    update: "r"
-                }
-            }
-        });
-
-        transport.update(options);
-    });
-
-    test("the update method invokes the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    update: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.update({});
-
-        equal(transportOptions.calls("parameterMap"), 1);
-    });
-
-    test("the update method passes options.data to the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    update: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        var options = { data: "foo" };
-
-        transport.update(options);
-
-        equal(transportOptions.args("parameterMap", 0)[0], options.data);
-    });
-
-    test("the update method invokes parameterMap and passes 'update' as the type of operation", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    update: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.update({});
-
-        equal(transportOptions.args("parameterMap", 0)[1], "update");
-    });
-
-    test("update calls options.success when invoke is done", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
+        it("the create method invokes the create server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
                     invoke: function() {
                         return promise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        fail: $.noop
                     },
-                    on: $.noop
-                },
-                server: {
-                    update: "r"
+                    hub: hub,
+                    server: {
+                        create: "r"
+                    }
                 }
+            });
+
+            transport.create({});
+        });
+
+        it("the create method throws error if server configuration is not specified", function() {
+            try {
+                transport.create();
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "server.create" option must be set.');
             }
         });
 
-        var options = stub({}, "success");
-
-        transport.update(options);
-
-        equal(options.calls("success"), 1);
-    });
-
-    test("update calls options.error when invoke fails", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
-                    invoke: function() {
-                        return {
-                            done: function() {
-                                return this;
-                            },
-                            fail: function(callback) {
-                                callback();
-                            }
-                        };
-                    },
-                    on: $.noop
-                },
-                server: {
-                    update: "r"
-                }
-            }
-        });
-
-        var options = stub({}, "error");
-
-        transport.update(options);
-
-        equal(options.calls("error"), 1);
-    });
-
-    test("the destroy method invokes the destroy server method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.calls("invoke"), 1);
-                        equal(hub.args("invoke", 0)[0], "r");
-                    },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    destroy: "r"
-                }
-            }
-        });
-
-        transport.destroy({});
-    });
-
-    test("the destroy method throws error if server configuration is not specified", 1, function() {
-        try {
-            transport.destroy();
-        } catch (e) {
-            equal(e.toString(), 'Error: The "server.destroy" option must be set.');
-        }
-    });
-
-    test("the destroy method passes the data field of the options to the server destroy method", function() {
-        var hub = stub( {
-            on: $.noop
-        }, {
-            invoke: function() {
-                return promise();
-            }
-        });
-
-        var options = { data: "foo" };
-
-        transport = SignalR({
-            signalr: {
-                promise: {
-                    done: function(callback) {
-                        callback();
-
-                        equal(hub.args("invoke", 0)[1], options.data);
-                    },
-                    fail: $.noop
-                },
-                hub: hub,
-                server: {
-                    destroy: "r"
-                }
-            }
-        });
-
-        transport.destroy(options);
-    });
-
-    test("the destroy method invokes the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    destroy: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.destroy({});
-
-        equal(transportOptions.calls("parameterMap"), 1);
-    });
-
-    test("the destroy method passes options.data to the parameterMap", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    destroy: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        var options = { data: {} };
-
-        transport.destroy(options);
-
-        equal(transportOptions.args("parameterMap", 0)[0], options.data);
-    });
-
-    test("the destroy method invokes parameterMap and passes 'destroy' as the type of operation", function() {
-        var transportOptions = {
-            signalr: {
-                promise: promise(),
-                hub: hub(),
-                server: {
-                    destroy: "r"
-                }
-            }
-        };
-
-        stub(transportOptions, "parameterMap");
-
-        transport = SignalR(transportOptions);
-
-        transport.destroy({});
-
-        equal(transportOptions.args("parameterMap", 0)[1], "destroy");
-    });
-
-    test("destroy calls options.success when invoke is done", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
+        it("the create method passes the data field of the options to the server create method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
                     invoke: function() {
                         return promise();
+                    }
+                });
+
+            var options = { data: "foo" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        fail: $.noop
                     },
-                    on: $.noop
-                },
-                server: {
-                    destroy: "r"
+                    hub: hub,
+                    server: {
+                        create: "r"
+                    }
                 }
-            }
+            });
+
+            transport.create(options);
         });
 
-        var options = stub({}, "success");
+        it("the create method invokes the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        create: "r"
+                    }
+                }
+            };
 
-        transport.destroy(options);
+            stub(transportOptions, "parameterMap");
 
-        equal(options.calls("success"), 1);
-    });
+            transport = SignalR(transportOptions);
 
-    test("destroy calls options.error when invoke fails", function() {
-        transport = SignalR({
-            signalr: {
-                promise: promise(),
-                hub: {
+            transport.create({});
+
+            assert.equal(transportOptions.calls("parameterMap"), 1);
+        });
+
+        it("the create method passes options.data to the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        create: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            var options = { data: "foo" };
+
+            transport.create(options);
+
+            assert.equal(transportOptions.args("parameterMap", 0)[0], options.data);
+        });
+
+        it("the create method invokes parameterMap and passes 'create' as the type of operation", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        create: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            transport.create({});
+
+            assert.equal(transportOptions.args("parameterMap", 0)[1], "create");
+        });
+
+        it("create calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return promise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        create: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.create(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("create calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                done: function() {
+                                    return this;
+                                },
+                                fail: function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        create: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.create(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
+
+
+        it("the update method invokes the update server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
                     invoke: function() {
-                        return {
-                            done: function() {
-                                return this;
-                            },
-                            fail: function(callback) {
-                                callback();
-                            }
-                        };
+                        return promise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        fail: $.noop
                     },
-                    on: $.noop
-                },
-                server: {
-                    destroy: "r"
+                    hub: hub,
+                    server: {
+                        update: "r"
+                    }
                 }
+            });
+
+            transport.update({});
+        });
+
+        it("the update method throws error if server configuration is not specified", function() {
+            try {
+                transport.update();
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "server.update" option must be set.');
             }
         });
 
-        var options = stub({}, "error");
+        it("the update method passes the data field of the options to the server update method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return promise();
+                    }
+                });
 
-        transport.destroy(options);
+            var options = { data: "foo" };
 
-        equal(options.calls("error"), 1);
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        fail: $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            transport.update(options);
+        });
+
+        it("the update method invokes the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        update: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            transport.update({});
+
+            assert.equal(transportOptions.calls("parameterMap"), 1);
+        });
+
+        it("the update method passes options.data to the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        update: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            var options = { data: "foo" };
+
+            transport.update(options);
+
+            assert.equal(transportOptions.args("parameterMap", 0)[0], options.data);
+        });
+
+        it("the update method invokes parameterMap and passes 'update' as the type of operation", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        update: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            transport.update({});
+
+            assert.equal(transportOptions.args("parameterMap", 0)[1], "update");
+        });
+
+        it("update calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return promise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.update(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("update calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                done: function() {
+                                    return this;
+                                },
+                                fail: function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.update(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
+
+        it("the destroy method invokes the destroy server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return promise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        fail: $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            transport.destroy({});
+        });
+
+        it("the destroy method throws error if server configuration is not specified", function() {
+            try {
+                transport.destroy();
+            } catch (e) {
+                assert.equal(e.toString(), 'Error: The "server.destroy" option must be set.');
+            }
+        });
+
+        it("the destroy method passes the data field of the options to the server destroy method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return promise();
+                    }
+                });
+
+            var options = { data: "foo" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        done: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        fail: $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            transport.destroy(options);
+        });
+
+        it("the destroy method invokes the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            transport.destroy({});
+
+            assert.equal(transportOptions.calls("parameterMap"), 1);
+        });
+
+        it("the destroy method passes options.data to the parameterMap", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            var options = { data: {} };
+
+            transport.destroy(options);
+
+            assert.equal(transportOptions.args("parameterMap", 0)[0], options.data);
+        });
+
+        it("the destroy method invokes parameterMap and passes 'destroy' as the type of operation", function() {
+            var transportOptions = {
+                signalr: {
+                    promise: promise(),
+                    hub: hub(),
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            };
+
+            stub(transportOptions, "parameterMap");
+
+            transport = SignalR(transportOptions);
+
+            transport.destroy({});
+
+            assert.equal(transportOptions.args("parameterMap", 0)[1], "destroy");
+        });
+
+        it("destroy calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return promise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.destroy(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("destroy calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: promise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                done: function() {
+                                    return this;
+                                },
+                                fail: function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.destroy(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
     });
 
+    describe("SignalR for ASP.NET Core", function() {
+        beforeEach(function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: hub(nativePromise())
+                }
+            });
+        });
+
+        it("the read method invokes the read server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        read: "r"
+                    }
+                }
+            });
+
+            transport.read({});
+        });
+
+        it("the read method passes the data field of the options to the server read method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            var options = { data: "data" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        read: "r"
+                    }
+                }
+            });
+
+            transport.read(options);
+        });
+
+        it("read calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return nativePromise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        read: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.read(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("read calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                then: function() {
+                                    return this;
+                                },
+                                "catch": function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        read: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.read(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
+
+        it("the create method invokes the create server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        create: "r"
+                    }
+                }
+            });
+
+            transport.create({});
+        });
+
+        it("the create method passes the data field of the options to the server create method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            var options = { data: "foo" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        create: "r"
+                    }
+                }
+            });
+
+            transport.create(options);
+        });
+
+        it("create calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return nativePromise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        create: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.create(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("create calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                then: function() {
+                                    return this;
+                                },
+                                "catch": function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        create: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.create(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
+
+        it("the update method invokes the update server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            transport.update({});
+        });
+
+        it("the update method passes the data field of the options to the server update method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            var options = { data: "foo" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            transport.update(options);
+        });
+
+        it("update calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return nativePromise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.update(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("update calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                then: function() {
+                                    return this;
+                                },
+                                "catch": function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        update: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.update(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
+
+        it("the destroy method invokes the destroy server method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.calls("invoke"), 1);
+                            assert.equal(hub.args("invoke", 0)[0], "r");
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            transport.destroy({});
+        });
+
+        it("the destroy method passes the data field of the options to the server destroy method", function() {
+            var hub = stub({
+                on: $.noop
+            }, {
+                    invoke: function() {
+                        return nativePromise();
+                    }
+                });
+
+            var options = { data: "foo" };
+
+            transport = SignalR({
+                signalr: {
+                    promise: {
+                        then: function(callback) {
+                            callback();
+
+                            assert.equal(hub.args("invoke", 0)[1], options.data);
+                        },
+                        "catch": $.noop
+                    },
+                    hub: hub,
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            transport.destroy(options);
+        });
+
+        it("destroy calls options.success when invoke is done", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return nativePromise();
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "success");
+
+            transport.destroy(options);
+
+            assert.equal(options.calls("success"), 1);
+        });
+
+        it("destroy calls options.error when invoke fails", function() {
+            transport = SignalR({
+                signalr: {
+                    promise: nativePromise(),
+                    hub: {
+                        invoke: function() {
+                            return {
+                                then: function() {
+                                    return this;
+                                },
+                                "catch": function(callback) {
+                                    callback();
+                                }
+                            };
+                        },
+                        on: $.noop
+                    },
+                    server: {
+                        destroy: "r"
+                    }
+                }
+            });
+
+            var options = stub({}, "error");
+
+            transport.destroy(options);
+
+            assert.equal(options.calls("error"), 1);
+        });
+
+    });
 }());

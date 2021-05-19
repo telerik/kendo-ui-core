@@ -3,43 +3,42 @@
 var ComboBox = kendo.ui.ComboBox,
     input;
 
-module("kendo.ui.ComboBox placeholder", {
-    setup: function() {
-        input = $("<input />").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
+describe("kendo.ui.ComboBox placeholder", function () {
+    beforeEach(function() {
+        input = $("<input />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
         input.data("kendoComboBox").destroy();
-        kendo.destroy(QUnit.fixture);
-    }
-});
-
-if (!kendo.support.placeholder) {
-    test("get text from placeholder attr", function() {
-        var combobox = input.attr("placeholder", "Select...").kendoComboBox().data("kendoComboBox");
-
-        equal(combobox.options.placeholder, "Select...");
-        equal(combobox.input.val(), "Select...");
+        kendo.destroy(Mocha.fixture);
     });
 
-    test("set placeholder if defined", function() {
+if (!kendo.support.placeholder) {
+    it("get text from placeholder attr", function() {
+        var combobox = input.attr("placeholder", "Select...").kendoComboBox().data("kendoComboBox");
+
+        assert.equal(combobox.options.placeholder, "Select...");
+        assert.equal(combobox.input.val(), "Select...");
+    });
+
+    it("set placeholder if defined", function() {
         var combobox = input.kendoComboBox({
             placeholder: "Select item..."
         }).data("kendoComboBox");
 
-        equal(combobox.input.val(), "Select item...");
+        assert.equal(combobox.input.val(), "Select item...");
     });
 
-    test("do not set k-readonly if value", function() {
+    it("do not set k-readonly if value", function() {
         var combobox = input.kendoComboBox({
             dataSource: ["text1", "text2"],
             placeholder: "Select item...",
             index: 0
         }).data("kendoComboBox");
 
-        ok(!combobox.input.hasClass("k-readonly"));
+        assert.isOk(!combobox.input.hasClass("k-readonly"));
     });
 
-    asyncTest("set placeholder on blur", 1, function() {
+    it("set placeholder on blur", function(done) {
         var combo = input.kendoComboBox({
             dataTextField: "text",
             dataValueField: "value",
@@ -51,12 +50,12 @@ if (!kendo.support.placeholder) {
         combo.value("");
         combo.input.focus().blur();
         setTimeout(function() {
-            start();
-            equal(combo.input.val(), "Select...");
+            assert.equal(combo.input.val(), "Select...");
+            done();
         }, 300);
     });
 
-    test("set placeholder when clear value with API", 1, function() {
+    it("set placeholder when clear value with API", function() {
         var combo = input.kendoComboBox({
             dataTextField: "text",
             dataValueField: "value",
@@ -66,38 +65,39 @@ if (!kendo.support.placeholder) {
         }).data("kendoComboBox");
 
         combo.value("");
-        equal(combo.input.val(), "Select...");
+        assert.equal(combo.input.val(), "Select...");
     });
 
-    test("setting null as value shows placeholder", function() {
+    it("setting null as value shows placeholder", function() {
         var combobox = input.val("1").kendoComboBox({
             placeholder: "Select..."
         }).data("kendoComboBox");
 
         combobox.value(null);
 
-        equal(combobox.element.val(), "");
+        assert.equal(combobox.element.val(), "");
     });
 } else {
-    test("add placeholder attr to the visible input", function() {
+    it("add placeholder attr to the visible input", function() {
         var combobox = input.attr("placeholder", "test").kendoComboBox({
             placeholder: "Select..."
         }).data("kendoComboBox");
 
-        equal(combobox.input.attr("placeholder"), "Select...");
+        assert.equal(combobox.input.attr("placeholder"), "Select...");
     });
 
-    test("get text from element.placeholder", function() {
+    it("get text from element.placeholder", function() {
         var combobox = input.attr("placeholder", "test").kendoComboBox().data("kendoComboBox");
 
-        equal(combobox.input.attr("placeholder"), "test");
+        assert.equal(combobox.input.attr("placeholder"), "test");
     });
 
-    test("do not set k-readonly class", function() {
+    it("do not set k-readonly class", function() {
         var combobox = input.attr("placeholder", "test").kendoComboBox().data("kendoComboBox");
 
-        ok(!combobox.input.hasClass("k-readonly"));
+        assert.isOk(!combobox.input.hasClass("k-readonly"));
     });
 }
 
-})();
+    });
+}());

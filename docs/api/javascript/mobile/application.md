@@ -3,6 +3,7 @@ title: Application
 page_title: Configuration and methods for Mobile Application widget
 description: How to hide the browser address bar, set the platform which will force on the application, hide/show a loading animation and more in Kendo UI Mobile Application widget.
 res_type: api
+component: application
 ---
 
 # kendo.mobile.Application
@@ -91,6 +92,7 @@ The view model scope. By default, the views will try to resolve their models fro
         modelScope: {
             foo: {
                 onInit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e);
                 }
             }
@@ -109,6 +111,7 @@ The view model scope. By default, the views will try to resolve their models fro
         modelScope: {
             foo: {
                 onInit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e);
                 }
             }
@@ -135,11 +138,11 @@ You can also set platform variants with it (`"android-light"` or `"android-dark"
 
 If set to true, the application router instance will use the [history pushState API](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#The_pushState().C2.A0method).
 
-> The history `pushState` API currently has [limited support across current browsers](http://caniuse.com/#search=pushstate).
+> The history `pushState` API currently has [limited support across current browsers](https://caniuse.com/#search=pushstate).
 
 ### root `String` *(default: "/")*
 
-Applicable if `pushState` is used and the application is deployed to a path different than `/`. If the application start page is hosted on `http://foo.com/myapp/`, the root option should be set to `/myapp/`.
+Applicable if `pushState` is used and the application is deployed to a path different than `/`. If the application start page is hosted on `//foo.com/myapp/`, the root option should be set to `/myapp/`.
 
 ### retina `Boolean`*(default: true)*
 
@@ -483,6 +486,7 @@ Get a reference to the current view.
     <script>
         var app = new kendo.mobile.Application();
         function logCurrentView() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(app.view()); // the foo mobile view instance
         }
     </script>
@@ -506,6 +510,7 @@ Fires after the mobile application is instantiated.
     <script>
         var app = new kendo.mobile.Application(document.body, {
             init: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Kendo UI Mobile application is ready");
             }
         });
@@ -526,6 +531,7 @@ The mobile application binds to the `routeMissing` router event handler, so regi
     <script>
         $(function() {
             var app = new kendo.mobile.Application();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(app.router);
         });
     </script>

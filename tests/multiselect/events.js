@@ -12,36 +12,37 @@
         select.html(options);
     }
 
-    module("kendo.ui.MultiSelect Events", {
-        setup: function() {
+    describe("kendo.ui.MultiSelect Events", function () {
+        beforeEach(function() {
             kendo.ns = "kendo-";
-            select = $("<select multiple/>").appendTo(QUnit.fixture);
+            select = $("<select multiple/>").appendTo(Mocha.fixture);
             populateSelect();
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.ns = "";
             if (select.data("kendoMultiSelect")) {
                 select.data("kendoMultiSelect").destroy();
             }
 
             select.parents(".k-widget").remove();
-        }
-    });
+        });
 
-    test("MultiSelect triggers open event", 1, function() {
+    it("MultiSelect triggers open event", function(done) {
         var multiselect = new MultiSelect(select, {
             open: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             }
         });
 
         multiselect.open();
     });
 
-    test("MultiSelect triggers close event", 1, function() {
+    it("MultiSelect triggers close event", function(done) {
         var multiselect = new MultiSelect(select, {
             close: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             }
         });
 
@@ -49,18 +50,20 @@
         multiselect.close();
     });
 
-    test("MultiSelect triggers dataBound event on refresh", 1, function() {
+    it("MultiSelect triggers dataBound event on refresh", function(done) {
         var multiselect = new MultiSelect(select, {
             dataBound: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             }
         });
     });
 
-    test("MultiSelect raises change event on click", 1, function() {
+    it("MultiSelect raises change event on click", function(done) {
         var multiselect = new MultiSelect(select, {
             change: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             }
         });
 
@@ -68,10 +71,11 @@
         multiselect.ul.children().first().click();
     });
 
-    test("MultiSelect raises change event on enter", 1, function() {
+    it("MultiSelect raises change event on enter", function(done) {
         var multiselect = new MultiSelect(select, {
             change: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             }
         });
 
@@ -82,10 +86,11 @@
         });
     });
 
-    test("MultiSelect raises change event delete", 2, function() {
+    it("MultiSelect raises change event delete", function(done) {
         var multiselect = new MultiSelect(select, {
             change: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             },
             value: ["1", "2"]
         });
@@ -101,10 +106,11 @@
         });
     });
 
-    test("MultiSelect raises change event on delete button", 1, function() {
+    it("MultiSelect raises change event on delete button", function(done) {
         var multiselect = new MultiSelect(select, {
             change: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             },
             value: ["1", "2"]
         });
@@ -112,11 +118,11 @@
         multiselect.tagList.find(".k-i-close").first().click();
     });
 
-    test("MultiSelect raises select event", 2, function() {
+    it("MultiSelect raises select event", function() {
         var multiselect = new MultiSelect(select, {
             select: function(e) {
-                equal(e.dataItem, this.dataSource.view()[0]);
-                equal(e.item[0], this.ul.children().first()[0]);
+                assert.equal(e.dataItem, this.dataSource.view()[0]);
+                assert.equal(e.item[0], this.ul.children().first()[0]);
             }
         });
 
@@ -124,11 +130,11 @@
         multiselect.ul.children().first().click();
     });
 
-    test("MultiSelect raises select event on ENTER", 2, function() {
+    it("MultiSelect raises select event on ENTER", function() {
         var multiselect = new MultiSelect(select, {
             select: function(e) {
-                equal(e.dataItem, this.dataSource.view()[1]);
-                equal(e.item[0], this.ul.children()[1]);
+                assert.equal(e.dataItem, this.dataSource.view()[1]);
+                assert.equal(e.item[0], this.ul.children()[1]);
             }
         });
 
@@ -143,7 +149,7 @@
         });
     });
 
-    test("MultiSelect does not select item if select is prevented", 1, function() {
+    it("MultiSelect does not select item if select is prevented", function() {
         var multiselect = new MultiSelect(select, {
             select: function(e) {
                 e.preventDefault();
@@ -153,14 +159,14 @@
         multiselect.open();
         multiselect.ul.children().first().click();
 
-        equal(multiselect.value().length, 0);
+        assert.equal(multiselect.value().length, 0);
     });
 
-    test("MultiSelect triggers deselect on tag remove", 2, function() {
+    it("MultiSelect triggers deselect on tag remove", function() {
         var multiselect = new MultiSelect(select, {
             deselect: function(e) {
-                equal(e.dataItem, this.dataItems()[0]);
-                equal(e.item[0], this.tagList.children().first()[0]);
+                assert.equal(e.dataItem, this.dataItems()[0]);
+                assert.equal(e.item[0], this.tagList.children().first()[0]);
             },
             value: ["0", "1"]
         });
@@ -168,11 +174,11 @@
         multiselect.tagList.find(".k-i-close").first().click();
     });
 
-    test("MultiSelect triggers deselect on item deselect", 2, function() {
+    it("MultiSelect triggers deselect on item deselect", function() {
         var multiselect = new MultiSelect(select, {
             deselect: function(e) {
-                equal(e.dataItem, this.dataItems()[0]);
-                equal(e.item[0], this.ul.children().first()[0]);
+                assert.equal(e.dataItem, this.dataItems()[0]);
+                assert.equal(e.item[0], this.ul.children().first()[0]);
             },
             value: ["0", "1"]
         });
@@ -181,7 +187,7 @@
         multiselect.ul.children().first().click();
     });
 
-    test("MultiSelect does not allow tag remove if deselected is prevented", 1, function() {
+    it("MultiSelect does not allow tag remove if deselected is prevented", function() {
         var multiselect = new MultiSelect(select, {
             deselect: function(e) {
                 e.preventDefault();
@@ -191,13 +197,13 @@
 
         multiselect.tagList.find(".k-i-close").first().click();
 
-        equal(multiselect.value().length, 2);
+        assert.equal(multiselect.value().length, 2);
     });
 
-    test("MultiSelect does not raise change event when set value using value method", 0, function() {
+    it("MultiSelect does not raise change event when set value using value method", function() {
         var multiselect = new MultiSelect(select, {
             change: function() {
-                ok(false);
+                assert.isOk(false);
             }
         });
 
@@ -207,7 +213,7 @@
         multiselect._change();
     });
 
-    asyncTest("MultiSelect triggers filtering event on data source filter", 3, function() {
+    it("MultiSelect triggers filtering event on data source filter", function(done) {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             dataSource: ["foo", "bar"],
@@ -215,18 +221,18 @@
             filtering: function(e) {
                 var filter = e.filter;
 
-                equal(filter.field, "");
-                equal(filter.operator, "contains");
-                equal(filter.value, "baz");
+                assert.equal(filter.field, "");
+                assert.equal(filter.operator, "contains");
+                assert.equal(filter.value, "baz");
 
-                start();
+                done();
             }
         });
 
         multiselect.search("baz");
     });
 
-    asyncTest("modifying filter expression in filtering event changes datasource result", 2, function() {
+    it("modifying filter expression in filtering event changes datasource result", function(done) {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             dataSource: ["foo", "bar"],
@@ -239,16 +245,16 @@
         multiselect.one("dataBound", function() {
             var data = multiselect.dataSource.view();
 
-            equal(data.length, 1);
-            equal(data[0], "foo");
+            assert.equal(data.length, 1);
+            assert.equal(data[0], "foo");
 
-            start();
+            done();
         });
 
         multiselect.search("baz");
     });
 
-    test("MultiSelect filtering event can be prevented", 0, function() {
+    it("MultiSelect filtering event can be prevented", function() {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             dataSource: ["foo", "bar"],
@@ -259,13 +265,13 @@
         });
 
         multiselect.dataSource.bind("change", function() {
-            ok(false);
+            assert.isOk(false);
         });
 
         multiselect.search("baz");
     });
 
-    asyncTest("MultiSelect triggers filtering when filter is cleared", 1, function() {
+    it("MultiSelect triggers filtering when filter is cleared", function(done) {
         var multiselect = new MultiSelect(select, {
             delay: 0,
             dataSource: ["foo", "bar"],
@@ -274,8 +280,8 @@
 
         multiselect.dataSource.one("change", function() {
             multiselect.bind("filtering", function(e) {
-                start();
-                equal(e.filter, undefined);
+                assert.equal(e.filter, undefined);
+                done();
             });
 
             multiselect.ul.children("li").first().click();
@@ -285,12 +291,13 @@
         multiselect.search("bar");
     });
 
-    test("trigger change event when clear single tag on delete", 1, function() {
+    it("trigger change event when clear single tag on delete", function(done) {
         var multiselect = new MultiSelect(select, {
             tagMode: "single",
             value: [1,2,3],
             change: function() {
-                ok(true);
+                assert.isOk(true);
+                done();
             }
         });
 
@@ -299,4 +306,76 @@
             keyCode: kendo.keys.BACKSPACE
         });
     });
-})();
+
+    it("trigger change event when clear all items", function(done) {
+        var multiselect = new MultiSelect(select, {
+            change: function() {
+                assert.isOk(true);
+                done();
+            },
+            value: ["1", "2"]
+        });
+
+        multiselect.input.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ESC
+        });
+    });
+
+
+    it("element click calls _focusHandler", function(done) {
+        var multiselect = new MultiSelect(select, {});
+
+        multiselect.input.on("focus", function() {
+            assert.isOk(true);
+            done();
+        });
+
+        multiselect.element.click();
+    });
+
+    it("MultiSelect triggers deselect on tag remove in single tagMode", function(done) {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            deselect: function(e) {
+                assert.equal(e.dataItem, this.dataItems()[0]);
+                assert.equal(e.item[0], this.tagList.children().first()[0]);
+                done();
+            },
+            value: ["1"]
+        });
+
+        multiselect._clearValue();
+    });
+
+    it("MultiSelect triggers deselect for every item on tag remove in single tagMode", function() {
+        var callCount = 0;
+
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            deselect: function() {
+                callCount += 1;
+            },
+            value: ["0", "1"]
+        });
+
+        multiselect._clearValue();
+
+        assert.equal(callCount, 2);
+    });
+
+    it("MultiSelect does not allow tag remove if deselected is prevented in single tagMode", function() {
+        var multiselect = new MultiSelect(select, {
+            tagMode: "single",
+            deselect: function(e) {
+                e.preventDefault();
+            },
+            value: ["0", "1"]
+        });
+
+        multiselect._clearValue();
+
+        assert.equal(multiselect.value().length, 2);
+    });
+    });
+}());

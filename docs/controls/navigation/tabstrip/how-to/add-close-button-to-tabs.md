@@ -13,12 +13,12 @@ The milestones of the approach are:
 
 * The buttons must be placed in a `<span>` element, which wraps the whole tab text.
 * When adding a new tab with a button programmatically, `encoded` should be set to `false`.
-* The [`tabGroup`](/api/javascript/ui/tabstrip#fields-tabGroup) field. and the [`append`](/api/javascript/ui/tabstrip#methods-append) and [`remove`](/api/javascript/ui/tabstrip#methods-remove) TabStrip methods are used.
+* The [`tabGroup`](/api/javascript/ui/tabstrip#fields-tabgroup) field. and the [`append`](/api/javascript/ui/tabstrip/methods/append) and [`remove`](/api/javascript/ui/tabstrip/methods/remove) TabStrip methods are used.
 * A `data-type="remove"` attribute is used to distinguish the tab remove buttons.
 
-###### Example
 
-```html
+
+```dojo
 <style>
 
   .k-tabstrip-items li .k-button {
@@ -79,8 +79,6 @@ The milestones of the approach are:
 ```
 
 ## See Also
-
-Other articles on the Kendo UI TabStrip:
 
 * [TabStrip JavaScript API Reference](/api/javascript/ui/tabstrip)
 * [How to Display Buttons at the Bottom]({% slug howto_displaybuttonsatthebottom_tabstrip %})

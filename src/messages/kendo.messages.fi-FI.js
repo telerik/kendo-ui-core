@@ -176,6 +176,7 @@ if (kendo.ui.FilterMenu) {
 kendo.ui.FilterMenu.prototype.options.messages =
 $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "info": "Näytä tulokset, joiden arvo:",
+  "title": "Näytä tulokset, joiden arvo",
   "isTrue": "on",
   "isFalse": "ei ole",
   "filter": "Suodata",
@@ -327,6 +328,26 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "Kaikki",
+  "display": "{0} - {1} yht. {2} tuloksesta",
+  "empty": "Ei tuloksia",
+  "page": "Sivu",
+  "of": "/ {0}",
+  "itemsPerPage": "tulosta sivulla",
+  "first": "Ensimmäinen sivu",
+  "previous": "Edellinen sivu",
+  "next": "Seuraava sivu",
+  "last": "Viimeinen sivu",
+  "refresh": "Päivitä",
+  "morePages": "Lisää sivuja"
+});
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "Kaikki",
   "display": "{0} - {1} yht. {2} tuloksesta",
   "empty": "Ei tuloksia",
@@ -621,7 +642,7 @@ $.extend(true, kendo.spreadsheet.messages.dialogs,{
       "typeMessage": "Tyypin viesti"
     }
   },
-  "saveAsDialog": {
+  "exportAsDialog": {
     "title": "Tallenna nimellä...",
     "labels": {
       "fileName": "Tiedostonimi",

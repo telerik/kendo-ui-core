@@ -3,6 +3,7 @@ title: Slider
 page_title: Configuration, methods and events of Kendo UI Slider
 description: Configuration of Slider UI control, different methods, and events, triggered when the slider value changes upon specific conditions.
 res_type: api
+component: slider
 ---
 
 # kendo.ui.Slider
@@ -28,7 +29,7 @@ The title of the increase button of the **Slider**.
 The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
 handle must be focused). Note: `largeStep` will also set a large tick for every large step.
 
-Must be a positive number, larger than [smallStep](#configuration-smallStep).
+Must be a positive number, larger than [smallStep](/api/javascript/ui/slider#configuration-smallStep).
 
 ### max `Number`*(default: 10)*
 
@@ -230,6 +231,7 @@ The max value to set.
 
     var max = slider.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -268,6 +270,7 @@ The min value to set.
 
     var min = slider.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -335,6 +338,7 @@ a number representing the underlying value.
 	  
     var slider = $("#slider").data("kendoSlider");
     var sliderValue = slider.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
 	console.log(sliderValue);
 	
     </script>

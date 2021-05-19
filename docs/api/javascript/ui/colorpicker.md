@@ -2,6 +2,7 @@
 title: ColorPicker
 page_title: Configuration, methods and events of Kendo UI ColorPicker
 res_type: api
+component: color-picker
 ---
 
 # kendo.ui.ColorPicker
@@ -19,35 +20,35 @@ the DOM.
 
 Specifies whether the widget should display the Apply / Cancel buttons.
 
-Applicable only for the HSV selector, when a [`pallete`](#configuration-palette) is not specified.
+Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is not specified.
 
 #### Example
 
     <input id="colorpicker" type="color" />
     <script>
-    $("#colorpicker").kendoColorPicker({
-      buttons: false
-    })
+      $("#colorpicker").kendoColorPicker({
+        buttons: false
+      })
     </script>
 
 ### clearButton `Boolean` *(default: false)*
 
 Specifies whether the widget should display the 'Clear color' button.
 
-Applicable only for the HSV selector, when a [`pallete`](#configuration-palette) is not specified.
+Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is not specified.
 
 #### Example
 
     <input id="colorpicker" type="color" />
     <script>
-    $("#colorpicker").kendoColorPicker({
-      clearButton: false
-    });
+      $("#colorpicker").kendoColorPicker({
+        clearButton: true
+      });
     </script>
 
 ### columns `Number`
 
-The number of columns to show in the color dropdown when a [`pallete`](#configuration-palette) is specified.
+The number of columns to show in the color dropdown when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is specified.
 This is automatically initialized for the "basic" and "websafe" palettes.
 If you use a custom palette then you can set this to some value that makes sense for your colors.
 
@@ -391,6 +392,7 @@ The value of the colorpicker.
     <script>
     $("#colorpicker").kendoColorPicker({
       change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The picked color is ", e.value);
       }
     });
@@ -401,6 +403,7 @@ The value of the colorpicker.
     <div id="colorpicker"></div>
     <script>
     function picker_change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The picked color is ", e.value);
     }
     $("#colorpicker").kendoColorPicker();
@@ -426,6 +429,7 @@ The value of the colorpicker.
     <script>
     $("#colorpicker").kendoColorPicker({
       select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The selected color is ", e.value);
       }
     });
@@ -436,6 +440,7 @@ The value of the colorpicker.
     <div id="colorpicker"></div>
     <script>
     function picker_select(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The selected color is ", e.value);
     }
     $("#colorpicker").kendoColorPicker();
@@ -453,6 +458,7 @@ Fires when the picker popup is opening.
     <script>
     $("#colorpicker").kendoColorPicker({
       open: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Picker popup opened");
       }
     });
@@ -463,6 +469,7 @@ Fires when the picker popup is opening.
     <div id="colorpicker"></div>
     <script>
     function picker_open() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Picker popup opened");
     }
     $("#colorpicker").kendoColorPicker();
@@ -480,6 +487,7 @@ Fires when the picker popup is closing.
     <script>
     $("#colorpicker").kendoColorPicker({
       close: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Picker popup closed");
       }
     });
@@ -490,6 +498,7 @@ Fires when the picker popup is closing.
     <div id="colorpicker"></div>
     <script>
     function picker_close() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("Picker popup closed");
     }
     $("#colorpicker").kendoColorPicker();

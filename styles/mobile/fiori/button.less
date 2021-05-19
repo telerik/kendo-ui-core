@@ -1,0 +1,54 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+// Button
+
+.km-fiori .km-button
+{
+    padding: .5em .8em;
+    border-style: solid;
+    border-width: @fiori-border-width;
+    border-radius: @fiori-border-radius;
+}
+
+// Badges and Details
+
+.km-fiori .km-badge,
+.km-fiori .km-detail
+{
+    border: 0;
+    min-width: 2em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 5em;
+    font-size: .8em;
+}
+
+.km-fiori .km-detail
+{
+    min-width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-width: @fiori-border-width;
+    border-style: solid;
+}
+
+.km-fiori .km-detaildisclose
+{
+    min-width: 2em;
+    height: 2em;
+    line-height: 2em;
+}
+
+.km-fiori .km-detaildisclose:after,
+.km-fiori .km-detaildisclose:before
+{
+    left: .1em;
+    top: 0.35em;
+}
+
+.km-fiori .km-detail .km-icon:before
+{
+    display: none;
+}

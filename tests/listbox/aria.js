@@ -4,9 +4,9 @@
         listA;
 
 
-    module("ListBox aria", {
-        setup: function() {
-            var element = $('<select id="listA"></select>').appendTo(QUnit.fixture);
+    describe("ListBox aria", function () {
+        beforeEach(function() {
+            var element = $('<select id="listA"></select>').appendTo(Mocha.fixture);
 
             listA  = createListBoxWithToolbar({
                     dataSource: [ { name: "Tim", id:4 }, { name: "Johny", id:5 }, { name: "Dicky", id:6 }],
@@ -15,21 +15,20 @@
                     navigatable: true
             }, element);
 
-            $(document.body).append(QUnit.fixture);
-        },
-        teardown: function() {
+            $(document.body).append(Mocha.fixture);
+        });
+        afterEach(function() {
             if(listA) {
               listA.destroy();
             }
-            kendo.destroy(QUnit.fixture);
-        }
+            kendo.destroy(Mocha.fixture);
+        });
+
+    it("List has a data role set", function() {
+        assert.isOk(listA._getList().attr("role") === "listbox");
     });
 
-    test("List has a data role set", 1, function() {
-        ok(listA._getList().attr("role") === "listbox");
-    });
-
-    test("All items have id and role set", 1, function() {
+    it("All items have id and role set", function() {
         var allSet = true;
         listA.items().each(function () {
             if(!$(this).attr("id") || $(this).attr("role") !== "option") {
@@ -37,46 +36,47 @@
             }
         });
 
-        ok(allSet === true);
+        assert.isOk(allSet === true);
     });
 
-    test("aria-activedescendant is properly set", 1, function() {
+    it("aria-activedescendant is properly set", function() {
         listA.focus();
         listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-        ok(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
+        assert.isOk(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
     });
 
-    test("aria-activedescendant is properly set", 1, function() {
+    it("aria-activedescendant is properly set", function() {
         listA.focus();
         listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-        ok(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
+        assert.isOk(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
     });
 
-    test("blur clears aria-activedescendant", 1, function() {
+    it("blur clears aria-activedescendant", function() {
         listA.focus();
         listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
         listA._blur();
-        ok(!listA._getList().attr("aria-activedescendant"));
+        assert.isOk(!listA._getList().attr("aria-activedescendant"));
     });
 
-    test("click sets aria-activedescendant", 1, function() {
+    it("click sets aria-activedescendant", function() {
         listA._click({ currentTarget: listA.items().first() });
-        ok(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
+        assert.isOk(listA._getList().attr("aria-activedescendant") === listA.items().first().attr("id"));
     });
 
-    test("toolbar's tools have aria-label", function () {
+    it("toolbar's tools have aria-label", function () {
         var toolsButtons = listA.toolbar.element.find("a.k-button");
         var ariaLabelAttr = "aria-label";
 
-        equal(toolsButtons.filter('[data-command="remove"]').attr(ariaLabelAttr), "Delete");
-        equal(toolsButtons.filter('[data-command="moveUp"]').attr(ariaLabelAttr), "Move Up");
-        equal(toolsButtons.filter('[data-command="moveDown"]').attr(ariaLabelAttr), "Move Down");
-        equal(toolsButtons.filter('[data-command="transferTo"]').attr(ariaLabelAttr), "Transfer To");
-        equal(toolsButtons.filter('[data-command="transferFrom"]').attr(ariaLabelAttr), "Transfer From");
-        equal(toolsButtons.filter('[data-command="transferAllTo"]').attr(ariaLabelAttr), "Transfer All To");
-        equal(toolsButtons.filter('[data-command="transferAllFrom"]').attr(ariaLabelAttr), "Transfer All From");
+        assert.equal(toolsButtons.filter('[data-command="remove"]').attr(ariaLabelAttr), "Delete");
+        assert.equal(toolsButtons.filter('[data-command="moveUp"]').attr(ariaLabelAttr), "Move Up");
+        assert.equal(toolsButtons.filter('[data-command="moveDown"]').attr(ariaLabelAttr), "Move Down");
+        assert.equal(toolsButtons.filter('[data-command="transferTo"]').attr(ariaLabelAttr), "Transfer To");
+        assert.equal(toolsButtons.filter('[data-command="transferFrom"]').attr(ariaLabelAttr), "Transfer From");
+        assert.equal(toolsButtons.filter('[data-command="transferAllTo"]').attr(ariaLabelAttr), "Transfer All To");
+        assert.equal(toolsButtons.filter('[data-command="transferAllFrom"]').attr(ariaLabelAttr), "Transfer All From");
     });
 
-})();
+    });
+}());

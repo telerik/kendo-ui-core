@@ -9,9 +9,9 @@ slug: howto_globally_modify_default_options_datepicker
 
 The following example demonstrates how to globally modify the default options in the DatePicker.
 
-###### Example
 
-```html
+
+```dojo
     <input id="datepicker" value="10/10/2011" style="width:150px;" />
     <br />
     <br />

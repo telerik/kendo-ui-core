@@ -36,7 +36,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -64,7 +64,7 @@ If the `dataSource` option is an existing [kendo.data.PivotDataSource](/api/java
                 cube: "Adventure Works"
             },
             discover: {
-                url: "http://demos.telerik.com/olap/msmdpump.dll",
+                url: "https://demos.telerik.com/olap/msmdpump.dll",
                 dataType: "text",
                 contentType: "text/xml",
                 type: "POST"
@@ -101,7 +101,7 @@ If set to `true` the user will be able to filter by using the field menu.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -137,7 +137,7 @@ Can be set to a JavaScript object which represents the sorting configuration.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -173,7 +173,7 @@ If set to `true` the user can get the widget in unsorted state by clicking the s
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -207,7 +207,7 @@ The height of the PivotConfigurator. Numeric values are treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -237,7 +237,7 @@ The height of the PivotConfigurator. Numeric values are treated as pixels.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -279,7 +279,7 @@ The text messages displayed in the fields sections.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -315,7 +315,7 @@ The text messages displayed in the measure fields sections.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -351,7 +351,7 @@ The text messages displayed in the column fields sections.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -387,7 +387,7 @@ The text messages displayed in the row fields sections.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -423,7 +423,7 @@ The text messages displayed for measure label.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -459,7 +459,7 @@ The text messages displayed for rows label.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -495,7 +495,7 @@ The text messages displayed for column label.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -531,7 +531,7 @@ The text messages displayed for fields label.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -579,7 +579,7 @@ The text messages displayed in the field menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -618,7 +618,7 @@ The text messages displayed in fields filter.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -657,7 +657,7 @@ The text message displayed for the menu item which performs ascending sort.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -696,7 +696,7 @@ The text message displayed for the menu item which performs descending sort.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -735,7 +735,7 @@ The text messages of the fields filter menu item.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -774,7 +774,7 @@ The text messages of the filter button.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -813,7 +813,7 @@ The text messages of the include menu item.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -852,7 +852,7 @@ The title of the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -891,7 +891,7 @@ The text of the clear filter expressions button.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -930,7 +930,7 @@ The text of the OK button in the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -969,7 +969,7 @@ The text of the cancel button in the include fields dialog.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1015,7 +1015,7 @@ The text of the filter operators displayed in the filter menu.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1056,7 +1056,7 @@ The text of the "contains" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1097,7 +1097,7 @@ The text of the "Does not contain" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1138,7 +1138,7 @@ The text of the "Starts with" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1179,7 +1179,7 @@ The text of the "Ends with" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1220,7 +1220,7 @@ The text of the "equal" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1261,7 +1261,7 @@ The text of the "not equal" filter operator.
                     cube: "Adventure Works"
                 },
                 read: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1278,11 +1278,11 @@ The text of the "not equal" filter operator.
 
 ### dataSource `kendo.data.PivotDataSource`
 
-The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/pivotdatasource) of the widget. Configured via the [dataSource](/api/javascript/ui/pivotconfigurator/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/pivotconfigurator/methods/setdatasource) method instead.
 
 #### Example - get reference to the widget data source
 
@@ -1300,7 +1300,7 @@ The [data source](/api/javascript/data/pivotdatasource) of the widget. Configure
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1340,7 +1340,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1376,7 +1376,7 @@ Refresh widget content
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1406,32 +1406,31 @@ The data source to which the widget should be bound.
 
     <div id="configurator"></div>
     <script>
-    $("#configurator").kendoPivotConfigurator({
-        dataSource: {
-            type: "xmla",
-            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
-            rows: [{ name: "[Product].[Product]" }],
-            measures: ["[Measures].[Internet Sales Amount]"],
-            transport: {
-                connection: {
-                    catalog: "Adventure Works DW 2008R2",
-                    cube: "Adventure Works"
+        $("#configurator").kendoPivotConfigurator({
+            dataSource: {
+                type: "xmla",
+                columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+                rows: [{ name: "[Product].[Product]" }],
+                measures: ["[Measures].[Internet Sales Amount]"],
+                transport: {
+                    connection: {
+                        catalog: "Adventure Works DW 2008R2",
+                        cube: "Adventure Works"
+                    },
+                    discover: {
+                        url: "https://demos.telerik.com/olap/msmdpump.dll",
+                        dataType: "text",
+                        contentType: "text/xml",
+                        type: "POST"
+                    }
                 },
-                discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
-                    dataType: "text",
-                    contentType: "text/xml",
-                    type: "POST"
+                schema: {
+                    type: "xmla"
                 }
-            },
-            schema: {
-                type: "xmla"
             }
-        }
-    });
+        });
 
-    var dataSource = kendo.data.PivotDataSource({
-        dataSource: {
+        var dataSource = new kendo.data.PivotDataSource({
             type: "xmla",
             columns: [{ name: "[Date].[Calendar]", expand: true }],
             rows: [{ name: "[Product].[Product]" }],
@@ -1442,7 +1441,7 @@ The data source to which the widget should be bound.
                     cube: "Adventure Works"
                 },
                 discover: {
-                    url: "http://demos.telerik.com/olap/msmdpump.dll",
+                    url: "https://demos.telerik.com/olap/msmdpump.dll",
                     dataType: "text",
                     contentType: "text/xml",
                     type: "POST"
@@ -1451,10 +1450,11 @@ The data source to which the widget should be bound.
             schema: {
                 type: "xmla"
             }
-        }
-    });
+        });
 
-    var configurator = $("#configurator").data("kendoPivotConfigurator");
-    configurator.setDataSource(dataSource);
+        setTimeout(function(){
+            var configurator = $("#configurator").data("kendoPivotConfigurator");
+            configurator.setDataSource(dataSource);
+        }, 2000);
     </script>
 

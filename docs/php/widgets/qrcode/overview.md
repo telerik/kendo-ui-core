@@ -20,14 +20,14 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 **Step 2** Add a [QRCode](/api/php/Kendo/Dataviz/UI/QRCode).
 
-###### Example
+
 
         $qrcode = new \Kendo\Dataviz\UI\QRCode('qrcode');
         $qrcode->value("foo");
 
-**Step 3** Choose the appropriate [error correction level](/api/javascript/dataviz/ui/qrcode#configuration-errorCorrection) and [encoding](/api/javascript/dataviz/ui/qrcode#configuration-encoding).
+**Step 3** Choose the appropriate [error correction level](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) and [encoding](/api/javascript/dataviz/ui/qrcode/configuration/encoding).
 
-###### Example
+
 
         $qrcode = new \Kendo\Dataviz\UI\QRCode('qrcode');
         $qrcode->value("foo")
@@ -36,7 +36,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 **Step 4** Output the QRCode by echoing the result of the `render` method.
 
-###### Example
+
 
         echo $qrcode->render();
 
@@ -44,9 +44,9 @@ Below are listed the steps for you to follow when configuring the Kendo UI QRCod
 
 ### Client-Side Instances
 
-You are able to reference an existing QRCode instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [QRCode API](/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
+You are able to reference an existing QRCode instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [QRCode API](/api/javascript/dataviz/ui/qrcode#methods) to control its behavior.
 
-###### Example
+
 
         //Put this after your Kendo QRCode for PHP render() call
         <script>
@@ -57,8 +57,6 @@ You are able to reference an existing QRCode instance via the [`jQuery.data()`](
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for PHP and on the QRCode:
 
 * [Overview of the Kendo UI QRCode Widget]({% slug overview_kendoui_qrcode_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

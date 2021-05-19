@@ -1,26 +1,22 @@
 ---
-title: Colspan and Rowspan
-page_title: Colspan and Rowspan | Kendo UI Excel Export
+title: Expanding Cells across Rows and Columns
+page_title: Expanding Cells across Rows and Columns | Kendo UI Excel Export
 description: "Learn how to make a cell occupy more than one column or row when exporting a Kendo UI component to Excel."
 slug: colaspanandrowspan_excelexport_kendoui
 position: 5
 ---
 
-# Colspan and Rowspan
+# Expanding Cells
 
-By default, a cell is displayed in a single row and column. However, you are able to make a cell occupy more than one row or column, as explained in this article.
+By default, a cell is displayed in a single row and column.
 
-## Extend Cells to More Than One Column or Row
+However, you can configure a cell to occupy more than one row or column.
 
-### Set the colSpan
+## Spanning across Columns
 
-Set the [`colSpan`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.colSpan) option to make a cell occupy more than one column. When done, all cells that follow shift to the right with the same number of columns as defined by the `colSpan`.
+To expand a cell across two or more columns, set the [`colSpan`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.colspan) option. As a result, all cells will follow shift to the right with the same number of columns as defined by the `colSpan`.
 
-The example below demonstrates how to make a cell occupy three columns.
-
-###### Example
-
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -42,15 +38,11 @@ kendo.saveAs({
 </script>
 ```
 
-### Set the rowSpan
+## Spanning across Rows
 
-Set the [`rowSpan`](/api/javascript/ooxml/workbook#configuration-sheets.rows.cells.rowSpan) option to make a cell occupy more than one row.
+To expand a cell across two or more rows, set the [`rowSpan`](/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.rowspan) option.
 
-The example below demonstrates how to make a cell occupy two rows.
-
-###### Example
-
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -77,15 +69,11 @@ kendo.saveAs({
 </script>
 ```
 
-## Extend Cells to More Than One Column and Row
+## Spanning across Rows and Columns
 
-### Set Both Colspan and Rowspan
+To span a cell across two or more rows and columns simultaneously, use both the `colSpan` and `rowSpan` options.
 
-Setting both `colSpan` and `rowSpan` is also supported, as demonstrated in the example below.
-
-###### Example
-
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -109,11 +97,9 @@ kendo.saveAs({
 
 ## See Also
 
-Articles on the Excel export functionality in Kendo UI:
-
 * [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
-* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
-* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
-* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
-* [Create Multiple Sheets]({% slug sheets_excelexport_kendoui %})
-* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})
+* [Customizing the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Freezing Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Setting the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Creating Multiple Sheets]({% slug sheets_excelexport_kendoui %})
+* [Exporting the Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})

@@ -1,6 +1,6 @@
 /* exported createInput */
 function createInput() {
-    return $("<input />").appendTo(QUnit.fixture);
+    return $("<input />").appendTo(Mocha.fixture);
 }
 
 /* exported updateInputAt */
@@ -21,14 +21,14 @@ function updateInput(masked, updated) {
 /* exported updateChars */
 function updateChars(masked, updated) {
     var chars = updated.split("");
-    for(var i = 0; i < chars.length; i++) {
+    for (var i = 0; i < chars.length; i++) {
         updateInputAt(masked, chars[i], i);
     }
 }
 
 /* exported createMasked */
 function createMasked(input, mask) {
-    var isMask = typeof(mask) === "string";
+    var isMask = typeof (mask) === "string";
     var opts = isMask ? { mask: mask } : mask;
     var masked = new kendo.ui.MaskedTextBox(input, opts);
 
@@ -53,6 +53,6 @@ function deleteBackwards(masked, pos, length) {
     input.value = value.substring(0, Math.max(pos - l, 0)) + value.substring(pos);
     //chrome 58 fails when we try to set selectionStart to -1;
     //make sure it is not smaller than 0
-    kendo.caret(input, Math.max(pos - l, 0)); 
+    kendo.caret(input, Math.max(pos - l, 0));
     masked.inputChange(true);
 }

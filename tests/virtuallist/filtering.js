@@ -47,9 +47,9 @@
         { id: 30, value: 30, text: "Item 30", letter: "a" }
     ];
 
-    module("VirtualList Filtering: ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("VirtualList Filtering: ", function() {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -92,224 +92,168 @@
                     o.success(o.value);
                 }
             });
-        },
-
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-            QUnit.fixture.empty();
-        }
-    });
-
-    //rendering
-
-    asyncTest("items are rendered after data is filtered", 1, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.items().first().text(), "Item 1 b");
-            });
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
-    });
 
-    asyncTest("itemCount changes after filtering", 2, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.itemCount, 9);
-            });
-            equal(virtualList.itemCount, 16);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+            Mocha.fixture.empty();
         });
-    });
 
-    asyncTest("itemCount changes after filtering", 2, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.itemCount, 9);
-            });
-            equal(virtualList.itemCount, 16);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-        });
-    });
+        //rendering
 
-    asyncTest("list renders only the required amount of item placeholders after filtering", 2, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.items().length, 9);
-            });
-            equal(virtualList.items().length, 16);
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-        });
-    });
-
-    asyncTest("works if the dataSource is filtered before list is created", 2, function() {
-        asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-        virtualList.one("listBound", function() {
-            start();
-            equal(virtualList.items().length, 9);
-            equal(virtualList.items().first().text(), "Item 0 a");
-        });
-    });
-
-    asyncTest("sets the correct container height after filtering", 1, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.heightContainer.offsetHeight, 9 * 50);
-            });
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-        });
-    });
-
-    asyncTest("can be scrolled after dataSource is filtered", 1, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                scroll(virtualList.content, 4 * CONTAINER_HEIGHT);
-                equal(virtualList.items().last().text(), "Item 29 b");
-            });
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
-        });
-    });
-
-    asyncTest("does not clear the values after filtering", 1, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
-                start();
-                equal(virtualList.value()[0], 0);
-            });
-            virtualList.value([0]).done(function() {
+        it("items are rendered after data is filtered", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    assert.equal(virtualList.items().first().text(), "Item 1 b");
+                    done();
+                });
                 asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
             });
         });
-    });
 
-    asyncTest("removes selection when dataSource is filtered", 2, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
+        it("itemCount changes after filtering", function(done) {
+            asyncDataSource.read().then(function() {
                 virtualList.one("listBound", function() {
-                    start();
-                    ok(virtualList.items().first().hasClass(SELECTED), "item is selected");
+                    assert.equal(virtualList.itemCount, 9);
+                    done();
                 });
-                ok(!virtualList.items().first().hasClass(SELECTED), "item is selected");
-                asyncDataSource.filter([]);
+                assert.equal(virtualList.itemCount, 16);
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
             });
-            virtualList.select(virtualList.items().first());
+        });
+
+        it("itemCount changes after filtering", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    assert.equal(virtualList.itemCount, 9);
+                    done();
+                });
+                assert.equal(virtualList.itemCount, 16);
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+            });
+        });
+
+        it("list renders only the required amount of item placeholders after filtering", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    assert.equal(virtualList.items().length, 9);
+                    done();
+                });
+                assert.equal(virtualList.items().length, 16);
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+            });
+        });
+
+        it("works if the dataSource is filtered before list is created", function(done) {
             asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
-        });
-    });
-
-    asyncTest("select the correct item after filter is cleared", 2, function() {
-        var dataSource = new kendo.data.DataSource({
-            transport: {
-                read: function(options) {
-                    setTimeout(function() {
-                        options.success(data);
-                    }, 0);
-                }
-            }
-        });
-
-        virtualList.setDataSource(dataSource);
-
-        dataSource.read().then(function() {
             virtualList.one("listBound", function() {
+                assert.equal(virtualList.items().length, 9);
+                assert.equal(virtualList.items().first().text(), "Item 0 a");
+                done();
+            });
+        });
+
+        it("sets the correct container height after filtering", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    assert.equal(virtualList.heightContainer.offsetHeight, 9 * 50);
+                    done();
+                });
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+            });
+        });
+
+        it("can be scrolled after dataSource is filtered", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    scroll(virtualList.content, 4 * CONTAINER_HEIGHT);
+                    assert.equal(virtualList.items().last().text(), "Item 29 b");
+                    done();
+                });
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+            });
+        });
+
+        it("does not clear the values after filtering", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    assert.equal(virtualList.value()[0], 0);
+                    done();
+                });
+                virtualList.value([0]).done(function() {
+                    asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+                });
+            });
+        });
+
+        it("highlight selected items when dataSource is filtered", function(done) {
+            asyncDataSource.read().then(function() {
                 virtualList.one("listBound", function() {
                     virtualList.one("listBound", function() {
-                        start();
-                        equal(virtualList.items().find(".k-state-selected").length, 0);
-                        deepEqual(virtualList.select(), [17]);
+                        assert.isOk(virtualList.items().first().hasClass(SELECTED), "item is selected");
+                        done();
                     });
-                    dataSource.filter([]);
+                    assert.isOk(virtualList.items().first().hasClass(SELECTED), "item is selected");
+                    asyncDataSource.filter([]);
                 });
-                virtualList.select(11);
+                virtualList.select(virtualList.items().first()).then(function() {
+                    asyncDataSource.filter({ field: "letter", operator: "eq", value: "a" });
+                });
             });
-            dataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
-    });
 
-    //TODO: Improve as it is unstable in Travis
-    /*
-    asyncTest("does not fetch negative page on scroll and filter", 2, function() {
-        var requestOptions;
-        var dataSource = new kendo.data.DataSource({
-            transport: {
-                read: function(options) {
-                    requestOptions = options;
-
-                    setTimeout(function() {
-                        var filter = options.data.filter;
-                        var myData;
-
-                        if (filter) {
-                            var filterValue = options.data.filter.filters[0].value;
-                            myData = data.filter(function(item) {
-                                return item.letter === filterValue;
-                            });
-                        } else {
-                            myData = data;
-                        }
-
-                        options.success({ data: myData.slice(options.data.skip, options.data.skip + options.data.take), total: myData.length });
-                    }, 0);
+        it("select the correct item after filter is cleared", function(asyncDone) {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: function(options) {
+                        setTimeout(function() {
+                            options.success(data);
+                        }, 0);
+                    }
                 }
-            },
-            serverPaging: true,
-            serverFiltering: true,
-            pageSize: 80,
-            schema: {
-                data: "data",
-                total: "total"
-            }
-        });
-
-        virtualList.setDataSource(dataSource);
-
-        dataSource.read().then(function() {
-            virtualList.bind("listBound", function() {
-                start();
-
-                var skip = requestOptions.data.skip;
-
-                notEqual(1/skip, -Infinity);
-                ok(skip >= 0);
             });
 
-            virtualList.focus(30);
+            virtualList.setDataSource(dataSource);
 
-            stub(dataSource, {
-                total: function() { return 1; } //return less items
-            });
-
-            dataSource.filter({ field: "letter", operator: "eq", value: "b" });
-        });
-    });*/
-
-    asyncTest("throws ListBound event after filter is cleared", 1, function() {
-        asyncDataSource.read().then(function() {
-            virtualList.one("listBound", function() {
+            dataSource.read().done(function() {
                 virtualList.one("listBound", function() {
-                   start();
-                   ok(true, "listBound is fired");
+                    virtualList.select(11).done(function () {
+                        virtualList.one("listBound", function() {
+                            assert.equal(0, virtualList.items().find(".k-state-selected").length);
+                            assert.deepEqual([17], virtualList.select());
+                            asyncDone();
+                        });
+                        dataSource.filter([]);
+                    });
                 });
-                asyncDataSource.filter([]);
+                dataSource.filter({ field: "letter", operator: "eq", value: "b" });
             });
-            asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
         });
+
+        it("throws ListBound event after filter is cleared", function(done) {
+            asyncDataSource.read().then(function() {
+                virtualList.one("listBound", function() {
+                    virtualList.one("listBound", function() {
+                        assert.isOk(true, "listBound is fired");
+                        done();
+                    });
+                    asyncDataSource.filter([]);
+                });
+                asyncDataSource.filter({ field: "letter", operator: "eq", value: "b" });
+            });
+        });
+
     });
 
     var localDataSource;
 
-    module("VirtualList Filtering (local data): ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("VirtualList Filtering (local data): ", function() {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             var data = [], i;
-            for(i = 0; i < 5000; i++) {
-                data.push({text: 'Item ' + i, value: i.toString()});
+            for (i = 0; i < 5000; i++) {
+                data.push({ text: 'Item ' + i, value: i.toString() });
             }
 
             localDataSource = new kendo.data.DataSource({
@@ -348,115 +292,115 @@
                     options.success(res);
                 }
             });
-        },
-
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-            QUnit.fixture.empty();
-        }
-    });
-
-    asyncTest("displays result after subsequent filtering", 3, function() {
-        virtualList.one("listBound", function() {
-            equal(this.items().first().text(), "Item 200");
         });
-        localDataSource.filter({field: "text", operator: "contains", value: "200"});
 
-        virtualList.one("listBound", function() {
-            equal(this.items().first().text(), "Item 0");
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+            Mocha.fixture.empty();
         });
-        localDataSource.filter([]);
 
-        virtualList.one("listBound", function() {
-            equal(this.items().first().text(), "Item 1234");
-
-            start();
-        });
-        localDataSource.filter({field: "text", operator: "contains", value: "1234"});
-    });
-
-    asyncTest("set focus to the first item after subsequent filtering", 1, function() {
-        localDataSource.filter({field: "text", operator: "contains", value: "200"});
-
-        localDataSource.filter([]);
-
-        virtualList.one("listBound", function() {
-            equal(this.focus().first().text(), "Item 1234");
-
-            start();
-        });
-        localDataSource.filter({field: "text", operator: "contains", value: "1234"});
-    });
-
-    asyncTest("selects item that was previously selected after filter is cleared", 1, function() {
-        virtualList.one("listBound", function() {
-            virtualList.select(0).done(function() {
-                virtualList.one("listBound", function() {
-                    start();
-                    ok(virtualList.items().eq(0).hasClass("k-state-selected"));
-                });
-
-                localDataSource.filter([]);
+        it("displays result after subsequent filtering", function(done) {
+            virtualList.one("listBound", function() {
+                assert.equal(this.items().first().text(), "Item 200");
             });
+            localDataSource.filter({ field: "text", operator: "contains", value: "200" });
+
+            virtualList.one("listBound", function() {
+                assert.equal(this.items().first().text(), "Item 0");
+            });
+            localDataSource.filter([]);
+
+            virtualList.one("listBound", function() {
+                assert.equal(this.items().first().text(), "Item 1234");
+
+                done();
+            });
+            localDataSource.filter({ field: "text", operator: "contains", value: "1234" });
         });
 
-        localDataSource.filter({field: "text", operator: "contains", value: "0"});
-    });
+        it("set focus to the first item after subsequent filtering", function(done) {
+            localDataSource.filter({ field: "text", operator: "contains", value: "200" });
 
-    asyncTest("resets pageSize after filters are cleared", 1, function() {
-        localDataSource.filter({field: "text", operator: "contains", value: "200"});
-        localDataSource.range(0, 8);
+            localDataSource.filter([]);
 
-        virtualList.one("listBound", function() {
-            start();
-            equal(virtualList.dataSource.pageSize(), 16);
+            virtualList.one("listBound", function() {
+                assert.equal(this.focus().first().text(), "Item 1234");
+
+                done();
+            });
+            localDataSource.filter({ field: "text", operator: "contains", value: "1234" });
         });
 
-        localDataSource.filter([]);
-    });
+        it("selects item that was previously selected after filter is cleared", function(done) {
+            virtualList.one("listBound", function() {
+                virtualList.select(0).done(function() {
+                    virtualList.one("listBound", function() {
+                        assert.isOk(virtualList.items().eq(0).hasClass("k-state-selected"));
+                        done();
+                    });
 
-    asyncTest("clear selected values when list is filtered", 4, function() {
-        var container = $("<div/>").appendTo(QUnit.fixture);
-        var virtualList = new VirtualList(container, {
-            dataSource: localDataSource,
-            template: "#=text#",
-            dataValueField: "value",
-            height: CONTAINER_HEIGHT,
-            itemHeight: ITEM_HEIGHT,
-            selectable: "multiple",
-            valueMapper: function(options) {
-                var data = this.dataSource.data();
-                var values = $.isArray(options.value) ? options.value : [options.value];
-                var res = [], i, j, l = values.length, dl = data.length;
+                    localDataSource.filter([]);
+                });
+            });
 
-                for (i = 0; i < l; i++) {
-                    for (j = 0; j < dl; j++) {
-                        if (data[j].value === values[i]) {
-                            res[i] = j;
-                            break;
+            localDataSource.filter({ field: "text", operator: "contains", value: "0" });
+        });
+
+        it("resets pageSize after filters are cleared", function(done) {
+            localDataSource.filter({ field: "text", operator: "contains", value: "200" });
+            localDataSource.range(0, 8);
+
+            virtualList.one("listBound", function() {
+                assert.equal(virtualList.dataSource.pageSize(), 16);
+                done();
+            });
+
+            localDataSource.filter([]);
+        });
+
+        it("clear selected values when list is filtered", function(done) {
+            var container = $("<div/>").appendTo(Mocha.fixture);
+            var virtualList = new VirtualList(container, {
+                dataSource: localDataSource,
+                template: "#=text#",
+                dataValueField: "value",
+                height: CONTAINER_HEIGHT,
+                itemHeight: ITEM_HEIGHT,
+                selectable: "multiple",
+                valueMapper: function(options) {
+                    var data = this.dataSource.data();
+                    var values = $.isArray(options.value) ? options.value : [options.value];
+                    var res = [], i, j, l = values.length, dl = data.length;
+
+                    for (i = 0; i < l; i++) {
+                        for (j = 0; j < dl; j++) {
+                            if (data[j].value === values[i]) {
+                                res[i] = j;
+                                break;
+                            }
                         }
                     }
+
+                    options.success(res);
                 }
-
-                options.success(res);
-            }
-        });
-
-        virtualList.one("listBound", function() {
-            virtualList.select(0).done(function() {
-                virtualList.bind("change", function(e) {
-                    start();
-
-                    equal(virtualList.value().length, 0);
-                    equal(e.removed.length, 1);
-                    ok(e.removed[0].dataItem);
-                    equal(e.removed[0].position, 0);
-                });
-
-                virtualList.value([]);
             });
-        });
 
-        localDataSource.filter({field: "text", operator: "contains", value: "0"});
+            virtualList.one("listBound", function() {
+                virtualList.select(0).done(function() {
+                    virtualList.bind("change", function(e) {
+
+                        assert.equal(virtualList.value().length, 0);
+                        assert.equal(e.removed.length, 1);
+                        assert.isOk(e.removed[0].dataItem);
+                        assert.equal(e.removed[0].position, 0);
+                        done();
+                    });
+
+                    virtualList.value([]);
+                });
+            });
+
+            localDataSource.filter({ field: "text", operator: "contains", value: "0" });
+        });
     });
-})();
+}());

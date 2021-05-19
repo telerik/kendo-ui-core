@@ -1,8 +1,8 @@
 ---
-title: Cannot Install Kendo UI Professional from Bower
-description: Kendo UI Professional fails to authenticate and install.
+title: Cannot Install Kendo UI from Bower
+page_title: Having Problem with Bower Installation | Kendo UI for jQuery
+description: Kendo UI fails to authenticate and install.
 type: troubleshooting
-page_title: Problem with Bower Installation | Kendo UI Professional
 slug: bower-credentials-authentication-failed-kendo-ui-professional
 tags: bower, git, credentials, kendo, professional
 ticketid: 1116013
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Professional</td>
+  <td>Progress Kendo UI for jQuery</td>
  </tr>
  <tr>
   <td>NodeJS</td>
@@ -32,27 +32,23 @@ res_type: kb
 
 ## Description
 
-I use Git Credential Manager. After it prompts for my username and password, Bower authentication fails and I am not able to install Kendo UI Professional.  
-
-## Error Message
-
-Authentication failed 
+I use Git Credential Manager. After it prompts for my username and password, Bower authentication fails with the `Authentication failed` error message, and I am not able to install Kendo UI.  
 
 ## Solution
 
-To solve this issue, use the following approach:
+Use a `bower.json` file with the credentials as part of the URL. Encode both the password and the credentials.
 
 ```
 /*
-username: jdoe@missingpersons.com
-encoded: jdoe%40missingpersons.com 
+Actual Username: jdoe@missingpersons.com
+Encoded Username: jdoe%40missingpersons.com 
 
-password: $password!
-encoded: %24password%21
+Actual Password: $password!
+Encoded Password: %24password%21
 */ 
 ```
 
-As a result, the `bower.json` file reads:
+As a result, the `bower.json` file reads `https://[EncodedUsername]:[EncodedPassword]@bower.telerik.com/bower-kendo-ui.git#~2017.1.118`.
 
 ```
 "dependencies": {

@@ -3,6 +3,7 @@ title: ComboBox
 page_title: Configuration, methods and events of Kendo UI ComboBox
 description: Learn to configure Kendo UI ComboBox widget, use the documentation guide to operate different types of methods and get familiar with all events, used in ComboBox UI widget.
 res_type: api
+component: combobox
 ---
 
 # kendo.ui.ComboBox
@@ -161,8 +162,10 @@ Use it to set the Id of the parent ComboBox widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/combobox#configuration-dataValueField).
+Defines the field to be used to filter the data source. If not defined, it is set to a field with the same name as the [parent's dataValueField option](/api/javascript/ui/combobox/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/combobox/cascading)
+
+ > Note: As the dataItems of the dataSource inherit from the kendo.ObservableObject class and this class has a method named [parent](/api/javascript/data/observableobject/methods/parent), setting the cascadeFromField to a field named "parent" is not supported.
 
 #### Example
 
@@ -181,6 +184,39 @@ Defines the field to be used to filter the data source. If not defined the [pare
     $("#child").kendoComboBox({
         cascadeFrom: "parent",
         cascadeFromField: "parentId",
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Child1", id: 1, parentId: 1 },
+            { name: "Child2", id: 2, parentId: 2 },
+            { name: "Child3", id: 3, parentId: 1 },
+            { name: "Child4", id: 4, parentId: 2 }
+        ]
+    });
+    </script>
+
+### cascadeFromParentField `String`
+
+Defines the parent field to be used to retain value from. This value will be used further to filter the dataSource. If not defined the value from the [parent's dataValueField will be used](/api/javascript/ui/combobox/configuration/datavaluefield).
+
+#### Example
+
+    <input id="parent" />
+    <input id="child" />
+    <script>
+    $("#parent").kendoComboBox({
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Parent1", id: 123, cascadeId: 1 },
+            { name: "Parent2", id: 234, cascadeId: 2 }
+        ]
+    });
+
+    $("#child").kendoComboBox({
+        cascadeFrom: "parent",
+        cascadeFromField: "parentId",
+        cascadeFromParentField: "cascadeId",
         dataTextField: "name",
         dataValueField: "id",
         dataSource: [
@@ -242,7 +278,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/products",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
       }
@@ -322,7 +358,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/combobox#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -350,7 +386,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/combobox#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -364,7 +400,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -377,7 +413,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -387,7 +423,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -412,7 +448,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -425,7 +461,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the groups
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -489,11 +525,68 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize ComboBox messages
+
+    <input id="combobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#combobox").kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <input id="combobox" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#combobox").kendoComboBox({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="combobox" />
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [],
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/combobox/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -504,14 +597,14 @@ The minimum number of characters the user must type before a search is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
 
-#### Example - specify headerTemplate as a string
+#### Example - specify noDataTemplate as a string
 
     <input id="combobox" />
     <script>
@@ -656,10 +749,21 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       }
     });
     </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
 ### suggest `Boolean`*(default: false)*
 
@@ -713,7 +817,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -844,7 +948,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -863,7 +967,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     pageSize: 80,
                     serverPaging: true,
@@ -907,7 +1011,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
               source: new kendo.data.DataSource({
                 type: "odata",
                 transport: {
-                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                 },
                 schema: {
                   model: {
@@ -932,7 +1036,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
         function orderValueMapper(options) {
             $.ajax({
-              url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
               type: "GET",
               dataType: "jsonp",
               data: convertValues(options.value),
@@ -959,11 +1063,11 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/combobox/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/combobox/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
     <input id="combobox" />
@@ -1146,7 +1250,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -1251,14 +1355,14 @@ The filter value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
+> **Important:** If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/javascript/ui/combobox/methods/value) method), and no item will be selected.
 
 > **Important:** When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/combobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="combobox" />
     <script>
@@ -1409,9 +1513,9 @@ there are no matches then the text will be considered as a custom value of the w
 
 > **Important:** When the `autoBind` option is set to *false*, the widget will update only the selected text. The widget will stay **unbound**.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/combobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="combobox" />
     <script>
@@ -1478,9 +1582,9 @@ Gets or sets the value of the ComboBox.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/combobox/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="combobox" />
     <script>
@@ -1525,7 +1629,7 @@ Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cas
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
 > **Important:** The event is not fired when the value of the widget is changed from code.
-> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/combobox#events-cascade) event.
+> **Important:** The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/combobox/events/cascade) event.
 
 #### Event Data
 
@@ -1653,7 +1757,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 
@@ -1699,7 +1803,7 @@ The filter descriptor that will be used to filter the data source.
       filtering: function(e) {
           var filter = e.filter;
 
-          if (!filter.value) {
+          if (filter && !filter.value) {
             //prevent filtering if the filter does not value
             e.preventDefault();
           }

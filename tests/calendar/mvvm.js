@@ -3,50 +3,59 @@
 var Calendar = kendo.ui.Calendar;
 var dom;
 
-module("kendo.ui.Calendar MVVM", {
-    setup: function() {
-        kendo.effects.disable();
+describe("kendo.ui.Calendar MVVM", function () {
+    beforeEach(function() {
+
 
         window.change = function() {
-            ok(true);
+            assert.isOk(true);
         };
-    },
-    teardown: function() {
-        kendo.effects.enable();
+    });
+    afterEach(function() {
+
         delete window.change;
 
         kendo.destroy(dom);
-    }
-});
+    });
 
-test("initializes a calendar when data role is calendar", function() {
+it("initializes a calendar when data role is calendar", function() {
     dom = $('<div data-role="calendar"/>');
 
     kendo.bind(dom);
 
-    ok(dom.data("kendoCalendar") instanceof kendo.ui.Calendar);
+    assert.isOk(dom.data("kendoCalendar") instanceof kendo.ui.Calendar);
 });
 
-test("initializes a options from data attributes", function() {
+it("initializes a options from data attributes", function() {
     dom = $('<div data-role="calendar" data-start="year" />');
 
     kendo.bind(dom);
 
     var calendar = dom.data("kendoCalendar");
 
-    equal(calendar.options.start, "year");
+    assert.equal(calendar.options.start, "year");
 });
 
-test("initializes value from view model", function() {
+it("initializes a disabledDates from data attributes", function() {
+    dom = $('<div data-role="calendar" data-disable-dates="[\'sa\', \'su\']" ></div>');
+
+    kendo.bind(dom);
+
+    var calendar = dom.data("kendoCalendar");
+
+    assert.isOk(calendar.options.disableDates != $.noop);
+});
+
+it("initializes value from view model", function() {
     dom = $('<div data-role="calendar" data-bind="value:value" />');
     var value = new Date();
 
     kendo.bind(dom, { value: value } );
 
-    equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
 });
 
-test("initializes a options from data attributes after init of the widget", function() {
+it("initializes a options from data attributes after init of the widget", function() {
     dom = $('<div data-role="calendar" data-format="{0:MM yyyy}" data-start="year" />');
     dom.kendoCalendar();
 
@@ -54,11 +63,11 @@ test("initializes a options from data attributes after init of the widget", func
 
     var calendar = dom.data("kendoCalendar");
 
-    equal(calendar.options.format, "MM yyyy");
-    equal(calendar.options.start, "year");
+    assert.equal(calendar.options.format, "MM yyyy");
+    assert.equal(calendar.options.start, "year");
 });
 
-test("changing a value updates the view model", function() {
+it("changing a value updates the view model", function() {
     dom = $('<div data-role="calendar" data-bind="value:value" />');
 
     var observable = kendo.observable({ value: null });
@@ -69,10 +78,10 @@ test("changing a value updates the view model", function() {
     dom.data("kendoCalendar").value(value);
     dom.data("kendoCalendar").trigger("change");
 
-    equal(observable.value.getTime(), value.getTime());
+    assert.equal(observable.value.getTime(), value.getTime());
 });
 
-test("binding calendar initialized before binding", function() {
+it("binding calendar initialized before binding", function() {
     dom = $('<div data-bind="value:value" />');
 
     var value = new Date(2011, 1, 2);
@@ -83,10 +92,10 @@ test("binding calendar initialized before binding", function() {
 
     kendo.bind(dom, observable);
 
-    equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
 });
 
-test("binding calendar initialized after binding", function() {
+it("binding calendar initialized after binding", function() {
     dom = $('<div data-bind="value:value" />');
 
     var observable = kendo.observable({ value: null });
@@ -97,10 +106,10 @@ test("binding calendar initialized after binding", function() {
 
     dom.kendoCalendar();
 
-    equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
 });
 
-test("updating model value updates the UI", function() {
+it("updating model value updates the UI", function() {
     dom = $('<div data-bind="value:value" />');
 
     var observable = kendo.observable({ value: value });
@@ -111,10 +120,10 @@ test("updating model value updates the UI", function() {
 
     var value = new Date(2011, 1, 2);
     observable.set("value", value)
-    equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
+    assert.equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
 });
 
-test("bindings are removed if element is rebind", 1, function() {
+it("bindings are removed if element is rebind", function() {
     dom = $('<div data-role="calendar" data-bind="value:value" />');
 
     var observable = kendo.observable({ value: new Date(2011, 1, 2) });
@@ -125,10 +134,10 @@ test("bindings are removed if element is rebind", 1, function() {
 
     kendo.bind(dom, observable);
 
-    equal(destroy.calls("destroy"), 1);
+    assert.equal(destroy.calls("destroy"), 1);
 });
 
-test("binding target is destroyed", 1, function() {
+it("binding target is destroyed", function() {
     dom = $('<div data-role="calendar" data-bind="value:value"/>');
 
     var observable = kendo.observable({ value: null });
@@ -139,10 +148,10 @@ test("binding target is destroyed", 1, function() {
 
     kendo.bind(dom, observable);
 
-    equal(destroy.calls("destroy"), 1);
+    assert.equal(destroy.calls("destroy"), 1);
 });
 
-test("change event is raised if attached as option", 1, function() {
+it("change event is raised if attached as option", function() {
     dom = $('<div data-role="calendar" data-change="change" />');
 
     var observable = kendo.observable({
@@ -153,7 +162,7 @@ test("change event is raised if attached as option", 1, function() {
     dom.data("kendoCalendar").trigger("change");
 });
 
-test("change event is raised if attached as option to a already initialized calendar", 1, function() {
+it("change event is raised if attached as option to a already initialized calendar", function() {
     dom = $('<div data-change="change" />').kendoCalendar();
 
     var observable = kendo.observable({
@@ -164,44 +173,45 @@ test("change event is raised if attached as option to a already initialized cale
     dom.data("kendoCalendar").trigger("change");
 });
 
-test("binding visible to true shows the calendar", function() {
+it("binding visible to true shows the calendar", function() {
     dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
 
     kendo.bind(dom, { visible: true });
 
     var calendar = dom.data("kendoCalendar");
 
-    ok(calendar.wrapper.css("display") != "none", "calendar is visible");
+    assert.isOk(calendar.wrapper.css("display") != "none", "calendar is visible");
 });
 
-test("binding visible to false hides the calendar", function() {
+it("binding visible to false hides the calendar", function() {
     dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
 
     kendo.bind(dom, { visible: false });
 
     var calendar = dom.data("kendoCalendar");
 
-    ok(calendar.wrapper.css("display") == "none", "calendar is not visible");
+    assert.isOk(calendar.wrapper.css("display") == "none", "calendar is not visible");
 });
 
-test("binding invisible to true hides the calendar", function() {
+it("binding invisible to true hides the calendar", function() {
     dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
 
     kendo.bind(dom, { invisible: true });
 
     var calendar = dom.data("kendoCalendar");
 
-    ok(calendar.wrapper.css("display") == "none", "calendar is invisible");
+    assert.isOk(calendar.wrapper.css("display") == "none", "calendar is invisible");
 });
 
-test("binding invisible to false shows the calendar", function() {
+it("binding invisible to false shows the calendar", function() {
     dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
 
     kendo.bind(dom, { invisible: false });
 
     var calendar = dom.data("kendoCalendar");
 
-    ok(calendar.wrapper.css("display") != "none", "calendar is not invisible");
+    assert.isOk(calendar.wrapper.css("display") != "none", "calendar is not invisible");
 });
 
-})();
+    });
+}());

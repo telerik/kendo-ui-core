@@ -3,6 +3,7 @@ title: Calendar
 page_title: Configuration, methods and events of Kendo UI Calendar
 description: Find out how to successfully configure calendar UI component, how to use methods to get the max value of the calendar and navigate easily.
 res_type: api
+component: calendar
 ---
 
 # kendo.ui.Calendar
@@ -10,6 +11,22 @@ res_type: api
 Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/ui/widget).
 
 ## Configuration
+
+### componentType `String`*(default: "classic")*
+
+ Specifies the component type of the widget.
+
+* `"classic"` - Uses the standard rendering of the widget.
+* `"modern"` - Uses new rendering with a fresh and modern look and feel.
+
+#### Example - specify modern component type
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            componentType: "modern"
+        });
+    </script>
 
 ### culture `String`*(default: "en-US")*
 
@@ -21,10 +38,10 @@ Represents the Kendo UI Calendar widget. Inherits from [Widget](/api/javascript/
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <div id="calendar"></div>
@@ -121,7 +138,7 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 ### footer `String|Function`
 
- The [template](/api/javascript/kendo#methods-template) which renders the footer. If false, the footer will not be rendered.
+ The [template](/api/javascript/kendo/methods/template) which renders the footer. If false, the footer will not be rendered.
 
 #### Example - specify footer template as a function
 
@@ -255,13 +272,13 @@ Allows customization of the week column header text. Set the value to make the w
 
 ### month.weekNumber `String`
 
- The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year. 
+ The template to be used for rendering the cells in "week" column. By default, the widget renders the calculated week of the year.
  The properties available in the data object are:
 
  * currentDate - returns the first date of the current week.
  * weekNumber - calculated week number.
 
- These properties can be used in the template to make additional calculations. 
+ These properties can be used in the template to make additional calculations.
 
 #### Example - specify week number template as a string
 
@@ -301,9 +318,41 @@ Allows customization of the week column header text. Set the value to make the w
         });
     </script>
 
+### selectable `String`  *(default: "single")*
+
+By default user is able to select a single date. The property can also be set to "multiple" in order the multiple  date selection to be enabled. More information about multiple selection can be found in the [Selection]({% slug overview_kendoui_calendar_widget %}#selection) article.
+
+#### Example - enable the multiple selection
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectable: "multiple"
+        });
+    </script>
+
+> Check [Selection](https://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
+
+### selectDates `Array`  *(default: [])*
+
+Specifies which dates to be selected when the calendar is initialized.
+
+> **Important:** This configuration option requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "multiple" option to be set.
+
+#### Example - set two dates to be selected upon calendar initialization
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+           selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)]
+        });
+    </script>
+
+> Check [Selection](https://demos.telerik.com/kendo-ui/calendar/selection) for a live demo.
+
 ### weekNumber `Boolean` *(default: false)*
 
-If set to `true` a week of the year will be shown on the left side of the calendar. It is possible to define a template in order to customize what will be displayed.  
+If set to `true` a week of the year will be shown on the left side of the calendar.
 
 #### Example - enable the week of the year option
 
@@ -544,6 +593,40 @@ Navigates to the upper view.
         calendar.navigateUp();
     </script>
 
+### selectDates
+
+Gets/Sets the selected dates for the calendar.
+
+> **Important:** This method requires the [selectable](/api/javascript/ui/calendar/configuration/selectable): "multiple" option to be set.
+
+#### Example - gets the selected dates of the widget
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)],
+            selectable: "multiple"
+        });
+
+        var calendar = $("#calendar").data("kendoCalendar");
+
+        var value = calendar.selectDates();
+    </script>
+
+#### Example - sets the value of the widget
+
+    <div id="calendar"></div>
+    <script>
+        $("#calendar").kendoCalendar({
+            selectDates: [new Date(2013, 10, 10), new Date(2015, 10, 10)],
+            selectable: "multiple"
+        });
+
+        var calendar = $("#calendar").data("kendoCalendar");
+
+        calendar.selectDates([new Date(2016, 10,10), new Date()]);
+    </script>
+
 ### value
 
 Gets/Sets the value of the calendar.
@@ -616,6 +699,7 @@ Fires when the selected date is changed.
         $("#calendar").kendoCalendar({
             change: function() {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value); //value is the selected date in the calendar
             }
         });
@@ -631,6 +715,7 @@ Fires when the selected date is changed.
 
         calendar.bind("change", function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the calendar
         });
     </script>
@@ -646,9 +731,11 @@ Fires when calendar navigates.
         $("#calendar").kendoCalendar({
             navigate: function() {
                 var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(view.name); //name of the current view
 
                 var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(current); //currently focused date
             }
         });
@@ -664,9 +751,11 @@ Fires when calendar navigates.
 
         calendar.bind("navigate", function() {
             var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view.name); //name of the current view
 
             var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(current); //currently focused date
         });
     </script>

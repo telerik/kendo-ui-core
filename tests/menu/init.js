@@ -6,9 +6,9 @@ function getRootItem(index) {
 
 var menu;
 
-module("menu init", {
-    setup: function () {
-        QUnit.fixture.append(
+describe("menu init", function () {
+    beforeEach(function () {
+        Mocha.fixture.append(
             '<ul id="menu">' +
             '   <li>' +
             '       Item 1' +
@@ -42,41 +42,123 @@ module("menu init", {
             '</ul>'
         );
         menu = new kendo.ui.ContextMenu("#menu", { animation: false });
-    },
-    teardown: function() {
+    });
+    afterEach(function() {
         kendo.destroy(menu.element);
-    }
+    });
+
+it('.k-menu is placed on root element', function() {
+    assert.isOk(menu.element.is(".k-menu"));
 });
 
-test('.k-menu is placed on root element', function() {
-    ok(menu.element.is(".k-menu"));
+it('groups are both k-group and k-menu-group', function() {
+    assert.isOk(menu.element.find("ul").is(".k-menu-group.k-group"));
 });
 
-test('groups are both k-group and k-menu-group', function() {
-    ok(menu.element.find("ul").is(".k-menu-group.k-group"));
+it('div inside menu is assigned .k-content class', function() {
+    assert.isOk(menu.element.find("div").is(".k-content"));
 });
 
-test('div inside menu is assigned .k-content class', function() {
-    ok(menu.element.find("div").is(".k-content"));
+it('UL elements inside content don\'t get k-menu-group class', function() {
+    assert.isOk(!menu.element.find("div ul").is(".k-group"));
+    assert.isOk(!menu.element.find("div ul").is(".k-menu-group"));
 });
 
-test('UL elements inside content don\'t get k-menu-group class', function() {
-    ok(!menu.element.find("div ul").is(".k-group"));
-    ok(!menu.element.find("div ul").is(".k-menu-group"));
-});
-
-test('menu is inside scroll wrapper', function() {
+it('menu is inside scroll wrapper', function() {
     menu.setOptions({ scrollable: true, orientation: "horizontal" });
-    ok(menu.element.parent().is("div.k-popups-wrapper.horizontal"));
+    assert.isOk(menu.element.parent().is("div.k-popups-wrapper.horizontal"));
 });
 
 
-test('menu does not strip "k-i-arrow-chevron-right" icons', function() {
+it('menu does not strip "k-i-arrow-chevron-right" icons', function() {
     var m = new kendo.ui.Menu("<ul><li><span class='k-icon k-i-arrow-chevron-right'></span>Next</li><li>Refresh</li></ul>");
 
-    ok(m.element.find(".k-i-arrow-chevron-right")[0]);
+    assert.isOk(m.element.find(".k-i-arrow-chevron-right")[0]);
     m.destroy();
 });
 
-})();
+it('menu renders aria-haspopup on items with submenu', function() {
+    var dom = '<ul id="menu">' +
+    '   <li>' +
+    '       Item 1' +
+    '       <ul>' +
+    '           <li>Sub Item 1</li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 2' +
+    '       <ul>' +
+    '           <li>Sub Item 1'+
+    '               <ul>' +
+    '                   <li>Sub Item 1</li>' +
+    '               </ul>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 3' +
+    '       <ul>' +
+    '           <li>' +
+    '               <div>' +
+    '                   <ul>' +
+    '                       <li>Item 1</li>' +
+    '                       <li>Item 2</li>' +
+    '                   </ul>' +
+    '               </div>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '</ul>';
+
+
+    var m = new kendo.ui.Menu(dom);
+
+    assert.equal(m.element.find("[aria-haspopup]").length, 4)
+    m.destroy();
+});
+
+it('menu does not wrap content of items with omit-wrap', function() {
+    var dom = '<ul id="menu">' +
+    '   <li ' + kendo.attr("omit-wrap") + '="true">' +
+    '       Item 1' +
+    '       <ul>' +
+    '           <li>Sub Item 1</li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 2' +
+    '       <ul>' +
+    '           <li>Sub Item 1'+
+    '               <ul>' +
+    '                   <li>Sub Item 1</li>' +
+    '               </ul>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '   <li>' +
+    '       Item 3' +
+    '       <ul>' +
+    '           <li>' +
+    '               <div>' +
+    '                   <ul>' +
+    '                       <li>Item 1</li>' +
+    '                       <li>Item 2</li>' +
+    '                   </ul>' +
+    '               </div>' +
+    '           </li>' +
+    '       </ul>' +
+    '   </li>' +
+    '</ul>';
+
+
+    var m = new kendo.ui.Menu(dom);
+
+    assert.isNotOk(m.element.find("["+kendo.attr("omit-wrap")+"]").hasClass('k-menu-item'));
+    assert.isNotOk(m.element.find("["+kendo.attr("omit-wrap")+"] > span").length);
+
+    m.destroy();
+});
+
+    });
+}());
 

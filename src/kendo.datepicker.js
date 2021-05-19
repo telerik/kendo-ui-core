@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.calendar", "./kendo.popup" ], f);
+    define([ "./kendo.calendar", "./kendo.popup",  "./kendo.dateinput" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -16,12 +16,14 @@ var __meta__ = { // jshint ignore:line
     Widget = ui.Widget,
     parse = kendo.parseDate,
     keys = kendo.keys,
+    support = kendo.support,
     template = kendo.template,
     activeElement = kendo._activeElement,
     DIV = "<div />",
     SPAN = "<span />",
     ns = ".kendoDatePicker",
     CLICK = "click" + ns,
+    UP = support.mouseAndTouchPresent ? kendo.applyEventMap("up", ns.slice(1)) : CLICK,
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -39,6 +41,7 @@ var __meta__ = { // jshint ignore:line
     MAX = "max",
     MONTH = "month",
     ARIA_DISABLED = "aria-disabled",
+    ARIA_READONLY = "aria-readonly",
     ARIA_EXPANDED = "aria-expanded",
     ARIA_HIDDEN = "aria-hidden",
     calendar = kendo.calendar,
@@ -77,20 +80,23 @@ var __meta__ = { // jshint ignore:line
         var that = this, id,
             body = document.body,
             div = $(DIV).attr(ARIA_HIDDEN, "true")
-                        .addClass("k-calendar-container")
-                        .appendTo(body);
+                        .addClass("k-calendar-container");
 
         that.options = options = options || {};
         id = options.id;
 
+        if(!options.omitPopup){
+            div.appendTo(body);
+            that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
+        } else {
+            div = options.dateDiv;
+        }
         if (id) {
             id += "_dateview";
 
             div.attr(ID, id);
             that._dateViewID = id;
         }
-
-        that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
         that.div = div;
 
         that.value(options.value);
@@ -105,14 +111,12 @@ var __meta__ = { // jshint ignore:line
 
             if (!calendar) {
                 div = $(DIV).attr(ID, kendo.guid())
-                            .appendTo(that.popup.element)
+                            .appendTo(options.omitPopup ? options.dateDiv : that.popup.element)
                             .on(MOUSEDOWN, preventDefault)
                             .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
 
-                that.calendar = calendar = new ui.Calendar(div);
+                that.calendar = calendar = new ui.Calendar(div, { componentType: options.componentType });
                 that._setOptions(options);
-
-                kendo.calendar.makeUnselectable(calendar.element);
 
                 calendar.navigate(that._value || that._current, options.start);
 
@@ -158,18 +162,34 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-            this.popup.destroy();
+            if(this.popup){
+                this.popup.destroy();
+            }
         },
 
         open: function() {
             var that = this;
+            var popupHovered;
 
             that._calendar();
+
+            // In some cases when the popup is opened resize is triggered which will cause it to close
+            // Setting the below flag will prevent this from happening
+            // Reference: https://github.com/telerik/kendo/pull/7553
+            popupHovered = that.popup._hovered;
+            that.popup._hovered = true;
+
             that.popup.open();
+
+            setTimeout(function() {
+                that.popup._hovered = popupHovered;
+            }, 1);
         },
 
         close: function() {
-            this.popup.close();
+            if (this.popup) {
+                this.popup.close();
+            }
         },
 
         min: function(value) {
@@ -204,15 +224,18 @@ var __meta__ = { // jshint ignore:line
                     handled = true;
                 }
 
-            } else if (that.popup.visible()) {
+            } else if (that.popup && that.popup.visible()) {
 
                 if (key == keys.ESC || (selectIsClicked && calendar._cell.hasClass(SELECTED))) {
                     that.close();
                     e.preventDefault();
                     return true;
                 }
+                //spacebar selects a date in the calendar
+                if (key != keys.SPACEBAR) {
+                    that._current = calendar._move(e);
+                }
 
-                that._current = calendar._move(e);
                 handled = true;
             }
 
@@ -221,7 +244,9 @@ var __meta__ = { // jshint ignore:line
 
         current: function(date) {
             this._current = date;
-            this.calendar._focus(date);
+            if (this.calendar) {
+                this.calendar._focus(date);
+            }
         },
 
         value: function(value) {
@@ -245,6 +270,7 @@ var __meta__ = { // jshint ignore:line
         _click: function(e) {
 
             if (e.currentTarget.className.indexOf(SELECTED) !== -1) {
+                this.calendar.trigger("change");
                 this.close();
             }
         },
@@ -338,7 +364,9 @@ var __meta__ = { // jshint ignore:line
                 .attr({
                     role: "combobox",
                     "aria-expanded": false,
-                    "aria-owns": that.dateView._dateViewID
+                    "aria-haspopup": "grid",
+                    "aria-owns": that.dateView._dateViewID,
+                    "autocomplete": "off"
                 });
             that._reset();
             that._template();
@@ -350,15 +378,7 @@ var __meta__ = { // jshint ignore:line
                 that.readonly(element.is("[readonly]"));
             }
 
-            if (options.dateInput) {
-                that._dateInput = new ui.DateInput(element, {
-                    culture: options.culture,
-                    format: options.format,
-                    min: options.min,
-                    max: options.max,
-                    value: options.value
-                });
-            }
+            that._createDateInput(options);
 
             that._old = that._update(options.value || that.element.val());
             that._oldText = element.val();
@@ -383,9 +403,11 @@ var __meta__ = { // jshint ignore:line
             animation: {},
             month: {},
             dates: [],
-            ARIATemplate: 'Current focused date is #=kendo.toString(data.current, "D")#',
+            disableDates: null,
+            ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateInput: false,
-            weekNumber: false
+            weekNumber: false,
+            componentType: "classic"
         },
 
         setOptions: function(options) {
@@ -402,18 +424,13 @@ var __meta__ = { // jshint ignore:line
             normalize(options);
 
             that.dateView.setOptions(options);
-            if (that._dateInput) {
-                that._dateInput.setOptions({
-                    culture: options.culture,
-                    format: options.format,
-                    min: options.min,
-                    max: options.max,
-                    value: options.value
-                });
+            that._createDateInput(options);
+
+            if (!that._dateInput) {
+                that.element.val(kendo.toString(value, options.format, options.culture));
             }
 
             if (value) {
-                that.element.val(kendo.toString(value, options.format, options.culture));
                 that._updateARIA(value);
             }
         },
@@ -431,9 +448,11 @@ var __meta__ = { // jshint ignore:line
                     .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
-
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
+                element.attr(ARIA_DISABLED, false)
                        .attr(ARIA_DISABLED, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
@@ -441,7 +460,7 @@ var __meta__ = { // jshint ignore:line
                            that._inputWrapper.addClass(FOCUSED);
                        });
 
-               icon.on(CLICK, proxy(that._click, that))
+               icon.on(UP, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
             } else {
                 wrapper
@@ -450,7 +469,8 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable);
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 
@@ -459,6 +479,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: readonly === undefined ? true : readonly,
                 disable: false
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: readonly === undefined ? true : readonly,
+                    disable: false
+                });
+            }
         },
 
         enable: function(enable) {
@@ -466,6 +492,12 @@ var __meta__ = { // jshint ignore:line
                 readonly: false,
                 disable: !(enable = enable === undefined ? true : enable)
             });
+            if (this._dateInput) {
+                this._dateInput._editable({
+                    readonly: false,
+                    disable: !(enable = enable === undefined ? true : enable)
+                });
+            }
         },
 
         destroy: function() {
@@ -509,7 +541,7 @@ var __meta__ = { // jshint ignore:line
 
             that._old = that._update(value);
 
-            if (that._old === null) {
+            if (that._old === null && !that._dateInput) {
                 that.element.val("");
             }
 
@@ -527,19 +559,26 @@ var __meta__ = { // jshint ignore:line
             that.close();
             if (value !== that._oldText) {
                 that._change(value);
+                if (!value) {
+                    that.dateView.current(kendo.calendar.getToday());
+                }
             }
 
             that._inputWrapper.removeClass(FOCUSED);
         },
 
-        _click: function() {
-            var that = this,
-                element = that.element;
+        _click: function(e) {
+            var that = this;
 
             that.dateView.toggle();
+            that._focusElement(e.type);
+        },
 
-            if (!kendo.support.touch && element[0] !== activeElement()) {
-                element.focus();
+        _focusElement: function(eventType) {
+            var element = this.element;
+
+            if ((!support.touch || (support.mouseAndTouchPresent && !(eventType || "").match(/touch/i))) && element[0] !== activeElement()) {
+                element.trigger("focus");
             }
         },
 
@@ -643,7 +682,7 @@ var __meta__ = { // jshint ignore:line
             if (+date === +current && isSameType) {
                 formattedValue = kendo.toString(date, options.format, options.culture);
 
-                if (formattedValue !== value) {
+                if (formattedValue !== value && !(that._dateInput && !date)) {
                     that.element.val(date === null ? value : formattedValue);
                 }
 
@@ -658,7 +697,7 @@ var __meta__ = { // jshint ignore:line
 
             that._value = date;
             that.dateView.value(date);
-            if (that._dateInput) {
+            if (that._dateInput && date) {
                 that._dateInput.value(date || value);
             } else {
                 that.element.val(kendo.toString(date || value, options.format, options.culture));
@@ -686,8 +725,8 @@ var __meta__ = { // jshint ignore:line
                 height: element[0].style.height
             });
 
-            that.wrapper = wrapper.addClass("k-widget k-datepicker k-header")
-                                  .addClass(element[0].className);
+            that.wrapper = wrapper.addClass("k-widget k-datepicker")
+                .addClass(element[0].className).removeClass('input-validation-error');
 
             that._inputWrapper = $(wrapper[0].firstChild);
         },
@@ -696,11 +735,24 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 element = that.element,
                 formId = element.attr("form"),
-                form = formId ? $("#" + formId) : element.closest("form");
+                options = that.options,
+                disabledDate = options.disableDates,
+                parseFormats = options.parseFormats.length ? options.parseFormats : null,
+                optionsValue = that._initialOptions.value,
+                form = formId ? $("#" + formId) : element.closest("form"),
+                initialValue = element[0].defaultValue;
+
+            if (optionsValue && (disabledDate && disabledDate(optionsValue))) {
+                optionsValue = null;
+            }
+
+            if ((!initialValue || !kendo.parseDate(initialValue, parseFormats, options.culture)) && optionsValue) {
+                element.attr("value", kendo.toString(optionsValue, options.format, options.culture));
+            }
 
             if (form[0]) {
                 that._resetHandler = function() {
-                    that.value(element[0].defaultValue);
+                    that.value(optionsValue || element[0].defaultValue);
                     that.max(that._initialOptions.max);
                     that.min(that._initialOptions.min);
                 };
@@ -710,21 +762,35 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = template(this.options.ARIATemplate);
+            this._ariaTemplate = proxy(template(this.options.ARIATemplate), this);
+        },
+
+        _createDateInput: function(options) {
+            if (this._dateInput) {
+                this._dateInput.destroy();
+                this._dateInput = null;
+            }
+
+            if (options.dateInput ) {
+                this._dateInput = new ui.DateInput(this.element, {
+                    culture: options.culture,
+                    format: options.format,
+                    min: options.min,
+                    max: options.max
+                });
+            }
         },
 
         _updateARIA: function(date) {
-            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
 
-            that.element.removeAttr("aria-activedescendant");
+            if (that.element && that.element.length) {
+                that.element[0].removeAttribute("aria-activedescendant");
+            }
 
             if (calendar) {
-                cell = calendar._cell;
-                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
-
-                that.element.attr("aria-activedescendant", cell.attr("id"));
+                that.element.attr("aria-activedescendant", calendar._updateAria(that._ariaTemplate, date));
             }
         }
     });

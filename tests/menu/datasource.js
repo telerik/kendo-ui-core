@@ -4,23 +4,22 @@
     function createMenu(options) {
         removeHTML();
 
-        QUnit.fixture.append("<ul id='menu'></ul>");
+        Mocha.fixture.append("<ul id='menu'></ul>");
 
         menu = new kendo.ui.Menu("#menu", options);
     }
 
     function removeHTML() {
-        kendo.destroy(QUnit.fixture);
-        QUnit.fixture.empty();
+        kendo.destroy(Mocha.fixture);
+        Mocha.fixture.empty();
     }
 
-    module("Client side rendering", {
-        teardown: function () {
+    describe("Client side rendering", function () {
+        afterEach(function () {
             removeHTML();
-        }
-    });
+        });
 
-    test('Custom attribute is rendered in item', function(){
+    it('Custom attribute is rendered in item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -31,10 +30,10 @@
             }]
         });
 
-        equal(menu.element.find("li:first").attr("data-myCustomAttribute"), "myCustomAttribute");
+        assert.equal(menu.element.find("li:first").attr("data-myCustomAttribute"), "myCustomAttribute");
     });
 
-    test('Class added via attr is added to other classes', function(){
+    it('Class added via attr is added to other classes', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -50,10 +49,10 @@
         var listItemContents = menu.element.html();
         var classAttributesCount = (listItemContents.match(/class/g) || []).length;
 
-        equal(classAttributesCount, 1);
+        assert.equal(classAttributesCount, 1);
     });
 
-    test('Multiple attributes are rendered in item', function(){
+    it('Multiple attributes are rendered in item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -67,11 +66,11 @@
 
         var firstItem = menu.element.find("li:first");
 
-        equal(firstItem.attr("data-myCustomAttribute"), "myCustomAttribute");
-        equal(firstItem.attr("id"), "myId");
+        assert.equal(firstItem.attr("data-myCustomAttribute"), "myCustomAttribute");
+        assert.equal(firstItem.attr("id"), "myId");
     });
 
-    test('Attributes are rendered in sub item', function(){
+    it('Attributes are rendered in sub item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -84,12 +83,14 @@
             }]
         });
 
+        menu.dataSource.view()[0].load();
+
         var subItem = menu.element.find(".myClass");
 
-        equal(subItem.length, 1);
+        assert.equal(subItem.length, 1);
     });
 
-    test('Image attributes are rendered in a item', 2, function(){
+    it('Image attributes are rendered in a item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -104,13 +105,15 @@
             }]
         });
 
+        menu.dataSource.view()[0].load();
+
         var img = menu.element.find("img");
 
-        equal(img.attr("test"), "myAttribute");
-        ok(img.hasClass("customClass"));
+        assert.equal(img.attr("test"), "myAttribute");
+        assert.isOk(img.hasClass("customClass"));
     });
 
-    test('Content attributes are rendered in a item', 2, function(){
+    it('Content attributes are rendered in a item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -125,13 +128,15 @@
             }]
         });
 
+        menu.dataSource.view()[0].load();
+
         var content = menu.element.find(".customClass");
 
-        equal(content.length, 1);
-        equal(content.attr("test"), "myAttribute");
+        assert.equal(content.length, 1);
+        assert.equal(content.attr("test"), "myAttribute");
     });
 
-    test('Default classes are rendered in a item', 3, function(){
+    it('Default classes are rendered in a item', function(){
         createMenu({
             dataSource: [{
               text: "Item 1",
@@ -145,10 +150,147 @@
             }]
         });
 
+        menu.dataSource.view()[0].load();
+
         var content = menu.element.find(".customClass");
 
-        ok(content.hasClass("k-content"));
-        ok(content.hasClass("k-group"));
-        ok(content.hasClass("k-menu-group"));
+        assert.isOk(content.hasClass("k-content"));
+        assert.isOk(content.hasClass("k-group"));
+        assert.isOk(content.hasClass("k-menu-group"));
     });
-})();
+
+    it('Expand arrow classes are rendered in subitems', function(){
+        createMenu({
+            dataSource: [
+                {
+                    text: "RootItem",
+                    items: [
+                        {
+                            text: "Sub-item 1.1",
+                            items: [
+                                { text: "Sub-item 1.2" }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+
+        menu.dataSource.view()[0].load();
+
+        var expandArrow = menu.element.find(".k-menu-group .k-icon");
+
+        assert.isOk(expandArrow.hasClass("k-menu-expand-arrow"));
+    });
+
+
+    it('HierarchicalDataSource creates menu item', function(){
+        createMenu({
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-link").text(), "RootItem");
+    });
+
+    it('dataTextField configures the item text', function(){
+        createMenu({
+            dataTextField: "Name",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    Name: "RootItem"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-link").text(), "RootItem");
+    });
+
+    it('dataUrlField configures the item URL', function(){
+        createMenu({
+            dataUrlField: "URLTEST",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    URLTEST: "URLTEST"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-link").attr('href'), "URLTEST");
+    });
+
+    it('dataSpriteCssClassField configures the item icon class', function(){
+        createMenu({
+            dataSpriteCssClassField: "spriteClass",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    spriteClass: "TESTCLASS"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.isOk(menu.element.find(".k-sprite").is(".TESTCLASS"));
+    });
+
+    it('dataImageUrlField configures the item image', function(){
+        createMenu({
+            dataImageUrlField: "imgUrl",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    imgUrl: "TESTURL"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-image").attr("src"), "TESTURL");
+    });
+
+    it('dataImageUrlField configures the item image', function(){
+        createMenu({
+            dataImageUrlField: "imgUrl",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    imgUrl: "TESTURL"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-image").attr("src"), "TESTURL");
+    });
+
+    it('dataContentField configures the item content', function(){
+        createMenu({
+            dataContentField: "desc",
+            dataSource: new kendo.data.HierarchicalDataSource({
+                data: [
+                {
+                    text: "RootItem",
+                    desc: "CONTENT"
+                }
+            ]})
+        });
+
+        menu.dataSource.view()[0].load();
+        assert.equal(menu.element.find(".k-content").text(), "CONTENT");
+    });
+    });
+}());

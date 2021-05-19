@@ -2,6 +2,7 @@
 title: Notification
 description: Configuration, methods and events of the Kendo UI Notification
 res_type: api
+component: notification
 ---
 
 # kendo.ui.Notification
@@ -25,6 +26,7 @@ Indicates the period in milliseconds after which a notification can be dismissed
     $("#notification").kendoNotification({
         allowHideAfter: 1000
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### animation `Object|Boolean`
@@ -40,6 +42,7 @@ Defines custom show and hide animations via an Kendo UI Animation object. Settin
     $("#notification").kendoNotification({
         animation: false
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - slide animations
@@ -57,11 +60,12 @@ Defines custom show and hide animations via an Kendo UI Animation object. Settin
             }
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### appendTo `String|Element|jQuery` *(default: null)*
 
-Defines the element to which the notifications will be appended or prepended (depending on the [stacking](#configuration-stacking) direction).
+Defines the element to which the notifications will be appended or prepended (depending on the [stacking](/api/javascript/ui/notification#configuration-stacking) direction).
 
 #### Example - set appendTo as a selector string
 
@@ -71,6 +75,7 @@ Defines the element to which the notifications will be appended or prepended (de
     $("#notification").kendoNotification({
         appendTo: "#container"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set appendTo as a DOM element
@@ -82,6 +87,7 @@ Defines the element to which the notifications will be appended or prepended (de
     $("#notification").kendoNotification({
         appendTo: container
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set appendTo as a jQuery object
@@ -92,6 +98,7 @@ Defines the element to which the notifications will be appended or prepended (de
     element.kendoNotification({
         appendTo: element
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### autoHideAfter `Number` *(default: 5000)*
@@ -105,6 +112,7 @@ Indicates the period in milliseconds after which a notification disappears autom
     $("#notification").kendoNotification({
         autoHideAfter: 3000
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - disable automatic hiding
@@ -114,6 +122,7 @@ Indicates the period in milliseconds after which a notification disappears autom
     $("#notification").kendoNotification({
         autoHideAfter: 0
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### button `Boolean` *(default: false)*
@@ -127,6 +136,7 @@ Determines whether the notifications will include a hide button. **This setting 
     $("#notification").kendoNotification({
         button: true
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### height `Number|String` *(default: null)*
@@ -140,6 +150,7 @@ Defines the notifications' height. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         height: 50
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set height as a string
@@ -149,6 +160,7 @@ Defines the notifications' height. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         height: "4em"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### hideOnClick `Boolean` *(default: true)*
@@ -162,6 +174,7 @@ Determines whether notifications can be hidden by clicking anywhere on their con
     $("#notification").kendoNotification({
         hideOnClick: false
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position `Object`
@@ -183,6 +196,7 @@ It determines the position of the first notification on the screen, as well as w
             right: 20
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.bottom `Number` *(default: 20)*
@@ -198,6 +212,7 @@ Determines the pixel position of the first popup notification with regard to the
             bottom: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.left `Number` *(default: null)*
@@ -213,6 +228,7 @@ Determines the pixel position of the first popup notification with regard to the
             left: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.pinned `Boolean` *(default: true)*
@@ -228,6 +244,7 @@ Determines whether the popup notifications will move together with the other pag
             pinned: false
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.right `Number` *(default: 20)*
@@ -243,6 +260,7 @@ Determines the pixel position of the first popup notification with regard to the
             right: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### position.top `Number` *(default: null)*
@@ -258,6 +276,7 @@ Determines the position of the first popup notification with regard to the viewp
             top: 30
         }
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### stacking `String` *(default: "default")*
@@ -276,6 +295,7 @@ The `"default"` setting takes into consideration the applied `position` settings
         },
         stacking: "down"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### templates `Array` *(default: [])*
@@ -329,13 +349,13 @@ Describes the HTML markup of the different notification types as Kendo UI templa
 
 **Required.** Specified a unique identifier, which is used to retrieve the correct template when a notification of this type is shown.
 
-See the [example above](#configuration-templates).
+See the [example above](/api/javascript/ui/notification#configuration-templates).
 
 ### templates.template `String` *(default: "")*
 
 Defines a Kendo UI template to be used with the corresponding notification type.
 
-See the [example above](#configuration-templates).
+See the [example above](/api/javascript/ui/notification#configuration-templates).
 
 ### width `Number|String` *(default: null)*
 
@@ -348,6 +368,7 @@ Defines the notifications' width. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         width: 300
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 #### Example - set width as a string
@@ -357,13 +378,14 @@ Defines the notifications' width. Numbers are treated as pixels.
     $("#notification").kendoNotification({
         width: "20em"
     });
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ## Methods
 
 ### error
 
-This is a shorthand method for [`show(data, "error")`](#methods-show)
+This is a shorthand method for [`show(data, "error")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -376,7 +398,7 @@ This is a shorthand method for [`show(data, "error")`](#methods-show)
 Returns a jQuery collection of all visible notifications, displayed by the given widget instance. Each item in the collection is a `div.k-notification` element.
 
 This method is useful for quick removal of all visible messages before showing new ones. After obtaining all visible messages, **remove** them from the DOM
-instead of [hiding](#methods-hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
+instead of [hiding](/api/javascript/ui/notification/methods/hide) them, unless animations are disabled. This is because animations are asynchronous and the new messages
 will be shown on the wrong places before the old ones have been hidden. Another thing to keep in mind is that when using
 [**popup**](/web/notification/overview#popup-messages) notification messages, you should remove the [**parent**](/web/notification/overview#html-output)
 of each member of the collection, returned by the `getNotifications()` method. In this case the parent will be a `div.k-animation-container` element.
@@ -385,15 +407,15 @@ of each member of the collection, returned by the `getNotifications()` method. I
 
     <span id="notification"></span>
     <button id="removeMessages" type="button" class="k-button">Remove messages and show new ones</button>
-    
+
     <script>
-    
+
     var notificationWidget = $("#notification").kendoNotification({
         button: false,
         hideOnClick: false,
         autoHideAfter: 0
     }).data("kendoNotification");
-    
+
     var messageCount = 1;
 
     notificationWidget.show("foo " + messageCount);
@@ -403,19 +425,19 @@ of each member of the collection, returned by the `getNotifications()` method. I
         // since there is no way for the user to hide notifications,
         // the following expression will return two elements, no matter when it is executed
         var elements = notificationWidget.getNotifications();
-        
+
         // remove the two messages from the DOM
         elements.each(function(){
             $(this).parent().remove();
         });
-        
+
         messageCount++;
-        
+
         // show two new messages
         notificationWidget.show("foo " + messageCount);
         notificationWidget.show("bar " + messageCount);
     });
-    
+
     </script>
 
 #### Returns
@@ -427,7 +449,7 @@ of each member of the collection, returned by the `getNotifications()` method. I
 Hides all notifications from the given widget instance.
 
 If you intend to use this method to dispose of all visible messages before showing new ones,
-then use the [`getNotifications()`](#methods-getNotifications) method instead, unless animations are disabled.
+then use the [`getNotifications()`](/api/javascript/ui/notification/methods/getnotifications) method instead, unless animations are disabled.
 
 #### Example
 
@@ -443,7 +465,7 @@ then use the [`getNotifications()`](#methods-getNotifications) method instead, u
 
 ### info
 
-This is a shorthand method for [`show(data, "info")`](#methods-show)
+This is a shorthand method for [`show(data, "info")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -464,11 +486,11 @@ Displays a notification.
 
 **Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
 
-> **Important** The content **will not** be HTML-encoded. Use the [showText](#methods-showText) if you only intend to show plain text.
+> **Important** The content **will not** be HTML-encoded. Use the [showText](/api/javascript/ui/notification/methods/showtext) if you only intend to show plain text.
 
 ##### type `String`
 
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
+The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
 If this argument is not supplied, then `"info"` is assumed.
 
 #### Example - Use the show method with a template and custom arguments
@@ -478,45 +500,6 @@ If this argument is not supplied, then `"info"` is assumed.
     var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
 
     notificationWidget.show("foo text", "warning");
-    </script>
-
-#### Example - Use the show method and return the message from a function
-
-    <span id="notification"></span>
-    <script>
-    function getNotificationMessage() {
-        return "foo text";
-    }
-
-    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
-
-    notificationWidget.showText(getNotificationMessag);
-    </script>
-
-### showText
-
-Displays a plain-text notification.
-
-This is a safer version of the [show](#methods-show) method that assumes that you want to encode any markup passed in as a message.
-
-#### Parameters
-
-##### data `Object|String|Function`
-
-**Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
-
-##### type `String`
-
-The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](#configuration-templates).
-If this argument is not supplied, then `"info"` is assumed.
-
-#### Example - Use the showText method to display a string
-
-    <span id="notification"></span>
-    <script>
-    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
-
-    notificationWidget.showText("foo text", "warning");
     </script>
 
 #### Example - use the show method with a function argument
@@ -530,17 +513,57 @@ If this argument is not supplied, then `"info"` is assumed.
     }
 
     var notificationWidget = $("#notification").kendoNotification({
-        templates: {
-            myAlert: "<div>System alert: #= myMessage #</div>"
-        }
-    }).data("kendoNotification");
+		templates: [{
+			type: "myAlert",
+			template: "<div>System alert: #= myMessage #</div>"
+		}]
+	}).data("kendoNotification");
 
-    notificationWidget.show(getNotificationMessage, "myAlert");
+	notificationWidget.show(getNotificationMessage, "myAlert");
+    </script>
+
+### showText
+
+Displays a plain-text notification.
+
+This is a safer version of the [show](/api/javascript/ui/notification/methods/show) method that assumes that you want to encode any markup passed in as a message.
+
+#### Parameters
+
+##### data `Object|String|Function`
+
+**Required**. The string content for the notification; or the object with the values for the variables inside the notification template; or the function, which returns the required string or an object.
+
+##### type `String`
+
+The notification type. Built-in types include `"info"`, `"success"`, `"warning"` and `"error"`. Custom types should match the types from the [template configuration](/api/javascript/ui/notification#configuration-templates).
+If this argument is not supplied, then `"info"` is assumed.
+
+#### Example - Use the showText method to display a string
+
+    <span id="notification"></span>
+    <script>
+    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+    notificationWidget.showText("foo text", "warning");
+    </script>
+
+#### Example - Use the show method and return the message from a function
+
+    <span id="notification"></span>
+    <script>
+    function getNotificationMessage() {
+        return "foo text";
+    }
+
+    var notificationWidget = $("#notification").kendoNotification().data("kendoNotification");
+
+    notificationWidget.showText(getNotificationMessage());
     </script>
 
 ### success
 
-This is a shorthand method for [`show(data, "success")`](#methods-show)
+This is a shorthand method for [`show(data, "success")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -550,7 +573,7 @@ This is a shorthand method for [`show(data, "success")`](#methods-show)
 
 ### warning
 
-This is a shorthand method for [`show(data, "warning")`](#methods-show)
+This is a shorthand method for [`show(data, "warning")`](/api/javascript/ui/notification/methods/show)
 
 #### Parameters
 
@@ -582,6 +605,8 @@ The jQuery object, which wraps the element being hidden.
     $("#notification").kendoNotification({
         hide: onHide
     });
+
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>
 
 ### show
@@ -606,4 +631,6 @@ The jQuery object, which wraps the element being displayed.
     $("#notification").kendoNotification({
         show: onShow
     });
+
+	$("#notification").getKendoNotification().show("Kendo Notification");
     </script>

@@ -1,7 +1,7 @@
 ---
 title: User Guide
-page_title: User Guide | Kendo UI Spreadsheet
-description: "A user guide for the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation | User Guide
+description: "Get started with the jQuery Spreadsheet by Kendo UI and check out its user guide."
 slug: user_guide_spreadsheet_widget
 position: 1
 ---
@@ -26,11 +26,18 @@ This guide uses the following conventions:
 
 The Kendo UI Spreadsheet is used for the implementation of related data and its visualization in a tabular format (rows and columns). This kind of data structuring provides for an easier management and analysis. The widget renders the touch and feel of a [Microsoft Excel table](https://support.office.com/en-ca/article/Overview-of-Excel-tables-7ab0bb7d-3a9e-4b56-a3c9-6c94334e492c) by offering many cell-formatting options, styles, and themes while utilizing simpler and easy-to-master user interface.
 
-**Figure 1: Main Elements of the Spreadsheet**
-
 <center>![Spreadsheet UI components](../images/spreadsheet-components.png)</center>
 
 ## Actions
+
+* [Sheets](#sheets)
+* [Cells](#cells)
+* [Rows](#rows)
+* [Columns](#columns)
+* [Fonts](#fonts)
+* [Filters](#filters)
+* [File import and export](#file-import-and-export)
+* [Other](#other)
 
 ### Sheets
 
@@ -117,8 +124,8 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 ### Other
 
 | What you want				| How to get there		|
-| :---						| :---					|
-| Auto fill                 | <ol><li>Insert textual, numeric, or textual and numeric characters of one and the same pattern in at least two subsequent column cells. For example, 1, 2.</li> <li>Select these cells.</li> <li>To copy the data series automatically, drag the fill handle across, down, or up the cells you want to fill.</li></ol> <p>Note that the **Auto Fill** command will copy the format of the cells with the initial data series and will apply it to the target ones.</p> <p>If you select just one cell and drag the fill handle to auto-complete adjacent cells, the command copies, but does not change in the existing pattern, the content from the initial cell to each of the target ones.</p>
+| :---						    | :---					|
+| Auto fill           | <ol><li>Insert textual, numeric, or textual and numeric characters of one and the same pattern in at least two subsequent column cells. For example, 1, 2.</li> <li>Select these cells.</li> <li>To copy the data series automatically, drag the fill handle across, down, or up the cells you want to fill.</li></ol> <p>Note that the **Auto Fill** command copies the format of the cells with the initial data series and will apply it to the target ones.</p> <p>If you select just one cell and drag the fill handle to auto-complete adjacent cells, the command copies, but does not change in the existing pattern, the content from the initial cell to each of the target ones.</p>
 | Freeze panes				| <ol><li>Select the row or column which you want to freeze</li> <li>From the **Toolbar** click **Freeze Panes**</li> <li>Choose the option from the drop-down list</li></ol> |
 | Apply the `Undo` function | Click **Undo** [ <span class="k-icon k-i-undo"></span> ] on the **Menu** to reverse the actions you made during your current session. The number of actions you can reverse using `Undo` is unlimited. |
 | Apply the `Redo` function | Click **Redo** [ <span class="k-icon k-i-redo"></span> ] on the **Menu** to repeat the actions you made during your current session. The number of actions you can repeat using `Redo` is unlimited. |
@@ -135,7 +142,6 @@ You are able to export the content of your Spreadsheet to Portable Document Form
 
 <br>
 
-> **Important**
 > * To close an active drop-down list or menu or exit an open window and then return to the worksheet, click **Cancel** whenever displayed as a command.
 > * To apply an options you have already selected, click **Apply** whenever displayed as a command.
 
@@ -157,8 +163,6 @@ The Spreadsheet supports many of the Excel keyboard shortcuts as seen in the [Li
 Use `SUM` when your case is similar to the second example of the nested formulas above. If to use `SUM` is not possible, avoid nesting values more than 100 levels deep. Note that the maximum depth depends on the browser, but one hundred is considered to be a safe limit.
 
 ## See Also
-
-Other articles on Kendo UI Spreadsheet:
 
 * [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %})
 * [List of Formulas and Functions]({% slug list_offormulas_andfunctions_spreadsheet_widget %})

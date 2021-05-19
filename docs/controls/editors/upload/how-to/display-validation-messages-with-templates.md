@@ -11,9 +11,9 @@ When the Upload is configured to use a template, the content of the template rep
 
 The following example demonstrates how to add a `span` element to the template. This allows a validation message to be conditionally displayed.
 
-###### Example
 
-```html
+
+```dojo
 <div id="example">
     <input name="files" id="files" type="file" />
     <div class="demo-hint">You can only upload <strong>PDF</strong> files.</div>

@@ -3,7 +3,6 @@ title: Aurelia
 page_title: Aurelia | Kendo UI Third-Party Tools
 description: "Create Aurelia applications by using Kendo UI controls through applying the Aurelia-KendoUI Bridge."
 slug: aurelia_integration_kendoui
-position: 10
 ---
 
 # Aurelia
@@ -14,7 +13,7 @@ position: 10
 
 The [Aurelia-KendoUI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/about/about) creates native Aurelia components for the Kendo UI suite, so that developers are able to build Aurelia applications by using the Kendo UI toolkit. This interface is a structured and configurable collection of JavaScript classes. It wraps native Kendo UI controls and presents them as Aurelia components.
 
-The skeleton of the Bridge is the standard Aurelia plugin setup and the [KendoUI Components Catalog index](http://aurelia-ui-toolkits.github.io/demo-kendo/#/project-status) is the resulting output of its implementation and development.
+The skeleton of the Bridge is the standard Aurelia plugin setup and the [KendoUI Components Catalog index](http://aurelia-ui-toolkits.github.io/demo-kendo/#/catalog-index) is the resulting output of its implementation and development.
 
 This Catalogue is an Aurelia application that serves two main purposes:
 
@@ -23,17 +22,13 @@ This Catalogue is an Aurelia application that serves two main purposes:
 
 For more information on the Aurelia-KendoUI Bridge functionalities, refer to [this blog post by Aurelia's founder, Rob Eisenberg](http://blog.durandal.io/2016/01/28/aurelia-and-kendo-ui/).
 
-## Get Started
-
-### Prerequisites and Installation
+## Prerequisites and Installation
 
 To get your project up and running, refer to the page on [installing the Aurelia-KendoUI Bridge](http://aurelia-ui-toolkits.github.io/demo-kendo/#/installation).
 
-### Basic Usage
+## Basic Usage
 
-The example below demonstrates code snippets for Grid components.
-
-###### Example
+The following example demonstrates code snippets for Grid components. For more runnable examples on all Aurelia-KendoUI controls the Bridge supports, refer to the [page of the Aurelia-KendoUI components catalog](http://aurelia-ui-toolkits.github.io/demo-kendo/#/samples/grid/basic-use).
 
 ```tab-View
     <template>
@@ -42,7 +37,7 @@ The example below demonstrates code snippets for Grid components.
         <ak-grid k-data-source.bind="datasource" k-pageable.bind="pageable" k-sortable.bind="true">
           <ak-col k-title="Contact Name" k-field="ContactName">
             <ak-template>
-              <div class='customer-photo' style="background-image: url(http://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);"></div>
+              <div class='customer-photo' style="background-image: url(https://demos.telerik.com/kendo-ui/content/web/Customers/${CustomerID}.jpg);"></div>
               <div class='customer-name'>${ContactName}</div>
             </ak-template>
           </ak-col>
@@ -95,11 +90,7 @@ The example below demonstrates code snippets for Grid components.
     }
 ```
 
-For more runnable examples on all Aurelia-KendoUI controls the Bridge supports, refer to the [page of the Aurelia-KendoUI components catalog](http://aurelia-ui-toolkits.github.io/demo-kendo/#/samples/grid/basic-use).
-
 ## See Also
-
-Articles on Kendo UI integration with third-party tools and frameworks:
 
 * [SharePoint Add-Ins]({% slug sharepoint_tutorials %})
 * [Twitter Bootstrap]({% slug twitterbootstrapintegration_integration_kendoui %})

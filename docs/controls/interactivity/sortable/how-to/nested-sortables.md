@@ -7,11 +7,9 @@ slug: howto_nestsortables_sortable
 
 # Nest Sortables
 
-The example below demonstrates how to create nested Kendo UI Sortable widgets.
+The following example demonstrates how to create nested Kendo UI Sortable widgets.
 
-###### Example
-
-```html
+```dojo
   <ul id="parent">
     <li class="list-item">Apples</li>
     <li class="list-item">Grapefruits</li>
@@ -32,8 +30,9 @@ The example below demonstrates how to create nested Kendo UI Sortable widgets.
 
     $("#parent").kendoSortable({
       connectWith: "#nested",
-      filter: ">li.list-item", //filter only list-items that are direct child of the Sortable container. Use ".list-item" to allow parent items to use the nested sortable.
-      ignore: "#nested >li", //ignore nested list-items
+      filter: ">li.list-item", // Filter only list items that are direct child of the Sortable container.
+      // Use ".list-item" to allow parent items to use the nested Sortable.
+      ignore: "#nested >li", // Ignore the nested list items.
       placeholder: placeholder
     });
     $("#nested").kendoSortable({
@@ -46,10 +45,5 @@ The example below demonstrates how to create nested Kendo UI Sortable widgets.
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Reorder Multiple Items]({% slug howto_reordermultipleitems_sortable %})
-* [How to Transfer Grid Rows]({% slug howto_transfergridrows_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

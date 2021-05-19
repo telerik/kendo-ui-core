@@ -9,9 +9,9 @@ slug: howto_showtabtextandroidskin_hybridtabstrip
 
 The example below demonstrates how to show the tab text of a Hybrid UI TabStrip widget in Android skin.
 
-###### Example
 
-```html
+
+```dojo
   <div data-role="view" data-layout="mobile-tabstrip">
   </div>
 
@@ -50,8 +50,6 @@ The example below demonstrates how to show the tab text of a Hybrid UI TabStrip 
 ```
 
 ## See Also
-
-Other articles on the Hybrid UI TabStrip:
 
 * [Hybrid UI TabStrip JavaScript API Reference](/api/javascript/mobile/ui/tabstrip)
 * [Overview of the Hybrid UI TabStrip]({% slug overview_hybridtabstrip %})

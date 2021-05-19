@@ -10,9 +10,9 @@ slug: howto_changeoptiojnsdynamically_hybridactionsheet
 
 The example below demonstrates how to change the Hybrid UI ActionSheet options dynamically on demand in Kendo UI.
 
-###### Example
 
-```html
+
+```dojo
     <div data-role="view" data-title="Inbox" id="actionsheet-view">
       <h3 id="actionResult"></h3>
       <ul data-role="listview" data-source="inbox" data-template="inboxItem" class="inboxList"></ul>
@@ -173,8 +173,6 @@ The example below demonstrates how to change the Hybrid UI ActionSheet options d
 ```
 
 ## See Also
-
-Other articles on the Hybrid UI ActionSheet:
 
 * [Hybrid UI ActionSheet JavaScript API Reference](/api/javascript/mobile/ui/actionsheet)
 * [Overview of the ActionSheet]({% slug overview_hybridactionsheet %})

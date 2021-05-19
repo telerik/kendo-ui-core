@@ -3,6 +3,7 @@ title: ListView
 page_title: Configuration, methods and events of Kendo UI Mobile ListView
 description: How to display flat or grouped list of items with Kendo UI Mobile ListView widget and use events to handle button clicks and access dataItem.
 res_type: api
+component: mobile-listview
 ---
 
 # kendo.mobile.ui.ListView
@@ -488,6 +489,7 @@ Previously loaded pages in the DataSource are also discarded.
     var foo = new kendo.data.DataSource({
       transport: {
         read: function(options) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(options.data.since_id); // undefined in the first request
           var max = i + 5;
           var data = [];
@@ -505,6 +507,7 @@ Previously loaded pages in the DataSource are also discarded.
         pullToRefresh: true,
         template: "#: name # - #: modified #",
         pullParameters: function(item) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(item); // the last item currently displayed
           return { since_id: item.name };
         }
@@ -1009,6 +1012,7 @@ Get the listview DOM element items
 
     <script>
     function getListViewItems() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log($("#listView").data("kendoMobileListView").items());
     }
 
@@ -1085,6 +1089,7 @@ Fires when item is tapped.
 
     <script>
     function listViewClick(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.item); // The clicked item as a jQuery object
     }
 
@@ -1104,6 +1109,7 @@ Fires when item is tapped.
        }),
 
        click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.dataItem.title);
        }
     });
@@ -1147,6 +1153,7 @@ Fires when the ListView has received data from the DataSource. **The event is us
        }),
 
       dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
       }
     });
@@ -1171,6 +1178,7 @@ Fires when the ListView is about to be rendered. **The event is used only when v
        }),
 
       dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
       }
     });
@@ -1218,6 +1226,7 @@ Fires when a new item is added to the listview. **The event is used in virtual (
     });
 
       function itemChange(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
       }
 

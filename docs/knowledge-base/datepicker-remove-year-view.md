@@ -2,11 +2,12 @@
 title: Hide Year Selection from DatePicker and DateTimePicker
 description: An example on how to disable the year view of the Kendo UI DatePicker and DateTimePicker widgets.
 type: how-to
-page_title: Remove the Year View | Kendo UI DatePicker
+page_title: Remove the Year View | Kendo UI DatePicker for jQuery
 slug: datepicker-remove-year-view
 tags: kendo ui, datepicker, datetimepicker, year view
 ticketid: 1115942, 1116792
 res_type: kb
+component: date-time-pickers
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Date/Time Pickers for Progress Kendo UI</td>
+  <td>Progress Kendo UI DatePicker</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -22,6 +23,7 @@ res_type: kb
  </tr>
 </table>
  
+
 ## Description
 
 Can I disable the display of the year in the DatePicker? How can I enable my users to select only a day from a month while I hide from them the option to select the year?
@@ -34,7 +36,7 @@ The Calendar, DatePicker, and DateTimePicker provide configuration options for h
 
 The following example demonstrates how to hide the year view in a Kendo UI DatePicker.
 
-```html
+```dojo
 <input id="datepicker" />
 <script>
     var openFlag = true;
@@ -94,7 +96,7 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
 
 The following example demonstrates how to hide the year view in a Kendo UI DateTimPicker in MVVM.
 
-```html
+```dojo
 <div id="example">
 <input data-role="datetimepicker"
          data-bind="value: selectedDate,
@@ -160,6 +162,6 @@ The following example demonstrates how to hide the year view in a Kendo UI DateT
 
 ## See Also
 
-* [DatePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
-* [DateTimePicker API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
-* [Calendar API Reference](http://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)
+* [DatePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datepicker)
+* [DateTimePicker API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/datetimepicker)
+* [Calendar API Reference](https://docs.telerik.com/kendo-ui/api/javascript/ui/calendar)

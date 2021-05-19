@@ -1,29 +1,29 @@
-(function(){
+(function() {
 
-var Model;
+    var Model;
 
-module("model get", {
-    setup: function() {
-        Model = kendo.data.Model.define();
-    }
-});
+    describe("model get", function() {
+        beforeEach(function() {
+            Model = kendo.data.Model.define();
+        });
 
-test("get returns the value of the specified field", function() {
-    var m = new Model({
-        foo: "bar"
+        it("get returns the value of the specified field", function() {
+            var m = new Model({
+                foo: "bar"
+            });
+
+            assert.equal(m.get("foo"), "bar");
+        });
+
+        it("get evaluates nested expression", function() {
+            var m = new Model({
+                foo: {
+                    bar: "bar"
+                }
+            });
+
+            assert.equal(m.get("foo.bar"), "bar");
+        });
+
     });
-
-    equal(m.get("foo"), "bar");
-});
-
-test("get evaluates nested expression", function() {
-    var m = new Model({
-        foo: {
-            bar: "bar"
-        }
-    });
-
-    equal(m.get("foo.bar"), "bar");
-});
-
 }());

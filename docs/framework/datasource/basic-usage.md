@@ -9,15 +9,13 @@ position: 2
 
 # Basic Usage
 
-The [Kendo UI DataSource component](http://demos.telerik.com/kendo-ui/datasource/index) plays a central role in practically all web applications built with Kendo UI. It is an abstraction for using local data&mdash;arrays of JavaScript objects&mdash;or remote data&mdash;web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML. This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
+The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasource/index) plays a central role in all web applications built with Kendo UI for jQuery.
 
-## DataSource for Local and Remote Data
+The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML). This article demonstrates some of the most common scenarios regarding the possibilities for you to apply the DataSource component to your projects.
 
-### Create DataSource for Local Data
+## Creating Local Data Sources
 
-The example below demonstrates how to create a DataSource for local data.
-
-###### Example
+The following example demonstrates how to create a DataSource for local data.
 
         var movies = [
                 { title: "Star Wars: A New Hope", year: 1977 },
@@ -33,7 +31,7 @@ The `localDataSource` variable in the example is a DataSource that is initialize
 
 When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overridden, i.e. `autoBind`.
 
-### Create DataSource for Remote Services
+## Creating Remote Data Sources
 
 The process of creating a DataSource for remote data differs in several ways from creating a DataSource for a local data:
 
@@ -41,9 +39,7 @@ The process of creating a DataSource for remote data differs in several ways fro
 * It is optionally required to use a `parameterMap`, which marshals request parameters to the format of a remote endpoint.
 * It is optionally configured to use server operations for calculating aggregates, defining filters, and supporting features like grouping, paging, and sorting.
 
-The example below demonstrates how to create a DataSource for data from a remote endpoint.
-
-###### Example
+The following example demonstrates how to create a DataSource for data from a remote endpoint.
 
         var remoteDataSource = new kendo.data.DataSource({
             type: "odata",
@@ -60,9 +56,7 @@ As is the case with creating a DataSource for local data, the data provided by t
 
 When the DataSource is bound to a Kendo UI widget or chart, the explicit invocation may not be necessary. The default configuration of the widgets is set to automatically bind to an associated DataSource. However, this may be overridden, i.e. `autoBind`.
 
-The example below demonstrates how to create a DataSource for data from another remote endpoint.
-
-###### Example
+The following example demonstrates how to create a DataSource for data from another remote endpoint.
 
         var remoteDataSource = new kendo.data.DataSource({
             transport: {
@@ -80,19 +74,11 @@ The example below demonstrates how to create a DataSource for data from another 
 
 The DataSource in the example is initialized to represent an in-memory cache of tweets from the search service for Twitter. This endpoint employs a [JSON](http://www.json.org/)-based endpoint contact that allows an input parameter `q` to denote a query string for the search service. Here, its value is provided by an input element on the page.
 
-Operations conducted by the DataSource against this remote endpoint are performed via [`jQuery.ajax()`](http://api.jquery.com/jQuery.ajax/) and therefore, are subject to the same security constraints as the ones enforced by the user agent. These security constraints also apply to [XHRs (XMLHttpRequests)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
+Operations conducted by the DataSource against this remote endpoint are performed via [`jQuery.ajax()`](https://api.jquery.com/jQuery.ajax/) and therefore, are subject to the same security constraints as the ones enforced by the user agent. These security constraints also apply to [XHRs (XMLHttpRequests)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) made across different domains. Since this is the case with the example above, the `dataType` configuration property is set to use [JSONP](https://en.wikipedia.org/wiki/JSONP).
 
-## Data Filtration
+## Local Filtering
 
-Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource#configuration-filter) configuration option.
-
-### Local Filtering
-
-Local filtering is convenient for small datasets.
-
-Avoid it when working with large datasets because it might lead to performance issues.
-
-###### Example
+Filtering local data is a trivial task using the DataSource. The component accepts a list of one or more filter expressions. They can be combined by using the `and` or `or` logical operators. For more details about the filter expression structure, refer to the documentation on the [`filter`](/api/javascript/data/datasource/configuration/filter) configuration option. Local filtering is convenient for small datasets. Avoid it when working with large datasets because it might lead to performance issues.
 
 ```tab-Data
 
@@ -117,15 +103,11 @@ Avoid it when working with large datasets because it might lead to performance i
         });
 ```
 
-### Server Filtering
+## Server Filtering
 
-Server filtering is convenient for large datasets.
+Server filtering is convenient for large datasets. Make sure that you set the [`schema`](/api/javascript/data/datasource/configuration/schema) and the [`filter`](/api/javascript/data/datasource/configuration/filter) properties as necessary.
 
-Be sure to set the [`schema`](/api/javascript/data/datasource#configuration-schema) and the [`filter`](/api/javascript/data/datasource#configuration-filter) properties as necessary.
-
-The example below features local data but the data returned by the [`transport`](/api/javascript/data/datasource#configuration-transport) is going to be evaluated the same way.
-
-###### Example
+The following example features local data but the data returned by the [`transport`](/api/javascript/data/datasource/configuration/transport) is going to be evaluated the same way.
 
 ```tab-Data
         //the JSON result from "{remote service}"
@@ -158,100 +140,34 @@ The example below features local data but the data returned by the [`transport`]
         });
 ```
 
-### Accent Folding
+## Accent Folding
 
-The DataSource does not support `accent folding` out of the box. However, it can be easily implemented by using either local or server filtering.
+Starting from R2 2019 release there is a built-in functionality in the Kendo UI DataSource to handle cases when user needs to filter on diacritic characters for specific language. The [accentFoldingFiltering](/api/javascript/data/datasource/configuration/accentfoldingfiltering) option allows user to define a specific culture to be used when applying the filter. Since these characters are unique for a specific language, setting the appropriate culture has to be set as a value. For example, `tr-TR` for Turkish, `es-ES` for Spanish, or `fr-FR` for French.
 
-#### Using Local Filtering
+> Due to the specifics of the case-insensitive search, only one language can be used to filter your data. For example, if you mix Spanish and Turkish in the data, you may observe unexpected behavior.
 
-The example below demonstrates accent folding with local filtering.
+The following example demonstrates how to check the filtering.
 
-###### Example
-
-    <h5>DataSource will display all matching to 'Lo' search value items</h5>
-    <div id="result"></div>
     <script>
-    var template = kendo.template("<div>#: name #</div>");
-
-    var accentMap = {
-      'ó':'o',
-      'ø':'o',
-      'ö':'o'
-    };
-
-    var accentRegExp = new RegExp(Object.keys(accentMap).join("|"), "ig");
-
-    var replace = function(value) {
-      return value.replace(accentRegExp, function(match) {
-        return accentMap[match] || match;
+      var dataSource = new kendo.data.DataSource({
+        data: [
+            {  name: "KIZILTOPRAK" },
+            {  name: "KARŞIYAKA" },
+            {  name: "İSTANBUL" }
+        ],
+        filter: { field: "name", operator: "contains", value: "k\u0131z" },
+        accentFoldingFiltering: "tr-TR"
       });
-    };
-
-    var dataSource = new kendo.data.DataSource({
-      change: function() {
-				$("#result").html(kendo.render(template, this.view()));
-      },
-      data: [
-        { name: "Fulanito López", age: 30 },
-        { name: "Erik Lørgensen", age: 33 },
-        { name: "Lorena Smith", age: 20 },
-        { name: "James Lö", age: 32 }
-      ],
-      filter: {
-       	field: "name",
-        operator: function(value, search) {
-          return replace(value).indexOf(search) !== -1;
-        },
-        value: "Lo"
-      }
-    });
-
-    dataSource.fetch();
+      dataSource.fetch(function() {
+        var view = dataSource.view();
+        console.log(view.length); // displays "1"
+        console.log(view[0].name); // displays "KIZILTOPRAK"
+      });
     </script>
 
-#### Using Server Filtering
+## Local Grouping
 
-The example below demonstrates accent folding with server filtering.
-
-###### Example
-
-```tab-Data
-        //the 'accent folding' is done on the server
-        {
-            result: [
-                { name: "Fulanito López", age: 30 },
-                { name: "Erik Lørgensen", age: 33 },
-                { name: "Lorena Smith", age: 20 },
-                { name: "James Lö", age: 32 }
-            ]
-        }
-```
-```tab-DataSource
-
-        var wordsDataSource = new kendo.data.DataSource({
-            serverFiltering: true,
-            transport: {
-                read: {
-                    url: "{remote service}"
-                }
-            },
-            schema: {
-                data: "result"
-            },
-
-            filter: { field: "name", operator: "contains", value: "Lo" }
-        });
-```
-
-## Grouped Data Handling
-
-Grouping local data is mostly trivial&mdash;you can continue to use the same DataSource you are already familiar with. However, generating grouped data on the server can be difficult when you are unsure of the format the DataSource is expecting.
-
-### Local Grouping
-
-Local grouping is convenient for small datasets. However, avoid it is working with large datasets for performance reasons.
-
-###### Example
+When you group local data, you can continue to use the same DataSource you are already familiar with. However, generating grouped data on the server can be difficult when you are unsure of the format the DataSource is expecting. Local grouping is convenient for small datasets. However, for performance concerns, avoid it when you work with large datasets.
 
 ```tab-Data
 
@@ -275,13 +191,11 @@ Local grouping is convenient for small datasets. However, avoid it is working wi
         });
 ```
 
-### Server Grouping
+## Server Grouping
 
 Server grouping is an excellent option when working with large datasets. Be sure to set the `schema` and `group` properties as necessary.
 
-The example below features local data but the data returned by a `transport` is going to be evaluated the same way.
-
-###### Example
+The following example features local data but the data returned by a `transport` is going to be evaluated the same way.
 
 ```tab-Data
 
@@ -324,8 +238,6 @@ The example below features local data but the data returned by a `transport` is 
 ```
 
 ## See Also
-
-Other articles on the Kendo UI DataSource component:
 
 * [DataSource Overview]({% slug overview_kendoui_datasourcecomponent %})
 * [Offline Support]({% slug offlinesupport_kendoui_datasourcecomponent %})

@@ -9,18 +9,16 @@ slug: howto_embedfontawesome_inexportedpdf_drawingapi
 
 Custom fonts, including icon fonts such as [Font Awesome](https://fortawesome.github.io/Font-Awesome/), must be [available for embedding]({% slug drawingofhtmlelements_drawingapi %}#configuration-Custom) during PDF Export. Otherwise, the generated document will use a standard set of fonts as defined by the PDF Standard. These fonts normally cover only the [ASCII](https://en.wikipedia.org/wiki/ASCII) range.
 
-The example below demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
+The following example demonstrates how to embed custom fonts while working with the Kendo UI Drawing API and exporting content in PDF.
 
-###### Example
-
-```html
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
+```dojo
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css">
 
     <script>
       // The font file location must be set explicitly if it's not hosted in the same domain
       kendo.pdf.defineFont({
         "FontAwesome":
-            "http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf"
+            "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf"
       });
     </script>
 
@@ -48,13 +46,13 @@ The example below demonstrates how to embed custom fonts while working with the 
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+          proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
         },
         dataSource: {
           type: "odata",
           transport: {
             read: {
-              url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
+              url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Employees",
             }
           }
         },
@@ -71,8 +69,6 @@ The example below demonstrates how to embed custom fonts while working with the 
 ```
 
 ## See Also
-
-Other articles and how-to examples on Kendo UI Drawing API:
 
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)

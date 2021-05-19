@@ -21,9 +21,9 @@
         return items;
     }
 
-    module("VirtualList Aria: ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("VirtualList Aria: ", function () {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -50,44 +50,44 @@
                 dataValueField: "value",
                 selectable: true
             });
-        },
+        });
 
-        teardown: function() {
+        afterEach(function() {
             if (container.data("kendoVirtualList")) {
                 container.data("kendoVirtualList").destroy();
             }
 
-            QUnit.fixture.empty();
-        }
+            Mocha.fixture.empty();
     });
 
     //rendering
 
-    test("elements received role='listbox' attribute", 1, function() {
-        equal(virtualList.element.attr("role"), "listbox");
+    it("elements received role='listbox' attribute", function() {
+        assert.equal(virtualList.element.attr("role"), "listbox");
     });
 
-    asyncTest("items receive role='option' attribute", 1, function() {
+    it("items receive role='option' attribute", function(done) {
         asyncDataSource.read().then(function() {
-            start();
-            equal(virtualList.items().first().attr("role"), "option");
+            assert.equal(virtualList.items().first().attr("role"), "option");
+            done();
         });
     });
 
-    asyncTest("optionLabel receive role='option' attribute", 1, function() {
+    it("optionLabel receive role='option' attribute", function(done) {
         asyncDataSource.read().then(function() {
-            start();
-            equal(virtualList.items().first().attr("role"), "option");
+            assert.equal(virtualList.items().first().attr("role"), "option");
+            done();
         });
     });
 
-    asyncTest("currently focused item receives ID attribute", 1, function() {
+    it("currently focused item receives ID attribute", function(done) {
         asyncDataSource.read().then(function() {
             virtualList.select(virtualList.items().eq(1)).done(function() {
-                start();
-                equal(virtualList.focus().attr("id"), virtualList._optionID);
+                assert.equal(virtualList.focus().attr("id"), virtualList._optionID);
+                done();
             });
         });
     });
 
-})();
+    });
+}());

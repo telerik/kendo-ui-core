@@ -9,9 +9,7 @@ slug: howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget
 
 The following example demonstrates how to get all flagged cells in the Spreadsheet which contain invalid values.
 
-###### Example
-
-```html
+```dojo
 <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
 <div id="example">
   <div id="spreadsheet" style="width: 100%;"></div>
@@ -19,14 +17,13 @@ The following example demonstrates how to get all flagged cells in the Spreadshe
     function getFlaggedCells(e) {
       var spreadsheet = e.sender;
       var sheet = spreadsheet.activeSheet();
-      var cellsStates = sheet.range('A3:E8').getState();
-      for (var r in cellsStates.data) {
-        for(var c in cellsStates.data[r]){
-          if (cellsStates.data[r][c].validation && !cellsStates.data[r][c].validation.value) {
-            console.log(r+","+c);
+      var range = sheet.range('A3:E8');
+
+      range.forEachCell(function (row, column, cell) {
+          if(cell.validation && !cell.validation.value) {
+          	console.log("Row: " + row + " Col: " + column);
           }
-        }
-      }
+      });
     }
 
     $(function() {
@@ -573,6 +570,5 @@ The following example demonstrates how to get all flagged cells in the Spreadshe
 
 ## See Also
 
+* [Basic Usage of the Spreadsheet (Demo)](https://demos.telerik.com/kendo-ui/spreadsheet/index)
 * [Spreadsheet JavaScript API Reference](/api/javascript/ui/spreadsheet)
-* [How to Bind Charts to Sheet Data]({% slug howto_bindcharttosheet_spreadsheet_widget %})
-* [How to Set Validation Rules to Column Ranges]({% slug howto_validationtocolumn_spreadsheet_widget %})

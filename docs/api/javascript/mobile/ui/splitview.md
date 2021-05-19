@@ -3,6 +3,7 @@ title: SplitView
 page_title: Configuration, methods and events of Kendo UI Mobile SplitView
 description: See how to define horizontal or vertical style of the Kendo UI Mobile SplitView widget and learn which events are fired.
 res_type: api
+component: split-view
 ---
 
 # kendo.mobile.ui.SplitView
@@ -64,6 +65,7 @@ Fires after the mobile SplitView and its child widgets are initialized.
 
     <script>
     function onInit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e);
     }
     new kendo.mobile.Application();
@@ -92,6 +94,7 @@ Fires when the mobile SplitView becomes visible.
 
     <script>
     function onShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e);
     }
     new kendo.mobile.Application();

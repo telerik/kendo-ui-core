@@ -1,39 +1,37 @@
 ---
-title: DataSource Export
-page_title: DataSource Export | Kendo UI Excel Export
+title: Exporting Data Sources
+page_title: Exporting Data Sources | Kendo UI Excel Export
 description: "Learn how to create Excel documents by using the Kendo UI DataSource component."
 slug: exportdatasource_excelexport_kendoui
 position: 7
 ---
 
-# DataSource Export
+# Exporting Data Sources
 
-The Kendo UI API allows you to create Excel documents from any data set and save them to a client machine. In this way you are able to extract the data stored in a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) to an Excel file.
+Kendo UI allows you to create Excel documents from any data set and save them to a client machine.
 
-## Configuration
+In this way you are able to extract the data that is stored in a [Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}) to an Excel file.
 
-### Requirements
+## Getting Started
 
-To extract the DataSource to an Excel document (workbook), follow these steps:
+To extract the DataSource to an Excel document (workbook):
 
 1. Instantiate a [Kendo UI DataSource](/api/javascript/data/datasource).
 2. Create the rows header structure based on the DataSource data. Save it into an `array`.
-3. Fetch the remote data and by using the callback of the [`fetch`](/api/javascript/data/datasource#methods-fetch) method, loop through the items and push the data to the `rows` array.
+3. Fetch the remote data and by using the callback of the [`fetch`](/api/javascript/data/datasource/methods/fetch) method, loop through the items and push the data to the `rows` array.
 4. Instantiate a [`kendo.ooxml.Workbook`](/api/javascript/ooxml/workbook). The workbook has an array of sheets, where you can set their width and title, and set the `rows` property to the already created `rows` array.
-5. Call the [`toDataURL`](/api/javascript/ooxml/workbook#methods-toDataURL) method of the workbook to get the output Excel file as a data URI.
+5. Call the [`toDataURL`](/api/javascript/ooxml/workbook/methods/todataurl) or [`toDataURLAsync`](/api/javascript/ooxml/workbook/methods/todataurlasync) methods of the workbook to get the output Excel file as a data URI.
 
-### Create Excel Workbook
+## Creating Excel Workbooks
 
-The example below demonstrates how to create an Excel workbook based on the requirements from the previous section.
+The following example demonstrates how to create an Excel workbook based on the steps from the previous section.
 
-###### Example
-
-```html
+```dojo
     <script>
       var ds = new kendo.data.DataSource({
         type: "odata",
         transport: {
-          read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
         },
         schema: {
           model: {
@@ -50,24 +48,24 @@ The example below demonstrates how to create an Excel workbook based on the requ
 
       var rows = [{
         cells: [
-           // First cell
+           // The first cell.
           { value: "OrderID" },
-           // Second cell
+           // The second cell.
           { value: "Freight" },
-          // Third cell
+          // The third cell.
           { value: "ShipName" },
-          // Fourth cell
+          // The fourth cell.
           { value: "OrderDate" },
-          // Fifth cell
+          // The fifth cell.
           { value: "ShipCity" }
         ]
       }];
 
-      //using fetch, so we can process the data when the request is successfully completed
+      // Use fetch so that you can process the data when the request is successfully completed.
       ds.fetch(function(){
         var data = this.data();
         for (var i = 0; i < data.length; i++){
-          //push single row for every record
+          // Push single row for every record.
           rows.push({
             cells: [
               { value: data[i].OrderID },
@@ -82,21 +80,21 @@ The example below demonstrates how to create an Excel workbook based on the requ
           sheets: [
             {
               columns: [
-                // Column settings (width)
+                // Column settings (width).
                 { autoWidth: true },
                 { autoWidth: true },
                 { autoWidth: true },
                 { autoWidth: true },
                 { autoWidth: true }
               ],
-              // Title of the sheet
+              // The title of the sheet.
               title: "Orders",
-              // Rows of the sheet
+              // The rows of the sheet.
               rows: rows
             }
           ]
         });
-        //save the file as Excel file with extension xlsx
+        // Save the file as an Excel file with the xlsx extension.
         kendo.saveAs({dataURI: workbook.toDataURL(), fileName: "Test.xlsx"});
       });
     </script>
@@ -104,11 +102,9 @@ The example below demonstrates how to create an Excel workbook based on the requ
 
 ## See Also
 
-Articles on the Excel export functionality in Kendo UI:
-
 * [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
-* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
-* [Freeze Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
-* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
-* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
-* [Create Multiple Sheets]({% slug sheets_excelexport_kendoui %})
+* [Customizing the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Freezing Rows and Columns]({% slug freezerowsandcolumns_excelexport_kendoui %})
+* [Setting the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Spanning Cells across Rows and Columns]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Creating Multiple Sheets]({% slug sheets_excelexport_kendoui %})

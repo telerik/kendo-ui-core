@@ -100,6 +100,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
+            Widget.fn.destroy.call(this);
+
             this.events.destroy();
         },
 

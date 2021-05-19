@@ -99,10 +99,11 @@ var __meta__ = { // jshint ignore:line
                     that._hovered = true;
                 })
                 .on("wheel" + NS, function(e) {
-                    var scrollArea = $(this).find(".k-list").parent();
-                    if ((scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
-                        (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0)) {
-                            e.preventDefault();
+                    var list = $(e.target).find(".k-list");
+                    var scrollArea = list.parent();
+                    if (list.length && list.is(":visible") && ((scrollArea.scrollTop() === 0 && e.originalEvent.deltaY < 0) ||
+                        (scrollArea.scrollTop() === scrollArea.prop('scrollHeight') - scrollArea.prop('offsetHeight') && e.originalEvent.deltaY > 0))) {
+                           e.preventDefault();
                     }
                 })
                 .on("mouseleave" + NS, function() {
@@ -183,7 +184,8 @@ var __meta__ = { // jshint ignore:line
                     duration: 100,
                     hide: true
                 }
-            }
+            },
+            omitOriginOffsets: false
         },
 
         _animationClose: function() {
@@ -217,7 +219,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!options.modal) {
-                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
+                DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy);
                 that._toggleResize(false);
             }
 
@@ -259,8 +261,8 @@ var __meta__ = { // jshint ignore:line
                 that._activated = false;
 
                 if (!options.modal) {
-                    DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy)
-                                .bind(that.downEvent, that._mousedownProxy);
+                    DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy)
+                                .on(that.downEvent, that._mousedownProxy);
 
                     // this binding hangs iOS in editor
                     // all elements in IE7/8 fire resize event, causing mayhem
@@ -291,6 +293,12 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.anchor != BODY) {
                     that._showDirClass(animation);
+                }
+
+                if (!element.is(":visible") && element.data("olddisplay") === undefined) {
+                    element.show();
+                    element.data("olddisplay", element.css("display"));
+                    element.hide();
                 }
 
                 element.data(EFFECTS, animation.effects)
@@ -420,7 +428,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
 
-                DOCUMENT_ELEMENT.unbind(that.downEvent, that._mousedownProxy);
+                DOCUMENT_ELEMENT.off(that.downEvent, that._mousedownProxy);
 
                 if (skipEffects) {
                     animation = { hide: true, effects: {} };
@@ -475,11 +483,18 @@ var __meta__ = { // jshint ignore:line
             var method = toggle ? "on" : "off";
             var eventNames = support.resize;
 
-            if (!(support.mobileOS.ios || support.mobileOS.android)) {
+            if (!(support.mobileOS.ios || support.mobileOS.android || support.browser.safari)) {
                 eventNames += " " + SCROLL;
             }
 
-            this._scrollableParents()[method](SCROLL, this._resizeProxy);
+            if (toggle && !this.scrollableParents) {
+                this.scrollableParents = this._scrollableParents();
+            }
+
+            if (this.scrollableParents && this.scrollableParents.length) {
+                this.scrollableParents[method](SCROLL, this._resizeProxy);
+            }
+
             WINDOW[method](eventNames, this._resizeProxy);
         },
 
@@ -678,11 +693,11 @@ var __meta__ = { // jshint ignore:line
                 appendTo = $(that.options.appendTo),
                 appendToOffset,
                 width = outerWidth(element),
-                height = outerHeight(element),
+                height = outerHeight(element) || outerHeight(element.children().first()),
                 anchorWidth = outerWidth(anchor),
                 anchorHeight = outerHeight(anchor),
-                top = anchorOffset.top,
-                left = anchorOffset.left,
+                top = that.options.omitOriginOffsets ? 0 : anchorOffset.top,
+                left = that.options.omitOriginOffsets ? 0 : anchorOffset.left,
                 round = Math.round;
 
             if (appendTo[0] != document.body) {
@@ -774,7 +789,7 @@ var __meta__ = { // jshint ignore:line
         },
         _focusableElements: function(){
             var elements = this.element.find(focusableNodesSelector).filter(function(i, item){
-                return item.tabIndex >= 0 && $(item).is(':visible');
+                return item.tabIndex >= 0 && $(item).is(':visible') && !$(item).is('[disabled]');
             });
 
             if (this.element.is("[tabindex]")) {
@@ -814,10 +829,23 @@ var __meta__ = { // jshint ignore:line
             return elements.get((current + (e.shiftKey ? -1 : 1)) % count);
         },
         _focus: function(element){
+            if (element.nodeName == "IFRAME") {
+                element.contentWindow.document.body.focus();
+                return;
+            }
+
             element.focus();
-            if (element.nodeName == "INPUT" && element.setSelectionRange) {
+
+            if (element.nodeName == "INPUT" && element.setSelectionRange && this._haveSelectionRange(element)) {
                 element.setSelectionRange(0, element.value.length);
             }
+        },
+        _haveSelectionRange: function(element){
+            var elementType = element.type.toLowerCase();
+
+            return elementType === "text" || elementType === "search" ||
+            elementType === "url" || elementType === "tel" ||
+            elementType === "password";
         }
     });
     ui.Popup.TabKeyTrap = TabKeyTrap;

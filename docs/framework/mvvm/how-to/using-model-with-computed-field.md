@@ -7,11 +7,9 @@ slug: howto_applysourceandtemplatebinding_usingmodelcomputedfield_mvvm
 
 # Apply Source and Template Binding Using Model with Computed Field
 
-The example below demonstrates how to apply source and template binding by using a Model with a computed field in Kendo UI MVVM.
+The following example demonstrates how to apply source and template binding by using a Model with a computed field in Kendo UI MVVM.
 
-###### Example
-
-```html
+```dojo
   <div data-bind="source: data" data-template="tmp"></div>
   <script id="tmp" type="text/x-kendo-template">
     <div>
@@ -46,8 +44,6 @@ The example below demonstrates how to apply source and template binding by using
 ```
 
 ## See Also
-
-Other articles on Kendo UI MVVM:
 
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [ObservableObject Overview]({% slug overview_observabeobject_kendoui %})

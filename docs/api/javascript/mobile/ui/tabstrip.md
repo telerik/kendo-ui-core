@@ -3,6 +3,7 @@ title: TabStrip
 page_title: Configuration, methods and events of Kendo UI Mobile TabStrip
 description: How to configure Mobile Tabstrip widget with a few clicks, change its behavior and use supported events.
 res_type: api
+component: mobile-tabstrip
 ---
 
 # kendo.mobile.ui.TabStrip
@@ -75,6 +76,7 @@ The target value to be set or false to be removed.
       // Set the first tab badge value to 5
       tabstrip.badge(0, 5);
       // Get the current badge value on the first tab.
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(tabstrip.badge(0));
     }
     </script>
@@ -104,6 +106,7 @@ Get the currently selected tab DOM element.
     function onInit(e) {
       var tabstrip = e.view.footer.find(".km-tabstrip").data("kendoMobileTabStrip");
       var currentItem = tabstrip.currentItem();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(currentItem);
     }
     </script>

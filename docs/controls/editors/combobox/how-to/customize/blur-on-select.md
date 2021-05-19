@@ -10,9 +10,9 @@ slug: howto_blur_after_select_combobox
 
 The following example demonstrates how to blur the input in a Kendo UI ComboBox after an option has been selected.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>ComboBox</h4>

@@ -9,13 +9,11 @@ slug: howto_rendercustomsymbols_forbubblelayers_map
 
 The Bubble Layer allows you to define the way symbols are rendered.
 
-This approach works by defining a [`symbol`](/api/javascript/dataviz/ui/map#configuration-layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/javascript/drawing/group) of shapes.
+This approach works by defining a [`symbol`](/api/javascript/dataviz/ui/map/configuration/layers.symbol) function that uses the [Drawing API]({% slug overview_kendoui_drawingapi %}) to define the shape. The symbol is typically a [Group](/api/javascript/drawing/group) of shapes.
 
 The following example demonstrates how to render 200-kilometer lines in West-East direction as a symbol. Note that the lines get longer the farther you go North, which is due to that fact that the example uses the [Mercator Projection](https://en.wikipedia.org/wiki/Mercator_projection).
 
-###### Example
-
-```html
+```dojo
     <div id="map"></div>
     <script>
       var draw = kendo.dataviz.drawing;
@@ -28,16 +26,16 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
         wraparound: false,
         layers: [{
           type: "tile",
-          urlTemplate: "http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          urlTemplate: "https://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
           subdomains: ["a", "b", "c"],
-          attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap contributors</a>"
+          attribution: "&copy; <a href='https://osm.org/copyright'>OpenStreetMap contributors</a>"
         }, {
           type: "bubble",
           attribution: "Population data from Nordpil and UN Population Division.",
           dataSource: {
             transport: {
               read: {
-                url: "http://runner.telerik.io/fullscreen/EsuDU.json",
+                url: "https://runner.telerik.io/fullscreen/EsuDU.json",
                 dataType: "json"
               }
             }
@@ -50,23 +48,19 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
             // Bubble location
             var location = e.location;
 
-            // Find locations 100km west and east of center
-            //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location#methods-destination
-            //
+            // Find locations 100km west and east of center.
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/map/location/methods/destination
             // Actual distance can be bound to e.dataItem fields
             var l1 = location.destination(100000, 270);
             var l2 = location.destination(100000, 90);
 
-            // View (screen) coordinates for the locations
-            //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map#methods-locationToView
+            // View the (screen) coordinates for the locations.
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/map/methods/locationToView
             var p1 = map.locationToView(l1);
             var p2 = map.locationToView(l2);
 
-            // Draw the lines
-            //
-            // http://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/circle
+            // Draw the lines.
+            // https://docs.telerik.com/kendo-ui/api/javascript/dataviz/drawing/circle
             var path = new draw.Path({
               stroke: {
                 width: 2,
@@ -89,11 +83,6 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
 
 ## See Also
 
-* [Map JavaScript API Reference](/api/javascript/dataviz/ui/map)
-* [How to Add Shape Titles]({% slug howto_addhspaetitles_map %})
-* [How to Drag and Drop Markers]({% slug howto_draganddropmarkers_map %})
-* [How to Highlight Map Shapes by ID]({% slug howto_highlightmapshapesbyid_map %})
-* [How to Update Map Shapes by ID]({% slug howto_updatemapshapesbyid_map %})
-* [How to Zoom on Area]({% slug howto_zoomonarea_map %})
-
-For more runnable examples on the Kendo UI Map, browse the [**How To** documentation folder]({% slug howto_addhspaetitles_map %}).
+* [Basic Usage of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/index)
+* [Using the API of the Map (Demo)](https://demos.telerik.com/kendo-ui/map/api)
+* [JavaScript API Reference of the Map](/api/javascript/dataviz/ui/map)

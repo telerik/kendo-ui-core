@@ -9,12 +9,12 @@ slug: include_esri_map_mobile_application
 
 The example below demonstrates how to include an Esri(ArcGIS) map when working with the Hybrid UI Application of Kendo UI.
 
-###### Example
 
-```html
-      <style id="jsbin-css"></style>
-    <link rel="stylesheet" href="http://js.arcgis.com/3.6/js/esri/css/esri.css" />
-    <script src="http://js.arcgis.com/3.6/"></script>
+
+```dojo
+    <style id="jsbin-css"></style>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.6/js/esri/css/esri.css" />
+    <script src="https://js.arcgis.com/3.6/"></script>
     <div data-role="view" data-stretch="true" data-init="onInit">
       <header data-role="header">
         <div data-role="navbar">

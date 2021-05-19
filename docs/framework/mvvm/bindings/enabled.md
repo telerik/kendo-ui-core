@@ -1,24 +1,21 @@
 ---
 title: Enabled
-page_title: Enabled | Kendo UI MVVM
+page_title: Enabled Binding | Kendo UI MVVM
 description: "Learn how to enable the target DOM element by having the View-Model value return true values in Kendo UI MVVM."
 slug: enabledbinding_mvvm_kendoui
 ---
 
 # Enabled Binding
 
-The Kendo UI Enabled (`enabled`) binding enables the target DOM element or widget if the View-Model value is `true`. If the View-Model value is `false` the target DOM element or widget is disabled.
+The Kendo UI Enabled (`enabled`) binding enables the target DOM element or widget if the View-Model value is `true`.
 
-## Getting Started
+If the View-Model value is `false` the target DOM element or widget is disabled.
 
-The `enabled` binding supports only input HTML elements: `input`, `select`, `button` and `textarea`.
-When an input element is disabled the end user cannot change its value (type in text or choose a different option).
+The `enabled` binding supports only input HTML elements&mdash;`input`, `select`, `button` and `textarea`. When an input element is disabled the end user cannot change its value (type in text or choose a different option).
 
-### Setup
+Non-Boolean values, such as `0`, `null`, `undefined`, and `""`, are treated as `false` by the `enabled` binding. All other values are treated as `true`.
 
-The example below demonstrates how to use the `enabeled` binding.
-
-###### Example
+The following example demonstrates how to use the `enabled` binding. The `input` element is initially disabled because the value of the `isNameEnabled` field is `false`. When the user presses the button, the `input` is enabled because the value of the `isNameEnabled` field is set to `true`.
 
     <div id="view">
         <input type="text" data-bind="value: name, enabled: isNameEnabled" />
@@ -36,15 +33,7 @@ The example below demonstrates how to use the `enabeled` binding.
     kendo.bind($("#view"), viewModel);
     </script>
 
-In the example, the `input` element is initially disabled because the value of the `isNameEnabled` field is `false`. When the user presses the button, the `input` is enabled because the value of the `isNameEnabled` field is set to `true`.
-
-### Non-Boolean Values
-
-Non-boolean values, such as `0`, `null`, `undefined` and `""`, are treated as `false` by the `enabled` binding. All other values are treated as `true`.
-
 ## See Also
-
-Other articles on the Kendo UI MVVM component and bindings:
 
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})

@@ -1,6 +1,6 @@
 ---
 title: Checked
-page_title: Checked | Kendo UI MVVM
+page_title: Checked Binding | Kendo UI MVVM
 description: "Learn how to change the behavior of a checkbox or a radio button based on the value from the View-Model in Kendo UI MVVM."
 slug: checkedbinding_mvvm_kendoui
 ---
@@ -9,21 +9,13 @@ slug: checkedbinding_mvvm_kendoui
 
 The Kendo UI Checked (`checked`) binding checks or unchecks a checkbox (`<input type="checkbox" />`) or a radio button (`<input type="radio" />`) based on a value from the View-Model.
 
-> **Important**
->
-> The `checked` binding supports only checkable DOM elements and widgets.
+> The `checked` binding supports only checkable DOM elements and widgets. To set the value of other `input` elements, use the `value` binding.
 
-To set the value of other `input` elements use the `value` binding.
+## Using with Checkboxes
 
-## Checkboxes
+The [Kendo UI MVVM](https://demos.telerik.com/kendo-ui/mvvm/index) displays a bound checkbox in `checked` state if the value from the View-Model is `true`. If the checkbox is checked by the end-user, the value from the View-Model is set to `true`. Unchecking the checkbox sets the value from the View-Model to `false`. Setting the value from the View-Model via code checks or unchecks the checkbox depending on the new value.
 
-The [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/mvvm/index) displays a bound checkbox in `checked` state if the value from the View-Model is `true`. If the checkbox is checked by the end-user, the value from the View-Model is set to `true`. Unchecking the checkbox sets the value from the View-Model to `false`. Setting the value from the View-Model via code checks or unchecks the checkbox depending on the new value.
-
-### Use with Checkboxes
-
-The example below demonstrates how to use the `checked` binding with a checkbox.
-
-###### Example
+The following example demonstrates how to use the `checked` binding with a checkbox. The checkbox is initially displayed as unchecked because the value of the `isChecked` field is `false`. If the user checks the checkbox, the `isChecked` field is set to `true`. Setting `isChecked` to `true` from code checks the checkbox. Setting `isChecked` to `false` unchecks it.
 
     <input type="checkbox" data-bind="checked: isChecked" />
     <script>
@@ -34,15 +26,11 @@ The example below demonstrates how to use the `checked` binding with a checkbox.
     kendo.bind($("input"), viewModel);
     </script>
 
-In the example, the checkbox is initially displayed as unchecked because the value of the `isChecked` field is `false`. If the user checks the checkbox, the `isChecked` field is set to `true`. Setting `isChecked` to `true` from code checks the checkbox. Setting `isChecked` to `false` unchecks it.
-
-### Bind List of Checkboxes to Array
+## Binding Lists of Checkboxes to Arrays
 
 The `checked` binding also supports binding a list of checkboxes to a View-Model value of an array type. Checking a checkbox from the list appends its `value` attribute to the array specified by the `checked` binding. Unchecking a checkbox removes its `value` attribute from the array.
 
-The example below demonstrates how to use the `checked` binding with a list of checkboxes.
-
-###### Example
+The following example demonstrates how to use the `checked` binding with a list of checkboxes. The first checkbox is checked after calling `kendo.bind` because its `value` attribute (`"Red"`) is present in the `colors` array specified by the `checked` binding. Checking another checkbox from the list, e.g. `"Blue"`, would append its `value` attribute (`"Blue"`) to the `colors` array. Unchecking a checkbox from the list would remove its `value` attribute from the `colors` array.
 
     <input type="checkbox" value="Red"   data-bind="checked: colors" />
     <input type="checkbox" value="Green" data-bind="checked: colors" />
@@ -55,17 +43,13 @@ The example below demonstrates how to use the `checked` binding with a list of c
     kendo.bind($("input"), viewModel);
     </script>
 
-In the example, the first checkbox is checked after calling `kendo.bind` because its `value` attribute (`"Red"`) is present in the `colors` array specified by the `checked` binding. Checking another checkbox from the list, e.g. `"Blue"`, would append its `value` attribute (`"Blue"`) to the `colors` array. Unchecking a checkbox from the list would remove its `value` attribute from the `colors` array.
+## Using with Radio Buttons
 
-## Radio Buttons
+The [Kendo UI MVVM](https://demos.telerik.com/kendo-ui/mvvm/index) displays a radio button in `checked` state only if its `value` attribute is equal to the value from the View-Model. If the user checks a radio button, its `value` attribute updates the corresponding value from the View-Model. Updating the value from the View-Model via code checks the radio button whose `value` attribute is equal to the new value.
 
-The [Kendo UI MVVM](http://demos.telerik.com/kendo-ui/mvvm/index) displays a radio button in `checked` state only if its `value` attribute is equal to the value from the View-Model. If the user checks a radio button, its `value` attribute updates the corresponding value from the View-Model. Updating the value from the View-Model via code checks the radio button whose `value` attribute is equal to the new value.
+The following example demonstrates how to use the `checked` binding with a group of radio buttons. The second radio button is checked after calling `kendo.bind` because its `value` attribute (`"Green"`) is equal to the value of `selectedColor`. Checking another radio button, for example, `"Blue"`, updates `selectedColor` (to "Blue"). The `name` attribute of all radio buttons is the same.
 
-### Use with Radio Buttons
-
-The example below demonstrates how to use the `checked` binding with a group of radio buttons.
-
-###### Example
+> All radio buttons which act as a group have to have the same `name` attribute. Only then checking a radio button from the group unchecks the previously checked one.
 
     <input type="radio" value="Red"   name="color" data-bind="checked: selectedColor" />
     <input type="radio" value="Green" name="color" data-bind="checked: selectedColor" />
@@ -78,23 +62,11 @@ The example below demonstrates how to use the `checked` binding with a group of 
     kendo.bind($("input"), viewModel);
     </script>
 
-In the example, the second radio button is checked after calling `kendo.bind` because its `value` attribute (`"Green"`) is equal to the value of `selectedColor`. Checking another radio button, i.e. `"Blue"`, updates `selectedColor` (to "Blue"). Note that the `name` attribute of all radio buttons is the same.
+## Using with Data-Type Attributes
 
-> **Important**
->
-> All radio buttons acting as a group should have the same `name` attribute. Only then checking a radio button from the group unchecks the previously checked one.
+Checkbox inputs bound to an array and radio buttons also support [strong typing](https://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](value#strongly-typed-value-binding).
 
-## Strongly-Typed checked Binding
-
-Checkbox inputs bound to an array and radio buttons also support [strong typing](http://demos.telerik.com/kendo-ui/mvvm/types), which uses the same principles applied to the [strongly typed value binding](value#strongly-typed-value-binding).
-
-### Use with Data-Type Attributes
-
-The example below demonstrates how to use the data-type attribute.
-
-###### Example
-
-```html
+```dojo
     <div id="view">
         <input type="checkbox" name="items" data-bind="checked: items" value="bike"/>
         <input type="checkbox" name="items" data-bind="checked: items" value="-1" data-type="number"/>
@@ -120,8 +92,6 @@ The example below demonstrates how to use the data-type attribute.
 ```
 
 ## See Also
-
-Other articles on the Kendo UI MVVM component and bindings:
 
 * [MVVM Overview]({% slug overview_mvvmpattern_kendoui %})
 * [Overview of the Attribute Binding]({% slug attributebinding_mvvm_kendoui %})

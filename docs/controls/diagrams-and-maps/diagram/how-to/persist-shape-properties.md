@@ -13,9 +13,7 @@ By using the same approach, you can persist the data source of the connections, 
 
 The following example demonstrates how to use the session storage of the browser to persist the `Shape` properties of the Diagram, so that when the user reloads the page, the position and the other properties of the widget are stored.
 
-###### Example
-
-```html
+```dojo
 
 <div id="diagram"></div>
   <script>
@@ -149,9 +147,8 @@ The following example demonstrates how to use the session storage of the browser
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Render External Content in Shapes]({% slug howto_renderexternalcontent_inshapes_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

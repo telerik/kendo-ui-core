@@ -2,6 +2,7 @@
 title: MultiSelect
 page_title: Configuration, methods and events of Kendo UI MultiSelect
 res_type: api
+component: multi-select
 ---
 
 # kendo.ui.MultiSelect
@@ -212,7 +213,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/products",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
       }
@@ -282,7 +283,7 @@ The field of the data item that provides the value of the widget.
     </select>
     <script>
     $("#multiselect").kendoMultiSelect({
-        delay: 1000 // wait 1 second before clearing the user input
+        delay: 1000 // wait 1 second before filtering
     });
     </script>
 
@@ -304,7 +305,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/multiselect#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -335,7 +336,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "startswith")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/multiselect#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -352,7 +353,7 @@ The supported filter values are `startswith`, `endswith` and `contains`.
 
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <select id="customers" style="width: 400px;"></select>
     <script>
@@ -366,7 +367,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -376,7 +377,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -401,7 +402,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <select id="customers" style="width: 400px;"></select>
     <script>
@@ -415,7 +416,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the groups
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -471,12 +472,107 @@ If set to `false` case-sensitive search will be performed to find suggestions. T
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize MultiSelect messages
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          clear: "clear!",
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.clear `String` *(default: "clear")*
+
+The text message when hovering the input clear button.
+
+#### Example - customize clear message
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          clear: "clear!"
+        }
+      });
+    </script>
+
+### messages.deleteTag `String` *(default: "delete")*
+
+The text message shown when hovering delete icon in a selected tag.
+
+#### Example - customize deleteTag message
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                deleteTag: "delete!"
+            }
+        });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <select id="multiselect" multiple="multiple"></select>
+    <script>
+      $("#multiselect").kendoMultiSelect({
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.singleTag `String` *(default: "item(s) selected")*
+
+The text message shown in the single TagMode tag.
+
+#### Example - customize singleTag message
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                singleTag: "item(s) selected!",
+            },
+            tagMode: "single"
+        });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a search is performed. Set to a higher value if the search could match a lot of items.
 A zero value means that a request will be made as soon as the user focuses the widget.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/multiselect/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -508,14 +604,14 @@ A zero value means that a request will be made as soon as the user focuses the w
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
 
-#### Example - specify headerTemplate as a string
+#### Example - specify noDataTemplate as a string
 
     <select id="multiselect"></select>
     <script>
@@ -548,7 +644,7 @@ The hint displayed by the widget when it is empty. Not set by default.
 
 #### Example - specify placeholder as HTML attribute
 
-    <select id="multiselect data-placeholder="Select..." multiple="multiple">
+    <select id="multiselect" data-placeholder="Select..." multiple="multiple">
         <option>Item1</option>
         <option>Item2</option>
     </select>
@@ -633,10 +729,21 @@ The available "x" positions are:
       dataTextField: "name",
       dataValueField: "id",
       popup: {
-        origin: "top left"
+        position: "top center"
       }
     });
     </script>
+    <style>
+      #container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
 
 ### popup.position `String`
 
@@ -697,7 +804,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### itemTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the items in the popup list.
+The [template](/api/javascript/kendo/methods/template) used to render the items in the popup list.
 
 #### Example - specify template as a function
 
@@ -737,15 +844,15 @@ The [template](/api/javascript/kendo#methods-template) used to render the items 
 
 ### tagTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the tags.
+The [template](/api/javascript/kendo/methods/template) used to render the tags.
 
-#### Template Data for the 'multiple' [tagMode](#configuration-tagMode)
+#### Template Data for the 'multiple' [tagMode](/api/javascript/ui/multiselect#configuration-tagMode)
 
 ##### data `Object`
 
 The dataitem that corresponds to the selected value.
 
-#### Template Data for the 'single' [tagMode](#configuration-tagMode)
+#### Template Data for the 'single' [tagMode](/api/javascript/ui/multiselect#configuration-tagMode)
 
 ##### data.values `Array`
 
@@ -757,7 +864,7 @@ A list of the selected data items.
 
 ##### data.currentTotal `Array`
 
-The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource#methods-view).
+The current dataSource total value. If it is server filtered, it will show the current length of the [view](/api/javascript/data/datasource/methods/view).
 
 ##### data.maxTotal `Array`
 
@@ -834,7 +941,7 @@ The mode used to render the selected tags. The available modes are:
 - `single` - renders only one tag that shows the number of the selected values
 
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
-set a custom a [tagTemplate](#configuration-tagTemplate) value.
+set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
 
 ### value `Array`*(default: [])*
 
@@ -911,7 +1018,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -924,7 +1031,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     schema: {
                         model: {
@@ -979,7 +1086,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
               source: new kendo.data.DataSource({
                 type: "odata",
                 transport: {
-                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                 },
                 schema: {
                   model: {
@@ -1004,7 +1111,7 @@ For detailed information, refer to the [article on virtualization]({% slug virtu
 
         function orderValueMapper(options) {
             $.ajax({
-              url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
               type: "GET",
               dataType: "jsonp",
               data: convertValues(options.value),
@@ -1046,7 +1153,7 @@ If the developer does not specify one, the framework will automatically set `ite
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -1064,7 +1171,7 @@ If the developer does not specify one, the framework will automatically set `ite
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     schema: {
                         model: {
@@ -1125,7 +1232,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -1138,7 +1245,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     schema: {
                         model: {
@@ -1175,11 +1282,11 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](/api/javascript/ui/multiselect/configuration/datasource) option.
 
 > Changes of the data source will be reflected in the widget.
 
-> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> **Important:** Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/multiselect/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
 
@@ -1372,7 +1479,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -1515,9 +1622,9 @@ Gets or sets the value of the MultiSelect.
 
 > **Important:** The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
 
-> **Important:** This method **does not trigger** [change](#events-change) event.
+> **Important:** This method **does not trigger** [change](/api/javascript/ui/multiselect/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior by triggering the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <select id="multiselect" multiple="multiple">
         <option>Item1</option>
@@ -1725,7 +1832,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 
@@ -1778,7 +1885,7 @@ The filter descriptor that will be used to filter the data source.
           var filter = e.filter;
 
           if (!filter.value) {
-            //prevent filtering if the filter does not value
+            //prevent filtering if the filter does not have value
             e.preventDefault();
           }
       }

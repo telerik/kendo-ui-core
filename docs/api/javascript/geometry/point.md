@@ -35,7 +35,7 @@ The x coordinate of the point.
 
 The y coordinate of the point.
 
-## Class methods
+## Class Methods
 
 ### create
 

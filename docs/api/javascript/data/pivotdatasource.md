@@ -7,9 +7,7 @@ res_type: api
 
 # kendo.data.PivotDataSource
 
-The data source used by the [kendo.ui.PivotGrid](/api/javascript/ui/pivotgrid) widget.
-Inherits from [kendo.data.DataSource](/api/framework/datasource).
-
+The data source used by the [`kendo.ui.PivotGrid`](/api/javascript/ui/pivotgrid) widget. Inherits from [`kendo.data.DataSource`](/api/framework/datasource).
 
 ## Configuration
 
@@ -17,12 +15,12 @@ See the [DataSource configuration](/api/framework/datasource#configuration) for 
 
 ### columns `Array`
 
-The configuration of columns axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchical name of the member.
+The configuration of the column axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as column descriptors. Strings are interpreted as the hierarchical name of the member.
 
 #### Example - set the columns
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
@@ -30,7 +28,7 @@ The configuration of columns axis members. An array of JavaScript objects or str
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -41,12 +39,12 @@ The configuration of columns axis members. An array of JavaScript objects or str
 
 ### columns.expand `Boolean`
 
-If set to true the member will be expanded.
+If set to `true`, the member will be expanded.
 
 #### Example - set the column as expanded
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: true }],
       transport: {
@@ -54,7 +52,7 @@ If set to true the member will be expanded.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -65,12 +63,12 @@ If set to true the member will be expanded.
 
 ### columns.name `String`
 
-The hierarchical name of the column
+The hierarchical name of the column.
 
 #### Example - set the column name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: false }],
       transport: {
@@ -78,7 +76,7 @@ The hierarchical name of the column
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -90,22 +88,19 @@ The hierarchical name of the column
 
 ### measures `Array|Object`
 
-The configuration of measures. An string array which values are interpreted as the name of the measures to be loaded.
-Measures can be defined as a list of objects with `name` and `type` fields:
+The configuration of measures. A string array whose values are interpreted as the name of the measures that will be loaded. Measures can be defined as a list of objects with the `name` and `type` fields.
 
     [{
         name: "[Measures].[_Internet Current Quarter Sales Performance Status]",
         type: "status"
     }]
 
-> The `type` value can be defined to "status" or "trend" to render [kpiStatusTemplate](/api/javascript/ui/pivotgrid#configuration-kpiStatusTemplate)
-or [kpiTrendTemplate](/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplate). If type is not defined, then the
-[dataCellTemplate](/api/javascript/ui/pivotgrid#configuration-dataCellTemplate) will be used.
+> The `type` value can be defined to `status` or `trend` to render [`kpiStatusTemplate`](/api/javascript/ui/pivotgrid/configuration/kpistatustemplate) or [`kpiTrendTemplate`](/api/javascript/ui/pivotgrid/configuration/kpitrendtemplate). If `type` is not defined, then the [`dataCellTemplate`](/api/javascript/ui/pivotgrid/configuration/datacelltemplate) will be used.
 
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: ["[Measures].[Internet Order Lines Count]"],
       transport: {
@@ -113,7 +108,7 @@ or [kpiTrendTemplate](/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplat
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -124,12 +119,12 @@ or [kpiTrendTemplate](/api/javascript/ui/pivotgrid#configuration-kpiTrendTemplat
 
 ### measures.values `Array`
 
-An string array which values are interpreted as the name of the measures to be loaded.
+A string array whose values are interpreted as the name of the measures that will be loaded.
 
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
           values: ["[Measures].[Internet Order Lines Count]"]
@@ -139,7 +134,7 @@ An string array which values are interpreted as the name of the measures to be l
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -150,12 +145,12 @@ An string array which values are interpreted as the name of the measures to be l
 
 ### measures.axis `String` *(default: columns)*
 
-The name of the axis on which the measures will be displayed. Supported values are rows or columns. This option is applicable if multiple measures are used.
+The name of the axis on which the measures will be displayed. The supported values are the rows or columns. This option is applicable if multiple measures are used.
 
-#### Example - set the measures axis
+#### Example - set the axis of the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
           values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
@@ -166,7 +161,7 @@ The name of the axis on which the measures will be displayed. Supported values a
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -177,12 +172,12 @@ The name of the axis on which the measures will be displayed. Supported values a
 
 ### rows `Array`
 
-The configuration of rows axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchical name of the member.
+The configuration of the row axis members. An array of JavaScript objects or strings. A JavaScript objects are interpreted as rows descriptors. Strings are interpreted as the hierarchical name of the member.
 
 #### Example - set the columns
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: ["[Date].[Calendar]"],
       transport: {
@@ -190,7 +185,7 @@ The configuration of rows axis members. An array of JavaScript objects or string
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -201,12 +196,12 @@ The configuration of rows axis members. An array of JavaScript objects or string
 
 ### rows.expand `Boolean`
 
-If set to true the member will be expanded.
+If set to `true`, the member will be expanded.
 
 #### Example - set the rows as expanded
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: true }],
       transport: {
@@ -214,7 +209,7 @@ If set to true the member will be expanded.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -225,12 +220,12 @@ If set to true the member will be expanded.
 
 ### rows.name `String`
 
-The hierarchical name of the rows
+The hierarchical name of the rows.
 
 #### Example - set the rows name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: [{ name: "[Date].[Calendar]", expand: false }],
       transport: {
@@ -238,7 +233,7 @@ The hierarchical name of the rows
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -253,42 +248,40 @@ The configuration used to load data items and discover schema information.
 
 ### transport.discover `Object|String|Function`
 
-The configuration used when the data source discovers schema information about the current cube.
+The configuration which is used when the data source discovers the schema information about the current cube.
 
-> The data source uses [jQuery.ajax](http://api.jquery.com/jQuery.ajax) to make a HTTP request to the remote service. The value configured via `transport.discover` is passed to `jQuery.ajax`. This means that you can set
-all options supported by `jQuery.ajax` via `transport.read` except the `success` and `error` callback functions which are used by the transport.
+> The data source uses [`jQuery.ajax`](https://api.jquery.com/jQuery.ajax) to make an HTTP request to the remote service. The value that is configured through `transport.discover` is passed to `jQuery.ajax`. This means that you can set all options that are supported by `jQuery.ajax` with `transport.read` except for the `success` and `error` callback functions which are used by the transport.
 
-If the value of `transport.discover` is a function, the data source invokes that function instead of `jQuery.ajax`.
-
-If the value of `transport.discover` is a string the data source uses this string as the URL of the remote service.
-
-If the value of `transport.discover` is omitted the data source uses `transport.read` for schema discover.
+* If the value of `transport.discover` is a function, the data source invokes that function instead of `jQuery.ajax`.
+* If the value of `transport.discover` is a string, the data source uses this string as the URL of the remote service.
+* If the value of `transport.discover` is omitted, the data source uses `transport.read` for schema discovery.
 
 #### Example - set the discover remote service
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        discover: "http://demos.telerik.com/olap/msmdpump.dll",
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        discover: "https://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
       }
     });
     dataSource.schemaDimensions().done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dimensions.length);
     });
     </script>
 
 ### transport.connection `Object`
 
-The configuration used for setting connection options.
+The configuration that is used for setting the connection options.
 
 ### transport.connection.catalog `String`
 
@@ -297,13 +290,13 @@ The catalog name.
 #### Example - set the connection catalog name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/olap/msmdpump.dll",
       },
       schema: {
         type: "xmla"
@@ -319,14 +312,14 @@ The cube name in the current data source.
 #### Example - set the cube catalog name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll",
+        read: "https://demos.telerik.com/olap/msmdpump.dll",
       },
       schema: {
         type: "xmla"
@@ -340,14 +333,13 @@ The schema configuration of the PivotDataSource.
 
 ### schema.axes `Function|String`
 
-The field from the server response which contains the columns and rows axes data. Can be set to a function which is called to
-return the columns and rows axes data for the response.
+The field from the server response which contains the axes data of the columns and rows. Can be set to a function which is called to return the column and row axes data for the response.
 
 #### Returns
 
-`Object` The columns and rows axes data from the response.
+`Object`&mdash;The axes data of the columns and rows from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
     {
         columns:{ // columns axis data
@@ -382,7 +374,7 @@ The result should have the following format and attributes:
         }
     }
 
-#### Example - specify the field which contains columns and rows axes as a string
+#### Example - specify the field which contains column and row axes as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -395,7 +387,7 @@ The result should have the following format and attributes:
     });
     </script>
 
-#### Example - set columns and rows axes data as a function
+#### Example - set column and row axes data as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -412,20 +404,19 @@ The result should have the following format and attributes:
 
 ### schema.catalogs `Function|String`
 
-The field from the server response which contains the list of catalogs available on the server. Can be set to a function which is called to
-return the catalogs schema information for the response. It is executed during the schema discover.
+The field from the server response which contains the list of catalogs that are available on the server. Can be set to a function which is called to return the schema information of the catalogs for the response. Executed during the schema discovery.
 
 #### Returns
 
-`Array` The catalogs schema from the response.
+`Array`&mdash;The catalogs schema from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
     [{
         "name":"Adventure Works Internet Sales Model"
     }]
 
-#### Example - specify the field which contains catalogs schema information as a string
+#### Example - specify the field which contains the catalogs schema information as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -438,7 +429,7 @@ The result should have the following format and attributes:
     });
     </script>
 
-#### Example - set cubes schema information as a function
+#### Example - set the schema information of the cubes as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -455,26 +446,15 @@ The result should have the following format and attributes:
 
 ### schema.cubes `Function|String`
 
-The field from the server response which contains the list of cubes available in the catalog. Can be set to a function which is called to
-return the cubes schema information for the response. It is executed during the schema discover.
+The field from the server response which contains the list of cubes that are available in the catalog. Can be set to a function which is called to return the schema information of the cubes for the response. Executed during the schema discovery.
 
 #### Returns
 
-`Array` The cubes schema from the response.
+`Array`&mdash;The cubes schema from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
-    [{
-        name:"Adventure Works Internet Sales Model",
-        caption:"Adventure Works Internet Sales Model",
-        type:"CUBE"
-     },{
-        name:"Internet Sales",
-        caption:"Internet Sales",
-        type:"CUBE"
-     }]
-
-#### Example - specify the field which contains cubes schema information as a string
+#### Example - specify the field which contains the schema information of the cubes as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -487,7 +467,7 @@ The result should have the following format and attributes:
     });
     </script>
 
-#### Example - set cubes schema information as a function
+#### Example - set the schema information of the cubes as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -504,13 +484,17 @@ The result should have the following format and attributes:
 
 ### schema.cube `Object`
 
-The cube declaration. If configured this option will enable the client cube processing, useful for binding to flat data. Note: This is only applicable if client cube processing is used.
+The cube declaration. If configured, this option will enable the client cube processing that is useful for binding to flat data.
+
+> Only applicable if client cube processing is used.
 
 #### schema.cube.dimensions `Object`
 
-A set of key/value pairs which specify the field-dimension mapping for the available for processing dimensions. The key specifies the name of the field to which the dimension will be mapped. Note: The key should match the column name used in the columns definition.
+A set of key/value pairs which specifies the field-dimension mapping that is available for processing dimensions. The key specifies the name of the field to which the dimension will be mapped.
 
-##### Example - define cube dimensions
+> The key has to match the column name that is used in the columns definition.
+
+##### Example - define the cube dimensions
 
     <script>
       var dataSource = new kendo.data.PivotDataSource({
@@ -528,13 +512,14 @@ A set of key/value pairs which specify the field-dimension mapping for the avail
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
 
 ##### schema.cube.dimensions.dimensionName `String`
 
-The name of the field which map to the dimension.
+The name of the field which maps to the dimension.
 
 ##### schema.cube.dimensions.dimensionName.caption `String`
 
@@ -542,9 +527,11 @@ A user-friendly name of the dimension.
 
 #### schema.cube.measures `Object`
 
-A set of key/value pairs which specify the available measures. The key specifies the name of measure.Note: The key should match the measure name used in the measures definition of the PivotDataSource
+A set of key/value pairs which specifies the available measures. The key specifies the name of measure.
 
-#### Example - define cube measures which calculates the sum of products price
+> The key has to match the measure name that is used in the measures definition of the PivotDataSource.
+
+#### Example - define the cube measures which calculate the sum of the products price
 
     <script>
       var dataSource = new kendo.data.PivotDataSource({
@@ -572,41 +559,49 @@ A set of key/value pairs which specify the available measures. The key specifies
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
 
 ##### schema.cube.measures.measureName.field `String`
 
-The field name which value is used to calculations.
+The field name whose value is used for calculations.
 
 ##### schema.cube.measures.measureName.format `String`
 
-The format which to be applied on the calculated measure value.
+The format which will be applied to the calculated measure value.
 
 ##### schema.cube.measures.measureName.aggregate `Function|String`
 
-The function used to aggregate the measure value. The built-in aggregates are "average", "count", "max", "min" and "sum".
+The function that is used to aggregate the measure value.
+
+The built-in aggregates are:
+* `average`
+* `count`
+* `max`
+* `min`
+* `sum`
 
 ###### Returns
 
-`Object` The result of the calculation
+`Object`&mdash;The result of the calculation.
 
 ###### Parameters
 
 ####### value `Object`
 
-The value of the specified field of the current processed record.
+The value of the specified field of the currently processed record.
 
 ####### state `Object`
 
-The current aggregated result of the function for already processed records.
+The currently aggregated result of the function for already processed records.
 
-> The `state` uses a predefined field named **accumulator**, where the last aggregated result is preserved.
+> `state` uses a predefined field that is named `accumulator` where the last aggregated result is preserved.
 
 ####### context `Object`
 
-The context for the current aggregate call. It includes the current data item and its index in the data:
+The context for the current aggregate call. Includes the current data item and its index in the data.
 
     {
         dataItem: `data item`,
@@ -637,6 +632,7 @@ The context for the current aggregate call. It includes the current data item an
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -667,6 +663,7 @@ The context for the current aggregate call. It includes the current data item an
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
@@ -675,11 +672,11 @@ The context for the current aggregate call. It includes the current data item an
 
 The function that will be called at the end of tuple aggregation.
 
-> If it is not defined, the `state.accumulator` value set in the `aggregate` function will be used.
+> If not defined, the `state.accumulator` value that is set in the `aggregate` function will be used.
 
 ###### Returns
 
-`Object` The result of the calculation
+`Object`&mdash;The result of the calculation.
 
 ###### Parameters
 
@@ -687,9 +684,9 @@ The function that will be called at the end of tuple aggregation.
 
 The last aggregated result of the function for already processed records.
 
-> The `state` uses a predefined field named **accumulator**, where the last aggregated result is preserved.
+> `state` uses a predefined field named `accumulator` where the last aggregated result is preserved.
 
-###### Example - specify a result function calculating the final value
+###### Example - specify a result function that calculates the final value
 
     <script>
       var dataSource = new kendo.data.PivotDataSource({
@@ -723,20 +720,20 @@ The last aggregated result of the function for already processed records.
       });
 
       dataSource.fetch(function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(dataSource.data(), dataSource.axes());
       });
     </script>
 
 ### schema.data `Function|String`
 
-The field from the server response which contains the cells data. Can be set to a function which is called to
-return the cells data for the response.
+The field from the server response which contains the data of the cells. Can be set to a function which is called to return the cell data for the response.
 
 #### Returns
 
-`Array` The cells data from the response.
+`Array`&mdash;The cell data from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
     [{
         value:"1",
@@ -748,7 +745,7 @@ The result should have the following format and attributes:
         ordinal:1
     }, /*..*/]
 
-#### Example - specify the field which contains cells data as a string
+#### Example - specify the field which contains the cell data as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -761,7 +758,7 @@ The result should have the following format and attributes:
     });
     </script>
 
-#### Example - set cells data as a function
+#### Example - set the cell data as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -778,14 +775,13 @@ The result should have the following format and attributes:
 
 ### schema.dimensions `Function|String`
 
-The field from the server response which contains the dimensions schema information. Can be set to a function which is called to
-return the dimensions schema information for the response. It is executed during the schema discover.
+The field from the server response which contains the dimensions schema information. Can be set to a function which is called to return the dimensions schema information for the response. Executed during the schema discovery.
 
 #### Returns
 
-`Array` The dimensions schema from the response.
+`Array`&mdash;The dimensions schema from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
     [
       {
@@ -804,7 +800,7 @@ The result should have the following format and attributes:
       }, /*..*/
    ]
 
-#### Example - specify the field which contains dimensions schema information as a string
+#### Example - specify the field which contains the dimensions schema information as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -817,7 +813,7 @@ The result should have the following format and attributes:
     });
     </script>
 
-#### Example - set dimensions schema information as a function
+#### Example - set the dimensions schema information as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -834,14 +830,13 @@ The result should have the following format and attributes:
 
 ### schema.hierarchies `Function|String`
 
-The field from the server response which contains the hierarchies schema information. Can be set to a function which is called to
-return the hierarchies schema information for the response. It is executed during the schema discover requests.
+The field from the server response which contains the hierarchies schema information. Can be set to a function which is called to return the hierarchies schema information for the response. Executed during the schema discovery requests.
 
 #### Returns
 
-`Array` The cube hierarchies schema from the response.
+`Array`&mdash;The cube hierarchies schema from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
     [
         {
@@ -893,14 +888,13 @@ The result should have the following format and attributes:
 
 ### schema.levels `Function|String`
 
-The field from the server response which contains the levels schema information. Can be set to a function which is called to
-return the levels schema information for the response. It is executed during the schema discover.
+The field from the server response which contains the levels schema information. Can be set to a function which is called to return the levels schema information for the response. Executed during the schema discovery.
 
 #### Returns
 
-`Array` The levels schema from the response.
+`Array`&mdash;The levels schema from the response.
 
-The result should have the following format and attributes:
+The result has the following format and attributes.
 
   [
       {
@@ -923,7 +917,7 @@ The result should have the following format and attributes:
       }, /*..*/
    ]
 
-#### Example - specify the field which contains levels schema information as a string
+#### Example - specify the field which contains the levels schema information as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -936,7 +930,7 @@ The result should have the following format and attributes:
     });
     </script>
 
-#### Example - set levels schema information as a function
+#### Example - set the levels schema information as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -953,14 +947,13 @@ The result should have the following format and attributes:
 
 ### schema.measures `Function|String`
 
-The field from the server response which contains the measures schema information. Can be set to a function which is called to
-return the measures schema information for the response. It is executed during the schema discover.
+The field from the server response which contains the measures schema information. Can be set to a function which is called to return the measures schema information for the response. Executed during the schema discovery.
 
 #### Returns
 
-`Array` The measures schema from the response.
+`Array`&mdash;The measures schema from the response.
 
-The result should have the following format:
+The result has the following format.
 
     [
         {
@@ -980,7 +973,7 @@ The result should have the following format:
         /*..*/
     ]
 
-#### Example - specify the field which contains measures schema information as a string
+#### Example - specify the field which contains the measures schema information as a string
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -993,7 +986,7 @@ The result should have the following format:
     });
     </script>
 
-#### Example - set measures schema information as a function
+#### Example - set the measures schema information as a function
 
     <script>
     var dataSource = new kendo.data.PivotDataSource({
@@ -1014,23 +1007,23 @@ See the [DataSource methods](/api/framework/datasource#methods) for all inherite
 
 ### axes
 
-Get the parsed axes data
+Gets the parsed axes data.
 
 #### Returns
 
-`Object` the parsed axes data
+`Object`&mdash;The parsed axes data.
 
 #### Example - get the axes data
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1044,7 +1037,7 @@ Get the parsed axes data
 
 ### catalog
 
-Get or sets the current catalog name.
+Gets or sets the current catalog name.
 
 #### Parameters
 
@@ -1054,16 +1047,16 @@ The name of the catalog.
 
 #### Returns
 
-`String` the current catalog name.
+`String`&mdash;The current catalog name.
 
 #### Example - set the catalog
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1076,14 +1069,14 @@ The name of the catalog.
 #### Example - get the catalog name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1091,34 +1084,35 @@ The name of the catalog.
     });
 
     var catalogName = dataSource.catalog();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(catalogName);// prints "Adventure Works DW 2008R2"
     </script>
 
 ### columns
 
-Get or sets the columns configuration.
+Gets or sets the columns configuration.
 
 #### Parameters
 
 ##### val `Array`
 
-The columns configuration. Accepts the same values as the [columns](#configuration-columns) option.
+The columns configuration. Accepts the same values as the [`columns`](/api/javascript/data/pivotdatasource#configuration-columns) option.
 
 #### Returns
 
-`Array` the current columns configuration.
+`Array`&mdash;The current columns configuration.
 
 #### Example - set the columns
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1131,14 +1125,14 @@ The columns configuration. Accepts the same values as the [columns](#configurati
 #### Example - get the columns name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1146,12 +1140,13 @@ The columns configuration. Accepts the same values as the [columns](#configurati
     });
 
     var columns = dataSource.columns();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(columns);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
 ### cube
 
-Get or sets the current cube name.
+Gets or sets the current cube name.
 
 #### Parameters
 
@@ -1161,19 +1156,19 @@ The name of the cube.
 
 #### Returns
 
-`String` the current cube name.
+`String`&mdash;The current cube name.
 
 #### Example - set the cube
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1188,7 +1183,7 @@ The name of the cube.
 #### Example - get the cube name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: ["[Date].[Calendar]"],
       transport: {
@@ -1196,7 +1191,7 @@ The name of the cube.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1204,33 +1199,34 @@ The name of the cube.
     });
 
     var cubeName = dataSource.cube();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(cubeName);// prints "Adventure Works"
     </script>
 
 ### discover
 
-Starts discover request with given options.
+Starts the discover request with the specified options.
 
 #### Parameters
 
 ##### options `String`
 
-The options of the discover request
+The options of the discover request.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1245,6 +1241,7 @@ The options of the discover request
             cubeName: dataSource.cube()
           }
         }).done(function(response) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(response);
         });
     </script>
@@ -1253,7 +1250,7 @@ The options of the discover request
 
 Expands a column tuple member that has children.
 
-> The path should includes the unique member names until the significant (the one that needs to be expanded) member is reached.
+> The path has to include the unique member names until the significant (the one that needs to be expanded) member is reached.
 
 #### Parameters
 
@@ -1261,12 +1258,12 @@ Expands a column tuple member that has children.
 
 The path that uniquely specifies the tuple member that needs to be expanded.
 
-#### Example - expand second level tuple member
+#### Example - expand the second-level tuple member
 
-    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+    <!-- Real life demo: https://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
       rows: [{ name: "[Geography].[City]" }],
@@ -1275,7 +1272,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1297,20 +1294,20 @@ The path that uniquely specifies the tuple member that needs to be expanded.
 
 Expands a row tuple member that has children.
 
-> The path should includes the unique member names until the significant (the one that needs to be expanded) member is reached.
+> The path has to include the unique member names until the significant (the one that needs to be expanded) member is reached.
 
 #### Parameters
 
 ##### path `Array`
 
-The path that uniquely specifies the tuple member that needs to be expanded.
+The path which uniquely specifies the tuple member that needs to be expanded.
 
-#### Example - expand second level tuple member
+#### Example - expand the second-level tuple member
 
-    <!-- Real life demo: http://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
+    <!-- Real life demo: https://docs.telerik.com/kendo-ui/web/pivotgrid/how-to/expand-multiple-dimensions -->
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Product].[Category]" } ],
       columns: [{ name: "[Geography].[City]" }],
@@ -1319,7 +1316,7 @@ The path that uniquely specifies the tuple member that needs to be expanded.
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1339,29 +1336,29 @@ The path that uniquely specifies the tuple member that needs to be expanded.
 
 ### measures
 
-Get or sets the measures configuration.
+Gets or sets the measures configuration.
 
 #### Parameters
 
 ##### val `Array`
 
-The measures configuration. Accepts the same values as the [measures](#configuration-measures-values) option.
+The measures configuration. Accepts the same values as the [`measures`](/api/javascript/data/pivotdatasource#configuration-measures-values) option.
 
 #### Returns
 
-`Array` the current measures configuration.
+`Array`&mdash;The current measures configuration.
 
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1374,14 +1371,14 @@ The measures configuration. Accepts the same values as the [measures](#configura
 #### Example - get the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: ["[Measures].[Internet Order Lines Count]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1389,21 +1386,22 @@ The measures configuration. Accepts the same values as the [measures](#configura
     });
 
     var measures = dataSource.measures();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(measures);// [{ name: "[Measures].[Internet Order Lines Count]" }]
     </script>
 
 ### measuresAxis
 
-Get the name of the axis on which measures are displayed.
+Gets the name of the axis on which the measures are displayed.
 
 #### Returns
 
-`String` the axis name.
+`String`&mdash;The axis name.
 
 #### Example - set the measures
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
           values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
@@ -1414,7 +1412,7 @@ Get the name of the axis on which measures are displayed.
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1422,34 +1420,35 @@ Get the name of the axis on which measures are displayed.
     });
 
     var axis = dataSource.measuresAxis();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(axis); // "rows"
     </script>
 
 ### rows
 
-Get or sets the rows configuration.
+Gets or sets the rows configuration.
 
 #### Parameters
 
 ##### val `Array`
 
-The rows configuration. Accepts the same values as the [row](#configuration-rows) option.
+The rows configuration. Accepts the same values as the [`row`](/api/javascript/data/pivotdatasource#configuration-rows) option.
 
 #### Returns
 
-`Array` the current rows configuration.
+`Array`&mdash;The current rows configuration.
 
 #### Example - set the rows
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
             cube: "Adventure Works"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1462,14 +1461,14 @@ The rows configuration. Accepts the same values as the [row](#configuration-rows
 #### Example - get the rows name
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       rows: ["[Date].[Calendar]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1477,24 +1476,25 @@ The rows configuration. Accepts the same values as the [row](#configuration-rows
     });
 
     var rows = dataSource.rows();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(rows);// [{ name: ["[Date].[Calendar]"] }]
     </script>
 
 ### schemaCatalogs
 
-Request catalogs information.
+Requests the catalogs information.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1503,28 +1503,29 @@ Request catalogs information.
 
     dataSource.schemaCatalogs()
         .done(function(catalogs) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(catalogs);
         });
     </script>
 
 ### schemaCubes
 
-Request cubes schema information.
+Requests the cubes schema information.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1533,28 +1534,29 @@ Request cubes schema information.
 
     dataSource.schemaCubes()
         .done(function(cubes) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(cubes);
         });
     </script>
 
 ### schemaDimensions
 
-Request dimensions schema information.
+Requests the dimensions schema information.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1563,34 +1565,35 @@ Request dimensions schema information.
 
     dataSource.schemaDimensions()
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
 
 ### schemaHierarchies
 
-Request hierarchies schema information.
+Requests the hierarchies schema information.
 
 #### Parameters
 
 ##### dimensionName `String`
 
-The name of the dimensions which is 'owner' of the hierarchy.
+The name of the dimensions which is the "owner" of the hierarchy.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1601,34 +1604,35 @@ The name of the dimensions which is 'owner' of the hierarchy.
 
     dataSource.schemaHierarchies(dimensionName)
         .done(function(dimensions) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(dimensions);
         });
     </script>
 
 ### schemaLevels
 
-Request levels schema information.
+Requests the levels schema information.
 
 #### Parameters
 
 ##### hierarchyName `String`
 
-The name of the hierarchy which is 'owner' of the level.
+The name of the hierarchy which is the "owner" of the level.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1639,28 +1643,29 @@ The name of the hierarchy which is 'owner' of the level.
 
     dataSource.schemaLevels(hierarchyName)
         .done(function(levels) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(levels);
         });
     </script>
 
 ### schemaMeasures
 
-Request measures schema information.
+Requests the measures schema information.
 
 #### Returns
 
-`Object` Deferred object
+`Object`&mdash;The deferred object.
 
 #### Example
 
     <script>
-    var dataSource = new kendo.data.DataSource({
+    var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2"
         },
-        read: "http://demos.telerik.com/olap/msmdpump.dll"
+        read: "https://demos.telerik.com/olap/msmdpump.dll"
       },
       schema: {
         type: "xmla"
@@ -1669,8 +1674,7 @@ Request measures schema information.
 
     dataSource.schemaMeasures()
         .done(function(measures) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(measures);
         });
     </script>
-
-

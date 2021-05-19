@@ -27,72 +27,50 @@ Depending on the project requirements, the mobile application may be styled in s
 
 For the platform-adaptive styling to work as expected, the `kendo.mobile.all.min.css` CSS should be referred.
 
-###### Example
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1316/styles/kendo.mobile.all.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
+
+```dojo
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title">Hello</span>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, {
-        });
+      new kendo.mobile.Application(document.body, {
+      });
     </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with iOS Look on All Devices
 
 If you are targeting iOS devices only, or you want your application to have the iOS look regardless of the device, you may use either `kendo.mobile.all.min.css` or `kendo.mobile.ios.min.css`. Each of the two stylesheet files includes both the iOS6 (default) and iOS7+ looks. The `majorVersion` of the `platform` configuration option determines which one is going to be used.
 
-###### Example
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- both stylesheets may be used here -->
-    <!-- <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.ios.min.css" />  -->
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.ios.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
+
+```dojo
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title">Hello</span>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, {
-            platform: {
-                name: "ios",
-                majorVersion: 9 // Major OS version - may be set to 6 or removed for the skeuomorphism look.
-            }
-        });
+      new kendo.mobile.Application(document.body, {
+        platform: {
+          name: "ios",
+          majorVersion: 9 // Major OS version - may be set to 6 or removed for the skeuomorphism look.
+        }
+      });
     </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with Android Look on All Devices
@@ -101,66 +79,25 @@ If you are targeting Android devices only, or you want your application to have 
 
 #### Mobile Application with Android Halo Dark Look
 
-###### Example
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.android.dark.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
+
+```dojo
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title"></span>
+          <a data-role="button" data-align="right">About</a>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, {
-            platform: "android"
-        });
+      new kendo.mobile.Application(document.body, {
+        platform: "android"
+      });
     </script>
-</body>
-</html>
-```
-
-#### Mobile Application with Android Halo Light Look
-
-###### Example
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.android.light.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
-    <div data-role="view" data-title="Hello world">
-
-    <div data-role="header">
-        <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
-        </div>
-    </div>
-        <a data-role="button">I am a button</a>
-    </div>
-
-    <script>
-        new kendo.mobile.Application(document.body, {
-            platform: "android"
-        });
-    </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with Windows Phone 8 Look on All Devices
@@ -169,17 +106,9 @@ If you are targeting Windows Phone devices only, or you want your application to
 
 #### Mobile Application with Windows Phone 8 Look
 
-###### Example
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.wp8.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
+
+```dojo
     <div data-role="view" data-title="Hello world">
 
     <div data-role="header">
@@ -195,8 +124,6 @@ If you are targeting Windows Phone devices only, or you want your application to
             platform: "wp"
         });
     </script>
-</body>
-</html>
 ```
 
 ### Mobile Application with Platform Agnostic Skin
@@ -213,32 +140,22 @@ The skin should be activated by including the respective skin CSS file `kendo.mo
 
 ### Mobile Application with Nova Skin
 
-###### Example
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="http://cdn.kendostatic.com/2015.3.930/styles/kendo.mobile.nova.min.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2015.3.930/js/kendo.all.min.js"></script>
-</head>
-<body>
+
+```dojo
     <div data-role="view" data-title="Hello world">
 
-    <div data-role="header">
+      <div data-role="header">
         <div data-role="navbar">
-            <span data-role="view-title">Hello</span>
+          <span data-role="view-title">Hello</span>
         </div>
-    </div>
-        <a data-role="button">I am a button</a>
+      </div>
+      <a data-role="button">I am a button</a>
     </div>
 
     <script>
-        new kendo.mobile.Application(document.body, { skin: "nova" });
+      new kendo.mobile.Application(document.body, { skin: "nova" });
     </script>
-</body>
-</html>
 ```
 
 ### Hybrid Widgets in Web Context without Mobile Application Instance
@@ -253,7 +170,7 @@ On 10<sup>th</sup> September 2013 Kendo UI released an iOS7 theme for mobile dev
 
 In iOS7 every application can have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can be also set per single view. The Kendo UI iOS7 theme for mobile is created to be similarly easy to change the application tint color with the simple CSS rule shown below.
 
-###### Example
+
 
     .km-ios7 .k-list,
     .km-ios7 .k-slider,
@@ -266,7 +183,7 @@ In iOS7 every application can have the ability to set a tint color which is used
 
 Additionally, a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20 (avoid `#ID` selectors and `!important`), otherwise all the text in the View will be colorized.
 
-###### Example
+
 
     .specific-view .k-list,
     .specific-view .k-slider,
@@ -277,8 +194,9 @@ Additionally, a single View tint color can be changed by simply adding a CSS cla
 
 The example below demonstrates an application and a View-specific tint.
 
-###### Example
 
+
+```dojo
     <style scoped>
       .km-ios7 .k-list,
       .km-ios7 .k-slider,
@@ -323,12 +241,13 @@ The example below demonstrates an application and a View-specific tint.
     <script>
       new kendo.mobile.Application();
     </script>
+```
 
 ### Change Android Tint Color
 
 As of Kendo UI Q1 2014 release, every Android application can also have the ability to set a tint color which is used for highlighting specific interactive elements throughout the whole application. The tint color can also be set per a single view. The Kendo UI Android themes for mobile (`android-light` and `android-dark`) are created to be similarly easy to change the application tint color with the CSS rule demonstrated below.
 
-###### Example
+
 
     .km-android .km-shim,
     .km-android .km-popup,
@@ -354,7 +273,7 @@ The CSS rule is longer than the iOS one, as the Android theme has mostly highlig
 Additionally, a single View tint color can be changed by simply adding a CSS class to it and changing the above CSS accordingly. Make sure to avoid raising the CSS specificity above 20
 (avoid `#ID` selectors and `!important`).
 
-###### Example
+
 
     .specific-view .km-shim,
     .specific-view .km-popup,
@@ -375,8 +294,9 @@ Additionally, a single View tint color can be changed by simply adding a CSS cla
 
 The example below demonstrates an application and a View-specific tint.
 
-###### Example
 
+
+```dojo
     <style scoped>
       .km-android .km-shim,
       .km-android .km-popup,
@@ -439,8 +359,9 @@ The example below demonstrates an application and a View-specific tint.
       </footer>
     </div>
     <script>
-      new kendo.mobile.Application();
+      new kendo.mobile.Application(document.body, { platform: "android" });
     </script>
+```
 
 ### Change Flat Skin Active Color
 
@@ -448,7 +369,7 @@ The Flat skin, shipped with Kendo UI Q2 2013 release for mobile, was created to 
 
 The example below demonstrates how to change the flat skin active background to blue.
 
-###### Example
+
 
     .km-flat .km-switch-handle,
     .km-flat .k-slider-selection,
@@ -488,7 +409,7 @@ The example below demonstrates how to change the flat skin active background to 
 
 The example below demonstrates how to change the flat skin active background to red and the color to beige.
 
-###### Example
+
 
     .km-flat .km-badge,
     .km-flat .km-rowinsert,
@@ -576,7 +497,7 @@ The Kendo UI Nova theme provides three predefined font weights&mdash;light, medi
 
 The example below demonstrates Nova theme font weights.
 
-###### Example
+
 
 	<div data-role="view" data-title="Typography">
 		<!-- h1 with bold font weight -->
@@ -588,8 +509,6 @@ The example below demonstrates Nova theme font weights.
 	</div>
 
 ## See Also
-
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
 
 * [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
 * [Define the Layout]({% slug layout_hybridkendoui %})

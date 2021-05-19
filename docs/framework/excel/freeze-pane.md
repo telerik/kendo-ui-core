@@ -1,26 +1,22 @@
 ---
-title: Freeze Rows and Columns
-page_title: Freeze Rows and Columns | Kendo UI Excel Export
+title: Freezing Rows and Columns
+page_title: Freezing Rows and Columns | Kendo UI Excel Export
 description: "Learn how to freeze rows and columns in the output Excel document while working with Kendo UI."
 slug: freezerowsandcolumns_excelexport_kendoui
 position: 3
 ---
 
-# Freeze Rows and Columns
+# Freezing Rows and Columns
 
-Kendo UI allows you to freeze both columns and rows via the [`freezePane`](/api/javascript/ooxml/workbook#configuration-sheets.freezePane) option.
+Kendo UI allows you to freeze both columns and rows by using the [`freezePane`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane) option.
 
 ## Rows
 
-Freezing the first row of an Excel sheet is a common requirement. It allows you to scroll the rest of the document without losing the header.
+Freezing the first row of an Excel sheet is a common requirement. It allows you to scroll the rest of the document without losing the header. To freeze rows, set the [`rowSplit`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane.rowsplit) option to the number of rows you want to freeze.
 
-Kendo UI enables row freezing via the [`rowSplit`](/api/javascript/ooxml/workbook#configuration-sheets.freezePane.rowSplit) option. Set that option to the number of rows you want to freeze.
+The following example demonstrates how to freeze the top row in a worksheet.
 
-The example below demonstrates how to freeze the top row in a worksheet.
-
-###### Example
-
-```html
+```dojo
 <script>
 var workbook = new kendo.ooxml.Workbook({
   sheets: [
@@ -61,11 +57,9 @@ kendo.saveAs({
 
 ## Columns
 
-Kendo UI enables column freezing via the [`colSplit`](/api/javascript/ooxml/workbook#configuration-sheets.freezePane.colSplit) option. Set that option to the number of columns you want to freeze.
+To freeze columns, set the [`colSplit`](/api/javascript/ooxml/workbook/configuration/sheets.freezepane.colsplit) option to the number of columns you want to freeze.
 
-The example below demonstrates how to freeze the first two columns and the top row in a worksheet.  
-
-###### Example
+The following example demonstrates how to freeze the first two columns and the top row in a worksheet.
 
 ```
 <script>
@@ -108,11 +102,9 @@ kendo.saveAs({
 
 ## See Also
 
-Articles on the Excel export functionality in Kendo UI:
-
 * [Introduction to the Excel Export Functionality]({% slug introduction_excelexport_kendoui %})
-* [Customize the Appearance]({% slug appearance_excelexport_kendoui %})
-* [Set the Column Width]({% slug columnwidth_excelexport_kendoui %})
-* [Set the Colspan and Rowspan]({% slug colaspanandrowspan_excelexport_kendoui %})
-* [Create Multiple Sheets]({% slug sheets_excelexport_kendoui %})
-* [Export Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})
+* [Customizing the Appearance]({% slug appearance_excelexport_kendoui %})
+* [Setting the Column Width]({% slug columnwidth_excelexport_kendoui %})
+* [Spanning Cells across Rows and Columns]({% slug colaspanandrowspan_excelexport_kendoui %})
+* [Creating Multiple Sheets]({% slug sheets_excelexport_kendoui %})
+* [Exporting the Kendo UI DataSource to Excel]({% slug exportdatasource_excelexport_kendoui %})

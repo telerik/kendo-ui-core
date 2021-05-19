@@ -14,7 +14,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        EXPANED_PANE_SHIM = "<div class='km-expanded-pane-shim' />",
+        EXPANED_PANE_SHIM = "<div class='km-expanded-pane-shim'></div>",
         View = ui.View;
 
     var SplitView = View.extend({

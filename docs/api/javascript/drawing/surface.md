@@ -23,7 +23,7 @@ The implementations for SVG and Canvas inherit from this base class.
         surface.draw(path);
     </script>
 
-## Class methods
+## Class Methods
 
 ### create
 
@@ -180,6 +180,7 @@ Triggered when an element has been clicked.
         var draw = kendo.drawing;
         var surface = draw.Surface.create($("#container"), {
             click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Click");
             }
         });
@@ -207,6 +208,7 @@ Triggered when the mouse is moved over an element.
         var draw = kendo.drawing;
         var surface = draw.Surface.create($("#container"), {
             mouseenter: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Mouse enter");
             }
         });
@@ -234,6 +236,7 @@ Triggered when the mouse is leaves an element.
         var draw = kendo.drawing;
         var surface = draw.Surface.create($("#container"), {
             mouseleave: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Mouse leave");
             }
         });
@@ -262,6 +265,7 @@ Triggered when closing the surface tooltip.
       var draw = kendo.drawing;
       var surface = draw.Surface.create($("#container"), {
         tooltipClose: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("tooltip close");
         }
       });
@@ -298,6 +302,7 @@ Triggered when opening the surface tooltip.
       var draw = kendo.drawing;
       var surface = draw.Surface.create($("#container"), {
         tooltipOpen: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("tooltip open");
         }
       });

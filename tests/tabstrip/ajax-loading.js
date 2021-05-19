@@ -1,279 +1,279 @@
 (function() {
-var isRaised;
+    var isRaised;
+    var div;
+    var argsCheck = false;
 
-var argsCheck = false;
+    //handlers
+    function Select(e) {
+        if (argsCheck) {
+            isRaised = !!e.contentElement;
+            argsCheck = false;
+        } else
+            isRaised = true;
+    }
 
-//handlers
-function Select(e) {
-    if (argsCheck) {
-        isRaised = !!e.contentElement;
-        argsCheck = false;
-    } else
-        isRaised = true;
-}
+    var tabstrip;
+    var template = '<div id="tabstrip">' +
+        '    <ul>' +
+        '        <li class="k-state-active">ASP.NET MVC</li>' +
+        '        <li class="k-state-disabled">Silverlight</li>' +
+        '        <li>ASP.NET AJAX</li>' +
+        '        <li>OpenAccess ORM</li>' +
+        '        <li>Reporting</li>' +
+        '        <li>Sitefinity ASP.NET CMS</li>' +
+        '        <li>Loading using url from options</li>' +
+        '        <li>Loading using url from function</li>' +
+        '    </ul>' +
+        '    <div>' +
+        '        <ul>' +
+        '            <li>Pure ASP.NET MVC components</li>' +
+        '            <li>Completely Open Source</li>' +
+        '            <li>Exceptional Performance</li>' +
+        '            <li>Based on jQuery</li>' +
+        '            <li>Search Engine Optimized</li>' +
+        '            <li>Cross-browser support</li>' +
+        '        </ul>' +
+        '    </div>' +
+        '    <div></div>' +
+        '    <div></div>' +
+        '    <div></div>' +
+        '    <div></div>' +
+        '    <div></div>' +
+        '    <div></div>' +
+        '    <div></div>' +
+        '</div>';
 
+    var tabstripSetup = function() {
+        div = $(template);
+        div.appendTo(Mocha.fixture);
 
-var tabstrip;
-var template = '<div id="tabstrip">' +
-            '    <ul>' +
-            '        <li class="k-state-active">ASP.NET MVC</li>' +
-            '        <li class="k-state-disabled">Silverlight</li>' +
-            '        <li>ASP.NET AJAX</li>' +
-            '        <li>OpenAccess ORM</li>' +
-            '        <li>Reporting</li>' +
-            '        <li>Sitefinity ASP.NET CMS</li>' +
-            '        <li>Loading using url from options</li>' +
-            '        <li>Loading using url from function</li>' +
-            '    </ul>' +
-            '    <div>' +
-            '        <ul>' +
-            '            <li>Pure ASP.NET MVC components</li>' +
-            '            <li>Completely Open Source</li>' +
-            '            <li>Exceptional Performance</li>' +
-            '            <li>Based on jQuery</li>' +
-            '            <li>Search Engine Optimized</li>' +
-            '            <li>Cross-browser support</li>' +
-            '        </ul>' +
-            '    </div>' +
-            '    <div></div>' +
-            '    <div></div>' +
-            '    <div></div>' +
-            '    <div></div>' +
-            '    <div></div>' +
-            '    <div></div>' +
-            '    <div></div>' +
-            '</div>';
+        var localCounter = 0;
 
-var tabstripSetup = function() {
-    QUnit.fixture.append(template);
-
-    var localCounter = 0;
-
-    tabstrip = new kendo.ui.TabStrip("#tabstrip", {
-        animation: false,
-        select: Select,
-        contentUrls: [
-            'ajax-view-one.html',
-            'ajax-view-two.html',
-            'ajax-view-one.html',
-            'ajax-view-three.html',
-            'ajax-view-one.html',
-            'error.html',
-            {
-                url: 'ajax-view-from-options.html'
-            },
-            {
-                url: function() {
-                    localCounter++;
-                    return 'ajax-view-from-function' + localCounter + '.html';
+        tabstrip = new kendo.ui.TabStrip(div, {
+            animation: false,
+            select: Select,
+            contentUrls: [
+                'ajax-view-one.html',
+                'ajax-view-two.html',
+                'ajax-view-one.html',
+                'ajax-view-three.html',
+                'ajax-view-one.html',
+                'error.html',
+                {
+                    url: 'ajax-view-from-options.html'
+                },
+                {
+                    url: function() {
+                        localCounter++;
+                        return 'ajax-view-from-function' + localCounter + '.html';
+                    }
                 }
-            }
-        ]
-    });
-};
-
-module('tabstrip ajax loading', {
-    setup: function() {
-        kendo.effects.disable();
-
-        $.mockjaxSettings.responseTime = 0;
-
-        $.mockjax({
-            url: "error.html",
-            response: function() {
-                this.responseText = 'foo<script type="text/javascript">throw new Error("Exception required to fire the error event")<' + '/script>';
-            }
+            ]
         });
+    };
 
-        $.mockjax({
-            url: "ajax-view-one.html",
-            response: function() {
-                this.responseText = "<p>This content was loaded via ajax ().</p>"
-            }
-        });
-
-        $.mockjax({
-            url: "ajax-view-two.html",
-            response: function() {
-                this.responseText = "<p>This content was loaded via ajax ().</p>"
-            }
-        });
-
-        tabstripSetup();
-    },
-
-    teardown: function () {
-        kendo.effects.enable();
-        tabstrip.destroy();
-    }
-});
-
-function getRootItem(index) {
-    return $('#tabstrip').find('.k-item').eq(index)
-}
-
-test('clicking should make clicked item active even before AJAX request', 1, function() {
-    var item = getRootItem(2);
-
-    item.find('> .k-link').trigger('click');
-    ok(item.hasClass('k-state-active'));
-});
-
-asyncTest('clicking should make all items except clicked unactive', function() {
-    var item = getRootItem(0);
-
-    item.find('> .k-link').trigger('click');
-
-    setTimeout(function() {
-        equal(item.parent().find('.k-state-active').length, 1);
-        start();
-    });
-});
-
-test('ajax content url should be attached to item', function() {
-    var item = getRootItem(4);
-
-    equal(item.find('> .k-link').data('contentUrl'), 'ajax-view-one.html');
-});
-
-asyncTest('loading ajax content should trigger adding the loading element to the tab', function() {
-    var item = getRootItem(3);
-
-    tabstrip.bind("select", function () {
-        setTimeout(function () {
-            start();
-            ok(item.find('.k-loading').width() - item.width() <= 1);
-        });
-    });
-
-    item.click();
-});
-
-asyncTest("ajax content with error fires error handler and writes the error message to the console", 1, function () {
-    if (jQuery.fn.jquery.substring(0,1) === '3') {
-        start();
-        ok(true);
-        return;
+    function getRootItem(index) {
+        return div.find('.k-item').eq(index);
     }
 
-    var item = getRootItem(5);
+    describe('tabstrip ajax loading', function() {
+        beforeEach(function() {
 
-    tabstrip.bind("error", function (e) {
-        ok(true);
-        start();
+
+            $.mockjaxSettings.responseTime = 0;
+
+            $.mockjax({
+                url: "error.html",
+                response: function() {
+                    this.responseText = 'foo<script type="text/javascript">throw new Error("Exception required to fire the error event")<' + '/script>';
+                }
+            });
+
+            $.mockjax({
+                url: "ajax-view-one.html",
+                response: function() {
+                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                }
+            });
+
+            $.mockjax({
+                url: "ajax-view-two.html",
+                response: function() {
+                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                }
+            });
+
+            tabstripSetup();
+        });
+
+        afterEach(function() {
+
+            tabstrip.destroy();
+        });
+
+        it('clicking should make clicked item active even before AJAX request', function() {
+            var item = getRootItem(2);
+
+            item.find('> .k-link').trigger('click');
+            assert.isOk(item.hasClass('k-state-active'));
+        });
+
+        it('ajax content url should be attached to item', function() {
+            var item = getRootItem(4);
+
+            assert.equal(item.find('> .k-link').data('contentUrl'), 'ajax-view-one.html');
+        });
+
+        it('clicking should make all items except clicked unactive', function(done) {
+            var item = getRootItem(0);
+
+            item.find('> .k-link').trigger('click');
+
+            setTimeout(function() {
+                assert.equal(item.parent().find('.k-state-active').length, 1);
+                done();
+            });
+        });
+
+        it('loading ajax content should trigger adding the loading element to the tab', function(done) {
+            var item = getRootItem(3);
+
+            tabstrip.bind("select", function() {
+                setTimeout(function() {
+                    assert.isOk(item.find('.k-loading').width() - item.width() <= 1);
+                    done();
+                });
+            });
+
+            item.click();
+        });
+
+        it("ajax content with error fires error handler and writes the error message to the console", function(done) {
+            if (jQuery.fn.jquery.substring(0, 1) === '3') {
+                assert.isOk(true);
+                done();
+                return;
+            }
+
+            var item = getRootItem(5);
+
+            tabstrip.bind("error", function(e) {
+                assert.isOk(true);
+                done();
+            });
+
+            item.click();
+        });
     });
 
-    item.click();
-});
+    describe('tabstrip ajax loading using options', function() {
+        beforeEach(function() {
 
-module('tabstrip ajax loading using options', {
-    setup: function() {
-        kendo.effects.disable();
-        jasmine.clock().install();
-        $.mockjaxSettings.responseTime = 0;
-    },
+            jasmine.clock().install();
+            $.mockjaxSettings.responseTime = 0;
+        });
 
-    teardown: function () {
-        kendo.effects.enable();
-        jasmine.clock().uninstall();
-        tabstrip.destroy();
-    }
-});
+        afterEach(function() {
 
-test('ajax content url from options should be supported', 2, function() {
-    $.mockjax({
-        url: "ajax-view-from-options.html",
-        response: function() {
-            ok(true);
-        }
-    });
+            jasmine.clock().uninstall();
+            tabstrip.destroy();
+        });
 
-    tabstripSetup();
+        it('ajax content url from options should be supported', function() {
+            $.mockjax({
+                url: "ajax-view-from-options.html",
+                response: function() {
+                    assert.isOk(true);
+                }
+            });
 
-    var item = getRootItem(6);
+            tabstripSetup();
 
-    item.click();
+            var item = getRootItem(6);
 
-    jasmine.clock().tick();
+            item.click();
 
-    ok(!item.find('> .k-link').data('contentUrl'));
-});
+            jasmine.clock().tick();
 
-test('ajax content url from options should be supported when reloading tab', 3, function() {
-    $.mockjax({
-        url: "ajax-view-from-options.html",
-        response: function() {
-            ok(true);
-        }
-    });
+            assert.isOk(!item.find('> .k-link').data('contentUrl'));
+        });
 
-    tabstripSetup();
+        it('ajax content url from options should be supported when reloading tab', function() {
+            $.mockjax({
+                url: "ajax-view-from-options.html",
+                response: function() {
+                    assert.isOk(true);
+                }
+            });
 
-    var item = getRootItem(6);
+            tabstripSetup();
 
-    item.click();
-    jasmine.clock().tick();
+            var item = getRootItem(6);
 
-    tabstrip.reload(item);
-    jasmine.clock().tick();
+            item.click();
+            jasmine.clock().tick();
 
-    ok(!item.find('> .k-link').data('contentUrl'));
-});
+            tabstrip.reload(item);
+            jasmine.clock().tick();
 
-test('ajax content url should be supported when reloading tab', 3, function() {
-    var calls = 0;
+            assert.isOk(!item.find('> .k-link').data('contentUrl'));
+        });
 
-    $.mockjax({
-        url: "ajax-view-three.html",
-        response: function() {
-            ok(true);
-        }
-    });
+        it('ajax content url should be supported when reloading tab', function() {
+            var calls = 0;
 
-    tabstripSetup();
+            $.mockjax({
+                url: "ajax-view-three.html",
+                response: function() {
+                    assert.isOk(true);
+                }
+            });
 
-    var item = getRootItem(3);
+            tabstripSetup();
 
-    item.click();
-    jasmine.clock().tick();
+            var item = getRootItem(3);
 
-    tabstrip.reload(item);
-    jasmine.clock().tick();
+            item.click();
+            jasmine.clock().tick();
 
-    ok(item.find('> .k-link').data('contentUrl'));
-});
+            tabstrip.reload(item);
+            jasmine.clock().tick();
 
-test('ajax content url from function should supported', 3, function() {
-    var firstUrlCalls = 0;
-    $.mockjax({
-        url: "ajax-view-from-function1.html",
-        response: function() {
-            firstUrlCalls++;
+            assert.isOk(item.find('> .k-link').data('contentUrl'));
+        });
 
-            ok(true && firstUrlCalls < 2);
+        it('ajax content url from function should supported', function() {
+            var firstUrlCalls = 0;
+            $.mockjax({
+                url: "ajax-view-from-function1.html",
+                response: function() {
+                    firstUrlCalls++;
+
+                    assert.isOk(true && firstUrlCalls < 2);
+
+                    var item = getRootItem(7);
+
+                    tabstrip.reload($(item));
+                    jasmine.clock().tick();
+                }
+            });
+
+            $.mockjax({
+                url: "ajax-view-from-function2.html",
+                response: function() {
+                    assert.isOk(true);
+                }
+            });
+
+            tabstripSetup();
 
             var item = getRootItem(7);
 
-            tabstrip.reload($(item));
+            item.click();
             jasmine.clock().tick();
-        }
+
+
+            assert.isOk(!item.find('> .k-link').data('contentUrl'));
+        });
     });
-
-    $.mockjax({
-        url: "ajax-view-from-function2.html",
-        response: function() {
-            ok(true);
-        }
-    });
-
-    tabstripSetup();
-
-    var item = getRootItem(7);
-
-    item.click();
-    jasmine.clock().tick();
-
-
-    ok(!item.find('> .k-link').data('contentUrl'));
-});
-})();
+}());

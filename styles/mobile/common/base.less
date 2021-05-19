@@ -1,6 +1,6 @@
 @import "mixins.less";
 
-/* Common Platform CSS */
+// Common Platform CSS
 
 @-ms-viewport {
     width: device-width;
@@ -29,7 +29,7 @@
     font-size: 1em;
 }
 
-.km-root a
+.km-root a:not(.k-button)
 {
     color: inherit;
 }
@@ -195,16 +195,15 @@
     display: none;
 }
 
-/**
- * The angular tags will be converted to div kendo-mobile-view
- *
- */
-[data-role="view"], [data-role="drawer"], kendo-mobile-view, kendo-mobile-split-view, kendo-mobile-drawer
+// The angular tags will be converted to div kendo-mobile-view
+
+[data-role="view"], .km-drawer, kendo-mobile-view, kendo-mobile-split-view, kendo-mobile-drawer
 {
     visibility: hidden;
 }
 
-.km-view
+.km-view,
+.k-view
 {
     visibility: visible;
 }
@@ -301,7 +300,7 @@
     width: auto;
 }
 
-/* Loader */
+// Loader
 
 .km-loader
 {
@@ -411,7 +410,7 @@
 }
 
 
-/* Stretched View */
+// Stretched View
 
 .km-stretched-view
 {
@@ -475,7 +474,7 @@
     min-height: auto;
 }
 
-/* Restore position:absolute during animation */
+// Restore position:absolute during animation
 .km-native-scrolling .km-splitview
 {
     position: absolute;
@@ -558,7 +557,7 @@
     z-index: 2;
 }
 
-/* Disabled states */
+// Disabled states
 
 .km-state-disabled
 {

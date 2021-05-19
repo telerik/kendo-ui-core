@@ -2,11 +2,12 @@
 title: Enable Reordering in Grid by Adding Buttons to Each Row
 description: An example on how to reorder Kendo UI Grid rows by adding buttons to each row to move items up and down.
 type: how-to
-page_title: Reorder Rows by Adding Row Buttons | Kendo UI Grid
+page_title: Reorder Rows by Adding Row Buttons | Kendo UI Grid for jQuery
 slug: reorder-grid-rows-using-buttons
 tags: grid, reordering, items
 ticketid: 1112024
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -14,11 +15,11 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>Tested up to version 2017.2 504</td>
+  <td>Tested up to version 2020.2.617</td>
  </tr>
 </table>
 
@@ -29,25 +30,24 @@ How can I enable my users to reorder the Grid rows by adding buttons to each row
 ## Solution
 
 1. Specify a column template to add the buttons to each Grid row.
-
 1. In the click handlers of the buttons, find a reference to the corresponding row and attach the click handlers to the `dataBound` event of the Grid.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8"/>
     <title>Kendo UI Snippet</title>
 
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common.min.css"/>
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.rtl.min.css"/>
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.silver.min.css"/>
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2017.2.504/styles/kendo.mobile.all.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.common.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.rtl.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.silver.min.css"/>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.mobile.all.min.css"/>
 
-    <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2017.2.504/js/kendo.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
 
-    <script src="http://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+    <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
   </head>
   <body>

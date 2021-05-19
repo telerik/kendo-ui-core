@@ -3,6 +3,7 @@ title: ModalView
 page_title: Configuration, methods and events of Kendo UI Mobile ModalView
 description: Set height and width of the Kendo UI Mobile ModalView container in pixels, use methods to open and close it.
 res_type: api
+component: modal-view
 ---
 
 # kendo.mobile.ui.ModalView
@@ -160,6 +161,7 @@ Fires before the ModalView is shown. calling `preventDefault` on the event argum
     <script>
     function preventOpen(e) {
         e.preventDefault();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.target); // <a href="#foo" ...
     }
 
@@ -216,6 +218,7 @@ Fired when the mobile ModalView and its child widgets are initialized.
 
     <script>
     function onInit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.sender);
     }
 
@@ -244,6 +247,7 @@ Fires when the ModalView is shown.
 
     <script>
     function logTarget(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.target); // <a href="#foo" ...
     }
 

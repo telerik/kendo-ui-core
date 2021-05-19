@@ -2,7 +2,8 @@
 title: Use ContextMenu on Grid Cell
 description: An example on how to use the Kendo UI ContextMenu over a Kendo UI Grid row.
 type: how-to
-page_title: Use ContextMenu over Grid Row | Kendo UI Grid
+page_title: Use ContextMenu over Grid Row | Kendo UI Grid for jQuery
+previous_url: /knowledge-base/how-to-use-context-menu-over-grid-row
 slug: use-context-menu-over-grid-row
 ticketid: 1114321
 res_type: kb
@@ -13,10 +14,11 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
 </table>
  
+
 ## Description
 
 I want to add a drill-down options functionality to a Grid cell and have it work in the following way:
@@ -35,7 +37,7 @@ How can I append a Kendo UI ContextMenu to each cell or part of the cells in a K
 1. On the `select` event of the ContextMenu, retrieve the row information by using the `dataItem` method of the Grid.
 
 For more information, refer to:  
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/grid\#methods-dataItem](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem)  
-* [http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu\#events-select](http://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu#events-select)  
+* [https://docs.telerik.com/kendo-ui/api/javascript/ui/grid\/methods/dataitem](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/dataitem)  
+* [https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu\/events/select](https://docs.telerik.com/kendo-ui/api/javascript/ui/contextmenu/events/select)  
 
-[This Dojo example](http://dojo.telerik.com/iNuXet) demonstrates the full implementation of the scenario.
+For the full implementation of the approach, refer to [this Dojo example](https://dojo.telerik.com/iNuXet).

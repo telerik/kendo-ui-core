@@ -14,9 +14,9 @@ However, if the list item content is non-wrappable&mdash;for example, a very lon
 
 The following example demonstrates how to handle this issue and works for the Kendo UI ComboBox, AutoComplete, DropDownList, and MultiSelect widgets.
 
-###### Example
 
-```html
+
+```dojo
 <div id="example" role="application">
     <style>
         /* the first part of the ID matches the ID of the widget */

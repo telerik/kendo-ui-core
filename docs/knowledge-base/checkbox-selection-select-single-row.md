@@ -2,11 +2,12 @@
 title: Select Only One Grid Row with the Checkbox Selectable Column
 description: An example on how to select only a single row by using the built-in checkbox column of the Kendo UI Grid and remove the master checkbox.
 type: how-to
-page_title: Limit the Selection to a Single Row | Kendo UI Grid
+page_title: Limit the Selection to a Single Row | Kendo UI Grid for jQuery
 slug: checkbox-selection-select-single-row
 tags: checkbox selection, grid, kendo ui
 ticketid: 1116716
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -14,10 +15,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
@@ -28,22 +29,21 @@ I want to remove the master checkbox of the built-in checkbox column in the Kend
 
 ## Solution
 
-1. Remove the master checkbox by adding an empty [header template](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.headerTemplate) to the column.
+1. Remove the master checkbox by adding an empty [header template](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.headertemplate) to the column.
 1. Subscribe for the [`click`](https://api.jquery.com/click/) event of the checkboxes by using a jQuery selector.
 1. In the `click` event handler, get the row and the row classes by using the [`closest`](https://api.jquery.com/closest/) jQuery method.
-1. Based on the row classes, use the [`clearSelection`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-clearSelection) method of the Grid.
+1. Based on the row classes, use the [`clearSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/clearselection) method of the Grid.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 
     <script>
         function onClick(e) {
             var grid = $("#grid").data("kendoGrid");
-            var row = e.target.closest("tr");
-            var classes = row.className;
+            var row = $(e.target).closest("tr");
 
-            if (classes.indexOf("k-state-selected") != -1) {
+            if(row.hasClass("k-state-selected")){
                 setTimeout(function(e) {
                     var grid = $("#grid").data("kendoGrid");
                     grid.clearSelection();
@@ -111,5 +111,5 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 ## See Also
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
-* [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

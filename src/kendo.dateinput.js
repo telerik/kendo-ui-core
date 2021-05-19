@@ -46,19 +46,22 @@ var __meta__ = { // jshint ignore:line
             options.format = kendo._extractFormat(options.format || kendo.getCulture(options.culture).calendars.standard.patterns.d);
             options.min = kendo.parseDate(element.attr("min")) || kendo.parseDate(options.min);
             options.max = kendo.parseDate(element.attr("max")) || kendo.parseDate(options.max);
-            
+
             var insidePicker = ((element.parent().attr("class") || "").indexOf("k-picker-wrap") >= 0);
             if (insidePicker) {
                 that.wrapper = element.parent();
             } else {
                 that.wrapper = element.wrap("<span class='k-widget k-dateinput'></span>").parent();
-                that.wrapper.addClass(element[0].className);
+                that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
                 that.wrapper[0].style.cssText = element[0].style.cssText;
                 element.css({
                     width: "100%",
                     height: element[0].style.height
                 });
             }
+
+            that._inputWrapper = $(that.wrapper[0]);
+
             $("<span class='k-icon k-i-warning'></span>").insertAfter(element);
 
             that._form();
@@ -194,6 +197,9 @@ var __meta__ = { // jshint ignore:line
         _bindInput: function () {
             var that = this;
             that.element
+                .on("focusout" + ns, function () {
+                    that._change();
+                })
                 .on("paste" + ns, proxy(that._paste, that))
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on(INPUT_EVENT_NAME, proxy(that._input, that))
@@ -205,6 +211,7 @@ var __meta__ = { // jshint ignore:line
             this.element
                 .off("keydown" + ns)
                 .off("paste" + ns)
+                .off("focusout" + ns)
                 .off(INPUT_EVENT_NAME)
                 .off("mouseup" + ns)
                 .off("DOMMouseScroll" + ns + " mousewheel" + ns);
@@ -222,16 +229,24 @@ var __meta__ = { // jshint ignore:line
             if (!readonly && !disable) {
                 wrapper.addClass(STATEDEFAULT)
                     .removeClass(STATEDISABLED);
-
-                element.removeAttr(DISABLED)
-                    .removeAttr(READONLY);
+                if(element && element.length) {
+                    element[0].removeAttribute(DISABLED);
+                    element[0].removeAttribute(READONLY);
+                }
 
                 that._bindInput();
             } else {
-                wrapper.addClass(STATEDISABLED)
+                if (disable) {
+                    wrapper.addClass(STATEDISABLED)
                     .removeClass(STATEDEFAULT);
-                element.attr(DISABLED, disable)
-                    .attr(READONLY, readonly);
+                    element.attr(DISABLED, disable);
+                    if(element && element.length) {
+                        element[0].removeAttribute(READONLY);
+                    }
+                }
+                if (readonly) {
+                    element.attr(READONLY, readonly);
+                }
             }
         },
 
@@ -339,11 +354,16 @@ var __meta__ = { // jshint ignore:line
             var element = that.element;
             var formId = element.attr("form");
             var form = formId ? $("#" + formId) : element.closest("form");
+            var initialValue = element[0].value;
+
+            if (!initialValue && that.options.value) {
+                initialValue = that.options.value;
+            }
 
             if (form[0]) {
                 that._resetHandler = function () {
                     setTimeout(function () {
-                        that.value(element[0].value);
+                        that.value(initialValue);
                     });
                 };
 
@@ -379,9 +399,14 @@ var __meta__ = { // jshint ignore:line
                 selection = caret(this.element[0]);
                 var symbol = this._format[selection[0]];
                 if (knownSymbols.indexOf(symbol) >= 0) {
-                    this._dateTime.modifyPart(symbol, key == 38 ? 1 : -1);
+                    var interval = 1;
+                    if (symbol == 'm') {
+                        interval = this.options.interval || 1;
+                    }
+                    this._dateTime.modifyPart(symbol, key == 38 ? interval * 1 : interval * -1);
                     this._updateElementValue();
                     this._selectSegment(symbol);
+                    this.element.trigger(CHANGE);
                 }
             }
             if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
@@ -594,12 +619,13 @@ var __meta__ = { // jshint ignore:line
                 return true;
             }
             var newValue = new Date((value && value.getTime) ? value.getTime() : value);
+            var lastDateOfMonth = new Date(newValue.getFullYear(), newValue.getMonth() + 1, 0).getDate();
             var newHours;
             switch (symbol) {
                 case "d":
                     var newDate = (date ? newValue.getDate() * 10 : 0) + parseInt(currentChar, 10);
                     if (isNaN(newDate)) { return; }
-                    while (newDate > 31) {
+                    while (newDate > lastDateOfMonth) {
                         newDate = parseInt(newDate.toString().slice(1), 10);
                     }
                     if (newDate < 1) {

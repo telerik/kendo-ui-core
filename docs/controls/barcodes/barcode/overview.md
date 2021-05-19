@@ -1,32 +1,26 @@
 ---
 title: Overview
-page_title: Overview | Kendo UI Barcode
-description: "Learn how to create and set a Kendo UI Barcode widget."
+page_title: jQuery Barcode Documentation | Barcode Overview
+description: "Get started with the jQuery Barcode by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_barcode_widget
 position: 1
 ---
 
 # Barcode Overview
 
-The [Kendo UI Barcode widget](http://demos.telerik.com/kendo-ui/barcode/index) is used to represent data in a machine-readable format.
+The Barcode represents data in a machine-readable format.
 
-All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](http://www.w3.org/Graphics/SVG/).
+All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://www.w3.org/Graphics/SVG/).
 
-## Getting Started
+* [Demo page for the Barcode](https://demos.telerik.com/kendo-ui/barcode/index)
 
-### Create the Barcode
+## Basic Configuration
 
-To create the Barcode, use an HTML `div` element and, optionally, set a height and width via CSS.
+To create a Barcode, use an HTML `div` element and, optionally, use CSS to set its height and width.
 
-###### Example
+<div id="barcode"></div>
 
-    <div id="barcode"></div>
-
-### Initialize the Barcode
-
-To initialize the Barcode with its default configuration, use the following example. The default encoding is `code39`.
-
-###### Example
+The following example demonstrates how to initialize the Barcode with its default configuration. Its default encoding is `code39`.
 
     $(document).ready(function() {
         $("#barcode").kendoBarcode({
@@ -34,13 +28,7 @@ To initialize the Barcode with its default configuration, use the following exam
         });
     });
 
-## Configuration
-
-### Specifying the Type
-
-After you provide the Barcode value, select the encoding type (symbology) as demonstrated in the following example. For more information on what type of encoding to select, refer to the [article about encoding]({% slug encodings_kendoui_barcode_widget %}).
-
-###### Example
+After you provide the Barcode value, select the encoding type (symbology). For more information, refer to the [article on encoding]({% slug encodings_kendoui_barcode_widget %}). To set the color, background, and padding margin of the text, use the [Barcode API](/api/javascript/dataviz/ui/barcode).
 
     $(document).ready(function() {
         $("#barcode").kendoBarcode({
@@ -49,14 +37,13 @@ After you provide the Barcode value, select the encoding type (symbology) as dem
         });
     });
 
-### Styling the Appearance
+## Functionality and Features  
 
-To fine-tune the color, background, and padding margin of the text, refer to the [Barcode API](/api/javascript/dataviz/ui/barcode).
+The Barcode supports a set of [encoding types]({% slug encodings_kendoui_barcode_widget %}).
 
 ## See Also
 
-* [Encodings]({% slug encodings_kendoui_barcode_widget %})
-* [Overview of the ASP.NET MVC HtmlHelper Extension for the Barcode Widget](/aspnet-mvc/helpers/barcode/overview)
-* [Overview of the Barcode JSP Tag]({% slug overview_barcode_uiforjsp %})
-* [Overview of the Barcode PHP Class](/php/widgets/barcode/overview)
-* [Barcode JavaScript API Reference](/api/javascript/dataviz/ui/barcode)
+* [Basic Usage of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/index)
+* [Using the API of the Barcode (Demo)](https://demos.telerik.com/kendo-ui/barcode/api)
+* [Knowledge Base Section](/knowledge-base)
+* [JavaScript API Reference of the Barcode](/api/javascript/dataviz/ui/barcode)

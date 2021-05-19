@@ -9,9 +9,7 @@ slug: howto_edit_using_contectmenu_angularjs_scheduler
 
 The following example demonstrates how to edit an event in the Scheduler by using the Kendo UI ContextMenu in AngularJS.
 
-###### Example
-
-```html
+```dojo
      <div id="example" ng-app="KendoDemos">
       <div ng-controller="MyCtrl">
         <div kendo-scheduler="scheduler" k-options="schedulerOptions"></div>
@@ -83,19 +81,19 @@ The following example demonstrates how to edit an event in the Scheduler by usin
             batch: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks",
                 dataType: "jsonp"
               },
               update: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
                 dataType: "jsonp"
               },
               create: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
                 dataType: "jsonp"
               },
               destroy: {
-                url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
                 dataType: "jsonp"
               },
               parameterMap: function(options, operation) {
@@ -147,24 +145,8 @@ The following example demonstrates how to edit an event in the Scheduler by usin
     </script>
 ```
 
-
 ## See Also
 
-Other how-to examples on the Kendo UI Scheduler in AngularJS:
-
-* [How to Create and Set ObservableArray Events]({% slug howto_createand_set_observablearray_events_angularjs_scheduler %})
-* [How to Set Initial Data Manually]({% slug howto_set_intial_data_manually_angularjs_scheduler %})
-
-Other articles and how-to examples on the Kendo UI Scheduler:
-
-* [Scheduler JavaScript API Reference](/api/javascript/ui/scheduler)
-* [How to Add Controls to Custom Editor]({% slug howto_add_controlsto_custom_event_editor_scheduler %})
-* [How to Calculate Scheduler Height Dynamically]({% slug howto_calculate_scheduler_height_dunamically_scheduler %})
-* [How to Customize Edit and Events Templates]({% slug howto_customize_editand_event_templates_scheduler %})
-* [How to Create External Editor Form]({% slug howto_create_external_editor_form_scheduler %})
-* [How to Expand Scheduler to 100% Width and Height]({% slug howto_expand_scheduler_to100percent_widthandheight_scheduler %})
-* [How to Filter Events by Resource Using MultiSelect]({% slug howto_filter_eventsby_resourceusing_multiselect_scheduler %})
-* [How to Get Reference to the Built-In Validator]({% slug howto_get_referencetothe_builtin_validator_scheduler %})
-* [How to Use Custom Event Template with Specific Background Color]({% slug howto_use_custom_event_templatewith_specific_background_color_scheduler %})
-
-For more runnable examples on the Kendo UI Scheduler, browse its [**How To** documentation folder]({% slug howto_customize_editand_events_templates_angularjs_scheduler %}).
+* [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
+* [Using the API of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/api)
+* [JavaScript API Reference of the Scheduler](/api/javascript/ui/scheduler)

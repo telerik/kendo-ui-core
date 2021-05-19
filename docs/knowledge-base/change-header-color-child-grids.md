@@ -1,12 +1,13 @@
 ---
 title: Set Different Colors to Every Child Grid Header
+page_title: Change Header Colors of Child Grids | Kendo UI Grid for jQuery
 description: An example on how to change the color of every child Grid header in a hierarchical Kendo UI Grid.
 type: how-to
-page_title: Change Header Colors of Child Grids | Kendo UI Grid
 slug: change-header-color-child-grids
 tags: kendo ui, mvc, grid, hierarchy, child grids, header colors
 ticketid: 1101311
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress Kendo UI</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
    <td>Progress Kendo UI version</td>
@@ -30,7 +31,7 @@ How can I distinguish between the child grids of a master Kendo UI Grid by setti
 
 Conditionally change the background color of the header cells in the `dataBound` event handler of every child grid.
 
-```html
+```dojo
 <div id="grid"></div>
 
 <script>

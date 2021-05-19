@@ -7,7 +7,7 @@ res_type: api
 
 # kendo.ui.Confirm : kendo.ui.Dialog
 
-Represents the Kendo UI Confirm.
+Represents the Kendo UI Confirm. Inherits from [Dialog](/api/javascript/ui/dialog).
 
 ## Configuration
 
@@ -61,7 +61,7 @@ The title of the Cancel button.
 
 ### result `Promise`
 
-`Promise` a [jQuery promise instance](http://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](http://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
+`Promise` a [jQuery promise instance](https://api.jquery.com/Types/#Promise), which can be used for callbacks, or passed to [jQuery.when](https://api.jquery.com/jQuery.when/). The jQuery Deferred object resolves to:
 
 * `done()` - when user has pressed the "OK" button;
 * `fail()` - when user has pressed the "Cancel" button.
@@ -75,5 +75,6 @@ The title of the Cancel button.
       messages:{
         okText: "OK"
       }
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     }).data("kendoConfirm").result.done(function(){console.log("User accepted"); }).fail(function(){console.log("User rejected");});
     </script>

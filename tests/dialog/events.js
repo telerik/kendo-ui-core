@@ -1,222 +1,277 @@
 (function() {
-    module("initialization", {
-        setup: function() {
-            //
-        },
-        teardown: function() {
-            QUnit.fixture.closest("body").find(".dialog").each(function(idx, element) {
-                $(element).data("kendoDialog").destroy();
-            });
-            QUnit.fixture.closest("body").find(".k-overlay").remove();
-        }
-    });
-
     var KICONCLOSE = ".k-dialog-close";
 
     function createDialog(options, element) {
-        element = element || $("<div class='dialog'>dialog content</div>").appendTo(QUnit.fixture);
+        element = element || $("<div class='dialog'>dialog content</div>").appendTo(Mocha.fixture);
         return element.kendoDialog(options).data("kendoDialog");
     }
 
-    test("dialog has kendoNS", function() {
-        var dialog = createDialog({ visible: true });
-
-        ok(dialog.wrapper.data("kendoNS"));
-        ok(dialog.element.data("kendoNS"));
-    });
-
-    test("dialog actions have kendoNS", function () {
-        var dialog = createDialog({ actions: [{}, {}] })
-        var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
-        actionBtns.each(function() {
-            ok($(this).data("kendoNS"));
+    describe("initialization", function() {
+        beforeEach(function() {
+            //
         });
-    });
-
-    test("close triggers close event", function() {
-        var dialog = createDialog({
-            close: function() { ok(true); }
+        afterEach(function() {
+            Mocha.fixture.closest("body").find(".dialog").each(function(idx, element) {
+                $(element).data("kendoDialog").destroy();
+            });
+            Mocha.fixture.closest("body").find(".k-overlay").remove();
         });
 
-        dialog.close();
-    });
+        it("dialog has kendoNS", function() {
+            var dialog = createDialog({ visible: true });
 
-    test("title click on close icon calls close event", function() {
-        var dialog = createDialog({
-            close: function() { ok(true); }
+            assert.isOk(dialog.wrapper.data("kendoNS"));
+            assert.isOk(dialog.element.data("kendoNS"));
         });
 
-        dialog.wrapper.find(KICONCLOSE).click();
-    });
-
-    test("init triggers open event if visible: true", function() {
-        createDialog({
-            open: function() { ok(true); }
-        });
-    });
-
-    test("init triggers open event if visible: true and modal: false", function() {
-        createDialog({
-            modal: false,
-            open: function() { ok(true); }
-        });
-    });
-
-    test("init triggers initOpen event if visible: true", function() {
-        createDialog({
-            initOpen: function() { ok(true); }
-        });
-    });
-
-    test("init triggers initOpen event if visible: true and modal: false", function() {
-        createDialog({
-            modal: false,
-            initOpen: function() { ok(true); }
-        });
-    });
-
-    test("initOpen is triggered only once on init if visible: true", function() {
-        var dialog = createDialog({
-            initOpen: function() { ok(true); }
-        });
-        dialog.close();
-        dialog.open();
-    });
-
-    test("open triggers open event", function() {
-        var dialog = createDialog({
-            visible: false,
-            open: function() { ok(true); }
+        it("dialog actions have kendoNS", function() {
+            var dialog = createDialog({ actions: [{}, {}] })
+            var actionBtns = dialog.wrapper.find(".k-dialog-buttongroup > .k-button");
+            actionBtns.each(function() {
+                assert.isOk($(this).data("kendoNS"));
+            });
         });
 
-        dialog.open();
-    });
+        it("close triggers close event", function() {
+            var dialog = createDialog({
+                close: function(ev) {
+                    assert.isNotOk(ev.userTriggered);
+                    assert.isOk(true);
+                }
+            });
 
-
-    test("initOpen event is fired only the first time a dialog is opend", 1, function() {
-        var dialog = createDialog({
-            visible: false,
-            initOpen: function() { ok(true); }
-        });
-        dialog.open();
-        dialog.close();
-        dialog.open();
-    });
-
-    test("open triggers show event", function() {
-        var dialog = createDialog({
-            visible: false,
-            show: function(e) { ok(e.sender.wrapper.is(":visible")); }
+            dialog.close();
         });
 
-        dialog.open();
-    });
+        it("title click on close icon calls close event", function() {
+            var dialog = createDialog({
+                close: function(ev) {
+                    assert.isOk(ev.userTriggered);
+                    assert.isOk(true);
+                }
+            });
 
-    test("open does not triggers show event, if open event hendler returns false.", function() {
-        var dialog = createDialog({
-            visible: false,
-            opne: function() { ok(true); return false;},
-            show: function(e) { ok(e.sender.wrapper.is(":visible")); }
+            dialog.wrapper.find(KICONCLOSE).click();
         });
 
-        dialog.open();
-    });
+        it("action click calls close event", function() {
+            var dialog = createDialog({
+                actions: [
+                    { text: "just close" }
+                ],
+                close: function(ev) {
+                    assert.isOk(ev.userTriggered);
+                    assert.isOk(true);
+                }
+            });
 
-    test("close triggers hide event", function() {
-        var dialog = createDialog({
-            visible: true,
-            hide: function(e) {ok(!e.sender.wrapper.is(":visible")); }
-        });
-        dialog.close();
-    });
-
-    test("close does not triggers hide event, if close event hendler returns false.", function() {
-        var dialog = createDialog({
-            visible: true,
-            close: function() { ok(true); return false;},
-            show: function(e) { ok(!e.sender.wrapper.is(":visible")); }
+            dialog.wrapper.find(".k-button-group .k-button").click();
         });
 
-        dialog.close();
+        it("init triggers open event if visible: true", function() {
+            createDialog({
+                open: function() { assert.isOk(true); }
+            });
+        });
+
+        it("init triggers open event if visible: true and modal: false", function() {
+            createDialog({
+                modal: false,
+                open: function() { assert.isOk(true); }
+            });
+        });
+
+        it("init triggers initOpen event if visible: true", function() {
+            createDialog({
+                initOpen: function() { assert.isOk(true); }
+            });
+        });
+
+        it("init triggers initOpen event if visible: true and modal: false", function() {
+            createDialog({
+                modal: false,
+                initOpen: function() { assert.isOk(true); }
+            });
+        });
+
+        it("initOpen is triggered only once on init if visible: true", function() {
+            var dialog = createDialog({
+                initOpen: function() { assert.isOk(true); }
+            });
+            dialog.close();
+            dialog.open();
+        });
+
+        it("open triggers open event", function() {
+            var dialog = createDialog({
+                visible: false,
+                open: function() { assert.isOk(true); }
+            });
+
+            dialog.open();
+        });
+
+
+        it("initOpen event is fired only the first time a dialog is opend", function() {
+            var dialog = createDialog({
+                visible: false,
+                initOpen: function() { assert.isOk(true); }
+            });
+            dialog.open();
+            dialog.close();
+            dialog.open();
+        });
+
+        it("open triggers show event", function() {
+            var dialog = createDialog({
+                visible: false,
+                show: function(e) { assert.isOk(e.sender.wrapper.is(":visible")); }
+            });
+
+            dialog.open();
+        });
+
+        it("open does not triggers show event, if open event hendler returns false.", function() {
+            var dialog = createDialog({
+                visible: false,
+                opne: function() { assert.isOk(true); return false; },
+                show: function(e) { assert.isOk(e.sender.wrapper.is(":visible")); }
+            });
+
+            dialog.open();
+        });
+
+        it("close triggers hide event", function() {
+            var dialog = createDialog({
+                visible: true,
+                hide: function(e) { assert.isOk(!e.sender.wrapper.is(":visible")); }
+            });
+            dialog.close();
+        });
+
+        it("close does not triggers hide event, if close event hendler returns false.", function() {
+            var dialog = createDialog({
+                visible: true,
+                close: function() { assert.isOk(true); return false; },
+                show: function(e) { assert.isOk(!e.sender.wrapper.is(":visible")); }
+            });
+
+            dialog.close();
+        });
     });
 
     var keys = kendo.keys;
-    module("keyboard support", {
-        setup: function() {
+    describe("keyboard support", function() {
+        beforeEach(function() {
             keys = kendo.keys;
 
             $.fn.press = function(key, options) {
                 return this.trigger($.extend({ type: "keydown", keyCode: key }, options));
             };
-        },
-        teardown: function() {
-            QUnit.fixture.closest("body").find(".dialog").each(function(idx, element) {
+        });
+        afterEach(function() {
+            Mocha.fixture.closest("body").find(".dialog").each(function(idx, element) {
                 $(element).data("kendoDialog").destroy();
             });
-            QUnit.fixture.closest("body").find(".k-overlay").remove();
-        }
-    });
-
-    test("escape key coses the window", function() {
-        var dialog = createDialog({
-            closable: true,
-            animation: false
+            Mocha.fixture.closest("body").find(".k-overlay").remove();
         });
 
-        dialog.element.press(keys.ESC);
+        it("escape key coses the window", function() {
+            var dialog = createDialog({
+                closable: true,
+                animation: false
+            });
 
-        ok(!dialog.options.visible);
-        ok(!dialog.wrapper.is(":visible"));
-    });
+            dialog.element.press(keys.ESC);
 
-    test("escape key does not close the dialog, when closable is false", function() {
-        var dialog = createDialog({
-            closable: false,
-            animation: false
+            assert.isOk(!dialog.options.visible);
+            assert.isOk(!dialog.wrapper.is(":visible"));
         });
 
-        dialog.element.press(keys.ESC);
+        it("escape key does not close the dialog, when closable is false", function() {
+            var dialog = createDialog({
+                closable: false,
+                animation: false
+            });
 
-        ok(dialog.options.visible);
-        ok(dialog.wrapper.is(":visible"));
-    });
+            dialog.element.press(keys.ESC);
 
-    function keyboardCloseButton_closesDialog(keyCode) {
-        var dialog = createDialog({ closable: true });
-
-        dialog.wrapper.find(KICONCLOSE).press(keyCode);
-
-        ok(!dialog.options.visible);
-    }
-
-    test("close button enter key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ENTER));
-    test("close button esc key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ESC));
-    test("close button space key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.SPACEBAR));
-
-    function actionButtonKeyTrigger(keyCode) {
-        var dialog = createDialog({
-            actions: [{ text: "ok", action: function() {
-                ok(true);
-            }}]
+            assert.isOk(dialog.options.visible);
+            assert.isOk(dialog.wrapper.is(":visible"));
         });
 
-        dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keyCode);
-    }
-
-    test("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.ENTER));
-    test("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.SPACEBAR));
-
-    test("esc key on action button just closes the dialog", function() {
-        var dialog = createDialog({
-            actions: [{
-                text: "ok",
-                action: function() {
-                    ok(false);
+        function keyboardCloseButton_closesDialog(keyCode) {
+            var dialog = createDialog({
+                closable: true,
+                close: function (ev) {
+                    assert.isOk(ev.userTriggered);
                 }
-            }]
+            });
+
+            dialog.wrapper.find(KICONCLOSE).press(keyCode);
+
+            assert.isOk(!dialog.options.visible);
+        }
+
+        it("close button enter key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ENTER));
+        it("close button esc key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.ESC));
+        it("close button space key triggers close", $.proxy(keyboardCloseButton_closesDialog, this, keys.SPACEBAR));
+
+        function actionButtonKeyTrigger(keyCode) {
+            var dialog = createDialog({
+                actions: [{
+                    text: "ok", action: function() {
+                        assert.isOk(true);
+                    }
+                }]
+            });
+
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keyCode);
+        }
+
+        it("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.ENTER));
+        it("action button triggered by enter key", $.proxy(actionButtonKeyTrigger, this, keys.SPACEBAR));
+
+        it("esc key on action button just closes the dialog", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "ok",
+                    action: function() {
+                        assert.isOk(false);
+                    }
+                }]
+            });
+
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
+            assert.isOk(!dialog.options.visible);
         });
 
-        dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ESC);
-        ok(!dialog.options.visible);
+        it("enter key on action button runs action only once", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "ok",
+                    action: function() {
+                        assert.isOk(true);
+                    }
+                }]
+            });
+
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.ENTER);
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+        });
+
+        it("SPACEBAR key on action button runs action only once", function() {
+            var dialog = createDialog({
+                actions: [{
+                    text: "ok",
+                    action: function() {
+                        assert.isOk(true);
+                    }
+                }]
+            });
+
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").press(keys.SPACEBAR);
+            dialog.wrapper.find(".k-dialog-buttongroup .k-button").click();
+        });
     });
-})();
+}());

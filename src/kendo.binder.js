@@ -281,7 +281,7 @@ var __meta__ = { // jshint ignore:line
 
     var TypedBinder = Binder.extend({
         dataType: function() {
-            var dataType = this.element.getAttribute("data-type") || this.element.type || "text";
+            var dataType = this.element.getAttribute("data-" + kendo.ns + "type") || this.element.type || "text";
             return dataType.toLowerCase();
         },
 
@@ -400,7 +400,7 @@ var __meta__ = { // jshint ignore:line
     binders.text = Binder.extend({
         refresh: function() {
             var text = this.bindings.text.get();
-            var dataFormat = this.element.getAttribute("data-format") || "";
+            var dataFormat = this.element.getAttribute("data-" + kendo.ns + "format") || "";
             if (text == null) {
                 text = "";
             }
@@ -690,15 +690,16 @@ var __meta__ = { // jshint ignore:line
                     }else{
                         element.checked = source;
                     }
-                } else if (element.type == "radio" && value != null) {
+                } else if (element.type == "radio") {
                     if (type == "date") {
                         value = kendo.toString(value, "yyyy-MM-dd");
                     } else if (type == "datetime-local") {
                         value = kendo.toString(value, "yyyy-MM-ddTHH:mm:ss");
                     }
-                    if (element.value === value.toString()) {
+
+                    if (value !== null && typeof(value) !== "undefined" && element.value === value.toString()) {
                         element.checked = true;
-                    }else{
+                    } else {
                         element.checked = false;
                     }
                 }
@@ -960,7 +961,7 @@ var __meta__ = { // jshint ignore:line
                 var that = this,
                     source,
                     widget = that.widget,
-                    select, multiselect;
+                    select, multiselect, dropdowntree;
 
                 e = e || {};
 
@@ -979,10 +980,15 @@ var __meta__ = { // jshint ignore:line
                         } else if (source && source._dataSource) {
                             widget[setter](source._dataSource);
                         } else {
-                            widget[fieldName].data(source);
-
                             select = kendo.ui.Select && widget instanceof kendo.ui.Select;
                             multiselect = kendo.ui.MultiSelect && widget instanceof kendo.ui.MultiSelect;
+                            dropdowntree = kendo.ui.DropDownTree && widget instanceof kendo.ui.DropDownTree;
+
+                            if(!dropdowntree){
+                                widget[fieldName].data(source);
+                            }else{
+                                widget.treeview[fieldName].data(source);
+                            }
 
                             if (that.bindings.value && (select || multiselect)) {
                                 widget.value(retrievePrimitiveValues(that.bindings.value.get(), widget.options.dataValueField));
@@ -1062,11 +1068,59 @@ var __meta__ = { // jshint ignore:line
                 var element = this.element,
                     value = element.value;
 
-                if (value == "on" || value == "off") {
+                if (value == "on" || value == "off" || this.element.type == "checkbox") {
                     value = element.checked;
                 }
 
                 return value;
+            },
+
+            destroy: function() {
+                this.widget.unbind(CHANGE, this._change);
+            }
+        }),
+
+        start: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this._change = proxy(this.change, this);
+                this.widget = widget;
+                this.widget.bind(CHANGE, this._change);
+            },
+
+            change: function() {
+                this.bindings.start.set(this.widget.range().start);
+            },
+
+            refresh: function() {
+                var that = this;
+                var start = this.bindings.start.get();
+                var end = that.widget._range ? that.widget._range.end: null;
+                this.widget.range({start: start, end: end});
+            },
+
+            destroy: function() {
+                this.widget.unbind(CHANGE, this._change);
+            }
+        }),
+
+        end: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this._change = proxy(this.change, this);
+                this.widget = widget;
+                this.widget.bind(CHANGE, this._change);
+            },
+
+            change: function() {
+                this.bindings.end.set(this.widget.range().end);
+            },
+
+            refresh: function() {
+                var that = this;
+                var end = this.bindings.end.get();
+                var start = that.widget._range ? that.widget._range.start: null;
+                this.widget.range({start: start, end: end});
             },
 
             destroy: function() {
@@ -1271,7 +1325,131 @@ var __meta__ = { // jshint ignore:line
                 this.widget.unbind(CHANGE, this._change);
             }
         }),
+        dropdowntree: {
+            value: Binder.extend({
+                init: function(widget, bindings, options) {
+                    Binder.fn.init.call(this, widget.element[0], bindings, options);
 
+                    this.widget = widget;
+                    this._change = $.proxy(this.change, this);
+                    this.widget.first(CHANGE, this._change);
+                    this._initChange = false;
+                },
+
+                change: function() {
+                    var that = this,
+                        oldValues = that.bindings[VALUE].get(),
+                        valuePrimitive = that.options.valuePrimitive,
+                        selectedNode = that.widget.treeview.select(),
+                        nonPrimitiveValues = that.widget._isMultipleSelection() ? that.widget._getAllChecked(): (that.widget.treeview.dataItem(selectedNode) || that.widget.value()),
+                        newValues = (valuePrimitive || that.widget.options.autoBind === false) ? that.widget.value() : nonPrimitiveValues;
+
+                    var field = this.options.dataValueField || this.options.dataTextField;
+
+                    newValues = newValues.slice ? newValues.slice(0): newValues;
+
+                    that._initChange = true;
+
+                    if (oldValues instanceof ObservableArray) {
+                        var remove = [];
+                        var newLength = newValues.length;
+                        var i = 0, j = 0;
+                        var old = oldValues[i];
+                        var same = false;
+                        var removeIndex;
+                        var newValue;
+                        var found;
+
+                        while (old !== undefined) {
+                            found = false;
+                            for (j = 0; j < newLength; j++) {
+                                if (valuePrimitive) {
+                                    same = newValues[j] == old;
+                                } else {
+                                    newValue = newValues[j];
+
+                                    newValue = newValue.get ? newValue.get(field) : newValue;
+                                    same = newValue == (old.get ? old.get(field) : old);
+                                }
+
+                                if (same) {
+                                    newValues.splice(j, 1);
+                                    newLength -= 1;
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                remove.push(old);
+                                arraySplice(oldValues, i, 1);
+                                removeIndex = i;
+                            } else {
+                                i += 1;
+                            }
+
+                            old = oldValues[i];
+                        }
+
+                        arraySplice(oldValues, oldValues.length, 0, newValues);
+
+                        if (remove.length) {
+                            oldValues.trigger("change", {
+                                action: "remove",
+                                items: remove,
+                                index: removeIndex
+                            });
+                        }
+
+                        if (newValues.length) {
+                            oldValues.trigger("change", {
+                                action: "add",
+                                items: newValues,
+                                index: oldValues.length - 1
+                            });
+                        }
+                    } else {
+                        that.bindings[VALUE].set(newValues);
+                    }
+
+                    that._initChange = false;
+                },
+
+                refresh: function() {
+                    if (!this._initChange) {
+                        var options = this.options,
+                            widget = this.widget,
+                            field = options.dataValueField || options.dataTextField,
+                            value = this.bindings.value.get(),
+                            data = value,
+                            idx = 0, length,
+                            values = [],
+                            selectedValue;
+
+                        if (field) {
+                            if (value instanceof ObservableArray) {
+                                for (length = value.length; idx < length; idx++) {
+                                    selectedValue = value[idx];
+                                    values[idx] = selectedValue.get ? selectedValue.get(field) : selectedValue;
+                                }
+                                value = values;
+                            } else if (value instanceof ObservableObject) {
+                                value = value.get(field);
+                            }
+                        }
+                        if (options.autoBind === false && options.valuePrimitive !== true) {
+                            widget._preselect(data, value);
+                        } else {
+                            widget.value(value);
+                        }
+                   }
+                },
+
+                destroy: function() {
+                    this.widget.unbind(CHANGE, this._change);
+                }
+            })
+        },
         gantt: {
             dependencies: dataSourceBinding("dependencies", "dependencies", "setDependenciesDataSource")
         },
@@ -1424,6 +1602,46 @@ var __meta__ = { // jshint ignore:line
                             bindElement(elements[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
                         }
                     }
+                }
+            })
+        },
+
+        grid: {
+            source: dataSourceBinding("source", "dataSource", "setDataSource").extend({
+                dataBound: function(e) {
+                    var idx,
+                    length,
+                    widget = this.widget,
+                    elements = e.addedItems || widget.items(),
+                    parents,
+                    data;
+
+                    if (elements.length) {
+                        data = e.addedDataItems || widget.dataItems();
+                        parents = this.bindings.source._parents();
+
+                        for (idx = 0, length = data.length; idx < length; idx++) {
+                            bindElement(elements[idx], data[idx], this._ns(e.ns), [data[idx]].concat(parents));
+                        }
+                    }
+                }
+            })
+        },
+
+        badge: {
+            text: Binder.extend({
+                init: function(widget, bindings, options) {
+                    Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                    this.widget = widget;
+                },
+                refresh: function() {
+                    var text = this.bindings.text.get();
+
+                    if (text == null) {
+                        text = "";
+                    }
+                    this.widget.text(text);
                 }
             })
         }
@@ -1656,6 +1874,11 @@ var __meta__ = { // jshint ignore:line
     }
 
     function bindElement(element, source, roles, parents) {
+
+        if(!element || element.getAttribute("data-" + kendo.ns + "stop")){
+            return;
+        }
+
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
@@ -1679,7 +1902,7 @@ var __meta__ = { // jshint ignore:line
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true});
+                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true}, source);
                 options.roles = roles;
                 target = new BindingTarget(element, options);
             }
@@ -1727,7 +1950,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         var children = element.children;
-        if (deep && children) {
+        if (deep && children && !element.getAttribute("data-" + kendo.ns + "stop")) {
             // https://github.com/telerik/kendo/issues/1240 for the weirdness.
             for (idx = 0; idx < children.length; idx++) {
                 childrenCopy[idx] = children[idx];

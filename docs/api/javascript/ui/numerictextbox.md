@@ -3,6 +3,7 @@ title: NumericTextBox
 page_title: Configuration, methods and events of Kendo UI NumericTextBox
 description: Code examples and tips how to configure NumericTextBox widget, use available methods and events.
 res_type: api
+component: numeric-textbox
 ---
 
 # kendo.ui.NumericTextBox
@@ -21,10 +22,10 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
         TODO: Add the kendo.culture.de-DE.min.js file as it is required!
 
         Here is a sample script tag:
-        <script src="http://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{kendo version}/js/cultures/kendo.culture.de-DE.min.js"></script>
 
         For more information check this help topic:
-        http://docs.telerik.com/kendo-ui/framework/globalization/overview
+        https://docs.telerik.com/kendo-ui/framework/globalization/overview
     -->
 
     <input id="numerictextbox" />
@@ -38,7 +39,7 @@ Represents the Kendo UI NumericTextBox widget. Inherits from [Widget](/api/javas
 
 Specifies the number precision applied to the widget value and when the NumericTextBox is focused. If not set, the precision defined by the current culture is used. If the user enters a number with a greater precision than is currently configured, the widget value will be rounded. For example, if `decimals` is `2` and the user inputs `12.346`, the value will become `12.35`. If the user inputs `12.99`, the value will become `13.00`.
 
-Compare with the [`format`](#configuration-format) property.
+Compare with the [`format`](/api/javascript/ui/numerictextbox#configuration-format) property.
 
 #### Example
 
@@ -83,7 +84,7 @@ Specifies the factor by which the value is multiplied. The obtained result is us
 
 Specifies the number format used when the widget is not focused. Any [valid number format](/framework/globalization/numberformatting) is allowed.
 
-Compare with the [`decimals`](#configuration-decimals) property.
+Compare with the [`decimals`](/api/javascript/ui/numerictextbox#configuration-decimals) property.
 
 #### Example
 
@@ -92,6 +93,81 @@ Compare with the [`decimals`](#configuration-decimals) property.
     $("#numerictextbox").kendoNumericTextBox({
        format: "c0"
     });
+    </script>
+
+### label `String|Function|Object` *(default: null)*
+
+Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: "First name"
+        });
+    </script>
+
+The function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: function() {
+                return "First name";
+            }
+        });
+    </script>
+
+### label.content `String|Function` *(default: "")*
+
+Sets the inner HTML of the label.
+
+#### Example - create a label from a string
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: {
+                content: "First name"
+            }
+        });
+    </script>
+
+The function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - create a label from a function
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: {
+                content: function() {
+                    return "First name";
+                }
+            }
+        });
+    </script>
+
+### label.floating `Boolean` *(default: false)*
+
+If set to `true`, the widget will be wrapped in a container that will allow the floating label functionality.
+
+> **Important:** The [value](/api/javascript/ui/numerictextbox/methods/value) method **does not trigger** the `focusout` event of the input.
+This could affect the floating label functionality.
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
+#### Example - create a floating label
+
+    <input id="numerictextbox" />
+    <script>
+        $("#numerictextbox").kendoNumericTextBox({
+            label: {
+                content: "First name",
+                floating: true
+            }
+        });
     </script>
 
 ### max `Number`*(default: null)*
@@ -171,6 +247,19 @@ The hint displayed by the widget when it is empty. Not set by default.
     <script>
     $("#numerictextbox").kendoNumericTextBox({
         round: false
+    });
+    </script>
+
+### selectOnFocus `Boolean`*(default: false)*
+
+ When set to true, the text of the input will be selected after the widget is focused.
+
+#### Example
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        selectOnFocus: true
     });
     </script>
 
@@ -355,6 +444,7 @@ The max value to set.
 
     var max = numerictextbox.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -395,6 +485,7 @@ The min value to set.
 
     var min = numerictextbox.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -435,6 +526,7 @@ The step value to set.
 
     var step = numerictextbox.step();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(step);
     </script>
 
@@ -454,6 +546,10 @@ The step value to set.
 ### value
 
 Gets or sets the value of the NumericTextBox.
+
+> **Important:** This method **does not trigger** the `focusout` event of the input.
+This could affect the [floating label functionality](/api/javascript/ui/numerictextbox/configuration/label.floating).
+You can overcome this behavior by manually invoking the `refresh` method of the Floating Label: `$("#numerictextbox").data("kendoNumericTextBox").floatingLabel.refresh();`
 
 #### Parameters
 
@@ -475,6 +571,7 @@ The value to set.
 
     var value = numerictextbox.value();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -510,6 +607,7 @@ The widget instance which fired the event.
     $("#numerictextbox").kendoNumericTextBox({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the numerictextbox
         }
     });
@@ -525,6 +623,7 @@ The widget instance which fired the event.
 
     numerictextbox.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the numerictextbox
     });
     </script>
@@ -546,6 +645,7 @@ The widget instance which fired the event.
     $("#numerictextbox").kendoNumericTextBox({
         spin: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the numerictextbox
         }
     });
@@ -561,6 +661,7 @@ The widget instance which fired the event.
 
     numerictextbox.bind("spin", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the numerictextbox
     });
     </script>

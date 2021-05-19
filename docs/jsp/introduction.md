@@ -6,15 +6,21 @@ slug: overview_uiforjsp
 position: 1
 ---
 
-# Progress<sup>®</sup>Telerik<sup>®</sup> UI for JSP
+# Progress<sup>®</sup> Telerik<sup>®</sup> UI for JSP
 
 This article demonstrates how to download and install Progress Telerik UI for JSP and run a sample application.
+
+To read more about the benefits of using Progress Telerik UI for JSP, please visit the [product overview page](http://www.telerik.com/jsp-ui).
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
 
 ## Getting Started
 
 ### Download and Install
 
-The distribution files contain the following:
+Start by [downloading the controls](https://www.telerik.com/download-trial-file/v2/ui-for-jsp). The distribution files contain the following:
 
 * `\js`&mdash;These are the Kendo UI minified JavaScript files.
 * `\styles`&mdash;The Kendo UI minified CSS files and background images used by the themes.
@@ -25,7 +31,7 @@ The distribution files contain the following:
 
 ### Meet the Requirements
 
-* [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html), version 1.8 or 1.7
+* [Java Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html), latest recommended version
 * [Eclipse for Enterprise Developers (J2EE support)&mdash;Luna, Kepler, or later](https://eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/keplersr2)
 * [Maven support for Eclipse (M2E)](http://www.eclipse.org/m2e/)
 * Configured server, tested with [Tomcat 7](http://tomcat.apache.org/tomcat-7.0-doc/)
@@ -97,7 +103,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 **Step 6** Configure your page to include the Kendo UI web JavaScript and CSS files to the page, as shown in the example below.
 
-###### Example
+
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
@@ -110,7 +116,7 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 >
 > If you want to use Kendo UI web and data visualization widgets at the same time, include `kendo.all.min.js` instead of `kendo.web.min.js` and `kendo.dataviz.min.js`. You can also create a custom JavaScript file by using the [Custom Download Builder](https://www.telerik.com/login/v2/telerik?ReturnUrl=http%3a%2f%2fwww.telerik.com%2fdownload%2fcustom-download).
 
-###### Example
+
 
         <link href="resources/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
         <link href="resources/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
@@ -121,13 +127,13 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 **Step 7** Add taglib mapping to the Kendo UI tags.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 8** Use any Kendo UI HtmlHelper extension.
 
-###### Example
+
 
         <kendo:datePicker name="datePicker"></kendo:datePicker>
 
@@ -135,28 +141,45 @@ If you intend to use CDN services, skip steps 3, 4, and 5, and check the [sectio
 
 You are also able to include the JavaScript and CSS files from CDN. Do not forget to specify the version, e.g. 2012.2.710.
 
-###### Example
 
-       <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
-       <link href="http://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+
+       <link href="https://kendo.cdn.telerik.com/<VERSION>/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+       <link href="https://kendo.cdn.telerik.com/<VERSION>/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
 
        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-       <script src="http://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
+       <script src="https://kendo.cdn.telerik.com/<VERSION>/js/kendo.all.min.js"></script>
+
+## Trial Version and Commercial License
+
+This Progress Telerik UI for JSP library is a commercial UI library. You are welcome to explore its full functionality and get technical support from the team when you register for a free 30-day trial. To use it commercially, you need to [purchase a license](https://www.telerik.com/purchase/kendo-ui). Feel free to review the Progress Telerik UI for JSP [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui) to get acquainted with the full terms of use.
+
+## Support Options
+
+For any issues you might encounter while working with Progress Telerik UI for JSP, use any of the available support channels:
+
+* Kendo UI Professional license holders and active trialists can take advantage of our outstanding customer support delivered by the developers building the library. To submit a support ticket, use the [Progress Telerik UI for JSP dedicated support](https://www.telerik.com/account/support-tickets/) system.
+* [Progress Telerik UI for JSP forums](https://www.telerik.com/forums/jsp) are part of the free support you can get from the community and from the Progress Telerik UI for JSP team on all kinds of general issues.
+* [Progress Telerik UI for JSP feedback portal](https://feedback.telerik.com/jsp-ui) and [Progress Telerik UI for JSP roadmap](https://www.telerik.com/support/whats-new/jsp-ui/roadmap) provide information on the features in discussion and also the planned ones for release.
+* Progress Telerik UI for JSP uses GitHub Issues as its bug tracker and you can submit any related reports there.
+* You may still need a tailor-made solution for your project. In such cases, go straight to [Progress Services](https://www.progress.com/services).
+
+## Learning Resources
+
+* [Progress Telerik UI for JSP forum](https://www.telerik.com/forums/jsp)
+* [Progress Telerik UI for JSP feedback portal](https://feedback.telerik.com/jsp-ui)
 
 ## Next Steps
 
-To gain more practice on Progress Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](http://www.youtube.com/kendouitv):
+To gain more practice on Progress Telerik UI for JSP, watch the video tutorials on the [Kendo UI YouTube Channel](https://www.youtube.com/kendouitv):
 
-1. [Get Started with Progress Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
-1. [Get Started with Progress Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
-1. [Get Started with Progress Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
-1. [Get Started with Progress Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
+1. [Get Started with Telerik UI for JSP: Episode 1](https://www.youtube.com/watch?v=3VH75XVhLCI)
+1. [Get Started with Telerik UI for JSP: Episode 2](https://www.youtube.com/watch?v=LyGHeRMmq5I)
+1. [Get Started with Telerik UI for JSP: Episode 3](https://www.youtube.com/watch?v=sCwqj_ZRGI8)
+1. [Get Started with Telerik UI for JSP: Episode 4](https://www.youtube.com/watch?v=fcbw4YR4P2I)
 
 For more examples on how to use Kendo UI with JSP wrappers, visit the [GitHub repository with the collected Kendo UI examples on using JSP](https://github.com/telerik/kendo-examples-java).
 
 ## See Also
 
-Other articles on Progress Telerik UI for JSP:
-
-* [Progress Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
-* [Progress Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})
+* [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)
+* [Telerik UI for JSP Tags Folder]({% slug overview_autocomplete_uiforjsp %})

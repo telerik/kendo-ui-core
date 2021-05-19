@@ -8,13 +8,15 @@ position: 2
 
 # Router
 
-The `Router` class is responsible for tracking the application state and navigating between the application states. The router integrates into the browser history using the fragment part of the URL (`#page`), making the application states book-markable and linkable. It is also used for programmatic navigation to a given state. A change event is exposed, suitable for authorization hooks.
+The `Router` class is responsible for tracking the application state and navigating between the application states.
 
-The example below demonstrates a Router with a root route callback.
+## Getting Started 
 
-###### Example
+The router integrates into the browser history using the fragment part of the URL (`#page`), making the application states book-markable and linkable. It is also used for programmatic navigation to a given state. A change event is exposed, suitable for authorization hooks.
 
-```html
+The following example demonstrates a Router with a root route callback. By default, if the URL fragment is empty, or not present, the `"/"` route callback is executed. The `init` event handler is executed regardless of the initial URL.
+
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -27,25 +29,20 @@ The example below demonstrates a Router with a root route callback.
         });
     </script>
 ```
-By default, if the URL fragment is empty, or not present, the `"/"` route callback is executed. The `init` event handler is executed regardless of the initial URL.
 
 ## Parameters
 
-The router implements most of the [Ruby on Rails](http://guides.rubyonrails.org/routing.html#non-resourceful-routes) routing formats, supporting:
+The router implements most of the [Ruby on Rails](http://guides.rubyonrails.org/routing.html#non-resourceful-routes) routing formats. The parsed parts of the URL are passed as parameters to the route callback.
+
+The `Router` supports the following parameters:
 
 * Bound parameters
 * Optional segments
 * Route globbing
 
-The parsed parts of the URL are passed as parameters to the route callback.
+The following example demonstrates how the parameter parsing is done.
 
-### Parameter Parsing
-
-The example below demonstrates how the parameter parsing is done.
-
-###### Example
-
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -63,13 +60,9 @@ The example below demonstrates how the parameter parsing is done.
     </script>
 ```
 
-### Optional Segments
+The following example demonstrates how to handle the optional segments.
 
-The example below demonstrates how to handle the optional segments.
-
-###### Example
-
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -92,13 +85,9 @@ The example below demonstrates how to handle the optional segments.
     </script>
 ```
 
-### Route Globbing
+The following example demonstrates how to apply the route globbing.
 
-The example below demonstrates how to apply the route globbing.
-
-###### Example
-
-```html
+```dojo
     <script>
         var router = new kendo.Router();
 
@@ -121,17 +110,13 @@ The example below demonstrates how to apply the route globbing.
     </script>
 ```
 
-## Navigation
+## Setting the Route Navigation
 
 The `navigate` method can be used to navigate to another application. The respective route (if present) is triggered. The `navigate` method is modifying the URL fragment part. Clicking on anchor links will also trigger the respective route&mdash;a link with `href="#/foo"` also triggers the `/foo` route callback.
 
-### Route Navigation
+The following example demonstrates how to handle the `Route` navigation.
 
-The example below demonstrates how to handle route navigation.
-
-###### Example
-
-```html
+```dojo
     <a href="#/foo">Foo</a>
 
     <script>
@@ -148,15 +133,13 @@ The example below demonstrates how to handle route navigation.
     </script>
 ```
 
-### Missing Routes
+## Handling Missing Routes
 
-If no route match is found, the router triggers a `routeMissing` event, passing the URL in the event handler.
+If no route match is found, the router triggers a `routeMissing` event and passes the URL in the event handler.
 
-The example below demonstrates how to handle missing routes.
+The following example demonstrates how to handle missing routes.
 
-###### Example
-
-```html
+```dojo
     <script>
     var router = new kendo.Router({ routeMissing: function(e) { console.log(e.url) } });
 
@@ -167,15 +150,13 @@ The example below demonstrates how to handle missing routes.
     </script>
 ```
 
-### Navigation Intercepted
+## Intercepting Navigation
 
 Each time the URL fragment changes, the router triggers a `change` event. Calling the `preventDefault` method on the event object reverts the URL to its previous state.
 
-The example below demonstrates how to intercept the navigation.
+The following example demonstrates how to intercept the navigation.
 
-###### Example
-
-```html
+```dojo
     <script>
     var router = new kendo.Router({
         change: function(e) {
@@ -193,13 +174,9 @@ The example below demonstrates how to intercept the navigation.
 
 ## Query String Parameters
 
-### General
+In addition to the route parameters, the route callback will receive a `key:value` object with the query string parameters (if any) as its last argument.
 
-In addition to the route parameters, the route callback will receive a `key:value` object with the query string parameters (if any) as its last argument, as shown in the example below.
-
-###### Example
-
-```html
+```dojo
     <script>
     var router = new kendo.Router();
 
@@ -214,33 +191,37 @@ In addition to the route parameters, the route callback will receive a `key:valu
     </script>
 ```
 
-### Back Action Parameter
+If the `Back` key button is pressed, the object of the query string parameter includes a `_back: true` field to indicate the back action.
 
-If the `Back` key button is pressed, the query string parameter's object includes a `_back: true` field to indicate the back action.
+> To globally detect back navigation in the `Router`, use its [`back` event](/api/javascript/router/events/back).
 
-The example below demonstrates how to detect `Back` button press in a route.
+The following example demonstrates how to detect `Back` button press in a route.
 
-###### Example
-
-```html
+```dojo
     <script>
-    var router = new kendo.Router();
+      var router = new kendo.Router();
 
-    router.route("/foo", function(params) {
-        console.log(params._back);
-    });
-
-    $(function() {
+      router.route("/foo", function(params) {
+        if(params._back){
+          console.log("Navigating back to '/foo'");
+        }
+        else {
+          console.log("Forward navigation to '/foo'");
+        }
+      });
+      router.route("/bar", function(params) {
+        console.log("Forward navigation to '/bar'");
+      });
+      $(function() {
         router.start();
-        router.navigate("/foo?q=2");
+        router.navigate("/foo");
+        router.navigate("/bar");
         history.back();
-    });
+      });
     </script>
 ```
 
 ## See Also
-
-Other articles on Kendo UI Single-Page Application:
 
 * [Single-Page Application Overview]({% slug overview_kendoui_singlepageapplication %})
 * [SPA Layout]({% slug layout_kendoui_singlepageapplication %})

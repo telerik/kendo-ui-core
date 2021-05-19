@@ -9,9 +9,9 @@ slug: howto_select_ranges_between_datepicker
 
 The following example demonstrates how to implement a range selection between two Kendo UI DatePickers in AngularJS projects.
 
-###### Example
 
-```html
+
+```dojo
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content"ng-controller="MyCtrl">
     <div class="box-col">

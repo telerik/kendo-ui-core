@@ -3,6 +3,7 @@ title: DropDownList
 page_title: Configuration, methods and events of Kendo UI DropDownList
 description: "Learn how to control your DropDown UI widget's behavior to suit your needs: open, close, enable, disable the widget. Events data and code examples available."
 res_type: api
+component: dropdownlist
 ---
 
 # kendo.ui.DropDownList
@@ -168,7 +169,7 @@ Use it to set the Id of the parent DropDownList widget.
 
 ### cascadeFromField `String`
 
-Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/dropdownlist#configuration-dataValueField).
+Defines the field to be used to filter the data source. If not defined the [parent's dataValueField option will be used](/api/javascript/ui/dropdownlist/configuration/datavaluefield).
 [Help topic showing how cascading functionality works](/web/dropdownlist/cascading)
 
 #### Example
@@ -188,6 +189,39 @@ Defines the field to be used to filter the data source. If not defined the [pare
     $("#child").kendoDropDownList({
         cascadeFrom: "parent",
         cascadeFromField: "parentId",
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Child1", id: 1, parentId: 1 },
+            { name: "Child2", id: 2, parentId: 2 },
+            { name: "Child3", id: 3, parentId: 1 },
+            { name: "Child4", id: 4, parentId: 2 }
+        ]
+    });
+    </script>
+
+### cascadeFromParentField `String`
+
+Defines the parent field to be used to retain value from. This value will be used further to filter the dataSource. If not defined the value from the [parent's dataValueField will be used](/api/javascript/ui/dropdownlist/configuration/datavaluefield).
+
+#### Example
+
+    <input id="parent" />
+    <input id="child" />
+    <script>
+    $("#parent").kendoDropDownList({
+        dataTextField: "name",
+        dataValueField: "id",
+        dataSource: [
+            { name: "Parent1", id: 123, cascadeId: 1 },
+            { name: "Parent2", id: 234, cascadeId: 2 }
+        ]
+    });
+
+    $("#child").kendoDropDownList({
+        cascadeFrom: "parent",
+        cascadeFromField: "parentId",
+        cascadeFromParentField: "cascadeId",
         dataTextField: "name",
         dataValueField: "id",
         dataSource: [
@@ -236,7 +270,7 @@ If the `dataSource` option is an existing [kendo.data.DataSource](/api/javascrip
     var dataSource = new kendo.data.DataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/products",
+          url: "https://demos.telerik.com/kendo-ui/service/products",
           dataType: "jsonp"
         }
       }
@@ -290,14 +324,15 @@ The field of the data item that provides the value of the widget.
 
 ### delay `Number`*(default: 500)*
 
- Specifies the delay in milliseconds before the search-text typed by the end user is cleared.
+ Specifies the delay in milliseconds before the search-text typed by the end user is sent for filtering.
 
 #### Example - set the delay
 
     <input id="dropdownlist" />
     <script>
     $("#dropdownlist").kendoDropDownList({
-        delay: 1000 // wait 1 second before clearing the user input
+        filter: true,
+        delay: 1000 // wait 1 second before filtering with the user input
     });
     </script>
 
@@ -316,7 +351,7 @@ If set to `false` the widget will be disabled and will not allow user input. The
 
 ### enforceMinLength `Boolean` *(default: false)*
 
-If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](#configuration-minLength).
+If set to `true` the widget will not show all items when the text of the search input cleared. By default the widget shows all items when the text of the search input is cleared. Works in conjunction with [minLength](/api/javascript/ui/dropdownlist#configuration-minLength).
 
 #### Example - enforce minLength
 
@@ -343,7 +378,7 @@ If set to `true` the widget will not show all items when the text of the search 
 
 ### filter `String`*(default: "none")*
 
-The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](#configuration-dataTextField) option).
+The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/dropdownlist#configuration-dataTextField) option).
 The supported filter values are `startswith`, `endswith` and `contains`.
 
 #### Example - set the filter
@@ -356,9 +391,24 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterTitle `String`
+
+When filtering is enabled, allows custom title to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterTitle: "custom title"
+    });
+    </script>
+
 ### fixedGroupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the fixed header group. By default the widget displays only the value of the current group.
+The [template](/api/javascript/kendo/methods/template) used to render the fixed header group. By default the widget displays only the value of the current group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -371,7 +421,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -381,7 +431,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the fixed 
 
 ### footerTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
+The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
 
 #### Parameters
 
@@ -406,7 +456,7 @@ The widget instance.
 
 ### groupTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the groups. By default the widget displays only the value of the group.
+The [template](/api/javascript/kendo/methods/template) used to render the groups. By default the widget displays only the value of the group.
 
     <input id="customers" style="width: 400px" />
     <script>
@@ -419,7 +469,7 @@ The [template](/api/javascript/kendo#methods-template) used to render the groups
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Customers"
                     },
                     group: { field: "Country" }
                 }
@@ -480,11 +530,47 @@ The index of the initially selected item. The index is `0` based.
     });
     </script>
 
+### messages `Object`
+
+The text messages displayed in the widget. Use this option to customize or localize the messages.
+
+#### Example - customize DropDownList messages
+
+    <input id="dropdownlist" />
+    <script>
+      var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
+      $("#dropdownlist").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: items,
+        index: 1,
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
+### messages.noData `String` *(default: "No data found.")*
+
+The text message shown in the noDataTemplate when no data is available in the widget drop-down.
+
+#### Example - customize noData message
+
+    <input id="dropdownlist" />
+    <script>
+      $("#dropdownlist").kendoDropDownList({
+        dataSource: [],
+        messages: {
+          noData: "There is no data!"
+        }
+      });
+    </script>
+
 ### minLength `Number`*(default: 1)*
 
 The minimum number of characters the user must type before a filter is performed. Set to higher value than `1` if the search could match a lot of items.
 
-> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](#events-filtering) event for more details.
+> Widget will initiate a request when input value is cleared. If you would like to prevent this behavior please check the [filtering](/api/javascript/ui/dropdownlist/events/filtering) event for more details.
 
 #### Example - set minLength
 
@@ -497,14 +583,14 @@ The minimum number of characters the user must type before a filter is performed
     });
     </script>
 
-### noDataTemplate `String|Function` *(default: "NO DATA FOUND.")*
+### noDataTemplate `String|Function|Boolean` *(default: true)*
 
-The [template](/api/javascript/kendo#methods-template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
+The [template](/api/javascript/kendo/methods/template) used to render the "no data" template, which will be displayed if no results are found or the underlying data source is empty.
 The noData template receives the widget itself as a part of the data argument. The template will be evaluated on every widget data bound.
 
 > **Important** The popup will open when 'noDataTemplate' is defined
 
-#### Example - specify headerTemplate as a string
+#### Example - specify noDataTemplate as a string
 
     <input id="dropdownlist" />
     <script>
@@ -615,23 +701,33 @@ The available "x" positions are:
 
 #### Example - append the popup to a specific element
 
-    <div id="container">
-        <input id="dropdownlist" />
-    </div>
-    <script>
-    $("#dropdownlist").kendoDropDownList({
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-      popup: {
-        origin: "top left"
-      }
-    });
-    </script>
-
+  <div id="container">
+      <input id="dropdownlist" />
+  </div>
+  <script>
+  $("#dropdownlist").kendoDropDownList({
+    dataSource: [
+      { id: 1, name: "Apples" },
+      { id: 2, name: "Oranges" }
+    ],
+    dataTextField: "name",
+    dataValueField: "id",
+    popup: {
+      position: "top center"
+    }
+  });
+  </script>
+  <style>
+    #container{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      width: 100px;
+      height: 100px;
+    }
+  </style>
 
 ### optionLabel `String | Object`*(default: "")*
 
@@ -639,7 +735,7 @@ The available "x" positions are:
  Note that the optionLabel will not be available if the widget is empty.
 
 > * If `optionLabel` is an object, it needs to have at least `dataValueField` and `dataTextField` properties. Otherwise, widget will show `undefined`.
-Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist#configuration-valueTemplate). **You need to ensure that all required by the valueTemplate properties are present
+Note that the very same optionLabel object will be passed to the [valueTemplate](/api/javascript/ui/dropdownlist/configuration/valuetemplate). **You need to ensure that all required by the valueTemplate properties are present
 in the optionLabel object**.
 > * Since Q1 2015 (2015.1.318), the option label is rendered as a separate header template. The benefits of this change are:
 - the widget's value will be empty string even when `dataValueField` and `dataTextField` options are equal or not defined
@@ -677,16 +773,34 @@ in the optionLabel object**.
 
 ### optionLabelTemplate `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the option label.
+The [template](/api/javascript/kendo/methods/template) used to render the option label. Use optionLabelTemplate if you want to customize the markup of the optionLabel.
 
-> Define the [optionLabel](/api/javascript/kendo#configuration-optionLabel) as **object** if complex template structure is used
+> * [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) has to be defined for the optionLabelTemplate to take effect.
+> * Define the [optionLabel](/api/javascript/ui/dropdownlist/configuration/optionlabel) as **object** if complex template structure is used
+
+#### Example - specify the optionLabelTemplate as a string
+    <input id="dropdownlist" />
+    <script>
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: [
+          { productName: "Product 1", productId: 1 },
+          { productName: "Product 2", productId: 2 },
+          { productName: "Product 3", productId: 3 },
+          { productName: "Product 4", productId: 4 }
+        ],
+        dataTextField: "productName",
+        dataValueField: "productId",
+        optionLabel: "-- Please select --",
+        optionLabelTemplate:'<span style="color:red">-- Please select --</span>'
+    });
+    </script>
 
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.
 
-> * The header content **should be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
-> * Widget does not pass a model data to the header template. Use this option only with static HTML.
+> * The header content **must be wrapped** with a HTML tag if it contains more than one element. This is applicable also when header content is just a string/text.
+> * Widget does not pass model data to the header template. Use the header template only with static HTML (only presentation elements and not functionality like data bound inputs or fields).
 
 #### Example - specify headerTemplate as a string
 
@@ -705,7 +819,7 @@ Specifies a static HTML content, which will be rendered as a header of the popup
 
 ### template `String|Function`
 
-The [template](/api/javascript/kendo#methods-template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [template](/api/javascript/kendo/methods/template) used to render the items. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify template as a function
 
@@ -745,14 +859,13 @@ The [template](/api/javascript/kendo#methods-template) used to render the items.
 
 ### valueTemplate `String|Function`
 
-The [valueTemplate](/api/javascript/kendo#methods-template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
+The [valueTemplate](/api/javascript/kendo/methods/template) used to render the selected value. By default the widget displays only the text of the data item (configured via `dataTextField`).
 
 #### Example - specify valueTemplate as a function
 
     <input id="dropdownlist" />
     <script id="valueTemplate" type="text/x-kendo-template">
-        <img src="/img/#: id #.png" alt="#: name #" />
-        #: name #
+        <strong>#: name #</strong>
     </script>
     <script>
     $("#dropdownlist").kendoDropDownList({
@@ -777,7 +890,7 @@ The [valueTemplate](/api/javascript/kendo#methods-template) used to render the s
       ],
       dataTextField: "name",
       dataValueField: "id",
-      valueTemplate: '<img src="/img/#: id #.png" alt="#: name #" />#: name #'
+      valueTemplate: '<strong>#: name #</strong>'
     });
     </script>
 
@@ -876,7 +989,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                     itemHeight: 26,
                     valueMapper: function(options) {
                         $.ajax({
-                            url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+                            url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
                             type: "GET",
                             dataType: "jsonp",
                             data: convertValues(options.value),
@@ -895,7 +1008,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
                 dataSource: {
                     type: "odata",
                     transport: {
-                        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                     },
                     schema: {
                         model: {
@@ -950,7 +1063,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
               source: new kendo.data.DataSource({
                 type: "odata",
                 transport: {
-                  read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
+                  read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders"
                 },
                 schema: {
                   model: {
@@ -974,7 +1087,7 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
         function orderValueMapper(options) {
             $.ajax({
-              url: "http://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
+              url: "https://demos.telerik.com/kendo-ui/service/Orders/ValueMapper",
               type: "GET",
               dataType: "jsonp",
               data: convertValues(options.value),
@@ -1001,10 +1114,10 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
 ### dataSource `kendo.data.DataSource`
 
-The [data source](/api/javascript/data/datasource) of the widget. Configured via the [dataSource](#configuration-dataSource) option.
+The [data source](/api/javascript/data/datasource) of the widget. configured via the [datasource](/api/javascript/ui/dropdownlist/configuration/datasource) option.
 
 > * Changes of the data source will be reflected in the widget.
-> * Assigning a new data source would have no effect. Use the [setDataSource](#methods-setDataSource) method instead.
+> * Assigning a new data source would have no effect. Use the [setDataSource](/api/javascript/ui/dropdownlist/methods/setdatasource) method instead.
 
 #### Example - add a data item to the data source
     <input id="dropdownlist" />
@@ -1047,7 +1160,10 @@ A jQuery object of the filter input element, where the user types.
 
     <input id="dropdownlist" />
     <script>
-    $("#dropdownlist").kendoDropDownList();
+    $("#dropdownlist").kendoDropDownList({
+      filter:"startswith",
+      dataSource:["Chai", "Chang","Tofu"]
+    });
 
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
@@ -1055,7 +1171,7 @@ A jQuery object of the filter input element, where the user types.
     </script>
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the information about the configuration options of the widget.
 
 #### Example - get options of the widget
 
@@ -1184,7 +1300,7 @@ Focuses the widget.
 
 ### items
 
-Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource#methods-view).
+Obtains an Array of the DOM elements, which correspond to the data items from the Kendo UI DataSource [view](/api/javascript/data/datasource/methods/view).
 
 #### Returns
 
@@ -1295,7 +1411,7 @@ Refresh the popup by rendering all items again.
 
 ### search
 
-Selects an item, which starts with the provided value.
+If the DropDownList filter is enabled, the method searches and filters the results available in the drop-down. If no filter is configured for the widget it selects the first item, which starts with the provided value.
 
 #### Parameters
 
@@ -1325,13 +1441,13 @@ The search value.
 
 Gets or sets the selected item. Selects the item provided as an argument and updates the value and text of the widget.
 
-> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](#methods-value) method), and no item will be selected.
-> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](#configuration-optionLabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
+> * If the widget is not bound (e.g. `autoBind` is set to `false`), the `select` method will **not** pre-fetch the data before continuing with the selection and value setting (unlike the [value](/api/javascript/ui/dropdownlist/methods/value) method), and no item will be selected.
+> * The numeric argument indicates the item index in the dropdown, not in the dataSource. If an [`optionLabel`](/api/javascript/ui/dropdownlist/configuration/optionlabel) is used, the dropdown item index can be obtained by incrementing the respective dataSource item index by 1.
 > * When **virtualization** is enabled, the method **does not support** selection with a *function predicate*. The predicate function looks only
 in the current datasource view, which represents only the active range/page. Hence it will not work properly.
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/dropdownlist/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dropdownlist" />
     <script>
@@ -1511,9 +1627,9 @@ Gets or sets the value of the DropDownList. The value will not be set if there i
 > * If the widget is not bound (e.g. `autoBind` is set to `false`), the `value` method will pre-fetch the data before continuing with the value setting.
 **This does not apply when MVVM binding is used.**
 > * The widget will **clear the applied filter** if a new value is set. Thus it ensures that the original/whole data set is available for selection.
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/dropdownlist/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dropdownlist" />
     <script>
@@ -1557,7 +1673,7 @@ Fired when the value of the widget is changed by the user. As of 2015 Q3 SP1 cas
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
-> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist#events-cascade) event.
+> The event is not fired when the value of the widget is changed programmatically. If you need to handle changes made by API, wire the [cascade](/api/javascript/ui/dropdownlist/events/cascade) event.
 
 #### Event Data
 
@@ -1687,7 +1803,7 @@ The widget instance which fired the event.
 
 The filter descriptor that will be used to filter the data source.
 
-> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource#configuration-serverFiltering) option is set to `true`.
+> The data source filters the data items client-side unless the [data source serverFiltering](/api/javascript/data/datasource/configuration/serverfiltering) option is set to `true`.
 
 #### Example - subscribe to the "filtering" event during initialization
 
@@ -1859,7 +1975,7 @@ Fired when the value of the widget is changed via API or user interaction.
 
 The widget instance which fired the event.
 
-#### Example - subscribe to the "select" event during initialization
+#### Example - subscribe to the "cascade" event during initialization
 
     <input id="dropdownlist" />
     <script>
@@ -1871,7 +1987,7 @@ The widget instance which fired the event.
     });
     </script>
 
-#### Example - subscribe to the "select" event after initialization
+#### Example - subscribe to the "cascade" event after initialization
 
     <input id="dropdownlist" />
     <script>

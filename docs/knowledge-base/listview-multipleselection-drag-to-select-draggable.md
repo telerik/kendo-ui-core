@@ -2,11 +2,12 @@
 title: Implement Draggable and Droppable Functionality in ListView and Grid
 description: An example on how to implement the drag-to-select and draggable functionalities with multiple selection in the Kendo UI ListView.
 type: how-to
-page_title: Implement Drag-and-Drop with Multiple Selection in ListView and Grid | Kendo UI Professional
+page_title: Implement Drag-and-Drop with Multiple Selection in ListView and Grid | Kendo UI for jQuery
 slug: listview-multiselection-drag-to-select-draggable
 tags: grid, listview, multipleselection, drag to select, draggable
 ticketid: 1116847
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Drag and Drop for Progress Kendo UI</td>
+  <td>Progress Kendo UI Drag and Drop</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -39,7 +40,7 @@ How can I implement the drag-to-select and draggable functionalities in a Kendo 
 
 Prevent the `start` and `move` events of the selectable elements in the `dataBound` even of the ListView or Grid you use.
 
-``html
+```dojo
  dataBound: function() {
               this.selectable.userEvents._events.start = null
               this.selectable.userEvents._events.move = null
@@ -49,7 +50,7 @@ Prevent the `start` and `move` events of the selectable elements in the `dataBou
 
 The following example demonstrates the full implementation of the approach.
 
-````html
+```dojo
 <div style="padding-bottom: 20px">
 <label>List View Drop Area</label>
 <div id="list-view-drop" style="height: 400px; width: 400px;border: 1px solid black"></div>
@@ -88,4 +89,4 @@ The following example demonstrates the full implementation of the approach.
 
     });
 </script>
-````
+```

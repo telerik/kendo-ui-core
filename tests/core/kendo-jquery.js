@@ -1,25 +1,24 @@
 (function() {
     var $$ = kendo.jQuery;
 
-    module("kendo jQuery", {
-        setup: function() {
+    describe("kendo jQuery", function () {
+        beforeEach(function() {
             kendo.support.touch = true;
-        },
-        teardown: function() {
+        });
+        afterEach(function() {
             kendo.support.touch = false;
-        }
-    });
+        });
 
-    test("Executes listener event handler", 1, function() {
-        var div = $$("<div />").handler({ _click: function() { ok(true) } });
+    it("Executes listener event handler", function() {
+        var div = $$("<div />").handler({ _click: function() { assert.isOk(true) } });
 
         div.on("click", "_click");
 
         div.trigger("click");
     });
 
-    test("Unbinds all listeners", 1, function() {
-        var div = $$("<div />").handler({ _click: function() { ok(true) } });
+    it("Unbinds all listeners", function() {
+        var div = $$("<div />").handler({ _click: function() { assert.isOk(true) } });
 
         div.autoApplyNS();
         div.on("click", "_click");
@@ -39,8 +38,8 @@
     }
 
     if (!kendo.support.browser.msie) {
-        test("Recognizes event aliases", 2, function() {
-            var div = $$("<div />").handler({ _up: function() { ok(true) } });
+        it("Recognizes event aliases", function() {
+            var div = $$("<div />").handler({ _up: function() { assert.isOk(true) } });
 
             div.on("up", "_up");
 
@@ -48,15 +47,15 @@
             div.trigger("touchend");
         });
 
-        test("Skips synthetic mouse events", 3, function() {
+        it("Skips synthetic mouse events", function() {
             var mouseAndTouchPresent = kendo.support.mouseAndTouchPresent;
             kendo.support.mouseAndTouchPresent = true;
 
             try {
-                var div = $$("<div />").appendTo(QUnit.fixture).handler({
-                        _down: function() { ok(true) },
-                        _move: function() { ok(true) },
-                        _up: function() { ok(true) }
+                var div = $$("<div />").appendTo(Mocha.fixture).handler({
+                        _down: function() { assert.isOk(true) },
+                        _move: function() { assert.isOk(true) },
+                        _up: function() { assert.isOk(true) }
                     });
 
                 div.on("up", "_up");
@@ -75,8 +74,8 @@
             }
         });
 
-        asyncTest("Registers real mouse events", 2, function() {
-            var div = $$("<div />").handler({ _down: function() { ok(true) } });
+        it("Registers real mouse events", function(done) {
+            var div = $$("<div />").handler({ _down: function() { assert.isOk(true) } });
 
             div.on("down", "_down");
 
@@ -85,23 +84,24 @@
             div.trigger("touchend");
 
             setTimeout(function() {
-                start();
                 dispatchRealEvent(div, "mousedown");
                 dispatchRealEvent(div, "mousemove");
                 dispatchRealEvent(div, "mouseup");
+                done();
             }, 500);
         });
     }
 
-    test("Is instance of jQuery", function() {
-        ok($$() instanceof jQuery);
+    it("Is instance of jQuery", function() {
+        assert.isOk($$() instanceof jQuery);
     });
 
-    test("Creates instances of kendo.jQuery", function() {
-        ok($$() instanceof $$);
+    it("Creates instances of kendo.jQuery", function() {
+        assert.isOk($$() instanceof $$);
     });
 
-    test("find returns instances of kendo.jQuery", function() {
-        ok($$().find("body") instanceof $$);
+    it("find returns instances of kendo.jQuery", function() {
+        assert.isOk($$().find("body") instanceof $$);
     });
-})();
+    });
+}());

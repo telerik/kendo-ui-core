@@ -91,11 +91,11 @@ Defines the thickness or width of the connector's stroke.
 
 ### connections `Array`
 
-An array of [Connections](connection) that originate or terminate in this connector.
+An array of [Connections](/api/javascript/dataviz/diagram/connection) that originate or terminate in this connector.
 
 ### shape `kendo.dataviz.diagram.Shape`
 
-The [Shape](shape) that owns the connector.
+The [Shape](/api/javascript/dataviz/diagram/shape) that owns the connector.
 
 ## Methods
 

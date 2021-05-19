@@ -7,11 +7,9 @@ slug: howto_customize_masks_through_mvvmbinding_mvvm_maskedtextbox
 
 # Customize Masks through MVVM Binding
 
-The following example demonstrates how to implement [a custom MVVM binding](http://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the mask option of the MaskedTextBox.
+The following example demonstrates how to implement [a custom MVVM binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the mask option of the MaskedTextBox.
 
-###### Example
-
-```html
+```dojo
 <div id="example">
     <div class="demo-section k-header">
         <div class="box-col" style="width: 300px">
@@ -52,8 +50,8 @@ The following example demonstrates how to implement [a custom MVVM binding](http
 
 ## See Also
 
-* [MaskedTextBox JavaScript API Reference](/api/javascript/ui/maskedtextbox)
-* [How to Show Custom Placeholder on Blur]({% slug howto_show_custom_placeholderon_blur_maskedtextbox %})
-* [How to Use Custom MVVM Binding to Set Model Value]({% slug howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox %})
+* [Basic Usage of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/index)
+* [Using the API of the MaskedTextBox (Demo)](https://demos.telerik.com/kendo-ui/maskedtextbox/api)
+* [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)
 
 For more runnable examples on the Kendo UI MaskedTextBox, browse its [**How To** documentation folder]({% slug howto_use_raw_methodtoset_modelvalue_angularjs_maskedtextbox %}).

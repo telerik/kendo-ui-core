@@ -4,11 +4,12 @@ page_title: Overview | Hybrid UI Collapsible
 description: "Create collapsible blocks of content by using the hybrid mobile Kendo UI Collapsible widget and learn how to nest widgets inside it."
 slug: overview_hybridcollapsible
 position: 1
+component: collapsible
 ---
 
 # Overview Collapsible
 
-The [Hybrid UI Collapsible widget](http://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
+The [Hybrid UI Collapsible widget](https://demos.telerik.com/kendo-ui/m/index#collapsible/index) allows you to create collapsible blocks of content.
 
 ## Getting Started
 
@@ -22,7 +23,7 @@ By default the content is initially hidden.
 
 The example below demonstrates how to initialize Hybrid UI Collapsible based on the `data-role` attribute.
 
-###### Example
+
 
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible">
@@ -37,7 +38,7 @@ The example below demonstrates how to initialize Hybrid UI Collapsible based on 
 
 ### Initialize Using jQuery
 
-###### Example
+
 
     var collapsible = $("#collapsible").kendoMobileCollapsible();
 
@@ -47,9 +48,9 @@ The example below demonstrates how to initialize Hybrid UI Collapsible based on 
 
 To create some scrollable collapsible content, wrap the content in a `div` element with `data-role="scroller"` and specify its `height`.
 
-###### Example
 
-```html
+
+```dojo
     <div id="home" data-role="view">
         <div id="collapsible" data-role="collapsible">
             <h2>Header</h2>
@@ -87,9 +88,9 @@ Collapsible widgets can be nested inside each other, as demonstrated in the exam
 >
 > In this scenario the animation of the parent Collapsible content should be disabled.
 
-###### Example
 
-```html
+
+```dojo
     <div id="home" data-role="view" data-init="onInit">
         <div id="collapsible" data-role="collapsible" data-animation="false" data-collapsed="false">
             <h2>Header</h2>
@@ -143,8 +144,6 @@ Collapsible widgets can be nested inside each other, as demonstrated in the exam
 ```
 
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI components and on the Collapsible:
 
 * [Hybrid UI Collapsible JavaScript API Reference](/api/javascript/mobile/ui/collapsible)
 * [How to Use DataSource to Render Content]({% slug howto_usedatasourcetorebdercontent_hybridcollapsible %})

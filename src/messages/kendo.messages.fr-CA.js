@@ -177,7 +177,8 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
     "pdf": "Exporter vers PDF",
     "select": "Sélectionner",
     "cancel": "Annuler les modifications",
-    "save": "Enregistrer les modifications"
+    "save": "Enregistrer les modifications",
+    "search": "Recherche"
   },
   "editable": {
     "confirmation": "Êtes-vous sûr de vouloir supprimer cet enregistrement?",
@@ -193,6 +194,26 @@ $.extend(true, kendo.ui.Grid.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "Tous",
+  "page": "Page",
+  "display": "Afficher les items {0} - {1} de {2}",
+  "of": "de {0}",
+  "empty": "Aucun enregistrement à afficher.",
+  "refresh": "Actualiser",
+  "first": "Aller à la première page",
+  "itemsPerPage": "articles par page",
+  "last": "Aller à la dernière page",
+  "next": "Aller à la page suivante",
+  "previous": "Aller à la page précédente",
+  "morePages": "Plusieurs pages"
+});
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "Tous",
   "page": "Page",
   "display": "Afficher les items {0} - {1} de {2}",
@@ -230,13 +251,17 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Et",
   "clear": "Effacer filtre",
   "info": "Afficher les lignes avec la valeur qui",
+  "title": "Afficher les lignes avec la valeur qui",
   "selectValue": "-Sélectionner-",
   "isFalse": "est fausse",
   "isTrue": "est vrai",
   "or": "Ou",
   "cancel": "Annuler",
   "operator": "Opérateur",
-  "value": "Valeur"
+  "value": "Valeur",
+  "logic": "Logique des filtres",
+  "additionalOperator": "Opérateur supplémentaire",
+  "additionalValue": "Valeur supplémentaire"
 });
 }
 
@@ -345,7 +370,7 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "borderStyle": "Style de bordure",
   "collapseBorders": "Rétracter bordures",
   "wrapText": "Renvoi à la ligne",
-  "associateCellsWithHeaders": "Cellules associées aux entêtes",
+  "associateCellsWithHeaders": "Entêtes associées",
   "alignLeft": "Aligner à gauche",
   "alignCenter": "Aligner le centre",
   "alignRight": "Aligner à droite",
@@ -520,6 +545,40 @@ $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
   "okText": "OK",
   "cancel": "Annuler"
 });
+}
+
+/* FlatColorPicker messages */
+
+if (kendo.ui.FlatColorPicker) {
+  kendo.ui.FlatColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* ColorPicker messages */
+
+if (kendo.ui.ColorPicker) {
+  kendo.ui.ColorPicker.prototype.options.messages =
+  $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
+      "apply": "Appliquer",
+      "cancel": "Annuler",
+      "noColor": "aucune couleur",
+      "clearColor": "Supprimer la couleur"
+  });
+}
+
+/* Numeric text box messages */
+
+if (kendo.ui.NumericTextBox) {
+  kendo.ui.NumericTextBox.prototype.options =
+  $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
+    "upArrowText": "Augmenter la valeur",
+    "downArrowText": "Diminuer la valeur"
+  });
 }
 
 })(window.kendo.jQuery);

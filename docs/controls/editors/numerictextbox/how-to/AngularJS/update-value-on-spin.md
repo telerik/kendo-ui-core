@@ -9,9 +9,9 @@ slug: howto_update_valueon_spin_angularjs_numerictextbox
 
 The following example demonstrates how to update the value of the NumericTextBox on `spin`.
 
-###### Example
 
-```html
+
+```dojo
     <div id="example" ng-app="app">
         <div class="demo-section k-content" ng-controller="mainCtrl">
             <div>
@@ -25,7 +25,7 @@ The following example demonstrates how to update the value of the NumericTextBox
             </div>
             <div>
                 <h4>Result</h4>
-                Value: {{ value }}
+                Value: {% raw %}{{ value }}{% endraw %}
             </div>
         </div>
         <script>

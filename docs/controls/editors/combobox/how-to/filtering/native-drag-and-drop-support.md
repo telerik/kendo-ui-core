@@ -15,9 +15,9 @@ To see how the example works:
 * Drag it to the input field of the ComboBox.
 * Release the mouse.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>
@@ -38,7 +38,7 @@ To see how the example works:
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             }
           }

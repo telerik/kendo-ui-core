@@ -2,11 +2,12 @@
 title: Place Pagers at Top and Bottom of the ListView
 description: An example on how to display pagers at the top and bottom of a Kendo UI ListView.
 type: how-to
-page_title: Use Two Pagers for the ListView | UI for ASP.NET MVC
+page_title: Use Two Pagers for the ListView | Kendo UI ListView for ASP.NET MVC
 slug: listview-two-pagers
 tags: listview, paging, pager, mvc, kendo ui, two pagers
 ticketid: 1111995
 res_type: kb
+component: listview
 ---
 
 ## Environment
@@ -50,11 +51,11 @@ However, you can still work around this issue by applying custom logic to the:
 
 The following example demonstrates how to customize the default behavior of the ListView widget and implement a pager at its top and bottom.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="http://demos.telerik.com/kendo-ui/listview/index">
+    <base href="https://demos.telerik.com/kendo-ui/listview/index">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common-material.min.css" />
@@ -109,11 +110,11 @@ The following example demonstrates how to customize the default behavior of the 
 
 ### ListView Wrapper
 
-To add a pager to an MVC ListView wrapper, apply the same configuration approach in regard to the page at the top. The aim is to initialize another pager through a jQuery initialization within `document ready` and pass the `dataSource` of the ListBox.  
+To add a pager to a Kendo UI ListView for ASP.NET MVC, apply the same configuration approach in regard to the page at the top. The aim is to initialize another pager through a jQuery initialization within `document ready` and pass the `dataSource` of the ListBox.  
 
 The following example demonstrates how to customize the default behavior of the ListView wrapper and implement a pager at its top and bottom.
 
-```html
+```dojo
 <div id="pager1" class="k-pager-wrap"></div>
 @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>()
     .Name("listView")

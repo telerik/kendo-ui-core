@@ -2,11 +2,12 @@
 title: Persist the Selection in the ComboBox
 description: An example on how to persist the selected item in a Kendo UI ComboBox.
 type: how-to
-page_title: Persist the ComboBox Selection | Kendo UI ComboBox
+page_title: Persist the ComboBox Selection | Kendo UI ComboBox for jQuery
 slug: persist-combobox-selection
 tags: persisting, selected, item, combobox
 ticketid: 1116339
 res_type: kb
+component: combobox
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>ComboBox for Progress Kendo UI</td>
+  <td>Progress Kendo UI ComboBox</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -32,9 +33,9 @@ In web pages I have the Persistence Manager control to preserve the user options
 
 ## Solution
 
-Retrieve the selected item and keep it in `localStorage` by using the [`select()`](http://docs.telerik.com/kendo-ui/api/javascript/ui/combobox#methods-select) method. When necessary, set an item as selected again by using `select()`.
+Retrieve the selected item and keep it in `localStorage` by using the [`select()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox/methods/select) method. When necessary, set an item as selected again by using `select()`.
 
-```html
+```dojo
   <div  >
       <a href="#" class="k-button" id="save">Save State</a>
       <a href="#" class="k-button" id="load">Load State</a>
@@ -83,4 +84,4 @@ Retrieve the selected item and keep it in `localStorage` by using the [`select()
 
 ## See Also
 
-* [Demo on Persisting the Grid State](http://demos.telerik.com/kendo-ui/grid/persist-state)
+* [Demo on Persisting the Grid State](https://demos.telerik.com/kendo-ui/grid/persist-state)

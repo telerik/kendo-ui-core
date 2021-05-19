@@ -1,22 +1,22 @@
 (function() {
     var DropDownList = kendo.ui.DropDownList,
-        data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
+        data = [{ text: "Foo", value: 1 }, { text: "Bar", value: 2 }, { text: "Baz", value: 3 }],
         select,
         input;
 
-    module("kendo.ui.DropDownList searching", {
-        setup: function() {
+    describe("kendo.ui.DropDownList searching", function() {
+        beforeEach(function() {
             $.fn.press = function(key) {
                 if (typeof key === "string") {
                     key = key.charCodeAt(0);
                 }
 
-                return this.trigger({ type: "keypress", keyCode: key } );
+                return this.trigger({ type: "keypress", keyCode: key });
             }
-            input = $("<input />").appendTo(QUnit.fixture);
-            select = $("<select />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
+            input = $("<input />").appendTo(Mocha.fixture);
+            select = $("<select />").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
             if (input.data('kendoDropDownList')) {
                 input.data('kendoDropDownList').destroy();
                 input.add($("ul")).parent(".k-widget").remove();
@@ -26,802 +26,864 @@
                 select.data('kendoDropDownList').destroy();
                 select.add($("ul")).parent(".k-widget").remove();
             }
-        }
-    });
-
-    test("search select first match", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data
         });
 
-        dropdownlist.search("b");
+        it("search select first match", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: data
+            });
 
-        ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
-    });
+            dropdownlist.search("b");
 
-    test("search select item if text number", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: [{text: "Foo", value: 1}, {text:10, value:2}]
+            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
         });
 
-        dropdownlist.search("1");
+        it("search select item if text number", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [{ text: "Foo", value: 1 }, { text: 10, value: 2 }]
+            });
 
-        ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
-    });
+            dropdownlist.search("1");
 
-    test("search select item if text is 0", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
+            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
         });
 
-        dropdownlist.search("0");
+        it("search select item if text is 0", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [{ text: "Foo", value: 1 }, { text: 0, value: 2 }]
+            });
 
-        ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
-    });
+            dropdownlist.search("0");
 
-    test("search should not raise error if word is null", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data
+            assert.isOk(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
         });
 
-        dropdownlist.search();
+        it("search should not raise error if word is null", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: data
+            });
 
-        ok(true);
-    });
+            dropdownlist.search();
 
-    test("search method supports a case sensitive search", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["TEXT", "text", "3text"],
-            ignoreCase: false
+            assert.isOk(true);
         });
 
-        dropdownlist.search("t");
+        it("search method supports a case sensitive search", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["TEXT", "text", "3text"],
+                ignoreCase: false
+            });
 
-        equal(dropdownlist.selectedIndex, 1);
-    });
+            dropdownlist.search("t");
 
-    test("selects next item if starts with same character", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["text1", "text2", "text3"]
+            assert.equal(dropdownlist.selectedIndex, 1);
         });
 
-        input.press("t");
-        input.press("t");
+        it("search method supports a case insensitive search", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: {
+                    data: ["KIN", "KAŞ"],
+                    accentFoldingFiltering: "tr-TR"
+                },
+                ignoreCase: true
+            });
+            input.press("k");
+            input.press("ı");
 
-        equal(dropdownlist.selectedIndex, 2);
-    });
-
-    test("selects a specific item if typed matches", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["text1", "text2", "text3", "text4", "text5", "text6"]
+            assert.equal(dropdownlist.selectedIndex, 1);
         });
 
-        input.press("t");
-        input.press("e");
-        input.press("x");
-        input.press("t");
-        input.press("4");
+        it("selects next item if starts with same character", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["text1", "text2", "text3"]
+            });
 
-        equal(dropdownlist.selectedIndex, 3);
-    });
+            input.press("t");
+            input.press("t");
 
-    test("selects a specific item after loop", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["tt1", "t", "ttt", "tt3", "tt", "tttt"]
+            assert.equal(dropdownlist.selectedIndex, 2);
         });
 
-        input.press("t");
-        input.press("t");
-        input.press("1");
+        it("selects a specific item if typed matches", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["text1", "text2", "text3", "text4", "text5", "text6"]
+            });
 
-        equal(dropdownlist.selectedIndex, 0);
-    });
+            input.press("t");
+            input.press("e");
+            input.press("x");
+            input.press("t");
+            input.press("4");
 
-    test("stays on the same item if changed char but still in loop", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["text1", "text2", "text3"]
+            assert.equal(dropdownlist.selectedIndex, 3);
         });
 
-        input.press("t"); //selects text2
-        input.press("t"); //selects text3
-        input.press("e");
-        input.press("x");
-        input.press("t");
-        input.press("2"); //resulting text is 'ttext2'
+        it("selects a specific item after loop", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["tt1", "t", "ttt", "tt3", "tt", "tttt"]
+            });
 
-        equal(dropdownlist.selectedIndex, 2);
-    });
+            input.press("t");
+            input.press("t");
+            input.press("1");
 
-    test("select next item if starts with same character (option label)", 2, function() {
-        var dropdownlist = new DropDownList(input, {
-            optionLabel: "select...",
-            dataSource: ["text1", "text2"]
+            assert.equal(dropdownlist.selectedIndex, 0);
         });
 
-        input.press("t");
-        equal(dropdownlist.value(), "text1");
+        it("stays on the same item if changed char but still in loop", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["text1", "text2", "text3"]
+            });
 
-        input.press("t");
-        equal(dropdownlist.value(), "text2");
-    });
+            input.press("t"); //selects text2
+            input.press("t"); //selects text3
+            input.press("e");
+            input.press("x");
+            input.press("t");
+            input.press("2"); //resulting text is 'ttext2'
 
-    test("keep selection if typed text is 0ame as current data item", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["test", "500.122", "500.123"]
+            assert.equal(dropdownlist.selectedIndex, 2);
         });
 
-        dropdownlist.select(0);
+        it("select next item if starts with same character (option label)", function() {
+            var dropdownlist = new DropDownList(input, {
+                optionLabel: "select...",
+                dataSource: ["text1", "text2"]
+            });
 
-        input.press("5");
-        input.press("0");
+            input.press("t");
+            assert.equal(dropdownlist.value(), "text1");
 
-        equal(dropdownlist.selectedIndex, 1);
-    });
-
-    test("keep selection if typed text differs", 2, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["500.122", "500.123"]
+            input.press("t");
+            assert.equal(dropdownlist.value(), "text2");
         });
 
-        input.press("5");
-        equal(dropdownlist.selectedIndex, 1);
+        it("keep selection if typed text is 0ame as current data item", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["test", "500.122", "500.123"]
+            });
 
-        input.press("0");
-        input.press("0");
-        input.press("0");
+            dropdownlist.select(0);
 
-        equal(dropdownlist.selectedIndex, 1);
-    });
+            input.press("5");
+            input.press("0");
 
-    test("1oop items on search trigger change event", 2, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["text1", "text2", "text3"],
+            assert.equal(dropdownlist.selectedIndex, 1);
         });
 
-        dropdownlist.bind("change", function() {
-            ok(true);
+        it("keep selection if typed text differs", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["500.122", "500.123"]
+            });
+
+            input.press("5");
+            assert.equal(dropdownlist.selectedIndex, 1);
+
+            input.press("0");
+            input.press("0");
+            input.press("0");
+
+            assert.equal(dropdownlist.selectedIndex, 1);
         });
 
-        input.press("t"); //selects text2
-        input.press("t"); //selects text3
-    });
+        it("1oop items on search trigger change event", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["text1", "text2", "text3"],
+            });
 
-    test("looping through items honors ignoreCase option", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["text1", "Text2", "Text3"],
-            ignoreCase: true
+            dropdownlist.bind("change", function() {
+                assert.isOk(true);
+            });
+
+            input.press("t"); //selects text2
+            input.press("t"); //selects text3
         });
 
-        dropdownlist.select(1);
+        it("looping through items honors ignoreCase option", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["text1", "Text2", "Text3"],
+                ignoreCase: true
+            });
 
-        input.press("t"); //selects Text3
-        input.press("t"); //selects text1
+            dropdownlist.select(1);
 
-        equal(dropdownlist.selectedIndex, 0);
-    });
+            input.press("t"); //selects Text3
+            input.press("t"); //selects text1
 
-    test("prevent default behavior of SPACEBAR", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["text1", "Text2", "Text3"],
-            ignoreCase: true
+            assert.equal(dropdownlist.selectedIndex, 0);
         });
 
-        dropdownlist.select(1);
+        it("prevent default behavior of SPACEBAR", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["text1", "Text2", "Text3"],
+                ignoreCase: true
+            });
 
-        input.trigger({
-            type: "keypress",
-            charCode: " ".charCodeAt(0),
-            preventDefault: function() {
-                ok(true);
-            }
-        });
-    });
+            dropdownlist.select(1);
 
-    test("typing same letter does not move to next item", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["test", "Bill 1", "Bill 2", "Label"],
-            ignoreCase: true
-        });
-
-        input.press("b");
-        input.press("i");
-        input.press("l");
-        input.press("l");
-
-        equal(dropdownlist.selectedIndex, 1);
-    });
-
-    test("search supports space", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["Bill 1", "Bill 2", "Label"],
-            ignoreCase: true
+            input.trigger({
+                type: "keypress",
+                charCode: " ".charCodeAt(0),
+                preventDefault: function() {
+                    assert.isOk(true);
+                }
+            });
         });
 
-        input.press("b");
-        input.press("i");
-        input.press("l");
-        input.press("l");
-        input.press(" ");
-        input.press("2");
+        it("typing same letter does not move to next item", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["test", "Bill 1", "Bill 2", "Label"],
+                ignoreCase: true
+            });
 
-        equal(dropdownlist.selectedIndex, 1);
-    });
-
-    asyncTest("get next item after delay elapsed", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: ["Bill 1", "Bill 2", "Label"],
-            ignoreCase: true,
-            index: 1,
-            delay: 0
-        });
-
-        input.press("b");
-
-        setTimeout(function() {
-            start();
             input.press("b");
-            equal(dropdownlist.selectedIndex, 1);
-        }, 100);
-    });
+            input.press("i");
+            input.press("l");
+            input.press("l");
 
-    test("navigation does not raise exception when data is set through setDataSource", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value"
+            assert.equal(dropdownlist.selectedIndex, 1);
         });
 
-        dropdownlist.setDataSource(data);
+        it("search supports space", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["Bill 1", "Bill 2", "Label"],
+                ignoreCase: true
+            });
 
-        input.press("b");
+            input.press("b");
+            input.press("i");
+            input.press("l");
+            input.press("l");
+            input.press(" ");
+            input.press("2");
 
-        ok(true);
-    });
-
-    test("search does not raise exception when widget is not bound", function() {
-        var dropdownlist = new DropDownList(input, {
-            autoBind: false,
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: [
-                { text: "Item1", value: "1" }
-            ]
+            assert.equal(dropdownlist.selectedIndex, 1);
         });
 
-        input.press("i");
+        it("get next item after delay elapsed", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: ["Bill 1", "Bill 2", "Label"],
+                ignoreCase: true,
+                index: 1,
+                delay: 0
+            });
 
-        ok(true);
-    });
+            input.press("b");
 
-    test("search empty widget does not raise exception", function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data
-        });
-        dropdownlist.selectedIndex = -1; //Kendo Editor requires such functionality
-
-        input.press("i");
-
-        ok(true);
-    });
-
-    test("searching for nonexisting item when last item is selected does not raise error", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            setTimeout(function() {
+                input.press("b");
+                assert.equal(dropdownlist.selectedIndex, 1);
+                done();
+            }, 100);
         });
 
-        input.press("z");
-        input.press("z");
+        it("navigation does not raise exception when data is set through setDataSource", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value"
+            });
 
-        ok(true);
-    });
+            dropdownlist.setDataSource(data);
 
-    test("searching always start from next item", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataSource: [
-                { text: "First", value: "1" },
-                { text: "Small", value: "2" },
-                { text: "Same", value: "3" },
-                { text: "Same", value: "4" },
-                { text: "Small", value: "5" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            delay: 0,
-            index: 0
+            input.press("b");
+
+            assert.isOk(true);
         });
 
-        input.press("s");
-        input.press("m");
+        it("search does not raise exception when widget is not bound", function() {
+            var dropdownlist = new DropDownList(input, {
+                autoBind: false,
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                    { text: "Item1", value: "1" }
+                ]
+            });
 
-        dropdownlist._word = "";
+            input.press("i");
 
-        input.press("s");
-        input.press("m");
-
-        equal(dropdownlist.selectedIndex, 4);
-    });
-
-    test("search honors optionLabel header", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            optionLabel: "Select item...",
-            dataSource: ["foo", "bar", "baz"],
+            assert.isOk(true);
         });
 
-        dropdownlist.bind("change", function() {
-            equal(dropdownlist.value(), "bar");
+        it("search empty widget does not raise exception", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: data
+            });
+            dropdownlist.selectedIndex = -1; //Kendo Editor requires such functionality
+
+            input.press("i");
+
+            assert.isOk(true);
         });
 
-        input.press("b");
-    });
+        it("searching for nonexisting item when last item is selected does not raise error", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-    test("search honors optionLabel header", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            delay: 0,
-            optionLabel: "Select",
-            dataSource: ["Animal", "Bat", "Cat"],
+            input.press("z");
+            input.press("z");
+
+            assert.isOk(true);
         });
 
-        input.press("a");
-        dropdownlist._word = "";
+        it("searching always start from next item", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataSource: [
+                    { text: "First", value: "1" },
+                    { text: "Small", value: "2" },
+                    { text: "Same", value: "3" },
+                    { text: "Same", value: "4" },
+                    { text: "Small", value: "5" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                delay: 0,
+                index: 0
+            });
 
-        input.press("c");
-        dropdownlist._word = "";
+            input.press("s");
+            input.press("m");
 
-        input.press("a");
+            dropdownlist._word = "";
 
-        equal(dropdownlist.value(), "Animal");
-    });
+            input.press("s");
+            input.press("m");
 
-    asyncTest("filter items on user input", 2, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            assert.equal(dropdownlist.selectedIndex, 4);
         });
 
-        dropdownlist.bind("dataBound", function() {
-            start();
+        it("search honors optionLabel header", function() {
+            var dropdownlist = new DropDownList(input, {
+                optionLabel: "Select item...",
+                dataSource: ["foo", "bar", "baz"],
+            });
 
-            var data = dropdownlist.dataSource.view();
+            dropdownlist.bind("change", function() {
+                assert.equal(dropdownlist.value(), "bar");
+            });
 
-            equal(data.length, 1);
-            equal(data[0].text, "Orange");
+            input.press("b");
         });
 
-        dropdownlist.open();
-        dropdownlist.filterInput.val("or").keydown();
-    });
+        it("search honors optionLabel header", function() {
+            var dropdownlist = new DropDownList(input, {
+                delay: 0,
+                optionLabel: "Select",
+                dataSource: ["Animal", "Bat", "Cat"],
+            });
 
-    asyncTest("widget does not update selected text on filter", 2, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            input.press("a");
+            dropdownlist._word = "";
+
+            input.press("c");
+            dropdownlist._word = "";
+
+            input.press("a");
+
+            assert.equal(dropdownlist.value(), "Animal");
         });
 
-        dropdownlist.bind("dataBound", function() {
-            start();
+        it("filter items on user input", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-            equal(dropdownlist.value(), "3");
-            equal(dropdownlist.text(), "Grey");
+            dropdownlist.bind("dataBound", function() {
+
+                var data = dropdownlist.dataSource.view();
+
+                assert.equal(data.length, 1);
+                assert.equal(data[0].text, "Orange");
+                done();
+            });
+
+            dropdownlist.open();
+            dropdownlist.filterInput.val("or").keydown();
         });
 
-        dropdownlist.open();
-        dropdownlist.filterInput.val("or").keydown();
-    });
+        it("widget does not update selected text on filter", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-    asyncTest("widget focuses first item after search", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            dropdownlist.bind("dataBound", function() {
+
+                assert.equal(dropdownlist.value(), "3");
+                assert.equal(dropdownlist.text(), "Grey");
+                done();
+            });
+
+            dropdownlist.open();
+            dropdownlist.filterInput.val("or").keydown();
         });
 
-        dropdownlist.bind("dataBound", function() {
-            start();
+        it("widget focuses first item after search", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-            equal(dropdownlist.ul[0].firstChild, dropdownlist.current()[0]);
+            dropdownlist.bind("dataBound", function() {
+
+                assert.equal(dropdownlist.ul[0].firstChild, dropdownlist.current()[0]);
+                done();
+            });
+
+            dropdownlist.open();
+            dropdownlist.filterInput.val("or").keydown();
         });
 
-        dropdownlist.open();
-        dropdownlist.filterInput.val("or").keydown();
-    });
+        it("keep open popup if no items can be found", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-    asyncTest("keep open popup if no items can be found", 0, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            dropdownlist.bind("close", function() {
+                assert.isOk(false);
+            });
+
+            dropdownlist.open();
+            dropdownlist.filterInput.val("not found").keydown();
+
+            setTimeout(function() {
+                done();
+            }, 100);
         });
 
-        dropdownlist.bind("close", function() {
-            ok(false);
+        it("clear filter when clear input value", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
+
+            dropdownlist.open();
+            dropdownlist._prev = "not found";
+            dropdownlist.filterInput.val("not found").keydown();
+
+            dropdownlist.bind("dataBound", function() {
+                assert.equal(dropdownlist.dataSource.view().length, 3);
+                done();
+            });
+
+            dropdownlist.filterInput.val("").keydown();
         });
 
-        dropdownlist.open();
-        dropdownlist.filterInput.val("not found").keydown();
+        it("does not clear filter when clear input value and enforceMinLength: true", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                minLength: 3,
+                enforceMinLength: true,
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-        setTimeout(function() {
-            start();
-        }, 100);
-    });
+            dropdownlist.open();
+            dropdownlist._prev = "or";
+            dropdownlist.filterInput.val("or").keydown();
 
-    asyncTest("clear filter when clear input value", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            dropdownlist.bind("dataBound", function() {
+                assert.isOk(false, "list should not rebind");
+            });
+
+            dropdownlist.filterInput.val("").keydown();
+
+            setTimeout(function() {
+                done();
+            }, 0);
         });
 
-        dropdownlist.open();
-        dropdownlist._prev = "not found";
-        dropdownlist.filterInput.val("not found").keydown();
+        it("persist selected value if no items (select)", function(done) {
+            var dropdownlist = new DropDownList(select, {
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-        dropdownlist.bind("dataBound", function() {
-            start();
-            equal(dropdownlist.dataSource.view().length, 3);
+            dropdownlist.open();
+
+            dropdownlist.bind("dataBound", function() {
+                assert.equal(dropdownlist.value(), "3");
+                done();
+            });
+
+            dropdownlist.filterInput.focus().val("test").keydown();
         });
 
-        dropdownlist.filterInput.val("").keydown();
-    });
+        it("update popup height when no items are found", function(done) {
+            var dropdownlist = new DropDownList(select, {
+                noDataTemplate: "",
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value"
+            });
 
-    asyncTest("does not clear filter when clear input value and enforceMinLength: true", 0, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            minLength: 3,
-            enforceMinLength: true,
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            dropdownlist.open();
+
+            var height = dropdownlist.ul.height();
+
+            dropdownlist.bind("dataBound", function() {
+                assert.isOk(dropdownlist.ul.height() < height);
+                done();
+            });
+
+            dropdownlist.filterInput.focus().val("test").keydown();
         });
 
-        dropdownlist.open();
-        dropdownlist._prev = "or";
-        dropdownlist.filterInput.val("or").keydown();
+        it("update popup height when no items are found and noDataTemplate is defined", function(done) {
+            var dropdownlist = new DropDownList(select, {
+                noDataTemplate: "No data found.",
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value"
+            });
 
-        dropdownlist.bind("dataBound", function() {
-            ok(false, "list should not rebind");
+            dropdownlist.open();
+
+            var height = dropdownlist.ul.height();
+
+            dropdownlist.one("dataBound", function() {
+                done();
+                assert.isOk(!dropdownlist.ul.height());
+            });
+
+            dropdownlist.filterInput.focus().val("test").keydown();
         });
 
-        dropdownlist.filterInput.val("").keydown();
+        it("search select first match of grouped list", function() {
+            var data = [{ text: "Foo", value: 1, type: "a" }, { text: "Bar", value: 2, type: "b" }, { text: "Baz", value: 3, type: "a" }];
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: {
+                    data: data,
+                    group: { field: "type" }
+                }
+            });
 
-        setTimeout(function() {
-            start();
-        }, 0);
-    });
+            dropdownlist.wrapper.focus().press("b");
+            dropdownlist.wrapper.focus().press("b");
 
-    asyncTest("persist selected value if no items (select)", 1, function() {
-        var dropdownlist = new DropDownList(select, {
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
+            assert.isOk(dropdownlist.ul.children().eq(2).text(), "Bar");
+            assert.isOk(dropdownlist.ul.children().eq(2).hasClass("k-state-selected"));
         });
 
-        dropdownlist.open();
+        it("filter on paste", function(done) {
+            var dropdownlist = new DropDownList(input, {
+                animation: false,
+                filter: "startswith",
+                delay: 0,
+                dataSource: [
+                    { text: "Black", value: "1" },
+                    { text: "Orange", value: "2" },
+                    { text: "Grey", value: "3" }
+                ],
+                dataTextField: "text",
+                dataValueField: "value",
+                index: 2
+            });
 
-        dropdownlist.bind("dataBound", function() {
-            start();
-            equal(dropdownlist.value(), "3");
+            dropdownlist.one("filtering", function() {
+                assert.isOk(true);
+                done();
+            });
+
+            dropdownlist.open();
+            dropdownlist.filterInput.val("Gre").focus().trigger({ type: "paste" });
         });
 
-        dropdownlist.filterInput.focus().val("test").keydown();
-    });
 
-    asyncTest("update popup height when no items are found", 1, function() {
-        var dropdownlist = new DropDownList(select, {
-            noDataTemplate: "",
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value"
-        });
-
-        dropdownlist.open();
-
-        var height = dropdownlist.ul.height();
-
-        dropdownlist.bind("dataBound", function() {
-            start();
-            ok(dropdownlist.ul.height() < height);
-        });
-
-        dropdownlist.filterInput.focus().val("test").keydown();
-    });
-
-    asyncTest("update popup height when no items are found and noDataTemplate is defined", 1, function() {
-        var dropdownlist = new DropDownList(select, {
-            noDataTemplate: "No data found.",
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value"
-        });
-
-        dropdownlist.open();
-
-        var height = dropdownlist.ul.height();
-
-        dropdownlist.one("dataBound", function() {
-            start();
-            ok(!dropdownlist.ul.height());
-        });
-
-        dropdownlist.filterInput.focus().val("test").keydown();
-    });
-
-    test("search select first match of grouped list", function() {
-        var data = [{text: "Foo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: {
-                data: data,
-                group: { field: "type" }
-            }
-        });
-
-        dropdownlist.wrapper.focus().press("b");
-        dropdownlist.wrapper.focus().press("b");
-
-        ok(dropdownlist.ul.children().eq(2).text(), "Bar");
-        ok(dropdownlist.ul.children().eq(2).hasClass("k-state-selected"));
-    });
-
-    asyncTest("filter on paste", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            animation: false,
-            filter: "startswith",
-            delay: 0,
-            dataSource: [
-                { text: "Black", value: "1" },
-                { text: "Orange", value: "2" },
-                { text: "Grey", value: "3" }
-            ],
-            dataTextField: "text",
-            dataValueField: "value",
-            index: 2
-        });
-
-        dropdownlist.one("filtering", function() {
-            start();
-            ok(true);
-        });
-
-        dropdownlist.open();
-        dropdownlist.filterInput.val("Gre").focus().trigger({type: "paste"});
-    });
-
-
-    test("resize popup on search when autoWidth is enabled", function(assert) {
-        var data = [{text: "Foooooooooooooo", value: 1, type: "a"}, {text:"Bar", value:2, type: "b"}, {text:"Baz", value:3, type: "a"}];
-        var dropdownlist = new DropDownList(input, {
-            autoWidth: true,
-            dataTextField: "ProductName",
-            dataValueField: "ProductID",
-            autoBind: false,
-            filter: "contains",
-            minLenght: 3,
-            dataSource: {
-                serverFiltering: false,
-                transport: {
-                    read: function(options) {
-                        options.success([
-                            { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
-                            { ProductName: "Tofu", ProductID: 2 },
-                            { ProductName: "Test3", ProductID: 3 },
-                            { ProductName: "Chai3", ProductID: 4 },
-                            { ProductName: "Test4", ProductID: 5 }
-                        ]);
+        it("resize popup on search when autoWidth is enabled", function(done) {
+            kendo.effects.enable();
+            var data = [{ text: "Foooooooooooooo", value: 1, type: "a" }, { text: "Bar", value: 2, type: "b" }, { text: "Baz", value: 3, type: "a" }];
+            var dropdownlist = new DropDownList(input, {
+                autoWidth: true,
+                dataTextField: "ProductName",
+                dataValueField: "ProductID",
+                autoBind: false,
+                filter: "contains",
+                minLenght: 3,
+                dataSource: {
+                    serverFiltering: false,
+                    transport: {
+                        read: function(options) {
+                            options.success([
+                                { ProductName: "ChaiiiiiiiiiiiiiiiiiiiiiiiiiiiiiChaiiiiiiiiiiiiiiiiiiiiiiiiiiiii", ProductID: 1 },
+                                { ProductName: "Tofu", ProductID: 2 },
+                                { ProductName: "Test3", ProductID: 3 },
+                                { ProductName: "Chai3", ProductID: 4 },
+                                { ProductName: "Test4", ProductID: 5 }
+                            ]);
+                        }
                     }
                 }
-            }
-        });
-
-        var done1 = assert.async();
-        var done2 = assert.async();
-        dropdownlist.popup.one("open", function() {
-            assert.ok(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
-            dropdownlist.close();
-            done1();
-            dropdownlist.popup.one("activate", function() {
-                assert.ok(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
-                done2();
             });
-            dropdownlist.dataSource.filter({field: "ProductName", oeprator: "contains", value: "To"});
+
+            dropdownlist.popup.one("open", function() {
+                assert.isOk(dropdownlist.wrapper.width() < dropdownlist.popup.element.width());
+                dropdownlist.close();
+
+                dropdownlist.popup.one("activate", function() {
+                    assert.isOk(dropdownlist.wrapper.width() >= dropdownlist.popup.element.width());
+                    done();
+                });
+                dropdownlist.dataSource.filter({ field: "ProductName", oeprator: "contains", value: "To" });
+                dropdownlist.open();
+            });
             dropdownlist.open();
+            kendo.effects.disable();
         });
-        dropdownlist.open();
 
-    });
+        it("autoWidth adds one pixel to avoid browser pixel rounding", function() {
+            var dropdownlist = new DropDownList(input, {
+                autoWidth: true,
+                animation: {
+                    open: {
+                        duration: 0
+                    },
+                    close: {
+                        duration: 0
+                    },
+                },
+                dataSource: {
+                    data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text", "Short item"]
+                }
+            });
 
-test("autoWidth adds one pixel to avoid browser pixel rounding", function(assert) {
-    var dropdownlist = new DropDownList(input, {
-        autoWidth: true,
-        animation:{
-            open: {
-                duration:0
-            },
-            close: {
-                duration:0
-            },
-        },
-        dataSource: {
-            data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
-        }
-    });
+            dropdownlist.open();
+            assert.closeTo(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
+            dropdownlist.close();
+            dropdownlist.open();
+            assert.closeTo(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1, 0.1);
+        });
 
-    dropdownlist.open();
-    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
-    dropdownlist.close();
-    dropdownlist.open();
-    equal(dropdownlist.popup.element.parent(".k-animation-container").width(), dropdownlist.popup.element.outerWidth(true) + 1);
-});
+        it("enabled autoWidth disables X scrolling", function() {
+            var dropdownlist = new DropDownList(input, {
+                autoWidth: true,
+                animation:{
+                    open: {
+                        duration:0
+                    },
+                    close: {
+                        duration:0
+                    },
+                },
+                dataSource: {
+                    data: ["Short item", "An item with really, really, really, really, really, really, really, really, really, long text","Short item"]
 
-    test("removes filtering expression if field matches the dataTextField", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: {
-                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
-                filter: {
-                    logic: "or",
-                    filters: [
-                        { field: "text", operator: "eq", value: "bar" },
-                        { field: "text", operator: "eq", value: "foo" }
+                }
+            });
+
+            dropdownlist.open();
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto")
+        });
+
+        it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
+            var dropdownlist = new DropDownList(input, {
+                autoWidth: true,
+                animation:{
+                    open: {
+                        duration:0
+                    },
+                    close: {
+                        duration:0
+                    },
+                },
+                dataSource: {
+                    data: [
+                        "Short item",
+                        "An item with really, really, really, really, really, really, really, really, really, long text",
+                        "Short item",
+                        "Short item",
+                        "Short item",
+                        "Short item",
+                        "Short item"
                     ]
                 }
-            }
+            });
+
+            dropdownlist.open();
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden scroll")
         });
 
-        dropdownlist.search("to");
-
-        equal(dropdownlist.dataSource.filter().filters.length, 1);
-    });
-
-    test("keeps custom filter expresssion", 5, function() {
-        var dropdownlist = new DropDownList(input, {
-            filter: "startswith",
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: {
-                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
-                filter: {
-                    logic: "or",
-                    filters: [
-                        { field: "value", operator: "eq", value: 1 },
-                        { field: "value", operator: "eq", value: 2 }
-                    ]
+        it("removes filtering expression if field matches the dataTextField", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: {
+                    data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+                    filter: {
+                        logic: "or",
+                        filters: [
+                            { field: "text", operator: "eq", value: "bar" },
+                            { field: "text", operator: "eq", value: "foo" }
+                        ]
+                    }
                 }
-            }
+            });
+
+            dropdownlist.search("to");
+
+            assert.equal(dropdownlist.dataSource.filter().filters.length, 1);
         });
 
-        dropdownlist.search("to");
-
-        var filters = dropdownlist.dataSource.filter();
-
-        equal(filters.logic, "and");
-        equal(filters.filters.length, 2);
-        equal(filters.filters[0].field, "text");
-        equal(filters.filters[1].logic, "or");
-        equal(filters.filters[1].filters.length, 2);
-    });
-
-    test("concat filters with the same logic operator", 2, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            filter: "contains",
-            dataSource: {
-                data: [{ text: "start_foo_end", value: 1 }, { text: "boo", value: 2 }, { text: "start_too_end", value: 10 }],
-                filter: {
-                    logic: "or",
-                    filters: [
-                        { field: "value", operator: "eq", value: 1 },
-                        { field: "value", operator: "eq", value: 2 }
-                    ]
+        it("keeps custom filter expresssion", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "startswith",
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: {
+                    data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "too", value: 3 }],
+                    filter: {
+                        logic: "or",
+                        filters: [
+                            { field: "value", operator: "eq", value: 1 },
+                            { field: "value", operator: "eq", value: 2 }
+                        ]
+                    }
                 }
-            }
+            });
+
+            dropdownlist.search("to");
+
+            var filters = dropdownlist.dataSource.filter();
+
+            assert.equal(filters.logic, "and");
+            assert.equal(filters.filters.length, 2);
+            assert.equal(filters.filters[0].field, "text");
+            assert.equal(filters.filters[1].logic, "or");
+            assert.equal(filters.filters[1].filters.length, 2);
         });
 
-        dropdownlist.search("to");
-        dropdownlist.search("too");
+        it("concat filters with the same logic operator", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                filter: "contains",
+                dataSource: {
+                    data: [{ text: "start_foo_end", value: 1 }, { text: "boo", value: 2 }, { text: "start_too_end", value: 10 }],
+                    filter: {
+                        logic: "or",
+                        filters: [
+                            { field: "value", operator: "eq", value: 1 },
+                            { field: "value", operator: "eq", value: 2 }
+                        ]
+                    }
+                }
+            });
 
-        var filters = dropdownlist.dataSource.filter();
+            dropdownlist.search("to");
+            dropdownlist.search("too");
 
-        equal(filters.filters[1].filters.length, 2);
-        equal(!filters.filters[1].filters.filters, true);
-    });
+            var filters = dropdownlist.dataSource.filter();
 
-    test("update dataSource when minLength is set", 1, function() {
-        var dropdownlist = new DropDownList(input, {
-            dataTextField: "text",
-            dataValueField: "value",
-            serverFiltering: true,
-            minLenght: 3,
-            dataSource: {
-                data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "baz", value: 3 }]
-            }
+            assert.equal(filters.filters[1].filters.length, 2);
+            assert.equal(!filters.filters[1].filters.filters, true);
         });
 
-        dropdownlist.search("b");
-        dropdownlist.select(1);
-        dropdownlist.open();
-        equal(dropdownlist.ul.children().length, 3);
+        it("update dataSource when minLength is set", function() {
+            var dropdownlist = new DropDownList(input, {
+                dataTextField: "text",
+                dataValueField: "value",
+                serverFiltering: true,
+                minLenght: 3,
+                dataSource: {
+                    data: [{ text: "foo", value: 1 }, { text: "bar", value: 2 }, { text: "baz", value: 3 }]
+                }
+            });
 
+            dropdownlist.search("b");
+            dropdownlist.select(1);
+            dropdownlist.open();
+            assert.equal(dropdownlist.ul.children().length, 3);
+
+        });
     });
-})();
+}());

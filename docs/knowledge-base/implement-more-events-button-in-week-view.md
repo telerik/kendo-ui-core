@@ -2,11 +2,12 @@
 title: Implement More Events Button in Week View of Scheduler
 description: An example on how to implement a More Events button in the week view of the Scheduler which is similar to the one that is available in its month view.
 type: how-to
-page_title: Show More Events Button in Week View | Kendo UI Scheduler
+page_title: Show More Events Button in Week View | Kendo UI Scheduler for jQuery
 slug: implement-more-events-button-in-week-view
 tags: implement, show, more, events, button, scheduler, month, week, view
 ticketid: 1117416
 res_type: kb
+component: scheduler
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Scheduler for Progress Kendo UI</td>
+  <td>Progress Kendo UI Scheduler</td>
  </tr>
 </table>
 
@@ -28,7 +29,7 @@ The Kendo UI Scheduler does not provide a built-in solution for achieving this b
 
 To simulate the layout of the week view, implement a **More Events** button similar to that in the month view, and link it to the day view, create a custom view by using the following approach:
 
-```html
+```dojo
 <div id="scheduler"></div>
 <script>
     var MyWeekView = kendo.ui.MultiDayView.extend({
@@ -113,19 +114,19 @@ To simulate the layout of the week view, implement a **More Events** button simi
                 batch: true,
                 transport: {
                     read: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks",
                         dataType: "jsonp"
                     },
                     update: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks/update",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks/update",
                         dataType: "jsonp"
                     },
                     create: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks/create",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks/create",
                         dataType: "jsonp"
                     },
                     destroy: {
-                        url: "http://demos.telerik.com/kendo-ui/service/tasks/destroy",
+                        url: "https://demos.telerik.com/kendo-ui/service/tasks/destroy",
                         dataType: "jsonp"
                     },
                     parameterMap: function (options, operation) {

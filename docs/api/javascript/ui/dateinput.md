@@ -3,6 +3,7 @@ title: DateInput
 page_title: Configuration, methods and events of Kendo UI DateInput
 description: Easy to follow steps guide how to quickly configure DateInput UI widget, easily enable/disable it using methods and how to change events.
 res_type: api
+component: dateinput
 ---
 
 # kendo.ui.DateInput
@@ -242,6 +243,7 @@ The max date to set.
 
     var max = dateinput.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -280,6 +282,7 @@ The min date to set.
 
     var min = dateinput.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -334,9 +337,9 @@ The value to set.
 
 `Date` The value of the DateInput.
 
-> * This method **does not trigger** [change](#events-change) event.
+> * This method **does not trigger** [change](/api/javascript/ui/dateinput/events/change) event.
 This could affect [MVVM value binding](/framework/mvvm/bindings/value). The model bound to the widget will not be updated.
-You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable#methods-trigger) method.
+You can overcome this behavior trigerring the `change` event manually using [trigger("change")](/api/javascript/observable/methods/trigger) method.
 
     <input id="dateinput" />
     <script>
@@ -358,6 +361,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var dateinput = $("#dateinput").data("kendoDateInput");
 
     var value = dateinput.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -393,6 +397,7 @@ The widget instance which fired the event.
     $("#dateinput").kendoDateInput({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the dateinput
         }
     });
@@ -408,6 +413,7 @@ The widget instance which fired the event.
 
     dateinput.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the dateinput
     });
     </script>

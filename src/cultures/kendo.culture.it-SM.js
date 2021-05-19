@@ -34,7 +34,7 @@
                     namesShort: ["dom","lun","mar","mer","gio","ven","sab"]
                 },
                 months: {
-                    names: ["Gennaio","Febbraio","Marzo","Aprile","Maggio","Giugno","Luglio","Agosto","Settembre","Ottobre","Novembre","Dicembre"],
+                    names: ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"],
                     namesAbbr: ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"]
                 },
                 AM: ["AM","am","AM"],

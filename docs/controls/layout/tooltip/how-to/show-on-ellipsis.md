@@ -1,17 +1,15 @@
 ---
 title: Show Only If Text Overflows with Ellipsis
-page_title: Show Only If Text Overflows with Ellipsis | Kendo UI ToolBar
+page_title: Show Only If Text Overflows with Ellipsis | Kendo UI Tooltip
 description: "Learn how to show a Kendo UI Tooltip only if the target text overflows with ellipsis."
 slug: howto_showonlyiftextoverflowswithellipsis_tooltip
 ---
 
 # Show Only If Text Overflows with Ellipsis
 
-The example below demonstrates how to show a Kendo UI Tooltip only if the text of the target overflows with ellipsis.
+The following example demonstrates how to show a Kendo UI Tooltip only if the text of the target overflows with ellipsis.
 
-###### Example
-
-```html
+```dojo
     <style>
       td{
         max-width: 200px;
@@ -59,10 +57,6 @@ The example below demonstrates how to show a Kendo UI Tooltip only if the text o
 
 ## See Also
 
-Other articles and how-to examples on the Kendo UI Tooltip:
-
-* [Tooltip JavaScript API Reference](/api/javascript/ui/tooltip)
-* [How to Show Only If Text Exceeds Certain Length]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
-* [How to Show Tooltip for Chart Notes]({% slug howto_showonlyiftextexceedscertainlength_tooltip %})
-
-For more runnable examples on the Kendo UI Tooltip, browse its [**How To** documentation folder]({% slug howto_calculatetooltipcontentlength_tooltip %}).
+* [Basic Usage of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/index)
+* [Using the API of the Tooltip (Demo)](https://demos.telerik.com/kendo-ui/tooltip/api)
+* [JavaScript API Reference of the Tooltip](/api/javascript/ui/tooltip)

@@ -1,7 +1,7 @@
 (function() {
     var PanelBarHelpers = window.PanelBarHelpers = {
-        fromOptions: function (panelbarOptions, options) {
-            var container = QUnit.fixture;
+        fromOptions: function(panelbarOptions, options) {
+            var container = Mocha.fixture;
 
             options = options || {};
 
@@ -12,8 +12,8 @@
             return PanelBarHelpers.fromHtml("<div />", panelbarOptions, container);
         },
 
-        fromHtml: function (html, options, container) {
-            container = container || QUnit.fixture;
+        fromHtml: function(html, options, container) {
+            container = container || Mocha.fixture;
 
             var panelbar = window.panelbar = $(html).appendTo(container).kendoPanelBar(options);
             window.panelbarObject = panelbar.data("kendoPanelBar");
@@ -21,26 +21,10 @@
             return panelbar;
         },
 
-        destroy: function () {
-            kendo.destroy(QUnit.fixture);
+        destroy: function() {
+            kendo.destroy(Mocha.fixture);
             delete window.panelbar;
             delete window.panelbarObject;
-        },
-
-        basicModule: {
-            teardown: function() {
-                PanelBarHelpers.destroy();
-            }
-        },
-
-        noAnimationModule: {
-            setup: function() {
-                kendo.effects.disable();
-            },
-            teardown: function() {
-                kendo.effects.enable();
-                PanelBarHelpers.destroy();
-            }
         }
     };
-})();
+}());

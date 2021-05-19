@@ -186,6 +186,7 @@
     kendo.ui.FilterMenu.prototype.options.messages =
       $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
         "info": "Mostrar filas con valor que:",
+        "title": "Mostrar filas con valor que",
         "isTrue": "Sí",
         "isFalse": "No",
         "filter": "Filtrar",
@@ -253,7 +254,8 @@
         "checkAll": "Seleccionar todo",
         "clear": "Limpiar filtros",
         "filter": "Filtrar",
-        "search": "Buscar"
+        "search": "Buscar",
+        "selectedItemsFormat": "{0} articulos seleccionados"
       });
   }
 
@@ -361,6 +363,26 @@
   if (kendo.ui.Pager) {
     kendo.ui.Pager.prototype.options.messages =
       $.extend(true, kendo.ui.Pager.prototype.options.messages, {
+        "allPages": "Todas",
+        "display": "Elementos mostrados {0} - {1} de {2}",
+        "empty": "No hay registros.",
+        "page": "Página",
+        "of": "de {0}",
+        "itemsPerPage": "ítems por página",
+        "first": "Ir a la primera página",
+        "previous": "Ir a la página anterior",
+        "next": "Ir a la página siguiente",
+        "last": "Ir a la última página",
+        "refresh": "Actualizar",
+        "morePages": "Más paginas"
+      });
+  }
+
+  /* TreeListPager messages */
+
+  if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
         "allPages": "Todas",
         "display": "Elementos mostrados {0} - {1} de {2}",
         "empty": "No hay registros.",
@@ -671,13 +693,6 @@
           "placeholders": {
             "typeTitle": "Tipo de título",
             "typeMessage": "Escribir mensaje"
-          }
-        },
-        "saveAsDialog": {
-          "title": "Guardar como...",
-          "labels": {
-            "fileName": "Nombre de archivo",
-            "saveAsType": "Guardar como tipo"
           }
         },
         "exportAsDialog": {

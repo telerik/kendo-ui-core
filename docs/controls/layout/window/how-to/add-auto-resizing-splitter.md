@@ -9,9 +9,9 @@ slug: howto_addautoresizingsplitter_window
 
 The example below demonstrates how to add a Splitter that resizes automatically along with the Kendo UI Window widget.
 
-###### Example
 
-```html
+
+```dojo
     <style>
       html
       {

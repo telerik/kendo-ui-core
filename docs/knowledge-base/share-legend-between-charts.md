@@ -2,11 +2,12 @@
 title: Share Legend Between Charts
 description: An example on how to create a shared legend to show and hide series in two or more Kendo UI Charts.
 type: how-to
-page_title: Create Common Legend for Two or More Charts | Kendo UI Chart
+page_title: Create Common Legend for Two or More Charts | Kendo UI Chart for jQuery
 slug: share-legend-between-charts
 tags: chart, legend, series, kendo-ui
 ticketid: 1114263
 res_type: kb
+component: charts
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Chart for Progress Kendo UI</td>
+  <td>Progress Kendo UI Chart</td>
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
@@ -28,23 +29,11 @@ Can I click on the legend of one Kendo UI Chart and have the series of the other
 
 ## Solution
 
-Handle the [`legendItemClick`](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#events-legendItemClick) event of the first Chart and manually toggle the series visibility in the other Charts.
+Handle the [`legendItemClick`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/events/legenditemclick) event of the first Chart and manually toggle the series visibility in the other Charts.
 
 The following example demonstrates the full implementation of the approach.  
 
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
-    <title></title>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.common.min.css" />
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.621/styles/kendo.material.min.css" />
-
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/kendo.all.min.js"></script>
-  </head>
-  <body>
+```dojo
     <div id="example">
       <div class="demo-section k-content wide">
         <div id="chart" style="width:400px; height: 250px"></div>
@@ -115,12 +104,8 @@ The following example demonstrates the full implementation of the approach.
         $(document).ready(createChart);
       </script>
     </div>
-
-
-  </body>
-</html>
 ```
 
 ## Notes
 
-If the order of the series is different across the Charts, you can also [access the series by their names](http://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart#methods-findSeriesByName).  
+If the order of the series is different across the Charts, you can also [access the series by their names](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/chart/methods/findseriesbyname).  

@@ -33,18 +33,14 @@ To achieve this behavior, apply either of the following approaches:
       </script>
     ```
 
-When you use the Kendo UI checkboxes, make sure that the [`input` element is immediately followed by a `label` element]({% slug themesandappearnce_kendoui_desktopwidgets %}#customize-checkboxes-and-radio-buttons). Without the `label` element, the `k-checkbox` class applies a `display : none` style.
-
 The following example demonstrates how to:
 
 1. Add checkbox templates to a TreeView in AngularJS applications.
 2. Add the [Bootstrap feel to the checkboxes]({% slug themesandappearnce_kendoui_desktopwidgets %}#common-css-files).
 3. Show nested items under the TreeView elements.
 
-###### Example
-
-```html
-  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css">
+```dojo
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1021/styles/kendo.bootstrap.min.css">
 
   <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -75,7 +71,7 @@ The following example demonstrates how to:
         loadOnDemand: false,
         checkboxes: {
           checkChildren: true,
-          template: "# if (!item.isLegend) { # <input id='checkbox_#:item.uid#' type='checkbox' class='k-checkbox' /><label for='checkbox_#:item.uid#' class='k-checkbox-label'></label># } #"
+          template: "# if (!item.isLegend) { # <input id='checkbox_#:item.uid#' type='checkbox' class='k-checkbox' /># } #"
         },
         template: $("#item-template").html()
       };
@@ -90,8 +86,8 @@ The following example demonstrates how to:
                 {
                   "isLegend": true,
                   "images": [
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/2.jpg",
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/2.jpg",
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/1.jpg"
                   ]
                 }]
             },
@@ -101,8 +97,8 @@ The following example demonstrates how to:
                 {
                   "isLegend": true,
                   "images": [
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/35.jpg",
-                    "http://demos.telerik.com/kendo-ui/content/web/foods/75.jpg"
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/35.jpg",
+                    "https://demos.telerik.com/kendo-ui/content/web/foods/75.jpg"
                   ]
                 }
               ]
@@ -128,14 +124,6 @@ The following example demonstrates how to:
 
 ## See Also
 
-* [TreeView JavaScript API Reference](/api/javascript/ui/treeview)
-* [How to Check Nodes Programmatically]({% slug howto_checknodeprogramatically_treeview %})
-* [How to Edit Nodes via Form]({% slug howto_editnodesviaform_treeview %})
-* [How to Filter Out Search Results]({% slug howto_filetroutserachresults_treeview %})
-* [How to Hide Checkboxes for Root Level]({% slug howto_hidecheckboxesforrootlevel_treeview %})
-* [How to Persist Expanded State]({% slug howto_persistexpandedstate_treeview %})
-* [How to Render Multiple TreeViews Using HTML Source Binding]({% slug howto_rendermultipleusing_htmlsourcebinding_mvvm_treeview %})
-* [How to Scroll to Selected Item]({% slug howto_scrolltoselecteditem_treeview %})
-* [How to Use FontAwesome Icons]({% slug howto_usefontawesomeicons_treeview %})
-
-For more runnable examples on the Kendo UI TreeView, browse its [**How To** documentation folder]({% slug howto_bindcheckedstatecustommodelfields_angulartreeview %}).
+* [Basic Usage of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/index)
+* [Using the API of the TreeView (Demo)](https://demos.telerik.com/kendo-ui/treeview/api)
+* [JavaScript API Reference of the TreeView](/api/javascript/ui/treeview)

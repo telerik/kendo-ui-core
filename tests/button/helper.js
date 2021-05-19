@@ -6,7 +6,7 @@ function getButton(contents) {
         contents = "text";
     }
 
-    button = $("<button type='button'>" + contents + "</button>").appendTo(QUnit.fixture);
+    button = $("<button type='button'>" + contents + "</button>").appendTo(Mocha.fixture);
 
     return button;
 }
@@ -16,7 +16,7 @@ function getSpanButton(contents) {
         contents = "text";
     }
 
-    button = $("<span>" + contents + "</span>").appendTo(QUnit.fixture);
+    button = $("<span>" + contents + "</span>").appendTo(Mocha.fixture);
 
     return button;
 }
@@ -29,7 +29,7 @@ function getButtonContainer(contents) {
     buttonContainer = $("<div class='buttonContainer'>" +
         "<button type='button'>" + contents + "</button>" +
         "<button type='button'>" + contents + "</button>" +
-    "</div>").appendTo(QUnit.fixture);
+    "</div>").appendTo(Mocha.fixture);
 
     return buttonContainer;
 }

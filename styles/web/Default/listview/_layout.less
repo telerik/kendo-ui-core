@@ -1,0 +1,128 @@
+.k-listview {
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    border-style: solid;
+    box-sizing: border-box;
+    outline: 0;
+    font-size: @listview-font-size;
+    line-height: @listview-line-height;
+    flex-flow: column nowrap;
+    position: relative;
+}
+.k-listview-bordered {
+    border-width: @listview-border-width;
+}
+
+
+// Header
+.k-listview-header {
+    border-width: 0;
+    border-style: solid;
+    border-color: inherit;
+}
+.k-listview-bordered > .k-listview-header {
+    border-bottom-width: @listview-border-width;
+}
+
+
+// Footer
+.k-listview-footer {
+    border-width: 0;
+    border-style: solid;
+    border-color: inherit;
+}
+.k-listview-bordered > .k-listview-footer {
+    border-top-width: @listview-border-width;
+}
+
+
+// Content
+.k-listview-content {
+    margin: 0;
+    padding: 0;
+    border-color: inherit;
+    list-style: none;
+    flex: 1 1 auto;
+    align-content: flex-start;
+    position: relative;
+    overflow: auto;
+
+    &::after {
+        height: 0;
+        clear: both;
+        display: block;
+    }
+}
+.k-listview-content.k-d-flex,
+.k-listview-content.k-d-grid {
+    &::after { display: none; }
+}
+.k-listview-content-padding-rectangle {
+    padding: @listview-padding-y @listview-padding-x;
+}
+.k-listview-content-padding-square {
+    padding: @listview-padding-y;
+}
+
+
+// Items
+.k-listview-item {
+    padding: 0;
+    border-width: 0;
+    border-style: solid;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+.k-listview-item-padding-rectangle {
+    padding: @listview-item-padding-y @listview-item-padding-x;
+}
+.k-listview-item-padding-rectangle .k-listview-link {
+    margin: (-@listview-item-padding-y) (-@listview-item-padding-x);
+    padding: @listview-item-padding-y @listview-item-padding-x;
+}
+.k-listview-item-padding-square {
+    padding: @listview-item-padding-y;
+}
+.k-listview-item-padding-square .k-listview-link {
+    margin: (-@listview-item-padding-y);
+    padding: @listview-item-padding-y;
+}
+
+
+// Borders
+.k-listview-borders-all {
+    .k-listview-item {
+        border-width: 1px;
+    }
+}
+.k-listview-borders-horizontal {
+    .k-listview-item {
+        border-top-width: 1px;
+    }
+    .k-listview-item:first-child {
+        border-top-width: 0;
+    }
+}
+.k-listview-borders-vertical {
+    .k-listview-item {
+        border-left-width: 1px;
+    }
+    .k-listview-item:first-child {
+        border-left-width: 0;
+    }
+}
+
+
+// Listview pager
+.k-listview-pager {
+    border-width: 0;
+    border-color: inherit;
+    font: inherit;
+}
+.k-listview-bordered > .k-listview-pager-top {
+    border-bottom-width: @listview-border-width;
+}
+.k-listview-bordered > .k-listview-pager-bottom {
+    border-top-width: @listview-border-width;
+}

@@ -9,9 +9,9 @@ slug: howto_createconfirmationdialog_viapromises_window
 
 The example below demonstrates how to create a confirmation dialog in a Kendo UI Window by using Promises for deferred execution.
 
-###### Example
 
-```html
+
+```dojo
     <script id="confirmationTemplate" type="text/x-kendo-template">
     <div class="popupMessage"></div>
       </br>
@@ -76,8 +76,6 @@ The example below demonstrates how to create a confirmation dialog in a Kendo UI
 ```
 
 ## See Also
-
-Other articles and how-to examples on the Kendo UI Window:
 
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Panel
 
 **Step 2** Create a new action method which renders the view.
 
-###### Example
+
 
         @RequestMapping(value = "index", method = RequestMethod.GET)
         public String index() {
@@ -30,13 +30,13 @@ Below are listed the steps for you to follow when configuring the Kendo UI Panel
 
 **Step 3** Add the Kendo UI `taglib` mapping to the page.
 
-###### Example
 
-        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
+
+        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
 
 **Step 4** Add the `panelbar` tag.
 
-###### Example
+
 
     <kendo:panelBar name="panelBar" expandMode="single">
         <kendo:panelBar-items>
@@ -61,7 +61,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI Panel
 
 You can subscribe to all [events exposed by Kendo UI PanelBar](/api/javascript/ui/panelbar#events) by the handler name.
 
-###### Example
+
 
     <kendo:panelBar name="panelbar" expand="panelbar_expand" collapse="panelbar_collapse">
         <kendo:panelBar-items>
@@ -84,9 +84,9 @@ You can subscribe to all [events exposed by Kendo UI PanelBar](/api/javascript/u
 
 ### Existing Instances
 
-You are able to reference an existing PanelBar instance via [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [PanelBar API](/api/javascript/ui/panelbar#methods) to control its behavior.
+You are able to reference an existing PanelBar instance via [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, you are able to use the [PanelBar API](/api/javascript/ui/panelbar#methods) to control its behavior.
 
-###### Example
+
 
       //Put this after your Kendo PanelBar tag declaration
       <script>
@@ -97,8 +97,6 @@ You are able to reference an existing PanelBar instance via [`jQuery.data()`](ht
       </script>
 
 ## See Also
-
-Other articles on Telerik UI for JSP and on the PanelBar:
 
 * [Overview of the Kendo UI PanelBar Widget]({% slug overview_kendoui_panelbar_widget %})
 * [Telerik UI for JSP API Reference Folder](/api/jsp/autocomplete/animation)

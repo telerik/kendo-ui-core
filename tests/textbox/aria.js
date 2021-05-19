@@ -1,110 +1,48 @@
 (function() {
-    var NumericTextBox = kendo.ui.NumericTextBox,
+    var TextBox = kendo.ui.TextBox,
         input;
 
-    module("kendo.ui.NumericTextBox ARIA", {
-        setup: function() {
-            input = $("<input />").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
-    test("NumericTextBox adds role to the input element", function() {
-        input.kendoNumericTextBox();
-        equal(input.attr("role"), "spinbutton");
-    });
-
-    test("NumericTextBox adds aria-valuemin", function() {
-        input.kendoNumericTextBox({
-            min: 0
+    describe("kendo.ui.TextBox ARIA", function() {
+        beforeEach(function() {
+            input = $("<input />").appendTo(Mocha.fixture);
         });
-        equal(input.attr("aria-valuemin"), "0");
-    });
-
-    test("NumericTextBox adds aria-valuemax", function() {
-        input.kendoNumericTextBox({
-            max: 0
-        });
-        equal(input.attr("aria-valuemax"), "0");
-    });
-
-    test("NumericTextBox updates aria-valuemin", function() {
-        var numeric = new NumericTextBox(input);
-
-        numeric.min(10);
-        equal(input.attr("aria-valuemin"), "10");
-    });
-
-    test("NumericTextBox updates aria-valuemax", function() {
-        var numeric = new NumericTextBox(input);
-
-        numeric.max(10);
-        equal(input.attr("aria-valuemax"), "10");
-    });
-
-    test("NumericTextBox do not set aria-valuemin", function() {
-        var numeric = new NumericTextBox(input);
-
-        equal(input.attr("aria-valuemin"), undefined);
-    });
-
-    test("NumericTextBox adds aria-valuenow", function() {
-        var numeric = new NumericTextBox(input, {
-            value: 10
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        equal(input.attr("aria-valuenow"), "10");
-    });
+        it("initialization adds an aria-disabled false attribute", function() {
+            var textbox = new TextBox(input);
 
-    test("NumericTextBox adds role to the text element", function() {
-        var numeric = new NumericTextBox(input);
-
-        equal(numeric._text.attr("role"), "spinbutton");
-    });
-
-    test("NumericTextBox adds aria-valuemin", function() {
-        var numeric = new NumericTextBox(input, {
-            min: 0
+            assert.equal(textbox.element.attr("aria-disabled"), "false");
         });
 
-        equal(numeric._text.attr("aria-valuemin"), "0");
+        it("initialization adds an aria-disabled true attribute when enable: false", function() {
+            var textbox = new TextBox(input, {
+                enable: false
+            });
+
+            assert.equal(textbox.element.attr("aria-disabled"), "true");
+        });
     });
 
-    test("NumericTextBox adds aria-valuemax", function() {
-        var numeric = new NumericTextBox(input, {
-            max: 0
+    describe("kendo.ui.TextBox AXE", function() {
+        beforeEach(function() {
+            $("<input />").appendTo(Mocha.fixture);
+            input = $(Mocha.fixture).find("input");
+        });
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
         });
 
-        equal(numeric._text.attr("aria-valuemax"), "0");
-    });
+        it("TextBox is accessible", function(done) {
+            var textbox = new TextBox(input, {
+                label: {
+                    content: "Name",
+                    floating: true
+                }
+            });
 
-    test("NumericTextBox updates aria-valuemin", function() {
-        var numeric = new NumericTextBox(input);
-
-        numeric.min(10);
-        equal(numeric._text.attr("aria-valuemin"), "10");
-    });
-
-    test("NumericTextBox updates aria-valuemax", function() {
-        var numeric = new NumericTextBox(input);
-
-        numeric.max(10);
-        equal(numeric._text.attr("aria-valuemax"), "10");
-    });
-
-    test("NumericTextBox do not set aria-valuemin", function() {
-        var numeric = new NumericTextBox(input);
-
-        equal(numeric._text.attr("aria-valuemin"), undefined);
-    });
-
-    test("NumericTextBox adds aria-valuenow when value is null", function() {
-        var numeric = new NumericTextBox(input, {
-            value: null
+            axeRunFixture(done);
         });
-
-        equal(numeric._text.attr("aria-valuenow"), undefined);
     });
-})();
+}());

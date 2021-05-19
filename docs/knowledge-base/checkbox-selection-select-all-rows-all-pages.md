@@ -2,10 +2,11 @@
 title: Select All Rows on All Grid Pages
 description: An example on how to select all the rows on all the pages of the Kendo UI Grid.
 type: how-to
-page_title: Select All Rows on All Pages with a Master Checkbox | Kendo UI Grid
+page_title: Select All Rows on All Pages with a Master Checkbox | Kendo UI Grid for jQuery
 slug: checkbox-selection-select-all-rows-all-pages
 tags: checkbox selection, grid, kendo ui
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -13,10 +14,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
@@ -27,21 +28,19 @@ How can I select all rows on all Kendo UI Grid pages?
 
 ## Solution
 
-> **Important**
->
 > The implementation of this functionality might lead to slow Grid performance.
 
-1. Set the [`persistSelection`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-persistSelection) configuration of the Grid to `true`.
+1. Set the [`persistSelection`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/persistselection) configuration of the Grid to `true`.
 1. Use a jQuery selector to subscribe for the [`click`](https://api.jquery.com/click/) event of the master checkbox.
 1. In the `click` event handler:
-	1. Save the current page size in a global variable by using the [`pageSize`](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#methods-pageSize) method of the Kendo UI dataSource.
+	1. Save the current page size in a global variable by using the [`pageSize`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/methods/pagesize) method of the Kendo UI dataSource.
 	1. Show all the rows on a single page by using the `pageSize` method.
-	1. Select all the rows by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-select) method of the Kendo UI Grid.
+	1. Select all the rows by using the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/select) method of the Kendo UI Grid.
 	1. Bring back the old page size by using the `pageSize` method.
 
-```html
-<link rel="stylesheet" href="http://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
-<script src="http://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>  
+```dojo
+<link rel="stylesheet" href="https://demos.telerik.com/kendo-ui/content/shared/styles/examples-offline.css">
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/console.js"></script>
 
 
 <div id="example">
@@ -137,5 +136,5 @@ The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 relea
 ## See Also
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
-* [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

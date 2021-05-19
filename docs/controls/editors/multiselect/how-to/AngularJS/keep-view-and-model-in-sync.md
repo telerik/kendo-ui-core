@@ -13,7 +13,7 @@ slug: howto_keepviewandmodelinsync_angular_multiselect
 
 To keep the view and model in sync:
 
-1. Attach an event listener to the [`select`](/api/javascript/ui/multiselect#events-select) event by using `k-on-select`.
+1. Attach an event listener to the [`select`](/api/javascript/ui/multiselect/events/select) event by using `k-on-select`.
 
 2. If `"Unknown"` is selected, all other options are deselected by assigning the value of `"Unknown"` to the model.
 
@@ -21,14 +21,12 @@ To keep the view and model in sync:
 
 3. If any other option is selected, find the `"Unknown"` option and remove it from the model. Then, add the current selection.
 
-You can implement a similar result by following the same steps and using the [`change`](/api/javascript/ui/multiselect#events-change) event handler. In this case, it is not necessary to add the current selection from **Step 3**.
+You can implement a similar result by following the same steps and using the [`change`](/api/javascript/ui/multiselect/events/change) event handler. In this case, it is not necessary to add the current selection from **Step 3**.
 
 The following example demonstrates how to keep in sync the view and the model of a Kendo UI MultiSelect in AngularJS applications.
 
-###### Example
-
-```html
-  <base href="http://demos.telerik.com/kendo-ui/multiselect/angular">
+```dojo
+  <base href="https://demos.telerik.com/kendo-ui/multiselect/angular">
   <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content" ng-controller="MyCtrl">
         <h2>Options</h2>
@@ -85,7 +83,6 @@ The following example demonstrates how to keep in sync the view and the model of
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
-* [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})

@@ -20,7 +20,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 **Step 2** Create a [FlatColorPicker](/api/php/Kendo/UI/FlatColorPicker).
 
-###### Example
+
 
         <?php
         $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
@@ -29,7 +29,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI FlatC
 
 **Step 3** Output the FlatColorPicker by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $flatcolorpicker->render();
@@ -43,7 +43,7 @@ You can subscribe to all FlatColorPicker [events](/api/javascript/ui/flatcolorpi
 
 The example below demonstrates how to subscribe for events by specifying a JavaScript function name.
 
-###### Example
+
 
         <?php
         $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
@@ -63,7 +63,7 @@ The example below demonstrates how to subscribe for events by specifying a JavaS
 
 The example below demonstrates how to subscribe to events by providing inline JavaScript code.
 
-###### Example
+
 
         <?php
         $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
@@ -80,9 +80,9 @@ The example below demonstrates how to subscribe to events by providing inline Ja
 
 ### Client-Side Instances
 
-You are able to reference an existing FlatColorPicker instance via the [`jQuery.data()`](http://api.jquery.com/jQuery.data/). Once a reference is established, use the [FlatColorPicker API](/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
+You are able to reference an existing FlatColorPicker instance via the [`jQuery.data()`](https://api.jquery.com/jQuery.data/). Once a reference is established, use the [FlatColorPicker API](/api/javascript/ui/flatcolorpicker#methods) to control its behavior.
 
-###### Example
+
 
         <?php
         $flatcolorpicker = new \Kendo\UI\FlatColorPicker('flatcolorpicker');
@@ -96,8 +96,6 @@ You are able to reference an existing FlatColorPicker instance via the [`jQuery.
         </script>
 
 ## See Also
-
-Other articles on Telerik UI for PHP and related to the FlatColorPicker:
 
 * [Overview of the Kendo UI ColorPicker Widget]({% slug overview_kendoui_colorpicker_widget %})
 * [Telerik UI for PHP API Reference Folder](/api/php/Kendo/UI/AutoComplete)

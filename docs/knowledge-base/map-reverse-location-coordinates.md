@@ -2,11 +2,12 @@
 title: Cannot Display GeoJSON Coordinates in Proper Order for Bubble Type Layer in Map
 description: The received GeoJSON data is handled in a reversed longitude-latitude order when displaying a bubble-type layer in a Kendo UI Map.
 type: troubleshooting
-page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order | Kendo UI Map
+page_title: Problem with GeoJSON Coordinates for Bubble-Type Map Layer Received in Reversed Order | Kendo UI Map for jQuery
 slug: map-reverse-location-coordinates
 tags: kendo ui map, location, coordinates, longitude, latitude
 ticketid: 1111871
 res_type: kb
+component: map
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Map for Progress Kendo UI</td>
+  <td>Progress Kendo UI Map</td>
  </tr>
   <tr>
   <td>Progress Kendo UI version</td>
@@ -32,11 +33,11 @@ The Kendo UI Map does not provide a built-in solution for achieving this behavio
 
 The Map accepts a `[Latitude, Longitude]` format for its locations field. When you receive the data in a reversed order, modify the array prior to the binding and use `schema.parse` to update the array.
 
-```html
+```dojo
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="http://demos.telerik.com/kendo-ui/map/bubble-layer">
+    <base href="https://demos.telerik.com/kendo-ui/map/bubble-layer">
     <style>html { font-size: 14px; font-family: Arial, Helvetica, sans-serif; }</style>
     <title></title>
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.2.504/styles/kendo.common-material.min.css" />

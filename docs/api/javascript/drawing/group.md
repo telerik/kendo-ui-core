@@ -5,9 +5,11 @@ res_type: api
 ---
 
 # kendo.drawing.Group : kendo.drawing.Element
+
 Represents a set of drawing elements, possibly including other groups.
 
 #### Example - creating a group
+
     <div id="surface"></div>
     <script>
         var draw = kendo.drawing;
@@ -31,15 +33,15 @@ The configuration of this Group.
 
 ### clip `kendo.drawing.Path`
 The group clipping path.
-Inherited from [Element.clip](element#configuration-clip)
+Inherited from [Element.clip](/api/javascript/drawing/element#configuration-clip)
 
 ### cursor `String`
 The group cursor.
-Inherited from [Element.cursor](element#configuration-cursor)
+Inherited from [Element.cursor](/api/javascript/drawing/element#configuration-cursor)
 
 ### opacity `Number`
 The group opacity.
-Inherited from [Element.opacity](element#configuration-opacity)
+Inherited from [Element.opacity](/api/javascript/drawing/element#configuration-opacity)
 
 The opacity of any child groups and elements will be multiplied by this value.
 
@@ -51,11 +53,11 @@ The tooltip options of the shape.
 
 ### transform `kendo.geometry.Transformation`
 The transformation to apply to this group and its children.
-Inherited from [Element.transform](element#configuration-transform)
+Inherited from [Element.transform](/api/javascript/drawing/element#configuration-transform)
 
 ### visible `Boolean`
 A flag, indicating if the group and its children are visible.
-Inherited from [Element.visible](element#configuration-visible)
+Inherited from [Element.visible](/api/javascript/drawing/element#configuration-visible)
 
 ## Fields
 
@@ -79,7 +81,7 @@ Removes all child elements from the group.
 
 ### clip
 Gets or sets the group clipping path.
-Inherited from [Element.clip](element#methods-clip)
+Inherited from [Element.clip](/api/javascript/drawing/element#methods-clip)
 
 #### Parameters
 
@@ -92,7 +94,7 @@ The group clipping path.
 
 ### clippedBBox
 Returns the bounding box of the element with clipping and transformations applied.
-Inherited from [Element.clippedBBox](element#methods-clippedBBox)
+Inherited from [Element.clippedBBox](/api/javascript/drawing/element#methods-clippedBBox)
 
 #### Returns
 `kendo.geometry.Rect` The bounding box of the element with clipping transformations applied.
@@ -122,7 +124,7 @@ The element to insert.
 
 ### opacity
 Gets or sets the group opacity.
-Inherited from [Element.opacity](element#methods-opacity)
+Inherited from [Element.opacity](/api/javascript/drawing/element#methods-opacity)
 
 The opacity of any child groups and elements will be multiplied by this value.
 

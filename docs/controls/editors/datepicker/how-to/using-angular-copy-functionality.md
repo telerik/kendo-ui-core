@@ -9,9 +9,9 @@ slug: howto_use_angularjs_copy_functionality_datepicker
 
 The following example demonstrates how to use the AngularJS copy functionality in a Kendo UI DatePicker.
 
-###### Example
 
-```html
+
+```dojo
     <div id="example" ng-app="KendoDemos">
       <div class="demo-section k-content"ng-controller="MyCtrl">
         <div class="box-col">
@@ -24,8 +24,8 @@ The following example demonstrates how to use the AngularJS copy functionality i
 
           <pre>
           dateObject: {{ info.dateObject | date:"EEEE, MMMM d, yyyy" }}
-          typeof dateObject: {{ getType(info.dateObject) }}
-          dateObject instanceof Date: {{ isDate(info.dateObject) }}
+          typeof dateObject: {{'{{'}} getType(info.dateObject) }}
+          dateObject instanceof Date: {{'{{'}} isDate(info.dateObject) }}
         </pre>
 
         </div>

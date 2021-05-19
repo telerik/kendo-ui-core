@@ -16,7 +16,6 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script>
 
@@ -35,12 +34,31 @@ The [DataSource](/framework/datasource/overview) instance to which the Sheet is 
       var sheet = spreadsheet.activeSheet();
       sheet.setDataSource(dataSource);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(sheet.dataSource);
 
     </script>
-```
 
 ## Methods
+
+### addDrawing
+
+Adds a new drawing to this sheet.
+
+#### Parameters
+
+##### drawing `Object`
+
+This can contain the same properties as you can pass to
+[`sheets.drawings`](/api/javascript/ui/spreadsheet#configuration-sheets.drawings)
+configuration options.
+
+#### Returns
+
+`Object` an internal Drawing object containing the passed properties.  The
+internals of this object are not intended to be public API at this point, but
+you can pass this object reference to [`removeDrawing`](#methods-removeDrawing)
+if you want to remove this drawing.
 
 ### clearFilter
 
@@ -54,7 +72,6 @@ The column index(es)
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -76,7 +93,6 @@ The column index(es)
 
         sheet.clearFilter(1); // the clear filter will remove the applied filter for the second column.
     </script>
-```
 
 ### columnWidth
 
@@ -94,7 +110,6 @@ If passed, the method will set the width of the column at the passed index.
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -106,7 +121,6 @@ If passed, the method will set the width of the column at the passed index.
 
         sheet.columnWidth(1, 100);
     </script>
-```
 
 ### batch
 
@@ -126,7 +140,6 @@ The change event arguments that will be used for the change event triggered afte
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -143,7 +156,6 @@ The change event arguments that will be used for the change event triggered afte
             }
         }, { layout: true });
     </script>
-```
 
 ### deleteColumn
 
@@ -157,7 +169,7 @@ The zero-based index of the column
 
 ##### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -171,7 +183,7 @@ The zero-based index of the column
 
         sheet.deleteColumn(0);
     </script>
-```
+
 ### deleteRow
 
 Deletes the contents of the row at the provided index and shifts the remaining contents of the sheet up.
@@ -182,9 +194,13 @@ Deletes the contents of the row at the provided index and shifts the remaining c
 
 The zero-based index of the row
 
+##### skipDataSourceDelete `Boolean` *optional*
+
+If passed `true`, the method does not delete item from the DataSource.
+
 #### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -198,7 +214,7 @@ The zero-based index of the row
 
         sheet.deleteRow(0);
     </script>
-```
+
 
 ### fromJSON
 
@@ -206,7 +222,7 @@ Loads the sheet from an object in the format defined in the [sheet configuration
 
 > The configuration and cell values will be merged.
 >
-> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet#methods-fromJSON) method.
+> **Note:** the Sheet objects are not resizable.  If you use this method you must make sure that the JSON does not contain more rows or columns than defined when the `Spreadsheet` object has been constructed.  To reload a full spreadsheet from JSON, we recommend using Spreadsheet's [fromJSON](/api/javascript/ui/spreadsheet/methods/fromjson) method.
 
 #### Parameters
 
@@ -292,7 +308,6 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -304,7 +319,6 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
         sheet.frozenColumns(5);
     </script>
-```
 
 ### frozenRows
 
@@ -322,7 +336,6 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -334,7 +347,6 @@ The amount of columns to be frozen. Pass `0` to remove the frozen pane.
 
         sheet.frozenRows(5);
     </script>
-```
 
 ### hideColumn
 
@@ -348,7 +360,6 @@ The zero-based index of the column
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -362,7 +373,6 @@ The zero-based index of the column
 
         sheet.hideColumn(1);
     </script>
-```
 
 ### hideRow
 
@@ -376,7 +386,6 @@ The zero-based index of the row
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -390,7 +399,6 @@ The zero-based index of the row
 
         sheet.hideRow(1);
     </script>
-```
 
 ### insertColumn
 
@@ -404,7 +412,6 @@ The zero-based index of the column
 
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -418,7 +425,6 @@ The zero-based index of the column
 
         sheet.insertColumn(1);
     </script>
-```
 
 ### insertRow
 
@@ -430,9 +436,12 @@ Inserts a new, empty row at the provided index. The contents of the spreadsheet 
 
 The zero-based index of the column
 
+##### skipDataSourceInsert `Boolean` *optional*
+
+If passed `true`, the method does not insert item in the DataSource.
+
 #### Example
 
-```
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -446,7 +455,6 @@ The zero-based index of the column
 
         sheet.insertRow(1);
     </script>
-```
 
 ### range
 
@@ -456,14 +464,24 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
 
 ##### ref `String`
 
-[A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](http://excelribbon.tips.net/T008803_Understanding_R1C1_References.html) reference of the cells.
+##### rowIndex `Number`
+
+##### columnIndex `Number`
+
+##### rowCount `Number` *optional*
+
+##### columnCount `Number` *optional*
+
+If the parameter is a `string`, it should represent an [A1](https://msdn.microsoft.com/en-us/library/bb211395.aspx) or [RC notation](https://excelribbon.tips.net/T008803_Understanding_R1C1_References) reference of the cells.
+
+If the parameters are `Numbers`, the first two would represent the row index (the first parameter) and the column index (the second parameter) of the top-left cell of the `range`. If there are only two parameters, only one cell will be included in the `range`. If the other two `Numbers` are also present, they will represent the number of rows (the third parameter) and number of columns (the forth parameter) that would be included in the `range`, starting from the specified top-left cell. If the third or the forth parameter is set to 0 or 1, only one row / column will be included in the `range`.
 
 #### Returns
 
 `kendo.spreadsheet.Range` a range object, which may be used to manipulate the cell state further.
 
-#### Example
-```
+#### Example - Using string parameter
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -476,7 +494,30 @@ Returns a [Range](/api/javascript/spreadsheet/range) for the given range specifi
         // set contents of the A1:B2 range
         sheet.range("A1:B2").values([ [1, 2], [2, 3] ]);
     </script>
-```
+
+#### Example - Using Number parameters
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet();
+
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+
+        var sheet = spreadsheet.activeSheet();
+
+        // select the B3:C6 range
+        sheet.range(2,1,4,2).select();
+    </script>
+
+### removeDrawing
+
+Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
+
+#### Parameters
+
+##### drawing `Object`
+
+The drawing object.
 
 ### rowHeight
 
@@ -494,7 +535,7 @@ If passed, the method will set the height of the row at the passed index.
 
 #### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -506,7 +547,7 @@ If passed, the method will set the height of the row at the passed index.
 
         sheet.rowHeight(1, 100);
     </script>
-```
+
 
 ### selection
 
@@ -518,7 +559,7 @@ Returns a range with the current active selection.
 
 #### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -532,7 +573,7 @@ Returns a range with the current active selection.
 
         var selection = sheet.selection(); // A1:B2 range
     </script>
-```
+
 
 ### setDataSource
 
@@ -546,7 +587,7 @@ The DataSource instance.
 
 ###### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script>
 
@@ -566,7 +607,7 @@ The DataSource instance.
       sheet.setDataSource(dataSource);
 
     </script>
-```
+
 
 ##### columns `Array` *optional*
 
@@ -574,7 +615,7 @@ Columns configuration.
 
 ###### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script>
 
@@ -594,11 +635,11 @@ Columns configuration.
       sheet.setDataSource(dataSource, [ "ProductName", "UnitPrice" ]);
 
     </script>
-```
+
 
 ###### Example - reorder columns and change column titles
 
-```
+
     <div id="spreadsheet"></div>
     <script>
       var dataSource = new kendo.data.DataSource({
@@ -620,7 +661,7 @@ Columns configuration.
       ]);
 
     </script>
-```
+
 
 ### showGridLines
 
@@ -638,7 +679,7 @@ If passed, the method will toggle the display of the grid lines according to the
 
 #### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
         $("#spreadsheet").kendoSpreadsheet();
@@ -647,7 +688,7 @@ If passed, the method will toggle the display of the grid lines according to the
 
         sheet.showGridLines(false);
     </script>
-```
+
 
 ### toJSON
 Serializes the sheet in the format defined in the [sheet configuration](/api/javascript/ui/spreadsheet#configuration.sheets).
@@ -693,7 +734,7 @@ The zero-based index of the column
 
 #### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -708,7 +749,7 @@ The zero-based index of the column
         sheet.hideColumn(1);
         sheet.unhideColumn(1); // reverts upper call
     </script>
-```
+
 
 ### unhideRow
 
@@ -722,7 +763,7 @@ The zero-based index of the row
 
 #### Example
 
-```
+
     <div id="spreadsheet"></div>
     <script type="text/javascript" charset="utf-8">
 
@@ -737,7 +778,7 @@ The zero-based index of the row
         sheet.hideRow(1);
         sheet.unhideRow(1); // reverts upper call
     </script>
-```
+
 
 ## Events
 
@@ -753,7 +794,7 @@ The sheet instance.
 
 #### Example - subscribe to the "change" event during initialization
 
-```
+
     <div id="spreadsheet"></div>
     <script>
         $("#spreadsheet").kendoSpreadsheet();
@@ -763,9 +804,10 @@ The sheet instance.
         var sheet = spreadsheet.activeSheet();
 
         sheet.bind("change", function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("sheet state changed");
         });
 
         sheet.range("A1:B2").values([ [1, 2], [2, 3] ]);
     </script>
-```
+

@@ -11,9 +11,9 @@ function getRootItem(index) {
 var menu, isRaised,
     CLICK = "click";
 
-module("menu events", {
-    setup: function () {
-        QUnit.fixture.append(
+describe("menu events", function () {
+    beforeEach(function () {
+        Mocha.fixture.append(
 '            <ul id="menu" style="position: absolute; visibility: hidden;">' +
 '                <li>ASP.NET MVC' +
 '                    <ul>' +
@@ -85,26 +85,25 @@ module("menu events", {
 '            </ul>'
         );
         menu = new kendo.ui.Menu("#menu", { animation: false, select: onSelect, hoverDelay: 0 });
-    },
-    teardown: function() {
-        kendo.destroy(QUnit.fixture);
-    }
-});
+    });
+    afterEach(function() {
+        kendo.destroy(Mocha.fixture);
+    });
 
-asyncTest("close event can be canceled", 1, function() {
+it("close event can be canceled", function(done) {
     menu.bind("close", function (e) { e.preventDefault(); });
 
     menu.bind("activate", function() {
         menu.close(menu.element.children("li:eq(2)"));
-        equal(menu.element.find(">li:eq(2) ul").is(":visible"), true);
-        start();
+        assert.equal(menu.element.find(">li:eq(2) ul").is(":visible"), true);
+        done();
     });
 
     menu.open(menu.element.children("li:eq(2)"));
 });
 
 
-asyncTest("activate event is fired after open", 1, function() {
+it("activate event is fired after open", function(done) {
     menu.unbind("open");
     var activated = false;
 
@@ -115,13 +114,13 @@ asyncTest("activate event is fired after open", 1, function() {
     menu.open(menu.element.children("li:eq(1)"));
 
     setTimeout(function () {
-        equal(activated, true);
-        start();
+        assert.equal(activated, true);
+        done();
     }, 10);
 });
 
 
-test("element select is triggered when menu element is clicked", function() {
+it("element select is triggered when menu element is clicked", function() {
     var item = getRootItem(0),
         triggerCount = 0;
 
@@ -131,33 +130,33 @@ test("element select is triggered when menu element is clicked", function() {
 
     item.trigger(CLICK);
 
-    equal(triggerCount, 1);
+    assert.equal(triggerCount, 1);
 });
 
 
-test('clicking disabled item should not raise onSelect event on parent item', function() {
+it('clicking disabled item should not raise onSelect event on parent item', function() {
     var item = getRootItem(1);
 
     isRaised = false;
 
     item.find('.k-item > .k-link').eq(3).trigger('click');
 
-    ok(!isRaised);
+    assert.isOk(!isRaised);
 });
 
-asyncTest("open event can be canceled", 1, function() {
+it("open event can be canceled", function(done) {
     menu.bind("open", function (e) { e.preventDefault(); });
     menu.open(menu.element.children("li:first"));
 
     setTimeout(function () {
-        equal(menu.element.find(">li:first ul").is(":visible"), false);
-        start();
+        assert.equal(menu.element.find(">li:first ul").is(":visible"), false);
+        done();
     }, 10);
 });
 
 
-test("item select is triggered when items are loaded via dataSource", function() {
-    var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(QUnit.fixture);
+it("item select is triggered when items are loaded via dataSource", function() {
+    var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(Mocha.fixture);
     var selectCount = 0;
     var raiseCount = function () {
         selectCount++;
@@ -182,19 +181,25 @@ test("item select is triggered when items are loaded via dataSource", function()
             }
         ]
     });
+
+
+
     var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
+
+    dataBoundMenu.dataSource.view()[0].load();
+    dataBoundMenu.dataSource.view()[0].items[0].load();
 
     var items = $('.k-item', dataBoundMenu.element);
     items.each(function() {
         $(this).children(".k-link").trigger(CLICK);
     });
 
-    equal(selectCount, 3);
+    assert.equal(selectCount, 3);
     dataBoundMenu.destroy();
     menuDiv.remove();
 });
 
-test("item select is triggered when items are loaded via append", function() {
+it("item select is triggered when items are loaded via append", function() {
     var selectCount = 0;
     menu.append([
         {
@@ -207,10 +212,10 @@ test("item select is triggered when items are loaded via append", function() {
 
     $('.k-item', menu.element).last().children(".k-link").trigger(CLICK);
 
-    equal(selectCount, 1);
+    assert.equal(selectCount, 1);
 });
 
-test("item select is triggered when items are loaded via insertAfter", function() {
+it("item select is triggered when items are loaded via insertAfter", function() {
     var selectCount = 0;
     menu.insertAfter(
         [{
@@ -224,10 +229,10 @@ test("item select is triggered when items are loaded via insertAfter", function(
 
     $('.k-item', menu.element).last().children(".k-link").trigger(CLICK);
 
-    equal(selectCount, 1);
+    assert.equal(selectCount, 1);
 });
 
-test("item select is triggered when items are loaded via insertBefore", function() {
+it("item select is triggered when items are loaded via insertBefore", function() {
     var selectCount = 0;
     menu.insertBefore(
         [{
@@ -241,10 +246,10 @@ test("item select is triggered when items are loaded via insertBefore", function
 
     $('.k-item', menu.element).first().children(".k-link").trigger(CLICK);
 
-    equal(selectCount, 1);
+    assert.equal(selectCount, 1);
 });
 
-test("item select is triggered when item content is clicked", function() {
+it("item select is triggered when item content is clicked", function() {
     var selectCount = 0;
     menu.insertAfter(
         [{
@@ -259,7 +264,45 @@ test("item select is triggered when item content is clicked", function() {
 
     $('.k-item', menu.element).last().find("b").trigger(CLICK);
 
-    equal(selectCount, 1);
+    assert.equal(selectCount, 1);
 });
 
-})();
+it("dataBound event", function() {
+    var menuDiv = $("<div id='dataBoundMenu'></div>").appendTo(Mocha.fixture);
+    var selectCount = 0;
+    var raiseCount = function () {
+        selectCount++;
+    };
+    $("#dataBoundMenu").kendoMenu({
+        dataSource: [
+            {
+                text: "Item 1",
+                items: [
+                    {
+                        text: "Item 2",
+                        items: [
+                            {
+                                text: "Item 3",
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        dataBound: raiseCount
+    });
+
+
+
+    var dataBoundMenu = $("#dataBoundMenu").data("kendoMenu");
+
+    dataBoundMenu.dataSource.view()[0].load();
+    dataBoundMenu.dataSource.view()[0].items[0].load();
+
+    assert.equal(selectCount, 3);
+    dataBoundMenu.destroy();
+    menuDiv.remove();
+});
+
+    });
+}());

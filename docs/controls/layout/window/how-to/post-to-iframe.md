@@ -9,9 +9,9 @@ slug: howto_posttoiframe_window
 
 The example below demonstrates how to post to the iframe content of the Kendo UI Window.
 
-###### Example
 
-```html
+
+```dojo
     <button id="refresh" class="k-button k-primary">Post content to iframe</button>
 
     <script>
@@ -43,8 +43,6 @@ The example below demonstrates how to post to the iframe content of the Kendo UI
 ```
 
 ## See Also
-
-Other articles and how-to examples on the Kendo UI Window:
 
 * [Window JavaScript API Reference](/api/javascript/ui/window)
 * [How to Add Auto-Resizing Splitter]({% slug howto_addautoresizingsplitter_window %})

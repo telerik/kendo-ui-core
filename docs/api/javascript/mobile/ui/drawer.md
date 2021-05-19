@@ -3,6 +3,7 @@ title: Drawer
 page_title: Configuration, methods and events of Kendo UI Mobile Drawer
 description: Set direction of the Kendo UI Mobile Drawer container, use methods to show and hide it.
 res_type: api
+component: drawer
 ---
 
 # kendo.mobile.ui.Drawer
@@ -254,6 +255,7 @@ Fired after the mobile Drawer has been hidden.
     new kendo.mobile.Application();
 
     function onAfterHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
     }
     </script>
@@ -304,6 +306,7 @@ Fired when the mobile Drawer is closed by the user.
     new kendo.mobile.Application();
 
     function onHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
     }
     </script>
@@ -332,6 +335,7 @@ Fired when the mobile Drawer and its child widgets are initialized.
     new kendo.mobile.Application();
 
     function onInit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
     }
     </script>
@@ -360,6 +364,7 @@ Fires when the Drawer is shown.
     new kendo.mobile.Application();
 
     function onShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e);
     }
     </script>
@@ -390,6 +395,7 @@ Holds information about the current state of the Drawer. If it is currently open
     new kendo.mobile.Application();
     function onShow(){
         var isVisible = $('#my-drawer').getKendoMobileDrawer().visible;
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(isVisible); //will output false
     }
     </script>

@@ -10,9 +10,9 @@ slug: howto_clear_filter_open_combobox
 
 The following example demonstrates how to clear the filter of the Kendo UI ComboBox on opening the widget.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>
@@ -32,7 +32,7 @@ The following example demonstrates how to clear the filter of the Kendo UI Combo
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             }
           },

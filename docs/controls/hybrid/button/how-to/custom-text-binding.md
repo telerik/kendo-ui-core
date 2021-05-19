@@ -9,9 +9,9 @@ slug: howto_configuretextbinding_hybridactionsheet
 
 The example below demonstrates how to configure text binding for the Hybrid UI Button in Kendo UI.
 
-###### Example
 
-```html
+
+```dojo
 <div data-role="view" id="view" data-model="viewModel">
   <a data-role="button" data-bind="buttonText: value">Button</a>
 </div>
@@ -38,8 +38,6 @@ The example below demonstrates how to configure text binding for the Hybrid UI B
 ```
 
 ## See Also
-
-Other articles on the Hybrid UI Button:
 
 * [Hybrid UI Button JavaScript API Reference](/api/javascript/mobile/ui/button)
 * [Overview of the Hybrid UI Button]({% slug overview_hybridbutton %})

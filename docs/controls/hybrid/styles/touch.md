@@ -5,6 +5,7 @@ description: "Handle user-initiated touch events in the Hybrid UI framework of K
 previous_url: /controls/hybrid/touch
 slug: touchevents_hybridkendoui
 position: 4
+component: touch
 ---
 
 # Touch Events
@@ -17,7 +18,7 @@ The Kendo UI Hybrid Application widget automatically initializes a Touch compone
 
 ### Handle Element Touch Events
 
-###### Example
+
 
     <div data-role="view">
         <div data-role="touch" data-tap="onTap">
@@ -33,7 +34,7 @@ The Kendo UI Hybrid Application widget automatically initializes a Touch compone
 
 ### Initialize the Touch Component
 
-###### Example
+
 
     <div data-role="view" data-init="initTouch">
         <div id="touch-surface">
@@ -109,8 +110,6 @@ For a detailed description of each event, see the [`touch` API reference section
 > Multi-touch gestures work only on platforms that support `multitouch` (iOS 4+, Android 4+). Currently, only two finger gestures are supported, as the majority of the available mobile platforms usually have system-wide actions attached to three-finger gestures.
 
 ## See Also
-
-Other articles related to the appearance and styling of Kendo UI hybrid distribution:
 
 * [Style the Hybrid UI Form Elements]({% slug forms_hybridkendoui %})
 * [Apply CSS]({% slug styling_hybridkendoui %})

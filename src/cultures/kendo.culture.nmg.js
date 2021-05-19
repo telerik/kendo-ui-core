@@ -37,8 +37,8 @@
                     names: ["ngwɛn matáhra","ngwɛn ńmba","ngwɛn ńlal","ngwɛn ńna","ngwɛn ńtan","ngwɛn ńtuó","ngwɛn hɛmbuɛrí","ngwɛn lɔmbi","ngwɛn rɛbvuâ","ngwɛn wum","ngwɛn wum navǔr","krísimin"],
                     namesAbbr: ["ng1","ng2","ng3","ng4","ng5","ng6","ng7","ng8","ng9","ng10","ng11","kris"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["maná","maná","MANÁ"],
+                PM: ["kugú","kugú","KUGÚ"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd d MMMM yyyy",

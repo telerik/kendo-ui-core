@@ -93,12 +93,12 @@ The `id` of the parent task. Required for child tasks.
         parentId: 1,
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
-    });    
+    });
     </script>
 
 ### percentComplete `String|Number|Object` *(default: 0)*
 
-The completion percentage of the task. A value between 0 and 1, representing how much of a task is completed.
+The completion percentage of the task. A value between 0 and 1 representing how much of a task is completed.
 
 #### Example - set the percentComplete of a task
 
@@ -107,6 +107,40 @@ The completion percentage of the task. A value between 0 and 1, representing how
         id: 1,
         title: "Parent",
         percentComplete: 0.55,
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+    });
+    </script>
+
+### plannedEnd `Date`
+
+The date at which the Gantt task ends as per the planned schedule. The `plannedEnd` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+
+#### Example - set the plannedEnd date of a task
+
+    <script>
+    var task = new kendo.data.GanttTask({
+        id: 1,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 10:00"),
+        start: new Date("2014/6/17 9:00"),
+        end: new Date("2014/6/17 11:00")
+    });
+    </script>
+
+### plannedStart `Date`
+
+The date at which the Gantt task starts as per the planned schedule. The `plannedStart` date is mandatory when rendering the [Planned vs Actual](/api/javascript/ui/gantt/configuration/showplannedtasks) view in the Gantt.
+
+#### Example - set the plannedStart date of a task
+
+    <script>
+    var task = new kendo.data.GanttTask({
+        id: 1,
+        title: "Task1",
+        plannedStart: new Date("2014/6/17 9:00"),
+        plannedEnd: new Date("2014/6/17 10:00"),
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
@@ -131,7 +165,7 @@ The date at which the Gantt task starts. The `start` date is mandatory.
 
 If set to `true`, the task has child tasks.
 
-#### Example - create summary task
+#### Example - create a summary task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -173,6 +207,7 @@ The date at which the Gantt task ends.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.end); // outputs the end date
     </script>
 
@@ -180,7 +215,7 @@ The date at which the Gantt task ends.
 
 If set to `true`, the task is expanded and the tasks of its child are visible.
 
-#### Example - get the task expanded field
+#### Example - get the expanded field of a task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -190,6 +225,7 @@ If set to `true`, the task is expanded and the tasks of its child are visible.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.expanded); // outputs "false"
     </script>
 
@@ -197,7 +233,7 @@ If set to `true`, the task is expanded and the tasks of its child are visible.
 
 The unique identifier of the task.
 
-#### Example - get the task id
+#### Example - get the id of a task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -206,6 +242,7 @@ The unique identifier of the task.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.id); // outputs "1"
     </script>
 
@@ -213,7 +250,7 @@ The unique identifier of the task.
 
 The position of the task relative to its sibling tasks.
 
-#### Example - get the task orderId field
+#### Example - get the orderId field of a task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -223,6 +260,7 @@ The position of the task relative to its sibling tasks.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.orderId); // outputs "0"
     </script>
 
@@ -230,7 +268,7 @@ The position of the task relative to its sibling tasks.
 
 The `id` of the parent task.
 
-#### Example - get the task parentId field
+#### Example - get the parentId field of a task
 
     <script>
     var parent = new kendo.data.GanttTask({
@@ -247,6 +285,7 @@ The `id` of the parent task.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.parentId); // outputs "1"
     </script>
 
@@ -254,7 +293,7 @@ The `id` of the parent task.
 
 The completion percentage of the task.
 
-#### Example - get the task percentComplete field
+#### Example - get the percentComplete field of a task
 
     <script>
     var parent = new kendo.data.GanttTask({
@@ -264,6 +303,7 @@ The completion percentage of the task.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.percentComplete); // outputs "0.55"
     </script>
 
@@ -280,6 +320,7 @@ The date at which the Gantt task starts.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.start); // outputs the start date
     </script>
 
@@ -297,6 +338,7 @@ If set to `true`, the task has child tasks.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.summary); // outputs "true"
     </script>
 
@@ -313,6 +355,7 @@ The title of the task which is displayed by the Gantt widget.
         start: new Date("2014/6/17 9:00"),
         end: new Date("2014/6/17 11:00")
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.title); // outputs "Task1"
     </script>
 
@@ -320,7 +363,7 @@ The title of the task which is displayed by the Gantt widget.
 
 See the [Model methods](/api/framework/model#methods) for all inherited methods.
 
-### GanttTask.define
+### define
 
 Defines a new `GanttTask` type using the provided options.
 
@@ -332,7 +375,7 @@ Describes the configuration options of the new Gantt task class.
 
 ##### options.id `String`
 
-The name of the field which acts as an identifier of the Gantt task. The identifier is used to determine if a model instance is new or existing one. If the value of the field specified is equal to the default value (specified through the `fields` configuration), the model is considered as new.
+The name of the field which acts as an identifier of the Gantt task. The identifier is used to determine if a model instance is new or existing. If the value of the field specified is equal to the default value (specified through the `fields` configuration), the model is considered as new.
 
 ##### options.fields `Object`
 
@@ -340,7 +383,7 @@ A set of key/value pairs the configure the model fields. The key specifies the n
 
 ##### options.fields.fieldName.defaultValue
 
-Specifies the which will be used for the field when a new model instance is created. The default settings depend on the type of the field.
+Specifies the value which will be used for the field when a new model instance is created. The default settings depend on the type of the field.
 
 The default for:
 
@@ -350,11 +393,11 @@ The default for:
 
 ##### options.fields.fieldName.editable `Boolean`
 
-Specifies if the field is editable or not. The default value is `true`.
+Specifies if the field is editable or not. Defaults to `true`.
 
 ##### options.fields.fieldName.nullable `Boolean`
 
-Specifies if the `defaultValue` setting should be used. The default is `false`.
+Specifies if the `defaultValue` setting should be used. Defaults to `false`.
 
 ##### options.fields.fieldName.parse `Function`
 
@@ -366,18 +409,16 @@ Specifies the type of the field.
 
 The available options are:
 
-* `"string"`
+* (Default) `"string"`
 * `"number"`
 * `"boolean"`
 * `"date`"
-
-The default is `"string"`.
 
 ##### options.fields.fieldName.validation `Object`
 
 Specifies the validation options which will be used by the [Kendo Validator](/api/framework/validator).
 
-#### Example - define custom Gantt task
+#### Example - define a custom Gantt task
 
     var Task = kendo.data.GanttTask.define({
         id: "id",
@@ -400,9 +441,9 @@ Returns the Gantt task length in milliseconds.
 
 #### Returns
 
-`Number` the length of the task.
+`Number`&mdash;The length of the task.
 
-#### Example - get length of the task
+#### Example - get the length of the task
 
     <script>
     var task = new kendo.data.GanttTask({
@@ -412,6 +453,7 @@ Returns the Gantt task length in milliseconds.
         end: new Date("2014/6/17 11:00")
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.duration());
     </script>
 
@@ -421,7 +463,7 @@ Checks whether the event has zero duration.
 
 #### Returns
 
-`Boolean` return `true` if the task start is equal to the task end.
+`Boolean`&mdash;Returns `true` if the task start is equal to the task end.
 
 #### Example - check whether the task is a milestone
 
@@ -433,6 +475,7 @@ Checks whether the event has zero duration.
         end: new Date("2014/6/17 9:00")
     });
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(task.isMilestone()); //logs 'true'
     </script>
 

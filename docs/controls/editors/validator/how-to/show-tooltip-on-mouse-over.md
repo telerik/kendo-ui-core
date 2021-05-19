@@ -10,9 +10,7 @@ slug: howto_showtooltiponmouseover_validator
 
 The following example demonstrates how to show the validation tooltip in Kendo UI only when you move the mouse cursor over the input that failed to validate.
 
-#### Example:
-
-```html
+```dojo
     <style scoped>
       .k-invalid-msg
       {
@@ -119,7 +117,7 @@ The following example demonstrates how to show the validation tooltip in Kendo U
 
       <script>
         $(document).ready(function() {
-          var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-validation"' +
+          var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-error"' +
               'style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
               '#=message#<div class="k-callout k-callout-n"></div></div>'
 
@@ -159,7 +157,7 @@ The following example demonstrates how to show the validation tooltip in Kendo U
 
           var elements = $("#tickets").find("[data-role=autocomplete],[data-role=combobox],[data-role=dropdownlist],[data-role=numerictextbox]");
 
-          //correct mutation event detection
+          // A correct mutation of the event detection.
           var hasMutationEvents = ("MutationEvent" in window),
               MutationObserver = window.WebKitMutationObserver || window.MutationObserver;
 
@@ -203,9 +201,5 @@ The following example demonstrates how to show the validation tooltip in Kendo U
 
 ## See Also
 
-* [Validator JavaScript API Reference](/api/javascript/ui/validator)
-* [How to Use Use MutationObserver to Add Red Border and Hide Tooltip]({% slug howto_usemutationobserver_addborderandhidetooltip_validator %})
-* [How to Use Templates to Customize Tooltips]({% slug howto_usetemplatestocustomizetooltips_validator %})
-* [How to Validate Radio Buttons with Only One Error Message]({% slug howto_validateradiowithonemessage_validator %})
-
-For more runnable examples on the Kendo UI Validator widget, browse its [**How To** documentation folder]({% slug howto_addredborderandhidetooltip_validator %}).
+* [Basic Usage of the Validator (Demo)](https://demos.telerik.com/kendo-ui/validator/index)
+* [JavaScript API Reference of the Validator](/api/javascript/ui/validator)

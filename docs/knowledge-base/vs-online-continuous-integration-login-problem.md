@@ -59,7 +59,7 @@ The reason for this problem might be related to the known [https://github.com/do
 To apply the described approach, reset the `Nuget.config` file and use the `nuget restore` command:
 
 1. Delete the `NuGet.config` file `%AppData%\\NuGet\\`  
-1. Go through the procedure of storing the Telerik credentials once again and decide whether your assumption regarding the NuGet package is correct or the [Telerik.UI.for.AspNet.Core NuGet feed](http://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#use-the-telerik-private-nuget-feed) is needed.  
+1. Go through the procedure of storing the Telerik credentials once again and decide whether your assumption regarding the NuGet package is correct or the [Telerik.UI.for.AspNet.Core NuGet feed](https://docs.telerik.com/aspnet-mvc/getting-started/nuget-install#use-the-telerik-private-nuget-feed) is needed.  
 1. Use the `nuget restore` instead of `dotnet restore` command.  
 
 ## Workaround #2

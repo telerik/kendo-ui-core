@@ -2,11 +2,12 @@
 title: Show Popup next to a Custom Cell Editor in Spreadsheet
 description: An example on how to display a popup next to a custom cell editor in a Kendo UI Spreadsheet.
 type: how-to
-page_title: Show Custom Cell Editor with a Kendo UI Popup | Kendo UI Spreadsheet
+page_title: Show Custom Cell Editor with a Kendo UI Popup | Kendo UI Spreadsheet for jQuery
 slug: spreadsheet-custom-cell-editor-popup
 tags: spreadsheet, custom, editor, cell, popup
 ticketid: 1115323
 res_type: kb
+component: spreadsheet
 ---
 
 ## Environment
@@ -14,7 +15,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Spreadsheet for Progress Kendo UI</td>
+  <td>Progress Kendo UI Spreadsheet</td>
  </tr>
 </table>
 
@@ -26,7 +27,7 @@ I want to show the editor to the side of the selected Spreadsheet cell and make 
 
 The following example demonstrates how to implement this scenario.
 
-```html
+```dojo
     <!DOCTYPE html>
     <html>
         <head>

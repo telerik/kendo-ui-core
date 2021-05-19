@@ -3,21 +3,44 @@
 @background: #fff;
 
 @border-radius: 4px;
+@icon-size: 16px;
 
 @normal-background: #fff;
 @normal-text-color: #2e2e2e;
-@normal-gradient: "rgba(255,255,255,.6) 0%, rgba(255,255,255,.0) 100%";
+@normal-gradient: "rgba(255,255,255,.25) 0%, rgba(255,255,255,.0) 100%";
 @hover-background: #bcb4b0;
 @hover-text-color: #2e2e2e;
-@hover-gradient: "rgba(255,255,255,.4) 0%, rgba(255,255,255,.0) 100%";
+@hover-gradient: "rgba(255,255,255,.25) 0%, rgba(255,255,255,.0) 100%";
 @selected-background: #f35800;
 @selected-text-color: #fff;
-@selected-gradient: "rgba(255,255,255,.2) 0%, rgba(255,255,255,.0) 100%";
+@selected-gradient: "rgba(255,255,255,.15) 0%, rgba(255,255,255,.0) 100%";
 
-@error: #db4240;
-@warning: #ffc000;
-@success: #37b400;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #a0a700;
 @info: #0066cc;
+@success: #37b400;
+@warning: #ffc000;
+@error: #db4240;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #ff6800;
 @series-b: #a0a700;

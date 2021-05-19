@@ -5,6 +5,8 @@ res_type: api
 
 # kendo.View
 
+The View class instantiates and handles the events of a certain screen from the application.
+
 ## Configuration
 
 ### evalTemplate `Boolean`*(default: false)*
@@ -60,6 +62,7 @@ If set to `false`, the view will not wrap its contents in a root element. In tha
     <script>
     var view = new kendo.View('<div id="foo"></div>', { wrap: false });
     view.render($("#app"));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(view.element.attr('id')) // foo
     </script>
 
@@ -123,6 +126,7 @@ Fires when the View is replaced in a layout placeholder.
     <div id="app"></div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     var foo = new kendo.View("<span>Foo</span>", { hide: function() { console.log("Foo is hidden now"); }});
     var bar = new kendo.View("<span>Bar</span>");
 
@@ -143,6 +147,7 @@ Fires the first time the view renders.
     <div id="app"></div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     var view = new kendo.View("Hi!", { init: function() { console.log("View is initiated"); } });
     view.render($("#app"));
     </script>
@@ -156,13 +161,14 @@ Fires after the View is rendered (either by calling `render`, or by being render
     <div id="app"></div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     var view = new kendo.View("Hi!", { show: function() { console.log("View is rendered") } });
     view.render($("#app"));
     </script>
 
 ### transitionStart
 
-Fires when the view transition starts. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](layout#methods-showIn) method.
+Fires when the view transition starts. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/javascript/layout#methods-showIn) method.
 
 #### Example
 
@@ -170,6 +176,7 @@ Fires when the view transition starts. The `type` event data is set to either `"
 
     <script>
     var foo = new kendo.View("<span>Foo</span>");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     var bar = new kendo.View("<span>Bar</span>", { transitionStart: function() { console.log(e) }});
 
     var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer></footer>");
@@ -182,7 +189,7 @@ Fires when the view transition starts. The `type` event data is set to either `"
 
 ### transitionEnd
 
-Fires after the view transition container has its `k-fx-end` class set. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](layout#methods-showIn) method.
+Fires after the view transition container has its `k-fx-end` class set. The `type` event data is set to either `"show"` or `"hide"`. For more details on view Transitions check the [layout showIn](/api/javascript/layout#methods-showIn) method.
 
 #### Example
 
@@ -190,6 +197,7 @@ Fires after the view transition container has its `k-fx-end` class set. The `typ
 
     <script>
     var foo = new kendo.View("<span>Foo</span>");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     var bar = new kendo.View("<span>Bar</span>", { transitionEnd: function() { console.log(e) }});
 
     var layout = new kendo.Layout("<header>Header</header><section id='content'></section><footer></footer>");

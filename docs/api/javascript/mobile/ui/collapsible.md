@@ -3,6 +3,7 @@ title: Collapsible
 page_title: Configuration, methods and events of Kendo UI Mobile Collapsible widget
 description: Configuration, methods and events of Kendo UI Mobile Collapsible widget.
 res_type: api
+component: collapsible
 ---
 
 # kendo.mobile.ui.Collapsible
@@ -66,7 +67,7 @@ Sets the icon for the header of the collapsible widget when it is in a collapsed
     <style>
         /*
             define custom icon names, full list of available icons can be found at:
-            http://docs.telerik.com/kendo-ui/mobile/icons
+            https://docs.telerik.com/kendo-ui/mobile/icons
         */
         .km-arrow-up:after,
         .km-arrow-up:before {
@@ -99,7 +100,7 @@ Sets the icon for the header of the collapsible widget when it is in a expanded 
     <style>
         /*
             define custom icon names, full list of available icons can be found at:
-            http://docs.telerik.com/kendo-ui/mobile/icons
+            https://docs.telerik.com/kendo-ui/mobile/icons
         */
         .km-arrow-up:after,
         .km-arrow-up:before {
@@ -297,6 +298,7 @@ Fires when the user collapses the content.
         var app = new kendo.mobile.Application();
 
         function collapseHandler() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand");
         }
     </script>
@@ -318,6 +320,7 @@ Fires when the user expands the content.
         var app = new kendo.mobile.Application();
 
         function expandHandler() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand");
         }
     </script>

@@ -3,6 +3,7 @@ title: LinearGauge
 page_title: Configuration, methods and events of Kendo UI DataViz LinearGauge
 description: Manipulate the configuration options of linear gauge, change the border of the gauge area and its color, learn how to use methods.
 res_type: api
+component: gauges
 ---
 
 # kendo.dataviz.ui.LinearGauge
@@ -14,9 +15,9 @@ res_type: api
 The gauge area configuration options.
 This is the entire visible area of the gauge.
 
-### gaugeArea.background `Object`*(default: "white")*
+### gaugeArea.background `String`*(default: "white")*
 
- The background of the gauge area.
+The background of the gauge area.
 Any valid CSS color string will work here, including hex and rgb.
 
 ### gaugeArea.border `Object`
@@ -108,6 +109,7 @@ horizontal gauge is 200px.
 The pointer configuration options. It accepts an `Array` of pointers, each with it's own configuration options.
 
 #### Example - specify single pointer
+
     <div id="gauge"></div>
     <script>
 	  $("#gauge").kendoLinearGauge({
@@ -115,9 +117,10 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
           value: 40
         }
       });
-    <script>
+    </script>
 
 #### Example - specify multiple pointers
+
 	<div id="gauge"></div>
     <script>
 	  $("#gauge").kendoLinearGauge({
@@ -127,7 +130,7 @@ The pointer configuration options. It accepts an `Array` of pointers, each with 
           value: 40
         }]
       });
-    <script>
+    </script>
 
 ### pointer.border `Object`
 
@@ -195,7 +198,6 @@ The color of the pointer.
 ### pointer.opacity `Number`*(default: 1)*
 
  The opacity of the pointer.
-Any valid CSS color string will work here, including hex and rgb.
 
 ### pointer.shape `String`
 
@@ -430,14 +432,17 @@ The format of the labels.
 
 #### Example
 
+    <div id="linear-gauge"></div>
+    <script>
     $("#linear-gauge").kendoLinearGauge({
         scale: {
-           labels: {
-               // set the format to currency
-               format: "C"
-           }
+            labels: {
+                // set the format to currency
+                format: "C"
+            }
         }
     });
+    </script>
 
 ### scale.labels.margin `Number|Object`*(default: 5)*
 
@@ -498,15 +503,18 @@ Template variables:
 
 #### Example
 
-    // chart initialization
+    <div id="linear-gauge"></div>
+    <script>
+      // gauge initialization
     $("#linear-gauge").kendoLinearGauge({
-         scale: {
-             labels: {
-                 // labels template
-                 template: "#= value #%"
-             }
-         }
+        scale: {
+            labels: {
+                // labels template
+                template: "#= value #%"
+            }
+        }
     });
+    </script>
 
 ### scale.labels.visible `Boolean`*(default: true)*
 
@@ -583,15 +591,18 @@ The ranges of the scale.
 
 #### Example
 
-    $("#linear-gauge").kendoLinearGauge({
-        scale: {
+    <div id="linear-gauge"></div>
+    <script>
+        $("#linear-gauge").kendoLinearGauge({
+          scale: {
             ranges: [{
-                from: 10,
-                to: 20,
-                color: "green"
+              from: 10,
+              to: 20,
+              color: "green"
             }]
-        }
-     });
+          }
+        });
+    </script>
 
 ### scale.ranges.from `Number`
 
@@ -626,6 +637,25 @@ Reverses the axis direction - values increase from right to left and from top to
 
 The position of the gauge.
 
+### theme `String`
+
+The gauge theme. This can be either a built-in theme or "sass".
+When set to "sass" the chart will read the variables from the [Sass-based themes]({% slug sassbasedthemes_kendoui %}).
+
+The supported values are:
+
+* "sass" - special value, see notes
+* "black"
+* "blueopal"
+* "bootstrap"
+* "default"
+* "highcontrast"
+* "metro"
+* "metroblack"
+* "moonlight"
+* "silver"
+* "uniform"
+
 ### transitions `Boolean`*(default: true)*
 
 A value indicating if transition animations should be played.
@@ -647,32 +677,32 @@ An array of values to be set.
 #### Example - setting multiple values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoLinearGauge({
+	$("#gauge").kendoLinearGauge({
         pointer: [{
-          value: 20
+            value: 20
         }, {
-          value: 40
+            value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoLinearGauge");
-      gauge.allValues([60, 10]);
-    <script>
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    gauge.allValues([60, 10]);
+    </script>
 
 #### Example - retrieving all values
     <div id="gauge"></div>
     <script>
-	  $("#gauge").kendoLinearGauge({
+	$("#gauge").kendoLinearGauge({
         pointer: [{
-          value: 20
+            value: 20
         }, {
-          value: 40
+            value: 40
         }]
-      });
+    });
 
-      var gauge = $("#gauge").data("kendoLinearGauge");
-      var allValues = gauge.allValues();
-    <script>
+    var gauge = $("#gauge").data("kendoLinearGauge");
+    var allValues = gauge.allValues();
+    </script>
 
 ### destroy
 
@@ -682,9 +712,9 @@ Detaches event handlers and removes data entries in order to avoid memory leaks.
 
 ### exportImage
 Exports the Gauge as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -702,6 +732,7 @@ The height of the exported image. Defaults to the Gauge height.
 `Promise` A promise that will be resolved with a PNG image encoded as a Data URI.
 
 #### Example - Exporting a Gauge to an image
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -723,12 +754,11 @@ The height of the exported image. Defaults to the Gauge height.
         });
     </script>
 
-
 ### exportPDF
 Exports the Gauge as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -740,6 +770,7 @@ Parameters for the exported PDF file.
 `Promise` A promise that will be resolved with a PDF file encoded as a Data URI.
 
 #### Example - Exporting a chart to a PDF file
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -764,9 +795,9 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the Gauge as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -781,6 +812,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 `Promise` A promise that will be resolved with a SVG document encoded as a Data URI.
 
 #### Example - Exporting a chart to an SVG document
+
     <div id="gauge"></div>
     <script>
         $("#gauge").kendoLinearGauge({
@@ -845,15 +877,38 @@ Adjusts the widget layout to match the size of the container.
 
 Defines whether the widget should proceed with resizing even if the element dimensions have not changed.
 
+### setOptions
+
+Sets the current gauge options.
+
+#### Parameters
+
+##### options `Object`
+
+The gauge settings to update.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+    $("#gauge").kendoLinearGauge({
+        pointer: [{
+            value: 20
+        }]
+    });
+
+    $("#gauge").data("kendoLinearGauge").setOptions({ theme: 'metro' });
+    </script>
+
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the gauge.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the gauge.
 The returned string is a self-contained SVG document that can be used as is or
-converted to other formats using tools like [Inkscape](http://inkscape.org/) and
-[ImageMagick](http://www.imagemagick.org/).
+converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/lineargauge/methods/exportsvg), but will remain fully functional.
 
 #### Example
 
@@ -870,6 +925,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var gauge = $("#gauge").data("kendoLinearGauge");
     var svg = gauge.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -877,7 +933,7 @@ Both programs provide command-line interface suitable for server-side processing
 
 Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is obsoleted and replaced by [exportImage](#methods-exportImage), but will remain fully functional.
+> This method is obsoleted and replaced by [exportImage](/api/javascript/dataviz/ui/lineargauge/methods/exportimage), but will remain fully functional.
 
 #### Returns
 
@@ -910,7 +966,7 @@ Returns a PNG image of the gauge encoded as a [Data URL](https://developer.mozil
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);

@@ -24,7 +24,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 2** Create a data source and configure it.
 
-###### Example
+
 
         <?php
         $transport = new \Kendo\Data\DataSourceTransport();
@@ -63,7 +63,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 3** Create an Chart, configure its `series` option and set its data source.
 
-###### Example
+
 
         <?php
         $chart = new \Kendo\Dataviz\UI\Chart('chart');
@@ -81,7 +81,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 **Step 4** Output the Chart by echoing the result of the `render` method.
 
-###### Example
+
 
         <?php
         echo $chart->render();
@@ -95,7 +95,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 2** Create a PDO connection.
 
-###### Example
+
 
         <?php
         $db = new PDO('sqlite:../sample.db');
@@ -103,7 +103,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 3** Retrieve all records from the **Weather** table.
 
-###### Example
+
 
         <?php
         $statement = $db->prepare('SELECT Date, TMax FROM Weather LIMIT 10');
@@ -113,7 +113,7 @@ Below are listed the steps for you to follow when creating a PHP file which retu
 
 **Step 4** Return the records as JSON.
 
-###### Example
+
 
         <?php
         // Set response content type
@@ -124,8 +124,6 @@ Below are listed the steps for you to follow when creating a PHP file which retu
         ?>
 
 ## See Also
-
-Other articles on Telerik UI for PHP and on the Chart:
 
 * [Overview of the Chart PHP Class]({% slug overview_chart_uiforphp %})
 * [Local Binding of the Chart PHP Class]({% slug localbinding_chart_uiforphp %})

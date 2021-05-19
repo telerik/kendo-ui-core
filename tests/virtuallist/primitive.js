@@ -21,9 +21,9 @@
         return items;
     }
 
-    module("VirtualList Primitive Data: ", {
-        setup: function() {
-            container = $("<div id='container'></div>").appendTo(QUnit.fixture);
+    describe("VirtualList Primitive Data: ", function() {
+        beforeEach(function() {
+            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -47,428 +47,428 @@
                 height: CONTAINER_HEIGHT,
                 template: "#=data#"
             };
-        },
+        });
 
-        teardown: function() {
+        afterEach(function() {
             if (container.data("kendoVirtualList")) {
                 container.data("kendoVirtualList").destroy();
             }
 
-            QUnit.fixture.empty();
-        }
-    });
-
-    //selection
-    function selectAll(virtual, elements, done) {
-        var item = elements.shift();
-
-        if (!item) {
-            done();
-            return;
-        }
-
-        virtual.select(item).done(function() {
-           selectAll(virtual, elements, done);
+            Mocha.fixture.empty();
         });
-    }
 
-    asyncTest("selecting listItem selects it as a value of the list", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        //selection
+        function selectAll(virtual, elements, done) {
+            var item = elements.shift();
 
-        asyncDataSource.read().then(function() {
-            var element = virtualList.items().first();
-            virtualList.select(element).done(function() {
-                start();
-                equal(virtualList.value()[0], "Item 0");
+            if (!item) {
+                done();
+                return;
+            }
+
+            virtual.select(item).done(function() {
+                selectAll(virtual, elements, done);
+            });
+        }
+
+        it("selecting listItem selects it as a value of the list", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
+
+            asyncDataSource.read().then(function() {
+                var element = virtualList.items().first();
+                virtualList.select(element).done(function() {
+                    assert.equal(virtualList.value()[0], "Item 0");
+                    done();
+                });
             });
         });
-    });
 
-    asyncTest("selecting listItem selects it as a value of the list (multiple selection)", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple"
-        }));
+        it("selecting listItem selects it as a value of the list (multiple selection)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple"
+            }));
 
-        asyncDataSource.read().then(function() {
-            var elements = [];
+            asyncDataSource.read().then(function() {
+                var elements = [];
 
-            elements.push(virtualList.items().eq(1));
-            elements.push(virtualList.items().eq(2));
-            elements.push(virtualList.items().eq(7));
+                elements.push(virtualList.items().eq(1));
+                elements.push(virtualList.items().eq(2));
+                elements.push(virtualList.items().eq(7));
 
-            var done = function() {
-                start();
-                equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 2", "Item 7"]));
-            };
+                var virtualDone = function() {
+                    assert.equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 2", "Item 7"]));
+                    done();
+                };
 
-            selectAll(virtualList, elements, done);
+                selectAll(virtualList, elements, virtualDone);
+            });
         });
-    });
 
-    asyncTest("selecting already selected listItem does not deselect it as a value of the list", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        it("selecting already selected listItem does not deselect it as a value of the list", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
 
-        asyncDataSource.read().then(function() {
-            var element = virtualList.items().first();
-
-            virtualList.select(element).done(function() {
-                equal(virtualList.value()[0], "Item 0");
+            asyncDataSource.read().then(function() {
+                var element = virtualList.items().first();
 
                 virtualList.select(element).done(function() {
-                    start();
-                    equal(virtualList.value()[0], "Item 0");
+                    assert.equal(virtualList.value()[0], "Item 0");
+
+                    virtualList.select(element).done(function() {
+                        assert.equal(virtualList.value()[0], "Item 0");
+                        done();
+                    });
                 });
             });
         });
-    });
 
-    asyncTest("selecting already selected listItem deselects it as a value of the list (multiple selection)", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple"
-        }));
+        it("selecting already selected listItem deselects it as a value of the list (multiple selection)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple"
+            }));
 
-        asyncDataSource.read().then(function() {
-            var elements = [];
-            var item2 = virtualList.items().eq(2);
+            asyncDataSource.read().then(function() {
+                var elements = [];
+                var item2 = virtualList.items().eq(2);
 
-            elements.push(virtualList.items().eq(1));
-            elements.push(item2);
-            elements.push(virtualList.items().eq(7));
+                elements.push(virtualList.items().eq(1));
+                elements.push(item2);
+                elements.push(virtualList.items().eq(7));
 
-            var done = function() {
-                virtualList.select(item2).done(function() {
-                    start();
-                    equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 7"]));
+                var virtualDone = function() {
+                    virtualList.select(item2).done(function() {
+                        assert.equal(kendo.stringify(virtualList.value()), kendo.stringify(["Item 1", "Item 7"]));
+                        done();
+                    });
+                };
+
+                selectAll(virtualList, elements, virtualDone);
+            });
+        });
+
+        it("setting the initial value selects the item", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true,
+                value: "Item 6"
+            }));
+
+            asyncDataSource.read().then(function() {
+                assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+                done();
+            });
+        });
+
+        it("setting the initial value selects the item (multiple selection)", function(done) {
+            var values = ["Item 1", "Item 10", "Item 6"];
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple",
+                value: values
+            }));
+
+            asyncDataSource.read().then(function() {
+
+                assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+                assert.isOk(virtualList.items().eq(10).hasClass(SELECTED), "Item 10 is selected");
+                assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+                done();
+            });
+        });
+
+        it("setting the value with the value method updates the selection", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
+
+            asyncDataSource.read().then(function() {
+                virtualList.value("Item 9").done(function() {
+                    assert.isOk(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+                    done();
                 });
-            };
-
-            selectAll(virtualList, elements, done);
-        });
-    });
-
-    asyncTest("setting the initial value selects the item", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true,
-            value: "Item 6"
-        }));
-
-        asyncDataSource.read().then(function() {
-            start();
-            ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
-        });
-    });
-
-    asyncTest("setting the initial value selects the item (multiple selection)", 3, function() {
-        var values = ["Item 1", "Item 10", "Item 6"];
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple",
-            value: values
-        }));
-
-        asyncDataSource.read().then(function() {
-            start();
-
-            ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
-            ok(virtualList.items().eq(10).hasClass(SELECTED), "Item 10 is selected");
-            ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
-        });
-    });
-
-    asyncTest("setting the value with the value method updates the selection", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
-
-        asyncDataSource.read().then(function() {
-            virtualList.value("Item 9").done(function() {
-                start();
-                ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
             });
         });
-    });
 
-    asyncTest("setting the value with the value method updates the selection (multiple selection)", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple"
-        }));
+        it("setting the value with the value method updates the selection (multiple selection)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple"
+            }));
 
-        asyncDataSource.read().then(function() {
-            virtualList.value(["Item 1", "Item 5", "Item 6"]).done(function() {
-                start();
-                ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
-                ok(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
-                ok(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+            asyncDataSource.read().then(function() {
+                virtualList.value(["Item 1", "Item 5", "Item 6"]).done(function() {
+                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+                    assert.isOk(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
+                    assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+                    done();
+                });
             });
         });
-    });
 
-    asyncTest("value method works if called before the dataSource is fetched and list is created", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        it("value method works if called before the dataSource is fetched and list is created", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
 
-        virtualList.value("Item 3");
+            virtualList.value("Item 3");
 
-        asyncDataSource.read().then(function() {
-            start();
-            ok(virtualList.items().eq(3).hasClass(SELECTED), "Item 3 is selected");
-        });
-    });
-
-    asyncTest("value method works if called before the dataSource is fetched and list is created (multiple values)", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple"
-        }));
-
-        virtualList.value(["Item 1", "Item 5", "Item 9"]);
-
-        asyncDataSource.read().then(function() {
-            start();
-            ok(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
-            ok(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
-            ok(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
-        });
-    });
-
-    asyncTest("selecting listItem selects it and saves the corresponding dataItem", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
-
-        asyncDataSource.read().then(function() {
-            var element = virtualList.items().first();
-
-            virtualList.select(element).done(function() {
-                start();
-                equal(virtualList.selectedDataItems().length, 1, "One item is selected");
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+            asyncDataSource.read().then(function() {
+                assert.isOk(virtualList.items().eq(3).hasClass(SELECTED), "Item 3 is selected");
+                done();
             });
         });
-    });
 
-    asyncTest("selecting listItem selects it and saves the corresponding dataItem (multiple items)", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple"
-        }));
+        it("value method works if called before the dataSource is fetched and list is created (multiple values)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple"
+            }));
 
-        asyncDataSource.read().then(function() {
-            var elements = [];
-            elements.push(virtualList.items().eq(0));
-            elements.push(virtualList.items().eq(1));
-            elements.push(virtualList.items().eq(2));
+            virtualList.value(["Item 1", "Item 5", "Item 9"]);
 
-            selectAll(virtualList, elements, function() {
-                start();
+            asyncDataSource.read().then(function() {
+                assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+                assert.isOk(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
+                assert.isOk(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+                done();
+            });
+        });
 
-                for (var i = 0; i < 3; i++) {
-                    equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
+        it("selecting listItem selects it and saves the corresponding dataItem", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
+
+            asyncDataSource.read().then(function() {
+                var element = virtualList.items().first();
+
+                virtualList.select(element).done(function() {
+                    assert.equal(virtualList.selectedDataItems().length, 1, "One item is selected");
+                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0], "First item is selected");
+                    done();
+                });
+            });
+        });
+
+        it("selecting listItem selects it and saves the corresponding dataItem (multiple items)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple"
+            }));
+
+            asyncDataSource.read().then(function() {
+                var elements = [];
+                elements.push(virtualList.items().eq(0));
+                elements.push(virtualList.items().eq(1));
+                elements.push(virtualList.items().eq(2));
+
+                selectAll(virtualList, elements, function() {
+
+                    for (var i = 0; i < 3; i++) {
+                        assert.equal(virtualList.selectedDataItems()[i], asyncDataSource.data()[i]);
+                    }
+                    done();
+                });
+            });
+        });
+
+        it("saves the dataItems that correspond to the initially set values", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                value: ["Item 0", "Item 1"],
+                selectable: "multiple",
+                change: function() {
+
+                    assert.equal(virtualList.selectedDataItems().length, 2);
+                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                    assert.equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                    done();
                 }
+            }));
+
+            asyncDataSource.read();
+        });
+
+        it("selecting already selected listItem removes it from stored dataItems", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple",
+                value: ["Item 0", "Item 7"]
+            }));
+
+            asyncDataSource.read().then(function() {
+
+                var element = virtualList.items().eq(0);
+                virtualList.select(element).done(function() {
+
+                    assert.equal(virtualList.selectedDataItems().length, 1, "First item is removed");
+                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+                    done();
+                });
             });
         });
-    });
 
-    asyncTest("saves the dataItems that correspond to the initially set values", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            value: ["Item 0", "Item 1"],
-            selectable: "multiple",
-            change: function() {
-                start();
+        it("changing the value through the value method updates dataItems collection", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
 
-                equal(virtualList.selectedDataItems().length, 2);
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
-            }
-        }));
+            asyncDataSource.read().then(function() {
 
-        asyncDataSource.read();
-    });
-
-    asyncTest("selecting already selected listItem removes it from stored dataItems", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple",
-            value: ["Item 0", "Item 7"]
-        }));
-
-        asyncDataSource.read().then(function() {
-
-            var element = virtualList.items().eq(0);
-            virtualList.select(element).done(function() {
-                start();
-
-                equal(virtualList.selectedDataItems().length, 1, "First item is removed");
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+                virtualList.bind("change", function() {
+                    assert.equal(virtualList.selectedDataItems().length, 1);
+                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                    done();
+                });
+                virtualList.value("Item 0");
             });
         });
-    });
 
-    asyncTest("changing the value through the value method updates dataItems collection", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        it("changing the value through the value method updates dataItems collection (multiple)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple"
+            }));
 
-        asyncDataSource.read().then(function() {
-            start();
-
-            virtualList.bind("change", function() {
-                equal(virtualList.selectedDataItems().length, 1);
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+            asyncDataSource.read().then(function() {
+                virtualList.bind("change", function() {
+                    assert.equal(virtualList.selectedDataItems().length, 2);
+                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                    assert.equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                    done();
+                });
+                virtualList.value(["Item 0", "Item 1"]);
             });
-            virtualList.value("Item 0");
         });
-    });
 
-    asyncTest("changing the value through the value method updates dataItems collection (multiple)", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple"
-        }));
+        it("changing the value through the value method updates dataItems collection (initially set values)", function(done) {
+            var count = 1;
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                value: ["Item 7"],
+                selectable: "multiple"
+            }));
 
-        asyncDataSource.read().then(function() {
-            virtualList.bind("change", function() {
-                start();
-                equal(virtualList.selectedDataItems().length, 2);
-                equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-                equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+            virtualList.bind("listBound", function() {
+                virtualList.bind("change", function() {
+                    if (count !== 1) {
+                        assert.equal(virtualList.selectedDataItems().length, 2);
+                        assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                        assert.equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                        done();
+                    }
+
+                    count += 1; //first change is triggered because of dataitems removal
+                });
+                virtualList.value(["Item 0", "Item 1"]);
             });
-            virtualList.value(["Item 0", "Item 1"]);
+
+            asyncDataSource.read();
         });
-    });
 
-    asyncTest("changing the value through the value method updates dataItems collection (initially set values)", 3, function() {
-        var count = 1;
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            value: ["Item 7"],
-            selectable: "multiple"
-        }));
-
-        virtualList.bind("listBound", function() {
-            virtualList.bind("change", function() {
-                if (count !== 1) {
-                    start();
-                    equal(virtualList.selectedDataItems().length, 2);
-                    equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-                    equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+        it("not available dataItems are retrieved by the value method", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: "multiple",
+                valueMapper: function(o) {
+                    o.success([7, 256]);
                 }
+            }));
 
-                count += 1; //first change is triggered because of dataitems removal
-            });
-            virtualList.value(["Item 0", "Item 1"]);
-        });
-
-        asyncDataSource.read();
-    });
-
-    asyncTest("not available dataItems are retrieved by the value method", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: "multiple",
-            valueMapper: function(o) {
-                o.success([7, 256]);
-            }
-        }));
-
-        asyncDataSource.read().done(function() {
-            virtualList.bind("change", function() {
-                start();
-                equal(virtualList.selectedDataItems().length, 2);
-                ok(virtualList.selectedDataItems()[0] === "Item 7");
-                ok(virtualList.selectedDataItems()[1] === "Item 256");
-            });
-            virtualList.value(["Item 7", "Item 256"]);
-        });
-    });
-
-    asyncTest("not available dataItems are given as null in dataItems collection (initially set items)", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            value: ["Item 7", "Item 256"],
-            valueMapper: function(o) {
-                o.success([7, 256]);
-            },
-            selectable: "multiple",
-            change: function() {
-                start();
-
-                equal(virtualList.selectedDataItems().length, 2);
-                ok(virtualList.selectedDataItems()[0] === "Item 7");
-                ok(virtualList.selectedDataItems()[1] === "Item 256");
-            }
-        }));
-
-        asyncDataSource.read();
-    });
-
-    asyncTest("selection is persisted accross ranges", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
-
-        var element;
-
-        asyncDataSource.read().then(function() {
-            element = virtualList.items().first();
-            virtualList.select(element).done(function() {
-                ok(element.hasClass(SELECTED));
-                scroll(container, 4 * CONTAINER_HEIGHT);
-                setTimeout(function() {
-                    start();
-                    scroll(container, 0);
-
-                    ok(element.hasClass(SELECTED), "First item is not selected");
-                }, 300);
+            asyncDataSource.read().done(function() {
+                virtualList.bind("change", function() {
+                    assert.equal(virtualList.selectedDataItems().length, 2);
+                    assert.isOk(virtualList.selectedDataItems()[0] === "Item 7");
+                    assert.isOk(virtualList.selectedDataItems()[1] === "Item 256");
+                    done();
+                });
+                virtualList.value(["Item 7", "Item 256"]);
             });
         });
-    });
 
-    asyncTest("previously selected item is de-selected (single selection)", 1, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        it("not available dataItems are given as null in dataItems collection (initially set items)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                value: ["Item 7", "Item 256"],
+                valueMapper: function(o) {
+                    o.success([7, 256]);
+                },
+                selectable: "multiple",
+                change: function() {
 
-        asyncDataSource.read().then(function() {
-            var element1 = virtualList.items().eq(1);
-            var element2 = virtualList.items().eq(2);
-            virtualList.select(element1);
-            virtualList.select(element2).done(function() {
-                start();
-                equal(virtualList.items().filter("." + SELECTED).length, 1);
+                    assert.equal(virtualList.selectedDataItems().length, 2);
+                    assert.isOk(virtualList.selectedDataItems()[0] === "Item 7");
+                    assert.isOk(virtualList.selectedDataItems()[1] === "Item 256");
+                    done();
+                }
+            }));
+
+            asyncDataSource.read();
+        });
+
+        it("selection is persisted accross ranges", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
+
+            var element;
+
+            asyncDataSource.read().then(function() {
+                element = virtualList.items().first();
+                virtualList.select(element).done(function() {
+                    assert.isOk(element.hasClass(SELECTED));
+                    scroll(container, 4 * CONTAINER_HEIGHT);
+                    setTimeout(function() {
+                        scroll(container, 0);
+
+                        assert.isOk(element.hasClass(SELECTED), "First item is not selected");
+                        done();
+                    }, 300);
+                });
             });
         });
-    });
 
-    asyncTest("previously selected value is removed (single selection)", 2, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        it("previously selected item is de-selected (single selection)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
 
-        asyncDataSource.read().then(function() {
-            var elements = [virtualList.items().eq(1), virtualList.items().eq(2)];
-
-            selectAll(virtualList, elements, function() {
-                start();
-                equal(virtualList.value().length, 1);
-                equal(virtualList.value()[0], "Item 2");
+            asyncDataSource.read().then(function() {
+                var element1 = virtualList.items().eq(1);
+                var element2 = virtualList.items().eq(2);
+                virtualList.select(element1);
+                virtualList.select(element2).done(function() {
+                    assert.equal(virtualList.items().filter("." + SELECTED).length, 1);
+                    done();
+                });
             });
         });
-    });
 
-    asyncTest("select method selects the element", 3, function() {
-        var virtualList = new VirtualList(container, $.extend(virtualSettings, {
-            selectable: true
-        }));
+        it("previously selected value is removed (single selection)", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
 
-        asyncDataSource.read().then(function() {
-            var element = virtualList.items().eq(1);
+            asyncDataSource.read().then(function() {
+                var elements = [virtualList.items().eq(1), virtualList.items().eq(2)];
 
-            virtualList.select(element).done(function() {
-                start();
-
-                ok(element.hasClass(SELECTED));
-                equal(virtualList.value()[0], "Item 1");
-                equal(virtualList.selectedDataItems()[0], "Item 1");
+                selectAll(virtualList, elements, function() {
+                    assert.equal(virtualList.value().length, 1);
+                    assert.equal(virtualList.value()[0], "Item 2");
+                    done();
+                });
             });
         });
-    });
 
-})();
+        it("select method selects the element", function(done) {
+            var virtualList = new VirtualList(container, $.extend(virtualSettings, {
+                selectable: true
+            }));
+
+            asyncDataSource.read().then(function() {
+                var element = virtualList.items().eq(1);
+
+                virtualList.select(element).done(function() {
+
+                    assert.isOk(element.hasClass(SELECTED));
+                    assert.equal(virtualList.value()[0], "Item 1");
+                    assert.equal(virtualList.selectedDataItems()[0], "Item 1");
+                    done();
+                });
+            });
+        });
+
+    });
+}());

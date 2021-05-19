@@ -11,7 +11,7 @@ The following example demonstrates how to restrict user input to minimum or maxi
 
 #### Example:
 
-```html
+```dojo
     <input id="DOB" value="30/06/2010" />
   	<script>
       $(function() {

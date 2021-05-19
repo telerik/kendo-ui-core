@@ -10,9 +10,9 @@ slug: howto_add_option_label_manually_combobox
 
 The following example demonstrates how to manually add an option label in a Kendo UI ComboBox.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
     <div class="demo-section k-header">
       <h4>Products</h4>
@@ -31,7 +31,7 @@ The following example demonstrates how to manually add an option label in a Kend
             serverFiltering: true,
             transport: {
               read: {
-                url: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
+                url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products",
               }
             },
             requestEnd: function(e) {

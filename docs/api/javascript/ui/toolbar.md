@@ -3,6 +3,7 @@ title: ToolBar
 page_title: Configuration, methods and events of Kendo UI ToolBar
 relatedDocs: gs-web-toolbar-overview
 res_type: api
+component: toolbar
 ---
 
 # kendo.ui.ToolBar
@@ -150,6 +151,7 @@ Specifies the click event handler of the button. Applicable only for the childre
 
     <script>
     function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("click");
     }
 
@@ -293,7 +295,7 @@ If set, the ToolBar will render an image with the specified URL in the button.
     <div id="toolbar"></div>
 
     <script>
-    var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
+    var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
     $("#toolbar").kendoToolBar({
       items: [
         {
@@ -331,7 +333,7 @@ Specifies if the toggle button is initially selected. Applicable only for the ch
 
 ### items.buttons.showIcon `String` *(default: "both")*
 
-Specifies where the icon of the button will be displayed. Applicable only for the children of a ButtonGroup.
+Applicable only for the buttons of a ButtonGroup. Specifies where the icon of the button will be displayed. Whether it should be displayed always (*both*), only when the button is visible on the ToolBar (*toolbar*), or only when the button is overflowed (*overflow*).
 
 #### Example
 
@@ -339,40 +341,42 @@ Specifies where the icon of the button will be displayed. Applicable only for th
 
     <script>
         $("#toolbar").kendoToolBar({
-            items: [
-            {
-                type: "buttonGroup",
-                buttons: [
-                { text: "foo", icon: "clock", showIcon: "toolbar" },
-                { text: "bar", icon: "note", showIcon: "toolbar" },
-                { text: "baz", icon: "refresh", showIcon: "toolbar" }
-                ]
-            }
-            ]
-        });
+			items: [{
+				type: "button",
+				text: "This button has a very long text so the ButtonGroup would be collapsed on larger screen"
+			},{
+				type: "buttonGroup",
+				buttons: [
+					{ text: "foo", icon: "clock", showIcon: "overflow" },
+					{ text: "bar", icon: "error", showIcon: "both" },
+					{ text: "baz", icon: "refresh", showIcon: "toolbar" }
+				]
+			}]
+		});
     </script>
 
 ### items.buttons.showText `String` *(default: "both")*
 
-Specifies where the text of the menu button will be displayed. Applicable only for the buttons of a ButtonGroup.
+Applicable only for the buttons of a ButtonGroup. Specifies where the text of the button will be displayed. Whether it should be displayed always (*both*), only when the button is visible on the ToolBar (*toolbar*), or only when the button is overflowed (*overflow*).
 
 #### Example
 
     <div id="toolbar"></div>
 
     <script>
-        $("#toolbar").kendoToolBar({
-            items: [
-            {
-                type: "buttonGroup",
-                buttons: [
-                { text: "foo", icon: "clock", showText: "overflow" },
-                { text: "bar", icon: "note", showText: "overflow" },
-                { text: "baz", icon: "refresh",showText: "overflow" }
-                ]
-            }
-            ]
-        });
+		$("#toolbar").kendoToolBar({
+			items: [{
+				type: "button",
+				text: "This button has a very long text so the ButtonGroup would be collapsed on larger screen"
+			},{
+				type: "buttonGroup",
+				buttons: [
+					{ text: "foo", icon: "clock", showText: "overflow" },
+					{ text: "bar", icon: "error", showText: "both" },
+					{ text: "baz", icon: "refresh", showText: "toolbar" }
+				]
+			}]
+		});
     </script>
 
 ### items.buttons.spriteCssClass `String`
@@ -384,18 +388,19 @@ Defines a CSS class (or multiple classes separated by spaces) which will be used
     <div id="toolbar"></div>
 
     <script>
-    $("#toolbar").kendoToolBar({
-      items: [
-        {
-          type: "buttonGroup",
-          buttons: [
-            { text: "foo", spriteCssClass: "foo, bar" },
-            { text: "bar", spriteCssClass: "bar" },
-            { text: "baz", spriteCssClass: "baz" }
-          ]
-        }
-      ]
-    });
+		$("#toolbar").kendoToolBar({
+		  items: [
+			{
+			  type: "buttonGroup",
+			  buttons: [
+				{ text: "foo", spriteCssClass: "foo, bar" },
+				{ text: "bar", spriteCssClass: "bar" },
+				{ text: "baz", spriteCssClass: "baz" }
+			  ]
+			}
+		  ]
+		});
+	</script>
 
 ### items.buttons.toggle `Function`
 
@@ -407,6 +412,7 @@ Specifies the toggle event handler of the button. Applicable only for the childr
 
     <script>
         function toggle(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.group);
         }
 
@@ -481,8 +487,8 @@ Specifies the url of the button to navigate to.
             {
                 type: "buttonGroup",
                 buttons: [
-                { text: "foo", url: "http://www.telerik.com" },
-                { text: "bar", url: "http://www.google.com" },
+                { text: "foo", url: "https://www.telerik.com" },
+                { text: "bar", url: "https://www.google.com" },
                 ]
             }
             ]
@@ -504,6 +510,7 @@ Specifies the click event handler of the button. Applicable only for commands of
                 type: "button",
                 text: "foo",
                 click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(e.target.text() + " is clicked");
                 }
             }
@@ -613,7 +620,7 @@ If set, the ToolBar will render an image with the specified URL in the button.
     <div id="toolbar"></div>
 
     <script>
-        var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
+        var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
           items: [
               { type: "button", text: "foo", imageUrl: "/sports/snowboarding.png" },
@@ -781,7 +788,7 @@ If set, the ToolBar will render an image with the specified URL in the menu butt
     <div id="toolbar"></div>
 
     <script>
-        var baseUrl = "http://demos.telerik.com/kendo-ui/content/shared/icons";
+        var baseUrl = "https://demos.telerik.com/kendo-ui/content/shared/icons";
         $("#toolbar").kendoToolBar({
             items: [
             {
@@ -859,8 +866,8 @@ Specifies the url of the menu button to navigate to.
                 type: "splitButton",
                 text: "splitButton",
                 menuButtons: [
-                    { id: "foo", text: "Telerik", url: "http://www.telerik.com" },
-                    { id: "bar", text: "Google", url: "http://www.google.com" }
+                    { id: "foo", text: "Telerik", url: "https://www.telerik.com" },
+                    { id: "bar", text: "Google", url: "https://www.google.com" }
                 ]
             }
             ]
@@ -1075,6 +1082,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
                 text: "Foo",
                 togglable: true,
                 toggle: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log("toggle!");
                 }
             }
@@ -1084,7 +1092,7 @@ Specifies the toggle event handler of the button. Applicable only for commands o
 
 ### items.type `String`
 
-Specifies the command type. Supported types are "button", "splitButton", "buttonGroup", "separator".
+Specifies the command type. Supported types are "button", "splitButton", "buttonGroup", "separator", "spacer".
 
 > Specifying the type is **mandatory**. Only commands that have a `template` do not need a `type`.
 
@@ -1136,7 +1144,7 @@ Specifies the url to navigate to.
             {
                 type: "button",
                 text: "Foo",
-                url: "http://www.google.com"
+                url: "https://www.google.com"
             }
             ]
         });
@@ -1263,6 +1271,7 @@ The name of the group.
         var toolbar = $("#toolbar").data("kendoToolBar");
         var selected = toolbar.getSelectedFromGroup("radio");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(selected.attr("id"));
     </script>
 
@@ -1394,6 +1403,10 @@ The jQuery object that represents the command element.
 
 The id of the command element.
 
+##### e.item `Object`
+
+The item instance of the clicked item.
+
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
@@ -1408,6 +1421,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2" }
             ],
             click: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("click", e.target.text());
             }
         });
@@ -1426,6 +1440,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("click", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("click", e.target.text());
         });
     </script>
@@ -1462,6 +1477,7 @@ The widget instance which fired the event.
                 ] }
             ],
             close: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("close", e);
             }
         });
@@ -1484,6 +1500,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("close", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("close", e);
         });
     </script>
@@ -1520,6 +1537,7 @@ The widget instance which fired the event.
                 ] }
             ],
             open: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("open", e);
             }
         });
@@ -1542,6 +1560,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("open", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("open", e);
         });
     </script>
@@ -1566,6 +1585,10 @@ Boolean flag that indicates the button state.
 
 The id of the command element.
 
+##### e.item `Object`
+
+The item instance of the toggled item.
+
 ##### e.sender `kendo.ui.ToolBar`
 
 The widget instance which fired the event.
@@ -1580,6 +1603,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", togglable: true }
             ],
             toggle: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("toggle", e.target.text(), e.checked);
             }
         });
@@ -1598,6 +1622,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("toggle", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("toggle", e.target.text(), e.checked);
         });
     </script>
@@ -1626,6 +1651,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", overflow: "always" }
             ],
             overflowClose: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("close");
             }
         });
@@ -1644,6 +1670,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("overflowClose", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("close");
         });
     </script>
@@ -1672,6 +1699,7 @@ The widget instance which fired the event.
                 { type: "button", id: "btn2", text: "Button 2", overflow: "always" }
             ],
             overflowOpen: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("open");
             }
         });
@@ -1690,6 +1718,7 @@ The widget instance which fired the event.
 
         var toolbar = $("#toolbar").data("kendoToolBar");
         toolbar.bind("overflowOpen", function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("open");
         });
     </script>

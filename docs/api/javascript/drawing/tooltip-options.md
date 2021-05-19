@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.TooltipOptions
+
 Shape tooltip configuration options.
 
 ## Fields

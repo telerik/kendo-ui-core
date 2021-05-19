@@ -3,113 +3,112 @@
 var Calendar = kendo.ui.Calendar;
 var div;
 
-module("kendo.ui.Calendar initialization", {
-    setup: function() {
-        kendo.effects.disable();
-        div = $("<div />").appendTo(QUnit.fixture);
-    },
-    teardown: function() {
-        kendo.effects.enable();
-        kendo.destroy(QUnit.fixture);
-    }
-});
+describe("kendo.ui.Calendar initialization", function () {
+    beforeEach(function() {
 
-test("if format is {0: format} should strip it", function() {
+        div = $("<div />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+
+        kendo.destroy(Mocha.fixture);
+    });
+
+it("if format is {0: format} should strip it", function() {
     var cal = new Calendar(div, {format: "{0:MM/dd/yyyy}"});
 
-    equal(cal.options.format, "MM/dd/yyyy");
+    assert.equal(cal.options.format, "MM/dd/yyyy");
 });
 
-test("if start is not correct should set MONTH view", function() {
+it("if start is not correct should set MONTH view", function() {
     var cal = new Calendar(div, {start: "not real view"});
     var view = cal.view();
 
-    equal(view.name, "month");
+    assert.equal(view.name, "month");
 });
 
-test("if depth is bigger then start set it to MONTH view", function() {
+it("if depth is bigger then start set it to MONTH view", function() {
     var cal = new Calendar(div, {depth: "year"});
 
-    equal(cal.options.depth, "month");
+    assert.equal(cal.options.depth, "month");
 });
 
-test("define current", function() {
+it("define current", function() {
     var cal = new Calendar(div),
         current = cal.current(),
         today = new Date();
 
-    equal(current.getFullYear(), today.getFullYear());
-    equal(current.getMonth(), today.getMonth());
-    equal(current.getDate(), today.getDate());
+    assert.equal(current.getFullYear(), today.getFullYear());
+    assert.equal(current.getMonth(), today.getMonth());
+    assert.equal(current.getDate(), today.getDate());
 });
 
-test("render the header", function() {
+it("render the header", function() {
     var cal = new Calendar(div);
     var header = cal.element.find(".k-header");
 
-    ok(header[0]);
-    ok(header.find(".k-nav-prev")[0]);
-    ok(header.find(".k-nav-next")[0]);
-    ok(header.find(".k-nav-fast")[0]);
+    assert.isOk(header[0]);
+    assert.isOk(header.find(".k-nav-prev")[0]);
+    assert.isOk(header.find(".k-nav-next")[0]);
+    assert.isOk(header.find(".k-nav-fast")[0]);
 });
 
-test("render table after header", function() {
+it("render table after header", function() {
     var cal = new Calendar(div);
 
-    ok(cal.element.find(".k-content")[0]);
+    assert.isOk(cal.element.find(".k-content")[0]);
 });
 
-test("render month view when init", function() {
+it("render month view when init", function() {
     var date = new Date(2011, 10, 10);
     var cal = new Calendar(div, {value: date});
 
-    equal(div.find(".k-nav-fast").html(), "November 2011");
-    equal(div.find(".k-content").find("a").length, 42);
+    assert.equal(div.find(".k-nav-fast").html(), "November 2011");
+    assert.equal(div.find(".k-content").find("a").length, 42);
 });
 
-test("render year view when init", function() {
+it("render year view when init", function() {
     var date = new Date(2011, 10, 10);
     var cal = new Calendar(div, { value: date, start: "year" });
     var anchors = cal.element.find(".k-content").find("a");
     var january = kendo.culture().calendar.months.namesAbbr[0];
 
-    equal(div.find(".k-nav-fast").html(), "2011");
+    assert.equal(div.find(".k-nav-fast").html(), "2011");
 
-    equal(anchors.length, 12);
-    equal(anchors.eq(0).html(), january);
+    assert.equal(anchors.length, 12);
+    assert.equal(anchors.eq(0).html(), january);
 });
 
-test("render decade view when init", function() {
+it("render decade view when init", function() {
     var date = new Date(2011, 10, 10),
     cal = new Calendar(div, { start: "decade", value: date }),
     anchors = cal.element.find(".k-content").find("a");
 
-    equal(div.find(".k-nav-fast").html(), "2010-2019");
-    equal(anchors.length, 12);
-    equal(anchors.eq(0).html(), "2009");
+    assert.equal(div.find(".k-nav-fast").html(), "2010-2019");
+    assert.equal(anchors.length, 12);
+    assert.equal(anchors.eq(0).html(), "2009");
 });
 
-test("render century view when init", function() {
+it("render century view when init", function() {
     var date = new Date(2011, 10, 10),
     cal = new Calendar(div, { start: "century", value: date, max: new Date(2200, 10, 10) }),
     anchors = cal.element.find(".k-content").find("a");
 
-    equal(div.find(".k-nav-fast").html(), "2000-2099");
-    equal(anchors.length, 12);
-    equal(anchors.eq(0).html(), "1990 - 1999");
+    assert.equal(div.find(".k-nav-fast").html(), "2000-2099");
+    assert.equal(anchors.length, 12);
+    assert.equal(anchors.eq(0).html(), "1990 - 1999");
 });
 
-test("calendar should wire TD click event", function() {
+it("calendar should wire TD click event", function() {
     var cal = new Calendar(div);
 
     stub(cal, "navigateDown");
 
     cal.element.find("td:has(.k-link)").eq(0).click();
 
-    equal(cal.calls("navigateDown"), 1);
+    assert.equal(cal.calls("navigateDown"), 1);
 });
 
-test("calendar should wire header buttons", 3, function() {
+it("calendar should wire header buttons", function() {
     var cal = new Calendar(div);
     var links, current, view;
 
@@ -124,30 +123,30 @@ test("calendar should wire header buttons", 3, function() {
     current = new Date(cal.current());
     links.eq(0).click();
 
-    notEqual(+cal.current(), +current);
+    assert.notEqual(+cal.current(), +current);
 
     current = new Date(cal.current());
     links.eq(2).click();
 
-    notEqual(+cal.current(), +current);
+    assert.notEqual(+cal.current(), +current);
 
     view = cal.view();
     links.eq(1).click();
 
-    notEqual(cal.view().name, view.name);
+    assert.notEqual(cal.view().name, view.name);
 });
 
-test("calendar should show hover state when hover TD", function() {
+it("calendar should show hover state when hover TD", function() {
     var cal = new Calendar(div);
 
     var td = cal.element.find("td:has(.k-link)").eq(0);
 
     td.mouseenter();
 
-    ok(td.hasClass("k-state-hover"));
+    assert.isOk(td.hasClass("k-state-hover"));
 });
 
-test("calendar should remove hover state from TD", function() {
+it("calendar should remove hover state from TD", function() {
     var cal = new Calendar(div);
 
     var td = cal.element.find("td:has(.k-link)").eq(0);
@@ -155,10 +154,10 @@ test("calendar should remove hover state from TD", function() {
     td.mouseenter();
     td.mouseleave();
 
-    ok(!td.hasClass("k-state-hover"));
+    assert.isOk(!td.hasClass("k-state-hover"));
 });
 
-test("calendar should show hover state to the header elements", function() {
+it("calendar should show hover state to the header elements", function() {
     var cal = new Calendar(div);
 
     var links = cal.element.find(".k-header").find(".k-link");
@@ -167,12 +166,12 @@ test("calendar should show hover state to the header elements", function() {
     links.eq(1).mouseenter();
     links.eq(2).mouseenter();
 
-    ok(links.eq(0).hasClass("k-state-hover"));
-    ok(links.eq(1).hasClass("k-state-hover"));
-    ok(links.eq(2).hasClass("k-state-hover"));
+    assert.isOk(links.eq(0).hasClass("k-state-hover"));
+    assert.isOk(links.eq(1).hasClass("k-state-hover"));
+    assert.isOk(links.eq(2).hasClass("k-state-hover"));
 });
 
-test("calendar should remove hover state to the header elements", function() {
+it("calendar should remove hover state to the header elements", function() {
     var cal = new Calendar(div);
 
     var links = cal.element.find(".k-header").find(".k-link");
@@ -185,12 +184,12 @@ test("calendar should remove hover state to the header elements", function() {
     links.eq(1).mouseleave();
     links.eq(2).mouseleave();
 
-    ok(!links.eq(0).hasClass("k-state-hover"));
-    ok(!links.eq(1).hasClass("k-state-hover"));
-    ok(!links.eq(2).hasClass("k-state-hover"));
+    assert.isOk(!links.eq(0).hasClass("k-state-hover"));
+    assert.isOk(!links.eq(1).hasClass("k-state-hover"));
+    assert.isOk(!links.eq(2).hasClass("k-state-hover"));
 });
 
-test("today link should have k-nav-today", function() {
+it("today link should have k-nav-today", function() {
     var cal = new Calendar(div);
 
     stub(cal, "navigate");
@@ -199,12 +198,12 @@ test("today link should have k-nav-today", function() {
 
     link.click();
 
-    ok(link.hasClass("k-nav-today"));
-    ok(!link.hasClass("k-state-disabled"));
-    equal(cal.calls("navigate"), 1);
+    assert.isOk(link.hasClass("k-nav-today"));
+    assert.isOk(!link.hasClass("k-state-disabled"));
+    assert.equal(cal.calls("navigate"), 1);
 });
 
-test("today link should not have k-nav-today", function() {
+it("today link should not have k-nav-today", function() {
     var today = new Date(),
         cal = new Calendar(div, {
             min: new Date(today.getFullYear(), today.getMonth() + 1, today.getDate())
@@ -215,12 +214,12 @@ test("today link should not have k-nav-today", function() {
     var link = div.find(".k-footer").find(".k-link");
     link.click();
 
-    ok(!link.hasClass("k-nav-today"));
-    ok(link.hasClass("k-state-disabled"));
-    equal(cal.calls("_todayClick"), 0);
+    assert.isOk(!link.hasClass("k-nav-today"));
+    assert.isOk(link.hasClass("k-state-disabled"));
+    assert.equal(cal.calls("_todayClick"), 0);
 });
 
-test("today link sets today not now", function() {
+it("today link sets today not now", function() {
     var today = new Date(),
         cal = new Calendar(div, {
             max: new Date(today.getFullYear(), today.getMonth(), today.getDate(), 12, 12, 12)
@@ -230,26 +229,34 @@ test("today link sets today not now", function() {
 
     div.find(".k-footer").find(".k-link").click();
 
-    equal(+cal.value(), +new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    assert.equal(+cal.value(), +new Date(today.getFullYear(), today.getMonth(), today.getDate()));
 });
 
-test("footer:false should not render footer", function() {
+it("footer:false should not render footer", function() {
     var cal = new Calendar(div, {
         footer: false
     });
 
-    ok(!cal.footer);
+    assert.isOk(!cal.footer);
 });
 
-test("_footer(false) should hide the footer", function() {
+it("_footer(false) should hide the footer", function() {
     var cal = new Calendar(div);
 
     cal._footer(false);
 
-    ok(!cal.element.find(".k-footer").is("visible"));
+    assert.isOk(!cal.element.find(".k-footer").is("visible"));
 });
 
-test("Calendar uses culture settings specified through culture option", function() {
+it("footer:true should render footer", function() {
+    var cal = new Calendar(div, {
+        footer: true
+    });
+
+    assert.isOk(cal.footer);
+});
+
+it("Calendar uses culture settings specified through culture option", function() {
     var cal = new Calendar(div, {
         culture: "bg-BG"
     });
@@ -257,10 +264,10 @@ test("Calendar uses culture settings specified through culture option", function
     var culture = kendo.getCulture("bg-BG");
     var format = culture.calendars.standard.patterns["d"];
 
-    equal(cal.options.format, format);
+    assert.equal(cal.options.format, format);
 });
 
-test("footer honours culture option", function() {
+it("footer honours culture option", function() {
     var cal = new Calendar(div, {
         culture: "bg-BG"
     });
@@ -269,42 +276,42 @@ test("footer honours culture option", function() {
     var format = culture.calendars.standard.patterns["d"];
     var link = div.find(".k-footer").find(".k-link");
 
-    equal(link.html(), kendo.toString(new Date(), "D", culture));
-    equal(link.attr("title"), kendo.toString(new Date(), "D", culture));
+    assert.equal(link.html(), kendo.toString(new Date(), "D", culture));
+    assert.equal(link.attr("title"), kendo.toString(new Date(), "D", culture));
 });
 
-test("Calendar removes focused style on initial rendering", function() {
+it("Calendar removes focused style on initial rendering", function() {
     var cal = new Calendar(div);
 
-    ok(!cal._cell.hasClass("k-state-focused"));
+    assert.isOk(!cal._cell.hasClass("k-state-focused"));
 });
 
-test("Calendar adds  focused on focus", function() {
+it("Calendar adds  focused on focus", function() {
     var cal = new Calendar(div);
 
     cal._table.focus();
 
-    ok(cal._cell.hasClass("k-state-focused"));
+    assert.isOk(cal._cell.hasClass("k-state-focused"));
 });
 
-test("Calendar removes  focused on blur", function() {
+it("Calendar removes  focused on blur", function() {
     var cal = new Calendar(div);
 
     cal._table.focus();
     cal._table.blur();
 
-    ok(!cal._cell.hasClass("k-state-focused"));
+    assert.isOk(!cal._cell.hasClass("k-state-focused"));
 });
 
-test("Widget does not fall into infinitive loop", function() {
+it("Widget does not fall into infinitive loop", function() {
     var cal = new Calendar(div, {
         value: '2000/10/5'
     });
 
-    ok(true);
+    assert.isOk(true);
 });
 
-test("Widget sets disabled class correctly when callback is set", function() {
+it("Widget sets disabled class correctly when callback is set", function() {
     var cal = new Calendar(div, {
         value: new Date(2015,9,12),
 		disableDates: function(date) {
@@ -312,33 +319,104 @@ test("Widget sets disabled class correctly when callback is set", function() {
                 return true;
             }
         }
-    });
-    ok(cal.element.find("tbody>tr>td").first().hasClass("k-state-disabled"));
+        });
+    assert.isOk(cal.element.find("tbody>tr>td").first().hasClass("k-state-disabled"));
 });
 
-test("Widget sets disabled class correctly when array is set", function() {
+it("Widget sets disabled class correctly when array is set", function() {
     var cal = new Calendar(div, {
         value: new Date(2015,9,12),
 		disableDates: ["mo", "su"]
     });
-    ok($('tr').eq(2).children().first().hasClass("k-state-disabled"));
+    assert.isOk($('tr').eq(2).children().first().hasClass("k-state-disabled"));
 });
 
-test("Widget value is not set if value is disbaled date", function() {
+it("Widget value is not set if value is disbaled date", function() {
     var cal = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: ["mo", "sa"]
     });
-    ok(cal.element.find("tr").eq(1).children().last().hasClass("k-state-disabled"));
+    assert.isOk(cal.element.find("tr").eq(1).children().last().hasClass("k-state-disabled"));
 });
 
-test("Widget value is correctly after initialized with disabled value", function() {
+it("Widget value is correctly after initialized with disabled value", function() {
     var cal = new Calendar(div, {
         value: new Date(2015,9,3),
 		disableDates: ["mo", "sa"]
     });
     cal.value(new Date(2015,9,4))
-    ok(cal.element.find('tr').eq(2).children().first().hasClass("k-state-selected"));
+    assert.isOk(cal.element.find('tr').eq(2).children().first().hasClass("k-state-selected"));
 });
 
+it("Year 0 should initialize year 1900", function () {
+    var cal = new Calendar(div, {
+        value: new Date(0, 1, 1)
+    });
+
+    assert.equal(1900, cal.value().getFullYear());
+});
+
+it("Full year 0 should initialize year 1900", function () {
+    var year = 1;
+    var date = new Date(2016, 1, 1);
+    date.setFullYear(year);
+
+    var cal = new Calendar(div, { value: date, min: date });
+
+    assert.equal(year, cal.value().getFullYear());
+});
+
+it("Year 99 should initialize year 1999", function () {
+    var cal = new Calendar(div, {
+        value: new Date(99, 1, 1)
+    });
+
+    assert.equal(1999, cal.value().getFullYear());
+});
+
+it("Full year 99 should initialize year 1900", function () {
+    var year = 99;
+    var date = new Date(2016, 1, 1);
+    date.setFullYear(year);
+
+    var cal = new Calendar(div, { value: date, min: date });
+
+    assert.equal(year, cal.value().getFullYear());
+});
+
+it("Century view support dates less then 200 year", function () {
+    var minDate = new Date(Date.UTC(1000, 0, 1));
+    minDate.setUTCFullYear(100); // set year to 100
+
+    var cal = new Calendar(div, {
+        min: minDate,
+        value: new Date(200, 0, 1),
+        start: "century"
+    });
+
+    // navigate to previous century
+    var header = cal.element.find(".k-header");
+    var prevButton = cal.element.find(".k-header .k-nav-prev");
+    prevButton.click();
+
+    // first decade should be 100 - 1009
+    var firstDecade = cal.element.find(".k-content td:has(.k-link:not(.k-state-disabled)):not(.k-out-of-range) .k-link");
+    assert.equal(firstDecade.html(), "100 - 109");
+});
+
+
+it("Century view supports min value equal to 0001-01-01", function () {
+    var minDate = new Date(Date.UTC(1000, 0, 1));
+    minDate.setUTCFullYear(1); // set year to 0001
+
+    var cal = new Calendar(div, {
+        min: minDate,
+        value: new Date(1900, 0, 1),
+        start: "century"
+    });
+
+    assert.equal(cal.min(), minDate);
+});
+
+    });
 }());

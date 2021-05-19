@@ -3,6 +3,7 @@ title: PopOver
 page_title: Configuration, methods and events of Kendo UI Mobile PopOver
 description: 'Guide to Kendo UI Mobile PopOver configuration options: set width and height of the popup in pixels and direction to which the popup will expand.'
 res_type: api
+component: pop-over
 ---
 
 # kendo.mobile.ui.PopOver
@@ -303,6 +304,7 @@ The widget instance which fired the event.
     var app = new kendo.mobile.Application();
 
     function onClose(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("close");
       //handle event
     }
@@ -338,6 +340,7 @@ The widget instance which fired the event.
     var app = new kendo.mobile.Application();
 
     function onOpen(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("open");
       //handle event
     }

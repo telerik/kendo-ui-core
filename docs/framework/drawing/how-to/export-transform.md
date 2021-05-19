@@ -7,15 +7,13 @@ slug: howto_applytransformationsduringexport_drawingapi
 
 # Apply Transformations During Export
 
-The example below demonstrates how to apply geometric transformations during export while applying the Kendo UI Drawing API.
+The following example demonstrates how to apply geometric transformations during export while applying the Kendo UI Drawing API.
 
 The aim of the example is to produce a PNG image of a section of the page at 4x the original resolution. This is done by applying an uniform 2x scale on the X and Y dimensions. The operation is carried out while the content is still represented in a vector form. No loss of quality occurs.
 
-For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation#methods-scale).
+For more information, refer to the [Transformation API article](/api/javascript/geometry/transformation/methods/scale).
 
-###### Example
-
-```html
+```dojo
     <button class='export-img k-button'>Export as Image</button>
     <div class="content">
       <div id="chart"></div>
@@ -74,7 +72,7 @@ For more information, refer to the [Transformation API article](/api/javascript/
           kendo.saveAs({
             dataURI: data,
             fileName: "Map.png",
-            proxyURL: "http://demos.telerik.com/kendo-ui/service/export"
+            proxyURL: "https://demos.telerik.com/kendo-ui/service/export"
           });
         });
       });
@@ -82,8 +80,6 @@ For more information, refer to the [Transformation API article](/api/javascript/
 ```
 
 ## See Also
-
-Other articles and how-to examples on Kendo UI Drawing API:
 
 * [JavaScript API Reference: kendo.drawing.surface](/api/javascript/drawing/surface)
 * [JavaScript API Reference: kendo.geometry.Transformation](/api/javascript/geometry/transformation)

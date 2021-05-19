@@ -3,6 +3,7 @@ title: QRCode
 page_title: Configuration, methods and events of Kendo UI DataViz QRCode
 description: Learn the configuration options for QRCode widget, set its options, use methods properly.
 res_type: api
+component: qrcode
 ---
 
 # kendo.dataviz.ui.QRCode
@@ -16,7 +17,7 @@ Represents the Kendo UI QRCode widget. Inherits from [Widget](/api/javascript/ui
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       renderAs: "svg"
     });
     </script>
@@ -30,7 +31,7 @@ The background color of the QR code. Accepts a valid CSS color string, including
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       background: "red"
     });
     </script>
@@ -48,7 +49,7 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       border: {
         color: "#FF321C",
         width: 2
@@ -65,7 +66,7 @@ The width of the border in pixels. By default the border width is set to zero wh
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       border: {
         width: 5,
         color: "#FF7D05"
@@ -82,7 +83,7 @@ The color of the QR code. Accepts a valid CSS color string, including hex and rg
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       color: "#aa00bb"
     });
     </script>
@@ -93,8 +94,8 @@ The encoding mode used to encode the value.
 
 The possible values are:
 
-* "ISO\_8859\_1" - supports all characters from the [ISO/IEC 8859-1](http://en.wikipedia.org/wiki/ISO/IEC_8859-1) character set.
-* "UTF_8" - supports all [Unicode](http://en.wikipedia.org/wiki/List_of_Unicode_characters) characters.
+* "ISO\_8859\_1" - supports all characters from the [ISO/IEC 8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) character set.
+* "UTF_8" - supports all [Unicode](https://en.wikipedia.org/wiki/List_of_Unicode_characters) characters.
 
 > *Important:* The UTF-8 encoding is not included in the specifications and is not supported by all readers.
 
@@ -124,9 +125,100 @@ The possible values are:
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       errorCorrection: "H"
     });
+    </script>
+
+### overlay `Object`
+
+The overlay configuration which alows you to choose from predefined layouts or insert a custom image.
+
+> **Note:** Always test if the code reads correctly with the overlay. Depending on the length of the value and the size of the overlay, you might need to raise the [errorCorrection](/api/javascript/dataviz/ui/qrcode/configuration/errorcorrection) to "M" or "H".
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           width: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.height `Number`
+
+The height of the overlay in pixels.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           height: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.type `String` *(default: "custom")*
+
+Available options are `image` and `swiss`. When set to `image` you have to specify the url source of the image. If set to `swiss` a Swiss QR Code is created.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+          type: "swiss"
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.imageUrl `String`
+
+The URL of the displayed overlay image.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           height: 40
+       },
+       errorCorrection: "M"
+     });
+    </script>
+
+### overlay.width `Number`
+
+The width of the overlay in pixels.
+
+#### Example
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+       value: "https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg",
+       overlay:{
+           url: 'https://demos.telerik.com/kendo-ui/content/shared/images/site/kendoka-cta.svg',
+           width: 40
+       },
+       errorCorrection: "M"
+     });
     </script>
 
 ### padding `Number` *(default: 0)*
@@ -138,7 +230,7 @@ Sets the minimum distance in pixels that should be left between the border and t
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       size: 240,
       padding: 10
     });
@@ -165,7 +257,7 @@ In case the element has width or height of zero, a default value of 200 pixels w
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       size: 300
     });
     </script>
@@ -175,7 +267,7 @@ In case the element has width or height of zero, a default value of 200 pixels w
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
       size: "300px"
     });
     </script>
@@ -189,7 +281,7 @@ The value of the QRCode.
     <div id="qrCode"></div>
     <script>
     $("#qrCode").kendoQRCode({
-      value: "http://demos.telerik.com/kendo-ui/dataviz/overview/index.html"
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html"
     });
     </script>
 
@@ -208,9 +300,9 @@ Removes data entries in order to avoid memory leaks.
 
 ### exportImage
 Exports the QRCode as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -246,9 +338,9 @@ The height of the exported image. Defaults to the QRCode height.
 
 ### exportPDF
 Exports the QRCode as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -278,9 +370,9 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the QRCode as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -314,7 +406,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/qrcode/methods/exportimage).
 
 #### Returns
 
@@ -341,7 +433,7 @@ Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozi
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);
@@ -395,7 +487,7 @@ Sets new options to the QRCode and redraws it.
 
 ##### options `Object`
 
-An object with the new options. All [configuration](qrcode#configuration) options can be set.
+An object with the new options. All [configuration](/api/javascript/dataviz/ui/qrcode#configuration) options can be set.
 
 #### Example
 
@@ -413,10 +505,10 @@ An object with the new options. All [configuration](qrcode#configuration) option
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](http://inkscape.org/) and
-[ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the qrcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/qrcode/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 
@@ -431,6 +523,7 @@ Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the qrcode.
     });
     var qrcode = $("#qrcode").data("kendoQRCode");
     var svg = qrcode.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 

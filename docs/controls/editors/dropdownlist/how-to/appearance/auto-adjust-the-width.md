@@ -17,14 +17,14 @@ To achieve this behavior:
 
 Either of the following scenarios occur:
 
-1. The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist#events-open) event.
-1. The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist#events-dataBound) event.
+1. The DropDownList is already bound when it is opened. In this case, execute `adjustDropDownWidth` in the [`open`](/api/javascript/ui/dropdownlist/events/open) event.
+1. The DropDownList triggers a remote request after it is opened. In this case, execute `adjustDropDownWidth` in the [`dataBound`](/api/javascript/ui/dropdownlist/events/databound) event.
 
 The following example demonstrates how to automatically adjust the width of a DropDownList depending on its list items.
 
-###### Example
 
-```html
+
+```dojo
 <style>
 
   .k-list
@@ -113,7 +113,7 @@ The following example demonstrates how to automatically adjust the width of a Dr
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})
 * [How to Move the Group Label on Top of Items]({% slug howto_move_group_label_ontopof_items_dropdownlist %})

@@ -32,9 +32,9 @@ The category axis configuration options.
 
 ### navigator.categoryAxis.autoBaseUnitSteps `Object`
 
-The discrete [navigator.categoryAxis.baseUnitStep](#configuration-navigator-categoryAxis.baseUnitStep) values when
-either [navigator.categoryAxis.baseUnit](#configuration-navigator-categoryAxis.baseUnit) is set to "fit" or
-[navigator.categoryAxis.baseUnitStep](#configuration-navigator-categoryAxis.baseUnitStep) is set to "auto".
+The discrete [navigator.categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) values when
+either [navigator.categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnit) is set to "fit" or
+[navigator.categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-navigator-categoryAxis.baseUnitStep) is set to "auto".
 
 ### navigator.categoryAxis.autoBaseUnitSteps.seconds `Array` *(default: [1, 2, 5, 15, 30])*
 
@@ -92,17 +92,17 @@ The supported values are:
 * "months"
 * "years"
 
-Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep)
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep)
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-Series data is aggregated for the specified base unit using the [series.aggregate](#configuration-series.aggregate) function.
+Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/stock-chart#configuration-series.aggregate) function.
 
 ### navigator.categoryAxis.baseUnitStep `Object` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-This option is ignored if [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit".
+This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
 ### navigator.categoryAxis.categories `Array`
 
@@ -110,14 +110,14 @@ The category names. The chart will create a category for every item of the array
 
 ### navigator.categoryAxis.color `String`
 
-The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](#configuration-categoryAxis.labels.color) and
-[categoryAxis.line.color](#configuration-categoryAxis.line.color).
+The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by [categoryAxis.labels.color](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.labels.color) and
+[categoryAxis.line.color](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.line.color).
 
 ### navigator.categoryAxis.crosshair `Object`
 
 The crosshair configuration options.
 
-> The crosshair is displayed when the [categoryAxis.crosshair.visible](#configuration-categoryAxis.crosshair.visible) option is set to `true`.
+> The crosshair is displayed when the [categoryAxis.crosshair.visible](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.visible) option is set to `true`.
 
 ### navigator.categoryAxis.crosshair.color `String`
 
@@ -145,7 +145,7 @@ The opacity of the crosshair. By default the crosshair is opaque.
 
 The crosshair tooltip options.
 
-> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
+> The crosshair tooltip is displayed when the [categoryAxis.crosshair.tooltip.visible](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.crosshair.tooltip.visible) option is set to `true`.
 
 ### navigator.categoryAxis.crosshair.tooltip.background `String`
 
@@ -231,7 +231,7 @@ The width of the crosshair in pixels.
 
 ### navigator.categoryAxis.field `String`
 
-The data item field which contains the category name. Requires the [dataSource](#configuration-dataSource) option to be set.
+The data item field which contains the category name. Requires the [dataSource](/api/javascript/dataviz/ui/stock-chart#configuration-dataSource) option to be set.
 
 ### navigator.categoryAxis.justified `Boolean`
 
@@ -239,7 +239,7 @@ If set to `true` the chart will position categories and series points on major t
 
 The default value is `false` except for "area" and "verticalArea".
 
-> This option is ignored if the [series.type](#configuration-series.type) option is set to "bar", "column", "ohlc" or "candlestick".
+> This option is ignored if the [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) option is set to "bar", "column", "ohlc" or "candlestick".
 
 ### navigator.categoryAxis.labels `Object`
 
@@ -287,27 +287,27 @@ The culture to use when formatting date values. See the [globalization overview]
 
 The format used to display the labels when the categories are dates. Uses [kendo.format](/api/framework/kendo#methods-format). Contains one placeholder ("{0}") which represents the category value.
 
-> The chart will choose the appropriate format for the current [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](#configuration-categoryAxis.labels.format) option will override the date formats.
+> The chart will choose the appropriate format for the current [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit). Setting the [categoryAxis.labels.format](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.labels.format) option will override the date formats.
 
 ### navigator.categoryAxis.labels.dateFormats.days `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "days".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "days".
 
 ### navigator.categoryAxis.labels.dateFormats.hours `String` *(default: "HH:mm")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "hours".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "hours".
 
 ### navigator.categoryAxis.labels.dateFormats.months `String` *(default: "MMM 'yy")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "months".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "months".
 
 ### navigator.categoryAxis.labels.dateFormats.weeks `String` *(default: "M/d")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "weeks".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 ### navigator.categoryAxis.labels.dateFormats.years `String` *(default: "yyyy")*
 
-The format used when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "years".
+The format used when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "years".
 
 ### navigator.categoryAxis.labels.font `String` *(default: "12px Arial,Helvetica,sans-serif")*
 
@@ -487,19 +487,19 @@ The skip of the category axis major ticks.
 ### navigator.categoryAxis.max `Object`
 
 The last date displayed on the category date axis. By default, the minimum date is the same as the last category.
-This is often used in combination with the [categoryAxis.min](#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 ### navigator.categoryAxis.maxDateGroups `Number` *(default: 10)*
 
 The maximum number of groups (categories) to display when
-[categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep) is set to "auto".
+[categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 ### navigator.categoryAxis.min `Object`
 
 The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
-This is often used in combination with the [categoryAxis.min](#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](#configuration-categoryAxis.roundToBaseUnit) options to
+This is often used in combination with the [categoryAxis.min](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.min) and [categoryAxis.roundToBaseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.roundToBaseUnit) options to
 set up a fixed date range.
 
 ### navigator.categoryAxis.minorGridLines `Object`
@@ -597,13 +597,13 @@ If set to `true` the category axis direction will be reversed. By default catego
 
 If set to `true` the chart will round the first and last date to the nearest base unit.
 
-The `roundToBaseUnit` option will be ignored if [series.type](#configuration-series.type) is set to "bar", "column", "ohlc" or "candlestick".
+The `roundToBaseUnit` option will be ignored if [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "ohlc" or "candlestick".
 
 ### navigator.categoryAxis.title `Object`
 
 The title configuration of the category axis.
 
-> The [categoryAxis.title.text](#configuration-categoryAxis.title.text) option must be set in order to display the title.
+> The [categoryAxis.title.text](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.title.text) option must be set in order to display the title.
 
 
 ### navigator.categoryAxis.title.background `String`
@@ -714,7 +714,7 @@ If set to `true` the chart will display the category axis. By default the catego
 
 ### navigator.categoryAxis.weekStartDay `Number` *(default: kendo.days.Sunday)*
 
-The week start day when [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "weeks".
+The week start day when [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "weeks".
 
 The supported values are:
 
@@ -1156,7 +1156,7 @@ The top padding of the navigator pane.
 
 The title configuration of the navigator pane.
 
-> The [panes.title.text](#configuration-panes.title.text) option must be set in order to display the title.
+> The [panes.title.text](/api/javascript/dataviz/ui/stock-chart#configuration-panes.title.text) option must be set in order to display the title.
 
 ### navigator.pane.title.background `String`
 
@@ -1257,10 +1257,6 @@ Omitting the array and specifying a single series is also acceptable.
     });
     </script>
 
-### navigator.visible `Boolean`*(default: true)*
-
-The visibility of the navigator.
-
 ### navigator.series.type `String`
 
 The type of the series. Available types:
@@ -1275,7 +1271,7 @@ The type of the series. Available types:
 
 The dash type of line chart.
 
-> The `dashType` option is taken into consideration only if the [series.type](#configuration-series.type) option is set to "line".
+> The `dashType` option is taken into consideration only if the [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) option is set to "line".
 
 The following dash types are supported:
 
@@ -1379,7 +1375,7 @@ The data item field which contains the category name or date.
 
 > The points will be rendered in chronological order if the category is a date.
 
-> If specified, the [dateField](#configuration-dateField) option is used as a default.
+> If specified, the [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
 
 #### Example - set series date category field
 
@@ -1946,7 +1942,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area" and "line".
+> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
 
 ### navigator.series.style `String` *(default: "normal")*
 
@@ -1957,7 +1953,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "area", "line".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area", "line".
 
 ### navigator.series.opacity `Number`
 
@@ -1991,9 +1987,9 @@ Available for column, candlestick and ohlc series.
 ### navigator.series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [navigator.series.stack.group](#configuration-series.stack.group).
+A string value is interpreted as [navigator.series.stack.group](/api/javascript/dataviz/ui/stock-chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [navigator.series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [navigator.series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 > Stack settings of the first series are applied to the rest of the series.
 
@@ -2008,7 +2004,7 @@ The type of stack to plot. The following types are supported:
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [navigator.series.type](#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [navigator.series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
 
 ### navigator.series.tooltip `Object`
 
@@ -2286,6 +2282,11 @@ Template variables:
 ### navigator.hint.format `String`
 
 The format of the hint.
+
+### navigator.visible `Boolean`*(default: true)*
+
+The visibility of the navigator.
+
 
 #### Example
 
@@ -2967,9 +2968,9 @@ Specialized axis for displaying chronological data.
 
 ### categoryAxis.autoBaseUnitSteps `Object`
 
-The discrete [categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep) values when
-either [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit" or
-[categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep) is set to "auto".
+The discrete [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) values when
+either [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit" or
+[categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep) is set to "auto".
 
 #### Example - set category axis auto base unit steps
 
@@ -3033,17 +3034,17 @@ The supported values are:
 * "weeks"
 * "years"
 
-Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](#configuration-categoryAxis.baseUnitStep)
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+Setting `baseUnit` to "fit" will set such base unit and [categoryAxis.baseUnitStep](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnitStep)
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-Series data is aggregated for the specified base unit using the [series.aggregate](#configuration-series.aggregate) function.
+Series data is aggregated for the specified base unit using the [series.aggregate](/api/javascript/dataviz/ui/stock-chart#configuration-series.aggregate) function.
 
 ### categoryAxis.baseUnitStep `Object` *(default: 1)*
 
 The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
-that the total number of categories does not exceed [categoryAxis.maxDateGroups](#configuration-categoryAxis.maxDateGroups).
+that the total number of categories does not exceed [categoryAxis.maxDateGroups](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.maxDateGroups).
 
-This option is ignored if [categoryAxis.baseUnit](#configuration-categoryAxis.baseUnit) is set to "fit".
+This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/stock-chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
 ### categoryAxis.labels.culture `String`
 
@@ -3122,6 +3123,10 @@ either **baseUnit** is set to "fit" or **baseUnitStep** is set to "auto".
 This option is ignored in all other cases.
 
 The default value is approximately equal to `[widget width, px] / 30`
+
+### categoryAxis.maxDivisions `Number`
+
+The maximum number of ticks and labels to display.
 
 ### categoryAxis.visible `Boolean`*(default: true)*
 
@@ -4910,6 +4915,113 @@ Configures the legend markers.
 The color of the markers.
 Any valid CSS color string will work here, including hex and rgb.
 
+### legend.title `Object`
+
+The legend title configuration options or text.
+
+### legend.title.align `String` *(default: "center")*
+
+The alignment of the title.
+
+* "center" - the text is aligned to the middle.
+* "left" - the text is aligned to the left.
+* "right" - the text is aligned to the right.
+
+### legend.title.background `String` *(default: "white")*
+
+The background color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border `Object`
+
+The border of the title.
+
+### legend.title.border.color `String` *(default: "black")*
+
+The color of the border. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.border.dashType `String` *(default: "solid")*
+
+The dash type of the legend title border.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+### legend.title.border.width `Number` *(default: 0)*
+
+The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+
+### legend.title.color `String`
+
+The text color of the title. Accepts a valid CSS color string, including hex and rgb.
+
+### legend.title.font `String` *(default: "16px Arial,Helvetica,sans-serif")*
+
+The font of the title.
+
+### legend.title.margin `Number|Object` *(default: 5)*
+
+The margin of the title. A numeric value will set all margins.
+
+### legend.title.margin.bottom `Number` *(default: 0)*
+
+The bottom margin of the title.
+
+### legend.title.margin.left `Number` *(default: 0)*
+
+The left margin of the title.
+
+### legend.title.margin.right `Number` *(default: 0)*
+
+The right margin of the title.
+
+### legend.title.margin.top `Number` *(default: 0)*
+
+The top margin of the title.
+
+### legend.title.padding `Number|Object` *(default: 5)*
+
+The padding of the title. A numeric value will set all margins.
+
+### legend.title.padding.bottom `Number` *(default: 0)*
+
+The bottom padding of the title.
+
+### legend.title.padding.left `Number` *(default: 0)*
+
+The left padding of the title.
+
+### legend.title.padding.right `Number` *(default: 0)*
+
+The right padding of the title.
+
+### legend.title.padding.top `Number` *(default: 0)*
+
+The top padding of the title.
+
+### legend.title.position `String` *(default: "top")*
+
+The position of the title.
+
+* "bottom" - the title is positioned on the bottom.
+* "top" - the title is positioned on the top.
+
+### legend.title.text `String`
+
+The text of the legend title. You can also set the text directly for a title with default options.
+
+> The text can be split into multiple lines by using line feed characters ("\n").
+
+### legend.title.visible `Boolean` *(default: true)*
+
+If set to `true` the chart will display the title. By default the title will be displayed.
+
 ### panes `Array`
 
 The chart panes configuration.
@@ -5100,7 +5212,7 @@ The text of the title.
 The visibility of the title.
 
 ### pdf `Object`
-Configures the export settings for the [saveAsPDF](#methods-saveAsPDF) method.
+Configures the export settings for the [saveAsPDF](/api/javascript/dataviz/ui/chart/methods/saveaspdf) method.
 
 ### pdf.author `String` *(default: null)*
 The author of the PDF document.
@@ -5181,7 +5293,7 @@ The date when the PDF document is created. Defaults to `new Date()`.
     </script>
 
 ### pdf.forceProxy `Boolean` *(default: false)*
-If set to true, the content will be forwarded to [proxyURL](#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+If set to true, the content will be forwarded to [proxyURL](/api/javascript/dataviz/ui/stock-chart#configuration-pdf.proxyURL) even if the browser supports saving files locally.
 
 #### Example - use proxy
 
@@ -5489,6 +5601,10 @@ Sets the title of the PDF file.
       chart.saveAsPDF();
     </script>
 
+### persistSeriesVisibility `Boolean` *(default: true)*
+
+Specifies if the series visible option should be persisted when changing the dataSource data.
+
 ### plotArea `Object`
 
 The plot area configuration options. This is the area containing the plotted series.
@@ -5571,7 +5687,7 @@ The supported values are:
 * "svg" - renders the widget as inline SVG document, if available
 * "canvas" - renders the widget as a Canvas element, if available.
 
-### Example - Render as Canvas, if supported
+#### Example - Render as Canvas, if supported
 
     <div id="stock-chart"></div>
     <script>
@@ -5669,7 +5785,7 @@ The data item field which contains the category name or date.
 
 > The points will be rendered in chronological order if the category is a date.
 
-> If specified, the [dateField](#configuration-dateField) option is used as a default.
+> If specified, the [dateField](/api/javascript/dataviz/ui/stock-chart#configuration-dateField) option is used as a default.
 
 #### Example - set series date category field
 
@@ -6233,7 +6349,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "area".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area".
 
 ### series.lowField `String`
 
@@ -6326,7 +6442,7 @@ The behavior for handling missing values. The supported values are:
 
 > The default value is "interpolate", except for "area" and stacked series which default to "zero".
 
-> The `missingValues` option is supported when [series.type](#configuration-series.type) is set to "area" and "line".
+> The `missingValues` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "area" and "line".
 
 ### series.style `String` *(default: "normal")*
 
@@ -6338,7 +6454,7 @@ The supported values are:
 
 > The default value is "normal".
 
-> The `style` option is supported when [series.type](#configuration-series.type) is set to "line".
+> The `style` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "line".
 
 ### series.negativeColor `String`
 
@@ -6380,9 +6496,9 @@ Available for column, candlestick and ohlc series.
 ### series.stack `Boolean|String|Object` *(default: false)*
 
 A boolean value indicating if the series should be stacked.
-A string value is interpreted as [series.stack.group](#configuration-series.stack.group).
+A string value is interpreted as [series.stack.group](/api/javascript/dataviz/ui/stock-chart#configuration-series.stack.group).
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 > Stack settings of the first series are applied to the rest of the series.
 
@@ -6397,7 +6513,7 @@ The type of stack to plot. The following types are supported:
 
 Indicates that the series should be stacked in a group with the specified name.
 
-> The `group` option is supported when [series.type](#configuration-series.type) is set to "bar" or "column".
+> The `group` option is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar" or "column".
 
 ### series.tooltip `Object`
 
@@ -6990,7 +7106,7 @@ The default options for all pie series. For more details see the series options.
 
 A boolean value indicating if the series should be stacked.
 
-> The `stack` options is supported when [series.type](#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
+> The `stack` options is supported when [series.type](/api/javascript/dataviz/ui/stock-chart#configuration-series.type) is set to "bar", "column", "line", "area", "verticalLine", "verticalArea", "radarLine", "radarArea" and "radarColumn".
 
 ### seriesDefaults.stack.type `String` *(default: "normal")*
 
@@ -9347,7 +9463,7 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
 ### exportImage
 Exports the chart as an image.
 
-Inherited from [Chart.exportImage](chart#methods-exportImage)
+Inherited from [Chart.exportImage](/api/javascript/dataviz/ui/chart#methods-exportImage)
 
 #### Parameters
 
@@ -9367,7 +9483,7 @@ The height of the exported image. Defaults to the chart height.
 ### exportPDF
 Exports the chart as a PDF file.
 
-Inherited from [Chart.exportPDF](chart#methods-exportPDF)
+Inherited from [Chart.exportPDF](/api/javascript/dataviz/ui/chart#methods-exportPDF)
 
 #### Parameters
 
@@ -9381,7 +9497,7 @@ Parameters for the exported PDF file.
 ### exportSVG
 Exports the chart as an SVG document.
 
-Inherited from [Chart.exportSVG](chart#methods-exportSVG)
+Inherited from [Chart.exportSVG](/api/javascript/dataviz/ui/chart#methods-exportSVG)
 
 #### Parameters
 
@@ -9434,13 +9550,13 @@ The chart settings to update.
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the chart.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the chart.
 The returned string is a self-contained SVG document that can be used as is or
-converted to other formats using tools like [Inkscape](http://inkscape.org/) and
-[ImageMagick](http://www.imagemagick.org/).
+converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/).
 Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/stock-chart/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 `String` the SVG representation of the chart.
@@ -9463,6 +9579,7 @@ Both programs provide command-line interface suitable for server-side processing
 
     var chart = $("#stock-chart").data("kendoStockChart");
     var svg = chart.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -9470,7 +9587,7 @@ Both programs provide command-line interface suitable for server-side processing
 
 Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/stock-chart/methods/exportimage).
 
 #### Returns
 
@@ -9505,7 +9622,7 @@ Returns a PNG image of the chart encoded as a [Data URL](https://developer.mozil
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);
@@ -9711,6 +9828,36 @@ The DOM element of the plot area.
 
 The widget instance which fired the event.
 
+### legendItemLeave
+
+Fires when the cursor leaves a legend item.
+
+#### Event Data
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.pointIndex `Number`
+
+The point index.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series options.
+
+##### e.seriesIndex `Number`
+
+The series index.
+
+##### e.text `String`
+
+The name of the series.
+
 ### noteClick
 
 Fired when the user clicks one of the notes.
@@ -9780,6 +9927,64 @@ The series of the note.
 The data item of the point's note.
 
 ##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+### noteLeave
+
+Fired when the cursor leaves a note.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category. Available only for categorical charts (bar, line, area and similar).
+
+##### e.dataItem `Object`
+
+The data item of the point's note.
+
+##### e.element `Object`
+
+The DOM element of the plot area.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The series of the note.
+
+##### e.value `Object`
+
+The data point value.
+
+##### e.visual `Object`
+
+The note visual element.
+
+### paneRender
+
+Fires when a pane is rendered because the chart is rendered, or the chart performs panning or zooming, or because the chart is exported with different options. The event can be used to render custom visuals in the panes.
+
+#### Event Data
+
+##### pane `kendo.dataviz.ui.StockChart`
+
+The chart pane that was rendered.
+
+##### name `String`
+
+The pane name.
+
+##### index `Number`
+
+The pane index.
+
+##### e.sender `kendo.dataviz.ui.Chart`
 
 The widget instance which fired the event.
 
@@ -9858,6 +10063,14 @@ The Y axis value or array of values for multi-axis charts.
 ##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
+
+### plotAreaLeave
+
+Fired when the cursor leaves the plotArea.
+
+#### Event Data
+
+##### e.sender `kendo.dataviz.ui.StockChart`
 
 ### render
 
@@ -10054,6 +10267,114 @@ The point value represented as a percentage value. Available only for donut, pie
 ##### e.sender `kendo.dataviz.ui.StockChart`
 
 The widget instance which fired the event.
+
+### seriesOver
+
+Fired when the cursor is over the chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
+
+### seriesLeave
+
+Fired when the cursor leaves a chart series.
+
+#### Event Data
+
+##### e.category `Object`
+
+The data point category
+
+##### e.dataItem `Object`
+
+The original data item (when binding to dataSource).
+
+##### e.element `Object`
+
+The DOM element of the data point.
+
+##### e.originalEvent `Object`
+
+The original browser event that triggered the hover action.
+
+##### e.percentage `Object`
+
+The point value represented as a percentage value. Available only for 100% stacked charts.
+
+##### e.sender `kendo.dataviz.ui.StockChart`
+
+The widget instance which fired the event.
+
+##### e.series `Object`
+
+The clicked series.
+
+##### e.series.type `String`
+
+The series type
+
+##### e.series.name `String`
+
+The series name
+
+##### e.series.data `Array`
+
+The series data points
+
+##### e.stackValue `Object`
+
+The cumulative point value on the stack. Available only for stackable series.
+
+##### e.value `Object`
+
+The data point value.
 
 ### zoomStart
 

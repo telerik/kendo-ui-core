@@ -2,40 +2,46 @@
     var Color = kendo.Color;
 
     // ------------------------------------------------------------
-    module("Color");
+    describe("Color", function () {
 
-    test("fromHSL", function() {
+    it("fromHSL", function() {
         var color = Color.fromHSL(200, 0.5, 1, 0);
-        equal(color.h, 200);
-        equal(color.s, 0.5);
-        equal(color.l, 1);
-        equal(color.a, 0);
+        assert.equal(color.h, 200);
+        assert.equal(color.s, 0.5);
+        assert.equal(color.l, 1);
+        assert.equal(color.a, 0);
     });
 
-    test("HSL to RGB", function() {
+    it("HSL to RGB", function() {
         var color = Color.fromHSL(228, 83, 61, 0);
-        equal(color.toRGB().toCss(), "#496aee");
+        assert.equal(color.toRGB().toCss(), "#496aee");
     });
 
-    test("RGB to HSL", function() {
+    it("RGB to HSL", function() {
         var color = kendo.parseColor("#496aee").toHSL();
         close(color.h, 228, 0.1);
         close(color.s, 83, 0.1);
         close(color.l, 61, 0.1);
-        equal(color.a, 1);
+        assert.equal(color.a, 1);
     });
 
-    test("darken HSL", function() {
+    it("RGB to HSL achromatic", function() {
+        var color = kendo.parseColor("#fff").toHSL().toCss();
+        assert.equal(color, "#ffffff");
+    });
+
+    it("darken HSL", function() {
         var color = kendo.parseColor("#496aee").toHSL();
         color.l = 30;
 
-        equal(color.toCss(), "#0d268c");
+        assert.equal(color.toCss(), "#0d268c");
     });
 
-    test("lighten HSL", function() {
+    it("lighten HSL", function() {
         var color = kendo.parseColor("#496aee").toHSL();
         color.l = 90;
 
-        equal(color.toCss(), "#d0d9fb");
+        assert.equal(color.toCss(), "#d0d9fb");
     });
-})();
+    });
+}());

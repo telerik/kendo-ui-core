@@ -230,6 +230,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Filter wissen",
   "filter": "Filter",
   "info": "Toon items met waarde:",
+  "title": "Toon items met waarde",
   "isFalse": "is niet waar",
   "isTrue": "is waar",
   "operator": "Operator",
@@ -287,6 +288,26 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
+  "display": "items {0} - {1} van {2}",
+  "empty": "Geen items om te tonen",
+  "first": "Ga naar eerste pagina",
+  "itemsPerPage": "items per pagina",
+  "last": "Ga naar laatste pagina",
+  "next": "Ga naar volgende pagina",
+  "of": "van {0}",
+  "page": "Pagina",
+  "previous": "Ga naar vorige pagina",
+  "refresh": "Verversen",
+  "morePages": "Meer pagina"
+});
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "All",
   "display": "items {0} - {1} van {2}",
   "empty": "Geen items om te tonen",

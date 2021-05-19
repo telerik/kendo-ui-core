@@ -7,11 +7,9 @@ slug: howto_create_custom_views_gantt
 
 # Create Custom Views
 
-The example below demonstrates how to create a custom view in the Kendo UI Gantt.
+The following example demonstrates how to create a custom view in the Kendo UI Gantt.
 
-###### Example
-
-```html
+```dojo
     <div id="gantt"></div>
     <script type="text/javascript">
       var gantt;
@@ -84,9 +82,8 @@ The example below demonstrates how to create a custom view in the Kendo UI Gantt
           ],
           listWidth: 500,
           dataBound: function() {
-            var height = this.timeline.view()._slots.length * 2.5;
-            this.list.header.find("tr").height(height + "em");
-            this.list._adjustHeight();
+            var height = this.timeline.view().header.height();
+						this.list.thead.find('tr').css('height',height);
           },
           dataSource: {
             data: [{ id: 1, parentId: null, percentComplete: 0.2, orderId: 0, title: "foo", start: new Date("05/05/2014 09:00"), end: new Date("06/06/2014 10:00") },
@@ -105,7 +102,5 @@ The example below demonstrates how to create a custom view in the Kendo UI Gantt
 
 ## See Also
 
-Other articles on the Kendo UI Gantt:
-
-* [Gantt JavaScript API Reference](/api/javascript/ui/gantt)
-* [How to Colorize Tasks]({% slug howto_colorize_tasks_gantt %})
+* [Basic Usage of the Gantt (Demo)](https://demos.telerik.com/kendo-ui/gantt/index)
+* [JavaScript API Reference of the Gantt](/api/javascript/ui/gantt)

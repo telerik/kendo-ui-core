@@ -1,4 +1,4 @@
-Copyright $YEAR Telerik AD. All rights reserved.
+Copyright $YEAR Progress Software Corporation and/or one of its subsidiaries or affiliates. All rights reserved.
 
 Kendo UI commercial licenses may be obtained at
 http://www.telerik.com/purchase/license-agreement/kendo-ui-complete

@@ -22,10 +22,18 @@
 .ktb-var-selected-gradient   { .composite-background(@selected-gradient); }
 .ktb-var-selected-text-color { color: @selected-text-color; }
 
+.ktb-var-is-dark-theme       { opacity: if( @is-dark-theme, 1, 0); }
+
+.ktb-var-primary             { color: @primary; }
+.ktb-var-secondary           { color: @secondary; }
+.ktb-var-tertiary            { color: @tertiary; }
 .ktb-var-error               { color: @error; }
 .ktb-var-warning             { color: @warning; }
 .ktb-var-success             { color: @success; }
 .ktb-var-info                { color: @info; }
+.ktb-var-dark                { color: @dark; }
+.ktb-var-light               { color: @light; }
+.ktb-var-inverse             { color: @inverse; }
 
 .ktb-var-series-a            { color: @series-a; }
 .ktb-var-series-b            { color: @series-b; }

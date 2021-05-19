@@ -1,0 +1,111 @@
+// Dialog
+.k-dialog {
+    min-width: 90px;
+    min-height: 3em;
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    overflow: hidden;
+
+    // Centered
+    &-centered {
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+    }
+}
+
+
+// Titlebar
+.k-dialog-titlebar {}
+.k-dialog-title {}
+
+
+// Titlebar actions
+.k-dialog-titlebar .k-dialog-actions {}
+.k-dialog-titlebar .k-dialog-close {}
+.k-dialog-titleless .k-dialog-close {
+    position: absolute;
+    z-index: 9999;
+    top: (@window-titlebar-padding-y / 2);
+    right: (@window-titlebar-padding-y / 2);
+}
+
+
+// Content
+.k-dialog-titleless .k-dialog-content {
+    padding: 2.4em;
+}
+
+
+// Buttons
+.k-dialog-buttongroup {
+    margin: 0;
+    padding: (@window-inner-padding-y / 2) (@window-inner-padding-x / 2);
+    width: 100%;
+    border-width: 1px 0 0;
+    border-style: solid;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .k-button {
+        flex-shrink: 0;
+        display: inline-block;
+        text-overflow: ellipsis;
+        box-sizing: border-box;
+    }
+    .k-button + .k-button {
+        margin-left: (@window-inner-padding-y / 2);
+    }
+}
+.k-dialog-button-layout-stretched {
+    .k-button {
+        flex: 1 0 0;
+        white-space: nowrap;
+    }
+}
+
+
+// Sizes
+.k-dialog.k-window-sm {
+
+    .k-dialog-button-group {
+        flex-direction: column;
+
+        .k-button + .k-button {
+            margin: (@window-inner-padding-y / 2) 0 0;
+        }
+    }
+}
+
+
+// RTL
+.k-rtl.k-dialog-titleless .k-dialog-close,
+.k-rtl .k-dialog-titleless .k-dialog-close {
+    right: auto;
+    left: (@window-titlebar-padding-y / 2);
+}
+.k-rtl {
+    .k-dialog-buttongroup {
+        .k-button + .k-button {
+            margin-left: 0;
+            margin-right: (@window-inner-padding-y / 2);
+        }
+    }
+}
+
+
+
+
+// No flex box (IE9)
+.k-no-flexbox {
+    .k-dialog-button-layout-stretched {
+        text-align: right;
+    }
+    .k-rtl .k-dialog-button-layout-stretched {
+        text-align: left;
+    }
+}

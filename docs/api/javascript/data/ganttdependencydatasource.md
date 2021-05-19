@@ -27,15 +27,15 @@ The model configuration of the `GanttDependencyDataSource`. See [`GanttDependenc
     var dataSource = new kendo.data.GanttDependencyDataSource({
       transport: {
         read: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttDependencies",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttDependencies",
           dataType: "jsonp"
         },
         destroy: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttDependencies/Destroy",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttDependencies/Destroy",
           dataType: "jsonp"
         },
         create: {
-          url: "http://demos.telerik.com/kendo-ui/service/GanttDependencies/Create",
+          url: "https://demos.telerik.com/kendo-ui/service/GanttDependencies/Create",
           dataType: "jsonp"
         }
       },
@@ -53,6 +53,7 @@ The model configuration of the `GanttDependencyDataSource`. See [`GanttDependenc
     });
     dataSource.fetch(function() {
       var dependency = this.at(0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(dependency.type);
     });
     </script>
@@ -69,11 +70,11 @@ Returns a list of all dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the Gantt task, based on which the dependencies are filtered.
+The id of the Gantt task based on which the dependencies are filtered.
 
 #### Returns
 
-`Array` the list of all task dependencies.
+`Array`&mdash;The list of all task dependencies.
 
 #### Example - get all dependencies of a task
 
@@ -115,11 +116,11 @@ Returns a list of all predecessor dependencies for a certain task.
 
 ##### id `String|Number|Object`
 
-The id of the Gantt task, based on which the dependencies are filtered.
+The id of the Gantt task based on which the dependencies are filtered.
 
 #### Returns
 
-`Array` the list of all task predecessors.
+`Array`&mdash;The list of all task predecessors.
 
 #### Example - get all task predecessors
 
@@ -165,7 +166,7 @@ The id of the Gantt task, based on which the dependencies are filtered.
 
 #### Returns
 
-`Array` the list of all task successors.
+`Array`&mdash;The list of all task successors.
 
 #### Example - get all task successors
 

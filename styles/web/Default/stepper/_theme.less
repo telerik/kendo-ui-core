@@ -1,0 +1,157 @@
+ // Base
+ .k-stepper {
+    .fill(
+        @stepper-text,
+        @stepper-bg,
+        @stepper-border
+    );
+
+
+    // Not done steps
+    .k-step {
+        // Hover
+        &:hover,
+        &.k-step-hover {
+            .k-step-indicator {
+                .fill(
+                    @stepper-indicator-hover-text,
+                    @stepper-indicator-hover-bg,
+                    @stepper-indicator-hover-border
+                );
+            }
+        }
+
+
+        // Disabled
+        &.k-step-disabled,
+        &:disabled {
+            .k-step-indicator {
+                .fill(
+                    @stepper-indicator-disabled-text,
+                    @stepper-indicator-disabled-bg,
+                    @stepper-indicator-disabled-border
+                );
+            }
+        }
+    }
+    .k-step-indicator {
+        .fill(
+            @stepper-indicator-text,
+            @stepper-indicator-bg,
+            @stepper-indicator-border
+        );
+    }
+    .k-step-indicator::after {
+        box-shadow: inset 0 0 0 2px @component-bg;
+    }
+    .k-step-label:only-child {
+        .fill(
+            @component-text,
+            @component-bg,
+            @component-border
+        );
+    }
+
+
+    // Done steps
+    .k-step-done {
+
+        .k-step-indicator {
+            .fill(
+                @stepper-indicator-done-text,
+                @stepper-indicator-done-bg,
+                @stepper-indicator-done-border
+            );
+        }
+
+
+        // Hover
+        &:hover,
+        &.k-step-hover {
+            .k-step-indicator {
+                .fill(
+                    @stepper-indicator-done-hover-text,
+                    @stepper-indicator-done-hover-bg,
+                    @stepper-indicator-done-hover-border
+                );
+            }
+        }
+
+
+        // Disabled
+        &.k-step-disabled,
+        &:disabled {
+            .k-step-indicator {
+                .fill(
+                    @stepper-indicator-done-disabled-text,
+                    @stepper-indicator-done-disabled-bg,
+                    @stepper-indicator-done-disabled-border
+                );
+            }
+        }
+    }
+
+
+    // Current
+    .k-step-current {
+
+        .k-step-indicator {
+            .fill(
+                @stepper-indicator-current-text,
+                @stepper-indicator-current-bg,
+                @stepper-indicator-current-border
+            );
+        }
+
+
+        // Hover
+        &:hover,
+        &.k-step-hover {
+            .k-step-indicator {
+                .fill(
+                    @stepper-indicator-current-hover-text,
+                    @stepper-indicator-current-hover-bg,
+                    @stepper-indicator-current-hover-border
+                );
+            }
+        }
+
+
+        // Disabled
+        &.k-step-disabled,
+        &:disabled {
+            .k-step-indicator {
+                .fill(
+                    @stepper-indicator-current-disabled-text,
+                    @stepper-indicator-current-disabled-bg,
+                    @stepper-indicator-current-disabled-border
+                );
+            }
+        }
+    }
+
+    // Label
+    .k-step-label {
+        .fill( @stepper-label-text );
+    }
+    .k-step-success .k-step-label .k-icon {
+        .fill( @stepper-label-success-text );
+    }
+    .k-step-error .k-step-label {
+        .fill( @stepper-label-error-text );
+    }
+    .k-step-disabled .k-step-label {
+        .fill( @stepper-label-disabled-text );
+    }
+
+    // Labels only
+    .k-step-focus .k-step-label:only-child,
+    .k-step-link:focus .k-step-label:only-child {
+        box-shadow: inset 0 0 0 2px @component-border;
+    }
+
+    // Optional Label
+    .k-step-optional .k-step-label-optional {
+        opacity: .35;
+    }
+}

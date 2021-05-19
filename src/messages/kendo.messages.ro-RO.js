@@ -229,6 +229,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "clear": "Șterge",
   "filter": "Filtrează",
   "info": "Criterii filtrare:",
+  "title": "Criterii filtrare",
   "isFalse": "este fals",
   "isTrue": "este adevărat",
   "or": "Sau",
@@ -287,6 +288,26 @@ $.extend(true, kendo.ui.Groupable.prototype.options.messages,{
 if (kendo.ui.Pager) {
 kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
+  "allPages": "All",
+  "display": "{0} - {1} din {2} elemente",
+  "empty": "Nu există elemente pentru afișare",
+  "first": "Prima pagină",
+  "itemsPerPage": "elemente per pagină",
+  "last": "Ultima pagină",
+  "next": "Pagina următoare",
+  "of": "din {0}",
+  "page": "Pagina",
+  "previous": "Pagina precedentă",
+  "refresh": "Actualizează",
+  "morePages": "Mai multe pagini"
+});
+}
+
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+kendo.ui.TreeListPager.prototype.options.messages =
+$.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
   "allPages": "All",
   "display": "{0} - {1} din {2} elemente",
   "empty": "Nu există elemente pentru afișare",

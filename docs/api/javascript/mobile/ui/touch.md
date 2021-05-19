@@ -1,6 +1,7 @@
 ---
 title: Touch
 res_type: api
+component: touch
 ---
 
 # kendo.ui.Touch
@@ -28,6 +29,7 @@ jQuery selector that specifies child elements that are touchable if a widget is 
     $("#list").kendoTouch({
         filter: ".touch",
         drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("you dragged a list item");
         }
     });
@@ -51,6 +53,7 @@ This option is useful if the widget is instantiated on small DOM elements like b
     $("#list li").kendoTouch({
         surface: $("#list"),
         drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("you dragged a list item");
         }
     });
@@ -69,6 +72,7 @@ If set to true, the widget will capture and trigger the `gesturestart`, `gesture
     $("#touch").kendoTouch({
         multiTouch: true,
         gesturestart: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("User touched the element with two fingers");
         }
     });
@@ -90,6 +94,7 @@ If set to true, the Touch widget will recognize horizontal swipes and trigger th
     $("#touch").kendoTouch({
         enableSwipe: true,
         swipe: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("User swiped the element");
         }
     });
@@ -110,6 +115,7 @@ The minimum horizontal distance in pixels the user should swipe before the `swip
         enableSwipe: true,
         minXDelta: 50,
         swipe: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Long swipe");
         }
     });
@@ -130,6 +136,7 @@ The maximum vertical deviation in pixels of the swipe event. Swipes with higher 
         enableSwipe: true,
         maxYDelta: 50,
         swipe: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Loose shaky swipe");
         }
     });
@@ -150,6 +157,7 @@ The maximum amount of time in milliseconds the swipe event can last. Slower swip
         enableSwipe: true,
         maxDuration: 500,
         swipe: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("fast swipe");
         }
     });
@@ -171,6 +179,7 @@ The timeout in milliseconds before the `hold` event is fired.
     $("#touch").kendoTouch({
         minHold: 2000,
         hold: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("holding for a while.");
         }
     });
@@ -190,6 +199,7 @@ The maximum period (in milliseconds) between two consecutive taps which will tri
     $("#touch").kendoTouch({
         doubleTapTimeout: 2000,
         doubletap: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("two taps");
         }
     });
@@ -212,6 +222,7 @@ Cancels the current touch event sequence. Calling `cancel` in a `touchstart` or 
             },
             hold: function(e) {
                 // this event handler will not be executed
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e);
             }
         });
@@ -235,6 +246,7 @@ Fires when the user presses the element.
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ touchstart: function (e) { console.log(e); } });
     </script>
 
@@ -257,6 +269,7 @@ Fires when the user starts dragging the element.
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ dragstart: function (e) { console.log(e); } });
     </script>
 
@@ -280,6 +293,7 @@ Fires each time the user drags (within the element boundaries).
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ drag: function (e) { console.log(e); } });
     </script>
 
@@ -302,6 +316,7 @@ Fires when the user lifts his/hers finger, or drags outside of the element bound
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ dragend: function (e) { console.log(e); } });
     </script>
 
@@ -324,6 +339,7 @@ Fires when the user taps on the element. A touch sequence is considered a tap if
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ tap: function (e) { console.log(e); } });
     </script>
 
@@ -348,6 +364,7 @@ Fires when the user quickly taps twice on the element.
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ doubletap: function (e) { console.log(e); } });
     </script>
 
@@ -372,6 +389,7 @@ The minimum amount can be configured through the `minHold` configuration option.
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ hold: function (e) { console.log(e); } });
     </script>
 
@@ -398,6 +416,7 @@ For this event to be triggered, the `enableSwipe` configuration option should be
     <div id="touch">Touch here</div>
 
     <script>
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     $("#touch").kendoTouch({ enableSwipe: true, swipe: function (e) { console.log(e); } });
     </script>
 
@@ -429,6 +448,7 @@ Fires when the user presses the element with two fingers (or presses with a seco
     $("#touch").kendoTouch({
         multiTouch: true,
         gesturestart: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("User touched the element with two fingers");
         }
     });
@@ -466,6 +486,7 @@ Fires when the user moves a finger while multiple fingers are touching the eleme
     $("#touch").kendoTouch({
         multiTouch: true,
         gesturechange: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         }
     });
@@ -504,6 +525,7 @@ Fires when the user lifts the second finger from the element.
     $("#touch").kendoTouch({
         multiTouch: true,
         gestureend: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e);
         }
     });
@@ -540,7 +562,9 @@ The touch event object (available in the event handler event object) contains in
         var xAxis = touch.x;
         var yAxis = touch.y;
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(xAxis.location);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(yAxis.location);
     }
 

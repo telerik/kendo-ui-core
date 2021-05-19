@@ -53,7 +53,7 @@
         "justifyCenter": "Στοίχιση Κέντρο",
         "justifyLeft": "Στοίχιση Αριστερά",
         "justifyRight": "Στοίχιση Δεξιά",
-        "justifyFull": "Justify",
+        "justifyFull": "Ισάζω",
         "insertUnorderedList": "Τοποθετήστε μη διατεταγμένη λίστα",
         "insertOrderedList": "Τοποθετήστε διατεταγμένη λίστα",
         "indent": "Εσοχή",
@@ -228,6 +228,7 @@
     kendo.ui.FilterMenu.prototype.options.messages =
       $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
         "info": "Δείξε αντικείμενα με τιμή που:",
+        "title": "Δείξε αντικείμενα με τιμή που",
         "isTrue": "είναι αληθές",
         "isFalse": "είναι ψευδές",
         "filter": "Φίλτρο",
@@ -429,6 +430,26 @@
         "display": "{0} - {1} από {2} αντικείμενα",
         "empty": "Δεν υπάρχουν αντικείμενα",
         "page": "Σελίδα",
+        "of": "από {0}",
+        "itemsPerPage": "αντικείμενα ανα σελίδα",
+        "first": "Πηγαίντε στην πρώτη σελίδα",
+        "previous": "Πηγαίντε στην προηγούμενη σελίδα",
+        "next": "Πηγαίντε στην επόμενη σελίδα",
+        "last": "Πηγαίντε στην τελευταία σελίδα",
+        "refresh": "Ανανέωση",
+        "morePages": "Περισσότερες Σελίδες"
+      });
+  }
+
+  /* TreeListPager messages */
+
+  if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+      $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
+        "allPages": "Όλα",
+        "page": "Σελίδα",
+        "display": "{0} - {1} από {2} αντικείμενα",
+        "empty": "Δεν υπάρχουν αντικείμενα",
         "of": "από {0}",
         "itemsPerPage": "αντικείμενα ανα σελίδα",
         "first": "Πηγαίντε στην πρώτη σελίδα",
@@ -731,13 +752,6 @@
             "typeMessage": "Τυπος μηνύματος"
           }
         },
-        "saveAsDialog": {
-          "title": "Αποθήκευση ως...",
-          "labels": {
-            "fileName": "Όνομα Αρχείου",
-            "saveAsType": "Αποθήκευση ως τύπος"
-          }
-        },
         "exportAsDialog": {
           "title": "Εξαγωγή...",
           "labels": {
@@ -824,7 +838,7 @@
           "justtifyLeft": "Ευθυγράμμιση Αριστερά",
           "justifyCenter": "Κέντρο",
           "justifyRight": "Ευθυγράμμιση Δεξιά",
-          "justifyFull": "Justify",
+          "justifyFull": "Ισάζω",
           "alignTop": "Ευθυγράμμιση Πάνω",
           "alignMiddle": "Ευθυγράμμιση Μέση",
           "alignBottom": "Ευθυγράμμιση Κάτω"
@@ -940,18 +954,6 @@
           "destroy": "Διαγραφή",
           "excel": "Εξαγωγή σε Excel",
           "pdf": "Εξαγωγή σε PDF"
-        }
-      });
-  }
-
-  if (kendo.ui.TreeList) {
-    kendo.ui.TreeList.prototype.options.columnMenu =
-      $.extend(true, kendo.ui.TreeList.prototype.options.columnMenu, {
-        "messages": {
-          "columns": "Επιλέξτε στήλες",
-          "filter": "Εφαρμογή φίλτρων",
-          "sortAscending": "Ταξινόμιση (αύξ.)",
-          "sortDescending": "Ταξινόμιση (φθήν.)"
         }
       });
   }

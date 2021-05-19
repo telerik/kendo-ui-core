@@ -9,10 +9,10 @@ slug: include_google_maps_mobile_application
 
 The example below demonstrates how to include Google maps when working with the Hybrid UI Application of Kendo UI.
 
-###### Example
 
-```html
-       <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCG4jUolof0jhqQu0j1aNqSWfW_ms-wRKg&sensor=true"></script>
+
+```dojo
+       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG4jUolof0jhqQu0j1aNqSWfW_ms-wRKg&sensor=true"></script>
     <div data-role="view" data-title="Info" id="info">
       <div style="width:100%; text-align: center">
         <h1>Using Google Maps<br />in KendoUI application</h1>

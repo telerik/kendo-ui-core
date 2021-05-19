@@ -15,11 +15,11 @@ To achieve this behavior:
 
 > **Important**
 >
-> This approach is not officially supported and might lead to undesired side-effects.
+> This approach is not officially supported and might lead to undesired side-effects. As of the Kendo UI R2 2017 release, the DatePicker supports the [`dateInput`](/api/javascript/ui/datepicker/configuration/dateinput) property which provides a built-in mask. 
 
-###### Example
 
-```html
+
+```dojo
     <input id="datepicker1" />
     <input id="datepicker2" />
     <script>

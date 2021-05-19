@@ -2,526 +2,544 @@
     var splitter;
     var create = SplitterHelpers.create;
 
-    module("splitter api", SplitterHelpers.basicModule);
+    describe("splitter api", function() {
+        beforeEach(SplitterHelpers.basicModule.setup);
+        afterEach(SplitterHelpers.basicModule.teardown);
 
-    test("toggle(false) toggles pane state", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
+        it("toggle(false) toggles pane state", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            var pane = splitter.dom.find(".k-pane:first");
+
+            splitter.object.toggle(pane, false);
+
+            assert.isOk(pane.data("pane").collapsed);
+
+            splitter = create({
+                panes: [{}, { collapsible: true }]
+            });
+
+            pane = splitter.dom.find(".k-pane:last")
+
+            splitter.object.toggle(pane, false);
+
+            assert.isOk(pane.data("pane").collapsed);
         });
 
-        var pane = splitter.dom.find(".k-pane:first");
+        it("toggle(false) triggers resize", function() {
+            var triggered = false;
 
-        splitter.object.toggle(pane, false);
+            splitter = create({
+                panes: [{ collapsible: true }, {}],
+                resize: function() {
+                    triggered = true;
+                }
+            });
 
-        ok(pane.data("pane").collapsed);
+            splitter.object.toggle(".k-pane:last", false);
 
-        splitter = create({
-            panes: [ {}, { collapsible: true } ]
+            assert.isOk(triggered);
         });
 
-        pane = splitter.dom.find(".k-pane:last")
+        it("toggle(false) converts associated arrow to expand arrow", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
 
-        splitter.object.toggle(pane, false);
+            splitter.object.toggle(".k-pane:first", false);
 
-        ok(pane.data("pane").collapsed);
-    });
+            var previousArrow = splitter.dom.find(".k-expand-prev");
 
-    test("toggle(false) triggers resize", function() {
-        var triggered = false;
+            assert.isOk(previousArrow.is(".k-expand-prev"));
+            assert.isOk(previousArrow.is(":not(.k-collapse-prev)"));
+        });
 
-        splitter = create({
-            panes: [ { collapsible: true }, {} ],
-            resize: function() {
+        it("toggle(false) disables splitbar resize", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter.object.toggle(".k-pane:first", false);
+
+            assert.isOk(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
+        });
+
+        it("toggle(true) removes splibar hover style", function() {
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            splitter.dom.find(".k-splitbar").addClass("k-splitbar-horizontal-hover");
+
+            splitter.object.toggle(".k-pane:first", false);
+
+            assert.isOk(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
+        });
+
+        it("toggle(true) toggles pane state", function() {
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            var pane = splitter.dom.find(".k-pane:first");
+
+            splitter.object.toggle(pane, true);
+
+            assert.isOk(!pane.data("pane").collapsed);
+
+            splitter = create({
+                panes: [{}, { collapsible: true, collapsed: true }]
+            });
+
+            pane = splitter.dom.find(".k-pane:last")
+
+            splitter.object.toggle(pane, true);
+
+            assert.isOk(!pane.data("pane").collapsed);
+        });
+
+        it("toggle(true) triggers resize", function() {
+            var triggered = false;
+
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}],
+                resize: function() {
+                    triggered = true;
+                }
+            });
+
+            splitter.object.toggle(".k-pane:first", true);
+
+            assert.isOk(triggered);
+        });
+
+        it("toggle(true) converts associated arrow to collapse arrow", function() {
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            splitter.object.toggle(".k-pane:first", true);
+
+            var previousArrow = splitter.dom.find(".k-collapse-prev");
+
+            assert.isOk(previousArrow.is(".k-collapse-prev"));
+            assert.isOk(previousArrow.is(":not(.k-expand-prev)"));
+        });
+
+        it("toggle(true) enables splitbar resize", function() {
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            splitter.object.toggle(".k-pane:first", true);
+
+            assert.isOk(splitter.dom.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
+        });
+
+        it("toggle(true) does not add splibar hover style", function() {
+            splitter = create({
+                panes: [{ collapsible: true, collapsed: true }, {}]
+            });
+
+            splitter.object.toggle(".k-pane:first", true);
+
+            assert.isOk(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
+        });
+
+        it("toggle() applies selector context", function() {
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter.object.toggle(".k-pane:first", false);
+
+            assert.isOk(splitter.dom.find(".k-pane:first").data("pane").collapsed);
+        });
+
+        it("collapse() calls toggle(false)", function() {
+            var args;
+
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter.object.toggle = function() {
+                args = arguments;
+            };
+
+            splitter.object.collapse(".k-pane:last");
+
+            assert.isOk(args);
+            assert.equal(args.length, 2);
+            assert.equal(args[0], ".k-pane:last");
+            assert.equal(args[1], false);
+        });
+
+        it("expand() calls toggle(true)", function() {
+            var args;
+
+            splitter = create({
+                panes: [{ collapsible: true }, {}]
+            });
+
+            splitter.object.toggle = function() {
+                args = arguments;
+            };
+
+            splitter.object.expand(".k-pane:last");
+
+            assert.isOk(args);
+            assert.equal(args.length, 2);
+            assert.equal(args[0], ".k-pane:last");
+            assert.equal(args[1], true);
+        });
+
+        it("size() gets/sets pane size", function() {
+            splitter = create({
+                panes: [{ size: "110px" }, {}]
+            });
+
+            var firstPane = splitter.dom.find(".k-pane:first");
+
+            assert.equal(splitter.object.size(firstPane), "110px");
+
+            splitter.object.size(firstPane, "120px");
+
+            assert.equal(splitter.object.size(firstPane), "120px");
+        });
+
+        it("size() applies selector context", function() {
+            splitter = create({
+                panes: [{ size: "125px" }, {}]
+            });
+
+            splitter = create({
+                panes: [{ size: "110px" }, {}]
+            });
+
+            assert.equal(splitter.object.size(".k-pane:first"), "110px");
+        });
+
+        it("min() gets/sets pane min", function() {
+            splitter = create({
+                panes: [{ min: "110px", size: "200px" }, {}]
+            });
+
+            var firstPane = splitter.dom.find(".k-pane:first");
+
+            assert.equal(splitter.object.min(firstPane), "110px");
+
+            splitter.object.min(firstPane, "120px");
+
+            assert.equal(splitter.object.min(firstPane), "120px");
+        });
+
+        it("max() gets/sets pane max", function() {
+            splitter = create({
+                panes: [{ max: "200px", size: "110px" }, {}]
+            });
+
+            var firstPane = splitter.dom.find(".k-pane:first");
+
+            assert.equal(splitter.object.max(firstPane), "200px");
+
+            splitter.object.max(firstPane, "120px");
+
+            assert.equal(splitter.object.max(firstPane), "120px");
+        });
+
+        it("size(value) triggers resize", function() {
+            var triggered = false;
+
+            splitter = create({
+                panes: [{ size: "110px" }, {}]
+            });
+
+            splitter.object.bind("resize", function() {
                 triggered = true;
+            });
+
+            splitter.object.size(".k-pane:first", "120px");
+
+            assert.isOk(triggered);
+        });
+
+        it("ajaxRequest() with remote URL", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var url = "http://google.com";
+
+            splitter.object.ajaxRequest(".k-pane:first", url);
+
+            var pane = splitter.dom.find(".k-pane:first"),
+                iframe = pane.find("> iframe");
+
+            assert.equal(iframe.length, 1);
+            assert.equal(iframe.attr("src"), url);
+            assert.isOk(!pane.hasClass("k-scrollable"));
+        });
+
+        it("collapsing uncollapsible panes is not permitted", function() {
+            splitter = create({
+                panes: [{ collapsible: false }, { collapsible: false }]
+            });
+
+            splitter.object.toggle(splitter.dom.find(".k-scrollable:first"), false);
+
+            assert.equal(splitter.dom.find(".k-pane:first").data("pane").collapsed, undefined);
+        });
+
+        it("ajaxRequest() applies selector context", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            splitter.object.ajaxRequest(".k-pane:first", "http://google.com");
+
+            assert.equal(splitter.dom.find("iframe").length, 1);
+        });
+
+        it("append() appends a pane element", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            splitter.object.append();
+
+            assert.equal(splitter.dom.children(".k-pane").length, 3);
+        });
+
+        it("append() returns the pane element", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var result = splitter.object.append() || $();
+
+            assert.isOk(result.is(splitter.dom.children(".k-pane").last()));
+        });
+
+        it("append() appends a pane configuration", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var config = { foo: "bar" };
+
+            splitter.object.append(config);
+
+            var panes = splitter.object.options.panes;
+
+            assert.equal(panes[panes.length - 1], config);
+        });
+
+        it("append() calls Splitter resize(true)", function() {
+            var args;
+
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            splitter.object.resize = function() {
+                args = arguments;
             }
+
+            splitter.object.append({});
+
+            assert.isOk(args.length == 1 && args[0] === true);
         });
 
-        splitter.object.toggle(".k-pane:last", false);
+        it("insertBefore() inserts a pane element", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
 
-        ok(triggered);
-    });
+            var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
 
-    test("toggle(false) converts associated arrow to expand arrow", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
+            splitter.object.insertBefore({}, referencePane);
+
+            assert.equal(splitter.dom.children(".k-pane").length, 3);
+            assert.isOk(!splitter.dom.children(".k-pane").first().hasClass("existing-pane"));
         });
 
-        splitter.object.toggle(".k-pane:first", false);
+        it("insertBefore() returns the pane element", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
 
-        var previousArrow = splitter.dom.find(".k-expand-prev");
+            var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
 
-        ok(previousArrow.is(".k-expand-prev"));
-        ok(previousArrow.is(":not(.k-collapse-prev)"));
-    });
+            var result = splitter.object.insertBefore({}, referencePane) || $();
 
-    test("toggle(false) disables splitbar resize", function() {
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
+            assert.isOk(result.is(splitter.dom.children(".k-pane").first()));
         });
 
-        splitter.object.toggle(".k-pane:first", false);
+        it("insertBefore() inserts a pane configuration", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
 
-        ok(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
-    });
+            var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first(),
+                config = { foo: "bar" };
 
-    test("toggle(true) removes splibar hover style", function() {
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
+            splitter.object.insertBefore(config, referencePane);
+
+            assert.equal(splitter.object.options.panes[0], config);
         });
 
-        splitter.dom.find(".k-splitbar").addClass("k-splitbar-horizontal-hover");
+        it("insertBefore() calls Splitter resize(true)", function() {
+            var args;
 
-        splitter.object.toggle(".k-pane:first", false);
+            splitter = create({
+                panes: [{}, {}]
+            });
 
-        ok(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
-    });
+            var referencePane = splitter.dom.children(".k-pane").first();
 
-    test("toggle(true) toggles pane state", function() {
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
-        });
-
-        var pane = splitter.dom.find(".k-pane:first");
-
-        splitter.object.toggle(pane, true);
-
-        ok(!pane.data("pane").collapsed);
-
-        splitter = create({
-            panes: [ {}, { collapsible: true, collapsed: true } ]
-        });
-
-        pane = splitter.dom.find(".k-pane:last")
-
-        splitter.object.toggle(pane, true);
-
-        ok(!pane.data("pane").collapsed);
-    });
-
-    test("toggle(true) triggers resize", function() {
-        var triggered = false;
-
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ],
-            resize: function() {
-                triggered = true;
+            splitter.object.resize = function() {
+                args = arguments;
             }
+
+            splitter.object.insertBefore({}, referencePane);
+
+            assert.isOk(args.length == 1 && args[0] === true);
         });
 
-        splitter.object.toggle(".k-pane:first", true);
+        it("insertAfter() inserts a pane element", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
 
-        ok(triggered);
+            var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
+
+            splitter.object.insertAfter({}, referencePane);
+
+            assert.equal(splitter.dom.children(".k-pane").length, 3);
+            assert.isOk(!splitter.dom.children(".k-pane").eq(1).hasClass("existing-pane"));
+        });
+
+        it("insertAfter() returns the pane element", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
+
+            var result = splitter.object.insertAfter({}, referencePane) || $();
+
+            assert.isOk(result.is(splitter.dom.children(".k-pane").eq(1)));
+        });
+
+        it("insertAfter() inserts a pane configuration", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first(),
+                config = { foo: "bar" };
+
+            splitter.object.insertAfter(config, referencePane);
+
+            assert.equal(splitter.object.options.panes[1], config);
+        });
+
+        it("insertAfter() calls Splitter resize(true)", function() {
+            var args;
+
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var referencePane = splitter.dom.children(".k-pane").first();
+
+            splitter.object.resize = function() {
+                args = arguments;
+            }
+
+            splitter.object.insertAfter({}, referencePane);
+
+            assert.isOk(args.length == 1 && args[0] === true);
+        });
+
+        it("remove() removes a pane element", function() {
+            splitter = create({
+                panes: [{}, {}, {}]
+            }, 3);
+
+            splitter.dom.children(".k-pane").eq(1).addClass("remaining-pane");
+
+            splitter.object.remove(splitter.dom.children(".k-pane").not(".remaining-pane"));
+
+            assert.equal(splitter.dom.children(".k-pane").length, 1);
+            assert.isOk(splitter.dom.children(".k-pane").first().hasClass("remaining-pane"));
+        });
+
+        it("remove() removes a pane configuration", function() {
+            var config = { foo: "bar" };
+
+            splitter = create({
+                panes: [{}, config, {}]
+            }, 3);
+
+            splitter.dom.children(".k-pane").eq(1).addClass("remaining-pane");
+
+            splitter.object.remove(splitter.dom.children(".k-pane").not(".remaining-pane"));
+
+            var panes = splitter.object.options.panes;
+
+            assert.isOk(panes[0] && typeof panes[0].foo != "undefined");
+        });
+
+        it("remove() returns the splitter object", function() {
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var result = splitter.object.remove(splitter.dom.children(".k-pane").first());
+
+            assert.isOk(result && result.options && result.options.name && result.options.name == "Splitter");
+        });
+
+        it("remove() calls Splitter resize(true)", function() {
+            var args;
+
+            splitter = create({
+                panes: [{}, {}]
+            });
+
+            var referencePane = splitter.dom.children(".k-pane").first();
+
+            splitter.object.resize = function() {
+                args = arguments;
+            }
+
+            splitter.object.remove(referencePane);
+
+            assert.isOk(args.length == 1 && args[0] === true);
+        });
+
+        it("remove() removes a pane element only from the current instance", function() {
+            var splitter = create({
+                panes: [{}, {}, {}]
+            }, 3);
+
+            var splitter2 = create({
+                panes: [{}, {}]
+            }, 2);
+
+            splitter.object.remove(splitter.dom.children(".k-pane:first"));
+
+            assert.equal(splitter.dom.children(".k-pane").length, 2);
+            assert.equal(splitter2.dom.children(".k-pane").length, 2);
+        });
+
     });
-
-    test("toggle(true) converts associated arrow to collapse arrow", function() {
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
-        });
-
-        splitter.object.toggle(".k-pane:first", true);
-
-        var previousArrow = splitter.dom.find(".k-collapse-prev");
-
-        ok(previousArrow.is(".k-collapse-prev"));
-        ok(previousArrow.is(":not(.k-expand-prev)"));
-    });
-
-    test("toggle(true) enables splitbar resize", function() {
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
-        });
-
-        splitter.object.toggle(".k-pane:first", true);
-
-        ok(splitter.dom.find(".k-splitbar").hasClass("k-splitbar-draggable-horizontal"));
-    });
-
-    test("toggle(true) does not add splibar hover style", function() {
-        splitter = create({
-            panes: [ { collapsible: true, collapsed: true }, {} ]
-        });
-
-        splitter.object.toggle(".k-pane:first", true);
-
-        ok(!splitter.dom.find(".k-splitbar").hasClass("k-splitbar-horizontal-hover"));
-    });
-
-    test("toggle() applies selector context", function() {
-        splitter = create({
-            panes: [{ collapsible: true }, {}]
-        });
-
-        splitter = create({
-            panes: [{ collapsible: true }, {}]
-        });
-
-        splitter.object.toggle(".k-pane:first", false);
-
-        ok(splitter.dom.find(".k-pane:first").data("pane").collapsed);
-    });
-
-    test("collapse() calls toggle(false)", function() {
-        var args;
-
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
-        });
-
-        splitter.object.toggle = function() {
-            args = arguments;
-        };
-
-        splitter.object.collapse(".k-pane:last");
-
-        ok(args);
-        equal(args.length, 2);
-        equal(args[0], ".k-pane:last");
-        equal(args[1], false);
-    });
-
-    test("expand() calls toggle(true)", function() {
-        var args;
-
-        splitter = create({
-            panes: [ { collapsible: true }, {} ]
-        });
-
-        splitter.object.toggle = function() {
-            args = arguments;
-        };
-
-        splitter.object.expand(".k-pane:last");
-
-        ok(args);
-        equal(args.length, 2);
-        equal(args[0], ".k-pane:last");
-        equal(args[1], true);
-    });
-
-    test("size() gets/sets pane size", function() {
-        splitter = create({
-            panes: [ { size: "110px" }, {} ]
-        });
-
-        var firstPane = splitter.dom.find(".k-pane:first");
-
-        equal(splitter.object.size(firstPane), "110px");
-
-        splitter.object.size(firstPane, "120px");
-
-        equal(splitter.object.size(firstPane), "120px");
-    });
-
-    test("size() applies selector context", function() {
-        splitter = create({
-            panes: [ { size: "125px" }, {} ]
-        });
-
-        splitter = create({
-            panes: [ { size: "110px" }, {} ]
-        });
-
-        equal(splitter.object.size(".k-pane:first"), "110px");
-    });
-
-    test("min() gets/sets pane min", function() {
-        splitter = create({
-            panes: [ { min: "110px", size: "200px" }, {} ]
-        });
-
-        var firstPane = splitter.dom.find(".k-pane:first");
-
-        equal(splitter.object.min(firstPane), "110px");
-
-        splitter.object.min(firstPane, "120px");
-
-        equal(splitter.object.min(firstPane), "120px");
-    });
-
-    test("max() gets/sets pane max", function() {
-        splitter = create({
-            panes: [ { max: "200px", size: "110px" }, {} ]
-        });
-
-        var firstPane = splitter.dom.find(".k-pane:first");
-
-        equal(splitter.object.max(firstPane), "200px");
-
-        splitter.object.max(firstPane, "120px");
-
-        equal(splitter.object.max(firstPane), "120px");
-    });
-
-    test("size(value) triggers resize", function() {
-        var triggered = false;
-
-        splitter = create({
-            panes: [ { size: "110px" }, {} ]
-        });
-
-        splitter.object.bind("resize", function() {
-            triggered = true;
-        });
-
-        splitter.object.size(".k-pane:first", "120px");
-
-        ok(triggered);
-    });
-
-    test("ajaxRequest() with remote URL", function() {
-        splitter = create({
-            panes: [ {}, {} ]
-        });
-
-        var url = "http://google.com";
-
-        splitter.object.ajaxRequest(".k-pane:first", url);
-
-        var pane = splitter.dom.find(".k-pane:first"),
-            iframe = pane.find("> iframe");
-
-        equal(iframe.length, 1);
-        equal(iframe.attr("src"), url);
-        ok(!pane.hasClass("k-scrollable"));
-    });
-
-    test("collapsing uncollapsible panes is not permitted", function() {
-        splitter = create({
-            panes: [ { collapsible: false }, { collapsible: false }]
-        });
-
-        splitter.object.toggle(splitter.dom.find(".k-scrollable:first"), false);
-
-        equal(splitter.dom.find(".k-pane:first").data("pane").collapsed, undefined);
-    });
-
-    test("ajaxRequest() applies selector context", function() {
-        splitter = create({
-            panes: [ {}, {} ]
-        });
-
-        splitter.object.ajaxRequest(".k-pane:first", "http://google.com");
-
-        equal(splitter.dom.find("iframe").length, 1);
-    });
-
-    test("append() appends a pane element", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        splitter.object.append();
-
-        equal(splitter.dom.children(".k-pane").length, 3);
-    });
-
-    test("append() returns the pane element", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var result = splitter.object.append() || $();
-
-        ok(result.is(splitter.dom.children(".k-pane").last()));
-    });
-
-    test("append() appends a pane configuration", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var config = { foo: "bar" };
-
-        splitter.object.append(config);
-
-        var panes = splitter.object.options.panes;
-
-        equal(panes[panes.length - 1], config);
-    });
-
-    test("append() calls Splitter resize(true)", function() {
-        var args;
-
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        splitter.object.resize = function() {
-            args = arguments;
-        }
-
-        splitter.object.append({});
-
-        ok(args.length == 1 && args[0] === true);
-    });
-
-    test("insertBefore() inserts a pane element", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
-
-        splitter.object.insertBefore({}, referencePane);
-
-        equal(splitter.dom.children(".k-pane").length, 3);
-        ok(!splitter.dom.children(".k-pane").first().hasClass("existing-pane"));
-    });
-
-    test("insertBefore() returns the pane element", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
-
-        var result = splitter.object.insertBefore({}, referencePane) || $();
-
-        ok(result.is(splitter.dom.children(".k-pane").first()));
-    });
-
-    test("insertBefore() inserts a pane configuration", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first(),
-            config = { foo: "bar" };
-
-        splitter.object.insertBefore(config, referencePane);
-
-        equal(splitter.object.options.panes[0], config);
-    });
-
-    test("insertBefore() calls Splitter resize(true)", function() {
-        var args;
-
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").first();
-
-        splitter.object.resize = function() {
-            args = arguments;
-        }
-
-        splitter.object.insertBefore({}, referencePane);
-
-        ok(args.length == 1 && args[0] === true);
-    });
-
-    test("insertAfter() inserts a pane element", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
-
-        splitter.object.insertAfter({}, referencePane);
-
-        equal(splitter.dom.children(".k-pane").length, 3);
-        ok(!splitter.dom.children(".k-pane").eq(1).hasClass("existing-pane"));
-    });
-
-    test("insertAfter() returns the pane element", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first();
-
-        var result = splitter.object.insertAfter({}, referencePane) || $();
-
-        ok(result.is(splitter.dom.children(".k-pane").eq(1)));
-    });
-
-    test("insertAfter() inserts a pane configuration", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").addClass("existing-pane").first(),
-            config = { foo: "bar" };
-
-        splitter.object.insertAfter(config, referencePane);
-
-        equal(splitter.object.options.panes[1], config);
-    });
-
-    test("insertAfter() calls Splitter resize(true)", function() {
-        var args;
-
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").first();
-
-        splitter.object.resize = function() {
-            args = arguments;
-        }
-
-        splitter.object.insertAfter({}, referencePane);
-
-        ok(args.length == 1 && args[0] === true);
-    });
-
-    test("remove() removes a pane element", function() {
-        splitter = create({
-            panes: [{}, {}, {}]
-        }, 3);
-
-        splitter.dom.children(".k-pane").eq(1).addClass("remaining-pane");
-
-        splitter.object.remove(splitter.dom.children(".k-pane").not(".remaining-pane"));
-
-        equal(splitter.dom.children(".k-pane").length, 1);
-        ok(splitter.dom.children(".k-pane").first().hasClass("remaining-pane"));
-    });
-
-    test("remove() removes a pane configuration", function() {
-        var config = { foo: "bar" };
-
-        splitter = create({
-            panes: [{}, config, {}]
-        }, 3);
-
-        splitter.dom.children(".k-pane").eq(1).addClass("remaining-pane");
-
-        splitter.object.remove(splitter.dom.children(".k-pane").not(".remaining-pane"));
-
-        var panes = splitter.object.options.panes;
-
-        ok(panes[0] && typeof panes[0].foo != "undefined");
-    });
-
-    test("remove() returns the splitter object", function() {
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var result = splitter.object.remove(splitter.dom.children(".k-pane").first());
-
-        ok(result && result.options && result.options.name && result.options.name == "Splitter");
-    });
-
-    test("remove() calls Splitter resize(true)", function() {
-        var args;
-
-        splitter = create({
-            panes: [{}, {}]
-        });
-
-        var referencePane = splitter.dom.children(".k-pane").first();
-
-        splitter.object.resize = function() {
-            args = arguments;
-        }
-
-        splitter.object.remove(referencePane);
-
-        ok(args.length == 1 && args[0] === true);
-    });
-
-})();
+}());

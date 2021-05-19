@@ -1,79 +1,133 @@
 (function() {
-var dom;
-module("tabstrip initialization", {
-    setup: function() {
-        dom = $("<ul>");
-    },
-    teardown: function() {
-        kendo.destroy(dom);
-    }
-});
+    var dom;
+    var elementsDom;
+    var tabstrip;
 
-test("the element field is set to the target from which the tabstrip is initialized", function() {
-    var tabstrip = new kendo.ui.TabStrip(dom);
+    describe("tabstrip initialization", function () {
+        beforeEach(function() {
+            dom = $("<ul>");
+            elementsDom = '<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>';
+        });
+        afterEach(function() {
+            tabstrip.destroy();
+        });
 
-    equal(tabstrip.element[0], dom[0]);
-});
+        it("the element field is set to the target from which the tabstrip is initialized", function() {
+            tabstrip = new kendo.ui.TabStrip(dom);
 
-test("the wrapper field is set to the wrapper of created by the tabstrip", function() {
-    var tabstrip = new kendo.ui.TabStrip(dom);
+            assert.equal(tabstrip.element[0], dom[0]);
+        });
 
-    equal(tabstrip.wrapper[0], dom.parent()[0]);
-});
+        it("the wrapper field is set to the wrapper of created by the tabstrip", function() {
+            tabstrip = new kendo.ui.TabStrip(dom);
 
-test("the wrapper has k-widget and k-tabstrip css classes", function() {
-    var tabstrip = new kendo.ui.TabStrip(dom);
+            assert.equal(tabstrip.wrapper[0], dom.parent()[0]);
+        });
 
-    ok(tabstrip.wrapper.is(".k-widget,.k-tabstrip"), "CSS classes are applied");
-});
+        it("the wrapper has k-widget and k-tabstrip css classes", function() {
+            tabstrip = new kendo.ui.TabStrip(dom);
 
-test("navigatable should attach the keydown handler only if true", 2, function() {
-    var tabstrip = new kendo.ui.TabStrip(dom, { navigatable: false });
+            assert.isOk(tabstrip.wrapper.is(".k-widget,.k-tabstrip"), "CSS classes are applied");
+        });
 
-    ok(!$._data( tabstrip.wrapper[0], "events" ).keydown, "No keydown event attached");
+        it("navigatable should attach the keydown handler only if true", function() {
+            tabstrip = new kendo.ui.TabStrip(dom, { navigatable: false });
 
-    tabstrip.setOptions({ navigatable: true });
+            assert.isOk(!$._data( tabstrip.wrapper[0], "events" ).keydown, "No keydown event attached");
 
-    ok($._data( tabstrip.wrapper[0], "events" ).keydown, "Keydown event attached");
-});
+            tabstrip.setOptions({ navigatable: true });
 
-test("adds a scroll stopping wrapper around itself", function() {
-    var tabstrip = new kendo.ui.TabStrip(dom);
+            assert.isOk($._data( tabstrip.wrapper[0], "events" ).keydown, "Keydown event attached");
+        });
 
-    ok(tabstrip.scrollWrap.is(".k-tabstrip-wrapper"), "Adds wrapper class");
-    ok(tabstrip.wrapper.parent(".k-tabstrip-wrapper").length, "Wraps around the TabStrip");
-});
+        it("adds a scroll stopping wrapper around itself", function() {
+            tabstrip = new kendo.ui.TabStrip(dom);
 
-test("doesn't add a scroll stopping wrapper if there is one already", function() {
-    var tabstrip = new kendo.ui.TabStrip(dom.wrap('<div class="k-tabstrip-wrapper"></div>'));
+            assert.isOk(tabstrip.scrollWrap.is(".k-tabstrip-wrapper"), "Adds wrapper class");
+            assert.isOk(tabstrip.wrapper.parent(".k-tabstrip-wrapper").length, "Wraps around the TabStrip");
+        });
 
-    ok(dom.parents(".k-tabstrip-wrapper").length == 1, "Only one wrapper around the TabStrip");
-});
+        it("doesn't add a scroll stopping wrapper if there is one already", function() {
+            tabstrip = new kendo.ui.TabStrip(dom.wrap('<div class="k-tabstrip-wrapper"></div>'));
 
-test("removes its scrolling wrapper on destroy", function() {
-    var tabstrip = new kendo.ui.TabStrip(dom);
+            assert.isOk(dom.parents(".k-tabstrip-wrapper").length == 1, "Only one wrapper around the TabStrip");
+        });
 
-    tabstrip.destroy();
+        it("removes its scrolling wrapper on destroy", function() {
+            tabstrip = new kendo.ui.TabStrip(dom);
 
-    ok(!tabstrip.wrapper.parent().is(".km-tabstrip-wrapper"), "Unwraps the wrapper");
-});
+            tabstrip.destroy();
 
-test("applies a default top tab position CSS class", function () {
-    var tabstrip = new kendo.ui.TabStrip(dom);
+            assert.isOk(!tabstrip.wrapper.parent().is(".km-tabstrip-wrapper"), "Unwraps the wrapper");
+        });
 
-    ok(tabstrip.wrapper.hasClass("k-tabstrip-top"), "CSS class is applied");
-});
+        it("applies a default top tab position CSS class", function () {
+            tabstrip = new kendo.ui.TabStrip(dom);
 
-test("applies a top tab position CSS class", function () {
-    var tabstrip = new kendo.ui.TabStrip(dom, {tabPosition: "left"});
+            assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-top"), "CSS class is applied");
+        });
 
-    ok(tabstrip.wrapper.hasClass("k-tabstrip-left"), "CSS class is applied");
-});
+        it("applies a top tab position CSS class", function () {
+            tabstrip = new kendo.ui.TabStrip(dom, {tabPosition: "left"});
 
-test("moves tabs at the bottom when bottom tab position is defined", function () {
-    var tabstrip = new kendo.ui.TabStrip(dom, { tabPosition: "bottom" });
+            assert.isOk(tabstrip.wrapper.hasClass("k-tabstrip-left"), "CSS class is applied");
+        });
 
-    ok(tabstrip.wrapper.children().last().is(".k-tabstrip-items"), "Tabs are at the bottom");
-});
+        it("moves tabs at the bottom when bottom tab position is defined", function () {
+            tabstrip = new kendo.ui.TabStrip(dom, { tabPosition: "bottom" });
 
-})();
+            assert.isOk(tabstrip.wrapper.children().last().is(".k-tabstrip-items"), "Tabs are at the bottom");
+        });
+
+        it("adds tabindex=0 to all tab contents", function () {
+            tabstrip = new kendo.ui.TabStrip(dom, {
+                dataContentField: "content",
+                dataTextField: "text",
+                dataSource: [ {
+                    text: "one", content: "Content one"
+                }, {
+                    text: "two", content: "Content two"
+                } ]
+            });
+
+            assert.equal(tabstrip.wrapper.find("div[tabindex=0]").length, 2);
+        });
+
+        it("each tab has an id", function () {
+            tabstrip = new kendo.ui.TabStrip(dom, {
+                dataContentField: "content",
+                dataTextField: "text",
+                dataSource: [ {
+                    text: "one", content: "Content one"
+                }, {
+                    text: "two", content: "Content two"
+                } ]
+            });
+
+            assert.equal(tabstrip.wrapper.find("li.k-item")[0].id.length, 42);
+            assert.equal(tabstrip.wrapper.find("li.k-item")[1].id.length, 42);
+        });
+
+        it("each content element has an id", function () {
+            tabstrip = new kendo.ui.TabStrip(dom, {
+                dataContentField: "content",
+                dataTextField: "text",
+                dataSource: [ {
+                    text: "one", content: "Content one"
+                }, {
+                    text: "two", content: "Content two"
+                } ]
+            });
+
+            assert.equal(tabstrip.wrapper.children("div")[0].id.length, 38);
+            assert.equal(tabstrip.wrapper.children("div")[1].id.length, 38);
+        });
+
+        it("adds tabindex=0 to all tab contents when initialized from element", function() {
+            tabstrip = new kendo.ui.TabStrip(elementsDom);
+
+            assert.equal(tabstrip.wrapper.find("div[tabindex=0]").length, 2);
+        });
+
+    });
+}());

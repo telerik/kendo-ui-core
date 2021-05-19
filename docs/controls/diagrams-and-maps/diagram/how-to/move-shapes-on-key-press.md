@@ -10,13 +10,12 @@ slug: howto_move_shapes_with_arrow_keys
 Your project might require you to move the shapes of the Diagram by pressing the arrow keys.
 
 To achieve this behavior:
+
 1. Handle the `load` event of the Diagram and check whether the selected item is a shape.
 2. If the clicked object is a shape, assign a handler to the standard `keyPress` event of the `window` object.
 3. To move the shape depending on the pressed key, use the `bounds()` method of the `Shape`.
 
-###### Example
-
-```html
+```dojo
 
     <div id="diagram" style="height: 250px"></div>
     <script>
@@ -87,8 +86,7 @@ To achieve this behavior:
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Pan with Mouse Wheel]({% slug howto_pan_with_mouse_wheel %})
 * [How to Drag and Drop on Existing Shapes]({% slug howto_draganddrop_onshapes_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

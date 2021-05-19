@@ -3,6 +3,7 @@ title: Barcode
 page_title: Configuration, methods and events of Kendo UI DataViz Barcode
 description: Manipulate the configuration options of Barcode, configure the color of the bars/text and change the value.
 res_type: api
+component: barcode
 ---
 
 # kendo.dataviz.ui.Barcode
@@ -307,9 +308,9 @@ The width of the barcode in pixels.  By default the width is 300.
 
 ### exportImage
 Exports the barcode as an image.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PNG image encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -346,9 +347,9 @@ The height of the exported image. Defaults to the barcode height.
 
 ### exportPDF
 Exports the barcode as a PDF file.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -379,9 +380,9 @@ Parameters for the exported PDF file.
 
 ### exportSVG
 Exports the barcode as an SVG document.
-The result can be saved using [kendo.saveAs](/api/javascript/kendo#methods-saveAs).
+The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/saveas).
 
-The export operation is asynchronous and returns a [promise](http://api.jquery.com/Types/#Promise).
+The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a SVG document encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
 
 #### Parameters
@@ -416,7 +417,7 @@ Resolves the promise with the raw SVG document without the Data URI prefix.
 
 Returns a PNG image of the barcode encoded as a [Data URL](https://developer.mozilla.org/en-US/docs/data_URIs).
 
-> This method is deprecated and replaced by [exportImage](#methods-exportImage).
+> This method is deprecated and replaced by [exportImage](/api/javascript/dataviz/ui/barcode/methods/exportimage).
 
 #### Returns
 
@@ -444,7 +445,7 @@ Returns a PNG image of the barcode encoded as a [Data URL](https://developer.moz
       }
     });
 
-    // See: http://goo.gl/qlg5dd
+    // See: https://goo.gl/qlg5dd
     function toBlob(base64, type) {
       var rawData = base64.substring(base64.indexOf("base64,") + 7);
       var data = atob(rawData);
@@ -494,7 +495,7 @@ Adjusts the widget layout to match the size of the container.
 
 > **Important**
 >
-> If a fixed width is set using the [width](#configuration-width) option, the [resize](#methods-resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
+> If a fixed width is set using the [width](/api/javascript/dataviz/ui/barcode#configuration-width) option, the [resize](/api/javascript/dataviz/ui/barcode/methods/resize) method will not adjust the widget to match the size of the container. In this case, update both the container's width and the widget's width to the appropriate value.
 
 #### Example
 
@@ -519,10 +520,10 @@ Defines whether the widget should proceed with resizing even if the element dime
 
 ### svg
 
-Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the barcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](http://inkscape.org/) and
-[ImageMagick](http://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
+Returns the [SVG](https://www.w3.org/Graphics/SVG/) representation of the barcode. The returned string is a self-contained SVG document that can be used as is or converted to other formats using tools like [Inkscape](https://inkscape.org/en) and
+[ImageMagick](https://www.imagemagick.org/). Both programs provide command-line interface suitable for server-side processing.
 
-> This method is obsoleted by [exportSVG](#methods-exportSVG), but will remain fully functional.
+> This method is obsoleted by [exportSVG](/api/javascript/dataviz/ui/barcode/methods/exportsvg), but will remain fully functional.
 
 #### Returns
 
@@ -538,6 +539,7 @@ Returns the [SVG](http://www.w3.org/Graphics/SVG/) representation of the barcode
     });
     var barcode = $("#barcode").data("kendoBarcode");
     var svg = barcode.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 
@@ -558,6 +560,7 @@ Gets/Sets the value of the barcode.
 
     // get the value of the barcode.
     var value = barcode.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
 
     // sets the value of the barcode and redraws it.

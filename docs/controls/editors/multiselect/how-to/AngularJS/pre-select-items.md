@@ -15,9 +15,7 @@ slug: howto_preselect_itemson_load_angular_multiselect
 
 The following example demonstrates how to preselect items in the Kendo UI MultiSelect without loading the whole source in AngularJS. To ensure the proper functioning of the example, run it in the Dojo.
 
-###### Example
-
-```html
+```dojo
 <script src="https://cdnjs.cloudflare.com/ajax/libs/linq.js/2.2.0.2/jquery.linq.min.js"></script>
 <div id="example" ng-app="KendoDemos">
   <div class="demo-section k-content" ng-controller="MyCtrl">
@@ -65,7 +63,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
       serverFiltering: true,
       serverSorting: true,
       transport: {
-        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
       }
     };
 
@@ -85,7 +83,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
       serverFiltering: true,
       serverSorting: true,
       transport: {
-        read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
       }
     };
 
@@ -115,7 +113,7 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
       };
 
       $scope.filter = filter;
-      $http.get('http://demos.telerik.com/kendo-ui/service/Northwind.svc/Products?$filter='+filter).success(success);
+      $http.get('https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products?$filter='+filter).success(success);
     }
 
     setTimeout(function() {
@@ -131,7 +129,6 @@ The following example demonstrates how to preselect items in the Kendo UI MultiS
 * [How to Cascade from DropDownList]({% slug howto_cascade_froma_dropdownlist_multiselect %})
 * [How to Filter Values in Widgets Sharing the Same Data]({% slug howto_filter_valuesin_widgetswith_shared_data_multiselect %})
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
-* [How to Reorder Selected Items]({% slug howto_reorder_selected_items_multiselect %})
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})

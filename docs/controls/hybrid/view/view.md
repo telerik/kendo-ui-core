@@ -4,11 +4,12 @@ page_title: Overview | Hybrid UI View
 description: "Use the hybrid mobile Kendo UI View widget, mark header and footer elements, and view parameters of navigational widgets and DOM elements."
 slug: overview_hybridview
 position: 1
+component: view
 ---
 
 # View Overview
 
-The [Hybrid UI View widget](http://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
+The [Hybrid UI View widget](https://demos.telerik.com/kendo-ui/m/index#mobile-view/index) represents a screen in the kendo mobile Application. The Application automatically instantiates a mobile View for each element with a `role` data attribute set to `view`.
 
 ## Getting Started
 
@@ -16,7 +17,7 @@ The [Hybrid UI View widget](http://demos.telerik.com/kendo-ui/m/index#mobile-vie
 
 The example below demonstrates how to initialize the View component.
 
-###### Example
+
 
     <div data-role="view">Hello world!</div>
 
@@ -28,7 +29,7 @@ By default, the mobile View content stretches to fit the application element. Al
 
 The example below demonstrates a mobile View with a header and a footer.
 
-###### Example
+
 
     <div data-role="view">
         <div data-role="header">Header</div>
@@ -46,7 +47,7 @@ Navigational widgets can pass additional URL parameters when navigating to Views
 
 The example below demonstrates a button with additional URL parameters.
 
-###### Example
+
 
     <a data-role="button" href="#foo?bar=baz">Link to FOO <strong>View</strong> with bar parameter set to baz</a>
 
@@ -68,8 +69,6 @@ Each mobile View instance exposes the following fields:
 * `scrollerContent`&mdash;The View mobile Scroller container DOM element. Recommended if the mobile View contents need to be manipulated or replaced.
 
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI components and on the View:
 
 * [Hybrid UI View JavaScript API Reference](/api/javascript/mobile/ui/view)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

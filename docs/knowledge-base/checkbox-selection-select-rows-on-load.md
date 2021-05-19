@@ -2,11 +2,12 @@
 title: Select Grid Rows Programmatically Based on the DataItem
 description: An example on how to select rows in a Kendo UI Grid based on the values of the data items.
 type: how-to
-page_title: Automatically Check Checkboxes on Load | Kendo UI Grid
+page_title: Automatically Check Checkboxes on Load | Kendo UI Grid for jQuery
 slug: checkbox-selection-select-rows-on-load
 tags: checkbox selection, grid, kendo ui
 ticketid: 1117204
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -14,10 +15,10 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Grid for Progress® Kendo UI®</td>
+  <td>Progress Kendo UI Grid</td>
  </tr>
  <tr>
-  <td>Progress® Kendo UI® version</td>
+  <td>Progress Kendo UI version</td>
   <td>Tested up to version 2017.2 621</td>
  </tr>
 </table>
@@ -28,12 +29,12 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
 
 ## Solution
 
-1. In the [`dataBound`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#events-dataBound) event handler, get and save all the rows.
+1. In the [`dataBound`](/api/javascript/ui/grid/events/databound) event handler, get the rows with the [`items()`](/api/javascript/ui/grid/methods/items) method of the grid.
 1. Loop through the rows by using the jQuery [`each`](https://api.jquery.com/each/) method.
-1. Get every row data by using the [`dataItem`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-dataItem) method.
-1. Set the current row as selected by using the [`select`](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-select) method.
+1. Get every row data by using the [`dataItem`](/api/javascript/ui/grid/methods/dataitem) method.
+1. Set the current row as selected by using the [`select`](/api/javascript/ui/grid/methods/select) method.
 
-```html
+```dojo
 <div id="example">
     <div id="grid"></div>
 
@@ -56,10 +57,10 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
                 },
                 pageable: true,
                 dataBound: function(e) {
-                    var rows = e.sender.tbody[0].rows;
+                    var grid = this;
+                    var rows = grid.items();
 
                     $(rows).each(function(e) {
-                        var grid = $("#grid").data("kendoGrid");
                         var row = this;
                         var dataItem = grid.dataItem(row);
 
@@ -99,12 +100,12 @@ I want to have a Grid with some of its checkboxes checked by default when it loa
 </div>
 ```
 
-### Notes
+## Notes
 
 The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 release.
 
 ## See Also
 
 * [Frequently Asked Questions on Checkbox Selection]({% slug frequently_asked_questions_grid %})
-* [Grid Checkbox Selection Demo](http://demos.telerik.com/kendo-ui/grid/checkbox-selection)
-* [API Reference for the columns.selectable Configuration](http://docs.telerik.com/kendo-ui/api/javascript/ui/grid#configuration-columns.selectable)
+* [Grid Checkbox Selection Demo](https://demos.telerik.com/kendo-ui/grid/checkbox-selection)
+* [API Reference for the columns.selectable Configuration](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.selectable)

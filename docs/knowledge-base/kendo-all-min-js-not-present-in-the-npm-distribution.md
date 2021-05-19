@@ -2,7 +2,7 @@
 title: Cannot Find kendo.all.min.js in the Kendo UI NPM Packages
 description: The kendo.all.min.js file is missing when using the Kendo UI NPM packages.
 type: troubleshooting
-page_title: The kendo.all.min.js File Is Missing in the NPM Distribution | Kendo UI Professional
+page_title: The kendo.all.min.js File Is Missing in the NPM Distribution | Kendo UI for jQuery
 slug: kendo-all-min-js-not-present-in-the-npm-distribution
 tags: npm, webpack
 ticketid: 1110344
@@ -14,7 +14,7 @@ res_type: kb
 <table>
  <tr>
   <td>Product</td>
-  <td>Progress Kendo UI Professional</td>
+  <td>Progress Kendo UI for jQuery</td>
  </tr>
  <tr>
   <td>Operating System</td>
@@ -44,6 +44,6 @@ It is expected that the `kendo.all.min.js` file is missing from the NPM package 
 
 ## Solution
 
-For more details, refer to the article on [third-parties frameworks and utilities](http://docs.telerik.com/kendo-ui/third-party/webpack).
+For more details, refer to the article on [third-parties frameworks and utilities](https://docs.telerik.com/kendo-ui/third-party/webpack).
 
 For more information on Webpack integration, refer to [this GitHub demo](https://github.com/telerik/kendo-ui-npm-example). Even though the example uses Webpack version 1, you can use a similar approach in Webpack version 2.

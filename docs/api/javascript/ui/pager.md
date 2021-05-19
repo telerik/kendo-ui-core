@@ -240,7 +240,8 @@ Defines if an input element which allows the user to navigate to given page will
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          input: true
+          input: true,
+          numeric: false
         });
 
         dataSource.read();
@@ -406,11 +407,41 @@ Defines if a refresh button will be displayed. Click on that button will call Da
       }
     </style>
 
+### responsive `Boolean`*(default: true)*
+Defines if the pager will be responsive.
+
+#### Example - show the responsive button
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          responsive: false
+        });
+
+        dataSource.read();
+    </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
+
 ### messages `Object`
 Defines texts shown within the pager. Use this option to customize or localize the pager messages.
 
 ### messages.display `String`*(default: "{0} - {1} of {2} items")*
-The pager info text. Uses [kendo.format](/api/javascript/kendo#methods-format).
+The pager info text. Uses [kendo.format](/api/javascript/kendo/methods/format).
 
 Contains three placeholders:
 - {0} - the first data item index
@@ -542,7 +573,7 @@ The label displayed before the pager input.
     </style>
 
 ### messages.of `String`*(default: "of {0}")*,
-The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo#methods-format). Contains one optional placeholder {0} which represents the total number of pages.
+The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
 
 #### Example - set the label after the pager input
     <div id="pager"></div>
@@ -623,7 +654,8 @@ The tooltip of the button which navigates to the first page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -655,7 +687,8 @@ The tooltip of the button which navigates to the previous page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -758,7 +791,8 @@ The tooltip of the refresh button.
           dataSource: dataSource,
           messages: {
             refresh: "Refresh data"
-          }
+          },
+          refresh: true
         });
 
         dataSource.read();
@@ -795,6 +829,7 @@ Returns the number of pages.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.totalPages()); // displays "2"
     </script>
     <style>
@@ -831,6 +866,7 @@ Returns the page size - maximum number of items allowed on one page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.pageSize()); // displays "2"
     </script>
     <style>
@@ -867,6 +903,7 @@ Gets or sets the current page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.page()); // displays "1"
     </script>
     <style>
@@ -1009,6 +1046,7 @@ The widget instance which fired the event.
         $("#pager").kendoPager({
           dataSource: dataSource,
           change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pager change event");
           }
         });
@@ -1024,6 +1062,7 @@ The widget instance which fired the event.
 
     <script>
         function pager_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("pager change event");
         }
 

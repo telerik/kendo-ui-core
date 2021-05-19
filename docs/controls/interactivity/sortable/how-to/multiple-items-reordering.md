@@ -7,11 +7,9 @@ slug: howto_reordermultipleitems_sortable
 
 # Reorder Multiple Items
 
-The example below demonstrates how to reorder multiple items using the Kendo UI Sortable widget.
+The following example demonstrates how to reorder multiple items using the Kendo UI Sortable widget.
 
-###### Example
-
-```html
+```dojo
   <p>Select multiple items with CTRL key</p>
   <div class="list-wrapper">
     <ul id="sortable-listA">
@@ -162,9 +160,5 @@ The example below demonstrates how to reorder multiple items using the Kendo UI 
 
 ## See Also
 
-* [Sortable JavaScript API Reference](/api/javascript/ui/sortable)
-* [How to Nest Sortables]({% slug howto_nestsortables_sortable %})
-* [How to Persist Order in localStorage]({% slug howto_persistoderinlocalstorage_sortable %})
-* [How to Use Sortable in AngularJS with Grid in Batch Editing Mode]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %})
-
-For more runnable examples on the Kendo UI Sortable, browse its [**How To** documentation folder]({% slug howto_usesortablewith_gridinbatcheditablemode_angular_sortable %}).
+* [Basic Usage of the Sortable (Demo)](https://demos.telerik.com/kendo-ui/sortable/index)
+* [JavaScript API Reference of the Sortable](/api/javascript/ui/sortable)

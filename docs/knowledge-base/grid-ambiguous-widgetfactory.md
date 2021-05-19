@@ -1,12 +1,13 @@
 ---
-title: Ambiguous Grid because Multiple Kinds of Members with this Name Exist
+title: Ambiguous Grid Because Multiple Kinds of Members with This Name Exist
 description: An error message occurs about an ambiguous Grid because multiple kinds of members with this name exist in the Kendo.Mvc.UI.Fluent.WidgetFactory class after an upgrade to the 2017.2.621 version.
 type: troubleshooting
-page_title: The Grid Is Ambiguous because Multiple Kinds of Members with this Name Exist | UI for ASP.NET MVC
+page_title: The Grid Is Ambiguous Because Multiple Kinds of Members with This Name Exist | Kendo UI Grid for ASP.NET MVC
 slug: grid-ambiguous-widgetfactory
 tags: ambiguous, grid, upgrade, WidgetFactory
 ticketid: 1117665
 res_type: kb
+component: grid
 ---
 
 ## Environment
@@ -45,14 +46,14 @@ After I upgrade to the 2017.2.621 version, I am getting the following error mess
 
 To solve this issue, either:
 
-* [Upgrade to a later version](#upgrade-version), or
-* [Install a missing NuGet package](#install-missing-nuget-package).
+* [Upgrade to a later version](#upgrading-the-version), or
+* [Install a missing NuGet package](#installing-the-missing-nuget-package).
 
-### Upgrade Version
+### Upgrading the Version
 
 Upgrade to the Kendo UI R3 2017 version or to internal builds version later than 2017.2 621.
 
-### Install Missing NuGet Package
+### Installing the Missing NuGet Package
 
 Such an error occurs if the [Microsoft.CodeDom.Providers.DotNetCompilerPlatform](https://www.nuget.org/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform) ([https://www.nuget.org/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform](https://www.nuget.org/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform)) NuGet package is missing from the project.
 

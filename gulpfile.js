@@ -41,6 +41,29 @@ requireDir('./build/gulp/tasks');
 
 var makeSourceMaps = !argv['skip-source-maps'];
 
+var postcss = require("gulp-postcss");
+var autoprefixer = require("autoprefixer");
+var calc = require("postcss-calc");
+var browsers = [
+    "Explorer >= 9",
+    "last 3 Edge versions",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Opera versions",
+    "last 2 Safari major versions",
+    "last 2 iOS major versions",
+    "Android >= 4.4",
+    "ExplorerMobile >= 10"
+];
+var postcssPlugins = [
+    calc({
+        precision: 10
+    }),
+    autoprefixer({
+        browsers: browsers
+    })
+];
+
 gulp.task("css-assets", function() {
     return gulp.src("styles/**/*.{less,woff,ttf,eot,png,gif,css,svg,txt}")
         .pipe(gulpIf((file) => file.path.match(/.less$/), license() ))
@@ -69,6 +92,7 @@ gulp.task("build-skin", ["css-assets"], function() {
         ]))
         .pipe(sourcemaps.init())
         .pipe(cssUtils.fromLess())
+        .pipe(postcss(postcssPlugins))
         .pipe(mapLogger)
         .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
         .pipe(gulp.dest('dist/styles'))
@@ -78,7 +102,8 @@ gulp.task("build-skin", ["css-assets"], function() {
 gulp.task("less",function() {
     var css = gulp.src(`styles/${argv.styles || '**/kendo*.less'}`, { base: "styles" })
         .pipe(license())
-        .pipe(cssUtils.fromLess());
+        .pipe(cssUtils.fromLess())
+        .pipe(postcss(postcssPlugins));
 
     var minCss = css.pipe(clone())
         .pipe(gulpIf(makeSourceMaps, sourcemaps.init()))
@@ -160,8 +185,12 @@ gulp.task("custom", function() {
         });
     }
 
+    if (files.indexOf(',') !== -1) {
+        files = `{${files}}`;
+    }
+
     var included = [];
-    var src = gulp.src(`src/kendo.{${files}}.js`)
+    var src = gulp.src(`src/kendo.${files}.js`)
                 .pipe(gatherAmd.gatherCustom())
                 .pipe(filter(function(file) {
                     if (included.indexOf(file.path) === -1) {
@@ -196,7 +225,7 @@ gulp.task("jshint", function() {
 
 gulp.task('build', [ 'scripts', 'styles' ]);
 
-gulp.task('tests', [ 'karma-unit' ]);
+gulp.task('tests', [ 'karma-mocha' ]);
 
 gulp.task('ci', function(done) {
   runSequence('build', 'karma-jenkins', done);
@@ -229,14 +258,23 @@ gulp.task('mdspell', shell.task(
 ['cd docs && mdspell "**/*.md" -n -a --report']
 ));
 
-[ 'pro', 'core' ].forEach(function(flavor) {
+[ 'core' ].forEach(function(flavor) {
     gulp.task('npm-' + flavor, [ 'cjs', 'styles' ] , function() {
-        var js = gulp.src('dist/cjs/**/*').pipe(gulp.dest('dist/npm/js'));
+        var internalOption = "", i = process.argv.indexOf("--channel");
+        if(i>-1) {
+            internalOption = process.argv[i+1];
+        }
+        var js = gulp.src('dist/cjs/**/*')
+                    .pipe(gulp.dest('dist/npm/js'));
+
+        var jsmin = gulp.src('dist/cjs/**/*.js')
+                    .pipe(uglify())
+                    .pipe(gulp.dest('dist/npm/js'));
 
         var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
 
         var pkg = gulp.src('build/package-' + flavor + '.json')
-                    .pipe(replace("$KENDO_VERSION", kendoVersion))
+                    .pipe(replace("$KENDO_VERSION", kendoVersion + internalOption))
                     .pipe(rename('package.json'))
                     .pipe(gulp.dest('dist/npm'));
 
@@ -249,10 +287,14 @@ gulp.task('mdspell', shell.task(
                     .pipe(rename('README.md'))
                     .pipe(gulp.dest('dist/npm'));
 
-        return merge(js, styles, pkg, license, readme);
+        return merge(js, jsmin, styles, pkg, license, readme);
     })
 })
 
 const taskListing = require('gulp-task-listing');
 gulp.task('tasks', taskListing.withFilters(/:/));
 
+// Exit immediately on Ctrl+C
+process.once('SIGINT', function () {
+    process.exit();
+});

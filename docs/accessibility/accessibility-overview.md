@@ -8,18 +8,16 @@ position: 1
 
 # Accessibility Overview
 
-In terms of web components, accessibility means that the web sites and applications provide full control over their features by enabling users with disabilities to access them through assistive technologies such as screen readers.
+In terms of web components, accessibility means that the websites and applications provide full control over their features by enabling users with disabilities to access them through assistive technologies such as screen readers.
 
-## Importance
+Assistive technologies work well for the most basic and text-driven websites and applications. However, the Web is dynamically changing and is now well beyond the realm of text-based experiences. As a result, assistive technologies struggle to keep up.
 
-Assistive technologies work well for the most basic and text-driven web sites and applications. However, the Web is dynamically changing and is now well beyond the realm of text-based experiences. As a result, assistive technologies struggle to keep up.
-
-Web developers can do a lot to bridge this gap between the current challenges which web applications pose to disabled users and the capabilities which assistive technologies support. By providing features, such as full keyboard support, high-contrast visual elements, and text-based equivalents of non-text elements, and by adhering to standards like [WAI-ARIA](http://www.w3.org/WAI/PF/aria-practices/), [WCAG 2.0](http://www.w3.org/TR/WCAG20/), and [Section 508](http://www.section508.gov), developers deliver completely accessible and rich Internet applications.
+Web developers can do a lot to bridge this gap between the current challenges which web applications pose to disabled users and the capabilities which assistive technologies support. By providing features, such as full keyboard support, high-contrast visual elements, and text-based equivalents of non-text elements, and by adhering to standards like [WAI-ARIA](https://www.w3.org/WAI/PF/aria-practices/), [WCAG 2.1](https://www.w3.org/TR/WCAG21/), and [Section 508](https://www.section508.gov), developers deliver completely accessible and rich Internet applications.
 
 ## See Also
 
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
-* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

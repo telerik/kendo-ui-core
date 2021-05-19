@@ -4,11 +4,12 @@ page_title: Overview | Hybrid UI Drawer
 description: "Initialize and use a Hybrid UI Drawer component in Kendo UI framework."
 slug: overview_hybriddrawer
 position: 1
+component: drawer
 ---
 
 # Drawer Overview
 
-The [Hybrid UI Drawer widget](http://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
+The [Hybrid UI Drawer widget](https://demos.telerik.com/kendo-ui/m/index#drawer/index) provides a slide to reveal the global mobile application toolbox or navigation.
 
 ## Getting Started
 
@@ -26,7 +27,7 @@ The Drawer automatically hides when the user swipes back or taps the remaining v
 
 The example below demonstrates a Drawer and a **Reveal** button.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="drawer" data-role="button">Drawer</a>
@@ -52,7 +53,7 @@ The example below demonstrates a Drawer and a **Reveal** button.
 
 The example below demonstrates a Drawer with view navigation links.
 
-###### Example
+
 
     <div data-role="view" id="foo">
         Foo
@@ -81,7 +82,7 @@ The `views` array allows you to associate the Drawer with a list of view IDs on 
 
 The example below demonstrates a Drawer associated with a remote View.
 
-###### Example
+
 
     <!-- local view -->
     <div id="foo" data-role="view">
@@ -112,7 +113,7 @@ In addition to responding to user swipes, the Drawer widget can be opened when a
 
 The example below demonstrates a button revealing a Drawer.
 
-###### Example
+
 
     <div data-role="view">
         <a href="#foo" data-rel="drawer" data-role="button">Foo</a>
@@ -128,7 +129,7 @@ The example below demonstrates a button revealing a Drawer.
 
 **Figure 1: Nested ListView with different color schemes**
 
-![Nested ListView with different color scheme](/controls/hybrid/drawer/ListView-in-Drawer.png)
+![Nested ListView with different color scheme](ListView-in-Drawer.png)
 
 The ListView has different styling when placed in a Drawer.
 
@@ -136,11 +137,11 @@ The ListView has different styling when placed in a Drawer.
 
 **Figure 2: Nested vertical TabStrip**
 
-![Nested Vertical TabStrip](/controls/hybrid/drawer/TabStrip-in-Drawer.png)
+![Nested Vertical TabStrip](TabStrip-in-Drawer.png)
 
 To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip placed in a Drawer, as demonstrated in the example below.
 
-###### Example
+
 
 	<div data-role="drawer">
         <div data-role="tabstrip" class="km-vertical-tabstrip">
@@ -149,8 +150,6 @@ To activate this feature, set the `km-vertical-tabstrip` class to the TabStrip p
     </div>
 
 ## See Also
-
-Other articles and how-to examples on the Hybrid UI components and on the Drawer:
 
 * [Hybrid UI Drawer JavaScript API Reference](/api/javascript/mobile/ui/drawer)
 * [Overview of the Hybrid UI Components]({% slug overview_hybridkendoui %})

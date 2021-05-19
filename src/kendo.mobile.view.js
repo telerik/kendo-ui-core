@@ -19,7 +19,7 @@ var __meta__ = { // jshint ignore:line
         Widget = ui.Widget,
         ViewClone = kendo.ViewClone,
         INIT = "init",
-        UI_OVERLAY = '<div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
+        UI_OVERLAY = '<div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 20000; display: none"></div>',
         BEFORE_SHOW = "beforeShow",
         SHOW = "show",
         AFTER_SHOW = "afterShow",

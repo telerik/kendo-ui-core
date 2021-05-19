@@ -13,9 +13,9 @@ Every new child is bound with distinct values.
 
 > **Important**  
 >
-> When applied, the `ng-repeat` directive demonstrates some limitations. For more information on this issue, refer to the [notes on `ng-repeat`](http://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat).
+> When applied, the `ng-repeat` directive demonstrates some limitations. For more information on this issue, refer to the [notes on `ng-repeat`](https://docs.telerik.com/kendo-ui/AngularJS/notes-on-ng-repeat).
 
-```html
+```dojo
     <script type="text/javascript">
       function getResource(val){
         return val;
@@ -119,10 +119,10 @@ Every new child is bound with distinct values.
       }]);
     </script>
   <div ng-app="test" ng-controller="testController">
-    {{hierarchyFieldIds}}
+    {{'{{'}}hierarchyFieldIds}}
     <div ng-repeat="field in placeholder track by $index">
       <select kendo-dropdownlist
-              data-index="{{$index}}"
+              data-index="{{'{{'}}$index}}"
               k-data-source="hierarchyFields[$index]"
               k-data-text-field="'Name'"
               k-data-value-field="'Id'"
@@ -139,7 +139,7 @@ Every new child is bound with distinct values.
 
 ## See Also
 
-* [DropDownList JavaScript API Reference](/api/javascript/ui/dropdownlist)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)
 * [How to Automatically Adjust the Width of a DropDownList]({% slug howto_automatically_adjust_width_dropdownlist %})
 * [How to Create DropDownLists with Long Items]({% slug howto_create_listswith_long_items_dropdownlist %})
 * [How to Detect Wrapper Focus Events]({% slug howto_detect_wrapper_focus_events_dropdownlist %})

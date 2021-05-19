@@ -196,6 +196,26 @@ $.extend(true, kendo.ui.Pager.prototype.options.messages,{
 });
 }
 
+/* TreeListPager messages */
+
+if (kendo.ui.TreeListPager) {
+    kendo.ui.TreeListPager.prototype.options.messages =
+    $.extend(true, kendo.ui.TreeListPager.prototype.options.messages,{
+      "allPages": "All",
+      "page": "Side",
+      "display": "Viser rækker {0} - {1} af {2}",
+      "of": "af {0}",
+      "empty": "Ingen rækker at vise.",
+      "refresh": "Opdatér",
+      "first": "Gå til første side",
+      "itemsPerPage": "emner pr side",
+      "last": "Gå til sidste side",
+      "next": "Gå til næste side",
+      "previous": "Gå til forrige side",
+      "morePages": "Flere sider"
+    });
+    }
+
 /* FilterCell messages */
 
 if (kendo.ui.FilterCell) {
@@ -218,6 +238,7 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "and": "Og",
   "clear": "Nulstil",
   "info": "Vis rækker som",
+  "title": "Vis rækker som",
   "selectValue": "-Vælg værdi-",
   "isFalse": "er falskt",
   "isTrue": "er sandt",

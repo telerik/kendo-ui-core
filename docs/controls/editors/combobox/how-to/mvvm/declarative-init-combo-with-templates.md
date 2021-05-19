@@ -10,9 +10,9 @@ slug: howto_declaratively_initialize_with_templates_combobox
 
 The following example demonstrates how to declaratively initialize a Kendo UI ComboBox with templates.
 
-###### Example
 
-```html
+
+```dojo
   <div id="example">
 
     <div class="demo-section k-header">
@@ -51,7 +51,7 @@ The following example demonstrates how to declaratively initialize a Kendo UI Co
             transport: {
               read: {
                 dataType: "jsonp",
-                url: "http://demos.telerik.com/kendo-ui/service/Customers"
+                url: "https://demos.telerik.com/kendo-ui/service/Customers"
               }
             }
           }),

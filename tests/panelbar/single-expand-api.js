@@ -2,11 +2,11 @@
     var panelbar;
     var ul;
 
-    module('panelbar single expand api', {
-        setup: function() {
-            kendo.effects.disable();
+    describe('panelbar single expand api', function () {
+        beforeEach(function() {
 
-            QUnit.fixture.append(
+
+            Mocha.fixture.append(
                 '<ul id="panelbar">' +
                 '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
                 '            class="k-icon k-i-arrow-60-down k-panelbar-expand"></span></span>' +
@@ -100,33 +100,33 @@
             ul = $("#panelbar");
 
             panelbar = new kendo.ui.PanelBar(ul, { expandMode: 0 });
-        },
-        teardown: function() {
-            kendo.effects.enable();
+        });
+        afterEach(function() {
+
 
             panelbar.destroy();
-        }
-    });
+        });
 
     function getRootItem(index) {
         return ul.find('.k-header').parent().eq(index)
     }
 
-    test('expand should collapse other opened items', function() {
+    it('expand should collapse other opened items', function() {
         var item = getRootItem(0);
         var item2 = getRootItem(2);
 
         panelbar.expand(item2);
 
-        equal(item.find('> .k-group').css("display"), "none");
+        assert.equal(item.find('> .k-group').css("display"), "none");
     });
 
-    test('expand should not collapse item which is already expanded', function() {
+    it('expand should not collapse item which is already expanded', function() {
         var item = getRootItem(2);
 
         panelbar.expand(item);
         panelbar.expand(item);
 
-        equal(item.find('> .k-group').css("display"), "block");
+        assert.equal(item.find('> .k-group').css("display"), "block");
     });
-})();
+    });
+}());

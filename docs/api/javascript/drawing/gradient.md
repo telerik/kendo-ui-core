@@ -5,6 +5,7 @@ res_type: api
 ---
 
 # kendo.drawing.Gradient : kendo.Class
+
 An abstract base class representing common members of all gradients.
 
 ## Constructor Parameters
@@ -16,13 +17,13 @@ The configuration of this gradient.
 
 ### stops `Array`
 The color stops of the gradient.
-Can contain either plain objects or [GradientStop](gradient-stop) instances.
+Can contain either plain objects or [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ## Fields
 
 ### stops `Array`
 The array of gradient color stops.
-Contains [GradientStop](gradient-stop) instances.
+Contains [GradientStop](/api/javascript/drawing/gradient-stop) instances.
 
 ### options `kendo.drawing.OptionsStore`
 The configuration options of the gradient.
@@ -43,7 +44,7 @@ The color in any of the following formats.
 
 | Format         | Description
 | ---            | --- | ---
-| red            | [Basic](http://www.w3.org/TR/css3-color/#html4) or [Extended](http://www.w3.org/TR/css3-color/#svg-color) CSS Color name
+| red            | [Basic](https://www.w3.org/TR/css3-color/#html4) or [Extended](https://www.w3.org/TR/css3-color/#svg-color) CSS Color name
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB value
 

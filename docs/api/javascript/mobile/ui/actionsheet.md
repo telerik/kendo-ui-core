@@ -3,6 +3,7 @@ title: ActionSheet
 page_title: Configuration, methods and events of Kendo UI Mobile ActionSheet
 description: Quickly configure mobile ActionSheet widget, close and open it using methods, find which events to use.
 res_type: api
+component: action-sheet
 ---
 
 # kendo.mobile.ui.ActionSheet
@@ -234,6 +235,7 @@ Fires when the ActionSheet is closed.
       var app = new kendo.mobile.Application();
 
       function onClose() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("closed");
       }
     </script>
@@ -256,6 +258,7 @@ Fires when the ActionSheet is opened.
       var app = new kendo.mobile.Application();
 
       function onOpen() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("opened");
       }
     </script>

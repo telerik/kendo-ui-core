@@ -3,6 +3,7 @@ title: Button
 page_title: Configuration, methods and events of Kendo UI Mobile Button
 description: Find which events to use in Mobile Button Widget.
 res_type: api
+component: mobile-button
 ---
 
 # kendo.mobile.ui.Button
@@ -61,6 +62,7 @@ By default, buttons trigger click/navigate when the user taps the button (a pres
     <script>
         var app = new kendo.mobile.Application();
         function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("click");
         }
     </script>
@@ -80,6 +82,7 @@ If set to `false` the widget will be disabled and will not allow the user to cli
     <script>
         var app = new kendo.mobile.Application();
         function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("click");
         }
     </script>
@@ -189,6 +192,7 @@ Whether to enable or disable the widget.
             $("#foo").data("kendoMobileButton").enable(this.check());
         }
         function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("click");
         }
     </script>
@@ -209,6 +213,7 @@ Fires when the user taps the button.
     var app = new kendo.mobile.Application();
 
     function onClick() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("clicked");
     }
     </script>

@@ -12,9 +12,9 @@ The following example demonstrates how to expand a Kendo UI ComboBox located in 
 
 Basically, the approach is to set the input width to 100%.
 
-###### Example
 
-```html
+
+```dojo
   <div class="row">
     <div class="col-md-8"><input id="categories" style="width: 100%" /></div>
     <div class="col-md-4">.col-md-4</div>
@@ -28,7 +28,7 @@ Basically, the approach is to set the input width to 100%.
                 type: "odata",
                 serverFiltering: true,
                 transport: {
-                    read: "http://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
+                    read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Categories"
                 }
             }
         });

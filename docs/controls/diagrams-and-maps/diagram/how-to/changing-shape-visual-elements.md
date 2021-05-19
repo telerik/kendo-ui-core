@@ -11,9 +11,7 @@ The following example demonstrates how to find a particular element from the sha
 
 This means to change the rectangle fill and stroke options on `hover`.
 
-###### Example
-
-```html
+```dojo
 
     <div id="diagram"></div>
     <script>
@@ -147,7 +145,7 @@ This means to change the rectangle fill and stroke options on `hover`.
         }));
 
         g.append(new dataviz.diagram.Image({
-          source: "http://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
+          source: "https://demos.telerik.com/kendo-ui/content/dataviz/diagram/people/" + dataItem.image,
           x: 3,
           y: 3,
           width: 68,
@@ -163,9 +161,8 @@ This means to change the rectangle fill and stroke options on `hover`.
 
 ## See Also
 
-* [JavaScript API Reference](/api/javascript/dataviz/ui/diagram)
+* [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)
+* [JavaScript API Reference of the Diagram](/api/javascript/dataviz/ui/diagram)
 * [How to Implement Local Data Editing]({% slug howto_editlocaladata_diagram %})
 * [How to Use Scrollbars]({% slug howto_usescrollbar_diagram %})
 * [How to Wrap Text]({% slug howto_wraptext_diagram %})
-
-For more runnable examples on the Kendo UI Diagram, browse its [**How To** documentation folder]({% slug howto_adjustpathorigin_diagram %}).

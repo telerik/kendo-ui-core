@@ -10,9 +10,9 @@ slug: howto_underline_matched_search_combobox
 
 The following example demonstrates how to underline a matched input-field search in a Kendo UI ComboBox widget.
 
-###### Example
 
-```html
+
+```dojo
 <input id="fabric" placeholder="Select fabric..." />
 <script>
   function formatValue(value, text) {

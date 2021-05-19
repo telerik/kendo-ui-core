@@ -22,8 +22,6 @@ The Hybrid UI framework tries to match the native look of several iOS platform v
 
 ## See Also
 
-Other articles on frequently asked questions about the Hybrid UI components:
-
 * [All Platforms FAQ]({% slug all_platforms_faq %})
 * [Android-Specific FAQ]({% slug android_specific_faq %})
 * [Blackberry-Specific FAQ]({% slug blackberry_specific_faq %})

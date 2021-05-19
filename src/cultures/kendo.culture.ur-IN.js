@@ -3,13 +3,13 @@
         name: "ur-IN",
         numberFormat: {
             pattern: ["-n"],
-            decimals: 0,
+            decimals: 2,
             ",": ",",
             ".": ".",
             groupSize: [3],
             percent: {
                 pattern: ["-n%","n%"],
-                decimals: 0,
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],

@@ -3,6 +3,7 @@
 @background: #fff;
 
 @border-radius: 4px;
+@icon-size: 16px;
 
 @normal-background: #fff;
 @normal-text-color: #333333;
@@ -14,10 +15,32 @@
 @selected-text-color: #ffffff;
 @selected-gradient: none;
 
-@error: #ffe0d9;
-@warning: #fbeed5;
-@success: #eaf7ec;
-@info: #e5f5fa;
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #5cb85c;
+@info: #5bc0de;
+@success: #5cb85c;
+@warning: #f0ad4e;
+@error: #d9534f;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
 
 @series-a: #428bca;
 @series-b: #5bc0de;
@@ -33,19 +56,18 @@
 
 @import "type-bootstrap.less";
 
-/*
-Uncomment the following two @import statements if you want to compile a Kendo UI Bootstrap theme with a custom color scheme, based on a custom Bootstrap Less file.
+// Uncomment the following two @import statements if you want to compile a Kendo UI Bootstrap theme with a custom color scheme, based on a custom Bootstrap Less file.
+//
+// The first file (bootstrap-variables.less) contains the Bootstrap Less variables. It is part of the Bootstrap source code, not the Kendo UI source code.
+//
+// The second file (bootstrap-mapper.less) exists in the same folder as this file. It maps the Bootstrap Less variables to Kendo UI Less variables,
+// which will cause the Kendo UI color values to be overwritten.
+//
+// More information is available in the Kendo UI documentation:
+//
+// http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
 
-The first file (bootstrap-variables.less) contains the Bootstrap Less variables. It is part of the Bootstrap source code, not the Kendo UI source code.
 
-The second file (bootstrap-mapper.less) exists in the same folder as this file. It maps the Bootstrap Less variables to Kendo UI Less variables,
-which will cause the Kendo UI color values to be overwritten.
+// @import "bootstrap-variables.less";
 
-More information is available in the Kendo UI documentation:
-
-http://docs.telerik.com/kendo-ui/using-kendo-with-twitter-bootstrap
-*/
-
-/*@import "bootstrap-variables.less";*/
-
-/*@import "bootstrap-mapper.less";*/
+// @import "bootstrap-mapper.less";

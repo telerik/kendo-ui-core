@@ -17,9 +17,9 @@
             },
             currency: {
                 name: "Mauritanian Ouguiya",
-                abbr: "MRO",
+                abbr: "MRU",
                 pattern: ["-n $","n $"],
-                decimals: 0,
+                decimals: 2,
                 ",": " ",
                 ".": ",",
                 groupSize: [3],

@@ -1,14 +1,14 @@
 ---
 title: List of Formulas and Functions
-page_title: List of Formulas and Functions | Kendo UI Spreadsheet
-description: "A list of the formulas and functions available in the Kendo UI Spreadsheet widget."
+page_title: jQuery Spreadsheet Documentation | List of Formulas and Functions
+description: "Get started with the jQuery Spreadsheet by Kendo UI and check out the list of its formulas and functions."
 slug: list_offormulas_andfunctions_spreadsheet_widget
 position: 2
 ---
 
 # List of Formulas and Functions
 
-The following table provides a list of the formulas and functions the Spreadsheet supports. 
+The following table provides a list of the formulas and functions the Spreadsheet supports.
 
 | Formulas and functions	  | Description				                                    
 | :--- 						          | :---						                                    
@@ -254,8 +254,8 @@ The following table provides a list of the formulas and functions the Spreadshee
 | TRIM                      | Removes spaces from text; replaces all internal multiple spaces with a single space
 | TRIMMEAN                  | Returns the mean of the interior of a data set, ignoring a proportion of high and low values
 | TRUE                      | Returns the logical value `True`
-| UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](http://unicode.org/standard/standard.html)
-| UNICODE                   | Returns the [Unicode](http://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
+| UNICHAR                   | Returns the character represented by the given numeric value according to the [Unicode Standard](https://unicode.org/standard/standard.html)
+| UNICODE                   | Returns the [Unicode](https://unicode.org/standard/standard.html) code point that corresponds to the first character of a text value
 | UPPER                     | Converts text to uppercase
 | VALUE                     | Converts a text argument to a number
 | VAR.P                     | Calculates variance based on the entire population
@@ -271,19 +271,9 @@ For more information on how to create formulas and what their syntax is, see the
 
 ## Array Formulas
 
-Similar to Excel, the Kendo UI Spreadsheet widget supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US), which return a matrix of values.
-
-### Differences from Excel
-
-In Excel, to get all the values from an array formula, you pre-select the target range, press `F2` to type the formula, and press `Ctrl`+`Shift`+`Enter` to save it. Excel then locks the cells that contain the result, so that they cannot be edited, deleted, or merged.
-
-In the Spreadsheet, if a formula returns an array, the values are distributed across adjacent cells. For example, if you type in `A1`: `=2*D1:E2`, then the `A1`, `B1`, `A2`, and `B2` cells receive the doubles of the values from `D1`, `E1`, `D2`, and `E2` respectively. In Excel, such a formula places the double of `D1` in `A1`&mdash;it would only act as an array formula if the steps outlined above are taken when the formula is created.
-
-The Spreadsheet does not lock the result cells neither, which might lead to surprising behavior. You are able to type into the result cells, but the values do not appear to have been saved because the formula distributes the values to them again. The result cells are also editable and can be merged or deleted&mdash;an array formula will just attempt to fill whatever cell possible.
+Similar to Excel, the Kendo UI Spreadsheet supports [array formulas](https://support.office.com/en-us/article/Guidelines-and-examples-of-array-formulas-7d94a64e-3ff3-4686-9372-ecfd5caa57c7?ui=en-US&rs=en-US&ad=US) which return a matrix of values. You have to enter them in the same way as in Excel&mdash;by pre-selecting the target range and pressing `Ctrl`+`Shift`+`Enter` to save the formula.
 
 ## See Also
-
-Other articles on Kendo UI Spreadsheet:
 
 * [List of Keyboard Shortcuts]({% slug list_ofkeyboard_shortcuts_spreadsheet_widget %})
 * [User Guide]({% slug user_guide_spreadsheet_widget %})
