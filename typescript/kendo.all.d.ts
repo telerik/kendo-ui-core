@@ -5540,6 +5540,8 @@ declare namespace kendo.ui {
         done?: string;
         lock?: string;
         unlock?: string;
+        apply?: string;
+        reset?: string;
     }
 
     interface GridColumnMenu {

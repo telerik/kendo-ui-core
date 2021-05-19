@@ -518,6 +518,7 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "repeat": "Repeat",
+  "recurrenceEditorTitle": "Recurrence editor",
   "frequencies": {
     "never": "Never",
     "hourly": "Hourly",
@@ -583,6 +584,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 if (kendo.ui.MobileRecurrenceEditor) {
     kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
     $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "cancel": "Cancel",
+      "update": "Save",
       "endTitle": "Repeat ends",
       "repeatTitle": "Repeat pattern",
       "headerTitle": "Repeat event",
@@ -591,18 +594,35 @@ if (kendo.ui.MobileRecurrenceEditor) {
             "never": "Never",
             "after": "After...",
             "on": "On..."
-        }
+        },
+        "never": "Never",
+        "after": "End repeat after",
+        "on": "End repeat on"
+      },
+      "daily": {
+        "interval": ""
+      },
+      "hourly": {
+        "interval": ""
+      },
+      "weekly": {
+        "interval": ""
       },
       "monthly": {
+        "interval": "",
         "repeatBy": "Repeat by: ",
         "dayOfMonth": "Day of the month",
         "dayOfWeek": "Day of the week",
-        "every": "Every"
+        "repeatEvery": "Repeat every",
+        "every": "Every",
+        "day": "Day "
       },
       "yearly": {
+        "interval": "",
         "repeatBy": "Repeat by: ",
         "dayOfMonth": "Day of the month",
         "dayOfWeek": "Day of the week",
+        "repeatEvery": "Repeat every: ",
         "every": "Every",
         "month": "Month",
         "day": "Day"

@@ -580,7 +580,9 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "unlock": "Отключи колоната",
   "stick" : "Залепи колоната",
   "unstick": "Отлепи колоната",
-  "setColumnPosition": "Задай позиция на колоната"
+  "setColumnPosition": "Задай позиция на колоната",
+  "apply": "Приложи",
+  "reset": "Нулирай"
 });
 }
 
@@ -590,6 +592,7 @@ if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
   "repeat": "Повторение",
+  "recurrenceEditorTitle": "Конфигуратор на повторенията",
   "daily": {
     "interval": " ден(дни)",
     "repeatEvery": "Повтаряй всеки: "
@@ -650,6 +653,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 if (kendo.ui.MobileRecurrenceEditor) {
     kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
     $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "cancel": "Откажи",
+      "update": "Запази",
       "endTitle": "Повтарянето завършва",
       "repeatTitle": "Вид повторение",
       "headerTitle": "Повтори събитието",
@@ -658,18 +663,35 @@ if (kendo.ui.MobileRecurrenceEditor) {
             "never": "Никога",
             "after": "След...",
             "on": "На..."
-        }
+        },
+        "never": "Никога",
+        "after": "Приключи повторенията след",
+        "on": "Приключи повторенията на"
+      },
+      "daily": {
+        "interval": ""
+      },
+      "hourly": {
+        "interval": ""
+      },
+      "weekly": {
+        "interval": ""
       },
       "monthly": {
+        "interval": "",
         "repeatBy": "Повтори според: ",
         "dayOfMonth": "Дата от месеца",
         "dayOfWeek": "Ден от седмицата",
-        "every": "Всеки"
+        "repeatEvery": "Повтори всеки",
+        "every": "Всеки",
+        "day": "Ден "
       },
       "yearly": {
+        "interval": "",
         "repeatBy": "Повтори според: ",
         "dayOfMonth": "Дата от месеца",
         "dayOfWeek": "Ден от седмицата",
+        "repeatEvery": "Повтори всеки: ",
         "every": "Всеки",
         "month": "Месец",
         "day": "Ден"
