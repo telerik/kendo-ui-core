@@ -38,11 +38,11 @@ var __meta__ = { // jshint ignore:line
         RIGHT = "right",
         UP = "up",
         NS = ".kendoNotification",
-        WRAPPER = '<div class="k-widget k-popup k-notification"></div>',
+        WRAPPER = '<div role="alert" aria-live="polite" class="k-widget k-popup k-notification"></div>',
         TEMPLATE = '<div class="k-notification-wrap">' +
-                '<span class="k-icon k-i-#=typeIcon#" title="#=typeIcon#"></span>' +
+                '<span class="k-icon k-i-#:typeIcon#" title="#:typeIcon#"></span>' +
                 '<div class="k-notification-content">#=content#</div>' +
-                '<span class="#: closeButton ? "" : "k-hidden"# k-icon k-i-close" title="Hide"></span>' +
+                '<span aria-hidden="true" class="#: closeButton ? "" : "k-hidden"# k-icon k-i-close" title="Hide"></span>' +
             '</div>',
         SAFE_TEMPLATE = TEMPLATE.replace("#=content#", "#:content#");
 
@@ -89,6 +89,7 @@ var __meta__ = { // jshint ignore:line
             width: null,
             height: null,
             templates: [],
+            title: null,
             animation: {
                 open: {
                     effects: "fade:in",
@@ -353,11 +354,14 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 options = that.options,
                 wrapper = $(WRAPPER),
+                contentId = kendo.guid(),
                 args, defaultArgs;
 
             if (!type) {
                 type = INFO;
             }
+
+            wrapper.attr("aria-label", type);
 
             if (content !== null && content !== undefined && content !== "") {
 
@@ -377,9 +381,15 @@ var __meta__ = { // jshint ignore:line
                     .addClass(KNOTIFICATION + "-" + type)
                     .toggleClass(KNOTIFICATION + "-button", options.button)
                     .toggleClass(KNOTIFICATION + "-closable", options.button)
-                    .attr("data-role", "alert")
+                    .attr({
+                        "data-role": "alert",
+                        title: options.title
+                    })
                     .css({width: options.width, height: options.height})
                     .append(that._getCompiled(type, safe)(args));
+
+                wrapper.find(".k-notification-content").attr("id", contentId);
+                wrapper.attr("aria-describedby", contentId);
 
                 that.angular("compile", function(){
                     return {

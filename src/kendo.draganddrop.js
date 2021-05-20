@@ -921,6 +921,8 @@ var __meta__ = { // jshint ignore:line
                 }
             });
 
+            clearInterval(this._scrollInterval);
+            this._scrollInterval = null;
             this._cancel(this._trigger(DRAGEND, e));
         },
 
