@@ -357,6 +357,20 @@ Defines a Kendo UI template to be used with the corresponding notification type.
 
 See the [example above](/api/javascript/ui/notification#configuration-templates).
 
+### title `String` *(default: null)*
+
+Defines the title attribute value for the Notification wrapper.
+
+#### Example
+
+    <span id="notification"></span>
+    <script>
+        $("#notification").kendoNotification({
+            title: "Custom title"
+        });
+        $("#notification").getKendoNotification().show("Kendo Notification");
+    </script>
+
 ### width `Number|String` *(default: null)*
 
 Defines the notifications' width. Numbers are treated as pixels.
