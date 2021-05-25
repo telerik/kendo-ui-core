@@ -4354,7 +4354,7 @@ The label that is displayed after the drop-down list for the page size.
                 ]
             },
             pageable: {
-                pageSize: 2,
+                pageSizes: [2,3],
                 input: true,
                 messages: {
                     itemsPerPage: "data items per page"
