@@ -121,9 +121,9 @@ Get a reference to the Form instance and set the value of the required model fie
           function onDdlChange(e){
             var form = $("#exampleForm").getKendoForm();
             var dataItem = e.sender.dataItem();
-
-            form._model.set("City", dataItem.ShipCity);
-            form._model.set("AddressLine", dataItem.ShipAddress);
+            
+            form.editable.options.model.set("City", dataItem.ShipCity);
+            form.editable.options.model.set("AddressLine", dataItem.ShipAddress);
           };
 
         });
