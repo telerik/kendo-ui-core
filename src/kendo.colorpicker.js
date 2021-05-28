@@ -564,7 +564,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            this._colorAsText.attr("title", that.options.messages.previewInput);
+            this._colorAsText.attr("aria-label", that.options.messages.previewInput);
             this._colorAsText.removeClass("k-state-error");
 
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
