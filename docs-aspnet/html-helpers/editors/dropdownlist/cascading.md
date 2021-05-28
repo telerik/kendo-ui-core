@@ -11,8 +11,11 @@ position: 6
 The cascading functionality is represented by a series of two or more DropDownLists in which each DropDownList is filtered according to the selected options in the previous DropDownList.
 
 ## Basic Concepts and Requirements
-
+{% if site.core %}
 The child DropDownList cascades from the parent one if the [`CascadeFrom`](/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder#cascadefromsystemstring) property is defined. The `CascadeFrom` property has to point to the [`Name`]({% slug fundamentals_core %}#basic-configuration) of the parent DropDownList widget.
+{% else %}
+The child DropDownList cascades from the parent one if the [`CascadeFrom`](/api/Kendo.Mvc.UI.Fluent/DropDownListBuilder#cascadefromsystemstring) property is defined. The `CascadeFrom` property has to point to the [`Name`]({% slug fundamentals_aspnetmvc %}#basic-configuration) of the parent DropDownList widget.
+{% endif %}
 
 The following actions occur during initialization of the child DropDownList. The child {{ site.product_short }} DropDownList:
 - checks if the `CascadeFrom` property is set. If not, cascading is disabled.

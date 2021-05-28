@@ -35,6 +35,7 @@ var __meta__ = { // jshint ignore:line
         HOVER = "k-state-hover",
         FOCUS = "focus",
         POINT = ".",
+        SYMBOL = "symbol",
         CLASS_ICON = "k-icon",
         LABELCLASSES = "k-label k-input-label",
         SELECTED = "k-state-selected",
@@ -421,7 +422,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (group) {
                     groupRegExp = new RegExp("\\" + group, "g");
-                    extractRegExp = new RegExp("(^(-)$)|(^(-)?([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?)");
+                    extractRegExp = new RegExp("(-)?(" + format[SYMBOL] + ")?([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?");
                 }
 
                 if (extractRegExp) {
