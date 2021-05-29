@@ -7173,6 +7173,7 @@ declare namespace kendo.ui {
         position?: NotificationPosition;
         stacking?: string;
         templates?: NotificationTemplate[];
+        title?: string;
         width?: number|string;
         hide?(e: NotificationHideEvent): void;
         show?(e: NotificationShowEvent): void;

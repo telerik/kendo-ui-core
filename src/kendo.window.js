@@ -2051,9 +2051,9 @@
                     wnd.minTop = -containerOffset.top;
                 }
 
-                wnd.wrapper
-                    .append(templates.overlay)
-                    .children(KWINDOWRESIZEHANDLES).hide();
+                $(templates.overlay).appendTo(wnd.wrapper).css({ opacity: 0 });
+
+                wnd.wrapper.children(KWINDOWRESIZEHANDLES).hide();
 
                 $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
             },

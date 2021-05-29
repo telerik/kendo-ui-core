@@ -894,10 +894,14 @@ var __meta__ = { // jshint ignore:line
 
             if (yInBounds) {
                 parent.scrollTop += velocity.y;
+            } else if (yIsScrollable && yDelta < 0) {
+                parent.scrollTop = 0;
             }
 
             if (xInBounds) {
                 parent.scrollLeft += velocity.x;
+            } else if (xIsScrollable && xDelta < 0) {
+                parent.scrollLeft = 0;
             }
 
             if (this.hint && isRootNode && (xInBounds || yInBounds)) {
@@ -921,6 +925,8 @@ var __meta__ = { // jshint ignore:line
                 }
             });
 
+            clearInterval(this._scrollInterval);
+            this._scrollInterval = null;
             this._cancel(this._trigger(DRAGEND, e));
         },
 
