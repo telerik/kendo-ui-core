@@ -473,6 +473,8 @@ The pane(s) to be removed.
 
 Get or set the size of the pane. Setting this value will cause the widget to redraw and it will trigger the `resize` event.
 
+> Note: The correct usage of the method requires that the size of the panes should be set either through the [panes.size](/api/javascript/ui/splitter/configuration/panes#panes.size) property or the `size` method. Otherwise, the method will return *undefined*.
+
 #### Parameters
 
 ##### pane `String|Element|jQuery`

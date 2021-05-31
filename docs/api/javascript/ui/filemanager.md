@@ -1131,6 +1131,7 @@ Navigates to the specified path.
 
 The path to navigate.
 
+> Note: If you wish to use the method to navigate to a child folder, you will need to navigate to its parent folder first.
 #### Example
 
     <div id="fileManager"></div>

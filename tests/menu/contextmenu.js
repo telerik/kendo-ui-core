@@ -356,6 +356,49 @@
         removeMocksIn(kendo.ui.ContextMenu.fn);
     });
 
+    it("first menu item is focused upon opening", function(done){
+        var target;
+
+        menu.setOptions({
+            showOn: "click",
+            target: ".filter"
+        });
+
+        menu.bind("activate", function () {
+            setTimeout(function() {
+                assert.equal(menu.element.find(".k-state-focused").length, 1);
+                done();
+            });
+        });
+
+        target = $(".filter:first");
+        target.trigger("click");
+    });
+
+    it('ContextMenu is accessible', function (done) {
+        $("#target").trigger("contextmenu");
+
+        axeRun(menu.wrapper, done);
+    });
+
+    it("opened ContextMenu is accessible", function(done){
+        var target;
+
+        menu.setOptions({
+            showOn: "click",
+            target: ".filter"
+        });
+
+        menu.bind("activate", function () {
+            setTimeout(function() {
+                axeRun(menu.wrapper, done);
+            });
+        });
+
+        target = $(".filter:first");
+        target.trigger("click");
+    });
+
     });
 }());
 
