@@ -85,6 +85,7 @@ var __meta__ = { // jshint ignore:line
         touchPointerTypes = { "2": 1, "touch": 1 },
         STRING = "string",
         DATABOUND = "dataBound",
+        ARIA_EXPANDED = "aria-expanded",
 
         bindings = {
             text: "dataTextField",
@@ -1155,6 +1156,7 @@ var __meta__ = { // jshint ignore:line
                             popup.options.animation.open.effects = openEffects;
                         }
                         ul.removeAttr("aria-hidden");
+                        li.attr(ARIA_EXPANDED, true);
 
                         that._configurePopupOverflow(popup, li);
 
@@ -1296,6 +1298,8 @@ var __meta__ = { // jshint ignore:line
             items.each(function () {
                 var li = $(this);
 
+                li.attr(ARIA_EXPANDED, false);
+
                 if (!dontClearClose && that._isRootItem(li)) {
                     that.clicked = false;
                 }
@@ -1400,6 +1404,12 @@ var __meta__ = { // jshint ignore:line
             element.removeClass("k-menu-horizontal k-menu-vertical");
             element.addClass("k-widget k-reset k-header k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
 
+            if(this.options.orientation === "vertical") {
+                element.attr("aria-orientation", "vertical");
+            } else {
+                element.attr("aria-orientation", "horizontal");
+            }
+
             element.find("li > ul")
                    .filter(function() {
                        return !kendo.support.matchesSelector.call(this, nonContentGroupsSelector);
@@ -1413,6 +1423,8 @@ var __meta__ = { // jshint ignore:line
                    .find("li > div")
                    .addClass("k-content")
                    .attr("tabindex", "-1"); // Capture the focus before the Menu
+
+            element.find("li[aria-haspopup]").attr(ARIA_EXPANDED, false);
 
             items = element.find("> li,.k-menu-group > li");
 
@@ -1812,7 +1824,7 @@ var __meta__ = { // jshint ignore:line
                         that.open(hoverItem);
                         that._moveHover(hoverItem, that._childPopupElement(hoverItem).children().first());
                     } else {
-                        that._moveHover(hoverItem, that._findRootParent(hoverItem));
+                        that._moveHoverToRoot(hoverItem, that._findRootParent(hoverItem));
                     }
                 }
             } else if (key == keys.TAB) {
@@ -1873,6 +1885,10 @@ var __meta__ = { // jshint ignore:line
                 }
                 that._scrollToItem(nextItem);
             }
+        },
+
+        _moveHoverToRoot: function (item, nextItem) {
+            this._moveHover(item, nextItem);
         },
 
         _findRootParent: function (item) {
@@ -2302,6 +2318,13 @@ var __meta__ = { // jshint ignore:line
                         "# } else if (item.content || item.contentUrl || contentHtml) { #" +
                         "#= renderContent(data) #" +
                         "# } #" +
+                        "# if(item.items && item.items.length > 0) { # " +
+                            "# if(item.expanded) { # " +
+                                " aria-expanded='true'" +
+                            "# } else { #" +
+                                " aria-expanded='false'" +
+                            "# } #" +
+                        "# } #" +
                     "</li>"
                 ),
                 scrollButton: template(
@@ -2364,6 +2387,8 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             Menu.fn.init.call(that, element, options);
+
+            that.element.attr("role", "menu");
 
             that._marker = kendo.guid().substring(0, 8);
 
@@ -2481,6 +2506,8 @@ var __meta__ = { // jshint ignore:line
                     DOCUMENT_ELEMENT.off(that.popup.downEvent, that.popup._mousedownProxy);
                     DOCUMENT_ELEMENT
                         .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
+
+                    that.element.focus();
                 }
             }
 
@@ -2551,9 +2578,12 @@ var __meta__ = { // jshint ignore:line
             } else {
                 if (that.popup.visible()) {
                     if (that._triggerEvent({ item: that.element, type: CLOSE }) === false) {
+                        that._removeHoverItem();
+                        that.element.find("#" + that._ariaId).removeAttr("id");
                         that.popup.close();
                         DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS + that._marker, that._closeProxy);
                         that.unbind(SELECT, that._closeTimeoutProxy);
+                        that.target.focus();
                     }
                 }
             }
@@ -2690,6 +2720,21 @@ var __meta__ = { // jshint ignore:line
                             }).data(KENDOPOPUP);
 
             that._targetChild = contains(that.target[0], that.popup.element[0]);
+        },
+
+        _moveHoverToRoot: function (item, nextItem) {
+            this._moveHover(item, nextItem);
+            this.close();
+        },
+
+        _focus: function (e) {
+            var hoverItem  = this._oldHoverItem = this._hoverItem() || [];
+
+            Menu.fn._focus.call(this, e);
+
+            if (activeElement() === e.currentTarget) {
+                this._moveHover(hoverItem, this.wrapper.children().first());
+            }
         }
     });
 
