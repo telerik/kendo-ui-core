@@ -218,8 +218,8 @@ HTML attributes of the table cell (`<td>`) rendered for the column.
         field: "name",
         title: "Name",
         attributes: {
-          "class": "table-cell",
-          style: "text-align: right; font-size: 14px"
+          "class": "table-cell k-text-right",
+          style: "font-size: 14px"
         }
       } ],
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" }]
@@ -1607,8 +1607,8 @@ HTML attributes of the column footer. The `footerAttributes` option can be used 
             { field: "age",
               footerTemplate: "Min: #: min # Max: #: max #",
               footerAttributes: {
-                  "class": "table-footer-cell",
-                  style: "text-align: right; font-size: 14px"
+                  "class": "table-footer-cell k-text-right",
+                  style: "font-size: 14px"
               }
             }
           ],
@@ -2124,8 +2124,8 @@ HTML attributes of the column header. The grid renders a table header cell (`<th
       columns: [{
         field: "name",
         headerAttributes: {
-          "class": "table-header-cell",
-          style: "text-align: right; font-size: 14px"
+          "class": "table-header-cell k-text-right",
+          style: "font-size: 14px"
         }
       }],
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
