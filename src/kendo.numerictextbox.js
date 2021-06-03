@@ -949,7 +949,7 @@ var __meta__ = { // jshint ignore:line
         var className = "k-i-arrow-" + (direction === "increase" ? "60-up" : "60-down");
 
         return (
-            '<span unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
+            '<span role="button" unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
                 '<span unselectable="on" class="' + CLASS_ICON + ' ' + className + '"></span>' +
             '</span>'
         );
