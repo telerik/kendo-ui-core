@@ -749,7 +749,7 @@ var __meta__ = { // jshint ignore:line
                     '# } else { #' +
                         '<span class="k-selected-color"><span class="k-icon k-i-line" style="display: none;"></span></span>' +
                     '# } #' +
-                    '<span class="k-select" unselectable="on" aria-label="select">' +
+                    '<span role="button" class="k-select" unselectable="on" aria-label="select">' +
                         '<span class="k-icon k-i-arrow-60-down"></span>' +
                     '</span>' +
                 '</span>' +

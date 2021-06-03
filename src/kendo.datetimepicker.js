@@ -875,8 +875,8 @@ var __meta__ = { // jshint ignore:line
 
             if (!icons[0]) {
                 icons = $('<span unselectable="on" class="k-select">' +
-                            '<span class="k-link k-link-date" aria-label="' + options.dateButtonText + '"><span unselectable="on" class="k-icon k-i-calendar"></span></span>' +
-                            '<span class="k-link k-link-time" aria-label="' + options.timeButtonText + '"><span unselectable="on" class="k-icon k-i-clock"></span></span>' +
+                            '<span class="k-link k-link-date" role="button" aria-label="' + options.dateButtonText + '"><span unselectable="on" class="k-icon k-i-calendar"></span></span>' +
+                            '<span class="k-link k-link-time" role="button" aria-label="' + options.timeButtonText + '"><span unselectable="on" class="k-icon k-i-clock"></span></span>' +
                           '</span>'
                          ).insertAfter(element);
             }

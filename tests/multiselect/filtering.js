@@ -794,5 +794,33 @@
         });
     });
 
+    it("MultiSelect with filter on DataSource populates properly", function(done) {
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: [{
+                    value: 1,
+                    text: "one",
+                    filterVal: 1
+                }, {
+                    value: 1,
+                    text: "one",
+                    filterVal: 2
+                }],
+                filter: [{ field: "filterVal", operator: "eq", value: 1 }]
+            }
+        });
+
+        multiselect.bind("open", function() {
+            var items = multiselect.dataSource.view();
+
+            assert.equal(items.length, 1);
+            done();
+        });
+
+        multiselect.open();
+    });
+
     });
 }());
