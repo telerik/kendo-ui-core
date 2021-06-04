@@ -120,6 +120,20 @@ As of the Kendo UI 2020 R3 release, the Scheduler RecurrenceEditor will be rende
 * The responsive Pager no longer has the `k-pager-lg` breakpoint and class.
 * The page numbers drop-down of the responsive Pager is now an HTML `select` element.
 
+**Rendering changes in ListView**
+
+Starting with 2020 R2, the ListView adds a wrapper element for the items in the list. This aims to add appearance improvements of the widget.
+
+If you need to remove the new wrapper element `<div class="k-listview-content">` you can add a new Listview property `contentElement`, with an empty string value:
+
+```
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            contentElement: "",
+            template: kendo.template($("#template").html())
+        });
+```
+
 **Disabled buttons in Editor toolbar**
 
 Starting with 2020 R2, disabled buttons in editor toolbar will no longer be hidden, but instead be visible. The change is a preparation for the replacing of the custom editor toolbar with the actual Kendo UI for jQuery toolbar and is part of a bigger story to reuse components and enforce consistency, instead of creating ad-hoc ones that differ ever so slightly.

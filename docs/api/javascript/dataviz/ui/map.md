@@ -4667,6 +4667,8 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
 
 The map size is derived from the zoom level and minScale options: `size = (2 ^ zoom) * minSize`
 
+> Map zoom rounds floating point numbers. This is done so as the majority of web maps use the whole [`zoom levels`](https://wiki.openstreetmap.org/wiki/Zoom_levels) 0 through to 19.
+
 #### Example - setting initial zoom level
     <div id="map"></div>
     <script>

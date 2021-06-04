@@ -8103,8 +8103,8 @@ declare namespace kendo.ui {
 
     interface RadioGroupChangeEvent extends RadioGroupEvent {
         target?: JQuery;
-        oldValue?: number;
-        newValue?: number;
+        oldValue?: string;
+        newValue?: string;
     }
 
     interface RadioGroupFocusEvent extends RadioGroupEvent {

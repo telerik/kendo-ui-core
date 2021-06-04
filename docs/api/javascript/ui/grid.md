@@ -2616,6 +2616,35 @@ An array of values that will be displayed instead of the bound value. Each item 
 
 This example displays "Beverages" and "Food" in the "category" column instead of "1" and "2".
 
+#### Example - specify column values using the MVVM design pattern
+
+    <div id="example">
+      <div data-role="grid"
+           data-columns="[
+                         { 'field': 'productName' },
+
+                         { 'field': 'category', 'values': [ 
+
+                         { 'text': 'Beverages', 'value': 1 }, 
+
+                         { 'text': 'Food', 'value': 2 } 
+
+                         ]}
+
+                         ]"
+           data-bind="source: products" ></div> 
+
+      <script>
+        var viewModel = kendo.observable({
+          products: [
+            { productName: "Tea", category: 1 },
+            { productName: "Ham", category: 2 }
+          ]
+        });
+        kendo.bind($("#example"), viewModel);
+      </script>
+    </div>
+
 > Check [ForeignKey column](https://demos.telerik.com/kendo-ui/grid/foreignkeycolumn) for a live demo.
 
 ### columns.menu `Boolean`
@@ -10254,6 +10283,15 @@ The configuration options to be set.
               sortable: true
         });
     </script>
+
+
+When used for AngularJS, the `$scope` should be passed to the Grid options. By default, the Grid when initialized expects such logic.
+
+```
+$scope.grid.setOptions($.extend({}, options, {
+                        $angular: [$scope]
+                    }));
+```
 
 ### showColumn
 

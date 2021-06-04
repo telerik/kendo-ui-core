@@ -61,19 +61,19 @@ The following specifiers are supported by Kendo UI:
 
 * `"0"`&mdash;The zero placeholder replaces the zero with the corresponding digit if such is present. Otherwise, zero appears in the result string.
 
-    kendo.toString(1234.5678, "00000") -> 01235
+    `kendo.toString(1234.5678, "00000")` -> 01235
 
 * `"#"`&mdash;The digit placeholder replaces the pound sign with the corresponding digit if one is present. Otherwise, no digit appears in the result string. Cannot be used to format a number as a telephone number, that is, `(###)-###-####`.
 
-    kendo.toString(1234.5678, "#####") -> 1235
+    `kendo.toString(1234.5678, "#####")` -> 1235
 
 * `"."`&mdash;The decimal placeholder determines the location of the decimal separator in the result string.
 
-    kendo.toString(0.45678, "0.00") -> 0.46 (en-US)
+    `kendo.toString(0.45678, "0.00")` -> 0.46 (en-US)
 
 * `","`&mdash;The group separator placeholder inserts a localized group separator between each group.
 
-    kendo.toString(12345678, "##,#") -> 12,345,678(en-US)
+    `kendo.toString(12345678, "##,#")` -> 12,345,678(en-US)
 
 * `"%"`&mdash;The percentage placeholder multiplies a number by 100 and inserts a localized percentage symbol in the result string. The `%` symbol is interpreted as a format specifier in the format string. To prevent this behavior, precede the `%` symbol with a double backslash - `kendo.toString(12, "# \\\%")` -> 12 % (en-US).
 
@@ -81,7 +81,7 @@ The following specifiers are supported by Kendo UI:
 
 * `"e"`&mdash;The exponential notation.
 
-    kendo.toString(0.45678, "e0") -> 5e-1
+    `kendo.toString(0.45678, "e0")` -> 5e-1
 
 * `";"`&mdash;The section separator defines sections with separate format strings for positive, negative, and zero numbers.
 * `"string"/'string'`&mdash;The literal string delimiter indicates that the enclosed characters will be copied to the result string.

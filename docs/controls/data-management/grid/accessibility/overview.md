@@ -30,6 +30,10 @@ For more information, refer to:
 * [WCAG 2.1 support by the Grid (demo)](https://demos.telerik.com/kendo-ui/grid/index)
 * [WCAG 2.1 compliance in Kendo UI for jQuery]({% slug section508_wcag21_accessibility_support %})
 
+## Hierarchical Grid
+
+Customization of the text in the column header for the expand or collapse columns in Hierarchical Grids can be made via the [messages.expandCollapseColumnHeader property](/api/javascript/dataviz/ui/chart#configuration-series.spacing). This sets the value to make the widget compliant with the web accessibility standards.
+
 ## See Also
 
 * [WCAG 2.1 Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)

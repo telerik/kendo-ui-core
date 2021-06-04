@@ -413,11 +413,11 @@ The widget instance which fired the event.
 
 The `<input type="radio">` DOM element that triggered the change.
 
-##### e.oldValue `Number`
+##### e.oldValue `String`
 
 The previous value of the widget.
 
-##### e.newValue `Number`
+##### e.newValue `String`
 
 The new value of the widget.
 
@@ -427,7 +427,7 @@ The new value of the widget.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ]
+            items: [ "one", "two", "three" ],
             change: function (e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
@@ -459,7 +459,7 @@ The `<input type="radio">` DOM element that triggered the change.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ]
+            items: [ "one", "two", "three" ],
             focus: function (e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
@@ -491,7 +491,7 @@ The `<input type="radio">` DOM element that triggered the event.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ]
+            items: [ "one", "two", "three" ],
             select: function (e) {
                 if(e.target.val() === "two") {
                     // Prevent selection if clicking on the "two" radio button

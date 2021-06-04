@@ -499,6 +499,14 @@ The text messages displayed in the filter. Use it to customize or localize the f
       });
     </script>
 
+### messages.addExpression `String` *(default: "Add Expression")*
+
+The title of the add expression button.
+
+### messages.addGroup `String` *(default: "Add Group")*
+
+The title of the add group button.
+
 ### messages.and `String` *(default: "And")*
 
 The text of the option which represents the "and" logical operation.
@@ -506,6 +514,18 @@ The text of the option which represents the "and" logical operation.
 ### messages.apply `String` *(default: "Apply")*
 
 The text inside the apply button.
+
+### messages.close `String` *(default: "Close")*
+
+The title of the close button.
+
+### messages.fields `String` *(default: "Fields")*
+
+The title of the fields drop down.
+
+### messages.operators `String` *(default: "Operators")*
+
+The title of the operators drop down.
 
 ### messages.or `String` *(default: "Or")*
 

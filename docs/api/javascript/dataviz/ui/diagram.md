@@ -7068,7 +7068,7 @@ Whether the addition should be recorded in the undo-redo stack.
       var shape1 = diagram.addShape( new Shape({x:100, y:100, fill: "red"}));
       var shape2 = diagram.addShape( new Shape({x:300, y:200, fill: "red"}));
 
-      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, { stroke: { color: "red" } });
+      var connection = new kendo.dataviz.diagram.Connection(shape1, shape2, $.extend(true, {}, diagram.options.connectionDefaults,{ stroke: { color: "red" }}));
       diagram.addConnection(connection);
     </script>
 

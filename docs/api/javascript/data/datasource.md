@@ -3975,6 +3975,8 @@ The array of data items that replace the current offline state of the data sourc
 
 Gets or sets the current page.
 
+> The DataSource will perform a server request even when [`serverPaging`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/serverpaging) is disabled if `dataSource.page(N)` is called on a DataSource without any data items.
+
 #### Parameters
 
 ##### page `Number`
