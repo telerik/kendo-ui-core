@@ -4945,6 +4945,7 @@ A promise that will be resolved when the export completes.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	    tools: ["pdf"],
       pdfExport: function(e) {
       }
     });
@@ -4956,7 +4957,9 @@ A promise that will be resolved when the export completes.
     <script>
     function onEditorExport(e) {
     }
-    $("#editor").kendoEditor();
+    $("#editor").kendoEditor({
+		   tools: ["pdf"]
+	  });
     var editor = $("#editor").data("kendoEditor");
     editor.bind("pdfExport", onEditorExport);
     </script>

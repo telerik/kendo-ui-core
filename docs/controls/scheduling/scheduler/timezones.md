@@ -99,6 +99,78 @@ The following example demonstrates how to bind the Scheduler to UTC dates when t
     </script>
 ````
 
+## Schedulers with a timezone option set
+When the `timezone` option is set the events in the Scheduler will be displayed with respect to the configuration, regardless of the local timezone. 
+
+> The **kendo.timezones.min.js** file must be included in order to use timezones other than "Etc/UTC".
+
+> The **timezone** option will not affect events if the widget's data source is initialized separately. In this case set the [schema.timezone](/api/javascript/data/schedulerdatasource/configuration/schema.timezone) option directly.
+
+In the example below, the event will be displayed in the **Europe/Berlin** timezone. It will be displayed as scheduled for 4:00pm, regardless of your location.
+
+````dojo
+    <div id="scheduler"></div>
+    <script>
+      var version = kendo.version;
+
+      $.getScript( 'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js', loadScheduler);
+
+      function loadScheduler() {
+        $("#scheduler").kendoScheduler({
+          timezone: "Europe/Berlin",
+          date: new Date("2013/6/13"),
+          startTime: new Date("2013/6/13 10:00"),
+          endTime: new Date("2013/6/13 23:00"),
+          height: 600,
+          views: ["day"],
+          editable: false,
+          dataSource: [
+            {
+              title: "The Internship",
+              start: new Date("2013-06-13T14:00:00.000Z"),
+              end: new Date("2013-06-13T15:30:00.000Z")
+            }
+          ]
+        });
+      }
+    </script>
+````
+
+## Schedulers with a startTimezone and endTimezone option
+
+The startTimezone and endTimezone of each single event can be used to define which is the start and end timezone of the client where the event will be displayed. The example below demonstrates how events could be displayed starting at different time depending on the startTimezone and endTimezone configured.
+
+````dojo
+    <div id="scheduler"></div>
+    <script>
+      var version = kendo.version;
+      $.getScript( 'https://kendo.cdn.telerik.com/'+version+'/js/kendo.timezones.min.js', function( data, textStatus, jqxhr ) {
+        $("#scheduler").kendoScheduler({       
+          date: new Date("2013/6/13"),
+          startTime: new Date("2013/6/13 10:00"),
+          endTime: new Date("2013/6/13 23:00"),
+          height: 600,
+          views: ["day"],
+          editable: false,
+          dataSource: [
+            {
+              title: "No start/endTimezone set",             
+              start: new Date("2013-06-13T14:00:00.000Z"),
+              end: new Date("2013-06-13T15:30:00.000Z")
+            },
+            {
+              title: "Event Europe/Berlin",             
+              start: new Date("2013-06-13T14:00:00.000Z"),
+              end: new Date("2013-06-13T15:30:00.000Z"),
+              startTimezone: "Europe/Berlin",
+              endTimezone: "Europe/Berlin"
+            }
+          ]
+        });
+      });
+    </script>
+````
+
 ## See Also
 
 * [Basic Usage of the Scheduler (Demo)](https://demos.telerik.com/kendo-ui/scheduler/index)
