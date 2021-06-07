@@ -27,7 +27,7 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/radiogr
                 value: "two",
                 label: "Fast delivery"
             },{
-                value: "three"
+                value: "three",
                 label: "Express delivery"
             }],
         });

@@ -23,7 +23,7 @@ Sets the enabled state of all radio buttons in the RadioGroup.
     <script>
         $("#radiogroup").kendoRadioGroup({
             enabled: false,
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
     </script>
 
@@ -52,7 +52,7 @@ Array of items to be rendered as radio buttons in the RadioGroup. If the array c
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
     </script>
 
@@ -62,16 +62,16 @@ Array of items to be rendered as radio buttons in the RadioGroup. If the array c
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one"
             },{
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -85,7 +85,7 @@ Collection of key-value pairs that would be used to generate the attributes atta
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one",
                 attributes: {
@@ -95,9 +95,9 @@ Collection of key-value pairs that would be used to generate the attributes atta
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -111,7 +111,7 @@ Custom class that would be set on the respective `k-radio-item` element.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one",
                 cssClass: "custom-class"
@@ -119,9 +119,9 @@ Custom class that would be set on the respective `k-radio-item` element.
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -135,7 +135,7 @@ Defines whether the radio button is enabled or not. By default all radio buttons
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one",
                 enabled: false
@@ -143,9 +143,9 @@ Defines whether the radio button is enabled or not. By default all radio buttons
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -159,7 +159,7 @@ Determines whether the radio button label content should be rendered as an HTML 
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "<strong>Label one</strong>",
                 encoded: false
@@ -167,9 +167,9 @@ Determines whether the radio button label content should be rendered as an HTML 
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -183,16 +183,16 @@ Specifies the label content for the radio button.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "<strong>Label one</strong>"
             },{
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -206,16 +206,16 @@ Specifies the value for the radio button.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "<strong>Label one</strong>"
             },{
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -282,7 +282,7 @@ Enables or disables the RadioGroup.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
@@ -309,7 +309,7 @@ The index of the radio button to be enabled/disabled.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
@@ -336,11 +336,11 @@ The index of the requested radio button.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        // The result can be observed in the DevTools(F12) console of the browser.
         console.log(radioGroup.item(1));
     </script>
 
@@ -358,11 +358,11 @@ Returns all radio buttons in the RadioGroup.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        // The result can be observed in the DevTools(F12) console of the browser.
         console.log(radioGroup.items());
     </script>
 
@@ -388,12 +388,12 @@ The value to set.
 
     <script>
         $("#radiogroup").kendoRadioGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var radioGroup = $("#radiogroup").getKendoRadioGroup();
         radioGroup.value("two");
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        // The result can be observed in the DevTools(F12) console of the browser.
         console.log(radioGroup.value());
     </script>
 
@@ -429,11 +429,11 @@ The new value of the widget.
         $("#radiogroup").kendoRadioGroup({
             items: [ "one", "two", "three" ],
             change: function (e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+                // The result can be observed in the DevTools(F12) console of the browser.
                 console.log(e.target);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+                // The result can be observed in the DevTools(F12) console of the browser.
                 console.log("Old value: " + e.oldValue);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+                // The result can be observed in the DevTools(F12) console of the browser.
                 console.log("New value: " + e.newValue);
             }
         });
@@ -461,7 +461,7 @@ The `<input type="radio">` DOM element that triggered the change.
         $("#radiogroup").kendoRadioGroup({
             items: [ "one", "two", "three" ],
             focus: function (e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+                // The result can be observed in the DevTools(F12) console of the browser.
                 console.log(e.target);
             }
         });

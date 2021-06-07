@@ -974,7 +974,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
 
-                that.userEvents = new kendo.UserEvents(document, {
+                that.userEvents = new kendo.UserEvents(document.documentElement, {
                     threshold: 5,
                     allowSelection: true,
                     filter:

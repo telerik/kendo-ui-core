@@ -23,7 +23,7 @@ Sets the enabled state of all checkboxes in the CheckBoxGroup.
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
             enabled: false,
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
     </script>
 
@@ -52,7 +52,7 @@ Array of items to be rendered as checkboxes in the CheckBoxGroup. If the array c
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
     </script>
 
@@ -62,16 +62,16 @@ Array of items to be rendered as checkboxes in the CheckBoxGroup. If the array c
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one"
             },{
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -85,7 +85,7 @@ Collection of key-value pairs that would be used to generate the attributes atta
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one",
                 attributes: {
@@ -95,9 +95,9 @@ Collection of key-value pairs that would be used to generate the attributes atta
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -111,7 +111,7 @@ Any custom classes that should be attached to the `k-checkbox-item` element.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one",
                 cssClass: "custom-class"
@@ -119,9 +119,9 @@ Any custom classes that should be attached to the `k-checkbox-item` element.
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -135,7 +135,7 @@ Defines whether the checkbox is enabled or not. By default all checkboxes are en
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "Label one",
                 enabled: false
@@ -143,9 +143,9 @@ Defines whether the checkbox is enabled or not. By default all checkboxes are en
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -159,7 +159,7 @@ Determines whether the checkbox label content should be rendered as an HTML stri
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "<strong>Label one</strong>",
                 encoded: false
@@ -167,7 +167,7 @@ Determines whether the checkbox label content should be rendered as an HTML stri
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
             }],
         });
@@ -183,16 +183,16 @@ Specifies the label content for the checkbox.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "<strong>Label one</strong>"
             },{
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -206,16 +206,16 @@ Specifies the value for the checkbox.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ {
+            items: [{
                 value: "one",
                 label: "<strong>Label one</strong>"
             },{
                 value: "two",
                 label: "Label two"
             },{
-                value: "three"
+                value: "three",
                 label: "Label three"
-            }],
+            }]
         });
     </script>
 
@@ -282,7 +282,7 @@ Selects or deselects all checkboxes in the group.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
@@ -305,7 +305,7 @@ Enables or disables the CheckBoxGroup.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
@@ -332,7 +332,7 @@ The index of the checkbox to be enabled/disabled.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
@@ -359,11 +359,11 @@ The index of the requested checkbox.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        // The result can be observed in the DevTools(F12) console of the browser.
         console.log(checkGroup.item(1));
     </script>
 
@@ -381,11 +381,11 @@ Returns all checkboxes in the CheckBoxGroup.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        // The result can be observed in the DevTools(F12) console of the browser.
         console.log(checkGroup.items());
     </script>
 
@@ -411,12 +411,12 @@ The value to set.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ],
+            items: [ "one", "two", "three" ]
         });
 
         var checkGroup = $("#checkboxgroup").getKendoCheckBoxGroup();
         checkGroup.value(["two", "one"]);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        // The result can be observed in the DevTools(F12) console of the browser.
         console.log(checkGroup.value());
     </script>
 
@@ -442,9 +442,9 @@ The `<input type="checkbox">` element that triggered the change.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ]
+            items: [ "one", "two", "three" ],
             change: function (e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+                // The result can be observed in the DevTools(F12) console of the browser.
                 console.log(e.target);
             }
         });
@@ -470,9 +470,9 @@ The `<input type="checkbox">` element that triggered the change.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ]
+            items: [ "one", "two", "three" ],
             focus: function (e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+                // The result can be observed in the DevTools(F12) console of the browser.
                 console.log(e.target);
             }
         });
@@ -502,7 +502,7 @@ The `<input type="checkbox">` element that triggered the event.
 
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
-            items: [ "one", "two", "three" ]
+            items: [ "one", "two", "three" ],
             select: function (e) {
                 if(e.target.val() === "two") {
                     // Prevent selection if clicking on the "two" checkbox
