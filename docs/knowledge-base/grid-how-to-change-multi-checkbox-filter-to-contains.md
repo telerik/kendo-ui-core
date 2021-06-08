@@ -48,7 +48,7 @@ To customize the filter:
 <script>
 $("#grid").kendoGrid({
   filter: function(e){
-    if(e.field == "someField"){
+    if(e.field == "someField" && e.filter){
     	e.filter.filters.forEach(function(f){
         f.operator = "contains";
       })

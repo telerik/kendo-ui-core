@@ -1066,6 +1066,41 @@ populated at the time the template function is called, if the TreeList uses remo
       });
     </script>
 
+### columns.filterable.operators `Object`
+
+The property is identical to [`filterable.operators`](filterable.operators), but is used for a specific column.
+
+#### Example - Set custom filterable operators
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          {
+            field: "name",
+            filterable:{
+              operators:{
+                string:{
+                  eq: "custom equal",
+                  neq: "custom not equal"
+                }
+              }
+            }
+          },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { parentId: null, id: 1, name: "Jane Doe", age: 30 },
+            { parentId: 1, id: 2, name: "John Doe", age: 33 }
+          ]
+        },
+        filterable: {
+          extra: false
+        }
+      });
+    </script>
+
 ### columns.filterable.ui `String|Function`
 
 The `role` [data attribute](/framework/data-attribute-initialization) of the widget that is used in the filter menu, or a JavaScript function which initializes that widget.

@@ -183,6 +183,7 @@ By default, the Validator provides built-in messages which map to built-in valid
 
 The following example demonstrates how to define custom messages when the validation rules are not fulfilled.
 
+```dojo
     <form id="myform">
         <input name="username" required /> <br />
         <input type="email" name="userEmail" required data-message="My custom email message" /> <br />
@@ -218,6 +219,7 @@ The following example demonstrates how to define custom messages when the valida
           return input.data("message");
         }
     </script>
+```
 
 ## Custom Message Attributes
 
@@ -231,6 +233,7 @@ These attributes will be checked before applying the message from the `messages`
 
 The following example demonstrates how the set multiple `data-[rule]-msg` attributes so that they allow a field to have different messages for each different validation rule.
 
+```dojo
     <form id="myform">
         <input type="url" required data-required-msg="You need to enter a URL" data-url-msg="This url is invalid">
         <button>Validate</button>
@@ -239,9 +242,11 @@ The following example demonstrates how the set multiple `data-[rule]-msg` attrib
     <script>
         $("#myform").kendoValidator();
     </script>
+```
 
 The following example demonstrates how to use the `validationMessage` attribute to specify a custom validation message.
 
+```dojo
     <form id="myform">
         <input type="tel" pattern="\d{10}" validationMessage="Plase enter a ten digit phone number" value="123"> <br />
         <button>Validate</button>
@@ -250,9 +255,11 @@ The following example demonstrates how to use the `validationMessage` attribute 
     <script>
         $("#myform").kendoValidator();
     </script>
+```
 
 Validation messages can also be defined for custom rules.
 
+```dojo
     <form id="myform">
         <input name="username" /> <br />
         <input name="town" /> <br />
@@ -281,6 +288,7 @@ Validation messages can also be defined for custom rules.
             }
         });
     </script>
+```
 
 ## See Also
 

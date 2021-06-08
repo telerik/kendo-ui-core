@@ -700,6 +700,28 @@ The built-in tools are:
 
 ## Methods
 
+### add
+
+Adds an item to the widget.
+
+#### Example
+
+    <select id="listBox"></select>
+    <script>
+    $("#listBox").kendoListBox({
+         dataSource: {
+            data: [
+                { name: "Jane Doe" },
+                { name: "Sam Doe" }
+            ]
+        },
+        template: "<div>#:name#</div>"
+    });
+    var listBox = $("#listBox").data("kendoListBox");
+    var person = {name: "Bob Doe"};
+    listBox.add(person);
+    </script>
+
 ### clearSelection
 
 Clears the selected items of the ListBox and triggers the `change` event.
@@ -1287,6 +1309,9 @@ The data items that are to be removed.
     <script>
     $("#listBox").kendoListBox({
         template: "<div>#: name#</div>",
+        toolbar: {
+            tools: ["remove"]
+        },
         dataSource: {
             data: [
                 { id: 1, name: "Jane Doe" },
@@ -1304,11 +1329,9 @@ The data items that are to be removed.
         },
         remove: function(e) {
             //handle event
+            alert(e.dataItems[0].name + " was removed from the list");
         }
     });
-    // get a reference to the list box
-    var listBox = $("#listBox").data("kendoListBox");
-    listBox.remove(listBox.items().first());
     </script>
 
 #### To set after initialization
@@ -1317,6 +1340,9 @@ The data items that are to be removed.
     <script>
     $("#listBox").kendoListBox({
         template: "<div>#: name#</div>",
+        toolbar: {
+            tools: ["remove"]
+        },
         dataSource: {
             data: [
                 { id: 1, name: "Jane Doe" },
@@ -1337,12 +1363,9 @@ The data items that are to be removed.
     var listBox = $("#listBox").data("kendoListBox");
     // bind to the remove event
     listBox.bind("remove", function(e) {
-        // handle event
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-        console.log("remove");
-        e.preventDefault();
+    // handle event
+        alert(e.dataItems[0].name + " was removed from the list");
     });
-    listBox.remove(listBox.items().first());
     </script>
 
 ### reorder

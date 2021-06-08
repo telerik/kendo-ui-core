@@ -34,6 +34,15 @@ For more information, refer to:
 
 Customization of the text in the column header for the expand or collapse columns in Hierarchical Grids can be made via the [messages.expandCollapseColumnHeader property](/api/javascript/dataviz/ui/chart#configuration-series.spacing). This sets the value to make the widget compliant with the web accessibility standards.
 
+## Scrollable Grid
+
+To achieve a better level of accessibility, disable the Grid's [scrollable](/api/javascript/ui/grid/configuration/scrollable) configuration.
+
+        $("#grid").kendoGrid({
+            scrollable: false,
+            // other configurations
+        });
+
 ## See Also
 
 * [WCAG 2.1 Support by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/index)

@@ -270,6 +270,40 @@ The fields which can be used in the template are:
 
 > The text can be split into multiple lines by using line feed characters ("\n").
 
+#### Example - set the axisDefaults label template as a string
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      axisDefaults: {
+        categories: ["2011", "2012", "2013"],
+        labels: {
+          template: "Value: #: value #"
+        },
+      },
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
+#### Example - set the axisDefaults label template as a function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      axisDefaults: {
+        categories: ["2011", "2012", "2013"],
+        labels: {
+          template: kendo.template("Value: #: value #")
+        },
+      },
+      series: [{
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
 ### axisDefaults.labels.visible `Boolean` *(default: true)*
 
 If set to `true` the chart will display the axis labels. By default the axis labels are visible.
@@ -1403,6 +1437,35 @@ The top padding of the crosshair tooltip.
       series: [
         { data: [1, 2, 3] }
       ]
+    });
+    </script>
+
+### categoryAxis.crosshair.tooltip.position `String`
+
+The position of the crosshair tooltip.
+
+#### Example - set the category axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: ["2012", "2013"],
+        crosshair: {
+          tooltip: {
+            visible: true,
+            // Position can be top or bottom.
+            position: "bottom"
+          },
+          color: "green",
+          width: 2,
+          visible: true
+        }
+      },
+      series: [{
+        type: "line",
+        data: [1, 2, 3]
+      }]
     });
     </script>
 
@@ -13036,6 +13099,8 @@ The data item field which contains the series lower value.
 
 #### Example - set the chart series lower field
 
+    <div id="chart"></div>
+    <script>
     $("#chart").kendoChart({
       dataSource: {
         data: [{
@@ -13059,6 +13124,7 @@ The data item field which contains the series lower value.
          outliersField: "outliers"
       }]
     });
+    </script>
 
 ### series.q1Field `String` *(default: "q1")*
 
@@ -17125,7 +17191,8 @@ Sets the visible property of a chart series
         $("#chart").kendoChart({
             dataSource: dataSource,
             series: [
-                { field: "Volume", visible:false }
+                { field: "High", visible: false },
+          	    { field: "Low", visible: true }
             ]
         });
     </script>
@@ -17224,6 +17291,166 @@ A function that can be used to create a custom visual for the points. Applicable
           }
         }]
       });
+    </script>
+
+### series.whiskers `Object`
+
+The chart series whiskers configuration.
+
+> The appearance settings for the BoxPlot whiskers.
+
+### series.whiskers.color `String`
+
+The color of the whiskers.
+
+#### Example - set the series whiskers color
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           color: "#0000FF"
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
+    </script>
+
+### series.whiskers.dashType `String` (default: "solid")
+
+The dash type of the whiskers.
+
+The following dash types are supported:
+
+* "dash" - a line consisting of dashes
+* "dashDot" - a line consisting of a repeating pattern of dash-dot
+* "dot" - a line consisting of dots
+* "longDash" - a line consisting of a repeating pattern of long-dash
+* "longDashDot" - a line consisting of a repeating pattern of long-dash-dot
+* "longDashDotDot" - a line consisting of a repeating pattern of long-dash-dot-dot
+* "solid" - a solid line
+
+#### Example - set the series whiskers dash type
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           dashType: "dot"
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
+    </script>
+
+### series.whiskers.opacity `Number` (default: 1)
+
+The opacity of the whiskers.
+
+#### Example - set the series whiskers opacity
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           opacity: 0.3
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
+    </script>
+
+### series.whiskers.width `Number`
+
+The width of the whiskers.
+
+#### Example - set the series whiskers width
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      dataSource: {
+        data: [{
+          lower: 1,
+          q1: 2,
+          median: 3,
+          q3: 4,
+          upper: 5,
+          mean: 3.5,
+          outliers: [0,0,0.5,6,7,11]
+        }]
+      },
+      series: [{
+         whiskers: {
+           width: 3
+         },
+         type: "boxPlot",
+         lowerField: "lower",
+         q1Field: "q1",
+         medianField: "median",
+         q3Field: "q3",
+         upperField: "upper",
+         meanField: "mean",
+         outliersField: "outliers"
+      }]
+    });
     </script>
 
 ### series.width `Number`
@@ -19353,6 +19580,26 @@ The type of stack to plot. The following types are supported:
     });
     </script>
 
+### seriesDefaults.startAngle `Number` *(default: 90)*
+
+The start angle (degrees) of the first donut or pie segment.
+
+Angles increase clockwise and zero is to the left. Negative values are acceptable.
+
+#### Example - set the donut chart seriesDefaults start angle
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      seriesDefaults: {
+        startAngle: 180
+      },
+      series: [
+        { type: "donut",  data: [1,2,3] }
+      ]
+    });
+    </script>
+
 ### seriesDefaults.type `String`
 
 The default type of the series.
@@ -20620,10 +20867,16 @@ The supported values are:
 * "blueopal"
 * "bootstrap"
 * "default"
+* "fiori"
+* "flat"
 * "highcontrast"
+* "material"
+* "materialblack"
 * "metro"
 * "metroblack"
 * "moonlight"
+* "nova"
+* "office365"
 * "silver"
 * "uniform"
 
@@ -22139,6 +22392,34 @@ The top padding of the crosshair tooltip.
       series: [
         { data: [1, 2, 3] }
       ]
+    });
+    </script>
+
+### valueAxis.crosshair.tooltip.position `String`
+
+The position of the crosshair tooltip.
+
+#### Example - set the value axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      valueAxis: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          visible: true,
+          tooltip: {
+            visible: true,
+            // Position can be left or right.
+            position: "right"
+          }
+        }
+      },
+      series: [{
+        type: "line",
+        data: [1, 2, 3]
+      }]
     });
     </script>
 
@@ -26848,6 +27129,33 @@ The top padding of the crosshair tooltip.
       }],
       series: [
         { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### xAxis.crosshair.tooltip.position `String`
+
+Top position of the crosshair tooltip.
+
+#### Example - set the scatter chart x axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      xAxis: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          visible: true,
+          tooltip: {
+            visible: true,
+            // Position can be top or bottom.
+            position: "bottom"
+          }
+        }
+      },
+      series: [
+        { type: "scatter", data: [[1, 2]] }
       ]
     });
     </script>
@@ -31968,6 +32276,33 @@ The top padding of the crosshair tooltip.
       }],
       series: [
         { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+### yAxis.crosshair.tooltip.position `String`
+
+The position of the crosshair tooltip.
+
+#### Example - set the scatter chart y axis crosshair tooltip position
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      yAxis: {
+        crosshair: {
+          color: "green",
+          width: 2,
+          visible: true,
+          tooltip: {
+            visible: true,
+            // Position can be left or right.
+            position: "right"
+          }
+        }
+      },
+      series: [
+        { type: "scatter", data: [[1, 2]] }
       ]
     });
     </script>
