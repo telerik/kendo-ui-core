@@ -202,6 +202,8 @@ The array of data items which the data source contains. The data source will wra
 
 Can be set to a string value if the [`schema.type`](/api/javascript/data/datasource#configuration-schema.type) option is set to `"xml"`.
 
+> A field in the DataSource cannot be named "data". The latter should be considered a limitation.
+
 #### Example - set the data items of a data source
 
     <script>
