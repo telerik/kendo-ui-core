@@ -1125,13 +1125,14 @@ The name of the view.
 
 Navigates to the specified path.
 
+> Note: If you wish to use the method to navigate to a child folder, you will need to navigate to its parent folder first.
+
 #### Parameters
 
 ##### path `String`
 
 The path to navigate.
 
-> Note: If you wish to use the method to navigate to a child folder, you will need to navigate to its parent folder first.
 #### Example
 
     <div id="fileManager"></div>

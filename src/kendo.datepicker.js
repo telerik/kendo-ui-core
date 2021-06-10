@@ -453,7 +453,7 @@ var __meta__ = { // jshint ignore:line
                     element[0].removeAttribute(READONLY);
                 }
                 element.attr(ARIA_DISABLED, false)
-                       .attr(ARIA_DISABLED, false)
+                       .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
