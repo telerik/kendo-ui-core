@@ -631,7 +631,6 @@ var __meta__ = { // jshint ignore:line
             that._renderNoData();
             that._toggleNoData(!data.length);
             that._resizePopup();
-            that._updateItemFocus();
 
             if (that._open) {
                 that._open = false;
@@ -639,6 +638,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.popup.position();
+            that._updateItemFocus();
 
             if (that._touchScroller) {
                 that._touchScroller.reset();

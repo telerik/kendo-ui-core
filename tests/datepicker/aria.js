@@ -54,13 +54,28 @@ it("DatePicker sets aria-hidden=true to the popup element", function() {
     assert.equal(instance.dateView.popup.element.attr("aria-hidden"), "true");
 });
 
-it("DatePicker adds aria-disabled=false", function() {
-    assert.equal(input.attr("aria-disabled"), "false");
-});
-
 it("DatePicker sets aria-disabled=true", function() {
     instance.enable(false);
     assert.equal(input.attr("aria-disabled"), "true");
+});
+
+it("DatePicker sets aria-disabled to false after state is changed", function() {
+    instance.enable(false);
+    instance.enable(true);
+
+    assert.equal(input.attr("aria-disabled"), "false");
+});
+
+it("DatePicker sets aria-readonly=true", function() {
+    instance.readonly(true);
+    assert.equal(input.attr("aria-readonly"), "true");
+});
+
+it("DatePicker sets aria-readonly to false after state is changed", function() {
+    instance.readonly(true);
+    instance.readonly(false);
+
+    assert.equal(input.attr("aria-readonly"), "false");
 });
 
 it("DatePicker adds role to the toggle button", function() {
