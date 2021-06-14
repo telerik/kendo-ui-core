@@ -86,7 +86,7 @@ When the Grid is created from an existing table, the Grid provides the following
 * The `id` attributes define the id of the columns.
 * The `data-field` attributes define the names of the data fields.
 * The `width` styles when applied to the respective `<col>` elements set the width of the columns.
-* The `data-type` attributes define the data types.
+* The [`data-type`]({% slug editing_kendoui_grid_widget %}#configuring-the-data-source) attributes define the data types.
 * The `data-template` attributes set the column templates.
 * The `data-menu` attributes enable or disable the column menu.
 * The `data-sortable` attributes enable or disable sorting.

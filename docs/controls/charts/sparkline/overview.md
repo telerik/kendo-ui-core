@@ -12,6 +12,8 @@ The Kendo UI Sparkline is a very small chart that is drawn without axes, coordin
 
 Sparklines behave like inline elements as they are rendered inside a `span` element so that they can be easily embedded in text as opposed to the standard Telerik UI Charts which behave like block elements as they are rendered inside `div` elements.
 
+> * The Sparkline inherits configurations, methods, fields and events from the [Categorical Charts]({% slug htmlhelpers_categoricalcharts_aspnetcore %}).
+
 While Sparklines are typically line charts, other types are supported as well:
 
 * Line (default)

@@ -14,6 +14,8 @@ The TreeList JSP tag is a server-side wrapper for the [Kendo UI TreeList](/api/j
 
 ### Configuration
 
+> The names of the properties are case-sensitive, `productName` is different from `ProductName`.
+
 Below are listed the steps for you to follow when configuring the Kendo UI TreeList.
 
 **Step 1** Make sure you followed all the steps from the [introductory article on Telerik UI for JSP]({% slug overview_uiforjsp %}).

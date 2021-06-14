@@ -1083,15 +1083,17 @@ The fields which can be used in the template are:
 For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
 About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
-#### Example - emphasize the values in *2005*
+#### Example - bold the value for the *2010* column and use the formatted value for the other columns.
 
     <div id="pivotgrid"></div>
 
     <script id="dataCellTemplate" type="text/x-kendo-template">
-        # if (columnTuple.members[0].name === "[Date].[Calendar].[Year].&[2005]") { #
-            <em>#: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #</em>
+        # if (columnTuple.members[0].name === "[Date].[Calendar].[Calendar Year].&[2010]") { #
+        		<!-- Display the value in bold for the year 2010. -->
+            <b>#: dataItem.value #</b>
         # } else { #
-            #: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #
+        		<!-- Display the formatted value for the other years. -->
+            #: dataItem.fmtValue #
         # } #
     </script>
 

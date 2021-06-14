@@ -7964,7 +7964,10 @@ the [Column widths](/web/grid/appearance#column-widths) help section for additio
 
 The [template](/api/javascript/kendo/methods/template) which renders rows. Be default renders a table row (`<tr>`) for every data source item.
 
-> The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
+> There are a few important things to keep in mind when using `rowTemplate`.
+>
+>* The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
+>* If `rowTemplate` is used alongside with `detailTemplate`, the row (`<tr>`) element needs to have class `k-master-row`. The first `<td>` element of the row needs to have class `k-hierarchy-cell`. Check the [`Row Templates documentation`](/controls/data-management/grid/Templates/row-templates) for more information.
 
 #### Example - specify row template as a function
 
@@ -8328,7 +8331,7 @@ The "search" built-in search panel for the grid.
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
-      toolbar: "<p>My string template in a paragraph.</p>",
+      toolbar: "<button class='k-button' onclick='myClick()'>My Button</button>",
       columns: [
         { field: "name" },
         { field: "age" }
@@ -8344,14 +8347,22 @@ The "search" built-in search panel for the grid.
       },
       editable: true
     });
+
+    function myClick() {
+      kendo.alert("Clicked!")
+    }
     </script>
 
 #### Example - configure the Grid Toolbar template with a function
 
+    <script type="x-kendo/template" id="template">
+    	<button class='k-button' onclick='myClick()'>My Button</button>
+    </script>
+      
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
-      toolbar: kendo.template("<p>My function template.</p>"),
+      toolbar: kendo.template($("#template").html()),
       columns: [
         { field: "name" },
         { field: "age" }
@@ -8367,6 +8378,10 @@ The "search" built-in search panel for the grid.
       },
       editable: true
     });
+      
+    function myClick() {
+      kendo.alert("Clicked!")
+    }
     </script>
 
 #### Example - configure the Grid Toolbar as an array of commands
@@ -10078,7 +10093,10 @@ A string, DOM element or jQuery object which represents the table row(s) or cell
 
 Gets an array that holds the id field values of the selected rows.
 
-> **Note:** In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).
+> There are a few important things to keep in mind when using `selectedKeyNames`.
+>
+> * **In order for the method to return the selected IDs you need to define an ID field in [`schema.model`](/api/javascript/data/datasource/configuration/schema.model).**
+> * **The selected IDs are sorted in ascending order inside the `selectedKeyNames` array.**
 
 
 #### Returns

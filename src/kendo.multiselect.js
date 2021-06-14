@@ -429,6 +429,11 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 listView.removeAt(position);
+
+                if(listView._removedAddedIndexes) {
+                    listView._removedAddedIndexes.splice(position, 1);
+                }
+
                 listViewChild = listViewChildren[customIndex];
                 if (listViewChild) {
                     listViewChildren[customIndex].classList.remove("k-state-selected");

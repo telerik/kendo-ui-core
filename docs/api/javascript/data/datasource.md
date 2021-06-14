@@ -202,8 +202,6 @@ The array of data items which the data source contains. The data source will wra
 
 Can be set to a string value if the [`schema.type`](/api/javascript/data/datasource#configuration-schema.type) option is set to `"xml"`.
 
-> A field in the DataSource cannot be named "data". The latter should be considered a limitation.
-
 #### Example - set the data items of a data source
 
     <script>
@@ -1004,6 +1002,8 @@ The aggregate results should have the following format:
 ### schema.data `Function|String`
 
 The field from the server response which contains the data items. Can be set to a function which is called to return the data items for the response.
+
+> The `data` option will not be used if the data source is grouped and set for [`serverGrouping`](/api/javascript/data/datasource#configuration-serverGrouping).
 
 #### Returns
 
@@ -3552,45 +3552,58 @@ The optional function which is executed when the remote request is finished. The
 
 #### Example - read data from a remote data source
 
+    <div id="grid"></div>
+
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read:  {
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
-        }
-      }
-    });
-    // read the data items from https://demos.telerik.com/kendo-ui/service/products
-    dataSource.fetch(function(){
-      var data = this.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);  // displays "77"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data[0].ProductName); // displays "Chai"
-    });
+    	var dataSource = new kendo.data.DataSource({
+    	  transport: {
+    	    read:  {
+    	      url: "https://demos.telerik.com/kendo-ui/service/products",
+    	      dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
+    	    }
+    	  }
+    	});
+
+      // read the data items from https://demos.telerik.com/kendo-ui/service/products
+      dataSource.fetch(function() {
+        let data = this.data();
+
+        // initialize a Kendo Grid with the returned data from the server.
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: data
+          },
+          height: 800
+        });
+      });
     </script>
 
 #### Example - use the Promise API to track when a request finishes
 
+    <div id="grid"></div>
+      
     <script>
-    var dataSource = new kendo.data.DataSource({
-      transport: {
-        read:  {
-          url: "https://demos.telerik.com/kendo-ui/service/products",
-          dataType: "jsonp"
-        }
-      }
-    });
-
-    // read the data items from https://demos.telerik.com/kendo-ui/service/products
-    dataSource.fetch().then(function(){
-      var data = dataSource.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data.length);  // displays "77"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data[0].ProductName); // displays "Chai"
-    });
+    	var dataSource = new kendo.data.DataSource({
+    	  transport: {
+    	    read:  {
+    	      url: "https://demos.telerik.com/kendo-ui/service/products",
+    	      dataType: "jsonp"
+    	    }
+    	  }
+    	});
+    
+    	// read the data items from https://demos.telerik.com/kendo-ui/service/products
+    	dataSource.fetch().then(function(){
+      	var data = dataSource.data();
+    
+        // initialize a Kendo Grid with the returned data from the server.
+        $("#grid").kendoGrid({
+          dataSource: {
+            data: data
+          },
+          height: 800
+        });
+    	});
     </script>
 
 ### filter

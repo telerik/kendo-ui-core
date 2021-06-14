@@ -12,6 +12,10 @@ The Grid enables you to display aggregated number results when the user groups i
 
 To enable grouping by using aggregate functions, use the `aggregates`, `groupFooterTemplate`, `groupHeaderColumnTemplate`, or `footerTemplate` settings of the Grid and the `group` and `aggregate` fields of its data source. For a runnable example, refer to the [demo on using aggregate functions in the Grid](https://demos.telerik.com/kendo-ui/grid/aggregates).
 
+## Known Limitations
+
+The [`columns.aggregates`](/api/javascript/ui/grid/configuration/columns.aggregates) configuration needs to be included if the Grid has its [`groupable`](/api/javascript/ui/grid/configuration/groupable) property enabled, otherwise the `groupFooterTemplate` and `groupHeaderTemplate` won't function properly.
+
 ## See Also
 
 * [Grouping with Aggregates by the Grid (Demo)](https://demos.telerik.com/kendo-ui/grid/aggregates)

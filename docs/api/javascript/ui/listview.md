@@ -715,6 +715,8 @@ Multiple item selection.
 
 Specifies ListView item template.
 
+> The outermost HTML element in the template must be enclosed in another container such as a `div` or `span` element.
+
 #### Example
 
      <script type="text/kendo-x-tmpl" id="template">
@@ -739,6 +741,8 @@ Specifies ListView item template.
 ### altTemplate `Function`
 
 Template to be used for rendering the alternate items in the ListView.
+
+> The outermost HTML element in the template must be enclosed in another container such as a `div` or `span` element.
 
 #### Example of alternate item template
 

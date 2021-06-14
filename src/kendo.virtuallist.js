@@ -487,13 +487,24 @@ var __meta__ = { // jshint ignore:line
         },
 
         removeAt: function(position) {
-            this._selectedIndexes.splice(position, 1);
-            this._values.splice(position, 1);
+            var value = this._values.splice(position, 1)[0];
 
             return {
                 position: position,
-                dataItem: this._selectedDataItems.splice(position, 1)[0]
+                dataItem: this._removeSelectedDataItem(value)
             };
+        },
+
+        _removeSelectedDataItem: function (value) {
+            var that = this,
+                valueGetter = that._valueGetter;
+
+            for (var idx in that._selectedDataItems) {
+                if(valueGetter(that._selectedDataItems[idx]) === value) {
+                    that._selectedIndexes.splice(idx, 1);
+                    return that._selectedDataItems.splice(idx, 1)[0];
+                }
+            }
         },
 
         setValue: function(value) {

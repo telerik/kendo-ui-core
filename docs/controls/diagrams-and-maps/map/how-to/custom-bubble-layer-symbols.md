@@ -35,7 +35,7 @@ The following example demonstrates how to render 200-kilometer lines in West-Eas
           dataSource: {
             transport: {
               read: {
-                url: "https://runner.telerik.io/fullscreen/EsuDU.json",
+                url: "https://demos.telerik.com/kendo-ui/content/dataviz/map/urban-areas.json",
                 dataType: "json"
               }
             }

@@ -45,6 +45,54 @@ The following example demonstrates how to specify the previous approach as a tem
 
 ![Grid with row template](../grid8_1.png)
 
+## Using Row Templates with Detail Templates
+
+A few requirements need to be met when the `rowTemplate` is used alongside a `detailTemplate`.
+
+1. The `<tr>` element of the `rowTemplate` needs to have a class `k-master-row`.
+1. The first `<td>` element of the `rowTemplate` needs to have a class `k-hierarchy-cell`.
+1. The element with class `k-hierarchy-cell` needs to contain an `a` element which will expand the row.
+
+```dojo
+    <script id="template" type="text/x-kendo-template">
+        <tr class="k-master-row" data-uid="#= uid #">
+        		<td class="k-hierarchy-cell">
+            	<a class="k-icon k-i-expand" href="\#" aria-label="Expand"></a>
+      			</td>
+            <td>
+                <strong>#: name #</strong>
+            </td>
+            <td>
+            	<strong>#: age #</strong>
+            </td>
+        </tr>
+    </script>
+  
+    <script id="detail-template" type="text/x-kendo-template">
+      <div>
+        Name: #: name #
+      </div>
+      <div>
+        Age: #: age #
+      </div>
+    </script>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      detailTemplate: kendo.template($("#detail-template").html()),
+      rowTemplate: kendo.template($("#template").html())
+    });
+    </script>
+```
+
 ## KB Articles on Row Templates
 
 * [Adding Row Numbers]({% slug howto_addrownumbers_grid %})
