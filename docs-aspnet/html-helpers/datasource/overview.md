@@ -49,7 +49,13 @@ The following example demonstrates how to define the DataSource by using the Dat
 
 ## Basic Configuration
 
-You can declare the DataSource HtmlHelper configuration options by using the available methods&mdash;for example, you can define the page size, page, sort order, filter, group, aggregates, and the model. The configuration accepts the definition for all CRUD operations and facilitates the sending of additional data such as the `AntiForgeryTokens`.
+You can declare the DataSource HtmlHelper configuration options by using the available methods&mdash;for example, you can define the page size, page, sort order, filter, group, aggregates, and the model. 
+
+> * To [sort](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort#sort) the data based on an object, set [the data field, by which the data items are sorted,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort#sortfield) to a property of that object. 
+> * To [group](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) the data by an object, set [the group by data item field](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group#groupfield) to a property of that object.
+> * To [filter](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) the data based on an object, set [the data item field, to which the filter operator is applied,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter#filterfield) to a property of that object.
+
+The configuration accepts the definition for all CRUD operations and facilitates the sending of additional data such as the `AntiForgeryTokens`.
 
     @(Html.AntiForgeryToken())
 

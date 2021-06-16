@@ -12,6 +12,8 @@ By default, the filtering functionality of the Kendo UI Grid is disabled.
 
 To control filtering in the Grid, use the `filterable` property.
 
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be filterable. To enable filtering on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
+
 The Grid enables you to implement the following filter options:
 * [Header row filtering](#filtering-by-rows)
 * [Filtering by checkboxes](#filtering-by-checkboxes)
