@@ -31,6 +31,8 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 
 ![Grid Grouped by Last Name](../grid6_1.png)
 
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
+
 ## Using with Row Templates
 
 A row template explicitly defines the row markup while grouping requires you to change the row markup. To use the two features simultaneously, include a script in the row template which adds additional cells depending on the number of the existing groups.

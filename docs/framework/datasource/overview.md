@@ -15,6 +15,10 @@ The [Kendo UI DataSource component](https://demos.telerik.com/kendo-ui/datasourc
 
 The DataSource is an abstraction for using local data (arrays of JavaScript objects) or remote data (web services returning JSON, JSONP, [oData](http://www.odata.org/) or XML). It fully supports CRUD (Create, Read, Update, Destroy) data operations and provides both client-side and server-side support for sorting, paging, filtering, grouping, and aggregates.
 
+> * To [sort](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort#sort) the data based on an object, set [the data field, by which the data items are sorted,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/sort#sortfield) to a property of that object. 
+> * To [group](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group) the data by an object, set [the group by data item field](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/group#groupfield) to a property of that object.
+> * To [filter](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter) the data based on an object, set [the data item field, to which the filter operator is applied,](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/filter#filterfield) to a property of that object.
+
 The following list includes some of the functionality and features which the DataSource provides. For detailed information on the capabilities of the DataSource, refer to its [configuration API, methods, and events](/api/javascript/data/datasource), and [demos](https://demos.telerik.com/kendo-ui/datasource/index).
 
 * [Retrieval of data from a remote endpoint](/framework/datasource/cors).

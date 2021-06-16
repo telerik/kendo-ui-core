@@ -19,6 +19,8 @@ To control the sorting in the Grid, use the `Sortable` option.
         .Sortable()
         ...
 
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
+
 ## Sort Modes
 
 The Grid supports single and multiple columns sort modes which can be set through its `SortMode` property. You can also specify if the columns can be unsorted by setting the `AllowUnsort` property to `true` or `false`. For a runnable example, refer to the [demo on sorting in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/sorting).

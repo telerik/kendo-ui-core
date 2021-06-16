@@ -30,7 +30,13 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "są inne niż",
     "startswith": "zaczynają się od",
     "contains": "zawierają",
-    "doesnotcontain": "nie zawierają"
+    "doesnotcontain": "nie zawierają",
+    "isnull": "jest null",
+    "isnotnull": "nie jest null",
+    "isempty": "jest puste",
+    "isnotempty": "nie jest puste",
+    "isnullorempty": "nie ma wartości",
+    "isnotnullorempty": "ma wartośc"
   },
   "enums": {
     "eq": "są równe",
@@ -276,6 +282,8 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "search": "Szukaj",
   "filter": "Filtr",
   "clear": "Wyczyść filtr",
+  "checkAll": "Zaznacz wszystko",
+  "clearAll": "Odznacz wszystko",
   "selectedItemsFormat":"Wybrano {0} elementy"
 });
 }
