@@ -10,6 +10,14 @@ position: 1
 
 This article lists the breaking or important changes in the 2021 releases of Kendo UI.
 
+## Kendo UI 2021 R2 SP1
+
+> Important change
+
+**TileLayout**
+
+The TileLayout container headers come with a new rendering. The TileLayout containers no longer render the header texts inside `<h5>` elements, but place them inside `<div>` elements.
+
 ## Kendo UI 2021 R2
 
 > Important change
