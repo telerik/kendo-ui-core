@@ -39085,6 +39085,7 @@ The data point value.
 
 #### Example - subscribe to the "seriesHover" event during initialization
     <div id="chart"></div>
+    <div><center>The result can be observed in the DevTools(F12) console of the browser.</center></div>
     <script>
     $("#chart").kendoChart({
       series: [
