@@ -2,7 +2,7 @@
     var TimePicker = kendo.ui.TimePicker;
     var input;
 
-    describe("kendo.ui.Calendar API", function () {
+    describe("kendo.ui.TimePicker new rendering", function () {
         beforeEach(function () {
 
             input = $("<input />").appendTo(Mocha.fixture);
@@ -155,7 +155,7 @@
                 value: new Date(value)
             });
 
-            picker.timeView._nowClickHandler();
+            picker.timeView._nowClickHandler({ preventDefault: $.noop});
 
             assert.notEqual(+value, +picker.timeView._value);
         });
