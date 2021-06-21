@@ -99,6 +99,7 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
               .DataSource(dataSource => dataSource //Configure the Grid data source.
                   .Ajax() //Specify that Ajax binding is used.
                   .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
+                  .Events(ev => ev.Error("onError"))
                )
               .Columns(columns =>
               {
@@ -112,6 +113,12 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
               .Pageable() // Enable paging
               .Sortable() // Enable sorting
         )
+
+        <script>
+        function onError(e) {
+            console.log(e.status);
+        }
+        </script>
 
 1. Build and run the application.
 

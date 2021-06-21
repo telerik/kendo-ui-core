@@ -155,7 +155,8 @@ The following example demonstrates how to obtain the current filter expression a
     });
 
     function saveState(e) {
-        localStorage["myFilterSettings"] = JSON.stringify(getFilter().getOptions().expression);
+        var expression = getFilter().getOptions().expression;
+        localStorage["myFilterSettings"] = expression.filters ? JSON.stringify(expression) : "";
         // You can store and restore all options not just the expression.
     }
 
