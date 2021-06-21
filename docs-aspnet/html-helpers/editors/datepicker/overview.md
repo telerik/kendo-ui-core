@@ -99,6 +99,9 @@ To reference an existing Telerik UI DatePicker instance, use the [`jQuery.data()
         $(function() {
         // The Name() of the DatePicker is used to get its client-side instance.
             var datepicker = $("#datepicker").data("kendoDatePicker");
+
+            //Use the "value" API method to get the DatePicker's value.
+            console.log(datepicker.value());
         });
         </script>
 
