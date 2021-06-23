@@ -8,11 +8,13 @@ position: 1
 
 # Download and Installation Overview
 
-To start using Kendo UI, you need to [download the library](#downloading-the-library) by using any of the available approaches and then [initialize the widgets](#initializing-the-widgets) you need.   
+This article provides general information on the Kendo UI distributions that you can download as well as the available Kendo UI installation and widget initialization approaches.  
+
+To gain the hands-on experience, refer to the respective articles in the **Getting Started** section of the Kendo UI documentation&mdash;for example, the article on [how to host Kendo UI in your project]({% slug hosting_kendoui %}).  
 
 ## Downloading Kendo UI
 
-Depending on your preferences and the requirements of your project, you can:
+Kendo UI comes in trial, commercial, and free distributions. Depending on your preferences and the requirements of your project, you can:
 
 * Download [Kendo UI for a Trial Period](https://www.telerik.com/download/kendo-ui).
 * Get your [Commercial License for Kendo UI Professional](https://www.telerik.com/purchase/kendo-ui).
@@ -21,19 +23,33 @@ Depending on your preferences and the requirements of your project, you can:
 * Get your [Commercial License for Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET PHP](https://www.telerik.com/purchase/php-ui).
 * Use the [GitHub Open-Source License for Kendo UI Core](https://github.com/telerik/kendo-ui-core).
 
-Kendo UI for jQuery uses the [Bower web package manager](https://bower.io/) which handles frameworks, libraries, assets, and utilities. The library maintains the Kendo UI Core and the Kendo UI Professional Bower packages which provide all official releases, service packs, and internal Kendo UI for jQuery builds. For more information, refer to the article on [installing Kendo UI as a Bower package]({% slug kendoui_bower_packages_kendoui_installation %}).
+Kendo UI also offers various download approaches which allow you to use the technology with which you feel most comfortable to work with:  
 
-To install Kendo UI for jQuery widgets, you can use the [available Kendo UI CDN services]({% slug kendoui_cdn_services_installation %}) which are hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
+* Kendo UI for jQuery uses the [Bower web package manager](https://bower.io/) which handles frameworks, libraries, assets, and utilities. The library maintains the Kendo UI Core and the Kendo UI Professional Bower packages which provide all official releases, service packs, and internal Kendo UI for jQuery builds.
 
-Another approach to install Kendo UI is by accessing the [Node Package Manager (NPM)](http://npmjs.com/) JavaScript package manager and [downloading the available Kendo UI packages on NPM]({% slug kendoui_npm_packages_kendoui_installation %}).
+  For more information, refer to the article on [installing Kendo UI as a Bower package]({% slug kendoui_bower_packages_kendoui_installation %}).
 
-If you are a registered user, you can use the [available Kendo UI NuGet packages]({% slug kendoui_nuget_packages %}) from the private Kendo UI NuGet feed. [NuGet](https://www.nuget.org) is an open-source .NET package manager which hosts Kendo UI packages for the jQuery and ASP.NET MVC flavors.  
+* To install Kendo UI for jQuery widgets, you can use the available Kendo UI CDN services which are hosted on [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
-You can also install part of the Kendo UI for jQuery widgets and framework components that your project requires and include [only what you need]({% slug include_only_what_you_need_kendoui_installation %}) by picking the combined scripts, by building a custom combined script, or by using Gulp to build a custom script.
+  For more information, refer to the article on [installing Kendo UI by using CDN]({% slug kendoui_cdn_services_installation %}).
+
+* Another approach to install Kendo UI is by accessing the [Node Package Manager (NPM)](http://npmjs.com/) JavaScript package manager and downloading the available Kendo UI packages on NPM.
+
+  For more information, refer to the article on [installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %}).
+
+* If you are a registered user, you can use the available Kendo UI NuGet packages from the private Kendo UI NuGet feed. [NuGet](https://www.nuget.org) is an open-source .NET package manager which hosts Kendo UI packages for the jQuery and ASP.NET MVC flavors.  
+
+  For more information, refer to the article on [installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %}).
+
+* You can also install part of the Kendo UI for jQuery widgets and framework components that your project requires and include only what you need by picking the combined or individual scripts, by building a custom combined script, or by using Gulp to build a custom script.
+
+  For more information, refer to the article on [creating your own custom bundles with Kendo UI]({% slug include_only_what_you_need_kendoui_installation %}).
 
 ## Initializing the Widgets
 
-Once you have done the Kendo UI installation, you can move on and initialize the desired Kendo UI widgets. The documentation for each Kendo UI widget features an **Overview** article that provides information on the individual initialization approaches&mdash;for example, the [overview article of the Grid]({% slug overview_kendoui_grid_widget %}).
+Once you have installed Kendo UI and referenced the needed CSS and JavaScript files, you can move on and initialize the desired Kendo UI widgets.
+
+The Kendo UI documentation includes an **Overview** article for each Kendo UI widget which provides information on the individual initialization approaches&mdash;for example, the [**Overview** of the Grid]({% slug overview_kendoui_grid_widget %}).
 
 All Kendo UI widgets are registered as [jQuery plugins](http://learn.jquery.com/plugins/) which means that [you can instantiate each widget on a jQuery `object` instance]({% slug initialize_widgets_using_jquery_plugins_installation %}).
 

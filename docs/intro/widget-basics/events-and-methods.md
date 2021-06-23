@@ -11,56 +11,58 @@ position: 5
 
 All Kendo UI widgets provide methods and events that you can use to query or modify their state at runtime.
 
-## Getting the Widget Instance
+## Using the Methods
 
-To use the methods of the widgets, you have to obtain a reference to the specific widget instance by using any of the following approaches:
+To start using the methods provided by Kendo UI widgets:
 
-* [Using the jQuery `data` method](#the-jquery-data-method)
-* [Using the `getKendo<WidgetName>` method](#the-getkendo-method)
+1. [Reference a specific widget instances](#referencing-specific-widget-instances)
+1. [Call the methods](#calling-the-methods)  
 
-### The jQuery data Method
+### Referencing Specific Widget Instances
 
-The Kendo UI widgets are jQuery plugins. A common way to get a reference to a widget instance is to use the [jQuery `data`](https://api.jquery.com/data/) method and pass the plugin name as a string.
+To obtain a reference to the specific widget instance, either use the jQuery `data` method, or the `getKendo<WidgetName>` method.
 
-```
-    <p>Animal: <input id="animal" /></p>
+* The Kendo UI widgets are jQuery plugins. A common way to get a reference to a widget instance is to use the [jQuery `data`](https://api.jquery.com/data/) method and pass the plugin name as a string.
 
-    <script>
-        $(function() {
-          // create a new widget instance
-          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+    ```
+        <p>Animal: <input id="animal" /></p>
 
-          // retrieve the widget instance
-          var autoComplete = $("#animal").data("kendoAutoComplete");
+        <script>
+            $(function() {
+              // create a new widget instance
+              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
 
-          console.log(autoComplete);
-        });
-    </script>
-```
+              // retrieve the widget instance
+              var autoComplete = $("#animal").data("kendoAutoComplete");
 
-### The getKendo Method
+              console.log(autoComplete);
+            });
+        </script>
+    ```
 
-To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element applies to widget initialization plugin methods too. This means that the plugin method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector on which the method was used.
+* To get a reference to a widget instance, you may also use the `getKendo<WidgetName>` method. Note that the jQuery convention of returning the selected DOM element applies to widget initialization plugin methods too. This means that the plugin method, for example `kendoAutoComplete()`, does not return the widget instance, but the jQuery selector on which the method was used.
 
-```
-    <p>Animal: <input id="animal" /></p>
+    ```
+        <p>Animal: <input id="animal" /></p>
 
-    <script>
-        $(function() {
-          // create a new widget instance
-          $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
+        <script>
+            $(function() {
+              // create a new widget instance
+              $("#animal").kendoAutoComplete({ dataSource: [ "Ant", "Antilope", "Badger", "Beaver", "Bird" ] });
 
-          // retrieve the widget instance
-          var autoComplete = $("#animal").getKendoAutoComplete();
+              // retrieve the widget instance
+              var autoComplete = $("#animal").getKendoAutoComplete();
 
-          console.log(autoComplete);
-        });
-    </script>
-```
+              console.log(autoComplete);
+            });
+        </script>
+    ```
 
-## Using Methods
+### Calling the Methods
 
-After the widget instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section. If the code which will return a widget instance returns `undefined`, then the widget is not yet initialized. Such a problem may occur, for example, if a widget is created in a `document.ready` handler but the widget instance is referenced from code that was executed earlier.
+After the widget instance is available, you can call its methods by using the standard JavaScript method syntax. The complete list and examples of the widget methods and method parameters is available in the [API reference](/api/javascript/kendo) section.
+
+If the code which will return a widget instance returns `undefined`, then the widget is not yet initialized. Such a problem may occur, for example, if a widget is created in a `document.ready` handler but the widget instance is referenced from code that was executed earlier.
 
 ```
         <p>Animal: <input id="animal" /></p>
@@ -79,7 +81,11 @@ After the widget instance is available, you can call its methods by using the st
 
 ## Handling Widget Events
 
-Depending on its specific features, each widget exposes different events. For example, the AutoComplete widget triggers `change`, `close`, `dataBound`, and so on. You can pass event handlers either [during the widget initialization](#binding-events-during-initialization) or [after the widget initialization](#binding-events-after-initialization). When you work with the events of the Kendo UI widgets, you can also [use event handler arguments](#using-event-handler-arguments), [prevent events](#preventing-events), and [unbind from events](#unbinding-from-events).
+Depending on its specific features, each widget exposes different events. For example, the AutoComplete widget triggers `change`, `close`, `dataBound`, and so on.
+
+You can pass event handlers either [during the widget initialization](#binding-events-during-initialization) or [after the widget initialization](#binding-events-after-initialization).
+
+When you work with the events of the Kendo UI widgets, you can also [use event handler arguments](#using-event-handler-arguments), [prevent events](#preventing-events), and [unbind from events](#unbinding-from-events).
 
 ### Binding Events during Initialization
 

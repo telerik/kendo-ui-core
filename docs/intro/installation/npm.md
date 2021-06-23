@@ -28,13 +28,19 @@ The Kendo UI NPM package is available as [`@progress/kendo-ui`](https://www.npmj
 > * The scripts in the NPM package are not usable in the browser. To work around this issue, use a bundler such as [WebPack]({% slug webpacksupport_integration_kendoui %}).
 > * After May 2017, the `kendo` legacy package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will no longer be updated but will remain active.
 
-## NPM Channels for Kendo UI packages
+## NPM Channels for Kendo UI Packages
 
-As of November 2019, there are two separate channels for the Internal and Official NPM packages. The official releases and Service Packs for Kendo UI and Kendo UI Core are distributed in the "latest" channel. The internal builds are released in the "dev" channel. 
+As of November 2019, Kendo UI supports two separate channels for its official and internal NPM packages.
 
-To install the latest internal build, run `npm install --save @progress/kendo-ui@dev`. If you wish to install an older version, run `npm install --save @progress/kendo-ui@2019.3.1115-internal`. 
+* The official releases and service packs for Kendo UI and Kendo UI Core are distributed in the **latest** channel.
 
-To install the latest official build, run `npm install --save @progress/kendo-ui@latest`.
+  To install the latest official build, run `npm install --save @progress/kendo-ui@latest`.
+
+* The internal builds are released in the **dev** channel.
+
+  * To install the latest internal build, run `npm install --save @progress/kendo-ui@dev`.
+
+  * To install an earlier version, run `npm install --save @progress/kendo-ui@2019.3.1115-internal`.
 
 ## Troubleshooting
 

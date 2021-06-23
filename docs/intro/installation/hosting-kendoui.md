@@ -8,45 +8,59 @@ position: 2
 
 # Adding Kendo UI in Your Project
 
-To start using the Kendo UI for jQuery and host the library into your project, you need to [download the bundles](#step-1-downloading-the-bundles) and then [add the CSS and JavaScript references](#step-2-referencing-the-needed-css-and-javascript-files-to-your-project).
+To start using the Kendo UI for jQuery and host the library into your project, you need to:
 
-## Step 1: Downloading the Bundles
+1. [Download the bundles](#downloading-the-bundles)
+1. [Add the CSS and JavaScript references](#referencing-the-needed-css-and-javascript-files)
+1. [Initialize a widget](#initializing-a-widget)
 
-To download a Kendo UI bundle, go to [https://www.telerik.com/download/kendo-ui](https://www.telerik.com/download/kendo-ui). When the download completes, here is what each folder inside the downloaded archive has:
+## Downloading the Bundles
+
+To download a Kendo UI bundle, go to [https://www.telerik.com/download/kendo-ui](https://www.telerik.com/download/kendo-ui). When the download completes, here is what each folder inside the downloaded archive contains:
 
 |Folders 						|Contents |
 |:---								|:---			|
-|`/apptemplates`		|The folder contains standalone starter templates. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
+|`/apptemplates`		|Contains standalone starter templates. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
 |`/examples`				|Accommodates the quick-start demo files. Although they are static HTML files, it is recommended that you open them through a web server instead of directly from the file system. The latter approach breaks all AJAX data requests.|
 |`/js`							|Contains the minified JavaScript files needed by Kendo UI to operates.|
-|`/license-agreements`			|Contains the End User License Agreement that has to be read before installing Kendo UI.|
-|`/src`							|This folder used to hold the source code files but they are now provided in a separate download package. Access the source code package from the [Downloads section](https://www.telerik.com/account/my-downloads) of your account. Note that the source code is not available to trial users.|
-|`/styles`					| This folder contains the definitions of all [SASS](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) and [LESS](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling)-based themes that Kendo UI provides. |
-|`/typescript`				|Includes the Kendo UI [TypeScript definitions](https://docs.telerik.com/kendo-ui/third-party/typescript)|
-|`/vsdoc`				|Includes the files that provide the intellisense  |
+|`/license-agreements`| Contains the End User License Agreement that has to be read before installing Kendo UI.|
+|`/src`							|Used to hold the source code files but they are now provided in a separate download package. Access the source code package from the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account. Note that the source code is not available to trial users.|
+|`/styles`					|Contains the definitions of all [SASS](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes) and [LESS](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling)-based themes that Kendo UI provides. |
+|`/typescript`			|Includes the Kendo UI [TypeScript definitions](https://docs.telerik.com/kendo-ui/third-party/typescript).|
+|`/vsdoc`				    |Includes the files that provide the intellisense.  |
 |`changelog.html`		|Provides the Kendo UI release notes.|
 
-To download the commercial version of Kendo UI go to www.telerik.com and login with your credentials. Navigate to the [Downloads section](https://www.telerik.com/account/my-downloads) of your account. Search for Progress® Kendo UI® for jQuery and download the package.
+To download the commercial version of Kendo UI:
 
-Based on the preferred technologies, there are also other approaches you can use to add Kendo UI to a project. Here you can find more details about each of them: 
+1. Go to www.telerik.com and log in with your credentials.
+1. Navigate to the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account.
+1. Search for Progress® Kendo UI® for jQuery and download the package.
+
+Based on the preferred technologies, you can also use other approaches to add Kendo UI to a project. For more details, refer to the following articles:
+
 * [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
-* [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %}) 
+* [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 
-## Step 2: Referencing the needed CSS and JavaScript files to your project
+## Referencing the Needed CSS and JavaScript Files
 
-To include the required by Kendo UI CSS and JavaScript files first extract the `/js` and `/styles` directories from the downloaded bundle archive. Copy the extracted folders in the root folder of your project. The next step is to include the Kendo UI JavaScript and CSS files in the `head` tag of your main HTML file. As the SASS and LESS-based themes structure is different, below you find two sections discussing the loading of each theme type.  
+To include the required by Kendo UI CSS and JavaScript files:
 
-### Including SASS-based themes to your project
+1. Extract the `/js` and `/styles` directories from the downloaded bundle archive.
+1. Copy the extracted folders in the root folder of your project.
+1. Include the Kendo UI JavaScript and CSS files in the `head` tag of your main HTML file. As the SASS and LESS-based themes structure is different, below you will find the respective sections which discuss the loading of each theme type.  
 
-Each SASS-based theme is represented by a single CSS file that combines the layout and the styling of the different components. Thus only one CSS file has to be referenced in the project. 
+### Including SASS-Based Themes
+
+Each SASS-based theme is represented by a single CSS file that combines the layout and the styling of the different components. In this way, only one CSS file needs to be referenced in your project.
 
 The CSS files defining the different Kendo UI SASS themes are as follows:
-* Kendo UI Default v.2(kendo.default-v2.min.css)
-* Kendo UI Bootstrap v.4(kendo.bootstrap-v4.min.css)
-* Kendo UI Material(kendo.material-v2.min.css)
 
-Here is how we can define a Kendo UI project that uses the Kendo UI Default v.2 theme:
+* Kendo UI Default v.2 (`kendo.default-v2.min.css`)
+* Kendo UI Bootstrap v.4 (`kendo.bootstrap-v4.min.css`)
+* Kendo UI Material (`kendo.material-v2.min.css`)
+
+The following example shows how to define a Kendo UI project that uses the Kendo UI Default v.2 theme.
 
 	<!DOCTYPE html>
 		<html>
@@ -67,19 +81,21 @@ Here is how we can define a Kendo UI project that uses the Kendo UI Default v.2 
 		<body>
 			Hello World!
 		</body>
-		</html> 
+		</html>
 
-### Including LESS-based themes to your project
-To load a LESS-based theme to a project at least two CSS files should be referenced in it. 
-* kendo.common.css — This is a common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function properly.
+### Including LESS-Based Themes
 
-> Some LESS themes require the loading of different "kendo.common.css" file. More details about these themes can be found [here](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#common-css-files).  
+To load a LESS-based theme to a project, at least two CSS files need to be referenced in it:
 
-* kendo.[theme name].css — This stylesheet applies theme-specific styles such as color palette, background gradients, and patterns, etc.
+* `kendo.common.css`&mdash;A common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function properly.
 
-More about the different LESS themes can be read [here](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling). 
+	> Some LESS themes require the loading of a different `kendo.common.css` file. For more details, refer to https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling#common-css-files.  
 
-Here is how we can define a Kendo UI project that uses the Kendo UI Default(LESS) theme:
+* `kendo.[theme name].css`&mdash;Applies theme-specific styles such as color palette, background gradients, and patterns, and so on.
+
+For more information on the different LESS themes, refer to the article on [styling the appearance of widgets]({% slug themesandappearnce_kendoui_desktopwidgets %}).
+
+The following example shows how to define a Kendo UI project that uses the Kendo UI Default (LESS) theme.
 
 	<!DOCTYPE html>
 		<html>
@@ -109,39 +125,40 @@ Here is how we can define a Kendo UI project that uses the Kendo UI Default(LESS
 		</html>
 
 
-## Step 3: Initializing a widget. 
+## Initializing a Widget
+
 > The examples in this step assume that all the Kendo UI scripts and stylesheets are correctly referenced.
 
-	 The following example demonstrates how to initialize the [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index) component.
+The following example demonstrates how to initialize the [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index) component.
 
-        <!-- HTML element from which the DatePicker would be initialized -->
-        <input id="datepicker" />
-        <script>
-        $(function() {
-            // Initialize the Kendo UI DatePicker by calling the kendoDatePicker jQuery plugin
-            $("#datepicker").kendoDatePicker();
-        });
-        </script>
+      <!-- HTML element from which the DatePicker would be initialized -->
+      <input id="datepicker" />
+      <script>
+      $(function() {
+          // Initialize the Kendo UI DatePicker by calling the kendoDatePicker jQuery plugin
+          $("#datepicker").kendoDatePicker();
+      });
+      </script>
 
-		The following example demonstrates the full initialization of the [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index).
+The following example demonstrates the full initialization of the [DatePicker](https://demos.telerik.com/kendo-ui/datepicker/index).
 
-		    <!DOCTYPE html>
-		    <html>
-		        <head>
-		            <title>Welcome to Kendo UI!</title>
-		            <link href="styles/kendo.default-v2.min.css" rel="stylesheet" />
-		            <script src="js/jquery.min.js"></script>
-		            <script src="js/kendo.all.min.js"></script>
-		        </head>
-		        <body>
-		            <input id="datepicker" />
-		            <script>
-		                $(function() {
-		                    $("#datepicker").kendoDatePicker();
-		                });
-		            </script>
-		        </body>
-		    </html>
+	    <!DOCTYPE html>
+	    <html>
+	        <head>
+	            <title>Welcome to Kendo UI!</title>
+	            <link href="styles/kendo.default-v2.min.css" rel="stylesheet" />
+	            <script src="js/jquery.min.js"></script>
+	            <script src="js/kendo.all.min.js"></script>
+	        </head>
+	        <body>
+	            <input id="datepicker" />
+	            <script>
+	                $(function() {
+	                    $("#datepicker").kendoDatePicker();
+	                });
+	            </script>
+	        </body>
+	    </html>
 
 ## Next Steps
 
