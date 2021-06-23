@@ -11,7 +11,7 @@ position: 4
 
 The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
-Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
+Only the official Kendo UI releases and service packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
 
 ## Using the HTTP Protocol
 
@@ -25,17 +25,13 @@ For example, the `{{ site.cdnVersion }}` version can be loaded from the followin
 * `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
 * `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
 
-The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release.
-
-To load the scripts, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
 
 ## Using the HTTPS Protocol
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name `kendo.cdn.telerik.com` and replace the scheme (protocol) with `https`. For example:
-
-* `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
-
 > The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
+
+To access the Kendo UI CDN service through the HTTPS protocol, use the same `kendo.cdn.telerik.com` host name and replace the scheme (protocol) with `https`. For example, `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
 
 ## Troubleshooting
 
