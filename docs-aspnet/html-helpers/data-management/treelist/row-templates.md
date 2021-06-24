@@ -13,6 +13,8 @@ The Kendo UI TreeList supports a row template that enables you to place custom c
 For runnable example, refer to:
 * [Demo on using the row template of the TreeList HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/treelist/rowtemplate)
 
+> If editing is enabled, row templates is supported only in "popup" editing mode.
+
 The following example demonstrates how to implement row and alter row templates by using their Ids:
 
     .RowTemplateId("rowTemplate")
