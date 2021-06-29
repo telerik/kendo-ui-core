@@ -1443,6 +1443,49 @@ The source which triggered the event.
 
 Fired when the widget is bound to data from its data source.
 
+#### Example
+
+    <div id="filemanager"></div>
+    <script>
+    var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+            $("#filemanager").kendoFileManager({
+                dataSource: {
+                    schema: kendo.data.schemas.filemanager,
+                    transport: {
+                        read: {
+                            url: baseUrl + "Read",
+                            method: "POST"
+                        },
+                        create: {
+                            url: baseUrl + "Create",
+                            method: "POST"
+                        },
+                        update: {
+                            url: baseUrl + "Update",
+                            method: "POST"
+                        },
+                        destroy: {
+                            url: baseUrl + "Destroy",
+                            method: "POST"
+                        }
+                    }
+                },
+                uploadUrl: "/kendo-ui/service/FileManager/Upload",
+                toolbar: {
+                    items: [
+                        { name: "createFolder" },
+                        { name: "upload" }
+                    ]
+                },
+                dataBound: onDataBound
+            });
+
+        function onDataBound(e) {
+            console.log("event: DataBound");
+        }
+    </script>
+
 #### Event Data
 
 ##### e.sender `kendo.ui.FileManager`

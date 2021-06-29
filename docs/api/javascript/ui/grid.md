@@ -2150,7 +2150,19 @@ is displayed in the column header cell.
         field: "name",
         headerTemplate: '<input type="checkbox" id="check-all" /><label for="check-all">Check All</label>'
       }],
+      selectable: "multiple",
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
+    });
+
+    $("#check-all").change(function(e){
+      var grid = $("#grid").data("kendoGrid");
+      var selected = grid.select();
+
+      if(selected.length > 0) {
+        grid.clearSelection();
+      } else {
+        grid.select("tr:eq(0), tr:eq(1)");
+      }
     });
     </script>
 
@@ -2163,7 +2175,19 @@ is displayed in the column header cell.
         field: "name",
         headerTemplate: kendo.template('# if (true) { # <input type="checkbox" id="check-all" /><label for="check-all">Check All</label> # } else { # this will never be displayed # } #')
       }],
+      selectable: "multiple",
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
+    });
+      
+    $("#check-all").change(function(e){
+      var grid = $("#grid").data("kendoGrid");
+      var selected = grid.select();
+      
+      if(selected.length > 0) {
+        grid.clearSelection();
+      } else {
+        grid.select("tr:eq(0), tr:eq(1)");
+      }
     });
     </script>
 
@@ -3660,6 +3684,66 @@ The editing mode to use. The supported editing modes are "incell", "inline" and 
       },
       editable: {
         mode: "inline"
+      }
+    });
+    </script>
+
+#### Example - specify popup editing mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" },
+        { command: "edit" }
+      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
+      editable: {
+        mode: "popup"
+      }
+    });
+    </script>
+
+#### Example - specify incell editing mode
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["save"],
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: {
+       data: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+       ],
+       schema:{
+        model: {
+         id: "id",
+         fields: {
+           age: { type: "number"}
+         }
+        }
+       }
+      },
+      editable: {
+        mode: "incell"
       }
     });
     </script>
@@ -9822,6 +9906,43 @@ Renders all table rows using the current data items.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.refresh();
+    </script>
+
+#### Example - change the value of a dataItem and refresh the widget
+
+    <button id="refresh" class="k-button">Refresh</button>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["save"],
+      columns: [
+        { field: "name" },
+        { field: "age" },
+      ],
+      dataSource: {
+        data: [
+          { id: 1, name: "Jane Doe", age: 30 },
+          { id: 2, name: "John Doe", age: 33 }
+      	],
+        schema:{
+        	model: {
+        	 id: "id",
+        	 fields: {
+        	   age: { type: "number"}
+        	 }
+         }
+       }
+      },
+      editable: true
+    });
+
+    $("#refresh").click(function(){
+    var grid = $("#grid").data("kendoGrid");
+    // Change the name of the first dataItem.
+    grid.dataSource.data()[0].name = "Different John";
+    // Call refresh in order to see the change.
+    grid.refresh();
+    });
     </script>
 
 ### removeRow

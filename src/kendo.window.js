@@ -1789,9 +1789,10 @@
                 "</a>"
             ),
             titlebar: template(
-                "<div class='k-window-titlebar'>" +
-                "<span class='k-window-title'>#= title #</span>" +
-                "<div class='k-window-actions'></div>" +
+                "<div class='k-window-titlebar k-hstack'>" +
+                    "<span class='k-window-title'>#= title #</span>" +
+                    "<span class='k-spacer'></span>" +
+                    "<div class='k-window-actions k-hstack'></div>" +
                 "</div>"
             ),
             overlay: "<div class='k-overlay'></div>",

@@ -64,7 +64,7 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 6** Right-click **spring-demos** in the Eclipse Project Explorer. Pick **Properties**.
 
-**Step 7** In the properties window pick **Project Facets**.
+**Step 7** In the properties window pick **Project Facets** or other Eclipse package that contains Tools for developers working with Java and Web applications.
 
 **Step 8** From the "Project Facets" menu select "Dynamic Web Module".
 

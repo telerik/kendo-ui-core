@@ -39,9 +39,9 @@
 
             assert.isOk(wrapper.is(".k-widget.k-window.k-dialog"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar.k-dialog-titlebar"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(1).is(".k-window-actions.k-dialog-actions"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(2).is(".k-window-actions.k-dialog-actions"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(2).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(2).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content.k-dialog-content"));
             assert.equal(wrapper.find(".k-dialog-buttongroup").length, 0);
         });
@@ -274,7 +274,7 @@
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-stretched"));
+            assert.isOk(actionbar.hasClass("k-justify-content-stretch"));
             assert.equal(actionbar.find(".k-button").eq(0).width, actionbar.find(".k-button").eq(1).width);
         });
 
@@ -285,7 +285,7 @@
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-normal"));
+            assert.isOk(actionbar.hasClass("k-justify-content-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 
@@ -332,7 +332,7 @@
             });
             var actionbar = dialog.wrapper.find(".k-dialog-buttongroup");
 
-            assert.isOk(actionbar.hasClass("k-dialog-button-layout-normal"));
+            assert.isOk(actionbar.hasClass("k-justify-content-end"));
             assert.equal(actionbar.find(".k-button").get(0).style.width, "");
         });
 

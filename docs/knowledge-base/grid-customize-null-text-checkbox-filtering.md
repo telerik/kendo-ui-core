@@ -48,9 +48,9 @@ You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/config
       $(function() {
 
         var commonCheckboxTemplate = function(e) {
-          return "#if(data.all || data.value){#" +
-            "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || data.value # </span></label></div>" +
-            "#}#"
+          return "#if(data.all || data." + e.field + "){#" +
+            "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || data." + e.field + " # </span></label></div>" +
+            "#}#";
         };
 
 
@@ -109,7 +109,7 @@ You can add the [columns.filterable.itemTemplate](/api/javascript/ui/grid/config
       $(function() {
 
         var commonCheckboxTemplate = function(e) {
-          return "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || (data.value?data.value: 'No Value') # </span></label></div>" 
+          return "<div><label><input  type='checkbox' name='"+ e.field +"' value='#= data." + e.field + "#'><span>#= data.all || (data." + e.field + "?data." + e.field + ": 'No Value') # </span></label></div>"; 
         };
 
 

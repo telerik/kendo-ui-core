@@ -838,6 +838,20 @@ that the total number of categories does not exceed [categoryAxis.maxDateGroups]
 
 This option is ignored if [categoryAxis.baseUnit](/api/javascript/dataviz/ui/chart#configuration-categoryAxis.baseUnit) is set to "fit".
 
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+        categoryAxis: {
+            categories: [
+                new Date("2012/02/01 00:00:00"),
+                new Date("2012/02/02 00:00:00"),
+                new Date("2012/02/20 00:00:00")
+            ],
+            baseUnitStep: "3" // Displays a category for every 3 days.
+        }
+    });
+    </script>
+
 ### categoryAxis.categories `Array`
 
 The category names. The chart will create a category for every item of the array.
@@ -6149,7 +6163,7 @@ The supported values are:
 
 * "date" - specialized axis for displaying chronological data.
 
-#### Example - set the category axis type
+#### Example - set the category axis type to date
 
     <div id="chart"></div>
     <script>
@@ -6160,6 +6174,25 @@ The supported values are:
           new Date("2011/12/21")
         ],
         type: "date"
+      },
+      series: [
+        { data: [1, 2, 3] }
+      ]
+    });
+    </script>
+
+#### Example - set the category axis type to category
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: [
+          "Seats",
+          "Cars",
+          "People"
+        ],
+        type: "category"
       },
       series: [
         { data: [1, 2, 3] }
@@ -39099,16 +39132,18 @@ The data point value.
 
 #### Example - subscribe to the "seriesHover" event after initialization
     <div id="chart"></div>
-    functino chart_seriesHover(e) {
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(e.value);
-    }
     <script>
     $("#chart").kendoChart({
       series: [
         { data: [1, 2] }
       ]
     });
+    
+    function chart_seriesHover(e) {
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log(e.value);
+    }
+    
     var chart = $("#chart").data("kendoChart");
     chart.bind("seriesHover", chart_seriesHover);
     </script>

@@ -22,6 +22,9 @@ The following table lists the individual script files for the Kendo UI widgets t
 | [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.expansionpanel.js | |
+| [Form](https://demos.telerik.com/kendo-ui/form/index | jquery.js | |
+| | kendo.editable.js | |
+| | kendo.form.js | |
 | [Notification](https://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

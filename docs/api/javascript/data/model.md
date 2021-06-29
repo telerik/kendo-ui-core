@@ -16,6 +16,32 @@ res_type: api
 
 The value of the ID of the `Model`. This field is available only if the `id` is defined in the Model configuration. See the following example.
 
+#### Example
+
+    <script>
+      var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+          dataSource = new kendo.data.DataSource({
+            transport: {
+              read:  {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+              }
+            },
+            pageSize: 20,
+            schema: {
+              model: {
+                id: "ProductID",
+                fields: {
+                  ProductID: { editable: false, nullable: true },
+                  ProductName: { validation: { required: true } },
+                  UnitPrice: { type: "number" },
+                  Discontinued: { type: "boolean" },
+                }
+              }
+            }
+          });
+    </script>
+
 ### idField `String`
 
 The name of the `Model` ID field. This field is available only if the `id` is defined in the Model configuration.

@@ -96,6 +96,17 @@ Specifies the color of the component. Valid options are `inherit`, `default`, `p
 
 If set to false the badge will not be displayed.
 
+#### Example
+
+    <button id="button">Button</button>
+    <script>
+      $("#button").kendoButton({
+        badge: {
+          text: 21,
+          visible: false
+        }
+      });
+    </script>
 
 ### enable `Boolean` *(default: true)*
 

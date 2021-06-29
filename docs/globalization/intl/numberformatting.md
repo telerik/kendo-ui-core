@@ -75,9 +75,9 @@ The following specifiers are supported by Kendo UI:
 
     `kendo.toString(12345678, "##,#")` -> 12,345,678(en-US)
 
-* `"%"`&mdash;The percentage placeholder multiplies a number by 100 and inserts a localized percentage symbol in the result string. The `%` symbol is interpreted as a format specifier in the format string. To prevent this behavior, precede the `%` symbol with a double backslash - `kendo.toString(12, "# \\\%")` -> 12 % (en-US).
+* `"%"`&mdash;The percentage placeholder multiplies a number by 100 and inserts a localized percentage symbol in the result string. The `%` symbol is interpreted as a format specifier in the format string. To prevent this behavior, precede the `%` symbol with a double backslash - `kendo.toString(12, "# \\%")` -> 12 % (en-US).
 
-* `"$"`&mdash;The currency placeholder specifies that the number will be formatted by using the currency culture settings. The `$` symbol is replaced with the localized currency symbol. `$` is interpreted as a format specifier in the format string. To prevent this behavior, precede the `$` symbol with a double backslash - `kendo.toString(12, "# \\\$")` -> 12 $ (en-US).
+* `"$"`&mdash;The currency placeholder specifies that the number will be formatted by using the currency culture settings. The `$` symbol is replaced with the localized currency symbol. `$` is interpreted as a format specifier in the format string. To prevent this behavior, precede the `$` symbol with a double backslash - `kendo.toString(12, "# \\$")` -> 12 $ (en-US).
 
 * `"e"`&mdash;The exponential notation.
 

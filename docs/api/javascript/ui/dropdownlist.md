@@ -924,31 +924,56 @@ The value of the widget.
 
 ### valuePrimitive `Boolean`*(default: false)*
 
-Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.
+Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the widget when the initial model value is null. If set to `true`, the View-Model field will be updated with the primitive value of the selected item's field (defined in the dataValueField option).if set to `false`, the View-Model field will be updated with the selected item - the entire non-primitive object.
+
 
 #### Example - specify that the View-Model field should be updated with the selected item value
 
-    <select id="dropdown" data-bind="value: selectedProductId, source: products" >
-    </select>
-
+    <div id="example">
+      <div>Change the value of the dropdowns and observe the logged value in the console.</div>
+      <br/>
+      
+      <select id="dropdownPrimitive" data-bind="value: selectedProductId, source: products" >
+      </select>
+      
+      <select id="dropdown" data-bind="value: selectedProduct, source: products" >
+      </select>
+    </div>
     <script>
-    $("#dropdown").kendoDropDownList({
+    $("#dropdownPrimitive").kendoDropDownList({
       valuePrimitive: true,
       dataTextField: "name",
       dataValueField: "id",
       optionLabel: "Select product..."
     });
+      
+    $("#dropdown").kendoDropDownList({
+      valuePrimitive: false,
+      dataTextField: "name",
+      dataValueField: "id",
+      optionLabel: "Select product..."
+    });
+      
     var viewModel = kendo.observable({
       selectedProductId: null,
+      selectedProduct: null,
       products: [
         { id: 1, name: "Coffee" },
         { id: 2, name: "Tea" },
         { id: 3, name: "Juice" }
       ]
     });
+      
+    viewModel.bind("change", function(ev) {
+      if (ev.field === "selectedProduct") {
+        console.log("value: " + JSON.stringify(this.get(ev.field)));
+      } else if (ev.field === "selectedProductId") {
+        console.log("value: " + this.get(ev.field));
+      }
+    });
 
-    kendo.bind($("#dropdown"), viewModel);
-    </script>
+    kendo.bind($("#example"), viewModel);
+   
 
 ### virtual `Boolean|Object`*(default: false)*
 

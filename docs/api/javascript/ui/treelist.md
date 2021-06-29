@@ -1318,7 +1318,7 @@ If set to `true` the treelist will render a select column with checkboxes in eac
     <script>
         $("#treelist").kendoTreeList({
           columns: [
-            { selectable: true }
+            { selectable: true, width: 65 },
             { field: "id", width: 250},
             { field: "name", width: 250 },
             { field: "age", width: 250}
@@ -6693,6 +6693,50 @@ When `setOptions` is called, the Treelist widget will be destroyed and recreated
 > all configuration fields, which represent function references, will be lost. You have two options to avoid this limitation:
 > use a [custom implementation](https://github.com/tarruda/super-json) to serialize JavaScript functions, or
 > add the function references back to the deserialized configuration object before passing it to the `setOptions` method.
+
+#### Example - set `reorderable` feature of the TreeList to true
+
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ]
+      });
+
+      var treelist = $("#treelist").data("kendoTreeList");
+      treelist.setOptions({
+        reorderable: true
+      });
+    </script>
 
 ### showColumn
 
