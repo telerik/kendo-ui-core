@@ -12,11 +12,12 @@ The following example demonstrates how to restrict user input to minimum or maxi
 #### Example:
 
 ```dojo
-    <input id="DOB" value="30/06/2010" />
+    <input id="DOB" />
   	<script>
       $(function() {
         $("#DOB").kendoDatePicker({
           format: "dd/MM/yyyy",
+          value: new Date(2020, 10, 04),
           min: new Date(2000, 10, 10),
           max: new Date(2020, 10, 10),
           change: onDOBChange

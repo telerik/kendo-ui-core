@@ -49,6 +49,25 @@ To configure the Window with load-on-demand content:
             .LoadContentFrom("AjaxContent", "Window") //Define the Action and Controller names.
         )
 
+You can also use another [`.LoadContentFrom()`](/api/Kendo.Mvc.UI.Fluent/WindowBuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
+```Razor
+@(Html.Kendo().Window()
+        .Name("window") 
+        .Title("User Details") 
+        .LoadContentFrom("UserDetails", "Window", new { userId = 10}) //Define the Action, Controller names and additional route values.
+    )
+```
+```Controller
+public IActionResult UserDetails(int userId)
+{
+    MyUserViewModel model = myService.GetUserDetails(userId)
+    //fetch required details and pass them to the View 
+    
+    return View(model);
+}
+```
+
+To refresh or change the Window's content on the client, once the Window has been initialized, you can use the [Client-side API of the Window](https://docs.telerik.com/kendo-ui/api/javascript/ui/window) and the [refresh method](https://docs.telerik.com/kendo-ui/api/javascript/ui/window/methods/refresh).
 ## See Also
 
 * [Server-Side API](/api/window)
