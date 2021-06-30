@@ -9,9 +9,9 @@ position: 1
 
 # AngularJS Directives Overview
 
-This article demonstrates the basics of the integration between Kendo UI and AngularJS.
+This article describes the basics of integrating Kendo UI for jQuery and AngularJS 1.x. 
 
-For more information, refer to the page on [developing with AngularJS](https://www.telerik.com/kendo-ui/angularjs-and-kendo-ui-framework-integration "Developing with AngularJS?").
+If you are developing with newer versions of Angular (2.0+), [Kendo UI for Angular](https://www.telerik.com/kendo-angular-ui) provides 100+ native Angular components.
 
 ## Getting Started
 
