@@ -50,6 +50,50 @@ With the badge you can customize the content using templates.
             .Appearance("rectangle"))
         </a>
 
+## Using as a label
+
+You can integrate the Badge into other UI components. The following example demonstrates how to use it as a label in Grid client column templates.
+
+```C#
+    @(Html.Kendo().Grid<OrderViewModel>()
+        .Name("grid")
+        .Columns(columns => {
+            columns.Bound("OrderID").HtmlAttributes(new { @class = "templateCell" }).ClientTemplateId("orderTemplate");
+        })
+        .Events(ev => ev.DataBound("initBadges"))
+        .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("Orders_Read", "Grid"))
+       )
+    )
+
+    <script type="kendo-template" id="orderTemplate">
+        #if(OrderID <= 10){#
+            @(Html.Kendo().Badge()
+                .Name("flag#=OrderID#")
+                .ThemeColor(BadgeColor.Success)
+                .Text("New")
+                .ToClientTemplate()
+            )
+        #}#
+        #if(OrderID > 10){#
+            @(Html.Kendo().Badge()
+                .Name("flag#=OrderID#")
+                .ThemeColor(BadgeColor.Error)
+                .Text("Old")
+                .ToClientTemplate()
+            )
+        #}#
+    </script>
+```
+```JavaScript
+    function initBadges(e) {
+        $(".templateCell").each(function(){
+            eval($(this).children("script").last().html());
+        });
+    }
+```
+
 ## Referencing Existing Instances
 
 You can access an existing Button instance by using the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method which gets executed by the jQuery object of the originating element. Once the reference is established, use the [Badge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge#methods) to control its behavior.
