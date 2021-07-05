@@ -62,16 +62,6 @@
             margin-left: -.125em;
         }
     }
-    &-icon {
-        width: @button-calc-size;
-        height: @button-calc-size;
-        padding: @button-padding-y;
-
-        .k-text,
-        .k-button-text {
-            display: none;
-        }
-    }
 
     // Disabled state
     &[disabled],
@@ -81,8 +71,23 @@
         outline: 0;
         box-shadow: none;
         opacity: @disabled-button-opacity;
+        pointer-events: none;
     }
 
+}
+
+
+// Icon button
+.k-icon-button,
+.k-button.k-button-icon {
+    width: @button-calc-size;
+    height: @button-calc-size;
+    padding: @button-padding-y;
+
+    .k-text,
+    .k-button-text {
+        display: none;
+    }
 }
 
 a.k-button-expand {

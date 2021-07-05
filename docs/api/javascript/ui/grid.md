@@ -2901,6 +2901,64 @@ The text messages displayed in the column menu. Use it to customize or localize 
     });
     </script>
 
+### columnMenu.messages.apply `String` *(default: "Apply")*
+
+The text of the button which applies the columns filter.
+
+> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
+
+#### Example - column menu apply button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        componentType: "modern",
+        messages: {
+          apply: "Apply Columns"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.buttonTitle `String` *(default: "{0} edit column settings")*
+
+The title of the button that displays the ColumnMenu.
+
+> The {0} argument represents the field name
+
+#### Example - set the ColumnMenu "buttonTitle" message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        messages: {
+          buttonTitle: "{0} Column Menu"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
 ### columnMenu.messages.columns `String` *(default: "Columns")*
 
 The text message displayed for the column selection menu item.
@@ -2948,6 +3006,63 @@ The text message displayed for the filter menu item.
       dataSource: [
         { name: "Jane Doe", age: 30 },
         { name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.lock `String` *(default: "Lock Column")*
+
+The text message displayed in the column menu for locking a column.
+
+#### Example - column menu lock button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { locked: true, field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        messages: {
+          lock: "Pin this column"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
+      ]
+    });
+    </script>
+
+### columnMenu.messages.reset `String` *(default: "Reset")*
+
+The text of the button which resets the columns filter.
+
+> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
+
+#### Example - column menu reset button text
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "id", width:200 },
+        { field: "name", width:400 },
+        { field: "age", width:400 }
+      ],
+      columnMenu: {
+        componentType: "modern",
+        messages: {
+          reset: "Reset Columns"
+        }
+      },
+      sortable: true,
+      dataSource: [
+        { id: 1, name: "Jane Doe", age: 30 },
+        { id: 2, name: "John Doe", age: 33 }
       ]
     });
     </script>
@@ -3110,33 +3225,6 @@ The text message displayed in the column menu for unsticking a column.
     });
     </script>
 
-### columnMenu.messages.lock `String` *(default: "Lock Column")*
-
-The text message displayed in the column menu for locking a column.
-
-#### Example - column menu lock button text
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { locked: true, field: "id", width:200 },
-        { field: "name", width:400 },
-        { field: "age", width:400 }
-      ],
-      columnMenu: {
-        messages: {
-          lock: "Pin this column"
-        }
-      },
-      sortable: true,
-      dataSource: [
-        { id: 1, name: "Jane Doe", age: 30 },
-        { id: 2, name: "John Doe", age: 33 }
-      ]
-    });
-    </script>
-
 ### columnMenu.messages.unlock `String` *(default: "Unlock Column")*
 
 The text message displayed in the column menu for unlocking a column.
@@ -3164,65 +3252,6 @@ The text message displayed in the column menu for unlocking a column.
     });
     </script>
 
-### columnMenu.messages.apply `String` *(default: "Apply")*
-
-The text of the button which applies the columns filter.
-
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
-
-#### Example - column menu apply button text
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width:200 },
-        { field: "name", width:400 },
-        { field: "age", width:400 }
-      ],
-      columnMenu: {
-        componentType: "modern",
-        messages: {
-          apply: "Apply Columns"
-        }
-      },
-      sortable: true,
-      dataSource: [
-        { id: 1, name: "Jane Doe", age: 30 },
-        { id: 2, name: "John Doe", age: 33 }
-      ]
-    });
-    </script>
-
-### columnMenu.messages.reset `String` *(default: "Reset")*
-
-The text of the button which resets the columns filter.
-
-> The button is visible when the column menu [componentType](/api/javascript/ui/grid/configuration/columnmenu.componenttype) is set to `modern`.
-
-#### Example - column menu reset button text
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "id", width:200 },
-        { field: "name", width:400 },
-        { field: "age", width:400 }
-      ],
-      columnMenu: {
-        componentType: "modern",
-        messages: {
-          reset: "Reset Columns"
-        }
-      },
-      sortable: true,
-      dataSource: [
-        { id: 1, name: "Jane Doe", age: 30 },
-        { id: 2, name: "John Doe", age: 33 }
-      ]
-    });
-    </script>
 
 ### dataSource `Object|Array|kendo.data.DataSource`
 
@@ -4252,6 +4281,37 @@ The text of the option which represents the "and" logical operation.
       filterable: {
         messages: {
           and: "and"
+        }
+      }
+    });
+    </script>
+
+### filterable.messages.buttonTitle `String` *(default: "{0} filter column settings")*
+
+The title of the button that displays the FilterMenu.
+
+> The {0} argument represents the field name
+
+#### Example - set the "buttonTitle" message
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "productName" },
+        { field: "category", values: [
+            { text: "Beverages", value: 1 },
+            { text: "Food", value: 2 },
+          ]
+        }
+      ],
+      dataSource: [
+        { productName: "Tea", category: 1 },
+        { productName: "Ham", category: 2 }
+      ],
+      filterable: {
+        messages: {
+          buttonTitle: "{0} Filter Menu"
         }
       }
     });

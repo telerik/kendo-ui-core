@@ -45,7 +45,7 @@
                 componentType: 'modern'
             });
 
-            assert.equal(cal.element.find(".k-calendar-header .k-today").length, 1);
+            assert.equal(cal.element.find(".k-calendar-header .k-nav-today").length, 1);
         });
 
         it("calendar should not create a footer when componentType is set to modern", function () {
@@ -119,14 +119,6 @@
             });
 
             assert.isTrue(cal._today.is('.k-state-disabled'));
-        });
-
-        it("calendar today link should not have k-nav-today class when component type is modern", function () {
-            var cal = new Calendar(div, {
-                componentType: 'modern'
-            });
-
-            assert.equal(cal.element.find(".k-nav-today").length, 0);
         });
     });
 }());

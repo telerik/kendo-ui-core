@@ -582,7 +582,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "unstick": "Отлепи колоната",
   "setColumnPosition": "Задай позиция на колоната",
   "apply": "Приложи",
-  "reset": "Нулирай"
+  "reset": "Нулирай",
+  "buttonTitle": "Меню за редактиране на колона {0}"
 });
 }
 
@@ -828,7 +829,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "additionalValue": "Допълнителна стойност",
   "logic": "Логика",
   "done": "Готово",
-  "into": "в"
+  "into": "в",
+  "buttonTitle": "Меню за филтриране на колона {0}"
 });
 }
 

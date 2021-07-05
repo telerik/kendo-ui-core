@@ -118,7 +118,7 @@ it("calendar should wire header buttons", function() {
         navigateUp: cal.navigateUp
     });
 
-    links = cal.element.find(".k-header").find(".k-link");
+    links = cal.element.find(".k-header").find(".k-button");
 
     current = new Date(cal.current());
     links.eq(0).click();
@@ -155,38 +155,6 @@ it("calendar should remove hover state from TD", function() {
     td.mouseleave();
 
     assert.isOk(!td.hasClass("k-state-hover"));
-});
-
-it("calendar should show hover state to the header elements", function() {
-    var cal = new Calendar(div);
-
-    var links = cal.element.find(".k-header").find(".k-link");
-
-    links.eq(0).mouseenter();
-    links.eq(1).mouseenter();
-    links.eq(2).mouseenter();
-
-    assert.isOk(links.eq(0).hasClass("k-state-hover"));
-    assert.isOk(links.eq(1).hasClass("k-state-hover"));
-    assert.isOk(links.eq(2).hasClass("k-state-hover"));
-});
-
-it("calendar should remove hover state to the header elements", function() {
-    var cal = new Calendar(div);
-
-    var links = cal.element.find(".k-header").find(".k-link");
-
-    links.eq(0).mouseenter();
-    links.eq(1).mouseenter();
-    links.eq(2).mouseenter();
-
-    links.eq(0).mouseleave();
-    links.eq(1).mouseleave();
-    links.eq(2).mouseleave();
-
-    assert.isOk(!links.eq(0).hasClass("k-state-hover"));
-    assert.isOk(!links.eq(1).hasClass("k-state-hover"));
-    assert.isOk(!links.eq(2).hasClass("k-state-hover"));
 });
 
 it("today link should have k-nav-today", function() {

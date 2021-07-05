@@ -4769,6 +4769,7 @@ declare namespace kendo.ui {
         isTrue?: string;
         or?: string;
         selectValue?: string;
+        buttonTitle?: string;
     }
 
     interface FilterMenuOperatorsDate {
@@ -5589,6 +5590,7 @@ declare namespace kendo.ui {
         unlock?: string;
         apply?: string;
         reset?: string;
+        buttonTitle?: string;
     }
 
     interface GridColumnMenu {

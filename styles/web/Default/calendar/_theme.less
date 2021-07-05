@@ -15,15 +15,6 @@
             @calendar-header-border
         );
         .composite-background(@calendar-header-gradient);
-
-        .k-link.k-state-hover when (@theme-name = material) {
-            color: inherit;
-            background-color: shade(@calendar-header-bg, 20);
-            box-shadow: none;
-        }
-        .k-nav-fast when (@theme-name = material) {
-            border-radius: 0;
-        }
     }
 
 
@@ -102,7 +93,7 @@
     }
 
     .k-footer .k-nav-today,
-    .k-calendar-header .k-today {
+    .k-calendar-header .k-nav-today {
         color: @link-text;
 
         &:hover,

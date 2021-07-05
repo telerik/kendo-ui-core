@@ -44,7 +44,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "unstick": "Unstick Column",
   "setColumnPosition": "Set Column Position",
   "apply": "Apply",
-  "reset": "Reset"
+  "reset": "Reset",
+  "buttonTitle": "{0} edit column settings"
 });
 }
 
@@ -273,7 +274,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "value": "Value",
   "cancel": "Cancel",
   "done": "Done",
-  "into": "in"
+  "into": "in",
+  "buttonTitle": "{0} filter column settings"
 });
 }
 
