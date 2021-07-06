@@ -34,11 +34,11 @@ The following example demonstrates how to define the Tooltip by using the Toolti
 The following example demonstrates the basic configuration of the Tooltip HtmlHelper.
 
 ```
-    <span id="tooltip" class="k-button wider">
-      <а href="#">Hover me</a>
-    </span>
+<span id="tooltip" class="k-button wider">
+    <a href="#">Hover me</a>
+</span>
 
-    @(Html.Kendo().Tooltip()
+@(Html.Kendo().Tooltip()
         .For("#tooltip")
         .Position(TooltipPosition.Top)
         .Content("Hello!")
@@ -47,6 +47,17 @@ The following example demonstrates the basic configuration of the Tooltip HtmlHe
         .Filter("a")
         .Events(events => events.Hide("onHide").Show("onShow"))
     )
+
+<script>
+
+    function onHide() {
+        // Hide Event function handler
+    }
+
+    function onShow() {
+        // Show Event function handler
+    }
+</script>
 ```
 
 ## Functionality and Features
