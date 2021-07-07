@@ -403,6 +403,13 @@ Defines the value type of the field.
 
 > **Note:** By default if a value is not provided the type will be **string**.
 
+The available dataType options are:
+* `"string"`
+* `"number"`
+* `"boolean"`
+* `"date"`
+* `"object"`
+
 #### Example - set the editorTemplate
 
     <div id="filter"></div>
