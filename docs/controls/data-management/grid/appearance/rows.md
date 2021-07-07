@@ -52,7 +52,8 @@ However, if your project requires you to avoid the `hover` state, use either of 
         }
       ```
 
-* Override the `hover` styling by using the CSS code from the following example. The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
+* Override the `hover` styling by using the CSS code from the following example (which utilizes Sass Bootstrap v.4 theme). The `#f1f1f1` value corresponds to the background color of the `.k-alt` table rows. To find the correct value for the Kendo UI theme that you are applying, use the DOM inspector of the browser. Alternatively, set a background color value of your preference.
+
 
     ```
     .k-grid tr:not(.k-state-selected):hover {
@@ -61,7 +62,7 @@ However, if your project requires you to avoid the `hover` state, use either of 
     }
 
     .k-grid tr.k-alt:not(.k-state-selected):hover {
-        background: #f1f1f1;
+        background: #f1f1f1; /* the color varies depending on the theme */
     }
     ```
 

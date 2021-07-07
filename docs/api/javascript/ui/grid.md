@@ -828,6 +828,41 @@ Can be set to a JavaScript object which specifies whether the column should be e
 
 If set to `false` the column will be excluded from the exported Excel file.
 
+#### Example - Exclude UnitsInStock column from the exported Excel file.
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      toolbar: ["excel"],
+      dataSource: {
+        type: "odata",
+        transport: {
+          read: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        },
+        schema:{
+          model: {
+            fields: {
+              UnitsInStock: { type: "number" },
+              ProductName: { type: "string" },
+              UnitPrice: { type: "number" },
+              UnitsOnOrder: { type: "number" },
+              UnitsInStock: { type: "number" }
+            }
+          }
+        },
+        pageSize: 20,
+      },
+      pageable: true,
+      height: 550,
+      columns: [
+        { field: "ProductName", title: "Product Name" },
+        { field: "UnitPrice", title: "Unit Price" },
+        { field: "UnitsOnOrder", title: "Units On Order" },
+        { field: "UnitsInStock", title: "Units In Stock", exportable: { excel: false} } //excluded from the export
+      ]
+    });
+</script>
+
 ### columns.exportable.pdf `Boolean` *(default: true)*
 
 If set to `false` the column will be excluded from the exported PDF file.

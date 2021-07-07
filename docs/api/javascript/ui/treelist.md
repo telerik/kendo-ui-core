@@ -183,7 +183,7 @@ The HTML attributes of the table cell (`<td>`) that is rendered for the column.
         color: red;
       }
     </style>
-    // The table cells look like `<td class="name-cell" style="text-align: right">...</td>`.
+    //The table cells look like `<td role="gridcell" class="highlight" style="text-align: right;">...</td>`.
 
 ### columns.columns `Array`
 
