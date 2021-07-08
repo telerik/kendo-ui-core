@@ -18,7 +18,7 @@ This article describes how to download and install Telerik UI for ASP.NET Core o
 * The Telerik UI for ASP.NET Core **Sample Application** distributed with the same package requires:
 
   * [.NET Core](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/install)
-  * [Visual Studio](https://www.visualstudio.com/downloads/) with completely installed `.NET Core cross-platform development` workload.
+  * [Visual Studio](https://www.visualstudio.com/downloads/) with completely installed `.NET Core cross-platform development` workload. See the Supported [Visual Studio Versions]({% slug visualstudiosupport_core %}).
 
 ## Download
 

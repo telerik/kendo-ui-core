@@ -27,7 +27,7 @@ An alternative approach is to use [NuGet]({% slug aspnetmvc_nuget %}) and to ins
 
    * [A current .NET Framework version](https://dotnet.microsoft.com/download/dotnet-framework)
    
-   * [Visual Studio](https://www.visualstudio.com/downloads/)
+   * [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later
    
    * Microsoft SQL Server Express LocalDB
 
