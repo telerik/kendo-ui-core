@@ -903,7 +903,7 @@ var __meta__ = { // jshint ignore:line
                     if (!listView.focus()) {
                         listView.focusLast();
                     } else {
-                        if (e.shiftKey) {
+                        if (e.shiftKey && !that.options.virtual) {
                             this._multipleSelection = true;
                             that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus().first()) + dir);
                         }
@@ -923,7 +923,7 @@ var __meta__ = { // jshint ignore:line
                     if (!listView.focus()) {
                         that.close();
                     } else {
-                        if (e.shiftKey) {
+                        if (e.shiftKey && !that.options.virtual) {
                             this._multipleSelection = true;
                             that._selectRange(activeItemIdx, listView.getElementIndex(listView.focus().first()) + dir);
                         }
@@ -981,7 +981,7 @@ var __meta__ = { // jshint ignore:line
                     that._change();
                 });
                 e.preventDefault();
-            } else if (key === keys.SPACEBAR && e.shiftKey && visible) {
+            } else if (key === keys.SPACEBAR && e.shiftKey && visible && !that.options.virtual) {
                 var activeIndex = listView.getElementIndex(that._getActiveItem());
                 var currentIndex = listView.getElementIndex(listView.focus());
 

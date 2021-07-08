@@ -11,7 +11,7 @@ position: 1
 
 The {{ site.product_long }} Visual Studio (VS) Extensions enhance the experience in developing MVC web applications with {{ site.product }}.
 The VS Extensions come with handy templates that ease the creation of new projects. They also help you to add {{ site.product_short }} to an existing project or to upgrade the {{ site.product_short }} version.
-The {{ site.product_short }} VS extensions support VS 2017 and 2019 and are distributed with the {{ site.product }} installer.
+The {{ site.product_short }} VS extensions support VS 2022, 2019 and 2017, and are distributed with the {{ site.product }} installer.
 
 ### Benefits
 

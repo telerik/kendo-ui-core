@@ -10,6 +10,14 @@ position: 1
 
 This article lists the breaking or important changes in the 2021 releases of Kendo UI.
 
+## Kendo UI 2021 R3
+
+> Important change
+
+**MultiSelect**
+
+As of the 2021 R3 release the MultiSelect in virtualization scenario will no longer support `Shift` + `Arrow` key selection as it is described in the [Keyboard navigation demo](https://demos.telerik.com/kendo-ui/multiselect/keyboard-navigation). That is because when going from one virtual page of MultiSelect items to another the items indexes are reused. As the range selection functionality relies on indexes, executing it via the `Shift` + `Arrow` combination may result in improper selection in the widget. That is why it has been disabled for virtualized MultiSelect widgets.
+
 ## Kendo UI 2021 R2 SP1
 
 > Important change
