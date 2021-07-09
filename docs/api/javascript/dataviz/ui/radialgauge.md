@@ -293,7 +293,7 @@ The font style of the labels.
 
 ### scale.labels.format `String`
 
-The format of the labels.
+The [`format`](/globalization/intl/numberformatting) of the labels.
 
 #### Example
 

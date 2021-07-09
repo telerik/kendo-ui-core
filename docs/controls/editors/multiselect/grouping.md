@@ -44,7 +44,8 @@ To enable grouping, use the remote `transport` configuration and a grouped DataS
 
 ## Customizing the Inline Group Title
 
-To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/grouptemplate) configuration. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value.
+To customize the inline group title which is displayed next to the suggestion item in the popup element, use the [`groupTemplate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect/configuration/grouptemplate) configuration. The inline group title is rendered as an absolutely positioned, right-aligned group element and is displayed in every first element of each new group. The parameter that is passed to the template is the group title value. 
+By design, the `groupTemplate` is not displayed for the first group as group hint is shown instead. 
 
 The following example demonstrates how to define a custom group template.
 

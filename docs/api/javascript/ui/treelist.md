@@ -5285,6 +5285,27 @@ Configures the Kendo UI TreeList search bar settings.
 
 Defines a list of fields which will be included in the search. If values for the property are not defined the treelist will search in all column fields.
 
+#### Example - specify which fields will be included in the search
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        toolbar:["search"],
+        search: {
+          fields: ["name"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
+        },
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+    </script>
+
 ### selectable `Boolean|String` *(default: false)*
 
 If set to `true`, the user will be able to select TreeList rows. By default, selection is disabled.

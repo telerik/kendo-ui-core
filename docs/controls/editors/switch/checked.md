@@ -27,6 +27,22 @@ The following example demonstrates how to initialize a checked Switch by using t
                 checked: true
             });
     </script>
+	
+The following example demonstrates how to get or set the Switch checked state.
+
+	<input id="switch" />
+
+	<script>
+		var switchInstance = $("#switch").kendoSwitch().data("kendoSwitch");
+		//get the Switch checked state
+		console.log("Is Swicth checked?: " + switchInstance.check());
+	
+		//set the Switch checked state
+		switchInstance.check(true);
+	
+		//get the Switch checked state
+		console.log("Is Swicth checked?: " + switchInstance.check());
+	</script>
 
 ## See Also
 

@@ -1490,6 +1490,7 @@ The node whose the checkbox has been checked.
       check: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Checking", e.node);
+		console.log("Is node checked -> " + $(e.node).attr("aria-checked"))
       }
     });
     </script>
