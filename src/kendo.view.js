@@ -75,6 +75,7 @@ var __meta__ = { // jshint ignore:line
             that.model = options.model;
             that._wrap = options.wrap !== false;
             this._evalTemplate = options.evalTemplate || false;
+            this._useWithBlock = options.useWithBlock;
             that._fragments = {};
 
             that.bind([ INIT, SHOW, HIDE, TRANSITION_START, TRANSITION_END ], options);
@@ -213,11 +214,11 @@ var __meta__ = { // jshint ignore:line
                     content = that.content;
                 }
             }
-
+            
             if (typeof content === "string") {
                 content = content.replace(/^\s+|\s+$/g, '');
                 if (that._evalTemplate) {
-                    content = kendo.template(content)(that.model || {});
+                    content = kendo.template(content, { useWithBlock: that._useWithBlock })(that.model || {});
                 }
 
                 element = $(wrapper).append(content);
@@ -232,7 +233,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 element = content;
                 if (that._evalTemplate) {
-                    var result = $(kendo.template($("<div />").append(element.clone(true)).html())(that.model || {}));
+                    var result = $(kendo.template($("<div />").append(element.clone(true)).html(), { useWithBlock: that._useWithBlock })(that.model || {}));
 
                     // template uses DOM
                     if ($.contains(document, element[0])) {
