@@ -53,6 +53,8 @@ A few requirements need to be met when the `rowTemplate` is used alongside a `de
 1. The first `<td>` element of the `rowTemplate` needs to have a class `k-hierarchy-cell`.
 1. The element with class `k-hierarchy-cell` needs to contain an `a` element which will expand the row.
 
+**Define the `rowTemplate` as an external template.**
+
 ```dojo
     <script id="template" type="text/x-kendo-template">
         <tr class="k-master-row" data-uid="#= uid #">
@@ -90,6 +92,38 @@ A few requirements need to be met when the `rowTemplate` is used alongside a `de
       detailTemplate: kendo.template($("#detail-template").html()),
       rowTemplate: kendo.template($("#template").html())
     });
+    </script>
+```
+
+**Define the `rowTemplate` as a function.**
+
+```dojo
+    <script id="detail-template" type="text/x-kendo-template">
+      <div>
+        Name: #: name #
+      </div>
+      <div>
+        Age: #: age #
+      </div>
+    </script>
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        detailTemplate: kendo.template($("#detail-template").html()),
+        rowTemplate: rowTemplate
+      });
+      
+      function rowTemplate(data) {
+        return '<tr class="k-master-row" data-uid="' + data.uid + '"><td class="k-hierarchy-cell"><a class="k-icon k-i-expand" href="\#" aria-label="Expand"></a></td><td><strong>' + data.name + '</strong></td><td><strong>' + data.age + '</strong></td></tr>';
+      }
     </script>
 ```
 

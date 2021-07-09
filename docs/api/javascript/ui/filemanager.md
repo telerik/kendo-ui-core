@@ -1411,6 +1411,26 @@ The options of the command.
 
 Fired when a error in the DataSource happen.
 
+#### Example
+
+	<div id="filemanager"></div>  
+    <script>        
+        $("#filemanager").kendoFileManager({
+          dataSource: {
+            schema: kendo.data.schemas.filemanager,
+            transport: {
+              read: {
+                url: "https://demos.telerik.com/kendo-ui/service/FileManager/Read",
+                method: "POST"
+              }
+            }
+          },
+          error: function(e) {            
+            console.log("Request failed with status " + e.status)
+          }            	
+        });
+    </script>
+
 ### dataBinding
 
 Fired before the widget binds to its data source.

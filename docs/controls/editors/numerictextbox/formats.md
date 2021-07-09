@@ -8,7 +8,7 @@ position: 2
 
 # Formats
 
-The NumericTextBox accepts only numeric entries and its specific format defines the conversion data type&mdash;for example, currency or percentage.
+The NumericTextBox accepts only numeric entries and its specific [`format`](/globalization/intl/numberformatting) defines the conversion data type&mdash;for example, currency or percentage.
 
 The following example demonstrates how to render a currency NumericTextBox.
 
