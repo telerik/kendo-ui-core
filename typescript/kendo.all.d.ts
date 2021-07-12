@@ -345,6 +345,7 @@ declare namespace kendo {
         wrap?: boolean;
         model?: Object;
         evalTemplate?: boolean;
+        useWithBlock?: boolean;
         init?: (e: ViewEvent) => void;
         show?: (e: ViewEvent) => void;
         hide?: (e: ViewEvent) => void;

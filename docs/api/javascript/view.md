@@ -25,6 +25,22 @@ If set to `true`, the view template will be treated as kendo template and evalua
      view.render($("#app"));
     </script>
 
+### useWithBlock `Boolean`*(default: true)*
+
+If set to `false` and evalTemplate is set to `true`, the kendo template will be evaluated without using a `with` block.
+
+#### Example
+
+    <div id="app"></div>
+    <script id="foo-template" type="text/x-kendo-template">
+        <span>#: data.foo #</span> <!-- "data." is required as there is no with block -->
+    </script>
+    <script>
+     var foo = { foo: "foo" }
+     var view = new kendo.View('foo-template', { model: foo, evalTemplate: true });
+     view.render($("#app"));
+    </script>
+
 ### model `ObservableObject`*(default: null)*
 
 The MVVM model to bind the element to.
