@@ -11,6 +11,14 @@ position: 7
 
 Depending on your project, you may need to skip some of the Kendo UI utilities and install only what your application requires.  
 
+To facilitate the customization of your project, Kendo UI for jQuery delivers a set of combined and individual scripts, and also provides further options for scripts customization.
+
+* The [combined scripts bundles](#combined-scripts) contain the scripts of specific types of widgets (for example, desktop, hybrid) available for the different Kendo UI distributions.
+
+* The [individual scripts bundles](#individual-scripts) contain the scripts of widgets grouped by their common functionality (for example, Charts, Editors) so that you can select which individual control to add to your project.  
+
+* You can also further [customize your project by creating your custom scripts](#custom-scripts) which will add the specific widgets and features of your project requirements.  
+
 ## Combined Scripts
 
 To facilitate the common project types, Kendo UI ships the following combined scripts in the bundles or on CDN:
@@ -18,11 +26,11 @@ To facilitate the common project types, Kendo UI ships the following combined sc
 *  The `kendo.ui.core.min.js` contains all widgets supported by the [Kendo UI Core distribution]({% slug welcometo_kendoui %}#list-of-widgets). The relevant script is available in the Kendo UI Core package as well.
 *  The `kendo.all.min.js` contains a minified version of all features provided by Kendo UI.
 
-  > The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](https://www.telerik.com/download/custom-download).
+  > The `kendo.all.min.js` is available in the Kendo UI Professional, Telerik UI for ASP.NET MVC, Telerik UI for ASP.NET Core, Telerik UI for JSP and Telerik UI for PHP bundles. However, the `kendo.all.min.js` does not include the `kendo.aspnetmvc.min.js`. To install it, add `kendo.aspnetmvc.min.js` to `kendo.all.min.js`, or use the [custom download builder tool](https://www.telerik.com/download/custom-download).
 
-* The `kendo.web.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all desktop browser widgets (previously distributed as Kendo UI Web).
-* The `kendo.dataviz.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all data visualization widgets (previously distributed as Kendo UI DataViz).
-* The `kendo.mobile.min.js` is available in Kendo UI Professional, JSP, PHP, and MVC. It includes the core framework and all mobile device specific widgets (previously distributed as Kendo UI Mobile).
+* The `kendo.web.min.js` includes the core framework and all desktop browser widgets (previously distributed as Kendo UI Web). It is available in Kendo UI Professional, JSP, PHP, MVC and Core.  
+* The `kendo.dataviz.min.js` includes the core framework and all data visualization widgets (previously distributed as Kendo UI DataViz). It is available in Kendo UI Professional, JSP, PHP, MVC and Core.
+* The `kendo.mobile.min.js` includes the core framework and all mobile device specific widgets (previously distributed as Kendo UI Mobile). It is available in Kendo UI Professional, JSP, PHP, MVC and Core.
 
     > Only one of the combined JavaScript files can be included at a time, because they include the Kendo UI framework. To simultaneously use widgets from different Kendo UI suites, use the `kendo.all.min.js` or build a custom script.
 
@@ -32,7 +40,7 @@ To facilitate the common project types, Kendo UI ships the following combined sc
 
 ## Individual Scripts
 
-The following list provides the references to the script files which, whether minified or not and depending on your project, can be included on a per-widget basis.
+The following list provides the references to the script files which, whether minified or not, and depending on your project, can be included on a per-widget basis.
 
 + [List of Kendo UI widgets in terms of their bundle support]({% slug welcometo_kendoui %}#list-of-widgets)
 + [Script Files for Data Management]({% slug script_filesfor_datamanagement_widgets %})

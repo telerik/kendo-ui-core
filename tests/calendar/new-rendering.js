@@ -45,7 +45,7 @@
                 componentType: 'modern'
             });
 
-            assert.equal(cal.element.find(".k-calendar-header .k-today").length, 1);
+            assert.equal(cal.element.find(".k-calendar-header .k-nav-today").length, 1);
         });
 
         it("calendar should not create a footer when componentType is set to modern", function () {
@@ -90,6 +90,35 @@
             var cal = new Calendar(div);
 
             assert.equal(cal.element.find(".k-calendar-content").length, 0);
+        });
+
+        it("calendar should disable today link when todays date is disabled", function () {
+            var cal = new Calendar(div, {
+                componentType: "modern",
+                value: new Date("2/7/2021"),
+                dates: [
+                    new Date(),
+                ],
+                disableDates: function (date) {
+                    function compareDates(date, dates) {
+                        for (var i = 0; i < dates.length; i++) {
+                            if (dates[i].getDate() == date.getDate() &&
+                                dates[i].getMonth() == date.getMonth() &&
+                                dates[i].getYear() == date.getYear()) {
+                            return true
+                            }
+                        }
+                    }
+                    var dates = div.data("kendoCalendar").options.dates;
+                    if (date && compareDates(date, dates)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            });
+
+            assert.isTrue(cal._today.is('.k-state-disabled'));
         });
     });
 }());

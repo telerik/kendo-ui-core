@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Grid Documentation | Grouping Overview | Kendo UI
+page_title: jQuery Grid Documentation | Grouping Overview
 description: "Get started with the jQuery Grid by Kendo UI packed with features such as sorting, grouping, paging, editing and more."
 slug: grouping_kendoui_grid_widget
 position: 1
@@ -30,6 +30,8 @@ To sort the grouped content, click the grouping tab. To toggle the sort order of
 **Figure 2: A Grid with its data grouped by last name**
 
 ![Grid Grouped by Last Name](../grid6_1.png)
+
+> Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/kendo-ui/knowledge-base/enable-operations-for-object-column).
 
 ## Using with Row Templates
 

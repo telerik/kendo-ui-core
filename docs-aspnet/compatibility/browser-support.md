@@ -20,11 +20,13 @@ Most [Telerik UI for ASP.NET Core helpers]({% slug overview_aspnetmvc6_aspnetmvc
 | BROWSER           | SUPPORTED VERSIONS            | LIMITATIONS
 | :---------------- | :---------------------------- | :---------------
 | Edge              | 20 or later ([officially supported versions by Microsoft only](https://en.wikipedia.org/wiki/Microsoft_Edge#Release_history)) |
-| Internet Explorer | 9 or later                    |
+| Internet Explorer* | 9 or later                    |
 | Chrome            | Current and previous          |
 | Firefox           | [Current and ESR releases](https://en.wikipedia.org/wiki/History_of_Firefox#Release_history) ([What is ESR?](https://www.mozilla.org/en-US/firefox/organizations/faq/))|
 | Opera             | 15 or later                   |
 | OS X Safari       | [6.2.6 or later](https://en.wikipedia.org/wiki/Safari_version_history#Mac)|
+
+*\* some features may not be available due to browser limitations* 
 
 ## Support for Data Visualizing Helpers
 
@@ -80,7 +82,7 @@ To boost the performance of your project:
     > Always specify a [DOCTYPE](http://www.sitepoint.com/web-foundations/doctypes/). Recommended DOCTYPEs include `HTML5`, `XHTML 1.1`, `XHTML 1.0 Strict` and `HTML4 Strict`. The `HTML4 Transitional` DOCTYPE fires the Quirks mode and should not be used. `XHTML 1.0 Transitional` works well in most cases, but may cause issues with the vertical positioning of icons. The correct syntax for [all DOCTYPEs](http://www.w3.org/QA/2002/04/valid-dtd-list.html) is provided on the [W3C website](http://www.w3.org/).
 
 * Internet Explorer compatibility modes are not supported. These modes can exhibit different behavior and rendering bugs as compared to the browser versions they emulate.
-* It is highly advisable to use [Internet Explorer Edge mode](http://blogs.msdn.com/b/ie/archive/2010/06/16/ie-s-compatibility-features-for-site-developers.aspx) over a META tag or an HTTP header:
+* It is highly advisable to use [Internet Explorer Edge mode](https://docs.microsoft.com/en-us/internet-explorer/ie11-deploy-guide/tips-and-tricks-to-manage-ie-compatibility) over a META tag or an HTTP header:
 
     ```
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />

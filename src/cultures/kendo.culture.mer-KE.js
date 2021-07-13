@@ -37,8 +37,8 @@
                     names: ["Januarĩ","Feburuarĩ","Machi","Ĩpurũ","Mĩĩ","Njuni","Njuraĩ","Agasti","Septemba","Oktũba","Novemba","Dicemba"],
                     namesAbbr: ["JAN","FEB","MAC","ĨPU","MĨĨ","NJU","NJR","AGA","SPT","OKT","NOV","DEC"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["RŨ","rũ","RŨ"],
+                PM: ["ŨG","ũg","ŨG"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

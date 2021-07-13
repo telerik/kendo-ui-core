@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Window Documentation | Window Globalization | Kendo UI
+page_title: jQuery Window Documentation | Window Globalization
 description: "Get started with the jQuery Window by Kendo UI and learn about the globalization options it supports."
 slug: globalization_window
 position: 1

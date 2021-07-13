@@ -487,6 +487,45 @@ Determines the height of the layout. Numeric values are treated as pixels.
     });
     </script>
 
+### navigatable `Boolean` *(default: false)*
+
+A value indicating whether keyboard navigation will be enabled.
+
+> **Note:** When [`reorderable`](/api/javascript/ui/tilelayout/configuration/reorderable) is enabled after reordering the items the DOM are also reordered.
+
+#### Example - enable the keyboard navigation
+    <script id="first" type="text/x-kendo-template">
+    <h3>A</h3>
+    </script>
+    <script id="second" type="text/x-kendo-template">
+        <h3>B</h3>
+    </script>
+    <div id="tilelayout"></div>
+    <script>
+    $("#tilelayout").kendoTileLayout({
+        containers: [
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                header: {
+                    text: "Item one"
+                },
+                bodyTemplate: kendo.template($("#first").html())
+            },
+            {
+                colSpan: 1,
+                rowSpan: 1,
+                header: {
+                    text: "Item two"
+                },
+                bodyTemplate: kendo.template($("#second").html())
+            }
+        ],
+        navigatable: true,
+        columns: 4
+    });
+    </script>
+
 ### reorderable `Boolean` *(default: false)*
 
 Determines whether the reordering functionality will be enabled.
@@ -682,6 +721,7 @@ The widget instance which fired the event.
         columns: 4,
         resizable: true,
         resize: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.container[0]);
         }
     });
@@ -740,6 +780,7 @@ The widget instance which fired the event.
         columns: 4,
         reorderable: true,
         reorder: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(e.newIndex, e.oldIndex);
         }
     });

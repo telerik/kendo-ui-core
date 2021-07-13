@@ -30,6 +30,197 @@ CRUD operations are also handled in a specific way:
 * Deleting rows translates into destroy operations.
 * Inserting and removing columns is not supported.
 
+{% if site.core %}
+## Data Source Binding in Razor Page scenario
+
+In order to set up the Data Source Binding of the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }} component in Razor page scenario, the above mentioned requrements are still valid. You will, however, need to configure the `read` and `submit` transport options to send requests to the respective handler in the PageModel. When handling the `submit` action you will need to also send the antiforgery token. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+
+```tab-RazorPage(csthml)
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <div class="box-col">
+        <h4>Save data changes</h4>
+        <div>
+            <button id="save">Save changes</button>
+            <button id="cancel">Cancel changes</button>
+        </div>
+    </div>
+
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Events(e => e
+                .DataBinding("onDataBinding")
+                .DataBound("onDataBound")
+            )
+        .Sheets(s => s.Add()
+            .Name("Sheet1")
+            .DataSource<Product>(ds => ds
+                .Custom()
+                .Batch(true)
+                .Transport(t => t
+                    .Read("onRead")
+                    .Submit("onSubmit")
+                )
+                .Events(e => e.Change("onChange"))
+                .Schema(sch => sch
+                    .Model(m =>
+                    {
+                        m.Id(i => i.ProductID);
+                    })
+                )
+            )
+            .Columns(columns=>{
+                columns.Add().Width(100);
+                columns.Add().Width(100);
+                columns.Add().Width(200);
+            })
+            .Rows(rows =>
+            {
+                rows.Add().Height(40).Cells(cells =>
+                {
+                    cells.Add()
+                        .Bold(true)
+                        .Background("#9c27b0")
+                        .TextAlign(SpreadsheetTextAlign.Center)
+                        .Color("white");
+                    cells.Add()
+                        .Bold(true)
+                        .Background("#9c27b0")
+                        .TextAlign(SpreadsheetTextAlign.Center)
+                        .Color("white");
+                    cells.Add()
+                        .Bold(true)
+                        .Background("#9c27b0")
+                        .TextAlign(SpreadsheetTextAlign.Center)
+                        .Color("white");
+                });
+            })
+            )
+        )
+
+    <script>
+        function onSubmit(e) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Page("SpreadsheetDataSourceBinding", "Data_Source_Products_Submit")',
+                data: {
+                    model: e.data,
+                    __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken
+                },
+                dataType: "json",
+                success: function (result) {
+                    e.success(result.Updated, "update");
+                    e.success(result.Created, "create");
+                    e.success(result.Destroyed, "destroy");
+                },
+                error: function (xhr, httpStatusMessage, customErrorMessage) {
+                    alert(xhr.responseText);
+                }
+            });
+        }
+
+        function onRead(options) {
+            $.ajax({
+                url: '@Url.Page("SpreadsheetDataSourceBinding", "Data_Source_Products_Read")',
+                dataType: "json",
+                success: function (result) {
+                    options.success(result.Data);
+                },
+                error: function (result) {
+                    options.error(result);
+                }
+            });
+        }
+
+        function onChange(e) {
+            $("#cancel, #save").toggleClass("k-state-disabled", !this.hasChanges());
+        }
+
+        function getDataSource() {
+            return $("#spreadsheet").data("kendoSpreadsheet").activeSheet().dataSource;
+        }
+
+        function onDataBinding(e) {
+            console.log('Data is about to be bound to sheet "' + e.sheet.name() + '".');
+        }
+
+        function onDataBound(e) {
+            console.log('Data has been bound to sheet "' + e.sheet.name() + '".');
+        }
+
+        $(document).ready( function () {
+            $("#save").click(function () {
+                if (!$(this).hasClass("k-state-disabled")) {
+                    getDataSource().sync();
+                }
+            });
+
+            $("#cancel").click(function () {
+                if (!$(this).hasClass("k-state-disabled")) {
+                    getDataSource().cancelChanges();
+                }
+            });
+        })
+    </script>
+```
+```tab-PageModel(cshtml.cs)
+    public JsonResult OnGetData_Source_Products_Read([DataSourceRequest] DataSourceRequest request)
+    {
+        return new JsonResult(SpreadData.ToDataSourceResult(request));
+    }
+
+    public ActionResult OnPostData_Source_Products_Submit(SpreadsheetSubmitViewModel model)
+    {
+        var result = new SpreadsheetSubmitViewModel()
+        {
+            Created = new List<Product>(),
+            Updated = new List<Product>(),
+            Destroyed = new List<Product>()
+        };
+
+        if ((model.Created != null || model.Updated != null || model.Destroyed != null) && ModelState.IsValid)
+        {
+            if (model.Created != null)
+            {
+                foreach (var created in model.Created)
+                {
+                    SpreadData.Add(created);
+                    result.Created.Add(created);
+                }
+            }
+
+            if (model.Updated != null)
+            {
+                foreach (var updated in model.Updated)
+                {
+                    var target = SpreadData.FirstOrDefault(x=>x.ProductID == updated.ProductID);
+                    target = updated;
+                    result.Updated.Add(updated);
+                }
+            }
+
+            if (model.Destroyed != null)
+            {
+                foreach (var destroyed in model.Destroyed)
+                {
+                    var target = SpreadData.FirstOrDefault(x => x.ProductID == destroyed.ProductID);
+                    SpreadData.Remove(target);
+                    result.Destroyed.Add(destroyed);
+                }
+            }
+
+            return new JsonResult(result);
+        }
+        else
+        {
+            return StatusCode(400, "The models contain invalid property values.");
+        }
+    }
+```
+
+{% endif %}
+
 ## Unsupported Scenarios
 
 * The Sheet cannot be bound to a source which does not contain any items because the header row in the sheet is generated based on the data items fields.

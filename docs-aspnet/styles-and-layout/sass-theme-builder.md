@@ -65,7 +65,7 @@ To customize an existing theme, use the following Sass Theme Builder features:
 1. Color swatches&mdash;Contains predefined color palettes that you can apply to all components in your application.
 1. Default&mdash;Provides the applicable color customization options.
 1. Selected Components&mdash;List of components to include in the preview and the final CSS bundle.
-1. Download&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme.
+1. Download&mdash;Downloads the archive that holds the generated style files after the customization completes. When you click the button, a dialog appears and prompts you to name your theme. The archive contains a css, scss and a json file. The json file contains information on the modified variables of the customized theme.
 
 **Figure 3: Available options for customization**
 
@@ -74,8 +74,14 @@ To customize an existing theme, use the following Sass Theme Builder features:
 To upload an existing theme you have previously created:
 
 1. On the initial Sass Theme Builder pane, select **Import Theme**.
-1. Upload the `variables.scss` file which contains your current modifications of the customized theme. As a result, the selected components and styling elements load.
+1. Upload the `MyThemeName.json` file which contains information on the modified variables of the customized theme. As a result, the selected components and styling elements load.
 1. Start customizing your theme.
+
+> Previous version of the Sass Theme Builder required the upload of the `variables.scss` file which contains the modifications of the customized theme. If you need to customize a theme generated with a previous version of the Sass Theme Builder, you can:
+
+> * Download a theme from the new version,
+> * Update the generated json with the variable values from your scss file and 
+> * Upload the json to the Sass Theme Builder to continue customization.
 
 **Figure 4: Importing themes for customization**
 

@@ -42,6 +42,7 @@ TESTS.beforeTestFiles.push('src/angular.js');
 TESTS.beforeTestFiles.push('tests/angular-route.js');
 TESTS.beforeTestFiles.push('tests/jasmine.js');
 TESTS.beforeTestFiles.push('tests/jasmine-boot.js');
+TESTS.beforeTestFiles.push('node_modules/axe-core/axe.js');
 
 var defaultOptions = {
     reportSlowerThan: 500,

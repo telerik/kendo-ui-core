@@ -699,6 +699,7 @@ Fires when the selected date is changed.
         $("#calendar").kendoCalendar({
             change: function() {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value); //value is the selected date in the calendar
             }
         });
@@ -714,6 +715,7 @@ Fires when the selected date is changed.
 
         calendar.bind("change", function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the calendar
         });
     </script>
@@ -729,9 +731,11 @@ Fires when calendar navigates.
         $("#calendar").kendoCalendar({
             navigate: function() {
                 var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(view.name); //name of the current view
 
                 var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(current); //currently focused date
             }
         });
@@ -747,9 +751,11 @@ Fires when calendar navigates.
 
         calendar.bind("navigate", function() {
             var view = this.view();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(view.name); //name of the current view
 
             var current = this.current();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(current); //currently focused date
         });
     </script>

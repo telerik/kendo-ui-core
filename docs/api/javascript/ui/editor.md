@@ -63,6 +63,7 @@ Indicates whether the Editor should submit encoded HTML tags. By default, the su
       value: "<p>foo</p>",
       encoded: false
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").val()); // logs "<p>foo</p>"
     </script>
 
@@ -470,6 +471,51 @@ The title of the tool that aligns the cell text.
     $("#editor").kendoEditor({
       messages: {
         alignRightTop: "Align Right Top"
+      }
+    });
+    </script>
+
+### messages.tableAlignLeft `String` *(default: 'Table Align Left')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignLeft: "Table Align Left"
+      }
+    });
+    </script>
+
+### messages.tableAlignCenter `String` *(default: 'Table Align Center')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignCenter: "Table Align Center"
+      }
+    });
+    </script>
+
+### messages.tableAlignRight `String` *(default: 'Table Align Right')*
+
+The title of the tool that aligns the table.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        tableAlignRight: "Table Align Right"
       }
     });
     </script>
@@ -1209,6 +1255,36 @@ The title of the tool that inserts an unordered list.
     });
     </script>
 
+### messages.insertUpperRomanList `String` *(default: "Insert upper roman list")*
+
+The title of the tool that inserts an upper roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertUpperRomanList: "Insert upper roman list"
+      }
+    });
+    </script>
+
+### messages.insertLowerRomanList `String` *(default: "Insert lower roman list")*
+
+The title of the tool that inserts an lower roman list.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        insertLowerRomanList: "Insert lower roman list"
+      }
+    });
+    </script>
+
 ### messages.italic `String` *(default: "Italic")*
 
 The title of the tool that makes text italicized.
@@ -1779,6 +1855,12 @@ The author of the PDF document.
         });
     </script>
 
+
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -1836,6 +1918,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/editor#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -2137,6 +2227,7 @@ Indicates whether the characters outside the ASCII range will be encoded as HTML
         entities: true
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
     </script>
 
@@ -2157,6 +2248,7 @@ Indicates whether inline scripts will be serialized and posted to the server.
         scripts: true
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // log will contain the script tag
     </script>
 
@@ -2175,6 +2267,7 @@ or as presentational (b / i / u / font) tags. Used for outputting content for le
         semantic: false
       }
     });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log($("#editor").data("kendoEditor").value()); // logs "Check out <i>this</i> <b>kata</b>.",
     </script>
 
@@ -4352,6 +4445,7 @@ Gets the HTML encoded value of the editor.
     <script>
     $("#editor").kendoEditor({ value: "<p>foo</p>" });
     var editor = $("#editor").data("kendoEditor");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.encodedValue()); // logs "&lt;p&gt;foo&lt;/p&gt;"
     </script>
 
@@ -4410,6 +4504,7 @@ Gets a **Range** object form the editable area.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     var range = editor.getRange();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(range);
     </script>
 
@@ -4428,6 +4523,7 @@ Gets a W3C-compatible **Selection** object form the editable area.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     var selection = editor.getSelection();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(selection);
     </script>
 
@@ -4570,8 +4666,10 @@ This method should be called after modifying the editor content through the DOM.
     textarea.kendoEditor({ value: "Hello, " });
     var editor = textarea.data("kendoEditor");
     editor.body.appendChild(editor.document.createTextNode("World"));
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(textarea.val()); // logs "Hello, "
     editor.update();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(textarea.val()); // logs "Hello, World"
     </script>
 
@@ -4599,7 +4697,9 @@ The name of the tool that will be tested if formatted.
     var range = editor.createRange();
     range.selectNodeContents(editor.body.firstChild);
     editor.selectRange(range);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.state("italic")); // logs true
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.state("bold")); // logs false
     </script>
 
@@ -4624,6 +4724,7 @@ The value to set.
     $("#editor").kendoEditor();
     var editor = $("#editor").data("kendoEditor");
     editor.value("<p>New content</p>");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(editor.value()); // logs "<p>New content</p>"
     </script>
 
@@ -4639,6 +4740,7 @@ Fires when Editor is blurred and its content has changed.
     <script>
     $("#editor").kendoEditor({
       change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(this.value());
       }
     });
@@ -4649,6 +4751,7 @@ Fires when Editor is blurred and its content has changed.
     <textarea id="editor"></textarea>
     <script>
     function editor_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(this.value());
     }
     $("#editor").kendoEditor();
@@ -4676,6 +4779,7 @@ The command instance
     <script>
     $("#editor").kendoEditor({
       execute: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("executing command", e.name, e.command);
       }
     });
@@ -4686,6 +4790,7 @@ The command instance
     <textarea id="editor"></textarea>
     <script>
     function editor_execute(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("executing command", e.name, e.command);
     }
     $("#editor").kendoEditor();
@@ -4703,6 +4808,7 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
     <script>
     $("#editor").kendoEditor({
       keydown: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("keydown : keyCode=",e.keyCode);
       }
     });
@@ -4713,6 +4819,7 @@ Fires when the user depresses a keyboard key. Triggered multiple times if the us
     <textarea id="editor"></textarea>
     <script>
     function editor_keydown(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("keydown : keyCode=", e.keyCode);
     }
     $("#editor").kendoEditor();
@@ -4730,6 +4837,7 @@ Fires when the user releases a keyboard key.
     <script>
     $("#editor").kendoEditor({
       keyup: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("keyup : keyCode=",e.keyCode);
       }
     });
@@ -4740,6 +4848,7 @@ Fires when the user releases a keyboard key.
     <textarea id="editor"></textarea>
     <script>
     function editor_keyup(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("keyup : keyCode=",e.keyCode);
     }
     $("#editor").kendoEditor();
@@ -4781,6 +4890,7 @@ The pasted content
     <script>
     $("#editor").kendoEditor({
       paste: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.html);
       }
     });
@@ -4791,6 +4901,7 @@ The pasted content
     <textarea id="editor"></textarea>
     <script>
     function editor_paste(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(e.html);
     }
     $("#editor").kendoEditor();
@@ -4834,6 +4945,7 @@ A promise that will be resolved when the export completes.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+	    tools: ["pdf"],
       pdfExport: function(e) {
       }
     });
@@ -4845,7 +4957,9 @@ A promise that will be resolved when the export completes.
     <script>
     function onEditorExport(e) {
     }
-    $("#editor").kendoEditor();
+    $("#editor").kendoEditor({
+		   tools: ["pdf"]
+	  });
     var editor = $("#editor").data("kendoEditor");
     editor.bind("pdfExport", onEditorExport);
     </script>

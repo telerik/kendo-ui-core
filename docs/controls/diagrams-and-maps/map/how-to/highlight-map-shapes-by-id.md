@@ -21,7 +21,7 @@ The following example demonstrates how to highlight the Map shapes by a specifie
             dataSource: {
               type: "geojson",
               transport: {
-                read: "http://output.jsbin.com/zuguhajiye.js"
+                read: "https://output.jsbin.com/zuguhajiye.js"
               }
             },
             style: {

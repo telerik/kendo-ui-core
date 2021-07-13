@@ -1748,5 +1748,267 @@
             }, "page");
         });
 
+        it("group method should reset the page when new group is added/removed and group paging is enabled", function() {
+            var data = [{ age: 1 }, { age: 3 }, { age: 1 }];
+
+            var dataSource = new DataSource({
+                data: data,
+                page: 1,
+                pageSize: 2,
+                groupPaging: true
+            });
+            dataSource.read();
+            dataSource.page(2);
+            dataSource.group({ field: "age" });
+
+            assert.equal(dataSource.page(), 1);
+        });
+
+        it("_findGroupedRange should call _fetchGroupItems when proccessing a group with enabled server operations", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            var result = [];
+            dataSource.read();
+            dataSource._groupsState[dataSource._ranges[0].data[0].uid] = true;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                _fetchGroupItems: function(){return true},
+                getGroupItems: $.noop
+            });
+
+            dataSource._findGroupedRange(dataSource._ranges[0].data, result, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 10
+            });
+
+            assert.equal(dataSourceStub.calls("_fetchGroupItems"), 1);
+        });
+
+        it("_fetchGroupItems should call getGroupItems when group items are not fetched", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            group.items = null;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                getGroupItems: $.noop
+            });
+            dataSource._fetchGroupItems(group, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 10
+            });
+
+            assert.equal(dataSourceStub.calls("getGroupItems"), 1);
+        });
+
+        it("_fetchGroupItems should call getGroupItems when a group item is not yet fetched", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            group.items[0].notFetched = true;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                getGroupItems: $.noop
+            });
+            dataSource._fetchGroupItems(group, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 3
+            });
+
+            assert.equal(dataSourceStub.calls("getGroupItems"), 1);
+        });
+
+        it("_fetchGroupItems should call _expandedSubGroupItemsCount", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            group.items[0].notFetched = true;
+
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                },
+                getGroupItems: $.noop,
+                _expandedSubGroupItemsCount: function () {
+                    return 0;
+                }
+            });
+            dataSource._fetchGroupItems(group, {
+                skip: 0,
+                skipped: 0,
+                taken: 0,
+                take: 3
+            });
+
+            assert.equal(dataSourceStub.calls("_expandedSubGroupItemsCount"), 1);
+        });
+
+        it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            var data = new kendo.data.ObservableArray([
+                { 
+                    field: "foo", 
+                    value: "boo", 
+                    hasSubgroups: true,
+                    subgroupCount: 1,
+                    items: [
+                        { 
+                            field: "boo", 
+                            value: "foo", 
+                            hasSubgroups: true,
+                            subgroupCount:1,
+                            items: [
+                                { 
+                                    field: "moo", 
+                                    value: "voo", 
+                                    hasSubgroups: false,
+                                    items: [
+                                        {name: 'foo'}
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]);
+
+            dataSource._groupsState[data[0].uid] = true;
+            dataSource._groupsState[data[0].items[0].uid] = true;
+            dataSource._groupsState[data[0].items[0].items[0].uid] = true;
+
+            var result = dataSource._expandedSubGroupItemsCount(data[0], 1);
+
+            assert.equal(result, 2);
+        });
+
+        it("_expandedSubGroupItemsCount returns the correct count of expanded subgroups when there are expanded subgroups which are not part of the current sub range", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                group: {
+                    field: 'ShipAddress'
+                },
+                groupPaging: true
+            });
+            var data = new kendo.data.ObservableArray([
+                { 
+                    field: "foo", 
+                    value: "boo", 
+                    hasSubgroups: true,
+                    subgroupCount: 1,
+                    items: [
+                        { 
+                            field: "boo", 
+                            value: "foo", 
+                            hasSubgroups: true,
+                            subgroupCount:1,
+                            items: [
+                                { 
+                                    field: "moo", 
+                                    value: "voo", 
+                                    hasSubgroups: false,
+                                    items: [
+                                        {name: 'foo'}
+                                    ]
+                                }
+                            ]
+                        },
+                        { 
+                            field: "boo", 
+                            value: "foo", 
+                            hasSubgroups: true,
+                            subgroupCount:1,
+                            items: [
+                                { 
+                                    field: "moo", 
+                                    value: "voo", 
+                                    hasSubgroups: false,
+                                    items: [
+                                        {name: 'foo'}
+                                    ]
+                                }
+                            ]
+                        },
+                        { 
+                            field: "boo", 
+                            value: "foo", 
+                            hasSubgroups: true,
+                            subgroupCount:1,
+                            items: [
+                                { 
+                                    field: "moo", 
+                                    value: "voo", 
+                                    hasSubgroups: false,
+                                    items: [
+                                        {name: 'foo'}
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]);
+
+            dataSource._groupsState[data[0].uid] = true;
+            dataSource._groupsState[data[0].items[0].uid] = true;
+            dataSource._groupsState[data[0].items[0].items[0].uid] = true;
+            dataSource._groupsState[data[0].items[1].uid] = true;
+            dataSource._groupsState[data[0].items[1].items[0].uid] = true;
+            dataSource._groupsState[data[0].items[2].uid] = true;
+            dataSource._groupsState[data[0].items[2].items[0].uid] = true;
+
+            var result = dataSource._expandedSubGroupItemsCount(data[0], 4);
+
+            assert.equal(result, 4);
+        });
     });
 }());

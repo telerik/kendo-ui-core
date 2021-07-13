@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: jQuery Upload Documentation | Upload Localization | Kendo UI
+page_title: jQuery Upload Documentation | Upload Localization
 description: "Get started with the jQuery Upload by Kendo UI and translate its messages for different culture locales."
 slug: localization_upload
 position: 3

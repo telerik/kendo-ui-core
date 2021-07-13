@@ -1,6 +1,6 @@
 ---
 title: Bullet Charts
-page_title: jQuery Chart Documentation | Bullet Charts | Kendo UI
+page_title: jQuery Chart Documentation | Bullet Charts
 description: "Learn how to create a Kendo UI Bullet Chart and configure its options."
 slug: chart-types-bullet
 ---

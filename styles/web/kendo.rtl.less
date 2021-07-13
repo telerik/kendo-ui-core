@@ -56,23 +56,18 @@
     border-bottom-right-radius: 4px;
 }
 
-.k-rtl .k-autocomplete > .k-i-close,
-.k-rtl .k-multiselect > .k-multiselect-wrap > .k-i-close {
+.k-rtl .k-autocomplete > .k-clear-value,
+.k-rtl .k-multiselect > .k-multiselect-wrap > .k-clear-value {
     right: auto;
     margin-right: 0;
 }
 
-.k-rtl .k-combobox > .k-dropdown-wrap > .k-i-close {
+.k-rtl .k-combobox > .k-dropdown-wrap > .k-clear-value {
     right: auto;
 }
 
-.k-rtl .k-dropdowntree > .k-dropdown-wrap > .k-i-close {
+.k-rtl .k-dropdowntree > .k-dropdown-wrap > .k-clear-value {
     right: auto;
-}
-
-.k-rtl .k-datetimepicker .k-picker-wrap .k-icon
-{
-    margin: 0 2px 0 0;
 }
 
 .k-rtl.k-popup > .k-static-header
@@ -110,26 +105,8 @@
     }
 }
 
-.k-rtl .k-datetimepicker .k-select
-{
-
-    .k-link-date
-    {
-        margin-right: -.285em;
-        margin-left: auto;
-    }
-
-    .k-link-time
-    {
-        margin-right: .428em;
-        margin-left: -.285em;
-    }
-}
 
 // Calendar
-
-.k-rtl .k-widget.k-calendar .k-nav-prev { left: auto; right: 1%; }
-.k-rtl .k-widget.k-calendar .k-nav-next { right: auto; left: 1%; }
 
 .k-rtl .k-calendar .k-i-arrow-60-right,
 .k-rtl .k-calendar .k-i-arrow-60-left
@@ -265,9 +242,9 @@
 }
 
 .k-rtl .k-grid-header-locked,
-.k-rtl .k-grid-content-locked
-{
-    border-width: 0;
+.k-rtl .k-grid-content-locked {
+    border-right-width: 0;
+    border-left-width: 1px;
 }
 
 .k-rtl .k-grid-header th.k-with-icon .k-link
@@ -299,10 +276,6 @@
 {
     right: auto;
     left: 2.5em;
-}
-
-.k-rtl .k-header .k-grid-search {
-    float: left;
 }
 
 // Editing
@@ -341,11 +314,6 @@
     margin: 0;
     left: auto;
     right: 0;
-}
-
-.k-webkit .k-rtl .k-dirty
-{
-    margin: -0.4em 0.7em 0 0;
 }
 
 // Gantt
@@ -515,8 +483,8 @@
     padding: .03em .2em;
 }
 
-.k-rtl .k-autocomplete > .k-i-close,
-.k-rtl .k-multiselect-wrap > .k-i-close {
+.k-rtl .k-autocomplete > .k-clear-value,
+.k-rtl .k-multiselect-wrap > .k-clear-value {
     right: auto;
 }
 
@@ -892,10 +860,10 @@
     right: 0;
 }
 
-.k-rtl .k-upload-selected
+.k-rtl .k-upload .k-action-buttons .k-button + .k-button
 {
-    margin-right: .8em;
-    margin-left: .2em;
+    margin-right: 6px;
+    margin-left: 0;
 }
 
 .k-rtl .k-file-name-size-wrapper {

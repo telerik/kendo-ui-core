@@ -33,37 +33,6 @@ To configure the ListView, use either of the following approaches:
 
 1. Add a hybrid ListView to the `Index` view. It must be inside the View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("listview-home")
-            .Title("Destinations")
-            .Content(() =>
-            {
-                %>
-                <% Html.Kendo().MobileListView().Style("inset").Type("group")
-                        .Items(root => {
-                            // Add the root item.
-                            root.Add().Text("Africa").Items(items =>
-                            {
-                                // Add the nested link item.
-                                items.AddLink().Text("Nairobi").Icon("toprated");
-                            });
-
-                            root.Add().Text("America").Items(items =>
-                            {
-                                items.AddLink().Text("Boston").Icon("globe");
-                                items.AddLink().Text("Ottawa").Icon("globe");
-                                items.AddLink().Text("San Francisco").Icon("toprated");
-                            });
-                        })
-                        .Render();
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("listview-home")
             .Title("Destinations")
@@ -87,20 +56,12 @@ To configure the ListView, use either of the following approaches:
                     })
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -147,24 +108,6 @@ To configure the ListView, use either of the following approaches:
 
 1. Add the hybrid Telerik UI ListView to the `Index` view. It must be inside the View content.
 
-    ```ASPX
-        <%: Html.Kendo().MobileView()
-            .Name("grouped")
-            .Title("ListView")
-            .Content(obj =>
-                Html.Kendo().MobileListView()
-                    .Name("grouped-listview")
-                    .TemplateId("template") // Configure the item template.
-                    .FixedHeaders(true)
-                    .DataSource(dataSource =>
-                        dataSource
-                            .Read("Read", "Home") // Configure DataSource `Read` action.
-                            .Group(group => group.Add("Letter", typeof(string)))
-                    )
-            )
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("grouped")
             .Title("ListView")
@@ -180,20 +123,12 @@ To configure the ListView, use either of the following approaches:
                     )
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -203,21 +138,6 @@ You can subscribe to all hybrid ListView [events](https://docs.telerik.com/kendo
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileListView()
-            .Name("MobileListView")
-            .Events(events => events
-                .Click("onClick")
-            )
-    %>
-
-    <script>
-        function onClick() {
-            // Handle the click event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileListView()
             .Name("MobileListView")
             .Events(events => events
@@ -230,7 +150,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the click event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

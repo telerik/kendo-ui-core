@@ -54,7 +54,6 @@
             assert.isOk(text.hasClass("k-input"));
             assert.isOk(text.hasClass("custom"));
             assert.isOk(text.hasClass("k-formatted-value"));
-            assert.equal(text.attr("aria-hidden"), "true");
             assert.isOk(text[0].style.cssText.indexOf("color: red") != -1);
             assert.equal(text.next()[0].nodeName, "INPUT");
         });
@@ -306,6 +305,16 @@
             textbox.element.val("10.556").blur();
 
             assert.equal(textbox.value(), 10.55);
+        });
+
+        it("enable false disables the widget", function() {
+            var textbox = new NumericTextBox(input, {
+                enable: false
+            });
+
+            assert.isOk(textbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.equal(textbox._text.attr("disabled"), "disabled");
+            assert.equal(textbox._text.attr("aria-disabled"), "true");
         });
     });
 }());

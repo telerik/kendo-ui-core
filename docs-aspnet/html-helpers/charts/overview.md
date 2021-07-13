@@ -7,9 +7,9 @@ slug: htmlhelpers_charts_aspnetcore
 position: 1
 ---
 {% if site.core %}
-    {% assign AxisDefaults = "/api//Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultssettingsbuildert" %}
+    {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultssettingsbuildert" %}
 {% else %}
-    {% assign AxisDefaults = "/api//Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultsbuildert" %}
+    {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultsbuildert" %}
 {% endif %}
 
 # Chart HtmlHelper Overview

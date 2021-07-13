@@ -219,6 +219,56 @@ To enable both virtualized columns and rows:
     </kendo-grid>
 
 ```
+
+## Sticky Columns
+
+Sticky columns enable you to display specific columns at all times while the user scrolls the Grid horizontally. This specific column will be scrollable as well, however, it will fix its position to the left/right when it reaches left/right Grid border.
+
+For a runnable example, refer to the demo on [implementing sticky columns in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/sticky-columns).
+
+```tagHelper
+    <column-menu enabled="true"/>
+    <columns>
+        <column field="ContactName" sticky="true" stickable="true" title="Contact Name" width="240" />
+        <column field="ContactTitle" stickable="true" title="Contact Title" />
+        <column field="CompanyName" stickable="true" title="Company Name" />
+        <column field="Country" stickable="true" title="Country" width="150" />
+    </columns>
+```
+```cshtml
+    .ColumnMenu()
+    .Columns(columns =>
+    {
+        columns.Bound(o => o.ContactName).Sticky(true).Stickable(true).Width(150);
+        columns.Bound(o => o.ContactTitle).Stickable(true).Width(250);
+        columns.Bound(o => o.CompanyName).Stickable(true).Width(350);
+        columns.Bound(o => o.Country).Stickable(true).Width(300);
+
+    })
+```
+> When it comes to the Grid Sticky Columns there are some known limitation. For more information please refer to [this section of the documentation.](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/columns/sticky#known-limitations)
+
+## Column Menu
+
+The Grid provides a built-in option for triggering column operations through a menu.
+
+To enable the column menu, use the `column-menu` tag helper. As a result, the column headers of the Grid render a column menu which allows the user to sort, filter, or change the visibility of the column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/aspnet-core/grid/tag-helper).
+
+The columns are not sorted by default, they have the same order as the columns in the grid. To sort the columns, nest the `column-menu-columns` child tag helper with the `sort` attribute and pass `asc` or `desc` as a value. 
+
+To create groups, use the nested `column-menu-columns-groups` tag helper. The `columns` attribute expects a collection of the model properties. The menu will automatically use the title from the grid columns if such is defined.
+
+```tagHelper
+    <column-menu>
+        <column-menu-columns sort="asc">
+            <column-menu-columns-groups>
+                <column-menu-columns-group title="Company Info" columns='new string[] { "CompanyName", "Country" }' />
+                <column-menu-columns-group title="Contact Info" columns='new string[] { "ContactName", "ContactTitle" }' />
+            </column-menu-columns-groups>
+        </column-menu-columns>
+    </column-menu>
+```
+
 ## See Also
 
 * [Basic Usage of the Grid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/grid/tag-helper)

@@ -1,6 +1,6 @@
 ---
 title: Endless Scrolling
-page_title: jQuery Grid Documentation | Endless Scrolling | Kendo UI
+page_title: jQuery Grid Documentation | Endless Scrolling
 description: "Get started with the jQuery Grid by Kendo UI supporting endless scrolling mode suitable for displaying large number of items."
 slug: endless_scrolling_kendoui_grid_widget
 position: 3
@@ -8,7 +8,7 @@ position: 3
 
 # Endless Scrolling
 
-Endless scrolling is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
+Endless scrolling is an alternative to paging. The functionality is suitable when you display large number of items and use editing, grouping, filtering, sorting, or hierarchy.
 
 For runnable examples, refer to:
 * [Demo on endless scrolling of local data by the Grid](https://demos.telerik.com/kendo-ui/grid/endless-scrolling-local)
@@ -53,6 +53,10 @@ If the Grid is bound to remote data, enable `serverGrouping` to apply grouping t
 If the Grid displays hierarchical data and an item gets expanded, it will not be collapsed when the items are scrolled and a new page will be requested.
 
 > The filtering, sorting, and grouping operations reset the scroll position.
+
+## Known Limitations
+
+* Either enable endless scrolling or paging. Do not apply both features at the same time.
 
 ## KB Articles on Scrolling
 

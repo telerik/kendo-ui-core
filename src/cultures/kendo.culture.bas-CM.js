@@ -37,8 +37,8 @@
                     names: ["Kɔndɔŋ","Màcɛ̂l","Màtùmb","Màtop","M̀puyɛ","Hìlòndɛ̀","Njèbà","Hìkaŋ","Dìpɔ̀s","Bìòôm","Màyɛsèp","Lìbuy li ńyèe"],
                     namesAbbr: ["kɔn","mac","mat","mto","mpu","hil","nje","hik","dip","bio","may","liɓ"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["I bikɛ̂glà","i bikɛ̂glà","I BIKƐ̂GLÀ"],
+                PM: ["I ɓugajɔp","i ɓugajɔp","I ƁUGAJƆP"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd d MMMM yyyy",

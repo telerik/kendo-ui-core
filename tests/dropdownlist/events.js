@@ -156,6 +156,31 @@
             dropdownlist.wrapper.focus().focusout();
         });
 
+        it("change event is triggered after dataSource sort", function() {
+            var counter = 0;
+            var dropdownlist = new DropDownList(select, {
+                dataSource: ["Apples", "Oranges", "Bananas"],
+                change: function() {
+                    counter++;
+                }
+            });
+
+            dropdownlist.value("Oranges");
+            dropdownlist._old = "";
+            dropdownlist._change();
+
+            dropdownlist.value("Bananas");
+            dropdownlist._old = "Oranges";
+            dropdownlist._change();
+
+            dropdownlist.dataSource.sort({ dir: "asc" });
+
+            dropdownlist.open();
+            dropdownlist.ul.find("li:last").click();
+
+            assert.equal(counter, 3);
+        });
+
         it("support setting a value in change event handler", function() {
             var dropdownlist = new DropDownList(input, {
                 dataSource: ["foo", "bar"],

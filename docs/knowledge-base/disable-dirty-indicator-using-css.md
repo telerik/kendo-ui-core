@@ -111,17 +111,11 @@ For the full implementation, open the following example in the Dojo.
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
           { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-          { field: "Discontinued", width: 120, editor: customBoolEditor },
+          { field: "Discontinued", width: 120 },
           { command: "destroy", title: "&nbsp;", width: 150 }],
         editable: true
       });
     });
-
-    function customBoolEditor(container, options) {
-      var guid = kendo.guid();
-      $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-      $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
-    }
   </script>
 </div>
 ```

@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Badge Documentation | Dialog Overview | Kendo UI
+page_title: jQuery Badge Documentation | Badge Overview
 description: "Get started with the jQuery Badge by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_badge_widget
 position: 1
@@ -10,7 +10,7 @@ position: 1
 
 The Badge is an absolutely positioned element that is used to decorate avatars, navigation menus, or other components in the application when the visual notification is needed.
 
-It also provides customizing its content through templates, setting different types and layouts.
+It also provides customizing its content through templates, setting different shapes and layouts.
 
 * [Demo page for the Badge](https://demos.telerik.com/kendo-ui/badge/index)
 
@@ -24,7 +24,7 @@ To initialize the Badge, you can use virtually any `span` element. The following
     <script>
         $(document).ready(function(){
             $("#badge").kendoBadge({
-                appearance: "rectangle"
+                shape: "rectangle"
             });
         });
     </script>
@@ -32,7 +32,7 @@ To initialize the Badge, you can use virtually any `span` element. The following
 
 ## Basic Configuration
 
-The badge also provides the choice to be inline or overlay and set its type. To make the badge overlay add the `k-badge-overlay` class to the parent parent element.
+The badge also provides the choice to be inline or overlay. To make the badge overlay add the `k-badge-overlay` class to the parent parent element.
 
 ```dojo
     <a class="k-button k-badge-overlay"><span id="badge">42</span></a>
@@ -40,8 +40,7 @@ The badge also provides the choice to be inline or overlay and set its type. To 
     <script>
         $(document).ready(function(){
             $("#badge").kendoBadge({
-                appearance: "rectangle",
-                type:'warning'
+                shape: "rectangle",
             });
         });
     </script>
@@ -49,16 +48,17 @@ The badge also provides the choice to be inline or overlay and set its type. To 
 
 ## Using templates
 
-With the badge you can customize the content using templates.
+Badge content may be customized using templates.
 
 ```dojo
-    <a class="k-button k-badge-overlay"><span id="badge">42</span></a>
+    <a class="k-button k-badge-overlay"><span id="badge"></span></a>
 
     <script>
         $(document).ready(function(){
             $("#badge").kendoBadge({
-                appearance: "rectangle",
-                type:"info",
+                data: {
+                   value: 11
+                },
                 template: "#= +value > 10 ? '9+' : value #"
             });
         });
@@ -76,8 +76,7 @@ You can access an existing Button instance by using the .data() jQuery method wh
     <script>
         $(document).ready(function(){
             $("#badge").kendoBadge({
-                appearance: "rectangle",
-                type:"info"
+                shape: "rectangle"
             });
         });
 

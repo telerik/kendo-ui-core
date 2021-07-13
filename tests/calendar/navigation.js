@@ -66,6 +66,24 @@
             assert.equal(div.find("td.k-state-focused").text(), date.getDate() + "");
         });
 
+        it("navigating to a new date does not remove selected attributes", function() {
+            var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
+                date = new Date(2021, 11, 1),
+                date2 = new Date(2021, 11, 2),
+                selectedCell;
+
+            calendar.value(date);
+
+            calendar._move(event);
+
+            assert.deepEqual(calendar.current(), date2);
+            assert.equal(div.find("td.k-state-focused").text(), date2.getDate() + "");
+
+            selectedCell = div.find("td.k-state-selected");
+            assert.equal(selectedCell.text(), date.getDate() + "");
+            assert.equal(selectedCell.attr("aria-selected"), "true");
+        });
+
         it("navigate should not _move selection if value is less than min", function() {
             var event = { keyCode: keys.LEFT, preventDefault: $.noop },
                 date = new Date(2000, 11, 1);

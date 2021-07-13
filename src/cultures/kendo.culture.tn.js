@@ -30,8 +30,8 @@
             standard: {
                 days: {
                     names: ["Tshipi","Mosopulogo","Labobedi","Laboraro","Labone","Labotlhano","Matlhatso"],
-                    namesAbbr: ["Tsh","Mos","Bed","Rar","Ne","Tla","Mat"],
-                    namesShort: ["Tsh","Mos","Bed","Rar","Ne","Tla","Mat"]
+                    namesAbbr: ["Tsh","Mos","Labb","Labr","Labn","Labt","Mat"],
+                    namesShort: ["Tsh","Mos","Labb","Labr","Labn","Labt","Mat"]
                 },
                 months: {
                     names: ["Ferikgong","Tlhakole","Mopitlo","Moranang","Motsheganang","Seetebosigo","Phukwi","Phatwe","Lwetse","Diphalane","Ngwanatsele","Sedimonthole"],

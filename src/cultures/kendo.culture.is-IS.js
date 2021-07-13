@@ -23,7 +23,7 @@
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "ISK"
+                symbol: "kr"
             }
         },
         calendars: {

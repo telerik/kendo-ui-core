@@ -152,3 +152,9 @@ You can also target specific columns by using the `:nth-child()` selector.
       });
     </script>
 ```
+
+## See Also
+
+* [Show hidden columns during PDF Export]({% slug grid-pdf-show-hidden-columns %})
+* [Exclude Certain Columns from the Exported PDF File]({% slug grid-exclude-columns-from-exported-pdf %})
+* [Exclude Toolbar and Pager from Grid PDF Export]({% slug grid-export-pdf-without-toolbar-pager %})

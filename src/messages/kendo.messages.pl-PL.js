@@ -30,7 +30,13 @@ $.extend(true, kendo.ui.FilterCell.prototype.options.operators,{
     "neq": "są inne niż",
     "startswith": "zaczynają się od",
     "contains": "zawierają",
-    "doesnotcontain": "nie zawierają"
+    "doesnotcontain": "nie zawierają",
+    "isnull": "jest null",
+    "isnotnull": "nie jest null",
+    "isempty": "jest puste",
+    "isnotempty": "nie jest puste",
+    "isnullorempty": "nie ma wartości",
+    "isnotnullorempty": "ma wartośc"
   },
   "enums": {
     "eq": "są równe",
@@ -276,6 +282,8 @@ $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages,{
   "search": "Szukaj",
   "filter": "Filtr",
   "clear": "Wyczyść filtr",
+  "checkAll": "Zaznacz wszystko",
+  "clearAll": "Odznacz wszystko",
   "selectedItemsFormat":"Wybrano {0} elementy"
 });
 }
@@ -1018,5 +1026,21 @@ if (kendo.ui.MultiColumnComboBox) {
     kendo.ui.MultiColumnComboBox.prototype.options.messages =
     $.extend(true, kendo.ui.MultiColumnComboBox.prototype.options.messages, kendo.ui.List.prototype.options.messages);
 }
-  
+
+/* Validator */
+if (kendo.ui.Validator) {
+kendo.ui.Validator.prototype.options.messages =
+$.extend(true, kendo.ui.Validator.prototype.options.messages, {
+	required: 'Wartość {0} jest wymagana',
+	pattern: 'Wartość {0} jest nieprawidłowa',
+	min: '{0} musi być nie mniejsze niż {1}',
+	max: '{0} musi być nie większe niż {1}',
+	step: 'Wartość {0} jest nieprawidłowa',
+	email: 'Nieprawidłowy email: {0}',
+	url: 'Nieprawidłowy URL: {0}',
+	date: 'Nieprawidłowa data: {0}',
+	dateCompare: 'Data początkowa nie może być późniejsza niż końcowa.'
+});
+}
+ 
 })(window.kendo.jQuery);

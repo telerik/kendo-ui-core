@@ -560,12 +560,18 @@ Possible values are:
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
       content: "This is your Kendo Dialog.",
-      size: "wide"
+      size: "medium"
     });
     </script>
 
 ## Methods
 
+### center
+
+Centers the Dialog within the viewport.
+#### Returns
+
+`kendo.ui.Dialog` - Returns the Dialog object to support chaining. 
 ### close
 
 Closes a Dialog.
@@ -610,6 +616,7 @@ The content of the Dialog. Can be an HTML string or jQuery object.
       title: "Kendo Dialog Component",
     });
     var dialog = $("#dialog").data("kendoDialog");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(dialog.content()); // logs "foo"
     </script>
 

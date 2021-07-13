@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-page_title: jQuery Diagram Documentation | Troubleshooting | Kendo UI
+page_title: jQuery Diagram Documentation | Troubleshooting
 description: "Get started with the jQuery Diagram by Kendo UI and handle common troubleshooting issues."
 previous_url: /controls/diagrams-and-maps/diagram/troubleshoot/common-issues
 slug: troubleshooting_diagram_widget

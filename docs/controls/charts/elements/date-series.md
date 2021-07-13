@@ -1,6 +1,6 @@
 ---
 title: Date Series
-page_title: jQuery Chart Documentation | Date Series | Kendo UI
+page_title: jQuery Chart Documentation | Date Series
 description: "Get started with the jQuery Chart by Kendo UI and learn how to handle date series and date grouping."
 previous_url: /controls/charts/date-series
 slug: dateseries_charts_widget
@@ -230,7 +230,7 @@ Setting the [`baseUnit`](/api/dataviz/chart#configuration-categoryAxis.baseUnit)
                 // => Skip to months
                 weeks: [],
 
-                // Results in two groups.                
+                // Results in two groups.
                 // => Chosen
                 months: [1]
             }
@@ -249,6 +249,46 @@ The date category axis provides options for specifying one format per base unit.
             }
         }
     }
+
+#### Displaying the Axis Date Range
+
+To display the exact start and end date of the axis range, set the [`rangeLabels.visible` property](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.rangelabels#categoryaxisrangelabelsvisible) to `true`.
+
+The range labels support the same settings as the axis labels. If an option is not set, it will default to the value set for the regular labels. For example [`rangeLabels.color`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.rangelabels#categoryaxisrangelabelscolor) defaults to the value of [`labels.color`](/api/javascript/dataviz/ui/chart/configuration/categoryaxis.labels#categoryaxislabelscolor).
+
+Toggle the range labels in the example below to see how they differ from the regular axis labels:
+
+    <div id="chart" style="width: 350px; height: 250px;"></div>
+    <script>
+        $("#chart").kendoChart({
+          categoryAxis: {
+            baseUnit: "days",
+            maxDivisions: 5,
+            rangeLabels: {
+              visible: true,
+              format: "d"
+            },
+            labels: {
+              format: "d-M"
+            }
+          },
+          series: [{
+            type: 'line',
+            field: 'value',
+            categoryField: 'date',
+            data: [{
+              value: 1,
+              date: new Date("2012/01/01")
+            }, {
+              value: 21,
+              date: new Date("2012/02/01")
+            }, {
+              value: 23,
+              date: new Date("2012/03/07")
+            }]
+          }]
+        });
+    </script>
 
 ## Date Series in Scatter Charts
 

@@ -29,6 +29,12 @@ To start the **Create New Project Wizard**, follow either of the approaches belo
 
 For convenience, the same project templates are located under the **Visual C#** > **Web** and **Visual Basic** > **Web** nodes.
 
+You will receive a list of predefined Telerik templates and the Telerik ASP.NET MVC versions list to choose from:
+* **Blank Template** - It lets you develop your application from scratch with the Telerik UI components enabled.
+* **Standard Template** - You can start off with three example pages which have Panel Bar, Card and TabStrip components integrated.
+* **Grid and Menu Template** - A small application that contains Grid, Menu and Buttons as a base for your application.
+* **Dashboard Template** - It allows you to quickly develop dashboards and dashboard-like applications using the built-in TileLayout component.
+
 The wizard detects all the installed versions of Telerik UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
 ![The new Project Wizard](../../getting-started-mvc/vs-integration/images/new_project.png)

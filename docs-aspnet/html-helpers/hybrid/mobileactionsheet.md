@@ -26,43 +26,10 @@ The ActionSheet displays a set of choices related to a task the user initiates.
 
 1. Add an ActionSheet to the `Index` view. Like most hybrid Telerik UI, the ActionSheet must be initialized within the hybrid View content.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Name("actionsheet-view")
-            .Title("Inbox")
-            .Content(() =>
-            {
-                %>
-                <!-- Add a button to open the ActionSheet. -->
-                <%: Html.Kendo().MobileButton()
-                        .Name("button")
-                        .Rel(MobileButtonRel.ActionSheet)
-                        .Text("Reply")
-                        .Url("#inboxActions")
-                %>
-
-                <% Html.Kendo().MobileActionSheet()
-                    .Name("inboxActions")
-                    .Popup(popup => popup.Direction(MobilePopupDirection.Left))
-                    .Title("Monday Meeting:")
-                    .Items(items => {
-                        items.Add().Text("Reply");
-                        items.Add().Text("Reply All");
-                        items.Add().Text("Archive");
-                    })
-                    .Render();
-                %>
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Name("actionsheet-view")
             .Title("Inbox")
-            .Content(
-                @<text>
+            .Content(@<text>
                 <!-- Add a button to open the actionsheet widget -->
                 @(Html.Kendo().MobileButton()
                     .Name("button")
@@ -80,23 +47,14 @@ The ActionSheet displays a set of choices related to a task the user initiates.
                         items.Add().Text("Reply All");
                         items.Add().Text("Archive");
                     }))
-
             </text>)
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-                .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
-        @(Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        )
-    ```
+    @(Html.Kendo().MobileApplication()
+        .ServerNavigation(true)
+    )
 
 1. Build and run the application.
 
@@ -106,28 +64,6 @@ You can subscribe to all hybrid ActionSheet [events](https://docs.telerik.com/ke
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileActionSheet()
-            .Name("MobileActionSheet")
-            .Items(items => {
-                items.Add().Text("Reply").Action("replay");
-            }))
-            .Events(events => events
-                .Open("onOpen")
-            )
-    %>
-
-    <script>
-        function onOpen() {
-            // Handle the open event.
-        }
-
-        function replay() {
-            // Will execute when item with `Reply` title is clicked.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileActionSheet()
         .Name("MobileActionSheet")
         .Items(items => {
@@ -147,7 +83,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Will execute when item with `Reply` title is clicked.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

@@ -19,7 +19,7 @@
                 name: "Tanzanian Shilling",
                 abbr: "TZS",
                 pattern: ["-n$","n$"],
-                decimals: 0,
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
@@ -37,8 +37,8 @@
                     names: ["Januari","Februari","Machi","Aprilyi","Mei","Junyi","Julyai","Agusti","Septemba","Oktoba","Novemba","Desemba"],
                     namesAbbr: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Des"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["utuko","utuko","UTUKO"],
+                PM: ["kyiukonyi","kyiukonyi","KYIUKONYI"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

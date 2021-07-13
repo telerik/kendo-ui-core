@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery TabStrip Documentation | TabStrip Globalization | Kendo UI
+page_title: jQuery TabStrip Documentation | TabStrip Globalization
 description: "Get started with the jQuery TabStrip by Kendo UI and learn about the globalization options it supports."
 slug: globalization_tabstrip
 position: 1

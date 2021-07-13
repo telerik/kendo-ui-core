@@ -4,7 +4,7 @@ page_title: Custom Binding
 description: "Learn how to implement custom binding with Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/custom-binding
 slug: custombinding_multicolumncombobox_aspnetmvc
-position: 4
+position: 5
 ---
 
 # Custom Binding

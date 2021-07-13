@@ -1,6 +1,6 @@
 ---
 title: Validation
-page_title: Kendo UI for jQuery Form Documentation | Validation | Kendo UI
+page_title: Kendo UI for jQuery Form Documentation | Validation
 description: "Get started with the Kendo UI for jQuery Form and learn about its validation configuration."
 slug: validation_form_widget
 position: 7
@@ -186,7 +186,7 @@ The following example demonstrates custom validation of the `RetireDate` field.
                                     if (input.is("[name='RetireDate']") && input.val() != "") {
                                         var date = kendo.parseDate(input.val()),
                                             hireDate = kendo.parseDate($("[name='HireDate']").val());
-                                        input.attr("data-RetireDatevalidation-msg", "Retire Date should be after Hire Date");
+                                        input.attr("data-greaterdate-msg", "Retire Date should be after Hire Date");
                                         return hireDate == null || hireDate.getTime() < date.getTime();
                                     }
 

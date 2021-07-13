@@ -37,8 +37,8 @@
                     names: ["Janeru","Febreru","Marsu","Abril","Maiu","Junhu","Julhu","Agostu","Setenbru","Otubru","Nuvenbru","Dizenbru"],
                     namesAbbr: ["Jan","Feb","Mar","Abr","Mai","Jun","Jul","Ago","Set","Otu","Nuv","Diz"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["am","am","AM"],
+                PM: ["pm","pm","PM"],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd, d 'di' MMMM 'di' yyyy",

@@ -27,8 +27,9 @@
             KSCROLL = "k-scroll",
             KTITLELESS = "k-dialog-titleless",
             KDIALOGTITLE = ".k-dialog-title",
-            KDIALOGTITLEBAR = KDIALOGTITLE + "bar",
+            KDIALOGTITLEBAR =".k-dialog-titlebar",
             KBUTTONGROUP = ".k-dialog-buttongroup",
+            // KACTIONS = ".k-actions",
             KBUTTON = ".k-button",
             KALERT = "k-alert",
             KCONFIRM = "k-confirm",
@@ -394,7 +395,7 @@
 
             _createActionbar: function(wrapper) {
                 var isStretchedLayout = (this.options.buttonLayout === "stretched");
-                var buttonLayout = isStretchedLayout ? "stretched" : "normal";
+                var buttonLayout = isStretchedLayout ? "stretch" : "end";
                 var actionbar = $(templates.actionbar({ buttonLayout: buttonLayout }));
 
                 this._addButtons(actionbar);
@@ -452,6 +453,7 @@
 
             _actionKeyHandler: function(e) {
                 if (buttonKeyTrigger(e)) {
+                    e.preventDefault();
                     this._runActionBtn(e.currentTarget);
                 } else if (e.keyCode == keys.ESC) {
                     this.close(false);
@@ -775,11 +777,15 @@
                 var that = this;
 
                 var zStack = $(KWINDOW).filter(function() {
-                    var dom = $(this);
-                    var object = that._object(dom);
-                    var options = object && object.options;
+                    var modal = that._object($(this));
 
-                    return options && options.modal && that.options.appendTo == options.appendTo && options.visible && dom.is(VISIBLE);
+                    return modal &&
+                        modal.options &&
+                        modal.options.modal &&
+                        modal.options.visible &&
+                        modal.options.appendTo === that.options.appendTo &&
+                        !modal.containment &&
+                        $(modal.element).is(VISIBLE);
                 }).sort(function(a, b) {
                     return +$(a).css("zIndex") - +$(b).css("zIndex");
                 });
@@ -1098,15 +1104,16 @@
 
         templates = {
             wrapper: template("<div class='k-widget k-window k-dialog' role='dialog'></div>"),
-            action: template("<button type='button' class='k-button# if (data.primary) { # k-primary# } role='button' #'></button>"),
+            action: template("<button type='button' class='k-button # if (data.primary) { # k-primary # } #' role='button'></button>"),
             titlebar: template(
-                "<div class='k-window-titlebar k-dialog-titlebar'>" +
+                "<div class='k-window-titlebar k-dialog-titlebar k-hstack'>" +
                     "<span class='k-window-title k-dialog-title'>#: title #</span>" +
-                    "<div class='k-window-actions k-dialog-actions'></div>" +
+                    "<span class='k-spacer'></span>" +
+                    "<div class='k-window-actions k-dialog-actions k-hstack'></div>" +
                 "</div>"
             ),
             close: template("<a role='button' href='\\#' class='k-button k-flat k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
-            actionbar: template("<div class='k-dialog-buttongroup k-dialog-button-layout-#: buttonLayout #' role='toolbar'></div>"),
+            actionbar: template("<div class='k-dialog-buttongroup k-actions k-hstack k-justify-content-#: buttonLayout #' role='toolbar'></div>"),
             overlay: "<div class='k-overlay'></div>",
             alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
             alert: "<div></div>",

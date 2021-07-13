@@ -461,13 +461,13 @@ Gets or sets the html rendering of the cells in the range.
 ##### value `Boolean` *optional*
 
 True to make the cell render the value as HTML. 
-An important thing in this case is to sanitized the value of the cell on the server for passing save html because there is no client-side sanitizing.
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
-> When the value is 'true ' the value of the cell should be always sanitized on the server for passing save html.
+> When the value is 'true ' the value of the cell should be always sanitized on the server for passing safe html.
 
 #### Returns
 
-`Boolean` the current disabled state of the top-left cell of the range.
+`Boolean` the current html state of the top-left cell of the range.
 
 #### Example
 
@@ -477,8 +477,8 @@ An important thing in this case is to sanitized the value of the cell on the ser
     $("#spreadsheet").kendoSpreadsheet();
     var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
     var sheet = spreadsheet.activeSheet();
-    sheet.range("A1").value("disabled");
-    sheet.range("A1").enable(false);
+    sheet.range("A1").value("<b>bold</b>");
+    sheet.range("A1").html(true);
 </script>
 ```
 
@@ -537,6 +537,7 @@ Possible values for direction:
         } catch(ex) {
             if (ex instanceof kendo.spreadsheet.Range.FillError) {
                 // can be "incompatibleRanges" or "noFillDirection"
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(ex.code);
             } else {
                 throw ex;
@@ -765,6 +766,7 @@ The function that will be executed against every cell. The function receives the
     var range = sheet.range("A1:B2");
 
     range.forEachCell(function (row, column, cellProperties) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(row, column, cellProperties);
     });
 </script>
@@ -831,6 +833,7 @@ The new formula of the cell. The string may optionally start with `=`.
 
     sheet.range("A1").input("1000");
     sheet.range("A2").formula("A1*2");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range("A2").formula()); // "A1*2"
 </script>
 ```
@@ -873,6 +876,7 @@ Returns `true` if the sheet of the range has filter enabled.
         { column: 1, filter: filter2 }
     ]);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range("A1:C4").hasFilter());
 </script>
 ```

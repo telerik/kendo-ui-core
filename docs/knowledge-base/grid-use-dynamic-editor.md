@@ -72,15 +72,16 @@ How can I have a column whose editor depends on the value of the Grid record?
             });
           }
           else if(options.model.id == 2){
-            var input = $('<input type="text" class="k-textbox" name="value" data-bind="value:value">');
-            input.appendTo(container);
+            var input = $('<textarea  type="text" name="value" data-bind="value:value"></textarea>');
+            input.appendTo(container)
+            input.kendoTextArea({
+              rows:5
+            })
           }else{
-            var input = $('<input type="checkbox" name="value" data-bind="value:value">');
+            var input = $('<input type="text" class="k-textbox" name="value" data-bind="value:value">');
             input.appendTo(container);
           }
         };
-
-
       });
 
     </script>

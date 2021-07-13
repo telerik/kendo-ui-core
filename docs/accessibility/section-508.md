@@ -48,12 +48,12 @@ table td:nth-child(2) {
 
 ## Special Considerations
 
-For more information, refer to the article on [Section 508 and WCAG compliance]({% slug section508_wcag20_accessibility_support %}#special-considerations).
+For more information, refer to the article on [Section 508 and WCAG 2.1 compliance]({% slug section508_wcag21_accessibility_support %}#special-considerations).
 
 ## See Also
 
 * [Overview of Accessibility Features in Kendo UI]({% slug overview_accessibility_support_kendoui %})
-* [Section 508 and WCAG 2.0 Compliance of Kendo UI Widgets]({% slug section508_wcag20_accessibility_support %})
+* [Section 508 and WCAG 2.1 Compliance of Kendo UI Widgets]({% slug section508_wcag21_accessibility_support %})
 * [WAI-ARIA Support in Kendo UI]({% slug wai_aria_accessibility_support %})
 * [Keyboard Support in Kendo UI]({% slug keyboard_shortcuts_accessibility_support %})
 * [Right-to-Left Language Support in Kendo UI]({% slug right_toleft_languages_accessibility_support %})

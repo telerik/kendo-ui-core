@@ -24,43 +24,45 @@ span.k-dropdowntree {
 .k-multiselect,
 .k-textbox,
 .k-listbox {
+    width: @input-default-width;
+    border-width: 0;
     position: relative;
     display: inline-block;
-    width: @input-default-width;
-    overflow: visible;
-    border-width: 0;
     vertical-align: middle;
+    overflow: visible;
 }
 
-.k-autocomplete > .k-i-close,
-.k-dropdown-wrap > .k-i-close,
-.k-multiselect-wrap > .k-i-close {
+.k-autocomplete > .k-clear-value,
+.k-dropdown-wrap > .k-clear-value,
+.k-multiselect-wrap > .k-clear-value {
+    outline: 0;
     font-size: 100%;
-    display: none;
+    display: inline-block;
     position: absolute;
+    visibility: hidden;
     cursor: pointer;
 }
 
-.k-autocomplete > .k-i-close {
+.k-autocomplete > .k-clear-value {
     right: calc(@input-clear-icon-offset);
 }
 
-.k-multiselect-wrap > .k-i-close {
+.k-multiselect-wrap > .k-clear-value {
     right: calc(@input-clear-icon-offset + 1px);
 }
 
-.k-autocomplete > .k-i-close,
-.k-dropdown-wrap > .k-i-close {
+.k-autocomplete > .k-clear-value,
+.k-dropdown-wrap > .k-clear-value {
     top: 50%;
     transform: translateY(-50%);
 }
 
-.k-dropdown-wrap > .k-i-close {
+.k-dropdown-wrap > .k-clear-value {
     right: calc(@combobox-clear-icon-offset);
 }
 
-.k-multiselect-wrap > .k-i-close,
-.k-dropdowntree > .k-multiselect-wrap > .k-i-close  {
+.k-multiselect-wrap > .k-clear-value,
+.k-dropdowntree > .k-multiselect-wrap > .k-clear-value  {
     top: calc(@multiselect-clear-icon-top-offset);
 }
 
@@ -75,9 +77,8 @@ span.k-dropdowntree {
 .k-multiselect-wrap {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-i-close {
-            display: inline-block;
-            outline: none;
+        > .k-clear-value {
+            visibility: visible;
         }
     }
 }
@@ -85,9 +86,8 @@ span.k-dropdowntree {
 .k-multiselect {
     &.k-state-hover,
     &.k-state-focused {
-        > .k-multiselect-wrap > .k-i-close {
-            display: inline-block;
-            outline: none;
+        > .k-multiselect-wrap > .k-clear-value {
+            visibility: visible;
         }
     }
 }
@@ -120,7 +120,7 @@ span.k-dropdowntree {
 .k-filter-menu .k-dropdowntree,
 .k-filter-menu .k-autocomplete,
 .k-filter-menu .k-textbox {
-    width: 13.2em;
+    width: 100%;
 }
 
 .k-colorpicker {
@@ -244,14 +244,6 @@ span.k-dropdowntree {
     right: 3px;
 }
 
-// prevent missing bottom border at some zoom levels
-span.k-textbox:after {
-  content: "\a0";
-  display: block;
-  height: .4px;
-  overflow: hidden;
-}
-
 .k-autocomplete,
 .k-dropdown-wrap,
 .k-picker-wrap,
@@ -270,7 +262,8 @@ span.k-textbox:after {
 .k-picker-wrap .k-input,
 .k-numeric-wrap .k-input,
 .k-dropdown-wrap .k-input,
-.k-selectbox .k-input {
+.k-selectbox .k-input,
+.k-multiselect-wrap .k-input {
     font-family: inherit;
     border-width: 0;
     outline: 0;
@@ -330,6 +323,7 @@ span.k-datetimepicker .k-select + .k-select {
 }
 
 .k-textbox > input,
+.k-textbox > .k-input,
 .k-autocomplete .k-input,
 .k-multiselect-wrap .k-input,
 .k-picker-wrap .k-input,
@@ -343,6 +337,16 @@ span.k-datetimepicker .k-select + .k-select {
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.k-textbox,
+.k-textarea,
+.k-textbox > input,
+.k-textarea > textarea,
+.k-input {
+    &::placeholder {
+        user-select: none;
+    }
 }
 
 .k-dropdown-wrap .k-input:before {
@@ -656,6 +660,10 @@ body .k-datetimepicker .k-select {
         justify-content: center;
     }
 
+    .k-timeselector {
+        outline: none;
+    }
+
     .k-time-tab .k-datetime-selector {
         transform: translateX(-100%);
     }
@@ -665,6 +673,18 @@ body .k-datetimepicker .k-select {
 
         .k-action-buttons {
             margin-bottom: 0;
+        }
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        .k-time-tab {
+
+            .k-datetime-selector {
+                transform: translateX(100%);
+            }
         }
     }
 }
@@ -759,6 +779,13 @@ body .k-datetimepicker .k-select {
         height: auto;
         width: @time-list-width;
     }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"]  {
+        .hide-scrollbar(left);
+    }
 }
 
 .k-time-list-container {
@@ -836,6 +863,14 @@ body .k-datetimepicker .k-select {
     padding: 0.25em 0;
 }
 
+.k-input-separator {
+    margin: 0;
+    width: 0;
+    height: @icon-size;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+}
+
 .k-input,
 .k-textbox > input,
 .k-textarea > textarea {
@@ -868,11 +903,12 @@ textarea.k-textarea {
 
 // Input with icon
 .k-input-icon {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: @input-icon-width;
     position: relative;
+    flex-shrink: 0;
 
     .k-icon {
         position: static;
@@ -1127,15 +1163,15 @@ span.k-numerictextbox {
         padding-left: calc(@input-offset);
     }
 
-    .k-dropdown-wrap > .k-i-close {
+    .k-dropdown-wrap > .k-clear-value {
         left: calc(@combobox-clear-icon-offset);
     }
 
-    .k-autocomplete > .k-i-close {
+    .k-autocomplete > .k-clear-value {
         left: calc(@input-clear-icon-offset);
     }
 
-    .k-multiselect-wrap > .k-i-close {
+    .k-multiselect-wrap > .k-clear-value {
         left: calc(@input-clear-icon-offset + 1px);
     }
 
@@ -1416,5 +1452,50 @@ div.k-dropdowngrid-popup .k-group-header {
     &[dir="rtl"] {
         margin-right: 0;
         margin-left: @input-indent;
+    }
+}
+
+// Input prefix and suffix
+.k-input-prefix,
+.k-input-suffix {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    height: @button-inner-calc-size;
+
+    > * {
+        flex-shrink: 0;
+    }
+
+    > .k-icon {
+        width: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        height: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    > .k-clear-value {
+        width: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        height: calc((@line-height * @font-size) + (@input-padding-y * 2));
+        position: relative;
+
+        &::after {
+            content: "";
+            opacity: 0;
+            display: none;
+            pointer-events: none;
+            position: absolute;
+            left: -1px;
+            right: -1px;
+            top: -1px;
+            bottom: -1px;
+        }
+
+        &.k-state-focused::after,
+        &:focus::after {
+            display: block;
+        }
     }
 }

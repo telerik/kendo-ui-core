@@ -1,6 +1,6 @@
 ---
 title: Excel Export
-page_title: jQuery Grid Documentation | Excel Export | Kendo UI
+page_title: jQuery Grid Documentation | Excel Export
 description: "Get started with the jQuery Grid by Kendo UI and learn how to set the Excel export functionality."
 previous_url: /excel-export
 slug: exporting_excel_kendoui_grid_widget
@@ -218,6 +218,21 @@ To export huge datasets to Excel, use the new [RadSpreadStreamProcessing library
 * For examples on exporting Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 * For more information on the Grid server-side processing, refer to [this article](https://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
 
+## Exclude Column From Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+It can also be set to an Object containing different values for Excel and PDF exporting modes, providing separate options for each:
+
+```javascript
+columns: [
+   { 
+       field: 'ContactTitle',
+       exportable: { pdf: true, excel: false }
+   }
+]
+```
+
 ## Known Limitations
 
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.
@@ -250,5 +265,6 @@ To export huge datasets to Excel, use the new [RadSpreadStreamProcessing library
 ## See Also
 
 * [Exporting the Grid to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/excel-export)
+* [Export Images to Excel]({% slug export-images-in-grid %})
 * [Copying Data to Excel (Demo)](https://demos.telerik.com/kendo-ui/grid/copy-to-excel)
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

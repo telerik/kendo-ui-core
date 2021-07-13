@@ -6,6 +6,21 @@
         border-color: @card-border;
         background-color: @card-bg;
     }
+
+    // Card actions
+    .k-card-actions {
+        border-color: @card-border;
+    }
+
+    &:focus,
+    &.k-state-focus {
+        .fill(
+            @card-focus-text,
+            @card-focus-bg,
+            @card-focus-border
+        );
+        .box-shadow( @card-focus-shadow );
+    }
 }
 
 
@@ -21,12 +36,6 @@
 
 // Separator
 .k-card-separator {
-    border-color: @card-border;
-}
-
-
-// Card actions
-.k-card-actions {
     border-color: @card-border;
 }
 
@@ -73,3 +82,16 @@
     )
 }
 
+.k-card:focus .k-card-callout,
+.k-card.k-state-focus .k-card-callout {
+    .fill(
+        @card-focus-text,
+        @card-focus-bg,
+        @card-focus-border
+    );
+
+    &.k-callout-n { .box-shadow( @card-focus-callout-box-shadow-n ); }
+    &.k-callout-e { .box-shadow( @card-focus-callout-box-shadow-e ); }
+    &.k-callout-s { .box-shadow( @card-focus-callout-box-shadow-s ); }
+    &.k-callout-w { .box-shadow( @card-focus-callout-box-shadow-w ); }
+}

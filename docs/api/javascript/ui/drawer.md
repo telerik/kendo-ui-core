@@ -12,6 +12,26 @@ Represents the Kendo UI Drawer widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
+### autoCollapse `Boolean` *(default: true)*
+
+Specifies if the Drawer will be automatically collapsed when an item is clicked.
+
+#### Specifying autoCollapse
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var drawerInstance = $("#drawer").kendoDrawer({
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                autoCollapse: false
+            }).data("kendoDrawer");
+
+            drawerInstance.show();
+        });
+    </script>
+
 ### position `String` *(default: 'left')*
 
 The position of the drawer. Can be `left` (default) or `right`.
@@ -45,6 +65,28 @@ Determines how the Kendo UI Drawer will interact with the associated content. Th
         $(document).ready(function() {
             var drawerInstance = $("#drawer").kendoDrawer({
                 mode: "push",
+                template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
+                position: 'left'
+            }).data("kendoDrawer");
+
+            drawerInstance.show();
+        });
+    </script>
+
+### navigatable `Boolean` *(default: false)*
+
+If set to `true` the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Navigation
+
+    <div id="drawer">
+        <div>Content area content.</div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var drawerInstance = $("#drawer").kendoDrawer({
+                mode: "push",
+                navigatable: true,
                 template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
                 position: 'left'
             }).data("kendoDrawer");
@@ -290,6 +332,7 @@ Fired when the Kendo UI Drawer is about to be hidden. The event can be prevented
                     template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left',
                     hide: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                         console.log("Drawer is about to be hidden");
                     }
 
@@ -342,6 +385,7 @@ Fires when user clicks on item from the Kendo UI Drawer.
                     template: `<ul><li data-role='drawer-item'><span class='k-icon k-i-star-outline'></span><span class='item-text'>item 1</span></li><li data-role='drawer-separator'></li><li data-role='drawer-item'><span class='k-icon k-i-twitter'></span><span class='item-text'>item 2</span></li></ul>`,
                     position: 'left',
                     itemClick: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                         console.log("Clicked on the" + e.item.find(".item-text").text());
                     }
 
@@ -371,6 +415,7 @@ Holds information about the current state of the Drawer. If it is currently open
 
                 $('#show').click(function() {
                     drawerInstance.show();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(drawerInstance.visible);
                 });
             });

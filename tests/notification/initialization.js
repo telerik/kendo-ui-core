@@ -106,8 +106,8 @@
             createNotification();
 
             var defaultFunc = notification._getCompiled();
-            var params = { typeIcon: "info", content: "foo" };
-            var defaultOutput = '<div class="k-notification-wrap"><span class="k-icon k-i-info" title="info"></span><div class="k-notification-content">foo</div><span class="k-icon k-i-close" title="Hide"></span></div>';
+            var params = { typeIcon: "info", content: "foo", closeButton: false };
+            var defaultOutput = '<div class="k-notification-wrap"><span class="k-icon k-i-info" title="info"></span><div class="k-notification-content">foo</div><span aria-hidden="true" class="k-hidden k-icon k-i-close" title="Hide"></span></div>';
 
             assert.equal(typeof defaultFunc, "function");
             assert.equal(defaultFunc(params), defaultOutput);
@@ -303,8 +303,20 @@
                 var notificationPopup = $(".k-notification");
                 var closeIcon = notificationPopup.find(".k-i-close");
                 assert.isOk(!closeIcon.is(":visible"));
+                assert.isOk(closeIcon.hasClass("k-hidden"));
                 done();
             }, 400);
+        });
+
+        it("title is applied to the Notification element", function() {
+            createNotification({
+                title: "custom title"
+            });
+            notification.show("foo");
+
+            var element = $(".k-notification");
+
+            assert.equal(element.attr("title"), "custom title");
         });
 
         it("hide button is displayed if button property is set to true", function() {

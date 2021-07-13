@@ -14,24 +14,23 @@ While supported by default in modern browsers, this functionality is not provide
 
 
 ```dojo
-    <a href="https://www.telerik.com" alt="navigate">navigate</a>
     <div id="example">
       <div id="cap-view" class="demo-section k-header">
         <input id="color" name="color" />
-        <input id="color_hidden" name="color" type="hidden" />
 
         <input id="datepicker" name="datepicker" />
-        <input id="datepicker_hidden" name="datepicker" type="hidden" />
       </div>
     </div>
     <script>
       $(document).ready(function() {
-        var datepicker_hidden = $("#datepicker_hidden");
+        // Get the datePicker value from the local storage of the browser.
+        var datePickerValue = localStorage.getItem("datePickerValue");
 
         $("#datepicker").kendoDatePicker({
-          value: datepicker_hidden.val(),
+          value: datePickerValue,
           change: function() {
-            datepicker_hidden.val(this.element.val());
+            // Save the datePicker value in the local storage of the browser.
+            localStorage.setItem("datePickerValue", this.element.val());
           }
         });
 
@@ -41,20 +40,20 @@ While supported by default in modern browsers, this functionality is not provide
           { text: "Grey", value: "3" }
         ];
 
-        var color_hidden = $("#color_hidden");
+        var colorValue = localStorage.getItem("colorValue");
 
         $("#color").kendoDropDownList({
           dataTextField: "text",
           dataValueField: "value",
           dataSource: data,
-          value: color_hidden.val(),
+          value: colorValue,
           change: function() {
-            color_hidden.val(this.value());
+            localStorage.setItem("colorValue", this.value());
           },
           index: 0
         });
       });
-    </script>    
+    </script>  
 ```
 
 ## See Also

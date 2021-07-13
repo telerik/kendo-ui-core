@@ -12,6 +12,13 @@ The following table lists the individual script files for the Kendo UI widgets t
 
 | Widget | Individual Scripts | Comments |
 | :---   | :---         | :---     |
+| [ActionSheet](https://demos.telerik.com/kendo-ui/actionsheet/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.actionsheet.js | |
+| [AppBar](https://demos.telerik.com/kendo-ui/appbar/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.appbar.js | |
 | [Breadcrumb](https://demos.telerik.com/kendo-ui/breadcrumb/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.breadcrumb.js | |
@@ -27,6 +34,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.core.js | |
 | | kendo.userevents.js | |
 | | kendo.drawer.js | |
+| [FloatingActionButton](https://demos.telerik.com/kendo-ui/floatingactionbutton/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.fx.js | |
+| | kendo.floatingactionbutton.js | |
 | [Menu](https://demos.telerik.com/kendo-ui/menu/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |

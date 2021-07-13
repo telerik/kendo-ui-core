@@ -18,7 +18,7 @@ The Rating displays a label by default that shows the current value out of the m
 
 ## Customizing the Label
 
-Customizing the text of the label could be achieved through the [`Label.TemplateId`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingLabelSettingsBuilder#templateidsystemstring) property.
+Customizing the text of the label could be achieved through the [`Label.TemplateId`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingLabelSettingsBuilder#templateidsystemstring) property.
 
 By default, the template automatically receives the `value` and `maxValue` in the data object. This allows those properties to be used inside the template through [the Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
@@ -36,7 +36,7 @@ By default, the template automatically receives the `value` and `maxValue` in th
 
 ## Disabling the Label
 
-Setting the [`Label`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#labelsystemstring) property to false prevents the label from, being displayed.
+Setting the [`Label`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#labelsystemstring) property to false prevents the label from, being displayed.
 
 ```Razor
     <kendo-rating name="rating" min="1" max="6" value="3">

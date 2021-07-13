@@ -99,6 +99,17 @@
             assert.equal(dom.find(".val:eq(1)").text(), "2");
         });
 
+        it("changing a badge value reflects UI", function() {
+            var viewModel = kendo.observable({
+                foo: 55
+            });
+
+            var dom = $('<span data-role="badge" data-bind="text:foo"></span>');
+            kendo.bind(dom, viewModel);
+            viewModel.set("foo", 90);
+            assert.equal(dom.text(), "90");
+            kendo.destroy(dom);
+        });
 
         it("changing a view model field updates the CSS classes in the UI", function() {
             var viewModel = kendo.observable({

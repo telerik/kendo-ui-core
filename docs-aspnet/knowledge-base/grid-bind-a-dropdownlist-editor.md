@@ -19,7 +19,7 @@ component: grid
  </tr>
  <tr>
   <td>Product Version</td>
-  <td>217.2.621</td>
+  <td>2017.2.621</td>
  </tr>
 </table>
 
@@ -33,7 +33,7 @@ This is a logged issue. The Core helpers duplicate the property name when the `D
 
 ## Suggested Workarounds
 
-Telerik UI for ASP.NET Core does not provide a built-in solution for achieving this behavior. However, you can still work around the issue by using a `.DropDownListFor(m => m)` definition.
+Telerik UI for ASP.NET Core does not provide a built-in solution for achieving this behavior. However, you can still work around the issue by using a `.DropDownListFor(m => m)` definition when defining an Editor Template.
 
 ```
 @model Project.Models.StateProvinceRegionViewModel
@@ -47,6 +47,7 @@ Telerik UI for ASP.NET Core does not provide a built-in solution for achieving t
 )
 ```
 
+For further details on configuring Custom Editors for the Grid refer to the [Custom Editing](https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/editing/custom#custom-editing) section of the documentation and the [runnable example demonstrating the use of a DropDownList as a Custom Editor](https://demos.telerik.com/aspnet-core/grid/editing-custom)
 ## See Also
 
 * [API Reference of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid)

@@ -3621,30 +3621,33 @@ Template variables:
 
 #### Example
 
-    $("#chart").kendoChart({
-         title: {
-             text: "Internet Users"
-         },
-         series: [{
-             name: "United States",
-             data: [67.96, 68.93, 75, 74, 78]
-         }, {
-             name: "World",
-             data: [15.7, 16.7, 20, 23.5, 26.6]
-         }],
-         categoryAxis: {
-             categories: [2005, 2006, 2007, 2008, 2009]
-         },
-         tooltip: {
-             visible: true,
-             shared: true,
-             sharedTemplate:
-                "#= category # </br>" +
-                "# for (var i = 0; i < points.length; i++) { #" +
-                    "#= points[i].series.name #: #= points[i].value # </br>" +
-                "# } #"
-         }
+    <div id="sparkline"></div>
+
+    <script>
+    $("#sparkline").kendoSparkline({
+      	chartArea: {
+          width: 300,
+          height: 200
+        },
+        type: "bar",
+      	categoryAxis: {
+          categories: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014]
+        },
+      	seriesDefaults: {
+          data: [
+            16, 17, 18, 19, 20, 21, 21, 22, 23, 22
+        	],
+          name: "value"
+        },
+        tooltip: {
+            shared: true,
+    			  sharedTemplate: "#= category # </br>" +
+    				"# for (var i = 0; i < points.length; i++) { #" +
+    				    "#= points[i].series.name #: #= points[i].value # </br>" +
+    				"# } #"
+        }
     });
+    </script>
 
 ### transitions `Boolean`*(default: false)*
 
@@ -5572,6 +5575,7 @@ Both programs provide command-line interface suitable for server-side processing
     });
     var sparkline = $("#sparkline").data("kendoSparkline");
     var svg = sparkline.svg();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(svg); // displays the SVG string
     </script>
 

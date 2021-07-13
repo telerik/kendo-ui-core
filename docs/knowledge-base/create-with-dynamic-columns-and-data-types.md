@@ -140,4 +140,5 @@ The following example demonstrates how to create a Grid with column and data-fie
 
 ## See Also
 
+* [Dynamic Aggregates in a Dynamic Grid]({% slug grid-dynamic-aggregates %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

@@ -3,19 +3,136 @@ title: 2020 Releases
 page_title: 2020 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2020."
 slug: breakingchanges2020_kendoui
-position: 1
+position: 2
 ---
 
 # 2020 Releases
 
 This article lists the breaking changes in the Kendo UI 2020 releases.
 
+## Kendo UI 2020 R3 SP1
+
+**Upload**
+
+Changed appearance in `Less-based themes` of the Upload action buttons that are rendered when the [async.autoUpload option](https://docs.telerik.com/kendo-ui/api/javascript/ui/upload/configuration/async.autoupload) is set to `false`.
+
+Reverting to the previous appearance is possible by utilizing the following styles:
+
+```
+<style>
+.k-upload .k-action-buttons {
+    padding: 0;
+    align-items: stretch;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-width: 1px 0 0;
+    border-top-width: 1px;
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-basis: auto;
+    overflow: hidden;
+    border-color: transparent;
+}
+
+.k-upload .k-action-buttons .k-button {
+    background-clip: border-box;
+    border-radius: 0;
+    margin: 0;
+    padding: 12px 16px;
+    border-width: 0;
+    text-overflow: ellipsis;
+    flex: 1 0 0%;
+    flex-grow: 1;
+    flex-grow: 1;
+    display: inline-block;
+    overflow: hidden;
+    width: auto;
+    max-width: 100%;
+}
+</style>
+
+<input type="file" name="files" id="photos" />
+
+<script>
+    $("#photos").kendoUpload({
+        async: {
+            saveUrl: "http://my-app.localhost/save",
+            removeUrl: "http://my-app.localhost/remove",
+            autoUpload: false
+        }
+    });
+</script>
+```
+
+## Kendo UI 2020 R3
+
+**Badge**
+
+Deprecated configuration options and methods:
+
+<table>
+    <thead>
+        <tr>
+            <th>Old configuration/method</th><th>New configuration/method</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>appearance</code></td><td><code>shape</code></td>
+        </tr>
+        <tr>
+            <td><code>badgeStyle</code></td><td><code>fill</code></td>
+        </tr>
+        <tr>
+            <td><code>color</code></td><td><code>themeColor</code></td>
+        </tr>
+        <tr>
+            <td><code>look</code></td><td><code>fill</code></td>
+        </tr>
+      <tr>
+            <td><code>overlay</code></td><td>use <code>position: "edge"</code> and <code>align:"top end"</code></td>
+        </tr>
+        <tr>
+            <td><code>placement</code></td><td><code>position</code></td>
+        </tr>
+        <tr>
+            <td><code>position</code></td><td><code>align</code></td>
+        </tr>
+        <tr>
+            <td><code>value</code></td><td><code>text</code></td>
+        </tr>
+        <tr>
+            <td><code>value()</code></td><td><code>text()</code></td>
+        </tr>
+    </tbody>
+</table>
+
+**Scheduler**
+
+As of the Kendo UI 2020 R3 release, the Scheduler RecurrenceEditor will be rendered as a ButtonGroup and not a DropDownList. Apart from that, in the Weekly recurrence view the days selection is also displayed as a ButtonGroup instead of checkboxes.
+
 ## Kendo UI 2020 R2
 
 **Pager**, **Grid**, **TreeList**, **ListView**
 
 * The responsive Pager no longer has the `k-pager-lg` breakpoint and class.
-* The page numbers drop-down of the responsive Pager is now an HTML `select` element. 
+* The page numbers drop-down of the responsive Pager is now an HTML `select` element.
+
+**Rendering changes in ListView**
+
+Starting with 2020 R2, the ListView adds a wrapper element for the items in the list. This aims to add appearance improvements of the widget.
+
+If you need to remove the new wrapper element `<div class="k-listview-content">` you can add a new Listview property `contentElement`, with an empty string value:
+
+```
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            contentElement: "",
+            template: kendo.template($("#template").html())
+        });
+```
 
 **Disabled buttons in Editor toolbar**
 
@@ -47,7 +164,7 @@ As of Kendo UI 2020 R2 we have reworked the Kendo Validator with improved stylin
 
  ```
     /* Styles for validation messages */
-    span.k-widget.k-tooltip-validation {
+    span.k-widget.k-validator-tooltip {
         margin: 0; /* removes margin */
         width: 160px; /* set width */
         display; inline-flex; /* changes the appearance from block to inline */

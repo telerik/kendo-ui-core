@@ -113,5 +113,24 @@
             textbox.destroy();
             assert.equal(input.data("kendoTextBox"), undefined);
         });
+
+        it("setOptions correctly changes placeholder", function() {
+            var textbox = new TextBox(input, { placeholder: "Enter value ..." });
+
+            textbox.setOptions({ placeholder: "test1" });
+            assert.equal(textbox.element.attr("placeholder"), "test1");
+        });
+
+        it("setOptions correctly removes floating label", function() {
+            var textbox = new TextBox(input, {
+                label: {
+                    content: "Name",
+                    floating: true
+                }
+            });
+
+            textbox.setOptions({ label: false });
+            assert.isOk(!textbox.element.closest(".k-floating-label-container").length);
+        });
     });
 }());

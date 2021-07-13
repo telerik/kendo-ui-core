@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         READONLY = "readonly",
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
+        HIDDENCLASS = "k-hidden",
         STATEDISABLED = "k-state-disabled",
         AUTOCOMPLETEVALUE = "off",
         HOVER = "k-state-hover",
@@ -115,8 +116,8 @@ var __meta__ = { // jshint ignore:line
                 })
                 .attr({
                     autocomplete: AUTOCOMPLETEVALUE,
-                    role: "textbox",
-                    "aria-haspopup": true
+                    role: "combobox",
+                    "aria-expanded": false
                 });
 
             that._clear.on("click" + ns + " touchend" + ns, proxy(that._clearValue, that));
@@ -265,6 +266,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.popup.close();
+            that._deactivateItem();
         },
 
         destroy: function() {
@@ -437,7 +439,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var data = that.dataSource.flatView();
             var length = data.length;
-            var groupsLength = that.dataSource._group.length;
+            var groupsLength = that.dataSource._group ? that.dataSource._group.length : 0;
             var isActive = that.element[0] === activeElement();
             var action;
 
@@ -483,7 +485,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._hideBusy();
-            that._makeUnselectable();
 
             that.trigger("dataBound");
         },
@@ -671,7 +672,7 @@ var __meta__ = { // jshint ignore:line
         _hideBusy: function () {
             var that = this;
             clearTimeout(that._busy);
-            that._loading.hide();
+            that._loading.addClass(HIDDENCLASS);
             that.element.attr("aria-busy", false);
             that._busy = null;
             that._showClear();
@@ -686,7 +687,7 @@ var __meta__ = { // jshint ignore:line
 
             that._busy = setTimeout(function () {
                 that.element.attr("aria-busy", true);
-                that._loading.show();
+                that._loading.removeClass(HIDDENCLASS);
                 that._hideClear();
             }, 100);
         },
@@ -771,7 +772,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading" style="display:none"></span>').insertAfter(this.element);
+            this._loading = $('<span class="k-icon k-i-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.element);
         },
 
         _clearButton: function() {
@@ -808,7 +809,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             wrapper.attr("tabindex", -1);
-            wrapper.attr("role", "presentation");
 
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({

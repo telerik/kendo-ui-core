@@ -1171,6 +1171,17 @@
             assert.isOk(dom[0].kendoBindingTarget);
         });
 
+        it("binding text to badge works correctly", function() {
+            dom = $('<span data-role="badge" data-bind="text:foo"></span>');
+
+            var viewModel = {
+                foo: "foo"
+            };
+
+            kendo.bind(dom, viewModel);
+            assert.equal(dom.text().trim(), "foo")
+        });
+
         it("binding target expando is removed after kendo.unbind", function() {
             dom = $('<div data-bind="text:foo"/>');
 

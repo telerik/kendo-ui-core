@@ -181,11 +181,35 @@ The [page on creating a custom number format](https://support.office.com/en-us/a
             }
         </script>
 
+{% if site.mvc %}
+## Use the Detail Template
+
+The Kendo UI Grid does not export its `DetailTemplate` for the same reason it does not export the column templates. If the detail template contains another Grid, follow [this runnable how-to example]({% slug howto_detailgridexcelexport_aspnetmvcgrid %}).
+
+## Export Multiple Grids
+
+For more information on how to export multiple Grids to a separate Excel sheet in a single Excel document, refer to [this runnable how-to example]({% slug howto_multiplegridexport_aspnetmvcgrid %}).
+{% endif %}
+
 ## Server-Side Processing
 
 To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
 > The {{ site.framework }} version is in development. For updates, check [this](https://feedback.telerik.com/document-processing/1356226-document-processing-provide-version-for-net-core) feature request.
+
+## Exclude Column From Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+```Razor
+columns.Bound(p => p.ProductName).Exportable(false);
+```
+
+It can also be set in a detailed fashion containing different values for Excel and PDF exporting modes, providing separate options for each:
+
+```Razor
+columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
+```
 
 ## Known Limitations
 

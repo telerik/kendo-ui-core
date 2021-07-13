@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Dialog Documentation | Dialog Overview | Kendo UI
+page_title: jQuery Dialog Documentation | Dialog Overview
 description: "Get started with the jQuery Dialog by Kendo UI and learn how to create, initialize, and enable the widget."
 previous_url: /web/dialog/overview, /getting-started/web/dialog/overview
 slug: overview_kendoui_dialog_widget

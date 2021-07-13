@@ -26,19 +26,6 @@ The View represents a screen in the mobile Application.
 
 1. Add a hybrid Telerik UI View to the `Index` view.
 
-    ```ASPX
-        <% Html.Kendo().MobileView()
-            .Title("View Title")
-            .Content(() =>
-            {
-                %>
-                    View Content Template
-                <%
-            })
-            .Render();
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileView()
             .Title("View Title")
             .Content(
@@ -47,20 +34,12 @@ The View represents a screen in the mobile Application.
                 </text>
             )
         )
-    ```
 
 1. Initialize the mobile application.
 
-    ```ASPX
-        <%: Html.Kendo().MobileApplication()
-            .ServerNavigation(true)
-        %>
-    ```
-    ```Razor
         @(Html.Kendo().MobileApplication()
             .ServerNavigation(true)
         )
-    ```
 
 1. Build and run the application.
 
@@ -70,21 +49,6 @@ You can subscribe to all hybrid View [events](https://docs.telerik.com/kendo-ui/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```ASPX
-    <%: Html.Kendo().MobileView()
-            .Name("MobileView")
-            .Events(events => events
-                .AfterShow("onAfterShow")
-            )
-    %>
-
-    <script>
-        function onAfterShow() {
-            // Handle the show event.
-        }
-    </script>
-```
-```Razor
     @(Html.Kendo().MobileView()
             .Name("MobileView")
             .Events(events => events
@@ -97,7 +61,6 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the show event.
         }
     </script>
-```
 
 ## Referencing Existing Instances
 

@@ -28,23 +28,36 @@ A Grid allows the user to hide or show columns through its column menu but how c
 
 ## Solution
 
-Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the Grid and remove the desired element or elements by using jQuery.
+Use the [`columnMenuInit`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/columnmenuinit) event of the Grid and add a `hidden` class to the desired element or elements by using jQuery.
+
+```
+  <style>
+    .hidden {
+      display: none !important;
+    }
+  </style>
+```
 
 ```
 columnMenuInit(e){
-  e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').remove();
+  e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').addClass("hidden");
 }
 ```
 
 The following example demonstrates the full implementation of the suggested approach.
 
 ```dojo
+<style>
+  .hidden {
+    display: none !important;
+  }
+</style>
 <div id="grid"></div>
 <script>
   $(document).ready(function() {
     $("#grid").kendoGrid({
       columnMenuInit(e){
-        e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').remove();
+        e.container.find('li[role="menuitemcheckbox"]:nth-child(2)').addClass("hidden");
       },
       dataSource: {
         type: "odata",

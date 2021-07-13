@@ -37,8 +37,8 @@
                     names: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Setiembre","Octubre","Noviembre","Diciembre"],
                     namesAbbr: ["Ene.","Feb.","Mar.","Abr.","May.","Jun.","Jul.","Ago.","Set.","Oct.","Nov.","Dic."]
                 },
-                AM: ["a.m.","a.m.","A.M."],
-                PM: ["p.m.","p.m.","P.M."],
+                AM: ["a. m.","a. m.","A. M."],
+                PM: ["p. m.","p. m.","P. M."],
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd, d 'de' MMMM 'de' yyyy",

@@ -1,6 +1,6 @@
 ---
 title: Icon TabStrip
-page_title: jQuery TabStrip Documentation | Icon TabStrip | Kendo UI
+page_title: jQuery TabStrip Documentation | Icon TabStrip
 description: "Get started with the jQuery TabStrip by Kendo UI and learn how to visually enhance the content of its tabs by adding images."
 slug: icons_tabstrip
 position: 2

@@ -18,7 +18,7 @@
             currency: {
                 name: "Azerbaijani Manat",
                 abbr: "AZN",
-                pattern: ["-$ n","$ n"],
+                pattern: ["-n $","n $"],
                 decimals: 2,
                 ",": ".",
                 ".": ",",
@@ -45,14 +45,14 @@
                     F: "d MMMM yyyy, dddd HH:mm:ss",
                     g: "dd.MM.yyyy HH:mm",
                     G: "dd.MM.yyyy HH:mm:ss",
-                    m: "MMMM d",
-                    M: "MMMM d",
+                    m: "d MMMM",
+                    M: "d MMMM",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
                     t: "HH:mm",
                     T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
-                    y: "yyyy MMMM",
-                    Y: "yyyy MMMM"
+                    y: "MMMM yyyy",
+                    Y: "MMMM yyyy"
                 },
                 "/": ".",
                 ":": ":",

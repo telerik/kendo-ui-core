@@ -23,7 +23,7 @@
                 ",": ".",
                 ".": ",",
                 groupSize: [3],
-                symbol: "RON"
+                symbol: "lei"
             }
         },
         calendars: {
@@ -31,7 +31,7 @@
                 days: {
                     names: ["duminică","luni","marți","miercuri","joi","vineri","sâmbătă"],
                     namesAbbr: ["dum.","lun.","mar.","mie.","joi","vin.","sâm."],
-                    namesShort: ["du.","lu.","ma.","mi.","jo.","vi.","sâ."]
+                    namesShort: ["du.","lu.","ma.","mi.","joi","vi.","sâ."]
                 },
                 months: {
                     names: ["ianuarie","februarie","martie","aprilie","mai","iunie","iulie","august","septembrie","octombrie","noiembrie","decembrie"],

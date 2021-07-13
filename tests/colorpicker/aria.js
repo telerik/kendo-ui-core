@@ -4,7 +4,7 @@
 
     describe("colorpalette", function() {
         beforeEach(function() {
-            element = $("<div>").kendoColorPalette();
+            element = $("<div>").appendTo(Mocha.fixture).kendoColorPalette();
             colorPicker = element.data("kendoColorPalette");
         });
         afterEach(function() {
@@ -54,11 +54,15 @@
 
             assert.equal(cells.filter("[role=gridcell]").length, cells.length);
         });
+
+        it("colorpalette is accessible with AXE", function(done) {
+            axeRunFixture(done);
+        });
     });
 
     describe("color picker", function() {
         beforeEach(function() {
-            element = $("<input/>").kendoColorPicker();
+            element = $("<input/>").appendTo(Mocha.fixture).kendoColorPicker();
             colorPicker = element.data("kendoColorPicker");
         });
         afterEach(function() {
@@ -107,11 +111,22 @@
 
             assert.isOk(colorPicker.wrapper.attr("aria-label").indexOf("#f9d9ab") !== -1);
         });
+
+        it("colorpicker is accessible with AXE", function(done) {
+            axeRunFixture(done);
+        });
+
+        it("colorpicker popup is accessible with AXE", function(done) {
+            colorPicker.open();
+
+            // excluded rule should be removed after fixing the issue in the slider
+            axeRun(colorPicker._popup.element, done, ["aria-allowed-role"]);
+        });
     });
 
     describe("flatcolorpicker", function() {
         beforeEach(function() {
-            element = $("<div>").kendoFlatColorPicker({
+            element = $("<div>").appendTo(Mocha.fixture).kendoFlatColorPicker({
                 preview: true
             });
             colorPicker = element.data("kendoFlatColorPicker");
@@ -125,10 +140,14 @@
             assert.isOk(ariaLabel === "hue saturation");
         });
 
-        it("renders title to the preview input", function() {
-            var ariaLabel = colorPicker.wrapper.find(".k-color-value").attr("title");
+        it("renders aria-label to the preview input", function() {
+            var ariaLabel = colorPicker.wrapper.find(".k-color-value").attr("aria-label");
             assert.isOk(ariaLabel === "Color Hexadecimal Code");
         });
 
+        it("flatcolorpicker is accessible with AXE", function(done) {
+            // excluded rule should be removed after fixing the issue in the slider
+            axeRunFixture(done, ["aria-allowed-role"]);
+        });
     });
 }());

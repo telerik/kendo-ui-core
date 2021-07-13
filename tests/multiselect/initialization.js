@@ -554,12 +554,30 @@
         assert.equal(multiselect.listView.calls("focusFirst"), 1);
     });
 
+    it("do not highlight first item when autoBind is false", function() {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, {
+            highlightFirst: false,
+            autoBind: false
+        });
+
+        multiselect.open();
+
+        assert.equal(multiselect.current(), null);
+    });
+
     it("Copy accesskey to the visible input", function() {
         popuplateSelect();
         var multiselect = new MultiSelect(select.attr("accesskey", "w"), { highlightFirst: false });
 
         assert.isOk(!multiselect.element.attr("accesskey"));
         assert.equal(multiselect.input.attr("accesskey"), "w");
+    });
+
+    it("should not render accesskey on its input when none is configuerd", function() {
+        var multiselect = new MultiSelect(select);
+
+        assert.isOk(!multiselect.input[0].hasAttribute("accesskey"));
     });
 
     it("Scales correctly input element when init in hidden element", function() {

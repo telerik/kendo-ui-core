@@ -89,6 +89,25 @@ The following example demonstrates the basic configuration for the Map HtmlHelpe
 
 For a complete example on basic Map events, refer to the [demo on using the events of the Map](https://demos.telerik.com/{{ site.platform }}/map/events).
 
+    @(Html.Kendo().Map()
+        .Name("map")
+        .Layers(layers =>
+        {
+            layers.Add()
+                .Type(MapLayerType.Tile)
+                .UrlTemplate("http://#= subdomain #.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+                .Subdomains("a", "b", "c");
+        })
+        .Events(e => e
+            .Reset("mapReset")
+        )
+    )
+    <script>
+        function mapReset(e) {
+            // Handle the reset event.
+        }
+    </script>
+
 ## See Also
 
 * [Basic Usage of the Map HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/map/index)

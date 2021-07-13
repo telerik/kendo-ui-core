@@ -266,6 +266,20 @@ The following example demonstrates how to handle custom fonts.
             )
         )
 
+## Exclude Column From Exporting
+
+In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
+
+```Razor
+columns.Bound(p => p.ProductName).Exportable(false);
+```
+
+It can also be set in a detailed fashion containing different values for Excel and PDF exporting modes, providing separate options for each:
+
+```Razor
+columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
+```
+
 ## Known Limitations
 
 * All [known limitations](https://docs.telerik.com/kendo-ui/framework/drawing/limitations-browser-support) of the Kendo UI for jQuery HTML Drawing module apply.

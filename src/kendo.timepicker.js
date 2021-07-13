@@ -42,6 +42,7 @@ var __meta__ = { // jshint ignore:line
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
         ARIA_DISABLED = "aria-disabled",
+        ARIA_READONLY = "aria-readonly",
         ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ID = "id",
         isArray = $.isArray,
@@ -136,7 +137,6 @@ var __meta__ = { // jshint ignore:line
         that.options = options;
         that._dates = [];
 
-
         that._createList(options.timeView && options.timeView.list === "scroll");
 
         if (id) {
@@ -147,7 +147,7 @@ var __meta__ = { // jshint ignore:line
         }
 
         that._heightHandler = proxy(that._height, that);
-
+        that._ariaLabel();
         that._popup();
     };
 
@@ -175,6 +175,32 @@ var __meta__ = { // jshint ignore:line
             this.list.on("keydown"+ns, proxy(this._scrollerKeyDownHandler, this));
         },
 
+        _ariaLabel: function(){
+            var that = this;
+            var inputElm = $("#"+that.options.id);
+            var ul = that.ul;
+            var id = inputElm.attr("id");
+            var labelElm = $("label[for=\'" + id  + "\']");
+            var ariaLabel = inputElm.attr("aria-label");
+            var ariaLabelledBy = inputElm.attr("aria-labelledby");
+            var labelId;
+
+            if (ariaLabel) {
+                ul.attr("aria-label", ariaLabel);
+            } else if (ariaLabelledBy){
+                ul.attr("aria-labelledby", ariaLabelledBy);
+            } else if (labelElm.length){
+                labelId = labelElm.attr("id");
+                if (labelId) {
+                    ul.attr("aria-labelledby", labelId);
+                } else {
+                    labelId = kendo.guid();
+                    labelElm.attr("id", labelId);
+                    ul.attr("aria-labelledby", labelId);
+                }
+            }
+        },
+
         _scrollerKeyDownHandler: function (e) {
             var that = this,
                 key = e.keyCode,
@@ -183,7 +209,7 @@ var __meta__ = { // jshint ignore:line
                 length = lists.length,
                 index = lists.index(list),
                 isRtl = kendo.support.isRtl(that.wrapper),
-                itemHeight = list.find(".k-item:visible:eq(0)").outerHeight(),
+                itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)")),
                 container = list.find(".k-time-container.k-content.k-scrollable");
 
             if (!list.length) {
@@ -292,11 +318,11 @@ var __meta__ = { // jshint ignore:line
             var minutes = value.getMinutes();
             var seconds = value.getSeconds();
             var designator;
-            var hoursList = this.ul.find('[data-index="1"]');
-            var minutessList = this.ul.find('[data-index="2"]');
-            var secondsList = this.ul.find('[data-index="3"]');
-            var designatorList = this.ul.find('[data-index="4"]');
-            var item;
+            var indexAttr = kendo.attr('index');
+            var hoursList = this.ul.find('[' + indexAttr + '="1"]');
+            var minutessList = this.ul.find('[' + indexAttr + '="2"]');
+            var secondsList = this.ul.find('[' + indexAttr + '="3"]');
+            var designatorList = this.ul.find('[' + indexAttr + '="4"]');
 
             if (is12hourFormat) {
                 if (hours >= 12) {
@@ -306,28 +332,36 @@ var __meta__ = { // jshint ignore:line
                     }
                 } else {
                     designator = "AM";
+                    if (hours === 0) {
+                        hours = 12;
+                    }
                 }
             }
 
+            this._internalScroll = true;
             if (hoursList.length) {
-                item = hoursList.find('.k-item[data-value="' + pad(hours) + '"]');
-                hoursList.scrollTop(hoursList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(hoursList, hours);
             }
 
             if (minutessList.length) {
-                item = minutessList.find('.k-item[data-value="' + pad(minutes) + '"]');
-                minutessList.scrollTop(minutessList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(minutessList, minutes);
             }
 
             if (secondsList.length) {
-                item = secondsList.find('.k-item[data-value="' + pad(seconds) + '"]');
-                secondsList.scrollTop(secondsList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(secondsList, seconds);
             }
 
             if (designatorList.length) {
-                item = designatorList.find('.k-item[data-value="' + pad(designator) + '"]');
-                designatorList.scrollTop(designatorList.find(".k-item:visible").index(item) * item.outerHeight());
+                this._scrollListToPosition(designatorList, designator);
             }
+            this._internalScroll = false;
+        },
+
+        _scrollListToPosition: function(list, value) {
+            var item = list.find('.k-item[data-value="' + pad(value) + '"]');
+            var itemHeight = getItemHeight(item);
+
+            list.scrollTop(list.find(".k-item:visible").index(item) * itemHeight);
         },
 
         close: function() {
@@ -438,8 +472,20 @@ var __meta__ = { // jshint ignore:line
             that._html(html);
         },
 
+        _showAllHiddenItems: function() {
+            var items = this.list.find('.k-time-container');
+            var length = items.length;
+            var item;
+
+            for (var i = 0; i < length; i++) {
+                item = $(items[i]);
+                item.find('.k-item:hidden').show();
+                this._updateListBottomOffset(item);
+            }
+        },
+
         _updateListBottomOffset: function (list) {
-            var itemHeight = list.find(".k-item:visible:eq(0)").outerHeight();
+            var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
             var listHeight = list.outerHeight();
             var bottomOffset = listHeight - itemHeight;
             list.find(".k-scrollable-placeholder").css({
@@ -449,23 +495,22 @@ var __meta__ = { // jshint ignore:line
 
         _updateHoursRange: function () {
             var that = this;
-            var hoursList = this.ul.find('[data-index="1"]');
+            var indexAttr = kendo.attr('index');
+            var hoursList = this.ul.find('[' + indexAttr + '="1"]');
             var minHours = this._minHours;
             var maxHours = this._maxHours;
             var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
             var useMax;
             var useMin;
-            var firstHourIndex;
+            var selectedDesignator = this._findSelectedValue(this.ul.find('[' + indexAttr + '="4"]'));
 
             if (!hoursList.length) {
                 return;
             }
-            firstHourIndex = firstItemIndex(hoursList.scrollTop(), hoursList.find(".k-item:visible:eq(0)").outerHeight());
-            this._selectedHour = +hoursList.find(".k-item:visible").eq(firstHourIndex).attr("data-value");
 
-            if (is12hourFormat && this._selectedDesignator) {
+            if (is12hourFormat && selectedDesignator) {
 
-                if (this._selectedDesignator === "AM") {
+                if (selectedDesignator === "AM") {
                     if (minHours < 12) {
                         useMin = true;
                     }
@@ -473,7 +518,7 @@ var __meta__ = { // jshint ignore:line
                     if (maxHours < 12) {
                         useMax = true;
                     }
-                } else if (this._selectedDesignator === "PM") {
+                } else if (selectedDesignator === "PM") {
 
                     if (minHours > 12) {
                         useMin = true;
@@ -513,20 +558,23 @@ var __meta__ = { // jshint ignore:line
 
         _updateMinutesRange: function () {
             var that = this;
-            var minutesList = this.ul.find('[data-index="2"]');
+            var indexAttr = kendo.attr('index');
+            var minutesList = this.ul.find('[' + indexAttr + '="2"]');
             var minHours = this._minHours;
             var maxHours = this._maxHours;
             var minMinutes = this._minMinutes;
             var maxMinutes = this._maxMinutes;
-            var selectedHour = this._selectedHour;
-            var firstIndex;
+            var selectedHour = +this._findSelectedValue(this.ul.find('[' + indexAttr + '="1"]'));
+            var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
+            var selectedDesignator = this._findSelectedValue(this.ul.find('[' + indexAttr + '="4"]'));
+
+            if (is12hourFormat && selectedDesignator === "PM") {
+                selectedHour += 12;
+            }
 
             if (!minutesList.length) {
                 return;
             }
-
-            firstIndex = firstItemIndex(minutesList.scrollTop(), minutesList.find(".k-item:visible:eq(0)").outerHeight());
-            this._selectedMinutes = +minutesList.find(".k-item:visible").eq(firstIndex).attr("data-value");
 
             minutesList.find(".k-item").each(function (_, item) {
                 item = $(item);
@@ -544,12 +592,13 @@ var __meta__ = { // jshint ignore:line
 
         _updateSecondsRange: function () {
             var that = this;
-            var secondsList = this.ul.find('[data-index="3"]');
+            var indexAttr = kendo.attr('index');
+            var secondsList = this.ul.find('[' + indexAttr + '="3"]');
             var minSeconds = this._minSeconds;
             var maxSeconds = this._minSeconds;
             var minMinutes = this._minMinutes;
             var maxMinutes = this._maxMinutes;
-            var selectedMinutes = this._selectedMinutes;
+            var selectedMinutes = +this._findSelectedValue(this.ul.find('[' + indexAttr + '="2"]'));
 
             if (!secondsList.length) {
                 return;
@@ -572,15 +621,12 @@ var __meta__ = { // jshint ignore:line
         _updateDesignatorRange: function () {
             var minHours = this._minHours;
             var maxHours = this._maxHours;
-            var designatorList = this.ul.find('[data-index="4"]');
-            var firstIndex;
+            var indexAttr = kendo.attr('index');
+            var designatorList = this.ul.find('[' + indexAttr + '="4"]');
 
             if (!designatorList.length) {
                return;
             }
-
-            firstIndex = firstItemIndex(designatorList.scrollTop(), designatorList.find(".k-item:visible:eq(0)").outerHeight());
-            this._selectedDesignator = designatorList.find(".k-item:visible").eq(firstIndex).attr("data-value");
 
             if (this._validateMin && minHours >= 12) {
                 designatorList.find('.k-item[data-value="AM"]').hide();
@@ -607,8 +653,6 @@ var __meta__ = { // jshint ignore:line
             var max = this.options.max;
             var min = this.options.min;
 
-            this._selectedDesignator = this._selectedHour = this._selectedMinutes = this._selectedSeconds = null;
-
             if (this.options.validateDate) {
                 if (max.getFullYear() === this._currentlySelected.getFullYear() &&
                     max.getMonth() === this._currentlySelected.getMonth() &&
@@ -627,6 +671,7 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (!this._validateMax && !this._validateMin) {
+                    this._showAllHiddenItems();
                     return;
                 }
             } else {
@@ -659,7 +704,7 @@ var __meta__ = { // jshint ignore:line
 
             for (var i = 0; i < length; i++) {
                 list = lists.eq(i);
-                itemHeight = list.find(".k-item:visible:eq(0)").outerHeight();
+                itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
                 listHeight = list.outerHeight();
                 topOffset = (listHeight - itemHeight) / 2;
                 translate = "translateY(" + topOffset + "px)";
@@ -677,81 +722,84 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _nowClickHandler: function () {
+        _nowClickHandler: function (e) {
+            e.preventDefault();
+
             var now = new Date();
             this.value(now);
             this.options.change(kendo.toString(now, this.options.format, this.options.culture));
         },
 
-        _cancelClickHandler: function () {
+        _cancelClickHandler: function (e) {
+            e.preventDefault();
             this.value(this._value);
             this.popup.close();
         },
 
-        _setClickHandler: function () {
+        _setClickHandler: function (e) {
+            e.preventDefault();
             this._value = new Date(this._currentlySelected);
-            this._updateCurrentlySelected();
 
-            this.options.change(kendo.toString(this._value, this.options.format, this.options.culture), true);
+            this.options.change(kendo.toString(this._currentlySelected, this.options.format, this.options.culture), true);
             this.popup.close();
         },
 
         _listScrollHandler: function (e) {
             var that = this;
-            var itemHeight = Math.floor($(e.currentTarget).find(".k-item:visible:eq(0)").outerHeight());
+            var itemHeight = getItemHeight($(e.currentTarget).find(".k-item:visible:eq(0)"));
+
+            if (that._internalScroll) {
+                return;
+            }
 
             if (that._scrollingTimeout) {
                 clearTimeout(that._scrollingTimeout);
             }
 
             that._scrollingTimeout = setTimeout(function () {
-                if (e.currentTarget.scrollTop % itemHeight !== 0) {
-                    if (e.currentTarget.scrollTop > that._scrollTop) {
-                        e.currentTarget.scrollTop = Math.ceil(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                    } else {
-                        e.currentTarget.scrollTop = Math.floor(e.currentTarget.scrollTop / itemHeight) * itemHeight;
-                    }
+                if (e.currentTarget.scrollTop % itemHeight > 1) {
+                    e.currentTarget.scrollTop += itemHeight - e.currentTarget.scrollTop % itemHeight;
                 }
                 that._scrollTop = e.currentTarget.scrollTop;
-                that._updateRanges();
                 that._updateCurrentlySelected();
+                that._updateRanges();
             }, 100);
         },
 
         _updateCurrentlySelected: function () {
             var is12hourFormat = includes(this.options.format.toLowerCase(), "t");
-            var hoursList = this.ul.find('[data-index="1"]');
-            var minutesList = this.ul.find('[data-index="2"]');
-            var secondsList = this.ul.find('[data-index="3"]');
-            var designatorList = this.ul.find('[data-index="4"]');
+            var indexAttr = kendo.attr('index');
+            var hoursList = this.ul.find('[' + indexAttr + '="1"]');
+            var minutesList = this.ul.find('[' + indexAttr + '="2"]');
+            var secondsList = this.ul.find('[' + indexAttr + '="3"]');
+            var designatorList = this.ul.find('[' + indexAttr + '="4"]');
             var selectedHour;
             var selectedMinutes;
-            var firstOccurence;
             var selectedSeconds;
             var selectedDesignator;
+
+            if (!this.ul.is(":visible")) {
+                return;
+            }
 
             if (!this._currentlySelected) {
                 this._currentlySelected = this._value ? new Date(this._value) : new Date();
             }
 
             if (hoursList.length) {
-                firstOccurence = firstItemIndex(hoursList.scrollTop(), Math.floor(hoursList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedHour = +hoursList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedHour = +this._findSelectedValue(hoursList);
             }
 
             if (minutesList.length) {
-                firstOccurence = firstItemIndex(minutesList.scrollTop(), Math.floor(minutesList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedMinutes = +minutesList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedMinutes = +this._findSelectedValue(minutesList);
             }
 
             if (secondsList.length) {
-                firstOccurence = firstItemIndex(secondsList.scrollTop(), Math.floor(secondsList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedSeconds = +secondsList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedSeconds = +this._findSelectedValue(secondsList);
             }
 
             if (designatorList.length) {
-                firstOccurence = firstItemIndex(designatorList.scrollTop(), Math.floor(designatorList.find(".k-item:visible:eq(0)").outerHeight()));
-                selectedDesignator = designatorList.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+                selectedDesignator = this._findSelectedValue(designatorList);
             }
 
             if (is12hourFormat) {
@@ -780,10 +828,15 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _findSelectedValue: function(list) {
+           var firstOccurence = firstItemIndex(list.scrollTop(), getItemHeight(list.find(".k-item:visible:eq(0)")));
+           return list.find(".k-item:visible").eq(firstOccurence).attr("data-value");
+        },
+
         _itemClickHandler: function (e) {
             var list = $(e.originalEvent.currentTarget);
             var index = list.find(".k-item:visible").index($(e.currentTarget));
-            var itemHeight = list.find(".k-item:visible:eq(0)").outerHeight();
+            var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
 
             list.scrollTop(index * itemHeight);
         },
@@ -810,6 +863,9 @@ var __meta__ = { // jshint ignore:line
                 }
                 result.push(new Date(start));
                 start.setTime(start.getTime() + msInterval);
+                if (!msMax && this.options.maxSet){
+                    break;
+                }
             }
 
             return result;
@@ -838,11 +894,12 @@ var __meta__ = { // jshint ignore:line
         _itemTemplate: function (values, part, title, index) {
             var result ="";
             var length = values.length;
+            var indexAttr = kendo.attr('index');
 
             result += '<div class="k-time-list-wrapper" role="presentation">' +
                         '<span class="k-title">' + (title || part.type) + '</span>' +
                         '<div class="k-time-list">' +
-                            '<div class="k-time-container k-content k-scrollable" role="presentation" data-index="' + index + '">' +
+                            '<div class="k-time-container k-content k-scrollable" role="presentation" ' + indexAttr + '="' + index + '">' +
                                 '<ul class="k-reset">';
 
             for( var i = 0;i < length; i++){
@@ -867,9 +924,9 @@ var __meta__ = { // jshint ignore:line
             var end;
 
             if (part.type === "hour") {
-                start = 1;
+                start = part.hour12 ? 1 : 0;
                 index = 1;
-                end = part.hour12 ? 12 : 24;
+                end = part.hour12 ? 12 : 23;
             } else if (part.type === "minute") {
                 index = 2;
                 end = 59;
@@ -932,20 +989,11 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            var content = this.list[0],
-                itemOffsetTop = item.offsetTop,
-                itemOffsetHeight = item.offsetHeight,
-                contentScrollTop = content.scrollTop,
-                contentOffsetHeight = content.clientHeight,
-                bottomDistance = itemOffsetTop + itemOffsetHeight;
-
-                if (contentScrollTop > itemOffsetTop) {
-                    contentScrollTop = itemOffsetTop;
-                } else if (bottomDistance > (contentScrollTop + contentOffsetHeight)) {
-                    contentScrollTop = (bottomDistance - contentOffsetHeight);
-                }
-
-                content.scrollTop = contentScrollTop;
+            if (item.scrollIntoViewIfNeeded) {
+                item.scrollIntoViewIfNeeded();
+            } else {
+                scrollIntoViewIfNeeded(item);
+            }
         },
 
         select: function(li) {
@@ -1127,7 +1175,11 @@ var __meta__ = { // jshint ignore:line
                     activate: function () {
                         if (that.options.timeView && that.options.timeView.list === "scroll") {
                             that.addTranslate();
-                            that.applyValue(that._value);
+                            if (that._value) {
+                                that.applyValue(that._value);
+                            } else {
+                                that._updateCurrentlySelected();
+                            }
                             that._updateRanges();
                             that._focusList(that.list.find(".k-time-list-wrapper:eq(0)"));
                         }
@@ -1286,7 +1338,8 @@ var __meta__ = { // jshint ignore:line
                         element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
                     }
                 },
-                specifiedRange: that._specifiedRange
+                specifiedRange: that._specifiedRange,
+                maxSet: +options.max != +TODAY
             }));
             ul = timeView.ul;
 
@@ -1357,7 +1410,8 @@ var __meta__ = { // jshint ignore:line
                 second: "second",
                 millisecond: "millisecond",
                 now: "Now"
-            }
+            },
+            componentType: "classic"
         },
 
         events: [
@@ -1385,6 +1439,10 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn.setOptions.call(that, options);
             options = that.options;
+
+            if (+options.max != +TODAY || +options.min != +TODAY) {
+                this._specifiedRange = true;
+            }
 
             normalize(options);
 
@@ -1424,6 +1482,7 @@ var __meta__ = { // jshint ignore:line
                     element[0].removeAttribute(READONLY);
                 }
                 element.attr(ARIA_DISABLED, false)
+                       .attr(ARIA_READONLY, false)
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
@@ -1442,7 +1501,8 @@ var __meta__ = { // jshint ignore:line
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
-                       .attr(ARIA_DISABLED, disable);
+                       .attr(ARIA_DISABLED, disable)
+                       .attr(ARIA_READONLY, readonly);
             }
         },
 
@@ -1485,10 +1545,20 @@ var __meta__ = { // jshint ignore:line
         },
 
         min: function (value) {
+            if (value) {
+                this._specifiedRange = true;
+            }
+
             return this._option("min", value);
         },
 
         max: function (value) {
+            if (value && this.timeView) {
+                this._specifiedRange = true;
+                this.timeView.options.maxSet = true;
+            } else if (this.timeView) {
+                this.timeView.options.maxSet = false;
+            }
             return this._option("max", value);
         },
 
@@ -1842,7 +1912,66 @@ var __meta__ = { // jshint ignore:line
     }
 
     function firstItemIndex(scrollTop, itemHeight) {
-        return Math.max(Math.floor(scrollTop / itemHeight), 0);
+        return Math.max(Math.round(scrollTop / itemHeight), 0);
+    }
+
+    function getItemHeight (item){
+        return item.length && item[0].getBoundingClientRect().height;
+    }
+
+    function scrollIntoViewIfNeeded(element, centerIfNeeded) {
+
+        function makeRange(start, length) {
+            return {start: start, length: length, end: start + length};
+        }
+
+        function coverRange(inner, outer) {
+            if (false === centerIfNeeded ||
+                (outer.start < inner.end && inner.start < outer.end))
+            {
+                return Math.min(
+                    inner.start, Math.max(outer.start, inner.end - outer.length)
+                );
+            }
+            return (inner.start + inner.end - outer.length) / 2;
+        }
+
+        function makePoint(x, y) {
+            return {
+                x: x, y: y,
+                translate: function translate(dX, dY) {
+                    return makePoint(x + dX, y + dY);
+                }
+            };
+        }
+
+        function absolute(elem, pt) {
+            while (elem) {
+                pt = pt.translate(elem.offsetLeft, elem.offsetTop);
+                elem = elem.offsetParent;
+            }
+            return pt;
+        }
+
+        var target = absolute(element, makePoint(0, 0)),
+            extent = makePoint(element.offsetWidth, element.offsetHeight),
+            elem = element.parentNode,
+            origin;
+
+        while (elem instanceof HTMLElement) {
+            origin = absolute(elem, makePoint(elem.clientLeft, elem.clientTop));
+            elem.scrollLeft = coverRange(
+                makeRange(target.x - origin.x, extent.x),
+                makeRange(elem.scrollLeft, elem.clientWidth)
+            );
+            elem.scrollTop = coverRange(
+                makeRange(target.y - origin.y, extent.y),
+                makeRange(elem.scrollTop, elem.clientHeight)
+            );
+
+            target = target.translate(-elem.scrollLeft, -elem.scrollTop);
+            elem = elem.parentNode;
+        }
     }
 
     ui.plugin(TimePicker);

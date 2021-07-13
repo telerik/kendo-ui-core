@@ -824,5 +824,32 @@
 
             assert.equal(pager.find(".k-pager-numbers .k-state-selected").length, 1);
         });
+
+        it("info message is correct with dataSource with groupPaging enabled", function() {
+            var dataSource = new DataSource({
+                pageSize: 10,
+                data: [
+                    { name: "Tea", category: "Beverages" },
+                    { name: "Coffee", category: "Beverages" },
+                    { name: "Ham", category: "Food" }
+                  ],
+                  // group by the "category" field
+                  group: { field: "category" },
+                  groupPaging: true
+            });
+
+            dataSource.fetch(function(){
+                var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
+                    dataSource: dataSource
+                }).data('kendoPager');
+                debugger
+                dataSource._groupsState[dataSource.view()[0].uid] = true
+                pager.refresh();
+
+                assert.equal(pager.element.find(".k-pager-info").text(), "1 - 3 of 4 items");
+
+            });
+
+        });
     });
 }());

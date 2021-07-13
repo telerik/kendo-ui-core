@@ -405,12 +405,23 @@ $.extend(true, kendo.ui.Gantt.prototype.options.messages,{
     "editorTitle": "Задача",
     "end": "Край",
     "percentComplete": "Завършено",
+    "plannedStart": "Планирано начало",
+    "plannedEnd": "Планиран край",
     "resources": "Ресурси",
     "resourcesEditorTitle": "Ресурси",
     "resourcesHeader": "Ресурси",
     "start": "Начало",
     "title": "Заглавие",
     "unitsHeader": "Единици"
+  },
+  "plannedTasks": {
+    "switchText": "Планирана задача",
+    "offsetTooltipAdvanced": "Изпълнена предварително",
+    "offsetTooltipDelay": "Закъснение",
+    "seconds": "секунди",
+    "minutes": "минути",
+    "hours": "часa",
+    "days": "дни"
   },
   "save": "Запази",
   "views": {
@@ -560,12 +571,19 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
   "filter": "Филтрирай",
   "column": "Колона",
   "columns": "Колони",
+  "columnVisibility": "Видими колони",
   "clear": "Премахни",
   "cancel": "Откажи",
   "done": "Готово",
   "settings": "Настройки на колоната",
-  "lock": "Заключи",
-  "unlock": "Отключи"
+  "lock": "Заключи колоната",
+  "unlock": "Отключи колоната",
+  "stick" : "Залепи колоната",
+  "unstick": "Отлепи колоната",
+  "setColumnPosition": "Задай позиция на колоната",
+  "apply": "Приложи",
+  "reset": "Нулирай",
+  "buttonTitle": "Меню за редактиране на колона {0}"
 });
 }
 
@@ -574,6 +592,8 @@ $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages,{
 if (kendo.ui.RecurrenceEditor) {
 kendo.ui.RecurrenceEditor.prototype.options.messages =
 $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
+  "repeat": "Повторение",
+  "recurrenceEditorTitle": "Конфигуратор на повторенията",
   "daily": {
     "interval": " ден(дни)",
     "repeatEvery": "Повтаряй всеки: "
@@ -634,6 +654,8 @@ $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages,{
 if (kendo.ui.MobileRecurrenceEditor) {
     kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
     $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
+      "cancel": "Откажи",
+      "update": "Запази",
       "endTitle": "Повтарянето завършва",
       "repeatTitle": "Вид повторение",
       "headerTitle": "Повтори събитието",
@@ -642,18 +664,35 @@ if (kendo.ui.MobileRecurrenceEditor) {
             "never": "Никога",
             "after": "След...",
             "on": "На..."
-        }
+        },
+        "never": "Никога",
+        "after": "Приключи повторенията след",
+        "on": "Приключи повторенията на"
+      },
+      "daily": {
+        "interval": ""
+      },
+      "hourly": {
+        "interval": ""
+      },
+      "weekly": {
+        "interval": ""
       },
       "monthly": {
+        "interval": "",
         "repeatBy": "Повтори според: ",
         "dayOfMonth": "Дата от месеца",
         "dayOfWeek": "Ден от седмицата",
-        "every": "Всеки"
+        "repeatEvery": "Повтори всеки",
+        "every": "Всеки",
+        "day": "Ден "
       },
       "yearly": {
+        "interval": "",
         "repeatBy": "Повтори според: ",
         "dayOfMonth": "Дата от месеца",
         "dayOfWeek": "Ден от седмицата",
+        "repeatEvery": "Повтори всеки: ",
         "every": "Всеки",
         "month": "Месец",
         "day": "Ден"
@@ -790,7 +829,8 @@ $.extend(true, kendo.ui.FilterMenu.prototype.options.messages,{
   "additionalValue": "Допълнителна стойност",
   "logic": "Логика",
   "done": "Готово",
-  "into": "в"
+  "into": "в",
+  "buttonTitle": "Меню за филтриране на колона {0}"
 });
 }
 
@@ -938,7 +978,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "associateScope": "Асоцииране чрез 'scope' атрибут",
   "associateIds": "Асоцииране чрез Id",
   "copyFormat": "Копирай форматирането",
-  "applyFormat": "Приложи форматирането"
+  "applyFormat": "Приложи форматирането",
+  "borderNone": "Без рамка"
 });
 }
 
@@ -1016,7 +1057,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   },
   "deleteWindowTitle": "Изтрий събитие",
   "showFullDay": "Покажи цял ден",
-  "showWorkDay": "Покажи работни часове"
+  "showWorkDay": "Покажи работни часове",
+  "search": "Намери..."
 });
 }
 
@@ -1205,6 +1247,74 @@ if (kendo.ui.Wizard) {
         "done": "Готово",
         "step": "Стъпка",
         "of": "от"
+    });
+}
+
+
+/* PDFViewer messages */
+
+if (kendo.ui.PDFViewer) {
+    kendo.ui.PDFViewer.prototype.options.messages =
+    $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+        defaultFileName: "Документ",
+        toolbar: {
+            zoom: {
+                zoomLevel: "ниво на приближение",
+                zoomOut: "Отдалечи",
+                zoomIn: "Приближи",
+                actualWidth: "Действителна ширина",
+                autoWidth: "Автоматична ширина",
+                fitToWidth: "Изпълни ширината",
+                fitToPage: "Покажи цяла страница"
+            },
+            open: "Отвори",
+            exportAs: "Експортирай",
+            download: "Свали",
+            pager:  {
+                first: "Отиди на първата страница",
+                previous: "Отиди на предишната страница",
+                next: "Отиди на следващата страница",
+                last: "Отиди на последната страница",
+                of: " от {0} ",
+                page: "страница",
+                pages: "страници"
+            },
+            print: "Разпечатай",
+            toggleSelection: "Активирай селектиране",
+            togglePan: "Активирай местене",
+            search: "Търси"
+        },
+        errorMessages: {
+            notSupported: "Разрешени са само файлове в PDF.",
+            parseError: "Неуспешно обработване на PDF файлът.",
+            notFound: "Файлът не беше открит.",
+            popupBlocked: "Изскачащият прозорец беше блокиран."
+        },
+        dialogs: {
+            exportAsDialog: {
+                title: "Експортирай...",
+                defaultFileName: "Документ",
+                pdf: "Portable Document Format (.pdf)",
+                png: "Portable Network Graphics (.png)",
+                svg: "Scalable Vector Graphics (.svg)",
+                labels: {
+                    fileName: "Име на файла",
+                    saveAsType: "Сапази като",
+                    page: "Страница"
+                }
+            },
+            okText: "ОК",
+            save: "Сапази",
+            cancel: "Отмени",
+            search: {
+                inputLabel: "Търси текст",
+                matchCase: "Търси според малки/големи букви",
+                next: "Следващо съвпадение",
+                previous: "Предишно съвпадение",
+                close: "Затвори",
+                of: "от"
+            }
+        }
     });
 }
 

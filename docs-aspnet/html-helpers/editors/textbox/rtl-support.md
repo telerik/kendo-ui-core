@@ -1,7 +1,7 @@
 ---
 title: RTL Support
 page_title: Right-to-Left Support
-description: "Get started with the Telerik UI TextBox for {{ site.framework }} and learn about the RTL supports it provides."
+description: "Use the Right-to-Left (RTL) feature of the TextBox component for {{ site.framework }} to render content for RTL languages."
 slug: rtl_textbox_aspnetcore
 position: 3
 ---

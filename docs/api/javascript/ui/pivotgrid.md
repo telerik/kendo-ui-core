@@ -331,6 +331,11 @@ The author of the PDF document.
     });
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 A flag indicating whether to produce actual hyperlinks in the exported PDF file.
 
@@ -451,6 +456,14 @@ Specifies the file name of the exported PDF file.
 
 ### pdf.forceProxy `Boolean` *(default: false)*
 If set to true, the content will be forwarded to [proxyURL](/api/javascript/ui/pivotgrid#configuration-pdf.proxyURL) even if the browser supports saving files locally.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -1070,15 +1083,17 @@ The fields which can be used in the template are:
 For information about the tuple structure check this [link](/api/javascript/data/pivotdatasource/configuration/schema.axes).
 About the data item structure review this [help topic](/api/javascript/data/pivotdatasource/configuration/schema.data).
 
-#### Example - emphasize the values in *2005*
+#### Example - bold the value for the *2010* column and use the formatted value for the other columns.
 
     <div id="pivotgrid"></div>
 
     <script id="dataCellTemplate" type="text/x-kendo-template">
-        # if (columnTuple.members[0].name === "[Date].[Calendar].[Year].&[2005]") { #
-            <em>#: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #</em>
+        # if (columnTuple.members[0].name === "[Date].[Calendar].[Calendar Year].&[2010]") { #
+        		<!-- Display the value in bold for the year 2010. -->
+            <b>#: dataItem.value #</b>
         # } else { #
-            #: kendo.toString(kendo.parseFloat(dataItem.value), "c2") #
+        		<!-- Display the formatted value for the other years. -->
+            #: dataItem.fmtValue #
         # } #
     </script>
 
@@ -2266,6 +2281,7 @@ The fields of the result object:
 
             var info = pivotgrid.cellInfo(columnIndex, rowIndex); //retrieve data cell information
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(info);
         });
     });
@@ -2325,6 +2341,7 @@ The fields of the result object:
         pivotgrid.wrapper.on("mouseenter", ".k-grid-content td", function(e){
             var info = pivotgrid.cellInfoByElement(e.currentTarget);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(info);
         });
     });
@@ -2663,6 +2680,7 @@ The widget instance which fired the event.
     $("#pivotgrid").kendoPivotGrid({
         height: 550,
         dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("data bound");
         },
         dataSource: {
@@ -2694,6 +2712,7 @@ The widget instance which fired the event.
     <div id="pivotgrid"></div>
     <script>
     function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("data bound");
     }
 
@@ -2756,6 +2775,7 @@ The path to the field that will be expanded.
     $("#pivotgrid").kendoPivotGrid({
         height: 550,
         expandMember: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand member");
         },
         dataSource: {
@@ -2787,6 +2807,7 @@ The path to the field that will be expanded.
     <div id="pivotgrid"></div>
     <script>
     function expandMember(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("expand member");
     }
 
@@ -2849,6 +2870,7 @@ The path to the field that will be collapsed.
     $("#pivotgrid").kendoPivotGrid({
         height: 550,
         collapseMember: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("collapse member");
         },
         dataSource: {
@@ -2880,6 +2902,7 @@ The path to the field that will be collapsed.
     <div id="pivotgrid"></div>
     <script>
     function collapseMember(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("collapse member");
     }
 

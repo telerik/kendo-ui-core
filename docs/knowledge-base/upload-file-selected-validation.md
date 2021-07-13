@@ -54,14 +54,14 @@ Use a custom rule in the Kendo UI Validator to validate on form submission wheth
             rules: {
             upload: function(input) {
                 if (input[0].type == "file") {
-                fileNotSelected = true;
-                var len = input.closest(".k-upload").find(".k-file").length;
+					fileNotSelected = true;
+					var len = input.closest(".k-upload").find(".k-file").length;
 
-                return len > 0;
+					return len > 0;
                 }
 
                 return true;
-            }
+              }
             }
         }).data("kendoValidator");
 
@@ -69,10 +69,11 @@ Use a custom rule in the Kendo UI Validator to validate on form submission wheth
             $("#files").removeAttr("disabled");
 
             if(!validator.validate()) {
-            if(fileNotSelected) {
-                fileNotSelected = false;
-            }
-            e.preventDefault()
+				if(fileNotSelected) {
+					alert('Please select file to upload')
+					fileNotSelected = false;					
+				}
+				e.preventDefault()
             }
         });  
     </script>

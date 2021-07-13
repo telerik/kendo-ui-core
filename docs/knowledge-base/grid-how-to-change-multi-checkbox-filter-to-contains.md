@@ -48,7 +48,7 @@ To customize the filter:
 <script>
 $("#grid").kendoGrid({
   filter: function(e){
-    if(e.field == "someField"){
+    if(e.field == "someField" && e.filter){
     	e.filter.filters.forEach(function(f){
         f.operator = "contains";
       })
@@ -79,3 +79,225 @@ $("#grid").kendoGrid({
 
 </script>
 ```
+
+## Additional Requirements
+
+I would like to keep the filter state active and show the applied initial filter on the grid.
+
+## Suggested solution
+
+It is easiest to add the `k-state-active` class initially and let the grid with the custom filter handler manage the rest of the state changes.A timeout is needed to accomplish this initial load:
+
+```
+  grid.one("dataBound", function(e){
+    setTimeout(function(){
+        grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass ("k-state-active");
+    });            
+  });
+```
+
+### Example
+
+```dojo
+  <div id="example">
+      <style>
+        .k-multicheck-wrap {
+          overflow-x: hidden;
+        }
+      </style>
+      <div class="demo-section k-content wide">
+        <h4>Server Operations</h4>
+        <div id="server"></div>
+      </div>
+      <script>
+        function getFilterValuesForField(expression, field) {
+          if (expression.filters) {
+            expression.filters = $.grep(expression.filters, function (filter) {
+              getFilterValuesForField(filter, field);
+              if (filter.filters) {
+                return filter.filters.length;
+              } else {
+                return filter.field == field;
+              }
+            });
+          }
+        }
+
+        function flatFilterValues(expression) {
+          if (expression.logic == "and" && expression.filters.length > 1) {
+            return [];
+          }
+          if (expression.filters) {
+            return $.map(expression.filters, function (filter) {
+              return flatFilterValues(filter);
+            });
+          } else if (expression.value !== undefined) {
+            return [expression.value];
+          } else {
+            return [];
+          }
+        }
+
+        var myFilter = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var expression = { logic: "or" };
+
+          var that = this;
+          expression.filters = $.map(this.form.find(":checkbox:checked:not(.k-check-all)"), function (item) {
+            return { value: $(item).val(), operator: "contains", field: that.field };
+          });
+
+          expression = this._merge(expression);
+          if (expression.filters.length) {
+            this.dataSource.filter(expression);
+          }
+
+          this._closeForm();
+        }
+
+        var myGetFilterArray = function () {
+          var expression = $.extend(true, {}, { filters: [], logic: "and" }, this.dataSource.filter());
+          getFilterValuesForField(expression, this.field);
+          var flatValues = flatFilterValues(expression);
+          return flatValues;
+        }
+        $(document).ready(function() {
+          var telerikWebServiceBase = "https://demos.telerik.com/kendo-ui/service/";
+
+
+
+          var grid = $("#server").kendoGrid({
+            filterMenuInit:function(e){
+              var filterMultiCheck = this.thead.find("[data-field=" + e.field + "]").data("kendoFilterMultiCheck");
+              if (filterMultiCheck) {
+                filterMultiCheck.getFilterArray = myGetFilterArray
+                filterMultiCheck.form.off('submit').on('submit', $.proxy(myFilter, filterMultiCheck));
+              }
+            },
+            dataSource: {
+              type: "odata",
+              transport: {
+                read: telerikWebServiceBase + "Northwind.svc/Employees"
+              },
+              pageSize: 20,
+              serverPaging: true,
+              serverSorting: true,
+              serverFiltering: true,
+              filter: { filters: [{value: "Nancy", operator: "contains", field: "FirstName"}], logic: "or"}
+            },
+            editable: true,
+            filterable: true,
+            pageable: true,
+            columns: [{
+                field: "FirstName",
+                title: "First Name",
+                filterable: {
+                  multi: true ,
+                  //when serverPaging of the Grid is enabled, dataSource should be provided for all the Filterable Multi Check widgets
+                  dataSource: {
+                    transport: {
+                      read: {
+                        url: telerikWebServiceBase + "Employees/Unique",
+                        dataType: "jsonp",
+                        data: {
+                          field: "FirstName"
+                        }
+                      }
+                    }
+                  }
+                },
+                width: "220px"
+              }, {
+                field: "LastName",
+                filterable: { 
+                  dataSource: {
+                    transport: {
+                      read: {
+                        url: telerikWebServiceBase + "Employees/Unique",
+                        dataType: "jsonp",
+                        data: {
+                          field: "LastName"
+                        }
+                      }
+                    }
+                  },
+                  multi: true 
+                },
+                title: "Last Name",
+                width: "220px"
+              },{
+                field: "Country",
+                filterable: {
+                  multi: true,
+                  dataSource: {
+                    transport: {
+                      read: {
+                        url: telerikWebServiceBase + "Employees/Unique",
+                        dataType: "jsonp",
+                        data: {
+                          field: "Country"
+                        }
+                      }
+                    }
+                  },
+                  itemTemplate: function(e) {
+                    if (e.field == "all") {
+                      //handle the check-all checkbox template
+                      return "<div><label><strong><input type='checkbox' />#= all#</strong></label></div>";
+                    } else {
+                      //handle the other checkboxes
+                      return "<span><label><input type='checkbox' name='" + e.field + "' value='#=Country#'/><span>#= Country #</span></label></span>"
+                    }
+                  }
+                },
+                width: "220px"
+              }, {
+                field: "City",
+                filterable: {
+                  multi: true,
+                  dataSource: [{
+                    City: "Seattle",
+                  },{
+                    City: "Tacoma",
+                  },{
+                    City: "Kirkland",
+                  },{
+                    City: "Redmond",
+                  },{
+                    City: "London"
+                  }],
+                  checkAll: false
+                },
+                width: "220px"
+              }, {
+                filterable: {
+                  multi: true,
+                  dataSource: {
+                    transport: {
+                      read: {
+                        url: telerikWebServiceBase + "Employees/Unique",
+                        dataType: "jsonp",
+                        data: {
+                          field: "Title"
+                        }
+                      }
+                    }
+                  }
+                },
+                field: "Title"
+              }
+            ]
+          }).data("kendoGrid");
+          
+          grid.one("dataBound", function(e){
+            setTimeout(function(){
+            	grid.thead.find("[data-field='FirstName']").find(".k-grid-filter").addClass("k-state-active");
+            });          	
+          });
+        });
+      </script>
+    </div>
+```
+

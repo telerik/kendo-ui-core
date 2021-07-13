@@ -12,54 +12,9 @@ This article demonstrates how to download and install Progress Telerik UI for JS
 
 To read more about the benefits of using Progress Telerik UI for JSP, please visit the [product overview page](http://www.telerik.com/jsp-ui).
 
-<style>
-/* Kendo UI for jQuery download trial button */
-div#kendo_trial {
-	text-align: center !important;
-}
-
-div#kendo_trial .kendo_download_btn {	
-	color: #fff;
-	background-color: #e74b3c;
-	padding:.44em .9em .52em;
-	font-size: 20px;
-	font-weight:400;
-	letter-spacing:-.025em;
-	position:relative;
-	display:inline-block;
-	line-height:1.2;
-	-webkit-transition:color .2s ease,background-color .2s ease;
-	transition:color .2s ease,background-color .2s ease;
-	border-radius:2px;
-	-webkit-appearance:none;
-	font-family:Metric,Arial,Gadget,sans-serif;
-	text-align:center	
-}
-</style>
-
-<script type="text/javascript">
-
-  $(document).ready(function(){
-	  var mac = navigator.userAgent.match(/(Mac)/i);
-	  var $btnWin = $(".js-btnWin");
-	  var $btnOSX = $(".js-btnOSX");
-
-	  if (mac) {
-		$btnOSX.show();
-		$btnWin.hide();
-	  } else {
-		$btnOSX.hide();
-		$btnWin.show();
-	  }
-  });
-
-</script>
-
-<div id="kendo_trial">
-<br />
-<a href="https://www.telerik.com/download-trial-file/v2/ui-for-jsp" class="kendo_download_btn js-btnWin" style="display: none">Download Free Trial</a>
-<a href="https://www.telerik.com/download-trial-file/v2/ui-for-jsp" class="kendo_download_btn js-btnOSX" style="display: none">Download Free Trial</a>
-</div>
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
 
 ## Getting Started
 
@@ -109,7 +64,7 @@ Find a sample a JSP Spring MVC application in the `\wrappers\jsp\spring-demos` f
 
 **Step 6** Right-click **spring-demos** in the Eclipse Project Explorer. Pick **Properties**.
 
-**Step 7** In the properties window pick **Project Facets**.
+**Step 7** In the properties window pick **Project Facets** or other Eclipse package that contains Tools for developers working with Java and Web applications.
 
 **Step 8** From the "Project Facets" menu select "Dynamic Web Module".
 

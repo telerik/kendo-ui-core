@@ -203,7 +203,7 @@ The Theme Builder generates CSS, Less, and JS code which is compatible with the 
 
 ### Modifying Themes
 
-Kendo UI supports a number of `.less` files, which are only used when you want to modify the Kendo UI CSS source code and create a custom theme. In the Kendo UI Q1 2014 release, the Kendo UI `web.common.less` file was split, which resulted in the construction of `.less` files for each widget. The Kendo UI mobile platform themes were also divided in parts to create files per widget. The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets, can be built by using the Less 1.7.5 version.
+Kendo UI supports a number of `.less` files, which are only used when you want to modify the Kendo UI CSS source code and create a custom theme. In the Kendo UI Q1 2014 release, the Kendo UI `web.common.less` file was split, which resulted in the construction of `.less` files for each widget. The Kendo UI mobile platform themes were also divided in parts to create files per widget. The Kendo UI `.less` files, including the styling of the Kendo UI hybrid widgets, can be built by using the Less 3.0.0 version.
 
 > * As of 2019.1 versions and onwards Kendo UI for jQuery distributes a single and identical set of themes for both Kendo UI Professional and Kendo UI Core.
 > * Kendo UI versions earlier than and including 2015.2.805 had to be built with [Telerik Less fork](https://github.com/telerik/less.js) located on GitHub. This is no longer a requirement.

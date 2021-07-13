@@ -85,6 +85,18 @@ When scrolling is enabled, the vertical scrollbar of the Grid is always visible 
        overflow-y: visible;
     }
 
+## Visualizing only the Horizontal ScrollBar
+
+In order to activate the Horizontal Scrollbar, set width to the columns of the Grid, so their sum to be bigger than the total width of the Grid. For hiding the Vertical ScrollBar use the following CSS(replace the `#GridID` with the Id of your Grid. The needed Id is the name of the Grid):
+
+    #GridID .k-grid-content {
+        overflow-y: hidden;
+    }
+
+    .k-grid-header {
+        padding: 0px !important;
+    }
+
 ## Restoring the Scroll Position
 
 In some scenarios, the scroll position of the Grid might be reset when the widget is rebound. To prevent the restoration of the scroll position:

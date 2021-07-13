@@ -12,46 +12,25 @@ position: 1
     {% assign telerik_product_url = "aspnet-mvc" %}
 {% endif %}
 
-## Welcome to {{ site.product }}
+# Welcome to {{ site.product }}
 
 Thank you for choosing Progress<sup>®</sup> Telerik<sup>®</sup> {{ site.product_short }}!  
 
-[{{ site.product }}](https://www.telerik.com/{{ telerik_product_url }}) is a set of server-side wrappers (HTML{% if site.core %} and Tag{% endif %} helpers) that allow you to use the Kendo UI widgets in .NET {{ site.framework_short }}. From a client-side point of view, the vanilla HTML/JavaScript Kendo UI widgets and their {{ site.framework }} helpers represent the same functionalities and provide the same capabilities.
+[{{ site.product }}](https://www.telerik.com/{{ telerik_product_url }}) is a set of server-side wrappers that bring the [HTML/JavaScript Kendo UI widgets](https://docs.telerik.com/kendo-ui/introduction) to .NET {{ site.framework_short }}. Our server-side wrappers come in the form of HTML{% if site.core %} and Tag{% endif %} helpers. 
+From client-side perspective, the vanilla HTML/JavaScript Kendo UI widgets and their {{ site.framework }} server-side wrappers represent the same functionalities and provide the same capabilities.
+
 
 The {{ site.product }} HTML{% if site.core %} and Tag{% endif %} helpers:
-* Allow you to configure a Kendo UI widget through the C# or VB.NET code&mdash;for example, to set its value, data source, and so on.
-* Render the HTML and JavaScript that are needed to initialize a Kendo UI widget whose options propagate to the client-side through its initialization script.
+* Allow you to configure a Kendo UI widget through  C# or VB.NET code&mdash;for example, to set its value, data source, and so on.
+* Render the HTML and JavaScript that are needed to initialize a Kendo UI widget.
+* Propagate the widget’s options to the client-side through its initialization script.
 
 To read more about the benefits of using {{ site.product }}, please visit the {% if site.core %}[product overview page](https://www.telerik.com/aspnet-core-ui){% else %}[product overview page](https://www.telerik.com/aspnet-mvc){% endif %}.
 
-<style>
-/* UI for ASP.NET download trial button */
-div#aspnet_trial {
-	text-align: center !important;
-}
-div#aspnet_trial .aspnet_download_btn {	
-	color: #fff;
-	background-color: #e74b3c;
-	padding:.44em .9em .52em;
-	font-size: 20px;
-	font-weight:400;
-	letter-spacing:-.025em;
-	position:relative;
-	display:inline-block;
-	line-height:1.2;
-	-webkit-transition:color .2s ease,background-color .2s ease;
-	transition:color .2s ease,background-color .2s ease;
-	border-radius:2px;
-	-webkit-appearance:none;
-	font-family:Metric,Arial,Gadget,sans-serif;
-	text-align:center	
-}
-</style>
 
-<div id="aspnet_trial">
-<br />
-    <a href="https://www.telerik.com/download-trial-file/v2/{{ telerik_product_url }}" class="aspnet_download_btn">Download Free Trial</a>
-</div>
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
 
 ## Getting Started
 
@@ -85,11 +64,11 @@ Telerik {{ site.product_short }} supports:
 * [.NET Framework v3.5](https://www.microsoft.com/en-us/download/details.aspx?id=21) and later.
 * [ASP.NET MVC 3](http://www.asp.net/mvc/mvc3) and later.
 * Visual Studio 2012 and later.
-* [IIS 5](https://www.microsoft.com/en-us/download/details.aspx?id=24843) and later.
+* [IIS](https://www.iis.net/) 5 and later.
 * [C#](https://msdn.microsoft.com/en-us/library/aa288436(v=vs.71).aspx)  and [VB.NET](http://www.tutorialspoint.com/vb.net/).
 * [SharePoint 2010](https://msdn.microsoft.com/en-us/library/office/dd776256(v=office.12).aspx) and later.
 
-The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 2015 and later.
+The Telerik UI for ASP.NET MVC Visual Studio extensions support Visual Studio 2012 and later.
 {% endif %}
 
 ### Monitoring the Progress Live Services
@@ -114,12 +93,12 @@ For any issues you might encounter while working with {{ site.product_short }}, 
 ## Learning Resources
 
 {% if site.core %} 
-* [Virtual Classroom](https://progress.exceedlms.com/student/path/497495-telerik-ui-for-asp-net-core)
+* [Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/8/telerik-ui-for-aspnet-core)
 * [Knowledge Base](https://docs.telerik.com/aspnet-core/knowledge-base.html)
 * [Support Resources Hub Page](https://www.telerik.com/support/aspnet-core)
 * [Collected Examples on Telerik UI for ASP.NET Core](https://github.com/telerik/ui-for-aspnet-core-examples)
 {% else %}
-* [Virtual Classroom](https://progress.exceedlms.com/student/path/498054-telerik-ui-for-asp-net-mvc)
+* [Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/3/telerik-ui-for-aspnet-mvc)
 * [Tutorials]({% slug overview_timeefficiencyapp_aspnetmvc6 %})
 * [Support Resources Hub Page](https://www.telerik.com/support/aspnet-mvc)
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)

@@ -30,7 +30,7 @@ You can define the `Checkboxes` configuration option by:
   * The `CheckChildren()` option indicates whether checkboxes of child items will be checked when the checkbox of a parent item is checked. This option also enables tri-state checkboxes with an indeterminate state.
   * The `TemplateId()` option allows you to define a script template which will be used for the rendering of the checkboxes. Similarly, the `Template()` option allows the setting of an inline string template.
 
-        @(Html.Kendo().TreeView()
+          @(Html.Kendo().TreeView()
             .Name("treeview")
             .DataTextField("Name")
             .Checkboxes(checkboxes => checkboxes
@@ -43,11 +43,10 @@ You can define the `Checkboxes` configuration option by:
                     .Action("Read_TreeViewData", "TreeView")
                 )
             )
-        )
-
-        <script type="text/kendo-template" id="checkbox-template">
+          )          
+          <script type="text/kendo-template" id="checkbox-template">
             <input type='checkbox' name='checkedFiles[#= item.id #]' value='true' />
-        </script>
+          </script>
 
 ## See Also
 

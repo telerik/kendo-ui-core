@@ -17,7 +17,7 @@ For the full list of components which support accessibility and keyboard navigat
 Accessible websites and applications normally provide support for:
 
 * [Section 508](#section-508)
-* [W3C Web Content Accessibility Guidelines (WCAG) 2.0](#wcag-21)
+* [W3C Web Content Accessibility Guidelines (WCAG) 2.1](#wcag-21)
 * [WAI-ARIA](#wai-aria)
 * [Keyboard navigation requirements](#keyboard-navigation)
 
@@ -40,5 +40,5 @@ By default, users can only navigate to links, buttons, and form controls with a 
 ## Suggested Links
 
 * [Accessibility Support by {{ site.product }}]({% slug compliance_accessibility %})
-* [GSA Government-Wide Section 508 Accessibility Program](https://www.access-board.gov/the-board/laws/rehabilitation-act-of-1973#508)
+* [GSA Government-Wide Section 508 Accessibility Program](https://www.access-board.gov/law/ra.html#section-508-federal-electronic-and-information-technology)
 * [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices/)

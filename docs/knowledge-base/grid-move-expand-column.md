@@ -31,7 +31,14 @@ How can I relocate the expand column of the Grid?
 Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/events/databound) event, rearrange the columns by using jQuery.
 
 ```dojo
-<div id="example">
+  <style>
+    /* Set a width for the hierarchy column, otherwise the column you swap it with will be shrunk. */
+    .k-grid .k-hierarchy-col {
+      width: 110px;
+    }
+  </style>
+  
+  <div id="example">
       <div id="grid"></div>
 
       <script>
@@ -43,6 +50,7 @@ Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gri
             $(this).replaceWith(copy_to);
           });
         };
+        
         $(document).ready(function() {
           var element = $("#grid").kendoGrid({
             dataSource: {
@@ -56,21 +64,19 @@ Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gri
             },
             height: 600,
             sortable: true,
-            reorderable:true,
             pageable: true,
             detailInit: detailInit,
             dataBound: function() {
+              // Swap the hierarchy column with the fourth column of the grid.
+              this.thead.find('.k-hierarchy-cell').each(function(_,x){
+          	  	x= $(x);
+          	  	x.swapWith($("th:eq(3)"));
+          		});
+              
               this.tbody.find('.k-hierarchy-cell').each(function(_,x){
                 x= $(x);
-                x.swapWith(x.nextAll().eq(3));
-              })
-
-              this.thead.find('.k-hierarchy-cell').each(function(_,x){
-                x= $(x);
-                x.swapWith(x.nextAll().eq(3));
-              })
-
-              this.element.find('.k-hierarchy-col').swapWith(this.element.find('col').nextAll().eq(3));
+                x.swapWith(x.closest("tr").find('td:eq(3)'));
+              });
             },
             columns: [
               {
@@ -92,7 +98,8 @@ Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gri
                 width: "110px"
               },
               {
-                field: "Title"
+                field: "Title",
+                width: "110px"
               }
             ]
           });
@@ -117,7 +124,7 @@ Within the [`dataBound`](https://docs.telerik.com/kendo-ui/api/javascript/ui/gri
             columns: [
               { field: "OrderID", width: "110px" },
               { field: "ShipCountry", title:"Ship Country", width: "110px" },
-              { field: "ShipAddress", title:"Ship Address" },
+              { field: "ShipAddress", title:"Ship Address", width: "110px" },
               { field: "ShipName", title: "Ship Name", width: "300px" }
             ]
           });

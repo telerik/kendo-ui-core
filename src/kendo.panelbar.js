@@ -240,7 +240,7 @@ var __meta__ = { // jshint ignore:line
                 .on("blur" + NS, function() {
                     that._current(null);
                 })
-                .attr("role", "menu");
+                .attr("role", "tree");
 
             content = element.find("li." + ACTIVECLASS + " > ." + CONTENT);
 
@@ -362,7 +362,7 @@ var __meta__ = { // jshint ignore:line
 
             that.templates = {
                 content: template(
-                    "<div role='region' class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                    "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
                 ),
                 group: template(
                     "<ul role='group' aria-hidden='#= ariaHidden(group) #' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
@@ -390,7 +390,7 @@ var __meta__ = { // jshint ignore:line
                 ),
 
                 item: template(
-                    "<li role='menuitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
+                    "<li role='treeitem' #=aria(item)#class='#= wrapperCssClass(group, item) #'" +
                          kendo.attr("uid") + "='#= item.uid #'>" +
                         "#= itemWrapper(data) #" +
                         "# if (item.items && item.items.length > 0) { #" +
@@ -400,10 +400,12 @@ var __meta__ = { // jshint ignore:line
                         "# } #" +
                     "</li>"
                 ),
-                loading: template("<div class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</div>"),
+                loading: template("<li class='k-item'><span class='k-icon k-i-loading'></span> #: data.messages.loading #</li>"),
                 retry: template(
-                    "#: data.messages.requestFailed # " +
-                    "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
+                    "<li class='k-item'>" +
+                        "#: data.messages.requestFailed # " +
+                        "<button class='k-button k-request-retry'>#: data.messages.retry #</button>" +
+                    "</li>"
                 ),
                 arrow: template("<span class='#= arrowClass(item) #'></span>"),
                 empty: template("")
@@ -1249,6 +1251,7 @@ var __meta__ = { // jshint ignore:line
                 });
                 if (isReferenceItem) {
                     var dataItem = that.dataItem(referenceItem);
+
                     if (dataItem) {
                         dataItem.hasChildren = true;
                         referenceItem
@@ -1300,6 +1303,7 @@ var __meta__ = { // jshint ignore:line
             expanded = (dataItem && dataItem.expanded) || false;
 
             panels.parent()
+                  .not("[" + ARIA_EXPANDED + "]")
                   .attr(ARIA_EXPANDED, expanded)
                   .not("." + ACTIVECLASS)
                   .children("ul")
@@ -1329,7 +1333,7 @@ var __meta__ = { // jshint ignore:line
                 root = this.element[0],
                 wrapElement, link;
 
-            item = $(item).addClass("k-item").attr("role", "menuitem");
+            item = $(item).addClass("k-item").attr("role", "treeitem");
 
             if (kendo.support.browser.msie) {  // IE10 doesn't apply list-style: none on invisible items otherwise.
                 item.css("list-style-position", "inside")
@@ -1364,7 +1368,6 @@ var __meta__ = { // jshint ignore:line
             item
                 .children("div")
                 .addClass(CONTENT)
-                .attr("role", "region")
                 .attr(ARIA_HIDDEN, true)
                 .hide()
                 .parent()

@@ -75,5 +75,6 @@ The title of the Cancel button.
       messages:{
         okText: "OK"
       }
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     }).data("kendoConfirm").result.done(function(){console.log("User accepted"); }).fail(function(){console.log("User rejected");});
     </script>

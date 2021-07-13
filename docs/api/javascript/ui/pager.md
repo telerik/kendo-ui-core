@@ -240,7 +240,8 @@ Defines if an input element which allows the user to navigate to given page will
 
         $("#pager").kendoPager({
           dataSource: dataSource,
-          input: true
+          input: true,
+          numeric: false
         });
 
         dataSource.read();
@@ -653,7 +654,8 @@ The tooltip of the button which navigates to the first page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -685,7 +687,8 @@ The tooltip of the button which navigates to the previous page.
             { productName: "Ham", category: "Food" },
             { productName: "Bread", category: "Food" }
           ],
-          pageSize: 2
+          pageSize: 2,
+          page: 2
         });
 
         $("#pager").kendoPager({
@@ -788,7 +791,8 @@ The tooltip of the refresh button.
           dataSource: dataSource,
           messages: {
             refresh: "Refresh data"
-          }
+          },
+          refresh: true
         });
 
         dataSource.read();
@@ -825,6 +829,7 @@ Returns the number of pages.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.totalPages()); // displays "2"
     </script>
     <style>
@@ -861,6 +866,7 @@ Returns the page size - maximum number of items allowed on one page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.pageSize()); // displays "2"
     </script>
     <style>
@@ -897,6 +903,7 @@ Gets or sets the current page.
           dataSource: dataSource
         }).data("kendoPager");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(pager.page()); // displays "1"
     </script>
     <style>
@@ -1039,6 +1046,7 @@ The widget instance which fired the event.
         $("#pager").kendoPager({
           dataSource: dataSource,
           change: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("pager change event");
           }
         });
@@ -1054,6 +1062,7 @@ The widget instance which fired the event.
 
     <script>
         function pager_change() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("pager change event");
         }
 

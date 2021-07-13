@@ -35,6 +35,7 @@ var __meta__ = { // jshint ignore:line
         HOVER = "k-state-hover",
         FOCUS = "focus",
         POINT = ".",
+        SYMBOL = "symbol",
         CLASS_ICON = "k-icon",
         LABELCLASSES = "k-label k-input-label",
         SELECTED = "k-state-selected",
@@ -95,13 +96,12 @@ var __meta__ = { // jshint ignore:line
                  that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function() {
                      if (kendo.support.browser.edge) {
                          that._text.one(FOCUS + ns, function() {
-                             that._toggleText(false);
-                             element.focus();
+                            that._focusin();
                          });
                      } else {
-                         that._toggleText(false);
-                         element.focus();
+                        that._focusin();
                      }
+                     that.selectValue();
                  });
              }
 
@@ -122,7 +122,7 @@ var __meta__ = { // jshint ignore:line
 
              that.value(value);
 
-             disabled = element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
+             disabled = !options.enable || element.is("[disabled]") || $(that.element).parents("fieldset").is(':disabled');
 
              if (disabled) {
                  that.enable(false);
@@ -137,6 +137,7 @@ var __meta__ = { // jshint ignore:line
              });
 
              that._label();
+             that._ariaLabel();
 
              kendo.notify(that);
          },
@@ -144,6 +145,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "NumericTextBox",
             decimals: NULL,
+            enable: true,
             restrictDecimals: false,
             min: NULL,
             max: NULL,
@@ -154,6 +156,7 @@ var __meta__ = { // jshint ignore:line
             format: "n",
             spinners: true,
             placeholder: "",
+            selectOnFocus: false,
             factor: 1,
             upArrowText: "Increase value",
             downArrowText: "Decrease value",
@@ -419,7 +422,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (group) {
                     groupRegExp = new RegExp("\\" + group, "g");
-                    extractRegExp = new RegExp("(^(-)$)|(^(-)?([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?)");
+                    extractRegExp = new RegExp("(-)?(" + format[SYMBOL] + ")?([\\d\\" + group + "]+)(\\" + format[POINT] + ")?(\\d+)?");
                 }
 
                 if (extractRegExp) {
@@ -437,20 +440,34 @@ var __meta__ = { // jshint ignore:line
                 that._focusin();
 
                 caret(that.element[0], caretPosition);
+                that.selectValue();
             });
         },
 
-        _change: function(value) {
+        selectValue: function(){
+            if (this.options.selectOnFocus) {
+                this.element[0].select();
+            }
+        },
+
+        _getFactorValue: function (value) {
             var that = this,
                 factor = that.options.factor;
 
-            if(factor && factor !== 1){
+            if (factor && factor !== 1) {
                 value = kendo.parseFloat(value);
-                if(value !== null) {
+                if (value !== null) {
                     value = value/factor;
                 }
             }
 
+            return value;
+        },
+
+        _change: function(value) {
+            var that = this;
+
+            value = that._getFactorValue(value);
             that._update(value);
             value = that._value;
 
@@ -514,7 +531,7 @@ var __meta__ = { // jshint ignore:line
             text = wrapper.find(POINT + CLASSNAME);
 
             if (!text[0]) {
-                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME).attr("aria-hidden", "true");
+                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
             }
 
             try {
@@ -579,11 +596,17 @@ var __meta__ = { // jshint ignore:line
             var numberFormat = this._format(this.options.format);
             var decimalSeparator = numberFormat[POINT];
             var minInvalid = (min !== null && min >= 0 && value.charAt(0) === "-");
-            
+
             if (this._numPadDot && decimalSeparator !== POINT) {
                 value = value.replace(POINT, decimalSeparator);
                 this.element.val(value);
                 this._numPadDot = false;
+            }
+
+            if (this._isPasted) {
+                value = this._parse(value)
+                    .toString()
+                    .replace(POINT, numberFormat[POINT]);
             }
 
             if (this._numericRegex(numberFormat).test(value) && !minInvalid) {
@@ -596,6 +619,8 @@ var __meta__ = { // jshint ignore:line
                     this._cachedCaret = null;
                 }
             }
+
+            this._isPasted = false;
         },
 
         _blinkInvalidState: function () {
@@ -655,7 +680,9 @@ var __meta__ = { // jshint ignore:line
             var value = element.value;
             var numberFormat = that._format(that.options.format);
 
-            setTimeout(function() {
+            that._isPasted = true;
+
+           setTimeout(function() {
                 var result = that._parse(element.value);
 
                 if (result === NULL) {
@@ -663,6 +690,7 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     element.value = result.toString().replace(POINT, numberFormat[POINT]);
                     if (that._adjust(result) !== result || !that._numericRegex(numberFormat).test(element.value)) {
+                        value = that._getFactorValue(element.value);
                         that._update(value);
                     }
                 }
@@ -690,6 +718,32 @@ var __meta__ = { // jshint ignore:line
                 .attr("aria-value" + option, value);
 
             element.attr(option, value);
+        },
+
+        _ariaLabel: function(){
+            var that = this;
+            var text = that._text;
+            var inputElm = that.element;
+            var id = inputElm.attr("id");
+            var labelElm = $("label[for=\'" + id  + "\']");
+            var ariaLabel = inputElm.attr("aria-label");
+            var ariaLabelledBy = inputElm.attr("aria-labelledby");
+            var labelId;
+
+            if (ariaLabel) {
+                text.attr("aria-label", ariaLabel);
+            } else if (ariaLabelledBy){
+                text.attr("aria-labelledby", ariaLabelledBy);
+            } else if (labelElm.length){
+                labelId = labelElm.attr("id");
+                if (labelId) {
+                    text.attr("aria-labelledby", labelId);
+                } else {
+                    labelId = kendo.guid();
+                    labelElm.attr("id", labelId);
+                    text.attr("aria-labelledby", labelId);
+                }
+            }
         },
 
         _spin: function(step, timeout) {
@@ -738,6 +792,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that._text.toggle(toggle);
+            if (toggle) {
+                that._text.removeAttr("aria-hidden");
+            } else {
+                that._text.attr("aria-hidden", "true");
+            }
             that.element.toggle(!toggle);
         },
 
@@ -890,7 +949,7 @@ var __meta__ = { // jshint ignore:line
         var className = "k-i-arrow-" + (direction === "increase" ? "60-up" : "60-down");
 
         return (
-            '<span unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
+            '<span role="button" unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
                 '<span unselectable="on" class="' + CLASS_ICON + ' ' + className + '"></span>' +
             '</span>'
         );

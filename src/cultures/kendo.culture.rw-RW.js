@@ -40,11 +40,11 @@
                 AM: ["AM","am","AM"],
                 PM: ["PM","pm","PM"],
                 patterns: {
-                    d: "yyyy/MM/dd",
-                    D: "dddd, yyyy MMMM dd",
-                    F: "dddd, yyyy MMMM dd HH:mm:ss",
-                    g: "yyyy/MM/dd HH:mm",
-                    G: "yyyy/MM/dd HH:mm:ss",
+                    d: "yyyy-MM-dd",
+                    D: "yyyy MMMM d, dddd",
+                    F: "yyyy MMMM d, dddd HH:mm:ss",
+                    g: "yyyy-MM-dd HH:mm",
+                    G: "yyyy-MM-dd HH:mm:ss",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
@@ -54,7 +54,7 @@
                     y: "yyyy MMMM",
                     Y: "yyyy MMMM"
                 },
-                "/": "/",
+                "/": "-",
                 ":": ":",
                 firstDay: 1
             }

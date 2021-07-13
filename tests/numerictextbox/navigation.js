@@ -105,8 +105,6 @@
             assert.equal(input.val(), "1");
         });
 
-    
-
         it("Allow decimal separator '.'", function() {
             var textbox = new NumericTextBox(input);
 
@@ -155,7 +153,7 @@
 
             kendo.culture("bg-BG");
             input.focus();
-            
+
             input.val(".");
             input.pressKey(kendo.keys.NUMPAD_DOT, "keydown");
             input.trigger("input");
@@ -256,6 +254,48 @@
             }, 100);
         });
 
+        it("Apply pasted value with different decimal separator", function(done) {
+            var textbox = new NumericTextBox(input),
+                textboxEl = textbox.element;
+
+            textboxEl.focus();
+
+            textboxEl.val("3,321");
+
+            textboxEl.trigger("paste", {
+                target: input[0]
+            });
+
+            textboxEl.trigger("input");
+
+            setTimeout(function() {
+                assert.equal(textboxEl.val(), 3321);
+                done();
+            }, 100);
+        });
+
+        it("Apply pasted value with different decimal separator based on culture", function(done) {
+            var textbox = new NumericTextBox(input, {
+                culture: "de-DE"
+            }),
+            textboxEl = textbox.element;
+
+            textboxEl.focus();
+
+            textboxEl.val("1.012,56");
+
+            textboxEl.trigger("paste", {
+                target: input[0]
+            });
+
+            textboxEl.trigger("input");
+
+            setTimeout(function() {
+                assert.equal(textboxEl.val(), "1012,56");
+                done();
+            }, 100);
+        });
+
         it("Accept pasted value with different decimal separator", function(done) {
             var textbox = new NumericTextBox(input);
             kendo.culture("bg-BG");
@@ -269,6 +309,31 @@
                 done();
             }, 100);
             kendo.culture("en-US");
+        });
+
+        it("Pasting works correctly with factor", function(done) {
+            var textbox = new NumericTextBox(input, {
+                format: "p0",
+                factor: 100,
+                min: 0,
+                max: 1,
+                step: 0.01
+            });
+
+            input.focus();
+
+            input.val("30");
+
+            input.trigger("paste", {
+                target: input[0]
+            });
+
+            input.trigger("input");
+
+            setTimeout(function() {
+                assert.equal(textbox.value(), 0.3);
+                done();
+            }, 100);
         });
 
         it("Accept pasted value with currency symbol", function(done) {
@@ -355,6 +420,33 @@
             });
 
             kendo.support.mobileOS = true;
+        });
+
+        it("Focus origin input on touched adds focused class", function() {
+            kendo.support.mobileOS = true;
+
+            var textbox = new NumericTextBox(input);
+
+            textbox.element.on("focus", function() {
+                assert.isOk(textbox._inputWrapper.hasClass("k-state-focused"));
+            });
+
+            textbox.wrapper.find(".k-formatted-value").trigger({
+                type: "touchend"
+            });
+
+            kendo.support.mobileOS = true;
+        });
+
+        it("text is selected after focus when selectOnFocus is enabled", function(done) {
+            var textbox = new NumericTextBox(input, { selectOnFocus: true, value: 15 });
+
+            textbox._click({ target: textbox._text[0] });
+
+            setTimeout(function() {
+                assert.equal(input[0].value.substring(input[0].selectionStart, input[0].selectionEnd), "15");
+                done();
+            }, 100);
         });
     });
 }());

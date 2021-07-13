@@ -299,4 +299,5 @@ The usage of a row template is suitable only if you do not intend to use hierarc
 
 ## See Also
 
+* [Dynamic User defined row styles]({% slug grid-user-defined-row-styles %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)

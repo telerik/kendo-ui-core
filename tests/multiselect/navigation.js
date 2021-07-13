@@ -1,7 +1,8 @@
 (function() {
     var MultiSelect = kendo.ui.MultiSelect,
         keys = kendo.keys,
-        select;
+        select,
+        CONTAINER_HEIGHT = 200;;
 
     function populateSelect(length) {
         var options = [];
@@ -540,6 +541,236 @@
         multiselect.open();
 
         assert.isOk(multiselect.listView.content[0].scrollTop > 50);
+    });
+});
+
+describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
+    function generateData(parameters) {
+        var items = [];
+        for (var i = parameters.skip, len = parameters.skip + parameters.take; i < len; i++) {
+            items.push({
+                id: i,
+                value: i,
+                text: "Item " + i
+            });
+        }
+
+        return items;
+    }
+
+    function createAsyncDataSource(options) {
+        options = options || {};
+        var transport = {
+            read: function(options) {
+                setTimeout(function() {
+                    options.success({ data: generateData(options.data), total: 300 });
+                }, 0);
+            }
+        };
+
+        return new kendo.data.DataSource({
+            transport: options.transport || transport,
+            serverPaging: true,
+            serverFiltering: true,
+            pageSize: 40,
+            schema: {
+                data: "data",
+                total: "total"
+            }
+        });
+    }
+
+    beforeEach(function() {
+        kendo.ns = "";
+        select = $("<select multiple />").appendTo(Mocha.fixture);
+    });
+    afterEach(function() {
+        if (select.data("kendoMultiSelect")) {
+            select.data("kendoMultiSelect").destroy();
+        }
+
+        select.parents(".k-widget").remove();
+    });
+
+    it("MultiSelect selects all on CTRL+A", function(done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: 65,
+                ctrlKey: true
+            });
+
+            assert.equal(multiselect.tagList.children().length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on SHIFT+DOWN", function (done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN,
+                shiftKey: true
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children().length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on SHIFT+UP", function (done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.UP,
+                shiftKey: true
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.UP,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children().length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on CTRL+SHIFT+END", function (done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.END,
+                ctrlKey: true,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children().length, 0);
+            done();
+        });
+    });
+
+    it("MultiSelect selects multiple items on CTRL+SHIFT+HOME", function (done) {
+        var multiselect = new MultiSelect(select, {
+            height: CONTAINER_HEIGHT,
+            animation: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: createAsyncDataSource(),
+            virtual: {
+                valueMapper: function(o) { o.success(o.value); },
+                itemHeight: 40
+            }
+        });
+
+        multiselect.one("dataBound", function() {
+            multiselect.open();
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.DOWN
+            });
+
+            multiselect.input.trigger({
+                type: "keydown",
+                keyCode: keys.HOME,
+                ctrlKey: true,
+                shiftKey: true
+            });
+
+            assert.equal(multiselect.tagList.children().length, 0);
+            done();
+        });
     });
 });
 

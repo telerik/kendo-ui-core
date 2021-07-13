@@ -460,5 +460,18 @@
             assert.equal(datetimepicker.popup.element.find('.k-time-tab').length, 1);
             assert.equal(datetimepicker.popup.element.find('.k-date-tab').length, 0);
         });
+
+        it("when time group is selected, date picker should display the time view", function () {
+            var datetimepicker = input.kendoDateTimePicker({
+                value: new Date(2020, 3, 5, 0, 0, 0),
+                min: new Date(2020, 3, 4, 0, 30, 0),
+                max: new Date(2020, 3, 5, 0, 0, 0)
+            }).data("kendoDateTimePicker");
+            var tv = datetimepicker.timeView;
+
+            tv.refresh();
+            assert.equal(tv.ul.children().length, 1);
+            assert.equal(tv.ul.find("li:last").html(), "12:00 AM");
+        });
     });
 }());

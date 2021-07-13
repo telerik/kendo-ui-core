@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery PivotGrid Documentation | PivotGrid Overview | Kendo UI
+page_title: jQuery PivotGrid Documentation | PivotGrid Overview
 description: "Get started with the jQuery PivotGrid by Kendo UI and learn how to create and configure the widget."
 slug: overview_kendoui_pivotgrid_widget
 position: 1

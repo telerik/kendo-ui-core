@@ -1,6 +1,6 @@
 /* exported createListBoxFromHtml */
 function createListBoxFromHtml(html, options, container) {
-    return $(html || "<select />").appendTo(container || Mocha.fixture[0]).kendoListBox(options).data("kendoListBox");
+    return $(html || "<select aria-label='listbox label' />").appendTo(container || Mocha.fixture[0]).kendoListBox(options).data("kendoListBox");
 }
 
 /* exported createListBoxFromOptions */

@@ -1,6 +1,6 @@
 ---
 title: Localization
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Localization | Kendo UI
+page_title: jQuery NumericTextBox Documentation | NumericTextBox Localization
 description: "Get started with the jQuery NumericTextBox by Kendo UI and translate its messages for different culture locales."
 slug: localization_numerictextbox
 position: 3

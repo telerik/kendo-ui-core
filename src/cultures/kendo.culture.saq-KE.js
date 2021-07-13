@@ -37,8 +37,8 @@
                     names: ["Lapa le obo","Lapa le waare","Lapa le okuni","Lapa le ong’wan","Lapa le imet","Lapa le ile","Lapa le sapa","Lapa le isiet","Lapa le saal","Lapa le tomon","Lapa le tomon obo","Lapa le tomon waare"],
                     namesAbbr: ["Obo","Waa","Oku","Ong","Ime","Ile","Sap","Isi","Saa","Tom","Tob","Tow"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["Tesiran","tesiran","TESIRAN"],
+                PM: ["Teipa","teipa","TEIPA"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

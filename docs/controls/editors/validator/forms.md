@@ -1,6 +1,6 @@
 ---
 title: HTML5 Form Constraints
-page_title: jQuery Validator Documentation | HTML5 Form Constraints | Kendo UI
+page_title: jQuery Validator Documentation | HTML5 Form Constraints
 description: "Get started with the jQuery Validator by Kendo UI and use the HTML5 form validation attributes."
 slug: forms_kendoui_validator
 position: 2
@@ -19,6 +19,8 @@ The available constraints are the following:
 - `pattern` (regex)
 - `min` and `max`
 - [HTML5 data types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Input#attr-type) (for example, `email`, `URL`, `number`, and so on)
+
+For details on setting up the Kendo Validator and the usage of thе built-in validation rules and creating custom validation rules refer to the [Validation Rules section.]({% slug rules_kendoui_validator %})
 
 To use HTML5 form validation, add the desired HTML5 attributes to the HTML `input` elements.
 

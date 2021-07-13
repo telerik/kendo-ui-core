@@ -36,6 +36,7 @@ An alias to the [prototype](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 
     var birdie = new Bird();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(birdie.legs); // outputs 2
     </script>
 
@@ -60,6 +61,7 @@ A key/value pair of all methods that the new class will have.
     <script>
     var Animal = kendo.Class.extend({
         move: function() {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Animal.move()");
         }
     });
@@ -68,6 +70,7 @@ A key/value pair of all methods that the new class will have.
        move: function() {
             Animal.fn.move.call(this);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Fly");
        }
     });
@@ -76,6 +79,7 @@ A key/value pair of all methods that the new class will have.
        move: function() {
             Animal.fn.move.call(this);
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Sneak");
        }
     });
@@ -88,9 +92,12 @@ A key/value pair of all methods that the new class will have.
 
     sylvester.move(); // outputs "Animal.move()" then "Sneak"
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(tweety instanceof Bird); // outputs "true" because tweety is an instanfe of Bird
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(tweety instanceof Animal); // outputs "true" because Animal is the base class of Bird
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(tweety instanceof Cat); // outputs "false" because tweety is not an instance of Cat
     </script>

@@ -31,7 +31,7 @@ component: grid
  </tr>
   <tr>
   <td>Made With Version</td>
-  <td>2017.2.504</td>
+  <td>2020.3.1021</td>
  </tr>
 </table>
 
@@ -131,7 +131,7 @@ To resolve the resulting scroll-related issue which occurs after the refresh, [r
               "ProductName",
               { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 120 },
               { field: "UnitsInStock", title: "Units In Stock", width: 120 },
-              { field: "Discontinued", width: 120, editor: customBoolEditor },
+              { field: "Discontinued", width: 120 },
               { command: [{
                 name: "Cancel",
                 click: function(e) {
@@ -153,11 +153,6 @@ To resolve the resulting scroll-related issue which occurs after the refresh, [r
             editable: true
           });
         });
-
-        function customBoolEditor(container, options) {
-          $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label">​</label>').appendTo(container);
-        }
       </script>
     </div>
 ````

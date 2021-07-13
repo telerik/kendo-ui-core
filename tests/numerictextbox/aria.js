@@ -107,4 +107,27 @@
             assert.equal(numeric._text.attr("aria-valuenow"), undefined);
         });
     });
+
+    describe("kendo.ui.NumericTextBox aria with AXE", function() {
+        beforeEach(function() {
+            $("<label>Price Discount:<input id='percentage' value='35' title='percentage' /></label>").appendTo(Mocha.fixture);
+            input = $(Mocha.fixture).find("input");
+        });
+
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("NumericTextBox is accessible", function(done) {
+            var numeric = new NumericTextBox(input);
+
+            axeRunFixture(done);
+        });
+
+        it("NumericTextBox is accessible when label is defined", function(done) {
+            var numeric = new NumericTextBox(input, { label: "Price" });
+
+            axeRunFixture(done);
+        });
+    });
 }());

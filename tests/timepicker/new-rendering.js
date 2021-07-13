@@ -2,7 +2,7 @@
     var TimePicker = kendo.ui.TimePicker;
     var input;
 
-    describe("kendo.ui.Calendar API", function () {
+    describe("kendo.ui.TimePicker new rendering", function () {
         beforeEach(function () {
 
             input = $("<input />").appendTo(Mocha.fixture);
@@ -155,7 +155,7 @@
                 value: new Date(value)
             });
 
-            picker.timeView._nowClickHandler();
+            picker.timeView._nowClickHandler({ preventDefault: $.noop});
 
             assert.notEqual(+value, +picker.timeView._value);
         });
@@ -169,6 +169,42 @@
             picker.open();
 
             assert.equal(picker.timeView.list.find('[data-index]').length, 4);
+        });
+
+        it("_updateCurrentlySelected selected calls _findSelectedValue method", function () {
+            var picker = new TimePicker(input, {
+                componentType: 'modern',
+                format: "hh:mm:ss tt"
+            });
+
+            var pickerStub = stub(picker.timeView, {
+                _findSelectedValue: $.noop
+            });
+
+            picker.open();
+            picker.timeView._updateCurrentlySelected();
+
+            assert.isTrue(pickerStub.calls('_findSelectedValue') > 0);
+        });
+
+        it("_updateRanges should call _showAllHiddenItems when validateDate is true and date does not match", function () {
+            var picker = new TimePicker(input, {
+                componentType: 'modern',
+                format: "hh:mm:ss tt",
+                validateDate: true,
+                max: new Date(1999,11, 11, 11, 11,11, 11)
+            });
+
+            picker.open();
+            picker.timeView._currentlySelected = new Date(1999,10, 11, 11, 11,11, 11);
+
+            var pickerStub = stub(picker.timeView, {
+                _showAllHiddenItems: $.noop
+            });
+
+            picker.timeView._updateRanges();
+
+            assert.isTrue(pickerStub.calls('_showAllHiddenItems') === 1);
         });
     });
 }());

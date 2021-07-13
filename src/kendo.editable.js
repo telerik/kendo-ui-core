@@ -16,7 +16,6 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         Widget = ui.Widget,
         extend = $.extend,
-        oldIE = kendo.support.browser.msie && kendo.support.browser.version < 9,
         isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
@@ -38,7 +37,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function convertToValueBinding(container) {
-        container.find(":input:not(:button, .k-combobox .k-input, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
+        container.find(":input:not(:button, .k-combobox .k-input, .k-checkbox-list .k-checkbox, .k-radio-list .k-radio, [" + kendo.attr("role") + "=listbox], [" + kendo.attr("role") + "=upload], [" + kendo.attr("skip") + "], [type=file])").each(function() {
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" || this.type === "radio" ? "checked:" : "value:",
@@ -99,7 +98,7 @@ var __meta__ = { // jshint ignore:line
             attr[DATATYPE] = type;
         }
 
-        attr[BINDING] = ("value:") + options.field;
+        attr[BINDING] = (type === "boolean" ? "checked:" : "value:") + options.field;
 
         return attr;
     }
@@ -136,11 +135,27 @@ var __meta__ = { // jshint ignore:line
         return result;
     }
 
+    function getEditorTag(type, options) {
+        var tag;
+
+        if (!type.length) { return; }
+
+        if ((type === "DropDownTree" && options && options.checkboxes) || type === "MultiSelect") {
+            tag = "<select />";
+        } else if (type === "RadioGroup" || type === "CheckBoxGroup") {
+            tag = "<ul />";
+        } else {
+            tag = type === "Editor" ? "<textarea />" : "<input />";
+        }
+
+        return tag;
+    }
+
     var kendoEditors = [
-        "AutoComplete", "ColorPicker", "ComboBox", "DateInput",
+        "AutoComplete", "CheckBoxGroup", "ColorPicker", "ComboBox", "DateInput",
         "DatePicker", "DateTimePicker", "DropDownTree",
         "Editor", "MaskedTextBox", "MultiColumnComboBox","MultiSelect",
-        "NumericTextBox", "Rating", "Slider", "Switch", "TimePicker", "DropDownList"
+        "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList"
     ];
 
     var editors = {
@@ -169,7 +184,9 @@ var __meta__ = { // jshint ignore:line
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
+            var element = $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
+
+            renderHiddenForMvcCheckbox(element, container, options);
         },
         "values": function(container, options) {
             var attr = createAttributes(options);
@@ -182,14 +199,16 @@ var __meta__ = { // jshint ignore:line
         "kendoEditor": function (container, options) {
             var attr = createAttributes(options);
             var type = options.editor;
-            var tag = type === "Editor" ? "<textarea />" : "<input />";
             var editor = "kendo" + type;
             var editorOptions = options.editorOptions;
+            var tagElement = getEditorTag(type, editorOptions);
 
-            $(tag)
+            var element = $(tagElement)
                 .attr(attr)
                 .appendTo(container)
                 [editor](editorOptions);
+
+            renderHiddenForMvcCheckbox(element, container, options);
         }
     };
 
@@ -248,6 +267,15 @@ var __meta__ = { // jshint ignore:line
             if (isFunction(descriptor)) {
                 rules[rule] = descriptor;
             }
+        }
+    }
+
+    function renderHiddenForMvcCheckbox(tag, container, field) {
+        var addHidden = field ? (field.shouldRenderHidden || false) : false;
+
+        if (addHidden) {
+            tag.val(true);
+            container.append($("<input type='hidden' name='" + field.field +"' value='false' data-skip='true' data-validate='false'/>"));
         }
     }
 
@@ -442,10 +470,7 @@ var __meta__ = { // jshint ignore:line
                 rules: rules });
 
             if (!that.options.skipFocus) {
-                var focusable = container.find(":kendoFocusable").eq(0).focus();
-                if (oldIE) {
-                    focusable.focus();
-                }
+                container.find(":kendoFocusable").eq(0).focus();
             }
         }
    });

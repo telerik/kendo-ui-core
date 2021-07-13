@@ -29,11 +29,11 @@
 
         it("clicking on window brings it in front of other windows and adds k-state-focused", function() {
             jasmine.clock().install();
-            var firstWindow = createWindow(),
+            var firstWindow = createWindow({ animation: { open: { duration: 50 } } }),
                 secondWindow = createWindow();
 
             firstWindow.element.trigger("mousedown");
-            jasmine.clock().tick();
+            jasmine.clock().tick(50);
             assert.equal(
                 +firstWindow.wrapper.css("zIndex"),
                 +secondWindow.wrapper.css("zIndex") + 2
@@ -44,12 +44,12 @@
 
         it("clicking on minimized window brings it in front of other windows and adds k-state-focused", function() {
             jasmine.clock().install();
-            var firstWindow = createWindow(),
+            var firstWindow = createWindow({ animation: { open: { duration: 50 } } }),
                 secondWindow = createWindow();
 
             firstWindow.minimize();
             firstWindow.wrapper.trigger("mousedown");
-            jasmine.clock().tick();
+            jasmine.clock().tick(50);
             assert.equal(
                 +firstWindow.wrapper.css("zIndex"),
                 +secondWindow.wrapper.css("zIndex") + 2
@@ -62,15 +62,17 @@
             jasmine.clock().install();
             var firstWindow = createWindow({
                     content: "/base/tests/window/blank.html",
-                    iframe: true
+                    iframe: true,
+                    animation: { open: { duration: 50 } }
                 }),
                 secondWindow = createWindow({
                     content: "/base/tests/window/blank.html",
-                    iframe: true
+                    iframe: true,
+                    animation: { open: { duration: 50 } }
                 });
 
             firstWindow.element.find(".k-overlay").trigger("mousedown");
-            jasmine.clock().tick();
+            jasmine.clock().tick(50);
             assert.isOk(firstWindow.wrapper.is(".k-state-focused"));
             jasmine.clock().uninstall();
         });
@@ -315,7 +317,7 @@
 
         it("up arrow moves window up", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -330,7 +332,7 @@
 
         it("down arrow moves window down", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -345,7 +347,7 @@
 
         it("left arrow moves window left", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -356,7 +358,7 @@
 
         it("right arrow moves window right", function() {
             var dialogObject = createWindow({});
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             var offset = dialogObject.wrapper.offset();
 
@@ -423,38 +425,38 @@
 
         it("ctrl+down arrow expands window", function() {
             var dialogObject = createWindow({ height: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.DOWN, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.height(), 210);
+            assert.equal(dialogObject.wrapper.outerHeight(), 210);
         });
 
         it("ctrl+up arrow shrinks window", function() {
             var dialogObject = createWindow({ height: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.UP, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.height(), 190);
+            assert.equal(dialogObject.wrapper.outerHeight(), 190);
         });
 
         it("ctrl+left arrow shrinks window", function() {
             var dialogObject = createWindow({ width: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.LEFT, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.width(), 190);
+            assert.equal(dialogObject.wrapper.outerWidth(), 190);
         });
 
         it("ctrl+right arrow expands window", function() {
             var dialogObject = createWindow({ width: 200 });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.RIGHT, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.width(), 210);
+            assert.equal(dialogObject.wrapper.outerWidth(), 210);
         });
 
         it("ctrl+left takes minWidth into account", function() {
@@ -462,11 +464,11 @@
                 width: 100,
                 minWidth: 95
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.LEFT, { ctrlKey: true });
 
-            assert.closeTo(dialogObject.wrapper.width(), 95, 1);
+            assert.closeTo(dialogObject.wrapper.outerWidth(), 95, 1);
         });
 
         it("ctrl+right takes maxWidth into account", function() {
@@ -474,11 +476,11 @@
                 width: 100,
                 maxWidth: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.RIGHT, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.width(), 105);
+            assert.equal(dialogObject.wrapper.outerWidth(), 105);
         });
 
         it("ctrl+up takes minHeight into account", function() {
@@ -486,11 +488,11 @@
                 height: 100,
                 minHeight: 95
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.UP, { ctrlKey: true });
 
-            assert.equal(dialogObject.wrapper.height(), 95);
+            assert.equal(dialogObject.wrapper.outerHeight(), 95);
         });
 
         it("ctrl+down takes maxHeight into account", function() {
@@ -498,11 +500,11 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.DOWN, { ctrlKey: true });
 
-            assert.closeTo(dialogObject.wrapper.height(), 105, 1);
+            assert.closeTo(dialogObject.wrapper.outerHeight(), 105, 1);
         });
 
         it("alt+p toggles pin", function() {
@@ -510,7 +512,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(80, { altKey: true });
 
@@ -526,7 +528,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.UP, { altKey: true });
 
@@ -538,7 +540,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
             dialogObject.maximize();
             dialog.press(keys.DOWN, { altKey: true });
 
@@ -550,7 +552,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
 
             dialog.press(keys.DOWN, { altKey: true });
 
@@ -562,7 +564,7 @@
                 height: 100,
                 maxHeight: 105
             });
-            var dialog = dialogObject.element;
+            var dialog = dialogObject.wrapper;
             dialogObject.minimize();
             dialog.press(keys.UP, { altKey: true });
 
@@ -593,8 +595,8 @@
                     height: initialSize
                 });
 
-            dialog.element.press(keys.RIGHT, { ctrlKey: true });
-            dialog.element.press(keys.DOWN, { ctrlKey: true });
+            dialog.wrapper.press(keys.RIGHT, { ctrlKey: true });
+            dialog.wrapper.press(keys.DOWN, { ctrlKey: true });
 
             assert.equal(dialog.options.width, initialSize + 10 + "px");
             assert.equal(dialog.options.height, initialSize + 10 + "px");
@@ -712,6 +714,64 @@
 
             assert.isOk(!dialog.initialWindowPosition);
             assert.isOk(!handler.calls);
+        });
+
+        it("restore() triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                    actions: ["Maximize", "Restore"],
+                    restore: function() {
+                        triggers++;
+                    }
+                });
+
+            dialog.maximize();
+            dialog.restore();
+
+            assert.equal(triggers, 1);
+        });
+
+        it("restore() triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                    restore: function() {
+                        triggers++;
+                    }
+                });
+
+            dialog.maximize();
+            dialog.restore();
+
+            assert.equal(triggers, 1);
+        });
+
+        it("alt+up triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                restore: function(ev) {
+                    triggers++;
+                }
+            });
+
+            dialog.minimize();
+            dialog.wrapper.press(keys.UP, { altKey: true });
+
+            assert.isOk(triggers, 1);
+        });
+
+        it("alt+down triggers restore event", function() {
+            var triggers = 0,
+                dialog = createWindow({
+                restore: function(ev) {
+                    triggers++;
+                }
+            });
+
+
+            dialog.maximize();
+            dialog.wrapper.press(keys.DOWN, { altKey: true });
+
+            assert.isOk(triggers, 1);
         });
     });
 })();

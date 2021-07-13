@@ -3,7 +3,7 @@ title: Server filtering
 page_title: Server filtering
 description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure the component to work with server-side filtering."
 slug: htmlhelpers_scheduler_server_filtering_aspnetcore
-position: 6
+position: 7
 ---
 
 # Server filtering
@@ -12,7 +12,7 @@ This article explains how to implement server-side filtering for the Scheduler c
 
 The server-side filtering allows the user to load only the events that are part of the currently loaded View without the need to fetch all the available data from the datasource. The server-side filtering approach is very useful for situations where there are a lot of events/meetings in the database allowing us to fetch the needed data only - leading to better performance and faster loading.
 
-The code snippets below are extracted from a demo project of Scheduler with Server Filtering in {{ site.framework }} that can be downloaded from  [this repository]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Kendo.Examples.Mvc/Kendo.Examples.Mvc/Views/Scheduler/SchedulerServerFiltering.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-server-filtering{% endif %}). The current article discussed the more difficult steps of the server filtering implementation. For more details, please refer to the above-linked repository.
+The code snippets below are extracted from a demo project of Scheduler with Server Filtering in {{ site.framework }} that can be downloaded from  [this repository]({% if site.core %}https://github.com/telerik/ui-for-aspnet-core-examples/blob/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Scheduler/SchedulerServerFiltering.cshtml{% else %}https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/scheduler/scheduler-server-filtering{% endif %}). The current article discussed the more difficult steps of the server filtering implementation. For more details, please refer to the above-linked repository.
 
 ## Initializing the Scheduler
 

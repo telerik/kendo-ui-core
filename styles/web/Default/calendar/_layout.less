@@ -54,51 +54,19 @@
         text-align: center;
         position: relative;
         z-index: 1;
-
-        .k-link {
-            padding: @calendar-header-button-padding-y @calendar-header-button-padding-x;
-            border-width: @calendar-header-button-border-width;
-            border-style: solid;
-            border-radius: @calendar-header-button-border-radius;
-            display: inline-block;
-        }
-    }
-
-    .k-nav-prev,
-    .k-nav-next {
-        width: (@calendar-line-height * 1em);
-        height: (@calendar-line-height * 1em);
-        box-sizing: content-box;
-        position: absolute;
-        top: @calendar-header-padding-y;
-
-        .k-icon { vertical-align: text-top; }
-    }
-    .k-nav-prev { left: @calendar-header-padding-x; }
-    .k-nav-next { right: @calendar-header-padding-x; }
-
-    .k-nav-fast {
-        margin: auto;
-        width: 75%;
-        box-sizing: border-box;
     }
 
 
     // Footer
     .k-footer {
+        padding: .5em;
         text-align: center;
         position: relative;
         clear: both;
-    }
-    .k-nav-today,
-    .k-footer > .k-state-disabled {
-        padding: .5em;
-        border-width: 0;
-        border-radius: 0;
-        display: block;
-    }
-    .k-nav-today:hover {
-        text-decoration: underline;
+
+        .k-nav-today:hover {
+            text-decoration: underline;
+        }
     }
 
 
@@ -149,7 +117,7 @@
     .k-month {
         .k-link {
             width: @calendar-cell-size;
-            height: @calendar-cell-size;;
+            height: @calendar-cell-size;
         }
 
         th {
@@ -193,7 +161,6 @@
     // Animations
     .k-animation-container .k-content {
         height: 100%;
-
     }
 
     // Calendar Modern
@@ -207,12 +174,13 @@
 
         .k-button {
             white-space: nowrap;
-            .k-button.k-flat();
         }
-
-        .k-today {
-            cursor: pointer;
-        }
+    }
+    .k-calendar-nav {
+        align-items: center;
+    }
+    .k-nav-today {
+        cursor: pointer;
     }
 
     .k-calendar-monthview,

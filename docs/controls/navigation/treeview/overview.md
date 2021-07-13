@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery TreeView Documentation | TreeView Overview | Kendo UI
+page_title: jQuery TreeView Documentation | TreeView Overview
 description: "Get started with the jQuery TreeView by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_treeview_widget
 position: 1

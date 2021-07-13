@@ -32,5 +32,19 @@
 
             input.focus().val("newVal").focusout();
         });
+
+        it("change is not raised if value is null and not changed", function() {
+            var calls = 0;
+            var textbox = new TextBox(input, {
+                change: function() {
+                    calls++;
+                }
+            });
+
+            textbox.value(null);
+            textbox._focusout();
+
+            assert.isNotOk(calls);
+        });
     });
 }());

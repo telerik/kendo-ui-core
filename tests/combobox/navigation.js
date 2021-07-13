@@ -60,6 +60,24 @@ it("pressing alt + up should close popup", function() {
     combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
 });
 
+it("pressing Capse lock should not open popup", function(done) {
+    create({
+        filter: "contains",
+        delay: 0
+    });
+    combobox.popup.bind("open", function(){
+        assert.isOk(false);
+        done();
+    });
+
+    combobox.input.trigger({type: "keydown", altKey: true, keyCode: 20});
+
+    setTimeout(function() {
+        assert.isOk(true);
+        done();
+    }, 0);
+});
+
 it("_arrow click should focus the input", function() {
     create();
 

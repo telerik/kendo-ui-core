@@ -2,7 +2,6 @@
 title: Step
 page_title: Configuration, methods and events of Kendo UI Wizard Step Instance object
 res_type: api
-published: false
 ---
 
 # kendo.wizard.Step

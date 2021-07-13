@@ -1,11 +1,15 @@
 ---
 title: Overview
-page_title: jQuery Chart Documentation | Chart Types Overview | Kendo UI
+page_title: jQuery Chart Documentation | Chart Types Overview
 description: "Learn the basics when working with the chart types in the Kendo UI for jQuery suite."
 previous_url: /controls/charts/chart-types/chart-types-compatibility
 slug: overview_charttypes_charts
 position: 1
 ---
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-small.html %}
+{% endif %}
 
 # Chart Types Overview
 

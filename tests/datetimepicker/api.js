@@ -125,6 +125,24 @@
             assert.equal(+datetimepicker.value(), +value);
         });
 
+        it("value method should not clear DateInput format", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                dateInput: true
+            });
+            datetimepicker.value(null);
+            assert.isOk(datetimepicker.element.val());
+        })
+
+        it("value method should not clear DateInput format if initial value was provided", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                dateInput: true,
+                value: new Date()
+            });
+            datetimepicker.value(null);
+            assert.equal(datetimepicker.element.val(), "month/day/year hours:minutes AM/PM");
+            assert.isOk(datetimepicker.element.val());
+        })
+
         it("value method sets null if date is out of range", function() {
             var datetimepicker = new DateTimePicker(input, {
                 min: new Date(2000, 10, 10)
@@ -901,6 +919,18 @@
             assert.equal(datetimepicker.dateView._current.getHours(), 0);
             assert.equal(datetimepicker.dateView._current.getMinutes(), 0);
             assert.equal(datetimepicker.dateView._current.getSeconds(), 0);
+        });
+
+        it("time is correctly selected when disabledDates are specified", function() {
+            var datetimepicker = new DateTimePicker(input, {
+                value: new Date(2015,9,3),
+                disableDates: [new Date(2015,9,12), new Date(2015,9,22)]
+            });
+            debugger
+            datetimepicker.timeView.refresh();
+            datetimepicker.timeView.ul.find("li:eq(4)").trigger("click");
+
+            assert.equal(datetimepicker.element.val(), "10/3/2015 2:00 AM");
         });
     });
 }());

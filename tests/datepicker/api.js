@@ -211,6 +211,16 @@ it("empty input if set value ot null", function() {
     assert.equal(datepicker._value, null);
 });
 
+it("mask is shown if set value ot null", function() {
+    datepicker = input.kendoDatePicker({ dateInput: true }).data("kendoDatePicker");
+
+    datepicker.value(null);
+
+    assert.isOk(input.val());
+    assert.equal(input.val(), "month/day/year");
+    assert.equal(datepicker._value, null);
+});
+
 it("value method should call dateview.value()", function() {
     datepicker = input.kendoDatePicker().data("kendoDatePicker");
     stub(datepicker.dateView, "value");
@@ -618,6 +628,14 @@ it("readonly calls dateinput _editable method", function() {
 
     datepicker.readonly();
     assert.equal(atStub.calls("_editable"), 1);
+});
+
+it("value method should not clear DateInput format", function() {
+    var datepicker = new DatePicker(input, {
+        dateInput: true
+    });
+    datepicker.value("");
+    assert.isOk(datepicker.element.val());
 });
 
 it("enable calls dateinput _editable method", function() {

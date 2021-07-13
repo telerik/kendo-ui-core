@@ -69,6 +69,27 @@ The following example demonstrates how to subscribe to events by a handler name.
     }
     </script>
 ```
+{% if site.core %}
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+    @(Html.Kendo().DateRangePicker()
+      .Name("daterangepicker")
+      .Events(e => e
+          .Open(@<text>
+            function() {
+                // Handle the open event inline.
+            }
+          </text>)
+          .Change(@<text>
+            function() {
+                // Handle the change event inline.
+            }
+            </text>)
+      )
+    )
+{% endif %}
 
 ## Referencing Existing Instances
 

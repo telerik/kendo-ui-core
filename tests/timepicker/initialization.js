@@ -408,5 +408,20 @@
             assert.equal(tv.ul.find("li:last").html(), "11:50 PM");
             tv.destroy();
         });
+
+        it("TimeView renders only one item if max is set to 00:00:00 on", function() {
+            var tv = new TimeView({
+                min: new Date(2010, 1, 1, 0, 0, 0),
+                max: new Date(2020, 3, 3, 0, 0, 0),
+                value: new Date(2020, 3, 3, 0, 0, 0),
+                format: "hh:mm tt",
+                maxSet: true
+            });
+
+            tv.refresh();
+            assert.equal(tv.ul.children().length, 1);
+            assert.equal(tv.ul.find("li:last").html(), "12:00 AM");
+            tv.destroy();
+        });
     });
 }());

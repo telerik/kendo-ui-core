@@ -29,11 +29,11 @@ An Upload in the synchronous mode behaves like a regular file input&mdash;the se
 </form>
 ```
 ```Controller
-public IHostingEnvironment HostingEnvironment { get; set; }
+public IWebHostEnvironment WebHostEnvironment { get; set; }
 
-public UploadController(IHostingEnvironment hostingEnvironment)
+public UploadController(IWebHostEnvironment webHostEnvironment)
 {
-    HostingEnvironment = hostingEnvironment;
+    WebHostEnvironment = webHostEnvironment;
 }
 
 public ActionResult Submit(IEnumerable<IFormFile> files)
@@ -48,9 +48,8 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
             // Some browsers send file names with full path.
             // The demo is interested only in the file name.
             var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
 
-            // The files are not actually saved in this demo.
             using (var fileStream = new FileStream(physicalPath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -77,11 +76,11 @@ An Upload in the asynchronous mode requires dedicated server handlers to store a
 )
 ```
 ```Controller
-public IHostingEnvironment HostingEnvironment { get; set; }
+public IWebHostingEnvironment WebHostEnvironment { get; set; }
 
-public UploadController(IHostingEnvironment hostingEnvironment)
+public UploadController(IWebHostEnvironment webHostEnvironment)
 {
-    HostingEnvironment = hostingEnvironment;
+    WebHostEnvironment = webHostEnvironment;
 }
 
 public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
@@ -96,9 +95,8 @@ public async Task<ActionResult> SaveAsync(IEnumerable<IFormFile> files)
             // Some browsers send file names with full path.
             // We are only interested in the file name.
             var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
 
-            // The files are not actually saved in this demo.
             using (var fileStream = new FileStream(physicalPath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
@@ -119,14 +117,13 @@ public ActionResult Remove(string[] fileNames)
         foreach (var fullName in fileNames)
         {
             var fileName = Path.GetFileName(fullName);
-            var physicalPath = Path.Combine(HostingEnvironment.WebRootPath, "App_Data", fileName);
+            var physicalPath = Path.Combine(WebHostEnvironment.WebRootPath, "App_Data", fileName);
 
             // TODO: Verify user permissions.
 
             if (System.IO.File.Exists(physicalPath))
             {
-                // The files are not actually removed in this demo.
-                // System.IO.File.Delete(physicalPath);
+                System.IO.File.Delete(physicalPath);
             }
         }
     }

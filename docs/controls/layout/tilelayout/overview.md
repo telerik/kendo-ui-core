@@ -1,8 +1,9 @@
 ---
 title: Overview
-page_title: Kendo UI for jQuery TileLayout Documentation | TileLayout Overview | Kendo UI
+page_title: Kendo UI for jQuery TileLayout Documentation | TileLayout Overview
 description: "Get started with the Kendo UI for jQuery TileLayout and learn about its features and how to initialize the widget."
 slug: overview_kendoui_tilelayout_widget
+position: 1
 ---
 
 # TileLayout Overview

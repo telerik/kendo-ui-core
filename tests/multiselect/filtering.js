@@ -775,5 +775,52 @@
 
         multiselect.input.focus().val("test").keydown();
     });
+
+    it("MultiSelect caret is not moved on input focus", function(done) {
+        popuplateSelect();
+        var multiselect = new MultiSelect(select, {
+            delay: 0,
+            filter: "startswith",
+            autoClose: false
+        });
+
+        multiselect.input.val("Option1");
+        kendo.caret(multiselect.input[0], 3);
+        multiselect.input.focus();
+
+        setTimeout(function() {
+            assert.equal(kendo.caret(multiselect.input[0])[0], 3);
+            done();
+        });
+    });
+
+    it("MultiSelect with filter on DataSource populates properly", function(done) {
+        var multiselect = new MultiSelect(select, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: {
+                data: [{
+                    value: 1,
+                    text: "one",
+                    filterVal: 1
+                }, {
+                    value: 1,
+                    text: "one",
+                    filterVal: 2
+                }],
+                filter: [{ field: "filterVal", operator: "eq", value: 1 }]
+            }
+        });
+
+        multiselect.bind("open", function() {
+            var items = multiselect.dataSource.view();
+
+            assert.equal(items.length, 1);
+            done();
+        });
+
+        multiselect.open();
+    });
+
     });
 }());

@@ -1,6 +1,6 @@
 ---
 title: Server Filtering
-page_title: jQuery MultiSelect Documentation | Server Filtering | Kendo UI
+page_title: jQuery MultiSelect Documentation | Server Filtering
 description: "Get started with the jQuery MultiSelect by Kendo UI and learn how to filter its data on the server."
 slug: server_filtering_kendoui_multiselect_widget
 position: 4

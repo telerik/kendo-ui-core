@@ -7,9 +7,9 @@ slug: databinding_stockchart_aspnetcore
 position: 2
 ---
 {% if site.core %}
-    {% assign DateField = "/api//Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
+    {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
 {% else %}
-    {% assign DateField = "/api//Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
+    {% assign DateField = "/api/Kendo.Mvc.UI.Fluent/StockChartBuilder#datefieldsystemstring" %}
 {% endif %}
 
 # Data Binding

@@ -1,6 +1,6 @@
 ---
 title: Performance Issues
-page_title: jQuery Chart Documentation | Performance Issues | Kendo UI
+page_title: jQuery Chart Documentation | Performance Issues
 description: "Learn the tips and tricks for improving the performance of the Kendo UI widgets rendering data visualization."
 previous_url: /dataviz/performance-tips
 slug: tipsandtricks_kendouistyling

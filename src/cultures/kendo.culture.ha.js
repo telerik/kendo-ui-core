@@ -30,7 +30,7 @@
             standard: {
                 days: {
                     names: ["Lahadi","Litinin","Talata","Laraba","Alhamis","Jummaʼa","Asabar"],
-                    namesAbbr: ["Lh","Li","Ta","Lr","Al","Ju","As"],
+                    namesAbbr: ["Lah","Lit","Tal","Lar","Alh","Jum","Asa"],
                     namesShort: ["Lh","Li","Ta","Lr","Al","Ju","As"]
                 },
                 months: {
@@ -42,14 +42,14 @@
                 patterns: {
                     d: "d/M/yyyy",
                     D: "dddd, d MMMM, yyyy",
-                    F: "dddd, d MMMM, yyyy h:mm:ss tt",
-                    g: "d/M/yyyy h:mm tt",
-                    G: "d/M/yyyy h:mm:ss tt",
+                    F: "dddd, d MMMM, yyyy HH:mm:ss",
+                    g: "d/M/yyyy HH:mm",
+                    G: "d/M/yyyy HH:mm:ss",
                     m: "MMMM d",
                     M: "MMMM d",
                     s: "yyyy'-'MM'-'dd'T'HH':'mm':'ss",
-                    t: "h:mm tt",
-                    T: "h:mm:ss tt",
+                    t: "HH:mm",
+                    T: "HH:mm:ss",
                     u: "yyyy'-'MM'-'dd HH':'mm':'ss'Z'",
                     y: "MMMM yyyy",
                     Y: "MMMM yyyy"

@@ -1,12 +1,14 @@
 // Card
 .k-card {
     .border-radius( @card-border-radius );
-    // .box-shadow( @card-box-shadow );
     border-width: @card-border-width;
     border-style: solid;
+    outline: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     position: relative;
+    overflow: hidden;
 
     .k-card-callout {
         position: absolute;
@@ -42,37 +44,39 @@
             transform: translate(-50%, -50%) rotate(-135deg);
         }
     }
+
+    .k-avatar {
+        width: @card-avatar-size;
+        height: @card-avatar-size;
+        margin-right: @card-avatar-spacing;
+
+        &.k-avatar-image > * {
+            width: @card-avatar-size;
+            height: @card-avatar-size;
+        }
+    }
 }
 .k-card.k-card-flat {
     box-shadow: none;
 }
 
-
-// Placeholder selectors
-// %top-rounded-child {
-//     .k-card > &:first-child {
-//         .border-top-radius( @card-border-radius );
-//     }
-// }
-// %bottom-rounded-child {
-//     .k-card > &:last-child {
-//         .border-bottom-radius( @card-border-radius );
-//     }
-// }
-
- // Orientation
- .k-card-horizontal {
+// Orientation
+.k-card-horizontal {
     flex-direction: row;
 }
 
+.k-card-inner {
+    display: flex;
+    flex-direction: inherit;
+    overflow: hidden;
+}
 
 // Header
 .k-card-header {
-    // @extend %top-rounded-child;
-    // @extend %bottom-rounded-child;
     padding: @card-header-padding-y @card-header-padding-x;
     border-width: 0 0 @card-header-border-width;
     border-style: solid;
+    outline: 0;
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -84,12 +88,13 @@
         .border-bottom-radius( @card-border-radius );
     }
 
-    > h1,
-    > h2,
-    > h3,
-    > h4,
-    > h5,
-    > h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    > div {
         margin: 0;
     }
 
@@ -103,6 +108,7 @@
     padding: @card-footer-padding-y @card-footer-padding-x;
     border-width: @card-footer-border-width 0 0;
     border-style: solid;
+    outline: 0;
     display: block;
 }
 
@@ -112,6 +118,7 @@
     // @extend %top-rounded-child;
     // @extend %bottom-rounded-child;
     padding: @card-body-padding-y @card-body-padding-x;
+    outline: 0;
     flex: 1 1 auto;
 
     .k-card > &:first-child {
@@ -135,8 +142,6 @@
 // Card image
 .k-card-image,
 .k-card-media {
-    // @extend %top-rounded-child;
-    // @extend %bottom-rounded-child;
     border: 0;
     max-width: 100%;
     overflow: hidden;
@@ -179,9 +184,6 @@
     margin: 0 0 @card-subtitle-margin-bottom;
     opacity: .6;
 }
-.k-card-title + .k-card-subtitle {
-    margin-top: ( -@card-title-margin-bottom * .75 );
-}
 
  // Separator
  .k-card-separator {
@@ -207,8 +209,6 @@
 
 // Card actions
 .k-card-actions {
-    // @extend %top-rounded-child;
-    // @extend %bottom-rounded-child;
     padding: @card-actions-padding-y @card-actions-padding-x;
     border-width: 0;
     border-style: solid;
@@ -224,11 +224,6 @@
     }
     .k-card > &:last-child {
         .border-bottom-radius( @card-border-radius );
-    }
-
-    .k-card > & {
-        border-top-width: @card-actions-border-width;
-        border-color: inherit;
     }
 
     .k-card-horizontal &,
@@ -320,8 +315,23 @@
         border-left-width: @card-actions-border-width;
     }
 
+    .k-card & {
+        border-top-width: @card-actions-border-width;
+        border-style: solid;
+    }
+
+    .k-card-horizontal > & {
+        border-left-width: @card-actions-border-width;
+        border-top-width: 0;
+    }
+
     &.k-card-actions-vertical {
         flex-direction: column;
+
+        .k-card-action + .k-card-action {
+            border-top-width: @card-actions-border-width;
+            border-left-width: 0;
+        }
     }
 }
 
@@ -442,6 +452,21 @@
         .k-card + .k-card {
             margin-left: 0;
             margin-right: @card-deck-gap;
+        }
+    }
+
+    .k-card-actions-stretched {
+        .k-card-action + .k-card-action {
+            border-right-width: @card-actions-border-width;
+            border-left-width: 0;
+        }
+    }
+
+    .k-card-horizontal {
+        .k-card-actions-vertical,
+        > .k-card-actions-stretched {
+            border-right-width: @card-actions-border-width;
+            border-left-width: 0;
         }
     }
 }

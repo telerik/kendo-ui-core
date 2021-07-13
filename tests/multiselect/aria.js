@@ -3,11 +3,104 @@
         keys = kendo.keys,
         input;
 
+    describe("kendo.ui.MultiSelect WAI-ARIA with AXE", function () {
+        beforeEach(function() {
+            kendo.ns = "kendo-";
+            input = $("<select multiple id='ms'/>").appendTo(Mocha.fixture);
+            $("<label for='ms'>Label</label>").appendTo(Mocha.fixture);
+        });
+        afterEach(function() {
+            kendo.ns = "";
+            if (input.data("kendoMultiSelect")) {
+                input.data("kendoMultiSelect").destroy();
+            }
+        });
+
+        it("MultiSelect is accessible", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ]
+            });
+
+            axeRunFixture(done);
+        });
+
+        // Fails because of the aria-expanded attribute on a role="textbox" element
+        it("MultiSelect with search term is accessible", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ],
+                filter: "contains"
+            });
+
+            ms.open();
+            ms.search("f");
+
+            axeRunFixture(done);
+        });
+
+        it("MultiSelect with search term has accessible popup", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ],
+                filter: "contains"
+            });
+
+            ms.open();
+            ms.search("f");
+
+            axeRun(ms.popup.element[0], done);
+        });
+
+        it("MultiSelect with value is accessible", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ],
+                value: "bar"
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("MultiSelect with value and single tagMode is accessible", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ],
+                value: ["bar", "foo"],
+                tagMode: "single"
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("MultiSelect with value and single tagMode has accessible popup", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ],
+                value: ["bar", "foo"],
+                tagMode: "single"
+            });
+
+            ms.open();
+
+            axeRun(ms.popup.element[0], done);
+        });
+
+        it("MultiSelect with templates has accessible popup", function(done) {
+            var ms = new MultiSelect(input, {
+                dataSource: [ "foo", "bar" ],
+                footerTemplate: 'Total items found',
+                headerTemplate: 'Total items found',
+                filter: "contains"
+            });
+
+            ms.open();
+            ms.search("f");
+
+            //ms.popup.element.find('ul').attr("title", 'test')
+            axeRun(ms.popup.element[0], done);
+        });
+    });
+
     describe("kendo.ui.MultiSelect ARIA", function () {
         beforeEach(function() {
 
             kendo.ns = "kendo-";
-            input = $("<select multiple />").appendTo(Mocha.fixture);
+            input = $("<select multiple id='ms'/>").appendTo(Mocha.fixture);
         });
         afterEach(function() {
 
@@ -20,7 +113,19 @@
     it("MultiSelect adds role to the input", function() {
         var multiselect = new MultiSelect(input);
 
-        assert.equal(multiselect.input[0].getAttribute("role"), "listbox");
+        assert.equal(multiselect.input[0].getAttribute("role"), "textbox");
+    });
+
+    it("MultiSelect adds aria-owns pointing to its popup list", function() {
+        var multiselect = new MultiSelect(input);
+
+        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-owns"), multiselect.ul.attr("id"));
+    });
+
+    it("MultiSelect adds aria-controls pointing to its popup list", function() {
+        var multiselect = new MultiSelect(input);
+
+        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-controls"), multiselect.ul.attr("id"));
     });
 
     it("MultiSelect adds aria-disabled='true'", function() {
@@ -38,7 +143,7 @@
     it("MultiSelect adds aria-expanded='false'", function() {
         var multiselect = new MultiSelect(input);
 
-        assert.equal(multiselect.input.attr("aria-expanded"), "false");
+        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-expanded"), "false");
     });
 
     it("MultiSelect adds aria-expanded='true'", function() {
@@ -48,7 +153,7 @@
 
         multiselect.open();
 
-        assert.equal(multiselect.input.attr("aria-expanded"), "true");
+        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-expanded"), "true");
     });
 
     it("MultiSelect sets aria-expanded to false on close", function() {
@@ -60,7 +165,7 @@
         multiselect.close();
 
         assert.isOk(!multiselect.popup.visible());
-        assert.equal(multiselect.input.attr("aria-expanded"), "false");
+        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-expanded"), "false");
     });
 
     it("MultiSelect adds aria-hidden to the popup element", function() {
@@ -197,18 +302,24 @@
         label.remove();
     });
 
-    it("MultiSelect adds aria-haspopup that takes value equal to the role", function() {
+    it("MultiSelect input has textbox role", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"));
-        var role = multiselect.input.attr("role");
 
-        assert.equal(multiselect.input.attr("role"), "listbox");
-        assert.equal(multiselect.input.attr("aria-haspopup"), role);
+        assert.equal(multiselect.input.attr("role"), "textbox");
     });
 
     it("MultiSelect adds aria-autocomplete", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"));
 
         assert.equal(multiselect.input.attr("aria-autocomplete"), "list");
+    });
+
+    it("MultiSelect adds aria-autocomplete set to 'none' when filter is 'none'", function() {
+        input.attr("id", "test");
+
+        var multiselect = new MultiSelect(input, { filter: "none" });
+
+        assert.equal(multiselect.input.attr("aria-autocomplete"), "none");
     });
 
     it("MultiSelect adds role to the popup items", function() {
@@ -253,6 +364,15 @@
         });
 
         assert.isOk(!tag.attr("aria-hidden"));
+    });
+
+    it("MultiSelect does not assign role to its TagList", function() {
+        var multiselect = new MultiSelect(input, {
+            dataSource: ["item1", "item2"],
+            value: "item1"
+        });
+
+        assert.equal(multiselect.tagList.attr("role"), undefined);
     });
     });
 }());

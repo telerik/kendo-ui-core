@@ -25,7 +25,7 @@ The following example demonstrates how the set the configuration for the Steps o
                     icon:"home",
                 },{
                     label: "Second step",
-                    icon: "attachement",
+                    icon: "attachment",
                     error: true
                 },{
                     label: "Preview",

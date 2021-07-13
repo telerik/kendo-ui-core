@@ -18,7 +18,7 @@ component: grid
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>Created with version 2017.3.1026</td>
+  <td>Created with version 2020.3.1021</td>
  </tr>
 </table>
 
@@ -87,7 +87,7 @@ How can I open the popup editor when I double-click a Grid row?
               { field:"ProductName", title: "Product Name" },
               { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "120px" },
               { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
-              { field: "Discontinued", width: "120px", editor: customBoolEditor },],
+              { field: "Discontinued", width: "120px" }],
             editable: "popup",
             dataBound: onDataBound
           });
@@ -101,12 +101,6 @@ How can I open the popup editor when I double-click a Grid row?
           grid.element.on('dblclick','tbody tr[data-uid]',function (e) {
             grid.editRow($(e.target).closest('tr'));
           })
-        }
-
-        function customBoolEditor(container, options) {
-          var guid = kendo.guid();
-          $('<input class="k-checkbox" id="' + guid + '" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
-          $('<label class="k-checkbox-label" for="' + guid + '">​</label>').appendTo(container);
         }
       </script>
     </div>

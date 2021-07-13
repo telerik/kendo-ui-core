@@ -12,6 +12,64 @@ Represents the Kendo UI TreeList widget. Inherits from [Widget](/api/javascript/
 
 ## Configuration
 
+### altRowTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders the alternating table rows. By default the treelist renders a table row (`<tr>`) for every data source item.
+
+> The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
+> Set the `class` of the table row to `k-alt` to get the default "alternating" look and feel.
+
+#### Example - specify alternating row template as a function
+
+    <div id="treelist"></div>
+    <script id="template" type="text/x-kendo-template">
+        <tr data-uid="#= data.model.uid #">
+            <td colspan="2">
+                #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                    <span class="k-icon k-i-none"></span>
+                #}#
+                #if(data.hasChildren){#
+                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                #}#
+
+                <strong>#: data.model.lastName # </strong>
+                <strong>#: data.model.position #</strong>
+            </td>
+        </tr>
+    </script>
+    <script id="altTemplate" type="text/x-kendo-template">
+        <tr data-uid="#= data.model.uid #" class="k-alt">
+            <td colspan="2">
+                #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                    <span class="k-icon k-i-none"></span>
+                #}#
+                #if(data.hasChildren){#
+                    <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                #}#
+
+                <strong>#: data.model.lastName # </strong>
+                <strong>#: data.model.position #</strong>
+            </td>
+        </tr>
+    </script>
+    <script>
+      $("#treelist").kendoTreeList({
+        rowTemplate: kendo.template($("#template").html()),
+        altRowTemplate: kendo.template($("#altTemplate").html()),
+        columns: [
+          { field: "lastName" }
+        ],
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+            { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" }
+
+          ]
+        }
+      });
+    </script>
+
 ### autoBind `Boolean` *(default: true)*
 
 If set to `false`, the TreeList will not bind to the specified DataSource during initialization. In this case, data binding will occur when the [`change`](/api/javascript/data/datasource/events/change) event of the DataSource fires. By default, the TreeList will bind to the DataSource that is specified in the configuration.
@@ -125,7 +183,7 @@ The HTML attributes of the table cell (`<td>`) that is rendered for the column.
         color: red;
       }
     </style>
-    // The table cells look like `<td class="name-cell" style="text-align: right">...</td>`.
+    //The table cells look like `<td role="gridcell" class="highlight" style="text-align: right;">...</td>`.
 
 ### columns.columns `Array`
 
@@ -338,6 +396,7 @@ The JavaScript function that is executed when the user clicks the command button
                 var tr = $(e.target).closest("tr"); // get the current table row (tr)
                 // get the data bound to the current table row
                 var data = this.dataItem(tr);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Details for: " + data.lastName);
               }
             }
@@ -624,6 +683,424 @@ for all columns when filtering is enabled through the [`filterable`](/api/javasc
       });
     </script>
 
+### columns.filterable.cell `Object`
+
+Specifies options for the filter header cell when filter mode is set to 'row'.
+
+Can be set to a JavaScript object which represents the filter cell configuration.
+
+#### Example - cell filtering options
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    enabled: true,
+                    delay: 1500
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.dataSource `Object|kendo.data.DataSource`
+
+Specifies a custom dataSource for the AutoComplete when the type of the column is `string`. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array, or an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance.
+
+It is not recommended that you use the same `dataSource` instance for the TreeList and the AutoComplete because it causes negative side effects.
+
+If the `dataSource` options is missing, a new cloned instance of the TreeList's dataSource will be used.
+
+If the `dataSource` option is an existing [`kendo.data.DataSource`](/api/javascript/data/datasource) instance, the widget will use that instance and will _not_ initialize a new one.
+
+#### Example - custom cell filter autocomplete dataSource
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    dataSource: new kendo.data.DataSource({
+                        data: [
+                            { someField: "CEO" },
+                            { someField: "VP, Engineering" },
+                            { someField: "Software Engineer" }
+                        ]
+                    }),
+                    dataTextField: "someField"
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.dataTextField `String`
+
+Specifies the name of the field which will provide the text representation for the AutoComplete suggestion (when using String type column) when CustomDataSource is provided. By default the name of the field bound to the column will be used.
+
+#### Example - Using custom dataSource and providing dataTextField option
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    dataSource: new kendo.data.DataSource({
+                        data: [
+                            { someField: "CEO" },
+                            { someField: "VP, Engineering" },
+                            { someField: "Software Engineer" }
+                        ]
+                    }),
+                    dataTextField: "someField"
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.delay `Number` *(default: 200)*
+
+Specifies the delay of the AutoComplete widget which will provide the suggest functionality (when using String type column).
+
+#### Example - Specifying delay option for the AutoComplete widget used to make suggestions while filtering.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+                cell: {
+                    dataSource: new kendo.data.DataSource({
+                        data: [
+                            { someField: "CEO" },
+                            { someField: "VP, Engineering" },
+                            { someField: "Software Engineer" }
+                        ]
+                    }),
+                    dataTextField: "someField"
+                }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.inputWidth `Number`
+
+Specifies the width of the input before it is initialized or turned into a widget. Provides convenient way to set the width according to the column width.
+
+#### Example - Specifying inputWidth option for the filter cell of a column
+
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  inputWidth: 333
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.suggestionOperator `String` *(default: "startswith")*
+
+Specifies the AutoComplete `filter` option. The possible values are the same as the ones for the AutoComplete `filter` option - `"startswith"`, `"endswith"`, `"contains"`. The `"contains"` operator performs a case-insensitive search. To perform a case-sensitive filtering, set a custom filtering function through the [`dataSource.filter.operator`](/api/javascript/data/datasource/configuration/filter.operator) option.
+
+> This operator is completely independent from the operator used for the filtering on this column. For more inforamtion, check [`operator`](columns.filterable.cell.operator).
+
+#### Example - Specifying suggestionOperator option for the filter cell of a column
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  suggestionOperator: "contains"
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.minLength `Number` *(default: 1)*
+
+Specifies the minLength option of the AutoComplete widget when column is of type string.
+
+#### Example - Specifying minLength of the AutoComplete widget when using filter cell.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                   minLength: 3
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.enabled `Boolean` *(default: true)*
+
+When set to false the TreeList will not render the cell filtering widget for that specific column.
+
+#### Example - Disable the cell filtering for a specific column.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  enabled: false
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.operator `String` *(default: "eq")*
+
+Specifies the default operator that will be used for the cell filtering.
+
+> If you want to change how the AutoComplete suggestions are filtered use [suggestionOperator](columns.filterable.cell.suggestionoperator).
+
+#### Example - Specifying default operator for cell filtering.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  operator: "neq"
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.showOperators `Boolean` *(default: true)*
+
+Specifies whether to show or hide the DropDownList with the operators.
+
+#### Example - Hide the operators dropdownlist for cell filtering.
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  showOperators: false,
+                  operator: "contains"
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+        ]
+      });
+    </script>
+
+### columns.filterable.cell.template `Function`
+
+JavaScript function which will customize how the input for the filter value is rendered.
+The function receives an object argument with two fields:
+
+* **`element`** - the default input inside the filter cell;
+* **`dataSource`** - a Kendo UI DataSource instance, which has the same settings as the TreeList dataSource, but will only contain data items with unique values for the current column.
+This instance is also used by the default AutoComplete widget, which is used inside the filter cell if no template is set. Keep in mind that the passed dataSource instance may still not be
+populated at the time the template function is called, if the TreeList uses remote binding.
+
+#### Example - Using template for the filter cell
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          { field: "lastName" },
+          { field: "position",
+            filterable: {
+              cell: {
+                  template: function (args) {
+                      // create a DropDownList of unique values (colors)
+                      args.element.kendoDropDownList({
+                          dataSource: args.dataSource,
+                          dataTextField: "position",
+                          dataValueField: "position",
+                          valuePrimitive: true
+                      });
+
+                  },
+                  showOperators: false
+              }
+            }
+          }
+        ],
+        editable: "popup",
+        filterable: {
+            mode: "row"
+        },
+        dataSource: [
+              { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+              { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+              { id: 3, parentId: null, lastName: "Jason", position: "Contractor" }
+        ]
+      });
+    </script>
+
+### columns.filterable.operators `Object`
+
+The property is identical to [`filterable.operators`](filterable.operators), but is used for a specific column.
+
+#### Example - Set custom filterable operators
+
+    <div id="treelist"></div>
+    <script>
+      $("#treelist").kendoTreeList({
+        columns: [
+          {
+            field: "name",
+            filterable:{
+              operators:{
+                string:{
+                  eq: "custom equal",
+                  neq: "custom not equal"
+                }
+              }
+            }
+          },
+          { field: "age" }
+        ],
+        dataSource: {
+          data: [
+            { parentId: null, id: 1, name: "Jane Doe", age: 30 },
+            { parentId: 1, id: 2, name: "John Doe", age: 33 }
+          ]
+        },
+        filterable: {
+          extra: false
+        }
+      });
+    </script>
+
 ### columns.filterable.ui `String|Function`
 
 The `role` [data attribute](/framework/data-attribute-initialization) of the widget that is used in the filter menu, or a JavaScript function which initializes that widget.
@@ -831,6 +1308,28 @@ The pixel screen width below which the column will be hidden. The setting takes 
         });
     </script>
 
+### columns.selectable `Boolean` *(default: false)*
+
+If set to `true` the treelist will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+        $("#treelist").kendoTreeList({
+          columns: [
+            { selectable: true, width: 65 },
+            { field: "id", width: 250},
+            { field: "name", width: 250 },
+            { field: "age", width: 250}
+          ],
+          dataSource: [
+              { id: 1, parentId: null, name: "Jane Doe", age: 31, city: "Boston" },
+              { id: 2, parentId: 1, name: "John Doe", age: 55, city: "New York" }
+          ]
+        });
+    </script>
+
 ### columns.sortable `Boolean|Object` *(default: true)*
 
 If set to `true` and sorting is enabled, the user can click the column header and sort the TreeList by the column [`field`](/api/javascript/ui/treelist#configuration-columns.field). If set to `false`, sorting will be disabled for this column. By default, all columns are sortable if sorting is enabled though the [`sortable`](/api/javascript/ui/treelist#configuration-sortable) option.
@@ -1030,6 +1529,28 @@ If set to `true`, the TreeList will not display the column. By default, all colu
                     { id: 2, parentId: 1, name: "John Doe", age: 24 }
                 ]
             }
+        });
+    </script>
+
+### columns.includeChildren `Boolean` *(default: false)*
+
+If set to `true`, the TreeList will select all child rows upon parent row selection when checkbox selection is used.
+
+#### Example
+
+    <div id="treelist"></div>
+    <script>
+        $("#treelist").kendoTreeList({
+          columns: [
+            { selectable: true, includeChildren: true }
+            { field: "id", width: 250},
+            { field: "name", width: 250 },
+            { field: "age", width: 250}
+          ],
+          dataSource: [
+              { id: 1, parentId: null, name: "Jane Doe", age: 31, city: "Boston" },
+              { id: 2, parentId: 1, name: "John Doe", age: 55, city: "New York" }
+          ]
         });
     </script>
 
@@ -1436,7 +1957,7 @@ The text message that is displayed in the menu header.
       });
     </script>
 
-### columnMenu.messages.lock `String` *(default: "Lock")*
+### columnMenu.messages.lock `String` *(default: "Lock Column")*
 
 The text message that is displayed in the column menu when locking a column.
 
@@ -1465,7 +1986,7 @@ The text message that is displayed in the column menu when locking a column.
       });
     </script>
 
-### columnMenu.messages.unlock `String` *(default: "Unlock")*
+### columnMenu.messages.unlock `String` *(default: "Unlock Column")*
 
 The text message that is displayed in the column menu for unlocking a column.
 
@@ -1756,7 +2277,7 @@ The supported edit modes are:
           });
       </script>
 
-### editable.move `Boolean` *(default: false)*
+### editable.move `Boolean|Object` *(default: false)*
 
 Enables the drag-and-drop UI of rows between parents.
 
@@ -1790,6 +2311,51 @@ Enables the drag-and-drop UI of rows between parents.
           height: 540,
           editable: {
             move: true
+          },
+          columns: [
+            { field: "FirstName", title: "First Name", width: 220 },
+            { field: "LastName", title: "Last Name", width: 160 },
+            { field: "Position" }
+          ]
+        });
+      </script>
+
+### editable.move.reorderable `Boolean` *(default: false)*
+
+Enables reordering of rows via a drag-and-drop UI.
+
+#### Example - using the drag-and-drop functionality for editing the row parent node
+
+      <div id="treelist"></div>
+      <script>
+        var service = "https://demos.telerik.com/kendo-ui/service";
+
+        $("#treelist").kendoTreeList({
+          dataSource: {
+            transport: {
+              read: {
+                url: service + "/EmployeeDirectory/All",
+                dataType: "jsonp"
+              }
+            },
+            schema: {
+              model: {
+                id: "EmployeeID",
+                parentId: "ReportsTo",
+                fields: {
+                  ReportsTo: { field: "ReportsTo",  nullable: true },
+                  EmployeeID: { field: "EmployeeId", type: "number" },
+                  Extension: { field: "Extension", type: "number" }
+                },
+                expanded: true
+              }
+            }
+          },
+          height: 540,
+          editable: {
+            move: {
+              reorderable: true
+            }
           },
           columns: [
             { field: "FirstName", title: "First Name", width: 220 },
@@ -2475,6 +3041,41 @@ The text of the option which represents the `OR` logical operation.
           messages: {
             or: "or"
           }
+        }
+      });
+    </script>
+
+### filterable.mode `String` *(default: "menu")*
+
+If set to `row` the user would be able to filter via extra row added below the headers. By default filtering is using the `menu` mode.
+
+Can also be set to the following string values:
+
+- "row" - the user can filter via extra row within the header.
+- "menu" - the user can filter via the menu after clicking the filter icon.
+- "menu, row" - the user can filter with both modes above enabled.
+
+> When the `filterable.mode` property is set to `"row"` or `"menu, row"`, the TreeList dataSource instance is copied and applied to the Kendo UI AutoComplete widgets used for string filtering.
+This will cause one additional read request per string column. The AutoComplete dataSources do not perform paging and will use a collection of the unique column values only.
+
+#### Example - set mode option to use both "menu" and "row" modes simultaneously
+
+    <div id="treeList"></div>
+
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          "lastName",
+          "position"
+        ],
+        filterable: {
+            mode: "menu, row"
+        },
+        dataSource: {
+          data: [
+            { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+            { id: 2, parentId: 1, lastName: "Weber", position: "  VP, Engineering" }
+          ]
         }
       });
     </script>
@@ -4073,6 +4674,11 @@ The author of the PDF document.
       });
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.avoidLinks `Boolean|String` *(default: false)*
 
 (Available as of the 2015.3.1020 release) A flag which indicates whether to produce actual hyperlinks in the exported PDF file. You can also pass a CSS selector as an argument. All matching links will be ignored.
@@ -4200,6 +4806,14 @@ Specifies the file name of the exported PDF file.
 ### pdf.forceProxy `Boolean` *(default: false)*
 
 If set to `true`, the content will be forwarded to [`proxyURL`](/api/javascript/ui/treelist#configuration-pdf.proxyURL) even if the browser supports the local saving of files.
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -4569,6 +5183,63 @@ Sets the title of the PDF file.
       });
     </script>
 
+### rowTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) which renders rows. By default renders a table row (`<tr>`) for every data source item.
+
+> The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The treelist uses the `uid` data attribute to determine the data to which a table row is bound to.
+
+#### Example - specify row template as a function
+
+        <div id="treelist"></div>
+        <script id="template" type="text/x-kendo-template">
+            <tr data-uid="#= data.model.uid #">
+                <td colspan="2">
+                    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                        <span class="k-icon k-i-none"></span>
+                    #}#
+                    #if(data.hasChildren){#
+                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    #}#
+
+                    <strong>#: data.model.lastName # </strong>
+                    <strong>#: data.model.position #</strong>
+                </td>
+            </tr>
+        </script>
+        <script id="altTemplate" type="text/x-kendo-template">
+            <tr data-uid="#= data.model.uid #" class="k-alt">
+                <td colspan="2">
+                    #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+                        <span class="k-icon k-i-none"></span>
+                    #}#
+                    #if(data.hasChildren){#
+                        <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+                    #}#
+
+                    <strong>#: data.model.lastName # </strong>
+                    <strong>#: data.model.position #</strong>
+                </td>
+            </tr>
+        </script>
+        <script>
+          $("#treelist").kendoTreeList({
+            rowTemplate: kendo.template($("#template").html()),
+            altRowTemplate: kendo.template($("#altTemplate").html()),
+            columns: [
+              { field: "lastName" }
+            ],
+            dataSource: {
+              data: [
+                { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+                { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+                { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" }
+
+              ]
+            }
+          });
+        </script>
+
 ### scrollable `Boolean|Object` *(default: true)*
 
 If set to `true`, the TreeList will display a scrollbar when the total row height or width exceeds the TreeList height or width. By default, scrolling is enabled. Scrolling renders separate tables for the header and data area. For accessibility-conscious applications, disable scrolling.
@@ -4613,6 +5284,27 @@ Configures the Kendo UI TreeList search bar settings.
 ### search.fields `Array`
 
 Defines a list of fields which will be included in the search. If values for the property are not defined the treelist will search in all column fields.
+
+#### Example - specify which fields will be included in the search
+
+    <div id="treeList"></div>
+    <script>
+      $("#treeList").kendoTreeList({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        toolbar:["search"],
+        search: {
+          fields: ["name"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
+        },
+        dataSource: [
+          { id: 1, parentId: null, name: "Jane Doe", age: 22 },
+          { id: 2, parentId: 1, name: "John Doe", age: 24 },
+          { id: 3, parentId: 1, name: "Jenny Doe", age: 3 }
+        ]
+      });
+    </script>
 
 ### selectable `Boolean|String` *(default: false)*
 
@@ -4963,6 +5655,7 @@ The columns of the TreeList that are initialized from the [`columns`](/api/javas
       $("#countBtn").click(function(e){
         var treelist = $("#treelist").data("kendoTreeList");
         for (var i = 0; i < treelist.columns.length; i++) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(treelist.columns[i].field); // displays "lastName" and then "position"
         }
       });
@@ -5414,6 +6107,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
         });
         var treeList = $("#treeList").data("kendoTreeList");
         var data = treeList.dataItem("tbody>tr:eq(1)");
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(data.age); // displays "22"
     </script>
 
@@ -5610,6 +6304,11 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
         treeList.expand(row);
       });
     </script>
+
+### getOptions
+
+Retrieves the options that are currently enabled or disabled on the Treelist, also gives the current state of the dataSource.
+Use this method if you want to save the state of the Treelist into a variable. It is also possible to extract and store only some of the Treelist options.
 
 ### itemFor
 
@@ -5955,6 +6654,7 @@ A DOM element or a jQuery object which represents the table rows or cells.
         var row = treeList.select();
         if(row.length > 0){
           var data = treeList.dataItem(row);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(data.name);
         }
       });
@@ -5996,6 +6696,66 @@ The data source to which the widget will be bound.
           ]
         });
         treeList.setDataSource(dsNew);
+      });
+    </script>
+
+### setOptions
+
+Sets the options of the Treelist. Use this method if you want to enable/disable a particular feature/option or to load
+the complete state obtained previously with the [`getOptions`](getoptions) method.
+
+When `setOptions` is called, the Treelist widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.
+
+> There are a few important things to keep in mind when using `getOptions` and `setOptions`.
+>
+> * **calling `setOptions()` in a Treelist event handler is not possible.**
+> * **calling `setOptions()` in a function, which is related to the Treelist's databinding mechanism may cause an endless loop.**
+> * `JSON.stringify()` cannot serialize function references (e.g. event handlers), so if stringification is used for the retrieved Treelist state,
+> all configuration fields, which represent function references, will be lost. You have two options to avoid this limitation:
+> use a [custom implementation](https://github.com/tarruda/super-json) to serialize JavaScript functions, or
+> add the function references back to the deserialized configuration object before passing it to the `setOptions` method.
+
+#### Example - set `reorderable` feature of the TreeList to true
+
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: true
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ]
+      });
+
+      var treelist = $("#treelist").data("kendoTreeList");
+      treelist.setOptions({
+        reorderable: true
       });
     </script>
 
@@ -6254,6 +7014,7 @@ The widget instance which fired the event.
         editable: "incell",
         toolbar:["create"],
         beforeEdit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("beforeEdit");
 
           if (!e.model.isNew()) {
@@ -6301,6 +7062,7 @@ The widget instance which fired the event.
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           cancel: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("cancel");
           }
         });
@@ -6311,6 +7073,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
      <script>
         function cancel(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("cancel");
         }
         $("#treeList").kendoTreeList({
@@ -6375,6 +7138,7 @@ The widget instance which fired the event.
         editable: "incell",
         toolbar:["create"],
         cellClose:  function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.type);
         }
       });
@@ -6416,6 +7180,7 @@ The widget instance which fired the event.
             selectedDataItems.push(dataItem);
           }
           // selectedDataItems contains all selected data items
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(selectedDataItems.length);
         }
       });
@@ -6435,6 +7200,7 @@ The widget instance which fired the event.
           }
         }
         // selectedDataItems contains all selected data items
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(selectedDataItems.length + " data items selected.");
       }
       $("#treeList").kendoTreeList({
@@ -6486,6 +7252,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           collapse: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("collapse");
           }
         });
@@ -6496,6 +7263,7 @@ If invoked, prevents the collapse action. The child table rows will not be hidde
     <div id="treeList"></div>
      <script>
         function collapse(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("collapse");
         }
         $("#treeList").kendoTreeList({
@@ -6542,6 +7310,7 @@ If invoked, prevents the data bind action. The table rows will remain unchanged 
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           dataBinding: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBinding");
           }
         });
@@ -6552,6 +7321,7 @@ If invoked, prevents the data bind action. The table rows will remain unchanged 
     <div id="treeList"></div>
      <script>
         function dataBinding(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBinding");
         }
         $("#treeList").kendoTreeList({
@@ -6594,6 +7364,7 @@ The widget instance which fired the event.
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           dataBound: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
           }
         });
@@ -6604,6 +7375,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
      <script>
         function dataBound(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("dataBound");
         }
         $("#treeList").kendoTreeList({
@@ -6667,6 +7439,7 @@ The model of the source row.
           { field: "Position" }
         ],
         dragstart: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("dragstart", e.source);
         }
       });
@@ -6679,6 +7452,7 @@ The model of the source row.
       var service = "https://demos.telerik.com/kendo-ui/service";
 
       function dragstart(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragstart");
       }
 
@@ -6773,6 +7547,7 @@ The widget instance which fired the event.
           { field: "Position" }
         ],
         drag: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("dragging", e.source, e.target);
         }
       });
@@ -6785,6 +7560,7 @@ The widget instance which fired the event.
       var service = "https://demos.telerik.com/kendo-ui/service";
 
       function drag(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("dragging");
       }
 
@@ -6879,6 +7655,7 @@ The widget instance which fired the event.
           { field: "Position" }
         ],
         dragend: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("drag ended", e.source, e.destination);
         }
       });
@@ -6891,6 +7668,7 @@ The widget instance which fired the event.
       var service = "https://demos.telerik.com/kendo-ui/service";
 
       function dragend(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("drag ended");
       }
 
@@ -7004,6 +7782,7 @@ Both operations cancel the default drag operation but the indication to the user
           { field: "Position" }
         ],
         drop: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("drop", e.source, e.destination, e.valid);
         }
       });
@@ -7017,6 +7796,7 @@ Both operations cancel the default drag operation but the indication to the user
 
       function drop(e) {
         debugger
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("row dropped");
       }
 
@@ -7123,6 +7903,7 @@ The widget instance which fired the event.
           { command: ["edit"] }
         ],
         edit: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("edit");
         }
       });
@@ -7136,6 +7917,7 @@ The widget instance which fired the event.
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service";
 
       function edit(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("edit");
       }
 
@@ -7287,6 +8069,7 @@ If invoked, prevents the expand action. The child table rows will not be shown.
             { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
           ],
           expand: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("expand");
           }
         });
@@ -7297,6 +8080,7 @@ If invoked, prevents the expand action. The child table rows will not be shown.
     <div id="treeList"></div>
     <script>
       function expand(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("expand");
       }
       $("#treeList").kendoTreeList({
@@ -7494,6 +8278,7 @@ A promise that will be resolved when the export completes.
           { id: 2, Name: "Guy Wooten", Position: "Chief Technical Officer", parentId: 1 }
         ],
         pdfExport: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("exporting PDF");
         }
       });
@@ -7518,6 +8303,7 @@ A promise that will be resolved when the export completes.
       });
       var treelist = $("#treeList").data("kendoTreeList");
       treelist.bind("pdfExport", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("exporting pdf");
       });
       treelist.saveAsPDF();
@@ -7592,6 +8378,7 @@ If invoked, prevents the removal of the data item. The table rows will remain un
           { command: ["destroy"] }
         ],
         remove: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("remove");
         }
       });
@@ -7646,6 +8433,7 @@ If invoked, prevents the removal of the data item. The table rows will remain un
       });
 
       function remove(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("remove");
       }
 
@@ -7717,6 +8505,7 @@ The widget instance which fired the event.
           { command: ["edit"] }
         ],
         save: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log("save row");
         }
       });
@@ -7770,6 +8559,7 @@ The widget instance which fired the event.
       });
 
       function save(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("save row");
       }
 
@@ -7874,6 +8664,7 @@ The widget instance which fired the event.
         },
         columnMenu: true,
         columnShow: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the shown column
         }
       });
@@ -7884,6 +8675,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
       function treelist_columnShow(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the shown column
       }
 
@@ -7938,6 +8730,7 @@ The widget instance which fired the event.
         },
         columnMenu: true,
         columnHide: function(e){
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the hidden column
         }
       });
@@ -7948,6 +8741,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
       function treelist_columnHide(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the hidden column
       }
 
@@ -8009,6 +8803,7 @@ The widget instance which fired the event.
             },
             reorderable: true,
             columnReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.column.field, e.newIndex, e.oldIndex);
             }
         });
@@ -8019,6 +8814,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
         function treelist_columnReorder(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field, e.newIndex, e.oldIndex);
         }
 
@@ -8079,6 +8875,7 @@ The widget instance which fired the event.
             },
             resizable: true,
             columnResize: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.column[0].field, e.newWidth, e.oldWidth);
             }
         });
@@ -8089,6 +8886,7 @@ The widget instance which fired the event.
     <div id="treeList"></div>
     <script>
         function treelist_columnResize(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column[0].field, e.newWidth, e.oldWidth);
         }
 
@@ -8150,6 +8948,7 @@ The widget instance which fired the event.
           menu.append({ text: "Custom" });
           menu.bind("select", function(e) {
             if ($(e.item).text() == "Custom") {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
               console.log("Custom button for", field);
             }
           });
@@ -8167,6 +8966,7 @@ The widget instance which fired the event.
         menu.append({ text: "Custom" });
         menu.bind("select", function(e) {
           if ($(e.item).text() == "Custom") {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("Custom button for", field);
           }
         });
@@ -8290,6 +9090,7 @@ The widget instance which fired the event.
         scrollable: true,
         columnMenu: true,
         columnLock: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the just locked column
         }
       });
@@ -8300,6 +9101,7 @@ The widget instance which fired the event.
     <div id="treeList" style="width: 400px"></div>
     <script>
       function treeList_columnLock(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just locked column
       }
 
@@ -8354,6 +9156,7 @@ The widget instance which fired the event.
         scrollable: true,
         columnMenu: true,
         columnUnlock: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
           console.log(e.column.field); // displays the field of the just locked column
         }
       });
@@ -8364,6 +9167,7 @@ The widget instance which fired the event.
     <div id="treeList" style="width: 400px"></div>
     <script>
       function treeList_columnUnlock(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(e.column.field); // displays the field of the just locked column
       }
 

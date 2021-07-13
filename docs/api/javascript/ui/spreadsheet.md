@@ -259,6 +259,11 @@ The author of the PDF document.
         spreadsheet.saveAsPDF();
     </script>
 
+### pdf.autoPrint `Boolean` *(default: false)*
+Specifies if the Print dialog should be opened immediately after loading the document.
+
+> **Note:** Some PDF Readers/Viewers will not allow opening the Print Preview by default, it might be necessary to configure the corresponding add-on or application.
+
 ### pdf.creator `String` *(default: "Kendo UI PDF Generator")*
 
 The creator of the PDF document.
@@ -426,6 +431,14 @@ Indicates whether to center the content horizontally. For more information, refe
         var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
         spreadsheet.saveAsPDF();
     </script>
+
+### pdf.jpegQuality  `Number` *(default: 0.92)*
+
+Specifies the quality of the images within the exported file, from 0 to 1.
+
+### pdf.keepPNG `Boolean` *(default: false)*
+
+If set to true all PNG images contained in the exported file will be kept in PNG format.
 
 ### pdf.keywords `String` *(default: null)*
 
@@ -995,7 +1008,7 @@ The cell formula without the leading equals sign, for example, `A1 * 10`.
 ### sheets.rows.cells.html `Boolean`
 
 If set to `true`, renders the cell value as HTML. 
-An important thing in this case is to sanitized the value of the cell on the server for passing save html because there is no client-side sanitizing.
+It is important to sanitize the value of the cell on the server for passing safe html because there is no client-side sanitizing. When editing a cell the new value can be checked and prevented in the client `changing` event.
 
 ### sheets.rows.cells.index `Number`
 
@@ -1432,6 +1445,7 @@ This flag only affects the presentation - the way formulas are entered by the en
     sheet.range('B1').input('=SUM(A1, A2, 3.14)');
 
     // prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 To make the API functions obey `useCultureDecimals`, wrap your code in a call to `sheet.withCultureDecimals`. Assuming a culture where the comma is used for decimals, compare the previous example with the following one.
@@ -1442,10 +1456,12 @@ To make the API functions obey `useCultureDecimals`, wrap your code in a call to
         sheet.range('B1').input('=SUM(A1; A2; 3,14)');
 
         // prints: SUM(A1; A2; 3,14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(sheet.range('B1').formula());
     });
 
     // back to canonical form; this prints: SUM(A1, A2, 3.14)
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(sheet.range('B1').formula());
 
 ## Methods
@@ -2475,6 +2491,7 @@ The [progress handler](https://api.jquery.com/deferred.progress/) of the promise
             excelImport: function(e) {
                 e.promise
                 .progress(function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                     console.log(kendo.format("{0:P} complete", e.progress));
                 })
                 .done(function() {

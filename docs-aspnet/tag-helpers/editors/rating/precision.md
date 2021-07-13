@@ -8,7 +8,7 @@ position: 3
 
 # Precision
 
-The widget allows to control the precision with which an item is selected by configuring the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property:
+The widget allows to control the precision with which an item is selected by configuring the [`Precision`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property:
 
 * item - selecting the whole item.
 
@@ -16,7 +16,7 @@ The widget allows to control the precision with which an item is selected by con
 
 ## Item Precision
 
-This is the default precision of the Rating. If not configured, the widget will automatically set the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"item"`:
+This is the default precision of the Rating. If not configured, the widget will automatically set the [`Precision`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"item"`:
 
 ```tagHelper
     <kendo-rating name="rating" precision="item"></kendo-rating>
@@ -24,7 +24,7 @@ This is the default precision of the Rating. If not configured, the widget will 
 
 ## Half Precision
 
-Half precision can be configured by setting the [`Precision`](https://docs.telerik.com/aspnet-core/api//Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"half"`:
+Half precision can be configured by setting the [`Precision`](https://docs.telerik.com/aspnet-core/api/Kendo.Mvc.UI.Fluent/RatingBuilder#precisionsystemstring) property to `"half"`:
 
 With half precision the Rating widget allows to set decimal values. The passed value is rounded during the rendering phase for the purpose of displaying full or half item based on the value:
 

@@ -19,7 +19,7 @@
                 name: "",
                 abbr: "",
                 pattern: ["-n $","n $"],
-                decimals: 0,
+                decimals: 2,
                 ",": ",",
                 ".": ".",
                 groupSize: [3],
@@ -37,8 +37,8 @@
                     names: ["Januari","Februari","Machi","Aprili","Mei","Juni","Julai","Agosti","Septemba","Oktoba","Novemba","Desemba"],
                     namesAbbr: ["Jan","Feb","Mac","Apr","Mei","Jun","Jul","Ago","Sep","Okt","Nov","Dec"]
                 },
-                AM: ["AM","am","AM"],
-                PM: ["PM","pm","PM"],
+                AM: ["icheheavo","icheheavo","ICHEHEAVO"],
+                PM: ["ichamthi","ichamthi","ICHAMTHI"],
                 patterns: {
                     d: "dd/MM/yyyy",
                     D: "dddd, d MMMM yyyy",

@@ -35,10 +35,8 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
-        DISABLED = "k-state-disabled",
+        DISABLED = "k-state-disabled";
 
-        browser = kendo.support.browser,
-        isIE8 = browser.msie && browser.version < 9;
 
     var ColorSelector = Widget.extend({
         init: function(element, options) {
@@ -366,11 +364,6 @@ var __meta__ = { // jshint ignore:line
                     that._updateUI(that.color());
                     that._cancel();
                 });
-
-            if (isIE8) {
-                // IE filters require absolute URLs
-                that._applyIEFilter();
-            }
         },
         destroy: function() {
             this._hsvEvents.destroy();
@@ -393,13 +386,7 @@ var __meta__ = { // jshint ignore:line
             autoupdate : true,
             messages   : MESSAGES
         },
-        _applyIEFilter: function() {
-            var track = this.element.find(".k-hue-slider .k-slider-track")[0],
-                url = track.currentStyle.backgroundImage;
 
-            url = url.replace(/^url\([\'\"]?|[\'\"]?\)$/g, "");
-            track.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + url + "', sizingMethod='scale')";
-        },
         _sliders: function() {
             var that = this,
                 element = that.element,
@@ -577,7 +564,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            this._colorAsText.attr("title", that.options.messages.previewInput);
+            this._colorAsText.attr("aria-label", that.options.messages.previewInput);
             this._colorAsText.removeClass("k-state-error");
 
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
@@ -762,7 +749,7 @@ var __meta__ = { // jshint ignore:line
                     '# } else { #' +
                         '<span class="k-selected-color"><span class="k-icon k-i-line" style="display: none;"></span></span>' +
                     '# } #' +
-                    '<span class="k-select" unselectable="on" aria-label="select">' +
+                    '<span role="button" class="k-select" unselectable="on" aria-label="select">' +
                         '<span class="k-icon k-i-arrow-60-down"></span>' +
                     '</span>' +
                 '</span>' +

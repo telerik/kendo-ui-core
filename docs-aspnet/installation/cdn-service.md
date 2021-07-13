@@ -9,13 +9,13 @@ position: 8
 
 # Using CDN
 
-The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
+The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service, which is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). Including the client-side resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
 
-Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
+Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on the CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
 
-## Using the HTTP Protocol
+## Using the HTTPS Protocol
 
-> The http://cdn.kendostatic.com/ URL is still active but is no longer recommended for new projects.
+> The https://da7xgjtj801h2.cloudfront.net/ URL is still active but is no longer recommended for new projects.
 
 The minified versions of all JavaScript files are available at the following locations:
 * `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/FILENAME.min.js`
@@ -27,11 +27,11 @@ For example, the `{{ site.mvcCoreVersion }}` version can be loaded from the foll
 
 The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release. To load the scripts, use the `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.ui.core.min.js` URL.
 
-## Using the HTTPS Protocol
+## Using the HTTP Protocol
 
-> The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
+> The http://cdn.kendostatic.com/ URL remains active but is no longer recommended for new projects.
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same host name from the previous section and replace the scheme (protocol) with `https`&mdash;for example, `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js`.
+To access the Kendo UI CDN service through the HTTP protocol, use the same URL from the previous section and replace the scheme (protocol) with `http`&mdash;for example, `http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js`.
 
 ## Troubleshooting
 
@@ -90,17 +90,12 @@ This section provides solutions for common issues you might encounter while usin
 ## Next Steps
 
 * [Create your own custom bundles]({% slug custombundles_core %})
-* [Check out the jQuery version support]({% slug jquerysupport_core %})
-* [Check out the web browser support]({% slug webbrowsersupport_core %})
-* [Check out the operation system support]({% slug ossupport_core %})
-* [Check out the PDF and Excel export support]({% slug exportsupport_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Check out the PDF and Excel export support]({% slug exportsupport_core %})
 
 ## See Also
 
 * [Including Client-Side Resources]({% slug copyclientresources_aspnetmvc6_aspnetmvc %})
-* [Installing Telerik UI for ASP.NET Core with Bower]({% slug bowerpackage_core %})
-* [Installing Telerik UI for ASP.NET Core with NPM]({% slug npmpackages_core %})
 * [Installing Telerik UI for ASP.NET Core with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Windows (Online Guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [First Steps on Visual Studio for Mac (Online Guide)]({% slug gettingstarted_firststeps_vsmac %})

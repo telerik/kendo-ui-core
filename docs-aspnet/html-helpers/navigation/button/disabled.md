@@ -11,7 +11,7 @@ position: 2
 
 The business logic of an application often requires a certain button to be temporarily disabled or enabled.
 
-You can initially configure the Button as disabled either through its `.Enable()` setting. The Button can also be disabled or enabled at any time with JavaScript by using its [`enable()` method](/api//Kendo.Mvc.UI.Fluent/ButtonBuilder#enablesystemboolean) with a Boolean argument. 
+You can initially configure the Button as disabled either through its `.Enable()` setting. The Button can also be disabled or enabled at any time with JavaScript by using its [`enable()` method](/api/Kendo.Mvc.UI.Fluent/ButtonBuilder#enablesystemboolean) with a Boolean argument. 
 
 The following example demonstrates how to enable and disable the Button.
 

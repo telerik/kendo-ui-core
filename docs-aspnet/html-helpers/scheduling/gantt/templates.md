@@ -3,7 +3,7 @@ title: Templates
 page_title: Templates
 description: "Use templates and customize the rendering of the tasks of the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
 slug: htmlhelpers_gantt_templates_aspnetcore
-position: 5
+position: 6
 ---
 
 # Templates

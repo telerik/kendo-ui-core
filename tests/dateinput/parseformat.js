@@ -141,5 +141,16 @@
         assert.equal(element.selectionEnd, 9);
     });
 
+    it("DateInput parses date correctly when selected date exceeds current month last date", function() {
+        var diff = [["d","1"]];
+        dateinput = input.kendoDateInput({
+            format: "MM/dd/yyyy",
+            dateInput: true,
+            value: new Date('04-03-2020')
+        }).data("kendoDateInput");
+
+        assert.isOk(dateinput._dateTime.parsePart("d", "1"));
+    });
+
 });
 }());

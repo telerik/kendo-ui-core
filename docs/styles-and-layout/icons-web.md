@@ -9,7 +9,7 @@ position: 7
 
 # Web Font Icons
 
-As of the R1 2017 release, Kendo UI delivers 400 integrated font icons intended for the web and data visualization widgets of the suite.
+As of the R1 2017 release, Kendo UI delivers integrated font icons intended for the web and data visualization widgets of the suite. Currently, 577 icons are available. 
 
 These icons can be used directly in a Kendo UI web project by assigning one of the predefined CSS classes provided in the [list of font icons](#list-of-font-icons) below. The following example demonstrates how to achieve this behavior.
 
@@ -172,6 +172,9 @@ fonts in fonts/
    <li><span class="k-icon k-i-unlink-vertical"></span> .k-i-unlink-vertical</li>
    <li><span class="k-icon k-i-lock"></span> .k-i-lock</li>
    <li><span class="k-icon k-i-unlock"></span> .k-i-unlock</li>
+   <li><span class="k-icon k-i-set-column-position"></span> .k-i-set-column-position</li>
+   <li><span class="k-icon k-i-stick"></span> .k-i-stick</li>
+   <li><span class="k-icon k-i-unstick"></span> .k-i-unstick</li>
    <li><span class="k-icon k-i-cancel"></span> .k-i-cancel</li>
    <li><span class="k-icon k-i-cancel-outline"></span> .k-i-cancel-outline</li>
    <li><span class="k-icon k-i-cancel-circle"></span> .k-i-cancel-circle</li>
@@ -190,8 +193,8 @@ fonts in fonts/
    <li><span class="k-icon k-i-divide"></span> .k-i-divide</li>
    <li><span class="k-icon k-i-equal"></span> .k-i-equal</li>
    <li><span class="k-icon k-i-not-equal"></span> .k-i-not-equal</li>
-   <li><span class="k-icon k-less-or-equal"></span> .k-i-less-or-equal</li>
-   <li><span class="k-icon k-greater-or-equal"></span> .k-i-greater-or-equal</li>
+   <li><span class="k-icon k-i-less-or-equal"></span> .k-i-less-or-equal</li>
+   <li><span class="k-icon k-i-greater-or-equal"></span> .k-i-greater-or-equal</li>
    <li><span class="k-icon k-i-sort-asc"></span> .k-i-sort-asc</li>
    <li><span class="k-icon k-i-sort-desc"></span> .k-i-sort-desc</li>
    <li><span class="k-icon k-i-unsort"></span> .k-i-unsort</li>
@@ -242,6 +245,8 @@ fonts in fonts/
    <li><span class="k-icon k-i-barcode-qr-code-scanner"></span> .k-i-barcode-qr-code-scanner</li>
    <li><span class="k-icon k-i-signature"></span> .k-i-signature</li>
    <li><span class="k-icon k-i-accessibility"></span> .k-i-accessibility</li>
+   <li><span class="k-icon k-i-export"></span> .k-i-export</li>
+   <li><span class="k-icon k-i-import"></span> .k-i-import</li>
 </ul>
 
 ### Alerts and Notifications
@@ -277,6 +282,8 @@ fonts in fonts/
     <li><span class="k-icon k-i-h6"></span> .k-i-h6</li>
     <li><span class="k-icon k-i-list-ordered"></span> .k-i-list-ordered<br /> .k-i-list-numbered</li>
     <li><span class="k-icon k-i-list-unordered"></span> .k-i-list-unordered<br /> .k-i-list-bulleted</li>
+    <li><span class="k-icon k-i-list-roman-upper"></span> .k-i-list-roman-upper</li>
+    <li><span class="k-icon k-i-list-roman-lower"></span> .k-i-list-roman-lower</li>
     <li><span class="k-icon k-i-indent-increase"></span> .k-i-indent-increase<br /> .k-i-indent</li>
     <li><span class="k-icon k-i-indent-decrease"></span> .k-i-indent-decrease<br /> .k-i-outdent</li>
     <li><span class="k-icon k-i-insert-up"></span> .k-i-insert-up<br /> .k-i-insert-top</li>
@@ -292,6 +299,9 @@ fonts in fonts/
     <li><span class="k-icon k-i-align-remove"></span> .k-i-align-remove</li>
     <li><span class="k-icon k-i-text-wrap"></span> .k-i-text-wrap</li>
     <li><span class="k-icon k-i-rule-horizontal"></span> .k-i-rule-horizontal</li>
+    <li><span class="k-icon k-i-table-position-left"></span> .k-i-table-position-left</li>
+    <li><span class="k-icon k-i-table-position-center"></span> .k-i-table-position-center</li>
+    <li><span class="k-icon k-i-table-position-right"></span> .k-i-table-position-right</li>
     <li><span class="k-icon k-i-table-align-top-left"></span> .k-i-table-align-top-left</li>
     <li><span class="k-icon k-i-table-align-top-center"></span> .k-i-table-align-top-center</li>
     <li><span class="k-icon k-i-table-align-top-right"></span> .k-i-table-align-top-right</li>
@@ -778,13 +788,27 @@ fonts in fonts/
 </ul>
 
 <script>
-    $(".WebComponentsIcons .k-icon").each(function() {
+    var icons = document.querySelectorAll('.WebComponentsIcons .k-icon');
+
+    for (var i = 0, len = icons.length; i < len; i++) {
+        var icon = icons[i];
+    
         function iconGlyph(el) {
             return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
         }
-        $(this.parentNode).append("<br />Unicode: " + iconGlyph(this) + "")
-    });
+        icon.parentNode.insertAdjacentHTML("beforeend","<br />Unicode: " + iconGlyph(icon) + "");
+    }
 </script>
+
+<style>
+    article:not(.api-reference) ul:not(.docs-tabstrip):not(.k-reset):not(.k-pager-numbers)>li:before { 
+        content: none; 
+    }
+
+    article > ul.WebComponentsIcons > li {
+        line-height: 15px;
+    }
+</style>
 
 ## See Also
 

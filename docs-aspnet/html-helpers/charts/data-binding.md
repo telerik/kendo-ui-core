@@ -236,34 +236,32 @@ To bind to remote data by using the DataSource component:
 
 1. In the view, configure the Chart to use the action method that you created.
 
-        ```
-        @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
-            .Name("chart")
-            .Title("Spain electricity production (GWh)")
-            .Legend(legend => legend
-                .Position(ChartLegendPosition.Top)
-            )
-            .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
-            .Series(series => {
-                series.Line(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
-                series.Line(model => model.Hydro).Name("Hydro").CategoryField("Year");
-                series.Line(model => model.Wind).Name("Wind").CategoryField("Year");
-            })
-            .CategoryAxis(axis => axis
-                .Labels(labels => labels.Rotation(-90))
-                .Crosshair(c => c.Visible(true))
-            )
-            .ValueAxis(axis => axis.Numeric()
-                .Labels(labels => labels.Format("{0:N0}"))
-                .MajorUnit(10000)
-            )
-            .Tooltip(tooltip => tooltip
-                .Visible(true)
-                .Shared(true)
-                .Format("{0:N0}")
-            )
+    @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
+        .Name("chart")
+        .Title("Spain electricity production (GWh)")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Top)
         )
-        ```
+        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
+        .Series(series => {
+            series.Line(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
+            series.Line(model => model.Hydro).Name("Hydro").CategoryField("Year");
+            series.Line(model => model.Wind).Name("Wind").CategoryField("Year");
+        })
+        .CategoryAxis(axis => axis
+            .Labels(labels => labels.Rotation(-90))
+            .Crosshair(c => c.Visible(true))
+        )
+        .ValueAxis(axis => axis.Numeric()
+            .Labels(labels => labels.Format("{0:N0}"))
+            .MajorUnit(10000)
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Shared(true)
+            .Format("{0:N0}")
+        )
+    )
 
 1. (Optional) Configure a Custom DataSource.
 
@@ -282,20 +280,20 @@ To bind to remote data by using the DataSource component:
             .Legend(legend => legend
                 .Position(ChartLegendPosition.Top)
             )
-                        .DataSource(source =>
-                        {
-                            source.Custom()
-                                    .Type("aspnetmvc-ajax")
-                                    .Transport(transport =>
-                                    {
-                                        transport.Read("Products_Read", "Chart");
-                                    })
-                                    .Schema(schema =>
-                                    {
-                                        schema.Data("Data")
-                                            .Total("Total");
-                                    });
-                        })
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .Type("aspnetmvc-ajax")
+                    .Transport(transport =>
+                    {
+                        transport.Read("Products_Read", "Chart");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data")
+                            .Total("Total");
+                    });
+            })
             .Series(series =>
             {
                 series.Column(model => model.UnitPrice).Name("Price").CategoryField("ProductName");

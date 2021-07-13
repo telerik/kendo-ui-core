@@ -29,16 +29,16 @@
         calendars: {
             standard: {
                 days: {
-                    names: ["Sunndaach","Moondaach","Dinnsdaach","Metwoch","Dunnersdaach","Friidaach","Samsdaach"],
+                    names: ["Sunndaach","Mohndaach","Dinnsdaach","Metwoch","Dunnersdaach","Friidaach","Samsdaach"],
                     namesAbbr: ["Su.","Mo.","Di.","Me.","Du.","Fr.","Sa."],
                     namesShort: ["Su","Mo","Di","Me","Du","Fr","Sa"]
                 },
                 months: {
-                    names: ["Jannewa","Fäbrowa","Määz","Aprell","Mäi","Juuni","Juuli","Oujoß","Septämber","Oktoober","Novämber","Dezämber"],
-                    namesAbbr: ["Jan.","Fäb.","Mäz.","Apr.","Mäi","Jun.","Jul.","Ouj.","Säp.","Okt.","Nov.","Dez."]
+                    names: ["Jannewa","Fäbrowa","Määz","Aprell","Mai","Juuni","Juuli","Oujoß","Septämber","Oktohber","Novämber","Dezämber"],
+                    namesAbbr: ["Jan.","Fäb.","Mäz.","Apr.","Mai","Jun.","Jul.","Ouj.","Säp.","Okt.","Nov.","Dez."]
                 },
-                AM: ["v.m.","v.m.","V.M."],
-                PM: ["n.m.","n.m.","N.M."],
+                AM: ["v.M.","v.m.","V.M."],
+                PM: ["n.M.","n.m.","N.M."],
                 patterns: {
                     d: "d. M. yyyy",
                     D: "dddd, 'dä' d. MMMM yyyy",

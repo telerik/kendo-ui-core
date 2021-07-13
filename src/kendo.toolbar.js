@@ -74,7 +74,7 @@ var __meta__ = { // jshint ignore:line
         kendo.toolbar = {};
 
         var components = {
-            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button"></div>',
+            overflowAnchor: '<div tabindex="0" class="k-overflow-anchor k-button" title="More tools" role="button"></div>',
             overflowContainer: '<ul class="k-overflow-container k-list-container"></ul>'
         };
 
@@ -694,7 +694,7 @@ var __meta__ = { // jshint ignore:line
                 this.mainButton.element.appendTo(element);
 
                 for (var i = 0; i < items.length; i++) {
-                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId, isChild: true }, items[i]), this.toolbar);
+                    item = new OverflowButton($.extend({ mobile: options.mobile, type: "button", splitContainerId: splitContainerId, isChild: true }, items[i], { click: options.click }), this.toolbar);
                     item.element.appendTo(element);
                 }
 
@@ -974,7 +974,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
 
-                that.userEvents = new kendo.UserEvents(document, {
+                that.userEvents = new kendo.UserEvents(document.documentElement, {
                     threshold: 5,
                     allowSelection: true,
                     filter:

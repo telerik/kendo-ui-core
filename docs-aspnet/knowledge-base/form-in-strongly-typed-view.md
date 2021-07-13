@@ -24,7 +24,7 @@ How can I create a form by using the UI for ASP.NET Core strongly typed helpers?
 
 ## Solution
 
-For the complete implementation on how to create a strongly typed form in a view by using the Telerik UI for ASP.NET Core HTML helpers, refer to [this GitHub project](https://github.com/telerik/aspnet-core-examples/tree/master/forms/form-in-strongly-typed-view).
+For the complete implementation on how to create a strongly typed form in a view by using the Telerik UI for ASP.NET Core HTML helpers, refer to [this GitHub project](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc/Telerik.Examples.Mvc/Views/Forms).
 
 ## See Also
 

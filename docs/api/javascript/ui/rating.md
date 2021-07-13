@@ -293,6 +293,7 @@ The value to set.
         }).data("kendoRating");
 
         ratingInstance.value(3);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(ratingInstance.value());
     </script>
 
@@ -416,6 +417,7 @@ The new value of the widget.
     <script>
         $("#rating").kendoRating({
             change: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
             }
         });
@@ -442,6 +444,7 @@ The DOM element that triggered the event.
     <script>
         $("#rating").kendoRating({
             select: function (e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.target);
             }
         });

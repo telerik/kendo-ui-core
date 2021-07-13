@@ -29,8 +29,6 @@ var __meta__ = { // jshint ignore:line
         emptyCellTemplate = template('<td role="gridcell" class="k-out-of-range"><a class="k-link"></a></td>', { useWithBlock: false }),
         otherMonthCellTemplate = template('<td role="gridcell" class="k-out-of-range">&nbsp;</td>', { useWithBlock: false }),
         weekNumberTemplate = template('<td class="k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
-        browser = kendo.support.browser,
-        isIE8 = browser.msie && browser.version < 9,
         outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
@@ -78,19 +76,20 @@ var __meta__ = { // jshint ignore:line
             century: 3
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
-        CLASSIC_HEADER_TEMPLATE = '<div class="k-header">' +
-            '<a href="\\#" ' + kendo.attr("action") + '="prev" role="button" class="k-link k-nav-prev" ' + ARIA_LABEL + '="Previous"><span class="k-icon k-i-arrow-60-left"></span></a>' +
-            '<a href="\\#" ' + kendo.attr("action") + '="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-link k-nav-fast"></a>' +
-            '<a href="\\#" ' + kendo.attr("action") + '="next" role="button" class="k-link k-nav-next" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
+        CLASSIC_HEADER_TEMPLATE = '<div class="k-header k-hstack">' +
+            '<a href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button k-flat k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-icon k-i-arrow-60-left"></span></a>' +
+            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-nav-fast k-button k-flat k-flex"></a>' +
+            '<a href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button k-flat k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
         '</div>',
-        MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header">' +
-            '<a href="\\#" ' + kendo.attr("action") + '="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-button k-title"></a>' +
-            '<span class="k-calendar-nav">' +
-                '<a ' + kendo.attr("action") + '="prev" class="k-button k-button-icon k-prev-view">' +
+        MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header k-hstack">' +
+            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-calendar-title k-button k-flat"></a>' +
+            '<span class="k-spacer"></span>' +
+            '<span class="k-calendar-nav k-hstack">' +
+                '<a #=actionAttr#="prev" class="k-button k-flat k-button-icon k-prev-view">' +
                     '<span class="k-icon k-i-arrow-60-left"></span>' +
                 '</a>' +
-                '<a ' + kendo.attr("action") + '="today" class="k-today">#=messages.today#</a>' +
-                '<a ' + kendo.attr("action") + '="next" class="k-button k-button-icon k-next-view">' +
+                '<a #=actionAttr#="today" class="k-nav-today">#=messages.today#</a>' +
+                '<a #=actionAttr#="next" class="k-button k-flat k-button-icon k-next-view">' +
                     '<span class="k-icon k-i-arrow-60-right"></span>' +
                 '</a>' +
             '</span>' +
@@ -120,43 +119,42 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.hasFooter) {
                 that._footer(that.footer);
+            } else {
+                that._today = that.element.find('a.k-nav-today');
+                that._toggle();
             }
 
             id = element
-                    .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
-                    .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
-                    .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
-                    .on(CLICK + " touchend", CELLSELECTOR, function(e) {
-                        var link = e.currentTarget.firstChild,
-                            value = toDateObject(link);
+                .addClass("k-widget k-calendar " + (options.weekNumber ? " k-week-number" : ""))
+                .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE, CELLSELECTOR, mousetoggle)
+                .on(KEYDOWN_NS, "table.k-content", proxy(that._move, that))
+                .on(CLICK + " touchend", CELLSELECTOR, function(e) {
+                    var link = e.currentTarget.firstChild,
+                        value = toDateObject(link);
 
-                        if (link.href.indexOf("#") != -1) {
-                            e.preventDefault();
-                        }
+                    if (link.href.indexOf("#") != -1) {
+                        e.preventDefault();
+                    }
 
-                        if (that._view.name == "month" && that.options.disableDates(value)) {
-                            return;
-                        }
-                        if(that._view.name != "month" || options.selectable == "single") {
-                             that._click($(link));
-                        }
-                    })
-                    .on("mouseup" + ns, "table.k-content, .k-footer", function() {
-                        that._focusView(that.options.focusOnNav !== false);
-                    })
-                    .attr(ID);
+                    if (that._view.name == "month" && that.options.disableDates(value)) {
+                        return;
+                    }
+                    if (that._view.name != "month" || options.selectable == "single") {
+                            that._click($(link));
+                    }
+                })
+                .on("mouseup" + ns, "table.k-content, .k-footer", function() {
+                    that._focusView(that.options.focusOnNav !== false);
+                })
+                .attr(ID);
 
-            if (id) {
-                that._cellID = id + "_cell_selected";
-            }
-
-            if(that._isMultipleSelection() && that.options.weekNumber) {
+            if (that._isMultipleSelection() && that.options.weekNumber) {
                 element.on(CLICK, WEEKCOLUMNSELECTOR, function(e) {
                         var first = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).first(),
                             last = that.selectable._lastActive = $(e.currentTarget).closest("tr").find(CELLSELECTORVALID).last();
                         that.selectable.selectRange(first, last, { event: e});
                         that._current = that._value = toDateObject(last.find("a"));
-                        that._class(FOCUSED, that._current);
+                        that._setCurrent(that._current);
                 });
             }
 
@@ -181,12 +179,14 @@ var __meta__ = { // jshint ignore:line
 
             that._removeClassProxy = function() {
                 that._active = false;
-                that._cell.removeClass(FOCUSED);
+                if (that._cell) {
+                    that._cell.removeClass(FOCUSED);
+                }
             };
 
             that.value(value);
 
-            if(that._isMultipleSelection() && options.selectDates.length > 0) {
+            if (that._isMultipleSelection() && options.selectDates.length > 0) {
                 that.selectDates(options.selectDates);
             }
             kendo.notify(that);
@@ -224,7 +224,8 @@ var __meta__ = { // jshint ignore:line
             messages: {
                 weekColumnHeader: "",
                 today: "Today"
-            }
+            },
+            componentType: "classic"
         },
 
         events: [
@@ -238,7 +239,7 @@ var __meta__ = { // jshint ignore:line
                     template: CLASSIC_HEADER_TEMPLATE
                 },
                 hasFooter: true,
-                linksSelector: ".k-link",
+                linksSelector: ".k-button",
                 contentClasses: "k-content"
             },
             "modern": {
@@ -271,12 +272,13 @@ var __meta__ = { // jshint ignore:line
                 that._footer(that.footer);
             } else {
                 that.element.find(".k-footer").hide();
+                that._toggle();
             }
             that._index = views[that.options.start];
 
             that.navigate();
 
-            if(options.weekNumber) {
+            if (options.weekNumber) {
                 that.element.addClass('k-week-number');
             }
         },
@@ -398,15 +400,9 @@ var __meta__ = { // jshint ignore:line
 
             disabled = compare(value, min) < 1;
             that[PREVARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
-            if (that[PREVARROW].hasClass(DISABLED)) {
-                that[PREVARROW].removeClass(HOVER);
-            }
 
             disabled = compare(value, max) > -1;
             that[NEXTARROW].toggleClass(DISABLED, disabled).attr(ARIA_DISABLED, disabled);
-            if (that[NEXTARROW].hasClass(DISABLED)) {
-                that[NEXTARROW].removeClass(HOVER);
-            }
 
             if (from && old && old.data("animating")) {
                 old.kendoStop(true, true);
@@ -434,7 +430,6 @@ var __meta__ = { // jshint ignore:line
                 }, that[currentView.name])));
 
                 addClassToViewContainer(to, currentView.name);
-                makeUnselectable(to);
                 var replace = from && from.data("start") === to.data("start");
                 that._animate({
                     from: from,
@@ -444,7 +439,7 @@ var __meta__ = { // jshint ignore:line
                     replace: replace
                 });
 
-                if(that.options.componentType === "modern"){
+                if (that.options.componentType === "modern"){
                     viewWrapper.removeClass("k-calendar-monthview k-calendar-yearview k-calendar-decadeview k-calendar-centuryview");
                     viewWrapper.addClass("k-calendar-" + currentView.name + "view");
                 }
@@ -458,13 +453,13 @@ var __meta__ = { // jshint ignore:line
                 that._visualizeSelectedDatesInView();
             }
 
-            if(that.options.selectable === "single") {
+            if (that.options.selectable === "single") {
                 if (view === views[options.depth] && that._value && !that.options.disableDates(that._value)) {
-                    that._class("k-state-selected", that._value);
+                    that._selectCell(that._value);
                 }
             }
 
-            that._class(FOCUSED, value);
+            that._setCurrent(value);
 
             if (!from && that._cell) {
                 that._cell.removeClass(FOCUSED);
@@ -478,7 +473,7 @@ var __meta__ = { // jshint ignore:line
                 validSelectedDates,
                 datesUnique;
 
-            if(dates === undefined) {
+            if (dates === undefined) {
                 return that._selectDates;
             }
 
@@ -490,7 +485,7 @@ var __meta__ = { // jshint ignore:line
                 .map(function (time) { return new Date(time); });
 
             validSelectedDates = $.grep(datesUnique, function(value) {
-                if(value) {
+                if (value) {
                     return +that._validateValue(new Date(value.setHours(0, 0, 0, 0))) === +value;
                 }
             });
@@ -563,7 +558,7 @@ var __meta__ = { // jshint ignore:line
                 .filter(function(index, element) {
                     return selectedDates[$(element.firstChild).attr(kendo.attr(VALUE))];
                 });
-            if(cells.length > 0) {
+            if (cells.length > 0) {
                 that.selectable._selectElement(cells, true);
             }
         },
@@ -575,7 +570,7 @@ var __meta__ = { // jshint ignore:line
 
         _selectable: function() {
             var that = this;
-            if(!that._isMultipleSelection()) {
+            if (!that._isMultipleSelection()) {
                 return;
             }
 
@@ -599,9 +594,9 @@ var __meta__ = { // jshint ignore:line
         _onRelatedTarget: function(target) {
             var that = this;
 
-            if(that.selectable.options.multiple && target.is(CELLSELECTORVALID)) {
+            if (that.selectable.options.multiple && target.is(CELLSELECTORVALID)) {
                 that._current = toDateObject(target.find("a"));
-                that._class(FOCUSED, toDateObject(target.find("a")));
+                that._setCurrent(that._current);
             }
 
         },
@@ -611,8 +606,8 @@ var __meta__ = { // jshint ignore:line
                 eventArgs = e,
                 selectableOptions = Selectable.parseOptions(that.options.selectable);
 
-            if(!selectableOptions.multiple) {
-                if($(eventArgs.event.currentTarget).is("td") && !$(eventArgs.event.currentTarget).hasClass("k-state-selected")) {
+            if (!selectableOptions.multiple) {
+                if ($(eventArgs.event.currentTarget).is("td") && !$(eventArgs.event.currentTarget).hasClass("k-state-selected")) {
                     $(eventArgs.event.currentTarget).addClass("k-state-selected");
                 }
                 else {
@@ -621,8 +616,8 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if(eventArgs.event.ctrlKey || eventArgs.event.metaKey) {
-                if($(eventArgs.event.currentTarget).is(CELLSELECTORVALID)) {
+            if (eventArgs.event.ctrlKey || eventArgs.event.metaKey) {
+                if ($(eventArgs.event.currentTarget).is(CELLSELECTORVALID)) {
                     that._toggleSelection($(eventArgs.event.currentTarget));
                 }
                 else {
@@ -636,7 +631,7 @@ var __meta__ = { // jshint ignore:line
             else if (eventArgs.event.shiftKey) {
                 that._rangeSelection(that._cell);
             }
-            else if($(eventArgs.event.currentTarget).is(CELLSELECTOR)) {
+            else if ($(eventArgs.event.currentTarget).is(CELLSELECTOR)) {
                 that.value(toDateObject($(eventArgs.event.currentTarget).find("a")));
             }
             else {
@@ -659,7 +654,7 @@ var __meta__ = { // jshint ignore:line
         _toggleSelection: function(currentCell) {
             var that = this,
                 date = toDateObject(currentCell.find("a"));
-                if(currentCell.hasClass("k-state-selected")) {
+                if (currentCell.hasClass("k-state-selected")) {
                     that._selectDates.push(date);
                 }
                 else {
@@ -674,7 +669,7 @@ var __meta__ = { // jshint ignore:line
                 toDate = toDateObject(toDateCell.find("a")),
                 daysDifference;
 
-            if(that.selectable._lastActive || that._value) {
+            if (that.selectable._lastActive || that._value) {
                 fromDate = that.selectable._lastActive? toDateObject(that.selectable._lastActive.find("a")): new Date(+that._value);
             } else {
                 that.selectable._lastActive = startDate? that._cellByDate(that._view.toDateString(startDate), CELLSELECTORVALID): that.selectable.value().first();
@@ -696,7 +691,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             that.selectable.value().each(function(index, item) {
                 var date = toDateObject($(item.firstChild));
-                if(!that.options.disableDates(date)) {
+                if (!that.options.disableDates(date)) {
                     that._selectDates.push(date);
                 }
             });
@@ -705,7 +700,7 @@ var __meta__ = { // jshint ignore:line
          _deselect: function(date) {
             var that = this;
              var currentDateIndex = that._selectDates.map(Number).indexOf(+date);
-            if(currentDateIndex != -1) {
+            if (currentDateIndex != -1) {
                 that._selectDates.splice(currentDateIndex, 1);
             }
         },
@@ -763,7 +758,7 @@ var __meta__ = { // jshint ignore:line
                 value = index === 0 ? 7 : 4;
                 prevent = true;
             }
-            else if(key == keys.SPACEBAR) {
+            else if (key == keys.SPACEBAR) {
                 value = 0;
                 prevent = true;
             }
@@ -793,10 +788,10 @@ var __meta__ = { // jshint ignore:line
                     that._keyboardToggleSelection(e);
 
                     var focusedDate = toDateObject($(that._cell[0]).find("a"));
-                    that._class(FOCUSED, focusedDate);
+                    that._setCurrent(focusedDate);
 
                 }
-            } else if(e.shiftKey) {
+            } else if (e.shiftKey) {
                 if (value !== undefined || method) {
                     if (!method) {
                         view.setDate(currentValue, value);
@@ -811,7 +806,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     min = createDate(min.getFullYear(), min.getMonth(), min.getDate());
-                    if(that._isMultipleSelection()) {
+                    if (that._isMultipleSelection()) {
                         that._keyboardRangeSelection(e, currentValue);
                     }
                     else {
@@ -820,7 +815,7 @@ var __meta__ = { // jshint ignore:line
                 }
             } else {
                 if (key == keys.ENTER || key == keys.SPACEBAR) {
-                    if(view.name == "month" && that._isMultipleSelection()) {
+                    if (view.name == "month" && that._isMultipleSelection()) {
                         that.value(toDateObject($(that._cell.find("a"))));
                         that.selectable._lastActive = $(that._cell[0]);
                         that.trigger(CHANGE);
@@ -852,13 +847,13 @@ var __meta__ = { // jshint ignore:line
                         currentValue = that._nextNavigatable(currentValue, value);
                     }
 
-                    if(that._isMultipleSelection()) {
-                        if(!that._dateInView(currentValue)) {
+                    if (that._isMultipleSelection()) {
+                        if (!that._dateInView(currentValue)) {
                             that.navigate(currentValue);
                         }
                         else {
                             that._current = currentValue;
-                            that._class(FOCUSED, currentValue);
+                            that._setCurrent(currentValue);
                         }
                     }
                     else {
@@ -879,7 +874,7 @@ var __meta__ = { // jshint ignore:line
                 fromDate,
                 daysDifference;
 
-            if(!that._dateInView(currentValue)) {
+            if (!that._dateInView(currentValue)) {
                 that._selectDates = [];
 
                 fromDate = that.selectable._lastActive? toDateObject(that.selectable._lastActive.find("a")): currentValue;
@@ -894,7 +889,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
             that.selectable.options.filter = that.wrapper.find("table").length > 1 && +currentValue > +that._current? "table.k-month:eq(1) " + CELLSELECTORVALID: "table.k-month:eq(0) " + CELLSELECTORVALID;
-            that._class(FOCUSED, currentValue);
+            that._setCurrent(currentValue);
             that._current = currentValue;
 
             that._rangeSelection(that._cellByDate(that._view.toDateString(currentValue), CELLSELECTORVALID), currentValue);
@@ -1054,42 +1049,46 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _class: function(className, date) {
+        _selectCell: function (date) {
             var that = this,
-                id = that._cellID,
+                cell = that._selectedCell,
+                value = that._view.toDateString(date);
+
+                if (cell && cell[0]) {
+                    cell[0].removeAttribute(ARIA_SELECTED);
+                    cell.removeClass(SELECTED);
+                }
+
+                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")");
+
+                that._selectedCell = cell;
+                cell.addClass(SELECTED)
+                    .attr(ARIA_SELECTED, true);
+        },
+
+        _setCurrent: function (date) {
+            var that = this,
+                id = kendo.guid(),
                 cell = that._cell,
-                value = that._view.toDateString(date),
-                disabledDate;
+                value = that._view.toDateString(date);
 
-            if (cell && cell.length) {
-                cell[0].removeAttribute(ARIA_SELECTED);
-                cell[0].removeAttribute(ARIA_LABEL);
-                cell[0].removeAttribute(ID);
-                //.removeClass(className);
-            }
+                if (cell && cell[0]) {
+                    cell.removeClass(FOCUSED);
+                    cell[0].removeAttribute(ARIA_LABEL);
+                    cell[0].removeAttribute(ID);
+                }
 
-            if (date && that._view.name == "month") {
-                disabledDate = that.options.disableDates(date);
-            }
-            that._cellsBySelector(that._isMultipleSelection() ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")").removeClass(className);
-            cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")")
-            .attr(ARIA_SELECTED, true);
+                cell = that._cellByDate(value, that.options.selectable == "multiple" ? CELLSELECTOR: "td:not(." + OTHERMONTH + ")");
 
-            if (className === FOCUSED && !that._active && that.options.focusOnNav !== false || disabledDate) {
-                className = "";
-            }
-
-            cell.addClass(className);
-
-            if (cell[0]) {
                 that._cell = cell;
-            }
 
-            if (id) {
-                cell.attr(ID, id);
-                that._table[0].removeAttribute("aria-activedescendant");
-                that._table.attr("aria-activedescendant", id);
-            }
+                cell.attr(ID, id)
+                    .addClass(FOCUSED);
+
+                if (that._table[0]) {
+                    that._table[0].removeAttribute("aria-activedescendant");
+                    that._table.attr("aria-activedescendant", id);
+                }
         },
 
         _bindTable: function (table) {
@@ -1123,7 +1122,7 @@ var __meta__ = { // jshint ignore:line
                 that.navigate(value);
             } else {
                 that._current = value;
-                that._class(FOCUSED, value);
+                that._setCurrent(value);
             }
         },
 
@@ -1160,9 +1159,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._today = footer.show()
-            .find(".k-link")
-            .html(template(today))
-            .attr("title", kendo.toString(today, "D", that.options.culture));
+                .find(".k-link")
+                .html(template(today))
+                .attr("title", kendo.toString(today, "D", that.options.culture));
 
             that._toggle();
         },
@@ -1173,12 +1172,11 @@ var __meta__ = { // jshint ignore:line
             linksSelector = that.options.linksSelector;
 
             if (!element.find(HEADERSELECTOR)[0]) {
-                element.html(kendo.template(that.options.header.template)(that.options));
+                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {actionAttr: kendo.attr("action")})));
             }
 
             element.find(linksSelector)
-            .on(MOUSEENTER_WITH_NS + " " + MOUSELEAVE + " " + FOCUS_WITH_NS + " " + BLUR, mousetoggle)
-            .on(CLICK + " touchend" + ns, function() { return false; } );
+                .on(CLICK + " touchend" + ns, function() { return false; } );
 
             that._title = element.find('[' + kendo.attr("action") + '="nav-up"]').on(CLICK + " touchend" + ns, function () {
                 that._active = that.options.focusOnNav !== false;
@@ -1264,7 +1262,8 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 options = that.options,
                 isTodayDisabled = that.options.disableDates(getToday()),
-                link = that._today;
+                link = that._today,
+                todayClass = that._todayClass();
 
             if (toggle === undefined) {
                 toggle = isInRange(getToday(), options.min, options.max);
@@ -1274,15 +1273,19 @@ var __meta__ = { // jshint ignore:line
                 link.off(CLICK);
 
                 if (toggle && !isTodayDisabled) {
-                    link.addClass(TODAY)
+                    link.addClass(todayClass)
                     .removeClass(DISABLED)
                     .on(CLICK, proxy(that._todayClick, that));
                 } else {
-                    link.removeClass(TODAY)
+                    link.removeClass(todayClass)
                     .addClass(DISABLED)
                     .on(CLICK, prevent);
                 }
             }
+        },
+
+        _todayClass: function() {
+            return TODAY;
         },
 
         _todayClick: function(e) {
@@ -1301,7 +1304,7 @@ var __meta__ = { // jshint ignore:line
                 that._changeView = false;
             }
 
-            if(that._isMultipleSelection()) {
+            if (that._isMultipleSelection()) {
                 that._selectDates = [today];
                 that.selectable._lastActive = null;
             }
@@ -1333,6 +1336,26 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.footer = footer !== false ? template(footerTemplate, { useWithBlock: false }) : null;
+        },
+
+        _updateAria: function (ariaTemplate, date) {
+            var that = this;
+            var cell = that._cell;
+            var valueType = that.view().valueType();
+            var current = date || that.current();
+            var text;
+
+            if (valueType === "month") {
+                text = kendo.toString(current, "MMMM");
+            } else if (valueType === "date") {
+                text = kendo.toString(current, "D");
+            } else {
+                text = cell.text();
+            }
+
+            cell.attr("aria-label", ariaTemplate({ current: current, valueType: valueType, text: text }));
+
+            return cell.attr("id");
         }
     });
 
@@ -1519,6 +1542,9 @@ var __meta__ = { // jshint ignore:line
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/" + date.getDate();
+            },
+            valueType: function () {
+                return "date";
             }
         },
         {
@@ -1594,6 +1620,9 @@ var __meta__ = { // jshint ignore:line
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/" + date.getMonth() + "/1";
+            },
+            valueType: function () {
+                return "month";
             }
         },
         {
@@ -1645,6 +1674,9 @@ var __meta__ = { // jshint ignore:line
             },
             toDateString: function(date) {
                 return date.getFullYear() + "/0/1";
+            },
+            valueType: function () {
+                return "year";
             }
         },
         {
@@ -1719,6 +1751,9 @@ var __meta__ = { // jshint ignore:line
             toDateString: function(date) {
                 var year = date.getFullYear();
                 return (year - year % 10) + "/0/1";
+            },
+            valueType: function () {
+                return "decade";
             }
         }]
     };
@@ -1761,12 +1796,12 @@ var __meta__ = { // jshint ignore:line
             empty = options.empty || emptyCellTemplate,
             otherMonthTemplate = options.otherMonthCellTemplate || otherMonthCellTemplate,
             html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
-            if(isWeekColumnVisible) {
+            if (isWeekColumnVisible) {
                 html += weekNumber(weekNumberBuild(start));
             }
 
 
-        for(; idx < length; idx++) {
+        for (; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
                 html += '</tr><tr role="row">';
                 if (isWeekColumnVisible) {
@@ -1841,7 +1876,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function daysBetweenTwoDates(startDate, endDate) {
-        if(+endDate < +startDate) {
+        if (+endDate < +startDate) {
             var temp = +startDate;
             calendar.views[0].setDate(startDate, endDate);
             calendar.views[0].setDate(endDate, new Date(temp));
@@ -1853,10 +1888,10 @@ var __meta__ = { // jshint ignore:line
     }
 
     function addDaysToArray(array, numberOfDays, fromDate, disableDates) {
-        for(var i = 0; i <= numberOfDays; i++) {
+        for (var i = 0; i <= numberOfDays; i++) {
             var nextDay = new Date(fromDate.getTime());
             nextDay = new Date(nextDay.setDate(nextDay.getDate() + i));
-            if(!disableDates(nextDay)) {
+            if (!disableDates(nextDay)) {
                 array.push(nextDay);
             }
         }
@@ -1906,18 +1941,12 @@ var __meta__ = { // jshint ignore:line
         }
     }
 
-    function makeUnselectable(element) {
-        if (isIE8) {
-            element.find("*").attr("unselectable", "on");
-        }
-    }
-
     function addClassToViewContainer(element, currentView) {
         element.addClass("k-" + currentView);
     }
 
     function inArray(date, dates) {
-        for(var i = 0, length = dates.length; i < length; i++) {
+        for (var i = 0, length = dates.length; i < length; i++) {
             if (date === +dates[i]) {
                 return true;
             }
@@ -1976,7 +2005,7 @@ var __meta__ = { // jshint ignore:line
 
         if (dates[0] instanceof DATE) {
             disabledDates = convertDatesArray(dates);
-            body = "var found = date && window.kendo.jQuery.inArray(date.setHours(0, 0, 0, 0),["+ disabledDates +"]) > -1;" + searchExpression;
+            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.setHours(0, 0, 0, 0),["+ disabledDates +"]) > -1;" + searchExpression;
         } else {
             for (var i = 0; i < dates.length; i++) {
                 var day = dates[i].slice(0,2).toLowerCase();
@@ -1985,7 +2014,7 @@ var __meta__ = { // jshint ignore:line
                     disabledDates.push(index);
                 }
             }
-            body = "var found = date && window.kendo.jQuery.inArray(date.getDay(),["+ disabledDates +"]) > -1;" + searchExpression;
+            body = "var clonedDate = new Date(date); var found = date && window.kendo.jQuery.inArray(clonedDate.getDay(),["+ disabledDates +"]) > -1;" + searchExpression;
         }
 
         callback = new Function("date", body); //jshint ignore:line
@@ -2012,7 +2041,6 @@ var __meta__ = { // jshint ignore:line
 
     calendar.isEqualDatePart = isEqualDatePart;
     calendar.isEqualDate = isEqualDate;
-    calendar.makeUnselectable =  makeUnselectable;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
     calendar.addClassToViewContainer = addClassToViewContainer;

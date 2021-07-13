@@ -7,7 +7,6 @@
     outline: 0;
     font-size: @listview-font-size;
     line-height: @listview-line-height;
-    display: flex;
     flex-flow: column nowrap;
     position: relative;
 }
@@ -47,6 +46,7 @@
     flex: 1 1 auto;
     align-content: flex-start;
     position: relative;
+    overflow: auto;
 
     &::after {
         height: 0;

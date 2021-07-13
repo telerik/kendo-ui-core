@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Map Documentation | Map Overview | Kendo UI
+page_title: jQuery Map Documentation | Map Overview
 description: "Get started with the jQuery Map by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: overview_kendoui_mapwidget
 position: 1
@@ -43,6 +43,7 @@ The following example demonstrates how to add a basic tile layer to the Map that
 
 * [Layers]({% slug maplayers_mapwidget %})
 * [Creating maps]({% slug mapauthoring_mapwidget %})
+* [Implementation with Azure](https://docs.telerik.com/kendo-ui/knowledge-base/map-implementation-with-azure)
 
 ## Events
 

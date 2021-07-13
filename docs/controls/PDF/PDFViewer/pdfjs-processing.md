@@ -1,6 +1,6 @@
 ---
 title: PDFjs Processing
-page_title: jQuery PDFViewer Documentation | PDFjs Processing | Kendo UI
+page_title: jQuery PDFViewer Documentation | PDFjs Processing
 description: "Get started with the jQuery PDFViewer by Kendo UI and use PDF.JS processing in the Kendo UI PDFViewer widget"
 slug: pdfjs_processing_pdfviewer_widget
 position: 2
@@ -35,7 +35,7 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
 
 ## Browser Support
 
-PDF.js processing is not supported in Internet Explorer 9. To work properly in that browser version, PDF.js requires additional configuration.
+PDF.js processing is only supported in Internet Explorer 11.    
 
 <script>
     // Specify the workerSrc property for Internet Explorer support.

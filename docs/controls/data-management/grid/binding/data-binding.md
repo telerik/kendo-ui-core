@@ -1,6 +1,6 @@
 ---
 title: Remote Data
-page_title: jQuery Grid Documentation | Remote Data | Kendo UI
+page_title: jQuery Grid Documentation | Remote Data
 description: "Get started with the jQuery Grid by Kendo UI featuring a built-in DataSource which allows you to bind the Grid to remote data."
 previous_url: /howto/bind-the-grid-to-remote-data
 slug: remote_data_binding_grid
@@ -282,6 +282,18 @@ The following example demonstrates how to fully customize the Grid by applying a
       }
     </style>
 ```
+
+## Loading Overlay Types
+
+The Kendo UI Grid exposes two types of loading indicators:
+
+* The `loadingPanel` adds an overlay element with a loading spinner over the main content of the Grid. This is the default type.
+
+* The `skeleton` uses the [SkeletonContainer widget]({% slug overview_kendoui_skeletoncontainer_widget %}) to show a simplified preview of each of the grid's cells. The `skeleton` loading type aims at helping the user gain an idea of what the content would look like when the loading completes. It also makes the page load time appear shorter.
+
+Check the `skeleton` loading type in action in the live demo below:
+
+* [Skeleton Loading Type Demo](https://demos.telerik.com/kendo-ui/skeletoncontainer/grid-integration)
 
 ## KB Articles on Remote Data Binding
 

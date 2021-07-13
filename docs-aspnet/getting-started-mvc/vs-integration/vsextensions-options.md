@@ -31,7 +31,7 @@ Set the default value for the **Copy referenced assemblies to solution** option 
 
 Set the project upgrade notifications for detected local distributions by using the options under the **Project Upgrade Notifications for Detected Local Distributions**:
 
-- **Suggest project upgrades for Telerik product version available on my computer**&mdash;When enabled, you are prompted to upgrade upon opening a project, which is not using the latest version of Telerik products installed on your system.
+- **Suggest project upgrades for Telerik product versions available on my computer**&mdash;When enabled, you are prompted to upgrade upon opening a project, which is not using the latest version of Telerik products installed on your system.
 - **Suggest upgrades when an equal Dev release is detected on projects using a Trial**&mdash;When enabled, you are prompted to upgrade if a licensed version is available on your system, but the current project uses a trial version.
 
 ### Download Folder Selection
@@ -42,7 +42,7 @@ Set the project upgrade notifications for detected local distributions by using 
 
 ## Telerik UI for ASP.NET MVC Settings
 
-All settings under the Kendo UI category affect only the Telerik UI for ASP.NET MVC VS Extensions.
+The Telerik UI for ASP.NET MVC VS Extensions settings can be found in the standard options dialog in Visual Studio under the Telerik node.
 
 ![The Options dialog](../../getting-started-mvc/vs-integration/images/options_kendo.png)
 

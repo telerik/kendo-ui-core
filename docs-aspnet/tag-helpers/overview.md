@@ -52,6 +52,43 @@ The following example demonstrates how to configure the `NumericTextBox` tag hel
           enable="true" max="100" value="30">
       </kendo-numerictextbox>
 
+## Using Tag Helpers in ClientTemplates
+
+Тhe .NET framework ignores any TagHelpers which are within script tags. In order to compile them correctly, when placing a TagHelper within a Kendo Template, set the type to `text/html` and add the `is-in-client-template="true"` attribute.
+
+The following example demonstrates how to include Chart TagHelpers in the TileLayout TagHelper.
+
+      <!-- container chart templates -->
+      <script id="downloads-template" type="text/html">
+          <kendo-chart name="downloads" is-in-client-template="true">
+              <series>
+                  <series-item type="ChartSeriesType.Line" data="new double[] { 56000, 63000, 74000, 91000, 117000, 138000 }">
+                  </series-item>
+              </series>
+          </kendo-chart>
+      </script>
+      <script id="devices-template" type="text/html">
+          <kendo-chart name="devices" is-in-client-template="true">
+              <series>
+                  <series-item type="ChartSeriesType.Donut" auto-fit="true" data='new dynamic[] {
+                      new {category = "Asia",value = 30.8,color = "\\#006634"},
+                      new {category = "Europe",value = 69.2,color = "\\#90cc38"}}'>
+                  </series-item>
+              </series>
+          </kendo-chart>
+      </script>
+      <kendo-tilelayout name="tilelayout" columns="2" resizable="true" reorderable="true">
+          <containers>
+              <container body-template-id="downloads-template" col-span="1" row-span="1">
+                  <container-header text="Weekly Recap-Downloads" />
+              </container>
+              <container body-template-id="devices-template" col-span="1" row-span="1">
+                  <container-header text="Devices" />
+              </container>
+          </containers>
+      </kendo-tilelayout>
+
+
 ## Handling Widget Events
 
 All widget events are supported by the Tag Helpers. The event can only be set as a string literal that points to a JavaScript function handler. The event is set as an attribute preceded by the `on-` prefix.

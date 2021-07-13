@@ -1,6 +1,6 @@
 ---
 title: RTL Support
-page_title: jQuery TabStrip Documentation | TabStrip Right-to-Left Support | Kendo UI
+page_title: jQuery TabStrip Documentation | TabStrip Right-to-Left Support
 description: "Get started with the jQuery TabStrip by Kendo UI and learn about the RTL supports it provides."
 slug: rtl_tabstrip
 position: 3

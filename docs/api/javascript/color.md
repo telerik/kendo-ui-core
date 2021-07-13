@@ -44,8 +44,11 @@ Computes the relative luminance between two colors.
     var pink = kendo.parseColor("#ffc0cb");
     var white = kendo.parseColor("#ffffff");
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(red.diff(crimson)); // logs 17.118
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(red.diff(pink));    // logs 115.459
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(red.diff(white));   // logs 153.042
     </script>
 
@@ -62,9 +65,11 @@ Compares two color objects for equality.
     <script>
     var red = kendo.Color.fromRGB(1,0,0);
     var green = kendo.Color.fromRGB(0,1,0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(red.equals(green)); // logs false
 
     var opaqueRed = kendo.Color.fromBytes(255,0,0,1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(red.equals(opaqueRed)); // logs true
     </script>
 
@@ -191,9 +196,11 @@ The alpha channel of the color, in the range from 0 to 1. Defaults to 1 when omi
 
     <script>
     var color = kendo.Color.fromRGB(1,0,0);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(color.toCss()); // logs "#ff0000"
 
     color = kendo.Color.fromRGB(0,1,0,1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(color.toCssRgba()); // logs "rgba(0, 255, 0, 1)"
     </script>
 
@@ -227,9 +234,11 @@ The alpha channel of the color, in the range from 0 to 1. Defaults to 1 when omi
 
     <script>
     var color = kendo.Color.fromHSV(1,.5,.5);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(color.toCss()); // logs "#804140"
 
     color = kendo.Color.fromHSV(.5,1,.5,1);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(color.toCssRgba()); // logs "rgba(128, 1, 0, 1)"
     </script>
 
@@ -263,8 +272,10 @@ The alpha channel of the color, in the range from 0 to 1. Defaults to 1 when omi
 
     <script>
     var color = kendo.Color.fromBytes(0,0,255);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(color.toCss()); // logs "#0000ff"
 
     color = kendo.Color.fromBytes(255,255,0,.5);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(color.toCssRgba()); // logs "rgba(255, 255, 0, 0.5)"
     </script>

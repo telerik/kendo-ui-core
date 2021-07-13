@@ -500,6 +500,7 @@ The maximum time value to set for a TimePicker, expressed as a Date object or as
 
     var max = timepicker.max();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(max);
     </script>
 
@@ -538,6 +539,7 @@ The minimum time value to set for a TimePicker, expressed as a Date object or as
 
     var min = timepicker.min();
 
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(min);
     </script>
 
@@ -635,6 +637,7 @@ You can overcome this behavior trigerring the `change` event manually using [tri
     var timepicker = $("#timepicker").data("kendoTimePicker");
 
     var value = timepicker.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(value);
     </script>
 
@@ -668,6 +671,7 @@ The widget instance which fired the event.
     $("#timepicker").kendoTimePicker({
         change: function() {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value); //value is the selected date in the timepicker
         }
     });
@@ -683,6 +687,7 @@ The widget instance which fired the event.
 
     timepicker.bind("change", function() {
         var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); //value is the selected date in the timepicker
     });
     </script>

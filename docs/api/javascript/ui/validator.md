@@ -8,6 +8,8 @@ component: validation
 
 # kendo.ui.Validator
 
+Represents the Kendo UI Validator widget. Inherits from [Widget](/api/javascript/ui/widget).
+
 ## Configuration
 
 ### errorTemplate `String`
@@ -458,6 +460,7 @@ The validation errors.
         // attach a validator to the container
         $("form").kendoValidator({
             validate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("valid" + e.valid);
             }
         });
@@ -475,6 +478,7 @@ The validation errors.
         var validatable = $("form").kendoValidator().data("kendoValidator");
 
         validatable.bind("validate", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("valid" + e.valid);
         });
       </script>
@@ -518,6 +522,7 @@ The error message text.
         // attach a validator to the container
         $("form").kendoValidator({
             validateInput: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
             }
         });
@@ -535,6 +540,7 @@ The error message text.
         var validatable = $("form").kendoValidator().data("kendoValidator");
 
         validatable.bind("validateInput", function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("input " + e.input.attr("name") + " changed to valid: " + e.valid);
         });
       </script>

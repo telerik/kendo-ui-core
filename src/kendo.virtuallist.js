@@ -277,6 +277,12 @@ var __meta__ = { // jshint ignore:line
             that.wrapper = that.content.wrap("<div class='" + WRAPPER + "'></div>").parent();
             that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
 
+            if(options.ariaLabel) {
+                this.element.attr("aria-label", options.ariaLabel);
+            } else if(options.ariaLabelledBy) {
+                this.element.attr("aria-labelledby", options.ariaLabelledBy);
+            }
+
             if (options.columns && options.columns.length) {
                 that.element.removeClass(LIST);
             }
@@ -321,7 +327,9 @@ var __meta__ = { // jshint ignore:line
             groupTemplate: "#:data#",
             fixedGroupTemplate: "#:data#",
             mapValueTo: "index",
-            valueMapper: null
+            valueMapper: null,
+            ariaLabel: null,
+            ariaLabelledBy: null
         },
 
         events: [
@@ -479,13 +487,24 @@ var __meta__ = { // jshint ignore:line
         },
 
         removeAt: function(position) {
-            this._selectedIndexes.splice(position, 1);
-            this._values.splice(position, 1);
+            var value = this._values.splice(position, 1)[0];
 
             return {
                 position: position,
-                dataItem: this._selectedDataItems.splice(position, 1)[0]
+                dataItem: this._removeSelectedDataItem(value)
             };
+        },
+
+        _removeSelectedDataItem: function (value) {
+            var that = this,
+                valueGetter = that._valueGetter;
+
+            for (var idx in that._selectedDataItems) {
+                if(valueGetter(that._selectedDataItems[idx]) === value) {
+                    that._selectedIndexes.splice(idx, 1);
+                    return that._selectedDataItems.splice(idx, 1)[0];
+                }
+            }
         },
 
         setValue: function(value) {

@@ -110,6 +110,7 @@ The target value to be set or false to be removed.
       // Set the last button badge value to 10
       buttongroup.badge("li:last", 10);
       // Get the current badge value on the first button.
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(buttongroup.badge(0));
       // Remove the first button badge
       buttongroup.badge("li:first", false);
@@ -139,6 +140,7 @@ Get the currently selected Button.
 
     function onSelect(e) {
         var index = this.current().index();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(index);
     }
     </script>
@@ -253,6 +255,7 @@ Fires when a Button is selected.
 
     function onSelect(e) {
       var index = this.current().index();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(index);
     }
     </script>

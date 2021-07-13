@@ -1,6 +1,6 @@
 ---
 title: Overview
-page_title: jQuery Gantt Documentation | Gantt Overview | Kendo UI
+page_title: jQuery Gantt Documentation | Gantt Overview
 description: "Get started with the jQuery Gantt by Kendo UI and learn how to initialize the widget and use its events."
 slug: overview_kendoui_gantt_widget
 position: 1
@@ -115,8 +115,10 @@ If your remote service stores and returns the Gantt dependencies in a different 
 
 ## Functionality and Features
 
+* [Layout]({% slug layout_kendoui_gantt %})
 * [Data binding]({% slug databinding_kendoui_gantt %})
 * [Columns]({% slug columns_kendoui_gantt %})
+* [Planned vs Actual]({% slug planned_vs_actual_kendoui_gantt %})
 * [Views]({% slug views_kendoui_gantt %})
 
 ## Referencing Existing Instances

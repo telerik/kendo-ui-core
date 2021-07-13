@@ -273,9 +273,11 @@ The value to set.
         });
         var textbox = $("#textbox").data("kendoTextBox");
         var value = textbox.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); // Displays "Oranges"
         textbox.value("Apples");
         value = textbox.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log(value); // Displays "Apples"
     </script>
 
@@ -302,6 +304,7 @@ The widget instance which fired the event.
         $("#textbox").kendoTextBox({
             change: function(e) {
                 var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(value);
                 // Use the value of the widget
             }
@@ -314,6 +317,7 @@ The widget instance which fired the event.
     <script>
         function textbox_change(e) {
             var value = this.value();
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log(value);
             // Use the value of the widget
         };

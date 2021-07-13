@@ -8,7 +8,7 @@ position: 2
 
 # Excel Export
 
-This article provides solutions for issues you might encounter while exporting the content of the Telerik UI for ASP.NET MVC Grid HtmlHelper.
+This article provides solutions for issues you might encounter while exporting the content of the Telerik UI Grid HtmlHelper for {{ site.framework }}.
 
 ## JSZip Is Not Found
 

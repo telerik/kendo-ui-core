@@ -1,6 +1,6 @@
 ---
 title: Image Browser
-page_title: jQuery Editor Documentation | Image Browser | Kendo UI
+page_title: jQuery Editor Documentation | Image Browser
 description: "Get started with the jQuery Editor by Kendo UI and learn how to use its Image Browser tool."
 slug: image_browser_editor_widget
 position: 6

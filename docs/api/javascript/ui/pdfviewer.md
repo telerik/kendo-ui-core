@@ -53,6 +53,14 @@ Specifies the default file to be displayed.
         });
     </script>
 
+### pdfjsProcessing.file.cMapUrl `String`
+
+Specifies the the URL where the predefined Adobe CMaps are located. Further info in [the PDF.js API ref](https://github.com/mozilla/pdf.js/blob/master/src/display/api.js#L117).
+
+### pdfjsProcessing.file.cMapPacked `Boolean`
+
+Specifies if the Adobe CMaps are binary packed. Further info in [the PDF.js API ref](https://github.com/mozilla/pdf.js/blob/master/src/display/api.js#L119).
+
 ### pdfjsProcessing.file.data `Blob | byte[] | String`
 
 Specifies the `data` to be passed to the pdfjs processor. Accepts `blob`, `byte` array or `base64` string.
@@ -592,7 +600,7 @@ Renders page canvas by number
             </script>
 
             <div id="example">
-            <button id="btn">Load 3rd page of the current document</button>      
+            <button id="btn">Load 3rd page of the current document</button>
             <br/><br/>
             <div id="pdfViewer">
             </div>
@@ -621,7 +629,7 @@ Renders page canvas by number
                     content: "<img width ='300' height ='300' src='"+ canvas.toDataURL() +"'/>"
                     }).data("kendoAlert").open();
                 })
-                
+
                 pdfViewer.loadPage(3);
 
                 }
@@ -640,16 +648,16 @@ Executes a command of the PDFViewer.
         </script>
 
         <div id="example">
-        
+
             <input type="button" value="Download" onclick="onDownloadClick()"/>
             <div id="pdfViewer">
             </div>
         </div>
 
         <script>
-        
 
-        
+
+
             $(document).ready(function () {
                 $("#pdfViewer").kendoPDFViewer({
                     pdfjsProcessing: {
@@ -667,7 +675,7 @@ Executes a command of the PDFViewer.
                     }
                 });
             });
-        
+
             function onDownloadClick(){
                 var pdfViewer = $("#pdfViewer").data("kendoPDFViewer");
                 pdfViewer.execute({command:"DownloadCommand"});
@@ -704,7 +712,7 @@ Update the dimensions of the widget, the active page or the processor.
 
                 var pdfViewer = $("#pdfViewer").kendoPDFViewer({
                     pdfjsProcessing: {
-                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"     
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
                     },
                     width: "100%",
                     height: 700
@@ -747,7 +755,7 @@ Destroys the widget.
 
                 var pdfViewer = $("#pdfViewer").kendoPDFViewer({
                     pdfjsProcessing: {
-                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"     
+                        file: "https://demos.telerik.com/kendo-ui/content/web/pdfViewer/sample.pdf"
                     },
                     width: "100%",
                     height: 700

@@ -1,9 +1,9 @@
 ---
 title: Reordering
 page_title: Reordering of Columns
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} (Demo) and learn how to modify its column widths."
+description: "With the Telerik UI Grid HtmlHelper component for {{ site.framework }}, you can enable end-users to effortlessly reorder columns."
 slug: reordercols_aspnetcore_grid
-position: 5
+position: 8
 ---
 
 # Reordering of Columns

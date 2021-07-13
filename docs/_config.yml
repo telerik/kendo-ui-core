@@ -183,6 +183,10 @@ navigation:
         position: 70
     "controls/navigation":
         title: "Navigation"
+    "controls/navigation/appbar":
+        title: "AppBar"
+    "controls/navigation/bottomnavigation":
+        title: "BottomNavigation"
     "controls/navigation/breadcrumb":
         title: "Breadcrumb"
     "controls/navigation/buttongroup":
@@ -193,7 +197,9 @@ navigation:
         title: "ContextMenu"
         position: 6
     "controls/navigation/stepper":
-        title: "Stepper"    
+        title: "Stepper"
+    "controls/navigation/wizard":
+        title: "Wizard"
     "controls/navigation/tabstrip/how-to":
         title: "How To"
         position: 70
@@ -203,6 +209,8 @@ navigation:
     "controls/navigation/treeview/binding":
         title: "Data Binding"
         position: 2
+    "controls/editors/imageeditor":
+        title: "Image Editor"
     "controls/conversational-ui":
         title: "Conversational UI"
     "controls/conversational-ui/chat":
@@ -216,6 +224,10 @@ navigation:
         title: "FX"
     "controls/interactivity/draganddrop":
         title: "Drag and Drop"
+    "controls/interactivity/loader":
+        title: "Loader"
+    "controls/interactivity/skeletoncontainer":
+        title: "SkeletonContainer"
     "controls/interactivity/ripplecontainer":
         title: "RippleContainer"
     "controls/interactivity/sortable/integration":
@@ -349,7 +361,6 @@ navigation:
     "kendo-in-the-cloud":
         title: "Cloud Integration"
         position: 8
-        isNew: true
     "globalization":
         title: "Globalization"
         position: 9
@@ -484,6 +495,8 @@ navigation:
         title: "QRCode"
     "*arcgauge":
         title: "ArcGauge"
+    "*circulargauge":
+        title: "CircularGauge"
     "*radialgauge":
         title: "RadialGauge"
     "*sparkline":
@@ -518,13 +531,23 @@ navigation:
         title: "AutoComplete"
     "*autocomplete/how-to/input":
         title: "Managing Inputs"
-    "*/badge":
+    "*badge":
         title: "Badge"
+    "*bottomnavigation":
+        isNew: true
+        title: "BottomNavigation"
+    "*breadcrumb":
+        title: "Breadcrumb"
     "*/button":
         title: "Button"
+    "*buttongroup":
+        title: "ButtonGroup"
+    "*checkboxgroup":
+        isNew: true
+        title: "CheckBoxGroup"
     "*/radiobutton":
         title: "RadioButton"
-    "controls/scheduling/calendar":
+    "*/calendar":
         title: "Calendar"
     "controls/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
@@ -534,8 +557,7 @@ navigation:
         title: "FlatColorPicker"
     "*colorpicker":
         title: "ColorPicker"
-    "*/multicolumncombobox":
-        isNew: true
+    "*multicolumncombobox":
         title: "MultiColumnComboBox"
     "*combobox":
         title: "ComboBox"
@@ -562,8 +584,16 @@ navigation:
         title: "Filter"
     "*form":
         title: "Form"
+    "*/floatingactionbutton":
+        title: "FloatingActionButton"
+        isnew: true
+    "*/expansionpanel":
+        title: "ExpansionPanel"
+        isnew: true
     "*gantt":
         title: "Gantt"
+    "*imageeditor":
+        title: "Image Editor"
     "*pivotgrid":
         title: "PivotGrid"
     "*grid":
@@ -578,23 +608,37 @@ navigation:
         title: "ListView"
     "*listbox":
         title: "ListBox"
+    "*loader":
+        title: "Loader"
+    "*skeletoncontainer":
+        isNew: true
+        title: "SkeletonContainer"
     "*maskedtextbox":
         title: "MaskedTextBox"
     "*menu":
         title: "Menu"
+    "*actionsheet":
+        title: "ActionSheet"
     "*multiselect":
         title: "MultiSelect"
     "*notification":
         title: "Notification"
+    "*pager":
+        title: "Pager"
     "*popup":
         title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
+    "*radiogroup":
+        isNew: true
+        title: "RadioGroup"
     "*rating":
         title: "Rating"
     "*panelbar":
         title: "PanelBar"
     "*pdfviewer":
+        title: "PDFViewer"
+    "*PDFViewer":
         title: "PDFViewer"
     "*pivotdatasource":
         title: "PivotDataSource"
@@ -620,6 +664,12 @@ navigation:
         title: "Splitter"
     "*tabstrip":
         title: "TabStrip"
+    "*taskboard":
+        isNew: true
+        title: "TaskBoard"    
+    "*textarea":
+        isNew: true
+        title: "TextArea"
     "*textbox":
         title: "TextBox"
     "*timeline":
@@ -668,10 +718,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2020.2.513"
+cdnVersion: "2021.2.616"
 
 ## The MVC Core version used
-mvcCoreVersion: "2020.2.513"
+mvcCoreVersion: "2021.2.616"
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
@@ -1466,6 +1516,7 @@ api:
       - "items"
 
 product: "Kendo UI for jQuery"
+product_url: https://www.telerik.com/kendo-ui#jquery
 platform: kendo-ui
 
 ## Assign layout and category per different paths
@@ -1566,6 +1617,12 @@ defaults:
 
 -
     scope:
+        path: "controls/editors/checkboxgroup"
+    values:
+        component: "checkboxgroup"
+
+-
+    scope:
         path: "controls/editors/colorpicker"
     values:
         component: "color-picker"
@@ -1631,7 +1688,7 @@ defaults:
         component: "dropdownlist"
 
 
-        scope:
+    scope:
         path: "controls/editors/editor"
     values:
         component: "editor"
@@ -1728,6 +1785,12 @@ defaults:
 
 -
     scope:
+        path: "controls/navigation/actionsheet"
+    values:
+        component: "ActionSheet"
+
+-
+    scope:
         path: "controls/editors/multiselect"
     values:
         component: "multi-select"
@@ -1746,6 +1809,18 @@ defaults:
 
 -
     scope:
+        path: "controls/navigation/floatingactionbutton"
+    values:
+        component: "floatingactionbutton"
+        
+-
+    scope:
+        path: "controls/layout/expansionpanel"
+    values:
+        component: "expansionpanel"
+
+-
+    scope:
         path: "controls/layout/notification"
     values:
         component: "notification"
@@ -1755,6 +1830,12 @@ defaults:
         path: "controls/editors/numerictextbox"
     values:
         component: "numeric-textbox"
+
+-
+    scope:
+        path: "controls/editors/radiogroup"
+    values:
+        component: "radiogroup"
 
 -
     scope:
@@ -1853,9 +1934,27 @@ defaults:
 
 -
     scope:
+        path: "controls/data-management/taskboard"
+    values:
+        component: "taskboard"
+
+-
+    scope:
+        path: "controls/editors/textarea"
+    values:
+        component: "textarea"
+
+-
+    scope:
         path: "controls/editors/textbox"
     values:
         component: "textbox"
+
+-
+    scope:
+        path: "controls/editors/textarea"
+    values:
+        component: "textarea"
 
 -
     scope:
@@ -1880,6 +1979,11 @@ defaults:
         path: "controls/layout/tooltip"
     values:
         component: "tooltip"
+
+    scope:
+        path: "controls/layout/tilelayout"
+    values:
+        component: "tilelayout"
 
 -
     scope:
@@ -1939,6 +2043,149 @@ type_links:
 # Aliases available in the markdown template. The below will expand {{site.foo}} to Bar in the output
 # "foo": "Bar"
 
+intro_columns:
+-
+  categories:
+  -
+    title: "Barcodes"
+    items:
+      "Barcode": "overview_kendoui_barcode_widget"
+      "QRCode": "overview_kendoui_qrcode_widget"
+  -
+    title: "Charts"
+    items:
+      "Charts": "overview_kendoui_charts_widget"
+  -
+    title: "Data Management"
+    items:
+      "FileManager": "overview_kendoui_filemanager_widget"
+      "Filter": "overview_kendoui_filter_widget"
+      "Grid": "overview_kendoui_grid_widget"
+      "ListView": "overview_kendoui_listview_widget"
+      "Pager": "overview_kendoui_pager_widget"
+      "PivotGrid": "overview_kendoui_pivotgrid_widget"
+      "Spreadsheet": "overview_spreadsheet_widget"
+      "TaskBoard": "overview_kendoui_taskboard_widget"
+      "TreeList": "overview_kendoui_treelist_widget"
+  -
+    title: "Scheduling"
+    items:
+      "Calendar": "overview_kendoui_calendar_widget"
+      "Gantt": "overview_kendoui_gantt_widget"
+      "MultiViewCalendar": "overview_kendoui_multiviewcalendar_widget"
+      "Scheduler": "overview_kendoui_scheduler_widget"
+  -
+    title: "Interactivity & UX"
+    items:
+      "Drag and Drop": "overview_kendoui_draganddrop_intercativityandux"
+      "Effects": "overview_kendoui_fxeffects_widget"
+      "Loader": "overview_kendoui_loader_widget"
+      "SkeletonContainer": "overview_kendoui_skeletoncontainer_widget"
+      "ProgressBar": "overview_kendoui_progressbar_widget"
+      "RippleContainer": "overview_kendoui_ripplecontainer_widget"
+      "Sortable": "overview_kendoui_sortable_widget"
+  -
+
+-
+  categories:
+  -
+    title: "Editors"
+    items:
+      "AutoComplete": "overview_kendoui_autocomplete_widget"
+      "CheckBoxGroup": "overview_kendoui_checkboxgroup_widget"
+      "Color Picker": "overview_kendoui_colorpicker_widget"
+      "ComboBox": "overview_kendoui_combobox_widget"
+      "DateInput": "overview_kendoui_dateinput_widget"
+      "DatePicker": "overview_kendoui_datepicker_widget"
+      "DateRangePicker": "overview_kendoui_daterangepicker_widget"
+      "DropDownList": "overview_kendoui_dropdownlist_widget"
+      "DropDownTree": "overview_kendoui_dropdowntree_widget"
+      "Editor": "overview_kendoui_editor_widget"
+      "ImageEditor": "overview_kendoui_imageeditor_widget"
+      "ListBox": "overview_kendoui_listbox_widget"
+      "MaskedTextBox": "overview_kendoui_maskedtextbox_widget"
+      "MultiColumnComboBox": "overview_kendoui_multicolumncombobox_widget"
+      "MultiSelect": "overview_kendoui_multiselect_widget"
+      "NumericTextBox": "overview_kendoui_numerictextbox_widget"
+      "RadioGroup": "overview_kendoui_radiogroup_widget"
+      "RangeSlider": "overview_kendoui_rangeslider_widget"
+      "Rating": "overview_kendoui_rating_widget"
+      "Slider": "overview_kendoui_slider_widget"
+      "Switch": "overview_kendoui_switch_widget"
+      "TextArea": "overview_kendoui_textarea_widget"
+      "TextBox": "overview_kendoui_textbox_widget"
+      "TimePicker": "overview_kendoui_timepicker_widget"
+      "Upload": "overview_kendoui_upload_widget"
+      "Validator": "overview_kendoui_validator_widget"
+
+-
+  categories:
+  -
+    title: "Conversational UI"
+    items:
+      "Chat": "overview_kendoui_chat_widget"
+  -
+    title: "PDF"
+    items:
+      "PDFViewer": "overview_kendoui_pdfviewer_widget"
+
+  -
+    title: "Diagrams & Maps"
+    items:
+      "Diagram": "overview_kendoui_diagram_widget"
+      "Map": "overview_kendoui_mapwidget"
+  -
+    title: "Navigation"
+    items:
+      "ActionSheet": "overview_kendoui_actionsheet_widget"
+      "AppBar": "overview_kendoui_appbar_widget"
+      "BottomNavigation": "overview_kendoui_bottomnavigation_widget"
+      "Breadcrumb": "overview_kendoui_breadcrumb_widget"
+      "Button": "overview_kendoui_button_widget"
+      "ButtonGroup": "overview_kendoui_buttongroup_widget"
+      "Drawer": "overview_kendoui_drawer_widget"
+      "FloatingActionButton": "overview_kendoui_floatingactionbutton_widget"
+      "Menu": "overview_kendoui_menu_widget"
+      "PanelBar": "overview_kendoui_panelbar_widget"
+      "Stepper": "overview_stepper_widget"
+      "TabStrip": "overview_kendoui_tabstrip_widget"
+      "Timeline": "overview_kendoui_timeline_widget"
+      "ToolBar": "overview_kendoui_toolbar_widget"
+      "TreeView": "overview_kendoui_treeview_widget"
+      "Wizard": "overview_wizard_widget"
+  -
+    title: "Hybrid UI"
+    items:
+      "Hybrid": "overview_hybridkendoui"
+-
+  categories:
+  -
+    title: "Media"
+    items:
+      "Media Player": "overview_kendoui_mediaplayer_widget"
+      "ScrollView": "overview_kendoui_scrollview_widget"
+  -
+    title: "Gauges"
+    items:
+      "ArcGauge": "overview_kendoui_arcgaugewidget"
+      "CircularGauge": "overview_kendoui_circulargaugewidget"
+      "LinearGauge": "overview_kendoui_lineargauge_widget"
+      "RadialGauge": "overview_kendoui_radialgaugewidget"
+  -
+    title: "Layout"
+    items:
+      "Badge": "overview_kendoui_badge_widget"
+      "Dialog": "overview_kendoui_dialog_widget"
+      "ExpansionPanel": "overview_kendoui_expansionpanel_widget"
+      "Form": "overview_kendoui_form_widget"
+      "Notification": "overview_kendoui_notification_widget"
+      "Popup": "overview_kendoui_popup_widget"
+      "ResponsivePanel": "overview_kendoui_responsivepanel_widget"
+      "Splitter": "overview_kendoui_splitter_widget"
+      "ToolTip": "overview_kendoui_tooltip_widget"
+      "TileLayout": "overview_kendoui_tilelayout_widget"
+      "Window": "overview_kendoui_window_widget"
+
 ff-sheet-id: 14zzclhdh7dMLpg0iq4-2hweCdEiuxxqP3tHdr42-_Cs
 
 # The google services configuration
@@ -1952,6 +2199,7 @@ has_web_api: true
 skip_tabbed_code: true
 code_lang: true
 has_kb_portal: true
+has_cta_panels: true
 edit_repo_url: https://github.com/telerik/kendo-ui-core/edit/master/docs
 download: https://www.telerik.com/download/kendo-ui
 nav:

@@ -46,6 +46,23 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
+### Handling by Template Delegate
+
+The following example demonstrates how to subscribe to events by a template delegate.
+
+
+    @(Html.Kendo().DateInput()
+      .Name("dateinput")
+      .Events(e => e
+          .Change(@<text>
+            function(e) {
+                console.log(this.value());
+            }
+            </text>)
+      )
+    )
+
+
 ## Referencing Existing Instances
 
 To reference an existing Telerik UI DateInput instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DateInput client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dateinput#methods) to control its behavior.

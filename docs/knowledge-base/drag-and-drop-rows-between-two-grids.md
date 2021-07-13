@@ -78,7 +78,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 
 
         $(grid1.element).kendoDraggable({
-          filter: "tr",
+          filter: "tbody>tr",
           hint: function (e) {
             var item = $('<div class="k-grid k-widget" style="background-color: DarkOrange; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
             return item;
@@ -88,7 +88,7 @@ The following example demonstrates how to drag and drop rows between two Kendo U
 
 
         $(grid2.element).kendoDraggable({
-          filter: "tr",
+          filter: "tbody>tr",
           hint: function (e) {
             var item = $('<div class="k-grid k-widget" style="background-color: MediumVioletRed; color: black;"><table><tbody><tr>' + e.html() + '</tr></tbody></table></div>');
             return item;

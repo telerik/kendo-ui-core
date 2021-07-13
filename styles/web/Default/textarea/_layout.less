@@ -1,0 +1,91 @@
+.k-textarea {
+    .border-radius( 4px );
+    margin: 0;
+    border-width: @textarea-border-width;
+    border-style: solid;
+    outline: 0;
+    line-height: @textarea-line-height;
+    box-sizing: border-box;
+    box-shadow: none;
+    background: none;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    vertical-align: middle;
+    position: relative;
+    -webkit-appearance: none;
+
+    // Hide clear icon
+    &::-ms-clear { display: none; }
+
+    > .k-input {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        border: 0;
+        outline: 0;
+        box-sizing: border-box;
+        color: inherit;
+        background: none;
+        font: inherit;
+        display: inline-block;
+        flex: 1 1 auto;
+        -webkit-appearance: none;
+
+        // Hide clear icon
+        &::-ms-clear { display: none; }
+    }
+
+    // Disabled state
+    &:disabled,
+    &[disabled],
+    &.k-state-disabled {
+        outline: none;
+        cursor: default;
+        opacity: .6;
+        filter: grayscale(.1);
+        pointer-events: none;
+        box-shadow: none;
+    }
+}
+
+// Textarea old rendering
+textarea.k-textarea {
+    background-clip: padding-box;
+    padding: @textarea-padding-y @textarea-padding-x;
+    width: @textarea-default-width;
+    min-height: @textarea-calc-height;
+    display: inline-block;
+    resize: both;
+}
+
+// Textarea new rendering
+.k-textarea {
+    > .k-input {
+        background-clip: padding-box;
+        padding: @textarea-padding-y @textarea-padding-x;
+        width: @textarea-default-width;
+        min-height: @textarea-calc-height;
+        overflow-y: auto;
+        resize: both;
+    }
+}
+
+// Floating label
+.k-textbox-container,
+.k-floating-label-container {
+    > .k-textarea {
+        flex: 1 1 auto;
+        width: auto;
+    }
+}
+
+// TODO: Remove once we drop IE support
+.k-ie {
+    .k-textarea > .k-input {
+        background-clip: border-box;
+    }
+
+    textarea.k-textarea {
+        background-clip: border-box;
+    }
+}

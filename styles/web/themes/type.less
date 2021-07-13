@@ -22,6 +22,8 @@
 .ktb-var-selected-gradient   { .composite-background(@selected-gradient); }
 .ktb-var-selected-text-color { color: @selected-text-color; }
 
+.ktb-var-is-dark-theme       { opacity: if( @is-dark-theme, 1, 0); }
+
 .ktb-var-primary             { color: @primary; }
 .ktb-var-secondary           { color: @secondary; }
 .ktb-var-tertiary            { color: @tertiary; }

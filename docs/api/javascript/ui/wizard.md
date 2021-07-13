@@ -2,7 +2,6 @@
 title: Wizard
 description: Configuration, methods and events of the Kendo UI Wizard
 res_type: api
-published: false
 component: wizard
 ---
 
@@ -39,47 +38,6 @@ Indicates the position of the step content element according to the [Stepper](/a
         $("#wizard").kendoWizard({
             contentPosition: "left",
             steps: ["Initial step", "Second step", "Third step"]
-        });
-	</script>
-
-### formTag `String` *(default: "form")*
-
-Specifies the HTML tag name that should be used for all [Form](/api/javascript/ui/form) widgets initialized in the Wizard steps. Using a "div" HTML element and placing the Wizard in a custom "form" element will allow you to simultaneously submit the fields populated on all steps (forms) with a form data request.
-
-#### Example
-
-	<div id="wizard"></div>
-
-	<script>
-        $("#wizard").kendoWizard({
-            formTag: "div",
-            steps: [{
-                title: "first",
-                form: {
-                    formData: {
-                        name: null
-                    },
-                    items: [{
-                        field: "name",
-                        validation: {
-                            required: true
-                        }
-                    }]
-                }
-            },{
-                title: "second",
-                form: {
-                    formData: {
-                        title: null
-                    },
-                    items: [{
-                        field: "title",
-                        validation: {
-                            required: true
-                        }
-                    }]
-                }
-            }]
         });
 	</script>
 
@@ -236,9 +194,9 @@ Specifies whether the [Stepper](/api/javascript/ui/stepper) will allow non-linea
         });
 	</script>
 
-### validateForms `Boolean` *(default: true)*
+### validateForms `Boolean | Object` *(default: true)*
 
-Indicates whether the Wizard will automatically validate any Kendo [Form](/api/javascript/ui/form) configured for a Step.
+Indicates whether the Wizard will automatically validate any Kendo [Form](/api/javascript/ui/form) configured for a Step. Validation will be executed upon Step navigation.
 
 #### Example
 
@@ -262,6 +220,50 @@ Indicates whether the Wizard will automatically validate any Kendo [Form](/api/j
                 }
             },{
                 title: "second"
+            }]
+        });
+	</script>
+
+
+### validateForms.validateOnPrevious `Boolean`
+
+Indicates whether navigation to previous Step will trigger current Step Form validation. By default, Form validation is enabled for any step navigation.
+
+#### Example
+
+	<div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            validateForms: {
+                validateOnPrevious: false
+            },
+            steps: [{
+                title: "first",
+                form: {
+                    formData: {
+                        name: null
+                    },
+                    items: [{
+                        field: "name",
+                        validation: {
+                            required: true
+                        }
+                    }]
+                }
+            },{
+                title: "second",
+                form: {
+                    formData: {
+                        title: null
+                    },
+                    items: [{
+                        field: "title",
+                        validation: {
+                            required: true
+                        }
+                    }]
+                }
             }]
         });
 	</script>
@@ -542,6 +544,91 @@ Specifies whether the step is enabled or not.
 
 Defines the [Form](/api/javascript/ui/form) widget configuration, which will populate the **Wizard** step content.
 
+### steps.icon `String`
+
+Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be displayed in the Stepper step element.
+For a list of available icon names, please refer to the [Web Font Icons article](https://docs.telerik.com/kendo-ui/styles-and-layout/icons-web).
+
+#### Example
+
+	<div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            steps: [{
+                title: "Initial step",
+                content: "Step 1 Content"
+            }, {
+                title: "Second step",
+                content: "Step 2 Content",
+                icon: "cancel"
+            },{
+                title: "Third step",
+                content: "Step 3 Content"
+            }]
+        });
+	</script>
+
+### steps.iconTemplate `String|Function`
+
+The [template](/api/javascript/kendo/methods/template) used to render the icon in the Stepper step.
+
+The fields which can be used in the template are:
+
+* title `String` - the title set on the step
+* label `String` - same as `title` - the title set on the step
+* icon `String` - the icon specified for this step (if any)
+* enabled `Boolean` - indicates whether the step is enabled (true) or disabled (false)
+* selected `Boolean` - indicates whether the step is selected
+* previous `Boolean` - indicates whether the step is before the currently selected or not
+* index `Number` - a zero-based index of the current step
+* isFirstStep `Boolean` - indicates whether the step is the initial one in the Stepper
+* isLastStep `Boolean` - indicates whether the step is the last one in the Stepper
+* indicatorVisible `Boolean` - indicates whether the indicator, which holds the icon should be displayed or not
+* labelVisible `Boolean` - indicates whether the label section of the step should be displayed or not
+
+#### Example - Use a string template
+
+    <div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            steps: [{
+                title: "ONE",
+                content: "Step 1 Content"
+            }, {
+                title: "TWO",
+                content: "Step 2 Content",
+                iconTemplate: "<strong>#:title#</strong>"
+            },{
+                title: "THREE",
+                content: "Step 3 Content"
+            }]
+        });
+	</script>
+
+#### Example - Use a function
+
+    <div id="wizard"></div>
+
+	<script>
+        $("#wizard").kendoWizard({
+            steps: [{
+                title: "ONE",
+                content: "Step 1 Content"
+            }, {
+                title: "TWO",
+                content: "Step 2 Content",
+                iconTemplate: function(e) {
+                    return '<strong>' + e.title + '</strong>';
+                }
+            },{
+                title: "THREE",
+                content: "Step 3 Content"
+            }]
+        });
+	</script>
+
 ### steps.pager `Boolean` *(default: true)*
 
 Specifies whether the pager will be rendered on the current step or not.
@@ -807,6 +894,7 @@ The [Step](/api/javascript/wizard/step) instance that has been selected.
                 title: "Second step"
             }],
             activate: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step.options.title + " step activated.");
             }
         });
@@ -839,6 +927,7 @@ The [Step](/api/javascript/wizard/step) instance that has been populated from re
                 title: "Second step"
             }],
             contentLoad: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step.options.title + " has been loaded.");
             }
         });
@@ -878,6 +967,7 @@ An array of all Kendo UI [Form](/api/javascript/ui/button) widgets (if any) conf
                 title: "Second step"
             }],
             done: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.button);
             }
         });
@@ -918,6 +1008,7 @@ The [Step](/api/javascript/wizard/step) instance that is attempted to be populat
                 title: "Second step"
             }],
             error: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.step.options.title + " failed.");
             }
         });
@@ -953,6 +1044,7 @@ The [Button](/api/javascript/ui/button) instance that has been clicked in order 
                 title: "Second step"
             }],
             reset: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.button);
             }
         });
@@ -1000,7 +1092,9 @@ If invoked prevents the selection.
                 title: "Second step"
             }],
             select: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.button);
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log(e.stepper);
                 e.preventDefault();
             }
@@ -1049,6 +1143,7 @@ The [Step](/api/javascript/wizard/step) where is placed the Form with failed val
                 title: "second"
             }],
             formValidateFailed: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
                 console.log("Validation failed for step " + e.step.options.title);
             }
         });

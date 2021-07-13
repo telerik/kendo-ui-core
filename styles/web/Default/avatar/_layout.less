@@ -1,0 +1,37 @@
+.k-avatar {
+    width: @avatar-size;
+    height: @avatar-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.k-avatar-circle {
+    border-radius: 50%;
+
+    &.k-avatar-image {
+        > * {
+            border-radius: 50%;
+        }
+    }
+}
+
+.k-avatar-rounded {
+    border-radius: @avatar-rounded-radius;
+
+    &.k-avatar-image {
+        > * {
+            border-radius: @avatar-rounded-radius;
+        }
+    }
+}
+
+.k-avatar-image {
+    > * {
+        width: @avatar-size;
+        height: @avatar-size;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}

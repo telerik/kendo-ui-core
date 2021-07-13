@@ -7,7 +7,7 @@ slug: overview_tilelayout_uiforjsp
 
 # TileLayout JSP Tag Overview
 
-The TileLayout JSP tag is a server-side wrapper for the [Kendo UI TileLayout](/api/javascript/ui/tilelayout) widget.
+The TileLayout JSP tag is a server-side wrapper for the [Kendo UI TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index) widget.
 
 The Kendo UI TileLayout widget allows you configure a two-dimensional grid-based sandbox surface to display content in tiles which can be dragged around and rearranged to create any modern page design.
 
@@ -79,6 +79,16 @@ To override any of the classes, add your own or remove some, insert the new defi
 ```
     kendo.ui.TileLayout.styles.item = "k-tilelayout-item k-card my-own-class";
 ```
+
+# Add or Remove Tiles
+
+The Kendo UI TileLayout supports the option to dynamically add and remove tiles.
+
+## Usage
+
+This functionality is a custom implementation based on the [`splice`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice) JS array method and the [`setOptions`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tilelayout/methods/setOptions) TileLayout client-side method.
+
+For a full implementation of the Add/Remove functionality please refer to the official [`Add/Remove demo`](https://demos.telerik.com/jsp-ui/tilelayout/add-remove) page.
 
 ## Known Limitations
 

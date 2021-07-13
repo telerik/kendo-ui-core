@@ -9,25 +9,10 @@ position: 8
 
 # Scaffolding
 
-As of the R1 2019 release, Telerik UI for ASP.NET Core provides Scaffolding templates.
+As of the R1 2019 release, Telerik UI for ASP.NET Core provides **Scaffold templates**.
 
-These templates allow you to apply standard scaffolding to generate MVC-helper declarations for editors which use the Telerik UI for ASP.NET Core components instead of applying standard inputs. You can use the Scaffolding extensions both in MVC views and in Razor Pages.
+ASP.NET Scaffolding is a code generation framework for ASP.NET Web applications. Telerik UI for ASP.NET Core makes use of this framework and offers Scaffold templates that aim to accelerate and ease the process of building an application for both Razor Pages and MVC.
 
-Depending on the type of field, the following editors will be generated:
-
-* `String`&mdash;An `input` element with Kendo UI styles.
-* `String` (multiline)&mdash;A `textarea` element with Kendo UI styles.
-* `Number`&mdash;A `kendo-numerictextbox` tag helper.
-* `DateTime`&mdash;A `kendo-datetimepicker` tag helper.
-* `Boolean`&mdash;An `Html.Kendo().CheckBoxFor` helper.
-
-The scaffolding logic and tools are the same as in the ordinary .NET Core web applications. The main repository and logic for the scaffolding that is provided by Microsoft is located in [https://github.com/aspnet/Scaffolding](https://github.com/aspnet/Scaffolding). The original template files are located in its [https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates](https://github.com/aspnet/Scaffolding/tree/master/src/VS.Web.CG.Mvc/Templates) folder.
-
-For more information on using the scaffolding by Microsoft, refer to the following resources:
-- [Add a model to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-2.1)
-- [Add a model to a Razor Pages app in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model?view=aspnetcore-2.1)
-
-> The Scaffolding features allow you to generate templates based on classes. They are different from the editor templates that are used for editing by widgets such as the Grid, for example. The editor templates are located in your installation folder at `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <your version>\wrappers\aspnetcore\EditorTemplates`.
 
 ## Prerequisites
 
@@ -41,7 +26,7 @@ To install the UI for ASP.NET Core Scaffolding templates and extensions in your 
 
 1. Clone or download the [https://github.com/telerik/scaffold-templates-core](https://github.com/telerik/scaffold-templates-core) repository.
 1. Copy the `Templates` folder from the `scaffold-templates-core` repository to the root of your project.
-1. Exclude the `scaffold-templates-core` repository from the project to avoid its compilation when you build the application. To exclude the repository, use either of the following approaches:
+1. Exclude the `Templates` folder from the project to avoid its compilation when you build the application. To exclude the repository, use either of the following approaches:
 
     * Add the following lines directly to the project file.
 
@@ -58,21 +43,19 @@ To install the UI for ASP.NET Core Scaffolding templates and extensions in your 
 
         ![Excluding the Templates folder from compilation](../getting-started-core/images/exclude-templates-from-project-GUI.png)
 
-As of the 2019 R1 release, the **Create New Project Wizard**, which comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the article on [creating projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard).
+As of the 2019 R1 release, the **Create New Project Wizard** that comes with the Telerik UI for ASP.NET Core [Visual Studio Extensions](https://docs.telerik.com/aspnet-core/vs-integration/introduction), automatically creates the `Templates` folder in the root of the application. For more information on the wizard, refer to the article on [creating projects](https://docs.telerik.com/aspnet-core/vs-integration/new-project-wizard).
 
-> As of .NET Core 2.2, when using Bootstrap 3, the views folder used is `ViewGenerator_Versioned\Bootstrap3\`. If you are upgrading your project make sure to update the folder's name.
+> As of .NET Core 2.2, the Bootstrap 3 content goes to the `ViewGenerator_Versioned\Bootstrap3\` directory, whereas the Bootstrap 4 content goes to the `ViewGenerator\` directory. If you are upgrading your project, make sure to update the folder's name.
 
-## Using Templates with VS
+## Telerik UI Scaffold Templates
 
-The Kendo UI Scaffolding Templates pertain to `cshtml` generation. That is why, first you have to create the appropriate model and controller as per your application requirements. You can either use the standard Scaffolding or the code you already have. If you do not already have a model and controller, use the sample set below the list to follow the example.
+The Telerik UI Scaffold Templates produces the code for `Razor View`, `RazorPage` and `Controller` files based on an existent C# class. To add a Scaffold template:
 
-To add a View that will use a Kendo UI Scaffolding template:
-
-1. Select **Add** > **New Scaffolded Item...** from the context menu of the desired location.
+1. Right-click either the project or a folder within the project, and select **Add** > **New Scaffolded Item...** as shown in the following image.
 
     ![Adding a scaffolded item](../getting-started-core/images/add-scaffolded-item.png)
 
-1. Choose item type (for example, **MVC View**) and click **Add**.
+1. From the **Add Scaffold** window, select the type of scaffold to add.
 
     ![Adding a scaffolded view](../getting-started-core/images/add-scaffolded-view.png)
 
@@ -184,6 +167,14 @@ namespace SampleCoreApp.Controllers
     }
 }
 ```
+
+For general information about Scaffolding, refer to the following resources by Microsoft:
+
+- [Add a model to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model?view=aspnetcore-2.1)
+- [Add a model to a Razor Pages app in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model?view=aspnetcore-2.1)
+
+
+> The Scaffolding generates templates based on C# classes. They are different from the editor templates that are used for editing by widgets such as the Grid, for example. The editor templates are located in your installation folder at `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <your version>\wrappers\aspnetcore\EditorTemplates`.
 
 ## See Also
 

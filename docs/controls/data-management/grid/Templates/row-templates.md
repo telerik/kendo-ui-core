@@ -1,6 +1,6 @@
 ---
 title: Row Templates
-page_title: jQuery Grid Documentation | Row Templates | Kendo UI
+page_title: jQuery Grid Documentation | Row Templates
 description: "Get started with the jQuery Grid by Kendo UI and learn how to place custom content into a grid row with the help of row templates."
 previous_url: /controls/data-management/grid/walkthrough#templates
 slug: row_templates_kendoui_grid_widget
@@ -44,6 +44,88 @@ The following example demonstrates how to specify the previous approach as a tem
 **Figure 1: A Grid with an applied row template**
 
 ![Grid with row template](../grid8_1.png)
+
+## Using Row Templates with Detail Templates
+
+A few requirements need to be met when the `rowTemplate` is used alongside a `detailTemplate`.
+
+1. The `<tr>` element of the `rowTemplate` needs to have a class `k-master-row`.
+1. The first `<td>` element of the `rowTemplate` needs to have a class `k-hierarchy-cell`.
+1. The element with class `k-hierarchy-cell` needs to contain an `a` element which will expand the row.
+
+**Define the `rowTemplate` as an external template.**
+
+```dojo
+    <script id="template" type="text/x-kendo-template">
+        <tr class="k-master-row" data-uid="#= uid #">
+        		<td class="k-hierarchy-cell">
+            	<a class="k-icon k-i-expand" href="\#" aria-label="Expand"></a>
+      			</td>
+            <td>
+                <strong>#: name #</strong>
+            </td>
+            <td>
+            	<strong>#: age #</strong>
+            </td>
+        </tr>
+    </script>
+  
+    <script id="detail-template" type="text/x-kendo-template">
+      <div>
+        Name: #: name #
+      </div>
+      <div>
+        Age: #: age #
+      </div>
+    </script>
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      detailTemplate: kendo.template($("#detail-template").html()),
+      rowTemplate: kendo.template($("#template").html())
+    });
+    </script>
+```
+
+**Define the `rowTemplate` as a function.**
+
+```dojo
+    <script id="detail-template" type="text/x-kendo-template">
+      <div>
+        Name: #: name #
+      </div>
+      <div>
+        Age: #: age #
+      </div>
+    </script>
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        detailTemplate: kendo.template($("#detail-template").html()),
+        rowTemplate: rowTemplate
+      });
+      
+      function rowTemplate(data) {
+        return '<tr class="k-master-row" data-uid="' + data.uid + '"><td class="k-hierarchy-cell"><a class="k-icon k-i-expand" href="\#" aria-label="Expand"></a></td><td><strong>' + data.name + '</strong></td><td><strong>' + data.age + '</strong></td></tr>';
+      }
+    </script>
+```
 
 ## KB Articles on Row Templates
 

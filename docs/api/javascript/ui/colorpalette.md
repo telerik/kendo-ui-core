@@ -184,6 +184,7 @@ Triggers when a new color has been changed.
     <script>
     $("#palette").kendoColorPalette({
       change: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The newly selected color is ", e.value);
       }
     });
@@ -194,6 +195,7 @@ Triggers when a new color has been changed.
     <div id="palette"></div>
     <script>
     function palette_change(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The newly selected color is ", e.value);
     }
     $("#palette").kendoColorPalette();

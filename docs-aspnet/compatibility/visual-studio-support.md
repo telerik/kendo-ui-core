@@ -13,6 +13,7 @@ The table below describes the minimum required version of Visual Studio based on
 
 | .NET CORE SDK     | VISUAL STUDIO                 | 
 | :---------------- | :---------------------------- | 
+| 5.0               | Visual Studio 2022, or Visual Studio 2019 version 16.8 or higher. |
 | 3.1               | Visual Studio 2019 version 16.4 or higher. |
 | 3.0               | Visual Studio 2019 version 16.3 or higher. |
 | 2.2               | Visual Studio 2017 version 15.9 or higher. |

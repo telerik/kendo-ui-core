@@ -226,6 +226,7 @@ Triggered before the responsive panel is closed. Cancellable.
         // event handler for close event
         var onClose = function() {
             // the responsive panel is closing
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("closing");
         };
 
@@ -254,6 +255,7 @@ Triggered before the responsive panel is closed. Cancellable.
         // event handler for close event
         var onClose = function() {
             // the responsive panel is closing
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("closing");
         };
 
@@ -282,6 +284,7 @@ Triggered before the responsive panel is opened. Cancellable.
         // event handler for open event
         var onOpen = function() {
             // the responsive panel is opening
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("opening");
         };
 
@@ -310,6 +313,7 @@ Triggered before the responsive panel is opened. Cancellable.
         // event handler for open event
         var onOpen = function() {
             // the responsive panel is opening
+	/* The result can be observed in the DevTools(F12) console of the browser. */
             console.log("opening");
         };
 
