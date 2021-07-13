@@ -444,7 +444,11 @@ var __meta__ = { // jshint ignore:line
 
             that._old = that._update(value);
             if (that._old === null) {
-                that.element.val("");
+                if (that._dateInput) {
+                    that._dateInput.value(that._old);
+                } else {
+                    that.element.val("");
+                }
             }
 
             that._oldText = that.element.val();
@@ -624,8 +628,10 @@ var __meta__ = { // jshint ignore:line
                     timeView.bind();
                 }
             }
-            if (that._dateInput && date) {
-                that._dateInput.value(date || value);
+            if (that._dateInput) {
+                if (date) {
+                    that._dateInput.value(date);
+                }
             } else {
                 that.element.val(kendo.toString(date || value, options.format, options.culture));
             }
