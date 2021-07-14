@@ -10,6 +10,34 @@ position: 2
 
 The TabStrip provides advanced options for configuring its tabs.
 
+## Tabs Positioning
+
+The TabStrip API provides the `.TabPosition()`[/api/Kendo.Mvc.UI.Fluent/TabStripBuilder#tabpositionkendomvcuitabstriptabposition] configuration option that allows you to set the position of the tabs. You can position the tabs to the top, left, right or bottom of the TabStrip via the [`TabStripTabPosition`](/api/Kendo.Mvc.UI/TabStripTabPosition)
+
+The following example demonstrates how to position the TabStrip tabs to the right:
+
+```
+@(Html.Kendo().TabStrip()
+    .Name("tabstrip")
+    .TabPosition(TabStripTabPosition.Right)
+    .Items(items =>
+    {
+        items.Add().Text("One")
+                .Content(@<text>
+                    <p>Tab One</p>
+                </text>);
+        items.Add().Text("Two")
+                .Content(@<text>
+                    <p>Tab Two</p>
+                </text>);
+        items.Add().Text("Three")
+                .Content(@<text>
+                    <p>Tab Three</p>
+                </text>);
+    })
+)
+```
+
 ## Dynamic Tabs
 
 The TabStrip API provides methods for dynamically adding or removing TabStrip bars.
