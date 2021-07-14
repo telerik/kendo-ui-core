@@ -399,7 +399,8 @@ $.extend(true, kendo.ui.Editor.prototype.options.messages,{
   "formatting": "Formatowanie",
   "viewHtml": "Widok HTML",
   "dialogUpdate": "Aktualizuj",
-  "insertFile": "Wstaw plik"
+  "insertFile": "Wstaw plik",
+  "print": "Drukuj"
 });
 }
  

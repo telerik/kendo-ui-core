@@ -109,6 +109,8 @@ The following example demonstrates the basic configuration of the TabStrip HtmlH
 
 * [Tabs]({% slug htmlhelpers_tabstrip_aspnetcore_tabs %})
 * [Tab content]({% slug htmlhelpers_tabstrip_aspnetcore_content %})
+* [Animation Effects]({% slug htmlhelpers_tabstrip_animations_aspnetcore %})
+* [Images]({% slug htmlhelpers_tabstrip_images_aspnetcore %})
 
 ## Events
 
