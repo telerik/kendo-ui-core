@@ -35,10 +35,6 @@ After the document is ready, dynamically add the option for the **All** page siz
         $(function () {
 
             var grid = $('#grid').data('kendoGrid');
-            //this line will give the undefined when it try to find the dropdownlist.
-            //var pageSizeDropDownList = grid.wrapper.children(".k-grid-pager").find("select").data("kendoDropDownList");
-            
-            //the alternate code this below line.
             var pageSizeDropDownList= grid.wrapper.find('.k-pager-sizes').find('[data-role="dropdownlist"]').data('kendoDropDownList');
             console.log(pageSizeDropDownList)
             pageSizeDropDownList.dataSource.add({text:"All", value:'all'})
