@@ -330,19 +330,25 @@ navigation:
         position: 1
      "html-helpers/charts/chart-types":
         title: "Chart Types"
-        position: 4
+        position: 5
      "html-helpers/charts/elements":
         title: "Elements"
-        position: 5
+        position: 6
+     "html-helpers/charts/bar-chart":
+        title: "Bar Chart"
+        position: 7
      "html-helpers/charts/sparkline":
         title: "Sparkline"
-        position: 6
+        position: 8
      "html-helpers/charts/stockchart":
         title: "StockChart"
-        position: 7
+        position: 9
      "html-helpers/charts/treemap":
         title: "TreeMap"
-        position: 8
+        position: 10
+     "html-helpers/charts/heatmap":
+        title: "HeatMap"
+        position: 11
      "html-helpers/gauges":
         title: "Gauges"
      "html-helpers/hybrid":
@@ -478,6 +484,8 @@ navigation:
         title: "MultiViewCalendar"
      "*badge":
         title: "Badge"
+     "*checkbox":
+        title: "CheckBox"
      "*checkboxgroup":
         title: "CheckBoxGroup"
         isNew: true
@@ -492,6 +500,8 @@ navigation:
         title: "MultiColumnComboBox"
      "*combobox":
         title: "ComboBox"
+     "*captcha":
+        title: "Captcha"
      "*dateinput":
         title: "DateInput"
      "*datepicker":
@@ -549,6 +559,9 @@ navigation:
         title: "MultiSelect"
      "*notification":
         title: "Notification"
+     "*popover":
+        title: "PopOver"
+        isNew: true
      "*popup":
         title: "Popup"
      "*numerictextbox":
@@ -558,6 +571,9 @@ navigation:
      "*radiogroup":
         title: "RadioGroup"
         isNew: true
+     "*/orgchart":
+        isNew: true
+        title: "OrgChart"
      "*progressbar":
         title: "ProgressBar"
      "*qrcode":
@@ -634,10 +650,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2021.2.616"
+cdnVersion: "2021.3.914"
 
 ## The MVC Core version used
-mvcCoreVersion: "2021.2.616"
+mvcCoreVersion: "2021.3.914"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -746,10 +762,20 @@ defaults:
         title_prefix: "ASP.NET Core Map Component"
 -
     scope:
+        path: "html-helpers/diagrams-and-maps/orgchart"
+    values:
+        title_prefix: "ASP.NET Core OrgChart Component"
+-
+    scope:
         path: "html-helpers/editors/autocomplete"
     values:
         title_prefix: "ASP.NET Core AutoComplete Component"
 -
+    scope:
+        path: "html-helpers/editors/checkbox"
+    values:
+        title_prefix: "ASP.NET Core CheckBox Component"
+
     scope:
         path: "html-helpers/editors/checkboxgroup"
     values:
@@ -769,6 +795,11 @@ defaults:
         path: "html-helpers/editors/combobox"
     values:
         title_prefix: "ASP.NET Core ComboBox Component"
+-
+    scope:
+        path: "html-helpers/editors/captcha"
+    values:
+        title_prefix: "ASP.NET Core Captcha Component"
 -
     scope:
         path: "html-helpers/editors/dateinput"
@@ -959,6 +990,11 @@ defaults:
         path: "html-helpers/layout/notification"
     values:
         title_prefix: "ASP.NET Core Notification Component"
+-
+    scope:
+        path: "html-helpers/layout/popover"
+    values:
+        title_prefix: "ASP.NET Core PopOver Component"
 -
     scope:
         path: "html-helpers/layout/popup"
@@ -1389,6 +1425,11 @@ defaults:
         path: "tag-helpers/layout/notification"
     values:
         title_prefix: "ASP.NET Core Notification Component"
+-
+    scope:
+        path: "tag-helpers/layout/popover"
+    values:
+        title_prefix: "ASP.NET Core PopOver Component"
 -
     scope:
         path: "tag-helpers/layout/popup"

@@ -218,24 +218,6 @@
             assert.isOk(isRaised);
         });
 
-        it('clicking should raise onActivate event when the new contentElement is visible and scrollWrap should be sized accordingly', function(done) {
-            var tabstrip = getTabStrip();
-            var item = getRootItem(1);
-
-            isActivateRaised = false;
-
-            var height = Math.round(tabstrip.scrollWrap.height());
-            item.find('> .k-link').trigger('click');
-
-            setTimeout(function() {
-                assert.isOk(isActivateRaised);
-                assert.equal(height, Math.round(tabstrip.scrollWrap.height()));
-                done();
-            }, 10);
-
-            jasmine.clock().tick(10);
-        });
-
         it('clicking first item should select it', function() {
             var item = getRootItem(0);
 
@@ -441,7 +423,7 @@
                 jasmine.clock().tick();
 
                 assert.equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
-                assert.equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
+                assert.equal($(tabStrip.element.children("div")[1]).text(), "Content 2");
                 assert.equal(tabStrip._contentUrls[0], 'index2.html');
             } finally {
                 tabStrip.destroy();
@@ -488,7 +470,7 @@
                 jasmine.clock().tick();
 
                 assert.equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
-                assert.equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
+                assert.equal($(tabStrip.element.children("div")[1]).text(), "Content 2");
                 assert.equal(tabStrip._contentUrls[0], 'index2.html');
             } finally {
                 tabStrip.destroy();
@@ -521,7 +503,7 @@
                 jasmine.clock().tick();
 
                 assert.equal(tabStrip.tabGroup.children("li:first-child").text(), "Tab 2");
-                assert.equal($(tabStrip.element.children("div")[0]).text(), "Content 2");
+                assert.equal($(tabStrip.element.children("div")[1]).text(), "Content 2");
                 assert.equal(tabStrip._contentUrls[0], 'index2.html');
             } finally {
                 tabStrip.destroy();
@@ -554,7 +536,7 @@
                 jasmine.clock().tick();
 
                 assert.equal(tabStrip.tabGroup.children("li:last-child").text(), "Tab 2");
-                assert.equal($(tabStrip.element.children("div")[2]).text(), "Content 2");
+                assert.equal($(tabStrip.element.children("div")[3]).text(), "Content 2");
                 assert.equal(tabStrip._contentUrls[2], 'index2.html');
             } finally {
                 tabStrip.destroy();
@@ -577,7 +559,7 @@
                 jasmine.clock().tick();
 
                 assert.equal(tabStrip.tabGroup.children("li:nth-child(2)").text(), "Tab 2");
-                assert.equal($(tabStrip.element.children("div")[1]).text(), "Content 2");
+                assert.equal($(tabStrip.element.children("div")[2]).text(), "Content 2");
                 assert.equal(tabStrip._contentUrls[1], 'index2.html');
                 assert.equal(tabStrip._contentUrls.length, 3);
             } finally {
@@ -717,7 +699,7 @@
 
             tabStrip.remove("li:eq(1)");
 
-            var items = tabStrip.element.find("div");
+            var items = tabStrip.element.find("div.k-tabstrip-content");
             assert.equal(items.text(), "fcontent");
         });
 
@@ -775,8 +757,8 @@
                 content: "zcontent"
             });
 
-            var newDiv = tabStrip.element.children("div").last();
-            assert.isOk(newDiv.next().is(".k-tabstrip-prev"));
+            var tabWrapper = tabStrip.element.children("div").first();
+            assert.isOk(tabWrapper.hasClass('k-tabstrip-items-wrapper'));
         });
 
         it("append method appends content containers before the tabGroup when tabPosition is bottom", function() {
@@ -793,8 +775,8 @@
                 content: "zcontent"
             });
 
-            var newDiv = tabStrip.element.find("div").last();
-            assert.isOk(newDiv.next().is("ul.k-tabstrip-items"));
+            var tabWrapper = tabStrip.element.children("div").last();
+            assert.isOk(tabWrapper.hasClass('k-tabstrip-items-wrapper'));
         });
 
         it("value option is correctly set", function() {

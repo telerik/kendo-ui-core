@@ -26,7 +26,6 @@ The following example demonstrates how to define the ComboBox by using the Combo
 The ComboBox TagHelper configuration options are passed as attributes of the tag.
 
 ```cshtml
-
     @(Html.Kendo().ComboBox()
           .Name("products")
           .Placeholder("Select product")
@@ -42,6 +41,7 @@ The ComboBox TagHelper configuration options are passed as attributes of the tag
     )
 ```
 ```tagHelper
+    @addTagHelper *, <<Your Project Name Goes Here>>
 
     <kendo-combobox name="products" filter="FilterType.Contains"
                         placeholder="Select product"
@@ -55,6 +55,12 @@ The ComboBox TagHelper configuration options are passed as attributes of the tag
             </transport>
         </datasource>
     </kendo-combobox>
+```
+```Controller
+    public JsonResult GetProducts()
+    {
+        return new JsonResult(new[] { new { ProductName = "ProductName 1", ProductID = 1} });
+    }
 ```
 
 ## See Also

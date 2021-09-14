@@ -40,5 +40,24 @@
             var clearTitle = multiSelect.wrapper.find('.k-clear-value').attr("title");
             assert.equal(clearTitle, "custom");
         });
+
+        it("down arrow title is properly set", function() {
+            var multiSelect = new MultiSelect(select, {
+                value: 1,
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [{
+                    text: "Test",
+                    value: 1
+                }],
+                downArrow: true,
+                messages: {
+                    downArrow: "custom"
+                }
+            });
+
+            var label = multiSelect._arrow.attr("title");
+            assert.equal(label, "custom");
+        });
     });
 }());

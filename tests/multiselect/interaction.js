@@ -487,6 +487,30 @@
             assert.equal(multiselect.wrapper.find(multiselect._clear).length, 0);
         });
 
+        it("open dropdown when arrow is clicked", function() {
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz", "item1", "item2"],
+                downArrow: true,
+                Animation: false
+            });
+
+            multiselect._arrow.mousedown();
+            assert.isOk(multiselect.popup.visible());
+        });
+
+        it("close dropdown when arrow is clicked and dropdown is open", function() {
+            var multiselect = new MultiSelect(select, {
+                dataSource: ["foo", "bar", "baz", "item1", "item2"],
+                downArrow: true,
+                Animation: false
+            });
+
+            multiselect._arrow.mousedown();
+            assert.isOk(multiselect.popup.visible());
+            multiselect._arrow.mousedown();
+            assert.isOk(!multiselect.popup.visible());
+        });
+
         it("MultiSelect removes focused class on blur", function() {
             var multiselect = new MultiSelect(select);
 

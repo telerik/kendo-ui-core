@@ -183,6 +183,10 @@ The following example demonstrates the basic configuration for the Spreadsheet H
 * [Images]({% slug htmlhelpers_spreadsheet_images_aspnetcore %})
 * [Import and export of data]({% slug htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore %})
 * [End user guide]({% slug htmlhelpers_spreadsheet_user_guide_aspnetcore %})
+* [Sorting and Filtering]({% slug htmlhelpers_spreadsheet_sorting_filtering_aspnetcore %})
+* [Disabled Cells]({% slug htmlhelpers_spreadsheet_disabled_cells_aspnetcore %})
+* [Validation]({% slug htmlhelpers_spreadsheet_validation_aspnetcore %})
+* [Custom Cell Editors]({% slug htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore %})
 
 ## Events
 

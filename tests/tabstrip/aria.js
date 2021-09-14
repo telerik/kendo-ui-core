@@ -345,16 +345,16 @@
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
                     .kendoTabStrip();
 
-            assert.equal(div.find(".k-item")[0].id, div.children("div")[0].getAttribute("aria-labelledby"));
-            assert.equal(div.find(".k-item")[1].id, div.children("div")[1].getAttribute("aria-labelledby"));
+            assert.equal(div.find(".k-item")[0].id, div.children("div:not(.k-tabstrip-items-wrapper)")[0].getAttribute("aria-labelledby"));
+            assert.equal(div.find(".k-item")[1].id, div.children("div:not(.k-tabstrip-items-wrapper)")[1].getAttribute("aria-labelledby"));
         });
 
         it("assigns properly aria-labelledby to the respective Tab items with guid if no id is present for the wrapper", function() {
             div = $('<div><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
                     .kendoTabStrip();
 
-            assert.equal(div.find(".k-item")[0].id, div.children("div")[0].getAttribute("aria-labelledby"));
-            assert.equal(div.find(".k-item")[1].id, div.children("div")[1].getAttribute("aria-labelledby"));
+            assert.equal(div.find(".k-item")[0].id, div.children("div:not(.k-tabstrip-items-wrapper)")[0].getAttribute("aria-labelledby"));
+            assert.equal(div.find(".k-item")[1].id, div.children("div:not(.k-tabstrip-items-wrapper)")[1].getAttribute("aria-labelledby"));
         });
     });
 }());

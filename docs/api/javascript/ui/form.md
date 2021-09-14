@@ -187,7 +187,7 @@ Defines the editor widget type. Available options are:
 
 * DropDown widgets - "AutoComplete", "DropDownList", "ComboBox", "MultiSelect", "DropDownTree", "MultiColumnComboBox"
 * DatePicker widgets - "DateInput", "DatePicker", "DateTimePicker", "TimePicker"
-* Input widgets - "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker"
+* Input widgets - "TextBox", "TextArea", "NumericTextBox", "MaskedTextBox", "RadioGroup", "CheckBoxGroup", "Switch", "Rating", "Slider", "ColorPicker", "hidden"
 * Editor widget - "Editor"
 
 #### Example - define editor as string
@@ -202,6 +202,40 @@ Defines the editor widget type. Available options are:
                 Address: 3
             },
             items: [{
+                field: "Name",
+                validation: { required: true }
+            }, {
+                field: "Address",
+                editor:"DropDownList",
+                editorOptions:{
+                    dataTextField:"text",
+                    dataValueField:"id",
+                    dataSource: {
+                        data: [
+                            {text:"Sofia", id:1},
+                            {text:"London", id:2},
+                            {text:"New York", id:3}]
+                    }
+                }
+            }]
+        });
+    </script>
+
+#### Example - define editor as hidden
+
+    <form id="myForm"></form>
+
+    <script>
+        $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "John Doe",
+                Address: 3
+            },
+            items: [{
+                field: "ID",
+                editor: "hidden"
+            }, {
                 field: "Name",
                 validation: { required: true }
             }, {
@@ -1026,7 +1060,7 @@ Validates the form by executing the Form Validator [validate() method](/api/java
 
 ### clear
 
-Clears the form fields. Sets all model fields to `null`.
+Clears the form fields. Sets all model fields to `null` except the ones with hidden input (editor: "hidden").
 
 #### Example
 

@@ -1402,7 +1402,7 @@ var __meta__ = { // jshint ignore:line
                 items;
 
             element.removeClass("k-menu-horizontal k-menu-vertical");
-            element.addClass("k-widget k-reset k-header k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
+            element.addClass("k-widget k-reset k-menu-init " + MENU).addClass(MENU + "-" + this.options.orientation);
 
             if(this.options.orientation === "vertical") {
                 element.attr("aria-orientation", "vertical");
@@ -2311,19 +2311,20 @@ var __meta__ = { // jshint ignore:line
                     "#var contentHtml = " + fieldAccessor("content") + "(item);#" +
                     "<li class='#= wrapperCssClass(group, item) #' #= itemCssAttributes(item.toJSON ? item.toJSON() : item) # role='menuitem'  #=item.items ? \"aria-haspopup='true'\": \"\"#" +
                         "#=item.enabled === false ? \"aria-disabled='true'\" : ''#" +
-                        kendo.attr("uid") + "='#= item.uid #' >" +
-                        "#= itemWrapper(data) #" +
-                        "#if (item.hasChildren || item.items) { #" +
-                        "#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #" +
-                        "# } else if (item.content || item.contentUrl || contentHtml) { #" +
-                        "#= renderContent(data) #" +
-                        "# } #" +
+                        kendo.attr("uid") + "='#= item.uid #' " +
                         "# if(item.items && item.items.length > 0) { # " +
                             "# if(item.expanded) { # " +
                                 " aria-expanded='true'" +
                             "# } else { #" +
                                 " aria-expanded='false'" +
                             "# } #" +
+                        "# } #" +
+                    ">" +
+                        "#= itemWrapper(data) #" +
+                        "#if (item.hasChildren || item.items) { #" +
+                            "#= subGroup({ items: item.items, menu: menu, group: { expanded: item.expanded } }) #" +
+                        "# } else if (item.content || item.contentUrl || contentHtml) { #" +
+                            "#= renderContent(data) #" +
                         "# } #" +
                     "</li>"
                 ),
@@ -2583,7 +2584,7 @@ var __meta__ = { // jshint ignore:line
                         that.popup.close();
                         DOCUMENT_ELEMENT.off(kendo.support.mousedown + NS + that._marker, that._closeProxy);
                         that.unbind(SELECT, that._closeTimeoutProxy);
-                        that.target.focus();
+                        that.popup.options.anchor.focus();
                     }
                 }
             }

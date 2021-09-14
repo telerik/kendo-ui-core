@@ -51,6 +51,22 @@ span.k-dropdowntree {
     right: calc(@input-clear-icon-offset + 1px);
 }
 
+.k-multiselect-wrap.k-multiselect-wrap-arrow > .k-select {
+    right: calc(@input-clear-icon-offset + 1px);
+    top: calc(@multiselect-clear-icon-top-offset);
+    outline: 0;
+    font-size: 100%;
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+    bottom: auto;
+    padding: 0;
+}
+
+.k-multiselect-wrap.k-multiselect-wrap-arrow > .k-clear-value {
+    right: calc(@multiselect-clear-icon-offset-with-arrow);
+}
+
 .k-autocomplete > .k-clear-value,
 .k-dropdown-wrap > .k-clear-value {
     top: 50%;
@@ -457,8 +473,7 @@ body .k-datetimepicker .k-select {
 .k-list-optionlabel,
 .k-popup > .k-group-header,
 .k-popup > .k-virtual-wrap > .k-group-header,
-.k-listbox .k-item,
-.k-item.k-drag-clue {
+.k-listbox .k-item {
     padding: 1px 5px 1px 5px;
     line-height: 1.8em;
     min-height: 1.8em;
@@ -992,16 +1007,11 @@ span.k-numerictextbox {
     }
 
     .k-i-warning {
-        display: none;
         position: absolute;
         width: 2em;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
-    }
-
-    &.k-state-invalid .k-i-warning {
-        display: inline-block;
     }
 }
 
@@ -1021,17 +1031,11 @@ span.k-numerictextbox {
     }
 
     .k-i-warning {
-        display: none;
         position: absolute;
         right: 0;
         top: 50%;
         transform: translateY(-50%);
         overflow: visible;
-    }
-    &.k-state-invalid {
-        .k-i-warning {
-            display: inline-block;
-        }
     }
 }
 
@@ -1040,16 +1044,11 @@ span.k-numerictextbox {
 .k-datetimepicker {
     .k-picker-wrap {
         .k-i-warning {
-            display: none;
             position: absolute;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
             overflow: visible;
-        }
-
-        &.k-state-invalid .k-i-warning {
-            display: inline-block;
         }
     }
 }
@@ -1173,6 +1172,16 @@ span.k-numerictextbox {
 
     .k-multiselect-wrap > .k-clear-value {
         left: calc(@input-clear-icon-offset + 1px);
+    }
+
+    .k-multiselect-wrap.k-multiselect-wrap-arrow > .k-select {
+        left: calc(@input-clear-icon-offset + 1px);
+        right: auto;
+    }
+
+    .k-multiselect-wrap.k-multiselect-wrap-arrow > .k-clear-value {
+        left: calc(@multiselect-clear-icon-offset-with-arrow);
+        right: auto;
     }
 
     .k-numeric-wrap.k-state-invalid.k-expand-padding .k-i-warning{

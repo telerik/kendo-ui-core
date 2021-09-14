@@ -174,6 +174,8 @@ navigation:
         title: "Barcodes"
     "controls/diagrams-and-maps":
         title: "Diagrams and Maps"
+    "controls/diagrams-and-maps/orgchart":
+        title: "OrgChart"
     "controls/scheduling":
         title: "Scheduling"
     "controls/layout":
@@ -230,6 +232,8 @@ navigation:
         title: "SkeletonContainer"
     "controls/interactivity/ripplecontainer":
         title: "RippleContainer"
+    "controls/editors/captcha":
+        title: "Captcha"
     "controls/interactivity/sortable/integration":
         title: "Integration"
         position: 6
@@ -534,7 +538,6 @@ navigation:
     "*badge":
         title: "Badge"
     "*bottomnavigation":
-        isNew: true
         title: "BottomNavigation"
     "*breadcrumb":
         title: "Breadcrumb"
@@ -543,12 +546,13 @@ navigation:
     "*buttongroup":
         title: "ButtonGroup"
     "*checkboxgroup":
-        isNew: true
         title: "CheckBoxGroup"
     "*/radiobutton":
         title: "RadioButton"
     "*/calendar":
         title: "Calendar"
+    "*captcha":
+        title: "Captcha"
     "controls/scheduling/multiviewcalendar":
         title: "MultiViewCalendar"
     "*colorpalette":
@@ -579,17 +583,14 @@ navigation:
         title: "Editor"
     "*filemanager":
         title: "FileManager"
-        isNew: true
     "*filter":
         title: "Filter"
     "*form":
         title: "Form"
     "*/floatingactionbutton":
         title: "FloatingActionButton"
-        isnew: true
     "*/expansionpanel":
         title: "ExpansionPanel"
-        isnew: true
     "*gantt":
         title: "Gantt"
     "*imageeditor":
@@ -611,7 +612,6 @@ navigation:
     "*loader":
         title: "Loader"
     "*skeletoncontainer":
-        isNew: true
         title: "SkeletonContainer"
     "*maskedtextbox":
         title: "MaskedTextBox"
@@ -629,8 +629,10 @@ navigation:
         title: "Popup"
     "*numerictextbox":
         title: "NumericTextBox"
-    "*radiogroup":
+    "*orgchart":
         isNew: true
+        title: "OrgChart"
+    "*radiogroup":
         title: "RadioGroup"
     "*rating":
         title: "Rating"
@@ -644,6 +646,9 @@ navigation:
         title: "PivotDataSource"
     "*pivotconfigurator":
         title: "PivotConfigurator"
+    "*popover":
+        isNew: true
+        title: "Popover"
     "*progressbar":
         title: "ProgressBar"
     "*rangeslider":
@@ -665,10 +670,8 @@ navigation:
     "*tabstrip":
         title: "TabStrip"
     "*taskboard":
-        isNew: true
-        title: "TaskBoard"    
+        title: "TaskBoard"
     "*textarea":
-        isNew: true
         title: "TextArea"
     "*textbox":
         title: "TextBox"
@@ -718,10 +721,10 @@ navigation:
 baseurl: /kendo-ui
 
 ## The Kendo UI version used
-cdnVersion: "2021.2.616"
+cdnVersion: "2021.3.914"
 
 ## The MVC Core version used
-mvcCoreVersion: "2021.2.616"
+mvcCoreVersion: "2021.3.914" 
 
 ## Progress NPM Registry
 registry_url: 'https://registry.npm.telerik.com/'
@@ -1845,6 +1848,11 @@ defaults:
 
 -
     scope:
+        path: "controls/diagrams-and-maps/orgchart"
+    values:
+        component: "orgchart"
+-
+    scope:
         path: "controls/navigation/panelbar"
     values:
         component: "panelbar"
@@ -1854,6 +1862,12 @@ defaults:
         path: "controls/data-management/pivotgrid"
     values:
         component: "pivotgrid"
+
+-
+    scope:
+        path: "controls/layout/popover"
+    values:
+        component: "popover"
 
 -
     scope:
@@ -2092,6 +2106,7 @@ intro_columns:
     title: "Editors"
     items:
       "AutoComplete": "overview_kendoui_autocomplete_widget"
+      "Captcha": "overview_kendoui_captcha_widget"
       "CheckBoxGroup": "overview_kendoui_checkboxgroup_widget"
       "Color Picker": "overview_kendoui_colorpicker_widget"
       "ComboBox": "overview_kendoui_combobox_widget"
@@ -2134,6 +2149,7 @@ intro_columns:
     items:
       "Diagram": "overview_kendoui_diagram_widget"
       "Map": "overview_kendoui_mapwidget"
+      "OrgChart": "overview_kendoui_orgchart_widget"
   -
     title: "Navigation"
     items:
@@ -2179,6 +2195,7 @@ intro_columns:
       "ExpansionPanel": "overview_kendoui_expansionpanel_widget"
       "Form": "overview_kendoui_form_widget"
       "Notification": "overview_kendoui_notification_widget"
+      "Popover": "overview_kendoui_popover_widget"
       "Popup": "overview_kendoui_popup_widget"
       "ResponsivePanel": "overview_kendoui_responsivepanel_widget"
       "Splitter": "overview_kendoui_splitter_widget"

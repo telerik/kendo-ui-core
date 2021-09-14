@@ -5,11 +5,21 @@
     position: relative;
 }
 
-.k-pivot-toolbar
-{
-    padding: .2em;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+
+
+.k-pivot-toolbar {
+    border-width: 0 0 1px;
+    border-style: solid;
+    align-items: start;
+    flex-wrap: wrap;
+
+    > * {
+        max-width: 100%;
+    }
+
+    &::before {
+        display: none;
+    }
 }
 
 .k-pivot .k-pivot-toolbar

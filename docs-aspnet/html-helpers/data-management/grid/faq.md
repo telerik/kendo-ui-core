@@ -25,7 +25,6 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
 
   > The `Template` method needs a [templated Razor delegate](http://haacked.com/archive/2011/02/27/templated-razor-delegates.aspx) when used in Razor views. The bound item is available through the `@item` parameter.
 
-      ```Razor
           @(Html.Kendo().Grid<Models.Product>(Model)
               .Name("Grid")
               .Columns(columns =>
@@ -35,7 +34,19 @@ By default, the Telerik UI Grid for {{ site.framework }} encodes the HTML entiti
                   </text>);
               })
           )
-      ```
+
+Here is another sample with DetailTemplates (common setting for the Grid, not specific to given Column):
+
+        .DetailTemplate(@<text>
+            <div>ProductID: @item.ProductID</div>
+            <div>ProductName: @item.ProductName</div>
+            <div>UnitsInStock: @item.UnitsInStock</div>
+            <div>UnitPrice: @item.UnitPrice</div>
+            <div>UnitsOnOrder: @item.UnitsOnOrder</div>
+            <div>Discontinued: @item.Discontinued</div>
+        </text>)
+
+It is important to note that you can use only-server templates when the Grid is `server-bound`. They are not available in Ajax or WebService binding mode. For these cases, you will need to use Client Templates.
 
 * If the Grid is `Ajax-bound`, use the `ClientTemplate` method. The value should be a string, which represents a valid [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 {% else %}

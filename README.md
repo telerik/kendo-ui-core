@@ -19,7 +19,6 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [Spreadsheet](https://demos.telerik.com/kendo-ui/spreadsheet/index)    | :x:  | :white_check_mark: | :white_check_mark:           |
 | [ListView](https://demos.telerik.com/kendo-ui/listview/index)          | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
 | [PivotGrid](https://demos.telerik.com/kendo-ui/pivotgrid/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
-| [TaskBoard](https://demos.telerik.com/kendo-ui/taskboard/index)        | :x:  | :white_check_mark: | :white_check_mark:           |
 | [TreeList](https://demos.telerik.com/kendo-ui/treelist/index)          | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Filter](https://demos.telerik.com/kendo-ui/filter/index)              | :x:  | :white_check_mark: | :white_check_mark:           |
 | [Pager](https://demos.telerik.com/kendo-ui/pager/index)                | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
@@ -89,6 +88,7 @@ Kendo UI Core is a free and open-source subset of Kendo UI. The following table 
 | [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index)              | :x: | :white_check_mark: | :white_check_mark:           |
 | [Form](https://demos.telerik.com/kendo-ui/form/index)                  | :x: | :white_check_mark: | :white_check_mark:           |
 | [Notification](https://demos.telerik.com/kendo-ui/notification/index)  | :white_check_mark: | :white_check_mark: | :white_check_mark:           |
+| [Popover](https://demos.telerik.com/kendo-ui/popover/index)            | :x: | :white_check_mark: | :white_check_mark:           |
 | [Responsive Panel](https://demos.telerik.com/kendo-ui/responsive-panel/index)| :white_check_mark: | :white_check_mark: | :white_check_mark:     |
 | [Splitter](https://demos.telerik.com/kendo-ui/splitter/index)          | :white_check_mark:| :white_check_mark: | :white_check_mark:            |
 | [TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index)      | :x: | :white_check_mark: | :white_check_mark:           |

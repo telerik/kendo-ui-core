@@ -11,6 +11,39 @@ Represents the Kendo UI Pager widget. Inherits from [Widget](/api/javascript/ui/
 
 ## Configuration
 
+### ARIATemplate `String`*(default: "Page navigation, page #=page# of #=totalPages#")*
+Specifies a template used to populate the value of the aria-label attribute of the pager element.The parameters available for the template are:
+
+* `page` - The current page.
+* `totalPages` - The total number of pages.
+
+#### Example - setting the aria-label of the pager element
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { productName: "Tea", category: "Beverages" },
+                { productName: "Coffee", category: "Beverages" },
+                { productName: "Ham", category: "Food" },
+                { productName: "Bread", category: "Food" }
+            ],
+            pageSize: 25
+          });
+
+        dataSource.read();
+
+        $("#pager").kendoPager({
+          ARIATemplate: "Current page is #=page#"
+          dataSource: dataSource
+        });
+    </script>
+    <style>
+      #pager{
+       margin-top: 100px;
+      }
+    </style>
+
 ### autoBind `Boolean`*(default: true)*
 Indicates whether the pager refresh method will be called within its initialization.
 
@@ -572,6 +605,42 @@ The label displayed before the pager input.
       }
     </style>
 
+### messages.pageButtonLabel `String`*(default: "Page {0}")*,
+The title of the numeric link page buttons of the **Pager**. The parameters available for the template are:
+
+* `page` - The page that will becomes selected when clicking the button.
+
+#### Example - set the label before the pager input
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+          data: [
+            { productName: "Tea", category: "Beverages" },
+            { productName: "Coffee", category: "Beverages" },
+            { productName: "Ham", category: "Food" },
+            { productName: "Bread", category: "Food" }
+          ],
+          pageSize: 2
+        });
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          input: true,
+          numeric: false,
+          messages: {
+            pageButtonLabel: "This is page {0}"
+          }
+        });
+
+        dataSource.read();
+    </script>
+    <style>
+      #pager {
+       margin-top: 100px;
+      }
+    </style>
+
 ### messages.of `String`*(default: "of {0}")*,
 The label displayed before the pager input. Uses [kendo.format](/api/javascript/kendo/methods/format). Contains one optional placeholder {0} which represents the total number of pages.
 
@@ -799,6 +868,40 @@ The tooltip of the refresh button.
     </script>
     <style>
       #pager {
+       margin-top: 100px;
+      }
+    </style>
+
+### navigatable `Boolean`*(default: false)*
+If set to `true` the user could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.
+
+#### Example - enable keyboard navigation
+    <div id="pager"></div>
+
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            data: [
+                { productName: "Tea", category: "Beverages" },
+                { productName: "Coffee", category: "Beverages" },
+                { productName: "Ham", category: "Food" },
+                { productName: "Bread", category: "Food" },
+                { productName: "Potatoes", category: "Food" },
+                { productName: "Rice", category: "Food" },
+                { productName: "Tomatoes", category: "Food" },
+                { productName: "Carrots", category: "Food" }
+            ],
+            pageSize: 2
+          });
+
+        dataSource.read();
+
+        $("#pager").kendoPager({
+          dataSource: dataSource,
+          navigatable: true
+        });
+    </script>
+    <style>
+      #pager{
        margin-top: 100px;
       }
     </style>

@@ -1033,6 +1033,270 @@
 @scheduler-tooltip-day-text: @link-text-color;
 
 
+// Captcha
+@captcha-bg: @component-bg;
+@captcha-text: @component-text;
+@captcha-border: @component-border;
+
+
+// Popover
+@popover-bg: @component-bg;
+@popover-text: @component-text;
+@popover-border: @component-border;
+@popover-shadow: @window-shadow;
+
+@popover-header-bg: @popover-bg;
+@popover-header-text: @card-header-text;
+@popover-header-border: @card-header-border;
+
+@popover-callout-bg: @popover-bg;
+@popover-callout-border: @popover-border;
+
+@popover-callout-shadow-n: @card-focus-callout-box-shadow-n;
+@popover-callout-shadow-e: @card-focus-callout-box-shadow-e;
+@popover-callout-shadow-s: @card-focus-callout-box-shadow-s;
+@popover-callout-shadow-w: @card-focus-callout-box-shadow-w;
+
+
+// Orgchart
+@orgchart-bg: @component-bg;
+@orgchart-text: @component-text;
+@orgchart-border: @component-border;
+
+@orgchart-node-group-bg: @header-background-color;
+@orgchart-node-group-text: @component-text;
+@orgchart-node-group-border: @component-border;
+
+@orgchart-node-group-focus-border: @card-focus-border;
+@orgchart-node-group-focus-shadow: @card-focus-shadow;
+
+@orgchart-card-focus-shadow: @card-focus-shadow;
+
+@orgchart-line-fill: @component-border;
+
+
+// PivotGrid
+@pivotgrid-bg: @component-bg;
+@pivotgrid-text: @component-text;
+@pivotgrid-border: @component-border;
+
+@pivotgrid-alt-border: shade(@pivotgrid-border, 20%);
+
+@pivotgrid-headers-bg: @header-background-color;
+@pivotgrid-headers-text: @header-text-color;
+@pivotgrid-headers-border: @component-border;
+
+@pivotgrid-total-bg: shade( @pivotgrid-bg, 10% );
+@pivotgrid-total-text: @header-text-color;
+@pivotgrid-total-border: @component-border;
+
+@pivotgrid-hover-bg: darken(@pivotgrid-bg, 7%);
+@pivotgrid-hover-text: null;
+@pivotgrid-hover-border: null;
+
+@pivotgrid-selected-bg: rgba(@selected-background-color, .25);
+@pivotgrid-selected-text: null;
+@pivotgrid-selected-border: null;
+
+@pivotgrid-focus-shadow: @focused-item-shadow;
+
+// PivotGrid Configurator
+@pivotgrid-configurator-bg: @component-bg;
+@pivotgrid-configurator-text: @component-text;
+@pivotgrid-configurator-border: @component-border;
+
+@pivotgrid-configurator-header-bg: null;
+@pivotgrid-configurator-header-text: @header-text-color;
+@pivotgrid-configurator-header-border: null;
+
+@pivotgrid-configurator-end-shadow: -3px 0px 6px rgba(0, 0, 0, .16);
+@pivotgrid-configurator-start-shadow: 3px 0px 6px rgba(0, 0, 0, .16);
+@pivotgrid-configurator-top-shadow: 0px -3px 6px rgba(0, 0, 0, .16);
+@pivotgrid-configurator-bottom-shadow: 0px 3px 6px rgba(0, 0, 0, .16);
+
+// PivotGrid Calculated Field
+@pivotgrid-calculated-field-bg: @component-bg;
+@pivotgrid-calculated-field-text: @component-text;
+@pivotgrid-calculated-field-border: @component-border;
+
+@pivotgrid-calculated-field-header-bg: null;
+@pivotgrid-calculated-field-header-text: @header-text-color;
+@pivotgrid-calculated-field-header-border: null;
+
+
+// Chip
+@chip-base-bg: @button-text-color;
+
+@chip-solid-bg: rgba( @chip-base-bg, .08 );
+@chip-solid-text: @chip-base-bg;
+@chip-solid-border: rgba( @chip-base-bg, .3 );
+
+@chip-solid-hover-bg: rgba( @chip-base-bg, .16 );
+@chip-solid-hover-text: null;
+@chip-solid-hover-border: null;
+
+@chip-solid-focus-bg: @chip-solid-bg;
+@chip-solid-focus-shadow: 0 0 0 2px rgba( @chip-base-bg, .16 );
+
+@chip-solid-selected-bg: rgba( @chip-base-bg, .24 );
+@chip-solid-selected-text: null;
+@chip-solid-selected-border: null;
+
+@chip-solid-success-bg: rgba( @success, .08 );
+@chip-solid-success-text: @success;
+@chip-solid-success-border: rgba( @success, .3 );
+
+@chip-solid-success-hover-bg: rgba( @success, .16 );
+@chip-solid-success-hover-text: null;
+@chip-solid-success-hover-border: null;
+
+@chip-solid-success-focus-bg: null;
+@chip-solid-success-focus-text: null;
+@chip-solid-success-focus-border: null;
+
+@chip-solid-success-selected-bg: rgba( @success, .24 );
+@chip-solid-success-selected-text: null;
+@chip-solid-success-selected-border: null;
+
+@chip-solid-warning-bg: rgba( @warning, .08 );
+@chip-solid-warning-text: @warning;
+@chip-solid-warning-border: rgba( @warning, .3 );
+
+@chip-solid-warning-hover-bg: rgba( @warning, .16 );
+@chip-solid-warning-hover-text: null;
+@chip-solid-warning-hover-border: null;
+
+@chip-solid-warning-focus-bg: null;
+@chip-solid-warning-focus-text: null;
+@chip-solid-warning-focus-border: null;
+
+@chip-solid-warning-selected-bg: rgba( @warning, .24 );
+@chip-solid-warning-selected-text: null;
+@chip-solid-warning-selected-border: null;
+
+@chip-solid-error-bg: rgba( @error, .08 );
+@chip-solid-error-text: @error;
+@chip-solid-error-border: rgba( @error, .3 );
+
+@chip-solid-error-hover-bg: rgba( @error, .16 );
+@chip-solid-error-hover-text: null;
+@chip-solid-error-hover-border: null;
+
+@chip-solid-error-focus-bg: null;
+@chip-solid-error-focus-text: null;
+@chip-solid-error-focus-border: null;
+
+@chip-solid-error-selected-bg: rgba( @error, .24 );
+@chip-solid-error-selected-text: null;
+@chip-solid-error-selected-border: null;
+
+@chip-solid-info-bg: rgba( @info, .08 );
+@chip-solid-info-text: @info;
+@chip-solid-info-border: rgba( @info, .3 );
+
+@chip-solid-info-hover-bg: rgba( @info, .16 );
+@chip-solid-info-hover-text: null;
+@chip-solid-info-hover-border: null;
+
+@chip-solid-info-focus-bg: null;
+@chip-solid-info-focus-text: null;
+@chip-solid-info-focus-border: null;
+
+@chip-solid-info-selected-bg: rgba( @info, .24 );
+@chip-solid-info-selected-text: null;
+@chip-solid-info-selected-border: null;
+
+@chip-outline-bg: @component-bg;
+@chip-outline-text: @chip-base-bg;
+@chip-outline-border: @chip-base-bg;
+
+@chip-outline-hover-bg: @chip-base-bg;
+@chip-outline-hover-text: contrast( @chip-outline-hover-bg );
+@chip-outline-hover-border: null;
+
+@chip-outline-focus-bg: null;
+@chip-outline-focus-text: null;
+@chip-outline-focus-border: null;
+@chip-outline-focus-shadow: 0 0 0 2px rgba( @chip-base-bg, .08 );
+
+@chip-outline-selected-bg: @chip-outline-hover-bg;
+@chip-outline-selected-text: @chip-outline-hover-text;
+
+@chip-outline-success-bg: null;
+@chip-outline-success-text: @success;
+@chip-outline-success-border: @success;
+
+@chip-outline-success-hover-bg: @success;
+@chip-outline-success-hover-text: contrast( @chip-outline-success-hover-bg );
+@chip-outline-success-hover-border: null;
+
+@chip-outline-success-focus-bg: nul;
+@chip-outline-success-focus-text: null;
+@chip-outline-success-focus-border: null;
+
+@chip-outline-success-selected-bg: @chip-outline-success-hover-bg;
+@chip-outline-success-selected-text: @chip-outline-success-hover-text;
+@chip-outline-success-selected-border: null;
+
+@chip-outline-warning-bg: null;
+@chip-outline-warning-text: @warning;
+@chip-outline-warning-border: @warning;
+
+@chip-outline-warning-hover-bg: @warning;
+@chip-outline-warning-hover-text: contrast( @chip-outline-warning-hover-bg );
+@chip-outline-warning-hover-border: null;
+
+@chip-outline-warning-focus-bg: nul;
+@chip-outline-warning-focus-text: null;
+@chip-outline-warning-focus-border: null;
+
+@chip-outline-warning-selected-bg: @chip-outline-warning-hover-bg;
+@chip-outline-warning-selected-text: @chip-outline-warning-hover-text;
+@chip-outline-warning-selected-border: null;
+
+@chip-outline-error-bg: null;
+@chip-outline-error-text: @error;
+@chip-outline-error-border: @error;
+
+@chip-outline-error-hover-bg: @error;
+@chip-outline-error-hover-text: contrast( @chip-outline-error-hover-bg );
+@chip-outline-error-hover-border: null;
+
+@chip-outline-error-focus-bg: nul;
+@chip-outline-error-focus-text: null;
+@chip-outline-error-focus-border: null;
+
+@chip-outline-error-selected-bg: @chip-outline-error-hover-bg;
+@chip-outline-error-selected-text: @chip-outline-error-hover-text;
+@chip-outline-error-selected-border: null;
+
+@chip-outline-info-bg: null;
+@chip-outline-info-text: @info;
+@chip-outline-info-border: @info;
+
+@chip-outline-info-hover-bg: @info;
+@chip-outline-info-hover-text: contrast( @chip-outline-info-hover-bg );
+@chip-outline-info-hover-border: null;
+
+@chip-outline-info-focus-bg: nul;
+@chip-outline-info-focus-text: null;
+@chip-outline-info-focus-border: null;
+
+@chip-outline-info-selected-bg: @chip-outline-info-hover-bg;
+@chip-outline-info-selected-text: @chip-outline-info-hover-text;
+@chip-outline-info-selected-border: null;
+
+@chip-multiple-selected-icon-bg: rgba( black, .44 );
+@chip-multiple-selected-icon-text: #ffffff;
+
+@chip-primary-focus-shadow: 0 0 0 2px rgba( @primary, .16 );
+@chip-secondary-focus-shadow: 0 0 0 2px rgba( @secondary, .16 );
+@chip-info-focus-shadow: 0 0 0 2px rgba( @info, .16 );
+@chip-success-focus-shadow: 0 0 0 2px rgba( @success, .16 );
+@chip-warning-focus-shadow: 0 0 0 2px rgba( @warning, .16 );
+@chip-error-focus-shadow: 0 0 0 2px rgba( @error, .16 );
+
+
 // Kendo skin
 
 @theme-name: ~"fiori";
@@ -1083,6 +1347,11 @@
 @import "Default/skeleton/_theme.less";
 @import "Default/taskboard/_theme.less";
 @import "Default/scheduler/_theme.less";
+@import "Default/captcha/_theme.less";
+@import "Default/popover/_theme.less";
+@import "Default/orgchart/_theme.less";
+@import "Default/pivotgrid/_theme.less";
+@import "Default/chip/_theme.less";
 
 
 .k-item
@@ -1140,7 +1409,6 @@
 .k-upload-files,
 .k-upload .k-action-buttons,
 .k-popup.k-align .k-list .k-item:last-child,
-.k-editor-dialog .k-tabstrip-items,
 .k-maskedtextbox.k-state-disabled > .k-textbox:hover,
 .k-dateinput.k-state-disabled > .k-textbox:hover
 {
@@ -1268,6 +1536,9 @@ td.k-group-cell,
 }
 
 .k-header,
+.k-menu,
+.k-tabstrip,
+.k-drag-clue,
 .k-treemap-title,
 .k-grid-header .k-header > .k-link
 {
@@ -1276,6 +1547,9 @@ td.k-group-cell,
 
 .k-header,
 .k-grid-header,
+.k-menu,
+.k-tabstrip,
+.k-drag-clue,
 .k-toolbar,
 .k-dropdown-wrap,
 .k-picker-wrap,
@@ -1284,9 +1558,7 @@ td.k-group-cell,
 .k-progressbar,
 .k-draghandle,
 .k-autocomplete,
-.k-state-highlight,
-.k-tabstrip-items .k-item,
-.k-panelbar .k-tabstrip-items .k-item {
+.k-state-highlight {
     .composite-background(@widget-gradient);
     background-position: 50% 50%;
     background-color: @header-background-color;
@@ -1704,6 +1976,12 @@ div.k-filebrowser-dropzone em,
     background-color: @header-background-color;
     color: @header-text-color;
 
+    &:focus,
+    &.k-focus,
+    &.k-state-focused {
+        box-shadow: inset 0 0 0 1px @selected-background;
+    }
+
     .k-link {
         border-color: transparent;
         color: @link-text-color;
@@ -1716,6 +1994,9 @@ div.k-filebrowser-dropzone em,
     }
     .k-link.k-state-disabled {
         color: @normal-text-color;
+    }
+    .k-link:focus {
+        .box-shadow( inset 0 0 0 1px @selected-background );
     }
 
 
@@ -1732,7 +2013,6 @@ div.k-filebrowser-dropzone em,
         border-top-color: @selected-border-color;
         color: @selected-border-color;
     }
-
 }
 
 .k-autocomplete.k-state-active,
@@ -2173,9 +2453,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-block > .k-header,
-.k-tabstrip-items .k-item,
-.k-panelbar .k-tabstrip-items .k-item,
-.k-tabstrip-items .k-link,
 .k-calendar-container.k-state-border-down,
 .k-list-container.k-state-border-down,
 .k-autocomplete.k-state-border-down,
@@ -2447,7 +2724,7 @@ div.k-filebrowser-dropzone em
     outline-color: @tabstrip-content-border-focused;
 }
 
-.k-menu.k-header,
+.k-menu,
 .k-menu .k-item
 {
     border-color: @menu-border-color;
@@ -2559,8 +2836,8 @@ div.k-filebrowser-dropzone em
     border-color: @hover-border-color;
 }
 
-.k-menu.k-header,
-.k-tabstrip.k-header,
+.k-menu,
+.k-tabstrip,
 .k-tabstrip .k-tabstrip-items .k-item {
     background-color: @secondary-background-color;
 }
@@ -2593,7 +2870,7 @@ div.k-filebrowser-dropzone em
     color: @selected-border-color;
 }
 
-.k-tabstrip .k-tabstrip-items .k-state-active
+.k-tabstrip .k-tabstrip-items .k-item.k-state-active
 {
     border-color: @selected-border-color;
 }
@@ -2605,7 +2882,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-list > .k-state-selected,
-.k-drag-clue.k-state-selected,
 .k-group > .k-item > .k-state-selected,
 .k-group > .k-item > .k-link.k-state-selected,
 .k-group > .k-item > .k-link.k-state-selected.k-state-hover,
@@ -2627,6 +2903,7 @@ div.k-filebrowser-dropzone em
     background: none;
 }
 
+.k-grid-pager.k-state-focused,
 .k-grid-header th.k-state-focused,
 .k-grid td.k-state-focused {
     box-shadow: inset 0 0 0 1px @selected-background;
@@ -2823,6 +3100,11 @@ div.k-filebrowser-dropzone em
     background-color: @button-hover-background-color;
 }
 
+.k-spreadsheet-sheets-bar {
+    color: inherit;
+    background-color: transparent;
+}
+
 @spreadsheet-cell-border: darken(@background, 13%);
 
 .k-numeric-wrap .k-i-warning {
@@ -3015,10 +3297,6 @@ div.k-filebrowser-dropzone em
         height: 0;
         border-top: 1px solid @accent;
     }
-}
-
-.k-state-selected.k-drag-clue {
-    border-width: 0;
 }
 
 .k-grid-header {

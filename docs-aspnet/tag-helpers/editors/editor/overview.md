@@ -24,15 +24,15 @@ The following example demonstrates how to define the Editor by using the Editor 
 
 ## Basic Configuration
 
-The tools collection of the Editor TagHelper is passed through the nest `<tools>` tag.
+The tools collection of the Editor TagHelper is passed through the nested `<tools>` tag.
 
 ```tagHelper
 		<kendo-editor name="editor">
 			<tools>
-        <tool name="bold" />
-        <tool name="italic" />
-				<tool name="underline" />
-        <tool name="fontName" />
+                <tool name="bold" />
+                <tool name="italic" />
+                <tool name="underline" />
+                <tool name="fontName" />
 			</tools>
 		</kendo-editor>
 ```
@@ -81,7 +81,7 @@ To specify a chunk of content in the Editor TagHelper, use the `<content>` tag o
 ```tagHelper
 	<kendo-editor name="editor">
 			<content>
-					<p>Some content.</p>
+                <p>Some content.</p>
 			</content>
 	</kendo-editor>
 ```

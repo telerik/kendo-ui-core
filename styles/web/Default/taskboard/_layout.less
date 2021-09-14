@@ -117,10 +117,10 @@
     bottom: 0;
     overflow: hidden;
     z-index: 2;
-    gap: @taskboard-pane-gap;
 }
 
 .k-taskboard-pane-header {
+    padding: @taskboard-pane-header-padding-y @taskboard-pane-header-padding-x;
     font-weight: @taskboard-pane-header-font-weight;
     display: flex;
     flex-direction: row;
@@ -137,7 +137,6 @@
 }
 
 .k-taskboard-pane-content {
-    margin: @taskboard-pane-content-padding-y (-@taskboard-pane-content-padding-x);
     padding: @taskboard-pane-content-padding-y @taskboard-pane-content-padding-x;
     overflow: auto;
     flex: 1 1 auto;

@@ -48,7 +48,7 @@ The AutoComplete TagHelper configuration options are passed as attributes of the
     <script>
         function onAdditionalData() {
             return {
-                text: $("#products").val()
+                text: $("#products").val() // sends the typed value from the AutoComplete to the server
             };
         }
     </script>
@@ -68,10 +68,18 @@ The AutoComplete TagHelper configuration options are passed as attributes of the
     <script>
         function onAdditionalData() {
             return {
-                text: $("#products").val()
+                text: $("#products").val() // sends the typed value from the AutoComplete to the server
             };
         }
     </script>
+```
+```Controller
+    public JsonResult GetProducts(string text)
+    {
+        // filter the data based on the text value
+        // return an IEnumerable collection to the view     
+        return Json(products.ToList());
+    }
 ```
 
 ## See Also

@@ -31,6 +31,12 @@ To return the focus on the table cell, press `Esc`. In order for the hyperlinks 
 
 You can also avoid the procedure and bypass the keyboard navigation of the Grid, access the custom hyperlinks with tabbing, and activate them with `Enter`. To achieve this, prevent the `keydown` event bubbling of the custom hyperlinks. As a result, the `Enter` key-presses will be unnoticed by the Grid.
 
+## Pager Navigation
+
+The Kendo UI Grid's pager inherits all of the keyboard navigation functionalities from the [Kendo UI Pager]({% slug overview_kendoui_pager_widget %}).
+
+For a complete list of all supported key combinations, refer to the [Pager's Keyboard Navigation]({% slug keynav_pager_jquery %}) article.
+
 ## See Also
 
 * [Keyboard Navigation by the Grid (Demo)](https://demos.telerik.com/kendo-ui/web/grid/navigation.html)

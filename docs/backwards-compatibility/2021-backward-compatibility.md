@@ -71,3 +71,9 @@ $("#window").kendoWindow({
     height: "250px", // increase this value with the title bar height
 });
 ```
+
+## Kendo UI 2021 R2 SP1
+
+**Upload**
+
+Up until this version the Upload widget does not implement keyboard navigation logic. The main Upload input, its command buttons and all the buttons on each file element were part of the default tab sequence on the page. Therefore, they were accessible using the Tab key. In version 2021 R2 SP1 a dedicated keyboard navigation logic has been introduced making the widget and its main elements easier to navigate. The file elements and their buttons are accessible using the arrow keys, while the Upload widget buttons, outside of its file elements remain part of the tab sequence of the page. Detailed instructions on the introduced concepts could be found on the [Upload Keyboard Navigation demo](https://demos.telerik.com/kendo-ui/upload/keyboard-navigation).

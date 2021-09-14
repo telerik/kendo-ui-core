@@ -5675,7 +5675,7 @@ The jQuery object which represents the TreeList table header element.
 
 ### content `jQuery`
 
-The jQuery object which represents the TreeList `content` element which holds the scrollable content. Available only in a TreeList with locked columns.
+The jQuery object which represents the TreeList `content` element which holds the scrollable content. Available only when `scrollable` is set to `true`.
 
 ### lockedHeader `jQuery`
 

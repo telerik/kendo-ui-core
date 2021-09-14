@@ -45,7 +45,7 @@ var __meta__ = { // jshint ignore:line
         FIRST = "k-first",
         SELECT = "select",
         ACTIVATE = "activate",
-        CONTENT = "k-content",
+        CONTENT = "k-tabstrip-content k-content",
         CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
@@ -63,10 +63,10 @@ var __meta__ = { // jshint ignore:line
 
         templates = {
             content: template(
-                "<div class='k-content'#= contentAttributes(data) # tabindex='0'>#= content(item) #</div>"
+                "<div class='k-tabstrip-content k-content' #= contentAttributes(data) # tabindex='0'>#= content(item) #</div>"
             ),
             itemWrapper: template(
-                "<#= tag(item) # class='k-link'#= contentUrl(item) ##= textAttributes(item) #>" +
+                "<#= tag(item) # class='k-link' #= contentUrl(item) # #= textAttributes(item) #>" +
                     "#= image(item) ##= sprite(item) ##= text(item) #" +
                 "</#= tag(item) #>"
             ),
@@ -82,24 +82,24 @@ var __meta__ = { // jshint ignore:line
 
         rendering = {
             wrapperCssClass: function (group, item) {
-                var result = "k-item",
+                var result = ["k-tabstrip-item", "k-item"],
                     index = item.index;
 
                 if (item.enabled === false) {
-                    result += " k-state-disabled";
+                    result.push("k-state-disabled");
                 } else {
-                    result += " k-state-default";
+                    result.push("k-state-default");
                 }
 
                 if (index === 0) {
-                    result += " k-first";
+                    result.push("k-first");
                 }
 
                 if (index == group.length-1) {
-                    result += " k-last";
+                    result.push("k-last");
                 }
 
-                return result;
+                return result.join(" ");
             },
             textAttributes: function(item) {
                 return item.url ? " href='" + item.url + "'" : "";
@@ -121,7 +121,7 @@ var __meta__ = { // jshint ignore:line
             }
         };
 
-    function updateTabClasses (tabs) {
+    function updateTabClasses(tabs) {
         tabs.children(IMG)
             .addClass(IMAGE);
 
@@ -162,7 +162,7 @@ var __meta__ = { // jshint ignore:line
 
     }
 
-    function updateFirstLast (tabGroup) {
+    function updateFirstLast(tabGroup) {
         var tabs = tabGroup.children(".k-item");
 
         tabs.filter(".k-first:not(:first-child)").removeClass(FIRST);
@@ -172,7 +172,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return "<span class='k-button k-button-icon k-flat k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-icon " + iconClass + "'></span></span>";
+        return "<span class='k-button k-icon-button k-flat k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-icon " + iconClass + "'></span></span>";
     }
 
     var TabStrip = Widget.extend({
@@ -340,8 +340,6 @@ var __meta__ = { // jshint ignore:line
                               parseInt(that.wrapper.css("border-top-width"), 10) +
                               parseInt(that.wrapper.css("border-bottom-width"), 10);
 
-            that._sizeScrollWrap(visibleContents);
-
             if (contentHolder.length === 0) {
                 visibleContents
                     .removeClass( ACTIVESTATE )
@@ -360,8 +358,6 @@ var __meta__ = { // jshint ignore:line
 
                     that._current(item);
 
-                    that._sizeScrollWrap(contentElement);
-
                     contentElement
                         .addClass(ACTIVESTATE)
                         .removeAttr("aria-hidden")
@@ -376,8 +372,6 @@ var __meta__ = { // jshint ignore:line
 
                                 that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
                                 kendo.resize(contentHolder);
-
-                                that.scrollWrap.css("height", "").css("height");
 
                                 // Force IE and Edge rendering to fix visual glitches telerik/kendo-ui-core#2777.
                                 if (isAnimationEnabled && (kendo.support.browser.msie || kendo.support.browser.edge)) {
@@ -592,9 +586,7 @@ var __meta__ = { // jshint ignore:line
                 var contents = inserted.contents[idx];
                 that.tabGroup.append(this);
                 if (that.options.tabPosition == "bottom") {
-                    that.tabGroup.before(contents);
-                } else if (that._scrollableModeActive) {
-                    that._scrollPrevButton.before(contents);
+                    that.tabWrapper.before(contents);
                 } else {
                     that.wrapper.append(contents);
                 }
@@ -663,8 +655,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         destroy: function() {
-            var that = this,
-            scrollWrap = that.scrollWrap;
+            var that = this;
 
             Widget.fn.destroy.call(that);
 
@@ -673,7 +664,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.wrapper.off(NS);
-            that.wrapper.children(".k-tabstrip-items").off(NS);
+            that.tabGroup.off(NS);
 
             if (that._scrollableModeActive) {
                 that._scrollPrevButton.off().remove();
@@ -681,7 +672,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             kendo.destroy(that.wrapper);
-            scrollWrap.children(".k-tabstrip").unwrap();
         },
 
         disable: function (element) {
@@ -964,7 +954,7 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper.on("keydown" + NS, that._keyDownProxy);
             }
 
-            that.wrapper.children(".k-tabstrip-items")
+            that.tabGroup
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
                 .on(CLICK + NS, " > " + NAVIGATABLEITEMS, $.proxy(that._itemClick, that));
         },
@@ -1249,7 +1239,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (that._contentUrls.length) {
-                that.wrapper.find(".k-tabstrip-items > .k-item")
+                that.tabGroup.children(".k-item")
                     .each(function(index, item) {
                         var url = that._contentUrls[index];
 
@@ -1267,7 +1257,6 @@ var __meta__ = { // jshint ignore:line
         },
 
         _resize: function() {
-            this._setContentElementsDimensions();
             this._scrollable();
         },
 
@@ -1294,12 +1283,11 @@ var __meta__ = { // jshint ignore:line
                     var browser = kendo.support.browser;
                     var isRtlScrollDirection = that._isRtl && !browser.msie && !browser.edge;
 
-                    that.wrapper.append(scrollButtonHtml("prev", "k-i-arrow-60-left") + scrollButtonHtml("next", "k-i-arrow-60-right"));
+                    that.tabWrapper.prepend(scrollButtonHtml("prev", "k-i-arrow-60-left"));
+                    that.tabWrapper.append(scrollButtonHtml("next", "k-i-arrow-60-right"));
 
-                    scrollPrevButton = that._scrollPrevButton = that.wrapper.children(".k-tabstrip-prev");
-                    scrollNextButton = that._scrollNextButton = that.wrapper.children(".k-tabstrip-next");
-
-                    that.tabGroup.css({ marginLeft: outerWidth(scrollPrevButton) + 9, marginRight: outerWidth(scrollNextButton) + 12 });
+                    scrollPrevButton = that._scrollPrevButton = that.tabWrapper.children(".k-tabstrip-prev");
+                    scrollNextButton = that._scrollNextButton = that.tabWrapper.children(".k-tabstrip-next");
 
                     scrollPrevButton.on(mouseDown + NS, function () {
                         that._nowScrollingTabs = true;
@@ -1325,7 +1313,6 @@ var __meta__ = { // jshint ignore:line
 
                     that._scrollPrevButton.off().remove();
                     that._scrollNextButton.off().remove();
-                    that.tabGroup.css({ marginLeft: "", marginRight: "" });
                 } else if (!that._scrollableModeActive) {
                     that.wrapper.removeClass("k-tabstrip-scrollable");
                 } else {
@@ -1351,25 +1338,24 @@ var __meta__ = { // jshint ignore:line
                 itemWidth = outerWidth(item),
                 itemOffset = that._isRtl ? item.position().left : item.position().left - tabGroup.children().first().position().left,
                 tabGroupWidth = tabGroup[0].offsetWidth,
-                tabGroupPadding = Math.ceil(parseFloat(tabGroup.css("padding-left"))),
                 browser = kendo.support.browser,
                 itemPosition;
 
-            if(that._isRtl && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
+            if (that._isRtl && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
                 currentScrollOffset = currentScrollOffset * -1;
             }
 
             if (that._isRtl) {
                 if (itemOffset < 0) {
-                    itemPosition = currentScrollOffset + itemOffset - (tabGroupWidth - currentScrollOffset) - tabGroupPadding;
+                    itemPosition = currentScrollOffset + itemOffset - (tabGroupWidth - currentScrollOffset);
                 } else if (itemOffset + itemWidth > tabGroupWidth) {
-                    itemPosition = currentScrollOffset + itemOffset - itemWidth + tabGroupPadding * 2;
+                    itemPosition = currentScrollOffset + itemOffset - itemWidth;
                 }
             } else {
                 if (currentScrollOffset + tabGroupWidth < itemOffset + itemWidth) {
-                    itemPosition = itemOffset + itemWidth - tabGroupWidth + tabGroupPadding * 2;
+                    itemPosition = itemOffset + itemWidth - tabGroupWidth;
                 } else if (currentScrollOffset > itemOffset) {
-                    itemPosition = itemOffset - tabGroupPadding;
+                    itemPosition = itemOffset;
                 }
             }
 
@@ -1397,38 +1383,6 @@ var __meta__ = { // jshint ignore:line
             });
         },
 
-        _setContentElementsDimensions: function () {
-            var that = this,
-                tabPosition = that.options.tabPosition;
-
-            if (tabPosition == "left" || tabPosition == "right") {
-                var contentDivs = that.wrapper.children(".k-content"),
-                    activeDiv = contentDivs.filter(":visible"),
-                    marginStyleProperty = "margin-" + tabPosition,
-                    tabGroup = that.tabGroup,
-                    margin = outerWidth(tabGroup);
-
-                var minHeight = Math.ceil(tabGroup.height()) -
-                    parseInt(activeDiv.css("padding-top"), 10) -
-                    parseInt(activeDiv.css("padding-bottom"), 10) -
-                    parseInt(activeDiv.css("border-top-width"), 10) -
-                    parseInt(activeDiv.css("border-bottom-width"), 10);
-
-                setTimeout(function () {
-                    contentDivs.css(marginStyleProperty, margin).css("min-height", minHeight);
-                });
-            }
-        },
-
-        _sizeScrollWrap: function (element) {
-            if (element.is(":visible")) {
-                var tabPosition = this.options.tabPosition;
-                var h = Math.floor(outerHeight(element, true)) + (tabPosition === "left" || tabPosition === "right" ? 2 : this.tabsHeight);
-
-                this.scrollWrap.css("height", h).css("height");
-            }
-        },
-
         _tabPosition: function() {
             var that = this,
                 tabPosition = that.options.tabPosition;
@@ -1436,7 +1390,7 @@ var __meta__ = { // jshint ignore:line
             that.wrapper.addClass("k-floatwrap k-tabstrip-" + tabPosition);
 
             if (tabPosition == "bottom") {
-                that.tabGroup.appendTo(that.wrapper);
+                that.tabWrapper.appendTo(that.wrapper);
             }
 
             if (tabPosition === "left" || tabPosition === "right") {
@@ -1465,23 +1419,34 @@ var __meta__ = { // jshint ignore:line
                 ul = that.tabGroup,
                 scrollLeft = kendo.scrollLeft(ul);
 
-                that._scrollPrevButton.toggle(scrollLeft !== 0);
-                that._scrollNextButton.toggle(scrollLeft < ul[0].scrollWidth - ul[0].offsetWidth - 1);
+                that._scrollPrevButton.toggleClass('k-disabled', scrollLeft === 0);
+                that._scrollNextButton.toggleClass('k-disabled', scrollLeft === ul[0].scrollWidth - ul[0].offsetWidth);
         },
 
         _updateClasses: function() {
             var that = this,
                 tabs, activeItem, activeTab;
+            var isHorizontal = /top|bottom/.test(that.options.tabPosition);
 
-            that.wrapper.addClass("k-widget k-header k-tabstrip");
+            that.wrapper.addClass("k-widget k-tabstrip");
 
-            that.tabGroup = that.wrapper.children("ul").addClass("k-tabstrip-items k-reset");
-
-            if (!that.tabGroup[0]) {
-                that.tabGroup = $("<ul class='k-tabstrip-items k-reset'/>").appendTo(that.wrapper);
+            if (!that.tabGroup) {
+                that.tabGroup = that.wrapper.children("ul");
+                that.tabGroup.wrap('<div />');
+                that.tabWrapper = that.tabGroup.parent();
             }
 
-            tabs = that.tabGroup.find("li").addClass("k-item");
+            if (!that.tabGroup[0]) {
+                that.tabGroup = $("<ul />").prependTo(that.wrapper);
+                that.tabGroup.wrap('<div />');
+                that.tabWrapper = that.tabGroup.parent();
+            }
+
+            that.tabWrapper.addClass('k-tabstrip-items-wrapper');
+            that.tabWrapper.addClass(isHorizontal ? 'k-hstack' : 'k-vstack');
+            that.tabGroup.addClass('k-tabstrip-items k-reset');
+
+            tabs = that.tabGroup.find("li").addClass("k-tabstrip-item k-item");
 
             if (tabs.length) {
                 activeItem = tabs.filter("." + ACTIVESTATE).index();
@@ -1497,7 +1462,7 @@ var __meta__ = { // jshint ignore:line
                 tabs.eq(activeItem).addClass(TABONTOP);
             }
 
-            that.contentElements = that.wrapper.children("div");
+            that.contentElements = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)");
 
             that.contentElements
                 .addClass(CONTENT)
@@ -1517,7 +1482,7 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 contentUrls = that._contentUrls,
                 items = that.tabGroup.children(".k-item"),
-                contentElements = that.wrapper.children("div"),
+                contentElements = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)"),
                 _elementId = that._elementId.bind(that);
 
             if (contentElements.length && (items.length > contentElements.length)) {
@@ -1573,7 +1538,7 @@ var __meta__ = { // jshint ignore:line
                 });
             }
 
-            that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
+            that.contentElements = that.contentAnimators = that.wrapper.children("div:not(.k-tabstrip-items-wrapper)"); // refresh the contents
 
             that.tabsHeight = outerHeight(that.tabGroup) +
                               parseInt(that.wrapper.css("border-top-width"), 10) +
@@ -1592,12 +1557,6 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper = that.element.wrapAll("<div />").parent();
             } else {
                 that.wrapper = that.element;
-            }
-
-            that.scrollWrap = that.wrapper.parent(".k-tabstrip-wrapper");
-
-            if (!that.scrollWrap[0]) {
-                that.scrollWrap = that.wrapper.wrapAll("<div class='k-tabstrip-wrapper' />").parent();
             }
         }
     });

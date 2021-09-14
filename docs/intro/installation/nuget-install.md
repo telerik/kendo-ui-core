@@ -21,6 +21,7 @@ To install Kendo UI with NuGet:
 1. Register the Telerik NuGet Feed on your system.
 1. Install the Kendo UI package you need.
 
+>The improved Telerik NuGet v3 is now available for beta testing at https://nuget.telerik.com/v3/index.json. The new v3 API is faster, lighter, and reduces the number of requests from NuGet clients. You are welcome to try it.
 
 ## Registering the Feed on Your System
 
@@ -109,16 +110,11 @@ Regardless of the package installation approach you choose, after the installati
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
-* [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
+* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_scripts %})
+* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 * [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})
-* [Check out the jQuery version support]({% slug jquerysupport_kendoui %})
-* [Check out the web browser support]({% slug wbe_browserand_operating_system_support %})
-* [Check out the operation system support]({% slug ossupport_kendo %})
-* [Check out the PDF and Excel export support]({% slug export_support_kendoui %})
 * [Explore the widget script dependencies]({% slug script_filesfor_barcodes_widgets %})
-* [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 
 ## See Also
 

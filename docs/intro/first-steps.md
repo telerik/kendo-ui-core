@@ -581,7 +581,7 @@ This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and i
 ## Next Steps
 
 * [Ways to download and install Kendo UI for jQuery]({% slug overviewdownload_kendoui %})
-* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
+* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_scripts %})
 * [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Create your own custom widgets]({% slug createcustomkendouiwidgets_gettingstarted %})
 * [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})

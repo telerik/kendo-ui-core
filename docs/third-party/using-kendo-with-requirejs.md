@@ -13,7 +13,7 @@ The minified Kendo UI JavaScript files are [AMD modules](https://en.wikipedia.or
 > * As of 2016, the RequireJS project is mostly superseded by solutions such as [Webpack](http://webpack.github.io/), [Browserify](http://browserify.org/) and [SystemJS](https://github.com/systemjs/systemjs), which provide much more extensible API.
 > * You may check the help articles on their integration too&mdash;[Webpack support]({% slug webpacksupport_integration_kendoui %}) and [SystemJS support]({% slug systemjs_integration_kendoui %}).
 > * Due to a bug, the examples below do not work with the official Kendo UI Q1 2016 release. They should work as expected with the versions 2016.1.118 and later.
-> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_installation %}#employ-download-builder) using RequireJS.
+> * It is not possible to load packages produced by the [Download Builder]({% slug include_only_what_you_need_kendoui_scripts %}#employ-download-builder) using RequireJS.
 
 ## Loading from Local Directories
 
@@ -145,7 +145,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
 
 ## Using Custom Kendo Scripts in AngularJS
 
-The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_installation %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `gulp custom dropdownlist,angular`.
+The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_scripts %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `gulp custom dropdownlist,angular`.
 
 ```pseudo
 <!DOCTYPE HTML>

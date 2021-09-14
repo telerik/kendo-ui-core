@@ -1133,9 +1133,11 @@ Repaints the ListView using the data available in the DataSource.
       });
       $("#refreshBtn").click(function(){
         var listView = $("#listView").data("kendoListView");
-        // refreshes the ListView
+        // Change the ProductName of the first item in the data.
+        listView.dataSource.data()[0].ProductName = "test";
+        // Call the refresh method in order to see the change.
         listView.refresh();
-      });
+        });
     </script>
 
 ### remove

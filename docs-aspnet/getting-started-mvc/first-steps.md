@@ -12,238 +12,99 @@ permalink: /getting-started/first-steps
 
 Welcome to the First Steps with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC in Visual Studio tutorial!
 
-This article presents a use-case scenario that demonstrates how to start working with Telerik UI for ASP.NET MVC. You will implement the Kendo UI Grid in your project by using the Telerik UI Grid HtmlHelper. In this tutorial, we use Visual Studio for Windows 2019.
+The tutorial guides you through implementing the Telerik UI for ASP.NET MVC Grid and Datepicker in a new Telerik UI for ASP.NET application. To create the application, you will use Visual Studio 2019 for Windows and the [Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}) that come with the Telerik UI for ASP.NET installation.
 
-To configure an ASP.NET MVC web application to use UI for ASP.NET MVC, you can use either of the following approaches:
-* Create the application from scratch and manually add the necessary setup (demonstrated in this guide). 
-* [Use the Telerik UI for ASP.NET MVC Visual Studio extensions]({% slug newprojectwizards_visualstudio_aspnetmvc %}) and create an application that has all necessary scripts, styles, and editor templates.
+The Telerik Extensions streamline the Telerik UI for ASP.NET MVC setup by automatically adding the necessary references and configuration. The Extensions can also [convert an existing ASP.NET MVC application]({% slug projectwizardcoversion_visualstudio_aspnetmvc %}) to a Telerik UI for ASP.NET MVC application.
 
-To get up and running with the project:
+If you want to manually set up Telerik UI for ASP.NET MVC in an existing application, there are alternative approaches that do not involve the Telerik Visual Studio Extensions:
+* [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %}). 
+* [Manual setup]({% slug manualsetup_aspnetmvc%}).
 
-1. [Meet the requirements](#meet-the-requirements)
-1. [Create the ASP.NET MVC Web Application](#create-the-application)
-1. [Add the Telerik NuGet Feed to Visual Studio](#add-the-telerik-nuget-feed-to-visual-studio)
-1. [Add the UI for ASP.NET MVC NuGet package](#add-the-nuget-package)
-1. [Include the Telerik UI for ASP.NET MVC client-side resources](#include-the-client-side-resources)
-1. [Initialize the HtmlHelper](#initialize-the-htmlhelper)
-1. [Build and run the application](#build-and-run-the-application)
+## Prerequisites
 
-## Meet the requirements
+* Telerik UI for ASP.NET MVC requires <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
 
-Telerik UI for ASP.NET MVC requires the .NET Framework. [Download a current version of the .NET Framework from Microsoft's website.](https://dotnet.microsoft.com/download/dotnet-framework) 
+* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later.
+   
+* [Telerik account](https://www.telerik.com/account).
 
-## Create the Application
+## Downloading and Installing
 
-1. Open Visual Studio 2019 for Windows and select **Create a new project**.
-1. Select **ASP.NET Web Application (.NET Framework)** and click **Next**.
-1. Set a name and location for the project and click **Create**.
-1. Select **MVC** and click **Create**.
+Follow these steps to download and install Telerik UI for ASP.NET MVC:
 
-## Add the Telerik NuGet Feed to Visual Studio
+1. Log in to your [Telerik account](https://www.telerik.com/login/v2/telerik).
 
-Telerik maintains a NuGet feed with official UI ASP.NET MVC releases and service packs. These packages are available for registered users.
+   >tip If you don't have a Telerik account yet, you can create one for free.
 
-* If you use a free trial license, follow [these steps](#add-the-telerik-nuget-feed-for-trial-license-users) to add the NuGet feed to Visual Studio.
-* If you purchased a commercial license, follow [these steps](#add-the-telerik-nuget-feed-for-users-with-commercial-license) to add the NuGet feed to Visual Studio. 
+1. Download the installation file:
 
->**Tip**
->
->If you have already configured the Telerik NuGet feed in Visual Studio, jump to [Add the NuGet Package](#add-the-nuget-package).
-	
-### Add the Telerik NuGet Feed for Trial License Users
+    * To get the free trial version, follow [this link](https://www.telerik.com/try/ui-for-asp.net-mvc) to download UI for ASP.NET MVC and activate your trial.
 
-The easiest way to add the Telerik NuGet feed to Visual Studio if you are a trial user is to install the UI for ASP.NET MVC free trial:
+    * If you have already purchased a license:
 
-1. Download the [UI for ASP.NET MVC free trial](https://www.telerik.com/aspnet-mvc) installer. You need to create a free account if don't have one.
+        1. Click **Downloads** in the top navigation bar of your [Telerik account](https://www.telerik.com/login/v2/telerik).
 
-1. Run the installer.
+        1. Click **UI for ASP.NET MVC**.
 
-1. Select the option **Set up Telerik NuGet package source** to automatically add the [Telerik NuGet feed]({% slug aspnetmvc_nuget %}).
+        1. Download the `.msi` installer file from the **Installation** section.
 
-	![NuGet checkbox in Progress Trial Installer](../getting-started-mvc/images/check-nuget.png)
-	
-### Add the Telerik NuGet Feed for Users with Commercial License
+1. Close any running Visual Studio instances and run the Telerik UI for ASP.NET MVC installer. The automatic setup will guide you through the rest of the installation. The Telerik Visual Studio Extensions are installed by default.
 
-The easiest way to add the Telerik NuGet feed to Visual Studio if you purchased a commercial license is to use the Progress Control Panel:
+The default installation folder is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET MVC<version>`. 
 
-1. Download the Progress Control Panel from the **Overview** page of your [Telerik account](https://www.telerik.com/account/). 
+## Creating a Telerik ASP.NET MVC Application
 
-	![Download Progress Control Panel](../getting-started-mvc/images/download-control-panel.png)
-	
-1. Run the Progress Control Panel exe.
+After the Visual Studio Extensions are installed, you can create a Telerik ASP.NET MVC application by using the **Create New Project** wizard in Visual Studio.
 
-1. On the Login screen, check the **set up Telerik NuGet package source** option.
+1. In the Visual Studio toolbar, click **File** > **New** > **Project**.     
 
-	![Set Up Nuget on Progress Control Panel Login](../getting-started-mvc/images/login-control-panel.png)
-	
-1. If you miss to set up the Nuget Feed on login, go to the Progress Control Panel options and scroll to **Nuget Settings**. Enter your Telerik credentials and click the **Save and Close** button.
+1. Search for and select the **Telerik ASP.NET MVC C#** project template. Click **Next**.
 
-	![Set Up Nuget on Progress Control Panel options](../getting-started-mvc/images/nuget-control-panel-options.png)
+	![Telerik ASP.NET MVC application](../getting-started-mvc/images/create-new-project-mvc.png)
 
-## Add the NuGet Package
+1. Select the **GRID AND MENU** template.
 
-1. Righ-click on the Solution and select **Manage NuGet Packages for Solution...**
+   For more information on the additional predefined Telerik template options, refer to the [Creating New Projects]({% slug newprojectwizards_visualstudio_aspnetmvc %}) article. 
 
-	![Locating and opening the NuGet package manager menu](../getting-started-mvc/images/manage-nuget.png)
-	
-1. From the **Package source** drop-down, select the Telerik NuGet source.
+	![The new Project Wizard](../getting-started-mvc/images/create-new-project-templates-mvc.png)
 
-1. Click on the **Browse** tab, search for `Telerik.UI.for.AspNet.Mvc5` (or `Telerik.UI.for.AspNet.Mvc5.Trial`), and install it.
+1. Select the **Default-v2** visual theme for your Telerik ASP.NET MVC Application, and click **Finish** to complete the creation of the application.
 
-	![Selecting and installing the NuGet package](../getting-started-mvc/images/install-nuget-mvc.png)
-	
->**Note**
->
->When you use the NuGet package manager to install Telerik.UI.for.AspNet.Mvc5, you save time. It performs the following steps in the background:
->* Adds a reference to the `Kendo.Mvc.dll` assembly that contains the Telerik UI for ASP.NET MVC helpers.
->* Updates the `web.config` file to indicate the `Kendo.Mvc.UI` namespace where the helpers are located.
+The newly created application already has a reference to the required `Kendo.Mvc.dll` assembly. The wizard also references the client-side resources (the Kendo UI script and theme-related CSS files) in the `_Layout.cshtml`. 
 
-## Include the Client-Side Resources
+You can now start adding components.
 
->**Note**
->
-> * The CDN links and/or package versions have to point to the same UI for ASP.NET MVC version that your project references.
-> * The Kendo UI scripts have to be placed after `jQuery`.
+## Adding Components to the Application
 
-Before you can use a Telerik UI component, you must include the theme, the jQuery script, and the Kendo UI scripts:
+As a result of selecting the **GRID AND MENU** template, a Grid component has been added to the `Index.cshtml` view, and a Menu to the `_Layout.cshtml`. The Grid is configured and bound remotely to sample data returned by the `GridController`.
 
-1. Go to `~\Views\Shared\_Layout.cshtml` and add the Kendo UI theme of your choice to the `<head>` of the document. Since Microsoft's project template uses Bootstrap, you can use the Kendo UI SASS Bootstrap v4 theme to match it:
+Add a DatePicker to the `Index.cshtml` view:
 
-		<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My ASP.NET Application</title>
-		@Styles.Render("~/Content/css")
-		@Scripts.Render("~/bundles/modernizr")
+```
+    <h4>Telerik UI for ASP.NET MVC DatePicker:</h4>
 
-		@* Add the Kendo Bootstrap v4 theme: *@
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		</head>
+    @(Html.Kendo().DatePicker()
+        .Name("datepicker") // The Name of the DatePicker is mandatory. It specifies the "id" attribute of the component.
+        .Value(DateTime.Today) // Sets the value of the DatePicker.
+    )
+```
 
-1. The Microsoft ASP.NET Web Application template comes with a `jQuery` script reference at the end of _Layout.cshtml file. Find the `@Scripts.Render("~/bundles/jquery")` script line in the `<body>` of the document and remove it.  
+## Building and Running the Application 
 
-1. Add the `jQuery` script hosted on the Telerik CDN to the `<head>`:
+Press `CTRL+F5` to build and run the application. You have a Grid and a DatePicker on your page.
 
-		<head>
-		...
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		
-		@* Add the jQuery script from the Telerik CDN: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-		</head>
-
-1. Add the Kendo UI scripts. The Kendo UI script files required by UI for ASP.NET MVC must be loaded in the `<head>` tag *after* the `jQuery` script:
-
-		<head>
-		...
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-
-		@* Add the Kendo UI scripts: *@
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-		</head>
-
-1. Finally, add the `bootstrap.min.js` script available in Microsoft's ASP.NET Web Application template, and the `<head>` will look like this:
-
-		<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>@ViewBag.Title - My Telerik MVC Application</title>
-		@Styles.Render("~/Content/css")
-		@Scripts.Render("~/bundles/modernizr")
-		<link href="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/styles/kendo.bootstrap-v4.min.css" rel="stylesheet" type="text/css" />
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jquery.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/jszip.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
-		
-		@* Add the bootstrap.min.js script: *@
-		<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-		</head>
-
-
->**Note**
->
->* Always put the `kendo.all.min.js` and `kendo.aspnetmvc.min.js` script files after the `jquery.min.js` script. 
->* `jQuery` must be loaded only once. It must be placed only in the `<head>` tag, make sure there are no duplicate references elsewhere in the _Layout.
-
-## Initialize the HtmlHelper 
-
-Perform the steps below to initialize the HtmlHelper:
-
-1. Create a model in the `Models` folder of the application.
-
-        public class Product
-        {
-            public int ProductID { get; set; }
-            public string ProductName { get; set; }
-            public Nullable<decimal> UnitPrice { get; set; }
-            public bool Discontinued { get; set; }
-        }
-
-1. Open the `~/Views/Home/Index.cshtml` view or, if using ASPX, the `Index.aspx` file.
-1. Add a Kendo UI Grid HtmlHelper.
-
-    ```Razor
-        <div class="text-center">
-			<h2>Kendo UI Grid</h2>
-			@(Html.Kendo().Grid<TelerikMvcApp1.Models.Product>()
-				.Name("grid")
-				.Columns(columns =>
-				{
-					columns.Bound(c => c.ProductID).Width(100);
-					columns.Bound(c => c.ProductName).Width(300);
-					columns.Bound(c => c.UnitPrice).Width(100);
-					columns.Bound(c => c.Discontinued).Width(200);
-				})
-				.DataSource(dataSource => dataSource
-					.Ajax()
-					.Read(read => read.Action("Select", "Home"))
-				)
-			)
-		</div>
-    ```
-1. Open the `HomeController.cs` and import the `Kendo.Mvc.UI` and the `Kendo.Mvc.Extensions` namespaces so that you can use `Kendo.Mvc.UI.DataSourceRequest` and the `ToDataSourceResult` extension method in the next step:
-
-    	using Kendo.Mvc.Extensions;
-    	using Kendo.Mvc.UI;
-
-Additionally, import the namespace for the model that you created in step 1.
-
-1. In the `HomeController.cs`, add a new action method which will return the data as JSON. The Grid makes Ajax requests to this action:
-
-        public ActionResult Select([DataSourceRequest]DataSourceRequest request)
-        {
-            var data = Enumerable.Range(1, 10)
-                .Select(index => new Product
-                {
-                    ProductID = index,
-                    ProductName = "Product #" + index,
-                    UnitPrice = index * 10,
-                    Discontinued = false
-                });
-
-            return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        }
-
-## Build and Run the Application 
-
-Press `CTRL+F5` to build and run the application. As a result, the following sample page is created.
-
-![Sample page](../getting-started-mvc/images/sample-page.png)
+![Sample page](../getting-started-mvc/images/grid-and-datepicker-mvc.png)
 
 ## Next Steps
 
 * [Explore the Telerik UI for ASP.NET MVC fundamentals]({% slug fundamentals_aspnetmvc %})
-* [Scaffold the Telerik UI for ASP.NET MVC project]({% slug scaffolding_aspnetmvc %})
-* [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
-* [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetcore %})
+* [Telerik UI for ASP.NET MVC HTML Helpers]({% slug knownissues_aspnetmvc6_aspnetmvc %})
+* [Grid Data Binding Overview]({% slug htmlhelpers_grid_aspnetcore_binding_overview %})
 
 ## See Also
 
 * [Exploring the Helper Script Dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [Integrate Telerik UI for ASP.NET MVC in Visual Studio]({% slug overview_visualstudio_aspnetmvc %})
+* [Upgrade Telerik UI for ASP.NET MVC]({% slug upgrade_aspnetcore %})
 * [Collected Examples on ASP.NET MVC](https://github.com/telerik/kendo-examples-asp-net-mvc)
-* [Collected Examples on ASP.NET Web Technologies](https://github.com/telerik/kendo-examples-asp-net)
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)

@@ -101,6 +101,10 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
+The full list of events with explanations of when they are triggered is available here:
+
+* [Dialog Events](/api/Kendo.Mvc.UI.Fluent/DialogBuilder#eventssystemactionkendomvcuifluentdialogeventbuilder)
+
 ## See Also
 
 * [Basic Usage of the Dialog HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dialog)

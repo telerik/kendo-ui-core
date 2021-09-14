@@ -990,5 +990,23 @@
 
         assert.isOk(multiselect._clear.hasClass("k-hidden"));
     });
+
+    it("down arrow is rendered if configured", function() {
+        var multiselect = new MultiSelect(select, {
+            downArrow: true
+        });
+
+        assert.equal(multiselect._arrow.length, 1);
+        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap > .k-select").length, 1);
+    });
+
+    it("k-multiselect-wrap-arrow class is applied when down arrow is configured", function() {
+        var multiselect = new MultiSelect(select, {
+            downArrow: true
+        });
+
+        assert.equal(multiselect._arrow.length, 1);
+        assert.isOk(multiselect.wrapper.find(".k-multiselect-wrap").hasClass("k-multiselect-wrap-arrow"));
+    });
     });
 }());

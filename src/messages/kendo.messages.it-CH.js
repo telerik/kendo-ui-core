@@ -531,7 +531,8 @@ if (kendo.ui.MultiSelect) {
         "singleTag": "opzione/i selezionata/e",
         "clear": "cancelli",
         "deleteTag": "rimuovi",
-        "noData": "Nessun dato trovato."
+        "noData": "Nessun dato trovato.",
+        "downArrow": "seleziona"
     });
 }
 
@@ -557,6 +558,30 @@ if (kendo.ui.Wizard) {
         "done": "Finito",
         "step": "Passo",
         "of": "di"
+    });
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+    kendo.ui.OrgChart.prototype.options.messages =
+    $.extend(true, kendo.ui.OrgChart.prototype.options.messages,{
+        label: "Org Chart",
+        edit: "Modifica",
+        create: "Crea",
+        destroy: "Rimuovi",
+        destroyContent: "Sei sicuro che vuoi rimovere questo articulo e i suoi figli?",
+        destroyTitle: "Rimuovi articolo",
+        cancel: "Anulla",
+        save: "Salva",
+        menuLabel: "Menu di modificazioni",
+        uploadAvatar: "Carica un nuovo avatar",
+        parent: "Genitore",
+        name: "Nome",
+        title: "Titolo",
+        none: "--Nessun--",
+        expand: "espanda",
+        collapse: "crolla"
     });
 }
 

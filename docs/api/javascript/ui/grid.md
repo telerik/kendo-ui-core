@@ -285,7 +285,16 @@ Custom commands are supported by specifying the [click](columns.command.click) o
         { command: "destroy" } // displays the built-in "destroy" command
       ],
       editable: true,
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -299,7 +308,16 @@ Custom commands are supported by specifying the [click](columns.command.click) o
         { command: ["edit", "destroy"] } // displays the built-in "edit" and "destroy" commands
       ],
       editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -322,7 +340,16 @@ Custom commands are supported by specifying the [click](columns.command.click) o
         }
       ],
       editable: true,
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -340,7 +367,16 @@ The CSS class applied to the command button.
         { command: [{ className: "btn-destroy", name: "destroy", text: "Remove" }] }
       ],
       editable: true,
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
     <style>
@@ -379,7 +415,16 @@ The function context (available via the `this` keyword) will be set to the grid 
           }]
        }
       ],
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -404,7 +449,16 @@ When it is defined as an object it allows to customize the web font icon for the
             }]
        }
       ],
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -425,7 +479,16 @@ When it is defined as an object it allows to customize the web font icon for the
             }]
        }
       ],
-      dataSource: [ { name: "Jane Doe" } ],
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      },
       editable: "inline"
     });
     </script>
@@ -449,7 +512,16 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
             }]
        }
       ],
-      dataSource: [ { name: "Jane Doe" } ],
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      },
       editable: "inline"
     });
     </script>
@@ -473,7 +545,16 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
             }]
        }
       ],
-      dataSource: [ { name: "Jane Doe" } ],
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      },
       editable: "inline"
     });
     </script>
@@ -497,7 +578,16 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
             }]
        }
       ],
-      dataSource: [ { name: "Jane Doe" } ],
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      },
       editable: "inline"
     });
     </script>
@@ -516,7 +606,16 @@ The name of the command. The built-in commands are "edit" and "destroy". Can be 
         { command: [{ name: "edit" }] }
       ],
       editable: "popup",
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -563,7 +662,16 @@ The text displayed by the command button and the "cancel", "edit" and "update" t
         { command: [{ name: "destroy", text: "Remove" }] }
       ],
       editable: true,
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -607,7 +715,16 @@ The "edit" text of the edit command.
         { command: [{ name: "edit", text: { edit: "Custom edit"} }] }
       ],
       editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -625,7 +742,16 @@ The "cancel" text of the edit command.
         { command: [{ name: "edit", text: { cancel: "Custom cancel"} }] }
       ],
       editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -643,7 +769,16 @@ The "update" text of the edit command.
         { command: [{ name: "edit", text: { update: "Custom Update"} }] }
       ],
       editable: "inline",
-      dataSource: [ { name: "Jane Doe" } ]
+      dataSource: {
+        data: [ { name: "Jane Doe" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -661,7 +796,16 @@ The JavaScript function executed on initialization of the row which will determi
         { command: [{ name: "edit", visible: function(dataItem) { return dataItem.name==="Jane" } }] }
       ],
       editable: "popup",
-      dataSource: [ { name: "Jane" }, { name: "Bill" } ]
+      dataSource: {
+        data: [ { name: "Jane" }, { name: "Bill" } ],
+        schema: {
+          model: {
+            fields: {
+              name: { type: "string" }
+            }
+          }
+        }
+      }
     });
     </script>
 
@@ -1700,6 +1844,35 @@ The fields which can be used in the template are:
     });
     </script>
 
+#### Example - specify an external column footer template
+
+    <script id="template" type="kendo/template">
+        <span>Min: #: min #</span>
+        <span>Max: #: max #</span>
+    </script>
+      
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age",
+          footerTemplate: $("#template").html()
+        }
+      ],
+      dataSource: {
+        data: [
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ],
+        aggregate: [
+            { field: "age", aggregate: "min" },
+            { field: "age", aggregate: "max" }
+        ]
+      }
+    });
+    </script>
+
 #### Example - specify footer template when using source binding
 
     <div data-role="grid" data-bind="source:dataSource"
@@ -1747,8 +1920,8 @@ The fields which can be used in the template are:
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/api/javascript/kendo#standard-number-formats),
-[custom number format](/api/javascript/kendo#standard-number-formats), [standard date format](/api/javascript/kendo#standard-date-formats) or a [custom date format](/api/javascript/kendo#custom-date-formats).
+The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/globalization/intl/numberformatting#default-number-formats),
+[custom number format](/globalization/intl/numberformatting#custom-number-formats), [standard date format](/globalization/intl/dateformatting#default-date-formats) or a [custom date format](/globalization/intl/dateformatting#custom-date-formats).
 
 > The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
 
@@ -7546,7 +7719,7 @@ If set to `true` the pager will display buttons for going to the first, previous
 
 ### pageable.refresh `Boolean` *(default: false)*
 
-If set to `true` the pager will display the refresh button. Clicking the refresh button will refresh the grid. By default the refresh button is not displayed.
+If set to `true` the pager will display the refresh button. Clicking the refresh button will [refresh](/api/javascript/ui/grid/methods/refresh) the grid. By default the refresh button is not displayed.
 
 #### Example - show the refresh button
 
@@ -7927,11 +8100,11 @@ Supported values:
     });
     </script>
 
-> As of Q2 2016, when `paperSize` is specified the Grid will use `drawDOM`'s [automatic page breaking](/framework/drawing/drawing-dom#configuration-Automatic) algorithm.  This makes available a few new options: `template`, `repeatHeaders` and `scale`.
+> As of Q2 2016, when `paperSize` is specified the Grid will use `drawDOM`'s [automatic page breaking](/framework/drawing/pdf-output/multi-page-content#automatic-page-breaking) algorithm.  This makes available a few new options: `template`, `repeatHeaders` and `scale`.
 
 ### pdf.template `String` *(default: null)*
 
-A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [drawDOM](/framework/drawing/drawing-dom#Template).
+A piece of HTML to be included in each page.  Can be used to display headers and footers.  See the documentation in [drawDOM](/framework/drawing/pdf-output/page-templates).
 
 Available template variables include:
 * pageNum
@@ -9007,7 +9180,7 @@ The jQuery object which represents the grid table header element.
 
 ### content `jQuery`
 
-The jQuery object which represents the grid content element, which holds the scrollable content. Available only in a grid with locked columns.
+The jQuery object which represents the grid content element, which holds the scrollable content. Available only when `scrollable` is set to `true`.
 
 #### Example - hightligh the cells within the content of the grid
 
@@ -9017,9 +9190,10 @@ The jQuery object which represents the grid content element, which holds the scr
     <script>
       $("#grid").kendoGrid({
         columns: [
-          { locked: true, field: "id", width:200 },
+          { field: "id", width:200 },
           { field: "name", width:800 }
         ],
+        scrollable: true,
         dataSource: [ { id: 1, name: "Jane Doe" }, { id: 2, name: "John Doe" } ]
       });
 

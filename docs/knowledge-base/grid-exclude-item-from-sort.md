@@ -57,10 +57,10 @@ Use the [`compare`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/con
         sortable: {
           compare: function(a, b, descending) {
             if (descending){
-              return b.ProductName == "Chai" ? -1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
+              return a.ProductName == "Chai" ? 1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
             }
             else{
-              return a.ProductName == "Chai" ? -1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
+              return b.ProductName == "Chai" ? 1 : a.ProductName === b.ProductName ? 0 : (a.ProductName > b.ProductName) ? 1 : -1;
             }
           }
         },

@@ -152,6 +152,44 @@ Sets the field of the data item that provides information when the given event h
 
 > The value for this field should be either JavaScript Date object or serialized date.
 
+#### Example
+
+    <div id="timeline"></div>
+    
+    <script>
+      $(document).ready(function () {
+        var dataArray = [
+          { "id": 1, "title": "Bowling tournament", 
+           "subtitle": "Location: Sterling Lanes", 
+           "description": "Summer Bowling tournament in Michigan", 
+           "date1": "2025-06-30T21:00:00.000Z", 
+           "actions": [{ "text": "Visit the Bowling tournament page" }] },
+          { "id": 2, 
+           "title": "Charlie's first football game", 
+           "subtitle": "Location: City Football Stadium", 
+           "description": "Call coach Williams", 
+           "date1": "2022-10-22T21:00:00.000Z" }
+        ];
+
+        $("#timeline").kendoTimeline({
+          dataSource: {
+            data: dataArray,
+            schema: {
+              model: {
+                fields: {
+                  date1: {
+                    type: "date"
+                  }
+                }
+              }
+            }
+          },
+          dataDateField:"date1",
+          orientation: "vertical"
+        });
+      });
+    </script>
+
 ### dataImagesAltField `String`*(default: "altField")*
 
 Sets the field of the data item that provides the value for the alt attribute of the images.

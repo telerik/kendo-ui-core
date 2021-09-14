@@ -27,6 +27,10 @@ You can also customize which fields to search through the data when a value is e
     ...
     .Search(s=> { s.Field(c => c.ContactName); })
 
+The code snippets from above can be seen in action in the following demo:
+
+* [Grid Seach Panel Demo](https://demos.telerik.com/aspnet-core/grid/search-panel)
+
 ## Known Limitations
 
 * When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.

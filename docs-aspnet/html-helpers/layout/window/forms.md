@@ -108,6 +108,58 @@ public IActionResult MyModel_Create(MyModel model)
 }
 ```
 
+{% if site.core %}
+
+In case the Form is used in a RazorPages application, create the form with no ActionMethod and Controller. Upon submission, the OnPost() ActionMethod in the code-behind will be invoked:
+
+```Form.cshtml
+    @page
+    @model Telerik.Examples.RazorPages.Pages.Form.FormAjaxSubmitModel
+    @{ ViewData["Title"] = "FormIndex"; }
+
+    @using Telerik.Examples.RazorPages.Models
+    @using Kendo.Mvc.UI
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @{ var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken; }
+
+
+    @using (Html.BeginForm(FormMethod.Post))
+    {
+        @Html.EditorForModel(Model);
+
+        @Html.ValidationSummary()
+        
+        @(Html.Kendo().Button()
+                .Name("SubmitBtn")
+                .HtmlAttributes(new { type = "submit" })
+                .Content("Submit")
+            )
+    }
+```
+```Form.cshtml.cs
+    public class FormAjaxSubmitModel : PageModel
+    {
+        [BindProperty]
+        public MyModel MyModel { get; set; }
+
+        public void OnGet()
+        {
+            if (MyModel == null)
+            {
+                MyModel = new MyModel();
+            }
+        }
+
+        public IActionResult OnPost(MyModel MyModel)
+        {
+            return Content("<script>window.parent.closeFormPopup()</script>");
+        }
+    }
+```
+{% endif %}
+
+
 ## See Also
 
 * [Constraining the Movement of the Window HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/window/constrain-movement)

@@ -9,31 +9,13 @@ position: 1
 
 # JSON Serialization
 
-When you use Grid or other data-bound widgets in your code, make sure that the property name casing doesn't change during serialization. This document describes the recommended approaches.   
+When you use Grid or other data-bound widgets in your code, make sure that the property name casing doesn't change during serialization.
 
-### Configure JSON Serialization in ASP.NET Core 2
- 
-To maintain the property names casing, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
+Data-bound Telerik UI components like the Grid depend on Pascal case-formatted response from the server. However, the default casing for JSON strings in ASP.NET Core is the Camel case. If the serializer changes the casing to Camel, the data-bound widget cannot display the data correctly.
 
-			...
-			using Newtonsoft.Json.Serialization;
-			...
+This document describes the recommended approaches to maintain the Pascal case in different ASP.NET Core versions.
 
-    public void ConfigureServices(IServiceCollection services)
-	{
-		...
-		// Maintain the property names during serialization.
-		// For more information, refer to https://github.com/aspnet/Announcements/issues/194.
-		services
-			.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-			.AddJsonOptions(options =>
-				options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
-		// Add the Kendo UI services to the services container.
-		services.AddKendo();
-	}
-
-### Configure JSON Serialization in ASP.NET Core 3 
+### Configure JSON Serialization in ASP.NET Core 3 and Later
 
 There are three ways to configure JSON Serialization in ASP.NET Core 3:
 
@@ -87,6 +69,28 @@ There are three ways to configure JSON Serialization in ASP.NET Core 3:
         return Json(result, new JsonSerializerOptions() { PropertyNameCaseInsensitive = false });
     }
 	```
+
+### Configure JSON Serialization in ASP.NET Core 2
+ 
+To maintain the property names casing, locate the `ConfigureServices` method and update it by adding the `using Newtonsoft.Json.Serialization;` line at the top.
+
+			...
+			using Newtonsoft.Json.Serialization;
+			...
+
+    public void ConfigureServices(IServiceCollection services)
+	{
+		...
+		// Maintain the property names during serialization.
+		// For more information, refer to https://github.com/aspnet/Announcements/issues/194.
+		services
+			.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+			.AddJsonOptions(options =>
+				options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+		// Add the Kendo UI services to the services container.
+		services.AddKendo();
+	}
 
 ## See Also
 

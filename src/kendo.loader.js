@@ -16,8 +16,10 @@ var __meta__ = {// jshint ignore:line
         ui = kendo.ui,
 
         HIDDEN = 'k-hidden',
+        ROLE = 'role',
         ARIA_LABEL = 'aria-label',
-        ARIA_HIDDEN = 'aria-hidden';
+        ARIA_HIDDEN = 'aria-hidden',
+        ARIA_LIVE = 'aria-live';
 
     var loaderClasses = {
         loader: "k-widget k-loader",
@@ -76,7 +78,9 @@ var __meta__ = {// jshint ignore:line
 
             wrapper
                 .empty()
-                .attr(ARIA_LABEL, that.options.messages.loading);
+                .attr(ARIA_LABEL, that.options.messages.loading)
+                .attr(ROLE, "alert")
+                .attr(ARIA_LIVE, "polite");
 
             if (typeData.segments) {
                 for (var i = 0; i < typeData.segments; i += 1) {

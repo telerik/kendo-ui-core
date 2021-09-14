@@ -26,9 +26,11 @@ The following example demonstrates how to define the Chart by using the Chart Ta
 The Chart TagHelper configuration options are passed as attributes of the tag. In the following example, the `tagHelper` and `razor` configurations are equivalent.
 
 ```tagHelper
+@addTagHelper *, Kendo.Mvc
+
 <kendo-chart name="chart">
-    <chart-title text="Gross domestic product growth /GDP annual %/"></title>
-    <chart-legend position="ChartLegendPosition.Top"></legend>
+    <chart-title text="Gross domestic product growth /GDP annual %/"></chart-title>
+    <chart-legend position="ChartLegendPosition.Top"></chart-legend>
     <series-defaults type="ChartSeriesType.Column"></series-defaults>
 
     <series>

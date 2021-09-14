@@ -27,6 +27,8 @@ The `Model` method configures the model of the data source. The data field names
 
 The field, which acts as the identifier of the model. The identifier is used to determine if a model instance is new or existing. If the field value is equal to the default one, that is specified through `DefaultValue()`, the model is considered new.
 
+> The DataSource uses the identifier field of the Model to track the state of its items. The `Id` field must be non-editable `Editable(false)` otherwise unexpected behavior and loss of data might occur.
+
 ### Default Value
 
 Specifies the default value which will be used for the field when a new model instance is created. The default settings need to match the type of the field. 

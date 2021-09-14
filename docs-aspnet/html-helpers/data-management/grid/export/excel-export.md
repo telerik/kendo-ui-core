@@ -139,8 +139,8 @@ The Telerik UI Grid for {{ site.framework }} does not use the `ClientTemplate` d
         <script>
             function excelExport(e) {
                 var sheet = e.workbook.sheets[0];
-                var template = kendo.template(this.columns[1].template);
-                var data = this.dataSource.view();
+                var template = kendo.template(e.sender.columns[1].template);
+                var data = e.sender.dataSource.view();
                 for (var i = 0; i < data.length; i++) {
                     sheet.rows[i + 1].cells[1].value = template(data[i]);
                 }

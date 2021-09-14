@@ -775,6 +775,8 @@ kendo.ui.Pager.prototype.options.messages =
 $.extend(true, kendo.ui.Pager.prototype.options.messages,{
   "allPages": "Всички",
   "page": "Страница",
+  "pageButtonLabel": "Страница {0}",
+  "pageSizeDropDownLabel": "Размери на страниците",
   "display": "{0} - {1} от {2} записи",
   "of": "от {0}",
   "empty": "Няма записи за показване!",
@@ -1180,7 +1182,8 @@ if (kendo.ui.MultiSelect) {
         "singleTag": "избрана/и опция/и",
         "clear": "изчисти",
         "deleteTag": "премахни",
-        "noData": "Няма налични опции."
+        "noData": "Няма налични опции.",
+        "downArrow": "избери"
     });
 }
 
@@ -1315,6 +1318,30 @@ if (kendo.ui.PDFViewer) {
                 of: "от"
             }
         }
+    });
+}
+
+/* OrgChart messages */
+
+if (kendo.ui.OrgChart) {
+    kendo.ui.OrgChart.prototype.options.messages =
+    $.extend(true, kendo.ui.OrgChart.prototype.options.messages,{
+        label: "Орг чарт",
+        edit: "Промени",
+        create: "Създай",
+        destroy: "Изтрий",
+        destroyContent: "Сигурни ли сте, че искате да изтриете този айтем и неговите деца?",
+        destroyTitle: "Изтрий айтем",
+        cancel: "Откажи",
+        save: "Запази",
+        menuLabel: "Меню за редакции",
+        uploadAvatar: "Качи нова снимка",
+        parent: "Родител",
+        name: "Име",
+        title: "Позиция",
+        none: "--Без--",
+        expand: "разпъни",
+        collapse: "свий"
     });
 }
 

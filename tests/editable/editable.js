@@ -96,6 +96,21 @@
             assert.equal(editable.element.find("input[name=foo]").val(), "bar");
         });
 
+        it("input value is not bound when name is __RequestVerificationToken", function() {
+            var MyModel = Model.define({ fields: { "__RequestVerificationToken": "foo" } }),
+                model = new MyModel({ "__RequestVerificationToken": "bar" }),
+                editable = setup({
+                    fields: {
+                        field: "__RequestVerificationToken",
+                        editor: "<input type='hidden' name='__RequestVerificationToken' value='token' />"
+                    },
+                    model: model
+                });
+
+            assert.equal(editable.element.find("input[name=__RequestVerificationToken]").val(), "token");
+            assert.isNotOk(editable.element.find("input[name=__RequestVerificationToken]").attr("data-bind"));
+        });
+
         it("container is cleared", function() {
             div.append($("<span/>"));
 
@@ -755,6 +770,15 @@
             }).getKendoEditable();
 
             assert.isOk(editable.element.find("#foo").data("kendoSlider"));
+        });
+
+        it("hidden input is displayed when type option is set as hidden", function() {
+            var editable = div.kendoEditable({
+                fields: { field: "foo", id: "foo", editor: "hidden" },
+                model: defaultModel
+            }).getKendoEditable();
+
+            assert.isOk(editable.element.find("#foo").is("[type='hidden']"));
         });
 
         it("custom attributes can be added to editors", function() {

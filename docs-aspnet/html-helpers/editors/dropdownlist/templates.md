@@ -182,6 +182,31 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
                 })
     )
 
+## Option Label Template
+
+The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has been set. Use `OptionLabelTemplate` if you want to customize the markup of the optionLabel.
+
+    <!-- Template -->
+    <script id="noDataTemplate" type="text/x-kendo-template">
+        <strong>No Data!</strong>
+    </script>
+
+    <!-- DropDownList initialization -->
+    @(Html.Kendo().DropDownList()
+                .Name("customers")
+                .DataTextField("ContactName")
+                .DataValueField("CustomerID")
+                .OptionLabel("Select address...")
+                .OptionLabelTemplate("<span style='color: red'>Select address...</span>")
+                .DataSource(source =>
+                {
+                    source.Read(read =>
+                    {
+                        read.Action("Template_GetCustomers", "ComboBox");
+                    });
+                })
+    )
+
 ## See Also
 
 * [Customizing Templates in the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/template)

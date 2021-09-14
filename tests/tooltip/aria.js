@@ -81,7 +81,7 @@
 
             tooltip.show(container);
 
-            assert.equal(container.attr("aria-describedby"), "foo_tt_active");
+            assert.equal(container.attr("aria-describedby"), "foo_tb_active");
         });
 
         it("described by attribute is added to the already existing described by", function() {
@@ -94,7 +94,7 @@
 
             tooltip.show(container);
 
-            assert.equal(container.attr("aria-describedby"), "test foo_tt_active");
+            assert.equal(container.attr("aria-describedby"), "test foo_tb_active");
         });
 
         it("described by attribute is removed from the already existing described by", function() {
@@ -118,7 +118,7 @@
 
             tooltip.show(container);
 
-            assert.equal(tooltip.popup.element.attr("id"), "foo_tt_active");
+            assert.equal(tooltip.popup.element.attr("id"), "foo_tb_active");
         });
 
         it("id attribute is removed from the popup on hide", function() {
@@ -142,7 +142,7 @@
 
             tooltip.show(first);
 
-            assert.equal(first.attr("aria-describedby"), "first_tt_active");
+            assert.equal(first.attr("aria-describedby"), "first_tb_active");
         });
 
         it("popup hide removes described by attribute", function() {

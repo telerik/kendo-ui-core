@@ -41,9 +41,10 @@ var __meta__ = { // jshint ignore:line
             var bindAttr = kendo.attr("bind"),
                 binding = this.getAttribute(bindAttr) || "",
                 bindingName = this.type === "checkbox" || this.type === "radio" ? "checked:" : "value:",
+                isAntiForgeryToken = this.getAttribute("name") === Editable.antiForgeryTokenName,
                 fieldName = this.name;
 
-            if (binding.indexOf(bindingName) === -1 && fieldName) {
+            if (binding.indexOf(bindingName) === -1 && fieldName && !isAntiForgeryToken) {
                 binding += (binding.length ? "," : "") + bindingName + fieldName;
 
                 $(this).attr(bindAttr, binding);
@@ -145,7 +146,7 @@ var __meta__ = { // jshint ignore:line
         } else if (type === "RadioGroup" || type === "CheckBoxGroup") {
             tag = "<ul />";
         } else {
-            tag = type === "Editor" ? "<textarea />" : "<input />";
+            tag = type === "Editor" || type === "TextArea" ? "<textarea />" : "<input />";
         }
 
         return tag;
@@ -155,10 +156,15 @@ var __meta__ = { // jshint ignore:line
         "AutoComplete", "CheckBoxGroup", "ColorPicker", "ComboBox", "DateInput",
         "DatePicker", "DateTimePicker", "DropDownTree",
         "Editor", "MaskedTextBox", "MultiColumnComboBox","MultiSelect",
-        "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList"
+        "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList",
+        "TextBox", "TextArea", "Captcha"
     ];
 
     var editors = {
+        "hidden": function (container, options) {
+            var attr = createAttributes(options);
+            $('<input type="hidden"/>').attr(attr).appendTo(container);
+        },
         "number": function(container, options) {
             var attr = createAttributes(options);
             $('<input type="text"/>').attr(attr).appendTo(container).kendoNumericTextBox({ format: options.format });
@@ -316,9 +322,10 @@ var __meta__ = { // jshint ignore:line
                 model = that.options.model || {},
                 isValuesEditor = isObject && field.values,
                 type = isValuesEditor ? "values" : fieldType(modelField),
-                isCustomEditor = isObject && field.editor,
+                isHidden = isObject && typeof field.editor === "string" && field.editor === "hidden",
+                isCustomEditor = isObject && !isHidden && field.editor,
                 isKendoEditor = isObject && $.inArray(field.editor, kendoEditors) !== -1,
-                editor = isCustomEditor ? field.editor : editors[type],
+                editor = isCustomEditor ? field.editor : editors[isHidden ? "hidden" : type],
                 container = that.element.find("[" + kendo.attr("container-for") + "=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
 
             editor = editor ? editor : editors.string;
@@ -474,6 +481,8 @@ var __meta__ = { // jshint ignore:line
             }
         }
    });
+
+   Editable.antiForgeryTokenName = "__RequestVerificationToken";
 
    ui.plugin(Editable);
 })(window.kendo.jQuery);

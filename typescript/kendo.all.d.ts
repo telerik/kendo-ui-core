@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2021.2.511
+// Type definitions for Kendo UI Professional v2021.3.914
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -726,6 +726,33 @@ declare namespace kendo.data {
         insert(index: number, model: kendo.data.TreeListModel): kendo.data.TreeListModel;
         insert(index: number, model: Object): kendo.data.TreeListModel;
         remove(model: kendo.data.TreeListModel): void;
+    }
+
+    class OrgChartModel extends Model {
+        static idField: string;
+        static nameField: string;
+        static titleField: string;
+        static avatarField: string;
+        static fields: DataSourceSchemaModelFields;
+
+        id: any;
+        parentId: any;
+
+        static define(options: DataSourceSchemaModelWithFieldsObject): typeof OrgChartModel;
+        static define(options: DataSourceSchemaModelWithFieldsArray): typeof OrgChartModel;
+
+        constructor(data?: any);
+        init(data?: any): void;
+        loaded(value: boolean): void;
+        loaded(): boolean;
+    }
+
+    class OrgChartDataSource extends TreeListDataSource {
+        groupedItemsTree(field?: String): any[];
+        itemChildren(item?: kendo.data.OrgChartModel): kendo.data.OrgChartModel[];
+        itemsTree(item?: kendo.data.OrgChartModel, fromView?: boolean): kendo.data.OrgChartModel[];
+        prospectParents(item: kendo.data.OrgChartModel): kendo.data.OrgChartModel[];
+        toggleChildren(item: kendo.data.OrgChartModel): void;
     }
 
     class GanttTask extends Model {
@@ -2590,6 +2617,83 @@ declare namespace kendo.ui {
         sender: Calendar;
         preventDefault: Function;
         isDefaultPrevented(): boolean;
+    }
+
+    class Captcha extends kendo.ui.Widget {
+
+        static fn: Captcha;
+
+        options: CaptchaOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Captcha;
+
+        constructor(element: Element, options?: CaptchaOptions);
+
+
+        enable(enable: boolean): void;
+        getCaptchaId(): string;
+        isValid(): boolean;
+        readonly(readonly: boolean): void;
+        reset(): JQueryPromise<any>;
+        speak(): JQueryPromise<any>;
+        validate(): JQueryPromise<any>;
+
+    }
+
+    interface CaptchaMessages {
+        audio?: string;
+        imageAlt?: string;
+        reset?: string;
+        success?: string;
+    }
+
+    interface CaptchaOptions {
+        name?: string;
+        audioButton?: boolean;
+        audioHandler?: string|Function|any;
+        captcha?: string;
+        captchaId?: string;
+        dataCaptchaField?: string;
+        dataCaptchaIdField?: string;
+        handler?: string|Function|any;
+        messages?: CaptchaMessages;
+        resetButton?: boolean;
+        validateOnBlur?: boolean;
+        validationHandler?: string|Function|any;
+        volumeControl?: boolean;
+        change?(e: CaptchaChangeEvent): void;
+        requestEnd?(e: CaptchaRequestEndEvent): void;
+        requestStart?(e: CaptchaRequestStartEvent): void;
+        error?(e: CaptchaErrorEvent): void;
+    }
+    interface CaptchaEvent {
+        sender: Captcha;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface CaptchaChangeEvent extends CaptchaEvent {
+        value?: string;
+    }
+
+    interface CaptchaRequestEndEvent extends CaptchaEvent {
+        type?: string;
+    }
+
+    interface CaptchaRequestStartEvent extends CaptchaEvent {
+        type?: string;
+        data?: any;
+    }
+
+    interface CaptchaErrorEvent extends CaptchaEvent {
+        type?: string;
+        jqXHR?: any;
+        textStatus?: string;
+        errorThrown?: string;
     }
 
 
@@ -7015,6 +7119,7 @@ declare namespace kendo.ui {
         dataTextField?: string;
         dataValueField?: string;
         delay?: number;
+        downArrow?: boolean;
         enable?: boolean;
         enforceMinLength?: boolean;
         filter?: string;
@@ -7314,6 +7419,150 @@ declare namespace kendo.ui {
     interface NumericTextBoxSpinEvent extends NumericTextBoxEvent {
     }
 
+    class OrgChart extends kendo.ui.Widget {
+
+        static fn: OrgChart;
+
+        options: OrgChartOptions;
+
+        dataSource: kendo.data.OrgChartDataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): OrgChart;
+
+        constructor(element: Element, options?: OrgChartOptions);
+
+
+        append(item: any, parent: JQuery): void;
+        append(item: any, parent: Element): void;
+        append(item: any, parent: string): void;
+        cancelChanges(): void;
+        collapse(node: JQuery): void;
+        collapse(node: Element): void;
+        collapse(node: string): void;
+        dataItem(node: JQuery): void;
+        dataItem(node: Element): void;
+        dataItem(node: string): void;
+        delete(node: JQuery): void;
+        delete(node: Element): void;
+        delete(node: string): void;
+        edit(node: JQuery): void;
+        edit(node: Element): void;
+        edit(node: string): void;
+        expand(node: JQuery): void;
+        expand(node: Element): void;
+        expand(node: string): void;
+        getCollapsedNodes(): void;
+        items(): void;
+        parent(node: JQuery): void;
+        parent(node: Element): void;
+        parent(node: string): void;
+        saveChanges(): void;
+        select(node: JQuery): void;
+        select(node: Element): void;
+        select(node: string): void;
+
+    }
+
+    interface OrgChartEditable {
+        create?: boolean;
+        destroy?: boolean;
+        fields?: boolean;
+        form?: any;
+        parent?: boolean;
+    }
+
+    interface OrgChartMessages {
+        label?: string;
+        create?: string;
+        edit?: string;
+        destroy?: string;
+        destroyContent?: string;
+        destroyTitle?: string;
+        cancel?: string;
+        save?: string;
+        menuLabel?: string;
+        uploadAvatar?: string;
+        parent?: string;
+        name?: string;
+        title?: string;
+        none?: string;
+        expand?: string;
+        collapse?: string;
+    }
+
+    interface OrgChartOptions {
+        name?: string;
+        cardsColors?: any;
+        dataSource?: any|kendo.data.OrgChartDataSource;
+        editable?: boolean | OrgChartEditable;
+        groupField?: string;
+        groupHeaderTemplate?: string|Function;
+        messages?: OrgChartMessages;
+        template?: string|Function;
+        cancel?(e: OrgChartCancelEvent): void;
+        change?(e: OrgChartChangeEvent): void;
+        collapse?(e: OrgChartCollapseEvent): void;
+        dataBinding?(e: OrgChartDataBindingEvent): void;
+        dataBound?(e: OrgChartDataBoundEvent): void;
+        delete?(e: OrgChartDeleteEvent): void;
+        edit?(e: OrgChartEditEvent): void;
+        expand?(e: OrgChartExpandEvent): void;
+        save?(e: OrgChartSaveEvent): void;
+        select?(e: OrgChartSelectEvent): void;
+    }
+    interface OrgChartEvent {
+        sender: OrgChart;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface OrgChartCancelEvent extends OrgChartEvent {
+        dataItem?: any;
+    }
+
+    interface OrgChartChangeEvent extends OrgChartEvent {
+    }
+
+    interface OrgChartCollapseEvent extends OrgChartEvent {
+        item?: JQuery;
+        dataItems?: any;
+    }
+
+    interface OrgChartCreateEvent extends OrgChartEvent {
+        dataItem?: any;
+    }
+
+    interface OrgChartDataBindingEvent extends OrgChartEvent {
+    }
+
+    interface OrgChartDataBoundEvent extends OrgChartEvent {
+    }
+
+    interface OrgChartDeleteEvent extends OrgChartEvent {
+        dataItem?: any;
+    }
+
+    interface OrgChartEditEvent extends OrgChartEvent {
+        dataItem?: any;
+    }
+
+    interface OrgChartExpandEvent extends OrgChartEvent {
+        item?: JQuery;
+        dataItems?: any;
+    }
+
+    interface OrgChartSaveEvent extends OrgChartEvent {
+        dataItem?: any;
+    }
+
+    interface OrgChartSelectEvent extends OrgChartEvent {
+        item?: JQuery;
+        dataItems?: any;
+    }
+
     class PDFViewer extends kendo.ui.Widget {
 
         static fn: PDFViewer;
@@ -7329,7 +7578,7 @@ declare namespace kendo.ui {
         constructor(element: Element, options?: PDFViewerOptions);
 
 
-        fromFile(): void;
+        fromFile(file: any): void;
         activatePage(): void;
         loadPage(): void;
         execute(): void;
@@ -7517,6 +7766,7 @@ declare namespace kendo.ui {
         empty?: string;
         allPages?: string;
         page?: string;
+        pageButtonLabel?: string;
         of?: string;
         itemsPerPage?: string;
         first?: string;
@@ -7528,6 +7778,7 @@ declare namespace kendo.ui {
 
     interface PagerOptions {
         name?: string;
+        ARIATemplate?: string;
         autoBind?: boolean;
         buttonCount?: number;
         dataSource?: any|kendo.data.DataSource;
@@ -7541,6 +7792,7 @@ declare namespace kendo.ui {
         refresh?: boolean;
         responsive?: boolean;
         messages?: PagerMessages;
+        navigatable?: boolean;
         change?(e: PagerChangeEvent): void;
     }
     interface PagerEvent {
@@ -7934,6 +8186,71 @@ declare namespace kendo.ui {
         promise?: JQueryPromise<any>;
     }
 
+    class Popover extends kendo.ui.Widget {
+
+        static fn: Popover;
+
+        options: PopoverOptions;
+
+        popup: kendo.ui.Popup;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Popover;
+
+        constructor(element: Element, options?: PopoverOptions);
+
+
+        show(element: JQuery): void;
+        hide(): void;
+        target(): JQuery;
+
+    }
+
+    interface PopoverAction {
+        text?: string;
+        click?: Function;
+        iconClass?: Function;
+    }
+
+    interface PopoverAnimationClose {
+        effects?: string;
+        duration?: number;
+    }
+
+    interface PopoverAnimationOpen {
+        effects?: string;
+        duration?: number;
+    }
+
+    interface PopoverAnimation {
+        close?: PopoverAnimationClose;
+        open?: PopoverAnimationOpen;
+    }
+
+    interface PopoverOptions {
+        name?: string;
+        actions?: PopoverAction[];
+        actionsPosition?: string;
+        animation?: boolean | PopoverAnimation;
+        body?: string|Function;
+        filter?: string;
+        header?: string|Function;
+        height?: number;
+        toggleOnClick?: boolean;
+        width?: number;
+        position?: string;
+        showOn?: string;
+        offset?: number;
+        show?(e: PopoverEvent): void;
+        hide?(e: PopoverEvent): void;
+    }
+    interface PopoverEvent {
+        sender: Popover;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
 
     class Popup extends kendo.ui.Widget {
 
@@ -8038,8 +8355,11 @@ declare namespace kendo.ui {
     interface ProgressBarOptions {
         name?: string;
         animation?: boolean | ProgressBarAnimation;
+        ariaRole?: boolean;
         chunkCount?: number;
         enable?: boolean;
+        label?: string;
+        labelId?: string;
         max?: number;
         min?: number;
         orientation?: string;
@@ -9111,6 +9431,8 @@ declare namespace kendo.ui {
         collapsedSize?: string;
         collapsible?: boolean;
         contentUrl?: string;
+        label?: string;
+        labelId?: string;
         max?: string;
         min?: string;
         resizable?: boolean;
@@ -24355,6 +24677,10 @@ interface JQuery {
     kendoCalendar(options: kendo.ui.CalendarOptions): JQuery;
     data(key: "kendoCalendar"): kendo.ui.Calendar;
 
+    kendoCaptcha(): JQuery;
+    kendoCaptcha(options: kendo.ui.CaptchaOptions): JQuery;
+    data(key: "kendoCaptcha"): kendo.ui.Captcha;
+
     kendoChart(): JQuery;
     kendoChart(options: kendo.dataviz.ui.ChartOptions): JQuery;
     data(key: "kendoChart"): kendo.dataviz.ui.Chart;
@@ -24611,6 +24937,10 @@ interface JQuery {
     kendoNumericTextBox(options: kendo.ui.NumericTextBoxOptions): JQuery;
     data(key: "kendoNumericTextBox"): kendo.ui.NumericTextBox;
 
+    kendoOrgChart(): JQuery;
+    kendoOrgChart(options: kendo.ui.OrgChartOptions): JQuery;
+    data(key: "kendoOrgChart"): kendo.ui.OrgChart;
+
     kendoPDFViewer(): JQuery;
     kendoPDFViewer(options: kendo.ui.PDFViewerOptions): JQuery;
     data(key: "kendoPDFViewer"): kendo.ui.PDFViewer;
@@ -24630,6 +24960,10 @@ interface JQuery {
     kendoPivotGrid(): JQuery;
     kendoPivotGrid(options: kendo.ui.PivotGridOptions): JQuery;
     data(key: "kendoPivotGrid"): kendo.ui.PivotGrid;
+
+    kendoPopover(): JQuery;
+    kendoPopover(options: kendo.ui.PopoverOptions): JQuery;
+    data(key: "kendoPopover"): kendo.ui.Popover;
 
     kendoPopup(): JQuery;
     kendoPopup(options: kendo.ui.PopupOptions): JQuery;

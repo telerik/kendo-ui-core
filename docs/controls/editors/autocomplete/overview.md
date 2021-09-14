@@ -24,7 +24,7 @@ To initialize the AutoComplete, use a jQuery selector.
 
 The AutoComplete copies the styles and CSS classes from the `input` element to the `wrapper` element. For example, `<input id="autoComplete" class="myClass" />` results in the following output.
 
-    <span class="k-widget k-autocomplete k-header k-state-default myClass">
+    <span class="k-widget k-autocomplete myClass">
         <input id="autoComplete" class="myClass" />
     </span>
 

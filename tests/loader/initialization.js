@@ -45,12 +45,6 @@
             assert.equal(loader.element.is(':visible'), true);
             assert.equal(loader.element.hasClass('.k-hidden'), false);
         });
-
-        test('default messages.loading text is \'Loading\'', function() {
-            loader = new Loader(span);
-
-            assert.equal(loader.element.attr('aria-label'), 'Loading');
-        });
     });
 
 }());

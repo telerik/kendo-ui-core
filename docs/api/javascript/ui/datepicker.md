@@ -604,18 +604,20 @@ The following settings are available for the **start** value:
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the options of the widget. The options object holds all available [DatPicker configuration fields](/api/javascript/ui/datepicker#configuration).
 
 #### Example - get options of the widget
 
     <input id="datepicker" />
     <script>
-    $("#datepicker").kendoDatePicker();
-
-    var datepicker = $("#datepicker").data("kendoDatePicker");
-
-    var options = datepicker.options;
-    <script>
+        //initialize the DatePicker
+        $("#datepicker").kendoDatePicker();
+        //get instance of the DatePicker
+        var datepicker = $("#datepicker").data("kendoDatePicker");
+        //Get the DatePicker options object
+        var options = datepicker.options;
+        console.log("options", options)
+    </script>
 
 ## Methods
 
@@ -818,7 +820,7 @@ Opens the calendar.
 
 ### setOptions
 
-Changes the initial DatePicker configuration.
+Changes the initial DatePicker configuration by updating the options object. The options object holds all available [DatPicker configuration fields](/api/javascript/ui/datepicker#configuration).
 
 #### Parameters
 

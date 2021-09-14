@@ -56,15 +56,18 @@ How can I prevent the Kendo UI Grid from refreshing when I insert an item in the
     }).data("kendoGrid");
 
     setTimeout(function(e) {
+        //prevent the Grid from refreshing upon inserting a row
         dataSource.unbind("change", grid._refreshHandler);
         dataSource.insert(1, {
             id: 2,
             name: "Peter"
         });
+        //Bind back the change event handler of the dataSource to the Grid.
         dataSource.bind("change", grid._refreshHandler);
     }, 1000)
 
     setTimeout(function(e) {
+        //this will now refresh the Grid, change is bound
         dataSource.insert(2, {
             id: 3,
             name: "Michael"

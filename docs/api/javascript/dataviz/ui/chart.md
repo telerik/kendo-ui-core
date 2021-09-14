@@ -15371,6 +15371,27 @@ The width of the border in pixels. By default the border width is set to zero wh
     });
     </script>
 
+### series.markers.borderRadius `Number`
+
+The border radius in pixels when `type` is set to `"roundedRect"`. Defaults to 1/5 of the marker size.
+
+#### Example - set the chart series markers border radius
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: "line",
+        markers: {
+          visible: true,
+          type: "roundedRect",
+          borderRadius: 2
+        },
+        data: [1, 2, 3]
+      }]
+    });
+    </script>
+
 ### series.markers.from `Object`
 
 The chart series marker configuration for the "from" point. Supported for "rangeArea" and "verticalRangeArea" series.
@@ -15548,6 +15569,8 @@ The supported values are:
 * "square" - the marker shape is square.
 * "triangle" - the marker shape is triangle.
 * "cross" - the marker shape is cross.
+* "rect" - alias for "square".
+* "roundedRect" - the marker shape is a rounded rectangle.
 
 #### Example - set the chart series marker shape
 
@@ -17172,6 +17195,7 @@ The supported values are:
 * column
 * donut
 * funnel
+* heatmap
 * horizontalWaterfall
 * line
 * ohlc
@@ -26641,6 +26665,30 @@ The base time interval for the axis labels. The default baseUnit is determined a
     });
     </script>
 
+### xAxis.categories `Array`
+
+The category names. Applicable for charts with X and Y category axes (heatmap).
+
+#### Example - bind heatmap categories
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: 'heatmap',
+        data: [
+          [ 'a', 'v2', 1 ],
+          [ 'a', 'v1', 0 ]
+        ]
+      }],
+      xAxis: {
+        categories: ['a', 'b', 'c']
+      },
+      yAxis: {
+        categories: ['v1', 'v2']
+      }
+    });
+    </script>
+
 ### xAxis.color `String`
 
 The color of the axis. Accepts a valid CSS color string, including hex and rgb.
@@ -31784,6 +31832,30 @@ The base time interval for the axis labels. The default baseUnit is determined a
       yAxis: {
         type: "date",
         baseUnit: "hours"
+      }
+    });
+    </script>
+
+### yAxis.categories `Array`
+
+The category names. Applicable for charts with X and Y category axes (heatmap).
+
+#### Example - bind heatmap categories
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      series: [{
+        type: 'heatmap',
+        data: [
+          [ 'a', 'v2', 1 ],
+          [ 'a', 'v1', 0 ]
+        ]
+      }],
+      xAxis: {
+        categories: ['a', 'b', 'c']
+      },
+      yAxis: {
+        categories: ['v1', 'v2']
       }
     });
     </script>

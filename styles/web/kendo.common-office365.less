@@ -17,6 +17,7 @@
 
 @input-clear-icon-offset: ~"( (@{input-offset} - @{grid-size})/2 )";
 @combobox-clear-icon-offset: ~"( @{input-offset} + ((@{input-offset} - @{grid-size})/2) )";
+@multiselect-clear-icon-offset-with-arrow: @input-icon-width;
 @multiselect-clear-icon-top-offset: ~"( (@{input-height} - @{grid-size}) / 2 + @{input-padding-y} + 1px )";
 
 @editor-icon-size: 2em;
@@ -937,25 +938,26 @@
 @taskboard-column-header-actions-gap: calc(@taskboard-spacer / 2);
 @taskboard-column-header-font-weight: 500;
 
-@taskboard-column-cards-padding-y: 0;
-@taskboard-column-cards-padding-x: 0;
+@taskboard-column-cards-padding-y: null;
+@taskboard-column-cards-padding-x: null;
 @taskboard-column-cards-gap: calc(@taskboard-spacer / 2);
 
 @taskboard-column-new-calc-height: calc( @input-offset + (@taskboard-column-header-padding-y * 2) );
 
 @taskboard-pane-width: @taskboard-column-width;
-@taskboard-pane-padding-y: @taskboard-spacer;
-@taskboard-pane-padding-x: @taskboard-pane-padding-y;
+@taskboard-pane-padding-y: null;
+@taskboard-pane-padding-x: null;
 @taskboard-pane-border-width: 1px;
-@taskboard-pane-gap: @taskboard-spacer;
 
+@taskboard-pane-header-padding-y: calc(@taskboard-spacer * .75);
+@taskboard-pane-header-padding-x: @taskboard-spacer;
 @taskboard-pane-header-font-weight: 500;
 
-@taskboard-pane-content-padding-y: 0;
+@taskboard-pane-content-padding-y: 0px;
 @taskboard-pane-content-padding-x: @taskboard-spacer;
 
-@taskboard-pane-actions-padding-y: 0;
-@taskboard-pane-actions-padding-x: @taskboard-pane-actions-padding-y;
+@taskboard-pane-actions-padding-y: calc(@taskboard-spacer * .75);
+@taskboard-pane-actions-padding-x: @taskboard-spacer;
 
 @taskboard-card-padding-y: @taskboard-spacer;
 @taskboard-card-padding-x: @taskboard-card-padding-y;
@@ -996,6 +998,187 @@
 @scheduler-tooltip-event-padding-y: @padding-y;
 @scheduler-tooltip-event-border-radius: @border-radius;
 @scheduler-tooltip-event-gap: @padding-x-sm;
+
+
+// Captcha
+@captcha-spacer: @padding-x;
+
+@captcha-width: 280px;
+@captcha-font-family: inherit;
+@captcha-font-size: inherit;
+@captcha-line-height: @line-height;
+@captcha-gap: @captcha-spacer;
+
+@captcha-image-wrap-gap: @captcha-spacer;
+
+@captcha-image-controls-gap: @captcha-spacer;
+
+@captcha-validation-message-margin-top: calc( @captcha-spacer / 2 );
+@captcha-validation-message-font-size: 12px;
+@captcha-validation-message-font-style: italic;
+
+
+// Popover
+@popover-border-width: @card-border-width;
+@popover-border-style: solid;
+@popover-border-radius: @card-border-radius;
+@popover-font-size: inherit;
+@popover-font-family: inherit;
+@popover-line-height: @line-height;
+
+@popover-header-padding-y: @card-header-padding-y;
+@popover-header-padding-x: @card-header-padding-x;
+@popover-header-border-width: @card-header-border-width;
+@popover-header-border-style: @popover-border-style;
+
+@popover-body-padding-y: @card-body-padding-y;
+@popover-body-padding-x: @card-body-padding-x;
+
+@popover-actions-border-width: @popover-border-width;
+
+@popover-callout-width: @card-callout-width;
+@popover-callout-height: @card-callout-height;
+@popover-callout-border-width: @popover-border-width;
+@popover-callout-border-style: @popover-border-style;
+
+
+// Orgchart
+@orgchart-spacer: 24px;
+@orgchart-padding-y: @orgchart-spacer;
+@orgchart-padding-x: @orgchart-padding-y ;
+@orgchart-font-family: inherit;
+@orgchart-font-size: inherit;
+@orgchart-line-height: @line-height;
+
+@orgchart-node-gap: @orgchart-spacer;
+@orgchart-group-gap: @orgchart-spacer;
+@orgchart-node-container-gap: @orgchart-spacer;
+
+@orgchart-node-group-padding-y: @orgchart-spacer;
+@orgchart-node-group-padding-x: @orgchart-node-group-padding-y;
+@orgchart-node-group-border-width: 1px;
+@orgchart-node-group-border-radius: @border-radius;
+
+@orgchart-node-group-title-font-size: 16px;
+@orgchart-node-group-title-margin-bottom: calc( @orgchart-spacer / 3 );
+@orgchart-node-group-title-line-height: @line-height;
+
+@orgchart-node-group-subtitle-font-size: 14px;
+@orgchart-node-group-subtitle-margin-bottom: @orgchart-spacer;
+
+@orgchart-card-width: 300px;
+@orgchart-card-border-width: @card-border-width;
+
+@orgchart-card-title-margin-bottom: 0px;
+@orgchart-card-title-font-size: 16px;
+
+@orgchart-card-subtitle-margin-bottom: 0px;
+@orgchart-card-subtitle-font-size: 14px;
+
+@orgchart-card-body-border-width: 2px 0 0;
+@orgchart-card-body-border-color: transparent;
+
+@orgchart-card-body-vbox-margin-right: calc( @orgchart-spacer / 2 );
+@orgchart-card-body-vbox-min-height: @card-avatar-size;
+
+@orgchart-line-size: 1px;
+@orgchart-line-v-height: 25px;
+
+
+// Tabstrip
+@tabstrip-padding-x: 0;
+@tabstrip-padding-y: 0;
+@tabstrip-border-width: 0;
+
+@tabstrip-items-wrap-border-width: 0;
+
+@tabstrip-item-padding-x: 1em;
+@tabstrip-item-padding-y: .5em;
+@tabstrip-item-border-width: 0;
+@tabstrip-item-border-radius: 0;
+@tabstrip-item-gap: 0;
+
+@tabstrip-content-padding-x: 1em;
+@tabstrip-content-padding-y: 1em;
+@tabstrip-content-border-width: 0;
+
+
+// PivotGrid
+@pivotgrid-spacer: 16px;
+@pivotgrid-padding-x: null;
+@pivotgrid-padding-y: null;
+@pivotgrid-font-family: inherit;
+@pivotgrid-font-size: inherit;
+@pivotgrid-line-height: @line-height;
+@pivotgrid-border-width: 1px;
+
+@pivotgrid-row-header-width: 300px;
+@pivotgrid-column-header-height: 250px;
+
+@pivotgrid-cell-padding-x: @grid-cell-padding-x;
+@pivotgrid-cell-padding-y: @grid-cell-padding-y;
+@pivotgrid-cell-border-width: 1px;
+
+// Pivotgrid Configurator
+@pivotgrid-configurator-padding-x: null;
+@pivotgrid-configurator-padding-y: null;
+@pivotgrid-configurator-border-width: 1px;
+
+@pivotgrid-configurator-header-padding-x: @pivotgrid-spacer;
+@pivotgrid-configurator-header-padding-y: calc( @pivotgrid-spacer * .75 );
+@pivotgrid-configurator-header-font-size: 18px;
+@pivotgrid-configurator-header-font-weight: 500;
+
+@pivotgrid-configurator-content-padding-x: @pivotgrid-spacer;
+@pivotgrid-configurator-content-padding-y: 2px;
+
+@pivotgrid-configurator-fields-margin-x: 0px;
+@pivotgrid-configurator-fields-margin-y: calc( @pivotgrid-spacer / 2 );
+
+@pivotgrid-configurator-actions-padding-x: calc( @pivotgrid-spacer / 2 );
+@pivotgrid-configurator-actions-padding-y: calc( @pivotgrid-spacer * .75 );
+
+@pivotgrid-configurator-vertical-width: 320px;
+@pivotgrid-configurator-horizontal-height: 420px;
+
+@pivotgrid-configurator-button-padding-x: @padding-x-sm;
+@pivotgrid-configurator-button-padding-y: @pivotgrid-configurator-button-padding-x;
+@pivotgrid-configurator-button-border-width: 1px;
+@pivotgrid-configurator-button-size: ~"calc( (@{pivotgrid-line-height} * 1em) + (@{pivotgrid-configurator-button-padding-y} * 2) + (@{pivotgrid-configurator-button-border-width} * 2) )";
+
+// Calculated fields
+@pivotgrid-calculated-field-padding-x: @pivotgrid-spacer;
+@pivotgrid-calculated-field-padding-y: @pivotgrid-spacer;
+@pivotgrid-calculated-field-border-width: 1px;
+@pivotgrid-calculated-field-border-radius: @border-radius;
+@pivotgrid-calculated-field-gap: @pivotgrid-spacer;
+
+@pivotgrid-treeview-padding-x: calc( @pivotgrid-spacer / 2 );
+@pivotgrid-treeview-padding-y: 0px;
+
+
+// Chip
+@chips-margin: 8px;
+
+@chip-padding-x: 0px;
+@chip-padding-y: 4px;
+@chip-height: 24px;
+@chip-border-radius: calc( @chip-height / 2);
+@chip-font-size: 14px;
+
+@chip-selected-icon-size: 16px;
+@chip-selected-icon-offset: 4px;
+@chip-selected-icon-no-icon-offset: @chip-selected-icon-offset;
+@chip-selected-icon-font-size: @chip-font-size;
+
+@chip-content-padding-x: 8px;
+
+@chip-icons-size: 16px;
+@chip-icon-margin: 4px;
+@chip-remove-icon-margin: 8px;
+@chip-remove-icon-font-size: 14px;
+
+@chip-avatar-size: 16px;
 
 
 @import "common/all.less";
@@ -1508,14 +1691,6 @@
 }
 
 .k-spreadsheet {
-
-    .k-spreadsheet-sheets-bar {
-        height: 36px;
-
-        .k-button {
-            padding: 5px;
-        }
-    }
 
     .k-spreadsheet-quick-access-toolbar {
         .k-button {

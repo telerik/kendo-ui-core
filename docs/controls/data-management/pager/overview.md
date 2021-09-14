@@ -58,6 +58,7 @@ The following example demonstrates how to tie a pager to a data source and enabl
 * [Responsive Pager]({% slug responsive_kendoui_pager_widget  %})
 * [Pager Templates]({% slug templates_kendoui_pager_widget %})
 * [Globalization and Messages]({% slug globalization_kendoui_pager_widget %})
+* [Accessibility]({% slug accessibility_kendoui_pager_widget %})
 
 ## Events
 

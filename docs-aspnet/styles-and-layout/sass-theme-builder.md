@@ -13,6 +13,15 @@ position: 2
 
 The tool renders the same look and feel as the look and feel of all other components in the suite. It also delivers full control over the skin elements of each component and automatically updates its composite units. After you create the skin and achieve the desired look of the theme, the Sass Theme Builder enables you to download and integrate it in your project.
 
+Bootstrap 5 compatibility was added to the SASS themes in the R3 2021 release. As of R3 2021, you can choose from different predefined swatches of the SASS themes:
+
+* Default theme swatches: Main, Main Dark, Nordic, Purple, Turquoise. 
+* Bootstrap theme swatches: Main, Main Dark, Nordic, Urban, Vintage. 
+* Material theme swatches: Main, Arctic, Fuscia, Lime Dark, Main Dark. 
+* Classic theme swatches: Main, Opal, Silver.
+
+If you are using Bootstrap 4, we recommend using the Bootstrap-v4 swatch of the Bootstrap theme.
+
 **Figure 1: A preview of the Sass Theme Builder**
 
 ![Theme Builder Overview](images/theme-builder-overview-{{ site.framework_short }}.png)

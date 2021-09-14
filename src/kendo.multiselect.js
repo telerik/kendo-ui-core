@@ -84,6 +84,7 @@ var __meta__ = { // jshint ignore:line
             that._textContainer();
             that._loader();
             that._clearButton();
+            that._arrowButton();
 
             that._tabindex(that.input);
 
@@ -154,7 +155,8 @@ var __meta__ = { // jshint ignore:line
                 "singleTag": "item(s) selected",
                 "clear": "clear",
                 "deleteTag": "delete",
-                "noData": "No data found."
+                "noData": "No data found.",
+                "downArrow": "select"
             },
             enforceMinLength: false,
             delay: 100,
@@ -210,6 +212,7 @@ var __meta__ = { // jshint ignore:line
             this._tagTemplate();
             this._placeholder();
             this._clearButton();
+            this._arrowButton();
         },
 
         currentTag: function(candidate) {
@@ -340,23 +343,29 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var notInput = e.target.nodeName.toLowerCase() !== "input";
             var target = $(e.target);
-            var closeButton = target.hasClass("k-select") || target.hasClass("k-icon");
+            var closeButton = target.hasClass("k-select") || target.hasClass("k-icon"),
+                removeButton;
 
             if (closeButton) {
-                closeButton = !target.closest(".k-select").children(".k-i-arrow-60-down").length;
+                closeButton = target.closest(".k-select").children(".k-i-arrow-60-down").length;
+                removeButton = !target.closest(".k-select").children(".k-i-arrow-60-down").length;
             }
 
-            if (notInput && !(closeButton && kendo.support.mobileOS) && e.cancelable) {
+            if (notInput && !(removeButton && kendo.support.mobileOS) && e.cancelable) {
                 e.preventDefault();
             }
 
-            if (!closeButton) {
-                if (that.input[0] !== activeElement() && notInput) {
-                    that.input.focus();
-                }
+            if (!removeButton) {
+                if(closeButton && that.popup.visible()) {
+                    that.toggle(false);
+                } else {
+                    if (that.input[0] !== activeElement() && notInput) {
+                        that.input.focus();
+                    }
 
-                if (that.options.minLength === 1 && !that.popup.visible()) {
-                    that.open();
+                    if (that.options.minLength === 1 && !that.popup.visible()) {
+                        that.open();
+                    }
                 }
             }
 
@@ -533,6 +542,7 @@ var __meta__ = { // jshint ignore:line
                     .on("focusout" + ns, proxy(that._inputFocusout, that));
 
                 that._clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
+
                 input.removeAttr(DISABLED)
                      .removeAttr(READONLY)
                      .attr(ARIA_DISABLED, false)
@@ -1553,6 +1563,30 @@ var __meta__ = { // jshint ignore:line
             if (this.options.clearButton) {
                 this._clear.insertAfter(this.input);
                 this.wrapper.addClass("k-multiselect-clearable");
+            }
+        },
+
+        _arrowButton: function() {
+            var element = this.element,
+            arrowTitle = this.options.messages.downArrow,
+                arrow = $('<span unselectable="on" class="k-select" title="' + arrowTitle + '"><span class="k-icon k-i-arrow-60-down"></span></span></span>');
+
+            if (this.options.downArrow) {
+                this._arrow = arrow.attr({
+                    "role": "button",
+                    "tabIndex": -1
+                });
+
+                if (element.id) {
+                    this._arrow.attr("aria-controls", this.ul[0].id);
+                }
+
+                this._arrow.insertAfter(this.input);
+                this.wrapper.find(".k-multiselect-wrap").addClass("k-multiselect-wrap-arrow");
+            } else if(this._arrow) {
+                this._arrow.remove();
+                this._arrow = null;
+                this.wrapper.find(".k-multiselect-wrap").removeClass("k-multiselect-wrap-arrow");
             }
         },
 

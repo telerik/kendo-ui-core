@@ -13,7 +13,7 @@
             var elementB = $('<select id="listB"></select>').appendTo(Mocha.fixture);
             var elementC = $('<select id="listC"></select>').appendTo(Mocha.fixture);
             var elementD = $('<select id="listD"></select>').appendTo(Mocha.fixture);
-            
+
             listA  = elementA.kendoListBox({
                     dataSource: [ {name: "Tim", id:4 }, {name: "Johny", id:5 }, {name: "Dicky", id:6 }],
                     dataTextField: "name",
@@ -138,7 +138,7 @@
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
         move(draggedElement, targetOffset.left, targetOffset.top + 100);
-        assert.isOk($("body").find(".k-item.k-state-selected.k-reset.k-drag-clue").length === 1);
+        assert.isOk($("body").find(".k-drag-clue").length === 1);
         release(draggedElement, targetOffset.left, targetOffset.top + 100);
         assert.isOk(listA.items().find(".k-ghost").length === 0);
     });
@@ -147,7 +147,7 @@
         var mockedElement = $('<li class="k-item k-state-focused k-state-selected"/>');
         var hint = listA._draggable.options.hint(mockedElement)
 
-        assert.isOk(!hint.hasClass("k-state-focused"));                
+        assert.isOk(!hint.hasClass("k-state-focused"));
     });
     });
 }());

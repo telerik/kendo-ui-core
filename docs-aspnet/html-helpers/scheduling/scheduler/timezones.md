@@ -62,6 +62,12 @@ The `SchedulerEvent` instances are serialized by using [`JSON.stringify`](https:
 
 If you do not define a timezone option, your system timezone settings will apply by default.
 
+## Live Sample
+
+You can find a full working sample with Timezone defined and different cultures set dynamically here:
+
+[Localization and Globalization](https://demos.telerik.com/aspnet-mvc/scheduler/globalization)
+
 ## See Also
 
 * [Server-Side API](/api/scheduler)

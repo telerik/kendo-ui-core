@@ -9,7 +9,7 @@ position: 1
 
 # Scheduler HtmlHelper Overview
 
-The Telerik UI Scheduler HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Scheduler widget.
+The [Telerik UI Scheduler HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-core-ui/scheduler) is a server-side wrapper for the Kendo UI Scheduler widget.
 
 The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
