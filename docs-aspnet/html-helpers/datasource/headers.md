@@ -26,6 +26,8 @@ The following example demonstrates how to use the `Headers` option to set a requ
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
     {
+        // Get the request header "header1".
+        var Header1Value = Request.Headers["header1"];
         // Orders can be IQueriable or IEnumerable.
         return Json(orders.ToDataSourceResult(request));
     }

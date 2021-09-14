@@ -8,7 +8,7 @@ position: 5
 
 # Navigation Overview
 
-The navigation within the file structure in the FileManager is achieved with the help of an inbuilt [TreeView](#treeview) and [Breacrumb](#breadcrumb) components.
+The navigation within the file structure in the FileManager is achieved with the help of an inbuilt [TreeView](#treeview) and [Breadcrumb](#breadcrumb) components.
 
 ## TreeView
 On the left-hand side of the FileManager there is a nested [Kendo UI TreeView]({% slug overview_kendoui_treeview_widget %}) component, listing all folders loaded in the FileManager. The TreeView allows dragging and dropping files inside it, or between the Grid and ListView. It also provides you the possibility to rename files or folders, as well as execute commands with the inbuilt ContextMenu. 

@@ -5969,6 +5969,7 @@ Enables the DOM virtualization for vertical grouping of the view - renders batch
         }
       ]
     });
+	</script>
 
 ### views.workDays `Array`
 

@@ -557,6 +557,10 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
+            if (!this.dataSource.total() && !candidate) {
+                candidate = -1;
+            }
+
             return candidate;
         },
 

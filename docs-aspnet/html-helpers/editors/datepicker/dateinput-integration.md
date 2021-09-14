@@ -24,6 +24,8 @@ To use the DateInput as the input element in a DatePicker, enable the [`DateInpu
         .Value("10/10/2019")
     )
 ```
+The component also provides the `.Format(...)` option and it can be leveraged to set the date format, which will be used to parse and format the machine date. Defaults to **CultureInfo.DateTimeFormat.ShortDatePattern**.
+
 
 ## See Also
 

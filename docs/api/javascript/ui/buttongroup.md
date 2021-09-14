@@ -440,7 +440,7 @@ A boolean flag that indicates whether the widget should be enabled or disabled.
             enable: false
         });
         function enable() {
-            $("#btnGroup").data("kendoButtonGroup").enable(true);
+            $("#buttongroup").data("kendoButtonGroup").enable(true);
         }
     </script>
 

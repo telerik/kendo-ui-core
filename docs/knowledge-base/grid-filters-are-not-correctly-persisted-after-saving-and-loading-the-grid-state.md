@@ -45,7 +45,6 @@ The `JSON.stringify()` method that is internally used by the `kendo.stringify()`
 Programmatically apply the time offset before the filter is set again.
 
 ```dojo
- <body>
 
     <div id="example">
       <div class="box wide">
@@ -56,7 +55,6 @@ Programmatically apply the time offset before the filter is set again.
 
       <script>
         $(document).ready(function () {
-          var saved;
           $("#grid").kendoGrid({
             dataSource: {
               type: "odata",
@@ -103,7 +101,6 @@ Programmatically apply the time offset before the filter is set again.
           var grid = $("#grid").data("kendoGrid");
 
           $("#save").click(function (e) {
-            saved = true;
             e.preventDefault();
             localStorage["kendo-grid-options"] = kendo.stringify(grid.getOptions());
           });
@@ -113,23 +110,20 @@ Programmatically apply the time offset before the filter is set again.
             var options = localStorage["kendo-grid-options"];
             if (options) {
               var parsedOptions = JSON.parse(options)
-              if(saved && parsedOptions.dataSource.filter != undefined){
+              if(parsedOptions.dataSource.filter != undefined && parsedOptions.dataSource.filter.filters != undefined){
                 for (let i = 0; i<parsedOptions.dataSource.filter.filters.length; i++ ){
                   if(parsedOptions.dataSource.filter.filters[i].field = "Start"){
-                    // Take the current offset
-                    var currentoffset = (new Date()).getTimezoneOffset()
-                    var newTime = new Date(parsedOptions.dataSource.filter.filters[i].value)
-                    // Set the offset to the date
-                    newTime.setHours(newTime.getHours() + currentoffset/60);
+                    // Parse the date string.
+                    var newTime = new Date(parsedOptions.dataSource.filter.filters[i].value);
+                    // Set the offset to the date.
+                    kendo.timezone.apply(newTime, 0);
                     parsedOptions.dataSource.filter.filters[i].value = newTime
                   }
                 }
-                saved = false;
               }
 
               grid.setOptions(parsedOptions);
             }
-
           });
         });
       </script>

@@ -8,7 +8,7 @@ position: 2
 
 # Razor Page
 
-This article describes how to configure the Telerik UI Slider HtmlHelper for {{ site.framework }} in a RazorPages scenario.
+This article describes how to configure the [Telerik UI Slider HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-core-ui/slider) in a RazorPages scenario.
 
 See the Slider configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 

@@ -162,7 +162,7 @@ The following example demonstrates the full initialization of the [DatePicker](h
 
 ## Next Steps
 
-* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_installation %})
+* [Create your own custom bundles]({% slug include_only_what_you_need_kendoui_scripts %})
 * [Learn about the widget DOM element structure]({% slug widgetwrapperandelement_references_gettingstarted %})
 * [Initialize widgets as jQuery plugins]({% slug initialize_widgets_using_jquery_plugins_installation %})
 * [Initialize widgets with MVVM]({% slug mvvm_initialization_kendoui %})

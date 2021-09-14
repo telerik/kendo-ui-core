@@ -72,10 +72,10 @@
             assert.equal(calendarStub.calls('_footer'), 0);
         });
 
-        it("calendar view element should not contain k-calendar-monthview class when componentType is set to classic", function () {
+        it("calendar view element should contain k-calendar-monthview class when componentType is set to classic", function () {
             var cal = new Calendar(div);
 
-            assert.equal(cal.element.find(".k-calendar-monthview").length, 0);
+            assert.equal(cal.element.find(".k-calendar-monthview").length, 1);
         });
 
         it("calendar table element should contain k-calendar-content class when componentType is set to modern", function () {

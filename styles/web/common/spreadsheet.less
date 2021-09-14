@@ -145,8 +145,7 @@
             width: 100%;
             padding-left: 31px; // XXX: Move to code
 
-            &::before {
-                .use-font-icon();
+            > .k-i-formula-fx {
                 content: "\e691";
                 display: block;
                 position: absolute;
@@ -252,8 +251,33 @@
         z-index: 50;
     }
 
+    // bottom TabStrip
+
     .k-spreadsheet-sheets-bar {
         border-width: 1px 0 0;
+        padding: 0 4px 4px;
+        position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 8px;
+
+        > .k-button {
+            flex-shrink: 0;
+        }
+
+        .k-tabstrip {
+            padding: 0;
+            flex: 1;
+            border-width: 0;
+            background-color: transparent;
+            overflow: hidden;
+        }
+
+        .k-tabstrip .k-tabstrip-items li .k-link[data-type='remove'] {
+            padding-left: 6px;
+            padding-right: 6px;
+        }
     }
 
     .k-vertical-align-top {}
@@ -743,7 +767,7 @@ div.k-spreadsheet-window {
 }
 
 .k-spreadsheet-quick-access-toolbar .k-button,
-.k-button.k-spreadsheet-sheets-bar-add {
+.k-spreadsheet-sheets-bar .k-button {
     border-color: transparent;
     background-color: transparent;
     background-image: none;
@@ -818,34 +842,6 @@ div.k-spreadsheet-window {
     .k-item {
         padding: 0 .3em;
         box-shadow: none;
-    }
-}
-
-// bottom TabStrip
-
-.k-spreadsheet-sheets-bar {
-    position: relative;
-}
-
-.k-button.k-spreadsheet-sheets-bar-add {
-    position: absolute;
-    bottom: .2em;
-    left: .4em;
-    z-index: 1;
-}
-
-.k-spreadsheet-sheets-bar .k-spreadsheet-sheets-remove {
-    padding: 0;
-    margin: .5em .5em .5em -.5em;
-    vertical-align: middle;
-
-    .k-button-icon {
-        padding: 2px;
-        line-height: normal;
-    }
-
-    .k-icon {
-        margin: 0;
     }
 }
 

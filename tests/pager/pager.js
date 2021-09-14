@@ -842,7 +842,6 @@
                 var pager = $("<div />").appendTo(Mocha.fixture).kendoPager({
                     dataSource: dataSource
                 }).data('kendoPager');
-                debugger
                 dataSource._groupsState[dataSource.view()[0].uid] = true
                 pager.refresh();
 

@@ -206,7 +206,7 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.wrapper = that.element.addClass("k-widget k-reset k-header k-panelbar");
+            element = that.wrapper = that.element.addClass("k-widget k-reset k-panelbar");
             options = that.options;
 
             if (element[0].id) {

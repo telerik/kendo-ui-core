@@ -22,14 +22,65 @@ The following table lists the individual script files for the Kendo UI widgets t
 | [ExpansionPanel](https://demos.telerik.com/kendo-ui/expansionpanel/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.expansionpanel.js | |
-| [Form](https://demos.telerik.com/kendo-ui/form/index | jquery.js | |
+| [Form](https://demos.telerik.com/kendo-ui/form/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.data.js | |
+| | kendo.popup.js | |
+| | kendo.list.js | |
+| | kendo.dropdownlist.js | |
+| | kendo.userevents.js | |
+| | kendo.selectable.js | |
+| | kendo.calendar.js | |
+| | kendo.datepicker.js | |
+| | kendo.floatinglabel.js | |
+| | kendo.numerictextbox.js | |
+| | kendo.validator.js | |
+| | kendo.binder.js | |
 | | kendo.editable.js | |
+| | kendo.autocomplete.js | DropDowns feature (optional) |
+| | kendo.combobox.js | DropDowns feature (optional) |
+| | kendo.multiselect.js | DropDowns feature (optional) |
+| | kendo.treeview.js | DropDowns feature (optional) |
+| | kendo.dropdowntree.js | DropDowns feature (optional) |
+| | kendo.multicolumncombobox.js | DropDowns feature (optional) |
+| | kendo.dateinput.js | DatePickers feature (optional) |
+| | kendo.timepicker.js | DatePickers feature (optional) |
+| | kendo.datetimepicker.js | DatePickers feature (optional) |
+| | kendo.maskedtextbox.js | Inputs feature (optional) |
+| | kendo.switch.js | Inputs feature (optional) |
+| | kendo.rating.js | Inputs feature (optional) |
+| | kendo.draganddrop.js | Inputs feature (optional) |
+| | kendo.slider.js | Inputs feature (optional) |
+| | kendo.color.js | Inputs feature (optional) |
+| | kendo.badge.js | Inputs feature (optional) |
+| | kendo.button.js | Inputs feature (optional) |
+| | kendo.colorpicker.js | Inputs feature (optional) |
+| | kendo.inputgroupbase.js | Inputs feature (optional) |
+| | kendo.radiogroup.js | Inputs feature (optional) |
+| | kendo.checkboxgroup.js | Inputs feature (optional) |
+| | kendo.textbox.js | Inputs feature (optional) |
+| | kendo.textarea.js | Inputs feature (optional) |
+| | kendo.combobox.js | Editor feature (optional) |
+| | kendo.draganddrop.js | Editor feature (optional) |
+| | kendo.window.js | Editor feature (optional) |
+| | kendo.color.js | Editor feature (optional) |
+| | kendo.slider.js | Editor feature (optional) |
+| | kendo.badge.js | Editor feature (optional) |
+| | kendo.button.js | Editor feature (optional) |
+| | kendo.colorpicker.js | Editor feature (optional) |
+| | kendo.editor.js | Editor feature (optional) |
 | | kendo.form.js | |
 | [Notification](https://demos.telerik.com/kendo-ui/notification/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.popup.js | |
 | | kendo.fx.js | Animation feature (optional) |
 | | kendo.notification.js | |
+| [Popover](https://demos.telerik.com/kendo-ui/popover/index) | jquery.js | |
+| | kendo.core.js | |
+| | kendo.popup.js | |
+| | kendo.tooltip.js | |
+| | kendo.fx.js | Animation feature (optional) |
+| | kendo.popover.js | |
 | [Responsive Panel](https://demos.telerik.com/kendo-ui/responsive-panel/index) | jquery.js | |
 | | kendo.core.js | |
 | | kendo.responsive-panel.js | |
@@ -41,8 +92,11 @@ The following table lists the individual script files for the Kendo UI widgets t
 | | kendo.splitter.js | |
 | [TileLayout](https://demos.telerik.com/kendo-ui/tilelayout/index) | jquery.js | |
 | | kendo.core.js | |
-| | kendo.draganddrop.js | |
-| | kendo.resizable.js | |
+| | kendo.userevents.js | Resizable feature (optional) |
+| | kendo.draganddrop.js | Resizable feature (optional) |
+| | kendo.resizable.js | Resizable feature (optional) |
+| | kendo.userevents.js | Reorderable feature (optional) |
+| | kendo.draganddrop.js | Reorderable feature (optional) |
 | | kendo.tilelayout.js | |
 | [Tooltip](https://demos.telerik.com/kendo-ui/tooltip/index) | jquery.js | |
 | | kendo.core.js | |

@@ -4854,6 +4854,30 @@ function pad(number, digits, end) {
         return observable;
     };
 
+    kendo.getSeriesColors = function() {
+        var seriesColorsTemplate = '<div class="k-var--series-a"></div>' +
+                '<div class="k-var--series-b"></div>' +
+                '<div class="k-var--series-c"></div>' +
+                '<div class="k-var--series-d"></div>' +
+                '<div class="k-var--series-e"></div>' +
+                '<div class="k-var--series-f"></div>',
+            series = $(seriesColorsTemplate),
+            colors = [];
+
+        series.appendTo($('body'));
+
+        series.each(function(i, item) {
+            colors.push($(item).css("background-color"));
+        });
+
+        series.remove();
+
+        return colors;
+    };
+
+    kendo.isElement = function(element) {
+        return element instanceof Element || element instanceof HTMLDocument; // jshint ignore:line
+    };
 
     // Kendo defaults
     (function() {

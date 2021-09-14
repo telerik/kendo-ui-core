@@ -15,14 +15,15 @@ The following example demonstrates how to enable the default built-in `No Record
         .Name("Grid")
         .NoRecords()
     )
-
+{% if site.core %}
+{% else %}
 The following example demonstrates how to define a custom `No Records` message. In this case, the custom message is be displayed centered inside the empty Grid's data area.
 
     @(Html.Kendo().Grid<Order>()
         .Name("Grid")
         .NoRecords("string HTML template, automatically centered")
     )
-
+{% endif %}
 The following example demonstrates how to define a non-centered custom `No Records` message. In this case, the custom message is displayed with no centering styles applied, which allows an easier and more advanced appearance customization through custom CSS code.
 
     @(Html.Kendo().Grid<Order>()

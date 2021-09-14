@@ -40,7 +40,7 @@ var __meta__ = { // jshint ignore:line
         LABELCLASSES = "k-label k-input-label",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
-        STATE_INVALID = "k-state-invalid",
+        STATEINVALID = "k-state-invalid",
         ARIA_DISABLED = "aria-disabled",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
@@ -394,9 +394,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var element = that.element;
 
-            that._validationIcon = $("<span class='" + CLASS_ICON + " k-i-warning'></span>")
-                .hide()
-                .insertAfter(element);
+            that._validationIcon = $("<span class='" + CLASS_ICON + " k-i-warning k-hidden'></span>").insertAfter(element);
         },
 
         _blur: function() {
@@ -633,14 +631,16 @@ var __meta__ = { // jshint ignore:line
 
         _addInvalidState: function () {
             var that = this;
-            that._inputWrapper.addClass(STATE_INVALID);
-            that._validationIcon.show();
+
+            that._inputWrapper.addClass(STATEINVALID);
+            that._validationIcon.removeClass('k-hidden');
         },
 
         _removeInvalidState: function () {
             var that = this;
-            that._inputWrapper.removeClass(STATE_INVALID);
-            that._validationIcon.hide();
+
+            that._inputWrapper.removeClass(STATEINVALID);
+            that._validationIcon.addClass('k-hidden');
             that._invalidStateTimeout = null;
         },
 

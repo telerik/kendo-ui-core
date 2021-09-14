@@ -42,5 +42,39 @@
 
             assert.equal(element.find("input").attr("aria-label"), "1");
         });
+
+        it("page link buttons should have aria-label", function() {
+            var element = setup(null, { navigatable: true, numeric: true });
+            pager.page(1);
+            assert.equal(element.find(".k-pager-numbers .k-link:eq(0)").attr("aria-label"), "Page 1");
+        });
+
+        it("pager element should have aria-label", function() {
+            var element = setup(null, { navigatable: true, numeric: true });
+            pager.page(1);
+            assert.equal(element.attr("aria-label"), "Page navigation, page 1 of 5");
+        });
+
+        it("pager dropdown should have aria-label", function() {
+            var element = setup(null, { navigatable: true, pageSizes: [1, 2] });
+            pager.page(1);
+            assert.equal(element.find(".k-widget.k-dropdown").attr("aria-label"), "Page sizes drop down");
+        });
+    });
+
+    describe("kendo.ui.Pager Axe", function() {
+        beforeEach(function() {
+        });
+
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("pager is accessible", function(done) {
+            var element = setup(null, { navigatable: true, input: true,
+                numeric: true,  refresh: true,  pageSizes: [1, 2] });
+
+            axeRunFixture(done);
+        });
     });
 }());

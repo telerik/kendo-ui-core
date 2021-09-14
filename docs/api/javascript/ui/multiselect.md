@@ -273,7 +273,7 @@ The field of the data item that provides the value of the widget.
 
 ### delay `Number`*(default: 200)*
 
- Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
+Specifies the delay in milliseconds after which the MultiSelect will start filtering dataSource.
 
 #### Example - set the delay
 
@@ -284,6 +284,22 @@ The field of the data item that provides the value of the widget.
     <script>
     $("#multiselect").kendoMultiSelect({
         delay: 1000 // wait 1 second before filtering
+    });
+    </script>
+
+### downArrow `Boolean`*(default: false)*
+
+Configures MultiSelect to render a down arrow that opens and closes its popup.
+
+#### Example
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+        downArrow: true
     });
     </script>
 
@@ -526,6 +542,27 @@ The text message shown when hovering delete icon in a selected tag.
             dataValueField: "id",
             messages: {
                 deleteTag: "delete!"
+            }
+        });
+    </script>
+
+### messages.downArrow `String` *(default: "select")*
+
+Specifies the text that will be used for the MultiSelect `downArrow` title attribute.
+
+#### Example
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",
+            messages: {
+                downArrow: "custom!"
             }
         });
     </script>

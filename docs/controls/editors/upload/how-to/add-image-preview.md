@@ -47,7 +47,7 @@ The following example demonstrates how to add an image preview and read the file
           reader.onloadend = function () {
             var preview = $("<img class='image-preview'>").attr("src", this.result);
 
-            wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+            wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-group-wrapper")
               .replaceWith(preview);
           };
 

@@ -59,9 +59,9 @@ The following example demonstrates how to initialize the ActionSheet from an exi
 
 ## Functionality and Features
 
-* [Items]({% slug items_actionsheet_widget %}) - the configuration allows you to set various attributes like icons and text.
-* [Events]({% slug events_actionsheet_widget %}) - the exposed events of the component.
-* [Accessibility]({% slug accessibility_kendoui_actionsheet_widget %}) - the ActionSheet supports various accessibility standards.
+* [Items]({% slug items_actionsheet_widget %})&mdash;The configuration allows you to set various attributes like icons and text.
+* [Events]({% slug events_actionsheet_widget %})&mdash;The exposed events of the component.
+* [Accessibility]({% slug accessibility_kendoui_actionsheet_widget %})&mdash;The ActionSheet supports various accessibility standards.
 
 ## See Also
 

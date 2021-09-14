@@ -32,7 +32,7 @@ The Switch provides [accessibility support]({% slug accessibility_aspnetcore_swi
 
 ## Events
 
-You can subscribe to all Switch events. For a complete example on basic Slider events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/{{ site.platform }}/switch/events).
+You can subscribe to all Switch events. For a complete example on basic Switch events, refer to the [demo on using the events of the Slider](https://demos.telerik.com/{{ site.platform }}/switch/events).
 
 ### Handling by Handler Name
 

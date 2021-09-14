@@ -31,7 +31,7 @@ The following example demonstrates how to customize the AutoComplete by declarin
     )
 ```
 
-The following example demonstrates how to customize the DropDownList by referencing a script tag by its `id`.
+The following example demonstrates how to customize the AutoComplete by referencing a script tag by its `id`.
 
 ```
     <!-- Template -->

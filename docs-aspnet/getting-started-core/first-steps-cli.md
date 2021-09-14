@@ -4,7 +4,7 @@ page_title: Getting Started with CLI
 description: "Create a sample project with the command-line interface on any platform with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 previous_url: /aspnetmvc-apps/mvc-6/getting-started-linux, /mvc-6/getting-started-linux, /getting-started/getting-started-linux, /getting-started/getting-started-vscode, /getting-started/getting-started-cli
 slug: gettingstartedcli_aspnetmvc6_aspnetmvc
-position: 3
+position: 4
 permalink: /getting-started/first-steps-cli
 ---
 
@@ -120,6 +120,10 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
       <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
       <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 
+      If you prefer to include the client-side resources from a local source instead of CDNs, consider the following article:
+
+      [Local Client-side Resources](https://docs.telerik.com/aspnet-core/installation/getting-started-copy-client-resources#including-client-side-resources)
+
 6. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
 	```tab-HtmlHelper
@@ -140,6 +144,12 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
 7. Navigate to the project folder by using the Terminal (cmd) and run it by using the `dotnet run` command. The **Index** page will display a [Kendo UI DatePicker]({% slug htmlhelpers_datepicker_aspnetcore %}). As a result, the following sample page is created.
 
     ![The created sample page](../getting-started-core/images/sample-page.png)
+
+## JSON Serialization
+
+The default casing for JSON strings in ASP.NET Core is Camel-case. The Telerik UI components that are data-bound depend on Pascal-case formatted response from the server. To find out how to configure the application to return the data in Pascal-case, refer to the following article:
+
+* [JSON Serialization]({% slug jsonserialization_core %})
 
 ## Next Steps
 

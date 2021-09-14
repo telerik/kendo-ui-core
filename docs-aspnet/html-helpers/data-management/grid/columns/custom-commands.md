@@ -31,6 +31,16 @@ To include a command column which will render a button for triggering the comman
 
 For a runnable example, refer to the [demo on implementing custom commands in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/custom-command).
 
+## Features
+
+The custom command button offers the following features: 
+
+* `HtmlAttributes` - set custom HTML attributes to the underlying HTML of the button
+* `IconClass` - set an icon of your choice by providing the icon's name
+* `Template` and `TemplateId` - customize the appearance of the button via a template
+* `Text` - set the text of the button
+* `Visible` - conditionally determine whether the button should be visible via JavaScript (pass the name of the JavaScript function to this option)
+
 ## See Also
 
 * [Knowledge Base Section](/knowledge-base)

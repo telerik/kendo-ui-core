@@ -21,7 +21,7 @@
         it("the wrapper field is set to the wrapper of created by the tabstrip", function() {
             tabstrip = new kendo.ui.TabStrip(dom);
 
-            assert.equal(tabstrip.wrapper[0], dom.parent()[0]);
+            assert.equal(tabstrip.wrapper[0], dom.parent().parent()[0]);
         });
 
         it("the wrapper has k-widget and k-tabstrip css classes", function() {
@@ -40,27 +40,6 @@
             assert.isOk($._data( tabstrip.wrapper[0], "events" ).keydown, "Keydown event attached");
         });
 
-        it("adds a scroll stopping wrapper around itself", function() {
-            tabstrip = new kendo.ui.TabStrip(dom);
-
-            assert.isOk(tabstrip.scrollWrap.is(".k-tabstrip-wrapper"), "Adds wrapper class");
-            assert.isOk(tabstrip.wrapper.parent(".k-tabstrip-wrapper").length, "Wraps around the TabStrip");
-        });
-
-        it("doesn't add a scroll stopping wrapper if there is one already", function() {
-            tabstrip = new kendo.ui.TabStrip(dom.wrap('<div class="k-tabstrip-wrapper"></div>'));
-
-            assert.isOk(dom.parents(".k-tabstrip-wrapper").length == 1, "Only one wrapper around the TabStrip");
-        });
-
-        it("removes its scrolling wrapper on destroy", function() {
-            tabstrip = new kendo.ui.TabStrip(dom);
-
-            tabstrip.destroy();
-
-            assert.isOk(!tabstrip.wrapper.parent().is(".km-tabstrip-wrapper"), "Unwraps the wrapper");
-        });
-
         it("applies a default top tab position CSS class", function () {
             tabstrip = new kendo.ui.TabStrip(dom);
 
@@ -76,7 +55,7 @@
         it("moves tabs at the bottom when bottom tab position is defined", function () {
             tabstrip = new kendo.ui.TabStrip(dom, { tabPosition: "bottom" });
 
-            assert.isOk(tabstrip.wrapper.children().last().is(".k-tabstrip-items"), "Tabs are at the bottom");
+            assert.isOk(tabstrip.wrapper.children().last().is(".k-tabstrip-items-wrapper"), "Tabs are at the bottom");
         });
 
         it("adds tabindex=0 to all tab contents", function () {
@@ -119,8 +98,8 @@
                 } ]
             });
 
-            assert.equal(tabstrip.wrapper.children("div")[0].id.length, 38);
-            assert.equal(tabstrip.wrapper.children("div")[1].id.length, 38);
+            assert.equal(tabstrip.wrapper.children("div:not(.k-tabstrip-items-wrapper)")[0].id.length, 38);
+            assert.equal(tabstrip.wrapper.children("div:not(.k-tabstrip-items-wrapper)")[1].id.length, 38);
         });
 
         it("adds tabindex=0 to all tab contents when initialized from element", function() {

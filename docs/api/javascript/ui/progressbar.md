@@ -51,6 +51,20 @@ The duration of each progress animation in milliseconds.
 	  });
 	</script>
 
+### ariaRole `Boolean` *(default: false)*
+
+If set to `true` the ProgressBar will have its `role` attribute set to `progressbar`. It will also render its `aria-valuemin`, `aria-valuemax`, and `aria-valuenow` attributes.
+
+#### Example
+
+    <div id="pb"></div>
+    <script>
+		$("#pb").kendoProgressBar({
+			label: "label",
+			ariaRole: true
+		});
+    </script>
+
 ### chunkCount `Number` *(default: 5)*
 
 Specifies the number of chunks.
@@ -79,6 +93,35 @@ If set to `false` the widget will be disabled. It will still allow changing the 
 	    enable: false
 	  });
 	</script>
+
+### label `String`
+
+The label that would be used as a `aria-label` for the ProgressBar element. Will be applied only if `ariaRole` is set to `true`.
+
+#### Example
+
+    <div id="pb"></div>
+    <script>
+		$("#pb").kendoProgressBar({
+			label: "label",
+			ariaRole: true
+		});
+    </script>
+
+### labelId `String`
+
+The ID of the element that will be used as a label of the ProgressBar. Will be used as a value of the `aria-labelledby` attribute. Will be applied only if `ariaRole` is set to `true`.
+
+#### Example
+
+	<label id="label">This is the label</label>
+    <div id="pb"></div>
+    <script>
+		$("#pb").kendoProgressBar({
+			labelId: "label",
+			ariaRole: true
+		});
+    </script>
 
 ### max `Number` *(default: 100)*
 

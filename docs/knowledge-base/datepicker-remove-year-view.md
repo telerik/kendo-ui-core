@@ -64,7 +64,7 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
 
 
             if (calendar.view().name === "year") {
-                calendar.element.find(".k-header").css("display", "none");
+                calendar.element.find(".k-header").addClass("k-hidden");
             };
 
             calendar.bind("navigate", function(e) {
@@ -72,11 +72,11 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
                 var view = cal.view();
 
                 if (view.name === "year") {
-                    cal.element.find(".k-header").css("display", "none");
+                    cal.element.find(".k-header").addClass("k-hidden");
                 } else {
                     var navFast = $(".k-nav-fast");
 
-                    var dsa = cal.element.find(".k-header").css("display", "block");
+                    var dsa = cal.element.find(".k-header").removeClass("k-hidden");
                     navFast[0].innerText = navFast[0].innerText.slice(0, -5);
                 }
 
@@ -86,7 +86,7 @@ The following example demonstrates how to hide the year view in a Kendo UI DateP
             var calendar = e.sender.dateView.calendar;
 
             calendar.unbind("navigate");
-            calendar.element.find(".k-header").css("display", "block");
+            calendar.element.find(".k-header").removeClass("k-hidden");
         }
     });
 </script>

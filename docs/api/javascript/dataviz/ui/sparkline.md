@@ -5879,13 +5879,35 @@ The point value represented as a percentage value. Available only for donut, pie
 
 ### seriesHover
 
-Fires when chart series are hovered.
+Fires when chart series are hovered. The data that is available when the event is fired is listed below.
 
 #### Example
 
-    function onSeriesHover(e) {
-        alert("Hovered value: " + e.value);
-    }
+    <h4>Climate control history</h4>
+    <span id="hum-log"></span>
+    <script>
+      function createSparklines() {
+        $("#hum-log").kendoSparkline({
+          type: "area",
+          data: [
+            71, 70, 69, 68, 65, 60, 55, 55, 50, 52,
+            73, 72, 72, 71, 68, 63, 57, 58, 53, 55,
+            63, 59, 61, 64, 58, 53, 48, 48, 45, 45,
+            63, 64, 63, 67, 58, 56, 53, 59, 51, 54
+          ],
+          tooltip: {
+            format: "{0} %"
+          },
+          seriesHover: onSeriesHover
+        });
+      }
+
+      function onSeriesHover(e) {
+        console.log("Hovered value: " + e.value);
+      }
+
+      $(document).ready(createSparklines);
+    </script>
 
 #### Event Data
 

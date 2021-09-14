@@ -244,7 +244,7 @@ var __meta__ = {// jshint ignore:line
             wrapper = element.wrap("<span class='k-widget k-textarea'></span>").parent();
             wrapper[0].style.cssText = DOMElement.style.cssText;
             DOMElement.style.width = "100%";
-            that.wrapper = wrapper.addClass(DOMElement.className).removeClass('input-validation-error');
+            that._inputWrapper = that.wrapper = wrapper.addClass(DOMElement.className).removeClass('input-validation-error');
         }
     });
     ui.plugin(TextArea);

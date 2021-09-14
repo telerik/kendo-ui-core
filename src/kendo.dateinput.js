@@ -62,7 +62,7 @@ var __meta__ = { // jshint ignore:line
 
             that._inputWrapper = $(that.wrapper[0]);
 
-            $("<span class='k-icon k-i-warning'></span>").insertAfter(element);
+            that._validationIcon = $("<span class='k-icon k-i-warning k-hidden'></span>").insertAfter(element);
 
             that._form();
 
@@ -312,11 +312,31 @@ var __meta__ = { // jshint ignore:line
                 this._keydown(newEvent);
             }
             if (blinkInvalid) {
-                clearTimeout(that._blinkInvalidTimeout);
-                var stateInvalid = STATEINVALID;
-                that.wrapper.addClass(STATEINVALID);
-                that._blinkInvalidTimeout = setTimeout(function () { that.wrapper.removeClass(stateInvalid); }, 100);
+                that._blinkInvalidState();
             }
+        },
+
+        _blinkInvalidState: function () {
+            var that = this;
+
+            that._addInvalidState();
+            clearTimeout(that._invalidStateTimeout);
+            that._invalidStateTimeout = setTimeout(proxy(that._removeInvalidState, that), 100);
+        },
+
+        _addInvalidState: function() {
+            var that = this;
+
+            that.wrapper.addClass(STATEINVALID);
+            that._validationIcon.removeClass("k-hidden");
+        },
+
+        _removeInvalidState: function () {
+            var that = this;
+
+            that.wrapper.removeClass(STATEINVALID);
+            that._validationIcon.addClass("k-hidden");
+            that._invalidStateTimeout = null;
         },
 
         _mouseUp: function () {

@@ -50,7 +50,7 @@ Specifies whether a pane is initially collapsed (**true**) or expanded (**false*
 
 ### panes.collapsedSize `String`
 
-Specifies the size of a collapsible pane when collapsed, defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). 
+Specifies the size of a collapsible pane when collapsed, defined as pixels (i.e. "200px") or as a percentage (i.e. "50%").
 When the pane is collapsed a **.k-state-collapsed** class is added to it to ease its styling.
 Note: This value must not exceed **panes.max** or be less then **panes.min**.
 
@@ -95,6 +95,53 @@ Specifies the URL from which to load the content of a pane.
     <script>
     $("#splitter").kendoSplitter({
       panes: [ {}, { contentUrl: "https://www.telerik.com/" } ]
+    });
+    </script>
+
+### panes.label `String`
+
+The label of the current pane. Will be used as a `aria-label` for the Splitter `separator` that has the pane as its primary one (the separator that is immediately after the pane).
+
+#### Example
+
+    <div id="splitter">
+      <div>Pane A</div>
+      <div></div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      panes: [ {
+        label: "Label A"
+      }, {
+        contentUrl: "https://www.telerik.com/",
+        label: "Label from URL"
+      } ]
+    });
+    </script>
+
+### panes.labelId `String`
+
+The ID of the element that should be used as a label of the current pane. Will be used as a value of the `aria-labelledby` attribute for the Splitter `separator` that has the pane as its primary one (the separator that is immediately after the pane).
+
+#### Example
+
+    <div id="splitter">
+      <div>
+        <h5 id="ha">Title A</h5>
+        Pane A
+      </div>
+      <div>
+        <h5 id="hb">Title B</h5>
+        Pane B
+      </div>
+    </div>
+    <script>
+    $("#splitter").kendoSplitter({
+      panes: [ {
+        labelId: "ha"
+      }, {
+        labelId: "hb"
+      } ]
     });
     </script>
 

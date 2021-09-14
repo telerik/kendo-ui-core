@@ -16,6 +16,7 @@ Currently, Kendo UI delivers the following Sass themes:
 * Kendo UI Default v.2&mdash;The latest update of the Kendo UI Default theme.
 * Kendo UI Bootstrap v.4&mdash;To achieve similarity with the Bootstrap look and feel, the theme has linked variables to Bootstrap. This means that customizing the original Bootstrap theme will affect the Kendo UI theme as well.
 * Kendo UI Material&mdash;An update of the Kendo UI Material Theme to closely implement the [Material Design Guidelines](https://material.io/design/).
+* Kendo UI Classic&mdash;An SCSS-based variant of the Less Default theme.
 
 ## Less- vs. Sass-Based Themes
 
@@ -58,6 +59,7 @@ The Kendo UI Sass-based themes are located on the Progress NPM registry:
 * **Kendo UI Default Theme**&mdash;Available as @progress/kendo-theme-default.
 * **Kendo UI Bootstrap v4 Theme**&mdash;Available as @progress/kendo-theme-bootstrap.
 * **Kendo UI Material Theme**&mdash;Available as @progress/kendo-theme-material.
+* **Kendo UI Classic Theme**&mdash;Available as @progress/kendo-theme-classic.
 
 To access the Progress NPM registry, you need an active Telerik account with an active commercial license. For more information on how to access the NPM registry, refer to the [installation instructions for Kendo UI Professional]({% slug kendoui_npm_packages_kendoui_installation %}#kendo-ui-professional).
 
@@ -122,47 +124,33 @@ While each Sass-based theme has a dedicated NPM package (for example, @progress/
 
 A swatch is a set of variables which customizes the appearance of the theme.
 
-* Each swatch is placed in a separate file. A theme may contain multiple swatches.
 * Swatches are useful for creating multiple, persistent theme variations.
+* A theme may contain multiple swatches.
+* Each swatch is placed in a separate json config file.
 * The `.css` output file can be shared across projects and requires no further processing.
 
-To create a swatch:
+In order to utilize the Kendo Themes infrastructure for building and creating swatches, first setup the repository:
 
 1. Clone the [kendo-themes](https://github.com/telerik/kendo-themes) GitHub repository.
 1. Install the [node-gyp](https://github.com/nodejs/node-gyp#installation) package.
-1. Install the dependencies for all themes with `npm install && npx lerna bootstrap`.
-1. Switch the working directory to `packages/<THEME_NAME>`.
-1. Create a `SWATCH_NAME.scss` swatch file in the `scss/swatches` folder.
-1. To build the swatches for the theme by running `npm run sass:swatches` or `npm run dart:swatches`.
-1. Include the compiled CSS swatch file in your project. It could be found under `dist/SWATCH_NAME.css`.
-
-For example, in the Material theme create `blue-pink-dark` swatch with the following lines:
-
-    // Variables.
-    $primary-palette-name: blue;
-    $secondary-palette-name: pink;
-    $theme-type: dark;
-
-    // Import the theme file for the components you use.
-    @import "../panelbar/_index.scss";
-    @import "../grid/_index.scss";
-
-    // Alternatively, include all components.
-    @import "../all.scss";
+1. Install the dependencies for all themes with `npm install && npm run bootstrap`.
 
 
-For the Default and Bootstrap themes, the swatch should look like:
+To compile existing swatches:
 
-    // Variables.
-    $primary: blue;
-    $secondary: pink;
+1. Run the `sass:swatches` task from the root of the repository
 
-    // Import the theme file for the components you use.
-    @import "../panelbar/_index.scss";
-    @import "../grid/_index.scss";
+        npm run sass:swatches
 
-    // Alternatively, include all components.
-    @import "../all.scss";
+1. Include one of the compiled CSS swatch files(`packages/<THEME_NAME>/dist/SWATCH_NAME.css`) in your project.
+
+To create a new swatch:
+
+1. Create a `<THEME_NAME>-<SWATCH_NAME>.json` file in the `packages/<THEME_NAME>/lib/swatches` folder.
+1. Follow the already existing `(<THEME_NAME>-main.json` schema for customizing the variables.
+1. Run the `sass:swatches` task from the root of the repository.
+1. Include one of the compiled CSS swatch files(`packages/<THEME_NAME>/dist/SWATCH_NAME.css`) in your project.
+
 
 #### Customizing the Source Code
 

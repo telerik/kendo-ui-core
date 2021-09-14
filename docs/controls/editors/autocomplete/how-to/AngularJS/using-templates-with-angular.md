@@ -103,13 +103,13 @@ The following example demonstrates how to use AngularJS templates inside the Ken
           dataTextField: "ContactName",
 
           headerTemplate: '<div class="dropdown-header">' +
-          '<span class="k-widget k-header">Photo</span>' +
-          '<span class="k-widget k-header">Contact info</span>' +
-          '</div>',
+              '<span class="k-widget k-header">Photo</span>' +
+              '<span class="k-widget k-header">Contact info</span>' +
+            '</div>',
 
           // Using {{angular}} templates:
           template: '<span class="k-state-default"><img src=\"https://demos.telerik.com/kendo-ui/content/web/Customers/{% raw %}{{dataItem.CustomerID}}{% endraw %}.jpg\" alt=\"{% raw %}{{dataItem.CustomerID}}{% endraw %}\" /></span>' +
-          '<span class="k-state-default"><h3>{% raw %}{{dataItem.ContactName}}{% endraw %}</h3><p>{% raw %}{{dataItem.CompanyName}}{% endraw %}</p></span>',
+            '<span class="k-state-default"><h3>{% raw %}{{dataItem.ContactName}}{% endraw %}</h3><p>{% raw %}{{dataItem.CompanyName}}{% endraw %}</p></span>',
         };
       });
     </script>

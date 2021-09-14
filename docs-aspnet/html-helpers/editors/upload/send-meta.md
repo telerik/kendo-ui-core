@@ -35,16 +35,24 @@ To send metadata over to the `Save()` handler:
 
 3. Attach the `upload` event handler.    
 
-    ```
-    @(Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("ChunkSave", "Upload")
-            .Remove("Remove", "Upload")
+    ```HtmlHelper
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("ChunkSave", "Upload")
+                .Remove("Remove", "Upload")
+            )
+            .Events(e => e.Upload("onUpload"))
         )
-        .Events(e => e.Upload("onUpload"))
-    )
     ```
+    
+    {% if site.core %}
+    ```TagHelper
+        <kendo-upload drop-zone="drop-zone1" name="files" on-upload="onUpload">
+            <async save-url="/Upload/ChunkSave" remove-url="/Upload/Remove" />
+        </kendo-upload>
+    ```
+    {% endif %}
 
 4. Process the file and the associated description. The description, and any other fields of the `e.data` object, will be serialized in the `POST` request.
 

@@ -1207,6 +1207,7 @@ An object, which holds the information about the configuration options of the wi
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 
     var options = dropdownlist.options;
+    console.log(options) //open the console to see the options object
     </script>
 
 ### list `jQuery`

@@ -32,6 +32,22 @@ With multi-column sorting you can also configure the Grid to display the sort in
             .SortMode(GridSortMode.MultipleColumn)
             .ShowIndexes(true))
 
+## Defining Field Type
+
+If you want to sort a column as a different type than the original one in the database, e.g. decimal<->string and vice versa, you can use the following approach:
+
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Model(m =>
+                {
+                    m.Id("OrderID");
+                    m.Field("Freight", typeof(string));
+                })
+                .ServerOperation(false)
+                .PageSize(20)
+                .Read(read => read.Action("Orders_Read", "Grid"))
+            )
+
 ## See Also
 
 * [Sorting by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/sorting)

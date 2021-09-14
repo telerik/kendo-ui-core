@@ -25,10 +25,10 @@ var __meta__ = { // jshint ignore:line
         getCulture = kendo.getCulture,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
-        cellTemplate = template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
-        emptyCellTemplate = template('<td role="gridcell" class="k-out-of-range"><a class="k-link"></a></td>', { useWithBlock: false }),
-        otherMonthCellTemplate = template('<td role="gridcell" class="k-out-of-range">&nbsp;</td>', { useWithBlock: false }),
-        weekNumberTemplate = template('<td class="k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
+        cellTemplate = template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
+        emptyCellTemplate = template('<td role="gridcell" class="k-calendar-td k-out-of-range"><a class="k-link"></a></td>', { useWithBlock: false }),
+        otherMonthCellTemplate = template('<td role="gridcell" class="k-calendar-td k-out-of-range">&nbsp;</td>', { useWithBlock: false }),
+        weekNumberTemplate = template('<td class="k-calendar-td k-alt">#= data.weekNumber #</td>', { useWithBlock: false }),
         outerWidth = kendo._outerWidth,
         ns = ".kendoCalendar",
         CLICK = "click" + ns,
@@ -46,7 +46,6 @@ var __meta__ = { // jshint ignore:line
         DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
         OTHERMONTH = "k-other-month",
-        OTHERMONTHCLASS = ' class="' + OTHERMONTH + '"',
         OUTOFRANGE = "k-out-of-range",
         TODAY = "k-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
@@ -82,7 +81,7 @@ var __meta__ = { // jshint ignore:line
             '<a href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button k-flat k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
         '</div>',
         MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header k-hstack">' +
-            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-calendar-title k-button k-flat"></a>' +
+            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-calendar-title k-title k-button k-flat"></a>' +
             '<span class="k-spacer"></span>' +
             '<span class="k-calendar-nav k-hstack">' +
                 '<a #=actionAttr#="prev" class="k-button k-flat k-button-icon k-prev-view">' +
@@ -240,7 +239,7 @@ var __meta__ = { // jshint ignore:line
                 },
                 hasFooter: true,
                 linksSelector: ".k-button",
-                contentClasses: "k-content"
+                contentClasses: "k-calendar-table k-content"
             },
             "modern": {
                 header: {
@@ -248,7 +247,7 @@ var __meta__ = { // jshint ignore:line
                 },
                 hasFooter: false,
                 linksSelector: ".k-button",
-                contentClasses: "k-content k-calendar-content"
+                contentClasses: "k-calendar-table k-content k-calendar-content"
             }
         },
 
@@ -439,10 +438,8 @@ var __meta__ = { // jshint ignore:line
                     replace: replace
                 });
 
-                if (that.options.componentType === "modern"){
-                    viewWrapper.removeClass("k-calendar-monthview k-calendar-yearview k-calendar-decadeview k-calendar-centuryview");
-                    viewWrapper.addClass("k-calendar-" + currentView.name + "view");
-                }
+                viewWrapper.removeClass("k-calendar-monthview k-calendar-yearview k-calendar-decadeview k-calendar-centuryview");
+                viewWrapper.addClass("k-calendar-" + currentView.name + "view");
 
                 that.trigger(NAVIGATE);
 
@@ -1326,7 +1323,7 @@ var __meta__ = { // jshint ignore:line
                 footerTemplate = '#= kendo.toString(data,"D","' + options.culture +'") #';
 
             that.month = {
-                content: template('<td#=data.cssClass# role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr(VALUE) + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
+                content: template('<td class="#=data.cssClass#" role="gridcell"><a tabindex="-1" class="k-link#=data.linkClass#" href="#=data.url#" ' + kendo.attr(VALUE) + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
                 empty: template('<td role="gridcell">' + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty }),
                 weekNumber: template('<td class="k-alt">' + (weekNumber || "#= data.weekNumber #") + "</td>", { useWithBlock: !!weekNumber })
             };
@@ -1398,41 +1395,43 @@ var __meta__ = { // jshint ignore:line
             },
             content: function(options) {
                 var that = this,
-                idx = 0,
-                min = options.min,
-                max = options.max,
-                date = options.date,
-                dates = options.dates,
-                format = options.format,
-                culture = options.culture,
-                navigateUrl = options.url,
-                showHeader = options.showHeader,
-                otherMonth = options.otherMonth,
-                isWeekColumnVisible = options.isWeekColumnVisible,
-                hasUrl = navigateUrl && dates[0],
-                currentCalendar = getCalendarInfo(culture),
-                firstDayIdx = currentCalendar.firstDay,
-                days = currentCalendar.days,
-                names = shiftArray(days.names, firstDayIdx),
-                shortNames = shiftArray(days.namesShort, firstDayIdx),
-                start = calendar.firstVisibleDay(date, currentCalendar),
-                firstDayOfMonth = that.first(date),
-                lastDayOfMonth = that.last(date),
-                toDateString = that.toDateString,
-                today = getToday(),
-                contentClasses = options.contentClasses,
-                html = '<table tabindex="0" role="grid" class="' + contentClasses + '" cellspacing="0" data-start="' + toDateString(start) + '">';
+                    idx = 0,
+                    min = options.min,
+                    max = options.max,
+                    date = options.date,
+                    dates = options.dates,
+                    format = options.format,
+                    culture = options.culture,
+                    navigateUrl = options.url,
+                    showHeader = options.showHeader,
+                    otherMonth = options.otherMonth,
+                    isWeekColumnVisible = options.isWeekColumnVisible,
+                    hasUrl = navigateUrl && dates[0],
+                    currentCalendar = getCalendarInfo(culture),
+                    firstDayIdx = currentCalendar.firstDay,
+                    days = currentCalendar.days,
+                    names = shiftArray(days.names, firstDayIdx),
+                    shortNames = shiftArray(days.namesShort, firstDayIdx),
+                    start = calendar.firstVisibleDay(date, currentCalendar),
+                    firstDayOfMonth = that.first(date),
+                    lastDayOfMonth = that.last(date),
+                    toDateString = that.toDateString,
+                    today = getToday(),
+                    contentClasses = options.contentClasses,
+                    html = '<table tabindex="0" role="grid" class="' + contentClasses + '" cellspacing="0" data-start="' + toDateString(start) + '">';
+
                 if (showHeader) {
-                    html += '<caption class="k-month-header">' + this.title(date, min, max, culture) + '</caption><thead><tr role="row">';
-                } else {
-                    html += '<thead><tr role="row">';
+                    html += '<caption class="k-calendar-caption k-month-header">' + this.title(date, min, max, culture) + '</caption>';
                 }
+
+                html += '<thead class="k-calendar-thead"><tr role="row" class="k-calendar-tr">';
+
                 if (isWeekColumnVisible) {
-                    html += '<th scope="col" class="k-alt">' + options.messages.weekColumnHeader + '</th>';
+                    html += '<th scope="col" class="k-calendar-th k-alt">' + options.messages.weekColumnHeader + '</th>';
                 }
 
                 for (; idx < 7; idx++) {
-                    html += '<th scope="col" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
+                    html += '<th scope="col" class="k-calendar-th" title="' + names[idx] + '">' + shortNames[idx] + '</th>';
                 }
 
                 adjustDST(today, 0);
@@ -1441,7 +1440,7 @@ var __meta__ = { // jshint ignore:line
                 return view({
                     cells: 42,
                     perRow: 7,
-                    html: html += '</tr></thead><tbody><tr role="row">',
+                    html: html += '</tr></thead><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">',
                     start: start,
                     isWeekColumnVisible: isWeekColumnVisible,
                     weekNumber: options.weekNumber,
@@ -1454,10 +1453,10 @@ var __meta__ = { // jshint ignore:line
                     setter: that.setDate,
                     disableDates: options.disableDates,
                     build: function(date, idx, disableDates) {
-                        var cssClass = [],
-                        day = date.getDay(),
-                        linkClass = "",
-                        url = "#";
+                        var cssClass = [ "k-calendar-td" ],
+                            day = date.getDay(),
+                            linkClass = "",
+                            url = "#";
 
                         if (date < firstDayOfMonth || date > lastDayOfMonth) {
                             cssClass.push(OTHERMONTH);
@@ -1487,7 +1486,7 @@ var __meta__ = { // jshint ignore:line
                             title: kendo.toString(date, "D", culture),
                             value: date.getDate(),
                             dateString: toDateString(date),
-                            cssClass: cssClass[0] ? ' class="' + cssClass.join(" ") + '"' : "",
+                            cssClass: cssClass.join(" "),
                             linkClass: linkClass,
                             url: url
                         };
@@ -1560,9 +1559,12 @@ var __meta__ = { // jshint ignore:line
                 html = "";
 
                 if (options.showHeader) {
-                    html += '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><caption class="k-meta-header">';
-                    html += this.title(options.date);
-                    html += '</caption><tbody><tr role="row">';
+                    html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
+                        html += '<caption class="k-calendar-caption k-meta-header">';
+                            html += this.title(options.date);
+                        html += '</caption>';
+                        html += '<tbody class="k-calendar-tbody">';
+                            html += '<tr role="row" class="k-calendar-tr">';
                 }
 
                 return view({
@@ -1572,11 +1574,13 @@ var __meta__ = { // jshint ignore:line
                     html: html,
                     setter: this.setDate,
                     build: function(date) {
+                        var cssClass = [ "k-calendar-td" ];
+
                         return {
                             value: namesAbbr[date.getMonth()],
                             ns: kendo.ns,
                             dateString: toDateString(date),
-                            cssClass: ""
+                            cssClass: cssClass.join(" ")
                         };
                     }
                 });
@@ -1636,9 +1640,12 @@ var __meta__ = { // jshint ignore:line
                 html = "";
 
                 if (options.showHeader) {
-                    html += '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><caption class="k-meta-header">';
-                    html += this.title(options.date, options.min, options.max);
-                    html += '</caption><tbody><tr role="row">';
+                    html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
+                        html += '<caption class="k-meta-header">';
+                            html += this.title(options.date, options.min, options.max);
+                        html += '</caption>';
+                        html += '<tbody class="k-calendar-thead">';
+                            html += '<tr role="row" class="k-calendar-tr">';
                 }
 
                 return view({
@@ -1649,11 +1656,17 @@ var __meta__ = { // jshint ignore:line
                     html : html,
                     setter: this.setDate,
                     build: function(date, idx) {
+                        var cssClass = [ "k-calendar-td" ];
+
+                        if (idx === 0 || idx === 11) {
+                            cssClass.push(OTHERMONTH);
+                        }
+
                         return {
                             value: date.getFullYear(),
                             ns: kendo.ns,
                             dateString: toDateString(date),
-                            cssClass: idx === 0 || idx == 11 ? OTHERMONTHCLASS : ""
+                            cssClass: cssClass.join(" ")
                         };
                     }
                 });
@@ -1701,9 +1714,12 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 if (options.showHeader) {
-                    html += '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><caption class="k-meta-header">';
-                    html += this.title(options.date, options.min, options.max);
-                    html += '</caption><tbody><tr role="row">';
+                    html += '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0">';
+                        html += '<caption class="k-calendar-caption k-meta-header">';
+                            html += this.title(options.date, options.min, options.max);
+                        html += '</caption>';
+                        html += '<tbody class="k-calendar-tbody">';
+                            html += '<tr role="row" class="k-calendar-tr">';
                 }
 
                 return view({
@@ -1714,8 +1730,13 @@ var __meta__ = { // jshint ignore:line
                     html : html,
                     setter: this.setDate,
                     build: function(date, idx) {
+                        var cssClass = [ "k-calendar-td" ];
                         var start = date.getFullYear(),
-                        end = start + 9;
+                            end = start + 9;
+
+                        if (idx === 0 || idx === 11) {
+                            cssClass.push(OTHERMONTH);
+                        }
 
                         if (start < min) {
                             start = min;
@@ -1729,7 +1750,7 @@ var __meta__ = { // jshint ignore:line
                             ns: kendo.ns,
                             value: start + " - " + end,
                             dateString: toDateString(date),
-                            cssClass: idx === 0 || idx == 11 ? OTHERMONTHCLASS : ""
+                            cssClass: cssClass.join(" ")
                         };
                     }
                 });
@@ -1795,15 +1816,16 @@ var __meta__ = { // jshint ignore:line
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
             otherMonthTemplate = options.otherMonthCellTemplate || otherMonthCellTemplate,
-            html = options.html || '<table tabindex="0" role="grid" class="k-content k-meta-view" cellspacing="0"><tbody><tr role="row">';
-            if (isWeekColumnVisible) {
-                html += weekNumber(weekNumberBuild(start));
-            }
+            html = options.html || '<table tabindex="0" role="grid" class="k-calendar-table k-content k-meta-view" cellspacing="0"><tbody class="k-calendar-tbody"><tr role="row" class="k-calendar-tr">';
+
+        if (isWeekColumnVisible) {
+            html += weekNumber(weekNumberBuild(start));
+        }
 
 
         for (; idx < length; idx++) {
             if (idx > 0 && idx % cellsPerRow === 0) {
-                html += '</tr><tr role="row">';
+                html += '</tr><tr role="row" class="k-calendar-tr">';
                 if (isWeekColumnVisible) {
                     html += otherMonth || (+start <= +lastDayOfMonth) ? weekNumber(weekNumberBuild(start)) : weekNumber({ weekNumber : "&nbsp;"});
                 }

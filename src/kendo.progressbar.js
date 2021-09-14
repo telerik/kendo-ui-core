@@ -45,7 +45,8 @@ var __meta__ = { // jshint ignore:line
         DEFAULTANIMATIONDURATION = 400,
         PRECISION = 3,
         templates = {
-            progressStatus: "<span class='k-progress-status-wrap " + LABEL_POSITION_END + "'><span class='k-progress-status'></span></span>"
+            progressStatus: "<span class='k-progress-status-wrap " + LABEL_POSITION_END + "'><span class='k-progress-status'></span></span>",
+            announceElement: '<span aria-live="polite" class="k-sr-only k-progress-announce"></span>'
         };
 
     var ProgressBar = Widget.extend({
@@ -66,6 +67,10 @@ var __meta__ = { // jshint ignore:line
 
             that._wrapper();
 
+            if(options.ariaRole) {
+                that._aria();
+            }
+
             that._progressAnimation();
 
             if ((options.value !== options.min) && (options.value !== false)) {
@@ -74,16 +79,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         setOptions: function(options) {
-            var that = this;
+            var that = this,
+                wrapper = that.wrapper;
 
             Widget.fn.setOptions.call(that, options);
 
             if (options.hasOwnProperty("reverse")) {
-                that.wrapper.toggleClass("k-progressbar-reverse", options.reverse);
+                wrapper.toggleClass("k-progressbar-reverse", options.reverse);
             }
 
             if (options.hasOwnProperty("enable")) {
                 that.enable(options.enable);
+            }
+
+            if(options.ariaRole) {
+                that._aria();
             }
 
             that._progressAnimation();
@@ -109,7 +119,37 @@ var __meta__ = { // jshint ignore:line
             type: PROGRESSTYPE.VALUE,
             chunkCount: DEFAULTCHUNKCOUNT,
             showStatus: true,
-            animation: { }
+            animation: { },
+            label: null,
+            labelId: null,
+            ariaRole: false
+        },
+
+        _aria: function() {
+            var that = this,
+                options = that.options,
+                wrapper = that.wrapper;
+
+            wrapper.attr({
+                "role": "progressbar",
+                "aria-valuemin": options.min,
+                "aria-valuemax": options.max
+            });
+
+            if(!!options.labelId) {
+                wrapper.attr("aria-labelledby", options.labelId);
+            } else if(!!options.label) {
+                wrapper.attr("aria-label", options.label);
+            }
+
+            that.announce = $(templates.announceElement);
+            that.announce.appendTo($("body"));
+
+            if(options.value !== false) {
+                wrapper.attr("aria-valuenow", options.value);
+
+                that.announce.text(that._calculatePercentage().toFixed() + "%");
+            }
         },
 
         _fields: function() {
@@ -140,7 +180,7 @@ var __meta__ = { // jshint ignore:line
             var container = that.wrapper = that.element;
             var options = that.options;
             var orientation = options.orientation;
-            var initialStatusValue;
+            var initialValue = (options.value !== false) ? options.value : options.min;
 
             container.addClass("k-widget " + KPROGRESSBAR);
 
@@ -165,12 +205,10 @@ var __meta__ = { // jshint ignore:line
                     that.progressStatus = that.wrapper.prepend(templates.progressStatus)
                                               .find("." + KPROGRESSSTATUS);
 
-                    initialStatusValue = (options.value !== false) ? options.value : options.min;
-
                     if (options.type === PROGRESSTYPE.VALUE) {
-                        that.progressStatus.text(initialStatusValue);
+                        that.progressStatus.text(initialValue);
                     } else {
-                        that.progressStatus.text(that._calculatePercentage(initialStatusValue).toFixed() + "%");
+                        that.progressStatus.text(that._calculatePercentage(initialValue).toFixed() + "%");
                     }
                 }
             }
@@ -206,7 +244,12 @@ var __meta__ = { // jshint ignore:line
                     }
                 } else if (!value) {
                     that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
+                    that.wrapper.removeAttr("aria-valuenow");
                     options.value = false;
+
+                    if(that.announce) {
+                        that.announce.text("");
+                    }
                 }
             }
         },
@@ -250,6 +293,14 @@ var __meta__ = { // jshint ignore:line
                 that._onProgressUpdateAlways(options.value);
             } else {
                 that._updateProgressWrapper(percentage);
+            }
+
+            if(options.ariaRole) {
+                that.wrapper.attr("aria-valuenow", that.options.value);
+
+                if(that.announce) {
+                    that.announce.text(percentage.toFixed() + "%");
+                }
             }
         },
 
@@ -368,6 +419,10 @@ var __meta__ = { // jshint ignore:line
 
         destroy: function() {
             var that = this;
+
+            if(that.announce) {
+                that.announce.remove();
+            }
 
             Widget.fn.destroy.call(that);
         },

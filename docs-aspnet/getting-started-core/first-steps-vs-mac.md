@@ -3,7 +3,7 @@ title: First Steps on VS for Mac
 page_title: Getting Started on Visual Studio for Mac
 description: "Create a sample project on Visual Studio for Mac with Progress Telerik UI for ASP.NET Core (aka MVC 6 or ASP.NET Core MVC)."
 slug: gettingstarted_firststeps_vsmac
-position: 2
+position: 3
 permalink: /getting-started/first-steps-vs-mac
 ---
 
@@ -86,6 +86,10 @@ To get up and running with the project:
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>   
 		<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>   			
 
+If you prefer to include the client-side resources from a local source instead of CDNs, consider the following article:
+
+[Local Client-side Resources](https://docs.telerik.com/aspnet-core/installation/getting-started-copy-client-resources#including-client-side-resources)
+
 8. Use a Kendo UI widget by adding the snippet from the following example to `~/Views/Home/Index.cshtml`.
 
 	```tab-HtmlHelper
@@ -106,6 +110,13 @@ To get up and running with the project:
 	As a result, the following sample page is created.
 
     ![The created sample page](../getting-started-core/images/mac-sample-page.png)
+
+## JSON Serialization
+
+The default casing for JSON strings in ASP.NET Core is Camel-case. The Telerik UI components that are data-bound depend on Pascal-case formatted response from the server. To find out how to configure the application to return the data in Pascal-case, refer to the following article:
+
+* [JSON Serialization]({% slug jsonserialization_core %})
+
 
 ## Next Steps
 

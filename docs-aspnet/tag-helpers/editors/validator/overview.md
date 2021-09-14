@@ -19,22 +19,50 @@ The Validator offers options for implementing client-side form validation.
 
 The following example demonstrates how to define the Validator by using the Validator TagHelper.
 
-		@{
-			var messages = new Dictionary<string, string>() { { "custom", "Please choose another Start Time." } };
-			var rules = new Dictionary<string, string>() { { "custom", "customFunction" } };
-		}
-        <form id="ticketsForm" kendo-validator="true" kendo-messages="messages" kendo-rules="rules">
-            <ul id="fieldlist">
-                <li>
-                    <label for="fullname" class="required">Your Name</label>
-                    @(Html.Kendo().TextBox()
-						.Name("fullname")
-						.HtmlAttributes(new { placeholder = "Full name", required = "required", style = "width:220px" })
-                    )
-                </li>
-            </ul>
-        </form>
+```TagHelper
+    @{
+        var messages = new Dictionary<string, string>() { { "custom", "Please choose another Start Time." } };
+        var rules = new Dictionary<string, string>() { { "custom", "customFunction" } };
+    }
+    <form id="ticketsForm" kendo-validator="true" kendo-messages="messages" kendo-rules="rules">
+        <ul id="fieldlist">
+            <li>
+                <label for="fullname" class="required">Your Name</label>
+                @(Html.Kendo().TextBox()
+                    .Name("fullname")
+                    .HtmlAttributes(new { placeholder = "Full name", required = "required", style = "width:220px" })
+                )
+            </li>
+        </ul>
+    </form>
+``` 
+```JavaScript
+    <script>
+        function customFunction(input) {
 
+            if (input.attr('name') === "time" && input.val() == "14:00") {
+                return false;
+            }
+
+            return true;
+        }
+
+        $(document).ready( function () {
+            var validator = $("#ticketsForm").data("kendoValidator");
+            var validationSummary = $("#validation-summary");
+
+            $("form").submit(function(event) {
+                event.preventDefault();
+
+                if (validator.validate()) {
+                    validationSummary.html("<div class='k-messagebox k-messagebox-success'>Hooray! Your tickets has been booked!</div>");
+                } else {
+                    validationSummary.html("<div class='k-messagebox k-messagebox-error'>Oops! There is invalid data in the form.</div>");
+                }
+            });
+        });
+    </script>
+```
 ## See Also
 
 * [Basic Usage of the Validator Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/validator)

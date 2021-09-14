@@ -3343,7 +3343,7 @@ Returns the aggregate results.
       ],
       aggregate: [
         { field: "age", aggregate: "min" },
-        { field: "name", aggregate: "max" }
+        { field: "age", aggregate: "max" }
       ]
     });
     dataSource.read();

@@ -156,7 +156,7 @@ it("resetting DataSource rebinds the widget and refreshes content elements", fun
     }));
 
     assert.equal(tabstrip.wrapper.find("li").length, 2);
-    assert.equal(tabstrip.wrapper.children("div").length, 2);
+    assert.equal(tabstrip.wrapper.children("div:not(.k-tabstrip-items-wrapper)").length, 2);
 });
     });
 }());

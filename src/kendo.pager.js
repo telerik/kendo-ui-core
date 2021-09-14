@@ -14,12 +14,15 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        keys = kendo.keys,
+        template = kendo.template,
         proxy = $.proxy,
         FIRST = ".k-i-arrow-end-left",
         LAST = ".k-i-arrow-end-right",
         PREV = ".k-i-arrow-60-left",
         NEXT = ".k-i-arrow-60-right",
         SIZE = "k-pager-md k-pager-sm",
+        FOCUSABLE = ":kendoFocusable:not([tabindex='-1'])",
         CHANGE = "change",
         NS = ".kendoPager",
         CLICK = "click",
@@ -27,15 +30,18 @@ var __meta__ = { // jshint ignore:line
         DISABLED = "disabled",
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
-        iconTemplate = kendo.template('<a href="\\#" aria-label="#=text#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
+        isRtl = false,
+        iconTemplate = kendo.template('<a href="\\#" title="#=text#" #if (id !== "") {# aria-describedby="#=id#" #}# class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
-    function button(template, idx, text, numeric, title) {
-        return template( {
-            idx: idx,
-            text: text,
+    function button(options) {
+        return options.template( {
+            idx: options.idx,
+            text: options.text,
             ns: kendo.ns,
-            numeric: numeric,
-            title: title || ""
+            numeric: options.numeric,
+            title: options.title || "",
+            tabindex: options.navigatable ? 0 : -1,
+            navigatable: options.navigatable
         });
     }
 
@@ -47,11 +53,12 @@ var __meta__ = { // jshint ignore:line
         });
     }
 
-    function icon(className, text, wrapClassName) {
+    function icon(className, text, wrapClassName, id) {
         return iconTemplate({
             className: className.substring(1),
             text: text,
-            wrapClassName: wrapClassName || ""
+            wrapClassName: wrapClassName || "",
+            id: id || ""
         });
     }
 
@@ -59,7 +66,7 @@ var __meta__ = { // jshint ignore:line
        element.find(selector)
               .parent()
               .attr(kendo.attr("page"), page)
-              .attr("tabindex", -1)
+              .attr("tabindex", disabled ? -1 : 0)
               .toggleClass("k-state-disabled", disabled);
     }
 
@@ -101,15 +108,20 @@ var __meta__ = { // jshint ignore:line
             that.dataSource.bind(CHANGE, that._refreshHandler);
             that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
 
+            isRtl = kendo.support.isRtl(element);
+
+            that._id = that.element.attr("id") || kendo.guid();
+            that._template();
+
             if (options.previousNext) {
                 if (!that.element.find(FIRST).length) {
-                    that.element.append(icon(FIRST, options.messages.first, "k-pager-first"));
+                    that.element.append(icon(FIRST, options.messages.first, "k-pager-first", that._id));
 
                     first(that.element, page, totalPages);
                 }
 
                 if (!that.element.find(PREV).length) {
-                    that.element.append(icon(PREV, options.messages.previous));
+                    that.element.append(icon(PREV, options.messages.previous, null, that._id));
 
                     prev(that.element, page, totalPages);
                 }
@@ -142,7 +154,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (options.dataSource && !options.dataSource.total()) {
                     that._numericSelect.empty().append("<option value='0' />");
-                    that.list.empty().append(that.selectTemplate({ text: 0 }));
+                    that.list.empty().append(that.selectTemplate({ text: 0, tabindex: options.navigatalbe ? 0 : -1, navigatable: options.navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) }));
                 }
             }
 
@@ -160,13 +172,13 @@ var __meta__ = { // jshint ignore:line
 
             if (options.previousNext) {
                 if (!that.element.find(NEXT).length) {
-                    that.element.append(icon(NEXT, options.messages.next));
+                    that.element.append(icon(NEXT, options.messages.next, null, that._id));
 
                     next(that.element, page, totalPages);
                 }
 
                 if (!that.element.find(LAST).length) {
-                    that.element.append(icon(LAST, options.messages.last, "k-pager-last"));
+                    that.element.append(icon(LAST, options.messages.last, "k-pager-last", that._id));
 
                     last(that.element, page, totalPages);
                 }
@@ -192,7 +204,7 @@ var __meta__ = { // jshint ignore:line
                 that.element.find(".k-pager-sizes select").val(that.pageSize());
 
                 if (kendo.ui.DropDownList) {
-                   that.element.find(".k-pager-sizes select").show().kendoDropDownList();
+                   that.element.find(".k-pager-sizes select").show().attr("aria-label", options.messages.pageSizeDropDownLabel).kendoDropDownList();
                 }
 
                 that.element.on(CHANGE + NS, ".k-pager-sizes select", proxy(that._change, that));
@@ -231,6 +243,8 @@ var __meta__ = { // jshint ignore:line
                 that.element.addClass(sizeClassName);
             }
 
+            that._navigatable();
+
             kendo.notify(that);
         },
 
@@ -254,9 +268,10 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "Pager",
-            selectTemplate: '<li><span class="k-link k-state-selected">#=text#</span></li>',
+            ARIATemplate: "Page navigation, page #=page# of #=totalPages#",
+            selectTemplate: '<li><span tabindex="#=tabindex#" #if (navigatable) {# aria-label="#=title#" #}# class="k-link k-state-selected">#=text#</span></li>',
             currentPageTemplate: '<li class="k-current-page"><span class="k-link k-pager-nav">#=text#</span></li>',
-            linkTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
+            linkTemplate: '<li><a tabindex="#=tabindex#" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             numericItemTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             numericSelectItemTemplate: '<option value="#= idx #" #if (selected) {# selected="selected" #}#>#= text #</option>',
             buttonCount: 10,
@@ -268,6 +283,7 @@ var __meta__ = { // jshint ignore:line
             pageSizes: false,
             refresh: false,
             responsive: true,
+            navigatable: false,
             messages: {
                 allPages: "All",
                 display: "{0} - {1} of {2} items",
@@ -275,6 +291,8 @@ var __meta__ = { // jshint ignore:line
                 page: "Page",
                 of: "of {0}",
                 itemsPerPage: "items per page",
+                pageButtonLabel: "Page {0}",
+                pageSizeDropDownLabel: "Page sizes drop down",
                 first: "Go to the first page",
                 previous: "Go to the previous page",
                 next: "Go to the next page",
@@ -329,6 +347,7 @@ var __meta__ = { // jshint ignore:line
                 total = that.dataSource._isGroupPaged() ? that.dataSource.groupsTotal(true) : that.dataSource.total(),
                 totalPages = that.totalPages(),
                 linkTemplate = that.linkTemplate,
+                navigatable = options.navigatable,
                 numericSelectItemTemplate = that.numericSelectItemTemplate,
                 buttonCount = options.buttonCount;
 
@@ -346,22 +365,43 @@ var __meta__ = { // jshint ignore:line
                 end = Math.min((start + buttonCount) - 1, totalPages);
 
                 if (start > 1) {
-                    html += button(linkTemplate, start - 1, "...", false, options.messages.morePages);
+                    html += button({
+                        template: linkTemplate,
+                        navigatable: navigatable,
+                        idx: start - 1,
+                        text: "...",
+                        numeric: false,
+                        title: options.messages.morePages
+                    });
                     selectHtml += selectOption(numericSelectItemTemplate, start - 1, options.messages.morePages);
                 }
 
                 for (idx = start; idx <= end; idx++) {
-                    html += button(idx == page ? that.selectTemplate : linkTemplate, idx, idx, true);
+                    html += button({
+                        template: idx == page ? that.selectTemplate : linkTemplate,
+                        navigatable: navigatable,
+                        idx: idx,
+                        text: idx,
+                        numeric: true,
+                        title: kendo.format(options.messages.pageButtonLabel, idx)
+                    });
                     selectHtml += selectOption(numericSelectItemTemplate, idx, idx, idx == page);
                 }
 
                 if (end < totalPages) {
-                    html += button(linkTemplate, idx, "...", false, options.messages.morePages);
+                    html += button({
+                        template: linkTemplate,
+                        navigatable: navigatable,
+                        idx: idx,
+                        text: "...",
+                        numeric: numericSelectItemTemplate,
+                        title: options.messages.morePages
+                    });
                     selectHtml += selectOption(numericSelectItemTemplate, idx, options.messages.morePages);
                 }
 
                 if (html === "") {
-                    html = that.selectTemplate({ text: 0 });
+                    html = that.selectTemplate({ text: 0, tabindex: navigatable ? 0 : -1, navigatable: navigatable, title: kendo.format(options.messages.pageButtonLabel, 0) });
                     selectHtml = $("<option value='0' />");
                 }
 
@@ -421,6 +461,45 @@ var __meta__ = { // jshint ignore:line
                     .kendoDropDownList("value", pageSize)
                     .kendoDropDownList("text", text); // handles custom values
             }
+
+            that._restoreFocus(start, end, totalPages);
+            that._excludeChildrenFromTab();
+            that._updateAria();
+        },
+
+        _excludeChildrenFromTab: function () {
+            if (this.options.navigatable && kendo._activeElement() === this.element[0]) {
+                this.element.find(FOCUSABLE).attr("tabindex", -1);
+            }
+        },
+
+        _restoreFocus: function (start, end, totalPages) {
+            var that = this;
+
+            if (!that.options.navigatable) {
+                return;
+            }
+
+            if (that._focusSelected) {
+                that.element.find(".k-state-selected").focus();
+                that._focusSelected = null;
+            }
+
+            if (that._focusMore !== null) {
+                if (end < totalPages && that._focusMore) {
+                    that.list.find("li").last().find("a").focus();
+                }
+                if (!that._focusMore && start > 1) {
+                    that.list.find("li").first().find("a").focus();
+                }
+                that._focusMore = null;
+            }
+        },
+
+        _restoreTabIndexes: function () {
+            this.element
+                .find("[tabindex='-1']:not(.k-state-disabled)")
+                .attr("tabindex", 0);
         },
 
         _collapsedTotal: function() {
@@ -463,6 +542,109 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
+        _template: function() {
+            this._ariaTemplate = proxy(template(this.options.ARIATemplate), this);
+        },
+
+        _updateAria: function () {
+            if (!this.options.navigatable) {
+                return;
+            }
+            this.element.attr("aria-label", this._ariaTemplate({ page: this.page(), totalPages: this.totalPages() }));
+        },
+
+        _navigatable: function () {
+            var that = this;
+            var options = that.options;
+
+            if (!options.navigatable) {
+                return;
+            }
+
+            that.element.attr("role", "application");
+            that.element.attr("id", that._id);
+            that._template();
+            that._updateAria();
+
+            that._tabindex(that.element);
+
+            that.element.on("keydown" + NS, that, proxy(that._keyDown, that));
+            that.element.on("focusout" + NS, function() { that.element.removeClass("k-state-focused"); });
+            that.element.on("focusin" + NS,  function(e) {
+                that.element.addClass("k-state-focused");
+
+                if (e.target === that.element[0]) {
+                    that.element.find(FOCUSABLE).attr("tabindex", -1);
+                } else {
+                    that.element.removeClass("k-state-focused");
+                }
+            });
+        },
+
+        _keyDown: function (e) {
+            var that = this;
+            var target = $(e.target);
+            var allFocusable;
+            var handled = false;
+            var focusedIndex;
+
+            if (target[0] === that.element[0] && e.keyCode == keys.ENTER) {
+                that._restoreTabIndexes();
+                that.element.find(FOCUSABLE).first().focus();
+                handled = true;
+            }
+
+            if (target[0] !== that.element[0] && e.keyCode == keys.ESC) {
+                that.element.focus();
+                handled = true;
+            }
+
+            if (target[0] === that.element[0] && e.keyCode == keys.HOME) {
+                that.page(1);
+                handled = true;
+            }
+
+            if (target[0] === that.element[0] && e.keyCode == keys.END) {
+                that.page(that.totalPages());
+                handled = true;
+            }
+
+            if (target[0] === that.element[0] && (e.keyCode == (isRtl ? keys.LEFT : keys.RIGHT) || e.keyCode == keys.PAGEDOWN)) {
+                that.page(that.page() + 1);
+                handled = true;
+            }
+
+            if (target[0] === that.element[0] && (e.keyCode == (isRtl ? keys.RIGHT : keys.LEFT) || e.keyCode == keys.PAGEUP)) {
+                that.page((that.page() - 1) || 1);
+                handled = true;
+            }
+
+            if (target[0] !== that.element[0] && e.keyCode== keys.TAB) {
+                allFocusable = that.element.find(FOCUSABLE);
+                focusedIndex = allFocusable.index(target);
+
+                if (e.shiftKey) {
+                    if (focusedIndex - 1 < 0) {
+                        allFocusable.last().focus();
+                    } else {
+                        allFocusable.eq(focusedIndex - 1).focus();
+                    }
+                } else {
+                    if (focusedIndex + 1 < allFocusable.length) {
+                        allFocusable.eq(focusedIndex +1 ).focus();
+                    } else {
+                        allFocusable.first().focus();
+                    }
+                }
+
+                handled = true;
+            }
+
+            if (handled) {
+                e.preventDefault();
+            }
+        },
+
         _numericSelectChange: function(e) {
             var target = e.currentTarget;
             var value = target.value;
@@ -477,6 +659,14 @@ var __meta__ = { // jshint ignore:line
             var target = $(e.currentTarget);
 
             e.preventDefault();
+
+            if (this.options.navigatable) {
+                if (target.attr("title") == this.options.messages.morePages) {
+                    this._focusMore = target.parent().index();
+                } else if(!target.hasClass("k-pager-refresh") && !target.hasClass("k-pager-nav")) {
+                    this._focusSelected = true;
+                }
+            }
 
             if (!target.is(".k-state-disabled")) {
                 this.page(parseInt(target.attr(kendo.attr("page")), 10));

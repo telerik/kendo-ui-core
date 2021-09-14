@@ -37,6 +37,8 @@ You have to set the `Name` option of the helper. The value will be used as the `
 
 Alternatively, you can use the `NumericTextBoxFor` setting. All Telerik UI helpers which accept a value can be initialized with the `[WidgetName]For` method. For example, to initialize the DatePicker, use `DatePickerFor`. These methods automatically set the `Name` of the helper. In this way, `@Html.Kendo().NumericTextBoxFor(model => model.Age)` is the same as `@Html.Kendo().NumericTextBox().Name("Age").Value(Model.Age)`.
 
+The default casing for JSON strings in ASP.NET Core is Camel-case. Data-bound Telerik UI Components need Pascal-case formatted response from the server to populate their data successfully.  To find out how to configure the application to return the data in Pascal-case, refer to the [JSON Serialization section]({% slug jsonserialization_core %}).
+
 ## Deferred Initialization
 
 By default, the helpers output the widget initialization script immediately after the HTML markup of the widget. This scenario may not always be desired&mdash;for example, if the script files are registered at the bottom of the page or when you nest widgets.

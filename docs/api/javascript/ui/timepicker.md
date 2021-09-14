@@ -211,6 +211,15 @@ Specifies the end value in the popup list.
     });
     </script>
 
+#### Example - render all available hours
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        max: new Date(2000, 0, 1, 23, 30, 0) //date part is ignored
+    });
+    </script>
+
 ### min `Date`*(default: "00:00")*
 
 Specifies the start value in the popup list.
@@ -513,6 +522,17 @@ The maximum time value to set for a TimePicker, expressed as a Date object or as
     var timepicker = $("#timepicker").data("kendoTimePicker");
 
     timepicker.max(new Date(2000, 0, 1, 22, 0, 0));
+    </script>
+
+#### Example - render all available hours
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker();
+
+    var timepicker = $("#timepicker").data("kendoTimePicker");
+
+    timepicker.max(new Date(2000, 0, 1, 23, 30, 0));
     </script>
 
 ### min

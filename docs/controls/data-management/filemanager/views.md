@@ -13,7 +13,7 @@ The FileManager provides two inbuilt views for content visualization: `Grid` and
 You can switch between views from the Toolbar button group
 
 ## Grid View
-This view is achieved with the Kendo Grid and in renders the files in a tabular manner (see Image1 below). That said, you can control the configuration of this view trough the `views.grid` object of the FileManager (see example below). 
+This view is achieved with the Kendo Grid and in renders the files in a tabular manner (see Image1 below). That said, you can control the configuration of this view through the `views.grid` object of the FileManager (see example below). 
 
 ```js
     $("#filemanager").kendoFileManager({

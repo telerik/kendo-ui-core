@@ -17,7 +17,7 @@ UX guidelines and components library working together to craft exceptional exper
 Kendo UI design files cover all Kendo flavours - Angular, React, Vue, jQuery.
 The detailed anatomy, metrics and theming of the components will help you design better apps, be more productive and enable seamless handover to developers. To ensure perfect design implementation we provide Kendo UI default theme in the design resources, with ready-to-use components - all with typography, color swatches and metrics.
 
-We’ve made the Adobe XD files to be intuitive to use and require no additional XD knowledge - just use the components in their corresponding states in your design and the developers will get the the exact same appearance out of the box from the Kendo UI framework.
+We’ve made the Adobe XD files to be intuitive to use and require no additional XD knowledge - just use the components in their corresponding states in your design and the developers will get the exact same appearance out of the box from the Kendo UI framework.
 
 ## Adobe XD Design Files Download
 

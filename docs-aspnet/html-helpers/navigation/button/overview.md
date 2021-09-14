@@ -70,6 +70,7 @@ The Button HTML helper exposes only a `Click()` event that can be handled. For a
 <script>
 	function onClick() {
 		alert('Button clicked!')
+        window.location.href = 'https://en.wikipedia.org/';
 	}
 </script>
 ```
