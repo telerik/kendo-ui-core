@@ -94,6 +94,7 @@ The following example demonstrates a basic configuration for the Form HtmlHelper
 * [Orientation]({% slug htmlhelpers_form_aspnetcore_orientation %})
 * [Validation]({% slug htmlhelpers_form_aspnetcore_validation %})
 * [Accessibility]({% slug htmlhelpers_form_aspnetcore_accessibility %})
+* [Hidden Fields]({% slug htmlhelpers_form_aspnetcore_hidden_fields %})
 
 ## See Also
 

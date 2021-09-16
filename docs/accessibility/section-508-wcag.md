@@ -70,6 +70,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Pager         |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/pager/index)
 |PanelBar	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/panelbar/index)
 |PivotGrid	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/pivotgrid/index)
+|PopOver	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/popover/index)
 |QRCode	   	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/qrcode/index)
 |RadialGauge   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/radial-gauge/index)
 |RadioButton   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/styling/radios)
