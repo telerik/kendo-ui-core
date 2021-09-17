@@ -214,6 +214,7 @@ The following selection types are supported:
 
 - The `copySelectionToClipboard`, `exportSelectedToExcel` and `getSelectedData` methods do not work with rows that are persisted across different pages.
 - The Export to Chart method does not work with `Range and Cell selection` type.
+- The `copySelectionToClipboard` and `exportSelectedToExcel` methods do not work with Multi-column headers.
 
 ## See Also
 

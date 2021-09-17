@@ -9814,7 +9814,8 @@ The jQuery object which represents the table row.
     $("#grid").kendoGrid({
       columns: [
         { field: "name" },
-        { field: "age" }
+        { field: "age" },
+        { command: "edit" }
       ],
       dataSource: {
         data: [

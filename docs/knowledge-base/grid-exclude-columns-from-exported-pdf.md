@@ -28,6 +28,8 @@ How can I exclude certain columns from the exported PDF file in a Kendo UI Grid?
 
 ## Solution
 
+> As of Kendo UI R1 2021, there is an [exportable](/api/javascript/ui/grid/configuration/columns.exportable) property which allows the developer to exclude columns from being exported.
+
 Use either of the following approaches:
 
 *  [Use the `k-pdf-export` class and CSS](#using-the-k-pdf-export-class-and-css)

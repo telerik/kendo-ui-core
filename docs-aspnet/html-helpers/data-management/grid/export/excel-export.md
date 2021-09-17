@@ -211,6 +211,11 @@ It can also be set in a detailed fashion containing different values for Excel a
 columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
 ```
 
+In some scenarios, you want to include columns instead of excluding them. You may have columns defined in the grid which are not displayed in View mode, but you'd like to show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically. You can rather try using `.Exportable(x=> x.Pdf(false).Excel(true));` specifically.
+
+It is also important to understand the difference between .Hidden() and .Visible() properties of a grid column. The first one will hide the column only visually using CSS. The second one will cause the column not to be rendered at all.
+
+
 ## Known Limitations
 
 * The Grid and its DataSource contain only the data items from the current page during client-side export. As a result, either make the export in chunks, or disable the paging feature.

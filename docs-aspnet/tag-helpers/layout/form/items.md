@@ -2,7 +2,7 @@
 title: Items
 page_title: Items
 description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn how to configure items."
-slug: htmlhelpers_form_aspnetcore_items
+slug: taghelpers_form_aspnetcore_items
 position: 2
 ---
 

@@ -280,6 +280,11 @@ It can also be set in a detailed fashion containing different values for Excel a
 columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
 ```
 
+In some scenarios, you want to include columns instead of excluding them. You may have columns defined in the grid which are not displayed in View mode, but you'd like to show them in the exported file. In this case, setting `.Exportable(true)` will not work automatically. You can rather try using setting `.Exportable(x=> x.Pdf(true).Excel(false));` specifically.
+
+It is also important to understand the difference between .Hidden() and .Visible() properties of a grid column. The first one will hide the column only visually using CSS. The second one will cause the column not to be rendered at all.
+
+
 ## Known Limitations
 
 * All [known limitations](https://docs.telerik.com/kendo-ui/framework/drawing/limitations-browser-support) of the Kendo UI for jQuery HTML Drawing module apply.
