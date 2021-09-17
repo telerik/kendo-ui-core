@@ -11916,6 +11916,31 @@ The supported values are:
     });
     </script>
 
+##### Example - set the chart series aggregate using a function
+
+    <div id="chart"></div>
+    <script>
+    $("#chart").kendoChart({
+      categoryAxis: {
+        categories: [
+          new Date("2012/01/01"),
+          new Date("2012/01/02"),
+          new Date("2012/01/02")
+        ],
+        type: "date"
+      },
+      series: [{
+          data: [1, 2, 3],
+          aggregate: function(values, series, dataItems, category) {
+            // Two values with the same date(2 and 3), add them together and then divide them by the total number of values with the same category.
+            let average = values.reduce((a, b) => a + b) / values.length;
+
+            return average;
+          }
+      }]
+    });
+    </script>
+
 ### series.autoFit `Boolean` *(default: false)*
 
 If set to true, the Chart automatically scales down to fit the content area. Applicable for the Pie and Donut series.
@@ -14464,7 +14489,7 @@ The distance of the labels when [series.type](/api/javascript/dataviz/ui/chart#c
 
 ### series.labels.font `String|Function` *(default: "12px Arial,Helvetica,sans-serif")*
 
-The font style of the labels. Accepts a valid CSS color string, for example "20px 'Courier New'".
+The font style of the labels. Accepts a valid CSS font string, for example "20px Courier New'".
 
 #### Example - set the chart series label font
     <div id="chart"></div>
@@ -37162,6 +37187,8 @@ The result can be saved using [kendo.saveAs](/api/javascript/kendo/methods/savea
 
 The export operation is asynchronous and returns a [promise](https://api.jquery.com/Types/#Promise).
 The promise will be resolved with a PDF file encoded as a [Data URI](https://developer.mozilla.org/en-US/docs/data_URIs).
+
+The available configuration options can be found in the [PDFOptions](/api/javascript/drawing/pdfoptions) api.
 
 #### Parameters
 

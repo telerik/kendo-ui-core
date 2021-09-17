@@ -117,7 +117,7 @@ You can also target specific columns by using the `:nth-child()` selector.
         toolbar: ["pdf"],
         pdf: {
           fileName: "Kendo UI Grid Export.pdf",
-          paperSize: "A4",
+          paperSize: "A2",
           allPages: true,
           avoidLinks: true,
           margin: { top: "1.5cm", right: "0.5cm", bottom: "1cm", left: "0.5cm" },

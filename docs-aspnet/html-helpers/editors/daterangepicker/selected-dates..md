@@ -23,6 +23,10 @@ The following example demonstrates how to render a DateRangePicker with an initi
 )
 ```
 
+You can access the selected start and end range using the .range() method as demonstrated here:
+
+[DateRangePicker range() method](https://docs.telerik.com/kendo-ui/api/javascript/ui/daterangepicker/methods/range)
+
 ## See Also
 
 * [Selecting Date Ranges by Using the DateRangePicker (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/date-range)

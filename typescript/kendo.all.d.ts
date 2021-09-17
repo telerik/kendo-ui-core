@@ -3370,8 +3370,8 @@ declare namespace kendo.ui {
         open(): void;
         setOptions(options: any): void;
         value(): Date;
-        value(value: Date): void;
-        value(value: string): void;
+        value(value?: Date): void;
+        value(value?: string): void;
 
     }
 

@@ -142,9 +142,103 @@ Enables the events in the Kendo UI Timeline to be expandable or collapsible. Whe
 
 Sets the field of the data item that provides the actions information for the event.
 
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataActionsField: "actions1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions1": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
+
 ### dataDescriptionField `String`*(default: "description")*
 
 Sets the field of the data item that provides the description information for the event.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataDescriptionField: "description1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+          
+    var data = [
+      {
+        "description1": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
 
 ### dataDateField `String`*(default: "date")*
 
@@ -194,17 +288,205 @@ Sets the field of the data item that provides information when the given event h
 
 Sets the field of the data item that provides the value for the alt attribute of the images.
 
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataImagesAltField: "altField1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+          
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField1": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
+
 ### dataImagesField `String`*(default: "images")*
 
 Sets the field of the data item that provides the images information for the event.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataImagesField: "images1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+          
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images1": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
 
 ### dataSubtitleField `String`*(default: "subtitle")*
 
 Sets the field of the data item that provides the subtitle information for the event.
 
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataSubtitleField: "subtitle1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+          
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title": "Barcelona \u0026 Tenerife",
+        "subtitle1": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
+
 ### dataTitleField `String`*(default: "title")*
 
 Sets the field of the data item that provides the title information for the event.
+
+#### Example
+
+    <div id="timeline"></div>
+    <script>
+    $(document).ready(function () {
+        $("#timeline").kendoTimeline({
+            dataSource: {
+              data: data,
+              schema: {
+                model: {
+                  fields: {
+                    date: {
+                      type: "date"
+                    }
+                  }
+                }
+              }
+            },
+          	dataTitleField: "title1",
+            alternatingMode: true,
+            collapsibleEvents: true,
+            orientation: "vertical"
+        });
+    });
+          
+    var data = [
+      {
+        "description": "Barcelona is an excellent place to discover world-class arts and culture. Bullfighting was officially banned several years ago, but the city remains rich with festivals and events. The sights in Barcelona are second to none. Don’t miss the architectural wonder, Casa Mila—otherwise known as La Pedrera. It’s a modernist apartment building that looks like something out of an expressionist painting. Make your way up to the roof for more architectural surprises. And if you like Casa Mila, you’ll want to see another one of Antoni Gaudi’s architectural masterpieces, Casa Batllo, which is located at the center of Barcelona.\r\nTenerife, one of the nearby Canary Islands, is the perfect escape once you’ve had your fill of the city. In Los Gigantes, life revolves around the marina.",
+        "date": "2008-05-24T22:00:00.000Z",
+        "title1": "Barcelona \u0026 Tenerife",
+        "subtitle": "May 25, 2008",
+        "altField": "Arc de Triomf, Barcelona, Spain",
+        "images": [
+          {
+            "src": "https://demos.telerik.com/aspnet-mvc/tripxpert/Images/Gallery/Barcelona-and-Tenerife/Arc-de-Triomf,-Barcelona,-Spain_Liliya-Karakoleva.JPG?width=500&amp;height=500"
+          }
+        ],
+        "actions": [
+          {
+            "text": "More info about Barcelona",
+            "url": "https://en.wikipedia.org/wiki/Barcelona"
+          }
+        ]
+      }
+    ]
+    </script>
 
 ### dataSource `kendo.data.DataSource | Object`
 
