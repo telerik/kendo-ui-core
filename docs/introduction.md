@@ -11,7 +11,7 @@ position: 2
 
 Thank you for choosing Progress<sup>®</sup> Kendo UI for jQuery!  
 
-Kendo UI is a comprehensive HTML5 user interface framework for building interactive and high-performance websites and applications. It comes with a library of 70+ UI widgets, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library.
+Kendo UI is a comprehensive HTML5 user interface framework for building interactive and high-performance websites and applications. It comes with a library of 110+ UI widgets, an abundance of data-visualization gadgets, client-side data source, and a built-in MVVM (Model-View-ViewModel) library.
 
 Kendo UI for jQuery provides AngularJS and Bootstrap integration and is also distributed as part of several product units that you can choose from depending on your project requirements. The suite includes widgets for enterprise-grade line-of-business applications and is suitable for creating professional websites that require expert and timely technical support.
 
