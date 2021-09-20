@@ -16,8 +16,23 @@ Design files for Figma&mdash;building blocks for designers that match the Kendo 
 
 To enable efficient collaboration between designers and developers, we created three Kendo UI Kits for Figma: Material, Bootstrap, and Kendo Default. Each kit corresponds to one of the themes that ship with the Kendo UI jQuery components.
 
-<a href="https://www.figma.com/@progress" class="track--download-kendoui" style="display: inline-flex;" title="Download Kendo UI Kits">
-<button importance="ghost">
+<a href="https://www.figma.com/@progress" class="track--download-kendoui" style="text-decoration:none; display: inline-flex;" title="Download Kendo UI Kits">
+<button importance="ghost" style="display: flex;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                -webkit-box-pack: center;
+                                justify-content: center;
+                                outline: none;
+                                cursor: pointer;
+                                user-select: none;
+                                border-radius: 2px;
+                                font-weight: 500;
+                                font-size: 18px;
+                                line-height: 29px;
+                                padding: 0.5rem 1rem;
+                                background-color: transparent;
+                                border: 2px solid rgba(148, 216, 255, 0.533);
+                                color: rgb(101, 101, 101);">
 <span style="width: 21px; margin-right: 16px">
 <img src="images/figma-vector-logo-2.png" alt="Download Kendo UI Kits"/>
 </span>
