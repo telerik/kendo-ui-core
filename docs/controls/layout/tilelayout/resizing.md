@@ -12,6 +12,8 @@ The Kendo UI TileLayout widget allows you resize the containers by snapping to t
 
 The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/) mechanism, meaning that the widget increases how the element spans and the browser takes care of how to re-arrange the items if necessary.
 
+> **Note:** When [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) is enabled items should have a defined rowSpan and colSpan.
+
 ## Enabling the resizable feature of the TileLayout
 
 To enable the resizable feature of the TileLayout, set the [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) property to `true`.

@@ -1676,7 +1676,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
             fields: {
               id: { from: "ID", type: "number" },
               orderId: { from: "OrderID", type: "number", validation: { required: true } },
-              parentId: { from: "ParentID", type: "number", nullable: true, validation: { required: true } },
+              parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true, validation: { required: true } },
               start: { from: "Start", type: "date" },
               end: { from: "End", type: "date" },
               title: { from: "Title", defaultValue: "", type: "string" },
@@ -1761,7 +1761,7 @@ If the `dependencies` option is an existing [kendo.data.GanttDependencyDataSourc
           fields: {
             id: { from: "ID", type: "number" },
             orderId: { from: "OrderID", type: "number", validation: { required: true } },
-            parentId: { from: "ParentID", type: "number", nullable: true, validation: { required: true } },
+            parentId: { from: "ParentID", type: "number", defaultValue: null, nullable: true, validation: { required: true } },
             start: { from: "Start", type: "date" },
             end: { from: "End", type: "date" },
             title: { from: "Title", defaultValue: "", type: "string" },

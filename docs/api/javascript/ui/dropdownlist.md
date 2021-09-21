@@ -1167,7 +1167,14 @@ A jQuery object of the span element which holds the selected text.
 
     <input id="dropdownlist" />
     <script>
-    $("#dropdownlist").kendoDropDownList();
+    $("#dropdownlist").kendoDropDownList({
+        dataSource: [
+          { name: "Apples" },
+          { name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "name"
+    });
 
     var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 

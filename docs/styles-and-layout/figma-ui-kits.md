@@ -18,6 +18,7 @@ To enable efficient collaboration between designers and developers, we created t
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="text-decoration:none; display: inline-flex;" title="Download Kendo UI Kits">
 <button importance="ghost" style="display: flex;
+                                max-height: 50px;
                                 -webkit-box-align: center;
                                 align-items: center;
                                 -webkit-box-pack: center;

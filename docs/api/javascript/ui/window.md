@@ -922,23 +922,22 @@ Indicates whether the content will be fetched within an `iframe` or with AJAX, a
 
 #### Example
 
+    <button onclick="refreshContent()">Refresh</button>
     <div id="dialog"></div>
+
     <script>
-    $("#dialog").kendoWindow();
-    var dialog = $("#dialog").data("kendoWindow");
-    dialog.refresh("/feedbackForm");
+      $("#dialog").kendoWindow();
+      var dialog = $("#dialog").data("kendoWindow");
 
-    dialog.refresh({
-        url: "/feedbackForm",
-        data: { userId: 42 }
-    });
+      dialog.refresh({
+        url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent1.html"       
+      });
 
-    dialog.refresh({
-        url: "/userInfo", // returns JSON, { firstName: "Alyx", lastName: "Vance" }
-        data: { userId: 42 },
-        dataType: "json",
-        template: "Hello, #= firstName # #= lastName #"
-    });
+      function refreshContent(){
+        dialog.refresh({
+          url: "https://demos.telerik.com/kendo-ui/content/web/tabstrip/ajax/ajaxContent2.html",    
+        }).open();
+      }
     </script>
 
 ### restore
