@@ -50,6 +50,7 @@ The following example demonstrates how to map the `parentId` field to the corres
 * [Scrolling]({% slug scrolling_kendoui_treelist %})
 * [Multi-column headers]({% slug multicolumnheaders_kendoui_treelist %})
 * [Row Selection]({% slug selection_kendoui_treelist %})
+* [Accessibility]({% slug accessibility_kendoui_treelist %})
 
 ## Events, Fields, and Methods
 

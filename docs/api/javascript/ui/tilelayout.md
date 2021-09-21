@@ -567,6 +567,8 @@ Determines whether the reordering functionality will be enabled.
 
 Determines whether the resizing functionality will be enabled.
 
+> **Note:** When [`resizable`](/api/javascript/ui/tilelayout/configuration/resizable) is enabled items should have a defined rowSpan and colSpan.
+
 #### Example - enable resizing
     <script id="first" type="text/x-kendo-template">
     <h3>A</h3>

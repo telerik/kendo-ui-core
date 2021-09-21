@@ -59,7 +59,6 @@ var __meta__ = { // jshint ignore:line
         clickableItems = "> " + ACTIVEITEMSELECTOR + " > " + LINKSELECTOR + ", .k-panel > " + ACTIVEITEMSELECTOR + " > " + LINKSELECTOR,
         disabledItems = ITEM + ".k-state-disabled > .k-link",
         selectableItems = "> li > " + SELECTEDSELECTOR + ", .k-panel > li > " + SELECTEDSELECTOR,
-        defaultState = "k-state-default",
         ARIA_DISABLED = "aria-disabled",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
@@ -93,12 +92,12 @@ var __meta__ = { // jshint ignore:line
         var result = "k-item",
             index = item.index;
 
+        result += group.firstLevel ? " k-panelbar-header" : " k-panelbar-item";
+
         if (item.enabled === false) {
             result += " " + DISABLEDCLASS;
         } else if (item.expanded === true) {
             result += " " + ACTIVECLASS;
-        } else {
-            result += " k-state-default";
         }
 
         if (index === 0) {
@@ -113,15 +112,15 @@ var __meta__ = { // jshint ignore:line
             result += " " + item.cssClass;
         }
 
+        if (item.level) {
+            result += " k-level-" + item.level();
+        }
+
         return result;
     },
 
-    textClass: function(item, group) {
+    textClass: function(item) {
         var result = LINK;
-
-        if (group.firstLevel) {
-            result += " k-header";
-        }
 
         if (item.selected) {
             result += " " + SELECTEDCLASS;
@@ -135,7 +134,7 @@ var __meta__ = { // jshint ignore:line
     arrowClass: function(item) {
         var result = "k-icon";
 
-        result += item.expanded ? " k-panelbar-collapse k-i-arrow-60-up" : " k-panelbar-expand k-i-arrow-60-down";
+        result += item.expanded ? " k-panelbar-toggle k-panelbar-collapse k-i-arrow-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-arrow-chevron-down";
 
         return result;
     },
@@ -149,7 +148,7 @@ var __meta__ = { // jshint ignore:line
         return group.expanded !== true;
     },
     groupCssClass: function() {
-        return "k-group k-panel";
+        return "k-panelbar-group k-group k-panel";
     },
     contentAttributes: function(content) {
         return content.item.expanded !== true ? " style='display:none'" : "";
@@ -169,6 +168,12 @@ var __meta__ = { // jshint ignore:line
         items.filter(".k-last:not(:last-child)").removeClass(LAST);
         items.filter(":first-child").addClass(FIRST);
         items.filter(":last-child").addClass(LAST);
+    }
+
+    function updateLevel (item) {
+        item = $(item);
+
+        item.addClass("k-level-" + item.parentsUntil(".k-panelbar", "ul").length);
     }
 
      function updateItemHtml(item) {
@@ -206,7 +211,7 @@ var __meta__ = { // jshint ignore:line
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.wrapper = that.element.addClass("k-widget k-reset k-panelbar");
+            element = that.wrapper = that.element.addClass("k-panelbar");
             options = that.options;
 
             if (element[0].id) {
@@ -353,16 +358,16 @@ var __meta__ = { // jshint ignore:line
                      options.template = template(
                         "# var text = " + fieldAccessor("text") + "(data.item); #" +
                         "# if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {#" +
-                            "#= text #" +
+                            "<span class='k-panelbar-item-text'>#= text #</span>" +
                         "# } else { #" +
-                            "#: text #" +
+                            "<span class='k-panelbar-item-text'>#: text #</span>" +
                         "# } #"
                     );
                 }
 
             that.templates = {
                 content: template(
-                    "<div class='k-content'#= contentAttributes(data) #>#= content(item) #</div>"
+                    "<div class='k-panelbar-content k-content'#= contentAttributes(data) #>#= content(item) #</div>"
                 ),
                 group: template(
                     "<ul role='group' aria-hidden='#= ariaHidden(group) #' class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
@@ -376,9 +381,9 @@ var __meta__ = { // jshint ignore:line
                      "# var contentUrl = contentUrl(item); #" +
                      "# var tag = url||contentUrl ? 'a' : 'span'; #" +
 
-                    "<#= tag # class='#= textClass(item, group) #' #= contentUrl ##= textAttributes(url) #>" +
+                    "<#= tag # class='#= textClass(item) #' #= contentUrl ##= textAttributes(url) #>" +
                         "# if (imageUrl) { #" +
-                              "<img class='k-image' alt='' src='#= imageUrl #' />" +
+                              "<img class='k-panelbar-item-icon k-image' alt='' src='#= imageUrl #' />" +
                         "# } #" +
 
                         "# if (spriteCssClass) { #" +
@@ -537,7 +542,7 @@ var __meta__ = { // jshint ignore:line
                         var item = $(this),
                             parent = item.parent();
 
-                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-collapse k-i-arrow-60-up" : " k-panelbar-expand k-i-arrow-60-down") + "'/>");
+                        item.append("<span class='k-icon " + (parent.hasClass(ACTIVECLASS) ? " k-panelbar-toggle k-panelbar-collapse k-i-arrow-chevron-up" : " k-panelbar-toggle k-panelbar-expand k-i-arrow-chevron-down") + "'/>");
                     });
          },
 
@@ -942,7 +947,6 @@ var __meta__ = { // jshint ignore:line
         _toggleDisabled: function(element, enable) {
             element = this.element.find(element);
             element
-                .toggleClass(defaultState, enable)
                 .toggleClass(DISABLEDCLASS, !enable)
                 .attr(ARIA_DISABLED, !enable);
         },
@@ -1006,6 +1010,7 @@ var __meta__ = { // jshint ignore:line
             each(inserted.items, function () {
                 inserted.group.append(this);
                 updateFirstLast(this);
+                updateLevel(this);
             });
 
             this.updateArrow(referenceItem);
@@ -1023,6 +1028,7 @@ var __meta__ = { // jshint ignore:line
             each(inserted.items, function () {
                 referenceItem.before(this);
                 updateFirstLast(this);
+                updateLevel(this);
             });
 
             updateFirstLast(referenceItem);
@@ -1039,6 +1045,7 @@ var __meta__ = { // jshint ignore:line
             each(inserted.items, function () {
                 referenceItem.after(this);
                 updateFirstLast(this);
+                updateLevel(this);
             });
 
             updateFirstLast(referenceItem);
@@ -1295,7 +1302,7 @@ var __meta__ = { // jshint ignore:line
             panels = that.element
                          .find("li > ul")
                          .not(function () { return $(this).parentsUntil(".k-panelbar", "div").length; })
-                         .addClass("k-group k-panel")
+                         .addClass("k-panelbar-group k-group k-panel")
                          .attr("role", "group");
 
             panelsParent = panels.parent();
@@ -1356,10 +1363,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             item
-                .filter(":not([disabled]):not([class*=k-state])")
-                .addClass("k-state-default");
-
-            item
                 .filter("li[disabled]")
                 .addClass("k-state-disabled")
                 .attr(ARIA_DISABLED, true)
@@ -1367,7 +1370,7 @@ var __meta__ = { // jshint ignore:line
 
             item
                 .children("div")
-                .addClass(CONTENT)
+                .addClass(CONTENT + " k-panelbar-content")
                 .attr(ARIA_HIDDEN, true)
                 .hide()
                 .parent()
@@ -1386,9 +1389,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (!item.children(LINKSELECTOR)[0]) {
-                wrapElement = "<span class='" + LINK + "'></span>";
+                wrapElement = "<span class='" + LINK + "'><span class='k-panelbar-item-text'></span></span>";
                 if (contentUrls && contentUrls[index] && item[0].parentNode == root) {
-                    wrapElement = '<a class="k-link k-header" href="' + contentUrls[index] + '"></a>';
+                    wrapElement = '<a class="k-link" href="' + contentUrls[index] + '"></a>';
                 }
 
                 item
@@ -1397,10 +1400,15 @@ var __meta__ = { // jshint ignore:line
                     .wrapAll(wrapElement);
             }
 
+
             if (item.parent(".k-panelbar")[0]) {
-                item
-                    .children(LINKSELECTOR)
-                    .addClass("k-header");
+                item.addClass("k-panelbar-header");
+            } else {
+                item.addClass("k-panelbar-item");
+            }
+
+            if (!/k\-level\-\d+/i.test(item.attr("class"))) {
+                item.addClass("k-level-" + item.parentsUntil(this.element, "ul").length);
             }
         },
 
@@ -1414,7 +1422,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            if (target.closest(".k-widget")[0] != element[0]) {
+            if (target.closest(".k-panelbar")[0] != element[0]) {
                 return;
             }
 
@@ -1546,9 +1554,9 @@ var __meta__ = { // jshint ignore:line
                 .attr(ARIA_EXPANDED, !visibility)
                 .toggleClass(ACTIVECLASS, !visibility)
                 .find("> .k-link > .k-panelbar-collapse,> .k-link > .k-panelbar-expand")
-                    .toggleClass("k-i-arrow-60-up", !visibility)
+                    .toggleClass("k-i-arrow-chevron-up", !visibility)
                     .toggleClass("k-panelbar-collapse", !visibility)
-                    .toggleClass("k-i-arrow-60-down", visibility)
+                    .toggleClass("k-i-arrow-chevron-down", visibility)
                     .toggleClass("k-panelbar-expand", visibility);
             if (visibility) {
                 animation = extend(collapse, { hide: true });
@@ -1575,7 +1583,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _addGroupElement: function(element) {
-            var group = $('<ul role="group" aria-hidden="true" class="k-group k-panel" style="display:none"></ul>');
+            var group = $('<ul role="group" aria-hidden="true" class="k-panelbar-group k-group k-panel" style="display:none"></ul>');
 
             element.append(group);
             return group;
@@ -1696,7 +1704,7 @@ var __meta__ = { // jshint ignore:line
             element.find("> ." + HIGHLIGHTCLASS + ", .k-panel > ." + HIGHLIGHTCLASS).removeClass(HIGHLIGHTCLASS);
 
             link.addClass(SELECTEDCLASS);
-            link.parentsUntil(element, ITEM).filter(":has(.k-header)").addClass(HIGHLIGHTCLASS);
+            link.parentsUntil(element, ITEM).filter(":has(.k-link)").addClass(HIGHLIGHTCLASS);
             that._current(item[0] ? item : null);
             if(dataItem){
                  dataItem.set("selected", true);

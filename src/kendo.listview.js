@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.editable", "./kendo.selectable" ], f);
+    define([ "./kendo.data", "./kendo.editable", "./kendo.selectable", "./kendo.pager" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -18,6 +18,11 @@ var __meta__ = { // jshint ignore:line
         name: "Selection",
         description: "Support for selection",
         depends: [ "selectable" ]
+    }, {
+        id: "listview-paging",
+        name: "Paging",
+        description: "Support for paging",
+        depends: [ "pager" ]
     } ]
 };
 
@@ -31,12 +36,18 @@ var __meta__ = { // jshint ignore:line
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
         EMPTY_STRING = "",
+        DOT = ".",
         FOCUSSELECTOR = "> *:not(.k-loading-mask)",
         PROGRESS = "progress",
         ERROR = "error",
         FOCUSED = "k-state-focused",
         SELECTED = "k-state-selected",
         KEDITITEM = "k-edit-item",
+        PAGER_CLASS = "k-listview-pager",
+        ITEM_CLASS = "k-listview-item",
+        TABINDEX = "tabindex",
+        ARIA_SETSIZE = "aria-setsize",
+        ARIA_POSINSET = "aria-posinset",
         EDIT = "edit",
         REMOVE = "remove",
         SAVE = "save",
@@ -108,6 +119,7 @@ var __meta__ = { // jshint ignore:line
             autoBind: true,
             selectable: false,
             navigatable: false,
+            pageable: false,
             height: null,
             template: EMPTY_STRING,
             altTemplate: EMPTY_STRING,
@@ -185,7 +197,13 @@ var __meta__ = { // jshint ignore:line
         },
 
         _dataSource: function() {
-            var that = this;
+            var that = this,
+                pageable = that.options.pageable,
+                dataSource = that.options.dataSource;
+
+            if ($.isPlainObject(pageable) && pageable.pageSize !== undefined) {
+                dataSource.pageSize = pageable.pageSize;
+            }
 
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
@@ -195,7 +213,7 @@ var __meta__ = { // jshint ignore:line
                 that._errorHandler = proxy(that._error, that);
             }
 
-            that.dataSource = DataSource.create(that.options.dataSource)
+            that.dataSource = DataSource.create(dataSource)
                                 .bind(CHANGE, that._refreshHandler)
                                 .bind(PROGRESS, that._progressHandler)
                                 .bind(ERROR, that._errorHandler);
@@ -227,6 +245,8 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this.content = this.element;
             }
+
+            this.content.attr(TABINDEX, -1);
 
             if (height) {
                 this.element.css("height", height);
@@ -393,11 +413,19 @@ var __meta__ = { // jshint ignore:line
 
             for (idx = index, length = view.length; idx < length; idx++) {
                 item = items.eq(idx);
+
+                item.addClass(ITEM_CLASS);
+
                 item.attr(kendo.attr("uid"), view[idx].uid)
                     .attr("role", role);
 
                 if (that.options.selectable) {
                     item.attr("aria-selected", "false");
+                }
+
+                if (that.options.pageable) {
+                    item.attr(ARIA_SETSIZE, that.dataSource.total());
+                    item.attr(ARIA_POSINSET, that.dataSource.indexOf(that.dataItem(item)) + 1);
                 }
             }
 
@@ -423,17 +451,44 @@ var __meta__ = { // jshint ignore:line
         _pageable: function() {
             var that = this,
                 pageable = that.options.pageable,
-                settings,
-                pagerId;
+                navigatable = that.options.navigatable,
+                pagerWrap,
+                settings;
 
-            if ($.isPlainObject(pageable)) {
-                pagerId = pageable.pagerId;
+            if (!pageable) {
+                return;
+            }
+
+            pagerWrap = that.wrapper.find(DOT + PAGER_CLASS);
+
+            if (!pagerWrap.length) {
+                pagerWrap = $('<div />').addClass(PAGER_CLASS);
+            }
+
+            if (pageable.position === "top") {
+                pagerWrap
+                    .addClass(kendo.format("{0}-{1}", PAGER_CLASS, pageable.position))
+                    .prependTo(that.wrapper);
+            } else {
+                pagerWrap.appendTo(that.wrapper);
+            }
+
+            if (that.pager) {
+                that.pager.destroy();
+            }
+
+            if (typeof pageable === "object" && pageable instanceof kendo.ui.Pager) {
+                that.pager = pageable;
+            } else {
+                pagerWrap = pageable.pagerId ? $("#" + pageable.pagerId) : pagerWrap;
+
                 settings = $.extend({}, pageable, {
                     dataSource: that.dataSource,
+                    navigatable: navigatable,
                     pagerId: null
                 });
 
-                that.pager = new kendo.ui.Pager($("#" + pagerId), settings);
+                that.pager = new kendo.ui.Pager(pagerWrap, settings);
             }
         },
 
@@ -458,6 +513,9 @@ var __meta__ = { // jshint ignore:line
 
                 if (navigatable) {
                     that.element.on("keydown" + NS, function(e) {
+
+                        if (!$(e.target).is(that.element)) { return; }
+
                         if (e.keyCode === keys.SPACEBAR) {
                             current = that.current();
 
@@ -626,7 +684,7 @@ var __meta__ = { // jshint ignore:line
                             active = activeElement(), idx,
                             scrollable = that.options.scrollable;
 
-                        if ((!canHandle && !isTextBox && key !== keys.ESC) || (isTextBox && key !== keys.ESC && key !== keys.ENTER)) {
+                        if (!target.is(that.element) || (!canHandle && !isTextBox && key !== keys.ESC) || (isTextBox && key !== keys.ESC && key !== keys.ENTER)) {
                             return;
                         }
 
