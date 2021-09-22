@@ -165,6 +165,27 @@ The following example demonstrates how to subscribe to events by a template dele
         )
     )
 
+### MultiSelect Down Arrow
+
+To enable the down arrow for toggling the popup container as in the Telerik UI DropDownList, set the DownArrow() option:
+
+     @(Html.Kendo().MultiSelect()
+        .Name("movies")
+        .DownArrow()
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "12 Angry Men", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Il buono, il brutto, il cattivo.", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Inception", Value ="3"
+            }
+        })
+    )
+
 ## See Also
 
 * [Basic Usage by the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
