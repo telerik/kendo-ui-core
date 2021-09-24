@@ -34328,15 +34328,16 @@ The step of the y axis major ticks.
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      yAxis: [{
-        majorTicks: {
-          step: 2
-        },
-        categories: ["2011", "2012", "2013"]
-      }],
       series: [{
-        data: [1, 2, 3]
-      }]
+        type: "scatter",
+        data: [[1, 1],[2, 2]]
+      }],
+      yAxis: {
+        majorTicks: {
+          step: 2,
+          size: 15
+        }
+      }
     });
     </script>
 
@@ -34349,15 +34350,16 @@ The skip of the y axis major ticks.
     <div id="chart"></div>
     <script>
     $("#chart").kendoChart({
-      xAxis: [{
-        majorTicks: {
-          skip: 2
-        },
-        categories: ["2011", "2012", "2013"]
-      }],
       series: [{
-        data: [1, 2, 3]
-      }]
+        type: "scatter",
+        data: [[1, 1],[2, 2]]
+      }],
+      yAxis: {
+        majorTicks: {
+          skip: 2,
+          size: 15
+        }
+      }
     });
     </script>
 

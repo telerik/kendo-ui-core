@@ -8357,7 +8357,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
       $("#grid").kendoGrid({
         dataSource: [ { name: "Jane Doe", age: 30 }, { name: "John Doe", age: 33 } ],
         rowTemplate: function(dataItem){
-          return "<tr data-uid=" + dataItem.uid + "><td colspan='2'><strong>" + dataItem.name + "</strong><strong>" + dataItem.age + "</strong></td></tr>";
+          return "<tr data-uid=" + dataItem.uid + "><td colspan='1'><strong>" + dataItem.name + "</strong></td><td colspan='1'><strong>" + dataItem.age + "</strong></td></tr>";
         }
       });
     </script>
@@ -8367,9 +8367,11 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
     <div id="grid"></div>
     <script id="template" type="text/x-kendo-template">
         <tr data-uid="#= uid #">
-            <td colspan="2">
+            <td colspan="1">
                 <strong>#: name #</strong>
-                <strong>#: age #</strong>
+            </td>
+            <td colspan="1">
+              <strong>#: age #</strong>
             </td>
         </tr>
     </script>
@@ -8389,7 +8391,7 @@ The [template](/api/javascript/kendo/methods/template) which renders rows. Be de
     <script>
     $("#grid").kendoGrid({
       dataSource: [ { name: "Jane Doe", age: 30 }, { name: "John Doe", age: 33 } ],
-      rowTemplate: '<tr data-uid="#= uid #"><td colspan="2"><strong>#: name #</strong><strong>#: age #</strong></td></tr>'
+      rowTemplate: '<tr data-uid="#= uid #"><td colspan="1"><strong>#: name #</strong></td><td colspan="1"><strong>#: age #</strong></td></tr>'
     });
     </script>
 

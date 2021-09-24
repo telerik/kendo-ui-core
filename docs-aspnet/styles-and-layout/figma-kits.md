@@ -18,7 +18,23 @@ Design Files for Figma&mdash;building blocks for designers matching UI for {{sit
 To achieve efficient collaboration between designers and developers, we have created three Telerik UI kits for Figma (one for each of the top three themes we ship with {{site.product}}): Material, Bootstrap and Default (our own styling). 
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="display: inline-flex;" title="Download Telerik UI Kits">
-<button importance="ghost">
+<button importance="ghost" style="display: flex;
+                                max-height: 50px;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                -webkit-box-pack: center;
+                                justify-content: center;
+                                outline: none;
+                                cursor: pointer;
+                                user-select: none;
+                                border-radius: 2px;
+                                font-weight: 500;
+                                font-size: 18px;
+                                line-height: 29px;
+                                padding: 0.5rem 1rem;
+                                background-color: transparent;
+                                border: 2px solid rgba(148, 216, 255, 0.533);
+                                color: rgb(101, 101, 101);">
 <span style="width: 21px; margin-right: 16px">
 <img src="images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
 </span>
@@ -103,7 +119,23 @@ The Design Files for Figma are building blocks for designers that match the Tele
 We’ve created three distinct Telerik UI kits for Figma for each of the most popular themes shipped with UI for ASP.NET MVC library, thus aiming to facilitate efficient collaboration between designers and developers in their efforts for creating and implementing the perfect project design. 
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="display: inline-flex;" title="Download Telerik UI Kits">
-<button importance="ghost">
+<button importance="ghost" style="display: flex;
+                                max-height: 50px;
+                                -webkit-box-align: center;
+                                align-items: center;
+                                -webkit-box-pack: center;
+                                justify-content: center;
+                                outline: none;
+                                cursor: pointer;
+                                user-select: none;
+                                border-radius: 2px;
+                                font-weight: 500;
+                                font-size: 18px;
+                                line-height: 29px;
+                                padding: 0.5rem 1rem;
+                                background-color: transparent;
+                                border: 2px solid rgba(148, 216, 255, 0.533);
+                                color: rgb(101, 101, 101);">
 <span style="width: 21px; margin-right: 16px">
 <img src="images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
 </span>

@@ -248,6 +248,23 @@
             assert.isOk(dom.find(".k-listview-content > .k-listview-item:eq(2)").hasClass("k-state-selected"));
         });
 
+        it("ctrl + space key when multiple selectoin is enabled triggers change event", function() {
+            var triggered = 0;
+            var dom = setup({
+                selectable: "multiple",
+                change: function() {
+                    triggered += 1;
+                }
+            });
+
+            dom.focus()
+                .press(kendo.keys.DOWN)
+                .press(kendo.keys.SPACEBAR)
+                .press(kendo.keys.SPACEBAR, true);
+
+            assert.equal(triggered, 2);
+        });
+
         it("space key on already selected item when multiple selectoin is enabled unselects the item", function() {
             var dom = setup({ selectable: "multiple" });
 
@@ -462,6 +479,7 @@
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
+            kendo.destroy(element);
             element.remove();
         });
 
@@ -506,7 +524,13 @@
         });
 
         it("init calls _setContentHeight", function() {
-            var lv = createListView(element, {scrollable:{endless: true}, height: 400, template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>" });
+            var lv = createListView(element, {
+                scrollable:{
+                    endless: true
+                },
+                height: 400,
+                template: "<div style='padding:100px' class='k-listview-item'>#= value #</div>"
+            });
 
             var lvStub = stub(lv, {
                 _setContentHeight: $.noop
