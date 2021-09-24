@@ -48,6 +48,8 @@ var __meta__ = { // jshint ignore:line
         TABINDEX = "tabindex",
         ARIA_SETSIZE = "aria-setsize",
         ARIA_POSINSET = "aria-posinset",
+        ARIA_ROLE = "role",
+        ARIA_LABEL = "aria-label",
         EDIT = "edit",
         REMOVE = "remove",
         SAVE = "save",
@@ -235,9 +237,9 @@ var __meta__ = { // jshint ignore:line
             this.element.addClass("k-widget k-listview");
 
             if (options.navigatable || options.selectable) {
-                this.element.attr("role", "listbox");
+                this.element.attr(ARIA_ROLE, "listbox");
             } else {
-                this.element.attr("role", "list");
+                this.element.attr(ARIA_ROLE, "list");
             }
 
             if (options.contentElement) {
@@ -411,6 +413,11 @@ var __meta__ = { // jshint ignore:line
 
             items = that.items().not(".k-loading-mask");
 
+            if (!view.length) {
+                that.element.removeAttr(ARIA_ROLE);
+                that.element.removeAttr(ARIA_LABEL);
+            }
+
             for (idx = index, length = view.length; idx < length; idx++) {
                 item = items.eq(idx);
 
@@ -529,6 +536,7 @@ var __meta__ = { // jshint ignore:line
                                 } else {
                                     if (current && current.hasClass(SELECTED)) {
                                         current.removeClass(SELECTED);
+                                        that.trigger(CHANGE);
                                         return;
                                     }
                                 }

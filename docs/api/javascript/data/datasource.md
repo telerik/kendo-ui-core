@@ -3660,7 +3660,7 @@ The filter configuration. Accepts the same values as the [`filter`](/api/javascr
 
 Gets the data item (model) with the specified [`id`](/api/javascript/data/model#fields-id).
 
-> The `get` method requires the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option to be set and the `id` of the model to be specified.
+> The `get` method requires the [`schema.model`](/api/javascript/data/datasource#configuration-schema.model) option to be set and the `id` of the model to be specified. The `get` method will look for items only on the current page if [`serverPaging`](/api/javascript/data/datasource/configuration/serverpaging) is enabled.
 
 #### Parameters
 
