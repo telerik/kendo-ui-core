@@ -88,11 +88,11 @@ The Kendo Editor templates are included in the <code>~Views\Shared\EditorTemplat
             <td><strong>Standard</strong></td>
             <td><p>The Standard template features:</p>
                 <ul>
-                    <li> Everything from the <strong>Blank Project<strong></li>
-                    <li> Responsive Panel and Menu in  <code>_Layout.cshtml</code> </li>
-                    <li> PanelBar in <code>Index.cshtml</code></li>
-                    <li> TabStrip in <code>Contact.cshtml</code></li>
-                    <li> HTML styled with Cards CSS in <code>About.cshtml</code></li>
+                    <li> Everything from the <strong>Blank Project<strong>.</li>
+                    <li> Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
+                    <li> PanelBar in <code>Index.cshtml</code>.</li>
+                    <li> TabStrip in <code>Contact.cshtml</code>.</li>
+                    <li> HTML styled with [Cards](https://docs.telerik.com/{{ site.platform }}/styles-and-layout/cards) CSS in <code>About.cshtml</code>.</li>
                 </ul>
             </td>
         </tr>
@@ -100,9 +100,9 @@ The Kendo Editor templates are included in the <code>~Views\Shared\EditorTemplat
             <td><strong>Grid and Menu</strong></td>
             <td><p>The Grid and Menu template features:</p>
                 <ul>
-                    <li> Everything from the <strong>Blank Project</strong></li>
-                    <li> Buttons and Grid in <code>Index.cshtml</code> </li>
-                    <li> Responsive Panel and Menu in <code>_Layout.cshtml</code></li>
+                    <li> Everything from the <strong>Blank Project</strong>.</li>
+                    <li> Buttons and Grid in <code>Index.cshtml</code>.</li>
+                    <li> Responsive Panel and Menu in <code>_Layout.cshtml</code>.</li>
                 </ul>
             </td>
         </tr>
@@ -116,7 +116,21 @@ It features an editable grid in <code>Index.cshtml</code> that uses handlers to 
             <td><p>The Dashboard template features:</p>
                 <ul>
                     <li> Everything from the <strong>Blank Project</strong> except the editor templates.</li>
-                    <li> A TileLayout with Charts and Grids in <code>Index.cshtml</code> as well as a Shared DataSource and dynamicaly populated templates</li>
+                    <li> A TileLayout with Charts and Grids in <code>Index.cshtml</code> as well as a Shared DataSource and dynamicaly populated templates.</li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Admin</strong></td>
+            <td><p>The Admin is a Razor Pages template configured with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/overview">TagHelpers</a>. It features:</p>
+                <ul>
+                    <li>Everything from the <strong>Blank Project</strong>.</li>
+                    <li>Authentication functionallity (Registration, Login, and Logout) in <code>Areas/Login/Pages</code>.</li>
+                    <li>A navigation that is created by using the <a href="https://docs.telerik.com/aspnet-core/tag-helpers/navigation/drawer/overview">Drawer</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/navigation/appbar/overview">AppBar</a> components.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/cards">Cards</a>, <a href="https://docs.telerik.com/aspnet-core/tag-helpers/gauges/arcgauge/overview">Arc Gauge</a>, <a href="https://docs.telerik.com/aspnet-core/tag-helpers/charts/overview">Chart</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/data-management/grid/overview">Grid</a> in <code>Index.cshtml</code>.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with a variety of <a href="https://docs.telerik.com/aspnet-core/tag-helpers/charts/overview">Charts</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/gauges/radialgauge/overview">Gauges</a> in <code>Performance.cshtml</code>.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/charts/overview">Bubble Chart</a> and <a href="https://docs.telerik.com/aspnet-core/html-helpers/data-management/listview/overview">ListView</a> with editable <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/cards">Cards</a> in <code>Products.cshtml</code> as well as <a href="https://docs.telerik.com/aspnet-core/tag-helpers/data-management/pager/overview">Pager</a> and search panel.</li>
+                    <li>A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/form/overview">Form</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/scheduling/calendar/overview">Calendar</a> in <code>Settings.cshtml</code>.</li>
                 </ul>
             </td>
         </tr>

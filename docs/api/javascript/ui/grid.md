@@ -11962,6 +11962,88 @@ The widget instance which fired the event.
     grid.dataSource.fetch();
     </script>
 
+#### Example - apply custom cell styling in the dataBound event handler
+
+    <style>
+      .k-grid {
+        width: 500px;
+      }
+
+      .critical {
+        background-color: #fdd;
+      }
+
+      .warning {
+        background-color: #fda;
+      }
+
+      .ok {
+        background-color: #ced;
+      }
+
+    </style>
+
+    <div id="grid-databound-dataitems"></div>
+    <script>
+      // sample datasource
+      var products = [
+        { ID: 1, ProductName: "Foo", UnitsInStock: 9, Discontinued: false },
+        { ID: 2, ProductName: "Bar", UnitsInStock: 16, Discontinued: false },
+        { ID: 3, ProductName: "Baz", UnitsInStock: 3, Discontinued: true }
+      ];
+
+      function getUnitsInStockClass(units) {
+        if (units < 5) {
+          return "critical";
+        } else if (units < 10) {
+          return "warning";
+        } else {
+          return "ok";
+        }
+      }
+
+      $(document).ready(function () {
+        $("#grid-databound-dataitems").kendoGrid({
+          dataSource: {
+            data: products,
+            schema: {
+              model: {
+                id: "ID",
+                fields: {
+                  ID: { type: "number" },
+                  ProductName: { },
+                  UnitsInStock: { type: "number" },
+                  Discontinued: { type: "boolean" }
+                }
+              }
+            }
+          },
+          sortable: true,
+          columns: [
+            { field: "ProductName", title: "Product Name" },
+            { field: "UnitsInStock", title:"Units In Stock", width: "120px" },
+            { field: "Discontinued", width: "120px" }
+          ],
+          dataBound: function(e) {
+            // get the index of the UnitsInStock cell
+            var columns = e.sender.columns;
+            var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "UnitsInStock" + "]").index();
+
+            // iterate the table rows and apply custom cell styling
+            var rows = e.sender.tbody.children();
+            for (var j = 0; j < rows.length; j++) {
+              var row = $(rows[j]);
+              var dataItem = e.sender.dataItem(row);
+              var units = dataItem.get("UnitsInStock");
+
+              var cell = row.children().eq(columnIndex);
+              cell.addClass(getUnitsInStockClass(units));
+            }
+          }
+        });
+      });
+    </script>
+
 ### detailCollapse
 
 Fired when the user collapses a detail table row.

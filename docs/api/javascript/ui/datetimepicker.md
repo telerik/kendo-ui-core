@@ -879,6 +879,10 @@ Available views are "time" and "date".
 
 ### setOptions
 
+Sets the options of the DateTimePicker. Use this method if you want to enable/disable a particular feature/option.
+
+When setOptions is called, the DateTimePicker widget will be destroyed and recreated.
+
 #### Parameters
 
 Changes the initial DateTimePicker configuration.
@@ -887,7 +891,7 @@ Changes the initial DateTimePicker configuration.
 
 The new configuration options.
 
-#### Example
+#### Example - update the minimum date that the calendar can show 
 
     <input id="datetimepicker" />
     <script>
