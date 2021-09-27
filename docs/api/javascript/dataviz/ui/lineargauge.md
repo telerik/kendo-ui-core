@@ -15,10 +15,118 @@ component: gauges
 The gauge area configuration options.
 This is the entire visible area of the gauge.
 
+#### Example - set gaugeArea border width and color
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            border: {
+              color: "green",
+              width: "4px"
+            }
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
+
 ### gaugeArea.background `String`*(default: "white")*
 
 The background of the gauge area.
 Any valid CSS color string will work here, including hex and rgb.
+
+#### Example - set gaugeArea background color
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            background: "#c7d6d1",
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
+
 
 ### gaugeArea.border `Object`
 
@@ -27,6 +135,61 @@ The border of the gauge area.
 ### gaugeArea.border.color `String`*(default: "black")*
 
 The color of the border. Any valid CSS color string will work here, including hex and rgb.
+
+#### Example - set gaugeArea border color
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            border: {
+              color: "green",
+              width: "4px"
+            }
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
 
 ### gaugeArea.border.dashType `String`*(default: "solid")*
 
@@ -64,6 +227,61 @@ Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
 ### gaugeArea.border.width `Number`*(default: 0)*
 
  The width of the border.
+
+ #### Example - set gaugeArea border width
+
+    <div id="gauge-container">
+      <div id="gauge"></div>
+    </div>
+
+    <script>
+      $(function() {
+        var value = $("#gauge-value").val();
+        $("#gauge").kendoLinearGauge({
+          pointer: {
+            value: 28
+          },
+          gaugeArea: {
+            border: {
+              color: "green",
+              width: 4
+            }
+          },
+          scale: {
+            majorUnit: 20,
+            minorUnit: 2,
+            min: -40,
+            max: 60,
+            vertical: true,
+            ranges: [
+              {
+                from: -40,
+                to: -20,
+                color: "#2798df"
+              }
+            ]
+          }
+        });
+      });
+    </script>
+
+    <style>
+      #gauge-container {
+        text-align: center;
+        margin: 0 auto;
+        background-size: contain;
+        padding: 18px;
+        width: 300px;
+        height: 300px;
+      }
+
+      #gauge {
+        height: 100%;
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+      }
+    </style>
 
 ### gaugeArea.height `Number`
 
