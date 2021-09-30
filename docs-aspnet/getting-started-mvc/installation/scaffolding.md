@@ -28,6 +28,8 @@ For more information on the available configuration options, refer to the follow
 * C#
 * Entity Framework Data Model
 
+> The Scaffolder templates do not work in Visual Studio 2019 version 16.9.0+. A breaking change has been introduced in these Visual Studio 2019 versions, which affects the third party scaffolders. The issue has been reported to Microsoft, see [Developer Community topic](https://developercommunity.visualstudio.com/t/visual-studio-2019-version-1691-resulted-in-custom/1371519).
+
 ## Installation
 
 The Telerik UI for ASP.NET MVC installer will automatically install the extension.
