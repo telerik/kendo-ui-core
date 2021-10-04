@@ -155,6 +155,22 @@ The following example demonstrates how to subscribe to events by a template dele
           )
         )
 
+### Getting the current value
+
+The following example demonstrates how to get the current value of a Kendo UI DropDownList in the Change Event handler.
+
+        @(Html.Kendo().DropDownList()
+          .Name("dropdownlist")
+          .BindTo(new string[] { "Item1", "Item2", "Item3" })
+          .Events(e => e
+            .Change("dropdownlist_change")
+          )
+        )
+<script>
+    function dropdownlist_change(e) {
+        console.log(e.sender.value());
+    }
+</script>
 
 ## Referencing Existing Instances
 
