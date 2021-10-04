@@ -429,6 +429,9 @@ navigation:
      "deployment":
         title: "Deployment"
         position: 10
+     "integration-with-other-telerik-products":
+        title: "Integration with other Telerik Products"
+        position: 11   
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 12
@@ -690,6 +693,11 @@ defaults:
         editable: false
         res_type: api
         kind: api
+-
+    scope:
+        path: "integration-with-other-telerik-products"
+    values:
+        title_prefix: "Capture ASP.NET Core"
 -
     scope:
         path: "html-helpers/barcodes/barcode"

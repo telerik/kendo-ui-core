@@ -159,6 +159,11 @@ defaults:
         kind: api
 -
     scope:
+        path: "integration-with-other-telerik-products"
+    values:
+        title_prefix: "Capture ASP.NET MVC"
+-
+    scope:
         path: "html-helpers/barcodes/barcode"
     values:
         title_prefix: "ASP.NET MVC BarCode Component"

@@ -41,6 +41,10 @@ To set the desired filter mode, use the `Filterable->Mode` property. You can ena
 	...
 	columns.Bound(p => p.UnitsInStock).Width(140).Filterable(ftb => ftb.Multi(true).CheckAll(true));
 
+## Filter Operators
+
+* [List of the operators for the different data types](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/filterable.operators#related-properties)
+
 ## See Also
 
 * [Filter Rows by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/filter-row)
