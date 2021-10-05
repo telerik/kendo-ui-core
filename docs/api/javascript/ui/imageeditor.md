@@ -447,6 +447,22 @@ Returns the Image instance
 #### Returns
 
 `HTMLElement`
+The `img` element in the ImageEditor.
+
+#### Example 
+
+    <button id="getImage" class='k-button'>Get Image</button>
+    <div id="imageEditor"></div>
+    <script>
+      $("#imageEditor").kendoImageEditor({
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg"
+      });
+      var imageEditor = $("#imageEditor").data("kendoImageEditor");
+      $("#getImage").click(function(){
+        var image = imageEditor.getCurrentImage()
+        console.log(image);
+      })
+    </script>
 
 ### getZoomLevel
 

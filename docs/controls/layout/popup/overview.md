@@ -18,6 +18,7 @@ To initialize the Popup, use a `<div>` element. Initially, the element is hidden
 
 The following example demonstrates how to initialize the Popup and what its basic usage is.
 
+```dojo
     <input id="name" /><button> Open/Close </button>
 
     <div id="popup">
@@ -37,7 +38,7 @@ The following example demonstrates how to initialize the Popup and what its basi
       	$("#popup").data("kendoPopup").toggle();
       });
     </script>
-
+```
 ## Functionality and Features
 
 The Popup provides options for [aligning and appending it to elements and positioning it to specific points]({% slug alignposition_kendoui_popup %}).  

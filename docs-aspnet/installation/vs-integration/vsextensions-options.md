@@ -3,7 +3,7 @@ title: VS Extension Options
 page_title: VS Extension Options
 description: "Learn how to use the settings Visual Studio (VS) provides that allow you to configure the {{ site.product }} VS Extensions to best suit your needs."
 slug: vsextensionsoptions_visualstudio_aspnetcore
-position: 5
+position: 6
 ---
 
 # Visual Studio Extension Options

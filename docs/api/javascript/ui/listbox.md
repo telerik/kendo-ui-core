@@ -1086,6 +1086,12 @@ Fires when the ListBox selection has changed.
 
 The function context of the event handler (available through the `this` keyword) that will be set to the widget instance.
 
+#### Event Data
+
+##### e.sender `kendo.ui.ListBox`
+
+The widget instance which fired the event.
+
 #### Example
 
     <select id="listBox"></select>

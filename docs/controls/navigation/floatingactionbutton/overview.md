@@ -34,7 +34,7 @@ The following example demonstrates how to initialize the FloatingActionButton.
                 icon: "share",
                 size: "medium",
                 items: [{
-                    label: "Download"
+                    label: "Download",
                     icon: "download",
                     click: function () { console.log("download action"); }
                 }, {

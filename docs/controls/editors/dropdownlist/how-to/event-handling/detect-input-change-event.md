@@ -26,12 +26,14 @@ The following example demonstrates how to detect changes in the input of the wid
     </div>
     <script>
       $(document).ready(function() {
-        function widgetChange() {
-          $(".console").append("<p>event: change (widget)</p>");
+        function widgetChange(е) {
+          var value = this.value();
+          $(".console").append("<p>event: change (widget) -- selected value: " + value + "</p>");
         };
 
         function inputChange() {
-          $(".console").append("<p>event: change (input)</p>");
+          var val = $("#dropdownlist").val()
+          $(".console").append("<p>event: change (input)-- selected value: " + val + "</p>");
         };
 
         var data = [

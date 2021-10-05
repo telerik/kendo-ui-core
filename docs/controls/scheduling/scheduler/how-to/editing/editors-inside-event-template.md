@@ -23,18 +23,15 @@ The following example demonstrates how to nest editors inside the Scheduler even
     </script>
 
     <script>
-      function onCheckboxChange(checkbox) {
-        var scheduler =  checkbox.closest('[data-role=scheduler]').data("kendoScheduler");
-
-        checkbox = $(checkbox);
-
-        var uid = checkbox.closest("[data-uid]").data("uid");
+      function onCheckboxChange(checkbox) {        
+        var scheduler = $(checkbox).closest('[data-role=scheduler]').data("kendoScheduler");
+        var uid = $(checkbox).closest("[data-uid]").data("uid");
 
         // Get the event instance by using the Scheduler API.
         var event = scheduler.occurrenceByUid(uid);
 
         // Update the underlying model.
-        event.set("cancelled", checkbox.is(":checked"));
+        event.set("cancelled", $(checkbox).is(":checked"));
       }
 
       $(function() {

@@ -46,7 +46,7 @@ Use the [`page()`](/api/javascript/data/datasource/methods/page) and [`pageSize(
           {
             title: "#",
             template: "#= ++record #",
-            width: 35
+            width: 50
           }, {
             field: "ContactName", title: "Contact Name"
           }, {
