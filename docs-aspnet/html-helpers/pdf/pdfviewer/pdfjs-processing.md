@@ -22,9 +22,9 @@ Add the PDF.js library scripts to the page.
 The following example demonstrates how to configure the PDFViewer to use PDF.js processing.
 
 ```
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
     <script>
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js';
     </script>
 
     @(Html.Kendo().PDFViewer()
@@ -42,7 +42,7 @@ PDF.js processing is not supported in Internet Explorer 9. To work properly in t
 
     <script>
         // Specify the workerSrc property for Internet Explorer support.
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js';
     </script>
 
 ## See Also
