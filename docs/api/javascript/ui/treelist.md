@@ -1510,6 +1510,8 @@ The width of the column. Numeric values are treated as pixels.
       });
     </script>
 
+To set the column width after the TreeList initialization you can use the [setOptions()](/api/javascript/ui/treelist/methods/setoptions) method.
+
 ### columns.hidden `Boolean` *(default: false)*
 
 If set to `true`, the TreeList will not display the column. By default, all columns are displayed.

@@ -192,6 +192,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
         }
       ],
       groupable: true,
+      scrollable: false,
       dataSource: {
         data: [
           { firstName: "Jane", lastName: "Doe", age: 30 },
@@ -4221,7 +4222,7 @@ Specifies the file name of the exported Excel file. Must end with ".xlsx".
 
 ### excel.filterable `Boolean` *(default: false)*
 
-Enables or disables column filtering in the Excel file. Not to be mistaken with the grid filtering feature.
+Enables or disables column filtering in the Excel file. When set to true the exported Excel file comes with turned on filtering for the column headers. Not to be mistaken with the grid filtering feature.
 
 #### Example - enable filtering in the output Excel file
 
@@ -10251,6 +10252,32 @@ A string, DOM element or jQuery object which represents the table row. A string 
     });
     var grid = $("#grid").data("kendoGrid");
     grid.removeRow("tr:eq(1)");
+    </script>
+
+#### Example - remove the selected table row
+
+    <button class="k-button" onclick="remove()">Remove selected row</button>
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name" },
+          { field: "age" }
+        ],
+        selectable: true,
+        dataSource: {
+          data: [
+            { id: 1, name: "Jane Doe", age: 30 },
+            { id: 2, name: "John Doe", age: 33 },
+            { id: 3, name: "Angela Smith", age: 33 }
+          ]
+        }
+      });
+
+      function remove() {
+        var grid = $("#grid").data("kendoGrid");
+        grid.removeRow(grid.select());
+      }
     </script>
 
 ### reorderColumn

@@ -15374,9 +15374,9 @@ The color of the border. Accepts a valid CSS color string, including hex and rgb
     });
     </script>
 
-### series.markers.border.width `Number|Function` *(default: 0)*
+### series.markers.border.width `Number|Function` *(default: 2)*
 
-The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.
+The width of the border in pixels.
 
 #### Example - set the chart series markers border width
 

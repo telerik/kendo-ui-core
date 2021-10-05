@@ -3351,6 +3351,32 @@ The zIndex for this layer.
 
 Layers are normally stacked in declaration order (last one is on top).
 
+#### Example - setting a zIndex for a layer
+
+   <div id="map"></div>
+    <script>
+      $("#map").kendoMap({
+        layers: [{
+          type: "tile",
+          urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+          attribution: "&copy; OpenStreetMap",
+          zIndex: 1
+        }, {
+        //this layer is not visible as the zIndex of the above one is higher
+          type: "shape",
+          dataSource: {
+            type: "geojson",
+            data: [{
+              "type": "Polygon",
+              "coordinates": [
+                [[30, 10], [40, 40], [20, 40], [10, 20], [30, 10]]
+              ]
+            }]
+          }
+        }]
+      });
+    </script>
+
 ### markerDefaults `Object`
 
 The default options for all markers.

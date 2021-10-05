@@ -48,10 +48,11 @@ The **VSIX Installer** will handle any missing prerequisites in Visual Studio fo
 
 ## Use the Telerik VS Extensions
 
-There are two project wizards available:
+There are three project wizards available:
 
 1. [Create New Project Wizard]({% slug newprojectwizards_visualstudio_aspnetcore %})
 1. [Convert Project Wizard]({% slug convertprojectwizard_visualstudio_aspnetcore %})
+1. [Configure Project Wizard]({% slug projectwizardconfig_visualstudio_aspnetcore %})
 
 ### Steps for VS 2019 
 

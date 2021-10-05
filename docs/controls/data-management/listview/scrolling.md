@@ -14,11 +14,26 @@ By default, the scrolling functionality of the ListView is disabled.
 
 To enable the scrolling functionality, set the `scrollable` property. If `scrollable` is set to `true` and the content exceeds the [height](/api/javascript/ui/listview/configuration/height) value of the ListView, the widget will display a scrollbar.
 
-    $("#listview").kendoListView({
-        scrollable: true,
-        height: 350,
-        // other configuration
+```dojo
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<div>
+    <div id="listView"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        var dataSource = new kendo.data.DataSource({
+            data: products,
+        });
+
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            height: 200,
+            scrollable: true,
+            template: "<div>#:ProductName#</div>",
+        });
     });
+</script>
+```
 
 ## Endless Scrolling
 
@@ -32,11 +47,27 @@ The ListView supports endless scrolling regardless of whether it is bound to loc
 * When bound to local data arrays, the ListView serializes all items to the client and while the user is scrolling, the widget displays new items.
 * When bound to remote data, the ListView serializes only the items for one page. When the user scrolls to the end of the list, the ListView sends an AJAX request to get the items for the next page. When the data is returned, the ListView renders only the new items and appends them to the old ones.
 
-    $("#listview").kendoListView({
-        scrollable: "endless",
-        height: 350,
-        // Other configuration.
+```dojo
+<script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
+<div>
+    <div id="listView"></div>
+</div>
+<script>
+    $(document).ready(function () {
+        var dataSource = new kendo.data.DataSource({
+            data: products,
+          	pageSize: 12
+        });
+
+        $("#listView").kendoListView({
+            dataSource: dataSource,
+            height: 200,
+            scrollable: "endless",
+            template: "<div>#:ProductName#</div>",
+        });
     });
+</script>
+```
 
 ## See Also
 

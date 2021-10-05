@@ -45,8 +45,8 @@ Because this approach is not related to the functionality of the Kendo UI suite,
 
   <div id="tree"></div>
 
-  <p>Note: in order for the whole page to be styled, the &lt;body&gt; element has a <code>k-content</code> class.</p>
-
+  <p>Note #1: in order for the whole page to be styled, the &lt;body&gt; element has a <code>k-content</code> class.</p>
+  <p>Note #2: When you run the example, make sure that the LESS default theme is referred and not the SASS default-v2 theme.</p>
 </div>
 
 <script>
