@@ -8666,7 +8666,7 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
 
 ### sortable.mode `String` *(default: "single")*
 
-The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by multiple columns.
+The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by multiple columns. And the "mixed" mode enables you to sort in single mode when clicking and switch to multiple when holding **ctrl** key.
 
 #### Example - allow multiple column sorting
 
@@ -8683,6 +8683,27 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
       ],
       sortable: {
         mode: "multiple"
+      }
+    });
+    </script>
+
+  #### Example - enable mixed mode sorting
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      sortable: {
+        mode: "mixed",
+        allowUnsort: true, 
+        showIndexes: true
       }
     });
     </script>
