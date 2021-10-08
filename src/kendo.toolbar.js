@@ -39,6 +39,7 @@ var __meta__ = { // jshint ignore:line
         GROUP_END = "k-group-end",
         PRIMARY = "k-primary",
 
+        ROLE = "role",
         ARIA_DISABLED = "aria-disabled",
         ARIA_PRESSED = "aria-pressed",
 
@@ -186,7 +187,7 @@ var __meta__ = { // jshint ignore:line
                 if (options.url !== undefined && !options.useButtonTag) {
                     element.attr("href", options.url);
                     if (options.mobile) {
-                        element.attr(kendo.attr("role"), "button");
+                        element.attr(kendo.attr(ROLE), "button");
                     }
                 }
 
@@ -731,6 +732,7 @@ var __meta__ = { // jshint ignore:line
                 this.addOverflowAttr();
 
                 element.addClass(SEPARATOR);
+                element.attr(ROLE, "separator");
 
                 element.data({
                     type: "separator",
@@ -753,6 +755,7 @@ var __meta__ = { // jshint ignore:line
                 this.addOverflowIdAttr();
 
                 element.addClass(SEPARATOR);
+                element.attr(ROLE, "separator");
 
                 element.data({
                     type: "separator",
@@ -927,6 +930,7 @@ var __meta__ = { // jshint ignore:line
                 element = that.wrapper = that.element;
 
                 element.addClass(TOOLBAR + " k-widget");
+                element.attr(ROLE, "toolbar");
 
                 this.uid = kendo.guid();
                 this._isRtl = kendo.support.isRtl(element);
