@@ -711,5 +711,22 @@
 
             assert.equal(dialog.element.css("overflow"), "hidden");
         });
+
+        it("should not scroll down to Window if not modal and initially visible", function() {
+            jasmine.clock().install();
+
+            createWindow({
+                title: "Window Web: title 1t",
+                content: "test",
+                position: { top: 8240 , left: 50 },
+                height: "470px",
+                width: "1450px",
+                animation: false
+            });
+
+            jasmine.clock().tick(1);
+            assert.equal(document.documentElement.scrollTop, 0);
+            jasmine.clock().uninstall();
+        });
     });
 })();

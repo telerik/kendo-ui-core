@@ -219,7 +219,7 @@
                 }
 
                 if (options.visible) {
-                    that.toFront();
+                    that.toFront(null, !options.modal);
                 }
 
                 windowContent = wrapper.children(KWINDOWCONTENT);
@@ -1166,7 +1166,7 @@
                     (!element.find(active).length || !element.find(target).length);
             },
 
-            toFront: function (e) {
+            toFront: function (e, avoidFocus) {
                 var that = this,
                     wrapper = that.wrapper,
                     currentWindow = wrapper[0],
@@ -1202,9 +1202,11 @@
                 that.element.find("> .k-overlay").remove();
 
                 if (that._shouldFocus(target)) {
-                    setTimeout(function() {
-                        that.wrapper.focus();
-                    }, openAnimation ? openAnimation.duration : 0);
+                    if(!avoidFocus) {
+                        setTimeout(function() {
+                            that.wrapper.focus();
+                        }, openAnimation ? openAnimation.duration : 0);
+                    }
 
                     var scrollTop = containmentContext ? that.containment.scrollTop() : $(window).scrollTop(),
                         windowTop = parseInt(wrapper.position().top, 10);

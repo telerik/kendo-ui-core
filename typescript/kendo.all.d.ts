@@ -5603,6 +5603,7 @@ declare namespace kendo.ui {
         autoFitColumn(column: number): void;
         autoFitColumn(column: string): void;
         autoFitColumn(column: any): void;
+        autoFitColumns(columns?: GridColumn[]): void;
         cancelChanges(): void;
         cancelRow(): void;
         cellIndex(cell: string): number;
@@ -5998,8 +5999,13 @@ declare namespace kendo.ui {
         endless?: boolean | undefined;
     }
 
+    interface GridSearchField {
+        name?: string | undefined;
+        operator?: string | undefined;
+    }
+
     interface GridSearch {
-        fields?: any;
+        fields?: GridSearchField[] | undefined;
     }
 
     interface GridSortable {

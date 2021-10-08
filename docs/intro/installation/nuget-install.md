@@ -21,7 +21,7 @@ To install Kendo UI with NuGet:
 1. Register the Telerik NuGet Feed on your system.
 1. Install the Kendo UI package you need.
 
->The improved Telerik NuGet v3 is now available for beta testing at https://nuget.telerik.com/v3/index.json. The new v3 API is faster, lighter, and reduces the number of requests from NuGet clients. You are welcome to try it.
+>The legacy https://nuget.telerik.com/nuget server is now deprecated. Make sure to switch to the new https://nuget.telerik.com/v3/index.json server, which is faster, lighter, and reduces the number of requests from your NuGet client.
 
 ## Registering the Feed on Your System
 
@@ -45,19 +45,19 @@ To register the Telerik NuGet Feed on your system by using [NuGet CLI](http://do
 1. The command from the following example stores a token in the `%AppData%\NuGet\NuGet.config` file. Your original credentials cannot be obtained from this token.
 
     ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password"
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password"
     ```
 
     If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text.
 
     ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
     ```
 
     If you have already stored a token instead of storing the credentials as clear text, you can update the definition in the `%AppData%\NuGet\NuGet.config` file by using the following command:
 
     ```
-        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
     ```
 
 ### Adding the Feed with NuGet Package Manager
@@ -66,7 +66,7 @@ To register the Telerik NuGet Feed on your system by using [NuGet CLI](http://do
 
 1. Go to **Tools** > **NuGet Package Manager** > **Package Manager Settings**, select **Package Manager Sources** and then click the **+** button.
 
-1. Select the feed **Name**, set the feed URL to https://nuget.telerik.com/nuget, and click **OK**.
+1. Select the feed **Name**, set the feed URL to https://nuget.telerik.com/v3/index.json, and click **OK**.
 
     ![Kendo UI resources](../../images/add-nuget-package-source.png)
 
