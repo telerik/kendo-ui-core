@@ -183,7 +183,13 @@
                         display = element.css("display");
 
                         element.css({ visibility: HIDDEN, display: "" });
-                        offset = element.offset();
+
+                        if (document.body.contains(element[0])) {
+                            offset = element.offset();
+                        } else {
+                            offset = { top: 0, left: 0 };
+                        }
+
                         element.css({ visibility: visibility, display: display });
                     }
 
@@ -664,16 +670,16 @@
                 if(e.altKey && keyCode == keys.UP){
                     if (isMinimized) {
                         that.restore();
-                        that.wrapper.focus();
+                        that.wrapper.trigger("focus");
                     } else if (!isMaximized) {
                         that.maximize();
-                        that.wrapper.focus();
+                        that.wrapper.trigger("focus");
                     }
 
                 } else if (e.altKey && keyCode == keys.DOWN){
                     if (!isMinimized && !isMaximized) {
                         that.minimize();
-                        that.wrapper.focus();
+                        that.wrapper.trigger("focus");
                     } else if (isMaximized) {
                         that.restore();
                     }
@@ -976,7 +982,7 @@
                     that.toFront();
 
                     if (options.autoFocus) {
-                        that.wrapper.focus();
+                        that.wrapper.trigger("focus");
                     }
 
                     options.visible = true;
@@ -1000,7 +1006,7 @@
 
                         $(window).on("focus" + MODAL_NS, function() {
                             if (wrapper.data("isFront") && !$(document.activeElement).closest(wrapper).length) {
-                               that.wrapper.focus();
+                               that.wrapper.trigger("focus");
                             }
                         });
                     }
@@ -1035,7 +1041,7 @@
                 var scrollable = this.options.scrollable !== false;
 
                 if (this.options.autoFocus) {
-                    this.wrapper.focus();
+                    this.wrapper.trigger("focus");
                 }
 
                 this.element.css(OVERFLOW, scrollable ? "" : "hidden");
@@ -1125,7 +1131,7 @@
                 }
 
                 if (that.options.iframe) {
-                    that.wrapper.blur();
+                    that.wrapper.trigger("blur");
                 }
             },
 
@@ -1279,9 +1285,9 @@
                     .find(PIN_UNPIN).parent().show();
 
                 if (options.isMaximized) {
-                    that.wrapper.find(".k-i-window-maximize").parent().focus();
+                    that.wrapper.find(".k-i-window-maximize").parent().trigger("focus");
                 } else if (options.isMinimized) {
-                    that.wrapper.find(".k-i-window-minimize").parent().focus();
+                    that.wrapper.find(".k-i-window-minimize").parent().trigger("focus");
                 }
 
                 that.options.width = restoreOptions.width;
@@ -1335,7 +1341,7 @@
 
                 that.trigger(actionId);
 
-                wrapper.find(".k-i-window-restore").parent().focus();
+                wrapper.find(".k-i-window-restore").parent().trigger("focus");
 
                 return that;
             },
@@ -1630,7 +1636,7 @@
                         }
 
                         element.find("." + KCONTENTFRAME)
-                            .unbind("load" + NS)
+                            .off("load" + NS)
                             .on("load" + NS, proxy(this._triggerRefresh, this));
                     }
                 } else {

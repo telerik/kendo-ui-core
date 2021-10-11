@@ -72,7 +72,7 @@ var __meta__ = { // jshint ignore:line
             var that = this, wrapper, disabled;
 
             that.ns = ns;
-            options = $.isArray(options) ? { dataSource: options} : options;
+            options = Array.isArray(options) ? { dataSource: options} : options;
 
             List.fn.init.call(that, element, options);
 
@@ -241,8 +241,8 @@ var __meta__ = { // jshint ignore:line
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
+                element.prop(DISABLED, false)
+                       .prop(READONLY, false)
                        .attr(ARIA_DISABLED, false)
                        .attr(ARIA_READONLY, false);
             } else {

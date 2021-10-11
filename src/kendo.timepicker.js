@@ -45,7 +45,7 @@ var __meta__ = { // jshint ignore:line
         ARIA_READONLY = "aria-readonly",
         ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
         ID = "id",
-        isArray = $.isArray,
+        isArray = Array.isArray,
         extend = $.extend,
         proxy = $.proxy,
         DATE = Date,
@@ -209,7 +209,7 @@ var __meta__ = { // jshint ignore:line
                 length = lists.length,
                 index = lists.index(list),
                 isRtl = kendo.support.isRtl(that.wrapper),
-                itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)")),
+                itemHeight = getItemHeight(list.find(".k-item:visible").eq(0)),
                 container = list.find(".k-time-container.k-content.k-scrollable");
 
             if (!list.length) {
@@ -245,7 +245,7 @@ var __meta__ = { // jshint ignore:line
         _focusList: function(list){
             this.list.find(".k-time-list-wrapper").removeClass(FOCUSED);
             list.addClass(FOCUSED);
-            this.list.focus();
+            this.list.trigger("focus");
             this._scrollTop = list.find('.k-scrollable').scrollTop();
         },
         _createClassicRenderingList: function () {
@@ -485,7 +485,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _updateListBottomOffset: function (list) {
-            var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
+            var itemHeight = getItemHeight(list.find(".k-item:visible").eq(0));
             var listHeight = list.outerHeight();
             var bottomOffset = listHeight - itemHeight;
             list.find(".k-scrollable-placeholder").css({
@@ -704,7 +704,7 @@ var __meta__ = { // jshint ignore:line
 
             for (var i = 0; i < length; i++) {
                 list = lists.eq(i);
-                itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
+                itemHeight = getItemHeight(list.find(".k-item:visible").eq(0));
                 listHeight = list.outerHeight();
                 topOffset = (listHeight - itemHeight) / 2;
                 translate = "translateY(" + topOffset + "px)";
@@ -746,7 +746,7 @@ var __meta__ = { // jshint ignore:line
 
         _listScrollHandler: function (e) {
             var that = this;
-            var itemHeight = getItemHeight($(e.currentTarget).find(".k-item:visible:eq(0)"));
+            var itemHeight = getItemHeight($(e.currentTarget).find(".k-item:visible").eq(0));
 
             if (that._internalScroll) {
                 return;
@@ -829,14 +829,14 @@ var __meta__ = { // jshint ignore:line
         },
 
         _findSelectedValue: function(list) {
-           var firstOccurence = firstItemIndex(list.scrollTop(), getItemHeight(list.find(".k-item:visible:eq(0)")));
+           var firstOccurence = firstItemIndex(list.scrollTop(), getItemHeight(list.find(".k-item:visible").eq(0)));
            return list.find(".k-item:visible").eq(firstOccurence).attr("data-value");
         },
 
         _itemClickHandler: function (e) {
             var list = $(e.originalEvent.currentTarget);
             var index = list.find(".k-item:visible").index($(e.currentTarget));
-            var itemHeight = getItemHeight(list.find(".k-item:visible:eq(0)"));
+            var itemHeight = getItemHeight(list.find(".k-item:visible").eq(0));
 
             list.scrollTop(index * itemHeight);
         },
@@ -1181,7 +1181,7 @@ var __meta__ = { // jshint ignore:line
                                 that._updateCurrentlySelected();
                             }
                             that._updateRanges();
-                            that._focusList(that.list.find(".k-time-list-wrapper:eq(0)"));
+                            that._focusList(that.list.find(".k-time-list-wrapper").eq(0));
                         }
                     }
                 }));

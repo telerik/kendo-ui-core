@@ -17,7 +17,7 @@ var __meta__ = { // jshint ignore:line
         extend = $.extend,
         proxy = $.proxy,
         each = $.each,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         template = kendo.template,
         Widget = ui.Widget,
         HierarchicalDataSource = kendo.data.HierarchicalDataSource,
@@ -1241,7 +1241,7 @@ var __meta__ = { // jshint ignore:line
                 parent = $(that.renderGroup({ group: groupData, options: that.options })).appendTo(referenceItem);
             }
 
-            if (plain || $.isArray(item) || item instanceof HierarchicalDataSource) { // is JSON or HierarchicalDataSource
+            if (plain || Array.isArray(item) || item instanceof HierarchicalDataSource) { // is JSON or HierarchicalDataSource
                 if (item instanceof HierarchicalDataSource) {
                    item = item.data();
                 }
@@ -1366,7 +1366,7 @@ var __meta__ = { // jshint ignore:line
                 .filter("li[disabled]")
                 .addClass("k-state-disabled")
                 .attr(ARIA_DISABLED, true)
-                .removeAttr("disabled");
+                .prop("disabled", false);
 
             item
                 .children("div")

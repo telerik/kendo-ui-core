@@ -43,7 +43,7 @@ var __meta__ = { // jshint ignore:line
         FOCUSOUT = "focusout",
         extend = $.extend,
         proxy = $.proxy,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         browser = support.browser,
         HIDDENCLASS = "k-hidden",
         WIDTH = "width",
@@ -136,7 +136,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         focus: function() {
-            this._focused.focus();
+            this._focused.trigger("focus");
         },
 
         readonly: function(readonly) {
@@ -485,7 +485,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             this._angularElement(noData, "cleanup");
-            noData.children(":first").html(list.noDataTemplate({ instance: list }));
+            noData.children().first().html(list.noDataTemplate({ instance: list }));
             this._angularElement(noData, "compile");
         },
 
@@ -976,7 +976,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _calculateGroupPadding: function(height) {
-            var li = this.ul.children(".k-first:first");
+            var li = this.ul.children(".k-first").first();
             var groupHeader = this.listView.content.prev(GROUPHEADER);
             var padding = 0;
             var direction = 'right';
@@ -1066,7 +1066,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!preventFocus && !touchEnabled && that._focused[0] !== activeElement()) {
                 that._prevent = true;
-                that._focused.focus();
+                that._focused.trigger("focus");
                 that._prevent = false;
             }
 
@@ -1299,7 +1299,7 @@ var __meta__ = { // jshint ignore:line
                 dataSource = options.dataSource || {},
                 idx;
 
-            dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
+            dataSource = Array.isArray(dataSource) ? {data: dataSource} : dataSource;
 
             if (that._isSelect) {
                 idx = element[0].selectedIndex;
@@ -1667,7 +1667,7 @@ var __meta__ = { // jshint ignore:line
                     parent.one("dataBound", function() {
                         that._toggleCascadeOnFocus();
                         if (parent.popup.visible()) {
-                            parent._focused.focus();
+                            parent._focused.trigger("focus");
                         }
                     });
 
@@ -1683,12 +1683,12 @@ var __meta__ = { // jshint ignore:line
             var parent = that._parentWidget();
             var focusout = isIE && parent instanceof ui.DropDownList ? BLUR : FOCUSOUT;
 
-            parent._focused.add(parent.filterInput).bind(FOCUS, function() {
+            parent._focused.add(parent.filterInput).on(FOCUS, function() {
                 parent.unbind(CASCADE, that._cascadeHandlerProxy);
                 parent.first(CHANGE, that._cascadeHandlerProxy);
             });
 
-            parent._focused.add(parent.filterInput).bind(focusout, function() {
+            parent._focused.add(parent.filterInput).on(focusout, function() {
                 parent.unbind(CHANGE, that._cascadeHandlerProxy);
                 parent.first(CASCADE, that._cascadeHandlerProxy);
             });
@@ -1826,7 +1826,7 @@ var __meta__ = { // jshint ignore:line
             var value = this.options.value;
 
             if (value) {
-                this._values = $.isArray(value) ? value.slice(0) : [value];
+                this._values = Array.isArray(value) ? value.slice(0) : [value];
             }
 
             this._getter();
@@ -1871,7 +1871,7 @@ var __meta__ = { // jshint ignore:line
             var dataSource = source || {};
             var value;
 
-            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = Array.isArray(dataSource) ? { data: dataSource } : dataSource;
             dataSource = kendo.data.DataSource.create(dataSource);
 
             if (that.dataSource) {
@@ -2152,7 +2152,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         setValue: function(value) {
-            value = $.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
+            value = Array.isArray(value) || value instanceof ObservableArray ? value.slice(0) : [value];
 
             this._values = value;
 

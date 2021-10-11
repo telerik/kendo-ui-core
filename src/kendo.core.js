@@ -14,7 +14,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
         each = $.each,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         proxy = $.proxy,
         noop = $.noop,
         math = Math,
@@ -53,7 +53,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             // Handle case when target is a string or something (possible in deep copy)
-            if ( typeof target !== "object" && !jQuery.isFunction( target ) ) {
+            if ( typeof target !== "object" && typeof target !== "function") {
                 target = {};
             }
 
@@ -85,11 +85,11 @@ var __meta__ = { // jshint ignore:line
 
                         // Recurse if we're merging plain objects or arrays
                         if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
-                            ( copyIsArray = jQuery.isArray( copy ) ) ) ) {
+                            ( copyIsArray = Array.isArray( copy ) ) ) ) {
 
                             if ( copyIsArray ) {
                                 copyIsArray = false;
-                                clone = src && jQuery.isArray( src ) ? src : [];
+                                clone = src && Array.isArray( src ) ? src : [];
 
                             } else {
                                 clone = src && jQuery.isPlainObject( src ) ? src : {};
@@ -2590,7 +2590,7 @@ function pad(number, digits, end) {
 
         each(["swipe", "swipeLeft", "swipeRight", "swipeUp", "swipeDown", "doubleTap", "tap"], function(m, value) {
             $.fn[value] = function(callback) {
-                return this.bind(value, callback);
+                return this.on(value, callback);
             };
         });
     }
@@ -4480,7 +4480,7 @@ function pad(number, digits, end) {
             if (widget && widget.focus) {
               widget.focus();
             } else {
-              el.focus();
+              el.trigger("focus");
             }
         }
 
@@ -4704,7 +4704,7 @@ function pad(number, digits, end) {
 
     // influenced from: https://gist.github.com/fearphage/4341799
     kendo.whenAll = function(array) {
-        var resolveValues = arguments.length == 1 && $.isArray(array) ? array : Array.prototype.slice.call(arguments),
+        var resolveValues = arguments.length == 1 && Array.isArray(array) ? array : Array.prototype.slice.call(arguments),
             length = resolveValues.length,
             remaining = length,
             deferred = $.Deferred(),
@@ -4733,7 +4733,7 @@ function pad(number, digits, end) {
         }
 
         for (; i < length; i++) {
-            if ((value = resolveValues[i]) && $.isFunction(value.promise)) {
+            if ((value = resolveValues[i]) && kendo.isFunction(value.promise)) {
                 value.promise()
                     .done(updateFunc(i, resolveContexts, resolveValues))
                     .fail(updateFunc(i, rejectContexts, rejectValues));
@@ -4905,6 +4905,27 @@ function pad(number, digits, end) {
         };
 
     })();
+
+    // Implement type() as it has been depricated in jQuery
+    (function() {
+        kendo.class2type = {};
+
+        jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
+            function( _i, name ) {
+                kendo.class2type[ "[object " + name + "]" ] = name.toLowerCase();
+            } );
+
+        kendo.type = function(obj) {
+            if ( obj == null ) {
+                return obj + "";
+            }
+
+            // Support: Android <=2.3 only (functionish RegExp)
+            return typeof obj === "object" || typeof obj === "function" ?
+                kendo.class2type[Object.prototype.toString.call(obj)] || "object" :
+                typeof obj;
+        };
+    }());
 
 })(jQuery, window);
 

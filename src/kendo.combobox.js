@@ -59,7 +59,7 @@ var __meta__ = { // jshint ignore:line
 
             that.ns = ns;
 
-            options = $.isArray(options) ? { dataSource: options } : options;
+            options = Array.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
 
@@ -240,7 +240,7 @@ var __meta__ = { // jshint ignore:line
 
         _focusHandler: function(e) {
             if(e.target === this.element[0]) {
-                this.input.focus();
+                this.input.trigger("focus");
             }
         },
 
@@ -281,7 +281,7 @@ var __meta__ = { // jshint ignore:line
             if (isClearButton) {
                 that._blur();
 
-                that.element.blur();
+                that.element.trigger("blur");
             }
         },
 
@@ -310,8 +310,8 @@ var __meta__ = { // jshint ignore:line
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                input.removeAttr(DISABLED)
-                     .removeAttr(READONLY)
+                input.prop(DISABLED, false)
+                     .prop(READONLY, false)
                      .attr(ARIA_DISABLED, false)
                      .attr(ARIA_READONLY, false);
 
@@ -1190,7 +1190,7 @@ var __meta__ = { // jshint ignore:line
 
         _clearValue: function() {
             Select.fn._clearValue.call(this);
-            this.input.focus();
+            this.input.trigger("focus");
         }
     });
 

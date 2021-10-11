@@ -171,7 +171,7 @@ var __meta__ = { // jshint ignore:line
                 colors = colors.split(",");
             }
 
-            if ($.isArray(colors)) {
+            if (Array.isArray(colors)) {
                 colors = $.map(colors, function(x) { return parseColor(x); });
             }
 
@@ -208,7 +208,7 @@ var __meta__ = { // jshint ignore:line
         },
         focus: function(){
             if (this.wrapper && !this.wrapper.is("[unselectable='on']")) {
-                this.wrapper.focus();
+                this.wrapper.trigger("focus");
             }
         },
         options: {
@@ -443,12 +443,12 @@ var __meta__ = { // jshint ignore:line
                     this.offset = kendo.getOffset(hsvRect);
                     this.width = hsvRect.width();
                     this.height = hsvRect.height();
-                    hsvHandle.focus();
+                    hsvHandle.trigger("focus");
                     update.call(this, e.x.location, e.y.location);
                 },
                 start: function() {
                     hsvRect.addClass("k-dragging");
-                    hsvHandle.focus();
+                    hsvHandle.trigger("focus");
                 },
                 move: function(e) {
                     e.preventDefault();
@@ -522,7 +522,7 @@ var __meta__ = { // jshint ignore:line
                 that._select(that._getHSV());
                 break;
               case KEYS.F2:
-                that.wrapper.find("input.k-color-value").focus().select();
+                that.wrapper.find("input.k-color-value").trigger("focus").select();
                 break;
               case KEYS.ESC:
                 that._cancel();
@@ -530,7 +530,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
         focus: function() {
-            this._hsvHandle.focus();
+            this._hsvHandle.trigger("focus");
         },
         _getHSV: function(h, s, v, a) {
             var rect = this._hsvRect,
@@ -670,7 +670,7 @@ var __meta__ = { // jshint ignore:line
                 if (id) {
                     label = label.add('label[for="' + id + '"]');
                 }
-                label.click(function(ev){
+                label.on("click", function(ev){
                     that.open();
                     ev.preventDefault();
                 });
@@ -925,7 +925,7 @@ var __meta__ = { // jshint ignore:line
                         if (!color) {
                             setTimeout(function(){
                                 if (that.wrapper && !that.wrapper.is("[unselectable='on']")) {
-                                    that.wrapper.focus();
+                                    that.wrapper.trigger("focus");
                                 }
                             });
 

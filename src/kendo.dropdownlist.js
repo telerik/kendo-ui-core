@@ -57,7 +57,7 @@ var __meta__ = { // jshint ignore:line
             var optionLabel, text, disabled;
 
             that.ns = ns;
-            options = $.isArray(options) ? { dataSource: options } : options;
+            options = Array.isArray(options) ? { dataSource: options } : options;
 
             Select.fn.init.call(that, element, options);
 
@@ -306,7 +306,7 @@ var __meta__ = { // jshint ignore:line
                        .css("display", "inline-block");
 
             if (isInputActive) {
-                filterInput.focus();
+                filterInput.trigger("focus");
                 kendo.caret(filterInput[0], caret);
             }
 
@@ -621,7 +621,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _focusHandler: function() {
-            this.wrapper.focus();
+            this.wrapper.trigger("focus");
         },
 
         _focusinHandler: function() {
@@ -645,7 +645,7 @@ var __meta__ = { // jshint ignore:line
                 that._inputWrapper.removeClass(FOCUSED);
                 that._prevent = true;
                 that._open = false;
-                that.element.blur();
+                that.element.trigger("blur");
             }
         },
 
@@ -670,7 +670,7 @@ var __meta__ = { // jshint ignore:line
             var dropDownWrapper = that._inputWrapper.off(HOVEREVENTS);
 
             if (!readonly && !disable) {
-                element.removeAttr(DISABLED).removeAttr(READONLY);
+                element.prop(DISABLED, false).prop(READONLY, false);
 
                 dropDownWrapper
                     .addClass(DEFAULT)
@@ -953,7 +953,7 @@ var __meta__ = { // jshint ignore:line
             if (filterInput && (compareElement[0] === active || this._focusFilter)) {
                 this._focusFilter = false;
                 this._prevent = true;
-                this._focused = element.focus();
+                this._focused = element.trigger("focus");
             }
         },
 

@@ -17,7 +17,7 @@
             proxy = $.proxy,
             template = kendo.template,
             keys = kendo.keys,
-            isFunction = $.isFunction,
+            isFunction = kendo.isFunction,
             NS = "kendoWindow",
             KDIALOG = ".k-dialog",
             KWINDOW = ".k-window",

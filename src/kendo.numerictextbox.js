@@ -195,8 +195,8 @@ var __meta__ = { // jshint ignore:line
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
-                text.removeAttr(DISABLED)
-                    .removeAttr(READONLY)
+                text.prop(DISABLED, false)
+                    .prop(READONLY, false)
                     .attr(ARIA_DISABLED, false);
 
                 that._upArrowEventHandler.bind("press", function(e) {

@@ -13,7 +13,7 @@ var __meta__ = { // jshint ignore:line
 /*jshint  eqnull: true, boss: true */
 (function($, undefined) {
     var kendo = window.kendo,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         isPlainObject = $.isPlainObject,
         map = $.map,
         each = $.each,
@@ -38,7 +38,7 @@ var __meta__ = { // jshint ignore:line
                     if (model.fields) {
                         each(model.fields, function(field, value) {
                             if (isPlainObject(value) && value.field) {
-                                if (!$.isFunction(value.field)) {
+                                if (!kendo.isFunction(value.field)) {
                                     value = extend(value, { field: that.getter(value.field) });
                                 }
                             } else {

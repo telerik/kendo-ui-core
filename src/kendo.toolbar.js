@@ -418,8 +418,8 @@ var __meta__ = { // jshint ignore:line
             },
 
             refresh: function() {
-                this.element.children().filter(":not('." + STATE_HIDDEN + "'):first").addClass(GROUP_START);
-                this.element.children().filter(":not('." + STATE_HIDDEN + "'):last").addClass(GROUP_END);
+                this.element.children().filter(":not('." + STATE_HIDDEN + "')").first().addClass(GROUP_START);
+                this.element.children().filter(":not('." + STATE_HIDDEN + "')").last().addClass(GROUP_END);
             }
         });
 
@@ -547,15 +547,15 @@ var __meta__ = { // jshint ignore:line
                         that.toggle();
                         that.focus();
                     } else if (e.keyCode === keys.DOWN) {
-                        findFocusableSibling(li, "next").focus();
+                        findFocusableSibling(li, "next").trigger("focus");
                     } else if (e.keyCode === keys.UP) {
-                        findFocusableSibling(li, "prev").focus();
+                        findFocusableSibling(li, "prev").trigger("focus");
                     } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
                         that.toolbar.userEvents.trigger("tap", { target: $(e.target) });
                     } else if (e.keyCode === keys.HOME) {
-                        li.parent().find(":kendoFocusable").first().focus();
+                        li.parent().find(":kendoFocusable").first().trigger("focus");
                     } else if (e.keyCode === keys.END) {
-                        li.parent().find(":kendoFocusable").last().focus();
+                        li.parent().find(":kendoFocusable").last().trigger("focus");
                     }
                 });
             },
@@ -601,14 +601,14 @@ var __meta__ = { // jshint ignore:line
                         that.adjustPopupWidth(e.sender);
                     },
                     activate: function() {
-                        this.element.find(":kendoFocusable").first().focus();
+                        this.element.find(":kendoFocusable").first().trigger("focus");
                     },
                     close: function(e) {
                         var isDefaultPrevented = that.toolbar.trigger(CLOSE, { target: element });
                         if(isDefaultPrevented){
                             e.preventDefault();
                         }
-                        element.focus();
+                        element.trigger("focus");
                     }
                 }).data("kendoPopup");
 
@@ -658,7 +658,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             focus: function() {
-                this.element.focus();
+                this.element.trigger("focus");
             },
 
             hide: function() {
@@ -1312,14 +1312,14 @@ var __meta__ = { // jshint ignore:line
                         }
                     },
                     activate: function() {
-                        this.element.find(":kendoFocusable").first().focus();
+                        this.element.find(":kendoFocusable").first().trigger("focus");
                     },
                     close: function (e) {
                         if (that.trigger(OVERFLOW_CLOSE)) {
                             e.preventDefault();
                         }
 
-                        this.element.focus();
+                        this.element.trigger("focus");
                     }
                 });
 
@@ -1334,20 +1334,20 @@ var __meta__ = { // jshint ignore:line
                     if (e.keyCode === keys.ESC || e.keyCode === keys.TAB || (e.altKey && e.keyCode === keys.UP)) {
 
                         that._toggleOverflow();
-                        that.overflowAnchor.focus();
+                        that.overflowAnchor.trigger("focus");
                     } else if (e.keyCode === keys.DOWN) {
                         element = !isComplexTool || (isComplexTool && target.is(":last-child")) ? li : target;
-                        findFocusableSibling(element, "next").focus();
+                        findFocusableSibling(element, "next").trigger("focus");
                     } else if (e.keyCode === keys.UP) {
                         element = !isComplexTool || (isComplexTool && target.is(":first-child")) ? li : target;
-                        findFocusableSibling(element, "prev").focus();
+                        findFocusableSibling(element, "prev").trigger("focus");
                     } else if (e.keyCode === keys.SPACEBAR || e.keyCode === keys.ENTER) {
                         that.userEvents.trigger("tap", { target: $(e.target) });
-                        that.overflowAnchor.focus();
+                        that.overflowAnchor.trigger("focus");
                     } else if (e.keyCode === keys.HOME) {
-                        li.parent().find(":kendoFocusable").first().focus();
+                        li.parent().find(":kendoFocusable").first().trigger("focus");
                     } else if (e.keyCode === keys.END) {
-                        li.parent().find(":kendoFocusable").last().focus();
+                        li.parent().find(":kendoFocusable").last().trigger("focus");
                     }
                 });
 
@@ -1456,7 +1456,7 @@ var __meta__ = { // jshint ignore:line
                     .attr("tabindex", 0)
                     .on("focusin" + ns, function(ev) {
                         var target = $(ev.target);
-                        var element = $(this).find(":kendoFocusable:first");
+                        var element = $(this).find(":kendoFocusable").first();
 
                         if (!target.is("." + TOOLBAR) || element.length === 0) {
                             return;
@@ -1501,9 +1501,9 @@ var __meta__ = { // jshint ignore:line
                         }
 
                         if (lastItemNotOverflowAnchor.is(":kendoFocusable")) {
-                            items.last().focus();
+                            items.last().trigger("focus");
                         } else {
-                            items.last().find(":kendoFocusable").last().focus();
+                            items.last().find(":kendoFocusable").last().trigger("focus");
                         }
                     }
 
@@ -1526,14 +1526,14 @@ var __meta__ = { // jshint ignore:line
 
                     if (lastHasFocus && this.overflowAnchor && this.overflowAnchor.css("visibility") !== "hidden" && !isOnlyOverflowAnchor) {
                         e.preventDefault();
-                        this.overflowAnchor.focus();
+                        this.overflowAnchor.trigger("focus");
                     }
 
                     if (firstHasFocus || (isOnlyOverflowAnchor && e.shiftKey)) {
                         e.preventDefault();
                         var prevFocusable = this._getPrevFocusable(this.wrapper);
                         if (prevFocusable) {
-                            prevFocusable.focus();
+                            prevFocusable.trigger("focus");
                         }
                     }
                     this._preventNextFocus = false;
@@ -1574,9 +1574,9 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     if (this.overflowAnchor) {
-                        items.eq(1).focus();
+                        items.eq(1).trigger("focus");
                     } else {
-                        items.first().focus();
+                        items.first().trigger("focus");
                     }
                     e.preventDefault();
                 } else if (keyCode === keys.END) {
@@ -1584,9 +1584,9 @@ var __meta__ = { // jshint ignore:line
                         return;
                     }
                     if (this.overflowAnchor && $(this.overflowAnchor).css("visibility") != "hidden") {
-                        this.overflowAnchor.focus();
+                        this.overflowAnchor.trigger("focus");
                     } else {
-                        items.last().focus();
+                        items.last().trigger("focus");
                     }
                     e.preventDefault();
                 } else if (keyCode === keys.RIGHT && !this._preventNextFocus && !target.is("input, select, .k-dropdown, .k-colorpicker") && this._getNextElement(e.target, 1 * direction)) {

@@ -118,7 +118,7 @@ var __meta__ = { // jshint ignore:line
                 } else if (operator === "isempty" || operator === "isnotempty") {
                     filter = kendo.format("{0} {1} ''", field, filter);
                 } else if (filter && value !== undefined) {
-                    type = $.type(value);
+                    type = kendo.type(value);
                     if (type === "string") {
                         format = "'{1}'";
                         value = value.replace(/'/g, "''");
@@ -437,7 +437,7 @@ var __meta__ = { // jshint ignore:line
             "odata-v4": {
                 type: "json",
                 data: function(data) {
-                    if ($.isArray(data)) {
+                    if (Array.isArray(data)) {
                         for (var i = 0; i < data.length; i++) {
                             stripMetadata(data[i]);
                         }
@@ -489,7 +489,7 @@ var __meta__ = { // jshint ignore:line
                         result.$count = true;
                         delete result.$inlinecount;
                     }
-					
+
 					if (result && result.$filter) {
 						// Remove the single quotation marks around the GUID (OData v4).
 						result.$filter = result.$filter.replace(/('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}')/ig, function (x) {
