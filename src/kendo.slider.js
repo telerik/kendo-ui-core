@@ -20,7 +20,7 @@ var __meta__ = { // jshint ignore:line
         format = kendo.format,
         parse = kendo.parseFloat,
         proxy = $.proxy,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         math = Math,
         support = kendo.support,
         pointers = support.pointers,
@@ -749,7 +749,7 @@ var __meta__ = { // jshint ignore:line
                 .removeClass(STATE_DISABLED)
                 .addClass(STATE_DEFAULT);
 
-            that.wrapper.find("input").removeAttr(DISABLED);
+            that.wrapper.find("input").prop(DISABLED, false);
 
             clickHandler = function (e) {
                 var touch = getTouches(e)[0];
@@ -841,7 +841,7 @@ var __meta__ = { // jshint ignore:line
                     .on(MOUSE_DOWN, proxy(function (e) {
                         mouseDownHandler(e, -1);
                     }, that))
-                    .click(kendo.preventDefault);
+                    .on("click", kendo.preventDefault);
             }
 
             that.wrapper
@@ -1445,7 +1445,7 @@ var __meta__ = { // jshint ignore:line
                 .removeClass(STATE_DISABLED)
                 .addClass(STATE_DEFAULT);
 
-            that.wrapper.find("input").removeAttr(DISABLED);
+            that.wrapper.find("input").prop(DISABLED, false);
 
             clickHandler = function (e) {
                 var touch = getTouches(e)[0];

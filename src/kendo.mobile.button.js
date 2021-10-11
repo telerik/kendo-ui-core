@@ -119,7 +119,7 @@ var __meta__ = { // jshint ignore:line
             this.options.enable = enable;
 
             if(enable) {
-                element.removeAttr(DISABLED);
+                element.prop(DISABLED, false);
             } else {
                 element.attr(DISABLED, DISABLED);
             }

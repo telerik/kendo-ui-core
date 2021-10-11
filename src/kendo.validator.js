@@ -734,7 +734,7 @@ var __meta__ = { // jshint ignore:line
             nextFocusable = kendo.getWidgetFocusableElement(target);
 
             if (nextFocusable) {
-                nextFocusable.focus();
+                nextFocusable.trigger("focus");
             }
         },
 

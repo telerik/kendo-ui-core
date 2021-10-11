@@ -604,7 +604,8 @@
     it("MultiSelect uses disabled attr over the readonly", function() {
         var multiselect = new MultiSelect(select.attr("readonly", true).attr("disabled", true));
 
-        assert.equal(select.attr("readonly"), undefined);
+        assert.equal(multiselect.input.attr("readonly"), undefined);
+        assert.equal(multiselect.input.attr("disabled"), "disabled");
     });
 
     it("MultiSelect binds to simple data passed to value option if autoBind is false", function() {

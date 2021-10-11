@@ -878,7 +878,7 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var dataSource = options.dataSource || {};
 
-            dataSource = $.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = Array.isArray(dataSource) ? { data: dataSource } : dataSource;
             dataSource.select = that.element;
             dataSource.fields = [
                 { field: options.dataTextField },

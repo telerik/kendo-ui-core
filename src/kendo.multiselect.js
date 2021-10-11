@@ -58,7 +58,7 @@ var __meta__ = { // jshint ignore:line
         MOUSELEAVE = "mouseleave" + ns,
         HOVEREVENTS = MOUSEENTER + " " + MOUSELEAVE,
         quotRegExp = /"/g,
-        isArray = $.isArray,
+        isArray = Array.isArray,
         styles = ["font-family",
                   "font-size",
                   "font-stretch",
@@ -335,7 +335,7 @@ var __meta__ = { // jshint ignore:line
 
             for (idx = 0; idx < items.length; idx++) {
                 context = items[idx];
-                this.tagList.children().eq(context.index).children("span:first").html(this.tagTextTemplate(context.item));
+                this.tagList.children().eq(context.index).children("span").first().html(this.tagTextTemplate(context.item));
             }
         },
 
@@ -360,7 +360,7 @@ var __meta__ = { // jshint ignore:line
                     that.toggle(false);
                 } else {
                     if (that.input[0] !== activeElement() && notInput) {
-                        that.input.focus();
+                        that.input.trigger("focus");
                     }
 
                     if (that.options.minLength === 1 && !that.popup.visible()) {
@@ -396,7 +396,7 @@ var __meta__ = { // jshint ignore:line
                 that._clearFilter();
             }
 
-            that.element.blur();
+            that.element.trigger("blur");
         },
 
         _removeTag: function(tag, shouldTrigger) {
@@ -515,7 +515,7 @@ var __meta__ = { // jshint ignore:line
             var isActive = input[0] === active;
 
             if(!isActive) {
-                this.input.focus();
+                this.input.trigger("focus");
             }
         },
 
@@ -525,7 +525,7 @@ var __meta__ = { // jshint ignore:line
                 readonly = options.readonly,
                 wrapper = that.wrapper.off(ns),
                 tagList = that.tagList.off(ns),
-                input = that.element.add(that.input.off(ns));
+                input = that.input.off(ns);
 
             if (!readonly && !disable) {
                 wrapper
@@ -543,10 +543,12 @@ var __meta__ = { // jshint ignore:line
 
                 that._clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
 
-                input.removeAttr(DISABLED)
-                     .removeAttr(READONLY)
+                input.prop(DISABLED, false)
+                     .prop(READONLY, false)
                      .attr(ARIA_DISABLED, false)
                      .attr(ARIA_READONLY, false);
+
+                that.element.prop(DISABLED, false);
 
                 tagList
                     .on(MOUSEENTER, LI, function() { $(this).addClass(HOVERCLASS); })
@@ -561,6 +563,8 @@ var __meta__ = { // jshint ignore:line
                      .attr(READONLY, readonly)
                      .attr(ARIA_DISABLED, disable)
                      .attr(ARIA_READONLY, readonly);
+
+                that.element.prop(DISABLED, disable);
             }
         },
 

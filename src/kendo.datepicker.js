@@ -59,7 +59,7 @@ var __meta__ = { // jshint ignore:line
         calendar.normalize(options);
 
 
-        parseFormats = $.isArray(parseFormats) ? parseFormats : [parseFormats];
+        parseFormats = Array.isArray(parseFormats) ? parseFormats : [parseFormats];
 
         if (!parseFormats.length) {
             parseFormats.push("yyyy-MM-dd");

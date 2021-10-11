@@ -611,7 +611,7 @@ var __meta__ = { // jshint ignore:line
 
             if (index >= 0) {
                 view = buffer.at(index);
-                if ($.isArray(view) && !view.length) {
+                if (Array.isArray(view) && !view.length) {
                     view = null;
                 }
             }

@@ -136,7 +136,7 @@ var __meta__ = { // jshint ignore:line
         tabs.filter("li[disabled]")
             .addClass(DISABLEDSTATE)
             .attr("aria-disabled", "true")
-            .removeAttr("disabled");
+            .prop("disabled", false);
 
         tabs.filter(":not([class*=k-state])")
             .children("a")
@@ -1023,8 +1023,8 @@ var __meta__ = { // jshint ignore:line
 
             tab = tab instanceof kendo.data.ObservableArray ? tab.toJSON() : tab;
 
-            if ($.isPlainObject(tab) || $.isArray(tab)) {
-                tab = $.isArray(tab) ? tab : [tab];
+            if ($.isPlainObject(tab) || Array.isArray(tab)) {
+                tab = Array.isArray(tab) ? tab : [tab];
                 newTabsCreated = true;
 
                 tabs = map(tab, function (value, idx) {

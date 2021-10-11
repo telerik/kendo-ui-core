@@ -654,7 +654,7 @@ var __meta__ = { // jshint ignore:line
             return true;
         }
 
-        var xtype = $.type(x), ytype = $.type(y), field;
+        var xtype = kendo.type(x), ytype = kendo.type(y), field;
 
         if (xtype !== ytype) {
             return false;
