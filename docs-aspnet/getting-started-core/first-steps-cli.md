@@ -75,7 +75,7 @@ Install the appropriate [.Net Core SDK 2.0 or later](https://www.microsoft.com/n
       <configuration>
           <packageSources>
           ...
-          <add key="telerik.com" value="https://nuget.telerik.com/nuget" />
+          <add key="telerik.com" value="https://nuget.telerik.com/v3/index.json" />
           </packageSources>
           <packageSourceCredentials>
           <telerik.com>

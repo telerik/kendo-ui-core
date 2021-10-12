@@ -28,6 +28,7 @@ The following example demonstrates how to reload the data source of the PivotGri
             });
 
             function reset(pivot, config) {
+              // Call the setDataSource method and reset the current state of the PivotGrid using the initial options. This will cause the data to reload with the exact same configuration.
               pivot.setDataSource(new kendo.data.PivotDataSource(config));
             };
 

@@ -1185,6 +1185,23 @@
 @tabstrip-content-border-width: 0;
 
 
+// Panelbar
+@panelbar-padding-x: 0px;
+@panelbar-padding-y: 0px;
+@panelbar-font-family: inherit;
+@panelbar-font-size: inherit;
+@panelbar-line-height: @line-height;
+@panelbar-border-width: 1px;
+
+@panelbar-header-padding-x: @padding-x-lg;
+@panelbar-header-padding-y: @padding-y-lg;
+
+@panelbar-item-padding-x: @padding-x-lg;
+@panelbar-item-padding-y: @padding-y;
+
+@panelbar-item-level-count: 4;
+
+
 @import "common/all.less";
 
 @spreadsheet-first-tool-offset: 0;
@@ -1218,7 +1235,6 @@
     border-top-width: 2px;
 }
 
-.k-panelbar > .k-item > .k-link,
 .k-panel > .k-item > .k-link {
     line-height: 3.5em;
 }
@@ -1691,12 +1707,6 @@ div.editorToolbarWindow.k-window-content {
 
 .k-slider-vertical .k-draghandle.k-state-selected {
     left: -4px;
-}
-
-// PanelBar
-.k-panelbar-expand,
-.k-panelbar-collapse {
-    right: 16px;
 }
 
 // Grid
