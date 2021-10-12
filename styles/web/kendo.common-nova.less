@@ -1192,6 +1192,23 @@
 @chip-avatar-size: 24px;
 
 
+// Panelbar
+@panelbar-padding-x: 0px;
+@panelbar-padding-y: 0px;
+@panelbar-font-family: inherit;
+@panelbar-font-size: inherit;
+@panelbar-line-height: @line-height;
+@panelbar-border-width: 1px;
+
+@panelbar-header-padding-x: @padding-x-lg;
+@panelbar-header-padding-y: @padding-y-lg;
+
+@panelbar-item-padding-x: @padding-x-lg;
+@panelbar-item-padding-y: @padding-y;
+
+@panelbar-item-level-count: 4;
+
+
 @import "common/all.less";
 
 .k-button {
@@ -1226,19 +1243,9 @@
     border-top-width: 2px;
 }
 
-.k-panelbar > .k-item > .k-link,
 .k-panel > .k-item > .k-link {
     line-height: 3.5em;
 }
-
-.k-panelbar .k-image {
-    margin-top: 12px;
-}
-
-.k-panelbar .k-sprite {
-    margin-top: 16px;
-}
-
 .k-slider-track
 {
     border-width: 1px;
@@ -1713,12 +1720,6 @@ div.editorToolbarWindow.k-window-content {
             font-size: @selected-icon-height;
         }
     }
-}
-
-// PanelBar
-.k-panelbar-expand,
-.k-panelbar-collapse {
-    right: 16px;
 }
 
 // Grid

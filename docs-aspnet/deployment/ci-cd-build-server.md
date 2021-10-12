@@ -44,11 +44,11 @@ When using Azure pipelines, we encourage you to review the following resource on
 
 * Telerik feed not being found - the most common reason for a problem is that the path to the `nuget.config` file is wrong (it should, by default, be at the root level).
 
-* An `index.json not found` error can occur from many root causes. If you have successfully authenticated, this error usually means that the feed wasn't able to be searched or connected to. A common reason is an incorrect feed URL, such as including a trailing slash - Correct: `https://nuget.telerik.com/nuget` and Incorrect: `https://nuget.telerik.com/nuget/`.
+* An `index.json not found` error can occur from many root causes. If you have successfully authenticated, this error usually means that the feed wasn't able to be searched or connected to. A common reason is an incorrect feed URL, such as including a trailing slash - Correct: `https://nuget.telerik.com/v3/index.json` and Incorrect: `https://nuget.telerik.com/v3/index.json/`.
 
 >caption A few things to double check to ensure correct setup:
 
-* The Service connection is using Basic Authentication and the URL is correct (`https://nuget.telerik.com/nuget` exactly, no trailing slash).
+* The Service connection is using Basic Authentication and the URL is correct (`https://nuget.telerik.com/v3/index.json` exactly, no trailing slash).
 
 * That Service Connection is selected as the credentials source.
 
@@ -86,7 +86,7 @@ Finally, you need a `nuget.config` file that lists the Telerik server in the `pa
 <packageSources>
   <clear />
   <add key="NuGet" value="https://api.nuget.org/v3/index.json" />
-  <add key="TelerikFeed" value="https://nuget.telerik.com/nuget" />
+  <add key="TelerikFeed" value="https://nuget.telerik.com/v3/index.json" />
 </packageSources>
 <packageSourceCredentials>
   <TelerikFeed>

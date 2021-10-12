@@ -26,8 +26,120 @@ A circle with set center and radius.
 ### center `Array|kendo.geometry.Point`
 The center point of the circle
 
+#### Example - Set circle's coordinates
+
+    <div id="diagram"></div>
+    <script>
+      let diagram = jQuery("#diagram").kendoDiagram({
+        dataSource: [
+          { id: 1, name: "Node 1", title: "One" },
+          { id: 2, name: "Node 2", title: "Two" },
+          { id: 3, name: "Node 3", title: "Three" },
+          { id: 4, name: "Node 4", title: "End" }
+        ],
+        connectionsDataSource: [
+          { id: 1, from: 1, to: 2, name: "Connection 1" },
+          { id: 2, from: 2, to: 3, name: "Connection 2" },
+          { id: 3, from: 3, to: 4, name: "Connection 3" }
+        ],
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        editable: {
+          tools: false
+        },
+        shapeDefaults: {
+          visual: function (options) {
+            var r = new kendo.dataviz.diagram.Circle({
+              radius: 40,
+              center: { x: 40, y: 15}
+            });
+            return r;
+          },
+          fill: { color: "transparent" },
+          stroke: { color: "black", width: 1 },
+          hover: {
+            fill: "Orange",
+          }
+        },
+        connectionDefaults: {
+          type: "polyline",
+          editable: {
+            tools: false,
+          },
+          endCap: {
+            type: "ArrowEnd",
+          },
+          stroke: {
+            width: 2,
+          },
+          content: {
+            template: "#= name#",
+            fontSize: 10,
+          }
+        },
+      }).data("kendoDiagram");
+    </script>
+
 ### radius `Number`
 The radius of the circle
+
+#### Example - Set circle's radius
+
+    <div id="diagram"></div>
+    <script>
+      let diagram = jQuery("#diagram").kendoDiagram({
+        dataSource: [
+          { id: 1, name: "Node 1", title: "One" },
+          { id: 2, name: "Node 2", title: "Two" },
+          { id: 3, name: "Node 3", title: "Three" },
+          { id: 4, name: "Node 4", title: "End" }
+        ],
+        connectionsDataSource: [
+          { id: 1, from: 1, to: 2, name: "Connection 1" },
+          { id: 2, from: 2, to: 3, name: "Connection 2" },
+          { id: 3, from: 3, to: 4, name: "Connection 3" }
+        ],
+        layout: {
+          type: "tree",
+          subtype: "right"
+        },
+        editable: {
+          tools: false
+        },
+        shapeDefaults: {
+          visual: function (options) {
+            var r = new kendo.dataviz.diagram.Circle({
+              radius: 45,
+              center: { x: 40, y: 15}
+            });
+            return r;
+          },
+          fill: { color: "transparent" },
+          stroke: { color: "black", width: 1 },
+          hover: {
+            fill: "Orange",
+          }
+        },
+        connectionDefaults: {
+          type: "polyline",
+          editable: {
+            tools: false,
+          },
+          endCap: {
+            type: "ArrowEnd",
+          },
+          stroke: {
+            width: 2,
+          },
+          content: {
+            template: "#= name#",
+            fontSize: 10,
+          }
+        },
+      }).data("kendoDiagram");
+    </script>
 
 ## Fields
 

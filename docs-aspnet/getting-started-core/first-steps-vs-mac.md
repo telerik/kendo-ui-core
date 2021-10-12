@@ -44,7 +44,7 @@ To get up and running with the project:
 
 	![Adding the new NuGet source dialog](../getting-started-core/images/mac-add-nuget-source.png)
 
-3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/nuget` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
+3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/v3/index.json` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
 
 	![Adding the credentials and authenticating for NuGet](../getting-started-core/images/mac-nuget-authenticate.png)
 
