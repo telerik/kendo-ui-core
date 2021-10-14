@@ -11,21 +11,15 @@ position: 2
 
 This article demonstrates how to create a new {{ site.product_long }} application by using the templates that come with the Telerik Extensions for Visual Studio.
 
-## Geting the Wizard
+## Getting the Wizard
+
 To use the **Create New Project Wizard**, install the {{ site.product_long }} Extension. You can get it from:
 
-{% if site.core %}
 * The Visual Studio Marketplace
     * For [Visual Studio 2017 and 2019](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikASPNETCoreVSExtensions)
     * For [Visual Studio 2022](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions)
-* The {{ site.product }} [automated installer]{% slug msi_install_aspnetmvc6_aspnetmvc %}
+* The {{ site.product }} [automated installer]({% slug msi_install_aspnetmvc6_aspnetmvc %})
 * Your [Telerik.com account](https://www.telerik.com/account/product-download?product=UIASPCORE)
-{% else %}
-* The [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikASPNETMVCVSExtensions)
-* The {{ site.product }} [automated installer]{% slug msi_install_aspnetmvc6_aspnetmvc %}
-* Your [Telerik.com account](https://www.telerik.com/account/product-download?product=KENDOUIMVC)
-{% endif %}
-
 
 ## Using the Wizard
 

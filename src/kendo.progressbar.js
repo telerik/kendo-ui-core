@@ -316,8 +316,10 @@ var __meta__ = { // jshint ignore:line
             if((options.orientation === HORIZONTAL && !(options.reverse)) ||
                (options.orientation === VERTICAL && options.reverse)) {
                 completedChunks = that.wrapper.find("li.k-item").slice(0, completedChunksCount);
+            } else if(completedChunksCount === 0) {
+                completedChunks = kendo.jQuery();
             } else {
-                completedChunks = that.wrapper.find("li.k-item").slice((completedChunksCount + 1));
+                completedChunks = that.wrapper.find("li.k-item").slice(completedChunksCount * -1);
             }
 
             that.wrapper.find("." + KCOMPLETEDCHUNK)
