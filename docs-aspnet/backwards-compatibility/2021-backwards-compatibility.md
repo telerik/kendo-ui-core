@@ -10,6 +10,14 @@ position: 1
 
 This article lists the breaking or important changes in the 2021 releases of Kendo UI.
 
+## {{ site.product }} R3 2021
+
+> Important change
+
+**SASS Bootstrap Theme**
+
+As of the 2021 R3 release the Bootstrap SASS theme targets Bootstrap 5. Support for `form-*` classes has been dropped.
+
 ## {{ site.product }} R2 2021
 
 > Important change
