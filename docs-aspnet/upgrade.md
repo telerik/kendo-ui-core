@@ -41,6 +41,30 @@ To upgrade the version with NuGet and Bower:
 1. Delete (uninstall) the trial version from your machine. This approach will eliminate the possibility for trial assemblies to end up in the project references or in production.
 1. [Install]({% slug downloadinstall_aspnetcore %}#installation) the licensed Kendo UI version and follow the steps for updating the Telerik UI for ASP.NET Core version.
 
+### Troubleshooting
+
+#### I switched from a Trial to a Commercial license, but I still see the Trial message
+
+There are several common reasons for the observed behavior:
+
+* The build is not updated.
+
+    Try clearing the build folders and then building the project/solution once again. If the application has been compiled with the trial version and not recompiled with the commercial version the trial message might still be displayed.
+
+* A reference to the trial package has remained in the `.csproj` file.
+
+    Inspect the `.csproj` file of the application and make sure that it doesn't contain a reference to the trial version of the {{site.product}} package:
+
+```
+<ItemGroup>
+    <PackageReference Include="Telerik.UI.for.AspNet.Core.Trial" Version="2021.3.914" />
+</ItemGroup>
+```
+
+* A reference to the Trial package has been pushed to source control.
+
+    In case you have configured any build/release pipelines while testing the {{site.product}} Trial package, it is possible that a reference to the component library has been pushed to source control and is being used for rebuilding the project.
+
 ## See Also
 
 * [First steps on Visual Studio for Windows (online guide)]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})

@@ -79,7 +79,7 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
         )
     ```
 
-1. Send the AntiForgeryToken with each POST request of the page. Additional paratemers can also be passed with the request:
+1. Send the AntiForgeryToken with each POST request of the page:
 
     ```
         <script>
@@ -88,7 +88,20 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
             }
         </script>
     ```
-    
+
+    You can also pass additional parameters with the request. The names of the custom parameters must be different from the reserved words, which are used by the Kendo UI DataSource for jQuery for [sorting](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverSorting), [filtering](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverFiltering), [paging](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverPaging), and [grouping](http://docs.telerik.com/kendo-ui/api/javascript/data/datasource#configuration-serverGrouping).
+
+    ```
+        <script>
+            function forgeryToken() {
+                return {
+                    __RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken,
+                    additionalParameter: "test"
+                };
+            }
+        </script>
+    ```
+
 1. In the `PageModel` file, add a handler method for each of the CRUD operations:
 
     ```
@@ -114,8 +127,9 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
                 }
             }
 
-            public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request)
+            public JsonResult OnPostRead([DataSourceRequest] DataSourceRequest request, string additionalParameter)
             {
+                //The received parameter "additionalParameter" can be used for filtering/checking the data before returning it to the Grid.
                 return new JsonResult(orders.ToDataSourceResult(request));
             }
 

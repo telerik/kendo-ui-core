@@ -37,6 +37,12 @@ To download Telerik UI for ASP.NET Core:
 
 Run the Telerik UI for ASP.NET Core installer. The automatic setup will guide you through the rest of the installation. The default installation directory is `C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core <version>`.
 
+During the installation, the Telerik UI for ASP.NET Core installer provides an option to automatically set up the Telerik NuGet package source. Select the **Set up Telerik NuGet package source** checkbox, and the installer will configure the Telerik online NuGet feed for you:
+
+![Automatic NuGet Feed](../getting-started-core/images/automated-nuget-feed-setup.png)
+
+If you prefer to configure the NuGet package source manually, follow the steps in the [Installing with NuGet]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
+
 ## Distribution Contents
 
 You will find the following in the Telerik UI for ASP.NET Core installation directory:
