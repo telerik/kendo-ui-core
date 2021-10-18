@@ -1,12 +1,12 @@
 ---
-title: FlatColorPicker
-page_title: Configuration, methods and events of Kendo UI FlatColorPicker
+title: ColorGradient
+page_title: Configuration, methods and events of Kendo UI ColorGradient
 res_type: api
 ---
 
-# kendo.ui.FlatColorPicker
+# kendo.ui.ColorGradient
 
-A standalone color editor with color palette and color gradient views.
+This is the HSV color selector, which is used by default in the `kendo.ui.FlatColorPicker`.
 
 ## Configuration
 
@@ -17,23 +17,10 @@ selection of transparency.
 
 #### Example
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker({
+    $("#colorgradient").kendoColorGradient({
       opacity: true
-    });
-    </script>
-
-### buttons `Boolean` *(default: false)*
-
-Specifies whether the widget should display the Apply / Cancel buttons.
-
-#### Example
-
-    <div id="flatpicker"></div>
-    <script>
-    $("#flatpicker").kendoFlatColorPicker({
-      buttons: true
     });
     </script>
 
@@ -43,9 +30,9 @@ Enables the contrast tool in the ColorGradient.
 
 #### Example
 
-    <div id="flatcolorpicker"></div>
+    <div id="ColorGradient"></div>
     <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
+    $("#ColorGradient").kendoColorGradient({
       contrastTool: true
     });
     </script>
@@ -56,9 +43,9 @@ Sets the background color for the contrast tool in the ColorGradient.
 
 #### Example
 
-    <div id="flatcolorpicker"></div>
+    <div id="ColorGradient"></div>
     <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
+    $("#ColorGradient").kendoColorGradient({
       contrastTool: {
         backgroundColor: "#ff0000"
       }
@@ -71,9 +58,9 @@ Sets the default input format in the gradient input editor.
 
 #### Example
 
-    <div id="flatcolorpicker"></div>
+    <div id="ColorGradient"></div>
     <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
+    $("#ColorGradient").kendoColorGradient({
       format: "rgb"
     });
     </script>
@@ -84,9 +71,9 @@ Sets the available input formats in the gradient input editor. Only "hex" and "r
 
 #### Example
 
-    <div id="flatcolorpicker"></div>
+    <div id="ColorGradient"></div>
     <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
+    $("#ColorGradient").kendoColorGradient({
       format: "rgb",
       formats: ["rgb"]
     });
@@ -98,39 +85,10 @@ Specifies the initially selected color.
 
 #### Example
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker({
+    $("#colorgradient").kendoColorGradient({
       value: "#b72bba"
-    });
-    </script>
-
-### preview `Boolean` *(default: true)*
-
-Specifies whether we should display the preview bar which displays the
-current color and the input field.
-
-#### Example
-
-    <div id="flatpicker"></div>
-    <script>
-    $("#flatpicker").kendoFlatColorPicker({
-      preview: false
-    });
-    </script>
-
-### autoupdate `Boolean` *(default: true)*
-
-Specifies whether the UI should be updated while the user is typing in
-the input field, whenever a valid color can be parsed.  If you pass
-`false` for this, the widget will update only when ENTER is pressed.
-
-#### Example
-
-    <div id="flatpicker"></div>
-    <script>
-    $("#flatpicker").kendoFlatColorPicker({
-      autoupdate: false
     });
     </script>
 
@@ -140,43 +98,13 @@ Allows customization of "Apply" / "Cancel" labels.
 
 #### Example
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker({
+    $("#colorgradient").kendoColorGradient({
       buttons: true,
       messages: {
-        apply: "Update",
-        cancel: "Discard"
-      }
-    });
-    </script>
-
-### messages.apply `String`
-Allows customization of "Apply" label.
-
-#### Example
-
-    <div id="flatpicker"></div>
-    <script>
-    $("#flatpicker").kendoFlatColorPicker({
-      buttons: true,
-      messages: {
-        apply: "Update"
-      }
-    });
-    </script>
-
-### messages.cancel `String`
-Allows customization of "Cancel" label.
-
-#### Example
-
-    <div id="flatpicker"></div>
-    <script>
-    $("#flatpicker").kendoFlatColorPicker({
-      buttons: true,
-      messages: {
-        cancel: "Discard"
+        contrastRatio: "Contrast ratio",
+        gradient: "Gradient view"
       }
     });
     </script>
@@ -232,11 +160,11 @@ Focuses the widget.
 
 #### Example
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker();
-    var flatpicker = $("#flatpicker").data("kendoFlatColorPicker");
-    flatpicker.focus();
+    $("#colorgradient").kendoColorGradient();
+    var colorgradient = $("#colorgradient").data("kendoColorGradient");
+    colorgradient.focus();
     </script>
 
 ### value `String|kendo.Color` *(default: null)*
@@ -259,16 +187,16 @@ This does not trigger the "change" event.
 
 #### Example
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker();
-    var flatpicker = $("#flatpicker").data("kendoFlatColorPicker");
+    $("#colorgradient").kendoColorGradient();
+    var colorgradient = $("#colorgradient").data("kendoColorGradient");
 
     // set picker value
-    flatpicker.value("#ccc");
+    colorgradient.value("#ccc");
 
     // get picker value
-    var value = flatpicker.value();
+    var value = colorgradient.value();
     </script>
 
 ### color
@@ -297,11 +225,11 @@ Whether the widget should be enabled (`true`) or disabled (`false`). If not spec
 
 #### Example - disable the flat color picker
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker();
-    var flatpicker = $("#flatpicker").data("kendoFlatColorPicker");
-    flatpicker.enable(false);
+    $("#colorgradient").kendoColorGradient();
+    var colorgradient = $("#colorgradient").data("kendoColorGradient");
+    colorgradient.enable(false);
     </script>
 
 ## Events
@@ -318,9 +246,9 @@ The value of the ColorPicker.
 
 #### Example - subscribe to the "change" event during initialization
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
-    $("#flatpicker").kendoFlatColorPicker({
+    $("#colorgradient").kendoColorGradient({
       change: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("The newly selected color is ", e.value);
@@ -330,15 +258,15 @@ The value of the ColorPicker.
 
 #### Example - subscribe to the "change" event after initialization
 
-    <div id="flatpicker"></div>
+    <div id="colorgradient"></div>
     <script>
     function picker_change(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log("The newly selected color is ", e.value);
     }
-    $("#flatpicker").kendoFlatColorPicker();
-    var flatpicker = $("#flatpicker").data("kendoFlatColorPicker");
-    flatpicker.bind("change", picker_change);
+    $("#colorgradient").kendoColorGradient();
+    var colorgradient = $("#colorgradient").data("kendoColorGradient");
+    colorgradient.bind("change", picker_change);
     </script>
 
 [parseColor]: /api/javascript/kendo#parseColor

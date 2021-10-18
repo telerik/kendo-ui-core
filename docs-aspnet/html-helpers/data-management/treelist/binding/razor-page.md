@@ -12,7 +12,12 @@ position: 1
 
 This article showcases how to perform CRUD operations with the TreeList component in a Razor Pages scenario.
 
-To set up the TreeList component bindings, you need to configure the `Create`, `Read`, `Update`, `Delete` methods of its `DataSource` instance. The URLs in these methods must refer to the method names in the PageModel. See the implementation details in the example below. For the complete project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+To set up the TreeList component bindings:
+
+1. Configure the `Create`, `Read`, `Update`, `Delete` methods of the `DataSource` instance. The URLs in these methods must refer to the method names in the PageModel.
+1. Set the `Id` field in the `Model` of the `DataSource`. It is mandatory for the `Create`, `Update`, `Delete` operations.
+
+See the implementation details in the example below. For the complete project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
 ```tab-RazorPage(csthml)
 @page

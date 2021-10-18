@@ -7,9 +7,9 @@
         it("input: false does not show input", function() {
             var dom = $("<div />").appendTo(Mocha.fixture).kendoFlatColorPicker({ input: false });
 
-            var input = dom.find(".k-color-value");
+            var inputsWrapper = dom.find(".k-colorgradient-inputs");
 
-            assert.equal(input.css("visibility"), "hidden");
+            assert.equal(inputsWrapper.length, 0);
         });
 
         it("initialization from input nests it into wrapper", function() {
@@ -27,8 +27,8 @@
         });
 
         it("unbinds events from hsv area container", function() {
-            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoFlatColorPicker();
-            var cp = dom.data("kendoFlatColorPicker");
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
+            var cp = dom.data("kendoColorGradient");
 
             cp.destroy();
 

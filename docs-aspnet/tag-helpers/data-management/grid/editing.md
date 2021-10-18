@@ -18,6 +18,8 @@ To enable the data editing capabilities:
 * Declare the field definitions through `DataSource schema`.
 * Configure the DataSource for performing CRUD data operations by defining its `transport->create/update/destroy` attributes.
 
+The example below demonstrates how to implement batch editing in the Grid. For a runnable example, refer to the [demo on setting the batch edit mode of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing).
+
 ```tagHelper
 <kendo-grid name="grid" height="550">
     <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">

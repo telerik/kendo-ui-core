@@ -320,6 +320,8 @@ When you work with Telerik UI components, always consider the JSON serialization
 * [How to download and install UI for ASP.NET Core]({% slug downloadinstall_aspnetcore %})
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [How to update UI for ASP.NET Core to a new version]({% slug upgrade_aspnetcore %}#upgrading-to-new-versions)
+* [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
 
 ## See Also
 
