@@ -72,7 +72,7 @@ var __meta__ = { // jshint ignore:line
         groupSelector = ".k-menu-group",
         animationContainerSelector = ".k-animation-container",
         popupSelector = groupSelector + "," + animationContainerSelector,
-        allItemsSelector = ":not(.k-list) > .k-item",
+        allItemsSelector = ":not(.k-list) > .k-item:not([role='treeitem'])",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item",
         availableItemsSelector = ".k-item:not(.k-state-disabled)",
@@ -571,6 +571,8 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var overflowWrapper = that._overflowWrapper();
 
+            that._checkActiveProxy = proxy(that._checkActiveElement, that);
+
             (overflowWrapper || element).on(POINTERDOWN, itemSelector, proxy(that._focusHandler, that))
                    .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
@@ -585,7 +587,7 @@ var __meta__ = { // jshint ignore:line
                    .on("focus" + NS, proxy(that._focus, that))
                    .on("focus" + NS, ".k-content", proxy(that._focus, that))
                    .on("blur" + NS, proxy(that._removeHoverItem, that))
-                   .on("blur" + NS, "[tabindex]", proxy(that._checkActiveElement, that));
+                   .on("blur" + NS, "[tabindex]", that._checkActiveProxy);
 
             if (overflowWrapper) {
                 overflowWrapper

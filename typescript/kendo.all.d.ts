@@ -8142,6 +8142,132 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class PivotConfiguratorButton extends kendo.ui.Widget {
+
+        static fn: PivotConfiguratorButton;
+
+        options: PivotConfiguratorButtonOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotConfiguratorButton;
+
+        constructor(element: Element, options?: PivotConfiguratorButtonOptions);
+
+
+        toggle(): void;
+
+    }
+
+    interface PivotConfiguratorButtonOptions {
+        name?: string;
+        configurator?: string;
+        text?: string;
+    }
+    interface PivotConfiguratorButtonEvent {
+        sender: PivotConfiguratorButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    class PivotConfiguratorV2 extends kendo.ui.Widget {
+
+        static fn: PivotConfiguratorV2;
+
+        options: PivotConfiguratorV2Options;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotConfiguratorV2;
+
+        constructor(element: Element, options?: PivotConfiguratorV2Options);
+
+
+        destroy(): void;
+        refresh(): void;
+        setDataSource(dataSource: kendo.data.PivotDataSourceV2): void;
+
+    }
+
+    interface PivotConfiguratorV2MessagesFieldMenuOperators {
+        contains?: string;
+        doesnotcontain?: string;
+        startswith?: string;
+        endswith?: string;
+        eq?: string;
+        neq?: string;
+    }
+
+    interface PivotConfiguratorV2MessagesFieldMenu {
+        apply?: string;
+        sortAscending?: string;
+        sortDescending?: string;
+        filterFields?: string;
+        filter?: string;
+        include?: string;
+        clear?: string;
+        reset?: string;
+        operators?: PivotConfiguratorV2MessagesFieldMenuOperators;
+    }
+
+    interface PivotConfiguratorV2Messages {
+        applyButtonText?: string;
+        cancelButtonText?: string;
+        measures?: string;
+        columns?: string;
+        rows?: string;
+        title?: string;
+        fieldMenu?: PivotConfiguratorV2MessagesFieldMenu;
+    }
+
+    interface PivotConfiguratorV2Options {
+        name?: string;
+        dataSource?: any|kendo.data.PivotDataSourceV2;
+        filterable?: boolean;
+        sortable?: boolean|any;
+        height?: number|string;
+        messages?: PivotConfiguratorV2Messages;
+    }
+    interface PivotConfiguratorV2Event {
+        sender: PivotConfiguratorV2;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class PivotContainer extends kendo.ui.Widget {
+
+        static fn: PivotContainer;
+
+        options: PivotContainerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotContainer;
+
+        constructor(element: Element, options?: PivotContainerOptions);
+
+
+
+    }
+
+    interface PivotContainerOptions {
+        name?: string;
+        configuratorPosition?: string;
+    }
+    interface PivotContainerEvent {
+        sender: PivotContainer;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
 
     class PivotGrid extends kendo.ui.Widget {
 
@@ -8289,6 +8415,102 @@ declare namespace kendo.ui {
 
     interface PivotGridPdfExportEvent extends PivotGridEvent {
         promise?: JQueryPromise<any> | undefined;
+    }
+
+    class PivotGridV2 extends kendo.ui.Widget {
+
+        static fn: PivotGridV2;
+
+        options: PivotGridV2Options;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotGridV2;
+
+        constructor(element: Element, options?: PivotGridV2Options);
+
+
+        cellInfo(columnIndex: number, rowIndex: number): any;
+        cellInfoByElement(cell: string): any;
+        cellInfoByElement(cell: Element): any;
+        cellInfoByElement(cell: JQuery): any;
+        destroy(): void;
+        refresh(): void;
+        setDataSource(dataSource: kendo.data.PivotDataSourceV2): void;
+        saveAsPDF(): JQueryPromise<any>;
+
+    }
+
+    interface PivotGridV2PdfMargin {
+        bottom?: number|string;
+        left?: number|string;
+        right?: number|string;
+        top?: number|string;
+    }
+
+    interface PivotGridV2Pdf {
+        author?: string;
+        autoPrint?: boolean;
+        avoidLinks?: boolean|string;
+        creator?: string;
+        date?: Date;
+        fileName?: string;
+        forceProxy?: boolean;
+        jpegQuality?: number;
+        keepPNG?: boolean;
+        keywords?: string;
+        landscape?: boolean;
+        margin?: PivotGridV2PdfMargin;
+        paperSize?: string|any;
+        proxyURL?: string;
+        proxyTarget?: string;
+        subject?: string;
+        title?: string;
+    }
+
+    interface PivotGridV2Options {
+        name?: string;
+        dataSource?: any|kendo.data.PivotDataSourceV2;
+        autoBind?: boolean;
+        pdf?: PivotGridV2Pdf;
+        columnWidth?: number;
+        height?: number|string;
+        columnHeaderTemplate?: string|Function;
+        dataCellTemplate?: string|Function;
+        rowHeaderTemplate?: string|Function;
+        dataBinding?(e: PivotGridV2DataBindingEvent): void;
+        dataBound?(e: PivotGridV2DataBoundEvent): void;
+        expandMember?(e: PivotGridV2ExpandMemberEvent): void;
+        collapseMember?(e: PivotGridV2CollapseMemberEvent): void;
+        pdfExport?(e: PivotGridV2PdfExportEvent): void;
+    }
+    interface PivotGridV2Event {
+        sender: PivotGridV2;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface PivotGridV2DataBindingEvent extends PivotGridV2Event {
+    }
+
+    interface PivotGridV2DataBoundEvent extends PivotGridV2Event {
+    }
+
+    interface PivotGridV2ExpandMemberEvent extends PivotGridV2Event {
+        axis?: string;
+        path?: string;
+    }
+
+    interface PivotGridV2CollapseMemberEvent extends PivotGridV2Event {
+        axis?: string;
+        path?: string;
+    }
+
+    interface PivotGridV2PdfExportEvent extends PivotGridV2Event {
+        promise?: JQueryPromise<any>;
     }
 
     class Popover extends kendo.ui.Widget {
@@ -25066,9 +25288,25 @@ interface JQuery {
     kendoPivotConfigurator(options: kendo.ui.PivotConfiguratorOptions): JQuery;
     data(key: "kendoPivotConfigurator"): kendo.ui.PivotConfigurator;
 
+    kendoPivotConfiguratorButton(): JQuery;
+    kendoPivotConfiguratorButton(options: kendo.ui.PivotConfiguratorButtonOptions): JQuery;
+    data(key: "kendoPivotConfiguratorButton"): kendo.ui.PivotConfiguratorButton;
+
+    kendoPivotConfiguratorV2(): JQuery;
+    kendoPivotConfiguratorV2(options: kendo.ui.PivotConfiguratorV2Options): JQuery;
+    data(key: "kendoPivotConfiguratorV2"): kendo.ui.PivotConfiguratorV2;
+
+    kendoPivotContainer(): JQuery;
+    kendoPivotContainer(options: kendo.ui.PivotContainerOptions): JQuery;
+    data(key: "kendoPivotContainer"): kendo.ui.PivotContainer;
+
     kendoPivotGrid(): JQuery;
     kendoPivotGrid(options: kendo.ui.PivotGridOptions): JQuery;
     data(key: "kendoPivotGrid"): kendo.ui.PivotGrid;
+
+    kendoPivotGridV2(): JQuery;
+    kendoPivotGridV2(options: kendo.ui.PivotGridV2Options): JQuery;
+    data(key: "kendoPivotGridV2"): kendo.ui.PivotGridV2;
 
     kendoPopover(): JQuery;
     kendoPopover(options: kendo.ui.PopoverOptions): JQuery;

@@ -30,6 +30,11 @@ var __meta__ = { // jshint ignore:line
 
             this._registerBreakpoint();
 
+            if (this.options.content) {
+                kendo.destroy(this.element.children());
+                this.element.html(this.options.content);
+            }
+
             this.element
                 .addClass("k-rpanel k-rpanel-" + this.options.orientation + " " + this._guid);
 
@@ -92,6 +97,7 @@ var __meta__ = { // jshint ignore:line
         },
         options: {
             name: "ResponsivePanel",
+            content:"",
             orientation: "left",
             toggleButton: ".k-rpanel-toggle",
             breakpoint: 640,

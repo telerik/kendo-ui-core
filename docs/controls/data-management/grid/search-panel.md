@@ -24,10 +24,42 @@ In addition it is possible to customize which fields to search when a value is e
         ...
     });
 
+## Specify the filter operator
+
+As of Kendo UI 2021 R3 SP1, you can specify filter operators for each filter type. With this update, you can filter non-string types.
+
+The following example demonstrates how to specify which fields to include in the search
+
+    $("#grid").kendoGrid({
+        columns: [
+            { field: "name" },
+            { field: "age" }
+        ],
+        dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+        toolbar:["search"],
+        search: {
+            fields: ["name"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
+        }
+    });
+
+The following example demonstrates how to specify the operator for the field that will be used in the filter expression.
+
+    $("#grid").kendoGrid({
+        columns: [
+            { field: "name" },
+            { field: "age" }
+        ],
+        dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
+        toolbar:["search"],
+        search: {
+            fields: ["name", { name: "age", operator: "eq" }]
+        }
+    });
+
+
 ## Known Limitations
 
 * When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
-* When the server operations are enabled, you can search only by using string fields. Using the `Contains` filter operation is available only for string types.
 
 ## See Also
 
