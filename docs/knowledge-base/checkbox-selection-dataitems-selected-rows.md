@@ -27,6 +27,8 @@ component: grid
 
 How can I get all the data items of the selected rows when using the selectable column in the Kendo UI Grid?
 
+> The following obtains the selected rows of the current page only.
+
 ## Solution
 
 To get the `dataItem` for each selected row:
@@ -98,9 +100,87 @@ To get the `dataItem` for each selected row:
 </div>
 ```
 
-## Notes
+### Notes
 
 The checkbox selectable column is available as of the Kendo UI R2 2017 SP1 release.
+
+## Get the Selected Rows Data Across All Grid Pages
+
+1. Get the id field values of the selected rows via the [`selectedKeyNames()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/selectedkeynames) method.
+2. Traverse the Grid data to match the data items holding these id values.
+
+```dojo
+    <div id="example">
+      <button class="k-button" onclick="getSelectedRowsData()">Get selected rows data</button>
+      <div id="grid"></div>
+
+      <script>
+        $(document).ready(function() {
+          $("#grid").kendoGrid({
+            dataSource: {
+              pageSize: 10,
+              transport: {
+                read: {
+                  url: "https://demos.telerik.com/kendo-ui/service/Products",
+                  dataType: "jsonp"
+                }
+              },
+              schema: {
+                model: {
+                  id: "ProductID"
+                }
+              }
+            },
+            pageable: true,
+            scrollable: false,
+            persistSelection: true,
+            sortable: true,
+            columns: [
+              {
+                selectable: true,
+                width: "50px"
+              },
+              {
+                field: "ProductName",
+                title: "Product Name"
+              },
+              {
+                field: "UnitPrice",
+                title: "Unit Price",
+                format: "{0:c}"
+              },
+              {
+                field: "UnitsInStock",
+                title: "Units In Stock"
+              },
+              {
+                field: "Discontinued"
+              }
+            ]
+          });
+        });
+
+        function getSelectedRowsData() {
+          //Get the id field values of the selected rows
+          var keyNames = $("#grid").data("kendoGrid").selectedKeyNames();
+          // convert string values to number
+          var ids = keyNames.map(function (x) { 
+            return parseInt(x, 10); 
+          });
+          var gridData = $("#grid").data("kendoGrid").dataSource.data();
+          var selected =[];
+          ids.forEach(function(number) {
+            gridData.forEach(function(dataItem) {
+              if(number === dataItem.id) {
+                selected.push(dataItem)
+              }
+            }) 
+          })
+          console.log(selected);
+        }
+      </script>
+    </div>
+```
 
 ## See Also
 

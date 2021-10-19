@@ -2863,6 +2863,67 @@ declare namespace kendo.ui {
         target?: JQuery | undefined;
     }
 
+    class ColorGradient extends kendo.ui.Widget {
+
+        static fn: ColorGradient;
+
+        options: ColorGradientOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): ColorGradient;
+
+        constructor(element: Element, options?: ColorGradientOptions);
+
+
+        focus(): void;
+        value(): string;
+        value(color?: string | undefined): void;
+        color(): kendo.Color;
+        color(color?: kendo.Color | undefined): void;
+        enable(enable?: boolean): void;
+
+    }
+
+    interface ColorGradientContrastTool {
+        backgroundColor?: string|kendo.Color;
+    }
+
+    interface ColorGradientMessages {
+        contrastRatio?: string | undefined;
+        fail?: string | undefined;
+        pass?: string;
+        gradient?: string | undefined;
+        palette?: string | undefined;
+        toggleFormat?: string | undefined;
+        red?: string | undefined;
+        green?: string | undefined;
+        blue?: string | undefined;
+        hex?: string | undefined;
+    }
+
+    interface ColorGradientOptions {
+        name?: string | undefined;
+        opacity?: boolean | undefined;
+        contrastTool?: boolean | ColorGradientContrastTool | undefined;
+        format?: string | undefined;
+        formats?: any | undefined;
+        value?: string|kendo.Color | undefined;
+        messages?: ColorGradientMessages | undefined;
+        change?(e: ColorGradientChangeEvent): void;
+    }
+    interface ColorGradientEvent {
+        sender: ColorGradient;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface ColorGradientChangeEvent extends ColorGradientEvent {
+        value?: string | undefined;
+    }
+
     class ColorPalette extends kendo.ui.Widget {
 
         static fn: ColorPalette;
@@ -2929,32 +2990,53 @@ declare namespace kendo.ui {
         color(): kendo.Color;
         color(color?: kendo.Color): void;
         enable(enable?: boolean): void;
+        setBackgroundColor(color: string): void;
+        setBackgroundColor(color: kendo.Color): void;
 
+    }
+
+    interface ColorPickerContrastTool {
+        backgroundColor?: string|kendo.Color;
     }
 
     interface ColorPickerMessages {
-        apply?: string | undefined;
-        cancel?: string | undefined;
-        previewInput?: string | undefined;
+        apply?: string;
+        cancel?: string;
+        previewInput?: string;
+        contrastRatio?: string;
+        fail?: string;
+        pass?: string;
+        gradient?: string;
+        palette?: string;
+        toggleFormat?: string;
+        red?: string;
+        green?: string;
+        blue?: string;
+        hex?: string;
     }
 
     interface ColorPickerTileSize {
-        width?: number | undefined;
-        height?: number | undefined;
+        width?: number;
+        height?: number;
     }
 
     interface ColorPickerOptions {
-        name?: string | undefined;
-        buttons?: boolean | undefined;
-        clearButton?: boolean | undefined;
-        columns?: number | undefined;
-        tileSize?: ColorPickerTileSize | undefined;
-        messages?: ColorPickerMessages | undefined;
-        palette?: string|any | undefined;
-        opacity?: boolean | undefined;
-        preview?: boolean | undefined;
-        toolIcon?: string | undefined;
-        value?: string | undefined;
+        name?: string;
+        buttons?: boolean;
+        contrastTool?: boolean | ColorPickerContrastTool;
+        clearButton?: boolean;
+        columns?: number;
+        format?: string;
+        formats?: any;
+        tileSize?: ColorPickerTileSize;
+        messages?: ColorPickerMessages;
+        palette?: string|any;
+        opacity?: boolean;
+        preview?: boolean;
+        toolIcon?: string;
+        value?: string|kendo.Color;
+        view?: string;
+        views?: any;
         change?(e: ColorPickerChangeEvent): void;
         select?(e: ColorPickerSelectEvent): void;
         open?(e: ColorPickerEvent): void;
@@ -2967,11 +3049,11 @@ declare namespace kendo.ui {
     }
 
     interface ColorPickerChangeEvent extends ColorPickerEvent {
-        value?: string | undefined;
+        value?: string;
     }
 
     interface ColorPickerSelectEvent extends ColorPickerEvent {
-        value?: string | undefined;
+        value?: string;
     }
 
 
@@ -4967,16 +5049,33 @@ declare namespace kendo.ui {
 
     }
 
+    interface FlatColorPickerContrastTool {
+        backgroundColor?: string|kendo.Color;
+    }
+
     interface FlatColorPickerMessages {
         apply?: string | undefined;
         cancel?: string | undefined;
+        contrastRatio?: string | undefined;
+        fail?: string | undefined;
+        pass?: string | undefined;
+        gradient?: string | undefined;
+        palette?: string | undefined;
+        toggleFormat?: string | undefined;
+        red?: string | undefined;
+        green?: string | undefined;
+        blue?: string | undefined;
+        hex?: string | undefined;
     }
 
     interface FlatColorPickerOptions {
         name?: string | undefined;
         opacity?: boolean | undefined;
         buttons?: boolean | undefined;
-        value?: string | undefined;
+        contrastTool?: boolean | FlatColorPickerContrastTool | undefined;
+        format?: string | undefined;
+        formats?: any | undefined;
+        value?: string|kendo.Color | undefined;
         preview?: boolean | undefined;
         autoupdate?: boolean | undefined;
         messages?: FlatColorPickerMessages | undefined;
@@ -8043,6 +8142,132 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class PivotConfiguratorButton extends kendo.ui.Widget {
+
+        static fn: PivotConfiguratorButton;
+
+        options: PivotConfiguratorButtonOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotConfiguratorButton;
+
+        constructor(element: Element, options?: PivotConfiguratorButtonOptions);
+
+
+        toggle(): void;
+
+    }
+
+    interface PivotConfiguratorButtonOptions {
+        name?: string;
+        configurator?: string;
+        text?: string;
+    }
+    interface PivotConfiguratorButtonEvent {
+        sender: PivotConfiguratorButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    class PivotConfiguratorV2 extends kendo.ui.Widget {
+
+        static fn: PivotConfiguratorV2;
+
+        options: PivotConfiguratorV2Options;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotConfiguratorV2;
+
+        constructor(element: Element, options?: PivotConfiguratorV2Options);
+
+
+        destroy(): void;
+        refresh(): void;
+        setDataSource(dataSource: kendo.data.PivotDataSourceV2): void;
+
+    }
+
+    interface PivotConfiguratorV2MessagesFieldMenuOperators {
+        contains?: string;
+        doesnotcontain?: string;
+        startswith?: string;
+        endswith?: string;
+        eq?: string;
+        neq?: string;
+    }
+
+    interface PivotConfiguratorV2MessagesFieldMenu {
+        apply?: string;
+        sortAscending?: string;
+        sortDescending?: string;
+        filterFields?: string;
+        filter?: string;
+        include?: string;
+        clear?: string;
+        reset?: string;
+        operators?: PivotConfiguratorV2MessagesFieldMenuOperators;
+    }
+
+    interface PivotConfiguratorV2Messages {
+        applyButtonText?: string;
+        cancelButtonText?: string;
+        measures?: string;
+        columns?: string;
+        rows?: string;
+        title?: string;
+        fieldMenu?: PivotConfiguratorV2MessagesFieldMenu;
+    }
+
+    interface PivotConfiguratorV2Options {
+        name?: string;
+        dataSource?: any|kendo.data.PivotDataSourceV2;
+        filterable?: boolean;
+        sortable?: boolean|any;
+        height?: number|string;
+        messages?: PivotConfiguratorV2Messages;
+    }
+    interface PivotConfiguratorV2Event {
+        sender: PivotConfiguratorV2;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
+    class PivotContainer extends kendo.ui.Widget {
+
+        static fn: PivotContainer;
+
+        options: PivotContainerOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotContainer;
+
+        constructor(element: Element, options?: PivotContainerOptions);
+
+
+
+    }
+
+    interface PivotContainerOptions {
+        name?: string;
+        configuratorPosition?: string;
+    }
+    interface PivotContainerEvent {
+        sender: PivotContainer;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
 
     class PivotGrid extends kendo.ui.Widget {
 
@@ -8190,6 +8415,102 @@ declare namespace kendo.ui {
 
     interface PivotGridPdfExportEvent extends PivotGridEvent {
         promise?: JQueryPromise<any> | undefined;
+    }
+
+    class PivotGridV2 extends kendo.ui.Widget {
+
+        static fn: PivotGridV2;
+
+        options: PivotGridV2Options;
+
+        dataSource: kendo.data.DataSource;
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): PivotGridV2;
+
+        constructor(element: Element, options?: PivotGridV2Options);
+
+
+        cellInfo(columnIndex: number, rowIndex: number): any;
+        cellInfoByElement(cell: string): any;
+        cellInfoByElement(cell: Element): any;
+        cellInfoByElement(cell: JQuery): any;
+        destroy(): void;
+        refresh(): void;
+        setDataSource(dataSource: kendo.data.PivotDataSourceV2): void;
+        saveAsPDF(): JQueryPromise<any>;
+
+    }
+
+    interface PivotGridV2PdfMargin {
+        bottom?: number|string;
+        left?: number|string;
+        right?: number|string;
+        top?: number|string;
+    }
+
+    interface PivotGridV2Pdf {
+        author?: string;
+        autoPrint?: boolean;
+        avoidLinks?: boolean|string;
+        creator?: string;
+        date?: Date;
+        fileName?: string;
+        forceProxy?: boolean;
+        jpegQuality?: number;
+        keepPNG?: boolean;
+        keywords?: string;
+        landscape?: boolean;
+        margin?: PivotGridV2PdfMargin;
+        paperSize?: string|any;
+        proxyURL?: string;
+        proxyTarget?: string;
+        subject?: string;
+        title?: string;
+    }
+
+    interface PivotGridV2Options {
+        name?: string;
+        dataSource?: any|kendo.data.PivotDataSourceV2;
+        autoBind?: boolean;
+        pdf?: PivotGridV2Pdf;
+        columnWidth?: number;
+        height?: number|string;
+        columnHeaderTemplate?: string|Function;
+        dataCellTemplate?: string|Function;
+        rowHeaderTemplate?: string|Function;
+        dataBinding?(e: PivotGridV2DataBindingEvent): void;
+        dataBound?(e: PivotGridV2DataBoundEvent): void;
+        expandMember?(e: PivotGridV2ExpandMemberEvent): void;
+        collapseMember?(e: PivotGridV2CollapseMemberEvent): void;
+        pdfExport?(e: PivotGridV2PdfExportEvent): void;
+    }
+    interface PivotGridV2Event {
+        sender: PivotGridV2;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface PivotGridV2DataBindingEvent extends PivotGridV2Event {
+    }
+
+    interface PivotGridV2DataBoundEvent extends PivotGridV2Event {
+    }
+
+    interface PivotGridV2ExpandMemberEvent extends PivotGridV2Event {
+        axis?: string;
+        path?: string;
+    }
+
+    interface PivotGridV2CollapseMemberEvent extends PivotGridV2Event {
+        axis?: string;
+        path?: string;
+    }
+
+    interface PivotGridV2PdfExportEvent extends PivotGridV2Event {
+        promise?: JQueryPromise<any>;
     }
 
     class Popover extends kendo.ui.Widget {
@@ -24703,6 +25024,10 @@ interface JQuery {
     kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
     data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge;
 
+    kendoColorGradient(): JQuery;
+    kendoColorGradient(options: kendo.ui.ColorGradientOptions): JQuery;
+    data(key: "kendoColorGradient"): kendo.ui.ColorGradient;
+
     kendoColorPalette(): JQuery;
     kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery;
     data(key: "kendoColorPalette"): kendo.ui.ColorPalette;
@@ -24963,9 +25288,25 @@ interface JQuery {
     kendoPivotConfigurator(options: kendo.ui.PivotConfiguratorOptions): JQuery;
     data(key: "kendoPivotConfigurator"): kendo.ui.PivotConfigurator;
 
+    kendoPivotConfiguratorButton(): JQuery;
+    kendoPivotConfiguratorButton(options: kendo.ui.PivotConfiguratorButtonOptions): JQuery;
+    data(key: "kendoPivotConfiguratorButton"): kendo.ui.PivotConfiguratorButton;
+
+    kendoPivotConfiguratorV2(): JQuery;
+    kendoPivotConfiguratorV2(options: kendo.ui.PivotConfiguratorV2Options): JQuery;
+    data(key: "kendoPivotConfiguratorV2"): kendo.ui.PivotConfiguratorV2;
+
+    kendoPivotContainer(): JQuery;
+    kendoPivotContainer(options: kendo.ui.PivotContainerOptions): JQuery;
+    data(key: "kendoPivotContainer"): kendo.ui.PivotContainer;
+
     kendoPivotGrid(): JQuery;
     kendoPivotGrid(options: kendo.ui.PivotGridOptions): JQuery;
     data(key: "kendoPivotGrid"): kendo.ui.PivotGrid;
+
+    kendoPivotGridV2(): JQuery;
+    kendoPivotGridV2(options: kendo.ui.PivotGridV2Options): JQuery;
+    data(key: "kendoPivotGridV2"): kendo.ui.PivotGridV2;
 
     kendoPopover(): JQuery;
     kendoPopover(options: kendo.ui.PopoverOptions): JQuery;

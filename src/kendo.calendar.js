@@ -704,8 +704,8 @@ var __meta__ = { // jshint ignore:line
 
         _dateInView: function(date) {
             var that = this,
-                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID + ":first").find("a")),
-                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID + ":last").find("a"));
+                firstDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID).first().find("a")),
+                lastDateInView = toDateObject(that._cellsBySelector(CELLSELECTORVALID).last().find("a"));
 
             return +date <= +lastDateInView && +date >= +firstDateInView;
         },
@@ -720,7 +720,7 @@ var __meta__ = { // jshint ignore:line
                 return !isDisabled(currentValue);
             } else {
                 index = that.wrapper.find("."+FOCUSED).index();
-                cell = that.wrapper.find(".k-content td:eq("+(index+cellIndex)+")");
+                cell = that.wrapper.find(".k-content td").eq(index + cellIndex);
                 return cell.is(CELLSELECTORVALID) || !isDisabled(currentValue);
             }
         },
@@ -2001,7 +2001,7 @@ var __meta__ = { // jshint ignore:line
             return option;
         }
 
-        if ($.isArray(option)) {
+        if (Array.isArray(option)) {
             return createDisabledExpr(option);
         }
         return $.noop;

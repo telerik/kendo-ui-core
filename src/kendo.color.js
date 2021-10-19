@@ -22,6 +22,7 @@
 window.kendo = window.kendo || {};
 
 var Class = kendo.Class;
+var support = kendo.support;
 
 var namedColors = {
     aliceblue: "f0f8ff", antiquewhite: "faebd7", aqua: "00ffff",
@@ -75,6 +76,8 @@ var namedColors = {
     whitesmoke: "f5f5f5", yellow: "ffff00", yellowgreen: "9acd32"
 };
 
+var browser = support.browser;
+
 var matchNamedColor = function (color) {
     var colorNames = Object.keys(namedColors);
     colorNames.push("transparent");
@@ -92,11 +95,11 @@ var BaseColor = Class.extend({
 
     toRGB: function() { return this; },
 
-    toHex: function() { return this.toBytes().toHex(); },
+    toHex: function(options) { return this.toBytes().toHex(options); },
 
     toBytes: function() { return this; },
 
-    toCss: function() { return "#" + this.toHex(); },
+    toCss: function(options) { return "#" + this.toHex(options); },
 
     toCssRgba: function() {
         var rgb = this.toBytes();
@@ -104,6 +107,9 @@ var BaseColor = Class.extend({
     },
 
     toDisplay: function() {
+        if (browser.msie && browser.version < 9) {
+            return this.toCss(); // no RGBA support; does it support any opacity in colors?
+        }
         return this.toCssRgba();
     },
 
@@ -228,8 +234,14 @@ var Bytes = RGB.extend({
         return this.toRGB().toHSL();
     },
 
-    toHex: function() {
-        return hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
+    toHex: function(options) {
+        var value = hex(this.r, 2) + hex(this.g, 2) + hex(this.b, 2);
+
+        if (options && options.alpha) {
+            value += hex(Math.round(this.a * 255), 2);
+        }
+
+        return value;
     },
 
     toBytes: function() {
@@ -362,6 +374,10 @@ function hue2rgb(p, q, s) {
     return p;
 }
 
+function alphaFromHex(a) {
+    return parseFloat(parseFloat(parseInt(a, 16) / 255 ).toFixed(3));
+}
+
 function parseColor(value, safe) {
     var m, ret;
 
@@ -391,6 +407,16 @@ function parseColor(value, safe) {
         ret = new Bytes(parseInt(m[1] + m[1], 16),
                         parseInt(m[2] + m[2], 16),
                         parseInt(m[3] + m[3], 16), 1);
+    } else if ((m = /^#?([0-9a-f])([0-9a-f])([0-9a-f])([0-9a-f])\b/i.exec(color))) { // Parse 4 digit hex color
+        ret = new Bytes(parseInt(m[1] + m[1], 16),
+                        parseInt(m[2] + m[2], 16),
+                        parseInt(m[3] + m[3], 16),
+                        alphaFromHex(m[4] + m[4]));
+    } else if ((m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})\b/i.exec(color))) { // Parse 8 digit hex color
+        ret = new Bytes(parseInt(m[1], 16),
+                        parseInt(m[2], 16),
+                        parseInt(m[3], 16),
+                        alphaFromHex(m[4]));
     } else if ((m = /^rgb\(\s*([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)\s*\)/.exec(color))) {
         ret = new Bytes(parseInt(m[1], 10),
                         parseInt(m[2], 10),

@@ -1222,6 +1222,139 @@
 @chip-error-focus-shadow: 0 0 0 2px rgba( @error, .16 );
 
 
+// Panelbar
+@panelbar-bg: @component-bg;
+@panelbar-text: @component-text;
+@panelbar-border: @component-border;
+
+@panelbar-header-bg: @panelbar-bg;
+@panelbar-header-text: @panelbar-text;
+@panelbar-header-border: null;
+@panelbar-header-gradient: null;
+
+@panelbar-header-hovered-bg: shade( @panelbar-header-bg, 5% );
+@panelbar-header-hovered-text: null;
+@panelbar-header-hovered-border: null;
+@panelbar-header-hovered-gradient: null;
+
+@panelbar-header-focused-bg: null;
+@panelbar-header-focused-text: null;
+@panelbar-header-focused-border: null;
+@panelbar-header-focused-gradient: null;
+@panelbar-header-focused-shadow: inset 0 0 0 1px @accent;
+
+@panelbar-header-hovered-focused-bg: null;
+@panelbar-header-hovered-focused-text: null;
+@panelbar-header-hovered-focused-border: null;
+@panelbar-header-hovered-focused-gradient: null;
+
+@panelbar-header-selected-bg: @panelbar-header-bg;
+@panelbar-header-selected-text: @accent;
+@panelbar-header-selected-border: null;
+@panelbar-header-selected-gradient: null;
+
+@panelbar-header-selected-hovered-bg: shade( @panelbar-header-selected-bg, 10% );
+@panelbar-header-selected-hovered-text: null;
+@panelbar-header-selected-hovered-border: null;
+@panelbar-header-selected-hovered-gradient: null;
+
+@panelbar-header-selected-focused-bg: null;
+@panelbar-header-selected-focused-text: null;
+@panelbar-header-selected-focused-border: null;
+@panelbar-header-selected-focused-gradient: null;
+
+@panelbar-header-selected-hovered-focused-bg: null;
+@panelbar-header-selected-hovered-focused-text: null;
+@panelbar-header-selected-hovered-focused-border: null;
+@panelbar-header-selected-hovered-focused-gradient: null;
+
+@panelbar-item-hovered-bg: shade( @panelbar-bg, 5% );
+@panelbar-item-hovered-text: null;
+@panelbar-item-hovered-border: null;
+@panelbar-item-hovered-gradient: null;
+
+@panelbar-item-focused-bg: null;
+@panelbar-item-focused-text: null;
+@panelbar-item-focused-border: null;
+@panelbar-item-focused-gradient: null;
+@panelbar-item-focused-shadow: inset 0 0 0 1px @accent;
+
+@panelbar-item-hovered-focused-bg: null;
+@panelbar-item-hovered-focused-text: null;
+@panelbar-item-hovered-focused-border: null;
+@panelbar-item-hovered-focused-gradient: null;
+
+@panelbar-item-selected-bg: fadeout(@info, 75%);
+@panelbar-item-selected-text: @component-text;
+@panelbar-item-selected-border: null;
+@panelbar-item-selected-gradient: null;
+
+@panelbar-item-selected-hovered-bg: shade( @panelbar-item-selected-bg, 10% );
+@panelbar-item-selected-hovered-text: null;
+@panelbar-item-selected-hovered-border: null;
+@panelbar-item-selected-hovered-gradient: null;
+
+@panelbar-item-selected-focused-bg: null;
+@panelbar-item-selected-focused-text: null;
+@panelbar-item-selected-focused-border: null;
+@panelbar-item-selected-focused-gradient: null;
+
+@panelbar-item-selected-hovered-focused-bg: null;
+@panelbar-item-selected-hovered-focused-text: null;
+@panelbar-item-selected-hovered-focused-border: null;
+@panelbar-item-selected-hovered-focused-gradient: null;
+
+
+// ColorPalette
+@colorpalette-tile-focus-shadow: 0 0 3px 1px rgba( black, .3 ), inset 0 0 0 1px rgba( white, .5 );
+@colorpalette-tile-hover-shadow: 0 0 3px 1px rgba( black, .3 ), inset 0 0 0 1px rgba( white, .8 );
+@colorpalette-tile-selected-shadow: 0 1px 3px 1px rgba( black, .3 ), inset 0 0 0 1px rgba( white, 1 );
+
+
+// ColorGradient
+@gradient-transparent-to-black: rgba( black, 0), black;
+@gradient-transparent-to-white: rgba( white, 0), white;
+@gradient-black-to-transparent: black, rgba( black, 0);
+@gradient-white-to-transparent: white, rgba( white, 0);
+@gradient-rainbow: #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000;
+
+@colorgradient-bg: @component-bg;
+@colorgradient-text: @component-text;
+@colorgradient-border: @component-border;
+
+@colorgradient-focus-border: null;
+@colorgradient-focus-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .3);
+
+@colorgradient-draghandle-bg: transparent;
+@colorgradient-draghandle-text: null;
+@colorgradient-draghandle-border: rgba( white, .8);
+@colorgradient-draghandle-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+@colorgradient-draghandle-focus-shadow: 0 1px 4px black;
+@colorgradient-draghandle-hover-shadow: @colorgradient-draghandle-focus-shadow;
+
+@colorgradient-input-label-text: @disabled-text-color;
+
+
+// Color Preview
+@color-preview-bg: null;
+@color-preview-text: null;
+@color-preview-border: @component-border;
+@color-preview-hover-border: @hover-border-color;
+
+@color-preview-no-color-bg: white;
+@color-preview-no-color-text: @error;
+@color-preview-no-color-border: null;
+
+
+// ColorEditor/FlatColorPicker
+@coloreditor-bg: @component-bg;
+@coloreditor-text: @component-text;
+@coloreditor-border: @component-border;
+
+@coloreditor-focus-border: null;
+@coloreditor-focus-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .3);
+
+
 // Kendo skin
 
 @theme-name: ~"nova";
@@ -1277,6 +1410,8 @@
 @import "Default/orgchart/_theme.less";
 @import "Default/pivotgrid/_theme.less";
 @import "Default/chip/_theme.less";
+@import "Default/panelbar/_theme.less";
+@import "Default/colorpicker/_theme.less";
 
 
 // Main colors
@@ -1320,10 +1455,7 @@
 .k-grid-footer-wrap,
 .k-grouping-header,
 .k-grouping-header .k-group-indicator,
-.k-panelbar > .k-item > .k-link,
 .k-panel > .k-item > .k-link,
-.k-panelbar .k-panel,
-.k-panelbar .k-content,
 .k-treemap-tile,
 .k-slider-track,
 .k-splitbar,
@@ -1358,8 +1490,7 @@
 .k-drag-clue,
 .k-grid-header,
 .k-grouping-header,
-.k-state-highlight,
-.k-panelbar .k-tabstrip-items .k-item {
+.k-state-highlight:not(.k-panelbar-item) {
     color: contrast( @accent );
     background-color: @accent;
     border-color: @accent;
@@ -1382,7 +1513,6 @@
 }
 
 .k-content,
-.k-panelbar > li.k-item,
 .k-panel > li.k-item {
     background-color: @background;
 }
@@ -1486,9 +1616,7 @@
 }
 
 // Default icons opacity
-.k-button .k-image,
-.k-panelbar > .k-state-active > .k-header > .k-icon,
-.k-panelbar > .k-state-active > .k-header .k-state-default .k-icon
+.k-button .k-image
  {
     opacity: .4;
 }
@@ -1503,8 +1631,7 @@
 .k-pivot-toolbar .k-icon,
 .k-grid-content .k-button:active .k-icon,
 .k-splitbar.k-state-focused .k-icon,
-.k-gantt-toolbar .k-icon,
-.k-panelbar > .k-state-active > .k-header .k-state-active .k-icon {
+.k-gantt-toolbar .k-icon {
     opacity: 1;
 }
 
@@ -1594,7 +1721,9 @@
 .k-autocomplete,
 .k-picker-wrap.k-state-default,
 .k-numeric-wrap.k-state-default,
-.k-dropdown-wrap.k-state-default {
+.k-dropdown-wrap.k-state-default,
+.k-colorpicker .k-picker-wrap
+{
     background-color: @normal-background;
     border-color: darken(@normal-background, 12%);
 }
@@ -1801,29 +1930,17 @@ input.k-textbox:active {
 }
 
 // PanelBar
-.k-panelbar {
-    color: @normal-text-color;
-    background-color: @widget-background-color;
-    border-color: @widget-border-color;
+.k-panelbar > .k-item > .k-link,
+.k-panelbar > .k-item {
+    color: @component-text;
+
 }
 
-.k-panelbar {
-    > .k-item .k-panel > .k-item > .k-link,
-    > .k-item .k-panel > .k-item .k-panel > .k-item > .k-link,
-    .k-panel > .k-item .k-panel .k-item > .k-link {
-        color: @normal-text-color;
-    }
-
-     .k-item > .k-link.k-header {
-        color: @accent;
-        background-color: @widget-background-color;
-    }
-
-    > .k-item > .k-link.k-state-hover,
-    > .k-item .k-panel > .k-item > .k-link.k-state-hover {
-        background-color: @hover-background;
-    }
+.k-panelbar > .k-panelbar-header > .k-link {
+    color: @accent;
 }
+
+
 
 // TabStrip
 .k-tabstrip {
@@ -2397,22 +2514,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     background-color: @hover-background;
 }
 
-// ColorPicker
-.k-flatcolorpicker .k-hue-slider .k-draghandle {
-    background-color: @widget-background-color;
-    border-color: @widget-background-color;
-    .box-shadow(@popups-shadow);
-    border-radius: 50%;
-}
-
-.k-flatcolorpicker .k-hue-slider .k-draghandle:hover,
-.k-flatcolorpicker .k-transparency-slider .k-draghandle:hover,
-.k-flatcolorpicker .k-hue-slider .k-draghandle:focus,
-.k-flatcolorpicker .k-transparency-slider .k-draghandle:focus {
-    background-color: @hover-background;
-    border-color: @hover-background;
-    .box-shadow(@popups-shadow);
-}
 
 // Rating
 .k-rating.k-state-focused {

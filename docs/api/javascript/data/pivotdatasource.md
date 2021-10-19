@@ -99,10 +99,12 @@ The configuration of measures. A string array whose values are interpreted as th
 
 #### Example - set the measures
 
+    <div id="pivot"></div>
+
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
-      measures: ["[Measures].[Internet Order Lines Count]"],
+      measures: ["[Measures].[Reseller Freight Cost]"],
       transport: {
         connection: {
             catalog: "Adventure Works DW 2008R2",
@@ -114,7 +116,10 @@ The configuration of measures. A string array whose values are interpreted as th
         type: "xmla"
       }
     });
-    dataSource.fetch();
+
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### measures.values `Array`
@@ -123,11 +128,13 @@ A string array whose values are interpreted as the name of the measures that wil
 
 #### Example - set the measures
 
+    <div id="pivot"></div>
+
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
-          values: ["[Measures].[Internet Order Lines Count]"]
+          values: ["[Measures].[Reseller Freight Cost]"]
       },
       transport: {
         connection: {
@@ -140,7 +147,10 @@ A string array whose values are interpreted as the name of the measures that wil
         type: "xmla"
       }
     });
-    dataSource.fetch();
+
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### measures.axis `String` *(default: columns)*
@@ -149,11 +159,13 @@ The name of the axis on which the measures will be displayed. The supported valu
 
 #### Example - set the axis of the measures
 
+    <div id="pivot"></div>
+    
     <script>
     var dataSource = new kendo.data.PivotDataSource({
       type: "xmla",
       measures: {
-          values: ["[Measures].[Internet Order Lines Count]", "[Measures].[Days Current Quarter to Date]"],
+          values: ["[Measures].[Internet Revenue Trend]", "[Measures].[Internet Revenue Status]"],
           axis: "rows"
       },
       transport: {
@@ -167,7 +179,10 @@ The name of the axis on which the measures will be displayed. The supported valu
         type: "xmla"
       }
     });
-    dataSource.fetch();
+    
+    $("#pivot").kendoPivotGrid({
+      dataSource: dataSource
+    });
     </script>
 
 ### rows `Array`

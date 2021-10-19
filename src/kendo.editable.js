@@ -33,7 +33,7 @@ var __meta__ = { // jshint ignore:line
 
     function fieldType(field) {
         field = field != null ? field : "";
-        return field.type || $.type(field) || "string";
+        return field.type || kendo.type(field) || "string";
     }
 
     function convertToValueBinding(container) {
@@ -421,7 +421,7 @@ var __meta__ = { // jshint ignore:line
                 modelField,
                 modelFields;
 
-            if (!$.isArray(fields)) {
+            if (!Array.isArray(fields)) {
                 fields = [fields];
             }
 
@@ -477,7 +477,7 @@ var __meta__ = { // jshint ignore:line
                 rules: rules });
 
             if (!that.options.skipFocus) {
-                container.find(":kendoFocusable").eq(0).focus();
+                container.find(":kendoFocusable").eq(0).trigger("focus");
             }
         }
    });

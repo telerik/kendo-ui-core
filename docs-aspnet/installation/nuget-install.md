@@ -27,13 +27,13 @@ Our NuGet feed allows you instant access to various Telerik and Kendo packages t
 
 * [Use the Telerik UI for ASP.NET Core trial installer](#setup-with-the-trial-installer).
 
->The improved Telerik NuGet v3 is now available for beta testing at https://nuget.telerik.com/v3/index.json. The new v3 API is faster, lighter, and reduces the number of requests from NuGet clients. You are welcome to try it.
-
-The following video demonstrates how to add the Telerik NuGet feed through the NuGet Package Manager tool in Visual Studio or the `nuget.config` file.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/c3m_BLMXNDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>The legacy https://nuget.telerik.com/nuget server is now deprecated. Make sure to switch to the new https://nuget.telerik.com/v3/index.json server, which is faster, lighter, and reduces the number of requests from your NuGet client.
 
 ### Setup with the NuGet Package Manager
+
+The following video demonstrates how to add the Telerik NuGet feed through the NuGet Package Manager tool in Visual Studio.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dJo1Ij4CcIY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 1. Open Visual Studio.
 
@@ -41,7 +41,7 @@ The following video demonstrates how to add the Telerik NuGet feed through the N
 
 1. Add a **Name** for the Telerik NuGet feed.
 
-1. Add the **Source** URL: https://nuget.telerik.com/nuget and click **OK**.
+1. Add the **Source** URL: https://nuget.telerik.com/v3/index.json and click **OK**.
 
     ![Kendo UI resources](../getting-started-core/images/add-nuget-source.png)
 
@@ -65,12 +65,16 @@ You have successfully added the Telerik NuGet feed as a Package source. The step
 
 ### Setup with NuGet CLI
 
+The following video demonstrates how to add the Telerik NuGet feed by using the NuGet CLI or directly editing the `nuget.config` file.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c3m_BLMXNDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 1. Download the [latest NuGet executable](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe).
 1. Open a command prompt and change the path to where the `nuget.exe` was downloaded. 
 1. Execute the command:
 
     ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password"
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password"
     ```
 
 >**Note**
@@ -80,13 +84,13 @@ You have successfully added the Telerik NuGet feed as a Package source. The step
 If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text:
 
     ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
     ```
 
 If you have already stored a token instead of storing the credentials as clear text, you could update the definition in the `%AppData%\NuGet\NuGet.config` file using the following command:
 
     ```
-        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
     ```
 
 ### Setup with nuget.config
@@ -109,7 +113,7 @@ To use a `nuget.config` file for the Telerik feed, you need to:
             <!--To inherit the global NuGet package sources remove the <clear/> line below -->
             <clear />
             <add key="nuget" value="https://api.nuget.org/v3/index.json" />
-            <add key="telerik" value="https://nuget.telerik.com/nuget" />
+            <add key="telerik" value="https://nuget.telerik.com/v3/index.json" />
          </packageSources>
          <packageSourceCredentials>
             <telerik>
@@ -155,9 +159,11 @@ This section provides solutions for common issues you might encounter while usin
 
 ### After changing my Telerik password, I get [Telerik Nuget] The V2 feed at '...' returned an unexpected status code '401 Logon failed.' error
 
-After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"` command.
+After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your new password"` command.
 
 The password must contain only ASCII characters.
+
+As an alternative, you can [reset your Telerik NuGet Feed credentials from the Windows Credentials Manager]({% slug reset-nuget-feed-credentials%}).
 
 ### The NuGet package takes too long to install or update on Visual Studio
 

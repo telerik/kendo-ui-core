@@ -28,6 +28,8 @@ The Telerik NuGet feed allows you instant access to various Telerik and Kendo pa
 
 * [Use the Telerik UI for ASP.NET MVC trial installer](#setup-with-the-trial-installer).
 
+>The legacy https://nuget.telerik.com/nuget server is now deprecated. Make sure to switch to the new https://nuget.telerik.com/v3/index.json server, which is faster, lighter, and reduces the number of requests from your NuGet client.
+
 The following video demonstrates how to add the Telerik NuGet feed through the NuGet Package Manager tool in Visual Studio or the `nuget.config` file.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/c3m_BLMXNDk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -40,7 +42,7 @@ The following video demonstrates how to add the Telerik NuGet feed through the N
 
 1. Add a **Name** for the Telerik NuGet feed.
 
-1. Add the **Source** URL: https://nuget.telerik.com/nuget and click **OK**.
+1. Add the **Source** URL: https://nuget.telerik.com/v3/index.json and click **OK**.
 
     ![Kendo UI resources](../../getting-started-mvc/images/add-nuget-source.png)
 
@@ -69,7 +71,7 @@ You have successfully added the Telerik NuGet feed as a Package source. The step
 1. Execute the command:
 
     ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password"
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password"
     ```
 >**Note**
 >
@@ -78,13 +80,13 @@ You have successfully added the Telerik NuGet feed as a Package source. The step
 If you are unable to connect to the feed by using encrypted credentials, try the alternative approach of storing credentials in clear text:
 
     ```
-        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+        NuGet Sources Add -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
     ```
 
 If you have already stored a token instead of storing the credentials as clear text, you could update the definition in the `%AppData%\NuGet\NuGet.config` file using the following command:
 
     ```
-        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your password" -StorePasswordInClearText
+        NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your password" -StorePasswordInClearText
     ```
 ### Setup with nuget.config
 
@@ -121,7 +123,7 @@ This section provides solutions for common issues you might encounter while usin
 
 ### After changing my Telerik password, I get [Telerik Nuget] The V2 feed at '...' returned an unexpected status code '401 Logon failed.' error
 
-After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/nuget" -UserName "your login email" -Password "your new password"` command.
+After changing your Telerik password, you need to reset your credentials in the `NuGet.config` file. To do this, run the `NuGet Sources Update -Name "telerik.com" -Source "https://nuget.telerik.com/v3/index.json" -UserName "your login email" -Password "your new password"` command.
 
 ### The NuGet package takes too long to install or update on Visual Studio
 

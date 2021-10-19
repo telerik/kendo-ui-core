@@ -44,7 +44,7 @@ To get up and running with the project:
 
 	![Adding the new NuGet source dialog](../getting-started-core/images/mac-add-nuget-source.png)
 
-3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/nuget` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
+3.  In the **Add Package Source** popup, add a **Telerik Source** with the `https://nuget.telerik.com/v3/index.json` **Location** URL, enter your credentials (telerik.com email and password), and click **OK**.
 
 	![Adding the credentials and authenticating for NuGet](../getting-started-core/images/mac-nuget-authenticate.png)
 
@@ -124,6 +124,8 @@ The default casing for JSON strings in ASP.NET Core is Camel-case. The Telerik U
 * [Ways to download and install UI for ASP.NET Core (overview)]({% slug downloadinstall_aspnetcore %})
 * [Create your own custom bundles]({% slug custombundles_core %})
 * [Explore the helper script dependencies]({% slug script_filesfor_barcodes_widgets %})
+* [How to update UI for ASP.NET Core to a new version]({% slug upgrade_aspnetcore %}#upgrading-to-new-versions)
+* [Switch from Trial to Commercial License]({% slug upgrade_aspnetcore %}#switching-to-a-developer-license)
 
 ## See Also
 

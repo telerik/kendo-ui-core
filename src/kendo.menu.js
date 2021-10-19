@@ -15,7 +15,7 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         activeElement = kendo._activeElement,
         touch = (kendo.support.touch && kendo.support.mobileOS),
-        isArray = $.isArray,
+        isArray = Array.isArray,
         HierarchicalDataSource = kendo.data.HierarchicalDataSource,
         MOUSEDOWN = "mousedown",
         CLICK = "click",
@@ -72,14 +72,12 @@ var __meta__ = { // jshint ignore:line
         groupSelector = ".k-menu-group",
         animationContainerSelector = ".k-animation-container",
         popupSelector = groupSelector + "," + animationContainerSelector,
-        allItemsSelector = ":not(.k-list) > .k-item",
+        allItemsSelector = ":not(.k-list) > .k-item:not([role='treeitem'])",
         disabledSelector = ".k-item.k-state-disabled",
         itemSelector = ".k-item",
         availableItemsSelector = ".k-item:not(.k-state-disabled)",
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
         exclusionSelector = ":not(.k-item.k-separator)",
-        nextSelector = itemSelector + exclusionSelector + ":eq(0)",
-        lastSelector = itemSelector + exclusionSelector + ":last",
         templateSelector = "div:not(.k-animation-container,.k-list-container)",
         scrollButtonSelector = ".k-menu-scroll-button",
         touchPointerTypes = { "2": 1, "touch": 1 },
@@ -275,7 +273,7 @@ var __meta__ = { // jshint ignore:line
         item
             .filter("li[disabled]")
             .addClass(DISABLEDSTATE)
-            .removeAttr("disabled")
+            .prop("disabled", false)
             .attr("aria-disabled", true);
 
         if (!item.filter("[role]").length) {
@@ -573,6 +571,8 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
             var overflowWrapper = that._overflowWrapper();
 
+            that._checkActiveProxy = proxy(that._checkActiveElement, that);
+
             (overflowWrapper || element).on(POINTERDOWN, itemSelector, proxy(that._focusHandler, that))
                    .on(CLICK + NS, disabledSelector, false)
                    .on(CLICK + NS, itemSelector, proxy(that._click , that))
@@ -587,7 +587,7 @@ var __meta__ = { // jshint ignore:line
                    .on("focus" + NS, proxy(that._focus, that))
                    .on("focus" + NS, ".k-content", proxy(that._focus, that))
                    .on("blur" + NS, proxy(that._removeHoverItem, that))
-                   .on("blur" + NS, "[tabindex]", proxy(that._checkActiveElement, that));
+                   .on("blur" + NS, "[tabindex]", that._checkActiveProxy);
 
             if (overflowWrapper) {
                 overflowWrapper
@@ -597,7 +597,7 @@ var __meta__ = { // jshint ignore:line
 
             if (options.openOnClick) {
                 that._documentClickHandler = proxy(that._documentClick, that);
-                $(document).click(that._documentClickHandler);
+                $(document).on("click", that._documentClickHandler);
             }
         },
 
@@ -612,7 +612,7 @@ var __meta__ = { // jshint ignore:line
             that.element.off(NS);
 
             if (that._documentClickHandler) {
-                $(document).unbind("click", that._documentClickHandler);
+                $(document).off("click", that._documentClickHandler);
             }
         },
 
@@ -716,7 +716,7 @@ var __meta__ = { // jshint ignore:line
         _initScrolling: function(scrollElement, backwardBtn, forwardBtn, isHorizontal) {
             var that = this;
             var scrollable = that.options.scrollable;
-            var distance =  $.isNumeric(scrollable.distance) ? scrollable.distance : SCROLLSPEED;
+            var distance =  that.isNumeric(scrollable.distance) ? scrollable.distance : SCROLLSPEED;
             var mouseWheelDistance = distance / 2;
             var backward = "-=" + distance;
             var forward = "+=" + distance;
@@ -787,6 +787,10 @@ var __meta__ = { // jshint ignore:line
                     e.preventDefault();
                 }
             });
+        },
+
+        isNumeric: function(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
         },
 
         _toggleScrollButtons: function(scrollElement, backwardBtn, forwardBtn, horizontal) {
@@ -1060,7 +1064,7 @@ var __meta__ = { // jshint ignore:line
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-menu-group:first:hidden");
+                    var ul = li.find(".k-menu-group:hidden").first();
                     var popup;
                     var overflowPopup;
 
@@ -1330,7 +1334,7 @@ var __meta__ = { // jshint ignore:line
 
         _getPopup: function(li) {
             var that = this;
-            var popup = li.find(".k-menu-group:not(.k-list-container):not(.k-calendar-container):first:visible").data(KENDOPOPUP);
+            var popup = li.find(".k-menu-group:not(.k-list-container):not(.k-calendar-container):visible").first().data(KENDOPOPUP);
             var overflowWrapper = that._overflowWrapper();
 
             if (!popup && overflowWrapper) {
@@ -1766,7 +1770,7 @@ var __meta__ = { // jshint ignore:line
             if (target != that.wrapper[0] && !$(target).is(":kendoFocusable")) {
                 e.stopPropagation();
                 $(target).closest(".k-content").closest(".k-menu-group").closest(".k-item").addClass(FOCUSEDSTATE);
-                that.wrapper.focus();
+                that.wrapper.trigger("focus");
                 return;
             }
 
@@ -1910,9 +1914,9 @@ var __meta__ = { // jshint ignore:line
                 overflowWrapper;
 
             if (!belongsToVertical) {
-                nextItem = item.nextAll(nextSelector);
+                nextItem = item.nextAll(itemSelector + exclusionSelector).eq(0);
                 if (!nextItem.length) {
-                    nextItem = item.prevAll(lastSelector);
+                    nextItem = item.prevAll(itemSelector + exclusionSelector).last();
                 }
                 that.close(item);
             } else if (hasChildren && !item.hasClass(DISABLEDSTATE)) {
@@ -1926,7 +1930,7 @@ var __meta__ = { // jshint ignore:line
                     that._closeChildPopups(rootPopup);
                 }
                 that.close(parentItem);
-                nextItem = parentItem.nextAll(nextSelector);
+                nextItem = parentItem.nextAll(itemSelector + exclusionSelector).eq(0);
             }
 
             if (nextItem && !nextItem.length) {
@@ -1945,9 +1949,9 @@ var __meta__ = { // jshint ignore:line
                 overflowWrapper;
 
             if (!belongsToVertical) {
-                nextItem = item.prevAll(nextSelector);
+                nextItem = item.prevAll(itemSelector + exclusionSelector).eq(0);
                 if (!nextItem.length) {
-                    nextItem = item.nextAll(lastSelector);
+                    nextItem = item.nextAll(itemSelector + exclusionSelector).last();
                 }
                 that.close(item);
             } else {
@@ -1958,7 +1962,7 @@ var __meta__ = { // jshint ignore:line
                 }
                 that.close(nextItem);
                 if (that._isRootItem(nextItem) && that.options.orientation == "horizontal") {
-                    nextItem = nextItem.prevAll(nextSelector);
+                    nextItem = nextItem.prevAll(itemSelector + exclusionSelector).eq(0);
                 }
             }
 
@@ -1982,7 +1986,7 @@ var __meta__ = { // jshint ignore:line
                     nextItem = that._childPopupElement(item).children().first();
                 }
             } else {
-                nextItem = item.nextAll(nextSelector);
+                nextItem = item.nextAll(itemSelector + exclusionSelector).eq(0);
             }
 
             if (!nextItem.length && item.length) {
@@ -2002,7 +2006,7 @@ var __meta__ = { // jshint ignore:line
             if (!belongsToVertical) {
                 return;
             } else {
-                nextItem = item.prevAll(nextSelector);
+                nextItem = item.prevAll(itemSelector + exclusionSelector).eq(0);
             }
 
             if (!nextItem.length && item.length) {
@@ -2508,7 +2512,7 @@ var __meta__ = { // jshint ignore:line
                     DOCUMENT_ELEMENT
                         .on(kendo.support.mousedown + NS + that._marker, that._closeProxy);
 
-                    that.element.focus();
+                    that.element.trigger("focus");
                 }
             }
 

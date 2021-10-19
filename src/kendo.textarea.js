@@ -161,8 +161,8 @@ var __meta__ = {// jshint ignore:line
             element.off(NS);
 
             if (!readonly && !disable) {
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
+                element.prop(DISABLED, false)
+                       .prop(READONLY, false)
                        .attr(ARIA_DISABLED, false);
 
                 wrapper.removeClass(STATEDISABLED)
@@ -244,6 +244,7 @@ var __meta__ = {// jshint ignore:line
             wrapper = element.wrap("<span class='k-widget k-textarea'></span>").parent();
             wrapper[0].style.cssText = DOMElement.style.cssText;
             DOMElement.style.width = "100%";
+
             that._inputWrapper = that.wrapper = wrapper.addClass(DOMElement.className).removeClass('input-validation-error');
         }
     });

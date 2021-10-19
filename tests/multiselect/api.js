@@ -453,7 +453,7 @@
 
             multiselect.readonly();
 
-            assert.equal(multiselect.element.attr("readonly"), "readonly");
+            assert.equal(multiselect.input.attr("readonly"), "readonly");
         });
 
         it("readonly method unbinds input click", function() {
@@ -480,7 +480,8 @@
             multiselect.enable(false);
             multiselect.readonly();
 
-            assert.equal(multiselect.element.attr("readonly"), "readonly");
+            assert.equal(multiselect.input.attr("readonly"), "readonly");
+            assert.equal(multiselect.input.attr("disabled"), undefined);
             assert.equal(multiselect.element.attr("disabled"), undefined);
             assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
         });
@@ -491,7 +492,8 @@
             multiselect.readonly();
             multiselect.enable(false);
 
-            assert.equal(multiselect.element.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("disabled"), "disabled");
             assert.equal(multiselect.element.attr("disabled"), "disabled");
             assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
         });
@@ -502,7 +504,8 @@
             multiselect.readonly();
             multiselect.enable();
 
-            assert.equal(multiselect.element.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("readonly"), undefined);
+            assert.equal(multiselect.input.attr("disabled"), undefined);
             assert.equal(multiselect.element.attr("disabled"), undefined);
             assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
         });

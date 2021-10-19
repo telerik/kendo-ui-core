@@ -952,7 +952,7 @@ var __meta__ = { // jshint ignore:line
     // the next method) and `object` (a reference to the original
     // object).
     function defadvice(klass, methodName, func) {
-        if ($.isArray(klass)) {
+        if (Array.isArray(klass)) {
             return angular.forEach(klass, function(klass){
                 defadvice(klass, methodName, func);
             });
@@ -1154,7 +1154,7 @@ var __meta__ = { // jshint ignore:line
     // All event handlers that are strings are compiled the Angular way.
     defadvice("ui.Widget", "$angular_init", function(element, options) {
         var self = this.self;
-        if (options && !$.isArray(options)) {
+        if (options && !Array.isArray(options)) {
             var scope = self.$angular_scope;
             for (var i = self.events.length; --i >= 0;) {
                 var event = self.events[i];

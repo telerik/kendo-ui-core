@@ -66,7 +66,7 @@ var __meta__ = { // jshint ignore:line
         init: function(element, options) {
             var that = this;
 
-            options = $.isArray(options) ? { dataSource: options } : options;
+            options = Array.isArray(options) ? { dataSource: options } : options;
 
             Widget.fn.init.call(that, element, options);
 

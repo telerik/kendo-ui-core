@@ -315,9 +315,11 @@ var __meta__ = { // jshint ignore:line
 
             if((options.orientation === HORIZONTAL && !(options.reverse)) ||
                (options.orientation === VERTICAL && options.reverse)) {
-                completedChunks = that.wrapper.find("li.k-item:lt(" + completedChunksCount + ")");
+                completedChunks = that.wrapper.find("li.k-item").slice(0, completedChunksCount);
+            } else if(completedChunksCount === 0) {
+                completedChunks = kendo.jQuery();
             } else {
-                completedChunks = that.wrapper.find("li.k-item:gt(-" + (completedChunksCount + 1) + ")");
+                completedChunks = that.wrapper.find("li.k-item").slice(completedChunksCount * -1);
             }
 
             that.wrapper.find("." + KCOMPLETEDCHUNK)
@@ -455,7 +457,7 @@ var __meta__ = { // jshint ignore:line
         _normalizeChunkSize: function() {
             var that = this;
             var options = that.options;
-            var lastChunk = that.wrapper.find(".k-item:last");
+            var lastChunk = that.wrapper.find(".k-item").last();
             var currentSize = parseFloat(lastChunk[0].style[that._progressProperty]);
             var difference = HUNDREDPERCENT - (options.chunkCount * currentSize);
 

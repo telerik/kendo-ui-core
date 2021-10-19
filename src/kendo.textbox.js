@@ -149,8 +149,8 @@ var __meta__ = {// jshint ignore:line
             element.off(NS);
 
             if (!readonly && !disable) {
-                element.removeAttr(DISABLED)
-                       .removeAttr(READONLY)
+                element.prop(DISABLED, false)
+                       .prop(READONLY, false)
                        .attr(ARIA_DISABLED, false);
 
                 wrapper.removeClass(STATEDISABLED)

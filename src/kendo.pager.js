@@ -481,16 +481,16 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (that._focusSelected) {
-                that.element.find(".k-state-selected").focus();
+                that.element.find(".k-state-selected").trigger("focus");
                 that._focusSelected = null;
             }
 
             if (that._focusMore !== null) {
                 if (end < totalPages && that._focusMore) {
-                    that.list.find("li").last().find("a").focus();
+                    that.list.find("li").last().find("a").trigger("focus");
                 }
                 if (!that._focusMore && start > 1) {
-                    that.list.find("li").first().find("a").focus();
+                    that.list.find("li").first().find("a").trigger("focus");
                 }
                 that._focusMore = null;
             }
@@ -590,12 +590,12 @@ var __meta__ = { // jshint ignore:line
 
             if (target[0] === that.element[0] && e.keyCode == keys.ENTER) {
                 that._restoreTabIndexes();
-                that.element.find(FOCUSABLE).first().focus();
+                that.element.find(FOCUSABLE).first().trigger("focus");
                 handled = true;
             }
 
             if (target[0] !== that.element[0] && e.keyCode == keys.ESC) {
-                that.element.focus();
+                that.element.trigger("focus");
                 handled = true;
             }
 
@@ -625,15 +625,15 @@ var __meta__ = { // jshint ignore:line
 
                 if (e.shiftKey) {
                     if (focusedIndex - 1 < 0) {
-                        allFocusable.last().focus();
+                        allFocusable.last().trigger("focus");
                     } else {
-                        allFocusable.eq(focusedIndex - 1).focus();
+                        allFocusable.eq(focusedIndex - 1).trigger("focus");
                     }
                 } else {
                     if (focusedIndex + 1 < allFocusable.length) {
-                        allFocusable.eq(focusedIndex +1 ).focus();
+                        allFocusable.eq(focusedIndex +1 ).trigger("focus");
                     } else {
-                        allFocusable.first().focus();
+                        allFocusable.first().trigger("focus");
                     }
                 }
 

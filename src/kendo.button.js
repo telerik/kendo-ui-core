@@ -218,7 +218,7 @@
 
                 // prevent 'Unspecified error' in IE when inside iframe
                 try {
-                    element.blur();
+                    element.trigger("blur");
                 } catch (err) {}
             },
 

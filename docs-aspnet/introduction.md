@@ -106,6 +106,8 @@ For any issues you might encounter while working with {{ site.product_short }}, 
 * [Collected Examples on Telerik UI for ASP.NET MVC](https://github.com/telerik/ui-for-aspnet-mvc-examples)
 {% endif %}
 
+>tip If you prefer videos, check out our free [Online Technical Training](https://docs.telerik.com/{{site.platform}}/virtual-classroom) 
+
 ### Next Steps
 
 {% if site.core %}

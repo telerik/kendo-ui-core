@@ -447,6 +447,22 @@
             assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
         });
 
+        it("No chunks are selected when progressbar is orientation:vertical and reverse: false and value is set to 0", function() {
+            pb = new ProgressBar(container, {
+                type: "chunk",
+                orientation: "vertical",
+                reverse: false,
+                min: 0,
+                max: 5,
+                value: 1,
+                chunkCount: 5
+            });
+
+            pb.value(0);
+
+            assert.equal(pb.wrapper.find("li").filter(".k-state-selected").length, 0);
+        });
+
         it("Correct chunks are updated when progressbar is orientation:horizontal and reverse: false and value was decreased", function() {
             pb = new ProgressBar(container, {
                 type: "chunk",
