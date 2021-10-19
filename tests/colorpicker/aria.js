@@ -12,7 +12,7 @@
         });
 
         it("renders aria-label for each color", function() {
-            element.find(".k-colorpalette-tile").each(function() {
+            element.find(".k-item").each(function() {
                 var label = $(this).attr("aria-label");
                 assert.isOk(label, "aria-label defined on cells"); // label defined
                 var bg = $(this);
@@ -23,7 +23,7 @@
         });
 
         it("maintains aria-selected attribute consistent with selection", function() {
-            var items = element.find(".k-colorpalette-tile");
+            var items = element.find(".k-item");
 
             assert.equal(element.find("[aria-selected=true]").length, 0);
 
@@ -35,7 +35,7 @@
         });
 
         it("sets aria-activedescendant based on selection", function() {
-            var lastColor = element.find(".k-colorpalette-tile").last();
+            var lastColor = element.find(".k-item").last();
 
             lastColor.click();
 
@@ -140,19 +140,9 @@
             assert.isOk(ariaLabel === "hue saturation");
         });
 
-        it("renders aria-label to the toggle format button", function() {
-            var ariaLabel = colorPicker.wrapper.find(".k-colorgradient-toggle-mode").attr("title");
-            assert.equal(ariaLabel, "Toggle format");
-        });
-
         it("renders aria-label to the preview input", function() {
-            var ariaLabel = colorPicker.wrapper.find("[data-role='textbox']").attr("aria-label");
-            assert.isOk(ariaLabel === "HEX");
-        });
-
-        it("renders aria-label to the RGB red input", function() {
-            var ariaLabel = colorPicker.wrapper.find("[data-role='numerictextbox']").attr("aria-label");
-            assert.isOk(ariaLabel === "Red");
+            var ariaLabel = colorPicker.wrapper.find(".k-color-value").attr("aria-label");
+            assert.isOk(ariaLabel === "Color Hexadecimal Code");
         });
 
         it("flatcolorpicker is accessible with AXE", function(done) {

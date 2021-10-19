@@ -1,21 +1,4 @@
 (function ($, undefined) {
-/* ColorGradient messages */
-
-if (kendo.ui.ColorGradient) {
-    kendo.ui.ColorGradient.prototype.options.messages =
-    $.extend(true, kendo.ui.ColorGradient.prototype.options.messages,{
-        "contrastRatio": "Contrast ratio:",
-        "fail": "Fail",
-        "pass": "Pass",
-        "hex": "HEX",
-        "toggleFormat": "Toggle format",
-        "red": "Red",
-        "green": "Green",
-        "blue": "Blue",
-        "alpha": "Alpha"
-    });
-}
-
 /* FlatColorPicker messages */
 
 if (kendo.ui.FlatColorPicker) {

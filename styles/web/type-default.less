@@ -1372,56 +1372,6 @@
 @panelbar-item-selected-hovered-focused-gradient: null;
 
 
-// ColorPalette
-@colorpalette-tile-focus-shadow: 0 0 3px 1px rgba( black, .3 ), inset 0 0 0 1px rgba( white, .5 );
-@colorpalette-tile-hover-shadow: 0 0 3px 1px rgba( black, .3 ), inset 0 0 0 1px rgba( white, .8 );
-@colorpalette-tile-selected-shadow: 0 1px 3px 1px rgba( black, .3 ), inset 0 0 0 1px rgba( white, 1 );
-
-
-// ColorGradient
-@gradient-transparent-to-black: rgba( black, 0), black;
-@gradient-transparent-to-white: rgba( white, 0), white;
-@gradient-black-to-transparent: black, rgba( black, 0);
-@gradient-white-to-transparent: white, rgba( white, 0);
-@gradient-rainbow: #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000;
-
-@colorgradient-bg: @component-bg;
-@colorgradient-text: @component-text;
-@colorgradient-border: @component-border;
-
-@colorgradient-focus-border: null;
-@colorgradient-focus-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .3);
-
-@colorgradient-draghandle-bg: transparent;
-@colorgradient-draghandle-text: null;
-@colorgradient-draghandle-border: rgba( white, .8);
-@colorgradient-draghandle-shadow: 0 1px 4px rgba(0, 0, 0, .5);
-@colorgradient-draghandle-focus-shadow: 0 1px 4px black;
-@colorgradient-draghandle-hover-shadow: @colorgradient-draghandle-focus-shadow;
-
-@colorgradient-input-label-text: @disabled-text-color;
-
-
-// Color Preview
-@color-preview-bg: null;
-@color-preview-text: null;
-@color-preview-border: @component-border;
-@color-preview-hover-border: @hover-border-color;
-
-@color-preview-no-color-bg: white;
-@color-preview-no-color-text: @error;
-@color-preview-no-color-border: null;
-
-
-// ColorEditor/FlatColorPicker
-@coloreditor-bg: @component-bg;
-@coloreditor-text: @component-text;
-@coloreditor-border: @component-border;
-
-@coloreditor-focus-border: null;
-@coloreditor-focus-shadow: 1px 1px 7px 1px rgba(0, 0, 0, .3);
-
-
 // Kendo skin
 
 @theme-name: ~"default";
@@ -1478,7 +1428,6 @@
 @import "Default/pivotgrid/_theme.less";
 @import "Default/chip/_theme.less";
 @import "Default/panelbar/_theme.less";
-@import "Default/colorpicker/_theme.less";
 
 .k-in,
 .k-item
@@ -2725,8 +2674,7 @@ div.k-filebrowser-dropzone em
 .k-autocomplete,
 .k-picker-wrap.k-state-default,
 .k-numeric-wrap.k-state-default,
-.k-dropdown-wrap.k-state-default,
-.k-colorpicker .k-picker-wrap
+.k-dropdown-wrap.k-state-default
 {
     .composite-background(@widget-gradient);
     background-position: 50% 50%;

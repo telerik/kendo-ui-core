@@ -8466,48 +8466,6 @@ Defines a list of fields which will be included in the search. If values for the
     });
     </script>
 
-### search.fields.name `String`
-
-Defines the name of the field to be included in the search
-
-#### Example
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
-      toolbar:["search"],
-      search: {
-        fields: [ { name: "name" } ]
-      }
-    });
-    </script>
-
-### search.fields.operator `String`
-
-Defines the operator for the field to be used in the filter expression: [filter](/api/javascript/data/datasource/configuration/filter).
-#### Example - specify which fields will be included in the search
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [ { name: "Jane", age: 30 }, { name: "John", age: 33 }],
-      toolbar:["search"],
-      search: {
-        fields: ["name", { name: "age", operator: "eq" }]
-      }
-    });
-    </script>
-
-
 
 ### selectable `Boolean|String|Object` *(default: false)*
 
@@ -8708,7 +8666,7 @@ Determines the inital (from un-sorted to sorted state) sort direction. The suppo
 
 ### sortable.mode `String` *(default: "single")*
 
-The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by multiple columns. And the "mixed" mode enables you to sort in single mode when clicking and switch to multiple when holding **ctrl** key.
+The sorting mode. If set to "single" the user can sort by one column. If set to "multiple" the user can sort by multiple columns.
 
 #### Example - allow multiple column sorting
 
@@ -8725,27 +8683,6 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
       ],
       sortable: {
         mode: "multiple"
-      }
-    });
-    </script>
-
-  #### Example - enable mixed mode sorting
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      sortable: {
-        mode: "mixed",
-        allowUnsort: true, 
-        showIndexes: true
       }
     });
     </script>
@@ -9435,71 +9372,6 @@ When using multicolumn headers, using an index is not allowed. In such scenarios
     });
     var grid = $("#grid").data("kendoGrid");
     grid.autoFitColumn(grid.columns[0].columns[1]);
-    </script>
-
-### autoFitColumns
-
-Applies the minimum possible width for all columns, so that all text fits without wrapping.
-
-> The method ignores and does not resize [hidden](/api/javascript/ui/grid/configuration/columns.hidden) columns.
->
-> Auto-fitting all columns at once is a resource-intensive operation and is not recommended. A better option is to auto-fit only a few columns ([autoFitColumn](/api/javascript/ui/grid/methods/autoFitColumn)) that have the most variable content in terms of length. Alternatively, disable scrolling and allow the [browser to adjust all column widths automatically](/controls/data-management/grid/appearance#widths), according to their content.
->
-> Use `autoFitColumns` only after the Grid has been databound. Executing the method immediately after Grid initialization makes no sense and can lead to undesired behavior.
-
-#### Parameters
-
-##### columns `Array` *optional*
-
-A set of column objects obtained from the [columns](/api/javascript/ui/grid/fields/columns) collection. If parameter is not provided all Grid columns will be auto-fitted.
-
-#### Example - autofit all collumns
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-        columns: [{
-            title: "Person",
-            columns: [
-                { field: "fname", title: "First name"},
-                { field: "lname", title: "Last name"}
-            ]}, {
-                field: "age"
-            }
-        ],
-        dataSource: [
-            { fname: "Jane", lname: "Smith", age: 30 },
-            { fname: "John", lname: "Stevens", age: 33 }
-        ],
-        dataBound: function (e) {
-            e.sender.autoFitColumns();
-        },
-    });
-    </script>
-
-#### Example - autofit set of columns
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-        columns: [{
-            title: "Person",
-            columns: [
-                { field: "fname", title: "First name"},
-                { field: "lname", title: "Last name"}
-            ]}, {
-                field: "age"
-            }
-        ],
-        dataSource: [
-            { fname: "Jane", lname: "Smith", age: 30 },
-            { fname: "John", lname: "Stevens", age: 33 }
-        ],
-        dataBound: function (e) {
-            var grid = e.sender;
-            grid.autoFitColumns(grid.columns[0].columns);
-        },
-    });
     </script>
 
 ### cancelChanges

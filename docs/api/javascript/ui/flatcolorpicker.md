@@ -6,7 +6,8 @@ res_type: api
 
 # kendo.ui.FlatColorPicker
 
-A standalone color editor with color palette and color gradient views.
+This is the HSV color selector, which is used by default in the
+`kendo.ui.ColorPicker` popup when there is no `palette` set.
 
 ## Configuration
 
@@ -37,62 +38,7 @@ Specifies whether the widget should display the Apply / Cancel buttons.
     });
     </script>
 
-### contrastTool `Boolean|Object` *(default: false)*
-
-Enables the contrast tool in the ColorGradient.
-
-#### Example
-
-    <div id="flatcolorpicker"></div>
-    <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
-      contrastTool: true
-    });
-    </script>
-
-### contrastTool.backgroundColor `String|kendo.Color` *(default: '#ffffff')*
-
-Sets the background color for the contrast tool in the ColorGradient.
-
-#### Example
-
-    <div id="flatcolorpicker"></div>
-    <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
-      contrastTool: {
-        backgroundColor: "#ff0000"
-      }
-    });
-    </script>
-
-### format `String` *(default: "hex")*
-
-Sets the default input format in the gradient input editor.
-
-#### Example
-
-    <div id="flatcolorpicker"></div>
-    <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
-      format: "rgb"
-    });
-    </script>
-
-### formats `Array` *(default: ["hex", "rgb"])*
-
-Sets the available input formats in the gradient input editor. Only "hex" and "rgb" are valid values.
-
-#### Example
-
-    <div id="flatcolorpicker"></div>
-    <script>
-    $("#flatcolorpicker").kendoFlatColorPicker({
-      format: "rgb",
-      formats: ["rgb"]
-    });
-    </script>
-
-### value `String | kendo.Color` *(default: null)*
+### value `String | Color` *(default: null)*
 
 Specifies the initially selected color.
 
@@ -181,49 +127,6 @@ Allows customization of "Cancel" label.
     });
     </script>
 
-### messages.contrastRatio `String` *(default: "Contrast ratio")*
-
-Allows customization of the "Contrast ratio" text in the contrast tool.
-
-### messages.fail `String` *(default: "Fail")*
-
-Allows customization of the "Fail" text in the contrast tool.
-
-### messages.pass  `String` *(default: "Pass")*
-
-Allows customization of the "Pass" text in the contrast tool.
-
-### messages.gradient `String` *(default: "Gradient view")*
-
-Allows customization of the Gradient view button.
-
-### messages.palette `String` *(default: "Palette view")*
-
-Allows customization of the Palette view button.
-
-### messages.toggleFormat `String` *(default: "Toggle format")*
-
-Allows customization of the toggle format button in the Gradient's input editor.
-
-### messages.red `String` *(default: "Red")*
-
-Allows customization of the rgb's red input in the Gradient's input editor.
-
-### messages.green `String` *(default: "Green")*
-
-Allows customization of the rgb's green input in the Gradient's input editor.
-
-### messages.blue `String` *(default: "Blue")*
-
-Allows customization of the rgb's blue input in the Gradient's input editor.
-### messages.alpha `String` *(default: "Alpha")*
-
-Allows customization of the rgb's alpha input in the Gradient's input editor.
-
-### messages.hex `String` *(default: "HEX")*
-
-Allows customization of the hex input in the Gradient's input editor.
-
 ## Methods
 
 ### focus
@@ -239,7 +142,7 @@ Focuses the widget.
     flatpicker.focus();
     </script>
 
-### value `String|kendo.Color` *(default: null)*
+### value `String|Color` *(default: null)*
 
 Get or set the selected color. If no argument is given, this returns the
 currently selected color as a string in format #FFFFFF when the `opacity`

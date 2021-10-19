@@ -9,7 +9,7 @@ position: 7
 
 # Web Font Icons
 
-As of the R1 2017 release, Kendo UI delivers integrated font icons intended for the web and data visualization widgets of the suite. Currently, 577 icons are available.
+As of the R1 2017 release, Kendo UI delivers integrated font icons intended for the web and data visualization widgets of the suite. Currently, 577 icons are available. 
 
 These icons can be used directly in a Kendo UI web project by assigning one of the predefined CSS classes provided in the [list of font icons](#list-of-font-icons) below. The following example demonstrates how to achieve this behavior.
 
@@ -592,7 +592,6 @@ fonts in fonts/
     <li><span class="k-icon k-i-snap-to-gridlines"></span> .k-i-snap-to-gridlines</li>
     <li><span class="k-icon k-i-snap-to-snaplines"></span> .k-i-snap-to-snaplines</li>
     <li><span class="k-icon k-i-dimensions"></span> .k-i-dimensions</li>
-    <li><span class="k-icon k-i-color-canvas"></span> .k-i-color-canvas</li>
 </ul>
 
 ### Layout and Navigation
@@ -793,7 +792,7 @@ fonts in fonts/
 
     for (var i = 0, len = icons.length; i < len; i++) {
         var icon = icons[i];
-
+    
         function iconGlyph(el) {
             return window.getComputedStyle(el,':before').content.charCodeAt(1).toString(16);
         }
@@ -802,8 +801,8 @@ fonts in fonts/
 </script>
 
 <style>
-    article:not(.api-reference) ul:not(.docs-tabstrip):not(.k-reset):not(.k-pager-numbers)>li:before {
-        content: none;
+    article:not(.api-reference) ul:not(.docs-tabstrip):not(.k-reset):not(.k-pager-numbers)>li:before { 
+        content: none; 
     }
 
     article > ul.WebComponentsIcons > li {

@@ -11,7 +11,9 @@
     function selectColor(colorpicker) {
         colorpicker.open();
 
-        colorpicker._selector._select(kendo.parseColor("#f11f11"));
+        $("input.k-color-value")
+            .val("#f11f11")
+            .trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
     }
 
     it("triggers change on input element when selecting color", function() {

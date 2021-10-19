@@ -12,11 +12,13 @@
         function selectColor(colorpicker) {
             colorpicker.open();
 
-            colorpicker._selector._select(kendo.parseColor("#f11f11"));
+            $("input.k-color-value")
+                .val("#f11f11")
+                .trigger({ type: "keydown", keyCode: kendo.keys.ENTER });
         }
 
         function clearColor(colorpicker) {
-            colorpicker._selector.element.find(".k-coloreditor-reset").trigger("click");
+            colorpicker._selector.element.find(".k-clear-color").getKendoButton().trigger("click");
         }
 
         it("clear button removes selected color", function() {
@@ -25,7 +27,6 @@
             selectColor(colorPicker);
 
             clearColor(colorPicker);
-            $(colorPicker._selector.element).find("button.k-coloreditor-apply").trigger("click");
 
             assert.equal(null, colorPicker.value());
         });
@@ -33,9 +34,10 @@
         it("apply button does not set color when color is cleared", function() {
             var colorPicker = createPicker({ buttons: true });
 
-            selectColor(colorPicker);
+            colorPicker.open();
+            colorPicker.value("#f11f11");
             clearColor(colorPicker);
-            $(colorPicker._selector.element).find("button.k-coloreditor-apply").trigger("click");
+            $(colorPicker._selector.element).find("button.apply").trigger("click");
 
             assert.equal(null, colorPicker.value());
         });

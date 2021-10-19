@@ -31,34 +31,6 @@ Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colo
       })
     </script>
 
-### contrastTool `Boolean|Object` *(default: false)*
-
-Enables the contrast tool in the ColorGradient.
-
-#### Example
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      contrastTool: true
-    });
-    </script>
-
-### contrastTool.backgroundColor `String|kendo.Color` *(default: '#ffffff')*
-
-Sets the background color for the contrast tool in the ColorGradient.
-
-#### Example
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      contrastTool: {
-        backgroundColor: "#ff0000"
-      }
-    });
-    </script>
-
 ### clearButton `Boolean` *(default: false)*
 
 Specifies whether the widget should display the 'Clear color' button.
@@ -87,34 +59,6 @@ If you use a custom palette then you can set this to some value that makes sense
     $("#colorpicker").kendoColorPicker({
       palette: [ "#000", "#333", "#666", "#999", "#ccc", "#fff" ],
       columns: 3
-    });
-    </script>
-
-
-### format `String` *(default: "hex")*
-
-Sets the default input format in the gradient input editor.
-
-#### Example
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      format: "rgb"
-    });
-    </script>
-
-### formats `Array` *(default: ["hex", "rgb"])*
-
-Sets the available input formats in the gradient input editor. Only "hex" and "rgb" are valid values.
-
-#### Example
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      format: "rgb",
-      formats: ["rgb"]
     });
     </script>
 
@@ -221,49 +165,6 @@ Allows customization of the "Color Hexadecimal Code" preview input title.
     })
     </script>
 
-### messages.contrastRatio `String` *(default: "Contrast ratio")*
-
-Allows customization of the "Contrast ratio" text in the contrast tool.
-
-### messages.fail `String` *(default: "Fail")*
-
-Allows customization of the "Fail" text in the contrast tool.
-
-### messages.pass  `String` *(default: "Pass")*
-
-Allows customization of the "Pass" text in the contrast tool.
-
-### messages.gradient `String` *(default: "Gradient view")*
-
-Allows customization of the Gradient view button.
-
-### messages.palette `String` *(default: "Palette view")*
-
-Allows customization of the Palette view button.
-
-### messages.toggleFormat `String` *(default: "Toggle format")*
-
-Allows customization of the toggle format button in the Gradient's input editor.
-
-### messages.red `String` *(default: "Red")*
-
-Allows customization of the rgb's red input in the Gradient's input editor.
-
-### messages.green `String` *(default: "Green")*
-
-Allows customization of the rgb's green input in the Gradient's input editor.
-
-### messages.blue `String` *(default: "Blue")*
-
-Allows customization of the rgb's blue input in the Gradient's input editor.
-### messages.alpha `String` *(default: "Alpha")*
-
-Allows customization of the rgb's alpha input in the Gradient's input editor.
-
-### messages.hex `String` *(default: "HEX")*
-
-Allows customization of the hex input in the Gradient's input editor.
-
 ### palette `String|Array` *(default: null)*
 
 When a non-null `palette` argument is supplied, the drop-down will be
@@ -347,7 +248,7 @@ specified, the HTML for the element will look like this:
     });
     </script>
 
-### value `String|kendo.Color` *(default: null)*
+### value `String|Color` *(default: null)*
 
 The initially selected color.
 Note that when initializing the widget from an `<input>` element, the initial color will be decided by the field instead.
@@ -358,33 +259,6 @@ Note that when initializing the widget from an `<input>` element, the initial co
     <script>
     $("#colorpicker").kendoColorPicker({
       value: "#b72bba"
-    });
-    </script>
-
-### view `String` *(default: "gradient")*
-
-The initially selected view in the FlatColorPicker.
-
-#### Example
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      view: "palette"
-    });
-    </script>
-
-### views `Array` *(default: [ "gradient", "palette" ])*
-
-The available views in the FlatColorPicker. Valid values are "gradient" and "palette".
-
-#### Example
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      view: "palette",
-      views: ["palette"]
     });
     </script>
 
@@ -433,7 +307,7 @@ Toggles the popup.
     colorpicker.toggle();
     </script>
 
-### value `String|kendo.Color` *(default: null)*
+### value `String|Color` *(default: null)*
 
 Get or set the selected color. If no argument is given, this returns the
 currently selected color as a string in format #FFFFFF when the `opacity`
@@ -496,30 +370,6 @@ Whether the widget should be enabled (`true`) or disabled (`false`). If not spec
     $("#colorpicker").kendoColorPicker();
     var colorpicker = $("#colorpicker").data("kendoColorPicker");
     colorpicker.enable(false);
-    </script>
-
-### setBackgroundColor
-
-sets a new background color for the contrast tool.
-
-#### Parameters
-
-##### color `String|kendo.Color`
-
-The new background color.
-
-#### Example - disable the color picker
-
-    <div id="colorpicker"></div>
-    <script>
-    $("#colorpicker").kendoColorPicker({
-      contrastTool: {
-        backgroundColor: "#ffffff"
-      }
-    });
-
-    var colorpicker = $("#colorpicker").data("kendoColorPicker");
-    colorpicker.setBackgroundColor("#ff0000");
     </script>
 
 ## Events

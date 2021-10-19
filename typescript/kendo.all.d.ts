@@ -2863,67 +2863,6 @@ declare namespace kendo.ui {
         target?: JQuery | undefined;
     }
 
-    class ColorGradient extends kendo.ui.Widget {
-
-        static fn: ColorGradient;
-
-        options: ColorGradientOptions;
-
-
-        element: JQuery;
-        wrapper: JQuery;
-
-        static extend(proto: Object): ColorGradient;
-
-        constructor(element: Element, options?: ColorGradientOptions);
-
-
-        focus(): void;
-        value(): string;
-        value(color?: string | undefined): void;
-        color(): kendo.Color;
-        color(color?: kendo.Color | undefined): void;
-        enable(enable?: boolean): void;
-
-    }
-
-    interface ColorGradientContrastTool {
-        backgroundColor?: string|kendo.Color;
-    }
-
-    interface ColorGradientMessages {
-        contrastRatio?: string | undefined;
-        fail?: string | undefined;
-        pass?: string;
-        gradient?: string | undefined;
-        palette?: string | undefined;
-        toggleFormat?: string | undefined;
-        red?: string | undefined;
-        green?: string | undefined;
-        blue?: string | undefined;
-        hex?: string | undefined;
-    }
-
-    interface ColorGradientOptions {
-        name?: string | undefined;
-        opacity?: boolean | undefined;
-        contrastTool?: boolean | ColorGradientContrastTool | undefined;
-        format?: string | undefined;
-        formats?: any | undefined;
-        value?: string|kendo.Color | undefined;
-        messages?: ColorGradientMessages | undefined;
-        change?(e: ColorGradientChangeEvent): void;
-    }
-    interface ColorGradientEvent {
-        sender: ColorGradient;
-        preventDefault: Function;
-        isDefaultPrevented(): boolean;
-    }
-
-    interface ColorGradientChangeEvent extends ColorGradientEvent {
-        value?: string | undefined;
-    }
-
     class ColorPalette extends kendo.ui.Widget {
 
         static fn: ColorPalette;
@@ -2990,53 +2929,32 @@ declare namespace kendo.ui {
         color(): kendo.Color;
         color(color?: kendo.Color): void;
         enable(enable?: boolean): void;
-        setBackgroundColor(color: string): void;
-        setBackgroundColor(color: kendo.Color): void;
 
-    }
-
-    interface ColorPickerContrastTool {
-        backgroundColor?: string|kendo.Color;
     }
 
     interface ColorPickerMessages {
-        apply?: string;
-        cancel?: string;
-        previewInput?: string;
-        contrastRatio?: string;
-        fail?: string;
-        pass?: string;
-        gradient?: string;
-        palette?: string;
-        toggleFormat?: string;
-        red?: string;
-        green?: string;
-        blue?: string;
-        hex?: string;
+        apply?: string | undefined;
+        cancel?: string | undefined;
+        previewInput?: string | undefined;
     }
 
     interface ColorPickerTileSize {
-        width?: number;
-        height?: number;
+        width?: number | undefined;
+        height?: number | undefined;
     }
 
     interface ColorPickerOptions {
-        name?: string;
-        buttons?: boolean;
-        contrastTool?: boolean | ColorPickerContrastTool;
-        clearButton?: boolean;
-        columns?: number;
-        format?: string;
-        formats?: any;
-        tileSize?: ColorPickerTileSize;
-        messages?: ColorPickerMessages;
-        palette?: string|any;
-        opacity?: boolean;
-        preview?: boolean;
-        toolIcon?: string;
-        value?: string|kendo.Color;
-        view?: string;
-        views?: any;
+        name?: string | undefined;
+        buttons?: boolean | undefined;
+        clearButton?: boolean | undefined;
+        columns?: number | undefined;
+        tileSize?: ColorPickerTileSize | undefined;
+        messages?: ColorPickerMessages | undefined;
+        palette?: string|any | undefined;
+        opacity?: boolean | undefined;
+        preview?: boolean | undefined;
+        toolIcon?: string | undefined;
+        value?: string | undefined;
         change?(e: ColorPickerChangeEvent): void;
         select?(e: ColorPickerSelectEvent): void;
         open?(e: ColorPickerEvent): void;
@@ -3049,11 +2967,11 @@ declare namespace kendo.ui {
     }
 
     interface ColorPickerChangeEvent extends ColorPickerEvent {
-        value?: string;
+        value?: string | undefined;
     }
 
     interface ColorPickerSelectEvent extends ColorPickerEvent {
-        value?: string;
+        value?: string | undefined;
     }
 
 
@@ -5049,33 +4967,16 @@ declare namespace kendo.ui {
 
     }
 
-    interface FlatColorPickerContrastTool {
-        backgroundColor?: string|kendo.Color;
-    }
-
     interface FlatColorPickerMessages {
         apply?: string | undefined;
         cancel?: string | undefined;
-        contrastRatio?: string | undefined;
-        fail?: string | undefined;
-        pass?: string | undefined;
-        gradient?: string | undefined;
-        palette?: string | undefined;
-        toggleFormat?: string | undefined;
-        red?: string | undefined;
-        green?: string | undefined;
-        blue?: string | undefined;
-        hex?: string | undefined;
     }
 
     interface FlatColorPickerOptions {
         name?: string | undefined;
         opacity?: boolean | undefined;
         buttons?: boolean | undefined;
-        contrastTool?: boolean | FlatColorPickerContrastTool | undefined;
-        format?: string | undefined;
-        formats?: any | undefined;
-        value?: string|kendo.Color | undefined;
+        value?: string | undefined;
         preview?: boolean | undefined;
         autoupdate?: boolean | undefined;
         messages?: FlatColorPickerMessages | undefined;
@@ -24801,10 +24702,6 @@ interface JQuery {
     kendoCircularGauge(): JQuery;
     kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
     data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge;
-
-    kendoColorGradient(): JQuery;
-    kendoColorGradient(options: kendo.ui.ColorGradientOptions): JQuery;
-    data(key: "kendoColorGradient"): kendo.ui.ColorGradient;
 
     kendoColorPalette(): JQuery;
     kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery;

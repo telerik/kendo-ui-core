@@ -157,5 +157,14 @@
 
             assert.isOk(!dom.hasClass("k-rpanel-expanded"));
         });
+
+        it("set content html from options", function() {
+            
+            var panel = new ResponsivePanel(dom, {
+                content: "content text"
+            });
+
+            assert.equal(panel.element.html(), "content text");
+        });
     });
 }());

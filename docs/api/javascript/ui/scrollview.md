@@ -122,37 +122,68 @@ An instance of a DataSource to which the ScrollView will be bound.
 
 #### Example - binding the ScrollView to a remote DataSource
 
-    <div id="scrollView" style="height: 500px; width:600px;"></div>
-
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
     <script id="scrollview-template" type="text/x-kendo-template">
-      <div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"></div>
-      <p>#= ProductName #</p>
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
     </script>
-
     <script>
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
 
-    var dataSource = new kendo.data.DataSource({
-      type: "odata",
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: true
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
         }
-      },
-      serverPaging: true,
-      pageSize: 30
-    });
-
-    $("#scrollView").kendoScrollView({
-        dataSource: dataSource,
-        template: $("#scrollview-template").html(),
-        contentHeight: 120,
-        enablePager: true
-    });
-
-    function setBackground(id) {
-      return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
-    }
     </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
 
 ### duration `Number`*(default: 400)*
 
@@ -225,35 +256,68 @@ If set to `true`, the ScrollView will display a pager. By default, the pager is 
 
 #### Example - turning off the pager in a ScrollView in the data-bound mode
 
-    <div id="scrollview"></div>
-
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
     <script id="scrollview-template" type="text/x-kendo-template">
-      <div style="width: 110px; height: 110px; background-image: #=setBackground(ProductID)#;"></div>
-      <p>#= ProductName #</p>
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
     </script>
-
     <script>
-    $("#scrollView").kendoScrollView({
-        dataSource: dataSource,
-        template: "scrollview-template",
-        enablePager: false,
-        contentHeight: "120px"
-    });
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
 
-    var dataSource = new kendo.data.DataSource({
-      type: "odata",
-      transport: {
-        read: {
-          url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: false
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
         }
-      },
-      serverPaging: true
-    });
-
-    function setBackground(id) {
-      return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id +".jpg)";
-    }
     </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
 
 ### messages `Object`
 
