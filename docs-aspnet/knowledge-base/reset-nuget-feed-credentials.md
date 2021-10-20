@@ -21,9 +21,9 @@ res_type: kb
 
 I entered wrong credentials for the private Telerik NuGet Feed. How can I reset my credentials on a Windows machine?
 
-## Solution 1: Reseting The Credentials in `NuGet.config`
+## Solution 1: Resetting The Credentials in `NuGet.config`
 
-Try reseting your credentials by using the approach suggested in the [Troubleshooting section]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#after-changing-my-telerik-password-i-get-telerik-nuget-the-v2-feed-at--returned-an-unexpected-status-code-401-logon-failed-error) of the Installing with Nuget article. If the credentials are not updated, continue with [Solution 2](#solution-2-windows-credentials-manager).
+Try resetting your credentials by using the approach suggested in the {% if site.core %} [Troubleshooting section]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#after-changing-my-telerik-password-i-get-telerik-nuget-the-v2-feed-at--returned-an-unexpected-status-code-401-logon-failed-error) {% else %} [Troubleshooting section]({% slug aspnetmvc_nuget %}#after-changing-my-telerik-password-i-get-telerik-nuget-the-v2-feed-at--returned-an-unexpected-status-code-401-logon-failed-error) {% endif %} of the Installing with Nuget article. If the credentials are not updated, continue with [Solution 2](#solution-2-windows-credentials-manager).
 
 ## Solution 2: Windows Credentials Manager
 
@@ -37,6 +37,5 @@ Alternatively, use Windows Credentials Manager to remove the saved credentials:
     * `nuget.telerik.com`
     * `VSCredentials_nuget.telerik.com`
 ![My Image](../knowledge-base/images/windows-credential-manager.png)
-1. Add the Telerik NuGet Feed again, and then enter the correct credentials. For more details, see the [Installing with Nuget]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) article.
+1. Add the Telerik NuGet Feed again, and then enter the correct credentials. For more details, see the {% if site.core %} [Installing with Nuget]({% slug nuget_install_aspnetmvc6_aspnetmvc %}) {% else %} [Installing with Nuget]({% slug aspnetmvc_nuget %}) {% endif %} article.
 1. If desired, verify the NuGet credentials by inspecting the `NuGet.config` file located in `%AppData%\NuGet\NuGet.config`
-    
