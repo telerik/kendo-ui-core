@@ -16,7 +16,7 @@ This article demonstrates how to create a new Progress&reg; Telerik&reg; UI for 
 To use the **Create New Project Wizard**, install the {{ site.product_long }} Extension. You can get it from:
 
 * The [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikASPNETMVCVSExtensions)
-* The {{ site.product }} [automated installer]({% slug msi_install_aspnetmvc6_aspnetmvc %})
+* The {{ site.product }} [automated installer]({% slug gettingstarted_aspnetmvc %})
 * Your [Telerik.com account](https://www.telerik.com/account/product-download?product=KENDOUIMVC)
 
 ## Using the Wizard

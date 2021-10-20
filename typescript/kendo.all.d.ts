@@ -1006,6 +1006,76 @@ declare namespace kendo.data {
         schemaMeasures(): JQueryPromise<any>;
     }
 
+    class PivotDataSourceV2 extends Observable {
+
+
+        options: PivotDataSourceV2Options;
+
+
+        constructor(options?: PivotDataSourceV2Options);
+
+
+        axes(): any;
+        catalog(): string;
+        catalog(name: string): void;
+        columns(): any;
+        columns(val: any): void;
+        cube(): string;
+        cube(name: string): void;
+        discover(options: string): any;
+        measures(): any;
+        measures(val: any): void;
+        measuresAxis(): string;
+        rows(): any;
+        rows(val: any): void;
+        schemaCatalogs(): any;
+        schemaCubes(): any;
+        schemaDimensions(): any;
+        schemaHierarchies(dimensionName: string): any;
+        schemaLevels(hierarchyName: string): any;
+        schemaMeasures(): any;
+
+    }
+
+    interface PivotDataSourceV2Column {
+        expand?: boolean;
+        name?: string;
+    }
+
+    interface PivotDataSourceV2Measure {
+        values?: any;
+        axis?: string;
+    }
+
+    interface PivotDataSourceV2Row {
+        expand?: boolean;
+        name?: string;
+    }
+
+    interface PivotDataSourceV2TransportConnection {
+        catalog?: string;
+        cube?: string;
+    }
+
+    interface PivotDataSourceV2Transport {
+        discover?: any|string|Function;
+        connection?: PivotDataSourceV2TransportConnection;
+    }
+
+    interface PivotDataSourceV2Options {
+        name?: string;
+        columns?: PivotDataSourceV2Column[];
+        measures?: PivotDataSourceV2Measure[];
+        rows?: PivotDataSourceV2Row[];
+        transport?: PivotDataSourceV2Transport;
+    }
+    interface PivotDataSourceV2Event {
+        sender: PivotDataSourceV2;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+
     interface DataSourceTransport {
         create?: string | DataSourceTransportCreate | ((options: DataSourceTransportOptions) => void) | undefined;
         destroy?: string | DataSourceTransportDestroy | ((options: DataSourceTransportOptions) => void) | undefined;
