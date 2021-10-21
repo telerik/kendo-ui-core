@@ -116,6 +116,12 @@ navigation:
     "controls/data-management/pivotgrid/how-to":
         title: "How To"
         position: 70
+    "controls/data-management/pivotgridv2/binding":
+        title: "Data Binding"
+        position: 2
+    "controls/data-management/pivotgridv2/export":
+        title: "Export"
+        position: 5
     "controls/data-management/spreadsheet/import-and-export-data":
         title: "Data Import and Export"
         position: 7
@@ -600,6 +606,9 @@ navigation:
         title: "Image Editor"
     "*pivotgrid":
         title: "PivotGrid"
+    "*pivotgridv2":
+        isNew: true
+        title: "PivotGridV2"
     "*grid":
         title: "Grid"
     "*media":
@@ -1868,6 +1877,13 @@ defaults:
 
 -
     scope:
+        path: "controls/data-management/pivotgridv2"
+    values:
+        component: "pivotgridv2"
+
+
+-
+    scope:
         path: "controls/layout/popover"
     values:
         component: "popover"
@@ -2081,6 +2097,7 @@ intro_columns:
       "ListView": "overview_kendoui_listview_widget"
       "Pager": "overview_kendoui_pager_widget"
       "PivotGrid": "overview_kendoui_pivotgrid_widget"
+      "PivotGridV2": "overview_kendoui_pivotgridv2_widget"
       "Spreadsheet": "overview_spreadsheet_widget"
       "TaskBoard": "overview_kendoui_taskboard_widget"
       "TreeList": "overview_kendoui_treelist_widget"

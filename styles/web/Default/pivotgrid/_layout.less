@@ -61,6 +61,11 @@
     overflow: hidden;
 }
 
+.k-pivotgrid-column-headers .k-pivotgrid-table {
+    padding-inline-end: 17px;
+    box-sizing: border-box;
+}
+
 .k-pivotgrid-column-headers .k-pivotgrid-cell {
     border-bottom-style: solid;
     border-bottom-width: @pivotgrid-cell-border-width;
@@ -425,6 +430,24 @@
     margin: 0;
     top: auto;
     position: relative;
+}
+
+// Export
+.k-pdf-export-shadow {
+
+    .k-pivotgrid {
+        height: auto !important;
+    }
+
+    .k-pivotgrid-values  {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .k-pivotgrid-column-headers .k-pivotgrid-table {
+        padding-inline-end: 0;
+    }
+
 }
 
 // Legacy
