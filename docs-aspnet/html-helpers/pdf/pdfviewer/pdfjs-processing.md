@@ -36,6 +36,10 @@ The following example demonstrates how to configure the PDFViewer to use PDF.js 
     )
 ```
 
+For a complete example, refer to the following demo:
+
+* [PDFViewer PDFjs Processing Demo](https://demos.telerik.com/{{ site.platform }}/pdfviewer/index)
+
 ## Browser Support
 
 PDF.js processing is not supported in Internet Explorer 9. To work properly in that browser version, PDF.js requires additional configuration.
