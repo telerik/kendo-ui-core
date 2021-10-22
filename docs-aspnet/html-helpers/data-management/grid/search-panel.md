@@ -25,7 +25,11 @@ To enable the search panel functionality, include the `Search` option to the too
 You can also customize which fields to search through the data when a value is entered in the search input.
 
     ...
-    .Search(s=> { s.Field(c => c.ContactName); })
+    .Search(s=> 
+    { 
+        s.Field(c => c.ContactName);
+        s.Field(c => c.CompanyName); 
+    })
 
 The code snippets from above can be seen in action in the following demo:
 

@@ -66,6 +66,21 @@ To display a custom list of colors in the ColorPicker, pass them in the `palette
         });
     </script>
 
+## Legacy ColorPicker Design
+
+As of the end of 2021, the ColorPicker has a new design. The configuration from the example below shows how to revert to the old design of the widget:
+
+```dojo
+    <input id="picker" />
+    <script>
+        $("#picker").kendoColorPicker({
+            input: false,
+            preview:false,
+            views: ["gradient"]
+        });
+    </script>
+```
+
 ## See Also
 
 * [Basic Usage of the ColorPicker (Demo)](https://demos.telerik.com/kendo-ui/colorpicker/index)

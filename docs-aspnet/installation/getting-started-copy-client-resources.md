@@ -34,6 +34,9 @@ To include the client-side resources, use any of the following approaches:
 
    ![Kendo UI resources](../getting-started-core/images/kendo-ui-wwwroot.png)
 
+The culture and localization (the translation of component messages) scripts are included in the `js` folder. For more information on using localization, internationalization, and right-to-left (RTL) support with {{ site.product }} helpers, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
+
+
 1. Register the UI styles and scripts in `~/Views/Shared/_Layout.cshtml`.
 
     > * The CDN links and/or package versions have to point to the same UI for ASP.NET Core version which your project references.

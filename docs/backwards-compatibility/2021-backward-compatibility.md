@@ -10,9 +10,13 @@ position: 1
 
 This article lists the breaking or important changes in the 2021 releases of Kendo UI.
 
-## Kendo UI 2021 R3
+## Kendo UI 2021 R3 SP 1
 
-> Important change
+**ColorPicker**
+
+As of the end of 2021, the ColorPicker has a new design. As a result, some new features were introduced. If you prefer the old design of the widget, refer to [this section from our documentation](https://docs.telerik.com/kendo-ui/controls/editors/colorpicker/overview#old-design-of-the-colorpicker).
+
+## Kendo UI 2021 R3
 
 **MultiSelect**
 
@@ -20,15 +24,11 @@ As of the 2021 R3 release the MultiSelect in virtualization scenario will no lon
 
 ## Kendo UI 2021 R2 SP1
 
-> Important change
-
 **TileLayout**
 
 The TileLayout container headers come with a new rendering. The TileLayout containers no longer render the header texts inside `<h5>` elements, but place them inside `<div>` elements.
 
 ## Kendo UI 2021 R2
-
-> Important change
 
 **Scheduler**
 

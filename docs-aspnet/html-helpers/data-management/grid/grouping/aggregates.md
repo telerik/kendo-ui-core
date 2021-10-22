@@ -41,7 +41,7 @@ Aggregates can be used for the entire grid via:
 Or, to each individual group via: 
 
 * `ClientGroupFooterTemplate` of a `GridColumn` - a footer in the respective column that renders when the grid is grouped.
-* `ClientGroupHeaderTemplate` of a `GridColumn` - a header in the respective column that renders when the grid is grouped by that column. The `value` field in the context carries the current group value.
+* `ClientGroupHeaderColumnTemplate` of a `GridColumn` - a header in the respective column that renders when the grid is grouped by that column. The `value` field in the context carries the current group value.
 
 ## How to Enable Aggregates
 
@@ -51,7 +51,36 @@ To enable aggregates:
 1. Use the aggregate result in the templates that support it - their `context` is strongly typed and carries the aggregate values in the respective fields.
 1. Set the grid's `Groupable` property to `true`.
     * If you will be using only `FooterTemplate`s - grouping is not required.
-1. Group the grid to see the effect on group-specific templates
+1. Group the grid to see the effect on group-specific templates.
+
+
+    ```
+        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
+            .Name("grid")
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.ProductName)
+                    .ClientGroupFooterTemplate("Product: #=count#");        
+                columns.Bound(p => p.UnitPrice).Format("{0:C}")
+                    .ClientFooterTemplate("Total price: #=sum#");
+                columns.Bound(p => p.UnitsInStock)
+                    .ClientGroupHeaderColumnTemplate("Units In Stock: #= value # (Count: #= count#)")
+                    .ClientGroupFooterTemplate("<div>Min: #= min #</div><div>Max: #= max #</div>");
+            })
+            .Groupable()
+            .Pageable()      
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .Aggregates(aggregates =>
+                {
+                    aggregates.Add(p => p.ProductName).Count();
+                    aggregates.Add(p => p.UnitPrice).Sum();
+                    aggregates.Add(p => p.UnitsInStock).Min().Max().Count();
+                })
+                .Read(read => read.Action("AllProducts", "Grid"))
+            )
+        )
+    ```
 
 * [Example Demo Grid with grouping and aggregates](https://demos.telerik.com/{{ site.platform }}/grid/aggregates)
 
