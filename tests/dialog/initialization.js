@@ -39,9 +39,9 @@
 
             assert.isOk(wrapper.is(".k-widget.k-window.k-dialog"));
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar.k-dialog-titlebar"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(2).is(".k-window-actions.k-dialog-actions"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(2).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
-            assert.isOk(wrapperChildren.eq(0).children().eq(2).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(1).is(".k-window-actions.k-dialog-actions"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).is(".k-window-action.k-dialog-action.k-dialog-close"));
+            assert.isOk(wrapperChildren.eq(0).children().eq(1).children().eq(0).children().eq(0).is(".k-icon.k-i-close"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content.k-dialog-content"));
             assert.equal(wrapper.find(".k-dialog-buttongroup").length, 0);
         });

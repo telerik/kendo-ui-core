@@ -1108,7 +1108,6 @@
             titlebar: template(
                 "<div class='k-window-titlebar k-dialog-titlebar k-hstack'>" +
                     "<span class='k-window-title k-dialog-title'>#: title #</span>" +
-                    "<span class='k-spacer'></span>" +
                     "<div class='k-window-actions k-dialog-actions k-hstack'></div>" +
                 "</div>"
             ),

@@ -127,3 +127,7 @@ As of the Kendo UI R2 2020 release, the {{ site.product }} TextBox is a componen
     .HtmlAttributes(new { @Value = String.Format("{0:C}", 2500) })
   )
 ```
+
+You can also check:
+
+[jQuery version support](https://docs.telerik.com/kendo-ui/intro/supporting/jquery-support)

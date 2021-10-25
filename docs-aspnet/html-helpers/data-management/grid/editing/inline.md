@@ -268,6 +268,13 @@ When editing is performed, server validation is often needed. This section demon
               }
           }
           </script>
+          
+## Runnable Samples
+
+To check and download runnable samples demonstrating Inline editing, you can go to these resources:
+
+* [Inline Editing Demo](https://demos.telerik.com/{{ site.platform }}/grid/editing-inline)
+* [Inline Editing Sample](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/grid-inline-editing-with-nullable-boolean)
 
 ## See Also
 
