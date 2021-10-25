@@ -270,7 +270,12 @@
           "confirmation": "Sigur doriți să ștergeți acest element ?",
           "cancelDelete": "Anulați",
           "confirmDelete": "Ștergeți"
-        }
+        },
+        "noRecords": "Nicio inregistrare disponibila.",
+        "search": "Cautare...",
+        "expandCollapseColumnHeader": "",
+        "groupHeader": "Apasati CTRL + spatiu pentru a grupa",
+        "ungroupHeader": "Apasati CTRL + spatiu pentru a degrupa"
       });
   }
 
