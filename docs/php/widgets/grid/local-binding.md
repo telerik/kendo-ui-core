@@ -70,7 +70,7 @@ Below are listed the steps for you to follow when binding the Kendo UI Grid for 
         $schema = new \Kendo\Data\DataSourceSchema();
 
         // Set its model
-        $schema->model($model)
+        $schema->model($model);
 
         // Create the data source
         $dataSource = new \Kendo\Data\DataSource();
@@ -101,7 +101,8 @@ Below are listed the steps for you to follow when binding the Kendo UI Grid for 
         $discontinuedColumn->field('Discontinued')
                            ->width('130px');
 
-        $grid->addColumn($productNameColumn, $unitPriceColumn, $discontinuedColumn);
+        $grid->addColumn($productNameColumn, $unitPriceColumn, $discontinuedColumn)
+             ->dataSource($dataSource);
         ?>
 
 **Step 6** Output the Grid by echoing the result of the `render` method.
