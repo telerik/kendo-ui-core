@@ -971,7 +971,7 @@ The items that are to be selected.
 
 `jQuery` - The selected items if called without arguments.
 
-#### Example
+#### Example - select the first element in the listbox
 
     <select id="listBox"></select>
     <script>
@@ -988,6 +988,29 @@ The items that are to be selected.
     var listBox = $("#listBox").data("kendoListBox");
     // selects first list box item
     listBox.select(listBox.items().first());
+    </script>
+
+#### Example - select an element by its name property
+
+    <select id="listBox"></select>
+    <script>
+    $("#listBox").kendoListBox({
+        dataSource: {
+            data: [
+                { id: 1, name: "Jane Doe", age: 47 },
+                { id: 2, name: "John Doe", age: 50 }
+            ]
+        },
+        template: "<div>#:name#</div>"
+    });
+    // get a reference to the list box widget
+    var listBox = $("#listBox").data("kendoListBox");
+    // Find the uid of the element by name.
+    let uid = listBox.dataItems().filter(f => f.name == "Jane Doe")[0].uid;
+    // Find the element using the uid.
+    let item = listBox.wrapper.find("[data-uid='"+uid+"']");
+    // Select the element.
+    listBox.select(item);
     </script>
 
 ### setDataSource

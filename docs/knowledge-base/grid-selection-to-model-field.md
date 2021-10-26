@@ -41,7 +41,7 @@ Your project might require you to select a Kendo UI Grid row by using a checkbox
 
 After the user checks or unchecks the checkbox, an `update` request initiates and it updates the Boolean field in the model.
 
-The following example demonstrates how `SelectAll` that is located in the header updates the Boolean field in all pages. This approach is suitable for scenarios with a limited number of records.
+The following example demonstrates how `SelectAll` that is located in the header updates the Boolean field in `all pages`. This approach is suitable for scenarios with a limited number of records.
 
 ```dojo
 <style>
@@ -123,22 +123,22 @@ The following example demonstrates how `SelectAll` that is located in the header
         });
     });
 
-  function checkAll(input){
-    var grid = $("#grid").data("kendoGrid");
-    var items = grid.items();
-    items.each(function(){
-     var dataItem = grid.dataItem(this);
-      if(dataItem.Discontinued != input.checked){
-        dataItem.Discontinued = input.checked;
-        dataItem.dirty = true;
+      function checkAll(input){
+        var grid = $("#grid").data("kendoGrid");
+        var data = grid.dataSource.data();
+
+        data.forEach(function(dataItem){
+          if(dataItem.Discontinued != input.checked){
+            dataItem.Discontinued = input.checked;
+            dataItem.dirty = true;
+          }
+        })
+        grid.dataSource.sync();
       }
-    })
-    grid.dataSource.sync();
-  }
 </script>
 ```
 
-The following example demonstrates how `SelectAll` that is located in the header updates the Boolean field on the current page only. This approach is suitable for scenarios with a great number of records.
+The following example demonstrates how `SelectAll` that is located in the header updates the Boolean field on the `current page` only. This approach is suitable for scenarios with a great number of records.
 
 ```dojo
 <style>

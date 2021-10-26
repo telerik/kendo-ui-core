@@ -17940,6 +17940,10 @@ declare namespace kendo.dataviz.ui {
         tooltip?: MapMarkerTooltip | undefined;
     }
 
+    interface MapMessages {
+        tileTitle?: string | undefined;
+    }
+
     interface MapOptions {
         name?: string | undefined;
         center?: any|kendo.dataviz.map.Location | undefined;
@@ -17951,6 +17955,7 @@ declare namespace kendo.dataviz.ui {
         minZoom?: number | undefined;
         maxZoom?: number | undefined;
         minSize?: number | undefined;
+        messages?: MapMessages | undefined;
         pannable?: boolean | undefined;
         wraparound?: boolean | undefined;
         zoom?: number | undefined;

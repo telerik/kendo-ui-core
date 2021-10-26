@@ -12,8 +12,9 @@ The Grid provides a built-in option for triggering column operations through a m
 
 To enable the column menu implementation, set [`columnMenu:true`](/api/javascript/ui/grid/configuration/columnmenu). As a result, the column headers of the Grid render a column menu, which allows the user to sort, filter, or change the visibility of a column. The column menu also detects when a specific column operation is disabled through the column definition and excludes the corresponding UI from its rendering. For a runnable example, refer to the [demo on implementing a column menu in the Grid](https://demos.telerik.com/kendo-ui/grid/column-menu).
 
-Further information about the available columnMenu configuration properties can be obtained from this [`API article`](/api/javascript/ui/grid/configuration/columnmenu).
+> When the [`columnMenu`](/api/javascript/ui/grid/configuration/columnmenu) configuration is set to true, the Grid fires the [`columnMenuInit`](/api/javascript/ui/grid/events/columnmenuinit) and [`columnMenuOpen`](/api/javascript/ui/grid/events/columnmenuopen) events instead of [`filterMenuInit`](/api/javascript/ui/grid/events/filtermenuinit) and [`filterMenuOpen`](/api/javascript/ui/grid/events/filtermenuopen).
 
+Further information about the available columnMenu configuration properties can be obtained from this [`API article`](/api/javascript/ui/grid/configuration/columnmenu).
 
 ## Sort
 

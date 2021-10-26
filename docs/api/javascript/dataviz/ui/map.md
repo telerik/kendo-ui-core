@@ -4649,6 +4649,14 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
 
 The size of the map in pixels at zoom level 0.
 
+### messages `Object`
+
+Allows localization of the strings that are used in the widget.
+
+### messages.tileTitle `String` *(default: "Map tile")*
+
+Specifies `alt` attribute value for the Map tile `<img>` elements.
+
 ### pannable `Boolean` *(default: true)*
 
 Controls whether the user can pan the map.

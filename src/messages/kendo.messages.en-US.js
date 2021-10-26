@@ -1556,4 +1556,13 @@ if (kendo.ui.OrgChart) {
     });
 }
 
+/* Map messages */
+
+if (kendo.dataviz.ui.Map) {
+    kendo.dataviz.ui.Map.prototype.options.messages =
+    $.extend(true, kendo.dataviz.ui.Map.prototype.optionss.messages, {
+        "tileTitle": "Map title"
+    });
+}
+
 })(window.kendo.jQuery);

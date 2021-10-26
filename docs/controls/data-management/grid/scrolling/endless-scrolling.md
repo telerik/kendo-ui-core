@@ -54,6 +54,30 @@ If the Grid displays hierarchical data and an item gets expanded, it will not be
 
 > The filtering, sorting, and grouping operations reset the scroll position.
 
+## Using with DataSource operations
+
+When a filter, sort, or group is applied through the [`DataSource methods`](/api/javascript/data/datasource#methods) rather than the Grid UI, the scroll position isn't automatically reset.
+
+In such cases, the scroll position and [`pageSize`](/api/javascript/data/datasource/configuration/pagesize) should be updated manually.
+
+        $("#grid").kendoGrid({
+            scrollable: {
+                endless: true
+            },
+            // Other configuration.
+        });
+
+        let grid = $("#grid").data("kendoGrid");
+
+        // Reset the scroll position and update the pageSize before invoking the operation.
+        grid.dataSource.options.endless = null;
+        grid._endlessPageSize = grid.dataSource.options.pageSize;
+        grid.dataSource.pageSize(grid.dataSource.options.pageSize);
+        
+        // Apply a filter, sort or group after that.
+        let filter = {field: "exampleField", operator: "eq", value: "example value"}
+        grid.dataSource.filter(filter);
+
 ## Known Limitations
 
 * Either enable endless scrolling or paging. Do not apply both features at the same time.

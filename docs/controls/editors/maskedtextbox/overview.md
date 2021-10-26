@@ -27,6 +27,15 @@ The following example demonstrates how to initialize the MaskedTextBox. When ini
         });
     </script>
 
+## Referencing Existing Instances
+
+To get a reference to an existing MaskedTextBox instance:
+
+1. Use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method.
+1. Once a reference is established, use the [MaskedTextBox API](/api/javascript/ui/maskedtextbox) to control its behavior:
+
+    var maskedtextbox = $("#textbox").data("kendoMaskedTextBox");
+
 ## Functionality and Features
 
 The MaskedTextBox supports the implementation of [mask rules]({% slug masks_kendoui_maskedtextbox_widget %}) to validate its input value.

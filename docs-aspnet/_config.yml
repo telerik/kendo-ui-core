@@ -112,6 +112,9 @@ navigation:
      "getting-started/helper-basics":
         title: "Working with Helpers"
         position: 6
+     "getting-started/repl":
+        title: "REPL"
+        position: 9
      "getting-started/vs-integration":
         title: "Integrating with VS"
         position: 7
@@ -129,6 +132,10 @@ navigation:
      "getting-started-core/installation":
         title: "Download and Installation"
         position: 5
+        include_in_navigation: false
+     "getting-started-core/repl":
+        title: "REPL"
+        position: 9
         include_in_navigation: false
      "getting-started-core/helper-basics":
         title: "Working with Helpers"
@@ -157,6 +164,10 @@ navigation:
      "getting-started-mvc/helper-basics":
         title: "Working with Helpers"
         position: 6
+        include_in_navigation: false
+     "getting-started-mvc/repl":
+        title: "repl"
+        position: 9
         include_in_navigation: false
      "getting-started-mvc/vs-integration":
         title: "Integrating with VS"
