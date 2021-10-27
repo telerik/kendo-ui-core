@@ -1240,6 +1240,8 @@ Removes all files for which the callback function returns `true` by sending a st
 
 > The invoking of the `removeFile` method does not trigger the `remove` event.
 
+> In a chunk upload scenario the method will not work for files that are not fully uploaded and saved. To remove a file that has been canceled call the `remove` handler manually.
+
 #### Example
 
     <input name="files" id="files" type="file" />
@@ -1389,6 +1391,8 @@ Manually triggers the upload process.
 Fires when the upload was cancelled while in progress.
 
 > The `cancel` event fires only when the Upload is in [async mode](/web/upload/modes#asynchronous-mode).
+
+> To remove the data of a file that has been canceled, manually call the `remove` handler. For more information refer to the limitation of the [`removeFile` method](/api/javascript/ui/upload/methods/removefile)
 
 #### Example
 
