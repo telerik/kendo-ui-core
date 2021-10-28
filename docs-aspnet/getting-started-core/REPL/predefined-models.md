@@ -1,13 +1,13 @@
 ---
-title: Available Models
-page_title: REPL Models
-description: Familiarize yourself with the models available in the Telerik REPL tool.
-slug: available_models_repl_aspnetcore
-permalink: /getting-started/repl/available-models
+title: Using Predefined Models
+page_title: Using Predefined Models
+description: Familiarize yourself with the predefined models available in the Telerik REPL tool.
+slug: using_predefined_models_repl_aspnetcore
+permalink: /getting-started/repl/predefined-models
 position: 2
 ---
 
-## REPL Models
+## Using Predefined Models
 
 REPL uses the predefined models available in the Telerik UI for ASP.NET Core demos. You can find them in your Telerik UI for ASP.NET Core installation folder, which should be at a location similar to the following:
 
