@@ -945,8 +945,17 @@ var __meta__ = { // jshint ignore:line
         },
 
         _list: function () {
-            var that = this;
-            $("<ul class='" + LIST_CLASS + "' role='listbox'></ul>").appendTo(that._innerWrapper);
+            var that = this,
+                list = $("<ul class='" + LIST_CLASS + "' role='listbox'></ul>"),
+                selectable = that.options.selectable,
+                selectableOptions = Selectable.parseOptions(selectable);
+
+            if (selectableOptions.multiple) {
+                list.attr("aria-multiselectable", "true");
+            }
+
+            list.appendTo(that._innerWrapper);
+
             if(that.options.navigatable) {
                 that._getList().attr(TABINDEX, that._getTabIndex());
             }
@@ -1070,10 +1079,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var selectable = that.options.selectable;
             var selectableOptions = Selectable.parseOptions(selectable);
-
-            if (selectableOptions.multiple) {
-                that.element.attr("aria-multiselectable", "true");
-            }
 
             that.selectable = new Selectable(that._innerWrapper, {
                 aria: true,

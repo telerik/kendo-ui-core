@@ -518,6 +518,10 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
 
+                if(multi) {
+                    that.element.attr("aria-multiselectable", true);
+                }
+
                 if (navigatable) {
                     that.element.on("keydown" + NS, function(e) {
 

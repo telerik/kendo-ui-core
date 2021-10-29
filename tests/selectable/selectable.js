@@ -750,24 +750,6 @@
             assert.isOk(ul.children().eq(2).hasClass(SELECTED), "Third item must be selected");
         });
 
-        it("multiple selection adds aria attribute", function() {
-            new Selectable(ul, { aria: true, multiple: true });
-
-            assert.isOk(ul.is("[aria-multiselectable]"));
-        });
-
-        it("non-aria selectable does not add aria-multiselectable", function() {
-            new Selectable(ul, { multiple: true });
-
-            assert.isOk(!ul.is("[aria-multiselectable]"));
-        });
-
-        it("non-aria selectable does not add aria-multiselectable", function() {
-            new Selectable(ul, { aria: true });
-
-            assert.isOk(!ul.is("[aria-multiselectable]"));
-        });
-
         it("_invalidateSelectables calls _collidesWithActiveElement", function() {
             var selectable =  new Selectable(ul, { multiple: true });
 

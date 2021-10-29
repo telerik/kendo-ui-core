@@ -49,6 +49,12 @@
 
             axeRunFixture(done);
         });
+
+        it("multiselectable ListBox has 'aria-multiselectable' on the element with role='listbox'", function() {
+            createListBox();
+
+            assert.equal(Mocha.fixture.find("[role='listbox']").attr("aria-multiselectable"), "true");
+        });
     });
 
     describe("ListBox aria", function () {

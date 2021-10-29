@@ -56,10 +56,6 @@ var __meta__ = { // jshint ignore:line
 
             multiple = that.options.multiple;
 
-            if (this.options.aria && multiple) {
-                that.element.attr("aria-multiselectable", true);
-            }
-
             that.userEvents = new kendo.UserEvents(that.element, {
                 global: true,
                 allowSelection: true,

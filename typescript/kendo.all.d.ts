@@ -6202,6 +6202,7 @@ declare namespace kendo.ui {
         dataSource?: any|any|kendo.data.DataSource | undefined;
         detailTemplate?: string|Function | undefined;
         editable?: boolean | "inline" | "incell" | "popup" | GridEditable | undefined;
+        encodeTitles?: boolean;
         excel?: GridExcel | undefined;
         filterable?: boolean | GridFilterable | undefined;
         groupable?: boolean | GridGroupable | undefined;
