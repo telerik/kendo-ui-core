@@ -1134,6 +1134,38 @@ Prepares the widget for safe removal from DOM. Detaches all event handlers and r
         form.destroy();
     </script>
 
+## Fields
+
+### validator `kendo.ui.Validator`
+
+The [Validator instance](/api/javascript/ui/validator).
+
+#### Example - use the validator API 
+
+    <form id="myForm"></form>
+
+    <script>
+        var form = $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "",
+                Address: ""
+            },
+            items: [{
+                field: "Name",
+                label: "Name:",
+                validation: { required: true }
+            }, {
+                field: "Address",
+                label: "Address:",
+                validation: { required: true }
+            }]
+        }).data("kendoForm");
+
+        form.validator.validateInput("[name='Name']");
+        form.validator.validateInput("[name='Address']");
+    </script>
+
 ## Events
 
 ### validate
