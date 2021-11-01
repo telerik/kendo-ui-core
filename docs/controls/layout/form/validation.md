@@ -201,6 +201,36 @@ The following example demonstrates custom validation of the `RetireDate` field.
     </script>
 ```
 
+## Using the Validator Instance
+
+The Kendo Ui Form utilizes the [Kendo UI Validator component](https://demos.telerik.com/kendo-ui/validator) internally. This behavior facilitates use cases, in which you may need to use the [Validator API](/api/javascript/ui/form)&mdash;for example, to programmatically trigger validation.
+
+```dojo
+    <form id="myForm"></form>
+
+    <script>
+        var form = $("#myForm").kendoForm({
+            formData: {
+                ID: 1,
+                Name: "",
+                Address: ""
+            },
+            items: [{
+                field: "Name",
+                label: "Name:",
+                validation: { required: true }
+            }, {
+                field: "Address",
+                label: "Address:",
+                validation: { required: true }
+            }]
+        }).data("kendoForm");
+
+        form.validator.validateInput("[name='Name']");
+        form.validator.validateInput("[name='Address']");
+    </script>
+```
+
 ## See Also
 
 * [Validation of the Form (Demo)](https://demos.telerik.com/kendo-ui/form/validation)
