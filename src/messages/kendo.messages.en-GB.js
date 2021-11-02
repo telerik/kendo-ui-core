@@ -538,15 +538,17 @@ $.extend(true, kendo.ui.NumericTextBox.prototype.options,{
 /* MediaPlayer messages */
 
 if (kendo.ui.MediaPlayer) {
-kendo.ui.MediaPlayer.prototype.options.messages =
-$.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
-  "pause": "Pause",
-  "play": "Play",
-  "mute": "Mute",
-  "unmute": "Unmute",
-  "quality": "Quality",
-  "fullscreen": "Full Screen"
-});
+    kendo.ui.MediaPlayer.prototype.options.messages =
+    $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+      "pause": "Pause",
+      "play": "Play",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "quality": "Quality",
+      "fullscreen": "Full Screen",
+      "volume": "volume",
+      "time": "time"
+    });
 }
 
 /* Pager messages */

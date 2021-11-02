@@ -1408,4 +1408,20 @@ if (kendo.dataviz.ui.Map) {
     });
 }
 
+/* MediaPlayer messages */
+
+if (kendo.ui.MediaPlayer) {
+    kendo.ui.MediaPlayer.prototype.options.messages =
+    $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
+      "pause": "Pause",
+      "play": "Play",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "quality": "Quality",
+      "fullscreen": "Full Screen",
+      "volume": "volume",
+      "time": "time"
+    });
+}
+
 })(window.kendo.jQuery);

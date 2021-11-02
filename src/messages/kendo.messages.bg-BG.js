@@ -380,7 +380,9 @@ $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
   "mute": "Заглушаване на звука",
   "unmute": "Включване на звука",
   "quality": "Промяна на качеството",
-  "fullscreen": "Цял екран"
+  "fullscreen": "Цял екран",
+  "volume": "сила на звука",
+  "time": "време"
 });
 }
 

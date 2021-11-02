@@ -596,7 +596,9 @@ $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages,{
   "mute": "Mute",
   "unmute": "Unmute",
   "quality": "Quality",
-  "fullscreen": "Full Screen"
+  "fullscreen": "Full Screen",
+  "volume": "volume",
+  "time": "time"
 });
 }
 
