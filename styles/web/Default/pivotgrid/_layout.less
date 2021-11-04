@@ -41,6 +41,11 @@
     table-layout: fixed;
 
     th {
+        font-weight: 400;
+        text-transform: initial;
+    }
+
+    .k-pivotgrid-header-root {
         font-weight: 600;
         text-transform: uppercase;
     }
@@ -138,6 +143,8 @@
 // Configurator
 .k-pivotgrid-configurator {
     display: flex;
+    border: none;
+    box-shadow: none;
 }
 
 .k-pivotgrid-configurator-panel {
@@ -158,6 +165,13 @@
     border-style: solid;
     box-sizing: border-box;
     cursor: pointer;
+
+    > span {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        gap: calc( @pivotgrid-spacer / 2 );
+    }
 
     .k-flex-row &,
     .k-flex-row-reverse & {
@@ -286,6 +300,10 @@
     .k-treeview {
         padding: @pivotgrid-treeview-padding-y @pivotgrid-treeview-padding-x;
         overflow: auto;
+    }
+
+    .k-treeview .k-in .k-checkbox-wrapper {
+        display: inline-flex;
     }
 }
 
@@ -431,6 +449,45 @@
     top: auto;
     position: relative;
 }
+
+// Column Menu
+.k-pivotgrid-column-menu {
+    border: none;
+}
+
+.k-pivotgrid-column-menu .k-item {
+    float: initial;
+    border: none;
+}
+
+.k-pivotgrid-column-menu-popup.k-state-focused {
+    box-shadow: none;
+}
+
+.k-pivotgrid-column-menu .k-actions {
+    padding: calc( @pivotgrid-configurator-actions-padding-y / 2) @pivotgrid-configurator-actions-padding-x;
+}
+
+.k-pivotgrid-column-menu.k-column-menu .k-animation-container-relative {
+    position: relative;
+    display: inline-block;
+}
+
+.k-pivotgrid-column-menu-popup .k-filter-menu {
+    margin: 0;
+    padding: 0;
+    background-color: inherit;
+}
+
+.k-pivotgrid-column-menu-popup .k-filer-menu .k-filter-menu-container {
+    padding: calc( @pivotgrid-configurator-actions-padding-y / 2) @pivotgrid-configurator-actions-padding-x
+}
+
+.k-pivotgrid-column-menu-popup .k-filter-menu-container .k-actions {
+    margin: 0;
+    padding: calc( @pivotgrid-configurator-actions-padding-y / 2) 0 0;
+}
+
 
 // Export
 .k-pdf-export-shadow {
