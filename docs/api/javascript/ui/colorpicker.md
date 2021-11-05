@@ -20,8 +20,6 @@ the DOM.
 
 Specifies whether the widget should display the Apply / Cancel buttons.
 
-Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is not specified.
-
 #### Example
 
     <input id="colorpicker" type="color" />
@@ -59,18 +57,19 @@ Sets the background color for the contrast tool in the ColorGradient.
     });
     </script>
 
-### clearButton `Boolean` *(default: false)*
+### closeOnSelect `Boolean` *(default: false)*
 
-Specifies whether the widget should display the 'Clear color' button.
-
-Applicable only for the HSV selector, when a [`pallete`](/api/javascript/ui/colorpicker#configuration-palette) is not specified.
+Specifies whether selection of a color in the palette view closes the popup. Applied only when buttons are set to false and the currently selected view is palette.
 
 #### Example
 
     <input id="colorpicker" type="color" />
     <script>
       $("#colorpicker").kendoColorPicker({
-        clearButton: true
+        buttons: false,
+        view: "palette",
+        views: ["palette"],
+        closeOnSelect: true
       });
     </script>
 
@@ -97,7 +96,7 @@ Sets the default input format in the gradient input editor.
 
 #### Example
 
-    <div id="colorpicker"></div>
+    <input id="colorpicker" type="color" />
     <script>
     $("#colorpicker").kendoColorPicker({
       format: "rgb"
@@ -110,11 +109,24 @@ Sets the available input formats in the gradient input editor. Only "hex" and "r
 
 #### Example
 
-    <div id="colorpicker"></div>
+    <input id="colorpicker" type="color" />
     <script>
     $("#colorpicker").kendoColorPicker({
       format: "rgb",
       formats: ["rgb"]
+    });
+    </script>
+
+### input `Boolean` *(default: true)*
+
+Whether to render the input in the ColorGradient component.
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      input: false
     });
     </script>
 
@@ -206,9 +218,13 @@ Allows customization of the "Cancel" button text.
     })
     </script>
 
-### messages.previewInput `String` *(default: "Color Hexadecimal Code")*
+### messages.clearColor `String` *(default: "Clear color")*
 
-Allows customization of the "Color Hexadecimal Code" preview input title.
+Allows customization of the Clear Color button label.
+
+### messages.previewInput `String`
+
+Overrides the messages.hex property. Legacy option.
 
 #### Example
 
@@ -243,26 +259,26 @@ Allows customization of the Palette view button.
 
 ### messages.toggleFormat `String` *(default: "Toggle format")*
 
-Allows customization of the toggle format button in the Gradient's input editor.
+Allows customization of the toggle format button's title in the Gradient's input editor.
 
 ### messages.red `String` *(default: "Red")*
 
-Allows customization of the rgb's red input in the Gradient's input editor.
+Allows customization of the rgb's red input's aria-label in the Gradient's input editor.
 
 ### messages.green `String` *(default: "Green")*
 
-Allows customization of the rgb's green input in the Gradient's input editor.
+Allows customization of the rgb's green input's aria-label in the Gradient's input editor.
 
 ### messages.blue `String` *(default: "Blue")*
 
-Allows customization of the rgb's blue input in the Gradient's input editor.
+Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
 ### messages.alpha `String` *(default: "Alpha")*
 
-Allows customization of the rgb's alpha input in the Gradient's input editor.
+Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.
 
 ### messages.hex `String` *(default: "HEX")*
 
-Allows customization of the hex input in the Gradient's input editor.
+Allows customization of the hex input's aria-label in the Gradient's input editor.
 
 ### palette `String|Array` *(default: null)*
 
@@ -277,9 +293,6 @@ a simple color picker that lists the colors. The following are supported:
   commas, or an array of colors, and it will display that palette instead.
   If you pass an array it can contain strings supported by [parseColor][] or
   [Color][] objects.
-
-If `palette` is missing or `null`, the widget will display the HSV
-selector.
 
 #### Example - use "websafe" palette
 
@@ -316,9 +329,7 @@ Note that currently in HTML5 the `<input type="color">` does not support opacity
 
 ### preview `Boolean` *(default: true)*
 
-Only applicable for the HSV selector.
-
-Displays the color preview element, along with an input field where the end user can paste a color in a CSS-supported notation.
+Displays the color preview element and the previously selected color for comparison. With buttons set to false, both elements will update at the same time.
 
 #### Example
 
@@ -508,7 +519,7 @@ sets a new background color for the contrast tool.
 
 The new background color.
 
-#### Example - disable the color picker
+#### Example
 
     <div id="colorpicker"></div>
     <script>

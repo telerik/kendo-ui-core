@@ -20,7 +20,6 @@
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
-        FOCUS_NS = "focus" + NS,
         BLUR_NS = "blur" + NS,
         ColorSelector = ui.colorpicker.ColorSelector;
 
@@ -89,9 +88,6 @@
                 })
                 .attr("tabIndex", that._tabIndex)
                 .on(KEYDOWN_NS, bind(that._keydown, that))
-                .on(FOCUS_NS, function(){
-                    that.wrapper.find(".k-colorpalette-tile").eq(0).addClass(ITEMSFOCUSEDCLASS);
-                })
                 .on(BLUR_NS, function(){
                     that.wrapper.find(".k-colorpalette-tile").removeClass(ITEMSFOCUSEDCLASS);
                 });
@@ -131,7 +127,7 @@
             var selected,
                 wrapper = this.wrapper,
                 items = wrapper.find(".k-colorpalette-tile"),
-                current = items.filter("." + ITEMSFOCUSEDCLASS).get(0),
+                current = items.filter("." + ITEMSFOCUSEDCLASS).get(0) || items.filter("." + ITEMSELECTEDCLASS).get(0),
                 keyCode = e.keyCode;
 
             if (keyCode == KEYS.LEFT) {
@@ -206,8 +202,9 @@
 
             this._current(item);
 
+            items.removeClass(ITEMSELECTEDCLASS);
+
             if(item) {
-                items.removeClass(ITEMSELECTEDCLASS);
                 $(item).addClass(ITEMSELECTEDCLASS);
             }
         },

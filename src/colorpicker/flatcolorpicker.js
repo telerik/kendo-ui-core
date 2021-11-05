@@ -10,13 +10,14 @@
     /*jshint eqnull:true  */
     var kendo = window.kendo,
         ui = kendo.ui,
+        Color = kendo.Color,
         BACKGROUNDCOLOR = "background-color",
         MESSAGES = {
             apply  : "Apply",
             cancel : "Cancel",
             noColor: "no color",
             clearColor: "Clear color",
-            previewInput: "Color Hexadecimal Code",
+            previewInput: null,
             contrastRatio: "Contrast ratio:",
             fail: "Fail",
             pass: "Pass",
@@ -31,7 +32,9 @@
         },
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
+        KEYDOWN_NS = "keydown" + NS,
         ColorSelector = ui.colorpicker.ColorSelector,
+        KEYS = kendo.keys,
 
         NO_COLOR = "k-no-color",
         SELECTED = "k-state-selected",
@@ -40,6 +43,12 @@
             "gradient": ui.ColorGradient,
             "palette": ui.ColorPalette
         };
+
+    function bind(callback, obj) {
+        return function() {
+            return callback.apply(obj, arguments);
+        };
+    }
 
     var FlatColorPicker = ColorSelector.extend({
         init: function(element, options) {
@@ -78,10 +87,11 @@
             }
 
             element
+                .on(KEYDOWN_NS, bind(that._keydown, that))
                 .on(CLICK_NS, ".k-coloreditor-reset", function () {
                     that._clearColor = true;
                     that._updateUI(null);
-                    that._view.value("#000");
+                    that._view.value(null);
                 })
                 .on(CLICK_NS, ".k-coloreditor-apply", function(){
                     if(that._clearColor) {
@@ -122,11 +132,11 @@
             that._selectedColor = that._previousColor = that._viewsContainer = that._view = null;
         },
         options: {
-            name       : "FlatColorPicker",
-            opacity    : false,
-            buttons    : false,
-            input      : true,
-            preview    : true,
+            name: "FlatColorPicker",
+            opacity: false,
+            buttons: false,
+            input: true,
+            preview: true,
             clearButton: false,
             format: "hex",
             formats: ["rgb", "hex"],
@@ -166,8 +176,13 @@
         },
         _changeView: function (mode) {
             var that = this,
-                options = that.options,
-                selector =  VIEWS[mode];
+                options = $.extend({}, that.options),
+                selector =  VIEWS[mode],
+                selectedColor, hsvColor;
+
+            if(that._view && that._view._colorInput) {
+                that.options.format = that._view._colorInput._viewModel.format;
+            }
 
             that.options.view = mode;
 
@@ -178,16 +193,25 @@
             delete options._standalone;
 
             if (that._view) {
+                selectedColor = that._view.color();
                 that._view.destroy();
                 that._viewsContainer.empty();
             }
 
+            if (selectedColor) {
+                selectedColor = selectedColor.toHSV();
+                hsvColor = Color.fromHSV(that._cachedHue || 0, selectedColor.s, selectedColor.v, selectedColor.a);
+                that._cachedHue = selectedColor.toHSV().h;
+                selectedColor = selectedColor.equals(hsvColor) ? hsvColor : selectedColor;
+            }
+
             if (selector) {
                 that._view = new VIEWS[mode]($("<div></div>").appendTo(that._viewsContainer), options);
+                that._view.value(selectedColor);
 
                 that._view.bind("change", function (ev) {
                     delete that._clearColor;
-                    that._updateUI(ev.sender.color());
+                    that._updateUI(ev.sender.color(), true);
                 });
 
                 that._view.bind("forceSelect", function (ev) {
@@ -210,13 +234,12 @@
                 that._view.focus();
             }
         },
-        _updateUI: function(color) {
+        _updateUI: function(color, dontChangeView) {
             var that = this;
 
             if (color && color.toDisplay) {
                 that._selectedColor.removeClass(NO_COLOR);
                 that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
-
             } else {
                 that._selectedColor.addClass(NO_COLOR);
                 that._selectedColor.css(BACKGROUNDCOLOR, "");
@@ -226,6 +249,10 @@
 
             if (that.options.autoupdate) {
                 that._updatePreviousColor(color);
+            }
+
+            if(!dontChangeView) {
+                that._view.value(color);
             }
         },
         _setViewSize: function() {
@@ -238,6 +265,12 @@
             wrapper.style.setProperty("--kendo-color-preview-columns", previewColumns);
             wrapper.style.setProperty("--kendo-color-preview-width", previewWidth + "px");
             wrapper.style.setProperty("--kendo-color-preview-height", previewHeight + "px");
+        },
+        _keydown: function(e) {
+
+            if (e.keyCode == KEYS.ESC) {
+                this._cancel();
+            }
         },
         _template: kendo.template(
             '<div class="k-coloreditor-header k-hstack">' +
@@ -277,7 +310,6 @@
             '# } #'
         )
     });
-
 
     ui.plugin(FlatColorPicker);
 })(window.kendo.jQuery);

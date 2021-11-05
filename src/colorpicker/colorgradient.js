@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../kendo.core" ], f);
+    define([ "../kendo.core", "./contrastToolUtils" ], f);
 })(function(){
 
 (function($, undefined) {
@@ -15,9 +15,12 @@
         KEYS = kendo.keys,
         BACKGROUNDCOLOR = "background-color",
         WHITE = "#ffffff",
+        BLACK = "#000000",
         NS = ".kendoColorTools",
         KEYDOWN_NS = "keydown" + NS,
-        ColorSelector = ui.colorpicker.ColorSelector;
+        ColorSelector = ui.colorpicker.ColorSelector,
+
+        contrastToolUtils = ui.colorpicker.contrastToolUtils;
 
     function preventDefault(ev) { ev.preventDefault(); }
 
@@ -54,7 +57,7 @@
 
             that._render();
 
-            that.wrapper.on(KEYDOWN_NS, that.keydown.bind(that));
+            that.element.on(KEYDOWN_NS, that.keydown.bind(that));
 
             Observable.fn.init.call(that);
         },
@@ -100,25 +103,29 @@
             '# } #'),
         destroy: function(){
             var that = this;
+
+
             that._viewModel.unbind("change", that._changeHandler);
-            kendo.unbind(that.wrapper);
-            that.wrapper.off(KEYDOWN_NS);
+            kendo.unbind(that.element);
+            kendo.destroy(that.element);
+            that.element.off(KEYDOWN_NS);
             delete that._viewModel;
             delete that._changeHandler;
         },
         _render: function() {
             var that = this;
 
-            that.wrapper = that.element
+            that.element
                 .append(that._template({ ns: kendo.ns, guid: kendo.guid(), options: that.options }))
                 .parent();
 
-            kendo.bind(that.wrapper, that._viewModel);
+            kendo.bind(that.element, that._viewModel);
+            that.element.attr("data-" + kendo.ns + "stop", "stop");
         },
         value: function (color) {
             var that = this;
 
-            that._color = (color && color.toBytes()) || parseColor("#fff");
+            that._color = (color && color.toBytes()) || parseColor(BLACK);
             that._preventChangeEvent = true;
             that._viewModel.set("rgb", that._color);
             delete that._preventChangeEvent;
@@ -127,7 +134,7 @@
             var that = this;
 
             that._preventChangeEvent = true;
-            that._viewModel.set("rgb", parseColor("#fff").toBytes());
+            that._viewModel.set("rgb", parseColor(BLACK));
             delete that._preventChangeEvent;
         },
         switchMode: function() {
@@ -146,16 +153,27 @@
             var that = this;
 
             if (ev.field.indexOf("rgb") >= 0) {
-                that._color = parseColor(that._viewModel.rgb.toCssRgba());
+                that._color = that._tryParseColor(that._viewModel.rgb.toCssRgba());
                 that._viewModel.set("hex", that._color.toCss({ alpha: that.options.opacity }));
             } else if (ev.field === "hex") {
-                that._color = parseColor(ev.sender[ev.field], true).toBytes();
+                that._color = that._tryParseColor(ev.sender[ev.field]);
                 that._viewModel.set("rgb", that._color);
             }
 
             if (!that._preventChangeEvent) {
                 that.trigger("change", {value: that._color});
             }
+        },
+        _tryParseColor: function (color) {
+            var that = this;
+
+            try {
+                color = parseColor(color) || that._color;
+            } catch (error) {
+                color = that._color;
+            }
+
+            return color;
         },
         keydown: function (ev) {
             var that = this,
@@ -174,10 +192,17 @@
 
     var ColorGradient = ColorSelector.extend({
         init: function (element, options) {
-            var that = this;
+            var that = this,
+                value;
+
             ColorSelector.fn.init.call(that, element, options);
 
             options = that.options = kendo.deepExtend({}, that.options, options);
+
+            if(options.messages.previewInput) {
+                options.messages.hex = options.messages.previewInput;
+            }
+
             options.messages = options.messages ? $.extend(that.options.messages, options.messages) : that.options.messages;
             element = that.element;
 
@@ -192,7 +217,7 @@
 
             that._hsvArea();
 
-            var value = that._value || parseColor("#000");
+            value = that._value;
 
             if(that._colorgradientInputs.length) {
                 that._colorInput = new ColorInput(that._colorgradientInputs, extend({}, options, {
@@ -357,14 +382,14 @@
                     backgroundColor: color
                 };
 
-                that._updateColorContrast(that.color());
+                that._updateColorContrast(that.color() || parseColor(WHITE));
             }
         },
         _updateUI: function(color, dontChangeInput) {
-            var that = this,
-                rect = that._hsvRect;
+            var that = this;
 
             if (!color) {
+                that._reset();
                 return;
             }
 
@@ -373,8 +398,34 @@
             }
 
             that._triggerSelect(color);
+            that._updateHsv(color);
+
+            if(that._contrastTool.length) {
+                that._updateColorContrast(color);
+            }
+        },
+        _reset: function () {
+            var that = this;
+
+            if (that._colorInput) {
+                that._colorInput.reset();
+            }
+
+            that._resetHsv();
+            that._resetColorContrast();
+        },
+        _resetHsv: function () {
+            var that = this,
+                color = parseColor(BLACK);
+
+            that._updateHsv(color);
+        },
+        _updateHsv: function (color) {
+            var that = this,
+                rect = that._hsvRect;
 
             color = color.toHSV();
+
             that._hsvHandle.css({
                 // saturation is 0 on the left side, full (1) on the right
                 left: color.s * rect.width() + "px",
@@ -389,16 +440,20 @@
                 that._opacitySlider.wrapper.find(".k-slider-track").css("background", "linear-gradient(to top, transparent, " + Color.fromHSV(color.h, 1, 1, 1).toCss());
                 that._opacitySlider.value(100 * color.a);
             }
+        },
+        _resetColorContrast: function () {
+            var that = this,
+                contrastOptions = that.options.contrastTool;
 
-            if(that._contrastTool) {
-                that._updateColorContrast(color);
+            if(that._contrastTool.length) {
+                that._updateColorContrast(contrastOptions.backgroundColor ? parseColor(contrastOptions.backgroundColor) : parseColor(WHITE));
             }
         },
         _updateColorContrast: function (color) {
             var that = this,
                 contrastOptions = that.options.contrastTool,
                 backgroundColor = contrastOptions.backgroundColor ? parseColor(contrastOptions.backgroundColor) : parseColor(WHITE),
-                contrastRatio = getContrastFromTwoRGBAs(parseColor(color.toCss()), backgroundColor),
+                contrastRatio = contrastToolUtils.getContrastFromTwoRGBAs(parseColor(color.toCssRgba()), backgroundColor),
                 contrastRatioTemplate = kendo.template('<div class="k-contrast-ratio">' +
                                             '<span class="k-contrast-ratio-text">#:messages.contrastRatio# #:kendo.toString(ratio, "n2")#</span>' +
                                             '<span class="k-contrast-validation k-text-success">' +
@@ -410,7 +465,7 @@
                                                 '#}#' +
                                             '</span></div>'),
                 labelTemplate = kendo.template('<div>' +
-                                            '<span>AA: #:limit# </span>' +
+                                            '<span>#:level#: #:limit# </span>' +
                                             '#if (ratio > limit) {#' +
                                             '<span class="k-contrast-validation k-text-success">#:messages.pass# <span class="k-icon k-i-check"></span></span>' +
                                             '#} else {#' +
@@ -427,17 +482,37 @@
             output += labelTemplate({
                 messages: that.options.messages,
                 ratio: contrastRatio,
-                limit: 4.5
+                limit: 4.5,
+                level: "AA"
             });
 
             output += labelTemplate({
                 messages: that.options.messages,
                 ratio: contrastRatio,
-                limit: 7
+                limit: 7,
+                level: "AAA"
             });
 
             that._contrastTool.find(".k-contrast-ratio, div").remove();
             that._contrastTool.append(output);
+
+            that._updateContrastSvg(backgroundColor);
+        },
+        _updateContrastSvg: function (backgroundColor) {
+            var that = this,
+                hsvRect = that._hsvRect,
+                svgClassName = "k-color-contrast-svg",
+                metrics = { width: hsvRect.width(), height: hsvRect.height() },
+                newSvg;
+
+            if(!metrics.width || !metrics.height) {
+                return;
+            }
+
+            newSvg = $(contrastToolUtils.renderSvgCurveLine(metrics, that._getHSV(), backgroundColor)).addClass(svgClassName);
+
+            hsvRect.find("." + svgClassName).remove();
+            hsvRect.append(newSvg);
         },
         _keydown: function(ev) {
             var that = this;
@@ -482,7 +557,7 @@
                 that._select(that._getHSV());
                 break;
             case KEYS.F2:
-                that._colorInput.wrapper.find("input").trigger("focus").select();
+                that._colorInput.element.find("input").trigger("focus").select();
                 break;
             case KEYS.ESC:
                 that._cancel();
@@ -498,6 +573,10 @@
                 width = rect.width(),
                 height = rect.height(),
                 handlePosition = this._hsvHandle.position();
+
+            if(!width || !height) {
+                return that.color() ? that.color().toHSV() : parseColor(BLACK);
+            }
 
             if (h == null) {
                 h = that._hueSlider.value();
@@ -538,55 +617,6 @@
     });
 
     ui.plugin(ColorGradient);
-
-    // Color utils - calc contrast
-
-    function getContrast(luminance1, luminance2) {
-        var brightest = Math.max(luminance1, luminance2);
-        var darkest = Math.min(luminance1, luminance2);
-        return (brightest + 0.05) / (darkest + 0.05);
-    }
-
-    function getContrastFromTwoRGBAs(a, b) {
-        return getContrast(
-            getLuminance(getRGBFromRGBA(a, b)),
-            getLuminance(getRGBFromRGBA(b, { r: 0, g: 0, b: 0, a: 1 })));
-    }
-
-    function getLuminance (rgb) {
-        var a = [rgb.r, rgb.g, rgb.b].map(function (v) {
-            v /= 255;
-            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-        });
-        return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
-    }
-
-    function getRGBFromRGBA(foregroundColor, backgroundColor) {
-        var r1 = fitIntoBounds(foregroundColor.r, 0, 255);
-        var g1 = fitIntoBounds(foregroundColor.g, 0, 255);
-        var b1 = fitIntoBounds(foregroundColor.b, 0, 255);
-        var a1 = fitIntoBounds(foregroundColor.a, 0, 1);
-
-        var r2 = fitIntoBounds(backgroundColor.r, 0, 255);
-        var g2 = fitIntoBounds(backgroundColor.g, 0, 255);
-        var b2 = fitIntoBounds(backgroundColor.b, 0, 255);
-
-        return {
-            r: Math.round(((1 - a1) * r2) + (a1 * r1)),
-            g: Math.round(((1 - a1) * g2) + (a1 * g1)),
-            b: Math.round(((1 - a1) * b2) + (a1 * b1))
-        };
-    }
-
-    function fitIntoBounds(contender, min, max) {
-        if (!isPresent(contender) || isNaN(contender)) {
-            return min;
-        }
-
-        return contender <= min ? min : contender >= max ? max : contender;
-    }
-
-    function isPresent(value) { return value !== null && value !== undefined; }
 
 })(window.kendo.jQuery);
 

@@ -79,6 +79,19 @@ Sets the available input formats in the gradient input editor. Only "hex" and "r
     });
     </script>
 
+### input `Boolean` *(default: true)*
+
+Whether to render the input.
+
+#### Example
+
+    <div id="ColorGradient"></div>
+    <script>
+    $("#ColorGradient").kendoColorGradient({
+      input: false
+    });
+    </script>
+
 ### value `String | kendo.Color` *(default: null)*
 
 Specifies the initially selected color.
@@ -94,14 +107,13 @@ Specifies the initially selected color.
 
 ### messages `Object`
 
-Allows customization of "Apply" / "Cancel" labels.
+Allows customization labels and messages in the ColorGradient.
 
 #### Example
 
     <div id="colorgradient"></div>
     <script>
     $("#colorgradient").kendoColorGradient({
-      buttons: true,
       messages: {
         contrastRatio: "Contrast ratio",
         gradient: "Gradient view"
@@ -121,36 +133,28 @@ Allows customization of the "Fail" text in the contrast tool.
 
 Allows customization of the "Pass" text in the contrast tool.
 
-### messages.gradient `String` *(default: "Gradient view")*
-
-Allows customization of the Gradient view button.
-
-### messages.palette `String` *(default: "Palette view")*
-
-Allows customization of the Palette view button.
-
 ### messages.toggleFormat `String` *(default: "Toggle format")*
 
-Allows customization of the toggle format button in the Gradient's input editor.
+Allows customization of the toggle format button's title in the Gradient's input editor.
 
 ### messages.red `String` *(default: "Red")*
 
-Allows customization of the rgb's red input in the Gradient's input editor.
+Allows customization of the rgb's red input's aria-label in the Gradient's input editor.
 
 ### messages.green `String` *(default: "Green")*
 
-Allows customization of the rgb's green input in the Gradient's input editor.
+Allows customization of the rgb's green input's aria-label in the Gradient's input editor.
 
 ### messages.blue `String` *(default: "Blue")*
 
-Allows customization of the rgb's blue input in the Gradient's input editor.
+Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
 ### messages.alpha `String` *(default: "Alpha")*
 
-Allows customization of the rgb's alpha input in the Gradient's input editor.
+Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.
 
 ### messages.hex `String` *(default: "HEX")*
 
-Allows customization of the hex input in the Gradient's input editor.
+Allows customization of the hex input's aria-label in the Gradient's input editor.
 
 ## Methods
 
@@ -223,7 +227,7 @@ Enables or disables the widget.
 
 Whether the widget should be enabled (`true`) or disabled (`false`). If not specified, the method will enable the widget.
 
-#### Example - disable the flat color picker
+#### Example
 
     <div id="colorgradient"></div>
     <script>
@@ -242,7 +246,7 @@ Triggers when a new color has been selected.
 
 ##### e.value `String`
 
-The value of the ColorPicker.
+The value of the ColorGradient.
 
 #### Example - subscribe to the "change" event during initialization
 

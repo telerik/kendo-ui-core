@@ -160,4 +160,47 @@
             axeRunFixture(done, ["aria-allowed-role"]);
         });
     });
+
+    describe("colorgradient", function() {
+        beforeEach(function() {
+            element = $("<div>").appendTo(Mocha.fixture).kendoColorGradient({
+                preview: true,
+                opacity: true
+            });
+            colorPicker = element.data("kendoColorGradient");
+        });
+        afterEach(function() {
+            colorPicker.destroy();
+        });
+
+        it("renders aria-label to the slider", function() {
+            var ariaLabel = colorPicker.wrapper.find(".k-hue-slider input").attr("aria-label");
+            assert.isOk(ariaLabel === "hue saturation");
+        });
+
+        it("renders aria-label to the opacity slider", function() {
+            var ariaLabel = colorPicker.wrapper.find("input.k-alpha-slider").attr("aria-label");
+            assert.isOk(ariaLabel === "opacity");
+        });
+
+        it("renders aria-label to the toggle format button", function() {
+            var ariaLabel = colorPicker.wrapper.find(".k-colorgradient-toggle-mode").attr("title");
+            assert.equal(ariaLabel, "Toggle format");
+        });
+
+        it("renders aria-label to the preview input", function() {
+            var ariaLabel = colorPicker.wrapper.find("[data-role='textbox']").attr("aria-label");
+            assert.isOk(ariaLabel === "HEX");
+        });
+
+        it("renders aria-label to the RGB red input", function() {
+            var ariaLabel = colorPicker.wrapper.find("[data-role='numerictextbox']").attr("aria-label");
+            assert.isOk(ariaLabel === "Red");
+        });
+
+        it("flatcolorpicker is accessible with AXE", function(done) {
+            // excluded rule should be removed after fixing the issue in the slider
+            axeRunFixture(done, ["aria-allowed-role"]);
+        });
+    });
 }());

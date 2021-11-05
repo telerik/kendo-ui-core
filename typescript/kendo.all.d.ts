@@ -3072,6 +3072,7 @@ declare namespace kendo.ui {
     interface ColorPickerMessages {
         apply?: string;
         cancel?: string;
+        clearColor?: string;
         previewInput?: string;
         contrastRatio?: string;
         fail?: string;
@@ -5127,6 +5128,7 @@ declare namespace kendo.ui {
         apply?: string | undefined;
         cancel?: string | undefined;
         contrastRatio?: string | undefined;
+        clearColor?: string;
         fail?: string | undefined;
         pass?: string | undefined;
         gradient?: string | undefined;

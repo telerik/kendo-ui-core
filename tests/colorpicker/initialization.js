@@ -214,3 +214,66 @@
         });
     });
 }());
+
+(function() {
+    describe("ColorGradient", function() {
+        afterEach(function() {
+            kendo.destroy(Mocha.fixture);
+        });
+
+        it("renders colorinput", function() {
+            var dom = $("<div></div>").appendTo(Mocha.fixture).kendoColorGradient();
+
+            var inputsWrapper = dom.find(".k-colorgradient-inputs");
+
+            assert.equal(inputsWrapper.length, 1);
+            assert.equal(inputsWrapper.find("[data-role=textbox]").length, 1);
+            assert.equal(inputsWrapper.find("[data-role=numerictextbox]").length, 3);
+        });
+
+        it("input: false does not show input", function() {
+            var dom = $("<div></div>").appendTo(Mocha.fixture).kendoColorGradient({ input: false });
+
+            var inputsWrapper = dom.find(".k-colorgradient-inputs");
+
+            assert.equal(inputsWrapper.length, 0);
+        });
+
+        it("maintains tabIndex after disable/enable", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
+            var cp = dom.data("kendoColorGradient");
+            cp.enable(false);
+            cp.enable(true);
+            assert.equal(cp.wrapper.attr("tabIndex"), 5);
+        });
+
+        it("unbinds events from hsv area container", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
+            var cp = dom.data("kendoColorGradient");
+
+            cp.destroy();
+
+            assert.isOk($.isEmptyObject(cp._hsvEvents._events));
+        });
+
+        it("receives k-state-disabled class when disabled", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
+            var cp = dom.data("kendoColorGradient");
+
+            cp.enable(false);
+
+            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+        });
+
+        it("removes k-state-disabled class when enabled", function() {
+            var dom = $("<div tabindex='5' />").appendTo(Mocha.fixture).kendoColorGradient();
+            var cp = dom.data("kendoColorGradient");
+
+            cp.enable(false);
+            cp.enable();
+
+            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
+        });
+
+    });
+}());

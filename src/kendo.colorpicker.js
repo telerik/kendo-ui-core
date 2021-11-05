@@ -32,6 +32,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        Color = kendo.Color,
         parseColor = kendo.parseColor,
         KEYS = kendo.keys,
         BACKGROUNDCOLOR = "background-color",
@@ -41,7 +42,7 @@ var __meta__ = { // jshint ignore:line
             cancel : "Cancel",
             noColor: "no color",
             clearColor: "Clear color",
-            previewInput: "Color Hexadecimal Code",
+            previewInput: null,
             contrastRatio: "Contrast ratio:",
             fail: "Fail",
             pass: "Pass",
@@ -57,7 +58,8 @@ var __meta__ = { // jshint ignore:line
         NS = ".kendoColorTools",
         CLICK_NS = "click" + NS,
         KEYDOWN_NS = "keydown" + NS,
-        ColorSelector = ui.colorpicker.ColorSelector;
+        ColorSelector = ui.colorpicker.ColorSelector,
+        FlatColorPicker = ui.FlatColorPicker;
 
     /* -----[ The ColorPicker widget ]----- */
 
@@ -188,6 +190,8 @@ var __meta__ = { // jshint ignore:line
 
         options: {
             name: "ColorPicker",
+            closeOnSelect: false,
+            contrastTool: false,
             palette: null,
             columns: 10,
             toolIcon: null,
@@ -226,10 +230,17 @@ var __meta__ = { // jshint ignore:line
             }
         },
         setBackgroundColor: function (color) {
-            var that = this;
+            var that = this,
+                handler = function () { that._selector.setBackgroundColor(color); };
 
-            that.options.backgroundColor = color;
-            that._selector.setBackgroundColor(color);
+            that.options.contrastTool.backgroundColor = color;
+
+            if(that._selector && (that._popup && that._popup.visible())) {
+                that._selector.setBackgroundColor(color);
+            } else if (that._popup) {
+                that._popup.unbind("activate", handler);
+                that._popup.bind("activate", handler);
+            }
         },
         _noColorIcon: function(){
             return this.wrapper.find(".k-picker-wrap > .k-selected-color");
@@ -243,7 +254,7 @@ var __meta__ = { // jshint ignore:line
             return (/^input$/i).test(el.tagName) && (/^color$/i).test(el.type);
         },
 
-        _updateUI: function(value) {
+        _updateUI: function(value, dontChangeSelector) {
             var formattedValue = "";
 
             if (value) {
@@ -271,6 +282,10 @@ var __meta__ = { // jshint ignore:line
             );
 
             this._noColorIcon().toggleClass("k-no-color", !formattedValue);
+
+            if (this._selector && !dontChangeSelector) {
+                this._selector.value(value);
+            }
         },
         _keydown: function(ev) {
             var key = ev.keyCode;
@@ -294,15 +309,15 @@ var __meta__ = { // jshint ignore:line
                 var options = that.options;
                 var selectorType;
 
-                selectorType = ui.FlatColorPicker;
+                selectorType = FlatColorPicker;
 
-                options._standalone = false;
                 options.autoupdate = options.buttons !== true;
                 delete options.select;
                 delete options.change;
                 delete options.cancel;
 
                 var id = kendo.guid();
+
                 var selectorWrapper = $('<div id="' + id +'" class="k-colorpicker-popup"></div>').appendTo(document.body);
                 var selector = that._selector = new selectorType($('<div></div>').appendTo(selectorWrapper), options);
 
@@ -315,16 +330,20 @@ var __meta__ = { // jshint ignore:line
 
                 selector.bind({
                     select: function(ev){
-                        that._updateUI(parseColor(ev.value));
+                        that._updateUI(parseColor(ev.value), true);
                     },
-                    change: function(){
-                        that._select(selector.color());
-                        that.close();
+                    change: function(ev){
+                        if (that.options.buttons) {
+                            that._select(selector.color());
+                        } else {
+                            that._updateUI(parseColor(ev.value), true);
+                        }
+
+                        if (that.options.buttons || (that._selector.options.view === "palette" && that.options.closeOnSelect)) {
+                            that.close();
+                        }
                     },
                     cancel: function() {
-                        if (selector.options._clearedColor && !that.value() && selector.value()) {
-                            that._select(selector.color(), true);
-                        }
                         that.close();
                     }
                 });
@@ -335,25 +354,26 @@ var __meta__ = { // jshint ignore:line
                             return;
                         }
                         that.wrapper.children(".k-picker-wrap").removeClass("k-state-focused");
-                        var color = selector._selectOnHide();
-                        var selectorColor = selector.value();
-                        var value = that.value();
-                        var options = selector.options;
-                        if (!color) {
-                            setTimeout(function(){
-                                if (that.wrapper && !that.wrapper.is("[unselectable='on']")) {
-                                    that.wrapper.trigger("focus");
-                                }
-                            });
 
-                            if (!options._closing && options._clearedColor && !value && selectorColor) {
-                                that._select(selectorColor, true);
-                            } else {
-                                that._updateUI(that.color());
-                            }
-                        } else if (!(options._clearedColor && !value)) {
+                        var color = selector.color();
+
+                        if (!that.options.buttons) {
                             that._select(color);
+                        } else {
+                            that._select(that.color());
                         }
+
+                        color = that.color();
+
+                        if (color && color.h) {
+                            that._cachedHue = color.h;
+                        }
+
+                        setTimeout(function(){
+                            if (that.wrapper && !that.wrapper.is("[unselectable='on']")) {
+                                that.wrapper.trigger("focus");
+                            }
+                        },0);
                     },
                     open: function(ev) {
                         if (that.trigger("open")) {
@@ -363,6 +383,16 @@ var __meta__ = { // jshint ignore:line
                         }
                     },
                     activate: function(){
+                        var hsvColor,
+                            selectedColor = that.color();
+
+                        if (selectedColor) {
+                            selectedColor = selectedColor.toHSV();
+                            hsvColor = Color.fromHSV(that._cachedHue || 0, selectedColor.s, selectedColor.v, selectedColor.a);
+                            selectedColor = selectedColor.equals(hsvColor) ? hsvColor : selectedColor;
+                        }
+
+                        selector.value(selectedColor);
                         selector.focus();
                         that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
                     }

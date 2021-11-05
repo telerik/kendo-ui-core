@@ -48,6 +48,7 @@
         ],
         color: function(value) {
             if (value !== undefined) {
+                // this.options.value = value;
                 this._value = parseColor(value);
                 this._updateUI(this._value);
             }
@@ -82,8 +83,8 @@
             color = this.color(color);
 
             if (!nohooks) {
-                this.element.trigger("change");
                 if ((color && !color.equals(prev)) || (color === null && color !== prev)) {
+                    this.element.trigger("change");
                     this.trigger("change", { value: this.value() });
                 } else if (!this._standalone) {
                     this.trigger("cancel");

@@ -37,6 +37,20 @@ Specifies whether the widget should display the Apply / Cancel buttons.
     });
     </script>
 
+### columns `Number`
+
+The number of columns to show in the palette. Also defines the width of the FlatColorPicker.
+
+#### Example - wrap list of colors on two rows with 3 columns
+
+    <input id="flatcolorpicker" type="color" />
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+      palette: [ "#000", "#333", "#666", "#999", "#ccc", "#fff" ],
+      columns: 3
+    });
+    </script>
+
 ### contrastTool `Boolean|Object` *(default: false)*
 
 Enables the contrast tool in the ColorGradient.
@@ -92,6 +106,20 @@ Sets the available input formats in the gradient input editor. Only "hex" and "r
     });
     </script>
 
+
+### input `Boolean` *(default: true)*
+
+Whether to render the input in ColorGradient component.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+      input: false
+    });
+    </script>
+
 ### value `String | kendo.Color` *(default: null)*
 
 Specifies the initially selected color.
@@ -107,8 +135,7 @@ Specifies the initially selected color.
 
 ### preview `Boolean` *(default: true)*
 
-Specifies whether we should display the preview bar which displays the
-current color and the input field.
+Specifies whether a selected and previous color are displayed for color comparison. with autoupdate set to true both selected and previous colors will be updated.
 
 #### Example
 
@@ -131,6 +158,30 @@ the input field, whenever a valid color can be parsed.  If you pass
     <script>
     $("#flatpicker").kendoFlatColorPicker({
       autoupdate: false
+    });
+    </script>
+
+### palette `String|Array` *(default: null)*
+
+Specifies the color palette to display.
+
+#### Example - use "websafe" palette
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+      palette: "websafe",
+      columns: 18
+    });
+    </script>
+
+#### Example - use list of colors
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#flatcolorpicker").kendoFlatColorPicker({
+      palette: [ "#000", "#333", "#666", "#999", "#ccc", "#fff" ],
+      columns: 6
     });
     </script>
 
@@ -181,6 +232,10 @@ Allows customization of "Cancel" label.
     });
     </script>
 
+### messages.clearColor `String` *(default: "Clear color")*
+
+Allows customization of the Clear Color button label.
+
 ### messages.contrastRatio `String` *(default: "Contrast ratio")*
 
 Allows customization of the "Contrast ratio" text in the contrast tool.
@@ -203,26 +258,26 @@ Allows customization of the Palette view button.
 
 ### messages.toggleFormat `String` *(default: "Toggle format")*
 
-Allows customization of the toggle format button in the Gradient's input editor.
+Allows customization of the toggle format button's aria-label in the Gradient's input editor.
 
 ### messages.red `String` *(default: "Red")*
 
-Allows customization of the rgb's red input in the Gradient's input editor.
+Allows customization of the rgb's red input's aria-label in the Gradient's input editor.
 
 ### messages.green `String` *(default: "Green")*
 
-Allows customization of the rgb's green input in the Gradient's input editor.
+Allows customization of the rgb's green input's aria-label in the Gradient's input editor.
 
 ### messages.blue `String` *(default: "Blue")*
 
-Allows customization of the rgb's blue input in the Gradient's input editor.
+Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
 ### messages.alpha `String` *(default: "Alpha")*
 
-Allows customization of the rgb's alpha input in the Gradient's input editor.
+Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.
 
 ### messages.hex `String` *(default: "HEX")*
 
-Allows customization of the hex input in the Gradient's input editor.
+Allows customization of the hex input's aria-label in the Gradient's input editor.
 
 ## Methods
 
@@ -314,7 +369,7 @@ Triggers when a new color has been selected.
 
 ##### e.value `String`
 
-The value of the ColorPicker.
+The value of the FlatColorPicker.
 
 #### Example - subscribe to the "change" event during initialization
 
