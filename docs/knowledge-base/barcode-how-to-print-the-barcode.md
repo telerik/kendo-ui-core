@@ -44,48 +44,35 @@ How can I print the Kendo UI Barcode?
 Open a new window and place the Barcode DOM elements on the page.
 
 ```dojo
-    <button class="k-button">Print</button>
-    <div id="toPrint">
-      <span id="manchego"></span>
-    </div>
-
-    <script>
-      $(document).ready(function () {
-        $("#manchego").kendoBarcode({
-          value: "2346722",
-          type: "ean8"            
-        });
-
-        $('button').click(function(){
-
-
-          var divToPrint=document.getElementById('toPrint');
-
-          var newWin=window.open('','Print-Window');
-
-          newWin.document.open();
-
-          newWin.document.write('<html><head> <link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
-
-          newWin.document.close();
-
-
-        })
-
-      });
-    </script>
-    <style scoped>
-
-      #manchego svg{
-        width: 102mm !important;
-        height: 192mm !important;;
-      }
-
-      @media print{
-        #manchego svg{
-          width: 102mm !important;;
-          height: 192mm !important;;
-        }  
-      }           
-    </style>
+<button class="k-button">Print</button>
+<div id="toPrint">
+<span id="manchego"></span>
+</div>
+<script>
+  $(document).ready(function () {
+    $("#manchego").kendoBarcode({
+      value: "2346722",
+      type: "ean8"            
+    });
+    $('button').click(function(){
+      var divToPrint=document.getElementById('toPrint');
+      var newWin=window.open('','Print-Window');
+      newWin.document.open();
+      newWin.document.write('<html><head> <link href="https://kendo.cdn.telerik.com/' + kendo.version + '/styles/kendo.common.min.css" rel="stylesheet" /></head>  <body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+      newWin.document.close();
+    })
+  });
+</script>
+<style>
+  #manchego svg{
+    width: 102mm !important;
+    height: 192mm !important;;
+  }
+  @media print{
+    #manchego svg{
+      width: 102mm !important;;
+      height: 192mm !important;;
+    }  
+  }           
+</style>
 ```
