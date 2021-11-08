@@ -12,7 +12,7 @@ The Kendo UI PivotGridV2 represents multidimensional data in a cross-tabular for
 
 * [Demo page for the PivotGridV2](https://demos.telerik.com/kendo-ui/pivotgridv2/index)
 
-Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design, and its future-proof architecture allows the implementation of many upcoming functionalities. As PivotGridV2 aims to replace the legacy PivotGrid, it is recommended to use the PivotGridV2 in your new projects. For information about the legacy PivotGrid, refer to the [PivotGrid Overview]({% slug overview_kendoui_pivotgrid_widget %}) article.
+Compared to the legacy PivotGrid, the new PivotGridV2 offers a brand new design, and its future-proof architecture allows the implementation of many upcoming functionalities. As PivotGridV2 aims to replace the legacy PivotGrid, it is recommended to use the PivotGridV2 in your new projects. For information about the differences between the PivotGrid and PivotGridV2, refer to the [Comparison]({% slug comparison_kendoui_pivotgridv2 %}) article.
 
 ## Basic Configuration
 
@@ -52,6 +52,7 @@ The following image demonstrates the output from the previous example.
 ## Functionality and Features
 
 * [Data binding]({% slug databinding_kendoui_pivotgridv2 %})
+* [Comparison with the PivotGrid]({% slug comparison_kendoui_pivotgridv2 %})
 * [Templates]({% slug templates_kendoui_pivotgridv2 %})
 * [PDF export]({% slug pdfexport_kendoui_pivotgridv2 %})
 

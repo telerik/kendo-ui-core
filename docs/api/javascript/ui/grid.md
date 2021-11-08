@@ -10773,7 +10773,7 @@ Gets an array that holds the id field values of the selected rows.
 
 ### setDataSource
 
-Sets the data source of the widget.
+Sets the data source of the widget. The new dataSource will override the configurations and data of the old one.
 
 #### Parameters
 

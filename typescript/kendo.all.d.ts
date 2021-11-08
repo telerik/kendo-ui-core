@@ -8305,6 +8305,7 @@ declare namespace kendo.ui {
         sortable?: boolean|any;
         height?: number|string;
         messages?: PivotConfiguratorV2Messages;
+        orientation?: string;
     }
     interface PivotConfiguratorV2Event {
         sender: PivotConfiguratorV2;

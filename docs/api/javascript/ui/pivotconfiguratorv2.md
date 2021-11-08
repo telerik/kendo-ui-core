@@ -888,6 +888,36 @@ The text of the "not equal" filter operator.
     });
     </script>
 
+### orientation `String` *(default: "vertical")*
+
+Defines a value indicating the type of layout that the configurator has. Possible values are:
+
+- "vertical"
+- "horizontal"
+
+#### Example
+
+    <div id="configurator"></div>
+    <script>
+    $("#configurator").kendoPivotConfiguratorV2({
+        filterable: true,
+        orientation: "horizontal",
+        dataSource: {
+            type: "xmla",
+            columns: [{ name: "[Date].[Calendar]", expand: true }, { name: "[Geography].[City]" } ],
+            rows: [{ name: "[Product].[Product]" }],
+            measures: ["[Measures].[Internet Sales Amount]"],
+            transport: {
+                connection: {
+                    catalog: "Adventure Works DW 2008R2",
+                    cube: "Adventure Works"
+                },
+                read: 'https://demos.telerik.com/olap/msmdpump.dll'
+            }
+        }
+    });
+    </script>
+
 ## Fields
 
 ### dataSource `kendo.data.PivotDataSourceV2`

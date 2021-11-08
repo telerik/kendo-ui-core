@@ -22,10 +22,10 @@ The following example demonstrates how to expand multiple column dimensions by u
     <script>
         $(document).ready(function () {
             var paths = [
-              //Expand CY 2005 - first dimension
-              ["[Date].[Calendar].[Calendar Year].&[2005]"],
-              //Expand All Products under CY 2015 - second dimension
-                ["[Date].[Calendar].[Calendar Year].&[2005]","[Product].[Category].[All Products]"]
+              //Expand CY 2010 - first dimension
+              ["[Date].[Calendar].[Calendar Year].&[2010]"],
+              //Expand All Products under CY 2010 - second dimension
+                ["[Date].[Calendar].[Calendar Year].&[2010]","[Product].[Category].[All Products]"]
             ];
 
             var pivotgrid = $("#pivotgrid").kendoPivotGrid({

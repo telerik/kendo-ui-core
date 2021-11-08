@@ -133,6 +133,33 @@ Specifies the initially selected color.
     });
     </script>
 
+### view `String` *(default: "gradient")*
+
+The initially selected view in the FlatColorPicker.
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#colorpicker").kendoFlatColorPicker({
+      view: "palette"
+    });
+    </script>
+
+### views `Array` *(default: [ "gradient", "palette" ])*
+
+The available views in the FlatColorPicker. Valid values are "gradient" and "palette".
+
+#### Example
+
+    <div id="flatcolorpicker"></div>
+    <script>
+    $("#colorpicker").kendoFlatColorPicker({
+      view: "palette",
+      views: ["palette"]
+    });
+    </script>
+
 ### preview `Boolean` *(default: true)*
 
 Specifies whether a selected and previous color are displayed for color comparison. with autoupdate set to true both selected and previous colors will be updated.
