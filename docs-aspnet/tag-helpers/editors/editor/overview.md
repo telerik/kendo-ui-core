@@ -176,3 +176,4 @@ To configure other Editor options, such as PDF export, immutables, rezisability 
 
 * [Basic Usage of the Editor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/editor/tag-helper)
 * [Server-Side API](/api/editor)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/editor#methods)

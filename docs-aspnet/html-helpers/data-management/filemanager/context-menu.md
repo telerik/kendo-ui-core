@@ -12,7 +12,7 @@ The {{ site.product }} FileManager's ContextMenu enables you to easily execute F
 
 The component uses the {{ site.product }} ContextMenu, enabling you to get full advantage of its [Client API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager). Once an item is selected, the corresponding command is executed. 
 
-The default items in the ContextMenu are `rename` and `delete`. You can define your custom items which can execute custom commands. You can also manage what items should be visible, by enumerating the needed ones in the initialization of the component (see Example below)
+The built-in items in the ContextMenu are `rename` and `delete`. You can define your custom items which can execute custom commands. You can also manage what items should be visible, by enumerating the needed ones in the initialization of the component (see Example below)
 
         @(Html.Kendo().FileManager()
             .Name("filemanager")              
@@ -23,6 +23,47 @@ The default items in the ContextMenu are `rename` and `delete`. You can define y
             })) 
             ...
         )
+
+
+## Custom ContextMenu Items
+
+To add a custom command to the context menu of the FileManager, follow the instuctions below. There is no limitation for the number of custom items. 
+
+1. Add the item, set text and specify a command name:
+
+    ```
+        .ContextMenu(context =>
+        {
+            context.Items(items =>
+            {
+                items.Add("rename");
+                items.Add("delete");
+                items.Add("custom").Text("Custom button").Command("MyCustomCommand");
+            });
+        })
+    ```
+
+1. Create the command for the FileManager:
+
+    ```
+        $(function(){
+            var filemanagerNS = kendo.ui.filemanager;
+
+            filemanagerNS.commands.MyCustomCommand = filemanagerNS.FileManagerCommand.extend({
+                exec: function () {
+                    var that = this,
+                        filemanager = that.filemanager, // get the kendo.ui.FileManager instance
+                        options = that.options, // get the options passed through the tool
+                        target = options.target // options.target is available only when command is executed from the context menu
+                    selectedFiles = filemanager.getSelected(); // get the selected files
+
+                    console.log(options.arg, target, selectedFiles);
+                    // Proceed with the logic of the custom command.
+                }
+            });
+        }); 
+    ```
+
 
 ## See Also
 

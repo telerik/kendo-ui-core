@@ -48,7 +48,7 @@ The following example demonstrates the basic configuration of the Responsive Pan
     )
 ```
 
-
+> The Telerik UI ResponsivePanel accepts any HTML that is passed in the `Content` option. For more advanced scenarios, pass custom HTML of your choice.  
 
 ## See Also
 
