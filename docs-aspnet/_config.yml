@@ -442,7 +442,7 @@ navigation:
         position: 10
      "integration-with-other-telerik-products":
         title: "Integration with other Telerik Products"
-        position: 11   
+        position: 11
      "backwards-compatibility":
         title: "Breaking Changes"
         position: 12
@@ -664,10 +664,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2021.3.914"
+cdnVersion: "2021.3.1109"
 
 ## The MVC Core version used
-mvcCoreVersion: "2021.3.914"
+mvcCoreVersion: "2021.3.1109"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 

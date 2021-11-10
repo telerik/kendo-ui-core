@@ -52,6 +52,30 @@ The DropDownList TagHelper configuration options are passed as attributes of the
         </datasource>
     </kendo-dropdownlist>
 ```
+```
+    public JsonResult GetProducts(string text)
+    {
+        using (var northwind = GetContext())
+        {
+            var products = northwind.Products.Select(product => new ProductViewModel
+            {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                UnitPrice = product.UnitPrice.Value,
+                UnitsInStock = product.UnitsInStock.Value,
+                UnitsOnOrder = product.UnitsOnOrder.Value,
+                Discontinued = product.Discontinued
+            });
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                products = products.Where(p => p.ProductName.Contains(text));
+            }
+
+            return Json(products.ToList());
+        }
+    }
+```
 
 ## See Also
 

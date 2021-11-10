@@ -38,52 +38,59 @@ Indeed the change which ASP.NET Core have made affects the server rendering, how
 
 ```cshtml
     <script id="toolbar" type="text/kendo-tmpl">
-        <div class="toolbar" style="margin: auto;">
-            <div>
-                <span class="pull-left">
-                    @(Html.Kendo().DropDownList()
-                     .Name("SomeName")
-                     .DataTextField("Text")
-                     .DataValueField("Value")
-                          .BindTo(new List<SelectListItem>() {
-                       new SelectListItem() {
-                           Text = "All",
-                           Value = "0"
-                       },
-                       new SelectListItem() {
-                           Text = "Processing",
-                           Value = "1"
-                       },
-                       new SelectListItem() {
-                           Text = "Ready",
-                           Value = "3"
-                       }
-                    }).ToClientTemplate())
-    
-                    @(Html.Kendo().Button()
-                      .Name("statusSelectButton")
-                      .Content("Go!")
-                      .HtmlAttributes(new { type = "button", @class = "k-button" })
-                      .Events(ev => ev.Click("onStatusSelectPending")).ToClientTemplate())
-                </span>
-                <span class="pull-right">
-                    <i class="icon-barcode"></i>
-    
-                        @(Html.Kendo().TextBox()
-                        .Name("barcodeSearchPending")
-                        .HtmlAttributes(new { placeholder = "Barcode Search", style = "width:250px" }   ).             ToClientTemplate())
-    
-                        @(Html.Kendo().Button()
-                         .Name("barcodeSearchButtonPending")
-                         .Content("Search")
-                         .HtmlAttributes(new { type = "button", @class = "k-button" })
-                         .Events(ev => ev.Click("onSelectBarcodeSearchPending")).ToClientTemplate())
-                </span>
-            </div>
+        <div class="pull-left">
+            @(Html.Kendo().DropDownList()
+                .Name("SomeName")
+                .DataTextField("Text")
+                .DataValueField("Value")
+                    .BindTo(new List<SelectListItem>() {
+                new SelectListItem() {
+                    Text = "All",
+                    Value = "0"
+                },
+                new SelectListItem() {
+                    Text = "Processing",
+                    Value = "1"
+                },
+                new SelectListItem() {
+                    Text = "Ready",
+                    Value = "3"
+                }
+            }).ToClientTemplate())
+
+            @(Html.Kendo().Button()
+                .Name("statusSelectButton")
+                .Content("Go!")
+                .HtmlAttributes(new { type = "button", @class = "k-button" })
+                .Events(ev => ev.Click("onStatusSelectPending")).ToClientTemplate())
+        </div>
+        <div class="pull-right">
+            <i class="icon-barcode"></i>
+
+                @(Html.Kendo().TextBox()
+                .Name("barcodeSearchPending")
+                .HtmlAttributes(new { placeholder = "Barcode Search", style = "width:250px" })
+                .ToClientTemplate())
+
+                @(Html.Kendo().Button()
+                    .Name("barcodeSearchButtonPending")
+                    .Content("Search")
+                    .HtmlAttributes(new { type = "button", @class = "k-button" })
+                    .Events(ev => ev.Click("onSelectBarcodeSearchPending")).ToClientTemplate())
         </div>
     </script>
+
     <script>
         function onStatusSelectPending() { alert("onStatusSelectPending") }
         function onSelectBarcodeSearchPending() { alert("onSelectBarcodeSearchPending") }
     </script>
+
+    <style>
+    .k-grid .pull-right {
+            margin-left: auto;
+            margin-right: 0;
+        }    
+    </style>
 ```
+
+Here is a [REPL example demonstrating the above with v2021.3.914](https://netcorerepl.telerik.com/wFFlaIlQ04WzH8VM43)

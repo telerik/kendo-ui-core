@@ -19,7 +19,8 @@ The following example demonstrates how to define the Form by using the Form Html
 ```Razor
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("formExample")
-        .HtmlAttributes(new { action = "Index", method = "POST" })
+        //configure the action and method attributes of the HTML <form> element
+        .HtmlAttributes(new { action = @Url.Action("MyAction","MyController"), method = "POST" })
         .Items(items =>
         {
             items.Add()
