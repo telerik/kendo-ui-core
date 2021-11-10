@@ -14,7 +14,7 @@ This article lists the breaking or important changes in the 2021 releases of Ken
 
 **ColorPicker**
 
-As of the 2021 R3 SP1 release, the ColorPicker has a new design and some new features were introduced. To revert to the legacy design use the following configuration:
+As of the 2021 R3 SP1 release, the ColorPicker has a new design and some new features were introduced. The `.ClearButton()` configuration is substituted with `.CleatOnSelect()`. In addition, if you desire to revert to the legacy design use the following configuration:
 
 ```
     @(Html.Kendo().ColorPicker()
