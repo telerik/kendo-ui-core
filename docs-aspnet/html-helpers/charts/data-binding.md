@@ -195,7 +195,11 @@ To bind to remote data by using the DataSource component:
             [HttpPost]
             public IActionResult _SpainElectricityProduction()
             {
-                // Data is usually read from a data context. Static data is used in this example for clarity.
+                // Data is usually read from a service that communicates with the an instance of the DbContext. 
+                // Refer to the MSDN documentation for further details on connecting to a data base and using a DBContext:
+                // https://docs.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.dbcontext?view=efcore-5.0
+                //
+                // For clarity, in this example static data is generated and returned from the remote-endpoint.
                 var result = new ElectricityProduction[] {
                     new ElectricityProduction("2000", 18, 31807, 4727, 62206),
                     new ElectricityProduction("2001", 24, 43864, 6759, 63708),
@@ -236,6 +240,7 @@ To bind to remote data by using the DataSource component:
 
 1. In the view, configure the Chart to use the action method that you created.
 
+    ```tab-Razor
     @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
         .Name("chart")
         .Title("Spain electricity production (GWh)")
@@ -262,10 +267,11 @@ To bind to remote data by using the DataSource component:
             .Format("{0:N0}")
         )
     )
+    ```
 
 1. (Optional) Configure a Custom DataSource.
 
-    Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response.
+    Unlike the Grid, the Chart is configured to read a flat data response by default. If you have custom logic that requires the usage of the `ToDataSourceResult()` extension method when returning data for the Chart, configure a custom DataSource with a schema that can correctly parse the response. For further details on the DataSource configuration refer to the [DataSource section of the documentation]({% slug htmlhelpers_datasource_aspnetcore %}).
 
     ```tab-Controller
         public IActionResult Products_Read([DataSourceRequest] DataSourceRequest request)

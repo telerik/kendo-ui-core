@@ -47,7 +47,7 @@ The following list provides information about the default requests and responses
 
     `name` from the previous example is the name of the file or directory, `type` is either an `f` for a file or a `d` for a directory, and `size` is the file size (optional).
 
-- `Destroy()`&mdash;Makes a `POST` request with the following parameters:
+- `Destroy()`&mdash;Makes a `POST` request with the following parameters and expects an empty ContentResult as a response:
 
     - `name`&mdash;The file or the directory that will be deleted.
     - `path`&mdash;The directory in which the file or the directory resides.

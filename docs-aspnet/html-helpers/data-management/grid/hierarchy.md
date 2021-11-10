@@ -15,4 +15,5 @@ To implement hierarchy in the Grid, use the `ClientDetailTemplateId()` method an
 ## See Also
 
 * [Hierarchy by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/hierarchy)
+* [Grid Hierarchy with Local Data]({% slug grid-hierarchy-localdata %})
 * [Server-Side API](/api/grid)

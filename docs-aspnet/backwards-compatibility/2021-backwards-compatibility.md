@@ -10,6 +10,21 @@ position: 1
 
 This article lists the breaking or important changes in the 2021 releases of Kendo UI.
 
+## {{ site.product }} R3 2021 SP1
+
+**ColorPicker**
+
+As of the 2021 R3 SP1 release, the ColorPicker has a new design and some new features were introduced. To revert to the legacy design use the following configuration:
+
+```
+    @(Html.Kendo().ColorPicker()
+        .Name("colorpicker")
+        .Input(false)
+        .Preview(false)
+        .Views(new string[] { "gradient"})
+    )
+```
+
 ## {{ site.product }} R3 2021
 
 > Important change

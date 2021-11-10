@@ -198,7 +198,7 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
     ```
 
 1. Copy the `@aspnet/signalr` folder from the `node_modules` directory to the `wwwroot/lib` folder of the Core project.
-1. Include the SignalR script on the HTML page.
+1. Include the SignalR script on the HTML page where you have initialized the Chat component.
 
     ```
     <script src="lib/signalr/dist/browser/signalr.min.js"></script>
@@ -245,6 +245,43 @@ In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers
     });
     ```
 
+1. Complete SignalR Client Hub Proxy configuration.
+
+    ```
+    <script src="lib/signalr/dist/browser/signalr.min.js"></script>
+    
+    <script>
+        // Point to the Hub remote endpoint.
+        window.chatHub = new signalR.HubConnectionBuilder()
+            .withUrl('/chat')
+            .build();
+
+        chatHub.start()
+            .catch(function(err) {
+                console.error(err.toString());
+            });
+
+        $(document).ready(function() {
+            window.chat = $("#chat").getKendoChat();
+
+            chatHub.on('broadcastMessage', function(sender, message) {
+                var message = {
+                    type: 'text',
+                    text: message
+                };
+
+                // Render the received message in the Chat.
+                chat.renderMessage(message, sender);
+            });
+
+            chatHub.on('typing', function(sender) {
+                // Display the typing notification in the Chat.
+                chat.renderMessage({ type: 'typing' }, sender);
+            });
+        });
+    </script>
+    ```
+    
 1. Start the Peer-to-Peer Chat application.
 
 {% else %}

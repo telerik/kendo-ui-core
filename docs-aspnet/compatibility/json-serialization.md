@@ -98,3 +98,4 @@ To maintain the property names casing, locate the `ConfigureServices` method and
 * [PDF and Excel Export Support by Telerik UI for ASP.NET Core]({% slug exportsupport_core %})
 * [Operation System Support by Telerik UI for ASP.NET Core]({% slug ossupport_core %})
 * [Earlier Versions Support Policy by Telerik UI for ASP.NET Core]({% slug oldversionssupportpolicy_core %})
+* [Data Binding of the Telerik UI for ASP.NET Core Grid]({% slug htmlhelpers_grid_aspnetcore_binding_overview %})
