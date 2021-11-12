@@ -26,6 +26,12 @@ The following example demonstrates how to define the ColorPicker by using the Co
     )
 ```
 
+## Functionality and Features
+
+* [Views]({% slug htmlhelpers_views_colorpickerhelper_aspnetcore %})
+* [Contrast Tool]({% slug htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore %})
+* [Formats]({% slug htmlhelpers_formats_colorpickerhelper_aspnetcore %})
+
 ## Events
 
 You can subscribe to all ColorPicker [events](https://docs.telerik.com/kendo-ui/api/javascript/ui/colorpicker#events). For a complete example on basic ColorPicker events, refer to the [demo on using the events of the ColorPicker](https://demos.telerik.com/{{ site.platform }}/colorpicker/events).
