@@ -12,16 +12,6 @@ Represents the Kendo UI QRCode widget. Inherits from [Widget](/api/javascript/ui
 
 ## Configuration
 
-### Example - Render as SVG, if supported
-
-    <div id="qrCode"></div>
-    <script>
-    $("#qrCode").kendoQRCode({
-      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
-      renderAs: "svg"
-    });
-    </script>
-
 ### background `String` *(default: "#fff")*
 
 The background color of the QR code. Accepts a valid CSS color string, including hex and rgb.
@@ -246,6 +236,16 @@ The supported values are:
 * "canvas" - renders the widget as a Canvas element, if available.
 * "svg" - renders the widget as inline SVG document, if available
 
+### Example - Render as SVG, if supported
+
+    <div id="qrCode"></div>
+    <script>
+    $("#qrCode").kendoQRCode({
+      value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html",
+      renderAs: "svg"
+    });
+    </script>
+
 ### size `Number|String`
 
 Specifies the size of a QR code in pixels (i.e. "200px"). Numeric values are treated as pixels.
@@ -274,7 +274,7 @@ In case the element has width or height of zero, a default value of 200 pixels w
 
 ### value `Number|String`
 
-The value of the QRCode.
+Sets the value of the QRCode. More about the the value of the QRCode can bo obtained in the [Encoding](/controls/barcodes/qrcode/encodings) documentation article.
 
 #### Example
 
@@ -539,6 +539,13 @@ The new value to be set.
 
 #### Example
 
-    var qrCode = $("#qrCode").data("kendoQRCode");
-    qrCode.value("Hello");
+    <div id="qrCode"></div>
+    <script>
+      $("#qrCode").kendoQRCode({
+        value: "https://demos.telerik.com/kendo-ui/dataviz/overview/index.html"
+      });
+
+      var qrCode = $("#qrCode").data("kendoQRCode");
+      qrCode.value("Hello");
+    </script>
 

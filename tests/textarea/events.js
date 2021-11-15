@@ -32,5 +32,18 @@
 
             textarea.focus().val("newVal").focusout();
         });
+
+        it("_focusout should not trigger change event when value is null", function() {
+            var value = "test";
+            var widget = new TextArea(textarea, {
+                change: function() {
+                    value = "bad test";
+                }
+            });
+
+            widget.value(null);
+            widget._focusout();
+            assert.equal(value, "test");
+        });
     });
 }());

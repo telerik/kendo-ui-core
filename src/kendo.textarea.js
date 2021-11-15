@@ -228,6 +228,10 @@ var __meta__ = {// jshint ignore:line
 
             that.wrapper.removeClass(FOCUSED);
 
+            if(value === null) {
+                value = "";
+            }
+
             if (value !== newValue) {
                 that._value = newValue;
 

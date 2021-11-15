@@ -374,6 +374,8 @@ Enables or disables the widget.
 
 If set to `true` the widget will be enabled. If set to `false` the widget will be disabled.
 
+Setting this property to `true` does not affect other properties of the NumericTextBox. It applies the `.k-state-disabled` CSS class of the wrapper span and sets the `aria-disabled` property of the input to `true`.
+
 #### Example - enable the widget
 
     <input id="numerictextbox" disabled="disabled" />
