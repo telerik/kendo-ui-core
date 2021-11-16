@@ -321,7 +321,7 @@ Set badge icon after initialization.
     <script>
         var badge = $('#badge').kendoBadge({ icon: 'add' }).data('kendoBadge');
 
-        window.setTimeOut(function() {
+        window.setTimeout(function() {
             badge.color('cog');
         }, 1000);
     </script>
