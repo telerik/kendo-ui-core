@@ -4499,6 +4499,8 @@ declare namespace kendo.ui {
         wrapText?: string | undefined;
         copyFormat?: string | undefined;
         applyFormat?: string | undefined;
+        undo?: string | undefined;
+        redo?: string | undefined;
     }
 
     interface EditorPasteCleanup {

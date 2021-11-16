@@ -54,7 +54,9 @@ The following example demonstrates the available configuration options for the B
 
 ## Functionality and Features
 
-The Button provides options for rendering [icons in the button]({% slug icons_button_aspnetcore %}).
+* [Disabled Button]({% slug disabled_buttonhelper_aspnetmvc %})
+* [Icon Button]({% slug icons_button_aspnetcore %})
+* [Badge Button]({% slug badges_button_aspnetcore %})
 
 ## Events
 
@@ -79,4 +81,5 @@ The Button HTML helper exposes only a `Click()` event that can be handled. For a
 
 * [Basic Usage of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/index)
 * [Using the API of the Button HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/button/api)
-* [Server-Side API](/api/button)
+* [Button Server-Side API](/api/button)
+* [Button Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/button)

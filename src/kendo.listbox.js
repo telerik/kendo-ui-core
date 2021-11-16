@@ -889,6 +889,7 @@ var __meta__ = { // jshint ignore:line
             that._bindDataSource();
 
             if (that.options.autoBind) {
+                that.wrapper.attr("aria-busy", true);
                 that.dataSource.fetch();
             }
         },
@@ -1023,6 +1024,8 @@ var __meta__ = { // jshint ignore:line
             that._updateToolbar();
             that._updateAllToolbars();
             that.trigger(DATABOUND);
+
+            that.wrapper.attr("aria-busy", false);
         },
 
         _syncElement: function () {

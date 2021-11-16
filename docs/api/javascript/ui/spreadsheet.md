@@ -1001,6 +1001,22 @@ If set to `false`, disables the cell.
 
 The format of the cell text. For more information, refer to the article on [creating or deleting a custom number format on MS Office](https://support.office.com/en-au/article/Create-or-delete-a-custom-number-format-78f2a361-936b-4c03-8772-09fab54be7f4).
 
+#### Example - setting the format of a cell
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            sheets: [{
+                name: "Order",               
+                rows: [{
+                    cells: [{
+                        value: 12.39, format: "$#,##0.00"
+                    }]
+                }],
+            }]
+        });
+    </script>
+
 ### sheets.rows.cells.formula `String`
 
 The cell formula without the leading equals sign, for example, `A1 * 10`.

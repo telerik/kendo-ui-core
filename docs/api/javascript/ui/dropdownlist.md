@@ -1697,6 +1697,27 @@ The value to set.
 
     dropdownlist.value("Oranges");
     </script>
+	
+#### Example - set value of the widget bound to remote data
+
+    <input id="products" style="width: 100%" />
+    <script>               
+        $("#products").kendoDropDownList({
+            dataTextField: "ProductName",
+            dataValueField: "ProductID",
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "jsonp",
+                        url: "https://demos.telerik.com/kendo-ui/service/Products",
+                    }
+               }
+            }
+        });
+       
+        var dropdownlist = $("#products").data("kendoDropDownList");
+		dropdownlist.value(2);
+	</script>
 
 ## Events
 

@@ -143,5 +143,21 @@
             assert.isOk(listB.items().first().data("uid").length);
             assert.isOk(listB.items().first().attr("id").length);
         });
+
+        it("has aria-busy set to 'true' while loading from remote", function() {
+            listA = createListBox({
+                dataSource: {
+                    transport: {
+                        read: function(options) {
+                            setTimeout(function() {
+                                options.success([ "one", "two" ]);
+                            });
+                        }
+                    }
+                }
+            });
+
+            assert.equal(listA.wrapper.attr("aria-busy"), "true");
+        });
     });
 }());

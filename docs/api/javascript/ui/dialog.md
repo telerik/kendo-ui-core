@@ -109,10 +109,16 @@ Adds a custom class to the action button.
           actions: [{
               text: "OK",
               primary: true,
-              cssClass: "k-button-ok"
+              cssClass: "myClass"
           }]
         });
     </script>
+	
+	  <style>
+		  .myClass{
+			  background-color: green !important;
+		  }
+	  </style>
 
 ### animation `Boolean|Object`
 

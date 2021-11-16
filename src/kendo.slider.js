@@ -48,7 +48,10 @@ var __meta__ = { // jshint ignore:line
         DISABLED = "disabled",
         UNDEFINED = "undefined",
         TABINDEX = "tabindex",
-        getTouches = kendo.getTouches;
+        getTouches = kendo.getTouches,
+
+        ARIA_VALUETEXT = "aria-valuetext",
+        ARIA_VALUENOW = "aria-valuenow";
 
     var SliderBase = Widget.extend({
         init: function(element, options) {
@@ -453,7 +456,7 @@ var __meta__ = { // jshint ignore:line
                        .before(createButton(options, "decrease", that._isHorizontal, that._isRtl));
             }
 
-            element.before(createTrack(options, element));
+            element.before(createTrack(options, element, that._isHorizontal));
         },
 
         _focus: function(e) {
@@ -605,19 +608,19 @@ var __meta__ = { // jshint ignore:line
             }
         }
 
-        return "<a class='k-button k-button-" + type + "' " +
+        return "<a role='button' class='k-button k-button-" + type + "' " +
                 "title='" + options[type + "ButtonTitle"] + "' " +
                 "aria-label='" + options[type + "ButtonTitle"] + "'>" +
                 "<span class='k-icon " + buttonCssClass + "'></span></a>";
     }
 
     function createSliderItems (options, distance) {
-        var result = "<ul class='k-reset k-slider-items'>",
+        var result = "<ul class='k-reset k-slider-items' role='presentation'>",
             count = math.floor(round(distance / options.smallStep)) + 1,
             i;
 
         for(i = 0; i < count; i++) {
-            result += "<li class='k-tick' role='presentation'>&nbsp;</li>";
+            result += "<li class='k-tick'>&nbsp;</li>";
         }
 
         result += "</ul>";
@@ -625,14 +628,49 @@ var __meta__ = { // jshint ignore:line
         return result;
     }
 
-    function createTrack (options, element) {
+    function createTrack (options, element, isHorizontal) {
         var dragHandleCount = element.is("input") ? 1 : 2,
-            firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle;
+            firstDragHandleTitle = dragHandleCount == 2 ? options.leftDragHandleTitle : options.dragHandleTitle,
+            value = options.value,
+            min = options.selectionStart,
+            max = options.selectionEnd,
+            elementValue, minElementValue, maxElementValue;
 
-        return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='#' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (options.selectionStart || options.min) : options.value || options.min) + "'></a>" +
-               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (options.selectionEnd || options.max) + "'></a>" : "") +
+        if(dragHandleCount === 1) {
+            elementValue = element.val();
+
+            if (elementValue !== null && elementValue !== undefined && elementValue !== 'null') {
+                if(value === null || value === undefined) {
+                    value = elementValue;
+                }
+            }
+        } else {
+            minElementValue = element.find("input").eq(0).val();
+            maxElementValue = element.find("input").eq(1).val();
+
+            if (minElementValue !== null && minElementValue !== undefined && minElementValue !== 'null') {
+                if(min === null || min === undefined) {
+                    min = minElementValue;
+                }
+            }
+
+            if (maxElementValue !== null && maxElementValue !== undefined && maxElementValue !== 'null') {
+                if(max === null || max === undefined) {
+                    max = maxElementValue;
+                }
+            }
+        }
+
+        var result = "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
+               "<span tabindex='0' class='k-draghandle' title='" + firstDragHandleTitle + "' role='slider' " +
+               (isHorizontal === false ? "aria-orientation='vertical' " : "") +
+               "aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (dragHandleCount > 1 ? (min || options.min) : value || options.min) + "'></span>" +
+               (dragHandleCount > 1 ? "<span tabindex='0' class='k-draghandle' title='" + options.rightDragHandleTitle + "'role='slider' " +
+               (isHorizontal === false ? "aria-orientation='vertical' " : "") +
+               "aria-valuemin='" + options.min + "' aria-valuemax='" + options.max + "' aria-valuenow='" + (max || options.max) + "'></span>" : "") +
                "</div>";
+
+        return result;
     }
 
     function step(stepValue) {
@@ -720,8 +758,10 @@ var __meta__ = { // jshint ignore:line
 
             dragHandle = that.wrapper.find(DRAG_HANDLE);
 
-            this._selection = new Slider.Selection(dragHandle, that, options);
+            that._selection = new Slider.Selection(dragHandle, that, options);
             that._drag = new Slider.Drag(dragHandle, "", that, options);
+
+            that._refreshAriaAttr(options.value);
         },
 
         options: {
@@ -937,7 +977,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 formattedValue = that._getFormattedValue(value, null);
             }
-            this.wrapper.find(DRAG_HANDLE).attr("aria-valuenow", value).attr("aria-valuetext", formattedValue);
+            this.wrapper.find(DRAG_HANDLE).attr(ARIA_VALUENOW, value).attr(ARIA_VALUETEXT, formattedValue);
         },
 
         _clearTimer: function () {
@@ -1420,6 +1460,8 @@ var __meta__ = { // jshint ignore:line
             this._selection = new RangeSlider.Selection(dragHandles, that, options);
             that._firstHandleDrag = new Slider.Drag(dragHandles.eq(0), "firstHandle", that, options);
             that._lastHandleDrag = new Slider.Drag(dragHandles.eq(1), "lastHandle" , that, options);
+
+            that._refreshAriaAttr(options.selectionStart , options.selectionEnd);
         },
 
         options: {
@@ -1683,9 +1725,9 @@ var __meta__ = { // jshint ignore:line
 
             formattedValue = that._getFormattedValue([start, end], drag);
 
-            dragHandles.eq(0).attr("aria-valuenow", start);
-            dragHandles.eq(1).attr("aria-valuenow", end);
-            dragHandles.attr("aria-valuetext", formattedValue);
+            dragHandles.eq(0).attr(ARIA_VALUENOW, start);
+            dragHandles.eq(1).attr(ARIA_VALUENOW, end);
+            dragHandles.attr(ARIA_VALUETEXT, formattedValue);
         },
 
         _setValueInRange: function (selectionStart, selectionEnd) {

@@ -120,7 +120,7 @@
             colorPicker.open();
 
             // excluded rule should be removed after fixing the issue in the slider
-            axeRun(colorPicker._popup.element, done, ["aria-allowed-role"]);
+            axeRun(colorPicker._popup.element, done);
         });
     });
 
@@ -157,7 +157,7 @@
 
         it("flatcolorpicker is accessible with AXE", function(done) {
             // excluded rule should be removed after fixing the issue in the slider
-            axeRunFixture(done, ["aria-allowed-role"]);
+            axeRunFixture(done);
         });
     });
 

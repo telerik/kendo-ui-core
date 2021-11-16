@@ -3239,7 +3239,7 @@ function pad(number, digits, end) {
                     containerScrollLeft = kendo.scrollLeft(container);
                     webkitCorrection = browser.webkit ? (!isRtl ? 0 : container[0].scrollWidth - container.width() - 2 * containerScrollLeft) : 0;
 
-                    mask = $(kendo.format("<div class='{0}'><span class='k-loading-text'>{1}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>", cssClass, kendo.ui.progress.messages.loading))
+                    mask = $(kendo.format("<div class='{0}'><span role='alert' aria-live='polite' class='k-loading-text'>{1}</span><div class='k-loading-image'></div><div class='k-loading-color'></div></div>", cssClass, kendo.ui.progress.messages.loading))
                         .width(options.width).height(options.height)
                         .css("top", options.top)
                         .css(leftRight, Math.abs(containerScrollLeft) + webkitCorrection)
