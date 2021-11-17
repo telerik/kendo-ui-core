@@ -567,6 +567,21 @@ The supported filter values are `startswith`, `endswith` and `contains`.
     });
     </script>
 
+### filterLabel `String`
+
+When filtering is enabled, allows aria-label to be defined for the filter input element.
+
+#### Example - set the filter
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      filter: "contains",
+      filterLabel: "custom title"
+    });
+    </script>
+
 ### footerTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.

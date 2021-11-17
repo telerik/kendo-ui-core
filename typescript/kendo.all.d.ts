@@ -4140,6 +4140,7 @@ declare namespace kendo.ui {
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
         filter?: string | undefined;
+        filterLabel?: string | undefined;
         footerTemplate?: string|Function | undefined;
         height?: string|number | undefined;
         ignoreCase?: boolean | undefined;

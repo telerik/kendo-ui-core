@@ -23,7 +23,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Component |508|WCAG 2.1|Demo
 |:---          |:---|:---  |:---
 |ActionSheet   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/actionsheet/index)
-|AppBar	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/appbar/index)
+|AppBar	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/appbar/index)
 |AutoComplete  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/autocomplete/index)
 |BarCode	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/barcode/index)
 |BottomNavigation |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/bottomnavigation/index)
@@ -45,11 +45,11 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Dialog	       |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dialog/index)
 |Drawer	       |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/drawer/index)
 |DropDownList  |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdownlist/index)
-|DropDownTree  |No  |-  |
+|DropDownTree* |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/dropdowntree/index)
 |Editor        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/editor/index)
 |ExpansionPanel|Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/expansionpanel/index)
 |FileManager   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/filemanager/index)
-|FloatingActionButton   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/floatingactionbutton/index)
+|FloatingActionButton |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/floatingactionbutton/index)
 |Form          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/form/index)
 |Gantt         |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/gantt/index)
 |Grid          |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/grid/index)
@@ -82,14 +82,14 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Sortable	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/sortable/index)
 |Splitter      |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/splitter/index)
 |Spreadsheet   |No  |-   |
-|Stepper	   |Yes |AA |[Browse](https://demos.telerik.com/kendo-ui/stepper/index)
+|Stepper	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/stepper/index)
 |Switch        |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/switch/index)
 |TabStrip	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/tabstrip/index)
 |TaskBoard	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/taskboard/index)
 |TextArea	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textarea/index)
 |TextBox	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/textbox/index)
 |TileLayout	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/tilelayout/index)
-|TimeLine	   |Yes |A |[Browse](https://demos.telerik.com/kendo-ui/timeline/index)
+|TimeLine	   |Yes |A   |[Browse](https://demos.telerik.com/kendo-ui/timeline/index)
 |TimePicker	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/timepicker/index)
 |ToolBar	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/toolbar/index)
 |Tooltip	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/tooltip/index)
@@ -98,6 +98,8 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Upload 	   |Yes |AA  |[Browse](https://demos.telerik.com/kendo-ui/upload/index)
 |Window 	   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/window/index)
 |Wizard		   |Yes |AAA |[Browse](https://demos.telerik.com/kendo-ui/wizard/index)
+
+> The DropDownTree widget will be identified as not compliant to the WAI-ARIA spec when tested with static HTML analyzer if there is no selection in the widget and the `placeholder` configuration is not used. That is because the DropDownTree wrapper element, which has `role="listbox"` will not contain any `option` elements. That should be considered a known limitation in the widget. Detailed information on the scenario could be found in [this GitHub issue](https://github.com/telerik/kendo-ui-core/issues/6558#issuecomment-938449528).
 
 ## Special Considerations
 
