@@ -428,27 +428,50 @@ The Image instance
 
 Returns the canvas element
 
-#### Returns
+#### Returns `HTMLElement`
 
-`HTMLElement`
+#### Example
+
+	<button id="getCanvas" class='k-button'>Get Canvas</button>
+    <div id="imageEditor"></div>
+    <script>
+      $("#imageEditor").kendoImageEditor({
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg"
+      });
+      var imageEditor = $("#imageEditor").data("kendoImageEditor");
+      $("#getCanvas").click(function(){
+        var canvas = imageEditor.getCanvasElement()
+        console.log(canvas);
+      })
+    </script>
 
 ### getCurrent2dContext
 
 Returns the canvas' 2d context object
 
-#### Returns
+#### Example
 
-`Object`
+    <button id="getCanvas" class='k-button'>Get Canvas Object</button>
+    <div id="imageEditor"></div>
+    <script>
+      $("#imageEditor").kendoImageEditor({
+        imageUrl: "https://demos.telerik.com/kendo-ui/content/shared/images/photos/2.jpg"
+      });
+      var imageEditor = $("#imageEditor").data("kendoImageEditor");
+      $("#getCanvas").click(function(){
+        var canvas = imageEditor.getCurrent2dContext()
+        console.log(canvas);
+      })
+    </script>
+#### Returns `Object`
 
 ### getCurrentImage
 
 Returns the Image instance
 
-#### Returns
+#### Returns `HTMLElement`
 
-`HTMLElement`
 The `img` element in the ImageEditor.
-
 #### Example 
 
     <button id="getImage" class='k-button'>Get Image</button>

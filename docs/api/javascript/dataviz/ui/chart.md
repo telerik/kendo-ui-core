@@ -36926,6 +36926,28 @@ Specifies an axis that should not be zoomed. The supported values are `none`, `x
       });
     </script>
 
+### zoomable.mousewheel.rate `Number` *(default: 0.3)*
+
+Specifies the zoom rate as percentage of the axis range. The default value is 0.3 or 30% of the axis range.
+
+##### Example - set the mousewheel zoom rate to 10% of the axis range
+    <div id="chart"></div>
+    <script>
+      $("#chart").kendoChart({
+        series: [{
+          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        }],
+        zoomable: {
+          mousewheel: {
+            rate: 0.1
+          }
+        },
+        categoryAxis: {
+          categories: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+        }
+      });
+    </script>
+
 ### zoomable.selection `Boolean|Object` *(default: true)*
 
 Specifies if the chart can be zoomed using selection.

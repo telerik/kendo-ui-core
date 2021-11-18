@@ -4,7 +4,6 @@ page_title: Change MultiSelect's tag background from a ToolTip with ColorPalette
 description: An example on how to Change MultiSelect's tag background using a ToolTip with ColorPalette.
 type: how-to
 slug: change-multiselect-tag-background
-previous_url: /knowledge-base/change-multiselect-tag-background
 tags: multiselect, tag, change, background, tooltip, colorpalette
 res_type: kb
 component: multi-select

@@ -10,6 +10,8 @@ slug: howto_setslotbackgroundcolor_usingslottemplates_scheduler
 
 You can set the cell background color based on the slot date in the Scheduler.
 
+> The example uses the `slotTemplate` and `allDaySlotTemplate` options. The `slotTemplate` is supported when views.type is set to "day", "week", "workWeek" or "timeline" views. The `allDaySlotTemplate` is supported only for the "day", "week" or "workWeek" views.
+
 The following example demonstrates how to achieve this behavior by using the `slotTemplate` and `allDaySlotTemplate` configuration options.
 
 ```dojo

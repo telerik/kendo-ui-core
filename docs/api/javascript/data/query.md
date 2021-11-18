@@ -81,6 +81,21 @@ A function that is applied to each of the items
 
 `kendo.data.Query` Returns a new instance of kendo.data.Query containing the mapped collection
 
+#### Example
+
+    <script>
+        var query = new kendo.data.Query([
+          { name: "Jane Doe", age: 30 },
+          { name: "John Doe", age: 33 }
+        ]);
+
+        var selectedItems = query.select(function(item){
+            return item.name;
+        })
+        // the result can be seen in the browser console.
+        console.log(selectedItems);
+    </script>
+
 ### order
 
 Returns a copy of the list sorted according to the direction
