@@ -3523,17 +3523,24 @@ The data items which will replace the current ones in the data source. If omitte
 #### Example - set the data items
 
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "Jane Doe" }
-      ]
-    });
-    dataSource.fetch(function(){
-      dataSource.data([ { name: "John Doe" } ]);
-      var data = dataSource.data();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(data[0].name); // displays "John Doe"
-    });
+      var dataSource = new kendo.data.DataSource({
+        data: [
+          { name: "Jane Doe" },
+          { name: "John Smith" },
+          { name: "Andrew Robertson" }
+        ]
+      });
+      dataSource.fetch(function(){
+        var newData = [
+          { name: "Samuell Dean" },
+          { name: "John Doe" }
+        ]
+        dataSource.data(newData);
+        var data = dataSource.data();
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(data); 
+        console.log(data[0].name); // displays "Samuel Dean"        
+      });
     </script>
 
 ### fetch
@@ -4341,14 +4348,16 @@ The sort configuration. Accepts the same values as the [`sort`](/api/javascript/
       },
       change: function(e) {
         var view = this.view();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(view)
         console.log(view[0].ProductName); // displays "Manjimup Dried Apples"
       }
     });
-    // sort by "ProductName" and get the third page with page size set to 20
+    // Filter only results with ProductID greather than 30, sort by "ProductName" and get the second page with page size set to 20. 
     dataSource.query({
       sort: { field: "ProductName", dir: "desc" },
-      page: 3,
+	  filter: { field: "ProductID", operator: "gt", value: 30 },
+      page: 2,
       pageSize: 20
     });
     </script>

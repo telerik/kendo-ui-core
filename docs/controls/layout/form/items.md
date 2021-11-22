@@ -86,8 +86,7 @@ The following example shows how to set the `hint` of an item. The hint is displa
                 formData: {
                     FirstName: "",
                     LastName: "",
-                    Password: "",
-                    Birth: new Date()
+                    Password: ""
                 },
                 items: [
                     {
@@ -125,8 +124,7 @@ With the `editor` option you can explicitly configure an editor to be used for a
                 formData: {
                     FirstName: "",
                     LastName: "",
-                    Password: "",
-                    Birth: new Date()
+                    Password: ""
                 },
                 items: [
                     {

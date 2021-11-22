@@ -17,7 +17,7 @@ The nested [Kendo UI TreeView]({% slug overview_kendoui_treeview_widget %}) comp
 
 ## Breadcrumb
 
-As for R1 2020, the [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}) component is added to the Kendo UI suite and it is incorporated in the FileManager.
+As of R1 2020, the [Breadcrumb]({% slug overview_kendoui_breadcrumb_widget %}) component is added to the Kendo UI suite and it is incorporated in the FileManager.
 
 ## See Also
 

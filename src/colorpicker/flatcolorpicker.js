@@ -1,6 +1,7 @@
 (function(f, define){
     define([
-        "../kendo.core"
+        "./colorgradient",
+        "./colorpalette"
     ], f);
 })(function(){
 

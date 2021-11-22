@@ -179,9 +179,9 @@
             var that = this,
                 textbox = $(ev.target).data("kendoTextBox");
 
-            if (ev.keyCode === KEYS.ENTER) {
-                if(textbox && textbox._focusout) {
-                    textbox._focusout();
+            if (ev.keyCode === KEYS.ENTER && $(ev.target).is("input")) {
+                if(textbox && textbox._change) {
+                    textbox._change();
                 }
 
                 that.trigger("change", {value: that._color});

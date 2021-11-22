@@ -18,7 +18,63 @@
             }
         }],
         "Total": 2
-    }
+    };
+
+    var sampleLocalData = [{
+            "Id": 1,
+            "Name": "John Smith",
+            "Position" : "Forward",
+            "Level": 5
+        }, {
+            "Id": 2,
+            "Name": "Mbape",
+            "Position" : "Forward",
+            "Level": 7
+        },{
+            "Id": 3,
+            "Name": "Messi",
+            "Position" : "Forward",
+            "Level": 10
+        },{
+            "Id": 4,
+            "Name": "Xavi",
+            "Position" : "Midfielder",
+            "Level": 10
+        },{
+            "Id": 5,
+            "Name": "Iniesta",
+            "Position" : "Midfielder",
+            "Level": 9
+        },{
+            "Id": 6,
+            "Name": "Rio",
+            "Position" : "Defender",
+            "Level": 5
+        },{
+            "Id": 7,
+            "Name": "Maldini",
+            "Position" : "Defender",
+            "Level": 10
+        },
+        {
+            "Id": 8,
+            "Name": "Bonuci",
+            "Position" : "Defender",
+            "Level": 9.5
+        },
+        {
+            "Id": 9,
+            "Name": "Neuer",
+            "Position" : "Goalkeeper",
+            "Level": 10
+        },
+        {
+            "Id": 10,
+            "Name": "Courtois",
+            "Position" : "Goalkeeper",
+            "Level": 9
+        }
+    ];
     var sampleGroupedRemoteResponse = {
         "Data": [{
                 "Key": "67, avenue de l-Europe",
@@ -2009,6 +2065,33 @@
             var result = dataSource._expandedSubGroupItemsCount(data[0], 4);
 
             assert.equal(result, 4);
+        });
+
+        it("ungrouping items removes groups from view and ranges", function () {
+            var dataSource = new kendo.data.DataSource({
+                pageSize: 5,
+                groupPaging: true,
+                group: [{
+                    field: 'Position'
+                }],
+                data: sampleLocalData,
+                schema: {
+                    id: "ID"
+                }
+            });
+            dataSource.read();
+            var view = dataSource.view();
+
+            assert.isOk(view[0].aggregates);
+            assert.isOk(dataSource._ranges[0].data[0]);
+
+            dataSource.group([]);
+
+            view = dataSource.view();
+
+            assert.isNotOk(view[0].aggregates);
+            assert.isNotOk(dataSource._ranges.length);
+
         });
     });
 }());

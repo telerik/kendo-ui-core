@@ -17,7 +17,7 @@ The Kendo UI Hybrid framework is shipped with several separate CSS files:
 
 > **Important**
 >
-> All themes and skins require the `images` sub-folder, which contains a mask for the iOS back button, icon fonts and the Windows Phone 8 PhoneGap icon workaround images.
+> All themes and skins require the `images` sub-folder, shipped with the Kendo UI bundle, which contains a mask for the iOS back button, icon fonts and the Windows Phone 8 PhoneGap icon workaround images.
 
 Depending on the project requirements, the mobile application may be styled in several different ways. Each approach requires a different set of stylesheets and `mobile.Application` configuration options.
 

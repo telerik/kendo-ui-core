@@ -23,7 +23,9 @@ The following example demonstrates how to initialize the RadioGroup from an exis
 
     <script>
         $(document).ready(function(){
-            $("#radiogroup").kendoRadioGroup();
+            $("#radiogroup").kendoRadioGroup({
+                items: ["Andora", "Italy", "Malta"]
+            });
         });
     </script>
 ```

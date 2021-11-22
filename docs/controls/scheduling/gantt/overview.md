@@ -21,7 +21,7 @@ The `kendo.data.GanttTask` object provides the following fields:
 * `end Date`&mdash;The date at which the task ends.
 * Expanded `Boolean`&mdash;Indicates if the task will be expanded.
 * `id Number`&mdash;The unique identifier of the Gantt task. Tasks, whose `id` is not set, are considered as `"new"`.
-* `orderId Number`&mdash;The index of the task.
+* `orderId Number`&mdash;The index of the task. The orderId values should be unique and consecutive. 
 * `parentId Number`The unique identifier of the parent task. Tasks, whose `parentId` is not set or null, are considered as `"root-level"`.
 * `percentComplete Number`&mdash;The percentage of the task completion.
 * `start Date`&mdash;The date at which the task starts.

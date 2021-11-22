@@ -86,7 +86,7 @@
             picker.bind("change", changeCallback);
 
             picker.element.find("[data-role=textbox]").val("#f00");
-            picker.element.find("[data-role=textbox]").trigger("blur");
+            picker.element.find("[data-role=textbox]").trigger("change");
             picker.element.find("button.k-coloreditor-apply").trigger("click");
 
             assert.equal(callback.calls, 1);
@@ -105,7 +105,7 @@
             picker.bind("cancel", cancelCallback);
 
             picker.element.find("[data-role=textbox]").val("#f00");
-            picker.element.find("[data-role=textbox]").trigger("blur");
+            picker.element.find("[data-role=textbox]").trigger("change");
             picker.element.find("button.k-coloreditor-cancel").trigger("click");
 
             assert.equal(callback.calls, 1);

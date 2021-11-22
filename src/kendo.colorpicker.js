@@ -11,8 +11,6 @@
         "./kendo.numerictextbox",
 
         "./colorpicker/colorselector",
-        "./colorpicker/colorgradient",
-        "./colorpicker/colorpalette",
         "./colorpicker/flatcolorpicker"
     ], f);
 })(function(){
@@ -412,7 +410,7 @@ var __meta__ = { // jshint ignore:line
 
     ui.plugin(ColorPicker);
 
-})(jQuery);
+})(window.kendo.jQuery);
 
 return window.kendo;
 

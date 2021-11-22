@@ -1465,6 +1465,21 @@ The title of the Print tool.
     });
     </script>
 
+### messages.redo `String` *(default: "Redo")*
+
+The title of the redo tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        redo: "Redo task"
+      }
+    });
+    </script>
+
 ### messages.rows `String` *(default: 'Rows')*
 
 The title of the Rows field in Table Wizard.
@@ -1596,6 +1611,21 @@ The title of the tool that underlines text.
     $("#editor").kendoEditor({
       messages: {
         underline: "Underline"
+      }
+    });
+    </script>
+
+### messages.undo `String` *(default: "Undo")*
+
+The title of the undo tool.
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      messages: {
+        undo: "Undo task"
       }
     });
     </script>

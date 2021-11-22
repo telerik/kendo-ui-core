@@ -630,6 +630,44 @@ Specifies the spriteCssClass of the item.
 ### contextMenu.items.command `String`
 Specifies the command of the item.
 
+#### Example
+
+	<div id="fileManager"></div>
+    <script>
+      var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+      $("#fileManager").kendoFileManager({
+        height: 500,
+        dataSource: {
+          transport: {
+            read: {
+              type: "post",
+              url: baseUrl + "Read"
+            },
+            destroy: {
+              type: "post",
+              url: baseUrl + "Destroy"
+            }
+          }
+        },
+        contextMenu: {
+          items: [     
+            { name: "delete" },
+            { name: "custom", text: "Custom command", command: "MyCustomCommand", spriteCssClass:"k-icon k-i-info" }
+          ]
+        }
+      });
+
+      $(document).ready(function () {
+        var filemanagerNS = kendo.ui.filemanager;
+        filemanagerNS.commands.MyCustomCommand = filemanagerNS.FileManagerCommand.extend({
+          exec: function(){
+            kendo.alert('Custom command in ContextMenu has been clicked')
+          }
+        });
+      })
+    </script>
+
 ### contextMenu.close `Function`
 
 Fires before a sub menu or the ContextMenu gets closed. You can cancel this event to prevent closure.  [ContextMenu Events](/api/javascript/ui/contextmenu#events).

@@ -158,6 +158,7 @@ var __meta__ = {// jshint ignore:line
 
                 element.on("focusin" + NS, proxy(that._focusin, that));
                 element.on("focusout" + NS, proxy(that._focusout, that));
+                element.on("change" + NS, proxy(that._change, that));
             } else {
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
@@ -210,20 +211,17 @@ var __meta__ = {// jshint ignore:line
 
         _focusout: function() {
             var that = this;
-            var value = that._value;
-            var newValue = that.element.val();
 
             that.wrapper.removeClass(FOCUSED);
+        },
+        
+        _change: function(e) {
+            var that = this;
+            var newValue = that.element.val();
 
-            if (value === null) {
-                value = "";
-            }
+            that._value = newValue;
 
-            if (value !== newValue) {
-                that._value = newValue;
-
-                that.trigger(CHANGE);
-            }
+            that.trigger(CHANGE, {value: newValue, originalEvent: e});
         },
 
         _wrapper: function () {

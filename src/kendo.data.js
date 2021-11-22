@@ -1931,7 +1931,7 @@ var __meta__ = { // jshint ignore:line
                 query = query.range(skip, take);
             }
 
-            if (group) {
+            if (group && (!isEmptyObject(group) || group.length !== 0)) {
                 query = query.group(group, data, options);
             }
         }
@@ -4711,6 +4711,10 @@ var __meta__ = { // jshint ignore:line
             var options = { group: val };
 
             if (that._groupPaging) {
+                // clear ranges if ungrouping is performed
+                if (val!== undefined && (!val || !val.length) ) {
+                    that._ranges = [];
+                }
                 options.page = 1;
             }
 

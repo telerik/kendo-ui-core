@@ -6721,6 +6721,9 @@ Allows selection of slots in day and time slots of the view (applicable in day/w
     //find event for selection:
     var event = scheduler.data()[0];
     scheduler.select([event.uid]);
+
+    //log selected event data
+    console.log(scheduler.select());
     </script>
 
 
@@ -6781,10 +6784,10 @@ The vertical position.
     var scheduler = $("#scheduler").data("kendoScheduler");
     var slot = scheduler.slotByPosition(100,100);
 
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log("slot startDate: " + slot.startDate);
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-    console.log("slot endDate: " + slot.endDate);
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("slot startDate: " + slot.startDate);
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
+      console.log("slot endDate: " + slot.endDate);
     </script>
 
 ### slotByElement

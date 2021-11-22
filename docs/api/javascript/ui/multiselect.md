@@ -980,6 +980,22 @@ The mode used to render the selected tags. The available modes are:
 > Every tagMode has a specific `tagTemplate` value. If you would like to control the content of the rendered tags,
 set a custom a [tagTemplate](/api/javascript/ui/multiselect#configuration-tagTemplate) value.
 
+#### Example - set the tagMode
+
+    <input id="multiselect" style="width: 400px;" />
+    <script>
+        $("#multiselect").kendoMultiSelect({
+            dataSource: [
+                { id: 1, name: "Apples" },
+                { id: 2, name: "Oranges" },
+                { id: 3, name: "Bananas" }
+            ],
+            dataTextField: "name",
+            dataValueField: "id",            
+            tagMode: "single"
+        });
+    </script>
+
 ### value `Array`*(default: [])*
 
  Define the value of the widget

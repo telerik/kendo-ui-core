@@ -32,7 +32,7 @@ Below are listed the steps for you to follow when configuring the Kendo UI AutoC
 
 
 
-        <%@taglib prefix="kendo" uri="https://www.telerik.com/kendo-ui/jsp/tags"%>
+        <%@taglib prefix="kendo" uri="http://www.kendoui.com/jsp/tags"%>
 
 **Step 4** Add the `menu` tag.
 
