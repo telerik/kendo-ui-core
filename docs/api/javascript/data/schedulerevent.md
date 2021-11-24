@@ -93,6 +93,8 @@ If set to `true` the event is "all day". By default events are not all day.
         end: new Date("2013/4/4 00:00"),
         isAllDay: true
     });
+    /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(event.isAllDay); // outputs "true"
     </script>
 
 ### recurrenceException `String` *(default: undefined)*

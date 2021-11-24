@@ -4232,6 +4232,41 @@ The data item or data items to append to the data source.
     console.log(dataSource.at(1).isNew()); // displays "false"
     </script>
 
+### pushMove
+
+Moves the specified data items to the data source without marking them as "new". The data source cannot reorder data items to the server without explicit knowledge of the sorting mechanism. Therefore, this is an explicitly client-side operation. 
+
+#### Parameters
+
+##### index `Number`
+
+The zero-based index at which the data item should be moved to.
+
+##### items `Object|Array`
+
+The data item or data items to append to the data source.
+
+#### Example - pushInsert with a single item
+
+    <script>
+    var dataSource = new kendo.data.DataSource({
+      schema: {
+        model: {
+          id: "id"
+        }
+      }
+    });
+    dataSource.pushCreate([{ id: 1, name: "John Doe" }, { id: 2, name: "Alex" }, { id: 3, name: "Peter" }]);
+
+    /* Move the first item to second position. */
+    dataSource.pushMove(2, dataSource.at(0));
+
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(dataSource.at(1).name); // displays "John Doe"
+	  /* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log(dataSource.at(1).isNew()); // displays "false"
+    </script>
+
 ### pushUpdate
 
 Updates the specified data items without marking them as "dirty". The data source will not sync data items appended via `pushUpdate`. If the data items are not found (using `schema.model.id`), they will be appended.

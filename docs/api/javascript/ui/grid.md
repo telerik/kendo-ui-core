@@ -825,6 +825,28 @@ The data text field of the foreign key item.
 
 The data value field of the foreign key item.
 
+### columns.draggable `Boolean` *(default: false)*
+
+If set to `true` a draghandle will be rendered and the user could reorder the rows by dragging the row via the drag handle. If the [selectable](/api/javascript/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
+
+> Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { draggable: true },
+        { field: "name" }
+      ],
+      dataSource: [ 
+        { id:1, name: "Jane Doe" }, 
+        { id:2, name: "John Doe" } 
+      ]
+    });
+    </script>
+
 ### columns.editable `Function`
 
 The JavaScript function executed when the cell/row is about to be opened for edit. The result returned will determine whether an editor for the column will be created.
@@ -8291,7 +8313,7 @@ Sets a value indicating whether the selection will be persisted when sorting, pa
     });
     </script>
 
-### reorderable `Boolean` *(default:false)*
+### reorderable `Object|Boolean` *(default:false)*
 
 If set to `true` the user could reorder the columns by dragging their header cells. By default reordering is disabled.
 Multi-level headers allow reordering only in same level.
@@ -8314,6 +8336,55 @@ Multi-level headers allow reordering only in same level.
     </script>
 
 > Check [Column reordering](https://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
+
+### reorderable.columns `Boolean` *(default:false)*
+
+If set to `true` the user could reorder the columns by dragging their header cells. By default reordering is disabled.
+Multi-level headers allow reordering only in same level.
+
+#### Example - enable column reordering
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { name: "Jane Doe", age: 30 },
+        { name: "John Doe", age: 33 }
+      ],
+      reorderable: true
+    });
+    </script>
+
+> Check [Column reordering](https://demos.telerik.com/kendo-ui/grid/column-reordering) for a live demo.
+
+### reorderable.rows `Boolean` *(default:false)*
+
+If set to `true` the user could reorder the rows by dragging them. By default reordering for rows is disabled. If the [selectable](/api/javascript/ui/grid/configuration/selectable) option is enabled for rows only selected rows will can be dragged and reordered.
+
+> Note that the reordering operation is only a client-side operation and it does not reflect the order of any data that is bound to the server.
+
+#### Example - enable column reordering
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id:1, name: "Jane Doe", age: 30 },
+        { id:2, name: "John Doe", age: 33 }
+      ],
+      reorderable: {
+        rows: true
+      }
+    });
+    </script>
 
 ### resizable `Boolean` *(default:false)*
 
@@ -13475,6 +13546,86 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("remove", grid_remove);
+    </script>
+
+
+### rowReorder
+
+Fired when the user changes the order of a row.
+
+The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Event Data
+
+##### e.row `jQuery`
+
+The jQuery object representing the table row being reordered.
+
+##### e.rows `jQuery`
+
+Available when multiple rows are dragged - the jQuery object representing the selected and dragged rows.
+
+##### e.newIndex `Number`
+
+The new row index.
+
+##### e.oldIndex `Number`
+
+The previous row index.
+
+##### e.sender `kendo.ui.Grid`
+
+The widget instance which fired the event.
+
+##### e.preventDefault `Function`
+
+If invoked prevents the rowReorder action - prevents the client-side reordering.
+
+#### Example
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id:1, name: "Jane Doe", age: 30 },
+        { id:2, name: "John Doe", age: 33 }
+      ],
+      reorderable: {
+        rows: true
+      },
+      rowReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.row, e.newIndex, e.oldIndex);
+      }
+    });
+    </script>
+
+#### Example - reordering with multiple selection
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [
+        { field: "name" },
+        { field: "age" }
+      ],
+      dataSource: [
+        { id:1, name: "Jane Doe", age: 30 },
+        { id:2, name: "John Doe", age: 33 }
+      ],
+      reorderable: {
+        rows: true
+      },
+      selectable: "multiple, row",
+      rowReorder: function(e) {
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.row, e.rows, e.newIndex, e.oldIndex);
+      }
+    });
     </script>
 
 ### save

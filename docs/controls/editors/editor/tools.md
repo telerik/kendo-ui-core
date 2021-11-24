@@ -35,6 +35,8 @@ Apart from the available built-in tools, you can extend the Editor functionality
 
 The following example demonstrates how to add a custom tool button. To enable styling where `toolName` is the specified name in the custom tool configuration, the custom buttons get a `k-toolName` CSS class. The `undo` and `redo` tool names are reserved.
 
+For a runnable example, refer to the [Custom tools Editor Demo](https://demos.telerik.com/kendo-ui/editor/custom-tools)
+
        $("#editor").kendoEditor({
            tools: [
                {

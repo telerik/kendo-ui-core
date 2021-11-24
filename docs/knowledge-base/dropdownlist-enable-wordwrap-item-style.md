@@ -15,11 +15,7 @@ res_type: kb
  <tr>
   <td>Product</td>
   <td>DropDownList for Progress® Kendo UI®</td>
- </tr>
- <tr>
-  <td>Product Version</td>
-  <td>2018.2.516</td>
- </tr>
+ </tr> 
 </table>
 
 ## Description
@@ -33,6 +29,7 @@ Implement [word-wrapping](https://www.w3schools.com/cssref/css3_pr_word-wrap.asp
 ```
   #myDropDownList-list.k-popup .k-list .k-item{
     word-wrap: break-word;
+    display: block !important;
   }
 ```
 
@@ -43,6 +40,7 @@ The following example demonstrates how to wrap words in the DropDownList while t
       /*For a specific Kendo UI DropDownList*/
       #myDropDownList-list.k-popup .k-list .k-item{
         word-wrap: break-word;
+        display: block !important;
       }
     </style>
 

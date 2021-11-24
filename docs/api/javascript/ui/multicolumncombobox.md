@@ -1124,7 +1124,19 @@ If set to `true` the widget will automatically use the first suggestion as its v
     <input id="multicolumncombobox" />
     <script>
     $("#multicolumncombobox").kendoMultiColumnComboBox({
-      suggest: true
+        suggest: true,
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: {
+            data:  [
+                { text: "Apples", value: "1" },
+                { text: "Oranges", value: "2" }
+            ]
+        },
+        columns: [
+            { field: "text", title: "Text" },
+            { field: "value", title: "Value" }
+        ]
     });
     </script>
 

@@ -788,6 +788,23 @@ The page instance that was rendered.
 
 Fires when a PDF is opened in the viewer.
 
+#### Example
+
+    <div id="pdfviewer"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.js"></script>
+
+    <script>
+       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.2.2/pdf.worker.js';
+    </script>
+
+    <script>
+       $("#pdfviewer").kendoPDFViewer({
+          open: function (e) {
+             kendo.alert("file opened: " + e.file.name);
+          },
+       });
+    </script>
+
 #### Event Data
 
 ##### e.sender `kendo.ui.PDFViewer`

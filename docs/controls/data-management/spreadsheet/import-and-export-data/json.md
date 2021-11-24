@@ -14,8 +14,6 @@ The Spreadsheet allows you to store and load data in a native JSON format.
 
 The format follows the same structure as the [widget configuration](/api/javascript/ui/spreadsheet#configuration). It is designed to be used both for direct storage and as an [intermediate format]({% slug serverside_processing_spreadsheet_widget %}).
 
-> Once the Spreadsheet goes out of its Beta version, an official JSON schema will be published.
-
 The information that is persisted includes:
 
 * Cell formulas, values, formatting and styling.

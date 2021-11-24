@@ -3049,6 +3049,50 @@ var __meta__ = { // jshint ignore:line
             return destroyed;
         },
 
+        pushMove: function(index, items) {
+            var pushed = this._moveItems(index, items);
+
+            if (pushed.length) {
+                this.trigger("push", {
+                    type: "update",
+                    items: pushed
+                });
+            }
+        },
+
+        _moveItems: function (index, items) {
+            if (!isArray(items)) {
+                items = [items];
+            }
+
+            var moved = [];
+            var autoSync = this.options.autoSync;
+            this.options.autoSync = false;
+
+            try {
+                for (var i = 0; i < items.length; i ++) {
+                    var item = items[i];
+                    var model = this._createNewModel(item);
+
+                    this._eachItem(this._data, function(dataItems){
+                        for (var idx = 0; idx < dataItems.length; idx++) {
+                            var dataItem = dataItems.at(idx);
+                            if (dataItem.id === model.id) {
+                                moved.push(dataItem);
+                                dataItems.splice(index >= idx ? --index : index, 0, dataItems.splice(idx, 1)[0]);
+                                index++;
+                                break;
+                            }
+                        }
+                    });
+                }
+            } finally {
+                this.options.autoSync = autoSync;
+            }
+
+            return moved;
+        },
+
         remove: function(model) {
             var result,
                 that = this,

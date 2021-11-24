@@ -1305,6 +1305,34 @@ The command arguments.
 ### getSelected
 Gets the selected files (the JSON representation of the files).
 
+#### Example - log the selected files data
+
+    <button onclick="getSelectedFiles()" class="k-button">Get selected files</button>
+    <div id="fileManager"></div>
+
+    <script>
+      var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+      $("#fileManager").kendoFileManager({
+        width: 500,
+        dataSource: {
+          transport: {
+            read: {
+              type: "post",
+              url: baseUrl + "Read"
+            }
+          }
+        }
+      });
+
+      function getSelectedFiles(){
+        var filemanager = $("#fileManager").getKendoFileManager();
+        var files = filemanager.getSelected()
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(files)
+      }
+    </script>
+
 #### Returns
 
 `Object` The currently selected files.

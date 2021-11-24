@@ -647,10 +647,12 @@ Destroys the dialog and its modal overlay, if necessary. Removes the widget HTML
     <script>
     $("#dialog").kendoDialog({
       title: "Kendo Dialog Component",
-      content: "This is your Kendo Dialog.",
+      content: "The Dialog will be destroyed in a few seconds...",
     });
-    var dialog = $("#dialog").data("kendoDialog");
-    dialog.destroy();
+    setTimeout(function(){
+        var dialog = $("#dialog").data("kendoDialog");
+        dialog.destroy();
+    }, 1500)
     </script>
 
 ### open

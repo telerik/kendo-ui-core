@@ -8,7 +8,7 @@ position: 1
 
 # Visual Studio Code Integration Overview
 
-The **Telerik UI for ASP.NET Core Template Wizard** [Visual Studio Code](https://code.visualstudio.com/) Extension enhances the experience in developing ASP.NET Core web applications with Telerik UI for ASP.NET Core.
+The **Telerik UI for ASP.NET Core Template Wizard** is an extension for [Visual Studio Code](https://code.visualstudio.com/) that enhances the application development experience with Telerik UI for ASP.NET Core.
 
 As its primary advantage, the VS Code extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
 
@@ -25,39 +25,68 @@ You can get the extention:
 
 To create a Telerik-enabled ASP.NET Core project:
 
-1. Press `Ctrl`+`Shift`+`P` in Windows/Linux or `Cmd`+`Shift`+`P` on Mac to open VSCode's extension launcher
+1. Press `Ctrl`+`Shift`+`P` in Windows/Linux or `Cmd`+`Shift`+`P` on Mac to open the VSCode extension launcher.
+
+1. Type/Select `Telerik UI for ASP.NET Core Template Wizard: Launch` and press `Enter` to launch the extension.
 
     ![launch Telerik ASP.NET Core VS Code extension](images/launch-extension.png)
 
-1. Type/Select `Telerik UI for ASP.NET Core Template Wizard: Launch` and press `Enter` to launch the extension
+1. Enter a project name and select the location.
 
-1. The wizard will now guide you through the project creation steps:
-    1. Choose a project name and location
-    
-        ![choose Telerik project name and location](images/project-name-and-location.png)
-        
-    1. The type of your Telerik license (trial or commercial, depending on what you have)
-    
-        ![choose ASP.NET Core project type and Telerik license](images/project-type-and-license.png)
-    
-    1. Add some sample pages to get you started (a grid with CRUD operations, a form and charts)
-    
-        ![add sample pages](images/add-pages.png)
-    
-    1. Choose a Theme.
-    
-        ![choose Telerik Theme](images/choose-theme.png)
+1. Choose whether to start from a [Blank project](#blank-project) or use the [Admin Dashboard](#admin-dashboard) template as a base.
 
-1. When you open the project, to run it:
+    ![choose Telerik project name and location](images/project-name-and-location.png)
 
-    1. Open the terminal and navigate to the project folder.
+## Blank Project
 
-    1. Execute `dotnet run` and navigate your browser to the link you see in the console output.
+The **Blank Project** has the package references and the client-side resources loaded in the `_Layout.cshtml`. It also features the expected JSON serialization configuration in the `Startup.cs` file. 
 
-    Alternatively, you may open the solution file with Visual Studio and build the application. Once the NuGet packages get restored and the build passes, you will have your ASP.NET Core project up and running.
+Additionally, you can include multiple {{ site.product }} components into your project (for example, the <a href="https://docs.telerik.com/aspnet-core/html-helpers/data-management/grid/overview">Grid</a>, <a href="https://docs.telerik.com/aspnet-core/html-helpers/charts/overview">Chart</a>, and <a href="https://docs.telerik.com/aspnet-core/html-helpers/layout/form/overview">Form</a>).
 
-1. You now have a ASP.NET Core app running!
+![{{site.product_short}} blank project pages](images/blank-project-pages.png)
 
+## Admin Dashboard
+
+The **Admin Dashboard** is a is a Razor Pages template configured with [TagHelpers]({% slug taghelpers_aspnetmvc6_aspnetmvc %}). It features:
+
+* Everything from the <strong>Blank Project</strong>.
+* Authentication functionallity (Registration, Login, and Logout) in <code>Areas/Login/Pages</code>.
+* A navigation that is created by using the <a href="https://docs.telerik.com/aspnet-core/tag-helpers/navigation/drawer/overview">Drawer</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/navigation/appbar/overview">AppBar</a> components.
+* A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/cards">Cards</a>, <a href="https://docs.telerik.com/aspnet-core/tag-helpers/gauges/arcgauge/overview">Arc Gauge</a>, <a href="https://docs.telerik.com/aspnet-core/tag-helpers/charts/overview">Chart</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/data-management/grid/overview">Grid</a> in <code>Index.cshtml</code>.
+* A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with a variety of <a href="https://docs.telerik.com/aspnet-core/tag-helpers/charts/overview">Charts</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/gauges/radialgauge/overview">Gauges</a> in <code>Performance.cshtml</code>.
+* A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/charts/overview">Bubble Chart</a> and <a href="https://docs.telerik.com/aspnet-core/html-helpers/data-management/listview/overview">ListView</a> with editable <a href="https://docs.telerik.com/aspnet-core/styles-and-layout/cards">Cards</a> in <code>Products.cshtml</code> as well as <a href="https://docs.telerik.com/aspnet-core/tag-helpers/data-management/pager/overview">Pager</a> and search panel.
+* A <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/tilelayout/overview">TileLayout</a> with <a href="https://docs.telerik.com/aspnet-core/tag-helpers/layout/form/overview">Form</a> and <a href="https://docs.telerik.com/aspnet-core/tag-helpers/scheduling/calendar/overview">Calendar</a> in <code>Settings.cshtml</code>.
+
+## Configuration
+
+### License Type
+
+Select the type of your Telerik license (trial or commercial, depending on what you have).
+
+![choose Telerik license](images/license-type.png)
+
+### Target Framework
+
+The wizard allows you to select the desired **{{ site.framework }}** version.
+
+![choose target framework](images/target-framewok.png)
+
+### Themes
+
+The **Built-in themes** option enables you to add styling to your application by selecting one of the <a href="https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes">Sass-Based themes</a> (Default, Bootstrap or Material) and pick from a variety of swatches that come with each theme. When you make your choice, the wizard will add to the `_Layout.cshtml` only these files that are required by the selected theme.
+
+![Theme options](images/themes.png)
+
+## Run the Project
+
+After configuring the settings of the project, click **Create Project** to start creating the new {{site.product_short}} application.
+
+To run the project:
+
+1. Open the terminal and navigate to the project folder.
+1. Execute `dotnet run` and navigate your browser to the link you see in the console output.
+
+Alternatively, you can open the solution file with Visual Studio and build the application. Once the NuGet packages get restored and the build passes, you will have your {{ site.product }} project up and running.
 
 ## Troubleshooting
 

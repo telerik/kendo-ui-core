@@ -62,20 +62,25 @@ In the `drop` event handler of the TreeView, get the dropped node and add it to 
 	});
 
 	$("#optional").kendoListBox({
-	dataTextField: "text",
-	dataValueField: "id",
-	dataSource: [{ id: 8, text: "Other products" }]
+	    dataTextField: "text",
+	    dataValueField: "id",
+	    dataSource: [{ id: 8, text: "Other products" }]
 	});
 
 	function onDrop(e){          
-	var item = e.sender.dataItem(e.sourceNode);         
-	var listbox = $('#optional').data('kendoListBox');         
-	listbox.add(item)
-	if(item.hasChildren){
-		for(var p=0; p <item.items.length;p++){
-			listbox.add(item.items[p])
-		}
-	}
-	}
+        if($(e.dropTarget).hasClass('k-list-scroller')){
+          var item = e.sender.dataItem(e.sourceNode);         
+          var listbox = $('#optional').data('kendoListBox');         
+          listbox.add(item)
+          if(item.hasChildren){
+            for(var p=0; p <item.items.length;p++){
+              listbox.add(item.items[p])
+            }
+          }
+        }else{
+          e.preventDefault()
+          alert('Please drop the node in the ListBox')
+        }
+    }
 </script>
 ```

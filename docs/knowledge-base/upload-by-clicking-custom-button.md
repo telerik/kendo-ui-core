@@ -46,8 +46,8 @@ How can I hide the default Upload button and upload the selected file by clickin
 	<script>
 		$("#files").kendoUpload({
 			async: {
-				saveUrl: "http://my-app.localhost/save",
-				removeUrl: "http://my-app.localhost/remove",
+				saveUrl: "https://demos.telerik.com/kendo-ui/upload/save",
+				removeUrl: "https://demos.telerik.com/kendo-ui/upload/save",
 				autoUpload: false
 			}
 		});

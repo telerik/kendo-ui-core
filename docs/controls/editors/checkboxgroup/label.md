@@ -36,7 +36,7 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/checkbo
 
 ## Configure the Label Position
 
-The labels of all checkboxes in the CheckBoxGroup could be rendered before or after each checkbox.
+The labels of all checkboxes in the CheckBoxGroup could be rendered before or after each checkbox. Use the [`labelPosition`](/api/javascript/ui/checkboxgroup/configuration/labelposition) configuration option to set the position of the label. 
 
 ```dojo
     <ul id="checkboxgroup"></ul>
@@ -44,7 +44,7 @@ The labels of all checkboxes in the CheckBoxGroup could be rendered before or af
     <script>
         $("#checkboxgroup").kendoCheckBoxGroup({
             items: [ "Blue", "Green", "Red" ],
-            labelPosition: "after"
+            labelPosition: "before"
         });
     </script>
 ```

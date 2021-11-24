@@ -37,6 +37,21 @@
             axeRunFixture(done);
         });
 
+        it("TabStrip with selected tab is accessible", function(done) {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ],
+                value: "foo2"
+            });
+
+            axeRunFixture(done);
+        });
+
         it("collapsible TabStrip is accessible", function(done) {
             div.kendoTabStrip({
                 dataTextField: "text",
@@ -81,6 +96,54 @@
 
             axeRunFixture(done);
         });
+
+        it("collapsible TabStrip with selected tab is accessible", function(done) {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ],
+                collapsible: true,
+                value: "foo2"
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("vertical TabStrip with selected tab is accessible", function(done) {
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ],
+                tabPosition: "left",
+                value: "foo2"
+            });
+
+            axeRunFixture(done);
+        });
+
+        it("scrollable TabStrip with selected tab is accessible", function(done) {
+            div.width("100px");
+            div.kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
+                dataSource: [
+                    { text: "foo", content: "bar" },
+                    { text: "foo2", content: "bar2" },
+                    { text: "foo3", content: "bar3" }
+                ],
+                value: "foo2"
+            });
+
+            axeRunFixture(done);
+        });
     });
 
     describe("tabstrip aria", function () {
@@ -95,7 +158,7 @@
         it("tablist role is added to the wrapper", function() {
             var tabstrip = div.kendoTabStrip().data("kendoTabStrip");
 
-            assert.equal(tabstrip.tabGroup.attr("role"), "tablist");
+            assert.equal(tabstrip.element.attr("role"), "tablist");
         });
 
         it("tab role is set to items", function() {
@@ -121,7 +184,7 @@
                 tabPosition: "left"
             }).data("kendoTabStrip");
 
-            assert.equal(tabstrip.tabGroup.attr("aria-orientation"), "vertical");
+            assert.equal(tabstrip.element.attr("aria-orientation"), "vertical");
         });
 
         it("tabpanel role is set to the content items", function() {

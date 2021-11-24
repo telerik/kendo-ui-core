@@ -195,7 +195,8 @@ var __meta__ = { // jshint ignore:line
             that._updateClasses();
             that._dataSource();
 
-            that.tabGroup.attr("role", "tablist");
+            that.tabGroup.attr("role", "none");
+            that.wrapper.attr("role", "tablist");
 
             if (options.dataSource) {
                 that.dataSource.fetch();
@@ -1394,7 +1395,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (tabPosition === "left" || tabPosition === "right") {
-                that.tabGroup.attr("aria-orientation", "vertical");
+                that.wrapper.attr("aria-orientation", "vertical");
             }
 
             that.resize(true);

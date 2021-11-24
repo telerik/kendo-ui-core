@@ -39,12 +39,33 @@ How can the I crop the text of items in a DropDownList and show an ellipsis if t
 
 Use the `white-space`, `overflow`, and `text-overflow` CSS properties.
 
-```css
-li.k-item {
-   white-space: nowrap;
-   overflow: hidden;
-   text-overflow: ellipsis;
-}
-```
 
-For the full implementation, refer to [this Dojo example](https://dojo.telerik.com/IPOga).
+```dojo
+    <style>
+        li.k-item {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+    </style>
+    
+    <h4>Products</h4>
+    <input id="products" style="width: 200px" />
+
+    <script>
+      $(document).ready(function() {
+        $("#products").kendoDropDownList({
+          dataTextField: "ProductName",
+          dataValueField: "ProductID",
+          dataSource: {
+            transport: {
+              read: {
+                dataType: "jsonp",
+                url: "https://demos.telerik.com/kendo-ui/service/Products",
+              }
+            }
+          }
+        });
+      });
+    </script>
+```

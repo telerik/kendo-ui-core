@@ -90,7 +90,7 @@ The following example demonstrates how to define a custom fixed group template.
     $(document).ready(function() {
         $("#customers").kendoMultiSelect({
             height: 200,
-            fixedGroupedTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
+            fixedGroupTemplate: "<strong>#:data#</strong>", //`data` is the title of the group
             dataTextField: "ContactName",
             dataValueField: "CustomerID",
             dataSource: {

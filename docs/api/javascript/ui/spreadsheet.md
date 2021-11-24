@@ -742,6 +742,19 @@ An array which defins the document sheets and their content.
 
 The active cell in the sheet, for example, `A1`.
 
+#### Example - configure the initially active cell
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            activeCell: "C3"
+          }
+        ]
+      });
+    </script>
+
 ### sheets.name `String`
 
 The name of the sheet.
@@ -1051,6 +1064,26 @@ If set to `true`, sets the cell font to underline.
 ### sheets.rows.cells.value `Number|String|Boolean|Date`
 
 The cell value.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [
+          {
+            rows: [
+              {
+                cells: [{ value: "Name" },{ value: "age" }]
+              },
+              {
+                cells: [{ value: "Peter" },{ value: 34 }]
+              }
+            ]
+          }
+        ]
+      });
+    </script>
 
 ### sheets.rows.cells.validation `Object`
 
