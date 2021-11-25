@@ -9,6 +9,12 @@ slug: howto_prevent_invalid_values_datetimepicker
 
 The following example demonstrates how to prevent invalid values in a Kendo UI DateTimePicker.
 
+## Solution
+
+1. Attach a handler to the [`change`](/api/javascript/ui/datetimepicker/events/change) event of the `DateTimePicker`.
+1. Check if the new value of the `DateTimePicker` is null. This will indicate whether the entered value is invalid or not.
+1. Execute any other custom logic.
+
 ```dojo
   <div id="example">
     <div class="demo-section k-header" style="width: 400px;">
@@ -30,12 +36,14 @@ The following example demonstrates how to prevent invalid values in a Kendo UI D
         }
 
         function onChange() {
-          $(".console").append("<p>Change :: " + kendo.toString(this.value(), 'd') + "<p>");
-
-          // If you do not want to wire the input change event, uncomment.
-          /*if (this.value() === null) {
-                       this.value("");
-                      }*/
+          // If an invalid value has been entered, the datetimepicker will set its value to null. Use this information to handle the invalid state.
+          if (this.value() === null) {
+            $(".console").append("<p>Error! Invalid Date! Setting back to the previous date!</p>");
+            this.value(lastValidDate);
+          } else {
+            lastValidDate = this.value();
+            $(".console").append("<p>Change :: " + kendo.toString(this.value(), 'd') + "<p>");
+          }
         }
 
         $("#datetimepicker").kendoDateTimePicker({
@@ -43,16 +51,6 @@ The following example demonstrates how to prevent invalid values in a Kendo UI D
           close: onClose,
           open: onOpen,
           value: new Date()
-        });
-
-        // If you do not want to use widget, change the event.
-        $("#datetimepicker").on("change", function() {
-          var input = $(this);
-          var widget = input.data("kendoDateTimePicker");
-
-          if (widget && widget.value() === null && input.val()) {
-            widget.value("");
-          }
         });
       });
     </script>            

@@ -165,11 +165,11 @@ The following example demonstrates the full implementation of the suggested appr
     var charts = [{
         text: "Column",
         type: "column",
-        icon: "k-i-column-clustered"
+        icon: "k-i-chart-column-clustered"
     }, {
         text: "Bar",
         type: "bar",
-        icon: "k-i-bar-clustered"
+        icon: "k-i-chart-bar-clustered"
     }];
 
     function fillChartPicker(layout, dataSource, collapsed) {
@@ -255,7 +255,6 @@ The following example demonstrates the full implementation of the suggested appr
 
         for (var idx = 0, length = collapsed.length; idx < length; idx++) {
             if (collapsed[idx] === name) {
-                console.log(name);
                 return true;
             }
         }

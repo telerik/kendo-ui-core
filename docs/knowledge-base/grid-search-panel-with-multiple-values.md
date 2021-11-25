@@ -94,6 +94,12 @@ The separation logic of the different values can be controlled the following var
           fields: ["name", "age", "country"] // Or, specify multiple fields by adding them to the array, e.g ["name", "age"]
         }
       });
+
+      function getColumnsFields(columns) {
+        return $.map(columns, function(column){
+          return column.field;
+        });
+      }
     </script>
 
 ``` 

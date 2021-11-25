@@ -8,6 +8,8 @@ position: 1
 
 # TileLayout Overview
 
+> The TileLayout widget is available as of Kendo UI R2 2020(v2020.2.513).
+
 The Kendo UI TileLayout widget allows you configure a two-dimensional grid-based sandbox surface to display content in tiles which can be dragged around and rearranged to create any modern page design.
 
 It is based on the [CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)(with all its features) which covers the majority of cases and uses additional JavaScript logic to provide resizing, reordering and templates customizations.
