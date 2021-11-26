@@ -27,6 +27,8 @@ The following example demonstrates the default tool methods of the Editor.
         .Italic()
         .Underline()
         .Strikethrough()
+        .Undo()
+        .Redo()
         .JustifyLeft()
         .JustifyCenter()
         .JustifyRight()

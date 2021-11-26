@@ -35,7 +35,7 @@ How can I disable column resizing for specific columns in the Kendo UI Grid for 
 
 Column resizing is enabled or disabled for all Grid columns.
 
-The following example demonstrates how to prevent resizing for specific columns.
+The following example demonstrates how to prevent resizing for the "bar" column.
 
 ```dojo
     <p>The <strong>bar</strong> column cannot be resized:</p>

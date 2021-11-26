@@ -1482,7 +1482,7 @@ if (kendo.ui.OrgChart) {
 
 if (kendo.dataviz.ui.Map) {
     kendo.dataviz.ui.Map.prototype.options.messages =
-    $.extend(true, kendo.dataviz.ui.Map.prototype.optionss.messages, {
+    $.extend(true, kendo.dataviz.ui.Map.prototype.options.messages, {
         "tileTitle": "Map title"
     });
 }

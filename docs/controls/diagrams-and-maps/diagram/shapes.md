@@ -41,6 +41,35 @@ The previous example results in the following output.
 
 ![Two connected Diagram shapes](diagram-connection.png)
 
+## Changing the Initial Options of the Shape
+
+To change a particular configuration of the shape and visualize it, use the [`redraw()`](/api/javascript/dataviz/diagram/shape/methods/redraw) method which will render the shape with its new [`options`](/api/javascript/dataviz/diagram/shape#configuration).
+
+    var shape = new kendo.dataviz.diagram.Shape({x: 500, y: 100, fill: "green"});
+    diagram.addShape(shape);
+    diagram.shapes[0].redraw({
+    fill: {
+        color: "red"
+    }
+    });
+
+## Cloning a Shape
+
+To make a clone of a shape and render it on the Diagram, use the [`clone()`](/api/javascript/dataviz/diagram/shape/methods/clone) method.
+
+    var shape = new kendo.dataviz.diagram.Shape({x: 500, y: 100, fill: "green"});
+    diagram.addShape(shape);
+
+    var shape2 = diagram.shapes[0].clone();
+    diagram.addShape(shape2);
+
+## Creating a Shape Using SVG Path Data
+
+To create a Diagram shape with an [SVG Path](https://www.w3.org/TR/SVG11/paths.html), use the [`path`](/api/javascript/dataviz/diagram/shape/configuration/path) configuration.
+
+    var shape = new kendo.dataviz.diagram.Shape({path: 'm35.15,0 L84.85,0 L120,35.15 L120,84.85 L84.85,120 L35.15,120 L0,84.85 L0,35.15 z', fill: "green"});
+    diagram.addShape(shape);
+
 ## See Also
 
 * [Basic Usage of the Diagram (Demo)](https://demos.telerik.com/kendo-ui/diagram/index)

@@ -1943,8 +1943,14 @@ The fields which can be used in the template are:
 
 ### columns.format `String`
 
-The format that is applied to the value before it is displayed. Takes the form "{0:format}" where "format" is a [standard number format](/globalization/intl/numberformatting#default-number-formats),
-[custom number format](/globalization/intl/numberformatting#custom-number-formats), [standard date format](/globalization/intl/dateformatting#default-date-formats) or a [custom date format](/globalization/intl/dateformatting#custom-date-formats).
+The format that is applied to the value before it is displayed. 
+
+Takes the form "{0:format}" where "format" can be a:
+
+* [standard number format](/globalization/intl/numberformatting#default-number-formats)
+* [custom number format](/globalization/intl/numberformatting#custom-number-formats)
+* [standard date format](/globalization/intl/dateformatting#default-date-formats)
+* [custom date format](/globalization/intl/dateformatting#custom-date-formats)
 
 > The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
 

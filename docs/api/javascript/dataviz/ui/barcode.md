@@ -187,6 +187,20 @@ The color of the text. Any valid CSS color string will work here, including hex 
 
 The font of the text.
 
+#### Example - set the font of the text
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        color: "red",
+        font: "20px sans-serif"
+      }
+    });
+    </script>
+
 ### text.margin `Object`
 
 The margin of the text
@@ -210,17 +224,77 @@ The margin of the text
 
 The bottom margin of the text.
 
+#### Example - apply a bottom margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	bottom: 20
+      	}
+      }
+    });
+    </script>
+
 ### text.margin.left `Number` *(default: 0)*
 
 The left margin of the text.
+
+#### Example - apply a left margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	left: 20
+      	}
+      }
+    });
+    </script>
 
 ### text.margin.right `Number` *(default: 0)*
 
 The right margin of the text.
 
+#### Example - apply a right margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	right: 20
+      	}
+      }
+    });
+    </script>
+
 ### text.margin.top `Number` *(default: 0)*
 
 The top margin of the text.
+
+#### Example - apply a top margin
+
+    <div id="barcode"></div>
+    <script>
+    $("#barcode").kendoBarcode({
+      value:"123456",
+      width: 300,
+      text:{
+        margin: {
+        	top: 20
+      	}
+      }
+    });
+    </script>
 
 ### text.visible `Boolean` *(default:true)*
 

@@ -7685,6 +7685,7 @@ declare namespace kendo.ui {
         template?: string|Function;
         cancel?(e: OrgChartCancelEvent): void;
         change?(e: OrgChartChangeEvent): void;
+        create?(e: OrgChartCreateEvent): void;
         collapse?(e: OrgChartCollapseEvent): void;
         dataBinding?(e: OrgChartDataBindingEvent): void;
         dataBound?(e: OrgChartDataBoundEvent): void;
