@@ -225,6 +225,8 @@ navigation:
         title: "Grid"
      "tag-helpers/data-management/pivotgrid":
         title: "PivotGrid"
+     "tag-helpers/data-management/pivotgridv2":
+        title: "PivotGridV2"
      "tag-helpers/data-management/taskboard":
         title: "TaskBoard"
      "tag-helpers/editors":
@@ -317,6 +319,14 @@ navigation:
         title: "Data Binding"
         position: 2
      "html-helpers/data-management/pivotgrid/export":
+        title: "Export"
+        position: 6
+     "html-helpers/data-management/pivotgridv2":
+        title: "PivotGridV2"
+     "html-helpers/data-management/pivotgridv2/data-binding":
+        title: "Data Binding"
+        position: 2
+     "html-helpers/data-management/pivotgridv2/export":
         title: "Export"
         position: 6
      "html-helpers/data-management/spreadsheet/import-and-export-data":
@@ -606,6 +616,8 @@ navigation:
         title: "PanelBar"
      "*pivotgrid":
         title: "PivotGrid"
+     "*pivotgridv2":
+        title: "PivotGridV2"
      "*scheduler":
         title: "Scheduler"
      "*scrollview":
@@ -754,6 +766,11 @@ defaults:
         path: "html-helpers/data-management/pivotgrid"
     values:
         title_prefix: "ASP.NET Core PivotGrid Component"
+-
+    scope:
+        path: "html-helpers/data-management/pivotgridv2"
+    values:
+        title_prefix: "ASP.NET Core PivotGridV2 Component"
 -
     scope:
         path: "html-helpers/data-management/spreadsheet"
@@ -1209,6 +1226,11 @@ defaults:
         path: "tag-helpers/data-management/pivotgrid"
     values:
         title_prefix: "ASP.NET Core PivotGrid Component"
+-
+    scope:
+        path: "tag-helpers/data-management/pivotgridv2"
+    values:
+        title_prefix: "ASP.NET Core PivotGridV2 Component"
 -
     scope:
         path: "tag-helpers/data-management/spreadsheet"

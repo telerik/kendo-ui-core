@@ -56,12 +56,6 @@ var defaultOptions = {
     colors: true,
     autoWatch: true,
     browsers: browsers,
-    customLaunchers: {
-        ChromiumTravis: {
-            base: 'ChromeHeadless',
-            flags: ['--no-sandbox']
-        }
-    },
     client: {
         mocha: {
             timeout: 10000
@@ -89,20 +83,6 @@ var flavours = {
             tests
         )
     },
-
-    travis: {
-        reporters: ['dots'],
-        singleRun: true,
-        browsers: [ 'ChromiumTravis' ],
-
-        files: [].concat(
-            TESTS.beforeTestFiles,
-            TESTS.ciFiles,
-            TESTS.afterTestFiles,
-            tests
-        )
-    },
-
     mocha: {
         files: [].concat(
             TESTS.beforeTestFiles,

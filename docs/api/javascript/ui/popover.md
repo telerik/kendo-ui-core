@@ -528,6 +528,26 @@ Specifies the offset (in pixels) between the Popover and the anchor. Тhe offset
 
 Contains the Kendo UI [`Popup`](/api/javascript/ui/popup) instance which manages the showing and hiding of the popovers at the appropriate position. The `popup` field can be used to apply custom CSS classes and styles, or any other attributes to the [`element` or `wrapper`](/intro/widget-basics/wrapper-element) settings of the Popup.
 
+The `Popup` instance is available only once the Popover is shown.
+
+#### Example - get the Popover Popup instance in the show event handler
+
+<span id="target">
+  Some content
+</span>
+
+<script>
+  $(document).ready(function() {
+    $("#target").kendoPopover({
+      template: "Content",
+      show: function(e) {
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(e.sender.popup)
+      }
+    });
+  });
+</script>
+
 ## Methods
 
 ### show

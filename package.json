@@ -89,7 +89,7 @@
   },
   "scripts": {
     "build": "npm install && gulp build",
-    "test": "gulp travis"
+    "test": "gulp karma-github"
   },
   "jshintConfig": {
     "es3": true,
