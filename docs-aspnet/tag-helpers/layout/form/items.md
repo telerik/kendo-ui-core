@@ -132,5 +132,5 @@ With the `Editor` option, you can explicitly configure an editor to be used for 
 
 ## See Also
 
-* [Items Demo of the Form TagHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/taghelper)
+* [Items Demo of the Form TagHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/tag-helper)
 * [Server-Side API](/api/form)

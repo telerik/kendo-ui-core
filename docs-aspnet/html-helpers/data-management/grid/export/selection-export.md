@@ -10,7 +10,7 @@ position: 6
 
 The Grid widget allows users to select specific cells and then to export them to Excel or a Telerik UI Chart for {{ site.framework }} .
 
-For runnable example, refer to the [Demo on copying/exporting selected cells](https://demos.telerik.com/{{ site.platform }}/grid/advanced-export)
+For runnable example, refer to the [Demo on copying/exporting selected cells](https://demos.telerik.com/{{ site.platform }}/grid/selection-export)
 
 ## Getting Started
 

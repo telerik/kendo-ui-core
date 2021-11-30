@@ -34,6 +34,6 @@ The following example demonstrates how to use the `TemplateId()` configuration:
 ```
 
 ## See Also
-* [Templates in the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/templates)
+* [Templates in the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/templates)
 * [Kendo UI Templates](https://docs.telerik.com/kendo-ui/framework/templates/overview)
 * [PanelBar Server-Side API](/api/panelbar)

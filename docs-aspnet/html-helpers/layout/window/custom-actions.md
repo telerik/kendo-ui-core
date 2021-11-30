@@ -39,6 +39,6 @@ The Window then renders `k-icon` and `k-i-actionname` CSS classes for the action
 
 ## See Also
 
-* [Implementing Custom Actions in the Window (Demo)](https://demos.telerik.com/{{ site.framework }}/window/actions)
+* [Implementing Custom Actions in the Window (Demo)](https://demos.telerik.com/{{ site.platform }}/window/actions)
 * [Server-Side API of the Telerik UI Window HtmlHelper for {{ site.framework }}](/api/window)
 * [JavaScript API Reference of the Window](/api/javascript/ui/window)

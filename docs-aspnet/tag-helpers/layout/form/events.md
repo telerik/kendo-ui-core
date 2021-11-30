@@ -59,5 +59,5 @@ The following example shows a Form configured to handle its `validate`, `submit`
 
 ## See Also
 
-* [Groups Demo of the Form HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/taghelper)
+* [Groups Demo of the Form HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/groups)
 * [Server-Side API](/api/form)

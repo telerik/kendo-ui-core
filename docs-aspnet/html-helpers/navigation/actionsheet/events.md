@@ -68,5 +68,5 @@ The following example demonstrates how you can subscribe to the `close` event of
 
 ## See Also
 
-* [Overview of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/overview)
+* [Overview of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet)
 * [Server-Side API](/api/actionsheet)

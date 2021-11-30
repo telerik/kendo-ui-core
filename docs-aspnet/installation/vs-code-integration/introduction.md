@@ -96,6 +96,6 @@ If the extension does not work right (missing pages, does not start, etc.), you 
 2. Go to the extensions templates cache folder and delete the `CoreT` folder - this is where cache for the Telerik extensions are kept:
     * on Windows, open `%localappdata%` 
     * on Mac, open `/Users/[user_name]/.local/share/`
-3. [Install](https://marketplace.visualstudio.com/items?itemName=aspnetcoretemplatewizard) the extension again.
+3. [Install](https://marketplace.visualstudio.com/items?itemName=TelerikInc.aspnetcoretemplatewizard) the extension again.
 
 If you see `Response status code does not indicate success: 401 (Logon failed.).`, then the Nuget.Config file in `%APPDATA%\NuGet` may contain invalid credentials or keys. For more information check the [Nuget Install article]({% slug nuget_install_aspnetmvc6_aspnetmvc %}#setup-with-nuget-cli) or [Nuget Setup with CLI article]({% slug gettingstartedcli_aspnetmvc6_aspnetmvc %}#integrating-ui-for-aspnet-core)

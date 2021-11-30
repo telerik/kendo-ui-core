@@ -688,6 +688,29 @@ Fires when a sub menu or the ContextMenu gets closed and its animation finished.
 
 Fires when a menu item gets selected. [ContextMenu Events](/api/javascript/ui/contextmenu#events).
 
+#### Example
+
+    <div id="fileManager"></div>
+    <script>
+        var baseUrl = "https://demos.telerik.com/kendo-ui/service/filemanager/";
+
+        $("#fileManager").kendoFileManager({
+            contextMenu: {
+                select: function(e){
+                    console.log('Selected item: ' + $(e.item).text())
+                }
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        type: "post",
+                        url: baseUrl + "Read"
+                    }
+                }
+            }
+        });
+    </script>
+
 ### views `Object`
 
 Configures every view registered for the FileManager.

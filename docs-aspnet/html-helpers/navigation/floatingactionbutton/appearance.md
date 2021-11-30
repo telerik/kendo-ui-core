@@ -43,6 +43,6 @@ The `Icon` configuration option specifies the name of an icon. The selected icon
 ```
 ## See Also
 
-* [Basic Usage of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/basic-usage)
+* [Basic Usage of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/basic-usage)
 * [Using the API of the FloatingActionButton HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
 * [Server-Side API](/api/floatingactionbutton)

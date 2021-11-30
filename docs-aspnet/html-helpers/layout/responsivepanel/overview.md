@@ -14,7 +14,7 @@ The Telerik UI Responsive Panel HtmlHelper for {{ site.framework }} is a server-
 The Responsive Panel allows you to hide part of a page content on small screens. The Component collapses a content element when a `breakpoint` is reached. The collapsed content is then expanded by a button with the `k-rpanel-toggle` class. To set the placement of the expandable content, use the `orientation` option.
 
 
-* [Demo page for the Responsive Panel](https://demos.telerik.com/{{ site.platform }}/responsivepanel/index)
+* [Demo page for the Responsive Panel](https://demos.telerik.com/{{ site.platform }}/responsive-panel)
 
 ## Initializing the Responsive Panel
 

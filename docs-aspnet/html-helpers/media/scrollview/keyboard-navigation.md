@@ -11,7 +11,7 @@ position: 2
 
 The keyboard navigation of the ScrollView is always available.
 
-To enable it, use the `Navigatable(true)` configuration. For a complete example, refer to the [demo on using the keyboard navigation of the ScrollView](https://demos.telerik.com/{{ site.platform }}/scrollview/keyboard).
+To enable it, use the `Navigatable(true)` configuration. For a complete example, refer to the [demo on using the keyboard navigation of the ScrollView](https://demos.telerik.com/{{ site.platform }}/scrollview/keyboard-navigation).
 
 The ScrollView supports the following keyboard shortcuts:
 
@@ -73,5 +73,5 @@ The ScrollView supports the following keyboard shortcuts:
 
 ## See Also
 
-* [Keyboard Navigation by the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/keyboard)
+* [Keyboard Navigation by the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/keyboard-navigation)
 * [Accessibility in {{ site.product }}]({% slug overview_accessibility %})

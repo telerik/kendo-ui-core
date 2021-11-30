@@ -46,5 +46,5 @@ The following example demonstrates the possible options for the `Items` configur
 
 ## See Also
 
-* [Overview of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/overview)
+* [Overview of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet)
 * [Server-Side API](/api/actionsheet)

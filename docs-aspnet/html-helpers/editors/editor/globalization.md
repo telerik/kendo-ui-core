@@ -31,5 +31,5 @@ The globalization functionality of the Editor is enabled through:
 
 ## See Also
 
-* [Globalization in the Editor HtmlHelper for ASP.NET {{site.framework}} (Demo)](https://demos.telerik.com/{{ site.framework }}/editor/globalization)
+* [Globalization in the Editor HtmlHelper for ASP.NET {{site.framework}} (Demo)](https://demos.telerik.com/{{ site.platform }}/editor/globalization)
 * [Editor Server-Side API](/api/editor)

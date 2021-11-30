@@ -14,7 +14,7 @@ The Telerik UI Responsive Panel TagHelper for {{ site.framework }} is a server-s
 The Responsive Panel allows you to hide part of a page content on small screens. The Component collapses a content element when a `breakpoint` is reached. The collapsed content is then expanded by a button with the `k-rpanel-toggle` class. To set the placement of the expandable content, use the 
 `orientation` option.
 
-* [Demo page for the Responsive Panel](https://demos.telerik.com/aspnet-core/responsivepanel/tag-helper)
+* [Demo page for the Responsive Panel](https://demos.telerik.com/aspnet-core/responsive-panel/tag-helper)
 
 ## Initializing the Responsive Panel
 
@@ -129,5 +129,5 @@ The configuration options of the ResponsivePanel TagHelper are passed as attribu
 
 ## See Also
 
-* [The Responsive Panel Tag Helper for {{ site.framework }} Demo](https://demos.telerik.com/aspnet-core/responsivepanel/tag-helper)
+* [The Responsive Panel Tag Helper for {{ site.framework }} Demo](https://demos.telerik.com/aspnet-core/responsive-panel/tag-helper)
 [The Responsive Panel Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/responsivepanel)

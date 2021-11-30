@@ -13,15 +13,18 @@ The recommended approach to include Kendo UI is by using the NPM package.
 
 As of the Kendo UI 2016 Q2 SP1 release, both Kendo UI Core and Kendo UI Professional are distributed in an NPM format. For more details, refer to [the installation instructions]({% slug kendoui_npm_packages_kendoui_installation %}).
 
+The Kendo UI Core NPM package is available as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/) and is accessible without credentials. 
+The Kendo UI NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry.
+
 > * The typescript step is optional&mdash;the NPM package might be consumed from vanilla JavaScript or with the Babel transpiler.
 > * The Kendo UI [TypeScript typings are global](https://github.com/typings/typings/blob/master/docs/faq.md#what-are-global-dependencies). This means that TypeScript will complain if you try to import the `kendo` object. Use the global reference instead.
 
 ```typescript
 // This won't work
-import kendo from '@progress/kendo-ui-core';
+import kendo from 'kendo-ui-core';
 
 // This works
-import '@progress/kendo-ui-core';
+import 'kendo-ui-core'; //or import '@progress/kendo-ui' to install the Kendo UI package
 
 console.log(kendo);
 ```

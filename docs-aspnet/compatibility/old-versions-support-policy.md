@@ -46,4 +46,4 @@ For earlier versions, you can get suggestions on how to implement certain scenar
 
 ## See Also
 
-* [License Agreement](https://www.telerik.com/purchase/license-agreement/aspnet-core)
+* [License Agreement](https://www.telerik.com/purchase/license-agreement/kendo-ui)

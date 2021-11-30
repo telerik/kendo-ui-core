@@ -174,7 +174,7 @@ For further details refer to [the official Microsoft documentation](https://docs
 
 # ASP.NET Core SignalR configuration 
 
-There are several major diferences when configuring ASP.NET Core SignalR compared to ASP.NET SignalR.  See the implementation details in the example below and for a complete example navigate to our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.MVC) with code examples.
+There are several major diferences when configuring ASP.NET Core SignalR compared to ASP.NET SignalR.  See the implementation details in the example below and for a complete example navigate to our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.Mvc) with code examples.
 
 The steps below outline what you need to do to configure the Scheduler HtmlHelper for {{ site.framework }} when using ASP.NET Core SignalR.
 * ASP.NET Core SignalR is an ASP.NET Core middleware. Therefore, on the server, you will need to add it in the ConfigureServices method and also map routes to hubs:

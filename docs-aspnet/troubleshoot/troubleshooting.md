@@ -450,7 +450,7 @@ If a widget does not show the updated data on a page visit, the most common reas
 
 Choose either of the options to overcome this behavior:
 
-* Force the `check for newer versions of stored pages` [(link)](https://support.microsoft.com/en-us/kb/263070).
+* Force the `check for newer versions of stored pages` [(link)](https://docs.telerik.com/aspnet-mvc/getting-started/helper-basics/fundamentals#using-css-bundling).
 * Disable caching using HTTP headers.
 
         [OutputCache(Duration=0,NoStore=true,VaryByParam="None")]

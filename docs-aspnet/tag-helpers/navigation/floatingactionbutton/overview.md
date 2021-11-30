@@ -14,7 +14,7 @@ The FloatingActionButton is a UI component that is tied to the most logical acti
 
 The FloatingActionButton floats in the application above other items, and its main action directly corresponds to the content on the screen. Apart from being a single button with a single action, the FloatingActionButton can also be configured to display additional related actions or speed dial actions.
 
-* [Demo page for the FloatingActionButton](https://demos.telerik.com/aspnet-core/floatingactionbutton/tag-helper)
+* [Demo page for the FloatingActionButton](https://demos.telerik.com/aspnet-core/floatingactionbutton/taghelper)
 
 ## Basic Configuration
 
@@ -86,4 +86,4 @@ You can subscribe to all FloatingActionButton events.
 
 ## See Also
 
-* [Basic Usage of the FloatingActionButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/floatingactionbutton/tag-helper)
+* [Basic Usage of the FloatingActionButton TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/floatingactionbutton/taghelper)

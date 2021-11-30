@@ -25045,187 +25045,187 @@ interface JQuery {
 
     kendoActionSheet(): JQuery;
     kendoActionSheet(options: kendo.ui.ActionSheetOptions): JQuery;
-    data(key: "kendoActionSheet"): kendo.ui.ActionSheet;
+    data(key: "kendoActionSheet"): kendo.ui.ActionSheet | undefined;
 
     kendoAlert(): JQuery;
     kendoAlert(options: kendo.ui.AlertOptions): JQuery;
-    data(key: "kendoAlert"): kendo.ui.Alert;
+    data(key: "kendoAlert"): kendo.ui.Alert | undefined;
 
     kendoAppBar(): JQuery;
     kendoAppBar(options: kendo.ui.AppBarOptions): JQuery;
-    data(key: "kendoAppBar"): kendo.ui.AppBar;
+    data(key: "kendoAppBar"): kendo.ui.AppBar | undefined;
 
     kendoArcGauge(): JQuery;
     kendoArcGauge(options: kendo.dataviz.ui.ArcGaugeOptions): JQuery;
-    data(key: "kendoArcGauge"): kendo.dataviz.ui.ArcGauge;
+    data(key: "kendoArcGauge"): kendo.dataviz.ui.ArcGauge | undefined;
 
     kendoAutoComplete(): JQuery;
     kendoAutoComplete(options: kendo.ui.AutoCompleteOptions): JQuery;
-    data(key: "kendoAutoComplete"): kendo.ui.AutoComplete;
+    data(key: "kendoAutoComplete"): kendo.ui.AutoComplete | undefined;
 
     kendoBadge(): JQuery;
     kendoBadge(options: kendo.ui.BadgeOptions): JQuery;
-    data(key: "kendoBadge"): kendo.ui.Badge;
+    data(key: "kendoBadge"): kendo.ui.Badge | undefined;
 
     kendoBarcode(): JQuery;
     kendoBarcode(options: kendo.dataviz.ui.BarcodeOptions): JQuery;
-    data(key: "kendoBarcode"): kendo.dataviz.ui.Barcode;
+    data(key: "kendoBarcode"): kendo.dataviz.ui.Barcode | undefined;
 
     kendoBottomNavigation(): JQuery;
     kendoBottomNavigation(options: kendo.ui.BottomNavigationOptions): JQuery;
-    data(key: "kendoBottomNavigation"): kendo.ui.BottomNavigation;
+    data(key: "kendoBottomNavigation"): kendo.ui.BottomNavigation | undefined;
 
     kendoButton(): JQuery;
     kendoButton(options: kendo.ui.ButtonOptions): JQuery;
-    data(key: "kendoButton"): kendo.ui.Button;
+    data(key: "kendoButton"): kendo.ui.Button | undefined;
 
     kendoButtonGroup(): JQuery;
     kendoButtonGroup(options: kendo.ui.ButtonGroupOptions): JQuery;
-    data(key: "kendoButtonGroup"): kendo.ui.ButtonGroup;
+    data(key: "kendoButtonGroup"): kendo.ui.ButtonGroup | undefined;
 
     kendoCalendar(): JQuery;
     kendoCalendar(options: kendo.ui.CalendarOptions): JQuery;
-    data(key: "kendoCalendar"): kendo.ui.Calendar;
+    data(key: "kendoCalendar"): kendo.ui.Calendar | undefined;
 
     kendoCaptcha(): JQuery;
     kendoCaptcha(options: kendo.ui.CaptchaOptions): JQuery;
-    data(key: "kendoCaptcha"): kendo.ui.Captcha;
+    data(key: "kendoCaptcha"): kendo.ui.Captcha | undefined;
 
     kendoChart(): JQuery;
     kendoChart(options: kendo.dataviz.ui.ChartOptions): JQuery;
-    data(key: "kendoChart"): kendo.dataviz.ui.Chart;
+    data(key: "kendoChart"): kendo.dataviz.ui.Chart | undefined;
 
     kendoChat(): JQuery;
     kendoChat(options: kendo.ui.ChatOptions): JQuery;
-    data(key: "kendoChat"): kendo.ui.Chat;
+    data(key: "kendoChat"): kendo.ui.Chat | undefined;
 
     kendoCheckBoxGroup(): JQuery;
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
-    data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup;
+    data(key: "kendoCheckBoxGroup"): kendo.ui.CheckBoxGroup | undefined;
 
     kendoCircularGauge(): JQuery;
     kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
-    data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge;
+    data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge | undefined;
 
     kendoColorGradient(): JQuery;
     kendoColorGradient(options: kendo.ui.ColorGradientOptions): JQuery;
-    data(key: "kendoColorGradient"): kendo.ui.ColorGradient;
+    data(key: "kendoColorGradient"): kendo.ui.ColorGradient | undefined;
 
     kendoColorPalette(): JQuery;
     kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery;
-    data(key: "kendoColorPalette"): kendo.ui.ColorPalette;
+    data(key: "kendoColorPalette"): kendo.ui.ColorPalette | undefined;
 
     kendoColorPicker(): JQuery;
     kendoColorPicker(options: kendo.ui.ColorPickerOptions): JQuery;
-    data(key: "kendoColorPicker"): kendo.ui.ColorPicker;
+    data(key: "kendoColorPicker"): kendo.ui.ColorPicker | undefined;
 
     kendoComboBox(): JQuery;
     kendoComboBox(options: kendo.ui.ComboBoxOptions): JQuery;
-    data(key: "kendoComboBox"): kendo.ui.ComboBox;
+    data(key: "kendoComboBox"): kendo.ui.ComboBox | undefined;
 
     kendoConfirm(): JQuery;
     kendoConfirm(options: kendo.ui.ConfirmOptions): JQuery;
-    data(key: "kendoConfirm"): kendo.ui.Confirm;
+    data(key: "kendoConfirm"): kendo.ui.Confirm | undefined;
 
     kendoContextMenu(): JQuery;
     kendoContextMenu(options: kendo.ui.ContextMenuOptions): JQuery;
-    data(key: "kendoContextMenu"): kendo.ui.ContextMenu;
+    data(key: "kendoContextMenu"): kendo.ui.ContextMenu | undefined;
 
     kendoDateInput(): JQuery;
     kendoDateInput(options: kendo.ui.DateInputOptions): JQuery;
-    data(key: "kendoDateInput"): kendo.ui.DateInput;
+    data(key: "kendoDateInput"): kendo.ui.DateInput | undefined;
 
     kendoDatePicker(): JQuery;
     kendoDatePicker(options: kendo.ui.DatePickerOptions): JQuery;
-    data(key: "kendoDatePicker"): kendo.ui.DatePicker;
+    data(key: "kendoDatePicker"): kendo.ui.DatePicker | undefined;
 
     kendoDateRangePicker(): JQuery;
     kendoDateRangePicker(options: kendo.ui.DateRangePickerOptions): JQuery;
-    data(key: "kendoDateRangePicker"): kendo.ui.DateRangePicker;
+    data(key: "kendoDateRangePicker"): kendo.ui.DateRangePicker | undefined;
 
     kendoDateTimePicker(): JQuery;
     kendoDateTimePicker(options: kendo.ui.DateTimePickerOptions): JQuery;
-    data(key: "kendoDateTimePicker"): kendo.ui.DateTimePicker;
+    data(key: "kendoDateTimePicker"): kendo.ui.DateTimePicker | undefined;
 
     kendoDiagram(): JQuery;
     kendoDiagram(options: kendo.dataviz.ui.DiagramOptions): JQuery;
-    data(key: "kendoDiagram"): kendo.dataviz.ui.Diagram;
+    data(key: "kendoDiagram"): kendo.dataviz.ui.Diagram | undefined;
 
     kendoDialog(): JQuery;
     kendoDialog(options: kendo.ui.DialogOptions): JQuery;
-    data(key: "kendoDialog"): kendo.ui.Dialog;
+    data(key: "kendoDialog"): kendo.ui.Dialog | undefined;
 
     kendoDrawer(): JQuery;
     kendoDrawer(options: kendo.ui.DrawerOptions): JQuery;
-    data(key: "kendoDrawer"): kendo.ui.Drawer;
+    data(key: "kendoDrawer"): kendo.ui.Drawer | undefined;
 
     kendoDraggable(): JQuery;
     kendoDraggable(options: kendo.ui.DraggableOptions): JQuery;
-    data(key: "kendoDraggable"): kendo.ui.Draggable;
+    data(key: "kendoDraggable"): kendo.ui.Draggable | undefined;
 
     kendoDropDownList(): JQuery;
     kendoDropDownList(options: kendo.ui.DropDownListOptions): JQuery;
-    data(key: "kendoDropDownList"): kendo.ui.DropDownList;
+    data(key: "kendoDropDownList"): kendo.ui.DropDownList | undefined;
 
     kendoDropDownTree(): JQuery;
     kendoDropDownTree(options: kendo.ui.DropDownTreeOptions): JQuery;
-    data(key: "kendoDropDownTree"): kendo.ui.DropDownTree;
+    data(key: "kendoDropDownTree"): kendo.ui.DropDownTree | undefined;
 
     kendoDropTarget(): JQuery;
     kendoDropTarget(options: kendo.ui.DropTargetOptions): JQuery;
-    data(key: "kendoDropTarget"): kendo.ui.DropTarget;
+    data(key: "kendoDropTarget"): kendo.ui.DropTarget | undefined;
 
     kendoDropTargetArea(): JQuery;
     kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
-    data(key: "kendoDropTargetArea"): kendo.ui.DropTargetArea;
+    data(key: "kendoDropTargetArea"): kendo.ui.DropTargetArea | undefined;
 
     kendoEditor(): JQuery;
     kendoEditor(options: kendo.ui.EditorOptions): JQuery;
-    data(key: "kendoEditor"): kendo.ui.Editor;
+    data(key: "kendoEditor"): kendo.ui.Editor | undefined;
 
     kendoExpansionPanel(): JQuery;
     kendoExpansionPanel(options: kendo.ui.ExpansionPanelOptions): JQuery;
-    data(key: "kendoExpansionPanel"): kendo.ui.ExpansionPanel;
+    data(key: "kendoExpansionPanel"): kendo.ui.ExpansionPanel | undefined;
 
     kendoFilter(): JQuery;
     kendoFilter(options: kendo.ui.FilterOptions): JQuery;
-    data(key: "kendoFilter"): kendo.ui.Filter;
+    data(key: "kendoFilter"): kendo.ui.Filter | undefined;
 
     kendoFilterMenu(): JQuery;
     kendoFilterMenu(options: kendo.ui.FilterMenuOptions): JQuery;
-    data(key: "kendoFilterMenu"): kendo.ui.FilterMenu;
+    data(key: "kendoFilterMenu"): kendo.ui.FilterMenu | undefined;
 
     kendoFlatColorPicker(): JQuery;
     kendoFlatColorPicker(options: kendo.ui.FlatColorPickerOptions): JQuery;
-    data(key: "kendoFlatColorPicker"): kendo.ui.FlatColorPicker;
+    data(key: "kendoFlatColorPicker"): kendo.ui.FlatColorPicker | undefined;
 
     kendoFloatingActionButton(): JQuery;
     kendoFloatingActionButton(options: kendo.ui.FloatingActionButtonOptions): JQuery;
-    data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton;
+    data(key: "kendoFloatingActionButton"): kendo.ui.FloatingActionButton | undefined;
 
     kendoForm(): JQuery;
     kendoForm(options: kendo.ui.FormOptions): JQuery;
-    data(key: "kendoForm"): kendo.ui.Form;
+    data(key: "kendoForm"): kendo.ui.Form | undefined;
 
     kendoGantt(): JQuery;
     kendoGantt(options: kendo.ui.GanttOptions): JQuery;
-    data(key: "kendoGantt"): kendo.ui.Gantt;
+    data(key: "kendoGantt"): kendo.ui.Gantt | undefined;
 
     kendoGrid(): JQuery;
     kendoGrid(options: kendo.ui.GridOptions): JQuery;
-    data(key: "kendoGrid"): kendo.ui.Grid;
+    data(key: "kendoGrid"): kendo.ui.Grid | undefined;
 
     kendoImageEditor(): JQuery;
     kendoImageEditor(options: kendo.ui.ImageEditorOptions): JQuery;
-    data(key: "kendoImageEditor"): kendo.ui.ImageEditor;
+    data(key: "kendoImageEditor"): kendo.ui.ImageEditor | undefined;
 
     kendoLinearGauge(): JQuery;
     kendoLinearGauge(options: kendo.dataviz.ui.LinearGaugeOptions): JQuery;
-    data(key: "kendoLinearGauge"): kendo.dataviz.ui.LinearGauge;
+    data(key: "kendoLinearGauge"): kendo.dataviz.ui.LinearGauge | undefined;
 
     kendoListBox(): JQuery;
     kendoListBox(options: kendo.ui.ListBoxOptions): JQuery;
-    data(key: "kendoListBox"): kendo.ui.ListBox;
+    data(key: "kendoListBox"): kendo.ui.ListBox | undefined;
 
     kendoListView(): JQuery;
     kendoListView(options: kendo.ui.ListViewOptions): JQuery;
@@ -25233,123 +25233,123 @@ interface JQuery {
 
     kendoLoader(): JQuery;
     kendoLoader(options: kendo.ui.LoaderOptions): JQuery;
-    data(key: "kendoLoader"): kendo.ui.Loader;
+    data(key: "kendoLoader"): kendo.ui.Loader | undefined;
 
     kendoMap(): JQuery;
     kendoMap(options: kendo.dataviz.ui.MapOptions): JQuery;
-    data(key: "kendoMap"): kendo.dataviz.ui.Map;
+    data(key: "kendoMap"): kendo.dataviz.ui.Map | undefined;
 
     kendoMaskedTextBox(): JQuery;
     kendoMaskedTextBox(options: kendo.ui.MaskedTextBoxOptions): JQuery;
-    data(key: "kendoMaskedTextBox"): kendo.ui.MaskedTextBox;
+    data(key: "kendoMaskedTextBox"): kendo.ui.MaskedTextBox | undefined;
 
     kendoMediaPlayer(): JQuery;
     kendoMediaPlayer(options: kendo.ui.MediaPlayerOptions): JQuery;
-    data(key: "kendoMediaPlayer"): kendo.ui.MediaPlayer;
+    data(key: "kendoMediaPlayer"): kendo.ui.MediaPlayer | undefined;
 
     kendoMenu(): JQuery;
     kendoMenu(options: kendo.ui.MenuOptions): JQuery;
-    data(key: "kendoMenu"): kendo.ui.Menu;
+    data(key: "kendoMenu"): kendo.ui.Menu | undefined;
 
     kendoMobileActionSheet(): JQuery;
     kendoMobileActionSheet(options: kendo.mobile.ui.ActionSheetOptions): JQuery;
-    data(key: "kendoMobileActionSheet"): kendo.mobile.ui.ActionSheet;
+    data(key: "kendoMobileActionSheet"): kendo.mobile.ui.ActionSheet | undefined;
 
     kendoMobileBackButton(): JQuery;
     kendoMobileBackButton(options: kendo.mobile.ui.BackButtonOptions): JQuery;
-    data(key: "kendoMobileBackButton"): kendo.mobile.ui.BackButton;
+    data(key: "kendoMobileBackButton"): kendo.mobile.ui.BackButton | undefined;
 
     kendoMobileButton(): JQuery;
     kendoMobileButton(options: kendo.mobile.ui.ButtonOptions): JQuery;
-    data(key: "kendoMobileButton"): kendo.mobile.ui.Button;
+    data(key: "kendoMobileButton"): kendo.mobile.ui.Button | undefined;
 
     kendoMobileButtonGroup(): JQuery;
     kendoMobileButtonGroup(options: kendo.mobile.ui.ButtonGroupOptions): JQuery;
-    data(key: "kendoMobileButtonGroup"): kendo.mobile.ui.ButtonGroup;
+    data(key: "kendoMobileButtonGroup"): kendo.mobile.ui.ButtonGroup | undefined;
 
     kendoMobileCollapsible(): JQuery;
     kendoMobileCollapsible(options: kendo.mobile.ui.CollapsibleOptions): JQuery;
-    data(key: "kendoMobileCollapsible"): kendo.mobile.ui.Collapsible;
+    data(key: "kendoMobileCollapsible"): kendo.mobile.ui.Collapsible | undefined;
 
     kendoMobileDetailButton(): JQuery;
     kendoMobileDetailButton(options: kendo.mobile.ui.DetailButtonOptions): JQuery;
-    data(key: "kendoMobileDetailButton"): kendo.mobile.ui.DetailButton;
+    data(key: "kendoMobileDetailButton"): kendo.mobile.ui.DetailButton | undefined;
 
     kendoMobileDrawer(): JQuery;
     kendoMobileDrawer(options: kendo.mobile.ui.DrawerOptions): JQuery;
-    data(key: "kendoMobileDrawer"): kendo.mobile.ui.Drawer;
+    data(key: "kendoMobileDrawer"): kendo.mobile.ui.Drawer | undefined;
 
     kendoMobileLayout(): JQuery;
     kendoMobileLayout(options: kendo.mobile.ui.LayoutOptions): JQuery;
-    data(key: "kendoMobileLayout"): kendo.mobile.ui.Layout;
+    data(key: "kendoMobileLayout"): kendo.mobile.ui.Layout | undefined;
 
     kendoMobileListView(): JQuery;
     kendoMobileListView(options: kendo.mobile.ui.ListViewOptions): JQuery;
-    data(key: "kendoMobileListView"): kendo.mobile.ui.ListView;
+    data(key: "kendoMobileListView"): kendo.mobile.ui.ListView | undefined;
 
     kendoMobileLoader(): JQuery;
     kendoMobileLoader(options: kendo.mobile.ui.LoaderOptions): JQuery;
-    data(key: "kendoMobileLoader"): kendo.mobile.ui.Loader;
+    data(key: "kendoMobileLoader"): kendo.mobile.ui.Loader | undefined;
 
     kendoMobileModalView(): JQuery;
     kendoMobileModalView(options: kendo.mobile.ui.ModalViewOptions): JQuery;
-    data(key: "kendoMobileModalView"): kendo.mobile.ui.ModalView;
+    data(key: "kendoMobileModalView"): kendo.mobile.ui.ModalView | undefined;
 
     kendoMobileNavBar(): JQuery;
     kendoMobileNavBar(options: kendo.mobile.ui.NavBarOptions): JQuery;
-    data(key: "kendoMobileNavBar"): kendo.mobile.ui.NavBar;
+    data(key: "kendoMobileNavBar"): kendo.mobile.ui.NavBar | undefined;
 
     kendoMobilePane(): JQuery;
     kendoMobilePane(options: kendo.mobile.ui.PaneOptions): JQuery;
-    data(key: "kendoMobilePane"): kendo.mobile.ui.Pane;
+    data(key: "kendoMobilePane"): kendo.mobile.ui.Pane | undefined;
 
     kendoMobilePopOver(): JQuery;
     kendoMobilePopOver(options: kendo.mobile.ui.PopOverOptions): JQuery;
-    data(key: "kendoMobilePopOver"): kendo.mobile.ui.PopOver;
+    data(key: "kendoMobilePopOver"): kendo.mobile.ui.PopOver | undefined;
 
     kendoMobileScrollView(): JQuery;
     kendoMobileScrollView(options: kendo.mobile.ui.ScrollViewOptions): JQuery;
-    data(key: "kendoMobileScrollView"): kendo.mobile.ui.ScrollView;
+    data(key: "kendoMobileScrollView"): kendo.mobile.ui.ScrollView | undefined;
 
     kendoMobileScroller(): JQuery;
     kendoMobileScroller(options: kendo.mobile.ui.ScrollerOptions): JQuery;
-    data(key: "kendoMobileScroller"): kendo.mobile.ui.Scroller;
+    data(key: "kendoMobileScroller"): kendo.mobile.ui.Scroller | undefined;
 
     kendoMobileSplitView(): JQuery;
     kendoMobileSplitView(options: kendo.mobile.ui.SplitViewOptions): JQuery;
-    data(key: "kendoMobileSplitView"): kendo.mobile.ui.SplitView;
+    data(key: "kendoMobileSplitView"): kendo.mobile.ui.SplitView | undefined;
 
     kendoMobileSwitch(): JQuery;
     kendoMobileSwitch(options: kendo.mobile.ui.SwitchOptions): JQuery;
-    data(key: "kendoMobileSwitch"): kendo.mobile.ui.Switch;
+    data(key: "kendoMobileSwitch"): kendo.mobile.ui.Switch | undefined;
 
     kendoMobileTabStrip(): JQuery;
     kendoMobileTabStrip(options: kendo.mobile.ui.TabStripOptions): JQuery;
-    data(key: "kendoMobileTabStrip"): kendo.mobile.ui.TabStrip;
+    data(key: "kendoMobileTabStrip"): kendo.mobile.ui.TabStrip | undefined;
 
     kendoMobileView(): JQuery;
     kendoMobileView(options: kendo.mobile.ui.ViewOptions): JQuery;
-    data(key: "kendoMobileView"): kendo.mobile.ui.View;
+    data(key: "kendoMobileView"): kendo.mobile.ui.View | undefined;
 
     kendoMultiColumnComboBox(): JQuery;
     kendoMultiColumnComboBox(options: kendo.ui.MultiColumnComboBoxOptions): JQuery;
-    data(key: "kendoMultiColumnComboBox"): kendo.ui.MultiColumnComboBox;
+    data(key: "kendoMultiColumnComboBox"): kendo.ui.MultiColumnComboBox | undefined;
 
     kendoMultiSelect(): JQuery;
     kendoMultiSelect(options: kendo.ui.MultiSelectOptions): JQuery;
-    data(key: "kendoMultiSelect"): kendo.ui.MultiSelect;
+    data(key: "kendoMultiSelect"): kendo.ui.MultiSelect | undefined;
 
     kendoMultiViewCalendar(): JQuery;
     kendoMultiViewCalendar(options: kendo.ui.MultiViewCalendarOptions): JQuery;
-    data(key: "kendoMultiViewCalendar"): kendo.ui.MultiViewCalendar;
+    data(key: "kendoMultiViewCalendar"): kendo.ui.MultiViewCalendar | undefined;
 
     kendoNotification(): JQuery;
     kendoNotification(options: kendo.ui.NotificationOptions): JQuery;
-    data(key: "kendoNotification"): kendo.ui.Notification;
+    data(key: "kendoNotification"): kendo.ui.Notification | undefined;
 
     kendoNumericTextBox(): JQuery;
     kendoNumericTextBox(options: kendo.ui.NumericTextBoxOptions): JQuery;
-    data(key: "kendoNumericTextBox"): kendo.ui.NumericTextBox;
+    data(key: "kendoNumericTextBox"): kendo.ui.NumericTextBox | undefined;
 
     kendoOrgChart(): JQuery;
     kendoOrgChart(options: kendo.ui.OrgChartOptions): JQuery;
@@ -25357,186 +25357,186 @@ interface JQuery {
 
     kendoPDFViewer(): JQuery;
     kendoPDFViewer(options: kendo.ui.PDFViewerOptions): JQuery;
-    data(key: "kendoPDFViewer"): kendo.ui.PDFViewer;
+    data(key: "kendoPDFViewer"): kendo.ui.PDFViewer | undefined;
 
     kendoPager(): JQuery;
     kendoPager(options: kendo.ui.PagerOptions): JQuery;
-    data(key: "kendoPager"): kendo.ui.Pager;
+    data(key: "kendoPager"): kendo.ui.Pager | undefined;
 
     kendoPanelBar(): JQuery;
     kendoPanelBar(options: kendo.ui.PanelBarOptions): JQuery;
-    data(key: "kendoPanelBar"): kendo.ui.PanelBar;
+    data(key: "kendoPanelBar"): kendo.ui.PanelBar | undefined;
 
     kendoPivotConfigurator(): JQuery;
     kendoPivotConfigurator(options: kendo.ui.PivotConfiguratorOptions): JQuery;
-    data(key: "kendoPivotConfigurator"): kendo.ui.PivotConfigurator;
+    data(key: "kendoPivotConfigurator"): kendo.ui.PivotConfigurator | undefined;
 
     kendoPivotConfiguratorButton(): JQuery;
     kendoPivotConfiguratorButton(options: kendo.ui.PivotConfiguratorButtonOptions): JQuery;
-    data(key: "kendoPivotConfiguratorButton"): kendo.ui.PivotConfiguratorButton;
+    data(key: "kendoPivotConfiguratorButton"): kendo.ui.PivotConfiguratorButton | undefined;
 
     kendoPivotConfiguratorV2(): JQuery;
     kendoPivotConfiguratorV2(options: kendo.ui.PivotConfiguratorV2Options): JQuery;
-    data(key: "kendoPivotConfiguratorV2"): kendo.ui.PivotConfiguratorV2;
+    data(key: "kendoPivotConfiguratorV2"): kendo.ui.PivotConfiguratorV2 | undefined;
 
     kendoPivotContainer(): JQuery;
     kendoPivotContainer(options: kendo.ui.PivotContainerOptions): JQuery;
-    data(key: "kendoPivotContainer"): kendo.ui.PivotContainer;
+    data(key: "kendoPivotContainer"): kendo.ui.PivotContainer | undefined;
 
     kendoPivotGrid(): JQuery;
     kendoPivotGrid(options: kendo.ui.PivotGridOptions): JQuery;
-    data(key: "kendoPivotGrid"): kendo.ui.PivotGrid;
+    data(key: "kendoPivotGrid"): kendo.ui.PivotGrid | undefined;
 
     kendoPivotGridV2(): JQuery;
     kendoPivotGridV2(options: kendo.ui.PivotGridV2Options): JQuery;
-    data(key: "kendoPivotGridV2"): kendo.ui.PivotGridV2;
+    data(key: "kendoPivotGridV2"): kendo.ui.PivotGridV2 | undefined;
 
     kendoPopover(): JQuery;
     kendoPopover(options: kendo.ui.PopoverOptions): JQuery;
-    data(key: "kendoPopover"): kendo.ui.Popover;
+    data(key: "kendoPopover"): kendo.ui.Popover | undefined;
 
     kendoPopup(): JQuery;
     kendoPopup(options: kendo.ui.PopupOptions): JQuery;
-    data(key: "kendoPopup"): kendo.ui.Popup;
+    data(key: "kendoPopup"): kendo.ui.Popup | undefined;
 
     kendoProgressBar(): JQuery;
     kendoProgressBar(options: kendo.ui.ProgressBarOptions): JQuery;
-    data(key: "kendoProgressBar"): kendo.ui.ProgressBar;
+    data(key: "kendoProgressBar"): kendo.ui.ProgressBar | undefined;
 
     kendoPrompt(): JQuery;
     kendoPrompt(options: kendo.ui.PromptOptions): JQuery;
-    data(key: "kendoPrompt"): kendo.ui.Prompt;
+    data(key: "kendoPrompt"): kendo.ui.Prompt | undefined;
 
     kendoQRCode(): JQuery;
     kendoQRCode(options: kendo.dataviz.ui.QRCodeOptions): JQuery;
-    data(key: "kendoQRCode"): kendo.dataviz.ui.QRCode;
+    data(key: "kendoQRCode"): kendo.dataviz.ui.QRCode | undefined;
 
     kendoRadialGauge(): JQuery;
     kendoRadialGauge(options: kendo.dataviz.ui.RadialGaugeOptions): JQuery;
-    data(key: "kendoRadialGauge"): kendo.dataviz.ui.RadialGauge;
+    data(key: "kendoRadialGauge"): kendo.dataviz.ui.RadialGauge | undefined;
 
     kendoRadioGroup(): JQuery;
     kendoRadioGroup(options: kendo.ui.RadioGroupOptions): JQuery;
-    data(key: "kendoRadioGroup"): kendo.ui.RadioGroup;
+    data(key: "kendoRadioGroup"): kendo.ui.RadioGroup | undefined;
 
     kendoRangeSlider(): JQuery;
     kendoRangeSlider(options: kendo.ui.RangeSliderOptions): JQuery;
-    data(key: "kendoRangeSlider"): kendo.ui.RangeSlider;
+    data(key: "kendoRangeSlider"): kendo.ui.RangeSlider | undefined;
 
     kendoRating(): JQuery;
     kendoRating(options: kendo.ui.RatingOptions): JQuery;
-    data(key: "kendoRating"): kendo.ui.Rating;
+    data(key: "kendoRating"): kendo.ui.Rating | undefined;
 
     kendoResponsivePanel(): JQuery;
     kendoResponsivePanel(options: kendo.ui.ResponsivePanelOptions): JQuery;
-    data(key: "kendoResponsivePanel"): kendo.ui.ResponsivePanel;
+    data(key: "kendoResponsivePanel"): kendo.ui.ResponsivePanel | undefined;
 
     kendoScheduler(): JQuery;
     kendoScheduler(options: kendo.ui.SchedulerOptions): JQuery;
-    data(key: "kendoScheduler"): kendo.ui.Scheduler;
+    data(key: "kendoScheduler"): kendo.ui.Scheduler | undefined;
 
     kendoScrollView(): JQuery;
     kendoScrollView(options: kendo.ui.ScrollViewOptions): JQuery;
-    data(key: "kendoScrollView"): kendo.ui.ScrollView;
+    data(key: "kendoScrollView"): kendo.ui.ScrollView | undefined;
 
     kendoSkeletonContainer(): JQuery;
     kendoSkeletonContainer(options: kendo.ui.SkeletonContainerOptions): JQuery;
-    data(key: "kendoSkeletonContainer"): kendo.ui.SkeletonContainer;
+    data(key: "kendoSkeletonContainer"): kendo.ui.SkeletonContainer | undefined;
 
     kendoSlider(): JQuery;
     kendoSlider(options: kendo.ui.SliderOptions): JQuery;
-    data(key: "kendoSlider"): kendo.ui.Slider;
+    data(key: "kendoSlider"): kendo.ui.Slider | undefined;
 
     kendoSortable(): JQuery;
     kendoSortable(options: kendo.ui.SortableOptions): JQuery;
-    data(key: "kendoSortable"): kendo.ui.Sortable;
+    data(key: "kendoSortable"): kendo.ui.Sortable | undefined;
 
     kendoSparkline(): JQuery;
     kendoSparkline(options: kendo.dataviz.ui.SparklineOptions): JQuery;
-    data(key: "kendoSparkline"): kendo.dataviz.ui.Sparkline;
+    data(key: "kendoSparkline"): kendo.dataviz.ui.Sparkline | undefined;
 
     kendoSplitter(): JQuery;
     kendoSplitter(options: kendo.ui.SplitterOptions): JQuery;
-    data(key: "kendoSplitter"): kendo.ui.Splitter;
+    data(key: "kendoSplitter"): kendo.ui.Splitter | undefined;
 
     kendoSpreadsheet(): JQuery;
     kendoSpreadsheet(options: kendo.ui.SpreadsheetOptions): JQuery;
-    data(key: "kendoSpreadsheet"): kendo.ui.Spreadsheet;
+    data(key: "kendoSpreadsheet"): kendo.ui.Spreadsheet | undefined;
 
     kendoStockChart(): JQuery;
     kendoStockChart(options: kendo.dataviz.ui.StockChartOptions): JQuery;
-    data(key: "kendoStockChart"): kendo.dataviz.ui.StockChart;
+    data(key: "kendoStockChart"): kendo.dataviz.ui.StockChart | undefined;
 
     kendoSwitch(): JQuery;
     kendoSwitch(options: kendo.ui.SwitchOptions): JQuery;
-    data(key: "kendoSwitch"): kendo.ui.Switch;
+    data(key: "kendoSwitch"): kendo.ui.Switch | undefined;
 
     kendoStepper(): JQuery;
     kendoStepper(options: kendo.ui.StepperOptions): JQuery;
-    data(key: "kendoStepper"): kendo.ui.Stepper;
+    data(key: "kendoStepper"): kendo.ui.Stepper | undefined;
 
     kendoTabStrip(): JQuery;
     kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery;
-    data(key: "kendoTabStrip"): kendo.ui.TabStrip;
+    data(key: "kendoTabStrip"): kendo.ui.TabStrip | undefined;
 
     kendoTextArea(): JQuery;
     kendoTextArea(options: kendo.ui.TextAreaOptions): JQuery;
-    data(key: "kendoTextArea"): kendo.ui.TextArea;
+    data(key: "kendoTextArea"): kendo.ui.TextArea | undefined;
 
     kendoTextBox(): JQuery;
     kendoTextBox(options: kendo.ui.TextBoxOptions): JQuery;
-    data(key: "kendoTextBox"): kendo.ui.TextBox;
+    data(key: "kendoTextBox"): kendo.ui.TextBox | undefined;
 
     kendoTileLayout(): JQuery;
     kendoTileLayout(options: kendo.ui.TileLayoutOptions): JQuery;
-    data(key: "kendoTileLayout"): kendo.ui.TileLayout;
+    data(key: "kendoTileLayout"): kendo.ui.TileLayout | undefined;
 
     kendoTimePicker(): JQuery;
     kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery;
-    data(key: "kendoTimePicker"): kendo.ui.TimePicker;
+    data(key: "kendoTimePicker"): kendo.ui.TimePicker | undefined;
 
     kendoTimeline(): JQuery;
     kendoTimeline(options: kendo.ui.TimelineOptions): JQuery;
-    data(key: "kendoTimeline"): kendo.ui.Timeline;
+    data(key: "kendoTimeline"): kendo.ui.Timeline | undefined;
 
     kendoToolBar(): JQuery;
     kendoToolBar(options: kendo.ui.ToolBarOptions): JQuery;
-    data(key: "kendoToolBar"): kendo.ui.ToolBar;
+    data(key: "kendoToolBar"): kendo.ui.ToolBar | undefined;
 
     kendoTooltip(): JQuery;
     kendoTooltip(options: kendo.ui.TooltipOptions): JQuery;
-    data(key: "kendoTooltip"): kendo.ui.Tooltip;
+    data(key: "kendoTooltip"): kendo.ui.Tooltip | undefined;
 
     kendoTouch(): JQuery;
     kendoTouch(options: kendo.ui.TouchOptions): JQuery;
-    data(key: "kendoTouch"): kendo.ui.Touch;
+    data(key: "kendoTouch"): kendo.ui.Touch | undefined;
 
     kendoTreeList(): JQuery;
     kendoTreeList(options: kendo.ui.TreeListOptions): JQuery;
-    data(key: "kendoTreeList"): kendo.ui.TreeList;
+    data(key: "kendoTreeList"): kendo.ui.TreeList | undefined;
 
     kendoTreeMap(): JQuery;
     kendoTreeMap(options: kendo.dataviz.ui.TreeMapOptions): JQuery;
-    data(key: "kendoTreeMap"): kendo.dataviz.ui.TreeMap;
+    data(key: "kendoTreeMap"): kendo.dataviz.ui.TreeMap | undefined;
 
     kendoTreeView(): JQuery;
     kendoTreeView(options: kendo.ui.TreeViewOptions): JQuery;
-    data(key: "kendoTreeView"): kendo.ui.TreeView;
+    data(key: "kendoTreeView"): kendo.ui.TreeView | undefined;
 
     kendoUpload(): JQuery;
     kendoUpload(options: kendo.ui.UploadOptions): JQuery;
-    data(key: "kendoUpload"): kendo.ui.Upload;
+    data(key: "kendoUpload"): kendo.ui.Upload | undefined;
 
     kendoValidator(): JQuery;
     kendoValidator(options: kendo.ui.ValidatorOptions): JQuery;
-    data(key: "kendoValidator"): kendo.ui.Validator;
+    data(key: "kendoValidator"): kendo.ui.Validator | undefined;
 
     kendoWindow(): JQuery;
     kendoWindow(options: kendo.ui.WindowOptions): JQuery;
-    data(key: "kendoWindow"): kendo.ui.Window;
+    data(key: "kendoWindow"): kendo.ui.Window | undefined;
 
     kendoWizard(): JQuery;
     kendoWizard(options: kendo.ui.WizardOptions): JQuery;
-    data(key: "kendoWizard"): kendo.ui.Wizard;
+    data(key: "kendoWizard"): kendo.ui.Wizard | undefined;
 
 }

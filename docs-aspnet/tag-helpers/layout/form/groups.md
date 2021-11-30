@@ -46,5 +46,5 @@ The following example shows a Form configured to display its editors in two grou
 
 ## See Also
 
-* [Groups Demo of the Form HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/taghelper)
+* [Groups Demo of the Form HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/tag-helper)
 * [Server-Side API](/api/form)

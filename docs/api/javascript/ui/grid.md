@@ -987,6 +987,8 @@ If set to `true` the column value will be HTML-encoded before it is displayed. I
 
 ### columns.exportable `Boolean|Object` *(default: true)*
 
+> If the column isn't visible, the `exportable` property must be set to `true` explicitly.
+
 If set to `false` the column will be excluded from the exported Excel/PDF files.
 
 Can be set to a JavaScript object which specifies whether the column should be exported per format.

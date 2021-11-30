@@ -321,7 +321,7 @@ Set badge icon after initialization.
     <script>
         var badge = $('#badge').kendoBadge({ icon: 'add' }).data('kendoBadge');
 
-        window.setTimeOut(function() {
+        window.setTimeout(function() {
             badge.color('cog');
         }, 1000);
     </script>
@@ -426,7 +426,7 @@ Sets or gets the theme color of the badge.
 
 ##### themeColor `String`
 
-See [`badge.options.themeColor`](/api/javascript/ui/badge/configuration/themeColor) for valid options.
+See [`badge.options.themeColor`](/api/javascript/ui/badge/configuration/themecolor) for valid options.
 
 #### Example
 
@@ -437,7 +437,7 @@ Set badge theme color after initialization.
     <script>
         var badge = $('#badge').kendoBadge({ themeColor: 'secondary' }).data('kendoBadge');
 
-        window.setTimeOut(function() {
+        window.setTimeout(function() {
             badge.themeColor('primary');
         }, 1000);
     </script>

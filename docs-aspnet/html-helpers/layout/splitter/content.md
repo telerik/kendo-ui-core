@@ -69,6 +69,6 @@ public IActionResult PaneContent()
 
 ## See Also
 
-* [Loading Content with AJAX in the Splitter (Demo)](https://demos.telerik.com/{{ site.framework }}/splitter/ajax)
+* [Loading Content with AJAX in the Splitter (Demo)](https://demos.telerik.com/{{ site.platform }}/splitter/ajax)
 * [Server-Side API](/api/splitter)
 * [JavaScript API Reference of the Splitter](/api/javascript/ui/splitter)

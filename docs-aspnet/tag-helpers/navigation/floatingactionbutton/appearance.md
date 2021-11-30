@@ -41,6 +41,6 @@ The `icon` configuration option specifies the name of an icon. The selected icon
 
 ## See Also
 
-* [Basic Usage of the FloatingActionButton TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/tag-helper)
+* [Basic Usage of the FloatingActionButton TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/taghelper)
 * [Using the API of the FloatingActionButton TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/floatingactionbutton/api)
 * [Server-Side API](/api/floatingactionbutton)

@@ -27,7 +27,7 @@ Most browsers provide a way to temporary disable all add-ons:
 
 **Solution**
 
-There are multiple possible reasons for leaking JavaScript Heap memory. To narrow them down, use the profiling features provided by the browser developer tools. See [Memory Diagnosis | Web Tools](https://developers.google.com/web/tools/chrome-devtools/profile/memory-problems/memory-diagnosis?hl=en) for a detailed description of the debugging process.
+There are multiple possible reasons for leaking JavaScript Heap memory. To narrow them down, use the profiling features provided by the browser developer tools. See [Memory Diagnosis | Web Tools](https://developer.chrome.com/docs/devtools/memory-problems) for a detailed description of the debugging process.
 
 ### Application Becomes Unresponsive or Hangs
 

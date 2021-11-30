@@ -61,5 +61,5 @@ You can also set sprites the the Telerik UI for {{ site.framework }} PanelBar it
 
 ## See Also
 
-* [Images in the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/images)
+* [Images in the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/images)
 * [PanelBar Server-Side API](/api/panelbar)
