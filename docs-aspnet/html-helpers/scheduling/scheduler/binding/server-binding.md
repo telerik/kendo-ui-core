@@ -12,6 +12,7 @@ You can bind the Scheduler to a model.
 
 1. Create a new model which inherits the `ISchedulerEvent` interface.
 
+    ```Model    
         public class Projection : ISchedulerEvent
         {
             public string Title { get; set; }
@@ -24,6 +25,21 @@ You can bind the Scheduler to a model.
             public string RecurrenceRule { get; set; }
             public string RecurrenceException { get; set; }
         }
+    ```
+    ```Interface
+        public interface ISchedulerEvent
+        {
+            string Title { get; set; }
+            string Description { get; set; }
+            bool IsAllDay { get; set; }
+            DateTime Start { get; set; }
+            DateTime End { get; set; }
+            string StartTimezone { get; set; }
+            string EndTimezone { get; set; }
+            string RecurrenceRule { get; set; }
+            string RecurrenceException { get; set; }
+        }
+    ```
 
 1. Create a new action method which passes the `List` of projections to the view.
 

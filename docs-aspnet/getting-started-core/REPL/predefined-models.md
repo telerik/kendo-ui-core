@@ -11,10 +11,10 @@ position: 2
 
 REPL uses the predefined models available in the Telerik UI for ASP.NET Core demos. You can find them in your Telerik UI for ASP.NET Core installation folder, which should be at a location similar to the following:
 
-*C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core R3 2021\wrappers\aspnetcore\Examples\AspNet.Core\VS2019\Kendo.Mvc.Examples\Models*
+*C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core Rn YYYY\wrappers\aspnetcore\Examples\AspNet.Core\VSYYYY\Kendo.Mvc.Examples\Models*
 
 Here is an extensive list containing the available models:
-   
+
 **Activity.cs**
 
 ```C#
@@ -442,7 +442,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Category
     {
         public Category()
@@ -450,12 +450,12 @@ namespace Kendo.Mvc.Examples.Models
             this.Products = new HashSet<Product>();
             this.DetailProducts = new HashSet<DetailProduct>();
         }
-    
+
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
         public byte[] Picture { get; set; }
-    
+
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<DetailProduct> DetailProducts { get; set; }
     }
@@ -585,7 +585,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public partial class ChartDataRepository
     {
-        public static IList<AprilSales> AprilSalesData() 
+        public static IList<AprilSales> AprilSalesData()
         {
             return new AprilSales[]
             {
@@ -632,91 +632,91 @@ namespace Kendo.Mvc.Examples.Models
                     Price = 105,
                     Performance = 100
                 },
-                
+
                 new PricePerformance {
                     Family = "Pentium",
                     Model = "D 915",
                     Price = 120,
                     Performance = 102
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Pentium",
                     Model = "D 945",
                     Price = 160,
                     Performance = 118
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Pentium",
                     Model = "XE 965",
                     Price = 1000,
                     Performance = 137
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Core 2 Duo",
                     Model = "E6300",
                     Price = 185,
                     Performance = 134
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Core 2 Duo",
                     Model = "E6400",
                     Price = 210,
                     Performance = 143
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Core 2 Duo",
                     Model = "E6600",
                     Price = 305,
                     Performance = 163
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Core 2 Duo",
                     Model = "E6700",
                     Price = 530,
                     Performance = 177
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Core 2 Extreme",
                     Model = "X6800",
                     Price = 1000,
                     Performance = 190
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Athlon 64",
                     Model = "X2 3800+",
                     Price = 148,
                     Performance = 115
-                }, 
-            
+                },
+
                 new PricePerformance {
                     Family = "Athlon 64",
                     Model = "X2 4200+",
                     Price = 170,
                     Performance = 125
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Athlon 64",
                     Model = "X2 4600+",
                     Price = 205,
                     Performance = 138
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Athlon 64",
                     Model = "X2 5000+",
                     Price = 290,
                     Performance = 143
-                }, 
-                
+                },
+
                 new PricePerformance {
                     Family = "Athlon 64",
                     Model = "FX-62",
@@ -733,19 +733,19 @@ namespace Kendo.Mvc.Examples.Models
                 new SiteOptimizationItem{
                     Description= "All Visitors",
                     Visitors= 23945
-                }, 
+                },
                 new SiteOptimizationItem{
                     Description= "Tried the Demos",
                     Visitors= 19156
-                }, 
+                },
                 new SiteOptimizationItem{
                     Description= "Downloaded",
                     Visitors= 13984
-                }, 
+                },
                 new SiteOptimizationItem{
                     Description= "Requested a Quote",
                     Visitors= 3216
-                }, 
+                },
                 new SiteOptimizationItem{
                     Description= "Purchased",
                     Visitors= 1673
@@ -917,7 +917,7 @@ namespace Kendo.Mvc.Examples.Models
                 new Medals(2000,3,5,"Japan"),
                 new Medals(2004,3,12,"Japan"),
                 new Medals(2008,3,10,"Japan"),
-                new Medals(2012,3,17,"Japan") 
+                new Medals(2012,3,17,"Japan")
             };
         }
 
@@ -953,7 +953,7 @@ namespace Kendo.Mvc.Examples.Models
                  new BlogComments("My blog", 27, 7),
                  new BlogComments("My blog", 28, 6),
                  new BlogComments("My blog", 29, 3),
-                 new BlogComments("My blog", 30, 6) 
+                 new BlogComments("My blog", 30, 6)
             };
         }
 
@@ -1030,7 +1030,7 @@ namespace Kendo.Mvc.Examples.Models
                     Applications = 700000,
                     Company = "Google",
                     Year = 2011
-                }, 
+                },
                 new JobGrowth {
                     Growth = -2000,
                     Jobs = 60000,
@@ -1359,7 +1359,7 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
-        public static IList<DatePoint> DatePoints() 
+        public static IList<DatePoint> DatePoints()
         {
             return new DatePoint[]
             {
@@ -1379,7 +1379,7 @@ namespace Kendo.Mvc.Examples.Models
                 new DatePoint(50, DateTime.Parse("2012/01/02")),
                 new DatePoint(55, DateTime.Parse("2012/01/03")),
                 new DatePoint(35, DateTime.Parse("2012/01/04")),
-                new DatePoint(30, DateTime.Parse("2012/01/05"))  
+                new DatePoint(30, DateTime.Parse("2012/01/05"))
             };
         }
 
@@ -1401,48 +1401,48 @@ namespace Kendo.Mvc.Examples.Models
         {
             return new List<Forecast>()
             {
-                new Forecast 
+                new Forecast
                 {
                     Temperature = 15,
                     Weather = "cloudy",
                     Day = "Monday"
-                }, 
-                new Forecast 
+                },
+                new Forecast
                 {
                     Temperature = 16,
                     Weather = "rainy",
                     Day = "Tuesday"
-                }, 
-                new Forecast 
+                },
+                new Forecast
                 {
                     Temperature = 20,
                     Weather = "cloudy",
                     Day = "Wednesday"
-                }, 
-                new Forecast 
+                },
+                new Forecast
                 {
                     Temperature = 23,
                     Weather = "sunny",
                     Day = "Thursday"
-                }, 
-                new Forecast 
+                },
+                new Forecast
                 {
                     Temperature = 17,
                     Weather = "cloudy",
                     Day = "Friday"
-                }, 
-                new Forecast 
+                },
+                new Forecast
                 {
                     Temperature = 20,
                     Weather = "sunny",
                     Day = "Saturday"
-                }, 
-                new Forecast 
+                },
+                new Forecast
                 {
                     Temperature = 25,
                     Weather = "sunny",
                     Day = "Sunday"
-                } 
+                }
 
             };
         }
@@ -1451,7 +1451,7 @@ namespace Kendo.Mvc.Examples.Models
         {
             IList<ChartCategoryPoint> data = new List<ChartCategoryPoint>();
             Random random = new Random(0);
-            for (var i = 0; i < 100; i++) 
+            for (var i = 0; i < 100; i++)
             {
                 var value = random.Next(0, 11);
                 data.Add( new ChartCategoryPoint
@@ -1493,7 +1493,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public partial class ChartDataRepository
     {
-        public static IList<AntennaGainItem> AntennaGain() 
+        public static IList<AntennaGainItem> AntennaGain()
         {
             return new AntennaGainItem[] {
                 new AntennaGainItem(0, 0),
@@ -1566,7 +1566,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public partial class ChartDataRepository
     {
-        public static IList<BudgetReportItem> BudgetReport() 
+        public static IList<BudgetReportItem> BudgetReport()
         {
             return new BudgetReportItem[] {
                 new BudgetReportItem("Sales", 40000, 52800),
@@ -2148,7 +2148,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public class CheckBoxGroupViewModel
     {
-        public List<IInputGroupItem> Items { get; set; }        
+        public List<IInputGroupItem> Items { get; set; }
 
         [Required]
         public string[] CheckBoxGroupValue { get; set; }
@@ -2383,18 +2383,18 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Country
     {
         public Country()
         {
             this.DetailProducts = new HashSet<DetailProduct>();
         }
-    
+
         public byte CountryID { get; set; }
         public string CountryNameShort { get; set; }
         public string CountryNameLong { get; set; }
-    
+
         public virtual ICollection<DetailProduct> DetailProducts { get; set; }
     }
 }
@@ -2434,7 +2434,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Customer
     {
         public Customer()
@@ -2442,7 +2442,7 @@ namespace Kendo.Mvc.Examples.Models
             this.Orders = new HashSet<Order>();
             this.CustomerDemographics = new HashSet<CustomerDemographic>();
         }
-    
+
         public string CustomerID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
@@ -2455,7 +2455,7 @@ namespace Kendo.Mvc.Examples.Models
         public string Phone { get; set; }
         public string Fax { get; set; }
         public Nullable<bool> Bool { get; set; }
-    
+
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<CustomerDemographic> CustomerDemographics { get; set; }
     }
@@ -2478,17 +2478,17 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class CustomerDemographic
     {
         public CustomerDemographic()
         {
             this.Customers = new HashSet<Customer>();
         }
-    
+
         public string CustomerTypeID { get; set; }
         public string CustomerDesc { get; set; }
-    
+
         public virtual ICollection<Customer> Customers { get; set; }
     }
 }
@@ -2551,11 +2551,11 @@ namespace Kendo.Mvc.Examples.Models
         {
             var productName = (string) value;
             if (!string.IsNullOrEmpty(productName))
-	        {                
+	        {
 		        return Regex.IsMatch(productName, "^[A-Z]");
             }
-            return true;            
-        }        
+            return true;
+        }
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
@@ -2564,7 +2564,7 @@ namespace Kendo.Mvc.Examples.Models
                 ErrorMessage = ErrorMessage,
                 ValidationType = "productnamevalidation"
             };
-        }        
+        }
     }
 }
 ```
@@ -2694,7 +2694,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class DetailProduct
     {
         public int ProductID { get; set; }
@@ -2709,7 +2709,7 @@ namespace Kendo.Mvc.Examples.Models
         public Nullable<byte> CustomerRating { get; set; }
         public Nullable<int> TargetSales { get; set; }
         public Nullable<System.DateTime> LastSupply { get; set; }
-    
+
         public virtual Category Category { get; set; }
         public virtual Country Country { get; set; }
     }
@@ -3830,7 +3830,7 @@ namespace Kendo.Mvc.Examples.Models.SpreadStreamProcessing
         private double exportTime;
         private SpreadDocumentFormat selectedDocumentFormat;
         private int totalCellsCount;
-        
+
         public SpreadDocumentFormat SelectedDocumentFormat
         {
             get
@@ -3999,7 +3999,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Employee
     {
         public Employee()
@@ -4008,7 +4008,7 @@ namespace Kendo.Mvc.Examples.Models
             this.Orders = new HashSet<Order>();
             this.Territories = new HashSet<Territory>();
         }
-    
+
         public int EmployeeID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
@@ -4027,7 +4027,7 @@ namespace Kendo.Mvc.Examples.Models
         public string Notes { get; set; }
         public Nullable<int> ReportsTo { get; set; }
         public string PhotoPath { get; set; }
-    
+
         public virtual ICollection<Employee> Employees1 { get; set; }
         public virtual Employee Employee1 { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
@@ -4052,14 +4052,14 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class EmployeeDirectory
     {
         public EmployeeDirectory()
         {
             this.EmployeeDirectory1 = new HashSet<EmployeeDirectory>();
         }
-    
+
         public int EmployeeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -4072,7 +4072,7 @@ namespace Kendo.Mvc.Examples.Models
         public Nullable<System.DateTime> BirthDate { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
         public string Position { get; set; }
-    
+
         public virtual ICollection<EmployeeDirectory> EmployeeDirectory1 { get; set; }
         public virtual EmployeeDirectory EmployeeDirectory2 { get; set; }
     }
@@ -4096,7 +4096,7 @@ namespace Kendo.Mvc.Examples.Models.TreeList
         [Required]
         [DisplayName("First name")]
         public string FirstName { get; set; }
-        
+
         [DisplayName("Last name")]
         public string LastName { get; set; }
 
@@ -4110,8 +4110,8 @@ namespace Kendo.Mvc.Examples.Models.TreeList
         public string Country { get; set; }
 
         public string Phone { get; set; }
-        
-        [Range(0, 9999)]         
+
+        [Range(0, 9999)]
         [DataType("Integer")]
         public int? Extension { get; set; }
 
@@ -4219,7 +4219,7 @@ namespace Kendo.Mvc.Examples.Models.TreeList
         public string Phone { get; set; }
 
         [Required]
-        [Range(0, 9999)]         
+        [Range(0, 9999)]
         [DataType("Integer")]
         public int? Extension { get; set; }
 
@@ -4309,7 +4309,7 @@ namespace Kendo.Mvc.Examples.Models.TreeList
     using System.Web;
 
     public static class EmployeeDirectoryIEnumerableExtensions
-    {        
+    {
         public static EmployeeDirectoryModel ToEmployeeDirectoryModel(this EmployeeDirectory employee)
         {
             return new EmployeeDirectoryModel
@@ -4363,7 +4363,7 @@ namespace Kendo.Mvc.Examples.Models.TreeList
         public EmployeeDirectoryService()
             : this(new SampleEntities())
         {
-        }       
+        }
 
         public virtual IList<EmployeeDirectoryModel> GetAll()
         {
@@ -4468,7 +4468,7 @@ namespace Kendo.Mvc.Examples.Models.TreeList
 
         private void DeleteEntityChildren(EmployeeDirectory employee)
         {
-            var children = db.EmployeeDirectory.Where(e => e.ReportsTo == employee.EmployeeID);            
+            var children = db.EmployeeDirectory.Where(e => e.ReportsTo == employee.EmployeeID);
 
             foreach (var subordinate in children)
             {
@@ -4503,7 +4503,7 @@ namespace Kendo.Mvc.Examples.Models.TreeList
                 modelState.AddModelError("errors", "Employee cannot be hired before birth.");
                 return false;
             }
-            
+
             return true;
         }
 
@@ -4521,7 +4521,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;   
+    using System.Web.Mvc;
 
     public class EmployeeViewModel
     {
@@ -4550,7 +4550,7 @@ namespace Kendo.Mvc.Examples.Models
             get;
             set;
         }
-        
+
         public string Title
         {
             get;
@@ -4972,7 +4972,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class GanttDependency
     {
         public int ID { get; set; }
@@ -5095,7 +5095,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class GanttResource
     {
         public int ID { get; set; }
@@ -5121,7 +5121,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class GanttResourceAssignment
     {
         public int ID { get; set; }
@@ -5189,14 +5189,14 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class GanttTask
     {
         public GanttTask()
         {
             this.GanttTasks1 = new HashSet<GanttTask>();
         }
-    
+
         public int ID { get; set; }
         public Nullable<int> ParentID { get; set; }
         public int OrderID { get; set; }
@@ -5206,7 +5206,7 @@ namespace Kendo.Mvc.Examples.Models
         public decimal PercentComplete { get; set; }
         public bool Expanded { get; set; }
         public bool Summary { get; set; }
-    
+
         public virtual ICollection<GanttTask> GanttTasks1 { get; set; }
         public virtual GanttTask GanttTask1 { get; set; }
     }
@@ -5385,7 +5385,7 @@ namespace Kendo.Mvc.Examples.Models.Gantt
                 modelState.AddModelError("errors", "End date must be greater or equal to Start date.");
                 return false;
             }
-            
+
             return true;
         }
 
@@ -5555,7 +5555,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Intraday
     {
         public int ID { get; set; }
@@ -5649,7 +5649,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public partial class MapDataRepository
     {
-        public static IList<Marker> StoreLocations() 
+        public static IList<Marker> StoreLocations()
         {
             return new Marker[]
             {
@@ -5747,7 +5747,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Meeting
     {
         public Meeting()
@@ -5755,7 +5755,7 @@ namespace Kendo.Mvc.Examples.Models
             this.MeetingAttendees = new HashSet<MeetingAttendee>();
             this.Meetings1 = new HashSet<Meeting>();
         }
-    
+
         public int MeetingID { get; set; }
         public System.DateTime Start { get; set; }
         public System.DateTime End { get; set; }
@@ -5768,7 +5768,7 @@ namespace Kendo.Mvc.Examples.Models
         public string RecurrenceException { get; set; }
         public string StartTimezone { get; set; }
         public string EndTimezone { get; set; }
-    
+
         public virtual ICollection<MeetingAttendee> MeetingAttendees { get; set; }
         public virtual ICollection<Meeting> Meetings1 { get; set; }
         public virtual Meeting Meeting1 { get; set; }
@@ -5792,12 +5792,12 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class MeetingAttendee
     {
         public int MeetingID { get; set; }
         public int AttendeeID { get; set; }
-    
+
         public virtual Meeting Meeting { get; set; }
     }
 }
@@ -6078,14 +6078,14 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Order
     {
         public Order()
         {
             this.Order_Details = new HashSet<Order_Detail>();
         }
-    
+
         public int OrderID { get; set; }
         public string CustomerID { get; set; }
         public Nullable<int> EmployeeID { get; set; }
@@ -6100,7 +6100,7 @@ namespace Kendo.Mvc.Examples.Models
         public string ShipRegion { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
-    
+
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual ICollection<Order_Detail> Order_Details { get; set; }
@@ -6125,7 +6125,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Order_Detail
     {
         public int OrderID { get; set; }
@@ -6133,7 +6133,7 @@ namespace Kendo.Mvc.Examples.Models
         public decimal UnitPrice { get; set; }
         public short Quantity { get; set; }
         public float Discount { get; set; }
-    
+
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
@@ -6146,8 +6146,8 @@ namespace Kendo.Mvc.Examples.Models
 namespace Kendo.Mvc.Examples.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;    
-    
+    using System.ComponentModel.DataAnnotations;
+
     public class OrderViewModel
     {
         public int OrderID
@@ -6157,7 +6157,7 @@ namespace Kendo.Mvc.Examples.Models
         }
 
         public string CustomerID { get; set; }
-        
+
         public string ContactName
         {
             get;
@@ -6232,7 +6232,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class OrgChartConnection
     {
         public int Id { get; set; }
@@ -6312,7 +6312,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class OrgChartShape
     {
         public int Id { get; set; }
@@ -6601,7 +6601,7 @@ namespace Kendo.Mvc.Examples.Models
         {
             Name = name;
             Value = value;
-            Items = items; 
+            Items = items;
         }
 
         public string Name { get; set; }
@@ -6734,14 +6734,14 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Product
     {
         public Product()
         {
             this.Order_Details = new HashSet<Order_Detail>();
         }
-    
+
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public Nullable<int> SupplierID { get; set; }
@@ -6752,7 +6752,7 @@ namespace Kendo.Mvc.Examples.Models
         public Nullable<short> UnitsOnOrder { get; set; }
         public Nullable<short> ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
-    
+
         public virtual Category Category { get; set; }
         public virtual ICollection<Order_Detail> Order_Details { get; set; }
         public virtual Supplier Supplier { get; set; }
@@ -6957,7 +6957,7 @@ namespace Kendo.Mvc.Examples.Models
                             CategoryName = entities.Categories.Where(s => s.CategoryID == product.CategoryID).Select(s => s.CategoryName).First()
                         };
                     }
-                    
+
                     target.CategoryID = product.CategoryID;
                     target.Category = product.Category;
                 }
@@ -7088,17 +7088,17 @@ namespace Kendo.Mvc.Examples.Models
         }
 
         [DataType("Integer")]
-        public int UnitsOnOrder 
-        { 
-            get; 
-            set; 
+        public int UnitsOnOrder
+        {
+            get;
+            set;
         }
 
         [UIHint("ClientCategory")]
-        public CategoryViewModel Category 
-        { 
-            get; 
-            set; 
+        public CategoryViewModel Category
+        {
+            get;
+            set;
         }
 
         public int? CategoryID { get; set; }
@@ -7223,17 +7223,17 @@ namespace Kendo.Mvc.Examples.Models
         }
 
         [DataType("Integer")]
-        public int UnitsOnOrder 
-        { 
-            get; 
-            set; 
+        public int UnitsOnOrder
+        {
+            get;
+            set;
         }
 
         [UIHint("ClientCategory")]
-        public CategoryViewModel Category 
-        { 
-            get; 
-            set; 
+        public CategoryViewModel Category
+        {
+            get;
+            set;
         }
 
         public int? CategoryID { get; set; }
@@ -7370,17 +7370,17 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Region
     {
         public Region()
         {
             this.Territories = new HashSet<Territory>();
         }
-    
+
         public int RegionID { get; set; }
         public string RegionDescription { get; set; }
-    
+
         public virtual ICollection<Territory> Territories { get; set; }
     }
 }
@@ -7539,19 +7539,19 @@ namespace Kendo.Mvc.Examples.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class SampleEntities : DbContext
     {
         public SampleEntities()
             : base("name=SampleEntities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public DbSet<Category> Categories { get; set; }
         public DbSet<CustomerDemographic> CustomerDemographics { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -7776,12 +7776,12 @@ public class CodeStringGenerator
             _code.SpaceAfter(Accessibility.ForGetter(navigationProperty)),
             _code.SpaceAfter(Accessibility.ForSetter(navigationProperty)));
     }
-    
+
     public string AccessibilityAndVirtual(string accessibility)
     {
         return accessibility + (accessibility != "private" ? " virtual" : "");
     }
-    
+
     public string EntityClassOpening(EntityType entity)
     {
         return string.Format(
@@ -7792,7 +7792,7 @@ public class CodeStringGenerator
             _code.Escape(entity),
             _code.StringBefore(" : ", _typeMapper.GetTypeName(entity.BaseType)));
     }
-    
+
     public string EnumOpening(SimpleType enumType)
     {
         return string.Format(
@@ -7802,7 +7802,7 @@ public class CodeStringGenerator
             _code.Escape(enumType),
             _code.Escape(_typeMapper.UnderlyingClrType(enumType)));
         }
-    
+
     public void WriteFunctionParameters(EdmFunction edmFunction, Action<string, string, string, string> writeParameter)
     {
         var parameters = FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
@@ -7814,11 +7814,11 @@ public class CodeStringGenerator
             writeParameter(parameter.LocalVariableName, isNotNull, notNullInit, nullInit);
         }
     }
-    
+
     public string ComposableFunctionMethod(EdmFunction edmFunction, string modelNamespace)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
-        
+
         return string.Format(
             CultureInfo.InvariantCulture,
             "\{0\} IQueryable<\{1\}> \{2\}\(\{3\})",
@@ -7827,11 +7827,11 @@ public class CodeStringGenerator
             _code.Escape(edmFunction),
             string.Join(", ", parameters.Select(p => p.FunctionParameterType + " " + p.FunctionParameterName).ToArray()));
     }
-    
+
     public string ComposableCreateQuery(EdmFunction edmFunction, string modelNamespace)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
-        
+
         return string.Format(
             CultureInfo.InvariantCulture,
             "return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<\{0\}>(\"[\{1\}].[{\2\}](\{3\})\"\{4\});",
@@ -7841,7 +7841,7 @@ public class CodeStringGenerator
             string.Join(", ", parameters.Select(p => "@" + p.EsqlParameterName).ToArray()),
             _code.StringBefore(", ", string.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray())));
     }
-    
+
     public string FunctionMethod(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
@@ -7861,7 +7861,7 @@ public class CodeStringGenerator
             _code.Escape(edmFunction),
             paramList);
     }
-    
+
     public string ExecuteFunction(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
@@ -7872,7 +7872,7 @@ public class CodeStringGenerator
         {
             callParams = ", mergeOption" + callParams;
         }
-        
+
         return string.Format(
             CultureInfo.InvariantCulture,
             "return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction{0}(\"{1}\"{2});",
@@ -7880,7 +7880,7 @@ public class CodeStringGenerator
             edmFunction.Name,
             callParams);
     }
-    
+
     public string DbSet(EntitySet entitySet)
     {
         return string.Format(
@@ -7985,7 +7985,7 @@ public class TypeMapper
 
         throw new ArgumentException("edmType");
     }
-    
+
     public Type UnderlyingClrType(EdmType edmType)
     {
         ArgumentNotNull(edmType, "edmType");
@@ -8003,19 +8003,19 @@ public class TypeMapper
 
         return typeof(object);
     }
-    
+
     public object GetEnumMemberValue(MetadataItem enumMember)
     {
         ArgumentNotNull(enumMember, "enumMember");
-        
+
         var valueProperty = enumMember.GetType().GetProperty("Value");
         return valueProperty == null ? null : valueProperty.GetValue(enumMember, null);
     }
-    
+
     public string GetEnumMemberName(MetadataItem enumMember)
     {
         ArgumentNotNull(enumMember, "enumMember");
-        
+
         var nameProperty = enumMember.GetType().GetProperty("Name");
         return nameProperty == null ? null : (string)nameProperty.GetValue(enumMember, null);
     }
@@ -8025,15 +8025,15 @@ public class TypeMapper
         ArgumentNotNull(enumType, "enumType");
 
         var membersProperty = enumType.GetType().GetProperty("Members");
-        return membersProperty != null 
+        return membersProperty != null
             ? (System.Collections.IEnumerable)membersProperty.GetValue(enumType, null)
             : Enumerable.Empty<MetadataItem>();
     }
-    
+
     public bool EnumIsFlags(EdmType enumType)
     {
         ArgumentNotNull(enumType, "enumType");
-        
+
         var isFlagsProperty = enumType.GetType().GetProperty("IsFlags");
         return isFlagsProperty != null && (bool)isFlagsProperty.GetValue(enumType, null);
     }
@@ -8061,12 +8061,12 @@ public class TypeMapper
 
         return string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", ((TimeSpan)value).Ticks);
     }
-    
+
     public bool VerifyCaseInsensitiveTypeUniqueness(IEnumerable<string> types, string sourceFile)
     {
         ArgumentNotNull(types, "types");
         ArgumentNotNull(sourceFile, "sourceFile");
-        
+
         var hash = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
         if (types.Any(item => !hash.Add(item)))
         {
@@ -8077,13 +8077,13 @@ public class TypeMapper
         }
         return true;
     }
-    
+
     public IEnumerable<SimpleType> GetEnumItemsToGenerate(IEnumerable<GlobalItem> itemCollection)
     {
         return GetItemsToGenerate<SimpleType>(itemCollection)
             .Where(e => IsEnumType(e));
     }
-    
+
     public IEnumerable<T> GetItemsToGenerate<T>(IEnumerable<GlobalItem> itemCollection) where T: EdmType
     {
         return itemCollection
@@ -8115,17 +8115,17 @@ public class TypeMapper
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
     }
-    
+
     public IEnumerable<EdmProperty> GetSimpleProperties(ComplexType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
     }
-    
+
     public IEnumerable<EdmProperty> GetComplexProperties(EntityType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
     }
-    
+
     public IEnumerable<EdmProperty> GetComplexProperties(ComplexType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
@@ -8135,7 +8135,7 @@ public class TypeMapper
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
     }
-    
+
     public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(ComplexType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
@@ -8145,12 +8145,12 @@ public class TypeMapper
     {
         return type.NavigationProperties.Where(np => np.DeclaringType == type);
     }
-    
+
     public IEnumerable<NavigationProperty> GetCollectionNavigationProperties(EntityType type)
     {
         return type.NavigationProperties.Where(np => np.DeclaringType == type && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
     }
-    
+
     public FunctionParameter GetReturnParameter(EdmFunction edmFunction)
     {
         ArgumentNotNull(edmFunction, "edmFunction");
@@ -8179,7 +8179,7 @@ public class TypeMapper
         var returnParam = GetReturnParameter(edmFunction);
         return returnParam == null ? null : _ef.GetElementType(returnParam.TypeUsage);
     }
-    
+
     public bool GenerateMergeOptionFunction(EdmFunction edmFunction, bool includeMergeOption)
     {
         var returnType = GetReturnType(edmFunction);
@@ -8289,7 +8289,7 @@ public class EdmMetadataLoader
                 });
         }
     }
-    
+
     public bool IsLazyLoadingEnabled(EntityContainer container)
     {
         string lazyLoadingAttributeValue;
@@ -8308,7 +8308,7 @@ public static void ArgumentNotNull<T>(T arg, string name) where T : class
         throw new ArgumentNullException(name);
     }
 }
-    
+
 private static readonly Lazy<System.Resources.ResourceManager> ResourceManager =
     new Lazy<System.Resources.ResourceManager>(
         () => new System.Resources.ResourceManager("System.Data.Entity.Design", typeof(MetadataItemCollectionFactory).Assembly), isThreadSafe: true);
@@ -8339,7 +8339,7 @@ public static string GetResourceString(string resourceName)
 **Sample.Designer.cs**
 
 ```C#
-// T4 code generation is enabled for model 'C:\KendoRepo\kendo\wrappers\mvc\demos\Kendo.Mvc.Examples\Models\Sample.edmx'. 
+// T4 code generation is enabled for model 'C:\KendoRepo\kendo\wrappers\mvc\demos\Kendo.Mvc.Examples\Models\Sample.edmx'.
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
@@ -9009,16 +9009,16 @@ warning 6002: The table/view 'C:\KENDOREPO\KENDO\WRAPPERS\MVC\DEMOS\KENDO.MVC.EX
           <EntitySet Name="Territories" EntityType="Self.Territories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UrbanAreas" EntityType="Self.UrbanAreas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Weather" EntityType="Self.Weather" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-[Weather].[ID] AS [ID], 
-[Weather].[Station] AS [Station], 
-[Weather].[Date] AS [Date], 
-[Weather].[TMax] AS [TMax], 
-[Weather].[TMin] AS [TMin], 
-[Weather].[Wind] AS [Wind], 
-[Weather].[Gust] AS [Gust], 
-[Weather].[Rain] AS [Rain], 
-[Weather].[Snow] AS [Snow], 
+            <DefiningQuery>SELECT
+[Weather].[ID] AS [ID],
+[Weather].[Station] AS [Station],
+[Weather].[Date] AS [Date],
+[Weather].[TMax] AS [TMax],
+[Weather].[TMin] AS [TMin],
+[Weather].[Wind] AS [Wind],
+[Weather].[Gust] AS [Gust],
+[Weather].[Rain] AS [Rain],
+[Weather].[Snow] AS [Snow],
 [Weather].[Events] AS [Events]
 FROM [dbo].[Weather] AS [Weather]</DefiningQuery>
           </EntitySet>
@@ -10296,7 +10296,7 @@ FROM [dbo].[Weather] AS [Weather]</DefiningQuery>
 
 ```C#
 <#@ template language="C#" debug="false" hostspecific="true"#>
-<#@ include file="EF.Utility.CS.ttinclude"#><#@ 
+<#@ include file="EF.Utility.CS.ttinclude"#><#@
  output extension=".cs"#><#
 
 const string inputFile = @"Sample.edmx";
@@ -10487,7 +10487,7 @@ foreach (var enumType in typeMapper.GetEnumItemsToGenerate(itemCollection))
 {
 <#
     var foundOne = false;
-    
+
     foreach (MetadataItem member in typeMapper.GetEnumMembers(enumType))
     {
         foundOne = true;
@@ -10595,12 +10595,12 @@ public class CodeStringGenerator
             _code.SpaceAfter(Accessibility.ForGetter(navigationProperty)),
             _code.SpaceAfter(Accessibility.ForSetter(navigationProperty)));
     }
-    
+
     public string AccessibilityAndVirtual(string accessibility)
     {
         return accessibility + (accessibility != "private" ? " virtual" : "");
     }
-    
+
     public string EntityClassOpening(EntityType entity)
     {
         return string.Format(
@@ -10611,7 +10611,7 @@ public class CodeStringGenerator
             _code.Escape(entity),
             _code.StringBefore(" : ", _typeMapper.GetTypeName(entity.BaseType)));
     }
-    
+
     public string EnumOpening(SimpleType enumType)
     {
         return string.Format(
@@ -10621,7 +10621,7 @@ public class CodeStringGenerator
             _code.Escape(enumType),
             _code.Escape(_typeMapper.UnderlyingClrType(enumType)));
         }
-    
+
     public void WriteFunctionParameters(EdmFunction edmFunction, Action<string, string, string, string> writeParameter)
     {
         var parameters = FunctionImportParameter.Create(edmFunction.Parameters, _code, _ef);
@@ -10633,11 +10633,11 @@ public class CodeStringGenerator
             writeParameter(parameter.LocalVariableName, isNotNull, notNullInit, nullInit);
         }
     }
-    
+
     public string ComposableFunctionMethod(EdmFunction edmFunction, string modelNamespace)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
-        
+
         return string.Format(
             CultureInfo.InvariantCulture,
             "\{0\} IQueryable<\{1\}> \{2\}(\{3\})",
@@ -10646,11 +10646,11 @@ public class CodeStringGenerator
             _code.Escape(edmFunction),
             string.Join(", ", parameters.Select(p => p.FunctionParameterType + " " + p.FunctionParameterName).ToArray()));
     }
-    
+
     public string ComposableCreateQuery(EdmFunction edmFunction, string modelNamespace)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
-        
+
         return string.Format(
             CultureInfo.InvariantCulture,
             "return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<{0}>(\"[\{1\}].[\{2\}](\{3\})\"\{4\});",
@@ -10660,7 +10660,7 @@ public class CodeStringGenerator
             string.Join(", ", parameters.Select(p => "@" + p.EsqlParameterName).ToArray()),
             _code.StringBefore(", ", string.Join(", ", parameters.Select(p => p.ExecuteParameterName).ToArray())));
     }
-    
+
     public string FunctionMethod(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
@@ -10680,7 +10680,7 @@ public class CodeStringGenerator
             _code.Escape(edmFunction),
             paramList);
     }
-    
+
     public string ExecuteFunction(EdmFunction edmFunction, string modelNamespace, bool includeMergeOption)
     {
         var parameters = _typeMapper.GetParameters(edmFunction);
@@ -10691,7 +10691,7 @@ public class CodeStringGenerator
         {
             callParams = ", mergeOption" + callParams;
         }
-        
+
         return string.Format(
             CultureInfo.InvariantCulture,
             "return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction{0}(\"{1}\"{2});",
@@ -10699,7 +10699,7 @@ public class CodeStringGenerator
             edmFunction.Name,
             callParams);
     }
-    
+
     public string DbSet(EntitySet entitySet)
     {
         return string.Format(
@@ -10804,7 +10804,7 @@ public class TypeMapper
 
         throw new ArgumentException("edmType");
     }
-    
+
     public Type UnderlyingClrType(EdmType edmType)
     {
         ArgumentNotNull(edmType, "edmType");
@@ -10822,19 +10822,19 @@ public class TypeMapper
 
         return typeof(object);
     }
-    
+
     public object GetEnumMemberValue(MetadataItem enumMember)
     {
         ArgumentNotNull(enumMember, "enumMember");
-        
+
         var valueProperty = enumMember.GetType().GetProperty("Value");
         return valueProperty == null ? null : valueProperty.GetValue(enumMember, null);
     }
-    
+
     public string GetEnumMemberName(MetadataItem enumMember)
     {
         ArgumentNotNull(enumMember, "enumMember");
-        
+
         var nameProperty = enumMember.GetType().GetProperty("Name");
         return nameProperty == null ? null : (string)nameProperty.GetValue(enumMember, null);
     }
@@ -10844,15 +10844,15 @@ public class TypeMapper
         ArgumentNotNull(enumType, "enumType");
 
         var membersProperty = enumType.GetType().GetProperty("Members");
-        return membersProperty != null 
+        return membersProperty != null
             ? (System.Collections.IEnumerable)membersProperty.GetValue(enumType, null)
             : Enumerable.Empty<MetadataItem>();
     }
-    
+
     public bool EnumIsFlags(EdmType enumType)
     {
         ArgumentNotNull(enumType, "enumType");
-        
+
         var isFlagsProperty = enumType.GetType().GetProperty("IsFlags");
         return isFlagsProperty != null && (bool)isFlagsProperty.GetValue(enumType, null);
     }
@@ -10880,12 +10880,12 @@ public class TypeMapper
 
         return string.Format(CultureInfo.InvariantCulture, "new TimeSpan({0})", ((TimeSpan)value).Ticks);
     }
-    
+
     public bool VerifyCaseInsensitiveTypeUniqueness(IEnumerable<string> types, string sourceFile)
     {
         ArgumentNotNull(types, "types");
         ArgumentNotNull(sourceFile, "sourceFile");
-        
+
         var hash = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
         if (types.Any(item => !hash.Add(item)))
         {
@@ -10896,13 +10896,13 @@ public class TypeMapper
         }
         return true;
     }
-    
+
     public IEnumerable<SimpleType> GetEnumItemsToGenerate(IEnumerable<GlobalItem> itemCollection)
     {
         return GetItemsToGenerate<SimpleType>(itemCollection)
             .Where(e => IsEnumType(e));
     }
-    
+
     public IEnumerable<T> GetItemsToGenerate<T>(IEnumerable<GlobalItem> itemCollection) where T: EdmType
     {
         return itemCollection
@@ -10934,17 +10934,17 @@ public class TypeMapper
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
     }
-    
+
     public IEnumerable<EdmProperty> GetSimpleProperties(ComplexType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type);
     }
-    
+
     public IEnumerable<EdmProperty> GetComplexProperties(EntityType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
     }
-    
+
     public IEnumerable<EdmProperty> GetComplexProperties(ComplexType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is ComplexType && p.DeclaringType == type);
@@ -10954,7 +10954,7 @@ public class TypeMapper
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
     }
-    
+
     public IEnumerable<EdmProperty> GetPropertiesWithDefaultValues(ComplexType type)
     {
         return type.Properties.Where(p => p.TypeUsage.EdmType is SimpleType && p.DeclaringType == type && p.DefaultValue != null);
@@ -10964,12 +10964,12 @@ public class TypeMapper
     {
         return type.NavigationProperties.Where(np => np.DeclaringType == type);
     }
-    
+
     public IEnumerable<NavigationProperty> GetCollectionNavigationProperties(EntityType type)
     {
         return type.NavigationProperties.Where(np => np.DeclaringType == type && np.ToEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many);
     }
-    
+
     public FunctionParameter GetReturnParameter(EdmFunction edmFunction)
     {
         ArgumentNotNull(edmFunction, "edmFunction");
@@ -10998,7 +10998,7 @@ public class TypeMapper
         var returnParam = GetReturnParameter(edmFunction);
         return returnParam == null ? null : _ef.GetElementType(returnParam.TypeUsage);
     }
-    
+
     public bool GenerateMergeOptionFunction(EdmFunction edmFunction, bool includeMergeOption)
     {
         var returnType = GetReturnType(edmFunction);
@@ -11108,7 +11108,7 @@ public class EdmMetadataLoader
                 });
         }
     }
-    
+
     public bool IsLazyLoadingEnabled(EntityContainer container)
     {
         string lazyLoadingAttributeValue;
@@ -11127,7 +11127,7 @@ public static void ArgumentNotNull<T>(T arg, string name) where T : class
         throw new ArgumentNullException(name);
     }
 }
-    
+
 private static readonly Lazy<System.Resources.ResourceManager> ResourceManager =
     new Lazy<System.Resources.ResourceManager>(
         () => new System.Resources.ResourceManager("System.Data.Entity.Design", typeof(MetadataItemCollectionFactory).Assembly), isThreadSafe: true);
@@ -11750,13 +11750,13 @@ namespace Kendo.Mvc.Examples.Models
         public static IList<UploadInitialFile> GetAllInitialFiles()
         {
             IList<UploadInitialFile> initialFiles = (IList<UploadInitialFile>)HttpContext.Current.Session["InitialFiles"];
-            
+
             if (initialFiles == null)
             {
                 initialFiles = new List<UploadInitialFile>();
                 HttpContext.Current.Session["InitialFiles"] = initialFiles;
             }
-            
+
             return initialFiles;
         }
 
@@ -11791,18 +11791,18 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Shipper
     {
         public Shipper()
         {
             this.Orders = new HashSet<Order>();
         }
-    
+
         public int ShipperID { get; set; }
         public string CompanyName { get; set; }
         public string Phone { get; set; }
-    
+
         public virtual ICollection<Order> Orders { get; set; }
     }
 }
@@ -12160,7 +12160,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Stock
     {
         public int ID { get; set; }
@@ -12301,14 +12301,14 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Supplier
     {
         public Supplier()
         {
             this.Products = new HashSet<Product>();
         }
-    
+
         public int SupplierID { get; set; }
         public string CompanyName { get; set; }
         public string ContactName { get; set; }
@@ -12321,7 +12321,7 @@ namespace Kendo.Mvc.Examples.Models
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string HomePage { get; set; }
-    
+
         public virtual ICollection<Product> Products { get; set; }
     }
 }
@@ -12365,14 +12365,14 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Task
     {
         public Task()
         {
             this.Tasks1 = new HashSet<Task>();
         }
-    
+
         public int TaskID { get; set; }
         public System.DateTime Start { get; set; }
         public System.DateTime End { get; set; }
@@ -12385,7 +12385,7 @@ namespace Kendo.Mvc.Examples.Models
         public string RecurrenceException { get; set; }
         public string StartTimezone { get; set; }
         public string EndTimezone { get; set; }
-    
+
         public virtual ICollection<Task> Tasks1 { get; set; }
         public virtual Task Task1 { get; set; }
     }
@@ -12577,18 +12577,18 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Territory
     {
         public Territory()
         {
             this.Employees = new HashSet<Employee>();
         }
-    
+
         public string TerritoryID { get; set; }
         public string TerritoryDescription { get; set; }
         public int RegionID { get; set; }
-    
+
         public virtual Region Region { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
     }
@@ -12675,7 +12675,7 @@ namespace Kendo.Mvc.Examples.Models
             alabama.Items.Add(new PopulationUSA("Auburn", 58582, null));
             alabama.Items.Add(new PopulationUSA("Decatur", 55816, null));
 
-            PopulationUSA alaska = new PopulationUSA("Alaska", 735132, new List<PopulationUSA>()); 
+            PopulationUSA alaska = new PopulationUSA("Alaska", 735132, new List<PopulationUSA>());
             usa.Items.Add(alaska);
             alaska.Items.Add(new PopulationUSA("Anchorage", 300950, null));
             alaska.Items.Add(new PopulationUSA("Badger", 20200, null));
@@ -12791,7 +12791,7 @@ namespace Kendo.Mvc.Examples.Models
                     expanded = this.expanded,
                     hasChildren = this.hasChildren
                 };
-            return clone;            
+            return clone;
         }
     }
 }
@@ -12812,7 +12812,7 @@ namespace Kendo.Mvc.Examples.Models
         private static List<TreeViewItemViewModel> projectData;
 
         static TreeViewRepository()
-        {            
+        {
             projectData = new List<TreeViewItemViewModel>();
             projectData.Add(new TreeViewItemViewModel
                 {
@@ -12836,19 +12836,19 @@ namespace Kendo.Mvc.Examples.Models
                                     {
                                             id = "3",
                                             text ="about.html",
-                                            spriteCssClass = "html"                                               
+                                            spriteCssClass = "html"
                                     },
                                     new TreeViewItemViewModel
                                     {
                                             id = "4",
                                             text ="index.html",
-                                            spriteCssClass = "html"                                               
+                                            spriteCssClass = "html"
                                     },
                                     new TreeViewItemViewModel
                                     {
                                             id = "5",
                                             text ="logo.png",
-                                            spriteCssClass = "image"                                               
+                                            spriteCssClass = "image"
                                     }
                                 }
                            },
@@ -12865,13 +12865,13 @@ namespace Kendo.Mvc.Examples.Models
                                     {
                                             id = "7",
                                             text ="mockup.jpg",
-                                            spriteCssClass = "image"                                               
+                                            spriteCssClass = "image"
                                     },
                                     new TreeViewItemViewModel
                                     {
                                             id = "8",
                                             text ="Research.pdf",
-                                            spriteCssClass = "pdf"                                               
+                                            spriteCssClass = "pdf"
                                     }
                                 }
                            },
@@ -12888,19 +12888,19 @@ namespace Kendo.Mvc.Examples.Models
                                     {
                                             id = "10",
                                             text ="February.pdf",
-                                            spriteCssClass = "pdf"                                               
+                                            spriteCssClass = "pdf"
                                     },
                                     new TreeViewItemViewModel
                                     {
                                             id = "11",
                                             text ="March.pdf",
-                                            spriteCssClass = "pdf"                                               
+                                            spriteCssClass = "pdf"
                                     },
                                         new TreeViewItemViewModel
                                     {
                                             id = "12",
                                             text ="April.pdf",
-                                            spriteCssClass = "pdf"                                               
+                                            spriteCssClass = "pdf"
                                     }
                                 }
                            }
@@ -12915,9 +12915,9 @@ namespace Kendo.Mvc.Examples.Models
         }
 
         public static IEnumerable<TreeViewItemViewModel> GetChildren(string id)
-        {            
+        {
             Queue<TreeViewItemViewModel> items = new Queue<TreeViewItemViewModel>(projectData);
-           
+
             while (items.Count > 0)
             {
                 var current = items.Dequeue();
@@ -12945,7 +12945,7 @@ namespace Kendo.Mvc.Examples.Models
 
             return new List<TreeViewItemViewModel>();
         }
-    }           
+    }
 }
 ```
 **UploadInitialFile.cs**
@@ -13006,7 +13006,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class UrbanArea
     {
         public int ID { get; set; }
@@ -13046,7 +13046,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public partial class UrbanArea
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]      
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public decimal[] Location {
             get
             {
@@ -13187,7 +13187,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Weather
     {
         public int ID { get; set; }
@@ -13247,31 +13247,31 @@ namespace Kendo.Mvc.Examples.Models
                     Date = "2/22/2009",
                     Title = "RE: New version of Telerik Trainer"
                 },
-                
+
                 new WebMail {
                     MailID = 2,
                     FromID = 2,
                     From = "Jytte Petersen",
                     Date = "2/22/2009",
                     Title = "RE: New version of Telerik Trainer"
-                }, 
-                
+                },
+
                 new WebMail {
                     MailID = 3,
                     FromID = 3,
                     From = "Renate Messner",
                     Date = "2/22/2009",
                     Title = "RE: Conferences?"
-                }, 
-                
+                },
+
                 new WebMail {
                     MailID = 4,
                     FromID = 4,
                     From = "Kevin Babcock",
                     Date = "2/21/2009",
                     Title = "RE: Conferences?"
-                }, 
-                
+                },
+
                 new WebMail {
                     MailID = 5,
                     FromID = 5,
@@ -13279,7 +13279,7 @@ namespace Kendo.Mvc.Examples.Models
                     Date = "2/21/2009",
                     Title = "RE: New 'Your Links' menu on telerik.com"
                 }
-                
+
             };
         }
 
@@ -13309,6 +13309,6 @@ namespace Kendo.Mvc.Examples.Models
 }
 ```
 
-       
 
-  
+
+

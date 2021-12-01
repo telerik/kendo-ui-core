@@ -9527,6 +9527,7 @@ declare namespace kendo.ui {
     interface ScrollViewMessages {
         nextButtonLabel?: string | undefined;
         previousButtonLabel?: string | undefined;
+        pagerLabel?: string | undefined;
     }
 
     interface ScrollViewPageable {

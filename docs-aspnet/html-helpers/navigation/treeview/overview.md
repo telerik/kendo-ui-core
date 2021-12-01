@@ -160,4 +160,5 @@ The following example demonstrates the available TreeView events and how an even
 
 * [Basic Usage of the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/index)
 * [Using the API of the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/api)
+* [Telerik UI for {{site.framework}} DataSource configuration]({% slug htmlhelpers_datasource_aspnetcore %})
 * [Server-Side API](/api/treeview)

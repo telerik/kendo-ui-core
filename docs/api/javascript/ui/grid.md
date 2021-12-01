@@ -13573,6 +13573,10 @@ The jQuery object representing the table row being reordered.
 
 Available when multiple rows are dragged - the jQuery object representing the selected and dragged rows.
 
+> When you Drap and Drop multiple items from one instance of the Grid to another the selected and dragged rows are available by the selected rows of the external Grid via the [`select`](/api/javascript/ui/grid/methods/select) method.
+
+`selectedRows = externalGrid.select();`
+
 ##### e.newIndex `Number`
 
 The new row index.

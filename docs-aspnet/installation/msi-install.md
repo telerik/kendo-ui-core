@@ -9,7 +9,7 @@ position: 2
 
 # Installation Overview
 
-This article describes how to download and install Telerik UI for ASP.NET Core on a Windows machine. 
+This article describes how to download and install Telerik UI for ASP.NET Core on a Windows machine.
 
 ## Prerequisites
 
@@ -58,17 +58,17 @@ You will find the following in the Telerik UI for ASP.NET Core installation dire
 
 ## Sample Application
 
-Telerik UI for ASP.NET Core comes with a sample .NET Core application, which is available in two versions:
+Telerik UI for ASP.NET Core comes with a sample .NET Core application, which is built with Visual Studio 2022:
 
- * A Sample Application built with Visual Studio 2019
- 
-Both versions represent an offline alternative of the [Telerik UI for ASP.NET Core Demos](https://demos.telerik.com/aspnet-core). You can use the sample application as an inspiration, or you can experiment with it while you get accustomed to the product.
+ * A Sample Application built with Visual Studio 2022
 
-To run the sample application in Visual Studio 2019:
+You can use the sample application as an inspiration, or you can experiment with it while you get accustomed to the product.
+
+To run the sample application in Visual Studio 2022:
 
 1. Navigate to the Telerik UI for ASP.NET Core installation directory.
 
-1. Open the Visual Studio 2019 sample project: `wrappers\aspnetcore\Examples\AspNet.Core\VS2019\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
+1. Open the Visual Studio 2022 sample project: `wrappers\aspnetcore\Examples\AspNet.Core\VS2022\Kendo.Mvc.Examples\Kendo.Mvc.Examples.csproj`.
 
 1. Press `CTRL+F5` to build and run the application.
 

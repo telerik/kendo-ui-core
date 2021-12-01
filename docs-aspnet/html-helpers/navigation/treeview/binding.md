@@ -104,7 +104,7 @@ private IEnumerable<TreeViewItemModel> GetData()
 
 ## Remote Data Binding
 
-The TreeView provides support for remote data binding by using a `DataSource` configuration object.
+The TreeView provides support for remote data binding by using a [`DataSource`]({% slug htmlhelpers_datasource_aspnetcore %}) configuration object.
 
 ```Razor
 @(Html.Kendo().TreeView()
@@ -147,6 +147,8 @@ public IActionResult Read_TreeViewData(int? id)
     return Json(result);
 }
 ```
+
+By default, the TreeView sends to the remote endpoint the `id` of the expanded node. To [send additional data]({% slug htmlhelpers_datasource_aspnetcore %}#pass-additional-data-to-action-methods) use the DataSource `Data` method and provide the name of a JavaScript function which will return a JavaScript object with the additional data.
 
 {% if site.core %}
 ## Razor Pages

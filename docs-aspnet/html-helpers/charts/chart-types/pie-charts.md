@@ -76,4 +76,5 @@ The Pie Chart supports the following `ChartSeriesGradient` options:
 ## See Also
 
 * [Basic Usage of the Pie Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pie-charts/index)
+* [Data Binding Options for the Telerik UI for {{ site.framework }} Charts]({% slug htmlhelpers_charts_databinding_aspnetcore %})
 * [Server-Side API](/api/chart)

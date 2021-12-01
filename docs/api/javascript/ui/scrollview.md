@@ -364,6 +364,81 @@ Defines the aria-label for the next button.
     });
     </script>
 
+### messages.pagerLabel `String`*(default: "ScrollView pager")*
+
+Defines the aria-label for the pager.
+
+> **Note:** Will render the label only if paging and keyboard navigation are enabled.
+
+#### Example - setting the pagerLabel
+
+    <div id="scrollView" style="height: 500px; width:100%;"></div>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+         # } #
+        </div>
+    </script>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: {
+                    url: "https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products"
+                }
+            },
+            serverPaging: true,
+            pageSize: 3
+        });
+
+        $("#scrollView").kendoScrollView({
+            dataSource: dataSource,
+            messages: {
+              pagerLabel: "Control pager"
+            },
+            navigatable: true,
+            template: $("#scrollview-template").html(),
+            contentHeight: "100%",
+            enablePager: false
+        });
+
+        function setBackground(id) {
+            return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
+        }
+    </script>
+    <style>
+        div.k-scrollview ul.k-scrollview-wrap > li {
+            text-align: center;
+            display: table;
+            box-sizing: border-box;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper {
+            padding: 2em;
+            display: table-cell;
+            vertical-align: middle;
+            white-space: initial;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div {
+            width: 30%;
+            min-width: 150px;
+            box-sizing: border-box;
+            display: inline-block;
+            vertical-align: top;
+            margin-bottom: 1em;
+        }
+
+        ul.k-scrollview-wrap > li > .img-wrapper > div > div {
+            margin: auto;
+            margin-bottom: 0.5em;
+        }
+    </style>
+
 ### messages.previousButtonLabel `String`*(default: "Previous")*
 
 Defines the aria-label for the previous button.
