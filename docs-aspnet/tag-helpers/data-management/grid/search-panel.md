@@ -46,10 +46,21 @@ You can also customize which fields to search through the data when a value is e
         <search fields="@(new string[] { "ContactName", "Country"})">
         </search>
 
+## Specify the filter operator
+
+As of Kendo UI 2021 R3 SP1, you can specify filter operators for each filter type. With this update, you can filter non-string types.
+
+The following example demonstrates how to specify which fields to include in the search
+
+    <search fields-extended="@(new object[]
+                                        {new {Name = "OrderID", Operator = "eq"},
+                                         new {Name = "ShipName", Operator = "contains"},
+                                         new {Name = "ShipCity", Operator = "contains"}})">
+    </search>
+
 ## Known Limitations
 
 * When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
-* When the server operations are enabled, you can search only by using string fields. Using the `Contains` filter operation is available only for string types.
 
 ## See Also
 

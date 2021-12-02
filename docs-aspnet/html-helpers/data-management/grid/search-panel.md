@@ -31,6 +31,19 @@ You can also customize which fields to search through the data when a value is e
         s.Field(c => c.CompanyName); 
     })
 
+## Specify the filter operator
+
+As of Kendo UI 2021 R3 SP1, you can specify filter operators for each filter type. With this update, you can filter non-string types.
+
+The following example demonstrates how to specify which fields to include in the search
+
+    .Search(s => {
+            s.Field(o => o.OrderID, "eq");
+            s.Field(o => o.Freight, "gt");
+            s.Field(o => o.ShipName, "contains");
+            s.Field(o => o.ShipCity, "contains");
+    })
+
 The code snippets from above can be seen in action in the following demo:
 
 * [Grid Seach Panel Demo](https://demos.telerik.com/aspnet-core/grid/search-panel)
@@ -38,7 +51,6 @@ The code snippets from above can be seen in action in the following demo:
 ## Known Limitations
 
 * When filtering is enabled in the filter textboxes for all Grid columns will be populated with the value entered in the search textbox.
-* When the server operations are enabled, you can search only by using string fields. Using the `Contains` filter operation is available only for string types.
 
 ## See Also
 
