@@ -9,7 +9,7 @@ position: 2
 
 ## Using Predefined Models
 
-REPL uses the predefined models available in the Telerik UI for ASP.NET Core demos. You can find them in your Telerik UI for ASP.NET Core installation folder, which should be at a location similar to the following:
+Telerik REPL uses the predefined models available in the Telerik UI for ASP.NET Core demos. You can find them in your Telerik UI for ASP.NET Core installation folder, which should be at a location similar to the following:
 
 *C:\Program Files (x86)\Progress\Telerik UI for ASP.NET Core Rn YYYY\wrappers\aspnetcore\Examples\AspNet.Core\VSYYYY\Kendo.Mvc.Examples\Models*
 

@@ -113,7 +113,7 @@ navigation:
         title: "Working with Helpers"
         position: 6
      "getting-started/repl":
-        title: "REPL"
+        title: "Telerik REPL"
         position: 9
      "getting-started/vs-integration":
         title: "Integrating with VS"
