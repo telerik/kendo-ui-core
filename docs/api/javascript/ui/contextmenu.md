@@ -975,7 +975,7 @@ Closes the **ContextMenu**. This method can be prevented to stop the closure.
         // get a reference to the ContextMenu widget
         var contextMenu = $("#context-menu").data("kendoContextMenu");
         // close the ContextMenu
-        contextMenu.close(100, 100);
+        contextMenu.close();
     </script>
 
 #### Parameters

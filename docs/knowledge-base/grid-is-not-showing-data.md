@@ -52,7 +52,7 @@ Edit the `ConfigureServices` method in the `Startup.cs`.
         // https://github.com/aspnet/Announcements/issues/194
         services
             .AddMvc()
-            .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
         // Add Kendo UI services to the services container
         services.AddKendo();

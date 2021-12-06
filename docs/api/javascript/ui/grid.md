@@ -1968,7 +1968,6 @@ Takes the form "{0:format}" where "format" can be a:
         field: "number",
         format: "{0:c}"
       } ],
-      filterable: true,
       dataSource: [ { date: new Date(), number: 3.1415 } ]
     });
     </script>
