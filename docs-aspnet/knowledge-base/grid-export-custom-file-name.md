@@ -12,9 +12,9 @@ res_type: kb
 
 <table>
 	<tbody>
-    <tr>
+        <tr>
 			<td>Product</td>
-			<td>Progress® Kendo UI® Grid for ASP.NET MVC</td>
+			<td>Grid for Progress® Telerik® {{ site.product_short }}</td>
 		</tr>
 	</tbody>
 </table>
