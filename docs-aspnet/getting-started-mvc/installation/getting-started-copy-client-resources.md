@@ -163,6 +163,14 @@ For more information, refer to the article on [using the Kendo UI CDN services](
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.timezones.min.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>
 
+## Custom Download Builder
+
+Users with a commercial license can use the [Custom Download Builder tool](https://www.telerik.com/download/custom-download) to create a single JavaScript file which contains the dependencies only for the required widgets and features.
+
+> * Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
+> * It is not possible to load Download Builder packages by using RequireJS, because the tool will not create the required AMD modules.
+> * Make sure the `Server Wrappers` checkbox is checked, to include the scripts required by the wrappers. 
+
 ## See Also
 
 * [Telerik UI for ASP.NET MVC Fundamentals]({% slug fundamentals_aspnetmvc %})

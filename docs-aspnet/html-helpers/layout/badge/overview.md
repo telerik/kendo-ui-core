@@ -20,10 +20,11 @@ The following example demonstrates how to define the Badge by using the Badge Ht
 
 
         <a class="k-button">
-        @(Html.Kendo().Badge()
-            .Name("badge")
-            .Value("42")
-            .Appearance("rectangle"))
+            @(Html.Kendo().Badge()
+                .Name("badge")
+                .Text("42")
+                .Shape(BadgeShape.Rectangle)
+            )
         </a>
 
 ## Basic Configuration
@@ -31,11 +32,12 @@ The following example demonstrates how to define the Badge by using the Badge Ht
 The badge also provides the choice to be inline or overlay and set its type. To make the badge overlay add the `k-badge-overlay` class to the parent parent element.
 
         <a class="k-button k-badge-overlay">
-        @(Html.Kendo().Badge()
-            .Name("badge")
-            .Value("42")
-            .Type("warning")
-            .Appearance("rectangle"))
+            @(Html.Kendo().Badge()
+                .Name("badge")
+                .Text("42")
+                .ThemeColor(BadgeColor.Warning)
+                .Shape(BadgeShape.Rounded)
+            )
         </a>
 
 ## Using templates
@@ -43,11 +45,12 @@ The badge also provides the choice to be inline or overlay and set its type. To 
 With the badge you can customize the content using templates.
 
         <a class="k-button k-badge-overlay">
-        @(Html.Kendo().Badge()
-            .Name("badge")
-            .Value("42")
-            .Template("#= +value > 10 ? '9+' : value #")
-            .Appearance("rectangle"))
+            @(Html.Kendo().Badge()
+                .Name("badge")
+                .Text("120")
+                .Template("#= +this._text > 100 ? 'a lot' : this._text #")
+                .Shape(BadgeShape.Rectangle)
+            )
         </a>
 
 ## Using as a label
@@ -99,12 +102,22 @@ You can integrate the Badge into other UI components. The following example demo
 You can access an existing Button instance by using the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method which gets executed by the jQuery object of the originating element. Once the reference is established, use the [Badge client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/badge#methods) to control its behavior.
 
         <a class="k-button k-badge-overlay">
-        @(Html.Kendo().Badge()
-            .Name("badge")
-            .Value("42")
-            .Template("#= +value > 10 ? '9+' : value #")
-            .Appearance("rectangle"))
+            @(Html.Kendo().Badge()
+                .Name("badge")
+                .Text("42")
+                .TemplateId("badge-template")
+                .Shape(BadgeShape.Pill)
+            )
         </a>
+
+        <script type="text/x-kendo-template" id="badge-template">
+            # var badgeText = this.options.text;#
+            #if(badgeText > 100){#
+                100+
+            #}else{#
+                #=badgeText#
+            #}#
+        </script>
     
         <script>
             var badge = $('#badge').data('kendoBadge');

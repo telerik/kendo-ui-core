@@ -37591,7 +37591,7 @@ Saves the Chart as a PDF file using the options specified in [options.pdf](/api/
 
 #### Example - export the Chart to PDF
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2018.3.1017/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
     <button id="exportBtn">Export to PDF</button>
     <div id="chart" style="width: 600px; height: 400px;"></div>
     <script>

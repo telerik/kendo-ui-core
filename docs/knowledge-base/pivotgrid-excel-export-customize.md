@@ -63,7 +63,7 @@ The PivotGrid triggers its [`excelExport`](api/javascript/ui/pivotgrid/events/ex
 ```
 
 ```dojo
-    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
     
     <div id="example">
       <button id="export" class="k-button k-button-icontext hidden-on-narrow"><span class="k-icon k-i-excel"></span>Export to Excel</button>

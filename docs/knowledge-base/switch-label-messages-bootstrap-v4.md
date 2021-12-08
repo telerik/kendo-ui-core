@@ -19,7 +19,7 @@ ticketid: 1455921
  </tr>
  <tr>
    <td>Created with Kendo UI version</td>
-   <td>Tested up to version 2020.1.219</td>
+   <td>Tested up to version {{ site.cdnVersion }}</td>
   </tr>
 </table>
 
@@ -40,7 +40,7 @@ The Kendo UI Bootstrap theme follows the designs as laid out in [Bootstrap v4](h
 ```
 
 ```dojo
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.1.219/styles/kendo.bootstrap-v4.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.bootstrap-v4.min.css" />
     <style>
         .k-switch-label-on,.k-switch-label-off {
           display:block;

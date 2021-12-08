@@ -9,7 +9,7 @@ position: 3
 
 # Data Binding
 
-By default, the Telerik UI Gantt for ASP.NET MVC performs server-side requests (`HTTP` and `GET`) when doing paging, sorting, and filtering.
+By default, the Telerik UI Gantt for {{ site.framework }} performs server-side requests (`HTTP` and `GET`) when doing paging, sorting, and filtering.
 
 You can also render the view with the data for the tasks and dependences. You have to implement the `IGanttTask` and `IGanttDependency` interfaces in the data models for the `GanttTasks` and `GantDependencies` respectively.
 

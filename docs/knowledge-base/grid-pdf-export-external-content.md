@@ -68,7 +68,7 @@ I am working on a multiple grid export to PDF which needs a custom template.
       <div id="grid"></div>
       <div id="grid2"></div>
 
-      <script src="https://kendo.cdn.telerik.com/2017.3.913/js/pako_deflate.min.js"></script>
+      <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
       <script type="x/kendo-template" id="page-template">
             <div class="page-template">

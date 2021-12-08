@@ -13,7 +13,7 @@ The DatePicker provides options for localizing its user interface by utilizing i
 To enable the desired culture, add a reference to the script file before the widget is initialized and include the desired culture in the settings of the widget.
 
 ```dojo
-  <script src="https://kendo.cdn.telerik.com/2019.2.514/js/cultures/kendo.culture.de-DE.min.js"></script>
+  <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <input id="datepicker" />
     <script>
       $("#datepicker").kendoDatePicker({

@@ -15,7 +15,7 @@ The resizing takes advantage of the [CSS Grid](https://css-tricks.com/snippets/c
 ## Enabling the resizable feature of the TileLayout
 
 To enable the resizable feature of the TileLayout, set the [`Resizable()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutBuilder#resizable) method {% if site.mvc %}
-and pass `true` as a parameter{% endif %}.
+and pass `true` as a parameter{% endif %}. When resizable is enabled, the TileLayout items should have `RowSpan` and `ColSpan` defined.
 
 The example below will render a grid with two rows and two columns which can be resized both vertically and horizontally.
 

@@ -19,7 +19,7 @@ component: grid
  </tr>
  <tr>
   <td>Progress Kendo UI version</td>
-  <td>Created with the 2017.3.913 version</td>
+  <td>Created with the {{ site.cdnVersion }} version</td>
  </tr>
 </table>
 
@@ -65,22 +65,22 @@ How can I export only the selected rows of a Kendo UI Grid to PDF?
 
     <script>
         /*
-                    This demo renders the grid in "DejaVu Sans" font family, which is
-                    declared in kendo.common.css. It also declares the paths to the
-                    fonts below using <tt>kendo.pdf.defineFont</tt>, because the
-                    stylesheet is hosted on a different domain.
-                */
+            This demo renders the grid in "DejaVu Sans" font family, which is
+            declared in kendo.common.css. It also declares the paths to the
+            fonts below using <tt>kendo.pdf.defineFont</tt>, because the
+            stylesheet is hosted on a different domain.
+        */
         kendo.pdf.defineFont({
-            "DejaVu Sans": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans.ttf",
-            "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
-            "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/2016.2.607/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
-            "WebComponentsIcons": "https://kendo.cdn.telerik.com/2017.1.223/styles/fonts/glyphs/WebComponentsIcons.ttf"
+            "DejaVu Sans": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans.ttf",
+            "DejaVu Sans|Bold": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Bold.ttf",
+            "DejaVu Sans|Bold|Italic": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "DejaVu Sans|Italic": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/DejaVu/DejaVuSans-Oblique.ttf",
+            "WebComponentsIcons": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/fonts/glyphs/WebComponentsIcons.ttf"
         });
     </script>
 
     <!-- Load Pako ZLIB library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2017.3.913/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <script type="x/kendo-template" id="page-template">
         <div class="page-template">

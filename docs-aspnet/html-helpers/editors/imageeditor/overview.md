@@ -10,7 +10,7 @@ position: 1
 
 The Telerik UI ImageEditor HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ImageEditor widget.
 
-The ImageEditor utilizes a canvas element and enables image editing. It allows you to open, edit and save edited images.
+The ImageEditor utilizes a canvas element and enables image editing. It allows you to open, edit and save edited `.png`, `.jpg`, or `.jpeg` images.
 
 * [Demo page for the ImageEditor](https://demos.telerik.com/{{ site.platform }}/imageeditor/index)
 

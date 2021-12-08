@@ -102,18 +102,18 @@ Replace the `repeat` directive above with a Kendo UI Grid.
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.1.318/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.1.318/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.1.318/styles/kendo.default.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.1.318/styles/kendo.dataviz.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.1.318/styles/kendo.dataviz.default.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2015.1.318/styles/kendo.mobile.all.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.dataviz.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.mobile.all.min.css">
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2015.1.318/js/angular.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2015.1.318/js/jszip.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2015.1.318/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js"></script>
   </head>
   <body>
 

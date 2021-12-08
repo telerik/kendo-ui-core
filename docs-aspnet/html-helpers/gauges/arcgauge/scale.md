@@ -44,6 +44,18 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
     )
 ````
 
+## Reverse
+
+Reverses the scale direction - values are increased counterclockwise.
+
+````CSHTML
+    @(Html.Kendo().ArcGauge()
+        .Name("gauge")
+        .Value(65)
+        .Scale(x => x.Reverse(true))
+    )
+````
+
 ## See Also
 
 * [Overview of the ArcGauge]({%slug overview_arcgaugehelper_aspnetcore%})

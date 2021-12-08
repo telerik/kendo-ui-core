@@ -46,8 +46,8 @@ https://docs.telerik.com/kendo-ui/globalization/localization
 Here is a full sample:
 
 ```dojo 
-    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/cultures/kendo.culture.bg-BG.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/messages/kendo.messages.bg-BG.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.bg-BG.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/messages/kendo.messages.bg-BG.min.js"></script>
 
     <p>Modern Picker with Bulgarian Localization</p>
 
@@ -67,7 +67,7 @@ Here is a full sample:
 This is a custom approach by modifying the values directly in the DOM elements using JavaScript:
 
 ```dojo 
-    <script src="https://kendo.cdn.telerik.com/2020.3.1021/js/cultures/kendo.culture.nl-NL.min.js">     </script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.nl-NL.min.js">     </script>
 
     <p>Modern Picker with Dutch Localization</p>
 

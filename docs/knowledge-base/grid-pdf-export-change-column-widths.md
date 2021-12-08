@@ -98,7 +98,7 @@ You can also target specific columns by using the `:nth-child()` selector.
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2017.2.621/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">

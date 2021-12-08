@@ -84,7 +84,7 @@ The following example demonstrates how to hide the last column during PDF Export
   <body>
 
     <!-- Load Pako Deflate library to enable PDF compression -->
-    <script src="https://kendo.cdn.telerik.com/2019.1.220/js/pako_deflate.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/pako_deflate.min.js"></script>
 
     <div id="grid"></div>
     <script type="x/kendo-template" id="page-template">

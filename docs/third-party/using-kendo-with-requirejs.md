@@ -62,8 +62,8 @@ The following example demonstrates how to use a bundle script with RequireJS.
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2018.1.221/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -73,8 +73,8 @@ The following example demonstrates how to use a bundle script with RequireJS.
       require.config({
         paths: {
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "jszip": "https://kendo.cdn.telerik.com/2018.1.221/js/jszip.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2018.1.221/js/kendo.all.min",
+          "jszip": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/jszip.min",
+          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min",
         }
       });
 
@@ -100,9 +100,9 @@ The following example demonstrates how to load AngularJS and initialize it with 
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.rtl.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>
@@ -115,7 +115,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
         paths: {
           "angular": "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min",
           "jquery": "https://code.jquery.com/jquery-1.9.1.min",
-          "kendo.all.min": "https://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min"
+          "kendo.all.min": "https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min"
         },
         shim: {
           "angular": { deps: ["jquery"] },
@@ -151,8 +151,8 @@ The following example demonstrates how to use a [custom Kendo script created wit
 <!DOCTYPE HTML>
 <html>
   <head>
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.514/styles/kendo.common.min.css">
-  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2019.2.514/styles/kendo.default.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css">
+  <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.default.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
   </head>
   <body>

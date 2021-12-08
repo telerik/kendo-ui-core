@@ -156,7 +156,7 @@ If no culture is found the default one is used.
 > The culture must be set before any Kendo UI widgets that rely on it, are initialized.
 
 #### Example -  include a culture-specific JavaScript file and set the culture
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.en-GB.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.en-GB.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.format("{0:c}", 99)); // outputs "$99.00" using the default en-US culture
@@ -472,7 +472,7 @@ Parses a string as a floating point number.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseFloat("12.22")); // outputs "12.22"
@@ -503,7 +503,7 @@ Parses as a string as an integer.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
       console.log(kendo.parseInt("12.22")); // outputs "12"
@@ -913,7 +913,7 @@ The container element to enable scrolling for.
 Formats a `Number` or `Date` using the specified format and the current culture.
 
 #### Example
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
       // Format a number using standard number formats and default culture (en-US)
 	/* The result can be observed in the DevTools(F12) console of the browser. */
@@ -1229,7 +1229,7 @@ Formats the value as a number with decimal and thousand separators.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "n")); // outputs "1,234.57"
@@ -1244,7 +1244,7 @@ Formats the value by adding the currency symbol.
 
 #### Example
 
-    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/cultures/kendo.culture.de-DE.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/cultures/kendo.culture.de-DE.min.js"></script>
     <script>
 	/* The result can be observed in the DevTools(F12) console of the browser. */
     console.log(kendo.toString(1234.567, "c")); // outputs "$1,234.57"

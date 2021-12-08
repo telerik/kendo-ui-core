@@ -30,7 +30,7 @@ The following example demonstrates how to insert a complete form inside the Wind
 
 ## Loading External Form
 
-The Telerik UI Window for ASP.NET MVC enables you to use the `LoadContentFrom()` method to load content from a view into the popup content.
+The Telerik UI Window for {{ site.framework }} enables you to use the `LoadContentFrom()` method to load content from a view into the popup content.
 
 Though the Window allows the creation of popup forms, you need to consider the conceptual differences during their implementation. Typically, if you load a view into a Kendo UI for jQuery Window, it does not act as a separate browser window. This means that any returned data from the form submit action loads into the main page and eventually might lead to unexpected results.
 
