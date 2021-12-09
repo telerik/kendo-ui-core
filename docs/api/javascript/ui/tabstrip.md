@@ -587,7 +587,7 @@ Appends a tab to the collection of tabs in a **TabStrip**.
             dataTextField: "text",
             dataImageUrlField: "imageUrl",
             dataContentField: "content",
-            dataContentUrlField: "contentUrl"
+            dataContentUrlField: "contentUrl",
             dataSource: [
                             {
                                 text: "Tab 1",

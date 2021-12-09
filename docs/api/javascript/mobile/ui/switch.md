@@ -210,7 +210,9 @@ Toggle the checked state of the widget.
 
 ### change
 
-Fires when the state of the widget changes
+Fires when the state of the widget changes.
+
+More information about the Kendo UI Application for mobile can be found in [`this article`](/controls/hybrid/application).
 
 #### Event Data
 
@@ -225,6 +227,7 @@ The checked state of the widget.
     </div>
 
     <script>
+    // the content of the document.body is used by default
     var app = new kendo.mobile.Application();
 
     function onChange(e) {

@@ -2819,6 +2819,8 @@ The width of the column. Numeric values are treated as pixels. The width option 
 
 **For more important information, please refer to [Column Widths](/controls/data-management/grid/columns/widths)**.
 
+Grid options, including column widths, can be set programmatically after Grid initialization with the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
+
 #### Example - set the column width as a string
 
      <div id="grid"></div>
@@ -12382,6 +12384,78 @@ The widget instance which fired the event.
         console.log(e.masterRow, e.detailRow);
       }
     });
+    </script>
+
+#### Example - get the data items of the expanded master and detail rows
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        dataSource: {
+          data: [
+            { EmployeeID: 1, FirstName: "Nancy", LastName: "Davolio", Country: "USA"},
+            { EmployeeID: 2, FirstName: "Andrew", LastName: "Fuller", Country: "USA"},
+            { EmployeeID: 3, FirstName: "Janet", LastName: "Leverling", Country: "Germany"}
+          ]
+        },
+        pageable: true,
+        detailInit: detailInit,
+        dataBound: function() {
+          this.expandRow(this.tbody.find("tr.k-master-row").first());
+        },
+        columns: [
+          {
+            field: "FirstName",
+            title: "First Name",
+            width: "110px"
+          },
+          {
+            field: "LastName",
+            title: "Last Name",
+            width: "110px"
+          },
+          {
+            field: "Country",
+            width: "110px"
+          }
+        ],
+        detailExpand: function(e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+          var masterDataItem = e.sender.dataItem(e.masterRow);
+          // get detail Grid data
+          //var detailDataItems = e.detailRow.find(".k-grid").data("kendoGrid").dataSource.data();
+
+          //get detail grid data items using dataItem()
+          var detailGridRows = e.detailRow.find(".k-master-row");
+          var detailGrid = e.detailRow.find(".k-grid").data("kendoGrid");
+          var detailDataItems = [];
+          detailGridRows.each(function(idx, row){
+            detailDataItems.push(detailGrid.dataItem(row))
+          });
+
+          console.log("master row dataItem", masterDataItem);
+          console.log("detail row dataItem", detailDataItems);
+        }
+      });
+
+      function detailInit(e) {
+        $("<div/>").appendTo(e.detailCell).kendoGrid({
+          dataSource: {
+            data: [
+              {EmployeeID: 1, OrderID: 10258, ShipCountry: "Austria" },
+              {EmployeeID: 2, OrderID: 10558, ShipCountry: "Spain" },
+              {EmployeeID: 1, OrderID: 10256, ShipCountry: "France" },
+              {EmployeeID: 3, OrderID: 11005, ShipCountry: "Spain" }
+            ],
+            filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
+          },
+          pageable: true,
+          columns: [
+            { field: "OrderID", width: "110px" },
+            { field: "ShipCountry", title:"Ship Country", width: "110px" }
+          ]
+        });
+      }
     </script>
 
 #### Example - subscribe to the "detailExpand" event after initialization
