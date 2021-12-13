@@ -2284,6 +2284,41 @@ The fields which can be used in the template are:
       }
     });
     </script>
+    
+#### Example - set the group header template as a function
+
+    <div id="grid"></div>
+    <script>
+      var grid = $("#grid").kendoGrid({
+        groupable: true,
+        columns: [
+          { field: "name" },
+          {
+            field: "age",
+            groupHeaderTemplate: groupHeaderTemp,
+            aggregates: ["count"]
+          },
+          { field: "year", aggregates: ["max"] }
+        ],
+        dataSource: {
+          data: [
+            { name: "Jane Doe", age: 30, year: 1978 },
+            { name: "John Doe", age: 30, year: 1980 }
+          ],
+          group: {
+            field: "age", aggregates: [
+              { field: "age", aggregate: "count" },
+              { field: "age", aggregate: "max" }, 
+              { field: "year", aggregate: "max" }
+            ]
+          }
+        }
+      }).data("kendoGrid");
+
+      function groupHeaderTemp(data) {
+        return `Age: ${data.value} total: ${data.count} Max Year: ${data.aggregates.year.max}`;
+      }
+    </script>
 
 ### columns.groupFooterTemplate `String|Function`
 

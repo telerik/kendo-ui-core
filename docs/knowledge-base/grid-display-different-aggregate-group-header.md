@@ -56,7 +56,7 @@ The following example demonstrates the suggested approach by displaying the **Un
         },
         pageSize: 7,
         group: {
-          field: "UnitsInStock", aggregates: { field: "UnitsInStock", aggregate: "sum" }
+          field: "ProductName", aggregates: [{ field: "UnitsInStock", aggregate: "sum" }]
 
         },
 

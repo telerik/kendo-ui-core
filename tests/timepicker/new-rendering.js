@@ -157,6 +157,7 @@
 
             picker.timeView._nowClickHandler({ preventDefault: $.noop});
 
+            assert.notEqual(+value, +picker.value());
             assert.notEqual(+value, +picker.timeView._value);
         });
 

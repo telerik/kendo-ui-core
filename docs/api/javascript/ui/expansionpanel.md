@@ -310,14 +310,110 @@ Fired when the widget is expanded.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+#### Example - subscribe to the "expand" event during initialization
+
+<div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+<script>
+    $("#expansionPanel").kendoExpansionPanel({
+        title: "Lorem ipsum",
+      	expand: function(e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("expand has been fired");
+        }
+    });
+</script>
+
+#### Example - subscribe to the "expand" event after initialization
+
+    <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+    <script>
+      $("#expansionPanel").kendoExpansionPanel({
+        title: "Lorem ipsum"
+      });
+
+      var expansionPanel = $("#expansionPanel").data("kendoExpansionPanel");
+      expansionPanel.bind("expand", expansionPanelExpand);
+
+      function expansionPanelExpand() {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("expand has been fired");
+      }
+    </script>
+
 ### collapse
 
 Fired when the widget is collapsed.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
+#### Example - subscribe to the "collapse" event during initialization
+
+<div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+<script>
+    $("#expansionPanel").kendoExpansionPanel({
+        title: "Lorem ipsum",
+      	collapse: function(e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("collapse has been fired");
+        }
+    });
+</script>
+
+#### Example - subscribe to the "collapse" event after initialization
+
+    <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+    <script>
+      $("#expansionPanel").kendoExpansionPanel({
+        title: "Lorem ipsum"
+      });
+
+      var expansionPanel = $("#expansionPanel").data("kendoExpansionPanel");
+      expansionPanel.bind("collapse", expansionPanelCollapse);
+
+      function expansionPanelCollapse() {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("collapse has been fired");
+      }
+    </script>
+
 ### complete
 
 Fired when the animation during collapse/expand is completed.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
+
+#### Example - subscribe to the "complete" event during initialization
+
+<div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+</div>
+<script>
+    $("#expansionPanel").kendoExpansionPanel({
+        title: "Lorem ipsum",
+      	complete: function(e) {
+          /* The result can be observed in the DevTools(F12) console of the browser. */
+            console.log("complete has been fired");
+        }
+    });
+</script>
+
+#### Example - subscribe to the "complete" event after initialization
+
+    <div id="expansionPanel">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+    <script>
+      $("#expansionPanel").kendoExpansionPanel({
+        title: "Lorem ipsum"
+      });
+
+      var expansionPanel = $("#expansionPanel").data("kendoExpansionPanel");
+      expansionPanel.bind("complete", expansionPanelComplete);
+
+      function expansionPanelComplete() {
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log("complete has been fired");
+      }
+    </script>

@@ -642,6 +642,7 @@ var __meta__ = { // jshint ignore:line
 
             if (handled) {
                 e.preventDefault();
+                e.stopPropagation();
             }
         },
 
