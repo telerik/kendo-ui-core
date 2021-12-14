@@ -157,6 +157,62 @@ All Telerik UI for ASP.NET Core components are compatible with the ASP.NET Razor
         }
     ```
 
+## Post data from a Razor Page
+
+You can post data to the PageModel by binding the model properties to editors and submitting the entire model through a form. The example below demonstrates how to post the selected option from the [AutoComplete component]({% slug htmlhelpers_autocomplete_aspnetcore %}) to the PageModel:
+
+```tab-RazorPage(csthml)
+    @page
+    @model IndexModel
+
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
+
+    <form id="formExample" class="form-horizontal" method="post">
+        <div class="form-group">
+            @(Html.Label("Ship name:"))
+            <div class="col-sm-10">
+                @(Html.Kendo().AutoCompleteFor(m => m.ShipName)
+                    //.Name("ShipName") is not required when using <WidgetName>For(). The attrbibutes of the input element "name" and "id" will be generated automiatically to match the name of the Model property (for example, "ShipName").
+                    .Filter("startswith")
+                    .Placeholder("Select country...")
+                    .BindTo(new string[] {
+                        "France",
+                        "Germany",
+                        "United Kingdom"
+                    })
+                    .Separator(", ")
+                )
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Send</button>
+            </div>
+        </div>
+    </form>
+```
+```tab-PageModel(cshtml.cs)
+    public class IndexModel : PageModel
+    {
+        [BindProperty]
+        public string ShipName { get; set; }
+
+        public void OnGet()
+        {
+        }
+
+        public IActionResult OnPost()
+        {
+            string submitted_AutoComplete_value = ShipName;
+            return RedirectToPage("Success");
+        }
+    }
+
+```
+
+For more information on the model binding in Razor Pages application, refer to [the official MSDN documentation](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio#write-a-basic-form).
+
 ## GitHub Repo with Razor Pages Examples
 
 A sample project with Razor Pages examples, which demonstrates the usage of the Telerik UI for ASP.NET Core components, is located in the [ASP.NET Core Examples](https://github.com/telerik/ui-for-aspnet-core-examples) repository on GitHub.

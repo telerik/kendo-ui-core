@@ -42,10 +42,10 @@ The example below demonstrates how to implement batch editing in the Grid. For a
     <editable mode="incell" />
     <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
     </pageable>
-    <toolbar>
-        <toolbar-button name="create" text="Add new record"></toolbar-button>
-        <toolbar-button name="save" text="Save Changes"></toolbar-button>
-        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button>
+    <toolbar> <!-- Enable the built-in grid's Toolbar commands "create", "save", and "cancel". -->
+        <toolbar-button name="create" text="Add new record"></toolbar-button> <!-- Adds an empty row to the grid to create a new record. -->
+        <toolbar-button name="save" text="Save Changes"></toolbar-button> <!-- Saves the new and the edited records. -->
+        <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button> <!-- Reverts any data changes done by the end user. -->
     </toolbar>
     <columns>
         <column field="ProductName" title="Product Name" width="240" />

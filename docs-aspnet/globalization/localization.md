@@ -34,6 +34,9 @@ The following example demonstrates how to register the localization script in th
     <script src="https://kendo.cdn.telerik.com/<version>/js/kendo.aspnetmvc.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/<version>/js/messages/kendo.messages.es-ES.min.js"></script>
 
+To change the current culture and language dynamically, refer to the [demo on globalization by the Grid](https://demos.telerik.com/{{ site.platform }}/grid/globalization).
+
+
 > Currently, translations are not available for every language and some of the localization files may be incomplete. For more information on the full list of available translations, refer to the [section on contributing](#contribution).
 
 ## Creating New Localization Files
