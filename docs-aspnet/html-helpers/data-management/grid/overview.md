@@ -107,6 +107,7 @@ The following example demonstrates how to define the Grid by using the Grid Html
     * [Scaffolding]({% slug scaffoldinggrid_aspnetmvc %}){% endif %}
     * [Scroll modes]({% slug htmlhelpers_grid_aspnetcore_scrolling %})
     * [Selection]({% slug htmlhelpers_grid_aspnetcore_selection %})
+    * [Toolbar]({% slug htmlhelpers_grid_aspnetcore_toolbar %})
     * [Rendering and dimensions]({% slug width_grid_aspnetcore %})
     * [Responsive Grid]({% slug adaptive_rendering_gridhelper_aspnetcore %})
     * [Performance tips]({% slug performance_htmlhelpers_grid_aspnetcore %})

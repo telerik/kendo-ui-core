@@ -17,7 +17,7 @@ It enables you to organize and manage files and folders and provides you with a 
 
 ## Initializing the FileManager
 
-The following example demonstrates initialization of the FileManager with a local binding. The file structure is served as JSON though the FileManager DataSource object.
+The following example demonstrates the initialization of the FileManager with a remote binding. The file structure is served as JSON though the FileManager DataSource object.
 
 ```Razor
    @(Html.Kendo().FileManager()
@@ -111,7 +111,7 @@ The following example demonstrates initialization of the FileManager with a loca
 ```
 ## Referencing Existing Instances
 
-To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [FileManager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager#methods) to control its behavior.
+To refer to an existing FileManager instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [FileManager client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/filemanager#methods) to control its behavior.
 
         var filemanager = $("#filemanager").data("kendoFileManager");
 
