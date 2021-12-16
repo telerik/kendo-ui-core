@@ -141,6 +141,10 @@
 
 @grid-search-width: @input-default-width;
 
+@grid-header-inner-margin: -0.786em -0.6em -0.786em -1.286em;
+
+@grid-filterable-icon-spacing: ~"calc( @{icon-size} + 1em )";
+
 // Calendar
 @calendar-padding-x: 0;
 @calendar-padding-y: 0;
@@ -1830,15 +1834,6 @@ form.k-filter-menu .k-textbox {
 .k-gantt-actions > .k-button {
      vertical-align: middle;
 }
-
-// Icons
-
-.k-grid-header .k-grid-filter,
-.k-grid-header .k-header-column-menu {
-    padding: .857em;
-    margin: -0.9em -0.6em -0.714em 0;
-}
-
 
 //RTL
 .k-rtl .k-widget .k-dropdown-wrap,

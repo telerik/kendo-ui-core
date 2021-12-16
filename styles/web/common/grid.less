@@ -375,16 +375,22 @@ div.k-grid-footer
 }
 
 // Grid :: filtering
-
-.k-header > .k-grid-filter,
-.k-header > .k-header-column-menu
+.k-header .k-grid-filter,
+.k-header .k-header-column-menu
 {
-    float: right;
-    margin: -.5em -.6em -.4em 0;
-    padding: .5em .2em .4em;
-    position: relative;
+    margin: 0;
+    padding: 0;
+    width: @button-calc-size;
+    height: @button-calc-size;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
     z-index: 1; // mvc site.css
     color: inherit;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .k-grid .k-animation-container
@@ -1232,5 +1238,68 @@ form.k-filter-menu .k-textbox
             border-left-width: 1px;
             border-right-width: 0;
         }
+    }
+}
+
+/* Header Overflow */
+.k-grid {
+    .k-header > .k-cell-inner {
+        margin: @grid-header-inner-margin;
+    }
+
+    .k-header.k-filterable {
+        position: relative;
+        padding-right: @grid-filterable-icon-spacing;
+    }
+
+    .k-cell-inner {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        overflow: hidden;
+
+        > .k-link {
+            padding: @grid-th-padding;
+            width: auto;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            flex: 1;
+            overflow: hidden;
+
+            > .k-icon.k-i-sort-desc-sm,
+            > .k-icon.k-i-sort-asc-sm {
+                margin-left: 0;
+                margin-top: 0;
+                display: inline-block;
+                flex-shrink: 0;
+            }
+
+        }
+
+        .k-sort-order {
+            flex-shrink: 0;
+            line-height: normal;
+        }
+
+        .k-grid-filter,
+        .k-header-column-menu {
+            margin: 0;
+        }
+
+        .k-grid-filter,
+        .k-header-column-menu,
+        .k-hierarchy-cell .k-icon {
+            text-align: center;
+            flex-shrink: 0;
+        }
+    }
+
+    .k-column-title {
+        min-width: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex-shrink: 1;
+        overflow: hidden;
     }
 }

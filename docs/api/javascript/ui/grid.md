@@ -1875,7 +1875,7 @@ The fields which can be used in the template are:
         <span>Min: #: min #</span>
         <span>Max: #: max #</span>
     </script>
-      
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -2412,7 +2412,7 @@ The table header cell will look like this: `<th class="table-header-cell" style=
 The [template](/api/javascript/kendo/methods/template) which renders the column header content. By default the value of the [title](columns.title) column option
 is displayed in the column header cell.
 
-> If sorting is enabled, the column header content will be wrapped in a `<a>` element. As a result the template **must** contain only inline elements.
+> If sorting is enabled, the column header content will be wrapped in a `<span>` element.
 
 #### Example - column header template as a string
 
@@ -2451,11 +2451,11 @@ is displayed in the column header cell.
       selectable: "multiple",
       dataSource: [ { name: "Jane Doe" }, { name: "John Doe" } ]
     });
-      
+
     $("#check-all").change(function(e){
       var grid = $("#grid").data("kendoGrid");
       var selected = grid.select();
-      
+
       if(selected.length > 0) {
         grid.clearSelection();
       } else {
@@ -2922,16 +2922,16 @@ This example displays "Beverages" and "Food" in the "category" column instead of
            data-columns="[
                          { 'field': 'productName' },
 
-                         { 'field': 'category', 'values': [ 
+                         { 'field': 'category', 'values': [
 
-                         { 'text': 'Beverages', 'value': 1 }, 
+                         { 'text': 'Beverages', 'value': 1 },
 
-                         { 'text': 'Food', 'value': 2 } 
+                         { 'text': 'Food', 'value': 2 }
 
                          ]}
 
                          ]"
-           data-bind="source: products" ></div> 
+           data-bind="source: products" ></div>
 
       <script>
         var viewModel = kendo.observable({
@@ -8859,7 +8859,7 @@ The sorting mode. If set to "single" the user can sort by one column. If set to 
       ],
       sortable: {
         mode: "mixed",
-        allowUnsort: true, 
+        allowUnsort: true,
         showIndexes: true
       }
     });
@@ -8920,7 +8920,7 @@ The "search" built-in search panel for the grid.
     <script type="x-kendo/template" id="template">
     	<button class='k-button' onclick='myClick()'>My Button</button>
     </script>
-      
+
     <div id="grid"></div>
     <script>
     $("#grid").kendoGrid({
@@ -8940,7 +8940,7 @@ The "search" built-in search panel for the grid.
       },
       editable: true
     });
-      
+
     function myClick() {
       kendo.alert("Clicked!")
     }
