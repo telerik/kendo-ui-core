@@ -23,7 +23,7 @@ To include the client-side resources, use any of the following approaches:
 
 ## Local Files
 
-1. Go to the [UI for ASP.NET MVC download page](https://www.telerik.com/account/product-download?product=KENDOUIMVC) or to **Account Overview** > **Downloads** > **Telerik UI for ASP.NET MVC**.
+1. Go to the [UI for ASP.NET MVC download page](https://www.telerik.com/account/product-download?product=KENDOUIMVC) or to **Account Overview** > **Downloads** > **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC**.
 1. Download the archive that matches the `Kendo.Mvc.UI` version:
 
     - `telerik.ui.for.aspnetmvc.{{ site.mvcCoreVersion }}.commercial` includes minified scripts and styles.

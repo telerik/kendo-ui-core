@@ -34,7 +34,7 @@ To download the commercial version of Kendo UI:
 
 1. Go to www.telerik.com and log in with your credentials.
 1. Navigate to the [**Downloads** section](https://www.telerik.com/account/my-downloads) of your account.
-1. Search for Progress® Kendo UI® for jQuery and download the package.
+1. Search for **Progress® Kendo UI® for jQuery** and download the package.
 
 Based on the preferred technologies, you can also use other approaches to add Kendo UI to a project. For more details, refer to the following articles:
 

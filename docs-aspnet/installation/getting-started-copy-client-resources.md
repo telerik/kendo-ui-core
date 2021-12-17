@@ -24,7 +24,7 @@ To include the client-side resources, use any of the following approaches:
 
 ## Manual Installation
 
-1. Go to the [UI for ASP.NET Core download page](https://www.telerik.com/account/product-download?product=UIASPCORE) or to **Account Overview** > **Downloads** > **Telerik UI for ASP.NET Core**.
+1. Go to the [UI for ASP.NET Core download page](https://www.telerik.com/account/product-download?product=UIASPCORE) or to **Account Overview** > **Downloads** > **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET Core**.
 1. Download the archive that matches the `Kendo.Mvc.UI` version:
 
     - `telerik.ui.for.aspnet.core.{{ site.mvcCoreVersion }}.commercial-source` includes non-minified scripts and styles.

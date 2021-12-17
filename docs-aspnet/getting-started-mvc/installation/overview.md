@@ -39,7 +39,7 @@ Follow these steps to download Telerik UI for ASP.NET MVC installer:
 
 1. Click **Downloads** in the top navigation bar.
 
-1. Click **UI for ASP.NET MVC**.
+1. Click **Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC**.
 
 1. In the **Installation** section, select the msi installer file.
 
