@@ -9,9 +9,9 @@ position: 4
 
 # Using CDN
 
-The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
+The Kendo UI for jQuery CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
-Only the official Kendo UI releases and service packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
+Only the official Kendo UI for jQuery releases and service packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI for jQuery CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
 
 ## Using the HTTP Protocol
 
@@ -25,13 +25,13 @@ For example, the `{{ site.cdnVersion }}` version can be loaded from the followin
 * `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`
 * `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css`
 
-The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
+The minified Kendo UI for jQuery scripts are available as of the Kendo UI Q1 2014 SP1 release. To load them, use the `http://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.ui.core.min.js` URL.
 
 ## Using the HTTPS Protocol
 
 > The https://da7xgjtj801h2.cloudfront.net/ URL remains active but is no longer recommended for new projects.
 
-To access the Kendo UI CDN service through the HTTPS protocol, use the same `kendo.cdn.telerik.com` host name and replace the scheme (protocol) with `https`. For example, `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
+To access the Kendo UI for jQuery CDN service through the HTTPS protocol, use the same `kendo.cdn.telerik.com` host name and replace the scheme (protocol) with `https`. For example, `https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/kendo.all.min.js`.
 
 ## Troubleshooting
 
@@ -43,18 +43,18 @@ This section provides solutions for common issues you might encounter while usin
 
 **Cause** You might be experiencing Internet, network connectivity, or DNS problems. It is also possible that firewalls, antivirus, or other security software incorrectly filters out the CDN scripts or modifies (breaks) them on the fly.
 
-**Solution** Contact your system administrator because remote investigation of connection problems is outside the scope of the Kendo UI Support Team.
+**Solution** Contact your system administrator because remote investigation of connection problems is outside the scope of the Kendo UI for jQuery Support Team.
 
 ### It is not possible to refer Kendo UI internal builds from CDN
 
-**Cause** The internal Kendo UI builds are not uploaded to CDN because they are intended only for clients with a commercial license. Only major Kendo UI releases and service packs are available on CDN.
+**Cause** The internal Kendo UI for jQuery builds are not uploaded to CDN because they are intended only for clients with a commercial license. Only major Kendo UI for jQuery releases and service packs are available on CDN.
 
 **Solution** For internal builds, use private CDN services. It is recommended that you implement a local fallback when you use any kind of CDN. For more information, refer to [Scott Hanselman's blog post **Fallback from CDN to Local Scripts**](http://www.hanselman.com/blog/CDNsFailButYourScriptsDontHaveToFallbackFromCDNToLocalJQuery.aspx).
 
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Welcome to Kendo UI</title>
+        <title>Welcome to Kendo UI for jQuery</title>
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.common.min.css" />
         <link rel="stylesheet" href="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/styles/kendo.blueopal.min.css" />
 
@@ -72,11 +72,11 @@ This section provides solutions for common issues you might encounter while usin
                 // Checking for loaded CSS files is cumbersome,
                 // therefore assume that if the scripts have failed, so have the stylesheets.
 
-                // Fallback to local Kendo UI stylesheets.
+                // Fallback to local Kendo UI for jQuery stylesheets.
                 document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.common.min.css" %3C/%3E'));
                 document.write(decodeURIComponent('%3Clink rel="stylesheet" href="/path/to/local/kendo.blueopal.min.css" %3C/%3E'));
 
-                // Fallback to local Kendo UI scripts.
+                // Fallback to local Kendo UI for jQuery scripts.
                 document.write(decodeURIComponent('%3Cscript src="/path/to/local/kendo.all.min.js" %3E%3C/script%3E'));
                 // Also add kendo.aspnetmvc.min.js or kendo.timezones.min.js if needed.
             }

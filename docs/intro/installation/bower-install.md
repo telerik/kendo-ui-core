@@ -11,7 +11,7 @@ position: 3
 
 [Bower](https://bower.io/) is a popular package manager for the web that handles frameworks, libraries, assets, and utilities.
 
-Kendo UI maintains the [Kendo UI Core](#kendo-ui-core-on-bower) and the [Kendo UI Professional](#kendo-ui-professional-on-bower) Bower packages. All Kendo UI official releases, service packs, and internal builds are uploaded to both of them.
+Kendo UI for jQuery maintains the [Kendo UI Core](#kendo-ui-core-on-bower) and the [Kendo UI Professional](#kendo-ui-professional-on-bower) Bower packages. All Kendo UI official releases, service packs, and internal builds are uploaded to both of them.
 
 > The Kendo UI Professional Bower package is available only for commercial license holders. For more information, refer to the [list of the Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
 
@@ -21,7 +21,7 @@ The Kendo UI Core Bower package is available as a [public GitHub repository](htt
 
 ## Kendo UI Professional on Bower
 
-The Kendo UI Professional Bower package is available as a private GitHub repository. To access the package, active your subscription for Kendo UI or DevCraft. Bower prompts you to enter your username and password during the installation and update processes. To install the Kendo UI Professional Bower package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. To check the available versions of Kendo UI Professional Bower package, run the `bower info kendo-ui --verbose` command.
+The Kendo UI Professional Bower package is available as a private GitHub repository. To access the package, active your subscription for Kendo UI for jQuery or DevCraft. Bower prompts you to enter your username and password during the installation and update processes. To install the Kendo UI Professional Bower package, run the `bower install https://bower.telerik.com/bower-kendo-ui.git` command. To check the available versions of Kendo UI Professional Bower package, run the `bower info kendo-ui --verbose` command.
 
 You can also add the package to the `bower.json` file.
 

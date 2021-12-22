@@ -28,7 +28,7 @@ The `Shape` parameter controls the shape of the pointer and takes a member of th
 
 * `Arrow`
 
-````CSHTML
+```CSHTML
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer => pointer
@@ -36,13 +36,13 @@ The `Shape` parameter controls the shape of the pointer and takes a member of th
               .Shape(GaugeLinearPointerShape.Arrow)
           )
     )
-````
+```
 
 ## Color
 
 The `Color` (`string`) parameter controls the color of the pointers. It accepts **CSS**, **HEX** and **RGB** colors.
 
-````CSHTML
+```CSHTML
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -61,13 +61,13 @@ The `Color` (`string`) parameter controls the color of the pointers. It accepts 
                   .Shape(GaugeLinearPointerShape.Arrow);
           })
     )
-````
+```
 
 ## Opacity
 
 The `Opacity` (`double`) parameter controls the opacity of the pointers. The value passed to it should be between **0** and **1**.
 
-````CSHML
+```CSHML
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -79,13 +79,13 @@ The `Opacity` (`double`) parameter controls the opacity of the pointers. The val
                   .Shape(GaugeLinearPointerShape.Arrow);
           })
     )
-````
+```
 
 ## Size
 
 The `Size` (`double`) parameter controls the size of the pointers. 
 
-````CSHTML
+```CSHTML
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -96,13 +96,13 @@ The `Size` (`double`) parameter controls the size of the pointers.
                   .Shape(GaugeLinearPointerShape.Arrow);
           })
     )
-````
+```
 
 ## Margin
 
 The `Margin` (`double`) parameter controls the margin between the [Scale]({%slug scale_lineargaugehelper_aspnetcore%}) and the pointers.
 
-````CSHTML
+```CSHTML
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -113,7 +113,7 @@ The `Margin` (`double`) parameter controls the margin between the [Scale]({%slug
                   .Shape(GaugeLinearPointerShape.Arrow);
           })
     )
-````
+```
 ## See Also
 
 * [Overview of the LinearGauge]({%slug overview_lineargaugehelper_aspnetcore%})

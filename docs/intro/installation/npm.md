@@ -12,15 +12,15 @@ The [Node Package Manager (NPM)](http://npmjs.com/) is a popular JavaScript pack
 
 This article assumes that you are familiar with the necessary steps to use browser-based libraries from NPM. Some of the tools that address this issue are Browserify, Webpack, and SystemJS. For more information on possible setups, refer to the [sample repository on GitHub](https://github.com/telerik/kendo-ui-npm-example).
 
-Kendo UI maintains the [Kendo UI Core](#kendo-ui-core-on-npm) and the [Kendo UI](#kendo-ui-on-npm) NPM packages. All Kendo UI official releases, service packs, and internal builds are uploaded to both of them.
+Kendo UI for jQuery maintains the [Kendo UI Core](#kendo-ui-core-on-npm) and the [Kendo UI](#kendo-ui-on-npm) NPM packages. All Kendo UI for jQuery official releases, service packs, and internal builds are uploaded to both of them.
 
-> The Kendo UI NPM package is available only for commercial license holders. For more information, refer to the [list of Kendo UI components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
+> The Kendo UI for jQuery NPM package is available only for commercial license holders. For more information, refer to the [list of Kendo UI for jQuery components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
 
 ## Kendo UI Core on NPM
 
 The Kendo UI Core NPM package is available as [`kendo-ui-core`](https://www.npmjs.com/package/kendo-ui-core) on [http://npmjs.com/](http://npmjs.com/) and is accessible without credentials. To install the package, run `npm install --save kendo-ui-core`.
 
-## Kendo UI on NPM
+## Kendo UI for jQuery on NPM
 
 The Kendo UI NPM package is available as [`@progress/kendo-ui`](https://www.npmjs.com/package/@progress/kendo-ui) in the NPM registry. To install the package, run `npm install --save @progress/kendo-ui`.
 
@@ -28,11 +28,11 @@ The Kendo UI NPM package is available as [`@progress/kendo-ui`](https://www.npmj
 > * The scripts in the NPM package are not usable in the browser. To work around this issue, use a bundler such as [WebPack]({% slug webpacksupport_integration_kendoui %}).
 > * After May 2017, the `kendo` legacy package that is available as a GitHub repository and is accessible through `git+https://bower.telerik.com/npm-kendo-ui/npm-kendo.git` will no longer be updated but will remain active.
 
-## NPM Channels for Kendo UI Packages
+## NPM Channels for Kendo UI for jQuery Packages
 
-As of November 2019, Kendo UI supports two separate channels for its official and internal NPM packages.
+As of November 2019, Kendo UI for jQuery supports two separate channels for its official and internal NPM packages.
 
-* The official releases and service packs for Kendo UI and Kendo UI Core are distributed in the **latest** channel.
+* The official releases and service packs for Kendo UI for jQuery and Kendo UI Core are distributed in the **latest** channel.
 
   To install the latest official build, run `npm install --save @progress/kendo-ui@latest`.
 
@@ -44,7 +44,7 @@ As of November 2019, Kendo UI supports two separate channels for its official an
 
 ## Troubleshooting
 
-This section provides solutions for common issues you might encounter while installing the Kendo UI NPM packages.
+This section provides solutions for common issues you might encounter while installing the Kendo UI for jQuery NPM packages.
 
 ### The jQuery module is not found
 
@@ -69,8 +69,8 @@ This section provides solutions for common issues you might encounter while inst
 
 ## See Also
 
-* [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
-* [Installing Kendo UI with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
-* [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
-* [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Hosting Kendo UI for jQuery in Your Project]({% slug hosting_kendoui %})
+* [Installing Kendo UI for jQuery with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
+* [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})

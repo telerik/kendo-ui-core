@@ -372,7 +372,7 @@ The following example demonstrates the updated Grid configuration.
 
 ## 5. Formatting the Dates
 
-Kendo UI widgets can [display dates in a variety of ways]({% slug dateformatting_kendoui_globalization %}). For example, you can [format](/api/javascript/ui/grid/configuration/columns.format) the **Order Date** column.
+Kendo UI jQuery widgets can [display dates in a variety of ways]({% slug dateformatting_kendoui_globalization %}). For example, you can [format](/api/javascript/ui/grid/configuration/columns.format) the **Order Date** column.
 
 	//field: "OrderDate",
 	//title: "Order Date",
@@ -409,7 +409,7 @@ Then, call the function in the `Freight` [column template](/api/javascript/ui/gr
 
 ## 7. Adding Globalization
 
-[Globalization]({% slug overview_kendoui_globalization %}) is a standard requirement for many software applications. Kendo UI enables you to override the default English messages of the widgets by including an additional JavaScript file. For example, if you want the Grid to render French messages, register the following [localization]({% slug overview_localization_kendoui %}) file after `kendo.all.min.js`.
+[Globalization]({% slug overview_kendoui_globalization %}) is a standard requirement for many software applications. Kendo UI for jQuery enables you to override the default English messages of the widgets by including an additional JavaScript file. For example, if you want the Grid to render French messages, register the following [localization]({% slug overview_localization_kendoui %}) file after `kendo.all.min.js`.
 
     <script src="https://kendo.cdn.telerik.com/{{ site.cdnVersion }}/js/messages/kendo.messages.fr-FR.min.js"></script>
 
@@ -419,7 +419,7 @@ Additionally, culture-aware widgets, such as the Calendar, DatePicker, and Numer
 
 ## 8. Including Charts
 
-You have already rendered a functional Grid in the project and can now display its data in a more visual and user-friendly format by including a Kendo UI Chart.
+You have already rendered a functional Grid in the project and can now display its data in a more visual and user-friendly format by including a Kendo UI jQuery Chart.
 
 Above the Grid, add a new `<div>` element for the Chart.
 
@@ -500,7 +500,7 @@ At this point, the Chart is rendered empty. To get the Grid data and set it to t
 
 In the next example, note the following:
 
-- Kendo UI events expose some common [arguments]({% slug widget_methodsand_events_kendoui_installation %}#using-event-handler-arguments),
+- Kendo UI jQuery events expose some common [arguments]({% slug widget_methodsand_events_kendoui_installation %}#using-event-handler-arguments),
 including the widget instance that fired the event (`e.sender`).
 - The `dataBound` event handler obtains a [reference to the Chart instance]({% slug widget_methodsand_events_kendoui_installation %}) so that the Chart must already exist. That is why you placed the Chart declaration before the declaration of the Grid.
 - The Grid and the Chart can use a [shared Kendo UI DataSource]({% slug overview_kendoui_datasourcecomponent %}#shared-datasource) instance. Avoid using this approach so that the data operations in the Grid do not influence the appearance of the Chart.
@@ -590,8 +590,8 @@ This is it! Now you are ready to dive more deeply into Kendo UI for jQuery and i
 
 ## See Also
 
-* [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
-* [Installing Kendo UI with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
-* [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
-* [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
+* [Hosting Kendo UI for jQuery in Your Project]({% slug hosting_kendoui %})
+* [Installing Kendo UI for jQuery with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Installing Kendo UI for jQuery with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
+* [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})

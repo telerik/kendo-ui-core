@@ -8,24 +8,24 @@ position: 6
 
 # Installing with NuGet
 
-[NuGet](https://www.nuget.org) is a popular .NET package manager. Progress maintains the Telerik NuGet Feed for registered users and all Kendo UI official releases and service packs are published there as well.
+[NuGet](https://www.nuget.org) is a popular .NET package manager. Progress maintains the Telerik NuGet Feed for registered users and all Kendo UI for jQuery official releases and service packs are published there as well.
 
-The Telerik NuGet Feed provides the following Kendo UI packages:
+The Telerik NuGet Feed provides the following Kendo UI for jQuery packages:
 
 * `KendoUIProfessional`&mdash;Kendo UI for jQuery Commercial version.
 * `KendoUIProfessional.Trial`&mdash;Kendo UI for jQuery Trial version.
 * `KendoUICore`&mdash;Kendo UI Core (contains only the Core widgets).
 
-To install Kendo UI with NuGet:
+To install Kendo UI for jQuery with NuGet:
 
 1. Register the Telerik NuGet Feed on your system.
-1. Install the Kendo UI package you need.
+1. Install the Kendo UI for jQuery package you need.
 
 >The legacy https://nuget.telerik.com/nuget server is now deprecated. Make sure to switch to the new https://nuget.telerik.com/v3/index.json server, which is faster, lighter, and reduces the number of requests from your NuGet client.
 
 ## Registering the Feed on Your System
 
-To add the feed as a package source on your machine and access the Kendo UI packages, either:
+To add the feed as a package source on your machine and access the Kendo UI for jQuery packages, either:
 
 * [Use the NuGet CLI](#adding-the-feed-with-nuget-cli), or
 * [Use the UI provided from Visual Studio for configuring authenticated NuGet feeds](#adding-the-feed-with-nuget-package-manager).
@@ -68,7 +68,7 @@ To register the Telerik NuGet Feed on your system by using [NuGet CLI](http://do
 
 1. Select the feed **Name**, set the feed URL to https://nuget.telerik.com/v3/index.json, and click **OK**.
 
-    ![Kendo UI resources](../../images/add-nuget-package-source.png)
+    ![Kendo UI for jQuery resources](../../images/add-nuget-package-source.png)
 
 1. Select the **Browse** list of packages.
 
@@ -76,7 +76,7 @@ To register the Telerik NuGet Feed on your system by using [NuGet CLI](http://do
 
 ## Installing the Kendo UI Packages
 
-After setting up the Telerik NuGet Feed package source on your computer, install the Kendo UI packages by using either:
+After setting up the Telerik NuGet Feed package source on your computer, install the Kendo UI for jQuery packages by using either:
 
 * [The Package Manager Dialog](#installing-with-package-manager-dialog), or
 * [The Package Manager Console](#installing-with-package-manager-console).
@@ -86,17 +86,17 @@ Regardless of the package installation approach you choose, after the installati
 * `/Scripts/kendo/<version>/`&mdash;Contains the minified JavaScript files.
 * `/Content/kendo/<version>/`&mdash;Contains the minified CSS files and theme images.
 
-![Kendo UI resources](../../images/kendo-folder-structure.png)
+![Kendo UI for jQuery resources](../../images/kendo-folder-structure.png)
 
 ### Installing with Package Manager Dialog
 
 1. Right-click the **Solution** or a specific project in **Solution** and navigate to **Manage NuGet Packages**.
 
-    ![Kendo UI resources](../../images/manage-nuget-packages.png)
+    ![Kendo UI for jQuery resources](../../images/manage-nuget-packages.png)
 
 1. Set the package source to `telerik.com` and install the `KendoUIProfessional` NuGet package.
 
-    ![Kendo UI resources](../../images/kendo-ui-package.png)
+    ![Kendo UI for jQuery resources](../../images/kendo-ui-package.png)
 
 ### Installing with Package Manager Console
 
@@ -118,8 +118,8 @@ Regardless of the package installation approach you choose, after the installati
 
 ## See Also
 
-* [Hosting Kendo UI in Your Project]({% slug hosting_kendoui %})
-* [Installing Kendo UI with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
-* [Installing Kendo UI by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
-* [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
-* [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Hosting Kendo UI for jQuery in Your Project]({% slug hosting_kendoui %})
+* [Installing Kendo UI for jQuery with Bower]({% slug kendoui_bower_packages_kendoui_installation %})
+* [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
+* [Installing Kendo UI for jQuery with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
+* [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})

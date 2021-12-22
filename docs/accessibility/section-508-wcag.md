@@ -16,7 +16,9 @@ The Kendo UI components also conform to the technical standards set out in [Sect
 
 Applications built with components that adhere to these guidelines will not only be accessible to people with disabilities, but also to users of all kinds of devices and interfaces such as desktop browsers, voice browsers, mobile phones, automobile-based personal computers, and so on.
 
-The following table lists the Section 508 and WCAG 2.1 compliance levels of support for the Kendo UI widgets. The report is based on results from tests performed on our **Basic Usage** demos.
+The following table lists the Section 508 and WCAG 2.1 compliance levels of support for the Kendo UI widgets. 
+
+> The described level of compliance in the table below is achievable with the **HighContrast Less Theme.**
 
 **Table 1: 508 and WCAG 2.1 compliance with Kendo UI widgets**
 

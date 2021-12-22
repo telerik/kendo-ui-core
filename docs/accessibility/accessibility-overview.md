@@ -14,6 +14,8 @@ Assistive technologies work well for the most basic and text-driven websites and
 
 Web developers can do a lot to bridge this gap between the current challenges which web applications pose to disabled users and the capabilities which assistive technologies support. By providing features, such as full keyboard support, high-contrast visual elements, and text-based equivalents of non-text elements, and by adhering to standards like [WAI-ARIA](https://www.w3.org/WAI/PF/aria-practices/), [WCAG 2.1](https://www.w3.org/TR/WCAG21/), and [Section 508](https://www.section508.gov), developers deliver completely accessible and rich Internet applications.
 
+The Kendo UI for jQuery components are highly extensible and customizable. Depending on the level of customization applied, you may be introducing rendering that is not accessible. Therefore, it is recommended that web developers test any modifications and templates they create to ensure the components still meet the desired level of accessibility standards. Additionally, be mindful of components working with custom input (images, text, HTML content, and so on) and make sure your content is accessible, too.
+
 ## See Also
 
 * [Section 508 Support in Kendo UI]({% slug section508_accessibility_support %})
