@@ -14220,6 +14220,7 @@ declare namespace kendo.dataviz.ui {
         margin?: number | ChartCategoryAxisItemLabelsMargin | undefined;
         mirror?: boolean | undefined;
         padding?: number | ChartCategoryAxisItemLabelsPadding | undefined;
+        position?: string | undefined;
         rotation?: string | number | ChartCategoryAxisItemLabelsRotation | undefined;
         skip?: number | undefined;
         step?: number | undefined;
@@ -21472,7 +21473,7 @@ declare namespace kendo.dataviz {
         slot(from: Date, to?: number, limit?: boolean): kendo.geometry.Rect;
         slot(from: Date, to?: Date, limit?: boolean): kendo.geometry.Rect;
         value(point: kendo.geometry.Point): void;
-        valueRange(): void;
+        valueRange(): any;
 
     }
 
@@ -22302,7 +22303,7 @@ declare namespace kendo.dataviz.diagram {
         position(point: kendo.dataviz.diagram.Point): void;
         clone(): kendo.dataviz.diagram.Shape;
         select(value: boolean): void;
-        connections(type: string): void;
+        connections(type?: string): any;
         getConnector(): void;
         getPosition(side: string): void;
         redraw(options: any): void;
