@@ -2,7 +2,6 @@
 title: Badge Button
 page_title: Badge Button
 description: "Include a badge and enhance the meaning of the text content of the Telerik UI Button HtmlHelper for {{ site.framework }}."
-previous_url: /helpers/navigation/button/icons
 slug: badges_button_aspnetcore
 position: 4
 ---

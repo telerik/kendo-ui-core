@@ -2,7 +2,6 @@
 title: QR Code Types
 page_title: QR Code Types
 description: "Try the different types of Telerik UI QRCode HtmlHelper for {{ site.framework }}."
-previous_url: /helpers/barcodes/qrcode/overview
 slug: types_qrcodehelper_aspnetcore
 position: 3
 ---

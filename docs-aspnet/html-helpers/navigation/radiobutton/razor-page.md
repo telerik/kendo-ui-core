@@ -2,7 +2,6 @@
 title: Razor Page
 page_title: Configure the RadioButton in Razor Page
 description: "Learn how to configure the Telerik UI RadioButton for {{ site.framework }} in Razor Page scenario."
-previous_url: /helpers/navigation/radiobutton/model-binding
 slug: razor_page_radiobutton_aspnetcore
 position: 4
 ---
