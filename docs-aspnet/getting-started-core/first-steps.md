@@ -39,7 +39,7 @@ You'll learn how to:
     <li><span class="k-icon k-i-check"></span>Use the Telerik UI Themes.</li>
 </ul>
 
->tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({% slug virtualclass_uiforcore %}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
+>tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({%slug virtualclass_uiforcore%}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
 
 Using the Visual Studio extensions is the fastest approach to create and configure a project for Telerik UI, but it isn't the only one. The following tutorials describe the alternative approaches:
 

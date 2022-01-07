@@ -20,7 +20,7 @@ If you want to manually set up Telerik UI for ASP.NET MVC in an existing applica
 * [Setup with Telerik NuGet]({% slug setupwithnuget_aspnetmvc %}). 
 * [Manual setup]({% slug manualsetup_aspnetmvc%}).
 
->tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({% slug virtualclass_uiformvc %}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
+>tip How about a free Telerik UI onboarding course? Check out the [Video Onboarding]({%slug virtualclass_uiformvc%}) article and learn how to take advantage of the <a href="https://learn.telerik.com/learn" target="_blank">Telerik Virtual Classroom</a>.
 
 ## Prerequisites
 
