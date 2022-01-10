@@ -246,7 +246,10 @@ if (kendo.ui.FileManager) {
             typeField: "Type",
             dateModifiedField: "Date Modified",
             dateCreatedField: "Date Created",
-            items: "items"
+            items: "items",
+            listLabel: "FileManager ListView",
+            gridLabel: "FileManager Grid",
+            treeLabel: "FileManager TreeView"
         },
         dialogs: {
             upload: {

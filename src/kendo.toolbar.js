@@ -1599,7 +1599,7 @@ var __meta__ = { // jshint ignore:line
             },
 
             _getNextElement: function (item, direction) {
-                var items = this.element.children(":not(.k-separator):visible");
+                var items = this.element.children(":not(.k-separator, .k-spacer):visible");
                 var itemIndex = items.index(item) === -1 ? items.index(item.parentElement) : items.index(item);
                 var startIndex = this.overflowAnchor ? 1 : 0;
                 var directionNumber = direction;
@@ -1639,6 +1639,10 @@ var __meta__ = { // jshint ignore:line
                         if (!focusableItem) {
                             return this.overflowAnchor;
                         }
+                    }
+
+                    if ($(focusableItem).hasClass("k-combobox")) {
+                        focusableItem = $(focusableItem).find("input");
                     }
                     this._preventNextFocus = $(focusableItem).closest("." + BUTTON_GROUP).length ? false : true;
                 }

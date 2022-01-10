@@ -4809,6 +4809,7 @@ declare namespace kendo.ui {
         dateModifiedField?: string | undefined;
         dateCreatedField?: string | undefined;
         items?: string | undefined;
+        listViewLabel?: string | undefined;
     }
 
     interface FileManagerMessages {

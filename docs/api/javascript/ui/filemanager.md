@@ -178,7 +178,7 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Read",
-                            dataType: "json", 
+                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -191,7 +191,7 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Update",
-                            dataType: "json", 
+                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -204,7 +204,7 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Update",
-                            dataType: "json", 
+                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -217,7 +217,7 @@ Sets the [FileManagerDataSource](/api/javascript/data/filemanagerdatasource) of 
 
                         $.ajax({
                             url: baseUrl + "Destroy",
-                            dataType: "json", 
+                            dataType: "json",
                             method: "POST",
                             data: that.parameterMap ? that.parameterMap(options.data, "read") : options.data,
                             success: function(result) {
@@ -1005,6 +1005,8 @@ Defines the localization messages for the views.
 
 ### messages.views.items `String`
 
+### messages.views.listViewLabel `String`
+
 ### messages.dialogs `Object`
 Defines the localization messages for the dialogs.
 
@@ -1502,8 +1504,8 @@ Fired when a error in the DataSource happen.
 
 #### Example
 
-	<div id="filemanager"></div>  
-    <script>        
+	<div id="filemanager"></div>
+    <script>
         $("#filemanager").kendoFileManager({
           dataSource: {
             schema: kendo.data.schemas.filemanager,
@@ -1514,9 +1516,9 @@ Fired when a error in the DataSource happen.
               }
             }
           },
-          error: function(e) {            
+          error: function(e) {
             console.log("Request failed with status " + e.status)
-          }            	
+          }
         });
     </script>
 
