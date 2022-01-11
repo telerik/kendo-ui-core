@@ -416,8 +416,7 @@ it("readonly() removes disabled attribute and disabled class", function() {
 
     assert.equal(datepicker.element.attr("readonly"), "readonly");
     assert.equal(datepicker.element.attr("disabled"), undefined);
-    assert.isOk(datepicker._inputWrapper.hasClass("k-state-default"));
-    assert.isOk(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+    assert.isOk(!datepicker.wrapper.hasClass("k-disabled"));
 });
 
 it("enable(false) removes readonly attribute and default class", function() {
@@ -428,8 +427,7 @@ it("enable(false) removes readonly attribute and default class", function() {
 
     assert.equal(datepicker.element.attr("readonly"), undefined);
     assert.equal(datepicker.element.attr("disabled"), "disabled");
-    assert.isOk(!datepicker._inputWrapper.hasClass("k-state-default"));
-    assert.isOk(datepicker._inputWrapper.hasClass("k-state-disabled"));
+    assert.isOk(datepicker.wrapper.hasClass("k-disabled"));
 });
 
 it("enable() enables widget after readonly()", function() {
@@ -440,8 +438,7 @@ it("enable() enables widget after readonly()", function() {
 
     assert.equal(datepicker.element.attr("readonly"), undefined);
     assert.equal(datepicker.element.attr("disabled"), undefined);
-    assert.isOk(datepicker._inputWrapper.hasClass("k-state-default"));
-    assert.isOk(!datepicker._inputWrapper.hasClass("k-state-disabled"));
+    assert.isOk(!datepicker.wrapper.hasClass("k-disabled"));
 });
 
 it("value method honors options.culture", function() {
@@ -566,6 +563,17 @@ it("setOptions updates options.dates", function() {
     });
 
     assert.equal(datepicker.options.dates.length, 2);
+});
+
+it("setOptions updates the button size correctly", function() {
+    var datepicker = new DatePicker(input);
+
+    datepicker.setOptions({
+        size: "small"
+    });
+
+    assert.isOk(datepicker._dateIcon.hasClass("k-button-sm"));
+    assert.isNotOk(datepicker._dateIcon.hasClass("k-button-md"));
 });
 
 it("disabled date is not set as widgets value", function() {

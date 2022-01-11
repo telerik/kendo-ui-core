@@ -24,6 +24,7 @@
             assert.isOk(wrapperChildren.eq(0).is(".k-window-titlebar"));
             assert.isOk(wrapperChildren.eq(1).is(".k-window-content"));
             assert.isOk(wrapperChildren.eq(2).children(":first").is(".k-textbox"));
+            assert.isOk(wrapperChildren.eq(2).children(":first").children(":first").is(".k-input-inner"));
             assert.isOk(wrapperChildren.eq(3).is(".k-dialog-buttongroup"));
             assert.isOk(wrapperChildren.eq(3).children().eq(0).is(".k-button"));
             assert.isOk(wrapperChildren.eq(3).children().eq(1).is(".k-button"));
@@ -31,7 +32,7 @@
 
         it("focuses the textbox on first show", function() {
             mockFunc(kendo.ui.Prompt.fn, "_focus", function(node) {
-                assert.isOk($(node).hasClass("k-textbox"));
+                assert.isOk($(node).hasClass("k-input-inner"));
             });
             createPrompt({ visible: true });
         });
@@ -39,7 +40,7 @@
         it("open focuses the OK button", function() {
             var dialog = createPrompt({ visible: false });
             mockFunc(dialog, "_focus", function(node) {
-                assert.isOk($(node).hasClass("k-textbox"));
+                assert.isOk($(node).hasClass("k-input-inner"));
             });
             dialog.open();
         });
@@ -59,7 +60,7 @@
 
         it("proptValue sets the prompt input value", function() {
             var promptDialog = createPrompt({ value: "test" });
-            assert.equal(promptDialog.wrapper.find(".k-textbox").val(), "test");
+            assert.equal(promptDialog.wrapper.find(".k-input-inner").val(), "test");
         });
 
         it("first action is primary", function() {
@@ -122,7 +123,7 @@
 
         it("value sets default prompt value", function() {
             kendo.prompt("message", "test value");
-            assert.equal($(".k-textbox").val(), "test value");
+            assert.equal($(".k-input-inner").val(), "test value");
         });
 
         it("ok calls chained done handler with prompt value argument", function() {

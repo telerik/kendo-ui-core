@@ -22,6 +22,8 @@ var __meta__ = { // jshint ignore:line
         VALIDATIONSUMMARY = "k-validation-summary",
         INVALIDLABEL = "k-text-error",
         MESSAGEBOX = "k-messagebox k-messagebox-error",
+        INPUTINNER = ".k-input-inner",
+        INPUTWRAPPER = ".k-input",
         ARIAINVALID = "aria-invalid",
         ARIADESCRIBEDBY = "aria-describedby",
         emailRegExp = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/i,
@@ -442,6 +444,8 @@ var __meta__ = { // jshint ignore:line
                     var parentElement = input.parent().get(0);
                     var nextElement = input.next().get(0);
                     var prevElement = input.prev().get(0);
+                    var isInputInner = input.is(INPUTINNER);
+                    var inputWrapper = input.parent(INPUTWRAPPER);
 
                     // Get the instance of the RadioGroup which is not initialized on the input element
                     if(!widgetInstance && input.is("[type=radio]")) {
@@ -464,6 +468,9 @@ var __meta__ = { // jshint ignore:line
                     } else if (prevElement && isLabelFor(prevElement, input[0])) {
                         // Input after label
                         messageLabel.insertAfter(input);
+                    } else if (isInputInner && inputWrapper.length) {
+                        // Input after input wrapper
+                        messageLabel.insertAfter(inputWrapper);
                     } else {
                         messageLabel.insertAfter(input);
                     }
@@ -484,8 +491,9 @@ var __meta__ = { // jshint ignore:line
             input.toggleClass(VALIDINPUT, valid);
 
             if (kendo.widgetInstance(input)) {
-                var inputWrap = kendo.widgetInstance(input)._inputWrapper;
-                var inputLabel = kendo.widgetInstance(input)._inputLabel;
+                var widget = kendo.widgetInstance(input);
+                var inputWrap = widget._inputWrapper || widget.wrapper;
+                var inputLabel = widget._inputLabel;
 
                 if (inputWrap) {
                     inputWrap.toggleClass(INVALIDINPUT, !valid);

@@ -156,9 +156,9 @@
 
             var button = container.find("#foo");
 
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-active"));
             click(button);
-            assert.isOk(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
+            assert.isOk(button.hasClass("k-active"), "Button receives k-active class after click");
         });
 
         it("click on a toggleButton's icon changes the button state", function() {
@@ -169,10 +169,10 @@
             });
 
             var button = container.find("#foo");
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-active"));
 
             click(container.find("span.k-i-foo"));
-            assert.isOk(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
+            assert.isOk(button.hasClass("k-active"), "Button receives k-active class after click");
         });
 
         it("click on selected toggleButton deselects it", function() {
@@ -185,10 +185,10 @@
             var button = container.find("#foo");
 
             click(button);
-            assert.isOk(button.hasClass("k-state-active"));
+            assert.isOk(button.hasClass("k-active"));
 
             click(button);
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-active"));
         });
 
         it("click on disabled toggleButton does not change its state", function() {
@@ -201,7 +201,7 @@
             var button = container.find("#foo");
 
             click(button);
-            assert.isOk(!button.hasClass("k-state-active"), "Button state is not changed");
+            assert.isOk(!button.hasClass("k-active"), "Button state is not changed");
         });
 
         it("click on disabled toggleButton does not trigger the toggle event", function() {
@@ -287,13 +287,13 @@
 
             click(buttons.eq(0));
 
-            assert.isOk(buttons.eq(0).hasClass("k-state-active"), "First button is selected");
-            assert.isOk(!buttons.eq(1).hasClass("k-state-active"), "Second button is deselected");
+            assert.isOk(buttons.eq(0).hasClass("k-active"), "First button is selected");
+            assert.isOk(!buttons.eq(1).hasClass("k-active"), "Second button is deselected");
 
             click(buttons.eq(1));
 
-            assert.isOk(!buttons.eq(0).hasClass("k-state-active"), "First button is deselected");
-            assert.isOk(buttons.eq(1).hasClass("k-state-active"), "Second button is selected");
+            assert.isOk(!buttons.eq(0).hasClass("k-active"), "First button is deselected");
+            assert.isOk(buttons.eq(1).hasClass("k-active"), "Second button is selected");
         });
 
         it("click on splitButton triggers click event", function(done) {
@@ -396,7 +396,7 @@
                 ]
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
+            var button = container.find("#foo_wrapper .k-split-button-arrow");
             var popup = container.find("#foo_wrapper").data("kendoPopup");
 
             click(button);
@@ -416,7 +416,7 @@
                 ]
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
+            var button = container.find("#foo_wrapper .k-split-button-arrow");
             var popup = container.find("#foo_wrapper").data("kendoPopup");
 
             click(button);
@@ -544,7 +544,7 @@
                 }
             });
 
-            var button = container.find("#foo_wrapper a.k-split-button-arrow");
+            var button = container.find("#foo_wrapper .k-split-button-arrow");
             var popup = container.find(".k-split-button").data("kendoPopup");
 
             click(button); //open
@@ -579,9 +579,9 @@
 
             var button = toolbar.popup.element.find("#foo_overflow > .k-button");
 
-            assert.isOk(!button.hasClass("k-state-active"));
+            assert.isOk(!button.hasClass("k-active"));
             click(button);
-            assert.isOk(button.hasClass("k-state-active"), "Button receives k-state-active class after click");
+            assert.isOk(button.hasClass("k-active"), "Button receives k-active class after click");
         });
 
         it("click event is not fired for disabled buttons (overflow)", function() {
@@ -762,8 +762,8 @@
 
             click($("#left_overflow"));
 
-            assert.isOk($("#left").hasClass("k-state-active"));
-            assert.isOk($("#left_overflow").hasClass("k-state-active"));
+            assert.isOk($("#left").hasClass("k-active"));
+            assert.isOk($("#left_overflow").hasClass("k-active"));
         });
 
     });

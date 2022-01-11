@@ -9,6 +9,7 @@
         "./kendo.binder",
         "./kendo.textbox",
         "./kendo.numerictextbox",
+        "./html/button",
 
         "./colorpicker/colorselector",
         "./colorpicker/flatcolorpicker"
@@ -34,7 +35,6 @@ var __meta__ = { // jshint ignore:line
         parseColor = kendo.parseColor,
         KEYS = kendo.keys,
         BACKGROUNDCOLOR = "background-color",
-        WHITE = "#ffffff",
         MESSAGES = {
             apply  : "Apply",
             cancel : "Cancel",
@@ -82,10 +82,9 @@ var __meta__ = { // jshint ignore:line
             }
             that._value = options.value = value;
 
-            var content = that.wrapper = $(that._template(options));
+            var content = that._inputWrapper = that.wrapper = $(that._template(options));
+            that._applyCssClasses();
             element.hide().after(content);
-
-            that._inputWrapper = $(that.wrapper[0].firstChild);
 
             if (element.is("input")) {
                 element.appendTo(content);
@@ -136,8 +135,7 @@ var __meta__ = { // jshint ignore:line
         enable: function(enable) {
             var that = this,
                 wrapper = that.wrapper,
-                innerWrapper = wrapper.children(".k-picker-wrap"),
-                arrow = innerWrapper.find(".k-select");
+                arrow = wrapper.find(".k-input-button");
 
             if (arguments.length === 0) {
                 enable = true;
@@ -148,20 +146,20 @@ var __meta__ = { // jshint ignore:line
 
             arrow.off(NS).on("mousedown" + NS, preventDefault);
 
-            wrapper.addClass("k-state-disabled")
+            wrapper.addClass("k-disabled")
                 .removeAttr("tabIndex")
                 .add("*", wrapper).off(NS);
 
             if (enable) {
-                wrapper.removeClass("k-state-disabled")
+                wrapper.removeClass("k-disabled")
                     .attr("tabIndex", that._tabIndex)
-                    .on("mouseenter" + NS, function () { innerWrapper.addClass("k-state-hover"); })
-                    .on("mouseleave" + NS, function () { innerWrapper.removeClass("k-state-hover"); })
-                    .on("focus" + NS, function () { innerWrapper.addClass("k-state-focused"); })
-                    .on("blur" + NS, function () { innerWrapper.removeClass("k-state-focused"); })
+                    .on("mouseenter" + NS, function () { wrapper.addClass("k-hover"); })
+                    .on("mouseleave" + NS, function () { wrapper.removeClass("k-hover"); })
+                    .on("focus" + NS, function () { wrapper.addClass("k-focus"); })
+                    .on("blur" + NS, function () { wrapper.removeClass("k-focus"); })
                     .on(KEYDOWN_NS, bind(that._keydown, that))
-                    .on(CLICK_NS, ".k-select", bind(that.toggle, that))
-                    .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function () {
+                    .on(CLICK_NS, ".k-input-button", bind(that.toggle, that))
+                    .on(CLICK_NS, ".k-input-inner", function () {
                         that.trigger("activate");
                     });
             } else {
@@ -170,20 +168,19 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: kendo.template(
-            '<div role="textbox" aria-haspopup="true" class="k-colorpicker">' +
-                '<span  class="k-picker-wrap">' +
-                    '# if (toolIcon) { #' +
-                        '<span class="k-icon k-tool-icon #= toolIcon #">' +
-                            '<span class="k-selected-color"></span>' +
+            '<span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker">' +
+                '<span  class="k-input-inner">' +
+                        '<span class="k-value-icon k-color-preview #: toolIcon ? "k-icon-color-preview" : "" #">' +
+                            '# if (toolIcon) { #' +
+                            '<span class="k-color-preview-icon k-icon #= toolIcon #"></span>' +
+                            '# } #' +
+                            '<span class="k-color-preview-mask"></span>' +
                         '</span>' +
-                    '# } else { #' +
-                        '<span class="k-selected-color"></span>' +
-                    '# } #' +
-                    '<span role="button" class="k-select" unselectable="on" aria-label="select">' +
-                        '<span class="k-icon k-i-arrow-s"></span>' +
-                    '</span>' +
-                '</span >' +
-            '</div>'
+                    '</span >' +
+                    kendo.html.renderButton('<button class="k-select k-button-rectangle k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, this.options, {
+                        icon: "arrow-s"
+                    })) +
+            '</span>'
         ),
 
         options: {
@@ -205,7 +202,10 @@ var __meta__ = { // jshint ignore:line
             view: "gradient",
             views: ["gradient", "palette"],
             backgroundColor: null,
-            ARIATemplate: 'Current selected color is #=data || ""#'
+            ARIATemplate: 'Current selected color is #=data || ""#',
+            size: "medium",
+            rounded: "medium",
+            fillMode: "solid"
         },
 
         events: [ "activate", "change", "select", "open", "close" ],
@@ -241,7 +241,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
         _noColorIcon: function(){
-            return this.wrapper.find(".k-picker-wrap > .k-selected-color");
+            return this.wrapper.find(".k-color-preview");
         },
         color: ColorSelector.fn.color,
         value: ColorSelector.fn.value,
@@ -274,9 +274,9 @@ var __meta__ = { // jshint ignore:line
             this.wrapper.attr("aria-label", this._ariaTemplate(formattedValue));
 
             this._triggerSelect(value);
-            this.wrapper.find(".k-selected-color").css(
+            this.wrapper.find(".k-color-preview-mask").css(
                 BACKGROUNDCOLOR,
-                value ? value.toDisplay() : WHITE
+                value ? value.toDisplay() : ""
             );
 
             this._noColorIcon().toggleClass("k-no-color", !formattedValue);
@@ -351,7 +351,7 @@ var __meta__ = { // jshint ignore:line
                             ev.preventDefault();
                             return;
                         }
-                        that.wrapper.children(".k-picker-wrap").removeClass("k-state-focused");
+                        that.wrapper.removeClass("k-focus");
 
                         var color = selector.color();
 
@@ -377,7 +377,7 @@ var __meta__ = { // jshint ignore:line
                         if (that.trigger("open")) {
                             ev.preventDefault();
                         } else {
-                            that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
+                            that.wrapper.addClass("k-focus");
                         }
                     },
                     activate: function(){
@@ -392,7 +392,7 @@ var __meta__ = { // jshint ignore:line
 
                         selector.value(selectedColor);
                         selector.focus();
-                        that.wrapper.children(".k-picker-wrap").addClass("k-state-focused");
+                        that.wrapper.addClass("k-focus");
                     }
                 });
             }
@@ -409,6 +409,13 @@ var __meta__ = { // jshint ignore:line
     }
 
     ui.plugin(ColorPicker);
+
+    kendo.cssProperties.registerPrefix("ColorPicker", "k-picker-");
+
+    kendo.cssProperties.registerValues("ColorPicker", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 
 })(window.kendo.jQuery);
 

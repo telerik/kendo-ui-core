@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -393,7 +393,7 @@
                     template: "<span class='foo'>#:text#</span>"
                 });
 
-                assert.equal(virtualList.items().first().html(), '<span class="foo">Item 0</span>');
+                assert.equal(virtualList.items().first().find(".k-list-item-text").html(), '<span class="foo">Item 0</span>');
                 done();
             });
         });
@@ -748,7 +748,7 @@
                     assert.equal(this.value().length, 1);
                     assert.equal(this.value()[0], 2);
 
-                    assert.equal(this.element.find(".k-state-selected").length, 1);
+                    assert.equal(this.element.find(".k-selected").length, 1);
                     done();
                 });
                 virtualList.value([2]);

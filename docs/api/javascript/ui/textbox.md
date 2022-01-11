@@ -25,6 +25,24 @@ If set to `false`, the widget will be disabled and will not allow user input. Th
         });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "solid"
+- "flat"
+- "outline"
+- null
+
+#### Example - sets the fillMode
+
+    <input id="textbox" />
+    <script>
+    $("#textbox").kendoTextBox({
+        fillMode: "flat"
+    });
+    </script>
+
 ### label `String|Function|Object` *(default: null)*
 
 Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
@@ -127,6 +145,25 @@ If set to `true`, the widget will be readonly and will not allow user input. The
         });
     </script>
 
+### rounded `String` *(default: 'medium')*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- null
+
+#### Example
+
+    <input id="textbox" />
+    <script>
+    $("#textbox").kendoTextBox({
+        rounded: "large"
+    });
+    </script>
+
 ### value `String`*(default: "")*
 
 The value of the widget.
@@ -138,6 +175,25 @@ The value of the widget.
         $("#textbox").kendoTextBox({
             value: "John Doe"
         });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <input id="textbox" />
+    <script>
+    $("#textbox").kendoTextBox({
+        size: "large",
+        rounded: "large"
+    });
     </script>
 
 ## Methods

@@ -22,15 +22,15 @@
 
         button.focus();
 
-        assert.isOk(button.hasClass("k-state-focused"));
+        assert.isOk(button.hasClass("k-focus"));
     });
 
     it("blurring removes a focused class", function() {
-        var buttonObject = getButton().addClass("k-state-focused").kendoButton();
+        var buttonObject = getButton().addClass("k-focus").kendoButton();
 
         button.blur();
 
-        assert.isOk(!button.hasClass("k-state-focused"));
+        assert.isOk(!button.hasClass("k-focus"));
     });
 
     it("Enter key triggers click event for non-button elements", function() {

@@ -33,14 +33,13 @@
 
             var dateinput = input.kendoDateInput().data("kendoDateInput");
 
-            assert.isOk(input.parent().hasClass("k-state-default"));
-            assert.equal(dateinput.wrapper.attr("class"), "k-widget k-dateinput k-state-default");
+            assert.equal(dateinput.wrapper.attr("class"), "k-dateinput k-input k-input-solid k-input-md k-rounded-md");
         });
 
-        it("_input should add k-textbox to the element", function() {
+        it("_input should add k-input-inner to the element", function() {
             var dateinput = input.kendoDateInput().data("kendoDateInput");
 
-            assert.isOk(dateinput.element.hasClass("k-textbox"));
+            assert.isOk(dateinput.element.hasClass("k-input-inner"));
         });
 
         it("DateInput copies input's className to the wrapper", function() {

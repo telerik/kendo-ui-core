@@ -162,7 +162,7 @@ it("defining header template", function() {
 
     var list = autocomplete.list;
 
-    assert.equal(list.children()[0].outerHTML, "<div>Header</div>");
+    assert.equal(list.find(".k-list-header").html(), "<div>Header</div>");
 });
 
 it("render footer container", function() {
@@ -173,7 +173,7 @@ it("render footer container", function() {
     var footer = autocomplete.footer;
 
     assert.isOk(footer);
-    assert.isOk(footer.hasClass("k-footer"));
+    assert.isOk(footer.hasClass("k-list-footer"));
 });
 
 it("render footer template", function() {
@@ -236,7 +236,7 @@ it("highlight first item", function() {
 
     autocomplete.search("1");
 
-    assert.isOk(autocomplete.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(autocomplete.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("resetting dataSource detaches the previouse events", function() {
@@ -393,8 +393,7 @@ it("readonly() removes disabled attribute and disabled class", function() {
 
     assert.equal(autocomplete.element.attr("readonly"), "readonly");
     assert.equal(autocomplete.element.attr("disabled"), undefined);
-    assert.isOk(autocomplete.wrapper.hasClass("k-state-default"));
-    assert.isOk(!autocomplete.wrapper.hasClass("k-state-disabled"));
+    assert.isOk(!autocomplete.wrapper.hasClass("k-disabled"));
 });
 
 it("enable(false) removes readonly attribute and default class", function() {
@@ -405,8 +404,7 @@ it("enable(false) removes readonly attribute and default class", function() {
 
     assert.equal(autocomplete.element.attr("readonly"), undefined);
     assert.equal(autocomplete.element.attr("disabled"), "disabled");
-    assert.isOk(!autocomplete.wrapper.hasClass("k-state-default"));
-    assert.isOk(autocomplete.wrapper.hasClass("k-state-disabled"));
+    assert.isOk(autocomplete.wrapper.hasClass("k-disabled"));
 });
 
 it("enable() enables widget after readonly()", function() {
@@ -417,8 +415,7 @@ it("enable() enables widget after readonly()", function() {
 
     assert.equal(autocomplete.element.attr("readonly"), undefined);
     assert.equal(autocomplete.element.attr("disabled"), undefined);
-    assert.isOk(autocomplete.wrapper.hasClass("k-state-default"));
-    assert.isOk(!autocomplete.wrapper.hasClass("k-state-disabled"));
+    assert.isOk(!autocomplete.wrapper.hasClass("k-disabled"));
 });
 
 it("AutoComplete honors readonly attribute", function() {
@@ -465,12 +462,12 @@ it("AutoComplete adds scrollbar width to the fixed group header padding", functi
         height: 50
     }).data("kendoAutoComplete");
 
-    var padding = autocomplete.list.find(".k-group-header").css("padding-right");
+    var padding = autocomplete.list.find(".k-list-group-sticky-header").css("padding-right");
 
     autocomplete.dataSource.read();
     autocomplete.popup.open();
 
-    var padding = autocomplete.list.find(".k-group-header").css("padding-right");
+    var padding = autocomplete.list.find(".k-list-group-sticky-header").css("padding-right");
 
     assert.isOk(parseFloat(padding) > 0);
 });
@@ -511,7 +508,7 @@ it("AutoComplete does not add scrollbar width if popup is shorter then options.h
     autocomplete.dataSource.read();
     autocomplete.popup.open();
 
-    var padding = autocomplete.list.find(".k-group-header").css("padding-right");
+    var padding = autocomplete.list.find(".k-list-group-sticky-header").css("padding-right");
 
     assert.isOk(parseFloat(padding) < 15);
 });
@@ -607,8 +604,7 @@ it("render nodata container", function() {
     autocomplete.search("test");
 
     assert.isOk(autocomplete.noData);
-    assert.isOk(autocomplete.noData.hasClass("k-nodata"));
-    assert.equal(autocomplete.noData.children("div").length, 1);
+    assert.isOk(autocomplete.noData.hasClass("k-no-data"));
     assert.equal(autocomplete.noData.text(), autocomplete.options.noDataTemplate);
 });
 
@@ -618,7 +614,7 @@ it("render nodata before footerTemplate", function() {
         footerTemplate: "footer"
     });
 
-    assert.isOk(autocomplete.noData.next().hasClass("k-footer"));
+    assert.isOk(autocomplete.noData.next().hasClass("k-list-footer"));
 });
 
 it("hides noData template if any data", function() {
@@ -734,7 +730,7 @@ it("hide group header when no data loaded", function() {
     });
 
     autocomplete.search("test");
-    var groupHeader = autocomplete.list.find(".k-group-header");
+    var groupHeader = autocomplete.list.find(".k-list-group-sticky-header");
     assert.equal(groupHeader.css("display"), "none");
 });
     });

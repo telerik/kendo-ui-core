@@ -65,8 +65,7 @@
         _template: kendo.template(
             '# if (options.formats && options.formats.length > 1) { #' +
             '<div class="k-vstack">' +
-                '<button class="k-colorgradient-toggle-mode k-button k-icon-button k-flat" data-#:ns#bind="click: switchMode" title="#: options.messages.toggleFormat #">' +
-                    '<span class="k-button-icon k-icon k-i-arrows-kpi"></span>' +
+                '<button class="k-colorgradient-toggle-mode" data-#:ns#role="button" data-#:ns#icon="arrows-kpi" data data-#:ns#bind="click: switchMode" data-#:ns#fill-mode="flat" data-#:ns#size="#: options.size #" title="#: options.messages.toggleFormat #">' +
                '</button>' +
             '</div>' +
             '# } #' +
@@ -75,7 +74,7 @@
             // HEX input
             '# if (options.formats && options.formats.indexOf("hex") >= 0) { #' +
             '<div class="k-vstack k-flex-1" data-#:ns#bind="visible: mode(\'hex\')">' +
-                '<input type="text" data-#:ns#bind="value: hex" data-#:ns#role="textbox" tabindex="#:options.tabindex#"  aria-label="#: options.messages.hex #"/>' +
+                '<input type="text" data-#:ns#bind="value: hex" data-#:ns#role="textbox" data-#:ns#size="#: options.size #" tabindex="#:options.tabindex#"  aria-label="#: options.messages.hex #"/>' +
                 '<label class="k-colorgradient-input-label">HEX</label>' +
             '</div>' +
             '# } #' +
@@ -83,20 +82,20 @@
             // RGBA input
             '# if (options.formats && options.formats.indexOf("rgb") >= 0) { #' +
             '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.r" data-#:ns#role="numerictextbox" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.red #" />' +
+                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.r" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.red #" />' +
                 '<label class="k-colorgradient-input-label">R</label>' +
             '</div>' +
             '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.g" data-#:ns#role="numerictextbox" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.green #" />' +
+                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.g" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.green #" />' +
                 '<label class="k-colorgradient-input-label">G</label>' +
             '</div>' +
             '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.b" data-#:ns#role="numerictextbox" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.blue #"/>' +
+                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.b" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#max="255" data-#:ns#min="0" data-#:ns#decimals="0" data-#:ns#spinners="false" data-#:ns#format="n0"  aria-label="#: options.messages.blue #"/>' +
                 '<label class="k-colorgradient-input-label">B</label>' +
             '</div>' +
             '#if(options.opacity){#' +
             '<div  class="k-vstack" data-#:ns#bind="visible: mode(\'rgb\')">' +
-                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.a" data-#:ns#role="numerictextbox" data-#:ns#step="0.1" data-#:ns#max="1" data-#:ns#min="0" data-#:ns#decimals="1" data-#:ns#spinners="false" data-#:ns#format="n1"  aria-label="#: options.messages.alpha #" />' +
+                '<input tabindex="#:options.tabindex#" data-#:ns#bind="value: rgb.a" data-#:ns#role="numerictextbox" data-#:ns#size="#: options.size #" data-#:ns#step="0.1" data-#:ns#max="1" data-#:ns#min="0" data-#:ns#decimals="1" data-#:ns#spinners="false" data-#:ns#format="n1"  aria-label="#: options.messages.alpha #" />' +
                 '<label class="k-colorgradient-input-label">A</label>' +
             '</div>' +
             '# } #' +
@@ -244,6 +243,7 @@
             format: "hex",
             formats: ["rgb", "hex"],
             contrastTool: false,
+            size: "medium",
             messages: {
                 contrastRatio: "Contrast ratio:",
                 fail: "Fail",

@@ -119,13 +119,13 @@
     it("MultiSelect adds aria-owns pointing to its popup list", function() {
         var multiselect = new MultiSelect(input);
 
-        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-owns"), multiselect.ul.attr("id"));
+        assert.equal(multiselect.wrapper.attr("aria-owns"), multiselect.ul.attr("id"));
     });
 
     it("MultiSelect adds aria-controls pointing to its popup list", function() {
         var multiselect = new MultiSelect(input);
 
-        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-controls"), multiselect.ul.attr("id"));
+        assert.equal(multiselect.wrapper.attr("aria-controls"), multiselect.ul.attr("id"));
     });
 
     it("MultiSelect adds aria-disabled='true'", function() {
@@ -143,7 +143,7 @@
     it("MultiSelect adds aria-expanded='false'", function() {
         var multiselect = new MultiSelect(input);
 
-        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-expanded"), "false");
+        assert.equal(multiselect.wrapper.attr("aria-expanded"), "false");
     });
 
     it("MultiSelect adds aria-expanded='true'", function() {
@@ -153,7 +153,7 @@
 
         multiselect.open();
 
-        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-expanded"), "true");
+        assert.equal(multiselect.wrapper.attr("aria-expanded"), "true");
     });
 
     it("MultiSelect sets aria-expanded to false on close", function() {
@@ -165,7 +165,7 @@
         multiselect.close();
 
         assert.isOk(!multiselect.popup.visible());
-        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap").attr("aria-expanded"), "false");
+        assert.equal(multiselect.wrapper.attr("aria-expanded"), "false");
     });
 
     it("MultiSelect adds aria-hidden to the popup element", function() {
@@ -352,7 +352,7 @@
             dataSource: ["item1", "item2"],
             value: "item1"
         });
-        var tag = multiselect.tagList.children().first().find(".k-select");
+        var tag = multiselect.tagList.children(".k-chip").first().find(".k-chip-icon");
 
         assert.equal(tag.attr("aria-hidden"), "true");
 

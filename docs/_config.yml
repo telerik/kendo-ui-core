@@ -362,6 +362,9 @@ navigation:
     "styles-and-layout":
         title: "Styles & Appearance"
         position: 6
+    "styles-and-layout/styling-components":
+        title: "Styling Components"
+        position: 1
     "third-party":
         title: "Third-Party Libraries"
         position: 7
@@ -544,6 +547,9 @@ navigation:
         title: "AutoComplete"
     "*autocomplete/how-to/input":
         title: "Managing Inputs"
+    "*avatar":
+        isNew: true
+        title: "Avatar"
     "*badge":
         title: "Badge"
     "*bottomnavigation":
@@ -1608,6 +1614,12 @@ defaults:
 
 -
     scope:
+        path: "controls/layout/avatar"
+    values:
+        component: "avatar"
+
+-
+    scope:
         path: "controls/barcodes/barcode"
     values:
         component: "barcode"
@@ -2210,6 +2222,7 @@ intro_columns:
   -
     title: "Layout"
     items:
+      "Avatar": "overview_kendoui_avatar_widget"
       "Badge": "overview_kendoui_badge_widget"
       "Dialog": "overview_kendoui_dialog_widget"
       "ExpansionPanel": "overview_kendoui_expansionpanel_widget"

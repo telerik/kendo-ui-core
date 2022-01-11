@@ -180,7 +180,7 @@
 
         var expandArrow = menu.element.find(".k-menu-group .k-icon");
 
-        assert.isOk(expandArrow.hasClass("k-menu-expand-arrow"));
+        assert.isOk(expandArrow.hasClass("k-menu-expand-arrow-icon"));
     });
 
 

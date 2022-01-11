@@ -14,6 +14,7 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         caret = kendo.caret,
         keys = kendo.keys,
+        html = kendo.html,
         ui = kendo.ui,
         Widget = ui.Widget,
         activeElement = kendo._activeElement,
@@ -24,23 +25,22 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         DISABLED = "disabled",
         READONLY = "readonly",
-        INPUT = "k-input",
+        INPUT = "k-input-inner",
         SPIN = "spin",
         ns = ".kendoNumericTextBox",
         TOUCHEND = "touchend",
         MOUSELEAVE = "mouseleave" + ns,
         HOVEREVENTS = "mouseenter" + ns + " " + MOUSELEAVE,
-        DEFAULT = "k-state-default",
-        FOCUSED = "k-state-focused",
-        HOVER = "k-state-hover",
+        FOCUSED = "k-focus",
+        HOVER = "k-hover",
         FOCUS = "focus",
         POINT = ".",
         SYMBOL = "symbol",
         CLASS_ICON = "k-icon",
         LABELCLASSES = "k-label k-input-label",
-        SELECTED = "k-state-selected",
-        STATEDISABLED = "k-state-disabled",
-        STATEINVALID = "k-state-invalid",
+        SELECTED = "k-selected",
+        STATEDISABLED = "k-disabled",
+        STATEINVALID = "k-invalid",
         ARIA_DISABLED = "aria-disabled",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
@@ -138,6 +138,7 @@ var __meta__ = { // jshint ignore:line
 
              that._label();
              that._ariaLabel();
+             that._applyCssClasses();
 
              kendo.notify(that);
          },
@@ -160,7 +161,10 @@ var __meta__ = { // jshint ignore:line
             factor: 1,
             upArrowText: "Increase value",
             downArrowText: "Decrease value",
-            label: null
+            label: null,
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
         events: [
             CHANGE,
@@ -173,7 +177,7 @@ var __meta__ = { // jshint ignore:line
                 disable = options.disable,
                 readonly = options.readonly,
                 text = that._text.add(element),
-                wrapper = that._inputWrapper.off(HOVEREVENTS);
+                wrapper = that.wrapper.off(HOVEREVENTS);
 
             that._toggleText(true);
 
@@ -191,7 +195,6 @@ var __meta__ = { // jshint ignore:line
 
             if (!readonly && !disable) {
                 wrapper
-                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
@@ -223,8 +226,8 @@ var __meta__ = { // jshint ignore:line
 
             } else {
                 wrapper
-                    .addClass(disable ? STATEDISABLED : DEFAULT)
-                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+                    .addClass(disable ? STATEDISABLED : "")
+                    .removeClass(disable ?"" : STATEDISABLED);
 
                 text.attr(DISABLED, disable)
                     .attr(READONLY, readonly)
@@ -263,7 +266,7 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.setOptions.call(that, options);
 
             that._arrowsWrap.toggle(that.options.spinners);
-            that._inputWrapper.toggleClass("k-expand-padding", !that.options.spinners);
+            that.wrapper.toggleClass("k-expand-padding", !that.options.spinners);
             that._text.prop("placeholder", that.options.placeholder);
             that._placeholder(that.options.placeholder);
             that.element.attr({
@@ -272,6 +275,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             that.options.format = extractFormat(that.options.format);
+            that._applyCssClasses();
 
             if (options.value !== undefined) {
                 that.value(options.value);
@@ -293,7 +297,6 @@ var __meta__ = { // jshint ignore:line
                 .add(that._text)
                 .add(that._upArrow)
                 .add(that._downArrow)
-                .add(that._inputWrapper)
                 .off(ns);
 
             that._upArrowEventHandler.destroy();
@@ -376,12 +379,12 @@ var __meta__ = { // jshint ignore:line
                 arrows = $(buttonHtml("increase", options.upArrowText) + buttonHtml("decrease", options.downArrowText))
                         .insertAfter(element);
 
-                that._arrowsWrap = arrows.wrapAll('<span class="k-select"/>').parent();
+                that._arrowsWrap = arrows.wrapAll('<span class="k-input-spinner k-spin-button"/>').parent();
             }
 
             if (!spinners) {
                 arrows.parent().toggle(spinners);
-                that._inputWrapper.addClass("k-expand-padding");
+                that.wrapper.addClass("k-expand-padding");
             }
 
             that._upArrow = arrows.eq(0);
@@ -394,7 +397,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var element = that.element;
 
-            that._validationIcon = $("<span class='" + CLASS_ICON + " k-i-warning k-hidden'></span>").insertAfter(element);
+            that._validationIcon = $("<span class='k-input-validation-icon " + CLASS_ICON + " k-i-warning k-hidden'></span>").insertAfter(element);
         },
 
         _blur: function() {
@@ -489,7 +492,7 @@ var __meta__ = { // jshint ignore:line
 
         _focusin: function() {
             var that = this;
-            that._inputWrapper.addClass(FOCUSED);
+            that.wrapper.addClass(FOCUSED);
             that._toggleText(false);
             that.element[0].focus();
         },
@@ -498,7 +501,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             clearTimeout(that._focusing);
-            that._inputWrapper.removeClass(FOCUSED).removeClass(HOVER);
+            that.wrapper.removeClass(FOCUSED).removeClass(HOVER);
             that._blur();
             that._removeInvalidState();
         },
@@ -520,16 +523,16 @@ var __meta__ = { // jshint ignore:line
         _input: function() {
             var that = this,
                 options = that.options,
-                CLASSNAME = "k-formatted-value",
                 element = that.element.addClass(INPUT).show()[0],
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
+                inputs = wrapper.find(POINT + INPUT),
                 text;
 
-            text = wrapper.find(POINT + CLASSNAME);
+            text = inputs.first();
 
-            if (!text[0]) {
-                text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
+            if (text.length < 2) {
+                text = $('<input type="text"/>').insertBefore(element);
             }
 
             try {
@@ -632,14 +635,14 @@ var __meta__ = { // jshint ignore:line
         _addInvalidState: function () {
             var that = this;
 
-            that._inputWrapper.addClass(STATEINVALID);
+            that.wrapper.addClass(STATEINVALID);
             that._validationIcon.removeClass('k-hidden');
         },
 
         _removeInvalidState: function () {
             var that = this;
 
-            that._inputWrapper.removeClass(STATEINVALID);
+            that.wrapper.removeClass(STATEINVALID);
             that._validationIcon.addClass('k-hidden');
             that._invalidStateTimeout = null;
         },
@@ -911,18 +914,15 @@ var __meta__ = { // jshint ignore:line
             wrapper = element.parents(".k-numerictextbox");
 
             if (!wrapper.is("span.k-numerictextbox")) {
-                wrapper = element.hide().wrap('<span class="k-numeric-wrap k-state-default" />').parent();
-                wrapper = wrapper.wrap("<span/>").parent();
+                wrapper = element.hide().wrap("<span/>").parent();
             }
 
             wrapper[0].style.cssText = DOMElement.style.cssText;
             DOMElement.style.width = "";
-            that.wrapper = wrapper.addClass("k-widget k-numerictextbox")
+            that.wrapper = wrapper.addClass("k-numerictextbox k-input")
                                   .addClass(DOMElement.className)
                                   .removeClass('input-validation-error')
                                   .css("display", "");
-
-            that._inputWrapper = $(wrapper[0].firstChild);
         },
 
         _reset: function() {
@@ -945,14 +945,22 @@ var __meta__ = { // jshint ignore:line
         }
     });
 
-    function buttonHtml(direction, text) {
-        var className = "k-i-arrow-" + (direction === "increase" ? "60-up" : "60-down");
+    kendo.cssProperties.registerPrefix("NumericTextBox", "k-input-");
 
-        return (
-            '<span role="button" unselectable="on" class="k-link k-link-' + direction + '" aria-label="' + text + '" title="' + text + '">' +
-                '<span unselectable="on" class="' + CLASS_ICON + ' ' + className + '"></span>' +
-            '</span>'
-        );
+    kendo.cssProperties.registerValues("NumericTextBox", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
+
+    function buttonHtml(direction, text) {
+        var className = direction === "increase" ? "arrow-n" : "arrow-s";
+        var dir = direction === "increase" ? "increase" : "decrease";
+
+        return html.renderButton('<button role="button" unselectable="on" class="k-spinner-' + dir + '" aria-label="' + text + '" title="' + text + '"></button>', extend({}, this.options, {
+            icon: className,
+            shape: null,
+            rounded: null
+        }));
     }
 
     function truncate(value, precision) {

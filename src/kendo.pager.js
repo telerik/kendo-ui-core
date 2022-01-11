@@ -140,7 +140,7 @@ var __meta__ = { // jshint ignore:line
                     that._numericSelect = that._numericWrap.find(".k-dropdown");
 
                     if (that._numericSelect.length === 0) {
-                       that._numericSelect = $("<select class='k-dropdown' />").appendTo(that._numericWrap);
+                       that._numericSelect = $("<select class='k-dropdown k-picker k-dropdown-list' />").appendTo(that._numericWrap);
                     }
                 }
 
@@ -162,7 +162,7 @@ var __meta__ = { // jshint ignore:line
                 if (!that.element.find(".k-pager-input").length) {
                    that.element.append('<span class="k-pager-input k-label">'+
                        options.messages.page +
-                       '<input class="k-textbox">' +
+                       '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" /></span>' +
                        kendo.format(options.messages.of, totalPages) +
                        '</span>');
                 }
@@ -426,7 +426,7 @@ var __meta__ = { // jshint ignore:line
                 that.element
                     .find(".k-pager-input")
                     .html(that.options.messages.page +
-                        '<input class="k-textbox" aria-label="' + page + '">' +
+                        '<span class="k-textbox k-input k-input-md k-rounded-md k-input-solid"><input class="k-input-inner" aria-label="' + page + '"></span>' +
                         kendo.format(options.messages.of, totalPages))
                     .find("input")
                     .val(page)

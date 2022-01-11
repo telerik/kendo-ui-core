@@ -12,6 +12,25 @@ Represents the Kendo UI DateInput widget. Inherits from [Widget](/api/javascript
 
 ## Configuration
 
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to format the value of the DateInput displayed in the input. The format also will be used to parse the input.
@@ -117,6 +136,43 @@ The placeholder for the seconds part.
 ### messages.dayperiod `String` *(default: "AM/PM")*
 
 The placeholder for the AM/PM part.
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <input id="dateinput" />
+    <script>
+    $("#dateinput").kendoDateInput({
+        size: "large"
+    });
+    </script>
 
 ## Fields
 

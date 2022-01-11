@@ -42,10 +42,10 @@
             assert.isOk(input.data("kendoMaskedTextBox") instanceof MaskedTextBox);
         });
 
-        it("MaskedTextBox add k-textbox class to the element", function() {
+        it("MaskedTextBox add k-input-inner class to the element", function() {
             var maskedtextbox = new MaskedTextBox(input);
 
-            assert.isOk(input.hasClass("k-textbox"));
+            assert.isOk(input.hasClass("k-input-inner"));
         });
 
         it("MaskedTextBox add autocomplete='off' attr", function() {
@@ -176,7 +176,7 @@
                 value: "9999"
             });
 
-            assert.isOk(maskedtextbox.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(maskedtextbox.wrapper.hasClass("k-disabled"));
         });
 
         it("MaskedTextBox gets value from input element", function() {
@@ -267,6 +267,31 @@
             $(input).wrap('<fieldset disabled="disabled"></fieldset>');
             input.kendoMaskedTextBox().data("kendoMaskedTextBox");
             assert.equal(input.attr("disabled"), "disabled");
+        });
+
+
+        it("MaskedTextBox sets correct size class", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                size: "large"
+            });
+
+            assert.isOk(maskedtextbox.wrapper.hasClass("k-input-lg"));
+        });
+
+        it("MaskedTextBox sets correct fillMode class", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                fillMode: "flat"
+            });
+
+            assert.isOk(maskedtextbox.wrapper.hasClass("k-input-flat"));
+        });
+
+        it("MaskedTextBox sets correct rounded class", function() {
+            var maskedtextbox = new MaskedTextBox(input, {
+                rounded: "large"
+            });
+
+            assert.isOk(maskedtextbox.wrapper.hasClass("k-rounded-lg"));
         });
     });
 }());

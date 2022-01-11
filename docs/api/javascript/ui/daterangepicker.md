@@ -178,7 +178,25 @@ Specifies the end field name for model binding.
 			});
 		</script>
 	</div>
-	
+
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### footer `String|Function`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -439,6 +457,43 @@ This sets the end date of the range selection.
                 end: new Date(2019, 10, 22)
             }
         });
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius of the inputs. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <div id="daterangepicker" title="daterangepicker"></div>
+    <script>
+    $("#daterangepicker").kendoDateRangePicker({
+        size: "large"
+    });
     </script>
 
 ### start `String`*(default: "month")*

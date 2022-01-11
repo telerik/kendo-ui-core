@@ -281,6 +281,24 @@ note that a check for an empty `date` is needed, as the widget can work with a n
 
 > This functionality was added with the Q1 release of 2016.
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### footer `String`
 
  The [template](/api/javascript/kendo/methods/template) which renders the footer of the calendar. If false, the footer will not be rendered.
@@ -572,6 +590,43 @@ If set to `true` a week of the year will be shown on the left side of the calend
     $("#datetimepicker").kendoDateTimePicker({
         format: "yyyy/MM/dd hh:mm tt",
         parseFormats: ["MMMM yyyy", "HH:mm"] //format also will be added to parseFormats
+    });
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets the rounded value
+
+    <input id="datetimepicker" />
+    <script>
+    $("#datetimepicker").kendoDateTimePicker({
+        size: "large"
     });
     </script>
 

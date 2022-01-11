@@ -1,5 +1,5 @@
 (function(f, define) {
-    define(["./kendo.core", "./kendo.popup"], f);
+    define(["./kendo.core", "./kendo.popup", "./kendo.textbox"], f);
 })(function() {
 
     var __meta__ = { // jshint ignore:line
@@ -7,7 +7,7 @@
         name: "Dialog",
         category: "web", // suite
         description: "The dialog widget is a modal popup that brings information to the user.",
-        depends: ["core", "popup"] // dependencies
+        depends: ["core", "popup", "textbox"] // dependencies
     };
 
     (function($, undefined) {
@@ -34,7 +34,7 @@
             KALERT = "k-alert",
             KCONFIRM = "k-confirm",
             KPROMPT = "k-prompt",
-            KTEXTBOX = ".k-textbox",
+            KTEXTBOX = ".k-input-inner",
             KOVERLAY = ".k-overlay",
             VISIBLE = ":visible",
             ZINDEX = "zIndex",
@@ -1054,8 +1054,10 @@
                 var value = this.options.value,
                     promptContainer = $(templates.promptInputContainer(this.options)).insertAfter(this.element);
 
+                this.input = new kendo.ui.TextBox(promptContainer.find("input"));
+
                 if (value) {
-                    promptContainer.children(KTEXTBOX).val(value);
+                    this.input.value(value);
                 }
 
                 this._defaultFocus = this._chooseEntryFocus();
@@ -1075,7 +1077,7 @@
                     primary: true,
                     action: function(e) {
                         var sender = e.sender,
-                            value = sender.wrapper.find(KTEXTBOX).val();
+                            value = sender.input.value();
 
                         sender.result.resolve(value);
                     }
@@ -1083,7 +1085,7 @@
                     text: "#: messages.cancel #",
                     action: function(e) {
                         var sender = e.sender,
-                            value = sender.wrapper.find(KTEXTBOX).val();
+                            value = sender.input.value();
 
                         e.sender.result.reject(value);
                     }
@@ -1104,21 +1106,22 @@
 
         templates = {
             wrapper: template("<div class='k-widget k-window k-dialog' role='dialog'></div>"),
-            action: template("<button type='button' class='k-button # if (data.primary) { # k-primary # } #' role='button'></button>"),
+            action: template("<button type='button' class='k-button k-button-md k-rounded-md k-button-solid # if (data.primary) { # k-button-solid-primary # } else { # k-button-solid-base # } #' role='button'></button>"),
             titlebar: template(
                 "<div class='k-window-titlebar k-dialog-titlebar k-hstack'>" +
                     "<span class='k-window-title k-dialog-title'>#: title #</span>" +
                     "<div class='k-window-actions k-dialog-actions k-hstack'></div>" +
                 "</div>"
             ),
-            close: template("<a role='button' href='\\#' class='k-button k-flat k-button-icon k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'><span class='k-icon k-i-close'></span></a>"),
+            close: template("<a role='button' href='\\#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action k-dialog-action k-dialog-close' title='#: messages.close #' aria-label='#: messages.close #' tabindex='-1'>" +
+                "<span class='k-button-icon k-icon k-i-close'></span></a>"),
             actionbar: template("<div class='k-dialog-buttongroup k-actions k-hstack k-justify-content-#: buttonLayout #' role='toolbar'></div>"),
             overlay: "<div class='k-overlay'></div>",
             alertWrapper: template("<div class='k-widget k-window k-dialog' role='alertdialog'></div>"),
             alert: "<div></div>",
             confirm: "<div></div>",
             prompt: "<div></div>",
-            promptInputContainer: template("<div class='k-prompt-container'><input type='text' class='k-textbox' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
+            promptInputContainer: template("<div class='k-prompt-container'><input type='text' title='#: messages.promptInput #' aria-label='#: messages.promptInput #' /></div>")
         };
 
         kendo.alert = kendoAlert;

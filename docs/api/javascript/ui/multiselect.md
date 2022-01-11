@@ -350,6 +350,28 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      filter: "contains",
+      fillMode: "flat"
+    });
+    </script>
+
 ### filter `String`*(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned of by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/multiselect#configuration-dataTextField) option).
@@ -1329,6 +1351,49 @@ The widget will pass the selected value(s) in the `valueMapper` function. In tur
 
             return data;
         }
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <select id="multiselect" multiple="multiple">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+    $("#multiselect").kendoMultiSelect({
+      size: "large"
+    });
     </script>
 
 ## Fields

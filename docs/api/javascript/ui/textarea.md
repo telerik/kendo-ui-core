@@ -42,6 +42,24 @@ If set to `false`, the widget will be disabled and will not allow user input. Th
         })
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "solid"
+- "flat"
+- "outline"
+- null
+
+#### Example
+
+    <textarea id="description"></textarea>
+    <script>
+    $("#description").kendoTextArea({
+        fillMode: "flat"
+    });
+    </script>
+
 ### label `String|Function|Object` *(default: null)*
 
 Adds a label before the textarea. If the textarea has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
@@ -133,6 +151,26 @@ The maximum number of characters that the user can enter.
         })
     </script>
 
+### overflow `String`*(default: "auto")*
+
+Sets a value controlling how the overflow of the textarea is applied. Can also be set to the following string values:
+
+- "auto"
+- "hidden"
+- "visible"
+- "scroll"
+- "clip"
+- null
+
+#### Example
+
+    <textarea id="description"></textarea>
+    <script>
+    $("#description").kendoTextArea({
+        overflow: "visible"
+    });
+    </script>
+
 ### placeholder `String` *(default: "")*
 
 The hint displayed by the widget when it is empty. Not set by default.
@@ -157,6 +195,24 @@ If set to `true`, the widget will be readonly and will not allow user input. The
         $("#description").kendoTextArea({
                 readonly: true
         })
+    </script>
+
+### resize `String`*(default: "none")*
+
+Sets a value controlling how the resize is applied. Can also be set to the following string values:
+
+- "both"
+- "horizontal"
+- "vertical"
+- "none"
+
+#### Example
+
+    <textarea id="description"></textarea>
+    <script>
+    $("#description").kendoTextArea({
+        resize: "both"
+    });
     </script>
 
 ### resizable `String` *(default: "none")*
@@ -192,6 +248,25 @@ The number of visible text lines for the control.
         })
     </script>
 
+### rounded `String` *(default: 'medium')*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- "none"
+
+#### Example
+
+    <textarea id="description"></textarea>
+    <script>
+    $("#description").kendoTextArea({
+        rounded: "large"
+    });
+    </script>
+
 ### value `String`*(default: "")*
 
 The value of the widget.
@@ -203,6 +278,25 @@ The value of the widget.
         $("#description").kendoTextArea({
                 value: "Best offer in the area!"
         })
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "none"
+
+#### Example - sets a size
+
+    <textarea id="description"></textarea>
+    <script>
+    $("#description").kendoTextArea({
+        size: "large",
+        rounded: "large"
+    });
     </script>
 
 ## Methods

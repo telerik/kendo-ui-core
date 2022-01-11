@@ -9,7 +9,7 @@
         afterEach(function() {
             if (input.data('kendoComboBox')) {
                 input.data('kendoComboBox').destroy();
-                input.add($("ul")).parent(".k-widget").remove();
+                input.add($("ul")).parent(".k-input").remove();
             }
         });
 
@@ -19,7 +19,7 @@
                     noData: "custom"
                 }
             });
-            var noDataTemplateText = comboBox.list.find(".k-nodata").text();
+            var noDataTemplateText = comboBox.list.find(".k-no-data").text();
             assert.equal(noDataTemplateText, "custom");
         });
 

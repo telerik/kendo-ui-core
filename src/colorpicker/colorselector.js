@@ -14,7 +14,7 @@
         extend = $.extend,
 
         NS = ".kendoColorTools",
-        DISABLED = "k-state-disabled";
+        DISABLED = "k-disabled";
 
     var ColorSelector = Widget.extend({
         init: function(element, options) {

@@ -52,7 +52,7 @@
 
     describe("VirtualList: ", function () {
         beforeEach(function() {
-            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
+            container = $("<ul id='container'></ul>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -77,6 +77,9 @@
                 height: CONTAINER_HEIGHT,
                 template: "#:text#"
             };
+
+            // TO DO: remove below after implementing new SASS styles in LESS
+            Mocha.fixture.append($('<style>.k-virtual-content .k-list-item { position: absolute; } .k-list-ul { margin: 0; }</style>'));
         });
 
         afterEach(function() {
@@ -109,7 +112,8 @@
 
     it("creates list's content wrapper", function() {
         var virtualList = new VirtualList(container, virtualSettings);
-        assert.equal(virtualList.wrapper.find(".k-virtual-content").length, 1);
+
+        assert.isOk(virtualList.wrapper.hasClass("k-virtual-content"));
     });
 
     it("creates height container", function(done) {
@@ -178,12 +182,12 @@
         });
     });
 
-    it("adds .k-virtual-item class to the item placeholders", function(done) {
+    it("adds .k-list-item class to the item placeholders", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var items = virtualList.items();
-            assert.isOk(items.hasClass("k-virtual-item"));
+            assert.isOk(items.hasClass("k-list-item"));
             done();
         });
     });
@@ -222,37 +226,37 @@
         });
     });
 
-    it("adds k-state-hover class on mouseenter", function(done) {
+    it("adds k-hover class on mouseenter", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var element = virtualList.items().first();
             element.trigger("mouseover");
-            assert.isOk(element.hasClass("k-state-hover"));
+            assert.isOk(element.hasClass("k-hover"));
             done();
         });
     });
 
-    it("removes k-state-hover class on mouseleave", function(done) {
+    it("removes k-hover class on mouseleave", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var element = virtualList.items().first();
             element.trigger("mouseover");
-            assert.isOk(element.hasClass("k-state-hover"));
+            assert.isOk(element.hasClass("k-hover"));
             element.trigger("mouseleave");
-            assert.isOk(!element.hasClass("k-state-hover"));
+            assert.isOk(!element.hasClass("k-hover"));
             done();
         });
     });
 
-    it("adds k-state-hover class on mouseenter", function(done) {
+    it("adds k-hover class on mouseenter", function(done) {
         var virtualList = new VirtualList(container, virtualSettings);
 
         asyncDataSource.read().then(function() {
             var element = virtualList.items().first();
             element.trigger("mouseover");
-            assert.isOk(element.hasClass("k-state-hover"));
+            assert.isOk(element.hasClass("k-hover"));
             done();
         });
     });
@@ -321,7 +325,7 @@
                                 }).first();
 
             li.trigger("mouseover");
-            assert.isOk(!li.hasClass("k-state-hover"));
+            assert.isOk(!li.hasClass("k-hover"));
             done();
         });
     });
@@ -390,18 +394,20 @@
         });
     });
 
-    it("wraps the item template in li.k-virtual-item > div.k-item", function(done) {
+    it("wraps the item template in li.k-list-item > div.k-list-item-text", function(done) {
         var virtualList = new VirtualList(container, $.extend(virtualSettings, {
             template: "<span class='foo'>#:text#</span>"
         }));
 
-        asyncDataSource.read().then(function() {
+        virtualList.bind("listBound", function() {
             var items = virtualList.element.find(".foo");
             items.each(function(idx, element) {
-                assert.isOk(items.eq(idx).parent().is(".k-item") && items.eq(idx).parents(".k-virtual-item").length === 1);
+                assert.isOk(items.eq(idx).parent().is(".k-list-item-text") && items.eq(idx).parents(".k-list-item").length === 1);
             });
             done();
         });
+
+        asyncDataSource.read();
     });
 
     it("accepts function as item template", function(done) {
@@ -432,7 +438,7 @@
 
         asyncDataSource.read().then(function() {
             scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
-            assert.equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
+            assert.equal(virtualList.items().last().find(".k-list-item-text").html(), '<span class="foo">foo...</span>');
             done();
         });
     });
@@ -447,7 +453,7 @@
 
         asyncDataSource.read().then(function() {
             scroll(virtualList.content, 3 * CONTAINER_HEIGHT + 60);
-            assert.equal(virtualList.items().last().html(), '<span class="foo">foo...</span>');
+            assert.equal(virtualList.items().last().find(".k-list-item-text").html(), '<span class="foo">foo...</span>');
             done();
         });
     });
@@ -600,9 +606,10 @@
 
             async.allDone(function() {
                 setTimeout(function() {
-
                     var li = virtualList.element.children()
-                                        .filter(function() { return $(this).offset().top >= 0; })
+                                        .filter(function() {
+                                            return $(this).offset().top >= 0;
+                                        })
                                         .first();
 
                     assert.equal(li.text().trim(), "Item 100");

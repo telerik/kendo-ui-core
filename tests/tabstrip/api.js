@@ -36,13 +36,13 @@
             Mocha.fixture.append(
                 ' <div class="k-widget k-tabstrip k-header" id="tabstrip" style="visibility: hidden;">' +
                 '    <ul class="k-reset k-tabstrip-items">' +
-                '        <li class="k-item k-state-default k-state-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
-                '        <li class="k-item k-state-default"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
-                '        <li class="k-item k-state-default"><a class="k-link" href="#tabstrip-3">ASP.NET AJAX</a></li>' +
-                '        <li class="k-item k-state-default"><a class="k-link" href="#tabstrip-4">OpenAccess ORM</a></li>' +
-                '        <li class="k-item k-state-default"><a class="k-link" href="#tabstrip-5">Reporting</a></li>' +
-                '        <li class="k-item k-state-default"><a class="k-link" href="#tabstrip-6">Sitefinity ASP.NET CMS</a></li>' +
-                '        <li class="k-item k-state-default"><a class="k-link" href="http://www.google.com">Sitefinity ASP.NET CMS</a></li>' +
+                '        <li class="k-item k-state-active"><a class="k-link" href="#tabstrip-1">ASP.NET MVC</a></li>' +
+                '        <li class="k-item"><a class="k-link" href="#tabstrip-2">Silverlight</a></li>' +
+                '        <li class="k-item"><a class="k-link" href="#tabstrip-3">ASP.NET AJAX</a></li>' +
+                '        <li class="k-item"><a class="k-link" href="#tabstrip-4">OpenAccess ORM</a></li>' +
+                '        <li class="k-item"><a class="k-link" href="#tabstrip-5">Reporting</a></li>' +
+                '        <li class="k-item"><a class="k-link" href="#tabstrip-6">Sitefinity ASP.NET CMS</a></li>' +
+                '        <li class="k-item"><a class="k-link" href="http://www.google.com">Sitefinity ASP.NET CMS</a></li>' +
                 '    </ul>' +
                 '    <div class="k-content k-state-active" id="tabstrip-1" style="display: block;">' +
                 '        <ul>' +
@@ -107,15 +107,15 @@
                 '</div>' +
                 '<div id="parent-tabstrip" class="k-widget k-tabstrip k-header" style="visibility: hidden; position: absolute;">' +
                 '    <ul class="k-reset k-tabstrip-items">' +
-                '        <li class="k-item k-state-default">Tab 1</li>' +
-                '        <li class="k-item k-state-default k-state-active">Tab 2</li>' +
+                '        <li class="k-item">Tab 1</li>' +
+                '        <li class="k-item k-state-active">Tab 2</li>' +
                 '    </ul>' +
                 '    <div id="parent-tabstrip-1" class="k-content">foo</div>' +
                 '    <div id="parent-tabstrip-2" class="k-content" style="display: block;">' +
                 '        <div id="child-tabstrip" class="k-widget k-tabstrip k-header">' +
                 '            <ul class="k-reset k-tabstrip-items">' +
-                '                <li class="k-item k-state-default">foo</li>' +
-                '                <li class="k-item k-state-default k-state-active">bar</li>' +
+                '                <li class="k-item">foo</li>' +
+                '                <li class="k-item k-state-active">bar</li>' +
                 '            </ul>' +
                 '            <div id="child-tabstrip-1">foo</div>' +
                 '            <div id="child-tabstrip-2" style="display: block;">bar</div>' +
@@ -252,7 +252,7 @@
 
             tabstrip.enable(item);
 
-            assert.isOk(item.hasClass('k-state-default'));
+            assert.isOk(!item.hasClass('k-state-disabled'));
             assert.isOk(item.is('[aria-disabled="false"]'));
         });
 
@@ -297,7 +297,7 @@
 
         it('getSelectedTab should return negative if no selected tabs', function() {
             var tabstrip = getTabStrip();
-            tabstrip.element.find('.k-state-active').removeClass('k-state-active').addClass('k-state-default');
+            tabstrip.element.find('.k-state-active').removeClass('k-state-active');
 
             assert.equal(tabstrip.select().length, 0);
         });

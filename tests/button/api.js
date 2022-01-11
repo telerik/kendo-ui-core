@@ -57,7 +57,7 @@
 
         buttonObject.enable(false);
 
-        assert.isOk(button.hasClass("k-state-disabled"));
+        assert.isOk(button.hasClass("k-disabled"));
     });
 
     it("enable(false) sets widget options.enable to false", function() {

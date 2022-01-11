@@ -43,7 +43,7 @@
             KOVERLAY = ".k-overlay",
             KCONTENTFRAME = "k-content-frame",
             LOADING = "k-i-loading",
-            KHOVERSTATE = "k-state-hover",
+            KHOVERSTATE = "k-hover",
             KFOCUSEDSTATE = "k-state-focused",
             MAXIMIZEDSTATE = "k-window-maximized",
             INLINE_FLEX = "k-display-inline-flex",
@@ -1014,7 +1014,7 @@
                     if (!wrapper.is(VISIBLE)) {
                         contentElement.css(OVERFLOW, HIDDEN);
 
-                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-flat");
+                        that.wrapper.find(TITLEBAR_BUTTONS).addClass("k-button-flat");
 
                         wrapper.addClass(INLINE_FLEX).kendoStop().kendoAnimate({
                             effects: showOptions.effects,
@@ -1109,7 +1109,7 @@
                     this._removeOverlay();
 
                     // Prevent close animation from stopping
-                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-flat");
+                    that.wrapper.find(TITLEBAR_BUTTONS).removeClass("k-button-flat");
 
                     wrapper.kendoStop().kendoAnimate({
                         effects: hideOptions.effects || showOptions.effects,
@@ -1792,8 +1792,8 @@
         templates = {
             wrapper: template("<div class='k-widget k-window'></div>"),
             action: template(
-                "<a role='button' href='\\#' class='k-button k-flat k-button-icon k-window-action' aria-label='#= name #'>" +
-                "<span class='k-icon k-i-#= name.toLowerCase() #'></span>" +
+                "<a role='button' href='\\#' class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-window-action' aria-label='#= name #'>" +
+                    "<span class='k-button-icon k-icon k-i-#= name.toLowerCase() #'></span>" +
                 "</a>"
             ),
             titlebar: template(

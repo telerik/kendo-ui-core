@@ -19,7 +19,7 @@
                     noData: "custom"
                 }
             });
-            var noDataTemplateText = multiSelect.list.find(".k-nodata").text();
+            var noDataTemplateText = multiSelect.list.find(".k-no-data").text();
             assert.equal(noDataTemplateText, "custom");
         });
 

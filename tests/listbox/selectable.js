@@ -140,7 +140,7 @@
         });
 
     it("should not select disabled items", function() {
-        listbox.items().addClass("k-state-disabled");
+        listbox.items().addClass("k-disabled");
 
         listbox.select(listbox.items());
 

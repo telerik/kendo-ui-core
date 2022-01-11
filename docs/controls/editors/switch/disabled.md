@@ -3,7 +3,7 @@ title: Disabled Switch
 page_title: jQuery Switch Documentation | Disabled Switch
 description: "Get started with the jQuery Switch by Kendo UI and set it in its enabled or disabled state."
 slug: disabled_kendoui_switch_widget
-position: 3
+position: 4
 ---
 
 # Disabled Switch

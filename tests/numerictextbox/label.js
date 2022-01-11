@@ -100,10 +100,10 @@
 
             numerictextbox.focus();
 
-            assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-focus"));
         });
 
-        it("floating label removes k-state-focused on blur", function() {
+        it("floating label removes k-focus on blur", function() {
             var numerictextbox = new NumericTextBox(input, {
                 label: {
                     content: "test",
@@ -113,11 +113,11 @@
 
             numerictextbox.focus();
 
-            assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isOk(numerictextbox.floatingLabel.element.hasClass("k-focus"));
 
             document.activeElement.blur();
 
-            assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isNotOk(numerictextbox.floatingLabel.element.hasClass("k-focus"));
         });
 
         it("numerictextbox enable calls floating label enable", function() {

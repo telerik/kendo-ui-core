@@ -409,7 +409,7 @@ var __meta__ = { // jshint ignore:line
                 retry: template(
                     "<li class='k-item'>" +
                         "#: data.messages.requestFailed # " +
-                        "<button class='k-button k-request-retry'>#: data.messages.retry #</button>" +
+                        "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-request-retry'><span class='k-button-text'>#: data.messages.retry #</span></button>" +
                     "</li>"
                 ),
                 arrow: template("<span class='#= arrowClass(item) #'></span>"),

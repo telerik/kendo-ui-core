@@ -4,7 +4,7 @@ page_title: Validation
 description: "Use the predefined and custom masks in the Telerik UI MaskedTextBox for {{ site.framework }}."
 previous_url: /helpers/editors/maskedtextbox/mask-rules
 slug: validation_maskedtextbox_aspnetcore
-position: 2
+position: 3
 ---
 
 # Validation

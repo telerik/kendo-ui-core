@@ -51,7 +51,6 @@ var __meta__ = { // jshint ignore:line
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
         DISABLEDSTATE = "k-state-disabled",
-        DEFAULTSTATE = "k-state-default",
         ACTIVESTATE = "k-state-active",
         FOCUSEDSTATE = "k-state-focused",
         HOVERSTATE = "k-state-hover",
@@ -87,8 +86,6 @@ var __meta__ = { // jshint ignore:line
 
                 if (item.enabled === false) {
                     result.push("k-state-disabled");
-                } else {
-                    result.push("k-state-default");
                 }
 
                 if (index === 0) {
@@ -130,9 +127,6 @@ var __meta__ = { // jshint ignore:line
             .children(IMG)
             .addClass(IMAGE);
 
-        tabs.filter(":not([disabled]):not([class*=k-state-disabled])")
-            .addClass(DEFAULTSTATE);
-
         tabs.filter("li[disabled]")
             .addClass(DISABLEDSTATE)
             .attr("aria-disabled", "true")
@@ -172,7 +166,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     function scrollButtonHtml(buttonClass, iconClass) {
-        return "<span class='k-button k-icon-button k-flat k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-icon " + iconClass + "'></span></span>";
+        return "<span class='k-button k-button-md k-rounded-md k-button-flat k-button-flat-base k-icon-button k-tabstrip-" + buttonClass + "' unselectable='on'><span class='k-button-icon k-icon " + iconClass + "'></span></span>";
     }
 
     var TabStrip = Widget.extend({
@@ -414,10 +408,8 @@ var __meta__ = { // jshint ignore:line
                         .css("z-index");
 
             if (kendo.size(animation.effects)) {
-                oldTab.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
                 item.kendoAddClass(ACTIVESTATE, { duration: animation.duration });
             } else {
-                oldTab.addClass(DEFAULTSTATE);
                 item.addClass(ACTIVESTATE);
             }
 
@@ -638,10 +630,8 @@ var __meta__ = { // jshint ignore:line
             close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { hide: true });
 
             if (kendo.size(animation.effects)) {
-                item.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
                 item.kendoRemoveClass(ACTIVESTATE, { duration: animation.duration });
             } else {
-                item.addClass(DEFAULTSTATE);
                 item.removeClass(ACTIVESTATE);
             }
 
@@ -1409,7 +1399,6 @@ var __meta__ = { // jshint ignore:line
             element = this.tabGroup.find(element);
             element.each(function () {
                 $(this)
-                    .toggleClass(DEFAULTSTATE, enable)
                     .toggleClass(DISABLEDSTATE, !enable)
                     .attr("aria-disabled", !enable);
             });

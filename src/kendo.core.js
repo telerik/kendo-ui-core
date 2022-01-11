@@ -32,9 +32,11 @@ var __meta__ = { // jshint ignore:line
         NULL = "null",
         BOOLEAN = "boolean",
         UNDEFINED = "undefined",
+        PREFIX = "prefix",
         getterCache = {},
         setterCache = {},
         slice = [].slice,
+        cssPropertiesNames = [ "themeColor", "fillMode", "shape", "size", "rounded", "positionMode" ],
         // avoid extending the depricated properties in latest verions of jQuery
         noDepricateExtend = function() {
             var src, copyIsArray, copy, name, options, clone,
@@ -2888,8 +2890,10 @@ function pad(number, digits, end) {
         },
 
         setOptions: function(options) {
+            this._clearCssClasses(options);
             this._setEvents(options);
             $.extend(this.options, options);
+            this._applyCssClasses();
         },
 
         _setEvents: function(options) {
@@ -2955,6 +2959,92 @@ function pad(number, digits, end) {
             callback.call(this);
 
             this._muteRebind = false;
+        },
+
+        _applyCssClasses: function(element) {
+            var protoOptions = this.__proto__.options, // jshint ignore:line
+                options = this.options,
+                el = element || this.wrapper || this.element,
+                classes = [],
+                i, prop, validFill, widgetName;
+
+            if (!kendo.cssProperties.propertyDictionary[protoOptions.name]) {
+                return;
+            }
+
+            for (i = 0; i < cssPropertiesNames.length; i++) {
+                prop = cssPropertiesNames[i];
+                widgetName = this.options._altname || protoOptions.name;
+
+                if (protoOptions.hasOwnProperty(prop)) {
+                    if (prop === "themeColor") {
+                        validFill = kendo.cssProperties.getValidClass({
+                            widget: widgetName,
+                            propName: "fillMode",
+                            value: options.fillMode
+                        });
+
+                        if (validFill && validFill.length) {
+                            classes.push(kendo.cssProperties.getValidClass({
+                                widget: widgetName,
+                                propName: prop,
+                                value: options[prop],
+                                fill: options.fillMode
+                            }));
+                        }
+                    } else {
+                        classes.push(kendo.cssProperties.getValidClass({
+                            widget: widgetName,
+                            propName: prop,
+                            value: options[prop]
+                        }));
+                    }
+                }
+            }
+
+            el.addClass(classes.join(" "));
+        },
+
+        _clearCssClasses: function(newOptions, element) {
+            var protoOptions = this.__proto__.options, // jshint ignore:line
+                currentOptions = this.options,
+                el = element || this.wrapper || this.element,
+                i, prop, widgetName;
+
+            if(!kendo.cssProperties.propertyDictionary[protoOptions.name]) {
+                return;
+            }
+
+            for(i = 0; i < cssPropertiesNames.length; i++) {
+                prop = cssPropertiesNames[i];
+                widgetName = this.options._altname || protoOptions.name;
+
+                if(protoOptions.hasOwnProperty(prop) && newOptions.hasOwnProperty(prop)) {
+                    if (prop === "themeColor") {
+                        el.removeClass(kendo.cssProperties.getValidClass({
+                            widget: widgetName,
+                            propName: prop,
+                            value: currentOptions[prop],
+                            fill: currentOptions.fillMode
+                        }));
+                    } else {
+                        if (prop === "fillMode") {
+                            el.removeClass(kendo.cssProperties.getValidClass({
+                                widget: widgetName,
+                                propName: "themeColor",
+                                value: currentOptions.themeColor,
+                                fill: currentOptions.fillMode
+                            }));
+                        }
+
+                        el.removeClass(kendo.cssProperties.getValidClass({
+                            widget: widgetName,
+                            propName: prop,
+                            value: currentOptions[prop]
+                        }));
+                    }
+                }
+            }
         }
     });
 
@@ -4656,16 +4746,140 @@ function pad(number, digits, end) {
 
     // Standardized Properties and CSS classes
 
-    var themeColorValues = ['primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'];
+    var themeColorValues = ['base', 'primary', 'secondary', 'tertiary', 'inherit', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'];
     var fillValues = ['solid', 'outline', 'flat'];
-    var postitionValues = ['edge', 'outside', 'inside'];
-    var shapeValues = ['circle', 'rectangle', 'rounded', 'dot', 'pill'];
+    //var postitionValues = ['edge', 'outside', 'inside'];
+    var shapeValues = ['rectangle', 'square'];
     var sizeValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
-    var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
+    var roundedValues = [ ['small', 'sm'], ['medium', 'md'], ['large', 'lg'] ];
+    //var alignValues = [ ['top start', 'top-start'], ['top end', 'top-end'], ['bottom start', 'bottom-start'], ['bottom end', 'bottom-end'] ];
     var positionModeValues = [ 'fixed', 'static', 'sticky', 'absolute' ];
+    var resizeValues = [ 'both', 'horizontal', 'vertical' ];
+    var overflowValues = [ 'auto', 'hidden', 'visible', 'scroll', 'clip' ];
 
-    kendo.propertyToCssClassMap = {};
+    kendo.cssProperties = (function() {
+        var defaultValues = {},
+            propertyDictionary = {};
 
+        function registerPrefix(widget, prefix) {
+            var dict = kendo.cssProperties.propertyDictionary;
+
+            if (!dict[widget]) {
+                dict[widget] = {};
+            }
+
+            dict[widget][PREFIX] = prefix;
+        }
+
+        function registerValues(widget, args) {
+            var dict = kendo.cssProperties.propertyDictionary,
+                i, j, prop, values, newValues, currentValue;
+
+            for (i = 0; i < args.length; i++) {
+                prop = args[i].prop;
+                newValues = args[i].values;
+
+                if(!dict[widget][prop]) {
+                    dict[widget][prop] = {};
+                }
+
+                values = dict[widget][prop];
+
+                for (j = 0; j < newValues.length; j++) {
+                    currentValue = newValues[j];
+
+                    if (isArray(newValues[j])) {
+                        values[currentValue[0]] = currentValue[1];
+                    } else {
+                        values[currentValue] = currentValue;
+                    }
+                }
+            }
+        }
+
+        function registerCssClass(propName, value, shorthand) {
+            if (!defaultValues[propName]) {
+                defaultValues[propName] = {};
+            }
+
+            defaultValues[propName][value] = shorthand || value;
+        }
+
+        function registerCssClasses(propName, arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (isArray(arr[i])) {
+                    registerCssClass(propName, arr[i][0], arr[i][1]);
+                } else {
+                    registerCssClass(propName, arr[i]);
+                }
+            }
+        }
+
+        function getValidClass(args) {
+            var widget = args.widget,
+                propName = args.propName,
+                value = args.value,
+                fill = args.fill,
+                cssProperties = kendo.cssProperties,
+                defaultValues = cssProperties.defaultValues[propName],
+                widgetProperties = cssProperties.propertyDictionary[widget],
+                widgetValues, validValue, prefix;
+
+            if(!widgetProperties) {
+                return "";
+            }
+
+            widgetValues = widgetProperties[propName];
+            validValue = widgetValues ? widgetValues[value] || defaultValues[value] : defaultValues[value];
+
+            if (validValue) {
+                if (propName === "themeColor") {
+                    prefix = widgetProperties[PREFIX] + fill + "-";
+                } else if (propName === "positionMode") {
+                    prefix = "k-pos-";
+                } else if (propName === "rounded") {
+                    prefix = "k-rounded-";
+                } else if (propName === "resize") {
+                    prefix = "k-resize-";
+                } else if (propName === "overflow") {
+                    prefix = "k-overflow-";
+                } else {
+                    prefix = widgetProperties[PREFIX];
+                }
+
+                return prefix + validValue;
+            } else {
+                return "";
+            }
+        }
+
+        registerCssClasses("themeColor", themeColorValues);
+        registerCssClasses("fillMode", fillValues);
+        registerCssClasses("shape", shapeValues);
+        registerCssClasses("size", sizeValues);
+        registerCssClasses("positionMode", positionModeValues);
+        registerCssClasses("rounded", roundedValues);
+        registerCssClasses("resize", resizeValues);
+        registerCssClasses("overflow", overflowValues);
+
+        return {
+            positionModeValues: positionModeValues,
+            roundedValues: roundedValues,
+            sizeValues: sizeValues,
+            shapeValues: shapeValues,
+            fillModeValues: fillValues,
+            themeColorValues: themeColorValues,
+
+            defaultValues: defaultValues,
+            propertyDictionary: propertyDictionary,
+
+            registerValues: registerValues,
+            getValidClass: getValidClass,
+            registerPrefix: registerPrefix
+        };
+    }());
+
+    //To do: delete below after implementing new styles and classes for BottomNavigation
     kendo.registerCssClass = function (propName, value, shorthand) {
         if (!kendo.propertyToCssClassMap[propName]) {
             kendo.propertyToCssClassMap[propName] = {};
@@ -4692,12 +4906,14 @@ function pad(number, digits, end) {
         }
     };
 
+    kendo.propertyToCssClassMap = {};
+
     kendo.registerCssClasses("themeColor", themeColorValues);
     kendo.registerCssClasses("fill", fillValues);
-    kendo.registerCssClasses("postition", postitionValues);
+    //kendo.registerCssClasses("postition", postitionValues);
     kendo.registerCssClasses("shape", shapeValues);
     kendo.registerCssClasses("size", sizeValues);
-    kendo.registerCssClasses("align", alignValues);
+    //kendo.registerCssClasses("align", alignValues);
     kendo.registerCssClasses("positionMode", positionModeValues);
 
     // jQuery deferred helpers

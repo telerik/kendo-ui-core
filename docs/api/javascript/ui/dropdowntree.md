@@ -582,6 +582,25 @@ When filtering is enabled, allows aria-label to be defined for the filter input 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      fillMode: "flat"
+    });
+    </script>
+
 ### footerTemplate `String|Function`
 
 The [template](/api/javascript/kendo/methods/template) used to render the footer template. The footer template receives the widget itself as a part of the data argument. Use the widget fields directly in the template.
@@ -1102,6 +1121,45 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
         });
 
         kendo.bind($("#dropdowntree"), viewModel);
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets the fillMode
+
+    <input id="ddt" />
+    <script>
+    $("#ddt").kendoDropDownTree({
+      dataSource: ["Chai", "Chang", "Tofu"],
+      size: "large"
+    });
     </script>
 
 ## Fields

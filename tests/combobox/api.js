@@ -4,7 +4,7 @@
 
     var ComboBox = kendo.ui.ComboBox;
 
-    var SELECTED = "k-state-selected";
+    var SELECTED = "k-selected";
     var keys = kendo.keys;
     var select;
     var input;
@@ -146,7 +146,7 @@
             combobox.value("");
 
             assert.equal(combobox.selectedIndex, 0);
-            assert.isOk(combobox.ul.children(":first").hasClass("k-state-selected"));
+            assert.isOk(combobox.ul.children(":first").hasClass("k-selected"));
         });
 
         it("value method selects item with null value", function() {
@@ -160,7 +160,7 @@
             combobox.value(null);
 
             assert.equal(combobox.selectedIndex, 0);
-            assert.isOk(combobox.ul.children(":first").hasClass("k-state-selected"));
+            assert.isOk(combobox.ul.children(":first").hasClass("k-selected"));
         });
 
         it("value method does not add item with custom value 'null' (select)", function() {
@@ -206,7 +206,7 @@
             combobox.value(2);
 
             assert.equal(combobox.selectedIndex, 1);
-            assert.isOk(combobox.ul.children(":last").hasClass("k-state-selected"));
+            assert.isOk(combobox.ul.children(":last").hasClass("k-selected"));
         });
 
         it("should select jquery object", function() {
@@ -513,7 +513,7 @@
 
             combobox.enable(false);
 
-            assert.isOk(combobox._inputWrapper.hasClass('k-state-disabled'));
+            assert.isOk(combobox.wrapper.hasClass('k-disabled'));
             assert.isOk(combobox.input.attr("disabled"));
             assert.isOk(combobox.element.attr("disabled"));
         });
@@ -539,15 +539,15 @@
             combobox.popup.toggle = oldOpen;
         });
 
-        it("enable(true) removes k-state-disabled class", function() {
+        it("enable(true) removes k-disabled class", function() {
             var combobox = new ComboBox(input);
-            combobox.wrapper.addClass('k-state-disabled');
+            combobox.wrapper.addClass('k-disabled');
             combobox.element.attr("disabled", true);
             combobox.input.attr("disabled");
 
             combobox.enable();
 
-            assert.isOk(!combobox._inputWrapper.hasClass('k-state-disabled'));
+            assert.isOk(!combobox.wrapper.hasClass('k-disabled'));
             assert.isOk(!combobox.element.attr("disabled"));
             assert.isOk(!combobox.input.attr("disabled"));
         });
@@ -593,8 +593,7 @@
             assert.equal(combobox.element.attr("disabled"), undefined);
             assert.equal(combobox.input.attr("readonly"), "readonly");
             assert.equal(combobox.input.attr("disabled"), undefined);
-            assert.isOk(combobox._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!combobox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!combobox.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -607,8 +606,7 @@
             assert.equal(combobox.element.attr("disabled"), "disabled");
             assert.equal(combobox.input.attr("readonly"), undefined);
             assert.equal(combobox.input.attr("disabled"), "disabled");
-            assert.isOk(!combobox._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(combobox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(combobox.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -621,8 +619,7 @@
             assert.equal(combobox.input.attr("disabled"), undefined);
             assert.equal(combobox.element.attr("readonly"), undefined);
             assert.equal(combobox.element.attr("disabled"), undefined);
-            assert.isOk(combobox._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!combobox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!combobox.wrapper.hasClass("k-disabled"));
         });
 
         it("dataItem() returns null if no item is selected", function() {
@@ -752,7 +749,7 @@
 
             combobox.open();
 
-            assert.isOk(combobox.ul.children(":first").hasClass("k-state-selected"));
+            assert.isOk(combobox.ul.children(":first").hasClass("k-selected"));
         });
 
         it("ComboBox filter after value method is used", function(done) {
@@ -1136,7 +1133,7 @@
 
             combobox.open();
 
-            assert.isOk(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+            assert.isOk(combobox.ul.children().eq(0).hasClass("k-focus"));
         });
 
         it("hide clear button on value reset", function() {

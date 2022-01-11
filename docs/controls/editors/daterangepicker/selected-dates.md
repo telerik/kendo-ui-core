@@ -3,7 +3,7 @@ title: Selected Dates
 page_title: jQuery DateRangePicker Documentation | Selected Dates
 description: "Get started with the jQuery DateRangePicker by Kendo UI and learn how to set the selected and the min and max values."
 slug: selecteddates_kendoui_daterangepicker
-position: 3
+position: 4
 ---
 
 # Selected Dates

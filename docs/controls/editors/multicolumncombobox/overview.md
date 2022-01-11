@@ -34,6 +34,7 @@ To initialize the MultiColumnComboBox, use any of the following approaches:
 * [Virtualization]({% slug virtualization_kendoui_multicolumncombobox_widget %})
 * [Templates]({% slug templates_kendoui_multicolumncombobox %})
 * [Cascading MultiColumnComboBoxes]({% slug cascading_kendoui_multicolumncombobox_widget %})
+* [Appearance]({% slug appearance_kendoui_multicolumncombobox_widget %})
 
 ## See Also
 

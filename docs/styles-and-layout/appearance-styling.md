@@ -23,6 +23,8 @@ This is how the same themes are rendered in widgets that visualize data, such as
 
 ## Getting Started
 
+> The LESS-based themes support only the default values of the new [Components Styling Options]({% slug components_rendering_overview %}#styling-options).
+
 Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
 * `kendo.common.css`&mdash;This is a common (base) stylesheet. It applies styles related to element positioning and widget dimensions. It is a must for the widgets to look and function in a proper way.

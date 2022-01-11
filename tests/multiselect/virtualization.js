@@ -157,7 +157,7 @@
             multiselect.close();
             multiselect.value([300]);
             setTimeout(function() {
-                assert.equal(multiselect.tagList.children().length, 1, "Selected tag is rendered");
+                assert.equal(multiselect.tagList.children(".k-chip").length, 1, "Selected tag is rendered");
                 done();
             }, 300)
         });
@@ -322,7 +322,7 @@
         });
 
         multiselect.one("dataBound", function() {
-            assert.equal(multiselect.tagList.children().length, 2);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 2);
             done();
         });
 
@@ -504,7 +504,7 @@
         jasmine.clock().tick(1);
         multiselect.search("Item 200");
         jasmine.clock().tick(1);
-        assert.equal($(".k-state-selected").length, 1);
+        assert.equal($(".k-selected").length, 1);
         jasmine.clock().uninstall();
     });
 

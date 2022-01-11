@@ -76,20 +76,20 @@ var __meta__ = { // jshint ignore:line
         },
         HEADERSELECTOR = '.k-header, .k-calendar-header',
         CLASSIC_HEADER_TEMPLATE = '<div class="k-header k-hstack">' +
-            '<a href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button k-flat k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-icon k-i-arrow-60-left"></span></a>' +
-            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-nav-fast k-button k-flat k-flex"></a>' +
-            '<a href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button k-flat k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
+            '<a href="\\#" #=actionAttr#="prev" role="button" class="k-nav-prev k-button #=size# k-rounded-md k-button-flat k-button-flat-base k-icon-button" ' + ARIA_LABEL + '="Previous"><span class="k-button-icon k-icon k-i-arrow-60-left"></span></a>' +
+            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-nav-fast k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-flex"></a>' +
+            '<a href="\\#" #=actionAttr#="next" role="button" class="k-nav-next k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button" ' + ARIA_LABEL + '="Next"><span class="k-icon k-i-arrow-60-right"></span></a>' +
         '</div>',
         MODERN_HEADER_TEMPLATE = '<div class="k-calendar-header k-hstack">' +
-            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-calendar-title k-title k-button k-flat"></a>' +
+            '<a href="\\#" #=actionAttr#="nav-up" role="button" aria-live="assertive" aria-atomic="true" class="k-calendar-title k-title k-button #=size# k-rounded-md k-button-flat k-button-flat-base "></a>' +
             '<span class="k-spacer"></span>' +
             '<span class="k-calendar-nav k-hstack">' +
-                '<a #=actionAttr#="prev" class="k-button k-flat k-button-icon k-prev-view">' +
-                    '<span class="k-icon k-i-arrow-60-left"></span>' +
+                '<a #=actionAttr#="prev" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-prev-view">' +
+                    '<span class="k-button-icon k-icon k-i-arrow-60-left"></span>' +
                 '</a>' +
                 '<a #=actionAttr#="today" class="k-nav-today">#=messages.today#</a>' +
-                '<a #=actionAttr#="next" class="k-button k-flat k-button-icon k-next-view">' +
-                    '<span class="k-icon k-i-arrow-60-right"></span>' +
+                '<a #=actionAttr#="next" class="k-button #=size# k-rounded-md k-button-flat k-button-flat-base  k-icon-button k-next-view">' +
+                    '<span class="k-button-icon k-icon k-i-arrow-60-right"></span>' +
                 '</a>' +
             '</span>' +
         '</div>';
@@ -208,6 +208,7 @@ var __meta__ = { // jshint ignore:line
             selectDates: [],
             start: MONTH,
             depth: MONTH,
+            size: "medium",
             animation: {
                 horizontal: {
                     effects: SLIDE,
@@ -1169,7 +1170,7 @@ var __meta__ = { // jshint ignore:line
             linksSelector = that.options.linksSelector;
 
             if (!element.find(HEADERSELECTOR)[0]) {
-                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {actionAttr: kendo.attr("action")})));
+                element.html(kendo.template(that.options.header.template)($.extend(true,{}, that.options, {actionAttr: kendo.attr("action"), size: kendo.getValidCssClass("k-button-", "size", that.options.size)})));
             }
 
             element.find(linksSelector)

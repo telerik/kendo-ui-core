@@ -35,48 +35,48 @@ describe("menu api", function () {
     beforeEach(function () {
         $("#qunit-fixture").append(
             '    <ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden; top: -10000px">' +
-            '        <li class="k-item k-state-default" style=""><span class="k-link">ASP.NET MVC<span' +
+            '        <li class="k-item" style=""><span class="k-link">ASP.NET MVC<span' +
             '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
-            '                <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
+            '                <li class="k-item"><span class="k-link">Grid</span>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">Menu<span' +
+            '                <li class="k-item"><span class="k-link">Menu<span' +
             '                class="k-icon k-i-arrow-60-right"></span></span>' +
             '                    <ul class="k-group">' +
-            '                        <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
+            '                        <li class="k-item"><span class="k-link">Grid</span>' +
             '                        </li>' +
-            '                        <li class="k-item k-state-default"><span class="k-link">Menu</span>' +
+            '                        <li class="k-item"><span class="k-link">Menu</span>' +
             '                        </li>' +
-            '                        <li class="k-item k-state-default"><span class="k-link">PanelBar</span></li>' +
-            '                        <li class="k-item k-state-default"><span class="k-link">TabStrip</span></li>' +
+            '                        <li class="k-item"><span class="k-link">PanelBar</span></li>' +
+            '                        <li class="k-item"><span class="k-link">TabStrip</span></li>' +
             '                    </ul>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">PanelBar</span></li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">TabStrip</span></li>' +
+            '                <li class="k-item"><span class="k-link">PanelBar</span></li>' +
+            '                <li class="k-item"><span class="k-link">TabStrip</span></li>' +
             '            </ul>' +
-            '        </li><li class="k-item k-state-default"><span class="k-link">Silverlight<span' +
+            '        </li><li class="k-item"><span class="k-link">Silverlight<span' +
             '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
-            '                <li class="k-item k-state-default"><span class="k-link">GridView</span>' +
+            '                <li class="k-item"><span class="k-link">GridView</span>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">Scheduler</span></li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">Docking</span>' +
+            '                <li class="k-item"><span class="k-link">Scheduler</span></li>' +
+            '                <li class="k-item"><span class="k-link">Docking</span>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">Chart</span></li>' +
-            '                <li class="k-item k-state-default"><a href="http://www.telerik.com/products/silverlight.aspx"' +
+            '                <li class="k-item"><span class="k-link">Chart</span></li>' +
+            '                <li class="k-item"><a href="http://www.telerik.com/products/silverlight.aspx"' +
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
-            '        </li><li class="k-item k-state-default"><span class="k-link">ASP.NET AJAX<span' +
+            '        </li><li class="k-item"><span class="k-link">ASP.NET AJAX<span' +
             '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
-            '                <li class="k-item k-state-default"><span class="k-link">Grid</span></li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">Editor</span>' +
+            '                <li class="k-item"><span class="k-link">Grid</span></li>' +
+            '                <li class="k-item"><span class="k-link">Editor</span>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">Scheduler</span></li>' +
-            '                <li class="k-item k-state-default"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"' +
+            '                <li class="k-item"><span class="k-link">Scheduler</span></li>' +
+            '                <li class="k-item"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"' +
             '                                                      class="k-link">... and 28 more!</a></li>' +
             '            </ul>' +
-            '        </li><li class="k-item k-state-default"><a href="#Menu-4" class="k-link">OpenAccess ORM<span' +
+            '        </li><li class="k-item"><a href="#Menu-4" class="k-link">OpenAccess ORM<span' +
             '                class="k-icon k-i-arrow-60-down"></span></a>' +
             '            <ul class="k-group">' +
             '                <li class="k-item">' +
@@ -90,15 +90,15 @@ describe("menu api", function () {
             '                    </div>' +
             '                </li>' +
             '            </ul>' +
-            '        </li><li class="k-item k-state-default"><span class="k-link">Reporting</span></li><li class="k-item k-state-default"><span class="k-link">Sitefinity ASP.NET CMS</span>' +
-            '        </li><li style="border-right: 0;" class="k-item k-state-default"><span class="k-link">Other products<span' +
+            '        </li><li class="k-item"><span class="k-link">Reporting</span></li><li class="k-item"><span class="k-link">Sitefinity ASP.NET CMS</span>' +
+            '        </li><li style="border-right: 0;" class="k-item"><span class="k-link">Other products<span' +
             '                class="k-icon k-i-arrow-60-down"></span></span>' +
             '            <ul class="k-group">' +
-            '                <li class="k-item k-state-default"><span class="k-link">Web Testing Tools</span>' +
+            '                <li class="k-item"><span class="k-link">Web Testing Tools</span>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">WinForms UI Controls</span>' +
+            '                <li class="k-item"><span class="k-link">WinForms UI Controls</span>' +
             '                </li>' +
-            '                <li class="k-item k-state-default"><span class="k-link">WPF UI Controls</span></li>' +
+            '                <li class="k-item"><span class="k-link">WPF UI Controls</span></li>' +
             '            </ul>' +
             '        </li>' +
             '    </ul>'
@@ -319,7 +319,7 @@ it('disable method should disable enabled item', function() {
 
     menu.disable(item);
 
-    assert.isOk(item.hasClass('k-state-disabled'));
+    assert.isOk(item.hasClass('k-disabled'));
 });
 
 it('enable method should enable disabled item', function() {
@@ -327,7 +327,7 @@ it('enable method should enable disabled item', function() {
 
     menu.enable(item);
 
-    assert.isOk(item.hasClass('k-state-default'));
+    assert.isOk(!item.hasClass('k-disabled'));
 });
 
 it('configure with popupCollision overrides the default', function(done) {

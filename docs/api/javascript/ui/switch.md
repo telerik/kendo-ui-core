@@ -103,6 +103,62 @@ The label for the unchecked state of the Switch.
         });
     </script>
 
+### size `String` *(default: 'medium')*
+
+Sets a value controlling the size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example
+
+    <input id="switch" />
+    <script>
+    $("#switch").kendoSwitch({
+        size: "large"
+    });
+    </script>
+
+### trackRounded `String` *(default: 'full')*
+
+Sets a value controlling the track's border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- null
+
+#### Example
+
+    <input id="switch" />
+    <script>
+    $("#switch").kendoSwitch({
+        trackRounded: "small"
+    });
+    </script>
+
+### thumbRounded `String` *(default: 'full')*
+
+Sets a value controlling the thumb's border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- null
+
+#### Example
+
+    <input id="switch" />
+    <script>
+    $("#switch").kendoSwitch({
+        thumbRounded: "full"
+    });
+    </script>
+
 ### width `Number|String`*(default: "6em")*
 
 The width of the Switch.

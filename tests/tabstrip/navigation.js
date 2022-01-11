@@ -385,7 +385,7 @@ it("makes clicked element focused", function() {
 });
 
 it("prevents default action event", function() {
-    div = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-default k-state-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item k-state-default"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-state-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
+    div = $('<div class="k-widget k-tabstrip k-header" id="tabstrip"><ul class="k-reset k-tabstrip-items"><li class="k-item k-state-active"><a class="k-link" href="#tabstrip-1">Paris</a></li><li class="k-item"><a class="k-link" href="#tabstrip-2">New York</a></li></ul><div class="k-content k-state-active" id="tabstrip-1" style="display:block"><p>Rainy weather in Paris.</p></div><div class="k-content" id="tabstrip-2"><p>Sunny weather in New York.</p></div></div>').appendTo(Mocha.fixture);
     var tabstrip = new kendo.ui.TabStrip(div)
     div.focus();
     tabstrip.tabGroup.children().eq(1).attr("data-animating", true);

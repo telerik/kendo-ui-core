@@ -100,7 +100,7 @@
 
             maskedtextbox.element[0].focus();
 
-            assert.isOk(maskedtextbox.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isOk(maskedtextbox.floatingLabel.element.hasClass("k-focus"));
         });
 
         it("floating label removes k-state-focused on blur", function() {
@@ -113,11 +113,11 @@
 
             maskedtextbox.element[0].focus();
 
-            assert.isOk(maskedtextbox.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isOk(maskedtextbox.floatingLabel.element.hasClass("k-focus"));
 
             document.activeElement.blur();
 
-            assert.isNotOk(maskedtextbox.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isNotOk(maskedtextbox.floatingLabel.element.hasClass("k-focus"));
         });
 
         it("maskedtextbox enable calls floating label enable", function() {

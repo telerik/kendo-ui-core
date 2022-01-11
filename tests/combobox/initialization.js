@@ -47,7 +47,7 @@ it("combobox creates static list view", function() {
     assert.isOk(combobox.listView instanceof kendo.ui.StaticList);
 });
 
-it("wraps element if no wrapper span.k-widget and hide element", function() {
+it("wraps element if no wrapper span.k-input and hide element", function() {
    input.wrap("<span class='test'/>");
 
    var combobox = new ComboBox(input);
@@ -56,7 +56,7 @@ it("wraps element if no wrapper span.k-widget and hide element", function() {
 
    assert.isOk(wrapper.is("span"));
    assert.isOk(wrapper.parent().is("span.test"));
-   assert.isOk(wrapper.hasClass("k-widget k-combobox"));
+   assert.isOk(wrapper.hasClass("k-input k-combobox"));
    assert.isOk(!input.is(":visible"));
 
    input.unwrap();
@@ -71,7 +71,7 @@ it("create a text input", function() {
     var text = combobox.input;
 
     assert.isOk(text.is("input"));
-    assert.isOk(text.hasClass("k-input"));
+    assert.isOk(text.hasClass("k-input-inner"));
 
     assert.equal(text.val(), "test");
     assert.equal(text.attr("autocomplete"), autocompleteAttr);
@@ -84,19 +84,18 @@ it("text input should be wrapped with span", function(){
    var comboWrapper = combobox.input.parent();
 
    assert.isOk(comboWrapper.is("span"));
-   assert.isOk(comboWrapper.hasClass("k-dropdown-wrap k-state-default"));
 });
 
-it("include arrow after input.k-input", function(){
+it("include arrow after input.k-input-inner", function(){
    var combobox = new ComboBox(input);
 
-    var spanArrow = combobox.input.next().next(),
-       arrow = spanArrow.children().eq(0);
+    var button = combobox.input.next().next(),
+       arrow = button.children().eq(0);
 
-   assert.isOk(spanArrow.is("span"));
-   assert.isOk(spanArrow.hasClass("k-select"));
+   assert.isOk(button.is("button"));
+   assert.isOk(button.hasClass("k-select"));
    assert.isOk(arrow.is("span"));
-   assert.isOk(arrow.hasClass("k-icon k-i-arrow-60-down"));
+   assert.isOk(arrow.hasClass("k-icon k-i-arrow-s"));
    assert.equal(arrow.html(), "");
 });
 
@@ -423,7 +422,7 @@ it("defining header template", function() {
 
     var list = combobox.list;
 
-    assert.equal(list.children()[0].outerHTML, "<div>Header</div>");
+    assert.equal(list.children().first().find(".k-list-header").html(), "<div>Header</div>");
 });
 
 it("render footer container", function() {
@@ -434,7 +433,7 @@ it("render footer container", function() {
     var footer = combobox.footer;
 
     assert.isOk(footer);
-    assert.isOk(footer.hasClass("k-footer"));
+    assert.isOk(footer.hasClass("k-list-footer"));
 });
 
 it("render footer template", function() {
@@ -498,12 +497,12 @@ it("should populate text and value if items", function() {
    assert.equal(combobox.value(), "1");
 });
 
-it("disabled input rendered with wrapper.k-state-disabled", function() {
+it("disabled input rendered with wrapper.k-disabled", function() {
    input.attr("disabled", "disabled").kendoComboBox();
 
    var combobox = input.data("kendoComboBox");
 
-   assert.isOk(combobox._inputWrapper.hasClass("k-state-disabled"));
+   assert.isOk(combobox.wrapper.hasClass("k-disabled"));
    assert.isOk(combobox.input.prop("disabled"));
 });
 
@@ -514,7 +513,7 @@ it("ComboBox disables on init", function() {
 
    var combobox = input.data("kendoComboBox");
 
-   assert.isOk(combobox._inputWrapper.hasClass("k-state-disabled"));
+   assert.isOk(combobox.wrapper.hasClass("k-disabled"));
    assert.isOk(combobox.input.prop("disabled"));
 });
 
@@ -625,11 +624,11 @@ if (!kendo.support.touch) {
              dataSource: data
         });
 
-        var wrap = combobox.wrapper.children(".k-dropdown-wrap");
+        var element = combobox.wrapper.find(".k-input-inner");
 
-        wrap.mouseenter();
+        element.mouseenter();
 
-        assert.isOk(wrap.hasClass("k-state-hover"));
+        assert.isOk(combobox.wrapper.hasClass("k-hover"));
     });
 }
 
@@ -640,11 +639,11 @@ it("leaving widget should remove hover state", function() {
          dataSource: data
     });
 
-    wrap = combobox.wrapper.children(".k-dropdown-wrap");
-    wrap.mouseenter();
-    wrap.mouseleave();
+    var element = combobox.wrapper.find(".k-input-inner");
+    element.mouseenter();
+    element.mouseleave();
 
-    assert.isOk(!wrap.hasClass("k-state-hover"));
+    assert.isOk(!element.hasClass("k-hover"));
 });
 
 it("set selectedIndex", function() {
@@ -942,7 +941,7 @@ it("ComboBox adds scrollbar width to the fixed group header padding", function()
 
     combobox.open();
 
-    var padding = combobox.list.find(".k-group-header").css("padding-right");
+    var padding = combobox.list.find(".k-list-group-sticky-header").css("padding-right");
 
     assert.isOk(parseFloat(padding) >= kendo.support.scrollbar());
 });
@@ -966,7 +965,7 @@ it("ComboBox does not add scrollbar width to the fixed group header padding if p
 
     combobox.open();
 
-    var padding = combobox.list.find(".k-group-header").css("padding-right");
+    var padding = combobox.list.find(".k-list-group-sticky-header").css("padding-right");
 
     assert.isOk(parseFloat(padding) < 15);
 });
@@ -1187,8 +1186,7 @@ it("render nodata container", function() {
     });
 
     assert.isOk(combobox.noData);
-    assert.isOk(combobox.noData.hasClass("k-nodata"));
-    assert.equal(combobox.noData.children("div").length, 1);
+    assert.isOk(combobox.noData.hasClass("k-no-data"));
     assert.equal(combobox.noData.text(), combobox.options.noDataTemplate);
 });
 
@@ -1198,7 +1196,7 @@ it("render nodata before footerTemplate", function() {
         footerTemplate: "footer"
     });
 
-    assert.isOk(combobox.noData.next().hasClass("k-footer"));
+    assert.isOk(combobox.noData.next().hasClass("k-list-footer"));
 });
 
 it("hides noData template if any data", function() {

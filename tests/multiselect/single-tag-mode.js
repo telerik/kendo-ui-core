@@ -27,7 +27,7 @@
         });
         var tagList = multiselect.tagList;
 
-        assert.equal(tagList.children().length, 0);
+        assert.equal(tagList.children(".k-chip").length, 0);
     });
 
     it("Widget renders a single tag using the default 'single' tag template", function() {
@@ -36,15 +36,15 @@
             value: [1]
         });
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tagList.children().length, 1);
+        assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.children().eq(0).html(), "1 item(s) selected");
-        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
-        assert.equal(tag.find(".k-select").attr("aria-label"), "open");
-        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").html(), "");
+        assert.equal(tag.find(".k-chip-content").html(), "1 item(s) selected");
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
+        assert.equal(tag.find(".k-chip-icon").attr("aria-label"), "open");
+        assert.equal(tag.find(".k-chip-icon").html(), "");
     });
 
     it("Widget renders a single tag using a custom template with 'values' and 'maxTotal'", function() {
@@ -54,13 +54,13 @@
             value: [1]
         });
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tagList.children().length, 1);
+        assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.children().eq(0).html(), "1 selected of 15");
-        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.find(".k-chip-content").html(), "1 selected of 15");
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -70,13 +70,13 @@
             value: [1]
         });
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tagList.children().length, 1);
+        assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.children().eq(0).html(), "1 (1) selected of 15");
-        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.find(".k-chip-content").html(), "1 (1) selected of 15");
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
     });
 
     it("Widget passes 'dataitems' and 'total' value to the single tag template", function() {
@@ -86,13 +86,13 @@
             value: [1]
         });
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tagList.children().length, 1);
+        assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.children().eq(0).html(), "1 (1) selected of 15");
-        assert.equal(tag.find(".k-select").children(".k-i-arrow-60-down").length, 1);
+        assert.equal(tag.find(".k-chip-content").html(), "1 (1) selected of 15");
+        assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
     });
 
     it("Updates the text of the selected tag when value is changed", function() {
@@ -105,9 +105,9 @@
         multiselect.value([1,2,3]);
 
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tag.children().eq(0).html(), "3,15,15");
+        assert.equal(tag.find(".k-chip-content").html(), "3,15,15");
     });
 
     it("Removes tag when no value", function() {
@@ -120,7 +120,7 @@
         multiselect.value([]);
 
         var tagList = multiselect.tagList;
-        assert.equal(tagList.children().length, 0);
+        assert.equal(tagList.children(".k-chip").length, 0);
     });
 
     it("Passes maxTotal value to the template different than currentTotal", function() {
@@ -134,9 +134,9 @@
         multiselect.value([3]);
 
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tag.children().eq(0).html(), "1,1,15");
+        assert.equal(tag.find(".k-chip-content").html(), "1,1,15");
     });
 
     it("Do not remove tag when click 'arrow' icon", function() {
@@ -147,9 +147,9 @@
 
         var tagList = multiselect.tagList;
 
-        tagList.children(":first").children(":last").click();
+        tagList.children(".k-chip:first").children(":first").click();
 
-        assert.equal(tagList.children().length, 1);
+        assert.equal(tagList.children(".k-chip").length, 1);
     });
 
     it("Open popup when click 'arrow' icon", function() {
@@ -160,7 +160,7 @@
 
         var tagList = multiselect.tagList;
 
-        tagList.children(":first").children(":last").mousedown();
+        tagList.children(".k-chip:first").children(":first").mousedown();
 
         assert.isOk(multiselect.popup.visible());
     });
@@ -250,8 +250,8 @@
 
         assert.equal(selectValue.length, 2);
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
-        assert.equal(tag.children().eq(0).html(), "2 item(s) selected");
+        var tag = tagList.children(".k-chip:first");
+        assert.equal(tag.find(".k-chip-content").html(), "2 item(s) selected");
     });
 
     it("Clear selected values clear button when delete the tag after filtering", function() {
@@ -268,7 +268,7 @@
 
         assert.equal(selectValue.length, 0);
         var tagList = multiselect.tagList;
-        var tag = tagList.children(":first");
+        var tag = tagList.children(".k-chip:first");
         assert.equal(tag.children().length, 0);
     });
 

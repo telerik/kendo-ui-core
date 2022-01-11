@@ -218,7 +218,7 @@
     //             virtualList.bind("change", function() {
     //                 assert.equal(this.selectedDataItems().length, 1);
     //                 assert.equal(this.select().length, 1);
-    //                 assert.equal(this.items().filter(".k-state-selected").length, 1, "Only one item is visibly selected");
+    //                 assert.equal(this.items().filter(".k-selected").length, 1, "Only one item is visibly selected");
     //                 asyncDone();
     //             });
 
@@ -240,7 +240,7 @@
             virtualList.bind("change", function() {
                 assert.equal(this.selectedDataItems().length, 1);
                 assert.equal(this.select().length, 1);
-                assert.equal(this.items().filter(".k-state-selected").length, 1, "Only one item is visibly selected");
+                assert.equal(this.items().filter(".k-selected").length, 1, "Only one item is visibly selected");
                 done();
             });
 

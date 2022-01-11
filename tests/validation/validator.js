@@ -446,6 +446,16 @@
             assert.equal(container.children("span").length, 1);
         });
 
+        it("message element is added after input wrapper when k-input-inner is present", function() {
+            var input = $('<span class="k-input"><input class="k-input-inner" name="test" type="text" required validationMessage="invalid" /></span>');
+            container.append(input);
+            var validator = setup(container);
+
+            validator.validate();
+
+            assert.isOk(input.next().is(".k-invalid-msg"));
+        });
+
         it("individualErrors template overrides the default template", function() {
             var input = $('<input type="text" required validationMessage="invalid"/>'),
             validator = setup(input, {

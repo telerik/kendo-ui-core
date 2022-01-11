@@ -3,7 +3,7 @@ title: Input Restrictions
 page_title: jQuery NumericTextBox Documentation | Input Restrictions
 description: "Get started with the jQuery NumericTextBox by Kendo UI and learn how to create, initialize, and enable the widget."
 slug: input_restrictions_numerictextbox
-position: 4
+position: 5
 ---
 
 # Input Restrictions

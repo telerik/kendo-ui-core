@@ -42,6 +42,26 @@ The `name` attribute to be used for the radio inputs. If omitted, the `id` of th
         });
     </script>
 
+### inputSize `String` *(default: 'medium')*
+
+Sets a value controlling the size of the radio inputs. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example
+
+    <ul id="radiogroup"></ul>
+
+    <script>
+        $("#radiogroup").kendoRadioGroup({
+            items: [ "one", "two", "three" ],
+            inputSize: "large"
+        });
+    </script>
+
 ### items `Array`
 
 Array of items to be rendered as radio buttons in the RadioGroup. If the array contains objects, their fields will be used for each radio button. If the array contains strings, those will be used as both value and label of the respective radio button.

@@ -3,7 +3,7 @@ title: Labels
 page_title: Labels
 description: "Learn the basics when working with Labels for the Telerik UI MaskedTextBox for {{ site.framework }}."
 slug: htmlhelpers_labels_maskedtextbox
-position: 3
+position: 4
 ---
 
 # Label Overview

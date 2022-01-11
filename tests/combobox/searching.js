@@ -47,7 +47,7 @@ it("search focus first match", function() {
     combobox.text("b");
     combobox.search("b");
 
-    assert.isOk(combobox.ul.children().eq(1).hasClass("k-state-focused"));
+    assert.isOk(combobox.ul.children().eq(1).hasClass("k-focus"));
 });
 
 it("open popup on search and any items", function() {
@@ -102,7 +102,7 @@ it("search focus item if text number", function() {
     combobox.text("1");
     combobox.search("1");
 
-    assert.isOk(combobox.ul.children().eq(1).hasClass("k-state-focused"));
+    assert.isOk(combobox.ul.children().eq(1).hasClass("k-focus"));
 });
 
 it("search focus item if text is 0", function() {
@@ -115,7 +115,7 @@ it("search focus item if text is 0", function() {
     combobox.text("0");
     combobox.search("0");
 
-    assert.isOk(combobox.ul.children().eq(1).hasClass("k-state-focused"));
+    assert.isOk(combobox.ul.children().eq(1).hasClass("k-focus"));
 });
 
 it("focused item does not update text input value", function() {
@@ -317,7 +317,7 @@ it("rebound ul should has item selected", function() {
 
     combobox.open();
 
-    assert.isOk(combobox.current().hasClass("k-state-selected"));
+    assert.isOk(combobox.current().hasClass("k-selected"));
 });
 
 it("typing should trigger search", function(done) {
@@ -422,7 +422,7 @@ it("highlight first item on refresh", function() {
     combobox.input.val("f");
     combobox.search("f");
 
-    assert.isOk(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(combobox.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("refresh method highlights first item if options.highlightFirst is true", function() {
@@ -438,14 +438,14 @@ it("refresh method highlights first item if options.highlightFirst is true", fun
     combobox.input.val("f");
     combobox.search("f");
 
-    assert.equal(combobox.ul.children().filter(".k-state-focused").length, 0);
+    assert.equal(combobox.ul.children().filter(".k-focus").length, 0);
 });
 
 it("no filter and highlightFirst should always focus first item", function() {
     create();
     combobox.search("");
 
-    assert.isOk(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(combobox.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("no filter and highlightFirst=false should not focus first item", function() {
@@ -458,7 +458,7 @@ it("no filter and highlightFirst=false should not focus first item", function() 
 
     combobox.search("");
 
-    assert.isOk(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(!combobox.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("failed filter should not focus first item", function() {
@@ -471,7 +471,7 @@ it("failed filter should not focus first item", function() {
     combobox.input.val("Ice");
     combobox.search("Ice");
 
-    assert.isOk(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(!combobox.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("startswith filter and highlightFirst should always focus first item", function() {
@@ -484,7 +484,7 @@ it("startswith filter and highlightFirst should always focus first item", functi
 
     combobox.search("");
 
-    assert.isOk(combobox.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(combobox.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("startswith filter and highlightFirst=false should not focus first item", function() {
@@ -498,7 +498,7 @@ it("startswith filter and highlightFirst=false should not focus first item", fun
 
     combobox.search("");
 
-    assert.isOk(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
+    assert.isOk(!combobox.ul.children().eq(0).hasClass("k-focus"));
 });
 
 it("search method uses ignoreCase option", function() {
@@ -1146,35 +1146,7 @@ it("enabled autoWidth disables X scrolling", function() {
     });
 
     combobox.open();
-    assert.equal(combobox.listView.content.css("overflow"), "hidden auto")
-});
-
-it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
-    var combobox = new ComboBox(input, {
-        autoWidth: true,
-        animation:{
-            open: {
-                duration:0
-            },
-            close: {
-                duration:0
-            },
-        },
-        dataSource: {
-            data: [
-                "Short item",
-                "An item with really, really, really, really, really, really, really, really, really, long text",
-                "Short item",
-                "Short item",
-                "Short item",
-                "Short item",
-                "Short item"
-            ]
-        }
-    });
-
-    combobox.open();
-    assert.equal(combobox.listView.content.css("overflow"), "hidden scroll")
+    assert.equal(combobox.listView.content.css("overflow"), "hidden auto");
 });
 
 it("keep popup opened on empty search result if noDataTemplate", function() {
@@ -1240,8 +1212,8 @@ it("scrolls to the matched item on open", function() {
 
     combobox.search("49");
 
-    assert.isOk(combobox.ul.children().eq(49).hasClass("k-state-focused"), "item is not focused");
-    assert.isOk(combobox.list.children(".k-list-scroller").scrollTop() > 200, "list is not scrolled");
+    assert.isOk(combobox.ul.children().eq(49).hasClass("k-focus"), "item is not focused");
+    assert.isOk(combobox.list.find(".k-list-scroller").scrollTop() > 200, "list is not scrolled");
 });
 
 it("concat filters with the same logic operator", function() {

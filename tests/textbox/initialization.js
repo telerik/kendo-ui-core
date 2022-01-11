@@ -14,7 +14,7 @@
             var textbox = new TextBox(input),
                 wrapper = textbox.wrapper;
 
-            assert.equal(wrapper[0].className, "k-widget k-textbox");
+            assert.equal(wrapper[0].className, "k-input k-textbox k-input-solid k-input-md k-rounded-md");
         });
 
         it("Should set placeholder", function() {
@@ -38,7 +38,7 @@
                 enable: false
             });
 
-            assert.isOk(textbox.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(textbox.wrapper.hasClass("k-disabled"));
         });
 
         it("Should set readonly state", function() {
@@ -98,21 +98,21 @@
             assert.equal(textbox.element[0].style.width, "100%");
         });
 
-        it("sets the k-state-focused class on focusin", function() {
+        it("sets the k-focus class on focusin", function() {
             var textbox = new TextBox(input);
 
             textbox.element[0].focus();
 
-            assert.isOk(textbox.wrapper.hasClass("k-state-focused"));
+            assert.isOk(textbox.wrapper.hasClass("k-focus"));
         });
 
-        it("removes the k-state-focused class on focusout", function() {
+        it("removes the k-focus class on focusout", function() {
             var textbox = new TextBox(input);
 
             textbox.element[0].focus();
             textbox.element.blur();
 
-            assert.isNotOk(textbox.wrapper.hasClass("k-state-focused"));
+            assert.isNotOk(textbox.wrapper.hasClass("k-focus"));
         });
 
         it("form reset support", function(done) {
@@ -129,6 +129,41 @@
                 assert.equal(textbox.element.val(), "test");
                 done();
             }, 200);
+        });
+
+        it("styling options - fillMode", function() {
+            var textbox = new TextBox(input, {
+                fillMode: "outline"
+            });
+
+            assert.isOk(textbox.wrapper.hasClass("k-input-outline"));
+        });
+
+        it("styling options - size", function() {
+            var textbox = new TextBox(input, {
+                size: "small"
+            });
+
+            assert.isOk(textbox.wrapper.hasClass("k-input-sm"));
+        });
+
+        it("styling options - rounded", function() {
+            var textbox = new TextBox(input, {
+                rounded: "large"
+            });
+
+            assert.isOk(textbox.wrapper.hasClass("k-rounded-lg"));
+        });
+
+        it("styling options - checks for valid options", function() {
+            var textbox = new TextBox(input, {
+                size: "large"
+            });
+
+            assert.isNotOk(textbox.wrapper.hasClass("k-rounded-lg")); // Does not add valid class for other option
+            assert.isNotOk(textbox.wrapper.hasClass("k-input-sm")); // Does not add invalid class with prefix
+            assert.isNotOk(textbox.wrapper.hasClass("k-input-md")); // Does not add default class for the option
+            assert.isOk(textbox.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
         });
     });
 }());

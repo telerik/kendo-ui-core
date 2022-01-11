@@ -101,7 +101,7 @@
 
             input.focus();
 
-            assert.isOk(datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-focus"));
         });
 
         it("DateTimePicker remove focus state to the wrapper on blur", function() {
@@ -109,7 +109,7 @@
 
             input.focus().blur();
 
-            assert.isOk(!datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            assert.isOk(!datetimepicker.wrapper.hasClass("k-focus"));
         });
 
         it("DateTimePicker opens DateView when press ALT + DOWN", function() {
@@ -257,7 +257,7 @@
 
             assert.equal(datetimepicker.timeView.ul.children().length, 1);
             assert.equal(datetimepicker.timeView.ul.children().text(), "12:00 AM");
-            assert.isOk(datetimepicker.timeView.ul.children().hasClass("k-state-selected"));
+            assert.isOk(datetimepicker.timeView.ul.children().hasClass("k-selected"));
         });
 
         it("DateTimePicker limits the available times to the max date", function() {

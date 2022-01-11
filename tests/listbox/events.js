@@ -2,8 +2,6 @@
     var listbox;
     var item;
 
-    var DISABLED_STATE_CLASS = "k-state-disabled";
-    var SELECTED_STATE_CLASS = "k-state-selected";
     var DOT = ".";
     var REORDER = "reorder";
     var REMOVE = "remove";

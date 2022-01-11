@@ -368,7 +368,7 @@ var __meta__ = { // jshint ignore:line
                 previousPaneEl.attr("id", previousPaneId);
             }
 
-            splitbar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
+            splitbar.addClass("k-splitbar k-splitbar-" + orientation)
                     .attr("role", "separator")
                     .attr(ARIA_VALUEMIN, "0")
                     .attr(ARIA_VALUEMAX, "100")
@@ -733,7 +733,7 @@ var __meta__ = { // jshint ignore:line
 
         _createHint: function(handle) {
             var that = this;
-            return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + " k-state-default' />")
+            return $("<div class='k-ghost-splitbar k-ghost-splitbar-" + that.orientation + "' />")
                         .css(that.alternateSizingProperty, handle[that.alternateSizingProperty]());
         },
 

@@ -170,6 +170,24 @@ The duration of the open animation in milliseconds.
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "h:mm tt")*
 
  Specifies the format, which is used to format the value of the TimePicker displayed in the input. The format also will be used to parse the input.
@@ -352,6 +370,43 @@ The available "x" positions are:
         height: 100px;
       }
     </style>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="timepicker" />
+    <script>
+    $("#timepicker").kendoTimePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <input id="timepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        size: "large"
+    });
+    </script>
 
 ### value `Date`*(default: null)*
 

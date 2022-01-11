@@ -2,7 +2,7 @@
 
 var AutoComplete = kendo.ui.AutoComplete;
 var CLICK = kendo.support.touch ? "touchend" : "click";
-var FOCUSED = ".k-state-focused";
+var FOCUSED = ".k-focus";
 var keys = kendo.keys;
 var input;
 
@@ -110,7 +110,7 @@ it("clicking an item applies selected style", function() {
     var autocomplete = new AutoComplete(input, {
         dataSource: ["baz", "bar"],
         change: function() {
-            assert.isOk(autocomplete.ul.children().eq(0).is(".k-state-selected"));
+            assert.isOk(autocomplete.ul.children().eq(0).is(".k-selected"));
         }
     });
 
@@ -197,7 +197,7 @@ it("select applies selected style", function() {
     input.val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first());
-    assert.isOk(autocomplete.ul.children().first().is(".k-state-selected"));
+    assert.isOk(autocomplete.ul.children().first().is(".k-selected"));
 });
 
 it("select sets input value", function() {
@@ -220,7 +220,7 @@ it("select should accepts DOM element", function() {
     input.focus().val("b");
     autocomplete.search();
     autocomplete.select(autocomplete.ul.children().first()[0]);
-    assert.isOk(autocomplete.ul.children().first().is(".k-state-selected"));
+    assert.isOk(autocomplete.ul.children().first().is(".k-selected"));
 });
 
 it("moving up when there the current item is first", function() {

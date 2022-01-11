@@ -80,7 +80,7 @@
 
             multiselect.value("0");
 
-            assert.equal(multiselect.tagList.children().length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
             assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
             assert.isOk(multiselect.element[0].children[0].selected);
         });
@@ -92,7 +92,7 @@
             multiselect.value("0");
             multiselect.value("1");
 
-            assert.equal(multiselect.tagList.children().length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
             assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option1");
             assert.isOk(multiselect.element[0].children[1].selected);
             assert.isOk(!multiselect.element[0].children[0].selected);
@@ -177,7 +177,7 @@
             multiselect.close();
             multiselect.open();
 
-            assert.equal(multiselect.tagList.children().length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
         });
 
         it("Multiselect value is not deselected if the value is changed before first open", function() {
@@ -196,8 +196,8 @@
             multiselect.dataSource.read();
             multiselect.open();
 
-            assert.equal(multiselect.tagList.children().length, 1);
-            assert.equal(multiselect.tagList.children()[0].textContent, "bar");
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip")[0].textContent, "bar");
         });
 
         it("MultiSelect supports multiple values", function() {
@@ -206,9 +206,9 @@
 
             multiselect.value(["0", "1"]);
 
-            assert.equal(multiselect.tagList.children().length, 2);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
-            assert.equal(multiselect.tagList.children(":last").find("span").html(), "Option1");
+            assert.equal(multiselect.tagList.children(".k-chip").length, 2);
+            assert.equal(multiselect.tagList.children(".k-chip:first").find("span").html(), "Option0");
+            assert.equal(multiselect.tagList.children(".k-chip:last").find("span").html(), "Option1");
             assert.isOk(multiselect.element[0].children[0].selected);
             assert.isOk(multiselect.element[0].children[1].selected);
         });
@@ -220,7 +220,7 @@
 
             multiselect.value(value);
 
-            assert.equal(multiselect.tagList.children().length, 1);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
             assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
             assert.isOk(multiselect.element[0].children[0].selected);
         });
@@ -366,9 +366,8 @@
 
             multiselect.tagList.find(".k-i-close").click();
 
-            assert.equal(multiselect.tagList.children().length, 1);
-            assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
-            assert.isOk(!multiselect._inputWrapper.hasClass("k-state-disabled"));
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1);
+            assert.isOk(multiselect.wrapper.hasClass("k-disabled"));
             assert.isOk(multiselect.input.attr("disabled"));
         });
 
@@ -379,11 +378,11 @@
             multiselect.enable(false);
             multiselect.enable(true);
 
-            multiselect.tagList.find(".k-i-close").click();
+            multiselect.tagList.find(".k-i-x").click();
             multiselect.wrapper.mousedown();
 
-            assert.equal(multiselect.tagList.children().length, 0);
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.equal(multiselect.tagList.children(".k-chip").length, 0);
+            assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
             assert.isOk(!multiselect.input.attr("disabled"));
             assert.isOk(multiselect.popup.visible());
         });
@@ -483,7 +482,7 @@
             assert.equal(multiselect.input.attr("readonly"), "readonly");
             assert.equal(multiselect.input.attr("disabled"), undefined);
             assert.equal(multiselect.element.attr("disabled"), undefined);
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -495,7 +494,7 @@
             assert.equal(multiselect.input.attr("readonly"), undefined);
             assert.equal(multiselect.input.attr("disabled"), "disabled");
             assert.equal(multiselect.element.attr("disabled"), "disabled");
-            assert.isOk(multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(multiselect.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -507,7 +506,7 @@
             assert.equal(multiselect.input.attr("readonly"), undefined);
             assert.equal(multiselect.input.attr("disabled"), undefined);
             assert.equal(multiselect.element.attr("disabled"), undefined);
-            assert.isOk(!multiselect.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!multiselect.wrapper.hasClass("k-disabled"));
         });
 
         it("MultiSelect does not pass placeholder on search", function() {
@@ -577,7 +576,7 @@
 
             multiselect.setDataSource(multiselect.dataSource);
 
-            assert.equal(multiselect.tagList.children().length, 2);
+            assert.equal(multiselect.tagList.children(".k-chip").length, 2);
         });
 
         it("setOptions updates listView template when dataTextField is set", function() {
@@ -624,7 +623,7 @@
 
             multiselect.value("item2");
 
-            assert.equal(multiselect.tagList.children().length, 1)
+            assert.equal(multiselect.tagList.children(".k-chip").length, 1)
         });
 
         it("setOptions method updates footer template", function() {

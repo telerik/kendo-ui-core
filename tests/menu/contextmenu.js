@@ -366,7 +366,7 @@
 
         menu.bind("activate", function () {
             setTimeout(function() {
-                assert.equal(menu.element.find(".k-state-focused").length, 1);
+                assert.equal(menu.element.find(".k-focus").length, 1);
                 done();
             });
         });

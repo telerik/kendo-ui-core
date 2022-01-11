@@ -473,7 +473,7 @@ var __meta__ = { // jshint ignore:line
                     that._resizeTimeout = null;
                 }, 50);
             } else {
-                if (!that._hovered || (that._activated && that.element.hasClass("k-list-container"))) {
+                if (!that._hovered || (that._activated && that.element.find(".k-list").length > 0)) {
                     that.close();
                 }
             }

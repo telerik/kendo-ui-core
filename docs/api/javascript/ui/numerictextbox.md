@@ -80,6 +80,24 @@ Specifies the factor by which the value is multiplied. The obtained result is us
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "n")*
 
 Specifies the number format used when the widget is not focused. Any [valid number format](/framework/globalization/numberformatting) is allowed.
@@ -250,6 +268,25 @@ The hint displayed by the widget when it is empty. Not set by default.
     });
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        rounded: "large"
+    });
+    </script>
+
 ### selectOnFocus `Boolean`*(default: false)*
 
  When set to true, the text of the input will be selected after the widget is focused.
@@ -260,6 +297,24 @@ The hint displayed by the widget when it is empty. Not set by default.
     <script>
     $("#numerictextbox").kendoNumericTextBox({
         selectOnFocus: true
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <input id="numerictextbox" />
+    <script>
+    $("#numerictextbox").kendoNumericTextBox({
+        size: "large"
     });
     </script>
 

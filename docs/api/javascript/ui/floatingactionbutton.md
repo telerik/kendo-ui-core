@@ -16,18 +16,18 @@ Represents the Kendo UI FloatingActionButton widget. Inherits from [Widget](/api
 
 Specifies position of the FloatingActionButton relative to its container. Valid position options are:
 
-* `top start`: positions the button at top left corner of the container.
-* `top center`: positions the button at top center of the container.
-* `top end`: positions the button at top right corner of the container.
-* `middle start`: positions the button at middle left of the container.
-* `middle end`: positions the button at middle right of the container.
-* `bottom start`: positions the button at bottom left corner of the container.
-* `bottom center`: positions the button at top center of the container.
-* `bottom end`: positions the button at bottom right corner of the container.
+* `"top start"`: positions the button at top left corner of the container.
+* `"top center"`: positions the button at top center of the container.
+* `"top end"`: positions the button at top right corner of the container.
+* `"middle start"`: positions the button at middle left of the container.
+* `"middle end"`: positions the button at middle right of the container.
+* `"bottom start"`: positions the button at bottom left corner of the container.
+* `"bottom center"`: positions the button at top center of the container.
+* `"bottom end"`: positions the button at bottom right corner of the container.
 
 `align` works in conjunction with [`positionMode`](/api/javascript/ui/floatingactionbutton/configuration/positionmode) and [`alignOffset`](/api/javascript/ui/floatingactionbutton/configuration/alignoffset).
 
-**Note: when using `align`, make sure the FloatingActionButton container has [css position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) other than `static` and allows [overflow content](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow).
+**Note: when using `align`, make sure the FloatingActionButton container has [css position](https://developer.mozilla.org/en-US/docs/Web/CSS/position) other than `"static"` and allows [overflow content](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow).
 
 #### Example
     <div class="fab-container" style="position: relative;">
@@ -91,6 +91,10 @@ Specifies whether the FloatingActionButton is enabled (true) or disabled (false)
             enabled: false
         });
     </script>
+
+### fillMode `String` *(default: 'solid')*
+
+Controls how the color is applied to the button. Valid values are: `"solid"`, and `null`.
 
 ### icon `String` *(default: "")*
 
@@ -318,8 +322,8 @@ Specifies the label for the speed-dial item that will be read by assistive techn
 
 Specifies CSS position of the FloatingActionButton in the document. Valid options are:
 
-* `absolute`: positions the button relative to the nearest positioned ancestor .
-* `fixed`: positions the button relative to the viewport.
+* `"absolute"`: positions the button relative to the nearest positioned ancestor .
+* `"fixed"`: positions the button relative to the viewport.
 
 #### Example - fixed position
 
@@ -346,14 +350,30 @@ Specifies CSS position of the FloatingActionButton in the document. Valid option
         });
     </script>
 
+### rounded `String` *(default: 'full')*
+
+Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `null`.
+
+#### Example
+
+    <div class="fab-container" style="width: 200px; height: 200px; position: relative;">
+        <button id="fab-absolute"></button>
+    </div>
+
+	<script>
+        $('#fab-absolute').kendoFloatingActionButton({
+            icon: 'home',
+            align: 'bottom start',
+            rounded: 'large'
+        });
+    </script>
+
 ### shape  `String` *(default: 'pill')*
 
 Specifies the shape of the FloatingActionButton.
 
-* `rectangle`: applies no border radius on the button.
-* `rounded`: applies default border radius on the button.
-* `pill`: applies border radius equal to half the height of the button.
-* `circle`: forces circular shape on the button.
+* `"rectangle"`
+* `"square"`
 
 #### Example
 
@@ -374,7 +394,7 @@ Specifies the shape of the FloatingActionButton.
 
 ### size  `String` *(default: 'medium')*
 
-Specifies the size of the FloatingActionButton. Valid options are `small`, `medium` and `large`.
+Specifies the size of the FloatingActionButton. Valid options are `"small"`, `"medium"`, `"large"` and `null`.
 
 #### Example
 
@@ -413,17 +433,7 @@ Specifies the text of the FloatingActionButton. Default is empty string.
 
 ### themeColor `String` *(default: 'secondary')*
 
-Specifies the theme color of the FloatingActionButton. Valid options are:
-
-* `primary`:  apply coloring based on **primary** theme color.
-* `secondary`: apply coloring based on **secondary** theme color.
-* `tertiary`: apply coloring based on **tertiary** theme color.
-* `info`: apply coloring based on **info** theme color.
-* `success`: apply coloring based on **success** theme color.
-* `warning`:apply coloring based on **warning** theme color.
-* `error`: apply coloring based on **error** theme color.
-* `dark`: apply coloring based on **dark** theme color.
-* `light`: always coloring based on **light** theme color.
+Specifies the theme color of the FloatingActionButton. Valid options are `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"` and `null`.
 
 #### Example
 

@@ -115,7 +115,7 @@
             value: ["1", "2"]
         });
 
-        multiselect.tagList.find(".k-i-close").first().click();
+        multiselect.tagList.find(".k-i-x").first().click();
     });
 
     it("MultiSelect raises select event", function() {

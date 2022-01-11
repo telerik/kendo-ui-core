@@ -1,7 +1,25 @@
-.k-avatar-icon,
-.k-avatar-initials {
-    .fill (
-        @avatar-text,
-        @avatar-bg
-    );
+// Solid Avatars
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-avatar-solid.k-avatar-@{name} {
+        border-color: @color;
+        color: contrast(@color);
+        background-color: @color;
+    }
+});
+
+// Outline avatars
+.k-avatar-outline {
+    border-color: currentColor;
 }
+
+each( @theme-colors, {
+    @name: @key;
+    @color: @value;
+
+    .k-avatar-outline.k-avatar-@{name} {
+        color: @color;
+    }
+});

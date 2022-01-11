@@ -2,7 +2,7 @@
     var ListBox = kendo.ui.ListBox,
         listA,
         keys = kendo.keys,
-        FOCUSED_CLASS = "k-state-focused",
+        FOCUSED_CLASS = "k-focus",
         DOT = ".",
         TRANSFER_TO = "transferTo",
         TRANSFER_FROM = "transferFrom",
@@ -195,7 +195,7 @@
             listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
             listA._keyDown({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-            assert.isOk(listA.items().eq(2).hasClass("k-state-selected") === true);
+            assert.isOk(listA.items().eq(2).hasClass("k-selected") === true);
         });
 
 
@@ -258,16 +258,16 @@
         });
 
         it("selecting an item focuses it", function() {
-            listbox.wrapper.find(".k-list").find(".k-item").first().click();
+            listbox.wrapper.find(".k-list-ul").find(".k-list-item").first().click();
 
-            assert.equal(kendo._activeElement(), listbox.wrapper.find(".k-list")[0]);
+            assert.equal(kendo._activeElement(), listbox.wrapper.find(".k-list-ul")[0]);
         });
 
         it("selecting an item does not scroll the listbox", function() {
             listbox.wrapper.scrollTop(listbox.wrapper[0].scrollHeight);
             var initialScrollTop = listbox.wrapper.scrollTop();
 
-            listbox.wrapper.find(".k-list").find(".k-item").last().click();
+            listbox.wrapper.find(".k-list-ul").find(".k-list-item").last().click();
 
             assert.equal(initialScrollTop, wrapper.scrollTop());
         });
@@ -277,7 +277,7 @@
             listbox.wrapper.scrollTop(listbox.wrapper[0].scrollHeight);
             var initialScrollTop = wrapper.scrollTop();
 
-            listbox.wrapper.find(".k-list").find(".k-item").last().click();
+            listbox.wrapper.find(".k-list-ul").find(".k-list-item").last().click();
 
             assert.equal(initialScrollTop, wrapper.scrollTop());
         });

@@ -1,12 +1,12 @@
 (function(f, define){
-    define([ "./kendo.dropdownlist", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.validator", "./kendo.binder" ], f);
+    define([ "./kendo.checkbox", "./kendo.dropdownlist", "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.validator", "./kendo.binder" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
     id: "editable",
     name: "Editable",
     category: "framework",
-    depends: [ "dropdownlist", "datepicker", "numerictextbox", "validator", "binder" ],
+    depends: [ "checkbox", "dropdownlist", "datepicker", "numerictextbox", "validator", "binder" ],
     hidden: true
 };
 
@@ -153,7 +153,7 @@ var __meta__ = { // jshint ignore:line
     }
 
     var kendoEditors = [
-        "AutoComplete", "CheckBoxGroup", "ColorPicker", "ComboBox", "DateInput",
+        "AutoComplete", "CheckBox", "CheckBoxGroup", "ColorPicker", "ComboBox", "DateInput",
         "DatePicker", "DateTimePicker", "DropDownTree",
         "Editor", "MaskedTextBox", "MultiColumnComboBox","MultiSelect",
         "NumericTextBox", "RadioGroup", "Rating", "Slider", "Switch", "TimePicker", "DropDownList",
@@ -186,11 +186,11 @@ var __meta__ = { // jshint ignore:line
         "string": function(container, options) {
             var attr = createAttributes(options);
 
-            $('<input type="text" />').attr(attr).addClass("k-textbox").appendTo(container);
+            $('<input type="text"/>').attr(attr).appendTo(container).kendoTextBox();
         },
         "boolean": function(container, options) {
             var attr = createAttributes(options);
-            var element = $('<input type="checkbox" />').attr(attr).addClass("k-checkbox").appendTo(container);
+            var element = $('<input type="checkbox" />').attr(attr).kendoCheckBox().appendTo(container);
 
             renderHiddenForMvcCheckbox(element, container, options);
         },

@@ -16,34 +16,30 @@
 
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
-            assert.isOk(input.parent().hasClass("k-picker-wrap k-state-default"));
-            assert.isOk(datetimepicker.wrapper.hasClass("k-widget k-datetimepicker"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-datetimepicker k-input k-input-solid k-input-md k-rounded-md"));
         });
 
         it("DateTimePicker adds k-input class to the element", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
-            assert.isOk(datetimepicker.element.hasClass("k-input"));
+            assert.isOk(datetimepicker.element.hasClass("k-input-inner"));
         });
 
         it("_icons method creates calendar and clock button", function() {
             var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
-                icons = datetimepicker.wrapper.find(".k-select");
+                icons = datetimepicker.wrapper.find("button.k-input-button");
 
-            assert.isOk(icons.is("span"));
-            assert.isOk(icons.hasClass("k-select"));
+            var date = icons.eq(0);
+            var time = icons.eq(1);
+            assert.isOk(date.hasClass("k-select k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
+            assert.isOk(time.hasClass("k-select k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
 
-            var date = icons.children().eq(0);
-            var time = icons.children().eq(1);
-
-            assert.isOk(date.hasClass("k-link k-link-date"));
-            assert.isOk(time.hasClass("k-link k-link-time"));
 
             assert.isOk(date.attr("aria-label"), datetimepicker.options.dateButtonText);
             assert.isOk(time.attr("aria-label"), datetimepicker.options.timeButtonText);
 
-            assert.isOk(date.children().hasClass("k-icon k-i-calendar"));
-            assert.isOk(time.children().hasClass("k-icon k-i-clock"));
+            assert.isOk(date.children().eq(0).hasClass("k-icon k-i-clock k-button-icon"));
+            assert.isOk(time.children().eq(0).hasClass("k-icon k-i-calendar k-button-icon"));
         });
 
         it("DateTimePicker renders last date when navigating", function() {
@@ -111,7 +107,7 @@
         it("datetimepicker disables widget if input has disabled attribute", function() {
             var datetimepicker = new DateTimePicker(input.attr("disabled", "disabled"));
 
-            assert.isOk(datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
+            assert.isOk(datetimepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("form reset support", function(done) {
@@ -279,7 +275,7 @@
             datetimepicker.open("time");
 
             assert.equal(datetimepicker.timeView.ul.children().length, 1);
-            assert.equal(datetimepicker.timeView.ul.children().eq(0).html(), "6:00 PM");
+            assert.equal(datetimepicker.timeView.ul.children().eq(0).find("span").html(), "6:00 PM");
         });
 
         it("DateTimePicker copies input's className to the wrapper", function() {
@@ -356,7 +352,7 @@
 
             var li = datetimepicker.timeView.ul.find("li");
             assert.equal(li.length, 1);
-            assert.equal(li.html(), "10:00 AM");
+            assert.equal(li.find("span").html(), "10:00 AM");
         });
 
         it("DateTimePicker sets min from min attribute", function() {
@@ -471,7 +467,7 @@
 
             tv.refresh();
             assert.equal(tv.ul.children().length, 1);
-            assert.equal(tv.ul.find("li:last").html(), "12:00 AM");
+            assert.equal(tv.ul.find("li:last").find("span").html(), "12:00 AM");
         });
     });
 }());

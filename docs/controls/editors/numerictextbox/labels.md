@@ -3,7 +3,7 @@ title: Labels
 page_title: jQuery Labels for NumericTextBox Documentation
 description: "Learn how to create and initialize Labels for the Numeric TextBox."
 slug: labels_numerictextbox
-position: 3
+position: 4
 ---
 
 # Label Overview

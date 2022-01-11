@@ -384,6 +384,30 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/combobox#configuration-dataTextField) option).
@@ -764,6 +788,55 @@ The available "x" positions are:
         height: 100px;
       }
     </style>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <input id="combobox"/>
+    <script>
+      $("#combobox").kendoComboBox({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        dataValueField: "id",
+        size: "large"
+      });
+    </script>
 
 ### suggest `Boolean`*(default: false)*
 

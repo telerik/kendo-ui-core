@@ -2,7 +2,7 @@
 
 var dom;
 
-describe("kendo.ui.Calendar MVVM", function () {
+describe("kendo.ui.DatePicker MVVM", function () {
     beforeEach(function() {
         window.change = function() {
             assert.isOk(true);

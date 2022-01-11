@@ -117,6 +117,24 @@ Sets the available input formats in the gradient input editor. Only "hex" and "r
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- "solid"
+- "flat"
+- "outline"
+- null
+
+#### Example - sets the fillMode
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      fillMode: "outline
+    });
+    </script>
+
 ### input `Boolean` *(default: true)*
 
 Whether to render the input in the ColorGradient component.
@@ -340,6 +358,25 @@ Displays the color preview element and the previously selected color for compari
     });
     </script>
 
+### rounded `String` *(default: 'medium')*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- null
+
+#### Example
+
+    <input id="colorpicker" type="color" />
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      rounded: "full"
+    });
+    </script>
+
 ### toolIcon `String` *(default: null)*
 
 A CSS class name to display an icon in the color picker button.  If
@@ -398,6 +435,25 @@ The available views in the FlatColorPicker. Valid values are "gradient" and "pal
       views: ["palette"]
     });
     </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example
+
+    <div id="colorpicker"></div>
+    <script>
+    $("#colorpicker").kendoColorPicker({
+      size: "small"
+    });
+    </script>
+
 
 ## Methods
 

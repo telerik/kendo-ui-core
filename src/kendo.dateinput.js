@@ -23,11 +23,9 @@ var __meta__ = { // jshint ignore:line
 
     var INPUT_EVENT_NAME = (kendo.support.propertyChangeEvent ? "propertychange.kendoDateInput input" : "input") + ns;
 
-    var STATEDISABLED = "k-state-disabled";
-    var STATEDEFAULT = "k-state-default";
-    // var STATEFOCUSED = "k-state-focused";
-    // var STATEHOVER = "k-state-hover";
-    var STATEINVALID = "k-state-invalid";
+    var FOCUSED = "k-focus";
+    var STATEDISABLED = "k-disabled";
+    var STATEINVALID = "k-invalid";
 
     var DISABLED = "disabled";
     var READONLY = "readonly";
@@ -47,29 +45,32 @@ var __meta__ = { // jshint ignore:line
             options.min = kendo.parseDate(element.attr("min")) || kendo.parseDate(options.min);
             options.max = kendo.parseDate(element.attr("max")) || kendo.parseDate(options.max);
 
-            var insidePicker = ((element.parent().attr("class") || "").indexOf("k-picker-wrap") >= 0);
-            if (insidePicker) {
+            var wrapperClass = (element.parent().attr("class") || "");
+            var skipWrapping = wrapperClass.indexOf("picker") >= 0 && wrapperClass.indexOf("rangepicker") < 0;
+
+            if (skipWrapping) {
                 that.wrapper = element.parent();
             } else {
-                that.wrapper = element.wrap("<span class='k-widget k-dateinput'></span>").parent();
+                that.wrapper = element.wrap("<span class='k-dateinput k-input'></span>").parent();
                 that.wrapper.addClass(element[0].className).removeClass('input-validation-error');
                 that.wrapper[0].style.cssText = element[0].style.cssText;
                 element.css({
-                    width: "100%",
                     height: element[0].style.height
                 });
             }
 
-            that._inputWrapper = $(that.wrapper[0]);
-
-            that._validationIcon = $("<span class='k-icon k-i-warning k-hidden'></span>").insertAfter(element);
+            that._validationIcon = $("<span class='k-input-validation-icon k-icon k-i-warning k-hidden'></span>").insertAfter(element);
 
             that._form();
 
             that.element
-                .addClass(insidePicker ? " " : "k-textbox")
+                .addClass(skipWrapping ? " " : "k-input-inner")
                 .attr("autocomplete", "off")
+                .on("focus" + ns, function() {
+                    that.wrapper.addClass(FOCUSED);
+                })
                 .on("focusout" + ns, function () {
+                    that.wrapper.removeClass(FOCUSED);
                     that._change();
                 });
 
@@ -88,6 +89,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.value(that.options.value || element.val());
+            that._applyCssClasses();
 
             kendo.notify(that);
         },
@@ -108,7 +110,10 @@ var __meta__ = { // jshint ignore:line
                 "minute": "minutes",
                 "second": "seconds",
                 "dayperiod": "AM/PM"
-            }
+            },
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         events: [
@@ -197,7 +202,11 @@ var __meta__ = { // jshint ignore:line
         _bindInput: function () {
             var that = this;
             that.element
+                .on("focus" + ns, function() {
+                    that.wrapper.addClass(FOCUSED);
+                })
                 .on("focusout" + ns, function () {
+                    that.wrapper.removeClass(FOCUSED);
                     that._change();
                 })
                 .on("paste" + ns, proxy(that._paste, that))
@@ -211,6 +220,7 @@ var __meta__ = { // jshint ignore:line
             this.element
                 .off("keydown" + ns)
                 .off("paste" + ns)
+                .off("focus" + ns)
                 .off("focusout" + ns)
                 .off(INPUT_EVENT_NAME)
                 .off("mouseup" + ns)
@@ -227,8 +237,7 @@ var __meta__ = { // jshint ignore:line
             that._unbindInput();
 
             if (!readonly && !disable) {
-                wrapper.addClass(STATEDEFAULT)
-                    .removeClass(STATEDISABLED);
+                wrapper.removeClass(STATEDISABLED);
                 if(element && element.length) {
                     element[0].removeAttribute(DISABLED);
                     element[0].removeAttribute(READONLY);
@@ -237,8 +246,7 @@ var __meta__ = { // jshint ignore:line
                 that._bindInput();
             } else {
                 if (disable) {
-                    wrapper.addClass(STATEDISABLED)
-                    .removeClass(STATEDEFAULT);
+                    wrapper.addClass(STATEDISABLED);
                     element.attr(DISABLED, disable);
                     if(element && element.length) {
                         element[0].removeAttribute(READONLY);
@@ -475,6 +483,13 @@ var __meta__ = { // jshint ignore:line
         }
 
     });
+
+    kendo.cssProperties.registerPrefix("DateInput", "k-input-");
+
+    kendo.cssProperties.registerValues("DateInput", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 
     ui.plugin(DateInput);
 

@@ -3,7 +3,7 @@ title: Telerik UI Design Kits for Figma
 page_title: Telerik UI Design Kits for Figma
 description: "Discover the {{ site.product }} UI Design Kits for Figma and learn how to use them to create stylish applications."
 slug: ui_kits_figma_aspnetcore
-position: 4
+position: 5
 ---
 
 {% if site.core %}

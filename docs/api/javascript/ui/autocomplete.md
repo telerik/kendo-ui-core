@@ -250,6 +250,25 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="autocomplete" />
+
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String` *(default: "startswith")*
 
 The filtering method used to determine the suggestions for the current value. The default filter is "startswith" -
@@ -515,6 +534,57 @@ refer to [Popup](/api/javascript/ui/popup) documentation.
         appendTo: $("#container")
       }
     });
+    </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <div id="container">
+        <input id="autocomplete" />
+    </div>
+    <script>
+      $("#autocomplete").kendoAutoComplete({
+        dataSource: [
+          { id: 1, name: "Apples" },
+          { id: 2, name: "Oranges" }
+        ],
+        dataTextField: "name",
+        size: "large"
+      });
     </script>
 
 ### separator `String|Array` *(default: "")*

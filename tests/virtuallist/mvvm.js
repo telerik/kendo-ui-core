@@ -7,7 +7,7 @@
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);

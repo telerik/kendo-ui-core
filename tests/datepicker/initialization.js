@@ -103,25 +103,24 @@ it("_wrapper() wraps input element", function() {
 
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-    assert.isOk(input.parent().hasClass("k-picker-wrap k-state-default"));
-    assert.isOk(datepicker.wrapper.hasClass("k-widget k-datepicker"));
+    assert.isOk(datepicker.wrapper.hasClass("k-datepicker"));
 });
 
-it("_input should add k-input to the element", function() {
+it("_input should add k-input-inner to the element", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
-    assert.isOk(datepicker.element.hasClass("k-input"));
+    assert.isOk(datepicker.element.hasClass("k-input-inner"));
 });
 
 it("_input create calendar button", function() {
     var datepicker = input.kendoDatePicker().data("kendoDatePicker"),
-        icon = datepicker.wrapper.find(".k-select");
+        icon = datepicker.wrapper.find(".k-button");
 
     assert.isOk(icon);
-    assert.isOk(icon.is("span"));
-    assert.isOk(icon.hasClass("k-select"));
+    assert.isOk(icon.is("button"));
+    assert.isOk(icon.hasClass("k-input-button k-button k-icon-button k-button-md k-button-solid k-button-solid-base"));
     assert.isOk(icon.children().is("span"));
-    assert.isOk(icon.children().hasClass("k-icon k-i-calendar"));
+    assert.isOk(icon.children().hasClass("k-icon k-i-calendar k-button-icon"));
     assert.equal(icon.children().html(), "");
 });
 

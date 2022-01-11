@@ -27,7 +27,7 @@
             tv.open();
             tv.move({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-            assert.equal(tv.ul.find("li.k-state-selected").index(), 0);
+            assert.equal(tv.ul.find("li.k-selected").index(), 0);
             tv.destroy();
         });
 
@@ -43,7 +43,7 @@
             tv.open();
             tv.move({ keyCode: keys.UP, preventDefault: $.noop });
 
-            assert.equal(tv.ul.find("li.k-state-selected").index(), tv.ul.find("li").length - 1);
+            assert.equal(tv.ul.find("li.k-selected").index(), tv.ul.find("li").length - 1);
             tv.destroy();
         });
 
@@ -61,7 +61,7 @@
 
             tv.move({ keyCode: keys.DOWN, preventDefault: $.noop });
 
-            assert.equal(tv.ul.find("li.k-state-selected").index(), 1);
+            assert.equal(tv.ul.find("li.k-selected").index(), 1);
             tv.destroy();
         });
 
@@ -79,7 +79,7 @@
 
             tv.move({ keyCode: keys.UP, preventDefault: $.noop });
 
-            assert.equal(tv.ul.find("li.k-state-selected").index(), 0);
+            assert.equal(tv.ul.find("li.k-selected").index(), 0);
             tv.destroy();
         });
 
@@ -184,7 +184,7 @@
 
             input.focus().val("2:00 PM").blur();
 
-            assert.equal(timepicker.timeView.ul.find("li.k-state-selected").text(), "2:00 PM");
+            assert.equal(timepicker.timeView.ul.find("li.k-selected").text(), "2:00 PM");
         });
 
         it("should clear selected item if no such time", function() {
@@ -194,11 +194,11 @@
 
             timepicker.open();
 
-            assert.isOk(timepicker.timeView.ul.find("li.k-state-selected")[0]);
+            assert.isOk(timepicker.timeView.ul.find("li.k-selected")[0]);
 
             input.focus().val("2:33 PM").blur();
 
-            assert.isOk(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
+            assert.isOk(!timepicker.timeView.ul.find("li.k-selected")[0]);
         });
 
         it("do not change input value if not valid time if dateInput option is enabled ", function() {
@@ -274,7 +274,7 @@
 
             timepicker.open();
 
-            assert.isOk(timepicker.timeView.current().hasClass("k-state-selected"));
+            assert.isOk(timepicker.timeView.current().hasClass("k-selected"));
         });
 
         it("TimePicker does not update the input if the entered value is the same but in diff format", function() {

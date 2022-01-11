@@ -82,15 +82,15 @@
 
         button.focus();
 
-        assert.isOk(button.hasClass("k-state-focused"));
+        assert.isOk(button.hasClass("k-focus"));
     });
 
     it("blur removes focused class", function() {
-        getButton().addClass("k-state-focused").kendoButton();
+        getButton().addClass("k-focus").kendoButton();
 
         button.blur();
 
-        assert.isOk(!button.hasClass("k-state-focused"));
+        assert.isOk(!button.hasClass("k-focus"));
     });
 
     it("click event should be preventable", function () {

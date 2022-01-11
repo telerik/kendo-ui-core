@@ -1,5 +1,5 @@
 (function (f, define) {
-    define(["./kendo.core", "./kendo.badge"], f);
+    define(["./kendo.core", "./kendo.badge", "./html/button"], f);
 })(function () {
 
     var __meta__ = { // jshint ignore:line
@@ -13,6 +13,7 @@
     (function ($, undefined) {
         var kendo = window.kendo,
             Widget = kendo.ui.Widget,
+            html = kendo.html,
             ui = kendo.ui,
             proxy = $.proxy,
             keys = kendo.keys,
@@ -20,14 +21,11 @@
             MOUSEDOWN = kendo.support.mousedown,
             MOUSEUP = kendo.support.mouseup,
             MOUSEOUT = "mouseout",
-            KBUTTON = "k-button",
-            KBUTTONICON = "k-button-icon",
-            KBUTTONICONTEXT = "k-button-icontext",
             NS = ".kendoButton",
             DISABLED = "disabled",
-            DISABLEDSTATE = "k-state-disabled",
-            FOCUSEDSTATE = "k-state-focused",
-            SELECTEDSTATE = "k-state-active";
+            DISABLEDSTATE = "k-disabled",
+            FOCUSEDSTATE = "k-focus",
+            SELECTEDSTATE = "k-selected";
 
         var BUTTON_DEFAULTS = {
             icon: "",
@@ -47,7 +45,9 @@
                 element = that.wrapper = that.element;
                 options = that.options;
 
-                element.addClass(KBUTTON).attr("role", "button");
+                html.renderButton(element, $.extend({}, options));
+
+                element.attr("role", "button");
 
                 options.enable = options.enable && options.enabled && !element.attr(DISABLED);
                 that.enable(options.enable);
@@ -57,8 +57,6 @@
                 }
 
                 that._badge();
-
-                that.iconElement();
 
                 element
                     .on(CLICK + NS, proxy(that._click, that))
@@ -96,7 +94,12 @@
                 iconClass: "",
                 spriteCssClass: "",
                 imageUrl: "",
-                badge: null
+                badge: null,
+                size: "medium",
+                shape: "rectangle",
+                rounded: "medium",
+                fillMode: "solid",
+                themeColor: "base"
             },
 
             _isNativeButton: function() {
@@ -146,55 +149,6 @@
             _addActive: function() {
                 if (this.options.enable) {
                     this.element.addClass(SELECTEDSTATE);
-                }
-            },
-
-            iconElement: function() {
-                var that = this,
-                    element = that.element,
-                    options = that.options,
-                    icon = options.icon,
-                    iconClass = options.iconClass,
-                    spriteCssClass = options.spriteCssClass,
-                    imageUrl = options.imageUrl,
-                    span, img, isEmpty;
-
-                if (spriteCssClass || imageUrl || icon || iconClass) {
-                    isEmpty = true;
-
-                    element.contents().filter(function() {
-                        return (!$(this).hasClass("k-sprite") && !$(this).hasClass("k-icon") && !$(this).hasClass("k-image"));
-                    }).each(function(idx, el){
-                        if (el.nodeType == 1 || el.nodeType == 3 && kendo.trim(el.nodeValue).length > 0) {
-                            isEmpty = false;
-                        }
-                    });
-
-                    if (isEmpty) {
-                        element.addClass(KBUTTONICON);
-                    } else {
-                        element.addClass(KBUTTONICONTEXT);
-                    }
-                }
-
-                if (imageUrl) {
-                    img = element.children("img.k-image").first();
-                    if (!img[0]) {
-                        img = $('<img alt="icon" class="k-image" />').prependTo(element);
-                    }
-                    img.attr("src", imageUrl);
-                } else if (icon || iconClass) {
-                    span = element.children("span.k-icon").first();
-                    if (!span[0]) {
-                        span = $('<span></span>').prependTo(element);
-                    }
-                    span.attr("class", icon ? "k-icon k-i-" + icon : iconClass);
-                } else if (spriteCssClass) {
-                    span = element.children("span.k-sprite").first();
-                    if (!span[0]) {
-                        span = $('<span class="k-sprite"></span>').prependTo(element);
-                    }
-                    span.addClass(spriteCssClass);
                 }
             },
 
@@ -259,6 +213,16 @@
                 }
             });
         }
+
+        kendo.cssProperties.registerPrefix("Button", "k-button-");
+
+        kendo.cssProperties.registerValues("Button", [{
+            prop: "fillMode",
+            values: kendo.cssProperties.fillModeValues.concat(["link"])
+        }, {
+            prop: "rounded",
+            values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+        }]);
 
         kendo.ui.plugin(Button);
 

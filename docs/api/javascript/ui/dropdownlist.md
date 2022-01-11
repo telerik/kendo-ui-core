@@ -376,6 +376,28 @@ If set to `true` the widget will not show all items when the text of the search 
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <select id="dropdown">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#dropdown").kendoDropDownList({
+        filter: "contains",
+        fillMode: "flat"
+      });
+    </script>
+
 ### filter `String`*(default: "none")*
 
 The filtering method used to determine the suggestions for the current value. Filtration is turned off by default, and can be performed over `string` values only (either the widget's data has to be an array of strings, or over the field, configured in the [`dataTextField`](/api/javascript/ui/dropdownlist#configuration-dataTextField) option).
@@ -795,6 +817,51 @@ The [template](/api/javascript/kendo/methods/template) used to render the option
     });
     </script>
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <select id="dropdown">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#dropdown").kendoDropDownList({
+        filter: "contains",
+        rounded: "large"
+      });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <select id="dropdown">
+        <option>Item1</option>
+        <option>Item2</option>
+    </select>
+    <script>
+      $("#dropdown").kendoDropDownList({
+        filter: "contains",
+        size: "large"
+      });
+    </script>
+
 ### headerTemplate `String|Function`
 
 Specifies a static HTML content, which will be rendered as a header of the popup element.
@@ -932,10 +999,10 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
     <div id="example">
       <div>Change the value of the dropdowns and observe the logged value in the console.</div>
       <br/>
-      
+
       <select id="dropdownPrimitive" data-bind="value: selectedProductId, source: products" >
       </select>
-      
+
       <select id="dropdown" data-bind="value: selectedProduct, source: products" >
       </select>
     </div>
@@ -946,14 +1013,14 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
       dataValueField: "id",
       optionLabel: "Select product..."
     });
-      
+
     $("#dropdown").kendoDropDownList({
       valuePrimitive: false,
       dataTextField: "name",
       dataValueField: "id",
       optionLabel: "Select product..."
     });
-      
+
     var viewModel = kendo.observable({
       selectedProductId: null,
       selectedProduct: null,
@@ -963,7 +1030,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
         { id: 3, name: "Juice" }
       ]
     });
-      
+
     viewModel.bind("change", function(ev) {
       if (ev.field === "selectedProduct") {
         console.log("value: " + JSON.stringify(this.get(ev.field)));
@@ -973,7 +1040,7 @@ Specifies the [value binding](/framework/mvvm/bindings/value) behavior for the w
     });
 
     kendo.bind($("#example"), viewModel);
-   
+
 
 ### virtual `Boolean|Object`*(default: false)*
 
@@ -1697,11 +1764,11 @@ The value to set.
 
     dropdownlist.value("Oranges");
     </script>
-	
+
 #### Example - set value of the widget bound to remote data
 
     <input id="products" style="width: 100%" />
-    <script>               
+    <script>
         $("#products").kendoDropDownList({
             dataTextField: "ProductName",
             dataValueField: "ProductID",
@@ -1714,10 +1781,10 @@ The value to set.
                }
             }
         });
-       
+
         var dropdownlist = $("#products").data("kendoDropDownList");
-		dropdownlist.value(2);
-	</script>
+        dropdownlist.value(2);
+    </script>
 
 ## Events
 

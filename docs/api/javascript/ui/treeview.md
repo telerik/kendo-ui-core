@@ -631,6 +631,30 @@ Template for rendering each node.
     });
     </script>
 
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    $("#treeview").kendoTreeView({
+      size: "small",
+      dataSource: [
+        { text: "foo", inStock: 7, items: [
+          { text: "bar", inStock: 2 },
+          { text: "baz", inStock: 5 }
+        ] }
+      ]
+    });
+    </script>
+
 ## Methods
 
 ### append

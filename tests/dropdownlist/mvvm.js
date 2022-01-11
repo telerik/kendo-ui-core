@@ -381,7 +381,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase().trim(), "<strong>foo</strong>");
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).find(".k-list-item-text").html().toLowerCase().trim(), "<strong>foo</strong>");
         });
 
         it("binding template containing binding attributes", function() {
@@ -391,7 +391,7 @@
 
             kendo.bind(dom, observable);
 
-            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).html().toLowerCase().trim(), '<strong data-bind="text:text">foo</strong>');
+            assert.equal(dom.data("kendoDropDownList").ul.children().eq(0).find(".k-list-item-text").html().toLowerCase().trim(), '<strong data-bind="text:text">foo</strong>');
         });
 
         it("updating an item from the data source updates the corresponding dropdownlist item", function() {

@@ -581,14 +581,6 @@
             assert.equal(pb.wrapper.find("li.k-item").length, pb.options.chunkCount);
         });
 
-        it("Correct css class is added to each upcoming chunk", function() {
-            var pb = new ProgressBar(container, {
-                type: "chunk"
-            });
-
-            assert.isOk(pb.wrapper.find("li.k-item").hasClass("k-state-default"));
-        });
-
         it("Correct css class is added to the first chunk", function() {
             var pb = new ProgressBar(container, {
                 type: "chunk"

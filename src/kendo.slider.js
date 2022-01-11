@@ -43,7 +43,6 @@ var __meta__ = { // jshint ignore:line
         TICK_SELECTOR = ".k-tick",
         STATE_SELECTED = "k-state-selected",
         STATE_FOCUSED = "k-state-focused",
-        STATE_DEFAULT = "k-state-default",
         STATE_DISABLED = "k-state-disabled",
         DISABLED = "disabled",
         UNDEFINED = "undefined",
@@ -608,10 +607,10 @@ var __meta__ = { // jshint ignore:line
             }
         }
 
-        return "<a role='button' class='k-button k-button-" + type + "' " +
+        return "<a role='button' class='k-button k-button-md k-rounded-full k-button-solid k-button-solid-base k-icon-button k-button-" + type + "' " +
                 "title='" + options[type + "ButtonTitle"] + "' " +
                 "aria-label='" + options[type + "ButtonTitle"] + "'>" +
-                "<span class='k-icon " + buttonCssClass + "'></span></a>";
+                "<span class='k-button-icon k-icon " + buttonCssClass + "'></span></a>";
     }
 
     function createSliderItems (options, distance) {
@@ -786,8 +785,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.wrapper
-                .removeClass(STATE_DISABLED)
-                .addClass(STATE_DEFAULT);
+                .removeClass(STATE_DISABLED);
 
             that.wrapper.find("input").prop(DISABLED, false);
 
@@ -896,7 +894,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.wrapper
-                .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
 
             $(that.element).prop(DISABLED, DISABLED);
@@ -1484,8 +1481,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.wrapper
-                .removeClass(STATE_DISABLED)
-                .addClass(STATE_DEFAULT);
+                .removeClass(STATE_DISABLED);
 
             that.wrapper.find("input").prop(DISABLED, false);
 
@@ -1580,7 +1576,6 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.wrapper
-                .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
 
             that.wrapper.find("input").prop(DISABLED, DISABLED);

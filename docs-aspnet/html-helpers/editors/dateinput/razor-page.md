@@ -3,7 +3,7 @@ title:  Razor Pages
 page_title: Configure a Telerik UI DateInput with Globalization in Razor Pages.
 description: "An example on how to configure a DateInput with Globalization in Razor Pages."
 slug: htmlhelpers_dateinput_razorpage_aspnetcore
-position: 2
+position: 3
 ---
 
 # Razor Page

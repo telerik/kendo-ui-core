@@ -3,7 +3,7 @@ title: Filtering
 page_title: Filtering
 description: "Learn about the filtering functionality of the Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
 slug: htmlhelpers_dropdowntree_filtering_aspnetcore
-position: 3
+position: 4
 ---
 
 # Filtering

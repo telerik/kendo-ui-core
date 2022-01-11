@@ -454,7 +454,7 @@
             var dropdownlist = input.kendoDropDownList({
                 dataSource: ["foo", "bar"],
                 select: function(e) {
-                    e.preventDefault()
+                    e.preventDefault();
                 }
             }).data("kendoDropDownList");
 
@@ -463,9 +463,9 @@
 
             var current = dropdownlist.current();
 
-            assert.isOk(current.hasClass("k-state-focused"));
-            assert.isOk(current.hasClass("k-state-selected"));
-            assert.equal(current.html(), "foo");
+            assert.isOk(current.hasClass("k-focus"));
+            assert.isOk(current.hasClass("k-selected"));
+            assert.equal(current.text(), "foo");
         });
 
         it("shouldn't trigger select when value has not changed (TAB)", function() {

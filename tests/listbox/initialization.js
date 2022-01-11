@@ -197,7 +197,7 @@
             });
 
             assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
-            assert.equal(listbox.items().first().html(), "<div>item1</div>");
+            assert.equal(listbox.items().first().find("span").html(), "<div>item1</div>");
         });
 
         it("when providing a template string the rendered content is wrapped in a li element", function() {
@@ -206,7 +206,7 @@
             });
 
             assert.equal(listbox.items().first().prop('nodeName').toLowerCase(), "li");
-            assert.equal(listbox.items().first().html(), "<div>item1</div>");
+            assert.equal(listbox.items().first().find("span").html(), "<div>item1</div>");
         });
     });
 }());

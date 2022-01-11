@@ -12,13 +12,10 @@
 
         it("Should render wrapper", function() {
             var textbox = new NumericTextBox(input),
-                wrapper = textbox.wrapper,
-                innerWrapper = wrapper.children();
+                wrapper = textbox.wrapper;
 
-            assert.equal(wrapper[0].className, "k-widget k-numerictextbox");
+            assert.equal(wrapper[0].className, "k-numerictextbox k-input k-input-solid k-input-md k-rounded-md");
 
-            assert.isOk(innerWrapper.eq(0).hasClass("k-numeric-wrap"));
-            assert.equal(innerWrapper.length, 1);
         });
 
         it("Should render up and down arrows", function() {
@@ -26,18 +23,24 @@
                 upArrow = textbox._upArrow,
                 downArrow = textbox._downArrow;
 
-            assert.isOk(upArrow.parent().hasClass("k-select"));
+            assert.isOk(upArrow.parent().hasClass("k-input-spinner"));
 
-            assert.isOk(upArrow.hasClass("k-link"));
-            assert.isOk(upArrow.hasClass("k-link-increase"));
+            assert.isOk(upArrow.hasClass("k-button"));
+            assert.isOk(upArrow.hasClass("k-icon-button"));
+            assert.isOk(upArrow.hasClass("k-button-solid"));
+            assert.isOk(upArrow.hasClass("k-button-solid-base"));
+            assert.isOk(upArrow.hasClass("k-spinner-increase"));
             assert.equal(upArrow.attr("aria-label"), textbox.options.upArrowText);
 
-            assert.isOk(downArrow.hasClass("k-link"));
-            assert.isOk(downArrow.hasClass("k-link-decrease"));
+            assert.isOk(downArrow.hasClass("k-button"));
+            assert.isOk(downArrow.hasClass("k-icon-button"));
+            assert.isOk(downArrow.hasClass("k-button-solid"));
+            assert.isOk(downArrow.hasClass("k-button-solid-base"));
+            assert.isOk(downArrow.hasClass("k-spinner-decrease"));
             assert.equal(downArrow.attr("aria-label"), textbox.options.downArrowText);
 
-            assert.isOk(upArrow.children(":first").hasClass("k-icon k-i-arrow-60-up"));
-            assert.isOk(downArrow.children(":first").hasClass("k-icon k-i-arrow-60-down"));
+            assert.isOk(upArrow.children(":first").hasClass("k-icon k-i-arrow-n k-button-icon"));
+            assert.isOk(downArrow.children(":first").hasClass("k-icon k-i-arrow-s k-button-icon"));
             assert.equal(upArrow.children(":first").html(), "");
             assert.equal(downArrow.children(":first").html(), "");
         });
@@ -51,9 +54,8 @@
             assert.isOk(text.is(":visible"));
             assert.isOk(!input.is(":visible"));
             assert.isOk(text[0].nodeName, "INPUT");
-            assert.isOk(text.hasClass("k-input"));
+            assert.isOk(text.hasClass("k-input-inner"));
             assert.isOk(text.hasClass("custom"));
-            assert.isOk(text.hasClass("k-formatted-value"));
             assert.isOk(text[0].style.cssText.indexOf("color: red") != -1);
             assert.equal(text.next()[0].nodeName, "INPUT");
         });
@@ -143,7 +145,7 @@
             });
 
             assert.isOk(!textbox._upArrow.parent().is(":visible"));
-            assert.isOk(textbox._inputWrapper.hasClass("k-expand-padding"));
+            assert.isOk(textbox.wrapper.hasClass("k-expand-padding"));
         });
 
         it("NumericTextBox gets the placeholder value from the element", function() {
@@ -266,7 +268,7 @@
             var numerictextbox = input.attr("title", "foo").kendoNumericTextBox().data("kendoNumericTextBox");
             var title = input.attr("title");
 
-            assert.equal(numerictextbox.wrapper.find(".k-formatted-value").attr("title"), title);
+            assert.equal(numerictextbox.wrapper.find(".k-input-inner").first().attr("title"), title);
         });
 
         it("NumericTextBox copies the formatted value to the visible input aria-title attr", function() {
@@ -312,7 +314,7 @@
                 enable: false
             });
 
-            assert.isOk(textbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(textbox.wrapper.hasClass("k-disabled"));
             assert.equal(textbox._text.attr("disabled"), "disabled");
             assert.equal(textbox._text.attr("aria-disabled"), "true");
         });

@@ -123,14 +123,14 @@
         combobox.one("dataBound", function() {
             combobox.search("0");
             combobox.select(0).done(function() {
-                assert.isOk(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(combobox.listView.items().eq(0).hasClass("k-selected"));
 
                 combobox.close();
                 combobox.open();
             });
 
             setTimeout(function() {
-                assert.isOk(combobox.listView.items().eq(0).hasClass("k-state-selected"));
+                assert.isOk(combobox.listView.items().eq(0).hasClass("k-selected"));
                 done();
             }, 200);
         });
@@ -189,8 +189,8 @@
                         if (combobox.dataSource.page() > 1) { //wait until the binding is done
                             assert.equal(combobox.select(), 111);
                             assert.equal(combobox.dataItem().value, 111);
-                            assert.isOk($("[data-offset-index=111]").hasClass("k-state-focused"));
-                            assert.isOk($("[data-offset-index=111]").hasClass("k-state-selected"));
+                            assert.isOk($("[data-offset-index=111]").hasClass("k-focus"));
+                            assert.isOk($("[data-offset-index=111]").hasClass("k-selected"));
                             done();
                         }
                     });
@@ -260,8 +260,8 @@
                 combobox.one("dataBound", function() {
                     assert.equal(combobox.select(), 11);
                     assert.equal(combobox.dataItem().value, 11);
-                    assert.isOk($("[data-offset-index=11]").hasClass("k-state-focused"));
-                    assert.isOk($("[data-offset-index=11]").hasClass("k-state-selected"));
+                    assert.isOk($("[data-offset-index=11]").hasClass("k-focus"));
+                    assert.isOk($("[data-offset-index=11]").hasClass("k-selected"));
                     done();
                 });
 
@@ -375,7 +375,7 @@
             combobox.input.trigger({ type: "keydown" });
 
             setTimeout(function() {
-                assert.isOk($("[data-offset-index=1]").hasClass("k-state-focused"));
+                assert.isOk($("[data-offset-index=1]").hasClass("k-focus"));
                 done();
             }, 100);
         });

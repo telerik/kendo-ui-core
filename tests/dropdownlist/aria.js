@@ -135,7 +135,7 @@
                 dataSource: ["Item", "Item2"]
             });
 
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input")[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input-inner")[0].id);
         });
 
         it("DropDownList renders aria-selected", function() {
@@ -232,7 +232,7 @@
 
             assert.isOk(current.attr("id"));
             assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input")[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input-inner")[0].id);
         });
 
         it("widget removes aria id from the optionLabel", function() {

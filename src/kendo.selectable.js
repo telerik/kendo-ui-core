@@ -107,6 +107,7 @@ var __meta__ = { // jshint ignore:line
                 ctrlKey = e.event.ctrlKey || e.event.metaKey,
                 multiple = that.options.multiple,
                 shiftKey = multiple && e.event.shiftKey,
+                selectedClass = that.options.selectedClass || SELECTED,
                 selected,
                 whichCode = e.event.which,
                 buttonCode = e.event.button;
@@ -120,7 +121,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            selected = target.hasClass(SELECTED);
+            selected = target.hasClass(selectedClass);
             if (!multiple || !ctrlKey) {
                 that.clear();
             }
@@ -144,7 +145,8 @@ var __meta__ = { // jshint ignore:line
         _start: function(e) {
             var that = this,
                 target = $(e.target),
-                selected = target.hasClass(SELECTED),
+                selectedClass = that.options.selectedClass || SELECTED,
+                selected = target.hasClass(selectedClass),
                 currentElement,
                 ctrlKey = e.event.ctrlKey || e.event.metaKey;
 
@@ -238,6 +240,7 @@ var __meta__ = { // jshint ignore:line
                 length,
                 target = this._downTarget[0],
                 items = this._items,
+                selectedClass = this.options.selectedClass || SELECTED,
                 related,
                 toSelect;
 
@@ -248,9 +251,9 @@ var __meta__ = { // jshint ignore:line
                 related = toSelect.add(this.relatedTarget(toSelect));
 
                 if (collision(toSelect, position)) {
-                    if(toSelect.hasClass(SELECTED)) {
+                    if(toSelect.hasClass(selectedClass)) {
                         if(ctrlKey && target !== toSelect[0]) {
-                            related.removeClass(SELECTED).addClass(UNSELECTING);
+                            related.removeClass(selectedClass).addClass(UNSELECTING);
                         }
                     } else if (!toSelect.hasClass(ACTIVE) && !toSelect.hasClass(UNSELECTING) && !this._collidesWithActiveElement(related, position)) {
                         related.addClass(ACTIVE);
@@ -260,7 +263,7 @@ var __meta__ = { // jshint ignore:line
                     if (toSelect.hasClass(ACTIVE)) {
                         related.removeClass(ACTIVE);
                     } else if(ctrlKey && toSelect.hasClass(UNSELECTING)) {
-                        related.removeClass(UNSELECTING).addClass(SELECTED);
+                        related.removeClass(UNSELECTING).addClass(selectedClass);
                     }
                 }
             }
@@ -309,7 +312,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            return that.element.find(that.options.filter + "." + SELECTED);
+            return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED));
         },
 
         selectedRanges: function () {
@@ -335,7 +338,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var rangeSelectedAttr = kendo.attr("range-selected");
 
-            return that.element.find(that.options.filter + "." + SELECTED + ":not([" + rangeSelectedAttr + "])").toArray().map(function (elem) {
+            return that.element.find(that.options.filter + "." + (that.options.selectedClass || SELECTED) + ":not([" + rangeSelectedAttr + "])").toArray().map(function (elem) {
                 return $(elem);
             });
         },
@@ -356,11 +359,12 @@ var __meta__ = { // jshint ignore:line
 
         _selectElement: function(element, preventNotify) {
             var toSelect = $(element),
+                selectedClass = this.options.selectedClass || SELECTED,
                 isPrevented =  !preventNotify && this._notify("select", { element: element });
 
             toSelect.removeClass(ACTIVE);
             if(!isPrevented) {
-                 toSelect.addClass(SELECTED);
+                 toSelect.addClass(selectedClass);
 
                 if (this.options.aria) {
                     toSelect.attr(ARIASELECTED, true);
@@ -380,7 +384,7 @@ var __meta__ = { // jshint ignore:line
 
             var rangeSelectedAttr = kendo.attr("range-selected");
 
-            element.removeClass(SELECTED).removeAttr(rangeSelectedAttr);
+            element.removeClass(this.options.selectedClass || SELECTED).removeAttr(rangeSelectedAttr);
 
             if (this.options.aria) {
                 element.attr(ARIASELECTED, false);
@@ -412,7 +416,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         clear: function() {
-            var items = this.element.find(this.options.filter + "." + SELECTED);
+            var items = this.element.find(this.options.filter + "." + (this.options.selectedClass || SELECTED));
             this._unselect(items);
         },
 

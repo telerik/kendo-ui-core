@@ -14,7 +14,7 @@
             var widget = new TextArea(textarea),
                 wrapper = widget.wrapper;
 
-            assert.equal(wrapper[0].className, "k-widget k-textarea");
+            assert.equal(wrapper[0].className, "k-input k-textarea k-input-solid k-input-md k-rounded-md");
         });
 
         it("Should set placeholder", function() {
@@ -38,7 +38,7 @@
                 enable: false
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(widget.wrapper.hasClass("k-disabled"));
         });
 
         it("Should set readonly state", function() {
@@ -46,7 +46,7 @@
                 readonly: true
             });
 
-            assert.isOk(widget.wrapper.hasClass("k-state-readonly"));
+            assert.isOk(widget.wrapper.hasClass("k-readonly"));
         });
 
         it("Should get value from textarea", function() {
@@ -98,21 +98,21 @@
             assert.equal(widget.element[0].style.width, "100%");
         });
 
-        it("sets the k-state-focused class on focusin", function() {
+        it("sets the k-focus class on focusin", function() {
             var widget = new TextArea(textarea);
 
             widget.element[0].focus();
 
-            assert.isOk(widget.wrapper.hasClass("k-state-focused"));
+            assert.isOk(widget.wrapper.hasClass("k-focus"));
         });
 
-        it("removes the k-state-focused class on focusout", function() {
+        it("removes the k-focus class on focusout", function() {
             var widget = new TextArea(textarea);
 
             widget.element[0].focus();
             widget.element.blur();
 
-            assert.isNotOk(widget.wrapper.hasClass("k-state-focused"));
+            assert.isNotOk(widget.wrapper.hasClass("k-focus"));
         });
 
         it("form reset support", function(done) {
@@ -153,6 +153,57 @@
             });
 
             assert.isOk(widget.element.attr("style").indexOf("both") !== -1);
+        });
+
+        it("styling options - fillMode", function() {
+            var widget = new TextArea(textarea, {
+                fillMode: "outline"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-input-outline"));
+        });
+
+        it("styling options - size", function() {
+            var widget = new TextArea(textarea, {
+                size: "small"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-input-sm"));
+        });
+
+        it("styling options - rounded", function() {
+            var widget = new TextArea(textarea, {
+                rounded: "large"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-rounded-lg"));
+        });
+
+        it("styling options - resize", function() {
+            var widget = new TextArea(textarea, {
+                resize: "both"
+            });
+
+            assert.isOk(widget.wrapper.hasClass("k-resize-both"));
+        });
+
+        it("styling options - overflow", function() {
+            var widget = new TextArea(textarea, {
+                overflow: "hidden"
+            });
+
+            assert.isOk(widget.element.hasClass("k-overflow-hidden"));
+        });
+
+        it("styling options - checks for valid options", function() {
+            var widget = new TextArea(textarea, {
+                size: "full"
+            });
+
+            assert.isNotOk(widget.wrapper.hasClass("k-rounded-full")); // Does not add valid class for other option
+            assert.isNotOk(widget.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
+            assert.isNotOk(widget.wrapper.hasClass("k-input-md")); // Does not add default class for the option
+            assert.isOk(widget.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
         });
     });
 }());

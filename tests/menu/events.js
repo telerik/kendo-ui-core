@@ -40,7 +40,7 @@ describe("menu events", function () {
 '                        </li>' +
 '                        <li>Docking' +
 '                        </li>' +
-'                        <li class="k-item k-state-disabled">Chart' +
+'                        <li class="k-item k-disabled">Chart' +
 '                        </li>' +
 '                        <li><a href="http://www.telerik.com/products/silverlight.aspx">... and 28 more!</a></li>' +
 '                    </ul>' +

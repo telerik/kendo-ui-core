@@ -3,8 +3,8 @@
 var ComboBox = kendo.ui.ComboBox;
 var data = [{text: "Foo", value: 1}, {text:"Bar", value:2}];
 var CLICK = kendo.support.touch ? "touchend" : "click";
-var SELECTED = "k-state-selected";
-var FOCUSED = "k-state-focused";
+var SELECTED = "k-selected";
+var FOCUSED = "k-focus";
 var keys = kendo.keys;
 var combobox;
 var input;
@@ -341,7 +341,7 @@ it("pressing enter selects an item", function() {
         dataValueField: "value",
         dataSource: data,
         change: function() {
-            assert.isOk(combobox.current().hasClass("k-state-selected"));
+            assert.isOk(combobox.current().hasClass("k-selected"));
         }
     });
 
@@ -357,7 +357,7 @@ it("pressing Tab selects an item", function() {
         dataValueField: "value",
         dataSource: data,
         change: function() {
-            assert.isOk(combobox.current().hasClass("k-state-selected"));
+            assert.isOk(combobox.current().hasClass("k-selected"));
         }
     });
 
@@ -620,7 +620,7 @@ it("Selects first item if it is focused but not selected", function() {
     var current = combobox.current();
 
     assert.equal(current.index(), 0);
-    assert.isOk(current.hasClass("k-state-selected"));
+    assert.isOk(current.hasClass("k-selected"));
 });
 
 it("ComboBox scrolls content down", function() {

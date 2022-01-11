@@ -199,8 +199,8 @@
 
             toolbar.enable("#foo");
 
-            assert.isOk(!$("#foo").hasClass("k-state-disabled"), "Toolbar button does not have k-state-disabled class");
-            assert.isOk(!toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button does not have k-state-disabled class");
+            assert.isOk(!$("#foo").hasClass("k-disabled"), "Toolbar button does not have k-disabled class");
+            assert.isOk(!toolbar.popup.element.children().first().hasClass("k-disabled"), "Overflow button does not have k-disabled class");
         });
 
         it("enable method disables button", function() {
@@ -212,8 +212,8 @@
 
             toolbar.enable("#foo", false);
 
-            assert.isOk($("#foo").hasClass("k-state-disabled"), "Toolbar button have k-state-disabled class");
-            assert.isOk(toolbar.popup.element.children().first().hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
+            assert.isOk($("#foo").hasClass("k-disabled"), "Toolbar button have k-disabled class");
+            assert.isOk(toolbar.popup.element.children().first().hasClass("k-disabled"), "Overflow button have k-disabled class");
         });
 
         it("enable method disables button with overflow: 'always'", function() {
@@ -225,7 +225,7 @@
 
             toolbar.enable("#foo_overflow", false);
 
-            assert.isOk($("#foo_overflow").hasClass("k-state-disabled"), "Overflow button have k-state-disabled class");
+            assert.isOk($("#foo_overflow").hasClass("k-disabled"), "Overflow button have k-disabled class");
         });
 
         it("enable method disables SplitButton", function() {
@@ -248,7 +248,7 @@
             click($(".k-split-button-arrow"));
 
             assert.isOk(!popup.visible(), "popup does not open");
-            assert.isOk($("#splitButton").hasClass("k-state-disabled"));
+            assert.isOk($("#splitButton").hasClass("k-disabled"));
         });
 
         it("enable method disables menuButton from SplitButton", function() {
@@ -266,8 +266,8 @@
 
             toolbar.enable("#option2", false);
 
-            assert.isOk($("#option2").hasClass("k-state-disabled"));
-            assert.isOk($("#option2_overflow").hasClass("k-state-disabled"));
+            assert.isOk($("#option2").hasClass("k-disabled"));
+            assert.isOk($("#option2_overflow").hasClass("k-disabled"));
         });
 
         it("get selected item from group returns the selected toggle button", function() {
@@ -292,8 +292,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo", true);
-            assert.isOk($("#foo").hasClass("k-state-active"));
-            assert.isOk($("#foo_overflow > .k-button").hasClass("k-state-active"));
+            assert.isOk($("#foo").hasClass("k-active"));
+            assert.isOk($("#foo_overflow > .k-button").hasClass("k-active"));
         });
 
         it("Changing the toggle state of an overflow button is propagated to the twin element located in the toolbar wrapper", function() {
@@ -304,8 +304,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo_overflow", true);
-            assert.isOk($("#foo").hasClass("k-state-active"));
-            assert.isOk($("#foo_overflow > .k-button").hasClass("k-state-active"));
+            assert.isOk($("#foo").hasClass("k-active"));
+            assert.isOk($("#foo_overflow > .k-button").hasClass("k-active"));
         });
 
         it("toggle method selects togglable button", function() {
@@ -316,8 +316,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo_overflow", true);
-            assert.isOk($("#foo").hasClass("k-state-active"));
-            assert.isOk($("#foo_overflow > .k-button").hasClass("k-state-active"));
+            assert.isOk($("#foo").hasClass("k-active"));
+            assert.isOk($("#foo_overflow > .k-button").hasClass("k-active"));
         });
 
         it("toggle method deselects togglable button", function() {
@@ -329,8 +329,8 @@
 
             toolbar.toggle("#foo_overflow", true);
             toolbar.toggle("#foo_overflow", false);
-            assert.isOk(!$("#foo").hasClass("k-state-active"));
-            assert.isOk(!$("#foo_overflow > .k-button").hasClass("k-state-active"));
+            assert.isOk(!$("#foo").hasClass("k-active"));
+            assert.isOk(!$("#foo_overflow > .k-button").hasClass("k-active"));
         });
 
         it("toggle method respects flag 'false'", function() {
@@ -356,7 +356,7 @@
             toolbar.hide("#foo");
 
             assert.isOk($("#foo").hasClass("k-hidden"));
-            assert.isOk($("#foo").hasClass("k-state-hidden"));
+            assert.isOk($("#foo").hasClass("k-hidden"));
             assert.isOk($("#foo").is(":hidden"));
 
             assert.isOk($("#foo_overflow").closest("li").hasClass("k-overflow-hidden"));
@@ -474,7 +474,6 @@
             toolbar.hide($("#splitButton_wrapper"));
 
             assert.isOk($("#splitButton_wrapper").hasClass("k-hidden"));
-            assert.isOk($("#splitButton_wrapper").hasClass("k-state-hidden"));
         });
 
         it("Show method shows hidden button", function() {
@@ -616,12 +615,12 @@
 
             toolbar.toggle($("#option1"), true);
 
-            assert.isOk($("#option1").hasClass("k-state-active"));
+            assert.isOk($("#option1").hasClass("k-active"));
 
             toolbar.toggle($("#option2"), true);
 
-            assert.isOk(!$("#option1").hasClass("k-state-active"));
-            assert.isOk($("#option2").hasClass("k-state-active"));
+            assert.isOk(!$("#option1").hasClass("k-active"));
+            assert.isOk($("#option2").hasClass("k-active"));
         });
 
     });

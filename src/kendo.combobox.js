@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist" ], f);
+    define([ "./kendo.list", "./kendo.mobile.scroller", "./kendo.virtuallist", "./html/button" ], f);
 })(function(){
 
 var __meta__ = { // jshint ignore:line
@@ -24,6 +24,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
+        html = kendo.html,
         List = ui.List,
         Select = ui.Select,
         caret = kendo.caret,
@@ -39,9 +40,8 @@ var __meta__ = { // jshint ignore:line
         READONLY = "readonly",
         CHANGE = "change",
         LOADING = "k-i-loading",
-        DEFAULT = "k-state-default",
-        FOCUSED = "k-state-focused",
-        STATEDISABLED = "k-state-disabled",
+        FOCUSED = "k-focus",
+        STATEDISABLED = "k-disabled",
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         AUTOCOMPLETEVALUE = "off",
@@ -124,6 +124,7 @@ var __meta__ = { // jshint ignore:line
 
             kendo.notify(that);
             that._toggleCloseVisibility();
+            that._applyCssClasses();
         },
 
         options: {
@@ -155,7 +156,10 @@ var __meta__ = { // jshint ignore:line
             clearButton: true,
             syncValueAndText: true,
             autoWidth: false,
-            popup: null
+            popup: null,
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         events:[
@@ -189,7 +193,6 @@ var __meta__ = { // jshint ignore:line
             that.input.off(nsFocusEvent);
             that.element.off(ns);
             that.wrapper.off(ns);
-            that._inputWrapper.off(ns);
             clearTimeout(that._pasteTimeout);
 
             that._arrow.off(CLICK + " " + MOUSEDOWN);
@@ -249,7 +252,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _inputFocus: function() {
-            this._inputWrapper.addClass(FOCUSED);
+            this.wrapper.addClass(FOCUSED);
             this._placeholder(false);
         },
 
@@ -259,7 +262,7 @@ var __meta__ = { // jshint ignore:line
             var isClearButton = !$(e.relatedTarget).closest('.k-clear-value').length;
 
             that._userTriggered = true;
-            that._inputWrapper.removeClass(FOCUSED);
+            that.wrapper.removeClass(FOCUSED);
             clearTimeout(that._typingTimeout);
             that._typingTimeout = null;
 
@@ -299,14 +302,13 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 disable = options.disable,
                 readonly = options.readonly,
-                wrapper = that._inputWrapper.off(ns),
+                wrapper = that.wrapper.off(ns),
                 input = that.element.add(that.input.off(ns)),
                 arrow = that._arrow.off(CLICK + " " + MOUSEDOWN),
                 clear = that._clear;
 
             if (!readonly && !disable) {
                 wrapper
-                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
@@ -328,8 +330,8 @@ var __meta__ = { // jshint ignore:line
                 that.wrapper.on(CLICK + ns, proxy(that._focusHandler, that));
             } else {
                 wrapper
-                    .addClass(disable ? STATEDISABLED : DEFAULT)
-                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+                    .addClass(disable ? STATEDISABLED : "")
+                    .removeClass(disable ? "" : STATEDISABLED);
 
                 input.attr(DISABLED, disable)
                      .attr(READONLY, readonly)
@@ -437,7 +439,7 @@ var __meta__ = { // jshint ignore:line
             var filtered = that._state === STATE_FILTER;
 
             if (filtered) {
-                $(listView.focus()).removeClass("k-state-selected");
+                $(listView.focus()).removeClass("k-selected");
                 return;
             }
 
@@ -928,13 +930,15 @@ var __meta__ = { // jshint ignore:line
 
         _input: function() {
             var that = this,
-                element = that.element.removeClass("k-input")[0],
+                element = that.element.removeClass("k-input-inner")[0],
                 accessKey = element.accessKey,
                 wrapper = that.wrapper,
-                SELECTOR = "input.k-input",
+                SELECTOR = "input.k-input-inner",
                 name = element.name || "",
+                options = that.options,
                 input,
-                maxLength;
+                maxLength,
+                arrowBtn;
 
             if (name) {
                 name = 'name="' + name + '_input" ';
@@ -943,7 +947,16 @@ var __meta__ = { // jshint ignore:line
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span tabindex="-1" unselectable="on" class="k-dropdown-wrap k-state-default"><input ' + name + 'class="k-input" type="text" autocomplete="' + AUTOCOMPLETEVALUE +'"/><span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-arrow-60-down"></span></span></span>')
+                arrowBtn = html.renderButton('<button type="button" class="k-select k-input-button" aria-label="expand combobox"></button>', {
+                    icon: "arrow-s",
+                    size: options.size,
+                    fillMode: options.fillMode,
+                    shape: null,
+                    rounded: null,
+                });
+
+                wrapper.append('<input ' + name + 'class="k-input-inner" type="text" autocomplete="' + AUTOCOMPLETEVALUE +'"/>')
+                    .append(arrowBtn)
                     .append(that.element);
 
                 input = wrapper.find(SELECTOR);
@@ -979,7 +992,6 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._focused = that.input = input;
-            that._inputWrapper = $(wrapper[0].firstChild);
             that._arrow = wrapper.find(".k-select")
                 .attr({
                     "role": "button",
@@ -1142,12 +1154,12 @@ var __meta__ = { // jshint ignore:line
                 element = that.element,
                 wrapper = element.parent();
 
-            if (!wrapper.is("span.k-widget")) {
+            if (!wrapper.is("span.k-input")) {
                 wrapper = element.hide().wrap("<span />").parent();
                 wrapper[0].style.cssText = element[0].style.cssText;
             }
 
-            that.wrapper = wrapper.addClass("k-widget k-combobox")
+            that.wrapper = wrapper.addClass("k-input k-combobox k-widget")
                 .addClass(element[0].className)
                 .removeClass('input-validation-error')
                 .css("display", "");
@@ -1195,6 +1207,13 @@ var __meta__ = { // jshint ignore:line
     });
 
     ui.plugin(ComboBox);
+
+    kendo.cssProperties.registerPrefix("ComboBox", "k-input-");
+
+    kendo.cssProperties.registerValues("ComboBox", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 })(window.kendo.jQuery);
 
 return window.kendo;

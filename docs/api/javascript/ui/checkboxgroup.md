@@ -42,6 +42,47 @@ The `name` attribute to be used for the checkbox inputs. If omitted, the `id` of
         });
     </script>
 
+### inputRounded `String` *(default: 'medium')*
+
+Sets a value controlling the input elements border radius. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- "full"
+- null
+
+#### Example
+
+    <ul id="checkboxgroup"></ul>
+
+    <script>
+        $("#checkboxgroup").kendoCheckBoxGroup({
+            items: [ "one", "two", "three" ],
+            inputRounded: "full"
+        });
+    </script>
+
+### inputSize `String` *(default: 'medium')*
+
+Sets a value controlling the size of the checkbox inputs. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example
+
+    <ul id="checkboxgroup"></ul>
+
+    <script>
+        $("#checkboxgroup").kendoCheckBoxGroup({
+            items: [ "one", "two", "three" ],
+            inputSize: "large"
+        });
+    </script>
+
 ### items `Array`
 
 Array of items to be rendered as checkboxes in the CheckBoxGroup. If the array contains objects, their fields will be used for each checkbox configuration. If the array contains strings, those will be used as both value and label of the respective checkbox.

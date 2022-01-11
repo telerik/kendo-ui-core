@@ -17,19 +17,19 @@ var __meta__ = { // jshint ignore:line
         DataBoundWidget = ui.DataBoundWidget,
         proxy = $.proxy,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
-        WRAPPER = "k-virtual-wrap",
-        VIRTUALLIST = "k-virtual-list",
-        CONTENT = "k-virtual-content",
-        LIST = "k-list",
-        HEADER = "k-group-header",
-        VIRTUALITEM = "k-virtual-item",
-        ITEM = "k-item",
+        LIST_CONTENT = "k-list-content k-virtual-content",
+        TABLE_CONTENT = "k-table-body k-table-scroller k-virtual-content",
+        HEADER = "k-list-group-sticky-header",
+        LIST_ITEM = "k-list-item",
+        TABLE_ITEM = "k-table-row",
         HEIGHTCONTAINER = "k-height-container",
-        GROUPITEM = "k-group",
+        GROUPITEM = "k-list-item-group-label",
+        LIST_UL = "k-list-ul",
+        TABLE_LIST = "k-table-list",
 
-        SELECTED = "k-state-selected",
-        FOCUSED = "k-state-focused",
-        HOVER = "k-state-hover",
+        SELECTED = "k-selected",
+        FOCUSED = "k-focus",
+        HOVER = "k-hover",
         CHANGE = "change",
         CLICK = "click",
         LISTBOUND = "listBound",
@@ -37,6 +37,8 @@ var __meta__ = { // jshint ignore:line
 
         ACTIVATE = "activate",
         DEACTIVATE = "deactivate",
+
+        GROUP_ROW_SEL = ".k-table-group-row",
 
         VIRTUAL_LIST_NS = ".VirtualList";
 
@@ -66,16 +68,25 @@ var __meta__ = { // jshint ignore:line
         return element;
     }
 
-    function getDefaultItemHeight() {
-        var mockList = $('<div class="k-popup"><ul class="k-list"><li class="k-item"><li></ul></div>'),
-            lineHeight;
+    function getDefaultItemHeight(listSize) {
+        var mockList = $('<div class="k-list ' + listSize + ' k-virtual-list">' +
+                '<div class="k-list-content k-virtual-content">' +
+                    '<ul class="k-list-ul">' +
+                        '<li class="k-list-item">' +
+                            '<span class="k-list-item-text">test</span>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>' +
+            '</div>');
+        var lineHeight;
+
         mockList.css({
             position: "absolute",
             left: "-200000px",
             visibility: "hidden"
         });
         mockList.appendTo(document.body);
-        lineHeight = parseFloat(kendo.getComputedStyles(mockList.find(".k-item")[0], ["line-height"])["line-height"]);
+        lineHeight = parseFloat(kendo.getComputedStyles(mockList.find(".k-list-item")[0], ["height"]).height);
         mockList.remove();
 
         return lineHeight;
@@ -115,12 +126,8 @@ var __meta__ = { // jshint ignore:line
     }
 
     function position(element, y) {
-        if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
-            element.style.top = y + "px";
-        } else {
-            element.style.webkitTransform = 'translateY(' + y + "px)";
-            element.style.transform = 'translateY(' + y + "px)";
-        }
+        element.style.webkitTransform = 'translateY(' + y + "px)";
+        element.style.transform = 'translateY(' + y + "px)";
     }
 
     function map2(callback, templates) {
@@ -149,7 +156,9 @@ var __meta__ = { // jshint ignore:line
     }
 
     function render(element, data, templates) {
-        var itemTemplate = templates.template;
+        var itemTemplate = templates.template,
+            hasColumns = this.options.columns && this.options.columns.length,
+            altRow = data.index % 2 === 1 ? "k-table-alt-row" : "";
 
         element = $(element);
 
@@ -157,9 +166,9 @@ var __meta__ = { // jshint ignore:line
             itemTemplate = templates.placeholderTemplate;
         }
 
-         if (data.index === 0 && this.header && data.group) {
-             this.header.html(templates.fixedGroupTemplate(data.group));
-         }
+        if (data.index === 0 && this.header && data.group) {
+            this.header.html(templates.fixedGroupTemplate(data.group));
+        }
 
         this.angular("cleanup", function() {
             return { elements: [ element ]};
@@ -169,10 +178,12 @@ var __meta__ = { // jshint ignore:line
             .attr("data-uid", data.item ? data.item.uid : "")
             .attr("data-offset-index", data.index);
 
-         if (this.options.columns && this.options.columns.length && data.item) {
+        if (hasColumns && data.item) {
+            element.addClass(altRow);
             element.html(renderColumns(this.options, data.item, templates));
         } else {
-            element.html(itemTemplate(data.item || {}));
+            element.find("." + GROUPITEM).remove();
+            element.find(".k-list-item-text").html(itemTemplate(data.item || {}));
         }
 
         element.toggleClass(FOCUSED, data.current);
@@ -182,9 +193,16 @@ var __meta__ = { // jshint ignore:line
         element.toggleClass("k-loading-item", !data.item);
 
         if (data.index !== 0 && data.newGroup) {
-            $("<div class=" + GROUPITEM + "></div>")
-                .appendTo(element)
-                .html(templates.groupTemplate(data.group));
+            if (hasColumns) {
+                $('<span class="k-table-td k-table-group-td"><span>' + templates.groupTemplate(data.group) + '</span></span>')
+                    .appendTo(element);
+            } else {
+                $("<div class=" + GROUPITEM + "></div>")
+                    .appendTo(element)
+                    .html(templates.groupTemplate(data.group));
+            }
+        } else if (data.group && hasColumns) {
+            element.append($('<span class="k-table-td k-table-spacer-td"></span>'));
         }
 
         if (data.top !== undefined) {
@@ -210,7 +228,7 @@ var __meta__ = { // jshint ignore:line
                 widthStyle += percentageUnitsRegex.test(currentWidth) ? "%" : "px";
                 widthStyle += ";'";
             }
-            item += "<span class='k-cell' " + widthStyle + ">";
+            item += "<span class='k-table-td' " + widthStyle + ">";
             item += templates["column"+ i](dataItem);
             item += "</span>";
         }
@@ -259,7 +277,8 @@ var __meta__ = { // jshint ignore:line
 
     var VirtualList = DataBoundWidget.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                contentClasses = options.columns && options.columns.length ? TABLE_CONTENT : LIST_CONTENT;
 
             that.bound(false);
             that._fetching = false;
@@ -267,24 +286,34 @@ var __meta__ = { // jshint ignore:line
             Widget.fn.init.call(that, element, options);
 
             if (!that.options.itemHeight) {
-                that.options.itemHeight = getDefaultItemHeight();
+                that.options.itemHeight = getDefaultItemHeight(options.listSize);
             }
 
             options = that.options;
 
-            that.element.addClass(LIST + " " + VIRTUALLIST).attr("role", "listbox");
-            that.content = that.element.wrap("<div unselectable='on' class='" + CONTENT + "'></div>").parent();
-            that.wrapper = that.content.wrap("<div class='" + WRAPPER + "'></div>").parent();
-            that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
+            that.element.attr("role", "listbox");
+
+            that.content = that.wrapper = that.element.wrap("<div unselectable='on' class='" + contentClasses + "'></div>").parent();
+
+            if(that.options.columns && that.options.columns.length) {
+                var thead = that.element.closest(".k-data-table").find('.k-table-thead');
+                var row = $('<tr class="k-table-group-row">' +
+                    '<th class="k-table-th" colspan="' + that.options.columns.length + '"></th>' +
+                '</tr>');
+
+                thead.append(row);
+
+                that.header = row.find(".k-table-th");
+                that.element.addClass(TABLE_LIST);
+            } else {
+                that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
+                that.element.addClass(LIST_UL);
+            }
 
             if(options.ariaLabel) {
                 this.element.attr("aria-label", options.ariaLabel);
             } else if(options.ariaLabelledBy) {
                 this.element.attr("aria-labelledby", options.ariaLabelledBy);
-            }
-
-            if (options.columns && options.columns.length) {
-                that.element.removeClass(LIST);
             }
 
             that.element.on("mouseenter" + VIRTUAL_LIST_NS, "li:not(.k-loading-item)", function() { $(this).addClass(HOVER); })
@@ -342,10 +371,12 @@ var __meta__ = { // jshint ignore:line
         ],
 
         setOptions: function(options) {
+            var itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
+
             Widget.fn.setOptions.call(this, options);
 
             if (this._selectProxy && this.options.selectable === false) {
-                this.element.off(CLICK, "." + VIRTUALITEM, this._selectProxy);
+                this.element.off(CLICK, "." + itemClass, this._selectProxy);
             } else if (!this._selectProxy && this.options.selectable) {
                 this._selectable();
             }
@@ -1156,16 +1187,22 @@ var __meta__ = { // jshint ignore:line
 
         _generateItems: function(element, count) {
             var items = [],
-                item,
-                itemHeight = this.options.itemHeight + "px";
+                item, text,
+                itemHeight = this.options.itemHeight + "px",
+                itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
 
             while(count-- > 0) {
+                text = document.createElement("span");
+                text.className = "k-list-item-text";
+
                 item = document.createElement("li");
                 item.tabIndex = -1;
-                item.className = VIRTUALITEM + " " + ITEM;
+                item.className = itemClass;
                 item.setAttribute("role", "option");
                 item.style.height = itemHeight;
                 item.style.minHeight = itemHeight;
+                item.appendChild(text);
+
                 element.appendChild(item);
 
                 items.push(item);
@@ -1210,9 +1247,17 @@ var __meta__ = { // jshint ignore:line
             that.options.type = (dataSource.group() || []).length ? "group" : "flat";
 
             if (that.options.type === "flat") {
-                that.header.hide();
+                if (that.header.closest(GROUP_ROW_SEL).length) {
+                    that.header.closest(GROUP_ROW_SEL).hide();
+                } else {
+                    that.header.hide();
+                }
             } else {
-                that.header.show();
+                if (that.header.closest(GROUP_ROW_SEL).length) {
+                    that.header.closest(GROUP_ROW_SEL).show();
+                } else {
+                    that.header.show();
+                }
             }
 
             that.getter = that._getter(function() {
@@ -1512,9 +1557,11 @@ var __meta__ = { // jshint ignore:line
         },
 
         _selectable: function() {
+            var itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
+
             if (this.options.selectable) {
                 this._selectProxy = $.proxy(this, "_clickHandler");
-                this.element.on(CLICK + VIRTUAL_LIST_NS, "." + VIRTUALITEM, this._selectProxy);
+                this.element.on(CLICK + VIRTUAL_LIST_NS, "." + itemClass, this._selectProxy);
             }
         },
 
@@ -1630,7 +1677,7 @@ var __meta__ = { // jshint ignore:line
         _deselectSingleItem: function(item, position, selectedIndex, removedindexesCounter) {
             var dataItem;
 
-            if (!item.hasClass("k-state-selected")) {
+            if (!item.hasClass(SELECTED)) {
                 return;
             }
 
@@ -1659,7 +1706,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (indices[0] === -1) {
-                $(children).removeClass("k-state-selected");
+                $(children).removeClass(SELECTED);
                 removed = $.map(this._selectedDataItems.slice(0), function(dataItem, idx) {
                    return {
                       dataItem: dataItem,
@@ -1688,7 +1735,7 @@ var __meta__ = { // jshint ignore:line
 
                 if (position > -1) {
                     removed.push(this.removeAt(position));
-                    $(children[index]).removeClass("k-state-selected");
+                    $(children[index]).removeClass(SELECTED);
                 }
             }
 
@@ -1777,7 +1824,7 @@ var __meta__ = { // jshint ignore:line
             if(this.options.columns && this.options.columns.length){
                 var isRtl = kendo.support.isRtl(this.wrapper);
                 var scrollbar = kendo.support.scrollbar();
-                var columnsHeader = this.content.parent().parent().find(".k-grid-header");
+                var columnsHeader = this.content.parent().parent().find(".k-table-header");
                 var total = this.dataSource.total();
 
                 columnsHeader.css((isRtl ? "padding-left" : "padding-right"), total ? scrollbar : 0);

@@ -34,15 +34,14 @@ var __meta__ = { // jshint ignore:line
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
         CHANGE = "change",
-        DEFAULT = "k-state-default",
         DISABLED = "disabled",
         READONLY = "readonly",
-        FOCUSED = "k-state-focused",
-        SELECTED = "k-state-selected",
+        FOCUSED = "k-focus",
+        SELECTED = "k-selected",
         HIDDENCLASS = "k-hidden",
-        STATEDISABLED = "k-state-disabled",
+        STATEDISABLED = "k-disabled",
         AUTOCOMPLETEVALUE = "off",
-        HOVER = "k-state-hover",
+        HOVER = "k-hover",
         ns = ".kendoAutoComplete",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         proxy = $.proxy;
@@ -97,7 +96,7 @@ var __meta__ = { // jshint ignore:line
             that._popup();
 
             element
-                .addClass("k-input")
+                .addClass("k-input-inner")
                 .on("keydown" + ns, proxy(that._keydown, that))
                 .on("keypress" + ns, proxy(that._keypress, that))
                 .on("input" + ns, proxy(that._search, that))
@@ -147,6 +146,7 @@ var __meta__ = { // jshint ignore:line
 
             kendo.notify(that);
             that._toggleCloseVisibility();
+            that._applyCssClasses();
         },
 
         options: {
@@ -171,7 +171,10 @@ var __meta__ = { // jshint ignore:line
             value: null,
             clearButton: true,
             autoWidth: false,
-            popup: null
+            popup: null,
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         _dataSource: function() {
@@ -237,7 +240,6 @@ var __meta__ = { // jshint ignore:line
 
             if (!readonly && !disable) {
                 wrapper
-                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
@@ -247,8 +249,8 @@ var __meta__ = { // jshint ignore:line
                        .attr(ARIA_READONLY, false);
             } else {
                 wrapper
-                    .addClass(disable ? STATEDISABLED : DEFAULT)
-                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+                    .addClass(disable ? STATEDISABLED : "")
+                    .removeClass(disable ? "" : STATEDISABLED);
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
@@ -804,7 +806,7 @@ var __meta__ = { // jshint ignore:line
 
             wrapper = element.parent();
 
-            if (!wrapper.is("span.k-widget")) {
+            if (!wrapper.is("span.k-autocomplete")) {
                 wrapper = element.wrap("<span />").parent();
             }
 
@@ -818,11 +820,9 @@ var __meta__ = { // jshint ignore:line
 
             that._focused = that.element;
             that.wrapper = wrapper
-                .addClass("k-widget k-autocomplete")
+                .addClass("k-autocomplete k-input")
                 .addClass(DOMelement.className)
                 .removeClass('input-validation-error');
-
-            that._inputWrapper = $(wrapper[0]);
         },
 
         _clearValue: function() {
@@ -832,6 +832,13 @@ var __meta__ = { // jshint ignore:line
     });
 
     ui.plugin(AutoComplete);
+
+    kendo.cssProperties.registerPrefix("AutoComplete", "k-input-");
+
+    kendo.cssProperties.registerValues("AutoComplete", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 })(window.kendo.jQuery);
 
 return window.kendo;

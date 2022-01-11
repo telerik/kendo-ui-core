@@ -62,7 +62,7 @@
             assert.isOk(widget.wrapper.parent().hasClass("k-state-empty"));
         });
 
-        it("floating label removes k-state-empty class when the textarea has value", function() {
+        it("floating label removes k-empty class when the textarea has value", function() {
             var widget = new TextArea(textarea, {
                 value: "val",
                 label: {
@@ -74,7 +74,7 @@
             assert.isNotOk(widget.floatingLabel.element.hasClass("k-state-empty"));
         });
 
-        it("floating label removes k-state-empty on focusout when the textarea has value", function() {
+        it("floating label removes k-empty on focusout when the textarea has value", function() {
             var widget = new TextArea(textarea, {
                 label: {
                     content: "test",
@@ -87,10 +87,10 @@
             widget.value("val");
             widget.element.trigger("focusout");
 
-            assert.isNotOk(widget.floatingLabel.element.hasClass("k-state-empty"));
+            assert.isNotOk(widget.floatingLabel.element.hasClass("k-empty"));
         });
 
-        it("floating label adds k-state-focus when the user focuses the textarea", function() {
+        it("floating label adds k-focus when the user focuses the textarea", function() {
             var widget = new TextArea(textarea, {
                 label: {
                     content: "test",
@@ -100,10 +100,10 @@
 
             widget.focus();
 
-            assert.isOk(widget.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isOk(widget.floatingLabel.element.hasClass("k-focus"));
         });
 
-        it("floating label removes k-state-focused on blur", function() {
+        it("floating label removes k-focus on blur", function() {
             var widget = new TextArea(textarea, {
                 label: {
                     content: "test",
@@ -113,14 +113,14 @@
 
             widget.focus();
 
-            assert.isOk(widget.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isOk(widget.floatingLabel.element.hasClass("k-focus"));
 
             document.activeElement.blur();
 
-            assert.isNotOk(widget.floatingLabel.element.hasClass("k-state-focused"));
+            assert.isNotOk(widget.floatingLabel.element.hasClass("k-focus"));
         });
 
-        it("floating label adds k-state-readonly when textarea is set to readonly", function() {
+        it("floating label adds k-readonly when textarea is set to readonly", function() {
             var widget = new TextArea(textarea, {
                 label: {
                     content: "test",
@@ -130,7 +130,7 @@
 
             widget.readonly();
 
-            assert.isOk(widget.floatingLabel.element.hasClass("k-state-readonly"));
+            assert.isOk(widget.floatingLabel.element.hasClass("k-readonly"));
         });
 
         it("widget enable calls floating label enable", function() {

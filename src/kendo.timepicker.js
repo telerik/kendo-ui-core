@@ -13,6 +13,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         keys = kendo.keys,
+        html = kendo.html,
         parse = kendo.parseDate,
         activeElement = kendo._activeElement,
         extractFormat = kendo._extractFormat,
@@ -25,19 +26,18 @@ var __meta__ = { // jshint ignore:line
         CHANGE = "change",
         ns = ".kendoTimePicker",
         CLICK = "click" + ns,
-        DEFAULT = "k-state-default",
         DISABLED = "disabled",
         READONLY = "readonly",
         LI = "li",
         SPAN = "<span></span>",
-        FOCUSED = "k-state-focused",
-        HOVER = "k-state-hover",
+        FOCUSED = "k-focus",
+        HOVER = "k-hover",
         HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
         MOUSEDOWN = "mousedown" + ns,
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
-        SELECTED = "k-state-selected",
-        STATEDISABLED = "k-state-disabled",
+        SELECTED = "k-selected",
+        STATEDISABLED = "k-disabled",
         ARIA_SELECTED = "aria-selected",
         ARIA_EXPANDED = "aria-expanded",
         ARIA_HIDDEN = "aria-hidden",
@@ -113,18 +113,18 @@ var __meta__ = { // jshint ignore:line
             }
         },
         TODAY = new DATE(),
-        MODERN_RENDERING_TEMPLATE = '<div tabindex="0" class="k-timeselector">' +
+        MODERN_RENDERING_TEMPLATE = '<div tabindex="0" class="k-timeselector #=mainSize#">' +
             '<div class="k-time-header">' +
                 '<span class="k-title"></span>' +
-                '<button class="k-button k-flat k-time-now" title="Select now" aria-label="Select now">#=messages.now#</button>' +
+                '<button class="k-button #=buttonSize# k-rounded-md k-button-flat k-button-flat-base k-time-now" title="Select now" aria-label="Select now"><span class="k-button-text">#=messages.now#</span></button>' +
             '</div>' +
             '<div class="k-time-list-container">' +
                 '<span class="k-time-highlight"></span>' +
             '</div>' +
         '</div>',
         NEW_RENDERING_FOOTER = '<div class="k-time-footer k-action-buttons">' +
-            '<button class="k-button k-time-cancel" title="Cancel changes" aria-label="Cancel changes">#=messages.cancel#</button>' +
-            '<button class="k-time-accept k-button k-primary" title="Set time" aria-label="Set time">#=messages.set#</button>' +
+            '<button class="k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-base k-time-cancel" title="Cancel changes" aria-label="Cancel changes"><span class="k-button-text">#=messages.cancel#</span></button>' +
+            '<button class="k-time-accept k-button #=buttonSize# k-rounded-md k-button-solid k-button-solid-primary" title="Set time" aria-label="Set time"><span class="k-button-text">#=messages.set#</span></button>' +
             '</div>',
         HIGHLIGHTCONTAINER = '<span class="k-time-highlight"></span>';
 
@@ -160,11 +160,15 @@ var __meta__ = { // jshint ignore:line
             }
         },
         _createScrollList: function () {
-            this.list = $(kendo.template(MODERN_RENDERING_TEMPLATE)(this.options))
+            var templateOptions = $.extend({}, this.options, {
+                mainSize: kendo.getValidCssClass("k-timeselector-", "size", this.options.size || "medium"),
+                buttonSize: kendo.getValidCssClass("k-button-", "size", this.options.size || "medium")
+            });
+            this.list = $(kendo.template(MODERN_RENDERING_TEMPLATE)(templateOptions))
                 .on(MOUSEDOWN, preventDefault);
 
             if (!this.options.omitPopup) {
-                this.list.append(kendo.template(NEW_RENDERING_FOOTER)(this.options));
+                this.list.append(kendo.template(NEW_RENDERING_FOOTER)(templateOptions));
             }
 
             this.ul = this.list.find(".k-time-list-container");
@@ -204,7 +208,7 @@ var __meta__ = { // jshint ignore:line
         _scrollerKeyDownHandler: function (e) {
             var that = this,
                 key = e.keyCode,
-                list = $(e.currentTarget).find(".k-time-list-wrapper.k-state-focused"),
+                list = $(e.currentTarget).find(".k-time-list-wrapper.k-focus"),
                 lists = that.list.find(".k-time-list-wrapper"),
                 length = lists.length,
                 index = lists.index(list),
@@ -250,8 +254,9 @@ var __meta__ = { // jshint ignore:line
         },
         _createClassicRenderingList: function () {
             var that = this;
+            var listParent = $('<div class="k-list ' + kendo.getValidCssClass("k-list-", "size", that.options.size) + '"><ul tabindex="-1" role="listbox" aria-hidden="true" unselectable="on" class="k-list-ul"/></div>');
 
-            that.ul = $('<ul tabindex="-1" role="listbox" aria-hidden="true" unselectable="on" class="k-list k-reset"/>')
+            that.ul = listParent.find("ul")
                 .css({
                     overflow: support.kineticScrollNeeded ? "" : "auto"
                 })
@@ -264,10 +269,10 @@ var __meta__ = { // jshint ignore:line
                 });
 
             that.list = $("<div class='k-list-container k-list-scroller' unselectable='on'/>")
-                .append(that.ul)
+                .append(listParent)
                 .on(MOUSEDOWN, preventDefault);
 
-            that.template = kendo.template('<li tabindex="-1" role="option" class="k-item" unselectable="on">#=data#</li>', {
+            that.template = kendo.template('<li tabindex="-1" role="option" class="k-list-item" unselectable="on"><span class="k-list-item-text">#=data#</span></li>', {
                 useWithBlock: false
             });
 
@@ -1352,7 +1357,7 @@ var __meta__ = { // jshint ignore:line
                 element[0].type = "text";
             }
 
-            element.addClass("k-input")
+            element.addClass("k-input-inner")
                    .attr({
                         "role": "combobox",
                         "aria-expanded": false,
@@ -1381,11 +1386,15 @@ var __meta__ = { // jshint ignore:line
                     min: min,
                     max: max,
                     value: options.value,
-                    interval: options.interval
+                    interval: options.interval,
+                    size: options.size,
+                    fillMode: options.fillMode,
+                    rounded: options.rounded
                 });
             }
             that._old = that._update(options.value || that.element.val());
             that._oldText = element.val();
+            that._applyCssClasses();
 
             kendo.notify(that);
         },
@@ -1411,7 +1420,10 @@ var __meta__ = { // jshint ignore:line
                 millisecond: "millisecond",
                 now: "Now"
             },
-            componentType: "classic"
+            componentType: "classic",
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         events: [
@@ -1444,9 +1456,15 @@ var __meta__ = { // jshint ignore:line
                 this._specifiedRange = true;
             }
 
+            that._arrow.off(ns);
+            that._arrow.remove();
+
             normalize(options);
 
             that.timeView.setOptions(options);
+
+            that._icon();
+            that._editable(options);
 
             if (value) {
                 that.element.val(kendo.toString(value, options.format, options.culture));
@@ -1465,7 +1483,7 @@ var __meta__ = { // jshint ignore:line
                 readonly = options.readonly,
                 arrow = that._arrow.off(ns),
                 element = that.element.off(ns),
-                wrapper = that._inputWrapper.off(ns);
+                wrapper = that.wrapper.off(ns);
 
             if (that._dateInput) {
                 that._dateInput._unbindInput();
@@ -1473,7 +1491,6 @@ var __meta__ = { // jshint ignore:line
 
             if (!readonly && !disable) {
                 wrapper
-                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
 
@@ -1486,7 +1503,7 @@ var __meta__ = { // jshint ignore:line
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
-                           that._inputWrapper.addClass(FOCUSED);
+                           that.wrapper.addClass(FOCUSED);
                        });
 
                 if (that._dateInput) {
@@ -1496,8 +1513,8 @@ var __meta__ = { // jshint ignore:line
                    .on(MOUSEDOWN, preventDefault);
             } else {
                 wrapper
-                    .addClass(disable ? STATEDISABLED : DEFAULT)
-                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+                    .addClass(disable ? STATEDISABLED : "")
+                    .removeClass(disable ? "" : STATEDISABLED);
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
@@ -1529,7 +1546,7 @@ var __meta__ = { // jshint ignore:line
 
             that.element.off(ns);
             that._arrow.off(ns);
-            that._inputWrapper.off(ns);
+            that.wrapper.off(ns);
 
             if (that._form) {
                 that._form.off("reset", that._resetHandler);
@@ -1589,7 +1606,7 @@ var __meta__ = { // jshint ignore:line
             if (value !== that._oldText) {
                 that._change(value);
             }
-            that._inputWrapper.removeClass(FOCUSED);
+            that.wrapper.removeClass(FOCUSED);
         },
 
         _click: function() {
@@ -1631,12 +1648,19 @@ var __meta__ = { // jshint ignore:line
         _icon: function() {
             var that = this,
                 element = that.element,
+                options = that.options,
                 arrow;
 
-            arrow = element.next("span.k-select");
+            arrow = element.next("button.k-input-button");
 
             if (!arrow[0]) {
-                arrow = $('<span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-clock"></span></span>').insertAfter(element);
+                arrow = $(html.renderButton('<button unselectable="on" class="k-input-button" aria-label="select"></button>', {
+                    icon: "clock",
+                    size: options.size,
+                    fillMode: options.fillMode,
+                    shape: null,
+                    rounded: null
+                })).insertAfter(element);
             }
 
             that._arrow = arrow.attr({
@@ -1718,20 +1742,16 @@ var __meta__ = { // jshint ignore:line
             wrapper = element.parents(".k-timepicker");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap(SPAN).parent().addClass("k-picker-wrap k-state-default");
-                wrapper = wrapper.wrap(SPAN).parent();
+                wrapper = element.wrap(SPAN).parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-timepicker")
+            that.wrapper = wrapper.addClass("k-timepicker k-input")
                 .addClass(element[0].className);
 
             element.css({
-                width: "100%",
                 height: element[0].style.height
             });
-
-            that._inputWrapper = $(wrapper[0].firstChild);
         },
 
         _reset: function() {
@@ -1973,6 +1993,14 @@ var __meta__ = { // jshint ignore:line
             elem = elem.parentNode;
         }
     }
+
+
+    kendo.cssProperties.registerPrefix("TimePicker", "k-input-");
+
+    kendo.cssProperties.registerValues("TimePicker", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 
     ui.plugin(TimePicker);
 

@@ -28,7 +28,6 @@ var __meta__ = { // jshint ignore:line
         KPROGRESSSTATUS = "k-progress-status",
         LABEL_POSITION_END = "k-progress-end",
         KCOMPLETEDCHUNK = "k-state-selected",
-        KUPCOMINGCHUNK = "k-state-default",
         STATEDISABLED = "k-state-disabled",
         PROGRESSTYPE = {
             VALUE: "value",
@@ -323,11 +322,9 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.wrapper.find("." + KCOMPLETEDCHUNK)
-                        .removeClass(KCOMPLETEDCHUNK)
-                        .addClass(KUPCOMINGCHUNK);
+                        .removeClass(KCOMPLETEDCHUNK);
 
-            completedChunks.removeClass(KUPCOMINGCHUNK)
-                           .addClass(KCOMPLETEDCHUNK);
+            completedChunks.addClass(KCOMPLETEDCHUNK);
         },
 
         _updateProgressWrapper: function(percentage) {
@@ -442,7 +439,7 @@ var __meta__ = { // jshint ignore:line
 
             html += "<ul class='k-reset'>";
             for (var i = options.chunkCount - 1; i >= 0; i--) {
-                html += "<li class='k-item k-state-default'></li>";
+                html += "<li class='k-item'></li>";
             }
             html += "</ul>";
 

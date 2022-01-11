@@ -283,8 +283,7 @@
             assert.equal(numerictextbox.element.attr("disabled"), undefined);
             assert.equal(numerictextbox._text.attr("readonly"), "readonly");
             assert.equal(numerictextbox._text.attr("disabled"), undefined);
-            assert.isOk(numerictextbox._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!numerictextbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!numerictextbox.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -297,8 +296,7 @@
             assert.equal(numerictextbox.element.attr("disabled"), "disabled");
             assert.equal(numerictextbox._text.attr("readonly"), undefined);
             assert.equal(numerictextbox._text.attr("disabled"), "disabled");
-            assert.isOk(!numerictextbox._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(numerictextbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(numerictextbox.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -311,8 +309,7 @@
             assert.equal(numerictextbox.element.attr("disabled"), undefined);
             assert.equal(numerictextbox._text.attr("readonly"), undefined);
             assert.equal(numerictextbox._text.attr("disabled"), undefined);
-            assert.isOk(numerictextbox._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!numerictextbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!numerictextbox.wrapper.hasClass("k-disabled"));
         });
 
         it("_blur should hide the input text and show the _text", function() {
@@ -552,7 +549,7 @@
             });
 
             assert.equal(textbox._arrowsWrap.is(":visible"), true);
-            assert.equal(textbox._inputWrapper.hasClass("k-expand-padding"), false);
+            assert.equal(textbox.wrapper.hasClass("k-expand-padding"), false);
         });
 
         it("NumericTextBox setOptons correctly hides spinners", function() {
@@ -564,7 +561,7 @@
             });
 
             assert.equal(textbox._arrowsWrap.is(":visible"), false);
-            assert.equal(textbox._inputWrapper.hasClass("k-expand-padding"), true);
+            assert.equal(textbox.wrapper.hasClass("k-expand-padding"), true);
         });
 
         it("floating numbers should be calculated correctly when using spinners", function() {

@@ -74,7 +74,7 @@
                 ]
             });
 
-            $(".k-split-button > a").trigger('click');
+            $(".k-split-button .k-split-button-arrow").trigger('click');
 
             var splitWrapper = $(".k-split-wrapper");
 

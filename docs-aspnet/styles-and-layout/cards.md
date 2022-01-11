@@ -3,7 +3,7 @@ title: Cards
 page_title: Cards 
 description: "Learn how to use the Telerik UI card class to render a flexible content container in {{ site.product }} applications."
 slug: cards_aspnetmvc6_aspnetmvc
-position: 1
+position: 2
 ---
 
 # Cards

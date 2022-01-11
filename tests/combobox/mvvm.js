@@ -317,7 +317,7 @@ it("binding template", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).html().trim(), "<strong>foo</strong>");
+    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).find(".k-list-item-text").html().trim(), "<strong>foo</strong>");
 });
 
 it("binding template containing binding attributes", function() {
@@ -327,7 +327,7 @@ it("binding template containing binding attributes", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).html().trim(), '<strong data-bind="text:text">foo</strong>');
+    assert.equal(dom.data("kendoComboBox").ul.children().eq(0).find(".k-list-item-text").html().trim(), '<strong data-bind="text:text">foo</strong>');
 });
 
 it("updating an item from the data source updates the corresponding combobox item", function() {
@@ -360,7 +360,7 @@ it("binding header template", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal(dom.data("kendoComboBox").list.children(":first")[0].outerHTML.trim(), "<strong>Title</strong>");
+    assert.equal(dom.data("kendoComboBox").list.find(".k-list-header").html().trim(), "<strong>Title</strong>");
 });
 
 it("removing items from the model updates the UI", function() {

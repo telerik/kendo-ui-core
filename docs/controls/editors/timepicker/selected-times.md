@@ -3,7 +3,7 @@ title: Selected Times
 page_title: jQuery TimePicker Documentation | Selected Times
 description: "Get started with the jQuery TimePicker by Kendo UI and learn how to set selected times in the widget."
 slug: selectedtimes_kendoui_timepicker
-position: 2
+position: 3
 ---
 
 # Selected Times

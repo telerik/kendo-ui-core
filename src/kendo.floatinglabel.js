@@ -17,10 +17,10 @@ var __meta__ = {// jshint ignore:line
         NS = ".kendoFloatingLabel",
         FLOATINGLABELCONTAINER = "k-floating-label-container",
         EMPTY = "k-state-empty",
-        FOCUSED = "k-state-focused",
-        STATEDISABLED = "k-state-disabled",
+        FOCUSED = "k-focus",
+        STATEDISABLED = "k-disabled",
         NOCLICKCLASS = "k-no-click",
-        STATEREADONLY = "k-state-readonly",
+        STATEREADONLY = "k-readonly",
         proxy = $.proxy;
 
     var FloatingLabel = Widget.extend({

@@ -8,8 +8,7 @@
     var args;
 
     var DOT = ".";
-    var DISABLED_STATE_CLASS = "k-state-disabled";
-    var SELECTED_STATE_CLASS = "k-state-selected";
+    var DISABLED_STATE_CLASS = "k-disabled";
     var REMOVE = "remove";
     var TRANSFER = "transfer";
     var ADD = "add";

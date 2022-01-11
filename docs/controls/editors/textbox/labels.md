@@ -3,7 +3,7 @@ title: Labels
 page_title: jQuery Labels for TextBox Documentation
 description: "Learn how to create and initialize Labels for the TextBox."
 slug: labels_textbox
-position: 2
+position: 3
 ---
 
 # Label Overview

@@ -5,7 +5,7 @@
         VirtualList = kendo.ui.VirtualList,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -23,7 +23,7 @@
 
     describe("VirtualList Primitive Data: ", function() {
         beforeEach(function() {
-            container = $("<div id='container'></div>").appendTo(Mocha.fixture);
+            container = $("<ul id='container'></ul>").appendTo(Mocha.fixture);
 
             asyncDataSource = new kendo.data.DataSource({
                 transport: {
@@ -78,6 +78,7 @@
 
             asyncDataSource.read().then(function() {
                 var element = virtualList.items().first();
+
                 virtualList.select(element).done(function() {
                     assert.equal(virtualList.value()[0], "Item 0");
                     done();
@@ -156,8 +157,10 @@
             }));
 
             asyncDataSource.read().then(function() {
-                assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
-                done();
+                setTimeout(function() {
+                    assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+                    done();
+                }, 0);
             });
         });
 
@@ -169,11 +172,12 @@
             }));
 
             asyncDataSource.read().then(function() {
-
-                assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
-                assert.isOk(virtualList.items().eq(10).hasClass(SELECTED), "Item 10 is selected");
-                assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
-                done();
+                setTimeout(function() {
+                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+                    assert.isOk(virtualList.items().eq(10).hasClass(SELECTED), "Item 10 is selected");
+                    assert.isOk(virtualList.items().eq(6).hasClass(SELECTED), "Item 6 is selected");
+                    done();
+                });
             });
         });
 
@@ -213,8 +217,10 @@
             virtualList.value("Item 3");
 
             asyncDataSource.read().then(function() {
-                assert.isOk(virtualList.items().eq(3).hasClass(SELECTED), "Item 3 is selected");
-                done();
+                setTimeout(function() {
+                    assert.isOk(virtualList.items().eq(3).hasClass(SELECTED), "Item 3 is selected");
+                    done();
+                });
             });
         });
 
@@ -226,10 +232,12 @@
             virtualList.value(["Item 1", "Item 5", "Item 9"]);
 
             asyncDataSource.read().then(function() {
-                assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
-                assert.isOk(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
-                assert.isOk(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
-                done();
+                setTimeout(function() {
+                    assert.isOk(virtualList.items().eq(1).hasClass(SELECTED), "Item 1 is selected");
+                    assert.isOk(virtualList.items().eq(5).hasClass(SELECTED), "Item 5 is selected");
+                    assert.isOk(virtualList.items().eq(9).hasClass(SELECTED), "Item 9 is selected");
+                    done();
+                });
             });
         });
 
@@ -293,13 +301,14 @@
             }));
 
             asyncDataSource.read().then(function() {
+                setTimeout(function() {
+                    var element = virtualList.items().eq(0);
 
-                var element = virtualList.items().eq(0);
-                virtualList.select(element).done(function() {
-
-                    assert.equal(virtualList.selectedDataItems().length, 1, "First item is removed");
-                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
-                    done();
+                    virtualList.select(element).done(function() {
+                        assert.equal(virtualList.selectedDataItems().length, 1, "First item is removed");
+                        assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[7], "Second item is saved");
+                        done();
+                    });
                 });
             });
         });
@@ -337,22 +346,19 @@
         });
 
         it("changing the value through the value method updates dataItems collection (initially set values)", function(done) {
-            var count = 1;
             var virtualList = new VirtualList(container, $.extend(virtualSettings, {
                 value: ["Item 7"],
                 selectable: "multiple"
             }));
 
             virtualList.bind("listBound", function() {
+                virtualList.unbind("listBound");
                 virtualList.bind("change", function() {
-                    if (count !== 1) {
-                        assert.equal(virtualList.selectedDataItems().length, 2);
-                        assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
-                        assert.equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
-                        done();
-                    }
-
-                    count += 1; //first change is triggered because of dataitems removal
+                    virtualList.unbind("change");
+                    assert.equal(virtualList.selectedDataItems().length, 2);
+                    assert.equal(virtualList.selectedDataItems()[0], asyncDataSource.data()[0]);
+                    assert.equal(virtualList.selectedDataItems()[1], asyncDataSource.data()[1]);
+                    done();
                 });
                 virtualList.value(["Item 0", "Item 1"]);
             });
@@ -385,15 +391,19 @@
                 valueMapper: function(o) {
                     o.success([7, 256]);
                 },
-                selectable: "multiple",
-                change: function() {
-
-                    assert.equal(virtualList.selectedDataItems().length, 2);
-                    assert.isOk(virtualList.selectedDataItems()[0] === "Item 7");
-                    assert.isOk(virtualList.selectedDataItems()[1] === "Item 256");
-                    done();
-                }
+                selectable: "multiple"
             }));
+
+            virtualList.bind("listBound", function() {
+                virtualList.bind("change", function(e) {
+                    if(e.added && e.added.length) {
+                        assert.equal(virtualList.selectedDataItems().length, 2);
+                        assert.isOk(virtualList.selectedDataItems()[0] === "Item 7");
+                        assert.isOk(virtualList.selectedDataItems()[1] === "Item 256");
+                        done();
+                    }
+                });
+            });
 
             asyncDataSource.read();
         });

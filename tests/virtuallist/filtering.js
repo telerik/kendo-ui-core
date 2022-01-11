@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 50,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -219,7 +219,7 @@
                 virtualList.one("listBound", function() {
                     virtualList.select(11).done(function () {
                         virtualList.one("listBound", function() {
-                            assert.equal(0, virtualList.items().find(".k-state-selected").length);
+                            assert.equal(0, virtualList.items().find(".k-selected").length);
                             assert.deepEqual([17], virtualList.select());
                             asyncDone();
                         });
@@ -335,7 +335,7 @@
             virtualList.one("listBound", function() {
                 virtualList.select(0).done(function() {
                     virtualList.one("listBound", function() {
-                        assert.isOk(virtualList.items().eq(0).hasClass("k-state-selected"));
+                        assert.isOk(virtualList.items().eq(0).hasClass("k-selected"));
                         done();
                     });
 

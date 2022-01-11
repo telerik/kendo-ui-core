@@ -41,7 +41,7 @@
 
             cp.enable(false);
 
-            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
         it("removes k-state-disabled class when enabled", function() {
@@ -51,7 +51,7 @@
             cp.enable(false);
             cp.enable();
 
-            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!cp.wrapper.hasClass("k-disabled"));
         });
 
     });
@@ -154,7 +154,7 @@
 
             cp.enable(false);
 
-            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
         it("removes k-state-disabled class when enabled", function() {
@@ -166,16 +166,7 @@
             cp.enable(false);
             cp.enable();
 
-            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
-        });
-
-        it("picker inner wrapper has correct class", function() {
-            expect(0);
-
-            var dom = $("<input />").appendTo(Mocha.fixture).kendoColorPicker();
-            var cp = dom.data("kendoColorPicker");
-
-            assert.isOk(cp._inputWrapper.hasClass("k-picker-wrap"));
+            assert.isOk(!cp.wrapper.hasClass("k-disabled"));
         });
     });
 }());
@@ -200,7 +191,7 @@
 
             cp.enable(false);
 
-            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
         it("removes k-state-disabled class when enabled", function() {
@@ -210,7 +201,7 @@
             cp.enable(false);
             cp.enable();
 
-            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!cp.wrapper.hasClass("k-disabled"));
         });
     });
 }());
@@ -262,7 +253,7 @@
 
             cp.enable(false);
 
-            assert.isOk(cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(cp.wrapper.hasClass("k-disabled"));
         });
 
         it("removes k-state-disabled class when enabled", function() {
@@ -272,7 +263,7 @@
             cp.enable(false);
             cp.enable();
 
-            assert.isOk(!cp.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!cp.wrapper.hasClass("k-disabled"));
         });
 
     });

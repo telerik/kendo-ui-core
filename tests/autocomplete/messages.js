@@ -20,7 +20,7 @@
                 }
             });
             autoComplete.search("aaa");
-            var noDataTemplateText = autoComplete.list.find(".k-nodata").text();
+            var noDataTemplateText = autoComplete.list.find(".k-no-data").text();
             assert.equal(noDataTemplateText, "custom");
         });
 

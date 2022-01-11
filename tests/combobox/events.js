@@ -612,8 +612,8 @@ it("preventing select event during navigation reverts selection", function() {
 
     var current = combobox.current();
 
-    assert.isOk(current.hasClass("k-state-focused"));
-    assert.equal(current.html(), "foo");
+    assert.isOk(current.hasClass("k-focus"));
+    assert.equal(current.find(".k-list-item-text").html(), "foo");
 });
 
 it("trigger select event on blur when input text is changed", function(done) {

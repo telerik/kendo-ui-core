@@ -109,7 +109,7 @@
 
         multiselect.open();
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect allows selection after filter rebind", function() {
@@ -125,7 +125,7 @@
 
         multiselect.ul.children().first().click();
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect hides popup if no data", function() {
@@ -388,7 +388,7 @@
 
         multiselect.open();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
 
         assert.equal(tags.length, 2);
         assert.equal(tags.eq(0).children(":first").text(), "text1");
@@ -424,9 +424,9 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().last().find(".k-i-close").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 1);
@@ -465,9 +465,9 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().first().find(".k-i-close").click();
+        multiselect.tagList.children(".k-chip").first().find(".k-i-x").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 1);
@@ -506,10 +506,10 @@
 
         multiselect.open();
 
-        multiselect.tagList.children().last().find(".k-i-close").click();
-        multiselect.tagList.children().last().find(".k-i-close").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 0);
@@ -546,9 +546,9 @@
 
         multiselect.open();
 
-        multiselect.ul.find(".k-state-selected").click();
+        multiselect.ul.find(".k-selected").click();
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
 
         assert.equal(tags.length, 1);
@@ -592,7 +592,7 @@
 
         multiselect.open();
 
-        multiselect.ul.find(".k-state-selected").click();
+        multiselect.ul.find(".k-selected").click();
 
         var dataItems = multiselect.dataItems();
 
@@ -728,35 +728,7 @@
         });
 
         multiselect.open();
-        assert.equal(multiselect.listView.content.css("overflow"), "hidden auto")
-    });
-
-    it("enabled autoWidth sets overflowX to scroll when scrolling is needed", function() {
-        var multiselect = new MultiSelect(select, {
-            autoWidth: true,
-            animation:{
-                open: {
-                    duration:0
-                },
-                close: {
-                    duration:0
-                },
-            },
-            dataSource: {
-                data: [
-                    "Short item",
-                    "An item with really, really, really, really, really, really, really, really, really, long text",
-                    "Short item",
-                    "Short item",
-                    "Short item",
-                    "Short item",
-                    "Short item"
-                ]
-            }
-        });
-
-        multiselect.open();
-        assert.equal(multiselect.listView.content.css("overflow"), "hidden scroll")
+        assert.equal(multiselect.listView.content.css("overflow"), "hidden auto");
     });
 
     it("update popup height when no items are found", function(done) {

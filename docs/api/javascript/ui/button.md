@@ -121,6 +121,20 @@ Indicates whether the **Button** should be enabled or disabled. By default, it i
     });
     </script>
 
+
+### fillMode `String` *(default: 'solid')*
+
+Controls how the color is applied to the button. Valid values are: `"solid"`, `"outline"`, `"flat"`, `"link"`, and `null`. Default value is `"solid"`.
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+        $("#button").kendoButton({
+            fillMode: "outline"
+        });
+    </script>
+
 ### icon `String`
 
 Defines a name of an existing icon in the Kendo UI theme sprite. The icon will be applied as background image of a `span` element inside the **Button**.
@@ -188,6 +202,45 @@ The `img` element can be added automatically by the widget, or an existing eleme
         });
     </script>
 
+### rounded `String` *(default: 'medium')*
+
+Controls what border radius is applied to a button. Valid values are: `"small"`, `"medium"`, `"large"`, `"full"`, and `null`. Default value is `"medium"`.
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+        $("#button").kendoButton({
+            rounded: "full"
+        });
+    </script>
+
+### shape `String` *(default: 'rectangle')*
+
+Controls if the button is square or not. Valid values are: `"rectangle"`, `"square"`, and `null`. Default value is `"rectangle"`.
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+        $("#button").kendoButton({
+            shape: "square"
+        });
+    </script>
+
+### size `String` *(default: 'medium')*
+
+Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `null`. Default value is `"medium"`.
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+        $("#button").kendoButton({
+            size: "large"
+        });
+    </script>
+
 ### spriteCssClass `String`
 
 Defines a CSS class (or multiple classes separated by spaces), which will be used for applying a background image to a `span` element inside the **Button**.
@@ -212,6 +265,19 @@ The `span` element can be added automatically by the widget, or an existing elem
     <script>
         $("#button").kendoButton({
             spriteCssClass: "myEditIcon"
+        });
+    </script>
+
+### themeColor `String` *(default: 'base')*
+
+Controls the main color applied to the button. Valid values are:  `"base"`, `"primary"`, `"secondary"`, `"tertiary"`, `"info"`, `"success"`, `"warning"`, `"error"`, `"dark"`, `"light"`, `"inverse"`, and `null`. Default value is `"base"`.
+
+#### Example
+
+    <button id="button" type="button">Cancel</button>
+    <script>
+        $("#button").kendoButton({
+            themeColor: "dark"
         });
     </script>
 

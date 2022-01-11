@@ -27,7 +27,7 @@
             assert.equal(textarea.attr("disabled"), undefined);
         });
 
-        it("enable(false) removes readonly attribute and k-state-readonly class", function() {
+        it("enable(false) removes readonly attribute and k-readonly class", function() {
             var widget = textarea.kendoTextArea().data("kendoTextArea");
 
             widget.readonly();
@@ -35,8 +35,8 @@
 
             assert.equal(widget.element.attr("readonly"), undefined);
             assert.equal(widget.element.attr("disabled"), "disabled");
-            assert.isOk(!widget.wrapper.hasClass("k-state-readonly"));
-            assert.isOk(widget.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(!widget.wrapper.hasClass("k-readonly"));
+            assert.isOk(widget.wrapper.hasClass("k-disabled"));
         });
 
         it("readonly(true) makes textarea element readonly", function() {
@@ -45,7 +45,7 @@
             widget.readonly(true);
 
             assert.equal(textarea.attr("readonly"), "readonly");
-            assert.isOk(widget.wrapper.hasClass("k-state-readonly"));
+            assert.isOk(widget.wrapper.hasClass("k-readonly"));
         });
 
         it("readonly(false) should remove readonly attributes", function() {
@@ -55,7 +55,7 @@
             widget.readonly(false);
 
             assert.equal(textarea.attr("readonly"), undefined);
-            assert.isNotOk(widget.wrapper.hasClass("k-state-readonly"));
+            assert.isNotOk(widget.wrapper.hasClass("k-readonly"));
         });
 
         it("readonly() removes disabled attribute and disabled class", function() {
@@ -66,8 +66,8 @@
 
             assert.equal(widget.element.attr("readonly"), "readonly");
             assert.equal(widget.element.attr("disabled"), undefined);
-            assert.isOk(widget.wrapper.hasClass("k-state-readonly"));
-            assert.isOk(!widget.wrapper.hasClass("k-state-disabled"));
+            assert.isOk(widget.wrapper.hasClass("k-readonly"));
+            assert.isOk(!widget.wrapper.hasClass("k-disabled"));
         });
 
         it("focus method should focus the textarea", function(done) {
@@ -112,6 +112,27 @@
 
             widget.destroy();
             assert.equal(textarea.data("kendoTextArea"), undefined);
+        });
+
+
+        it("setOptions works on styling options", function() {
+            var widget = new TextArea(textarea, {
+                overflow: "hidden",
+                size: "small"
+            });
+
+            assert.isOk(widget.element.hasClass("k-overflow-hidden"));
+            assert.isOk(widget.wrapper.hasClass("k-input-sm"));
+
+            widget.setOptions({
+                overflow: "clip",
+                size: "large"
+            });
+
+            assert.isNotOk(widget.element.hasClass("k-overflow-hidden"));
+            assert.isNotOk(widget.wrapper.hasClass("k-input-sm"));
+            assert.isOk(widget.element.hasClass("k-overflow-clip"));
+            assert.isOk(widget.wrapper.hasClass("k-input-lg"));
         });
     });
 }());

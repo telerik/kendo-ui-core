@@ -19,6 +19,38 @@
         assert.isOk(button.data("kendoButton").element.hasClass("k-button"));
     });
 
+    it("Button element gets all default classes", function() {
+        getButton().kendoButton();
+
+        assert.isOk(button.hasClass("k-button-md"));
+        assert.isOk(button.hasClass("k-rounded-md"));
+        assert.isOk(button.hasClass("k-button-solid"));
+        assert.isOk(button.hasClass("k-button-solid-base"));
+        assert.isOk(button.hasClass("k-button-rectangle"));
+    });
+
+    it("Button element applies classes specified in styles options", function() {
+        getButton().kendoButton({
+            size: "large",
+            rounded: "full",
+            fillMode: "link",
+            themeColor: "primary",
+            shape: "square"
+        });
+
+        assert.isOk(button.hasClass("k-button-lg"));
+        assert.isOk(button.hasClass("k-rounded-full"));
+        assert.isOk(button.hasClass("k-button-link"));
+        assert.isOk(button.hasClass("k-button-link-primary"));
+        assert.isOk(button.hasClass("k-button-square"));
+    });
+
+    it("Button has inner element with class k-button-text", function() {
+        getButton().kendoButton();
+
+        assert.isOk(button.children().eq(0).hasClass("k-button-text"));
+    });
+
     it("spriteCssClass prepends a span element with corresponding class(es)", function() {
         getButton().kendoButton({
             spriteCssClass: "foo bar"
@@ -43,12 +75,13 @@
         assert.isOk(icon.hasClass("bar"));
     });
 
-    it("spriteCssClass adds a k-button-icon class to empty button", function() {
+    it("icon adds a k-icon-button class to empty button", function() {
         getButton("").kendoButton({
-            spriteCssClass: "foo"
+            icon: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
     it("spriteCssClass adds a k-button-icon class to empty button with only an icon span inside", function() {
@@ -56,15 +89,16 @@
             spriteCssClass: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
-    it("spriteCssClass adds a k-button-icontext class if button has content", function() {
+    it("spriteCssClass adds a k-button-text class if button has content", function() {
         getButton().kendoButton({
             spriteCssClass: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icontext"));
+        assert.isOk(button.children().eq(1).hasClass("k-button-text"));
     });
 
     it("icon prepends a span element with corresponding class(es)", function() {
@@ -89,12 +123,13 @@
         assert.isOk(icon.hasClass("k-i-foo"));
     });
 
-    it("icon adds a k-button-icon class to empty button", function() {
+    it("icon adds a k-button-icon and k-icon-button class to empty button", function() {
         getButton("").kendoButton({
             icon: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
     it("icon adds a k-button-icon class to empty button with only an icon span inside", function() {
@@ -102,15 +137,16 @@
             icon: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
-    it("icon adds a k-button-icontext class if button has content", function() {
+    it("icon adds a k-button-text class if button has content", function() {
         getButton().kendoButton({
             icon: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icontext"));
+        assert.isOk(button.children().eq(1).hasClass("k-button-text"));
     });
 
     it("iconClass prepends a span element with corresponding class(es)", function() {
@@ -120,23 +156,17 @@
 
         var icon = button.data("kendoButton").element.children("span");
 
-        assert.equal(icon.attr("class"), "fa fa-test");
+        assert.isOk(icon.hasClass("fa"));
+        assert.isOk(icon.hasClass("fa-test"));
     });
 
-    it("iconClass adds a k-button-icontext class if button has content", function() {
-        getButton().kendoButton({
-            iconClass: "fa fa-test"
-        });
-
-        assert.isOk(button.hasClass("k-button-icontext"));
-    });
-
-    it("iconClass adds a k-button-icon class to empty button", function() {
+    it("iconClass adds a k-button-icon and k-icon-button class to empty button", function() {
         getButton("").kendoButton({
             iconClass: "fa fa-test"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
     it("imageUrl prepends an img element with src attribute", function() {
@@ -161,42 +191,44 @@
         assert.equal(image.attr("src"), "foo");
     });
 
-    it("imageUrl adds a k-button-icon class to empty button", function() {
+    it("imageUrl adds a k-button-icon and k-icon-button class to empty button", function() {
         getButton("").kendoButton({
             imageUrl: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
-    it("imageUrl adds a k-button-icon class to empty button with only an icon image inside", function() {
+    it("imageUrl adds a k-button-icon and k-icon-button class to empty button with only an icon image inside", function() {
         getButton('<img class="k-image" />').kendoButton({
             imageUrl: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icon"));
+        assert.isOk(button.children().eq(0).hasClass("k-button-icon"));
+        assert.isOk(button.hasClass("k-icon-button"));
     });
 
-    it("imageUrl adds a k-button-icontext class if button has content", function() {
+    it("imageUrl adds a k-button-text class if button has content", function() {
         getButton().kendoButton({
             imageUrl: "foo"
         });
 
-        assert.isOk(button.hasClass("k-button-icontext"));
+        assert.isOk(button.children().eq(1).hasClass("k-button-text"));
     });
 
-    it("default button does not have a k-state-disabled class", function() {
-        getButton().addClass("k-state-disabled").kendoButton();
+    it("default button does not have a k-disabled class", function() {
+        getButton().addClass("k-disabled").kendoButton();
 
-        assert.isOk(!button.data("kendoButton").element.hasClass("k-state-disabled"));
+        assert.isOk(!button.data("kendoButton").element.hasClass("k-disabled"));
     });
 
-    it("enable:false adds a k-state-disabled class", function() {
+    it("enable:false adds a k-disabled class", function() {
         getButton().kendoButton({
             enable: false
         });
 
-        assert.isOk(button.data("kendoButton").element.hasClass("k-state-disabled"));
+        assert.isOk(button.data("kendoButton").element.hasClass("k-disabled"));
     });
 
     it("enable:false adds a disabled attribute", function() {
@@ -207,12 +239,12 @@
         assert.equal(button.data("kendoButton").element.attr("disabled"), "disabled");
     });
 
-    it("enabled:false adds a k-state-disabled class", function() {
+    it("enabled:false adds a k-disabled class", function() {
         getButton().kendoButton({
             enabled: false
         });
 
-        assert.isOk(button.data("kendoButton").element.hasClass("k-state-disabled"));
+        assert.isOk(button.data("kendoButton").element.hasClass("k-disabled"));
     });
 
     it("enabled:false adds a disabled attribute", function() {
@@ -223,10 +255,10 @@
         assert.equal(button.data("kendoButton").element.attr("disabled"), "disabled");
     });
 
-    it("disabled attribute adds a k-state-disabled class", function() {
+    it("disabled attribute adds a k-disabled class", function() {
         getButton().attr("disabled", "disabled").kendoButton();
 
-        assert.isOk(button.data("kendoButton").element.hasClass("k-state-disabled"));
+        assert.isOk(button.data("kendoButton").element.hasClass("k-disabled"));
     });
 
     it("initialization adds a tabindex attribute if not present", function() {

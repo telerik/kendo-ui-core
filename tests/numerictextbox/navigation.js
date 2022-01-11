@@ -428,7 +428,7 @@
             var textbox = new NumericTextBox(input);
 
             textbox.element.on("focus", function() {
-                assert.isOk(textbox._inputWrapper.hasClass("k-state-focused"));
+                assert.isOk(textbox.wrapper.hasClass("k-focus"));
             });
 
             textbox.wrapper.find(".k-formatted-value").trigger({

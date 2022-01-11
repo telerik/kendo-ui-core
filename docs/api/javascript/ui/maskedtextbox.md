@@ -50,6 +50,25 @@ Specifies the culture info used by the widget.
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="maskedtextbox" />
+    <script>
+    $("#maskedtextbox").kendoMaskedTextBox({
+        mask: "000000",
+        fillMode: "flat"
+    });
+    </script>
+
 ### label `String|Function|Object` *(default: null)*
 
 Adds a label before the input. If the input has no `id` attribute, a generated `id` will be assigned. The `string` and the `function` parameters are setting the inner HTML of the label.
@@ -168,6 +187,27 @@ Specifies the character used to represent the absence of user input in the widge
 
 > Note that the `promptChar` should not be equal to any of the used mask literals in the mask value.
 
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets a border radius
+
+    <input id="maskedtextbox" />
+    <script>
+    $("#maskedtextbox").kendoMaskedTextBox({
+        mask: "000000",
+        size: "large",
+        rounded: "large"
+    });
+    </script>
+
 ### rules `Object`
 
 Defines an object of custom mask rules.
@@ -195,6 +235,26 @@ Defines an object of custom mask rules.
                 return char === "^"; //allow ony "^" symbol
             }
         }
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    <input id="maskedtextbox" />
+    <script>
+    $("#maskedtextbox").kendoMaskedTextBox({
+        mask: "000000",
+        size: "large",
+        rounded: "large"
     });
     </script>
 

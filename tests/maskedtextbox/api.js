@@ -2,7 +2,7 @@
 (function() {
     var MaskedTextBox = kendo.ui.MaskedTextBox,
         input,
-        STATE_DISABLED = "k-state-disabled";
+        STATE_DISABLED = "k-disabled";
 
     describe("kendo.ui.MaskedTextBox api", function() {
         beforeEach(function() {

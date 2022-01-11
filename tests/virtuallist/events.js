@@ -6,7 +6,7 @@
         ITEM_HEIGHT = 40,
         CONTAINER_HEIGHT = 200,
 
-        SELECTED = "k-state-selected";
+        SELECTED = "k-selected";
 
     function scroll(element, height) {
         element.scrollTop(height);
@@ -374,7 +374,7 @@
 
                     assert.equal(removed[0].position, 1);
                     assert.equal(removed[0].dataItem.text, "Item 2");
-                    assert.equal(virtualList.element.find(".k-state-selected").length, 0);
+                    assert.equal(virtualList.element.find(".k-selected").length, 0);
                 });
 
                 virtualList.select(0);
@@ -410,7 +410,7 @@
             virtualList.bind("change", function() {
                 done();
 
-                assert.equal(container.find(".k-state-selected").length, 0);
+                assert.equal(container.find(".k-selected").length, 0);
             })
             virtualList.select(-1);
         });

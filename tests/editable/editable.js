@@ -55,7 +55,7 @@
                 model: defaultModel,
                 clearContainer: false
             });
-            assert.equal(editable.find("div > :input").length, 1);
+            assert.equal(editable.find("div :input").length, 1);
         });
 
         it("renders input element within the child element container if specified for complex fields", function() {
@@ -64,7 +64,7 @@
                 model: defaultModel,
                 clearContainer: false
             });
-            assert.equal(editable.find("div > :input").length, 1);
+            assert.equal(editable.find("div :input").length, 1);
         });
 
         it("input name is same as field", function() {

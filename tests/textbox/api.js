@@ -35,8 +35,8 @@
 
             assert.equal(textbox.element.attr("readonly"), undefined);
             assert.equal(textbox.element.attr("disabled"), "disabled");
-            assert.isOk(!textbox._inputWrapper.hasClass("k-no-click"));
-            assert.isOk(textbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!textbox.wrapper.hasClass("k-no-click"));
+            assert.isOk(textbox.wrapper.hasClass("k-disabled"));
         });
 
         it("readonly(true) makes input element readonly", function() {
@@ -66,8 +66,8 @@
 
             assert.equal(textbox.element.attr("readonly"), "readonly");
             assert.equal(textbox.element.attr("disabled"), undefined);
-            assert.isOk(textbox._inputWrapper.hasClass("k-no-click"));
-            assert.isOk(!textbox._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(textbox.wrapper.hasClass("k-no-click"));
+            assert.isOk(!textbox.wrapper.hasClass("k-disabled"));
         });
 
         it("focus method should focus the input", function(done) {

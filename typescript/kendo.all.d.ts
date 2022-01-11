@@ -2285,6 +2285,7 @@ declare namespace kendo.ui {
         delay?: number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
+        fillMode?: string | undefined;
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
@@ -2296,6 +2297,8 @@ declare namespace kendo.ui {
         noDataTemplate?: string|Function|boolean | undefined;
         placeholder?: string | undefined;
         popup?: any;
+        rounded?: string | undefined;
+        size?: string | undefined;
         separator?: string|any | undefined;
         suggest?: boolean | undefined;
         headerTemplate?: string|Function | undefined;
@@ -2335,6 +2338,33 @@ declare namespace kendo.ui {
     interface AutoCompleteSelectEvent extends AutoCompleteEvent {
         dataItem?: any;
         item?: JQuery | undefined;
+    }
+
+    class Avatar extends kendo.ui.Widget {
+        static fn: Avatar;
+
+        options: AvatarOptions;
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): Avatar;
+
+        constructor(element: Element, options?: AvatarOptions);
+    }
+
+    interface AvatarOptions {
+        name?: string | undefined;
+        alt?: string | undefined;
+        border?: boolean | undefined;
+        className?: string | undefined;
+        fillMode?: string | undefined;
+        icon?: string | undefined;
+        image?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        style?: any | undefined;
+        text?: string | undefined;
+        type?: string | undefined;
     }
 
     class Badge extends kendo.ui.Widget {
@@ -2541,10 +2571,15 @@ declare namespace kendo.ui {
     interface ButtonOptions {
         name?: string | undefined;
         enable?: boolean | undefined;
+        fillMode?: string | undefined;
         icon?: string | undefined;
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
+        rounded?: string | undefined;
+        shape?: string | undefined;
+        size?: string | undefined;
         spriteCssClass?: string | undefined;
+        themeColor?: string | undefined;
         click?(e: ButtonClickEvent): void;
     }
     interface ButtonEvent {
@@ -2869,6 +2904,45 @@ declare namespace kendo.ui {
     interface ChatTypingStartEvent extends ChatEvent {
     }
 
+    class CheckBox extends kendo.ui.Widget {
+        static fn: CheckBox;
+
+        options: CheckBoxOptions;
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): CheckBox;
+
+        constructor(element: Element, options?: CheckBoxOptions);
+
+        check(): boolean;
+        check(check: boolean): void;
+        toggle(): void;
+        destroy(): void;
+        enable(enable: boolean): void;
+    }
+
+    interface CheckBoxOptions {
+        name?: string | undefined;
+        checked?: boolean | undefined;
+        enabled?: boolean | undefined;
+        encoded?: boolean | undefined;
+        label?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        value?: string | undefined;
+        change?(e: CheckBoxChangeEvent): void;
+    }
+    interface CheckBoxEvent {
+        sender: CheckBox;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface CheckBoxChangeEvent extends CheckBoxEvent {
+        checked?: any;
+    }
+
     class CheckBoxGroup extends kendo.ui.Widget {
 
         static fn: CheckBoxGroup;
@@ -2907,6 +2981,8 @@ declare namespace kendo.ui {
         name?: string | undefined;
         enabled?: boolean | undefined;
         inputName?: string | undefined;
+        inputRounded?: string | undefined;
+        inputSize?: string | undefined;
         items?: CheckBoxGroupItem[] | undefined;
         labelPosition?: string | undefined;
         layout?: string | undefined;
@@ -3108,6 +3184,9 @@ declare namespace kendo.ui {
         value?: string|kendo.Color;
         view?: string;
         views?: any;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         change?(e: ColorPickerChangeEvent): void;
         select?(e: ColorPickerSelectEvent): void;
         open?(e: ColorPickerEvent): void;
@@ -3213,6 +3292,7 @@ declare namespace kendo.ui {
         delay?: number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
+        fillMode?: string | undefined;
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
@@ -3225,6 +3305,8 @@ declare namespace kendo.ui {
         noDataTemplate?: string|Function|boolean | undefined;
         placeholder?: string | undefined;
         popup?: ComboBoxPopup | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         suggest?: boolean | undefined;
         syncValueAndText?: boolean | undefined;
         headerTemplate?: string|Function | undefined;
@@ -3478,11 +3560,14 @@ declare namespace kendo.ui {
 
     interface DateInputOptions {
         name?: string | undefined;
+        fillMode?: string | undefined;
         format?: string | undefined;
         max?: Date | undefined;
         min?: Date | undefined;
         value?: Date | undefined;
         messages?: DateInputMessages | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         change?(e: DateInputChangeEvent): void;
     }
     interface DateInputEvent {
@@ -3553,18 +3638,22 @@ declare namespace kendo.ui {
         name?: string | undefined;
         animation?: boolean | DatePickerAnimation | undefined;
         ARIATemplate?: string | undefined;
+        componentType?: string | undefined;
         culture?: string | undefined;
         dateInput?: boolean | undefined;
         dates?: any;
         depth?: string | undefined;
         disableDates?: any|Function | undefined;
         footer?: boolean|string|Function | undefined;
+        fillMode?: string | undefined;
         format?: string | undefined;
         max?: Date | undefined;
         min?: Date | undefined;
         month?: DatePickerMonth | undefined;
         weekNumber?: boolean | undefined;
         parseFormats?: any;
+        rounded?: string | undefined;
+        size?: string | undefined;
         start?: string | undefined;
         value?: Date | undefined;
         change?(e: DatePickerChangeEvent): void;
@@ -3641,6 +3730,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string | undefined;
         disableDates?: any|Function | undefined;
+        fillMode?: string | undefined;
         footer?: string|Function | undefined;
         format?: string | undefined;
         max?: Date | undefined;
@@ -3650,6 +3740,8 @@ declare namespace kendo.ui {
         labels?: boolean | undefined;
         weekNumber?: boolean | undefined;
         range?: DateRangePickerRange | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         start?: string | undefined;
         change?(e: DateRangePickerChangeEvent): void;
         close?(e: DateRangePickerCloseEvent): void;
@@ -3734,6 +3826,7 @@ declare namespace kendo.ui {
         dates?: any;
         depth?: string | undefined;
         disableDates?: any|Function | undefined;
+        fillMode?: string | undefined;
         footer?: boolean|string|Function | undefined;
         format?: string | undefined;
         interval?: number | undefined;
@@ -3742,6 +3835,8 @@ declare namespace kendo.ui {
         month?: DateTimePickerMonth | undefined;
         weekNumber?: boolean | undefined;
         parseFormats?: any;
+        rounded?: string | undefined;
+        size?: string | undefined;
         start?: string | undefined;
         timeFormat?: string | undefined;
         value?: Date | undefined;
@@ -3991,6 +4086,7 @@ declare namespace kendo.ui {
         delay?: number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
+        fillMode?: string | undefined;
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
@@ -4004,6 +4100,8 @@ declare namespace kendo.ui {
         popup?: DropDownListPopup | undefined;
         optionLabel?: string|any | undefined;
         optionLabelTemplate?: string|Function | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         headerTemplate?: string|Function | undefined;
         template?: string|Function | undefined;
         valueTemplate?: string|Function | undefined;
@@ -4141,6 +4239,7 @@ declare namespace kendo.ui {
         enforceMinLength?: boolean | undefined;
         filter?: string | undefined;
         filterLabel?: string | undefined;
+        fillMode?: string | undefined;
         footerTemplate?: string|Function | undefined;
         height?: string|number | undefined;
         ignoreCase?: boolean | undefined;
@@ -4150,6 +4249,7 @@ declare namespace kendo.ui {
         noDataTemplate?: string|Function|boolean | undefined;
         placeholder?: string | undefined;
         popup?: DropDownTreePopup | undefined;
+        rounded?: string | undefined;
         headerTemplate?: string|Function | undefined;
         valueTemplate?: string|Function | undefined;
         tagMode?: string | undefined;
@@ -4157,6 +4257,7 @@ declare namespace kendo.ui {
         text?: string | undefined;
         value?: string|any | undefined;
         valuePrimitive?: boolean | undefined;
+        size?: string | undefined;
         change?(e: DropDownTreeChangeEvent): void;
         close?(e: DropDownTreeCloseEvent): void;
         dataBound?(e: DropDownTreeDataBoundEvent): void;
@@ -5196,45 +5297,17 @@ declare namespace kendo.ui {
         y?: number | undefined;
     }
 
-    enum FloatingActionButtonPositionMode {
-        fixed,
-        absolute,
-    }
-
-    enum FloatingActionButtonShape {
-        rounded,
-        pill,
-        circle
-    }
-
-    enum FloatingActionButtonSize {
-        small,
-        medium,
-        large
-    }
-
-    enum FloatingActionButtonThemeColor {
-        primary,
-        secondary,
-        tertiary,
-        info,
-        success,
-        warning,
-        error,
-        dark,
-        light,
-        inverse
-    }
-
     interface FloatingActionButtonOptions {
         icon?: string | undefined;
         text?: string | undefined;
-        themeColor?: string | FloatingActionButtonThemeColor | undefined;
-        size?: string | FloatingActionButtonSize | undefined;
-        shape?: string | FloatingActionButtonShape | undefined;
+        themeColor?: string | undefined;
+        size?: string  | undefined;
+        rounded?: string  | undefined;
+        fillMode?: string  | undefined;
+        shape?: string | undefined;
         align?: string | undefined;
         alignOffset?: FloatingActionButtonAlignOffset | undefined;
-        positionMode?: string | FloatingActionButtonPositionMode | undefined
+        positionMode?: string | undefined
         visible?: boolean | undefined;
         enabled?: boolean | undefined;
         items?: FloatingActionButtonItem[] | undefined;
@@ -6867,10 +6940,13 @@ declare namespace kendo.ui {
         name?: string | undefined;
         clearPromptChar?: boolean | undefined;
         culture?: string | undefined;
+        fillMode?: string | undefined;
         label?: string | Function | MaskedTextBoxLabel | undefined;
         mask?: string | undefined;
         promptChar?: string | undefined;
+        rounded?: string | undefined;
         rules?: any;
+        size?: string | undefined;
         unmaskOnPost?: boolean | undefined;
         value?: string | undefined;
         change?(e: MaskedTextBoxChangeEvent): void;
@@ -7165,6 +7241,7 @@ declare namespace kendo.ui {
         dropDownWidth?: string|number | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
+        fillMode?: string | undefined;
         filter?: string | undefined;
         filterFields?: any;
         fixedGroupTemplate?: string|Function | undefined;
@@ -7178,6 +7255,8 @@ declare namespace kendo.ui {
         noDataTemplate?: string|Function|boolean | undefined;
         placeholder?: string | undefined;
         popup?: MultiColumnComboBoxPopup | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         suggest?: boolean | undefined;
         syncValueAndText?: boolean | undefined;
         headerTemplate?: string|Function | undefined;
@@ -7304,6 +7383,7 @@ declare namespace kendo.ui {
         downArrow?: boolean | undefined;
         enable?: boolean | undefined;
         enforceMinLength?: boolean | undefined;
+        fillMode?: string | undefined;
         filter?: string | undefined;
         fixedGroupTemplate?: string|Function | undefined;
         footerTemplate?: string|Function | undefined;
@@ -7323,6 +7403,8 @@ declare namespace kendo.ui {
         value?: any;
         valuePrimitive?: boolean | undefined;
         virtual?: boolean | MultiSelectVirtual | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         change?(e: MultiSelectChangeEvent): void;
         close?(e: MultiSelectCloseEvent): void;
         dataBound?(e: MultiSelectDataBoundEvent): void;
@@ -7575,6 +7657,7 @@ declare namespace kendo.ui {
         decimals?: number | undefined;
         downArrowText?: string | undefined;
         factor?: number | undefined;
+        fillMode?: string | undefined;
         format?: string | undefined;
         label?: string | Function | NumericTextBoxLabel | undefined;
         max?: number | undefined;
@@ -7582,6 +7665,9 @@ declare namespace kendo.ui {
         placeholder?: string | undefined;
         restrictDecimals?: boolean | undefined;
         round?: boolean | undefined;
+        rounded?: string | undefined;
+        selectOnFocus?: boolean | undefined;
+        size?: string | undefined;
         spinners?: boolean | undefined;
         step?: number | undefined;
         upArrowText?: string | undefined;
@@ -8825,6 +8911,43 @@ declare namespace kendo.ui {
         isDefaultPrevented(): boolean;
     }
 
+    class RadioButton extends kendo.ui.Widget {
+        static fn: RadioButton;
+
+        options: RadioButtonOptions;
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): RadioButton;
+
+        constructor(element: Element, options?: RadioButtonOptions);
+
+        check(): boolean;
+        check(check: boolean): void;
+        toggle(): void;
+        destroy(): void;
+        enable(enable: boolean): void;
+    }
+
+    interface RadioButtonOptions {
+        name?: string | undefined;
+        checked?: boolean | undefined;
+        enabled?: boolean | undefined;
+        encoded?: boolean | undefined;
+        label?: string | undefined;
+        size?: string | undefined;
+        change?(e: RadioButtonChangeEvent): void;
+    }
+    interface RadioButtonEvent {
+        sender: RadioButton;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
+    interface RadioButtonChangeEvent extends RadioButtonEvent {
+        checked?: any;
+    }
+
     class RadioGroup extends kendo.ui.Widget {
 
         static fn: RadioGroup;
@@ -8865,6 +8988,7 @@ declare namespace kendo.ui {
         labelPosition?: string | undefined;
         layout?: string | undefined;
         inputName?: string | undefined;
+        inputSize?: string | undefined;
         value?: string | undefined;
         change?(e: RadioGroupChangeEvent): void;
         focus?(e: RadioGroupFocusEvent): void;
@@ -10289,6 +10413,9 @@ declare namespace kendo.ui {
         readonly?: boolean | undefined;
         width?: number|string | undefined;
         messages?: SwitchMessages | undefined;
+        size?: string | undefined;
+        trackRounded?: string | undefined;
+        thumbRounded?: string | undefined;
         change?(e: SwitchChangeEvent): void;
     }
 
@@ -10920,6 +11047,11 @@ declare namespace kendo.ui {
         resizable?: string | undefined;
         rows?: number | undefined;
         value?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
+        overflow?: string | undefined;
+        resize?: string | undefined;
         change?(e: TextAreaChangeEvent): void;
     }
     interface TextAreaEvent {
@@ -10967,6 +11099,9 @@ declare namespace kendo.ui {
         placeholder?: string | undefined;
         readonly?: boolean | undefined;
         value?: string | undefined;
+        fillMode?: string | undefined;
+        rounded?: string | undefined;
+        size?: string | undefined;
         change?(e: TextBoxChangeEvent): void;
     }
     interface TextBoxEvent {
@@ -11033,11 +11168,14 @@ declare namespace kendo.ui {
         culture?: string | undefined;
         dateInput?: boolean | undefined;
         dates?: any;
+        fillMode?: string | undefined;
         format?: string | undefined;
         interval?: number | undefined;
         max?: Date | undefined;
         min?: Date | undefined;
         parseFormats?: any;
+        rounded?: string | undefined;
+        size?: string | undefined;
         value?: Date | undefined;
         change?(e: TimePickerChangeEvent): void;
         close?(e: TimePickerCloseEvent): void;
@@ -12085,6 +12223,7 @@ declare namespace kendo.ui {
         loadOnDemand?: boolean | undefined;
         messages?: TreeViewMessages | undefined;
         template?: string|Function | undefined;
+        size?: string | undefined;
         change?(e: TreeViewEvent): void;
         check?(e: TreeViewCheckEvent): void;
         collapse?(e: TreeViewCollapseEvent): void;
@@ -25066,6 +25205,10 @@ interface JQuery {
     kendoAutoComplete(options: kendo.ui.AutoCompleteOptions): JQuery;
     data(key: "kendoAutoComplete"): kendo.ui.AutoComplete | undefined;
 
+    kendoAvatar(): JQuery;
+    kendoAvatar(options: kendo.ui.AvatarOptions): JQuery;
+    data(key: "kendoAvatar"): kendo.ui.Avatar;
+
     kendoBadge(): JQuery;
     kendoBadge(options: kendo.ui.BadgeOptions): JQuery;
     data(key: "kendoBadge"): kendo.ui.Badge | undefined;
@@ -25101,6 +25244,10 @@ interface JQuery {
     kendoChat(): JQuery;
     kendoChat(options: kendo.ui.ChatOptions): JQuery;
     data(key: "kendoChat"): kendo.ui.Chat | undefined;
+
+    kendoCheckBox(): JQuery;
+    kendoCheckBox(options: kendo.ui.CheckBoxOptions): JQuery;
+    data(key: "kendoCheckBox"): kendo.ui.CheckBox;
 
     kendoCheckBoxGroup(): JQuery;
     kendoCheckBoxGroup(options: kendo.ui.CheckBoxGroupOptions): JQuery;
@@ -25417,6 +25564,10 @@ interface JQuery {
     kendoRadialGauge(): JQuery;
     kendoRadialGauge(options: kendo.dataviz.ui.RadialGaugeOptions): JQuery;
     data(key: "kendoRadialGauge"): kendo.dataviz.ui.RadialGauge | undefined;
+
+    kendoRadioButton(): JQuery;
+    kendoRadioButton(options: kendo.ui.RadioButtonOptions): JQuery;
+    data(key: "kendoRadioButton"): kendo.ui.RadioButton;
 
     kendoRadioGroup(): JQuery;
     kendoRadioGroup(options: kendo.ui.RadioGroupOptions): JQuery;

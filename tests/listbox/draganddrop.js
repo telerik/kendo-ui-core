@@ -88,7 +88,7 @@
 
         assert.isOk(listB.items().length == 2, "Item is removed from ListB");
         assert.isOk(listA.items().length == 4, "Item is added to ListA");
-        assert.isOk(listA.items().first().html() === "Tom");
+        assert.isOk(listA.items().first().find("span").html() === "Tom");
     });
 
     it("Item is correctly reordered in listbox using drag", function () {
@@ -100,7 +100,7 @@
         move(draggedElement, targetOffset.left, targetOffset.top);
         release(draggedElement, targetOffset.left, targetOffset.top);
         //this should not depend on default line hight, since moving up to exact location
-        assert.isOk(listB.items().filter(":eq(0)").html() === "Donald");
+        assert.isOk(listB.items().filter(":eq(0)").find("span").html() === "Donald");
     });
 
     it("Item is not dropped if dropSources is not set", function() {
@@ -144,10 +144,10 @@
     });
 
      it("Drag and drop hint should not have .k-state-focused class when dragged element is focused", function(){
-        var mockedElement = $('<li class="k-item k-state-focused k-state-selected"/>');
+        var mockedElement = $('<li class="k-list-item k-focus k-selected"/>');
         var hint = listA._draggable.options.hint(mockedElement)
 
-        assert.isOk(!hint.hasClass("k-state-focused"));
+        assert.isOk(!hint.hasClass("k-focus"));
     });
     });
 }());

@@ -13,6 +13,7 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
     ui = kendo.ui,
+    html = kendo.html,
     Widget = ui.Widget,
     parse = kendo.parseDate,
     keys = kendo.keys,
@@ -29,11 +30,10 @@ var __meta__ = { // jshint ignore:line
     CHANGE = "change",
     DISABLED = "disabled",
     READONLY = "readonly",
-    DEFAULT = "k-state-default",
-    FOCUSED = "k-state-focused",
+    FOCUSED = "k-focus",
     SELECTED = "k-state-selected",
-    STATEDISABLED = "k-state-disabled",
-    HOVER = "k-state-hover",
+    STATEDISABLED = "k-disabled",
+    HOVER = "k-hover",
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
     MOUSEDOWN = "mousedown" + ns,
     ID = "id",
@@ -115,8 +115,11 @@ var __meta__ = { // jshint ignore:line
                             .on(MOUSEDOWN, preventDefault)
                             .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
 
-                that.calendar = calendar = new ui.Calendar(div, { componentType: options.componentType });
+
+                that.calendar = calendar = new ui.Calendar(div, { componentType: options.componentType, size: options.size});
                 that._setOptions(options);
+
+                div.addClass(kendo.getValidCssClass("k-calendar-", "size", options.size));
 
                 calendar.navigate(that._value || that._current, options.start);
 
@@ -360,7 +363,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             element
-                .addClass("k-input")
+                .addClass("k-input-inner")
                 .attr({
                     role: "combobox",
                     "aria-expanded": false,
@@ -382,6 +385,7 @@ var __meta__ = { // jshint ignore:line
 
             that._old = that._update(options.value || that.element.val());
             that._oldText = element.val();
+            that._applyCssClasses();
 
             kendo.notify(that);
         },
@@ -407,7 +411,10 @@ var __meta__ = { // jshint ignore:line
             ARIATemplate: 'Current focused #=data.valueType# is #=data.text#',
             dateInput: false,
             weekNumber: false,
-            componentType: "classic"
+            componentType: "classic",
+            size: "medium",
+            fillMode: "solid",
+            rounded: "medium"
         },
 
         setOptions: function(options) {
@@ -423,7 +430,12 @@ var __meta__ = { // jshint ignore:line
 
             normalize(options);
 
+            that._dateIcon.off(ns);
+            that._dateIcon.remove();
+
             that.dateView.setOptions(options);
+            that._icon();
+            that._editable(options);
             that._createDateInput(options);
 
             if (!that._dateInput) {
@@ -439,13 +451,12 @@ var __meta__ = { // jshint ignore:line
             var that = this,
                 icon = that._dateIcon.off(ns),
                 element = that.element.off(ns),
-                wrapper = that._inputWrapper.off(ns),
+                wrapper = that.wrapper.off(ns),
                 readonly = options.readonly,
                 disable = options.disable;
 
             if (!readonly && !disable) {
                 wrapper
-                    .addClass(DEFAULT)
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover);
                 if(element && element.length) {
@@ -457,15 +468,15 @@ var __meta__ = { // jshint ignore:line
                        .on("keydown" + ns, proxy(that._keydown, that))
                        .on("focusout" + ns, proxy(that._blur, that))
                        .on("focus" + ns, function() {
-                           that._inputWrapper.addClass(FOCUSED);
+                           that.wrapper.addClass(FOCUSED);
                        });
 
                icon.on(UP, proxy(that._click, that))
                    .on(MOUSEDOWN, preventDefault);
             } else {
                 wrapper
-                    .addClass(disable ? STATEDISABLED : DEFAULT)
-                    .removeClass(disable ? DEFAULT : STATEDISABLED);
+                    .addClass(disable ? STATEDISABLED : "")
+                    .removeClass(disable ? "" : STATEDISABLED);
 
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)
@@ -509,7 +520,6 @@ var __meta__ = { // jshint ignore:line
 
             that.element.off(ns);
             that._dateIcon.off(ns);
-            that._inputWrapper.off(ns);
 
             if (that._form) {
                 that._form.off("reset", that._resetHandler);
@@ -568,7 +578,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            that._inputWrapper.removeClass(FOCUSED);
+            that.wrapper.removeClass(FOCUSED);
         },
 
         _click: function(e) {
@@ -634,12 +644,19 @@ var __meta__ = { // jshint ignore:line
         _icon: function() {
             var that = this,
                 element = that.element,
+                options = that.options,
                 icon;
 
-            icon = element.next("span.k-select");
+            icon = element.next("button.k-input-button");
 
             if (!icon[0]) {
-                icon = $('<span unselectable="on" class="k-select" aria-label="select"><span class="k-icon k-i-calendar"></span></span>').insertAfter(element);
+                icon = $(html.renderButton('<button aria-label="select" class="k-input-button k-button k-icon-button"></button>', {
+                    icon: "calendar",
+                    size: options.size,
+                    fillMode: options.fillMode,
+                    shape: null,
+                    rounded: null
+                })).insertAfter(element);
             }
 
             that._dateIcon = icon.attr({
@@ -719,20 +736,16 @@ var __meta__ = { // jshint ignore:line
             wrapper = element.parents(".k-datepicker");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap(SPAN).parent().addClass("k-picker-wrap k-state-default");
-                wrapper = wrapper.wrap(SPAN).parent();
+                wrapper = element.wrap(SPAN).parent();
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
             element.css({
-                width: "100%",
                 height: element[0].style.height
             });
 
-            that.wrapper = wrapper.addClass("k-widget k-datepicker")
+            that.wrapper = wrapper.addClass("k-datepicker k-input")
                 .addClass(element[0].className).removeClass('input-validation-error');
-
-            that._inputWrapper = $(wrapper[0].firstChild);
         },
 
         _reset: function() {
@@ -779,6 +792,9 @@ var __meta__ = { // jshint ignore:line
                 this._dateInput = new ui.DateInput(this.element, {
                     culture: options.culture,
                     format: options.format,
+                    size: options.size,
+                    fillMode: options.fillMode,
+                    rounded: options.rounded,
                     min: options.min,
                     max: options.max
                 });
@@ -798,6 +814,13 @@ var __meta__ = { // jshint ignore:line
             }
         }
     });
+
+    kendo.cssProperties.registerPrefix("DatePicker", "k-input-");
+
+    kendo.cssProperties.registerValues("DatePicker", [{
+        prop: "rounded",
+        values: kendo.cssProperties.roundedValues.concat([['full', 'full']])
+    }]);
 
     ui.plugin(DatePicker);
 

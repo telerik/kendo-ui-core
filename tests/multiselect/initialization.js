@@ -30,8 +30,7 @@
         var multiselect = new MultiSelect(select),
             wrapper = multiselect.wrapper;
 
-        assert.equal(wrapper[0].nodeName, "DIV");
-        assert.isOk(wrapper.hasClass("k-widget"));
+        assert.equal(wrapper[0].nodeName, "SPAN");
         assert.isOk(wrapper.hasClass("k-multiselect"));
     });
 
@@ -58,14 +57,13 @@
     it("MultiSelect wraps tagList and clears float", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.isOk(multiselect.tagList.parent().hasClass("k-multiselect-wrap"));
-        assert.isOk(multiselect.tagList.parent().hasClass("k-floatwrap"));
+        assert.isOk(multiselect.tagList.parent().hasClass("k-multiselect"));
     });
 
-    it("MultiSelect appends ul to the wrapper", function() {
+    it("MultiSelect appends tagList to the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect._inputWrapper.children().first()[0], multiselect.tagList[0]);
+        assert.equal(multiselect.wrapper.children(".k-chip-list")[0], multiselect.tagList[0]);
     });
 
     it("MultiSelect creates input element", function() {
@@ -78,7 +76,7 @@
     it("MultiSelect appends input to the wrapper", function() {
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect._inputWrapper.children().eq(1)[0], multiselect.input[0]);
+        assert.equal(multiselect.wrapper.find(".k-input-values").find(".k-input-inner").eq(0)[0], multiselect.input[0]);
     });
 
     it("MultiSelect builds templates", function() {
@@ -124,7 +122,7 @@
 
         var list = multiselect.list;
 
-        assert.equal(list.children()[0].outerHTML, "<div>Header</div>");
+        assert.equal(list.find(".k-list-header").html(), "<div>Header</div>");
     });
 
     it("render footer container", function() {
@@ -135,7 +133,7 @@
         var footer = multiselect.footer;
 
         assert.isOk(footer);
-        assert.isOk(footer.hasClass("k-footer"));
+        assert.isOk(footer.hasClass("k-list-footer"));
     });
 
     it("render footer template", function() {
@@ -215,7 +213,7 @@
 
         assert.isOk(multiselect.ul);
         assert.isOk(multiselect.ul.is("ul"));
-        assert.isOk(multiselect.list.attr("id"), select.attr("id") + "-list");
+        assert.isOk(multiselect.list.find(".k-list").attr("id"), select.attr("id") + "-list");
         assert.equal(multiselect.listView.content.css("overflow"), "auto");
     });
 
@@ -225,7 +223,7 @@
             value: "0"
         });
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect creates _searchText", function() {
@@ -332,7 +330,7 @@
 
         multiselect.open();
 
-        var padding = multiselect.list.find(".k-group-header").css("padding-right");
+        var padding = multiselect.list.find(".k-list-group-sticky-header").css("padding-right");
 
         assert.isOk(parseFloat(padding) >= kendo.support.scrollbar());
     });
@@ -356,7 +354,7 @@
 
         multiselect.open();
 
-        var padding = multiselect.list.find(".k-group-header").css("padding-right");
+        var padding = multiselect.list.find(".k-list-group-sticky-header").css("padding-right");
 
         assert.isOk(parseFloat(padding) < 15);
     });
@@ -367,7 +365,7 @@
 
         var multiselect = new MultiSelect(select);
 
-        assert.equal(multiselect.tagList.children().length, 1);
+        assert.equal(multiselect.tagList.children(".k-chip").length, 1);
     });
 
     it("MultiSelect creates loading element", function() {
@@ -423,7 +421,7 @@
         select[0].children[1].setAttribute("selected", "selected");
         select[0].children[2].setAttribute("selected", "selected");
 
-        var form = $("<form/>").appendTo(document.documentElement).append(select),
+        var form = $("<form/>").appendTo(Mocha.fixture).append(select),
             multiselect = new MultiSelect(select);
 
         multiselect.value(["3","4"]);
@@ -443,7 +441,7 @@
         select[0].children[2].setAttribute("selected", "selected");
 
         select.attr("form", "form1");
-        var form = $('<form id="form1"/>').appendTo(document.documentElement),
+        var form = $('<form id="form1"/>').appendTo(Mocha.fixture),
             multiselect = new MultiSelect(select);
 
         multiselect.value(["3","4"]);
@@ -459,7 +457,7 @@
     it("form reset support does not remove place2older", function(done) {
         popuplateSelect();
 
-        var form = $("<form/>").appendTo(document.documentElement).append(select);
+        var form = $("<form/>").appendTo(Mocha.fixture).append(select);
         var multiselect = new MultiSelect(select, {
             placeholder: "Select..."
         });
@@ -578,14 +576,6 @@
         var multiselect = new MultiSelect(select);
 
         assert.isOk(!multiselect.input[0].hasAttribute("accesskey"));
-    });
-
-    it("Scales correctly input element when init in hidden element", function() {
-        var div = $("<div style='display:none'/>").appendTo(document.documentElement);
-        div.append(select);
-        var multiselect = new MultiSelect(select, { placeholder: "Select something..." });
-
-        assert.isOk(multiselect.input.width() > 50);
     });
 
     it("MultiSelect honors readonly attribute", function() {
@@ -829,7 +819,7 @@
 
         dataSource.view()[2].set("text", "updated");
 
-        var tags = multiselect.tagList.children();
+        var tags = multiselect.tagList.children(".k-chip");
 
         assert.equal(tags.length, 3);
         assert.equal(tags.eq(1).children(":first").text(), "updated");
@@ -895,8 +885,7 @@
         });
 
         assert.isOk(multiselect.noData);
-        assert.isOk(multiselect.noData.hasClass("k-nodata"));
-        assert.equal(multiselect.noData.children("div").length, 1);
+        assert.isOk(multiselect.noData.hasClass("k-no-data"));
         assert.equal(multiselect.noData.text(), multiselect.options.noDataTemplate);
     });
 
@@ -906,7 +895,7 @@
             footerTemplate: "footer"
         });
 
-        assert.isOk(multiselect.noData.next().hasClass("k-footer"));
+        assert.isOk(multiselect.noData.next().hasClass("k-list-footer"));
     });
 
     it("hides noData template if any data", function() {
@@ -998,7 +987,7 @@
         });
 
         assert.equal(multiselect._arrow.length, 1);
-        assert.equal(multiselect.wrapper.find(".k-multiselect-wrap > .k-select").length, 1);
+        assert.equal(multiselect.wrapper.find("> .k-input-button > .k-i-arrow-s").length, 1);
     });
 
     it("k-multiselect-wrap-arrow class is applied when down arrow is configured", function() {
@@ -1007,7 +996,41 @@
         });
 
         assert.equal(multiselect._arrow.length, 1);
-        assert.isOk(multiselect.wrapper.find(".k-multiselect-wrap").hasClass("k-multiselect-wrap-arrow"));
+    });
+
+    it("styling options - fillMode", function() {
+        var multiselect =new MultiSelect(select, {
+            fillMode: "outline"
+        });
+
+        assert.isOk(multiselect.wrapper.hasClass("k-input-outline"));
+    });
+
+    it("styling options - size", function() {
+        var multiselect =new MultiSelect(select, {
+            size: "small"
+        });
+
+        assert.isOk(multiselect.wrapper.hasClass("k-input-sm"));
+    });
+
+    it("styling options - rounded", function() {
+        var multiselect =new MultiSelect(select, {
+            rounded: "large"
+        });
+
+        assert.isOk(multiselect.wrapper.hasClass("k-rounded-lg"));
+    });
+
+    it("styling options - checks for valid options", function() {
+        var multiselect =new MultiSelect(select, {
+            size: "full"
+        });
+
+        assert.isNotOk(multiselect.wrapper.hasClass("k-rounded-large")); // Does not add valid class for other option
+        assert.isNotOk(multiselect.wrapper.hasClass("k-input-full")); // Does not add invalid class with prefix
+        assert.isNotOk(multiselect.wrapper.hasClass("k-input-md")); // Does not add default class for the option
+        assert.isOk(multiselect.wrapper.hasClass("k-rounded-md")); // Adds default class for other options
     });
     });
 }());

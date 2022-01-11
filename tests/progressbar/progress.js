@@ -478,7 +478,6 @@
             pb.value(2);
 
             assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
-            assert.equal(pb.wrapper.find(".k-state-default").length, 3);
         });
 
         it("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true and value was decreased", function() {
@@ -496,7 +495,6 @@
             pb.value(2);
 
             assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
-            assert.equal(pb.wrapper.find(".k-state-default").length, 3);
         });
 
         it("Correct chunks are updated when progressbar is orientation:vertical and reverse: false and value was decreased", function() {
@@ -514,7 +512,6 @@
             pb.value(2);
 
             assert.equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
-            assert.equal(pb.wrapper.find(".k-state-default").length, 3);
         });
 
         it("Correct chunks are updated when progressbar is orientation:vertical and reverse: true and value was decreased", function() {
@@ -532,7 +529,6 @@
             pb.value(2);
 
             assert.equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
-            assert.equal(pb.wrapper.find(".k-state-default").length, 3);
         });
 
         it("isStarted is set to true when the value is changed for the first time", function(done) {

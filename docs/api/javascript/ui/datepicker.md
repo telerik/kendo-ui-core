@@ -307,6 +307,24 @@ note that a check for an empty `date` is needed, as the widget can work with a n
     });
     </script>
 
+### fillMode `String`*(default: "solid")*
+
+Sets a value controlling how the color is applied. Can also be set to the following string values:
+
+- null
+- "solid"
+- "flat"
+- "outline"
+
+#### Example - sets the fillMode
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        fillMode: "flat"
+    });
+    </script>
+
 ### format `String`*(default: "M/d/yyyy")*
 
  Specifies the format, which is used to format the value of the DatePicker displayed in the input. The format also will be used to parse the input.
@@ -568,6 +586,40 @@ If set to `true` a week of the year will be shown on the left side of the calend
         parseFormats: ["MMMM yyyy"] //format also will be added to parseFormats
     });
     </script>
+
+### rounded `String`*(default: "medium")*
+
+Sets a value controlling the border radius. Can also be set to the following string values:
+
+- null
+- "small"
+- "medium"
+- "large"
+- "full"
+
+#### Example - sets the rounded value
+
+    <input id="datepicker" />
+    <script>
+    $("#datepicker").kendoDatePicker({
+        rounded: "large"
+    });
+    </script>
+
+### size `String`*(default: "medium")*
+
+Sets a value controlling size of the component. Can also be set to the following string values:
+
+- "small"
+- "medium"
+- "large"
+- null
+
+#### Example - sets a size
+
+    $("#datepicker").kendoDatePicker({
+        size: "large"
+    });
 
 ### start `String`*(default: "month")*
 

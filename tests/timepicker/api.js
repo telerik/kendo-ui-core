@@ -65,8 +65,8 @@
 
             tv.select("10:00 AM");
 
-            assert.equal(tv.ul.find("li.k-state-selected").length, 1);
-            assert.equal(tv.ul.find("li.k-state-selected").html(), "10:00 AM");
+            assert.equal(tv.ul.find("li.k-selected").length, 1);
+            assert.equal(tv.ul.find("li.k-selected span").html(), "10:00 AM");
             tv.destroy();
         });
 
@@ -89,7 +89,7 @@
 
             tv._click({ currentTarget: li[0], isDefaultPrevented: function() { return false; } });
 
-            assert.equal(tv.ul.find("li.k-state-selected")[0], li[0]);
+            assert.equal(tv.ul.find("li.k-selected")[0], li[0]);
             tv.destroy();
         });
 
@@ -107,8 +107,8 @@
 
             tv.current(tv.ul.find("li:first"));
 
-            assert.equal(tv.ul.find("li.k-state-selected").length, 1);
-            assert.equal(tv.current().index(), tv.ul.find("li.k-state-selected").index());
+            assert.equal(tv.ul.find("li.k-selected").length, 1);
+            assert.equal(tv.current().index(), tv.ul.find("li.k-selected").index());
             tv.destroy();
         });
 
@@ -139,8 +139,8 @@
             tv.refresh();
 
             assert.equal(tv.ul.find("li").length, 48);
-            assert.equal(tv.ul.find("li:first").html(), "12:00 AM");
-            assert.equal(tv.ul.find("li:last").html(), "11:30 PM");
+            assert.equal(tv.ul.find("li:first span").html(), "12:00 AM");
+            assert.equal(tv.ul.find("li:last span").html(), "11:30 PM");
             tv.destroy();
         });
 
@@ -156,8 +156,8 @@
             tv.refresh();
 
             assert.equal(tv.ul.find("li").length, 5);
-            assert.equal(tv.ul.find("li:first").html(), "10:00 AM");
-            assert.equal(tv.ul.find("li:last").html(), "12:00 PM");
+            assert.equal(tv.ul.find("li:first span").html(), "10:00 AM");
+            assert.equal(tv.ul.find("li:last span").html(), "12:00 PM");
             tv.destroy();
         });
 
@@ -173,8 +173,8 @@
             tv.refresh();
 
             assert.equal(tv.ul.find("li").length, 5);
-            assert.equal(tv.ul.find("li:first").html(), "10:10 AM");
-            assert.equal(tv.ul.find("li:last").html(), "11:50 AM");
+            assert.equal(tv.ul.find("li:first span").html(), "10:10 AM");
+            assert.equal(tv.ul.find("li:last span").html(), "11:50 AM");
             tv.destroy();
         });
 
@@ -191,7 +191,7 @@
 
             tv.refresh();
 
-            assert.isOk(tv.ul.find("li:last").hasClass("k-state-selected"));
+            assert.isOk(tv.ul.find("li:last").hasClass("k-selected"));
             tv.destroy();
         });
 
@@ -241,7 +241,7 @@
             tv.value("2:00 PM");
 
             assert.isOk(tv._value, "2:00 PM");
-            assert.isOk(tv.ul.children(".k-state-selected")[0]);
+            assert.isOk(tv.ul.children(".k-selected")[0]);
             tv.destroy();
         });
 
@@ -252,8 +252,7 @@
             timepicker.enable(false);
 
             assert.isOk(input.attr("disabled"), "disabled");
-            assert.isOk(timepicker._inputWrapper.hasClass("k-state-disabled"));
-            assert.isOk(!timepicker._inputWrapper.hasClass("k-state-default"));
+            assert.isOk(timepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) should unbind icon click", function() {
@@ -273,8 +272,7 @@
             timepicker.enable();
 
             assert.isOk(!input.attr("disabled"));
-            assert.isOk(timepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!timepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!timepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(true) should bind icon click", function() {
@@ -324,8 +322,7 @@
 
             assert.equal(timepicker.element.attr("readonly"), "readonly");
             assert.equal(timepicker.element.attr("disabled"), undefined);
-            assert.isOk(timepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!timepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!timepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable(false) removes readonly attribute and default class", function() {
@@ -336,8 +333,7 @@
 
             assert.equal(timepicker.element.attr("readonly"), undefined);
             assert.equal(timepicker.element.attr("disabled"), "disabled");
-            assert.isOk(!timepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(timepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(timepicker.wrapper.hasClass("k-disabled"));
         });
 
         it("enable() enables widget after readonly()", function() {
@@ -348,8 +344,7 @@
 
             assert.equal(timepicker.element.attr("readonly"), undefined);
             assert.equal(timepicker.element.attr("disabled"), undefined);
-            assert.isOk(timepicker._inputWrapper.hasClass("k-state-default"));
-            assert.isOk(!timepicker._inputWrapper.hasClass("k-state-disabled"));
+            assert.isOk(!timepicker.wrapper.hasClass("k-disabled"));
         });
 
 
@@ -402,7 +397,7 @@
             timepicker.value(new Date(2000, 10, 10, 14, 30, 0));
 
             assert.equal(input.val(), "2:30 PM");
-            assert.equal(timepicker.timeView.ul.find(".k-state-selected").text(), "2:30 PM");
+            assert.equal(timepicker.timeView.ul.find(".k-selected").text(), "2:30 PM");
         });
 
         it("value() should honor min/max range", function() {
@@ -565,9 +560,20 @@
                 format: "HH:mm"
             });
 
-            var first = timeView.ul.children().first();
+            var first = timeView.ul.children().first().find("span");
 
             assert.equal(first.html(), "00:00");
+        });
+
+        it("setOptions updates the button size correctly", function() {
+            var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+            timepicker.setOptions({
+                size: "small"
+            });
+
+            assert.isOk(timepicker._arrow.hasClass("k-button-sm"));
+            assert.isNotOk(timepicker._arrow.hasClass("k-button-md"));
         });
 
         it("setOptions method updates format", function() {
