@@ -12,7 +12,7 @@ position: 3
 
 In this article you will find information about the new rendering of the Kendo UI TextArea.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the TextArea](https://demos.telerik.com/kendo-ui/textarea/appearance).
 
@@ -237,6 +237,6 @@ $(".k-input-inner") // Returns a reference to the textarea element in the new re
 
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
+* [Rendering Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the TextArea](https://demos.telerik.com/kendo-ui/textarea/appearance)
 * [JavaScript API Reference of the TextArea](/api/javascript/ui/textarea)

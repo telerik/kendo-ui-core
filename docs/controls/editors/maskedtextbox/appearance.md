@@ -12,7 +12,7 @@ position: 3
 
 In this article, you will find information about the new rendering of the Kendo UI MaskedTextBox.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/styling).
 
@@ -179,6 +179,6 @@ $(".k-input-inner") // Returns a reference to the input element in the new rende
 
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
+* [Rendering Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/appearance)
 * [JavaScript API Reference of the MaskedTextBox](/api/javascript/ui/maskedtextbox)

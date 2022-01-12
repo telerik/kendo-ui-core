@@ -338,15 +338,6 @@
         assert.equal(multiselect.ul.children().first().attr("role"), "option");
     });
 
-    it("MultiSelect adds aria-setsize to the tag list items", function() {
-        var multiselect = new MultiSelect(input, {
-            dataSource: ["item1", "item2"],
-            value: "item1"
-        });
-
-        assert.equal(multiselect.tagList.children().first().attr("aria-setsize"), 1);
-    });
-
     it("MultiSelect toggles aria-hidden of the tag list items", function() {
         var multiselect = new MultiSelect(input, {
             dataSource: ["item1", "item2"],

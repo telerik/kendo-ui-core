@@ -1,153 +1,165 @@
 ---
-title: MultiColumnComboBox Appearance
-page_title: jQuery MultiColumnComboBox Documentation | MultiColumnComboBox Appearance
-description: "Learn how to apply different styling options to the MultiColumnComboBox widget."
-slug: appearance_kendoui_multicolumncombobox_widget
-position: 9
+title: Appearance
+page_title: Appearance
+description: "Learn about the rendering and appearance options of the Telerik UI MultiColumnComboBox for {{ site.framework }}."
+slug: appearance_multicolumncombobox
+position: 2
 ---
 
 # Appearance
 
-> As of Kendo UI R1 2022, the jQuery MultiColumnComboBox widget has new rendering and styling options. 
+As of the R1 2022 release, the MultiColumnComboBox component uses a new rendering. To learn more about why we decided to create a new rendering for our components, see the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
 
-In this article, you will find information about the rendering of the Kendo UI MultiColumnComboBox.
-
-For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
-
-For a live example, visit the [Appearance Demo of the MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/appearance).
+For a live example of the styling options of the MultiColumnComboBox, visit the [Appearance Demo of the MultiColumnComboBox](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/appearance).
 
 ## Options
 
-The Kendo UI MultiColumnComboBox supports the following styling options:
+The MultiColumnComboBox supports the following styling options:
 
-- [`size`](#size)—configures the overall size of the component.
-- [`rounded`](#rounded)—configures the border radius.
-- [`fillMode`](#fillMode)—controls how the color is applied.
+- [`Size`](#size)—configures the overall size of the component.
+- [`Rounded`](#rounded)—configures the border radius of the component.
+- [`FillMode`](#fillmode)—configures how the color is applied to the component.
 
 ### Size
 
-The `size` option controls how big or small the MultiColumnComboBox looks. The structure of the class is `k-input-{size}`.
+The `Size` option controls the size of the MultiColumnComboBox. The `k-input-{size}` class, which is applied to the wrapping span element of the MultiColumnComboBox, reflects the value of the `Size` option.
 
-The following values are available for the [`size`](/api/javascript/ui/multicolumncombobox/configuration/size) option:
+The following values are available for the `Size` option:
 
-- `sm`—small size
-- `md`—medium size
-- `lg`—large size
+- `Small`—small size (applies the `k-input-sm` class to the wrapping span element)
+- `Medium`—medium size (applies the `k-input-md` class to the wrapping span element)
+- `Large`—large size (applies the `k-input-lg` class to the wrapping span element)
 
-The default size value is `medium` and it is applied to the `span` wrapping element through the `k-input-md` class.
+The default size value is `Medium`.
 
 The example below shows a basic configuration and how to set `size` to "large":
 
-```dojo
-<input id="multicolumncombobox" />
-<script>
-    $("#multicolumncombobox").kendoMultiColumnComboBox({
-      size: "large",
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      columns: [
-            { field: "name" },
-            { field: "id" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-    });
-</script>
-```
+    @(Html.Kendo().MultiColumnComboBox()
+        .Name("movies")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .Size(ComponentSize.Large)
+        .Columns(columns =>
+        {
+            columns.Add().Field("Text").Title("Text").Width("300px");
+            columns.Add().Field("Value").Title("Value").Width("100px");
+        })
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "Item1", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Item2", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Item3", Value ="3"
+            }
+        })
+    )
 
-Below is the HTML that is affected from the configuration. The changes are applied to the `span.k-combobox` wrapping element:
+Below is the HTML of the MultiColumnComboBox that is affected from the `Size` configuration. The `ComponentSize.Large` value is reflected through the `k-input-lg` class applied to the `span.k-dropdowngrid` wrapping element:
 
 ```html
-<span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-outline k-input-lg k-rounded-full">
+<span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-solid k-input-lg k-rounded-full">
 </span>
 ```
 
 ### Rounded
 
-The `rounded` option controls how much border radius is applied to the widget. The structure of the class is `k-rounded-{size}`.
+The `Rounded` option controls the border radius of the MultiColumnComboBox. The class that corresponds to the `Rounded` option is `k-rounded-{rounded}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/multicolumncombobox/configuration/rounded) option:
+The following values are available for the `Rounded` option:
 
-- `sm`—small border radius
-- `md`—medium border radius
-- `lg`—large border radius
-- `full`—ellipse-like border radius
+- `Small`—small border radius (applies the `k-rounded-sm` class to the wrapping span element)
+- `Medium`—medium border radius (applies the `k-rounded-md` class to the wrapping span element)
+- `Large`—large border radius (applies the `k-rounded-lg` class to the wrapping span element)
+- `Full`—largest (ellipse-like) border radius (applies the `k-rounded-full` class to the wrapping span element)
 
-The default value is `full` and it is applied to the `span.k-combobox` wrapping element that contains the whole HTML through the `k-rounded-full` class.
+The default value is `Full`.
 
-The example below shows a basic MultiColumnComboBox configuration and how to set `rounded` to "medium":
+The following example demonstrates how to set `Rounded` in the declaration of the MultiColumnComboBox:
 
-```dojo
-<input id="multicolumncombobox" />
-<script>
-    $("#multicolumncombobox").kendoMultiColumnComboBox({
-      rounded: "medium",
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      columns: [
-            { field: "name" },
-            { field: "id" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-    });
-</script>
-```
+    @(Html.Kendo().MultiColumnComboBox()
+        .Name("movies")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .Rounded(Rounded.Medium)
+        .Columns(columns =>
+        {
+            columns.Add().Field("Text").Title("Text").Width("300px");
+            columns.Add().Field("Value").Title("Value").Width("100px");
+        })
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "Item1", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Item2", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Item3", Value ="3"
+            }
+        })
+    )
 
-The changes are applied to the `span.k-combobox` wrapping element:
+The `Rounded.Medium` value is reflected through the `k-rounded-md` class applied to the `span.k-dropdowngrid` wrapping element:
 
 ```html
-<span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-outline k-input-lg k-rounded-md">
+<span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-solid k-input-lg k-rounded-md">
     ...   
 </span>
 ```
 
 ### FillMode
 
-The `fillMode` option controls how the color is applied. The structure of the class is `k-input-{fillMode}`.
+The `FillMode` option controls how color is applied to the component. The structure of the class is `k-input-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/multicolumncombobox/configuration/fillMode) option:
+The following values are available for the `FillMode` option:
 
-- `solid`
-- `flat`
-- `outline`
+- `Solid`—applies the `k-input-solid` class to the wrapping span element
+- `Flat`—applies the `k-input-flat` class to the wrapping span element
+- `Outline`—applies the `k-input-outline` class to the wrapping span element
 
-The default value is `solid` and it is applied to the `span.k-combobox` wrapping element through the `k-input-solid` class.
+The default value is `Solid` and it is applied to the `span.k-dropdowngrid` wrapping element through the `k-input-solid` class.
 
-The example below shows a basic MultiColumnComboBox configuration and how to set `fillMode` to "outline":
+The following example demonstrates how to set `FillMode` in the declaration of the MultiColumnComboBox:
 
-```dojo
-<input id="multicolumncombobox" />
-<script>
-    $("#multicolumncombobox").kendoMultiColumnComboBox({
-      fillMode: "outline",
-      dataSource: [
-        { id: 1, name: "Apples" },
-        { id: 2, name: "Oranges" }
-      ],
-      columns: [
-            { field: "name" },
-            { field: "id" }
-      ],
-      dataTextField: "name",
-      dataValueField: "id",
-    });
-</script>
-```
-The changes are applied to the `span.k-combobox` wrapping element:
+    @(Html.Kendo().MultiColumnComboBox()
+        .Name("movies")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .FillMode(FillMode.Outline)
+        .Columns(columns =>
+        {
+            columns.Add().Field("Text").Title("Text").Width("300px");
+            columns.Add().Field("Value").Title("Value").Width("100px");
+        })
+        .BindTo(new List<SelectListItem>()
+        {
+            new SelectListItem() {
+            Text = "Item1", Value ="1"
+            },
+            new SelectListItem() {
+            Text = "Item2", Value ="2"
+            },
+            new SelectListItem() {
+            Text = "Item3", Value ="3"
+            }
+        })
+    )
+
+The `FillMode.Outline` value is reflected through the `k-input-outline` class applied to the `span.k-dropdowngrid` wrapping element:
 
 ```html
-<span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-outline k-input-medium k-rounded-full">
+<span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-outline k-input-md k-rounded-full">
 </span>
 ```
 
 ## Old vs New Rendering
 
-Below you will find the differences between the old and the new rendering. Some of the HTML elements rendered before are replaced with others in the new rendering.
+The differences between the old and the new rendering of the MultiColumnComboBox are shown below. Some of the HTML elements rendered before are replaced with other elements in the new rendering.
 
 Old Wrapper Rendering:
 
@@ -380,12 +392,11 @@ New Popup Rendering with virtualization:
 
 ## Visual Backwards Compatibility
 
-In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
+In order to achieve the same look and feel as the old rendering, use the classes available in the new rendering. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Appearance Overview]({% slug components_rendering_overview %}) article for additional information.
 
-> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
+> If you use a LESS theme, the new rendering will support only the [default options](#options).
 
 ## See Also
 
 * [Appearance Overview Article]({% slug components_rendering_overview %})
-* [Appearance Demo of the MultiColumnComboBox](https://demos.telerik.com/kendo-ui/multicolumncombobox/appearance)
-* [JavaScript API Reference of the MultiColumnComboBox](/api/javascript/ui/multicolumncombobox)
+* [Appearance Demo of the MultiColumnComboBox](https://demos.telerik.com/{{ site.platform }}/multicolumncombobox/appearance)

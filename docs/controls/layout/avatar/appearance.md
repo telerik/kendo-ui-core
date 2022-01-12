@@ -22,7 +22,7 @@ All of the types can be rendered in a different shape by setting the `rounded` p
 
 The available [`rounded`](/api/javascript/ui/avatar/configuration/rounded) values are:
 
-- "circle" (default)—Renders a circle shape avatar.
+- "full" (default)—Renders a circle shape avatar.
 - "small"—Renders an avatar with small border radius.
 - "medium"—Renders an avatar with meduim border radius.
 - "large"—Renders an avatar with large border radius.

@@ -25,12 +25,26 @@ Below you can find the list of first portion of updated components with R1 2022.
 
 ### Updated Components
 
-| Component   | Styling Documentation  |
+| Component   | Appearance Documentation  |
 |:---         |:---       |
-| `Switch` | [Switch Styling Documentation]({% slug styling_kendoui_switch_widget %})
-| `DropDownTree` | [DropDownTree Styling Documentation]({% slug styling_kendoui_dropdowntree_widget %})
-| `MultiSelect` | [MultiSelect Styling Documentation]({% slug styling_kendoui_multiselect_widget %})
-| `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
-| `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})
+| `AutoComplete` | [AutoComplete Appearance Documentation]()
+| `Button` | [Button Appearance Documentation]()
+| `ColorPicker` | [ColorPicker Appearance Documentation]()
+| `ComboBox` | [ComboBox Appearance Documentation]()
+| `DateInput` | [DateInput Appearance Documentation]()
 | `DatePicker` | [DatePicker Appearance Documentation]({% slug datepicker_appearance %})
-| `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug datetimepicker_appearance %})
+| `DateRangePicker` | [DateRangePicker Appearance Documentation]()
+| `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug datetimepicker_appearance%})
+| `DropDownList` | [DropDownList Appearance Documentation]()
+| `DropDownTree` | [DropDownTree Appearance Documentation]({% slug styling_kendoui_dropdowntree_widget %})
+| `FloatingActionButton` | [FloatingActionButton Appearance Documentation]()
+| `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})
+| `Menu` | [Menu Appearance Documentation]()
+| `MultiColumnComboBox` | [MultiColumnComboBox Appearance Documentation]()
+| `MultiSelect` | [MultiSelect Appearance Documentation]({% slug styling_kendoui_multiselect_widget %})
+| `NumericTextBox` | [NumericTextBox Appearance Documentation]()
+| `Switch` | [Switch Appearance Documentation]({% slug styling_kendoui_switch_widget %})
+| `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
+| `TextBox` | [TextBox Appearance Documentation]()
+| `TimePicker` | [TimePicker Appearance Documentation]()
+| `TreeView` | [TreeView Appearance Documentation]()

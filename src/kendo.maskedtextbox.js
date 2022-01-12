@@ -26,6 +26,7 @@ var __meta__ = { // jshint ignore:line
     var LABELCLASSES = "k-label k-input-label";
     var STATEDISABLED = "k-disabled";
     var STATEINVALID = "k-invalid";
+    var FOCUSED = "k-focus";
     var DISABLED = "disabled";
     var READONLY = "readonly";
     var CHANGE = "change";
@@ -79,6 +80,7 @@ var __meta__ = { // jshint ignore:line
                     }
 
                     that._oldValue = value;
+                    that.wrapper.addClass(FOCUSED);
 
                     that._timeoutId = setTimeout(function() {
                         caret(element, 0, value ? that._maskLength : 0);
@@ -94,6 +96,7 @@ var __meta__ = { // jshint ignore:line
                         DOMElement.value = that._old = value;
                     }
 
+                    that.wrapper.removeClass(FOCUSED);
                     that._change();
                     that._togglePrompt();
                 });

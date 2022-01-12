@@ -403,6 +403,7 @@ var __meta__ = { // jshint ignore:line
         validateInput: function(input) {
             input = $(input);
 
+
             this._isValidated = true;
 
             var that = this,
@@ -422,7 +423,9 @@ var __meta__ = { // jshint ignore:line
                 })).addClass("k-hidden"),
                 messageText = !valid ? that._extractMessage(input, result.key) : "",
                 messageLabel = !valid ? parseHtml(template({ message: decode(messageText), field: fieldName })) : "",
-                wasValid = !input.attr(ARIAINVALID);
+                wasValid = !input.attr(ARIAINVALID),
+                isInputInner = input.is(INPUTINNER),
+                inputWrapper = input.parent(INPUTWRAPPER);
 
             input.removeAttr(ARIAINVALID);
 
@@ -444,8 +447,6 @@ var __meta__ = { // jshint ignore:line
                     var parentElement = input.parent().get(0);
                     var nextElement = input.next().get(0);
                     var prevElement = input.prev().get(0);
-                    var isInputInner = input.is(INPUTINNER);
-                    var inputWrapper = input.parent(INPUTWRAPPER);
 
                     // Get the instance of the RadioGroup which is not initialized on the input element
                     if(!widgetInstance && input.is("[type=radio]")) {
@@ -487,8 +488,14 @@ var __meta__ = { // jshint ignore:line
                 this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName });
             }
 
+            if (isInputInner && inputWrapper.length) {
+                inputWrapper.toggleClass(INVALIDINPUT, !valid);
+                inputWrapper.toggleClass(VALIDINPUT, valid);
+            }
+
             input.toggleClass(INVALIDINPUT, !valid);
             input.toggleClass(VALIDINPUT, valid);
+
 
             if (kendo.widgetInstance(input)) {
                 var widget = kendo.widgetInstance(input);

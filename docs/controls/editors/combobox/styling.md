@@ -12,7 +12,7 @@ position: 9
 
 In this article, you will find information about the rendering of the Kendo UI ComboBox.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Styling Demo of the ComboBox](https://demos.telerik.com/kendo-ui/combobox/styling).
 
@@ -269,6 +269,6 @@ In order to achieve the same look and feel as the old rendering, the element ref
 
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
+* [Rendering Overview Article]({% slug components_rendering_overview %})
 * [Styling Demo of the ComboBox](https://demos.telerik.com/kendo-ui/combobox/styling)
 * [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)

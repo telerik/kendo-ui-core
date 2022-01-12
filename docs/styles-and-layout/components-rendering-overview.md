@@ -12,6 +12,7 @@ Kendo UI R1 2022 introduces new rendering for several components. This is a cont
 
 - [What is the Reason Behind These Changes?](#what-is-the-reason-behind-these-changes)
 - [Styling Options](#styling-options)
+- [State Classes](#state-classes)
 - [List of Updated Components](#updated-components)
 - [Migrating from LESS Themes](#less-themes-migration)
 - [CSS Classes Migration](#css-classes-migration)
@@ -22,7 +23,11 @@ Kendo UI R1 2022 introduces new rendering for several components. This is a cont
 
 The new rendering provides developers with the ability to change a particular styling option of a component. This helps to avoid the need of manually overriding the CSS styles of a component.
 
-One of the main reasons behind these changes is the feedback provided by the customers. The new rendering aims to ease the customization of components and allow developers to implement any design requirements with less work. 
+One of the main reasons behind these changes is the feedback provided by the customers. Many of the users of Kendo UI express that currently the themes are difficult to customize and take more effort than they should.
+
+The emergence of design languages over the past few years is also an important factor. Many of our customers prefer to customize the default themes to better suit their business requirements, instead of using them straight out-of-the-box.
+
+Ultimately, the new rendering aims to ease the customization of components and allow developers to implement any design requirements with less work.
 
 ## Styling Options
 
@@ -149,17 +154,46 @@ The following image showcases the result of applying the different `fillMode` va
 
 For more information regarding the available `fillMode` values, visit the [appearance documentation](#updated-components) of the corresponding component.
 
+## State Classes
+
+Apart from the new styling options, the state classes have also been changed. The `k-state-default` class has been completely removed from the entire Kendo suite, except for the PivotGrid, where logic relies on it.
+
+The following table showcases the old and updated versions of the Kendo state classes:
+
+| Old Class   | New Class |
+|:---         |:---       |
+| `k-state-default` | N/A
+| `k-state-active` | `k-active`
+| `k-state-selected` | `k-selected`
+| `k-state-disabled` | `k-disabled`
+| `k-state-focus` | `k-focus`
+| `k-state-hover` | `k-hover`
+
 ## Updated Components
 
-| Component   | Styling Documentation  |
+| Component   | Appearance Documentation  |
 |:---         |:---       |
-| `Switch` | [Switch Styling Documentation]({% slug styling_kendoui_switch_widget %})
-| `DropDownTree` | [DropDownTree Styling Documentation]({% slug styling_kendoui_dropdowntree_widget %})
-| `MultiSelect` | [MultiSelect Styling Documentation]({% slug styling_kendoui_multiselect_widget %})
-| `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
-| `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})
+| `AutoComplete` | [AutoComplete Appearance Documentation]()
+| `Button` | [Button Appearance Documentation]()
+| `ColorPicker` | [ColorPicker Appearance Documentation]()
+| `ComboBox` | [ComboBox Appearance Documentation]()
+| `DateInput` | [DateInput Appearance Documentation]()
 | `DatePicker` | [DatePicker Appearance Documentation]({% slug datepicker_appearance %})
+| `DateRangePicker` | [DateRangePicker Appearance Documentation]()
 | `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug datetimepicker_appearance%})
+| `DropDownList` | [DropDownList Appearance Documentation]()
+| `DropDownTree` | [DropDownTree Appearance Documentation]({% slug styling_kendoui_dropdowntree_widget %})
+| `FloatingActionButton` | [FloatingActionButton Appearance Documentation]()
+| `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})
+| `Menu` | [Menu Appearance Documentation]()
+| `MultiColumnComboBox` | [MultiColumnComboBox Appearance Documentation]()
+| `MultiSelect` | [MultiSelect Appearance Documentation]({% slug styling_kendoui_multiselect_widget %})
+| `NumericTextBox` | [NumericTextBox Appearance Documentation]()
+| `Switch` | [Switch Appearance Documentation]({% slug styling_kendoui_switch_widget %})
+| `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
+| `TextBox` | [TextBox Appearance Documentation]()
+| `TimePicker` | [TimePicker Appearance Documentation]()
+| `TreeView` | [TreeView Appearance Documentation]()
 
 ## LESS Themes Migration
 

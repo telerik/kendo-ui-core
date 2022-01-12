@@ -12,7 +12,7 @@ position: 2
 
 In this article, you will find information about the new rendering of the Kendo UI TextBox.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
 For a live example, visit the [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/appearance).
 
@@ -136,6 +136,6 @@ $(".k-input-inner") // Returns a reference to the textbox element in the new ren
 
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
+* [Rendering Overview Article]({% slug components_rendering_overview %})
 * [Appearance Demo of the TextBox](https://demos.telerik.com/kendo-ui/textbox/аppearance)
 * [JavaScript API Reference of the TextBox](/api/javascript/ui/textbox)

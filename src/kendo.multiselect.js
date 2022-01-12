@@ -134,8 +134,6 @@ var __meta__ = { // jshint ignore:line
                 that.enable(false);
             }
 
-            that._ariaSetSize(that.value().length);
-
             kendo.notify(that);
             that._toggleCloseVisibility();
             that._applyCssClasses();
@@ -725,8 +723,6 @@ var __meta__ = { // jshint ignore:line
                 that._fetchData();
             }
 
-            that._ariaSetSize(that.value().length);
-
             that._toggleCloseVisibility();
         },
 
@@ -853,8 +849,6 @@ var __meta__ = { // jshint ignore:line
                 that.element.trigger(CHANGE);
             }
             that.popup.position();
-
-            that._ariaSetSize(value.length);
 
             that._toggleCloseVisibility();
         },
@@ -1621,15 +1615,6 @@ var __meta__ = { // jshint ignore:line
                             .attr({
                                 "aria-expanded": false
                             });
-        },
-
-        _ariaSetSize: function(value) {
-            var that = this;
-            var selectedItems = that.tagList.children(CHIP);
-
-            if(value && selectedItems.length) {
-                selectedItems.attr("aria-setsize", value);
-            }
         },
 
         _ariaSetLive: function() {

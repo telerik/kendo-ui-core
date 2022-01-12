@@ -4,7 +4,7 @@ page_title: Grouping
 description: "Group the data in the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}"
 previous_url: /helpers/editors/multicolumncombobox/grouping
 slug: grouping_multicolumncombobox_aspnetmvc
-position: 4
+position: 6
 ---
 
 # Grouping

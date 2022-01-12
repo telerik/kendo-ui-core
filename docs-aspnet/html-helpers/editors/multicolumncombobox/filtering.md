@@ -4,7 +4,7 @@ page_title: Filtering
 description: "Set the filter options of the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/filtering
 slug: filtering_multicolumncombobox_aspnetcore
-position: 5
+position: 6
 ---
 
 # Filtering
