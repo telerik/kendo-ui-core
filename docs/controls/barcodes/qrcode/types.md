@@ -1,16 +1,16 @@
 ---
-title: QR Code Types
-page_title: jQuery QRCode Documentation | QR Code Types
+title: QRCode Types
+page_title: jQuery QRCode Documentation | QRCode Types
 description: "Try the different types of Telerik UI QRCode for the jQuery"
 slug: types_kendoui_qrcode_widget
 position: 3
 ---
 
-Kendo UI QR Code supports different types of overlay.
+Kendo UI QRCode supports different types of overlay.
 
 # Swiss QR Type
 
-The QRCode component supports the [Swiss QR Code format](https://blog.xsuite.com/en/swiss-qr-code). Enabling the `swiss` type of the overlay will add a swiss cross in the QR Code.
+The QRCode component supports the [Swiss QR Code format](https://blog.xsuite.com/en/swiss-qr-code). Enabling the `swiss` type of the overlay will add a swiss cross in the QRCode.
 
 The following implementation demonstrates the code needed for the Swiss Type:
 
@@ -50,11 +50,11 @@ Overview of the Swiss Type:
 
 ![Swiss Type](images/swissType.png)
 
-* [Demo showing Swiss QR Code format](https://demos.telerik.com/kendo-ui/qrcode/swiss)
+* [Demo showing Swiss QRCode format](https://demos.telerik.com/kendo-ui/qrcode/swiss)
 
 # QRCode Image Type
 
-The image type of the overlay is adding an image in the QR Code.
+The image type of the overlay is adding an image in the QRCode.
 
 The following implementation demonstrates the code needed for the Image Type:
 

@@ -15,54 +15,104 @@ For runnable examples, refer to:
 
 The following example demonstrates how to set `row` and `altRow` templates by using scripts. Specify the ids for the templates scripts:
 
-        rowTemplate: kendo.template($("#template").html()),
-        altRowTemplate: kendo.template($("#altRowTemplate").html()),
+```dojo
+<div id="treelist"></div>
 
-Implement the templates in the scripts by using the `data.model` properties and styles. Here is an example:
-
-```
 <script id="template" type="text/x-kendo-template">
-    <tr data-uid="#= data.model.uid #" >
-        <td colspan="2">
-            #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                <span class="k-icon k-i-none"></span>
-            #}#
-            #if(data.hasChildren){#
-                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-            #}#
-        <div class='employee-photo'
-             style='background-image: url(@Url.Content("~/content/shared/images/employees")/#: data.model.id #.png);'></div>
-        <div class='employee-name'>#: data.model.Employee #<span class = 'employee-position'>#: data.model.Position #</span></div>
-        </td>
-         <td colspan="2">
-                <img class= "county-flag" src="../content/web/country-flags/#: data.model.CountryFlag #.png"   />
-        </td>
-        <td colspan="2">
-                <span id='#: data.model.id #' class='badgeTemplate'>#: data.model.lengthOfService #</span>
-        </td>
-    </tr>
+  <tr data-uid="#= data.model.uid #" >
+      <td colspan="2">
+          #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+              <span class="k-icon k-i-none"></span>
+          #}#
+          #if(data.hasChildren){#
+              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+          #}#
+      </td>
+       <td colspan="2">
+              <span style='color:green;'>#:data.model.lastName #</span>
+      </td>
+      <td colspan="2">
+              <span style='color:red;'>#: data.model.position #</span>
+      </td>
+  </tr>
 </script>
 
 <script id="altRowTemplate" type="text/x-kendo-template">
-    <tr data-uid="#= data.model.uid #" class="k-alt">
-        <td colspan="2">
-            #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
-                <span class="k-icon k-i-none"></span>
-            #}#
-            #if(data.hasChildren){#
-                <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
-            #}#
-        <div class='employee-photo'
-             style='background-image: url(@Url.Content("~/content/shared/images/employees")/#: data.model.id #.png);'></div>
-        <div class='employee-name'>#: data.model.Employee #<span class = 'employee-position'>#: data.model.Position #</span></div>
-        </td>
-         <td colspan="2">
-                <img class= "county-flag" src="../content/web/country-flags/#: data.model.CountryFlag #.png"   />
-        </td>
-        <td colspan="2">
-                <span id='#: data.model.id #' class='badgeTemplate'>#: data.model.lengthOfService #</span>
-        </td>
-    </tr>
+  <tr data-uid="#= data.model.uid #" class="k-alt">
+      <td colspan="2">
+          #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+              <span class="k-icon k-i-none"></span>
+          #}#
+          #if(data.hasChildren){#
+              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+          #}#
+              </td>
+       <td colspan="2">
+              <span style='color:blue;'>#:data.model.lastName #</span>
+      </td>
+      <td colspan="2">
+              <span style='color:purple;'>#: data.model.position #</span>
+      </td>
+  </tr>
+</script>
+<script>
+    $("#treelist").kendoTreeList({
+        rowTemplate: kendo.template($("#template").html()),
+        altRowTemplate: kendo.template($("#altRowTemplate").html()),
+        columns: [
+            { field: "lastName" }
+        ],
+        dataSource: {
+            data: [
+                { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
+                { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" },
+                { id: 3, parentId: 2, lastName: "Jason", position: "Director, Engineering" },
+                { id: 4, parentId: 3, lastName: "Michael", position: "Engineer" }
+            ]
+        }
+    });
+</script>
+```
+
+Implement the templates in the script tags by using the [`data.model`](/api/javascript/data/model) properties. Here is an example:
+
+```
+<script id="template" type="text/x-kendo-template">
+  <tr data-uid="#= data.model.uid #" >
+      <td colspan="2">
+          #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+              <span class="k-icon k-i-none"></span>
+          #}#
+          #if(data.hasChildren){#
+              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+          #}#
+      </td>
+       <td colspan="2">
+            <span style='color:green;'>#:data.model.lastName #</span>
+      </td>
+      <td colspan="2">
+            <span style='color:red;'>#: data.model.position #</span>
+      </td>
+  </tr>
+</script>
+
+<script id="altRowTemplate" type="text/x-kendo-template">
+  <tr data-uid="#= data.model.uid #" class="k-alt">
+      <td colspan="2">
+          #for(var i = 0; i < (hasChildren ? level : (level + 1)); i++){#
+              <span class="k-icon k-i-none"></span>
+          #}#
+          #if(data.hasChildren){#
+              <span class="k-icon k-i-#=data.model.expanded? 'collapse' : 'expand'#"></span>
+          #}#
+              </td>
+       <td colspan="2">
+            <span style='color:blue;'>#:data.model.lastName #</span>
+      </td>
+      <td colspan="2">
+            <span style='color:purple;'>#: data.model.position #</span>
+      </td>
+  </tr>
 </script>
 ```
 

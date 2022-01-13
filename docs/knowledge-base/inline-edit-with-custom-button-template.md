@@ -34,7 +34,7 @@ How can I trigger the default **Edit** and **Delete** functionalities in a Grid 
 
 ## Solution
 
-Use the `addRow` and `removeRow` methods of the Grid.
+Use the [`addRow`](/api/javascript/ui/grid/methods/addrow) and [`removeRow`](/api/javascript/ui/grid/methods/removerow) methods of the Grid.
 
 1. Use the `columns.template` property to add a custom button to the column.
 
@@ -42,7 +42,7 @@ Use the `addRow` and `removeRow` methods of the Grid.
     { template: "<button class='customEdit'>My Edit</button>", title:"Custom Edit"}
     ````
 
-1. Apply the `editRow` method by passing the row for which the button was clicked as an argument.
+1. Apply the [`editRow`](/api/javascript/ui/grid/methods/editrow) method by passing the row for which the button was clicked as an argument.
 
     ```dojo
     <div id="grid"></div>

@@ -2604,7 +2604,7 @@ so the two should not be used at the same time.
 
 ### columns.selectable `Boolean` *(default: false)*
 
-If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page.
+If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/javascript/ui/grid/events/change) event is fired when a row is selected.
 
 #### Example - disable sorting
 

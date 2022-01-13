@@ -26,6 +26,7 @@
             assert.isOk(upArrow.parent().hasClass("k-input-spinner"));
 
             assert.isOk(upArrow.hasClass("k-button"));
+            assert.equal(upArrow.attr("tabindex"), "-1");
             assert.isOk(upArrow.hasClass("k-icon-button"));
             assert.isOk(upArrow.hasClass("k-button-solid"));
             assert.isOk(upArrow.hasClass("k-button-solid-base"));
@@ -33,6 +34,7 @@
             assert.equal(upArrow.attr("aria-label"), textbox.options.upArrowText);
 
             assert.isOk(downArrow.hasClass("k-button"));
+            assert.equal(downArrow.attr("tabindex"), "-1");
             assert.isOk(downArrow.hasClass("k-icon-button"));
             assert.isOk(downArrow.hasClass("k-button-solid"));
             assert.isOk(downArrow.hasClass("k-button-solid-base"));

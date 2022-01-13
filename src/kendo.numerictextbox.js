@@ -956,7 +956,7 @@ var __meta__ = { // jshint ignore:line
         var className = direction === "increase" ? "arrow-n" : "arrow-s";
         var dir = direction === "increase" ? "increase" : "decrease";
 
-        return html.renderButton('<button role="button" unselectable="on" class="k-spinner-' + dir + '" aria-label="' + text + '" title="' + text + '"></button>', extend({}, this.options, {
+        return html.renderButton('<button role="button" tabindex="-1" unselectable="on" class="k-spinner-' + dir + '" aria-label="' + text + '" title="' + text + '"></button>', extend({}, this.options, {
             icon: className,
             shape: null,
             rounded: null

@@ -1,20 +1,20 @@
 ---
-title: Styling
-page_title: jQuery ColorPicker Documentation | Styling
+title: Appearance
+page_title: jQuery ColorPicker Documentation | Appearance
 description: "Learn how to apply different styling options to the ColorPicker widget."
-slug: styling_kendoui_colorpicker_widget
+slug: appearance_kendoui_colorpicker_widget
 position: 5 
 ---
 
-# ColorPicker Styling
+# Appearance
 
 > As of Kendo UI R1 2022, the jQuery ColorPicker widget has new rendering and styling options.
 
 In this article, you will find information about the rendering of the Kendo UI ColorPicker.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Styling Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/styling).
+For a live example, visit the [Appearance Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/appearance).
 
 ## Options
 
@@ -118,9 +118,48 @@ The changes are applied to the `span.k-colorpicker` wrapping element:
 
 ## Old vs New Rendering
 
-Below you will find the differences between the old and the new rendering. 
+The old rendering of the component consisted of several wrapping elements:
 
-Old Rendering:
+- The outer `div` wrapper with the `k-colorpicker` class.
+
+```html
+  <div class="k-colorpicker">
+  </div>
+```
+
+- The inner `span` wrapper with the `k-picker-wrap` class.
+
+  ```html
+  <span class="k-picker-wrap">
+  </span>
+  ```
+  
+- The `span` element containing infromation about the selected color in the ColorPicker. This element is a child of the `k-picker-wrap` span.
+```html
+  <!-- no tool icon -->
+  <span class="k-selected-color" ></span>
+  
+  <!-- with tool icon -->
+  <span class="k-icon k-tool-icon k-i-foreground-color">
+	<span class="k-selected-color"></span>
+  </span>
+```
+
+
+- The button `span` element with `k-select` class. This element is a child of the `k-picker-wrap` span and renders the button which expands the color editor popup on click.
+
+  ```html
+  <span unselectable="on" class="k-select" role="button">
+  </span>
+  ```
+
+- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the colorpicker dropdown icon icon. 
+
+  ```html
+  <span class="k-icon k-i-arrow-s">
+  ```
+
+The following example demonstrates the full version of the old rendering:
 
 ```html
 <div role="textbox" aria-haspopup="true" class="k-colorpicker" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
@@ -161,7 +200,30 @@ Old Rendering:
 </div>
 ```
 
-New Rendering:
+The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements:
+
+- The `span` element controls the overall appearance of the widget and has the following class structure:
+
+  ```html
+  <span class="k-colorpicker k-picker k-icon-picker k-picker-solid k-picker-md k-rounded-md">
+  </span>
+  ```
+  
+- The inner span element with the `k-input-inner` class renders the color preview of the ColorPicker  
+
+  ```html
+  <span class="k-input-inner" ></span>
+  ```
+
+- The `button` element controls the appearance of the button that expands the color popup editor and has the following class structure:
+
+  ```html
+  <button type="button" class="k-select k-input-button k-button k-icon-button k-button-md k-button-solid k-button-solid-base">
+  </button>
+  ```
+
+
+The following example demonstrates the new rendering:
 
 ```html
 <span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker k-picker-{fillMode} k-picker-{size} k-rounded-{rounded}" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
@@ -211,8 +273,42 @@ In order to achieve the same look and feel as the old rendering, the element ref
 
 > The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
 
+Previously, a reference to the button element was obtainable through the `k-select` class.
+
+```javascript
+$(".k-select") // Returns a reference to the ColorPicker dropdown button element in the old rendering.
+```
+
+With the new rendering, a reference to the button element can be obtained also through the `k-button` and `k-input-button` classes. 
+
+```javascript
+$(".k-button") // Returns a reference to the ColorPicker dropdown button element in the new rendering.
+$(".k-input-button") // Returns a reference to the ColorPicker dropdown button element in the new rendering.
+```
+
+Previously, the element holding the color preview was obtainable either through the `k-selected-color` class or through the `k-tool-icon` class when a `toolIcon` is configured.
+
+```javascript
+$(".k-selected-color") // In the old rendering returns a reference to the ColorPicker color preview element when a toolIcon is not configured.
+
+$(".k-tool-icon") // In the old rendering returns a reference to the ColorPicker color preview element when a toolIcon is configured.
+```
+
+With the new rendering, a reference to the `span` element containing the color preview can be obtained through the `k-input-inner` class. 
+
+```javascript
+$(".k-input-inner") // Returns a reference to the ColorPicker color preview element in the new rendering.
+```
+
+With the new rendering, a reference to the `span` element containing the selected color can be obtained through the `k-color-preview-mask` class. 
+
+```javascript
+$(".k-color-preview-mask") // Returns a reference to span element containing the selected color in the new rendering.```
+```
+
+
 ## See Also
 
-* [Styling Overview Article]({% slug components_rendering_overview %})
-* [Styling Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/styling)
+* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Appearance Demo of the ColorPicker](https://demos.telerik.com/kendo-ui/colorpicker/appearance)
 * [JavaScript API Reference of the ColorPicker](/api/javascript/ui/colorpicker)

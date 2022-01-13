@@ -4683,42 +4683,67 @@ A function that can be used to create a custom visual for the legend items. The 
 
     <div id="chart"></div>
     <script>
-      $("#chart").kendoStockChart({
-        legend: {
-          item: {
-            visual: function (e) {
-              var color = e.options.markers.background;
-              var labelColor = e.options.labels.color;
-              var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
-              var layout = new kendo.drawing.Layout(rect, {
-                spacing: 5,
-                alignItems: "center"
-              });
-
-              var marker = new kendo.drawing.Path({
-                fill: {
-                  color: color
+        $("#chart").kendoStockChart({
+            legend: {
+                visible: true,
+                position: "bottom",
+                item: {
+                    visual: function (e) {
+                        var color = e.options.markers.background;
+                        var labelColor = e.options.labels.color;
+                        var rect = new kendo.geometry.Rect([0, 0], [100, 50]);
+                        var layout = new kendo.drawing.Layout(rect, {
+                            spacing: 5,
+                            alignItems: "center"
+                        });
+    
+                        var marker = new kendo.drawing.Path({
+                            fill: {
+                                color: color
+                            }
+                        }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
+    
+                        var label = new kendo.drawing.Text(e.series.name, [0, 0], {
+                            fill: {
+                                color: labelColor
+                            }
+                        });
+    
+                        layout.append(marker, label);
+                        layout.reflow()
+    
+                        return layout;
+                    }
                 }
-              }).moveTo(10, 0).lineTo(15, 10).lineTo(5, 10).close();
-
-              var label = new kendo.drawing.Text(e.series.name, [0, 0], {
-                fill: {
-                  color: labelColor
+            },
+            dataSource: {
+                data: [{
+                    "Date": "2016/01/01",
+                    "Open": 41.62,
+                    "High": 41.69,
+                    "Low": 39.81,
+                    "Close": 40.12,
+                    "Volume": 2632000
+                }, {
+                    "Date": "2016/03/01",
+                    "Open": 40.62,
+                    "High": 39.69,
+                    "Low": 40.81,
+                    "Close": 39.12,
+                    "Volume": 2631986
                 }
-              });
-
-              layout.append(marker, label);
-              layout.reflow()
-
-              return layout;
-            }
-          }
-        },
-        series: [
-          { name: "Series 1", data: [1, 2, 3] },
-          { name: "Series 2", data: [3, 4, 5] }
-        ]
-      });
+                ]
+            },
+            dateField: "Date",
+            series: [{
+                name: "Series 1",
+                type: "candlestick",
+                openField: "Open",
+                highField: "High",
+                lowField: "Low",
+                closeField: "Close"
+            }]
+        });
     </script>
 
 ### legend.labels `Object`
