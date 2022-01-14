@@ -28,6 +28,7 @@ To initialize the Switch, use a jQuery selector.
 
 ## Functionality and Features
 
+* [Appearance]({% slug appearance_kendoui_switch_widget %})
 * [Checked Switch]({% slug checked_kendoui_switch_widget %})
 * [Disabled Switch]({% slug disabled_kendoui_switch_widget %})
 * [Read-only Switch]({% slug readonly_kendoui_switch_widget %})

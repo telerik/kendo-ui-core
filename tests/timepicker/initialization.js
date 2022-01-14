@@ -92,6 +92,7 @@
 
             assert.isOk(icon);
             assert.isOk(icon.is("button"));
+            assert.equal(icon.attr("tabindex"), "-1");
             assert.isOk(icon.hasClass("k-button-md"));
             assert.isOk(icon.children().is("span"));
             assert.isOk(icon.children().hasClass("k-icon k-i-clock"));

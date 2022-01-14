@@ -152,16 +152,16 @@ For more information about the available `FillMode` option values, visit the [Ap
 
 | Component   | Appearance Documentation  |
 |:---         |:---       |
-| `AutoComplete` | 
+| `AutoComplete` | [AutoComplete Appearance Documentation]({% slug appearance_autocomplete_aspnetcore %})
 | `Button` | [Button Appearance Documentation]({% slug button_appearance %})
 | `CheckBox` | [CheckBox Appearance Documentation]({% slug checkbox_appearance %})
-| `ColorPicker` | 
-| `ComboBox` | 
+| `ColorPicker` | [ColorPicker Appearance Documentation]({% slug appearance_colorpicker_aspnetcore %})
+| `ComboBox` | [ComboBox Appearance Documentation]({% slug appearance_combobox_aspnetcore %})
 | `DateInput` | 
-| `DatePicker` | 
-| `DateRangePicker` | 
-| `DateTimePicker` | 
-| `DropDownList` | 
+| `DatePicker` | [DatePicker Appearance Documentation]({% slug appearance_datepicker_aspnetcore %})
+| `DateRangePicker` | [DateRangePicker Appearance Documentation]({% slug appearance_daterangepicker_aspnetcore %})
+| `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug appearance_datetimepicker_aspnetcore %})
+| `DropDownList` | [DropDownList Appearance Documentation]({% slug appearance_dropdownlist_aspnetcore %})
 | `DropDownTree` | 
 | `MaskedTextBox` | 
 | `MultiColumnComboBox` | 

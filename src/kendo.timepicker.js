@@ -1654,7 +1654,7 @@ var __meta__ = { // jshint ignore:line
             arrow = element.next("button.k-input-button");
 
             if (!arrow[0]) {
-                arrow = $(html.renderButton('<button unselectable="on" class="k-input-button" aria-label="select"></button>', {
+                arrow = $(html.renderButton('<button unselectable="on" tabindex="-1" class="k-input-button" aria-label="select"></button>', {
                     icon: "clock",
                     size: options.size,
                     fillMode: options.fillMode,

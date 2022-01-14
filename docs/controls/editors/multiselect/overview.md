@@ -41,6 +41,7 @@ The following example demonstrates how to initialize the MultiSelect from an exi
 
 ## Functionality and Features
 
+* [Appearance]({% slug appearance_kendoui_multiselect_widget %})
 * [Data binding]({% slug databinding_multiselect %})
 * [Grouping]({% slug grouping_kendoui_multiselect_widget %})
 * [Server filtering]({% slug server_filtering_kendoui_multiselect_widget %})

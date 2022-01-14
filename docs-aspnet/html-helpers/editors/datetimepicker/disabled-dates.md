@@ -3,7 +3,7 @@ title: Disabled Dates
 page_title: Disabled Dates
 description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to disable specific dates in the HTML Helper."
 slug: disableddates_datetimepicker_aspnetcore
-position: 2
+position: 13
 ---
 
 # Disabled Dates

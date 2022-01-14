@@ -2826,6 +2826,7 @@ declare namespace kendo.ui {
     }
 
     interface ChatMessages {
+        messageListLabel?: string | undefined;
         placeholder?: string | undefined;
         sendButton?: string | undefined;
         toggleButton?: string | undefined;

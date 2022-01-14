@@ -35,6 +35,8 @@
             assert.isOk(time.hasClass("k-select k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
 
 
+            assert.equal(date.attr("tabindex"), "-1");
+            assert.equal(time.attr("tabindex"), "-1");
             assert.isOk(date.attr("aria-label"), datetimepicker.options.dateButtonText);
             assert.isOk(time.attr("aria-label"), datetimepicker.options.timeButtonText);
 

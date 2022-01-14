@@ -1,12 +1,12 @@
 ---
-title: MultiSelect Styling
-page_title: jQuery MultiSelect Documentation | MultiSelect Styling
+title: MultiSelect Appearance
+page_title: jQuery MultiSelect Documentation | MultiSelect Appearance
 description: "Learn how to apply different styling options to the MultiSelect widget."
-slug: styling_kendoui_multiselect_widget
+slug: appearance_kendoui_multiselect_widget
 position: 9
 ---
 
-# MultiSelect Styling
+# Appearance
 
 > As of Kendo UI R1 2022, the jQuery MultiSelect widget has new rendering and styling options. 
 
@@ -14,7 +14,7 @@ In this article, you will find information about the rendering of the Kendo UI M
 
 For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Styling Demo of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/styling).
+For a live example, visit the [Appearance Demo of the MultiSelect](https://demos.telerik.com/kendo-ui/multiselect/appearance).
 
 ## Options
 

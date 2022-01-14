@@ -4,7 +4,7 @@ page_title: Grouping
 description: "Learn how to group data in the Telerik UI AutoComplete HtmlHelper for {{ site.framework }} works."
 previous_url: /helpers/editors/autocomplete/grouping
 slug: htmlhelpers_autocomplete_grouping_aspnetcore
-position: 2
+position: 6
 ---
 
 # Grouping Overview

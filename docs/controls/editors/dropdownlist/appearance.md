@@ -1,24 +1,24 @@
 ---
 title: Appearance
-page_title: jQuery ComboBox Documentation | Appearance
-description: "Get started with the jQuery ComboBox by Kendo UI and learn how to create, initialize, and enable the widget."
-slug: appearance_kendoui_combobox
-position: 7
+page_title: jQuery DropDownList Documentation | Appearance
+description: "Learn how to apply different styling options to the DropDownList widget."
+slug: appearance_kendoui_dropdownlist_widget
+position: 9
 ---
 
 # Appearance
 
-> As of Kendo UI R1 2022, the jQuery ComboBox widget has new rendering and styling options.
+> As of Kendo UI R1 2022, the jQuery DropDownList widget has new rendering and styling options.
 
-In this article, you will find information about the rendering of the Kendo UI ComboBox.
+In this article, you will find information about the rendering of the Kendo UI DropDownList.
 
-For additional information regarding the decision behind these changes, visit the [Styling Components]({% slug components_rendering_overview %}) article.
+For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Appearance Demo of the ComboBox](https://demos.telerik.com/kendo-ui/combobox/appearance).
+For a live example, visit the [Appearance Demo of the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/appearance).
 
 ## Options
 
-The Kendo UI ComboBox supports the following styling options:
+The Kendo UI DropDownList supports the following styling options:
 
 - [`size`](#size)—configures the overall size of the component.
 - [`rounded`](#rounded)—configures the border radius for the tags.
@@ -26,31 +26,31 @@ The Kendo UI ComboBox supports the following styling options:
 
 ### Size
 
-The `size` option controls how big or small the ComboBox component looks. The structure of the class is `k-input-{size}`.
+The `size` option controls how big or small the DropDownList component looks. The structure of the class is `k-picker-{size}`.
 
-The following values are available for the [`size`](/api/javascript/ui/combobox/configuration/size) option:
+The following values are available for the [`size`](/api/javascript/ui/dropdownlist/configuration/size) option:
 
 - `sm`—small size
 - `md`—medium size
 - `lg`—large size
 
-The default size value is `medium` and it is applied to the `span` wrapping element through the `k-input-md` class.
+The default size value is `medium` and it is applied to the `span` wrapping element through the `k-picker-md` class.
 
 The example below shows a basic configuration and how to set `size` to "large":
 
 ```dojo
-<input id="combobox" />
+<input id="dropdownlist" />
 <script>
-    $("#combobox").kendoComboBox({
+    $("#dropdownlist").kendoDropDownList({
       size: "large"
     });
 </script>
 ```
 
-Below is the HTML that is affected from the configuration. The changes are applied to the `span.k-combobox` wrapping element:
+Below is the HTML that is affected from the configuration. The changes are applied to the `span.k-dropdown` wrapping element:
 
 ```html
-<span class="k-combobox k-input k-input-lg">
+<span class="k-dropdown k-picker k-picker-lg">
     ...
 </span>
 ```
@@ -59,59 +59,59 @@ Below is the HTML that is affected from the configuration. The changes are appli
 
 The `rounded` option controls how much border radius is applied to the tags for the selected items in the widget. The structure of the class is `k-rounded-{size}`.
 
-The following values are available for the [`rounded`](/api/javascript/ui/combobox/configuration/rounded) option:
+The following values are available for the [`rounded`](/api/javascript/ui/dropdownlist/configuration/rounded) option:
 
 - `sm`—small border radius
 - `md`—medium border radius
 - `lg`—large border radius
 - `full`—ellipse-like border radius
 
-The default value is `medium` and it is applied to the `span.k-combobox` wrapping element through the `k-rounded-md` class. 
+The default value is `medium` and it is applied to the `span.k-dropdown` wrapping element through the `k-rounded-md` class. 
 
-The example below shows a basic ComboBox configuration and how to set `rounded` to "full":
+The example below shows a basic DropDownList configuration and how to set `rounded` to "full":
 
 ```dojo
-<input id="combobox" />
+<input id="dropdownlist" />
 <script>
-    $("#combobox").kendoComboBox({
+    $("#dropdownlist").kendoDropDownList({
       rounded: "full"
     });
 </script>
 ```
-The changes are applied to the `span.k-combobox` wrapping element:
+The changes are applied to the `span.k-dropdown` wrapping element:
 
 ```html
-<span class="k-combobox k-input k-rounded-full">
+<span class="k-dropdown k-picker k-rounded-full">
     ...    
 </span>
 ```
 
 ### FillMode
 
-The `fillMode` option controls how the color is applied. The structure of the class is `k-input-{fillMode}`.
+The `fillMode` option controls how the color is applied. The structure of the class is `k-picker-{fillMode}`.
 
-The following values are available for the [`fillMode`](/api/javascript/ui/combobox/configuration/fillMode) option:
+The following values are available for the [`fillMode`](/api/javascript/ui/dropdownlist/configuration/fillMode) option:
 
 - `solid`
 - `flat`
 - `outline`
 
-The default value is `solid` and it is applied to the `span.k-combobox` wrapping element through the `k-input-solid` class.
+The default value is `solid` and it is applied to the `span.k-dropdown` wrapping element through the `k-picker-solid` class.
 
-The example below shows a basic ComboBox configuration and how to set `fillMode` to "outline":
+The example below shows a basic DropDownList configuration and how to set `fillMode` to "outline":
 
 ```dojo
-<input id="combobox" />
+<input id="dropdownlist" />
 <script>
-    $("#combobox").kendoComboBox({
+    $("#dropdownlist").kendoDropDownList({
       fillMode: "outline"
     });
 </script>
 ```
-The changes are applied to the `span.k-combobox` wrapping element:
+The changes are applied to the `span.k-dropdown` wrapping element:
 
 ```html
-<span class="k-combobox k-input k-input-outline">
+<span class="k-dropdown k-picker k-picker-outline">
     ...    
 </span>
 ```
@@ -120,10 +120,10 @@ The changes are applied to the `span.k-combobox` wrapping element:
 
 The old rendering of the component consisted of several wrapping elements:
 
-- The outer `span` wrapper with the `k-combobox` and `k-widget` classes.
+- The outer `span` wrapper with the `k-dropdown` and `k-widget` classes.
 
   ```html
-  <span class="k-widget k-combobox">
+  <span class="k-widget k-dropdown">
   </span>
   ```
 
@@ -155,19 +155,19 @@ The old rendering of the component consisted of several wrapping elements:
   ```
 
 
-The new rendering of the component consists of a wrapping `span` element that contains the child `input` and `button` elements:
+The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements:
 
 - The `span` element controls the overall appearance of the widget and has the following class structure:
 
   ```html
-  <span class="k-input k-combobox k-widget k-input-solid k-input-md k-rounded-md">
+  <span class="k-picker k-dropdown k-widget k-picker-solid k-picker-md k-rounded-md">
   </span>
   ```
 
-- The `input` element controls the appearance of the Combobox itself and has the following class structure:
+- The `span` element controls the appearance of the DropDownList itself and has the following class structure:
 
   ```html
-  <input type="text" class="k-input-inner" value="..." placeholder="..." />
+  <span class="k-input-inner"></span>
   ```
 
 - The `button` element controls the appearance of the button that expands the dropdown popup and has the following class structure:
@@ -177,25 +177,33 @@ The new rendering of the component consists of a wrapping `span` element that co
   </button>
   ```
 
-- The inner `span` element renders the dropdown arrow icon of the ComboBox and has the following class structure:
+- The inner `span` element renders the dropdown arrow icon of the DropDownList and has the following class structure:
 
   ```html
   <span class="k-icon k-i-arrow-s k-button-icon"></span>
   ```
 
-Below you will find the differences between the old and the new rendering. 
+
+With the previous versions, when the filtering was enabled, the search icon in the DropDownList popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side. 
+ 
+The examples below demonstrates the full version of the old and new rendering:
 
 Wrapper Rendering:
 
 ```html
 <!-- OLD WRAPPER-->
-<span class="k-widget k-combobox">
-    <input id="combobox" type="text" class="k-input" placeholder="...">      
+<span class="k-widget k-dropdown">
+    <input id="dropdownlist" type="text" class="k-input" placeholder="...">      
 </span>
 
 <!-- NEW WRAPPER -->
-<span class="k-combobox k-input k-input-md k-rounded-md k-input-solid">
-    <input type="text" class="k-input-inner" value="..." placeholder="..." />
+<span class="k-picker k-dropdown k-widget k-picker-solid k-picker-md k-rounded-md">
+    <span class="k-input-inner">
+        <span class="k-input-value-text">Patricio Simpson</span>
+    </span>
+    <button class="k-select k-input-button k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base k-icon-button">
+        <span class="k-icon k-i-arrow-s k-button-icon"></span>
+    </button>
 </span>
 ```
 
@@ -225,7 +233,7 @@ Popup rendering without virtualization:
     </div>
 </div>
 
-<!-- NEW POPUP WITHOUT VIRTUALIZATION -->
+<!-- NEW POPUP NO VIRTUALIZATION -->
 <div class="k-popup k-group k-reset">
     <div class="k-list k-list-md">
         <div class="k-list-header">
@@ -326,84 +334,53 @@ Popup rendering with virtualization:
 </div>
 ```
 
+
 ## Visual Backwards Compatibility
 
 In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
 
 > The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
 
-Previously, a reference to the ComboBox input element was obtainable through the `k-input` class.
+Previously, a reference to the DropDownList input element was obtainable through the `k-input` class.
 
 ```javascript
 $(".k-input") // Returns a reference to the input element in the old rendering.
 ```
 
-With the new rendering, the ComboBox input element must be targeted by using the `k-input-inner` class.
+With the new rendering, the DropDownList input element must be targeted by using the `k-input-inner` class.
 
 ```javascript
-$(".k-input-inner") // Returns a reference to the input element in the new rendering.
+$('.k-dropdown .k-input-inner') // Returns a reference to the input element in the new rendering.
+```
+
+Previously, a reference to the dropdown button element was obtainable through the `k-select` class.
+
+```javascript
+$(".k-select") // Returns a reference to the calendar button element in the old rendering.
+```
+
+With the new rendering, a reference to the dropdown button element is obtainable through the `k-button` and `k-input-button` classes. 
+
+```javascript
+$(".k-button") // Returns a reference to the calendar button element in the new rendering.
+$(".k-input-button") // Returns a reference to the calendar button element in the new rendering.
+```
+
+Previously, a reference to the items in the DropDownList popup was obtainable through the `k-item` class.
+
+```javascript
+$(".k-item") // Returns a reference to the items rendered in the DropDownList popup.
+```
+
+With the new rendering, the DropDownList item elements must be targeted by using the `k-list-item` class.
+
+```javascript
+$('.k-list-item') // Returns a reference to the items rendered in the DropDownList popup.
 ```
 
 
-## Setting the List Width
-
-To customize the width of the ComboBox list and change its dimensions, use the jQuery `width()` method.
-
-    <input id="comboBox" />
-
-    <script>
-        var combobox = $("#combobox").data("kendoComboBox");
-        // Set the width of the drop-down list.
-        combobox.list.width(400);
-    </script>
-
-## Setting the Popup Width
-
-You can enable the `popup` element to automatically adjust its width according to the length of the item label it displays. When the `autoWidth` option is set to `true`, the popup will display the content on a single line and will not wrap it up.
-
-> Virtualized lists do not support the auto-width functionality.
-
-    <input id="combobox" style="width: 100px;" />
-    <script>
-    $("#combobox").kendoComboBox({
-      autoWidth: true,
-      dataSource: {
-        data: ["Short item", "An item with really, really long text"]
-      }
-    });
-    </script>
-
-## Accessing list Elements
-
-The ComboBox list renders an `ID` attribute which is generated from the ID of the widget and the `-list` suffix. You can use the `ID` to style the element or to access a specific element inside the popup element.
-
-> If the ComboBox has no ID, the `list` element will have no `ID` either.
-
-    <input id="combobox">
-    <script>
-      $(document).ready(function() {
-        $("#combobox").kendoComboBox({
-            dataSource: ["Item1", "Item2"]
-        });
-
-        // The DIV popup element that holds header and footer templates and the suggestion options.
-        var popupElement = $("#combobox-list");
-
-        console.log(popupElement);
-      });
-    </script>
-
-## Supporting label Elements
-
-Because of its complex rendering, the focusing of the widget by using a `label` element requires additional implementation. For a runnable example, refer to [this Kendo UI Dojo demo](https://dojo.telerik.com/uSeho).
-
-## Removing Input Values
-
-The ComboBox enables you to remove the values from its input area by using the `clearButton` configuration option. As a result, an **X** button appears in the input area on hover and when clicked, it resets the value of the widget and triggers the `change` event. By default, `clearButton` is enabled and is set to `true`.
-
 ## See Also
 
-* [Basic Usage of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/index)
-* [Using the API of the ComboBox (Demo)](https://demos.telerik.com/kendo-ui/combobox/api)
-* [Appearance Demo of the ComboBox](https://demos.telerik.com/kendo-ui/combobox/appearance)
-* [JavaScript API Reference of the ComboBox](/api/javascript/ui/combobox)
+* [Rendering Overview Article]({% slug components_rendering_overview %})
+* [Appearance Demo of the DropDownList](https://demos.telerik.com/kendo-ui/dropdownlist/appearance)
+* [JavaScript API Reference of the DropDownList](/api/javascript/ui/dropdownlist)

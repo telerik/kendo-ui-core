@@ -118,6 +118,7 @@ it("_input create calendar button", function() {
 
     assert.isOk(icon);
     assert.isOk(icon.is("button"));
+    assert.equal(icon.attr("tabindex"), "-1");
     assert.isOk(icon.hasClass("k-input-button k-button k-icon-button k-button-md k-button-solid k-button-solid-base"));
     assert.isOk(icon.children().is("span"));
     assert.isOk(icon.children().hasClass("k-icon k-i-calendar k-button-icon"));

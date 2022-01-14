@@ -862,6 +862,7 @@ if (kendo.ui.MultiSelect) {
 if (kendo.ui.Chat) {
     kendo.ui.Chat.prototype.options.messages =
     $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "messageListLabel": "Lista di messaggi",
         "placeholder": "Scrivi...",
         "toggleButton": "Apri/chiudi barra degli strumenti",
         "sendButton": "Invia messaggio"

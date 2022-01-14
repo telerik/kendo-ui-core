@@ -1,19 +1,19 @@
 ---
-title: Switch Styling
-page_title: jQuery Switch Documentation | Switch Styling
+title: Switch Appearance
+page_title: jQuery Switch Documentation | Switch Appearance
 description: "Learn how to apply different styling options to the Switch widget."
-slug: styling_kendoui_switch_widget
+slug: appearance_kendoui_switch_widget
 position: 2
 ---
 
-# Switch Styling
+# Appearance
 
 > As of Kendo UI R1 2022, the jQuery Switch widget has new rendering and styling options.
 In this article, you will find information about the rendering of the Kendo UI Switch.
 
 For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Styling Demo of the Switch](https://demos.telerik.com/kendo-ui/switch/styling).
+For a live example, visit the [Appearance Demo of the Switch](https://demos.telerik.com/kendo-ui/switch/appearance).
 
 ## Options
 

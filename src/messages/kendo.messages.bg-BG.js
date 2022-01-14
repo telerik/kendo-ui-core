@@ -1194,6 +1194,7 @@ if (kendo.ui.MultiSelect) {
 if (kendo.ui.Chat) {
     kendo.ui.Chat.prototype.options.messages =
     $.extend(true, kendo.ui.Chat.prototype.options.messages,{
+        "messageListLabel": "Списък със съобщения",
         "placeholder": "Напиши съобщение...",
         "toggleButton": "Отвори/затвори лентата с инструменти",
         "sendButton": "Изпрати съобщение"

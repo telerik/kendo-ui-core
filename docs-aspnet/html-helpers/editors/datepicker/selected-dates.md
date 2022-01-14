@@ -3,7 +3,7 @@ title: Selected Dates
 page_title: Selected Dates
 description: "Get started with the {{ site.product }} DatePicker and learn how to set selected dates and date ranges in the DatePicker."
 slug: htmlhelpers_datepicker_aspnetcore_selecteddates
-position: 3
+position: 10
 ---
 
 # Selected Dates

@@ -28,10 +28,53 @@ In left-to-right layouts, shrinking the horizontal Menu will cause the border of
        border-width: 0;
     }
 
+## Rendering
+
+> As of Kendo UI R1 2022, the Menu widget uses updated rendering.
+
+The text and the expand arrow are now wrapped in new separate containers.
+
+Old Rendering:
+
+```html
+<span class="k-link k-menu-link">
+    Products
+    <span class="k-menu-expand-arrow k-icon k-i-arrow-60-down"></span>
+</span>
+```
+
+New Rendering:
+```html
+<span class="k-link k-menu-link">
+    <span class="k-menu-link-text">Hover</span>
+    <span class="k-menu-expand-arrow">
+        <span class="k-icon k-i-arrow-s"></span>
+    </span>
+</span>
+```
+
+Additionally, the Menu groups receive a new size class:
+
+Old Rendering:
+
+```html
+<ul class="k-group k-menu-group k-popup k-reset">
+    ...
+</ul>
+```
+
+New Rendering:
+
+```html
+<ul class="k-group k-menu-group k-reset k-menu-group-md">
+     ... 
+</ul>
+```
 <!--*-->
 
 ## See Also
 
+* [Rendering Overview Article]({% slug components_rendering_overview %})
 * [Basic Usage of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/index)
 * [Using the API of the Menu (Demo)](https://demos.telerik.com/kendo-ui/menu/api)
 * [JavaScript API Reference of the Menu](/api/javascript/ui/menu)

@@ -650,7 +650,7 @@ var __meta__ = { // jshint ignore:line
             icon = element.next("button.k-input-button");
 
             if (!icon[0]) {
-                icon = $(html.renderButton('<button aria-label="select" class="k-input-button k-button k-icon-button"></button>', {
+                icon = $(html.renderButton('<button aria-label="select" tabindex="-1" class="k-input-button k-button k-icon-button"></button>', {
                     icon: "calendar",
                     size: options.size,
                     fillMode: options.fillMode,

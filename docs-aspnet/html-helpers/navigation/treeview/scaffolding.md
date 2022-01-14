@@ -4,7 +4,7 @@ page_title: Scaffolding
 description: "Learn the basics about scaffolding the Telerik UI TreeView HtmlHelper for ASP.NET MVC by using the Scaffolder extension for Visual Studio."
 previous_url: /helpers/navigation/treeview/scaffolding
 slug: scaffoldingtreeview_aspnetmvc
-position: 3
+position: 4
 ---
 
 # Scaffolding

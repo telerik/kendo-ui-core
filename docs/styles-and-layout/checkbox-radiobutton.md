@@ -10,65 +10,52 @@ position: 9
 
 The Kendo UI Checkbox and Kendo UI RadioButton are a set of classes that add styling to input elements of type `checkbox` and `radio`.
 
-Modern browsers support the [appearance](https://developer.mozilla.org/en-US/docs/Web/CSS/appearance) property. This enables customizing the look of checkboxes and radios by removing the platform-native styling.
+> As of Kendo UI R1 2022, the set of classes for the Checkbox and the RadioButton are updated to provide brand new rendering. 
 
-## Getting Started
+## CheckBox Old vs New Rendering
 
-To show a checkbox, utilize the `.k-checkbox` class which will apply the Kendo styles on the input element.
+With the old rendering, the `k-checkbox` class held all the styling information related to the CheckBox styling. Applying the class to an HTML element was enough to style a native element.
 
-```html
-<input type="checkbox" class="k-checkbox">
-```
-
-Similarly, to show a styled radiobutton use the `.k-radio` class.
+Old Rendering:
 
 ```html
-<input type="radio" name="engine" class="k-radio">
+    <input type="checkbox" class="k-checkbox" />
 ```
+Currently, the styles are split in multiple class names.
 
-## Showing with a label
-
-Following good practices it is recommended to have text related to the input. There are different ways to achieve that:
-
-Add a label element with `for` attribute that matches the id of the checkbox:
+New Rendering
 
 ```html
-<input type="checkbox" id="check1" class="k-checkbox" checked="checked">
-<label for="check1">I like apples</label>
+    <input type="checkbox" class="k-checkbox k-checkbox-md k-rounded-md" />
 ```
 
-And for the radiobutton:
+## RadioButton Old vs New Rendering
+
+With the old rendering, the `k-radio` class held all the styling information related to the RadioButton styling. Applying the class to an HTML element was enough to style a native element.
+
+Old Rendering:
 
 ```html
-<input type="radio" name="engine" id="radio1" class="k-radio">
-<label for="radio1">Oranges</label>
+    <input type="radio" class="k-radio" />
 ```
 
-Another option is to wrap the input in a `label` element and have the text in a span:
-
-Checkbox: 
+New Rendering
 
 ```html
-<label>
-    <input type="checkbox" id="check1" class="k-checkbox" checked="checked">
-    <span>I like apples</span>
-</label>
+    <input type="radio" class="k-radio  k-radio-md" />
 ```
 
-RadioButton:
+## Visual Backwards Compatibility
 
-```html
-<label>
-    <input type="radio" name="engine" id="radio1" class="k-radio">
-    <span>Oranges</span>
-</label>
-```
+In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
 
+> The new styling and rendering supports only the [default options](#options) when you use a LESS theme.
 
 ## See Also
 
+* [Appearance Overview Article]({% slug components_rendering_overview %})
 * [Checkbox demo](https://demos.telerik.com/kendo-ui/checkbox/index)
-* [RadioButon demo](https://demos.telerik.com/kendo-ui/radiobutton/index)
+* [RadioButton demo](https://demos.telerik.com/kendo-ui/radiobutton/index)
 * [Themes and Appearance of the Kendo UI Widgets]({% slug themesandappearnce_kendoui_desktopwidgets %})
 * [Responsive Web Design]({% slug responsivewebdesign_integration_kendoui %})
 * [Web Font Icons]({% slug webfonticons_kendoui_desktopwidgets %})
