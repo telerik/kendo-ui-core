@@ -72,10 +72,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._createHtml();
-            that.wrapper = that.element.closest(".k-slider");
             that._trackDiv = that.wrapper.find(TRACK_SELECTOR);
-
-            that._setTrackDivWidth();
 
             that._maxSelection = that._trackDiv[that._sizeFn]();
 
@@ -123,7 +120,6 @@ var __meta__ = { // jshint ignore:line
         },
 
         _resize: function() {
-            this._setTrackDivWidth();
             this.wrapper.find(".k-slider-items").remove();
 
             this._maxSelection = this._trackDiv[this._sizeFn]();
@@ -140,12 +136,12 @@ var __meta__ = { // jshint ignore:line
                 options = that.options;
 
             var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
+
             var pixelWidths = that._calculateItemsWidth(math.floor(removeFraction(that._distance()) / removeFraction(options.smallStep)));
 
             if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
                 $(this.element).parent().find(".k-slider-items").remove();
                 that._trackDiv.before(createSliderItems(options, that._distance()));
-                that._setItemsWidth(pixelWidths);
                 that._setItemsTitle();
             }
 
@@ -154,6 +150,8 @@ var __meta__ = { // jshint ignore:line
             if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
                 options.largeStep >= options.smallStep) {
                 that._setItemsLargeTick();
+                that.wrapper.find(TICK_SELECTOR).first().addClass("k-first");
+                that.wrapper.find(TICK_SELECTOR).last().addClass("k-last");
             }
         },
 
@@ -161,60 +159,14 @@ var __meta__ = { // jshint ignore:line
             return kendo.dimensions(this.wrapper);
         },
 
-        _setTrackDivWidth: function() {
-            var that = this,
-                trackDivPosition = parseFloat(that._trackDiv.css(that._isRtl ? "right" : that._position), 10) * 2;
-
-            that._trackDiv[that._sizeFn]((that.wrapper[that._sizeFn]() - 2) - trackDivPosition);
-        },
-
-        _setItemsWidth: function(pixelWidths) {
-            var that = this,
-                options = that.options,
-                first = 0,
-                last = pixelWidths.length - 1,
-                items = that.wrapper.find(TICK_SELECTOR),
-                i,
-                paddingTop = 0,
-                bordersWidth = 2,
-                count = items.length,
-                selection = 0;
-
-            for (i = 0; i < count - 2; i++) {
-                $(items[i + 1])[that._sizeFn](pixelWidths[i]);
-            }
-
-            if (that._isHorizontal) {
-                $(items[first]).addClass("k-first")[that._sizeFn](pixelWidths[last - 1]);
-                $(items[last]).addClass("k-last")[that._sizeFn](pixelWidths[last]);
-            } else {
-                $(items[last]).addClass("k-first")[that._sizeFn](pixelWidths[last]);
-                $(items[first]).addClass("k-last")[that._sizeFn](pixelWidths[last - 1]);
-            }
-
-            if (that._distance() % options.smallStep !== 0 && !that._isHorizontal) {
-                for (i = 0; i < pixelWidths.length; i++) {
-                    selection += pixelWidths[i];
-                }
-
-                paddingTop = that._maxSelection - selection;
-                paddingTop += parseFloat(that._trackDiv.css(that._position), 10) + bordersWidth;
-
-                that.wrapper.find(".k-slider-items").css("padding-top", paddingTop);
-            }
-        },
-
         _setItemsTitle: function() {
             var that = this,
                 options = that.options,
                 items = that.wrapper.find(TICK_SELECTOR),
                 titleNumber = options.min,
-                count = items.length,
-                i = that._isHorizontal && !that._isRtl ? 0 : count - 1,
-                limit = that._isHorizontal && !that._isRtl ? count : -1,
-                increment = that._isHorizontal && !that._isRtl ? 1 : -1;
+                count = items.length;
 
-            for (; i - limit !== 0 ; i += increment) {
+            for (var i = 0; i <= count; i += 1) {
                 $(items[i]).attr("title", format(options.tooltip.format, round(titleNumber)));
                 titleNumber += options.smallStep;
             }
@@ -448,10 +400,11 @@ var __meta__ = { // jshint ignore:line
                 element.prop("value", formatValue(options.value));
             }
 
-            element.wrap(createWrapper(options, element, that._isHorizontal)).hide();
+            that.wrapper = element.wrap(createWrapper(options, element, that._isHorizontal)).hide().parents(".k-slider");
 
             if (options.showButtons) {
-                element.before(createButton(options, "increase", that._isHorizontal, that._isRtl))
+                that.wrapper.find(".k-slider-track-wrap")
+                       .after(createButton(options, "increase", that._isHorizontal, that._isRtl))
                        .before(createButton(options, "decrease", that._isHorizontal, that._isRtl));
             }
 
@@ -586,24 +539,24 @@ var __meta__ = { // jshint ignore:line
         style = style ? " style='" + style + "'" : "";
 
         return "<div class='k-widget k-slider" + orientationCssClass + cssClasses + "'" + style + ">" +
-               "<div class='k-slider-wrap" + (options.showButtons ? " k-slider-buttons" : "") + tickPlacementCssClass +
+               "<div class='k-slider-track-wrap" + tickPlacementCssClass +
                "'></div></div>";
     }
 
-    function createButton (options, type, isHorizontal, isRtl) {
+    function createButton (options, type, isHorizontal) {
         var buttonCssClass = "";
 
         if(isHorizontal) {
-            if ((!isRtl && type == "increase") || (isRtl && type != "increase")) {
-                buttonCssClass = "k-i-arrow-60-right";
+            if (type === "increase") {
+                buttonCssClass = "k-i-arrow-e";
             } else {
-                buttonCssClass = "k-i-arrow-60-left";
+                buttonCssClass = "k-i-arrow-w";
             }
         } else {
             if (type == "increase") {
-                buttonCssClass = "k-i-arrow-60-up";
+                buttonCssClass = "k-i-arrow-n";
             } else {
-                buttonCssClass = "k-i-arrow-60-down";
+                buttonCssClass = "k-i-arrow-s";
             }
         }
 
@@ -619,7 +572,7 @@ var __meta__ = { // jshint ignore:line
             i;
 
         for(i = 0; i < count; i++) {
-            result += "<li class='k-tick'>&nbsp;</li>";
+            result += "<li class='k-tick'></li>";
         }
 
         result += "</ul>";
@@ -869,15 +822,9 @@ var __meta__ = { // jshint ignore:line
                         $(e.currentTarget).removeClass("k-state-hover");
                         this._clearTimer();
                     }, that))
-                    .eq(0)
                     .on(MOUSE_DOWN, proxy(function (e) {
-                        mouseDownHandler(e, 1);
-                    }, that))
-                    .click(false)
-                    .end()
-                    .eq(1)
-                    .on(MOUSE_DOWN, proxy(function (e) {
-                        mouseDownHandler(e, -1);
+                        var sign = $(e.target).closest(".k-button").is(".k-button-increase") ? 1 : -1;
+                        mouseDownHandler(e, sign);
                     }, that))
                     .on("click", kendo.preventDefault);
             }
@@ -1049,12 +996,10 @@ var __meta__ = { // jshint ignore:line
                 index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
                 selection = parseInt(that._pixelSteps[index], 10),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
-
-                halfDragHanndle = parseInt(that._outerSize(dragHandle) / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
             selectionDiv[that._sizeFn](that._isRtl ? that._maxSelection - selection : selection);
-            dragHandle.css(that._position, selection - halfDragHanndle - rtlCorrection);
+            dragHandle.css(that._position, selection - rtlCorrection);
         }
 
         moveSelection(options.value);
@@ -1781,12 +1726,11 @@ var __meta__ = { // jshint ignore:line
                 selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
-                halfHandle = parseInt(that._outerSize(dragHandles.eq(0)) / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
-            dragHandles.eq(0).css(that._position, selectionStart - halfHandle - rtlCorrection)
+            dragHandles.eq(0).css(that._position, selectionStart - rtlCorrection)
                        .end()
-                       .eq(1).css(that._position, selectionEnd - halfHandle - rtlCorrection);
+                       .eq(1).css(that._position, selectionEnd - rtlCorrection);
 
             makeSelection(selectionStart, selectionEnd);
         }

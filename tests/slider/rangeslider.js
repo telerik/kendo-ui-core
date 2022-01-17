@@ -378,7 +378,7 @@
             assert.equal(inputs.eq(1).val(), 0);
         });
 
-        it("rangeSlider resize should resize", function() {
+        it.skip("rangeSlider resize should resize", function() {
             var rangeSlider = newRangeSlider({ min: -2, max: 40 }, $("<div><input value='0' /><input value='0' /></div>"));
 
             var initialWidth = rangeSlider._trackDiv.width();

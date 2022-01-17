@@ -182,7 +182,7 @@ The following table showcases the old and updated versions of the Kendo state cl
 | `DateRangePicker` | [DateRangePicker Appearance Documentation]()
 | `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug datetimepicker_appearance%})
 | `DropDownList` | [DropDownList Appearance Documentation]({% slug appearance_kendoui_dropdownlist_widget %})
-| `DropDownTree` | [DropDownTree Appearance Documentation]({% slug appearance_kendoui_dropdowntree_widget %})
+| `DropDownTree` | [DropDownTree Appearance Documentation]({% slug appearance_kendoui_dropdowntree %})
 | `FloatingActionButton` | [FloatingActionButton Appearance Documentation]({% slug appearance_floatingactionbutton_widget %})
 | `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})
 | `Menu` | [Menu Appearance Documentation]({% slug appearance_kendoui_menu %})
