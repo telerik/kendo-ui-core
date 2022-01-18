@@ -317,11 +317,18 @@ span.k-sparkline,
     > .k-button {
         margin: 0;
         padding: 0;
+        width: auto;
+        height: auto;
         border-color: transparent;
         border-radius: 16px;
-        line-height: 10px;
+        line-height: 1;
         background: none;
         position: absolute;
+
+        .k-icon {
+            min-width: 0;
+            min-height: 0;
+        }
     }
 
     .k-navigator-n,

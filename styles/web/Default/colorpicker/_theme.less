@@ -106,12 +106,6 @@
         @color-preview-border
     );
 
-    &::before {
-        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAuSURBVHgBxYyxDQAwDMJIL+YT+DjtzFRliUfLcklqBCRT4eCTxbD6kdL2/LgYXqpvCbs3kBv/AAAAAElFTkSuQmCC");
-        background-size: contain;
-        background-position: 0;
-    }
-
     &:hover,
     &.k-state-hover,
     &.k-hover {
@@ -119,12 +113,20 @@
     }
 }
 
-// No Color
-.k-no-color::after {
+.k-color-preview-mask::before {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAuSURBVHgBxYyxDQAwDMJIL+YT+DjtzFRliUfLcklqBCRT4eCTxbD6kdL2/LgYXqpvCbs3kBv/AAAAAElFTkSuQmCC");
+    background-size: contain;
+    background-position: 0 0;
+}
+
+// Color Preview No Color
+.k-no-color .k-color-preview-mask::before {
+    content: "";
     @no-color-svg: escape('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" version="1.1"><line x1="0" x2="20" y1="0" y2="20" stroke="@{color-preview-no-color-text}" stroke-width="1"/></svg>');
     background-image: url('data:image/svg+xml,@{no-color-svg}');
     background-color: @color-preview-no-color-bg;
     background-size: 100% 100%;
+    background-position: 0 0;
 }
 
 

@@ -12,7 +12,7 @@
                 }
 
                 return this.trigger({ type: "keypress", keyCode: key });
-            }
+            };
             input = $("<input />").appendTo(Mocha.fixture);
             select = $("<select />").appendTo(Mocha.fixture);
         });
@@ -682,6 +682,9 @@
         it("resize popup on search when autoWidth is enabled", function(done) {
             kendo.effects.enable();
             var data = [{ text: "Foooooooooooooo", value: 1, type: "a" }, { text: "Bar", value: 2, type: "b" }, { text: "Baz", value: 3, type: "a" }];
+
+            input.css("width", 200);
+
             var dropdownlist = new DropDownList(input, {
                 autoWidth: true,
                 dataTextField: "ProductName",
@@ -746,12 +749,12 @@
         it("enabled autoWidth disables X scrolling", function() {
             var dropdownlist = new DropDownList(input, {
                 autoWidth: true,
-                animation:{
+                animation: {
                     open: {
-                        duration:0
+                        duration: 0
                     },
                     close: {
-                        duration:0
+                        duration: 0
                     },
                 },
                 dataSource: {
@@ -761,7 +764,7 @@
             });
 
             dropdownlist.open();
-            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto")
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto");
         });
 
         it("removes filtering expression if field matches the dataTextField", function() {

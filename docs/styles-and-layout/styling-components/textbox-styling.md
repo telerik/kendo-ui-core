@@ -40,7 +40,7 @@ The following example demonstrates the complete HTML structure:
 </span>
 ```
 
-For additional information regarding the available values for each appearance property, visit the [Appearance article]({% slug textbox_appearance %}) of the Kendo UI TextBox.
+For additional information regarding the available values for each appearance property, visit the [Appearance article]({% slug appearance_kendoui_textbox_widget %}) of the Kendo UI TextBox.
 
 ## Visual Backwards Compatibility
 
@@ -49,4 +49,4 @@ In order to achieve the same look and feel as the old rendering, the element ref
 ## See Also
 
 * [Styling Overview Article]({% slug components_rendering_overview %})
-* [Kendo TextBox Appearance]({% slug textbox_appearance %})
+* [Kendo TextBox Appearance]({% slug appearance_kendoui_textbox_widget %})

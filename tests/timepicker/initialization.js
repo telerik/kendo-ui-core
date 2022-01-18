@@ -1,3 +1,4 @@
+/* global timepicker */
 (function() {
     var TimeView = kendo.TimeView,
         TimePicker = kendo.ui.TimePicker,
@@ -217,7 +218,7 @@
             assert.equal(timepicker.timeView.ul.children(":first").text(), "6:00 PM");
         });
 
-        it("TimePicker normilize options depending on the options.culture", function() {
+        it("TimePicker normalize options depending on the options.culture", function() {
             var timepicker = input.kendoTimePicker({
                 culture: "bg-BG"
             }).data("kendoTimePicker");
@@ -246,8 +247,8 @@
 
         if (!kendo.support.touch) {
             it("TimePicker changes the type of the input", function() {
-                input = $("<input type='date'/>").appendTo(Mocha.fixture),
-                    timepicker = input.kendoTimePicker().data("kendoTimePicker");
+                input = $("<input type='date'/>").appendTo(Mocha.fixture);
+                var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
                 assert.equal(timepicker.element[0].type, "text");
             });
@@ -256,7 +257,7 @@
         it("TimePicker does not set width if list has style.width", function() {
             var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
-            timepicker.timeView.list.width(400);
+            timepicker.timeView.list.outerWidth(400);
 
             timepicker.open();
 
@@ -318,7 +319,7 @@
 
             timepicker.open();
 
-            assert.equal(timepicker.timeView.list.height(), 100)
+            assert.equal(timepicker.timeView.list.height(), 100);
         });
 
         it("TimePicker resize height after setOptions", function() {
@@ -336,7 +337,7 @@
 
             timepicker.open();
 
-            assert.equal(timepicker.timeView.list.height(), 200)
+            assert.equal(timepicker.timeView.list.height(), 200);
         });
 
         it("TimePicker is disabled when placed in disabled fieldset", function() {
@@ -350,7 +351,7 @@
             var timepicker = input.kendoTimePicker({
                 min: new Date(2000, 0, 1, 22, 0, 0),
                 max: new Date(2000, 0, 2, 22, 0, 0)
-            }).data("kendoTimePicker")
+            }).data("kendoTimePicker");
 
             timepicker.setOptions({
                 max: new Date(2000, 0, 1, 23, 0, 0)
@@ -363,10 +364,12 @@
         it("timepicker scrolls to selected value", function() {
             var timepicker = input.kendoTimePicker({
                 value: "10:00 AM"
-            }).data("kendoTimePicker")
+            }).data("kendoTimePicker");
+
             timepicker.open();
-            var isScrolled = !timepicker.timeView.list[0].scrollTop == 0;
-            assert.equal(isScrolled, true)
+
+            var isScrolled = !timepicker.timeView.ul[0].scrollTop == 0;
+            assert.equal(isScrolled, true);
         });
 
         it("timepicker renders formatted value even when out of range", function() {

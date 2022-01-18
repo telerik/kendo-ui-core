@@ -160,41 +160,41 @@ Apart from the new styling options, the state classes have also been changed. Th
 
 The following table showcases the old and updated versions of the Kendo state classes:
 
-| Old Class   | New Class |
-|:---         |:---       |
-| `k-state-default` | N/A
-| `k-state-active` | `k-active`
-| `k-state-selected` | `k-selected`
-| `k-state-disabled` | `k-disabled`
-| `k-state-focus` | `k-focus`
-| `k-state-hover` | `k-hover`
+| Old Class          | New Class    |
+|:-------------------|:-------------|
+| `k-state-default`  | N/A          |
+| `k-state-active`   | `k-active`   |
+| `k-state-selected` | `k-selected` |
+| `k-state-disabled` | `k-disabled` |
+| `k-state-focus`    | `k-focus`    |
+| `k-state-hover`    | `k-hover`    |
 
 ## Updated Components
 
-| Component   | Appearance Documentation  |
-|:---         |:---       |
-| `AutoComplete` | [AutoComplete Appearance Documentation]({% slug sizedimensions_kendoui_autocomplete %})
-| `Button` | [Button Appearance Documentation]({% slug button_styling %})
-| `ColorPicker` | [ColorPicker Appearance Documentation]({% slug appearance_kendoui_colorpicker_widget %})
-| `ComboBox` | [ComboBox Appearance Documentation]({% slug appearance_kendoui_combobox %})
-| `DateInput` | [DateInput Appearance Documentation]()
-| `DatePicker` | [DatePicker Appearance Documentation]({% slug datepicker_appearance %})
-| `DateRangePicker` | [DateRangePicker Appearance Documentation]()
-| `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug datetimepicker_appearance%})
-| `DropDownList` | [DropDownList Appearance Documentation]({% slug appearance_kendoui_dropdownlist_widget %})
-| `DropDownTree` | [DropDownTree Appearance Documentation]({% slug appearance_kendoui_dropdowntree %})
-| `FloatingActionButton` | [FloatingActionButton Appearance Documentation]({% slug appearance_floatingactionbutton_widget %})
-| `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})
-| `Menu` | [Menu Appearance Documentation]({% slug appearance_kendoui_menu %})
-| `MultiColumnComboBox` | [MultiColumnComboBox Appearance Documentation]({% slug appearance_kendoui_multicolumncombobox_widget %})
-| `MultiSelect` | [MultiSelect Appearance Documentation]({% slug appearance_kendoui_multiselect_widget %})
-| `NumericTextBox` | [NumericTextBox Appearance Documentation]()
-| `Slider` | [Slider Appearance Documentation]({% slug appearance_kendoui_slider_widget %})
-| `Switch` | [Switch Appearance Documentation]({% slug appearance_kendoui_switch_widget %})
-| `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
-| `TextBox` | [TextBox Appearance Documentation]()
-| `TimePicker` | [TimePicker Appearance Documentation]()
-| `TreeView` | [TreeView Appearance Documentation]({% slug appearance_kendoui_treeview_widget %})
+| Component              | Appearance Documentation                                                                                 |
+|:-----------------------|:---------------------------------------------------------------------------------------------------------|
+| `AutoComplete`         | [AutoComplete Appearance Documentation]({% slug sizedimensions_kendoui_autocomplete %})                  |
+| `Button`               | [Button Appearance Documentation]({% slug button_styling %})                                             |
+| `ColorPicker`          | [ColorPicker Appearance Documentation]({% slug appearance_kendoui_colorpicker_widget %})                 |
+| `ComboBox`             | [ComboBox Appearance Documentation]({% slug appearance_kendoui_combobox %})                              |
+| `DateInput`            | [DateInput Appearance Documentation]({% slug appearance_kendoui_dateinput_widget %})                     |
+| `DatePicker`           | [DatePicker Appearance Documentation]({% slug appearance_kendoui_datepicker_widget %})                   |
+| `DateRangePicker`      | [DateRangePicker Appearance Documentation]({% slug appearance_kendoui_daterangepicker_widget %})         |
+| `DateTimePicker`       | [DateTimePicker Appearance Documentation]({% slug appearance_kendoui_datetimepicker_widget %})           |
+| `DropDownList`         | [DropDownList Appearance Documentation]({% slug appearance_kendoui_dropdownlist_widget %})               |
+| `DropDownTree`         | [DropDownTree Appearance Documentation]({% slug appearance_kendoui_dropdowntree %})                      |
+| `FloatingActionButton` | [FloatingActionButton Appearance Documentation]({% slug appearance_floatingactionbutton_widget %})       |
+| `MaskedTextBox`        | [MaskedTextBox Appearance Documentation]({% slug maskedtextbox_appearance %})                            |
+| `Menu`                 | [Menu Appearance Documentation]({% slug appearance_kendoui_menu %})                                      |
+| `MultiColumnComboBox`  | [MultiColumnComboBox Appearance Documentation]({% slug appearance_kendoui_multicolumncombobox_widget %}) |
+| `MultiSelect`          | [MultiSelect Appearance Documentation]({% slug appearance_kendoui_multiselect_widget %})                 |
+| `NumericTextBox`       | [NumericTextBox Appearance Documentation]({% slug appearance_kendoui_numerictextbox_widget %})           |
+| `Slider`               | [Slider Appearance Documentation]({% slug appearance_kendoui_slider_widget %})                           |
+| `Switch`               | [Switch Appearance Documentation]({% slug appearance_kendoui_switch_widget %})                           |
+| `TextArea`             | [TextArea Appearance Documentation]({% slug textarea_appearance %})                                      |
+| `TextBox`              | [TextBox Appearance Documentation]({% slug appearance_kendoui_textbox_widget %})                         |
+| `TimePicker`           | [TimePicker Appearance Documentation]({% slug appearance_kendoui_timepicker_widget %})                   |
+| `TreeView`             | [TreeView Appearance Documentation]({% slug appearance_kendoui_treeview_widget %})                       |
 
 ## LESS Themes Migration
 

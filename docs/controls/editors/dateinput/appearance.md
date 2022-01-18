@@ -1,12 +1,12 @@
 ---
-title: Styling
-page_title: jQuery DateInput Documentation | DateInput Styling
+title: Appearance
+page_title: jQuery DateInput Documentation | DateInput Appearance
 description: "Learn how to apply different styling options to the DateInput widget."
-slug: dateinput_styling
+slug: appearance_kendoui_dateinput_widget
 position: 2
 ---
 
-# DateInput Styling
+# DateInput Appearance
 
 > As of Kendo UI R1 2022, the DateInput widget uses brand new rendering.
 
@@ -14,7 +14,7 @@ In this article, you will find information about the new rendering of the Kendo 
 
 For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Styling Demo of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/styling).
+For a live example, visit the [Appearance Demo of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/appearance).
 
 ## Options
 
@@ -131,5 +131,5 @@ $(".k-input-inner") // Returns a reference to the DateInput element in the new r
 ## See Also
 
 * [Rendering Overview Article]({% slug components_rendering_overview %})
-* [Styling Demo of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/styling)
+* [Appearance Demo of the DateInput](https://demos.telerik.com/kendo-ui/dateinput/appearance)
 * [JavaScript API Reference of the DateInput](/api/javascript/ui/dateinput)

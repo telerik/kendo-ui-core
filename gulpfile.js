@@ -70,35 +70,6 @@ gulp.task("css-assets", function() {
         .pipe(gulp.dest("dist/styles"));
 });
 
-gulp.task("build-skin", ["css-assets"], function() {
-    var resumeOnErrors = lazypipe()
-        .pipe(plumber, {
-            errorHandler: function (err) {
-                console.log(err);
-                this.emit('end');
-            }
-        });
-
-    var mapLogger = logger({ after: 'source map complete!', extname: '.css.map', showChange: true });
-
-    var allFiles = "styles/**/*.less";
-    var filesToBuild = argv.s || 'styles/**/kendo.*.less';
-
-    return gulp.src(allFiles)
-        .pipe(resumeOnErrors())
-        .pipe(cssUtils.cacheLessDependencies())
-        .pipe(filter([
-            filesToBuild.replace(/(styles|mobile|web)/, "**")
-        ]))
-        .pipe(sourcemaps.init())
-        .pipe(cssUtils.fromLess())
-        .pipe(postcss(postcssPlugins))
-        .pipe(mapLogger)
-        .pipe(sourcemaps.write("maps", { sourceRoot: "../../../../styles" }))
-        .pipe(gulp.dest('dist/styles'))
-        .pipe(browserSync.stream({ match: '**/*.css' }));
-});
-
 gulp.task("less",function() {
     var css = gulp.src(`styles/${argv.styles || '**/kendo*.less'}`, { base: "styles" })
         .pipe(license())
@@ -121,11 +92,6 @@ gulp.task("less",function() {
 });
 
 gulp.task("styles", [ "less", "css-assets" ]);
-
-gulp.task("watch-styles", [ "build-skin", "css-assets" ], function() {
-    browserSync.init({ proxy: "localhost", open: false });
-    return gulp.watch("styles/**/*.less", [ "build-skin" ]);
-});
 
 // cloning those somehow fails, I think that it is due to the RTL symbols in the culture
 function cultures() {

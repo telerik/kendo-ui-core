@@ -22,7 +22,7 @@ The R1 2022 release introduces new rendering for several components. In the long
 
 The new rendering gives developers more flexibility when customizing the look-and-feel of our components. The Kendo UI themes support several common options on a component level, which allow customizing the appearance of the component. This helps to avoid the need of manually overriding the CSS styles of a component.
 
-The feedback we have received from our customers shows that they need an easier way of modifying the appearance of the components. The new rendering aims to ease the customization of the components and to allow developers to implement any design requirements with less work. 
+The feedback we have received from our customers shows that they need an easier way of modifying the appearance of the components. Many of our customers prefer to customize the default themes, so that the components match the look and feel of the application they are used in. The new rendering aims to ease the customization of the components and to allow developers to implement any design requirements with less work. 
 
 ## Styling Options
 
@@ -148,6 +148,21 @@ The following image demonstrates the appearance of a Button, with different `Fil
 
 For more information about the available `FillMode` option values, visit the [Appearance documentation](#updated-components) of the respective component.
 
+## State Classes
+
+In addition to the new styling options, the state classes have also been changed. The `k-state-default` class has been completely removed from the components, except for the PivotGrid, in which there is JavaScript logic that relies on this class.
+
+The following table shows the old and the updated versions of the state classes:
+
+| Old Class   | New Class |
+|:---         |:---       |
+| `k-state-default` | N/A
+| `k-state-active` | `k-active`
+| `k-state-selected` | `k-selected`
+| `k-state-disabled` | `k-disabled`
+| `k-state-focus` | `k-focus`
+| `k-state-hover` | `k-hover`
+
 ## Updated Components
 
 | Component   | Appearance Documentation  |
@@ -157,21 +172,22 @@ For more information about the available `FillMode` option values, visit the [Ap
 | `CheckBox` | [CheckBox Appearance Documentation]({% slug checkbox_appearance %})
 | `ColorPicker` | [ColorPicker Appearance Documentation]({% slug appearance_colorpicker_aspnetcore %})
 | `ComboBox` | [ComboBox Appearance Documentation]({% slug appearance_combobox_aspnetcore %})
-| `DateInput` | 
+| `DateInput` | [DateInput Appearance Documentation]({% slug appearance_dateinput %})
 | `DatePicker` | [DatePicker Appearance Documentation]({% slug appearance_datepicker_aspnetcore %})
 | `DateRangePicker` | [DateRangePicker Appearance Documentation]({% slug appearance_daterangepicker_aspnetcore %})
 | `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug appearance_datetimepicker_aspnetcore %})
 | `DropDownList` | [DropDownList Appearance Documentation]({% slug appearance_dropdownlist_aspnetcore %})
-| `DropDownTree` | 
-| `MaskedTextBox` | 
-| `MultiColumnComboBox` | 
-| `MultiSelect` | 
+| `DropDownTree` | [DropDownTree Appearance Documentation]({% slug appearance_dropdowntree %})
+| `MaskedTextBox` | [MaskedTextBox Appearance Documentation]({% slug appearance_maskedtextbox %})
+| `MultiColumnComboBox` | [MultiColumnComboBox Appearance Documentation]({% slug appearance_multicolumncombobox %})
+| `MultiSelect` | [MultiSelect Appearance Documentation]({% slug appearance_multiselect %})
 | `NumericTextBox` | [NumericTextBox Appearance Documentation]({% slug numerictextbox_appearance %})
 | `RadioButton` | [RadioButton Appearance Documentation]({% slug radiobutton_appearance %})
 | `Switch` | [Switch Appearance Documentation]({% slug switch_appearance %})
 | `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
 | `TextBox` | [TextBox Appearance Documentation]({% slug textbox_appearance %})
-| `TimePicker` | 
+| `TimePicker` | [TimePicker Appearance Documentation]({% slug appearance_timepicker %})
+| `TreeView` | [TreeView Appearance Documentation]({% slug appearance_treeview %})
 
 ## LESS Themes Migration
 

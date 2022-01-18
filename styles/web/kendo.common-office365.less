@@ -1,11 +1,67 @@
 @import "Office365/_variables.less";
 
-@input-height: 1.65em;
-@input-default-width: 12.4em;
+// Inputs & Pickers
+
+@input-default-width: 100%;
+
 @input-border-width: 1px;
-@input-padding-x: 0;
+@input-border-height: ( @input-border-width * 2 );
+@input-border-radius: null;
+
+@input-padding-x: @padding-x;
 @input-padding-y: 0.17857143em;
-@input-indent: .571em;
+@input-font-family: inherit;
+@input-font-size: inherit;
+@input-line-height: 1.65em;
+
+@input-values-margin-y: 2px;
+@input-values-margin-x: @input-values-margin-y;
+
+@input-clear-value-text: null;
+@input-clear-value-opacity: .5;
+@input-clear-value-hover-text: null;
+@input-clear-value-hover-opacity: 1;
+
+@input-button-width: @button-inner-calc-size;
+@input-button-border-width: 0px;
+@input-spinner-width: @button-inner-calc-size;
+@input-spinner-icon-offset: 2px;
+
+
+// List
+
+@kendo-list-padding-x: 2px;
+@kendo-list-padding-y: 2px;
+
+@kendo-list-font-family: @font-family;
+@kendo-list-font-size: @font-size;
+@kendo-list-line-height: @line-height;
+
+@kendo-list-item-padding-x: @spacing[2];
+@kendo-list-item-padding-y: @spacing[1];
+@kendo-list-item-border-radius: 0;
+
+
+// Slider
+
+@kendo-slider-size: 200px;
+
+@kendo-slider-font-family: @font-family;
+@kendo-slider-font-size: @font-size;
+@kendo-slider-line-height: @line-height;
+
+@kendo-slider-track-size: 2px;
+@kendo-slider-track-border-width: 0;
+@kendo-slider-track-border-radius: 0;
+
+@kendo-slider-thumb-width: 8px;
+@kendo-slider-thumb-height: 16px;
+@kendo-slider-thumb-border-width: 0;
+@kendo-slider-thumb-border-radius: 0;
+
+
+// Inputs old
+@input-height: 1.65em;
 @input-offset: (@input-height + .35em);
 
 @line-height: (20 / 14);
@@ -97,7 +153,31 @@
 
 @toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
-@treeview-inner-padding: 1px 0.3333em 1px 0.25em;
+@kendo-treeview-font-family: @font-family;
+/// Font size of the treeview component.
+/// @group treeview
+@kendo-treeview-font-size: @font-size;
+/// Line height of the treeview component.
+/// @group treeview
+@kendo-treeview-line-height: @line-height;
+
+/// Indentation of child groups in treeview component.
+/// @group treeview
+@kendo-treeview-indent: 16px;
+
+/// Horizontal padding of treeview items.
+/// @group treeview
+@kendo-treeview-item-padding-x: @spacing[2];
+/// Vertical padding of treeview items.
+/// @group treeview
+@kendo-treeview-item-padding-y: @spacing[1];
+/// Border width of treeview items.
+/// @group treeview
+@kendo-treeview-item-border-width: 0px;
+/// Border radius of treeview items.
+/// @group treeview
+@kendo-treeview-item-border-radius: 0;
+
 @scheduler-link-padding: 0 1.1em;
 @grid-header-padding: .22em .2em .28em;
 @grid-th-padding: .5em .6em .4em .6em;
@@ -252,7 +332,8 @@
 
 @switch-label-position: calc(@switch-label-outer-spacing - @switch-container-border-width);
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
-@switch-on-left-x: calc(100% - @switch-handle-size);
+@switch-on-left-x: calc(100% - (@switch-handle-size / 2) - @switch-container-padding-x - @switch-container-border-width);
+@switch-on-right-x: calc( (@switch-handle-size / 2) + @switch-container-padding-x + @switch-container-border-width);
 
 
 // Pager
@@ -1177,7 +1258,7 @@
 // Chip
 @chips-margin: 8px;
 
-@chip-padding-x: 0px;
+@chip-padding-x: 4px;
 @chip-padding-y: 4px;
 @chip-height: 24px;
 @chip-border-radius: calc( @chip-height / 2);
@@ -1320,69 +1401,8 @@
     margin-left: 4px;
 }
 
-.k-gantt-toolbar .k-gantt-views {
-    text-transform: lowercase;
-}
-
-.k-webkit .k-combobox .k-dropdown-wrap:before,
-.k-webkit .k-picker-wrap:before,
-.k-webkit .k-numeric-wrap:before
-{
-    padding-bottom: 0.3em;
-}
-
-.k-filter-row .k-button {
-    line-height: 1.14em;
-}
-
-.k-combobox > .k-dropdown-wrap > .k-clear-value {
-    right: calc(@combobox-clear-icon-offset);
-}
-
-.k-autocomplete,
-.k-combobox > .k-dropdown-wrap {
-    &.k-state-border-down {
-       > .k-clear-value {
-           margin-top: -1px;
-        }
-    }
-}
-
-.k-popup.k-list-container,
 .k-popup.k-calendar-container {
     padding: 0;
-}
-
-.k-popup .k-list .k-item,
-.k-fieldselector .k-list .k-item {
-    min-height: 2em;
-    line-height: 2em;
-}
-
-.k-popup .k-list .k-item,
-.k-popup > .k-group-header,
-.k-fieldselector .k-list .k-item,
-.k-list-optionlabel, .k-popup > .k-static-header {
-    padding: 1px 7px 1px 7px;
-}
-
-.k-fieldselector .k-list .k-item,
-.k-list-optionlabel.k-state-focused,
-.k-list-optionlabel.k-state-selected {
-    padding: 0 6px;
-}
-
-.k-numerictextbox .k-link .k-i-arrow-60-up {
-    vertical-align: bottom;
-}
-
-.k-numerictextbox .k-link .k-i-arrow-60-down {
-    vertical-align: top;
-}
-
-.k-treeview .k-in {
-    line-height: 1.143em;
-    padding: .429em .571em;
 }
 
 .k-ghost-splitbar-vertical,
@@ -1471,9 +1491,8 @@
     padding: 6px 15px 15px;
 }
 
-.k-filter-help-text,
-.k-filter-menu .k-widget,
-.k-filter-menu .k-textbox {
+.k-filter-help-text
+{
     margin: 0.429em 0 0;
 }
 
@@ -1485,28 +1504,9 @@
     float: right;
 }
 
-.k-fieldselector .k-list li.k-item {
-    line-height: 1.231em;
-    padding: .192em 3.9em .192em 0;
-}
-
-.k-pivot-toolbar .k-button {
-    padding: .5em 5em .5em .308em;
-}
-
 .k-pivot-layout > tbody > tr:first-child > td:first-child {
     border-bottom-width: 1px;
     border-bottom-style: solid;
-}
-
-.k-field-actions {
-    right: 4px;
-    top: 6px;
-}
-
-.k-pivot-configurator-settings .k-field-actions {
-    right: 2px;
-    top: 2px;
 }
 
 .k-gantt-toolbar {
@@ -1625,12 +1625,6 @@
     border-radius: 0;
 }
 
-.k-rtl .k-dropdown-wrap,
-.k-rtl .k-picker-wrap,
-.k-rtl .k-numeric-wrap {
-  padding-left: 2em;
-}
-
 .k-progressbar-horizontal {
     height: 1em;
 }
@@ -1641,42 +1635,6 @@
 
 .k-progress-status-wrap {
     line-height: 1em;
-}
-
-.k-slider-track {
-    border-width: 0;
-}
-
-.k-slider-horizontal .k-slider-track,
-.k-slider-horizontal .k-slider-selection {
-    height: 2px;
-    margin-top: -1px;
-}
-
-.k-slider-vertical .k-slider-track,
-.k-slider-vertical .k-slider-selection {
-    width: 2px;
-    margin-left: -1px;
-}
-
-.k-slider-horizontal .k-draghandle
-{
-    width: 6px;
-    height: 18px;
-    top: -9px;
-}
-
-.k-slider-vertical .k-draghandle
-{
-    width: 18px;
-    height: 6px;
-    left: -9px;
-}
-
-.k-widget.k-slider .k-slider-buttons .k-button
-{
-    border-width: 0;
-    background: transparent;
 }
 
 .editorToolbarWindow {
@@ -1716,21 +1674,6 @@
 //RTL
 .k-rtl,
 [dir="rtl"] {
-    .k-widget.k-datetimepicker .k-picker-wrap .k-icon {
-        margin: 0 2px;
-    }
-
-    .k-widget.k-autocomplete > .k-clear-value,
-    .k-widget.k-multiselect > .k-multiselect-wrap > .k-clear-value {
-        right: initial;
-        margin-right: 0;
-    }
-
-    .k-widget.k-combobox > .k-dropdown-wrap > .k-clear-value {
-        left: calc(@combobox-clear-icon-offset);
-        right: initial;
-    }
-
     .k-radio:checked + .k-radio-label:after {
         right: 5px;
     }

@@ -794,5 +794,40 @@
         multiselect.open();
     });
 
+    it("filtering accepts compound filter", function(done) {
+        var multiselect = new MultiSelect(select, {
+            dataValueField: "value",
+            dataTextField: "text",
+            dataSource: {
+                filter: [{
+                    logic: "and",
+                    filters: [{
+                        field: "disc",
+                        operator: "eq",
+                        value: false
+                    }]
+                }],
+                data: [{
+                    text: "one",
+                    value: "one",
+                    disc: false
+                }, {
+                    text: "two",
+                    value: "two",
+                    disc: true
+                }]
+            }
+        });
+
+        multiselect.bind("open", function() {
+            var items = multiselect.dataSource.view();
+
+            assert.equal(items.length, 1);
+            done();
+        });
+
+        multiselect.open();
+    });
+
     });
 }());

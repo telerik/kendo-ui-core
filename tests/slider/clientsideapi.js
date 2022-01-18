@@ -4,9 +4,8 @@
 
     function newSlider(options, sliderInput) {
         $("head").append(`<style id='slider-fix-styles'>
-            .k-slider-track {
-                width: 130px;
-                margin-left: 34px;
+            .k-slider {
+                width: 200px;
             }
         </style>`);
 
@@ -133,13 +132,20 @@
         });
 
         it("value should update slider selectionDiv", function() {
-            var slider = newSlider();
-
+            var slider = newSlider({ showButtons: false });
             var selectionDiv = slider.wrapper.find(".k-slider-selection");
 
-            slider.value(10);
+            // Initial width
+            assert.equal(selectionDiv.outerWidth(), 0);
 
-            assert.equal(selectionDiv.width(), 130);
+            // slider.value(1);
+            // assert.equal(selectionDiv.outerWidth(), 20);
+
+            // slider.value(5);
+            // assert.equal(selectionDiv.outerWidth(), 100);
+
+            slider.value(10);
+            assert.equal(selectionDiv.outerWidth(), 200);
         });
 
         it("value should be in range", function() {
@@ -548,12 +554,12 @@
         });
     });
 
-    var rangeSider;
+    var rangeSlider;
 
     describe("rangeslider destroy", function() {
         beforeEach(function() {
-            rangeSider = newRangeSlider();
-            rangeSider.destroy();
+            rangeSlider = newRangeSlider();
+            rangeSlider.destroy();
         });
 
         it("removes data", function() {
@@ -561,7 +567,7 @@
         });
 
         it("unbinds events", function() {
-            assert.isOk(!(rangeSider._events || {}).slide);
+            assert.isOk(!(rangeSlider._events || {}).slide);
         });
 
         it("unbinds mousedown", function() {

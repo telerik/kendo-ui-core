@@ -173,6 +173,23 @@ The width of the Switch.
         });
     </script>
 
+The Switch options can be changed dynamically with the `setOptions()` method.
+
+#### Example
+
+    <input id="switch" />
+
+    <script>
+      $("#switch").kendoSwitch({
+        width: 50
+      });
+
+      var switch = $("#switch").data("kendoSwitch")
+          switch.setOptions( {
+              width: 200
+          })
+    </script>
+
 ## Methods
 
 ### check

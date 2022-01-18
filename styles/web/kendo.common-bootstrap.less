@@ -1,11 +1,67 @@
 @import "Bootstrap/_variables.less";
 
-@input-height: 1.93571428em;
-@input-default-width: 12.4em;
+// Inputs & Pickers
+
+@input-default-width: 100%;
+
 @input-border-width: 1px;
-@input-padding-x: 0;
-@input-padding-y: 0.17857143em;
-@input-indent: .8em;
+@input-border-height: ( @input-border-width * 2 );
+@input-border-radius: null;
+
+@input-padding-x: @padding-x;
+@input-padding-y: 0.167em;
+@input-font-family: inherit;
+@input-font-size: inherit;
+@input-line-height: 1.952em;
+
+@input-values-margin-y: 2px;
+@input-values-margin-x: @input-values-margin-y;
+
+@input-clear-value-text: null;
+@input-clear-value-opacity: .5;
+@input-clear-value-hover-text: null;
+@input-clear-value-hover-opacity: 1;
+
+@input-button-width: @button-inner-calc-size;
+@input-button-border-width: 0px;
+@input-spinner-width: @button-inner-calc-size;
+@input-spinner-icon-offset: 2px;
+
+
+// List
+
+@kendo-list-padding-x: 0;
+@kendo-list-padding-y: 0;
+
+@kendo-list-font-family: @font-family;
+@kendo-list-font-size: @font-size;
+@kendo-list-line-height: @line-height;
+
+@kendo-list-item-padding-x: @spacing[2];
+@kendo-list-item-padding-y: @spacing[1];
+@kendo-list-item-border-radius: 0;
+
+
+// Slider
+
+@kendo-slider-size: 200px;
+
+@kendo-slider-font-family: @font-family;
+@kendo-slider-font-size: @font-size;
+@kendo-slider-line-height: @line-height;
+
+@kendo-slider-track-size: 8px;
+@kendo-slider-track-border-width: 0;
+@kendo-slider-track-border-radius: 4px;
+
+@kendo-slider-thumb-width: 16px;
+@kendo-slider-thumb-height: 16px;
+@kendo-slider-thumb-border-width: 0;
+@kendo-slider-thumb-border-radius: 50%;
+
+
+// Inputs old
+@input-height: 1.952em;
 @input-offset: (@input-height + .35em);
 
 @line-height: (20 / 14);
@@ -97,7 +153,34 @@
 
 @toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
-@treeview-inner-padding: 0.4167em 0.6667em 0.3333em 0.5833em;
+
+// Treeview
+
+@kendo-treeview-font-family: @font-family;
+/// Font size of the treeview component.
+/// @group treeview
+@kendo-treeview-font-size: @font-size;
+/// Line height of the treeview component.
+/// @group treeview
+@kendo-treeview-line-height: @line-height;
+
+/// Indentation of child groups in treeview component.
+/// @group treeview
+@kendo-treeview-indent: 16px;
+
+/// Horizontal padding of treeview items.
+/// @group treeview
+@kendo-treeview-item-padding-x: @spacing[2];
+/// Vertical padding of treeview items.
+/// @group treeview
+@kendo-treeview-item-padding-y: @spacing[1];
+/// Border width of treeview items.
+/// @group treeview
+@kendo-treeview-item-border-width: 0px;
+/// Border radius of treeview items.
+/// @group treeview
+@kendo-treeview-item-border-radius: @spacing[1];
+
 @scheduler-link-padding: .16666em 1.1em;
 @grid-header-padding: .75em 1em .8333em;
 @grid-th-padding: .5em .6em .4em .6em;
@@ -252,7 +335,8 @@
 
 @switch-label-position: calc(@switch-label-outer-spacing - @switch-container-border-width);
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
-@switch-on-left-x: calc(100% - @switch-handle-size);
+@switch-on-left-x: calc(100% - (@switch-handle-size / 2) - @switch-container-padding-x - @switch-container-border-width);
+@switch-on-right-x: calc( (@switch-handle-size / 2) + @switch-container-padding-x + @switch-container-border-width);
 
 
 // Pager
@@ -1162,7 +1246,7 @@
 
 @chip-padding-x: 6px;
 @chip-padding-y: 4px;
-@chip-height: 32px;
+@chip-height: 28px;
 @chip-border-radius: calc( @chip-height / 2);
 @chip-font-size: 16px;
 
@@ -1305,12 +1389,6 @@
     .box-shadow(none);
 }
 
-.k-slider-track
-{
-    border-width: 1px;
-    border-style: solid;
-}
-
 .k-grouping-dropclue
 {
     margin-top: 10px;
@@ -1322,59 +1400,8 @@
     border-style: solid;
 }
 
-.k-slider-horizontal .k-slider-track,
-.k-slider-horizontal .k-slider-selection
-{
-    margin-top: -5px;
-}
-
-.k-slider-vertical .k-slider-track,
-.k-slider-vertical .k-slider-selection
-{
-    margin-left: -5px;
-}
-
-input.k-textbox {
-  height: 2.43em;
-}
-
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-dropdown-wrap .k-input,
-.k-selectbox .k-input {
-      padding: 0.167em 0;
-}
-
-.k-combobox-clearable {
-    .k-input {
-        padding-right: @combobox-padding-x;
-    }
-}
-
-.k-combobox > .k-dropdown-wrap > .k-clear-value {
-    right: calc(@combobox-clear-icon-offset);
-}
-
 .k-numerictextbox .k-link {
     height: 1.167em;
-}
-
-.k-webkit .k-rtl .k-widget .k-dropdown-wrap .k-input,
-.k-webkit .k-rtl .k-widget .k-numeric-wrap .k-input {
-    margin-right: 0;
-}
-
-.k-rtl .k-widget.k-autocomplete > .k-clear-value,
-.k-rtl .k-widget.k-multiselect > .k-multiselect-wrap > .k-clear-value {
-    right: initial;
-    margin-right: 0;
-}
-
-.k-rtl .k-widget.k-combobox > .k-dropdown-wrap > .k-clear-value {
-    left: calc(@combobox-clear-icon-offset);
-    right: initial;
 }
 
 .k-gantt .k-grid-content tr,
@@ -1396,27 +1423,4 @@ input.k-textbox {
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
     min-width: 56px;
-}
-
-.k-filtercell > span {
-    padding-right: 5.2em;
-}
-
-.k-filtercell > .k-operator-hidden {
-    padding-right: 2.7em;
-}
-
-.k-filter-row .k-dropdown-operator {
-    right: 3.0em;
-}
-
-// RTL
-.k-rtl {
-
-    .k-combobox-clearable {
-        .k-input {
-            padding-left: @combobox-padding-x;
-            padding-right: 0.167em;
-        }
-    }
 }

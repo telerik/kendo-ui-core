@@ -8,7 +8,7 @@ each( @theme-colors, {
     @name: @key;
     @color: @value;
 
-    .k-fab.k-fab-@{name} {
+    .k-fab.k-fab-solid-@{name} {
         border-color: @color;
         color: contrast( @color );
         background-color: @color;
@@ -20,7 +20,7 @@ each( @theme-colors, {
     @name: @key;
     @color: @value;
 
-    .k-state-hover.k-fab-@{name},
+    .k-state-hover.k-fab-solid-@{name},
     .k-fab.k-fab-@{name}:hover {
         border-color: darken( @color, 5% );
         background-color: darken( @color, 5% );
@@ -38,9 +38,9 @@ each( @theme-colors, {
     @name: @key;
     @color: @value;
 
-    .k-state-active.k-fab-@{name},
-    .k-state-selected.k-fab-@{name},
-    .k-fab-@{name}:active {
+    .k-state-active.k-fab-solid-@{name},
+    .k-state-selected.k-fab-solid-@{name},
+    .k-fab-solid-@{name}:active {
         border-color: darken( @color, 10%);
         background-color: darken( @color, 10%);
         box-shadow: @fab-shadow, 0px 3px 4px rgba(@color, .4);
@@ -58,8 +58,8 @@ each( @theme-colors, {
     @name: @key;
     @color: @value;
 
-    .k-state-disabled.k-fab-@{name},
-    .k-fab-@{name}:disabled {
+    .k-state-disabled.k-fab-solid-@{name},
+    .k-fab-solid-@{name}:disabled {
         background-color: tint( @color, 50% );
     }
 });

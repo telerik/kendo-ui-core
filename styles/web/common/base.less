@@ -8,10 +8,6 @@
 
 .k-no-click { pointer-events: none; }
 
-.k-floatwrap:after,.k-slider-items:after {content:"";display:block;clear:both;visibility:hidden;height:0;overflow:hidden;}
-.k-floatwrap,.k-slider-items {display:inline-block;}
-.k-floatwrap,.k-slider-items {display:block;}
-
 // main gradient
 
 .k-block,
@@ -21,14 +17,7 @@
 .k-grouping-header,
 .k-pager-wrap,
 .k-tabstrip-items .k-item,
-.k-link.k-state-hover,
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap,
-.k-dropdown-wrap.k-state-hover,
-.k-picker-wrap.k-state-hover,
-.k-numeric-wrap.k-state-hover,
-.k-draghandle {
+.k-link.k-state-hover {
     background-repeat: repeat;
     background-position: 0 center;
 }
@@ -44,26 +33,7 @@
 
 // widget
 
-.k-textbox,
-.k-textbox > input,
-.k-textbox > .k-input,
-.k-textarea,
-.k-textarea > textarea,
-.k-textarea > .k-input
-.k-multiselect .k-input,
-.k-input[type="text"],
-.k-input[type="number"],
-.k-picker-wrap .k-input {
-    font-size: 100%;
-    font-family: inherit;
-    border-style: solid;
-    border-width: 1px;
-    -webkit-appearance: none;
-}
-
 // TODO: Refactor after R1 2020; After unifying inputs features/rendering.
-.k-textbox > .k-input,
-.k-textarea > .k-input,
 .k-searchbox > .k-input {
     margin: 0;
     width: 100%;
@@ -86,9 +56,7 @@
 
 .k-widget,
 .k-block,
-.k-inline-block,
-.k-draghandle
-{
+.k-inline-block {
     border-style: solid;
     border-width: 1px;
     -webkit-appearance: none;
@@ -101,8 +69,7 @@
     outline: 0;
 }
 
-.k-widget .k-input::-ms-clear,
-.k-list-filter ::-ms-clear {
+.k-widget .k-input::-ms-clear {
     width : 0;
     height: 0;
 }
@@ -110,9 +77,7 @@
 .k-block,
 .k-widget,
 .k-grid,
-.k-slider,
 .k-splitter,
-.k-treeview,
 .k-panelbar,
 .k-content,
 .k-header-column-menu {
@@ -121,10 +86,8 @@
 }
 
 .k-block,
-.k-slider,
 .k-splitbar,
 .k-calendar,
-.k-treeview,
 .k-pager-wrap,
 .k-grid-header .k-i-link-horizontal,
 .k-header-column-menu {
@@ -186,18 +149,18 @@ input[type="reset"].k-button-expand
 }
 
 // states
-
+.k-disabled,
 .k-state-disabled,
 .k-state-disabled .k-link,
+.k-disabled .k-icon,
 .k-state-disabled .k-icon,
-.k-state-disabled .k-draghandle,
-.k-state-disabled .k-upload-button input
-{
+.k-state-disabled .k-upload-button input {
     cursor: default !important;
     pointer-events: none;
     outline: 0;
 }
 
+.k-disabled,
 .k-state-disabled
 {
     opacity:.7;
@@ -208,7 +171,9 @@ input[type="reset"].k-button-expand
 }
 
 @media print {
+    .k-disabled,
     .k-state-disabled,
+    .k-disabled .k-input,
     .k-state-disabled .k-input
     {
         opacity:1 !important;
@@ -493,13 +458,11 @@ html .k-error-colored
 .k-animation-container *,
 .k-widget *:before,
 .k-animation-container *:after,
-.k-block .k-header,
-.k-list-container {
+.k-block .k-header {
     .box-sizing(content-box);
 }
 
 .k-textbox,
-.k-autocomplete,
 .k-tabstrip > .k-content > .km-scroll-container,
 .k-block,
 .k-edit-cell .k-widget,
@@ -630,8 +593,7 @@ html .k-error-colored
 .k-column-menu .k-sprite,
 .k-grid-mobile .k-resize-handle-inner:before,
 .k-grid-mobile .k-resize-handle-inner:after,
-.k-pager-numbers .k-current-page .k-link:after,
-.k-gantt-views > .k-current-view > .k-link:after {
+.k-pager-numbers .k-current-page .k-link:after {
     .use-font-icon();
 }
 .k-icon:before {
@@ -672,21 +634,6 @@ html .k-error-colored
     vertical-align: middle;
     overflow: hidden;
     .disable-high-contrast();
-}
-
-// Header/Footer templates
-.k-list-container {
-
-    .k-footer {
-
-        // ensure right calculating of popup - expanding parent to children with margin
-        &:before,
-        &:after {
-            content: "";
-            display: block;
-            overflow: hidden;
-        }
-    }
 }
 
 // Reorder cue

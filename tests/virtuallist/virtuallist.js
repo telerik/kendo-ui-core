@@ -50,7 +50,7 @@
         }
     });
 
-    describe("VirtualList: ", function () {
+    describe("VirtualList: ", function() {
         beforeEach(function() {
             container = $("<ul id='container'></ul>").appendTo(Mocha.fixture);
 
@@ -177,7 +177,7 @@
 
         asyncDataSource.read().then(function() {
             var items = virtualList.items();
-            assert.equal(items.length, (CONTAINER_HEIGHT/20)*6);
+            assert.equal(items.length, (CONTAINER_HEIGHT / 20) * 6);
             done();
         });
     });
@@ -371,7 +371,7 @@
         asyncDataSource.read().then(function() {
             assert.isOk(virtualList.templates);
 
-            for (key in virtualList.templates) {
+            for (var key in virtualList.templates) {
                 assert.equal(typeof virtualList.templates[key], "function");
             }
             done();
@@ -967,7 +967,7 @@
 
     it("does not create elements with height larger than 250000px", function() {
         //testing with 100011 items
-        dataSource = new kendo.data.DataSource({
+        var dataSource = new kendo.data.DataSource({
             transport: {
                 read: function(options) {
                     options.success({ data: generateData(options.data), total: 100011 });
@@ -990,7 +990,7 @@
         //height is dataSource.total() * itemHeight
         assert.equal(virtualList.content.find(".k-height-container").height(), 100011 * 40);
 
-        heightPadChildren = virtualList.content.find(".k-height-container").children();
+        var heightPadChildren = virtualList.content.find(".k-height-container").children();
 
         //heightPad container is expanded by elements with max height of 250000
         //dataSource.total() * itemHeight / MaxHeightElement + 1 ("1" is added because the total height is not devided by 250000)

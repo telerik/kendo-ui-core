@@ -12,6 +12,9 @@ The MaskedTextBox provides a set of predefined mask rules and enables you to mod
 
 The default MaskedTextBox mask is an empty string which allows for any type of user input. To restrict user input, define a mask value.
 
+For a live example, visit the [Validation Demo of the MaskedTextBox](https://demos.telerik.com/kendo-ui/maskedtextbox/validation).
+
+
 ## Predefined Masks
 
 The MaskedTextBox supports the following predefined mask rules:
@@ -42,6 +45,7 @@ The MaskedTextBox enables you to define custom mask rules during initialization.
 
 > To escape any of the predefined rules, use the [`rules`](/api/web/maskedtextbox#configuration-rules) option.
 
+```dojo
    <input id="maskedtextbox">
 
     <script>
@@ -57,6 +61,7 @@ The MaskedTextBox enables you to define custom mask rules during initialization.
         });
       });
     </script>
+```
 
 ## See Also
 

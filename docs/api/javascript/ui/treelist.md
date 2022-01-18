@@ -517,7 +517,7 @@ The format string of the column that is specified through the [`format`](/api/ja
 
 The model instance to which the current table row is bound.
 
-#### Example - creating a custom column editor using the Kendo UI AutoComplete
+#### Example - creating a custom column editor using the Kendo UI AutoComplete and NumericTextBox
 
     <div id="treelist"></div>
     <script>
@@ -543,13 +543,26 @@ The model instance to which the current table row is bound.
               });
             }
           },
+          {
+            field: "number",
+            editor: function(container, options) {
+              $('<input required name="' + options.field + '"/>')
+                .appendTo(container)
+              // initialize a Kendo UI NumericTextBox
+              .kendoNumericTextBox({
+                decimals: 2,
+                step: 0.1
+              });
+            },
+            format: "{0:0}"
+          },
           { field: "position"},
           { command: [ "edit" ] }
         ],
         editable: true,
         dataSource: [
-          { id: 1, parentId: null, lastName: "Jackson", position: "CEO" },
-          { id: 2, parentId: 1, lastName: "Weber", position: "VP, Engineering" }
+          { id: 1, parentId: null, lastName: "Jackson", number: 10342.16, position: "CEO" },
+          { id: 2, parentId: 1, lastName: "Weber", number: 18031.11, position: "VP, Engineering" }
         ]
       });
     </script>

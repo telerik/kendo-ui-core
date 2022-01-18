@@ -1,16 +1,17 @@
 (function() {
-    var DropDownList = kendo.ui.DropDownList,
-        select,
-        input;
+    var DropDownList = kendo.ui.DropDownList;
+    var dropdownlist;
+    var select;
+    var input;
 
     describe("kendo.ui.DropDownList initialization", function() {
         beforeEach(function() {
             kendo.ns = "kendo-";
-            input = $("<input class='test'/>").appendTo(Mocha.fixture);
+            input = $("<input class='test' style='width: 200px' />").appendTo(Mocha.fixture);
             select = $("<select></select>").appendTo(Mocha.fixture);
         });
         afterEach(function() {
-            var element = $(document.body).find("[data-kendo-role=dropdownlist]")
+            var element = $(document.body).find("[data-kendo-role=dropdownlist]");
 
             if (element[0]) {
                 try {
@@ -38,7 +39,7 @@
             input.kendoDropDownList({ test: 1 });
 
             var options = input.data("kendoDropDownList").options;
-            assert.notEqual(options.test, undefined)
+            assert.notEqual(options.test, undefined);
             assert.equal(options.test, 1);
         });
 
@@ -229,7 +230,7 @@
             assert.isOk(dropdownlist.ul);
             assert.isOk(dropdownlist.ul.is("ul"));
             assert.isOk(dropdownlist.list.find(".k-list").attr("id"), input.attr("id") + "-list");
-            assert.equal(dropdownlist.listView.content.css("overflow"), "auto");
+            assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto");
         });
 
         it("dropdownlist initializes a popup for its items", function() {
@@ -840,7 +841,7 @@
             div.show();
             dropdown.open();
 
-            assert.equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
+            assert.equal(dropdown.popup.element.parent().outerWidth(), dropdown.wrapper.outerWidth());
         });
 
         it("dropdownlist put in hidden container can be re-bound", function() {
@@ -1024,6 +1025,7 @@
 
         it("widget throws an error when optionLabel does not match valueTemplate", function() {
             try {
+                // eslint-disable-next-line no-new
                 new DropDownList(input, {
                     optionLabel: "Select...",
                     dataTextField: "text",

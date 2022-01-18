@@ -227,9 +227,12 @@
 
 // Color Preview
 .k-color-preview {
+    width: 100%;
+    height: 100%;
     border-width: @color-preview-border-width;
     border-radius: @color-preview-border-radius;
     border-style: solid;
+    box-sizing: border-box;
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -237,22 +240,42 @@
     overflow: hidden;
     cursor: pointer;
 }
-.k-color-preview::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: relative;
-    z-index: -1;
+
+// Current Color
+.k-coloreditor-current-color {
+    cursor: pointer;
 }
 
-.k-no-color::after {
+// Icon color preview
+.k-icon-color-preview {
+    border-width: 0;
+    border-radius: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    .k-color-preview-mask {
+        width: ~"calc( @{icon-size} - 2px )";
+        height: 2px;
+    }
+}
+
+// Color Preview Mask
+.k-color-preview-mask {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.k-color-preview-mask::before {
     content: "";
     width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
 }
 
 
@@ -317,55 +340,7 @@
 
 // Colorpicker
 .k-colorpicker {
-    border-width: 0;
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: @colorpicker-line-height;
-    overflow: visible;
-    width: auto;
-    outline: 0;
-
-    .k-picker-wrap {
-        overflow: hidden;
-    }
-
-    .k-selected-color {
-        vertical-align: top;
-        display: inline-block;
-        height: calc(@input-height + .35em);
-        width: calc(@input-height + .35em);
-        position: relative;
-    }
-    .k-tool-icon {
-        position: relative;
-        top: -2px;
-        display: inline-block;
-        padding: 3px 3px 2px;
-        margin-right: 3px;
-        margin-left: 2px;
-        margin-bottom: 3px;
-        background-repeat: no-repeat;
-        vertical-align: middle;
-        width: @grid-size;
-        height: @grid-size;
-        .disable-high-contrast();
-        .k-selected-color {
-            display: block;
-            height: 3px;
-            width: @grid-size;
-            position: absolute;
-            left: 3px;
-            bottom: -3px;
-            border-radius: 0 !important;
-        }
-    }
-    .k-select {
-        cursor: pointer;
-    }
-    .k-picker-wrap .k-icon {
-        overflow:visible;
-    }
+    width: min-content;
 }
 
 .k-colorpicker-popup .k-coloreditor {

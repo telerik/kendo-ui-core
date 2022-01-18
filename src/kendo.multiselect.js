@@ -598,7 +598,7 @@ var __meta__ = { // jshint ignore:line
                 listViewFilterValue;
 
             if(listViewFilter && listViewFilter.filters.length > 0) {
-                listViewFilterValue = listViewFilter.filters[0].value.toString().toLowerCase();
+                listViewFilterValue = (listViewFilter.filters[0].value || "").toString().toLowerCase();
             }
 
             if (that._request) {

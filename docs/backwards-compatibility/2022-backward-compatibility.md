@@ -3,7 +3,7 @@ title: 2022 Releases
 page_title: 2021 Releases | Kendo UI Backwards Compatibility
 description: "Learn about the breaking changes and backwards compatibility released by Kendo UI in 2022."
 slug: breakingchanges2022_kendoui
-position: 1
+position: 0
 ---
 
 # 2022 Releases
@@ -31,10 +31,10 @@ Below you can find the list of first portion of updated components with R1 2022.
 | `Button` | [Button Appearance Documentation]({% slug button_styling %})
 | `ColorPicker` | [ColorPicker Appearance Documentation]({% slug appearance_kendoui_colorpicker_widget %})
 | `ComboBox` | [ComboBox Appearance Documentation]({% slug appearance_kendoui_combobox %})
-| `DateInput` | [DateInput Appearance Documentation]()
-| `DatePicker` | [DatePicker Appearance Documentation]({% slug datepicker_appearance %})
-| `DateRangePicker` | [DateRangePicker Appearance Documentation]()
-| `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug datetimepicker_appearance%})
+| `DateInput` | [DateInput Appearance Documentation]({% slug appearance_kendoui_dateinput_widget %})
+| `DatePicker` | [DatePicker Appearance Documentation]({% slug appearance_kendoui_datepicker_widget %})
+| `DateRangePicker` | [DateRangePicker Appearance Documentation]({% slug appearance_kendoui_daterangepicker_widget %})
+| `DateTimePicker` | [DateTimePicker Appearance Documentation]({% slug appearance_kendoui_datetimepicker_widget %})
 | `DropDownList` | [DropDownList Appearance Documentation]({% slug appearance_kendoui_dropdownlist_widget %})
 | `DropDownTree` | [DropDownTree Appearance Documentation]({% slug appearance_kendoui_dropdowntree %})
 | `FloatingActionButton` | [FloatingActionButton Appearance Documentation]({% slug appearance_floatingactionbutton_widget %})
@@ -42,10 +42,10 @@ Below you can find the list of first portion of updated components with R1 2022.
 | `Menu` | [Menu Appearance Documentation]({% slug appearance_kendoui_menu %})
 | `MultiColumnComboBox` | [MultiColumnComboBox Appearance Documentation]({% slug appearance_kendoui_multicolumncombobox_widget %})
 | `MultiSelect` | [MultiSelect Appearance Documentation]({% slug appearance_kendoui_multiselect_widget %})
-| `NumericTextBox` | [NumericTextBox Appearance Documentation]()
+| `NumericTextBox` | [NumericTextBox Appearance Documentation]({% slug appearance_kendoui_numerictextbox_widget %})
 | `Slider` | [Slider Appearance Documentation]({% slug appearance_kendoui_slider_widget %})
 | `Switch` | [Switch Appearance Documentation]({% slug appearance_kendoui_switch_widget %})
 | `TextArea` | [TextArea Appearance Documentation]({% slug textarea_appearance %})
-| `TextBox` | [TextBox Appearance Documentation]()
-| `TimePicker` | [TimePicker Appearance Documentation]()
-| `TreeView` | [TreeView Appearance Documentation]({% slug appearance_kendoui_treeview_widget %})
+| `TextBox` | [TextBox Appearance Documentation]({% slug appearance_kendoui_textbox_widget %})
+| `TimePicker` | [TimePicker Appearance Documentation]({% slug appearance_kendoui_timepicker_widget %})
+| `TreeView` | [TreeView Appearance Documentation]({% slug appearance_kendoui_treeview_widget %})`

@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.data", "./kendo.popup" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "list",
@@ -283,7 +283,7 @@ var __meta__ = { // jshint ignore:line
         _noData: function() {
             var list = this;
             var noData = $(list.noData);
-            var template = list.options.noDataTemplate === true ?  list.options.messages.noData : list.options.noDataTemplate;
+            var template = list.options.noDataTemplate === true ? list.options.messages.noData : list.options.noDataTemplate;
 
             list.angular("cleanup", function() { return { elements: noData }; });
             kendo.destroy(noData);
@@ -320,14 +320,14 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var currentOptions = that.options;
             var virtual = currentOptions.virtual;
-            var changeEventOption = {change: proxy(that._listChange, that)};
+            var changeEventOption = { change: proxy(that._listChange, that) };
             var listBoundHandler = proxy(that._listBound, that);
             var focusedElm = that._focused;
             var inputId = that.element.attr("id");
-            var labelElm = $("label[for=\"" + that.element.attr("id")  + "\"]");
+            var labelElm = $("label[for=\"" + that.element.attr("id") + "\"]");
             var labelledBy = focusedElm.attr(ARIA_LABELLEDBY);
 
-            if(!labelledBy && labelElm.length) {
+            if (!labelledBy && labelElm.length) {
                 labelledBy = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || kendo.guid());
             }
 
@@ -431,7 +431,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             if (this._isFilterEnabled() && !this.options.enforceMinLength) {
-                this._filter({word: "", open: false});
+                this._filter({ word: "", open: false });
 
                 if (this.options.highlightFirst) {
                     this.listView.focus(0);
@@ -503,26 +503,26 @@ var __meta__ = { // jshint ignore:line
             return dataSource[force ? "read" : "query"](dataSource._mergeState(dataSourceState));
         },
 
-        _pushFilterExpression: function (newExpression, filter) {
+        _pushFilterExpression: function(newExpression, filter) {
             if (isValidFilterExpr(filter) && filter.value !== "") {
                 newExpression.filters.push(filter);
             }
         },
 
-        _clearFilterExpressions: function (expression) {
+        _clearFilterExpressions: function(expression) {
             if (!expression.filters) {
                 return;
             }
 
             var filtersToRemove;
 
-            for(var i = 0; i < expression.filters.length; i++) {
+            for (var i = 0; i < expression.filters.length; i++) {
                 if ("fromFilter" in expression.filters[i]) {
                     filtersToRemove = i;
                 }
             }
 
-            if (!isNaN(filtersToRemove)){
+            if (!isNaN(filtersToRemove)) {
                 expression.filters.splice(filtersToRemove, 1);
             }
         },
@@ -622,7 +622,7 @@ var __meta__ = { // jshint ignore:line
                     filters: [],
                     fromFilter: true
                 };
-                for(var i = 0; i < filterFields.length; i++) {
+                for (var i = 0; i < filterFields.length; i++) {
                     this._pushFilterExpression(expression, that._buildExpression(word, filterFields[i]));
                 }
             } else {
@@ -651,7 +651,7 @@ var __meta__ = { // jshint ignore:line
             var list = this;
             var clearTitle = list.options.messages.clear;
 
-            if (!list._clear){
+            if (!list._clear) {
                 list._clear = $('<span unselectable="on" class="k-clear-value" title="' + clearTitle + '"><span class="k-icon k-i-x"></span></span>').attr({
                     "role": "button",
                     "tabIndex": -1
@@ -673,14 +673,14 @@ var __meta__ = { // jshint ignore:line
 
             if ((!options.enforceMinLength && !word.length) || word.length >= options.minLength) {
                 this._state = "filter";
-                if (this.listView){
+                if (this.listView) {
                     this.listView._emptySearch = !kendo.trim(word).length;
                 }
 
                 if (!this._isFilterEnabled()) {
                     this._searchByWord(word);
                 } else {
-                    this._filter({word: word, open: true});
+                    this._filter({ word: word, open: true });
                 }
             }
         },
@@ -767,14 +767,14 @@ var __meta__ = { // jshint ignore:line
                 autocomplete;
 
             if (options.suggest !== undefined) {
-                if(options.filter === "none") {
-                    if(options.suggest === true) {
+                if (options.filter === "none") {
+                    if (options.suggest === true) {
                         autocomplete = "inline";
                     } else {
                         autocomplete = "none";
                     }
                 } else {
-                    if(options.suggest === true) {
+                    if (options.suggest === true) {
                         autocomplete = "both";
                     } else {
                         autocomplete = "list";
@@ -791,7 +791,7 @@ var __meta__ = { // jshint ignore:line
                 "aria-controls": id
             });
 
-            if(that.filterInput && that.filterInput.length > 0) {
+            if (that.filterInput && that.filterInput.length > 0) {
                 that.filterInput.attr(ARIA_CONTROLS, id);
             }
 
@@ -800,12 +800,12 @@ var __meta__ = { // jshint ignore:line
             that._ariaLabel();
         },
 
-        _ariaLabel: function(){
+        _ariaLabel: function() {
             var that = this;
             var focusedElm = that._focused;
             var inputElm = that.element;
             var inputId = inputElm.attr("id");
-            var labelElm = $("label[for=\"" + inputId  + "\"]");
+            var labelElm = $("label[for=\"" + inputId + "\"]");
             var ariaLabel = inputElm.attr(ARIA_LABEL);
             var ariaLabelledBy = inputElm.attr(ARIA_LABELLEDBY);
 
@@ -815,15 +815,15 @@ var __meta__ = { // jshint ignore:line
 
             if (ariaLabel) {
                 focusedElm.attr(ARIA_LABEL, ariaLabel);
-            } else if (ariaLabelledBy){
+            } else if (ariaLabelledBy) {
                 focusedElm.attr(ARIA_LABELLEDBY, ariaLabelledBy);
-            } else if (labelElm.length){
+            } else if (labelElm.length) {
                 var labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || kendo.guid());
                 focusedElm.attr(ARIA_LABELLEDBY, labelId);
             }
         },
 
-        _generateLabelId: function(label, inputId){
+        _generateLabelId: function(label, inputId) {
             var labelId = inputId + LABELIDPART;
             label.attr("id", labelId);
 
@@ -989,7 +989,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
-            computedWidth = parseFloat(computedStyle  && computedStyle.width) || outerWidth(wrapper);
+            computedWidth = parseFloat(computedStyle && computedStyle.width) || outerWidth(wrapper);
 
             if (computedStyle && browser.msie) { // getComputedStyle returns different box in IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
@@ -1048,7 +1048,7 @@ var __meta__ = { // jshint ignore:line
                     padding = kendo.support.scrollbar();
                 }
 
-                if(this.element.parents('.k-rtl').length) {
+                if (this.element.parents('.k-rtl').length) {
                     direction = 'left';
                 }
 
@@ -1063,7 +1063,7 @@ var __meta__ = { // jshint ignore:line
             this._calculateColumnsHeaderPadding(height);
         },
 
-        _calculateColumnsHeaderPadding: function(height){
+        _calculateColumnsHeaderPadding: function(height) {
             if (this.options.columns && this.options.columns.length) {
                 var list = this;
                 var isRtl = support.isRtl(list.wrapper);
@@ -1073,7 +1073,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _refreshScroll: function () {
+        _refreshScroll: function() {
             var listView = this.listView;
             var enableYScroll = listView.element.height() > listView.content.height();
 
@@ -1114,7 +1114,7 @@ var __meta__ = { // jshint ignore:line
                 close: proxy(list._closeHandler, list),
                 animation: list.options.animation,
                 isRtl: support.isRtl(list.wrapper),
-                autosize :list.options.autoWidth
+                autosize: list.options.autoWidth
             }));
         },
 
@@ -1126,7 +1126,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var touchEnabled = support.mobileOS && (support.touch || support.MSPointers || support.pointers);
 
-            open = open !== undefined? open : !that.popup.visible();
+            open = open !== undefined ? open : !that.popup.visible();
 
             if (!preventFocus && !touchEnabled && that._focused[0] !== activeElement()) {
                 that._prevent = true;
@@ -1300,7 +1300,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _syncValueAndText: function () {
+        _syncValueAndText: function() {
             return true;
         },
 
@@ -1320,7 +1320,7 @@ var __meta__ = { // jshint ignore:line
             custom[0].selected = true;
         },
 
-        _hideBusy: function () {
+        _hideBusy: function() {
             var that = this;
             clearTimeout(that._busy);
             that._arrowIcon.removeClass(LOADING);
@@ -1329,7 +1329,7 @@ var __meta__ = { // jshint ignore:line
             that._showClear();
         },
 
-        _showBusy: function (e) {
+        _showBusy: function(e) {
             var that = this;
 
             if (e.isDefaultPrevented()) {
@@ -1342,7 +1342,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that._busy = setTimeout(function () {
+            that._busy = setTimeout(function() {
                 if (that._arrowIcon) { //destroyed after request start
                     that._focused.attr(ARIA_BUSY, true);
                     that._arrowIcon.addClass(LOADING);
@@ -1363,7 +1363,7 @@ var __meta__ = { // jshint ignore:line
                 dataSource = options.dataSource || {},
                 idx;
 
-            dataSource = Array.isArray(dataSource) ? {data: dataSource} : dataSource;
+            dataSource = Array.isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (that._isSelect) {
                 idx = element[0].selectedIndex;
@@ -1414,7 +1414,7 @@ var __meta__ = { // jshint ignore:line
                 index;
 
             if (isIndex) {
-                index =  hasOptionLabel ? --candidate : candidate;
+                index = hasOptionLabel ? --candidate : candidate;
             } else {
                 index = listView.getElementIndex(candidate);
             }
@@ -1530,7 +1530,7 @@ var __meta__ = { // jshint ignore:line
                     var shouldTrigger = true;
 
                     if (dataItem) {
-                        shouldTrigger = that._value(dataItem) !==  List.unifyType(that.value(), typeof that._value(dataItem));
+                        shouldTrigger = that._value(dataItem) !== List.unifyType(that.value(), typeof that._value(dataItem));
                     }
 
                     if (shouldTrigger && that.trigger(SELECT, { dataItem: dataItem, item: current })) {
@@ -1553,7 +1553,7 @@ var __meta__ = { // jshint ignore:line
                     that.wrapper.focusout();
                 } else {
                     if (selection && typeof selection.done === "function") {
-                        selection.done(function () {
+                        selection.done(function() {
                             that._blur();
                         });
                     } else {
@@ -1685,7 +1685,7 @@ var __meta__ = { // jshint ignore:line
             var parent = parentElement.data("kendo" + name);
 
             if (!parent) {
-                for(var i = 0; i < alternativeNames[name].length; i+=1) {
+                for (var i = 0; i < alternativeNames[name].length; i += 1) {
                     parent = parentElement.data("kendo" + alternativeNames[name][i]);
 
                     if (!!parent) {
@@ -1782,7 +1782,7 @@ var __meta__ = { // jshint ignore:line
             if (that._userTriggered) {
                 that._clearSelection(parent, true);
             } else if (value) {
-                if (value !==  unifyType(that.listView.value()[0], typeof value)) {
+                if (value !== unifyType(that.listView.value()[0], typeof value)) {
                     that.value(value);
                 }
 
@@ -1812,7 +1812,7 @@ var __meta__ = { // jshint ignore:line
                 expressions = that.dataSource.filter() || {};
                 removeFiltersForField(expressions, valueField);
 
-                var handler = function () {
+                var handler = function() {
                     var currentHandler = that._cascadeFilterRequests.shift();
                     if (currentHandler) {
                         that.unbind('dataBound', currentHandler);
@@ -1860,9 +1860,9 @@ var __meta__ = { // jshint ignore:line
                         .on(MOUSEENTER + STATIC_LIST_NS, "li", function() { $(this).addClass(HOVER); })
                         .on(MOUSELEAVE + STATIC_LIST_NS, "li", function() { $(this).removeClass(HOVER); });
 
-            if(options && options.ariaLabel) {
+            if (options && options.ariaLabel) {
                 this.element.attr(ARIA_LABEL, options.ariaLabel);
-            } else if(options && options.ariaLabelledBy) {
+            } else if (options && options.ariaLabelledBy) {
                 this.element.attr(ARIA_LABELLEDBY, options.ariaLabelledBy);
             }
 
@@ -1874,7 +1874,7 @@ var __meta__ = { // jshint ignore:line
                 this.element.attr(ARIA_MULTISELECTABLE, true);
             }
 
-            if(this.options.columns && this.options.columns.length) {
+            if (this.options.columns && this.options.columns.length) {
                 var thead = this.element.parent().find('.k-table-thead');
                 var row = $('<tr class="k-table-group-row">' +
                     '<th class="k-table-th" colspan="' + this.options.columns.length + '"></th>' +
@@ -1973,19 +1973,19 @@ var __meta__ = { // jshint ignore:line
             that._fixedHeader();
         },
 
-        _touchHandlers: function () {
+        _touchHandlers: function() {
             var that = this;
             var startY;
             var endY;
-            var tapPosition = function (event) {
+            var tapPosition = function(event) {
                 return (event.originalEvent || event).changedTouches[0].pageY;
             };
 
-            that.element.on("touchstart" + STATIC_LIST_NS, function (e) {
+            that.element.on("touchstart" + STATIC_LIST_NS, function(e) {
                 startY = tapPosition(e);
             });
 
-            that.element.on("touchend" + STATIC_LIST_NS, function (e) {
+            that.element.on("touchend" + STATIC_LIST_NS, function(e) {
                 if (e.isDefaultPrevented()) {
                     return;
                 }
@@ -2043,7 +2043,7 @@ var __meta__ = { // jshint ignore:line
             this.content.scrollTop(this.content.scrollTop() + value);
         },
 
-        scroll: function (item) {
+        scroll: function(item) {
             if (!item) {
                 return;
             }
@@ -2287,7 +2287,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _triggerClick: function (item) {
+        _triggerClick: function(item) {
             if (!this.trigger(CLICK, { item: $(item) })) {
                 this.select(item);
             }
@@ -2301,7 +2301,7 @@ var __meta__ = { // jshint ignore:line
             var comparer;
             var normalized = [];
 
-            if (!that._valueComparer  || that._valueType !== type) {
+            if (!that._valueComparer || that._valueType !== type) {
                 that._valueType = type;
 
                 for (; idx < values.length; idx++) {
@@ -2519,7 +2519,7 @@ var __meta__ = { // jshint ignore:line
                     var currentColumn = options.columns[i];
                     var templateText = currentColumn.field ? currentColumn.field.toString() : TEXT;
 
-                    templates["column"+ i] = currentColumn.template || "#: " + templateText + "#";
+                    templates["column" + i] = currentColumn.template || "#: " + templateText + "#";
                 }
             }
 
@@ -2694,7 +2694,7 @@ var __meta__ = { // jshint ignore:line
                     widthStyle += ";'";
                 }
                 item += "<span class='k-table-td' " + widthStyle + ">";
-                item += this.templates["column"+ i](dataItem);
+                item += this.templates["column" + i](dataItem);
                 item += "</span>";
             }
 
@@ -2917,4 +2917,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

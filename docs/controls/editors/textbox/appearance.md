@@ -2,7 +2,7 @@
 title: Appearance
 page_title: jQuery TextBox Documentation | TextBox Appearance
 description: "Learn how to apply different styling options to the TextBox widget."
-slug: textbox_appearance
+slug: appearance_kendoui_textbox_widget
 position: 2
 ---
 

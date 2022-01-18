@@ -1,6 +1,5 @@
 // Pivotgrid
 .k-pivotgrid {
-    padding: @pivotgrid-padding-y @pivotgrid-padding-x;
     border-width: @pivotgrid-border-width;
     border-style: solid;
     box-sizing: content-box;
@@ -148,7 +147,6 @@
 }
 
 .k-pivotgrid-configurator-panel {
-    padding: @pivotgrid-configurator-padding-y @pivotgrid-configurator-padding-x;
     border-width: @pivotgrid-configurator-border-width;
     border-style: solid;
     box-sizing: border-box;
@@ -300,10 +298,6 @@
     .k-treeview {
         padding: @pivotgrid-treeview-padding-y @pivotgrid-treeview-padding-x;
         overflow: auto;
-    }
-
-    .k-treeview .k-in .k-checkbox-wrapper {
-        display: inline-flex;
     }
 }
 
@@ -527,6 +521,76 @@
         .k-pivotgrid-column-headers,
         .k-pivotgrid-values {
             flex: 1 1 70%;
+        }
+    }
+}
+
+
+// jquery specific -- old pivot
+.k-pivotgrid-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    gap: @spacing[2];
+
+    > .k-pivotgrid-configurator-panel {
+        max-width: 320px;
+        flex: none;
+    }
+    > .k-pivot {
+        flex: 1;
+    }
+}
+.k-pivotgrid-configurator-panel.kendo-jquery {
+    box-sizing: border-box;
+    display: inline-flex;
+
+    .k-pivotgrid-configurator {
+        height: 100%;
+    }
+
+    .k-pivotgrid-configurator-content {
+        padding: @spacing[4];
+        max-height: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        gap: @spacing[4];
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .k-pivotgrid-targets {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: @spacing[4];
+    }
+
+    .k-pivotgrid-configurator-section {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: @spacing[2];
+    }
+
+    .k-column-fields {
+        margin: 0;
+        padding: @spacing[1];
+        max-height: 200px;
+        border-width: 1px;
+        border-style: solid;
+        display: flex;
+        flex-flow: row wrap;
+        gap: @spacing[1];
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        > * {
+            margin: 0;
+        }
+    }
+    .k-ie & .k-column-fields {
+        > * {
+            margin: 2px;
         }
     }
 }

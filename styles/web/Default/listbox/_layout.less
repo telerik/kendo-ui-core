@@ -1,0 +1,137 @@
+.k-listbox {
+    box-sizing: border-box;
+    height: 200px;
+    border-width: 0;
+    outline: 0;
+    font-family: @font-family;
+    font-size: @font-size;
+    line-height: @line-height;
+    vertical-align: top;
+    background-color: transparent;
+    display: inline-flex;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: @rgba-transparent;
+
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    .k-list-scroller {
+        width: 100%;
+        height: inherit;
+        overflow: auto;
+        border-width: 1px;
+        border-style: solid;
+        box-sizing: border-box;
+
+        .k-list-scroller {
+            border-width: 0;
+        }
+
+        li {
+            cursor: default;
+            user-select: none;
+        }
+    }
+
+    .k-ghost {
+        opacity: .5;
+    }
+
+    .k-drop-hint {
+        height: 0;
+        border-width: 0;
+        border-top-width: 1px;
+        border-top-style: solid;
+    }
+
+
+    // Listbox toolbar
+    .k-listbox-toolbar {
+        box-sizing: border-box;
+        display: flex;
+    }
+
+    &.k-listbox-toolbar-left,
+    &.k-listbox-toolbar-right {
+        .k-listbox-toolbar ul {
+            flex-direction: column;
+        }
+
+        .k-listbox-toolbar li + li {
+            margin-top: 5px;
+        }
+    }
+
+    &.k-listbox-toolbar-left {
+        flex-direction: row;
+
+        .k-listbox-toolbar {
+            margin-right: 5px;
+        }
+    }
+
+    &.k-listbox-toolbar-right {
+        flex-direction: row-reverse;
+
+        .k-listbox-toolbar {
+            margin-left: 5px;
+        }
+    }
+
+    &.k-listbox-toolbar-top,
+    &.k-listbox-toolbar-bottom {
+        flex-direction: column;
+
+        .k-listbox-toolbar ul {
+            flex-direction: row;
+        }
+
+        .k-listbox-toolbar li + li {
+            margin-left: 5px;
+        }
+    }
+
+    &.k-listbox-toolbar-top {
+        .k-listbox-toolbar {
+            margin-bottom: 5px;
+        }
+    }
+
+    &.k-listbox-toolbar-bottom {
+        .k-listbox-toolbar {
+            margin-top: 5px;
+        }
+    }
+}
+
+
+// Listbox toolbar
+
+// RTL
+.k-rtl {
+
+    .k-listbox {
+
+        &.k-listbox-toolbar-left,
+        &.k-listbox-toolbar-right {
+            .k-listbox-toolbar {
+                transform: scaleX(-1);
+            }
+        }
+
+        &.k-listbox-toolbar-left {
+            .k-listbox-toolbar {
+                margin-right: 0;
+                margin-left: 5px;
+            }
+        }
+
+        &.k-listbox-toolbar-right {
+            .k-listbox-toolbar {
+                margin-right: 5px;
+                margin-left: 0;
+            }
+        }
+    }
+}

@@ -4,61 +4,148 @@
 @widget-border-color: darken(@background, 20%);
 @widget-gradient: null;
 @widget-shadow: null;
+
+
+// Component
+@component-bg: @widget-background-color;
+@component-text: @widget-text-color;
+@component-border: @widget-border-color;
+
+
+// Hover
+@hover-bg: @hover-background;
+@hover-text: @hover-text-color;
+@hover-border: @hover-border-color;
+
+// Focus
+@focus-shadow: @focused-shadow;
+
+// Selected
+@selected-bg: @selected-background;
+@selected-text: @selected-text-color;
+@selected-border: @selected-border-color;
+
+
+// Error
+@error-background-color: @background;
+@error-border-color: lighten(@base, 4%);
+@error-text-color: lighten(@base, 4%);
+
+
 // Button
 @button-background-color: @base;
 @button-text-color: @background;
 @button-border-color: @base;
 @button-gradient: null;
 @button-shadow: null;
+
 @button-hover-text-color: @background;
 @button-hover-background-color: lighten(@accent, 4%);
 @button-hover-border-color: @button-hover-background-color;
 @button-hover-gradient: null;
 @button-hover-shadow: null;
+
 @button-active-background: darken(@accent, 4%);
 @button-active-text-color: @selected-text-color;
 @button-active-border-color: @button-active-background;
 @button-active-gradient: null;
 @button-active-shadow: null;
+
 @button-focused-border-color: @accent;
 @button-focused-shadow: none;
 @button-focused-active-shadow: none;
+
 // Primary button
 @primary-text-color: contrast(@primary-background-color);
 @primary-background-color: @accent;
 @primary-border-color: @primary-background-color;
 @primary-gradient: null;
 @primary-shadow: null;
+
 @primary-hover-text-color: @background;
 @primary-hover-background-color: lighten(@accent, 4%);
 @primary-hover-border-color: @primary-hover-background-color;
 @primary-hover-gradient: null;
 @primary-hover-shadow: null;
+
 @primary-active-text-color: contrast(@primary-active-background-color);
 @primary-active-background-color: darken(@accent, 4%);
 @primary-active-border-color: @primary-active-background-color;
 @primary-active-gradient: null;
 @primary-active-shadow: null;
+
 @primary-focused-border-color: darken(@accent, 10%);
 @primary-focused-shadow: none;
 @primary-focused-active-shadow: none;
+
 @primary-disabled-text-color: darken(@background, 24%);
 @primary-disabled-background-color: darken(@background, 4%);
 @primary-disabled-border-color: darken(@background, 20%);
 @primary-disabled-gradient: null;
-// Input
-@input-text: @normal-text-color;
-@input-bg: @background;
-@input-border: @drop-down-border-color;
+
+
+// Input new
+@input-text: @component-text;
+@input-bg: @component-bg;
+@input-border: @button-border-color;
 @input-shadow: null;
-@input-hovered-text: @input-text;
-@input-hovered-bg: @input-bg;
-@input-hovered-border: @drop-down-hover-border-color;
-@input-hovered-shadow: null;
-@input-focused-text: @input-text;
-@input-focused-bg: @input-bg;
-@input-focused-border: @drop-down-focused-border-color;
-@input-focused-shadow: @focused-shadow;
+
+@input-hover-text: @input-text;
+@input-hover-bg: @input-bg;
+@input-hover-border: @button-hover-border-color;
+@input-hover-shadow: null;
+
+@input-focus-text: @input-text;
+@input-focus-bg: @input-bg;
+@input-focus-border: @drop-down-focused-border-color;
+@input-focus-shadow: @focused-shadow;
+
+@input-placeholder-text: rgba( @input-text, .5 );
+@input-placeholder-opacity: 1;
+
+@input-invalid-border: @error;
+@input-invalid-shadow: null;
+
+
+// List
+
+@kendo-list-bg: @component-bg;
+@kendo-list-text: @component-text;
+@kendo-list-border: @component-text;
+
+@kendo-list-item-bg: null;
+@kendo-list-item-text: null;
+
+@kendo-list-item-hover-bg: @hover-bg;
+@kendo-list-item-hover-text: @hover-text;
+
+@kendo-list-item-selected-bg: @selected-bg;
+@kendo-list-item-selected-text: @selected-text;
+
+@kendo-list-item-focus-bg: null;
+@kendo-list-item-focus-text: null;
+@kendo-list-item-focus-shadow: @focused-item-shadow;
+
+
+// Slider
+
+@kendo-slider-track-bg: shade( @component-bg, 8% );
+@kendo-slider-track-border: null;
+@kendo-slider-selection-bg: @primary;
+
+@kendo-slider-thumb-bg: @primary;
+@kendo-slider-thumb-border: @primary;
+
+@kendo-slider-thumb-hover-bg: shade( @primary, 8% );
+@kendo-slider-thumb-hover-border: shade( @primary, 8% );
+
+@kendo-slider-thumb-active-bg: shade( @primary, 12% );
+@kendo-slider-thumb-active-border: shade( @primary, 12% );
+
+@kendo-slider-thumb-focus-shadow: @focus-shadow;
+
+
+// Generic
 @sprite-image: url('@{image-folder}/sprite.png');
 @inverse-text-color: @background;
 @hover-shadow: none;
@@ -79,9 +166,6 @@
 @active-background-color: @accent;
 @active-border-color: @accent;
 @active-text-color: @background;
-@error-background-color: @background;
-@error-border-color: lighten(@base, 4%);
-@error-text-color: lighten(@base, 4%);
 @disabled-text-color: darken(@background, 24%);
 @validation-background-color: @warning;
 @validation-border-color: @warning;
@@ -97,20 +181,28 @@
 @tooltip-border: @base;
 
 
+// Notification
 @notification-border-radius: @border-radius;
+
 @notification-info-bg: tint(@info, 80%);
 @notification-info-text: @info;
 @notification-info-border: @info;
+
 @notification-success-bg: tint(@success, 80%);
 @notification-success-text: @success;
 @notification-success-border: @success;
+
 @notification-warning-bg: tint(@warning, 80%);
 @notification-warning-text: @warning;
 @notification-warning-border: @warning;
+
 @notification-error-bg: tint(@error, 80%);
 @notification-error-text: @error;
 @notification-error-border: @error;
+
 @notification-gradient: null;
+
+// Draghandle
 @draghandle-border-radius: 13px;
 @draghandle-border-color: @accent;
 @draghandle-background-color: @accent;
@@ -118,6 +210,7 @@
 @draghandle-hover-border-color: @hover-background;
 @draghandle-hover-background-color: @hover-background;
 @draghandle-hover-shadow: 0 0 0;
+
 @alt-background-color: darken(@background, 4%);
 @nested-alt-background-color: darken(@alt-background-color, 8%);
 @active-filter-background-color: @accent;
@@ -145,7 +238,6 @@
 @task-summary-selected-color: lighten(@selected-background-color, 25%);
 @list-border-radius: (@border-radius - 1);
 @inner-border-radius: (@border-radius - 1.2);
-@slider-border-radius: 13px;
 @default-icon-opacity: 1;
 @header-text-color: @background;
 @header-background-color: @base;
@@ -183,18 +275,55 @@
 @link-hovered-text: contrast(@base, darken(@link-text, 4), lighten(@link-text, 4), .5);
 
 
-// component
-@component-bg: @widget-background-color;
-@component-text: @widget-text-color;
-@component-border: @widget-border-color;
-
-
 // Toolbar
 @toolbar-bg: @header-background-color;
 @toolbar-text: contrast(@toolbar-bg);
 @toolbar-border: @widget-border-color;
 @toolbar-gradient: @widget-gradient;
 @toolbar-shadow: null;
+
+
+// Treeview
+
+/// Background color of the treeview component.
+/// @group treeview
+@kendo-treeview-bg: null;
+/// Text color of the treeview component.
+/// @group treeview
+@kendo-treeview-text: @component-text;
+/// Border color of the treeview component.
+/// @group treeview
+@kendo-treeview-border: null;
+
+/// Background color of hovered treeview items.
+/// @group treeview
+@kendo-treeview-item-hover-bg: @hover-bg;
+/// Text color of hovered treeview items.
+/// @group treeview
+@kendo-treeview-item-hover-text: @hover-text;
+/// Border color of hovered treeview items.
+/// @group treeview
+@kendo-treeview-item-hover-border: null;
+/// Background gradient of hovered treeview items.
+/// @group treeview
+@kendo-treeview-item-hover-gradient: null;
+
+/// Background color of selected treeview items.
+/// @group treeview
+@kendo-treeview-item-selected-bg: @selected-bg;
+/// Text color of selected treeview items.
+/// @group treeview
+@kendo-treeview-item-selected-text: @selected-text;
+/// Border color of selected treeview items.
+/// @group treeview
+@kendo-treeview-item-selected-border: null;
+/// Background gradient of selected treeview items.
+/// @group treeview
+@kendo-treeview-item-selected-gradient: null;
+
+/// Box shadow of focused treeview items.
+/// @group treeview
+@kendo-treeview-item-focus-shadow: @focused-item-shadow;
 
 
 // Avatar
@@ -458,7 +587,7 @@
 @switch-off-handle-hovered-bg: @button-hover-background-color;
 @switch-off-handle-hovered-text: @switch-off-text;
 @switch-off-handle-hovered-border: @button-hover-border-color;
-@switch-off-handle-hovered-gradient: @button-hover-gradient;
+@switch-off-handle-hovered-gradient: null;
 
 
 // PDF viewer
@@ -800,32 +929,6 @@
 // Wizard
 @wizard-focused-shadow: inset 0 0 0 2px @widget-border-color;
 @wizard-step-border-focused: #656565;
-
-
-// Textarea
-@textarea-bg: @input-bg;
-@textarea-text: @input-text;
-@textarea-border: @input-border;
-@textarea-shadow: @input-shadow;
-
-@textarea-hovered-text: @input-hovered-text;
-@textarea-hovered-bg: @input-hovered-bg;
-@textarea-hovered-border: @input-hovered-border;
-@textarea-hovered-shadow: @input-hovered-shadow;
-
-@textarea-focused-text: @input-focused-text;
-@textarea-focused-bg: @input-focused-bg;
-@textarea-focused-border: @input-focused-border;
-@textarea-focused-shadow: @input-focused-shadow;
-
-@textarea-placeholder-text: rgba( @input-text, .5 );
-@textarea-placeholder-opacity: 1;
-
-@textarea-selected-text: contrast(@accent);
-@textarea-selected-bg: @accent;
-
-@textarea-invalid-border: rgba( @error, .5 );
-@textarea-invalid-shadow: null;
 
 
 // Appbar
@@ -1425,7 +1528,10 @@
 @import "mixins/gradients.less";
 @import "mixins/border-radius.less";
 @import "themes/type.less";
-@import "themes/button.less";
+@import "Default/button/_theme.less";
+@import "Default/input/_theme.less";
+@import "Default/dropdowngrid/_theme.less";
+@import "Default/daterangepicker/_theme.less";
 @import "Default/avatar/_theme.less";
 @import "Default/card/_theme.less";
 @import "Default/tilelayout/_theme.less";
@@ -1442,6 +1548,9 @@
 @import "Default/timeline/_theme.less";
 @import "Default/breadcrumb/_theme.less";
 @import "Default/listgroup/_theme.less";
+@import "Default/listbox/_theme.less";
+@import "Default/list/_theme.less";
+@import "Default/slider/_theme.less";
 @import "Default/messagebox/_theme.less";
 @import "Default/badge/_theme.less";
 @import "Default/checkbox/_theme.less";
@@ -1453,6 +1562,7 @@
 @import "Default/forms/_theme.less";
 @import "Default/toolbar/_theme.less";
 @import "Default/tooltip/_theme.less";
+@import "Default/treeview/_theme.less";
 @import "Default/wizard/_theme.less";
 @import "Default/textarea/_theme.less";
 @import "Default/appbar/_theme.less";
@@ -1495,19 +1605,15 @@
 
 .k-block,
 .k-widget,
-.k-input,
 .k-group,
 .k-content,
 .k-header,
 .k-filter-row > th,
 .k-separator,
-.k-autocomplete,
-.k-dropdown-wrap,
 .k-group-footer td,
 .k-grid-footer,
 .k-footer-template td,
 .k-state-default,
-.k-state-default .k-select,
 .k-state-disabled,
 .k-grid-header,
 .k-grid-header-wrap,
@@ -1521,15 +1627,10 @@
 .k-grouping-header .k-group-indicator,
 .k-panel > .k-item > .k-link,
 .k-treemap-tile,
-.k-slider-track,
 .k-splitbar,
 .k-dropzone-active,
 .k-upload-files,
-.k-upload .k-action-buttons,
-.k-popup.k-align .k-list .k-item:last-child,
-.k-maskedtextbox.k-state-disabled > .k-textbox:hover,
-.k-dateinput.k-state-disabled > .k-textbox:hover
-{
+.k-upload .k-action-buttons {
     border-color: @widget-border-color;
 }
 
@@ -1550,12 +1651,6 @@ td.k-group-cell,
 .k-grid .k-state-selected:hover .k-group-cell
 {
     background-color: @header-background-color;
-}
-
-.k-list-container
-{
-    border-color: @group-border-color;
-    background-color: @select-group-background-color;
 }
 
 .k-content,
@@ -1579,35 +1674,6 @@ td.k-group-cell,
     background-color: @nested-alt-background-color;
 }
 
-.k-textbox,
-.k-dropdown-wrap.k-state-active,
-.k-picker-wrap.k-state-active,
-.k-numeric-wrap.k-state-active
-{
-    border-color: @widget-border-color;
-    background-color: @select-background-color;
-}
-
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-dropdown-wrap .k-input,
-.k-textbox.k-state-focused,
-.k-autocomplete.k-state-focused .k-input,
-.k-dropdown-wrap.k-state-focused .k-input,
-.k-picker-wrap.k-state-focused .k-input,
-.k-numeric-wrap.k-state-focused .k-input
-{
-    border-color: @widget-border-color;
-}
-
-.k-input,
-.k-textbox,
-.k-textbox > input,
-.k-multiselect-wrap {
-    background-color: @input-bg;
-    color: @input-text;
-}
-
 .k-input-label {
     color: @input-text;
 }
@@ -1616,18 +1682,10 @@ td.k-group-cell,
     color: @error;
 }
 
-// Bootstrap readonly input styling has more specificity than ours.
-.k-input[readonly]
-{
-    background-color: @input-bg;
-    color: @input-text;
-}
-
 .k-block,
 .k-widget,
 .k-popup,
-.k-content,
-.k-dropdown .k-input
+.k-content
 {
     color: @widget-text-color;
 }
@@ -1678,13 +1736,8 @@ td.k-group-cell,
 .k-tabstrip,
 .k-drag-clue,
 .k-grid-header,
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap,
 .k-grouping-header,
 .k-progressbar,
-.k-draghandle,
-.k-autocomplete,
 .k-state-highlight,
 .k-tabstrip-items .k-item
 {
@@ -1719,20 +1772,6 @@ td.k-group-cell,
 
 .k-loading-image { background-image: url('@{image-folder}/loading-image.gif'); }
 .k-loading-color { background-color: @loading-panel-color; }
-
-.k-draghandle
-{
-    border-color: @draghandle-border-color;
-    background-color: @draghandle-background-color;
-    .box-shadow(@draghandle-shadow);
-}
-
-.k-draghandle:hover
-{
-    border-color: @draghandle-hover-border-color;
-    background-color: @draghandle-hover-background-color;
-    .box-shadow(@draghandle-hover-shadow);
-}
 
 // Drop Hint
 .k-drop-hint-line {
@@ -1867,11 +1906,6 @@ td.k-group-cell,
     color: @active-text-color;
 }
 
-.k-fieldselector .k-list-container
-{
-    background-color: @active-background-color;
-}
-
 .k-menu .k-state-hover>.k-state-active
 {
     background-color: transparent;
@@ -1889,14 +1923,6 @@ td.k-group-cell,
     border-color: @focused-border-color;
 }
 
-.k-mediaplayer-toolbar .k-button.k-flat {
-    &:active,
-    &.k-state-active,
-    &.k-state-active:hover {
-        color: @accent;
-    }
-}
-
 .k-calendar-container.k-group {
     border-color: @group-border-color;
 }
@@ -1904,12 +1930,9 @@ td.k-group-cell,
 .k-state-selected,
 .k-state-selected:link,
 .k-state-selected:visited,
-.k-list>.k-state-selected,
-.k-list>.k-state-highlight,
 .k-panel > .k-state-selected,
 .k-ghost-splitbar-vertical,
 .k-ghost-splitbar-horizontal,
-.k-draghandle.k-state-selected:hover,
 .k-scheduler .k-today.k-state-selected,
 .k-marquee-color
 {
@@ -1918,38 +1941,12 @@ td.k-group-cell,
     border-color: @selected-border-color;
 }
 
-.k-virtual-item.k-first,
-.k-group-header + .k-list > .k-item.k-first,
-.k-static-header + .k-list > .k-item.k-first
-{
-    border-top-color: @hover-border-color;
-}
-
-.k-group-header + div > .k-list > .k-item.k-first:before {
-    border-top-color: @hover-border-color;
-}
-
-.k-popup > .k-group-header,
-.k-popup > .k-virtual-wrap > .k-group-header
-{
-    background: @hover-border-color;
-    color: @selected-text-color;
-}
-
-.k-popup .k-list .k-item > .k-group
-{
-    background: @hover-border-color;
-    color: @selected-text-color;
-    border-bottom-left-radius: @inner-border-radius;
-}
-
 .k-marquee-text
 {
     color: @selected-text-color;
 }
 
 .k-state-focused,
-.k-list>.k-state-focused,
 .k-listview>.k-state-focused,
 .k-grid-header th.k-state-focused,
 td.k-state-focused
@@ -1958,16 +1955,10 @@ td.k-state-focused
 }
 
 .k-state-focused.k-state-selected,
-.k-list>.k-state-focused.k-state-selected,
 .k-listview>.k-state-focused.k-state-selected,
 td.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-active-item-shadow);
-}
-
-.k-list-optionlabel.k-state-selected.k-state-focused
-{
-    .box-shadow(none);
 }
 
 .k-state-selected>.k-link
@@ -1978,28 +1969,15 @@ td.k-state-focused.k-state-selected
 .k-state-hover,
 .k-splitbar-horizontal-hover,
 .k-splitbar-vertical-hover,
-.k-list>.k-state-hover,
-.k-dropdown .k-state-focused,
-.k-filebrowser-dropzone,
-.k-listbox .k-item:hover:not(.k-state-disabled)
-{
+.k-filebrowser-dropzone {
     color: @hover-text-color;
     background-color: @hover-background-color;
     border-color: @hover-border-color;
 }
 
-.k-state-hover > .k-select,
-.k-state-focused > .k-select
-{
-    border-color: @hover-border-color;
-}
-
 .k-state-hover,
 .k-other-month.k-state-hover .k-link,
-div.k-filebrowser-dropzone em,
-.k-draghandle:hover,
-.k-listbox .k-item:hover
-{
+div.k-filebrowser-dropzone em {
     .composite-background(@hover-gradient);
 }
 
@@ -2046,10 +2024,6 @@ div.k-filebrowser-dropzone em,
 
 }
 
-.k-autocomplete.k-state-active,
-.k-picker-wrap.k-state-active,
-.k-numeric-wrap.k-state-active,
-.k-dropdown-wrap.k-state-active,
 .k-state-active,
 .k-state-active:hover,
 .k-state-active>.k-link
@@ -2057,45 +2031,13 @@ div.k-filebrowser-dropzone em,
     .composite-background(@active-gradient);
 }
 
-.k-state-selected,
-.k-draghandle.k-state-selected:hover
-{
+.k-state-selected {
     .composite-background(@selected-gradient);
-}
-
-.k-draghandle.k-state-selected:hover
-{
-    background-position: 50% 50%;
 }
 
 .k-state-hover>.k-link,
 .k-other-month.k-state-hover .k-link,
 div.k-filebrowser-dropzone em
-{
-    color: @hover-text-color;
-}
-
-.k-autocomplete.k-state-hover,
-.k-autocomplete.k-state-focused,
-.k-picker-wrap.k-state-hover,
-.k-picker-wrap.k-state-focused,
-.k-numeric-wrap.k-state-hover,
-.k-numeric-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-hover,
-.k-dropdown-wrap.k-state-focused
-{
-    background-color: @select-hover-background-color;
-    .composite-background(@hover-gradient);
-    background-position: 50% 50%;
-    border-color: @select-border-color;
-}
-
-.k-dropdown .k-state-focused .k-input
-{
-    color: @widget-text-color;
-}
-
-.k-dropdown .k-state-hover .k-input
 {
     color: @hover-text-color;
 }
@@ -2117,9 +2059,7 @@ div.k-filebrowser-dropzone em
 .k-state-disabled .k-link,
 .k-other-month,
 .k-other-month .k-link,
-.k-dropzone em,
-.k-slider .k-draghandle
-{
+.k-dropzone em {
     color: @disabled-text-color;
 }
 
@@ -2138,27 +2078,6 @@ div.k-filebrowser-dropzone em
 .k-progressbar-indeterminate .k-state-selected
 {
     display: none;
-}
-
-// Slider
-.k-slider-track
-{
-    background-color: @widget-border-color;
-}
-
-.k-slider-selection
-{
-    background-color: @selected-background-color;
-}
-
-.k-slider-horizontal .k-tick
-{
-    background-image:url('@{image-folder}/slider-h.gif');
-}
-
-.k-slider-vertical .k-tick
-{
-    background-image:url('@{image-folder}/slider-v.gif');
 }
 
 // Tooltip
@@ -2279,10 +2198,7 @@ div.k-filebrowser-dropzone em
     .box-shadow(@widget-shadow);
 }
 
-.k-slider,
-.k-treeview,
-.k-upload
-{
+.k-upload {
     .box-shadow(none);
 }
 
@@ -2291,15 +2207,6 @@ div.k-filebrowser-dropzone em
     .box-shadow(@hover-shadow);
 }
 
-.k-textbox:focus,
-.k-textbox.k-state-focused,
-.k-autocomplete.k-state-focused,
-.k-dropdown-wrap.k-state-focused,
-.k-picker-wrap.k-state-focused,
-.k-numeric-wrap.k-state-focused
-{
-    .box-shadow(@focused-shadow);
-}
 
 .k-state-selected
 {
@@ -2321,12 +2228,6 @@ div.k-filebrowser-dropzone em
 .k-grid .k-filter-options,
 .k-time-popup,
 .k-datepicker-calendar,
-.k-autocomplete.k-state-border-down,
-.k-autocomplete.k-state-border-up,
-.k-dropdown-wrap.k-state-active,
-.k-picker-wrap.k-state-active,
-.k-multiselect-wrap.k-state-focused,
-.k-state-focused > .k-multiselect-wrap,
 .k-filebrowser .k-image {
     .box-shadow(0 2px 2px 0 @shadow-color);
 }
@@ -2450,99 +2351,23 @@ div.k-filebrowser-dropzone em
 
 // Border radius
 .k-block,
-.k-textbox,
 .k-drag-clue,
 .k-touch-scrollbar,
 .k-inline-block,
 .k-grid .k-filter-options,
 .k-grouping-header .k-group-indicator,
-.k-autocomplete,
-.k-multiselect,
-.k-combobox,
-.k-dropdown,
-.k-dropdowntree,
-.k-dropdown-wrap,
-.k-datepicker,
-.k-timepicker,
-.k-colorpicker,
-.k-datetimepicker,
-.k-numerictextbox,
-.k-picker-wrap,
-.k-numeric-wrap,
-.k-list-container,
 .k-calendar-container,
-.k-treeview .k-in,
 .k-editor-inline,
-.k-slider-track,
-.k-slider-selection,
 .k-upload,
 .k-breadcrumb
 {
     border-radius: @border-radius;
 }
 
-.k-calendar-container.k-state-border-up,
-.k-list-container.k-state-border-up,
-.k-autocomplete.k-state-border-up,
-.k-multiselect.k-state-border-up,
-.k-dropdown-wrap.k-state-border-up,
-.k-picker-wrap.k-state-border-up,
-.k-numeric-wrap.k-state-border-up,
-.k-filter-menu
-{
-    border-radius: 0 0 @border-radius @border-radius;
-}
-
-.k-autocomplete.k-state-border-up .k-input,
-.k-dropdown-wrap.k-state-border-up .k-input,
-.k-picker-wrap.k-state-border-up .k-input,
-.k-picker-wrap.k-state-border-up .k-selected-color,
-.k-numeric-wrap.k-state-border-up .k-input
-{
-    border-radius: 0 0 0 @border-radius;
-}
-
-.k-multiselect.k-state-border-up .k-multiselect-wrap
-{
-    border-radius: 0 0 @border-radius @border-radius;
-}
-
 .k-block > .k-header,
 .k-tabstrip-items .k-item,
-.k-tabstrip-items .k-link,
-.k-calendar-container.k-state-border-down,
-.k-list-container.k-state-border-down,
-.k-autocomplete.k-state-border-down,
-.k-multiselect.k-state-border-down,
-.k-dropdown-wrap.k-state-border-down,
-.k-picker-wrap.k-state-border-down,
-.k-numeric-wrap.k-state-border-down
-{
+.k-tabstrip-items .k-link {
     border-radius: @border-radius @border-radius 0 0;
-}
-
-.k-dropdown-wrap .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input
-{
-    border-radius: @inner-border-radius 0 0 @inner-border-radius;
-}
-
-.k-rtl .k-dropdown-wrap .k-input,
-.k-rtl .k-picker-wrap .k-input,
-.k-rtl .k-numeric-wrap .k-input
-{
-    border-radius: 0 @inner-border-radius @inner-border-radius 0;
-}
-
-.k-numeric-wrap .k-link
-{
-    border-radius: 0 @inner-border-radius 0 0;
-}
-
-.k-numeric-wrap .k-link + .k-link
-{
-    border-radius: 0 0 @inner-border-radius 0;
 }
 
 .k-colorpicker .k-selected-color
@@ -2553,89 +2378,6 @@ div.k-filebrowser-dropzone em
 .k-rtl .k-colorpicker .k-selected-color
 {
     border-radius: 0 @inner-border-radius @inner-border-radius 0;
-}
-
-.k-autocomplete.k-state-border-down .k-input
-{
-    border-radius: @border-radius @border-radius 0 0;
-}
-
-.k-dropdown-wrap.k-state-border-down .k-input,
-.k-picker-wrap.k-state-border-down .k-input,
-.k-picker-wrap.k-state-border-down .k-selected-color,
-.k-numeric-wrap.k-state-border-down .k-input
-{
-    border-radius: @border-radius 0 0 0;
-}
-
-.k-numeric-wrap .k-link.k-state-selected
-{
-    background-color: @numeric-selected-background;
-}
-
-.k-multiselect.k-state-border-down .k-multiselect-wrap
-{
-    border-radius: @inner-border-radius @inner-border-radius 0 0;
-}
-
-.k-dropdown-wrap .k-select,
-.k-picker-wrap .k-select,
-.k-numeric-wrap .k-select,
-.k-datetimepicker .k-select+.k-select,
-.k-list-container.k-state-border-right
-{
-    border-radius: 0 @border-radius @border-radius 0;
-}
-
-.k-autocomplete > .k-i-close,
-.k-dropdown-wrap > .k-i-close,
-.k-multiselect-wrap > .k-i-close {
-    border-radius: 50%;
-    background-color: @widget-border-color;
-}
-
-.k-rtl .k-dropdown-wrap .k-select,
-.k-rtl .k-picker-wrap .k-select,
-.k-rtl .k-numeric-wrap .k-select,
-.k-rtl .k-datetimepicker .k-select+.k-select,
-.k-rtl .k-list-container.k-state-border-right
-{
-    border-radius: @border-radius 0 0 @border-radius;
-}
-
-.k-numeric-wrap.k-expand-padding .k-input
-{
-    .guarded-border-radius(@border-radius);
-}
-
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-multiselect-wrap
-{
-    .guarded-border-radius(@inner-border-radius);
-}
-
-.k-list .k-state-hover,
-.k-list .k-state-focused,
-.k-list .k-state-highlight,
-.k-list .k-state-selected,
-.k-fieldselector .k-list .k-item,
-.k-list-optionlabel,
-.k-dropzone,
-.k-listbox .k-item
-{
-    .guarded-border-radius(@list-border-radius);
-}
-
-.k-slider .k-button,
-.k-grid .k-slider .k-button
-{
-    border-radius: @slider-border-radius;
-}
-
-.k-draghandle
-{
-    border-radius: @draghandle-border-radius;
 }
 
 .k-more-events,
@@ -2652,97 +2394,13 @@ div.k-filebrowser-dropzone em
     border-radius: (@inner-border-radius - 1);
 }
 
-// /Column Menu
-
-.k-autocomplete,
-.k-picker-wrap.k-state-default,
-.k-numeric-wrap.k-state-default,
-.k-dropdown-wrap.k-state-default,
-.k-colorpicker .k-picker-wrap
-{
-    color: @header-text-color;
-    .composite-background(@widget-gradient);
-    background-position: 50% 50%;
-    background-color: @drop-down-background;
-    border-color: @drop-down-border-color;
-}
-
-.k-autocomplete.k-state-hover,
-.k-picker-wrap.k-state-hover,
-.k-numeric-wrap.k-state-hover,
-.k-dropdown-wrap.k-state-hover
-{
-    background-color: @select-hover-background-color;
-    .composite-background(@hover-gradient);
-    background-position: 50% 50%;
-    border-color: @drop-down-hover-border-color;
-}
-
-.k-multiselect-wrap
-{
-    border-color: @drop-down-border-color;
-}
-
-.k-multiselect-wrap.k-state-hover,
-.k-state-hover > .k-multiselect-wrap,
-.k-multiselect-wrap.k-state-hover
-{
-    border-color: @drop-down-hover-border-color;
-    background-color: @input-bg;
-    color: @input-text;
-}
-
-.k-autocomplete.k-state-focused,
-.k-picker-wrap.k-state-focused,
-.k-numeric-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-focused,
-.k-multiselect.k-header.k-state-focused
-{
-    background-color: @select-hover-background-color;
-    .composite-background(@hover-gradient);
-    background-position: 50% 50%;
-    border-color: @drop-down-focused-border-color;
-    .box-shadow(@focused-shadow);
-}
-.k-multiselect-wrap.k-state-focused,
-.k-state-focused > .k-multiselect-wrap {
-    border-color: @drop-down-focused-border-color;
-    .box-shadow(@focused-shadow);
-}
-
-.k-list-container
-{
-    color: @drop-down-text-color;
-}
-
-.k-popup-dropdowntree .k-treeview {
-    color: inherit;
-}
-
 .k-nodata {
     color: @disabled-text-color;
 }
 
-.k-dropdown-wrap .k-input,
-.k-dropdown .k-state-focused .k-input,
 .k-menu .k-popup
 {
     color: @drop-down-text-color;
-}
-
-.k-state-default > .k-select
-{
-    border-color: @drop-down-border-color;
-}
-
-.k-state-hover > .k-select
-{
-    border-color: @drop-down-hover-border-color;
-}
-
-.k-state-focused > .k-select
-{
-    border-color: @drop-down-focused-border-color;
 }
 
 .k-tabstrip:focus
@@ -2874,13 +2532,6 @@ div.k-filebrowser-dropzone em
     border-color: @secondary-border-color;
 }
 
-// Fix for responsive design
-.k-treeview .k-in
-{
-    border-color: transparent;
-}
-
-.k-treeview .k-icon,
 .k-scheduler-table .k-icon,
 .k-grid .k-hierarchy-cell .k-icon
 {
@@ -2888,78 +2539,11 @@ div.k-filebrowser-dropzone em
     border-radius: @border-radius;
 }
 
-.k-popup-dropdowntree {
-
-    .k-treeview .k-icon {
-        background: transparent;
-    }
-}
-
-.k-list-filter {
-    color: #4c5356;
-}
-
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
 }
 
-.k-grid
-{
-    .k-autocomplete,
-    .k-picker-wrap,
-    .k-numeric-wrap,
-    .k-dropdown-wrap
-    {
-        background-color: @header-background-color;
-        .composite-background(@hover-gradient);
-        background-position: 50% 50%;
-        border-color: @secondary-border-color;
-    }
-
-    .k-autocomplete.k-state-hover,
-    .k-picker-wrap.k-state-hover,
-    .k-numeric-wrap.k-state-hover,
-    .k-dropdown-wrap.k-state-hover
-    {
-        background-color: @select-hover-background-color;
-        .composite-background(@hover-gradient);
-        background-position: 50% 50%;
-        border-color: @drop-down-hover-border-color;
-    }
-
-    .k-autocomplete.k-state-focused,
-    .k-picker-wrap.k-state-focused,
-    .k-numeric-wrap.k-state-focused,
-    .k-dropdown-wrap.k-state-focused
-    {
-        background-color: @select-border-color;
-        .composite-background(@hover-gradient);
-        background-position: 50% 50%;
-        border-color: @select-border-color;
-    }
-}
-
-.k-popup.k-group
-{
-    .k-state-default > .k-select
-    {
-        border-color: @secondary-border-color;
-    }
-
-    .k-state-hover > .k-select
-    {
-        border-color: @hover-border-color;
-    }
-
-    .k-state-focused > .k-select
-    {
-        border-color: @drop-down-border-color;
-    }
-}
-
-.k-dropdown .k-input,
-.k-dropdown .k-state-focused .k-input,
 .k-menu .k-popup
 {
     color: @secondary-text-color;
@@ -3065,95 +2649,6 @@ div.k-filebrowser-dropzone em
     width: 1.9em;
 }
 
-.k-numeric-wrap.k-state-invalid {
-    border-color: @input-validation-error;
-
-    input {
-        color: @input-validation-error;
-    }
-}
-
-.k-rtl .k-numeric-wrap.k-state-invalid .k-i-warning {
-    right: auto;
-    left: 1.9em;
-}
-
-.k-maskedtextbox.k-state-invalid {
-    .k-textbox {
-        border-color: @input-validation-error;
-        color: @input-validation-error;
-    }
-
-    .k-i-warning {
-        color: @input-validation-error;
-    }
-}
-
-.k-dateinput.k-state-invalid {
-    .k-textbox {
-        color: @input-validation-error;
-        border-color: @input-validation-error;
-    }
-
-    .k-i-warning {
-        margin-left: 0;
-        margin-right: 0.6em;
-        color: @input-validation-error;
-    }
-}
-
-.k-rtl .k-dateinput .k-i-warning {
-    margin-right: 0;
-    margin-left: 0.6em;
-}
-
-.k-datepicker .k-picker-wrap,
-.k-timepicker .k-picker-wrap {
-    &.k-state-invalid {
-        border-color: @input-validation-error;
-
-        .k-input {
-            color: @input-validation-error;
-        }
-    }
-
-    .k-i-warning {
-        color: @input-validation-error;
-        margin-left:0;
-        margin-right: 2.1em;
-    }
-
-    .k-rtl & {
-        .k-i-warning {
-            margin-right: 0;
-            margin-left: 2.1em;
-        }
-    }
-}
-
-.k-datetimepicker .k-picker-wrap {
-    &.k-state-invalid {
-        border-color: @input-validation-error;
-
-        .k-input {
-            color: @input-validation-error;
-        }
-    }
-
-    .k-i-warning {
-        color: @input-validation-error;
-        margin-left:0;
-        margin-right: 4.3em;
-    }
-
-    .k-rtl & {
-        .k-icon.k-i-warning {
-            margin-right: 0;
-            margin-left: 4.3em;
-        }
-    }
-}
-
 // Timepicker infinite
 // Timepicker header
 .k-time-header {
@@ -3229,20 +2724,6 @@ div.k-filebrowser-dropzone em
     }
 }
 
-.k-listbox {
-    .k-list-scroller {
-        padding: 3px;
-        border-color: @widget-border-color;
-        background-color: @input-bg;
-        color: @input-text;
-    }
-
-    .k-drop-hint {
-        height: 0;
-        border-top: 1px solid @accent;
-    }
-}
-
 .k-grid-header {
     .k-i-sort-asc-sm,
     .k-i-sort-desc-sm,
@@ -3251,61 +2732,6 @@ div.k-filebrowser-dropzone em
     }
 }
 
-
-
-// Combobox
-.k-combobox .k-input {
-    color: @input-text;
-}
-
-
-
-// Dropdowngrid
-.k-dropdowngrid-popup {
-    border-color: @grid-border;
-    color: @grid-text;
-    background-color: @grid-bg;
-}
-.k-dropdowngrid-popup .k-header {
-    border-color: @grid-header-border;
-    color: @grid-header-text;
-    background-color: @grid-header-bg;
-}
-.k-dropdowngrid-popup .k-group-header {
-    border-color: @grid-header-border;
-    color: @grid-header-text;
-    background-color: @grid-header-bg;
-}
-.k-dropdowngrid-popup .k-cell {
-    border-color: @grid-border;
-}
-.k-dropdowngrid-popup .k-item:nth-child(2n) {
-    background-color: @grid-alt-bg;
-}
-.k-dropdowngrid-popup .k-footer {
-    border-color: @grid-header-border;
-    color: @grid-header-text;
-    background-color: @grid-header-bg;
-}
-.k-dropdowngrid-popup .k-item.k-state-hover {
-    border-color: @grid-hover-border;
-    color: @grid-hover-text;
-    background-color: @grid-hover-bg;
-}
-.k-dropdowngrid-popup .k-item.k-state-selected {
-    border-color: @grid-selected-border;
-    color: @grid-selected-text;
-    background-color: @grid-selected-bg;
-}
-.k-dropdowngrid-popup .k-group-cell span {
-    background-color: @grid-text;
-    color: @grid-bg;
-}
-.k-grid-list > .k-item.k-last > .k-cell,
-.k-grid-list > .k-item.k-last > .k-group-cell,
-.k-grid-list > .k-item.k-last > .k-spacer-cell {
-    border-bottom-color: @grid-text;
-}
 
 // Grid Sticky columns
 .k-master-row {

@@ -1354,7 +1354,7 @@
 
             list.dataSource.read();
 
-            var content = list.content.height(200);
+            var content = list.content.outerHeight(200);
 
             assert.equal(list.screenHeight(), 200);
         });

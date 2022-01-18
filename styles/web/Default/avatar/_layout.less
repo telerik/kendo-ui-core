@@ -13,17 +13,19 @@
     overflow: hidden;
 }
 
-// Avatar icon
-.k-avatar-icon {
-    display: inline-flex;
-}
-
 // Avatar text
 .k-avatar-text,
 .k-avatar-initials {
     font-family: @avatar-font-family;
     font-size: @avatar-font-size;
     line-height: @avatar-line-height;
+}
+
+// Avatar icon
+.k-avatar-icon {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
 }
 
 // Avatar Image
@@ -52,27 +54,6 @@ each( @avatar-sizes, {
         flex-basis: @size;
     }
 });
-
-// Shapes
-.k-avatar-circle {
-    border-radius: 50%;
-
-    &.k-avatar-image {
-        > * {
-            border-radius: 50%;
-        }
-    }
-}
-
-.k-avatar-rounded {
-    border-radius: @avatar-rounded-radius;
-
-    &.k-avatar-image {
-        > * {
-            border-radius: @avatar-rounded-radius;
-        }
-    }
-}
 
  // Bordered
  .k-avatar-bordered {

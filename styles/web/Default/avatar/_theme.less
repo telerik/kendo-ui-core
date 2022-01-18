@@ -3,7 +3,7 @@ each( @theme-colors, {
     @name: @key;
     @color: @value;
 
-    .k-avatar-solid.k-avatar-@{name} {
+    .k-avatar-solid.k-avatar-solid-@{name} {
         border-color: @color;
         color: contrast(@color);
         background-color: @color;
@@ -19,7 +19,7 @@ each( @theme-colors, {
     @name: @key;
     @color: @value;
 
-    .k-avatar-outline.k-avatar-@{name} {
+    .k-avatar-outline.k-avatar-outline-@{name} {
         color: @color;
     }
 });

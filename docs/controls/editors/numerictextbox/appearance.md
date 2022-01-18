@@ -1,12 +1,12 @@
 ---
-title: Styling
-page_title: jQuery NumericTextBox Documentation | NumericTextBox Styling
+title: Appearance
+page_title: jQuery NumericTextBox Documentation | NumericTextBox Appearance
 description: "Learn how to apply different styling options to the NumericTextBox widget."
-slug: numerictextbox_styling
+slug: appearance_kendoui_numerictextbox_widget
 position: 2
 ---
 
-# NumericTextBox Styling
+# NumericTextBox Appearance
 
 > As of Kendo UI R1 2022, the NumericTextBox widget uses brand new rendering.
 
@@ -14,7 +14,7 @@ In this article, you will find information about the new rendering of the Kendo 
 
 For additional information regarding the decision behind these changes, visit the [Rendering Components]({% slug components_rendering_overview %}) article.
 
-For a live example, visit the [Styling Demo of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/styling).
+For a live example, visit the [Appearance Demo of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/appearance).
 
 ## Options
 
@@ -134,5 +134,5 @@ $(".k-input-inner") // Returns a reference to the NumericTextBox element in the 
 ## See Also
 
 * [Rendering Overview Article]({% slug components_rendering_overview %})
-* [Styling Demo of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/styling)
+* [Appearance Demo of the NumericTextBox](https://demos.telerik.com/kendo-ui/numerictextbox/appearance)
 * [JavaScript API Reference of the NumericTextBox](/api/javascript/ui/numerictextbox)

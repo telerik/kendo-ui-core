@@ -1,11 +1,67 @@
 @import "Fiori/_variables.less";
 
-@input-height: 1.65em;
-@input-default-width: 12.4em;
+// Inputs & Pickers
+
+@input-default-width: 100%;
+
 @input-border-width: 1px;
-@input-padding-x: 0;
+@input-border-height: ( @input-border-width * 2 );
+@input-border-radius: null;
+
+@input-padding-x: @padding-x;
 @input-padding-y: 0.532142857em;
-@input-indent: .8em;
+@input-font-family: inherit;
+@input-font-size: inherit;
+@input-line-height: 1.65em;
+
+@input-values-margin-y: 2px;
+@input-values-margin-x: @input-values-margin-y;
+
+@input-clear-value-text: null;
+@input-clear-value-opacity: .5;
+@input-clear-value-hover-text: null;
+@input-clear-value-hover-opacity: 1;
+
+@input-button-width: @button-inner-calc-size;
+@input-button-border-width: 0px;
+@input-spinner-width: @button-inner-calc-size;
+@input-spinner-icon-offset: 2px;
+
+
+// List
+
+@kendo-list-padding-x: 0;
+@kendo-list-padding-y: 0;
+
+@kendo-list-font-family: @font-family;
+@kendo-list-font-size: @font-size;
+@kendo-list-line-height: @line-height;
+
+@kendo-list-item-padding-x: @spacing[2];
+@kendo-list-item-padding-y: @spacing[1];
+@kendo-list-item-border-radius: 0;
+
+
+// Slider
+
+@kendo-slider-size: 200px;
+
+@kendo-slider-font-family: @font-family;
+@kendo-slider-font-size: @font-size;
+@kendo-slider-line-height: @line-height;
+
+@kendo-slider-track-size: 2px;
+@kendo-slider-track-border-width: 0;
+@kendo-slider-track-border-radius: 0;
+
+@kendo-slider-thumb-width: 10px;
+@kendo-slider-thumb-height: 16px;
+@kendo-slider-thumb-border-width: 2px;
+@kendo-slider-thumb-border-radius: 0;
+
+
+// Inputs old
+@input-height: 1.65em;
 @input-offset: (@input-height + .35em);
 
 @line-height: (20 / 14);
@@ -98,7 +154,31 @@
 
 @toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
-@treeview-inner-padding: 0.429em 0.6667em 0.429em 0.5833em;
+@kendo-treeview-font-family: @font-family;
+/// Font size of the treeview component.
+/// @group treeview
+@kendo-treeview-font-size: @font-size;
+/// Line height of the treeview component.
+/// @group treeview
+@kendo-treeview-line-height: @line-height;
+
+/// Indentation of child groups in treeview component.
+/// @group treeview
+@kendo-treeview-indent: 16px;
+
+/// Horizontal padding of treeview items.
+/// @group treeview
+@kendo-treeview-item-padding-x: @spacing[2];
+/// Vertical padding of treeview items.
+/// @group treeview
+@kendo-treeview-item-padding-y: @spacing[1];
+/// Border width of treeview items.
+/// @group treeview
+@kendo-treeview-item-border-width: 0px;
+/// Border radius of treeview items.
+/// @group treeview
+@kendo-treeview-item-border-radius: 0;
+
 @scheduler-link-padding: 0 1.1em;
 @grid-header-padding: .429em .2em .429em 1em;
 @grid-th-padding: .929em .6em .714em .6em;
@@ -253,7 +333,8 @@
 
 @switch-label-position: calc(@switch-label-outer-spacing - @switch-container-border-width);
 @switch-label-width: calc(100% - @switch-handle-size - @switch-label-spacing - @switch-container-padding-x);
-@switch-on-left-x: calc(100% - @switch-handle-size);
+@switch-on-left-x: calc(100% - (@switch-handle-size / 2) - @switch-container-padding-x - @switch-container-border-width);
+@switch-on-right-x: calc( (@switch-handle-size / 2) + @switch-container-padding-x + @switch-container-border-width);
 
 
 // Pager
@@ -1179,7 +1260,7 @@
 
 @chip-padding-x: 6px;
 @chip-padding-y: 4px;
-@chip-height: 32px;
+@chip-height: 30px;
 @chip-border-radius: calc( @chip-height / 2);
 @chip-font-size: 16px;
 
@@ -1298,40 +1379,10 @@
 
 @import "common/all.less";
 
-.k-textbox > input,
-.k-autocomplete .k-input,
-.k-multiselect-wrap .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-dropdown-wrap .k-input,
 .k-selectbox .k-input {
     line-height: @input-height;
     padding: @input-padding-y 0;
     text-indent: .714em;
-}
-
-.k-ie {
-
-    .k-textbox > input,
-    .k-picker-wrap .k-input,
-    .k-numeric-wrap .k-input,
-    .k-combobox .k-input {
-        height: ~"calc(@{input-height} + @{input-padding-y}*2)";
-    }
-
-    input.k-textbox {
-        height: ~"calc(@{input-height} + @{input-padding-y}*2 + 2px)";
-    }
-}
-
-input.k-textbox,
-.k-ff input.k-textbox
-{
-    height: 2.857em;
-}
-
-.k-mediaplayer-toolbar .k-button.k-flat {
-    padding: .82em;
 }
 
 .k-tabstrip > .k-content
@@ -1397,12 +1448,6 @@ input.k-textbox,
     border-top-style: solid;
 }
 
-.k-slider-track
-{
-    border-width: 1px;
-    border-style: solid;
-}
-
 .k-grouping-dropclue
 {
     margin-top: 10px;
@@ -1430,30 +1475,6 @@ input.k-textbox,
 .k-gantt-timeline .k-header
 {
     line-height: normal;
-}
-
-.k-filtercell > span {
-    padding-right: calc(@filter-icon-size * 2 + 4px); // width of 2 filter buttons + 4px spacing
-}
-
-.k-filtercell > .k-operator-hidden {
-    padding-right: calc(@filter-icon-size + 2px); // width of 1 filter button + 2px spacing
-}
-
-.k-filtercell > span > .k-button {
-    padding-left: .714em;
-    padding-right: .714em;
-    margin: 0;
-}
-
-.k-filter-row {
-  .k-dropdown-operator,
-  .k-button.k-button-icon {
-    width: @filter-icon-size;
-    right: calc(@filter-icon-size + 2px); // width of the button + 2px
-    height: 100%;
-    border-radius: 0;
-  }
 }
 
 .k-grouping-header .k-group-indicator
@@ -1500,117 +1521,6 @@ input.k-textbox,
     border-top: 0;
 }
 
-.k-autocomplete .k-i-loading,
-.k-multiselect .k-i-loading
-{
-    bottom: 10px;
-}
-
-.k-dropdown-wrap,
-.k-picker-wrap,
-.k-numeric-wrap {
-    padding: 0 2.71428571em 0 0;
-}
-
-.k-combobox-clearable .k-input {
-    padding-right: @combobox-padding-x;
-    width: calc(100% - 2.71428571em);
-}
-
-.k-picker-wrap .k-select,
-.k-numeric-wrap .k-select,
-.k-dropdown-wrap .k-select
-{
-    width: 2.71428571em;
-    line-height: ~"calc(@{input-height} + @{input-padding-y}*2)";
-}
-
-.k-datetimepicker {
-    width: 19.5em;
-}
-
-.k-datetimepicker .k-select {
-    width: 5em;
-}
-
-.k-datetimepicker .k-picker-wrap {
-    padding-right: 5em;
-}
-
-.k-datetimepicker .k-picker-wrap .k-icon {
-    margin: 0 6px;
-}
-
-.k-popup.k-list-container {
-    padding: 0.286em 0;
-
-    &.k-popup-dropdowntree,
-    &.k-popup-flush {
-        padding: 0;
-    }
-}
-
-.k-popup .k-list .k-item,
-.k-popup > .k-group-header,
-.k-fieldselector .k-list .k-item {
-    min-height: 2.143em;
-    line-height: 2.143em;
-}
-
-.k-list-filter > .k-icon {
-    right: 10px;
-
-    .k-rtl & {
-        left: 10px;
-        right: auto;
-    }
-}
-
-.k-combobox > .k-dropdown-wrap > .k-clear-value {
-    right: calc(@combobox-clear-icon-offset);
-}
-
-.k-multiselect-wrap li {
-    min-height: calc((@input-height - .15em) + 0.64285714em + 2px);
-    margin: 0.2143em 0 0.2143em 0.2143em;
-    padding: 0.32142857em 1.8em 0.32142857em .857em;
-}
-
-.k-multiselect-wrap li span {
-    margin-right: .3em;
-}
-.k-multiselect-wrap li span.k-icon {
-    margin: 0;
-}
-
-.k-multiselect-wrap .k-select
-{
-    padding-top: 0;
-    line-height: calc((@input-height - .15em) + 0.64285714em);
-}
-
-.k-multiselect-wrap > .k-select
-{
-    line-height: normal;
-}
-
-.k-numeric-wrap .k-select {
-    vertical-align: baseline;
-}
-
-.k-numerictextbox .k-link {
-    display: block;
-    height: ~"calc((@{input-height} / 2) + @{input-padding-y})";
-}
-
-.k-numerictextbox .k-link .k-i-arrow-60-up {
-    vertical-align: bottom;
-}
-
-.k-numerictextbox .k-link .k-i-arrow-60-down {
-    vertical-align: text-top;
-}
-
 .k-menu.k-header,
 .k-menu .k-item,
 .k-widget.k-menu-horizontal > .k-item {
@@ -1629,11 +1539,6 @@ input.k-textbox,
 .k-menu .k-item > .k-link > .k-icon
 {
     margin-left: 2px;
-}
-
-.k-draghandle
-{
-    border-width: 2px;
 }
 
 .k-file {
@@ -1695,42 +1600,6 @@ input.k-textbox,
     }
 }
 
-.k-slider-track {
-    border-width: 0;
-}
-
-.k-slider-horizontal .k-slider-track,
-.k-slider-horizontal .k-slider-selection {
-    height: 2px;
-    margin-top: -1px;
-}
-
-.k-slider-vertical .k-slider-track,
-.k-slider-vertical .k-slider-selection {
-    width: 2px;
-    margin-left: -1px;
-}
-
-.k-slider-horizontal .k-draghandle,
-{
-    width: 6px;
-    height: 12px;
-    top: -7px;
-}
-
-.k-slider-vertical .k-draghandle
-{
-    width: 12px;
-    height: 6px;
-    left: -7px;
-}
-
-.k-widget.k-slider .k-slider-buttons .k-button
-{
-    border-width: 0;
-    background: transparent;
-}
-
 .k-colorpicker
 {
 
@@ -1761,16 +1630,6 @@ input.k-textbox,
 
 // Scheduler
 
-.k-gantt-toolbar .k-gantt-views > li > .k-link
-{
-    padding: .2em 0 0;
-}
-
-.k-gantt-toolbar .k-gantt-views > li
-{
-    margin: 0 .928em;
-}
-
 .k-scheduler-header .k-slot-cell
 {
     vertical-align: middle;
@@ -1793,21 +1652,6 @@ input.k-textbox,
     line-height: 2em;
 }
 
-.k-gantt-toolbar > ul.k-gantt-views > li {
-    border-width: 0 0 3px 0;
-    border-color: transparent;
-}
-
-.k-gantt-toolbar > ul > li:first-child + li {
-    border-left-width: 0;
-}
-
-.k-gantt-toolbar li .k-link {
-    vertical-align: middle;
-    line-height: 36px;
-    padding-top: 2px;
-}
-
 .k-gantt-actions
 {
     margin: .2em 0;
@@ -1828,35 +1672,6 @@ input.k-textbox,
 //RTL
 .k-rtl,
 [dir="rtl"] {
-    .k-widget {
-        .k-dropdown-wrap,
-        .k-picker-wrap,
-        .k-numeric-wrap {
-            padding-left: 2.5em;
-        }
-
-
-        &.k-autocomplete > .k-clear-value,
-        &.k-multiselect > .k-multiselect-wrap > .k-clear-value {
-            right: initial;
-            margin-right: 0;
-        }
-
-        &.k-combobox > .k-dropdown-wrap > .k-clear-value {
-            left: calc(@combobox-clear-icon-offset);
-            right: initial;
-        }
-
-        &.k-datetimepicker .k-picker-wrap {
-            padding-left: 5em;
-
-            .k-icon {
-                margin: 0 6px;
-            }
-        }
-
-    }
-
     .k-panel > .k-item > .k-link {
         padding-left: 1em;
         padding-right: 2.4em;
@@ -1872,31 +1687,6 @@ input.k-textbox,
         &.k-menu-vertical {
             .k-item > .k-link > .k-i-arrow-60-left {
                 left: 1rem;
-            }
-        }
-    }
-
-    .k-filter-row {
-        .k-filtercell {
-            & > span {
-                padding-left: calc(@filter-icon-size * 2 + 4px); // width of 2 filter buttons + 4px spacing
-                padding-right: 0;
-
-                & > .k-button {
-                    right: auto;
-                    left: 0;
-                }
-            }
-
-            & > .k-operator-hidden {
-                padding-left: calc(@filter-icon-size + 2px); // width of 1 filter button + 2px spacing
-                padding-right: 0;
-            }
-
-            .k-dropdown-operator,
-            .k-button.k-button-icon {
-                left: calc(@filter-icon-size + 2px); // width of the button + 2px
-                right: auto;
             }
         }
     }
@@ -1964,14 +1754,6 @@ div.k-spreadsheet-window {
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdown,
 .k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
     width: 4.7em;
-}
-
-.k-animation-container .k-popup.k-align .k-list .k-icon {
-    line-height: 1.4em;
-}
-
-.k-animation-container .k-popup.k-align .k-list .k-i-align-remove {
-    line-height: 1.6em;
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-buttons {
