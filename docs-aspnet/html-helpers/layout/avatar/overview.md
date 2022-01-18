@@ -16,7 +16,7 @@ It also gives you the flexibility to customize its border radius, size, color, e
 
 ## Initializing the Avatar
 
-To initialize the Avatar, you can use any `div` element. The following example demonstrates how to initialize the Avatar.
+The following example demonstrates how to initialize an Avatar component.
 
 ```
     @(Html.Kendo().Avatar()
@@ -45,7 +45,7 @@ You can access an existing Avatar instance by using the `.data()` jQuery method 
 
 ## Accessibility and Keyboard Navigation
 
-The [alt](/api/javascript/ui/avatar/configuration/alt) option can be used when the [type](/api/javascript/ui/avatar/configuration/type) is set to `image`. This value will be used to populate the alt attribute of the `<img>` element.
+The `Alt` option can be used when the `Type` is set to `Image`. This value will be used to populate the alt attribute of the `<img>` element.
 
 The Avatar is a non-focusable element.
 
@@ -53,4 +53,4 @@ The Avatar is a non-focusable element.
 ## See Also
 
 * [Overview of the Avatar (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/index)
-* [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
+* [JavaScript API Reference of the Avatar](https://docs.telerik.com/kendo-ui/api/javascript/ui/avatar)

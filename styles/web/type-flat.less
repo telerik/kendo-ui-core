@@ -283,6 +283,63 @@
 @toolbar-shadow: null;
 
 
+// Menu
+@menu-bg: @header-background-color;
+@menu-text: @header-text-color;
+@menu-border: null;
+@menu-gradient: null;
+
+@menu-item-bg: null;
+@menu-item-text: @link-text;
+@menu-item-border: null;
+@menu-item-gradient: null;
+
+@menu-item-hover-bg:  @hover-background-color;
+@menu-item-hover-text:  @hover-text-color;
+@menu-item-hover-border: @hover-border-color;
+@menu-item-hover-gradient: null;
+
+@menu-item-expanded-bg: null;
+@menu-item-expanded-text: @component-text;
+@menu-item-expanded-border: null;
+@menu-item-expanded-gradient: null;
+
+@menu-item-focus-shadow: @focused-shadow;
+
+@menu-scroll-button-bg: @component-bg;
+@menu-scroll-button-text: @component-text;
+@menu-scroll-button-border: @component-border;
+@menu-scroll-button-gradient: null;
+
+@menu-scroll-button-hover-bg: null;
+@menu-scroll-button-hover-text: @link-hovered-text;
+@menu-scroll-button-hover-border: null;
+@menu-scroll-button-hover-gradient: null;
+
+// Menu Popup
+@menu-popup-bg: @header-background-color;
+@menu-popup-text: @header-background-color;
+@menu-popup-border: @component-border;
+@menu-popup-gradient: null;
+
+@menu-popup-item-bg: null;
+@menu-popup-item-text: null;
+@menu-popup-item-border: null;
+@menu-popup-item-gradient: null;
+
+@menu-popup-item-hover-bg: @kendo-list-item-hover-bg;
+@menu-popup-item-hover-text: @kendo-list-item-hover-text;
+@menu-popup-item-hover-border: null;
+@menu-popup-item-hover-gradient: null;
+
+@menu-popup-item-expanded-bg: @menu-popup-item-hover-bg;
+@menu-popup-item-expanded-text: @menu-popup-item-hover-text;
+@menu-popup-item-expanded-border: null;
+@menu-popup-item-expanded-gradient: null;
+
+@menu-popup-item-focus-shadow: @menu-item-focus-shadow;
+
+
 // Treeview
 
 /// Background color of the treeview component.
@@ -1529,6 +1586,7 @@
 @import "mixins/border-radius.less";
 @import "themes/type.less";
 @import "Default/button/_theme.less";
+@import "Default/menu/_theme.less";
 @import "Default/input/_theme.less";
 @import "Default/dropdowngrid/_theme.less";
 @import "Default/daterangepicker/_theme.less";
@@ -1906,11 +1964,6 @@ td.k-group-cell,
     color: @active-text-color;
 }
 
-.k-menu .k-state-hover>.k-state-active
-{
-    background-color: transparent;
-}
-
 .k-state-highlight
 {
     background: @active-background-color;
@@ -2224,7 +2277,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-popup,
-.k-menu .k-menu-group,
 .k-grid .k-filter-options,
 .k-time-popup,
 .k-datepicker-calendar,
@@ -2398,11 +2450,6 @@ div.k-filebrowser-dropzone em
     color: @disabled-text-color;
 }
 
-.k-menu .k-popup
-{
-    color: @drop-down-text-color;
-}
-
 .k-tabstrip:focus
 {
     .box-shadow(@focused-shadow);
@@ -2447,12 +2494,6 @@ div.k-filebrowser-dropzone em
     outline-color: @tabstrip-content-border-focused;
 }
 
-.k-menu,
-.k-menu .k-item
-{
-    border-color: @menu-border-color;
-}
-
 .k-column-menu,
 .k-column-menu .k-item,
 .k-grid-columnmenu-popup,
@@ -2469,11 +2510,6 @@ div.k-filebrowser-dropzone em
 .k-column-menu-group-header-text {
     color: @link-text-color;
     border-color: @link-text-color;
-}
-
-.k-menu .k-group
-{
-    border-color: @group-border-color;
 }
 
 .k-grid-filter.k-state-active
@@ -2542,11 +2578,6 @@ div.k-filebrowser-dropzone em
 .k-scheduler-table .k-state-hover .k-icon
 {
     background-color: transparent;
-}
-
-.k-menu .k-popup
-{
-    color: @secondary-text-color;
 }
 
 .k-chart .k-mask {

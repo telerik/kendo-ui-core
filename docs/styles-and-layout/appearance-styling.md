@@ -23,7 +23,9 @@ This is how the same themes are rendered in widgets that visualize data, such as
 
 ## Getting Started
 
-> The LESS-based themes support only the default values of the new [Components Styling Options]({% slug components_rendering_overview %}#styling-options).
+> The LESS-based themes support only the default value of the [Size styling option]({% slug components_rendering_overview %}#size).
+
+> As of 2022 R1, components receive the default value for the [Rounded styling option]({% slug components_rendering_overview %}#rounded)  through the `k-rounded-md` class. Check the [Backwards Compatibility section](#backwards-compatibility) for more details.
 
 Setting a Kendo UI theme for any of the Kendo UI widgets, such as [Kendo UI Grid](https://demos.telerik.com/kendo-ui/grid/index), or [Kendo UI Bar Chart](https://demos.telerik.com/kendo-ui/bar-charts/index), requires you to include the following two stylesheets to your project:
 
@@ -222,6 +224,40 @@ The following list demonstrates the names of the `.less` files that are supporte
 | `kendo.common-[theme-name].less` | Contains sizing adjustments for [theme-name] for all Kendo UI widgets. Building it produces a common file for all Kendo UI widgets. |
 | `kendo.rtl.css` | Contains styles for widgets in RTL mode, CSS only. |
 | `type-[theme-name].less` | Contains supporting files that cannot be built. Translates the colors from `kendo.[theme-name].less` to the theme colors to a usable theme. |
+
+## Backwards Compatibility 
+
+### Rounded Components with High Contrast Theme
+
+As of 2022 R1, the [default rounded value]({% slug components_rendering_overview %}#styling-options) of the components is set to `medium`.
+
+To revert back to the previous border-radius (9999px) value you can:
+
+* Set the `rounded` option of the component to `full`:
+
+        <button type="button" class="k-button k-rounded-full">
+            <span class="k-button-text">Text</span>
+        </button>
+   
+   * If you are using widget initialization:
+
+        <button id="roundedButton"></button>
+
+        <script>
+            $("#roundedButton").kendoButton({
+                rounded: "full"
+            });
+        </script>
+
+* Override the `.k-rounded-md` class:
+
+        .k-rounded-md { /* Global rule */
+            border-radius: 9999px !important!
+        }
+
+        .k-button.k-rounded-md { /* Scoped rule */
+            border-radius: 9999px !important!
+        }
 
 ## See Also
 

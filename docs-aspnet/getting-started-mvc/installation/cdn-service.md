@@ -11,11 +11,12 @@ permalink: /getting-started/installation/cdn-service
 
 The Kendo UI CDN is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/).
 
-Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
+Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol. Use any of the following CDN services:
+
+* `kendo.cdn.telerik.com`
+* `cdn.kendostatic.com` (a cookieless CDN service)
 
 ## Using the HTTP Protocol
-
-> The http://cdn.kendostatic.com/ URL is still active but is no longer recommended for new projects.
 
 The minified versions of all JavaScript files are available at the following locations:
 * `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/FILENAME.min.js`

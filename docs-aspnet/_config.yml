@@ -415,9 +415,12 @@ navigation:
         title: "Wizard"
      "html-helpers/navigation/radiobutton":
         title: "RadioButton"
+     "html-helpers/navigation/menu/binding":
+        title: "Data Binding"
+        position: 3
      "html-helpers/navigation/menu/contextmenu":
         title: "ContextMenu"
-        position: 3
+        position: 4
      "html-helpers/conversational-ui":
         title: "Conversational UI"
         isNew: true
@@ -490,6 +493,8 @@ navigation:
         title: "Spreadsheet"
      "*arcgauge":
         title: "ArcGauge"
+     "*avatar":
+        title: "Avatar"
      "*circulargauge":
         title: "CircularGauge"
      "*autocomplete":
@@ -676,10 +681,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2022.1.118"
+cdnVersion: "2022.1.119"
 
 ## The MVC Core version used
-mvcCoreVersion: "2022.1.118"
+mvcCoreVersion: "2022.1.119"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 
@@ -1001,6 +1006,11 @@ defaults:
         path: "html-helpers/interactivity/sortable"
     values:
         title_prefix: "ASP.NET Core Sortable Component"
+-
+    scope:
+        path: "html-helpers/layout/avatar"
+    values:
+        title_prefix: "ASP.NET Core Avatar Component"
 -
     scope:
         path: "html-helpers/layout/badge"
