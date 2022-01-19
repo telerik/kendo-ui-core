@@ -204,6 +204,62 @@
 @toolbar-shadow: null;
 
 
+// Menu
+@menu-bg: @base;
+@menu-text: @component-text;
+@menu-border: @base;
+@menu-gradient: null;
+
+@menu-item-bg: null;
+@menu-item-text:  @link-text-color;
+@menu-item-border: null;
+@menu-item-gradient: null;
+
+@menu-item-hover-bg:  @accent-hover-background;
+@menu-item-hover-text:  @normal-text-color;
+@menu-item-hover-border: @hover-border-color;
+@menu-item-hover-gradient: null;
+
+@menu-item-expanded-bg: null;
+@menu-item-expanded-text: @component-text;
+@menu-item-expanded-border: null;
+@menu-item-expanded-gradient: null;
+
+@menu-item-focus-shadow: @focused-shadow;
+
+@menu-scroll-button-bg: @component-bg;
+@menu-scroll-button-text: @component-text;
+@menu-scroll-button-border: @component-border;
+@menu-scroll-button-gradient: null;
+
+@menu-scroll-button-hover-bg: null;
+@menu-scroll-button-hover-text: @link-hovered-text;
+@menu-scroll-button-hover-border: null;
+@menu-scroll-button-hover-gradient: null;
+
+// Menu Popup
+@menu-popup-bg: @component-bg;
+@menu-popup-text: @header-background-color;
+@menu-popup-border: @component-border;
+@menu-popup-gradient: null;
+
+@menu-popup-item-bg: null;
+@menu-popup-item-text: @normal-text-color;
+@menu-popup-item-border: null;
+@menu-popup-item-gradient: null;
+
+@menu-popup-item-hover-bg: @kendo-list-item-hover-bg;
+@menu-popup-item-hover-text: @kendo-list-item-hover-text;
+@menu-popup-item-hover-border: null;
+@menu-popup-item-hover-gradient: null;
+
+@menu-popup-item-expanded-bg: @selected-background-color;
+@menu-popup-item-expanded-text: @selected-text-color;
+@menu-popup-item-expanded-border: null;
+@menu-popup-item-expanded-gradient: null;
+
+@menu-popup-item-focus-shadow: @menu-item-focus-shadow;
+
 // Treeview
 
 /// Background color of the treeview component.
@@ -1465,6 +1521,7 @@
 @import "themes/type.less";
 @import "Default/button/_theme.less";
 @import "Default/input/_theme.less";
+@import "Default/menu/_theme.less";
 @import "Default/dropdowngrid/_theme.less";
 @import "Default/daterangepicker/_theme.less";
 @import "Default/avatar/_theme.less";
@@ -1520,6 +1577,17 @@
 @import "Default/panelbar/_theme.less";
 @import "Default/colorpicker/_theme.less";
 
+// Menu
+.k-menu:not(.k-context-menu) .k-link {
+    .fill( @text: @menu-text );
+}
+.k-menu-link.k-link.k-state-active {
+    color: white;
+    background-color: #ff4350;
+}
+.k-menu-horizontal .k-menu-link {
+    border-width: 0;
+}
 
 // Main colors
 .k-splitbar .k-resize-handle {
@@ -1606,7 +1674,6 @@
 }
 
 .k-popup,
-.k-menu .k-menu-group,
 .k-grid .k-filter-options,
 .k-time-popup {
     .box-shadow(@popups-shadow);
@@ -1704,36 +1771,6 @@
 
 .k-quality-list {
     margin-left: -25px !important;
-}
-
-// Menu
-.k-menu {
-    background-color: @base;
-    border-color: @base;
-}
-
-.k-menu {
-    >.k-item.k-state-hover {
-        color: @normal-text-color;
-    }
-
-    .k-popup .k-item {
-        color: @link-text-color;
-    }
-
-    .k-item > .k-state-active {
-        color: @selected-text-color;
-        background-color: @selected-background;
-    }
-
-    .k-state-selected.k-state-hover,
-    .k-menu-scroll-button:hover {
-        background-color: lighten(@info, 11%);
-    }
-
-    .k-state-hover .k-link.k-state-active {
-        background-color: @accent-hover-background;
-    }
 }
 
 // Inputs

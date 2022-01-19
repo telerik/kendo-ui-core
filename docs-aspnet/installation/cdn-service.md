@@ -11,7 +11,10 @@ position: 8
 
 The Kendo UI client-side resources like JavaScript files and CSS files are available online through the Kendo CDN service, which is hosted on the [Amazon CloudFront](https://aws.amazon.com/cloudfront/). Including the client-side resources in your project is essential because the Telerik UI helpers are wrappers over the [Kendo UI widgets](https://docs.telerik.com/kendo-ui/intro/first-steps).
 
-Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on the CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol.
+Only the official Kendo UI releases and serviced packs are uploaded to the CDN. Internal builds are not available on the CDN. To access the Kendo UI CDN services, you can use either the [HTTP](#using-the-http-protocol) or the [HTTPS](#using-the-https-protocol) protocol. Use any of the following CDN services:
+
+* `kendo.cdn.telerik.com`
+* `cdn.kendostatic.com` (a cookieless CDN service)
 
 ## Using the HTTPS Protocol
 
@@ -28,8 +31,6 @@ For example, the `{{ site.mvcCoreVersion }}` version can be loaded from the foll
 The minified Kendo UI scripts are available as of the Kendo UI Q1 2014 SP1 release. To load the scripts, use the `https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.ui.core.min.js` URL.
 
 ## Using the HTTP Protocol
-
-> The http://cdn.kendostatic.com/ URL remains active but is no longer recommended for new projects.
 
 To access the Kendo UI CDN service through the HTTP protocol, use the same URL from the previous section and replace the scheme (protocol) with `http`&mdash;for example, `http://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js`.
 

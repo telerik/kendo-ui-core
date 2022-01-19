@@ -94,6 +94,40 @@
 @messagebox-link-text-decoration: underline;
 
 
+// Menu
+@menu-padding-x: 0px;
+@menu-padding-y: 0px;
+@menu-border-width: 0px;
+@menu-font-family: inherit;
+@menu-font-size: inherit;
+@menu-line-height: @line-height;
+
+@menu-item-padding-x: 1.2em;
+@menu-item-padding-y: 1.2em;
+@menu-item-spacing: @spacing[2];
+@menu-item-icon-spacing: @icon-spacing;
+
+@menu-separator-spacing: @spacing[1];
+
+// Menu popup
+@menu-popup-padding-x: null;
+@menu-popup-padding-y: null;
+@menu-popup-border-width: 1px;
+
+@menu-popup-font-size: @font-size;
+@menu-popup-line-height: @line-height;
+
+// Menu popup item
+@menu-popup-item-padding-x: @spacing[2];
+@menu-popup-item-padding-y: @spacing[1];
+
+@menu-popup-item-padding-end: ~"calc( (@{menu-popup-item-padding-x} * 2) + @{icon-size} )";
+@menu-popup-item-icon-margin-start: @menu-popup-item-padding-x;
+@menu-popup-item-icon-margin-end: ~"calc( -1 * (@{menu-popup-item-padding-end} - @{menu-popup-item-padding-x} / 2) )";
+
+@menu-popup-item-spacing: 0px;
+
+
 // Form
 @form-font-size: inherit;
 @form-line-height: (20 / 14);

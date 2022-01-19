@@ -290,7 +290,7 @@ var __meta__ = { // jshint ignore:line
     function updateArrow(item) {
         item = $(item);
 
-        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-arrow]:not(.k-sprite)").remove();
+        item.find("> .k-link > .k-menu-expand-arrow > [class*=k-i-arrow]:not(.k-sprite)").parent().remove();
 
         item.filter(":has(.k-menu-group)")
             .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
@@ -1415,6 +1415,7 @@ var __meta__ = { // jshint ignore:line
                    })
                    .addClass("k-group k-menu-group k-menu-group-md")
                    .attr("role", "menu")
+                   .hide()
                    .attr("aria-hidden", element.is(":visible"))
                    .parent("li")
                    .attr("aria-haspopup", "true")

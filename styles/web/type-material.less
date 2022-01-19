@@ -307,6 +307,63 @@
 @toolbar-shadow: @button-shadow;
 
 
+// Menu
+@menu-bg: @component-bg;
+@menu-text: @component-text;
+@menu-border: null;
+@menu-gradient: null;
+
+@menu-item-bg: null;
+@menu-item-text: @link-text;
+@menu-item-border: null;
+@menu-item-gradient: null;
+
+@menu-item-hover-bg:  @hover-background-color;
+@menu-item-hover-text:  @hover-text-color;
+@menu-item-hover-border: @hover-border-color;
+@menu-item-hover-gradient: null;
+
+@menu-item-expanded-bg: null;
+@menu-item-expanded-text: @component-text;
+@menu-item-expanded-border: null;
+@menu-item-expanded-gradient: null;
+
+@menu-item-focus-shadow: @focused-shadow;
+
+@menu-scroll-button-bg: @component-bg;
+@menu-scroll-button-text: @component-text;
+@menu-scroll-button-border: @component-border;
+@menu-scroll-button-gradient: null;
+
+@menu-scroll-button-hover-bg: null;
+@menu-scroll-button-hover-text: @link-hovered-text;
+@menu-scroll-button-hover-border: null;
+@menu-scroll-button-hover-gradient: null;
+
+// Menu Popup
+@menu-popup-bg: @header-background-color;
+@menu-popup-text: @header-background-color;
+@menu-popup-border: @component-border;
+@menu-popup-gradient: null;
+
+@menu-popup-item-bg: null;
+@menu-popup-item-text: @normal-text-color;
+@menu-popup-item-border: null;
+@menu-popup-item-gradient: null;
+
+@menu-popup-item-hover-bg: @kendo-list-item-hover-bg;
+@menu-popup-item-hover-text: @kendo-list-item-hover-text;
+@menu-popup-item-hover-border: null;
+@menu-popup-item-hover-gradient: null;
+
+@menu-popup-item-expanded-bg: @menu-popup-item-hover-bg;
+@menu-popup-item-expanded-text: @menu-popup-item-hover-text;
+@menu-popup-item-expanded-border: null;
+@menu-popup-item-expanded-gradient: null;
+
+@menu-popup-item-focus-shadow: @menu-item-focus-shadow;
+
+
 // Treeview
 
 /// Background color of the treeview component.
@@ -1555,6 +1612,7 @@
 @import "themes/type.less";
 @import "Default/button/_theme.less";
 @import "Default/input/_theme.less";
+@import "Default/menu/_theme.less";
 @import "Default/dropdowngrid/_theme.less";
 @import "Default/daterangepicker/_theme.less";
 @import "Default/avatar/_theme.less";
@@ -1609,6 +1667,14 @@
 @import "Default/panelbar/_theme.less";
 @import "Default/colorpicker/_theme.less";
 
+// Menu
+.k-menu:not(.k-context-menu) .k-link {
+    .fill( @text: @menu-text );
+}
+.k-menu-link.k-link.k-state-active {
+    background-color: @menu-item-hover-bg;
+    color: @menu-text;
+}
 
 .k-in,
 .k-item
@@ -1944,11 +2010,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     color: @active-text-color;
 }
 
-.k-menu .k-state-hover>.k-state-active
-{
-    background-color: transparent;
-}
-
 .k-state-highlight
 {
     background: @active-background-color;
@@ -1993,11 +2054,6 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
 td.k-state-focused
 {
     .box-shadow(@focused-item-shadow);
-}
-
-.k-menu .k-item.k-state-default.k-state-focused
-{
-    .box-shadow(@focused-menu-item-shadow);
 }
 
 .k-state-focused.k-state-selected,
@@ -2272,7 +2328,6 @@ div.k-filebrowser-dropzone em
 }
 
 .k-popup,
-.k-menu .k-menu-group,
 .k-grid .k-filter-options,
 .k-time-popup,
 .k-datepicker-calendar,
@@ -2454,11 +2509,6 @@ div.k-filebrowser-dropzone em
     color: @disabled-text-color;
 }
 
-.k-menu .k-popup
-{
-    color: @drop-down-text-color;
-}
-
 .k-tabstrip:focus
 {
     .box-shadow(@focused-shadow);
@@ -2494,12 +2544,6 @@ div.k-filebrowser-dropzone em
     outline-color: @tabstrip-content-border-focused;
 }
 
-.k-menu,
-.k-menu .k-item
-{
-    border-color: @menu-border-color;
-}
-
 .k-column-menu,
 .k-column-menu .k-item,
 .k-grid-columnmenu-popup,
@@ -2516,11 +2560,6 @@ div.k-filebrowser-dropzone em
 .k-column-menu-group-header-text {
     color: @normal-text-color;
     border-color: @normal-text-color;
-}
-
-.k-menu .k-group
-{
-    border-color: @group-border-color;
 }
 
 .k-grid-filter.k-state-active
@@ -2651,27 +2690,9 @@ div.k-splitbar.k-state-focused .k-icon,
 // Menu
 .k-group,
 .k-menu,
-.k-menu .k-group,
 .k-popup.k-widget.k-context-menu {
     color: @widget-text-color;
     background-color: @widget-background-color;
-}
-
-.k-menu .k-group,
-.k-popup.k-context-menu.k-group {
-    border-color: @widget-border-color;
-}
-
-.k-menu,
-.k-menu .k-item,
-.k-widget.k-menu-horizontal > .k-item {
-    .box-shadow(none);
-}
-
-.k-menu .k-state-active,
-.k-popup.k-context-menu.k-group .k-state-hover {
-    background-color: @hover-background-color;
-    border-color: @hover-border-color;
 }
 
 .k-grid .k-header .k-button {

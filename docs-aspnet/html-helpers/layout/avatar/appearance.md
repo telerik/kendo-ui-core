@@ -10,32 +10,43 @@ position: 2
 
 The Аvatar allows you to set different styles based on its content.
 
-## Rounding and Type
+## Type
 
-The available [`types`](/api/javascript/ui/avatar/configuration/type) are:
+The `Type` can be configured via the `AvatarType` enumeration. The available `AvatarType` values are:
 
-- Image—By passing an `img` element as child element of the Avatar.
-- Text avatar (Default)—By passing a string that will be rendered as text (initials).
-- Icon avatar—By passing an `icon` to the Avatar component.
+- `Text` (Default) — By passing a string that will be rendered as text (initials).
+- `Image` — By passing an `img` element as child element of the Avatar.
+- `Icon` — By passing an `icon` to the Avatar component.
 
-All of the types can be rendered in a different shape by setting the `rounded` property.
-
-The available [`rounded`](/api/javascript/ui/avatar/configuration/rounded) values are:
-
-- "full" (default)—Renders a circle shape avatar.
-- "small"—Renders an avatar with small border radius.
-- "medium"—Renders an avatar with meduim border radius.
-- "large"—Renders an avatar with large border radius.
-- null—Renders an avatar with no border radius (square avatar).
-
-The following example demonstrates the `type` and `rounded` options of the Avatar:
+The following example demonstrates the `Type` option of the Avatar:
 
 ```
         @(Html.Kendo().Avatar()
             .Name("avatar")
             .Type(AvatarType.Text)
             .Text("IMG")
-            .Rounded(AvatarRounded.Null)
+      )
+```
+
+All of the types can be rendered in a different shape by setting the `Rounded` property.
+
+## Rounded
+
+The `Rounded` property can be configured via the `Rounded` enumeration. The available values are:
+
+- `Full` (default) — Renders a circle shape avatar.
+- `Small` — Renders an avatar with small border radius.
+- `Medium` — Renders an avatar with meduim border radius.
+- `Large` — Renders an avatar with large border radius.
+- `Null` — Renders an avatar with no border radius (square avatar).
+
+The following example demonstrates the `Rounded` option of the Avatar:
+
+```
+        @(Html.Kendo().Avatar()
+            .Name("avatar")
+            .Text("IMG")
+            .Rounded(AvatarRounded.Large)
       )
 ```
 
@@ -43,21 +54,20 @@ The following example demonstrates the `type` and `rounded` options of the Avata
 
 The Аvatar allows you to specify predefined theme colors.
 
-The available [themeColor](/api/javascript/ui/avatar/configuration/themeColor) values are:
+The available `ThemeColor` values are:
 
-- primary (Default)—Applies coloring based on the primary theme color.
-- base-Applies base theme color.
-- secondary—Applies coloring based on the secondary theme color.
-- tertiary—Applies coloring based on the tertiary theme color.
-- inherit—Applies the inherited coloring value.
-- info—Applies coloring based on the info theme color.
-- success—Applies coloring based on the success theme color.
-- warning—Applies coloring based on the warning theme color.
-- error—Applies coloring based on the error theme color.
-- dark—Applies coloring based on the dark theme color.
-- light—Applies coloring based on the light theme color.
-- inverse—Applies coloring based on the inverted theme color.
-- null-will apply no theme color class.
+- `Primary` (Default)—Applies coloring based on the primary theme color.
+- `Base` - Applies base theme color.
+- `Secondary` — Applies coloring based on the secondary theme color.
+- `Tertiary` — Applies coloring based on the tertiary theme color.
+- `Inherit` — Applies the inherited coloring value.
+- `Info` — Applies coloring based on the info theme color.
+- `Success` — Applies coloring based on the success theme color.
+- `Warning` — Applies coloring based on the warning theme color.
+- `Error` — Applies coloring based on the error theme color.
+- `Dark` — Applies coloring based on the dark theme color.
+- `Light` — Applies coloring based on the light theme color.
+- `Inverse` — Applies coloring based on the inverted theme color.
 
 ```
    @(Html.Kendo().Avatar()
@@ -71,16 +81,12 @@ The available [themeColor](/api/javascript/ui/avatar/configuration/themeColor) v
 
 ## Size
 
-The Avatar allows you to set predefined or custom sizes. To specify a predefined size, set the [`size`](/api/javascript/ui/avatar/configuration/size) property.
+The Avatar allows you to set predefined or custom sizes. The `Size` property can be configured via the `ComponentSize`enumeration. The available values are:
 
-The available [`size`](/api/javascript/ui/avatar/configuration/size) values are:
-
-- "small"
-- "medium" (Default)
-- "large"
-- null
-
-To specify a custom avatar size, use the [style](/api/javascript/ui/avatar/configuration/style) property.
+- `Small`
+- `Medium` (Default)
+- `Large`
+- `Null`
 
 ```
     @(Html.Kendo().Avatar()
@@ -93,15 +99,11 @@ To specify a custom avatar size, use the [style](/api/javascript/ui/avatar/confi
 
 ## FillMode
 
-The Avatar enables you to set styling options and create solid or outline avatars by setting the [`fillMode`](/api/javascript/ui/avatar/configuration/fillMode) property.
+The Avatar enables you to set styling options and create solid or outline avatars by setting the `FillMode`. The available `FillMode` values are:
 
-The available [fillMode](/api/javascript/ui/avatar/configuration/fillMode) values are:
-
-- "solid" (Default)
-- "outline"
-- null
-
-An additional border around the content of an outline avatar can be rendered by setting the [`border`](/api/javascript/ui/avatar/configuration/border) property to true.
+- `Solid` (Default)
+- `Outline`
+- `Null`
 
 ```
     @(Html.Kendo().Avatar()
@@ -114,7 +116,7 @@ An additional border around the content of an outline avatar can be rendered by 
 
 ## Border
 
-The Avatar allows you to specify whether or not to render an additional border around its content by using the [border](/api/javascript/ui/avatar/configuration/border) property. By default, the border is set to `false`.
+The Avatar allows you to specify whether or not to render an additional border around its content by using the `Border` property. By default, the border is set to `false`.
 
 ```
     @(Html.Kendo().Avatar()
@@ -127,5 +129,5 @@ The Avatar allows you to specify whether or not to render an additional border a
 
 ## See Also
 
-* [Basic Usage of the Avatar (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/appearance)
-* [JavaScript API Reference of the Avatar](/api/javascript/ui/avatar)
+* [Appearance of the Avatar (Demo)](https://demos.telerik.com/{{ site.platform }}/avatar/appearance)
+* [JavaScript API Reference of the Avatar](https://docs.telerik.com/kendo-ui/api/javascript/ui/avatar)

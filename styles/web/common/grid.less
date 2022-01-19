@@ -811,7 +811,6 @@ div.k-grid-footer
     }
 
     .k-searchbox,
-    .k-textbox,
     .k-widget {
         margin-bottom: 8px;
         width: 100%;
@@ -840,11 +839,15 @@ div.k-grid-footer
 
         .k-filter-menu-container {
             padding: @grid-column-menu-popup-padding-y @grid-column-menu-popup-padding-x;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: stretch;
         }
 
         .k-widget,
         .k-radio-list,
-        .k-textbox {
+        .k-textbox,
+        .k-numerictextbox {
             margin: (@spacer / 2) 0;
         }
 
@@ -1014,6 +1017,7 @@ div.k-grid-footer
 
 // Column menu Group Header
 .k-column-menu-group-header {
+    padding: @padding-x @padding-y;
     display: flex;
     flex: 0 0 auto;
     position: relative;

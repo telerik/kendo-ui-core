@@ -270,7 +270,7 @@ it('open should open item even if disabled', function(done) {
     }, 1);
 });
 
-it('open should apply max-height and overflow styles to group UL', function(done) {
+it.skip('open should apply max-height and overflow styles to group UL', function(done) {
     var item = getRootItem(1).parent(),
         ul = item.find(".k-group");
 

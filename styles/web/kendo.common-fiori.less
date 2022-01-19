@@ -95,6 +95,40 @@
 @messagebox-link-text-decoration: underline;
 
 
+// Menu
+@menu-padding-x: 0px;
+@menu-padding-y: 0px;
+@menu-border-width: 0px;
+@menu-font-family: inherit;
+@menu-font-size: inherit;
+@menu-line-height: @line-height;
+
+@menu-item-padding-x: @padding-x;
+@menu-item-padding-y: @padding-y-lg;
+@menu-item-spacing: @spacing[2];
+@menu-item-icon-spacing: @icon-spacing;
+
+@menu-separator-spacing: @spacing[1];
+
+// Menu popup
+@menu-popup-padding-x: null;
+@menu-popup-padding-y: null;
+@menu-popup-border-width: 1px;
+
+@menu-popup-font-size: @font-size;
+@menu-popup-line-height: @line-height;
+
+// Menu popup item
+@menu-popup-item-padding-x: @spacing[2];
+@menu-popup-item-padding-y: @spacing[1];
+
+@menu-popup-item-padding-end: ~"calc( (@{menu-popup-item-padding-x} * 2) + @{icon-size} )";
+@menu-popup-item-icon-margin-start: @menu-popup-item-padding-x;
+@menu-popup-item-icon-margin-end: ~"calc( -1 * (@{menu-popup-item-padding-end} - @{menu-popup-item-padding-x} / 2) )";
+
+@menu-popup-item-spacing: 0px;
+
+
 // Form
 @form-font-size: inherit;
 @form-line-height: (20 / 14);
@@ -1521,26 +1555,6 @@
     border-top: 0;
 }
 
-.k-menu.k-header,
-.k-menu .k-item,
-.k-widget.k-menu-horizontal > .k-item {
-    border-width: 0;
-}
-
-.k-context-menu.k-menu-vertical > .k-item > .k-link,
-.k-menu .k-menu-group .k-item > .k-link {
-    padding: 0.786em 3em 0.786em 1.714em;
-}
-
-.k-menu .k-item > .k-link  > .k-i-arrow-60-right {
-    right: 1rem;
-}
-
-.k-menu .k-item > .k-link > .k-icon
-{
-    margin-left: 2px;
-}
-
 .k-file {
     padding: .643em .17em .643em 1em;
 }
@@ -1676,20 +1690,6 @@
         padding-left: 1em;
         padding-right: 2.4em;
     }
-
-    .k-context-menu.k-menu-vertical > .k-item > .k-link,
-    .k-menu .k-menu-group .k-item > .k-link {
-        padding: 0.786em 1.714em 0.786em 3em;
-    }
-
-    .k-menu {
-        &,
-        &.k-menu-vertical {
-            .k-item > .k-link > .k-i-arrow-60-left {
-                left: 1rem;
-            }
-        }
-    }
 }
 
 .k-spreadsheet {
@@ -1773,17 +1773,6 @@ div.k-spreadsheet-window {
         padding-right: 0;
     }
 }
-
-.k-spreadsheet-filter-menu > .k-menu .k-link {
-    padding-left: 26px;
-}
-.k-spreadsheet-filter-menu > .k-menu .k-link .k-icon {
-    margin-left: -26px;
-    margin-right: 0;
-}
-
-
-
 
 // Pager
 .k-pager-wrap {

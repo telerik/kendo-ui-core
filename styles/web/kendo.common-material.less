@@ -94,6 +94,40 @@
 @messagebox-link-text-decoration: underline;
 
 
+// Menu
+@menu-padding-x: 0px;
+@menu-padding-y: 0px;
+@menu-border-width: 0px;
+@menu-font-family: inherit;
+@menu-font-size: inherit;
+@menu-line-height: @line-height;
+
+@menu-item-padding-x: @padding-x;
+@menu-item-padding-y: @padding-y-lg;
+@menu-item-spacing: @spacing[2];
+@menu-item-icon-spacing: @icon-spacing;
+
+@menu-separator-spacing: @spacing[1];
+
+// Menu popup
+@menu-popup-padding-x: null;
+@menu-popup-padding-y: null;
+@menu-popup-border-width: 1px;
+
+@menu-popup-font-size: @font-size;
+@menu-popup-line-height: @line-height;
+
+// Menu popup item
+@menu-popup-item-padding-x: @spacing[2];
+@menu-popup-item-padding-y: @spacing[2];
+
+@menu-popup-item-padding-end: ~"calc( (@{menu-popup-item-padding-x} * 2) + @{icon-size} )";
+@menu-popup-item-icon-margin-start: @menu-popup-item-padding-x;
+@menu-popup-item-icon-margin-end: ~"calc( -1 * (@{menu-popup-item-padding-end} - @{menu-popup-item-padding-x} / 2) )";
+
+@menu-popup-item-spacing: 0px;
+
+
 // Form
 @form-font-size: inherit;
 @form-line-height: (20 / 14);
@@ -1517,40 +1551,9 @@
     border: 0;
 }
 
-.k-menu.k-header,
-.k-menu .k-item,
-.k-widget.k-menu-horizontal > .k-item {
-    border-width: 0;
-}
-
 .k-popup.k-context-menu {
     border-width: 1px;
     border-style: solid;
-}
-
-.k-context-menu.k-menu-vertical > .k-item > .k-link,
-.k-menu .k-menu-group .k-item > .k-link {
-    padding: 0.5em 4.929em 0.5em 1.714em;
-}
-
-.k-menu .k-item > .k-link {
-
-    & > .k-i-arrow-60-right {
-        right:  @menu-link-padding;
-    }
-
-    & > .k-i-arrow-60-left {
-        right: auto;
-        left:  @menu-link-padding;
-    }
-}
-
-.k-menu .k-animation-container .k-menu-group {
-    padding: 1.143em 0;
-}
-
-.k-column-menu .k-menu .k-animation-container .k-menu-group {
-    padding: 0;
 }
 
 .k-column-menu .k-menu-vertical .k-separator {
@@ -1738,30 +1741,6 @@ div.editorToolbarWindow.k-window-content {
     content: " ";
     display: block;
     clear: both;
-}
-
-//RTL
-.k-rtl,
-[dir="rtl"] {
-    .k-menu .k-item,
-    .k-widget.k-menu-horizontal > .k-item {
-        border-width: 0;
-    }
-
-    .k-context-menu.k-menu-vertical > .k-item > .k-link,
-    .k-menu .k-menu-group .k-item > .k-link {
-        padding: 0.5em 1.714em 0.5em 4.929em;
-    }
-
-    .k-menu {
-        .k-menu-group,
-        &.k-menu-vertical  {
-            .k-item > .k-link > .k-menu-expand-arrow {
-                right: auto;
-                left: 1.071em;
-            }
-        }
-    }
 }
 
 .k-spreadsheet .k-spreadsheet-action-bar {
