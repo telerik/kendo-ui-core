@@ -2680,7 +2680,8 @@ declare namespace kendo.ui {
         navigateToFuture(): void;
         navigateToPast(): void;
         navigateUp(): void;
-        selectDates(): void;
+        selectDates(): any;
+        selectDates(dates: any): void;
         value(): Date;
         value(value: Date): void;
         value(value: string): void;
