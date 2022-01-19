@@ -4,7 +4,7 @@ page_title: Sass Theme Builder
 description: "Use the Sass Theme Builder to customize Kendo UI themes in {{ site.product }} applications."
 slug: sass_theme_builder
 previous_url: /styles-and-layout/overview
-position: 3
+position: 4
 ---
 
 # Using the Sass Theme Builder

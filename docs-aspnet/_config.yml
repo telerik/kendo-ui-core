@@ -444,6 +444,9 @@ navigation:
      "styles-and-layout":
         title: "Styles and Appearance"
         position: 7
+     "styles-and-layout/styling-components":
+        title: "Styling Components"
+        position: 3
      "globalization":
         title: "Globalization"
         position: 8

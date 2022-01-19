@@ -10,6 +10,8 @@ position: 0
 
 Kendo UI R1 2022 introduces new rendering for several components. As this is an ongoing effort, there may be slight changes and touch-ups after the release. The new rendering will cover the entire list of web UI components.
 
+> Larger visual updates like these can have implications in the form of visual regressions which could appear when upgrading from an older version to R1 2022. While we believe that we have caught and resolved many visual regression issues while getting ready for R1 2022, there may be additional issues discovered after the release. We are firmly committed to address these issues as quickly as possible and will continue to push out updates with fixes to our themes and components after the R1 2022 release.
+
 - [What is the Reason Behind These Changes?](#what-is-the-reason-behind-these-changes)
 - [Styling Options](#styling-options)
 - [State Classes](#state-classes)
