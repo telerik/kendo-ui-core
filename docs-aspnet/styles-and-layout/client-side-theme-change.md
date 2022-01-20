@@ -3,7 +3,7 @@ title: Change Theme On The Client
 page_title: Change Theme On The Client
 description: "How to Change The {{ site.product }} Application Theme On The Client"
 slug: howto_changethemeontheclient
-position: 4
+position: 6
 ---
 
 # Change Theme On The Client 
