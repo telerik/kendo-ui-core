@@ -44,7 +44,7 @@ Download Telerik UI Kits
 
 These professional UI kits incorporate pre-built reusable design components that act in accordance with the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/).
 
-The design files include 30+ of the most widely used UI for {{site.framework}} components such as Grid, Scheduler, Dropdowns, Inputs, with their detailed anatomical structures, colors, indicators, and icons. The included building blocks and elements enable smooth collaboration between designers and developers and our goal is to continuously grow the number of included components and ensure full coverage.
+The design files include 90+ of the {{site.framework}} components. Currently all components are available except Charts. The included building blocks and elements enable smooth collaboration between designers and developers and our goal is to continuously grow the number of included components and ensure full coverage.
 
 ## Benefits of Using the Telerik UI Design Kits for Figma 
 You can enjoy the following advantages when using the UI kits: 
@@ -71,8 +71,7 @@ Each UI kit contains the following pages:
 - **Getting Started**&mdash;all you need to know to start operating with the UI kits.
 - **Styles**&mdash;typography, colors, and effects affecting the components and their variants.
 - **Icons**&mdash;all icons in the form of convenient components.
-- **Components & Variants**&mdash;all available components and their variants.
-- **\_Base (Structural Components)**&mdash;building blocks which can serve as a base component to many component states and types (normal, active, hover, solid, flat, etc.). As a result, a change in the base component will affect all components using this base.
+- **Components & Variants**&mdash;all available components and their variants. Base (Structural Components) are located above the corresponding frames on the Components page. 
 - **Scenarios**&mdash;different use case scenarios for the included components (work in progress).
 - **Change log**&mdash;release history of the kit changes.
 
@@ -143,7 +142,7 @@ Download Telerik UI Kits
 </button>
 </a>
 
-The Telerik UI Design Kits offer pre-built design components that can be reused as is, customized and are created according to the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/). They allow perfect delivery of design to the developer by providing more than 30 of the most widely used ASP.NET MVC components.
+The Telerik UI Design Kits offer pre-built design components that can be reused as is, customized and are created according to the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/). They allow perfect delivery of design to the developer by providing more than 90 of the ASP.NET MVC components.
 
 ## Advantages of the Telerik UI Design Kits for Figma  
 
@@ -161,7 +160,7 @@ You can download the Telerik Kits for Figma by following the links provided belo
 
 The Telerik Kits for Figma come with [support for component variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) and options for component management &mdash; utilization of [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/).
 
-Each kit includes a **Cover** page, information on how to start using the UI kits (**Getting Started** page), **Styles, Icons, Components & Variants, Change Log, Scenarios** and **_Base** page. The **Styles** and **Icons** pages display all the available customizations for the components. In the **_Base** page, you can find structural components (building blocks) for base components. Different use case scenarios are available in the **Scenarios** page. You can also view the release history of kit changes in the **Change Log** page. 
+Each kit includes a **Cover** page, information on how to start using the UI kits (**Getting Started** page), **Styles, Icons, Components & Variants, Change Log, Scenarios** page. The **Styles** and **Icons** pages display all the available customizations for the components. You can find structural components (building blocks) for base components above the corresponding frames on the **Components** page. Different use case scenarios are available in the **Scenarios** page. You can also view the release history of kit changes in the **Change Log** page. 
 
 ![Kendo UI Kit Pages](images/figma-ui-kit-pages.png)
 

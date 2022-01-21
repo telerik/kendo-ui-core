@@ -408,6 +408,14 @@
                     position.left = constrain(containmentLeft, this.minLeft, this.maxLeft);
                 }
 
+                if (position.top && position.top.toString().indexOf("px") > 0) {
+                    position.top = Number(position.top.replace("px", ""));
+                }
+
+                if (position.left && position.left.toString().indexOf("px") > 0) {
+                    position.left = Number(position.left.replace("px", ""));
+                }
+
                 if (position.top === 0) {
                     position.top = position.top.toString();
                 }

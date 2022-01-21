@@ -24,7 +24,7 @@ The DatePicker supports the following styling options:
 
 The `Size` option controls the size of the DatePicker. The `k-input-{size}` class, which is applied to the wrapping span element of the DatePicker, reflects the value of the `Size` option.
 
-The following values are available for the [`Size`](/api/javascript/ui/datepicker/configuration/size) option:
+The following values are available for the `Size` option:
 
 - `Small`—small size (applies the `k-input-sm` class to the wrapping span element).
 - `Medium`—medium size (applies the `k-input-md` class to the wrapping span element).
@@ -50,7 +50,7 @@ The default `Size` value is `Medium` and it is applied to the wrapping span elem
 
 The `Rounded` option controls the border radius of the DatePicker. The class that corresponds to the `Rounded` option is `k-rounded-{rounded}`.
 
-The following values are available for the [`Rounded`](/api/javascript/ui/datepicker/configuration/rounded) option:
+The following values are available for the `Rounded` option:
 
 - `Small`—small border radius (applies the `k-rounded-sm` class to the wrapping span element).
 - `Medium`—medium border radius (applies the `k-rounded-md` class to the wrapping span element).
@@ -77,7 +77,7 @@ The default `Rounded` value is `Medium` and it is applied to the wrapping span e
 
 The `FillMode` option controls the way color is applied to the rendered DatePicker. The `k-input-{fillMode}` class, which is applied to the wrapping span element of the DatePicker, reflects the value of the `FillMode` option.
 
-The following values are available for the [`FillMode`](/api/javascript/ui/datepicker/configuration/fillmode) option:
+The following values are available for the `FillMode` option:
 
 - `Solid`—applies the `k-input-solid` class to the wrapping span element.
 - `Flat`—applies the `k-input-flat` class to the wrapping span element.

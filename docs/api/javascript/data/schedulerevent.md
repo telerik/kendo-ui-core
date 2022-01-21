@@ -149,7 +149,7 @@ The `id` of the recurrence parent event. Required for events that are recurrence
 
 ### recurrenceRule `String` *(default: undefined)*
 
-The recurrence rule describing the recurring pattern of the event. The format follows the [iCal specification](http://tools.ietf.org/html/rfc5545).
+The recurrence rule describing the recurring pattern of the event. The format follows the [iCal specification](https://tools.ietf.org/html/rfc5545). You can find the recurrenceRule information under [section 3.3.10](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10).
 
 #### Example - set the recurrence rule
     <script>
