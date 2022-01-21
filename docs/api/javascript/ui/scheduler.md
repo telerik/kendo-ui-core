@@ -253,7 +253,7 @@ If the `dataSource` option is an existing [kendo.data.SchedulerDataSource](/api/
 
 #### Example - set dataSource as an existing kendo.data.SchedulerDataSource instance
 
-    <input id="autocomplete" />
+    <div id="scheduler"></div>
     <script>
     var dataSource = new kendo.data.SchedulerDataSource({
       transport: {

@@ -1502,6 +1502,23 @@ The options of the command.
 
 Fired when a error in the DataSource happen.
 
+#### Event data
+
+##### e.sender `kendo.ui.FileManager`
+
+The widget instance which fired the event.
+
+##### e.xhr `Object`
+
+The XMLHttpRequest object.
+
+##### e.status `String`
+
+The request status.
+##### e.errorThrown `String`
+
+The error message.
+
 #### Example
 
 	<div id="filemanager"></div>

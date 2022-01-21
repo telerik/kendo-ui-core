@@ -1479,6 +1479,8 @@ Use the [`parameterMap`](/api/javascript/data/datasource#configuration-transport
 
 For more information and tips about client and server data operations, refer to the [introductory article on the DataSource](/framework/datasource/overview#mixed-data-operations-mode).
 
+For a runnable example with enabled server paging, you can visit [the Grid remote data binding demo.](https://demos.telerik.com/kendo-ui/grid/remote-data-binding)
+
 #### Example - enable server paging
 
     <script>

@@ -322,7 +322,7 @@ Set badge icon after initialization.
         var badge = $('#badge').kendoBadge({ icon: 'add' }).data('kendoBadge');
 
         window.setTimeout(function() {
-            badge.color('cog');
+            badge.icon('cog');
         }, 1000);
     </script>
 
