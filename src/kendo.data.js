@@ -4386,18 +4386,18 @@ var __meta__ = { // jshint ignore:line
                 lastItem = group.items[Math.min(groupItemsSkip + take, groupItemCount - 1)];
 
                 if (firstItem.notFetched) {
-                    that.getGroupItems(group, options, parents, callback, math.max(math.floor(groupItemsSkip / pageSize), 0) * pageSize);
+                    that.getGroupItems(group, options, parents, callback, math.max(math.floor(groupItemsSkip / pageSize), 0) * pageSize, math.round((groupItemsSkip + pageSize) / pageSize));
                     return true;
                 }
 
                 if (lastItem.notFetched) {
-                    that.getGroupItems(group, options, parents, callback, math.max(math.floor((groupItemsSkip + pageSize) / pageSize), 0) * pageSize);
+                    that.getGroupItems(group, options, parents, callback, math.max(math.floor((groupItemsSkip + pageSize) / pageSize), 0) * pageSize, math.round((groupItemsSkip + pageSize) / pageSize));
                     return true;
                 }
             }
         },
 
-        getGroupItems: function(group, options, parents, callback, groupItemsSkip) {
+        getGroupItems: function(group, options, parents, callback, groupItemsSkip, page) {
             var that = this;
             var take;
             var filter;
@@ -4411,7 +4411,7 @@ var __meta__ = { // jshint ignore:line
             take = that.take();
             filter = this._composeItemsFilter(group, parents);
             data = {
-                page: math.floor((groupItemsSkip || 0) / (take || 1)) || 1,
+                page: page || 1,
                 pageSize: take,
                 skip: groupItemsSkip,
                 take: take,

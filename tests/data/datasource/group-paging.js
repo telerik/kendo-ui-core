@@ -177,7 +177,7 @@
                             }
                         }
                     },
-                    pageSize: 16,
+                    pageSize: options.pageSize || 16,
                     group: options.group || []
                 }, options || {}));
 
@@ -1042,6 +1042,42 @@
 
             dataSource.getGroupItems(group, options);
             assert.isOk(triggered);
+        });
+
+        it("getGroupItems calculates correct page with single level of grouping", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 1000,
+                pageSize: 25,
+                serverPaging: false,
+                group: [{
+                    field: 'ShipAddress'
+                }],
+                groupPaging: true
+            });
+            var result = [];
+            var dataSourceStub = stub(dataSource, {
+                _isServerGroupPaged: function () {
+                    return true;
+                }
+            });
+
+            dataSource.read();
+            var group = dataSource._ranges[0].data[0];
+            dataSource._groupsState[dataSource._ranges[0].data[0].uid] = true;
+            for (var index = 25; index < 50; index++) {
+                group.items[index].notFetched = true;;
+            }
+
+            dataSource._queueRequest = function (data) {
+                assert.equal(data.page, 2);
+            }
+            dataSource._findGroupedRange(dataSource._ranges[0].data, result, {
+                skip: 20,
+                skipped: 0,
+                taken: 0,
+                take: 25,
+                includeParents: true
+            });
         });
 
         it("getGroupItems should trigger requestEnd event", function () {

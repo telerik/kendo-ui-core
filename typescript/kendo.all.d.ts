@@ -1063,11 +1063,11 @@ declare namespace kendo.data {
     }
 
     interface PivotDataSourceV2Options {
-        name?: string;
-        columns?: PivotDataSourceV2Column[];
-        measures?: PivotDataSourceV2Measure[];
-        rows?: PivotDataSourceV2Row[];
-        transport?: PivotDataSourceV2Transport;
+        name?: string | undefined;
+        columns?: PivotDataSourceV2Column[] | undefined;
+        measures?: PivotDataSourceV2Measure[] | undefined;
+        rows?: PivotDataSourceV2Row[] | undefined;
+        transport?: PivotDataSourceV2Transport | undefined;
     }
     interface PivotDataSourceV2Event {
         sender: PivotDataSourceV2;
@@ -2757,19 +2757,19 @@ declare namespace kendo.ui {
     }
 
     interface CaptchaOptions {
-        name?: string;
-        audioButton?: boolean;
+        name?: string | undefined;
+        audioButton?: boolean | undefined;
         audioHandler?: string|Function|any;
-        captcha?: string;
-        captchaId?: string;
-        dataCaptchaField?: string;
-        dataCaptchaIdField?: string;
+        captcha?: string | undefined;
+        captchaId?: string | undefined;
+        dataCaptchaField?: string | undefined;
+        dataCaptchaIdField?: string | undefined;
         handler?: string|Function|any;
-        messages?: CaptchaMessages;
-        resetButton?: boolean;
-        validateOnBlur?: boolean;
+        messages?: CaptchaMessages | undefined;
+        resetButton?: boolean | undefined;
+        validateOnBlur?: boolean | undefined;
         validationHandler?: string|Function|any;
-        volumeControl?: boolean;
+        volumeControl?: boolean | undefined;
         change?(e: CaptchaChangeEvent): void;
         requestEnd?(e: CaptchaRequestEndEvent): void;
         requestStart?(e: CaptchaRequestStartEvent): void;
@@ -3169,21 +3169,21 @@ declare namespace kendo.ui {
     }
 
     interface ColorPickerOptions {
-        name?: string;
-        buttons?: boolean;
-        contrastTool?: boolean | ColorPickerContrastTool;
-        clearButton?: boolean;
-        columns?: number;
-        format?: string;
+        name?: string | undefined;
+        buttons?: boolean | undefined;
+        contrastTool?: boolean | ColorPickerContrastTool | undefined;
+        clearButton?: boolean | undefined;
+        columns?: number | undefined;
+        format?: string | undefined;
         formats?: any;
-        tileSize?: ColorPickerTileSize;
-        messages?: ColorPickerMessages;
+        tileSize?: ColorPickerTileSize | undefined;
+        messages?: ColorPickerMessages | undefined;
         palette?: string|any;
-        opacity?: boolean;
-        preview?: boolean;
-        toolIcon?: string;
-        value?: string|kendo.Color;
-        view?: string;
+        opacity?: boolean | undefined;
+        preview?: boolean | undefined;
+        toolIcon?: string | undefined;
+        value?: string|kendo.Color | undefined;
+        view?: string | undefined;
         views?: any;
         fillMode?: string | undefined;
         rounded?: string | undefined;
@@ -6282,7 +6282,7 @@ declare namespace kendo.ui {
         dataSource?: any|any|kendo.data.DataSource | undefined;
         detailTemplate?: string|Function | undefined;
         editable?: boolean | "inline" | "incell" | "popup" | GridEditable | undefined;
-        encodeTitles?: boolean;
+        encodeTitles?: boolean | undefined;
         excel?: GridExcel | undefined;
         filterable?: boolean | GridFilterable | undefined;
         groupable?: boolean | GridGroupable | undefined;
@@ -7763,14 +7763,14 @@ declare namespace kendo.ui {
     }
 
     interface OrgChartOptions {
-        name?: string;
-        cardsColors?: any;
-        dataSource?: any|kendo.data.OrgChartDataSource;
-        editable?: boolean | OrgChartEditable;
-        groupField?: string;
-        groupHeaderTemplate?: string|Function;
-        messages?: OrgChartMessages;
-        template?: string|Function;
+        name?: string | undefined;
+        cardsColors?: any | undefined;
+        dataSource?: any|kendo.data.OrgChartDataSource | undefined;
+        editable?: boolean | OrgChartEditable | undefined;
+        groupField?: string | undefined;
+        groupHeaderTemplate?: string|Function | undefined;
+        messages?: OrgChartMessages | undefined;
+        template?: string|Function | undefined;
         cancel?(e: OrgChartCancelEvent): void;
         change?(e: OrgChartChangeEvent): void;
         create?(e: OrgChartCreateEvent): void;
@@ -8327,9 +8327,9 @@ declare namespace kendo.ui {
     }
 
     interface PivotConfiguratorButtonOptions {
-        name?: string;
-        configurator?: string;
-        text?: string;
+        name?: string | undefined;
+        configurator?: string | undefined;
+        text?: string | undefined;
     }
     interface PivotConfiguratorButtonEvent {
         sender: PivotConfiguratorButton;
@@ -8391,13 +8391,13 @@ declare namespace kendo.ui {
     }
 
     interface PivotConfiguratorV2Options {
-        name?: string;
+        name?: string | undefined;
         dataSource?: any|kendo.data.PivotDataSourceV2;
-        filterable?: boolean;
+        filterable?: boolean | undefined;
         sortable?: boolean|any;
-        height?: number|string;
-        messages?: PivotConfiguratorV2Messages;
-        orientation?: string;
+        height?: number|string | undefined;
+        messages?: PivotConfiguratorV2Messages | undefined;
+        orientation?: string | undefined;
     }
     interface PivotConfiguratorV2Event {
         sender: PivotConfiguratorV2;
@@ -8425,8 +8425,8 @@ declare namespace kendo.ui {
     }
 
     interface PivotContainerOptions {
-        name?: string;
-        configuratorPosition?: string;
+        name?: string | undefined;
+        configuratorPosition?: string | undefined;
     }
     interface PivotContainerEvent {
         sender: PivotContainer;
@@ -8638,15 +8638,15 @@ declare namespace kendo.ui {
     }
 
     interface PivotGridV2Options {
-        name?: string;
+        name?: string | undefined;
         dataSource?: any|kendo.data.PivotDataSourceV2;
-        autoBind?: boolean;
-        pdf?: PivotGridV2Pdf;
-        columnWidth?: number;
-        height?: number|string;
-        columnHeaderTemplate?: string|Function;
-        dataCellTemplate?: string|Function;
-        rowHeaderTemplate?: string|Function;
+        autoBind?: boolean | undefined;
+        pdf?: PivotGridV2Pdf | undefined;
+        columnWidth?: number | undefined;
+        height?: number|string | undefined;
+        columnHeaderTemplate?: string|Function | undefined;
+        dataCellTemplate?: string|Function | undefined;
+        rowHeaderTemplate?: string|Function | undefined;
         dataBinding?(e: PivotGridV2DataBindingEvent): void;
         dataBound?(e: PivotGridV2DataBoundEvent): void;
         expandMember?(e: PivotGridV2ExpandMemberEvent): void;

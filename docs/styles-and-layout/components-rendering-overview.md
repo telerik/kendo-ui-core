@@ -53,6 +53,20 @@ For a list of all updated components and their respective articles, check the [U
 
 The `themeColor` property controls which color is used to style the specific component. The property is dependant on the [`fillMode`](#fill-mode) and cannot be used separately. The structure of the CSS class is `k-{component}-{fillMode}-{themeColor}`.
 
+The following values are available for the `themeColor` option:
+
+- `base`
+- `primary` 
+- `secondary` 
+- `tertiary` 
+- `info` 
+- `success` 
+- `warning` 
+- `error` 
+- `dark`
+- `light` 
+- `inverse`
+
 The following example shows a Kendo UI Button with `solid` fill mode and `base` theme color:
 
 ```html
@@ -64,8 +78,6 @@ The following example shows a Kendo UI Button with `solid` fill mode and `base` 
 The following image showcases the result of applying the different `themeColor` values to a button:
 
 ![Theme Color Option Image](images/theme-color-option.png)
-
-For more information regarding the available `themeColor` values, visit the [appearance documentation](#updated-components) of the corresponding component.
 
 ### Size
 
