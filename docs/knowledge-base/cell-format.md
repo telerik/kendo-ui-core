@@ -76,7 +76,10 @@ The following example demonstrates how to set a custom format for `date` values.
       for (var rowIndex = 1; rowIndex < sheet.rows.length; rowIndex++) {
         var row = sheet.rows[rowIndex];
         for (var cellIndex = 0; cellIndex < row.cells.length; cellIndex ++) {
-          row.cells[cellIndex].format = "yy-MM-dd hh:mm:ss"
+          //check if the cell value is of type date
+          if(row.cells[cellIndex].value instanceof Date) {
+            row.cells[cellIndex].format = "yy-MM-dd hh:mm:ss"
+          }
         }
       }
     },

@@ -847,6 +847,22 @@ The default color for the ranges.
 
 The width of the range indicators.
 
+#### Example
+
+<div id="linear-gauge"></div>
+<script>
+    $("#linear-gauge").kendoLinearGauge({
+      scale: {
+        ranges: [{
+          from: 10,
+          to: 20,
+          color: "green"
+        }],
+        rangeSize: 20
+      }
+    });
+</script>
+
 ### scale.reverse `Boolean`*(default: false)*
 
 Reverses the axis direction - values increase from right to left and from top to bottom.

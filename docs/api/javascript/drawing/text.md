@@ -30,7 +30,7 @@ The content of the text. Special characters are not supported.
 The position of the text upper left corner.
 
 ### options `Object`
-The configuration options. All available in [Configuration](/api/javascript/drawing/text#configuration).
+Represents an object containing the configuration options. All of the options are available in [Configuration](/api/javascript/drawing/text#configuration).
 
 ## Configuration
 

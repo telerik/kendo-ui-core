@@ -451,10 +451,20 @@ Returns a PNG image of the qrcode encoded as a [Data URL](https://developer.mozi
 
 Redraws the QR code using the current value and options.
 
-#### Example
+> The [`setOptions`](setOptions) method sets new options to the QRCode and redraws it att he same time. Calling `redraw()` int his case is not necessary.
 
-    var qrCode = $("#qrCode").data("kendoQRCode");
-    qrCode.redraw();
+#### Example - set background property and redraw QRCode
+
+    <div id="qrCode"></div>
+    <script>
+      $("#qrCode").kendoQRCode({
+        value: "mailto:clientservice@telerik.com",
+      });
+
+      var qrCode = $("#qrCode").data("kendoQRCode");
+      qrCode.options.background="#FFB821"
+      qrCode.redraw();
+    </script>
 
 ### resize
 
@@ -491,17 +501,23 @@ An object with the new options. All [configuration](/api/javascript/dataviz/ui/q
 
 #### Example
 
-    var qrCode = $("#qrCode").data("kendoQRCode");
+    <div id="qrCode"></div>
+    <script>
+      $("#qrCode").kendoQRCode({
+        value: "mailto:clientservice@telerik.com",
+      });
 
-    qrCode.setOptions({
-      errorCorrection: "H",
-      size: 300,
-      background: "#FFB821",
-      border: {
-        width: 5,
-        color: "#FF7D05"
-      }
-    });
+      var qrCode = $("#qrCode").data("kendoQRCode");
+      qrCode.setOptions({
+        errorCorrection: "H",
+        size: 200,
+        background: "#FFB821",
+        border: {
+          width: 5,
+          color: "#FF7D05"
+        }
+      });
+    </script>
 
 ### svg
 

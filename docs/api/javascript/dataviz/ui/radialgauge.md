@@ -510,9 +510,47 @@ The default color for the ranges.
 
 The width of the range indicators.
 
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+      $("#gauge").kendoRadialGauge({
+        pointer: {
+          value: 50
+        },
+        scale: {
+          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+          }],   
+          rangeSize: 20
+        }
+      });
+    </script>
+
 ### scale.rangeDistance `Number`
 
 The distance from the range indicators to the ticks.
+
+#### Example
+
+    <div id="gauge"></div>
+    <script>
+      $("#gauge").kendoRadialGauge({
+        pointer: {
+          value: 50
+        },
+        scale: {
+          ranges: [{
+            from: 10,
+            to: 20,
+            color: "green"
+          }],
+          rangeDistance: 10
+        }
+      });
+    </script>
 
 ### scale.reverse `Boolean`*(default: false)*
 
