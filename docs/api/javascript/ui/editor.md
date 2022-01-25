@@ -1009,6 +1009,7 @@ The title of the tool that changes the text size.
     <textarea id="editor"></textarea>
     <script>
     $("#editor").kendoEditor({
+      tools: ["fontSize"],
       messages: {
         fontSize: "Select font size"
       }

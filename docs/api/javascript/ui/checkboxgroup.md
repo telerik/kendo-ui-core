@@ -515,6 +515,10 @@ The `<input type="checkbox">` element that triggered the change.
             focus: function (e) {
                 // The result can be observed in the DevTools(F12) console of the browser.
                 console.log(e.target);
+                console.log("The old checked state of the checkbox --> " + e.target.val() + "  " + e.target[0].checked); 
+                setTimeout(function(){
+                  console.log("The new checked state of the checkbox --> " + e.target.val() + "  " + e.target[0].checked); 
+                })
             }
         });
     </script>
