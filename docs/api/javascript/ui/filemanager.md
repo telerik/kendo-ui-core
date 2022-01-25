@@ -360,8 +360,14 @@ Configures the items collection of the toolbar.
         $("#fileManager").kendoFileManager({
             toolbar: {
                 items: [
-                    "createFolder",
-                    "sortDirection"
+                    { name: "createFolder" },
+                    { name: "upload" },
+                    { name: "sortDirection" },
+                    { name: "sortField" },
+                    { name: "changeView" },
+                    { name: "spacer" },
+                    { name: "details" },
+                    { name: "search" }
                 ]
             },
             dataSource: {

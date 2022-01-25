@@ -2409,6 +2409,49 @@ The new value(s) that is(are) about to be applied to the range. Depending on the
 
 If invoked the changing will not be performed and no changes will be applied to the sheet.
 
+#### Example - subscribe to the "changing" event during initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }],
+        changing: function(e){
+        		console.log("The netered value is: " + e.data)
+        }
+      });
+    </script>
+
+#### Example - subscribe to the "changing" event after initialization
+
+    <div id="spreadsheet"></div>
+    <script>
+      function spread_changing(e){
+        console.log("The netered value is: " + e.data)
+      }
+      $("#spreadsheet").kendoSpreadsheet({
+        sheets: [{               
+          rows: [{           
+            cells: [
+              { value: "First"},
+              { value: "Second"},
+              { value: "Third"}
+            ]
+          }]
+        }]        
+      });
+
+      var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+      spreadsheet.bind("changing", spread_changing);
+    </script>
+
 ### change
 
 Triggered when a value in the Spreadsheet has been changed. Introduced in the 2016.Q1.SP1 release.

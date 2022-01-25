@@ -31,9 +31,45 @@ Currently, styles are split in multiple class names. Each class is scoped to a s
 </button>
 ```
 
+### Primary Button
+
+With the old rendering, the `k-primary` class was used in order to style a button as primary. With the new rendering the `k-primary` class is substituted with the appropriate `themeColor` class. 
+The example below demonstrates how a `button` element can be styled in order to achieve a primary button appearance. 
+
+```html
+ <!-- OLD -->
+<button class="k-button k-primary">        
+        Primary Button
+</button>
+
+ <!-- NEW -->
+<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-primary">
+        Primary Button
+</button>
+```
+
+### Flat Button
+
+The `k-flat` class is substituted with the appropriate `fillMode` and `themeColor` classes. 
+The example below demonstrates how a `button` element can be styled in order to achieve a flat button appearance. 
+
+```html
+ <!-- OLD -->
+<button class="k-button k-flat">        
+        Flat Button
+</button>
+
+ <!-- NEW -->
+<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-flat k-button-flat-base">
+        Flat Button
+</button>
+```
+
 ### Button with Icon
 
 With the old rendering, the `k-button-icon` class was used for the buttons with icons. The `k-button-icon` class is now used on the icon element itself. In case the button contains only an icon and no text, the `k-icon-button` is used for the `button` element.
+
+The example below demonstrates the old rendering:
 
 ```html
  <!-- OLD -->
@@ -46,6 +82,8 @@ With the old rendering, the `k-button-icon` class was used for the buttons with 
         <span class="k-icon k-i-folder"></span>
 </button>
 ```
+
+The example below demonstrates the new rendering:
 
 ```html
 <!-- NEW -->

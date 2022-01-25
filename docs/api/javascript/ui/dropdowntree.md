@@ -1765,6 +1765,7 @@ The selected node
       select: function(e) {
 	/* The result can be observed in the DevTools(F12) console of the browser. */
         console.log("Select", e.node);
+        console.log("Node text --> " + $(e.node).text())
       }
     });
     </script>

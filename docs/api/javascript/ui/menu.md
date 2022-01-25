@@ -424,18 +424,12 @@ Sets the field of the data item that provides the image url of the menu items.
         $("#menu").kendoMenu({
             dataSource: {
             data: [{
-                    Name: "Item 1",
-                    UrlPath: "urlPath",
-                    Sprite: "spriteCssClass",
-                    imgUrl: "imgUrl",
-                    description: "some description"
+                    Name: "Item 1",                
+                    imgUrl: "https://demos.telerik.com/kendo-ui/content/shared/icons/sports/golf.png"
                 }]
             },
-            dataTextField:"Name",
-            dataUrlField:"UrlPath",
-            dataSpriteCssClassField:"Sprite",
-            dataImageUrlField:"imgUrl",
-            dataContentField:"description"
+            dataTextField:"Name",            
+            dataImageUrlField:"imgUrl"
         });
     </script>
 

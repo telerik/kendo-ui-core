@@ -28,7 +28,7 @@ As of the Kendo UI 2020 R3 release, the Scheduler RecurrenceEditor is rendered a
 In order to have the DropDownList and the checkboxes instead of the current ButtonGroups you should override some parts of the RecurrenceEditor widget:
 
 ```dojo
-<div id="scheduler"></div>
+<div id="sch"></div>
 
 <script>
     // Below is needed to override the RecurrenceEditor definition
