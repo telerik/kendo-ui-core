@@ -42,10 +42,11 @@ You will receive a list of predefined Telerik templates and the Telerik ASP.NET 
 * **Standard Template** - You can start off with three example pages which have Panel Bar, Card and TabStrip components integrated.
 * **Grid and Menu Template** - A small application that contains Grid, Menu and Buttons as a base for your application.
 * **Dashboard Template** - It allows you to quickly develop dashboards and dashboard-like applications using the built-in TileLayout component.
+* **Admin Dashboard Template** - Manage and visualize your data using different Telerik UI components. 
 
 The wizard detects all the installed versions of Telerik UI for ASP.NET MVC and lists them in the **Version** combobox. This enables you to select a version you want to apply to your project.
 
-![The new Project Wizard](../../getting-started-mvc/vs-integration/images/new_project.png)
+![The new Project Wizard](../../getting-started-mvc/vs-integration/images/new_project2.png)
 
 ## Project Settings
 
@@ -75,6 +76,12 @@ As a result, the wizard:
 The Kendo UI ASP.NET MVC application includes a custom stripped-down Modernizr in a file called `kendo.modernizr.custom.js`. It provides an HTML5 element support for old browsers, specifically Internet Explorer.
 
 If you need the Modernizr in your application, remove the existing Modernizr and register another version which includes more components and features. In such cases, if HTML5 element support is required, include the `html5shiv` component to make sure that the newly registered Modernizr [provides such support](http://modernizr.com/docs/#html5inie).
+
+## Swatches
+
+A swatch is a set of variables which customizes the appearance of the theme.
+* [Using the Build Process of the Themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes#using-the-build-process-of-the-themes)
+* [How Do I Know Which SASS Theme Corresponds to My Current LESS Theme?](https://docs.telerik.com/aspnet-mvc/styles-and-layout/less-themes-migration#how-do-i-know-which-sass-theme-corresponds-to-my-current-less-theme)
 
 ## See Also
 
