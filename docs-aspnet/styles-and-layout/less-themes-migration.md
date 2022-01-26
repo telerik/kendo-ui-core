@@ -85,4 +85,5 @@ The LESS-based themes support only the default values of the new [Components Sty
 
 ## See More
 
+* [Plans for Telerik and Kendo UI LESS Themes](https://www.telerik.com/blogs/future-plans-telerik-kendo-ui-less-themes)
 * [Styling Overview Article]({% slug components_rendering_overview %})
