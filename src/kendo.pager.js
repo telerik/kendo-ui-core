@@ -468,7 +468,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _excludeChildrenFromTab: function () {
-            if (this.options.navigatable && kendo._activeElement() === this.element[0]) {
+            var activeElement = kendo._activeElement();
+            if (this.options.navigatable && (activeElement === this.element[0] || !$.contains(this.element[0], activeElement))) {
                 this.element.find(FOCUSABLE).attr("tabindex", -1);
             }
         },

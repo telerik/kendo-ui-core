@@ -265,5 +265,4 @@ Refer to the [following REPL](https://netcorerepl.telerik.com/mcuFlNuC05ge5RKB30
 
 ## See Also
 * [Grid Custom data source (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/custom-datasource)
-* [Dynamic User defined row styles]({% slug grid-user-defined-row-styles %})
 * [JavaScript API Reference of the Grid](/api/javascript/ui/grid)
