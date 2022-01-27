@@ -67,6 +67,7 @@
 
         it("escape focuses pager", function() {
             var focusEl = element.find(".k-link:eq(3)");
+            pager._restoreTabIndexes();
             focusEl.focus();
             var esc = { keyCode: keys.ESC, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(esc);
@@ -76,22 +77,23 @@
 
         it("tab moves focus to next focusable", function() {
             var focusEl = element.find(".k-link:eq(3)");
-            focusEl.focus();
-            var tab = { keyCode: keys.TAB, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
+            focusEl.click();
+            var tab = { keyCode: keys.TAB, preventDefault: $.noop, stopPropagation: $.noop, target: kendo._activeElement() };
             pager._keyDown(tab);
             assert.equal(element.find(".k-link:eq(4)")[0], document.activeElement);
         });
 
         it("shift + tab moves focus to prev focusable", function() {
             var focusEl = element.find(".k-link:eq(4)");
-            focusEl.focus();
-            var tab = { keyCode: keys.TAB, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
+            focusEl.click();
+            var tab = { keyCode: keys.TAB, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: kendo._activeElement() };
             pager._keyDown(tab);
             assert.equal(element.find(".k-link:eq(3)")[0], document.activeElement);
         });
 
         it("selected page button remains focused after enter", function() {
             var focusEl = element.find(".k-link:eq(4)");
+            pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl  };
             pager._keyDown(enter);
@@ -101,6 +103,7 @@
 
         it("arrow button remains focused after enter", function() {
             var focusEl = element.find(".k-pager-nav:eq(3)");
+            pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, shiftKey: true, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
@@ -110,6 +113,7 @@
 
         it("tab focuses first button when focus was on last", function() {
             var focusEl = element.find(".k-pager-refresh");
+            pager._restoreTabIndexes();
             focusEl.focus();
             var tab = { keyCode: keys.TAB, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(tab);
@@ -119,6 +123,7 @@
 
         it("more pages button remains focused after enter", function() {
             var focusEl = element.find(".k-link:eq(5)");
+            pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
@@ -129,6 +134,7 @@
         it("first more pages button remains focused after enter", function() {
             pager.page(7);
             var focusEl = element.find(".k-link:eq(2)");
+            pager._restoreTabIndexes();
             focusEl.focus();
             var enter = { keyCode: keys.ENTER, preventDefault: $.noop, stopPropagation: $.noop, target: focusEl };
             pager._keyDown(enter);
