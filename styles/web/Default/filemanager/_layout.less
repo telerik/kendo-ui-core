@@ -1,0 +1,286 @@
+// File Manager
+.k-filemanager {
+    border-width: @filemanager-border-width;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+}
+
+// Toolbar
+.k-filemanager-header {
+    border-color: inherit;
+}
+.k-filemanager-toolbar {
+    border-width: 0;
+    border-bottom-width: @filemanager-toolbar-border-width;
+    border-color: inherit;
+    flex-shrink: 0;
+}
+.k-filemanager-search-tool {
+    display: inline-flex;
+    flex-flow: row nowrap;
+}
+
+
+// Content Wrapper
+.k-filemanager-content-container {
+    border-color: inherit;
+    box-sizing: border-box;
+    flex: 1 1 0%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+
+// Navigation
+.k-filemanager-navigation {
+    width: @filemanager-navigation-width;
+    border-width: 0;
+    border-right-width: @filemanager-navigation-border-width;
+    border-style: solid;
+    border-color: inherit;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    > .k-treeview {
+        padding: @filemanager-navigation-padding-y @filemanager-navigation-padding-x;
+        height: 100%;
+    }
+}
+.k-filemanager-treeview {
+    > .k-group > .k-item {
+        padding: 0;
+    }
+}
+
+
+// Content
+.k-filemanager-content {
+    border-color: inherit;
+    flex: 1 1 0%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+
+// Breadcrumb
+.k-filemanager-breadcrumb {
+    border-width: 0;
+    border-bottom-width: @filemanager-breadcrumb-border-width;
+    padding: @filemanager-breadcrumb-padding-y @filemanager-breadcrumb-padding-x;
+    flex-shrink: 0;
+}
+
+
+// Filemanager view
+.k-filemanager-view {
+    display: flex;
+    flex: 1 1 auto;
+    flex-flow: row nowrap;
+
+    > .k-filemanager-listview,
+    > .k-filemanager-grid {
+        border-width: 0;
+    }
+}
+
+
+// Filemanager listview
+.k-filemanager-listview {
+    height: 100%;
+    flex: 1 1 0%;
+    overflow: auto;
+
+    // Listview item
+    .k-listview-item {
+        padding: @filemanager-listview-item-padding-y @filemanager-listview-item-padding-x;
+        width: @filemanager-listview-item-width;
+        height: @filemanager-listview-item-height;
+        text-align: center;
+    }
+
+    // File preview
+    .k-file-preview {
+        height: @filemanager-listview-item-icon-size;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    // File icon
+    .k-file-icon {
+        font-size: @filemanager-listview-item-icon-size;
+    }
+
+    // File image
+    .k-file-image {
+        max-width: 100%;
+        max-height: @filemanager-listview-item-icon-size;
+        display: block;
+    }
+
+    // File name
+    .k-file-name {
+        margin-top: (@filemanager-spacer / 2);
+        display: block;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // File size
+    .k-file-size {
+        margin-top: (@filemanager-spacer / 2);
+        display: block;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // Edit mode
+    .k-edit-item .k-textbox {
+        width: 100%;
+    }
+}
+
+
+// Filemanager grid
+.k-filemanager-grid {
+    flex: 1 1 0%;
+
+    // File preview
+    .k-file-preview {
+        margin-right: @icon-spacing;
+        display: inline-flex;
+        flex-direction: row;
+        vertical-align: middle;
+    }
+
+    // File icon
+    .k-file-icon {}
+
+    // File name
+    .k-file-name {
+        display: inline-flex;
+        flex-direction: row;
+        vertical-align: middle;
+    }
+}
+
+
+// Filemanager preview
+.k-filemanager-preview {
+    padding: (@filemanager-preview-padding-y * 3) @filemanager-preview-padding-x @filemanager-preview-padding-y;
+    width: @filemanager-preview-width;
+    min-height: calc( (@filemanager-preview-padding-y * 4) + (@filemanager-preview-icon-size * 2) + (@filemanager-preview-spacing * 3) );
+    border-width: 0;
+    border-left-width: @filemanager-preview-border-width;
+    border-style: solid;
+    border-color: inherit;
+    box-sizing: border-box;
+    text-align: center;
+    overflow-x: auto;
+    flex-shrink: 0;
+
+    // File preview
+    .k-file-preview {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    // File icon
+    .k-file-icon {
+        font-size: @filemanager-preview-icon-size;
+    }
+
+    // File name
+    .k-file-name {
+        margin-top: @filemanager-preview-spacing;
+        display: block;
+    }
+    .k-no-file-selected {}
+    .k-single-file-selected { font-weight: bold; }
+    .k-multiple-files-selected { font-weight: bold; }
+
+    // File size
+    .k-file-size {
+        font-size: inherit;
+        line-height: normal;
+    }
+
+    // File Meta
+    .k-file-meta {
+        margin: @filemanager-preview-spacing 0 0;
+        box-sizing: border-box;
+        text-align: start;
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .k-file-meta-label {
+        display: inline-block;
+    }
+    .k-file-meta-value {
+        margin: 0;
+    }
+    .k-file-type {
+        text-transform: capitalize;
+    }
+    .k-line-break {
+        margin: @filemanager-preview-spacing 0 0;
+        width: 100%;
+        flex: 1 1 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+}
+
+
+// Resizing Handle
+.k-filemanager-resizable {
+
+    .k-filemanager-navigation,
+    .k-filemanager-preview {
+        border-width: 0;
+    }
+}
+.k-filemanager .k-splitbar {
+    // border-width: 0;
+    flex-shrink: 0;
+    display: inline-flex;
+    position: relative;
+}
+.k-filemanager .k-splitbar-horizontal {
+    width: 6px;
+    flex-direction: column;
+    align-items: center;
+
+    .k-resize-handle {
+        width: 2px;
+    }
+}
+
+
+// Upload Dialog
+.k-filemanager-upload-dialog .k-upload-files {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+// Drag Hint
+// TODO: use drag-hint styles
+.k-filemanager-drag-hint {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.k-filemanager-drag-hint .k-icon {
+    margin-right: @icon-spacing;
+}

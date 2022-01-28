@@ -1,0 +1,60 @@
+@accent: #818181;
+@base: #fff;
+@background: #fff;
+
+@border-radius: 6px;
+@icon-size: 16px;
+
+@normal-background: #fff;
+@normal-text-color: #676767;
+@normal-gradient: "rgba(0,0,0,.01) 0%, rgba(0,0,0,.08) 100%";
+@hover-background: #fff;
+@hover-text-color: #676767;
+@hover-gradient: "rgba(0,0,0,.01) 0%, rgba(0,0,0,.06) 100%";
+@selected-background: #eee;
+@selected-text-color: #454545;
+@selected-gradient: "rgba(0,0,0,.13) 0%, rgba(0,0,0,.08) 100%";
+
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #527aa3;
+@info: #3e6b99;
+@success: #52c664;
+@warning: #f4bc35;
+@error: #f45835;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
+
+@series-a: #527aa3;
+@series-b: #6f91b3;
+@series-c: #8ca7c2;
+@series-d: #a8bdd1;
+@series-e: #c5d3e0;
+@series-f: #e2e9f0;
+
+// graphics
+@image-folder: "Uniform";
+@texture: none;
+@fallback-texture: url('textures/highlight.png');
+
+@import "type-default.less";
+
+@chat-quick-reply-color: darken(@accent, 47);
+@checkbox-radius: 3px;

@@ -1,0 +1,97 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+// Button
+
+.km-material .km-button
+{
+    padding: .714em 1.143em;
+    border-style: solid;
+    border-width: @material-border-width;
+    border-radius: @material-border-radius;
+    text-transform: uppercase;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+// Badges and Details
+
+.km-material .km-badge,
+.km-material .km-detail
+{
+    border: 0;
+    min-width: 1.8em;
+    height: 1.8em;
+    line-height: 1.8em;
+    border-radius: 5em;
+}
+
+.km-material .km-detail
+{
+    min-width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-width: @material-border-width;
+    border-style: solid;
+}
+
+.km-material .km-detaildisclose
+{
+    min-width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+}
+
+.km-material .km-detaildisclose:after,
+.km-material .km-detaildisclose:before
+{
+    left: .1em;
+    top: 0.35em;
+}
+
+.km-material .km-detail .km-icon:before
+{
+    display: none;
+}
+
+.km-material .km-navbar .km-button,
+.km-material .k-toolbar .km-button
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-material .km-navbar .km-button,
+.km-material .k-toolbar .km-button,
+.km-material .km-buttongroup .km-button
+{
+    background: transparent;
+    border-color: transparent;
+    .box-shadow(none);
+}
+
+.km-material .km-navbar .km-button .km-icon,
+.km-material .k-toolbar .km-button .km-icon
+{
+    font-size: 1.2em;
+}
+
+.km-material .km-navbar .km-back:before,
+.km-material .k-toolbar .km-back:before
+{
+    content: "\a0";
+    display: inline-block;
+    color: currentcolor;
+    width: .8em;
+    height: .8em;
+    border-width: 0;
+    box-shadow: inset .25rem -.25rem 0 currentcolor;
+    .transform(rotate(45deg));
+}
+
+.km-material .km-navbar .km-back .km-text,
+.km-material .k-toolbar .km-back .km-text
+{
+    display: none;
+}

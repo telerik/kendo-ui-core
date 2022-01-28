@@ -1,0 +1,182 @@
+.k-badge {
+    padding: 0;
+    border-width: 0;
+    border-style: solid;
+    border-color: transparent;
+    box-sizing: border-box;
+    color: inherit;
+    background-color: transparent;
+    font: inherit;
+    text-align: center;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.k-badge > * {
+    color: inherit;
+}
+
+// Links
+a.k-badge,
+.k-badge > a {
+    text-decoration: none;
+}
+a.k-badge:hover,
+.k-badge > a:hover {
+    text-decoration: underline;
+}
+
+
+// Icon
+.k-badge-icon {
+    max-width: 1em;
+    max-height: 1em;
+    font-size: inherit;
+}
+.k-badge-icon.k-svg-icon svg {
+    fill: currentColor;
+}
+
+
+// Badge sizes
+.k-badge-sm {
+    padding: @badge-padding-y-sm @badge-padding-x-sm;
+    border-width: @badge-border-width-sm;
+    font-size: @badge-font-size-sm;
+    line-height: @badge-line-height-sm;
+
+    &:empty { padding: @badge-padding-y-sm; }
+}
+.k-badge-md {
+    padding: @badge-padding-y @badge-padding-x;
+    border-width: @badge-border-width;
+    font-size: @badge-font-size;
+    line-height: @badge-line-height;
+
+    &:empty { padding: @badge-padding-y; }
+}
+.k-badge-lg {
+    padding: @badge-padding-y-lg @badge-padding-x-lg;
+    border-width: @badge-border-width-lg;
+    font-size: @badge-font-size-lg;
+    line-height: @badge-line-height-lg;
+
+    &:empty { padding: @badge-padding-y-lg; }
+}
+
+
+// Badge shapes
+.k-badge-rounded {
+    &.k-badge-sm { .border-radius( @badge-border-radius-sm ); }
+    &.k-badge-md { .border-radius( @badge-border-radius ); }
+    &.k-badge-lg { .border-radius( @badge-border-radius-lg ); }
+}
+.k-badge-pill {
+    border-radius: 5rem;
+}
+.k-badge-circle {
+    padding: 0 !important;
+    border-radius: 100%;
+
+    &.k-badge-sm {
+        width: @badge-size-sm;
+        height: @badge-size-sm;
+    }
+    &.k-badge-md {
+        width: @badge-size;
+        height: @badge-size;
+    }
+    &.k-badge-lg {
+        width: @badge-size-lg;
+        height: @badge-size-lg;
+    }
+}
+.k-badge-dot {
+    padding: 0 !important;
+    border-radius: 100%;
+    font-size: 0;
+
+    &.k-badge-sm {
+        width: @badge-dot-size-sm;
+        height: @badge-dot-size-sm;
+    }
+    &.k-badge-md {
+        width: @badge-dot-size;
+        height: @badge-dot-size;
+    }
+    &.k-badge-lg {
+        width: @badge-dot-size-lg;
+        height: @badge-dot-size-lg;
+    }
+}
+
+// Badge position
+.k-badge-container {
+    position: relative;
+    overflow: visible;
+}
+
+@badge-positions: {
+    inside: null;
+    edge: 50;
+    outside: 100;
+}
+each( @badge-positions, {
+    @placement: @key;
+    @translate: @value;
+
+    .k-badge-@{placement} {
+        position: absolute;
+        z-index: 9999;
+
+        &.k-top-start {
+            & when not (@translate = null) {
+                transform: translate( (-1% * @translate), (-1% * @translate) );
+            }
+        }
+        &.k-top-end {
+            & when not (@translate = null) {
+                transform: translate( (1% * @translate), (-1% * @translate) );
+            }
+        }
+        &.k-bottom-start {
+            & when not (@translate = null) {
+                transform: translate( (-1% * @translate), (1% * @translate) );
+            }
+        }
+        &.k-bottom-end {
+            & when not (@translate = null) {
+                transform: translate( (1% * @translate), (1% * @translate) );
+            }
+        }
+    }
+
+    .k-rtl .k-badge-@{placement},
+    [dir="rtl"].k-badge-@{placement},
+    [dir="rtl"] .k-badge-@{placement} {
+        &.k-top-start {
+            & when not (@translate = null) {
+                transform: translate( (1% * @translate), (-1% * @translate) );
+            }
+        }
+        &.k-top-end {
+            & when not (@translate = null) {
+                transform: translate( (-1% * @translate), (-1% * @translate) );
+            }
+        }
+        &.k-bottom-start {
+            & when not (@translate = null) {
+                transform: translate( (1% * @translate), (1% * @translate) );
+            }
+        }
+        &.k-bottom-end {
+            & when not (@translate = null) {
+                transform: translate( (-1% * @translate), (1% * @translate) );
+            }
+        }
+    }
+});

@@ -1,0 +1,57 @@
+.k-rating {
+    &.k-widget {
+        background-color: transparent;
+    }
+
+    &:focus,
+    &.k-state-focused {
+        box-shadow: none;
+
+        .k-rating-item {
+            > .k-icon {
+                text-shadow: @rating-icon-focused-shadow;
+            }
+
+            &.k-state-selected > .k-icon {
+                text-shadow: @rating-icon-focused-selected-shadow;
+            }
+        }
+    }
+}
+
+.k-rating-item {
+    color: @rating-icon-text;
+
+    &.k-state-selected {
+        color: @rating-icon-selected-text;
+        background: none;
+        box-shadow: none;
+
+        &:focus,
+        &.k-state-focused {
+            color: @rating-icon-focused-text;
+        }
+    }
+
+    &:hover,
+    &.k-state-hover {
+        color: @rating-icon-hover-text;
+        cursor: pointer;
+        background: none;
+        box-shadow: none;
+
+        &.k-state-selected {
+            box-shadow: none;
+        }
+    }
+
+    &:focus,
+    &.k-state-focused {
+        background: none;
+        box-shadow: none;
+
+        &.k-state-selected {
+            box-shadow: none;
+        }
+    }
+}

@@ -1,0 +1,485 @@
+@import "../common/forms.less";
+@import "base.less";
+
+// Slider
+
+.km-ios7 .k-slider
+{
+    margin-top: -.15em;
+    height: .2em;
+}
+
+.km-ios7 .km-list .km-full-width-slider {
+    position: relative;
+    margin-top: 0;
+    padding: 1.55em 0;
+    width: auto;
+    display: block;
+}
+
+.km-ios7 .k-slider .k-draghandle,
+.km-ios7 .k-slider .k-draghandle:hover
+{
+    top: -.8em;
+    border: 0;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 5em;
+}
+
+.km-ios7 .k-slider-horizontal .k-slider-track {
+    height: .29rem;
+}
+
+.km-ios7 .k-slider-vertical .k-slider-track {
+    width: .29rem;
+}
+
+.km-ios7 .k-slider-track
+{
+    margin: -.5em .5em 0 -.5em;
+    .box-sizing(content-box);
+}
+
+.km-ios7 .k-slider-selection
+{
+    margin-left: 0;
+}
+
+// Checkboxes and Radios
+
+.km-ios7 .km-listview-label input[type=radio]:checked,
+.km-ios7 .km-listview-label input[type=checkbox]:checked
+{
+    font-size: 1.2em;
+}
+
+// Forms
+
+.km-ios7 .km-list input[type=password],
+.km-ios7 .km-list input[type=search],
+.km-ios7 .km-list input[type=number],
+.km-ios7 .km-list input[type=tel],
+.km-ios7 .km-list input[type=url],
+.km-ios7 .km-list input[type=email],
+.km-ios7 .km-list input[type=month],
+.km-ios7 .km-list input[type=color],
+.km-ios7 .km-list input[type=week],
+.km-ios7 .km-list input[type=date],
+.km-ios7 .km-list input[type=time],
+.km-ios7 .km-list input[type=datetime],
+.km-ios7 .km-list input[type=datetime-local],
+.km-ios7 .km-list input[type=text]:not(.k-input),
+.km-ios7 .km-list select:not([multiple]),
+.km-ios7 .km-list .k-dropdown-wrap,
+.km-ios7 .km-list textarea
+{
+    .appearance(none);
+    font-size: 1.1rem;
+    min-width: 6em;
+    border: 0;
+    padding: .4em;
+    outline: none;
+    right: .8em;
+    background: transparent;
+}
+
+.km-ios7 .km-list .k-dropdown-wrap
+{
+    padding: .2em;
+}
+
+.km-ios7 .km-list .k-dropdown
+{
+    margin-top: -1.05em;
+    font-weight: normal;
+}
+
+.km-ios7 .km-list input[type=color],
+.km-ios7 .km-list input[type=week],
+.km-ios7 .km-list input[type=date],
+.km-ios7 .km-list input[type=time],
+.km-ios7 .km-list input[type=month],
+.km-ios7 .km-list input[type=datetime],
+.km-ios7 .km-list input[type=datetime-local],
+.km-ios7 .km-list .k-dropdown
+{
+    text-align: right;
+}
+
+.km-ios7 .km-list .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    border-radius: 0;
+    background: transparent;
+    .box-shadow(none);
+}
+
+.km-ios7 label.km-required:after {
+    content: "*";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
+
+.km-ios7 .km-icon-label.km-required:after {
+    margin-left: -.89em;
+}
+
+.km-ios7 .km-icon-label:before {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    font: 1em/1em "Kendo UI";
+    margin-right: .89em;
+}
+
+.km-ios7 {
+    .km-list {
+        .km-icon-label {
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            input[type=text]:not(.k-input),
+            select:not([multiple]),
+            .k-dropdown-wrap,
+            textarea  {
+                right: 0;
+            }
+        }
+    }
+}
+
+.km-ios7 .km-label-above {
+    width: 100%;
+    font-size: 0.87em;
+    display: block;
+    margin-top: -2px;
+    padding-top: .92em;
+    padding-bottom: 2.5em;
+}
+
+.km-ios7 fieldset .km-label-above {
+    margin-top: 0;
+    padding-top: 1.455em;
+    padding-bottom: 3.091em;
+}
+
+.km-ios7 .km-label-above textarea {
+    top: 50%;
+}
+
+.km-ios7 .km-label-above,
+.km-ios7 label.km-inline-field {
+    font-size: .7em;
+    line-height: 1.2em;
+}
+
+.km-ios7 {
+    .km-list {
+        .km-label-above {
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            input[type=text]:not(.k-input),
+            select:not([multiple]),
+            .k-dropdown-wrap,
+            textarea  {
+                width: 100%;
+                right: 0;
+                padding-left: 0;
+                left: .89em;
+                transform: translateY(0);
+                -webkit-transform: translateY(0);
+                margin-top: -.375em;
+            }
+        }
+    }
+}
+
+.km-ios7 {
+    .km-list {
+        fieldset {
+            .km-label-above {
+                input[type=password],
+                input[type=search],
+                input[type=number],
+                input[type=tel],
+                input[type=url],
+                input[type=email],
+                input[type=month],
+                input[type=color],
+                input[type=week],
+                input[type=date],
+                input[type=time],
+                input[type=datetime],
+                input[type=datetime-local],
+                input[type=text]:not(.k-input),
+                select:not([multiple]),
+                .k-dropdown-wrap,
+                textarea  {
+                    margin-top: -.25em;
+                }
+            }
+        }
+    }
+}
+
+.km-ios7 .km-list fieldset {
+    border: none;
+    padding: 0 1.61em;
+    margin: -.5em -1.61em;
+}
+
+.km-ios7 .km-list fieldset > input[type=password],
+.km-ios7 .km-list fieldset > input[type=search],
+.km-ios7 .km-list fieldset > input[type=number],
+.km-ios7 .km-list fieldset > input[type=tel],
+.km-ios7 .km-list fieldset > input[type=url],
+.km-ios7 .km-list fieldset > input[type=email],
+.km-ios7 .km-list fieldset > input[type=month],
+.km-ios7 .km-list fieldset > input[type=color],
+.km-ios7 .km-list fieldset > input[type=week],
+.km-ios7 .km-list fieldset > input[type=date],
+.km-ios7 .km-list fieldset > input[type=time],
+.km-ios7 .km-list fieldset > input[type=datetime],
+.km-ios7 .km-list fieldset > input[type=datetime-local],
+.km-ios7 .km-list fieldset > input[type=text]:not(.k-input),
+.km-ios7 .km-list fieldset > select:not([multiple]),
+.km-ios7 .km-list fieldset > .k-dropdown-wrap {
+    padding: 1.23em 0;
+    margin-top: 0;
+}
+
+.km-ios7 .km-list fieldset textarea {
+    width: 100%;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    margin-right: 0;
+    padding-left: 0;
+}
+
+.km-ios7 {
+    .km-list {
+        fieldset {
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            input[type=text]:not(.k-input),
+            select:not([multiple]),
+            .k-dropdown-wrap,
+            textarea  {
+                width: 100%;
+                position: relative;
+                transform: translateY(0);
+                -webkit-transform: translateY(0);
+                right: auto;
+            }
+        }
+    }
+}
+
+.km-ios7 .km-list fieldset legend {
+    text-indent: 0;
+    margin: 0 -1.61em;
+    font-weight: normal;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    padding: 1.8em 1.61em .72em;
+    width: 100%;
+    box-sizing: content-box;
+}
+
+.km-ios7 .km-legend-button {
+    display: block;
+    text-transform: uppercase;
+}
+
+.km-ios7 .km-inline-field {
+    display: inline-block;
+    position: relative;
+    width: calc((100% - 3.22em)/2);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.km-ios7 .km-list fieldset .km-inline-field {
+    margin-top: 0;
+    margin-left: 0;
+    padding-left: 1.61em;
+    border-right-width: 1px;
+    border-right-style: solid;
+}
+
+.km-ios7 .km-list fieldset .km-inline-field:first-of-type {
+    padding-left: 0;
+}
+
+.km-ios7 .km-inline-field.km-label-above {
+    margin-bottom: 0;
+}
+
+.km-ios7 {
+    .km-list {
+        .km-inline-field {
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            input[type=text]:not(.k-input),
+            select:not([multiple]),
+            .k-dropdown-wrap,
+            textarea  {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                padding-left: 0;
+                padding-left: 1em;
+            }
+        }
+    }
+}
+
+.km-ios7 {
+    .km-list {
+        .km-inline-field:first-of-type {
+            input[type=password],
+            input[type=search],
+            input[type=number],
+            input[type=tel],
+            input[type=url],
+            input[type=email],
+            input[type=month],
+            input[type=color],
+            input[type=week],
+            input[type=date],
+            input[type=time],
+            input[type=datetime],
+            input[type=datetime-local],
+            input[type=text]:not(.k-input),
+            select:not([multiple]),
+            .k-dropdown-wrap,
+            textarea  {
+                margin-left: 0;
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+// Standalone Checkboxes and RadioButtons
+.km-ios7 input.km-checkbox,
+.km-ios7 input.km-radio {
+    display: inline;
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    height: 0;
+}
+
+.km-ios7 .km-checkbox-label,
+.km-ios7 .km-radio-label {
+    display: block;
+    position: relative;
+    vertical-align: middle;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin-left: .89em;
+}
+
+.km-ios7 .km-checkbox-label:before,
+.km-ios7 .km-checkbox-label:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: .7em;
+    width: 1em;
+    height: .9rem;
+    border: 0;
+}
+
+.km-ios7 input.km-checkbox:checked + .km-checkbox-label:after {
+    content: "\e227";
+    font-size: 1.2em;
+    line-height: 1em;
+    font-family: "Kendo UI";
+}
+
+//Radio buttons
+.km-ios7 .km-radio-label {
+    position: relative;
+    padding-left: 2.5em;
+    vertical-align: middle;
+    line-height: 1.5em;
+}
+
+.km-ios7 .km-radio-label:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.km-ios7 input.km-radio:checked + .km-radio-label:after {
+    content: "";
+    width: 1.085rem;
+    height: 1.085rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-42%);
+    -webkit-transform: translateY(-42%);
+    left: 0.365rem;
+    border-radius: 50%;
+}
+
+.km-ios7 .km-listview-item-badge.km-badge,
+.km-ios7 .km-listview-link>.km-badge {
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    right: 2em;
+}

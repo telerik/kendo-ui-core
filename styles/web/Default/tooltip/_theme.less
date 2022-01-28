@@ -1,0 +1,32 @@
+// Default tooltip
+.k-tooltip,
+.k-tooltip.k-widget,
+.k-tooltip.k-popup {
+    .border-radius( @tooltip-border-radius );
+    .fill(
+        @tooltip-text,
+        @tooltip-bg,
+        @tooltip-border
+    );
+    .box-shadow( @tooltip-shadow );
+}
+each( @theme-colors, {
+    .k-tooltip-@{key} {
+        .fill(
+            contrast( @value ),
+            @value,
+            @value
+        )
+    }
+});
+
+
+
+
+// Chart tooltip
+.k-chart-tooltip {
+    color: white;
+}
+.k-chart-tooltip-inverse {
+    color: black;
+}

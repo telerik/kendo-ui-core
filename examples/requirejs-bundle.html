@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../dist/styles/web/kendo.common-material.core.min.css">
+        <link rel="stylesheet" href="../dist/styles/web/kendo.material.min.css">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+    </head>
+    <body>
+        <select id="dropdownlist"></select>
+        <input id="numeric" />
+        <script>
+          require.config({
+            paths: {
+              "jquery": "http://code.jquery.com/jquery-1.9.1.min",
+              "kendo.ui.core.min": "../dist/js/kendo.ui.core.min",
+              "kendo.culture.bg-BG.min": "../dist/js/cultures/kendo.culture.bg-BG.min"
+            },
+            shim: {
+              'kendo.culture.bg-BG.min': {
+                deps: [ 'kendo.ui.core.min' ]
+              }
+            }
+          });
+
+          require([ "jquery", "kendo.ui.core.min", "kendo.culture.bg-BG.min" ], function($, kendo) {
+            kendo.culture("bg-BG");
+            $("#numeric").kendoNumericTextBox({
+              format: "c"
+            });
+
+            $("#dropdownlist").kendoDropDownList({
+              dataSource: {
+                data: [{name:"Jane Doe", value: 1}, {name:"John Doe", value: 2}]
+              },
+              dataTextField: "name",
+              dataValueField: "value"
+            });
+          });
+        </script>
+    </body>
+</html>

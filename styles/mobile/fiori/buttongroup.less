@@ -1,0 +1,30 @@
+@import "../common/icons.less";
+@import "../common/buttongroup.less";
+@import "base.less";
+
+// ButtonGroup
+
+.km-fiori .km-buttongroup > *:not(:first-child):not(:last-child)
+{
+    border-radius: 0;
+}
+
+.km-fiori .km-buttongroup > *:first-child
+{
+    border-radius: @fiori-border-radius 0 0 @fiori-border-radius;
+}
+
+.km-fiori .km-buttongroup > *:last-child
+{
+    border-radius: 0 @fiori-border-radius @fiori-border-radius 0;
+}
+
+.km-fiori .km-buttongroup > *.km-state-active
+{
+    border-right-width: 1px;
+}
+
+.km-fiori .km-buttongroup > *.km-state-active + *
+{
+    border-left-width: 0;
+}

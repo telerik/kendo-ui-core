@@ -1,0 +1,566 @@
+@office365-background: #fff;
+@office365-text: #333;
+@office365-border-color: #bababa;
+
+// switch, popover, modalview
+@office365-secondary-background: #fff;
+@office365-overlay-background: rgba(64,70,75,.48);
+
+// navbar
+@office365-secondary-text: #fff;
+
+// buttons
+@office365-button-border: #f4f4f4;
+@office365-button-background: #f4f4f4;
+@office365-button-primary-background: #0072c6;
+@office365-button-selected-background: #0072c6;
+@office365-button-selected-border: #0072c6;
+@office365-button-hover-background: #eaeaea;
+
+// actionsheet, popover and modalview buttons
+@office365-inverse-background: #0072c6;
+@office365-inverse-hover-background: #fff;
+@office365-inverse-text: #333;
+@office365-inverse-border: #e5e5e5;
+
+@switch-color: #666666;
+@switch-border: #c8c8c8;
+
+@office365-shadow: 0 0 10px 5px rgba(0,0,0,.18);
+
+@office365-selected-color: #004578;
+
+@error: #f44336;
+
+// listview
+@office365-list-background: #fff;
+@office365-list-hover-background: #fff;
+@office365-list-selected-background: #cde6f7;
+@office365-list-group-background: #f7f7f7;
+@office365-list-group-text: #6d6d72;
+@office365-list-border: #e5e5e5;
+
+.km-office365,
+.km-office365 .km-view
+{
+    background-color: @office365-background;
+}
+
+.km-office365
+{
+    color: @office365-text;
+}
+
+.km-office365 .k-toolbar,
+.km-office365 .km-navbar,
+.km-office365 .km-navbar .km-view-title
+{
+    color: @office365-secondary-text;
+    background-color: @office365-inverse-background;
+}
+
+.km-office365 .km-popup .km-navbar,
+.km-office365 .km-modalview .km-navbar
+{
+    border-color: @office365-background;
+}
+
+.km-office365 .km-popup .km-navbar,
+.km-office365 .km-popup .km-navbar .km-view-title
+{
+    color: @office365-text;
+    background-color: @office365-background;
+}
+
+.km-office365 .km-modalview .km-header .km-navbar,
+.km-office365 .km-modalview .km-header .km-navbar .km-view-title
+{
+    color: @switch-color;
+    background-color: @office365-background;
+}
+
+.km-office365 .km-modalview .km-footer .km-rightitem
+{
+    color: @office365-text;
+    background-color: @office365-button-background;
+ }
+
+.km-office365 .km-modalview .km-footer .km-rightitem .km-button:first-child,
+ .km-office365 .km-modalview .km-footer .km-button.km-state-active
+{
+    color: @office365-secondary-text;
+    background-color: @office365-button-primary-background;
+}
+
+.km-office365 .km-navbar .km-leftitem .km-button {
+    border-color: @office365-background;
+}
+
+.km-office365 .km-navbar .km-leftitem .km-button.km-state-active {
+    border-color: @office365-selected-color;
+}
+
+.km-office365 .km-navbar .km-state-active.km-back:before,
+.km-office365 .k-toolbar .km-state-active.km-back:before,
+.km-office365 .km-state-active .km-drawer-button:after
+ {
+    color: @office365-selected-color;
+}
+
+// ActionSheet, Footer
+
+.km-office365 .km-actionsheet > li > a
+{
+    background: @office365-background;
+    color: @office365-text;
+    border-top-color: @office365-list-border;
+    border-image: linear-gradient(to right, transparent 1em, @office365-list-border 1em, @office365-list-border 100%) 1 stretch;
+}
+
+.km-office365 .km-actionsheet > li:nth-last-child(2) > a
+{
+    border-image: none;
+}
+
+.km-office365 .km-footer .km-tabstrip .km-button:hover,
+.km-office365 .km-actionsheet > li > a:active
+{
+    background: @office365-inverse-hover-background;
+}
+
+.km-office365 .km-footer .km-tabstrip .km-button,
+.km-office365 .km-actionsheet > li > a
+{
+    border-color: @office365-inverse-border;
+}
+
+.km-office365 .km-actionsheet > .km-actionsheet-cancel > a
+{
+    color: @office365-secondary-text;
+    background: @office365-button-primary-background;
+}
+
+// Button
+
+.km-office365 .km-tabstrip,
+.km-office365 .km-button
+{
+    background: @office365-button-background;
+    border-color: @office365-button-border;
+}
+
+.km-office365 .km-tabstrip .km-button,
+.km-office365 .km-tabstrip .km-state-active {
+    color: @switch-color;
+}
+
+.km-office365 .km-tabstrip .km-state-active .km-icon {
+    color: @office365-selected-color;
+}
+
+.km-office365 .km-buttongroup .km-button.km-state-active {
+    box-shadow: 0 0 0 1px @office365-button-selected-border;
+    z-index: 1;
+}
+
+.km-office365 .km-widget.km-navbar .km-buttongroup .km-button {
+    border-color: @office365-background;
+}
+
+.km-office365 .km-buttongroup .km-button:last-child {
+    border-left-color: @office365-button-border;
+}
+
+.km-office365 .km-widget.km-navbar .km-buttongroup .km-state-active {
+    color: @office365-button-selected-border;
+    background-color: @office365-background;
+    box-shadow: 0 0 0 1px @office365-background;
+}
+
+.km-office365 .km-button:hover,
+.km-office365 .km-footer .km-tabstrip .km-button:hover
+{
+    background: @office365-button-hover-background;
+}
+
+.km-office365 .km-button.km-state-active
+{
+    background: @office365-button-selected-background;
+    border-color: @office365-button-selected-border;
+}
+
+// Badges and Details
+
+.km-office365 .km-detail,
+.km-office365 .k-toolbar
+{
+    border-color: @office365-button-border;
+}
+
+// Switch
+.km-office365 .km-switch-off .km-switch-wrapper
+{
+    background-color: @office365-button-background;
+}
+
+.km-modalview
+{
+    background: @office365-secondary-background;
+}
+
+.km-office365 .km-switch-handle
+{
+    background: @switch-color;
+    border-color: @switch-color;
+}
+
+.km-office365 .km-switch-off .km-switch-handle:after,
+.km-office365 .km-switch-on .km-switch-handle:after,
+.km-office365 .km-switch-off .km-switch-handle:before,
+.km-office365 .km-switch-on .km-switch-handle:before
+{
+    background-color: @office365-background;
+}
+
+.km-office365 .km-switch-container,
+.km-office365 .km-switch-wrapper
+{
+    border-color: @switch-border;
+}
+
+// Slider
+
+
+// ListView
+
+.km-office365 .km-list > li
+{
+    background: @office365-list-background;
+    border-color: @office365-button-border;
+    border-top-color: @office365-list-border;
+    border-image: linear-gradient(to right, transparent 1em, @office365-list-border 1em, @office365-list-border 100%) 1 stretch;
+}
+
+.km-office365 .km-list > li:hover
+{
+    background-color: @office365-list-hover-background;
+}
+
+.km-office365 .km-listinset > li:first-child,
+.km-office365 .km-listgroupinset .km-list > li:first-child
+{
+    border-color: @office365-button-border;
+}
+
+.km-office365 .km-listinset > li:last-child,
+.km-office365 .km-listgroupinset .km-list > li:last-child
+{
+    border-color: @office365-button-border;
+}
+
+.km-office365 .km-list > li:last-child
+{
+    .box-shadow(inset 0 -1px 0 @office365-border-color);
+}
+
+.km-office365 .km-listview-link:after,
+.km-office365 .km-state-active .km-listview-link:after
+{
+    color: lighten(@office365-text, 30);
+    border-color: currentcolor;
+}
+
+.km-office365 .km-group-title,
+.km-office365 .km-list fieldset legend
+{
+    background: @office365-list-group-background;
+    border-color: @office365-list-group-background @office365-border-color @office365-border-color;
+    color: @office365-list-group-text;
+}
+
+.km-office365 .km-buttongroup {
+    border-color: @office365-border-color;
+}
+
+.km-office365 .km-listview .km-state-active > .km-listview-link
+{
+    color: @office365-text;
+}
+
+.km-office365 .km-filter-wrap:before,
+.km-office365 .km-filter-reset .km-clear
+{
+    color: @office365-text;
+}
+
+.km-office365 .km-filter-wrap > input
+{
+    color: @office365-text;
+    border-color: @office365-button-border;
+}
+
+.km-office365 .km-filter-wrap > input:focus
+{
+    border-color: #000;
+}
+
+.km-office365 .km-legend-button {
+    color: @office365-button-primary-background;
+}
+
+// ScrollView
+
+.km-office365 .km-pages li
+{
+    background: @office365-button-border;
+    border-color: @office365-border-color;
+}
+
+// Forms
+.km-office365 .km-label-above,
+.km-office365 .km-icon-label,
+.km-office365 .km-list>li label,
+.km-office365 .km-list fieldset textarea,
+.km-office365 .km-list fieldset input,
+.km-office365 .km-checkbox-label,
+.km-office365 .km-radio-label {
+    color: @office365-list-group-text;
+}
+
+.km-office365 input.km-checkbox:checked + .km-checkbox-label:after,
+.km-office365 input.km-radio:checked + .km-radio-label:after {
+    background-color: @office365-list-group-text;
+}
+
+.km-office365 .km-list input[type=password],
+.km-office365 .km-list input[type=search],
+.km-office365 .km-list input[type=number],
+.km-office365 .km-list input[type=tel],
+.km-office365 .km-list input[type=url],
+.km-office365 .km-list input[type=email],
+.km-office365 .km-list input[type=month],
+.km-office365 .km-list input[type=color],
+.km-office365 .km-list input[type=week],
+.km-office365 .km-list input[type=date],
+.km-office365 .km-list input[type=time],
+.km-office365 .km-list input[type=datetime],
+.km-office365 .km-list input[type=datetime-local],
+.km-office365 .km-list input[type=text]:not(.k-input),
+.km-office365 .km-list select:not([multiple]),
+.km-office365 .km-list .k-dropdown-wrap,
+.km-office365 .km-list textarea,
+.km-office365 .km-list .k-dropdown-wrap .k-input
+{
+    color: @office365-text;
+    border-color: @office365-border-color;
+}
+
+.km-office365 .km-list select:not([multiple]) option
+{
+    color: @office365-text;
+}
+
+// Checkboxes and Radios
+
+.km-office365 .km-listview-label input[type=radio],
+.km-office365 .km-listview-label input[type=checkbox]
+{
+    border-color: @switch-color;
+    background: #fff;
+}
+
+.km-office365 input:checked,
+.km-office365 .km-listview-label input[type=checkbox]:checked:after
+{
+    color: @switch-color;
+}
+
+.km-office365 .km-listview-label input[type=radio]:checked:after
+{
+    background-color: @switch-color;
+}
+
+// Shim
+
+.km-office365 .km-shim,
+.km-phone .km-office365 .km-actionsheet-wrapper,
+.km-office365 .km-actionsheet-root
+{
+    background: rgba(0,0,0,.4);
+}
+
+// PopUp
+
+.km-office365 .km-popup
+{
+    background: @office365-overlay-background;
+    box-shadow: @office365-shadow;
+}
+
+.km-office365 .km-actionsheet-wrapper,
+.km-office365 .km-popup .k-list-container
+{
+    background: @office365-background;
+    border-top-color: @office365-background;
+}
+
+.km-office365 .km-popup.km-pane,
+.km-tablet .km-office365 .km-actionsheet-wrapper
+{
+    background-color: @office365-background;
+}
+
+.km-office365 .km-popup-arrow:after
+{
+    border-color: @office365-background transparent;
+}
+
+.km-office365 .km-actionsheet-root .km-popup-arrow:after {
+    border-color: transparent @office365-background transparent;
+}
+
+// Loader & Pull-to-refresh
+
+.km-office365 .km-loader
+{
+    background: rgba(0,0,0,.05);
+}
+
+.km-office365 .km-loader h1
+{
+    color: @office365-text;
+}
+
+// Active States
+
+.km-office365 .km-state-active[style*=background]
+{
+    .box-shadow(inset 0 0 0 1000px rgba(0,0,0,.2));
+}
+
+// Active States
+
+.km-office365 .km-badge,
+.km-office365 .km-rowinsert,
+.km-office365 .km-rowdelete,
+.km-office365 .km-state-active,
+.km-office365 .km-switch-label-on,
+.km-office365 .km-switch-label-off,
+.km-office365 .k-slider .k-draghandle,
+.km-office365 .k-slider .k-draghandle:hover,
+.km-office365 .km-popup.km-pane .km-navbar,
+.km-office365 .km-popup.km-pane .k-toolbar,
+.km-office365 .km-popup.km-pane .km-tabstrip,
+.km-office365 .km-popup .k-state-hover,
+.km-office365 .km-popup .k-state-focused,
+.km-office365 .km-popup .k-state-selected,
+.km-office365 li.km-state-active .km-listview-link,
+.km-office365 li.km-state-active .km-listview-label
+{
+    color: @office365-secondary-text;
+}
+
+.km-office365 .km-scroller-pull .km-icon {
+    color: @office365-button-primary-background;
+}
+
+.km-office365 .km-popup .k-item
+{
+    color: @office365-text;
+    border-bottom-color: @office365-border-color;
+}
+
+.km-office365 .km-popup .k-state-selected.k-item {
+    color: @office365-secondary-text;
+}
+
+.km-office365 .km-filter-wrap > input,
+.km-office365 .km-switch-handle.km-state-active//,
+//.km-root .km-office365 .km-scroller-refresh span:not(.km-template)
+{
+    background: @office365-button-selected-background;
+}
+
+.km-office365 .km-switch-handle,
+.km-office365 .k-slider-selection
+{
+    color: @office365-button-selected-background;
+}
+
+.km-office365 .km-switch-background {
+    color: @office365-button-primary-background;
+}
+
+.km-office365 .km-switch-off .km-switch-background {
+    color: @office365-button-border;
+}
+
+.km-office365 a.km-widget.km-rowinsert,
+.km-office365 a.km-widget.km-rowdelete,
+.km-office365 .km-state-active,
+//.km-office365 .km-scroller-pull,
+.km-office365 .km-loader:before,
+.km-office365 .k-slider-selection,
+.km-office365 .km-touch-scrollbar,
+.km-office365 .km-pages .km-current-page,
+.km-office365 .k-slider .k-draghandle,
+.km-office365 .k-slider .k-draghandle:hover,
+.km-office365 .km-scroller-refresh.km-load-more,
+.km-office365 .km-popup .k-state-selected,
+.km-office365 li.km-state-active .km-listview-label
+{
+    background: @office365-button-selected-background;
+    border-color: @office365-button-selected-background;
+}
+
+.km-office365 .km-detail.km-state-active,
+.km-office365 .km-state-active .km-detail,
+.km-office365 a.km-listview-link:active,
+.km-office365 .km-state-active a.km-listview-link,
+.km-office365 .km-list > li:active,
+.km-office365 .km-tabstrip .km-state-active {
+    background: @office365-list-selected-background;
+}
+
+
+.km-office365 .km-state-active .km-detail,
+.km-office365 .km-detail.km-state-active
+{
+    color: @office365-text;
+    border-color: @office365-text;
+}
+
+.km-office365 .km-state-active .km-rowinsert,
+.km-office365 .km-rowinsert.km-state-active,
+.km-office365 .km-state-active .km-rowdelete,
+.km-office365 .km-rowdelete.km-state-active
+{
+    color: @office365-secondary-text;
+    border-color: @office365-inverse-background;
+}
+
+.km-office365 .km-filter-wrap > input:focus
+{
+    border-color: @office365-button-selected-background;
+}
+
+.km-office365 .km-badge,
+.km-office365 .km-rowdelete
+{
+    background: @office365-button-primary-background;
+}
+
+.km-office365 label.km-required:after {
+    color: @error;
+}
+
+.km-office365 {
+    .km-list {
+        fieldset {
+            legend,
+            .km-inline-field {
+                border-color: @office365-list-border;
+            }
+        }
+    }
+}

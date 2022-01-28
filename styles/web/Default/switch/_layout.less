@@ -1,0 +1,149 @@
+// Switch
+
+.k-switch {
+    border-radius: @switch-border-radius;
+    cursor: pointer;
+    width: @switch-size;
+    height: 30px;
+    background: none;
+    border: 0;
+    outline: 0;
+    box-shadow: none;
+    display: inline-flex;
+    align-items: center;
+    overflow: hidden;
+    vertical-align: middle;
+    font-size: @switch-font-size;
+    user-select: none;
+    text-align: left;
+    position: relative;
+
+    [type='checkbox'] {
+        display: none;
+    }
+
+    .k-ie & {
+        display: inline-block;
+    }
+}
+
+.k-switch,
+.k-switch-track,
+.k-switch-thumb {
+    box-sizing: border-box;
+}
+
+// Switch track
+.k-switch-track {
+    width: @switch-size;
+    height: 30px;
+    border-radius: @switch-border-radius;
+    padding: @switch-container-padding-y @switch-container-padding-x;
+    border-width: @switch-container-border-width;
+    border-style: solid;
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 0 auto;
+    position: relative;
+    outline: 0;
+    transition: background-color 200ms ease-out 0s;
+
+    .k-ie & {
+        display: block;
+    }
+}
+
+// Switch thumb
+.k-switch-thumb-wrap {
+    width: 0;
+    height: 0;
+    overflow: visible;
+    position: absolute;
+    transition: left 200ms ease-in-out;
+    top: 50%;
+}
+.k-switch-thumb {
+    border-radius: @switch-handle-border-radius;
+    width: @switch-handle-size;
+    height: @switch-handle-size;
+    border-width: @switch-handle-border-width;
+    border-style: solid;
+    background-position: 50%;
+    display: block;
+    position: absolute;
+    transform: translate( -50%, -50% );
+    transition: left 200ms ease-out 0s;
+
+    .k-ie11 & {
+        display: block;
+    }
+}
+
+.k-switch-on .k-switch-thumb-wrap {
+    left: @switch-on-left-x;
+
+    .k-ie &,
+    .k-edge & {
+        left: 100%;
+        margin-left: -@switch-handle-size;
+    }
+}
+
+.k-switch-off .k-switch-thumb-wrap {
+    left: @switch-on-right-x;
+}
+
+.k-switch-label-on,
+.k-switch-label-off {
+    display: @switch-label-display;
+    width: @switch-label-width;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-shadow: none;
+    line-height: @switch-handle-size;
+    overflow: hidden;
+}
+
+.k-switch-label-on {
+    text-align: left;
+    left: @switch-label-position;
+}
+
+.k-switch-label-off {
+    text-align: right;
+    right: @switch-label-position;
+}
+
+.k-switch when not (@switch-track-size = null) {
+    overflow: visible;
+
+    .k-switch-track {
+        height: @switch-track-size;
+    }
+}
+
+.k-rtl .k-switch,
+.k-switch[dir = "rtl"] {
+    .k-switch-thumb {
+        transform: translate( 50%, -50% );
+    }
+
+    &.k-switch-on .k-switch-thumb-wrap {
+        left: @switch-on-right-x;
+    }
+    &.k-switch-off .k-switch-thumb-wrap {
+        left: @switch-on-left-x;
+    }
+
+    .k-switch-label-on {
+        text-align: right;
+        left: initial;
+        right: @switch-label-position;
+    }
+    .k-switch-label-off {
+        text-align: left;
+        left: @switch-label-position;
+        right: initial;
+    }
+}

@@ -1,0 +1,567 @@
+@accent: #ff4350;
+@base: #f8fafb;
+@background: #fff;
+
+@border-radius: 4px;
+
+@normal-background: #fff;
+@normal-text-color: #32364c;
+@normal-gradient: none;
+
+@hover-background: #f8fafb;
+@hover-text-color: #888e90;
+@hover-gradient: none;
+
+@selected-background: #f5f6f6;
+@selected-text-color: #888e90;
+@selected-gradient: none;
+
+@accentSecond: #00acc1;
+
+@error: #f44336;
+@warning: #f9a825;
+@success: #00c853;
+@info: #2196f3;
+
+.km-nova h1,
+.km-nova h2,
+.km-nova h3,
+.km-nova h4,
+.km-nova h5,
+.km-nova h6,
+.km-nova p {
+    color: @normal-text-color;
+}
+
+.km-nova .km-content {
+    color: @normal-text-color;
+    background-color: @background;
+}
+
+// Shim
+.km-nova .km-popup,
+.km-nova .km-shim,
+.km-phone .km-nova .km-actionsheet-wrapper,
+.km-nova .km-actionsheet-root {
+    background: rgba(0,0,0,.4);
+}
+
+// Button
+.km-nova .km-button {
+    color: @hover-text-color;
+    background: @background;
+    border-color: @hover-text-color;
+}
+
+.km-nova .km-button.km-state-active {
+    background: @selected-background;
+}
+
+// Primary Button
+.km-nova .km-primary {
+    color: @background;
+    background: @accent;
+    border-color: @accent;
+}
+
+.km-nova .km-icon-button,
+.km-nova .km-list .km-icon-button .km-icon {
+    color: @background;
+}
+
+.km-nova .km-primary.km-state-active {
+    background: hsv(hsvHue(@accent), hsvSaturation(@accent), (hsvValue(@accent) - 10));
+    border-color: hsv(hsvHue(@accent), hsvSaturation(@accent), (hsvValue(@accent) - 10));
+}
+
+// Link button
+.km-nova .km-link-button {
+    color: @accentSecond;
+    border-color: transparent;
+}
+
+.km-nova a:not([class]),
+.km-nova .km-external-link {
+    color: @accentSecond;
+}
+
+// TabStrip
+.km-nova .km-footer {
+    background: @normal-text-color;
+}
+
+.km-nova .km-navbar,
+.km-nova .k-toolbar,
+.km-nova .km-tabstrip {
+    background-image: linear-gradient(to bottom, darken(@normal-text-color, 2%) 0%, darken(@normal-text-color, 7%) 100%);
+}
+
+.km-nova .km-vertical-tabstrip {
+    background-color: darken(@normal-text-color, 7%);
+}
+
+.km-nova .km-navbar,
+.km-nova .k-toolbar,
+.km-nova .k-toolbar .km-button,
+.km-nova .k-toolbar .km-icon,
+.km-nova .km-tabstrip,
+.km-nova .km-navbar .km-back:before,
+.km-nova .k-toolbar .km-back:before,
+.km-nova .km-navbar .km-button,
+.km-nova .km-view-title {
+    color: @background;
+}
+
+.km-nova .km-tabstrip .km-button {
+    color: @background;
+    background: transparent;
+    border-color: transparent;
+}
+
+.km-nova .km-tabstrip .km-button.km-state-active {
+    background-image: linear-gradient(to bottom, #202333 0%, #081421 100%);
+}
+
+.km-nova .km-drawer .km-navbar,
+.km-nova .km-drawer .km-vertical-tabstrip .km-button.km-state-active,
+.km-nova .km-drawer .km-listview li.km-state-active {
+    background: darken(@normal-text-color, 10%);
+}
+
+.km-nova .km-light .km-view-title {
+    color: @accent;
+}
+
+.km-nova .km-light.km-navbar,
+.km-nova .km-light.k-toolbar,
+.km-nova .km-light.km-tabstrip {
+    background: @background;
+    .box-shadow(0 1px 40px 4px @hover-background);
+}
+
+.km-nova .km-accent.km-navbar,
+.km-nova .km-accent.k-toolbar,
+.km-nova .km-accent.km-tabstrip,
+.km-nova .km-vertical-tabstrip .km-button.km-state-active:before,
+.km-nova .km-drawer .km-listview li.km-state-active:before {
+    background: @accent;
+}
+
+.km-nova .km-listview-link:after,
+.km-nova .km-listview-label:after {
+    border-color: lighten(@selected-text-color, 25%);
+}
+
+.km-nova .km-drawer .km-list .km-listview-link:after,
+.km-nova .km-drawer .km-list .km-listview-label:after {
+    border-color: @background;
+    opacity: .3;
+}
+
+.km-nova .km-touch-scrollbar {
+    background: @normal-text-color;
+}
+
+// Light NavBar button
+.km-nova .km-light.km-navbar .km-back:before,
+.km-nova .km-light.k-toolbar .km-back:before,
+.km-nova .km-light.km-navbar .km-button {
+    color: @accent;
+}
+
+.km-nova .km-navbar .km-button,
+.km-nova .k-toolbar .km-button {
+    background: transparent;
+    border-color: transparent;
+    .box-shadow(none);
+}
+
+// ButtonGroup
+.km-nova .km-buttongroup .km-button {
+    border-color: darken(@selected-background, 33%);
+}
+
+.km-nova .km-buttongroup .km-state-active {
+    color: @background;
+    background-color: darken(@selected-background, 33%);
+}
+
+.km-nova .km-buttongroup.km-primary .km-button {
+    color: @accent;
+    border-color: @accent;
+}
+
+.km-nova .km-buttongroup.km-primary .km-state-active {
+    color: @background;
+    background-color: @accent;
+}
+
+// Inverse ButtonGroup
+.km-nova .km-inverse .km-button {
+    color: @background;
+    background-color: darken(@selected-background, 33%);
+    border-color: @background;
+}
+
+.km-nova .km-inverse .km-state-active {
+    color: darken(@selected-background, 33%);
+    background-color: @background;
+}
+
+.km-nova .km-inverse.km-primary .km-button {
+    color: @background;
+    border-color: @background;
+    background-color: @accent;
+}
+
+.km-nova .km-inverse.km-primary .km-state-active {
+    color: @accent;
+    background-color: @background;
+}
+
+// Accent NavBar
+.km-nova .km-accent.km-navbar,
+.km-nova .km-accent.k-toolbar,
+.km-nova .km-accent.km-tabstrip,
+.km-nova .km-accent.km-navbar .km-back:before,
+.km-nova .km-accent.k-toolbar .km-back:before,
+.km-nova .km-accent.km-navbar .km-button {
+    color: @background;
+}
+
+// ButtonGroup in NavBar
+.km-nova .km-navbar .km-buttongroup .km-button {
+    border-color: @background;
+}
+
+.km-nova .km-navbar .km-buttongroup .km-state-active {
+    color: @normal-text-color;
+    background-color: @background;
+}
+
+// ListView
+.km-nova .km-list > li
+{
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+    color: @normal-text-color;
+}
+
+.km-nova .km-list > li.km-load-more {
+    border-color: transparent;
+}
+
+.km-nova .km-list > li > .km-listview-link,
+.km-nova .km-legend-button,
+.km-nova .km-collapsible-header,
+.km-nova .km-collapsible-header h1,
+.km-nova .km-collapsible-header h2,
+.km-nova .km-collapsible-header h3,
+.km-nova .km-collapsible-header h4,
+.km-nova .km-collapsible-header h5,
+.km-nova .km-collapsible-header h6 {
+    color: @accent;
+}
+
+.km-nova .km-legend-button,
+.km-nova .km-drawer a {
+    text-decoration: none;
+}
+
+.km-nova .km-list > li label,
+.km-nova .km-list fieldset textarea,
+.km-nova .km-list fieldset input,
+.km-nova .km-checkbox-label,
+.km-nova .km-radio-label {
+    color: lighten(@selected-text-color, 8%);
+}
+
+.km-nova .km-list fieldset .km-inline-field {
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+.km-nova label.km-required:after {
+    color: @accent;
+}
+
+.km-nova .km-group-title,
+.km-nova .km-list fieldset legend,
+.km-nova .km-shim li.km-actionsheet-title {
+    background: @base;
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+    color: @normal-text-color;
+}
+
+.km-nova .km-popup .k-state-focused,
+.km-nova .km-popup .k-state-selected {
+    color: @base;
+    background: @accent;
+}
+
+// Drawer
+.km-nova .km-drawer {
+    color: @background;
+    background-color: darken(@normal-text-color, 4%);
+}
+
+.km-nova .km-drawer .km-content {
+    background-color: darken(@normal-text-color, 4%);
+}
+
+// ListView in Drawer
+.km-nova .km-drawer .km-group-title {
+    color: @background;
+    background-color: darken(@normal-text-color, 15%);
+    border-color: lighten(@normal-text-color, 5%);
+}
+
+.km-nova .km-drawer .km-list > li {
+    border-color: lighten(@normal-text-color, 5%);
+}
+
+.km-nova .km-drawer .km-list > li,
+.km-nova .km-drawer .km-list > li > .km-listview-link,
+.km-nova .km-drawer .km-list > li .km-icon {
+    color: @background;
+}
+
+// Generic content
+.km-nova .km-thumbnail {
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+.km-nova .km-listview-link:after {
+    color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+// Filter box
+.km-nova .km-filter-wrap {
+    background: @base;
+    color: @normal-text-color;
+}
+
+.km-nova .km-filter-wrap:before,
+.km-nova .km-filter-wrap .km-clear {
+    color: lighten(@selected-text-color, 25%);
+}
+
+// Slider
+.km-nova .k-slider .k-slider-track {
+    background-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+    .box-shadow(none);
+}
+
+.km-nova .k-slider-selection {
+    background-color: @accent;
+    .box-shadow(none);
+}
+
+.km-nova .k-slider .k-draghandle,
+.km-nova .k-slider .k-draghandle:hover {
+    background-color: @background;
+    .box-shadow(0 0.202rem 0.403rem 0 rgba(0, 0, 0, 0.3));
+}
+
+// Switch
+.km-nova .km-switch-wrapper {
+    border-color: @accent;
+    background-color: @accent;
+}
+
+.km-nova .km-switch-off .km-switch-container {
+    .box-shadow(inset 0 0.202rem 0.403rem 0 darken(@base, 8%));
+    border-color: @base;
+    background-color: @base;
+}
+
+.km-nova span.km-switch {
+    color: @accent;
+}
+
+.km-nova span.km-switch-off {
+    color: @base;
+}
+
+.km-nova .km-switch-off .km-switch-wrapper {
+    background-color: @base;
+    border-color: @base;
+}
+
+.km-nova .km-switch-handle {
+    background: @background;
+    .box-shadow(0 0.202rem 0.403rem 0 rgba(0,0,0,.3));
+    border-color: darken(@base, 8%);
+}
+
+// ScrollView
+.km-nova .km-scrollview-dark {
+    background-color: @normal-text-color;
+}
+
+.km-nova .km-pages li {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+.km-nova .km-pages .km-current-page {
+    background: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+// Checkboxes and RadioButtons inside ListView
+.km-nova input[type=radio],
+.km-nova input[type=checkbox] {
+   color: @accent;
+   border-color: darken(@base, 8%);
+}
+
+.km-nova input[type=checkbox]:checked:after {
+    color: @accent;
+}
+
+.km-nova input[type=radio]:checked:after,
+.km-nova.km-on-android .km-view input[type=radio].km-check:checked:after {
+    background: @accent;
+}
+
+// Standalone Checkboxes and RadioButtons
+.km-nova .km-checkbox:checked + .km-checkbox-label:after {
+    color: @accent;
+    border-color: darken(@base, 8%);
+}
+
+.km-nova .km-checkbox-label:before {
+    border-color: transparent;
+}
+
+.km-nova .km-checkbox-label:after,
+.km-nova .km-radio-label:after {
+    color: darken(@base, 8%);
+}
+
+.km-nova .km-radio:checked + .km-radio-label:after {
+    background: @accent;
+}
+
+// ModalView
+.km-nova .km-modalview,
+.km-nova .km-modalview .km-footer .km-rightitem {
+    background: @background;
+}
+
+.km-nova .km-modalview .km-footer .km-button {
+    color: darken(@base, 50%);
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+.km-nova .km-modalview .km-footer .km-rightitem .km-button:last-child,
+.km-nova .km-modalview .km-footer .km-button.km-state-active {
+    color: @accentSecond;
+}
+
+// ActionSheet, Footer
+.km-nova .km-actionsheet > li > a,
+.km-nova .km-popup .k-item {
+    color: @normal-text-color;
+    background: @background;
+}
+
+.km-nova .km-actionsheet > li:nth-last-child(2) > a {
+    border-image: none;
+}
+
+.km-nova .km-footer .km-tabstrip .km-button,
+.km-nova .km-actionsheet-wrapper,
+.km-nova .km-actionsheet > li > a,
+.km-nova .km-shim li.km-actionsheet-title,
+.km-nova .km-popup .k-list-container,
+.km-nova .km-popup .k-item {
+    border-color: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+.km-nova .km-actionsheet > .km-actionsheet-cancel > a {
+    color: @normal-text-color;
+}
+
+.km-nova .km-popup.km-pane,
+.km-tablet .km-nova .km-actionsheet-wrapper {
+    background-color: @background;
+}
+
+// Collapsible
+.km-nova .km-collapsible-header,
+.km-nova .km-collapsible-content {
+    background: @background;
+    border-color: darken(@base, 8%);
+}
+
+.km-nova .km-collapsible-content {
+    color: @normal-text-color;
+}
+
+.km-nova .km-collapsible-header .km-icon,
+.km-nova .km-expanded .km-collapsible-header .km-icon {
+    color: lighten(@selected-text-color, 25%);
+}
+
+// Loader & Pull-to-refresh
+.km-nova .km-loader {
+    background: rgba(0,0,0,.05);
+}
+
+.km-nova .km-detail,
+.km-nova .km-detail .km-icon:after {
+    color: @accent;
+    background: @background;
+}
+
+.km-nova .km-list > li .km-style-default .km-icon:after {
+    color: @normal-text-color;
+}
+
+.km-nova .km-list > li .km-style-info .km-icon:after {
+    color: @info;
+}
+
+.km-nova .km-list > li .km-style-success .km-icon:after {
+    color: @success;
+}
+
+.km-nova .km-list > li .km-style-warning .km-icon:after {
+    color: @warning;
+}
+
+.km-nova .km-list > li .km-style-error .km-icon:after {
+    color: @error;
+}
+
+.km-nova .km-badge {
+    color: @background;
+    background: @accent;
+    border-color: @accent;
+}
+
+.km-nova .km-loading-left:before {
+  background: @normal-text-color;
+}
+
+.km-nova .km-loading-left:after {
+  background: hsv(hsvHue(@base) , hsvSaturation(@base), (hsvValue(@base) - 10));
+}
+
+.km-nova span.km-loading-right {
+   background: @background;
+}
+
+// Validation
+.km-nova .km-list > li label.km-invalid,
+.km-nova .km-list fieldset .km-legend-button.km-invalid,
+.km-nova .km-list > li label.km-invalid.km-required:after {
+    color: @warning;
+}
+
+.km-nova .km-invalid-msg {
+    background: @warning;
+}
+
+.km-nova .km-invalid-msg {
+    color: @background;
+}

@@ -1,0 +1,26 @@
+@import "../common/icons.less";
+@import "../common/tabstrip.less";
+@import "base.less";
+
+// TabStrip
+
+.km-material .km-tabstrip
+{
+    padding: 0;
+    display: table;
+    table-layout: fixed;
+}
+
+.km-material .km-tabstrip .km-button
+{
+    border: 0;
+    border-top: 2px solid transparent;
+    .box-shadow(none);
+    font-size: .7em;
+    display: table-cell;
+}
+
+.km-material .km-tabstrip .km-icon:before
+{
+    display: none;
+}

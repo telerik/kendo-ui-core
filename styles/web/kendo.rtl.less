@@ -1,0 +1,657 @@
+// Kendo RTL CSS
+
+.k-rtl
+{
+    direction: rtl;
+}
+
+// AutoComplete
+
+.k-rtl .k-autocomplete .k-i-loading,
+.k-rtl .k-multiselect .k-i-loading
+{
+    right: auto;
+    left: 3px;
+}
+
+// Buttons
+
+.k-rtl .k-button-icontext .k-icon,
+.k-rtl .k-button-icontext .k-image
+{
+    margin-left: 3px;
+    margin-left: .1875rem;
+    margin-right: -2px;
+    margin-right: -.125rem;
+}
+
+
+// Calendar
+
+.k-rtl .k-calendar .k-i-arrow-60-right,
+.k-rtl .k-calendar .k-i-arrow-60-left
+{
+    transform: scaleX(-1);
+}
+
+// Editor
+
+.k-rtl .k-form-text-row input
+{
+    margin-right: 0;
+    margin-left: 1em;
+}
+
+.k-rtl .k-form-checkbox-row input
+{
+    margin-left: 0;
+    margin-right: 7.5em;
+}
+
+.k-rtl .k-form-checkbox-row label
+{
+    padding-left: 0;
+    padding-right: 0.3em;
+}
+
+.k-rtl .k-search-wrap
+{
+    float: left;
+}
+
+.k-rtl .k-search-wrap .k-search
+{
+    right: auto;
+    left: 2px;
+}
+
+.k-rtl .k-editor-dialog .k-button-wrapper
+{
+    text-align: left;
+}
+
+.k-rtl .k-tiles-arrange
+{
+    float: left;
+}
+
+.k-rtl .k-toolbar-wrap {
+    float: right;
+}
+
+.k-rtl .k-imagebrowser .k-thumb
+{
+    float: right;
+    margin: 4px 4px 0 10px;
+}
+
+.k-rtl .k-i-indent-increase,
+.k-rtl .k-i-indent-decrease
+{
+    transform: scaleX(-1);
+}
+
+.k-rtl .k-overflow-tools {
+    left: 0;
+    right: auto;
+}
+
+// Grid
+
+.k-rtl div.k-grid-header,
+.k-rtl div.k-grid-footer
+{
+    padding-right: 0;
+    padding-left: 17px;
+}
+
+.k-rtl .k-grid-header-wrap,
+.k-rtl .k-grid-footer-wrap
+{
+    border-width: 0;
+}
+
+.k-rtl .k-header > .k-grid-filter,
+.k-rtl .k-header > .k-header-column-menu
+{
+    float: left;
+    margin: -.5em 0 -.4em -.6em;
+    padding: .5em .2em .4em;
+}
+
+.k-rtl .k-grid-header .k-filterable .k-link
+{
+    padding-left: 2.4em;
+    padding-right: .6em;
+}
+
+.k-rtl .k-grid-header .k-header:first-child,
+.k-rtl .k-filter-row th:first-child,
+.k-rtl .k-grid tbody td:first-child,
+.k-rtl .k-grid tfoot td:first-child
+{
+    border-left-width: 1px;
+}
+
+.k-rtl div.k-grid td.k-hierarchy-cell
+{
+    border-left-width: 0;
+}
+
+.k-rtl .k-grid .k-group-cell + td,
+.k-rtl .k-grid .k-hierarchy-cell + td
+{
+    border-left-width: 1px;
+}
+
+.k-rtl .k-grid-header .k-header
+{
+    text-align: right;
+}
+
+.k-rtl .k-scrollbar-vertical
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-group-footer .k-group-cell + td
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
+.k-rtl .k-grid-header-locked,
+.k-rtl .k-grid-content-locked {
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-grid-header th.k-with-icon .k-link
+{
+    margin: -.5em 0 -.4em -.6em;
+    padding: .5em 0 .4em .6em;
+    margin-left: 18px;
+}
+
+// Editing
+
+.k-rtl .k-edit-label,
+.k-rtl .k-edit-form-container .editor-label
+{
+    float: right;
+    clear: both;
+    margin-left: 0;
+    margin-right: 2%;
+    text-align: left;
+}
+
+.k-rtl .k-edit-field,
+.k-rtl .k-edit-form-container .editor-field
+{
+    float: left;
+    clear: left;
+    margin-right: 0;
+    margin-left: 2%;
+}
+
+.k-rtl .k-edit-field > .k-button:first-child {
+    margin-right: 0;
+}
+
+.k-rtl .k-edit-form-container .k-edit-buttons
+{
+    text-align: left;
+}
+
+.k-rtl .k-dirty
+{
+    border-color: #f00 #f00 transparent transparent;
+    margin: 0;
+    left: auto;
+    right: 0;
+}
+
+// Gantt
+.k-rtl {
+    .k-gantt .k-grid-header .k-header {
+        text-align: center;
+    }
+
+    .k-gantt-actions {
+        float: right;
+        margin-right: 0;
+        margin-left: .6em;
+    }
+
+    button.k-gantt-toggle {
+        float: right;
+        margin-right: 0;
+        margin-left: .5em;
+    }
+
+    .k-gantt-edit-form .k-edit-buttons .k-gantt-delete {
+        float: right;
+    }
+
+    .k-gantt-toolbar li:first-child + li,
+    .k-gantt-toolbar li:first-child + li > .k-link {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+    .k-gantt-toolbar li:last-child,
+    .k-gantt-toolbar li:last-child > .k-link {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .k-gantt-toolbar li:last-child {
+        border-left-width: 1px;
+    }
+
+    .k-gantt-toolbar li:first-child {
+        border-left-width: 0;
+    }
+
+    .k-gantt-rows,
+    .k-gantt-columns,
+    .k-gantt-dependencies {
+        left: auto;
+        right: 0;
+    }
+
+    .k-task-complete {
+        right: 0;
+        left: auto;
+    }
+
+    .k-task-template {
+        padding: .2em .6em .2em 1.4em;
+    }
+
+    .k-task-single {
+        text-align: right;
+    }
+
+    .k-task-actions {
+        right: auto;
+        left: 4px;
+    }
+
+    .k-task-dot:after {
+        margin-right: 4px;
+        margin-left: 0;
+    }
+
+    .k-task-start {
+        right: 0;
+        left: auto;
+    }
+
+    .k-task-end {
+        left: 0;
+        right: auto;
+    }
+
+    .k-resources-wrap {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+}
+
+
+
+
+
+// Grid
+
+.k-rtl .k-grid tbody td:last-child,
+.k-rtl .k-grid thead th:last-child
+{
+    border-left-width: 0;
+}
+
+.k-rtl .k-timeline .k-grid-header-wrap
+{
+    border-left-width: 1px;
+}
+
+// PanelBar
+
+.k-rtl .k-panelbar-expand,
+.k-rtl .k-panelbar-collapse
+{
+    right: auto;
+    left: 2px;
+}
+
+.k-rtl .k-panelbar .k-image,
+.k-rtl .k-panelbar .k-sprite
+{
+    float: right;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+// Progressbar
+
+.k-rtl .k-progressbar > .k-reset
+{
+    left: auto;
+    right: -1px;
+}
+
+.k-rtl .k-progressbar-horizontal li.k-last
+{
+    border-left-width: 0;
+}
+
+// Scheduler
+
+.k-rtl .k-scheduler .k-scrollbar-v .k-scheduler-header-wrap
+{
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-scheduler-monthview .k-scheduler-table td
+{
+    text-align: left;
+}
+
+.k-rtl .k-scheduler-table td,
+.k-rtl .k-scheduler-header th
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-table td:first-child,
+.k-rtl .k-scheduler-header th:first-child
+{
+    border-right-width: 0;
+}
+
+.k-rtl .k-scheduler-agendaview .k-scheduler-table td:first-child
+{
+    border-left-width: 0;
+    border-right-width: 1px;
+}
+
+.k-rtl .k-scheduler-agendaview .k-scheduler-table td.k-first
+{
+    border-right-width: 0;
+}
+
+.k-rtl .k-scheduler-agendaview .k-scheduler-table td.k-scheduler-datecolumn
+{
+    border-right-width: 0;
+}
+
+.k-rtl .k-scheduler-times th
+{
+    text-align: left;
+    padding-right: .5em;
+    padding-left: .6em;
+    border-right-width: 0;
+    border-left-width: 1px;
+}
+
+.k-rtl .k-scheduler-now-arrow
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-scheduler-now-line
+{
+    left: 0;
+    right: 5px;
+}
+
+.k-rtl .k-event,
+.k-rtl .k-more-events
+{
+    text-align: right;
+}
+
+.k-rtl .k-event-template
+{
+    padding-left: 1.4em;
+    padding-right: .6em;
+}
+
+.k-rtl .k-event-actions,
+.k-rtl .k-event > .k-link,
+.k-rtl .k-task > .k-link
+{
+    right: auto;
+    left: 4px;
+}
+
+.k-rtl .k-scheduler-agendaview .k-task > .k-link
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-event-actions:first-child
+{
+    float: right;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+.k-rtl .k-event .k-event-top-actions,
+.k-rtl .k-event .k-event-bottom-actions
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-event > .k-resize-e
+{
+    right: auto;
+    left: 0;
+}
+
+.k-rtl .k-event > .k-resize-w
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-event > .k-resize-e:after,
+.k-rtl .k-event > .k-resize-w:after
+{
+    left: auto;
+    right: 1px;
+}
+
+.k-rtl .k-event > .k-resize-e:after
+{
+    right: auto;
+    left: 1px;
+}
+
+.k-rtl .k-scheduler-marquee .k-label-top
+{
+    left: auto;
+    right: .8em;
+}
+
+.k-rtl .k-scheduler-marquee .k-label-bottom
+{
+    right: auto;
+    left: .81em;
+}
+
+.k-rtl .k-scheduler-agendaview .k-scheduler-table th,
+.k-rtl .k-scheduler-agendaview .k-scheduler-table td
+{
+    text-align: right;
+}
+
+.k-rtl .k-scheduler-timecolumn > div > .k-i-arrow-60-right
+{
+    right: auto;
+    left: -4px;
+}
+
+.k-rtl .k-scheduler-timecolumn .k-i-arrow-60-left
+{
+    margin-left: 0;
+    margin-right: -4px;
+}
+
+.k-rtl .k-scheduler-mark
+{
+    margin-right: 0;
+    margin-left: .5em;
+}
+
+.k-rtl .k-scheduler-agendaday
+{
+    float: right;
+    margin: 0 0 0 .2em;
+}
+
+.k-rtl .k-scheduler-edit-form > .k-edit-box:first-child .k-datetimepicker
+{
+    margin-right: 0;
+    margin-left: 1em;
+}
+
+.k-rtl .k-edit-box
+{
+    float: right;
+}
+
+.k-rtl .k-edit-box + .k-edit-box
+{
+    float: left;
+}
+
+.k-rtl .k-scheduler-edit-form label + input
+{
+    margin-left: 0;
+    margin-right: 1em;
+}
+
+.k-rtl .k-edit-buttons .k-scheduler-delete
+{
+    left: auto;
+    right: .6em;
+}
+
+// Slider
+
+// TabStrip
+
+.k-rtl {
+    .k-tabstrip-items .k-item,
+    .k-panelbar .k-tabstrip-items .k-item {
+        margin-left: -1px;
+        margin-right: 0;
+
+        .k-image,
+        .k-sprite {
+            margin: -3px -6px 0 3px;
+        }
+    }
+
+    .k-tabstrip-prev {
+        transform: scaleX(-1);
+    }
+
+    .k-tabstrip-next {
+        transform: scaleX(-1);
+    }
+}
+
+//  TreeList
+.k-rtl .k-treelist .k-i-arrow-60-right,
+.k-rtl .k-treelist .k-i-arrow-45-down-right
+{
+    transform: scaleX(-1);
+}
+
+.k-rtl .k-pager-wrap .k-i-arrow-end-right,
+.k-rtl .k-pager-wrap .k-i-arrow-end-left,
+.k-rtl .k-pager-wrap .k-i-arrow-60-right,
+.k-rtl .k-pager-wrap .k-i-arrow-60-left
+{
+    transform: scaleX(-1);
+}
+
+// Upload
+
+.k-rtl .k-dropzone em
+{
+    margin-left: 0;
+    margin-right: .6em;
+}
+
+.k-rtl .k-upload-files .k-button,
+.k-rtl .k-upload-status-total .k-icon
+{
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+.k-rtl .k-file
+{
+    padding-right: .8em;
+    padding-left: .167em;
+}
+
+.k-rtl .k-filename
+{
+    margin-left: 0;
+    margin-right: 1em;
+}
+
+.k-rtl .k-upload-status
+{
+    right: auto;
+    left: 12px;
+}
+
+.k-rtl .k-progress
+{
+    left: auto;
+    right: 0;
+}
+
+.k-rtl .k-upload .k-action-buttons .k-button + .k-button
+{
+    margin-right: 6px;
+    margin-left: 0;
+}
+
+.k-rtl .k-file-name-size-wrapper {
+    margin-left: 0;
+    margin-right: 1em;
+}
+
+// Spreadsheet
+
+.k-rtl .k-spreadsheet {
+
+    .k-spreadsheet-cell {
+
+        .k-dirty {
+            margin: 0;
+        }
+
+        &.k-spreadsheet-has-comment::after {
+            left: 0;
+            right: auto;
+        }
+    }
+}
