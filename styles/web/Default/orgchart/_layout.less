@@ -1,0 +1,97 @@
+// OrgChart
+.k-orgchart {
+    width: 100%;
+    padding: @orgchart-padding-x @orgchart-padding-y;
+    box-sizing: border-box;
+    font-size: @orgchart-font-size;
+    font-family: @orgchart-font-family;
+    line-height: @orgchart-line-height;
+    overflow: auto;
+}
+
+.k-orgchart-container {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+// Nodes
+.k-orgchart-group {
+    gap: @orgchart-group-gap;
+}
+
+.k-orgchart-group.k-vstack > .k-orgchart-node-container {
+    gap: 0;
+}
+
+.k-orgchart-node-container {
+    gap: @orgchart-node-gap;
+}
+
+.k-orgchart-node-group-container {
+    border-radius: @orgchart-node-group-border-radius;
+    padding: @orgchart-node-group-padding-y @orgchart-node-group-padding-x;
+    border-width: @orgchart-node-group-border-width;
+    border-style: solid;
+    outline: 0;
+}
+
+.k-orgchart-node-group-title {
+    margin: 0 0 @orgchart-node-group-title-margin-bottom;
+    font-size: @orgchart-node-group-title-font-size;
+    line-height: @orgchart-node-group-title-line-height;
+}
+
+.k-orgchart-node-group-subtitle {
+    margin: 0 0 @orgchart-node-group-subtitle-margin-bottom;
+    font-size: @orgchart-node-group-subtitle-font-size;
+    opacity: .6;
+}
+
+// Card
+.k-orgchart-card {
+    width: @orgchart-card-width;
+    border-width: @orgchart-card-border-width;
+
+    .k-card-title {
+        margin: 0 0 @orgchart-card-title-margin-bottom;
+        font-size: @orgchart-card-title-font-size;
+    }
+
+    .k-card-subtitle {
+        margin: 0 0 @orgchart-card-subtitle-margin-bottom;
+        font-size: @orgchart-card-subtitle-font-size;
+    }
+
+    .k-card-body {
+        border-width: @orgchart-card-body-border-width;
+        border-style: solid;
+        flex-grow: 0;
+    }
+    .k-card-body .k-card-title-wrap {
+        margin: 0 @orgchart-card-body-vbox-margin-right 0 0;
+        min-width: 0;
+        min-height: @orgchart-card-body-vbox-min-height;
+    }
+}
+
+// Lines
+.k-orgchart-line {
+    background-color: currentColor;
+}
+
+.k-orgchart-line-h {
+    height: @orgchart-line-size;
+}
+
+.k-orgchart-line-v {
+    margin: 0 auto;
+    width: @orgchart-line-size;
+    height: @orgchart-line-v-height;
+}
+
+// Buttons
+.k-orgchart-button {
+    z-index: 1;
+}

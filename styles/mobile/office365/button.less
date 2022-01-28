@@ -1,0 +1,129 @@
+@import "../common/icons.less";
+@import "../common/button.less";
+@import "base.less";
+
+// Button
+
+.km-office365 .km-button
+{
+    padding: .438em 1.25em;
+    border-style: solid;
+    border-width: @office365-border-width;
+}
+
+// Badges and Details
+
+.km-office365 .km-badge,
+.km-office365 .km-detail
+{
+    border: 0;
+    min-width: 2em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 5em;
+    font-size: .8em;
+    text-align: center;
+}
+
+.km-office365 .km-detail
+{
+    width: 2em;
+    margin-top: -1.1em;
+    border-width: @office365-border-width;
+    border-style: solid;
+}
+
+.km-office365 .km-detail > .km-icon {
+    min-width: 2em;
+    height: 2em;
+    line-height: 2em;
+    text-align: center;
+}
+
+.km-office365 .km-detaildisclose
+{
+    min-width: 2em;
+    height: 2em;
+    line-height: 2em;
+}
+
+.km-office365 .km-detaildisclose:after,
+.km-office365 .km-detaildisclose:before,
+.km-office365 .km-widget .km-rowinsert:after,
+.km-office365 .km-widget .km-rowdelete:after,
+.km-office365 .km-widget .km-contactadd:after,
+.km-office365 .km-widget .km-detaildisclose:after,
+.km-office365 .km-widget .km-rowinsert:before,
+.km-office365 .km-widget .km-rowdelete:before,
+.km-office365 .km-widget .km-contactadd:before,
+.km-office365 .km-widget .km-detaildisclose:before,
+.km-office365 .km-detail .km-icon
+{
+    left: 0;
+    top: 0;
+    line-height: 1.8em;
+    text-align: center;
+}
+
+.km-office365 .km-detail .km-icon:after
+{
+    line-height: 2em;
+    width: 1.7em;
+    text-align: center;
+}
+
+.km-office365 .km-detail .km-icon:before
+{
+    display: none;
+}
+
+.km-office365 .km-navbar .km-button,
+.km-office365 .k-toolbar .km-button
+{
+    background: transparent;
+    border-color: transparent;
+    .box-shadow(none);
+}
+
+.km-office365 .km-buttongroup .km-button {
+    padding: .625em 1.875em;
+}
+
+.km-office365 .km-navbar .km-button .km-icon,
+.km-office365 .k-toolbar .km-button .km-icon
+{
+    font-size: 1.2em;
+}
+
+.km-office365 .km-navbar .km-back:before,
+.km-office365 .k-toolbar .km-back:before
+{
+    content: "\a0";
+    display: inline-block;
+    color: currentcolor;
+    width: .875em;
+    height: .875em;
+    border-width: 0;
+    box-shadow: inset .25rem -.25rem 0 currentcolor;
+    .transform(rotate(45deg));
+
+    margin-top: -1px;
+    margin-left: 1px;
+    line-height: 3.125em;
+    vertical-align: top;
+}
+
+.km-office365 .km-navbar .km-back .km-text,
+.km-office365 .k-toolbar .km-back .km-text
+{
+    display: none;
+}
+
+.km-office365 .km-navbar .km-leftitem .km-button
+{
+    width: 2em;
+    height: 2em;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}

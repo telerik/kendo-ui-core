@@ -1,0 +1,53 @@
+.km-scrollview
+{
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.km-scrollview > div > *
+{
+    -webkit-transform: translatez(0);
+}
+
+.km-scrollview > div > [data-role=page]
+{
+    vertical-align: top;
+    display: inline-block;
+    min-height: 1px;
+}
+
+.km-scrollview .km-virtual-page
+{
+    min-height: 1px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+}
+
+.k-ff18 .km-scrollview > div,
+.k-ff19 .km-scrollview > div,
+.k-ff20 .km-scrollview > div,
+.k-ff21 .km-scrollview > div
+{
+    width: 0;
+}
+
+.km-pages
+{
+    text-align: center;
+    margin: 0;
+    padding: .6em 0 0;
+    height: 1.5em;
+}
+
+.km-pages li
+{
+    display: inline-block;
+    width: .5em;
+    height: .55em;
+    margin: 0 .3em;
+}
+

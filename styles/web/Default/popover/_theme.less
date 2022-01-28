@@ -1,0 +1,37 @@
+// Popover
+.k-widget.k-popover {
+    .box-shadow( @popover-shadow );
+
+    .fill(
+        @popover-text,
+        @popover-bg,
+        @popover-border
+    );
+}
+
+// Header
+.k-popover-header {
+    .fill(
+        @popover-header-text,
+        @popover-header-bg,
+        @popover-header-border
+    );
+}
+
+// Body
+.k-popover-body {
+    .fill( @bg: inherit );
+}
+
+// Callout
+.k-popover-callout {
+    .fill(
+        @bg: @popover-callout-bg,
+        @border: @popover-callout-border
+    );
+
+    &.k-callout-n { .box-shadow( @popover-callout-shadow-n ); }
+    &.k-callout-e { .box-shadow( @popover-callout-shadow-e ); }
+    &.k-callout-s { .box-shadow( @popover-callout-shadow-s ); }
+    &.k-callout-w { .box-shadow( @popover-callout-shadow-w ); }
+}

@@ -1,0 +1,57 @@
+@accent: #7ea700;
+@base: #fff;
+@background: #fff;
+
+@border-radius: 0;
+@icon-size: 16px;
+
+@normal-background: #fff;
+@normal-text-color: #787878;
+@normal-gradient: none;
+@hover-background: #8ebc00;
+@hover-text-color: #fff;
+@hover-gradient: "#8ebc00 0%, #8ebc00 100%";
+@selected-background: #7ea700;
+@selected-text-color: #fff;
+@selected-gradient: none;
+
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #309b46;
+@info: #0c779b;
+@success: #2b893c;
+@warning: #ffb137;
+@error: #e20000;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
+
+@series-a: #8ebc00;
+@series-b: #309b46;
+@series-c: #25a0da;
+@series-d: #ff6900;
+@series-e: #e61e26;
+@series-f: #d8e404;
+
+// graphics
+@image-folder: "Metro";
+@texture: none;
+@fallback-texture: url('textures/highlight.png');
+
+@import "type-metro.less";

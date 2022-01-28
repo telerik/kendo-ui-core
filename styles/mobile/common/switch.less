@@ -1,0 +1,105 @@
+.km-switch input[type=checkbox]
+{
+    display: none;
+}
+
+.km-switch,
+.km-checkbox
+{
+    text-align: left;
+    font-size: 1rem;
+    display: inline-block;
+    width: 6.4rem;
+    height: 2rem;
+    line-height: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.km-switch-wrapper,
+.km-slider-wrapper
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.km-switch-background,
+.km-slider-background
+{
+    display: block;
+    margin: 0 1px 1px -5em;
+    height: 100%;
+    width: 200%;
+}
+
+.km-switch-container
+{
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    .box-sizing(border-box);
+}
+
+.km-checkbox
+{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.km-checkbox-checked:after
+{
+    content: "\a0";
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.km-switch-handle
+{
+    top: 0;
+    left: 0;
+    width: 2.72em;
+    height: 100%;
+    display: inline-block;
+    margin: -1px 0 0 -1px;
+    background-color: #000;
+}
+
+.km-switch-label-on,
+.km-switch-label-off
+{
+    display: block;
+    width: 130%;
+    font-size: 1em;
+    line-height: 2em;
+    text-align: center;
+    position: absolute;
+    text-transform: uppercase;
+}
+
+.km-switch-label-off
+{
+    left: 104%;
+}
+
+.km-switch-label-on
+{
+    left: -134%;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+}
+
+.km-list .km-switch
+{
+    position: absolute;
+    top: 50%;
+    right: .8rem;
+    margin-top: -1rem;
+}
+

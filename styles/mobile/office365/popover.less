@@ -1,0 +1,51 @@
+@import "../common/popover.less";
+@import "base.less";
+
+// PopOver
+
+.km-office365 .km-popup.km-pane
+{
+    border: 5px solid transparent;
+}
+
+.km-office365 .km-popup.km-pane .km-navbar,
+.km-office365 .km-popup.km-pane .km-toolbar,
+.km-office365 .km-popup.km-pane .km-tabstrip
+{
+    color: inherit;
+    background: none;
+}
+
+.km-office365 .km-popup.km-pane .km-header
+{
+    padding: 0 5px;
+    margin: -5px -5px 2px;
+    border-radius: @office365-border-radius @office365-border-radius 0 0;
+    -webkit-margin-collapse: separate;
+}
+
+.km-office365 .km-popup-arrow:after
+{
+    border-style: solid;
+    border-width: 0 15px 15px;
+}
+
+.km-office365 .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
+}
+
+.km-office365 .km-up .km-popup-arrow:after
+{
+    border-width: 15px 15px 0 15px;
+}
+
+.km-office365 .km-left .km-popup-arrow:after
+{
+    border-width: 15px 0 15px 15px;
+}
+
+.km-office365 .km-right .km-popup-arrow:after
+{
+    border-width: 15px 15px 15px 0;
+}

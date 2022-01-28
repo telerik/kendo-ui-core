@@ -1,0 +1,407 @@
+// ComboBox & DropDownList
+
+span.k-datepicker,
+span.k-timepicker,
+span.k-datetimepicker,
+span.k-colorpicker,
+span.k-numerictextbox,
+span.k-combobox,
+span.k-dropdown,
+span.k-dropdowntree {
+    background-image: none;
+}
+
+
+.k-filter-menu .k-combobox,
+.k-filter-menu .k-datepicker,
+.k-filter-menu .k-timepicker,
+.k-filter-menu .k-datetimepicker,
+.k-filter-menu .k-numerictextbox,
+.k-filter-menu .k-dropdown,
+.k-filter-menu .k-dropdowntree,
+.k-filter-menu .k-autocomplete,
+.k-filter-menu .k-textbox {
+    width: 100%;
+}
+
+.k-popup.k-calendar-container {
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    padding: 2px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.k-popup {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.k-popup .k-item {
+    cursor: default;
+}
+
+.k-popup .k-calendar {
+    border: 0;
+}
+
+.k-nodata {
+    min-height: 138px;
+    width: 100%;
+    display: table;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    font-weight: lighter;
+}
+
+.k-nodata > div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 11px;
+}
+
+.k-time-popup .k-item {
+    padding: 1px 3px;
+}
+
+.k-datetime-container {
+
+    .k-datetime-wrap {
+        width: @datetime-width;
+        overflow: hidden;
+    }
+
+    .k-datetime-buttongroup {
+        padding: @button-padding-x;
+    }
+
+    .k-datetime-selector {
+        display: flex;
+        transition: transform .2s;
+    }
+
+    .k-datetime-calendar-wrap,
+    .k-datetime-time-wrap {
+        text-align: center;
+        flex: 0 0 @datetime-width;
+    }
+
+    .k-time-list-container {
+        justify-content: center;
+    }
+
+    .k-timeselector {
+        outline: none;
+    }
+
+    .k-time-tab .k-datetime-selector {
+        transform: translateX(-100%);
+    }
+
+    > .k-popup {
+        padding-bottom: 0;
+
+        .k-action-buttons {
+            margin-bottom: 0;
+        }
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        .k-time-tab {
+
+            .k-datetime-selector {
+                transform: translateX(100%);
+            }
+        }
+    }
+}
+
+
+// Infinite timepicker
+// Header
+.k-time-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: calc(2 * @timepicker-padding-y) calc(@timepicker-padding-x * 2);
+    line-height: @timepicker-header-height;
+
+    .k-title {
+        font-weight: bold;
+    }
+
+    .k-time-now {
+        border-width: 0;
+        line-height: inherit;
+        cursor: pointer;
+    }
+}
+
+// Content
+.k-time-list-wrapper {
+    display: inline-block;
+    overflow: hidden;
+    box-sizing: content-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    padding: @time-list-padding 0;
+    text-align: center;
+    width: @time-list-width;
+    height: @time-list-height;
+
+    .k-title {
+        display: block;
+        text-align: center;
+        font-size: @time-font-size-xs;
+        position: absolute;
+        text-transform: capitalize;
+        font-weight: bold;
+        min-width: 100%;
+        height: 1.5em;
+        line-height: 1.5em;
+        margin-top: calc(-1 * @time-list-padding);
+        z-index: 12;
+    }
+
+    &.k-state-focused {
+        &::before,
+        &::after {
+            display: block;
+            content: " ";
+            position: absolute;
+            width: 100%;
+            left: 0;
+            pointer-events: none;
+            height: calc(50% - 1em);
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+        }
+
+        &::before {
+            top: 0;
+        }
+
+        &::after {
+            bottom: 0;
+        }
+    }
+}
+
+.k-time-container {
+    position: absolute;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    line-height: @line-height;
+    left: 0;
+    right: 0;
+    top: @time-list-padding;
+    bottom: @time-list-padding;
+
+    .hide-scrollbar(right);
+
+    > ul {
+        height: auto;
+        width: @time-list-width;
+    }
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"]  {
+        .hide-scrollbar(left);
+    }
+}
+
+.k-time-list-container {
+    display: flex;
+    position: relative;
+}
+
+.k-time-list {
+    position: absolute;
+    display: flex;
+    z-index: 10;
+    outline: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+
+    &::before,
+    &::after {
+        display: block;
+        position: absolute;
+        content: " ";
+        height: 0;
+        line-height: 0;
+        z-index: 1;
+        width: 200%;
+        left: -50%;
+    }
+
+    &::before { top: 0; }
+    &::after { bottom: 0;}
+}
+
+.k-time-list .k-item {
+    padding: @timepicker-padding-y @timepicker-padding-x;
+}
+
+.k-time-highlight {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: calc( @button-line-height * 1em + @button-padding-y * 2 );
+    z-index: 1;
+    border-width: @time-highlight-size 0;
+    border-style: solid;
+    border-radius: .1px; // workaround for https://bugs.webkit.org/show_bug.cgi?id=175117
+}
+
+.k-time-container .k-scrollable-placeholder {
+    position: absolute;
+    width: 1px;
+    top: 0;
+    right: 0;
+}
+
+.k-time-separator {
+    display: inline-flex;
+    align-self: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 11;
+}
+
+.k-time-footer {
+    margin-top: 0;
+}
+
+
+.k-multiple-selection .k-in.k-state-selected {
+    border-color: transparent;
+    color: inherit;
+    background: none;
+}
+
+
+.k-popup-flush {
+    padding: 0;
+}
+
+
+// input container / floating labe
+@floating-label-transition: .2s ease-out;
+@floating-label-scale: .75;
+@floating-label-height: calc(@input-height * @floating-label-scale);
+
+.k-textbox-container,
+.k-floating-label-container {
+    padding-top: @floating-label-height;
+    display: inline-flex;
+    vertical-align: middle;
+    position: relative;
+    width: @input-default-width;
+    flex-direction: column;
+    justify-content: stretch;
+
+    > .k-label {
+        max-width: 90%;
+        line-height: @input-line-height;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        position: absolute;
+        top: calc(@floating-label-height + @input-border-width + @input-padding-y);
+        left: calc(@input-padding-x + @input-border-width);
+        overflow: hidden;
+        cursor: text;
+        transition: transform @floating-label-transition, color @floating-label-transition;
+        pointer-events: none;
+    }
+
+    > .k-textbox,
+    > .k-textarea,
+    > .k-widget {
+        flex: 1 1 auto;
+        width: auto;
+    }
+
+    &.k-state-empty {
+        > .k-label {
+            transform: translate( 0, 0 ) scale( 1 );
+            font-style: normal;
+        }
+    }
+
+    &.k-focus {
+        box-shadow: none;
+    }
+
+    > .k-label,
+    &.k-focus > .k-label {
+        // persist alignment after scaling
+        @half-scale-percent: ((1 - @floating-label-scale) * 100% / 2);
+
+        // transform position to top-left corner of the textbox-container
+        // do not use single translate + calc() because of IE10/11
+        @fls: -@floating-label-scale;
+        transform: translate(calc(-@input-padding-x), calc(@fls * @input-padding-y))
+                translate(-@input-border-width, calc(@fls * @input-line-height))
+                translate(-@half-scale-percent, calc(@fls * @half-scale-percent))
+                scale(@floating-label-scale);
+    }
+
+    &.k-state-empty:not(.k-focus) ::placeholder {
+        color: transparent;
+    }
+
+    .k-rtl &,
+    &[dir='rtl'] {
+
+        > .k-label {
+            left: auto;
+            right: calc(@input-padding-x + @input-border-width);
+        }
+
+        &.k-state-empty {
+            > .k-label {
+                transform: translate( 0, 0 ) scale( 1 );
+            }
+        }
+
+        > .k-label,
+        &.k-focus > .k-label {
+            @half-scale-percent: ((1 - @floating-label-scale) * 100% / 2);
+
+            @fls: -@floating-label-scale;
+            transform: translate(calc(@input-padding-x), calc(@fls * @input-padding-y))
+                    translate(@input-border-width, calc(@fls * @input-line-height))
+                    translate(@half-scale-percent, calc(@fls * @half-scale-percent))
+                    scale(@floating-label-scale);
+        }
+    }
+}
+
+// Label
+.k-input-label {
+    margin-right: @input-padding-x;
+    z-index: 1;
+
+    .k-rtl &,
+    &.k-rtl,
+    [dir="rtl"] &,
+    &[dir="rtl"] {
+        margin-right: 0;
+        margin-left: @input-padding-x;
+    }
+}

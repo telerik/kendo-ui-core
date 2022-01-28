@@ -1,0 +1,155 @@
+// Container box
+.k-radio {
+    margin: 0;
+    padding: 0;
+    width: @radio-size;
+    height: @radio-size;
+    border-width: @radio-border-width;
+    border-style: solid;
+    outline: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    -webkit-appearance: none;
+}
+
+// Checkmark
+.k-radio::before {
+    content: "";
+    width: (@radio-size / 2);
+    height: (@radio-size / 2);
+    border-radius: 50%;
+    background-color: currentColor;
+    transform: scale(0) translate(-50%, -50%);
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+
+
+
+
+// Hover state
+.k-radio:hover {
+    cursor: pointer;
+}
+
+// Checked state
+.k-radio:checked::before {
+    transform: scale(1) translate(-50%, -50%);
+}
+
+// Disabled state
+.k-radio:disabled,
+.k-radio:disabled + .k-radio-label {
+    opacity: .6;
+    filter: grayscale(.8);
+    cursor: default;
+}
+
+.k-radio + .k-radio-label {
+    display: inline;
+}
+
+// Radio label
+.k-radio-label {
+    margin: 0;
+    padding: 0;
+    line-height: @radio-line-height;
+    display: inline-flex;
+    align-items: flex-start;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+
+    // Hide empty label
+    &:empty,
+    &.k-no-text {
+        display: none;
+    }
+
+    .k-ripple {
+        display: none !important;
+    }
+}
+
+.k-radio + .k-radio-label,
+.k-radio-label + .k-radio {
+    margin-left: @icon-spacing;
+}
+.k-radio-label > .k-radio {
+    margin-right: @icon-spacing;
+    flex-shrink: 0;
+}
+
+.k-radio-list {
+    margin: @radio-list-margin;
+    padding: @radio-list-padding;
+    list-style: none;
+
+    .k-radio-item {
+        margin-top: @radio-list-item-margin-top;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+}
+
+.k-list-horizontal {
+    .k-radio-item {
+        display: inline-block;
+        margin: 0 @radio-list-horizontal-item-margin-x 0 0;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+
+// RTL
+.k-rtl,
+[dir="rtl"] {
+    .k-radio + .k-radio-label,
+    .k-radio-label + .k-radio {
+        margin-left: 0;
+        margin-right: @icon-spacing;
+    }
+    .k-radio-label > .k-radio {
+        margin-right: 0;
+        margin-left: @icon-spacing;
+    }
+
+    .k-list-horizontal {
+        .k-radio-item {
+            margin-right: 0;
+            margin-left: @radio-list-horizontal-item-margin-x;
+
+            &:last-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+
+
+
+// IE / Edge hack
+.k-radio::-ms-check {
+    border-width: 0;
+    border-color: inherit;
+    color: inherit;
+    background-color: inherit;
+}
+
+// IE 11 hack
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .k-radio::-ms-check {
+        border-width: @radio-border-width;
+    }
+}

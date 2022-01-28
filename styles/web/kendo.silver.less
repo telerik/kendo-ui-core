@@ -1,0 +1,60 @@
+@accent: #1984c8;
+@base: #f3f3f4;
+@background: #fff;
+
+@border-radius: 4px;
+@icon-size: 16px;
+
+@normal-background: #fff;
+@normal-text-color: #515967;
+@normal-gradient: "rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 100%";
+@hover-background: #b6bdca;
+@hover-text-color: #263248;
+@hover-gradient: "rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 100%";
+@selected-background: #1984c8;
+@selected-text-color: #fff;
+@selected-gradient: "rgba(255,255,255,.2) 0%, rgba(255,255,255,0) 100%";
+
+@is-dark-theme: boolean( luma(@background) < 50% );
+
+@primary: @accent;
+@secondary: @base;
+@tertiary: #007bc3;
+@info: #2498bc;
+@success: #3ea44e;
+@warning: #ff9800;
+@error: #d92800;
+@dark: #000000;
+@light: #ffffff;
+@inverse: if(@is-dark-theme, @light, @dark);
+
+
+@theme-colors: {
+    primary: @primary;
+    secondary: @secondary;
+    tertiary: @tertiary;
+    info: @info;
+    success: @success;
+    warning: @warning;
+    error: @error;
+    dark: @dark;
+    light: @light;
+    inverse: @inverse;
+}
+
+@series-a: #007bc3;
+@series-b: #76b800;
+@series-c: #ffae00;
+@series-d: #ef4c00;
+@series-e: #a419b7;
+@series-f: #430B62;
+
+// graphics
+@image-folder: "Silver";
+@texture: none;
+@fallback-texture: url('textures/highlight.png');
+
+@import "type-default.less";
+@column-highlight-background-color: lighten(@base, 1%);
+@scheduler-nonwork-background-color: @base;
+

@@ -1,0 +1,583 @@
+@import "../common/base.less";
+
+@nova-border-width: 1px;
+@nova-border-radius: 2px;
+@nova-inline-border-radius: (@nova-border-radius - 1px);
+
+.km-nova {
+    font: normal 1em "Helvetica Neue","Helvetica","Roboto Light","Arial","Verdana","sans-serif";
+    line-height: 1.2;
+}
+
+// General content
+.km-nova h1 {
+    font-size: 1.47em;
+}
+
+.km-nova h2 {
+    font-size: 1.2em;
+}
+
+.km-nova h3 {
+    font-size: 1.07em;
+}
+
+.km-nova h4 {
+    font-size: .9em;
+}
+
+.km-nova h5 {
+    font-size: .87em;
+}
+
+.km-nova h6 {
+    font-size: .67em;
+}
+
+.km-nova p {
+    font-size: .87em;
+}
+
+.km-nova .km-icon:before,
+.km-nova .km-icon:after {
+    text-align: center;
+}
+
+.km-nova .km-detail .km-icon,
+.km-nova .km-button .km-icon {
+    margin-left: 0;
+    margin-right: 0.8em;
+}
+
+.km-nova .km-list .km-icon {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+// override transform options for performance
+.km-root .km-nova.km-pane,
+.km-root .km-nova .km-view,
+.km-root .km-nova .km-slider,
+.km-root .km-nova .km-switch,
+.km-root .km-nova .km-group-title,
+.km-root .km-nova .km-filter-reset,
+.km-root .km-nova .km-shim .k-animation-container {
+    -webkit-transform: none;
+}
+
+.km-nova,
+.km-nova *
+{
+    .box-sizing(border-box);
+    .background-clip(border-box);
+}
+
+// Revert box/clip for Web widgets
+.km-nova [class^=k-] {
+    .box-sizing(content-box);
+}
+
+.km-nova .km-tabstrip .km-button {
+    background: none;
+}
+
+// PopUp
+.km-nova .km-popup .k-popup {
+    font-size: 1em !important;
+}
+
+.km-nova .km-popup .k-item,
+.km-nova .km-actionsheet > li > a {
+    display: block;
+    text-decoration: none;
+    border-radius: 0;
+    border-width: 0 0 1px;
+    border-style: solid;
+    .box-sizing(border-box);
+    font-size: 1.2em;
+    line-height: 1.5em;
+    padding: 1.14em .7em;
+}
+
+.km-nova .km-popup {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    .box-sizing(border-box);
+}
+
+.km-nova .km-popup .k-list-container {
+    width: 100% !important;
+    height: auto !important;
+    padding: 0;
+}
+
+.km-nova .km-actionsheet,
+.km-nova .km-popup .k-list-container {
+    max-height: 80%;
+}
+
+.km-nova .km-actionsheet-wrapper,
+.km-nova .km-popup .k-list-container {
+    bottom: 0;
+    border-style: solid;
+    border-radius: 0;
+    .box-sizing(border-box);
+    border-width: 1px;
+}
+
+.km-nova .km-shim .k-animation-container {
+    left: 0;
+    top: auto;
+    bottom: 0;
+}
+
+.km-nova .km-popup-wrapper {
+    padding: 15px;
+}
+
+
+// Color Template
+@import "template.less";
+
+// Tablet Styles
+.km-tablet .km-nova.km-horizontal .km-navbar .km-button,
+.km-tablet .km-nova.km-horizontal .km-toolbar .km-button {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.km-nova .km-icon:before,
+.km-nova .km-contactadd:before,
+.km-nova .km-rowdelete:before,
+.km-nova .km-rowinsert:before,
+.km-nova .km-detaildisclose:before {
+    margin-top: 0;
+}
+
+// Loader & Pull-to-refresh
+.km-nova .km-load-more {
+    height: 3.4em;
+}
+
+.km-nova .km-load-more .km-button {
+    margin: -1.09em .8em 0;
+    display: block;
+}
+
+.km-nova .km-scroller-refresh.km-load-more,
+.km-nova .km-scroller-pull {
+    border-radius: 50%;
+    overflow: visible;
+}
+
+.km-nova .km-loader {
+    left: 45%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+.km-nova .km-loader .km-loading {
+    .animation(none);
+    display: none;
+}
+
+.km-nova .km-loading-left,
+.km-nova .km-loading-right {
+    background: none;
+}
+
+.km-nova .km-loading-left,
+.km-nova .km-loading-right,
+.km-nova .km-scroller-refresh .km-icon {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+}
+
+.km-nova .km-scroller-pull .km-loading-left,
+.km-nova .km-scroller-pull .km-loading-right,
+.km-nova .km-scroller-refresh > .km-icon {
+    display: none;
+}
+
+.km-nova .km-scroller-refresh .km-loading-left,
+.km-nova .km-scroller-refresh .km-loading-right {
+    display: block;
+}
+
+.km-nova .km-scroller-refresh .km-loading-left,
+.km-nova .km-scroller-refresh .km-loading-right,
+.km-nova .km-scroller-refresh .km-icon {
+    top: 0;
+    left: 0;
+}
+
+.km-nova .km-scroller-refresh .km-icon:before {
+    content: "\a0";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.km-root .km-nova .km-scroller-pull .km-icon {
+    -webkit-background-clip: inherit;
+    background-size: inherit;
+    border-radius: 50%;
+}
+
+.km-nova .km-loading:after {
+    display: none;
+}
+
+.km-nova .km-scroller-refresh.km-load-more {
+    padding: 0;
+    position: relative;
+    margin: auto;
+}
+
+.km-nova .km-scroller-refresh.km-load-more,
+.km-nova .km-scroller-pull {
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    top: .25em;
+    white-space: nowrap;
+}
+
+.km-nova .km-scroller-pull {
+    left: 50%;
+    margin: 0 0 0 -90px;
+}
+
+.km-nova .km-loader h1 {
+    display: none;
+    font-size: 1em;
+    position: absolute;
+    left: -50%;
+    width: 200%;
+    top: 55%;
+}
+
+.km-nova .km-scroller-pull .km-template {
+    position: absolute;
+    line-height: 2em;
+    font-size: 1.2em;
+    min-width: 0;
+    top: 0;
+    left: 2em;
+}
+
+.km-nova .km-scroller-pull .km-icon {
+    margin-right: 0;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -1rem;
+    margin-top: -1rem;
+}
+
+.km-nova .km-scroller-pull .km-icon:after {
+    content: "\e012";
+    margin-left: -3px;
+}
+
+.km-nova .km-scroller-refresh .km-icon {
+    display: none;
+}
+
+.km-nova .km-load-more .km-icon,
+.km-nova .km-scroller-pull .km-icon {
+    .transform(rotate(0deg));
+    .pTransition(none);
+}
+
+.km-nova .km-load-more .km-icon:after,
+.km-nova .km-scroller-pull .km-icon:after {
+    .transform(rotate(0deg));
+    .transform-origin(62% 50%);
+    .pTransition(~"transform 300ms linear");
+}
+
+.km-nova .km-scroller-release .km-icon:after {
+    .transform(rotate(180deg));
+}
+
+.km-nova .km-scroller-refresh .km-icon:after {
+    .transition(none);
+}
+
+.km-nova .km-icon-left .km-arrow-n:after {
+    content: "\e012";
+}
+
+.km-nova .km-icon-left .km-arrow-s:after {
+    content: "\e010";
+}
+
+.km-nova .km-icon-right .km-arrow-n:after {
+    content: "\e011";
+}
+
+.km-nova .km-icon-right .km-arrow-s:after {
+    content: "\e012";
+}
+
+// transitions
+.km-root .km-nova.k-fx-slide {
+    &.k-fx-end .k-fx-current .km-content {
+        .transform(translatex(-50%));
+        -webkit-filter: brightness(70%);
+    }
+
+    // left reverse
+    &.k-fx-reverse {
+        &.k-fx-end .k-fx-next {
+            box-shadow: none;
+        }
+
+
+        &.k-fx-end .k-fx-current .km-content {
+            .transform(translatex(100%));
+            -webkit-filter: none;
+        }
+
+        &.k-fx-start .k-fx-next .km-content {
+            .transform(translatex(-50%));
+            -webkit-filter: brightness(70%);
+        }
+    }
+
+    // right
+    &.k-fx-right {
+        &.k-fx-end .k-fx-current .km-content {
+            .transform(translatex(50%));
+        }
+
+        // right reverse
+        &.k-fx-reverse {
+            &.k-fx-end .k-fx-current .km-content {
+                .transform(translatex(-100%));
+                -webkit-filter: none;
+            }
+
+            &.k-fx-start .k-fx-next .km-content {
+                .transform(translatex(50%));
+            }
+        }
+    }
+}
+
+// Loader
+.km-nova .km-loader {
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+}
+
+.km-nova .km-loader .km-loading {
+    .animation(none);
+    display: none;
+}
+
+.km-nova .km-loading-left,
+.km-nova .km-loading-right {
+    width: 1.33em;
+    height: 1.33em;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    bottom: 0;
+    right: 0;
+}
+
+@-webkit-keyframes animate_left {
+    0% {
+        -webkit-transform: translate3d(0, -0.67em, 0);
+    }
+    100% {
+        -webkit-transform: translate3d(0, 0.67em, 0);
+    }
+}
+
+@-ms-keyframes animate_left {
+    0% {
+        -ms-transform: translate3d(0, -0.67em, 0);
+    }
+    100% {
+        -ms-transform: translate3d(0, 0.67em, 0);
+    }
+}
+
+@keyframes animate_left {
+    0% {
+        transform: translate3d(0, -0.67em, 0);
+    }
+    100% {
+        transform: translate3d(0, 0.67em, 0);
+    }
+}
+
+.km-nova .km-loading-left:before,
+.km-nova .km-loading-left:after {
+  position: absolute;
+  content: "";
+  width: 1.33em;
+  border-radius: 50%;
+  height: 1.33rem;
+  z-index: 1;
+  display: block;
+  animation: animate_left 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+  -webkit-animation: animate_left 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.km-nova .km-loading-left:before {
+  right: 0;
+  bottom: 0;
+  animation-direction: alternate-reverse;
+  -webkit-animation-direction: alternate-reverse;
+}
+
+.km-nova .km-loading-left:after {
+  left: 0;
+  top: 0;
+}
+
+@-webkit-keyframes animate_right {
+    0% {
+        -webkit-transform: scale(0.01, 0.01) rotateY(0);
+        -webkit-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+    50% {
+        -webkit-transform: scale(1, 1) rotateY(0);
+        -webkit-animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    100% {
+        -webkit-transform: scale(0.01, 0.01) rotateY(0);
+    }
+}
+
+@-ms-keyframes animate_right {
+    0% {
+        -ms-transform: scale(0.01, 0.01) rotateY(0);
+        -ms-animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+     }
+    50% {
+        -ms-transform: scale(1, 1) rotateY(0);
+        -ms-animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    100% {
+        -ms-transform: scale(0.01, 0.01) rotateY(0);
+    }
+}
+
+@keyframes animate_right {
+    0% {
+        transform: scale(0.01, 0.01) rotateY(0);
+        animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    }
+    50% {
+        transform: scale(1, 1) rotateY(0);
+        animation-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+    }
+    100% {
+        transform: scale(0.01, 0.01) rotateY(0);
+    }
+}
+
+.km-nova .km-loading-right {
+  z-index: 2;
+  border-radius: 50%;
+  animation: animate_right 0.8s ease-in infinite;
+  -webkit-animation: animate_right 0.8s ease-in infinite;
+}
+
+// Icons
+.km-nova .km-icon.km-phone:before, .km-nova .km-icon.km-phone:after, .km-nova .km-state-active .km-phone:after { content: "\e326"; }
+.km-nova .km-detaildisclose:before, .km-nova .km-detaildisclose:after { content: "\e0de"; }
+.km-nova .km-action:before, .km-nova .km-action:after { content: "\e1ff"; }
+.km-nova .km-add:before, .km-nova .km-add:after { content: "\e200"; }
+.km-nova .km-mostrecent:before, .km-nova .km-mostrecent:after { content: "\e201"; }
+.km-nova .km-battery:before, .km-nova .km-battery:after { content: "\e203"; }
+.km-nova .km-bookmarks:before, .km-nova .km-bookmarks:after { content: "\e204"; }
+.km-nova .km-camera:before, .km-nova .km-camera:after { content: "\e205"; }
+.km-nova .km-cart:before, .km-nova .km-cart:after { content: "\e206"; }
+.km-nova .km-recents:before, .km-nova .km-recents:after { content: "\e207"; }
+.km-nova .km-download:before, .km-nova .km-download:after, .km-nova .km-downloads:before, .km-nova .km-downloads:after { content: "\e209"; }
+.km-nova .km-edit:before, .km-nova .km-edit:after { content: "\e20a"; }
+.km-nova .km-mostviewed:before, .km-nova .km-mostviewed:after { content: "\e20b"; }
+.km-nova .km-toprated:before, .km-nova .km-toprated:after, .km-nova .km-favorites:before, .km-nova .km-favorites:after { content: "\e20c"; }
+.km-nova .km-featured:before, .km-nova .km-featured:after { content: "\e20d"; }
+.km-nova .km-fastforward:before, .km-nova .km-fastforward:after { content: "\e20e"; }
+.km-nova .km-settings:before, .km-nova .km-settings:after { content: "\e20f"; }
+.km-nova .km-globe:before, .km-nova .km-globe:after { content: "\e211"; }
+.km-nova .km-home:before, .km-nova .km-home:after { content: "\e212"; }
+.km-nova .km-info:before, .km-nova .km-info:after, .km-nova .km-about:before, .km-nova .km-about:after { content: "\e213"; }
+.km-nova .km-share:before, .km-nova .km-share:after { content: "\e214"; }
+.km-nova .km-more:before, .km-nova .km-more:after { content: "\e215"; }
+.km-nova .km-details:before, .km-nova .km-details:after { content: "\e217"; }
+.km-nova .km-pause:before, .km-nova .km-pause:after { content: "\e218"; }
+.km-nova .km-contacts:before, .km-nova .km-contacts:after { content: "\e219"; }
+.km-nova .km-play:before, .km-nova .km-play:after { content: "\e21a"; }
+.km-nova .km-refresh:before, .km-nova .km-refresh:after { content: "\e21b"; }
+.km-nova .km-history:before, .km-nova .km-history:after { content: "\e21c"; }
+.km-nova .km-rewind:before, .km-nova .km-rewind:after { content: "\e21d"; }
+.km-nova .km-search:before, .km-nova .km-search:after { content: "\e21e"; }
+.km-nova .km-stop:before, .km-nova .km-stop:after { content: "\e21f"; }
+.km-nova .km-organize:before, .km-nova .km-organize:after { content: "\e220"; }
+.km-nova .km-trash:before, .km-nova .km-trash:after, .km-nova .km-delete:before, .km-nova .km-delete:after { content: "\e221"; }
+.km-nova .km-reply:before, .km-nova .km-reply:after { content: "\e222"; }
+.km-nova .km-forward:before, .km-nova .km-forward:after { content: "\e223"; }
+.km-nova .km-sounds:before, .km-nova .km-sounds:after, .km-nova .km-volume:before, .km-nova .km-volume:after { content: "\e224"; }
+.km-nova .km-wifi:before, .km-nova .km-wifi:after { content: "\e225"; }
+.km-nova .km-phone:before, .km-nova .km-phone:after { content: "\e226"; }
+.km-nova .km-hamburger:before, .km-nova .km-hamburger:after { content: "\e105"; }
+.km-nova .km-state-active .km-action:after { content: "\e2ff"; }
+.km-nova .km-state-active .km-add:after { content: "\e200"; }
+.km-nova .km-state-active .km-mostrecent:after { content: "\e301"; }
+.km-nova .km-state-active .km-battery:after { content: "\e303"; }
+.km-nova .km-state-active .km-bookmarks:after { content: "\e304"; }
+.km-nova .km-state-active .km-camera:after { content: "\e305"; }
+.km-nova .km-state-active .km-cart:after { content: "\e306"; }
+.km-nova .km-state-active .km-recents:after { content: "\e307"; }
+.km-nova .km-state-active .km-download:after, .km-nova .km-state-active .km-downloads:after { content: "\e309"; }
+.km-nova .km-state-active .km-edit:after { content: "\e20a"; }
+.km-nova .km-state-active .km-mostviewed:after { content: "\e30b"; }
+.km-nova .km-state-active .km-toprated:after, .km-nova .km-state-active .km-favorites:after { content: "\e30c"; }
+.km-nova .km-state-active .km-featured:after { content: "\e30d"; }
+.km-nova .km-state-active .km-fastforward:after { content: "\e30e"; }
+.km-nova .km-state-active .km-settings:after { content: "\e30f"; }
+.km-nova .km-state-active .km-globe:after { content: "\e311"; }
+.km-nova .km-state-active .km-home:after { content: "\e312"; }
+.km-nova .km-state-active .km-info:after, .km-nova .km-state-active .km-about:after { content: "\e313"; }
+.km-nova .km-state-active .km-share:after { content: "\e314"; }
+.km-nova .km-state-active .km-more:after { content: "\e315"; }
+.km-nova .km-state-active .km-details:after { content: "\e317"; }
+.km-nova .km-state-active .km-pause:after { content: "\e318"; }
+.km-nova .km-state-active .km-contacts:after { content: "\e319"; }
+.km-nova .km-state-active .km-play:after { content: "\e31a"; }
+.km-nova .km-state-active .km-refresh:after { content: "\e31b"; }
+.km-nova .km-state-active .km-history:after { content: "\e31c"; }
+.km-nova .km-state-active .km-rewind:after { content: "\e31d"; }
+.km-nova .km-state-active .km-search:after { content: "\e31e"; }
+.km-nova .km-state-active .km-stop:after { content: "\e31f"; }
+.km-nova .km-state-active .km-organize:after { content: "\e320"; }
+.km-nova .km-state-active .km-trash:after,.km-nova .km-state-active .km-delete:after { content: "\e321"; }
+.km-nova .km-state-active .km-reply:after { content: "\e322"; }
+.km-nova .km-state-active .km-forward:after { content: "\e323"; }
+.km-nova .km-state-active .km-sounds:after,.km-nova .km-state-active .km-volume:after { content: "\e324"; }
+.km-nova .km-state-active .km-wifi:after { content: "\e325"; }

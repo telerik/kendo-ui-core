@@ -1,0 +1,27 @@
+// Virtual List
+
+.k-virtual-wrap {
+    position: relative;
+}
+
+.k-virtual-wrap .k-list.k-virtual-list {
+    height: auto;
+}
+
+.k-virtual-content {
+    overflow-y: scroll; // has to be scroll, not auto
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.k-virtual-wrap > .k-virtual-header {
+    text-align: right;
+}
+
+.k-virtual-content > .k-virtual-list > .k-virtual-item {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}

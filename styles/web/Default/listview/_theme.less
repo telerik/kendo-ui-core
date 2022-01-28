@@ -1,0 +1,45 @@
+// Listview
+.k-listview {
+    .fill(
+        @listview-text,
+        @listview-bg,
+        @listview-border
+    );
+}
+
+
+// Hoverable
+.k-listview-hoverable {
+    .k-listview-item:hover {
+        .fill(
+            @listview-item-hover-text,
+            @listview-item-hover-bg,
+            @listview-item-hover-border
+        );
+    }
+}
+
+
+// Focusable
+.k-listview-focusable {
+    .k-listview-item:focus {
+        .fill(
+            @listview-item-focus-text,
+            @listview-item-focus-bg,
+            @listview-item-focus-border
+        );
+        .box-shadow(@listview-item-focus-shadow);
+    }
+}
+
+
+// Selectable
+.k-listview-selectable {
+    .k-listview-item-selected {
+        .fill(
+            @listview-item-selected-text,
+            @listview-item-selected-bg,
+            @listview-item-selected-border
+        );
+    }
+}

@@ -1,0 +1,347 @@
+// Chip Solid
+.k-chip-solid-base {
+    .fill(
+        @chip-solid-text,
+        @chip-solid-bg,
+        @chip-solid-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @bg: @chip-solid-hover-bg,
+            @border: @chip-solid-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .box-shadow( @chip-solid-focus-shadow );
+        .fill( @bg: @chip-solid-focus-bg );
+    }
+
+    &.k-selected {
+        .fill(
+            @bg: @chip-solid-selected-bg,
+            @border: @chip-solid-selected-border
+        );
+    }
+}
+
+.k-chip-solid-success {
+    .fill(
+        @chip-solid-success-text,
+        @chip-solid-success-bg,
+        @chip-solid-success-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-solid-success-hover-text,
+            @chip-solid-success-hover-bg,
+            @chip-solid-success-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-solid-success-focus-text,
+            @chip-solid-success-focus-bg,
+            @chip-solid-success-focus-border
+        );
+        .box-shadow( @chip-success-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-solid-success-selected-text,
+            @chip-solid-success-selected-bg,
+            @chip-solid-success-selected-border
+        );
+    }
+}
+
+
+.k-chip-solid-warning {
+    .fill(
+        @chip-solid-warning-text,
+        @chip-solid-warning-bg,
+        @chip-solid-warning-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-solid-warning-hover-text,
+            @chip-solid-warning-hover-bg,
+            @chip-solid-warning-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-solid-warning-focus-text,
+            @chip-solid-warning-focus-bg,
+            @chip-solid-warning-focus-border
+        );
+        .box-shadow( @chip-warning-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-solid-warning-selected-text,
+            @chip-solid-warning-selected-bg,
+            @chip-solid-warning-selected-border
+        );
+    }
+}
+
+.k-chip-solid-error {
+    .fill(
+        @chip-solid-error-text,
+        @chip-solid-error-bg,
+        @chip-solid-error-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-solid-error-hover-text,
+            @chip-solid-error-hover-bg,
+            @chip-solid-error-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-solid-error-focus-text,
+            @chip-solid-error-focus-bg,
+            @chip-solid-error-focus-border
+        );
+        .box-shadow( @chip-error-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-solid-error-selected-text,
+            @chip-solid-error-selected-bg,
+            @chip-solid-error-selected-border
+        );
+    }
+}
+
+.k-chip-solid-info {
+    .fill(
+        @chip-solid-info-text,
+        @chip-solid-info-bg,
+        @chip-solid-info-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-solid-info-hover-text,
+            @chip-solid-info-hover-bg,
+            @chip-solid-info-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-solid-info-focus-text,
+            @chip-solid-info-focus-bg,
+            @chip-solid-info-focus-border
+        );
+        .box-shadow( @chip-info-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-solid-info-selected-text,
+            @chip-solid-info-selected-bg,
+            @chip-solid-info-selected-border
+        );
+    }
+}
+
+// Chip Outline
+.k-chip-outline-base {
+    .fill(
+        @chip-outline-text,
+        @chip-outline-bg,
+        @chip-outline-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-outline-hover-text,
+            @chip-outline-hover-bg,
+            @chip-outline-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .box-shadow( @chip-outline-focus-shadow );
+        .fill(
+            @chip-outline-focus-text,
+            @chip-outline-focus-bg,
+            @chip-outline-focus-border
+        );
+    }
+
+    &.k-selected {
+        .fill(
+            @text: @chip-outline-selected-text,
+            @bg: @chip-outline-selected-bg
+        );
+    }
+}
+
+.k-chip-outline-success {
+    .fill(
+        @chip-outline-success-text,
+        @chip-outline-success-bg,
+        @chip-outline-success-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-outline-success-hover-text,
+            @chip-outline-success-hover-bg,
+            @chip-outline-success-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-outline-success-focus-text,
+            @chip-outline-success-focus-bg,
+            @chip-outline-success-focus-border
+        );
+        .box-shadow( @chip-success-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-outline-success-selected-text,
+            @chip-outline-success-selected-bg,
+            @chip-outline-success-selected-border
+        );
+    }
+}
+
+.k-chip-outline-warning {
+    .fill(
+        @chip-outline-warning-text,
+        @chip-outline-warning-bg,
+        @chip-outline-warning-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-outline-warning-hover-text,
+            @chip-outline-warning-hover-bg,
+            @chip-outline-warning-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-outline-warning-focus-text,
+            @chip-outline-warning-focus-bg,
+            @chip-outline-warning-focus-border
+        );
+        .box-shadow( @chip-warning-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-outline-warning-selected-text,
+            @chip-outline-warning-selected-bg,
+            @chip-outline-warning-selected-border
+        );
+    }
+}
+
+
+.k-chip-outline-error {
+    .fill(
+        @chip-outline-error-text,
+        @chip-outline-error-bg,
+        @chip-outline-error-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-outline-error-hover-text,
+            @chip-outline-error-hover-bg,
+            @chip-outline-error-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-outline-error-focus-text,
+            @chip-outline-error-focus-bg,
+            @chip-outline-error-focus-border
+        );
+        .box-shadow( @chip-error-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-outline-error-selected-text,
+            @chip-outline-error-selected-bg,
+            @chip-outline-error-selected-border
+        );
+    }
+}
+
+
+.k-chip-outline-info {
+    .fill(
+        @chip-outline-info-text,
+        @chip-outline-info-bg,
+        @chip-outline-info-border
+    );
+
+    &:hover,
+    &.k-hover {
+        .fill(
+            @chip-outline-info-hover-text,
+            @chip-outline-info-hover-bg,
+            @chip-outline-info-hover-border
+        );
+    }
+
+    &:focus,
+    &.k-focus {
+        .fill(
+            @chip-outline-info-focus-text,
+            @chip-outline-info-focus-bg,
+            @chip-outline-info-focus-border
+        );
+        .box-shadow( @chip-info-focus-shadow );
+    }
+
+    &.k-selected {
+        .fill(
+            @chip-outline-info-selected-text,
+            @chip-outline-info-selected-bg,
+            @chip-outline-info-selected-border
+        );
+    }
+}

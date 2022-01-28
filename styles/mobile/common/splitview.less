@@ -1,0 +1,36 @@
+// SplitView
+div.km-splitview > .km-content,
+kendo-mobile-split-view.km-splitview > .km-content
+{
+    .flex-direction(row);
+}
+
+div.km-split-vertical > .km-content,
+kendo-mobile-split-view.km-split-vertical > .km-content
+{
+    .flex-direction(column);
+}
+
+div.km-split-content > .km-pane
+{
+    .flex(2);
+    width: auto;
+    height: auto;
+}
+
+div.km-split-content > .km-pane:first-child
+{
+    .flex(1);
+}
+
+div.km-split-horizontal > .km-content > .km-pane
+{
+    top: 0;
+    bottom: 0;
+}
+
+// Hopefully temporary
+.km-split-vertical > .km-content > .km-pane > .km-view
+{
+    display: -webkit-box;
+}
