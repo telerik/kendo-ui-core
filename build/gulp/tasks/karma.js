@@ -71,10 +71,10 @@ var defaultOptions = {
 };
 
 var flavours = {
-    jenkins: {
+    ci: {
         reporters: ['dots', 'junit'],
         singleRun: true,
-        browsers: browsers,
+        browsers: [ 'ChromeHeadless' ],
 
         files: [].concat(
             TESTS.beforeTestFiles,
