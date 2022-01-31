@@ -194,7 +194,7 @@ gulp.task('build', gulp.series(['scripts', 'styles']));
 gulp.task('tests', gulp.series(['karma-mocha']));
 
 gulp.task('ci', function(done) {
-  runSequence('build', 'karma-jenkins', done);
+  runSequence('build', 'karma-ci', done);
 });
 
 gulp.task('cjs', function() {

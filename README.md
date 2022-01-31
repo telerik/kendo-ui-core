@@ -157,7 +157,7 @@ There are two ways to get the source code for Kendo UI Core. You can either down
 
 ### Installing Dependencies
 
-In order to build Kendo UI Core, you need to have **Node.js 6.x** and **git 2.x**.
+In order to build Kendo UI Core, you need to have **Node.js 10.x** and **git 2.x**.
 
 For Windows you have to download and install [Git for Windows](https://git-for-windows.github.io/) and [Node.js](http://nodejs.org/download/) and [Visual C++ Build Tools](http://landinghub.visualstudio.com/visual-cpp-build-tools).
 
@@ -191,25 +191,9 @@ npm run build
 ```
 The minified version of the scripts and styles of Kendo UI Core will be put in the `dist/` subdirectory.
 
-If you want to create custom build or help with Kendo UI Core development, it would be better to install the [gulp command line interface](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md#1-install-gulp-globally) as a global package:
-
-```sh
-[sudo] npm install --global gulp
-```
-Make sure you have `gulp` installed by testing:
-
-```sh
-gulp --version
-```
-
-Now by running the `gulp` command in the Kendo UI Core directory, you can build the full version of Kendo UI Core. This works just like the `npm run build` command:
-```sh
-gulp build
-```
-
 There are several other tasks available:
 ```sh
-gulp --tasks
+npx gulp --tasks
 ```
 
 ### Building only what you need
@@ -217,7 +201,7 @@ gulp --tasks
 The gulp `custom` task will create a custom minified file - `dist/kendo.custom.min.js`, which includes only the specified components. The following command will include only the autocomplete and dropdownlist widgets:
 
 ```sh
-gulp custom -c autocomplete,dropdownlist
+npx gulp custom -c autocomplete,dropdownlist
 ```
 
 ## Source Code and Downloads
