@@ -1175,6 +1175,7 @@ function pad(number, digits, end) {
 
 (function() {
     var nonBreakingSpaceRegExp = /\u00A0/g,
+        spaceRegExp = /\s/g,
         exponentRegExp = /[eE][\-+]?[0-9]+/,
         shortTimeZoneRegExp = /[+|\-]\d{1,2}/,
         longTimeZoneRegExp = /[+|\-]\d{1,2}:?\d{2}/,
@@ -1705,6 +1706,7 @@ function pad(number, digits, end) {
                      .replace(symbol, "")
                      .replace(nonBreakingSpaceRegExp, " ")
                      .split(number[","].replace(nonBreakingSpaceRegExp, " ")).join("")
+                     .replace(spaceRegExp, "")
                      .replace(number["."], ".");
 
         value = parseFloat(value);

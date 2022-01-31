@@ -298,6 +298,7 @@ var __meta__ = { // jshint ignore:line
     var DatePicker = Widget.extend({
         init: function(element, options) {
             var that = this,
+                initialValue,
                 disabled,
                 div;
 
@@ -382,9 +383,11 @@ var __meta__ = { // jshint ignore:line
                 that.readonly(element.is("[readonly]"));
             }
 
+            initialValue = parse(options.value || that.element.val(), options.parseFormats, options.culture);
+
             that._createDateInput(options);
 
-            that._old = that._update(options.value || that.element.val());
+            that._old = that._update(initialValue || that.element.val());
             that._oldText = element.val();
             that._applyCssClasses();
 
