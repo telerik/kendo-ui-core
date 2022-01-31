@@ -136,6 +136,13 @@ it("parseF should parse negative percent number", function() {
     assert.equal(parseF(value), -11.2323);
 });
 
+it("parseF should trim whitespaces", function() {
+    var value = "1 000 000";
+    var expected = 1000000;
+
+    assert.equal(parseF(value), expected);
+});
+
 it("parse exponential number", function() {
     var value = "1.23432e+5";
 

@@ -200,6 +200,17 @@
             assert.equal(datetimepicker.options.timeFormat, "hh:mm");
         });
 
+        it("DateTimePicker correctly parses value in DateInput scenario", function() {
+            input.val("09/01/2021 22:10:10");
+            var datetimepicker = input.kendoDateTimePicker({
+                format: "MMMM yyyy",
+                dateInput: true,
+                parseFormats: ["MM/dd/yyyy HH:mm:ss"]
+            }).data("kendoDateTimePicker");
+
+            assert.equal(datetimepicker.value().getFullYear(), "2021");
+        });
+
         it("DateTimePicker adds format to the parseFormats array", function() {
             var datetimepicker = input.kendoDateTimePicker({
                 parseFormats: ["MM/dd/yy"]

@@ -251,6 +251,17 @@ it("extend popup options if datepicker.options.popup", function() {
     assert.equal(datepicker.dateView.popup.options.appendTo[0], $(appendTo)[0]);
 });
 
+it("DatePicker correctly parses initial value when DateInput is present", function() {
+    input.val("09/01/2021 22:10:10");
+    var datepicker = input.kendoDatePicker({
+        format: "MMMM yyyy",
+        dateInput: true,
+        parseFormats: ["MM/dd/yyyy HH:mm:ss"]
+    }).data("kendoDatePicker");
+
+    assert.equal(datepicker.value().getFullYear(), "2021");
+});
+
 it("DatePicker adds format to parseFormats array", function() {
     var datepicker = input.kendoDatePicker({
         parseFormats: ["MM/dd/yy"]
