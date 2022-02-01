@@ -213,7 +213,7 @@ To send the generated file to a remote service, prevent the default file saving 
 
 ## Server-Side Processing
 
-To export huge datasets to Excel, use the new [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
+To export huge datasets to Excel, use the [RadSpreadStreamProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadstreamprocessing/overview) which is part of [Telerik Document Processing (TDP) by Progress](https://docs.telerik.com/devtools/document-processing/introduction).
 
 * For examples on exporting Excel files, refer to the [RadSpreadProcessing library](https://docs.telerik.com/devtools/document-processing/libraries/radspreadprocessing/overview).
 * For more information on the Grid server-side processing, refer to [this article](https://docs.telerik.com/aspnet-mvc/helpers/grid/excel-export#use-server-side-processing).
