@@ -7,8 +7,7 @@ slug: howto_remove_files_with_errors
 
 # Remove Files with Errors
 
-The following example demonstrates how to remove files which contain errors and which have not passed the validation by using the Kendo UI Upload.
-
+The following example demonstrates how to remove files from the Kendo UI Upload when [the upload/remove data operation fails](/api/javascript/ui/upload) due to errors or failing validation.
 
 
 ```dojo
@@ -49,6 +48,7 @@ The following example demonstrates how to remove files which contain errors and 
 ## See Also
 
 * [JavaScript API Reference of the Upload](/api/javascript/ui/upload)
+  * [Upload Error event](api/javascript/ui/upload/events/error)
 * [Modes of Operation]({% slug modes_upload_widget %})
 * [Metadata]({% slug metadata_upload_widget %})
 
