@@ -27,13 +27,13 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
 1. Add a new parameter of type `Kendo.Mvc.UI.DataSourceRequest` to the action. It will contain the current TreeList request information about sorting, aggregates and filtering. Decorate that parameter with the `Kendo.Mvc.UI.DataSourceRequestAttribute`. This attribute will populate the `DataSourceRequest` object from the posted data. Now import the `Kendo.Mvc.UI` namespace. Also add another parameter which will indicate which parent node has been expanded.
 
-        public IActionResult TreeList_Read([DataSourceRequest]DataSourceRequest request, int? parentId)
+        public IActionResult TreeList_Read([DataSourceRequest]DataSourceRequest request, int? id)
         {
         }
 
 1. Use the `ToTreeDataSourceResult` extension method to convert the items collection to a `Kendo.Mvc.UI.TreeDataSourceResult` object. This extension method will filter, sort, calculate aggregates and find only the current level items of your data using the information provided by the `DataSourceRequest` object. To use the `ToTreeDataSourceResult` extension method, import the `Kendo.Mvc.Extensions` namespace.
 
-        public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? parentId)
+        public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
         {
             var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
                 e => e.EmployeeId,
@@ -46,7 +46,7 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
 1. Return the `TreeDataSourceResult` as JSON. Configure the Telerik UI TreeList for Ajax binding.
 
-        public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? parentId)
+        public JsonResult Index([DataSourceRequest] DataSourceRequest request, int? id)
         {
             var result = ((EmployeeDirectoryService) employeeDirectory).GetAllRemote().ToTreeDataSourceResult(request,
                 e => e.EmployeeId,

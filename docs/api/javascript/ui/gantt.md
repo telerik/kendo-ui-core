@@ -3385,6 +3385,29 @@ The text similar to "Save" displayed in Gantt.
     });
     </script>
 
+### messages.selectView `String`
+
+The aria-label of the View select element.
+
+#### Example - set the "previous" message
+
+    <div id="gantt"></div>
+    <script>
+    $("#gantt").kendoGantt({
+      dataSource: [{
+         id: 1,
+         orderId: 0,
+         parentId: null,
+         title: "Task1",
+         start: new Date("2014/6/17 9:00"),
+         end: new Date("2014/6/17 11:00")
+      }],
+      messages: {
+        selectView: "Custom"
+      }
+    });
+    </script>
+
 ### messages.views `Object`
 
 The configuration of the Gantt view messages. Use this option to customize or localize the Gantt view messages.

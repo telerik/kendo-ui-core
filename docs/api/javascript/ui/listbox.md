@@ -722,6 +722,40 @@ Adds an item to the widget.
     listBox.add(person);
     </script>
 
+#### Example
+
+    <select id="listBox"></select>
+    <script>
+        var Product = kendo.data.Model.define({
+            id: "ProductID",
+            fields: {
+                ProductName: {
+                    type:"string"
+                }
+            }
+        });
+
+        var dataSource = new kendo.data.DataSource({
+            data:[
+                {ProductID:1, ProductName:"Apples"},
+                {ProductID:2, ProductName:"Oranges"},
+            ],
+            schema: {
+                model: Product
+            }
+        });
+
+        $("#listBox").kendoListBox({
+            dataSource: dataSource,
+            dataTextField:"ProductName",
+            dataValueField:"ProductID"
+        });
+
+        var listBox = $("#listBox").data("kendoListBox");
+        var item = new Product({ProductName:"Bananas"});
+        listBox.add(item);
+    </script>
+
 ### clearSelection
 
 Clears the selected items of the ListBox and triggers the `change` event.
