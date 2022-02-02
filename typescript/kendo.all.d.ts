@@ -5616,6 +5616,7 @@ declare namespace kendo.ui {
         editor?: GanttMessagesEditor | undefined;
         plannedTasks?: GanttMessagesPlannedTasks | undefined;
         save?: string | undefined;
+        selectView?: string | undefined;
         views?: GanttMessagesViews | undefined;
     }
 
