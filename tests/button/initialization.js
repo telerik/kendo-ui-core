@@ -280,5 +280,11 @@
 
         assert.isOk(button.data("kendoButton").badge instanceof kendo.ui.Badge);
     });
+
+    it("Button element type attribute is preserved", function() {
+        getButton().attr("type", "submit").kendoButton();
+
+        assert.equal(button.attr("type"), "submit");
+    });
     });
 }());

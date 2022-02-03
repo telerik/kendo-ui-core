@@ -1057,7 +1057,7 @@
 
             var list = dropdownlist.list;
 
-            assert.equal(list.find(".k-searchbox").length, 1);
+            assert.equal(list.parent().find(".k-searchbox").length, 1);
         });
 
         it("setOptions hides option optionLabel", function() {

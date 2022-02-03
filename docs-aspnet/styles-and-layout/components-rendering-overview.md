@@ -150,6 +150,20 @@ The following image demonstrates the appearance of a Button, with different `Fil
 
 For more information about the available `FillMode` option values, visit the [Appearance documentation](#updated-components) of the respective component.
 
+### Overriding Default Component Options
+
+The styling options that come with the new rendering can be set globally. 
+
+The following example shows how to set the size option of the Button to `large`. The default size of the Button is `medium`.
+
+```html
+<script>
+    kendo.ui['Button'].fn.options['size'] = "large";
+</script>
+```
+
+To apply this override to all Buttons in your application, add the script after the `kendo.all.min.js` script reference in the Layout. If you want the override to be applied only to the Buttons on a specific page, add the script at the beginning of the respective view. 
+
 ## State Classes
 
 In addition to the new styling options, the state classes have also been changed. The `k-state-default` class has been completely removed from the components, except for the PivotGrid, in which there is JavaScript logic that relies on this class.

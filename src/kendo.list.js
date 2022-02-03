@@ -92,12 +92,7 @@ var __meta__ = { // jshint ignore:line
         ARIA_BUSY = "aria-busy",
         ARIA_MULTISELECTABLE = "aria-multiselectable",
         ARIA_SELECTED = "aria-selected",
-        GROUP_ROW_SEL = ".k-table-group-row",
-
-        DOT = ".";
-
-    // TO DO:
-    // Sizing options (size) should propagate to StaticList / VirtualList
+        GROUP_ROW_SEL = ".k-table-group-row";
 
     var List = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
@@ -377,8 +372,8 @@ var __meta__ = { // jshint ignore:line
                 that.listView = new kendo.ui.StaticList(that.ul, listOptions);
             } else {
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
-                that.list.find(DOT + LIST).addClass("k-virtual-list");
-                that.list.find(DOT + DATA_TABLE).addClass("k-virtual-table");
+                that.list.addClass("k-virtual-list");
+                that.list.addClass("k-virtual-table");
             }
 
             that.listView.bind("listBound", proxy(that._listBound, that));
@@ -939,9 +934,9 @@ var __meta__ = { // jshint ignore:line
 
             if (length || that.options.noDataTemplate) {
                 // Check where animation container stays
-                popups = list.add(list.parent(".k-animation-container")).show();
+                popups = list.parent().add(list.closest(".k-animation-container")).show();
 
-                if (!list.is(":visible")) {
+                if (!list.parent().is(":visible")) {
                     popups.hide();
                     return;
                 }
@@ -979,7 +974,7 @@ var __meta__ = { // jshint ignore:line
 
         _adjustListWidth: function() {
             var that = this,
-                list = that.list,
+                list = that.list.parent(),
                 width = list[0].style.width,
                 wrapper = that.wrapper,
                 computedStyle, computedWidth;
@@ -1106,9 +1101,9 @@ var __meta__ = { // jshint ignore:line
         _popup: function() {
             var list = this;
 
-            list.list = list.list.wrap("<div>").parent();
+            list.list.wrap("<div>");
 
-            list.popup = new ui.Popup(list.list, extend({}, list.options.popup, {
+            list.popup = new ui.Popup(list.list.parent(), extend({}, list.options.popup, {
                 anchor: list.wrapper,
                 open: proxy(list._openHandler, list),
                 close: proxy(list._closeHandler, list),
@@ -1749,11 +1744,13 @@ var __meta__ = { // jshint ignore:line
 
             parent._focused.add(parent.filterInput).on(FOCUS, function() {
                 parent.unbind(CASCADE, that._cascadeHandlerProxy);
+                parent.unbind(CHANGE, that._cascadeHandlerProxy);
                 parent.first(CHANGE, that._cascadeHandlerProxy);
             });
 
             parent._focused.add(parent.filterInput).on(focusout, function() {
                 parent.unbind(CHANGE, that._cascadeHandlerProxy);
+                parent.unbind(CASCADE, that._cascadeHandlerProxy);
                 parent.first(CASCADE, that._cascadeHandlerProxy);
             });
         },

@@ -1247,6 +1247,7 @@ var __meta__ = { // jshint ignore:line
                     });
 
                 this.list
+                    .parent()
                     .prepend($(filterTemplate))
                     .find(".k-searchbox")
                     .append(this.filterInput);
