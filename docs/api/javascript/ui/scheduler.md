@@ -1095,7 +1095,7 @@ The arguments which can be used in the format string are:
 * {1} - represents the start date of the event.
 * {2} - represents the start time of the event.
 
-#### Example - set the "ariaSlotLabel" scheduler message
+#### Example
 
     <div id="scheduler"></div>
     <script>
@@ -1318,7 +1318,7 @@ The tooltip of the next navigation button.
 
 The text displayed in the Scheduler year view Tooltip when there are no events on the selected date.
 
-#### Example - set the "noData" message 
+#### Example - set the "noData" message
 
     <div id="scheduler"></div>
     <script>
@@ -1393,6 +1393,31 @@ The tooltip of the previous navigation button.
     });
     </script>
 
+### messages.refresh `String`
+
+The aria-label of the refresh toolbar button.
+
+#### Example - set the "previous" message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        refresh: "Again"
+      },
+      views: ["day"],
+      date: new Date("2013/6/6"),
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
 ### messages.resetSeries `String`
 
 The text of the reset series button.
@@ -1430,6 +1455,30 @@ The text similar to "Save" displayed in scheduler.
       messages: {
         save: "Update"
       },
+      dataSource: [
+        {
+          id: 1,
+          start: new Date("2013/6/6 08:00 AM"),
+          end: new Date("2013/6/6 09:00 AM"),
+          title: "Interview"
+        }
+      ]
+    });
+    </script>
+
+### messages.selectView `String`
+
+The aria-label of the View select element.
+
+#### Example - set the "previous" message
+
+    <div id="scheduler"></div>
+    <script>
+    $("#scheduler").kendoScheduler({
+      messages: {
+        selectView: "Custom"
+      },
+      date: new Date("2013/6/6"),
       dataSource: [
         {
           id: 1,

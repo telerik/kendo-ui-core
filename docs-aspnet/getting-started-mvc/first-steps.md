@@ -26,7 +26,9 @@ If you want to manually set up Telerik UI for ASP.NET MVC in an existing applica
 
 * Telerik UI for ASP.NET MVC requires <a href="https://dotnet.microsoft.com/download/dotnet-framework" target="_blank">.NET Framework</a>.
 
-* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later.
+* [Visual Studio](https://www.visualstudio.com/downloads/) 2012 or later
+
+  * For Visual Studio 2017 or later, you must have the **ASP.NET & web development** workload installed. See Microsoft's [Install Visual Studio workloads](https://docs.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2019#step-4---choose-workloads) documentation for guidance.
    
 * [Telerik account](https://www.telerik.com/account).
 

@@ -229,7 +229,7 @@
 
             assert.isOk(dropdownlist.ul);
             assert.isOk(dropdownlist.ul.is("ul"));
-            assert.isOk(dropdownlist.list.find(".k-list").attr("id"), input.attr("id") + "-list");
+            assert.isOk(dropdownlist.list.attr("id"), input.attr("id") + "-list");
             assert.equal(dropdownlist.listView.content.css("overflow"), "hidden auto");
         });
 
@@ -239,7 +239,7 @@
             assert.isOk(dropdownlist.popup);
             assert.isOk(dropdownlist.popup instanceof kendo.ui.Popup);
             assert.equal(dropdownlist.popup.options.anchor[0], dropdownlist.wrapper[0]);
-            assert.equal(dropdownlist.popup.element[0], dropdownlist.list[0]);
+            assert.equal(dropdownlist.popup.element[0], dropdownlist.list.parent()[0]);
         });
 
         it("dropdownlist shrink ul if the height of the items is more then options.height", function() {
@@ -346,7 +346,7 @@
 
             var list = dropdownlist.list;
 
-            assert.equal(list.find(".k-list .k-list-header").children()[0].outerHTML, "<div>Header</div>");
+            assert.equal(list.find(".k-list-header").children()[0].outerHTML, "<div>Header</div>");
         });
 
         it("defining option label template", function() {
@@ -356,7 +356,7 @@
                 headerTemplate: "<div>Header</div>"
             });
 
-            var optionHeader = dropdownlist.list.find(".k-list").children(":first")[0];
+            var optionHeader = dropdownlist.list.children(":first")[0];
 
             assert.isOk(optionHeader.id);
             assert.equal(optionHeader.className, "k-list-optionlabel k-selected k-focus");
@@ -370,7 +370,7 @@
                 headerTemplate: "<div>Header</div>",
             });
 
-            var optionHeader = dropdownlist.list.find(".k-list").children(":first")[0];
+            var optionHeader = dropdownlist.list.children(":first")[0];
 
             assert.isOk(optionHeader.id);
             assert.equal(optionHeader.className, "k-list-optionlabel k-selected k-focus");
@@ -641,7 +641,7 @@
             dropdownlist = new DropDownList(input);
 
             // for accessibility reasons the list must be associated to the input
-            assert.isOk(dropdownlist.list.find('.k-list').attr("id"));
+            assert.isOk(dropdownlist.list.attr("id"));
         });
 
         it("binding to primitive types", function() {
@@ -1066,7 +1066,7 @@
                 filter: "startswith"
             });
 
-            var filterHeader = dropdownlist.list.find(".k-list-filter");
+            var filterHeader = dropdownlist.list.parent().find(".k-list-filter");
 
             assert.isOk(filterHeader.hasClass("k-list-filter"));
             assert.isOk(filterHeader.find("input")[0]);
@@ -1110,7 +1110,7 @@
                 filter: "startswith"
             });
 
-            var filterHeader = dropdownlist.list.find(".k-list-filter");
+            var filterHeader = dropdownlist.list.parent().find(".k-list-filter");
             var icon = filterHeader.find(".k-input-icon");
 
             assert.isOk(icon[0]);
@@ -1236,8 +1236,8 @@
 
             dropdownlist.open();
 
-            assert.isOk(dropdownlist.list.children().first().hasClass("k-list"));
-            assert.isOk(dropdownlist.list.children().first().hasClass("k-list-md"));
+            assert.isOk(dropdownlist.list.hasClass("k-list"));
+            assert.isOk(dropdownlist.list.hasClass("k-list-md"));
         });
 
         it("applies custom size class when set", function() {
@@ -1248,8 +1248,8 @@
 
             dropdownlist.open();
 
-            assert.isOk(dropdownlist.list.children().first().hasClass("k-list"));
-            assert.isOk(dropdownlist.list.children().first().hasClass("k-list-lg"));
+            assert.isOk(dropdownlist.list.hasClass("k-list"));
+            assert.isOk(dropdownlist.list.hasClass("k-list-lg"));
         });
 
         it("skips size class if set to null", function() {
@@ -1260,7 +1260,7 @@
 
             dropdownlist.open();
 
-            assert.equal(dropdownlist.list.children().first().attr("class"), "k-list");
+            assert.equal(dropdownlist.list.attr("class"), "k-list");
         });
 
         it("copy input title attribute to the visible input", function() {

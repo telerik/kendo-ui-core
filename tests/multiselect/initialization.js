@@ -204,7 +204,7 @@
         assert.isOk(multiselect.popup);
         assert.isOk(multiselect.popup instanceof kendo.ui.Popup);
         assert.equal(multiselect.popup.options.anchor[0], multiselect.wrapper[0]);
-        assert.equal(multiselect.popup.element[0], multiselect.list[0]);
+        assert.equal(multiselect.popup.element[0], multiselect.list.parent()[0]);
     });
 
     it("MultiSelect initializes an UL for its items", function() {
@@ -213,7 +213,7 @@
 
         assert.isOk(multiselect.ul);
         assert.isOk(multiselect.ul.is("ul"));
-        assert.isOk(multiselect.list.find(".k-list").attr("id"), select.attr("id") + "-list");
+        assert.isOk(multiselect.list.attr("id"), select.attr("id") + "-list");
         assert.equal(multiselect.listView.content.css("overflow"), "hidden auto");
     });
 

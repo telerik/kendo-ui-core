@@ -1,6 +1,6 @@
 ---
 title: 2022 Releases
-page_title: 2022 Releases 
+page_title: 2022 Releases
 description: "Learn about the breaking changes and backwards compatibility released by {{ site.product }} in 2022."
 slug: breakingchanges_2022
 position: 1
@@ -9,6 +9,12 @@ position: 1
 # 2022 Releases
 
 This article lists the breaking or important changes in the 2022 releases of {{ site.product }}.
+
+## {{ site.product }} R1 2022 SP1
+
+**Scheduler**
+
+As of the 2022 R1 SP1 release the Scheduler exposes a modified keyboard navigation behavior. The main reason behind the change is to make the widget a single Tab stop element on the page. This would allow easier navigation to and away from the Scheduler. Further details on the new keyboard navigation behavior could be found on the [Keyboard Navigation demo](https://demos.telerik.com/{{ site.platform }}/scheduler/selection).
 
 ## {{ site.product }} 2022 R1
 

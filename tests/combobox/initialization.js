@@ -402,7 +402,7 @@
             });
             var list = combobox.list;
 
-            assert.equal(list.children().first().find(".k-list-header").html(), "<div>Header</div>");
+            assert.equal(list.find(".k-list-header").html(), "<div>Header</div>");
         });
 
         it("render footer container", function() {

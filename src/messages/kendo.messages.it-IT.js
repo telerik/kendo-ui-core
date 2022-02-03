@@ -447,12 +447,14 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
     "day": "Giorno",
     "month": "Mese",
     "week": "Settimana",
-    "workWeek": "Work Week"
+    "workWeek": "Settimana lavorativa"
   },
   "deleteWindowTitle": "Rimuovi evento",
   "showFullDay": "Mostra il giorno completo",
   "showWorkDay": "Mostra solo le ore lavorative",
-  "search": "Cerca..."
+  "search": "Cerca...",
+  "refresh": "Aggorna",
+  "selectView": "Seleziona vista"
 });
 }
 

@@ -9392,7 +9392,9 @@ declare namespace kendo.ui {
         next?: string | undefined;
         pdf?: string | undefined;
         previous?: string | undefined;
+        refresh?: string | undefined;
         save?: string | undefined;
+        selectView?: string | undefined;
         showFullDay?: string | undefined;
         showWorkDay?: string | undefined;
         time?: string | undefined;

@@ -822,6 +822,8 @@ $.extend(true, kendo.ui.Scheduler.prototype.options.messages,{
   "deleteWindowTitle": "Delete event",
   "ariaSlotLabel": "Selected from {0:t} to {1:t}",
   "ariaEventLabel": "{0} on {1:D} at {2:t}",
+  "refresh": "Refresh",
+  "selectView": "Select view",
   "editable": {
     "confirmation": "Are you sure you want to delete this event?"
   },

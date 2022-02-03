@@ -35,7 +35,11 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             HTMLBase.fn.init.call(that, element, options);
             that.wrapper = that.element.addClass(KBUTTON);
-            that.element.attr("type", that.options.type);
+
+            if (!that.element.attr("type")) {
+                that.element.attr("type", that.options.type);
+            }
+
             that._addClasses();
             that.iconElement();
             that._textElement();
