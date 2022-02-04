@@ -35,7 +35,7 @@ How can I implement a global Grid search and enable the users to search through 
 
     <div id="example">
       Filter all fields:
-      <input id='filter' class='k-textbox'/>
+      <span style="width: 30%;" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input id='filter' class='k-input-inner'/></span>
       <div id="grid"></div>
 
       <script>        

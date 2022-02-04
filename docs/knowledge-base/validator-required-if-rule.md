@@ -45,11 +45,11 @@ The code comments contain tips for the suggested implementation. For more inform
 
 ```dojo
 <form id="myform">
-	<input type="text" id="input1" name="input1" placeholder="type something here and click Validate" style="width: 250px" />
+	<span style="width: 250px" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input type="text" id="input1" name="input1" placeholder="type something here and click Validate" class='k-input-inner'/></span>
 
 	<br /><br />
 
-	<select id="requiredIfSample" multiple="multiple" requiredIf="input1" data-placeholder="Select attendees..." name="multiSelect">
+	<select style="width: 250px" id="requiredIfSample" multiple="multiple" requiredIf="input1" data-placeholder="Select attendees..." name="multiSelect">
 		<option>Steven White</option>
 		<option>Nancy King</option>
 		<option>Nancy Davolio</option>
@@ -73,11 +73,11 @@ The code comments contain tips for the suggested implementation. For more inform
 
 	<br /><br />
 
-	<input type="text" id="secondInput" requiredIf="input1" name="secondInput" />
+	<span style="width: 250px" class="k-input k-textbox k-input-solid k-input-md k-rounded-md"><input type="text" id="secondInput" requiredIf="input1" name="secondInput" class='k-input-inner'/></span>
 
 	<br /><br />
 
-	<button id="save">Validate</button>
+	<button id="save" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">Validate</span></button>
 
 </form>
 

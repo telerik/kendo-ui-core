@@ -74,6 +74,8 @@
             var element = setup(null, { navigatable: true, input: true,
                 numeric: true,  refresh: true,  pageSizes: [1, 2] });
 
+            element.getKendoPager().dataSource.fetch();
+
             axeRunFixture(done);
         });
     });

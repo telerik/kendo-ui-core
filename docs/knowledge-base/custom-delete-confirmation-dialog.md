@@ -44,8 +44,8 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 <script type="text/x-kendo-template" id="windowTemplate">
     <p> Delete <strong>#= ProductName #</strong> ? </p>
     <p> We have #= UnitsInStock # units in stock. </p>
-    <button class="k-button" id="yesButton">Yes</button>
-    <button class="k-button" id="noButton"> No</button>
+    <button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" id="yesButton"><span class="k-button-text">Yes</span></button>
+    <button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">No</span></button>
 </script>
 
 <script>

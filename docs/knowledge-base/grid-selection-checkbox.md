@@ -95,7 +95,11 @@ For earlier versions, refer to the following example. It demonstrates how to sel
             toolbar: ["create"],
             columns: [
             //define template column with checkbox and attach click event handler
-            { template: "<input type='checkbox' class='checkbox' />" },
+            { 
+                template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md checkbox' />", 
+                width: 40,
+                attributes: {class: "k-text-center"}
+            },
             "ProductName", {
                 field: "UnitPrice",
                 title: "Unit Price",
@@ -111,7 +115,7 @@ For earlier versions, refer to the following example. It demonstrates how to sel
                 }, {
                 command: ["edit", "destroy"],
                 title: "&nbsp;",
-                width: "172px"
+                width: "250px"
             }
             ],
             editable: "inline"
