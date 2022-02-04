@@ -2199,6 +2199,14 @@ function pad(number, digits, end) {
 
         support.browser = support.detectBrowser(navigator.userAgent);
 
+        if (!mobileOS && support.touch && support.browser.safari) {
+            mobileOS = support.mobileOS = {
+                ios: true,
+                tablet: "tablet",
+                device: "ipad"
+            };
+        }
+
         support.detectClipboardAccess = function() {
             var commands = {
                 copy: document.queryCommandSupported ? document.queryCommandSupported("copy") : false,

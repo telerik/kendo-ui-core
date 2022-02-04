@@ -277,10 +277,11 @@ var __meta__ = { // jshint ignore:line
         }
 
         if (!item.children(LINK_SELECTOR).length) {
-            item
-                .contents()      // exclude groups, real links, templates and empty text nodes
-                .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !kendo.trim(this.nodeValue))); })
-                .wrapAll("<span class='" + LINK + "'><span class='k-menu-link-text'></span></span>");
+            item.contents()      // exclude groups, real links, templates and empty text nodes
+                .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType === 3 && !kendo.trim(this.nodeValue))); })
+                .wrapAll("<span class='" + LINK + "'></span>")
+                .filter(function(idx, elm) { return elm.nodeType === 3; })
+                .wrap("<span class='k-menu-link-text'></span>");
         }
 
         updateArrow(item);
@@ -311,7 +312,7 @@ var __meta__ = { // jshint ignore:line
             arrowCssClass = "k-i-arrow-s";
         } else {
             if (isRtl) {
-                arrowCssClass = "k-i-arrow-n";
+                arrowCssClass = "k-i-arrow-w";
             }
             else {
                 arrowCssClass = "k-i-arrow-e";
@@ -1060,7 +1061,7 @@ var __meta__ = { // jshint ignore:line
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-menu-group:hidden").first();
+                    var ul = li.find("> .k-menu-group, > .k-animation-container > .k-menu-group").filter(":hidden").first();
                     var popup;
                     var overflowPopup;
 
@@ -1624,12 +1625,12 @@ var __meta__ = { // jshint ignore:line
                 overflowWrapper = that._overflowWrapper(),
                 shouldCloseTheRootItem;
 
-            if(targetElement && !targetElement.parentNode){
+            if(targetElement && (!targetElement.parentNode || !itemElement)){
                 return;
             }
 
             if($(target).hasClass('k-menu-expand-arrow-icon')){
-                this._lastClickedElement = targetElement.parentElement;
+                this._lastClickedElement = itemElement;
             }
 
             while (targetElement && targetElement.parentNode != itemElement) {
@@ -2273,12 +2274,13 @@ var __meta__ = { // jshint ignore:line
                     options.template = template(options.template);
             } else if (!options.template) {
                     options.template = template(
+                    "<span class='k-menu-link-text'>" +
                     "# var text = " + fieldAccessor("text") + "(data.item); #" +
                     "# if (typeof data.item.encoded != 'undefined' && data.item.encoded === false) {#" +
                         "#= text #" +
                     "# } else { #" +
                         "#: text #" +
-                    "# } #"
+                    "# } #</span>"
                 );
             }
 
@@ -2304,7 +2306,7 @@ var __meta__ = { // jshint ignore:line
                     "# } #" +
 
                     "#= sprite(item) #" +
-                    "<span class='k-menu-link-text'>#= data.menu.options.template(data) #</span>" +
+                    "#= data.menu.options.template(data) #" +
                     "#= arrow(data) #" +
                     "</#= tag #>"
                 ),
