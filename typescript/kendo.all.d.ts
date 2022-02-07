@@ -5898,7 +5898,7 @@ declare namespace kendo.ui {
         saveAsExcel(): void;
         saveAsPDF(): JQueryPromise<any>;
         saveChanges(): void;
-        saveRow(): void;
+        saveRow(): any;
         select(): JQuery;
         select(rows: string): void;
         select(rows: Element): void;

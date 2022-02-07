@@ -3,6 +3,7 @@ title: Bind Charts to Sheet Data
 page_title: Bind Charts to Sheet Data | Kendo UI Spreadsheet
 description: "Learn how to bind a Kendo UI Chart to the data of a Kendo UI Spreadsheet widget."
 slug: howto_bindcharttosheet_spreadsheet_widget
+pevious_url: /controls/charts/how-to/bind-chart-to-spreadsheet-data, /controls/charts/how-to/binding/bind-chart-to-spreadsheet-data
 ---
 
 # Bind Charts to Sheet Data
