@@ -1,7 +1,7 @@
 ---
 title: Cursor
 page_title: Cursor
-description: "Get started with the Telerik UI Sortable HtmlHelper for {{ site.framework }} and learn how to customize the displayed cursor."
+description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn how to customize the displayed cursor."
 slug: htmlhelpers_sortable_aspnetcore_cursor
 position: 4
 ---
@@ -16,6 +16,7 @@ For the full list of built-in cursor types, refer to [quirksmode.org](http://qui
 
 The following example demonstrates how to change the cursor type to `"move"`.
 
+```HtmlHelper
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -26,10 +27,11 @@ The following example demonstrates how to change the cursor type to `"move"`.
         .For("#sortable")
         .Cursor("move")
     )
-
+```
 
 The `cursor` option changes the style of the cursor only for the time the item is dragged. To change the cursor type on `hover`, use CSS.
 
+```HtmlHelper
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -46,8 +48,12 @@ The `cursor` option changes the style of the cursor only for the time the item i
             cursor: url('https://demos.telerik.com/kendo-ui//content/web/sortable/grabbing.cur'), default;
         }
     </style>
+```
 
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sortable/index)
+{% if site.core %}
+* [Basic Usage of the Sortable TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
+{% endif %}
 * [Server-Side API](/api/sortable)

@@ -14,19 +14,23 @@ For a runnable example, refer to the [demo on using aggregates in the Grid](http
 
 To control grouping in the Grid, use the [`Groupable()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridBuilder#groupable) method.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
             .Name("grid")
             .Groupable()
 	    	...
+    ```
 
 > Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be groupable. To enable grouping on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
 
 You can also render groups by setting group expressions in the DataSource of the Grid even without enabling `Groupable`.
 
+    ```HtmlHelper
         .Name("Grid")       
         .DataSource(dataSource => dataSource
             .Ajax()
             .Group(groups => groups.Add(p => p.UnitsInStock))
+    ```
 
 ## See Also
 

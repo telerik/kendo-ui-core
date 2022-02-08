@@ -1,7 +1,7 @@
 ---
 title:  Razor Page
 page_title: Configure a DataSource for the FileManager for Remote Binding in Razor Page.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI FileManager HtmlHelper for {{ site.framework }} in a Razor Page using CRUD Operations."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI FileManager component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_filemanager_razorpage_aspnetcore
 position: 1
 ---
@@ -12,7 +12,7 @@ This article describes how to configure the DataSource of a Telerik FileManager 
 
 In order to set up the FileManager component bindings, you need to configure the `Read` , `Create`, `Update` and `Destroy` methods of the `DataSource` instance. The URL in this method should refer the name of the handler in the PageModel. In this method, you can also pass additional parameters, such as the antiforgery token (see `forgeryToken`). See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper
     @Html.AntiForgeryToken()
 
     @(Html.Kendo().FileManager().Name("filemanager")
@@ -48,6 +48,28 @@ In order to set up the FileManager component bindings, you need to configure the
         }
     </script>
 ```
+{% if site.core %}
+```tab-TagHelper
+    @Html.AntiForgeryToken()
+
+    <kendo-filemanager name="filemanager" upload-url="/FileManager/FileManagerIndex?handler=FileManagerUpload">
+        <filemanager-datasource>
+            <transport>
+                <read url="/FileManager/FileManagerIndex?handler=FileManagerRead" data="forgeryToken" type="POST" />
+                <destroy url="/FileManager/FileManagerIndex?handler=FileManagerDestroy" data="forgeryToken" type="POST" />
+                <create url="/FileManager/FileManagerIndex?handler=FileManagerCreate" data="forgeryToken" type="POST" />
+                <update url="/FileManager/FileManagerIndex?handler=FileManagerUpdate" data="forgeryToken" type="POST" />
+            </transport>
+        </filemanager-datasource>
+    </kendo-filemanager>
+
+    <script>
+        function forgeryToken() {
+            return kendo.antiForgeryTokens();
+        }
+    </script>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
     public class FileManagerIndexModel : PageModel
     {

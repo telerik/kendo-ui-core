@@ -25,7 +25,8 @@ The toolbar has a predefined set of tools which you can show or hide, depending 
 ## Customizing the Toolbar Commands
 
 To Enable/Disable a Toolbar command button or update the its text you can use the  `Toolbar.Items()` configuration option:
-```cshtml
+
+```HtmlHelper
     .Toolbar(toolbar => toolbar.Items(items =>
         {
             items.Add("").Text("Add New Folder").Enable(false).Command("CreateFolderCommand").Type("button");
@@ -61,7 +62,7 @@ First, create a new command by extending the FileManagerCommand class.
 ```
 
 Then add the custom command to the FileManager Toolbar:
-```cshtml
+```HtmlHelper
     .Toolbar(toolbar => toolbar.Items(items =>
         {
             items.Add("").Type("button").Name("GetInfo").Text("Get Info").Command("MyCustomCommand");
@@ -69,7 +70,7 @@ Then add the custom command to the FileManager Toolbar:
 ```
 
 You can also add the custom command to the ContextMenu of the FileManager
-```cshtml
+```HtmlHelper
     .ContextMenu(context => context.Items(items =>
         {
             items.Add("rename");

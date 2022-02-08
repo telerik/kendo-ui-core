@@ -1,7 +1,7 @@
 ---
 title: Virtualization
 page_title: Virtualization
-description: "Learn how to setup the Virtualization feature of the Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to setup the Virtualization feature of the Telerik UI ComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/combobox/virtualization
 slug: htmlhelpers_combobox_virtualization_aspnetcore
 position: 5
@@ -67,60 +67,62 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
 
 1. Add a ComboBox to the view and configure it to use virtualization.
 
-            @model MvcApplication1.Models.ProductViewModel
+    ```HtmlHelper
+        @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-                .Filter("contains")
-                .DataTextField("ProductName")
-                .DataValueField("ProductID")
-                .Placeholder("Select product...")
-                .DataSource(source =>
-                {
-                    source.Custom()
-                        .ServerFiltering(true)
-                        .ServerPaging(true)
-                        .PageSize(80)
-                        .Type("aspnetmvc-ajax")
-                        .Transport(transport =>
-                        {
-                            transport.Read("ProductsVirtualization_Read", "Home");
-                        })
-                        .Schema(schema =>
-                        {
-                            schema.Data("Data")
-                                    .Total("Total");
-                        });
-                })
-                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
-            )
-
-            <script>
-                function valueMapper(options) {
-                    $.ajax({
-                        url: "@Url.Action("Products_ValueMapper", "Home")",
-                        data: convertValues(options.value),
-                        success: function (data) {
-                            options.success(data);
-                        }
+        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
+            .Filter("contains")
+            .DataTextField("ProductName")
+            .DataValueField("ProductID")
+            .Placeholder("Select product...")
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .ServerFiltering(true)
+                    .ServerPaging(true)
+                    .PageSize(80)
+                    .Type("aspnetmvc-ajax")
+                    .Transport(transport =>
+                    {
+                        transport.Read("ProductsVirtualization_Read", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data")
+                                .Total("Total");
                     });
-                }
+            })
+            .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+        )
 
-                function convertValues(value) {
-                    var data = {};
-
-                    value = $.isArray(value) ? value : [value];
-
-                    for (var idx = 0; idx < value.length; idx++) {
-                        data["values[" + idx + "]"] = value[idx];
+        <script>
+            function valueMapper(options) {
+                $.ajax({
+                    url: "@Url.Action("Products_ValueMapper", "Home")",
+                    data: convertValues(options.value),
+                    success: function (data) {
+                        options.success(data);
                     }
+                });
+            }
 
-                    return data;
+            function convertValues(value) {
+                var data = {};
+
+                value = $.isArray(value) ? value : [value];
+
+                for (var idx = 0; idx < value.length; idx++) {
+                    data["values[" + idx + "]"] = value[idx];
                 }
-            </script>
 
+                return data;
+            }
+        </script>
+    ```
 
 1. If the `AutoBind` option of the ComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().ComboBoxFor(m => m.ProductID)
@@ -129,6 +131,7 @@ The UI virtualization technique uses a fixed amount of list items in the popup l
             .DataTextField("ProductName")
             // Additional configuration.
         )
+    ```
 
 ## See Also
 

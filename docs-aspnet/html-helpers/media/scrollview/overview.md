@@ -7,13 +7,20 @@ slug: htmlhelpers_scrollview_aspnetcore
 position: 1
 ---
 
-# ScrollView HtmlHelper Overview
+# ScrollView Overview
 
+{% if site.core %}
+The Telerik UI ScrollView TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ScrollView widget.
+{% else %}
 The Telerik UI ScrollView HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ScrollView widget.
+{% endif %}
 
 The ScrollView displays a horizontal collection of content or image views with built-in navigation between them. It can be scrolled through dragging, gestures, arrow click or page click or tap. Among the key features of the ScrollView are data-source binding, customizable template, built-in pager, adjustable bounce effects and scroll velocity.
 
-* [Demo page for the ScrollView](https://demos.telerik.com/{{ site.platform }}/scrollview/index)
+* [Demo page for the ScrollView HtmlHelper](https://demos.telerik.com/{{ site.platform }}/scrollview/index)
+{% if site.core %}
+* [Demo page for the ScrollView TagHelper](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
+{% endif %}
 
 ## Initializing the ScrollView
 
@@ -24,25 +31,48 @@ You can initialize the ScrollView either [from HTML](#from-html) or [from a data
 1. Use its `Items()` method.
 1. Add HTML elements for each page as part of the content of the ScrollView items.
 
+```HtmlHelper
+    <style>
+        h1 {
+            margin-top: 30%;
+            text-align:center;
+        }
+    </style>
+    @(Html.Kendo().ScrollView()
+            .Name("scrollView")
+            .ContentHeight("100%")
+            .Items(x =>
+            {
+                x.Add().Content("<h1>One</h1>");
+                x.Add().Content("<h1>Two</h1>");
+                x.Add().Content("<h1>Three</h1>");
+            })
+            .HtmlAttributes(new { style = "height:748px; width:1022px; max-width: 100%;" })
+    )
 ```
-<style>
-    h1 {
-        margin-top: 30%;
-        text-align:center;
-    }
-</style>
- @(Html.Kendo().ScrollView()
-        .Name("scrollView")
-        .ContentHeight("100%")
-        .Items(x =>
-        {
-            x.Add().Content("<h1>One</h1>");
-            x.Add().Content("<h1>Two</h1>");
-            x.Add().Content("<h1>Three</h1>");
-        })
-        .HtmlAttributes(new { style = "height:748px; width:1022px; max-width: 100%;" })
-)
+{% if site.core %}
+```TagHelper
+   <kendo-scrollview name="scrollView" content-height="100%" template-id="scrollview-template" style="height:600px; width:890px; max-width: 100%;">
+        <items>
+            <scrollview-item>
+                <content><h1>One</h1></content>
+            </scrollview-item>
+            <scrollview-item>
+                <content><h1>Two</h1></content>
+            </scrollview-item>
+            <scrollview-item>
+                <content><h1>Three</h1></content>
+            </scrollview-item>
+        </items>
+    </kendo-scrollview>
+    <style>
+        h1 {
+            margin-top: 30%;
+            text-align:center;
+        }
+    </style>
 ```
+{% endif %}
 
 ### From the Data Source
 
@@ -51,7 +81,7 @@ You can initialize the ScrollView either [from HTML](#from-html) or [from a data
 
 Make sure that the template provides the `pageSize` of the data source. If `serverPaging` is enabled, the ScrollView will request the data in advance so it becomes available before it is required, thus improving user experience. The ScrollView uses virtualization when it is bound to a data source and it only has three pages at all times&mdash;the current, the previous, and the next.
 
-```
+```HtmlHelper
     @(Html.Kendo().ScrollView()
          .Name("scrollView")
          .ContentHeight("100%")
@@ -77,64 +107,85 @@ Make sure that the template provides the `pageSize` of the data source. If `serv
         </div>
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scrollview name="scrollView" content-height="100%" template-id="scrollview-template" style="height:600px; width:890px; max-width: 100%;">
+        <datasource custom-type="odata" page-size="3" server-paging="true">
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+            </transport>
+        </datasource>
+    </kendo-scrollview>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <div class="img-wrapper">
+            # for (var i = 0; i < data.length; i++) { #
+            <div>
+                <div style="width: 140px; height: 140px; background-image: #=setBackground(data[i].ProductID)#; background-repeat:no-repeat; background-size: cover;"></div>
+                <p>#= data[i].ProductName #</p>
+            </div>
+            # } #
+        </div>
+    </script>
+```
+{% endif %}
 
 The following example demonstrates how to fetch data from a Controller action.
 
-```View
-@(Html.Kendo().ScrollView()
-    .Name("scrollView")
-    .EnablePager(false)
-    .ContentHeight("100%")
-    .TemplateId("scrollview-template")
-     .DataSource(dataSource => dataSource
-        .Custom()
-        .Type("aspnetmvc-ajax")
-        .Transport(transport => transport
-          .Read(read => read.Action("GetScrollViewData", "Home"))
-        )
-        .Schema(s => s.Data("Data").Total("Total"))
-        .ServerPaging(true)
-        .PageSize(1))
-    .HtmlAttributes(new { style = "height:200px; width:300px" })
-)
+```HtmlHelper
+    @(Html.Kendo().ScrollView()
+        .Name("scrollView")
+        .EnablePager(false)
+        .ContentHeight("100%")
+        .TemplateId("scrollview-template")
+        .DataSource(dataSource => dataSource
+            .Custom()
+            .Type("aspnetmvc-ajax")
+            .Transport(transport => transport
+            .Read(read => read.Action("GetScrollViewData", "Home"))
+            )
+            .Schema(s => s.Data("Data").Total("Total"))
+            .ServerPaging(true)
+            .PageSize(1))
+        .HtmlAttributes(new { style = "height:200px; width:300px" })
+    )
 
-<script id="scrollview-template" type="text/x-kendo-template">
-    <p style="border: 2px solid blue; color: red;">#= data.SomeField #</p>
-</script>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        <p style="border: 2px solid blue; color: red;">#= data.SomeField #</p>
+    </script>
 ```
 ```Controller
-public class HomeController : Controller
-{
-    public ActionResult Index()
+    public class HomeController : Controller
     {
-        return View();
-    }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
-    [HttpPost]
-    public ActionResult GetScrollViewData([DataSourceRequest]DataSourceRequest request)
-    {
-        IEnumerable<MyModel> data = Enumerable.Range(1, 5).Select(x => new MyModel { SomeField = "item " + x + " from page " + request.Page });
-        {% if site.core %}
-        return Json(data.ToDataSourceResult(request));{% else %}
-        return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);{% endif %}
+        [HttpPost]
+        public ActionResult GetScrollViewData([DataSourceRequest]DataSourceRequest request)
+        {
+            IEnumerable<MyModel> data = Enumerable.Range(1, 5).Select(x => new MyModel { SomeField = "item " + x + " from page " + request.Page });
+            {% if site.core %}
+            return Json(data.ToDataSourceResult(request));{% else %}
+            return Json(data.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);{% endif %}
+        }
     }
-}
 ```
 ```Model
-public class MyModel
-{
-    public string SomeField { get; set; }
-}
+    public class MyModel
+    {
+        public string SomeField { get; set; }
+    }
 ```
 
 If you set the `PageSize` option to a larger value, you will need to use a loop in the template.
 
 ```
-<script id="scrollview-template" type="text/x-kendo-template">
-    # for (var i = 0; i < data.length; i++) { #
-        <p style="border: 2px solid blue; color: red;">#= data[i].SomeField #</p>
-    # } #
-</script>
+    <script id="scrollview-template" type="text/x-kendo-template">
+        # for (var i = 0; i < data.length; i++) { #
+            <p style="border: 2px solid blue; color: red;">#= data[i].SomeField #</p>
+        # } #
+    </script>
 ```
 
 ## Functionality and Features
@@ -163,6 +214,9 @@ To reference an existing Telerik UI ScrollView instance, use the [`jQuery.data()
 ## See Also
 
 * [Basic Usage of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/index)
+{% if site.core %}
+* [Basic Usage of the ScrollView TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scrollview/tag-helper)
+{% endif %}
 * [Using the API of the ScrollView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scrollview/api)
 * [ScrollView Server-Side API](/api/scrollview)
 * [ScrollView Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/scrollview)

@@ -27,13 +27,18 @@ The MultiViewCalendar supports the following keyboard shortcuts:
 | `Ctrl`+`Down Left`  | Navigates to the previous month.                 |
 | `Ctrl`+`Down Right` | Navigates to the next month.                     |
 
-```Razor
-
-        @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .Selectable("multiple")
-        )
+```HtmlHelper
+    @(Html.Kendo().MultiViewCalendar()
+        .Name("MultiViewCalendar")
+        .Selectable("multiple")
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiviewcalendar name="multiviewcalendar" selectable="multiple">        
+    </kendo-multiviewcalendar>
+```
+{% endif %}
 
 ## See Also
 

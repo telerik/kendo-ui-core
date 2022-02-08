@@ -16,15 +16,37 @@ Under the hood, the search panel uses filtering to show only the relevant record
 
 To enable the search panel functionality, include the `Search` option to the toolbar configuration.
 
+```HtmlHelper
     @(Html.Kendo().TreeList<CustomerViewModel>()
         .Name("treeList")
         .ToolBar(t => t.Search()) // Enable the Search panel.
         ...
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treelist name="treelist" height="550">
+        <toolbar>
+            <toolbar-button name="search"></toolbar-button>
+        </toolbar>
+    </kendo-treelist>
+```
+{% endif %}
+
 
 You can also customize which fields to search through the data when a value is entered in the search input.
 
+```HtmlHelper
     ...
     .Search(s=> { s.Field(c => c.ContactName); })
+```
+{% if site.core %}
+```TagHelper
+    ...
+    <kendo-treelist name="treelist " height="550">
+        <search fields="@(new string[] { "ContactName", "Country"})">
+        </search>
+```
+{% endif %}
 
 ## Known Limitations
 

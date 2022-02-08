@@ -1,7 +1,7 @@
 ---
 title: Razor Pages
 page_title: Configure a DataSource for the Telerik UI Chart for Remote Binding in Razor Pages.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Chart HtmlHelper for  {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) in Razor Pages."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Chart component for  {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) in Razor Pages."
 slug: htmlhelper_chart_razorpages_aspnetcore
 position: 5
 ---
@@ -18,7 +18,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 1. Configure the Read URL in the `DataSource`. The URL must refer to the method name in the `PageModel`:
 
-    ```
+    ```HtmlHelper
         .DataSource(ds => ds
             .Read(r => r.Url("/Chart/ChartRemoteBinding?handler=Read").Data("forgeryToken"))
         )
@@ -76,4 +76,5 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the TreeMap TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/treemap/tag-helper)
 * [Server-Side API](/api/chart)

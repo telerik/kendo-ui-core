@@ -1,9 +1,13 @@
 ---
 title: Pager Settings and Types
 page_title: Pager Settings and Types
-description: "Learn how to change the settings when working with the Telerik UI Pager HtmlHelper for {{ site.framework }}."
+description: "Learn how to change the settings when working with the Telerik UI Pager component for {{ site.framework }}."
 slug: settings_pager_aspnet
 ---
+
+# Pager Settings and Types
+
+You can select one of the two [Pager types](#types) and configure the Pager by using the available [settings](#settings).
 
 ## Types
 
@@ -16,7 +20,7 @@ The Pager is `Numeric()` by default. To configure the number of buttons that wil
 
 The following example shows how to enable the `Input()` pager type
 
-```
+```HtmlHelper
     @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("dataSource1")
         .Ajax(t=>t.Read(read => read.Action("People_Read", "Pager")).PageSize(20))
@@ -28,7 +32,6 @@ The following example shows how to enable the `Input()` pager type
         .Input(true)
         .Numeric(false)
     )
-
 ```
 
 ## Settings

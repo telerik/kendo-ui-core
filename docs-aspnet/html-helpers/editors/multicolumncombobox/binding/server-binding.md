@@ -1,7 +1,7 @@
 ---
 title:  Server Binding
 page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement server binding in the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/server-binding
 slug: htmlhelpers_multicolumncombobox_serverbinding_aspnetcore
 position: 4
@@ -11,7 +11,7 @@ position: 4
 
 Local data is the data that is available on the client when the MultiColumnComboBox is initialized.
 
-You can bind the MultiColumnComboBox locally on the server by passing the appropriate collection to the HTML helper `BindTo()` method.
+You can bind the MultiColumnComboBox locally on the server by passing the appropriate collection to the component's `BindTo()` method.
 
 1. Pass the data to the view through `ViewData`.
 
@@ -39,6 +39,7 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
 
 1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
@@ -51,6 +52,7 @@ You can bind the MultiColumnComboBox locally on the server by passing the approp
             })
             .BindTo((System.Collections.IEnumerable)ViewData["products"])
         )
+    ```
 
 ## See Also
 

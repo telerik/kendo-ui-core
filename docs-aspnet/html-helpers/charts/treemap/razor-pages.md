@@ -1,5 +1,5 @@
 ---
-title: The Telerik UI TreeMap in RazorPages
+title: TreeMap in RazorPages
 page_title: The Telerik UI TreeMap in RazorPages
 description: "Telerik UI TreeMap for {{ site.framework }} in a RazorPages application."
 slug: razorpages_treemap_aspnetcore
@@ -18,7 +18,7 @@ To bind the Telerik UI TreeMap to a data set within a RazorPage:
 
 1. Setup the Read URL in the `DataSource`. The URL should refer the name of the method in the `PageModel`. And the Model should contain the definition for Children:
 
-    ```
+    ```HtmlHelper
       .DataSource(dataSource => dataSource
           .Read(r => r.Url("/TreeMap/TreeMapBinding?handler=ReadOptional"))
           .Model(m => m.Children("Items"))

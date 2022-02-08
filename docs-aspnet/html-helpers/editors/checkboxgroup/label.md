@@ -14,7 +14,7 @@ If the CheckBoxGroup is bound to an array of strings, those will be used as both
 
 To customize the text of the label, use the [`label`](/api/javascript/ui/checkboxgroup/configuration/items.label) option.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")
         .Items(i =>
@@ -25,12 +25,25 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/checkbo
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-checkboxgroup name="checkboxgroup"
+                      input-name="checkboxItem">
+        <kendo-checkboxgroup-items>
+            <kendo-checkboxgroup-item value="one" label="First">
+            </kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="two" label="Second">
+            </kendo-checkboxgroup-item>
+        </kendo-checkboxgroup-items>
+    </kendo-checkboxgroup>
+```
+{% endif %}
 
 ## Configure the Label Position
 
 The labels of all checkboxes in the CheckBoxGroup could be rendered before or after each checkbox.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")
         .LabelPosition("after")
@@ -42,7 +55,14 @@ The labels of all checkboxes in the CheckBoxGroup could be rendered before or af
         })
     )
 ```
-
+{% if site.core %}
+```TagHelper
+    <kendo-checkboxgroup name="checkboxgroup"
+        input-name="checkboxItem"
+        label-position="CheckBoxGroupLabelPosition.Before">
+    </kendo-checkboxgroup>
+```
+{% endif %}
 ## See Also
 
 * [Server-Side API](/api/checkboxgroup)

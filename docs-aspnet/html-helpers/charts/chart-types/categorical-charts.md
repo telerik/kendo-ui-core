@@ -24,7 +24,7 @@ The axis orientation (horizontal or vertical) is inferred from the series type. 
 
 To set the category names, use the `CategoryAxis` object.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -39,7 +39,7 @@ To set the category names, use the `CategoryAxis` object.
 
 You can also bind the category name to a field of the data item.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
         .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Bar_Charts")))
@@ -63,7 +63,7 @@ To change the label position, set the [`Position`]({{ Position }}) option of the
 * When `Position` is set to `"ChartAxisLabelsPosition.Start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
 
 
-```
+```HtmlHelper
     .CategoryAxis(axis => axis
         .Categories("Jan", "Feb", "Mar", "Apr", "May", "Jun")
         .Labels(l => l.Position(ChartAxisLabelsPosition.Start))
@@ -76,7 +76,7 @@ Currently, the Chart supports only numeric value axes. To access the configurati
 
 The following example demonstrates how to configure a numeric axis with a minimum value of `0` and a maximum value of `100`.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -100,7 +100,7 @@ A Telerik UI Chart can have more than one value axis. The additional axes must h
 
 The following example demonstrates how to define the `miles` and `km` axes. To associate a series to a value axis, specify its name.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -132,7 +132,7 @@ The following example demonstrates how to define the `miles` and `km` axes. To a
 
 You can also control the arrangement of the value axes by specifying the values (category indices) at which they cross the category axis. In the following example, the first value axis crosses the category axis at the first category (leftmost). The second value axis crosses it at the last category.
 
-```
+```HtmlHelper
     .CategoryAxis(axis => axis
         .Categories("Mon", "Tue", "Wed")
         .AxisCrossingValue(0, 3)
@@ -143,5 +143,7 @@ You can also control the arrangement of the value axes by specifying the values 
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Bar Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/index)
+* [Basic Usage of the Bar Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/tag-helper)
 * [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
+* [Basic Usage of the Line Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
 * [Server-Side API](/api/chart)

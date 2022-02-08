@@ -22,7 +22,7 @@ To enable the adaptive rendering feature, set the [`Mobile`](https://docs.teleri
 
 > Important: With the mobile rendering, we recommend to set up `height` as well. Without setting an explicit height, every view of the grid might have a different height.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Grid<ProductViewModel>()
         .Name("grid")
         .Mobile()

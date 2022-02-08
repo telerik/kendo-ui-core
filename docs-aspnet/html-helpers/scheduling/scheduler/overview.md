@@ -1,27 +1,34 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Scheduler HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Scheduler component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/scheduler, /helpers/scheduling/scheduler/overview
 slug: htmlhelpers_scheduler_aspnetcore
 position: 1
 ---
 
-# Scheduler HtmlHelper Overview
+# Scheduler Overview
 
+{% if site.core %}
+The Telerik UI Scheduler TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Scheduler widget.
+{% else %}
 The [Telerik UI Scheduler HtmlHelper for {{ site.framework }}](https://www.telerik.com/aspnet-core-ui/scheduler) is a server-side wrapper for the Kendo UI Scheduler widget.
+{% endif %}
 
 The Scheduler displays a set of events, appointments, or tasks. It supports the display of scheduled events in different views&mdash;single days, whole weeks, or months, or as a list of tasks which need to be accomplished.
 
 > As of the R1 2017 release, exceptions are no longer automatically removed when the user edits a series. Changes that are made to specific occurrences are persisted during series editing. If a series contains an exception, the Scheduler renders a **Reset Series** button within the **Edit** dialog of the series which allows the user to reset the series by removing existing exceptions.
 
-* [Demo page for the Scheduler](https://demos.telerik.com/{{ site.platform }}/scheduler/index)
+* [Demo page for the Scheduler HtmlHelper](https://demos.telerik.com/{{ site.platform }}/scheduler/index)
+{% if site.core %}
+* [Demo page for the Scheduler TagHelper](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
+{% endif %}
 
 ## Initializing the Scheduler
 
-The following example demonstrates how to define the Scheduler by using the Scheduler HtmlHelper.
+The following example demonstrates how to define the Scheduler.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))
@@ -49,6 +56,11 @@ The following example demonstrates how to define the Scheduler by using the Sche
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-scheduler name="scheduler"></kendo-scheduler>
+```
+{% endif %}
 ```Controller
     public class SchedulerController : Controller
     {
@@ -110,9 +122,9 @@ The following example demonstrates how to define the Scheduler by using the Sche
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Scheduler HtmlHelper.
+The following example demonstrates the basic configuration of the Scheduler.
 
-```
+```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
         .CurrentTimeMarker(true)
@@ -163,6 +175,56 @@ The following example demonstrates the basic configuration of the Scheduler Html
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+        @{
+            var resources = new[]
+            {
+                new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                new { Text = "Bob", Value = 2, Color = "#51a0ed" },
+                new { Text = "Charlie", Value = 3, Color = "#56ca85" },
+            };
+        }
+        <kendo-scheduler name="scheduler" height="600" date="new DateTime(2013, 6, 13)" start-time="new DateTime(2013, 6, 13, 7, 0, 0, 0)" timezone="Etc/UTC">
+            <views>
+                    <view type="day"></view>
+                    <view type="workWeek" selected="true"></view>
+                    <view type="week"></view>
+                    <view type="month"></view>
+                    <view type="agenda"></view>
+                    <view type="timeline"></view>
+            </views>
+            <resources>
+                    <resource name="Owner" datacolorfield="Color" datatextfield="Text" datavaluefield="Value" field="OwnerID" bind-to="@resources">
+                    </resource>
+            </resources>
+            <scheduler-datasource>
+                    <transport>
+                    <read url="https://demos.telerik.com/kendo-ui/service/tasks" type="jsonp" />
+                    <update url="https://demos.telerik.com/kendo-ui/service/tasks/update" type="jsonp" />
+                    </transport>
+                    <schema data="Data" total="Total" errors="Errors">
+                    <scheduler-model id="TaskID">
+                            <fields>
+                            <field name="TaskID" type="number"></field>
+                            <field name="title" from="Title" type="string"></field>
+                            <field name="start" from="Start" type="date"></field>
+                            <field name="end" from="End" type="date"></field>
+                            <field name="description" from="Description" type="number"></field>
+                            <field name="recurrenceId" type="number" from="RecurrenceID"></field>
+                            <field name="recurrenceRule" type="string" from="RecurrenceRule"></field>
+                            <field name="recurrenceException" type="string" from="RecurrenceException"></field>
+                            <field name="OwnerID" type="number"></field>
+                            <field name="startTimezone" from="StartTimeZone" type="string"></field>
+                            <field name="endTimezone" from="EndTimeZone" type="string"></field>
+                            <field name="isAllDay" from="IsAllDay" type="boolean"></field>
+                            </fields>
+                    </scheduler-model>
+                    </schema>
+            </scheduler-datasource>
+        </kendo-scheduler>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -177,7 +239,7 @@ You can subscribe to all Scheduler events. For a complete example on basic Sched
 
 The following example demonstrates how to subscribe to the `dataBound` and `dataBinding` events.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))
@@ -218,5 +280,8 @@ To reference an existing Telerik UI Scheduler instance, use the [`jQuery.data()`
 ## See Also
 
 * [Basic Usage of the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler)
+{% if site.core %}
+* [Basic Usage of the Scheduler TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/scheduler/tag-helper)
+{% endif %}
 * [Using the API of the Scheduler HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/scheduler/api)
 * [Server-Side API](/api/scheduler)

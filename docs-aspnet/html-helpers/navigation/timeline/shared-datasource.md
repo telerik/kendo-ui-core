@@ -1,20 +1,20 @@
 ---
 title: Shared DataSource Binding
 page_title: Binding to a Shared DataSource
-description: "Learn how to bind the Telerik UI Timeline HtmlHelper for {{ site.framework }} widget to a shared data source."
+description: "Learn how to bind the Telerik UI Timeline component for {{ site.framework }} widget to a shared data source."
 slug: shared_datasource_timeline_aspnetcore
 position: 7
 ---
 
 # Binding to a Shared DataSource
 
-The Telerik UI Timeline HtmlHelper for {{ site.framework }} widget could be bound to a shared data source. Whenever a change external to the Timeline is present, the widget's data source and UI will be automatically updated.
+The Telerik UI Timeline for {{ site.framework }} widget could be bound to a shared data source. Whenever a change external to the Timeline is present, the widget's data source and UI will be automatically updated.
 
 For a runnable example, refer to the [demo on binding to a shared data source](https://demos.telerik.com/{{ site.platform }}/timeline/shared).
 
 The following example demonstrates how to bind two {{ site.product }} widgets to the same data source. Changes done from one of the widgets is automatically reflected in the data source and UI of the other widget.
 
-```
+```HtmlHelper
     @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.TimelineEventModel>()
         .Name("sharedDataSource")
         .Custom(dataSource => dataSource

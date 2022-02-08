@@ -1,7 +1,7 @@
 ---
 title: Axes Configuration
 page_title: Axes Configuration
-description: "Learn how to configure the axes in the Telerik UI Sparkline HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the axes in the Telerik UI Sparkline component for {{ site.framework }}."
 slug: axesconfig_sparklines_aspnetcore
 position: 3
 ---
@@ -15,7 +15,7 @@ position: 3
 
 # Axes Configuration
 
-The Sparkline HtmlHelper is a categorical (discrete) chart and has an implicit category and a value axis.
+The Sparkline is a categorical (discrete) chart and has an implicit category and a value axis.
 
 The axis orientation (horizontal or vertical) is inferred from the series type.
 
@@ -25,7 +25,7 @@ While category names are not visible by default, they are displayed in tooltips.
 
 The following example demonstrates how to use the `CategoryAxis` object to set the category names.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
         .Name("World")
         .Data(new double[] { 15.7, 16.7, 20, 23.5, 26.6 })
@@ -37,7 +37,7 @@ The following example demonstrates how to use the `CategoryAxis` object to set t
 
 You can also bind the category name to a field of the data item.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
         .Name("Sparkline")
         .Series(s => s.Bar(new object[] { new {
@@ -76,7 +76,7 @@ To set the base units in the Sparkline chart, use any of the following approache
 
 To determine a default base, use the smallest duration between categories.
 
-```
+```HtmlHelper
     .CategoryAxis(c => c
         .Categories(new DateTime[] { new DateTime(2005, 1, 1), new DateTime(2006, 1, 1) })
         // baseUnit is set to "years".
@@ -107,7 +107,7 @@ The following options are valid:
 
 If two or more categories fall within a base unit, its values are aggregated to display a single point.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
             .Name("Sparkline")
             .Series(s => s.Column(new int[] { 20, 40, 45, 30, 50 }))
@@ -129,7 +129,7 @@ The code from the previous example results in the following Sparkline chart. Not
 
 The following example demonstrates the Sparkline with its base unit changed to `"years"`.
 
-```
+```HtmlHelper
     .CategoryAxis(c => c
         .BaseUnit(ChartAxisBaseUnit.Years)
         .Categories(new DateTime[] {
@@ -148,7 +148,7 @@ The following example demonstrates a Sparkline with a grouped date category axis
 
 You can also change the aggregate function for each series.
 
-```
+```HtmlHelper
     .Series(s => s
         .Column(new int[] { 20, 40, 45, 30, 50 })
         .Aggregate(ChartSeriesAggregate.Avg))
@@ -172,7 +172,7 @@ Currently, the Sparkline supports only numeric value axes.
 
 To access the configuration options, use [`ValueAxis`]({{ ValueAxis }}). The following example configures a numeric axis with a minimum value of `0` and a maximum value of `100`.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
             .Name("Sparkline")
             .Series(s => s
@@ -188,7 +188,7 @@ To access the configuration options, use [`ValueAxis`]({{ ValueAxis }}). The fol
 
 You can configure each axis to display bands with different colors for predefined value ranges. The category index (zero based) is used as a value for the category axis.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
         .Name("temp-range")
         .Type(SparklineType.Bullet)

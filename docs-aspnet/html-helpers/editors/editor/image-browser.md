@@ -1,7 +1,7 @@
 ---
 title: Image Browser
 page_title: Editor Image Browser
-description: "Learn about the Image Browser component of the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn about the Image Browser component of the Telerik UI Editor component for {{ site.framework }}."
 previous_url: /helpers/editors/editor/image-browser
 slug: htmlhelpers_editor_image_browser_aspnetcore
 position: 6
@@ -15,20 +15,18 @@ The Editor also supports another way of picking an image by browsing a list of p
 
 To retrieve and upload the files and directories, the image browser needs a server-side implementation. To configure the image browser tool, use the [`ImageBrowser()`](/api/Kendo.Mvc.UI.Fluent/EditorBuilder#imagebrowsersystemactionkendomvcuifluenteditorimagebrowsersettingsbuilder) method. 
 
-The follwing example demonstrates how to set the ImageBrowser configuration of the Editor and a possible server-side implementation:
-
-```Razor
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .ImageBrowser(imageBrowser => imageBrowser
-        .Image("~/Content/UserFiles/Images/{0}")
-        .Read("Read", "ImageBrowser")
-        .Create("Create", "ImageBrowser")
-        .Destroy("Destroy", "ImageBrowser")
-        .Upload("Upload", "ImageBrowser")
-        .Thumbnail("Thumbnail", "ImageBrowser")
+```HtmlHelper
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .ImageBrowser(imageBrowser => imageBrowser
+            .Image("~/Content/UserFiles/Images/{0}")
+            .Read("Read", "ImageBrowser")
+            .Create("Create", "ImageBrowser")
+            .Destroy("Destroy", "ImageBrowser")
+            .Upload("Upload", "ImageBrowser")
+            .Thumbnail("Thumbnail", "ImageBrowser")
+        )
     )
-)
 ```
 {% if site.core %}
 ```ImageBrowserController
@@ -884,9 +882,9 @@ You can update all of these requests and responses through the [`ImageBrowser()`
 {% if site.core %}
 ## ImageBrowser in Razor Page scenario
 
-In order to set up the ImageBrowser of the Telerik UI Editor HtmlHelper for {{ site.framework }} component in Razor page scenario, you need to configure the `Read` , `Create`, `Update` and `Destroy` methods of the ImageBrowser `Transport` configuration. The URL in these methods should refer the name of the handler in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+In order to set up the ImageBrowser of the Telerik UI Editor for {{ site.framework }} component in Razor page scenario, you need to configure the `Read` , `Create`, `Update` and `Destroy` methods of the ImageBrowser `Transport` configuration. The URL in these methods should refer the name of the handler in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @(Html.Kendo().Editor()
             .Name("editor")
             .ImageBrowser(imageBrowser => imageBrowser

@@ -1,7 +1,7 @@
 ---
 title: Appearance
 page_title: Appearance
-description: "Learn the basics when working with the Telerik UI Loader HtmlHelper for {{ site.framework }} set its size, type and themeColor configurations."
+description: "Learn the basics when working with the Telerik UI Loader component for {{ site.framework }} set its size, type and themeColor configurations."
 slug: htmlhelpers_loader_aspnetcore_appearance
 position: 2
 ---
@@ -19,7 +19,7 @@ The available `types` values are:
 * `infinite-spinner`&mdash;Applies infinite-spinner animation on the Loader.
 * `converging-spinner`&mdash;Applies converging-spinner animation on the Loader.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Loader()
         .Name("pulsing")
         .Type(LoaderType.Pulsing)
@@ -53,7 +53,7 @@ The available `themeColor` values are:
 * `light`&mdash; Applies coloring based on light theme color.
 * `inverse`&mdash; Applies coloring based on inverted theme color.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Loader()
         .Name("Primary")
         .ThemeColor(LoaderThemeColor.Primary)
@@ -115,7 +115,7 @@ The available `size` values are:
 * `medium` (Default)
 * `large`
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Loader()
         .Name("loader-small")
         .Size(LoaderSize.Small)

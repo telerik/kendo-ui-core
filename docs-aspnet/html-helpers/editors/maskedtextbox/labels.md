@@ -22,13 +22,23 @@ The Label exposes a `content` property that sets the inner HTML of the label.
 
 The below example shows how to create a Label from a string.
 
+```HtmlHelper
     @(Html.Kendo().MaskedTextBox()
         .Name("MaskedTextBox")
         .Label(l => l.Content("Phone number"))
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-maskedtextbox name="PhoneNumber">
+        <maskedtextbox-label content="Phone Number" />
+    </kendo-maskedtextbox>
+```
+{% endif %}
 
 The below example shows how to create a Label from a function. The function context (available via the `this` keyword) will be set to the widget instance.
 
+```HtmlHelper
     @(Html.Kendo().MaskedTextBox()
             .Name("MaskedTextBox")
             .Label(l => l.ContentHandler("labelContentHandler"))
@@ -38,6 +48,19 @@ The below example shows how to create a Label from a function. The function cont
             return "Phone number"
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-maskedtextbox name="PhoneNumber">
+        <maskedtextbox-label content-handler="labelContentHandler" />
+    </kendo-maskedtextbox>
+    <script>
+        function labelContentHandler() {
+            return "Phone Number"
+        }
+    </script>
+```
+{% endif %}
 
 ## Floating Label
 
@@ -45,6 +68,7 @@ The Floating Label enables you to provide a floating label functionality to the 
 
 The following example demonstrates how to set a Floating Label for a MaskedTextBox.
 
+```HtmlHelper
     @(Html.Kendo().MaskedTextBox()
            .Name("MaskedTextBox")
            .Label(label =>
@@ -53,6 +77,14 @@ The following example demonstrates how to set a Floating Label for a MaskedTextB
                label.Floating(true);
            })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-maskedtextbox name="PhoneNumber">
+        <maskedtextbox-label content="Phone Number" floating="true" />
+    </kendo-maskedtextbox
+```
+{% endif %}
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 
@@ -64,3 +96,6 @@ You can overcome this behavior by manually invoking the `refresh` method of the 
 
 * [Server-Side MaskedTextBox API](/api/maskedtextbox)
 * [Using the API of the MaskedTextBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/api)
+{% if site.core %}
+* [Basic Usage of the MaskedTextBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/maskedtextbox/tag-helper)
+{% endif %}

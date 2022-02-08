@@ -17,7 +17,7 @@ If the Rating does not have a selected value, the label will not be displayed in
 
 The following example demonstrates how to use the default label.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -25,12 +25,17 @@ The following example demonstrates how to use the default label.
         .Value(3)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" min="1" max="6" value="3"></kendo-rating>
+```
+{% endif %}
 
 ## Customizing the Label
 
 To customize the text of the label, use the [`Label.TemplateId`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingLabelSettingsBuilder#templateidsystemstring) property. By default, the template automatically receives the `value` and `maxValue` in the data object which allows you to use those properties inside the template through [the Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -45,12 +50,25 @@ To customize the text of the label, use the [`Label.TemplateId`](https://docs.te
         </span>
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" min="1" max="6" value="3">
+        <label template-id="rating-label-template" />
+    </kendo-rating>
+
+    <script id="rating-label-template" type="text/x-kendo-template">
+        <span>
+            #: value # out of #: maxValue #
+        </span>
+    </script>
+```
+{% endif %}
 
 ## Disabling the Label
 
 Setting the [`Label`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#labelsystemstring) property to `false` prevents the label from being displayed.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -59,6 +77,13 @@ Setting the [`Label`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc
         .Label(false)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" min="1" max="6" value="3">
+        <label enabled="false" />
+    </kendo-rating>
+```
+{% endif %}
 
 ## See Also
 

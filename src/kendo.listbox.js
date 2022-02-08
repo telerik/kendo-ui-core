@@ -298,6 +298,7 @@ var __meta__ = { // jshint ignore:line
             var target = $(e.currentTarget);
             var oldTarget = that._target;
             var activeEl = kendo._activeElement();
+            var isContained = $.contains(that.wrapper[0], activeEl);
 
             if (oldTarget) {
                 oldTarget.removeClass(FOCUSED_CLASS);
@@ -307,7 +308,7 @@ var __meta__ = { // jshint ignore:line
             target.addClass(FOCUSED_CLASS);
             that._getList().attr("aria-activedescendant", target.attr(ID));
 
-            if (that._getList()[0] !== kendo._activeElement() && !isInputElement(activeEl)) {
+            if (that._getList()[0] !== kendo._activeElement() && (!isContained || !isInputElement(activeEl))) {
                 that.focus();
             }
         },

@@ -1,7 +1,7 @@
 ---
 title: Integration
 page_title: Integration
-description: "Integrating The Telerik UI Loader HtmlHelper for {{ site.framework }}."
+description: "Integrating The Telerik UI Loader component for {{ site.framework }}."
 slug: htmlhelpers_loader_aspnetcore_integration
 position: 3
 ---
@@ -13,7 +13,8 @@ The Loader component can be integrated in another component or it can be used as
 ## Loader in a Button
 
 The following example demonstrates how the Loader can be integrated in a button.
-```Razor
+
+```HtmlHelper
     @(Html.Kendo().Button()
         .Name("toggle")
         .Content(@<text>
@@ -47,7 +48,7 @@ The following example demonstrates how the Loader can be integrated in a button.
 
 The following example demonstrates how the Loader can be used as a building block in a Loading Panel.
 
-```dojo
+```HtmlHelper
     <button class='k-button'>Show Loading Panel</button>
     <div class="example-inner">
     <div class="k-loading-panel">

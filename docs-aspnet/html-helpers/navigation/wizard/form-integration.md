@@ -1,7 +1,7 @@
 ---
 title: Form Integration
 page_title: Form Integration
-description: "Get started with the Telerik UI Wizard HtmlHelper for {{ site.framework }} and learn how the Wizard integrates with the Telerik UI Form HtmlHelper for {{ site.framework }}."
+description: "Get started with the Telerik UI Wizard component for {{ site.framework }} and learn how the Wizard integrates with the Telerik UI Form component for {{ site.framework }}."
 slug: htmlhelpers_wizard_aspnetcore_form_integration
 position: 2
 ---
@@ -18,7 +18,7 @@ In order to facilitate the scenarios where Forms are integrated within the Wizar
 
 When the {{ site.product }} Wizard is initialized as a `<form>` element the Done button at the last Wizard step will act as a submit button. In this scenario, the Form DOM elements inside the {{ site.product }} Wizard will be rendered as `<div>` elements.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Wizard()
         .Name("wizard")
         .Tag("form")
@@ -58,7 +58,7 @@ When the {{ site.product }} Wizard is initialized as a `<form>` element the Done
 
 When the {{ site.product }} Wizard is initialized as a `<div>` element any forms initialized via the Wizard configuration option will behave as regular forms. If the Wizard contains multiple forms as part of its steps content and the requirement is to submit them separately a Submit button must be defined via the Form `ButtonsTemplate` configuration option. It is advisable to handle the Form submit event and submit the form data via Ajax as otherwise the page will reload and the Wizard will return in its initial state.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Wizard()
         .Name("wizard")
         .Tag("div")

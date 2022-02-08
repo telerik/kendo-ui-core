@@ -16,7 +16,7 @@ The orientation of the Stepper widget could be configured via the `orientation` 
 
 The following example demonstrates how to initialize a vertical Stepper.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Stepper()
         .Name("stepper")
         .Orientation(StepperOrientationType.Vertical)
@@ -28,6 +28,17 @@ The following example demonstrates how to initialize a vertical Stepper.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stepper name="stepper" orientation="@StepperOrientationType.Vertical">
+        <steps>
+            <step label="First"></step>
+            <step label="Second"></step>
+            <step label="Third"></step>
+        </steps>
+    </kendo-stepper>
+```
+{% endif %}
 
 ## Layout
 
@@ -35,7 +46,7 @@ By default both the label and indicator of each Step are displayed. The Stepper 
 
 The following example demonstrates how to initialize a Stepper with only indicator elements displayed.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Stepper()
         .Name("stepper")
         .Label(false)
@@ -48,6 +59,17 @@ The following example demonstrates how to initialize a Stepper with only indicat
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stepper name="stepper" label="false" indicator="true">
+        <steps>
+            <step label="First"></step>
+            <step label="Second"></step>
+            <step label="Third"></step>
+        </steps>
+    </kendo-stepper>
+```
+{% endif %}
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI OrgChart HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI OrgChart component for {{ site.framework }}."
 previous_url: /helpers/editors/orgchart/binding/ajax-binding
 slug: htmlhelpers_orgchart_ajaxbinding_aspnetcore
 position: 3
@@ -37,6 +37,7 @@ The following example demonstrates how to bind the OrgChart to remote data.
 
 1. Add an Ajax-bound OrgChart to the `Index` view.
 
+   ```HtmlHelper
         @(Html.Kendo().OrgChart<TelerikMvcApp1.Models.OrgChartEmployeeViewModel>()
                 .Name("orgchart")
                 .DataSource(dataSource => dataSource
@@ -52,6 +53,7 @@ The following example demonstrates how to bind the OrgChart to remote data.
                         })
                 )
         )
+   ```
     
 
 ## See Also

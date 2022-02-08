@@ -1,18 +1,18 @@
 ---
 title:  Razor Page
 page_title: Configure a DataSource for the Scheduler for Remote Binding in Razor Page.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Scheduler HtmlHelper for {{ site.framework }} in a Razor Page using CRUD Operations."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Scheduler component for {{ site.framework }} in a Razor Page using CRUD Operations."
 slug: htmlhelpers_scheduler_razorpage_aspnetcore
 position: 3
 ---
 
 # Razor Page
 
-This article describes how to configure a the DataSource of a Telerik UI Scheduler HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+This article describes how to configure a the DataSource of a Telerik UI Scheduler for {{ site.framework }} in a RazorPage scenario.
 
 In order to set up the Scheduler component bindings, you need to configure the `Create`,`Read`,`Update` and `Destroy` methods of its `DataSource` instance. The URL in this method should refer the name of the corresponding method in the PageModel. In this method, you can also pass additional parameters, such as antiforgery token (see `forgeryToken`). Note that the CRUD methods listed above make POST requests, thus the `OnPost()` handlers should be configured. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)        
+```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 

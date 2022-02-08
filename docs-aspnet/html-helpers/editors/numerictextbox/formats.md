@@ -12,7 +12,7 @@ The NumericTextBox accepts only numeric entries and its specific format defines 
 
 The following example demonstrates how to render a currency NumericTextBox.
 
-```
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
         .Name("currency")
         .Format("c")
@@ -21,7 +21,7 @@ The following example demonstrates how to render a currency NumericTextBox.
 
 The following example demonstrates how to render a percentage NumericTextBox.
 
-```
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
         .Name("percentage")
         .Format("p0")

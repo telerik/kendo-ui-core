@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 page_title: Common Mistakes
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to avoid and handle the most common performance mistakes."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to avoid and handle the most common performance mistakes."
 slug: performance_htmlhelpers_grid_aspnetcore
 position: 2
 ---
@@ -40,5 +40,5 @@ Hierarchical Grids are fast when the records for the child Grids in the `DetailT
 ## See Also
 
 * [Server-Side API](/api/grid)
-* [Rendering and Dimensions of the Grid HtmlHelper for {{ site.framework }}]({% slug width_grid_aspnetcore %})
-* [Adaptive Rendering of the Grid HtmlHelper for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})
+* [Rendering and Dimensions of the Grid component for {{ site.framework }}]({% slug width_grid_aspnetcore %})
+* [Adaptive Rendering of the Grid component for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})

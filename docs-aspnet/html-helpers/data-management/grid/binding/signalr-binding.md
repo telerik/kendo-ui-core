@@ -1,10 +1,10 @@
 ---
 title: SignalR Binding
 page_title: SignalR Binding
-description: "Learn the basics of SignalR Binding when working with the Grid HtmlHelper for {{ site.framework }}."
+description: "Learn the basics of SignalR Binding when working with the Grid component for {{ site.framework }}."
 slug: htmlhelpers_grid_aspnetcore_signalrbinding
 previous_url: /helpers/html-helpers/grid/signalr-binding
-position: 4
+position: 6
 ---
 
 # SignalR Binding
@@ -13,7 +13,7 @@ SignalR allows you to add real-time functionality to your Grid. SignalR takes ca
 
 You can use it with both the Telerik UI helpers for MVC and Core because they wrap the [Kendo UI for jQuery Grid](https://docs.telerik.com/kendo-ui/controls/data-management/grid/overview).
 
- For a runnable example, refer to the [demo on SignalR binding of the Grid HtmlHelper](https://demos.telerik.com/{{ site.platform }}/grid/signalr).
+ For a runnable example, refer to the [demo on SignalR binding of the Grid component](https://demos.telerik.com/{{ site.platform }}/grid/signalr).
 
 
 > As of the [{{ site.framework }} R2 2018 release](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-2.1), the suite provides SignalR support for its components.
@@ -174,7 +174,7 @@ The SignalR clients ship alongside the server components and are versioned to ma
 The next steps are to configure the Grid's DataSource Transport to connect to the SignalR Hub.
 Instruct the data source to use SignalR protocol for transmitting and operating with data in real time.
 
-```
+```HtmlHelper
 @(Html.Kendo().Grid<Core_Grid_CRUD.Models.OrderViewModel>()
                 .Name("grid")
                 .Columns(columns =>
@@ -249,7 +249,7 @@ function onPush(e) {
 }
 
 ```
-```Razor
+```HtmlHelper
 @(Html.Kendo().Notification()
         .Name("notification")
         .Width("100%")

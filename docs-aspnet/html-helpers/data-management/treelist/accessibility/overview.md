@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Accessibility
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: htmlhelpers_treelist_aspnetcore_accessibility
 position: 1
 ---
@@ -32,7 +32,7 @@ For more information, refer to:
 
 ## See Also
 
-* [WCAG 2.1 Support by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/index)
-* [Keyboard Navigation by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/keyboard-navigation)
-* [Keyboard Navigation by the TreeList HtmlHelper for {{ site.framework }}]({% slug htmlhelpers_treelist_aspnetcore_keynav %})
+* [WCAG 2.1 Support by the TreeList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/index)
+* [Keyboard Navigation by the TreeList for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/keyboard-navigation)
+* [Keyboard Navigation by the TreeList for {{ site.framework }}]({% slug htmlhelpers_treelist_aspnetcore_keynav %})
 * [Accessibility Compliance in {{ site.product }}]({% slug compliance_accessibility %})

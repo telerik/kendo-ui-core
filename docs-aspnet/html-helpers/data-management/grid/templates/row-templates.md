@@ -17,10 +17,12 @@ For runnable examples, refer to:
 
 The following example demonstrates how to use a string row template which generates two columns. The outermost HTML element in the template must be a table row (`<tr>`). That table row must have the `uid` data attribute set to `#= uid #`. The grid uses the `uid` data attribute to determine the data to which a table row is bound to.
 
+```HtmlHelper
         .ClientRowTemplate("<tr data-uid='#=data.uid#'>" +
             "<td>#=data.OrderID#</td>" +
             "<td><strong>#=ShipCountry #</strong></td>" +
         "</tr>")
+```
 
 ![A Grid with an applied row template](../row-template.png)
 

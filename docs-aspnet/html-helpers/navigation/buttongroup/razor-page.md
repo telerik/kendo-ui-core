@@ -1,18 +1,18 @@
 ---
 title:  Razor Page
 page_title: Configure the ButtonGroup in a Razor Page.
-description: "An example on how to configure the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }} in a Razor Page."
+description: "An example on how to configure the Telerik UI ButtonGroup component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_buttongroup_razorpage_aspnetcore
 position: 6
 ---
 
 # Razor Page
 
-This article describes how to configure the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }} in a RazorPages scenario.
+This article describes how to configure the Telerik UI ButtonGroup for {{ site.framework }} in a RazorPages scenario.
 
 See the ButtonGroup configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
 @page
 @model Telerik.Examples.RazorPages.Pages.ButtonGroup.ButtonGroupIndexModel
 @{

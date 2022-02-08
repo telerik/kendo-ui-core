@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn about the accessibility support it provides through its keyboard navigation functionality."
 slug: htmlhelpers_treelist_aspnetcore_keynav
 position: 2
 ---
@@ -16,11 +16,13 @@ The TreeList supports its keyboard navigation functionality through the `Navigat
 
 The following example demonstrates how to enable the key navigation in the TreeList.
 
+```HtmlHelper
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
         /* Other configuration. */
         .Navigatable()
     )
+```
 
 The keyboard navigation of the TreeList works by listening to the `keydown` events on the wrapper element of the helper. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused TreeList cell and not with the focused element of the browser. If the data cells of the TreeList contain hyperlinks that have to be activated through the keyboard:
 

@@ -1,17 +1,27 @@
 ---
 title: Overview
 page_title: StockChart Overview
-description: "Learn the basics when working with the Telerik UI StockChart HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI StockChart component for {{ site.framework }}."
 previous_url: /helpers/charts/stockchart/overview
 slug: overview_stockcharthelper_aspnetcore
 position: 1
 ---
 
-# StockChart HtmlHelper Overview
+# StockChart Overview
 
+{% if site.core %}
+The Telerik UI StockChart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI StockChart widget.
+{% else %}
 The Telerik UI StockChart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI StockChart widget.
+{% endif %}
 
 The StockChart is a specialized control visualizing the price movement of any financial instrument over a certain period of time. StockCharts include extensive touch support and a navigator pane for easy browsing of extended time periods. Generally, StockCharts extend the Telerik UI Chart and share most of its features.
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
+
+To see the component in action, check the examples:
 
 * [Demo page for the StockChart](https://demos.telerik.com/{{ site.platform }}/financial/index)
 
@@ -31,7 +41,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
   The following example demonstrates how to add a new action method which returns data to populate the StockChart.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
             .Name("stockChart")
             .Title("The Boeing Company (NYSE:BA)")
@@ -91,7 +101,7 @@ The UI for ASP.NET StockChart makes Ajax requests when it is bound to a data sou
 
     The following example demonstrates how to create the main and the navigator data series.
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
             .Name("stockChart")
             .Title("The Boeing Company (NYSE:BA)")
@@ -122,7 +132,7 @@ You can subscribe to all StockChart [events](/api/Kendo.Mvc.UI.Fluent/ChartEvent
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
     	.Name("stockChart")
     	.Title("The Boeing Company (NYSE:BA)")
@@ -157,7 +167,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```
+```HtmlHelper
     @(Html.Kendo().StockChart<Kendo.Mvc.Examples.Models.StockDataPoint>()
     	.Name("stockChart")
     	.Title("The Boeing Company (NYSE:BA)")

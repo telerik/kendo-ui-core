@@ -1,7 +1,7 @@
 ---
 title: Localization
 page_title: Localization
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
 slug: localization_aspnetcore_grid
 position: 3
 ---
@@ -30,6 +30,7 @@ To use the community-sources Resources files, override the executing context and
 
 1. Match the client-side culture. By including the Kendo UI culture scripts, the number formats, the week and month names, the date and time formats, and so on will match the server-side culture and prevent validation errors. The culture scripts are generated from the Windows 10 and .NET 4.7 server-side culture definitions and match them by design.
 
+    ```HtmlHelper
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/cultures/kendo.culture.fr-FR.min.js">
         <!-- include the call to the kendo.culture() method before any widgets are initialized -->
 
@@ -38,11 +39,13 @@ To use the community-sources Resources files, override the executing context and
         @(Html.Kendo().Grid<OrderViewModel>()
             /* grid definition */
         )
+    ```
 
 ## Toolbar Messages
 
 The following example demonstrates how to implement the custom translation of the toolbar messages in the Grid by using the `Toolbar.[Command].Text()` method.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
             .ToolBar(tools=>
             {
@@ -51,12 +54,13 @@ The following example demonstrates how to implement the custom translation of th
                 tools.Save().Text("Custom Save Changes button text");
                 tools.Create().Text("Custom Create button text");
             })
-
+    ```
 
 ## Menu Messages
 
 The following example demonstrates how to implement the message translation of the column menu in the Grid by using the `ColumnMenu.Messages()` method.
 
+    ```HtmlHelper
         .ColumnMenu(colMenu=>colMenu.Messages(messages=> {
                 messages.SortAscending("Custom Sort Asc Message");
                 messages.SortDescending("Custom Sort Asc Message");
@@ -65,11 +69,13 @@ The following example demonstrates how to implement the message translation of t
                 messages.Lock("Custom Column Lock message");
             })
         )
+    ```
 
 ## Command Messages
 
 The following example demonstrates how to implement the translation of the column command messages in the Grid by using the command `Columns.[Command].Text()` method.
 
+    ```HtmlHelper
         .Columns(columns =>
         {
             columns.Bound(f => f.OrderID).Width(200);
@@ -80,11 +86,13 @@ The following example demonstrates how to implement the translation of the colum
                 command.Destroy().Text("Custom Destroy button text");
             });
         })
+    ```
 
 ## Filter Messages
 
 The following example demonstrates how to implement the translations of the filter menu and operator messages in the Grid by using the `Filterable.Messages()` and `Filterable.Operators.For[Type]()` methods.
 
+    ```HtmlHelper
   	    .Filterable(filterable => {
             filterable.Messages(messages =>
             {
@@ -103,22 +111,26 @@ The following example demonstrates how to implement the translations of the filt
                 });
             });
         })
+    ```
 
 ## Group Header Messages
 
 The following example demonstrates how to implement the translation for the group header messages in the Grid by using the `Groupable.Messages.Empty()` method.
 
+    ```HtmlHelper
         .Groupable(groupable=> {
             groupable.Messages(messages =>
             {
                 messages.Empty("My Drag Here to group by column message");
             });
         })
+    ```
 
 ## Pager Messages
 
 The following example demonstrates how to implement the translations of the pager messages in the Grid. For more information, refer to the [`messages`](https://docs.telerik.com/kendo-ui/api/javascript/ui/pager/configuration/messages) API reference.
 
+    ```HtmlHelper
         .Pageable(pageable=> {
             pageable.Refresh(true);
             pageable.Messages(messages => {
@@ -129,6 +141,7 @@ The following example demonstrates how to implement the translations of the page
                 /* and others */
             });
         })
+    ```
 
 ## See Also
 

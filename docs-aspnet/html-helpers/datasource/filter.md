@@ -1,7 +1,7 @@
 ---
 title: Filtering
 page_title: DataSource Filtering
-description: "Learn how to set the initial filter options in the DataSource HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the initial filter options in the DataSource component for {{ site.framework }}."
 slug: htmlhelper_datasourcefilter
 ---
 
@@ -11,15 +11,17 @@ To request filtered data on initial load, configure the filters with the [`Filte
 
 * The `Filter` method sets the initial filters.
 
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-        .Filter(filters =>
-        {
-            //Show products whose ProductName property contains a "C".
-            filters.Add(product => product.ProductName).Contains("C");
-            //Show products whose UnitsInStock is greater than 10.
-            filters.Add(product => product.UnitsInStock).IsGreaterThan(10);
-        })
+```HtmlHelper
+    .Ajax()
+    .Read(read => read.Action("Products_Read", "Home"))
+    .Filter(filters =>
+    {
+        //Show products whose ProductName property contains a "C".
+        filters.Add(product => product.ProductName).Contains("C");
+        //Show products whose UnitsInStock is greater than 10.
+        filters.Add(product => product.UnitsInStock).IsGreaterThan(10);
+    })
+```
 
 ## See Also
 

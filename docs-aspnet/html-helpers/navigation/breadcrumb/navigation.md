@@ -12,13 +12,21 @@ The `Navigational`configuration determines whether automatic navigation will be 
 
 The below example demonstrates the automatic navigation:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Breadcrumb()
         .Name("breadcrumb")
         .BindToLocation(true)
         .Navigational(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-breadcrumb name="breadcrumb"
+                        bindToLocation="true"
+                        navigational="true">    
+    </kendo-breadcrumb>
+```
+{% endif %}
 
 The `BindToLocation` configuration sets the value ot the widget to the current url (the location object). In addition, that url will be added to the `href` attribute of the Breadcrumb items through the `Navigational` configuration.
 

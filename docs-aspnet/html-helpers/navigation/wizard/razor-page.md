@@ -1,14 +1,14 @@
 ---
 title:  Razor Page
 page_title: Configure a Wizard in a Razor Page.
-description: "An example on how to configure the Telerik UI Wizard HtmlHelper for {{ site.framework }} in a Razor Pages."
+description: "An example on how to configure the Telerik UI Wizard component for {{ site.framework }} in a Razor Pages."
 slug: htmlhelpers_wizard_razorpage_aspnetcore
 position: 5
 ---
 
 # Razor Page
 
-This article describes how to configure the Telerik UI Wizard HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+This article describes how to configure the Telerik UI Wizard for {{ site.framework }} in a RazorPage scenario.
 
 ## Standard Submit
 
@@ -18,7 +18,7 @@ As POST request will be sent to the server antiforgery token needs to be added. 
 
 See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -128,7 +128,7 @@ When the Wizard is submitted with ajax, the default done event of the component 
 
 See the implementation details in the example below, where the JSON errors are appended to the validation summary and it is toggled it in the ajax success and error callbacks. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 

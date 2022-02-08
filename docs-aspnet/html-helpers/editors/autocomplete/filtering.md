@@ -1,7 +1,7 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Learn how the data filtering in the Telerik UI AutoComplete HtmlHelper for {{ site.framework }} works."
+description: "Learn how the data filtering in the Telerik UI AutoComplete component for {{ site.framework }} works."
 slug: htmlhelpers_autocomplete_filtering_aspnetcore
 position: 5
 ---
@@ -23,7 +23,7 @@ To configure the {{ site.product_short }} AutoComplete for Server Filtering:
 
 The following example demonstrates how to configure AutoComplete for Server Filtering.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
           .Name("products")
           .DataTextField("ProductName")
@@ -76,7 +76,7 @@ The following example demonstrates how to configure AutoComplete for Server Filt
 
 For smaller sets of data, the {{ site.product_short }} AutoComplete also supports Client Filtering. To configure it, set the `ServerFiltering` property to `false`. This way the AutoComplete dataset will be filtered on the client without sending additional requests to a remote endpoint.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
           .Name("products")
           .DataTextField("ProductName")

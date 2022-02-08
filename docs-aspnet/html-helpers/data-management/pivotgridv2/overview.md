@@ -30,16 +30,26 @@ To configure the PivotGridV2 for Ajax binding to an **Adventure Works** cube tha
 1. Create a new {{ site.framework }} application. If you have the [{{ site.product }} Visual Studio Extensions]({% slug {{ VSExt }} %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGridV2`. If you decide not to use the {{ site.product }} Visual Studio Extensions, follow the steps from the [getting started article]({% slug {{ GettingStarted }} %}) to add {{ site.product }} to the application.
 1. Add a PivotGridV2 to the `Index` view.
 
-    ```
+    ```HtmlHelper
+         @(Html.Kendo().PivotConfiguratorV2()
+            .Name("configurator")
+            .Filterable(true)
+            .Sortable()
+            .Height(570)
+        )
+
         @(Html.Kendo().PivotGridV2()
             .Name("pivotgridv2")
+            .ColumnWidth(200)
+            .Height(570)
+            .Configurator("#configurator")
             .DataSource(dataSource => dataSource.
                 Xmla()
                 .Columns(columns => {
                     columns.Add("[Date].[Calendar]").Expand(true);
-                    columns.Add("[Geography].[City]");
+                    columns.Add("[Product].[Category]");
                 })
-                .Rows(rows => rows.Add("[Product].[Product]"))
+                .Rows(rows => rows.Add("[Geography].[City]"))
                 .Measures(measures => measures.Values(new string[]{"[Measures].[Reseller Freight Cost]"}))
                 .Transport(transport => transport
                     .Connection(connection => connection
@@ -55,6 +65,29 @@ To configure the PivotGridV2 for Ajax binding to an **Adventure Works** cube tha
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-pivotdatasourcev2 type=@(PivotDataSourceType.Xmla) name="pivotSource">
+            <columns>
+                <pivot-datasourcev2-column name="[Date].[Calendar]" expand="true"></pivot-datasourcev2-column>
+                <pivot-datasourcev2-column name="[Product].[Category]"></pivot-datasourcev2-column>
+            </columns>
+            <rows>
+                <row name="[Geography].[City]"></row>
+            </rows>
+            <schema type="xmla"/>
+            <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
+            <transport>
+                <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+                <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
+            </transport>
+        </kendo-pivotdatasourcev2>
+        <kendo-pivotconfiguratorv2 name="configurator" datasource-id="pivotSource">
+        </kendo-pivotconfiguratorv2>
+        <kendo-pivotgridv2 name="pivotgridv2" datasource-id="pivotSource">
+        </kendo-pivotgridv2>
+    ````
+    {% endif %}
 
 1. Build and run the application.
 

@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Learn the basics about binding the Telerik UI Chart HtmlHelper for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
+description: "Learn the basics about binding the Telerik UI Chart component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) to data."
 previous_url: /helpers/html-helpers/charts/chart/data-binding, /helpers/charts/data-binding
 slug: htmlhelpers_charts_databinding_aspnetcore
 position: 2
@@ -25,6 +25,7 @@ You can specify the data points of the Charts as part of the series definitions.
 
 > To keep the Chart consistent, all series have to contain the same number of points in an order that matches the order of the categories which are declared in `CategoryAxis`.
 
+```HtmlHelper
 	@(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -44,11 +45,13 @@ You can specify the data points of the Charts as part of the series definitions.
             .AxisCrossingValue(-10)
         )
 	)
+```
 
 ### Binding Scatter Series to Inline Data
 
 [Scatter series]({% slug htmlhelpers_scattercharts_aspnetcore %}) include the two-dimensional Scatter and ScatterLine series. Each data point in the series has to be an array which contains an X and a Y value.
 
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Rainfall - Wind Speed")
@@ -84,11 +87,13 @@ You can specify the data points of the Charts as part of the series definitions.
             .Max(25)
         )
     )
+```
 
 ### Binding to Arrays of Objects
 
 A more flexible alternative is to provide the series with an array of objects. This enables you to map each value to the corresponding series field which is useful for series that have both numeric and string fields in a single data point such as Pie, Donut, Bubble, and so on.
 
+```HtmlHelper
     @(Html.Kendo().Chart()
       .Name("chart")
       .Legend(legend => legend
@@ -117,6 +122,7 @@ A more flexible alternative is to provide the series with an array of objects. T
           .Template("#= category # (#= series.name #): #= value #%")
       )
     )
+```
 
 ## Local Data
 
@@ -161,7 +167,7 @@ You can bind the Chart to a data set in the view model or to items that are stor
         public string Country { get; set; }
     }
 ```
-```tab-Razor
+```HtmlHelper
     @model IEnumerable<LocalBindingExample.Models.InternetUsers>
 
     @(Html.Kendo().Chart(Model)
@@ -240,33 +246,33 @@ To bind to remote data by using the DataSource component:
 
 1. In the view, configure the Chart to use the action method that you created.
 
-    ```tab-Razor
-    @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
-        .Name("chart")
-        .Title("Spain electricity production (GWh)")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Top)
+    ```HtmlHelper
+        @(Html.Kendo().Chart<RemoteBindingExample.Models.ElectricityProduction>()
+            .Name("chart")
+            .Title("Spain electricity production (GWh)")
+            .Legend(legend => legend
+                .Position(ChartLegendPosition.Top)
+            )
+            .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
+            .Series(series => {
+                series.Line(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
+                series.Line(model => model.Hydro).Name("Hydro").CategoryField("Year");
+                series.Line(model => model.Wind).Name("Wind").CategoryField("Year");
+            })
+            .CategoryAxis(axis => axis
+                .Labels(labels => labels.Rotation(-90))
+                .Crosshair(c => c.Visible(true))
+            )
+            .ValueAxis(axis => axis.Numeric()
+                .Labels(labels => labels.Format("{0:N0}"))
+                .MajorUnit(10000)
+            )
+            .Tooltip(tooltip => tooltip
+                .Visible(true)
+                .Shared(true)
+                .Format("{0:N0}")
+            )
         )
-        .DataSource(ds => ds.Read(read => read.Action("_SpainElectricityProduction", "Line_Charts")))
-        .Series(series => {
-            series.Line(model => model.Nuclear).Name("Nuclear").CategoryField("Year");
-            series.Line(model => model.Hydro).Name("Hydro").CategoryField("Year");
-            series.Line(model => model.Wind).Name("Wind").CategoryField("Year");
-        })
-        .CategoryAxis(axis => axis
-            .Labels(labels => labels.Rotation(-90))
-            .Crosshair(c => c.Visible(true))
-        )
-        .ValueAxis(axis => axis.Numeric()
-            .Labels(labels => labels.Format("{0:N0}"))
-            .MajorUnit(10000)
-        )
-        .Tooltip(tooltip => tooltip
-            .Visible(true)
-            .Shared(true)
-            .Format("{0:N0}")
-        )
-    )
     ```
 
 1. (Optional) Configure a Custom DataSource.
@@ -279,7 +285,7 @@ To bind to remote data by using the DataSource component:
             return Json(productService.Read().ToDataSourceResult(request));
         }
     ```
-    ```tab-Razor
+    ```HtmlHelper
         @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("chart")
             .Title("Product Prices")
@@ -311,4 +317,5 @@ To bind to remote data by using the DataSource component:
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

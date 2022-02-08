@@ -1,7 +1,7 @@
 ---
 title: Hierarchy
 page_title: Hierarchy
-description: "Find out how to create an item hierarchy using the Telerik UI Drawer HtmlHelper for {{ site.framework }}."
+description: "Find out how to create an item hierarchy using the Telerik UI Drawer component for {{ site.framework }}."
 slug: hierarchy_drawer_aspnetcore
 position: 6
 ---
@@ -16,7 +16,7 @@ To utilize the hierarchy functionality of the Telerik UI Drawer:
 
 1. Add list elements with data-role attribute `drawer-item` and class `hidden` to the drawer's `Template` configuration.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Drawer()
             .Name("drawer")
             .Template(@"
@@ -38,7 +38,7 @@ To utilize the hierarchy functionality of the Telerik UI Drawer:
 
 1. Add the `ItemClick` event handler to the drawer's configuration.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Drawer()
             .Name("drawer")
             .Events(x => x.ItemClick("onItemClick"))

@@ -15,7 +15,7 @@ By default, the ListBox is set into a single-selection mode.
 
 To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Multiple` to its settings. When selected, multiple selected items move together, that is, the selected items are transferred to another Telerik UI ListBox together or reordered as a set among other items.
 
-```
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .DataTextField("ContactName")
@@ -50,6 +50,20 @@ To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Mul
         .BindTo(new List<CustomerViewModel>())
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    <kendo-listbox name="listbox" datatextfield="ProductName" datavaluefield="ProductID">
+        <datasource>
+            <transport>
+                <read datatype="jsonp" url="https://demos.telerik.com/kendo-ui/service/Products" />
+            </transport>
+        </datasource>
+        <toolbar position="ListBoxToolbarPosition.Right"
+                    tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
+    </kendo-listbox>
+```
+{% endif %}
 
 ## Reordering of Selections
 

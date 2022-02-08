@@ -1,7 +1,7 @@
 ---
 title: Virtualization
 page_title: Column Virtualization
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to enable its column virtualization."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable its column virtualization."
 slug: columnvirtualization_aspnet_grid
 ---
 
@@ -13,22 +13,36 @@ The Grid provides a built-in option for virtualizing its columns. To enable it, 
 
 To enable virtualized columns:
 
-```
+```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Scrollable(s=>s.Virtual(GridVirtualizationMode.Columns))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="550">
+        <scrollable virtual=@("columns")/>
+    </kendo-grid>
+````
+{% endif %}
 
 To enable both virtualized columns and rows:
 
-```
+```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Scrollable(s=>s.Virtual(GridVirtualizationMode.RowsAndColumns))
     )
 
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="550">
+        <scrollable virtual=@("rows, columns")/>
+    </kendo-grid>
+````
+{% endif %}
 
 ## See Also
 

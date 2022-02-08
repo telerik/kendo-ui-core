@@ -13,15 +13,16 @@ The {{ site.product }} FileManager provides two inbuilt views for content visual
 You can switch between views from the Toolbar button group.
 
 ## Grid View
+
 This view is achieved with the {{ site.product }} Grid and in renders the files in a tabular manner (see Image1 below). That said, you can control the configuration of this view trough the `views.grid` object of the FileManager (see example below). 
 
-        
-        @(Html.Kendo().FileManager()
-            .Name("filemanager")
-            .Views(v => v.Grid(grid => grid.Columns(cols => cols.Add().Field(....))))
-        
-        )
-        
+```HtmlHelper
+    @(Html.Kendo().FileManager()
+        .Name("filemanager")
+        .Views(v => v.Grid(grid => grid.Columns(cols => cols.Add().Field(....))))
+    
+    )
+```
 
 **Image1: GridView type in FileManager:**
 
@@ -31,13 +32,31 @@ This view is achieved with the {{ site.product }} Grid and in renders the files 
 
 The List view is implemented with the help of the {{ site.product }} ListView component. The content in this view is rendered as a list of thumbnails, representing the files. You can control the configuration of this view trough the `views.list` object of the FileManager. 
 
-        
-        @(Html.Kendo().FileManager()
-            .Name("filemanager")
-            .Views(v=>v.List(list=>list.TemplateId("...")))
-        
-        )
-        
+```HtmlHelper
+    @(Html.Kendo().FileManager()
+        .Name("filemanager")
+        .Views(v=>v.List(list=>list.TemplateId("...")))
+    
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-filemanager name="filemanager" upload-url="@Url.Action("Upload", "FileManagerData")">
+        <views>
+            <list template-id="myTemplateID"/>
+        </views>
+        <filemanager-datasource>
+            <transport>
+                <read url="@Url.Action("Read", "FileManagerData")" />
+                <create url="@Url.Action("Destroy", "FileManagerData")" />
+                <destroy url="@Url.Action("Create", "FileManagerData")" />
+                <update url="@Url.Action("Update", "FileManagerData")" />
+            </transport>
+        </filemanager-datasource>
+    </kendo-filemanager>
+```
+{% endif %}
+
 **Image2: ListView type in FileManager:** 
 
 <img src="listview.png">

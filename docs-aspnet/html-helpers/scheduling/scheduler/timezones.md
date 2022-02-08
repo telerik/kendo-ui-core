@@ -1,7 +1,7 @@
 ---
 title: Timezones
 page_title: Timezones
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure its timezone."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its timezone."
 slug: htmlhelpers_scheduler_timezones_aspnetcore
 position: 5
 ---
@@ -21,7 +21,7 @@ To set a timezone to the Scheduler, set the `timezone` option. `timezone` indica
 
 The following example demonstrates how to set `"Etc/UTC"` timezone to the Scheduler.
 
-```
+```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.MeetingViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))

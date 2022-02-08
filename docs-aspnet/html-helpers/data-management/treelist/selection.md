@@ -1,7 +1,7 @@
 ---
 title: Selection
 page_title: Selection
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn how to configure its select functionality."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to configure its select functionality."
 slug: htmlhelpers_treelist_selection
 position: 7
 ---
@@ -21,7 +21,7 @@ The Kendo UI Treelist exposes different modes of row selection:
 
 To enable the selection functionality of the TreeList, set the `Selectable` option to `true`. As a result, the default single-row selection functionality will be applied.
 
-```
+```HtmlHelper
     .Selectable(true)
 ```
 
@@ -29,12 +29,12 @@ To enable the selection functionality of the TreeList, set the `Selectable` opti
 
 To enable checkbox selection, add a column to the `columns` collection of the TreeList and set the `Selectable` option to `true`:
  
-```
+```HtmlHelper
     columns.Add().Selectable(true);
 ```
 In order to select or deselect all of the child items of the currently selected row, enable the `includeChildren` option:
 
-```
+```HtmlHelper
     columns.Add().Selectable(true).IncludeChildren();
 ```
 

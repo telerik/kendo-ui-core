@@ -1,7 +1,7 @@
 ---
 title: Disabled Cells
 page_title: Spreadsheet Disabled Cells
-description: "Learn how to enable and disable cells for the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Learn how to enable and disable cells for the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_disabled_cells_aspnetcore
 position: 7
 ---
@@ -14,24 +14,24 @@ The Telerik UI Spreadsheet for {{ site.framework }} allows you to control the en
 
 You can set the state of a cell during the initialization of the Spreadsheet for {{ site.framework }} by using the [`.Enable()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetRowCellBuilder#enablesystemboolean) configuration option:
 
-```Razor
-@(Html.Kendo().Spreadsheet()
-    .Name("spreadsheet")
-    .Sheets(sheets => {
-        sheets.Add()
-            .Name("Sheet1")
-            .Rows(rows => {
-                rows.Add().Cells(cells => {
-                    cells.Add()
-                        .Value("Enabled Cell");
+```HtmlHelper
+    @(Html.Kendo().Spreadsheet()
+        .Name("spreadsheet")
+        .Sheets(sheets => {
+            sheets.Add()
+                .Name("Sheet1")
+                .Rows(rows => {
+                    rows.Add().Cells(cells => {
+                        cells.Add()
+                            .Value("Enabled Cell");
 
-                    cells.Add()
-                        .Value("Disabled Cell")
-                        .Enable(false);
+                        cells.Add()
+                            .Value("Disabled Cell")
+                            .Enable(false);
+                    });
                 });
-            });
-        })
-)
+            })
+    )
 ```
 
 ## Set Cell State after Initialization

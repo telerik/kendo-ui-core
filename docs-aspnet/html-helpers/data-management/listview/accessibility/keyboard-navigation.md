@@ -8,13 +8,13 @@ position: 6
 
 # Keyboard Navigation
 
-By default, the keyboard navigation of the ListView HtmlHelper is disabled.
+By default, the keyboard navigation of the ListView component is disabled.
 
 The ListView supports its keyboard navigation functionality through the `Navigatable` option. When set to `true`, you can initially select an item and then move within the ListView by using the `Arrow` keys. The navigation occurs at item level regardless of what the selectable mode is. To select the current item, press `Space`.
 
 The following example demonstrates how to enable the key navigation in the ListView.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.

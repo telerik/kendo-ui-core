@@ -11,12 +11,18 @@ position: 7
 
 In the MultiViewCalendar, you can render a column which displays the number of the weeks within the current `month` view.
 
-```Razor
-      @(Html.Kendo().MultiViewCalendar()
-          .Name("MultiViewCalendar")
-          .WeekNumber(true)
-      )
+```HtmlHelper
+    @(Html.Kendo().MultiViewCalendar()
+        .Name("MultiViewCalendar")
+        .WeekNumber(true)
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiviewcalendar name="multiviewcalendar" week-number="true">
+    </kendo-multiviewcalendar>
+```
+{% endif %}
 
 ## See Also
 

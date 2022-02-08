@@ -16,6 +16,7 @@ The search tool is enabled by default. If the `Toolbar` configuration is used to
 
 The following example demonstrates how to show the default tools along with a custom button.
 
+```HtmlHelper
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
         .Toolbar(t => t.Items(items =>
@@ -37,6 +38,7 @@ The following example demonstrates how to show the default tools along with a cu
         .DataOrderField("Order")
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
+```
 
 ## See Also
 

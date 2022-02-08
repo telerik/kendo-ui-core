@@ -1,7 +1,7 @@
 ---
 title: Images
 page_title: Images
-description: "Learn how to include images and sprite icons in the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
+description: "Learn how to include images and sprite icons in the Telerik UI TabStrip component for {{ site.framework }}."
 slug: htmlhelpers_tabstrip_images_aspnetcore
 position: 7
 ---
@@ -14,7 +14,7 @@ The TabStrip allows you to include images or sprite icons in its tabs.
 
 To include images in the Telerik UI for {{ site.framework }} TabStrip items, use the `.ImageUrl()` configuration option and pass the image Url as a parameter:
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
         .Name("tabstrip-images")
         .Items(tabstrip =>
@@ -42,7 +42,7 @@ To include images in the Telerik UI for {{ site.framework }} TabStrip items, use
 
 To include sprites in the Telerik UI for {{ site.framework }} TabStrip items, use the `.SpriteCssClasses()` configuration option and specify the sprite CSS class:  
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
           .Name("tabstrip-sprites")
           .Items(tabstrip =>

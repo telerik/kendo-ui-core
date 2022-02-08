@@ -1,7 +1,7 @@
 ---
 title: Actions
 page_title: Timeline Actions
-description: "Action links in the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "Action links in the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/actions
 slug: actions_htmlhelpers_timeline_aspnetcore
 position: 3
@@ -15,7 +15,7 @@ The `href` attribute of an action will be set to the value of the `src` field of
 
 The example below shows how you can a few actions actions for one event.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
            .Name("Timeline")
            .DataDateField("EventDate")

@@ -1,7 +1,7 @@
 ---
 title: Formats
 page_title: Formats
-description: "Get started with the Telerik UI TimePicker for {{ site.framework }} and learn how to define the time format of the HTML Helper."
+description: "Get started with the Telerik UI TimePicker for {{ site.framework }} and learn how to define the time format."
 slug: formats_timepicker_aspnetcore
 position: 5
 ---
@@ -12,7 +12,7 @@ The TimePicker allows you to define its time formatting.
 
 The following example demonstrates how to define the time format.
 
-```
+```HtmlHelper
     @(Html.Kendo().TimePicker()
         .Name("TimePicker")
         .Value(DateTime.Now)
@@ -22,7 +22,7 @@ The following example demonstrates how to define the time format.
 
 The following example demonstrates how to define the interval (in minutes) between the values in the drop-down list with the time slots.
 
-```
+```HtmlHelper
     @(Html.Kendo().TimePicker()
         .Name("TimePicker")
         .Value(DateTime.Now)
@@ -33,5 +33,8 @@ The following example demonstrates how to define the interval (in minutes) betwe
 ## See Also
 
 * [Basic Usage by the TimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timepicker)
+{% if site.core %}
+* [Basic Usage of the TimePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/timepicker/tag-helper)
+{% endif %}
 * [Using the API of the TimePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/timepicker/api)
 * [Server-Side API](/api/timepicker)

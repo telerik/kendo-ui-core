@@ -1,7 +1,7 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Learn how to filter data on the server for the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Learn how to filter data on the server for the Telerik UI DropDownList component for {{ site.framework }}."
 slug: htmlhelpers_dropdownlist_serverfiltering_aspnetcore
 position: 4
 ---
@@ -23,7 +23,7 @@ To configure the {{ site.product_short }} DropDownList for Server Filtering:
 
 The following example demonstrates how to configure DropDownList for Server Filtering.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DropDownList()
           .Name("products")
           .DataTextField("ProductName")
@@ -68,7 +68,7 @@ The following example demonstrates how to configure DropDownList for Server Filt
 
 For smaller sets of data, the {{ site.product_short }} DropDownList also supports Client Filtering. To configure it, set the ServerFiltering property to false. This way the DropDownList dataset will be filtered on the client without sending additional requests to remote endpoint.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DropDownList()
           .Name("products")
           .DataTextField("ProductName")

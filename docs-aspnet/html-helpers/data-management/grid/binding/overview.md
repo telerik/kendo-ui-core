@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding Overview
-description: "Learn about the different types of data binding when working with the Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Learn about the different types of data binding when working with the Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/data-management/grid/binding/overview
 slug: htmlhelpers_grid_aspnetcore_binding_overview
 position: 1

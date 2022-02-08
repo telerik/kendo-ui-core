@@ -1,7 +1,7 @@
 ---
 title: Custom
 page_title: Custom Editing
-description: "Get started with the editing functionality of the Telerik UI Grid HtmlHelper for {{ site.framework }} allowing you to manipulate the way the data is presented."
+description: "Get started with the editing functionality of the Telerik UI Grid component for {{ site.framework }} allowing you to manipulate the way the data is presented."
 slug: customediting_grid_aspnetcore
 position: 5
 ---
@@ -18,7 +18,7 @@ The steps below will cover the scenario of using a NumericTextBox as a custom ed
 
 1. Add a cshtml file to the `EditorTemplates` folder and name it `Number`. Specify the field's data type at the top.
 
-    ```
+    ```HtmlHelper
         @model int?
         
         @(Html.Kendo().NumericTextBoxFor(m => m)
@@ -58,19 +58,19 @@ To create an editable grid a foreign key:
 
     * Local data binding:
 
-        ```
+        ```HtmlHelper
             columns.ForeignKey(p => p.CategoryID, (System.Collections.IEnumerable)ViewData["categories"], "CategoryID", "CategoryName");
         ```
 
     * Remote data binding:
 
-        ```
+        ```HtmlHelper
             columns.ForeignKey(p => p.CategoryID, ds=> ds.Read(r => r.Action("Categories", "Grid")), "CategoryID", "CategoryName");
         ```
 
 1. Specify default value for the column in the model of the data source:
 
-    ```
+    ```HtmlHelper
         .DataSource(dataSource => dataSource
             .Ajax()
             .Model(model =>
@@ -87,7 +87,7 @@ To create an editable grid a foreign key:
 
 1. Set the content of the file to be a DropDownList:
 
-    ```
+    ```HtmlHelper
         @model object
                 
         @(

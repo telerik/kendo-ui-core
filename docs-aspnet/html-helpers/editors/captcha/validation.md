@@ -1,7 +1,7 @@
 ---
 title: Validation
 page_title: Validation
-description: "Learn how to configure the server-side validation when using the Telerik UI Captcha HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the server-side validation when using the Telerik UI Captcha component for {{ site.framework }}."
 slug: htmlhelpers_captcha_validation
 position: 3
 ---
@@ -159,7 +159,7 @@ To generate CAPTCHAs and validate the user's input, the Telerik UI Captcha depen
 
 1. Introduce the Telerik UI Captcha in a Razor View:
 
-    ```cshtml
+    ```HtmlHelper
     @(Html.Kendo().Captcha()
         .Name("Captcha")
         .CaptchaImage((string)ViewData["Captcha"])
@@ -264,7 +264,7 @@ The Telerik UI Captcha for {{ site.framework }} prevents automated programs from
 
 1. Create a form and add the Telerik UI Captcha.
 
-    ```
+    ```HtmlHelper
     <form id="form" method="POST">
         @(Html.Kendo().TextBoxFor(m => m.UserName))
         @(Html.Kendo().TextBoxFor(m => m.FirstName))

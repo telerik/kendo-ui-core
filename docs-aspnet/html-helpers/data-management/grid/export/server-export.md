@@ -236,13 +236,13 @@ To enable the Server export option of the grid:
 
 By default, the Telerik UI Grid for {{ site.framework }} exports all rows. However, in order to export only the selected rows, make the grid selectable.
 
-```
+```HtmlHelper
 .Selectable()
 ```
 
 Or, add a checkbox column for selection:
 
-```
+```HtmlHelper
 .Columns(columns => {
     columns.Select().Width(80);
 })

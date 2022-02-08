@@ -1,7 +1,7 @@
 ---
 title: Toolbar and Tools
 page_title: Toolbar and Tools
-description: "Get started with the Telerik UI PDFViewer HtmlHelper for {{ site.framework }} and learn how to use and define the tools in its toolbar."
+description: "Get started with the Telerik UI PDFViewer component for {{ site.framework }} and learn how to use and define the tools in its toolbar."
 previous_url: /helpers/pdf/pdfviewer/toolbar
 slug: htmlhelpers_pdfviewer_toolbar_aspnetcore
 position: 4
@@ -31,7 +31,7 @@ The `zoom`, `toggleSelection`, `search` and `print` tools are available only wit
 
 The following example demonstrates basic configuration options for the PDFViewer toolbar tools. You can also add `spacer` elements, in order to group a preferable set of tools. 
 
-```  
+```HtmlHelper
       @(Html.Kendo().PDFViewer().Name("pdfviewer")
         .Toolbar(toolbar =>
             toolbar.Items(items =>
@@ -52,6 +52,7 @@ The following example demonstrates basic configuration options for the PDFViewer
 
 You can also use the `add` and `remove` client-side API methods to programmatically manage the rendered tools in the PDFViewer.
 
+```HtmlHelper
     @(Html.Kendo().PDFViewer()
         .Name("pdfviewer")     
     )
@@ -60,6 +61,7 @@ You can also use the `add` and `remove` client-side API methods to programmatica
       var printToolElement = $(".k-toolbar").find('a[title="Print"]');
       pdfviewer.toolbar.remove(printToolElement);
     </script>
+```
 
 ## See Also
 

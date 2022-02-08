@@ -1,34 +1,47 @@
 ---
 title: Overview
 page_title: Overview
-description: "Discover the features and functionalities of the Telerik UI ActionSheet HtmlHelper for {{ site.framework }}. Learn how to initialize and configure the ActionSheet control." 
+description: "Discover the features and functionalities of the Telerik UI ActionSheet component for {{ site.framework }}. Learn how to initialize and configure the ActionSheet control." 
 slug: htmlhelpers_actionsheet_aspnetcore
 position: 1
 ---
 
-# ActionSheet HtmlHelper Overview
+# ActionSheet Overview
 
+{% if site.core %}
+The Telerik UI DataSource TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DataSource widget.
+{% else %}
 The Telerik ActionSheet HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ActionSheet widget.
+{% endif %}
 
 The ActionSheet is a dialog that displays a set of options for the user to choose from. It appears on top of the app's content, and the user must manually dismiss it before resuming the interaction with the app.
 
-Visit the [Demo page for the ActionSheet](https://demos.telerik.com/{{ site.platform }}/actionsheet/index) to see it in action.
+* [Demo page for the ActionSheet HtmlHelper](https://demos.telerik.com/{{ site.platform }}/actionsheet/index)
+{% if site.core %}
+* [Demo page for the ActionSheet TagHelper](https://demos.telerik.com/aspnet-core/actionsheet/tag-helper)
+{% endif %}
 
 ## Initializing the ActionSheet
 
-The following example demonstrates how to define the ActionSheet by using the ActionSheet HtmlHelper.
+The following example demonstrates how to define the ActionSheet.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ActionSheet()
         .Name("actionsheet")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-actionsheet name="actionsheet">
+    </kendo-actionsheet>
+````
+{% endif %}
 
 ## Basic Configuration
 
 The following example demonstrates the basic configuration for the ActionSheet HtmlHelper.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ActionSheet()
         .Name("actionsheet")
         .Title("Select item")
@@ -52,6 +65,29 @@ The following example demonstrates the basic configuration for the ActionSheet H
     });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-actionsheet name="actionsheet" title="Select item">
+        <items>
+            <item text="Edit Item" icon-class="k-icon k-i-edit" click="onClick" />
+            <item text="Add to Favorites" icon-class="k-icon k-i-heart" click="onClick" />
+            <item text="Upload New" icon-class="k-icon k-i-upload" click="onClick" />
+            <item text="Cancel" icon-class="k-icon k-i-cancel" group="bottom" click="onClick" />
+        </items>
+    </kendo-actionsheet>
+
+    <script>
+    $(function() {
+        // The Name() of the ActionSheet is used to get its client-side instance.
+        function onClick(e) {
+            e.preventDefault();
+            var actionsheet = $("#actionsheet").data("kendoActionSheet");
+            actionsheet.close();
+        }
+    });
+    </script>
+````
+{% endif %}
 
 ## Functionality and Features
 
@@ -62,4 +98,7 @@ The following example demonstrates the basic configuration for the ActionSheet H
 ## See Also
 
 * [Basic Usage of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/index)
+{% if site.core %}
+* [Basic Usage of the ActionSheet TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/tag-helper)
+{% endif %}
 * [Using the API of the ActionSheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/actionsheet/api)

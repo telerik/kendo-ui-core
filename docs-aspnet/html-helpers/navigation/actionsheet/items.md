@@ -20,7 +20,7 @@ The `Items` configuration allows you to set specific attributes of the ActionShe
 
 The following example demonstrates the possible options for the `Items` configuration of the ActionSheet widget:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ActionSheet()
         .Name("actionsheet")
         .Title("Select item")

@@ -109,7 +109,8 @@ html-helpers/editors/daterangepicker/razor-page.md,
 html-helpers/navigation/drawer/razor-page.md,
 html-helpers/pdf/pdfviewer/razor-page.md,
 html-helpers/data-management/listview/binding/razor-page.md,
-html-helpers/media/mediaplayer/razor-page.md]
+html-helpers/media/mediaplayer/razor-page.md,
+html-helpers/overview-taghelpers]
 
 exclude_navigation: ["knowledge-base/*",
 api/Kendo.Mvc/*,

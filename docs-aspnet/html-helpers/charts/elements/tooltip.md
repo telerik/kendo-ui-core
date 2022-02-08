@@ -22,7 +22,7 @@ The border of this tooltip matches the color of the series.
 
 By default, the tooltip of the Chart is not visible. You can enable it by setting the visible property of the tooltip object to `true`.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -37,7 +37,7 @@ By default, the tooltip of the Chart is not visible. You can enable it by settin
 
 The tooltip can also be configured per series.
 
-```
+```HtmlHelper
     .Series(s => s
         .Bar(new double[] { 67.96, 68.93, 75, 74, 78 })
         .Tooltip(t=>t.Visible(true))
@@ -50,7 +50,7 @@ To format the point value, use the `Format` property. In the following example, 
 
 > Points in categorical (XY) Charts have two values&mdash;`{0}` and `{1}` (X and Y).
 
-```
+```HtmlHelper
     .Tooltip(t => t
         .Visible(true)
         .Format("Value: {0:N0}")
@@ -68,7 +68,7 @@ The template provides access to all information associated with the point:
 * `series`&mdash;The data series.
 * (When binding to a data source) `dataItem`&mdash;The original data item.
 
-```
+```HtmlHelper
     .Tooltip(t => t
         .Visible(true)
         .Template("Value: #= value # ; Category: #= category #")
@@ -77,7 +77,7 @@ The template provides access to all information associated with the point:
 
 You can also use an external template by specifying [`TemplateId`]({{ TemplateId }}).
 
-```
+```HtmlHelper
     .Tooltip(t => t
         .Visible(true)
         .TemplateId("tooltipTemplate")
@@ -95,4 +95,5 @@ You can also use an external template by specifying [`TemplateId`]({{ TemplateId
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

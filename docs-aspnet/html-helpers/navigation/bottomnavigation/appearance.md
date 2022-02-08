@@ -1,18 +1,18 @@
 ---
 title: Appearance
 page_title: Appearance
-description: "Learn how to customize the appearance of the BottomNavigation HtmlHelper for {{ site.framework }}."
+description: "Learn how to customize the appearance of the BottomNavigation component for {{ site.framework }}."
 slug: htmlhelpers_appearance_bottomnavigation_aspnetcore
 position: 3
 ---
 
 # Appearance
 
-The Telerik BottomNavigation HtmlHelper for {{ site.framework }} allows you to alter the appearance of the component by setting its [ItemFlow](/api/javascript/ui/bottomnavigation/configuration/itemflow), [ThemeColor](/api/javascript/ui/bottomnavigation/configuration/themeColor), [Border](/api/javascript/ui/bottomnavigation/configuration/border), [Shadow](/api/javascript/ui/bottomnavigation/configuration/shadow) and [Fill](/api/javascript/ui/bottomnavigation/configuration/fill) options.
+The Telerik BottomNavigation for {{ site.framework }} allows you to alter the appearance of the component by setting its [ItemFlow](/api/javascript/ui/bottomnavigation/configuration/itemflow), [ThemeColor](/api/javascript/ui/bottomnavigation/configuration/themeColor), [Border](/api/javascript/ui/bottomnavigation/configuration/border), [Shadow](/api/javascript/ui/bottomnavigation/configuration/shadow) and [Fill](/api/javascript/ui/bottomnavigation/configuration/fill) options.
 
 The example below demonstrates how to modify the appearance by using the above settings:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().BottomNavigation()
         .Name("bottomNavigation")
         .PositionMode(BottomNavigationPositionMode.Absolute)
@@ -30,6 +30,30 @@ The example below demonstrates how to modify the appearance by using the above s
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{
+        var home = new { view= "home"};
+        var calendar = new { view = "calendar" };
+        var profile = new { view = "profile" };
+    }  
+    <kendo-bottomnavigation
+            name="bottomNavigation"
+            position-mode="BottomNavigationPositionMode.Absolute"
+            item-flow="BottomNavigationItemFlow.Horizontal"
+            theme-color="BottomNavigationThemeColor.Secondary"
+            fill="BottomNavigationFill.Solid"
+            border="false"
+            shadow="true">
+        <bottomnavigation-items>
+            <bottomnavigation-item context-data="@home" text="Home" icon="home" selected="true"></bottomnavigation-item>
+            <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar"></bottomnavigation-item>
+            <bottomnavigation-item context-data="@profile" text="Profile" icon="user"></bottomnavigation-item>
+        </bottomnavigation-items>
+    </kendo-bottomnavigation>
+```
+{% endif %}
 
 ## See Also
 

@@ -1,19 +1,20 @@
 ---
 title: Dimensions
 page_title: Dimensions
-description: "Learn how to configure the dimensions of the Telerik UI Window HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the dimensions of the Telerik UI Window component for {{ site.framework }}."
 slug: htmlhelpers_window_dimensions_aspnetcore
 position: 2
 ---
 
 # Dimensions
 
-By default, the Window HtmlHelper does not have any pre-set dimensions and its size depends on its content.
+By default, the Window does not have any pre-set dimensions and its size depends on its content.
 
 ## Manual Size Control
 
-Apart from the automatic size calculation, you can explicitly set the `Width()` and the `Height()` of the HtmlHelper in pixels.
+Apart from the automatic size calculation, you can explicitly set the `Width()` and the `Height()` in pixels.
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Title("Alvar Aalto")
@@ -27,9 +28,11 @@ Apart from the automatic size calculation, you can explicitly set the `Width()` 
             </p>
         </text>)
     )
+```
 
-The Window HTML helper also allows configuration for its `min` and `max` dimensions (height and width).
+The Window also allows configuration for its `min` and `max` dimensions (height and width).
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Title("Alvar Aalto")
@@ -45,10 +48,11 @@ The Window HTML helper also allows configuration for its `min` and `max` dimensi
             </p>
         </text>)
     )
+```
 
 ## Adjusting the Size Depending on Content
 
-If the Window contains horizontally expandable block-level elements&mdash;including other HtmlHelpers such as the Grid, Editor, and others&mdash;the widget can expand horizontally to the point of touching the right edge of the browser viewport. In such cases, the widget sticks to the right viewport edge and cannot be separated from it. This issue occurs because the Window is absolutely positioned with CSS. To avoid such behavior, set an appropriate width to the widget, or a (max-)width to its content.
+If the Window contains horizontally expandable block-level elements&mdash;including other component such as the Grid, Editor, and others&mdash;the widget can expand horizontally to the point of touching the right edge of the browser viewport. In such cases, the widget sticks to the right viewport edge and cannot be separated from it. This issue occurs because the Window is absolutely positioned with CSS. To avoid such behavior, set an appropriate width to the widget, or a (max-)width to its content.
 
 The lack of restrictions over the dimensions for vertical expanding of the Window and its content might result in undesired behavior&mdash;for example, the rendition of a popup which is higher than the browser viewport.
 

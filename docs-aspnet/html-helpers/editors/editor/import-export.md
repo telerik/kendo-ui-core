@@ -27,7 +27,7 @@ To start using the import and export functionality:
 
 1. Add the `ExportAs` tool.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -38,7 +38,7 @@ To start using the import and export functionality:
 
     Alternatively, you can refine the options by configuring the `ExportAs` tool.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -55,7 +55,7 @@ To start using the import and export functionality:
 
 1. To enable the tool to contact the server and export a file, configure the `Proxy` method and, optionally, set up the name of the exported file through the `FileName` method.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -85,7 +85,7 @@ To start using the import and export functionality:
 
 1. Add the `Import` tool.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools
@@ -105,7 +105,7 @@ To start using the import and export functionality:
     > * [`Select()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#selectsystemstring)
     > * [`Success()`](/api/Kendo.Mvc.UI.Fluent/UploadEventBuilder#successsystemstring)
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Editor()
         .Name("Editor")
         .Tools(tools => tools

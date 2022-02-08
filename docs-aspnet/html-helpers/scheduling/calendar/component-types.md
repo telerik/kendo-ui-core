@@ -12,7 +12,7 @@ As of R2 2020 version of the Telerik UI for {{ site.framework }} suite, the Cale
 
 By default, the Calendar is initialized with the `classic` render mode. In order to set it to `modern`, configure the options of the widget as follows:
 
-```
+```HtmlHelper
     @(Html.Kendo().Calendar()
         .Name("calendar")
         .ComponentType("modern")

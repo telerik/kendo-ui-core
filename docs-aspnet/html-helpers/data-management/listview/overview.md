@@ -1,15 +1,19 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI ListView HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI ListView component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/listview, /helpers/data-management/listview/overview, /helpers/data-management/listview/configuration
 slug: htmlhelpers_listview_aspnetcore
 position: 1
 ---
 
-# ListView HtmlHelper Overview
+# ListView Overview
 
+{% if site.core %}
+The Telerik UI ListView TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ListView widget. To add the component to your ASP.NET Core app, you can use either.
+{% else %}
 The Telerik UI ListView HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ListView widget.
+{% endif %}
 
 The ListView enables you to display a custom layout of data-bound items. The ListView is ideally suited for displaying a list of items in a consistent manner. You can see commonplace examples of its use in the design structures of the Internet, search engine results, tweets from Twitter, Facebook updates, inbox items in Gmail, card lists in Trello, and so on.
 
@@ -19,7 +23,7 @@ The ListView enables you to control the display of data. It does not provide a d
 
 ## Initializing the ListView
 
-The following example demonstrates how to define the ListView by using the ListView HtmlHelper.
+The following example demonstrates how to define the ListView.
 
 * The `TagName` of the ListView for {{ site.framework }} is used to create an element to contain all ListView items once the ListView is bound.
 * The `ClientTemplateId` is mandatory for the ListView. It contains the `id` of the `script` element which accommodates the item template.
@@ -35,7 +39,7 @@ The following example demonstrates how to define the ListView by using the ListV
         </div>
     </script>
 ```
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the widget.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
@@ -49,7 +53,7 @@ The following example demonstrates how to define the ListView by using the ListV
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration for the ListView HtmlHelper.
+The following example demonstrates the basic configuration for the ListView.
 
 ```Template
     <script type="text/x-kendo-tmpl" id="template">
@@ -71,7 +75,7 @@ The following example demonstrates the basic configuration for the ListView Html
         </div>
     </script>
 ```
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView<Kendo.Mvc.Examples.Models.ProductViewModel>(Model)
         .Name("listView")
         .TagName("div")

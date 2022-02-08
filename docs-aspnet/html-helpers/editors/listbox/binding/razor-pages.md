@@ -18,7 +18,7 @@ To bind the Telerik UI ListBox to a data set  within a RazorPage:
 
 1. Setup the Read URL in the `DataSource`. The URL should refer the name of the method in the `PageModel`.
 
-    ```
+    ```HtmlHelper
         .DataSource(ds=>ds
             .Read(r=>r.Url("/ListBox/ListBoxBinding?handler=ReadOptional"))
         )

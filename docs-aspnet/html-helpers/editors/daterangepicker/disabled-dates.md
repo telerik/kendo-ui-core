@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
 page_title: Disabled Dates
-description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to disable specific dates in the HTML Helper."
+description: "Get started with the Telerik UI DateRangePicker for {{ site.framework }} and learn how to disable specific dates."
 slug: disableddates_daterangepicker_aspnetcore
 position: 10
 ---
@@ -19,7 +19,7 @@ To disable a date in the DateRangePicker, use either of the following approaches
 
 To disable dates by setting an array, list the names of the days that will be disabled by using the first letters from their names in English.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateRangePicker()
         .Name("dateRangePicker")
         .DisableDates(new[] {"we", "th" })
@@ -30,7 +30,7 @@ To disable dates by setting an array, list the names of the days that will be di
 
 To disable dates by using a function, set the return value for the date that will be disabled to `true`.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateRangePicker()
         .Name("dateRangePicker")
         .DisableDates("disableDatesHandler")

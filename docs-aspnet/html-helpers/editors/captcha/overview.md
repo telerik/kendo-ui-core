@@ -1,22 +1,31 @@
 ---
 title: Overview
 page_title: Overview
-description: "Discover the Telerik UI Captcha HtmlHelper for {{ site.framework }} control, and learn how to start using it."
+description: "Discover the Telerik UI Captcha component for {{ site.framework }} control, and learn how to start using it."
 slug: htmlhelpers_captcha_overview
 position: 1
 ---
 
-# Captcha HtmlHelper Overview
+# Captcha Overview
+
+{% if site.core %}
+The Telerik UI Captcha TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Captcha widget.
+{% else %}
+The Telerik UI Captcha HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DataSource widget.
+{% endif %}
 
 The Telerik UI Captcha for {{ site.framework }} is a security measure that prevents automated spam from performing tasks such as form submissions in your {{ site.framework }} application. The widget generates distorted images of letters and numbers that are easily decipherable to humans, but not to automated programs (spam bots). 
 
-* [Demo page for the Captcha](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+* [Demo page for the Captcha HtmlHelper](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+{% if site.core %}
+* [Demo page for the Captcha TagHelper](https://demos.telerik.com/{{ site.platform }}/captcha/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Captcha HtmlHelper. For the full server-side implementation, consider the [Validation article]({% slug htmlhelpers_captcha_validation %}).
+The following example demonstrates the basic configuration of the Captcha component. For the full server-side implementation, consider the [Validation article]({% slug htmlhelpers_captcha_validation %}).
 
-```cshtml
+```HtmlHelper
     @(Html.Kendo().Captcha()
         .Name("Captcha")
         .Handler(handler => handler.Action("Reset", "Captcha")) // endpoint to return the CAPTCHA 
@@ -24,6 +33,24 @@ The following example demonstrates the basic configuration of the Captcha HtmlHe
         .ValidationHandler(handler => handler.Action("Validate", "Captcha")) // enpoint to validate the CAPTCHA
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-form name="form" form-data="@Model">
+    <form-items>
+        <form-item field="UserName"></form-item>
+        <form-item field="FirstName"></form-item>
+        <form-item field="LastName"></form-item>
+        <form-item field="Captcha">
+            <captcha-editor datacaptchaidfield="CaptchaID" datacaptchafield="Captcha" captcha-image="@ViewData["Captcha"]" captcha-id="@ViewData["CaptchaID"]">
+                <handler url="@Url.Action("Reset")" />
+                <validation-handler url="@Url.Action("Validate")" />
+                <audio-handler function-handler="audioHandler" />
+            </captcha-editor>
+        </form-item>
+    </form-items>
+</kendo-form>
+```
+{% endif %}
 ```JavaScript
     <script>
         function audioHandler(args) {
@@ -31,6 +58,33 @@ The following example demonstrates the basic configuration of the Captcha HtmlHe
         }
     </script>
 ```
+```C#
+public ActionResult Reset()
+{
+    CaptchaImage newCaptcha = SetCaptchaImage();
+
+    return Json(new CaptchaModel
+    {
+        Captcha = "./shared/UserFiles/captcha/" + newCaptcha.UniqueId + ".png",
+        CaptchaID = newCaptcha.UniqueId
+    });
+}
+
+public ActionResult Validate(CaptchaModel model)
+{
+    string text = GetCaptchaText(model.CaptchaID);
+
+    return Json(text ==  model.Captcha.ToUpperInvariant());
+}
+
+private string GetCaptchaText(string captchaId)
+{
+    string text = HttpContext.Session.GetString("captcha_" + captchaId);
+
+    return text;
+}
+```
+
 
 ## Functionality and Features
 
@@ -60,5 +114,8 @@ To reference an existing Captcha instance, use the [`jQuery.data()`](https://api
 ## See Also
 
 * [Basic Usage of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+{% if site.core %}
+* [Basic Usage of the Captcha TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/captcha/tag-helper)
+{% endif %}
 * [Using the API of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
 * [Server-Side API](/api/captcha)

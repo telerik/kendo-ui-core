@@ -16,6 +16,7 @@ To enable the editing functionality of the Diagram:
 
 1. Configure the DataSource for remote CRUD operations. You have to include the model declaration. The `Id` is mandatory to indicate which of the fields is the unique identifier.
 
+    ```HtmlHelper
         .DataSource(d => d
             .ShapeDataSource()
             .Model(m =>
@@ -30,9 +31,11 @@ To enable the editing functionality of the Diagram:
             .Destroy("DestroyShape", "DiagramData")
             .Update("UpdateShape", "DiagramData")
         )
+    ```
 
 1. Configure the `ConnectionsDataSource` for remote CRUD operations. Without setting the `ConnectionsDataSource`, editing is disabled.
 
+    ```HtmlHelper
         .ConnectionsDataSource(d => d
             .Model(m =>
             {
@@ -51,7 +54,7 @@ To enable the editing functionality of the Diagram:
             .Destroy("DestroyConnection", "DiagramData")
             .Update("UpdateConnection", "DiagramData")
         )
-
+    ```
 ## Model Fields
 
 The shape model provides the following fields:

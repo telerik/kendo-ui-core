@@ -22,7 +22,7 @@ Scatter Charts are useful for displaying the relation between different sets of 
 
 XY Charts, such as the [Scatter](https://demos.telerik.com/{{ site.platform }}/scatter-charts/index) and [Scatter Line](https://demos.telerik.com/{{ site.platform }}/scatter-charts/scatter-line) Charts, use one or more X and Y axes which are configured through the `XAxis` and the `YAxis` properties.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series => {
@@ -50,7 +50,7 @@ To change the label position, set the [`Position`]({{ Position }}) option of the
 * When `Position` is set to `"ChartAxisLabelsPosition.End"`, the labels are placed at the end of the crossing axis. Typically, this configuration positions the labels at the top or right end of the Chart unless the crossing axis was reversed.
 * When `Position` is set to `"ChartAxisLabelsPosition.Start"`, the labels are placed at the start of the crossing axis. Typically, this configuration positions the labels at the left or bottom end of the Chart unless the crossing axis was reversed.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series => {
@@ -68,7 +68,7 @@ You can define more X and Y axes in addition to the primary axes. The additional
 
 > Do not specify a name for the primary X and Y axes.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart(Model)
         .Name("chart")
         .Series(series => {
@@ -109,7 +109,7 @@ Because no axis is specified, the first series is associated with the default Y 
 
 You can also control the arrangement of the X and Y axes by specifying the values at which they cross the primary axes.
 
-```
+```HtmlHelper
     .XAxis(x => x
         .Numeric()
         .AxisCrossingValue(0, 2500)
@@ -124,5 +124,7 @@ The primary Y axis crosses the X axis at point 0 (leftmost). The second, `torque
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Bar Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/index)
+* [Basic Usage of the Bar Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/tag-helper)
 * [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
+* [Basic Usage of the Line Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
 * [Server-Side API](/api/chart)

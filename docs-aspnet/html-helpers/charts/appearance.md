@@ -1,7 +1,7 @@
 ---
 title: Appearance
 page_title: Appearance
-description: "Learn how to control the appearance of the Telerik UI Chart HtmlHelper for {{ site.framework }}."
+description: "Learn how to control the appearance of the Telerik UI Chart component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/charts/chart/appearance
 slug: htmlhelpers_charts_appearance_aspnetcore
 position: 3
@@ -17,7 +17,7 @@ For more information on the structure of the Chart, refer to the articles on the
 
 The Charts come with [a set of predefined themes](https://docs.telerik.com/kendo-ui/styles-and-layout/appearance-styling). To select a theme, use the `Theme` option. The theme name is case-insensitive.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Theme("blueOpal")
@@ -52,7 +52,7 @@ The Charts come with [a set of predefined themes](https://docs.telerik.com/kendo
 
 As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-based themes](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes). When the theme is set to `inherit`, the Chart reads colors and fonts from the theme variables.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Theme("inherit")
@@ -87,7 +87,7 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
 
 {{ site.product }} Charts use animated transitions to display new and updated data. To disable these transitions, use the `transitions` option.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Transitions(false)
@@ -99,4 +99,5 @@ As of the R2 2017 SP1 release, the Chart provides styling options through [Sass-
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Kendo UI Area Charts Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

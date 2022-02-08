@@ -1,7 +1,7 @@
 ---
 title: Week Numbers
 page_title: Week Numbers
-description: "Define the first rendered view when working with the Telerik UI Calendar HtmlHelper for {{ site.framework }}."
+description: "Define the first rendered view when working with the Telerik UI Calendar component for {{ site.framework }}."
 slug: htmlhelpers_weeknumbers_calendar_aspnetcore
 position: 4
 ---
@@ -14,12 +14,17 @@ You can configure the Calendar to display the week number and also use the week 
 
 The `weekNumber` option enables the Calendar to display the week number on an annual base to the left side of month view and as a separate column.
 
-```
-
+```HtmlHelper
     @(Html.Kendo().Calendar()
                 .Name("calendar")
                 .WeekNumber(true)))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-calendar week-number="true" name="calendar">
+    </kendo-calendar>
+```
+{% endif %}
 
 ## Customizing Week Column Cells
 
@@ -32,14 +37,20 @@ The Calendar provides the following properties in the `data` object:
 
 You can use these properties in the template to make additional calculations.
 
-```
-
+```HtmlHelper
     @(Html.Kendo().Calendar()
         .Name("calendar")
         .WeekNumber()
         .MonthTemplate(x=> x.WeekNumber("<i>#= data.weekNumber #</i>"))
         )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-calendar week-number="true" name="calendar">
+        <month week-number="<i>#= data.weekNumber #</i>" />
+    </kendo-calendar>
+```
+{% endif %}
 
 ## See Also
 

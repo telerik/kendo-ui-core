@@ -19,7 +19,7 @@ The MaskedTextBox has [a list of predefined mask rules](https://docs.telerik.com
 
 The following example demonstrates how to set a `zip code` mask.
 
-```
+```HtmlHelper
     @(Html.Kendo().MaskedTextBox()
           .Name("maskedtextbox")
           .Mask("00000-9999") // Set the zip code.
@@ -34,7 +34,7 @@ The MaskedTextBox enables you to define custom mask rules if none of the predefi
 
 The following example demonstrates how to define a custom rule for the `-` (minus) and `+` (plus) symbols.
 
-```
+```HtmlHelper
   @(Html.Kendo().MaskedTextBox()
         .Name("maskedtextbox")
         .Rules(rules => {

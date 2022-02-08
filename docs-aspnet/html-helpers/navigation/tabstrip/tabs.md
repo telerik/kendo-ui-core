@@ -1,7 +1,7 @@
 ---
 title: Tabs
 page_title: Tabs
-description: "Configure the tabs of the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
+description: "Configure the tabs of the Telerik UI TabStrip component for {{ site.framework }}."
 slug: htmlhelpers_tabstrip_aspnetcore_tabs
 position: 2
 ---
@@ -16,7 +16,7 @@ The TabStrip API provides the `.TabPosition()`[/api/Kendo.Mvc.UI.Fluent/TabStrip
 
 The following example demonstrates how to position the TabStrip tabs to the right:
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .TabPosition(TabStripTabPosition.Right)
@@ -47,7 +47,7 @@ The TabStrip API provides methods for dynamically adding or removing TabStrip ba
 
 The following example demonstrates how to add a new TabStrip tab and position it after the first existing tab.
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>
@@ -83,7 +83,7 @@ The TabStrip supports scrollable `top` and `bottom` tabs through `TabPosition()`
 
 If the TabStrip has no fixed width and is placed in a fluid layout, it can re-check whether tab scrolling is necessary or no longer required. To enable this option, execute the [`resize()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/widget/methods/resize) method of the Kendo UI TabStrip for jQuery upon `window.resize`. The `resize` method will also render the right scroll button if the last and selected tab becomes invisible as a result of TabStrip shrinking.
 
-```
+```HtmlHelper
 <div style="width: 150px;">
     @(Html.Kendo().TabStrip()
         .Name("tabstrip")
@@ -113,7 +113,7 @@ To select a tab on initial load, apply either of the following approaches:
 
 The following example demonstrates how to use the `Selected()` configuration method.
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>

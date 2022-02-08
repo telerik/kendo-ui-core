@@ -1,14 +1,14 @@
 ---
 title: Types
 page_title: Types
-description: "Learn about the types of DataSource that are supported by the Telerik UI DataSource HtmlHelper for {{ site.framework }}."
+description: "Learn about the types of DataSource that are supported by the Telerik UI DataSource component for {{ site.framework }}."
 slug: htmlhelper_datasourcetypes_aspnetcore
 position: 2
 ---
 
-# Types
+# DataSource Types
 
-The DataSource HtmlHelper supports built-in types of data binding.
+The DataSource component supports built-in types of data binding.
 
 To include the default data source types, add the `<script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.aspnetmvc.min.js"></script>` script to your `_Layout.cshtml` file after the Kendo UI scripts.
 
@@ -20,6 +20,12 @@ The available DataSource types of data binding are:
 ## Ajax DataSource
 
 The Ajax DataSource type of data binding is the most popular data source type and performs Ajax requests to retrieve or update data. It formats the request filter, sort, group, page, page size, and aggregates, and, out of the box, binds the model to a controller which expects a [`[DataSourceRequest]DataSourceRequest request`](/api/Kendo.Mvc.UI/DataSourceRequest) parameter. This allows you to use the [`ToDataSourceResult()`](/api/Kendo.Mvc.Extensions/QueryableExtensions) extension method and to return a collection that corresponds to the request without having to deal with data operations programmatically.
+
+Additionally, you can use the `server-operation` or `.ServerOperation` property to enable or disable server operations:
+
+* When enabled, all data operations like paging, sorting, grouping, etc. will be performed server-side. 
+* When disabled, all data operations will be performed on the client, and the entire data set will be available for the DataSource. This approach is also applicable for the [WebAPI](#webapi-datasource) type of binding.
+
 
 ```HtmlHelper
      @(Html.Kendo().DataSource<OrderViewModel>()
@@ -50,6 +56,15 @@ The Ajax DataSource type of data binding is the most popular data source type an
         myDataSource.read(); // A POST request will be sent to the HomeController ReadOrders action
     </script>  
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource" type="DataSourceTagHelperType.Ajax" server-operation="false" page-size="5">
+        <transport>
+            <read url="/Home/ReadOrders" />
+        </transport>
+    </kendo-datasource>
+```
+{% endif %}
 ```HomeController
 
     public IActionResult ReadOrders([DataSourceRequest]DataSourceRequest request)
@@ -91,6 +106,24 @@ The WebAPI DataSource type of data binding is designed for WebAPI projects and w
         myDataSource.read(); // A GET request will be sent to the ProductController Get action
     </script>  
 ```
+{% if site.core %}
+```TagHelper
+    <!-- When you use the WebAPI DataSource type of data binding in an editable Grid, define the field types in the `schema` to use the correct editors for the field. -->
+
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.WebApi" server-operation="true">
+        <transport>
+            <read url="/api/Product" />
+        </transport>
+        <schema>
+            <model id="ProductID">
+                <fields>
+                    <field name="ProductID" type="number"></field>
+                </fields>
+            </model>
+        </schema>
+    </kendo-datasource>
+```
+{% endif %}
 ```ProductController
 
     [HttpGet]
@@ -113,6 +146,7 @@ The Custom DataSource type of data binding is the default type of binding and pr
 
 The following example demonstrates how to consume an OData service.
 
+```HtmlHelper
 	@(Html.Kendo().DataSource<AspNet{{ site.framework_short }}Grid.Models.OrderViewModel>()
         .Name("myDataSource")
         .Custom(dataSource =>
@@ -133,6 +167,26 @@ The following example demonstrates how to consume an OData service.
     <script>
        myDataSource.fetch();
     </script>
+```
+{% if site.core %}
+```TagHelper
+	<kendo-datasource name="dataSource1" custom-type="odata">
+	    <transport>
+	        <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Orders" />
+	    </transport>
+	</kendo-datasource>
+
+	<kendo-grid name="grid" datasource-id="dataSource1">
+	    <pageable enabled="true">
+	    </pageable>
+	    <columns>
+	        <column field="ShipName"></column>
+	        <column field="ShipCity"></column>
+	    </columns>
+	    <scrollable enabled="true" />
+	</kendo-grid>
+```
+{% endif %}
 
 ## See Also
 

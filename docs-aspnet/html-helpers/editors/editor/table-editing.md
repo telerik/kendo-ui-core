@@ -1,7 +1,7 @@
 ---
 title: Table Editing
 page_title: Editor Table Editing
-description: "Learn about the table editing of the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn about the table editing of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_table_editing_aspnetcore
 position: 12
 ---
@@ -17,7 +17,7 @@ The Editor exposes the capability of editing a data table as any other (X)HTML. 
 
 To enable the table editing, you should add the `TableEditing` tool to the widget's configuration:
 
-```
+```HtmlHelper
     @(Html.Kendo().Editor()
       .Name("editor")
       .HtmlAttributes(new { style = "height:440px", aria_label = "editor" })

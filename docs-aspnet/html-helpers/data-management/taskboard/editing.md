@@ -19,7 +19,7 @@ To set up editing:
 
 The following example demonstrates how to configure CRUD (Create, Read, Update, Destroy) data operations for columns and the cards of the TaskBoard. For an example of the editing functionality, refer to the [Editing (Demo)](https://demos.telerik.com/{{ site.platform }}/taskboard/editing).
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().TaskBoard<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel, Kendo.Mvc.Examples.Models.TaskBoard.Column>()
         .Name("taskBoard")
         .ColumnSettings(columnSettings => columnSettings
@@ -169,6 +169,7 @@ Configure the actions, which the DataSource will call when an "Update", "Destroy
 
 The following example demonstrates how to configure the data source of the columns.
 
+```HtmlHelper
     .Columns(dataSource => dataSource
         .Ajax()
         .Model(model => model.Id(p => p.ID))
@@ -177,9 +178,11 @@ The following example demonstrates how to configure the data source of the colum
         .Update("Editing_Columns_Update", "TaskBoard")
         .Destroy("Editing_Columns_Destroy", "TaskBoard")
     )
+```
 
 The following example demonstrates how to configure the data source of the cards.
 
+```HtmlHelper
     .DataSource(dataSource => dataSource
         .Ajax()
         .Model(model => model.Id(p => p.TaskID))
@@ -188,7 +191,7 @@ The following example demonstrates how to configure the data source of the cards
         .Update(update => update.Action("Tasks_Update", "TaskBoard"))
         .Destroy(destroy => destroy.Action("Tasks_Destroy", "TaskBoard"))
     )
-
+```
 
 ### Setting the Editable Option
 
@@ -196,6 +199,7 @@ Editing is enabled by default, but the `Editable` configuration exposes a number
 
 The following example demonstrates how to set the `Editable` configuration.
 
+```HtmlHelper
     .Editable(ed => ed.Form(f => f.Items(it =>
     {
         it.Add().Field("Title").Label("Title");
@@ -223,6 +227,7 @@ The following example demonstrates how to set the `Editable` configuration.
             .ValueTemplate("<span style='color: blue'>#:Text#</span>");
         });
     })))
+```
 
 ## See Also
 

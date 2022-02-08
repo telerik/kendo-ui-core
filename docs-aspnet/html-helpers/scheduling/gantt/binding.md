@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Learn the binding options for the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
+description: "Learn the binding options for the Telerik UI Gantt component for {{ site.framework }}."
 previous_url: /helpers/scheduling/gantt/server-binding
 slug: htmlhelpers_gantt_binding_aspnetcore
 position: 3
@@ -11,7 +11,7 @@ position: 3
 
 By default, the Telerik UI Gantt for {{ site.framework }} performs server-side requests (`HTTP` and `GET`) when doing paging, sorting, and filtering.
 
-You can also render the view with the data for the tasks and dependences. You have to implement the `IGanttTask` and `IGanttDependency` interfaces in the data models for the `GanttTasks` and `GantDependencies` respectively.
+You can also render the view with the data for the tasks and dependencies. You have to implement the `IGanttTask` and `IGanttDependency` interfaces in the data models for the `GanttTasks` and `GanttDependencies` respectively.
 
 ## Setting the Data Model Classes
 
@@ -133,7 +133,7 @@ The following example demonstrates how to bind the Gantt to items by using the `
         return View();
     }
 ```
-```Razor
+```HtmlHelper
     @(Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewData["tasks"], (IEnumerable<DependencyViewModel>)ViewData["dependencies"])
         .Name("gantt")
@@ -203,7 +203,7 @@ The following example demonstrates how to bind the Gantt to items by using the `
         return View();
     }
 ```
-```Razor
+```HtmlHelper
     @(Html.Kendo()
         .Gantt<TaskViewModel, DependencyViewModel>((IEnumerable<TaskViewModel>)ViewBag.Tasks, (IEnumerable<DependencyViewModel>)ViewBag.Dependencies)
         .Name("gantt")
@@ -241,7 +241,7 @@ The following example demonstrates how to bind the Gantt to items by using the `
 
 In order to set up the Telerik UI Gantt HtmlHelper for {{ site.framework }} component in Razor page scenario, you need to configure the `Read` , `Create`, `Update` and `Destroy` methods of the `DataSource` and the `DependenciesDataSource` instances. The URL in these methods should refer the name of the handler in the PageModel. In this method, you can also pass additional parameters, such as the antiforgery token (see `forgeryToken`). See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 
@@ -366,5 +366,8 @@ In order to set up the Telerik UI Gantt HtmlHelper for {{ site.framework }} comp
 ## See Also
 
 * [Basic Usage of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt)
+{% if site.core %}
+* [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+{% endif %}
 * [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)
 * [Server-Side API](/api/gantt)

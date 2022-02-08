@@ -1,12 +1,12 @@
 ---
-title: Server filtering
-page_title: Server filtering
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure the component to work with server-side filtering."
+title: Server Filtering
+page_title: Server f=Filtering
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure the component to work with server-side filtering."
 slug: htmlhelpers_scheduler_server_filtering_aspnetcore
 position: 7
 ---
 
-# Server filtering
+# Server Filtering
 
 This article explains how to implement server-side filtering for the Scheduler component.
 
@@ -25,7 +25,7 @@ When initializing the Scheduler that will work with server filtering there are t
 
 Here is a sample definition:
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Scheduler<SqlServerDataBase.Models.TaskViewModel>()
 	.Name("scheduler")
     .StartTime(6, 30, 0)
@@ -59,7 +59,7 @@ Here is a sample definition:
 )
 ```
 
-## Get the Start and End dates of the current Scheduler view
+## Get the Start and End Dates of the Current Scheduler View
 
 To be sure that the server will return only the events visible in the current Scheduler View, we have to pass to it the timespan that is currently visible. The timespan data is sent to the server using the Data parameter mentioned in the above section.
 
@@ -93,7 +93,7 @@ function getAdditionalData() {
 }
 ```
 
-## Configuration of the Read method on the server:
+## Configuration of the Read Method on the Server:
 
 Once the result of the getAdditionalData function is passed to the server it receives it in the ``range`` variable in the below Read method definition:
 

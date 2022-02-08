@@ -1,7 +1,7 @@
 ---
 title: Virtualization
 page_title: Virtualization
-description: "Learn how to set up the virtualization feature of the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to set up the virtualization feature of the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/virtualization
 slug: virtualization_multicolumncombobox_aspnetcore
 position: 5
@@ -66,6 +66,7 @@ You can configure a MultiColumnComboBox to use virtualization.
 
 1. Add the MultiColumnComboBox to the view and configure it to use virtualization.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
@@ -120,9 +121,11 @@ You can configure a MultiColumnComboBox to use virtualization.
                 return data;
             }
         </script>
+    ```
 
 If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you need the widget to display the model value as selected, set the `Text` configuration option by passing the field set as `DataTextField` to the `Text` option.
 
+```HtmlHelper
     @model MvcApplication1.Models.ProductViewModel
 
     @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
@@ -131,6 +134,7 @@ If the `AutoBind` option of the MultiColumnComboBox is set to `false` and you ne
         .DataTextField("ProductName")
         // Additional configuration.
     )
+```
 
 ## See Also
 

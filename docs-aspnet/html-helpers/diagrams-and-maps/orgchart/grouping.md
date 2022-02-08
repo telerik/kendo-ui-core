@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: Grouping
-description: "Learn how to group nodes in the Telerik UI OrgChart HtmlHelper for {{ site.framework }} works."
+description: "Learn how to group nodes in the Telerik UI OrgChart component for {{ site.framework }} works."
 previous_url: /helpers/editors/orgchart/grouping
 slug: htmlhelpers_orgchart_grouping_aspnetcore
 position: 2
@@ -13,7 +13,7 @@ The OrgChart enables you to group root nodes, or nodes that have the same parent
 
 The following example demonstrates how to group the OrgChart nodes by the `Group` field.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().OrgChart<TelerikMvcApp1.Models.OrgChartEmployeeViewModel>()
         .Name("orgchart")
         .GroupField("Group")

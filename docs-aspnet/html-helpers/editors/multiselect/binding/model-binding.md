@@ -1,7 +1,7 @@
 ---
 title:  Model Binding
 page_title: Model Binding
-description: "Learn how to implement model binding with Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement model binding with Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/binding/model-binding
 slug: htmlhelpers_multiselect_modelbinding_aspnetcore
 position: 6
@@ -40,6 +40,7 @@ Local data is the data that is available on the client when the MultiSelect is i
 
 1. Add the MultiSelect to the view and bind it to a property of the view model.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
@@ -47,7 +48,7 @@ Local data is the data that is available on the client when the MultiSelect is i
             .DataTextField("OrderName")
             .BindTo(Model.Orders)
         )
-
+    ```
 
 ## Remote Data
 
@@ -77,6 +78,7 @@ You can configure the MultiSelect to get its data from a remote source by making
 
 1. Add the MultiSelect to the view and configure its DataSource to use remote data.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
@@ -92,6 +94,7 @@ You can configure the MultiSelect to get its data from a remote source by making
                 .ServerFiltering(false);
             })
         )
+    ```
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Security Trimming
 page_title: Security Trimming
-description: "Use the built-in security trimming functionality of the Telerik UI Menu HtmlHelper for ASP.NET MVC."
+description: "Use the built-in security trimming functionality of the Telerik UI Menu component for ASP.NET MVC."
 previous_url: /helpers/navigation/menu/security-trimming
 slug: securitytrimming_menu_aspnetmvc
 position: 3
@@ -22,9 +22,11 @@ For more information on using a custom `AuthorizeAttribute`, refer to [this arti
 
 When the Menu items are removed because of lacking permissions, a parent item may be left without any children. For such cases, the Menu provides an option to remove the "orphaned" parent items.
 
+```HtmlHelper
     Html.Kendo().Menu()
         .Name("MainMenu")
         .SecurityTrimming(s => s.HideParent(true))
+```
 
 ## See Also
 

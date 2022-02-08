@@ -1,7 +1,7 @@
 ---
 title: Animations
 page_title: Animations
-description: "Learn how to control the animations in the Telerik UI PanelBar HtmlHelper for {{ site.framework }}."
+description: "Learn how to control the animations in the Telerik UI PanelBar component for {{ site.framework }}."
 slug: htmlhelpers_panelbar_animations_aspnetcore
 position: 6
 ---
@@ -14,7 +14,7 @@ You can modify these animations through the `Expand` and `Collapse` configuratio
 
 The following example demonstrates how to configure the PanelBar animation:
 
-```
+```HtmlHelper
 @(Html.Kendo().PanelBar()
     .Name("panelbar")
     .Animation(animation =>

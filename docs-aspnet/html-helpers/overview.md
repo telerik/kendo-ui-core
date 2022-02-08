@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: HTML Helpers Overview
 page_title: HTML Helpers Overview
 description: "Learn the basics when working with Telerik UI HTML Helpers for {{ site.framework }}"
 previous_url: /aspnetmvc-apps/mvc-6/known-issues, /mvc-6/known-issues, /known-issues

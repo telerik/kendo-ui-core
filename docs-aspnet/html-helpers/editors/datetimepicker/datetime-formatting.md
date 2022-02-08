@@ -1,7 +1,7 @@
 ---
 title: Date and Time Formatting
 page_title: Date and Time Formatting
-description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to define the date and time format of the HTML Helper."
+description: "Get started with the Telerik UI DateTimePicker for {{ site.framework }} and learn how to define the date and time format."
 slug: datetimeformatting_datetimepicker_aspnetcore
 position: 6
 ---
@@ -12,7 +12,7 @@ The DateTimePicker allows you to define its date and time formatting.
 
 The following example demonstrates how to define the date-time format.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .Value(DateTime.Now)
@@ -22,7 +22,7 @@ The following example demonstrates how to define the date-time format.
 
 The following example demonstrates how to define the time format.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .Value(DateTime.Now)
@@ -32,7 +32,7 @@ The following example demonstrates how to define the time format.
 
 The following example demonstrates how to define the interval (in minutes) between values in the drop-down list with time slots.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .Value(DateTime.Now)

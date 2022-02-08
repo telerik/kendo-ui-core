@@ -1,7 +1,7 @@
 ---
 title: Selection
 page_title: Selection
-description: "Enable the single, multiple, range-date, and week selections when working with the Telerik UI Calendar HtmlHelper for {{ site.framework }}."
+description: "Enable the single, multiple, range-date, and week selections when working with the Telerik UI Calendar component for {{ site.framework }}."
 slug: htmlhelpers_selection_calendar_aspnetcore
 position: 5
 ---
@@ -10,7 +10,7 @@ position: 5
 
 The Calendar enables the user to make single, multiple, range-date, and week selections.
 
-For a runnable example, refer to [the demo on multiple selection in the Calendar HtmlHelper](https://demos.telerik.com/{{ site.platform }}/calendar/selection).
+For a runnable example, refer to [the demo on multiple selection in the Calendar component](https://demos.telerik.com/{{ site.platform }}/calendar/selection).
 
 ## Single Date Selection
 
@@ -26,13 +26,18 @@ To perform the multiple date selection, the user can also use the keyboard:
 * The selection of a date from a specific view without utilizing the `Ctrl` key selects the date of the clicked cell and deselects all previously selected dates including the previously selected dates from other views or months.
 * The selection of a date that is already selected while holding the `Ctrl` key removes the date from the selection.
 
-```
-
+```HtmlHelper
     @(Html.Kendo().Calendar()
         .Name("calendar")
         .Selectable("multiple")
        )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-calendar selectable="multiple" name="calendar">
+    </kendo-calendar>
+```
+{% endif %}
 
 ## Range Date Selection
 

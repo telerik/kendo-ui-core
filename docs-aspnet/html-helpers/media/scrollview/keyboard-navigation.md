@@ -47,7 +47,7 @@ The ScrollView supports the following keyboard shortcuts:
 |`Enter`  |Selects the focused item in the pager
 |`Space`  |Selects the focused item in the pager
 
-```
+```HtmlHelper
     @(Html.Kendo().ScrollView()
         .Name("scrollView")
         .EnablePager(true)

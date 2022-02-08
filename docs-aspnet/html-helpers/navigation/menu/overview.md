@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Menu HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Menu component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/menu, /helpers/navigation/menu/overview
 slug: htmlhelpers_menu_aspnetcore
 position: 1
 ---
 
-# Menu HtmlHelper Overview
+# Menu Overview
 
+{% if site.core %}
+The Telerik UI Menu TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Menu widget.
+{% else %}
 The Telerik UI Menu HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Menu widget.
+{% endif %}
 
 The Menu displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
 
-* [Demo page for the Menu](https://demos.telerik.com/{{ site.platform }}/menu/index)
+* [Demo page for the Menu HtmlHelper](https://demos.telerik.com/{{ site.platform }}/menu/index)
+{% if site.core %}
+* [Demo page for the Menu TagHelper](https://demos.telerik.com/aspnet-core/menu/tag-helper)
+{% endif %}
 
 ## Initializing the Menu
 
-The following example demonstrates how to define the Menu by using the Menu HtmlHelper.
+The following example demonstrates how to define the Menu.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Menu()
     .Name("menu")
     .Items(items =>
@@ -75,6 +82,12 @@ The following example demonstrates how to define the Menu by using the Menu Html
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-menu name="menu">
+    </kendo-menu>
+```
+{% endif %}
 ```Controller
 public class MenuController : Controller
 {
@@ -87,9 +100,9 @@ public class MenuController : Controller
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Menu HtmlHelper.
+The following example demonstrates the basic configuration of the Menu.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Menu()
     .Name("menu")
     .Items(items =>
@@ -149,6 +162,22 @@ The following example demonstrates the basic configuration of the Menu HtmlHelpe
     });
 </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-menu name="menu">
+        <items>
+            <menu-item text="Home"></menu-item>
+            <menu-item text="Second Page"></menu-item>
+        </items>
+        <open-on-click enabled="true" root-menu-items="true" sub-menu-items="false" />
+        <popup-animation>
+            <open duration="500" />
+            <close duration="300" />
+        </popup-animation>
+        <scrollable enabled="false" />
+    </kendo-menu>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -164,7 +193,7 @@ You can subscribe to all Menu events. For a complete example on basic Menu event
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Menu()
         .Name("menu")
         .Events(e => e
@@ -187,7 +216,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Menu()
     .Name("menu")
     .Events(e => e
@@ -209,7 +238,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 The following example demonstrates how to subscribe to the `select` event of a single Menu item.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Menu()
     .Name("menu")
     .Items(items =>
@@ -223,5 +252,8 @@ The following example demonstrates how to subscribe to the `select` event of a s
 ## See Also
 
 * [Basic Usage of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu)
+{% if site.core %}
+* [Basic Usage of the Menu TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/menu/tag-helper)
+{% endif %}
 * [Using the API of the Menu HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/menu/api)
 * [Server-Side API](/api/menu)

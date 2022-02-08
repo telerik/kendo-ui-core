@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: DataSource Grouping
-description: "Learn how to set the initial group options in the DataSource HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the initial group options in the DataSource component for {{ site.framework }}."
 slug: htmlhelper_datasourcegroup
 ---
 
@@ -11,13 +11,15 @@ To request grouped data on initial load, configure the groups in the [`GroupDesc
 
 * The `Group` method sets the initial groups.
 
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-        .Group(groups =>
-        {
-            groups.Add(product => product.UnitPrice);
-            groups.Add(product => product.ProductName);
-        })
+```HtmlHelper
+    .Ajax()
+    .Read(read => read.Action("Products_Read", "Home"))
+    .Group(groups =>
+    {
+        groups.Add(product => product.UnitPrice);
+        groups.Add(product => product.ProductName);
+    })
+```
 
 ## See Also
 

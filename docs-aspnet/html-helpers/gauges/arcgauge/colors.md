@@ -1,7 +1,7 @@
 ---
 title: Colors
 page_title: Colors
-description: "Learn how to set the Colors of the Telerik UI ArcGauge HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the Colors of the Telerik UI ArcGauge component for {{ site.framework }}."
 slug: colors_arcgaugehelper_aspnetcore
 position: 3
 ---
@@ -10,7 +10,7 @@ position: 3
 
 The scale of the ArcGauge can be configured to show different colors for the different values. This allows for a diversified usage of the widget. The `Colors` option accepts a set of ranges with a respective `Color` option:
 
-````CSHTML
+````HtmlHelper
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)

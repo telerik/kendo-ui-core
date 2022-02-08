@@ -1,7 +1,7 @@
 ---
 title: Forms Integration
 page_title: Forms Integration
-description: "Learn how to use forms in the Telerik UI Window HtmlHelper for {{ site.framework }}."
+description: "Learn how to use forms in the Telerik UI Window component for {{ site.framework }}."
 previous_url: /helpers/layout/window/using-forms-in-window
 slug: htmlhelpers_window_forms_aspnetcore
 position: 7
@@ -9,7 +9,7 @@ position: 7
 
 # Forms Integration
 
-The Window HtmlHelper provides various approaches to load a `<form>` element as its content.
+The Window provides various approaches to load a `<form>` element as its content.
 
 ## Html.BeginForm inside Window
 
@@ -17,6 +17,7 @@ To insert a complete form inside a Window, end the Window declaration with `.Ren
 
 The following example demonstrates how to insert a complete form inside the Window.
 
+```HtmlHelper
     @{Html.Kendo().Window()
         .Name("window")
         .Content(@<text>
@@ -27,6 +28,7 @@ The following example demonstrates how to insert a complete form inside the Wind
         </text>)
         .Render();
     }
+```
 
 ## Loading External Form
 
@@ -36,50 +38,50 @@ Though the Window allows the creation of popup forms, you need to consider the c
 
 To handle this behavior, render the content in an `iframe`.
 
-```Index.cshtml
-@(Html.Kendo().Window()
-    .Name("PopupForm")
-    .Title("My Form")
-    .LoadContentFrom("GetForm","Home")
-    .Iframe(true)
-    .Resizable()
-    .Draggable()
-)
+```HtmlHelper(Index.cshtml)
+    @(Html.Kendo().Window()
+        .Name("PopupForm")
+        .Title("My Form")
+        .LoadContentFrom("GetForm","Home")
+        .Iframe(true)
+        .Resizable()
+        .Draggable()
+    )
 
-<script>
-    // Implement a script that will close the popup when model is valid.
-    function closeFormPopup() {
-        $("#PopupForm").data("kendoWindow").close();
-    }
-</script>
+        <script>
+            // Implement a script that will close the popup when model is valid.
+            function closeFormPopup() {
+                $("#PopupForm").data("kendoWindow").close();
+            }
+        </script>
 ```
 ```HomeController.cs
-public IActionResult GetForm()
-{
-    // Return the view with the form.
-    return View("Form");
-}
+    public IActionResult GetForm()
+    {
+        // Return the view with the form.
+        return View("Form");
+    }
 ```
-```Form.cshtml
-@* As this is loaded in an iframe, the view will have a layout to load an entire HTML page. *@
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+```HtmlHelper(Form.cshtml)
+    @* As this is loaded in an iframe, the view will have a layout to load an entire HTML page. *@
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
-@model TelerikMvcApp.Models.MyModel
+    @model TelerikMvcApp.Models.MyModel
 
-@using (Html.BeginForm("MyModel_Create", "MyModel", FormMethod.Post))
-{
-    @Html.ValidationSummary()
+    @using (Html.BeginForm("MyModel_Create", "MyModel", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
 
-    @Html.EditorForModel(Model);
+        @Html.EditorForModel(Model);
 
-    @(Html.Kendo().Button()
-        .Name("SubmitBtn")
-        .HtmlAttributes(new { type = "submit" })
-        .Content("Submit")
-    )
-}
+        @(Html.Kendo().Button()
+            .Name("SubmitBtn")
+            .HtmlAttributes(new { type = "submit" })
+            .Content("Submit")
+        )
+    }
 ```
 ```MyModel.cs
 public class MyModel
@@ -112,7 +114,7 @@ public IActionResult MyModel_Create(MyModel model)
 
 In case the Form is used in a RazorPages application, create the form with no ActionMethod and Controller. Upon submission, the OnPost() ActionMethod in the code-behind will be invoked:
 
-```Form.cshtml
+```HtmlHelper(Form.cshtml)
     @page
     @model Telerik.Examples.RazorPages.Pages.Form.FormAjaxSubmitModel
     @{ ViewData["Title"] = "FormIndex"; }

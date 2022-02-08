@@ -1,14 +1,14 @@
 ---
 title:  Razor Page
 page_title: Configure a Form in a Razor Page.
-description: "An example on how to configure the Telerik UI Form HtmlHelper for {{ site.framework }} in a Razor Page."
+description: "An example on how to configure the Telerik UI Form component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_form_razorpage_aspnetcore
 position: 7
 ---
 
 # Razor Page
 
-This article describes how to configure the Telerik UI Form HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+This article describes how to configure the Telerik UI Form for {{ site.framework }} in a RazorPage scenario.
 
 When a complex model is used, which is the case with the Razor Page scenario, the Form needs to have the FormData configuration set. As the Form makes a POST request antiforgery token needs to be added. This can be achieved, for example, by appending a hidden input to the Form.
 
@@ -18,7 +18,7 @@ By default, when the View containing the Form is loaded, clicking on the Submit 
 
 See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
@@ -91,7 +91,7 @@ When the Form is submitted with ajax, the default submit event of the component 
 
 See the implementation details in the example below, where the JSON errors are appended to the validation summary and it is toggled it in the ajax success and error callbacks. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @{
         var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;

@@ -1,19 +1,20 @@
 ---
 title: Binding
 page_title: Binding
-description: "Learn how to implement data binding with Telerik UI RadioGroup HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement data binding with Telerik UI RadioGroup component for {{ site.framework }}."
 slug: htmlhelpers_radiogroup_binding_aspnetcore
 position: 2
 ---
 
 # Binding
 
-When using the Html helpers you can bind the radio button items by using the [Items()](#items) method or the [Bindto()](#bindto) method.
+When using the RadioGroup component, you can bind the radio button items by using the [Items()](#items) method or the [Bindto()](#bindto) method.
 
 ## Items method
 
 The example below demonstrates how to use the Items() method to configure the radio buttons in the RadioGroup widget.
 
+```HtmlHelper
     @(Html.Kendo().RadioGroup()
         .Name("radiogroup")
         .Items(i =>
@@ -24,7 +25,20 @@ The example below demonstrates how to use the Items() method to configure the ra
         })
         .Value("1")
     )
-
+```
+{% if site.core %}
+```TagHelper
+   <kendo-radiogroup name="radiogroup"
+                      radio-name="radiogroup">
+        <kendo-radiogroup-items>
+            <kendo-radiogroup-item value="one" label="First">
+            </kendo-radiogroup-item>
+            <kendo-radiogroup-item value="two" label="Second">
+            </kendo-radiogroup-item>
+        </kendo-radiogroup-items>
+    </kendo-radiogroup>
+```
+{% endif %}
 
 ## BindTo method
 
@@ -79,12 +93,24 @@ You can configure the items in the RadioGroup widget by using the BindTo method.
 
 1. Add the RadioGroup to the view and bind it to a property of the view model.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.RadioGroupViewModel
 
         @(Html.Kendo().RadioGroup()
             .Name("radiogroup")   
             .BindTo(Model.Items)
         )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.RadioGroupViewModel
+
+        <kendo-radiogroup name="radiogroup"
+                      radio-name="radiogroup"                      
+                      bind-to="Model.Items">
+        </kendo-radiogroup>
+    ```
+    {% endif %}
 
 ## See Also
 

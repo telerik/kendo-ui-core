@@ -14,7 +14,7 @@ The Telerik UI Diagram for {{ site.framework }} provides a templating engine and
 
 To bind the Diagram to remote data, specify the `DataSource` option. You can either create the data source outside the Diagram, or pass it in it. If multiple Diagrams are bound to the same data set, you have to create the data source as an object to which you can refer in the different helpers. If the Diagram is the only item that is bound to the data, create it inline.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Diagram()
             .Name("diagram")
             .DataSource(dataSource => dataSource
@@ -41,7 +41,7 @@ To bind the Diagram to remote data, specify the `DataSource` option. You can eit
 
 To create a network of visuals and customize the appearance of the Diagram, set its `Visual` configuration.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Diagram()
               .Name("diagram")
               .DataSource(dataSource => dataSource

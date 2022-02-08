@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure it for Ajax binding."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for Ajax binding."
 previous_url: /helpers/scheduling/scheduler/ajax-editing
 slug: htmlhelpers_scheduler_ajaxbinding_aspnetcore
 position: 1
@@ -9,11 +9,11 @@ position: 1
 
 # Ajax Binding
 
-You can configure the Scheduler HtmlHelper for Ajax binding.
+You can configure the Scheduler for Ajax binding.
 
 For a complete example, refer to the [demo on binding the Scheduler to remote data](https://demos.telerik.com/{{ site.platform }}/scheduler/resources).
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
         .Name("scheduler")
         .Date(new DateTime(2013, 6, 13))

@@ -17219,36 +17219,36 @@ The type of the series.
 
 The supported values are:
 
-* area
-* bar
-* bubble
-* bullet
-* candlestick
-* column
-* donut
-* funnel
-* heatmap
-* horizontalWaterfall
-* line
-* ohlc
-* pie
-* polarArea
-* polarLine
-* polarScatter
-* radarArea
-* radarColumn
-* radarLine
-* rangeArea
-* rangeBar
-* rangeColumn
-* scatter
-* scatterLine
-* verticalArea
-* verticalBoxPlot
-* verticalBullet
-* verticalLine
-* verticalRangeArea
-* waterfall
+* [`area`](/controls/charts/chart-types/area-charts)
+* [`bar`](/controls/charts/chart-types/bar-charts)
+* [`bubble`](/controls/charts/chart-types/bubble-charts)
+* [`bullet`](/controls/charts/chart-types/bullet-charts)
+* [`candlestick`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.candlestick)
+* [`column`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.column)
+* [`donut`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.donut)
+* [`funnel`](/controls/charts/chart-types/funnel-charts)
+* [`heatmap`](/controls/charts/chart-types/heatmap)
+* [`horizontalWaterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/horizontal)
+* [`line`](/controls/charts/chart-types/line-charts)
+* [`ohlc`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.ohlc)
+* [`pie`](/controls/charts/chart-types/pie-charts)
+* [`polarArea`](https://demos.telerik.com/kendo-ui/polar-charts/polar-area)
+* [`polarLine`](https://demos.telerik.com/kendo-ui/polar-charts/index)
+* [`polarScatter`](https://demos.telerik.com/kendo-ui/polar-charts/polar-scatter)
+* [`radarArea`](https://demos.telerik.com/kendo-ui/radar-charts/radar-area)
+* [`radarColumn`](https://demos.telerik.com/kendo-ui/radar-charts/radar-column)
+* [`radarLine`](https://demos.telerik.com/kendo-ui/radar-charts/index)
+* [`rangeArea`](https://demos.telerik.com/kendo-ui/range-area-charts/index)
+* [`rangeBar`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
+* [`rangeColumn`](https://demos.telerik.com/kendo-ui/range-bar-charts/index)
+* [`scatter`](/controls/charts/chart-types/scatter-charts)
+* [`scatterLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.scatterline)
+* [`verticalArea`](api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalarea)
+* [`verticalBoxPlot`](https://demos.telerik.com/kendo-ui/box-plot-charts/vertical)
+* [`verticalBullet`](/controls/charts/chart-types/bullet-charts)
+* [`verticalLine`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalline)
+* [`verticalRangeArea`](/api/javascript/dataviz/ui/chart/configuration/seriesdefaults.verticalrangearea)
+* [`waterfall`](https://demos.telerik.com/kendo-ui/waterfall-charts/index)
 
 #### Example - set the chart series type
 

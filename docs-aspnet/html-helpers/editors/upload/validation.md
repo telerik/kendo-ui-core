@@ -1,7 +1,7 @@
 ---
 title: File Validation
 page_title: File Validation
-description: "Learn how to configure file validation on the client before it has been uploaded using the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure file validation on the client before it has been uploaded using the Telerik UI Upload component for {{ site.framework }}."
 slug: htmlhelpers_upload_validation_aspnetcore
 position: 7
 ---
@@ -20,19 +20,19 @@ The Upload supports three types of validation:
 
 The following example demonstrates a sample configuration for all the three types of validation.
 
-```
-@(Html.Kendo().Upload()
-    .Name("files")
-    .Async(a => a
-        .Save("ChunkSave", "Upload")
-        .Remove("Remove", "Upload")
+```HtmlHelper
+    @(Html.Kendo().Upload()
+        .Name("files")
+        .Async(a => a
+            .Save("ChunkSave", "Upload")
+            .Remove("Remove", "Upload")
+        )
+        .Validation(validation => validation
+            .AllowedExtensions(new string[] { ".gif", ".jpg", ".png" })
+            .MaxFileSize(31457280)
+            .MinFileSize(30720)
+        )
     )
-    .Validation(validation => validation
-        .AllowedExtensions(new string[] { ".gif", ".jpg", ".png" })
-        .MaxFileSize(31457280)
-        .MinFileSize(30720)
-    )
-)
 ```
 
 ### File Extension

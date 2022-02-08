@@ -1,14 +1,14 @@
 ---
 title: Items
 page_title: Items
-description: "Learn how to configure the items in the SkeletonContaienr HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the items in the SkeletonContaienr components for {{ site.framework }}."
 slug: htmlhelpers_skeletoncontainer_aspnetcore_items
 position: 2
 ---
 
 # Items
 
-The Telerik UI SkeletonContainer HtmlHelper for {{ site.framework }} uses the default [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) layout as a base. Each cell or group of cells from the CSS Grid can be represented by an item from the SkeletonContainer.
+The Telerik UI SkeletonContainer component for {{ site.framework }} uses the default [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) layout as a base. Each cell or group of cells from the CSS Grid can be represented by an item from the SkeletonContainer.
 
 Each item contains the following properties:
 
@@ -20,7 +20,7 @@ Each item contains the following properties:
 
 The following example shows how to create a SkeletonContainer using a grid featuring all shape types:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().SkeletonContainer()
         .Name("skeleton")
         .Height("340px")

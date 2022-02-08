@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: ListBox Globalization
-description: "Get started with the Telerik UI ListBox HtmlHelper for {{ site.framework }} and learn about the globalization options it supports."
+description: "Get started with the Telerik UI ListBox component for {{ site.framework }} and learn about the globalization options it supports."
 previous_url: /helpers/editors/listbox/globalization/overview
 slug: htmlhelpers_listbox_globalization_aspnetcore
 position: 1
@@ -14,7 +14,7 @@ The globalization process combines the translation of component messages (locali
 * [Localization of messages]({% slug htmlhelpers_listbox_localization_aspnetcore %})
 * [Right-to-left support]({% slug htmlhelpers_listbox_rtl_aspnetcore %})
 
-For more information on using localization and right-to-left languages with {{ site.product }} HTML Helpers, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
+For more information on using localization and right-to-left languages with {{ site.product }} components, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
 
 ## See Also
 

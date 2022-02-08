@@ -13,7 +13,7 @@ By default, the Telerik UI ListBox for {{ site.framework }} automatically binds 
 
 Immediately after the ListBox loads, the [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}) sends a query and the data is loaded to the helper. To disable this behavior, set the `AutoBind` option of the ListBox to `false`.
 
-```
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .DataTextField("ContactName")
@@ -44,4 +44,7 @@ For more information about binding the ListBox to data, refer to the articles on
 ## See Also
 
 * [Basic Usage of the ListBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/index)
+{% if site.core %}
+* [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+{% endif %}
 * [Server-Side API](/api/listbox)

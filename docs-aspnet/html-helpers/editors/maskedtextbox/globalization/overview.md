@@ -14,7 +14,7 @@ To determine the currency symbol and other culture-specific properties, the Mask
 
 The globalization functionality of the MaskedTextBox is enabled through its [right-to-left support]({% slug rtl_maskedtextbox_aspnetcore %}). For a complete example, refer to the [demo on globalization of the MaskedTextBox](https://demos.telerik.com/{{ site.platform }}/maskedtextbox/globalization).
 
-For more information on using localization and right-to-left languages with {{ site.product }} HTML Helpers, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
+For more information on using localization and right-to-left languages with {{ site.product }} components, refer to the article on [globalization support by {{ site.product }}]({% slug overview_globalization_core %}).
 
 ## See Also
 

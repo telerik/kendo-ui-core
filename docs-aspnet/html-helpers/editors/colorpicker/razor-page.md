@@ -1,18 +1,18 @@
 ---
 title:  Razor Page
 page_title: Configure a ColorPicker in Razor Page.
-description: "An example on how to configure the Telerik UI ColorPicker HtmlHelper for {{ site.framework }} in a Razor Page."
+description: "An example on how to configure the Telerik UI ColorPicker component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_colorpicker_razorpage_aspnetcore
 position: 6
 ---
 
 # Razor Page
 
-This article describes how to configure the Telerik UI ColorPicker HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+This article describes how to configure the Telerik UI ColorPicker for {{ site.framework }} in a RazorPage scenario.
 
 For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)        
+```tab-HtmlHelper(csthml)        
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	

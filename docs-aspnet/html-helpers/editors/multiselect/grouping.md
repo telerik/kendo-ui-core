@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: Grouping
-description: "Learn how to group data in the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to group data in the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/grouping
 slug: htmlhelpers_multiselect_grouping_aspnetcore
 position: 6
@@ -17,6 +17,7 @@ To group the data, define a group `datasource` expression which uses a custom Da
 
 The following example demonstrates how to group the data in the MultiSelect by country.
 
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("customers")
         .Placeholder("Select customers...")
@@ -40,6 +41,7 @@ The following example demonstrates how to group the data in the MultiSelect by c
             };
         }
     </script>
+```
 
 ## See Also
 

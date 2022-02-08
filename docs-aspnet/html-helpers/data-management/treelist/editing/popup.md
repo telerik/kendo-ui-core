@@ -1,7 +1,7 @@
 ---
 title: Popup
 page_title: Popup Editing
-description: "Define commands and set the edit mode to configure the Telerik UI TreeList HtmlHelper for {{ site.framework }} for popup editing."
+description: "Define commands and set the edit mode to configure the Telerik UI TreeList component for {{ site.framework }} for popup editing."
 slug: htmlhelpers_treelist_aspnetcore_popup_editing
 position: 4
 ---
@@ -75,6 +75,7 @@ To set the popup edit mode of the TreeList:
 
 1. In the view, configure the TreeList to use the action methods created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records so the DataSource on the client is aware of the server-side changes.
 
+    ```HtmlHelper
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModelPopUp>()
             .Name("treelist")
             .Toolbar(toolbar => toolbar.Create())
@@ -102,7 +103,7 @@ To set the popup edit mode of the TreeList:
                 })
             )
         )	  
-
+    ```
 ## See Also
 
 * [Editing Approaches by the TreeList HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/treelist/editing)

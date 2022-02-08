@@ -1,3 +1,5 @@
+---
+title: Razor Pages
 page_title: The Telerik UI MaskedTextBox in RazorPages
 description: "Telerik UI MaskedTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_maskedtextboxhelper_aspnetcore
@@ -25,7 +27,7 @@ To bind the Telerik UI MaskedTextBox within a `RazorPage`:
 1. Declare the widget either in a form or as a stand-alone widget:
 
 
-    ```
+    ```HtmlHelper
         <form method="post">
             <label for="phone_number">Phone number:</label>
             @(Html.Kendo().MaskedTextBoxFor(c=>c.PhoneNumber)

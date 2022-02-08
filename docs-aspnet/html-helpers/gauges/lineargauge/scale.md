@@ -1,12 +1,12 @@
 ---
 title: Scale
 page_title: Scale
-description: "Learn the Options of the Scale of the Telerik UI LinearGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Options of the Scale of the Telerik UI LinearGauge component for {{ site.framework }}."
 slug: scale_lineargaugehelper_aspnetcore
 position: 2
 ---
 
-## Linear Gauge Scale
+# Linear Gauge Scale
 
 The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the values, pointers and labels. It can be customized by adding the  `Scale` option to the widget. The `Scale` exposes the following child options:
 
@@ -26,7 +26,7 @@ The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the val
 
 * The `Max` (`double`) sets the maximum value of the widget.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Scale(scale => scale
@@ -34,7 +34,7 @@ The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the val
               .Max(180)
           )
     )
-````
+```
 
 ## MinorUnit and MajorUnit
 
@@ -42,7 +42,7 @@ The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the val
 
 * The `MinorUnit` (`double`) parameter controls the interval between the minor unit divisions of the widget.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Scale(scale => scale
@@ -50,46 +50,46 @@ The scale of the Telerik UI LinearGauge for {{ site.framework }} renders the val
               .MinorUnit(5)
           )
     )
-````
+```
 
 ## Mirror
 
 By design, the labels and unit devisions of the `Scale` are rendered to the left, or, to the top if the gauge is [horizontal](#reverse). If you set the `Mirror` (`bool`) to `true`, the `Scale` will render the labels and unit devisions to the right or to the bottom, respectively.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Scale(scale => scale
             .Mirror(true)
           )
     )
-````
+```
 
 ## Reverse
 
 If you set the `Reverse` (`bool`) option to `true`, the values of the scale will increase from top to bottom. By default they will raise from the bottom to the top.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Scale(scale => scale
             .Reverse(true)
           )
     )
-````
+```
 
 ## Vertical
 
 By design, the default orientation of the widget is vertical. Setting the `Vertical` (`bool`) option to `false` would render the widget horizontally.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Scale(scale => scale
             .Vertical(false)
           )
     )
-````
+```
 
 ## See Also
 

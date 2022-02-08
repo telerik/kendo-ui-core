@@ -14,7 +14,7 @@ By default, the user has to follow the Steps sequence. This behavior could be cu
 
 The following example demonstrates how to allow the user to navigate to any Step of the Stepper, irrespective of the Step sequence.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Stepper()
         .Name("stepper")
         .Linear(false)
@@ -26,6 +26,17 @@ The following example demonstrates how to allow the user to navigate to any Step
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stepper name="stepper" linear="false" >
+        <steps>
+            <step label="First"></step>
+            <step label="Second"></step>
+            <step label="Third"></step>
+        </steps>
+    </kendo-stepper>
+```
+{% endif %}
 
 ## See Also
 

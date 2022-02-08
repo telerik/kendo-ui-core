@@ -1,7 +1,7 @@
 ---
 title:  Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI PanelBar HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI PanelBar component for {{ site.framework }}."
 slug: htmlhelpers_panelbar_ajaxbinding_aspnetcore
 position: 3
 ---
@@ -10,7 +10,7 @@ position: 3
 
 The PanelBar provides support for remote data binding by using a `DataSource` configuration object.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().PanelBar()
     .Name("panelbar")
     .DataTextField("Name")

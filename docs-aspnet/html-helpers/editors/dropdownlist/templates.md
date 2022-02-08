@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI DropDownList component for {{ site.framework }}."
 slug: htmlhelpers_dropdownlist_templates_aspnetcore
 position: 4
 ---
@@ -16,7 +16,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The following example demonstrates how to customize the DropDownList by declaring an inline string.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -40,7 +40,7 @@ The following example demonstrates how to customize the DropDownList by declarin
 
 The following example demonstrates how to customize the DropDownList by referencing a script tag by its `id`.
 
-```
+```HtmlHelper
     @(Html.Kendo().DropDownList()
                 .Name("customers")
                 .DataTextField("ContactName")
@@ -62,6 +62,7 @@ The item template manages the way the list items of a DropDownList are rendered.
 
 The following example demonstrates how to define an item template and how to evaluate it against the dataItem.
 
+```HtmlHelper
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -81,6 +82,7 @@ The following example demonstrates how to define an item template and how to eva
                     });
                 })
     )
+```
 
 ## Value Templates
 
@@ -88,6 +90,7 @@ The value template manages the way the selected value of a DropDownList is rende
 
 > Include only HTML elements in the value templates.
 
+```HtmlHelper
     <!-- Template -->
     <script id="valueTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#
@@ -107,11 +110,13 @@ The value template manages the way the selected value of a DropDownList is rende
                     });
                 })
     )
+```
 
 ## Header Templates
 
 The header template manages the way the pop-up header of a DropDownList is rendered.
 
+```HtmlHelper
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
@@ -131,11 +136,13 @@ The header template manages the way the pop-up header of a DropDownList is rende
                     });
                 })
     )
+```
 
 ## Footer Templates
 
 The footer template manages the way the pop-up footer of a DropDownList is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
+```HtmlHelper
     <!-- Template -->
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
@@ -155,6 +162,7 @@ The footer template manages the way the pop-up footer of a DropDownList is rende
                     });
                 })
     )
+```
 
 ## No-Data Templates
 
@@ -162,6 +170,7 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
 
 > When the `noDataTemplate` option is defined, the DropDownList always opens the popup element.
 
+```HtmlHelper
     <!-- Template -->
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
@@ -181,11 +190,13 @@ The DropDownList displays `noDataTemplate` in the popup when the data source is 
                     });
                 })
     )
+```
 
 ## Option Label Template
 
 The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has been set. Use `OptionLabelTemplate` if you want to customize the markup of the optionLabel.
 
+```HtmlHelper
     <!-- Template -->
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
@@ -206,6 +217,7 @@ The DropDownList displays an `OptionLabelTemplate` when the `OptionLabel` has be
                     });
                 })
     )
+```
 
 ## See Also
 

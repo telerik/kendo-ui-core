@@ -1,20 +1,26 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI CheckBox HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI CheckBox component for {{ site.framework }}."
 slug: htmlhelpers_checkbox_aspnetcore_overview
 position: 1
 ---
 
-# CheckBox HtmlHelper Overview
+# CheckBox Overview
 
-The Telerik UI CheckBox HtmlHelper for {{ site.framework }} is based on the convential HTML checkbox element. It allows you to add more customizable checkboxes to your application.
+{% if site.core %}
+The Telerik UI CheckBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI CheckBox widget.
+{% else %}
+The Telerik UI CheckBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DataSource widget.
+{% endif %}
+
+The Telerik UI CheckBox for {{ site.framework }} is based on the convential HTML checkbox element. It allows you to add more customizable checkboxes to your application.
 
 ## Initializing the CheckBox
 
-The following example demonstrates how to define the CheckBox by using the CheckBox HtmlHelper.
+The following example demonstrates how to define the CheckBox.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBox()
         .Name("eq1")    
         .Checked(true)
@@ -24,9 +30,9 @@ The following example demonstrates how to define the CheckBox by using the Check
 
 ## Two-way Binding
 
-To use the Telerik UI Checkbox as an editor for a field in your C# Model declare it with the CheckboxFor HtmlHelper:
+To use the Telerik UI Checkbox as an editor for a field in your C# Model, declare by using the CheckboxFor helper:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBoxFor(m=>m.BooleanFieldName)
         .Label("Editable Checkbox"))
     )

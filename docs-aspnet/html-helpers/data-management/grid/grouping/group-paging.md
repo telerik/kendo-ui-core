@@ -15,6 +15,7 @@ By default, the groups are rendered collapsed and each row signifies one item fr
 
 To enable group paging, use the `GroupPaging()` method as part of the data source configuration, add a `Group()` and a `PageSize()` to see the result.
 
+```HtmlHelper
     .DataSource(dataSource => dataSource
         .Ajax()
         .GroupPaging(true)
@@ -24,7 +25,20 @@ To enable group paging, use the `GroupPaging()` method as part of the data sourc
         {
            x.Add(y => y.City);
         })
-    )   
+    )
+```  
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="550">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20" group-paging="true">
+            <groups>
+                <group direction="asc" field="Country">
+                </group>
+            </groups> 
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
 
 ## Using with Virtual Scrolling
 

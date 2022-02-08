@@ -1,7 +1,7 @@
 ---
 title: Display Modes
 page_title: Display Modes
-description: "Use the display modes and handle the rendering of the Telerik UI Drawer HtmlHelper for {{ site.framework }}."
+description: "Use the display modes and handle the rendering of the Telerik UI Drawer component for {{ site.framework }}."
 previous_url: /helpers/navigation/drawer/display-modes
 slug: displaymodes_drawer_aspnetcore
 position: 2
@@ -25,8 +25,14 @@ The height of the Drawer is determined by the higher content of the template of 
 
 You can use the `Mini()` option both with the overlay and push modes by adding a the `Mini()` method. If set to `true`, a portion of the Drawer that is always visible occupies the default width of `50px` and the main template. If the `Mini()` configurator is used, the `Width()` and `Template()`/`TemplateId()` can also be changed.
 
+```HtmlHelper
     .Mini(m=>m.Width(500).TemplateId("mini-template"))
-
+```
+{% if site.core %}
+```TagHelper
+     <mini width="100" template-id="mini-template"/>
+```
+{% endif %}
 ## See Also
 
 * [Mini Mode by the Drawer HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/drawer/mini)

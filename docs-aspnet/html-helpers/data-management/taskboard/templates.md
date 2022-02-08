@@ -24,8 +24,9 @@ For a complete example, refer to the [Templates demo of the TaskBoard](https://d
 
 The card template controls the rendering of the cards. It is set through the `TemplateId`, or the `Template` configuration.
 
+```HtmlHelper
     .TemplateId("card-template")
-
+```
 The following example shows a card template.
 
     <script id="card-template" type="text/x-kendo-template">
@@ -44,12 +45,14 @@ The column template controls the rendering of the column header. In the template
 
 The column template is set through the `TemplateId`, or the `Template` sub-options of the `ColumnSettings` configuration.
 
+```HtmlHelper
     .ColumnSettings(s =>
     {
         s.TemplateId("column-template");
         s.DataTextField("Text");
         s.DataStatusField("ID");
     })
+```
 
 The following example shows a column template.
 
@@ -68,7 +71,9 @@ The following example shows a column template.
 
 The editable header template controls the rendering of the header. It is set through the `HeaderTemplateId`, or the `HeaderTemplate` sub-options of the `Editable` configuration.
 
+```HtmlHelper
     .Editable(ed => ed.HeaderTemplateId("editable-header-template"))
+```
 
 The following example shows an editable header template.
 
@@ -80,10 +85,12 @@ The following example shows an editable header template.
 
 The preview pane template controls the rendering of the preview pane. It is set through the `TemplateId`, or the `Template` sub-options of the `PreviewPane` configuration.
 
+```HtmlHelper
     .PreviewPane(p =>
     {
         p.TemplateId("previewPane-content-template");
     })
+```
 
 The following example shows a preview pane template.
 
@@ -106,10 +113,12 @@ The following example shows a preview pane template.
 
 The preview pane header template controls the rendering of the header of the preview pane. It is set through the `HeaderTemplateId`, or the `HeaderTemplate` sub-options of the `PreviewPane` configuration.
 
+```HtmlHelper
     .PreviewPane(p =>
     {
         p.HeaderTemplateId("previewPane-header-template");
     })
+```
 
 The following example shows a preview pane header template.
 

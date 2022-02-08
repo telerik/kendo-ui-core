@@ -1,7 +1,7 @@
 ---
 title: Cascading DropDownLists
 page_title: Cascading DropDownLists
-description: "Learn how to implement a series of two or more Telerik UI DropDownList HtmlHelper for {{ site.framework }} and cascade them."
+description: "Learn how to implement a series of two or more Telerik UI DropDownList component for {{ site.framework }} and cascade them."
 slug: htmlhelpers_dropdownlist_cascading_aspnetcore
 position: 6
 ---
@@ -35,7 +35,7 @@ Additional data can be sent with the request by [using the Data method]({% slug 
 
 The following example demonstrates how to configure the cascading functionality for the {{ site.product_short }} DropDownList:
 
-```Razor
+```HtmlHelper
     <h4>Categories:</h4>
     @(Html.Kendo().DropDownList()
               .Name("categories")

@@ -11,7 +11,7 @@ position: 3
 
 The ListBox provides templates for its items that are passed as а function or string.
 
-``` index.cshtml
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .DataTextField("ContactName")

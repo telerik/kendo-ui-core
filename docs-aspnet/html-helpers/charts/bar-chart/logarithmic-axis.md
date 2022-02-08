@@ -1,7 +1,7 @@
 ---
 title: Logarithmic Axis
 page_title: Logarithmic Axis
-description: "Learn how to set the Logarithmic Axis of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the Logarithmic Axis of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_logarithmic_axis
 ---
 
@@ -13,7 +13,7 @@ This demo shows how you can use a logarithmic axis for the ASP.NET Core Column C
 
 The following implementation demonstrates the code needed for setting the Date Axis for Bar Chart:
 
-```View
+```HtmlHelper
  @model IEnumerable<int>
 
 <div class="demo-section k-content wide">

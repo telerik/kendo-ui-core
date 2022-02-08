@@ -1,7 +1,7 @@
 ---
 title:  Razor Page
 page_title: Configure a DataSource for the Menu for Remote Binding in Razor Page.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Menu HtmlHelper for {{ site.framework }} ."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Menu component for {{ site.framework }} ."
 slug: htmlhelpers_menu_razorpage_aspnetcore
 position: 5
 ---
@@ -12,7 +12,7 @@ This article describes how to configure a Remote DataSource of a Telerik Menu in
 
 In order to set up the Menu component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`). See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)   
+```tab-HtmlHelper(csthml)   
      
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()

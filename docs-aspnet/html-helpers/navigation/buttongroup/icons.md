@@ -1,7 +1,7 @@
 ---
 title: Icon ButtonGroup
 page_title: Icon ButtonGroup
-description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }}."
+description: "Accommodate an icon and enhance the meaning of the text content of the Telerik UI ButtonGroup component for {{ site.framework }}."
 previous_url: /helpers/navigation/buttongroup/icons
 slug: icons_buttongroup_aspnetcore
 position: 3
@@ -13,15 +13,15 @@ The ButtonGroup can accommodate an icon and in this way to enhance the meaning o
 
 You can configure the icons by using the `.Icon()` method of the ButtonGroup.
 
-```
-         @(Html.Kendo().ButtonGroup()
-            .Name("player")
-            .Items(t =>
-            {
-                    t.Add().Icon("play");
-                    t.Add().Icon("pause");
-                    t.Add().Icon("stop");
-            }))
+```HtmlHelper
+    @(Html.Kendo().ButtonGroup()
+    .Name("player")
+    .Items(t =>
+    {
+            t.Add().Icon("play");
+            t.Add().Icon("pause");
+            t.Add().Icon("stop");
+    }))
 ```
 
 This ButtonGroup configuration is expected to produce the following HTML output:

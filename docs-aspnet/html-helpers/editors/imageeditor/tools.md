@@ -1,7 +1,7 @@
 ---
 title: Tools
 page_title: Tools
-description: "Learn which tools are available in the Telerik UI ImageEditor HtmlHelper for {{ site.framework }}."
+description: "Learn which tools are available in the Telerik UI ImageEditor component for {{ site.framework }}."
 slug: htmlhelpers_imageeditor_tools_aspnetcore
 position: 2
 ---
@@ -10,7 +10,7 @@ position: 2
 
 The ImageEditor provides a predefined collection of tools that are used to interact with the control.
 
-You can enable any of these tools by using the `Toolbar()` HtmlHelper method and configuring the Items collection to add the required tools.
+You can enable any of these tools by using the `Toolbar()` method and configuring the Items collection to add the required tools.
 
 ## Default Tools
 
@@ -18,7 +18,7 @@ By default, all tools of the ImageEditor are included in the Toolbar.
 
 The following example demonstrates how to instantiate an ImageEditor with predefined set of tools and add a custom button to the ImageEditor Toolbar.
 
-```
+```HtmlHelper
     @(Html.Kendo().ImageEditor()
         .Name("imageEditor")
             .Toolbar(toolbar=>toolbar.Items(i=> {
@@ -86,7 +86,7 @@ First, create a new command by extending the ImageEditorCommand class.
 
 Then add the custom command to the ImageEditor Toolbar:
 
-```
+```HtmlHelper
     .Toolbar(toolbar=>toolbar.Items(i=> {
             i.Add().Command("MakeThumbnailImageEditorCommand").Type("button").Text("Make Thumbnail");
         }))
@@ -100,4 +100,7 @@ If the ImageUrl configuration option is used to set a predefined image for the I
 ## See Also
 
 * [Overview of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/index)
+{% if site.core %}
+* [Overview of the ImageEditor TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/imageeditor/tag-helper)
+{% endif %}
 * [Server-Side API](/api/imageeditor)

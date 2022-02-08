@@ -1,7 +1,7 @@
 ---
 title: SignalR Binding
 page_title: SignalR Binding
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure it for SignalR Binding."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure it for SignalR Binding."
 slug: htmlhelpers_scheduler_signalr_binding_aspnetcore
 position: 4
 ---
@@ -57,7 +57,7 @@ For further details refer to [the official Microsoft documentation](https://docs
 
  The [Scheduler SignalR Demo](https://demos.telerik.com/{{ site.platform }}/scheduler/signalr) and the [SignalR Meeting hub](https://github.com/telerik/kendo-ui-demos-service/blob/master/demos-and-odata-v3/KendoCRUDService/Hubs/MeetingHub.cs) are built using Microsoft.AspNet.SignalR and v1.1.3 of the client-side scripts.
 
- To setup an application to use the Scheduler HtmlHelper for {{ site.framework }} and the Microsoft.AspNet.SignalR library you need to:
+ To setup an application to use the Scheduler for {{ site.framework }} and the Microsoft.AspNet.SignalR library you need to:
  * Map to the hub when application starts
  ```
     public class Startup
@@ -89,7 +89,7 @@ For further details refer to [the official Microsoft documentation](https://docs
         }
     </script>
  ```
- ```Razor
+ ```HtmlHelper
     @(Html.Kendo().Notification()
         .Name("notification")
         .Width("100%")
@@ -280,7 +280,7 @@ The steps below outline what you need to do to configure the Scheduler HtmlHelpe
         }
     </script>
 ```
-```Razor
+```HtmlHelper
     @(Html.Kendo().Notification()
         .Name("notification")
         .Width("100%")

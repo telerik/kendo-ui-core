@@ -1,7 +1,7 @@
 ---
 title: Aggregates
 page_title: Aggregates
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and group its data by using aggregate functions."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and group its data by using aggregate functions."
 slug: aggregates_aspnetcore_grid
 position: 2
 ---
@@ -54,7 +54,7 @@ To enable aggregates:
 1. Group the grid to see the effect on group-specific templates.
 
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.ProductViewModel>()
             .Name("grid")
             .Columns(columns =>
@@ -95,7 +95,7 @@ To configure the grid to use server aggregates:
 
 1. Add the `Aggregates` option.  
 
-    ```
+    ```HtmlHelper
         .DataSource(dataSource => dataSource
             .Server()
             .Aggregates(aggregates =>
@@ -111,7 +111,7 @@ To configure the grid to use server aggregates:
 
 1. Use the aggregates inside the columns of the grid via the `FooterTemplate`, `GroupHeaderTemplate`, `GroupFooterTemplate`
 
-    ``` 
+    ```HtmlHelper
         @(Html.Kendo().Grid(Model)
             .Name("Grid")
             .Columns(columns =>

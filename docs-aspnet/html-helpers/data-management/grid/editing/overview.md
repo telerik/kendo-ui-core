@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Editing Overview
-description: "Get started with the editing functionality of the Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Get started with the editing functionality of the Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/data-management/grid/editing/ajax-editing, /helpers/data-management/grid/editing/batch-editing, /helpers/data-management/grid/editing/server-editing, /helpers/data-management/grid/editing/webapi-editing
 slug: htmlhelpers_grid_aspnetcore_editing_overview
 position: 1
@@ -9,7 +9,7 @@ position: 1
 
 # Editing Overview
 
-Editing is a basic functionality of the Telerik UI Grid HtmlHelper for {{ site.framework }} which allows you to manipulate the way its data is presented.
+Editing is a basic functionality of the Telerik UI Grid component for {{ site.framework }} which allows you to manipulate the way its data is presented.
 
 The Grid provides the following edit modes:
 * [Inline editing]({% slug inlineediting_grid_aspnetcore %})

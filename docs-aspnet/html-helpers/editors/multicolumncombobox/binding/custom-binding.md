@@ -1,7 +1,7 @@
 ---
 title: Custom Binding
 page_title: Custom Binding
-description: "Learn how to implement custom binding with Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom binding with Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/custom-binding
 slug: custombinding_multicolumncombobox_aspnetmvc
 position: 5
@@ -32,7 +32,7 @@ You can use a custom DataSource and bind the MultiColumnComboBox to a `ToDataSou
 
 1. Add an Ajax-bound MultiColumnComboBox.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().MultiColumnComboBox()
             .Name("productMultiColumnComboBox")
             .DataTextField("ProductName") // Specify which property of the Product to be used by the MultiColumnComboBox as a text.
@@ -64,7 +64,7 @@ You can use a custom DataSource and bind the MultiColumnComboBox to a `ToDataSou
 
 The following example demonstrates how to configure the MultiColumnComboBox to send parameters to the server.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("productMultiColumnComboBox") // The name of the MultiColumnComboBox is mandatory. It specifies the "id" attribute of the MultiColumnComboBox.
         .DataTextField("ProductName") // Specify which property of the Product to be used by the MultiColumnComboBox as a text.

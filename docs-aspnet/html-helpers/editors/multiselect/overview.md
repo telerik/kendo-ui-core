@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/multiselect, /helpers/editors/multiselect/overview
 slug: htmlhelpers_multiselect_aspnetcore
 position: 1
 ---
 
-# MultiSelect HtmlHelper Overview
+# MultiSelect Overview
 
+{% if site.core %}
+The Telerik UI MultiSelect TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI MultiSelect widget.
+{% else %}
 The Telerik UI MultiSelect HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI MultiSelect widget.
+{% endif %}
 
 The MultiSelect displays a list of options and allows multiple selections from this list. The widget represents a richer version of the `<select>` element and provides support for local and remote data binding, item and tag templates, and configurable options for controlling the list behavior.
 
-* [Demo page for the MultiSelect](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
+* [Demo page for the MultiSelect HtmlHelper](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
+{% if site.core %}
+* [Demo page for the MultiSelect TagHelper](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+{% endif %}
 
 ## Initializing the MultiSelect
 
-The following example demonstrates how to define the MultiSelect by using the MultiSelect HtmlHelper.
+The following example demonstrates how to define the MultiSelect.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DataTextField("ProductName")
@@ -35,6 +42,11 @@ The following example demonstrates how to define the MultiSelect by using the Mu
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="products" filter="FilterType.StartsWith"></kendo-multiselect>
+```
+{% endif %}
 ```Controller
     public class MultiSelectController : Controller
     {
@@ -70,9 +82,9 @@ The following example demonstrates how to define the MultiSelect by using the Mu
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the MultiSelect HtmlHelper. To get a reference to an existing Telerik UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
+The following example demonstrates the basic configuration of the MultiSelect. To get a reference to an existing Telerik UI MultiSelect instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [MultiSelect client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/multiselect#methods) to control its behavior.
 
-```
+```HtmlHelper
 @(Html.Kendo().MultiSelect()
     .Name("multiselect")
     .DataTextField("ProductName")
@@ -108,6 +120,21 @@ The following example demonstrates the basic configuration of the MultiSelect Ht
     });
 </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="products" filter="FilterType.Contains"
+                       placeholder="Select product"
+                       datatextfield="ProductName"
+                       datavaluefield="ProductID"
+                       style="width: 100%;">
+        <datasource type="DataSourceTagHelperType.Custom">
+            <transport>
+                <read url="@Url.Action("GetProducts", "Home")" />
+            </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -125,6 +152,7 @@ You can subscribe to all MultiSelect [events](/api/multiselect). For a complete 
 
 The following example demonstrates how to subscribe to events by a handler name.
 
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .BindTo(new string[] { "Item1", "Item2", "Item3" })
@@ -142,12 +170,13 @@ The following example demonstrates how to subscribe to events by a handler name.
             // Handle the change event.
         }
     </script>
-
+```
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .BindTo(new string[] { "Item1", "Item2", "Item3" })
@@ -164,11 +193,13 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
         )
     )
+```
 
 ### MultiSelect Down Arrow
 
 To enable the down arrow for toggling the popup container as in the Telerik UI DropDownList, set the DownArrow() option:
 
+```HtmlHelper
      @(Html.Kendo().MultiSelect()
         .Name("movies")
         .DownArrow()
@@ -185,9 +216,13 @@ To enable the down arrow for toggling the popup container as in the Telerik UI D
             }
         })
     )
+```
 
 ## See Also
 
 * [Basic Usage by the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/index)
+{% if site.core %}
+* [Basic Usage of the MultiSelect TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/multiselect/tag-helper)
+{% endif %}
 * [Using the API of the MultiSelect HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/multiselect/api)
 * [Server-Side API](/api/multiselect)

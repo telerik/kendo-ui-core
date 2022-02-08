@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI Menu HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI Menu component for {{ site.framework }}."
 previous_url: /helpers/navigation/menu/binding/overview
 slug: htmlhelpers_menu_databinding_aspnetcore
 position: 1

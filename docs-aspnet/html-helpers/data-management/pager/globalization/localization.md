@@ -1,7 +1,7 @@
 ---
 title: Localization
-page_title: Localization for the Telerik UI Pager HtmlHelper for {{ site.framework }}
-description: "Get started with the Telerik UI Pager HtmlHelper for {{ site.framework }} and learn how to localize the text of its messages."
+page_title: Localization for the Telerik UI Pager component for {{ site.framework }}
+description: "Get started with the Telerik UI Pager component for {{ site.framework }} and learn how to localize the text of its messages."
 slug: localization_pager_aspnet
 ---
 
@@ -13,8 +13,8 @@ To localize the messages, set the desired strings in the `PagerMessagesSettingsB
 
 The example below shows how to change the tooltip of the refresh button and the information message.
 
-``` 
- @(Html.Kendo().Pager()
+```HtmlHelper
+    @(Html.Kendo().Pager()
     .Name("Pager")
     .Events(events => events
         .Change("onChange")
@@ -23,8 +23,7 @@ The example below shows how to change the tooltip of the refresh button and the 
         m.Refresh("Refresh data");
         m.Display("Showing {0}-{1} from {2} data items");
     })
- )
-
+    )
 ```
 
 ## See Also

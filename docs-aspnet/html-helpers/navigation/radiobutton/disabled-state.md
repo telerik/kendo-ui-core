@@ -15,11 +15,13 @@ The RadioButton can be configured to be initially disabled through its `.Enable(
 
 The following example demonstrates how to use the `.Enable()` configuration option.
 
+```HtmlHelper
     @(Html.Kendo().RadioButton()
         .Name("disabledRadioButton")
         .Enable(false)
         .Label("Disabled radio button")
         .Checked(false))
+```
 
 ## See Also
 

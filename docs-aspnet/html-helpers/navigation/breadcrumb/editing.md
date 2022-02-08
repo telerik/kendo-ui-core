@@ -14,7 +14,7 @@ Editing mode shows an input field containing the current value of the widget. Us
 
 The below example demonstrates how to enable editing of the Breadcrumb.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Breadcrumb()
         .Name("breadcrumb")
         .Items(items =>
@@ -37,6 +37,18 @@ The below example demonstrates how to enable editing of the Breadcrumb.
         .Editable(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-breadcrumb name="breadcrumb"
+                      editable="true">
+        <kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.RootItem" text="All Components" href="https://demos.telerik.com/kendo-ui/" show-text="true" icon="home" show-icon="true"></kendo-breadcrumb-items>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="Breadcrumb" href="/breadcrumb"></kendo-breadcrumb-item>
+            <kendo-breadcrumb-item type="BreadcrumbItemType.Item" text="Tag Helper" href="/tag-helper"></kendo-breadcrumb-item>
+        </kendo-breadcrumb-items>
+    </kendo-breadcrumb>
+```
+{% endif %}
 
 ## See Also
 

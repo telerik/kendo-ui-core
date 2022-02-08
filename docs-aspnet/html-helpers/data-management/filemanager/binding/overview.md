@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding Overview
-description: "Learn about the different types of data binding when working with the Telerik UI FileManager HtmlHelper for {{ site.framework }}."
+description: "Learn about the different types of data binding when working with the Telerik UI FileManager component for {{ site.framework }}."
 slug: htmlhelpers_filemanager_aspnetcore_binding_overview
 position: 0
 ---
@@ -15,7 +15,7 @@ Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasourc
 
 To bind the FileManager to remote data, configure the `DataSource` option and set the endpoints for the `Read`, `Create`, `Update` and `Destroy` operations. The following example demonstrates a possible remote end-point implementation that will provide the data to the {{ site.product }} FileManager.
 
-```Razor
+```HtmlHelper
    @(Html.Kendo().FileManager()
     .Name("filemanager")
     .DataSource(ds =>
@@ -41,6 +41,18 @@ To bind the FileManager to remote data, configure the `DataSource` option and se
 )
 ```
 {% if site.core %}
+```TagHelper
+    <kendo-filemanager name="filemanager" upload-url="@Url.Action("Upload", "FileManagerData")">
+        <filemanager-datasource>
+            <transport>
+                <read url="@Url.Action("Read", "FileManagerData")" />
+                <create url="@Url.Action("Destroy", "FileManagerData")" />
+                <destroy url="@Url.Action("Create", "FileManagerData")" />
+                <update url="@Url.Action("Update", "FileManagerData")" />
+            </transport>
+        </filemanager-datasource>
+    </kendo-filemanager>
+```
 ```Controller
     public class FileManagerDataController : Controller
     {
@@ -1056,5 +1068,4 @@ The following list provides information about the default requests and responses
 * [Overview of {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_overview %})
 * [Navigation in {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_navigation %})
 * [Preview Panes in {{ site.product }} FileManager]({% slug htmlhelpers_filemanager_aspnetcore_previewpane %})
-
-​​​​​​​ 
+​​​

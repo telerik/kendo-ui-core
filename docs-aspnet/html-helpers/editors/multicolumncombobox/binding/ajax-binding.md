@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/ajax-binding
 slug: htmlhelpers_multicolumncombobox_ajaxbinding_aspnetcore
 position: 2
@@ -31,6 +31,7 @@ The MultiColumnComboBox provides support for remote data binding by using a `Dat
 
 1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiColumnComboBox()
@@ -53,7 +54,7 @@ The MultiColumnComboBox provides support for remote data binding by using a `Dat
                 .ServerFiltering(false);
             })
         )
-
+    ```
 ## See Also
 
 * [Local Data Binding]({% slug htmlhelpers_multicolumncombobox_serverbinding_aspnetcore %})

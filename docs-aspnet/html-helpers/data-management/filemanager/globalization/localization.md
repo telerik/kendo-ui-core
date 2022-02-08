@@ -1,7 +1,7 @@
 ---
 title: Localization
 page_title: Localization
-description: "Get started with the Telerik UI FileManager HtmlHelper for {{ site.framework }} and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
+description: "Get started with the Telerik UI FileManager component for {{ site.framework }} and translate its toolbar, menu, command, filter, header, and pager text messages for different culture locales."
 slug: localization_aspnetcore_filemanager
 position: 3
 ---

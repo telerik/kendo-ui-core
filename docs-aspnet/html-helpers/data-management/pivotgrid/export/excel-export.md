@@ -1,7 +1,7 @@
 ---
 title: Excel
 page_title: Excel Export
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn how to export a Telerik UI PivotGrid HtmlHelper for {{ site.framework }} to Excel."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to export a Telerik UI PivotGrid component for {{ site.framework }} to Excel."
 slug: htmlhelpers_pivotgrid_aspnetcore_excelexport
 position: 1
 ---
@@ -32,12 +32,14 @@ To apply customizations during the export to Excel:
 
 1. Attach an Excel export handler.
 
-    @(Html.Kendo().PivotConfigurator()
-        .Name("configurator")
-        .Filterable(true)
-        .Events(e => e.ExcelExport("excelExport"))
-        .Height(570)
-    )
+    ```HtmlHelper
+        @(Html.Kendo().PivotConfigurator()
+            .Name("configurator")
+            .Filterable(true)
+            .Events(e => e.ExcelExport("excelExport"))
+            .Height(570)
+        )
+    ```
 
 1. In the handler, manipulate the generated workbook. The example alternates the [background color of the rows cells](https://docs.telerik.com/kendo-ui/api/javascript/ooxml/workbook/configuration/sheets.rows.cells.background).
 

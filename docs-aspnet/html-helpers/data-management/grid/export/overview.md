@@ -8,7 +8,7 @@ position: 1
 
 # Export Overview
 
-By default, the Telerik UI Grid HtmlHelper for {{ site.framework }} provides a PDF and Excel export functionality.
+By default, the Telerik UI Grid component for {{ site.framework }} provides a PDF and Excel export functionality.
 
 For more information about the available export options of the Grid, refer to the articles on:
 * [Excel export]({% slug excelexport_gridhelper_aspnetcore %})
@@ -21,6 +21,7 @@ Under the hood, most of the PDF export options use the Kendo UI for jQuery [Draw
 
 To enable the PDF and Excel Export functionality, add the following ToolBar configuration:
 
+```HtmlHelper
     @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
         .Name("grid")
         .ToolBar(tools=>
@@ -29,6 +30,7 @@ To enable the PDF and Excel Export functionality, add the following ToolBar conf
             tools.Excel();
         })
     )
+```
 
 ## See Also
 

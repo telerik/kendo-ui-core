@@ -1,7 +1,7 @@
 ---
 title: Server Binding
 page_title: Server Binding
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to bind it to a model."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to bind it to a model."
 slug: htmlhelpers_scheduler_serverbinding_aspnetcore
 position: 2
 ---
@@ -67,7 +67,7 @@ You can bind the Scheduler to a model.
 
 1. Add a Scheduler.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Scheduler<KendoUISchedulerDemo.Models.Projection>()
             .Name("scheduler")
             .Date(new DateTime(2013, 6, 13))

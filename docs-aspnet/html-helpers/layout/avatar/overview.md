@@ -18,25 +18,42 @@ It also gives you the flexibility to customize its border radius, size, color, e
 
 The following example demonstrates how to initialize an Avatar component.
 
-```
+```HhmlHelper
     @(Html.Kendo().Avatar()
         .Name("avatar-text")
         .Type(AvatarType.Text)
         .Text("JS")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar-text"
+        type="AvatarType.Text"
+        text="JS">
+    </kendo-avatar>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 
 You can access an existing Avatar instance by using the `.data()` jQuery method which gets executed by the jQuery object of the originating element.
 
-```C#
+```HtmlHelper
     @(Html.Kendo().Avatar()
         .Name("avatar")
         .Type(AvatarType.Text)
         .Text("MJ")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-avatar name="avatar"
+        type="AvatarType.Text"
+        rounded="Rounded.Full"
+        text="MJ">
+    </kendo-avatar>
+```
+{% endif %}
 ```JavaScript
     <script>
         var avatar = $('#avatar').data('kendoAvatar');

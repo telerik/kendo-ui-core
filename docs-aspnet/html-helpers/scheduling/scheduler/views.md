@@ -1,7 +1,7 @@
 ---
 title: Views
 page_title: Views
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to how to use the default views and create custom views in the widget."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to how to use the default views and create custom views in the widget."
 slug: htmlhelpers_scheduler_views_aspnetcore
 position: 3
 ---
@@ -31,7 +31,7 @@ By default, the **Day** and **Week** views are enabled. To enable other views or
 
 The following example demonstrates how to enable all Scheduler views.
 
-```
+```HtmlHelper
 	@(Html.Kendo().Scheduler<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel>()
 		.Name("scheduler")
 		.Date(new DateTime(2021, 6, 13))

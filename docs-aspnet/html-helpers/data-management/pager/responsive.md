@@ -1,13 +1,13 @@
 ---
 title: Responsive Pager
-page_title: Responsive Telerik UI Pager HtmlHelper for {{ site.framework }}
-description: "Get started with the Pager HtmlHelper for {{ site.framework }} and learn about its responsive feature."
+page_title: Responsive Telerik UI Pager component for {{ site.framework }}
+description: "Get started with the Pager component for {{ site.framework }} and learn about its responsive feature."
 slug: responsive_pager_aspnet
 ---
 
 ## Responsive Design
 
-The Pager HtmlHelper for {{ site.framework }} is responsive by default. To disable the responsive behavior and have all of its elements visible at all times use the `Responsive()` method and pass to `false` as a parameter.
+The Pager component for {{ site.framework }} is responsive by default. To disable the responsive behavior and have all of its elements visible at all times use the `Responsive()` method and pass `false` as a parameter.
 
 ## Visible Elements
 

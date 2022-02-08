@@ -10,6 +10,8 @@ position: 5
 
 The Grid widget has a built-in feature that enables the users to search through the data. The Search Panel uses filtering under the hood to show only the relevant records in the Grid.
 
+> Search Panel functionality is available as of [`Kendo UI R3 2019`](https://www.telerik.com/support/whats-new/kendo-ui/release-history/kendo-ui-r3-2019) release.
+
 ## Getting Started
 
 To enable the functionality include the `search` option to the toolbar configuration.

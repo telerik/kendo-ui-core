@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/overview
 slug: overview_htmlhelpers_timeline_aspnetcore
 position: 1
@@ -9,21 +9,28 @@ position: 1
 
 # Timeline Overview
 
+{% if site.core %}
+The Telerik UI Timeline TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Timeline widget.
+{% else %}
 The Telerik UI Timeline HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Timeline widget.
+{% endif %}
 
 The Timeline widget displays a collection of events and their data in a chronological succession for each year.
 
 You can scroll through the events and collapse/expand them. The events order can be vertical or horizontal, and you can customize their templates, as well as respond to events and use API control the widget behavior. You can also control the format of the rendered date for the event. If you provide a list of actions, they will be rendered as links after the description and images.
 
-* [Demo page for the Timeline](https://demos.telerik.com/{{ site.platform }}/timeline/index)
+* [Demo page for the Timeline HtmlHelper](https://demos.telerik.com/{{ site.platform }}/timeline/index)
+{% if site.core %}
+* [Demo page for the Timeline TagHelper](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
+{% endif %}
 
 ![](images/timeline-overview.png)
 
 ## Initializing the Timeline
 
-The following example demonstrates how to define the Timeline by using the Timeline HtmlHelper. Note the tabs for the controller and model code that show how to feed data to the widget.
+The following example demonstrates how to define the Timeline. Note the tabs for the controller and model code that show how to feed data to the widget.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
            .Name("Timeline")
            .DataDateField("EventDate")
@@ -38,6 +45,24 @@ The following example demonstrates how to define the Timeline by using the Timel
            .DataSource(dt => dt.Read("GetTimelineData", "Timeline"))
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-timeline name="timeline" orientation="horizontal" datadatefield="EventDate" datatitlefield="Title" datasubtitlefield="Subtitle" datadescriptionfield="Description" dataactionsfield="Actions" dataimagesfield="Images">
+    <datasource>
+        <transport>
+            <read url="/Timeline/GetTimelineData" />
+        </transport>
+        <schema>
+            <model>
+                <fields>
+                    <field name="EventDate" type="date"></field>
+                </fields>
+            </model>
+        </schema>
+    </datasource>
+</kendo-timeline>
+```
+{% endif %}
 ```Controller
 public partial class Timeline : BaseController
 {
@@ -134,7 +159,7 @@ You can provide an event handler through its [JavaScript function name](#handlin
 
 The following example demonstrates how to subscribe to events by using a handler name.
 
-```
+```HtmlHelper
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
     .Name("Timeline")
     .Events(ev =>
@@ -176,7 +201,7 @@ The following example demonstrates how to subscribe to events by using a handler
 
 The following example demonstrates how to subscribe to events by using a template delegate.
 
-```
+```HtmlHelper
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
     .Name("Timeline")
     .Events(e =>
@@ -206,7 +231,7 @@ The following example demonstrates how to subscribe to events by using a templat
 
 To access an existing Timeline instance, use the `.data()` jQuery method, executed by the jQuery object of the originating element. Once you have the reference, you can use the [Timeline client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline#methods).
 
-```
+```HtmlHelper
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
     .Name("Timeline")
     .DataDateField("EventDate")
@@ -231,6 +256,9 @@ To access an existing Timeline instance, use the `.data()` jQuery method, execut
 ## See Also
 
 * [Basic Usage of the Timeline (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/index)
+{% if site.core %}
+* [Basic Usage of the Timeline TagHelper (Demo)](https://demos.telerik.com/aspnet-core/timeline/tag-helper)
+{% endif %}
 * [Using the Events of the Timeline (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/events)
 * [Applying the Timeline API (Demo)](https://demos.telerik.com/{{ site.platform }}/timeline/api)
 * [JavaScript API Reference of the Timeline](https://docs.telerik.com/kendo-ui/api/javascript/ui/timeline)

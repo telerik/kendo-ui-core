@@ -58,7 +58,7 @@ If the series contain two or more values for a specific period (base unit), they
 
 > The dates have to match the source.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -95,7 +95,7 @@ The following image demonstrates a chart with a set date category axis.
 
 The following example demonstrates date series that are grouped by the year.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -146,7 +146,7 @@ The following options are available:
 
 The following example demonstrates how to handle date grouping with the `sum` aggregate.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -191,14 +191,14 @@ To set the base units in the categorical charts, use any of the following approa
 
 To determine a default base, use the smallest duration between categories.
 
-```
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2006, 1, 1) })
         // baseUnit is set to "years".
     )
 ```
 
-```
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Categories(new DateTime[] {new DateTime(2005, 1, 1), new DateTime(2005, 1, 2) })
         // baseUnit is set to "days".
@@ -224,7 +224,7 @@ The following options are valid for `ChartAxisBaseUnit`:
 
 Setting the [`BaseUnit`]({{ BaseUnit }}) to `ChartAxisBaseUnit.Fit` constrains the total number of base units to [`MaxDateGroups`]({{ MaxDateGroups }}). The `BaseUnit` and `BaseUnitStep` are selected according to the [`AutoBaseUnitSteps`]({{ AutoBaseUnitSteps }}).
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -257,7 +257,7 @@ Setting the [`BaseUnit`]({{ BaseUnit }}) to `ChartAxisBaseUnit.Fit` constrains t
 
 The date category axis provides options for specifying one format per base unit. If specified, the [`Labels.Format` property]({{ LabelsFormat }}) takes priority. The global culture is used for formatting the dates and can be overridden by setting the [`Labels.Culture`]({{ LabelsCulture }}) property.
 
-```
+```HtmlHelper
     .CategoryAxis(categoryAxis => categoryAxis
         .Labels(labels => labels
             .DateFormats(dateFormat => dateFormat.Days("M/d"))
@@ -297,7 +297,7 @@ To set the base units in the scatter charts, use any of the following approaches
 
 The default base unit is determined by the axis (or series) range.
 
-```
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2006,1,1))
@@ -305,7 +305,7 @@ The default base unit is determined by the axis (or series) range.
     )
 ```
 
-```
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Min(new DateTime(2005,1,1))
         .Max(new DateTime(2005,1,2))
@@ -330,7 +330,7 @@ You can also manually specify the base unit by using the following valid options
 
 The date axis provides options for specifying one format per base unit. If specified, the [`labels.format` property]({{ LabelsFormat }}) takes priority. The global culture is used for formatting the dates and can be overridden by setting the [`labels.culture`]({{ LabelsCulture }}) property.
 
-```
+```HtmlHelper
     .XAxis(xAxis => xAxis
         .Labels(labels => labels
             .DateFormats(formats => formats.Days("M/d"))
@@ -342,4 +342,5 @@ The date axis provides options for specifying one format per base unit. If speci
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Columns Overview
-description: "An overview the Telerik UI Grid HtmlHelper for {{ site.framework }} columns options."
+description: "An overview the Telerik UI Grid component for {{ site.framework }} columns options."
 slug: htmlhelper_gridcolumns
 position: 1
 ---

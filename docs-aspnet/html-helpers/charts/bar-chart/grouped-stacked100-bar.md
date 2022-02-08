@@ -1,7 +1,7 @@
 ---
 title: 100% Stacked and Grouped Bars
 page_title: 100% Stacked and Grouped Bars
-description: "Learn how to use the 100% Stacked and Grouped Bars of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the 100% Stacked and Grouped Bars of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_aspnetcore_htmlhelper_stacked100_and_grouped_bars
 ---
 
@@ -17,7 +17,7 @@ series.Column(new int[] { 1100941, 1139797, 1172929, 1184435, 1184654 }).Name("0
 
 The following implementation demonstrates the code needed for setting the 100% Stacked and Grouped Bar Chart:
 
-```View
+```HtmlHelper
   @(Html.Kendo().Chart()
         .Name("chart")
         .Title("World population by age group and sex")

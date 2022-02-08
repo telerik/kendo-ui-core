@@ -22,16 +22,16 @@ The MediaPlayer supports the following keyboard shortcuts:
 |`Space`  |Toggles the play and pause state.
 |`M`      |Toggles the mute and unmute state.
 
-```
-@(Html.Kendo().MediaPlayer()
-    .Name("mediaplayer")
-    .Navigatable(true)
-    .Media(m => m
-        .Title("Our Company Culture - Lesson 1")
-        .Source("Video/video1.mp4")
+```HtmlHelper
+    @(Html.Kendo().MediaPlayer()
+        .Name("mediaplayer")
+        .Navigatable(true)
+        .Media(m => m
+            .Title("Our Company Culture - Lesson 1")
+            .Source("Video/video1.mp4")
+        )
+        .HtmlAttributes(new { style = "height:360px; width:640px" })
     )
-    .HtmlAttributes(new { style = "height:360px; width:640px" })
-)
 ```
 
 ## See Also

@@ -1,7 +1,7 @@
 ---
 title: Custom Binding
 page_title: Custom Binding
-description: "Learn how to implement custom binding with Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom binding with Telerik UI AutoComplete component for {{ site.framework }}."
 previous_url: /helpers/editors/autocomplete/binding/custom-binding
 slug: custombinding_autocomplete_aspnetmvc
 position: 4
@@ -32,7 +32,7 @@ You can use a custom DataSource and bind the AutoComplete to a `ToDataSourceResu
 
 1. Add an Ajax-bound AutoComplete.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().AutoComplete()
             .Name("productAutoComplete")
             .DataTextField("ProductName") // Specify which property of the Product to be used by the autocomplete as a text.
@@ -58,7 +58,7 @@ You can use a custom DataSource and bind the AutoComplete to a `ToDataSourceResu
 
 The following example demonstrates how to configure the AutoComplete to send parameters to the server.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
         .Name("productAutoComplete")
         .DataTextField("ProductName") // Specify which property of the Product will be used by the AutoComplete.

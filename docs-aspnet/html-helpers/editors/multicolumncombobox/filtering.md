@@ -1,7 +1,7 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Set the filter options of the Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Set the filter options of the Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/filtering
 slug: filtering_multicolumncombobox_aspnetcore
 position: 6
@@ -13,6 +13,7 @@ Apart from the standard filter options, the MultiColumnComboBox allows you to se
 
 The option accepts an array of strings.
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Filter("contains")
@@ -29,6 +30,7 @@ The option accepts an array of strings.
             .ServerFiltering(true)
         )
     )
+```
 
 ## See Also
 

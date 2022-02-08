@@ -1,25 +1,31 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI TabStrip component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/tabstrip, /helpers/navigation/tabstrip/overview
 slug: htmlhelpers_tabstrip_aspnetcore
 position: 1
 ---
 
-# TabStrip HtmlHelper Overview
-
+# TabStrip Overview
+{% if site.core %}
+The Telerik UI TabStrip TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TabStrip widget.
+{% else %}
 The Telerik UI TabStrip HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI TabStrip widget.
+{% endif %}
 
 The TabStrip displays a collection of tabs with associated content. It is composed of an unordered list of items which represent tabs, and a collection of `div` elements, which contain the content for each tab.
 
-* [Demo page for the TabStrip](https://demos.telerik.com/{{ site.platform }}/tabstrip/index)
+* [Demo page for the TabStrip TagHelper](https://demos.telerik.com/{{ site.platform }}/tabstrip/index)
+{% if site.core %}
+* [Demo page for the TabStrip HtmlHelper](https://demos.telerik.com/aspnet-core/tabstrip/tag-helper)
+{% endif %}
 
 ## Initializing the TabStrip
 
-The following example demonstrates how to define the TabStrip by using the TabStrip HtmlHelper.
+The following example demonstrates how to define the TabStrip.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>
@@ -55,6 +61,12 @@ The following example demonstrates how to define the TabStrip by using the TabSt
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+</kendo-tabstrip>
+```
+{% endif %}
 ```Controller
 public class TabStripController : Controller
 {
@@ -67,9 +79,9 @@ public class TabStripController : Controller
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the TabStrip HtmlHelper.
+The following example demonstrates the basic configuration of the TabStrip.
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .TabPosition(TabStripTabPosition.Bottom)
@@ -104,6 +116,32 @@ The following example demonstrates the basic configuration of the TabStrip HtmlH
     });
 </script>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Tab 1">
+            <content><p>Content 1</p></content>
+        </tabstrip-item>
+        <tabstrip-item text="Tab 2">
+            <content><p>Content 2</p></content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+```TagHelper=li
+<kendo-tabstrip name="tabstrip">
+    <li>Tab 1</li>
+    <li>Tab 2</li>
+    <div>
+        <p>Content 1</p>
+    </div>
+    <div>
+        <p>Content 2</p>
+    </div>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -116,7 +154,7 @@ The following example demonstrates the basic configuration of the TabStrip HtmlH
 
 The following example demonstrates the available TabStrip events and how an event handler could be implemented for each of them. For a complete example on basic TabStrip events, refer to the [demo on using the events of the TabStrip](https://demos.telerik.com/{{ site.platform }}/tabstrip/events).
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>
@@ -162,5 +200,8 @@ The following example demonstrates the available TabStrip events and how an even
 ## See Also
 
 * [Basic Usage of the TabStrip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tabstrip)
+{% if site.core %}
+* [Basic Usage of the TabStrip TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/tabstrip/tag-helper)
+{% endif %}
 * [Using the API of the TabStrip HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/tabstrip/api)
 * [Server-Side API](/api/tabstrip)

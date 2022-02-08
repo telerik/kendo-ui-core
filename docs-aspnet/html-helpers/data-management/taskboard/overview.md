@@ -8,7 +8,11 @@ position: 1
 
 # TaskBoard Overview
 
+{% if site.core %}
+The Telerik UI TaskBoard TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TaskBoard widget. To add the component to your ASP.NET Core app, you can use either.
+{% else %}
 The Telerik UI TaskBoard HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI TaskBoard widget.
+{% endif %}
 
 The {{ site.framework }} TaskBoard allows you to easily organize items and keep track of their state. The component provides a clean and user-friendly interface and enables you to manage tasks, notes, projects, people, or other kinds of items. The TaskBoard displays columns (lanes), which can represent different types of project/task statuses. Tasks are visualized as cards, which are easily customizable through templates. You can reorder cards within the columns, or drag and drop them onto another column.
 
@@ -18,7 +22,80 @@ The {{ site.framework }} TaskBoard allows you to easily organize items and keep 
 
 The following example demonstrates how to initialize the TaskBoard. 
 
-```Razor
+{% if site.core %}
+```HtmlHelper
+    @(Html.Kendo().TaskBoard<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel, Kendo.Mvc.Examples.Models.TaskBoard.Column>()
+        .Name("taskBoard")
+        .ColumnSettings(columnSettings => columnSettings
+            .DataTextField("Text")
+            .DataStatusField("ID")
+        )
+        .Columns(dataSource => dataSource
+            .Ajax()
+            .Read("Editing_Columns_Read", "TaskBoard")
+            .Create("Editing_Columns_Create", "TaskBoard")
+            .Update("Editing_Columns_Update", "TaskBoard")
+            .Destroy("Editing_Columns_Destroy", "TaskBoard")
+        )
+        .DataTitleField("Title")
+        .DataStatusField("OwnerID")
+        .DataDescriptionField("Description")
+        .DataCategoryField("ID")
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(model => model.Id(p => p.TaskID))
+            .Read(read => read.Action("Tasks_Read", "TaskBoard"))
+            .Create(update => update.Action("Tasks_Create", "TaskBoard"))
+            .Update(update => update.Action("Tasks_Update", "TaskBoard"))
+            .Destroy(update => update.Action("Tasks_Destroy", "TaskBoard"))
+        )
+        .Height("750")
+    )
+```
+```TagHelper
+    <kendo-taskboard name="taskBoard" datatitlefield="title" datastatusfield="OwnerID" datadescriptionfield="Description" datacategoryfield="ID" height="750">
+        <datasource>
+            <transport>
+                <read url="@Url.Action("Tag_Helper_Tasks_Read", "TaskBoard")" />
+                <create url="@Url.Action("Tag_Helper_Tasks_Create", "TaskBoard")" />
+                <update url="@Url.Action("Tag_Helper_Tasks_Update", "TaskBoard")" />
+                <destroy url="@Url.Action("Tag_Helper_Tasks_Destroy", "TaskBoard")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <model id="TaskID">
+                    <fields>
+                        <field name="TaskID" type="number"></field>
+                        <field name="title" from="Title" type="string"></field>
+                        <field name="Description" from="Description" type="string"></field>
+                        <field name="OwnerID" type="number" default-value="0"></field>
+                    </fields>
+                </model>
+            </schema>
+        </datasource>
+        <column-settings datatextfield="Text" datastatusfield="ID">
+        </column-settings>
+        <taskboard-columns>
+            <datasource>
+                <transport>
+                    <read url="@Url.Action("Tag_Helper_Columns_Read", "TaskBoard")" />
+                    <create url="@Url.Action("Tag_Helper_Columns_Create", "TaskBoard")" />
+                    <update url="@Url.Action("Tag_Helper_Columns_Update", "TaskBoard")" />
+                    <destroy url="@Url.Action("Tag_Helper_Columns_Destroy", "TaskBoard")" />
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
+                    <model id="ID">
+                        <fields>
+                            <field name="ID" type="number"></field>
+                            <field name="Text" from="Text" type="string"></field>
+                        </fields>
+                    </model>
+                </schema>
+            </datasource>
+        </taskboard-columns>
+    </kendo-taskboard>
+```
+{% else %}
+```HtmlHelper
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
         .ColumnSettings(s =>
@@ -67,6 +144,7 @@ The following example demonstrates how to initialize the TaskBoard.
         }
     }
 ```
+{% endif %}
 
 ## Functionality and Features
 

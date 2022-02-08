@@ -12,7 +12,7 @@ The keyboard navigation of the DateInput is always available.
 
 To focus the widget, use the key combination of [Access key](https://en.wikipedia.org/wiki/Access_key) and the key specified through the `HtmlAttributes` method.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateInput()
         .Name("dateinput")
         .HtmlAttributes(new { accesskey = "w" }) //Access key + "w" will focus the DateInput

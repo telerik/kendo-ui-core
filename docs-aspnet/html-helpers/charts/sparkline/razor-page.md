@@ -1,11 +1,11 @@
 ---
 title: Razor Pages
 page_title: Configure a DataSource for the Telerik UI Sparkline for Remote Binding in Razor Pages.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Sparkline HtmlHelper for  {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) in Razor Pages."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI Sparkline component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) in Razor Pages."
 slug: htmlhelper_sparkline_razorpages_aspnetcore
 position: 4
 ---
-# Telerik UI Sparkline in Razor Pages
+# Sparkline in Razor Pages
 
 Razor Pages are an alternative to the MVC pattern. Razor Pages make page-focused coding easier and more productive. This approach consists of a `cshtml` file and a `cs` file (generally, the two files have the same name). You can seamlessly integrate the Telerik UI Sparkline for {{ site.framework }} in Razor Pages applications.
 
@@ -17,7 +17,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 1. Configure the Read URL in the `DataSource`. The URL must refer to the method name in the `PageModel`:
 
-    ```
+    ```HtmlHelper
         .DataSource(ds => ds
             .Read(r => r.Url("/Sparkline/SparklineRemoteBidning?handler=Read").Data("forgeryToken"))
             )
@@ -25,7 +25,7 @@ The most flexible form of data binding is to use the [DataSource]({% slug htmlhe
 
 2. Add an AntiForgeryToken at the top of the RazorPage:
 
-    ```
+    ```HtmlHelper
         @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
         @Html.AntiForgeryToken()
     ```

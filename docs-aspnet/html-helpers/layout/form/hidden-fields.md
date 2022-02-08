@@ -1,7 +1,7 @@
 ---
 title: Hidden Fields
 page_title: Hidden Fields
-description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn how to set hidden fields."
+description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn how to set hidden fields."
 slug: htmlhelpers_form_aspnetcore_hiddenfields
 position: 8
 ---
@@ -12,7 +12,7 @@ The Telerik ASP.NET {{ site.framework }} Form component provides built-in suppor
 
 The following example demonstrates how to configure a Form with two visible and one hidden field (`UserID`).
 
-```Razor
+```HtmlHelper
        @(Html.Kendo().Form<Kendo.Mvc.Examples.Models.Form.UserViewModel>()
         .Name("formExample")
         .HtmlAttributes(new { action = "Index", method = "POST" })
@@ -56,7 +56,7 @@ To add support for the `HiddenInput` attribute, use the following implementation
         }
 ```
 
-```View
+```HtmlHelper
     @(Html.Kendo().Form<Kendo.Mvc.Examples.Models.Form.UserViewModel>()
         .Name("formExample")
         .HtmlAttributes(new { action = "Index", method = "POST" })
@@ -70,7 +70,7 @@ To add support for the `HiddenInput` attribute, use the following implementation
 {% if site.core %}
 To add a method for enabling the injection of the `AntiForgeryToken` input in:
 
-```Razor
+```HtmlHelper
    @(Html.Kendo().Form<Kendo.Mvc.Examples.Models.Form.UserViewModel>()
        .Name("formExample")
        .HtmlAttributes(new { action = "Index", method = "POST" })

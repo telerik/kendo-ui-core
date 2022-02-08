@@ -1,7 +1,7 @@
 ---
 title: Razor Page
 page_title: Razor Page
-description: "Learn how to configure the Telerik UI DataSource HtmlHelper for {{ site.framework }} in Razor Page scenario"
+description: "Learn how to configure the Telerik UI DataSource component for {{ site.framework }} in Razor Page scenario"
 slug: htmlhelpers_datasource_aspnetcore_razor_page
 position: 10
 ---
@@ -14,9 +14,9 @@ When configuring the DataSource for a Razor Page scenario it is important to kee
 * Razor Pages automatically implement antiforgery validation, which protects against cross-site request forgery (XSRF/CSRF) attacks. Therefore you need to pass an antiforgery token, in order to validate the request. 
 * Razor Pages use Page in their routing mechanism which interferes with GET requests made by the Kendo UI DataSource. As a result, only POST requests should be used when paging is required.
 
-The example below demonstrates how to configure the Telerik UI DataSource HtmlHelper for {{ site.framework }} in Razor Page scenario. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+The example below demonstrates how to configure the Telerik UI DataSource component for {{ site.framework }} in Razor Page scenario. For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @page
     @model Telerik.Examples.RazorPages.Pages.DataSource.DataSourceIndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

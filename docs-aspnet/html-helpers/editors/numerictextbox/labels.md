@@ -11,6 +11,9 @@ position: 3
 The Label enables you to associate the label HTML element with the NumericTextBox.
 
 * [Demo page for the NumericTextBox Floating Label](https://demos.telerik.com/{{ site.platform }}/numerictextbox/floating-label)
+{% if site.core %}
+* [Demo page for the NumericTextBox TagHelper](https://demos.telerik.com/aspnet-core/numerictextbox/tag-helper)
+{% endif %}
 
 ## Basic Usage
 
@@ -22,13 +25,24 @@ The Label exposes a `content` property that sets the inner HTML of the label.
 
 The below example demonstrates how to create a Label from a string.
 
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
         .Name("NumericTextBox")
         .Label(l => l.Content("Price"))
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-numerictextbox name="Price">
+        <numerictextbox-label content="Price" />
+    </kendo-numerictextbox>
+```
+{% endif %}
+
 
 The below example demonstrates how to create a Label from a function. The function context (available via the `this` keyword) will be set to the widget instance.
 
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
             .Name("NumericTextBox")
             .Label(l => l.ContentHandler("labelContentHandler"))
@@ -38,6 +52,19 @@ The below example demonstrates how to create a Label from a function. The functi
             return "Price"
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-numerictextbox name="Price">
+        <numerictextbox-label content-handler="labelContentHandler" />
+    </kendo-numerictextbox>
+    <script>
+        function labelContentHandler() {
+            return "Price"
+        }
+    </script>
+```
+{% endif %}
 
 ## Floating Label
 
@@ -45,6 +72,7 @@ The Floating Label enables you to provide a floating label functionality to the 
 
 The following example demonstrates how to set a Floating Label for a NumericTextBox.
 
+```HtmlHelper
     @(Html.Kendo().NumericTextBox()
            .Name("NumericTextBox")
            .Label(label =>
@@ -53,6 +81,14 @@ The following example demonstrates how to set a Floating Label for a NumericText
                label.Floating(true);
            })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-numerictextbox name="Price">
+        <numerictextbox-label content="Price" floating="true" />
+    </kendo-numerictextbox
+```
+{% endif %}
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 

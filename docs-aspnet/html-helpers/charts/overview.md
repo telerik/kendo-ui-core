@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Chart HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Chart component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/charts/charts, /helpers/html-helpers/charts, /helpers/html-helpers/charts/chart/overview, /helpers/charts/overview
 slug: htmlhelpers_charts_aspnetcore
 position: 1
@@ -12,11 +12,19 @@ position: 1
     {% assign AxisDefaults = "/api/Kendo.Mvc.UI.Fluent/ChartBuilder#axisdefaultssystemactionkendomvcuifluentchartaxisdefaultsbuildert" %}
 {% endif %}
 
-# Chart HtmlHelper Overview
+# Chart Overview
 
+{% if site.core %}
+The Chart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Chart widget. To add the component to your ASP.NET Core app, you can use either.
+{% else %}
 The Telerik UI Chart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Chart widget.
+{% endif %}
 
 The Chart uses modern browser technologies to render high-quality data visualizations. All graphics are rendered on the client by using [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics) with a fallback to [Canvas](http://www.canvasgfx.com/). The Charts support a [set of series types]({% slug areacharts_aspnetcore_htmlhelper %}) such as Bar, Line, Area, Bullet, Pie, Scatter, Bubble, Polar, and other.
+
+{% if site.has_cta_panels == true %}
+{% include cta-panel-introduction.html %}
+{% endif %}
 
 The Chart contains the following [building block elements]({% slug htmlhelpers_charts_dataseries_aspnetcore %}):
 
@@ -31,13 +39,17 @@ The following image displays the structure of the Chart.
 
 ![Chart Structure](images/chart-structure.png)
 
-* [Demo page for the Chart](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
+To see the component in action, check the examples:
+
+* [Demo page for the Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
+* [Demo page for the Chart TagHelper](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
 
 ## Initializing the Chart
 
-The following example demonstrates how to define a Bar Chart by using the Chart HtmlHelper.
+The following example demonstrates how to define the Chart.
 
-```Razor
+
+```HtmlHelper
    @(Html.Kendo().Chart(Model)
       .Name("internetUsersChart") // The name of the Chart is mandatory. It specifies the "id" attribute of the widget.
       .Title("Internet Users")
@@ -50,6 +62,11 @@ The following example demonstrates how to define a Bar Chart by using the Chart 
       )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-chart name="chart"></kendo-chart>
+```
+{% endif %}
 ```Controller
     public ActionResult Index()
     {
@@ -57,48 +74,92 @@ The following example demonstrates how to define a Bar Chart by using the Chart 
     }
 ```
 
-## Basic Configuration
+### Basic Configuration
 
-The following example demonstrates the basic configuration for the Line Chart HtmlHelper.
+To configure the Chart, pass the configuration options as attributes:
 
-```
-    @(Html.Kendo().Chart()
-        .Name("chart")
-        .Title("Gross domestic product growth \n /GDP annual %/")
-        .Legend(legend => legend
-            .Position(ChartLegendPosition.Bottom)
-        )
-        .ChartArea(chartArea => chartArea
-            .Background("transparent")
-        )
-        .SeriesDefaults(seriesDefaults =>
-            seriesDefaults.Line().Style(ChartSeriesStyle.Smooth)
-        )
-        .Series(series => {
-            series.Line(new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }).Name("India");
-            series.Line(new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 }).Name("World");
-            series.Line(new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3 }).Name("Russian Federation");
-            series.Line(new double[] { -0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590 }).Name("Haiti");
-        })
-        .CategoryAxis(axis => axis
-            .Categories("2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011")
-            .MajorGridLines(lines => lines.Visible(false))
-        )
-        .ValueAxis(axis => axis
-            .Numeric().Labels(labels => labels.Format("{0}%"))
-            .Line(line => line.Visible(false))
-            .AxisCrossingValue(-10)
-        )
-        .Tooltip(tooltip => tooltip
-            .Visible(true)
-            .Format("{0}%")
-        )
+
+```HtmlHelper
+@(Html.Kendo().Chart()
+    .Name("chart")
+    .Title("Gross domestic product growth /GDP annual %/")
+    .Legend(legend => legend
+        .Position(ChartLegendPosition.Top)
     )
+    .ChartArea(chartArea => chartArea
+        .Background("transparent")
+    )
+    .Series(series =>
+    {
+        series.Column(new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }).Name("India");
+        series.Column(new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3 }).Name("Russian Federation");
+        series.Column(new double[] { 0.010, -0.375, 1.161, 0.684, 3.7, 3.269, 1.083, -5.127, 3.690, 2.995 }).Name("Germany");
+        series.Column(new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 }).Name("World");
+    })
+    .CategoryAxis(axis => axis
+        .Name("series-axis")
+        .Line(line => line.Visible(false))
+    )
+    .CategoryAxis(axis => axis
+        .Name("label-axis")
+        .Categories("2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011")
+    )
+    .ValueAxis(axis => axis
+        .Numeric()
+            .Labels(labels => labels.Format("{0}%"))
+
+            // Move the label-axis all the way down the value axis.
+            .AxisCrossingValue(0, int.MinValue)
+    )
+    .Tooltip(tooltip => tooltip
+        .Visible(true)
+        .Format("{0}%")
+        .Template("#= series.name #: #= value #")
+    )
+)
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-chart name="chart">
+    <chart-title text="Gross domestic product growth /GDP annual %/"></chart-title>
+    <chart-legend position="ChartLegendPosition.Top"></chart-legend>
+    <series-defaults type="ChartSeriesType.Column"></series-defaults>
+
+    <series>
+        <series-item name="India" data="new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }"></series-item>
+        <series-item name="Russian Federation" data="new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3 }"></series-item>
+        <series-item name="Germany" data="new double[] { 0.010, -0.375, 1.161, 0.684, 3.7, 3.269, 1.083, -5.127, 3.690, 2.995 }"></series-item>
+        <series-item name="World" data="new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 }"></series-item>
+    </series>
+
+    <value-axis>
+        <value-axis-item>
+            <labels format="{0}%"></labels>
+            <line visible="false" />
+        </value-axis-item>
+    </value-axis>
+
+    <category-axis>
+        <category-axis-item categories='new string[] { "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "20010", "2011", }'>
+            <labels>
+                <chart-category-axis-labels-padding top="135" />
+            </labels>
+            <line visible="false" />
+        </category-axis-item>
+    </category-axis>
+
+    <tooltip visible="true" format="{0}%" template="#= series.name #: #= value #"></tooltip>
+</kendo-chart>
+```
+{% endif %}
+
+#### Axis Title
 
 You can also add a title to clearly indicate the role of the axis.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Average temperature and humidity")
@@ -128,9 +189,11 @@ You can also add a title to clearly indicate the role of the axis.
 
 ![Chart with axis titles](images/chart-axis-titles.png)
 
+#### Plot Bands
+
 The Chart enables you to configure each axis to display bands with different colors for predefined value ranges. The category index (zero-based) is used as a value for the category axis.
 
-```
+```HtmlHelper
     .ValueAxis(axis => axis.Numeric()
         .Labels(labels => labels.Format("{0:N0}"))
         .MajorUnit(10000)
@@ -145,9 +208,11 @@ The Chart enables you to configure each axis to display bands with different col
 
 ![Chart with axis plot bands](images/chart-plot-bands.png)
 
+#### Global Settings
+
 You may also need to apply global settings that affect all axes. In such cases, use [`AxisDefaults`]({{ AxisDefaults }}).
 
-```
+```HtmlHelper
     .AxisDefaults(a=> a
         .Labels(l=>l.Font("16px Verdana"))
     )
@@ -164,9 +229,9 @@ You can subscribe to all Chart [events](/api/chart). For a complete example on b
 
 ### Handling by Handler Name
 
-The following example demonstrates how to subscribe to events by a handler name.
+The following examples demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
         .Events(events => events
@@ -186,11 +251,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     </script>
 ```
 
-### Handling by Handler Name
-
-The following example demonstrates how to subscribe to events by a handler name.
-
-```
+```HtmlHelper
     @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
         .Events(events => events
@@ -226,6 +287,7 @@ To reference an existing Chart instance, use the [`jQuery.data()`](http://api.jq
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
+* [Basic Usage of the Kendo UI Area Charts Tag Helper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/area-charts/tag-helper)
 * [Basic Usage of the Bar Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bar-charts/index)
 * [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
 * [Server-Side API](/api/chart)

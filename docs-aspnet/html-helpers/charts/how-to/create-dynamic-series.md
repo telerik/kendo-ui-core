@@ -14,34 +14,34 @@ It is not always possible to know the series and model structure in advance. In 
 
 A simple scenario might bind each series to an array of primitive values.
 
-```
-@(Html.Kendo().Chart()
-      .Name("Chart")
-      .Series(series => {
-         foreach (var def in Model.Series) {
-           series.Column(def.Data).Name(def.Name).Stack(def.Stack);
-         }
-      })
-      .CategoryAxis(axis => axis
-         .Categories(Model.Categories)
-      )
-  )
+```HtmlHelper
+   @(Html.Kendo().Chart()
+         .Name("Chart")
+         .Series(series => {
+            foreach (var def in Model.Series) {
+            series.Column(def.Data).Name(def.Name).Stack(def.Stack);
+            }
+         })
+         .CategoryAxis(axis => axis
+            .Categories(Model.Categories)
+         )
+   )
 ```
 
 You can also bind the series to a collection of data items, specifying field bindings.
 
-```
-@(Html.Kendo().Chart()
-      .Name("Chart")
-      .Series(series => {
-         foreach (var def in Model.Series) {
-           series.Column(def.Data).Field(def.Field).Name(def.Name).Stack(def.Stack);
-         }
-      })
-      .CategoryAxis(axis => axis
-         .Categories(Model.Categories)
-      )
-  )
+```HtmlHelper
+   @(Html.Kendo().Chart()
+         .Name("Chart")
+         .Series(series => {
+            foreach (var def in Model.Series) {
+            series.Column(def.Data).Field(def.Field).Name(def.Name).Stack(def.Stack);
+            }
+         })
+         .CategoryAxis(axis => axis
+            .Categories(Model.Categories)
+         )
+   )
 ```
 
 To see the full examples, refer to the GitHub repository of the [sample project on dynamic series](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/chart/dynamic-series).

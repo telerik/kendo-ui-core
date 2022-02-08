@@ -1,18 +1,18 @@
 ---
 title:  Razor Page
 page_title: Configure the Splitter in a Razor Page.
-description: "An example on how to configure the Telerik UI Splitter HtmlHelper for {{ site.framework }} in a Razor Page."
+description: "An example on how to configure the Telerik UI Splitter component for {{ site.framework }} in a Razor Page."
 slug: htmlhelpers_splitter_razorpage_aspnetcore
 position: 6
 ---
 
 # Razor Page
 
-This article describes how to configure the Telerik UI Splitter HtmlHelper for {{ site.framework }} in a RazorPages scenario.
+This article describes how to configure the Telerik UI Splitter for {{ site.framework }} in a RazorPages scenario.
 
 See the Splitter configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
 @page
 @model Telerik.Examples.RazorPages.Pages.Splitter.SplitterIndexModel
 @{

@@ -1,7 +1,7 @@
 ---
 title:  Local Binding
 page_title: Local Binding
-description: "Learn how to implement Local Binding with Telerik UI OrgChart HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Local Binding with Telerik UI OrgChart component for {{ site.framework }}."
 previous_url: /helpers/editors/orgchart/binding/local-binding
 slug: htmlhelpers_orgchart_localbinding_aspnetcore
 position: 2
@@ -15,6 +15,7 @@ You can bind the OrgChart to local data by using its API.
 
 The following example demonstrates how to bind the OrgChart to a JSON array available on the client.
 
+```HtmlHelper
     @(Html.Kendo().OrgChart<Kendo.Mvc.Examples.Models.OrgChartEmployeeViewModel>()
         .Name("orgchart")
     )
@@ -73,6 +74,7 @@ The following example demonstrates how to bind the OrgChart to a JSON array avai
             orgchart.setDataSource(dataSource);
         });
     </script>
+```
 
 ## See Also
 

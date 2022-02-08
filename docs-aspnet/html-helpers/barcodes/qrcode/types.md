@@ -1,7 +1,7 @@
 ---
 title: QR Code Types
 page_title: QR Code Types
-description: "Try the different types of Telerik UI QRCode HtmlHelper for {{ site.framework }}."
+description: "Try the different types of Telerik UI QRCode component for {{ site.framework }}."
 slug: types_qrcodehelper_aspnetcore
 position: 3
 ---
@@ -15,7 +15,7 @@ The QRCode component supports the [Swiss QR Code format](https://blog.xsuite.com
 The following implementation demonstrates the code needed for the Swiss Type:
 
 
-```View
+```HtmlHelper
     @(Html.Kendo().QRCode()
          .Name("qrSwiss")
          .Value("SPC  0200  1  CH4431999123000889012  S  Robert Schneider AG  Rue du Lac  1268  2501  Biel  CH  1949.75  CHF  S  Pia-Maria Rutschmann-Schnyder  Grosse Marktgasse  28  9400  Rorschach  CH  QRR  210000000003139471430009017 Order of 15 June 2020  EPD  //S1/10/10201409/11/200701/20/140.000-53/30/102673831/31/200615/32/7.7/33/7.7:139.40/40/0:30  Name AV1: UV;UltraPay005;12345  Name AV2: XY;XYService;54321")
@@ -36,7 +36,7 @@ The image type of the overlay is adding an image in the QR Code.
 
 The following implementation demonstrates the code needed for the Image Type:
 
-```View
+```HtmlHelper
     @(
          Html.Kendo().QRCode()
             .Name("qrImage")
@@ -56,6 +56,6 @@ Overview of the Image Type:
 
 ## See Also
 
-* [Basic Usage of the QRCode HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/index)
-* [Using the API of the QRCode HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/api)
+* [Basic Usage of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/index)
+* [Using the API of the QRCode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/qrcode/api)
 * [Server-Side API](/api/qrcode)

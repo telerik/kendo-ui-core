@@ -1,7 +1,7 @@
 ---
 title: Placeholder
 page_title: Placeholder
-description: "Get started with the Telerik UI Sortable HtmlHelper for {{ site.framework }} and learn how to customize the placeholder."
+description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn how to customize the placeholder."
 slug: htmlhelpers_sortable_aspnetcore_placeholder
 position: 5
 ---
@@ -12,6 +12,7 @@ You can change the default placeholder of the Sortable by setting the `placehold
 
 The following example demonstrates how to build the placeholder from the dragged element.
 
+```HtmlHelper
     <ul id="sortable">
         <li>ItemA1</li>
         <li>ItemA2</li>
@@ -44,9 +45,12 @@ The following example demonstrates how to build a static placeholder.
         .For("#sortable")
         .Placeholder("<li>Drop Here!</li>")
     )
-
+```
 
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sortable/index)
+{% if site.core %}
+* [Basic Usage of the Sortable TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
+{% endif %}
 * [Server-Side API](/api/sortable)

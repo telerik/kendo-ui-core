@@ -7,7 +7,7 @@ slug: templates_pager_aspnet
 
 ## Pager Templates
 
-The {{ site.framework }} Pager HtmlHelper features templates for its page number links.
+The {{ site.framework }} Pager component features templates for its page number links.
 
 To change the look of the currently selected page number, use the `SelectTemplate()` or `SelectTemplateId()` methods.
 

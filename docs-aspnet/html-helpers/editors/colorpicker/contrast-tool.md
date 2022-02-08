@@ -1,7 +1,7 @@
 ---
 title: Contrast Tool
 page_title: Contrast Tool
-description: "Learn more about the contrast tool for the Telerik UI ColorPicker HtmlHelper for {{ site.framework }}."
+description: "Learn more about the contrast tool for the Telerik UI ColorPicker component for {{ site.framework }}."
 slug: htmlhelpers_contrast_tool_colorpickerhelper_aspnetcore
 position: 4
 ---
@@ -16,7 +16,7 @@ According to the WCAG standard, there are two levels of contrast ratio:
 
 The example below demonstrates how to enable the contrast tool in the ColorPicker:
 
-```
+```HtmlHelper
     <div class="demo-section">
         <div class="column">
             <h3 class="title"><label for="picker">Foreground Color</label></h3>

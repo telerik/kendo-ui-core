@@ -1,32 +1,32 @@
 ---
 title: Sorting and Filtering
 page_title: Spreadsheet Sorting and Filtering
-description: "Learn how to configure the sorting and filtering functionality of the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the sorting and filtering functionality of the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_sorting_filtering_aspnetcore
 position: 6
 ---
 
 # Sorting and Filtering
 
-The Spreadsheeto for {{ site.framework }} allows you to set predefinged sort and filter settings.
+The Spreadsheet for {{ site.framework }} allows you to set predefined sort and filter settings.
 
 ## Sorting
 
 You can set the Sorting configuration via the [`Sort()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetBuilder#sortsystemactionkendomvcuifluentspreadsheetsheetsortsettingsbuilder)  option. Set the reference over which the sorting will be applied via the [`Ref()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetSortSettingsBuilder) configuration and define further sorting settings via the [`Columns()`](/api/Kendo.Mvc.UI.Fluent/SpreadsheetSheetSortSettingsBuilder) configuration option.
 
-```
-.Sheets(sheets =>
-    {
-        sheets.Add()
-            .Name("Sheet1")
-            .Sort(sort => sort
-                .Ref("A3:G49")
-                .Columns(columns => { 
-                    columns.Add().Index(3).Ascending(false); 
-                })
-            )
-            //additional sheet configuration options
-    })
+```HtmlHelper
+    .Sheets(sheets =>
+        {
+            sheets.Add()
+                .Name("Sheet1")
+                .Sort(sort => sort
+                    .Ref("A3:G49")
+                    .Columns(columns => { 
+                        columns.Add().Index(3).Ascending(false); 
+                    })
+                )
+                //additional sheet configuration options
+        })
 ```
 
 ## Filtering
@@ -39,24 +39,24 @@ The supported filters are:
 * DynamicFilter - Represents a filter applied to a column of a given range. It may be used to filter dates and numbers for relative values, like belowAverage, yesterday, etc.
 * CustomFilter - Represents a filter applied to a column of a given range. It may specify one or two criterion, comparison operator (equals, starts with, greater than etc.), and logical operator (and, or).
 
-```
-.Sheets(sheets =>
-    {
-        sheets.Add()
-            .Name("Sheet1")
-            .Filter(filter => filter
-                .Ref("A3:G49")
-                .Columns(columns => { columns
-                    .Add()
-                    .Index(0)
-                    .Filter("custom")
-                    .Criteria(criteria=>criteria
+```HtmlHelper
+    .Sheets(sheets =>
+        {
+            sheets.Add()
+                .Name("Sheet1")
+                .Filter(filter => filter
+                    .Ref("A3:G49")
+                    .Columns(columns => { columns
                         .Add()
-                        .Operator(SpreadsheetFilterOperator.GreaterThan)
-                        .Value(10227)); 
-                }))
-    //additional sheet configuration options
-})
+                        .Index(0)
+                        .Filter("custom")
+                        .Criteria(criteria=>criteria
+                            .Add()
+                            .Operator(SpreadsheetFilterOperator.GreaterThan)
+                            .Value(10227)); 
+                    }))
+        //additional sheet configuration options
+    })
 ```
 
 ## See Also

@@ -1,7 +1,7 @@
 ---
 title: Layout
 page_title: Layout
-description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn about the layouts it supports."
+description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about the layouts it supports."
 slug: htmlhelpers_form_aspnetcore_layout
 position: 4
 ---
@@ -16,14 +16,19 @@ In addition the default layout, the Form offers an option to use `Grid` layout. 
 
 To use this layout set the `Layout` option to `grid`, specify the number of columns and the gutter between them. The Form supports up to 12 columns.
 
-```Razor
+```HtmlHelper
     .Layout("grid")
     .Grid(g => g.Cols(2).Gutter(20))
 ```
+{% if site.core %}
+```TagHelper
+    <grid  cols="2" gutter="20"/>
+```
+{% endif %}
 
 The following example shows the Form with `grid` layout set.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.FormOrderViewModel>()
         .Name("exampleForm")
         .HtmlAttributes(new { action = "Layout", method = "POST" })
@@ -90,6 +95,29 @@ The following example shows the Form with `grid` layout set.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items">
+        <validatable validate-on-blur="true" validation-summary="true" />
+        <grid  cols="2" gutter="20"/>
+        <form-items>
+            <form-item type="group">
+                <item-label text="Registration Form" />
+                <form-items>
+                    <form-item field="TextBox">
+                        <item-label text="TextBox:"/>
+                        <textbox-editor placeholder="TextBox"></textbox-editor>
+                    </form-item>
+                    <form-item field="NumericTextBox">
+                        <item-label text="NumericTextBox:" />
+                        <numerictextbox-editor></numerictextbox-editor>
+                    </form-item>  
+                </form-items>
+            </form-item>
+        </form-items>
+    </kendo-form>
+```
+{% endif %}
 
 ## See Also
 

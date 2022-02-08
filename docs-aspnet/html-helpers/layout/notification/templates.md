@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Learn the basics when working with the Telerik UI Notification HtmlHelper for ASP.NET MVC."
+description: "Learn the basics when working with the Telerik UI Notification component for ASP.NET MVC."
 previous_url: /helpers/layout/notification/templates
 slug: templates_notificatiomhelper_aspnetmvc
 position: 5
@@ -15,6 +15,7 @@ Each template is used together with its corresponding built-in or custom [notifi
 
 The following example demonstrates how to use Notification templates.
 
+```HtmlHelper
     <script id="myAlertTemplate" type="text/x-kendo-template">
         <div class="myAlert">System alert generated at #= time # : #= myMessage #</div>
     </script>
@@ -48,6 +49,7 @@ The following example demonstrates how to use Notification templates.
             }, "timeAlert");
         });
     </script>
+```
 
 ## See Also
 

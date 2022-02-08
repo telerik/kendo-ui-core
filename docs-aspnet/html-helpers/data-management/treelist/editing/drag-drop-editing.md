@@ -1,7 +1,7 @@
 ---
 title: Drag-and-Drop
 page_title: Editing by Dragging and Dropping
-description: "Learn how to enable the drag-and-drop editing of the Telerik UI TreeList HtmlHelper for {{ site.framework }}."
+description: "Learn how to enable the drag-and-drop editing of the Telerik UI TreeList component for {{ site.framework }}."
 slug: htmlhelpers_treelist_aspnetcore_drag_drop_editing
 position: 5
 ---
@@ -14,7 +14,7 @@ When the `.Editable(editable=>editable.Move(true))` property is set to `true`, t
 
 To persist the new hierarchy, configure the TreeList data source for CRUD operations and set `transport.update` as a bare minimum. For a runnable example, refer to the [demo on editing by dragging and dropping the rows of the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/dragdrop).
 
-```tab-Razor
+```tab-HtmlHelper
     @(Html.Kendo().TreeList<EmployeeViewModel>()
     	.Name("treelist")
     	.Toolbar(t=>t.Save()) /* to batch save the new hierarchy */

@@ -22,3 +22,6 @@ The Telerik UI Captcha fully supports right-to-left (RTL) language locales. To t
 ## See Also
 
 * [Basic Usage of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+{% if site.core %}
+* [Basic Usage of the Captcha TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/captcha/tag-helper)
+{% endif %}

@@ -1,14 +1,14 @@
 ---
 title: PivotConfigurator
 page_title: PivotConfigurator Overview
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn how to create and configure the Telerik UI PivotGrid Configurator."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to create and configure the Telerik UI PivotGrid Configurator."
 slug: htmlhelpers_pivotgrid_aspnetcore_configurator
 position: 4
 ---
 
 # PivotConfigurator Overview
 
-The [Telerik UI PivotConfigurator HtmlHelper for {{ site.framework }}](/api/pivotconfigurator) represents an OLAP cube structure.
+The [Telerik UI PivotConfigurator component for {{ site.framework }}](/api/pivotconfigurator) represents an OLAP cube structure.
 
 The PivotConfigurator can be used for configuring the column and row dimensions, and the measure fields of the [PivotGrid](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index). It is a supplementary component which is strongly related to the Telerik UI PivotDataSource.
 
@@ -16,6 +16,7 @@ The PivotConfigurator can be used for configuring the column and row dimensions,
 
 The following example demonstrates how to create the PivotConfigurator.
 
+```HtmlHelper
     @(Html.Kendo().PivotConfigurator()
         .Name("configurator")
         .Filterable(true)
@@ -29,11 +30,13 @@ The following example demonstrates how to create the PivotConfigurator.
     .Configurator("#configurator")
     // Other configuration.
     )
+```
 
 ## Basic Configuration
 
 The following example demonstrates how to configure the PivotConfigurator.
 
+```HtmlHelper
     @(Html.Kendo().PivotConfigurator()
         .Name("configurator")
         .Filterable(true)
@@ -70,6 +73,7 @@ The following example demonstrates how to configure the PivotConfigurator.
             .Events(e => e.Error("onError"))
         )
     )
+```
 
 The following image demonstrates the output from the previous example.
 

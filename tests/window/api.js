@@ -1551,5 +1551,44 @@
             assert.equal($("body").css("overflow"), "scroll");
             assert.equal($("html").css("overflow"), "scroll");
         });
+
+        it("get properly modals", function() {
+            var dialog1 = createWindow({
+                modal: true,
+                title:  'First Window'
+            });
+
+            var dialog2 = createWindow({
+                modal: true,
+                title:  'Second Window'
+            });
+
+            assert.equal(dialog1._modals().length, 2);
+            assert.equal(dialog2._modals().length, 2);
+        });
+
+        it("get properly modals in containment scenario", function() {
+            var div = $('<div id="containement" style="height:500px;width:500px">')
+            div.appendTo(Mocha.fixture);
+
+            var dialog1 = createWindow({
+                modal: true,
+                title:  'First Window',
+                draggable: {
+                    containment : '#containement'
+                }
+            });
+
+            var dialog2 = createWindow({
+                modal: true,
+                title:  'Second Window',
+                draggable: {
+                    containment : '#containement'
+                }
+            });
+
+            assert.equal(dialog1._modals().length, 2);
+            assert.equal(dialog2._modals().length, 2);
+        });
     });
 })();

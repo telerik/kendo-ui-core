@@ -16,6 +16,7 @@ The `Toolbar Items` configuration allows you to set the desired tools that will 
 
 The following example demonstrates how to add a custom tool to the toolbar.
 
+```HtmlHelper
     <script>
         kendo.ui.taskboard.commands["CustomAddCardCommand"] = kendo.ui.taskboard.Command.extend({
             exec: function () {
@@ -47,6 +48,7 @@ The following example demonstrates how to add a custom tool to the toolbar.
         .DataOrderField("Order")
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
+```
 
 ## See Also
 

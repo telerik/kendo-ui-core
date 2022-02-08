@@ -15,7 +15,7 @@ The TileLayout supports its keyboard navigation functionality through the `navig
 
 The following example demonstrates how to enable the key navigation in the TileLayout.
 
-```
+```HtmlHelper
     @(Html.Kendo().TileLayout()
         .Name("tilelayout")
         .Navigatable(true)

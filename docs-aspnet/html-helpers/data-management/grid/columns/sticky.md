@@ -1,7 +1,7 @@
 ---
 title: Sticky
 page_title: Sticky Columns
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} (Demo) supporting sticky columns that are scrollable, yet, visible at all times while the user scrolls the Grid horizontally."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} (Demo) supporting sticky columns that are scrollable, yet, visible at all times while the user scrolls the Grid horizontally."
 slug: htmlhelper_grid_sticky_columns
 position: 4
 ---
@@ -21,11 +21,28 @@ For a runnable example, refer to the demo on [implementing sticky columns in the
 
 > The [JavaScript API of the Grid](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) allows you to stick and unstick columns on the fly. However, this is possible only if the stickable configuration is enabled during initialization. If a certain column needs to be open for the users to change its position to sticky/non-sticky this must be specified in the column declaration.
 
+```HtmlHelper
+    .ColumnMenu()
     .Columns(columns =>
-        {
-            columns.Bound(o => o.OrderID).Stickable(true).Width(150);
-            columns.Bound(o => o.ShipName).Sticky(true).Width(350);
-        })
+    {
+        columns.Bound(o => o.ContactName).Sticky(true).Stickable(true).Width(150);
+        columns.Bound(o => o.ContactTitle).Stickable(true).Width(250);
+        columns.Bound(o => o.CompanyName).Stickable(true).Width(350);
+        columns.Bound(o => o.Country).Stickable(true).Width(300);
+
+    })
+```
+{% if site.core %}
+```TagHelper
+    <column-menu enabled="true"/>
+    <columns>
+        <column field="ContactName" sticky="true" stickable="true" title="Contact Name" width="240" />
+        <column field="ContactTitle" stickable="true" title="Contact Title" />
+        <column field="CompanyName" stickable="true" title="Company Name" />
+        <column field="Country" stickable="true" title="Country" width="150" />
+    </columns>
+````
+{% endif %}
 
 ## Known Limitations
 

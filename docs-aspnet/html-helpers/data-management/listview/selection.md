@@ -14,7 +14,7 @@ By default, the selection functionality of the Telerik UI ListView for {{ site.f
 
 The single selection functionality allows the user to select only one item at a time.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
@@ -44,7 +44,7 @@ The single selection functionality allows the user to select only one item at a 
 
 The multiple selection functionality allows the user to select one or more items at a time.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.

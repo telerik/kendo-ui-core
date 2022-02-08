@@ -2170,7 +2170,9 @@ function pad(number, digits, end) {
         support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
 
         support.detectBrowser = function(ua) {
-            var browser = false, match = [],
+            var browser = false,
+                match = [],
+                chromiumEdgeMatch = [],
                 browserRxs = {
                     edge: /(edge)[ \/]([\w.]+)/i,
                     webkit: /(chrome|crios)[ \/]([\w.]+)/i,
@@ -2188,6 +2190,14 @@ function pad(number, digits, end) {
                         browser[agent] = true;
                         browser[match[1].toLowerCase().split(" ")[0].split("/")[0]] = true;
                         browser.version = parseInt(document.documentMode || match[2], 10);
+
+                        if (browser.chrome) {
+                            chromiumEdgeMatch = ua.match(/(edg)[ \/]([\w.]+)/i);
+
+                            if(chromiumEdgeMatch) {
+                                browser.chromiumEdge = true;
+                            }
+                        }
 
                         break;
                     }

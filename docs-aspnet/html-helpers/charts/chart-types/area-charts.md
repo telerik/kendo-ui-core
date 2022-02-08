@@ -7,17 +7,24 @@ slug: areacharts_aspnetcore_htmlhelper
 
 # Area Charts
 
+{% if site.core %}
+The Telerik UI Area Chart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Area Chart widget.
+{% else %}
 The Telerik UI Area Chart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Area Chart widget.
+{% endif %}
 
 Area Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
-* [Demo page for the Area Chart](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Demo page for the Area Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+{% if site.core %}
+* [Demo page for the Area Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
+{% endif %}
 
 ## Getting Started
 
 The portion of the graph beneath the lines is filled with a particular color for each series. The different colors in an Area Chart are useful for emphasizing changes in the values which come from several sets of similar data.
 
-To create an Area series in the Chart HtmlHelper, use `Area` and `VerticalArea` in the `Series` configuration.
+To create an Area series in the Chart component, use `Area` and `VerticalArea` in the `Series` configuration.
 
 * [Configuring the axes](#configuring-the-axes)
 * [Configuring the line styles](#configuring-the-line-styles)
@@ -26,6 +33,7 @@ To create an Area series in the Chart HtmlHelper, use `Area` and `VerticalArea` 
 
 To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value axes are also supported.
 
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Internet Users")
@@ -47,6 +55,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis`. Multiple value ax
             .Labels(labels => labels.Format("{0}%"))
         )
     )
+```
 
 The configuration from the previous example results in the following Area Chart.
 
@@ -71,4 +80,5 @@ The following image displays a smooth-line Area Chart.
 ## See Also
 
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

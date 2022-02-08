@@ -1,7 +1,7 @@
 ---
 title: Columns
 page_title: Columns
-description: "Configure the columns of the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
+description: "Configure the columns of the Telerik UI Gantt component for {{ site.framework }}."
 slug: htmlhelpers_gantt_columns_aspnetcore
 position: 4
 ---
@@ -35,7 +35,7 @@ The columns in the TreeList section of the Gantt can be individually configured.
 
 The example below demonstrates how to configure Gantt columns.
 
-```
+```HtmlHelper
     @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
         .Name("gantt")
         .Columns(columns =>

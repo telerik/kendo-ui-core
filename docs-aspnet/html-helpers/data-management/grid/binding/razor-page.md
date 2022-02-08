@@ -1,9 +1,9 @@
 ---
-title: The Telerik UI Grid in RazorPages
+title: Grid in Razor Pages
 page_title: The Telerik UI Grid in RazorPages
 description: "Telerik UI Grid for {{ site.framework }} in a RazorPages application."
 slug: razorpages_gridhelper_aspnetcore
-position: 1
+position: 2
 ---
 
 # Telerik UI Grid in Razor Pages
@@ -22,7 +22,7 @@ To enable CRUD operations in the Telerik UI Grid within a `RazorPage`:
 1. Setup CRUD URLs in the `DataSource` along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
 
 
-    ```
+    ```HtmlHelper
         .DataSource(ds => ds.Ajax()
             .Read(r => r.Url("/Grid/GridCrudOperations?handler=Read").Data("forgeryToken"))
             .Update(u => u.Url("/Grid/GridCrudOperations?handler=Update").Data("forgeryToken"))
@@ -104,7 +104,7 @@ To bind the Telerik UI Grid to a property from the PageModel:
 
 1. Bind the Grid to the collection property
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().Grid<OrderViewModel>(Model.orders)
             .Name("grid")
         )

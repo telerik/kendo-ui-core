@@ -16,7 +16,7 @@ Local data is the data that is available on the client when the TaskBoard is ini
 
 The following example demonstrates how to bind the TaskBoard data saved in the ViewData.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
         .Columns(c =>
@@ -67,7 +67,7 @@ You can also bind the TaskBoard to remote data. Remote data binding enables the 
 
 The following example demonstrates how to enable remote binding in the TaskBoard by configuring the columns DataSource and the DataSource for the cards.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().TaskBoard<Kendo.Mvc.Examples.Models.Scheduler.TaskViewModel, Kendo.Mvc.Examples.Models.TaskBoard.Column>()
         .Name("taskBoard")
         .ColumnSettings(columnSettings => columnSettings

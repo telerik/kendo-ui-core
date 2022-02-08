@@ -26,6 +26,7 @@ The following sections provide step-by-step instructions and examples on getting
 
 1. To take full advantage of the Excel export feature, download the [JSZip library](https://stuk.github.io/jszip/) and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% if site.core %}{% slug exportsupport_core %}{% else %}{% slug exportsupport_aspnetmvc %}{% endif %}#jszip-library).
 
+    ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
@@ -40,6 +41,7 @@ The following sections provide step-by-step instructions and examples on getting
                 .Read(read => read.Action("Orders_Read", "Grid"))
             )
         )
+    ```
 
 ### Initializing a ContextMenu
 
@@ -51,6 +53,7 @@ The following sections provide step-by-step instructions and examples on getting
 
 1. Create the widget.
 
+    ```HtmlHelper
         @(Html.Kendo().ContextMenu()
             .Name("contextmenu")
             .Target(".contextMenuIcon")
@@ -67,6 +70,7 @@ The following sections provide step-by-step instructions and examples on getting
             })
             .Events(ev => ev.Select("onSelect"))
         )
+    ```
 
 1. Define the event handling function.
 

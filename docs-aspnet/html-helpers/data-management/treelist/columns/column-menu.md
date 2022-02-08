@@ -1,7 +1,7 @@
 ---
 title: Column Menu
 page_title: Column Menu
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and get to know how to enable the column menu."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and get to know how to enable the column menu."
 slug: htmlhelpers_treelist_aspnetcore_column_menu
 position: 2
 ---

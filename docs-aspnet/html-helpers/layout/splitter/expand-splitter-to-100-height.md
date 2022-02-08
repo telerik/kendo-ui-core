@@ -1,7 +1,7 @@
 ---
 title: Auto-Resizing the Height
 page_title: Auto-Resizing the Height
-description: "Learn how to make the Splitter expand vertically and resize together with the browser window by using Telerik UI Splitter HtmlHelper for {{ site.framework }}."
+description: "Learn how to make the Splitter expand vertically and resize together with the browser window by using Telerik UI Splitter component for {{ site.framework }}."
 slug: htmlhelpers_expand_splitter_to_100_height_aspnetcore
 position: 4
 ---
@@ -18,7 +18,7 @@ You also have to remove the border of the Splitter. Elements that are 100% high 
 
 In the following example, the outer Splitter has no siblings and has a 100% height style applied. Its parent is the `<body>` element and it receives a `height:100%` style which, in turn, requires the `<html>` element to obtain the same style.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Splitter()
                 .Name("splitter")
                 .Orientation(SplitterOrientation.Vertical)
@@ -72,7 +72,7 @@ In the following example, the outer Splitter has no siblings and has a 100% heig
 
 If the dimensions of the Splitter do not depend directly on the browser viewport size or if the Splitter has visible siblings, using a 100% height for it may not be applicable. In this case, you need to set the height of the Splitter [Kendo UI for jQuery `wrapper`](https://docs.telerik.com/kendo-ui/intro/widget-basics/wrapper-element) `<div>` manually and then call the `resize` method.
 
-```Razor
+```HtmlHelper
 <div id="header">Page header</div>
 @(Html.Kendo().Splitter()
                 .Name("vertical")

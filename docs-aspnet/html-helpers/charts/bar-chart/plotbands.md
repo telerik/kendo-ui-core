@@ -1,7 +1,7 @@
 ---
 title: Plotbands
 page_title: Plotbands
-description: "Learn how to set Plotbands of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to set Plotbands of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_plotbands
 ---
 
@@ -20,7 +20,7 @@ Each Plot Band could be configured independently by specifying the following pro
 
 The following implementation demonstrates the code needed for setting Plotbands for Bar Chart:
 
-```View
+```HtmlHelper
  @(Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
         .Title("Spain electricity production (GWh)")

@@ -1,7 +1,7 @@
 ---
 title: Encoding
 page_title: Encoding
-description: "Get started with the Telerik UI Barcode HtmlHelper for {{ site.framework }} and learn more about the character set and length and check the digits of the symbologies."
+description: "Get started with the Telerik UI Barcode component for {{ site.framework }} and learn more about the character set and length and check the digits of the symbologies."
 slug: encodings_aspnetcore_barcode_widget
 position: 2
 ---
@@ -169,5 +169,5 @@ The following table lists the available symbologies and their specifications sup
 
 ## See Also
 
-* [Basic Usage of the Barcode HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/barcode/index)
+* [Basic Usage of the Barcode component for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/barcode/index)
 * [Server-Side API](/api/barcode)

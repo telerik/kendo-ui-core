@@ -47,7 +47,7 @@ The following series types support error bars:
 
 To bind the low and high values of the error bars when using categorical series, set the [`ErrorLowField`]({{ ErrorLowField }}) and [`ErrorHighField`]({{ ErrorHighField }}) options to the fields in the data that hold the low and high value.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -80,7 +80,7 @@ You can also display error bars for the series `x` or `y` value, or both. To set
 
 The following example demonstrates how to bind the error bars for the `x` value of the series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
             .Name("chart")
             .Series(s => s
@@ -110,7 +110,7 @@ The following example demonstrates how to bind the error bars for the `x` value 
 
 The following example demonstrates how to bind the error bars for the `y` value of the series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
             .Name("chart")
             .Series(s => s
@@ -148,7 +148,7 @@ If the value of the error bar is set to a number (must not be negative), the low
 
 The following example demonstrates how to set a numeric value for the categorical series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -170,7 +170,7 @@ The following example demonstrates how to set a numeric value for the categorica
 
 The following example demonstrates how to set a numeric value for the scatter series.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -197,7 +197,7 @@ The following example demonstrates how to set a numeric value for the scatter se
 
 You can also set the difference of the point value as percentage by setting a string value in the `"percenatage(n)"` format where `n` indicates the percent value.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -222,7 +222,7 @@ The error bars support statistical calculations based on the series data. The su
 
 The following example demonstrates how to use the standard error type.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -243,7 +243,7 @@ The following example demonstrates how to use the standard error type.
 
 The following example demonstrates how to use the standard deviation type.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(s => s
@@ -276,23 +276,23 @@ The following fields are available as object parameters:
 
 The following example demonstrates how to use different percentages for the low and high values.
 
-```
-@(Html.Kendo().Chart()
-    .Name("chart")
-    .Series(s => s
-        .Column(new object[] {
-            new {
-                value = 4.743
-            },
-            new {
-                value = 7.295
-            },
-            new {
-                value = 6.376
-            }
-        })
-    .ErrorBars(err => err.ValueHandler("calculateError"))
-)
+```HtmlHelper
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Series(s => s
+            .Column(new object[] {
+                new {
+                    value = 4.743
+                },
+                new {
+                    value = 7.295
+                },
+                new {
+                    value = 6.376
+                }
+            })
+        .ErrorBars(err => err.ValueHandler("calculateError"))
+    )
 ```
 ```JavaScript
     function calculateError(data) {
@@ -308,4 +308,5 @@ The following example demonstrates how to use different percentages for the low 
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

@@ -12,7 +12,7 @@ The DateInput displays the date in a format depending on the selected culture (t
 
 The following example demonstrates how to format the date in the German culture:
 
-```
+```HtmlHelper
     <script datasrc="@Url.Content("~/lib/kendo/js/cultures/kendo.culture.de-DE.min.js")"></script>
 
     <script type="text/javascript">
@@ -31,7 +31,7 @@ The following example demonstrates how to format the date in the German culture:
 
 To control the date format, use the `Format()` method. The specified format also will be used to parse the input.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateInput()
         .Name("dateinput")
         .Value(DateTime.Today)

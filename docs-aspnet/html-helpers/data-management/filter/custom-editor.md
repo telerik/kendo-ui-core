@@ -1,7 +1,7 @@
 ---
 title: Custom Editor
 page_title: Custom Editor
-description: "Learn how to use a specific editor for the Telerik UI Filter HtmlHelper for {{ site.framework }}."
+description: "Learn how to use a specific editor for the Telerik UI Filter component for {{ site.framework }}."
 slug: htmlhelpers_filter_aspnetcore_custom_editor
 position: 4
 ---
@@ -16,7 +16,7 @@ To implement a custom editor you need to specify the [`.EditorTemplateHandler()`
 
 The following example demonstrates how to create a custom editor using the [`.EditorTemplateHandler()`](/api/Kendo.Mvc.UI.Fluent/FilterFieldBuilder#editortemplatehandlersystemstring) configuration option:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Filter<Kendo.Mvc.Examples.Models.ProductViewModel>()
         .Name("filter")
         .ApplyButton(true)

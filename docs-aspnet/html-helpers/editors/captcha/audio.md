@@ -1,7 +1,7 @@
 ---
 title: Audio Content
 page_title: Audio Content
-description: "Learn how to configure the audio provider for the Telerik UI Captcha HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the audio provider for the Telerik UI Captcha component for {{ site.framework }}."
 slug: htmlhelpers_captcha_audio
 position: 4
 ---
@@ -20,7 +20,7 @@ The Telerik UI Catpcha server-side provider creates an audio file based on the c
 
 1. Add the `AudioHandler` option to your Captcha.
 
-    ```
+    ```HtmlHelper
     @(Html.Kendo().Captcha()
         .Name("Captcha")
         .Handler(handler => handler.Action("Reset", "Captcha"))
@@ -60,4 +60,7 @@ The Telerik UI Catpcha server-side provider creates an audio file based on the c
 ## See Also
 
 * [Basic Usage of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+{% if site.core %}
+* [Basic Usage of the Captcha TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/captcha/tag-helper)
+{% endif %}
 * [Server-Side API](/api/captcha)

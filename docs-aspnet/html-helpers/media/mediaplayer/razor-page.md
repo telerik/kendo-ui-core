@@ -1,7 +1,7 @@
 ---
 title:  Razor Pages
 page_title: Configure a DataSource for the Telerik UI MediaPlayer for Remote Binding in Razor Pages.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MediaPlayer HtmlHelper for {{ site.framework }} in Razor Pages."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI MediaPlayer component for {{ site.framework }} in Razor Pages."
 slug: htmlhelpers_mediaplayer_razorpage_aspnetcore
 position: 3
 ---
@@ -18,7 +18,7 @@ The following example uses two widgets: a MediaPlayer and a ListView, which serv
 
 See the implementation details in the example below. For the full project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
 @page
 @model Telerik.Examples.RazorPages.Pages.MediaPlayer.MediaPlayerPlaylistModel
 @{

@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Learn the binding options for the Telerik UI TreeView HtmlHelper for {{ site.framework }}."
+description: "Learn the binding options for the Telerik UI TreeView component for {{ site.framework }}."
 previous_url: /helpers/navigation/treeview/ajax-binding
 slug: htmlhelpers_treeview_binding_aspnetcore
 position: 2
@@ -9,14 +9,15 @@ position: 2
 
 # TreeView Binding
 
-The TreeView HTML helper provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
+The TreeView provides support for declaratively defining its items and for local (on the server) and remote (using a `DataSource` configuration object) binding.
 
 ## Declaring TreeView Items
 
-The TreeView allows you to declare all its items within the HTML helper declaration.
+The TreeView allows you to declare all its items within the helper declaration.
 
 The following example demonstrates how to configure a TreeView with three levels of hierarchy.
 
+```HtmlHelper
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Items(treeview =>
@@ -35,12 +36,13 @@ The following example demonstrates how to configure a TreeView with three levels
                 });
         })
     )
+```
 
 ## Local Data Binding
 
 You can bind the TreeView locally on the server by passing the appropriate collection to the HTML helper `BindTo()` method.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().TreeView()
     .Name("treeview-left")
     .BindTo((IEnumerable<TreeViewItemModel>)ViewBag.treeData)
@@ -106,7 +108,7 @@ private IEnumerable<TreeViewItemModel> GetData()
 
 The TreeView provides support for remote data binding by using a [`DataSource`]({% slug htmlhelpers_datasource_aspnetcore %}) configuration object.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().TreeView()
     .Name("treeview")
     .DataTextField("Name")
@@ -155,7 +157,7 @@ By default, the TreeView sends to the remote endpoint the `id` of the expanded n
 
 In order to set up the TreeView component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
 @(Html.Kendo().TreeView()
     .Name("treeview")
     .DataTextField("Name")

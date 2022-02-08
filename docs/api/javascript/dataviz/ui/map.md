@@ -5831,7 +5831,7 @@ Fired when a [GeoJSON Feature](http://geojson.org/geojson-spec.html#feature-obje
 
 The original data item for this Feature. Members include `geometries` and `properties`.
 
-##### e.layer `kendo.dataviz.map.layer.Shape`
+##### e.layer `kendo.dataviz.map.layer`
 
 The parent layer instance.
 

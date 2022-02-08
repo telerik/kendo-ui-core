@@ -1,7 +1,7 @@
 ---
 title: Animations
 page_title: Animations
-description: "Learn how to control the animations in the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
+description: "Learn how to control the animations in the Telerik UI TabStrip component for {{ site.framework }}."
 slug: htmlhelpers_tabstrip_animations_aspnetcore
 position: 8
 ---
@@ -12,7 +12,7 @@ By default, the TabStrip uses animations to reveal the content of the tabs. You 
 
 The following example demonstrates how to configure the TabStrip animation:
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Animation(animation =>

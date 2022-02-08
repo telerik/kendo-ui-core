@@ -1,7 +1,7 @@
 ---
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Learn how to use the keyboard navigation functionality of the Telerik RadioGroup HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the keyboard navigation functionality of the Telerik RadioGroup component for {{ site.framework }}."
 slug: htmlhelpers_radiogroup_keyboardnavigation_aspnetcore
 position: 2
 ---

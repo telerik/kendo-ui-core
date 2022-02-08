@@ -1,7 +1,7 @@
 ---
 title: RGB and HEX Formats
 page_title: RGB and HEX Formats
-description: "Learn more about the input formats of the Telerik UI ColorPicker HtmlHelper for {{ site.framework }}."
+description: "Learn more about the input formats of the Telerik UI ColorPicker component for {{ site.framework }}."
 slug: htmlhelpers_formats_colorpickerhelper_aspnetcore
 position: 5
 ---
@@ -12,7 +12,7 @@ With R3 SP1 of 2021 release support for both RGB and HEX formats for the {{ site
 
 The example below demonstrates thow to configure the {{ site.product }} ColorPicker with a different default view:
 
-```
+```HtmlHelper
     <div>
         <h3><label>HEX ColorPicker</label></h3>
         @(Html.Kendo().ColorPicker()

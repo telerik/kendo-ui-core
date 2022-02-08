@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use templates and customize the rendering of the content in the Telerik UI PopOver HtmlHelper for {{ site.framework }}."
+description: "Use templates and customize the rendering of the content in the Telerik UI PopOver component for {{ site.framework }}."
 slug: htmlhelpers_templates_popover
 position: 2
 ---
@@ -14,7 +14,7 @@ The PopOver allows you to control the way its header and body sections are rende
 
 To specify the layout of the header that will be displayed, use the `Header` method.
 
-```
+```HtmlHelper
    <span id="info" class="k-button wider">Hover me!</span>
 
     @(Html.Kendo().Popover()
@@ -30,7 +30,7 @@ To specify the layout of the header that will be displayed, use the `Header` met
 
 You can configure the body section through the `Body` method.
 
-```
+```HtmlHelper
     <ul id="products">
         <li>
             <a href="#" data-id="11" title="A cheese made in the artisan tradition by rural dairy farmers in the north of Spain">

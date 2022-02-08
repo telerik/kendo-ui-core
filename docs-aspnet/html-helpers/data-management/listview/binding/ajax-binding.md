@@ -46,7 +46,7 @@ To configure the ListView for {{ site.framework }} for Ajax binding:
 
 1. In the view, configure the ListView to use the action method created in the previous steps. You may use the sample model and data from the following example. The `ToDataSourceResult` method uses the `DataSourceRequest` parameter and Linq expressions to apply paging, sorting, filtering, and grouping. The JSON response of the action method will contain only a single page of data. The ListView will be bound to that data.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
             .Name("ListView")
             .TagName("div")
@@ -161,6 +161,7 @@ To pass additional parameters to the action method:
 
   The following example demonstrates how to send additional data.
 
+    ```HtmlHelper
         @(Html.Kendo().ListView<ListViewCore.Models.OrderViewModel>()
             .Name("ListView")
             .TagName("div")
@@ -185,10 +186,12 @@ To pass additional parameters to the action method:
 
 By default, the Telerik UI ListView for {{ site.framework }} requests data from the server every time the user changes the page, filters the ListView, sorts, or groups. To change this behavior, disable `ServerOperation`.
 
+```HtmlHelper
     .DataSource(dataSource => dataSource
         .ServerOperation(false) // All data will be requested at once and data operations will be applied client-side.
         .Read(read => read.Action("Orders_Read", "ListView"))
     )
+```
 
 ## See Also
 

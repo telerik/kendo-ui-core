@@ -1,7 +1,7 @@
 ---
 title: Model
 page_title: DataSource Model
-description: "Learn how to use the model properties the DataSource HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the model properties the DataSource component for {{ site.framework }}."
 slug: htmlhelper_datasourcemodel
 ---
 
@@ -9,19 +9,21 @@ slug: htmlhelper_datasourcemodel
 
 The `Model` method configures the model of the data source. The data field names must be valid JavaScript [identifiers](https://developer.mozilla.org/en-US/docs/Glossary/Identifier) and contain neither spaces, nor special characters. The first character has to be a letter.
 
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Home"))
-        .Model(model =>
-        {
-            // The unique identifier (primary key) of the model is the ProductID property.
-            model.Id(product => product.ProductID);
+```HtmlHelper
+    .Ajax()
+    .Read(read => read.Action("Products_Read", "Home"))
+    .Model(model =>
+    {
+        // The unique identifier (primary key) of the model is the ProductID property.
+        model.Id(product => product.ProductID);
 
-            //Declare a model field and optionally specify its default value (used when a new model instance is created).
-            model.Field(product => product.ProductName).DefaultValue("N/A");
+        //Declare a model field and optionally specify its default value (used when a new model instance is created).
+        model.Field(product => product.ProductName).DefaultValue("N/A");
 
-            //Declare a model field and make it readonly.
-            model.Field(product => product.UnitPrice).Editable(false);
-        })
+        //Declare a model field and make it readonly.
+        model.Field(product => product.UnitPrice).Editable(false);
+    })
+```
 
 ### Id
 

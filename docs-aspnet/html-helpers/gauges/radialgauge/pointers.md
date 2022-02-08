@@ -1,7 +1,7 @@
 ---
 title: Pointers
 page_title: Pointers
-description: "Learn the Options of the Pointers of the Telerik UI RadialGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Options of the Pointers of the Telerik UI RadialGauge component for {{ site.framework }}."
 slug: pointers_radialgaugehelper_aspnetcore
 position: 3
 ---
@@ -21,7 +21,7 @@ The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the va
 * The `Color` (`string`) parameter controls the color of the pointers. It accepts **CSS**, **HEX** and **RGB** colors.
 * The `Length` (`string`) parameter controls the pointers length (in percent) that is based on the distance to the scale. The default length of 1 indicates that the pointer exactly reaches the scale. Accepts values between 0.1 and 1.5.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
         .Name("gauge")
         .Pointers(pointers =>
@@ -29,7 +29,7 @@ The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the va
             pointers.Add().Value(10).Color("#c20000").Length(0.5);
         })
     )
-````
+```
 
 ## Pointer Cap
 
@@ -37,7 +37,7 @@ The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the va
 
 * The `Size` (`double`) parameter controls the size of the pointer cap in percentage according to the scale radius. (from 0 to 1). The default size is 0.05.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
             .Name("gauge")
             .Pointers(pointers =>
@@ -45,13 +45,13 @@ The `Pointers` of the Telerik UI RadialGauge for {{ site.framework }} are the va
                 pointers.Add().Value(10).Color("#c20000").Length(0.5).Cap(c => c.Size(0.15).Color("red"));
             })
         )   
-````
+```
 
 ## Multiple Pointers
 
 The RadialGauge supports the usage of multiple pointers simultaneously. They can be declared within the `Pointers` option of the widget:
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
         .Name("gauge")
         .Pointers(pointers =>
@@ -67,7 +67,7 @@ The RadialGauge supports the usage of multiple pointers simultaneously. They can
                 .Max(180)
         )
     )
-````
+```
 
 ## See Also
 

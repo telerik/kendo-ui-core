@@ -8,15 +8,15 @@ position: 5
 
 # Razor Page
 
-This article demonstrates how to configure the Telerik UI PDFViewer HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+This article demonstrates how to configure the Telerik UI PDFViewer for {{ site.framework }} in a RazorPage scenario.
 
 For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
 ## PDFjs Processing
 
-The following example demonstrates how to initialize the PDFViewer HtmlHelper in RazorPage project by using [PDF.JS](https://mozilla.github.io/pdf.js/):
+The following example demonstrates how to initialize the PDFViewer in RazorPage project by using [PDF.JS](https://mozilla.github.io/pdf.js/):
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @page
     @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerIndexModel
 
@@ -49,7 +49,7 @@ The following example demonstrates how to initialize the PDFViewer HtmlHelper in
 
 The following example demonstrates how to initialize the PDFViewer by using the [Telerik Document Processing library](https://docs.telerik.com/devtools/document-processing/introduction):
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @page
     @model Telerik.Examples.RazorPages.Pages.PDFViewer.PDFViewerDPLModel
 

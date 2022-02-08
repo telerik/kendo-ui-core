@@ -1,7 +1,7 @@
 ---
 title: Disabled Dates
 page_title: Disabled Dates
-description: "Learn how to disable dates in the Telerik UI MultiViewCalendar HtmlHelper for {{ site.framework }}."
+description: "Learn how to disable dates in the Telerik UI MultiViewCalendar component for {{ site.framework }}."
 previous_url: /helpers/scheduling/multiviewcalendar/disable-dates
 slug: disabled_dates_multiviewcalendar_htmlhelper_aspnetcore
 position: 6
@@ -17,35 +17,39 @@ To disable a date, either [set an array](#setting-and-array) or [add a function]
 
 When you set an array, list the days that need to be disabled by using the first letters from their names in English.
 
-```Razor
-
-        @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .DisableDates(new[] {"we", "th" })
-        )
+```HtmlHelper
+    @(Html.Kendo().MultiViewCalendar()
+        .Name("MultiViewCalendar")
+        .DisableDates(new[] {"we", "th" })
+    )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiviewcalendar name="multiviewcalendar" disable-dates="new DateTime[] { DateTime.Now }">
+    </kendo-multiviewcalendar>
+```
+{% endif %}
 
 ## Adding a Function
 
 When you add a function, determine its return value as `true` for the date that is disabled.
 
-```Razor
+```HtmlHelper
+    @(Html.Kendo().MultiViewCalendar()
+        .Name("MultiViewCalendar")
+        .DisableDates("handler")
+    )
 
-        @(Html.Kendo().MultiViewCalendar()
-            .Name("MultiViewCalendar")
-            .DisableDates("handler")
-        )
-
-        <script>
-            function handler(date) {
-                var disabled = [13,14,20,21];
-                if (date && disabled.indexOf(date.getDate()) > -1 ) {
-                    return true;
-                } else {
-                    return false;
-                }
+    <script>
+        function handler(date) {
+            var disabled = [13,14,20,21];
+            if (date && disabled.indexOf(date.getDate()) > -1 ) {
+                return true;
+            } else {
+                return false;
             }
-        </script>
+        }
+    </script>
 ```
 
 ## See Also

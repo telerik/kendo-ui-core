@@ -1,7 +1,7 @@
 ---
 title: Bar Charts Stacked Bar
 page_title: Bar Charts Stacked Bar
-description: "Learn how to use the Stacked Bar of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the Stacked Bar of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_aspnetcore_htmlhelper_stackedbars
 ---
 
@@ -13,7 +13,7 @@ A Stacked bar is a bar divided into subparts to show cumulative effect, to displ
 
 The following implementation demonstrates the code needed for setting the Stacked Bar Chart:
 
-```View
+```HtmlHelper
  @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Olympic Medals won by USA")

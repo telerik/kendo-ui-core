@@ -1,7 +1,7 @@
 ---
 title:  Razor Pages
 page_title: Configure a DataSource for the Telerik UI ListView for Remote Binding in Razor Pages.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI ListView HtmlHelper for {{ site.framework }} in Razor Pages using CRUD Operations."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI ListView component for {{ site.framework }} in Razor Pages using CRUD Operations."
 slug: htmlhelpers_listview_razorpage_aspnetcore
 position: 1
 ---
@@ -14,7 +14,7 @@ This article showcases how to perform CRUD operations with the ListView componen
 
 To set up the ListView component bindings, you need to configure the `Create`, `Read`, `Update`, `Delete` methods of its `DataSource` instance. The URLs in these methods must refer to the methods names in the PageModel. See the implementation details in the example below. For the complete project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper
 @page
 @model Telerik.Examples.RazorPages.Pages.ListView.ListViewCrudOperationsModel
 @{

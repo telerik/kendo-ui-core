@@ -1,7 +1,7 @@
 ---
 title: Adaptive Rendering
 page_title: Adaptive Rendering
-description: "Get started with the Scheduler HtmlHelper for {{ site.framework }} and learn how to configure its adaptive rendering."
+description: "Get started with the Scheduler component for {{ site.framework }} and learn how to configure its adaptive rendering."
 previous_url: /helpers/scheduling/scheduler/adaptive-rendering
 slug: htmlhelpers_scheduler_adaptiverendering_aspnetcore
 position: 6
@@ -22,7 +22,7 @@ To enable the adaptive rendering feature, set the [`Mobile`](https://docs.teleri
 
 The following example demonstrates how to configure the adaptive rendering mode of the Scheduler.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Scheduler<KendoSchedulerAjaxEditing.Models.TaskViewModel>()
     .Name("scheduler")
     .Mobile(MobileMode.Auto)

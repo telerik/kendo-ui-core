@@ -8,7 +8,7 @@ position: 3
 
 # PDF Export
 
-The {{ site.product_short }} TreeList HtmlHelper provides a built-in PDF export functionality.
+The {{ site.product_short }} TreeList component provides a built-in PDF export functionality.
 
 For a runnable example, refer to the [demo on exporting the TreeList to PDF](https://demos.telerik.com/{{ site.platform }}/treelist/pdf-export).
 
@@ -25,6 +25,7 @@ To initiate the PDF export, press the **Toolbar** button or use the [TreeList cl
 
 The following example demonstrates how to enable the PDF export functionality of the TreeList.
 
+    ```HtmlHelper
         <!-- Load Pako Deflate library to enable PDF compression -->
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
@@ -35,13 +36,14 @@ The following example demonstrates how to enable the PDF export functionality of
                 .Read(read => read.Action("All", "EmployeeDirectory"))
             )
         )
-
+    ```
 ## Embedding Unicode Characters
 
 The default fonts in PDF files do not provide Unicode support. To support international characters, you have to embed an external font. For more information on the supported [Deja Vu font family](https://dejavu-fonts.github.io) as part of the Kendo UI distributions and other fonts, refer to the Kendo UI for jQuery article on [custom fonts and PDF](https://docs.telerik.com/kendo-ui/framework/drawing/pdf-output/embedded-fonts).
 
 The following example demonstrates how to handle custom fonts.
 
+    ```HtmlHelper
         <style>
             /*
                 Use the DejaVu Sans font for display and embedding in the PDF file.
@@ -74,7 +76,7 @@ The following example demonstrates how to handle custom fonts.
                 .Read(read => read.Action("All", "EmployeeDirectory"))
             )
         )
-
+    ```
 ## See Also
 
 * [PDF Export by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/pdf-export)

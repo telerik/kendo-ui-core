@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI ComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/combobox/binding/overview
 slug: htmlhelpers_combobox_databinding_aspnetcore
 position: 1

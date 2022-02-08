@@ -1,7 +1,7 @@
 ---
 title: Sorting
 page_title: Sorting
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn how to sort a Telerik UI PivotGrid HtmlHelper for {{ site.framework }}."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to sort a Telerik UI PivotGrid component for {{ site.framework }}."
 slug: htmlhelpers_pivotgrid_aspnetcore_sorting
 position: 4
 ---
@@ -21,4 +21,7 @@ To sort the PivotGrid rows and columns, click on the fields in the headers, the 
 ## See Also
 
 * [Basic Usage of the PivotGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index)
+{% if site.core %}
+* [Basic Usage of the PivotGrid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
+{% endif %}
 * [Server-Side API](/api/pivotgrid)

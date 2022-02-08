@@ -1,7 +1,7 @@
 ---
 title: Layout
 page_title: Layout
-description: "Get started with the Telerik UI Wizard HtmlHelper for {{ site.framework }} and learn how to customize its appearance."
+description: "Get started with the Telerik UI Wizard component for {{ site.framework }} and learn how to customize its appearance."
 slug: htmlhelpers_wizard_aspnetcore_layout
 position: 4
 ---
@@ -14,7 +14,7 @@ By default the {{ site.product }} Wizard is rendered with a Stepper in a horizon
 
 The following example demonstrates how to initialize a Wizard with a vertical Stepper and content rendered on the right side of the Stepper.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Wizard()
         .Name("wizard")
         .ContentPosition(WizardContentPosition.Right)
@@ -46,6 +46,29 @@ The following example demonstrates how to initialize a Wizard with a vertical St
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-wizard name="wizard" content-position="WizardContentPosition.Right">
+        <wizard-steps>
+            <wizard-step title="Initial step">
+                <wizard-step-content>
+                    <h1>Initial step content</h1>
+                </wizard-step-content>
+            </wizard-step>
+            <wizard-step title="Second step">
+                <wizard-step-content>
+                    <h1>Second step content</h1>
+                </wizard-step-content>
+            </wizard-step>
+            <wizard-step title="Final step">
+                <wizard-step-content>
+                    <h1>Final step content</h1>
+                </wizard-step-content>
+            </wizard-step>
+        </wizard-steps>
+    </kendo-wizard>
+```
+{% endif %}
 
 ## See Also
 

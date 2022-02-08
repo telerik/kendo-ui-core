@@ -7,17 +7,24 @@ slug: linecharts_aspnetcore_htmlhelper
 
 # Line Charts
 
-The Telerik UI Line Chart HtmlHelper for {{ site.framework }} extension is a server-side wrapper for the Kendo UI Line Chart widget.
+{% if site.core %}
+The Telerik UI Line Chart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Line Chart widget.
+{% else %}
+The Telerik UI Line Chart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Line Chart widget.
+{% endif %}
 
 Line Charts are suitable for displaying quantitative data by using continuous lines passing through points defined by the values of their items.
 
-* [Demo page for the Line Chart](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
+* [Demo page for the Line Chart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
+{% if site.core %}
+* [Demo page for the Line Chart TagHelper](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
+{% endif %}
 
 ## Getting Started
 
-You can use the Line Chart HtmlHelper to render a trend over time and compare sets of similar data.
+You can use the Line Chart component to render a trend over time and compare sets of similar data.
 
-To create a Line series in the Chart HtmlHelper, use `Line` and `VerticalLine` in the `Series` configuration.
+To create a Line series in the Chart, use `Line` and `VerticalLine` in the `Series` configuration.
 
 * [Configuring the axes](#configuring-the-axes)
 * [Configuring the line styles](#configuring-the-line-styles)
@@ -28,6 +35,7 @@ To create a Line series in the Chart HtmlHelper, use `Line` and `VerticalLine` i
 
 To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple value axes are also supported.
 
+```HtmlHelper
     @(Html.Kendo().Chart()
          .Name("chart")
          .Title("Internet Users")
@@ -47,6 +55,7 @@ To configure the axes, use the `CategoryAxis` and `ValueAxis` settings. Multiple
              .Numeric().Labels(labels => labels.Format("{0}%"))
          )
     )
+```
 
 The configuration from the previous example results in the following Line Chart.
 
@@ -62,7 +71,7 @@ The supported line styles are:
 * Step&mdash;This style renders the connection between data points through vertical and horizontal lines. It is suitable for indicating that the value is constant between the changes.
 * Smooth&mdash;This style causes the Line Chart to display a fitted curve through data points. It is suitable when the data requires to be displayed with a curve, or when you wish to connect the points with smooth instead of straight lines.
 
-```
+```HtmlHelper
    .SeriesDefaults(seriesDefaults =>
        seriesDefaults.Line().Style(ChartLineStyle.Smooth)
    )
@@ -70,7 +79,7 @@ The supported line styles are:
 
 You can also set the line style for each Line series individually.
 
-```
+```HtmlHelper
    .Series(series =>
    {
        series.Line(new double[] { 15.7, 26.7, 20, 23.5, 26.6 }).Name("World").Style(ChartLineStyle.Smooth);
@@ -88,7 +97,7 @@ The following image displays a smooth-line Line Chart.
 
 By default, the Chart draws its Line series as solid lines. You can configure the line to be drawn through different dash styles by setting `DashType`.
 
-```
+```HtmlHelper
      .Series(series =>
      {
          series.Line(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name("World").DashType(ChartDashType.Dot);
@@ -102,7 +111,7 @@ By default, the Chart draws its Line series as solid lines. You can configure th
 
 The series markers are the visuals that represent the point value in the Line series. You can customize or hide them through the `Markers` configuration.
 
-```
+```HtmlHelper
    series.Line(new double[] { 15.7, 16.7, 20, 23.5, 26.6 }).Name("World")
       .Markers(m=>m
           .Type(ChartMarkerShape.Square)
@@ -118,4 +127,5 @@ You can also completely draw custom markers for the Line series through the `Vis
 ## See Also
 
 * [Basic Usage of the Line Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/index)
+* [Basic Usage of the Line Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/line-charts/tag-helper)
 * [Server-Side API](/api/chart)

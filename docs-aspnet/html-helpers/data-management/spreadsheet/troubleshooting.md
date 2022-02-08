@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 page_title: Troubleshooting
-description: "Learn about the solutions of common issues that may occur while working with Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Learn about the solutions of common issues that may occur while working with Telerik UI Spreadsheet component for {{ site.framework }}."
 previous_url: /helpers/data-management/spreadsheet/troubleshoot/troubleshooting, /helpers/data-management/spreadsheet/troubleshooting
 slug: troubleshoot_spreadsheethelper_aspnetmvc
 position: 11
@@ -9,7 +9,7 @@ position: 11
 
 # Troubleshooting
 
-This article provides solutions for common issues you may encounter while working with the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}.
+This article provides solutions for common issues you may encounter while working with the Telerik UI Spreadsheet component for {{ site.framework }}.
 
 ## Processing fails for files with small amount of data
 
@@ -20,4 +20,7 @@ The conversion and processing can hang or fail even if the Spreadsheet file does
 ## See Also
 
 * [Basic Usage of the Spreadsheet HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/spreadsheet/index)
+{% if site.core %}
+* [Basic Usage of the Spreadsheet TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/spreadsheet/index)
+{% endif %}
 * [API Reference of the Spreadsheet HtmlHelper for {{ site.framework }}](/api/spreadsheet)

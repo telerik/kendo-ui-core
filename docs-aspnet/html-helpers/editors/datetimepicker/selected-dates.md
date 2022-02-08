@@ -16,7 +16,7 @@ For a complete example on how to select ranges by using the DateTimePicker, refe
 
 The following example demonstrates how to render a DateTimePicker with an initially selected date and defined min and max dates. The DateTimePicker sets the value only if the entered date is within the defined range and is valid.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateTimePicker()
         .Name("dateTimePicker")
         .Value(DateTime.Now)

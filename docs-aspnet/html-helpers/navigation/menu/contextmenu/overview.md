@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: ContextMenu
-description: "Learn the basics when working with the Telerik UI ContextMenu HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI ContextMenu component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/menu/contextmenu
 slug: htmlhelpers_contextmenu_aspnetcore
 position: 1
 ---
 
-# ContextMenu HtmlHelper Overview
+# ContextMenu Overview
 
+{% if site.core %}
+The Telerik UI ContextMenu TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ContextMenu widget.
+{% else %}
 The Telerik UI ContextMenu HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ContextMenu widget.
+{% endif %}
 
 The ContextMenu displays hierarchical data as a multi-level menu in a popup. It provides rich styling for unordered lists of items, and can be used for both navigation and execution of JavaScript commands.
 
-* [Demo page for the ContextMenu](https://demos.telerik.com/{{ site.platform }}/menu/context-menu)
+* [Demo page for the ContextMenu HtmlHelper](https://demos.telerik.com/{{ site.platform }}/menu/context-menu)
+{% if site.core %}
+* [Demo page for the ContextMenu TagHelper](https://demos.telerik.com/aspnet-core/menu/contextmenu-tag-helper)
+{% endif %}
 
 ## Basic Usage
 
-The following example demonstrates how to define the ContextMenu by using the ContextMenu HtmlHelper.
+The following example demonstrates how to define the ContextMenu.
 
-```Razor
+```HtmlHelper
 <div id="target">Click to open</div>
 
 @(Html.Kendo().ContextMenu()
@@ -55,7 +62,7 @@ The following example demonstrates how to define the ContextMenu by using the Co
 
 The following example demonstrates the basic configuration of the ContextMenu HtmlHelper and how to get the ContextMenu instance.
 
-```Razor
+```HtmlHelper
 <div id="target">Click to open</div>
 
 @(Html.Kendo().ContextMenu()
@@ -122,7 +129,7 @@ You can subscribe to all ContextMenu [events](https://docs.telerik.com/kendo-ui/
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```Razor
+```HtmlHelper
 <div id="target">Click to open</div>
 
 @(Html.Kendo().ContextMenu()
@@ -154,7 +161,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```Razor
+```HtmlHelper
 <div id="target">Click to open</div>
 
 @(Html.Kendo().ContextMenu()
@@ -180,7 +187,7 @@ The following example demonstrates how to subscribe to events by a template dele
 
 The following example demonstrates how to subscribe to the `select` event of a single ContextMenu item.
 
-```Razor
+```HtmlHelper
 <div id="target">Click to open</div>
 
 @(Html.Kendo().ContextMenu()

@@ -1,7 +1,7 @@
 ---
 title:  Binding to Remote Data
 page_title: Binding to Remote Data
-description: "Learn how to bind to remote data with Telerik UI Menu HtmlHelper for {{ site.framework }}."
+description: "Learn how to bind to remote data with Telerik UI Menu component for {{ site.framework }}."
 previous_url: /helpers/navigation/menu/binding/remote-data
 slug: htmlhelpers_menu_bindingremotedata_aspnetcore
 position: 3
@@ -36,7 +36,7 @@ The Menu supports remote data binding as of the R2 2019 release.
 
 1. Use the DataSource to configure the action URL to the end-point. Set up the `DataTextField` to define the field which will be bound to the text of the items. If the children items are not in an items field, configure the Model with the corresponding field that holds the children collection.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().Menu()
             .Name("menu")
             .DataTextField("Name")

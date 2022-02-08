@@ -1,7 +1,7 @@
 ---
 title: Constraining the Position
 page_title: Constraining the Position
-description: "Learn how to configure the containment limits for the Telerik UI Window HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the containment limits for the Telerik UI Window component for {{ site.framework }}."
 slug: htmlhelpers_window_constrain_aspnetcore
 position: 4
 ---
@@ -14,6 +14,7 @@ The `Containment()` option overrides the `appendTo` setting and attaches the Win
 
 The following example demonstrates how to create a modal Window and constrain its movement inside a DOM element.
 
+```HtmlHelper
     <style>
         #container {
             position: relative;
@@ -42,6 +43,7 @@ The following example demonstrates how to create a modal Window and constrain it
 
         </div>
     </div>
+```
 
 ## See Also
 

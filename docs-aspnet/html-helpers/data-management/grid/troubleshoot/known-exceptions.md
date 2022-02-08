@@ -8,7 +8,7 @@ position: 3
 
 # Known Exceptions
 
-This article provides solutions for some known exceptions you might encounter while working with the Telerik UI Grid HtmlHelper for {{ site.framework }}.
+This article provides solutions for some known exceptions you might encounter while working with the Telerik UI Grid component for {{ site.framework }}.
 
 ## Circular Reference Detected While Serializing an Object of Type
 

@@ -1,7 +1,7 @@
 ---
 title: Orientation
 page_title: Orientation
-description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn about its orientation options."
+description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its orientation options."
 slug: htmlhelpers_form_aspnetcore_orientation
 position: 6
 ---
@@ -19,7 +19,7 @@ To configure orientation, use either of the following settings:
 
 By default, the Form uses `vertical` orientation mode and renders the labels above their editors.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("formExample")
         .Orientation("vertical")
@@ -47,7 +47,7 @@ By default, the Form uses `vertical` orientation mode and renders the labels abo
 
 Set the `Оrientation` option to `horizontal`, if you want to render labels to the left of their editors. 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("formExample")
         .Orientation("horizontal")

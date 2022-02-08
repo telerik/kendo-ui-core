@@ -1,7 +1,7 @@
 ---
 title: Filtering
 page_title: Filtering
-description: "Learn how to filter data on the server for the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn how to filter data on the server for the Telerik UI MultiSelect component for {{ site.framework }}."
 slug: htmlhelpers_multiselect_filtering_aspnetcore
 position: 5
 ---
@@ -23,7 +23,7 @@ To configure the {{ site.product_short }} MultiSelect for Server Filtering:
 
 The following example demonstrates how to configure MultiSelect for Server Filtering.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
           .Name("products")
           .DataTextField("ProductName")
@@ -68,7 +68,7 @@ The following example demonstrates how to configure MultiSelect for Server Filte
 
 For smaller sets of data, the {{ site.product_short }} MultiSelect also supports Client Filtering. To configure it, set the ServerFiltering property to false. This way the MultiSelect dataset will be filtered on the client without sending additional requests to remote endpoint.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
           .Name("products")
           .DataTextField("ProductName")
