@@ -831,7 +831,7 @@
                         windowInstance.options.modal &&
                         windowInstance.options.visible &&
                         windowInstance.options.appendTo === that.options.appendTo &&
-                        !windowInstance.containment) {
+                        (!windowInstance.containment || (that.containment && windowInstance.containment[0] === that.containment[0]))) {
                             modals.push(windowInstance.wrapper[0]);
                     }
                 }
