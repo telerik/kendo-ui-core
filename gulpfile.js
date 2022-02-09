@@ -220,38 +220,40 @@ gulp.task('mdspell', shell.task(
 ['cd docs && mdspell "**/*.md" -n -a --report']
 ));
 
-[ 'core' ].forEach(function(flavor) {
-    gulp.task('npm-' + flavor, () => gulp.series(['cjs', 'styles']) , function() {
-        var internalOption = "", i = process.argv.indexOf("--channel");
-        if (i > -1) {
-            internalOption = process.argv[i+1];
-        }
-        var js = gulp.src('dist/cjs/**/*')
-                    .pipe(gulp.dest('dist/npm/js'));
+gulp.task('pack-npm', function () {
+    var internalOption = "", i = process.argv.indexOf("--channel"), flavor = 'core';
 
-        var jsmin = gulp.src('dist/cjs/**/*.js')
-                    .pipe(uglify())
-                    .pipe(gulp.dest('dist/npm/js'));
+    if (i > -1) {
+        internalOption = process.argv[i+1];
+    }
+    var js = gulp.src('dist/cjs/**/*')
+                .pipe(gulp.dest('dist/npm/js'));
 
-        var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
+    var jsmin = gulp.src('dist/cjs/**/*.js')
+                .pipe(uglify())
+                .pipe(gulp.dest('dist/npm/js'));
 
-        var pkg = gulp.src('build/package-' + flavor + '.json')
-                    .pipe(replace("$KENDO_VERSION", kendoVersion + internalOption))
-                    .pipe(rename('package.json'))
-                    .pipe(gulp.dest('dist/npm'));
+    var styles = gulp.src('dist/styles/**/*').pipe(gulp.dest('dist/npm/css'));
 
-        var license = gulp.src('resources/legal/npm/' + flavor + '.txt')
-                    .pipe(replace("$YEAR", new Date().getFullYear()))
-                    .pipe(rename('LICENSE'))
-                    .pipe(gulp.dest('dist/npm'));
+    var pkg = gulp.src('build/package-' + flavor + '.json')
+                .pipe(replace("$KENDO_VERSION", kendoVersion + internalOption))
+                .pipe(rename('package.json'))
+                .pipe(gulp.dest('dist/npm'));
 
-        var readme = gulp.src('resources/npm/' + flavor + '-README.md')
-                    .pipe(rename('README.md'))
-                    .pipe(gulp.dest('dist/npm'));
+    var license = gulp.src('resources/legal/npm/' + flavor + '.txt')
+                .pipe(replace("$YEAR", new Date().getFullYear()))
+                .pipe(rename('LICENSE'))
+                .pipe(gulp.dest('dist/npm'));
 
-        return merge(js, jsmin, styles, pkg, license, readme);
-    });
-});
+    var readme = gulp.src('resources/npm/' + flavor + '-README.md')
+                .pipe(rename('README.md'))
+                .pipe(gulp.dest('dist/npm'));
+
+    return merge(js, jsmin, styles, pkg, license, readme);
+})
+
+gulp.task('npm-core', gulp.series(['cjs', 'styles', 'pack-npm']));
+
 
 const taskListing = require('gulp-task-listing');
 gulp.task('tasks', taskListing.withFilters(/:/));
