@@ -35,7 +35,7 @@ The following example shows how to disable the built-in validation on blur.
                     {
                         field: "Address",
                         label: "Address:",
-                        validation: { required: true }
+                        validation: { required: true, message: "custom validation message" }
                     }
                 ]
             });

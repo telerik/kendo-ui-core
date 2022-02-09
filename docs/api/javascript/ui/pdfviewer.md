@@ -384,6 +384,22 @@ Sets the text of the button.
 ### toolbar.items.template `String|Function`
 Specifies what element will be added in the ToolBar wrapper. Items with template does not have a type.
 
+#### Example
+
+    <div id="pdf-viewer"></div>
+    <script>
+      $("#pdf-viewer").kendoPDFViewer({
+        toolbar: {
+          items: [            
+            {
+              name: "myCustomTool",
+              template: "<button>My custom button </button>"
+            }
+          ]
+        }  
+      });     
+    </script>
+
 ### toolbar.items.showText `String` *(default: "both")*
 Specifies where the text will be displayed. Possible values are: "toolbar", "overflow" or "both" (default).
 
