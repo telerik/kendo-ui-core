@@ -734,6 +734,15 @@ The default row height in pixels.
 
 The number of rows in the document.
 
+#### Example - configure the rows count
+
+    <div id="spreadsheet"></div>
+    <script>
+        $("#spreadsheet").kendoSpreadsheet({
+            rows: 300
+        });
+    </script>
+
 ### sheets `Array`
 
 An array which defins the document sheets and their content.
