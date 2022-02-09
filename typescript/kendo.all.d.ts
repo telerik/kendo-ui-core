@@ -2570,6 +2570,7 @@ declare namespace kendo.ui {
 
     interface ButtonOptions {
         name?: string | undefined;
+        badge?: ButtonBadge | undefined;
         enable?: boolean | undefined;
         fillMode?: string | undefined;
         icon?: string | undefined;
@@ -2582,6 +2583,22 @@ declare namespace kendo.ui {
         themeColor?: string | undefined;
         click?(e: ButtonClickEvent): void;
     }
+
+    interface ButtonBadge {
+        align?: string | undefined;
+        cutoutBorder?: boolean | undefined;
+        fill?: string | undefined;
+        icon?: string | undefined;
+        max?: number | undefined;
+        position?: string | undefined;
+        shape?: string | undefined;
+        size?: string | undefined;
+        template?: string | Function | undefined;
+        text?: string | number | undefined;
+        themeColor?: string | undefined;
+        visible?: boolean | undefined;
+    }
+
     interface ButtonEvent {
         sender: Button;
         preventDefault: Function;
