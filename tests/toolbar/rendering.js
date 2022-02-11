@@ -1169,6 +1169,27 @@
             assert.isOk($("#btn3").hasClass("baz"));
         });
 
+        it("default classes are preserved on menu buttons", function() {
+            var splitButton = container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "foo", text: "foo", menuButtons: [
+                            { id: "btn1", text: "Btn1", attributes: { "class": "foo" } },
+                            { id: "btn2", text: "Btn2", attributes: { "class": "bar" } },
+                            { id: "btn3", text: "Btn3", attributes: { "class": "baz" } }
+                        ]
+                    }
+                ]
+            }).data("kendoToolBar");
+
+            assert.isOk($("#btn1").hasClass("k-link"));
+            assert.isOk($("#btn2").hasClass("k-link"));
+            assert.isOk($("#btn3").hasClass("k-link"));
+            assert.isOk($("#btn1").hasClass("k-menu-link"));
+            assert.isOk($("#btn2").hasClass("k-menu-link"));
+            assert.isOk($("#btn3").hasClass("k-menu-link"));
+        });
+
         it("splitButton is initially hidden if hidden option is set to true", function() {
             var toolbar = container.kendoToolBar({
                 items: [

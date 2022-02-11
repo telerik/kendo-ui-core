@@ -139,8 +139,21 @@ var __meta__ = { // jshint ignore:line
             },
 
             attributes: function() {
-                if (this.options.attributes) {
-                    this.element.attr(this.options.attributes);
+                var attributes = this.options.attributes,
+                    classes;
+
+                if (attributes) {
+                    if (attributes.class) {
+                        classes = attributes.class;
+
+                        this.element.addClass(classes);
+
+                        delete attributes.class;
+                    }
+
+                    this.element.attr(attributes);
+
+                    attributes.class = classes;
                 }
             },
 
