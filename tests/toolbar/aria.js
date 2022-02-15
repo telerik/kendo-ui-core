@@ -224,5 +224,29 @@
                 assert.equal(sep.getAttribute("role"), "separator");
             });
         });
+
+        it("aria-label is added on buttons with only text", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", text: "Foo", icon: "tick", showText: "overflow", id: "id" }
+                ]
+            }).data("kendoToolBar");
+
+            var button = container.find("#id");
+
+            assert.equal(button.attr("aria-label"), "Foo");
+        });
+
+        it("aria-label is added on overflow buttons with only text", function() {
+            container.kendoToolBar({
+                items: [
+                    { type: "button", text: "Foo", icon: "tick", showText: "toolbar", id: "id" }
+                ]
+            }).data("kendoToolBar");
+
+            var button = $(".k-overflow-container").find("#id_overflow .k-button");
+
+            assert.equal(button.attr("aria-label"), "Foo");
+        });
     });
 }());

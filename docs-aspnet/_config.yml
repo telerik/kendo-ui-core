@@ -388,9 +388,18 @@ navigation:
      "integration-with-other-telerik-products":
         title: "Integration with other Telerik Products"
         position: 11
+     "cloud-integration":
+        title: "Cloud Integration"
+        position: 12
+     "cloud-integration/amazon-web-services":
+        title: "Amazon Web Services"
+        position: 2
+     "cloud-integration/azure":
+        title: "Azure"
+        position: 3
      "backwards-compatibility":
         title: "Breaking Changes"
-        position: 12
+        position: 13
      "*appearance":
         title: "Appearance"
      "*/binding":

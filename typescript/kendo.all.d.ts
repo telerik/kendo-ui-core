@@ -5441,7 +5441,9 @@ declare namespace kendo.ui {
         editor?: string|Function | undefined;
         editorOptions?: any;
         label?: string | FormItemLabel | undefined;
-        validation?: any;
+        validation?: any;      
+        layout?: string | "grid" | undefined;
+        grid?: FormGridOptions | undefined;
         items?: FormItem[] | undefined;
     }
 

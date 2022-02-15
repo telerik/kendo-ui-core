@@ -3,7 +3,7 @@ title: Upgrade
 page_title: Upgrade
 description: "Upgrade your current version of {{ site.product_long }} and switch from a trial to a developer license."
 slug: upgrade_aspnetcore
-position: 11
+position: 14
 ---
 
 # Upgrade
