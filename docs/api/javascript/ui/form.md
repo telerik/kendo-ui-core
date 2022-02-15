@@ -721,6 +721,114 @@ Defines the attributes that are applied to the input element.
         color:red;
       }
     </style>
+ 
+### items.layout `Object` *(default: '')*
+
+Specify the layout of the item when `items.type` is set to "group". Valid options:
+
+* `grid`: This is equivalent to `display: grid`. It defines the form item as a grid container and establishes a new grid formatting context for its contents.
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                grid: {
+                    cols: 2,
+                    gutter: 20
+                },
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { cols: 1, gutter: 10},
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
+
+### items.grid `Object`
+
+[Grid layout](/api/javascript/ui/form/configuration/grid) settings of the form item.
+
+#### Example
+
+    <form id="myForm"></form>
+
+    <script>
+        $(document).ready(function () {            
+            $("#myForm").kendoForm({
+                formData: {
+                    FirstName: "John",
+                    LastName: "Doe",
+                    Email: "john.doe@email.com"
+                },
+                layout: "grid",
+                grid: {
+                    cols: 2,
+                    gutter: 20
+                },
+                items: [
+                    {
+                        type: "group",
+                        label: "Personal Information",
+                        layout: "grid",
+                        grid: { cols: 1, gutter: 10},
+                        items: [
+                            { 
+                                field: "FirstName", 
+                                label: "First Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "LastName", 
+                                label: "Last Name:", 
+                                validation: { required: true } 
+                            },
+                            { 
+                                field: "Email", 
+                                label: "Email", 
+                                validation: { 
+                                    required: true, 
+                                    email: true 
+                                }
+                            }
+                        ]
+                    },                  
+                ],               
+            });
+        });
+    </script>
 
 ### orientation `String`
 

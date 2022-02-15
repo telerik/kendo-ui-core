@@ -298,6 +298,8 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         element.html(options.text);
                     }
+                } else if (!!options.text) {
+                    element.attr("aria-label", options.text);
                 }
 
                 if(options.icon || options.spriteCssClass || options.imageUrl) {
@@ -355,6 +357,8 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         element.html(options.text);
                     }
+                } else if (!!options.text) {
+                    element.attr("aria-label", options.text);
                 }
 
                 if(options.icon || options.spriteCssClass || options.imageUrl) {
