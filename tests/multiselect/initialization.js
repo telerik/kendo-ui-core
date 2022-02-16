@@ -117,12 +117,12 @@
     it("MultiSelect renders header template", function() {
         var multiselect = new MultiSelect(select, {
             template: "#= data.toUpperCase() #",
-            headerTemplate: "<div>Header</div>"
+            headerTemplate: "<div id='t'>Header</div>"
         });
 
         var list = multiselect.list;
 
-        assert.equal(list.find(".k-list-header").html(), "<div>Header</div>");
+        assert.equal(list.prev()[0].outerHTML, '<div id="t">Header</div>');
     });
 
     it("render footer container", function() {

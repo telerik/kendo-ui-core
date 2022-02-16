@@ -341,12 +341,12 @@
         it("defining header template", function() {
             var dropdownlist = new DropDownList(input, {
                 template: "#= data.toUpperCase() #",
-                headerTemplate: "<div>Header</div>"
+                headerTemplate: "<div id='t'>Header</div>"
             });
 
             var list = dropdownlist.list;
 
-            assert.equal(list.find(".k-list-header").children()[0].outerHTML, "<div>Header</div>");
+            assert.equal(list.parent().find("#t")[0].outerHTML, '<div id="t">Header</div>');
         });
 
         it("defining option label template", function() {
