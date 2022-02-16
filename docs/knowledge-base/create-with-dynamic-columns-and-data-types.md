@@ -29,11 +29,16 @@ res_type: kb
 
 ## Description
 
-How can I create a Kendo UI jQuery Grid with column and data fields information which is retrieved during runtime?
+Sometimes the server may return a response with different fields and values depending on user input or another external variable. In such cases, the developer doesn't know what columns and fields will be available in the Grid, nor what the type of these fields will be. 
+
+This article showcases how to dynamically generate the Kendo UI Grid by using the response data and without knowing the names and types of the columns and fields.
 
 ## Solution
 
-The following example demonstrates how to create a Grid with column and data-field information that is retrieved during runtime.
+1. Prefetch the dynamic Grid data by making an `ajax` request to the server.
+1. Create the [`dataSource.model`](/api/javascript/data/datasource/configuration/schema#schemamodel) by using the first record in the response as a sample.
+1. Create the Grid [`columns`](/api/javascript/ui/grid/configuration/columns) by using the names of the fields returned in the server response.
+1. Generate the Grid by using the model and columns that were created in the previous two steps.
 
 ```dojo
 

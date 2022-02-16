@@ -157,12 +157,12 @@ it("autocomplete supports setting a custom fixed group template", function() {
 it("defining header template", function() {
     var autocomplete = new AutoComplete(input, {
         template: "#= data.toUpperCase() #",
-        headerTemplate: "<div>Header</div>"
+        headerTemplate: "<div id='t'>Header</div>"
     });
 
     var list = autocomplete.list;
 
-    assert.equal(list.find(".k-list-header").html(), "<div>Header</div>");
+    assert.equal(list.prev()[0].outerHTML, '<div id="t">Header</div>');
 });
 
 it("render footer container", function() {

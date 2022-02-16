@@ -18,7 +18,7 @@ var __meta__ = { // jshint ignore:line
         proxy = $.proxy,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         LIST_CONTENT = "k-list-content k-virtual-content",
-        TABLE_CONTENT = "k-table-body k-table-scroller k-virtual-content",
+        TABLE_CONTENT = "k-table-body k-table-scroller",
         HEADER = "k-list-group-sticky-header",
         LIST_ITEM = "k-list-item",
         TABLE_ITEM = "k-table-row",
@@ -179,7 +179,11 @@ var __meta__ = { // jshint ignore:line
             .attr("data-offset-index", data.index);
 
         if (hasColumns && data.item) {
-            element.addClass(altRow);
+            if (altRow.length > 0) {
+                element.addClass(altRow);
+            } else {
+                element.removeClass("k-table-alt-row");
+            }
             element.html(renderColumns(this.options, data.item, templates));
         } else {
             element.find("." + GROUPITEM).remove();
@@ -304,7 +308,7 @@ var __meta__ = { // jshint ignore:line
                 thead.append(row);
 
                 that.header = row.find(".k-table-th");
-                that.element.addClass(TABLE_LIST);
+                that.element.addClass(TABLE_LIST + " k-virtual-table");
             } else {
                 that.header = that.content.before("<div class='" + HEADER + "'></div>").prev();
                 that.element.addClass(LIST_UL);

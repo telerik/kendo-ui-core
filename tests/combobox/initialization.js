@@ -398,11 +398,11 @@
         it("defining header template", function() {
             var combobox = new ComboBox(input, {
                 template: "#= data.toUpperCase() #",
-                headerTemplate: "<div>Header</div>"
+                headerTemplate: "<div id='t'>Header</div>"
             });
             var list = combobox.list;
 
-            assert.equal(list.find(".k-list-header").html(), "<div>Header</div>");
+            assert.equal(list.parent().find("#t")[0].outerHTML, '<div id="t">Header</div>');
         });
 
         it("render footer container", function() {

@@ -402,9 +402,16 @@
 /// @group treeview
 @kendo-treeview-item-selected-gradient: null;
 
+/// Border color of focused treeview items.
+/// @group treeview
+@kendo-treeview-item-focus-border: @drop-down-focused-border-color;
 /// Box shadow of focused treeview items.
 /// @group treeview
 @kendo-treeview-item-focus-shadow: @focused-item-shadow;
+
+/// Background color of treeview icons.
+/// @group treeview
+@kendo-treeview-icon-bg: @icon-background-color;
 
 
 // Avatar
@@ -845,7 +852,7 @@
 @checkbox-border-width: 1px;
 // @checkbox-line-height: (@checkbox-size + @checkbox-border-width);
 
-@checkbox-bg: @input-bg;
+@checkbox-bg: @background;
 @checkbox-text: @input-text;
 @checkbox-border: contrast(@background, darken(@input-border, 15%), lighten(@input-border, 15%));
 @checkbox-hovered-bg: @checkbox-bg;

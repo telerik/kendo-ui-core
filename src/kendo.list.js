@@ -75,9 +75,11 @@ var __meta__ = { // jshint ignore:line
 
         UL_EL = '<ul unselectable="on"/>',
         LIST_EL = "<div class='k-list'/>",
-        LIST_HEADER_EL = '<div class="k-list-header">',
         NO_DATA_EL = '<div class="k-no-data" style="display: none;"></div>',
         LIST_FOOTER_EL = '<div class="k-list-footer"></div>',
+        TABLE_FOOTER_EL = '<div class="k-table-footer">' +
+                '<span class="k-table-td"></span>' +
+            '</div>',
         MOUSEDOWN = "mousedown",
         LIST_SUFFIX = "-list",
         LISTBOX_SUFFIX = "_listbox",
@@ -97,7 +99,6 @@ var __meta__ = { // jshint ignore:line
     var List = kendo.ui.DataBoundWidget.extend({
         init: function(element, options) {
             var that = this,
-                ns = that.ns,
                 id;
 
             Widget.fn.init.call(that, element, options);
@@ -126,8 +127,7 @@ var __meta__ = { // jshint ignore:line
 
             that.list = $(LIST_EL)
                 .addClass(that._listSize)
-                .append(that.ul)
-                .on(MOUSEDOWN + ns, proxy(that._listMousedown, that));
+                .append(that.ul);
 
             id = element.attr(ID);
 
@@ -207,7 +207,6 @@ var __meta__ = { // jshint ignore:line
             var list = this;
             var header = $(list.header);
             var template = list.options.headerTemplate;
-            var wrapper;
 
             this._angularElement(header, "cleanup");
             kendo.destroy(header);
@@ -223,8 +222,10 @@ var __meta__ = { // jshint ignore:line
 
             list.header = header[0] ? header : null;
 
-            wrapper = header.wrap(LIST_HEADER_EL).parent();
-            list.list.prepend(wrapper);
+            if (list.list.parent.length > 0) {
+                list.list.before(header);
+            }
+
             this._angularElement(list.header, "compile");
         },
 
@@ -297,6 +298,7 @@ var __meta__ = { // jshint ignore:line
             var list = this;
             var footer = $(list.footer);
             var template = list.options.footerTemplate;
+            var footerEl = this.options.columns && this.options.columns.length ? TABLE_FOOTER_EL : LIST_FOOTER_EL;
 
             this._angularElement(footer, "cleanup");
             kendo.destroy(footer);
@@ -307,7 +309,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            list.footer = $(LIST_FOOTER_EL).appendTo(list.list);
+            list.footer = $(footerEl).appendTo(list.list);
             list.footerTemplate = typeof template !== "function" ? kendo.template(template) : template;
         },
 
@@ -373,7 +375,6 @@ var __meta__ = { // jshint ignore:line
             } else {
                 that.listView = new kendo.ui.VirtualList(that.ul, listOptions);
                 that.list.addClass("k-virtual-list");
-                that.list.addClass("k-virtual-table");
             }
 
             that.listView.bind("listBound", proxy(that._listBound, that));
@@ -556,7 +557,7 @@ var __meta__ = { // jshint ignore:line
 
         _renderFooter: function() {
             var list = this,
-                footer = list.footer;
+                footer = list.footer ? this.options.columns && this.options.columns.length ? list.footer.children().first() : list.footer : null;
 
             if (!footer) {
                 return;
@@ -1111,6 +1112,9 @@ var __meta__ = { // jshint ignore:line
                 isRtl: support.isRtl(list.wrapper),
                 autosize: list.options.autoWidth
             }));
+
+            list.popup.element.prepend(list.header)
+                .on(MOUSEDOWN + this.ns, proxy(this._listMousedown, this));
         },
 
         _toggleHover: function(e) {

@@ -360,7 +360,7 @@ it("binding header template", function() {
 
     kendo.bind(dom, observable);
 
-    assert.equal(dom.data("kendoComboBox").list.find(".k-list-header").html().trim(), "<strong>Title</strong>");
+    assert.equal(dom.data("kendoComboBox").list.prev()[0].outerHTML, "<strong>Title</strong>");
 });
 
 it("removing items from the model updates the UI", function() {
