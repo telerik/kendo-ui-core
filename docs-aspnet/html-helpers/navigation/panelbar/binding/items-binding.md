@@ -1,7 +1,7 @@
 ---
 title: Items Binding
 page_title: Items Binding
-description: "Manually define the properties of each item in the Telerik UI PanelBar HtmlHelper for {{ site.framework }} by using the items builder."
+description: "Manually define the properties of each item in the Telerik UI PanelBar component for {{ site.framework }} by using the items builder."
 slug: itemsbinding_panelbarhelper_aspnetmvc
 position: 2
 ---
@@ -20,7 +20,7 @@ The PanelBar enables you to manually define the properties of each item.
 
 1. Add a PanelBar.
 
-    ```Razor
+    ```HtmlHelper
         @(Html.Kendo().PanelBar()
             .Name("panelbar") // The name of the panelbar is mandatory. It specifies the "id" attribute of the PanelBar.
             .Items(items =>

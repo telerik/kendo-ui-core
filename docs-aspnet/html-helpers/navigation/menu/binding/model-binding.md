@@ -1,7 +1,7 @@
 ---
 title:  Model Binding
 page_title: Model Binding
-description: "Learn how to implement model binding with Telerik UI Menu HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement model binding with Telerik UI Menu component for {{ site.framework }}."
 previous_url: /helpers/navigation/menu/binding/model-binding
 slug: htmlhelpers_menu_modelbinding_aspnetcore
 position: 2
@@ -30,7 +30,7 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
 
 1. Add a Menu.
 
-    ```Razor
+    ```HtmlHelper
     @(Html.Kendo().Menu()
         .Name("menu") // The name of the Menu is mandatory. It specifies the "id" attribute of the widget.
         .BindTo(Model, mappings =>

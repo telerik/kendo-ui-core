@@ -1,7 +1,7 @@
 ---
 title: Resizing
 page_title: Resizing of Columns
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn how to enable column resizing to modify the width of columns."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn how to enable column resizing to modify the width of columns."
 slug: htmlhelpers_treelist_aspnetcore_column_resizing
 position: 4
 ---

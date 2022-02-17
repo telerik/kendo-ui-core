@@ -1,7 +1,7 @@
 ---
 title: Grouping
 page_title: Grouping
-description: "Learn how to group data in the Telerik UI AutoComplete HtmlHelper for {{ site.framework }} works."
+description: "Learn how to group data in the Telerik UI AutoComplete component for {{ site.framework }} works."
 previous_url: /helpers/editors/autocomplete/grouping
 slug: htmlhelpers_autocomplete_grouping_aspnetcore
 position: 6
@@ -17,7 +17,7 @@ To group the data, define a group `datasource` expression which uses a custom Da
 
 The following example demonstrates how to group the data in the AutoComplete by country.
 
-    ```
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataSource(source =>  source
@@ -31,7 +31,7 @@ The following example demonstrates how to group the data in the AutoComplete by 
             )
         .DataTextField("ContactName")
     )
-    ```
+```
 
 ## See Also
 

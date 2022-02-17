@@ -1,7 +1,7 @@
 ---
 title: Panes
 page_title: Panes
-description: "Learn how to configure the panes of a Telerik UI Chart HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the panes of a Telerik UI Chart component for {{ site.framework }}."
 slug: htmlhelpers_charts_panes_aspnetcore
 ---
 
@@ -21,6 +21,7 @@ Settings that apply to all panes can be declared through the `PaneDefaults` conf
 
 The following example sets the default background color for the panes:
 
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .PaneDefaults(p=> p.Background("#00ff00"))
@@ -51,6 +52,7 @@ The following example sets the default background color for the panes:
             .Template("#= series.name #: #= value #")
         )
     )
+```
 
 ## Disable Clipping
 
@@ -59,6 +61,7 @@ By default, the pane content cannot extend beyond its border. This prevents char
 Pane clipping may be undesired, for example when plotting series markers at the edge of the pane.
 To disable clipping, set the `Panes.Clip` setting to `false`:
 
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Panes(p => p.Add().Clip(false))
@@ -89,9 +92,11 @@ To disable clipping, set the `Panes.Clip` setting to `false`:
             .Template("#= series.name #: #= value #")
         )
     )
+```
 
 ## See Also
 
 * [Using the API of the Chart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/chart-api/index)
 * [Basic Usage of the Area Chart HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/area-charts/index)
+* [Basic Usage of the Area Chart TagHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/area-charts/tag-helper)
 * [Server-Side API](/api/chart)

@@ -1,7 +1,7 @@
 ---
 title: Gap and Spacing
 page_title: Gap and Spacing
-description: "Learn how to set Gap and Spacing of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to set Gap and Spacing of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_gap_and_spacing
 ---
 
@@ -11,7 +11,7 @@ The Bar Chart component allows you to control the distance between its categorie
 
 The following implementation demonstrates the code needed for setting Gap and Spacing for Bar Chart:
 
-```View
+```HtmlHelper
 <div class="configurator">
     <div class="header">Configurator</div>
     <div class="box-col">

@@ -1,7 +1,7 @@
 ---
 title: Tab Content
 page_title: Tab Content
-description: "Use the options for loading and configuring the tab content of the Telerik UI TabStrip HtmlHelper for {{ site.framework }}."
+description: "Use the options for loading and configuring the tab content of the Telerik UI TabStrip component for {{ site.framework }}."
 slug: htmlhelpers_tabstrip_aspnetcore_content
 position: 3
 ---
@@ -14,7 +14,7 @@ The TabStrip provides options for loading and configuring its tab content area.
 
 To define the tab content declaratively, use the `tab.Content()` configuration method.
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>
@@ -38,7 +38,7 @@ To define the tab content declaratively, use the `tab.Content()` configuration m
 
 The following example demonstrates how to load the tab content asynchronously by using AJAX.
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Items(tabstrip =>
@@ -58,7 +58,7 @@ By default, the containers of the TabStrip content are scrollable which enables 
 
 Depending on the browser, you can reset the scroll position of the content when the active tab is changed. To persist the scroll position, use the [`select`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/select) event of the Kendo UI for jQuery widget to save the current scroll position and then the [`activate`](https://docs.telerik.com/kendo-ui/api/javascript/ui/tabstrip/events/activate) event to restore it.
 
-```
+```HtmlHelper
 @(Html.Kendo().TabStrip()
     .Name("tabstrip")
     .Scrollable(false)

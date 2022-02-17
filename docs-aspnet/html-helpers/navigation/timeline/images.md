@@ -1,7 +1,7 @@
 ---
 title: Images
 page_title: Timeline Images
-description: "Adding images in the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "Adding images in the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/images
 slug: images_htmlhelpers_timeline_aspnetcore
 position: 4
@@ -16,7 +16,7 @@ The example below shows how you can add an image for the events.
 >tip If you want to show more than one image, you need to customize the [template of the Timeline](templates).
 
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
            .Name("Timeline")
            .DataDateField("EventDate")

@@ -1,6 +1,6 @@
 ---
 title: WebAPI Editing
-page_title: WebAPI Editing | Telerik UI Grid HtmlHelper for ASP.NET MVC
+page_title: WebAPI Editing | Telerik UI Grid component
 description: "Implement CRUD data operations with a WebAPI controller for the Kendo UI Grid for {{ site.framework }}."
 previous_url: /helpers/grid/webapi-editing, /helpers/data-management/grid/webapi-editing
 slug: webapi_editing_grid_aspnetmvc
@@ -90,7 +90,8 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
 		}{% endif %}
 
 1. In the view, configure the Grid to use the Products WebAPI controller.
-  
+
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
             .Name("grid")
             .Columns(columns =>
@@ -127,6 +128,7 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
             )
             .Pageable()
         )
+    ```
 
 1. Build and run the application.
 

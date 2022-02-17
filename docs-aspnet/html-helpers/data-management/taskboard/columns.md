@@ -16,6 +16,7 @@ The default buttons rendered in the TaskBoard columns are: `edit column`, `add c
 
 The following example demonstrates how to customize the columns by setting `width` and display only one of the three default column buttons. 
 
+```HtmlHelper
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
         .ColumnSettings(s =>
@@ -38,7 +39,7 @@ The following example demonstrates how to customize the columns by setting `widt
         .DataOrderField("Order")
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
-
+```
 
 ## Column Commands
 
@@ -54,6 +55,7 @@ In addition to the default buttons, you have the option to add custom buttons to
 
 The following example demonstrates how to use the `ColumnSettings` configuration to add a custom button. A custom command is created, to be triggered on clicking the custom button.
 
+```HtmlHelper
     <script>
         kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
             exec: function () {
@@ -89,6 +91,7 @@ The following example demonstrates how to use the `ColumnSettings` configuration
         .DataOrderField("Order")
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
     )
+```
 
 ## See Also
 

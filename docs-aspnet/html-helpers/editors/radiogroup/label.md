@@ -14,7 +14,7 @@ If the RadioGroup is bound to an array of strings, those will be used as both va
 
 To customize the text of the label, use the [`label`](/api/javascript/ui/radiogroup/configuration/items.label) option. 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().RadioGroup()
         .Name("radiogroup")
         .Items(i =>
@@ -25,12 +25,25 @@ To customize the text of the label, use the [`label`](/api/javascript/ui/radiogr
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radiogroup name="radiogroup"
+                      radio-name="radiogroup">
+        <kendo-radiogroup-items>
+            <kendo-radiogroup-item value="one" label="First">
+            </kendo-radiogroup-item>
+            <kendo-radiogroup-item value="two" label="Second">
+            </kendo-radiogroup-item>
+        </kendo-radiogroup-items>
+    </kendo-radiogroup>
+```
+{% endif %}
 
 ## Configure the Label Position
 
 The labels of all radio buttons in the RadioGroup could be rendered before or after the radio buttons.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().RadioGroup()
         .Name("radiogroup")
         .LabelPosition("after")
@@ -42,6 +55,15 @@ The labels of all radio buttons in the RadioGroup could be rendered before or af
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radiogroup name="radiogroup"
+        radio-name="radiogroup"
+        label-position="RadioGroupLabelPosition.Before"
+        >
+    </kendo-radiogroup>
+```
+{% endif %}
 
 ## See Also
 

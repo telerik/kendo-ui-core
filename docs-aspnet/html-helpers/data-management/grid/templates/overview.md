@@ -8,7 +8,7 @@ position: 1
 
 # Templates Overview
 
-The Progress Telerik UI Grid HtmlHelper for {{ site.framework }} provides a number of templating options that can be used to customize the way the data is visualized in the table.
+The Progress Telerik UI Grid component for {{ site.framework }} provides a number of templating options that can be used to customize the way the data is visualized in the table.
 
 Under the hood, the templates use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 

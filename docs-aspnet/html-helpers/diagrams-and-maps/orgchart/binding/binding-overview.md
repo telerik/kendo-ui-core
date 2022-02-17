@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI OrgChart HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI OrgChart component for {{ site.framework }}."
 slug: htmlhelpers_orgchart_databinding_aspnetcore
 position: 1
 ---

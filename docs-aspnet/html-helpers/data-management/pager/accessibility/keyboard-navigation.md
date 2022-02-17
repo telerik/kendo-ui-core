@@ -17,11 +17,13 @@ Alternatively, you can press `Enter` and navigate through the different elements
 
 The following example demonstrates how to enable the keyboard navigation in the Pager.
 
+```HtmlHelper
     @(Html.Kendo().Pager()
         .Name("pager")
         /* Other configuration. */
         .Navigatable(true)
     )
+```
 
 The table below lists the available key combinations supported by the Pager.
 

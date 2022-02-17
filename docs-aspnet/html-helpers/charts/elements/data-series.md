@@ -1,7 +1,7 @@
 ---
 title: Data Series
 page_title: Data Series
-description: "Learn how to plot one or more specified data series in the Telerik UI Chart HtmlHelper for {{ site.framework }}."
+description: "Learn how to plot one or more specified data series in the Telerik UI Chart component for {{ site.framework }}."
 slug: htmlhelpers_charts_dataseries_aspnetcore
 ---
 
@@ -15,7 +15,7 @@ To define the data series, add them to the `series` array.
 
 The following example demonstrates how to define two Bar series that are bound to inline data.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>
@@ -32,7 +32,7 @@ To specify the options that will be applied to all series, use `seriesDefaults`.
 
 > Options for individual series take precedence over the options that are specified in `seriesDefaults`.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .SeriesDefaults(seriesDefaults => seriesDefaults.Bar().Border(b=>b.Color("purple")))
@@ -48,7 +48,7 @@ To specify the options that will be applied to all series, use `seriesDefaults`.
 
 You can display series of different types in a single chart.
 
-```
+```HtmlHelper
     @(Html.Kendo().Chart()
         .Name("chart")
         .Series(series =>

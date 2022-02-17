@@ -1,14 +1,14 @@
 ---
 title: Batch
 page_title: Batch Editing
-description: "Enable cell edit mode and batch updates in Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Enable cell edit mode and batch updates in Telerik UI Grid component for {{ site.framework }}."
 slug: batchediting_grid_aspnetcore
 position: 4
 ---
 
 # Batch Editing
 
-The Telerik UI Grid HtmlHelper for {{ site.framework }} enables you to implement cell editing and make and save batch updates.
+The Telerik UI Grid component for {{ site.framework }} enables you to implement cell editing and make and save batch updates.
 
 For a runnable example, refer to the [demo on batch editing of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/editing).
 
@@ -175,39 +175,83 @@ For a runnable example, refer to the [demo on batch editing of the Grid](https:/
 
 1. In the view, configure the Grid to use the action methods that were created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
-            @(Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
-                  .Name("grid")
-                  .Columns(columns =>
-                  {
-                      columns.Bound(product => product.ProductID).Width(100);
-                      columns.Bound(product => product.ProductName);
-                      columns.Bound(product => product.UnitsInStock).Width(250);
-                      columns.Command(commands =>
-                      {
-                          commands.Destroy(); // The "destroy" command removes data items.
-                      }).Title("Commands").Width(200);
-                  })
-                  .ToolBar(toolbar =>
-                  {
-                      toolbar.Create(); // The "create" command adds new data items.
-                      toolbar.Save(); // The "save" command saves the changed data items.
-                  })
-                  .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
-                  .DataSource(dataSource =>
-                      dataSource.Ajax()
-                        .Batch(true) // Enable batch updates.
-                        .Model(model =>
-                        {
-                            model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
-                            model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
-                        })
-                        .Create(create => create.Action("Products_Create", "Home")) // Action method invoked when the user saves a new data item.
-                        .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the Grid needs data.
-                        .Update(update => update.Action("Products_Update", "Home"))  // Action method invoked when the user saves an updated data item.
-                        .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action method invoked when the user removes a data item.
-                  )
-                  .Pageable()
-            )
+    ```HtmlHelper
+        @(Html.Kendo().Grid<KendoGridBatchEditing.Models.ProductViewModel>()
+                .Name("grid")
+                .Columns(columns =>
+                {
+                    columns.Bound(product => product.ProductID).Width(100);
+                    columns.Bound(product => product.ProductName);
+                    columns.Bound(product => product.UnitsInStock).Width(250);
+                    columns.Command(commands =>
+                    {
+                        commands.Destroy(); // The "destroy" command removes data items.
+                    }).Title("Commands").Width(200);
+                })
+                .ToolBar(toolbar =>
+                {
+                    toolbar.Create(); // The "create" command adds new data items.
+                    toolbar.Save(); // The "save" command saves the changed data items.
+                })
+                .Editable(editable => editable.Mode(GridEditMode.InCell)) // Use in-cell editing mode.
+                .DataSource(dataSource =>
+                    dataSource.Ajax()
+                    .Batch(true) // Enable batch updates.
+                    .Model(model =>
+                    {
+                        model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
+                        model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
+                    })
+                    .Create(create => create.Action("Products_Create", "Home")) // Action method invoked when the user saves a new data item.
+                    .Read(read => read.Action("Products_Read", "Home"))  // Action method invoked when the Grid needs data.
+                    .Update(update => update.Action("Products_Update", "Home"))  // Action method invoked when the user saves an updated data item.
+                    .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action method invoked when the user removes a data item.
+                )
+                .Pageable()
+        )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" height="550">
+            <datasource  page-size="20" type="DataSourceTagHelperType.Custom" custom-type="odata" batch="true">
+                <transport>
+                    <read url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products" />
+                    <update url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Update"  />
+                    <destroy url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Destroy"   />
+                    <create url="https://demos.telerik.com/kendo-ui/service/Northwind.svc/Products/Create" />
+                </transport>
+                <schema  >
+                    <model id="ProductID">
+                        <fields>
+                            <field name="ProductName"></field>
+                            <field name="UnitPrice" type="number"></field>
+                            <field name="UnitsInStock" type="number"></field>
+                        </fields>
+                    </model>
+                </schema>
+            </datasource>
+            <editable mode="incell" />
+            <pageable button-count="5" refresh="true" page-sizes="new int[] { 5, 10, 20 }">
+            </pageable>
+            <toolbar> <!-- Enable the built-in grid's Toolbar commands "create", "save", and "cancel". -->
+                <toolbar-button name="create" text="Add new record"></toolbar-button> <!-- Adds an empty row to the grid to create a new record. -->
+                <toolbar-button name="save" text="Save Changes"></toolbar-button> <!-- Saves the new and the edited records. -->
+                <toolbar-button name="cancel" text="Cancel Changes"></toolbar-button> <!-- Reverts any data changes done by the end user. -->
+            </toolbar>
+            <columns>
+                <column field="ProductName" title="Product Name" width="240" />
+                <column field="UnitPrice" title="Unit Price" />
+                <column field="UnitsInStock" title="Units In Stock" />
+                <column field="Discontinued" title="Discontinued" width="150" />
+                <column>
+                    <commands>
+                        <column-command text="Delete" name="destroy"></column-command>
+                    </commands>
+                </column>
+            </columns>
+        </kendo-grid>
+    ```
+    {% endif %}
 
 ## See Also
 

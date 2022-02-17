@@ -10,7 +10,7 @@ position: 2
 
 The Telerik UI Diagram for {{ site.framework }} provides options for exporting its content to PDF and SVG, and as an Image.
 
-``` Razor
+```HtmlHelper
     <button class='export-pdf k-button'>Export as PDF</button>
     <button class='export-img k-button'>Export as Image</button>
     <button class='export-svg k-button'>Export as SVG</button>

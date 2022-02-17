@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
+description: "Use templates and customize the rendering of the items, values, and the popup header of the Telerik UI ComboBox component for {{ site.framework }}."
 slug: htmlhelpers_combobox_templates_aspnetcore
 position: 4
 ---
@@ -16,6 +16,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The following example demonstrates how to customize the ComboBox by referencing a script tag by its `id`.
 
+```HtmlHelper
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -35,9 +36,11 @@ The following example demonstrates how to customize the ComboBox by referencing 
             });
         })
     )
+```
 
 The following example demonstrates how to customize the ComboBox by declaring an inline string.
 
+```HtmlHelper
     @(Html.Kendo().ComboBox()
         .Name("customers")
         .DataTextField("ContactName")
@@ -51,6 +54,7 @@ The following example demonstrates how to customize the ComboBox by declaring an
             });
         })
     )
+```
 
 ## Item Template
 
@@ -58,6 +62,7 @@ The item template manages the way the list items of a ComboBox are rendered.
 
 The following example demonstrates how to define an item template and how to evaluate it against the dataItem.
 
+```HtmlHelper
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -76,11 +81,13 @@ The following example demonstrates how to define an item template and how to eva
             });
         })
     )
+```
 
 ## Header Templates
 
 The header template manages the way the popup header of a ComboBox is rendered.
 
+```HtmlHelper
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
@@ -99,11 +106,13 @@ The header template manages the way the popup header of a ComboBox is rendered.
             });
         })
     )
+```
 
 ## Footer Templates
 
 The footer template manages the way the popup footer of a ComboBox is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
+```HtmlHelper
     <!-- Template -->
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
@@ -122,11 +131,13 @@ The footer template manages the way the popup footer of a ComboBox is rendered. 
             });
         })
     )
+```HtmlHelper
 
 ## No-Data Templates
 
 The ComboBox displays `noDataTemplate` in the popup when the data source is empty.
 
+```HtmlHelper
     <!-- Template -->
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
@@ -145,6 +156,7 @@ The ComboBox displays `noDataTemplate` in the popup when the data source is empt
             });
         })
     )
+```HtmlHelper
 
 ## See Also
 

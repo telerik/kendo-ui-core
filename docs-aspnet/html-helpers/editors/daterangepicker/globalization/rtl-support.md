@@ -12,7 +12,7 @@ Right-to-left (RTL) support reflects the ability of a widget to render its conte
 
 The following example demonstrates how to set the basic right-to-left configuration for the DateRangePicker.
 
-```
+```HtmlHelper
 @using Kendo.Mvc.UI
 
 <div class="demo-section">

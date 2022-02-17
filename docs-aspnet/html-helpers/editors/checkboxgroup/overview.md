@@ -1,34 +1,48 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI CheckBoxGroup HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI CheckBoxGroup component for {{ site.framework }}."
 slug: htmlhelpers_checkboxgroup_aspnetcore_overview
 position: 1
 ---
 
-# CheckBoxGroup HtmlHelper Overview
+# CheckBoxGroup Overview
 
+{% if site.core %}
+The Telerik UI CheckBoxGroup TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI CheckBoxGroup widget.
+{% else %}
 The Telerik UI CheckBoxGroup HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI CheckBoxGroup widget.
+{% endif %}
 
 The CheckBoxGroup allows to style and provide checkbox functionality to list elements, set the position of the labels, attributes and custom css classes.
 
 * [Demo page for the CheckBoxGroup](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
+{% if site.core %}
+* [Demo page for the CheckBoxGroup](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
+{% endif %}
 
 ## Initializing the CheckBoxGroup
 
-The following example demonstrates how to define the CheckBoxGroup by using the CheckBoxGroup HtmlHelper.
+The following example demonstrates how to define the CheckBoxGroup.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")
     )
 ```
+{% if site.core %}
+```TagHelper
+     <kendo-checkboxgroup name="checkboxgroup"
+            input-name="checkboxItem">
+    </kendo-checkboxgroup>
+```
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration for the CheckBoxGroup HtmlHelper.
+The following example demonstrates the basic configuration for the CheckBoxGroup.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")
         .Items(i =>
@@ -46,6 +60,16 @@ The following example demonstrates the basic configuration for the CheckBoxGroup
     });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-checkboxgroup name="checkboxgroup">
+        <kendo-checkboxgroup-items>
+            <kendo-checkboxgroup-item value="one" label="Female"></kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="two" label="Male"></kendo-checkboxgroup-item>
+        </kendo-checkboxgroup-items>
+    </kendo-checkboxgroup>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -56,5 +80,8 @@ The following example demonstrates the basic configuration for the CheckBoxGroup
 ## See Also
 
 * [Basic Usage of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
+{% if site.core %}
+* [Basic Usage of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
+{% endif %}
 * [Using the API of the CheckBoxGroup HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/api)
 * [Server-Side API](/api/checkboxgroup)

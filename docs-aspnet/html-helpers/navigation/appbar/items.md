@@ -1,7 +1,7 @@
 ---
 title: Items
 page_title: Items
-description: "Learn how to configure the items in the AppBar HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the items in the AppBar component for {{ site.framework }}."
 slug: htmlhelpers_appbar_aspnetcore_items
 position: 2
 ---
@@ -20,7 +20,7 @@ There are two approaches to using templates with **Content Items**:
 * You can supply a `kendo.template` to the configuration by using the `TemplateId` option. 
 The following example shows how to utilize both of them:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AppBar()
         .Name("appbar")
         .ThemeColor(AppBarThemeColor.Inherit)
@@ -32,12 +32,33 @@ The following example shows how to utilize both of them:
     )
 
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+   <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit" >
+        <items>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button' href='\\#'><span class='k-icon k-i-menu'></span></a>"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template-id="search-template"></appbar-item>
+        </items>   
+    </kendo-appbar>
+
+    <script id="search-template" type="text/x-kendo-tmpl">
+        <span class="k-textbox k-display-flex">
+            <input autocomplete="off" placeholder="Search..." title="Search..." class="k-input">
+            <span class="k-input-icon">
+                <span class="k-icon k-i-search"></span>
+            </span>
+        </span>
+    </script>
+```
+{% endif %}
 
 ## Spacer
 
 The `Spacer` item could be utilized to easily separate the content items from each other.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().AppBar()
         .Name("appbar")
         .Items(items=> {
@@ -47,6 +68,19 @@ The `Spacer` item could be utilized to easily separate the content items from ea
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+
+      <kendo-appbar name="appbar" theme-color="AppBarThemeColor.Inherit" >
+        <items>
+            <appbar-item type="AppBarItemType.ContentItem" template="<h3 class='title'>All Products</h3>"></appbar-item>
+            <appbar-item type="AppBarItemType.Spacer" width="16px"></appbar-item>
+            <appbar-item type="AppBarItemType.ContentItem" template="<a class='k-button k-clear-search' href='\\#'>Clear search</a>"></appbar-item>
+        </items>   
+    </kendo-appbar>
+```
+{% endif %}
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Index
 page_title: Index
-description: "Configure the initially selected index of the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }}."
+description: "Configure the initially selected index of the Telerik UI ButtonGroup component for {{ site.framework }}."
 previous_url: /helpers/navigation/buttongroup/indexes
 slug: index_buttongroup_aspnetcore
 position: 4
@@ -15,7 +15,7 @@ You can also select an index through the `select()` method with a Integer argume
 
 The following example demonstrates how to select a button by its index.
 
-```
+```HtmlHelper
     @(Html.Kendo().ButtonGroup()
         .Name("select-period")
         .Index(1)

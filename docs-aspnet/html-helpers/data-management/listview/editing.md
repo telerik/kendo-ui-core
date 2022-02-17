@@ -68,6 +68,7 @@ The following example demonstrates how to define the item template for the Teler
 
 > `click` events for elements with `k-edit-button` and `k-delete-button` class names will be automatically handled and treated by the Telerik UI ListView as `update` and `destroy` actions. To facilitate the `create` operation add a click handler to the `k-add-button`, get the Telerik UI ListView instance and call the [`add()`](https://docs.telerik.com/kendo-ui/api/javascript/ui/listview/methods/add) method.
 
+```HtmlHelper
     <!-- Button for the Create operation. Use it to call the client ListView method add()  -->
     <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
 
@@ -112,6 +113,7 @@ The following example demonstrates how to define the item template for the Teler
             </div>
         </div>
     </script>
+```
 
 ## Defining the Editor Template
 
@@ -122,6 +124,7 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
 
 > `click` events for elements with `k-update-button` and `k-cancel-button` class names will be automatically handled and treated by the Telerik UI ListView as `save` and `cancel` actions. Similar to the item template, you have to wrap the editor template in an HTML container.
 
+```HtmlHelper
     @model ListViewExample.Models.OrderViewModel
     <div class="order">
         <h3 data-bind="text:OrderID"></h3>
@@ -156,17 +159,20 @@ The following example demonstrates how to define the `EditorTemplate` for the mo
             margin:6px;
         }
     </style>
+```
 
 ## Enabling the Editing Functionality
 
 The following example demonstrates how to enable the ListView editing.
 
+```HtmlHelper
     @(Html.Kendo().ListView<ListViewExample.Models.OrderViewModel>()
         .Name("listView")
         .TagName("div")
         .ClientTemplateId("list-view-template")
         .Editable() //<-- Enable editing.
     )
+```
 
 ## Specifying the Action Methods
 
@@ -174,6 +180,7 @@ The following example demonstrates how to enable the ListView editing.
 
 The following example demonstrates how to specify the action methods which will handle the `Create`, `Update`, and `Destroy` operations.
 
+```HtmlHelper
     @(Html.Kendo().ListView<ListViewExample.Models.OrderViewModel>()
         .Name("listView")
         .TagName("div")
@@ -190,7 +197,8 @@ The following example demonstrates how to specify the action methods which will 
         )
         .Pageable()
     )
-
+```
+ 
 For a quick test add a static list and copy and paste it in the controller, or use own service or data base which returns an `IEnumerable` or `IQueriable`.
 
     public class ListViewController : Controller

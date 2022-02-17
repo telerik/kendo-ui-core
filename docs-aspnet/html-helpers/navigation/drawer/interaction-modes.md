@@ -1,7 +1,7 @@
 ---
 title: Interaction Modes
 page_title: Interaction Modes
-description: "Use the interaction modes and handle the position of the Telerik UI Drawer HtmlHelper for {{ site.framework }}."
+description: "Use the interaction modes and handle the position of the Telerik UI Drawer component for {{ site.framework }}."
 previous_url: /helpers/navigation/drawer/interaction-modes
 slug: interactionmodes_drawer_aspnetcore
 position: 3

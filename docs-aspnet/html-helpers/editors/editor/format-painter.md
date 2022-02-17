@@ -1,7 +1,7 @@
 ---
 title: Format Painter
 page_title: Editor Format Painter
-description: "Learn about the format painter of the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn about the format painter of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_format_painter_aspnetcore
 position: 11
 ---
@@ -12,7 +12,7 @@ Use the `Format Painter` option of the Editor to quickly apply the same formatti
 
 1. Ensure that the `FormatPainter` option is added to the Editor's toolbox. 
 
-    ```
+    ```HtmlHelper
         @(Html.Kendo().Editor()
             .Name("editor")
             .Tools(tools => tools

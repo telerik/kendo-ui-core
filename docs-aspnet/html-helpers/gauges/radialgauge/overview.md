@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI RadialGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI RadialGauge component for {{ site.framework }}."
 previous_url: /helpers/gauges/radialgauge/overview
 slug: overview_radialgaugehelper_aspnetcore
 position: 1
 ---
 
-# RadialGauge HtmlHelper Overview
+# RadialGauge Overview
 
+{% if site.core %}
+The Telerik UI RadialGauge TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI RadialGauge widget.
+{% else %}
 The Telerik UI RadialGauge HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI RadialGauge widget.
+{% endif %}
 
 The RadialGauge represents values on a circular arc.
 
-* [Demo page for the RadialGauge](https://demos.telerik.com/{{ site.platform }}/radial-gauge/index)
+* [Demo page for the RadialGauge HtmlHelper](https://demos.telerik.com/{{ site.platform }}/radial-gauge/index)
+{% if site.core %}
+* [Demo page for the RadialGauge TagHelper](https://demos.telerik.com/aspnet-core/radial-gauge/tag-helper)
+{% endif %}
 
 ## Initializing the RadialGauge
 
-The following example demonstrates how to Initializing the RadialGauge by using the RadialGauge HtmlHelper.
+The following example demonstrates how to initialize the RadialGauge.
 
-```
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
           .Name("radialGauge") // The name of the RadialGauge is mandatory. It specifies the "id" attribute of the widget.
           .Scale(scale => scale
@@ -31,6 +38,17 @@ The following example demonstrates how to Initializing the RadialGauge by using 
           )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radialgauge name="gauge">
+        <radialgauge-pointers>
+            <pointer value="65"></pointer>
+        </radialgauge-pointers>
+        <scale minor-unit="5" start-angle="-30" end-angle="210" max="180">
+        </scale>
+    </kendo-radialgauge>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 
@@ -47,4 +65,7 @@ To reference an existing Kendo UI RadialGauge instance, use the [`jQuery.data()`
 ## See Also
 
 * [Basic Usage of the RadialGauge HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/radial-gauge/index)
+{% if site.core %}
+* [Basic Usage of the RadialGauge TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/radial-gauge/tag-helper)
+{% endif %}
 * [Server-Side API](/api/radialgauge)

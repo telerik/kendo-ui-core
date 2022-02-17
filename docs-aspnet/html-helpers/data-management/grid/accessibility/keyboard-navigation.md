@@ -16,12 +16,13 @@ The Grid supports its keyboard navigation functionality through the `Navigatable
 
 The following example demonstrates how to enable the key navigation in the Grid.
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.EmployeeViewModel>()
         .Name("grid")
         /* Other configuration. */
         .Navigatable()
     )
-
+```
 
 The keyboard navigation of the Grid works by listening to the `keydown` events on the wrapper element of the helper. Its behavior is based on the assumption that whatever the user does is in accordance with the currently focused Grid cell and not with the focused element of the browser. If the data cells of the Grid contain hyperlinks that have to be activated through the keyboard:
 

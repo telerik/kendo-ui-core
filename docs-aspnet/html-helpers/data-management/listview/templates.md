@@ -16,7 +16,7 @@ In order for the ListView to function seamlessly, defining its templates is mand
 
 To set the template, refer it when you initialize the ListView. The template displays the result that is set by the service.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.
@@ -45,7 +45,7 @@ To set the template, refer it when you initialize the ListView. The template dis
 
 Your project might require you to visually differentiate each alternating item in a ListView. For example, you might need to render each second item from the previous example in a slightly darker background, that is, banded rows. To achieve this behavior through the use of a template that you set, define the `altTemplate` property.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ListView(Model) // The ListView will be initially bound to the Model which is the Products table.
         .Name("productListView") // The name of the ListView is mandatory. It specifies the "id" attribute of the ListView.
         .TagName("div") // The tag name of the ListView is mandatory. It specifies the element which wraps all ListView items.

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Accessibility
-description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
+description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its accessibility support for WAI-ARIA, Section 508, and WCAG 2.1."
 slug: htmlhelpers_form_aspnetcore_accessibility
 position: 1
 ---

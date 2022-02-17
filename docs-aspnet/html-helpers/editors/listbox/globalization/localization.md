@@ -1,7 +1,7 @@
 ---
 title: Localization
 page_title: ListBox Localization
-description: "Get started with the Telerik UI ListBox HtmlHelper for {{ site.framework }} and learn about the localization options it supports."
+description: "Get started with the Telerik UI ListBox component for {{ site.framework }} and learn about the localization options it supports."
 previous_url: /helpers/editors/listbox/globalization/localization
 slug: htmlhelpers_listbox_localization_aspnetcore
 position: 2
@@ -13,7 +13,7 @@ You can customize the `Messages()` for each toolbar command button of the ListBo
 
 These messages serve as tooltip text when the user hovers over the buttons.
 
-```
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .DataTextField("ContactName")

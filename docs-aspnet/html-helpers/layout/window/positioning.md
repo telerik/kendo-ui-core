@@ -1,7 +1,7 @@
 ---
 title: Positioning
 page_title: Positioning
-description: "Learn how to position and where to open the Telerik UI Window HtmlHelper for {{ site.framework }}."
+description: "Learn how to position and where to open the Telerik UI Window component for {{ site.framework }}."
 slug: htmlhelpers_window_positioning_aspnetcore
 position: 3
 ---
@@ -14,6 +14,7 @@ Usually, it is preferable to center the Window rather than open it near the HTML
 
 The following example demonstrates how to center and open a Kendo UI for jQuery Window on a button click. If the content is loaded through Ajax, [centering occurs after the request is complete]({% slug htmlhelpers_window_loadingcontent_aspnetcore %}#load-on-demand-content).
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Title("Centered Window")
@@ -30,6 +31,7 @@ The following example demonstrates how to center and open a Kendo UI for jQuery 
         .Content("Open Window")
         .Events(e => e.Click("onClick"))
     )
+```
 
 The following example demonstrates how to center and open the Window upon button click.
 

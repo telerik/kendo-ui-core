@@ -1,7 +1,7 @@
 ---
 title: Dimensions
 page_title: Dimensions
-description: "Learn about the Dimensions configuration of the Telerik UI Dialog HtmlHelper for {{ site.framework }}."
+description: "Learn about the Dimensions configuration of the Telerik UI Dialog component for {{ site.framework }}."
 slug: dimensions_dialoghelper_aspnetcore
 position: 4
 ---

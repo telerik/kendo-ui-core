@@ -1,7 +1,7 @@
 ---
 title: Custom Cell Editors
 page_title: Spreadsheet Custom Cell Editors
-description: "Learn how to implement custom cell editors for the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom cell editors for the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_custom_cell_editors_aspnetcore
 position: 8
 ---
@@ -35,23 +35,23 @@ When the `editor` is a function, it is called the first time when a cell with th
 
 The following example demonstrates how to set up a color-picking custom editor.
 
-```
-@(Html.Kendo().Spreadsheet()
-        .Name("spreadsheet")
-        .Sheets(sheets =>
-        {
-            sheets.Add()
-                .Rows(rows =>
-                {
-                    rows.Add().Cells(cells =>
+```HtmlHelper
+    @(Html.Kendo().Spreadsheet()
+            .Name("spreadsheet")
+            .Sheets(sheets =>
+            {
+                sheets.Add()
+                    .Rows(rows =>
                     {
-                        cells.Add()
-                                .Value("Select color:")
-                                .Bold(true);
+                        rows.Add().Cells(cells =>
+                        {
+                            cells.Add()
+                                    .Value("Select color:")
+                                    .Bold(true);
+                        });
                     });
-                });
-        })
-)
+            })
+    )
 
 <script>
     $(document).ready(function () {

@@ -21,7 +21,7 @@ To enable CRUD operation in the Telerik UI Diagram within a `RazorPage`:
 1. Setup CRUD URLs in the `DataSource` and `ConnectionsDataSource` along with a `Model.Id`. The URL in these methods must refer to the name of the method in the `PageModel`.
 
 
-    ```
+    ```HtmlHelper
         .DataSource(d => d
               .ShapeDataSource()
               .Model(m =>

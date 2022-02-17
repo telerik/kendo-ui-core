@@ -1,7 +1,7 @@
 ---
 title: Chunk Upload
 page_title: Chunk Upload
-description: "Learn how to upload large files in chunks when using the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn how to upload large files in chunks when using the Telerik UI Upload component for {{ site.framework }}."
 previous_url: /helpers/editors/upload/chunk-upload
 slug: htmlhelpers_upload_chunks_aspnetcore
 position: 3
@@ -21,16 +21,16 @@ To enable the chunk upload:
 
 1. Set up the `Async(a => a.ChunkSize())` option of the Upload.
 
-    ```
-    @(Html.Kendo().Upload()
-        .Name("files")
-        .Async(a => a
-            .Save("ChunkSave", "Upload")
-            .Remove("Remove", "Upload")
-            .AutoUpload(true)
-            .ChunkSize(1100)
+    ```HtmlHelper
+        @(Html.Kendo().Upload()
+            .Name("files")
+            .Async(a => a
+                .Save("ChunkSave", "Upload")
+                .Remove("Remove", "Upload")
+                .AutoUpload(true)
+                .ChunkSize(1100)
+            )
         )
-    )
     ```
 
 {% if site.core %}
@@ -282,7 +282,7 @@ To fine-tune the chunk upload, use any of the following configuration options:
 
 > As a client-side solution, the Upload does not handle validation. File validation and security requirements have to be handled on the server by using application logic.
 
-```
+```HtmlHelper
     @(Html.Kendo().Upload()
         .Name("files")
         .Async(a => a

@@ -1,7 +1,7 @@
 ---
 title: Date Axis
 page_title: Date Axis
-description: "Learn how to set the Date Axis of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the Date Axis of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_date_axis
 ---
 
@@ -16,7 +16,7 @@ This implementation provides the opportunity to represent the data for the Bar C
 
 The following implementation demonstrates the code needed for setting the Date Axis for Bar Chart:
 
-```View
+```HtmlHelper
  @model IEnumerable<Kendo.Mvc.Examples.Models.DatePoint>
 
 <div class="configurator">

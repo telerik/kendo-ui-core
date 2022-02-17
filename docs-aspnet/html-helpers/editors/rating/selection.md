@@ -20,18 +20,23 @@ To configure the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/
 
 The continuous selection is the default selection mode of the Rating. If not configured, the Rating will automatically set the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"continuous"`.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Selection("continuous")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" selection="continuous"></kendo-rating>
+```
+{% endif %}
 
 ## Single Selection
 
 To configure the single selection mode, set the [`Selection`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/RatingBuilder#selectionsystemstring) property to `"single"`.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Rating()
         .Name("rating")
         .Min(1)
@@ -40,6 +45,11 @@ To configure the single selection mode, set the [`Selection`](https://docs.teler
         .Selection("single")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-rating name="rating" min="1" max="6" value="3" selection="single"></kendo-rating>
+```
+{% endif %}
 
 ## See Also
 

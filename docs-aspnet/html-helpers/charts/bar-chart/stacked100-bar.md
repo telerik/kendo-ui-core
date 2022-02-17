@@ -1,13 +1,13 @@
 ---
 title: 100% Stacked bars
 page_title: 100% Stacked bars
-description: "Learn how to use the 100% Stacked Bars of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the 100% Stacked Bars of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_aspnetcore_htmlhelper_stacked100bars
 ---
 
 # 100% Stacked bars
 
-The Bar chart type supports 100% stacking, where the stacked series values are rescaled in a way they add up to 100%. This implementation provides the opportunity to represent different categories per time and percentage in a custom stack whick total value is 100%.
+The Bar chart type supports 100% stacking, where the stacked series values are rescaled in a way they add up to 100%. This implementation provides the opportunity to represent different categories per time and percentage in a custom stack with a total value of 100%.
 
 You can enable the 100% stack feature through the seriesDefaults-> stack -> type chart attribute.
 
@@ -15,7 +15,7 @@ You can enable the 100% stack feature through the seriesDefaults-> stack -> type
 
 The following implementation demonstrates the code needed for setting the 100% Stacked Bar Chart:
 
-```View
+```HtmlHelper
  @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Olympic Medals won by USA")

@@ -1,26 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Upload component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/upload, /helpers/editors/upload/overview
 slug: htmlhelpers_upload_aspnetcore
 position: 1
 ---
 
-# Upload HtmlHelper Overview
-
+# Upload Overview
+{% if site.core %}
+The Telerik UI Upload TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Upload widget.
+{% else %}
 The Telerik UI Upload HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Upload widget.
+{% endif %}
 
 The Upload uses progressive enhancement to deliver the best possible uploading experience to users, without requiring extra developer effort.
 
-* [Demo page for the Upload](https://demos.telerik.com/{{ site.platform }}/upload/index)
+* [Demo page for the Upload HtmlHelper](https://demos.telerik.com/{{ site.platform }}/upload/index)
+{% if site.core %}
+* [Demo page for the Upload TagHelper](https://demos.telerik.com/aspnet-core/upload/tag-helper)
+{% endif %}
 
 ## Initializing the Upload
 
-The following example demonstrates how to define the Upload widget by using the Upload HtmlHelper.
+The following example demonstrates how to define the Upload widget.
 
 {% if site.core %}
-```Razor
+```HtmlHelper
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
@@ -29,6 +35,15 @@ The following example demonstrates how to define the Upload widget by using the 
         .AutoUpload(true)
     )
 )
+```
+```TagHelper
+    <kendo-upload drop-zone="drop-zone1" name="test">
+        <async auto-upload="true" />
+        <validation allowed-extensions="@Model.Extensions" />
+        <files>
+            <file name="dummy" size="1024" />
+        </files>
+    </kendo-upload>
 ```
 ```Controller
 public IWebHostEnvironment WebHostEnvironment { get; set; }
@@ -149,13 +164,13 @@ public ActionResult Remove(string[] fileNames)
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the Upload HtmlHelper and how to get the Upload widget instance.
+The following example demonstrates the basic configuration of the Upload component and how to get the Upload widget instance.
 
 An Upload widget configured in such way offers support for multiple file selection, asynchronous removal of uploaded files, progress tracking, in-progress cancellation of upload, file drag-and-drop. Progress tracking, file drag-and-drop, and in-progress cancellation of upload are automatically enabled if supported by the browser.
 
 > The Upload works in `<input type="file" />` elements, so it is only able to upload files selected by the user, which exist in the file system. For uploading files generated with JavaScript on the fly, use another approach, e.g. an Ajax request.
 
-```
+```HtmlHelper
 @(Html.Kendo().Upload()
     .Name("files")
     .Multiple(true)
@@ -189,7 +204,7 @@ An Upload widget configured in such way offers support for multiple file selecti
 
 The following example demonstrates Upload HTML helper exposes several events, which could be handled on the client-side. For a complete example on basic Upload events, refer to the [demo on using the events of the Upload](https://demos.telerik.com/{{ site.platform }}/upload/events).
 
-```
+```HtmlHelper
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a
@@ -259,5 +274,8 @@ The following example demonstrates Upload HTML helper exposes several events, wh
 ## See Also
 
 * [Basic Usage by the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload)
+{% if site.core %}
+* [Basic Usage of the Upload TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/upload/tag-helper)
+{% endif %}
 * [Using the API of the Upload HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/upload/api)
 * [Server-Side API](/api/upload)

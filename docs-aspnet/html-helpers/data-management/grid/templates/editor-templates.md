@@ -19,6 +19,7 @@ The Telerik UI Grid for {{ site.framework }} relies on {{ site.framework }} edit
 
 The configuration later in this article will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<Order>()
             .Name("Grid")
             .Columns(columns =>
@@ -27,11 +28,14 @@ The configuration later in this article will be used to get the editor HTML for 
                 columns.Bound(o => o.ShipCountry);
             })
             .Editable(editable => editable.Mode(GridEditMode.InLine))
+    ```
 
 The following example demonstrates the code that will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
+    ```HtmlHelper
         @(Html.EditorFor(o => o.OrderDate);
         @(Html.EditorFor(o => o.ShipCountry);
+    ```
 
 If the Grid is configured for popup editing, it will use the [`Html.EditorForModel`]({% if site.mvc %}https://msdn.microsoft.com/en-us/library/system.web.mvc.html.editorextensions.editorfor.aspx{% else %}https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper-1.editorfor?view=aspnetcore-3.1{% endif %}) to get the editor HTML for the whole model.
 
@@ -62,20 +66,24 @@ Your project may require you to create a custom editor for a specific property. 
 1. Create an editor template for the `Employee` property. The template will display a Kendo UI for jQuery DropDownList with all available employees. Add a new partial view to the `~/Views/Shared/EditorTemplates` folder&mdash;for example, `EmployeeEditor.cshtml`. In case the Editor Templates folder does not exist, you must add it manually.
 1. Add the DropDownList to that partial view. Set the `Name` of the DropDownList to the name of the property which will be edited&mdash;`"Employee"` in this case.
 
+    ```HtmlHelper
         @(Html.Kendo().DropDownList()
             .Name("Employee") // The name of the widget has to be the same as the name of the property.
             .DataValueField("EmployeeID") // The value of the drop-down is taken from the EmployeeID property.
             .DataTextField("EmployeeName") // The text of the items is taken from the EmployeeName property.
             .BindTo((System.Collections.IEnumerable)ViewData["employees"]) // A list of all employees which is populated in the controller.
         )
+    ```
 
 1. In the main view, bind a column of the Grid to the `Employee` property.
 
+    ```HtmlHelper
         .Editable(editable => editable.Mode(GridEditMode.InCell))
         .Columns(columns =>
         {
             columns.Bound(p => p.Employee).ClientTemplate("#=Employee.EmployeeName#").Sortable(false).Width(180);
         })
+    ```
 
 1. In the action method, which renders the view that contains the Grid, populate the `ViewData` with a list of all employees.
 

@@ -21,13 +21,23 @@ The Label exposes a `Content()` method that sets the inner HTML of the `label` e
 
 The below example shows how to create a Label from a string.
 
+```HtmlHelper
     @(Html.Kendo().TextArea()
         .Name("TextArea")
         .Label(l => l.Content("First name"))
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-textarea name="FirstName">
+        <label floating="true" content="Description"/>
+    </kendo-textarea>
+```
+{% endif %}
 
 The below example shows how to create a Label from a function by using the `ContentHandler()` method. The function context (available via the `this` keyword) will be set to the widget instance.
 
+```HtmlHelper
     @(Html.Kendo().TextArea()
             .Name("TextArea")
             .Label(l => l.ContentHandler("labelContentHandler"))
@@ -37,6 +47,19 @@ The below example shows how to create a Label from a function by using the `Cont
             return "First name"
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-textarea name="FirstName">
+        <label content-handler="labelContentHandler" />
+    </kendo-textarea>
+    <script>
+        function labelContentHandler() {
+            return "First Name"
+        }
+    </script>
+```
+{% endif %}
 
 ## Floating Label
 
@@ -44,6 +67,7 @@ The Floating Label enables you to provide a floating label functionality to the 
 
 The following example demonstrates how to set a Floating Label for a TextArea.
 
+```HtmlHelper
     @(Html.Kendo().TextArea()
            .Name("TextArea")
            .Label(label =>
@@ -52,6 +76,14 @@ The following example demonstrates how to set a Floating Label for a TextArea.
                label.Floating(true);
            })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-textarea name="FirstName">
+        <label content="First Name" floating="true" />
+    </kendo-textarea>
+```
+{% endif %}
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 

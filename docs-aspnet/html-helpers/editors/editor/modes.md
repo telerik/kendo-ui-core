@@ -1,7 +1,7 @@
 ---
 title: Modes of Operation
 page_title: Modes of Operation
-description: "Learn which are the modes in which the Telerik UI Editor HtmlHelper for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) operates."
+description: "Learn which are the modes in which the Telerik UI Editor component for {{ site.framework }} (MVC 6 or {{ site.framework }} MVC) operates."
 slug: htmlhelpers_editor_modes_aspnetcore
 position: 2
 ---
@@ -16,23 +16,23 @@ If you use the default `<textarea>` element for initializing the Editor, the Edi
 
 The classic Editor posts its value automatically because it is based on a `form` element. The tools of the Editor are always visible. Its content does not reside on the main web page and the styling of the page does not influence the editable content. To apply custom styles to the editable content, [inject them through the configuration of the Editor]({% slug htmlhelpers_editor_styling_aspnetcore %}). For more information, refer to the [demo on the classic Editor mode](https://demos.telerik.com/{{ site.platform }}/editor/index).
 
-```
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .HtmlAttributes(new { style = "width: 100%;height:440px" })
-)
+```HtmlHelper
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .HtmlAttributes(new { style = "width: 100%;height:440px" })
+    )
 ```
 
 ## Inline Mode
 
-If you use the `Tag()` method of the Editor HTML helper with a `"div"` parameter, the Editor assumes its inline mode. The `<div>` element is content-editable and is used by the widget to return its value. For a runnable example, refer to the [demo on inline editing by the Editor](https://demos.telerik.com/{{ site.platform }}/editor/inline-editing).
+If you use the `Tag()` method of the Editor with a `"div"` parameter, the Editor assumes its inline mode. The `<div>` element is content-editable and is used by the widget to return its value. For a runnable example, refer to the [demo on inline editing by the Editor](https://demos.telerik.com/{{ site.platform }}/editor/inline-editing).
 
-```
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .Tag("div")
-    .HtmlAttributes(new { style = "width: 100%;height:440px" })
-)
+```HtmlHelper
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .Tag("div")
+        .HtmlAttributes(new { style = "width: 100%;height:440px" })
+    )
 ```
 
 With the previous configuration, the tools of the Editor are only visible when the widget is focused. Its content resides on the main web page and the styling of the page influences the editable content.

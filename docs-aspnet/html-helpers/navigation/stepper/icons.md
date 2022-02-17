@@ -18,7 +18,7 @@ By default the Stepper displays the number of each step in the indictor element 
 
 The following example demonstrates how to configure different icons.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Stepper()
         .Name("stepper")
         .Steps(s =>
@@ -29,6 +29,17 @@ The following example demonstrates how to configure different icons.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-stepper name="stepper">
+        <steps>
+            <step label="First" icon="home"></step>
+            <step label="Second" icon="attachment"></step>
+            <step label="Third" icon="save"></step>
+        </steps>
+    </kendo-stepper>
+```
+{% endif %}
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Enable and use the keyboard navigation when working with the Telerik UI Calendar HtmlHelper for {{ site.framework }}."
+description: "Enable and use the keyboard navigation when working with the Telerik UI Calendar component for {{ site.framework }}."
 slug: htmlhelpers_keynav_calendar_aspnetcore
 position: 2
 ---

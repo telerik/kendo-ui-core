@@ -1,3 +1,5 @@
+---
+title: Razor Pages
 page_title: The Telerik UI NumericTextBox in RazorPages
 description: "Telerik UI NumericTextBox for {{ site.framework }} in a RazorPages application."
 slug: razorpages_numerictextboxhelper_aspnetcore
@@ -25,7 +27,7 @@ To bind the Telerik UI NumericTextBox within a `RazorPage`:
 1. Declare the widget either in a form or as a stand-alone widget:
 
 
-    ```
+    ```HtmlHelper
         <form method="post">
             <label for="Price">Price:</label>
             @(Html.Kendo().NumericTextBoxFor(c=>c.Price)

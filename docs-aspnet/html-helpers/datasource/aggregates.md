@@ -1,7 +1,7 @@
 ---
 title: Aggregates
 page_title: Aggregates
-description: "Learn how to set the aggregate options in the DataSource HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the aggregate options in the DataSource component for {{ site.framework }}."
 slug: htmlhelper_datasourceaggregates
 ---
 
@@ -11,15 +11,17 @@ To make aggregates available on the client, configure them in the [`DataSourceAg
 
 * The `Aggregates` method sets the aggregates.
 
-        .Ajax() 
-        .Read(read => read.Action("Products_Read", "Home"))
-        .Aggregates(aggregates =>
-        {
-            aggregates.Add(product => product.UnitsInStock).Min().Max().Count();
-            aggregates.Add(product => product.UnitsOnOrder).Average();
-            aggregates.Add(product => product.ProductName).Count();
-            aggregates.Add(product => product.UnitPrice).Sum();
-        })
+```HtmlHelper
+    .Ajax() 
+    .Read(read => read.Action("Products_Read", "Home"))
+    .Aggregates(aggregates =>
+    {
+        aggregates.Add(product => product.UnitsInStock).Min().Max().Count();
+        aggregates.Add(product => product.UnitsOnOrder).Average();
+        aggregates.Add(product => product.ProductName).Count();
+        aggregates.Add(product => product.UnitPrice).Sum();
+    })
+```
 
 ## See Also
 

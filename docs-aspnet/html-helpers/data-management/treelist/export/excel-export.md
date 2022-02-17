@@ -21,6 +21,7 @@ To enable the Excel export option of the TreeList:
     * [Excel export configuration](/api/Kendo.Mvc.UI.Fluent/TreeListBuilder#excelsystemactionkendomvcuifluenttreelistexcelsettingsbuildert)
 1. To take full advantage of the Excel export feature, download the JSZip library and include the file before the Kendo UI JavaScript files in the `Layout.cshtml`. For more information, refer to the article with the [requirements]({% if site.core %}{% slug exportsupport_core %}{% else %}{% slug exportsupport_aspnetmvc %}{% endif %}#jszip-library).
 
+    ```HtmlHelper
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
@@ -33,6 +34,7 @@ To enable the Excel export option of the TreeList:
                 .Read(read => read.Action("All", "EmployeeDirectory"))
             )
         )
+    ```
 
 To initiate the Excel export, press the **Toolbar** button or use the [TreeList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/treelist/methods/saveasexcel) method.
 
@@ -49,6 +51,7 @@ The TreeList uses the current column order, visibility, and dimensions to genera
 
 By default, the Telerik UI TreeList for {{ site.framework }} exports only the current page of data. To export all pages, set the `AllPages` option to `true`.
 
+```HtmlHelper
     @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
         .Name("treelist")
         .Toolbar(tools => tools.Excel())
@@ -57,6 +60,7 @@ By default, the Telerik UI TreeList for {{ site.framework }} exports only the cu
             .Read(read => read.Action("All", "EmployeeDirectory"))
         )
     )
+```
 
 ## See Also
 

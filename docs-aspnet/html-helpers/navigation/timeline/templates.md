@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Timeline Templates
-description: "Event templates in the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "Event templates in the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/templates
 slug: templates_htmlhelpers_timeline_aspnetcore
 position: 6
@@ -15,7 +15,7 @@ You can find a live example in the [Templates demo of the Timeline](https://demo
 
 The following example shows how you can customize the template of the timeline - to show more than one image and how you can use custom fields from your model that would not be recognized by the default template. The classes and HTML structure in this example mimic the default card template (except the custom field).
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Timeline<Kendo.Mvc.Examples.Models.TimelineEventModel>()
            .Name("Timeline")
            .EventTemplateId("eventTemplate")

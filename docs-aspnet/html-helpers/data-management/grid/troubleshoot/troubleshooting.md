@@ -8,7 +8,7 @@ position: 1
 
 # Common Issues
 
-This article provides solutions for common issues you might encounter while working with the Telerik UI Grid HtmlHelper for {{ site.framework }}.
+This article provides solutions for common issues you might encounter while working with the Telerik UI Grid component for {{ site.framework }}.
 
 ## Grid Performs HTTP GET Requests instead of POST
 
@@ -107,7 +107,7 @@ The following example demonstrates how to include JavaScript for the current cul
         kendo.culture("<%= culture %>");
     </script>
 ```
-```Razor
+```HtmlHelper
     @{
         var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
     }

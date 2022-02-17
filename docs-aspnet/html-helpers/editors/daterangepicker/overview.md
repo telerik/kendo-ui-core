@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the  DateRangePicker HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the  DateRangePicker component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/daterangepicker, /helpers/editors/daterangepicker/overview
 slug: htmlhelpers_daterangepicker_aspnetcore
 position: 1
 ---
 
-# DateRangePicker HtmlHelper Overview
+# DateRangePicker Overview
 
+{% if site.core %}
+The Telerik UI DateRangePicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DateRangePicker widget.
+{% else %}
 The Telerik UI DateRangePicker HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DateRangePicker widget.
+{% endif %}
+
 
 The DateRangePicker is a container for holding start and end date inputs. It allows the user to select a date range from a calendar or through a direct input. The helper also supports custom templates for its `month` view, configuration options for minimum and maximum dates, a start view, and a depth for navigation.
 
-* [Demo page for the DateRangePicker](https://demos.telerik.com/{{ site.platform }}/daterangepicker/index)
-
+* [Demo page for the DateRangePicker HtmlHelper](https://demos.telerik.com/{{ site.platform }}/daterangepicker/index)
+{% if site.core %}
+* [Demo page for the DateRangePicker TagHelper](https://demos.telerik.com/aspnet-core/daterangepicker/tag-helper)
+{% endif %}
 ## Basic Configuration
 
 The following example demonstrates the basic configuration for the DateRangePicker.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateRangePicker()
         .Name("daterangepicker") // The name of the DateRangePicker is mandatory. It specifies the "id" attribute of the DateRangePicker.
         .Min(new DateTime(1900, 1, 1)) // Sets the min date of the DateRangePicker.
@@ -27,6 +34,14 @@ The following example demonstrates the basic configuration for the DateRangePick
         .Range(r => r.Start(DateTime.Now).End(DateTime.Now.AddDays(10))) // Sets the range of the DateRangePicker.
     )
 ```
+{% if site.core %}
+```TagHelper
+
+        <kendo-daterangepicker name="daterangepicker" min="new DateTime(1900, 1, 1)" max="new DateTime(2099, 12, 31)" format="dd/MM/yyyy">
+                <range start="DateTime.Now" end="DateTime.Now.AddDays(10)"/>
+        </kendo-daterangepicker>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -46,7 +61,7 @@ You can subscribe to all DateRangePicker [events](/api/daterangepicker). For a c
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().DateRangePicker()
       .Name("daterangepicker")
       .Events(e => e
@@ -74,6 +89,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
+```HtmlHelper
     @(Html.Kendo().DateRangePicker()
       .Name("daterangepicker")
       .Events(e => e
@@ -89,6 +105,7 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
       )
     )
+```
 {% endif %}
 
 ## Referencing Existing Instances
@@ -108,5 +125,8 @@ The following example demonstrates how to access an existing DateRangePicker ins
 ## See Also
 
 * [Basic Usage of the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/index)
+{% if site.core %}
+* [Basic Usage of the DateRangePicker TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/daterangepicker/tag-helper)
+{% endif %}
 * [Using the API of the DateRangePicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/daterangepicker/api)
 * [Server-Side API](/api/daterangepicker)

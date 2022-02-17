@@ -1,7 +1,7 @@
 ---
 title: Export
 page_title: Export
-description: "Learn the Export Options of the Telerik UI ArcGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Export Options of the Telerik UI ArcGauge component for {{ site.framework }}."
 slug: export_arcgaugehelper_aspnetcore
 position: 4
 ---
@@ -20,7 +20,7 @@ The Telerik UI ArcGauge for {{ site.framework }} export relies on the [Telerik U
 
 The arc gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-pdf k-button'>Export as PDF</button>
     
     @(Html.Kendo().ArcGauge()
@@ -49,7 +49,7 @@ The arc gauge allows you to retrieve the PDF representation of the content via t
 
 The arc gauge allows you to retrieve the Image representation of the content via the [exportImage method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper     
     <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().ArcGauge()
@@ -78,7 +78,7 @@ The arc gauge allows you to retrieve the Image representation of the content via
 
 The arc gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content via the [exportSVG method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/arcgauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().ArcGauge()

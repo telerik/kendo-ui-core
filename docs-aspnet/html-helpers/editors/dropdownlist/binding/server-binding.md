@@ -1,7 +1,7 @@
 ---
 title:  Server Binding
 page_title: Server Binding
-description: "Learn how to implement server binding in the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement server binding in the Telerik UI DropDownList component for {{ site.framework }}."
 previous_url: /helpers/editors/dropdownlist/binding/server-binding
 slug: htmlhelpers_dropdownlist_serverbinding_aspnetcore
 position: 3
@@ -26,13 +26,15 @@ You can configure the Telerik UI DropDownList for server binding to the Northwin
 
 1. Add a server bound DropDownList.
 
+   ```HtmlHelper
         @(Html.Kendo().DropDownList()
-            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
-            .BindTo(Model)   // Pass the list of Products to the DropDownList.
-            .SelectedIndex(10) // Select an item with index 10. Note that the indexes are zero-based.
+        .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
+        .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
+        .BindTo(Model)   // Pass the list of Products to the DropDownList.
+        .SelectedIndex(10) // Select an item with index 10. Note that the indexes are zero-based.
         )
+   ```
 
 ## See Also
 

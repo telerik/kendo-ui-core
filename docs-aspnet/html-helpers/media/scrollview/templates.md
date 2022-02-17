@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Get started with the Telerik UI ScrollView HtmlHelper for {{ site.framework }} and learn how to use templates for configuring its items."
+description: "Get started with the Telerik UI ScrollView component for {{ site.framework }} and learn how to use templates for configuring its items."
 slug: htmlhelpers_scrollview_aspnetcore_templates
 position: 2
 ---
@@ -14,7 +14,7 @@ You can configure the items of the ScrollView by using [plain HTML and CSS](#htm
 
 The following example demonstrates how to use HTML templates to set the ScrollView items.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ScrollView()
                 .Name("scrollView")
                 .ContentHeight("100%")
@@ -92,7 +92,7 @@ The following example demonstrates how to use HTML templates to set the ScrollVi
 
 The ScrollView allows for configuring a dynamic template which loops through all of its data items.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ScrollView()
                 .Name("scrollView")
                 .EnablePager(false)
@@ -129,7 +129,7 @@ The ScrollView allows for configuring a dynamic template which loops through all
 
 The following example demonstrates how to set a template when no ScrollView items will be displayed.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ScrollView()
             .Name("scrollview")
             .EmptyTemplateId("scrollview-empty")

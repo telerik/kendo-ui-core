@@ -13,7 +13,7 @@ position: 3
 
 # PDF Export
 
-The {{ site.product_short }} Grid HtmlHelper provides a built-in PDF export functionality.
+The {{ site.product_short }} Grid component provides a built-in PDF export functionality.
 
 For a runnable example, refer to the [demo on exporting the Grid to PDF](https://demos.telerik.com/{{ site.platform }}/grid/pdf-export).
 
@@ -41,6 +41,7 @@ To initiate PDF export, press the **Toolbar** button or use the [Grid client-sid
 
 The following example demonstrates how to enable the PDF export functionality of the Grid.
 
+    ```HtmlHelper
         <!-- Load Pako Deflate library to enable PDF compression -->
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/pako_deflate.min.js"></script>
 
@@ -55,6 +56,7 @@ The following example demonstrates how to enable the PDF export functionality of
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
 
 ## Exporting All Pages
 
@@ -62,6 +64,7 @@ By default, the Grid exports only the current page of data. To export all pages,
 
 > When the `AllPages()` method is used with and server paging (Ajax binding default), the Grid will make a `"read"` request for all data. If the data items are too many, the browser may become unresponsive. In such cases, use server-side export.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<.ProductViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Pdf())
@@ -73,6 +76,7 @@ By default, the Grid exports only the current page of data. To export all pages,
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
 
 ## Fitting Content to Paper Size
 
@@ -87,6 +91,7 @@ You can specify a paper size that will be applied to the whole document. The con
 > * The exact maximum number of exportable rows will vary depending on the browser, system resources, template complexity, and other factors.
 > * A good practice is to verify your own worst-case scenarios in each browser you intend to support.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<.ProductViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Pdf())
@@ -101,6 +106,7 @@ You can specify a paper size that will be applied to the whole document. The con
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
 
 ## Specifying Page Templates
 
@@ -112,6 +118,7 @@ The Grid supports the following page template variables:
 * `pageNumber`
 * `totalPages`
 
+    ```HtmlHelper
         <style>
             body {
                 font-family: "DejaVu Serif";
@@ -174,11 +181,13 @@ The Grid supports the following page template variables:
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
 
 ## Using Server Proxy
 
 Internet Explorer 9 and Safari do not support the option for saving a file and require the implementation of a [server proxy](https://docs.telerik.com/kendo-ui/framework/saving-files). To specify the server proxy URL, use the [`ProxyURL()`](/api/Kendo.Mvc.UI.Fluent/{{ pdfbuilder }}#proxyurlsystemstring) method.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<.ProductViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Pdf())
@@ -194,12 +203,13 @@ Internet Explorer 9 and Safari do not support the option for saving a file and r
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
 
 ## Saving Files on the Server
 
 To send the generated file to a remote service, use the `ProxyURL()` and `ForceProxy()` methods. If the proxy returns `204 No Content`, no **Save As...** dialog will appear on the client.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Grid<.ProductViewModel>()
         .Name("grid")
         .ToolBar(tools => tools.Pdf())
@@ -228,6 +238,7 @@ The default fonts in PDF files do not provide Unicode support. To support intern
 
 The following example demonstrates how to handle custom fonts.
 
+    ```HtmlHelper
         <style>
             /*
                 Use the DejaVu Sans font for display and embedding in the PDF file.
@@ -265,18 +276,19 @@ The following example demonstrates how to handle custom fonts.
                 .Read(read => read.Action("Products_Read", "Home"))
             )
         )
+    ```
 
 ## Exclude Column From Exporting
 
 In some scenarios, you might want to hide given column or multiple columns from being exported. This can be achieved using the [Exportable](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.exportable) setting.
 
-```Razor
+```HtmlHelper
 columns.Bound(p => p.ProductName).Exportable(false);
 ```
 
 It can also be set in a detailed fashion containing different values for Excel and PDF exporting modes, providing separate options for each:
 
-```Razor
+```HtmlHelper
 columns.Bound(p => p.ProductName).Exportable(x=> x.Pdf(true).Excel(false));
 ```
 
@@ -302,5 +314,5 @@ It is also important to understand the difference between .Hidden() and .Visible
 ## See Also
 
 * [Server-Side API](/api/grid)
-* [Rendering and Dimensions of the Grid HtmlHelper for {{ site.framework }}]({% slug width_grid_aspnetcore %})
-* [Adaptive Rendering of the Grid HtmlHelper for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})
+* [Rendering and Dimensions of the Grid component for {{ site.framework }}]({% slug width_grid_aspnetcore %})
+* [Adaptive Rendering of the Grid component for {{ site.framework }}]({% slug adaptive_rendering_gridhelper_aspnetcore %})

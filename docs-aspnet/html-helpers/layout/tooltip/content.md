@@ -1,7 +1,7 @@
 ---
 title: Content
 page_title: Content
-description: "Use the options for loading and configuring the content of the Telerik UI Tooltip HtmlHelper for {{ site.framework }}."
+description: "Use the options for loading and configuring the content of the Telerik UI Tooltip component for {{ site.framework }}."
 previous_url: /helpers/layout/tooltip/content
 slug: htmlhelpers_tooltip_aspnetcore_content
 position: 2
@@ -15,7 +15,7 @@ The Tooltip provides options for loading and configuring its content.
 
 To define static content, use the `Content()` configuration method.
 
-```
+```HtmlHelper
    <span id="tooltip" class="k-button wider">Hover me!</span>
 
     @(Html.Kendo().Tooltip()
@@ -33,7 +33,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The following example demonstrates how to customize the Tooltip by referencing a script tag by its `id`.
 
-```
+```HtmlHelper
     <ul id="products">
         <li>
             <a href="#" data-id="11" title="A cheese made in the artisan tradition by rural dairy farmers in the north of Spain">
@@ -68,23 +68,23 @@ The following example demonstrates how to customize the Tooltip by referencing a
 
 The following example demonstrates how to load the content asynchronously with AJAX by using the `LoadContentFrom` configuration method.
 
-```
-@(Html.Kendo().Tooltip()
-    .For("#products")
-    .Filter("a")
-    .LoadContentFrom("Details", "Tooltip")
-    .Position(TooltipPosition.Top)
-    .Width(220)
-    .Height(280)
-    .Events(events => events.RequestStart("requestStart"))
-)
-<script type="text/javascript">
-    function requestStart(e) {
-        e.options.data = {
-            id: e.target.data("id")
+```HtmlHelper
+    @(Html.Kendo().Tooltip()
+        .For("#products")
+        .Filter("a")
+        .LoadContentFrom("Details", "Tooltip")
+        .Position(TooltipPosition.Top)
+        .Width(220)
+        .Height(280)
+        .Events(events => events.RequestStart("requestStart"))
+    )
+    <script type="text/javascript">
+        function requestStart(e) {
+            e.options.data = {
+                id: e.target.data("id")
+            }
         }
-    }
-</script>
+    </script>
 ```
 
 For a complete example, refer to the [Loading Content with AJAX Demo](https://demos.telerik.com/{{ site.platform }}/tooltip/ajax).

@@ -12,7 +12,7 @@ The Telerik UI ListBox for {{ site.framework }} enables you to bind it to local 
 
 When you use complex data objects, use the `DataTextField` and `DataValueField` properties to notify the ListBox about your preferred binding behavior.
 
-``` index.cshtml
+```HtmlHelper
     @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>
@@ -38,7 +38,7 @@ When you use complex data objects, use the `DataTextField` and `DataValueField` 
         .Selectable(ListBoxSelectable.Multiple)
     )
 ```
-``` IndexController.cs
+```IndexController.cs
     using System;
     using System.Collections.Generic;
     using System.Linq;

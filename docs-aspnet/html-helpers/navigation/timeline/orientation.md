@@ -1,7 +1,7 @@
 ---
 title: Orientation
 page_title: Timeline Orientation
-description: "See how to control the orientation of the Telerik UI Timeline HtmlHelper for {{ site.framework }}."
+description: "See how to control the orientation of the Telerik UI Timeline component for {{ site.framework }}."
 previous_url: /helpers/navigation/timeline/orientation
 slug: orientation_htmlhelpers_timeline_aspnetcore
 position: 5
@@ -19,7 +19,7 @@ You can have the events render alternatingly on both sides of the axis by adding
 
 If you add the `.CollapsibleEvents()` option, all events will start out collapsed (by default, all events are expanded). The user can then expand a particular event to see more than its title and subtitle.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
            .Name("Timeline")
            .Orientation("vertical") // defines the layout of the widget
@@ -122,7 +122,7 @@ The horizontal mode renders the event details on demand (only when they are sele
 
 Alternating rendering and collapsing is not available for the events in this mode.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Timeline<MyApp.Models.TimelineEventModel>()
            .Name("Timeline")
            .Orientation("horizontal") // defines the layout of the widget

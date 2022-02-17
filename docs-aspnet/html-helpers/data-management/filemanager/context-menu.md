@@ -14,16 +14,41 @@ The component uses the {{ site.product }} ContextMenu, enabling you to get full 
 
 The built-in items in the ContextMenu are `rename` and `delete`. You can define your custom items which can execute custom commands. You can also manage what items should be visible, by enumerating the needed ones in the initialization of the component (see Example below)
 
-        @(Html.Kendo().FileManager()
+```HtmlHelper
+    @(Html.Kendo().FileManager()
+        .Name("filemanager")              
             .Name("filemanager")              
-            .ContextMenu(context => context.Items(items =>
-            {
-                items.Add("rename");
-                items.Add("delete");
-            })) 
-            ...
-        )
-
+        .Name("filemanager")              
+            .Name("filemanager")              
+        .Name("filemanager")              
+        .ContextMenu(context => context.Items(items =>
+        {
+            items.Add("rename");
+            items.Add("delete");
+        })) 
+        ...
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-filemanager name="filemanager" upload-url="@Url.Action("Upload", "FileManagerData")">
+        <filemanager-datasource>
+            <transport>
+                <read url="@Url.Action("Read", "FileManagerData")" />
+                <create url="@Url.Action("Destroy", "FileManagerData")" />
+                <destroy url="@Url.Action("Create", "FileManagerData")" />
+                <update url="@Url.Action("Update", "FileManagerData")" />
+            </transport>
+        </filemanager-datasource>
+        <context-menu>
+            <items>
+                <item name="rename"></item>
+                <item name="delete"></item>
+            </items>
+        </context-menu>
+    </kendo-filemanager>
+```
+{% endif %}
 
 ## Custom ContextMenu Items
 

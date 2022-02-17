@@ -1,7 +1,7 @@
 ---
 title: Paging
 page_title: Paging
-description: "Get started with the Telerik UI ScrollView HtmlHelper for {{ site.framework }} and learn how to enable its paging functionality."
+description: "Get started with the Telerik UI ScrollView component for {{ site.framework }} and learn how to enable its paging functionality."
 slug: htmlhelpers_scrollview_aspnetcore_paging
 position: 3
 ---
@@ -12,6 +12,7 @@ By default, the pager of the Telerik UI ScrollView for {{ site.framework }} is e
 
 If the pager is set to `false`, the ScrollView will not display a pager.
 
+```HtmlHelper
     @(Html.Kendo().ScrollView()
                 .Name("scrollView")
                 .EnablePager(false) // The ScrollView will not display a pager.
@@ -41,6 +42,7 @@ If the pager is set to `false`, the ScrollView will not display a pager.
             return "url(https://demos.telerik.com/kendo-ui/content/web/foods/" + id + ".jpg)";
         }
     </script>
+```
 
 ## See Also
 

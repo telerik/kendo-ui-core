@@ -20,7 +20,7 @@ The **Calendar** view supports the following predefined views:
 
 The following example demonstrates how to create a DatePicker that allows the user to select a month.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("datepicker")
         .Start(CalendarView.Year)

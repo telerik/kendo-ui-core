@@ -1,14 +1,14 @@
 ---
 title: PDF
 page_title: PDF Export
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn how to export a Telerik UI PivotGrid HtmlHelper for {{ site.framework }} to PDF."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn how to export a Telerik UI PivotGrid component for {{ site.framework }} to PDF."
 slug: htmlhelpers_pivotgrid_aspnetcore_pdfexport
 position: 2
 ---
 
 # PDF Export
 
-As of the 2015 Q1 release, the PivotGrid HtmlHelper provides a built-in PDF export functionality.
+As of the 2015 Q1 release, the PivotGrid component provides a built-in PDF export functionality.
 
 By default, PDF export is enabled when `kendo.all.min.js`, `kendo.web.min.js`, or a custom build that includes PDF scripts is loaded to the page.
 

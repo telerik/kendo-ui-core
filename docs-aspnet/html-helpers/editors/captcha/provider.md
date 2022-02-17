@@ -1,7 +1,7 @@
 ---
 title: Captcha Server-side Provider
 page_title: Captcha Server-side Provider
-description: "Learn how to configure the server-side provider for the Telerik UI Captcha HtmlHelper for {{ site.framework }}."
+description: "Learn how to configure the server-side provider for the Telerik UI Captcha component for {{ site.framework }}."
 slug: htmlhelpers_captcha_provider
 position: 2
 ---
@@ -48,5 +48,8 @@ For more information about the usage and integration of the Captcha provider in 
 ## See Also
 
 * [Basic Usage of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/index)
+{% if site.core %}
+* [Basic Usage of the Captcha TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/captcha/tag-helper)
+{% endif %}
 * [Using the API of the Captcha HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/captcha/api)
 * [Server-Side API](/api/captcha)

@@ -1,7 +1,7 @@
 ---
 title: Printing
 page_title: Printing
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} allowing you to select only the Grid content on a page for printing."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} allowing you to select only the Grid content on a page for printing."
 slug: printing_gridhelper_aspnetcore
 position: 4
 ---
@@ -26,6 +26,7 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
 * If scrolling is enabled (which is set by default except for the MVC wrapper of the Grid), the Grid renders a [separate table for the header area]({% slug htmlhelpers_grid_aspnetcore_scrolling %}). Because the browser does not relate the two Grid tables, it will not repeat the header row on top of every printed page. The following example demonstrates how to address this issue by cloning the header table row into the data table.
 * When you print a Grid with locked (frozen) columns, it is possible that the resulting columns or rows get misaligned or that the overall layout gets broken. In such cases, use a separate print-friendly Grid instance with no frozen columns.
 
+    ```HtmlHelper
         <button type="button" class="k-button" id="printGrid">Print Grid</button>
         @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
             .Name("grid")
@@ -99,10 +100,10 @@ The following example demonstrates how to retrieve the HTML of the Grid, inject 
                    printGrid();
                });
         </script>
-
+    ```
 ## See Also
 
 * [Excel Export by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/excel-export)
 * [Copying to Excel by the Grid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/copy-to-excel)
-* [PDF Export of the Grid HtmlHelper for {{ site.framework }}]({% slug pdfexport_gridhelper_aspnetcore %})
+* [PDF Export of the Grid component for {{ site.framework }}]({% slug pdfexport_gridhelper_aspnetcore %})
 * [Server-Side API](/api/grid)

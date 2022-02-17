@@ -1,7 +1,7 @@
 ---
 title: Editing
 page_title: Editing
-description: "Learn about the Editing capabilities of the Telerik UI OrgChart HtmlHelper for {{ site.framework }}."
+description: "Learn about the Editing capabilities of the Telerik UI OrgChart component for {{ site.framework }}."
 slug: htmlhelpers_orgchart_editing_aspnetcore
 position: 1
 ---
@@ -22,7 +22,7 @@ To send the new data to the server, configure CRUD operations in the OrgChart Da
 
 The following example demonstrates how to configure the OrgChart to use editing.
 
-```cshtml
+```HtmlHelper
     @(Html.Kendo().OrgChart<Kendo.Mvc.Examples.Models.OrgChartEmployeeViewModel>()
         .Name("orgchart")
         .DataSource(dataSource => dataSource

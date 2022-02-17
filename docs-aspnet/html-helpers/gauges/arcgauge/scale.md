@@ -1,7 +1,7 @@
 ---
 title: Scale
 page_title: Scale
-description: "Learn the Options of the Scale of the Telerik UI ArcGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Options of the Scale of the Telerik UI ArcGauge component for {{ site.framework }}."
 slug: scale_arcgaugehelper_aspnetcore
 position: 2
 ---
@@ -22,13 +22,13 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
 
 * The `Max` (`double`) sets the maximum value of the widget.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)
         .Scale(x => x.Min(0).Max(100))
     )
-````
+```
 
 ## MinorUnit and MajorUnit
 
@@ -36,13 +36,13 @@ The scale of the Telerik UI ArcGauge for {{ site.framework }} renders the values
 
 * The `MinorUnit` (`double`) parameter controls the interval between the minor unit divisions of the widget.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().ArcGauge()
         .Name("gauge")
         .Value(65)
         .Scale(x => x.MajorUnit(20).MinorUnit(5))
     )
-````
+```
 
 ## Reverse
 

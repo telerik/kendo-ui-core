@@ -1,7 +1,7 @@
 ---
 title: Virtual Scrolling
 page_title: Virtual Scrolling
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to enable virtual scrolling as an alternative to paging."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to enable virtual scrolling as an alternative to paging."
 slug: virtual_scrolling_aspnetcore_grid
 position: 2
 ---
@@ -16,11 +16,13 @@ For runnable examples, refer to the [demo on virtualization of remote data by th
 
 When virtual scrolling is enabled, the Grid loads data from its remote data source while the user scrolls vertically.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
             .Name("grid")
             .HtmlAttributes(new { style = "height: 380px;" })
             .Scrollable(scrollable => scrollable.Virtual(true))
         )
+    ```
 
 In virtual scrolling, the HTML output is different from the standard scrolling functionality&mdash;the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` which affects scenarios when the data rows have to be manually scrolled to a particular position.
 

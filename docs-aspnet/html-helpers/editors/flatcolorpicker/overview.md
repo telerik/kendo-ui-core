@@ -1,15 +1,19 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI FlatColorPicker HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI FlatColorPicker component for {{ site.framework }}."
 previous_url: /helpers/editors/flatcolorpicker/overview
 slug: overview_flatcolorpickerhelper_aspnetcore
 position: 1
 ---
 
-# FlatColorPicker HtmlHelper Overview
+# FlatColorPicker Overview
 
+{% if site.core %}
+The Telerik UI FlatColorPicker TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI FlatColorPicker widget.
+{% else %}
 The Telerik UI FlatColorPicker HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI FlatColorPicker widget.
+{% endif %}
 
 The FlatColorPicker is the HSV color selector which is used by default in the `kendo.ui.ColorPicker` popup when no palette is set.
 
@@ -17,9 +21,9 @@ The FlatColorPicker is the HSV color selector which is used by default in the `k
 
 ## Initializing the FlatColorPicker
 
-The following example demonstrates how to define the FlatColorPicker by using the FlatColorPicker HtmlHelper.
+The following example demonstrates how to define the FlatColorPicker.
 
-```
+```HtmlHelper
     @(Html.Kendo().FlatColorPicker()
           .Name("flatcolorpicker") // The name of the FlatColorPicker is mandatory. It specifies the "id" attribute of the widget.
           .Value("#ff0000") // Set the value of the FlatColorPicker.
@@ -34,7 +38,7 @@ You can subscribe to all FlatColorPicker [events](/api/flatcolorpicker).
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
       @(Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
             .Events(e => e
@@ -52,7 +56,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```
+```HtmlHelper
       @(Html.Kendo().FlatColorPicker()
             .Name("flatcolorpicker")
             .Events(e => e

@@ -12,7 +12,7 @@ The keyboard navigation of the Wizard is always available.
 
 The Wizard widget itself is not focusable, but its elements (Stepper, steps and focusable elements within each step content) are part of the tab sequence on the page. Thus, when navigating with the Tab key, the selected Step will be focused within the Wizard widget. For a complete example, refer to the [demo on keyboard navigation of the Wizard](https://demos.telerik.com/{{ site.platform }}/wizard/keyboard-navigation).
 
-Telerik UI Wizard HtmlHelper for {{ site.framework }} supports the following keyboard shortcuts:
+Telerik UI Wizard for {{ site.framework }} supports the following keyboard shortcuts:
 
 | SHORTCUT | DESCRIPTION |
 |:--- |:--- |

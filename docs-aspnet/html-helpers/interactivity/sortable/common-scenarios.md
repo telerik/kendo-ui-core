@@ -1,14 +1,14 @@
 ---
 title: Common Scenarios
 page_title: Common Scenarios
-description: "Get started with the Telerik UI Sortable HtmlHelper for {{ site.framework }} and learn check out the common scenarios."
+description: "Get started with the Telerik UI Sortable component for {{ site.framework }} and learn check out the common scenarios."
 slug: htmlhelpers_sortable_aspnetcore_common_scenarios
 position: 7
 ---
 
 # Common Scenarios
 
-This article provides common scenarios you might encounter when working with the Telerik UI Sortable HtmlHelper for {{ site.framework }}.
+This article provides common scenarios you might encounter when working with the Telerik UI Sortable component for {{ site.framework }}.
 
 * [Persisting the current items order](#persisting-the-current-items-order)
 * [Handling items which contain input elements](#handling-items-with-input-elements)
@@ -20,6 +20,7 @@ By default, the Sortable does not persist the order of the current items. To det
 
 The following example demonstrates how to persist the order of the current items in local storage.
 
+```HtmlHelper
     <div id="sortable"></div>
 
     <button id="reset">Reset</button>
@@ -82,11 +83,13 @@ The following example demonstrates how to persist the order of the current items
             background-color: #51A0ED;
         }
     </style>
+```
 
 ## Handling Items with input Elements
 
 The `<input>` elements inside Sortable items cannot be focused because the items are draggable. To avoid this behavior, use the `Ignore` option.
 
+```HtmlHelper
     <ul id="sortable">
         <li>ItemA1 <input type="text" /></li>
         <li>ItemA2 <input type="text" /></li>
@@ -97,11 +100,13 @@ The `<input>` elements inside Sortable items cannot be focused because the items
         .For("#sortable")
         .Ignore("input")
     )   
+```
 
 ## Handling Radio Button Selections
 
 A Sortable with radio buttons and a hint cloned from the Sortable element will lose the selected radio button if dragged because the clone will take over the selection. To avoid this behavior, clear the name of the radio button in the hint.
 
+```HtmlHelper
     <ul id="sortable-basic">
         <li class="sortable"><input type="radio" name="foo" />Papercut <span>3:04</span></li>
         <li class="sortable"><input type="radio" name="foo" />One Step Closer <span>2:35</span></li>
@@ -128,8 +133,12 @@ A Sortable with radio buttons and a hint cloned from the Sortable element will l
             return element.clone().addClass("placeholder").text("drop here");
         }
     </script>
+```
 
 ## See Also
 
 * [Basic Usage of the Sortable HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/sortable/index)
+{% if site.core %}
+* [Basic Usage of the Sortable TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/sortable/tag-helper)
+{% endif %}
 * [Server-Side API](/api/sortable)

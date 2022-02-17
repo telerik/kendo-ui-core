@@ -1,7 +1,7 @@
 ---
 title:  Content
 page_title: Set the content for the Splitter.
-description: "An example on how to set the content for  the Telerik UI Splitter HtmlHelper for {{ site.framework }}."
+description: "An example on how to set the content for  the Telerik UI Splitter component for {{ site.framework }}."
 slug: htmlhelpers_splitter_content_aspnetcore
 position: 7
 ---
@@ -18,7 +18,7 @@ You can set the HTML for each Splitter pane via the [`Content()`](/api/Kendo.Mvc
 
 The following example demonstrates how to configure the HTML Content for the Splitter:
 
-```
+```HtmlHelper
 @(Html.Kendo().Splitter()
       .Name("splitter")
       .Orientation(SplitterOrientation.Vertical)
@@ -51,7 +51,7 @@ The Splitter provides built-in support for asynchronously loading content from U
 
 The following example demonstrates how to load the Splitter content asynchronously.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Splitter()
       .Name("splitter")
       .Panes(panes =>

@@ -1,7 +1,7 @@
 ---
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Learn how to use the keyboard navigation functionality of the Telerik CheckBoxGroup HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the keyboard navigation functionality of the Telerik CheckBoxGroup component for {{ site.framework }}."
 slug: htmlhelpers_checkboxgroup_keyboardnavigation_aspnetcore
 position: 2
 ---

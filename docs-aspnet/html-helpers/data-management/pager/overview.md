@@ -1,20 +1,27 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI Pager HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI Pager component for {{ site.framework }}."
 slug: htmlhelpers_pager_aspnet_overview
 position: 1
 ---
 
-# Pager HtmlHelper Overview
+# Pager Overview
 
-The Telerik UI Pager HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Pager widget which enables splitting a set of data into pages with flexible and intuitive UI.
+{% if site.core %}
+The Telerik UI Pager TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI Pager widget. To add the component to your ASP.NET Core app, you can use either.
+{% else %}
+The Telerik UI Pager HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI Pager widget.
+{% endif %}
 
-The user interface of the Pager is useful for paging data-bound components that have a [data source](/api/datasource) and do not have a built-in UI for paging such as the ListView or scenarios that require  paging options&mdash;for example, Kendo Templates with a data source.
+The Pager enables you to split a set of data into pages with flexible and intuitive UI. The user interface of the Pager is useful for paging data-bound components that have a [data source](/api/datasource) and do not have a built-in UI for paging such as the ListView or scenarios that require  paging options&mdash;for example, Kendo Templates with a data source.
 
  You can customize the page number templates or use an input for navigation to a specific page, toggle the visibility of previous and next buttons, include a pagesize dropdown and alter the information messages. The pager API also offers the ability to [localize its messages]({% slug localization_pager_aspnet %}).
 
-* [Demo page for the Pager](https://demos.telerik.com/{{ site.platform }}/pager/index)
+* [Demo page for the Pager HtmlHelper](https://demos.telerik.com/{{ site.platform }}/pager/index)
+{% if site.core %}
+* [Demo page for the Pager TagHelper](https://demos.telerik.com/{{ site.platform }}/pager/tag-helper) 
+{% endif %}
 
 ## Initializing the Pager
 
@@ -22,7 +29,7 @@ To use the Pager, you have to define a standalone data source and pass it by nam
 
 The following example demonstrates how to tie a pager to a data source and enable the `PageSizes()` functionality.
 
-```View
+```HtmlHelper
     @(Html.Kendo().DataSource<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("dataSource1")
         .Ajax(t=>t.Read(read => read.Action("People_Read", "Pager")).PageSize(20))
@@ -34,6 +41,18 @@ The following example demonstrates how to tie a pager to a data source and enabl
         .PageSizes(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-datasource name="dataSource1" type="DataSourceTagHelperType.Ajax" server-operation="false">
+        <transport>
+            <read url="@Url.Action("TagHelper_Products_Read", "DataSource")" />
+        </transport>
+    </kendo-datasource>
+
+    <kendo-pager name="pager1" refresh="true" datasource-id="dataSource1" page-sizes="true">
+    </kendo-pager>
+```
+{% endif %}
 ```Controller
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
@@ -77,7 +96,7 @@ The following example demonstrates how to tie a pager to a data source and enabl
 
 You can subscribe to the Pager [events](/api/pager).
 
-```
+```HtmlHelper
     @(Html.Kendo().Pager()
         .Name("Pager")
         .Events(events => events
@@ -90,6 +109,16 @@ You can subscribe to the Pager [events](/api/pager).
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-pager name="pager" on-change="onChange">
+    <script>
+        function onChange(e) {
+            console.log("pager change event");
+        }
+    </script>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

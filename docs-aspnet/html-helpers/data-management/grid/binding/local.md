@@ -1,7 +1,7 @@
 ---
 title: Local Binding
 page_title: Local Binding
-description: "Learn how to implement Local Binding with Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Local Binding with Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/data-management/grid/binding/server-binding
 slug: htmlhelpers_grid_aspnetcore_localbinding
 position: 3
@@ -54,6 +54,7 @@ To configure the Grid for {{ site.framework }} to do local binding:
 
 1. In the `Index.cshtml` view, configure the Grid to accept the model in its constructor and set `ServerOperations(false)`.
 
+    ```HtmlHelper
         @model IEnumerable<AspNetCoreGrid.Models.OrderViewModel>
         @(Html.Kendo().Grid(Model)
             .Name("grid")
@@ -76,7 +77,8 @@ To configure the Grid for {{ site.framework }} to do local binding:
                 columns.Bound(f => f.ShipCountry);
             })
         )
-
+    ```
+    
 1. Build and run the application.
 
 ## See Also

@@ -1,24 +1,69 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI OrgChart HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI OrgChart component for {{ site.framework }}."
 slug: htmlhelpers_orgchart_aspnetcore
 position: 0
 ---
 
-# OrgChart HtmlHelper Overview
-
+# OrgChart Overview
+{% if site.core %}
+The Telerik UI OrgChart TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI OrgChart widget.
+{% else %}
 The Telerik UI OrgChart HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI OrgChart widget.
+{% endif %}
 
 The OrgChart is a flexible organizational chart component designed to represent a structure of an organization. The OrgChart can illustrate the hierarchy in a company, department, team, or other hierarchical structures. 
 
-* [Demo page for the OrgChart](https://demos.telerik.com/{{ site.platform }}/orgchart/index)
+* [Demo page for the OrgChart HtmlHelper](https://demos.telerik.com/{{ site.platform }}/orgchart/index)
+{% if site.core %}
+* [Demo page for the OrgChart TagHelper](https://demos.telerik.com/aspnet-core/orgchart/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the OrgChart HtmlHelper.
+The following example demonstrates the basic configuration of the OrgChart component.
 
-```Razor
+{% if site.core %}
+```HtmlHelper
+    @(Html.Kendo().OrgChart<Kendo.Mvc.Examples.Models.OrgChartEmployeeViewModel>()
+        .Name("orgchart")
+        .DataSource(dataSource => dataSource
+            .Read(read => read.Action("RemoteDataBindingData", "OrgChart"))
+            .Model(m => {
+                m.Id(f => f.ID);
+                m.ParentId(f => f.ParentID);
+                m.Name(f => f.Name);
+                m.Title(f => f.Title);
+                m.Avatar(f => f.Avatar);
+                m.Expanded(f=>f.Expanded);
+            })
+        )
+    )
+```
+```TagHelper
+    <kendo-orgchart name="orgchart">
+        <orgchart-datasource>
+            <transport>
+                <read url="https://demos.telerik.com/kendo-ui/service/EmployeesOrgChart" />
+            </transport>
+            <schema>
+                <orgchart-model id="Id" parent-id="ParentId" expanded="true"
+                                name="FullName" title="Position" avatar="Avatar">
+                    <fields>
+                        <field name="ParentId" nullable="true"></field>
+                        <field name="Id" type="number"></field>
+                        <field name="FullName" type="string"></field>
+                        <field name="Position" type="string"></field>
+                        <field name="Avatar" type="string"></field>
+                    </fields>
+                </orgchart-model>
+            </schema>
+        </orgchart-datasource>
+    </kendo-orgchart>
+```
+{% else %}
+```HtmlHelper
     @(Html.Kendo().OrgChart<TelerikMvcApp1.Models.OrgChartEmployeeViewModel>()
         .Name("orgchart")
         .DataSource(dataSource => dataSource
@@ -35,6 +80,7 @@ The following example demonstrates the basic configuration of the OrgChart HtmlH
         )
     )
 ```
+{% endif %}
 ```Controller
     public JsonResult Read([DataSourceRequest] DataSourceRequest request)
     {
@@ -64,7 +110,7 @@ You can subscribe to all OrgChart [events](/api/orgchart). For a complete exampl
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().OrgChart()
       .Name("orgchart")
       .Events(e => e
@@ -86,6 +132,9 @@ The following example demonstrates how to subscribe to events by a handler name.
 ## See Also
 
 * [Basic Usage of the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart)
-* [Using the API of the OrgChart HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/api)
+{% if site.core %}
+* [Basic Usage of the OrgChart TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/orgchart/tag-helper)
+{% endif %}
+* [Using the API of the OrgChart for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/orgchart/api)
 * [Server-Side API](/api/orgchart)
 * [JavaScript API Reference of the OrgChart](https://docs.telerik.com/kendo-ui/api/javascript/ui/orgchart)

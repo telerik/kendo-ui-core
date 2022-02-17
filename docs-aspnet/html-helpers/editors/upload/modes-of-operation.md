@@ -1,7 +1,7 @@
 ---
 title: Modes of Operation
 page_title: Modes of Operation
-description: "Learn about the synchronous and the asynchronous modes of operation of the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn about the synchronous and the asynchronous modes of operation of the Telerik UI Upload component for {{ site.framework }}."
 previous_url: /helpers/editors/upload/modes
 slug: htmlhelpers_upload_modes_of_operation_aspnetcore
 position: 2
@@ -15,7 +15,7 @@ The Upload provides the [synchronous](#synchronous-mode) and [asynchronous](#asy
 
 An Upload in the synchronous mode behaves like a regular file input&mdash;the selected files are uploaded upon form submission and users can select a set of files. When the Upload is in its synchronous mode, the browser does not have to support multiple file selection.
 
-```Razor
+```HtmlHelper
 <form method="post" action='@Url.Action("Submit")'>
     <div class="demo-section k-content">
         @(Html.Kendo().Upload()
@@ -65,7 +65,7 @@ public ActionResult Submit(IEnumerable<IFormFile> files)
 
 An Upload in the asynchronous mode requires dedicated server handlers to store and remove uploaded files. Files are upload immediately or, optionally, after the confirmation from the user. The upload request is executed out-of-band without interrupting the page flow. The asynchronous mode is implemented through the [HTML5 File API](https://en.wikipedia.org/wiki/HTML5_File_API).
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Upload()
     .Name("files")
     .Async(a => a

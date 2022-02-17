@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI PivotGrid component for {{ site.framework }}."
 previous_url: /helpers/data-management/pivotgrid/overview
 slug: overview_pivotgridhelper_aspnetcore
 position: 1
@@ -14,13 +14,20 @@ position: 1
     {% assign GettingStarted = "gettingstarted_aspnetmvc" %}
 {% endif %}
 
-# PivotGrid HtmlHelper Overview
+# PivotGrid Overview
 
+{% if site.core %}
+The Telerik UI PivotGrid TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI PivotGrid widget. To add the component to your ASP.NET Core app, you can use either.
+{% else %}
 The Telerik UI PivotGrid HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI PivotGrid widget.
+{% endif %}
 
 The PivotGrid represents multidimensional data in a cross-tabular format.
 
-* [Demo page for the PivotGrid](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index)
+* [Demo page for the PivotGrid HtmlHelper](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index)
+{% if site.core %}
+* [Demo page for the PivotGrid TagHelper](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
@@ -29,31 +36,93 @@ To configure the PivotGrid for Ajax binding to an **Adventure Works** cube that 
 1. Create a new {{ site.framework }} application. If you have the [{{ site.product }} Visual Studio Extensions]({% slug {{ VSExt }} %}) installed, create a {{ site.product }} application. Name the application `KendoPivotGrid`. If you decide not to use the {{ site.product }} Visual Studio Extensions, follow the steps from the [introductory article]({% slug {{ GettingStarted }} %}) to add {{ site.product }} to the application.
 1. Add a PivotGrid to the `Index` view.
 
-    ```
-        @(Html.Kendo().PivotGrid()
-            .Name("pivotgrid")
-            .DataSource(dataSource => dataSource.
-                Xmla()
-                .Columns(columns => {
-                    columns.Add("[Date].[Calendar]").Expand(true);
-                    columns.Add("[Geography].[City]");
-                })
-                .Rows(rows => rows.Add("[Product].[Product]"))
-                .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
-                .Transport(transport => transport
-                    .Connection(connection => connection
-                        .Catalog("Adventure Works DW 2008R2")
-                        .Cube("Adventure Works"))
-                    .Read(read => read
-                        .Url("https://demos.telerik.com/olap/msmdpump.dll")
-                        .DataType("text")
-                        .ContentType("text/xml")
-                        .Type(HttpVerbs.Post)
-                    )
+{% if site.core %}
+```HtmlHelper
+    @(Html.Kendo().PivotConfigurator()
+        .Name("configurator")
+        .Filterable(true)
+        .Sortable()
+        .Height(570)
+    )
+
+    @(Html.Kendo().PivotGrid()
+        .Name("pivotgrid")
+        .ColumnWidth(200)
+        .Height(570)
+        .Filterable(true)
+        .Sortable()
+        .Configurator("#configurator")
+        .DataSource(dataSource => dataSource.
+            Xmla()
+            .Columns(columns => {
+                columns.Add("[Date].[Calendar]").Expand(true);
+                columns.Add("[Product].[Category]");
+            })
+            .Rows(rows => rows.Add("[Geography].[City]"))
+            .Measures(measures => measures.Values(new string[]{"[Measures].[Reseller Freight Cost]"}))
+            .Transport(transport => transport
+                .Connection(connection => connection
+                    .Catalog("Adventure Works DW 2008R2")
+                    .Cube("Adventure Works"))
+                .Read(read => read
+                    .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                    .DataType("text")
+                    .ContentType("text/xml")
+                    .Type(HttpVerbs.Post)
+                )
+            )
+            .Events(e => e.Error("onError"))
+        )
+    )
+```
+```TagHelper
+    <kendo-pivotdatasource type=@(PivotDataSourceType.Xmla) name="pivotSource">
+        <columns>
+            <pivot-datasource-column name="[Date].[Calendar]" expand="true"></pivot-datasource-column>
+            <pivot-datasource-column name="[Product].[Category]"></pivot-datasource-column>
+        </columns>
+        <rows>
+            <row name="[Geography].[City]"></row>
+        </rows>
+        <schema type="xmla"/>
+        <measures values=@(new string[] {"[Measures].[Reseller Freight Cost]"} ) ></measures>
+        <transport>
+            <read url="https://demos.telerik.com/olap/msmdpump.dll" datatype="text" content-type="text/xml" type="POST" />
+            <connection catalog="Adventure Works DW 2008R2" cube="Adventure Works"></connection>
+        </transport>
+    </kendo-pivotdatasource>
+    <kendo-pivotconfigurator name="configurator" datasource-id="pivotSource">
+    </kendo-pivotconfigurator>
+    <kendo-pivotgrid name="pivotgrid" datasource-id="pivotSource">
+    </kendo-pivotgrid>
+```
+{% else %}
+```HtmlHelper
+    @(Html.Kendo().PivotGrid()
+        .Name("pivotgrid")
+        .DataSource(dataSource => dataSource.
+            Xmla()
+            .Columns(columns => {
+                columns.Add("[Date].[Calendar]").Expand(true);
+                columns.Add("[Geography].[City]");
+            })
+            .Rows(rows => rows.Add("[Product].[Product]"))
+            .Measures(measures => measures.Values(new string[]{"[Measures].[Internet Sales Amount]"}))
+            .Transport(transport => transport
+                .Connection(connection => connection
+                    .Catalog("Adventure Works DW 2008R2")
+                    .Cube("Adventure Works"))
+                .Read(read => read
+                    .Url("https://demos.telerik.com/olap/msmdpump.dll")
+                    .DataType("text")
+                    .ContentType("text/xml")
+                    .Type(HttpVerbs.Post)
                 )
             )
         )
-    ```
+    )
+```
+{% endif %}
 
 1. Build and run the application.
 
@@ -75,4 +144,7 @@ To reference an existing PivotGrid instance, use the [`jQuery.data()`](http://ap
 ## See Also
 
 * [Basic Usage of the PivotGrid HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/pivotgrid/index)
+{% if site.core %}
+* [Basic Usage of the PivotGrid TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/pivotgrid/tag-helper)
+{% endif %}
 * [Server-Side API](/api/pivotgrid)

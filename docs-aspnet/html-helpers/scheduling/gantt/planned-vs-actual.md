@@ -1,7 +1,7 @@
 ---
 title: Planned vs Actual
 page_title: Data Binding
-description: "Learn more about how the Telerik UI Gantt HtmlHelper for {{ site.framework }} displays planned and actual dates."
+description: "Learn more about how the Telerik UI Gantt component for {{ site.framework }} displays planned and actual dates."
 slug: htmlhelpers_gantt_planned_vs_actual_aspnetcore
 position: 4
 ---
@@ -20,7 +20,7 @@ For a full example of the Planned vs Actual functionality, refer to the [Planned
 
 The example below demonstrates how to configure the Gantt to display planned and actual dates.
 
-```
+```HtmlHelper
 @(Html.Kendo().Gantt<TaskViewModel, DependencyViewModel>()
     .Name("gantt")
     .Columns(columns =>

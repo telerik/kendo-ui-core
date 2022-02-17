@@ -21,13 +21,23 @@ The Label exposes a `content` property that sets the inner HTML of the label.
 
 The below example shows how to create a Label from a string.
 
+```HtmlHelper
     @(Html.Kendo().TextBox()
         .Name("TextBox")
         .Label(l => l.Content("First name"))
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-textbox name="FirstName">
+        <textbox-label content="First Name" />
+    </kendo-textbox>
+```
+{% endif %}
 
 The below example shows how to create a Label from a function. The function context (available via the `this` keyword) will be set to the widget instance.
 
+```HtmlHelper
     @(Html.Kendo().TextBox()
             .Name("TextBox")
             .Label(l => l.ContentHandler("labelContentHandler"))
@@ -37,6 +47,19 @@ The below example shows how to create a Label from a function. The function cont
             return "First name"
         }
     </script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-textbox name="FirstName">
+        <textbox-label content-handler="labelContentHandler" />
+    </kendo-textbox>
+    <script>
+        function labelContentHandler() {
+            return "First Name"
+        }
+    </script>
+```
+{% endif %}
 
 ## Floating Label
 
@@ -44,6 +67,7 @@ The Floating Label enables you to provide a floating label functionality to the 
 
 The following example demonstrates how to set a Floating Label for a TextBox.
 
+```HtmlHelper
     @(Html.Kendo().TextBox()
            .Name("TextBox")
            .Label(label =>
@@ -52,6 +76,14 @@ The following example demonstrates how to set a Floating Label for a TextBox.
                label.Floating(true);
            })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-textbox name="FirstName">
+        <textbox-label content="First Name" floating="true" />
+    </kendo-textbox>
+```
+{% endif %}
 
 If set to `true`, the component will be wrapped in a container that will allow the floating label functionality.
 

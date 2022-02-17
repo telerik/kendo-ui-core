@@ -9,9 +9,9 @@ position: 2
 
 # Peer-to-Peer Chat
 
-You can configure a Telerik UI Chat HtmlHelper for {{ site.framework }} and a {% if site.core %}[.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/){% else %}[SignalR 2](https://www.asp.net/signalr){% endif %} service to create a Peer-to-Peer Chat application.
+You can configure the Telerik UI Chat component for {{ site.framework }} and a {% if site.core %}[.Net Core SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/){% else %}[SignalR 2](https://www.asp.net/signalr){% endif %} service to create a Peer-to-Peer Chat application.
 
-To create the Peer-to-Peer Chat you have to implement the SignalR Hub server and, then, to implement the application client:
+To create the Peer-to-Peer Chat, you have to implement the SignalR Hub server and then to implement the application client:
 
 1. [Create the new application](#creating-the-new-application)
 1. [Configure the SignalR Hub server](#configuring-the-signalr-hub-server)
@@ -152,40 +152,69 @@ Depending on your preferred editor, use any of the following approaches:
 
 In the `Views\Home\Index.cshtml` fie, initialize the Chat and implement handlers for its [`post`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/post) and [`typingStart`](https://docs.telerik.com/kendo-ui/api/javascript/ui/chat/events/typingstart) events.
 
-```
-@{
-    var name = Guid.NewGuid().ToString();
-}
 
-@(Html.Kendo().Chat()
-    .Name("chat")
-    .User(user => user
-        // Each instance of the app will generate a unique username.
-        // In this way, the SignalR Hub "knows" who is the user that sends the message
-        // and who are the clients that have to receive that message.
-        .Name(@name)
-        .IconUrl("https://demos.telerik.com/kendo-ui/content/chat/avatar.png")
-    )
-    .Events(events => events
-        .TypingStart("onTypingStart")
-        .Post("onPost")
-    )
-)
-
-<script>
-    // The `typingStart` will notify the SignallR Hub that the current client is typing.
-    // The Hub, in turn, will notify all the other clients that the user has started typing.
-    function onTypingStart(e) {
-        chatHub.invoke("sendTyping", chat.getUser());
+```HtmlHelper
+    @{
+        var name = Guid.NewGuid().ToString();
     }
 
-    // The `post` handler will send the user data and the typed text to the SignalR Hub.
-    // The Hub will then forward that info to the other clients.
-    function onPost(args) {
-        chatHub.invoke("send", chat.getUser(), args.text);
-    }
-</script>
+    @(Html.Kendo().Chat()
+        .Name("chat")
+        .User(user => user
+            // Each instance of the app will generate a unique username.
+            // In this way, the SignalR Hub "knows" who is the user that sends the message
+            // and who are the clients that have to receive that message.
+            .Name(@name)
+            .IconUrl("https://demos.telerik.com/kendo-ui/content/chat/avatar.png")
+        )
+        .Events(events => events
+            .TypingStart("onTypingStart")
+            .Post("onPost")
+        )
+    )
+
+    <script>
+        // The `typingStart` will notify the SignallR Hub that the current client is typing.
+        // The Hub, in turn, will notify all the other clients that the user has started typing.
+        function onTypingStart(e) {
+            chatHub.invoke("sendTyping", chat.getUser());
+        }
+
+        // The `post` handler will send the user data and the typed text to the SignalR Hub.
+        // The Hub will then forward that info to the other clients.
+        function onPost(args) {
+            chatHub.invoke("send", chat.getUser(), args.text);
+        }
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var name = Guid.NewGuid().ToString();
+    }
+
+    <kendo-chat name="chat"
+                on-post="onPost"
+                on-typing-start="onTypingStart">
+        <user name="@name"
+            icon-url="https://demos.telerik.com/kendo-ui/content/chat/avatar.png" />
+    </kendo-chat>
+
+    <script>
+        function onTypingStart() {
+            // The `typingStart` will notify the SignallR Hub that the current client is typing.
+            // The Hub, in  turn, will notify all the other clients that the user has started typing.
+            chatHub.invoke("sendTyping", chat.getUser());
+        }
+
+        function onPost(args) {
+            // The `post` handler will send the user data and the typed text to the SignalR Hub.
+            // The Hub will then forward that info to the other clients.
+            chatHub.invoke("send", chat.getUser(), args.text);
+        }
+    </script>
+```
+{% endif %}
 
 ## Configuring the SignalR Client Hub Proxy
 

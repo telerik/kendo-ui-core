@@ -35,9 +35,10 @@ You can bind a Telerik UI RadioButton to a model.
 
     The following example demonstrates how the radio button with the **I Disagree** label will be checked because its false value matches the model value.
 
+    ```HtmlHelper
         @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I agree").Value(true))
         @(Html.Kendo().RadioButtonFor(m => m.IAgreeProp).Label("I Disagree").Value(false))
-
+    ```
 ## See Also
 
 * [RadioButton Server-Side API](/api/radiobutton)

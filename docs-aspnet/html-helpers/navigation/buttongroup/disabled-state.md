@@ -1,7 +1,7 @@
 ---
 title: Disabled ButtonGroup
 page_title: Disabled ButtonGroup
-description: "Enable or disable the Telerik UI ButtonGroup HtmlHelper for {{ site.framework }}."
+description: "Enable or disable the Telerik UI ButtonGroup component for {{ site.framework }}."
 previous_url: /helpers/navigation/buttongroup/disabled-state
 slug: disabled_buttongroup_aspnetcore
 position: 2
@@ -15,7 +15,7 @@ To configure the ButtonGroup as initially disabled, use its `.Enable()` setting.
 
 The following example demonstrates how to enable and disable the ButtonGroup over the `.Enable()` configuration.
 
-```
+```HtmlHelper
     @(Html.Kendo().ButtonGroup()
         .Name("select-period")
         .Enable(false)

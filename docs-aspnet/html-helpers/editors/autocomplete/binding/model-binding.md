@@ -1,7 +1,7 @@
 ---
 title: Model Binding
 page_title: Model Binding
-description: "Learn how to implement model binding with Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement model binding with Telerik UI AutoComplete component for {{ site.framework }}."
 slug: modelbinding_autocomplete_aspnetmvc
 position: 5
 ---
@@ -40,7 +40,7 @@ Local data is the data that is available on the client when the AutoComplete is 
 
 1. Add the AutoComplete to the view and bind it to the data that is saved in `ViewData`.
 
-    ```Razor
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
@@ -78,7 +78,7 @@ You can configure the AutoComplete to get its data from a remote source by makin
 
 1. Add the AutoComplete to the view and configure its DataSource to use remote data.
 
-    ```Razor
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().AutoCompleteFor(m => m.ProductName)

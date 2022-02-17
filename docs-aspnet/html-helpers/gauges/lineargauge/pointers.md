@@ -1,12 +1,12 @@
 ---
 title: Pointers
 page_title: Pointers
-description: "Learn the Options of the Pointers of the Telerik UI LinearGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Options of the Pointers of the Telerik UI LinearGauge component for {{ site.framework }}."
 slug: pointers_lineargaugehelper_aspnetcore
 position: 3
 ---
 
-## Linear Gauge Pointers
+# Linear Gauge Pointers
 
 The `Pointers` of the Telerik UI LinearGauge for {{ site.framework }} are the values that will be marked on the scale. Customize them via the following options:
 
@@ -28,7 +28,7 @@ The `Shape` parameter controls the shape of the pointer and takes a member of th
 
 * `Arrow`
 
-```CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer => pointer
@@ -42,7 +42,7 @@ The `Shape` parameter controls the shape of the pointer and takes a member of th
 
 The `Color` (`string`) parameter controls the color of the pointers. It accepts **CSS**, **HEX** and **RGB** colors.
 
-```CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -67,7 +67,7 @@ The `Color` (`string`) parameter controls the color of the pointers. It accepts 
 
 The `Opacity` (`double`) parameter controls the opacity of the pointers. The value passed to it should be between **0** and **1**.
 
-```CSHML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -85,7 +85,7 @@ The `Opacity` (`double`) parameter controls the opacity of the pointers. The val
 
 The `Size` (`double`) parameter controls the size of the pointers. 
 
-```CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>
@@ -102,7 +102,7 @@ The `Size` (`double`) parameter controls the size of the pointers.
 
 The `Margin` (`double`) parameter controls the margin between the [Scale]({%slug scale_lineargaugehelper_aspnetcore%}) and the pointers.
 
-```CSHTML
+```HtmlHelper
     @(Html.Kendo().LinearGauge()
           .Name("gauge")
           .Pointer(pointer =>

@@ -19,7 +19,7 @@ To work around the default behavior of the DatePicker and simulate a different c
 
 > In both cases, the DatePicker uses the Gregorian calendar date. The second component only displays the Gregorian date with the Lunar year.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("gregorian")
         .Value(new DateTime(2000, 11, 10))

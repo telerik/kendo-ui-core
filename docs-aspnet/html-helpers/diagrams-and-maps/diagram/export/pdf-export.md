@@ -33,7 +33,7 @@ To enable PDF export in the Diagram:
 
 To enable PDF export in the Diagram through code, call the [`saveAsPdf`](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/diagram/methods/saveaspdf) method.
 
-```Razor
+```HtmlHelper
 
     <button class='export-pdf k-button'>Save as PDF</button>
 

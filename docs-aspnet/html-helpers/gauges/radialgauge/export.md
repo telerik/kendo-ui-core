@@ -1,7 +1,7 @@
 ---
 title: Export
 page_title: Export
-description: "Learn the Export Options of the Telerik UI RadialGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Export Options of the Telerik UI RadialGauge component for {{ site.framework }}."
 slug: export_radialgaugehelper_aspnetcore
 position: 4
 ---
@@ -20,7 +20,7 @@ The Telerik UI RadialGauge for {{ site.framework }} export relies on the [Teleri
 
 The radial gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-pdf k-button'>Export as PDF</button>
     
     @(Html.Kendo().RadialGauge()
@@ -51,7 +51,7 @@ The radial gauge allows you to retrieve the PDF representation of the content vi
 
 The radial gauge allows you to retrieve the Image representation of the content via the [exportImage method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().RadialGauge()
@@ -82,7 +82,7 @@ The radial gauge allows you to retrieve the Image representation of the content 
 
 The radial gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content via the [exportSVG method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().RadialGauge()

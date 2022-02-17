@@ -1,7 +1,7 @@
 ---
 title: Widths
 page_title: Column Widths
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to modify its column widths."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to modify its column widths."
 slug: column_widths_grid_aspnetcore
 position: 2
 ---

@@ -8,7 +8,7 @@ position: 2
 
 # Excel Export
 
-This article provides solutions for issues you might encounter while exporting the content of the Telerik UI Grid HtmlHelper for {{ site.framework }}.
+This article provides solutions for issues you might encounter while exporting the content of the Telerik UI Grid component for {{ site.framework }}.
 
 ## JSZip Is Not Found
 
@@ -50,7 +50,7 @@ The following example demonstrates the user server proxy.
         )
     %>
 ```
-```Razor
+```HtmlHelper
 
     @(Html.Kendo().Grid<MvcApplication.Models.ProductViewModel>()
         .Name("grid")

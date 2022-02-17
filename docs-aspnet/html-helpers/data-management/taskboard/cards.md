@@ -22,6 +22,7 @@ You can disable/enable individual cards, or all cards in a column.
 
 The following example demonstrates how to disable a specific card.
 
+```HtmlHelper
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
         .Columns(c =>
@@ -44,11 +45,13 @@ The following example demonstrates how to disable a specific card.
             taskBoard.enable(taskBoard.items().eq(0), false);
         });
     </script>
+```
 
 You can also set readonly status to specific cards, or to all cards in a column.
 
 The following example demonstrates how to set all cards in a column to readonly.
 
+```HtmlHelper
     @(Html.Kendo().TaskBoard()
         .Name("taskBoard")
         .Columns(c =>
@@ -71,6 +74,7 @@ The following example demonstrates how to set all cards in a column to readonly.
             taskBoard.readOnlyByColumn(taskBoard.columns().eq(0));
         });
     </script>
+```
 
 ## Card Menu
 
@@ -89,6 +93,7 @@ Additional custom buttons can be added through the `cardMenu` configuration.
 
 The following example demonstrates how to use a custom button that executes a custom command in the card menu.
 
+```HtmlHelper
     <script>
         kendo.ui.taskboard.commands["MyCustomCommand"] = kendo.ui.taskboard.Command.extend({
             exec: function () {
@@ -121,6 +126,7 @@ The following example demonstrates how to use a custom button that executes a cu
         .BindTo((IEnumerable<Kendo.Mvc.Examples.Models.TaskBoard.CardViewModel>)ViewBag.Cards)
         .CardMenu(m => m.Add().Name("CustomButton").Text("My Custom Tool").Icon("gear").Command("MyCustomCommand").Options("myvalue"))
     )
+```
 
 ## See Also
 

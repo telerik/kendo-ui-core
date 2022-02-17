@@ -8,7 +8,7 @@ position: 2
 
 # Incell Editing
 
-The Telerik UI TreeList HtmlHelper for {{ site.framework }} enables you to implement cell editing and make and save batch updates.
+The Telerik UI TreeList component for {{ site.framework }} enables you to implement cell editing and make and save batch updates.
 
 For a runnable example, refer to the [demo on incell (batch) editing of the TreeList](https://demos.telerik.com/{{ site.platform }}/treelist/editing-incell).
 
@@ -84,59 +84,60 @@ To set the incell edit mode of the TreeList:
 
 1. In the view, configure the TreeList to use the action methods that were created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
-        @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
-            .Name("treelist")
-            .Toolbar(toolbar =>
-            {
-                toolbar.Create();
-                toolbar.Save();
-                toolbar.Cancel();
-            })
-            .Columns(columns =>
-            {
-                columns.Add().Field(e => e.FirstName).Title("First Name").Width(220);
-                columns.Add().Field(e => e.LastName).Title("Last Name").Width(100);
-                columns.Add().Command(c =>
-                    {
-                        c.CreateChild().Text("Add child");
-                        c.Destroy();
-                    }
-                ).Width(240);
-            })
-            .Editable(e => e.Mode(TreeListEditMode.InCell).Move(false))
-            .Events(ev => ev.DataBound("onDataBound"))
-            .DataSource(dataSource => dataSource
-                .Batch(true)
-                .Read(read => read.Action("All_InCell", "TreeList"))
-                .Create(create => create.Action("Create_InCell", "TreeList").Type(HttpVerbs.Post))
-                .Update(update => update.Action("Update_InCell", "TreeList").Type(HttpVerbs.Post))
-                .Destroy(delete => delete.Action("Destroy_InCell", "TreeList").Type(HttpVerbs.Post))
-                .Model(m =>
+```HtmlHelper
+    @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
+        .Name("treelist")
+        .Toolbar(toolbar =>
+        {
+            toolbar.Create();
+            toolbar.Save();
+            toolbar.Cancel();
+        })
+        .Columns(columns =>
+        {
+            columns.Add().Field(e => e.FirstName).Title("First Name").Width(220);
+            columns.Add().Field(e => e.LastName).Title("Last Name").Width(100);
+            columns.Add().Command(c =>
                 {
-                    m.Id(f => f.EmployeeId);
-                    m.ParentId(f => f.ReportsTo);
-                })
-            )
+                    c.CreateChild().Text("Add child");
+                    c.Destroy();
+                }
+            ).Width(240);
+        })
+        .Editable(e => e.Mode(TreeListEditMode.InCell).Move(false))
+        .Events(ev => ev.DataBound("onDataBound"))
+        .DataSource(dataSource => dataSource
+            .Batch(true)
+            .Read(read => read.Action("All_InCell", "TreeList"))
+            .Create(create => create.Action("Create_InCell", "TreeList").Type(HttpVerbs.Post))
+            .Update(update => update.Action("Update_InCell", "TreeList").Type(HttpVerbs.Post))
+            .Destroy(delete => delete.Action("Destroy_InCell", "TreeList").Type(HttpVerbs.Post))
+            .Model(m =>
+            {
+                m.Id(f => f.EmployeeId);
+                m.ParentId(f => f.ReportsTo);
+            })
         )
-        <script>
-            // The following code removes the 'Add child' button from the new records,
-            // because they will receive an ID after saving the changes, which means that
-            // no child records can be added until that.
-            function onDataBound(e) {
-                var items = e.sender.items();
-                for (var i = 0; i < items.length; i++) {
-                    var row = $(items[i]);
-                    var dataItem = e.sender.dataItem(row);
-                    if (dataItem.isNew()) {
-                        row.find("[data-command='createchild']").hide();
-                    }
-                    else {
-                        row.find("[data-command='createchild']").show();
-                    }
+    )
+    <script>
+        // The following code removes the 'Add child' button from the new records,
+        // because they will receive an ID after saving the changes, which means that
+        // no child records can be added until that.
+        function onDataBound(e) {
+            var items = e.sender.items();
+            for (var i = 0; i < items.length; i++) {
+                var row = $(items[i]);
+                var dataItem = e.sender.dataItem(row);
+                if (dataItem.isNew()) {
+                    row.find("[data-command='createchild']").hide();
+                }
+                else {
+                    row.find("[data-command='createchild']").show();
                 }
             }
-        </script>
-
+        }
+    </script>
+```
 ## See Also
 
 * [Incell Editing by the TreeList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treelist/editing-incell)

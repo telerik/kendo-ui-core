@@ -1,7 +1,7 @@
 ---
 title:  Razor Pages
 page_title: Configure a DataSource for the TreeList for Remote Binding in Razor Pages.
-description: "An example on how to configure the remote binding DataSource to populate the Telerik UI TreeList HtmlHelper for {{ site.framework }} in a Razor Pages using CRUD Operations."
+description: "An example on how to configure the remote binding DataSource to populate the Telerik UI TreeList component for {{ site.framework }} in a Razor Pages using CRUD Operations."
 slug: htmlhelpers_treelist_razorpage_aspnetcore
 position: 1
 ---
@@ -19,71 +19,71 @@ To set up the TreeList component bindings:
 
 See the implementation details in the example below. For the complete project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
-@page
-@model Telerik.Examples.RazorPages.Pages.TreeList.TreeListCrudOperationsModel
-@{
-    ViewData["Title"] = "TreeListCrudOperations";
-}
+```HtmlHelper
+    @page
+    @model Telerik.Examples.RazorPages.Pages.TreeList.TreeListCrudOperationsModel
+    @{
+        ViewData["Title"] = "TreeListCrudOperations";
+    }
 
-@using Telerik.Examples.RazorPages.Models
+    @using Telerik.Examples.RazorPages.Models
 
-@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
-@Html.AntiForgeryToken()
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @Html.AntiForgeryToken()
 
-@(Html.Kendo().TreeList<EmployeeDirectoryModel>()
-    .Name("treelist")
-    .Toolbar(toolbar => toolbar.Create())
-    .Columns(columns =>
-    {
-        columns.Add().Field(e => e.FirstName).Title("First Name").Width(220);
-        columns.Add().Field(e => e.LastName).Title("Last Name").Width(200);
-        columns.Add().Field(e => e.Position);
-        columns.Add().Field(e => e.HireDate).Format("{0:MMMM d, yyyy}");
-        columns.Add().Width(350).Command(c =>
+    @(Html.Kendo().TreeList<EmployeeDirectoryModel>()
+        .Name("treelist")
+        .Toolbar(toolbar => toolbar.Create())
+        .Columns(columns =>
         {
-            c.CreateChild().Text("Add child");
-            c.Edit();
-            c.Destroy();
+            columns.Add().Field(e => e.FirstName).Title("First Name").Width(220);
+            columns.Add().Field(e => e.LastName).Title("Last Name").Width(200);
+            columns.Add().Field(e => e.Position);
+            columns.Add().Field(e => e.HireDate).Format("{0:MMMM d, yyyy}");
+            columns.Add().Width(350).Command(c =>
+            {
+                c.CreateChild().Text("Add child");
+                c.Edit();
+                c.Destroy();
+            })
+            .HtmlAttributes(new
+            {
+                style = "text-align: center;"
+            });
         })
-        .HtmlAttributes(new
-        {
-            style = "text-align: center;"
-        });
-    })
-    .Editable()
-    .DataSource(dataSource => dataSource
-        .Read(r => r.Url("/TreeList/TreeListCrudOperations?handler=Read").Data("forgeryToken")) // Specify the url to the OnPostRead method.
-        .Update(u => u.Url("/TreeList/TreeListCrudOperations?handler=Update").Data("forgeryToken"))
-        .Create(c => c.Url("/TreeList/TreeListCrudOperations?handler=Create").Data("forgeryToken"))
-        .Destroy(d => d.Url("/TreeList/TreeListCrudOperations?handler=Destroy").Data("forgeryToken"))
-        .Model(m =>
-        {
-            m.Id(f => f.EmployeeId); // Provide the Id property of the model.
-            m.ParentId(f => f.ReportsTo); // Provide the Child Id property of the model.
-            m.Expanded(true); // Set to true if you want the TreeList to be expanded by default.
-            m.Field(f => f.FirstName);
-            m.Field(f => f.LastName);
-            m.Field(f => f.ReportsTo);
-            m.Field(f => f.HireDate);
-            m.Field(f => f.Position);
-        })
+        .Editable()
+        .DataSource(dataSource => dataSource
+            .Read(r => r.Url("/TreeList/TreeListCrudOperations?handler=Read").Data("forgeryToken")) // Specify the url to the OnPostRead method.
+            .Update(u => u.Url("/TreeList/TreeListCrudOperations?handler=Update").Data("forgeryToken"))
+            .Create(c => c.Url("/TreeList/TreeListCrudOperations?handler=Create").Data("forgeryToken"))
+            .Destroy(d => d.Url("/TreeList/TreeListCrudOperations?handler=Destroy").Data("forgeryToken"))
+            .Model(m =>
+            {
+                m.Id(f => f.EmployeeId); // Provide the Id property of the model.
+                m.ParentId(f => f.ReportsTo); // Provide the Child Id property of the model.
+                m.Expanded(true); // Set to true if you want the TreeList to be expanded by default.
+                m.Field(f => f.FirstName);
+                m.Field(f => f.LastName);
+                m.Field(f => f.ReportsTo);
+                m.Field(f => f.HireDate);
+                m.Field(f => f.Position);
+            })
+        )
+        .Height(540)
     )
-    .Height(540)
-)
 
-<script>
-    function forgeryToken() {
-        return kendo.antiForgeryTokens();
-    }
-</script>
+    <script>
+        function forgeryToken() {
+            return kendo.antiForgeryTokens();
+        }
+    </script>
 
-<style>
-    .k-treelist .k-command-cell .k-button {
-        min-width: 0px;
-        padding: 10px 10px 10px 10px;
-    }
-</style>
+    <style>
+        .k-treelist .k-command-cell .k-button {
+            min-width: 0px;
+            padding: 10px 10px 10px 10px;
+        }
+    </style>
 ```
 
 ```tab-PageModel(cshtml.cs)

@@ -1,7 +1,7 @@
 ---
 title: Using FontAwesome Icons
 page_title: Using FontAwesome Icons
-description: "Learn how to use Fontawesome icons in the Telerik UI ToolBar HtmlHelper for {{ site.framework }}."
+description: "Learn how to use Fontawesome icons in the Telerik UI ToolBar component for {{ site.framework }}."
 slug: htmlhelpers_use_fontawesome_icons_aspnetcore
 position: 4
 ---
@@ -14,7 +14,7 @@ The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/
 
 [Open the example below in REPL](https://netcorerepl.telerik.com/cPFPkzPo13LZXYbf45)
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().ToolBar()
                 .Name("toolbar")
                 .Items(items =>

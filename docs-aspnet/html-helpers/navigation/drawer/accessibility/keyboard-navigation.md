@@ -1,7 +1,7 @@
 ---
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Learn how to use the keyboard navigation functionality of the Telerik UI Drawer HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the keyboard navigation functionality of the Telerik UI Drawer component for {{ site.framework }}."
 previous_url: /html-helpers/navigation/drawer/keyboard-navigation
 slug: htmlhelpers_drawer_keyboardnavigation_aspnetcore
 position: 2

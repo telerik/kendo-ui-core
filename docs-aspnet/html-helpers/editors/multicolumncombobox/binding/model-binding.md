@@ -1,7 +1,7 @@
 ---
 title: Model Binding
 page_title: Model Binding
-description: "Learn how to implement model binding with Telerik UI MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement model binding with Telerik UI MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/binding/model-binding
 slug: modelbinding_multicolumncombobox_aspnetmvc
 position: 6
@@ -41,7 +41,7 @@ Local data is the data that is available on the client when the MultiColumnCombo
 
 1. Add the MultiColumnComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
-    ```Razor
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)
@@ -84,7 +84,7 @@ You can configure the MultiColumnComboBox to get its data from a remote source b
 
 1. Add the MultiColumnComboBox to the view and configure its DataSource to use remote data.
 
-    ```Razor
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiColumnComboBoxFor(m => m.ProductID)

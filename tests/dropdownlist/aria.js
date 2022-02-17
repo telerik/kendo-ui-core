@@ -45,11 +45,11 @@
                 axeRunFixture(done);
             });
 
-            // Fails because of the aria-expanded attribute on a role="textbox" element
             it("DropDownList with search term is accessible", function(done) {
                 var ddl = new DropDownList(input, {
                     dataSource: ["Item"],
-                    filter: "contains"
+                    filter: "contains",
+                    animation: false
                 });
 
                 ddl.search("I");
@@ -57,12 +57,15 @@
                 axeRunFixture(done);
             });
 
-            it("DropDownList with search term has accessible popup", function(done) {
+            it("DropDownList with filter input has accessible popup", function(done) {
                 var ddl = new DropDownList(input, {
-                    dataSource: ["Item"]
+                    dataSource: ["Item"],
+                    filter: "contains",
+                    animation: false,
+                    filterTitle: "search"
                 });
 
-                ddl.search("I");
+                ddl.open();
 
                 axeRun(ddl.popup.element[0], done);
             });
@@ -80,10 +83,11 @@
                 var ddl = new DropDownList(input, {
                     dataSource: ["Item"],
                     footerTemplate: 'Total items found',
-                    headerTemplate: 'Total items found'
+                    headerTemplate: 'Total items found',
+                    animation: false
                 });
 
-                ddl.search("I");
+                ddl.open();
 
                 axeRun(ddl.popup.element[0], done);
             });

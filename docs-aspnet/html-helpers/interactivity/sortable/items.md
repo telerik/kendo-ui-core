@@ -1,7 +1,7 @@
 ---
 title: Items
 page_title: Items
-description: "Disable, filter, and drag items within containers and between lists when working with the Telerik UI Sortable HtmlHelper for {{ site.framework }}."
+description: "Disable, filter, and drag items within containers and between lists when working with the Telerik UI Sortable component for {{ site.framework }}."
 slug: htmlhelpers_sortable_aspnetcore_items
 position: 3
 ---
@@ -14,7 +14,7 @@ The Sortable provides options for controlling the behavior of its items.
 
 To make items non-sortable, disable them by providing a selector that matches these items. As a result, the user will not be able to drag the disabled non-sortable items, or to change their position. However, they will still be valid sort targets.
 
-```
+```HtmlHelper
 	@(Html.Kendo().Sortable()
     	.For("#sortable-basic")
     	.Disable(".disable")
@@ -25,7 +25,7 @@ To make items non-sortable, disable them by providing a selector that matches th
 
 To prevent items both from being dragged and being sort targets, specify a filter.
 
-```
+```HtmlHelper
 	@(Html.Kendo().Sortable()
     	.For("#sortable-basic")
     	.Filter(".sortable")
@@ -42,7 +42,7 @@ If the axis is set to `"x"` or `"y"`, the Sortable will start operating in an ax
 
 To enable the dragging of items between two lists, create a Sortable for each list and use the `ConnectWith` configuration in both Sortable components.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sortable()
         .For("#sortable-listA")
         .ConnectWith("#sortable-listB")

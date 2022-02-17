@@ -12,7 +12,7 @@ The RadioGroup supports two types of [`layout`](/api/javascript/ui/radiogroup/co
 
 The following example shows how to set the RadioGroup layout:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().RadioGroup()
         .Name("radiogroup")        
         .BindTo(new[] { "English", "German", "Italian", "Russian", "Spanish" })
@@ -20,6 +20,15 @@ The following example shows how to set the RadioGroup layout:
         .Value("Italian")
     ) 
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radiogroup name="radiogroup"
+        radio-name="radiogroup"        
+        layout="RadioGroupLayout.Horizontal"
+        bind-to="Model.Items">
+    </kendo-radiogroup>
+```
+{% endif %}
 
 ## See Also
 

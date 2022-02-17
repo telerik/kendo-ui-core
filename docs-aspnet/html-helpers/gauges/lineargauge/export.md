@@ -1,7 +1,7 @@
 ---
 title: Export
 page_title: Export
-description: "Learn the Export Options of the Telerik UI LinearGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Export Options of the Telerik UI LinearGauge component for {{ site.framework }}."
 slug: export_lineargaugehelper_aspnetcore
 position: 4
 ---
@@ -20,7 +20,7 @@ The Telerik UI LinearGauge for {{ site.framework }} export relies on the [Teleri
 
 The linear gauge allows you to retrieve the PDF representation of the content via the [exportPDF method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge/methods/exportpdf). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-pdf k-button'>Export as PDF</button>
 
     @(Html.Kendo().LinearGauge()
@@ -54,7 +54,7 @@ The linear gauge allows you to retrieve the PDF representation of the content vi
 
 The linear gauge allows you to retrieve the Image representation of the content via the [exportImage method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge/methods/exportimage). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-img k-button'>Export as Image</button>
 
     @(Html.Kendo().LinearGauge()
@@ -88,7 +88,7 @@ The linear gauge allows you to retrieve the Image representation of the content 
 
 The linear gauge allows you to retrieve the Scalable Vector Graphics (SVG) representation of the content via the [exportSVG method](https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/lineargauge/methods/exportsvg). The `base64` result can be forwarded to a service or downloaded on the client-side.
 
-```        
+```HtmlHelper        
     <button class='export-svg k-button'>Export as SVG</button>
 
     @(Html.Kendo().LinearGauge()

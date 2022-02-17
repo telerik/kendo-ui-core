@@ -16,6 +16,7 @@ A single instance resource is a resource of which only one instance can be assig
 
 The following example demonstrates how to use a single instance resource.
 
+```HtmlHelper
     .Resources(r => r.Add()
         .Field("Priority")
         .DataColorField("Color")
@@ -30,6 +31,7 @@ The following example demonstrates how to use a single instance resource.
             }
         )
     )
+```
 
 In the example, each task can have a single priority, and the Priority field value in the card data associates it with the respective resource that has the same value.
 
@@ -41,6 +43,7 @@ A multiple instance resource is a resource of which more than one instance can b
 
 The following example demonstrates how to use a multiple instance resource. 
 
+```HtmlHelper
     .Resources(r => r.Add()
         .Field("Tags")
         .DataColorField("Color")
@@ -57,6 +60,7 @@ The following example demonstrates how to use a multiple instance resource.
             }
         )
     )
+```
 
 In the example, each issue can have different tags at the same time, for example, `bug`, `client-side`, `high severity`. The `Tags` field in the issues data should be a collection of different tags. Issues with tags that match the Value field of the resources will be associated with the respective resources.
 

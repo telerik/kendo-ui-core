@@ -1,7 +1,7 @@
 ---
 title: Groups
 page_title: Groups
-description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn how to set up groups."
+description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn how to set up groups."
 slug: htmlhelpers_form_aspnetcore_groups
 position: 5
 ---
@@ -12,7 +12,7 @@ The grouping functionality of the Form allows you to create more intuitive forms
 
 The following example shows a Form configured to display its editors in two groups.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<Kendo.Mvc.Examples.Models.Form.FormOrderViewModel>()
         .Name("exampleForm")
         .HtmlAttributes(new { action = "Groups", method = "POST" })
@@ -81,6 +81,37 @@ The following example shows a Form configured to display its editors in two grou
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-form name="exampleForm" form-data="@Model" method="POST" asp-action="Items">
+        <validatable validate-on-blur="true" validation-summary="true" />
+        <form-items>
+            <form-item type="group">
+                <item-label text="Registration Form" />
+                <form-items>
+                    <form-item field="TextBox">
+                        <item-label text="TextBox:"/>
+                        <textbox-editor placeholder="TextBox"></textbox-editor>
+                    </form-item>
+                    <form-item field="NumericTextBox">
+                        <item-label text="NumericTextBox:" />
+                        <numerictextbox-editor></numerictextbox-editor>
+                    </form-item>  
+                </form-items>
+            </form-item>
+            <form-item type="group">
+                 <form-item field="MaskedTextBox">
+                        <item-label text="MaskedTextBox:" optional="true" />
+                        <maskedtextbox-editor></maskedtextbox-editor>
+                    </form-item>
+                    <form-item field="DatePicker">
+                        <item-label text="DatePicker:" optional="true" />
+                    </form-item>
+            </form-item>
+        </form-items>
+    </kendo-form>
+```
+{% endif %}
 
 > The Form does not support group nesting.
 

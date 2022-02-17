@@ -1,25 +1,32 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI DropDownList component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/dropdownlist, /helpers/editors/dropdownlist/overview
 slug: htmlhelpers_dropdownlist_aspnetcore
 position: 0
 ---
 
-# DropDownList HtmlHelper Overview
+# DropDownList Overview
 
+{% if site.core %}
+The Telerik UI DropDownList TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI DropDownList widget.
+{% else %}
 The Telerik UI DropDownList HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI DropDownList widget.
+{% endif %}
 
 The DropDownList displays a list of values and allows for a single selection from the list. The user input is restricted within the predefined options.
 
-* [Demo page for the DropDownList](https://demos.telerik.com/{{ site.platform }}/dropdownlist/index)
+* [Demo page for the DropDownList HtmlHelper](https://demos.telerik.com/{{ site.platform }}/dropdownlist/index)
+{% if site.core %}
+* [Demo page for the DropDownList TagHelper](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
+{% endif %}
 
 ## Initializing the DropDownList
 
-The following example demonstrates how to define the DropDownList by using the DropDownList HtmlHelper.
+The following example demonstrates how to define the DropDownList.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DropDownList()
         .Name("dropdownlist")
         .DataTextField("ProductName")
@@ -32,6 +39,11 @@ The following example demonstrates how to define the DropDownList by using the D
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdownlist name="products" filter="FilterType.StartsWith"></kendo-dropdownlist>
+```
+{% endif %}
 ```Controller
 
     public class DropDownListController : Controller
@@ -56,9 +68,60 @@ The following example demonstrates how to define the DropDownList by using the D
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration of the DropDownList HtmlHelper and how to get the DropDownList instance.
+The DropDownList configuration options are passed as attributes.
 
+{% if site.core %}
+```HtmlHelper
+    @(Html.Kendo().DropDownList()
+          .Name("products")
+          .DataTextField("ProductName")
+          .DataValueField("ProductID")
+          .HtmlAttributes(new { style = "width:100%;" })
+          .Filter(FilterType.Contains)
+          .DataSource(source => source
+              .Read(read => read.Action("GetProducts", "Home"))
+          )
+    )
 ```
+```TagHelper
+    <kendo-dropdownlist name="products" filter="FilterType.Contains"
+                        placeholder="Select product"
+                        datatextfield="ProductName"
+                        datavaluefield="ProductID"
+                        style="width: 100%;">
+        <datasource type="DataSourceTagHelperType.Custom">
+            <transport>
+                <read url="@Url.Action("GetProducts", "Home")" />
+            </transport>
+        </datasource>
+    </kendo-dropdownlist>
+```
+```Controller
+    public JsonResult GetProducts(string text)
+    {
+        using (var northwind = GetContext())
+        {
+            var products = northwind.Products.Select(product => new ProductViewModel
+            {
+                ProductID = product.ProductID,
+                ProductName = product.ProductName,
+                UnitPrice = product.UnitPrice.Value,
+                UnitsInStock = product.UnitsInStock.Value,
+                UnitsOnOrder = product.UnitsOnOrder.Value,
+                Discontinued = product.Discontinued
+            });
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                products = products.Where(p => p.ProductName.Contains(text));
+            }
+
+            return Json(products.ToList());
+        }
+    }
+```
+{% else %}
+```HtmlHelper
     @(Html.Kendo().DropDownList()
         .Name("dropdownlist")
         .DataTextField("ProductName")
@@ -98,6 +161,7 @@ The following example demonstrates the basic configuration of the DropDownList H
         });
     </script>
 ```
+{% endif %}
 
 ## Functionality and Features
 
@@ -115,63 +179,68 @@ You can subscribe to all DropDownList events. For a complete example on basic Dr
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-        @(Html.Kendo().DropDownList()
-          .Name("dropdownlist")
-          .BindTo(new string[] { "Item1", "Item2", "Item3" })
-          .Events(e => e
-                .Select("dropdownlist_select")
-                .Change("dropdownlist_change")
-          )
+```HtmlHelper
+    @(Html.Kendo().DropDownList()
+        .Name("dropdownlist")
+        .BindTo(new string[] { "Item1", "Item2", "Item3" })
+        .Events(e => e
+            .Select("dropdownlist_select")
+            .Change("dropdownlist_change")
         )
-        <script>
-        function dropdownlist_select() {
-            // Handle the select event.
-        }
+    )
+    <script>
+    function dropdownlist_select() {
+        // Handle the select event.
+    }
 
-        function dropdownlist_change() {
-            // Handle the change event.
-        }
-        </script>
-
+    function dropdownlist_change() {
+        // Handle the change event.
+    }
+    </script>
+```
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-        @(Html.Kendo().DropDownList()
-          .Name("dropdownlist")
-          .BindTo(new string[] { "Item1", "Item2", "Item3" })
-          .Events(e => e
-              .Select(@<text>
-                function() {
-                    // Handle the select event inline.
-                }
-              </text>)
-              .Change(@<text>
-                function() {
-                    // Handle the change event inline.
-                }
-                </text>)
-          )
+```HtmlHelper
+    @(Html.Kendo().DropDownList()
+        .Name("dropdownlist")
+        .BindTo(new string[] { "Item1", "Item2", "Item3" })
+        .Events(e => e
+            .Select(@<text>
+            function() {
+                // Handle the select event inline.
+            }
+            </text>)
+            .Change(@<text>
+            function() {
+                // Handle the change event inline.
+            }
+            </text>)
         )
+    )
+```
 
 ### Getting the current value
 
 The following example demonstrates how to get the current value of a Kendo UI DropDownList in the Change Event handler.
 
-        @(Html.Kendo().DropDownList()
-          .Name("dropdownlist")
-          .BindTo(new string[] { "Item1", "Item2", "Item3" })
-          .Events(e => e
-            .Change("dropdownlist_change")
-          )
+```HtmlHelper
+    @(Html.Kendo().DropDownList()
+        .Name("dropdownlist")
+        .BindTo(new string[] { "Item1", "Item2", "Item3" })
+        .Events(e => e
+        .Change("dropdownlist_change")
         )
-<script>
-    function dropdownlist_change(e) {
-        console.log(e.sender.value());
-    }
-</script>
+    )
 
+    <script>
+        function dropdownlist_change(e) {
+            console.log(e.sender.value());
+        }
+    </script>
+```
 ## Referencing Existing Instances
 
 To reference an existing Telerik UI DropDownList instance, use the [`jQuery.data()`](http://api.jquery.com/jQuery.data/) configuration option. Once a reference is established, use the [DropDownList client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/dropdownlist#methods) to control its behavior.
@@ -187,5 +256,8 @@ To reference an existing Telerik UI DropDownList instance, use the [`jQuery.data
 ## See Also
 
 * [Basic Usage of the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist)
+{% if site.core %}
+* [Basic Usage of the DropDownList TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/dropdownlist/tag-helper)
+{% endif %}
 * [Using the API of the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/api)
 * [Server-Side API](/api/dropdownlist)

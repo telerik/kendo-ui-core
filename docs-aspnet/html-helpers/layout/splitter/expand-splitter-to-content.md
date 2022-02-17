@@ -1,7 +1,7 @@
 ---
 title: Auto-Resizing to Content
 page_title: Auto-Resizing to Content
-description: "Learn how to expand the Splitter to fit the content inside it using the Telerik UI Splitter HtmlHelper for {{ site.framework }}."
+description: "Learn how to expand the Splitter to fit the content inside it using the Telerik UI Splitter component for {{ site.framework }}."
 slug: htmlhelpers_expand_splitter_to_content_aspnetcore
 position: 3
 ---
@@ -14,7 +14,7 @@ You can expand the height of the Splitter based on the content inside a pane.
 2. Make sure that the parent content is resized when the content of the pane is rendered.
 3. Call the `resize` method to finalize the process.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Splitter()
                 .Name("vertical")
                 .Orientation(SplitterOrientation.Horizontal)

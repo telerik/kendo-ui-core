@@ -1,10 +1,10 @@
 ---
 title: Custom Binding
 page_title: Custom Binding
-description: "Learn how to implement custom binding with Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom binding with Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/grid/custom-binding, /helpers/data-management/grid/custom-binding, /helpers/data-management/grid/binding/custom-binding
 slug: custombinding_grid_aspnetmvc
-position: 5
+position: 7
 ---
 
 # Custom Binding
@@ -258,6 +258,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
 
 1. Configure the Grid for custom Ajax binding.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridCustomAjaxBinding.Models.Order>()
             .Name("Grid")
             .EnableCustomBinding(true)
@@ -273,6 +274,7 @@ To download the Visual Studio Project, refer to [this GitHub repository](https:/
                 .Read("Orders_Read", "Home")
             )
         )
+    ```
 
 {% if site.mvc %}
 To download the Visual Studio Project, refer to [this GitHub repository](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid/custom-ajax-binding).

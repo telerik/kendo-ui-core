@@ -14,7 +14,7 @@ To set up the ScrollView component bindings, you need to configure the `Create`,
 
 See the implementation details in the sample below. A complete project with Razor Pages examples is available in this [ASP.NET Core Examples repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
 @page
 @model Telerik.Examples.RazorPages.Pages.ScrollView.ScrollViewBindingModel
 

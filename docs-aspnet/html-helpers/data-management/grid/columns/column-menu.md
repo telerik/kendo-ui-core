@@ -19,7 +19,7 @@ By default, the Grid column titles in the child column menu are not sorted. They
 
 The below example demonstrates how to sort the column titles in the child menu in ascending order:
 
-```
+```HtmlHelper
     .ColumnMenu(menu=>
            menu.Columns(columns => columns.Sort("asc"))
     )
@@ -31,17 +31,29 @@ The `ColumnMenu()` method accepts a `GridColumnMenuSettingsBuilder` that enables
 
 The following example demonstrates how to group columns by providing the model fields in a list of strings:
 
-```
+```HtmlHelper
     .ColumnMenu(menu=>
            menu.Columns(columns => {
                columns.Groups(groups =>
                {
-                   groups.Add().Title("Order ID").Columns(new List<string> { "OrderID" }); ;
-                   groups.Add().Title("Address").Columns(new List<string> { "ShipCountry", "ShipName", "ShipAddress"});
+                   groups.Add().Title("Company Info").Columns(new List<string> { "CompanyName", "Country" }); ;
+                   groups.Add().Title("Contact Info").Columns(new List<string> { "ContactName", "ContactTitle" });
                });
            })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <column-menu>
+        <column-menu-columns sort="asc">
+            <column-menu-columns-groups>
+                <column-menu-columns-group title="Company Info" columns='new string[] { "CompanyName", "Country" }' />
+                <column-menu-columns-group title="Contact Info" columns='new string[] { "ContactName", "ContactTitle" }' />
+            </column-menu-columns-groups>
+        </column-menu-columns>
+    </column-menu>
+````
+{% endif %}
 
 ## Column Menu Types
 
@@ -49,7 +61,7 @@ As of R1 2021 version of the Telerik UI for {{ site.framework }} suite, the Grid
 
 By default, the column menu of the Grid is initialized in the `classic` render mode. To set it to `modern`, configure the options of the widget as follows:
 
-```
+```HtmlHelper
     @(Html.Kendo().Grid()
             .Name("datePicker")
             .ColumnMenu(m=>{

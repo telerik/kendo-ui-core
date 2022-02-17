@@ -6,26 +6,45 @@ slug: htmlhelpers_overview_textarea
 position: 1
 ---
 
-# TextArea HtmlHelper Overview
+# TextArea Overview
 
+{% if site.core %}
+The Telerik UI TextArea TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI TextArea widget.
+{% else %}
 The Telerik UI TextArea HtmlHelper for {{ site.framework }} is a server-side wrapper for the [Kendo UI TextArea](https://demos.telerik.com/kendo-ui/textarea/index) widget.
+{% endif %}
 
 The TextArea provides a set of [default API configuration options](/api/textarea) that can be set during its initialization such as value, placeholder, and so on.
 
-* [Demo page for the TextArea](https://demos.telerik.com/{{ site.platform }}/textarea/index)
+* [Demo page for the TextArea HtmlHelper](https://demos.telerik.com/{{ site.platform }}/textarea/index)
+{% if site.core %}
+* [Demo page for the TextArea TagHelper](https://demos.telerik.com/aspnet-core/textarea/tag-helper)
+{% endif %}
 
 ## Basic Configuration
 
 The following example demonstrates the basic configuration for the TextArea.
 
-```
+```HtmlHelper
 	@(Html.Kendo().TextArea()
 		.Name("textarea") // The name of the TextArea is mandatory. It specifies the "id" attribute of the TextArea.
 		.Value("John Doe") // Set the value of the TextArea.
         .Rows(5) // Sets the number of rows
 	)
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-textarea name="description" rows="5">
+        <label floating="true" content="Description"/>
+    </kendo-textarea>
 
+    <style>
+        .k-floating-label-container {
+            width: 100%;
+        }
+    </style>
+```
+{% endif %}
 ## Functionality and Features
 
 * [Labels]({% slug htmlhelpers_textarea_labels %})
@@ -37,7 +56,7 @@ Here is a [demo on using some basic events of the TextArea](https://demos.teleri
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
   @(Html.Kendo().TextArea()
         .Name("textarea")
         .Events(e => e
@@ -68,5 +87,8 @@ The following example demonstrates how to access an existing TextArea instance.
 ## See Also
 
 * [Basic Usage of the TextArea HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/index)
+{% if site.core %}
+* [Basic Usage of the TextArea TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/textarea/tag-helper)
+{% endif %}
 * [Using the API of the TextArea HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/textarea/api)
 * [Server-Side API](/api/textarea)

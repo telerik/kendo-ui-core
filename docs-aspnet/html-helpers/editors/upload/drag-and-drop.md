@@ -1,7 +1,7 @@
 ---
 title: Dragging and Dropping of Files
 page_title: Dragging and Dropping of Files
-description: "Learn about the file drag and drop functionality of the Telerik UI Upload HtmlHelper for {{ site.framework }}."
+description: "Learn about the file drag and drop functionality of the Telerik UI Upload component for {{ site.framework }}."
 slug: htmlhelpers_upload_drag_drop_aspnetcore
 position: 4
 ---
@@ -25,19 +25,19 @@ To use the Upload as a drop zone:
 
 You can initialize custom drop zones depending on a particular selector that provides the upload of a file through the drag-and-drop functionality.
 
-```
-<div class="dropZoneElement" style="height: 200px; width: 200px; border: 1px solid red;">
-</div>
+```HtmlHelper
+    <div class="dropZoneElement" style="height: 200px; width: 200px; border: 1px solid red;">
+    </div>
 
-@(Html.Kendo().Upload()
-    .Name("files")
-    .Async(a => a
-        .Save("Save", "Upload")
-        .Remove("Remove", "Upload")
-        .AutoUpload(true)
+    @(Html.Kendo().Upload()
+        .Name("files")
+        .Async(a => a
+            .Save("Save", "Upload")
+            .Remove("Remove", "Upload")
+            .AutoUpload(true)
+        )
+        .DropZone(".dropZoneElement")
     )
-    .DropZone(".dropZoneElement")
-)
 ```
 
 To customize the appearance of the drop zone during the process of dragging and dropping, note the following:

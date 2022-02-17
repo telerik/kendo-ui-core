@@ -1,3 +1,5 @@
+---
+title: Razor Pages
 page_title: The Telerik UI Filter in RazorPages
 description: "Telerik UI Filter for {{ site.framework }} in a RazorPages application."
 slug: razorpages_filterhelper_aspnetcore
@@ -17,33 +19,33 @@ To configure the Telerik UI Filter widget within a `RazorPage`:
 1. Configure the Read URL in the `DataSource`. The URL in these methods must refer to the method name in the `PageModel`:
 
 
-    ```
-    @(Html.Kendo().DataSource<CustomerViewModel>()
-        .Name("dataSource1")
-         .Ajax(t =>
-                 {
-             t.Read(r=>r.Url("/Filter/FilterBinding?handler=Customers").Data("forgeryToken"));
-             t.Model(model => model.Id(p => p.CustomerID));
-             t.PageSize(20);
-         })
-    )
+    ```HtmlHelper
+        @(Html.Kendo().DataSource<CustomerViewModel>()
+            .Name("dataSource1")
+                .Ajax(t =>
+                        {
+                    t.Read(r=>r.Url("/Filter/FilterBinding?handler=Customers").Data("forgeryToken"));
+                    t.Model(model => model.Id(p => p.CustomerID));
+                    t.PageSize(20);
+                })
+        )
 
-    @(Html.Kendo().Filter<CustomerViewModel>()
-      .Name("filter")
-      .ApplyButton(true)
-      .ExpressionPreview(true)
-      .Fields(f =>
-      {
-          f.Add(p=>p.CustomerID);
-          f.Add(p=>p.Position);
-          f.Add(p=>p.CompanyName);
-          f.Add(p=>p.Country);
-      })
-      .FilterExpression(f => {
-          f.Add(p => p.Position).IsEqualTo("Sales Representative");
-      })
-      .DataSource("dataSource1")
-    )
+        @(Html.Kendo().Filter<CustomerViewModel>()
+            .Name("filter")
+            .ApplyButton(true)
+            .ExpressionPreview(true)
+            .Fields(f =>
+            {
+                f.Add(p=>p.CustomerID);
+                f.Add(p=>p.Position);
+                f.Add(p=>p.CompanyName);
+                f.Add(p=>p.Country);
+            })
+            .FilterExpression(f => {
+                f.Add(p => p.Position).IsEqualTo("Sales Representative");
+            })
+            .DataSource("dataSource1")
+        )
     ```
 
 1. Add an AntiForgeryToken at the top of the RazorPage:

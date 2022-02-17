@@ -1,7 +1,7 @@
 ---
 title: PDF Export
 page_title: Editor PDF Export
-description: "Learn about the export capabilities of the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn about the export capabilities of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_pfd_export_aspnetcore
 position: 13
 ---
@@ -10,7 +10,7 @@ position: 13
 
 The Telerik UI Editor for {{ site.framework }} comes with a built-in option to export its content to PDF. To enable the PDF export, add the `Pdf` tool to the widget' toolbox:
 
-````CSHTML
+````HtmlHelper
     @(Html.Kendo().Editor()
             .Name("editor")
             .Tools(tools => tools
@@ -21,7 +21,7 @@ The Telerik UI Editor for {{ site.framework }} comes with a built-in option to e
 
 Customizations such as file name, font size, export of all pages can be added to the [`Pdf`](/api/Kendo.Mvc.UI.Fluent/EditorPdfSettingsBuilder) option of the widget:
 
-````CSHTML
+````HtmlHelper
     @(Html.Kendo().Editor()
         .Name("editor")
         .Pdf(pdf => pdf

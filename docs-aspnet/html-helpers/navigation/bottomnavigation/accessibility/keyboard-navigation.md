@@ -1,7 +1,7 @@
 ---
 title:  Keyboard Navigation
 page_title: Keyboard Navigation
-description: "Learn how to use the keyboard navigation functionality of the Telerik BottomNavigation HtmlHelper for {{ site.framework }}."
+description: "Learn how to use the keyboard navigation functionality of the Telerik BottomNavigation component for {{ site.framework }}."
 slug: htmlhelpers_bottomnavigation_keyboardnavigation_aspnetcore
 position: 2
 ---

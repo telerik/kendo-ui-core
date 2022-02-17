@@ -1,7 +1,7 @@
 ---
 title: Virtualization
 page_title: Virtualization
-description: "Implement virtualization in a model-bound Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Implement virtualization in a model-bound Telerik UI AutoComplete component for {{ site.framework }}."
 previous_url: /helpers/editors/autocomplete/virtualization
 slug: virtualization_autocomplete_aspnetcore
 position: 4
@@ -65,55 +65,56 @@ You can configure an AutoComplete to use virtualization.
 
 1. Add the AutoComplete to the view and configure it to use virtualization.
 
-            @model MvcApplication1.Models.ProductViewModel
+    ```HtmlHelper
+        @model MvcApplication1.Models.ProductViewModel
 
-            @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
-                .Filter("contains")
-                .DataTextField("ProductName")
-                .DataSource(source =>
-                {
-                    source.Custom()
-                        .ServerFiltering(true)
-                        .ServerPaging(true)
-                        .PageSize(80)
-                        .Type("aspnetmvc-ajax")
-                        .Transport(transport =>
-                        {
-                            transport.Read("ProductsVirtualization_Read", "Home");
-                        })
-                        .Schema(schema =>
-                        {
-                            schema.Data("Data")
-                                    .Total("Total");
-                        });
-                })
-                .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
-            )
-
-            <script>
-                function valueMapper(options) {
-                    $.ajax({
-                        url: "@Url.Action("Products_ValueMapper", "Home")",
-                        data: convertValues(options.value),
-                        success: function (data) {
-                            options.success(data);
-                        }
+        @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+            .Filter("contains")
+            .DataTextField("ProductName")
+            .DataSource(source =>
+            {
+                source.Custom()
+                    .ServerFiltering(true)
+                    .ServerPaging(true)
+                    .PageSize(80)
+                    .Type("aspnetmvc-ajax")
+                    .Transport(transport =>
+                    {
+                        transport.Read("ProductsVirtualization_Read", "Home");
+                    })
+                    .Schema(schema =>
+                    {
+                        schema.Data("Data")
+                                .Total("Total");
                     });
-                }
+            })
+            .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+        )
 
-                function convertValues(value) {
-                    var data = {};
-
-                    value = $.isArray(value) ? value : [value];
-
-                    for (var idx = 0; idx < value.length; idx++) {
-                        data["values[" + idx + "]"] = value[idx];
+        <script>
+            function valueMapper(options) {
+                $.ajax({
+                    url: "@Url.Action("Products_ValueMapper", "Home")",
+                    data: convertValues(options.value),
+                    success: function (data) {
+                        options.success(data);
                     }
+                });
+            }
 
-                    return data;
+            function convertValues(value) {
+                var data = {};
+
+                value = $.isArray(value) ? value : [value];
+
+                for (var idx = 0; idx < value.length; idx++) {
+                    data["values[" + idx + "]"] = value[idx];
                 }
-            </script>
 
+                return data;
+            }
+        </script>
+    ```
 ## See Also
 
 * [Virtualization by the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/virtualization)

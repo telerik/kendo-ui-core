@@ -1,7 +1,7 @@
 ---
 title: Aggregates
 page_title: Aggregates
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and group its data by using aggregate functions."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and group its data by using aggregate functions."
 slug: htmlhelpers_treelist_aspnetcore_aggregates
 position: 3
 ---

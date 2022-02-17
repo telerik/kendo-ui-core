@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use filtering in the Telerik UI DropDownTree HtmlHelper for {{ site.framework }}."
+description: "Use filtering in the Telerik UI DropDownTree component for {{ site.framework }}."
 slug: htmlhelpers_dropdowntree_templates_aspnetcore
 position: 6
 ---
@@ -16,7 +16,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The following example demonstrates how to customize the DropDownTree by declaring an inline string.
 
-```
+```HtmlHelper
     <!-- DropDownTree initialization -->
     @(Html.Kendo().DropDownTree()
         .Name("dropdowntree")
@@ -30,7 +30,7 @@ The following example demonstrates how to customize the DropDownTree by declarin
 
 The following example demonstrates how to customize the DropDownTree by referencing a script tag by its `id`.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="dropdowntree-template" type="text/kendo-ui-template">
         #: item.text #
@@ -53,7 +53,7 @@ The item template manages the way the nodes in the DropDownTree are rendered.
 
 The following example demonstrates how to define an item template and how to evaluate it against the `dataItem`.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="dropdowntree-template" type="text/kendo-ui-template">
         #: item.text #
@@ -74,7 +74,7 @@ The following example demonstrates how to define an item template and how to eva
 
 The value template manages the way the selected items in the input area of the DropDownTree are rendered.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="dropdowntree-value-template" type="text/kendo-ui-template">
         <span class="k-sprite #: spriteCssClass #"></span>
@@ -97,7 +97,7 @@ The value template manages the way the selected items in the input area of the D
 
 The header template manages the way the pop-up header of a DropDownTree is rendered.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="dropdowntree-header-template" type="text/kendo-ui-template">
         <strong>Header</strong>
@@ -118,7 +118,7 @@ The header template manages the way the pop-up header of a DropDownTree is rende
 
 The footer template manages the way the pop-up footer of a DropDownTree is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="dropdowntree-footer-template" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
@@ -139,7 +139,7 @@ The footer template manages the way the pop-up footer of a DropDownTree is rende
 
 The DropDownTree displays `noDataTemplate` in the popup when the data source is empty.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="dropdowntree-nodata-template" type="text/x-kendo-template">
         <strong>No Data!</strong>

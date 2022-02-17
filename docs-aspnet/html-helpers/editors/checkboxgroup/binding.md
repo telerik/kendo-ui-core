@@ -1,19 +1,20 @@
 ---
 title: Binding
 page_title: Binding
-description: "Learn how to implement data binding with Telerik UI CheckBoxGroup HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement data binding with Telerik UI CheckBoxGroup component for {{ site.framework }}."
 slug: htmlhelpers_checkboxgroup_binding_aspnetcore
 position: 2
 ---
 
 # Binding
 
-When using the Html helpers you can bind the checkbox items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
+When using the helpers, you can bind the checkbox items by using the [Items()](#items) method or the [BindTo()](#bindto) method.
 
-## Items method
+## Items Method
 
 The example below demonstrates how to use the Items() method to configure the checkboxes in the CheckBoxGroup widget.
 
+```HtmlHelper
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")
         .Items(i =>
@@ -24,9 +25,21 @@ The example below demonstrates how to use the Items() method to configure the ch
         })
         .Value(new string[] { "1" })
     )
+```
+{% if site.core %}
+```tagHelper
+   <kendo-checkboxgroup name="checkboxgroup">
+        <kendo-checkboxgroup-items>
+            <kendo-checkboxgroup-item value="one" label="First">
+            </kendo-checkboxgroup-item>
+            <kendo-checkboxgroup-item value="two" label="Second">
+            </kendo-checkboxgroup-item>
+        </kendo-checkboxgroup-items>
+    </kendo-checkboxgroup>
+```
+{% endif %}
 
-
-## BindTo method
+## BindTo Method
 
 You can configure the items in the CheckBoxGroup widget by using the BindTo method.
 
@@ -82,6 +95,7 @@ You can configure the items in the CheckBoxGroup widget by using the BindTo meth
 
 1. Add the CheckBoxGroup to the view and bind it to a property of the view model.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.CheckBoxGroupViewModel
 
         @(Html.Kendo().CheckBoxGroup()
@@ -89,6 +103,17 @@ You can configure the items in the CheckBoxGroup widget by using the BindTo meth
             .BindTo(Model.Items)
 			.Value(Model.CheckBoxGroupValue)
         )
+    ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.CheckBoxGroupViewModel
+
+        <kendo-checkboxgroup name="checkboxgroup"
+                      input-name="checkboxItem"
+                      bind-to="Model.Items">
+        </kendo-checkboxgroup>
+    ```
+    {% endif %}
 
 ## See Also
 

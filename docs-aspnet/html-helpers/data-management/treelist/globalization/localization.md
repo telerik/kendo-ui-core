@@ -1,7 +1,7 @@
 ---
 title: Localization
 page_title: Localization
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} and learn about the localization options it supports."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} and learn about the localization options it supports."
 slug: htmlhelpers_treelist_aspnetcore_localization_overview
 position: 2
 ---

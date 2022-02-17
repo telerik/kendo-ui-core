@@ -1,15 +1,19 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI ColorPalette HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI ColorPalette component for {{ site.framework }}."
 previous_url: /helpers/editors/colorpalette/overview
 slug: overview_colorpalettehelper_aspnetcore
 position: 1
 ---
 
-# ColorPalette HtmlHelper Overview
+# ColorPalette Overview
 
+{% if site.core %}
+The Telerik UI ColorPalette TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ColorPalette widget.
+{% else %}
 The Telerik UI ColorPalette HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ColorPalette widget.
+{% endif %}
 
 The ColorPalette provides suggestions depending on the typed text and allows multiple value entries.
 
@@ -17,9 +21,9 @@ The ColorPalette provides suggestions depending on the typed text and allows mul
 
 ## Initializing the ColorPalette
 
-The following example demonstrates how to define the ColorPalette by using the ColorPalette HtmlHelper.
+The following example demonstrates how to define the ColorPalette.
 
-```
+```HtmlHelper
     @(Html.Kendo().ColorPalette()
           .Name("colorpalette") // The name of the ColorPalette is mandatory. It specifies the "id" attribute of the widget.
           .Value("#ff0000") // Set the value of the ColorPalette.
@@ -34,7 +38,7 @@ You can subscribe to all ColorPalette [events](https://docs.telerik.com/kendo-ui
 
 The following example demonstrates how to subscribe to events by a handler name.
 
-```
+```HtmlHelper
     @(Html.Kendo().ColorPalette()
         .Name("colorpalette")
         .Events(e => e
@@ -54,7 +58,7 @@ The following example demonstrates how to subscribe to events by a handler name.
 
 The following example demonstrates how to subscribe to events by a template delegate.
 
-```
+```HtmlHelper
     @(Html.Kendo().ColorPalette()
           .Name("colorpalette")
           .Events(e => e

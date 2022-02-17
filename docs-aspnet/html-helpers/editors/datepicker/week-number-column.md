@@ -12,7 +12,7 @@ The DatePicker provides options for rendering a column which displays the number
 
 To render the week number column, enable the [`WeekNumber`](/api/Kendo.Mvc.UI.Fluent/DatePickerBuilder#weeknumbersystemboolean) property.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().DatePicker()
         .Name("datepicker")
         .WeekNumber(true)

@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use templates and customize the rendering of the items, popup header and footer of the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Use templates and customize the rendering of the items, popup header and footer of the Telerik UI DropDownList component for {{ site.framework }}."
 slug: htmlhelpers_autocomplete_templates_aspnetcore
 position: 3
 ---
@@ -16,7 +16,7 @@ For more information on the capabilities and syntax of the templates, refer to t
 
 The following example demonstrates how to customize the AutoComplete by declaring an inline string.
 
-```
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataTextField("ContactName")
@@ -33,7 +33,7 @@ The following example demonstrates how to customize the AutoComplete by declarin
 
 The following example demonstrates how to customize the AutoComplete by referencing a script tag by its `id`.
 
-```
+```HtmlHelper
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -60,6 +60,7 @@ The item template manages the way the list items of a AutoComplete are rendered.
 
 The following example demonstrates how to define an item template and how to evaluate it against the dataItem.
 
+```HtmlHelper
     <!-- Template -->
     <script id="itemTemplate" type="text/x-kendo-template">
         ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
@@ -78,11 +79,13 @@ The following example demonstrates how to define an item template and how to eva
             });
         })
     )
+```
 
 ## Header Template
 
 The header template manages the way the popup header of a AutoComplete is rendered.
 
+```HtmlHelper
     <!-- Template -->
     <script id="headerTemplate" type="text/x-kendo-template">
         <strong>Header</strong>
@@ -101,11 +104,13 @@ The header template manages the way the popup header of a AutoComplete is render
             });
         })
     )
+```
 
 ## Footer Template
 
 The footer template manages the way the popup footer of a AutoComplete is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
+```HtmlHelper
     <!-- Template -->
     <script id="footerTemplate" type="text/x-kendo-template">
         Total <strong>#: instance.dataSource.total() #</strong> items found
@@ -124,11 +129,13 @@ The footer template manages the way the popup footer of a AutoComplete is render
             });
         })
     )
+```
 
 ## No-Data Templates
 
 The AutoComplete displays `noDataTemplate` in the popup when the data source is empty.
 
+```HtmlHelper
     <!-- Template -->
     <script id="noDataTemplate" type="text/x-kendo-template">
         <strong>No Data!</strong>
@@ -147,6 +154,7 @@ The AutoComplete displays `noDataTemplate` in the popup when the data source is 
             });
         })
     )
+```
 
 ## See Also
 

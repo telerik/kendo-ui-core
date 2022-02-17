@@ -1,7 +1,7 @@
 ---
 title: Columns
 page_title: Columns
-description: "Set the column width and other settings in the  MultiColumnComboBox HtmlHelper for {{ site.framework }}."
+description: "Set the column width and other settings in the  MultiColumnComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/multicolumncombobox/columns
 slug: columns_multicolumncombobox_aspnetcore
 position: 4
@@ -18,6 +18,7 @@ The columns also allow you to [set their `columns.width`](https://docs.telerik.c
 
 You can also define which `dataItem` field will be populated and also set a title, a template, and a `headerTemplate`.
 
+```HtmlHelper
     @(Html.Kendo().MultiColumnComboBox()
         .Name("multicolumncombobox")
         .Columns(columns =>
@@ -32,6 +33,7 @@ You can also define which `dataItem` field will be populated and also set a titl
             .ServerFiltering(true)
         )
     )
+```
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Scrolling Overview
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to configure the scrolling functionality of the Grid."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to configure the scrolling functionality of the Grid."
 slug: htmlhelpers_grid_aspnetcore_scrolling
 position: 1
 ---
@@ -10,6 +10,7 @@ position: 1
 
 By default, the scrolling functionality of the Grid is disabled. When scrolling is enabled, the widget applies a default height of 200px to its data area. This can be changed or removed by setting an optional height style in the Grid's `Scrollable()` method.
 
+```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Scrollable(s => s.Height(400)) // Set a 400px-height style.
@@ -21,6 +22,7 @@ By default, the scrolling functionality of the Grid is disabled. When scrolling 
         .Name("grid")
         .Scrollable(s => s.Height("auto")) // Remove the default height.
     )
+```
 
 The `Virtual` scrolling always displays a single page of data. Scrolling only changes the data which is currently displayed. The `Endless` scrolling mode appends new pages of data to the already rendered records. The `Endless` scrolling is suitable for limited number of records, because after some point the browser will start to freeze (due to the amount of DOM elements on the page). For huge amount of records it is recommended to use `Virtual` scrolling or standard paging.
 
@@ -106,6 +108,7 @@ In some scenarios, the scroll position of the Grid might be reset when the widge
 
 The scrollable container is `div.k-grid-content` and it is possible to retrieve it as a child element of the widget `wrapper`. If virtual scrolling is enabled, the scrollable data container is `div.k-virtual-scrollable-wrap` and it is scrolled only horizontally.
 
+```HtmlHelper
     @(Html.Kendo().Grid<OrderViewModel>()
         .Name("grid")
         .Scrollable()
@@ -136,6 +139,7 @@ The scrollable container is `div.k-grid-content` and it is possible to retrieve 
             container.scrollTop(scrollOffset.top); // Use only if virtual scrolling is disabled.
         }
     });
+```
 
 ## Adjusting Scrollbar and Page Layout on Zoom
 

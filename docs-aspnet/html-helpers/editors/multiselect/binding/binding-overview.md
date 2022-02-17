@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI MultiSelect HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI MultiSelect component for {{ site.framework }}."
 previous_url: /helpers/editors/multiselect/binding/overview
 slug: htmlhelpers_multiselect_databinding_aspnetcore
 position: 1

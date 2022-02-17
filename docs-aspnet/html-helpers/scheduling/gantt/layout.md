@@ -1,7 +1,7 @@
 ---
 title: Layout
 page_title: Layout
-description: "Learn more about the layout of the Telerik UI Gantt HtmlHelper for {{ site.framework }}."
+description: "Learn more about the layout of the Telerik UI Gantt component for {{ site.framework }}."
 slug: htmlhelpers_gantt_layout_aspnetcore
 position: 2
 ---
@@ -48,5 +48,8 @@ The Timeline section visualizes the tasks and diplays start and end dates, progr
 ## See Also
 
 * [Basic Usage of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt)
+{% if site.core %}
+* [Basic Usage of the Gantt TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/gantt/tag-helper)
+{% endif %}
 * [Using the API of the Gantt HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/gantt/api)
 * [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/gantt)

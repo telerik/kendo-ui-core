@@ -1,7 +1,7 @@
 ---
 title: Overview
 page_title: Data Binding
-description: "Learn the basics approaches for binding the Telerik UI AutoComplete HtmlHelper for {{ site.framework }}."
+description: "Learn the basics approaches for binding the Telerik UI AutoComplete component for {{ site.framework }}."
 previous_url: /helpers/editors/autocomplete/binding/overview
 slug: htmlhelpers_autocomplete_databinding_aspnetcore
 position: 1

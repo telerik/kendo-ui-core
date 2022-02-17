@@ -14,7 +14,7 @@ For a complete example on how to select ranges by using the DateRangePicker, ref
 
 The following example demonstrates how to render a DateRangePicker with an initially selected range and defined min and max dates.
 
-```
+```HtmlHelper
 @(Html.Kendo().DateRangePicker()
     .Name("daterangepicker") // The name of the DateRangePicker is mandatory. It specifies the "id" attribute of the widget.
     .Min(new DateTime(2019, 9, 4)) // Sets the min date of the DateRangePicker.

@@ -14,7 +14,7 @@ The `Items` configuration allows you to set specific attributes of the BottomNav
 
 The following example demonstrates how to set the attributes of the BottomNavigation items through the `Items` configuration:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().BottomNavigation()
         .Name("bottomNavigation")
         .PositionMode(BottomNavigationPositionMode.Absolute)
@@ -25,6 +25,23 @@ The following example demonstrates how to set the attributes of the BottomNaviga
         })
     )
 ```
+{% if site.core %}
+```tagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{
+        var home = new { view= "home"};
+        var calendar = new { view = "calendar" };
+        var profile = new { view = "profile" };
+    }  
+    <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute">
+            <bottomnavigation-items>
+                <bottomnavigation-item context-data="@home" url="#home" text="Home" enabled="false" icon="home" selected="true" css-class="custom-css-class"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@calendar" url="#calendar" template="<span class='k-bottom-nav-item-icon k-icon k-i-calendar-date'></span>" text="Calendar" icon="calendar" css-class="custom-css-class"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@profile" url="#profile" selected="true" text="Profile" icon="user" css-class="custom-css-class"></bottomnavigation-item>
+            </bottomnavigation-items>
+    </kendo-bottomnavigation>
+```
+{% endif %}
 
 ## See Also
 

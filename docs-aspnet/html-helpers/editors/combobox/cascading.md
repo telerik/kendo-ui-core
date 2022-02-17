@@ -1,7 +1,7 @@
 ---
 title: Cascading ComboBoxes
 page_title: Cascading ComboBoxes
-description: "Learn about the Cascading option of the Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn about the Cascading option of the Telerik UI ComboBox component for {{ site.framework }}."
 slug: htmlhelpers_combobox_cascading_aspnetcore
 position: 6
 ---
@@ -10,11 +10,11 @@ position: 6
 
 The cascading ComboBox is a series of two or more ComboBox widgets in which each ComboBox is filtered according to the selected options in the previous ComboBox.
 
-## Basic configuration
+## Basic Configuration
 
 The child ComboBox cascades from the parent one if the `CascadeFrom` option is defined. The `CascadeFrom` option has to point to the parent ID.
 
-```cshtml
+```HtmlHelper
     @(Html.Kendo().ComboBox()
           .Name("categories")
           // options removed for clarity

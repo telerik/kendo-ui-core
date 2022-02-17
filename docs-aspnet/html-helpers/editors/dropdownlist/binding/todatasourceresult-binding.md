@@ -1,7 +1,7 @@
 ---
 title: Custom Data Binding
 page_title: Custom Data Binding
-description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement custom ToDataSourceResult data binding in the Telerik UI DropDownList component for {{ site.framework }}."
 previous_url: /helpers/editors/dropdownlist/binding/custom-binding
 slug: htmlhelpers_dropdownlist_todatasourceresultbinding_aspnetcore
 position: 4
@@ -29,6 +29,7 @@ You can configure the Telerik UI DropDownList for data binding to use a custom D
 
 1. Add an Ajax-bound DropDownList.
 
+    ```HtmlHelper
         @(Html.Kendo().DropDownList()
             .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
@@ -49,7 +50,8 @@ You can configure the Telerik UI DropDownList for data binding to use a custom D
                         });
             })
         )
-
+    ```
+    
 ## See Also
 
 * [Customizing the Data Source of the DropDownList HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/dropdownlist/custom-datasource)

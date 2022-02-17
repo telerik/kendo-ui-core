@@ -1,15 +1,15 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax binding with the Telerik UI Grid HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax binding with the Telerik UI Grid component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/grid/ajax-binding, /helpers/data-management/grid/binding/ajax-binding
 slug: htmlhelpers_grid_aspnetcore_ajaxbinding
-position: 2
+position: 4
 ---
 
 # Ajax Binding
 
-You can configure the Grid HtmlHelper extension for Ajax binding.
+You can configure the Grid component extension for Ajax binding.
 
 When configured for Ajax binding, the Grid for {{ site.framework }} makes Ajax requests when doing paging, sorting, filtering, grouping, or when saving data. For a runnable example, refer to the [demo on Ajax binding of the Grid](https://demos.telerik.com/{{ site.platform }}/grid/remote-data-binding).  
 
@@ -94,6 +94,7 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Products>()
               .Name("grid")
               .DataSource(dataSource => dataSource //Configure the Grid data source.
@@ -119,6 +120,7 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
             console.log(e.status);
         }
         </script>
+    ```
 
 1. Build and run the application.
 

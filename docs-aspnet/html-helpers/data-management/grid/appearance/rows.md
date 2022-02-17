@@ -1,7 +1,7 @@
 ---
 title: Rows
 page_title: Rows
-description: "Get started with the Telerik UI Grid HtmlHelper for {{ site.framework }} and learn how to handle the most common scenarios when configuring the behavior of its rows."
+description: "Get started with the Telerik UI Grid component for {{ site.framework }} and learn how to handle the most common scenarios when configuring the behavior of its rows."
 slug: rows_aspnetcore_grid_widget
 position: 3
 ---
@@ -27,6 +27,7 @@ You can manually add a table row with a user-friendly message when the DataSourc
 
 The following example demonstrates how to add a table row in the [`DataBound()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#databoundsystemstring) event handler of the Grid.
 
+```HtmlHelper
     @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
         .Name("grid")
         .Filterable()
@@ -41,6 +42,7 @@ The following example demonstrates how to add a table row in the [`DataBound()`]
             e.sender.tbody.parent().width(e.sender.thead.width()).end().html(emptyRow);
         }
     }
+```
 
 ## Using Row Templates
 

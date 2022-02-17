@@ -16,7 +16,7 @@ The `open` event fires when the ActionSheet is opened.
 
 The following example demonstrates how you can subscribe to the `open` event of the component: 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ActionSheet()
         .Name("actionsheet")
         .Title("Select item")
@@ -44,7 +44,7 @@ The `close` event fires when the ActionSheet is closed.
 
 The following example demonstrates how you can subscribe to the `close` event of the widget:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().ActionSheet()
         .Name("actionsheet")
         .Title("Select item")

@@ -1,7 +1,7 @@
 ---
 title: Inline
 page_title: Inline Editing
-description: "Define commands and set the edit mode to configure the Telerik UI TreeList HtmlHelper for {{ site.framework }} for inline editing."
+description: "Define commands and set the edit mode to configure the Telerik UI TreeList component for {{ site.framework }} for inline editing."
 slug: htmlhelpers_treelist_aspnetcore_inline_editing
 position: 3
 ---
@@ -75,6 +75,7 @@ To set the inline edit mode of the TreeList:
 
 1. In the view, configure the TreeList to use the action methods that were created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
+    ```HtmlHelper
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryModel>()
             .Name("treelist")
             .Toolbar(toolbar => toolbar.Create())
@@ -110,7 +111,7 @@ To set the inline edit mode of the TreeList:
                 })
             )
         )
-
+    ```
 ## See Also
 
 * [Editing Approaches by the TreeList HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/treelist/editing)

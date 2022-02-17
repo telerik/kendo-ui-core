@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Learn the basics when working with the TreeList HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the TreeList component for {{ site.framework }}."
 slug: htmlhelpers_treelist_aspnetcore_ajaxbinding
 position: 2
 ---
@@ -60,6 +60,7 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
 
 1. In the view, configure the TreeList to use the action method created in the previous steps.
 
+    ```HtmlHelper
         @(Html.Kendo().TreeList<Kendo.Mvc.Examples.Models.TreeList.EmployeeDirectoryRemoteModel>()
             .Name("treelist")
             .Columns(columns =>
@@ -83,6 +84,7 @@ To configure the TreeList for {{ site.framework }} to do Ajax binding:
                 .Aggregates(x=> x.Add(y=> y.BirthDate).Count())
             )
         )
+    ```
 
 1. Build and run the application.
 

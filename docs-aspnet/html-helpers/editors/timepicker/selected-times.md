@@ -14,7 +14,7 @@ For a complete example on how to select ranges using TimePicker, refer to the [d
 
 The following example demonstrates how to render a TimePicker with an initially selected time and defined min and max times. The TimePicker sets the value only if the entered time is within the defined range and is valid.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().TimePicker()
         .Name("timepicker")
         .Value("8:00 AM")

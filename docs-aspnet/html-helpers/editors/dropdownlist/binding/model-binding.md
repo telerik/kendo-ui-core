@@ -1,7 +1,7 @@
 ---
 title:  Model Binding
 page_title: Model Binding
-description: "Learn how to implement Model Binding with Telerik UI DropDownList HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Model Binding with Telerik UI DropDownList component for {{ site.framework }}."
 previous_url: /helpers/editors/dropdownlist/binding/model-binding
 slug: htmlhelpers_dropdownlist_modelbinding_aspnetcore
 position: 5
@@ -41,6 +41,7 @@ Local data is the data that is available on the client when the DropDownList is 
 
 1. Add the DropDownList to the view and bind it to the data that is saved in the `ViewData`.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().DropDownListFor(m => m.ProductID)
@@ -48,6 +49,7 @@ Local data is the data that is available on the client when the DropDownList is 
             .DataTextField("ProductName")
             .BindTo((System.Collections.IEnumerable)ViewData["products"])
         )
+    ```
 
 ## Remote Data
 
@@ -77,6 +79,7 @@ You can configure the DropDownList to get its data from a remote source by makin
 
 1. Add the DropDownList to the view and configure its DataSource to use remote data.
 
+    ```HtmlHelper
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().DropDownListFor(m => m.ProductID)
@@ -93,7 +96,8 @@ You can configure the DropDownList to get its data from a remote source by makin
                 .ServerFiltering(false);
             })
         )
-
+    ```
+    
 ## See Also
 
 * [Server-Side API](/api/dropdownlist)

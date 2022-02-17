@@ -1,7 +1,7 @@
 ---
 title: Scale
 page_title: Scale
-description: "Learn the Options of the Scale of the Telerik UI RadialGauge HtmlHelper for {{ site.framework }}."
+description: "Learn the Options of the Scale of the Telerik UI RadialGauge component for {{ site.framework }}."
 slug: scale_radialgaugehelper_aspnetcore
 position: 2
 ---
@@ -22,7 +22,7 @@ The scale of the Telerik UI RadialGauge for {{ site.framework }} renders the val
 
 * The `Max` (`double`) sets the maximum value of the widget.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
           .Name("gauge")
           .Scale(scale => scale
@@ -30,7 +30,7 @@ The scale of the Telerik UI RadialGauge for {{ site.framework }} renders the val
               .Max(180)
           )
     )
-````
+```
 
 ## MinorUnit and MajorUnit
 
@@ -38,7 +38,7 @@ The scale of the Telerik UI RadialGauge for {{ site.framework }} renders the val
 
 * The `MinorUnit` (`double`) parameter controls the interval between the minor unit divisions of the widget.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
           .Name("gauge")
           .Scale(scale => scale
@@ -46,20 +46,20 @@ The scale of the Telerik UI RadialGauge for {{ site.framework }} renders the val
               .MinorUnit(5)
           )
     )
-````
+```
 
 ## Reverse
 
 If you set the `Reverse` (`bool`) option to `true`, the values of the scale will increase right to left. By default they will raise from left to  right.
 
-````CSHTML
+```HtmlHelper
     @(Html.Kendo().RadialGauge()
           .Name("gauge")
           .Scale(scale => scale
             .Reverse(true)
           )
     )
-````
+```
 
 ## See Also
 

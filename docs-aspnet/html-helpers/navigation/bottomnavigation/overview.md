@@ -1,34 +1,47 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI BottomNavigation HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI BottomNavigation component for {{ site.framework }}."
 slug: htmlhelpers_bottomnavigation_aspnetcore
 position: 1
 ---
 
-# BottomNavigation HtmlHelper Overview
+# BottomNavigation Overview
 
+{% if site.core %}
+The Telerik UI BottomNavigation TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI BottomNavigation widget.
+{% else %}
 The Telerik BottomNavigation HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI BottomNavigation widget.
+{% endif %}
 
 The BottomNavigation allows movement between primary destinations in an application. The main purpose of the component is to offer a navigation element whose options are represented by an icon and text.
 
-Visit the [Demo page for the BottomNavigation](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/index) to see it in action.
+* [Demo page for the BottomNavigation HtmlHelper](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/index)
+{% if site.core %}
+* [Demo page for the BottomNavigation TagHelper](https://demos.telerik.com/aspnet-core/bottomnavigation/tag-helper)
+{% endif %}
 
 ## Initializing the BottomNavigation
 
-The following example demonstrates how to define the BottomNavigation by using the BottomNavigation HtmlHelper.
+The following example demonstrates how to define the BottomNavigation.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().BottomNavigation()
         .Name("bottomnavigation")
     )
 ```
+{% if site.core %}
+```TagHelper
+       <kendo-bottomnavigation name="bottomNavigation">
+       </kendo-bottomnavigation>
+```
+{% endif %}
 
 ## Basic Configuration
 
-The following example demonstrates the basic configuration for the BottomNavigation HtmlHelper.
+The following example demonstrates the basic configuration for the BottomNavigation.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().BottomNavigation()
             .Name("bottomNavigation")
             .PositionMode(BottomNavigationPositionMode.Absolute)
@@ -47,6 +60,23 @@ The following example demonstrates the basic configuration for the BottomNavigat
     });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @{
+        var home = new { view= "home"};
+        var calendar = new { view = "calendar" };
+        var profile = new { view = "profile" };
+    }  
+    <kendo-bottomnavigation name="bottomNavigation" position-mode="BottomNavigationPositionMode.Absolute">
+            <bottomnavigation-items>
+                <bottomnavigation-item context-data="@home" text="Home" icon="home" selected="true"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@calendar" text="Calendar" icon="calendar"></bottomnavigation-item>
+                <bottomnavigation-item context-data="@profile" text="Profile" icon="user"></bottomnavigation-item>
+            </bottomnavigation-items>
+    </kendo-bottomnavigation>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -58,4 +88,7 @@ The following example demonstrates the basic configuration for the BottomNavigat
 ## See Also
 
 * [Basic Usage of the BottomNavigation HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/index)
+{% if site.core %}
+* [Basic Usage of the BottomNavigation TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/bottomnavigation/tag-helper)
+{% endif %}
 * [Using the API of the BottomNavigation HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/bottomnavigation/api)

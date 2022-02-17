@@ -12,7 +12,7 @@ The CheckBoxGroup supports two types of [`layout`](/api/javascript/ui/checkboxgr
 
 The following example shows how to set the CheckBoxGroup layout:
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().CheckBoxGroup()
         .Name("checkboxgroup")
         .BindTo(new[] { "English", "German", "Italian", "Russian", "Spanish" })
@@ -20,6 +20,17 @@ The following example shows how to set the CheckBoxGroup layout:
         .Value(new string[] { "Italian" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-checkboxgroup name="checkboxgroup"
+        layout="CheckBoxGroupLayout.Horizontal">
+		<kendo-checkboxgroup-item value="Green" css-class="green" label="Green"></kendo-checkboxgroup-item>
+        <kendo-checkboxgroup-item value="Red" css-class="red" label="Red"></kendo-checkboxgroup-item>
+        <kendo-checkboxgroup-item value="Blue" css-class="blue" label="Blue"></kendo-checkboxgroup-item>
+    </kendo-checkboxgroup>
+```
+{% endif %}
+
 
 ## See Also
 

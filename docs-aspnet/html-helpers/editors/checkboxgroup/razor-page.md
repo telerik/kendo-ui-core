@@ -8,11 +8,11 @@ position: 5
 
 # Razor Page
 
-This article demonstrates how to configure the Telerik UI CheckBoxGroup HtmlHelper for {{ site.framework }} in a RazorPage scenario.
+This article demonstrates how to configure the Telerik UI CheckBoxGroup component for {{ site.framework }} in a RazorPage scenario.
 
 For the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
     @page
     @model Telerik.Examples.RazorPages.Pages.CheckBoxGroup.CheckBoxGroupIndexModel
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf

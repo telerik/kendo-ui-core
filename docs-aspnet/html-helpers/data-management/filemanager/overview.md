@@ -10,16 +10,25 @@ position: 0
 
 The {{ site.product }} FileManager is an Explorer-like component enabling you to manage file and folders. 
 
-It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeView]({% slug htmlhelpers_treeview_aspnetcore %}), [Toolbar]({% slug htmlhelpers_toolbar_aspnetcore %}), [Breadcrumb]({% slug htmlhelpers_breadcrumb_aspnetcore_overview %}). 
+It enables you to organize and manage files and folders and provides you with a rich API for customization. You can show additional information about the selected file in a template-customizable Preview Pane, which you can show or hide via a switch button. The widget is built entirely by Kendo UI for jQuery components: [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %}), [ListView]({% slug htmlhelpers_listview_aspnetcore %}), [TreeView]({% slug htmlhelpers_treeview_aspnetcore %}), [Toolbar]({% slug htmlhelpers_toolbar_aspnetcore %}), [Breadcrumb]({% slug htmlhelpers_breadcrumb_aspnetcore_overview %}).
+
+{% if site.core %}
+The Telerik UI FileManager TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI FileManager widget. To add the component to your ASP.NET Core app, you can use either.
+{% else %}
+The Telerik UI FileManager HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI FileManager widget.
+{% endif %}
 
 
-* [Demo page for the FileManager](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
+* [Demo page for the FileManager HtmlHelper](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
+{% if site.core %}
+* [Demo page for the FileManager TagHelper](https://demos.telerik.com/{{ site.platform }}/filemanager/index)
+{% endif %}
 
 ## Initializing the FileManager
 
-The following example demonstrates the initialization of the FileManager with a remote binding. The file structure is served as JSON though the FileManager DataSource object.
+The following example demonstrates the initialization of the FileManager with remote binding. The file structure is served as JSON though the FileManager DataSource object.
 
-```Razor
+```HtmlHelper
    @(Html.Kendo().FileManager()
     .Name("filemanager")
     .DataSource(ds =>
@@ -44,6 +53,22 @@ The following example demonstrates the initialization of the FileManager with a 
     .UploadUrl("Upload", "FileManagerData")   
 )
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+
+<kendo-filemanager name="filemanager11" upload-url="@Url.Action("Upload", "FileManagerData")">
+    <filemanager-datasource>
+        <transport>
+            <read url="@Url.Action("Read", "FileManagerData")" />
+            <create url="@Url.Action("Destroy", "FileManagerData")" />
+            <destroy url="@Url.Action("Create", "FileManagerData")" />
+            <update url="@Url.Action("Update", "FileManagerData")" />
+        </transport>
+    </filemanager-datasource>
+</kendo-filemanager>
+```
+{% endif %}
 ```Controller
  // GET: /FileManager/
         private const string contentFolderRoot = "~/Content/";

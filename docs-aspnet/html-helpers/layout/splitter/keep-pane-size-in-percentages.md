@@ -1,7 +1,7 @@
 ---
 title: Persisting the Pane Size
 page_title: Persisting the Pane Size
-description: "Learn how to keep the Splitter pane sizes in percentages using the Telerik UI Splitter HtmlHelper for {{ site.framework }}."
+description: "Learn how to keep the Splitter pane sizes in percentages using the Telerik UI Splitter component for {{ site.framework }}."
 slug: htmlhelpers_keep_pane_size_in_percentages_aspnetcore
 position: 5
 ---
@@ -10,7 +10,7 @@ position: 5
 
 The Splitter enables you to keep its pane size in percentage upon user resizes.
 
-```Razor
+```HtmlHelper
 @(Html.Kendo().Splitter()
                 .Name("splitter")
                 .Panes(panes=> {

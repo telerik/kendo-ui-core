@@ -12,7 +12,7 @@ This article demonstrates how to set up the DateInput component in a Razor Pages
 
 See the implementation details in the example below. For the full project with Razor Pages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper(csthml)
 @page
 @model Telerik.Examples.RazorPages.Pages.DateInput.DateInputGlobalizationModel
 @{

@@ -1,7 +1,7 @@
 ---
 title: Pasting
 page_title: Pasting Content
-description: "Learn how to control the pasting behavior of the Telerik UI Editor HtmlHelper for {{ site.framework }}."
+description: "Learn how to control the pasting behavior of the Telerik UI Editor component for {{ site.framework }}."
 slug: htmlhelpers_editor_pasting_aspnetcore
 position: 4
 ---
@@ -30,25 +30,25 @@ The following list represents the built-in [`PasteCleanup()`](/api/Kendo.Mvc.UI.
 
 The following example demonstrates how to copy the HTML content above the Editor and paste it in the content area. Because of the enabled `Span()` option, the `span` tags are removed.
 
-```
-<p>
-    Copy this is a paragraph that has some
-    <span style="font-family:Impact, Charcoal, sans-serif;">
-        inline
-    </span>
-    <span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">
-        styles
-    </span>
-    and paste it in the Editor.
-</p>
-<hr />
+```HtmlHelper
+    <p>
+        Copy this is a paragraph that has some
+        <span style="font-family:Impact, Charcoal, sans-serif;">
+            inline
+        </span>
+        <span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">
+            styles
+        </span>
+        and paste it in the Editor.
+    </p>
+    <hr />
 
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .PasteCleanup(p => p
-        .Span()
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .PasteCleanup(p => p
+            .Span()
+        )
     )
-)
 ```
 
 ## Pasting from MS Word
@@ -61,15 +61,15 @@ The `MsConvertLists()` is an option that enables the end user to successfully pa
 
 The following example demonstrates how to adjust the MS Word specific options. To see the result, paste some content from MS Word.
 
-```
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .PasteCleanup(p => p
-        .MsTags(true)
-        .MsAllFormatting(false)
-        .MsConvertLists(true)
+```HtmlHelper
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .PasteCleanup(p => p
+            .MsTags(true)
+            .MsAllFormatting(false)
+            .MsConvertLists(true)
+        )
     )
-)
 ```
 
 ## Creating Custom pasteCleanup Functions
@@ -78,22 +78,22 @@ The `Custom()` method is a powerful way to define your own logic to clean the pa
 
 The following example demonstrates a simple logic to strip the `<strong>` tags from the pasted HTML content.
 
-```
-<p>some text with <strong>bold text</strong> inside.</p>
-<hr />
+```HtmlHelper
+    <p>some text with <strong>bold text</strong> inside.</p>
+    <hr />
 
-@(Html.Kendo().Editor()
-    .Name("editor")
-    .PasteCleanup(p => p
-        .Custom("customPasteCleanUp")
+    @(Html.Kendo().Editor()
+        .Name("editor")
+        .PasteCleanup(p => p
+            .Custom("customPasteCleanUp")
+        )
     )
-)
 
-<script>
-    function customPasteCleanUp(html) {
-        return html.replace(/<\/?strong[^>]*>/, "");
-    }
-</script>
+    <script>
+        function customPasteCleanUp(html) {
+            return html.replace(/<\/?strong[^>]*>/, "");
+        }
+    </script>
 ```
 
 ## See Also

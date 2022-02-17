@@ -1,7 +1,7 @@
 ---
 title: Multi Axis
 page_title: Multi Axis
-description: "Learn how to set the Multi Axis of Telerik UI Bar Charts HtmlHelper for {{ site.framework }}."
+description: "Learn how to set the Multi Axis of Telerik UI Bar Charts component for {{ site.framework }}."
 slug: barcharts_multi_axis
 ---
 
@@ -13,7 +13,7 @@ The example above shows a hybrid car range report visualized through four value 
 
 The following implementation demonstrates the code needed for setting the Multi Axis for Bar Chart:
 
-```View
+```HtmlHelper
   @(Html.Kendo().Chart()
         .Name("chart")
         .Title("Hybrid car mileage report")

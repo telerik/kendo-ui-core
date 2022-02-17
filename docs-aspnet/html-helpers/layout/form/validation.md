@@ -1,7 +1,7 @@
 ---
 title: Validation
 page_title: Validation
-description: "Get started with the Telerik UI Form HtmlHelper for {{ site.framework }} and learn about its validation configuration."
+description: "Get started with the Telerik UI Form component for {{ site.framework }} and learn about its validation configuration."
 slug: htmlhelpers_form_aspnetcore_validation
 position: 7
 ---
@@ -12,7 +12,7 @@ The Form has a built-in validator. Validation of all Form fields is triggered on
 
 The following example shows how to disable the built-in validation on blur. 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("exampleForm")
         .HtmlAttributes(new { action = "Index", method = "POST" })
@@ -46,7 +46,7 @@ The Form can display a list of all validation errors. The validation summary is 
 
 The following example shows how to enable validation summary in the Form. 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("exampleForm")
         .HtmlAttributes(new { action = "Index", method = "POST" })
@@ -78,7 +78,7 @@ You can set the `ValidationSummary.Container` option, if you want to use an elem
 
 The following example shows how to set `ValidationSummary.Container`. 
 
-```Razor
+```HtmlHelper
     <div class="container"></div>
 
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
@@ -114,7 +114,7 @@ You can customize validation error messages with templates.
 
 The following example shows how to define a template with the `Validatable.ErrorTemplate` option. 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("exampleForm")
         .HtmlAttributes(new { action = "Index", method = "POST" })
@@ -148,7 +148,7 @@ You can implement your own validation logic and return the respective error mess
 
 The following example demonstrates custom validation of the `LastName` and `RetireDate` fields. 
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Form<MyApplication.Models.UserViewModel>()
         .Name("exampleForm")
         .HtmlAttributes(new { action = "Index", method = "POST" })

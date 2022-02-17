@@ -1,7 +1,7 @@
 ---
 title: Auto-Resizing to Window
 page_title: Auto-Resizing to Window
-description: "Learn how to auto-resize the Splitter to fit to the Window component by using the Telerik UI Splitter HtmlHelper for {{ site.framework }}."
+description: "Learn how to auto-resize the Splitter to fit to the Window component by using the Telerik UI Splitter component for {{ site.framework }}."
 slug: htmlhelpers_add_auto_resizing_splitter_to_window_aspnetcore
 position: 2
 ---
@@ -10,7 +10,7 @@ position: 2
 
 You can add a Splitter that resizes automatically along with the Kendo UI for jQuery Window widget.
 
-```Razor
+```HtmlHelper
     @(Html.Kendo().Window()
                     .Name("win")
                     .Title("Kendo UI Window")

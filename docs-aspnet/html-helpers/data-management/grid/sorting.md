@@ -14,11 +14,13 @@ By default, the sorting functionality of the Telerik UI Grid for {{ site.framewo
 
 To control the sorting in the Grid, use the [`Sortable`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#sortable) option. As a result, the default [single-column sorting](#single-column-sorting) functionality will be applied.
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable()
         ...
     )
+```
 
 > Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
 

@@ -1,7 +1,7 @@
 ---
 title: Data Source Binding
 page_title: Data Source Binding
-description: "Learn how to bind a sheet to a Data Source in the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }}."
+description: "Learn how to bind a sheet to a Data Source in the Telerik UI Spreadsheet component for {{ site.framework }}."
 slug: htmlhelpers_spreadsheet_bind_to_datasource_aspnetcore
 position: 1
 ---
@@ -10,7 +10,7 @@ position: 1
 
 The Spreadsheet supports binding individual sheets to a Data Source instance which allows you to quickly bring data from external data sources into the Spreadsheet and edit it.  
 
-For a runnable example, refer to the demo on [binding the Spreadsheet HtmlHelper to the DataSource](https://demos.telerik.com/{{ site.platform }}/spreadsheet/datasource). The Spreadsheet DataSource from that example uses the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read) and [`submit`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.submit) transport options. The `submit` option is required to properly handle a scenario in which the user creates, updates and deletes items simultaneously.
+For a runnable example, refer to the demo on [binding the Spreadsheet component to the DataSource](https://demos.telerik.com/{{ site.platform }}/spreadsheet/datasource). The Spreadsheet DataSource from that example uses the [`read`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.read) and [`submit`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.submit) transport options. The `submit` option is required to properly handle a scenario in which the user creates, updates and deletes items simultaneously.
 
 When using separate [`create`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.create), [`update`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.update), and [`destroy`](https://docs.telerik.com/kendo-ui/api/javascript/data/datasource/configuration/transport.destroy) handlers, it is possible that one of them fails, while the others do not. That will result in a mismatch of the data state between the client (the Spreadsheet) and the remote source. The `submit` option handles all operations within a single request. It will not save any changes if any of the items is invalid.
 
@@ -33,9 +33,9 @@ CRUD operations are also handled in a specific way:
 {% if site.core %}
 ## Data Source Binding in Razor Page scenario
 
-In order to set up the Data Source Binding of the Telerik UI Spreadsheet HtmlHelper for {{ site.framework }} component in Razor page scenario, the above mentioned requrements are still valid. You will, however, need to configure the `read` and `submit` transport options to send requests to the respective handler in the PageModel. When handling the `submit` action you will need to also send the antiforgery token. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
+In order to set up the Data Source Binding of the Telerik UI Spreadsheet component for {{ site.framework }} component in Razor page scenario, the above mentioned requrements are still valid. You will, however, need to configure the `read` and `submit` transport options to send requests to the respective handler in the PageModel. When handling the `submit` action you will need to also send the antiforgery token. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-RazorPage(csthml)
+```tab-HtmlHelper
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
     @Html.AntiForgeryToken()
 

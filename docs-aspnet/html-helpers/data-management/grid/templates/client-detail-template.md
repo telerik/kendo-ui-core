@@ -74,6 +74,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
               .Name("grid")
               .DataSource(dataSource => dataSource
@@ -87,6 +88,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
               })
               .Pageable()
         )
+    ```
 
 1. Define the client template using the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
@@ -103,6 +105,7 @@ To configure the Grid for {{ site.framework }} to display additional details of 
 
 1. Specify the `id` of the template by using the `ClientDetailTemplateId` method.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridClientDetailTemplate.Models.Product>()
               .Name("grid")
               .DataSource(dataSource => dataSource
@@ -117,6 +120,8 @@ To configure the Grid for {{ site.framework }} to display additional details of 
               .Pageable()
               .ClientDetailTemplateId("client-template")
         )
+    ```
+
 {% if site.mvc %}
 1. Build and run the project.
 ![The final result](../images/grid-detail-template.png)
@@ -202,6 +207,7 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
 
 1. In the view, configure the Grid for Ajax binding to `Categories_Read`.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
               .Name("grid")
               .Columns(columns =>
@@ -213,12 +219,14 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
                 dataSource.Ajax().Read(read => read.Action("Categories_Read", "Home"))
               )
         )
+    ```
 
 1. Define the client template using [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
     > * Always call the `ToClientTemplate` method when using {{ site.product }} helpers in a client template.
     > * Escape the `#` characters used for a template expression when using a column `ClientTemplate` in a detail template, so that the expression is evaluated in the correct context.
 
+    ```HtmlHelper
         <script id="client-template" type="text/x-kendo-template">
             @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Product>()
                     .Name("grid_#=CategoryID#") // make sure the Name is unuque
@@ -235,9 +243,11 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
                     .ToClientTemplate()
             )
         </script>
+    ```
 
 1. Specify the `id` of the template using the `ClientDetailTemplateId` method.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<KendoGridClientHierarchy.Models.Category>()
               .Name("grid")
               .Columns(columns =>
@@ -250,6 +260,8 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
               )
               .ClientDetailTemplateId("client-template")
         )
+    ```
+
 {% if site.mvc %}
 1. Build and run the project.
 

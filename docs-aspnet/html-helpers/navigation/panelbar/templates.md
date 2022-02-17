@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Learn how to use templates in the Telerik UI PanelBar HtmlHelper for {{ site.framework }}."
+description: "Learn how to use templates in the Telerik UI PanelBar component for {{ site.framework }}."
 slug: htmlhelpers_panelbar_templates_aspnetcore
 position: 5
 ---
@@ -13,24 +13,24 @@ The PanelBar for {{ site.framework }} supports templates for customizing the app
 To customize look and feel of the PanelBar use the `Template()` or `TemplateId()` configuration options to set a template that will be used for the rendering the PanelBar's items. 
 
 The following example demonstrates how to use the `TemplateId()` configuration:
-```
-<script id="template" type="text/kendo-ui-template">
-    # if (!item.items) { #
-        #: item.text #
-    # } else { #
-        <b> #: item.text # </b> 
-    # } #
-</script>
 
-@(Html.Kendo().PanelBar()
-    .Name("panelbar")
-    .TemplateId("template")
-    .DataSource(source =>
-    {
-        source.Read(read => read.Action("Read_TemplateData", "PanelBar"));
-    })
-)
+```HtmlHelper
+    <script id="template" type="text/kendo-ui-template">
+        # if (!item.items) { #
+            #: item.text #
+        # } else { #
+            <b> #: item.text # </b> 
+        # } #
+    </script>
 
+    @(Html.Kendo().PanelBar()
+        .Name("panelbar")
+        .TemplateId("template")
+        .DataSource(source =>
+        {
+            source.Read(read => read.Action("Read_TemplateData", "PanelBar"));
+        })
+    )
 ```
 
 ## See Also

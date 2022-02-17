@@ -1,25 +1,31 @@
 ---
 title: Overview
 page_title: Overview
-description: "Learn the basics when working with the Telerik UI ListBox HtmlHelper for {{ site.framework }}."
+description: "Learn the basics when working with the Telerik UI ListBox component for {{ site.framework }}."
 previous_url: /helpers/html-helpers/listbox, /helpers/editors/listbox/overview
 slug: htmlhelpers_listbox_aspnetcore
 position: 1
 ---
 
-# ListBox HtmlHelper Overview
+# ListBox Overview
 
+{% if site.core %}
+The Telerik UI ListBox TagHelper and HtmlHelper for {{ site.framework }} are server-side wrappers for the Kendo UI ListBox widget.
+{% else %}
 The Telerik UI ListBox HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ListBox widget.
+{% endif %}
 
 The ListBox provides suggestions depending on the typed text and allows multiple value entries. It displays a list of data that is contained in a box and allows single or multiple selection, reordering of selected items, and deleting items and features keyboard navigation as well as the dragging and dropping of items. You can also connect the ListBox with another list-box and customize the widget with the use of templates, toolbar positioning, placeholder and hint, and localization of its command buttons messages.
 
-* [Demo page for the ListBox](https://demos.telerik.com/{{ site.platform }}/listbox/index)
+* [Demo page for the ListBox HtmlHelper](https://demos.telerik.com/{{ site.platform }}/listbox/index)
+{% if site.core %}
+* [Demo page for the ListBox TagHelper](https://demos.telerik.com/aspnet-core/listbox/tag-helper){% endif %}
 
 ## Initializing the ListBox
 
-The following example demonstrates how to define the ListBox by using the ListBox HtmlHelper.
+The following example demonstrates how to define the ListBox.
 
-```Razor
+```HtmlHelper
    @(Html.Kendo().ListBox()
         .Name("optional")
         .Toolbar(toolbar =>
@@ -33,6 +39,19 @@ The following example demonstrates how to define the ListBox by using the ListBo
         .BindTo(ViewBag.Attendees)
     )
 ```
+{% if site.core %}
+```TagHelper
+
+        <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.Attendees">
+            <toolbar position="ListBoxToolbarPosition.Right"
+                     tools='new string[] {moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
+        </kendo-listbox>
+
+        <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="new List<string>()">
+        </kendo-listbox>
+
+```
+{% endif %}
 ```Controller
     public ActionResult Index()
     {
@@ -79,5 +98,8 @@ The following example demonstrates how to access an existing ListBox instance.
 ## See Also
 
 * [Basic Usage of the ListBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/index)
+{% if site.core %}
+* [Basic Usage of the ListBox TagHelper for ASP.NET Core (Demo)](https://demos.telerik.com/aspnet-core/listbox/tag-helper)
+{% endif %}
 * [Using the API of the ListBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/listbox/api)
 * [Server-Side API](/api/listbox)

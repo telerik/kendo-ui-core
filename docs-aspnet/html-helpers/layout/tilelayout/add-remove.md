@@ -1,7 +1,7 @@
 ---
 title: Add or Remove Tiles
-page_title: The Telerik UI TileLayout HtmlHelper for {{ site.framework }} Documentation | TileLayout Add/Remove
-description: "Learn the basics of the The Telerik UI TileLayout HtmlHelper for {{ site.framework }} add/remove functionality."
+page_title: The Telerik UI TileLayout component for {{ site.framework }} Documentation | TileLayout Add/Remove
+description: "Learn the basics of the The Telerik UI TileLayout component for {{ site.framework }} add/remove functionality."
 slug: htmlhelpers_aspnet_tilelayout_add_remove
 position: 5
 ---
@@ -18,7 +18,7 @@ This functionality is a custom implementation based on the [`splice`](https://de
 The example below demonstrates how you can enable users to remove a tile from the TileLayout by a clicking on its close button.
 
 
-```Razor
+```HtmlHelper
         $("#tilelayout").on("click", ".k-button", function (e) {
           var itemId = $(e.currentTarget).closest(".k-tilelayout-item").attr("id");
           var mainItems = tilelayout.items;

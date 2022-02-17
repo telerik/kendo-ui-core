@@ -1,7 +1,7 @@
 ---
 title: Loading Content
 page_title: Loading Content
-description: "Learn about the different ways of loading content in Telerik UI Window HtmlHelper for {{ site.framework }}."
+description: "Learn about the different ways of loading content in Telerik UI Window component for {{ site.framework }}."
 previous_url: /helpers/layout/window/content
 slug: htmlhelpers_window_loadingcontent_aspnetcore
 position: 5
@@ -15,6 +15,7 @@ You can load the Window content initially or dynamically at a later stage.
 
 The Window exposes a `Content()` configuration method which allows you to load predefined HTML content. This is the most commonly preferred approach:
 
+```HtmlHelper
     @(Html.Kendo().Window()
         .Name("window")
         .Title("Static content")
@@ -22,6 +23,7 @@ The Window exposes a `Content()` configuration method which allows you to load p
                 <strong>Static content</strong> of the Window.
         </text>)
     )
+```
 
 ## Load-on-Demand Content
 
@@ -43,6 +45,7 @@ In some scenarios, it is required to configure the Window to load dynamic conten
 
 1. Add a Window on the page. Its definition will contain the LoadContentFrom() setting which will point to the Content Controller Action:
 
+    ```HtmlHelper
         @(Html.Kendo().Window()
             .Name("window") // The name of the Window is mandatory. It specifies the "id" attribute of the widget.
             .Title("About Alvar Aalto") // Set the title of the Window.
@@ -52,9 +55,10 @@ In some scenarios, it is required to configure the Window to load dynamic conten
             // .LoadContentFrom("MyRazorPageName")
         {% endif %}
         )
-
+    ```
 You can also use another [`.LoadContentFrom()`](/api/Kendo.Mvc.UI.Fluent/WindowBuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
-```Razor
+
+```HtmlHelper
 @(Html.Kendo().Window()
         .Name("window") 
         .Title("User Details") 

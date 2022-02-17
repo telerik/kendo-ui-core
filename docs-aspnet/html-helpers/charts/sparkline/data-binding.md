@@ -1,7 +1,7 @@
 ---
 title: Data Binding
 page_title: Data Binding
-description: "Learn how to bind the Telerik UI Sparkline HtmlHelper for {{ site.framework }} to data."
+description: "Learn how to bind the Telerik UI Sparkline component for {{ site.framework }} to data."
 slug: overview_sparklinesdatabinding_aspnetcore
 position: 2
 ---
@@ -17,7 +17,7 @@ Binding to local data can be done by using either of the following approaches:
 * Setting the root-level `Data` field to an array with values, or
 * Configuring a series and passing the data as an array.
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
             .Name("temp-log")
             .Type(SparklineType.Column)
@@ -25,7 +25,7 @@ Binding to local data can be done by using either of the following approaches:
     )
 ```
 
-```
+```HtmlHelper
     @(Html.Kendo().Sparkline()
             .Name("temp-log")
             .Type(SparklineType.Column)
@@ -37,13 +37,13 @@ Binding to local data can be done by using either of the following approaches:
 
 The following example demonstrates how to bind the Sparkline Chart to remote data. For more information, refer to the article on [binding Telerik UI Charts to a data source]({% slug htmlhelpers_charts_databinding_aspnetcore %}).
 
-```
-@(Html.Kendo().Sparkline()
-    .Name("sparkline-tmax")
-    .DataSource(ds => ds.Read(read => read.Url(Url.Action("_Weather", "Sparklines"))))
-    .Series(series => series
-        .Column("TMax").Color("#ff0000").NegativeColor("#0099ff")
-)
+```HtmlHelper
+    @(Html.Kendo().Sparkline()
+        .Name("sparkline-tmax")
+        .DataSource(ds => ds.Read(read => read.Url(Url.Action("_Weather", "Sparklines"))))
+        .Series(series => series
+            .Column("TMax").Color("#ff0000").NegativeColor("#0099ff")
+    )
 ```
 
 ## See Also

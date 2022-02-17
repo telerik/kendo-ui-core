@@ -1,7 +1,7 @@
 ---
 title: Templates
 page_title: Templates
-description: "Use the available templates of the Telerik UI Drawer HtmlHelper for {{ site.framework }}."
+description: "Use the available templates of the Telerik UI Drawer component for {{ site.framework }}."
 previous_url: /helpers/navigation/drawer/templates
 slug: templates_drawer_aspnetcore
 position: 4

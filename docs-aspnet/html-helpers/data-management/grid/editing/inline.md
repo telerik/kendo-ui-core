@@ -1,7 +1,7 @@
 ---
 title: Inline
 page_title: Inline Editing
-description: "Define commands and set the edit mode to configure the Telerik UI Grid HtmlHelper for {{ site.framework }} for inline editing."
+description: "Define commands and set the edit mode to configure the Telerik UI Grid component for {{ site.framework }} for inline editing."
 slug: inlineediting_grid_aspnetcore
 position: 2
 ---
@@ -145,35 +145,37 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. In the view, configure the Grid to use the action methods that were created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records which will enable the DataSource to apply the changes accordingly. The `Create` method has to return a collection of the created records with the assigned ID field.
 
-          @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
-                .Name("grid")
-                .Columns(columns =>
-                {
-                    columns.Bound(product => product.ProductID).Width(100);
-                    columns.Bound(product => product.ProductName);
-                    columns.Bound(product => product.UnitsInStock).Width(250);
-                    columns.Command(commands =>
+            ```HtmlHelper
+                @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
+                    .Name("grid")
+                    .Columns(columns =>
                     {
-                        commands.Edit(); // The "edit" command will edit and update data items.
-                        commands.Destroy(); // The "destroy" command removes data items.
-                    }).Title("Commands").Width(200);
-                })
-                .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
-                .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use the inline edit mode.
-                .DataSource(dataSource =>
-                    dataSource.Ajax()
-                      .Model(model =>
-                      {
-                          model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
-                          model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
-                      })
-                      .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
-                      .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Grid needs data.
-                      .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
-                      .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
+                        columns.Bound(product => product.ProductID).Width(100);
+                        columns.Bound(product => product.ProductName);
+                        columns.Bound(product => product.UnitsInStock).Width(250);
+                        columns.Command(commands =>
+                        {
+                            commands.Edit(); // The "edit" command will edit and update data items.
+                            commands.Destroy(); // The "destroy" command removes data items.
+                        }).Title("Commands").Width(200);
+                    })
+                    .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
+                    .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use the inline edit mode.
+                    .DataSource(dataSource =>
+                        dataSource.Ajax()
+                            .Model(model =>
+                            {
+                                model.Id(product => product.ProductID); // Specify the property which is the unique identifier of the model.
+                                model.Field(product => product.ProductID).Editable(false); // Make the ProductID property not editable.
+                            })
+                            .Create(create => create.Action("Products_Create", "Home")) // Action invoked when the user saves a new data item.
+                            .Read(read => read.Action("Products_Read", "Home"))  // Action invoked when the Grid needs data.
+                            .Update(update => update.Action("Products_Update", "Home"))  // Action invoked when the user saves an updated data item.
+                            .Destroy(destroy => destroy.Action("Products_Destroy", "Home")) // Action invoked when the user removes a data item.
+                    )
+                    .Pageable()
                 )
-                .Pageable()
-          )		  
+            ```  
 
 ## Handling ModelState Errors
 
@@ -218,6 +220,7 @@ When editing is performed, server validation is often needed. This section demon
 
 1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemstring) event handler. It is fired when model state errors or other unexpected problem occur when making the Ajax request. In the event handler, display the errors and call the [`cancelChanges`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods-cancelChanges) method of the Grid.
 
+        ```HtmlHelper
           @(Html.Kendo().Grid<KendoGridAjaxEditing.Models.ProductViewModel>()
                 .Name("grid")
                 .Columns(columns =>
@@ -268,7 +271,8 @@ When editing is performed, server validation is often needed. This section demon
               }
           }
           </script>
-          
+        ```
+         
 ## Runnable Samples
 
 To check and download runnable samples demonstrating Inline editing, you can go to these resources:

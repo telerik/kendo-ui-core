@@ -1,14 +1,14 @@
 ---
 title: Templates
 page_title: Templates
-description: "Get started with the Telerik UI PivotGrid HtmlHelper for {{ site.framework }} and learn about the provided templating options."
+description: "Get started with the Telerik UI PivotGrid component for {{ site.framework }} and learn about the provided templating options."
 slug: htmlhelpers_pivotgrid_aspnetcore_templates
 position: 5
 ---
 
 # Templates
 
-The Telerik UI PivotGrid HtmlHelper for {{ site.framework }} provides templating options that can be used to customize the way its data is visualized in the table.
+The Telerik UI PivotGrid component for {{ site.framework }} provides templating options that can be used to customize the way its data is visualized in the table.
 
 Under the hood, the templates use the [Kendo UI Templates syntax](https://docs.telerik.com/kendo-ui/framework/templates/overview).
 
@@ -27,6 +27,7 @@ In the data cell template, you can use the following fields:
 * `measure`&mdash;The value of the data cell measure.
 * `dataItem`&mdash;The data item itself.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
@@ -46,6 +47,7 @@ In the data cell template, you can use the following fields:
             #: value #
         # } #
     </script>
+```
 
 ## Column Header Template
 
@@ -55,6 +57,7 @@ In the column header template, you can use the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
 * `tuple`&mdash;The tuple of the corresponding column header cell.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
@@ -70,6 +73,7 @@ In the column header template, you can use the following fields:
             #: member.caption #
         # } #
     </script>
+```
 
 ## Row Header Template
 
@@ -79,6 +83,7 @@ In the row header template, you can use the following fields:
 * `member`&mdash;The member of the corresponding column header cell.
 * `tuple`&mdash;The tuple of the corresponding column header cell.
 
+```HtmlHelper
     @(Html.Kendo().PivotGrid()
         .Name("pivotgrid")
         .ColumnWidth(200)
@@ -94,6 +99,7 @@ In the row header template, you can use the following fields:
             #: member.caption #
         # } #
     </script>
+```
 
 ## See Also
 

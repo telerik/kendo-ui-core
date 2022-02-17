@@ -1,7 +1,7 @@
 ---
 title: Locked
 page_title: Locked Columns
-description: "Get started with the Telerik UI TreeList HtmlHelper for {{ site.framework }} (Demo) supporting locked columns that are visible at all times while the user scrolls the TreeList horizontally."
+description: "Get started with the Telerik UI TreeList component for {{ site.framework }} (Demo) supporting locked columns that are visible at all times while the user scrolls the TreeList horizontally."
 slug: htmlhelpers_treelist_aspnetcore_locked_columns
 position: 1
 ---

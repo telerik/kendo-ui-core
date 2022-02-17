@@ -1,7 +1,7 @@
 ---
 title: Ajax Binding
 page_title: Ajax Binding
-description: "Learn how to implement Ajax Binding with Telerik UI ComboBox HtmlHelper for {{ site.framework }}."
+description: "Learn how to implement Ajax Binding with Telerik UI ComboBox component for {{ site.framework }}."
 previous_url: /helpers/editors/combobox/binding/ajax-binding
 slug: htmlhelpers_combobox_ajaxbinding_aspnetcore
 position: 2
@@ -31,6 +31,7 @@ You can configure the Telerik UI ComboBox for Ajax binding to the Northwind **Pr
 
 1. Add an Ajax-bound ComboBox.
 
+    ```HtmlHelper
         @(Html.Kendo().ComboBox()
             .Name("productDropDownList") // The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the ComboBox as a text.
@@ -45,7 +46,8 @@ You can configure the Telerik UI ComboBox for Ajax binding to the Northwind **Pr
             })
             .SelectedIndex(0) // Select the first item.
         )
-
+    ```
+    
 ## See Also
 
 * [Server-Side API](/api/combobox)

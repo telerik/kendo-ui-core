@@ -1,7 +1,7 @@
 ---
 title: Popup
 page_title: Popup
-description: "Define commands and set the edit mode to configure the Telerik UI Grid HtmlHelper for {{ site.framework }} for popup editing."
+description: "Define commands and set the edit mode to configure the Telerik UI Grid component for {{ site.framework }} for popup editing."
 slug: popupediting_grid_aspnetcore
 position: 3
 ---
@@ -100,6 +100,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. In the view, configure the Grid to use the action methods created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records so the DataSource on the client is aware of the server-side changes.
 
+    ```HtmlHelper
         @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
             .Name("grid")
             .ToolBar(tools=>
@@ -131,6 +132,7 @@ For runnable examples, refer to the [demos on implementing the editing approache
                 .Destroy(destroy => destroy.Action("DestroyOrders", "Grid")); // Action invoked when the user removes a data item.
             })
         )
+    ```
 
 ## Handling ModelState Errors
 
@@ -166,6 +168,7 @@ When editing is performed, server validation is often needed. This section demon
 
 1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemstring) event handler. It is fired when model state errors or other unexpected problem occur when making the Ajax request. To prevent the popup from closing, get the Grid instance in the error event handler, prevent the Grid from `DataBinding`, and display the errors as a tooltip.
 
+    ```HtmlHelper
         .DataSource(d =>
         {
             d.Ajax()
@@ -203,7 +206,7 @@ When editing is performed, server validation is often needed. This section demon
                 }
             }
         </script>
-
+    ```
 ## See Also
 
 * [Editing Approaches by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/editing)
