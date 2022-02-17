@@ -145,7 +145,7 @@ The following example demonstrates how to load AngularJS and initialize it with 
 
 ## Using Custom Kendo Scripts in AngularJS
 
-The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_scripts %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `gulp custom dropdownlist,angular`.
+The following example demonstrates how to use a [custom Kendo script created with `gulp`]({% slug include_only_what_you_need_kendoui_scripts %}#use-gulp) with RequireJS and AngularJS. The script for the below example has been created with the following command: `npx gulp custom -c dropdownlist,angular`.
 
 ```pseudo
 <!DOCTYPE HTML>

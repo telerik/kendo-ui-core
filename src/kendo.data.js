@@ -3098,13 +3098,14 @@ var __meta__ = { // jshint ignore:line
                 that = this,
                 hasGroups = that._isServerGrouped();
 
+            if (hasGroups && model.uid && (!model.isNew || !model.isNew())) {
+                that._destroyed.push(model);
+            }
+
             this._eachItem(that._data, function(items) {
                 result = removeModel(items, model);
 
                 if (result && hasGroups) {
-                    if (!result.isNew || !result.isNew()) {
-                        that._destroyed.push(result);
-                    }
                     return true;
                 }
             });

@@ -1242,6 +1242,7 @@ var __meta__ = { // jshint ignore:line
                         placeholder: this.element.attr("placeholder"),
                         title: this.options.filterTitle || this.element.attr("title"),
                         role: "searchbox",
+                        "aria-label": this.options.filterTitle,
                         "aria-haspopup": "listbox",
                         "aria-autocomplete": "list"
                     });

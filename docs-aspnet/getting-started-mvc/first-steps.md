@@ -12,7 +12,7 @@ permalink: /getting-started/first-steps
 
 Welcome to the First Steps with Progress<sup>®</sup> Telerik<sup>®</sup> UI for ASP.NET MVC in Visual Studio tutorial!
 
-The tutorial guides you through implementing the Telerik UI for ASP.NET MVC Grid and Datepicker in a new Telerik UI for ASP.NET application. To create the application, you will use Visual Studio 2019 for Windows and the [Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}) that come with the Telerik UI for ASP.NET installation.
+The tutorial guides you through implementing the Telerik UI for ASP.NET MVC Grid and Datepicker in a new Telerik UI for ASP.NET application. To create the application, you will use Visual Studio for Windows and the [Visual Studio Extensions]({% slug overview_visualstudio_aspnetmvc %}) that come with the Telerik UI for ASP.NET installation.
 
 The Telerik Extensions streamline the Telerik UI for ASP.NET MVC setup by automatically adding the necessary references and configuration. The Extensions can also [convert an existing ASP.NET MVC application]({% slug projectwizardcoversion_visualstudio_aspnetmvc %}) to a Telerik UI for ASP.NET MVC application.
 

@@ -6066,7 +6066,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
 
 #### Returns
 
-`Promise`
+`Promise` - a promise that will be resolved once the data is loaded.
 
 #### Example - returning a promise
 
@@ -6266,7 +6266,7 @@ A string, a DOM element, or a jQuery object which represents the table row. A st
 
 #### Returns
 
-`Promise`
+`Promise` - a promise that will be resolved once the data is loaded.
 
 #### Example - returning a promise
 

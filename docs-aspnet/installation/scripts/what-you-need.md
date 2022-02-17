@@ -9,7 +9,7 @@ position: 1
 
 # Creating Your Own Custom Bundles
 
-Depending on your project, you may need to skip some of the Kendo UI utilities and install only what your application requires.  
+Depending on your project, you may need to skip some of the Kendo UI utilities and install only what your application requires.
 
 ## Combined Scripts
 
@@ -70,13 +70,12 @@ To build a custom distribution from the shipped source:
 
       ```sh
           cd src
-          npm install -g gulp
           npm install
-          gulp custom -c autocomplete,dropdownlist
+          npx gulp custom -c autocomplete,dropdownlist
       ```
 
 1. List the components you want to be included in the custom build and separate them with a comma (`,`). The previous example builds a custom minified script which includes the AutoComplete and the DropDownList widgets.
-1. Build the entire Kendo UI library by running `gulp custom -c all`.
+1. Build the entire Kendo UI library by running `npx gulp custom -c all`.
 
       > When complete, the `gulp` command outputs a `kendo.custom.min.js` file in the `src/dist` directory. The Gulp build task automatically resolves the needed dependencies for each component, so you do not have to list them. Do not use multiple custom combined scripts, as they will contain duplicate code. Instead, create one combined script file, which includes everything you need.
 

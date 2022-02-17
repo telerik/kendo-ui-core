@@ -596,7 +596,7 @@ var __meta__ = { // jshint ignore:line
                     return !node.hasClass(DISABLED_STATE_CLASS) ? { element: node, listBox: connectedListBox } : null;
                 } else if (!items.length ||
                             originalElement.hasClass("k-list-scroller k-selectable") ||
-                            originalElement.hasClass("k-reset k-list")) {
+                            originalElement.hasClass("k-list-content")) {
                     return { element: connectedListBox._getList(), listBox: connectedListBox, appendToBottom: true };
                 } else {
                     return null;
