@@ -9,7 +9,7 @@ slug: troubleshooting_content_security_policy_aspnetmvc
 
 If the strict `Content-Security-Policy` (CSP) mode is enabled, some browser features are disabled by default:
 
-- Inline JavaScript, such as <script></script> or DOM event attributes like `onclick`, is blocked. All script code must reside in separate files, served from a whitelisted domain.
+- Inline JavaScript, such as `<script> ... </script>` or DOM event attributes like `onclick`, is blocked. All script code must reside in separate files, served from a whitelisted domain.
 - Dynamic code evaluation via `eval()` and string arguments for both `setTimeout` and `setInterval` are blocked.
 
 Kendo UI uses `eval()` calls. This is how the Kendo UI templates work internally. Therefore, Kendo UI does not currently support the strict CSP mode.
