@@ -3123,7 +3123,7 @@ function pad(number, digits, end) {
             value = true;
         } else if (value === "false") {
             value = false;
-        } else if (numberRegExp.test(value) && option != "mask") {
+        } else if (numberRegExp.test(value) && option != "mask" && option != "format") {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
             value = new Function("return (" + value + ")")();

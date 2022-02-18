@@ -16,7 +16,8 @@
             altTemplate: "",
             dataMinHeight: "",
             columns: null,
-            dataBar: ""
+            dataBar: "",
+            format: ""
         },
 
         events: ["click", "click2"]
@@ -290,6 +291,15 @@
             var testwidget = dom.data("kendoTestWidget");
 
             assert.equal(testwidget.options.altTemplate({}), $("#template").html());
+        });
+
+        it("does not parse numeric values from format data attributes", function() {
+            dom = $('<div data-role="testwidget" data-format="00000" />');
+            kendo.init(dom);
+
+            var testwidget = dom.data("kendoTestWidget");
+
+            assert.isOk(testwidget.options.format === "00000");
         });
 
         it("initializes data source by field name", function() {
