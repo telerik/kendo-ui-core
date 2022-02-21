@@ -1,11 +1,41 @@
 ---
-title: Create Custom RegExp-Based Validation
-page_title: Create Custom RegExp-Based Validation
-description: "Learn how to create RegExp-based validation rules in a Kendo UI Spreadsheet."
+title: Create Custom RegExp-Based Validation in the Spreadsheet
+page_title: Create Custom RegExp-Based Validation in the Spreadsheet
+description: "Learn how to create RegExp-based validation rules in a Kendo UI Spreadsheet for jQuery."
 slug: howto_regexp_based_validation
+previous_url: /controls/data-management/spreadsheet/how-to/regexp-validation
+tags: kendo, jquery, spreadsheet, create, custom, regexp, based, validation, rules
+component: spreadsheet
+type: how-to
+res_type: kb
 ---
 
-# Create Custom RegExp-Based Validation
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Spreadsheet for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use RegExp-based rules with the validation of the Kendo UI for jQuery Spreadsheet?
+
+## Solution
 
 The [validation types](/api/javascript/spreadsheet/range/methods/validation) of the Spreadsheet do not directly support RegExp-based rules.
 

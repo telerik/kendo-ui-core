@@ -1,11 +1,41 @@
 ---
-title: Get Flagged Cells Containing Invalid Values
-page_title: Get Flagged Cells Containing Invalid Values | Kendo UI Spreadsheet
-description: "Learn how to get all flagged cells containing invalid values."
+title: Get Flagged Spreadsheet Cells Containing Invalid Values
+page_title: Get Flagged Spreadsheet Cells Containing Invalid Values
+description: "Learn how to get all flagged cells in a Kendo UI for jQuery Spreadsheet which contain invalid values."
 slug: howto_get_flagged_cells_containing_invalid_values_spreadsheet_widget
+previous_url: /controls/data-management/spreadsheet/how-to/get-flagged-cells
+tags: kendo, jquery, spreadsheet, get, flagged, cells, containing, invalid, values
+component: spreadsheet
+type: how-to
+res_type: kb
 ---
 
-# Get Flagged Cells Containing Invalid Values
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Spreadsheet for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I get all the cells in a Kendo UI for jQuery Spreadsheet that contain invalid values?
+
+## Solution
 
 The following example demonstrates how to get all flagged cells in the Spreadsheet which contain invalid values.
 

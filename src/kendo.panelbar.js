@@ -1572,6 +1572,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             element
+                .toggle(0)
                 .kendoStop(true, true)
                 .kendoAnimate( animation );
         },

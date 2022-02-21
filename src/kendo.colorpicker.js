@@ -82,7 +82,14 @@ var __meta__ = { // jshint ignore:line
             }
             that._value = options.value = value;
 
-            var content = that._inputWrapper = that.wrapper = $(that._template(options));
+            var _buttonHtml = kendo.html.renderButton('<button class="k-select k-button-rectangle k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, that.options, {
+                icon: "arrow-s"
+            }));
+
+            var content = that._inputWrapper = that.wrapper = $(that._template($.extend({}, that.options, {
+                _buttonHtml: _buttonHtml
+            })));
+
             that._applyCssClasses();
             element.hide().after(content);
 
@@ -170,16 +177,14 @@ var __meta__ = { // jshint ignore:line
         _template: kendo.template(
             '<span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker">' +
                 '<span  class="k-input-inner">' +
-                        '<span class="k-value-icon k-color-preview #: toolIcon ? "k-icon-color-preview" : "" #">' +
-                            '# if (toolIcon) { #' +
-                            '<span class="k-color-preview-icon k-icon #= toolIcon #"></span>' +
-                            '# } #' +
-                            '<span class="k-color-preview-mask"></span>' +
-                        '</span>' +
-                    '</span >' +
-                    kendo.html.renderButton('<button class="k-select k-button-rectangle k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, this.options, {
-                        icon: "arrow-s"
-                    })) +
+                    '<span class="k-value-icon k-color-preview #: toolIcon ? "k-icon-color-preview" : "" #">' +
+                        '# if (toolIcon) { #' +
+                        '<span class="k-color-preview-icon k-icon #= toolIcon #"></span>' +
+                        '# } #' +
+                        '<span class="k-color-preview-mask"></span>' +
+                    '</span>' +
+                '</span >' +
+                '#= _buttonHtml #' +
             '</span>'
         ),
 
