@@ -1061,7 +1061,11 @@ var __meta__ = { // jshint ignore:line
             },
 
             refresh: function() {
-                this.widget.check(this.bindings[CHECKED].get() === true);
+                if (this.element.type === "radio") {
+                    this.widget.check(this.bindings[CHECKED].get().toString() === this.value());
+                } else {
+                    this.widget.check(this.bindings[CHECKED].get() === true);
+                }
             },
 
             value: function() {

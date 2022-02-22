@@ -210,11 +210,6 @@ table.k-editor {
     width: 5em;
 }
 
-.k-editor-dialog .k-button
-{
-    display: inline-block;
-}
-
 .k-button-wrapper .k-link:hover {
     text-decoration: underline;
 }
@@ -459,7 +454,8 @@ table.k-editor {
     box-shadow: none;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-tabstrip-wrapper .k-content {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-tabstrip-wrapper .k-content,
+.k-editor-dialog.k-editor-table-wizard-dialog  .k-tabstrip-content {
     overflow: hidden;
     min-height: 440px;
     height: 35em;
@@ -468,13 +464,17 @@ table.k-editor {
     border-width: 0;
 }
 
+ .k-editor-table-wizard-dialog .k-colorpicker {
+     vertical-align: middle;
+ }
+
 .k-editor-dialog .k-edit-field .k-numerictextbox {
-    width: 10.6em;
+    width: 10em;
     margin: 0 .35714285em 0 0;
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdown {
-    width: 4em;
+    width: 4.5em;
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-textbox,

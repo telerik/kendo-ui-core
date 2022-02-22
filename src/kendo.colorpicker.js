@@ -372,11 +372,17 @@ var __meta__ = { // jshint ignore:line
                             that._cachedHue = color.h;
                         }
 
-                        setTimeout(function(){
-                            if (that.wrapper && !that.wrapper.is("[unselectable='on']")) {
-                                that.wrapper.trigger("focus");
-                            }
-                        },0);
+                        var clickedOutside = event &&
+                            event instanceof MouseEvent &&
+                            $(event.target).parents(".k-colorpicker-popup").length === 0;
+
+                        if (!clickedOutside) {
+                            setTimeout(function () {
+                                if (that.wrapper && !that.wrapper.is("[unselectable='on']")) {
+                                    that.wrapper.trigger("focus");
+                                }
+                            }, 0);
+                        }
                     },
                     open: function(ev) {
                         if (that.trigger("open")) {
