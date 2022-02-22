@@ -28,7 +28,8 @@
         it("MultiSelect with search term is accessible", function(done) {
             var ms = new MultiSelect(input, {
                 dataSource: [ "foo", "bar" ],
-                filter: "contains"
+                filter: "contains",
+                animation: false
             });
 
             ms.open();
@@ -40,7 +41,8 @@
         it("MultiSelect with search term has accessible popup", function(done) {
             var ms = new MultiSelect(input, {
                 dataSource: [ "foo", "bar" ],
-                filter: "contains"
+                filter: "contains",
+                animation: false
             });
 
             ms.open();
@@ -72,7 +74,8 @@
             var ms = new MultiSelect(input, {
                 dataSource: [ "foo", "bar" ],
                 value: ["bar", "foo"],
-                tagMode: "single"
+                tagMode: "single",
+                animation: false
             });
 
             ms.open();
@@ -85,7 +88,8 @@
                 dataSource: [ "foo", "bar" ],
                 footerTemplate: 'Total items found',
                 headerTemplate: 'Total items found',
-                filter: "contains"
+                filter: "contains",
+                animation: false
             });
 
             ms.open();
@@ -148,7 +152,8 @@
 
     it("MultiSelect adds aria-expanded='true'", function() {
         var multiselect = new MultiSelect(input, {
-            dataSource: ["item1", "item2"]
+            dataSource: ["item1", "item2"],
+            animation: false
         });
 
         multiselect.open();
@@ -158,7 +163,8 @@
 
     it("MultiSelect sets aria-expanded to false on close", function() {
         var multiselect = new MultiSelect(input, {
-            dataSource: ["item1", "item2"]
+            dataSource: ["item1", "item2"],
+            animation: false
         });
 
         multiselect.open();
@@ -170,7 +176,8 @@
 
     it("MultiSelect adds aria-hidden to the popup element", function() {
         var multiselect = new MultiSelect(input, {
-            dataSource: ["item1", "item2"]
+            dataSource: ["item1", "item2"],
+            animation: false
         });
 
         assert.equal(multiselect.ul.attr("aria-hidden"), "true");
@@ -236,7 +243,8 @@
     it("MultiSelect makes first item active on open", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"), {
             dataSource: ["item1", "item2"],
-            value: "item1"
+            value: "item1",
+            animation: false
         });
 
         multiselect.open();
@@ -247,7 +255,8 @@
     it("MultiSelect remove aria-activedescendant on close", function() {
         var multiselect = new MultiSelect(input.attr("id", "test"), {
             dataSource: ["item1", "item2"],
-            value: "item1"
+            value: "item1",
+            animation: false
         });
 
         multiselect.open();
@@ -324,7 +333,8 @@
 
     it("MultiSelect adds role to the popup items", function() {
         var multiselect = new MultiSelect(input, {
-            dataSource: ["item1", "item2"]
+            dataSource: ["item1", "item2"],
+            animation: false
         });
 
         assert.equal(multiselect.ul.children().first().attr("role"), "option");

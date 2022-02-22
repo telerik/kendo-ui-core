@@ -1,16 +1,43 @@
 ---
-title: Bind Charts to Sheet Data
-page_title: Bind Charts to Sheet Data | Kendo UI Spreadsheet
+title: Bind Charts to Spreadsheet Data
+page_title: Bind Charts to Spreadsheet Data
 description: "Learn how to bind a Kendo UI Chart to the data of a Kendo UI Spreadsheet widget."
 slug: howto_bindcharttosheet_spreadsheet_widget
-pevious_url: /controls/charts/how-to/bind-chart-to-spreadsheet-data, /controls/charts/how-to/binding/bind-chart-to-spreadsheet-data
+pevious_url: /controls/charts/how-to/bind-chart-to-spreadsheet-data, /controls/charts/how-to/binding/bind-chart-to-spreadsheet-data, /controls/data-management/spreadsheet/how-to/bind-chart-to-range
+tags: kendo, jquery, spreadsheet, bind, chart, to, sheet, data
+component: spreadsheet
+type: how-to
+res_type: kb
 ---
 
-# Bind Charts to Sheet Data
+## Environment
 
-The following example demonstrates how to extract the Spreadsheet data and populate a Kendo UI Chart with it.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Spreadsheet for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet/events/change) event.
+## Description
+
+How can I extract data from the Kendo UI for jQuery Spreadsheet and render it in a chart?
+
+## Solution
+
+The following example demonstrates how to extract the Spreadsheet data and populate a Kendo UI Chart with it. The Chart is updated on sheet upon a [`change`](/api/javascript/spreadsheet/sheet/events/change) event.
 
 ```dojo
 <style>

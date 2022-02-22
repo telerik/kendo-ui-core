@@ -1,13 +1,43 @@
 ---
-title: Hide Edit Fields on Different Levels
-page_title: Hide Edit Fields on Different Levels | Kendo UI TreeList
+title: Hide the Edit Fields on Different TreeList Levels
+page_title: Hide Edit Fields on Different TreeList Levels
 description: "Learn how to hide editors for different columns on different levels in a Kendo UI TreeList widget."
 slug: howto_hideeditfieldsondifferentlevels_treelist
+previous_url: /controls/data-management/treelist/how-to/hide-edit-fields-on-different-levels
+tags: kendo, jquery, treelist, hide, edit, fields, on, different, levels
+component: treelist
+type: how-to
+res_type: kb
 ---
 
-# Hide Edit Fields on Different Levels
+## Environment
 
-The following example demonstrates how to hide editors for different columns on different levels in the TreeList.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI TreeList for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I hide editors for different columns on different levels in the Kendo UI for jQuery TreeList?
+
+## Solution
+
+The following example demonstrates how to achieve the required scenario.
 
 ```dojo
     <div id="treelist"></div>

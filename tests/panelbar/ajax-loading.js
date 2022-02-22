@@ -78,7 +78,7 @@
             var item = getRootItem(0);
 
             panelbar.bind("contentLoad", function() {
-                assert.equal($(arguments[0].contentElement).css("display"), "block");
+                assert.equal($(arguments[0].contentElement).css("display"), "flow-root");
                 panelbar.unbind("contentLoad");
                 done();
             });
@@ -153,7 +153,7 @@
             var item = getRootItem(1);
 
             panelbar.bind("contentLoad", function() {
-                assert.equal(item.parent().find(".k-content").css("display"), "block");
+                assert.equal(item.parent().find(".k-content").css("display"), "flow-root");
                 panelbar.unbind("contentLoad");
                 done();
             });

@@ -92,7 +92,7 @@
                 $("<div id='window' />")
             );
 
-            assert.equal(wnd.element.attr("role"), "dialog");
+            assert.equal(wnd.wrapper.attr("role"), "dialog");
         });
 
         it("Window sets id to the title", function() {
@@ -114,7 +114,7 @@
             );
 
             assert.equal(
-                wnd.element.attr("aria-labelledby"),
+                wnd.wrapper.attr("aria-labelledby"),
                 "window_wnd_title"
             );
         });

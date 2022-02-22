@@ -1,6 +1,6 @@
-(function(f, define){
+(function(f, define) {
     define([ "./kendo.data" ], f);
-})(function(){
+})(function() {
 
 var __meta__ = { // jshint ignore:line
     id: "tabstrip",
@@ -16,7 +16,7 @@ var __meta__ = { // jshint ignore:line
     } ]
 };
 
-(function ($, undefined) {
+(function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
         keys = kendo.keys,
@@ -80,7 +80,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         rendering = {
-            wrapperCssClass: function (group, item) {
+            wrapperCssClass: function(group, item) {
                 var result = ["k-tabstrip-item", "k-item"],
                     index = item.index;
 
@@ -92,7 +92,7 @@ var __meta__ = { // jshint ignore:line
                     result.push("k-first");
                 }
 
-                if (index == group.length-1) {
+                if (index == group.length - 1) {
                     result.push("k-last");
                 }
 
@@ -148,7 +148,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!item.children("." + LINK).length) {
                 item
-                    .contents()      // exclude groups, real links, templates and empty text nodes
+                    .contents() // exclude groups, real links, templates and empty text nodes
                     .filter(function() { return (!this.nodeName.match(excludedNodesRegExp) && !(this.nodeType == 3 && !trim(this.nodeValue))); })
                     .wrapAll("<span UNSELECTABLE='on' class='" + LINK + "'/>");
             }
@@ -269,15 +269,15 @@ var __meta__ = { // jshint ignore:line
             options.animation = extend(true, animation, options.animation);
 
             if (options.navigatable) {
-                that.wrapper.on("keydown" + NS,  that._keyDownProxy);
+                that.wrapper.on("keydown" + NS, that._keyDownProxy);
             } else {
-                that.wrapper.off("keydown" + NS,  that._keyDownProxy);
+                that.wrapper.off("keydown" + NS, that._keyDownProxy);
             }
 
             Widget.fn.setOptions.call(that, options);
         },
 
-        activateTab: function (item) {
+        activateTab: function(item) {
             if (this.tabGroup.children("[data-animating]").length) { return; }
 
             item = this.tabGroup.find(item);
@@ -347,7 +347,7 @@ var __meta__ = { // jshint ignore:line
             item.attr("data-animating", true);
 
             var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || that._contentUrls[itemIndex] || false) && contentHolder.is(EMPTY),
-                showContentElement = function () {
+                showContentElement = function() {
                     oldTab.removeAttr("aria-selected");
                     item.attr("aria-selected", true);
 
@@ -358,11 +358,11 @@ var __meta__ = { // jshint ignore:line
                         .removeAttr("aria-hidden")
                         .kendoStop(true, true)
                         .attr("aria-expanded", true)
-                        .kendoAnimate( extend({ init: function () {
+                        .kendoAnimate( extend({ init: function() {
                             that.trigger(SHOW, { item: item[0], contentElement: contentHolder[0] });
                             kendo.resize(contentHolder);
                         } }, animation, {
-                            complete: function () {
+                            complete: function() {
                                 item.removeAttr("data-animating");
 
                                 that.trigger(ACTIVATE, { item: item[0], contentElement: contentHolder[0] });
@@ -372,7 +372,7 @@ var __meta__ = { // jshint ignore:line
                                 if (isAnimationEnabled && (kendo.support.browser.msie || kendo.support.browser.edge)) {
                                     contentHolder.finish().animate({
                                         opacity: 0.9
-                                    },"fast", "linear", function(){
+                                    },"fast", "linear", function() {
                                         contentHolder.finish().animate({
                                             opacity: 1
                                         },"fast", "linear");
@@ -387,7 +387,7 @@ var __meta__ = { // jshint ignore:line
                         that.trigger("change");
                     } else {
                         item.removeAttr("data-animating");
-                        that.ajaxRequest(item, contentHolder, function () {
+                        that.ajaxRequest(item, contentHolder, function() {
                             item.attr("data-animating", true);
                             showContentElement();
                             that.trigger("change");
@@ -399,6 +399,10 @@ var __meta__ = { // jshint ignore:line
                     }
 
                 };
+
+            // See https://github.com/telerik/kendo-ui-core/issues/6660
+            var oldMinHeight = that.element.css('min-height');
+            that.element.css('min-height', that.element.outerHeight());
 
             visibleContents
                     .removeClass(ACTIVESTATE);
@@ -426,10 +430,12 @@ var __meta__ = { // jshint ignore:line
                 showContent();
             }
 
+            that.element.css('min-height', oldMinHeight);
+
             return true;
         },
 
-        ajaxRequest: function (element, content, complete, url) {
+        ajaxRequest: function(element, content, complete, url) {
             element = this.tabGroup.find(element);
 
             var that = this,
@@ -469,7 +475,7 @@ var __meta__ = { // jshint ignore:line
                         event = current.progressUpload ? "progressUpload" : current.progress ? "progress" : false;
 
                     if (request) {
-                        $.each([ request, request.upload ], function () {
+                        $.each([ request, request.upload ], function() {
                             if (this.addEventListener) {
                                 this.addEventListener("progress", function(evt) {
                                     if (event) {
@@ -497,13 +503,13 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
 
-                error: function (xhr, status) {
+                error: function(xhr, status) {
                     if (that.trigger("error", { xhr: xhr, status: status })) {
                         this.complete();
                     }
                 },
 
-                stopProgress: function () {
+                stopProgress: function() {
                     clearInterval(fakeProgress);
                     statusIcon
                         .stop(true)
@@ -511,7 +517,7 @@ var __meta__ = { // jshint ignore:line
                         [0].style.cssText = "";
                 },
 
-                complete: function (xhr) {
+                complete: function(xhr) {
                     that.inRequest = false;
                     if (this.noProgress) {
                         setTimeout(this.stopProgress, 500);
@@ -524,21 +530,21 @@ var __meta__ = { // jshint ignore:line
                     }
                 },
 
-                success: function (data) {
+                success: function(data) {
                     statusIcon.addClass("k-complete");
                     try {
                         var current = this,
                             loaded = 10;
 
                         if (current.noProgress) {
-                            statusIcon.width(loaded+"%");
-                            fakeProgress = setInterval(function () {
+                            statusIcon.width(loaded + "%");
+                            fakeProgress = setInterval(function() {
                                 current.progress({ lengthComputable: true, loaded: Math.min(loaded, 100), total: 100 });
                                 loaded += 10;
                             }, 40);
                         }
 
-                        that.angular("cleanup", function () { return { elements: content.get() }; });
+                        that.angular("cleanup", function() { return { elements: content.get() }; });
                         kendo.destroy(content);
                         content.html(data);
                     } catch (e) {
@@ -554,7 +560,7 @@ var __meta__ = { // jshint ignore:line
                         complete.call(that, content);
                     }
 
-                    that.angular("compile", function(){ return { elements: content.get() }; });
+                    that.angular("compile", function() { return { elements: content.get() }; });
 
                     that.trigger(CONTENTLOAD, { item: element[0], contentElement: content[0] });
                 }
@@ -571,11 +577,11 @@ var __meta__ = { // jshint ignore:line
             that.xhr = $.ajax(ajaxOptions);
         },
 
-        append: function (tab) {
+        append: function(tab) {
             var that = this,
                 inserted = that._create(tab);
 
-            each(inserted.tabs, function (idx) {
+            each(inserted.tabs, function(idx) {
                 var contents = inserted.contents[idx];
                 that.tabGroup.append(this);
                 if (that.options.tabPosition == "bottom") {
@@ -583,7 +589,7 @@ var __meta__ = { // jshint ignore:line
                 } else {
                     that.wrapper.append(contents);
                 }
-                that.angular("compile", function(){ return { elements: [ contents ] }; });
+                that.angular("compile", function() { return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -593,7 +599,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        contentElement: function (itemIndex) {
+        contentElement: function(itemIndex) {
             if (isNaN(itemIndex - 0)) {
                 return undefined;
             }
@@ -612,14 +618,14 @@ var __meta__ = { // jshint ignore:line
             return undefined;
         },
 
-        contentHolder: function (itemIndex) {
+        contentHolder: function(itemIndex) {
             var contentElement = $(this.contentElement(itemIndex)),
                 scrollContainer = contentElement.children(".km-scroll-container");
 
             return kendo.support.touch && scrollContainer[0] ? scrollContainer : contentElement;
         },
 
-        deactivateTab: function (item) {
+        deactivateTab: function(item) {
             var that = this,
                 animationSettings = that.options.animation,
                 animation = animationSettings.open,
@@ -665,19 +671,19 @@ var __meta__ = { // jshint ignore:line
             kendo.destroy(that.wrapper);
         },
 
-        disable: function (element) {
+        disable: function(element) {
             this._toggleDisabled(element, false);
 
             return this;
         },
 
-        enable: function (element, state) {
+        enable: function(element, state) {
             this._toggleDisabled(element, state !== false);
 
             return this;
         },
 
-        insertAfter: function (tab, referenceTab) {
+        insertAfter: function(tab, referenceTab) {
             if ($(tab).is($(referenceTab))) {
                 referenceTab = this.tabGroup.find(referenceTab).prev();
             } else {
@@ -688,7 +694,7 @@ var __meta__ = { // jshint ignore:line
                 inserted = that._create(tab),
                 referenceContent = that.element.find("[id='" + referenceTab.attr("aria-controls") + "']");
 
-            each(inserted.tabs, function (idx) {
+            each(inserted.tabs, function(idx) {
                 var contents = inserted.contents[idx];
                 var fromIndex = inserted.newTabsCreated ? that._contentUrls.length - (inserted.tabs.length - idx) : $(contents).index() - 1;
 
@@ -696,7 +702,7 @@ var __meta__ = { // jshint ignore:line
                 referenceContent.after(contents);
 
                 that._moveUrlItem(fromIndex, $(this).index());
-                that.angular("compile", function(){ return { elements: [ contents ] }; });
+                that.angular("compile", function() { return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -706,7 +712,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        insertBefore: function (tab, referenceTab) {
+        insertBefore: function(tab, referenceTab) {
             if ($(tab).is($(referenceTab))) {
                 referenceTab = this.tabGroup.find(referenceTab).next();
             } else {
@@ -717,7 +723,7 @@ var __meta__ = { // jshint ignore:line
                 inserted = that._create(tab),
                 referenceContent = that.element.find("[id='" + referenceTab.attr("aria-controls") + "']");
 
-            each(inserted.tabs, function (idx) {
+            each(inserted.tabs, function(idx) {
                 var contents = inserted.contents[idx];
                 var fromIndex = inserted.newTabsCreated ? that._contentUrls.length - (inserted.tabs.length - idx) : $(contents).index() - 1;
 
@@ -725,7 +731,7 @@ var __meta__ = { // jshint ignore:line
                 referenceContent.before(contents);
 
                 that._moveUrlItem(fromIndex, $(this).index());
-                that.angular("compile", function(){ return { elements: [ contents ] }; });
+                that.angular("compile", function() { return { elements: [ contents ] }; });
             });
 
             updateFirstLast(that.tabGroup);
@@ -824,12 +830,12 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        reload: function (element) {
+        reload: function(element) {
             element = this.tabGroup.find(element);
             var that = this;
             var contentUrls = that._contentUrls;
 
-            element.each(function () {
+            element.each(function() {
                 var item = $(this),
                     contentUrl = item.find("." + LINK).data(CONTENTURL) || contentUrls[item.index()],
                     content = that.contentHolder(item.index());
@@ -842,7 +848,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        remove: function (elements) {
+        remove: function(elements) {
             var that = this;
             var type = typeof elements;
             var contents;
@@ -853,7 +859,7 @@ var __meta__ = { // jshint ignore:line
                 elements = that.tabGroup.children().eq(elements);
             }
 
-            contents = elements.map(function () {
+            contents = elements.map(function() {
                 var idx = $(this).index();
                 var content = that.contentElement(idx);
 
@@ -873,7 +879,7 @@ var __meta__ = { // jshint ignore:line
             return that;
         },
 
-        select: function (element) {
+        select: function(element) {
             var that = this;
 
             if (arguments.length === 0) {
@@ -885,7 +891,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             element = that.tabGroup.find(element);
-            $(element).each(function (index, item) {
+            $(element).each(function(index, item) {
                 item = $(item);
                 if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentHolder(item.index())[0] })) {
                     that.activateTab(item);
@@ -911,7 +917,7 @@ var __meta__ = { // jshint ignore:line
             }
         },
 
-        _active: function () {
+        _active: function() {
             var item = this.tabGroup.children().filter("." + ACTIVESTATE);
 
             item = item[0] ? item : this._endItem("first");
@@ -950,7 +956,7 @@ var __meta__ = { // jshint ignore:line
                 .on(CLICK + NS, " > " + NAVIGATABLEITEMS, $.proxy(that._itemClick, that));
         },
 
-        _click: function (item) {
+        _click: function(item) {
             var that = this,
                 link = item.find("." + LINK),
                 href = link.attr(HREF),
@@ -1005,7 +1011,7 @@ var __meta__ = { // jshint ignore:line
             return prevent;
         },
 
-        _create: function (tab) {
+        _create: function(tab) {
             var that = this,
             tabs,
             contents,
@@ -1018,7 +1024,7 @@ var __meta__ = { // jshint ignore:line
                 tab = Array.isArray(tab) ? tab : [tab];
                 newTabsCreated = true;
 
-                tabs = map(tab, function (value, idx) {
+                tabs = map(tab, function(value, idx) {
                             that._appendUrlItem(tab[idx].contentUrl || null);
 
                             return $(TabStrip.renderItem({
@@ -1027,7 +1033,7 @@ var __meta__ = { // jshint ignore:line
                             }));
                         });
 
-                contents = map( tab, function (value, idx) {
+                contents = map( tab, function(value, idx) {
                             if (typeof value.content == "string" || value.contentUrl) {
                                 return $(TabStrip.renderContent({
                                     item: extend(value, { index: idx })
@@ -1041,7 +1047,7 @@ var __meta__ = { // jshint ignore:line
                     tabs = $(tab);
                 }
                 contents = $();
-                tabs.each(function () {
+                tabs.each(function() {
                     if (/k-tabstrip-items/.test(this.parentNode.className)) {
                         var element = that.element.find("[id='" + this.getAttribute("aria-controls") + "']");
                         content = element;
@@ -1058,7 +1064,7 @@ var __meta__ = { // jshint ignore:line
             return { tabs: tabs, contents: contents, newTabsCreated: newTabsCreated };
         },
 
-        _current: function (candidate) {
+        _current: function(candidate) {
             var that = this,
                 focused = that._focused;
 
@@ -1104,7 +1110,7 @@ var __meta__ = { // jshint ignore:line
             if (!elementId || elementId.indexOf(wrapperId + "-") > -1) {
                 var tabStripID = (wrapperId || guid) + "-";
 
-                if(tab) {
+                if (tab) {
                     tabStripID += "tab-";
                 }
 
@@ -1280,17 +1286,17 @@ var __meta__ = { // jshint ignore:line
                     scrollPrevButton = that._scrollPrevButton = that.tabWrapper.children(".k-tabstrip-prev");
                     scrollNextButton = that._scrollNextButton = that.tabWrapper.children(".k-tabstrip-next");
 
-                    scrollPrevButton.on(mouseDown + NS, function () {
+                    scrollPrevButton.on(mouseDown + NS, function() {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance * (isRtlScrollDirection ? 1 : -1));
                     });
 
-                    scrollNextButton.on(mouseDown + NS, function () {
+                    scrollNextButton.on(mouseDown + NS, function() {
                         that._nowScrollingTabs = true;
                         that._scrollTabsByDelta(options.scrollable.distance * (isRtlScrollDirection ? -1 : 1));
                     });
 
-                    scrollPrevButton.add(scrollNextButton).on(mouseUp + NS, function () {
+                    scrollPrevButton.add(scrollNextButton).on(mouseUp + NS, function() {
                         that._nowScrollingTabs = false;
                     });
 
@@ -1315,14 +1321,14 @@ var __meta__ = { // jshint ignore:line
         _scrollableAllowed: function() {
             var options = this.options;
 
-            if(options.scrollable && !options.scrollable.distance){
-                options.scrollable = {distance: DEFAULTDISTANCE};
+            if (options.scrollable && !options.scrollable.distance) {
+                options.scrollable = { distance: DEFAULTDISTANCE };
             }
 
             return options.scrollable && !isNaN(options.scrollable.distance) && (options.tabPosition == "top" || options.tabPosition == "bottom");
         },
 
-        _scrollTabsToItem: function (item) {
+        _scrollTabsToItem: function(item) {
             var that = this,
                 tabGroup = that.tabGroup,
                 currentScrollOffset = kendo.scrollLeft(tabGroup),
@@ -1350,22 +1356,22 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            tabGroup.finish().animate({ "scrollLeft": itemPosition }, "fast", "linear", function () {
+            tabGroup.finish().animate({ "scrollLeft": itemPosition }, "fast", "linear", function() {
                 that._toggleScrollButtons();
             });
         },
 
-        _scrollTabsByDelta: function (delta) {
+        _scrollTabsByDelta: function(delta) {
             var that = this;
             var tabGroup = that.tabGroup;
             var scrLeft = kendo.scrollLeft(tabGroup);
             var browser = kendo.support.browser;
 
-            if(that._isRtl && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
+            if (that._isRtl && (browser.mozilla || (browser.webkit && browser.version >= 85))) {
                 scrLeft = scrLeft * -1;
             }
 
-            tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function () {
+            tabGroup.finish().animate({ "scrollLeft": scrLeft + delta }, "fast", "linear", function() {
                 if (that._nowScrollingTabs && !jQuery.fx.off) {
                     that._scrollTabsByDelta(delta);
                 } else {
@@ -1397,14 +1403,14 @@ var __meta__ = { // jshint ignore:line
 
         _toggleDisabled: function(element, enable) {
             element = this.tabGroup.find(element);
-            element.each(function () {
+            element.each(function() {
                 $(this)
                     .toggleClass(DISABLEDSTATE, !enable)
                     .attr("aria-disabled", !enable);
             });
         },
 
-        _toggleScrollButtons: function () {
+        _toggleScrollButtons: function() {
             var that = this,
                 ul = that.tabGroup,
                 scrollLeft = kendo.scrollLeft(ul);
@@ -1444,7 +1450,7 @@ var __meta__ = { // jshint ignore:line
 
                 that.tabGroup // Remove empty text nodes
                     .contents()
-                    .filter(function () { return (this.nodeType == 3 && !trim(this.nodeValue)); })
+                    .filter(function() { return (this.nodeType == 3 && !trim(this.nodeValue)); })
                     .remove();
             }
 
@@ -1553,7 +1559,7 @@ var __meta__ = { // jshint ignore:line
 
     // client-side rendering
     extend(TabStrip, {
-        renderItem: function (options) {
+        renderItem: function(options) {
             options = extend({ tabStrip: {}, group: {} }, options);
 
             var empty = templates.empty,
@@ -1566,7 +1572,7 @@ var __meta__ = { // jshint ignore:line
             }, rendering));
         },
 
-        renderContent: function (options) {
+        renderContent: function(options) {
             return templates.content(extend(options, rendering));
         }
     });
@@ -1577,4 +1583,4 @@ var __meta__ = { // jshint ignore:line
 
 return window.kendo;
 
-}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3){ (a3 || a2)(); });
+}, typeof define == 'function' && define.amd ? define : function(a1, a2, a3) { (a3 || a2)(); });

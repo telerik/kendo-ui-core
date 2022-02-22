@@ -1,13 +1,43 @@
 ---
-title: Update Field in All Child Nodes
-page_title: Update Field in All Child Nodes | Kendo UI TreeList
-description: "Learn how to update all child nodes recursively, propagating the state of a row in a Kendo UI TreeList widget."
-slug: howto_updatefieldinallchildnodes_treelist
+title: Show a Checkbox Column in the TreeList
+page_title: Show a Checkbox Column in the TreeList
+description: "Learn how to show a checkbox column bound to the item model in a Kendo UI TreeList widget."
+slug: howto_showcheckboxcolumn_treelist
+previous_url: /controls/data-management/treelist/how-to/show-a-checkbox-column
+tags: kendo, jquery, treelist, show, a, checkbox, column
+component: treelist
+type: how-to
+res_type: kb
 ---
 
-# Update Field in All Child Nodes
+## Environment
 
-The following example demonstrates how to update all child nodes recursively and propagate the row state in the TreeList.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI TreeList for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I show a checkbox column in the Kendo UI for jQuery TreeList?
+
+## Solution
+
+The following example demonstrates how to add and render a checkbox column bound to the item model in the TreeList.
 
 ```dojo
   <div id="treelist"></div>
@@ -16,7 +46,7 @@ The following example demonstrates how to update all child nodes recursively and
     var dataSource = new kendo.data.TreeListDataSource({
       data: [
         { id:  1, Name: "Daryl Sweeney", Position: "CEO", Phone: "(555) 924-9726", parentId: null },
-        { id:  2, Name: "Guy Wooten", Position: "Chief Technical Officer", Phone: "(438) 738-4935", parentId: null },
+        { id:  2, Name: "Guy Wooten", Position: "Chief Technical Officer", Phone: "(438) 738-4935", parentId: null, checked: true },
         { id:  3, Name: "Priscilla Frank", Position: "Chief Product Officer", Phone: "(217) 280-5300", parentId: 1 },
         { id:  4, Name: "Ursula Holmes", Position: "EVP, Product Strategy", Phone: "(370) 983-8796", parentId: 3 },
         { id: 11, Name: "Hyacinth Hood", Position: "Team Lead", Phone: "(889) 345-2438", parentId: 32 },
@@ -32,37 +62,26 @@ The following example demonstrates how to update all child nodes recursively and
         { id: 50, Name: "Lillian Bradshaw", Position: "Software Developer", Phone: "(323) 509-3479", parentId: 46 },
         { id: 60, Name: "Akeem Carr", Position: "Junior Software Developer", Phone: "(738) 136-2814", parentId: 11 },
         { id: 78, Name: "Rinah Simon", Position: "Software Developer", Phone: "(285) 912-5271", parentId: 11 }
-      ],
-      change: function propagate(e) {
-        var node = e.items && e.items[0];
-        var propagatedField = "checked";
-
-        // Only propagate changes to the desired field.
-        if (!node || e.field != propagatedField) {
-          return;
-        }
-
-        this.unbind("change", propagate);
-
-        function update(dataSource, nodes, field, state) {
-          for (var i = 0; i < nodes.length; i++) {
-            nodes[i].set(field, state);
-
-            update(dataSource, dataSource.childNodes(nodes[i]), field, state);
-          }
-        }
-
-        update(this, this.childNodes(node), propagatedField, node[propagatedField]);
-
-        this.bind("change", propagate);
-      }
+      ]
     });
+
+    function toggleAll(e) {
+      var view = dataSource.view();
+      var checked = e.target.checked;
+      for (var i = 0; i < view.length; i++) {
+        view[i].set("checked", checked);
+      }
+    }
 
     $("#treelist").kendoTreeList({
       dataSource: dataSource,
       height: 540,
       columns: [
-        { template: "<input type='checkbox' data-bind='checked: checked' />", width: 32 },
+        {
+          headerTemplate: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' onclick='toggleAll(event)' />",
+          template: "<input type='checkbox' class='k-checkbox k-checkbox-md k-rounded-md' data-bind='checked: checked' />",
+          width: 40
+        },
         { field: "Position", expandable: true },
         { field: "Name" },
         { field: "Phone" }

@@ -1,15 +1,43 @@
 ---
-title: Set Validation Rules to Column Ranges
-page_title: Set Validation Rules to Column Ranges
-description: "Learn how to set a valdiation rule to a specific column range in Kendo UI Spreadsheet."
+title: Set Validation Rules to Column Ranges in the Spreadsheet
+page_title: Set Validation Rules to Column Ranges in the Spreadsheet
+description: "Learn how to set a validation rule to a specific column range in Kendo UI Spreadsheet."
 slug: howto_validationtocolumn_spreadsheet_widget
+previous_url: /controls/data-management/spreadsheet/how-to/validation-to-column
+tags: kendo, jquery, spreadsheet, set, validation, rules, to, column, ranges
+component: spreadsheet
+type: how-to
+res_type: kb
 ---
 
-# Set Validation Rules to Column Ranges
+## Environment
 
-The following example demonstrates how to set a validation rule to a column range.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Spreadsheet for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-To apply the validation rule to the specific range, it uses the [`range.validation`](/api/javascript/spreadsheet/range/methods/validation) method.
+## Description
+
+How can I set a validation rule to a column range in the Kendo UI for jQuery Spreadsheet?
+
+## Solution
+
+To apply the validation rule to the specific range, the following example uses the [`range.validation`](/api/javascript/spreadsheet/range/methods/validation) method.
 
 ```dojo
 <div id="spreadsheet" style="width: 100%;"></div>

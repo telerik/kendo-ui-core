@@ -277,15 +277,12 @@
                 id = element.attr("id");
                 if (id) {
                     id = id + "_wnd_title";
-                    wrapper.children(KWINDOWTITLEBAR)
-                        .children(KWINDOWTITLE)
-                        .attr("id", id);
-
-                    windowContent
-                        .attr({
+                    wrapper.attr({
                             "role": "dialog",
                             "aria-labelledby": id
-                        });
+                        }).children(KWINDOWTITLEBAR)
+                        .children(KWINDOWTITLE)
+                        .attr("id", id);
                 }
 
                 wrapper.add(wrapper.children(".k-resize-handle," + KWINDOWTITLEBAR))

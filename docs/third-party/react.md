@@ -12,6 +12,14 @@ Kendo UI provides integration support for React.
 
 To use any jQuery component in a React application, you need a trial of the [Kendo UI for jQuery](https://www.telerik.com/kendo-ui#jquery) library or a valid [Kendo UI license](https://www.telerik.com/purchase/kendo-ui).
 
+## Kendo UI Wrappers for React
+
+> Since **20 Dec 2021**, the Kendo UI Wrappers for React have been deprecated.
+
+ Instead of using the Kendo UI Wrappers for React, you can use over 100 native and actively supported [KendoReact components](https://www.telerik.com/kendo-react-ui/components/). While you can still use the Kendo UI for jQuery components in React apps, we strongly recommend that you use the KendoReact UI component library, which is 100% React.
+
+For the few React components still missing, we recommend [the approach below](#kendo-ui-for-jquery-in-react-applications) for using Kendo UI for jQuery components in React applications.
+
 ## KendoReact Suite
 
 If you are looking for native React components (no jQuery dependency), please visit [KendoReact](https://www.telerik.com/kendo-react-ui/). KendoReact is a UI component library of 100+ native React components, from Data Grid, Scheduler and Charts to DatePickers, Menus and Buttons.
@@ -77,12 +85,6 @@ The Kendo UI for jQuery widgets can be used inside a React application following
         this.kendoSpreadsheetInstance.destroy()
         $('#spreadsheet').empty()
     ```
-
-## Kendo UI Wrappers for React
-
-Since `20 Dec 2021`, the Kendo UI Wrappers for React have been deprecated. Instead, you can use over 100 native and actively supported KendoReact components. While you can still use the Kendo UI for jQuery components in React apps, we strongly recommend that you use the KendoReact UI component library, which is 100% React.
-
-For the few React components still missing, we recommend [the approach above](#kendo-ui-for-jquery-in-react-applications) for using Kendo UI for jQuery components in React applications.
 
 
 ## See Also

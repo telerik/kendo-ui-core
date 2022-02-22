@@ -560,6 +560,8 @@ navigation:
         title: "Button"
     "*buttongroup":
         title: "ButtonGroup"
+    "*checkbox":
+        title: "CheckBox"
     "*checkboxgroup":
         title: "CheckBoxGroup"
     "*/radiobutton":
@@ -650,6 +652,8 @@ navigation:
     "*orgchart":
         isNew: true
         title: "OrgChart"
+    "*radiobutton":
+        title: "RadioButton"
     "*radiogroup":
         title: "RadioGroup"
     "*rating":
@@ -1641,6 +1645,12 @@ defaults:
         path: "controls/charts"
     values:
         component: "charts"
+        
+-
+    scope:
+        path: "controls/editors/checkbox"
+    values:
+        component: "checkbox"
 
 -
     scope:
@@ -1857,6 +1867,12 @@ defaults:
         path: "controls/editors/numerictextbox"
     values:
         component: "numeric-textbox"
+
+-
+    scope:
+        path: "controls/editors/radiobutton"
+    values:
+        component: "radiobutton"
 
 -
     scope:
@@ -2139,6 +2155,7 @@ intro_columns:
     items:
       "AutoComplete": "overview_kendoui_autocomplete_widget"
       "Captcha": "overview_kendoui_captcha_widget"
+      "CheckBox": "overview_kendoui_checkbox_widget"
       "CheckBoxGroup": "overview_kendoui_checkboxgroup_widget"
       "Color Picker": "overview_kendoui_colorpicker_widget"
       "ComboBox": "overview_kendoui_combobox_widget"
@@ -2154,6 +2171,7 @@ intro_columns:
       "MultiColumnComboBox": "overview_kendoui_multicolumncombobox_widget"
       "MultiSelect": "overview_kendoui_multiselect_widget"
       "NumericTextBox": "overview_kendoui_numerictextbox_widget"
+      "RadioButton": "overview_kendoui_radiobutton_widget"
       "RadioGroup": "overview_kendoui_radiogroup_widget"
       "RangeSlider": "overview_kendoui_rangeslider_widget"
       "Rating": "overview_kendoui_rating_widget"

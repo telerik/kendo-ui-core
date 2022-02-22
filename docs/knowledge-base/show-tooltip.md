@@ -1,13 +1,41 @@
 ---
-title: Show Extra Information in Tooltip
-page_title: Show Extra Information in Tooltip | Kendo UI TreeList
+title: Show Extra TreeList Information in a Tooltip
+page_title: Show Additional TreeList Information a Tooltip
 description: "Learn how to show additional information about a Kendo UI TreeList entry by using the Kendo UI Tooltip widget."
 slug: howto_showtooltip_treelist
+previous_url: /controls/data-management/treelist/how-to/show-tooltip
+tags: kendo, jquery, treelist, show, extra, additional, information, in, tooltip
+component: treelist
+type: how-to
+res_type: kb
 ---
 
-# Show Extra Information in Tooltip
+## Environment
 
-Your project might require you to show additional information about an entry in the TreeList.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI TreeList for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I show additional information about an entry in the Kendo UI for jQuery TreeList?
+
+## Solution
 
 To achieve this behavior, use a Kendo UI Tooltip that displays the information when the user hovers with the mouse over the TreeList node.
 

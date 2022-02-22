@@ -149,7 +149,8 @@ it("ComboBox adds aria-expanded='false'", function() {
 
 it("ComboBox adds aria-expanded='true'", function() {
     var combobox = new ComboBox(input, {
-        dataSource: ["item1", "item2"]
+        dataSource: ["item1", "item2"],
+        animation: false
     });
 
     combobox.open();
@@ -159,7 +160,8 @@ it("ComboBox adds aria-expanded='true'", function() {
 
 it("ComboBox sets aria-expanded to false on close", function() {
     var combobox = new ComboBox(input, {
-        dataSource: ["item1", "item2"]
+        dataSource: ["item1", "item2"],
+        animation: false
     });
 
     combobox.open();
@@ -191,7 +193,8 @@ it("ComboBox adds role to the popup element", function() {
 
 it("ComboBox adds aria-hidden to the popup element", function() {
     var combobox = new ComboBox(input, {
-        dataSource: ["item1", "item2"]
+        dataSource: ["item1", "item2"],
+        animation: false
     });
 
     assert.equal(combobox.ul.attr("aria-hidden"), "true");

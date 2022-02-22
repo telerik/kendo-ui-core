@@ -363,7 +363,8 @@
 
         it("timepicker scrolls to selected value", function() {
             var timepicker = input.kendoTimePicker({
-                value: "10:00 AM"
+                value: "10:00 AM",
+                animation: false
             }).data("kendoTimePicker");
 
             timepicker.open();

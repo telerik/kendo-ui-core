@@ -1,11 +1,41 @@
 ---
-title: Show Context Menu
-page_title: Show Context Menu | Kendo UI TreeList
+title: Show Context Menu in the TreeList
+page_title: Show Context Menu in the TreeList
 description: "Learn how to show a context menu for the Kendo UI TreeList rows."
 slug: howto_showcontextmenu_treelist
+previous_url: /controls/data-management/treelist/how-to/show-context-menu
+tags: kendo, jquery, treelist, show, context, menu
+component: treelist
+type: how-to
+res_type: kb
 ---
 
-# Show Context Menu
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI TreeList for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I render a context menu in the Kendo UI for jQuery TreeList?
+
+## Solution
 
 The following example demonstrates how to show a context menu for the TreeList rows.
 
@@ -13,8 +43,8 @@ The following example demonstrates how to show a context menu for the TreeList r
   <div id="treelist"></div>
 
   <ul id="menu">
-    <li><span class='k-icon k-add'></span>Add</li>
-    <li><span class='k-icon k-delete'></span>Delete</li>
+    <li><span class='k-icon k-i-add'></span>Add</li>
+    <li><span class='k-icon k-i-delete'></span>Delete</li>
   </ul>
 
   <script>
