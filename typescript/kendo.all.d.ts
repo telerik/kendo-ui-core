@@ -3028,6 +3028,55 @@ declare namespace kendo.ui {
         target?: JQuery | undefined;
     }
 
+    class CircularProgressBar extends kendo.ui.Widget {
+
+        static fn: CircularProgressBar;
+
+        options: CircularProgressBarOptions;
+
+
+        element: JQuery;
+        wrapper: JQuery;
+
+        static extend(proto: Object): CircularProgressBar;
+
+        constructor(element: Element, options?: CircularProgressBarOptions);
+
+
+        redraw(): void;
+        resize(): void;
+        setOptions(options: any): void;
+        value(): number;
+        value(value: number): void;
+    }
+
+    interface CircularProgressBarColor {
+        color?: string;
+        from?: number | undefined;
+        to?: number;
+    }
+
+    interface CircularProgressBarOptions {
+        name?: string | undefined;
+        ariaRole?: boolean | undefined;
+        label?: string | undefined;
+        labelId?: string | undefined;
+        centerTemplate?: string|Function | undefined;
+        color?: string | undefined;
+        colors?: CircularProgressBarColor[] | undefined;
+        opacity?: number | undefined;
+        theme?: string | undefined;
+        transitions?: boolean | undefined;
+        indeterminate?: boolean | undefined;
+        pointerWidth?: number | undefined;
+        value?: number | undefined;
+    }
+    interface CircularProgressBarEvent {
+        sender: CircularProgressBar;
+        preventDefault: Function;
+        isDefaultPrevented(): boolean;
+    }
+
     class ColorGradient extends kendo.ui.Widget {
 
         static fn: ColorGradient;
@@ -25290,6 +25339,10 @@ interface JQuery {
     kendoCircularGauge(): JQuery;
     kendoCircularGauge(options: kendo.dataviz.ui.CircularGaugeOptions): JQuery;
     data(key: "kendoCircularGauge"): kendo.dataviz.ui.CircularGauge | undefined;
+
+    kendoCircularProgressBar(): JQuery;
+    kendoCircularProgressBar(options: kendo.ui.CircularProgressBarOptions): JQuery;
+    data(key: "kendoCircularProgressBar"): kendo.ui.CircularProgressBarOptions | undefined;
 
     kendoColorGradient(): JQuery;
     kendoColorGradient(options: kendo.ui.ColorGradientOptions): JQuery;

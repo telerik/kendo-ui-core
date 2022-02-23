@@ -1,13 +1,41 @@
 ---
-title: Pan with Mouse Wheel
-page_title: Pan with Mouse Wheel | Kendo UI Diagram
+title: Pan the Diagram with the Mouse Wheel
+page_title: Pan the Diagram with the Mouse Wheel
 description: "Learn how to pan the Kendo UI Diagram with the mouse wheel."
 slug: howto_pan_with_mouse_wheel
+previous_url: /controls/diagrams-and-maps/diagram/how-to/pan-with-mouse-wheel
+tags: kendo, jquery, diagram, pan, with, mouse, wheel
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Pan with Mouse Wheel
+## Environment
 
-The following example demonstrates how to pan the Kendo UI Diagram when scrolling with the mouse.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I pan the Kendo UI Diagram when scrolling with the mouse?
+
+## Solution
 
 To achieve this behavior:
 

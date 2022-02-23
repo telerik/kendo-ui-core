@@ -1,11 +1,41 @@
 ---
-title: Drag and Drop on Existing Shapes
-page_title: Drag and Drop on Existing Shapes | Kendo UI Diagram
+title: Drag and Drop on Existing Diagram Shapes
+page_title: Drag and Drop on Existing Shapes of the Diagram
 description: "Learn how to enable the dropping only of new shapes on existing ones in the Kendo UI Diagram."
 slug: howto_draganddrop_onshapes_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/drag-and-drop-on-shapes
+tags: kendo, jquery, diagram, drag, and, drop, on, existing, shapes
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Drag and Drop on Existing Shapes
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I implement dragging and dropping on existing Kendo UI for jQuery Diagram shapes?
+
+## Solution
 
 The following example demonstrates how to enable the dropping only of new shapes on existing ones in the Diagram.
 

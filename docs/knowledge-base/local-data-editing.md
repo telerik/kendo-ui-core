@@ -1,15 +1,45 @@
 ---
-title: Implement Local Data Editing
-page_title: Implement Local Data Editing | Kendo UI Diagram
+title: Implement Local Data Editing in the Diagram
+page_title: Implement Local Data Editing in the Diagram
 description: "Learn how to implement editing with local data in a Kendo UI Diagram by using custom functions for the dataSource transport operations."
 slug: howto_editlocaladata_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/local-data-editing
+tags: kendo, jquery, diagram, implement, local, data, editing
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Implement Local Data Editing
+## Environment
 
-The following example demonstrates how to implement the editing functionality with local data by using custom functions for the dataSource transport operations.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-You need this functionality because assigning a non-default `id` value for the new items is required in order for the item to be accepted as existing by the dataSource and the new shapes to be displayed by the Diagram.
+## Description
+
+How can I render local data in the Kendo UI for jQuery Diagram?
+
+## Solution
+
+The following example demonstrates how to implement the editing functionality with local data by using custom functions for the `dataSource` transport operations.
+
+You need this functionality because assigning a non-default `id` value for the new items is required in order for the item to be accepted as existing by the `dataSource` and the new shapes to be displayed by the Diagram.
 
 ```dojo
 
@@ -229,7 +259,7 @@ You need this functionality because assigning a non-default `id` value for the n
 
     <div id="diagram"></div>        
     <div id="changes">
-      <button type="button"  class="k-button" data-bind="click:showChanges">Show changes</button>
+      <button type="button" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" data-bind="click:showChanges"><span class="k-button-text">Show changes</span></button>
       <div data-bind="visible:visible">
         Deleted Shapes:
         <div data-bind="source: shapes.deleted" data-template="shapeItemTemplate">

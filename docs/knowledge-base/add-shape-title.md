@@ -1,15 +1,43 @@
 ---
-title: Add Shape Titles
-page_title: Add Shape Titles | Kendo UI Map
+title: Add Titles to Map Shapes
+page_title: Add Titles to Map Shapes
 description: "Learn how to add titles for shapes loaded from GeoJSON in a Kendo UI Map widget."
 slug: howto_addhspaetitles_map
+previous_url: /controls/diagrams-and-maps/map/how-to/add-shape-title
+tags: kendo, jquery, map, add, titles, to, shapes
+component: map
+type: how-to
+res_type: kb
 ---
 
-# Add Shape Titles
+## Environment
 
-The following example demonstrates how to add a title text for shapes in the Map widget that are loaded from GeoJSON.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Map for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-In particular, it shows how to add a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map/events/shapecreated) event.
+## Description
+
+How can I add some title text for the shapes in the Kendo UI for jQuery Map?
+
+## Solution
+
+The following example demonstrates how to add title text for Map shapes that are loaded from GeoJSON. In particular, the example adds a [`Text`](/api/javascript/drawing/text) element positioned over the shape center. Shape layers are rendered by using the [Drawing API]({% slug overview_kendoui_drawingapi %}). To render additional elements, use the [`shapeCreated`](/api/javascript/dataviz/ui/map/events/shapecreated) event.
 
 ```dojo
   <div id="map"></div>

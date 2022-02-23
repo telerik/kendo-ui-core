@@ -1,13 +1,41 @@
 ---
-title: Show Context Menu over Shapes
-page_title: Show Context Menu over Shapes | Kendo UI Diagram
+title: Show Context Menu over Diagram Shapes
+page_title: Show Context Menu over Diagram Shapes
 description: "Learn how to show a context menu over the shapes of a Kendo UI Diagram."
 slug: howto_show_context_menu_over_shapes
+previous_url: /controls/diagrams-and-maps/diagram/how-to/show-context-menu-over-shapes
+tags: kendo, jquery, diagram, show, context, menu, over, shapes
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Show Context Menu over Shapes
+## Environment
 
-The following example demonstrates how to show a Kendo UI ContextMenu when pressing the right button of the mouse over the Diagram shapes.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I show a Kendo UI ContextMenu when pressing the right button of the mouse over the Diagram shapes?
+
+## Solution
 
 To achieve this behavior:
 

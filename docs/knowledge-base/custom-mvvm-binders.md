@@ -1,11 +1,41 @@
 ---
-title: Use Custom MVVM Binders for Shapes and Connections
-page_title: Use Custom MVVM Binders for Shapes and Connections | Kendo UI Diagram
+title: Use Custom MVVM Binders for Diagram Shapes and Connections
+page_title: Use Custom MVVM Binders for the Shapes and Connections of the Diagram
 description: "Learn how to use custom MVVM binders for shapes and connections in the Kendo UI Diagram in an MVVM scenario."
 slug: howto_custommvvmbidinders_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/custom-mvvm-binders
+tags: kendo, jquery, diagram, use, custom, mvvm, binders, for, shapes, and, connections
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Use Custom MVVM Binders for Shapes and Connections
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use custom MVVM binders for the shapes and connection of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 The following example demonstrates how to create [custom MVVM binders]({%slug custombinding_mvvm_kendoui%}) for the shapes and connections.
 
@@ -25,10 +55,12 @@ By using this approach, you can:
                    data-bind="source: shapesSource,
                               value: shapeId" />
             to:
-            <input type="text" class="k-textbox" data-bind="value: shapeText,
+            <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">
+              <input type="text" class="k-input-inner" data-bind="value: shapeText,
                                                             events: {
                                                               change: onShapeTextChange
                                                             }"/>
+            </span>
             <div id="diagram" data-role="diagram"
                  data-layout='{"type": "tree", "subtype": "right"}'
                  data-shape-defaults='{"type": "circle","content":{"template": "#= name #"}, "width": "70", "height":"70", "hover":{"fill": "Orange"}}'
@@ -36,7 +68,9 @@ By using this approach, you can:
                  data-bind="diagramShapes: shapesSource,
                             diagramConnections: connectionsSource"  
                  style="height: 250px;" ></div>
-          <input type="text" class="k-textbox" data-bind="value: getShapes" style="width:100%;"/>
+          <span class="k-input k-textbox k-input-solid k-input-md k-rounded-md">
+            <input type="text" class="k-input-inner" data-bind="value: getShapes" style="width:100%;"/>
+          </span>
         </div>
     </div>
 

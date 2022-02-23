@@ -1,11 +1,41 @@
 ---
-title: Persist Shape Properties
-page_title: Persist Shape Properties | Kendo UI Diagram
+title: Persist the Shape Properties of the Diagram
+page_title: Persist the Shape Properties of the Diagram
 description: "Learn how to persist Shape properties in the Kendo UI Diagram widget."
 slug: howto_persistshapeproperties_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/persist-shape-properties
+tags: kendo, jquery, diagram, persist, shape, properties
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Persist Shape Properties
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I persist the data source of the connections or the additional shape properties that are used in the custom visual of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 In real-live applications, you can easily store the position and other properties of the Diagram in the data source you use by applying the `DataSource` methods that correspond to your project.
 

@@ -673,6 +673,8 @@ navigation:
         title: "Popover"
     "*progressbar":
         title: "ProgressBar"
+    "*circularprogressbar":
+        title: "CircularProgressBar"
     "*rangeslider":
         title: "RangeSlider"
     "*responsivepanel":
@@ -1924,6 +1926,12 @@ defaults:
 
 -
     scope:
+        path: "controls/interactivity/circularprogressbar"
+    values:
+        component: "circularprogressbar"
+
+-
+    scope:
         path: "controls/barcodes/qrcode"
     values:
         component: "qrcode"
@@ -2144,6 +2152,7 @@ intro_columns:
       "Loader": "overview_kendoui_loader_widget"
       "SkeletonContainer": "overview_kendoui_skeletoncontainer_widget"
       "ProgressBar": "overview_kendoui_progressbar_widget"
+      "CircularProgressBar": "overview_kendoui_circularprogressbar_widget"
       "RippleContainer": "overview_kendoui_ripplecontainer_widget"
       "Sortable": "overview_kendoui_sortable_widget"
   -

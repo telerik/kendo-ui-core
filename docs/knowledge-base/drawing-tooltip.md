@@ -1,11 +1,41 @@
 ---
-title: Show Shapes Tooltip
-page_title: Show Shapes Tooltip | Kendo UI Diagram
+title: Show a Tooltip for Diagram Shapes
+page_title: Show a Tooltip for Diagram Shapes
 description: "Learn how to use the drawing tooltip to show a tooltip for the Kendo UI Diagram shapes."
 slug: howto_shapestooltip_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/drawing-tooltip
+tags: kendo, jquery, diagram, show, tooltip, for, shapes
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Show Shapes Tooltip
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I implement a tooltip for the shapes of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 The following example demonstrates how to use the [drawing tooltip options](/api/javascript/drawing/tooltip-options) to show a tooltip for the shapes.
 

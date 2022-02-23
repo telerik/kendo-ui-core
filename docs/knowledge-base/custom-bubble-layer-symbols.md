@@ -1,11 +1,41 @@
 ---
-title: Render Custom Symbols for Bubble Layers
-page_title: Render Custom Symbols for Bubble Layers | Kendo UI Map
+title: Render Custom Symbols for Map Bubble Layers
+page_title: Render Custom Symbols for Map Bubble Layers
 description: "Learn how to render custom symbols on Kendo UI Map Bubble layers."
 slug: howto_rendercustomsymbols_forbubblelayers_map
+previous_url: /controls/diagrams-and-maps/map/how-to/custom-bubble-layer-symbols
+tags: kendo, jquery, map, add, custom, symbols, for, bubble, layers
+component: map
+type: how-to
+res_type: kb
 ---
 
-# Render Custom Symbols for Bubble Layers
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Map for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I add some custom symbols to the Bubble layer of the Kendo UI for jQuery Map?
+
+## Solution
 
 The Bubble Layer allows you to define the way symbols are rendered.
 

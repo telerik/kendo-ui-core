@@ -1,12 +1,41 @@
 ---
-title: Adjust Path Origin
-page_title: Adjust Path Origin | Kendo UI Diagram
+title: Adjust the Path Origin of the Diagram
+page_title: Adjust the Path Origin of the Diagram
 description: "Learn how to adjust a path or the origin of an element when using a custom visual in the Kendo UI Diagram."
 slug: howto_adjustpathorigin_diagram
-position: 1
+previous_url: /controls/diagrams-and-maps/diagram/how-to/adjust-path-origin
+tags: kendo, jquery, diagram, adjust, path, origin
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Adjust Path Origin
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I adjust the position of any path at the origin of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 The following example demonstrates how to position any path at the origin of the Diagram.
 

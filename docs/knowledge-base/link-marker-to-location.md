@@ -1,11 +1,41 @@
 ---
-title: Link Marker to Location
-page_title: Link Marker to Location | Kendo UI Map
+title: Link Map Markers to Locations
+page_title: Link Map Markers to Locations
 description: "Learn how to link markers to locations in a Kendo UI Map widget."
 slug: howto_linkmarkertolocation_map
+previous_url: /controls/diagrams-and-maps/map/how-to/link-marker-to-location
+tags: kendo, jquery, map, link, markers, to, locations
+component: map
+type: how-to
+res_type: kb
 ---
 
-# Link Marker to Location
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Map for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I draw a straight line between a marker and a location on a Kendo UI for jQuery Map?
+
+## Solution
 
 The following example demonstrates how to draw a straight line between a marker and a location on a Kendo UI Map.
 
@@ -20,7 +50,7 @@ The following example demonstrates how to draw a straight line between a marker 
           dataSource: {
             type: "geojson",
             transport: {
-              read: "http://output.jsbin.com/zuguhajiye.js"
+              read: "https://output.jsbin.com/zuguhajiye.js"
             }
           }
         }, {

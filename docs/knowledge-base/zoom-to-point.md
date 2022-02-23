@@ -1,11 +1,41 @@
 ---
-title: Zoom to Predefined Points
-page_title: Zoom to Predefined Points | Kendo UI Diagram
+title: Zoom to Predefined Diagram Points
+page_title: Zoom to Predefined Diagram Points
 description: "Learn how to programmatically zoom to a certain point in the Kendo UI Diagram."
 slug: howto_zoomtopoint_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/zoom-to-point
+tags: kendo, jquery, diagram, zoom, to, predefined, points
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Zoom to Predefined Points
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I zoom the Kendo UI for jQuery Diagram to a predefined point?
+
+## Solution
 
 The following example demonstrates how to zoom the Diagram to a predefined point.
 

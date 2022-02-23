@@ -1,13 +1,41 @@
 ---
-title: Move Shapes with Arrow Keys
-page_title: Move Shapes with Arrow Keys | Kendo UI Diagram
+title: Move Diagram Shapes with Arrow Keys
+page_title: Move Diagram Shapes by Using Arrow Keys
 description: "Learn how to move the shapes of a Kendo UI Diagram by pressing the keyboard arrow keys."
 slug: howto_move_shapes_with_arrow_keys
+previous_url: /controls/diagrams-and-maps/diagram/how-to/move-shapes-on-key-press
+tags: kendo, jquery, diagram, move, shapes, with, arrow, keys
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Move Shapes with Arrow Keys
+## Environment
 
-Your project might require you to move the shapes of the Diagram by pressing the arrow keys.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I enable the `Arrow` keys to move the shapes of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 To achieve this behavior:
 

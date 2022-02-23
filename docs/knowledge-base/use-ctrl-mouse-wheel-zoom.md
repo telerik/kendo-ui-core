@@ -1,11 +1,41 @@
 ---
-title: Zoom on Ctrl Keypress Only
-page_title: Zoom on Crtl Keypress Only | Kendo UI Diagram
+title: Zoom the Diagram on Ctrl Keypress Only
+page_title: Zoom the Diagram on Crtl Keypress Only
 description: "Learn how to zoom the Kendo UI Diagram widget in and out by using the Ctrl key and the mouse wheel functionality."
 slug: howto_ctrlmousewheeltozoom_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/use-ctrl-mouse-wheel-zoom
+tags: kendo, jquery, diagram, zoom, on, ctrl, keypress, only
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Zoom on Ctrl Keypress Only
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I allow zooming in and out the Kendo UI for jQuery Diagram only through pressing the `Ctrl` key?
+
+## Solution
 
 The following example demonstrates how to set up the Diagram to allow zooming in and out only when the `Ctrl` key is pressed.
 

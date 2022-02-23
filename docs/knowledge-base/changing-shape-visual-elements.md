@@ -1,15 +1,43 @@
 ---
-title: Change Shape Visual Elements Dynamically
-page_title: Change Shape Visual Elements Dynamically | Kendo UI Diagram
+title: Change Diagram Shape Visual Elements Dynamically
+page_title: Change the Shape Visual Elements of the Diagram Dynamically
 description: "Learn how to find a particular element from the shape visual and dynamically change it in a Kendo UI Diagram."
 slug: howto_changeshapevisualelements_dynamically_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/changing-shape-visual-elements
+tags: kendo, jquery, diagram, change, shape visual, elements, dynamically
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Change Shape Visual Elements Dynamically
+## Environment
 
-The following example demonstrates how to find a particular element from the shape visual in the Diagram and dynamically change it.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-This means to change the rectangle fill and stroke options on `hover`.
+## Description
+
+How can I find a particular element from the shape visual in the Kendo UI for jQuery Diagram and dynamically change it?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario, which means that you will have to change the rectangle fill and stroke options on `hover`.
 
 ```dojo
 

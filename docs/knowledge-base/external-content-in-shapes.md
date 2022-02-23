@@ -1,12 +1,41 @@
 ---
-title: Render External Content in Shapes
-page_title: Render External Content in Shapes | Kendo UI Diagram
+title: Render External Content in Diagram Shapes
+page_title: Render External Content in Diagram Shapes
 description: "Learn how to render HTML content in Kendo UI Diagram shapes."
-previous_url: /kendo-mvc/dataviz/diagram/how-to/external-content-in-shapes
+previous_url: /kendo-mvc/dataviz/diagram/how-to/external-content-in-shapes, /controls/diagrams-and-maps/diagram/how-to/external-content-in-shapes
 slug: howto_renderexternalcontent_inshapes_diagram
+tags: kendo, jquery, diagram, render, external, content, in, shapes
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Render External Content in Shapes
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I render external content in the shapes of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 The Diagram is rendered through the [Drawing API](https://docs.telerik.com/kendo-ui/framework/drawing/overview).
 

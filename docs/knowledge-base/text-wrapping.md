@@ -1,11 +1,41 @@
 ---
-title: Wrap Text
-page_title: Wrap Text | Kendo UI Diagram
+title: Wrap Text in the Diagram
+page_title: Wrap Text in the Diagram
 description: "Learn how to use the layout element to wrap text in the Kendo UI Diagram widget."
 slug: howto_wraptext_diagram
+previous_url: /controls/diagrams-and-maps/diagram/how-to/text-wrapping
+tags: kendo, jquery, diagram, wrap, text
+component: diagram
+type: how-to
+res_type: kb
 ---
 
-# Wrap Text
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Diagram for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I make long chunks of text fit in a shape of the Kendo UI for jQuery Diagram?
+
+## Solution
 
 The following example demonstrates how to use the [`Layout`](/api/javascript/dataviz/diagram/layout) element to make long chunks of text fit in a shape.
 
