@@ -1,13 +1,43 @@
 ---
-title: Disable Mousewheel Zoom
-page_title: Disable Mousewheel Zoom | Kendo UI Map
-description: "Learn how to disable the nousewheel zoom in a Kendo UI Map widget."
+title: Disable the Mouse-wheel Zoom in the Map
+page_title: Disable the Mousewheel Zoom in the Map
+description: "Learn how to disable the mouse-wheel zoom in a Kendo UI Map widget."
 slug: howto_disablemousezoom_map
+previous_url: /controls/diagrams-and-maps/map/how-to/disable-mousewheel-zoom
+tags: kendo, jquery, map, disable, mousewheel, zoom
+component: map
+type: how-to
+res_type: kb
 ---
 
-# Disable Mousewheel Zoom
+## Environment
 
-The following example demonstrates how to disable the mousewheel zoom in the Map widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Map for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I disable the mouse-wheel zoom in the Kendo UI for jQuery Map?
+
+## Solution
+
+The following example demonstrates how to disable the mouse-wheel zoom in the Map widget.
 
 ```dojo
     <div id="map"></div>

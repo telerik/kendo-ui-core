@@ -1,13 +1,43 @@
 ---
-title: Highlight Map Shapes by ID
-page_title: Highlight Map Shapes by ID | Kendo UI Map
-description: "Learn how to highlight Kendo UI Map shapes by a specified ID."
-slug: howto_highlightmapshapesbyid_map
+title: Update Map Shapes by ID
+page_title: Update Map Shapes by ID
+description: "Learn how to update Kendo UI Map shapes by a specified ID."
+slug: howto_updatemapshapesbyid_map
+previous_url: /controls/diagrams-and-maps/map/how-to/update-map-shapes-by-id
+tags: kendo, jquery, map, shapes, by, id
+component: map
+type: how-to
+res_type: kb
 ---
 
-# Highlight Map Shapes by ID
+## Environment
 
-The following example demonstrates how to highlight the Map shapes by a specified ID.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Map for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I update the shapes of the Kendo UI for jQuery Map by using their IDs?
+
+## Solution
+
+The following example demonstrates how to update the Map shapes by a specified ID.
 
 ```dojo
     <div id="map"></div>
@@ -32,8 +62,6 @@ The following example demonstrates how to highlight the Map shapes by a specifie
             }
           }],
           shapeCreated: onShapeCreated,
-          shapeMouseEnter: toggleShape,
-          shapeMouseLeave: toggleShape,
           reset: onReset
         });
       }
@@ -50,20 +78,19 @@ The following example demonstrates how to highlight the Map shapes by a specifie
         shapesById[id].push(e.shape);
       }
 
-      function toggleShape(e) {
-        var id = e.shape.dataItem.id;
-        var shapes = shapesById[id];
+      setInterval(function() {
+        var shapes = shapesById.USA;
         if (shapes) {
           for (var i = 0; i < shapes.length; i++) {
             var shape = shapes[i];
             if (shape.options.fill.color === "white") {
-              shape.fill("blue");
+            	shape.fill("blue");
             } else {
               shape.fill("white");
             }
           }
         }
-      };
+      }, 500);
 
       $(document).ready(createMap);
     </script>
