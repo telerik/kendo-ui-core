@@ -195,6 +195,12 @@
             assert.isOk(widget.element.hasClass("k-overflow-hidden"));
         });
 
+        it("default overflow class check", function() {
+            var widget = new TextArea(textarea, {});
+
+            assert.isOk(widget.element.hasClass("!k-overflow-y-auto"));
+        });
+
         it("styling options - checks for valid options", function() {
             var widget = new TextArea(textarea, {
                 size: "full"

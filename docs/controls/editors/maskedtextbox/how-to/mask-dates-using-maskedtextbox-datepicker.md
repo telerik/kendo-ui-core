@@ -7,9 +7,7 @@ slug: howto_maskdatesdatepicker_maskedtextbox
 
 # Mask Dates in DatePickers
 
-Your project might require you to create a date-masking functionality for the Kendo UI DatePicker by using the Kendo UI MaskedTextBox.
-
-To see the example on how to achieve this behavior, refer to the [how-to article]({% slug howto_create_date_masking_datepicker %}).
+This scenario is now available as a built-in feature. For more information, refer to the article on [mask rules]({% slug masks_kendoui_maskedtextbox_widget %}).
 
 ## See Also
 
