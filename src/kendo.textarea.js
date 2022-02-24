@@ -108,6 +108,10 @@ var __meta__ = {// jshint ignore:line
 
             action = action || "addClass";
 
+            if (options.overflow === "auto") {
+                overflow = "!k-overflow-y-auto";
+            }
+
             that.wrapper[action](resize);
             that.element[action](overflow);
         },

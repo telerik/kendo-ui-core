@@ -3,6 +3,7 @@ title: Localization
 page_title: jQuery DatePicker Documentation | DatePicker Localization
 description: "Get started with the jQuery DatePicker by Kendo UI and translate its messages for different culture locales."
 slug: localization_datepicker
+previous_url: /controls/editors/datepicker/how-to/AngularJS/localization-using-angular-translate
 position: 3
 ---
 
