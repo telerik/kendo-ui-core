@@ -913,7 +913,7 @@ var __meta__ = { // jshint ignore:line
 
         _offsetHeight: function() {
             var offsetHeight = 0;
-            var siblings = this.listView.content.prevAll(":visible");
+            var siblings = this.listView.content.parent().prevAll(":visible");
 
             siblings.each(function() {
                 var element = $(this);
@@ -929,8 +929,7 @@ var __meta__ = { // jshint ignore:line
             var list = that.list;
             var height = that.options.height;
             var visible = that.popup.visible();
-            var filterHeight = 0;
-            var offsetTop, popups, footerHeight;
+            var offsetTop, popups;
 
             if (length || that.options.noDataTemplate) {
                 // Check where animation container stays
@@ -947,13 +946,8 @@ var __meta__ = { // jshint ignore:line
 
                 if (height !== "auto") {
                     offsetTop = that._offsetHeight();
-                    footerHeight = outerHeight($(that.footer)) || 0;
 
-                    if (that.filterInput) {
-                        filterHeight = kendo._outerHeight(that.filterInput.closest(".k-list-filter")) || 0;
-                    }
-
-                    height = height - offsetTop - footerHeight - filterHeight;
+                    height = height - offsetTop;
                 }
 
                 that.listView.content.parent().outerHeight(height);

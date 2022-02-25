@@ -8,7 +8,7 @@ slug: howto_expand_background_longlist_items_multiselect
 
 # Expand Backgrounds of Long List Items
 
-The described scenario and suggested solution are no longer valid and this article will soon be removed. For more information, refer to the built-in MultiSelect features or to the Knowledge Base hub.
+The described scenario and suggested solution are no lonegr valid and this article will soon be removed. For more information, refer to the built-in MultiSelect features or to the Knowledge Base hub.
 
 ## See Also
 

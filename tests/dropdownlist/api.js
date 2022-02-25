@@ -1047,6 +1047,24 @@
             assert.isOk(!dropdownlist.list.find(".k-textbox")[0]);
         });
 
+        it("setOptions does not duplicate filter container", function() {
+            dropdownlist = new DropDownList(input, {
+                dataSource: ["item1", "item2"],
+                filter: "startswith",
+                animation: false
+            });
+
+            dropdownlist.open();
+
+            dropdownlist.setOptions({
+                filter: "contains"
+            });
+
+            dropdownlist.open();
+
+            assert.equal(dropdownlist.list.parent().find(".k-list-filter").length, 1);
+        });
+
         it("setOptions does not render more than one input", function() {
             dropdownlist = new DropDownList(input, {
                 dataSource: ["item1", "item2"],

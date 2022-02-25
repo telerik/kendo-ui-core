@@ -1,13 +1,13 @@
 ---
-title: Telerik UI Design Kits for Figma
-page_title: Telerik UI Design Kits for Figma
+title: Telerik and Kendo UI Design Kits for Figma
+page_title: Telerik and Kendo UI Design Kits for Figma
 description: "Discover the {{ site.product }} UI Design Kits for Figma and learn how to use them to create stylish applications."
 slug: ui_kits_figma_aspnetcore
 position: 7
 ---
 
 {% if site.core %}
-# Telerik UI Design Kits for Figma ({{site.framework}})
+# Telerik and Kendo UI Design Kits for Figma ({{site.framework}})
 
 Design Files for Figma&mdash;building blocks for designers matching UI for {{site.framework}} components.
 
@@ -15,7 +15,7 @@ Design Files for Figma&mdash;building blocks for designers matching UI for {{sit
 <img src="images/styling-ui-kits-for-figma.png" alt="Download Telerik UI Kits" style="margin: 30px 0; width: auto; height: auto; max-width: 100%;"/>
 </a>
 
-To achieve efficient collaboration between designers and developers, we have created three Telerik UI kits for Figma (one for each of the top three themes we ship with {{site.product}}): Material, Bootstrap and Default (our own styling). 
+To achieve efficient collaboration between designers and developers, we have created three Telerik and Kendo UI Kits for Figma (one for each of the top three themes we ship with {{site.product}}): Material, Bootstrap and Default (our own styling). 
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="display: inline-flex;" title="Download Telerik UI Kits">
 <button importance="ghost" style="display: flex;
@@ -38,24 +38,25 @@ To achieve efficient collaboration between designers and developers, we have cre
 <span style="width: 21px; margin-right: 16px">
 <img src="images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
 </span>
-Download Telerik UI Kits
+Download UI Kits
 </button>
 </a>
 
 These professional UI kits incorporate pre-built reusable design components that act in accordance with the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/).
 
-The design files include 90+ of the {{site.framework}} components. Currently all components are available except Charts. The included building blocks and elements enable smooth collaboration between designers and developers and our goal is to continuously grow the number of included components and ensure full coverage.
+The design files represent the {{site.framework}} UI components in every possible state, their detailed anatomy, colors, metrics, and icons. All these elements enable the seamless handover of the design to the developers.
 
-## Benefits of Using the Telerik UI Design Kits for Figma 
+## Benefits of Using the UI Kits
+
 You can enjoy the following advantages when using the UI kits: 
 
 - The UI kits include information about which components are available, their states, and how they are connected.
 - Developers will be able to easily match the UI for {{site.framework}} components with corresponding design requirements.
 - The edited templates can be quickly converted into a [shared Figma library](https://www.figma.com/best-practices/components-styles-and-shared-libraries/).
 
-## Downloading the Telerik UI Design Kits for Figma 
+## Downloading the UI Kits 
 
-The Telerik UI Design Kit for Figma can be downloaded from the links below - follow the instructions on [duplicating a file from the Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
+The Telerik and Kendo UI Kits for Figma can be downloaded from the links below&mdash;follow the instructions on [duplicating a file from the Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
 
 - [Telerik UI Kit for Material](https://www.figma.com/community/file/971704350762479492)
 - [Telerik UI Kit for Bootstrap](https://www.figma.com/community/file/971704996235717509)
@@ -63,36 +64,38 @@ The Telerik UI Design Kit for Figma can be downloaded from the links below - fol
 
 ## Exploring the Telerik UI Kits' Structure 
 
-The Telerik UI Kits for Figma use [base components and nested instances](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/) for better component management. Furthermore, we have added [variant support](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) for certain components to make them even more intuitive to use. 
+The Telerik and Kendo UI Kits for Figma use [base components and nested instances](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/) for better component management. Furthermore, we have added [variant support](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) for certain components to make them even more intuitive to use. 
 
-Each UI kit contains the following pages:
+Each Telerik and Kendo UI Kit for Figma contains the following pages, most of which provide multiple frames that group similar design assets:
 
-- **Cover**&mdash;UI kit front page.
-- **Getting Started**&mdash;all you need to know to start operating with the UI kits.
-- **Styles**&mdash;typography, colors, and effects affecting the components and their variants.
-- **Icons**&mdash;all icons in the form of convenient components.
-- **Components & Variants**&mdash;all available components and their variants. Base (Structural Components) are located above the corresponding frames on the Components page. 
-- **Scenarios**&mdash;different use case scenarios for the included components (work in progress).
-- **Change log**&mdash;release history of the kit changes.
+* **_Cover**&mdash;The cover page of the UI kit.
+* **_Getting Started**&mdash;Briefly explains what you need to know to start using the UI kits.
+* **_Table of Contents**&mdash;An index with hyperlinks that you can use to quickly navigate within the UI kits.
+* **UI Components**&mdash;Contains all components and their variants.
+* **Data Visualization**&mdash;Contains visual equivalents of all charts supported by the Telerik and Kendo UI web component libraries.
+* **Icons**&mdash;Contains all icons in the form of convenient components.
+* **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
+* **_Change Log**&mdash;A list with the changes in the UI kit.
 
-![Kendo UI Kit Pages](images/figma-ui-kit-pages.png)
+![Kendo UI Kit Pages](images/figma-ui-kit-pages-v1.9.png)
 
-Multiple frames for grouping similar design assets are available for most pages.
+Most pages contain multiple frames that group similar design assets.
 
-![Kendo UI Kit Page with Multiple Frames](images/figma-ui-kit-frames.png)
+![Kendo UI Kit Page with Multiple Frames](images/figma-ui-kit-frames-v1.9.png)
 
-## Customizing a Telerik UI Design Kit 
+## Customizing the UI Kits 
 
-Telerik's Figma UI Kit is very flexible and can be fully customized according to your vision and needs. In addition, it allows you to apply the scalability of design changes.  
+The Telerik and Kendo UI Kits for Figma are flexible and fully customizable to your vision and needs. Also, the UI kits enable the scalability of the changes that you apply to the design.
 
-Changes to multiple component variants can be propagated by:
-
-- Customizing the base components.
-- Customizing the typography, colors, and effects on the Styles page.
-
-You can apply changes to a single component variant which will affect only the individual variants on the Components page.  
+To achieve the highest impact and to propagate your changes to multiple components and variants, customize the components on the **_Base** frames of the **UI Components** page. 
 
 > You can [publish the modified template as a library](https://help.figma.com/hc/en-us/articles/360041051154#h_b9cf5ead-791e-4ae2-9dd8-aded2fe54fe6), once the desired design is achieved.
+
+## Upgrading to Newer Versions
+
+To upgrade to newer versions of the UI kits while keeping your styles, download the free <a href="https://www.figma.com/community/plugin/1047874318864404919/InstaRelinker" target="_blank">InstaRelinker tool</a> that is available as a plugin in the Figma community. With this tool, you won’t have to manually swap instances and replace remote with local styles.
+
+The InstaRelinker plugin enables you to re-link nested remote instances and styles within selected local main components to their local equivalents. When the plugin runs, it scans the current Figma file for local main components and automatically re-links any remote instances with names that match a local main component. If the plugin doesn't find a match, it allows you to manually select the local main component for each remote instance and re-link it. The InstaRelinker applies the same process for remote styles.
 
 ## Choosing How to Use the UI Kits 
 
@@ -103,11 +106,14 @@ You can apply three different levels of component customization, depending on yo
 1. **Unique design system**&mdash;change the look and feel of the components entirely. In case you need consultation or help with the implementation, [contact](https://www.telerik.com/services/ui-ux-design) with our solution experts who will help you plan, prototype, and build your design system. 
 
 ## See Also
+
 * [Getting Started with {{site.product}}]({% slug gettingstarted_aspnetmvc6_aspnetmvc %})
 * [Browse the Components](https://demos.telerik.com/{{site.platform}}/)
+* [Figma for Developers (blog)](https://www.telerik.com/blogs/figma-developers)
+* [Design Systems for Developers (blog)](https://www.telerik.com/blogs/design-systems-developers)
 
 {% else %}
-# Telerik UI Design Kits for Figma ({{site.framework}})
+# Telerik and Kendo UI Design Kits for Figma ({{site.framework}})
 
 The Design Files for Figma are building blocks for designers that match the Telerik UI for ASP.NET MVC components.
 
@@ -115,7 +121,7 @@ The Design Files for Figma are building blocks for designers that match the Tele
 <img src="images/styling-ui-kits-for-figma.png" alt="Download Telerik UI Kits" style="margin: 30px 0; width: auto; height: auto; max-width: 100%;"/>
 </a>
 
-We’ve created three distinct Telerik UI kits for Figma for each of the most popular themes shipped with UI for ASP.NET MVC library, thus aiming to facilitate efficient collaboration between designers and developers in their efforts for creating and implementing the perfect project design. 
+We’ve created three distinct Telerik and Kendo UI kits for Figma for each of the most popular themes shipped with UI for ASP.NET MVC library, thus aiming to facilitate efficient collaboration between designers and developers in their efforts for creating and implementing the perfect project design. 
 
 <a href="https://www.figma.com/@progress" class="track--download-kendoui" style="display: inline-flex;" title="Download Telerik UI Kits">
 <button importance="ghost" style="display: flex;
@@ -138,43 +144,46 @@ We’ve created three distinct Telerik UI kits for Figma for each of the most po
 <span style="width: 21px; margin-right: 16px">
 <img src="images/figma-vector-logo-2.png" alt="Download Telerik UI Kits"/>
 </span>
-Download Telerik UI Kits
+Download UI Kits
 </button>
 </a>
 
-The Telerik UI Design Kits offer pre-built design components that can be reused as is, customized and are created according to the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/). They allow perfect delivery of design to the developer by providing more than 90 of the ASP.NET MVC components.
+The Telerik and Kendo UI Design Kits offer pre-built design components that you can use as they are or customize them. The UI kits are created according to the [atomic design principles](https://atomicdesign.bradfrost.com/chapter-2/). They allow perfect delivery of design to the developer by representing all of the ASP.NET MVC components.
 
-## Advantages of the Telerik UI Design Kits for Figma  
+## Downloading the UI Kits 
 
-You can easily match the ASP.NET MVC UI components to your design requirements with the available information on the type of components, their states and connection, Furthermore, you can effortlessly convert templates into a [shared Figma library](https://www.figma.com/best-practices/components-styles-and-shared-libraries/).
-
-## Downloading the Telerik UI Design Kits for Figma 
-
-You can download the Telerik Kits for Figma by following the links provided below. Instructions on how to duplicate a file are available in the [Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
+You can download the Telerik and Kendo UI Kits for Figma by following the links provided below. Instructions on how to duplicate a file are available in the [Figma Community](https://help.figma.com/hc/en-us/articles/360038510873-Use-files-from-the-Community#Duplicate).
 
 - [Telerik UI Kit for Material](https://www.figma.com/community/file/971704350762479492)
 - [Telerik UI Kit for Bootstrap](https://www.figma.com/community/file/971704996235717509)
 - [Telerik UI Kit Default](https://www.figma.com/community/file/971702824494731137)
 
-## Exploring the Telerik UI Kits' Structure 
+## Exploring the UI Kits' Structure 
 
-The Telerik Kits for Figma come with [support for component variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) and options for component management &mdash; utilization of [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/).
+The Telerik and Kendo UI Kits for Figma come with [support for component variants](https://help.figma.com/hc/en-us/articles/360055471353-Prepare-for-variants) and options for component management &mdash; utilization of [nested instances and base components](https://www.figma.com/best-practices/creating-and-organizing-variants/using-variants-effectively/).
 
-Each kit includes a **Cover** page, information on how to start using the UI kits (**Getting Started** page), **Styles, Icons, Components & Variants, Change Log, Scenarios** page. The **Styles** and **Icons** pages display all the available customizations for the components. You can find structural components (building blocks) for base components above the corresponding frames on the **Components** page. Different use case scenarios are available in the **Scenarios** page. You can also view the release history of kit changes in the **Change Log** page. 
+Each UI kit includes the following pages:
 
-![Kendo UI Kit Pages](images/figma-ui-kit-pages.png)
+* **_Cover**&mdash;The cover page of the UI kit.
+* **_Getting Started**&mdash;Briefly explains what you need to know to start using the UI kits.
+* **_Table of Contents**&mdash;An index with hyperlinks that you can use to quickly navigate within the UI kits.
+* **UI Components**&mdash;Contains all components and their variants.
+* **Data Visualization**&mdash;Contains visual equivalents of all charts supported by the Telerik and Kendo UI web component libraries.
+* **Icons**&mdash;Contains all icons in the form of convenient components.
+* **_Styles**&mdash;An informational page with all styles that are applied to the components, such as typography, colors, and effects.
+* **_Change Log**&mdash;A list with the changes in the UI kit.
 
-You can find different grouping frames for the available design assets. 
+![Kendo UI Kit Pages](images/figma-ui-kit-pages-v1.9.png)
 
-![Kendo UI Kit Page with Multiple Frames](images/figma-ui-kit-frames.png)
+The UI kits group similar design assets into frames. 
 
-## Customizing a Telerik UI Design Kit 
+![Kendo UI Kit Page with Multiple Frames](images/figma-ui-kit-frames-v1.9.png)
 
-The Telerik Figma Kit can be completely customized to match your requirements, vision and needs. It allows you to tailor the base components, typography, effects, and colors on the **Styles** page. 
+## Customizing the UI Kits 
 
-Modifying a single component variant will change only the individual variants. 
+The Telerik and Kendo UI Kits for Figma are flexible and fully customizable to your vision and needs. Also, the UI kits enable the scalability of the changes that you apply to the design.
 
-You can apply changes to a single component variant which will affect only the individual variants on the Components page.  
+To achieve the highest impact and to propagate your changes to multiple components and variants, customize the components on the **_Base** frames of the **UI Components** page.  
 
 > The modified template can be [published as a library](https://help.figma.com/hc/en-us/articles/360041051154#h_b9cf5ead-791e-4ae2-9dd8-aded2fe54fe6) once the desired customization is achieved.
 
@@ -182,9 +191,13 @@ You can apply changes to a single component variant which will affect only the i
 
 You can apply three different levels of component customization, depending on your requirements: 
 
-The Telerik UI Figma Kits allow you to customize the available components on three different levels – create your own application design by selecting one of the available kits, apply colors according to your brand guidelines with the [Theme Builder]({% slug sass_theme_builder %}) application, and change the look and feel of the component entirely with the unique design system. [Contact](https://www.telerik.com/services/ui-ux-design) our solution experts if you need help with building your unique design system. 
+The Telerik UI Figma Kits allow you to customize the available components on three different levels – create your own application design by selecting one of the available kits, apply colors according to your brand guidelines with the [Theme Builder]({% slug sass_theme_builder %}) application, or entirely change the look and feel of the components by creating your unique design system. [Contact](https://www.telerik.com/services/ui-ux-design) our solution experts if you need help with building your unique design system.
+
 ## See Also
+
 * [Getting Started with {{site.product}}]({% slug gettingstarted_aspnetmvc %})
 * [Browse the Components](https://demos.telerik.com/{{site.platform}}/)
+* [Figma for Developers (blog)](https://www.telerik.com/blogs/figma-developers)
+* [Design Systems for Developers (blog)](https://www.telerik.com/blogs/design-systems-developers)
 
 {% endif %}

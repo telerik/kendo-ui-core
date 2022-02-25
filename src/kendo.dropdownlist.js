@@ -1230,7 +1230,7 @@ var __meta__ = { // jshint ignore:line
             if (this.filterInput) {
                 this.filterInput
                     .off(ns)
-                    .parent()
+                    .closest(".k-list-filter")
                     .remove();
 
                 this.filterInput = null;
