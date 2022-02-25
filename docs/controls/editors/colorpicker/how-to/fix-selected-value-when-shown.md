@@ -1,13 +1,43 @@
 ---
-title: Fix ColorPicker Value When Showing It Dynamically
-page_title: Fix ColorPicker Value When Showing It Dynamically | Kendo UI DatePicker
+title: Fix the ColorPicker Value When Showing It Dynamically
+page_title: Fix the ColorPicker Value When Showing It Dynamically
 description: "Learn how to fix the selected value of the Kendo UI ColorPicker when showing it by using jQuery."
 slug: howto_fixselectedvalue_colorpicker
+previous_url: /controls/editors/colorpicker/how-to/fix-selected-value-when-shown
+tags: telerik, kendo, jquery, colorpicker, fix, value, when, showing, dynamically
+component: colorpicker
+type: how-to
+res_type: kb
 ---
 
-# Fix ColorPicker Value When Showing It Dynamically
+## Environment
 
-When you hide the Kendo UI ColorPicker and change its value, the pallette renders an incorrect selection as a side-effect from these actions.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI ColorPicker for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I fix the selected value of the Kendo UI ColorPicker when showing it by using jQuery?
+
+## Solution
+
+When you hide the Kendo UI ColorPicker and change its value, the palette renders an incorrect selection as a side-effect from these actions.
 
 The reason for this behavior is that the viewport of the hidden DOM element is zero. As a result, the position of the DOM element that represents the selected value cannot calculate its accurate position.
 

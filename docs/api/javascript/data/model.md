@@ -16,7 +16,31 @@ res_type: api
 
 The value of the ID of the `Model`. This field is available only if the `id` is defined in the Model configuration. See the following example.
 
-#### Example
+#### Example - configure the Model id 
+
+    <script>
+        var Product = kendo.data.Model.define( {
+          id: "ProductID", // the identifier is the "ProductID" field (declared below)
+          fields: {
+            /* name of the field - ProductID */ 
+            ProductID: { editable: false, nullable: true },
+            /* name of the field - ProductName*/ 
+            ProductName: { type: "string", defaultValue: "<empty>"}
+          }
+        });
+        var product = new Product({
+          ProductID:3,
+          ProductName: "Milk"
+        });
+  
+        /* The result can be observed in the DevTools(F12) console of the browser. */  
+        console.log(product.ProductID); // // outputs "3" which is the ProductID value
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log(product.idField); // outputs "ProductID" which is the name of the 'id' field
+    </script>
+
+
+#### Example - define the model.id in dataSource schema
 
     <script>
       var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
@@ -30,7 +54,7 @@ The value of the ID of the `Model`. This field is available only if the `id` is 
             pageSize: 20,
             schema: {
               model: {
-                id: "ProductID",
+                id: "ProductID", // the identifier of the model
                 fields: {
                   ProductID: { editable: false, nullable: true },
                   ProductName: { validation: { required: true } },

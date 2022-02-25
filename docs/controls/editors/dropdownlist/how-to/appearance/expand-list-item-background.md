@@ -8,7 +8,7 @@ slug: howto_expand_background_longlist_items_dropdownlist
 
 # Expand Backgrounds of Long List Items
 
-To see the example, refer to the article on [expanding the background of long list items in Kendo UI ComboBoxes]({% slug howto_expand_background_longlist_items_combobox %}).
+The described scenario and suggested solution are no lonegr valid and this article will soon be removed. For more information, refer to the built-in DropDownList features or to the Knowledge Base hub.
 
 ## See Also
 

@@ -11,9 +11,13 @@
 }
 
 each( @utils-overflow, {
-    .k-overflow-@{value} { overflow: @value !important; }
-    .k-overflow-x-@{value} { overflow-x: @value !important; }
-    .k-overflow-y-@{value} { overflow-y: @value !important; }
+    .k-overflow-@{value} { overflow: @value; }
+    .k-overflow-x-@{value} { overflow-x: @value; }
+    .k-overflow-y-@{value} { overflow-y: @value; }
+
+    .\!k-overflow-@{value} { overflow: @value !important; }
+    .\!k-overflow-x-@{value} { overflow-x: @value !important; }
+    .\!k-overflow-y-@{value} { overflow-y: @value !important; }
 
     .overflow-shorthand(@value);
 });

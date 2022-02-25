@@ -1786,6 +1786,37 @@ The value to set.
         dropdownlist.value(2);
     </script>
 
+#### Example - set the value of the widget when `autobind` is set to `false`
+
+    <input id="products" style="width: 100%" />
+    <script>
+      $("#products").kendoDropDownList({
+        dataTextField: "ProductName",
+        dataValueField: "ProductID",
+        autoBind: false,
+        dataSource: {
+          transport: {
+            read: {
+              dataType: "jsonp",
+              url: "https://demos.telerik.com/kendo-ui/service/Products",
+            }
+          }
+        }
+      });
+
+      /* Log the data length before using the DropDownList value method */
+      /* The result can be observed in the DevTools(F12) console of the browser. */
+
+      console.log($("#products").data("kendoDropDownList").dataSource.data())
+
+      $("#products").data("kendoDropDownList").value(2);
+      setTimeout(function(){
+        /* Log the data after setting the DropDownList value */
+        /* The result can be observed in the DevTools(F12) console of the browser. */
+        console.log($("#products").data("kendoDropDownList").dataSource.data())
+      }, 500)
+    </script>
+
 ## Events
 
 ### change

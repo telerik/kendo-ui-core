@@ -217,6 +217,8 @@ navigation:
     "controls/navigation/treeview/binding":
         title: "Data Binding"
         position: 2
+    "controls/editors/colorgradient":
+        title: "ColorGradient"
     "controls/editors/imageeditor":
         title: "Image Editor"
     "controls/conversational-ui":
@@ -2166,6 +2168,8 @@ intro_columns:
       "Captcha": "overview_kendoui_captcha_widget"
       "CheckBox": "overview_kendoui_checkbox_widget"
       "CheckBoxGroup": "overview_kendoui_checkboxgroup_widget"
+      "ColorGradient": "overview_kendoui_colorgradient_widget"
+      "ColorPalette": "overview_kendoui_colorpalette_widget"
       "Color Picker": "overview_kendoui_colorpicker_widget"
       "ComboBox": "overview_kendoui_combobox_widget"
       "DateInput": "overview_kendoui_dateinput_widget"
@@ -2174,6 +2178,7 @@ intro_columns:
       "DropDownList": "overview_kendoui_dropdownlist_widget"
       "DropDownTree": "overview_kendoui_dropdowntree_widget"
       "Editor": "overview_kendoui_editor_widget"
+      "FlatColorPicker": "overview_kendoui_flatcolorpicker_widget"
       "ImageEditor": "overview_kendoui_imageeditor_widget"
       "ListBox": "overview_kendoui_listbox_widget"
       "MaskedTextBox": "overview_kendoui_maskedtextbox_widget"

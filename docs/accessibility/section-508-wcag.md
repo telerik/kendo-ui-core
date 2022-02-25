@@ -27,6 +27,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |ActionSheet   |Yes |AAA |
 |AppBar	       |Yes |AAA |
 |AutoComplete  |Yes |AA  |
+|Avatar        |Yes |AAA  |
 |BarCode	   |Yes |AAA |
 |BottomNavigation |Yes |AAA |
 |Breadcrumb	   |Yes |AA  |
@@ -36,9 +37,12 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |Captcha       |Yes |AAA |
 |Charts        |Yes |AAA |
 |Chat          |Yes |AAA |
+|CheckBox      |Yes |AAA |
 |CheckBoxGroup |Yes |AAA |
 |ContextMenu   |Yes |AAA |
 |ComboBox      |Yes |AA  |
+|ColorGradient |Yes |AA  |
+|ColorPalette  |Yes |AA  |
 |ColorPicker   |Yes |AA  |
 |DateInput	   |Yes |AAA |
 |DatePicker	   |Yes |AAA |
@@ -52,6 +56,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |ExpansionPanel|Yes |AAA |
 |FileManager   |Yes |AAA |
 |Filter   |Yes |AAA |
+|FlatColorPicker |Yes |AA |
 |FloatingActionButton |Yes |AAA |
 |Form          |Yes |AAA |
 |Gantt         |Yes |AA  |
@@ -74,7 +79,7 @@ The following table lists the Section 508 and WCAG 2.1 compliance levels of supp
 |PopOver	   |Yes |AAA |
 |QRCode	   	   |Yes |AAA |
 |RadialGauge   |Yes |AAA |
-|RadioButton   |Yes |AA  |
+|RadioButton   |Yes |AAА  |
 |RadioGroup    |Yes |AAA |
 |Responsive Panel |Yes |AA |
 |ScrollView	   |Yes |AAA |
