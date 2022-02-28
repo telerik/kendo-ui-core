@@ -203,6 +203,8 @@ A value indicating how wide will the pointer be
 
 The component value.
 
+> **Note:** The value should be a number between 0 and 100.
+
 <div id="progressbar"></div>
     <script>
      $("#progressbar").kendoCircularProgressBar({
@@ -271,6 +273,8 @@ The component settings to update.
 ### value
 
 Gets or sets the value of the component.
+
+> **Note:** The value should be a number between 0 and 100.
 
 #### Example
 

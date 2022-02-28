@@ -929,6 +929,7 @@ var __meta__ = { // jshint ignore:line
             var list = that.list;
             var height = that.options.height;
             var visible = that.popup.visible();
+            var isMccb = this.options.columns && this.options.columns.length;
             var offsetTop, popups;
 
             if (length || that.options.noDataTemplate) {
@@ -948,9 +949,17 @@ var __meta__ = { // jshint ignore:line
                     offsetTop = that._offsetHeight();
 
                     height = height - offsetTop;
+
+                    if (isMccb) {
+                        height = height - (outerHeight($(that.footer)) || 0) - (outerHeight($(that.columnsHeader)) || 0);
+                    }
                 }
 
-                that.listView.content.parent().outerHeight(height);
+                if (isMccb) {
+                    that.listView.content.outerHeight(height);
+                } else {
+                    that.listView.content.parent().outerHeight(height);
+                }
 
                 if (!visible) {
                     popups.hide();
