@@ -210,7 +210,7 @@ navigation:
         position: 60
      "html-helpers":
         title: "Components"
-        position: 5 
+        position: 5
      "html-helpers/datasource":
         title: "Data Source"
      "html-helpers/data-management":
@@ -620,10 +620,10 @@ navigation:
 baseurl: /aspnet-core
 
 ## The Kendo UI version used
-cdnVersion: "2022.1.119"
+cdnVersion: "2022.1.301"
 
 ## The MVC Core version used
-mvcCoreVersion: "2022.1.119"
+mvcCoreVersion: "2022.1.301"
 
 ff-sheet-id: 1mottKpkbJFxkUq6rS3CsPrT8JQOE2JlUtsJBR622cxs
 

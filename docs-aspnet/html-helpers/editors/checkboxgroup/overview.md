@@ -17,9 +17,6 @@ The Telerik UI CheckBoxGroup HtmlHelper for {{ site.framework }} is a server-sid
 The CheckBoxGroup allows to style and provide checkbox functionality to list elements, set the position of the labels, attributes and custom css classes.
 
 * [Demo page for the CheckBoxGroup](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
-{% if site.core %}
-* [Demo page for the CheckBoxGroup](https://demos.telerik.com/{{ site.platform }}/checkboxgroup/index)
-{% endif %}
 
 ## Initializing the CheckBoxGroup
 

@@ -1,4 +1,4 @@
-// Type definitions for Kendo UI Professional v2022.1.119
+// Type definitions for Kendo UI Professional v2022.1.301
 // Project: http://www.telerik.com/kendo-ui
 // Definitions by: Telerik <https://github.com/telerik>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -5490,7 +5490,7 @@ declare namespace kendo.ui {
         editor?: string|Function | undefined;
         editorOptions?: any;
         label?: string | FormItemLabel | undefined;
-        validation?: any;      
+        validation?: any;
         layout?: string | "grid" | undefined;
         grid?: FormGridOptions | undefined;
         items?: FormItem[] | undefined;
