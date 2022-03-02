@@ -16,10 +16,24 @@ Amazon Web Services is a cloud platform that provides a wide range of cloud serv
 
 ![AWS Overview](images/aws-overview.png)
 
-For examples of using Telerik UI for {{ site.framework }} components with cloud services, refer to the following articles:
+For examples of using Telerik UI for {{ site.framework }} components with AWS cloud services, refer to the following articles:
 
 * [Creating an AWS Account and a User]({%slug aws_getting_started_aspnetcore %})&mdash;describes the steps for creating an AWS account and adding a user.
 
 * [Storage (S3)]({%slug aws_s3_storage_aspnetcore %})&mdash;explains how to create a bucket in Amazon S3 and how to upload a file to the bucket with the Telerik UI for {{ site.framework }} Upload.
 
 * [DynamoDB]({%slug aws_dynamodb_aspnetcore %})&mdash;describes how to connect the Telerik UI for {{ site.framework }} Grid to Amazon DynamoDB.
+
+# Microsoft Azure
+
+Microsoft Azure (often referred to as Azure) is a cloud computing service operated by Microsoft. The platform provides software as a service (SaaS), platform as a service (PaaS), and infrastructure as a service (IaaS). It supports different languages, tools, and frameworks, including both Microsoft-specific and third-party software and systems.
+
+![Azure Overview](images/azure-overview.png)
+
+For examples of using Telerik UI for {{ site.framework }} components with Azure cloud services, refer to the following articles:
+
+* [Creating an Azure Account]({%slug azure_getting_started_aspnetcore %})&mdash;learn how to create an Azure account.
+
+* [Azure Blob Storage]({%slug azure_blob_storage_aspnetcore %})&mdash;demonstrates how to upload images into a Blob Storage Container with the Telerik UI for {{ site.framework }} Upload and review them using a Telerik UI for {{ site.framework }} ListView.
+
+* [Azure CosmosDB]({%slug aws_dynamodb_aspnetcore %})&mdash;describes how to connect the Telerik UI for {{ site.framework }} Grid to Azure CosmosDB.
