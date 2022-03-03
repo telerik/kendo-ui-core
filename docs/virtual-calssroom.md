@@ -22,6 +22,6 @@ The Virtual Classroom program aims at:
 * Exploring common development practices, code examples, and sample applications.
 
 To get started with the trainings, refer to:
-* [Kendo UI for jQuery Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/23/kendo-ui-for-jquery)
+* [Kendo UI for jQuery Virtual Classroom](https://learn.telerik.com/learn/course/internal/view/elearning/30/kendo-ui-for-jquery-with-javascript)
 * [Kendo UI for jQuery with TypeScript Virtual Classroom](https://learn.telerik.com/learn/course/external/view/elearning/22/kendo-ui-for-jquery-with-typescript)
 * [All-Progress Products Virtual Classroom](https://www.telerik.com/account/support/virtual-classroom)

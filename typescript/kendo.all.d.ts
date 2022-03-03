@@ -11850,9 +11850,13 @@ declare namespace kendo.ui {
 
     interface TreeListEditable {
         mode?: string | undefined;
-        move?: boolean | undefined;
+        move?: boolean | TreeListEditableMove | undefined;
         template?: string|Function | undefined;
         window?: any;
+    }
+
+    interface TreeListEditableMove {
+        reorderable?: boolean | undefined;
     }
 
     interface TreeListExcel {
@@ -12101,11 +12105,16 @@ declare namespace kendo.ui {
     interface TreeListDragEvent extends TreeListEvent {
         source?: kendo.data.TreeListModel | undefined;
         target?: JQuery | undefined;
+        pageX?: number | undefined;
+        pageY?: number | undefined;
+        status?: string | undefined;
+        setStatus?: Function | undefined; 
     }
 
     interface TreeListDragendEvent extends TreeListEvent {
         source?: kendo.data.TreeListModel | undefined;
         destination?: kendo.data.TreeListModel | undefined;
+        position?: string | undefined;
     }
 
     interface TreeListDropEvent extends TreeListEvent {

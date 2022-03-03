@@ -14,46 +14,28 @@ position: 0
 - Console logs and errors
 - Network capture
 - Local and Session Storage logs
+- User action events
 
 
-### Installing Fiddler Jam Extension
+### Installing the Extension
 
 You can download and install the Fiddler Jam Chrome extension from [Chrome Web Store page for Fiddler Jam](https://chrome.google.com/webstore/detail/fiddler-jam/fnkjlegmkbicdodlheligomlfbdblpfj). Detailed instruction on how to install the extension can be found in [Fiddler Jam Extension Installation](https://docs.telerik.com/fiddler-jam/extension/installation) article. 
 
-## Capture a log
 
-Once you have [installed the Fiddler Jam browser extension](#installing-fiddler-jam), you can start capturing your issue and send it to the support team. 
+## Capture a Log
 
-The detailed capturing instructions can be found in [Fiddler Jam extension - Recording a log](https://docs.telerik.com/fiddler-jam/extension/recording-a-log) while below you can find a short video demonstrating the Installation and Capture process.
+The [Predefined link](https://docs.telerik.com/fiddler-jam/fj-extension/predefined-link) functionality allows easy capture and pre-configured setup just by clicking the link below. It will provide detailed instructions to follow on the fly.
 
+* <a href="https://jam.getfiddler.com/recording-links/3d609aacfa499f82b6d1c468454934927a6920e97cf48a1a55e4032f3e975bdfda6a425e988bf34db18a0df281e67545" target="_blank">Predefined Link to start a capture</a>
 
-<iframe style="width:560px; height:315px; display: block; margin-left: auto; margin-right: auto;" src="https://www.youtube.com/embed/AegKWavRSv0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+When you are ready with the log, you can revise it (click the `Preview` button once the capturing is stopped), configure the [Log Sharing Options](https://docs.telerik.com/fiddler-jam/fj-extension/link-options) and share it. 
 
-1. Navigate to <a href="about:blank" target="_blank">about:blank</a> or an empty page to ensure a clean capture
-2. Open the Fiddler Jam extension (default shortcut is `Ctrl+Shift+F`)
-3. Configure the options from the `Advanced Options` button (located above the `Start Capture` button):
-   - Ensure the `Mask Post Data` switch is `disabled` if reproducing the issue triggers a postback or a POST request
-   - Ensure the `Capture video` is `enabled` to provide more details and context in the capture
-        <br /> <br />![Fiddler Jam Settings](images/fiddler-jam-capture-settings.png)
-4. Click the `Start Capture button`
-5. Navigate to your page (e.g. `https://mydomain.com/mypagewithissue`) in the same tab. In case you started the capture from your `https://mydomain.com/mypagewithissue` page instead of a blank page, follow the steps below to ensure a proper capture
-   1. Click the address bar
-   2. Press `Enter` to navigate
-    >note **Important**: The page refresh must be from navigation to the page, otherwise the browser will use the requests from cache and will not include them in the capture
-6. Reproduce or observe the issue
-7. Once the issue is replicated, open the extension again(or shortcut `Ctrl+Shift+F`) and click the `Stop Capture` button
-8. Proceed to [Submit a log](#submit-a-log)
-
-## Submit a log
-
-1. *Optional* Toggle the `Password Protection` switch and enter a password (requirements: min 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number)
-1. Click the `Get Link` button
-1. Copy the generated link and share it in the support ticket
+Need to know what information the capture provides? Check out what the paid [Fiddler Jam portal](https://docs.telerik.com/fiddler-jam/portal/portal-logs) offers. You can [sign-up for a free trial](https://docs.telerik.com/fiddler-jam/portal/license) to see how this tool is applicable to your business.
 
 
 ## See Also
 
-* [Fiddler Jam product page](https://www.telerik.com/fiddler-jam)
-* [Fiddler Jam documentation](https://docs.telerik.com/fiddler-jam/introduction)
+* [Product page](https://www.telerik.com/fiddler-jam)
+* [Documentation](https://docs.telerik.com/fiddler-jam/introduction)
 * [Improve Your Debugging Skills with Chrome DevTools blog](https://www.telerik.com/blogs/improve-your-debugging-skills-with-chrome-devtools)
-* [Fiddler Jam Security](https://docs.telerik.com/fiddler-jam/security)
+* [Security](https://docs.telerik.com/fiddler-jam/security)

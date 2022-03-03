@@ -7513,6 +7513,10 @@ The model of the source row.
 
 #### Event Data
 
+##### e.sender `kendo.ui.TreeList`
+
+The widget instance which fired the event.
+
 ##### e.source `kendo.data.TreeListModel`
 
 The model of the source row.
@@ -7521,9 +7525,34 @@ The model of the source row.
 
 The element under the cursor.
 
-##### e.sender `kendo.ui.TreeList`
+##### e.pageX `Number`
 
-The widget instance which fired the event.
+The x coordinate of the mouse.
+
+##### e.pageY `Number`
+
+The y coordinate of the mouse.
+
+##### e.status `String`
+
+The status that the drag clue shows (**i-plus**, **i-cancel**, **i-insert-up**, **i-insert-middle** or **i-insert-down**).
+
+##### e.setStatus `Function`
+
+Allows a custom drag clue status to be set.
+
+Pre-defined status classes are:
+
+*   **k-i-insert-up**
+        - Indicates that the item will be inserted on top.
+*   **k-i-insert-middle**
+        - Indicates that the item will be inserted in the middle.
+*   **k-i-insert-down**
+        - Indicates that the item will be inserted at the bottom.
+*   **k-i-plus**
+        - Indicates that the item will be added/appended.
+*   **k-i-cancel**
+        - Indicates an invalid operation. `DO NOT` overwrite this class as the drag logic depends on it.
 
 #### Example - subscribing to the drag event before initialization
 
@@ -7615,6 +7644,53 @@ The widget instance which fired the event.
       treeList.bind("drag", drag);
     </script>
 
+#### Example - replacing the status clue
+
+    <div id="treelist"></div>
+    <script>
+      var service = "https://demos.telerik.com/kendo-ui/service";
+
+      $("#treelist").kendoTreeList({
+        dataSource: {
+          transport: {
+            read: {
+              url: service + "/EmployeeDirectory/All",
+              dataType: "jsonp"
+            }
+          },
+          schema: {
+            model: {
+              id: "EmployeeID",
+              parentId: "ReportsTo",
+              fields: {
+                ReportsTo: { field: "ReportsTo",  nullable: true },
+                EmployeeID: { field: "EmployeeId", type: "number" },
+                Extension: { field: "Extension", type: "number" }
+              },
+              expanded: true
+            }
+          }
+        },
+        height: 540,
+        editable: {
+          move: {
+          reorderable: true
+          }
+        },
+        columns: [
+          { field: "FirstName", title: "First Name", width: 220 },
+          { field: "LastName", title: "Last Name", width: 160 },
+          { field: "Position" }
+        ],
+        drag: function(e) {
+          // Replace the "add" icon with a "copy" icon. DO NOT REPLACE THE i-cancel status!
+          if(e.status === 'i-plus') {
+            e.setStatus("k-i-copy");
+          }
+        }
+      });
+    </script>
+
 ### dragend
 
 (Available as of the 2015.3.1014 release) Fires when the user finishes dragging an item and the model was updated. The event handler function context (available through the `this` keyword) will be set to the widget instance.
@@ -7628,6 +7704,10 @@ The model of the source row.
 ##### e.destination `kendo.data.TreeListModel`
 
 The model of the new parent row.
+
+##### e.position `String`
+
+The position of the dropped element.
 
 ##### e.sender `kendo.ui.TreeList`
 

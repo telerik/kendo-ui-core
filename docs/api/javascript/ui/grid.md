@@ -1773,15 +1773,16 @@ An html input element that will be rendered in the filter menu.
     <script>
     $("#grid").kendoGrid({
       columns: [ {
-        field: "date",
+        field: "name",
         filterable: {
+          extra: false,
           ui: function(element) {
-            $(element).replaceWith("<textarea></textarea>"); // Replace the input element with an HTML textarea
+            $(element).replaceWith("<textarea data-bind='value:filters[0].value'></textarea>"); // Replace the input element with an HTML textarea
           }
         }
       } ],
         filterable: true,
-        dataSource: [ { date: new Date() }, { date: new Date() } ]
+        dataSource: [ { name: "John" }, { name: "Mark" }, { name: "Tom" } ]
     });
     </script>
 
