@@ -384,6 +384,23 @@
             }, 100);
         });
 
+        it("Validate pasted before replacing decimal point", function(done) {
+            var textbox = new NumericTextBox(input);
+
+            stub(textbox, "_update");
+
+            input.val("abc");
+            input.trigger("paste", {
+                target: input[0]
+            });
+            input.trigger("input")
+
+            setTimeout(function() {
+                assert.equal(textbox.calls("_update"), 1);
+                done();
+            }, 100);
+        });
+
 
         it("Prevent decimals digits after precision is reached", function() {
             if (kendo.support.browser.mozilla) {

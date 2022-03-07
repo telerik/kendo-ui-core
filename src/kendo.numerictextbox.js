@@ -604,7 +604,7 @@ var __meta__ = { // jshint ignore:line
                 this._numPadDot = false;
             }
 
-            if (this._isPasted) {
+            if (this._isPasted && this._parse(value)) {
                 value = this._parse(value)
                     .toString()
                     .replace(POINT, numberFormat[POINT]);
