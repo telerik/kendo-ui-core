@@ -7,6 +7,7 @@
                 kendo.ns = "kendo-";
                 input = $("<input id='ddl' />").appendTo(Mocha.fixture);
                 $("<label for='ddl'>Label</label>").appendTo(Mocha.fixture);
+                Mocha.fixture.attr("role", "main");
             });
             afterEach(function() {
                 kendo.ns = "";
@@ -67,7 +68,7 @@
 
                 ddl.open();
 
-                axeRun(ddl.popup.element[0], done);
+                axeRun(ddl.popup.element.closest(".k-animation-container").parent(), done);
             });
 
             it("DropDownList with value is accessible", function(done) {
@@ -89,7 +90,7 @@
 
                 ddl.open();
 
-                axeRun(ddl.popup.element[0], done);
+                axeRun(ddl.popup.element.closest(".k-animation-container").parent(), done);
             });
         });
 

@@ -104,6 +104,7 @@
         beforeEach(function() {
             $("<label for='hiredate'>Deliver hour</label><input id='hiredate' />").appendTo(Mocha.fixture);
             input = $(Mocha.fixture).find("input");
+            Mocha.fixture.attr("role", "main");
         });
 
         afterEach(function() {
@@ -121,7 +122,7 @@
 
             instance.open();
 
-            axeRun(instance.timeView.popup.element[0], done, ["scrollable-region-focusable"]);
+            axeRun(instance.timeView.popup.element.closest(".k-animation-container").parent(), done, ["scrollable-region-focusable"]);
         });
     });
 }());

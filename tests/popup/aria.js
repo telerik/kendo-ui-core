@@ -6,6 +6,7 @@
 
             div = $("<div style='background:red'>popup</div>");
             anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo($("#qunit-fixture"));
+            Mocha.fixture.attr("role", "main");
         });
         afterEach(function() {
             if (popup) {
@@ -18,7 +19,7 @@
             popup = new Popup(div, { anchor: anchor });
             popup.open();
 
-            axeRun(div.parent(), done);
+            axeRun(div.closest(".k-animation-container").parent(), done);
         });
     });
 }());

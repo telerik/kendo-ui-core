@@ -8,6 +8,7 @@
             kendo.ns = "kendo-";
             input = $("<select multiple id='ms'/>").appendTo(Mocha.fixture);
             $("<label for='ms'>Label</label>").appendTo(Mocha.fixture);
+            Mocha.fixture.attr("role", "main");
         });
         afterEach(function() {
             kendo.ns = "";
@@ -48,7 +49,7 @@
             ms.open();
             ms.search("f");
 
-            axeRun(ms.popup.element[0], done);
+            axeRun(ms.popup.element.closest(".k-animation-container").parent(), done);
         });
 
         it("MultiSelect with value is accessible", function(done) {
@@ -80,7 +81,7 @@
 
             ms.open();
 
-            axeRun(ms.popup.element[0], done);
+            axeRun(ms.popup.element.closest(".k-animation-container").parent(), done);
         });
 
         it("MultiSelect with templates has accessible popup", function(done) {

@@ -8,6 +8,7 @@ var ComboBox = kendo.ui.ComboBox,
         beforeEach(function() {
             input = $("<input id='cb'/>").appendTo(Mocha.fixture);
             $("<label for='cb'>Label</label>").appendTo(Mocha.fixture);
+            Mocha.fixture.attr("role", "main");
         });
 
         afterEach(function() {
@@ -58,7 +59,7 @@ var ComboBox = kendo.ui.ComboBox,
 
             combo.search("I");
 
-            axeRun(combo.popup.element[0], done);
+            axeRun(combo.popup.element.closest(".k-animation-container").parent(), done);
         });
 
         it("ComboBox with value is accessible", function(done) {
@@ -79,7 +80,7 @@ var ComboBox = kendo.ui.ComboBox,
 
             combo.search("I");
 
-            axeRun(combo.popup.element[0], done);
+            axeRun(combo.popup.element.closest(".k-animation-container").parent(), done);
         });
     });
 

@@ -1,11 +1,41 @@
 ---
-title: Use Current Culture Default Date Format as Parse Format
-page_title: Use Current Culture Default Date Format as Parse Format | Kendo UI DateTimePicker
+title: Use the Current DateTimePicker Culture Default Date Format as a Parse Format
+page_title: Use the Current DateTimePicker Culture Default Date Format as a Parse Format
 description: "Learn how to use the default date format of the current culture as a parse format for the Kendo UI DateTimePicker widget."
 slug: howto_use_current_culture_date_format_in_datetimepicker
+previous_url: /controls/editors/datetimepicker/how-to/change-parse-formats-based-on-culture
+tags: telerik, kendo, jquery, datetimepicker, use, current, default, culture, format, as, parse, format
+component: datetimepicker
+type: how-to
+res_type: kb
 ---
 
-# Use Current Culture Default Date Format as Parse Format
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI DateTimePicker for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the current default culture format as a parse format for the Kendo UI for jQuery DateTimePicker?
+
+## Solution
 
 The default behavior of the DateTimePicker widget is to treat a value with no time part as invalid unless the corresponding format is provided in the `parseFormats` option.
 

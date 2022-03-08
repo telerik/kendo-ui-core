@@ -83,6 +83,7 @@ var __meta__ = { // jshint ignore:line
         STRING = "string",
         DATABOUND = "dataBound",
         ARIA_EXPANDED = "aria-expanded",
+        ROLE = "role",
 
         bindings = {
             text: "dataTextField",
@@ -273,7 +274,7 @@ var __meta__ = { // jshint ignore:line
             .attr("aria-disabled", true);
 
         if (!item.filter("[role]").length) {
-            item.attr("role", "menuitem");
+            item.attr(ROLE, "menuitem");
         }
 
         if (!item.children(LINK_SELECTOR).length) {
@@ -505,7 +506,7 @@ var __meta__ = { // jshint ignore:line
                 that.clicked = false;
             }
 
-            element.attr("role", "menubar");
+            element.attr(ROLE, "menubar");
 
             if (element[0].id) {
                 that._ariaId = kendo.format("{0}_mn_active", element[0].id);
@@ -946,7 +947,7 @@ var __meta__ = { // jshint ignore:line
 
                 groups = items.find("> ul")
                                 .addClass("k-menu-group k-menu-group-md")
-                                .attr("role", "menu");
+                                .attr(ROLE, "menu");
 
                 items = items.filter("li");
 
@@ -1150,6 +1151,8 @@ var __meta__ = { // jshint ignore:line
                                     }
                                 }
                             }).data(KENDOPOPUP);
+
+                            ul.closest(animationContainerSelector).removeAttr(ROLE);
                         } else {
                             popup = ul.data(KENDOPOPUP);
                             popup.options.origin = directions.origin;
@@ -1415,7 +1418,7 @@ var __meta__ = { // jshint ignore:line
                        return !kendo.support.matchesSelector.call(this, nonContentGroupsSelector);
                    })
                    .addClass("k-group k-menu-group k-menu-group-md")
-                   .attr("role", "menu")
+                   .attr(ROLE, "menu")
                    .hide()
                    .attr("aria-hidden", element.is(":visible"))
                    .parent("li")
@@ -2393,7 +2396,7 @@ var __meta__ = { // jshint ignore:line
 
             Menu.fn.init.call(that, element, options);
 
-            that.element.attr("role", "menu");
+            that.element.attr(ROLE, "menu");
 
             that._marker = kendo.guid().substring(0, 8);
 

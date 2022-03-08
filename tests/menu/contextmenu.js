@@ -42,6 +42,8 @@
                     '</ul>'
             );
             menu = new kendo.ui.ContextMenu("#menu", { animation: false, target: "#target" });
+
+            Mocha.fixture.attr("role", "main");
         });
         afterEach(function () {
             kendo.destroy(menu.element);
@@ -391,7 +393,7 @@
 
         menu.bind("activate", function () {
             setTimeout(function() {
-                axeRun(menu.wrapper, done);
+                axeRun(menu.wrapper.closest(".k-animation-container").parent(), done);
             });
         });
 

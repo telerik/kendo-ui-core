@@ -1,13 +1,43 @@
 ---
-title: Validate Custom Dates
-page_title: Validate Custom Dates | Kendo UI DateTimePicker
+title: Validate Custom Dates in the DateTimePicker
+page_title: Validate Custom Dates in the DateTimePicker
 description: "Learn how to create custom date validation in a Kendo UI DateTimePicker widget."
 slug: howto_validate_custom_dates_datetimepicker
+previous_url: /controls/editors/datetimepicker/how-to/custom-date-validation
+tags: telerik, kendo, jquery, datetimepicker, validate, custom, dates
+component: datetimepicker
+type: how-to
+res_type: kb
 ---
 
-# Validate Custom Dates
+## Environment
 
-The following example demonstrates how to create a custom date validation in the DateTimePicker.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI DateTimePicker for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create custom date validation in the Kendo UI for jQuery DateTimePicker?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
   <div id="example">
@@ -44,8 +74,6 @@ The following example demonstrates how to create a custom date validation in the
       #to-do {
         height: 52px;
         width: 221px;
-        margin: 30px auto;
-        padding: 91px 0 0 188px;
         background: url('../content/web/datepicker/todo.png') transparent no-repeat 0 0;
       }
     </style>

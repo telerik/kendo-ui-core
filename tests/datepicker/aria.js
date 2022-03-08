@@ -196,6 +196,7 @@ describe("kendo.ui.DatePicker aria with AXE", function() {
     beforeEach(function() {
         $("<label>Hire date:<input id='test' /></label>").appendTo(Mocha.fixture);
         input = $(Mocha.fixture).find("input");
+        Mocha.fixture.attr("role", "main");
     });
 
     afterEach(function() {
@@ -214,7 +215,7 @@ describe("kendo.ui.DatePicker aria with AXE", function() {
 
         instance.open();
 
-        axeRun(instance.dateView.popup.element[0], done);
+        axeRun(instance.dateView.popup.element.closest(".k-animation-container").parent(), done);
     });
 });
 }());

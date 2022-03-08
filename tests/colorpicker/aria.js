@@ -64,6 +64,7 @@
         beforeEach(function() {
             element = $("<input/>").appendTo(Mocha.fixture).kendoColorPicker();
             colorPicker = element.data("kendoColorPicker");
+            Mocha.fixture.attr("role", "main");
         });
         afterEach(function() {
             colorPicker.destroy();
@@ -119,8 +120,7 @@
         it("colorpicker popup is accessible with AXE", function(done) {
             colorPicker.open();
 
-            // excluded rule should be removed after fixing the issue in the slider
-            axeRun(colorPicker._popup.element, done);
+            axeRun(colorPicker._popup.element.closest(".k-animation-container").parent(), done);
         });
     });
 
@@ -156,7 +156,6 @@
         });
 
         it("flatcolorpicker is accessible with AXE", function(done) {
-            // excluded rule should be removed after fixing the issue in the slider
             axeRunFixture(done);
         });
     });
@@ -199,8 +198,7 @@
         });
 
         it("flatcolorpicker is accessible with AXE", function(done) {
-            // excluded rule should be removed after fixing the issue in the slider
-            axeRunFixture(done, ["aria-allowed-role"]);
+            axeRunFixture(done);
         });
     });
 }());

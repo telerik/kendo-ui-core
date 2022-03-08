@@ -1,13 +1,43 @@
 ---
-title: Use Custom MVVM Binding to Set Model Value
-page_title: Use Custom MVVM Binding to Set Model Value | Kendo UI MaskedTextBox
-description: "Learn how to use custom MVVM bindings to retrieve unmasked widget values in the Kendo UI MaskedTextBox widget."
+title: Use Custom MVVM Binding to Set the MaskedTextBox Model Value
+page_title: Use Custom MVVM Binding to Set the MaskedTextBox Model Value
+description: "Learn how to use custom MVVM bindings to retrieve unmasked widget values in the Kendo UI MaskedTextBox."
 slug: howto_use_custommvvm_bindingto_setmodel_value_maskedtextbox
+previous_url: /controls/editors/maskedtextbox/how-to/MVVM/custom-raw-method-binding
+tags: telerik, kendo, jquery, maskedtextbox, use, custom, mvvm, binding, to, set, the, model, unmasked, value
+component: maskedtextbox
+type: how-to
+res_type: kb
 ---
 
-# Use Custom MVVM Binding to Set Model Value
+## Environment
 
-The following example demonstrates how to implement [a custom MVVM binding](https://docs.telerik.com/kendo-ui/framework/mvvm/bindings/custom) to set the unmasked value of the MaskedTextBox.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MaskedTextBox for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use MVVM to set the unmasked value of the Kendo UI for jQuery MaskedTextBox?
+
+## Solution
+
+The following example demonstrates how to implement [a custom MVVM binding]({% slug custombinding_mvvm_kendoui %}) to set the model value of the MaskedTextBox.
 
 ```dojo
 <div id="example">

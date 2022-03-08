@@ -1,13 +1,43 @@
 ---
-title: Show Custom Placeholder on Blur
-page_title: Show Custom Placeholder on Blur | Kendo UI MaskedTextBox Widget
+title: Show a Custom MaskedTextBox Placeholder on Blur
+page_title: Render a Custom MaskedTextBox Placeholder on Blur
 description: "Learn how to show a custom placeholder on blur in the Kendo UI MaskedTextBox widget."
 slug: howto_show_custom_placeholderon_blur_maskedtextbox
+previous_url: /controls/editors/maskedtextbox/how-to/custom-placeholder
+tags: telerik, kendo, jquery, maskedtextbox, show, render, custom, placeholder, on, blur
+component: maskedtextbox
+type: how-to
+res_type: kb
 ---
 
-# Show Custom Placeholder on Blur
+## Environment
 
-The following example demonstrates how to show a custom placeholder text on `blur` when the MaskedTextBox has no value.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MaskedTextBox for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use MVVM to show a custom placeholder on `blur` in the Kendo UI for jQuery MaskedTextBox?
+
+## Solution
+
+The following example demonstrates how to show custom text as a placeholder on `blur` when the MaskedTextBox has no value.
 
 ```dojo
 <div id="example">

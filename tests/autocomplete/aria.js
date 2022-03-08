@@ -8,6 +8,7 @@
             kendo.effects.disable();
             input = $("<input id='ac'>").appendTo(Mocha.fixture);
             $("<label for='ac'>Label</label>").appendTo(Mocha.fixture);
+            Mocha.fixture.attr("role", "main");
         });
         afterEach(function() {
             kendo.destroy(Mocha.fixture);
@@ -72,7 +73,7 @@
 
             autocomplete.search("I");
 
-            axeRun(autocomplete.popup.element[0], done);
+            axeRun(autocomplete.popup.element.closest(".k-animation-container").parent(), done);
         });
     });
 
