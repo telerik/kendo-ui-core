@@ -381,3 +381,6 @@ The widget instance which fired the event.
         var textbox = $("#textbox").data("kendoTextBox");
         textbox.bind("change", textbox_change);
     </script>
+
+
+The change event fires only once the value of widget is changed and the widget itself is blurred out. You can add a custom events/methods by extending the existing functionality of the TextBox. How to add a `keyup` event to the TextBox is demonstrated in [this article](/knowledge-base/textbox-add-keyup-event).

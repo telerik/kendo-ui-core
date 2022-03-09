@@ -1974,14 +1974,60 @@ The format that is applied to the value before it is displayed.
 
 Takes the form "{0:format}" where "format" can be a:
 
-* [standard number format](/globalization/intl/numberformatting#default-number-formats)
+* [default number format](/globalization/intl/numberformatting#default-number-formats)
 * [custom number format](/globalization/intl/numberformatting#custom-number-formats)
-* [standard date format](/globalization/intl/dateformatting#default-date-formats)
+* [default date format](/globalization/intl/dateformatting#default-date-formats)
 * [custom date format](/globalization/intl/dateformatting#custom-date-formats)
 
 > The [kendo.format](/api/javascript/kendo/methods/format) function is used to format the value.
 
-#### Example - specify the column format string
+#### Example - specify default column format for a number field
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [ {
+          field: "product",
+        }, {
+          field: "number",
+          format: "{0:c}"
+        } ],
+        dataSource: [ { product: "Chai", number: 3.1415 } ]
+      });
+    </script>
+
+#### Example - specify custom column format for a number field
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [ {
+          field: "product",
+        }, {
+          field: "number",
+          format: "{0:0.0000}"
+        } ],
+        dataSource: [ { product: "Chai", number: 94 } ]
+      });
+    </script>
+
+
+#### Example - specify default format for a date field
+
+    <div id="grid"></div>
+    <script>
+    $("#grid").kendoGrid({
+      columns: [ {
+        field: "date",
+        format: "{0:g}"
+      }, {
+        field: "product"
+      } ],
+      dataSource: [ { date: new Date(), product: "Chai" } ]
+    });
+    </script>
+
+#### Example - specify custom format for a date field
 
     <div id="grid"></div>
     <script>
@@ -1990,12 +2036,12 @@ Takes the form "{0:format}" where "format" can be a:
         field: "date",
         format: "{0: yyyy-MM-dd HH:mm:ss}"
       }, {
-        field: "number",
-        format: "{0:c}"
+        field: "product"
       } ],
-      dataSource: [ { date: new Date(), number: 3.1415 } ]
+      dataSource: [ { date: new Date(), product: "Chai" } ]
     });
     </script>
+
 
 ### columns.groupable `Boolean|Object` *(default: true)
 
@@ -3743,6 +3789,8 @@ If set to `true` the grid will display a confirmation dialog when the user click
 Can be set to a string which will be used as the confirmation text.
 
 Can be set to a function which will be called, passing the model instance, to return the confirmation text.
+
+This and all Grid [`configuration properties`](/api/javascript/ui/grid#configuration) can be set (enabled/disabled) after the grid has been initialized with the [`setOptions`](/api/javascript/ui/grid/methods/setoptions) method.
 
 #### Example - disable delete confirmation
 
@@ -10947,7 +10995,7 @@ The data source to which the widget should be bound.
 
 ### setOptions
 
-Sets the options of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
+Sets the [`options`](/api/javascript/ui/grid#configuration) of the Grid. Use this method if you want to enable/disable a particular feature/option or to load
 the complete state obtained previously with the [`getOptions`](getoptions) method.
 
 When `setOptions` is called, the Grid widget will be destroyed and recreated. If the widget is bound to remote data, a new read request will be made.

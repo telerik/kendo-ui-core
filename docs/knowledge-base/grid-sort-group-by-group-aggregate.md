@@ -50,6 +50,8 @@ The Kendo UI DataSource group configuration has a [`compare`](/api/javascript/da
     }
 ```
 
+The following example demonstrates how to apply a custom compare function to sort the groups by their aggregated fields.
+
 ```dojo
     <div id="grid"></div>
     <script>
