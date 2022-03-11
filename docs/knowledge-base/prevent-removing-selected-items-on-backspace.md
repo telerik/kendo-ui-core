@@ -1,14 +1,43 @@
 ---
-title: Prevent the Deletion of Selected Items on Backspace
-page_title: Prevent the Deletion of Selected Items on Backspace | Kendo UI MultiSelect
+title: Prevent the Deletion of Selected MultiSelect Items on Backspace
+page_title: Prevent the Deletion of Selected MultiSelect Items on Backspace
 description: "Learn how to prevent deleting a selected item on pressing the Backspace key in the input of the Kendo UI MultiSelect widget."
-previous_url: /controls/editors/multiselect/how-to/prevent-removing-selected-items-on-backspace
+previous_url: /controls/editors/multiselect/how-to/prevent-removing-selected-items-on-backspace, /controls/editors/multiselect/how-to/selection/prevent-removing-selected-items-on-backspace
 slug: howto_prevent_deleting_selected_items_on_backspace_multiselect
+tags: telerik, kendo, jquery, multiselect, prevent, deletion, of, selected, items, on, backspace
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Prevent the Deletion of Selected Items on Backspace
+## Environment
 
-The following example demonstrates how to prevent the deletion of selected items on a `Backspace` key-press in the Kendo UI MultiSelect widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I prevent the deletion of selected items on a `Backspace` key-press in the Kendo UI MultiSelect widget?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
 <select id="multiselect" multiple="multiple"></select>
@@ -53,5 +82,3 @@ The following example demonstrates how to prevent the deletion of selected items
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

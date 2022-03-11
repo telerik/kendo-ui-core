@@ -1,14 +1,43 @@
 ---
-title: Filter Values in Widgets Sharing the Same Data
-page_title: Filter Values in Widgets Sharing the Same Data | Kendo UI MultiSelect
+title: Filter Values in MultiSelects Sharing the Same Data
+page_title: Filter Values in MultiSelects Sharing the Same Data
 description: "Learn how to filter values in two Kendo UI Multiselect widgets that share the same data."
-previous_url: /controls/editors/multiselect/how-to/distinct-values-in-widgets-sharing-same-data
+previous_url: /controls/editors/multiselect/how-to/distinct-values-in-widgets-sharing-same-data, /controls/editors/multiselect/how-to/filtering/distinct-values-in-widgets-sharing-same-data
 slug: howto_filter_valuesin_widgetswith_shared_data_multiselect
+tags: telerik, kendo, jquery, multiselect, filter, values, in, two, or, more, multiselects, share, the, same, data
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Filter Values in Widgets Sharing the Same Data
+## Environment
 
-The following example demonstrates how to filter the values of 2 Kendo UI widgets, which share the same data, based on user selection.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I filter the values of two Kendo UI widgets, which share the same data, based on user selection?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <select id="multiselect1">
@@ -59,5 +88,3 @@ The following example demonstrates how to filter the values of 2 Kendo UI widget
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

@@ -1,14 +1,43 @@
 ---
-title: Select or Deselect All Items
-page_title: Select or Deselect All Items | Kendo UI MultiSelect
+title: Select or Deselect All MultiSelect Items
+page_title: Select or Deselect All MultiSelect Items
 description: "Learn how to select or deselect all items in the Kendo UI MultiSelect widget."
-previous_url: /controls/editors/multiselect/how-to/select-deselect-all-items
+previous_url: /controls/editors/multiselect/how-to/select-deselect-all-items, /controls/editors/multiselect/how-to/selection/select-deselect-all-items
 slug: howto_select_and_deselect_allitems_multiselect
+tags: telerik, kendo, jquery, multiselect, select, or, deselect, all, items
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Select or Deselect All Items
+## Environment
 
-The following example demonstrates how to select or deselect all items in the Kendo UI MultiSelect widget by using external buttons.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I select or deselect all items in the Kendo UI MultiSelect widget by using external buttons?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="example" role="application">
@@ -89,5 +118,3 @@ The following example demonstrates how to select or deselect all items in the Ke
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

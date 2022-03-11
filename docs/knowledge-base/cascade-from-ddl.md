@@ -1,14 +1,43 @@
 ---
-title: Cascade from DropDownLists
-page_title: Cascade from DropDownLists | Kendo UI MultiSelect
+title: Cascade MultiSelects from DropDownLists
+page_title: Cascade MultiSelects from DropDownLists
 description: "Learn how to cascade the Kendo UI MultiSelect widget from a Kendo UI DropDownList."
 previous_url: /controls/editors/multiselect/how-to/cascade-from-ddl, /controls/editors/dropdownlist/how-to/cascade-multiselect-from-ddl, /controls/editors/dropdownlist/how-to/cascade/cascade-multiselect-from-ddl
 slug: howto_cascade_froma_dropdownlist_multiselect
+tags: telerik, kendo, jquery, multiselect, cascade, from, dropdownlists
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Cascade from DropDownLists
+## Environment
 
-The following example demonstrates how to cascade the Kendo UI MultiSelect from a Kendo UI DropDownList.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I cascade the Kendo UI MultiSelect from a Kendo UI DropDownList?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div>
@@ -86,5 +115,3 @@ The following example demonstrates how to cascade the Kendo UI MultiSelect from 
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

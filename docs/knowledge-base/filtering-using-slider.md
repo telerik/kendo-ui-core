@@ -3,7 +3,7 @@ title: Filter the ListView by Using Slider Selection
 page_title: Filter the ListView by Using Slider Selection
 description: "Learn how to filter the ListView datasource based on Kendo UI Slider selection."
 slug: howto_filter_using_slider_selection_listview
-previous_url: /controls/data-management/listview/how-to/filtering-using-slider
+previous_url: /controls/data-management/listview/how-to/filtering-using-slider, /controls/editors/slider/how-to/filter-listview-using-slider
 tags: listview, filter, using, slider, selection
 component: listview
 type: how-to

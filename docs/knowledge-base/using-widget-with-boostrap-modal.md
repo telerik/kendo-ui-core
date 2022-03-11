@@ -1,14 +1,43 @@
 ---
 title: Use MultiSelects with Bootstrap Modal Windows
-page_title: Use MultiSelects with Bootstrap Modal Windows | Kendo UI MultiSelect
+page_title: Use MultiSelects with Bootstrap Modal Windows
 description: "Learn how to use the Kendo UI MultiSelect widget with a Bootstrap modal window."
-previous_url: /controls/editors/multiselect/how-to/using-widget-with-boostrap-modal
+previous_url: /controls/editors/multiselect/how-to/using-widget-with-boostrap-modal, /controls/editors/multiselect/how-to/integration/using-widget-with-boostrap-modal
 slug: howto_use_multiselect_with_bootstrap_modal_window_multiselect
+tags: telerik, kendo, jquery, multiselect, use, with, bootstrap, modal, windows
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Use MultiSelects with Bootstrap Modal Windows
+## Environment
 
-The following example demonstrates how to use the Kendo UI MultiSelect widget with a Bootstrap modal window and bind values.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the Kendo UI MultiSelect widget with a Bootstrap modal window, and bind values?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
@@ -110,5 +139,3 @@ The following example demonstrates how to use the Kendo UI MultiSelect widget wi
 * [How to Preselect Items Using MVVM Binding]({% slug howto_preselect_items_byusing_mvvm_binding_multiselect %})
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

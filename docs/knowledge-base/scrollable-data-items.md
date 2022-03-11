@@ -1,14 +1,43 @@
 ---
-title: Scroll Selected Items
-page_title: Scroll Selected Items | Kendo UI MultiSelect
+title: Scroll Selected MultiSelect Items
+page_title: Scroll Selected MultiSelect Items
 description: "Learn how to create scrollable data items in the Kendo UI MultiSelect widget."
-previous_url: /controls/editors/multiselect/how-to/scrollbale-data-items, /web/multiselect/how-to/scrollbale-data-items, /controls/editors/multiselect/how-to/scrollable-data-items
+previous_url: /controls/editors/multiselect/how-to/scrollbale-data-items, /web/multiselect/how-to/scrollbale-data-items, /controls/editors/multiselect/how-to/scrollable-data-items, /controls/editors/multiselect/how-to/selection/scrollable-data-items
 slug: howto_create_scrollable_data_items_multiselect
+tags: telerik, kendo, jquery, multiselect, scroll, selected, items
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Scroll Selected Items
+## Environment
 
-The following example demonstrates how to create a scrollable list of the selected items in a Kendo UI MultiSelect widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create a scrollable list of the selected items in a Kendo UI MultiSelect widget?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
 <div id="example">
@@ -77,5 +106,3 @@ The following example demonstrates how to create a scrollable list of the select
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

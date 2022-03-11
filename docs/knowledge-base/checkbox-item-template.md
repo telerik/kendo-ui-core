@@ -1,14 +1,43 @@
 ---
-title: Create Checkbox Custom Item Templates
-page_title: Create Checkbox Custom Item Templates | Kendo UI MultiSelect
+title: Create Checkbox Custom Item Templates in the MultiSelect
+page_title: Create Checkbox Custom Item Templates in the MultiSelect
 description: "Learn how to create a Kendo UI MultiSelect with checkboxes."
-previous_url: /controls/editors/multiselect/how-to/checkbox-item-template
+previous_url: /controls/editors/multiselect/how-to/checkbox-item-template, /controls/editors/multiselect/how-to/templates/checkbox-item-template
 slug: howto_checkbox_custom_item_template_multiselect
+tags: telerik, kendo, jquery, multiselect, create, checkbox, custom, item, templates
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Create Checkbox Custom Item Templates
+## Environment
 
-The following example demonstrates how to create a Kendo UI MultiSelect widget with checkboxes.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create a Kendo UI MultiSelect widget with checkboxes?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="example" role="application">
@@ -86,5 +115,3 @@ The following example demonstrates how to create a Kendo UI MultiSelect widget w
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

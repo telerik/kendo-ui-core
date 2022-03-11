@@ -55,3 +55,16 @@ Below you can find the list of first portion of updated components with R1 2022.
 | `TextBox` | [TextBox Appearance Documentation]({% slug textbox_appearance %})
 | `TimePicker` | [TimePicker Appearance Documentation]({% slug appearance_timepicker %})
 | `TreeView` | [TreeView Appearance Documentation]({% slug appearance_treeview %})`
+
+**Button**
+
+As of the 2022 R1 release the `type` attribute of the Button is set to `button` by default. Previously, the Button rendered a `<button>` element without an explicitly set `type`. The main reason behind this change is to ensure the Button behaves as the Kendo UI for jQuery Button widget. As a result of this change, a Button with a default configuration nested in a form does not submit the form. If you want the Button to submit the form, set its `type` to `submit` in the `HtmlAttributes` configuration, as demonstrated in the example below.
+
+```
+@(Html.Kendo().Button()
+	.Name("button1")
+	.ThemeColor(ThemeColor.Primary)
+	.Content("Button1")
+	.HtmlAttributes(new { type = "submit" })
+)
+```

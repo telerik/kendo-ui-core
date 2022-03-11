@@ -1,14 +1,43 @@
 ---
-title: Select the First Item on TAB
-page_title: Select the First Item on TAB | Kendo UI MultiSelect
+title: Select the First MultiSelect Item on TAB
+page_title: Select the First MultiSelect Item on TAB
 description: "Learn how to select the first item from the popup on a TAB keypress in the Kendo UI MultiSelect widget."
-previous_url: /controls/editors/multiselect/how-to/select-on-tab
+previous_url: /controls/editors/multiselect/how-to/select-on-tab, /controls/editors/multiselect/how-to/selection/select-on-tab
 slug: howto_select_thefirst_itemon_tab_multiselect
+tags: telerik, kendo, jquery, multiselect, select, first, item, on, tab
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Select the First Item on TAB
+## Environment
 
-The following example demonstrates how to select the first item from the popup on a `Tab` key-press in a Kendo UI MultiSelect widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I select the first item from the popup on a `Tab` key-press in a Kendo UI MultiSelect widget?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
 <div id="example">
@@ -107,5 +136,3 @@ The following example demonstrates how to select the first item from the popup o
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

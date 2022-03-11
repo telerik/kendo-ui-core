@@ -1,14 +1,43 @@
 ---
-title: Bind Values to Templates
-page_title: Bind Values to Templates | Kendo UI MultiSelect
+title: Bind MultiSelect Values to Templates
+page_title: Bind MultiSelect Values to Templates
 description: "Learn how to bind values to a template by using MVVM in the Kendo UI MultiSelect widget."
-previous_url: /controls/editors/multiselect/how-to/bind-values-to-template
+previous_url: /controls/editors/multiselect/how-to/bind-values-to-template, /controls/editors/multiselect/how-to/templates/bind-values-to-template
 slug: howto_bind_values_totemplate_multiselect
+tags: telerik, kendo, jquery, multiselect, bind, values, to, templates
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Bind Values to Templates
+## Environment
 
-The following example demonstrates how to bind the Kendo UI MultiSelect value to a template by using MVVM.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I bind the Kendo UI MultiSelect value to a template by using MVVM?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="example">
@@ -92,5 +121,3 @@ The following example demonstrates how to bind the Kendo UI MultiSelect value to
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).

@@ -1,14 +1,43 @@
 ---
 title: Create Cascading MultiSelects
-page_title: Create Cascading MultiSelects | Kendo UI MultiSelect
+page_title: Create Cascading MultiSelects
 description: "Learn how to create cascading Kendo UI MultiSelect widgets."
-previous_url: /controls/editors/multiselect/how-to/cascading-multiselects
+previous_url: /controls/editors/multiselect/how-to/cascading-multiselects, /controls/editors/multiselect/how-to/cascade/cascading-multiselects
 slug: howto_create_cascading_widgets_multiselect
+tags: telerik, kendo, jquery, multiselect, create, cascading, multiselects
+component: multiselect
+type: how-to
+res_type: kb
 ---
 
-# Create Cascading MultiSelects
+## Environment
 
-The following example demonstrates how to cascade multiple Kendo UI MultiSelect widgets.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI MultiSelect for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I cascade multiple Kendo UI MultiSelect widgets?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     supplier: <select id="suppliers"></select>
@@ -87,5 +116,3 @@ The following example demonstrates how to cascade multiple Kendo UI MultiSelect 
 * [How to Select All Values with Single Selection]({% slug howto_select_allvalues_witha_single_selection_multiselect %})
 * [How to Use MultiSelect with Bootstrap Modal Window]({% slug howto_use_multiselect_with_bootstrap_modal_window_multiselect %})
 * [How to Wire Blur Event of the Filter Input]({% slug howto_wire_blur_event_ofthe_filtеr_input_multiselect %})
-
-For more runnable examples on the Kendo UI MultiSelect, browse its [**How To** documentation folder]({% slug howto_bindobjectstongmodel_multiselect %}).
