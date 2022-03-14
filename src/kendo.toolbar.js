@@ -465,6 +465,10 @@ var __meta__ = { // jshint ignore:line
 
                 element.addClass(BUTTON_GROUP);
 
+                if (options.hidden) {
+                    this.hide();
+                }
+
                 this.element.data({
                     type: "buttonGroup",
                     buttonGroup: this
@@ -886,6 +890,10 @@ var __meta__ = { // jshint ignore:line
                 this.addUidAttr();
                 this.addIdAttr();
                 this.addOverflowAttr();
+
+                if (options.hidden) {
+                    this.hide();
+                }
 
                 element.data({
                     type: TEMPLATE,
