@@ -264,6 +264,23 @@
             assert.isOk(!item.is(":visible"));
         });
 
+        it("removing the active item removes aria-activedescendant from element", function() {
+            var listView = setup({
+                selectable: "multiple"
+            }),
+
+            item = listView.content.children().first();
+
+            listView.current(item);
+
+            assert.isOk(!!item.attr("id"));
+            assert.equal(listView.element.attr("aria-activedescendant"), item.attr("id"));
+
+            listView.remove(item);
+
+            assert.equal(listView.element.attr("aria-activedescendant"), undefined);
+        });
+
         it("remove calls dataSource remove", function() {
             var listView = setup(),
                 removeMethod = stub(dataSource, "remove");

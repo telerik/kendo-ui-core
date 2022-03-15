@@ -43,7 +43,9 @@ The custom keyboard navigation works with the `ALT+W` key combination to move th
 
 There are several comments throughout the entire code that provide more in-depth information on the particular section of the logic.
 
-The following example showcases the full implementation of the logic with multiple series:
+The following example showcases the full implementation of the logic with multiple series.
+
+> To test the screen-reading functionality, run the example in a separate Dojo window by clicking the `Open In Dojo` button.
 
 ```dojo
     <style>

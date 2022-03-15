@@ -9,10 +9,11 @@
 @input-border-radius: null;
 
 @input-padding-x: @padding-x;
-@input-padding-y: 0.17857143em;
+@input-padding-y: @padding-y;
 @input-font-family: inherit;
 @input-font-size: inherit;
-@input-line-height: 2.214285714em;
+@input-line-height: @line-height;
+@input-line-height-em: @input-line-height * 1em;
 
 @input-values-margin-y: 2px;
 @input-values-margin-x: @input-values-margin-y;
@@ -61,12 +62,8 @@
 
 
 // Inputs old
-@line-height: (20/14);
-@line-height-em: ((20/14)*1em);
-@input-height: 2.214285714em;
+@input-height: @input-line-height-em;
 @input-offset: (@input-height + .35em);
-
-@line-height: (20 / 14);
 
 @icon-size: 16px;
 @input-icon-width: calc(@input-height + .35em);
@@ -90,7 +87,7 @@
 @messagebox-border-width: 0 0 0 4px;
 
 @messagebox-font-size: inherit; //@font-size;
-@messagebox-line-height: (20 / 14);//@line-height;
+@messagebox-line-height: @line-height;
 
 @messagebox-link-font-style: italic;
 @messagebox-link-text-decoration: underline;
@@ -132,7 +129,6 @@
 
 // Form
 @form-font-size: inherit;
-@form-line-height: (20 / 14);
 
 @form-label-margin: 0 0 8px;
 
@@ -144,7 +140,7 @@
 @form-legend-padding-x: 0;
 @form-legend-padding-y: 0;
 @form-legend-font-size: inherit;
-@form-legend-line-height: (20 / 14);
+@form-legend-line-height: @form-line-height;
 
 @form-field-margin: 0 0 16px;
 
@@ -164,12 +160,12 @@
 
 
 // Button
-@button-padding-x: 14px;
-@button-padding-y: 8px;
+@button-padding-x: @padding-x;
+@button-padding-y: @padding-y;
 @button-padding: @button-padding-y @button-padding-x;
 @button-border-width: 1px;
 
-@button-line-height: (20 / 14);
+@button-line-height: @line-height;
 
 @button-calc-size: ~"calc( (@{button-line-height} * 1em) + (@{button-padding-y} * 2) + (@{button-border-width} * 2) )";
 
@@ -185,7 +181,7 @@
 @toolbar-spacing: @toolbar-padding-x;
 
 @toolbar-font-size: inherit;
-@toolbar-line-height: (20 / 14);
+@toolbar-line-height: @line-height;
 
 @toolbar-calc-inner-size: ~"calc( @{button-calc-size} + (@{toolbar-padding-y} * 2) )";
 
@@ -274,7 +270,7 @@
 @calendar-border-width: 1px;
 @calendar-border-radius: 20px;
 @calendar-font-size: 14px;
-@calendar-line-height: (20 / 14);
+@calendar-line-height: @line-height;
 
 @calendar-header-padding-x: 0;
 @calendar-header-padding-y: 0;
@@ -293,7 +289,7 @@
 @calendar-header-cell-padding-y: (@calendar-cell-padding-y / 2);
 @calendar-header-cell-border-width: 0;
 @calendar-header-cell-font-size: 12px;
-@calendar-header-cell-line-height: (20 / 14);
+@calendar-header-cell-line-height: @line-height;
 @calendar-header-cell-size: @calendar-cell-size;
 
 @calendar-meta-cell-size: ( (60px / @calendar-font-size) * 1em );
@@ -445,7 +441,6 @@
 
 
 // Card
-@form-line-height: (20 / 14);
 @card-title-font-size: 19px;
 @card-subtitle-font-size: 12px;
 @card-border-radius: 4px;
@@ -700,7 +695,7 @@
 @listview-border-width: 1px;
 
 @listview-font-size: inherit;
-@listview-line-height: (20 / 14);
+@listview-line-height: @line-height;
 
 @listview-item-padding-x: 8px;
 @listview-item-padding-y: 4px;
@@ -787,7 +782,7 @@
 @stepper-inline-content-padding-y: 10px;
 
 @stepper-font-size: 14px;
-@stepper-line-height: (20 / 14);
+@stepper-line-height: @line-height;
 
 @stepper-indicator-width: 28px;
 @stepper-indicator-height: @stepper-indicator-width;
@@ -831,7 +826,7 @@
 @textarea-border-width: @input-border-width;
 @textarea-padding-x: 8px;
 @textarea-padding-y: 4px;
-@textarea-line-height: (20 / 14);
+@textarea-line-height: @line-height;
 @textarea-calc-height: calc( (@textarea-line-height * 1em) + (@textarea-padding-y * 2) + (@textarea-border-width * 2) );
 
 
@@ -1021,7 +1016,7 @@
 
 @actionsheet-font-size: 14px;
 @actionsheet-font-family: @font-family;
-@actionsheet-line-height: ( 20 / 14 );
+@actionsheet-line-height: @line-height;
 
 // Actionsheet header
 @actionsheet-header-padding-x: 16px;

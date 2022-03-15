@@ -16,7 +16,6 @@ The example below demonstrates how to use the `activate` event when initializing
 
 
 ```dojo
-    <body>
       <button id="openBtn">Open</button>
       <div id="wnd">
         <div id="grid"></div>
@@ -45,7 +44,7 @@ The example below demonstrates how to use the `activate` event when initializing
           }).data("kendoGrid");
 
           //apply the activate event, which is thrown only after the animation is played out
-          wnd.one("activate", function() {
+          wnd.one("activate", function() { // can use also 'bind' method as Kendo widgets support the "one" and "bind"
                 grid.resize();
           });
 
@@ -53,7 +52,6 @@ The example below demonstrates how to use the `activate` event when initializing
                 wnd.open();
           });
         </script>
-    </body>
 ```
 
 ## See Also

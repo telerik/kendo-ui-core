@@ -2045,7 +2045,7 @@ Takes the form "{0:format}" where "format" can be a:
 
 ### columns.groupable `Boolean|Object` *(default: true)
 
-If set to false the column will not be groupable (requires Grid groupable property to be enabled). By default all columns are groupable.
+If set to `false` the user will not be able to group the grid by this column (requires Grid [`groupable`](/api/javascript/ui/grid/configuration/groupable) property to be enabled). By default all columns are groupable.
 
 #### Example - disable grouping for individual column
 
@@ -8953,11 +8953,11 @@ The "cancel" built-in command reverts any data changes done by the end user.
 
 The "create" command adds an empty data item to the grid.
 
-The "save" command persists any data changes done by the end user.
+The "save" command persists any data changes done by the end user. When executed fires [`saveChanges`](/api/javascript/ui/grid/events/savechanges) grid event.
 
-The "excel" command exports the grid data in MS Excel format.
+The "excel" command exports the grid data in MS Excel format. Fires [`excelExport`](/api/javascript/ui/grid/events/excelexport) grid event.
 
-The "pdf" command exports the grid data in PDF format.
+The "pdf" command exports the grid data in PDF format. Fires [`pdfExport`](/api/javascript/ui/grid/events/pdfexport) grid event.
 
 The "search" built-in search panel for the grid.
 
@@ -11467,7 +11467,7 @@ The widget instance which fired the event.
 
 ### change
 
-Fired when the user selects a table row or cell in the grid.
+Fired when the user selects or deselects a table row or cell in the grid. To retrieve the selected elements, use the [`select`](/api/javascript/ui/grid/methods/select) method.
 
 The event handler function context (available via the `this` keyword) will be set to the widget instance.
 
@@ -11536,6 +11536,35 @@ The widget instance which fired the event.
     });
     var grid = $("#grid").data("kendoGrid");
     grid.bind("change", grid_change);
+    </script>
+
+#### Example - disable the selected rows
+
+    <div id="grid"></div>
+    <script>
+      $("#grid").kendoGrid({
+        columns: [
+          {selectable: true},
+          { field: "name" },
+          { field: "age" }
+        ],
+        dataSource: [
+          { name: "Jane Doe", age: 30 },
+          { name: "James Doe", age: 34 },
+          { name: "John Doe", age: 37 },
+          { name: "Mark Doe", age: 23 },
+          { name: "Mike Doe", age: 63 }
+        ],
+        change: function(e) {
+          var grid = e.sender;
+          var selectedRows = this.select();
+          $("td").removeClass("k-disabled");
+
+          selectedRows.each(function(i, x) {
+            $(x).find("td:not(:first)").addClass("k-disabled");
+          });
+        }
+      });
     </script>
 
 ### columnHide

@@ -2045,7 +2045,8 @@
 }
 
 .k-grid td.k-state-selected:hover,
-.k-grid tr.k-state-selected:hover td {
+.k-grid tr.k-state-selected:hover td,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover {
     background-color: @grid-selected-hover-bg;
 }
 
@@ -2650,6 +2651,10 @@ table:not(.k-scheduler-dayview) .k-scheduler-header-wrap .k-today {
     &.k-state-selected.k-state-hover .k-grid-content-sticky {
         background-color: @grid-selected-hover-bg;
         .composite-background(none);
+    }
+
+    td.k-grid-content-sticky.k-state-selected {
+        background-color: lighten(@info, 22%);
     }
 }
 

@@ -87,6 +87,16 @@ To enable the selection of multiple Grid cells, set `selectable` to `multiple ce
         // Other configuration.
     });
 
+## Ignored Elements
+
+By default, the Grid excludes some elements from the target list so that a click on any of these elements will not result in a row selection.
+
+The following code snippet contains all of the ignored selectors:
+
+```javascript
+input,a,textarea,.k-multiselect-wrap,select,button,.k-button>span,.k-button>img,span.k-icon.k-i-arrow-60-down,span.k-icon.k-i-arrow-60-up,label.k-checkbox-label.k-no-text,.k-icon.k-i-collapse,.k-icon.k-i-expand,span.k-numeric-wrap,.k-focusable
+```
+
 ## KB Articles on Selection
 
 * [Selecting or Deselecting All Rows with a Select All Header Checkbox]({% slug howto_select_deselect_all_rowswith_checkboxes_grid %})

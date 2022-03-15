@@ -2561,7 +2561,8 @@ div.k-filebrowser-dropzone em
 }
 
 .k-grid tr:hover .k-state-selected,
-.k-grid tr.k-state-selected:hover td {
+.k-grid tr.k-state-selected:hover td,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover {
     background-color: @grid-selected-hover-bg;
 }
 
@@ -2797,6 +2798,13 @@ div.k-filebrowser-dropzone em
     &.k-state-selected.k-state-hover .k-grid-content-sticky {
         background-color: @grid-selected-hover-bg;
         .composite-background(none);
+    }
+    &:hover td.k-grid-content-sticky.k-state-selected {
+        background-color: @grid-selected-hover-bg;
+    }
+
+    td.k-grid-content-sticky.k-state-selected {
+        background-color: @selected-background-color;
     }
 }
 

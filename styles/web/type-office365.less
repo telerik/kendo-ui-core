@@ -2720,7 +2720,8 @@ div.k-splitbar.k-state-focused .k-icon,
 }
 
 .k-grid tr.k-state-selected:hover,
-.k-grid td.k-state-selected:hover {
+.k-grid td.k-state-selected:hover,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover {
     background-color: @grid-selected-hover-bg;
 }
 
@@ -3115,6 +3116,10 @@ div.k-splitbar.k-state-focused .k-icon,
     &.k-state-selected.k-state-hover .k-grid-content-sticky {
         background-color: @grid-selected-hover-bg;
         .composite-background(none);
+    }
+
+    td.k-grid-content-sticky.k-state-selected {
+        background-color: @selected-background-color;
     }
 }
 

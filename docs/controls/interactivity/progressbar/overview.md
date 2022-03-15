@@ -10,6 +10,8 @@ position: 1
 
 The ProgressBar delivers rich functionality for displaying and tracking the progress of a task.
 
+To see the ProgressBar in action, visit its [demo page](https://demos.telerik.com/kendo-ui/progressbar/index).
+
 The widget provides the following types:
 
 * `value`&mdash;Represents a regular ProgressBar which displays the progress status as an absolute value.
@@ -17,8 +19,6 @@ The widget provides the following types:
 * `chunk`&mdash;Represents a ProgressBar which is divided in chunks and displays the progress status in steps.
 
 The ProgressBar also supports horizontal and vertical orientation, reversed direction, minimum and maximum values, and animation duration.
-
-* [Demo page for the ProgressBar](https://demos.telerik.com/kendo-ui/progressbar/index)
 
 ## Basic Configuration
 

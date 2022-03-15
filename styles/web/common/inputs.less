@@ -355,9 +355,9 @@ span.k-dropdowntree {
         // transform position to top-left corner of the textbox-container
         // do not use single translate + calc() because of IE10/11
         @fls: -@floating-label-scale;
-        transform: translate(calc(-@input-padding-x), calc(@fls * @input-padding-y))
-                translate(-@input-border-width, calc(@fls * @input-line-height))
-                translate(-@half-scale-percent, calc(@fls * @half-scale-percent))
+        transform: translate(calc(-@input-padding-x), -@input-padding-y)
+                translate(-@input-border-width, calc(@fls * @input-line-height-em))
+                translate(-@half-scale-percent, -@half-scale-percent)
                 scale(@floating-label-scale);
     }
 

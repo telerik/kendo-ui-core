@@ -48,7 +48,9 @@ This approach helps you achieve the look and feel of window-level fixed headers.
     </style>
 ```
 
-To see the following demo in action, click **Open in Dojo**.
+The following examples demonstrates the full code implementation.
+
+> To observe the result, run the example in a separate Dojo window by clicking the `Open In Dojo` button.
 
 ```dojo
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>

@@ -2621,7 +2621,8 @@ div.k-filebrowser-dropzone em
 }
 
 .k-grid td.k-state-selected:hover,
-.k-grid tr.k-state-selected:hover td {
+.k-grid tr.k-state-selected:hover td,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover {
     background-color: @grid-selected-hover-bg;
 }
 
@@ -2857,10 +2858,14 @@ div.k-filebrowser-dropzone em
         background-color: @grid-hover-bg;
     }
 
-    &.k-state-selected:hover .k-grid-content-sticky,
-    &.k-state-selected.k-state-hover .k-grid-content-sticky {
-        background-color: @grid-selected-hover-bg;
-        .composite-background(none);
+    &:hover .k-grid-content-sticky.k-state-selected,
+    &.k-state-hover .k-grid-content-sticky.k-state-selected {
+        background-color: @grid-selected-bg;
+        .composite-background(@grid-selected-gradient);
+    }
+
+    td.k-grid-content-sticky.k-state-selected {
+        background-color: @selected-background-color;
     }
 }
 

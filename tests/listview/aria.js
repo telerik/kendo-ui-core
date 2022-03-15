@@ -16,7 +16,7 @@
             selectable: true,
             dataSource: dataSource = new DataSource({ data: [1, 2, 3, 4, 5] })
         }, options);
-        return $("<div id='test' aria-label='listview label'/>").appendTo(Mocha.fixture).kendoListView(options);
+        return $("<div aria-label='listview label'/>").appendTo(Mocha.fixture).kendoListView(options);
     }
 
     describe("kendo.ui.ListView WAI-ARIA roles and attributes", function() {
@@ -36,6 +36,14 @@
             assert.equal(container.attr("role"), "listbox");
         });
 
+        it("ListView does not add role when empty", function() {
+            var container = setup({
+                dataSource: []
+            });
+
+            assert.equal(container.attr("role"), undefined);
+        });
+
         it("ListView adds role list when not navigatable and selectable", function() {
             var container = setup({ navigatable: false, selectable: false });
 
@@ -48,6 +56,15 @@
             });
 
             assert.equal(container.attr("aria-multiselectable"), "true");
+        });
+
+        it("ListView does not add aria-multiselectable when empty", function() {
+            var container = setup({
+                selectable: "multiple",
+                dataSource: []
+            });
+
+            assert.equal(container.attr("aria-multiselectable"), undefined);
         });
 
         it("aria-selected attribute is not rendered if selection is not enabled", function() {
@@ -97,7 +114,7 @@
                 keyCode: kendo.keys.SPACEBAR
             });
 
-            assert.equal(container.data("kendoListView").current().attr("id"), "test_lv_active");
+            assert.isOk(!!container.data("kendoListView").current().attr("id"));
         });
 
         it("ListView adds aria-activedescendant to the listview", function() {
@@ -109,7 +126,8 @@
                 keyCode: kendo.keys.SPACEBAR
             });
 
-            assert.equal(container.attr("aria-activedescendant"), "test_lv_active");
+            assert.isOk(!!container.attr("aria-activedescendant"));
+            assert.equal(container.attr("aria-activedescendant"), container.data("kendoListView").current().attr("id"));
         });
 
         it("ListView preserves the id of the LI elements", function() {

@@ -2602,7 +2602,8 @@ div.k-filebrowser-dropzone em
 }
 
 .k-grid tr:hover,
-.k-grid td.k-state-selected:hover {
+.k-grid td.k-state-selected:hover,
+.k-grid td.k-grid-content-sticky.k-state-selected:hover {
     color: @hover-text-color;
     background-color: @hover-background;
 }
@@ -2846,6 +2847,10 @@ div.k-filebrowser-dropzone em
     &.k-state-selected.k-state-hover .k-grid-content-sticky {
         background-color: @grid-selected-hover-bg;
         .composite-background(none);
+    }
+
+    td.k-grid-content-sticky.k-state-selected {
+        background-color: @selected-background-color;
     }
 }
 
