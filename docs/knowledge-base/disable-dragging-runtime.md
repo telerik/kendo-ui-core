@@ -1,21 +1,49 @@
 ---
 title: Enable and Disable Dragging at Runtime
-page_title: Enable and Disable Dragging at Runtime | Kendo UI Drag-and-Drop
+page_title: Enable and Disable Dragging at Runtime 
 description: "Learn how to enable and disable the Kendo UI Drag and Drop functionality at runtime."
 slug: howto_enableanddisabledraggingatruntime_intercativityandux
+previous_url: /controls/editors/validator/how-to/disable-dragging-runtime
+tags: telerik, kendo, jquery, drag, and, drop, enable, and, disable, dragging, at, runtime
+component: draganddrop
+type: how-to
+res_type: kb
 ---
 
-# Enable and Disable Dragging at Runtime
+## Environment
 
-Your project might require you to enable or disable the Kendo UI Drag-and-Drop functionality during runtime.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Drag and Drop for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-To achieve this behavior:
+## Description
 
-1. Initialize the Drag-and-Drop feature on the parent container.
+How can I enable and disable the Kendo UI Drag and Drop functionality at runtime?
+
+## Solution
+
+To achieve the desired scenario:
+
+1. Initialize the Drag and Drop feature on the parent container.
 2. Use a filter to specify which items will be draggable.
 3. Change the class of the items to enable and disable them.
 
-The following example demonstrates how to accomplish this scenario.
+The following example demonstrates the implementation of the suggested approach.
 
 ```dojo
   <button id="btn">Enable/Disable</button>

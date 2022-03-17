@@ -1,14 +1,43 @@
 ---
-title: Reorder Rows in Nested Grids
-page_title: Reorder Rows in Nested Grid | Kendo UI Sortable
+title: Reorder Rows in Nested Grids by Using the Sortable
+page_title: Reorder Rows in Nested Grid by Using the Sortable
 description: "Learn how to reorder rows in a child Grid using the Kendo UI Sortable widget."
-previous_url: /controls/interactivity/sortable/how-to/reorder-child-grid-rows
+previous_url: /controls/interactivity/sortable/how-to/reorder-child-grid-rows, /controls/interactivity/sortable/how-to/reorder-nested-grid-rows
 slug: howto_reorderrowsinnestedgrid_sortable
+tags: telerik, kendo, jquery, sortable, reorder, rows, in, nested, grids
+component: sortable
+type: how-to
+res_type: kb
 ---
 
-# Reorder Rows in Nested Grid
+## Environment
 
-The following example demonstrates how to reorder rows in a child Grid using the Kendo UI Sortable widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Sortable for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I reorder rows in a child Grid using the Kendo UI Sortable?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="example">

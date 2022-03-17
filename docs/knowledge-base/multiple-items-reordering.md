@@ -1,13 +1,43 @@
 ---
-title: Reorder Multiple Items
-page_title: Reorder Multiple Items | Kendo UI Sortable
+title: Reorder Multiple Items in the Sortable
+page_title: Reorder Multiple Items in the Sortable
 description: "Learn how to reorder multiple items using the Kendo UI Sortable widget."
 slug: howto_reordermultipleitems_sortable
+previous_url: /controls/interactivity/sortable/how-to/multiple-items-reordering
+tags: telerik, kendo, jquery, sortable, reorder, multiple, items
+component: sortable
+type: how-to
+res_type: kb
 ---
 
-# Reorder Multiple Items
+## Environment
 
-The following example demonstrates how to reorder multiple items using the Kendo UI Sortable widget.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Sortable for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I reorder multiple items by using the Kendo UI Sortable?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
   <p>Select multiple items with CTRL key</p>

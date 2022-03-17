@@ -1,14 +1,43 @@
 ---
-title: Reorder Rows in Grids
-page_title: Reorder Rows in Grids | Kendo UI Sortable
+title: Reorder Rows in Grids by Using the Sortable
+page_title: Reorder Rows in Grids by Using the Sortable
 description: "Learn how to use the Kendo UI Sortable widget with a Kendo UI Grid either in editable or non-editable modes."
-previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid, /web/sortable/how-to/angularjs-reorder-grid-rows
+previous_url: /controls/interactivity/sortable/how-to/reorder-grid-rows, /controls/interactivity/sortable/how-to/batch-editable-grid, /web/sortable/how-to/angularjs-reorder-grid-rows, /controls/interactivity/sortable/how-to/use-sortable-grid
 slug: howto_usesortablewithgrid_inincellediting_sortable
+tags: telerik, kendo, jquery, sortable, reorder, rows, in, grids
+component: sortable
+type: how-to
+res_type: kb
 ---
 
-# Reorder Rows in Grids
+## Environment
 
-The following examples demonstrate how to use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Sortable for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the Kendo UI Sortable widget with a Kendo UI Grid either in an editable or in a non-editable mode?
+
+## Solution
+
+The following examples demonstrate how to achieve the desired scenarios.
 
 ## Non-Editable Grid Mode
 
@@ -90,13 +119,16 @@ The main milestones of the approach are the following:
 
 * The standard HTML inputs that are used as editors need to have a `data-value-update="input"` attribute. If this attribute is not attached to the HTML element, the Grid will not update its data.
 
+      ```
        var textEditor = function (container, options) {
          $('<input data-value-update="input" data-bind="value:' + options.field + '"/>')
            .appendTo(container);
        };
+       ```
 
 * If you use a Kendo UI widget as an editor, manually trigger its `change` event in the `edit` event of the Grid.
 
+      ```
        // The Kendo UI widget that is used as an editor.
        var numericEditor = function (container, options) {
          $('<input data-role="numerictextbox" data-bind="value:' + options.field + '"/>')
@@ -118,6 +150,7 @@ The main milestones of the approach are the following:
            widget.trigger("change");
          });
        },
+       ```
 
 > * For simplicity, the demo uses local data with a dummy **Order** field. This may not be the case in a real-world scenario.
 > * The `change` event handler of the Sortable updates the **Order** field, which is a sample implementation. The `change` event handler has to be modified to fit your real-world scenario.

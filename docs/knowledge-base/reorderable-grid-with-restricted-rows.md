@@ -1,13 +1,43 @@
 ---
-title: Create Reorderable Grid with Restricted Rows
-page_title: Create Reorderable Grid with Restricted Rows | Kendo UI Sortable
+title: Create Reorderable Grid with Restricted Rows by Using the Sortable
+page_title: Create Reorderable Grid with Restricted Rows by Using the Sortable
 description: "Learn how to restrict rows reordering in a Kendo UI Grid with a Kendo UI Sortable widget."
 slug: howto_restrict_reordergridrows_sortable
+previous_url: /controls/interactivity/sortable/how-to/reorderable-grid-wth-restricted-rows
+tags: telerik, kendo, jquery, sortable, create, reorderable, grids, with, restricted, rows
+component: sortable
+type: how-to
+res_type: kb
 ---
 
-# Create Reorderable Grid with Restricted Rows
+## Environment
 
-The following example demonstrates how to reorder Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Sortable for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I reorder Grid rows using the Kendo UI Sortable widget and disable the top rows from reordering?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="grid" style="width: 800px; margin: 0 auto;"></div>

@@ -1,15 +1,43 @@
 ---
-title: Transfer Grid Rows
-page_title: Transfer Grid Rows | Kendo UI Sortable
+title: Transfer Grid Rows by Using the Sortable
+page_title: Transfer Grid Rows by Using the Sortable
 description: "Learn how to move a row from one Grid to another using the Kendo UI Sortable widget."
 slug: howto_transfergridrows_sortable
+previous_url: /controls/interactivity/sortable/how-to/transfer-grid-rows
+tags: telerik, kendo, jquery, sortable, transfer, grid, rows
+component: sortable
+type: how-to
+res_type: kb
 ---
 
-# Transfer Grid Rows
+## Environment
 
-The following example demonstrates how to move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Sortable for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-Reordering the rows within the same Grid in the same way is also supported.
+## Description
+
+How can I move a row from one Kendo UI Grid to another by dragging it from the first Grid to the second one and vice versa?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario. Reordering the rows within the same Grid in the same way is also supported.
 
 ```dojo
 <div id="grid1" style="width: 400px; float:left"></div>

@@ -1,13 +1,43 @@
 ---
-title: Nest Sortables
-page_title: Nest Sortables | Kendo UI Sortable
+title: Nest Sortable Widgets
+page_title: Nest Sortable Widgets 
 description: "Learn how to create nested Kendo UI Sortable widgets."
 slug: howto_nestsortables_sortable
+previous_url: /controls/interactivity/sortable/how-to/nested-sortables
+tags: telerik, kendo, jquery, sortable, create, nested, sortable, widgets
+component: sortable
+type: how-to
+res_type: kb
 ---
 
-# Nest Sortables
+## Environment
 
-The following example demonstrates how to create nested Kendo UI Sortable widgets.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Sortable for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I create nested Kendo UI Sortable widgets?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenarios.
 
 ```dojo
   <ul id="parent">
