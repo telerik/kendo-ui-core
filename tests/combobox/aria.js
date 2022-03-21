@@ -122,8 +122,11 @@ it("ComboBox adds aria-controls without input id", function() {
 it("ComboBox adds aria-activedescentant", function() {
     var combobox = new ComboBox(input.attr("id", "test"), {
         dataSource: ["Item1", "Item2"],
-        value: "Item2"
+        value: "Item2",
+        animation: false
     });
+
+    combobox.open();
 
     assert.equal(combobox.selectedIndex, 1);
     assert.equal(combobox.ul.children().eq(0).attr("id"), undefined);

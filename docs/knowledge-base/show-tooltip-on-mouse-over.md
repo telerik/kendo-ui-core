@@ -1,14 +1,43 @@
 ---
-title: Show Tooltip on Mouse Over
-page_title: Show Tooltip on Mouse Over | Kendo UI Validator
+title: Show Tooltip on Mouse Over in the Validator
+page_title: Show Tooltip on Mouse Over in the Validator
 description: "Learn how to show a toolbar on mouse over in the Kendo UI Validator."
-previous_url: /framework/validator/how-to/show-tooltip-on-mouse-over
+previous_url: /framework/validator/how-to/show-tooltip-on-mouse-over, /controls/editors/validator/how-to/show-tooltip-on-mouse-over
 slug: howto_showtooltiponmouseover_validator
+tags: telerik, kendo, jquery, validator, show, tooltip, on, mouseover
+component: validator
+type: how-to
+res_type: kb
 ---
 
-# Show Tooltip on Mouse Over
+## Environment
 
-The following example demonstrates how to show the validation tooltip in Kendo UI only when you move the mouse cursor over the input that failed to validate.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Validator for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I show the validation tooltip in Kendo UI only when you move the mouse cursor over the input that failed to validate?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <style scoped>
@@ -16,7 +45,6 @@ The following example demonstrates how to show the validation tooltip in Kendo U
       {
         display: none !important;
       }
-
       .k-invalid
       {
         border: 1px solid red;
@@ -29,11 +57,9 @@ The following example demonstrates how to show the validation tooltip in Kendo U
       .k-textbox {
         width: 11.8em;
       }
-
       .demo-section {
         width: 700px;
       }
-
       #tickets {
         width: 510px;
         height: 323px;
@@ -41,13 +67,11 @@ The following example demonstrates how to show the validation tooltip in Kendo U
         padding: 10px 20px 20px 170px;
         background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
       }
-
       #tickets h3 {
         font-weight: normal;
         font-size: 1.4em;
         border-bottom: 1px solid #ccc;
       }
-
       #tickets ul {
         list-style-type: none;
         margin: 0;
@@ -56,25 +80,20 @@ The following example demonstrates how to show the validation tooltip in Kendo U
       #tickets li {
         margin: 7px 0 0 0;
       }
-
       label {
         display: inline-block;
         width: 90px;
         text-align: right;
       }
-
       .required {
         font-weight: bold;
       }
-
       .accept, .status {
         padding-left: 90px;
       }
-
       .valid {
         color: green;
       }
-
       .invalid {
         color: red;
       }
@@ -90,13 +109,13 @@ The following example demonstrates how to show the validation tooltip in Kendo U
             <li>
               <label for="fullname" class="required">Your Name</label>
               <div style="display:inline-block">
-                <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
+                <input type="text" id="fullname" name="fullname" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
               </div>
             </li>
             <li>
               <label for="email" class="required">Email</label>
               <div style="display:inline-block">
-                <input type="email" id="email" name="email" class="k-textbox" placeholder="Email" required style="width: 200px;" />
+                <input type="email" id="email" name="email" placeholder="Email" required style="width: 200px;" />
               </div>
             </li>
             <li>
@@ -106,42 +125,37 @@ The following example demonstrates how to show the validation tooltip in Kendo U
               </div>
             </li>
             <li  class="accept">
-              <button class="k-button" type="submit">Submit</button>
+              <button id="submit" type="submit">Submit</button>
             </li>
             <li class="status">
             </li>
           </ul>
         </form>
       </div>
-
-
       <script>
         $(document).ready(function() {
+          $("#fullname").kendoTextBox();
+          $("#email").kendoTextBox();
+          $("#submit").kendoButton();
           var errorTemplate = '<div class="k-widget k-tooltip k-tooltip-error"' +
               'style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
               '#=message#<div class="k-callout k-callout-n"></div></div>'
-
           var validator = $("#tickets").kendoValidator({
             errorTemplate: errorTemplate
           }).data("kendoValidator");
-
           $("#age").kendoNumericTextBox();
-
           var tooltip = $("#tickets").kendoTooltip({
             filter: ".k-invalid",
             content: function(e) {
-              var name = e.target.attr("name") || e.target.closest(".k-widget").find(".k-invalid:input").attr("name");
+              var name = e.target.attr("name") || e.target.closest(".k-input").find(".k-invalid:input").attr("name");
               var errorMessage = $("#tickets").find("[data-for=" + name + "]");
-
               return '<span class="k-icon k-warning"> </span>' + errorMessage.text();
             },
             show: function() {
               this.refresh();
             }
           });
-
           var status = $(".status");
-
           $("form").submit(function(event) {
             event.preventDefault();
             if (validator.validate()) {
@@ -154,19 +168,15 @@ The following example demonstrates how to show the validation tooltip in Kendo U
               .addClass("invalid");
             }
           });
-
           var elements = $("#tickets").find("[data-role=autocomplete],[data-role=combobox],[data-role=dropdownlist],[data-role=numerictextbox]");
-
           // A correct mutation of the event detection.
           var hasMutationEvents = ("MutationEvent" in window),
               MutationObserver = window.WebKitMutationObserver || window.MutationObserver;
-
           if (MutationObserver) {
             var observer = new MutationObserver(function (mutations) {
               var idx = 0,
                   mutation,
                   length = mutations.length;
-
               for (; idx < length; idx++) {
                 mutation = mutations[idx];
                 if (mutation.attributeName === "class") {
@@ -175,7 +185,6 @@ The following example demonstrates how to show the validation tooltip in Kendo U
               }
             }),
                 config = { attributes: true, childList: false, characterData: false };
-
             elements.each(function () {
               observer.observe(this, config);
             });
@@ -186,10 +195,8 @@ The following example demonstrates how to show the validation tooltip in Kendo U
               this.attachEvent("onpropertychange", updateCssOnPropertyChange);
             });
           }
-
           function updateCssOnPropertyChange (e) {
             var element = $(e.target || e.srcElement);
-
             element.siblings("span.k-dropdown-wrap")
             .add(element.parent("span.k-numeric-wrap"))
             .toggleClass("k-invalid", element.hasClass("k-invalid"));

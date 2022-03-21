@@ -215,8 +215,11 @@
         it("DropDownList renders aria-activedescendant", function() {
             var dropdownlist = new DropDownList(input.attr("id", "test"), {
                 filter: "startswith",
-                dataSource: ["Item", "Item2"]
+                dataSource: ["Item", "Item2"],
+                animation: false
             });
+
+            dropdownlist.open();
 
             assert.equal(dropdownlist.filterInput.attr("aria-activedescendant"), dropdownlist.current()[0].id);
         });

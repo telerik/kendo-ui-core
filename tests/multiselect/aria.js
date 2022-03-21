@@ -376,5 +376,18 @@
 
         assert.equal(multiselect.tagList.attr("role"), undefined);
     });
+
+    it("MultiSelect renders aria-activedescendant", function() {
+        var multiselect = new MultiSelect(input, {
+            dataSource: ["Item", "Item2"],
+            animation: false,
+            value: ["Item"]
+        });
+
+        multiselect.open();
+
+        assert.isOk(!!multiselect.input.attr("aria-activedescendant"));
+        assert.equal(multiselect.input.attr("aria-activedescendant"), multiselect.current()[0].id);
+    });
     });
 }());

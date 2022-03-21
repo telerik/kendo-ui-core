@@ -1,12 +1,41 @@
 ---
-title: Use MutationObserver to Add Red Border and Hide Tooltip
-page_title: Use MutationObserver to Add Red Border and Hide Tooltip | Kendo UI Validator
-description: "Learn how to use MutationObserver to add a red border and hide the tooltip in the Kendo UI Validator."
-previous_url: /framework/validator/how-to/use-mutation-observer
+title: Use MutationObserver to Add Red Border and Hide the Validator Tooltip
+page_title: Use MutationObserver to Add Red Border and Hide the Validator Tooltip
+description: "Learn how to use the MutationObserver to add a red border and hide the tooltip in the Kendo UI Validator."
+previous_url: /framework/validator/how-to/use-mutation-observer, /controls/editors/validator/how-to/use-mutation-observer
 slug: howto_usemutationobserver_addborderandhidetooltip_validator
+tags: telerik, kendo, jquery, validator, use, mutationobserver, add, border, hide, tooltip
+component: validator
+type: how-to
+res_type: kb
 ---
 
-# Use MutationObserver to Add Red Border and Hide Tooltip
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Validator for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I use the `MutationObserver` to add a red border and hide the tooltip in the Kendo UI Validator?
+
+## Solution
 
 Your project might require you to hide the validation tooltip and add borders around `input` elements and widgets that failed to validate.
 
@@ -20,7 +49,6 @@ The following example demonstrates how to achieve this behavior by using a `Muta
         /*or*/
         /*display:none !important;*/
       }
-
       /*add red border*/
       .k-widget > span.k-invalid,
       input.k-invalid
@@ -30,12 +58,10 @@ The following example demonstrates how to achieve this behavior by using a `Muta
       .k-textbox {
         width: 11.8em;
       }
-
       .demo-section {
         width: 700px;
         font-size: 12px;
       }
-
       #tickets {
         width: 510px;
         height: 323px;
@@ -43,7 +69,6 @@ The following example demonstrates how to achieve this behavior by using a `Muta
         padding: 10px 20px 20px 170px;
         background: url('../content/web/validator/ticketsOnline.png') transparent no-repeat 0 0;
       }
-
       #tickets h3 {
         font-weight: normal;
         font-size: 1.4em;
@@ -51,7 +76,6 @@ The following example demonstrates how to achieve this behavior by using a `Muta
         margin: 10px 0 0;
         padding: 0;
       }
-
       #tickets ul {
         list-style-type: none;
         margin: 0;
@@ -60,25 +84,20 @@ The following example demonstrates how to achieve this behavior by using a `Muta
       #tickets li {
         margin: 10px 0 0 0;
       }
-
       label {
         display: inline-block;
         width: 90px;
         text-align: right;
       }
-
       .required {
         font-weight: bold;
       }
-
       .accept, .status {
         padding-left: 90px;
       }
-
       .valid {
         color: green;
       }
-
       .invalid {
         color: red;
       }
@@ -93,7 +112,7 @@ The following example demonstrates how to achieve this behavior by using a `Muta
           <ul>
             <li>
               <label for="fullname" class="required">Your Name</label>
-              <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
+              <input type="text" id="fullname" name="fullname" placeholder="Full name" required validationMessage="Enter {0}" style="width: 200px;" />
             </li>
             <li>
               <label for="search" class="required">Movie</label>
@@ -116,25 +135,24 @@ The following example demonstrates how to achieve this behavior by using a `Muta
             </li>
             <li>
               <label for="email" class="required">Email</label>
-              <input type="email" id="email" name="Email" class="k-textbox" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" style="width: 200px;" />
+              <input type="email" id="email" name="Email" placeholder="e.g. myname@example.net"  required data-email-msg="Email format is not valid" style="width: 200px;" />
             </li>
             <li>
               <label for="tel" class="required">Phone</label>
-              <input type="tel" id="tel" name="tel" class="k-textbox" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
+              <input type="tel" id="tel" name="tel" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required
                      validationMessage="Enter at least ten digits" style="width: 200px;"/>
             </li>
             <li  class="accept">
               <input type="checkbox" name="Accept" required validationMessage="Acceptance is required" /> I accept the terms of service
             </li>
             <li  class="accept">
-              <button class="k-button" type="submit">Submit</button>
+              <button id="submit" type="submit">Submit</button>
             </li>
             <li class="status">
             </li>
           </ul>
         </form>
       </div>
-
       <script>
         $(document).ready(function() {
           var data = [
@@ -149,21 +167,20 @@ The following example demonstrates how to achieve this behavior by using a `Muta
             "The Godfather: Part II",
             "The Shawshank Redemption"
           ];
-
+          $("#fullname").kendoTextBox();
+          $("#tel").kendoTextBox();
+          $("#email").kendoTextBox();
+          $("#submit").kendoButton();
           $("#search").kendoAutoComplete({
             dataSource: data,
             separator: ", "
           });
-
           $("#time").kendoDropDownList({
             optionLabel: "--Start time--"
           });
-
           $("#amount").kendoNumericTextBox();
-
           var validator = $("#tickets").kendoValidator().data("kendoValidator"),
               status = $(".status");
-
           $("form").submit(function(event) {
             event.preventDefault();
             if (validator.validate()) {
@@ -176,20 +193,16 @@ The following example demonstrates how to achieve this behavior by using a `Muta
               .addClass("invalid");
             }
           });
-
           /* Bind Mutation Events */
           var elements = $("#tickets").find("[data-role=autocomplete],[data-role=combobox],[data-role=dropdownlist],[data-role=numerictextbox]");
-
           //correct mutation event detection
           var hasMutationEvents = ("MutationEvent" in window),
               MutationObserver = window.WebKitMutationObserver || window.MutationObserver;
-
           if (MutationObserver) {
             var observer = new MutationObserver(function (mutations) {
               var idx = 0,
                   mutation,
                   length = mutations.length;
-
               for (; idx < length; idx++) {
                 mutation = mutations[idx];
                 if (mutation.attributeName === "class") {
@@ -198,7 +211,6 @@ The following example demonstrates how to achieve this behavior by using a `Muta
               }
             }),
                 config = { attributes: true, childList: false, characterData: false };
-
             elements.each(function () {
               observer.observe(this, config);
             });
@@ -209,10 +221,8 @@ The following example demonstrates how to achieve this behavior by using a `Muta
               this.attachEvent("onpropertychange", updateCssOnPropertyChange);
             });
           }
-
           function updateCssOnPropertyChange (e) {
             var element = $(e.target || e.srcElement);
-
             element.siblings("span.k-dropdown-wrap")
             .add(element.parent("span.k-numeric-wrap"))
             .toggleClass("k-invalid", element.hasClass("k-invalid"));

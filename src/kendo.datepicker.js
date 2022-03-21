@@ -36,6 +36,7 @@ var __meta__ = { // jshint ignore:line
     HOVER = "k-hover",
     HOVEREVENTS = "mouseenter" + ns + " mouseleave" + ns,
     MOUSEDOWN = "mousedown" + ns,
+    NAVIGATE = "navigate",
     ID = "id",
     MIN = "min",
     MAX = "max",
@@ -44,6 +45,7 @@ var __meta__ = { // jshint ignore:line
     ARIA_READONLY = "aria-readonly",
     ARIA_EXPANDED = "aria-expanded",
     ARIA_HIDDEN = "aria-hidden",
+    ARIA_ACTIVEDESCENDANT = "aria-activedescendant",
     calendar = kendo.calendar,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
@@ -115,8 +117,11 @@ var __meta__ = { // jshint ignore:line
                             .on(MOUSEDOWN, preventDefault)
                             .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
 
-
-                that.calendar = calendar = new ui.Calendar(div, { componentType: options.componentType, size: options.size, messages: options.messages });
+                that.calendar = calendar = new ui.Calendar(div, {
+                    componentType: options.componentType,
+                    size: options.size,
+                    messages: options.messages
+                });
                 that._setOptions(options);
 
                 div.addClass(kendo.getValidCssClass("k-calendar-", "size", options.size));
@@ -331,6 +336,10 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         element.attr(ARIA_EXPANDED, false);
                         div.attr(ARIA_HIDDEN, true);
+
+                        setTimeout(function() {
+                            element.removeAttr("aria-activedescendant");
+                        });
                     }
                 },
                 open: function(e) {
@@ -354,6 +363,7 @@ var __meta__ = { // jshint ignore:line
                     }
                 }
             }));
+
             div = that.dateView.div;
 
             that._icon();
@@ -535,6 +545,7 @@ var __meta__ = { // jshint ignore:line
 
         open: function() {
             this.dateView.open();
+            this._navigateCalendar();
         },
 
         close: function() {
@@ -592,6 +603,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             that.dateView.toggle();
+            that._navigateCalendar();
             that._focusElement(e.type);
         },
 
@@ -670,6 +682,18 @@ var __meta__ = { // jshint ignore:line
                 "role": "button",
                 "aria-controls": that.dateView._dateViewID
             });
+        },
+
+        _navigateCalendar: function() {
+            var that = this;
+
+            if (!!that.dateView.calendar) {
+                that.dateView.calendar.unbind(NAVIGATE).bind(NAVIGATE,function() {
+                    setTimeout(function() {
+                        that.element.attr(ARIA_ACTIVEDESCENDANT, that.dateView.calendar._table.attr(ARIA_ACTIVEDESCENDANT));
+                    });
+                });
+            }
         },
 
         _option: function(option, value) {
@@ -813,11 +837,11 @@ var __meta__ = { // jshint ignore:line
             var calendar = that.dateView.calendar;
 
             if (that.element && that.element.length) {
-                that.element[0].removeAttribute("aria-activedescendant");
+                that.element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
             }
 
             if (calendar) {
-                that.element.attr("aria-activedescendant", calendar._updateAria(that._ariaTemplate, date));
+                that.element.attr(ARIA_ACTIVEDESCENDANT, calendar._updateAria(that._ariaTemplate, date));
             }
         }
     });

@@ -1,12 +1,41 @@
 ---
 title: Validate Radio Buttons with Only One Error Message
-page_title: Validate Radio Buttons with Only One Error Message | Kendo UI Validator
+page_title: Validate Radio Buttons with Only One Error Message 
 description: "Learn how to validate radio buttons with only one error message in Kendo UI."
-previous_url: /framework/validator/how-to/validate-radio-buttons
+previous_url: /framework/validator/how-to/validate-radio-buttons, /controls/editors/validator/how-to/validate-radio-buttons
 slug: howto_validateradiowithonemessage_validator
+tags: telerik, kendo, jquery, validator, validate, radio, buttons, with, only, one, error, message
+component: validator
+type: how-to
+res_type: kb
 ---
 
-# Validate Radio Buttons with Only One Error Message
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Validator for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I validate radio buttons with only one error message in Kendo UI?
+
+## Solution
 
 The following example demonstrates how to validate a group of Kendo UI radio buttons and show only one error message.
 

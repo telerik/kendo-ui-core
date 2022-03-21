@@ -727,7 +727,7 @@ var __meta__ = { // jshint ignore:line
 
         _activateItem: function() {
             var current = this.listView.focus();
-            if (current) {
+            if (current && this.popup.visible()) {
                 this._focused.add(this.filterInput).attr(ARIA_ACTIVEDESCENDANT, current.attr("id"));
             }
         },
@@ -970,6 +970,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _openHandler: function(e) {
+            var current;
+
             this._adjustListWidth();
 
             if (this.trigger(OPEN)) {
@@ -977,6 +979,11 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this._focused.attr(ARIA_EXPANDED, true);
                 this.ul.attr(ARIA_HIDDEN, false);
+
+                current = this.listView.focus();
+                if (current) {
+                    this._focused.add(this.filterInput).attr(ARIA_ACTIVEDESCENDANT, current.attr("id"));
+                }
             }
         },
 
@@ -1021,6 +1028,7 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this._focused.attr(ARIA_EXPANDED, false);
                 this.ul.attr(ARIA_HIDDEN, true);
+                this._focused.add(this.filterInput).removeAttr(ARIA_ACTIVEDESCENDANT);
             }
         },
 

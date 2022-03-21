@@ -176,5 +176,19 @@
 
             assert.equal(autocomplete.element.attr("aria-expanded"), "true");
         });
+
+        it("Autocomplete renders aria-activedescendant", function() {
+            var autocomplete = new AutoComplete(input, {
+                dataSource: ["Item", "Item2"],
+                animation: false,
+                highlightFirst: true,
+                suggest: true
+            });
+
+            autocomplete.search("Item");
+
+            assert.isOk(!!autocomplete.element.attr("aria-activedescendant"));
+            assert.equal(autocomplete.element.attr("aria-activedescendant"), autocomplete.current()[0].id);
+        });
     });
 }());

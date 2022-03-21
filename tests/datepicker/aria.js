@@ -106,6 +106,23 @@ it("DatePicker sets aria-activedescendant after navigation", function() {
     assert.equal(instance.element.attr("aria-activedescendant"), cell.attr("id"));
 });
 
+it("navigate to new month in DateView should update the aria-activedescendant", function() {
+    jasmine.clock().install();
+    instance.open();
+
+    instance.element.focus();
+
+    instance.dateView.calendar.element.find(".k-nav-next").trigger("click");
+    instance.dateView.calendar.element.find(".k-nav-next").trigger("click");
+
+    var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+    jasmine.clock().tick();
+    jasmine.clock().uninstall();
+
+    assert.equal(instance.element.attr("aria-activedescendant"), cell.attr("id"));
+});
+
 it("DatePicker sets aria-label to focused cell", function() {
     instance.open();
 

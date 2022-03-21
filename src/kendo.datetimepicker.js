@@ -373,15 +373,21 @@ var __meta__ = { // jshint ignore:line
         },
 
         close: function(view) {
-            if (this.options.singlePopup) {
-                this.popup.close();
+            var that = this;
+
+            if (that.options.singlePopup) {
+                that.popup.close();
             } else {
                 if (view !== "time") {
                     view = "date";
                 }
 
-                this[view + "View"].close();
+                that[view + "View"].close();
             }
+
+            setTimeout(function() {
+                that.element.removeAttr("aria-activedescendant");
+            });
         },
 
         open: function(view) {

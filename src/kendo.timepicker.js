@@ -1325,6 +1325,10 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         element.attr(ARIA_EXPANDED, true);
                         ul.attr(ARIA_HIDDEN, false);
+
+                        if (timeView.current()) {
+                            element.attr(ARIA_ACTIVEDESCENDANT, timeView._optionID);
+                        }
                     }
                 },
                 close: function(e) {
@@ -1333,6 +1337,7 @@ var __meta__ = { // jshint ignore:line
                     } else {
                         element.attr(ARIA_EXPANDED, false);
                         ul.attr(ARIA_HIDDEN, true);
+                        element[0].removeAttribute(ARIA_ACTIVEDESCENDANT);
                     }
                 },
                 active: function(current) {
