@@ -18,6 +18,12 @@ By default, the TimePicker is initialized with the `classic` render mode. In ord
         .ComponentType("modern")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timePicker"
+                  component-type="modern"/>
+```
+{% endif %}
 
 As a result, the appearance of the widget is alternated. 
 

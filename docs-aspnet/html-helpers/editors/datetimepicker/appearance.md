@@ -31,15 +31,25 @@ The following values are available for the `Size` option:
 - `Large`—large size (applies the `k-input-lg` class to the wrapping span element).
 
 The following example demonstrates how to set `Size` in the declaration of the DateTimePicker:
-
-    @(Html.Kendo().DateTimePicker()
-        .Name("datetimepicker")
-        .Size(ComponentSize.Medium)
-        .Value(DateTime.Now)
-        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-        .DateInput()
-    )
-
+```HtmlHelper
+@(Html.Kendo().DateTimePicker()
+    .Name("datetimepicker")
+    .Size(ComponentSize.Medium)
+    .Value(DateTime.Now)
+    .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+    .DateInput()
+)
+```
+{%if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker" 
+                      size="ComponentSize.Medium"
+                      value="DateTime.Now"
+                      date-input="true"
+                      style="width:100%"
+                      title="datetimepicker" />
+```
+{% endif %}
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
 ```html
@@ -59,14 +69,25 @@ The following values are available for the `Rounded` option:
 - `Full`—largest border radius (applies the `k-rounded-full` class to the wrapping span element).
 
 The following example demonstrates how to set `Rounded` in the declaration of the DateTimePicker:
-
-    @(Html.Kendo().DateTimePicker()
-        .Name("datetimepicker")
-        .Rounded(Rounded.Medium)
-        .Value(DateTime.Now)
-        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-        .DateInput()
-    )
+```HtmlHelper
+@(Html.Kendo().DateTimePicker()
+    .Name("datetimepicker")
+    .Rounded(Rounded.Medium)
+    .Value(DateTime.Now)
+    .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+    .DateInput()
+)
+```
+{%if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker" 
+                      rounded="Rounded.Medium"
+                      value="DateTime.Now"
+                      date-input="true"
+                      style="width:100%"
+                      title="datetimepicker" />
+```
+{% endif %}
 
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
@@ -87,14 +108,25 @@ The following values are available for the `FillMode` option:
 
 The following example demonstrates how to set `FillMode` in the declaration of the DateTimePicker:
 
-    @(Html.Kendo().DateTimePicker()
-        .Name("datetimepicker")
-        .FillMode(FillMode.Solid)
-        .Value(DateTime.Now)
-        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-        .DateInput()
-    )
-
+```HtmlHelper
+@(Html.Kendo().DateTimePicker()
+    .Name("datetimepicker")
+    .FillMode(FillMode.Solid)
+    .Value(DateTime.Now)
+    .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+    .DateInput()
+)
+```
+{%if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker" 
+                      fill-mode="FillMode.Solid"
+                      value="DateTime.Now"
+                      date-input="true" 
+                      style="width:100%"
+                      title="datetimepicker" />
+```
+{% endif %}
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 
 ```html
@@ -209,15 +241,27 @@ The new rendering of the component consists of a single wrapping `span` element 
 
 The following example demonstrates how to configure the appearance of the component through the widget configuration:
 
-    @(Html.Kendo().DateTimePicker()
-        .Name("datetimepicker")
-        .Size(ComponentSize.Medium)
-        .Rounded(Rounded.Medium)
-        .FillMode(FillMode.Solid)
-        .Value(DateTime.Now)
-        .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
-        .DateInput()
-    )
+```HtmlHelper
+@(Html.Kendo().DateTimePicker()
+    .Name("datetimepicker")
+     Size(ComponentSize.Medium)
+    .Rounded(Rounded.Medium)
+    .FillMode(FillMode.Solid)
+    .Value(DateTime.Now)
+    .HtmlAttributes(new { style = "width: 100%", title = "datetimepicker" })
+    .DateInput()
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker" 
+                      size="ComponentSize.Medium"
+                      rounded="Rounded.Medium"
+                      fill-mode="FillMode.Solid"
+                      value="DateTime.Now"
+                      date-input="true"/>
+```
+{% endif %}
 
 The following example demonstrates the full version of the new rendering:
 

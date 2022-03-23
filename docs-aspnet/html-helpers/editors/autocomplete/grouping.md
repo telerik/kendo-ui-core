@@ -32,6 +32,21 @@ The following example demonstrates how to group the data in the AutoComplete by 
         .DataTextField("ContactName")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName">
+    <datasource>
+        <groups>
+            <group typeof="string" field="Country"></group>
+        </groups>
+        <transport>
+            <read url="@Url.Action("Grouping_GetCustomers", "Home")" />
+        </transport>
+    </datasource>
+</kendo-autocomplete>
+```
+{% endif %}
 
 ## See Also
 

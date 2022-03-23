@@ -37,6 +37,30 @@ The following example demonstrates how to position the TabStrip tabs to the righ
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip"
+                tab-position="right">
+    <items>
+        <tabstrip-item text="One">
+            <content>
+                <p>Tab One</p>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Two">
+            <content>
+                <p>Tab Two</p>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Three">
+            <content>
+                <p>Tab Three</p>
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## Dynamic Tabs
 
@@ -63,7 +87,31 @@ The following example demonstrates how to add a new TabStrip tab and position it
             </text>);
     })
 )
-
+```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip"
+                tab-position="@TabStripTabPosition.Right">
+    <items>
+        <tabstrip-item text="Paris">
+            <content>
+                <div class="weather">
+                    <p>Rainy weather in Paris.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Sofia" selected="true">
+            <content>
+                <div class="weather">
+                    <p>Sunny weather in Sofia.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
+```script
 <script>
     var tabstrip = $("#tabstrip").data("kendoTabStrip");
 
@@ -87,6 +135,7 @@ If the TabStrip has no fixed width and is placed in a fluid layout, it can re-ch
 <div style="width: 150px;">
     @(Html.Kendo().TabStrip()
         .Name("tabstrip")
+        .Scrollable(false)
         .Items(tabstrip =>
         {
             tabstrip.Add().Text("Paris")
@@ -102,6 +151,31 @@ If the TabStrip has no fixed width and is placed in a fluid layout, it can re-ch
     )
 </div>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <scrollable enabled="false" />
+    <items>
+        <tabstrip-item text="Paris"
+                       selected="true">
+            <content>
+                <div class="weather">
+                    <p>Rainy weather in Paris.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Sofia">
+            <content>
+                <div class="weather">
+                    <p>Sunny weather in Sofia.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## Selecting Tab on Initial Load
 
@@ -131,6 +205,30 @@ The following example demonstrates how to use the `Selected()` configuration met
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Paris">
+            <content>
+                <div class="weather">
+                    <p>Rainy weather in Paris.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Sofia"
+                       selected="true">
+            <content>
+                <div class="weather">
+                    <p>Sunny weather in Sofia.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## See Also
 

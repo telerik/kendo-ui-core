@@ -22,6 +22,14 @@ The following example demonstrates how to render a TimePicker with an initially 
         .Max("5:00 PM")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timePicker"
+                  value="new DateTime(1900, 1, 1, 8, 00, 0)"
+                  min="new DateTime(1900, 1, 1, 8, 00, 0)"
+                  max="new DateTime(1900, 1, 1, 17, 00, 0)" />
+```
+{% endif %}
 
 ## See Also
 

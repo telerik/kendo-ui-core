@@ -24,6 +24,15 @@ The following example demonstrates how to render a DatePicker with an initially 
         .Min(new DateTime(2019, 6, 18))
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  week-number="true"
+                  value="new DateTime(2019, 5, 15)"
+                  min="new DateTime(2019, 5, 15)"
+                  max="new DateTime(2019,6,18)" />
+```
+{% endif %}
 
 ## See Also
 

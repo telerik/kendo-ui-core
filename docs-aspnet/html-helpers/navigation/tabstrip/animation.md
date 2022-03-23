@@ -35,6 +35,19 @@ The following example demonstrates how to configure the TabStrip animation:
     })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <popup-animation enabled="true"> 
+        <open duration="300" effects="expand:vertical fade:in" /> 
+        <close duration="100" reverse="true" /> 
+    </popup-animation>
+    <items>
+        @*add Items*@
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## See Also
 

@@ -21,7 +21,14 @@ The following example demonstrates the built-in Notification types.
     @(Html.Kendo().Notification()
         .Name("notification")
     )
-
+```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification">
+</kendo-notification>
+```
+{% endif %}
+```script.js
     <script>
         $(function(){
             var notificationWidget = $("#notification").data("kendoNotification");

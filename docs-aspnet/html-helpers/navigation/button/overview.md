@@ -65,15 +65,18 @@ The following example demonstrates the available configuration options for the B
 ```
 {% if site.core %}
 ```TagHelper
-	<kendo-button name="imageButton" enable="true" tag="a" image-url="/shared/icons/sports/snowboarding.png">
-			<badge text="+1" 
-			shape="@BadgeShape.Circle" 
-			size="@BadgeSize.Medium" 
-			theme-color="@BadgeColor.Success"
-			position="@BadgePosition.Edge"
-			align="@BadgeAlign.TopEnd" />
-	Image button
-	</kendo-button>
+<kendo-button name="textButton"
+              enable="false"
+              tag="a">
+            Sample Button
+</kendo-button>
+
+<script type="text/javascript">
+    $(function() {
+        // The Name() of the Button is used to get its client-side instance.
+        var button = $("#textButton").data("kendoButton");
+    });
+</script>
 ```
 {% endif %}
 
@@ -93,7 +96,16 @@ The Button HTML helper exposes only a `Click()` event that can be handled. For a
 		.Content("Sample Button")
 		.Events(e => e.Click("onClick"))
 	)
-
+```
+{% if site.core %}
+```TagHelper
+<kendo-button name="textButton"
+              on-click="onClick">
+    Sample Button
+</kendo-button>
+```
+{% endif %}
+```script
 	<script>
 		function onClick() {
 			alert('Button clicked!')

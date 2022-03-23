@@ -23,6 +23,15 @@ Binding the column to a local collection of items can be done by passing a valid
     columns.ForeignKey(p => p.CategoryID, (System.Collections.IEnumerable)ViewData["categories"], "CategoryID", "CategoryName")
             .Title("Category").Width(200);
 ```
+{% if site.core %}
+```TagHelper
+<foreign-key-column field="CategoryID" title="Category" width="150"
+            values='(System.Collections.IEnumerable)ViewData["categories"]' 
+            value-field="CategoryID" 
+            text-field="CategoryName">
+        </foreign-key-column>
+```
+{% endif %}
 
 ## Binding to a Remote Collection
 
@@ -32,7 +41,17 @@ In order to bind the column to a remote collection of items, supply a URL Action
     columns.ForeignKey(p => p.CategoryID, ds=> ds.Read(r => r.Action("Categories", "Grid")), "CategoryID", "CategoryName")
             .Title("Category").Width(200);
 ```
-
+{% if site.core %}
+```TagHelper
+    <foreign-key-column field="CategoryID" title="Category" width="200" value-field="CategoryID" text-field="CategoryName">
+        <datasource>
+            <transport>
+                <read url="/grid/categories"/>
+            </transport>
+        </datasource>
+    </foreign-key-column>
+```
+{% endif %}
 ## See Also
 
 * [Foreign Key Column Local Binding (Demo)](https://demos.telerik.com/{{ site.platform }}/grid/foreignkeycolumn)

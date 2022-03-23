@@ -33,7 +33,9 @@ The following example demonstrates the basic configuration for the TextBox.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-textbox name="phone_number"  placeholder="Name..." value="John Doe"></kendo-textbox>
+    <kendo-textbox name="textbox"
+               value="John Doe">
+    </kendo-textbox>
 ```
 {% endif %}
 
@@ -54,6 +56,15 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("textbox_change")
         )
   )
+```
+{% if site.core %}
+```TagHelper
+<kendo-textbox name="textbox"
+               on-change="textbox_change">
+</kendo-textbox>
+```
+{% endif %}
+```script.js
   <script>
   function textbox_change() {
       // Handle the change event.

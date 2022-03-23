@@ -26,15 +26,25 @@ You can configure the Telerik UI DropDownList for server binding to the Northwin
 
 1. Add a server bound DropDownList.
 
-   ```HtmlHelper
-        @(Html.Kendo().DropDownList()
-        .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-        .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
-        .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
-        .BindTo(Model)   // Pass the list of Products to the DropDownList.
-        .SelectedIndex(10) // Select an item with index 10. Note that the indexes are zero-based.
-        )
-   ```
+ ```HtmlHelper
+      @(Html.Kendo().DropDownList()
+      .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+      .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
+      .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
+      .BindTo(Model)   // Pass the list of Products to the DropDownList.
+      .SelectedIndex(10) // Select an item with index 10. Note that the indexes are zero-based.
+      )
+ ```
+ {% if site.core %}
+ ```TagHelper
+<kendo-dropdownlist name="productDropDownList"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    bind-to="Model"
+                    index="10">
+</kendo-dropdownlist>
+ ```
+ {% endif %}
 
 ## See Also
 

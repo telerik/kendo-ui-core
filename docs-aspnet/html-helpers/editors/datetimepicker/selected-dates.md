@@ -24,6 +24,15 @@ The following example demonstrates how to render a DateTimePicker with an initia
         .Max(new DateTime(2050, 1, 1, 20, 0, 0))
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker"
+                      week-number="true"
+                      value="DateTime.Now"
+                      min="new DateTime(1950, 1, 1, 10, 0, 0)" 
+                      max="new DateTime(2050, 1, 1, 20, 0, 0)"/>
+```
+{% endif %}
 
 ## See Also
 

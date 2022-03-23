@@ -39,6 +39,16 @@ The following example demonstrates how to manage the position, stacking, and siz
         .Height(50)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification"
+                    stacking="NotificationStackingSettings.Down"
+                    width="300"
+                    height="50">
+    <position pinned="false" top="30" right="30" />
+</kendo-notification>
+```
+{% endif %}
 
 You may need the popup notifications to appear too quickly or to implement so many Notifications on the screen that the available space gets very little. In such cases, the subsequent popups appear outside the visible viewport area and are inaccessible if they are pinned. In such cases, consider using a shorter hiding delay or implementing static notifications for better usability.
 
@@ -55,6 +65,14 @@ The following example demonstrates how to enable static notifications.
         .Stacking(NotificationStackingSettings.Up)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification"
+                    stacking="NotificationStackingSettings.Up"
+                    append-to="#notification">
+</kendo-notification>
+```
+{% endif %}
 
 ## See Also
 

@@ -30,16 +30,24 @@ The following example demonstrates how to customize the AutoComplete by declarin
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName"
+                    template="<span><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Template_GetCustomers", "Home")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
 
 The following example demonstrates how to customize the AutoComplete by referencing a script tag by its `id`.
 
 ```HtmlHelper
-    <!-- Template -->
-    <script id="itemTemplate" type="text/x-kendo-template">
-        ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
-    </script>
-
-    <!-- AutoComplete initialization -->
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataTextField("ContactName")
@@ -53,6 +61,25 @@ The following example demonstrates how to customize the AutoComplete by referenc
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName"
+                    template-id="itemTemplate">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Template_GetCustomers", "Home")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
+```template
+    <script id="itemTemplate" type="text/x-kendo-template">
+        ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
+    </script>
+```
 
 ## Item Template
 
@@ -61,12 +88,6 @@ The item template manages the way the list items of a AutoComplete are rendered.
 The following example demonstrates how to define an item template and how to evaluate it against the dataItem.
 
 ```HtmlHelper
-    <!-- Template -->
-    <script id="itemTemplate" type="text/x-kendo-template">
-        ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
-    </script>
-
-    <!-- AutoComplete initialization -->
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataTextField("ContactName")
@@ -80,18 +101,31 @@ The following example demonstrates how to define an item template and how to eva
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName"
+                    template-id="itemTemplate">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Template_GetCustomers", "Home")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
+```template
+  <script id="itemTemplate" type="text/x-kendo-template">
+        ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
+    </script>
+```
 
 ## Header Template
 
 The header template manages the way the popup header of a AutoComplete is rendered.
 
 ```HtmlHelper
-    <!-- Template -->
-    <script id="headerTemplate" type="text/x-kendo-template">
-        <strong>Header</strong>
-    </script>
-
-    <!-- AutoComplete initialization -->
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataTextField("ContactName")
@@ -105,18 +139,32 @@ The header template manages the way the popup header of a AutoComplete is render
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName"
+                    header-template-id="headerTemplate">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Template_GetCustomers", "ComboBox")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
+```template
+    <script id="headerTemplate" type="text/x-kendo-template">
+        <strong>Header</strong>
+    </script>
+```
 
 ## Footer Template
 
 The footer template manages the way the popup footer of a AutoComplete is rendered. The footer is re-rendered on every change of the Data Source. The context of the template is the widget itself.
 
 ```HtmlHelper
-    <!-- Template -->
-    <script id="footerTemplate" type="text/x-kendo-template">
-        Total <strong>#: instance.dataSource.total() #</strong> items found
-    </script>
 
-    <!-- AutoComplete initialization -->
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataTextField("ContactName")
@@ -130,18 +178,32 @@ The footer template manages the way the popup footer of a AutoComplete is render
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName"
+                    footer-template-id="footerTemplate">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Template_GetCustomers", "Home")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+
+```
+{% endif %}
+```template
+    <script id="footerTemplate" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+```
 
 ## No-Data Templates
 
 The AutoComplete displays `noDataTemplate` in the popup when the data source is empty.
 
 ```HtmlHelper
-    <!-- Template -->
-    <script id="noDataTemplate" type="text/x-kendo-template">
-        <strong>No Data!</strong>
-    </script>
-
-    <!-- AutoComplete initialization -->
     @(Html.Kendo().AutoComplete()
         .Name("customers")
         .DataTextField("ContactName")
@@ -154,6 +216,26 @@ The AutoComplete displays `noDataTemplate` in the popup when the data source is 
             });
         })
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="customers"
+                    datatextfield="ContactName"
+                    no-data-template-id="noDataTemplate">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Template_GetCustomers", "Home")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+
+```
+{% endif %}
+```template
+    <script id="noDataTemplate" type="text/x-kendo-template">
+        <strong>No Data!</strong>
+    </script>
 ```
 
 ## See Also

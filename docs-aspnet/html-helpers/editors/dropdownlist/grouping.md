@@ -33,6 +33,22 @@ The following example demonstrates how to group the data in the DropDownList by 
         .DataValueField("CustomerID")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="customers"
+                    datatextfield="ContactName"
+                    datavaluefield="CustomerID">
+    <datasource>
+        <groups>
+            <group field="Country"></group>
+        </groups>
+        <transport>
+            <read url="@Url.Action("Grouping_GetCustomers", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 
 ## See Also
 

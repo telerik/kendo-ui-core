@@ -22,6 +22,19 @@ The TimePicker supports the following styling options:
 
 ### Size
 
+```HtmlHelper
+@(Html.Kendo().TimePicker()
+    .Name("timepicker")
+    .Size(ComponentSize.Medium)
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timepicker"
+                  size="ComponentSize.Medium"/>
+```
+{% endif %}
+
 The `Size` option controls the size of the input of the TimePicker. The `k-input-{size}` class, which is applied to the wrapping span element of the TimePicker, reflects the value of the `Size` option.
 
 The following values are available for the `Size` option:
@@ -38,6 +51,19 @@ The default size value is `Medium`.
 ``` 
 
 ### Rounded
+
+```HtmlHelper
+@(Html.Kendo().TimePicker()
+    .Name("timepicker")
+    .Rounded(Rounded.Medium)
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timepicker"
+                  rounded="Rounded.Medium"/>
+```
+{% endif %}
 
 The `Rounded` option controls the border radius of the TimePicker. The class that corresponds to the `Rounded` option is `k-rounded-{rounded}`.
 
@@ -56,6 +82,19 @@ The default value is `Medium`.
 ```
 
 ### FillMode
+
+```HtmlHelper
+@(Html.Kendo().TimePicker()
+    .Name("timepicker")
+    .FillMode(FillMode.Solid)
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timepicker"
+                  fill-mode="FillMode.Solid" />
+```
+{% endif %}
 
 The `FillMode` option controls how color is applied to the component. The structure of the class is `k-input-{fillMode}`.
 
@@ -96,12 +135,22 @@ The new rendering of the component consists of an input element with class `k-in
 
 The following example demonstrates how to configure the appearance of the component through the styling options:
 
-    @(Html.Kendo().TimePicker()
-        .Name("timepicker")
-        .Size(ComponentSize.Large)
-        .Rounded(Rounded.Small)
-        .FillMode(FillMode.Outline)
-    )
+```HtmlHelper
+@(Html.Kendo().TimePicker()
+    .Name("timepicker")
+    .Size(ComponentSize.Large)
+    .Rounded(Rounded.Small)
+    .FillMode(FillMode.Outline)
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timepicker"
+                  size="ComponentSize.Large"
+                  rounded="Rounded.Small"
+                  fill-mode="FillMode.Outline" />
+```
+{% endif %}
 
 ## Visual Backwards Compatibility
 

@@ -31,6 +31,25 @@ To define the tab content declaratively, use the `tab.Content()` configuration m
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Paris">
+            <content>
+                <p>Rainy weather in Paris.</p>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Sofia">
+            <content>
+                <p>Sunny weather in Sofia.</p>
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+
+```
+{% endif %}
 
 ## Loading Content with AJAX
 
@@ -51,6 +70,21 @@ The following example demonstrates how to load the tab content asynchronously by
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Paris"
+                       content-url="@Url.Action("Paris", "Home")">
+        </tabstrip-item>
+        <tabstrip-item text="Sofia"
+                       content-url="@Url.Action("Paris", "Home")">
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+
+```
+{% endif %}
 
 ## Scrollable Content
 
@@ -72,6 +106,21 @@ Depending on the browser, you can reset the scroll position of the content when 
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <scrollable enabled="false"/>
+    <items>
+        <tabstrip-item text="Paris"
+                       content-url="@Url.Action("Paris", "Home")">
+        </tabstrip-item>
+        <tabstrip-item text="Sofia"
+                       content-url="@Url.Action("Paris", "Home")">
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## See Also
 

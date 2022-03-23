@@ -34,15 +34,10 @@ The following example demonstrates the basic configuration for the TextArea.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-textarea name="description" rows="5">
-        <label floating="true" content="Description"/>
+    <kendo-textarea name="textarea"
+               value="John Doe"
+                rows="5">
     </kendo-textarea>
-
-    <style>
-        .k-floating-label-container {
-            width: 100%;
-        }
-    </style>
 ```
 {% endif %}
 ## Functionality and Features
@@ -63,6 +58,15 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("textarea_change")
         )
   )
+```
+{% if site.core %}
+```TagHelper
+<kendo-textarea name="textarea"
+                on-change="textarea-change">
+</kendo-textarea>
+```
+{% endif %}
+```script
   <script>
   function textarea_change() {
       // Handle the change event.

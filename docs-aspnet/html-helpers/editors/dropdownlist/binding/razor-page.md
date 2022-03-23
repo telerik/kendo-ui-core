@@ -32,6 +32,24 @@ In order to set up the DropDownList component bindings, you need to configure th
                     .ServerFiltering(true)
                 )
             )
+```
+{% if site.core %}
+```TagHelper
+
+<kendo-dropdownlist name="products"
+                    datatextfield="ShipName"
+                    datavaluefield="ShipCity"
+                    auto-bind="false"
+                    filter="FilterType.Contains">
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url("/DropDownList/DropDownListCrudOps?handler=Read")" data="dataFunction" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
+```script
     <script>
         function dataFunction() {
             var value = $("#products").getKendoDropDownList().filterInput.val();

@@ -36,6 +36,17 @@ To enable server filtering set the `ServerFiltering` option to `true`. Doing so,
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-combobox name="products">
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("ServerFiltering_GetProducts", "ComboBox")" />
+        </transport>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}
 
 ## See Also
 

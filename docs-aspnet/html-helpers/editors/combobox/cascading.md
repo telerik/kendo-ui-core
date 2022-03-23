@@ -36,6 +36,25 @@ The child ComboBox cascades from the parent one if the `CascadeFrom` option is d
           .CascadeFrom("categories")
     )
 ```
+{% if site.core %}
+```TagHelper
+
+
+<kendo-combobox name="categories">
+</kendo-combobox>
+
+<kendo-combobox name="products"
+                enable="false"
+                auto-bind="false"
+                cascade-from="categories">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("GetCascadeProducts", "ComboBox")" data="filterProducts"/>
+        </transport>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}
 ```JavaScript
     function filterProducts() {
         return {

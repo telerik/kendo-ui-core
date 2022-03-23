@@ -35,23 +35,37 @@ The AutoComplete provides support for remote data binding by using a `DataSource
 
 1. Add the AutoComplete to the view and configure its DataSource to use remote data.
 
-    ```HtmlHelper
-        @model MvcApplication1.Models.ProductViewModel
+```HtmlHelper
+    @model MvcApplication1.Models.ProductViewModel
 
-        @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
-            .Filter("contains")
-            .DataTextField("ProductName")
-            .Placeholder("Select product...")
-            .DataSource(source =>
+    @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+        .Filter("contains")
+        .DataTextField("ProductName")
+        .Placeholder("Select product...")
+        .DataSource(source =>
+        {
+            source.Read(read =>
             {
-                source.Read(read =>
-                {
-                    read.Action("GetProductsAjax", "Home");
-                })
-                .ServerFiltering(false);
+                read.Action("GetProductsAjax", "Home");
             })
-        )
-    ```
+            .ServerFiltering(false);
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-autocomplete for="products" style="width:100%"
+            dataTextField="ProductName"
+            placeholder="Select product..."
+            filter="FilterType.Contains">
+            <datasource type="DataSourceTagHelperType.Custom" server-filtering="false">
+                <transport>
+                    <read url="@Url.Action("GetProductsAjax", "Home")" />
+                </transport>
+            </datasource>
+    </kendo-autocomplete>
+```
+{% endif %}
 ## See Also
 
 * [Local Data Binding]({% slug htmlhelpers_autocomplete_serverbinding_aspnetcore %})

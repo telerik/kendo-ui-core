@@ -64,6 +64,37 @@ The following example demonstrates how to define the TabStrip.
 {% if site.core %}
 ```TagHelper
 <kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Paris"
+                       selected="true">
+            <content>
+                <div class="weather">
+                    <p>Rainy weather in Paris.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Sofia">
+            <content>
+                <div class="weather">
+                    <p>Sunny weather in Sofia.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Moscow">
+            <content>
+                <div class="weather">
+                    <p>Cloudy weather in Moscow.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Sydney">
+            <content>
+                <div class="weather">
+                    <p>Rainy weather in Sidney.</p>
+                </div>
+            </content>
+        </tabstrip-item>
+    </items>
 </kendo-tabstrip>
 ```
 {% endif %}
@@ -118,28 +149,34 @@ The following example demonstrates the basic configuration of the TabStrip.
 ```
 {% if site.core %}
 ```TagHelper
-<kendo-tabstrip name="tabstrip">
+<kendo-tabstrip name="tabstrip"
+                tab-position="bottom"
+                collapsible="true"
+                navigatable="false">
+    <popup-animation>
+        <open duration="300" effects="fade:in" />
+    </popup-animation>
     <items>
-        <tabstrip-item text="Tab 1">
-            <content><p>Content 1</p></content>
+        <tabstrip-item text="One">
+            <content>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </content>
         </tabstrip-item>
-        <tabstrip-item text="Tab 2">
-            <content><p>Content 2</p></content>
+        <tabstrip-item text="Two">
+            <content>
+                <p>Mauris pulvinar molestie accumsan.</p>
+            </content>
         </tabstrip-item>
     </items>
 </kendo-tabstrip>
-```
-```TagHelper=li
-<kendo-tabstrip name="tabstrip">
-    <li>Tab 1</li>
-    <li>Tab 2</li>
-    <div>
-        <p>Content 1</p>
-    </div>
-    <div>
-        <p>Content 2</p>
-    </div>
-</kendo-tabstrip>
+
+<script type="text/javascript">
+    $(function () {
+        // The Name() of the TabStrip is used to get its client-side instance.
+        var tabstrip = $("#tabstrip").data("kendoTabStrip");
+        console.log(tabstrip);
+    });
+</script>
 ```
 {% endif %}
 
@@ -173,7 +210,30 @@ The following example demonstrates the available TabStrip events and how an even
         .Error("onError")
     )
 )
+```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip"
+                on-show="onShow"
+                on-select="onSelect"
+                on-activate="onActivate"
+                on-content-load="onContentLoad"
+                on-error="onError">
+    <items>
+        <tabstrip-item text="Paris"
+                       content-url="@Url.Action("Paris", "Home")">
+            
+        </tabstrip-item>
+        <tabstrip-item text="Sofia"
+                        content-url="@Url.Action("Sofia", "Home")">
+           
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
 
+```
+{% endif %}
+```script
 <script type="text/javascript">
     function onShow(e) {
         console.log("Shown: " + $(e.item).find("> .k-link").text());

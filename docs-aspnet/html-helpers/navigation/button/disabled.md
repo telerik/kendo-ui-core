@@ -25,23 +25,37 @@ The following example demonstrates how to enable and disable the Button through 
 ```TagHelper
     <kendo-button name="disabledButton" enable="false">Disabled button</kendo-button>
 ```
+{% endif %}
 
 To disable the Button, you can also use the [`ViewData`](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-5.0#viewdata-attribute) or [`ViewBag`](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-5.0#viewbag) attributes. The example below illustrates a disabled Button through the `ViewData` attribute.
 
+
+```HtmlHelper
+    @(Html.Kendo().Button()
+        .Name("disabledButton")
+        .Enable((bool)@ViewData["IsEnabled"])
+        .Content("Disabled button"))
+```
+{% if site.core %}
 ```TagHelper
     <kendo-button name="disabledButton" enable='(bool)@ViewData["IsEnabled"]'>Disabled button</kendo-button>
 ```
+{% endif %}
 ```Controller
     public IActionResult Index()
     {
         ViewData["IsEnabled"] = false;
         return View();
     }
-````
+```
 
 At runtime, you can disable the Button at with JavaScript by using its [`enable()` method](https://docs.telerik.com/kendo-ui/api/javascript/ui/button/methods/enable) with a Boolean argument.
 
-
+```HtmlHelper
+@(Html.Kendo().Button()
+        .Name("editButton")
+        .Content("Edit")
+```
 ```TagHelper
     <kendo-button name="editButton">Edit</kendo-button>
 ```
@@ -55,9 +69,7 @@ At runtime, you can disable the Button at with JavaScript by using its [`enable(
             buttonWidget.enable(true);  // enable the button
         }
     </script>
-````
-
-{% endif %}
+```
 
 ## Referencing Existing Instances
 

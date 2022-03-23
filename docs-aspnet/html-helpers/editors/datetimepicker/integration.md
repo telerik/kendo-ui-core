@@ -23,6 +23,12 @@ To use the DateInput as the input element in a DateTimePicker, enable the [`Date
         .DateInput(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker"
+                       date-input="true"/>
+```
+{% endif %}
 
 ## See Also
 

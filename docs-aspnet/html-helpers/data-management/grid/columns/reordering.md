@@ -12,9 +12,18 @@ The Grid provides options for reordering its columns.
 
 To enable the user to reorder the columns of the Grid by dragging, set the `Reorderable.Columns()` method to `true`. For a runnable example, refer to the [demo on implementing column reordering in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/column-reordering).
 
-    ```HtmlHelper
-         .Reorderable(reorderable => reorderable.Columns(true))
-    ```
+```HtmlHelper
+
+    .Reorderable(reorderable => reorderable.Columns(true))
+
+```
+{% if site.core %}
+```TagHelper
+
+    <reorderable columns="true"/>
+    
+```
+{% endif %}
 
 ## See Also
 

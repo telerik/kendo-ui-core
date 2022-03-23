@@ -20,6 +20,12 @@ To apply the desired culture, add a reference to the script file before the Date
         .Culture("de-DE")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  culture="de-DE"/>
+```
+{% endif %}
 
 ## See Also
 

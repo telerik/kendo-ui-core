@@ -43,6 +43,22 @@ In order to set up the AutoComplete component bindings, you need to configure th
 
     </script>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="autocomplete"
+                    datatextfield="ShipName"
+                    filter="FilterType.Contains"
+                    min-length="3">
+    <datasource type="DataSourceTagHelperType.Custom"
+                server-filtering="true">
+        <transport>
+            <read url="/AutoComplete/AutoCompleteCRUDOperations?handler=Read" data="dataFunction" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
    public JsonResult OnGetRead(string filterValue)
         {

@@ -18,6 +18,13 @@ The following example demonstrates how to render a currency NumericTextBox.
         .Format("c")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-numerictextbox name="numeric"
+                      format="c">
+</kendo-numerictextbox>
+```
+{% endif %}
 
 The following example demonstrates how to render a percentage NumericTextBox.
 
@@ -27,6 +34,13 @@ The following example demonstrates how to render a percentage NumericTextBox.
         .Format("p0")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-numerictextbox name="percentage"
+                      format="p0">
+</kendo-numerictextbox>
+```
+{% endif %}
 
 More examples of the available formatting options you can find here:
 

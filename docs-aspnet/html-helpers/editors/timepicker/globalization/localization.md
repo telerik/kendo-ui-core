@@ -25,6 +25,13 @@ To enable the desired culture, add a reference to the script file before the Tim
         .Culture("de-DE")
     )
 ```
+{% if site.core %}
+```TagHelper
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/cultures/kendo.culture.de-DE.min.js"></script>
+<kendo-timepicker name="timePicker"
+                  culture="de-DE" />
+```
+{% endif %}
 
 ## See Also
 

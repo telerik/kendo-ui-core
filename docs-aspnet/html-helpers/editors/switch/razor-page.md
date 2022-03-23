@@ -21,6 +21,11 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
         )
 	
 ```
+{% if site.core %}
+```TagHelper
+<kendo-switch name="switch" checked="Model.IsChecked"></kendo-switch>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	
     [BindProperty]

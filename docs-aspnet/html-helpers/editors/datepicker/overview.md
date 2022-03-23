@@ -70,7 +70,16 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("datepicker_change")
       )
     )
-    <script>
+```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  on-open="datepicker_open"
+                  on-close="datepicker_close"
+                  on-change="datepicker_change"/>
+```
+{% endif %}
+```script.js
     function datepicker_open() {
         // Handle the open event.
     }
@@ -82,7 +91,6 @@ The following example demonstrates how to subscribe to events by a handler name.
     function datepicker_change() {
         // Handle the change event.
     }
-    </script>
 ```
 
 ### Handling by Template Delegate

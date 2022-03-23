@@ -19,6 +19,13 @@ To render the week number column, enable the [`WeekNumber`](/api/Kendo.Mvc.UI.Fl
         .Value("10/10/2019")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  week-number="true"
+                  value="new DateTime(10/10/2019)"/>
+```
+{% endif %}
 
 ## See Also
 

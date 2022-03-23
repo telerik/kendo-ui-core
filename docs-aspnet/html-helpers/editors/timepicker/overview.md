@@ -84,6 +84,16 @@ The following example demonstrates how to subscribe to events by a handler name.
                 .Change("timepicker_change")
           )
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="timepicker"
+                  on-open="timepicker_open"
+                  on-close="timepicker_close"
+                  on-change="timepicker_change"/>
+```
+{% endif %}
+```script
     <script>
         function timepicker_open(e) {
             // Handle the open event.

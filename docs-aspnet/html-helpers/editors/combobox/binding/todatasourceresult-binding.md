@@ -31,7 +31,7 @@ For a runnable example, refer to the [demo on customizing the data source of the
 
 1. Add an Ajax-bound ComboBox.
 
-    ```HtmlHelper
+```HtmlHelper
         @(Html.Kendo().ComboBox()
             .Name("productComboBox") // The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the ComboBox as a text.
@@ -52,7 +52,24 @@ For a runnable example, refer to the [demo on customizing the data source of the
                         });
             })
         )
-    ```
+```
+{% if site.core %}
+```TagHelper
+<kendo-combobox name="productComboBox"
+                datatextfield="ProductName"
+                datavaluefield="ProductID">
+    <datasource type="DataSourceTagHelperType.Custom"
+                server-filtering="true"
+                custom-type="aspnetmvc-ajax">
+        <transport>
+            <read url="@Url.Action("GetProducts", "Home")"/>
+        </transport>
+        <schema data="Data" total="Total">
+        </schema>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}
 ## See Also
 
 * [Customizing the Data Source of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/custom-datasource)

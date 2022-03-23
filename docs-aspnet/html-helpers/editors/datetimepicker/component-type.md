@@ -18,6 +18,13 @@ By default, the DateTimePicker is initialized with the `classic` render mode. In
             .ComponentType("modern")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker" 
+                      value="DateTime.Now"
+                      component-type="modern"/>
+```
+{% endif %}
 
 As a result, the appearance of the widget is alternated. 
 

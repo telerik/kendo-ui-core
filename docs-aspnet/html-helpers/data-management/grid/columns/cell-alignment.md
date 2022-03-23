@@ -21,6 +21,11 @@ To change the content alignment of the Grid, use either of the following approac
             columns.Bound(o => o.OrderID).HtmlAttributes(new { style = "text-align: right" });
         })
     ```
+    {% if site.core %}
+    ```TagHelper
+    <column field="OrderID" html-attributes='new Dictionary<string,object> { ["style"] = "text-align : right" }'/>
+    ```
+    {% endif %}
 
 
 
@@ -32,28 +37,43 @@ To change the content alignment of the Grid, use either of the following approac
             columns.Bound(o => o.OrderID).HtmlAttributes(new { @class = "k-text-right" });
         })
     ```
+    {% if site.core %}
+    ```TagHelper
+    <column field="OrderID" html-attributes='new Dictionary<string,object> { ["class"] = "k-text-right" }'/>
+    ```
+    {% endif %}
 
 ## Column Headers
 
 You can set the alignment of the column headers through the `HeaderHtmlAttributes()` method.
 
-    ```HtmlHelper
-        .Columns(columns =>
-            {
-                columns.Bound(o => o.OrderID).HeaderHtmlAttributes(new { style = "text-align: right" });
-            })
-    ```
+```HtmlHelper
+    .Columns(columns =>
+        {
+            columns.Bound(o => o.OrderID).HeaderHtmlAttributes(new { style = "text-align: right" });
+        })
+```
+{% if site.core %}
+```TagHelper
+<column field="OrderID" header-html-attributes='new Dictionary<string,object> { ["style"] = "text-align: right" }'/>
+```
+{% endif %}
 
 ## Column Footers
 
 When a specified column has a footer, you can change the alignment of its content by using the `FooterHtmlAttributes()` method.
 
-    ```HtmlHelper
-        .Columns(columns =>
-            {
-                columns.Bound(o => o.OrderID).FooterHtmlAttributes(new { style = "text-align: center" });
-            })
-    ```
+```HtmlHelper
+    .Columns(columns =>
+        {
+            columns.Bound(o => o.OrderID).FooterHtmlAttributes(new { style = "text-align: center" });
+        })
+```
+{% if site.core %}
+```TagHelper
+    <column field="OrderID" footer-html-attributes='new Dictionary<string,object> ["style"] = "text-align: center" }'/>
+```
+{% endif %}
 
 ## See Also
 

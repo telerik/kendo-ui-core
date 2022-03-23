@@ -8,13 +8,13 @@ position: 3
 
 # Razor Page
 
-# ComboBox Remote Data Binding in Razor Pages
+## ComboBox Remote Data Binding in Razor Pages
 
 This article describes how to configure a Remote DataSource of a Telerik ComboBox in a RazorPage scenario.
 
 In order to set up the ComboBox component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. In this method, you can also pass additional parameters, such as filter string and antiforgery token (see `dataFunction`). See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)        
+```HtmlHelper       
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 	
@@ -33,7 +33,24 @@ In order to set up the ComboBox component bindings, you need to configure the `R
                 .ServerFiltering(true)
             )
         )
-		
+```
+{% if site.core %}
+```TagHelper
+<kendo-combobox name="combobox"
+                datatextfield="ShipName"
+                datavaluefield="ShipCity"
+                auto-bind="false"
+                filter="FilterType.Contains">
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Content("/ComboBox/ComboBoxCrud?handler=Read")" data="dataFunction"/>
+        </transport>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}
+
+```script
 	<script>	
 		function dataFunction(e) {
 			var filterValue = '';
@@ -48,7 +65,7 @@ In order to set up the ComboBox component bindings, you need to configure the `R
 		}
 	</script>
 ```
-```tab-PageModel(cshtml.cs)      
+```PageModel(cshtml.cs)      
 
     public JsonResult OnGetRead(string filterValue)
     {

@@ -31,23 +31,36 @@ You can configure the Telerik UI ComboBox for Ajax binding to the Northwind **Pr
 
 1. Add an Ajax-bound ComboBox.
 
-    ```HtmlHelper
-        @(Html.Kendo().ComboBox()
-            .Name("productDropDownList") // The name of the ComboBox is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") // Specify which property of the Product to be used by the ComboBox as a text.
-            .DataValueField("ProductID") // Specify which property of the Product to be used by the ComboBox as a value.
+```HtmlHelper
+    @(Html.Kendo().ComboBox()
+        .Name("productComboBox") // The name of the ComboBox is mandatory. It specifies the"id" attribute of the widget.
+        .DataTextField("ProductName") // Specify which property of the Product to be used by theComboBox as a text.
+         .DataValueField("ProductID") // Specify which property of the Product to be used by theComboBox as a value.
             .DataSource(source =>
-            {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProducts", "Home"); // Set the Action and Controller names.
-                    })
-                    .ServerFiltering(true); // If true, the DataSource will not filter the data on the client.
-            })
-            .SelectedIndex(0) // Select the first item.
-        )
-    ```
-    
+        {
+                 source.Read(read =>
+                 {
+                    read.Action("GetProducts", "Home"); // Set the Action and Controller names.
+                })
+                .ServerFiltering(true); // If true, the DataSource will not filter the data on theclient.
+        })
+           .SelectedIndex(0) // Select the first item.
+    )
+```
+{% if site.core %}
+```TagHelper
+<kendo-combobox name="productComboBox" // The name of the ComboBox is mandatory. It specifies the"id" attribute of the widget.
+                datatextfield="ProductName" // Specify which property of the Product to be used by theComboBox as a text.
+                datavaluefield="ProductID" // Specify which property of the Product to be used by theComboBox as a value.
+                index="0"> // Select the first item.
+    <datasource server-filtering="true"> // If true, the DataSource will not filter the data on theclient.
+        <transport>
+            <read url="@Url.Action("GetProducts", "Home")" /> // Set the Action and Controller names.
+        </transport>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}    
 ## See Also
 
 * [Server-Side API](/api/combobox)

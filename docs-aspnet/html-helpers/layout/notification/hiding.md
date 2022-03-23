@@ -34,6 +34,16 @@ The following example demonstrates how to manage the hiding of the Notification.
         .HideOnClick(false)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification"
+                    auto-hide-after="7000"
+                    allow-hide-after="1000"
+                    button="true"
+                    hide-on-click="false">
+</kendo-notification>
+```
+{% endif %}
 
 ## See Also
 

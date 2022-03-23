@@ -27,6 +27,13 @@ The following example demonstrates how to create a DatePicker that allows the us
         .Depth(CalendarView.Year)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  start="CalendarView.Year"
+                  depth="CalendarView.Year"/>
+```
+{% endif %}
 
 ## See Also
 

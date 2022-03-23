@@ -91,44 +91,81 @@ For runnable examples, refer to the [demos on editing of the Grid](https://demos
 
 1. In the view, configure the Grid to use the Products WebAPI controller.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
-            .Name("grid")
-            .Columns(columns =>
+```HtmlHelper
+    @(Html.Kendo().Grid<KendoGridWebApiCRUD.Models.Product>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(product => product.ProductID).Width(100);
+            columns.Bound(product => product.ProductName);
+            columns.Bound(product => product.UnitsInStock).Width(250);
+            columns.Command(commands =>
             {
-                columns.Bound(product => product.ProductID).Width(100);
-                columns.Bound(product => product.ProductName);
-                columns.Bound(product => product.UnitsInStock).Width(250);
-                columns.Command(commands =>
-                {
-                    commands.Edit(); // The "edit" command will edit and update data items.
-                    commands.Destroy(); // The "destroy" command removes data items.
-                }).Title("Commands").Width(200);
+                commands.Edit(); // The "edit" command will edit and update data items.
+                commands.Destroy(); // The "destroy" command removes data items.
+            }).Title("Commands").Width(200);
+        })
+        .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
+        .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline edit mode.
+        .DataSource(dataSource => dataSource
+            .WebApi()
+            .Model(model =>
+            {
+                model.Id(product => product.ProductID); // Specify the property which is the    unique identifier of the model.
+                model.Field(product => product.ProductID).Editable(false); // Make the  ProductID property not editable.
             })
-            .ToolBar(toolbar => toolbar.Create()) // The "create" command adds new data items.
-            .Editable(editable => editable.Mode(GridEditMode.InLine)) // Use inline edit mode.
-            .DataSource(dataSource => dataSource
-                .WebApi()
-                .Model(model =>
-                {
-                    model.Id(product => product.ProductID); // Specify the property which is the    unique identifier of the model.
-                    model.Field(product => product.ProductID).Editable(false); // Make the  ProductID property not editable.
-                })
-                {% if site.mvc %}
-                .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Product" }    )))
-                .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller =  "Product" })))
-                .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller =  "Product", id = "{0}" })))
-                .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller =   "Product", id = "{0}" })))
-                {% else %}
-                .Read(read => read.Action("Get", "Product"))
-	    		.Create(create => create.Action("Post", "Product"))
-	    		.Update(update => update.Action("Put", "Product", new { id = "{0}"} ))
-	    		.Destroy(destroy => destroy.Action("DELETE", "Product", new { id = "{0}" }))	
-                {% endif %}
-            )
-            .Pageable()
+            {% if site.mvc %}
+            .Read(read => read.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Product" }    )))
+            .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller =  "Product" })))
+            .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller =  "Product", id = "{0}" })))
+            .Destroy(destroy => destroy.Url(Url.HttpRouteUrl("DefaultApi", new { controller =   "Product", id = "{0}" })))
+            {% else %}
+            .Read(read => read.Action("Get", "Product"))
+            .Create(create => create.Action("Post", "Product"))
+            .Update(update => update.Action("Put", "Product", new { id = "{0}"} ))
+            .Destroy(destroy => destroy.Action("DELETE", "Product", new { id = "{0}" }))	
+            {% endif %}
         )
-    ```
+    )
+```
+{% if site.core %}
+```TagHelper
+@{  var Id = new { id = "{0}" }; }
+
+<kendo-grid name="grid" height="430">
+    <columns>
+        <column field="ProductID" />
+        <column field="ProductName" />
+        <column field="UnitsInStock" />
+        <column title="Commands" width="200">
+            <commands>
+                <column-command text="Edit" name="edit"></column-command>
+                <column-command text="Delete" name="destroy"></column-command>
+            </commands>
+        </column>
+    </columns>
+    <toolbar>
+        <toolbar-button name="create"></toolbar-button>
+    </toolbar>
+    <editable mode="inline" />
+    <datasource type="DataSourceTagHelperType.WebApi">
+        <schema>
+            <model id="ProductID">
+                <fields>
+                    <field name="ProductID" editable="false"></field>
+                </fields>
+            </model>
+        </schema>
+        <transport>
+            <read url="@Url.Action("Get", "Product")"/>
+            <create url="@Url.Action("Post", "Product")"/>
+            <update url="@Url.Action("Put", "Product")" data ="@Id"/>
+            <destroy url="@Url.Action("Delete", "Product")" data="@Id"/>
+        </transport>
+    </datasource>
+</kendo-grid>
+```
+{% endif %}
 
 1. Build and run the application.
 

@@ -30,6 +30,16 @@ To work around the default behavior of the DatePicker and simulate a different c
         .Value(new DateTime(1497, 11, 10))
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="gregorian"
+                  value="new DateTime(2000, 11, 10)"/>
+
+<kendo-datepicker name="lunar"
+                  min="new DateTime(1400,1,1)"
+                  value="new DateTime(1497, 11, 10)" />
+```
+{% endif %}
 
 ## See Also
 

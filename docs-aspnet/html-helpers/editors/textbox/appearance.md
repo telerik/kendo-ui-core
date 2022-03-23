@@ -30,12 +30,19 @@ The `Size()` method controls the size of the rendered TextBox.
 
 The example below demonstrates how to adjust the `Size` of the component:
 
-```
+```HtmlHelper
 @(Html.Kendo().TextBox()
     .Name("textbox")
     .Size(ComponentSize.Medium)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textbox name="textbox"
+               size="ComponentSize.Medium">
+</kendo-textbox>
+```
+{% endif %}
 
 The following values are available for the `Size` option:
 
@@ -54,12 +61,19 @@ The default size value is `Medium` and it is applied to the wrapping span elemen
 
 The border radius of the TextBox can be customized through the `Rounded()` method.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextBox()
     .Name("textbox")
     .Rounded(Rounded.Medium)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textbox name="textbox"
+               rounded="Rounded.Medium">
+</kendo-textbox>
+```
+{% endif %}
 
 The following values are available for the `Rounded` option:
 
@@ -79,12 +93,19 @@ The default value is `Medium` and it is added as a class `k-rounded-md` to the w
 
 The `FillMode()` method controls the way the color is applied to the TextBox component.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextBox()
     .Name("textbox")
     .FillMode(FillMode.Solid)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textbox name="textbox"
+               fill-mode="FillMode.Solid">
+</kendo-textbox>
+```
+{% endif %}
 
 The following values are available for the `FillMode` option:
 

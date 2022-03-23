@@ -17,9 +17,11 @@ To get a table row in the Grid by the ID of the data item:
 1. Make sure the [Id field is defined in the model configuration](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceModelDescriptorFactory) of the data source of the Grid.
 2. Retrieve the row model, the model UID, and the Grid table row consecutively.
 
+```script
     var grid = $("#grid").data("kendoGrid"); // Get the Grid instance.
     var dataItem = grid.dataSource.get(10249); // The get() method of the dataSource only works when the model id is set.
     var tableRow = $("[data-uid='" + dataItem.uid + "']"); // Get the row by its unique data-uid attribute. This UID is rendered by the Grid automatically.
+```
 
 ## Adding Custom Rows
 
@@ -34,7 +36,19 @@ The following example demonstrates how to add a table row in the [`DataBound()`]
         /* Other configuration. */
         .Events(e=>e.DataBound("onGridDataBound"))
     )
+```
+{% if site.core %}
+```TagHelper
+<div style="width:500px">
+    <kendo-grid name="grid"
+                on-data-bound="onGridDataBound">
+        <filterable enabled="true" />
 
+    </kendo-grid>
+</div>
+```
+{% endif %}
+```script
     function onGridDataBound(e) {
         if (!e.sender.dataSource.view().length) {
             var colspan = e.sender.thead.find("th:visible").length,

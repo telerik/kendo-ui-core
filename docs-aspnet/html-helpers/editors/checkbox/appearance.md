@@ -25,13 +25,21 @@ For a live example, refer to the [Appearance Demo of the CheckBox](https://demos
 
 The `Size()` method allows you to change the size of the CheckBox.
 
-```
+```HtmlHelper
 @(Html.Kendo().CheckBox()
     .Name("checkBoxBtn")
     .Checked(true)
     .Size(ComponentSize.Medium)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-checkbox name="checkBoxBtn"
+                checked="true"
+                size="ComponentSize.Medium">
+</kendo-checkbox>
+```
+{% endif %}
 
 The following values are available for the `Size` option:
 
@@ -51,12 +59,18 @@ The default size value is `Medium` and it is added as a class `k-checkbox-md` to
 The border radius of the CheckBox can be customized through the `Rounded()` method.
 
 {% if site.core %}
-```
+```HtmlHelper
 @(Html.Kendo().CheckBox()
     .Name("checkBoxBtn")
     .Checked(true)
     .Rounded(BasicRounded.Medium)
 )
+```
+```TagHelper
+<kendo-checkbox name="checkBoxBtn"
+                checked="true"
+                rounded="Rounded.Medium">
+</kendo-checkbox>
 ```
 {% endif %}
 {% if site.mvc %}

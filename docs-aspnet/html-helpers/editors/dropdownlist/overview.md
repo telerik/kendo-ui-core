@@ -41,7 +41,15 @@ The following example demonstrates how to define the DropDownList.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-dropdownlist name="products" filter="FilterType.StartsWith"></kendo-dropdownlist>
+    <kendo-dropdownlist name="dropdownlist"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Products_Read", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
 ```
 {% endif %}
 ```Controller
@@ -89,7 +97,7 @@ The DropDownList configuration options are passed as attributes.
                         datatextfield="ProductName"
                         datavaluefield="ProductID"
                         style="width: 100%;">
-        <datasource type="DataSourceTagHelperType.Custom">
+        <datasource>
             <transport>
                 <read url="@Url.Action("GetProducts", "Home")" />
             </transport>
@@ -188,6 +196,22 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("dropdownlist_change")
         )
     )
+```
+{% if site.core %}
+```TagHelper
+
+@{ 
+    var Items = new string[] { "Item1", "Item2", "Item3" };
+}
+
+<kendo-dropdownlist name="dropdownlist"
+                    bind-to="Items"
+                    on-select="dropdownlist_select"
+                    on-change="dropdownlist_change">
+</kendo-dropdownlist>
+```
+{% endif %}
+```script.js
     <script>
     function dropdownlist_select() {
         // Handle the select event.
@@ -234,7 +258,21 @@ The following example demonstrates how to get the current value of a Kendo UI Dr
         .Change("dropdownlist_change")
         )
     )
+```
+{% if site.core %}
+```TagHelper
 
+@{ 
+    var Items = new string[] { "Item1", "Item2", "Item3" };
+}
+
+<kendo-dropdownlist name="dropdownlist"
+                    bind-to="Items"
+                    on-change="dropdownlist_change">
+</kendo-dropdownlist>
+```
+{% endif %}
+```script.js
     <script>
         function dropdownlist_change(e) {
             console.log(e.sender.value());

@@ -28,13 +28,20 @@ The Switch HtmlHelper provides the following styling options:
 
 The `Size()` method allows you to adjust the size of the Switch. The default size is `Medium`.
 
-```
+```HtmlHelper
 @(Html.Kendo().Switch()
     .Name("switch")
     .Size(ComponentSize.Medium)
     .Messages(c => c.Checked("YES").Unchecked("NO"))
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-switch name="switch" size="ComponentSize.Medium">
+    <messages checked="YES" unchecked="NO"/>
+</kendo-switch>
+```
+{% endif %}
 
 The option adds a class `k-switch-md` to the `span.k-switch` element:
 
@@ -55,12 +62,17 @@ You can control how much border radius is applied to the component's track by us
 
 The example below demonstrates how to set the `TrackRounded` option:
 
-```
+```HtmlHelper
 @(Html.Kendo().Switch()
     .Name("switch")
     .TrackRounded(Rounded.Full)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-switch name="switch" track-rounded="Rounded.Full"></kendo-switch>
+```
+{% endif %}
 
 The option adds a class `k-rounded-full` to the `span.k-switch-track` element that wraps the On/Off labels:
 
@@ -81,12 +93,17 @@ The option adds a class `k-rounded-full` to the `span.k-switch-track` element th
 
 The `ThumbRounded()` method controls how much border radius is applied to thumb of the Switch. 
 
-```
+```HtmlHelper
 @(Html.Kendo().Switch()
     .Name("switch")
     .ThumbRounded(Rounded.Full)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-switch name="switch" thumb-rounded="Rounded.Full"></kendo-switch>
+```
+{% endif %}
 
 The option adds a class `k-rounded-full` to the `span.k-switch-thumb` element for the Switch handle:
 

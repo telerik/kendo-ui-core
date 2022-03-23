@@ -24,6 +24,16 @@ The below example demonstrates how to sort the column titles in the child menu i
            menu.Columns(columns => columns.Sort("asc"))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <column-menu>
+        <column-menu-columns sort="asc">
+            
+        </column-menu-columns>
+    </column-menu>
+```
+{% endif %}
+
 
 ## Group
 
@@ -69,6 +79,15 @@ By default, the column menu of the Grid is initialized in the `classic` render m
             })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-grid name="grid">
+    <column-menu component-type="modern">
+        
+    </column-menu>
+</kendo-grid>
+```
+{% endif %}
 
 ## See Also
 

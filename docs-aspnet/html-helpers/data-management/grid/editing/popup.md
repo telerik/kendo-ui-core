@@ -100,39 +100,75 @@ For runnable examples, refer to the [demos on implementing the editing approache
 
 1. In the view, configure the Grid to use the action methods created in the previous steps. The `Create`, `Update`, and `Destroy` action methods have to return a collection with the modified or deleted records so the DataSource on the client is aware of the server-side changes.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
-            .Name("grid")
-            .ToolBar(tools=>
+```HtmlHelper
+    @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
+        .Name("grid")
+        .ToolBar(tools=>
+        {
+            tools.Create();
+        })
+        .Columns(columns =>
+        {
+            columns.Bound(f => f.OrderID);
+            columns.Bound(f => f.ShipCountry);
+            columns.Bound(f => f.Freight);
+            columns.Command(command => {
+                command.Edit();
+                command.Destroy();
+            });
+        })
+        .Editable(editable => editable.Mode(GridEditMode.PopUp))
+        .DataSource(d =>
+        {
+            d.Ajax()
+            .Model(model =>
             {
-                tools.Create();
+                model.Id(product => product.OrderID); // Specify the property which is the unique identifier of the model.
+                model.Field(product => product.OrderID).Editable(false); // Make the OrderID property not editable.
             })
-            .Columns(columns =>
-            {
-                columns.Bound(f => f.OrderID);
-                columns.Bound(f => f.ShipCountry);
-                columns.Bound(f => f.Freight);
-                columns.Command(command => {
-                    command.Edit();
-                    command.Destroy();
-                });
-            })
-            .Editable(editable => editable.Mode(GridEditMode.PopUp))
-            .DataSource(d =>
-            {
-                d.Ajax()
-                .Model(model =>
-                {
-                    model.Id(product => product.OrderID); // Specify the property which is the unique identifier of the model.
-                    model.Field(product => product.OrderID).Editable(false); // Make the OrderID property not editable.
-                })
-                .Create(create => create.Action("CreateOrders", "Grid")) // Action invoked when the user saves a new data item.
-                .Read(read => read.Action("ReadOrders", "Grid"))  // Action invoked when the Grid needs data.
-                .Update(update => update.Action("UpdateOrders", "Grid"))  // Action invoked when the user saves an updated data item.
-                .Destroy(destroy => destroy.Action("DestroyOrders", "Grid")); // Action invoked when the user removes a data item.
-            })
-        )
-    ```
+            .Create(create => create.Action("CreateOrders", "Grid")) // Action invoked when the user saves a new data item.
+            .Read(read => read.Action("ReadOrders", "Grid"))  // Action invoked when the Grid needs data.
+            .Update(update => update.Action("UpdateOrders", "Grid"))  // Action invoked when the user saves an updated data item.
+            .Destroy(destroy => destroy.Action("DestroyOrders", "Grid")); // Action invoked when the user removes a data item.
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+<kendo-grid name="grid" height="430">
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="20">
+        <schema data="Data" total="Total">
+            <model id="OrderID">
+                <fields>
+                    <field name="OrderID" type="number" editable="false"></field>
+                </fields>
+            </model>
+        </schema>
+        <transport>
+            <read url= "@Url.Action("ReadOrders", "Grid")" />
+            <update url="@Url.Action("UpdateOrders", "Grid")" />
+            <create url="@Url.Action("CreateOrders", "Grid")" />
+            <destroy url="@Url.Action("DestroyOrders", "Grid")" />
+        </transport>
+    </datasource>
+    <columns>
+        <column field="OrderID" />
+        <column field="ShipCountry"  />
+        <column field="Freight"  />
+        <column>
+            <commands>
+                <column-command text="Edit" name="edit"></column-command>
+                <column-command text="Delete" name="destroy"></column-command>
+            </commands>
+        </column>
+    </columns>
+    <toolbar>
+        <toolbar-button name="create"></toolbar-button>
+    </toolbar>
+    <editable mode="popup" />
+</kendo-grid>
+```
+{% endif %}
 
 ## Handling ModelState Errors
 
@@ -168,45 +204,66 @@ When editing is performed, server validation is often needed. This section demon
 
 1. Subscribe to the [`DataSource.Error()`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/DataSourceEventBuilder#errorsystemstring) event handler. It is fired when model state errors or other unexpected problem occur when making the Ajax request. To prevent the popup from closing, get the Grid instance in the error event handler, prevent the Grid from `DataBinding`, and display the errors as a tooltip.
 
-    ```HtmlHelper
-        .DataSource(d =>
+```HtmlHelper
+    .DataSource(d =>
+    {
+        d.Ajax()
+        .Model(model =>
         {
-            d.Ajax()
-            .Model(model =>
-            {
-                model.Id(product => product.OrderID);
-                model.Field(product => product.OrderID).Editable(false);
-            })
-            .Create(create => create.Action("CreateOrders", "Grid"))
-            .Read(read => read.Action("ReadOrders", "Grid"))
-            .Update(update => update.Action("UpdateOrders", "Grid"))
-            .Destroy(destroy => destroy.Action("DestroyOrders", "Grid"))
-            .Events(events => events.Error("onError")); // Add the error handler to the DataSource.
+            model.Id(product => product.OrderID);
+            model.Field(product => product.OrderID).Editable(false);
         })
+        .Create(create => create.Action("CreateOrders", "Grid"))
+        .Read(read => read.Action("ReadOrders", "Grid"))
+        .Update(update => update.Action("UpdateOrders", "Grid"))
+        .Destroy(destroy => destroy.Action("DestroyOrders", "Grid"))
+        .Events(events => events.Error("onError")); // Add the error handler to the DataSource.
+    })
+```
+{% if site.core %}
+```TagHelper
+    <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                on-error="onError"> // Add the error handler to the DataSource.
+        <schema data="Data" total="Total">
+            <model id="OrderID">
+                <fields>
+                    <field name="OrderID" type="number" editable="false"></field>
+                </fields>
+            </model>
+        </schema>
+        <transport>
+            <read url="@Url.Action("ReadOrders", "Grid")" />
+            <update url="@Url.Action("UpdateOrders", "Grid")" />
+            <create url="@Url.Action("CreateOrders", "Grid")" />
+            <destroy url="@Url.Action("DestroyOrders", "Grid")" />
+        </transport>
+    </datasource>
+```
+{% endif%}
+```script
+<script>
+    function onError(args) {
+        var errors = args.errors;
+        if (errors) {
+            var grid = $("#grid").data("kendoGrid");
+                grid.one("dataBinding", function (e) {
+                    e.preventDefault();
+                    $.each(errors, function (key, value) {
+                        var message = "";
+                        if ('errors' in value) {
+                            $.each(value.errors, function() {
+                                message += this + "\n";
+                            });
+                        }
 
-        <script>
-            function onError(args) {
-                var errors = args.errors;
-                if (errors) {
-                    var grid = $("#grid").data("kendoGrid");
-                        grid.one("dataBinding", function (e) {
-                           e.preventDefault();
-                           $.each(errors, function (key, value) {
-                               var message = "";
-                               if ('errors' in value) {
-                                   $.each(value.errors, function() {
-                                     message += this + "\n";
-                                   });
-                               }
-
-                                // As long as the key matches the field name, this line of code will be displayed as validation message in the popup.
-                               grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
-                        });
-                    });
-                }
-            }
-        </script>
-    ```
+                        // As long as the key matches the field name, this line of code will be displayed as validation message in the popup.
+                        grid.editable.element.find("[data-valmsg-for='" + key + "']").replaceWith('<div class="k-widget k-tooltip k-tooltip-error" style="margin:0.5em"><span class="k-icon k-i-warning"> </span>' + message + '<div class="k-callout k-callout-n"></div></div>').show();
+                });
+            });
+        }
+    }
+</script>
+```
 ## See Also
 
 * [Editing Approaches by the Grid HtmlHelper for {{ site.framework }} (Demos)](https://demos.telerik.com/{{ site.platform }}/grid/editing)

@@ -37,6 +37,32 @@ To include images in the Telerik UI for {{ site.framework }} TabStrip items, use
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip-images">
+    <items>
+        <tabstrip-item text="Baseball"
+                       image-url="~/shared/icons/sports/baseball.png">
+            <content>
+                Baseball content
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Baseball"
+                       image-url="~/shared/icons/sports/football.png">
+            <content>
+                Football content
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Baseball"
+                       image-url="~/shared/icons/sports/basketball.png">
+            <content>
+                Basketball content
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## Sprites
 
@@ -68,6 +94,32 @@ To include sprites in the Telerik UI for {{ site.framework }} TabStrip items, us
           .SelectedIndex(0)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip-sprites">
+    <items>
+        <tabstrip-item text="Brazil"
+                       icon-class="k-sprite brazilFlag">
+            <content>
+                Brazil, officially the Federative Republic of Brazil, is the largest country in South America.
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="India"
+                       icon-class="k-sprite indiaFlag">
+            <content>
+                India, officially the Republic of India, is a country in South Asia.
+            </content>
+        </tabstrip-item>
+        <tabstrip-item text="Netherlands"
+                       icon-class="k-sprite netherlandsFlag">
+            <content>
+                The Netherlands is a constituent country of the Kingdom of the Netherlands, located mainly in North-West Europe and with several islands in the Caribbean.
+            </content>
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 
 ## See Also
 

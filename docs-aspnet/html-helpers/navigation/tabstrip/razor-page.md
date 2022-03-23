@@ -32,6 +32,24 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
     </div>
 	
 ```
+{% if site.core %}
+```TagHelper
+<kendo-tabstrip name="tabstrip">
+    <items>
+        <tabstrip-item text="Dimensions & Weights"
+                       selected="true"
+                       content-url="@Url.Content("~/Content/TabStrip/ajaxContent1.html")">
+        </tabstrip-item>
+        <tabstrip-item text="Engine"
+                        content-url="@Url.Content("~/Content/TabStrip/ajaxContent2.html")">
+        </tabstrip-item>
+        <tabstrip-item text="Chassis "
+                       content-url="@Url.Content("~/Content/TabStrip/ajaxContent3.html")">
+        </tabstrip-item>
+    </items>
+</kendo-tabstrip>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	
     public void OnGet()

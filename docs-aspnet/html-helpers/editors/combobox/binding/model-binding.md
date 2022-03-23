@@ -42,15 +42,32 @@ Local data is the data that is available on the client when the ComboBox is init
 
 1. Add the ComboBox to the view and bind it to the data that is saved in the `ViewData`.
 
-    ```HtmlHelper
-        @model MvcApplication1.Models.ProductViewModel
+```HtmlHelper
+    @model MvcApplication1.Models.ProductViewModel
 
-        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-            .DataValueField("ProductID")
-            .DataTextField("ProductName")
-            .BindTo((System.Collections.IEnumerable)ViewData["products"])
-        )
-    ```
+    @(Html.Kendo().ComboBoxFor(m => m.ProductID)
+        .DataValueField("ProductID")
+        .DataTextField("ProductName")
+        .BindTo((System.Collections.IEnumerable)ViewData["products"])
+    )
+```
+{% if site.core %}
+```TagHelper
+
+@model DocsCoreTest.Models.ProductViewModel
+
+@{ 
+    var data = (IEnumerable<DocsCoreTest.Models.ProductViewModel>)ViewData["products"];
+}
+<kendo-combobox for="ProductID"
+                filter="FilterType.Contains"
+                datatextfield="ProductName"
+                datavaluefield="ProductID"
+                bind-to="data">
+</kendo-combobox>
+```
+{% endif %}
+
 
 ## Remote Data
 
@@ -81,25 +98,41 @@ You can configure the ComboBox to get its data from a remote source by making an
 
 1. Add the ComboBox to the view and configure its DataSource to use remote data.
 
-    ```HtmlHelper
-        @model MvcApplication1.Models.ProductViewModel
+```HtmlHelper
+    @model MvcApplication1.Models.ProductViewModel
 
 
-        @(Html.Kendo().ComboBoxFor(m => m.ProductID)
-            .Filter("contains")
-            .DataTextField("ProductName")
-            .DataValueField("ProductID")
-            .Placeholder("Select product...")
-            .DataSource(source =>
+    @(Html.Kendo().ComboBoxFor(m => m.ProductID)
+        .Filter("contains")
+        .DataTextField("ProductName")
+        .DataValueField("ProductID")
+        .Placeholder("Select product...")
+        .DataSource(source =>
+        {
+            source.Read(read =>
             {
-                source.Read(read =>
-                {
-                    read.Action("GetProductsAjax", "Home");
-                })
-                .ServerFiltering(false);
+                read.Action("GetProductsAjax", "Home");
             })
-        )
-    ```
+            .ServerFiltering(false);
+        })
+    )
+```
+{% if site.core %}
+```TagHelper
+<kendo-combobox for="ProductID"
+                filter="FilterType.Contains"
+                datatextfield="ProductName"
+                datavaluefield="ProductID"
+                placeholder="Select product...">
+    <datasource server-filtering="false">
+        <transport>
+            <read url="@Url.Action("GetProductsAjax", "Home")"/>
+        </transport>
+    </datasource>
+
+</kendo-combobox>
+```
+{% endif %}
 
 ## See Also
 

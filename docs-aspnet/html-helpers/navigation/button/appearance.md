@@ -30,7 +30,7 @@ The Button HtmlHelper provides the following methods for styling:
 
 By default, the Button has a rectangular shape. The `Shape()` method allows you to change the default shape to `Square`. 
 
-```
+```HtmlHelper
 @(Html.Kendo().Button()
     .Name("textButton")
     .Shape(ComponentShape.Square)
@@ -38,6 +38,14 @@ By default, the Button has a rectangular shape. The `Shape()` method allows you 
     .Content("Text Button")
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-button name="textButton"
+              shape="ComponentShape.Square">
+    Text Button
+</kendo-button>
+```
+{% endif %}
 
 ### Size
 
@@ -47,7 +55,7 @@ To control the size of the Button, configure the `Size` option with any of the f
 - `Medium` - the default size
 - `Large`
 
-```
+```HtmlHelper
 @(Html.Kendo().Button()
     .Name("textButton")
     .Size(ComponentSize.Medium)
@@ -55,12 +63,20 @@ To control the size of the Button, configure the `Size` option with any of the f
     .Content("Text Button")
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-button name="textButton"
+              size="ComponentSize.Medium">
+    Text Button
+</kendo-button>
+```
+{% endif %}
 
 ### FillMode
 
 The `FillMode()` method specifies how the color is applied to the component. The default Button fill mode is `Solid`.
 
-```
+```HtmlHelper
 @(Html.Kendo().Button()
     .Name("textButton")
     .FillMode(ButtonFillMode.Solid)
@@ -68,6 +84,14 @@ The `FillMode()` method specifies how the color is applied to the component. The
     .Content("Text Button")
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-button name="textButton"
+              fill-mode="ButtonFillMode.Solid">
+    Text Button
+</kendo-button>
+```
+{% endif %}
 
 The following options are available for the `FillMode` configuration:
 
@@ -94,7 +118,7 @@ The `ThemeColor` configuration provides a variety of colors that can be applied 
 
 The default `ThemeColor` is `Base`.
 
-```
+```HtmlHelper
 @(Html.Kendo().Button()
     .Name("textButton")
     .ThemeColor(ThemeColor.Base)
@@ -102,12 +126,20 @@ The default `ThemeColor` is `Base`.
     .Content("Text Button")
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-button name="textButton"
+              theme-color="ThemeColor.Base">
+    Text Button
+</kendo-button>
+```
+{% endif %}
 
 ### Rounded
 
 The border radius of the Button can be customized through the `Rounded()` method. The default option is `Medium`.
 
-```
+```HtmlHelper
 @(Html.Kendo().Button()
     .Name("textButton")
     .Rounded(ButtonRounded.Medium)
@@ -115,6 +147,14 @@ The border radius of the Button can be customized through the `Rounded()` method
     .Content("Text Button")
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-button name="textButton"
+              rounded="Rounded.Medium">
+    Text Button
+</kendo-button>
+```
+{% endif %}
 
 The following values are available for the `Rounded` option:
 

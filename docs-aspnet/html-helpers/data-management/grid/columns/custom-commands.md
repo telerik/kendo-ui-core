@@ -19,6 +19,15 @@ To include a command column which will render a button for triggering the comman
             columns.Command(command => command.Custom("ViewDetails").Click("showDetails"));
         })
     ```
+    {% if site.core %}
+    ```TagHelper
+    <column width="120">
+        <commands>
+            <column-command text="ViewDetails" click="showDetails"></column-command>
+        </commands>
+    </column>
+    ```
+    {% endif %}
 
 1. Wire the `click` event of the button to a JavaScript function which will receive the corresponding Grid data item as an argument.  In the function definition, handle the command.
 

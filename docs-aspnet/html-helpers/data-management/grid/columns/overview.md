@@ -50,40 +50,61 @@ Bound columns support many settings and amongst the most used are the following 
 * HeaderHtmlAttributes
 * FooterHtmlAttributes
 
-            @( Html.Kendo().Grid<Product>()
-                    .Name("grid")
-                    .Columns(columns =>
-                    {
-                        // Define a column which will display the value of the ProductID property.
-                        columns.Bound(product => product.ProductID);            
+```HtmlHelper
+@( Html.Kendo().Grid<Product>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        // Define a column which will display the value of the ProductID property.
+        columns.Bound(product => product.ProductID);            
 
-                        // Define the column title to be different than the field name.
-                        columns.Bound(product => product.ProductName).Title("Product Name");            
-                        // Define the column to use a standard date format
-                        columns.Bound(product => product.OrderDate).Format("{0:d}"); 
-                        {% if site.mvc %}
-                        // Define a template column. It needs a templated razor delegate.
-                        columns.Template(@<text>
-                            @Html.ActionLink("Edit", "Home", new { id = item.ProductID })
-                        </text>);{% else %} 
-                        // Define a template only column to use a calculated field
-                        columns.Template("#=calculateField(data)#");
-                        {% endif %}           
+        // Define the column title to be different than the field name.
+        columns.Bound(product => product.ProductName).Title("Product Name");            
+        // Define the column to use a standard date format
+        columns.Bound(product => product.OrderDate).Format("{0:d}"); 
+        {% if site.mvc %}
+        // Define a template column. It needs a templated razor delegate.
+        columns.Template(@<text>
+            @Html.ActionLink("Edit", "Home", new { id = item.ProductID })
+        </text>);{% else %} 
+        // Define a template only column to use a calculated field
+        columns.Template("#=calculateField(data)#");
+        {% endif %}           
 
-                        // Define a command column with a "Destroy" button.
-                        columns.Command(commands =>
-                        {
-                            commands.Destroy();
-                        });
-                    })
-                )
-                {% if site.core %}
-                <script>
-                    function calculateField(data) {
-                        return data.UnitPrice * data.UnitsInStock;
-                    }
-                </script>
-                {% endif %}
+        // Define a command column with a "Destroy" button.
+        columns.Command(commands =>
+        {
+            commands.Destroy();
+        });
+    })
+)
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <columns>
+            <column field="ProductID" />
+            <column field="ProductName" title="Product Name" />
+            <column field="OrderDate" format="{0:d}" />
+            <column template="#=calculateField(data)#" />
+            <column>
+                <commands>
+                    <column-command text="Delete" name="destroy"></column-command>
+                </commands>
+            </column>
+        </columns>
+    </kendo-grid>
+```
+{% endif %}
+```script
+<script>
+    function calculateField(data) {
+        return data.UnitPrice * data.UnitsInStock;
+    }
+</script>
+
+```
+
 
 The [`Columns`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#columnssystemactionkendomvcuifluentgridcolumnfactoryt) method configures the Grid columns. If not used, the Grid creates a column for every public property of the model.
 
@@ -97,17 +118,36 @@ The [`Columns`](/api/Kendo.Mvc.UI.Fluent/GridBuilder#columnssystemactionkendomvc
     * Use an auxiliary JavaScript function in the global scope, which returns the desired value&mdash;for example, `"#= auxFunction(3, 5) #"`.
     * Encode the `+` (plus) sign&mdash;for example, `"#= 3 %2b 5 #"`.
 
+```HtmlHelper
             @(Html.Kendo().Grid<Product>()
                 .Name("grid")
                 .Columns(
                 {
-                    columns.Bound(product => product.ProductName).ClientTemplate("<strong>#:    ProductName #</strong>");
+                    columns.Bound(product => product.ProductName).ClientTemplate("<strong>#:ProductName #</strong>");
                 })
                 .DataSource(dataSource => dataSource
                     .Ajax()
                     .Read(read => read.Action("Products_Read", "Home"))
                 )
             )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read", "Home")" />
+            </transport>
+        </datasource>
+        
+        <columns>
+            <column field="ProductName" template="<strong>#:ProductName #</strong>" />
+
+        </columns>
+    </kendo-grid>
+```
+{% endif %}
+
 
 
 ## Features

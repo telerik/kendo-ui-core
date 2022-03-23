@@ -58,19 +58,48 @@ To create an editable grid a foreign key:
 
     * Local data binding:
 
-        ```HtmlHelper
-            columns.ForeignKey(p => p.CategoryID, (System.Collections.IEnumerable)ViewData["categories"], "CategoryID", "CategoryName");
-        ```
+    ```HtmlHelper
+
+        columns.ForeignKey(p => p.CategoryID, (System.Collections.IEnumerable)ViewData["categories"], "CategoryID", "CategoryName");
+
+    ```
+    {% if site.core %}
+    ```TagHelper
+
+        <foreign-key-column field="CategoryID" title="Category" width="150"
+                    values='(System.Collections.IEnumerable)ViewData["categories"]' 
+                    value-field="CategoryID" 
+                    text-field="CategoryName">
+        </foreign-key-column>
+
+    ```
+    {% endif %}
 
     * Remote data binding:
 
-        ```HtmlHelper
-            columns.ForeignKey(p => p.CategoryID, ds=> ds.Read(r => r.Action("Categories", "Grid")), "CategoryID", "CategoryName");
-        ```
+    ```HtmlHelper
+
+        columns.ForeignKey(p => p.CategoryID, ds=> ds.Read(r => r.Action("Categories", "Grid")), "CategoryID", "CategoryName");
+
+    ```
+    {% if site.core %}
+    ```TagHelper
+
+        <foreign-key-column field="CategoryID" title="Category" width="200" value-field="CategoryID" text-field="CategoryName">
+            <datasource>
+                <transport>
+                    <read url="/grid/categories"/>
+                </transport>
+            </datasource>
+        </foreign-key-column>
+        
+    ```
+    {% endif %}
 
 1. Specify default value for the column in the model of the data source:
 
     ```HtmlHelper
+
         .DataSource(dataSource => dataSource
             .Ajax()
             .Model(model =>
@@ -81,7 +110,24 @@ To create an editable grid a foreign key:
             })
             // other options omitted for brevity.
         )
+
     ```
+    {% if site.core %}
+    ```TagHelper
+
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <schema>
+                    <model id="ProductID">
+                        <fields>
+                            <field name="ProductID" editable="false"></field>
+                            <field name="CategoryID" default-value="4"></field>
+                        </fields>
+                    </model>
+                </schema>
+            </datasource>
+
+    ```
+    {% endif %}
 
 1. Add a cshtml file within the `/Views/Shared/EditorTemplates` folder of your project and name it `GridForeignKey`. If such folder is not existent, add it manually.
 

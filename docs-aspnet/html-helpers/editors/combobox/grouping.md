@@ -33,6 +33,22 @@ The following example demonstrates how to group the ComboBox data by country.
         .DataValueField("CustomerID")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-combobox name="customers"
+                datatextfield="ContactName"
+                datavaluefield="CustomerID">
+    <datasource type="DataSourceTagHelperType.Custom">
+        <groups>
+            <group typeof="string" field="Country"></group>
+        </groups>
+        <transport>
+            <read url="@Url.Action("GetCascadeProducts", "ComboBox")" />
+        </transport>
+    </datasource>
+</kendo-combobox>
+```
+{% endif %}
 
 ## See Also
 

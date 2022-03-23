@@ -94,33 +94,56 @@ To configure the Grid for {{ site.framework }} to do Ajax binding to the **Produ
 
 1. In the view, configure the Grid to use the action method created in the previous steps.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Products>()
-              .Name("grid")
-              .DataSource(dataSource => dataSource //Configure the Grid data source.
-                  .Ajax() //Specify that Ajax binding is used.
-                  .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
-                  .Events(ev => ev.Error("onError"))
-               )
-              .Columns(columns =>
-              {
-                  //Create a column bound to the ProductID property.
-                  columns.Bound(product => product.ProductID);
-                  //Create a column bound to the ProductName property.
-                  columns.Bound(product => product.ProductName);
-                  //Create a column bound to the UnitsInStock property.
-                  columns.Bound(product => product.UnitsInStock);
-              })
-              .Pageable() // Enable paging
-              .Sortable() // Enable sorting
-        )
-
-        <script>
+```HtmlHelper
+    @(Html.Kendo().Grid<KendoGridAjaxBinding.Models.Products>()
+          .Name("grid")
+          .DataSource(dataSource => dataSource //Configure the Grid data source.
+              .Ajax() //Specify that Ajax binding is used.
+              .Read(read => read.Action("Products_Read", "Home")) // Set the action method which will return the data in JSON format.
+              .Events(ev => ev.Error("onError"))
+           )
+          .Columns(columns =>
+          {
+              //Create a column bound to the ProductID property.
+              columns.Bound(product => product.ProductID);
+              //Create a column bound to the ProductName property.
+              columns.Bound(product => product.ProductName);
+              //Create a column bound to the UnitsInStock property.
+              columns.Bound(product => product.UnitsInStock);
+          })
+          .Pageable() // Enable paging
+             .Sortable() // Enable sorting
+    )
+```
+{% if site.core %}
+```TagHelper
+<div style="width:500px">
+    <kendo-grid name="grid">
+        <datasource type="DataSourceTagHelperType.Ajax"
+                    on-error="onError">
+            <transport>
+                <read url="@Url.Action("Products_Read", "Home")" />
+            </transport>
+        </datasource>
+        <pageable enabled="true">
+        </pageable>
+        <sortable enabled="true"/>
+        <columns>
+            <column field="ProductID"/>
+            <column field="ProductName"/>
+            <column field="UnitsInStock"/>
+        </columns>
+    </kendo-grid>
+</div>
+```
+{% endif %}
+```script
+    <script>
         function onError(e) {
             console.log(e.status);
         }
-        </script>
-    ```
+    </script>
+```
 
 1. Build and run the application.
 

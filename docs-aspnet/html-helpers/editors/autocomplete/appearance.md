@@ -32,6 +32,7 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the AutoComplete:
 
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
             .Name("input")
             .Size(ComponentSize.Medium)
@@ -52,6 +53,34 @@ The following example demonstrates how to set `Size` in the declaration of the A
             })
             .HtmlAttributes(new { style = "width:100%;" })
     )
+```
+{% if site.core %}
+```TagHelper
+@{
+    var Colors = new string[]
+            {
+                "Red-violet",
+                "Red",
+                "Red-orange",
+                "Orange",
+                "Yellow-orange",
+                "Yellow",
+                "Yellow-green",
+                "Green",
+                "Blue-green",
+                "Blue",
+                "Blue-violet",
+                "Violet"
+            };
+}
+<kendo-autocomplete name="input"
+                    size="ComponentSize.Medium"
+                    bind-to="Colors"
+                    style="width:100%">
+
+</kendo-autocomplete>
+```
+{% endif %}
 
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -73,6 +102,7 @@ The following values are available for the `Rounded` option:
 
 The following example demonstrates how to set `Rounded` in the declaration of the AutoComplete:
 
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
             .Name("input")
             .Rounded(Rounded.Medium)
@@ -93,6 +123,35 @@ The following example demonstrates how to set `Rounded` in the declaration of th
             })
             .HtmlAttributes(new { style = "width:100%;" })
     )
+```
+{% if site.core %}
+```TagHelper
+@{
+    var Colors = new string[]
+            {
+                "Red-violet",
+                "Red",
+                "Red-orange",
+                "Orange",
+                "Yellow-orange",
+                "Yellow",
+                "Yellow-green",
+                "Green",
+                "Blue-green",
+                "Blue",
+                "Blue-violet",
+                "Violet"
+            };
+}
+<kendo-autocomplete name="input"
+                    rounded="Rounded.Medium"
+                    bind-to="Colors"
+                    style="width:100%">
+
+</kendo-autocomplete>
+```
+{% endif %}
+
 
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
@@ -113,6 +172,7 @@ The following values are available for the `FillMode` option:
 
 The following example demonstrates how to set `FillMode` in the declaration of the AutoComplete:
 
+```HtmlHelper
     @(Html.Kendo().AutoComplete()
             .Name("input")
             .FillMode(FillMode.Solid)
@@ -133,6 +193,34 @@ The following example demonstrates how to set `FillMode` in the declaration of t
             })
             .HtmlAttributes(new { style = "width:100%;" })
     )
+```
+{% if site.core %}
+```TagHelper
+@{
+    var Colors = new string[]
+            {
+                "Red-violet",
+                "Red",
+                "Red-orange",
+                "Orange",
+                "Yellow-orange",
+                "Yellow",
+                "Yellow-green",
+                "Green",
+                "Blue-green",
+                "Blue",
+                "Blue-violet",
+                "Violet"
+            };
+}
+<kendo-autocomplete name="input"
+                    fill-mode="FillMode.Solid"
+                    bind-to="Colors"
+                    style="width:100%">
+
+</kendo-autocomplete>
+```
+{% endif %}
 
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 

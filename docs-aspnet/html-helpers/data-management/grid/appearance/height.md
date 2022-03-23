@@ -41,6 +41,17 @@ In specific scenarios you can set a height style to the scrollable data area eit
         )
     </div>
 ```
+{% if site.core %}
+```TagHelper
+<div style="width:500px">
+    <kendo-grid name="grid"
+                height="200">
+        <scrollable enabled="true" />
+
+    </kendo-grid>
+</div>
+```
+{% endif %}
 
 ![A Grid with a fixed height and scrolling functionality enabled](../grid-scrollable.png)
 

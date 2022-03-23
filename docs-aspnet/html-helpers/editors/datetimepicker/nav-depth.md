@@ -28,6 +28,15 @@ The following example demonstrates how to create a DateTimePicker that allows th
         .Depth(CalendarView.Year)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker"
+                      value="DateTime.Now"
+                      start="CalendarView.Year"
+                      depth="CalendarView.Year"/>
+```
+{% endif %}
+
 
 ## See Also
 

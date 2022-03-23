@@ -32,6 +32,7 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the DropDownList:
 
+```HtmlHelper
     @(Html.Kendo().DropDownList()
         .Name("categories")
         .Size(ComponentSize.Medium)
@@ -52,6 +53,27 @@ The following example demonstrates how to set `Size` in the declaration of the D
         })
         .FooterTemplate("Total number of <strong>#: instance.dataSource.total() #</strong> categories found")
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="categories"
+                    datatextfield="CategoryName"
+                    datavaluefield="CategoryId"
+                    size="ComponentSize.Medium"
+                    option-label="Select category..."
+                    height="310"
+                    template="<span class='k-state-default' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
+                    value-template="<span class='selected-value' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
+                    footer-template="Total number of <strong>#: instance.dataSource.total() #</strong> categories found">
+
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Overview_Get_Categories", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-picker-md` class.
 
@@ -72,7 +94,7 @@ The following values are available for the `Rounded` option:
 - `Full`—largest border radius (applies the `k-rounded-full` class to the wrapping span element)
 
 The following example demonstrates how to set `Rounded` in the declaration of the DropDownList:
-
+```HtmlHelper
     @(Html.Kendo().DropDownList()
         .Name("categories")
         .Rounded(Rounded.Medium)
@@ -93,7 +115,26 @@ The following example demonstrates how to set `Rounded` in the declaration of th
         })
         .FooterTemplate("Total number of <strong>#: instance.dataSource.total() #</strong> categories found")
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="categories"
+                    datatextfield="CategoryName"
+                    datavaluefield="CategoryId"
+                    rounded="Rounded.Medium"
+                    option-label="Select category..."
+                    height="310"
+                    template="<span class='k-state-default' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
+                    value-template="<span class='selected-value' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
+                    footer-template="Total number of <strong>#: instance.dataSource.total() #</strong> categories found">
 
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Overview_Get_Categories", "DropDownList")" />
+        </transport>
+    </datasource>
+```
+{% endif %}
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
 ```html
@@ -112,7 +153,7 @@ The following values are available for the `FillMode` option:
 - `Outline`—applies the `k-picker-outline` class to the wrapping span element
 
 The following example demonstrates how to set `FillMode` in the declaration of the DropDownList:
-
+```HtmlHelper
     @(Html.Kendo().DropDownList()
         .Name("categories")
         .FillMode(FillMode.Solid)
@@ -133,7 +174,27 @@ The following example demonstrates how to set `FillMode` in the declaration of t
         })
         .FooterTemplate("Total number of <strong>#: instance.dataSource.total() #</strong> categories found")
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="categories"
+                    datatextfield="CategoryName"
+                    datavaluefield="CategoryId"
+                    fill-mode="FillMode.Solid"
+                    option-label="Select category..."
+                    height="310"
+                    template="<span class='k-state-default' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span class='k-state-default' style='padding-left: 15px;'><h3>#: data.CategoryName #</h3></span>"
+                    value-template="<span class='selected-value' style='background-image: url(/Content/web/dropdownlist/#:data.CategoryId#.jpg);'></span><span>#:data.CategoryName#</span>"
+                    footer-template="Total number of <strong>#: instance.dataSource.total() #</strong> categories found">
 
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Overview_Get_Categories", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-picker-solid` class.
 
 ```html

@@ -39,6 +39,21 @@ The following example demonstrates how to configure DropDownList for Server Filt
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="products"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    filter="FilterType.Contains">
+
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("ServerFiltering_GetProducts", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts(string text)
     {
@@ -84,6 +99,21 @@ For smaller sets of data, the {{ site.product_short }} DropDownList also support
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="products"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    filter="FilterType.Contains">
+
+    <datasource server-filtering="false">
+        <transport>
+            <read url="@Url.Action("ServerFiltering_GetProducts", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts()
     {с

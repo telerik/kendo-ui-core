@@ -32,6 +32,7 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the ComboBox:
 
+```HtmlHelper
     @(Html.Kendo().ComboBox()
                 .Name("combobox")
                 .Size(ComponentSize.Medium)
@@ -52,6 +53,37 @@ The following example demonstrates how to set `Size` in the declaration of the C
                     }
                 })
         )
+```
+{% if site.core %}
+```TagHelper
+
+@{
+    var items = new List<SelectListItem>()
+{
+        new SelectListItem()
+        {
+            Text = "Item 1", Value = "1"
+        },
+         new SelectListItem()
+        {
+            Text = "Item 2", Value = "2"
+        },
+          new SelectListItem()
+        {
+            Text = "Item 3", Value = "3"
+        }
+    };
+}
+<kendo-combobox name="combobox"
+                size="ComponentSize.Medium"
+                datatextfield="Text"
+                datavaluefield="Value"
+                filter="FilterType.StartsWith"
+                bind-to="items">
+
+</kendo-combobox>
+```
+{% endif %}
 
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -73,6 +105,7 @@ The following values are available for the `Rounded` option:
 
 The following example demonstrates how to set `Rounded` in the declaration of the ComboBox:
 
+```HtmlHelper
     @(Html.Kendo().ComboBox()
                 .Name("combobox")
                 .Rounded(Rounded.Medium)
@@ -93,7 +126,37 @@ The following example demonstrates how to set `Rounded` in the declaration of th
                     }
                 })
     )
+```
+{% if site.core %}
+```TagHelper
 
+@{
+    var items = new List<SelectListItem>()
+{
+        new SelectListItem()
+        {
+            Text = "Item 1", Value = "1"
+        },
+         new SelectListItem()
+        {
+            Text = "Item 2", Value = "2"
+        },
+          new SelectListItem()
+        {
+            Text = "Item 3", Value = "3"
+        }
+    };
+}
+<kendo-combobox name="combobox"
+                rounded="Rounded.Medium"
+                datatextfield="Text"
+                datavaluefield="Value"
+                filter="FilterType.StartsWith"
+                bind-to="items">
+
+</kendo-combobox>
+```
+{% endif %}
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
 ```html
@@ -113,6 +176,7 @@ The following values are available for the `FillMode` option:
 
 The following example demonstrates how to set `FillMode` in the declaration of the ComboBox:
 
+```HtmlHelper
     @(Html.Kendo().ComboBox()
                 .Name("combobox")
                 .FillMode(FillMode.Solid)
@@ -133,6 +197,37 @@ The following example demonstrates how to set `FillMode` in the declaration of t
                     }
                 })
         )
+```
+{% if site.core %}
+```TagHelper
+
+@{
+    var items = new List<SelectListItem>()
+{
+        new SelectListItem()
+        {
+            Text = "Item 1", Value = "1"
+        },
+         new SelectListItem()
+        {
+            Text = "Item 2", Value = "2"
+        },
+          new SelectListItem()
+        {
+            Text = "Item 3", Value = "3"
+        }
+    };
+}
+<kendo-combobox name="combobox"
+                fill-mode="FillMode.Solid"
+                datatextfield="Text"
+                datavaluefield="Value"
+                filter="FilterType.StartsWith"
+                bind-to="items">
+
+</kendo-combobox>
+```
+{% endif %}
 
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 
@@ -161,6 +256,7 @@ Wrapper Rendering:
 
 The following example demonstrates how to configure the appearance of the component through configuration:
 
+```HtmlHelper
     @(Html.Kendo().ComboBox()
                 .Name("combobox")
                 .Size(ComponentSize.Medium)
@@ -183,6 +279,39 @@ The following example demonstrates how to configure the appearance of the compon
                     }
                 })
         )
+```
+{% if site.core %}
+```TagHelper
+
+@{
+    var items = new List<SelectListItem>()
+{
+        new SelectListItem()
+        {
+            Text = "Item 1", Value = "1"
+        },
+         new SelectListItem()
+        {
+            Text = "Item 2", Value = "2"
+        },
+          new SelectListItem()
+        {
+            Text = "Item 3", Value = "3"
+        }
+    };
+}
+<kendo-combobox name="combobox"
+                size="ComponentSize.Medium"
+                rounded="Rounded.Medium"
+                fill-mode="FillMode.Solid"
+                datatextfield="Text"
+                datavaluefield="Value"
+                filter="FilterType.StartsWith"
+                bind-to="items">
+
+</kendo-combobox>
+```
+{% endif %}
 
 Popup rendering without virtualization:
 

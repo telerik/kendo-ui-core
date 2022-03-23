@@ -72,7 +72,38 @@ The following example demonstrates how to configure the cascading functionality 
               .AutoBind(false)
               .CascadeFrom("categories")
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-dropdownlist name="categories"
+                    datatextfield="ContactName"
+                    datavaluefield="CustomerID"
+                    option-label="Select category...">
 
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Cascading_GetCategories", "DropDownList")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+
+<kendo-dropdownlist name="products"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    option-label="Select product..."
+                    enable="false"
+                    auto-bind="false"
+                    cascade-from="categories">
+
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("Cascading_GetProducts", "DropDownList")" data="filterProducts" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
+```script
     <script>
         function filterProducts() {
             return {

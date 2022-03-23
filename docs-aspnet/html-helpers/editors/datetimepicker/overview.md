@@ -60,11 +60,20 @@ The DateTimePicker configuration options are passed as attributes.
 
 The `ParseFormats` option is of type `string[]` and can be assigned either by a `ViewBag` property or by a property of the model.
 
-        @{
-            ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
-        }
+```HtmlHelper
+@(Html.Kendo().DateTimePicker()
+    .Name("datetimepicker")
+    .ParseFormats(new string[] { "MMMM yyyy", "MMMM" })
+)
+```
 
-        <kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates"></kendo-datetimepicker>
+```TagHelper
+@{
+    ViewBag.ParseDates = new string[] { "MMMM yyyy", "MMMM" };
+}
+
+<kendo-datetimepicker name="datetimepicker" parse-formats="ViewBag.ParseDates"></kendo-datetimepicker>
+```
 {% endif %}
 
 ## Functionality and Features
@@ -96,7 +105,16 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("datetimepicker_change")
       )
     )
-    <script>
+```
+{% if site.core %}
+```TagHelper
+<kendo-datetimepicker name="datetimepicker"
+                      on-open="datetimepicker_open"
+                      on-close="datetimepicker_close"
+                      on-change="datetimepicker_open"/>
+```
+{% endif %}
+```script.js
     function datetimepicker_open() {
         // Handle the open event.
     }
@@ -108,7 +126,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     function datetimepicker_change() {
         // Handle the change event.
     }
-      </script>
+
 ```
 
 ### Handling by Template Delegate

@@ -41,7 +41,15 @@ The following example demonstrates how to define the ComboBox.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-combobox name="products" filter="FilterType.StartsWith"></kendo-combobox>
+    <kendo-combobox name="combobox"
+                datatextfield="ProductName"
+                datavaluefield="ProductID">
+    <datasource>
+        <transport>
+            <read url="@Url.Action("Products_Read", "ComboBox")"/>
+        </transport>
+    </datasource>
+</kendo-combobox>
 ```
 {% endif %}
 ```Controller
@@ -176,6 +184,20 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("combobox_change")
         )
     )
+```
+{% if site.core %}
+```TagHelper
+@{ 
+    var items = new string[] { "Item 1", "Item 2", "Item 3" };
+}
+<kendo-combobox name="combobox"
+                bind-to="items"
+                on-select="combobox_select"
+                on-change="combobox_change">
+</kendo-combobox>
+```
+{% endif %}
+```script
     <script>
     function combobox_select() {
         // Handle the select event.

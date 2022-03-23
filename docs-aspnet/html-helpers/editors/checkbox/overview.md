@@ -27,6 +27,14 @@ The following example demonstrates how to define the CheckBox.
         .Label("My Telerik Checkbox")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-checkbox name="eq1"
+                checked="true"
+                label="My Telerik Checkbox">
+    </kendo-checkbox>
+```
+{% endif %}
 
 ## Two-way Binding
 
@@ -37,6 +45,13 @@ To use the Telerik UI Checkbox as an editor for a field in your C# Model, declar
         .Label("Editable Checkbox"))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-checkbox name="BooleanFieldName"
+                label="Editable Checkbox">
+    </kendo-checkbox>
+```
+{% endif %}
 
 ## See Also
 

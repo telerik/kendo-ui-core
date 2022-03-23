@@ -51,6 +51,19 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
 		});
 	</script>
 ```
+{% if site.core%}
+```tab-TagHelper
+<kendo-notification name="notification"
+                    width="200">
+    <templates>
+        <notification-template type="info"
+                               template="<div>TEXT: <span class='custom-style'>#: text #</span> </div> <div>TIME: <span class='custom-style'>#: time #</span> </div>">
+            
+        </notification-template>
+    </templates>
+</kendo-notification>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	
 	public JsonResult OnPostRead()

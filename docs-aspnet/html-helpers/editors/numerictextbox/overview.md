@@ -36,7 +36,11 @@ The following example demonstrates the basic configuration for the NumericTextBo
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-numerictextbox name="numeric"></kendo-numerictextbox>
+    <kendo-numerictextbox name="numerictextbox"
+                      min="-100"
+                      max="100"
+                      value="10">
+    </kendo-numerictextbox>
 ```
 {% endif %}
 
@@ -85,7 +89,17 @@ The following example demonstrates how to subscribe to events by a handler name.
                 .Spin("numerictextbox_spin")
           )
     )
-    <script>
+```
+{% if site.core %}
+```TagHelper
+    <kendo-numerictextbox name="numerictextbox"
+                      on-change="numerictextbox_change"
+                      on-spin="numerictextbox_spin">
+    </kendo-numerictextbox>
+```
+{% endif %}
+```script
+<script>
     function numerictextbox_spin() {
         // Handle the spin event.
     }
@@ -93,7 +107,7 @@ The following example demonstrates how to subscribe to events by a handler name.
     function numerictextbox_change() {
         // Handle the change event.
     }
-    </script>
+</script>
 ```
 
 ### Handling by Template Delegate
@@ -130,7 +144,14 @@ The following example demonstrates how to get a reference to an existing instanc
     @(Html.Kendo().NumericTextBox()
           .Name("numerictextbox") // The name of the NumericTextBox is mandatory. It specifies the "id" attribute of the helper.
     )
-
+```
+{% if site.core %}
+```TagHelper
+<kendo-numerictextbox name="numerictextbox">
+</kendo-numerictextbox>
+```
+{% endif %}
+```script
     <script>
         var numericTextBox = $('#numerictextbox').data('kendoNumericTextBox'); // numericTextBox is a reference to the instance of the helper.
     </script>

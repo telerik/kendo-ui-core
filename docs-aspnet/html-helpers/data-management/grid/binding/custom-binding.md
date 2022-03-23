@@ -121,6 +121,7 @@ The Grid provides options for setting {% if site.mvc %}[custom server-binding](#
 
 1. Set `EnableCustomBinding(true)` through the Grid widget declaration.
 
+```HtmlHelper
         @model IEnumerable<KendoGridCustomServerBinding.Models.Order>
 
         @(Html.Kendo().Grid(Model)
@@ -134,6 +135,8 @@ The Grid provides options for setting {% if site.mvc %}[custom server-binding](#
             .Sortable()
             .Scrollable()
         )
+```
+
 
 1. If paging is enabled, assign the total number of records through the `DataSource`.
 

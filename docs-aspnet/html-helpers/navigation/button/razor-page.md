@@ -22,12 +22,30 @@ The example below demonstrates how to pass antiforgery token when a Button is cl
 		<br/>
 		@(Html.Kendo().Button()
 			.Name("primaryTextButton")
-			.HtmlAttributes(new { type = "submit", @class = "k-primary" })
+			.ThemeColor(ThemeColor.Primary)
+			.HtmlAttributes(new { type = "submit" })
 			.Events(e => e.Click("onClick"))
 			.Content("Submit")
 		)
 	</form>
 	
+```
+{% if site.core %}
+```TagHelper
+<form method="post">
+    <input type="text" name="description">
+    <br />
+    <kendo-button name="primaryTextButton"
+                   on-click="onClick"
+				   theme-color="ThemeColor.Primary"
+                   type="submit">
+        Submit
+    </kendo-button>
+
+</form>
+```
+{% endif %}
+```script
 	<script>
 		function onClick() {
 			return kendo.antiForgeryTokens();

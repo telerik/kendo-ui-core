@@ -37,6 +37,7 @@ The following example demonstrates how to define the Switch.
     <kendo-switch name="switch"
             checked="true"></kendo-switch>
 ```
+{% endif %}
 
 ## Basic Configuration
 
@@ -54,7 +55,7 @@ The configuration options of the Switch are passed as attributes.
             enabled="true"></kendo-switch>
 ```
 
-{% endif %}
+
 
 
 ## Functionality and Features
@@ -82,6 +83,16 @@ The following example demonstrates how to subscribe to events by a handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-switch name="switch" on-change="change"></kendo-switch>
+<script>
+    function change(e) {
+        //Handle the change event.
+    }
+</script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 

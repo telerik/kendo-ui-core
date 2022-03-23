@@ -19,6 +19,13 @@ The following example demonstrates how to define the time format.
         .Format("{0:hh:mm:ss tt}")
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="TimePicker"
+                  value="DateTime.Now"
+                  format="{0:hh:mm:ss tt}"/>
+```
+{% endif %}
 
 The following example demonstrates how to define the interval (in minutes) between the values in the drop-down list with the time slots.
 
@@ -29,6 +36,13 @@ The following example demonstrates how to define the interval (in minutes) betwe
         .Interval(15)
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-timepicker name="TimePicker"
+                  value="DateTime.Now"
+                  interval="15"/>
+```
+{% endif %}
 
 ## See Also
 

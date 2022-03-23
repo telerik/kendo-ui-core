@@ -27,7 +27,6 @@ The following example demonstrates how to configure AutoComplete for Server Filt
     @(Html.Kendo().AutoComplete()
           .Name("products")
           .DataTextField("ProductName")
-          .DataValueField("ProductID")
           .Filter(FilterType.Contains)
           .DataSource(source =>
           {
@@ -39,6 +38,22 @@ The following example demonstrates how to configure AutoComplete for Server Filt
               .ServerFiltering(true);
           })
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="products"
+                    datatextfield="ProductName"
+                    filter="FilterType.Contains">
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("ServerFiltering_GetProducts", "AutoComplete")" data="onAdditionalData"/>
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
+```script
     <script>
         function onAdditionalData() {
             return {
@@ -80,7 +95,6 @@ For smaller sets of data, the {{ site.product_short }} AutoComplete also support
     @(Html.Kendo().AutoComplete()
           .Name("products")
           .DataTextField("ProductName")
-          .DataValueField("ProductID")
           .Filter(FilterType.Contains)
           .DataSource(source =>
           {
@@ -92,6 +106,20 @@ For smaller sets of data, the {{ site.product_short }} AutoComplete also support
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-autocomplete name="products"
+                    datatextfield="ProductName"
+                    filter="FilterType.Contains">
+    <datasource server-filtering="false">
+        <transport>
+            <read url="@Url.Action("ServerFiltering_GetProducts", "AutoComplete")" />
+        </transport>
+    </datasource>
+
+</kendo-autocomplete>
+```
+{% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts()
     {с

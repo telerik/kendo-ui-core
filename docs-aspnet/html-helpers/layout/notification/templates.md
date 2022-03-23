@@ -50,6 +50,23 @@ The following example demonstrates how to use Notification templates.
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-notification name="notification">
+    <templates>
+        <notification-template type="warning"
+                               template="<div class='myWarning'>Warning: #= myMessage #</div>">
+        </notification-template>
+        <notification-template type="timeAlert"
+                               template="<div class='myAlert'>System alert generated at #= time # : #= myMessage #</div>">
+        </notification-template>
+        <notification-template type="timeAlert"
+                               template-id="myAlertTemplate">
+        </notification-template>
+    </templates>
+</kendo-notification>
+```
+{% endif %}
 
 ## See Also
 

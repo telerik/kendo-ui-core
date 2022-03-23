@@ -32,12 +32,21 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the DatePicker:
 
-    @(Html.Kendo().DatePicker()
-          .Name("datepicker")
-          .Size(ComponentSize.Medium)
-          .Value("10/10/2011")
-          .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
-    )
+```HtmlHelper
+@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .Size(ComponentSize.Medium)
+      .Value(new DateTime(2011, 10, 10))
+      .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  size="ComponentSize.Medium"
+                  value="new DateTime(2011, 10, 10)"/>
+```
+{% endif %}
 
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-input-md` class.
 
@@ -59,12 +68,21 @@ The following values are available for the `Rounded` option:
 
 The following example demonstrates how to set `Rounded` in the declaration of the DatePicker:
 
-    @(Html.Kendo().DatePicker()
-          .Name("datepicker")
-          .Rounded(Rounded.Medium)
-          .Value("10/10/2011")
-          .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
-    )
+```HtmlHelper
+@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .Rounded(Rounded.Medium)
+      .Value("10/10/2011")
+      .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  rounded="Rounded.Medium"
+                  value="new DateTime(2011, 10, 10)"
+```
+{% endif %}
 
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
@@ -85,12 +103,21 @@ The following values are available for the `FillMode` option:
 
 The following example demonstrates how to set `FillMode` in the declaration of the DatePicker:
 
-    @(Html.Kendo().DatePicker()
-          .Name("datepicker")
-          .FillMode(FillMode.Solid)
-          .Value("10/10/2011")
-          .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
-        )
+```HtmlHelper
+@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .FillMode(FillMode.Solid)
+       .Value("10/10/2011")
+      .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+    )
+```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  fill-mode="FillMode.Solid"
+                  value="new DateTime(2011, 10, 10)"
+```
+{% endif %}
 
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 
@@ -181,14 +208,25 @@ The new rendering of the component consists of a single wrapping `span` element 
 
 The following example demonstrates how to configure the appearance of the component through configuration:
 
-    @(Html.Kendo().DatePicker()
-          .Name("datepicker")
-          .Size(ComponentSize.Medium)
-          .Rounded(Rounded.Medium)
-          .FillMode(FillMode.Solid)
-          .Value("10/10/2011")
-          .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
-    )
+```HtmlHelper
+@(Html.Kendo().DatePicker()
+      .Name("datepicker")
+      .Size(ComponentSize.Medium)
+      .Rounded(Rounded.Medium)
+      .FillMode(FillMode.Solid)
+      .Value("10/10/2011")
+      .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+)
+```
+{% if site.core %}
+```TagHelper
+<kendo-datepicker name="datepicker"
+                  size="ComponentSize.Medium"
+                  rounded="Rounded.Medium"
+                  fill-mode="FillMode.Solid"
+                  value="new DateTime(2011, 10, 10)"/>
+```
+{% endif %}
 
 The following example demonstrates the full version of the new rendering:
 

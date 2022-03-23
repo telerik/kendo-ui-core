@@ -65,56 +65,76 @@ You can configure an AutoComplete to use virtualization.
 
 1. Add the AutoComplete to the view and configure it to use virtualization.
 
-    ```HtmlHelper
-        @model MvcApplication1.Models.ProductViewModel
+```HtmlHelper
+    @model MvcApplication1.Models.ProductViewModel
 
-        @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
-            .Filter("contains")
-            .DataTextField("ProductName")
-            .DataSource(source =>
-            {
-                source.Custom()
-                    .ServerFiltering(true)
-                    .ServerPaging(true)
-                    .PageSize(80)
-                    .Type("aspnetmvc-ajax")
-                    .Transport(transport =>
-                    {
-                        transport.Read("ProductsVirtualization_Read", "Home");
-                    })
-                    .Schema(schema =>
-                    {
-                        schema.Data("Data")
-                                .Total("Total");
-                    });
-            })
-            .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
-        )
-
-        <script>
-            function valueMapper(options) {
-                $.ajax({
-                    url: "@Url.Action("Products_ValueMapper", "Home")",
-                    data: convertValues(options.value),
-                    success: function (data) {
-                        options.success(data);
-                    }
+    @(Html.Kendo().AutoCompleteFor(m => m.ProductName)
+        .Filter("contains")
+        .DataTextField("ProductName")
+        .DataSource(source =>
+        {
+            source.Custom()
+                .ServerFiltering(true)
+                .ServerPaging(true)
+                .PageSize(80)
+                .Type("aspnetmvc-ajax")
+                .Transport(transport =>
+                {
+                    transport.Read("ProductsVirtualization_Read", "Home");
+                })
+                .Schema(schema =>
+                {
+                    schema.Data("Data")
+                            .Total("Total");
                 });
-            }
+        })
+        .Virtual(v => v.ItemHeight(26).ValueMapper("valueMapper"))
+    )
 
-            function convertValues(value) {
-                var data = {};
+```
+{% if site.core %}
+```TagHelper
 
-                value = $.isArray(value) ? value : [value];
-
-                for (var idx = 0; idx < value.length; idx++) {
-                    data["values[" + idx + "]"] = value[idx];
+   <kendo-autocomplete for="ProductName" style="width:100%"
+            dataTextField="ProductName"
+            filter="FilterType.Contains">
+            <datasource type="DataSourceTagHelperType.Custom" custom-type="aspnetmvc-ajax" page-size="80" server-filtering="true" server-paging="true">
+                <schema data="Data" total="Total"></schema>
+                <transport>
+                    <read url="@Url.Action("ProductsVirtualization_Read", "Home")"/>
+                </transport>
+            </datasource>
+            <virtual item-height="26" value-mapper="valueMapper" />
+    </kendo-autocomplete>
+    
+```
+{% endif %}
+```script
+    <script>
+        function valueMapper(options) {
+            $.ajax({
+                url: "@Url.Action("Products_ValueMapper", "Home")",
+                data: convertValues(options.value),
+                success: function (data) {
+                    options.success(data);
                 }
+            });
+        }
 
-                return data;
+        function convertValues(value) {
+            var data = {};
+
+            value = $.isArray(value) ? value : [value];
+
+            for (var idx = 0; idx < value.length; idx++) {
+                data["values[" + idx + "]"] = value[idx];
             }
-        </script>
-    ```
+
+            return data;
+        }
+    </script>
+```
+
 ## See Also
 
 * [Virtualization by the AutoComplete HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/autocomplete/virtualization)

@@ -31,22 +31,36 @@ You can configure the Telerik UI DropDownList for Ajax binding to the Northwind 
 
 1. Add an Ajax-bound DropDownList.
 
-    ```HtmlHelper
-        @(Html.Kendo().DropDownList()
-            .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
-            .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
-            .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
-            .DataSource(source =>
-            {
-                    source.Read(read =>
-                    {
-                        read.Action("GetProducts", "Home"); // Set the Action and Controller names.
-                    })
-                    .ServerFiltering(true); // If true, the DataSource will not filter the data on the client.
-            })
-            .SelectedIndex(0) // Select the first item.
-        )
-    ```
+```HtmlHelper
+    @(Html.Kendo().DropDownList()
+        .Name("productDropDownList") // The name of the DropDownList is mandatory. It specifies the "id" attribute of the widget.
+        .DataTextField("ProductName") // Specify which property of the Product to be used by the DropDownList as a text.
+        .DataValueField("ProductID") // Specify which property of the Product to be used by the DropDownList as a value.
+        .DataSource(source =>
+        {
+                source.Read(read =>
+                {
+                    read.Action("GetProducts", "Home"); // Set the Action and Controller names.
+                })
+                .ServerFiltering(true); // If true, the DataSource will not filter the data on the client.
+        })
+        .SelectedIndex(0) // Select the first item.
+     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-dropdownlist name="productDropDownList"
+                    datatextfield="ProductName"
+                    datavaluefield="ProductID"
+                    index="0">
+    <datasource server-filtering="true">
+        <transport>
+            <read url="@Url.Action("GetProducts", "Home")" />
+        </transport>
+    </datasource>
+</kendo-dropdownlist>
+```
+{% endif %}
 ## See Also
 
 * [Server-Side API](/api/dropdownlist)

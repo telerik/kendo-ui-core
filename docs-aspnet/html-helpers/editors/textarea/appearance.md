@@ -26,12 +26,19 @@ The TextArea HtmlHelper supports the following styling methods:
 
 The `Size()` method allows you to adjust the size of the TextArea. The default size is `Medium`.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextArea()
     .Name("description")
     .Size(ComponentSize.Medium)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textarea name="description"
+                size="ComponentSize.Medium">
+</kendo-textarea>
+```
+{% endif %}
 The option adds a class `k-input-md` to the wrapping span element `span.k-textarea`:
 
 ```html
@@ -50,12 +57,19 @@ The following values are available for the `Size` option:
 
 You can control how much border radius is applied to the component by using the `Rounded()` method. The default value is `Medium`.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextArea()
     .Name("description")
     .Rounded(Rounded.Medium)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textarea name="description"
+                rounded="Rounded.Medium">
+</kendo-textarea>
+```
+{% endif %}
 The value `Medium` is applied to the wrapping span element through the `k-rounded-md` class. 
 
 ```html
@@ -75,12 +89,20 @@ The `Rounded()` method supports the following values:
 
 The `FillMode` option controls the way the color is applied to the component. The default value is `Solid`.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextArea()
     .Name("description")
     .FillMode(FillMode.Solid)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textarea name="description"
+                fill-mode="FillMode.Solid">
+</kendo-textarea>
+```
+{% endif %}
+
 
 The option adds a class `k-input-solid` to the wrapping span element of the TextArea:
 
@@ -100,12 +122,19 @@ The following values are available for the `FillMode` option:
 
 The `Overflow()` method allows you to handle the content overflow of the TextArea. By default, it is set to `Auto`.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextArea()
     .Name("description")
     .Overflow(TextAreaOverflow.Auto)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textarea name="description"
+                overflow="TextAreaOverflow.Auto">
+</kendo-textarea>
+```
+{% endif %}
 
 The option is applied to the TextArea element through the `k-overflow-auto` class.
 
@@ -126,12 +155,19 @@ The following values are available for the `Overflow` option:
 
 The `Resize()` method defines how the component should be resized. The default `Resize` value is `None`.
 
-```
+```HtmlHelper
 @(Html.Kendo().TextArea()
     .Name("description")
     .Resize(TextAreaResize.None)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-textarea name="description"
+                resize="TextAreaResize.None">
+</kendo-textarea>
+```
+{% endif %}
 
 The option is applied to the wrapping span element through the `k-resize-none` class.
 
