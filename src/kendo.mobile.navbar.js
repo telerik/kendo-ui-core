@@ -45,7 +45,7 @@ var __meta__ = { // jshint ignore:line
 
             element = that.element;
 
-            that.container().bind("show", $.proxy(this, "refresh"));
+            that.container().bind("show", this.refresh.bind(this));
 
             element.addClass("km-navbar").wrapInner($('<div class="km-view-title km-show-title" />'));
             that.leftElement = createContainer("left", element);

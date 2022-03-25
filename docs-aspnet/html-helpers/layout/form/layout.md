@@ -119,6 +119,158 @@ The following example shows the Form with `grid` layout set.
 ```
 {% endif %}
 
+## Responsive Form
+
+You can use [Media Queries](https://docs.telerik.com/kendo-ui/styles-and-layout/using-kendo-in-responsive-web-pages#media-queries) to enhance the Form appearance on different form factors:
+
+{% if site.core %}
+```HtmlHelper
+    <style>
+      @media screen and (max-width: 600px) { //Resize the screen to less than 600px and check out the styling in action.
+        .k-form-fieldset {
+            grid-column-start: 1;
+            grid-column-end: span 1;
+        }
+      }
+    </style>
+
+    @(Html.Kendo().Form<Kendo.Mvc.Examples.Models.Form.FormOrderViewModel>()
+        .Name("responsiveLayoutForm")
+        .HtmlAttributes(new { action = @Url.Action("MyAction","MyController"), method = "POST" })
+        .Layout("grid")
+        .Grid(g => g.Cols(2).Gutter(20))
+        .Items(items =>
+        {
+            items.AddGroup()
+                .Label("Personal Information")
+                .Layout("grid")
+                .Grid(g => g.Cols(1).Gutter(10))
+                .Items(i =>
+                {
+                   i.Add()
+                        .Field(f => f.FirstName)
+                        .Label(l => l.Text("First Name:"));
+                    i.Add()
+                        .Field(f => f.LastName)
+                        .Label(l => l.Text("Last Name:"));
+                });
+
+            items.AddGroup()
+                .Label("Shipping Address")
+                .Layout("grid")
+                .Grid(g => g.Cols(2).Gutter(10))
+                .Items(i =>
+                {
+                    i.Add()
+                        .Field(f => f.City)
+                        .Label(l => l.Text("City:"))
+                        .ColSpan(1);
+                    i.Add()
+                        .Field(f => f.Address)
+                        .Label(l => l.Text("Address Line:"))
+                        .ColSpan(2);
+                });
+        })
+    )
+
+```
+```TagHelper
+    @addTagHelper *, Kendo.Mvc
+    @model Kendo.Mvc.Examples.Models.Form.FormOrderViewModel
+
+    <style>
+      @media screen and (max-width: 600px) { //Resize the screen to less than 600px and check out the styling in action.
+        .k-form-fieldset {
+            grid-column-start: 1;
+            grid-column-end: span 1;
+        }
+      }
+    </style>
+
+    <kendo-form name="responsiveLayoutForm" form-data="@Model" action="MyAction" controller="MyController" method="POST"
+        layout="grid">
+        <grid cols="2" gutter="20" />
+        <form-items>
+            <form-item type="group">
+                <item-label text="Personal Information" />
+                <form-items>
+                    <form-item field="FirstName">
+                        <item-label text="First Name:">
+                    </form-item>
+                    <form-item field="LastName">
+                        <item-label text="Last Name:">
+                    </form-item>
+                </form-items>
+            </form-item>
+            <form-item type="group">
+                <item-label text="Shipping Address" />
+                <form-items>
+                    <form-item field="City" col-span="1">
+                        <item-label text="City:">
+                    </form-item>
+                    <form-item field="Address" col-span="2">
+                        <item-label text="Address Line:">
+                    </form-item>
+                </form-items>
+            </form-item>
+        </form-items>
+    </kendo-form>
+
+```
+{% else %}
+```HtmlHelper
+    <style>
+      @media screen and (max-width: 600px) { //Resize the screen to less than 600px and check out the styling in action.
+        .k-form-fieldset {
+            grid-column-start: 1;
+            grid-column-end: span 1;
+        }
+      }
+    </style>
+
+    @(Html.Kendo().Form<Kendo.Mvc.Examples.Models.Form.FormOrderViewModel>()
+        .Name("responsiveLayoutForm")
+        .HtmlAttributes(new { action = @Url.Action("MyAction","MyController"), method = "POST" })
+        .Layout("grid")
+        .Grid(g => g.Cols(2).Gutter(20))
+        .Items(items =>
+        {
+            items.AddGroup()
+                .Label("Personal Information")
+                .Layout("grid")
+                .Grid(g => g.Cols(1).Gutter(10))
+                .Items(i =>
+                {
+                   i.Add()
+                        .Field(f => f.FirstName)
+                        .Label(l => l.Text("First Name:"));
+                    i.Add()
+                        .Field(f => f.LastName)
+                        .Label(l => l.Text("Last Name:"));
+                });
+
+            items.AddGroup()
+                .Label("Shipping Address")
+                .Layout("grid")
+                .Grid(g => g.Cols(2).Gutter(10))
+                .Items(i =>
+                {
+                    i.Add()
+                        .Field(f => f.City)
+                        .Label(l => l.Text("City:"))
+                        .ColSpan(1);
+                    i.Add()
+                        .Field(f => f.Address)
+                        .Label(l => l.Text("Address Line:"))
+                        .ColSpan(2);
+                });
+        })
+    )
+```
+{% endif %}
+
+For more information on the Grid layout of the Form, refer to [the official CSS Grid documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout).
+
 ## See Also
 
 * [Layout Demo of the Form HtmlHelper for {{ site.framework }}](https://demos.telerik.com/{{ site.platform }}/form/layout)

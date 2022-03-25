@@ -23,7 +23,6 @@ var __meta__ = { // jshint ignore:line
         isFunction = kendo.isFunction,
         isPlainObject = $.isPlainObject,
         extend = $.extend,
-        proxy = $.proxy,
         DOCUMENT = $(document),
         isLocalUrl = kendo.isLocalUrl,
         ARIAIDSUFFIX = "_tb_active",
@@ -139,10 +138,10 @@ var __meta__ = { // jshint ignore:line
             that.dimensions = DIMENSIONS[axis];
 
             if (kendo.support.touch && this._isShownOnMouseEnter()) {
-                that.element.on(kendo.support.mousedown + NS, that.options.filter, proxy(that._showOn, that));
+                that.element.on(kendo.support.mousedown + NS, that.options.filter, that._showOn.bind(that));
             }
 
-            that.element.on(that.options.showOn + NS, that.options.filter, proxy(that._showOn, that));
+            that.element.on(that.options.showOn + NS, that.options.filter, that._showOn.bind(that));
         },
 
         options: {
@@ -325,22 +324,22 @@ var __meta__ = { // jshint ignore:line
 
             that.dimensions = DIMENSIONS[axis];
 
-            that._documentKeyDownHandler = proxy(that._documentKeyDown, that);
+            that._documentKeyDownHandler = that._documentKeyDown.bind(that);
 
             if (this._isShownOnMouseEnter() || this._isShownOnClick()) {
-                that.element.on("mouseenter" + NS, that.options.filter, proxy(that._mouseenter, that));
+                that.element.on("mouseenter" + NS, that.options.filter, that._mouseenter.bind(that));
             }
 
             if (this.options.autoHide && this._isShownOnMouseEnter()) {
-                that.element.on("mouseleave" + NS, that.options.filter, proxy(that._mouseleave, that));
+                that.element.on("mouseleave" + NS, that.options.filter, that._mouseleave.bind(that));
             }
 
             if (this.options.autoHide && this._isShownOnFocus()) {
-                that.element.on("blur" + NS, that.options.filter, proxy(that._blur, that));
+                that.element.on("blur" + NS, that.options.filter, that._blur.bind(that));
             }
 
             if (kendo.support.touch) {
-                that.element.on(kendo.support.mousedown + NS, that.options.filter, proxy(that._mouseenter, that));
+                that.element.on(kendo.support.mousedown + NS, that.options.filter, that._mouseenter.bind(that));
             }
         },
 
@@ -430,7 +429,18 @@ var __meta__ = { // jshint ignore:line
         },
 
         _ajaxRequest: function(options) {
-            var that = this;
+            var that = this,
+                successFn = function (data) {
+                    kendo.ui.progress(that.content, false);
+
+                    that.content.html(data);
+
+                    that.contentLoading = false;
+
+                    that.trigger(CONTENTLOAD);
+
+                    that._openPopup();
+                };
 
             that.contentLoading = true;
 
@@ -443,17 +453,7 @@ var __meta__ = { // jshint ignore:line
 
                     that.trigger(ERROR, { status: status, xhr: xhr });
                 },
-                success: proxy(function (data) {
-                    kendo.ui.progress(that.content, false);
-
-                    that.content.html(data);
-
-                    that.contentLoading = false;
-
-                    that.trigger(CONTENTLOAD);
-
-                    that._openPopup();
-                }, that)
+                success: successFn.bind(that)
             }, options));
         },
 
@@ -550,9 +550,9 @@ var __meta__ = { // jshint ignore:line
             that.arrow = wrapper.find(".k-callout");
 
             if (options.autoHide && this._isShownOnMouseEnter()) {
-                wrapper.on("mouseleave" + NS, proxy(that._mouseleave, that));
+                wrapper.on("mouseleave" + NS, that._mouseleave.bind(that));
             } else {
-                wrapper.on("click" + NS, ".k-tooltip-button", proxy(that._closeButtonClick, that));
+                wrapper.on("click" + NS, ".k-tooltip-button", that._closeButtonClick.bind(that));
             }
         },
 

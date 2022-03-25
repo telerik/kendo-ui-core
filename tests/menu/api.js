@@ -458,10 +458,10 @@ it("Adding dynamic contentUrl element renders contents on root and inner levels"
         var m = new kendo.ui.Menu("<div />");
 
         m.setOptions({ scrollable: true, orientation: "horizontal" });
-        assert.isOk(m._overflowWrapper().is(".horizontal"));
+        assert.isOk(m._overflowWrapper().is(".k-horizontal"));
 
         m.setOptions({ scrollable: true, orientation: "vertical" });
-        assert.isOk(m._overflowWrapper().is(".vertical"));
+        assert.isOk(m._overflowWrapper().is(".k-vertical"));
 
         m.destroy();
     });

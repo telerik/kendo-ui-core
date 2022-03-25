@@ -15,7 +15,6 @@ var __meta__ = { // jshint ignore:line
         mobile = kendo.mobile,
         fx = kendo.effects,
         ui = mobile.ui,
-        proxy = $.proxy,
         extend = $.extend,
         Widget = ui.Widget,
         Class = kendo.Class,
@@ -46,8 +45,8 @@ var __meta__ = { // jshint ignore:line
             Animation.fn.init.call(that);
             extend(that, options);
 
-            that.userEvents.bind("gestureend", proxy(that.start, that));
-            that.tapCapture.bind("press", proxy(that.cancel, that));
+            that.userEvents.bind("gestureend", that.start.bind(that));
+            that.tapCapture.bind("press", that.cancel.bind(that));
         },
 
         enabled: function() {
@@ -86,9 +85,9 @@ var __meta__ = { // jshint ignore:line
             });
 
             that.tapCapture.bind("press", function() { that.cancel(); });
-            that.userEvents.bind("end", proxy(that.start, that));
-            that.userEvents.bind("gestureend", proxy(that.start, that));
-            that.userEvents.bind("tap", proxy(that.onEnd, that));
+            that.userEvents.bind("end", that.start.bind(that));
+            that.userEvents.bind("gestureend", that.start.bind(that));
+            that.userEvents.bind("tap", that.onEnd.bind(that));
         },
 
         onCancel: function() {
@@ -245,7 +244,7 @@ var __meta__ = { // jshint ignore:line
                 size: horizontal ? "width" : "height"
             });
 
-            that.scrollMovable.bind(CHANGE, proxy(that.refresh, that));
+            that.scrollMovable.bind(CHANGE, that.refresh.bind(that));
             that.container.append(element);
             if (options.alwaysVisible) {
                 that.show();
@@ -404,7 +403,7 @@ var __meta__ = { // jshint ignore:line
             });
 
             if (that.options.mousewheelScrolling) {
-                element.on("DOMMouseScroll mousewheel",  proxy(this, "_wheelScroll"));
+                element.on("DOMMouseScroll mousewheel",  this._wheelScroll.bind(this));
             }
 
             extend(that, {
@@ -614,8 +613,8 @@ var __meta__ = { // jshint ignore:line
             that.refreshHint = that.scrollElement.children().first();
             that.hintContainer = that.refreshHint.children(".km-template");
 
-            that.pane.y.bind("change", proxy(that._paneChange, that));
-            that.userEvents.bind("end", proxy(that._dragEnd, that));
+            that.pane.y.bind("change", that._paneChange.bind(that));
+            that.userEvents.bind("end", that._dragEnd.bind(that));
         },
 
         _dragEnd: function() {

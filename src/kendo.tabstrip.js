@@ -942,10 +942,10 @@ var __meta__ = { // jshint ignore:line
 
             that.wrapper
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
-                .on("focus" + NS, $.proxy(that._active, that))
+                .on("focus" + NS, that._active.bind(that))
                 .on("blur" + NS, function() { that._current(null); });
 
-            that._keyDownProxy = $.proxy(that._keydown, that);
+            that._keyDownProxy = that._keydown.bind(that);
 
             if (options.navigatable) {
                 that.wrapper.on("keydown" + NS, that._keyDownProxy);
@@ -953,7 +953,7 @@ var __meta__ = { // jshint ignore:line
 
             that.tabGroup
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
-                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, $.proxy(that._itemClick, that));
+                .on(CLICK + NS, " > " + NAVIGATABLEITEMS, that._itemClick.bind(that));
         },
 
         _click: function(item) {
@@ -1095,7 +1095,7 @@ var __meta__ = { // jshint ignore:line
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler);
             } else {
-                that._refreshHandler = $.proxy(that.refresh, that);
+                that._refreshHandler = that.refresh.bind(that);
             }
 
             that.dataSource = kendo.data.DataSource.create(that.options.dataSource)

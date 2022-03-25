@@ -25,7 +25,6 @@
             activeElement = kendo._activeElement,
             outerWidth = kendo._outerWidth,
             outerHeight = kendo._outerHeight,
-            proxy = $.proxy,
             extend = $.extend,
             each = $.each,
             template = kendo.template,
@@ -235,15 +234,15 @@
                 }
 
                 wrapper
-                    .on("mouseenter" + NS, TITLEBAR_BUTTONS, proxy(that._buttonEnter, that))
-                    .on("mouseleave" + NS, TITLEBAR_BUTTONS, proxy(that._buttonLeave, that))
-                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that))
-                    .on("keydown" + NS, that, proxy(that._keydown, that))
-                    .on("focus" + NS, proxy(that._focus, that))
-                    .on("blur" + NS, proxy(that._blur, that));
+                    .on("mouseenter" + NS, TITLEBAR_BUTTONS, that._buttonEnter.bind(that))
+                    .on("mouseleave" + NS, TITLEBAR_BUTTONS, that._buttonLeave.bind(that))
+                    .on("click" + NS, "> " + TITLEBAR_BUTTONS, that._windowActionHandler.bind(that))
+                    .on("keydown" + NS, that, that._keydown.bind(that))
+                    .on("focus" + NS, that._focus.bind(that))
+                    .on("blur" + NS, that._blur.bind(that));
 
                 windowContent
-                    .on("keydown" + NS, that, proxy(that._keydownContent, that));
+                    .on("keydown" + NS, that, that._keydownContent.bind(that));
 
                 windowFrame = windowContent.find("." + KCONTENTFRAME)[0];
 
@@ -286,11 +285,11 @@
                 }
 
                 wrapper.add(wrapper.children(".k-resize-handle," + KWINDOWTITLEBAR))
-                    .on(kendo.support.mousedown + NS, proxy(that.toFront, that));
+                    .on(kendo.support.mousedown + NS, that.toFront.bind(that));
 
                 that.touchScroller = kendo.touchScroller(element);
 
-                that._resizeHandler = proxy(that._onDocumentResize, that);
+                that._resizeHandler = that._onDocumentResize.bind(that);
 
                 that._marker = kendo.guid().substring(0, 8);
 
@@ -486,11 +485,11 @@
                 }
 
                 if (resizable) {
-                    wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(function(e) {
+                    wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, (function(e) {
                         if (!$(e.target).closest(".k-window-action").length) {
                             this.toggleMaximization();
                         }
-                    }, this));
+                    }).bind(this));
 
                     each("n e s w se sw ne nw".split(" "), function(index, handler) {
                         wrapper.append(templates.resizeHandle(handler));
@@ -1024,7 +1023,7 @@
                         wrapper.addClass(INLINE_FLEX).kendoStop().kendoAnimate({
                             effects: showOptions.effects,
                             duration: showOptions.duration,
-                            complete: proxy(this._activate, this)
+                            complete: this._activate.bind(this)
                         });
                     }
                 }
@@ -1120,7 +1119,7 @@
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
-                        complete: proxy(this._deactivate, this)
+                        complete: this._deactivate.bind(this)
                     });
                     $(window).off(MODAL_NS);
                 }
@@ -1642,7 +1641,7 @@
 
                         element.find("." + KCONTENTFRAME)
                             .off("load" + NS)
-                            .on("load" + NS, proxy(this._triggerRefresh, this));
+                            .on("load" + NS, this._triggerRefresh.bind(this));
                     }
                 } else {
                     if (options.template) {
@@ -1690,15 +1689,15 @@
             },
 
             _ajaxRequest: function (options) {
-                this._loadingIconTimeout = setTimeout(proxy(this._showLoading, this), 100);
+                this._loadingIconTimeout = setTimeout(this._showLoading.bind(this), 100);
 
                 $.ajax(extend({
                     type: "GET",
                     dataType: "html",
                     cache: false,
-                    error: proxy(this._ajaxError, this),
-                    complete: proxy(this._ajaxComplete, this),
-                    success: proxy(this._ajaxSuccess(options.template), this)
+                    error: this._ajaxError.bind(this),
+                    complete: this._ajaxComplete.bind(this),
+                    success: this._ajaxSuccess(options.template).bind(this)
                 }, options));
             },
 
@@ -1814,7 +1813,7 @@
                 "This page requires frames in order to show content" +
                 "</iframe>"
             ),
-            resizeHandle: template("<div class='k-resize-handle k-resize-#= data #'></div>")
+            resizeHandle: template("<div aria-hidden='true' class='k-resize-handle k-resize-#= data #'></div>")
         };
 
 
@@ -1825,13 +1824,13 @@
             that._draggable = new Draggable(wnd.wrapper, {
                 filter: ">" + KWINDOWRESIZEHANDLES,
                 group: wnd.wrapper.id + "-resizing",
-                dragstart: proxy(that.dragstart, that),
-                drag: proxy(that.drag, that),
-                dragend: proxy(that.dragend, that)
+                dragstart: that.dragstart.bind(that),
+                drag: that.drag.bind(that),
+                dragend: that.dragend.bind(that)
             });
 
-            that._draggable.userEvents.bind("press", proxy(that.addOverlay, that));
-            that._draggable.userEvents.bind("release", proxy(that.removeOverlay, that));
+            that._draggable.userEvents.bind("press", that.addOverlay.bind(that));
+            that._draggable.userEvents.bind("release", that.removeOverlay.bind(that));
         }
 
         WindowResizing.prototype = {
@@ -2018,10 +2017,10 @@
             that._draggable = new Draggable(wnd.wrapper, {
                 filter: dragHandle,
                 group: wnd.wrapper.id + "-moving",
-                dragstart: proxy(that.dragstart, that),
-                drag: proxy(that.drag, that),
-                dragend: proxy(that.dragend, that),
-                dragcancel: proxy(that.dragcancel, that)
+                dragstart: that.dragstart.bind(that),
+                drag: that.drag.bind(that),
+                dragend: that.dragend.bind(that),
+                dragcancel: that.dragcancel.bind(that)
             });
 
             that._draggable.userEvents.stopPropagation = false;

@@ -59,7 +59,6 @@ var __meta__ = { // jshint ignore:line
         CLICK = "click",
         TOUCHSTART = "touchstart",
         NS = ".kendoListView",
-        proxy = $.proxy,
         activeElement = kendo._activeElement,
         progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
@@ -214,9 +213,9 @@ var __meta__ = { // jshint ignore:line
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._refreshHandler = proxy(that.refresh, that);
-                that._progressHandler = proxy(that._progress, that);
-                that._errorHandler = proxy(that._error, that);
+                that._refreshHandler = that.refresh.bind(that);
+                that._progressHandler = that._progress.bind(that);
+                that._errorHandler = that._error.bind(that);
             }
 
             that.dataSource = DataSource.create(dataSource)
@@ -814,7 +813,7 @@ var __meta__ = { // jshint ignore:line
                         }
                     });
 
-                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, that.options.contentElement ? ".k-listview-content " + FOCUSSELECTOR : FOCUSSELECTOR, proxy(clickCallback, that));
+                element.on(MOUSEDOWN + NS + " " + TOUCHSTART + NS, that.options.contentElement ? ".k-listview-content " + FOCUSSELECTOR : FOCUSSELECTOR, clickCallback.bind(that));
             }
         },
 

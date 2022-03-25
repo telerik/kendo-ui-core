@@ -14,7 +14,6 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
-        proxy = $.proxy,
         isFunction = kendo.isFunction,
         keys = kendo.keys,
         outerWidth = kendo._outerWidth,
@@ -1043,7 +1042,7 @@ var __meta__ = { // jshint ignore:line
                         threshold: 5,
                         allowSelection: true,
                         filter: DOT + OVERFLOW_ANCHOR,
-                        tap: proxy(that._toggleOverflow, that)
+                        tap: that._toggleOverflow.bind(that)
                     });
 
                     that._resizeHandler = kendo.onResize(function() {
@@ -1070,7 +1069,7 @@ var __meta__ = { // jshint ignore:line
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] a." + KBUTTON + COMMA + EMPTY +
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + MENU_LINK + COMMA + EMPTY +
                         "[" + KENDO_UID_ATTR + "=" + this.uid + "] ." + OVERFLOW_BUTTON,
-                    tap: proxy(that._buttonClick, that),
+                    tap: that._buttonClick.bind(that),
                     press: toggleActive,
                     release: toggleActive
                 });
@@ -1556,7 +1555,7 @@ var __meta__ = { // jshint ignore:line
                             element[0].focus();
                         }
                     })
-                    .on(KEYDOWN + ns, proxy(that._keydown, that));
+                    .on(KEYDOWN + ns, that._keydown.bind(that));
             },
 
             _keydown: function(e) {

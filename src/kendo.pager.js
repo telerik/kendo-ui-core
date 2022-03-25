@@ -16,7 +16,6 @@ var __meta__ = { // jshint ignore:line
         Widget = ui.Widget,
         keys = kendo.keys,
         template = kendo.template,
-        proxy = $.proxy,
         FIRST = ".k-i-arrow-end-left",
         LAST = ".k-i-arrow-end-right",
         PREV = ".k-i-arrow-60-left",
@@ -31,7 +30,7 @@ var __meta__ = { // jshint ignore:line
         MOUSEDOWN = "down",
         MAX_VALUE = Number.MAX_VALUE,
         isRtl = false,
-        iconTemplate = kendo.template('<a href="\\#" title="#=text#" #if (id !== "") {# aria-describedby="#=id#" #}# class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
+        iconTemplate = kendo.template('<a href="\\#" title="#=text#" aria-label="#=text#" #if (id !== "") {# aria-describedby="#=id#" #}# class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #"></span></a>');
 
     function button(options) {
         return options.template( {
@@ -103,14 +102,16 @@ var __meta__ = { // jshint ignore:line
             page = that.page();
             totalPages = that.totalPages();
 
-            that._refreshHandler = proxy(that.refresh, that);
+            that._refreshHandler = that.refresh.bind(that);
 
             that.dataSource.bind(CHANGE, that._refreshHandler);
             that.downEvent = kendo.applyEventMap(MOUSEDOWN, kendo.guid());
 
             isRtl = kendo.support.isRtl(element);
 
-            that._id = that.element.attr("id") || kendo.guid();
+            if (options.navigatable) {
+                that._id = that.element.attr("id") || kendo.guid();
+            }
             that._template();
 
             if (options.previousNext) {
@@ -167,7 +168,7 @@ var __meta__ = { // jshint ignore:line
                        '</span>');
                 }
 
-                that.element.on(KEYDOWN + NS, ".k-pager-input input", proxy(that._keydown, that));
+                that.element.on(KEYDOWN + NS, ".k-pager-input input", that._keydown.bind(that));
             }
 
             if (options.previousNext) {
@@ -207,7 +208,7 @@ var __meta__ = { // jshint ignore:line
                    that.element.find(".k-pager-sizes select").show().attr("aria-label", options.messages.pageSizeDropDownLabel).kendoDropDownList();
                 }
 
-                that.element.on(CHANGE + NS, ".k-pager-sizes select", proxy(that._change, that));
+                that.element.on(CHANGE + NS, ".k-pager-sizes select", that._change.bind(that));
             }
 
             if (options.refresh) {
@@ -216,7 +217,7 @@ var __meta__ = { // jshint ignore:line
                         '" aria-label="' + options.messages.refresh + '"><span class="k-icon k-i-reload"></span></a>');
                 }
 
-                that.element.on(CLICK + NS, ".k-pager-refresh", proxy(that._refreshClick, that));
+                that.element.on(CLICK + NS, ".k-pager-refresh", that._refreshClick.bind(that));
             }
 
             if (options.info) {
@@ -226,15 +227,15 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.element
-                .on(CLICK + NS , "a", proxy(that._click, that))
-                .on(CHANGE + NS , "select.k-dropdown", proxy(that._numericSelectChange, that))
+                .on(CLICK + NS , "a", that._click.bind(that))
+                .on(CHANGE + NS , "select.k-dropdown", that._numericSelectChange.bind(that))
                 .addClass("k-pager-wrap k-widget k-floatwrap");
 
             if (options.autoBind) {
                 that.refresh();
             }
 
-            that._resizeHandler = proxy(that.resize, that, true);
+            that._resizeHandler = that.resize.bind(that, true);
             $(window).on("resize" + NS, that._resizeHandler);
 
             sizeClassName = that._getWidthSizeClass(that.element.outerWidth());
@@ -544,7 +545,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = proxy(template(this.options.ARIATemplate), this);
+            this._ariaTemplate = template(this.options.ARIATemplate).bind(this);
         },
 
         _updateAria: function () {
@@ -569,7 +570,7 @@ var __meta__ = { // jshint ignore:line
 
             that._tabindex(that.element);
 
-            that.element.on("keydown" + NS, that, proxy(that._keyDown, that));
+            that.element.on("keydown" + NS, that, that._keyDown.bind(that));
             that.element.on("focusout" + NS, function() { that.element.removeClass("k-state-focused"); });
             that.element.on("focusin" + NS,  function(e) {
                 that.element.addClass("k-state-focused");

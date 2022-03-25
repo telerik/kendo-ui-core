@@ -19,7 +19,6 @@ var __meta__ = { // jshint ignore:line
         toString = {}.toString,
         binders = {},
         Class = kendo.Class,
-        proxy = $.proxy,
         VALUE = "value",
         SOURCE = "source",
         EVENTS = "events",
@@ -230,7 +229,11 @@ var __meta__ = { // jshint ignore:line
                 }
             }
 
-            return proxy(handler, source);
+            if (!handler) {
+                return;
+            }
+
+            return handler.bind(source);
         }
     });
 
@@ -439,7 +442,7 @@ var __meta__ = { // jshint ignore:line
         init: function(element, bindings, options) {
             TypedBinder.fn.init.call(this, element, bindings, options);
 
-            this._change = proxy(this.change, this);
+            this._change = this.change.bind(this);
             this.eventName = options.valueUpdate || CHANGE;
 
             $(this.element).on(this.eventName, this._change);
@@ -627,7 +630,7 @@ var __meta__ = { // jshint ignore:line
         checked: TypedBinder.extend({
             init: function(element, bindings, options) {
                 TypedBinder.fn.init.call(this, element, bindings, options);
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
 
                 $(this.element).change(this._change);
             },
@@ -755,7 +758,7 @@ var __meta__ = { // jshint ignore:line
             init: function(target, bindings, options) {
                 TypedBinder.fn.init.call(this, target, bindings, options);
 
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 $(this.element).change(this._change);
             },
 
@@ -900,9 +903,9 @@ var __meta__ = { // jshint ignore:line
                 Binder.fn.init.call(that, widget.element[0], bindings, options);
 
                 that.widget = widget;
-                that._dataBinding = proxy(that.dataBinding, that);
-                that._dataBound = proxy(that.dataBound, that);
-                that._itemChange = proxy(that.itemChange, that);
+                that._dataBinding = that.dataBinding.bind(that);
+                that._dataBound = that.dataBound.bind(that);
+                that._itemChange = that.itemChange.bind(that);
             },
 
             itemChange: function(e) {
@@ -1053,7 +1056,7 @@ var __meta__ = { // jshint ignore:line
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                 this.widget = widget;
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget.bind(CHANGE, this._change);
             },
             change: function() {
@@ -1087,7 +1090,7 @@ var __meta__ = { // jshint ignore:line
         start: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget = widget;
                 this.widget.bind(CHANGE, this._change);
             },
@@ -1111,7 +1114,7 @@ var __meta__ = { // jshint ignore:line
         end: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
-                this._change = proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget = widget;
                 this.widget.bind(CHANGE, this._change);
             },
@@ -1205,7 +1208,7 @@ var __meta__ = { // jshint ignore:line
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                 this.widget = widget;
-                this._change = $.proxy(this.change, this);
+                this._change = this.change.bind(this);
                 this.widget.first(CHANGE, this._change);
 
                 var value = this.bindings.value.get();
@@ -1347,7 +1350,7 @@ var __meta__ = { // jshint ignore:line
                     Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                     this.widget = widget;
-                    this._change = $.proxy(this.change, this);
+                    this._change = this.change.bind(this);
                     this.widget.first(CHANGE, this._change);
                     this._initChange = false;
                 },
@@ -1476,7 +1479,7 @@ var __meta__ = { // jshint ignore:line
                     Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                     this.widget = widget;
-                    this._change = $.proxy(this.change, this);
+                    this._change = this.change.bind(this);
                     this.widget.first(CHANGE, this._change);
                     this._initChange = false;
                 },

@@ -224,25 +224,6 @@
             assert.equal(dropdownlist.filterInput.attr("aria-activedescendant"), dropdownlist.current()[0].id);
         });
 
-        it("widget adds activedescendant to the wrapper when optionLabel is focused", function() {
-            var dropdownlist = new DropDownList(input, {
-                filter: "contains",
-                dataSource: [
-                    { item: "item1" },
-                    { item: "item2" }
-                ],
-                dataTextField: "item",
-                dataValueField: "item",
-                optionLabel: "Select..."
-            });
-
-            var current = dropdownlist.current();
-
-            assert.isOk(current.attr("id"));
-            assert.isOk(current.hasClass("k-list-optionlabel"));
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input-inner")[0].id);
-        });
-
         it("widget removes aria id from the optionLabel", function() {
             var dropdownlist = new DropDownList(input, {
                 filter: "contains",
@@ -260,6 +241,23 @@
             var optionLabel = dropdownlist.list.find(".k-list-optionlabel");
 
             assert.isOk(!optionLabel.attr("id"));
+        });
+
+        it("optionLabel has role option", function() {
+            var dropdownlist = new DropDownList(input, {
+                filter: "contains",
+                dataSource: [
+                    { item: "item1" },
+                    { item: "item2" }
+                ],
+                dataTextField: "item",
+                dataValueField: "item",
+                optionLabel: "Select..."
+            });
+
+            var optionLabel = dropdownlist.list.find(".k-list-optionlabel");
+
+            assert.equal(optionLabel.attr("role"), "option");
         });
 
         it("widget takes aria-label attribute", function() {
@@ -293,5 +291,27 @@
 
             label.remove();
         });
+
+        if (kendo.support.browser.chrome) {
+            it("wrapper has aria-live=polite set", function() {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"],
+                    animation: false
+                });
+
+                assert.equal(ddl.wrapper.attr("aria-live"), "polite");
+            });
+
+            it("wrapper does not have aria-live=polite when popup is open", function() {
+                var ddl = new DropDownList(input, {
+                    dataSource: ["Item"],
+                    animation: false
+                });
+
+                ddl.open();
+
+                assert.equal(ddl.wrapper.attr("aria-live"), undefined);
+            });
+        }
     });
 }());

@@ -297,7 +297,7 @@ var __meta__ = { // jshint ignore:line
                 }
             }
             Widget.fn.init.call(that, element, options);
-            that._validateProxy = $.proxy(that._validate, that);
+            that._validateProxy = that._validate.bind(that);
             that.refresh();
         },
 

@@ -25,8 +25,7 @@ var __meta__ = { // jshint ignore:line
         DISABLED_STATE = "state-disabled",
         DISABLED = "disabled",
         RESOLVEDPREFIX = support.transitions.css === undefined ? "" : support.transitions.css,
-        TRANSFORMSTYLE = RESOLVEDPREFIX + "transform",
-        proxy = $.proxy;
+        TRANSFORMSTYLE = RESOLVEDPREFIX + "transform";
 
     function className(name) {
         return "km-" + name;
@@ -250,9 +249,9 @@ var __meta__ = { // jshint ignore:line
                         that._toggle(!that.element[0].checked);
                     }
                 },
-                start: proxy(that._start, that),
-                move: proxy(that._move, that),
-                end: proxy(that._stop, that)
+                start: that._start.bind(that),
+                move: that._move.bind(that),
+                end: that._stop.bind(that)
             });
         }
     });

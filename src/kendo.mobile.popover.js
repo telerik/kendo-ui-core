@@ -96,7 +96,7 @@ var __meta__ = { // jshint ignore:line
                     that.overlay.show();
                 },
 
-                activate: $.proxy(that._activate, that),
+                activate: that._activate.bind(that),
 
                 deactivate: function() {
                     that.overlay.hide();

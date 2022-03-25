@@ -21,7 +21,6 @@ var __meta__ = { // jshint ignore:line
         ITEM_SELECTOR = ".km-list > li, > li:not(.km-group-container)",
         HIGHLIGHT_SELECTOR = ".km-listview-link, .km-listview-label",
         ICON_SELECTOR = "[" + kendo.attr("icon") + "]",
-        proxy = $.proxy,
         attrValue = kendo.attrValue,
         GROUP_CLASS = "km-group-title",
         ACTIVE_CLASS = "km-state-active",
@@ -833,13 +832,13 @@ var __meta__ = { // jshint ignore:line
                 .on("focus" + NS, function() {
                     filter._oldFilter = filter.searchInput.val();
                 })
-                .on(events.split(" ").join(NS + " ") + NS, proxy(this._filterChange, this));
+                .on(events.split(" ").join(NS + " ") + NS, this._filterChange.bind(this));
 
             this.clearButton = listView.wrapper.find(".km-filter-reset")
-                .on(CLICK, proxy(this, "_clearFilter"))
+                .on(CLICK, this._clearFilter.bind(this))
                 .hide();
 
-             this._dataSourceChange = $.proxy(this._refreshInput, this);
+             this._dataSourceChange = this._refreshInput.bind(this);
              listView.bind("_dataSource", function(e) {
                  e.dataSource.bind("change", that._dataSourceChange);
              });
@@ -944,7 +943,7 @@ var __meta__ = { // jshint ignore:line
             this._style();
 
             if (this.options.$angular && (this.virtual || this.options.pullToRefresh)) {
-                setTimeout($.proxy(this, "_start"));
+                setTimeout(this._start.bind(this));
             } else {
                 this._start();
             }
@@ -1219,7 +1218,7 @@ var __meta__ = { // jshint ignore:line
                 template = "#=this.template(data)#";
             }
 
-            this.template = proxy(kendo.template("<li" + dataIDAttribute + ">" + template + "</li>"), templateProxy);
+            this.template = kendo.template("<li" + dataIDAttribute + ">" + template + "</li>").bind(templateProxy);
 
             groupTemplateProxy.template = this.template;
 
@@ -1230,7 +1229,7 @@ var __meta__ = { // jshint ignore:line
 
             groupTemplateProxy.headerTemplate = kendo.template(headerTemplate);
 
-            this.groupTemplate = proxy(GROUP_TEMPLATE, groupTemplateProxy);
+            this.groupTemplate = GROUP_TEMPLATE.bind(groupTemplateProxy);
         },
 
         _click: function(e) {

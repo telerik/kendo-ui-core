@@ -14,6 +14,19 @@ When configured for Ajax binding, the Telerik UI TreeList for {{ site.framework 
 
 The Ajax-bound mode has the following features:
 - The TreeList retrieves only the data (in JSON format) representing the current level items.
+>  To utilize lazy-loading define the `hasChildren` property of the Model
+
+    public class EmployeeViewModel
+    {
+        // The Id.
+        public int EmployeeID { get; set; }
+
+        public string FirstName { get; set; }
+
+        // This is a case-sensitive property. Define it only if you want to use lazy-loading.
+        // If it is not defined, the TreeList will calculate and assign its value on the client.
+        public bool hasChildren { get; set; }
+    }
 - All column templates are executed client-side. They follow the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) definition rules and may contain embedded JavaScript code.
 
 To configure the TreeList for {{ site.framework }} to do Ajax binding:

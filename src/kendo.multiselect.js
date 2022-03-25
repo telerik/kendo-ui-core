@@ -29,7 +29,6 @@ var __meta__ = { // jshint ignore:line
         keys = $.extend({ A: 65 }, kendo.keys),
         activeElement = kendo._activeElement,
         ObservableArray = kendo.data.ObservableArray,
-        proxy = $.proxy,
         ID = "id",
         CHIP = ".k-chip",
         ACCEPT = "accept",
@@ -293,7 +292,7 @@ var __meta__ = { // jshint ignore:line
         _listOptions: function(options) {
             var that = this;
             var listOptions = List.fn._listOptions.call(that, $.extend(options, {
-                selectedItemChange: proxy(that._selectedItemChange, that),
+                selectedItemChange: that._selectedItemChange.bind(that),
                 selectable: "multiple"
             }));
 
@@ -531,16 +530,16 @@ var __meta__ = { // jshint ignore:line
                     .removeClass(STATEDISABLED)
                     .removeClass(NOCLICKCLASS)
                     .on(HOVEREVENTS, that._toggleHover)
-                    .on("mousedown" + ns + " touchend" + ns, proxy(that._wrapperMousedown, that))
-                    .on(CLICK, proxy(that._focusHandler, that));
+                    .on("mousedown" + ns + " touchend" + ns, that._wrapperMousedown.bind(that))
+                    .on(CLICK, that._focusHandler.bind(that));
 
-                that.input.on(KEYDOWN, proxy(that._keydown, that))
-                    .on("paste" + ns, proxy(that._search, that))
-                    .on("input" + ns, proxy(that._search, that))
-                    .on("focus" + ns, proxy(that._inputFocus, that))
-                    .on("focusout" + ns, proxy(that._inputFocusout, that));
+                that.input.on(KEYDOWN, that._keydown.bind(that))
+                    .on("paste" + ns, that._search.bind(that))
+                    .on("input" + ns, that._search.bind(that))
+                    .on("focus" + ns, that._inputFocus.bind(that))
+                    .on("focusout" + ns, that._inputFocusout.bind(that));
 
-                that._clear.on(CLICK + " touchend" + ns, proxy(that._clearValue, that));
+                that._clear.on(CLICK + " touchend" + ns, that._clearValue.bind(that));
 
                 input.prop(DISABLED, false)
                      .prop(READONLY, false)
@@ -552,7 +551,7 @@ var __meta__ = { // jshint ignore:line
                 tagList
                     .on(MOUSEENTER, CHIP, function() { $(this).addClass(HOVERCLASS); })
                     .on(MOUSELEAVE, CHIP, function() { $(this).removeClass(HOVERCLASS); })
-                    .on(CLICK + " touchend" + ns, ".k-chip .k-icon", proxy(that._tagListClick, that));
+                    .on(CLICK + " touchend" + ns, ".k-chip .k-icon", that._tagListClick.bind(that));
             } else {
 
                 wrapper.toggleClass(STATEDISABLED, disable)
@@ -785,8 +784,8 @@ var __meta__ = { // jshint ignore:line
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
             } else {
-                that._progressHandler = proxy(that._showBusy, that);
-                that._errorHandler = proxy(that._hideBusy, that);
+                that._progressHandler = that._showBusy.bind(that);
+                that._errorHandler = that._hideBusy.bind(that);
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
@@ -1102,7 +1101,7 @@ var __meta__ = { // jshint ignore:line
                 return;
             }
 
-            that._busy = setTimeout(proxy(that._showBusyHandler, that), 100);
+            that._busy = setTimeout(that._showBusyHandler.bind(that), 100);
         },
 
         _placeholder: function(show, skipCaret) {

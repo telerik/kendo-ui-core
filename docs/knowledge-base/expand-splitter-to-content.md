@@ -1,11 +1,41 @@
 ---
-title: Expand to Content
-page_title: Expand to Content | Kendo UI Splitter
+title: Expand the Splitter Based on Content Height
+page_title: Expand the Splitter Based on Content Height
 description: "Learn how to expand the Kendo UI Splitter based on the height of the content."
 slug: howto_expandtocontent_splitter
+previous_url: /controls/layout/splitter/how-to/expand-splitter-to-content
+tags: telerik, kendo, jquery, splitter, expand, based, on, content, height  
+component: splitter
+type: how-to
+res_type: kb
 ---
 
-# Expand to Content
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Splitter for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I expand the Kendo UI Splitter based on the height of the content?
+
+## Solution
 
 The following example demonstrates how to make the Kendo UI Splitter expand its height based on the content inside a pane.
 

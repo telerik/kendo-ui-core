@@ -19,7 +19,6 @@ var __meta__ = { // jshint ignore:line
         extend = $.extend,
         format = kendo.format,
         parse = kendo.parseFloat,
-        proxy = $.proxy,
         isArray = Array.isArray,
         math = Math,
         support = kendo.support,
@@ -493,7 +492,7 @@ var __meta__ = { // jshint ignore:line
                 form = formId ? $("#" + formId) : element.closest("form");
 
             if (form[0]) {
-                that._form = form.on("reset", proxy(that._formResetHandler, that));
+                that._form = form.on("reset", that._formResetHandler.bind(that));
             }
         },
 
@@ -788,52 +787,52 @@ var __meta__ = { // jshint ignore:line
                     that._focusWithMouse(e.target);
                     e.preventDefault();
                 })
-                .on(FOCUS, proxy(that._focus, that))
-                .on(BLUR, proxy(that._blur, that));
+                .on(FOCUS, that._focus.bind(that))
+                .on(BLUR, that._blur.bind(that));
 
-            move = proxy(function(sign) {
+            move = (function(sign) {
                 var newVal = that._nextValueByIndex(that._valueIndex + (sign * 1));
                 that._setValueInRange(newVal);
                 that._drag._updateTooltip(newVal);
-            }, that);
+            }).bind(that);
 
             if (options.showButtons) {
-                var mouseDownHandler = proxy(function(e, sign) {
+                var mouseDownHandler = (function(e, sign) {
                     this._clearTooltipTimeout();
                     if (e.which === 1 || (support.touch && e.which === 0)) {
                         move(sign);
 
-                        this.timeout = setTimeout(proxy(function() {
+                        this.timeout = setTimeout((function() {
                             this.timer = setInterval(function() {
                                 move(sign);
                             }, 60);
-                        }, this), 200);
+                        }).bind(this), 200);
                     }
-                }, that);
+                }).bind(that);
 
                 that.wrapper.find(".k-button")
-                    .on(MOUSE_UP, proxy(function(e) {
+                    .on(MOUSE_UP, (function(e) {
                         this._clearTimer();
                         that._focusWithMouse(e.target);
-                    }, that))
+                    }).bind(that))
                     .on(MOUSE_OVER, function(e) {
                         $(e.currentTarget).addClass("k-state-hover");
                     })
-                    .on("mouseout" + NS, proxy(function(e) {
+                    .on("mouseout" + NS, (function(e) {
                         $(e.currentTarget).removeClass("k-state-hover");
                         this._clearTimer();
-                    }, that))
-                    .on(MOUSE_DOWN, proxy(function(e) {
+                    }).bind(that))
+                    .on(MOUSE_DOWN, (function(e) {
                         var sign = $(e.target).closest(".k-button").is(".k-button-increase") ? 1 : -1;
                         mouseDownHandler(e, sign);
-                    }, that))
+                    }).bind(that))
                     .on("click", kendo.preventDefault);
             }
 
             that.wrapper
                 .find(DRAG_HANDLE)
                 .off(KEY_DOWN, false)
-                .on(KEY_DOWN, proxy(this._keydown, that));
+                .on(KEY_DOWN, this._keydown.bind(that));
 
             options.enabled = true;
         },
@@ -1023,10 +1022,10 @@ var __meta__ = { // jshint ignore:line
 
         that.draggable = new Draggable(element, {
             distance: 0,
-            dragstart: proxy(that._dragstart, that),
-            drag: proxy(that.drag, that),
-            dragend: proxy(that.dragend, that),
-            dragcancel: proxy(that.dragcancel, that)
+            dragstart: that._dragstart.bind(that),
+            drag: that.drag.bind(that),
+            dragend: that.dragend.bind(that),
+            dragcancel: that.dragcancel.bind(that)
         });
 
         element.click(false);
@@ -1498,21 +1497,21 @@ var __meta__ = { // jshint ignore:line
                     that._focusWithMouse(e.target);
                     e.preventDefault();
                 })
-                .on(FOCUS, proxy(that._focus, that))
-                .on(BLUR, proxy(that._blur, that));
+                .on(FOCUS, that._focus.bind(that))
+                .on(BLUR, that._blur.bind(that));
 
             that.wrapper.find(DRAG_HANDLE)
                 .off(KEY_DOWN, kendo.preventDefault)
                 .eq(0).on(KEY_DOWN,
-                    proxy(function(e) {
+                    (function(e) {
                         this._keydown(e, "firstHandle");
-                    }, that)
+                    }).bind(that)
                 )
                 .end()
                 .eq(1).on(KEY_DOWN,
-                    proxy(function(e) {
+                    (function(e) {
                         this._keydown(e, "lastHandle");
-                    }, that)
+                    }).bind(that)
                 );
 
             that.options.enabled = true;

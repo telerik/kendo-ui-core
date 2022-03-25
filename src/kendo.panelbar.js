@@ -15,7 +15,6 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         keys = kendo.keys,
         extend = $.extend,
-        proxy = $.proxy,
         each = $.each,
         isArray = Array.isArray,
         template = kendo.template,
@@ -233,11 +232,11 @@ var __meta__ = { // jshint ignore:line
             that._animations(options);
 
             element
-                .on(CLICK + NS, clickableItems, proxy(that._click, that))
+                .on(CLICK + NS, clickableItems, that._click.bind(that))
                 .on(MOUSEENTER  + NS + " " + MOUSELEAVE + NS, clickableItems, that._toggleHover)
                 .on(CLICK + NS, disabledItems, false)
-                .on(CLICK + NS, ".k-request-retry", proxy(that._retryRequest, that))
-                .on("keydown" + NS, proxy(that._keydown, that))
+                .on(CLICK + NS, ".k-request-retry", that._retryRequest.bind(that))
+                .on("keydown" + NS, that._keydown.bind(that))
                 .on("focus" + NS, function() {
                     var item = that.select();
                     that._current(item[0] ? item : that._first());
@@ -350,7 +349,7 @@ var __meta__ = { // jshint ignore:line
         _templates: function() {
             var that = this,
                 options = that.options,
-                fieldAccessor = proxy(that._fieldAccessor, that);
+                fieldAccessor = that._fieldAccessor.bind(that);
 
               if (options.template && typeof options.template == STRING) {
                     options.template = template(options.template);
@@ -754,8 +753,8 @@ var __meta__ = { // jshint ignore:line
         },
 
         _bindDataSource: function() {
-            this._refreshHandler = proxy(this.refresh, this);
-            this._errorHandler = proxy(this._error, this);
+            this._refreshHandler = this.refresh.bind(this);
+            this._errorHandler = this._error.bind(this);
 
             this.dataSource.bind(CHANGE, this._refreshHandler);
             this.dataSource.bind(ERROR, this._errorHandler);

@@ -44,7 +44,6 @@ var __meta__ = { // jshint ignore:line
         ARIA_DISABLED = "aria-disabled",
         INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
-        proxy = $.proxy,
         isPlainObject = $.isPlainObject,
         extend = $.extend;
 
@@ -59,7 +58,7 @@ var __meta__ = { // jshint ignore:line
 
              options = that.options;
              element = that.element
-                           .on("focusout" + ns, proxy(that._focusout, that))
+                           .on("focusout" + ns, that._focusout.bind(that))
                            .attr("role", "spinbutton");
 
              options.placeholder = options.placeholder || element.attr("placeholder");
@@ -91,7 +90,7 @@ var __meta__ = { // jshint ignore:line
              that._input();
 
              if (!kendo.support.mobileOS) {
-                 that._text.on(FOCUS + ns, proxy(that._click, that));
+                 that._text.on(FOCUS + ns, that._click.bind(that));
              } else {
                  that._text.on(TOUCHEND + ns + " " + FOCUS + ns, function() {
                      if (kendo.support.browser.edge) {
@@ -215,13 +214,13 @@ var __meta__ = { // jshint ignore:line
                 });
 
                 that.element
-                    .on("keydown" + ns, proxy(that._keydown, that))
-                    .on("keyup" + ns, proxy(that._keyup, that))
-                    .on("paste" + ns, proxy(that._paste, that))
-                    .on("input" + ns, proxy(that._inputHandler, that));
+                    .on("keydown" + ns, that._keydown.bind(that))
+                    .on("keyup" + ns, that._keyup.bind(that))
+                    .on("paste" + ns, that._paste.bind(that))
+                    .on("input" + ns, that._inputHandler.bind(that));
 
                 if (that._inputLabel) {
-                    that._inputLabel.on("click" + ns, proxy(that.focus, that));
+                    that._inputLabel.on("click" + ns, that.focus.bind(that));
                 }
 
             } else {
@@ -629,7 +628,7 @@ var __meta__ = { // jshint ignore:line
 
             that._addInvalidState();
             clearTimeout(that._invalidStateTimeout);
-            that._invalidStateTimeout = setTimeout(proxy(that._removeInvalidState, that), 100);
+            that._invalidStateTimeout = setTimeout(that._removeInvalidState.bind(that), 100);
         },
 
         _addInvalidState: function () {
@@ -903,7 +902,7 @@ var __meta__ = { // jshint ignore:line
                 that._inputLabel = $("<label class='" + LABELCLASSES + "' for='" + id + "'>" + labelText + "</label>'").insertBefore(that.wrapper);
 
                 if ((that.element.attr("disabled") === undefined) && (that.element.attr("readonly") === undefined)) {
-                    that._inputLabel.on("click" + ns, proxy(that.focus, that));
+                    that._inputLabel.on("click" + ns, that.focus.bind(that));
                 }
             }
         },

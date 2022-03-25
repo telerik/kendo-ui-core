@@ -26,7 +26,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-            that.container().bind("show", $.proxy(this, "refresh"));
+            that.container().bind("show", this.refresh.bind(this));
 
             that.element
                .addClass("km-tabstrip")

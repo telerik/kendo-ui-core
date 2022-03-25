@@ -1,30 +1,58 @@
 ---
 title: Move Popup Notifications on Window Resize
-page_title: Move Popup Notifications on Window Resize | Kendo UI Notification
+page_title: Move Popup Notifications on Window Resize 
 description: "Learn how to move popup notifications on window resize in the Kendo UI Notification widget."
 slug: howto_move_popup_notifications_onwindow_resize_notification
+previous_url: /controls/layout/notification/how-to/move-on-window-resize 
+tags: telerik, kendo, jquery, notification, move, popup, on, window, resize  
+component: notification
+type: how-to
+res_type: kb
 ---
 
-# Move Popup Notifications on Window Resize
+## Environment
 
-The following example demonstrates how to move popup notifications on browser window resize, so that they remain within the viewport boundaries.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Notification for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
 
-The code from the snippet executes the following actions:
+## Description
+
+How can I move popup notifications on browser window resize, so that they remain within the viewport boundaries?
+
+## Solution
+
+The code from the example below executes the following actions:
 1. Ensures that the `timeOutMoveFunction` function is executed once, some time after browser window resizing is complete.
 1. Calculates the expected position of the first (oldest) notification popup and compare it with the current position.
 1. Moves all notification popups, according to the discrepancy derived from the previous point.
 
 ```dojo
-    <div id="example">
+  <div id="example">
 
       <span id="notification" style="display:none;"></span>
 
       <p>
-        <button id="showNotification" class="k-button">Show a notification</button>
+        <button id="showNotification" >Show a notification</button>
       </p>
       <h4>Hide notifications:</h4>
       <p>
-        <button id="hideAllNotifications" class="k-button">Hide all notifications</button>
+        <button id="hideAllNotifications">Hide all notifications</button>
       </p>
 
       <script>
@@ -38,12 +66,16 @@ The code from the snippet executes the following actions:
             autoHideAfter: 0
           }).data("kendoNotification");
 
-          $("#showNotification").click(function(){
-            notification.info("foo");
+          $("#showNotification").kendoButton({
+            click:function(){
+              notification.info("foo");
+            }
           });
 
-          $("#hideAllNotifications").click(function(){
-            notification.hide();
+          $("#hideAllNotifications").kendoButton({
+            click:function(){
+              notification.hide();
+            }
           });
 
           var timeOut = -1;
@@ -85,8 +117,7 @@ The code from the snippet executes the following actions:
 
         });
       </script>
-
-    </div>
+  </div>
 ```
 
 ## See Also

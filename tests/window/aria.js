@@ -129,5 +129,20 @@
                 "button"
             );
         });
+
+        it("Window adds aria-hidden='true' on resize handles", function() {
+            var wnd = createWindow(
+                { title: "Test", resizable: true },
+                $("<div id='window' />")
+            );
+
+            var handles = wnd.wrapper.find(".k-resize-handle");
+
+            assert.equal(handles.length, 8);
+
+            handles.each(function(i, h) {
+                assert.isOk(h.getAttribute("aria-hidden"), "true");
+            });
+        });
     });
 })();

@@ -13,7 +13,7 @@
         }
     }
 
-    describe("tabstrip accessibility with AXE", function () {
+    describe("tabstrip accessibility with AXE", function() {
         beforeEach(function() {
             div = $('<div id="test">');
             div.appendTo(Mocha.fixture);
@@ -146,7 +146,7 @@
         });
     });
 
-    describe("tabstrip aria", function () {
+    describe("tabstrip aria", function() {
         beforeEach(function() {
             div = $('<div id="test">');
             div.appendTo(Mocha.fixture);
@@ -164,7 +164,7 @@
         it("tab role is set to items", function() {
             div.kendoTabStrip({
                 dataTextField: "text",
-                dataSource: [ { text: "foo", content: "bar" } ]
+                dataSource: [{ text: "foo", content: "bar" }]
             });
 
             assert.equal(div.find("li[role=tab]").text(), "foo");
@@ -180,7 +180,7 @@
             var tabstrip = div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "bar"} ],
+                dataSource: [{ text: "foo", content: "bar" }],
                 tabPosition: "left"
             }).data("kendoTabStrip");
 
@@ -191,7 +191,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "bar"} ]
+                dataSource: [{ text: "foo", content: "bar" }]
             });
 
             assert.equal(div.find("div[role=tabpanel]").text(), "bar");
@@ -199,35 +199,35 @@
 
         it("tabpanel role is set to content items when created from html", function() {
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find("div[role=tabpanel]").length, 2);
         });
 
         it("TabStrip adds aria-controls to the tab items", function() {
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find("li[role=tab]").eq(0).attr("aria-controls"), "test-1");
         });
 
         it("TabStrip does not replace the id attributes of content items", function() {
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div id="customId">foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find(".k-content").attr("id"), "customId");
         });
 
         it("TabStrip does not replace the id attributes of Tab items", function() {
             div = $('<div id="test"><ul><li id="first">foo</li id="second"><li id="third">bar</li></ul><div id="customId">foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find(".k-item").attr("id"), "first");
         });
 
         it("TabStrip render aria-controls with guid if no id", function() {
             div = $('<div><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.isOk(div.find("li[role=tab]").eq(0).attr("aria-controls"));
         });
@@ -236,7 +236,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             assert.equal(div.find("div[aria-hidden=true]").length, 2);
@@ -244,7 +244,7 @@
 
         it("hidden attribute is set to the content if tab is not visible when created from html", function() {
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find("div[aria-hidden=true]").length, 2);
         });
@@ -253,7 +253,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             div.data("kendoTabStrip").select(1);
@@ -266,7 +266,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             div.data("kendoTabStrip").select(1);
@@ -280,7 +280,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" },{ text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             div.data("kendoTabStrip").select(0);
@@ -294,7 +294,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}, { text: "bar"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }, { text: "bar" }]
             });
 
             div.data("kendoTabStrip").select(1);
@@ -309,7 +309,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             div.data("kendoTabStrip").select(0);
@@ -321,7 +321,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             div.data("kendoTabStrip").select(0);
@@ -333,7 +333,7 @@
 
         it("aria-selected is added to the active tab when created from html", function() {
             div = $('<div id="test"><ul><li class="k-state-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find("li[aria-selected=true]").text(), "foo");
         });
@@ -342,7 +342,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             assert.equal(div.find("div[aria-expanded=false]").length, 2);
@@ -352,7 +352,7 @@
             div.kendoTabStrip({
                 dataTextField: "text",
                 dataContentField: "content",
-                dataSource: [ { text: "foo", content: "foo content" }, { text: "bar", content: "bar content"}  ]
+                dataSource: [{ text: "foo", content: "foo content" }, { text: "bar", content: "bar content" }]
             });
 
             div.data("kendoTabStrip").select(0);
@@ -362,14 +362,14 @@
 
         it("aria-expanded false is added to the non active content when created from html", function() {
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find("div[aria-expanded=false]").length, 2);
         });
 
         it("aria-expanded is added to the active content when created from html", function() {
             div = $('<div id="test"><ul><li class="k-state-active">foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find("div[aria-expanded=true]").text(), "foo content");
         });
@@ -406,7 +406,7 @@
 
         it("assigns properly aria-labelledby to the respective Tab items", function() {
             div = $('<div id="test"><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find(".k-item")[0].id, div.children("div:not(.k-tabstrip-items-wrapper)")[0].getAttribute("aria-labelledby"));
             assert.equal(div.find(".k-item")[1].id, div.children("div:not(.k-tabstrip-items-wrapper)")[1].getAttribute("aria-labelledby"));
@@ -414,7 +414,7 @@
 
         it("assigns properly aria-labelledby to the respective Tab items with guid if no id is present for the wrapper", function() {
             div = $('<div><ul><li>foo</li><li>bar</li></ul><div>foo content</div><div>bar content</div></div>')
-                    .kendoTabStrip();
+                .kendoTabStrip();
 
             assert.equal(div.find(".k-item")[0].id, div.children("div:not(.k-tabstrip-items-wrapper)")[0].getAttribute("aria-labelledby"));
             assert.equal(div.find(".k-item")[1].id, div.children("div:not(.k-tabstrip-items-wrapper)")[1].getAttribute("aria-labelledby"));

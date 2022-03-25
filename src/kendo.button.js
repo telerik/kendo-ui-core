@@ -15,7 +15,6 @@
             Widget = kendo.ui.Widget,
             html = kendo.html,
             ui = kendo.ui,
-            proxy = $.proxy,
             keys = kendo.keys,
             CLICK = "click",
             MOUSEDOWN = kendo.support.mousedown,
@@ -59,13 +58,13 @@
                 that._badge();
 
                 element
-                    .on(CLICK + NS, proxy(that._click, that))
-                    .on("focus" + NS, proxy(that._focus, that))
-                    .on("blur" + NS, proxy(that._blur, that))
-                    .on("keydown" + NS, proxy(that._keydown, that))
-                    .on("keyup" + NS, proxy(that._removeActive, that))
-                    .on(MOUSEDOWN + NS, proxy(that._addActive, that))
-                    .on(MOUSEUP + NS  + " " + MOUSEOUT + NS, proxy(that._removeActive, that));
+                    .on(CLICK + NS, that._click.bind(that))
+                    .on("focus" + NS, that._focus.bind(that))
+                    .on("blur" + NS, that._blur.bind(that))
+                    .on("keydown" + NS, that._keydown.bind(that))
+                    .on("keyup" + NS, that._removeActive.bind(that))
+                    .on(MOUSEDOWN + NS, that._addActive.bind(that))
+                    .on(MOUSEUP + NS  + " " + MOUSEOUT + NS, that._removeActive.bind(that));
 
                 kendo.notify(that);
             },

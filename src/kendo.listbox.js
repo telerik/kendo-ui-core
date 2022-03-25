@@ -24,7 +24,6 @@ var __meta__ = { // jshint ignore:line
 
     var extend = $.extend;
     var noop = $.noop;
-    var proxy = $.proxy;
 
     var DASH = "-";
     var DOT = ".";
@@ -262,9 +261,9 @@ var __meta__ = { // jshint ignore:line
             var options = that.options;
 
             if (options.navigatable) {
-                that._getList().on(CLICK, ENABLED_ITEM_SELECTOR, proxy(that._click, that))
-                            .on(KEYDOWN, proxy(that._keyDown, that))
-                            .on(BLUR, proxy(that._blur, that));
+                that._getList().on(CLICK, ENABLED_ITEM_SELECTOR, that._click.bind(that))
+                            .on(KEYDOWN, that._keyDown.bind(that))
+                            .on(BLUR, that._blur.bind(that));
             }
         },
 
@@ -476,10 +475,10 @@ var __meta__ = { // jshint ignore:line
                 that._draggable = new kendo.ui.Draggable(that.wrapper, {
                     filter: draggable.filter ? draggable.filter : DEFAULT_FILTER,
                     hint: kendo.isFunction(hint) ? hint : $(hint),
-                    dragstart: proxy(that._dragstart, that),
-                    dragcancel: proxy(that._clear, that),
-                    drag: proxy(that._drag, that),
-                    dragend: proxy(that._dragend, that)
+                    dragstart: that._dragstart.bind(that),
+                    dragcancel: that._clear.bind(that),
+                    drag: that._drag.bind(that),
+                    dragend: that._dragend.bind(that)
                 });
             }
         },
@@ -914,7 +913,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var dataSource = that.dataSource;
 
-            that._dataChangeHandler = proxy(that.refresh, that);
+            that._dataChangeHandler = that.refresh.bind(that);
 
             if (dataSource) {
                 dataSource.bind(CHANGE, that._dataChangeHandler);
@@ -1089,7 +1088,7 @@ var __meta__ = { // jshint ignore:line
                 selectedClass: "k-selected",
                 multiple: selectableOptions.multiple,
                 filter: ENABLED_ITEM_SELECTOR,
-                change: proxy(that._onSelect, that)
+                change: that._onSelect.bind(that)
             });
         },
 
@@ -1537,7 +1536,7 @@ var __meta__ = { // jshint ignore:line
         _attachEventHandlers: function() {
             var that = this;
 
-            that.element.on(CLICK, TOOL_SELECTOR, proxy(that._onToolClick, that));
+            that.element.on(CLICK, TOOL_SELECTOR, that._onToolClick.bind(that));
         },
 
         _detachEventHandlers: function() {

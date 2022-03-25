@@ -51,7 +51,6 @@ var __meta__ = { // jshint ignore:line
     restrictValue = calendar.restrictValue,
     isEqualDatePart = calendar.isEqualDatePart,
     extend = $.extend,
-    proxy = $.proxy,
     DATE = Date;
 
     function normalize(options) {
@@ -115,7 +114,7 @@ var __meta__ = { // jshint ignore:line
                 div = $(DIV).attr(ID, kendo.guid())
                             .appendTo(options.omitPopup ? options.dateDiv : that.popup.element)
                             .on(MOUSEDOWN, preventDefault)
-                            .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
+                            .on(CLICK, "td:has(.k-link)", that._click.bind(that));
 
                 that.calendar = calendar = new ui.Calendar(div, {
                     componentType: options.componentType,
@@ -482,13 +481,13 @@ var __meta__ = { // jshint ignore:line
                 }
                 element.attr(ARIA_DISABLED, false)
                        .attr(ARIA_READONLY, false)
-                       .on("keydown" + ns, proxy(that._keydown, that))
-                       .on("focusout" + ns, proxy(that._blur, that))
+                       .on("keydown" + ns, that._keydown.bind(that))
+                       .on("focusout" + ns, that._blur.bind(that))
                        .on("focus" + ns, function() {
                            that.wrapper.addClass(FOCUSED);
                        });
 
-               icon.on(UP, proxy(that._click, that))
+               icon.on(UP, that._click.bind(that))
                    .on(MOUSEDOWN, preventDefault);
             } else {
                 wrapper
@@ -810,7 +809,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _template: function() {
-            this._ariaTemplate = proxy(template(this.options.ARIATemplate), this);
+            this._ariaTemplate = template(this.options.ARIATemplate).bind(this);
         },
 
         _createDateInput: function(options) {

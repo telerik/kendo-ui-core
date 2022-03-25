@@ -14,7 +14,6 @@ var __meta__ = { // jshint ignore:line
     var kendo = window.kendo,
         mobile = kendo.mobile,
         ui = mobile.ui,
-        proxy = $.proxy,
         Transition = kendo.effects.Transition,
         Pane = kendo.ui.Pane,
         PaneDimensions = kendo.ui.PaneDimensions,
@@ -61,8 +60,8 @@ var __meta__ = { // jshint ignore:line
 
             scrollView.element.append(element);
 
-            this._changeProxy = proxy(that, "_change");
-            this._refreshProxy = proxy(that, "_refresh");
+            this._changeProxy = that._change.bind(that);
+            this._refreshProxy = that._refresh.bind(that);
             scrollView.bind(CHANGE, this._changeProxy);
             scrollView.bind(REFRESH, this._refreshProxy);
 
@@ -367,9 +366,9 @@ var __meta__ = { // jshint ignore:line
                 this.buffer = new Buffer(this.dataSource, itemsPerPage * 3);
             }
 
-            this._resizeProxy = proxy(this, "_onResize");
-            this._resetProxy = proxy(this, "_onReset");
-            this._endReachedProxy = proxy(this, "_onEndReached");
+            this._resizeProxy = this._onResize.bind(this);
+            this._resetProxy = this._onReset.bind(this);
+            this._endReachedProxy = this._onEndReached.bind(this);
 
             this.buffer.bind({
                 "resize": this._resizeProxy,
@@ -389,14 +388,14 @@ var __meta__ = { // jshint ignore:line
                 template = "#=this.template(data)#";
             }
 
-            this.template = proxy(kendo.template(template), templateProxy);
+            this.template = kendo.template(template).bind(templateProxy);
 
             if (typeof emptyTemplate === FUNCTION) {
                 emptyTemplateProxy.emptyTemplate = emptyTemplate;
                 emptyTemplate = "#=this.emptyTemplate(data)#";
             }
 
-            this.emptyTemplate = proxy(kendo.template(emptyTemplate), emptyTemplateProxy);
+            this.emptyTemplate = kendo.template(emptyTemplate).bind(emptyTemplateProxy);
         },
 
         _initPages: function() {
@@ -685,10 +684,10 @@ var __meta__ = { // jshint ignore:line
 
             that.pane = new ElasticPane(that.inner, {
                 duration: this.options.duration,
-                transitionEnd: proxy(this, "_transitionEnd"),
-                dragStart: proxy(this, "_dragStart"),
-                dragEnd: proxy(this, "_dragEnd"),
-                change: proxy(this, REFRESH)
+                transitionEnd: this._transitionEnd.bind(this),
+                dragStart: this._dragStart.bind(this),
+                dragEnd: this._dragEnd.bind(this),
+                change: this[REFRESH].bind(this)
             });
 
             that.bind("resize", function() {
@@ -736,7 +735,7 @@ var __meta__ = { // jshint ignore:line
                 that.viewInit();
                 that.viewShow();
             } else {
-                mobileContainer.bind("show", proxy(this, "viewShow")).bind("init", proxy(this, "viewInit"));
+                mobileContainer.bind("show", this.viewShow.bind(this)).bind("init", this.viewInit.bind(this));
             }
         },
 

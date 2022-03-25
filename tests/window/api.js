@@ -127,8 +127,8 @@
             var window = createWindow();
 
             var div = $("<div style='height:2000px' />").appendTo(
-                    Mocha.fixture.height(2010)
-                ),
+                Mocha.fixture.height(2010)
+            ),
                 scrollPosition = 300;
 
             $(Mocha.fixture[0].ownerDocument).scrollTop(scrollPosition);
@@ -147,8 +147,8 @@
             var window = createWindow();
 
             var div = $("<div style='width:5000px' />").appendTo(
-                    Mocha.fixture.width(5020)
-                ),
+                Mocha.fixture.width(5020)
+            ),
                 scrollPosition = 1300;
 
             // Mocha.fixture's document is initially with overflow:hidden
@@ -176,8 +176,8 @@
 
         it("destroying a modal window moves overlay before previous window", function() {
             var dialog = createWindow({
-                    modal: true
-                }),
+                modal: true
+            }),
                 overlappingDialog = createWindow({
                     modal: true
                 });
@@ -197,8 +197,8 @@
 
         it("closing a modal window moves overlay before previous window", function() {
             var dialog = createWindow({
-                    modal: true
-                }),
+                modal: true
+            }),
                 overlappingDialog = createWindow({
                     modal: true
                 });
@@ -209,8 +209,8 @@
 
         it("closing a modal window moves overlay before previous Kendo Dialog too", function() {
             var dialog = createDialog({
-                    modal: true
-                }),
+                modal: true
+            }),
                 overlappingDialog = createWindow({
                     modal: true
                 });
@@ -222,12 +222,12 @@
         it("closing a modal window removes overlay if previous modal has containment enabled", function() {
             $("<div id='container' style='height: 400px; width: 400px; position: absolute;' />").appendTo(Mocha.fixture);
             var dialog = createWindow({
-                    modal: true,
-                    draggable: {
-                        containment: "#container"
-                    },
-                    animation: false
-                }),
+                modal: true,
+                draggable: {
+                    containment: "#container"
+                },
+                animation: false
+            }),
                 overlappingDialog = createWindow({
                     modal: true,
                     animation: false
@@ -241,9 +241,9 @@
 
         it("destroying a modal window removes overlay if other open window has different appendTo", function() {
             var dialog = createWindow({
-                    modal: true,
-                    appendTo: Mocha.fixture
-                }),
+                modal: true,
+                appendTo: Mocha.fixture
+            }),
                 overlappingDialog = createWindow({
                     modal: true,
                     appendTo: document.body
@@ -437,8 +437,8 @@
             });
 
             var dialog = createWindow({
-                    content: "foo"
-                }),
+                content: "foo"
+            }),
                 url = "http://example.com/";
 
             dialog.refresh(url);
@@ -567,8 +567,8 @@
 
         it("toFront() removes overlay on foremost window", function() {
             var firstWindow = createWindow({
-                    content: "http://www.telerik.com/"
-                }),
+                content: "http://www.telerik.com/"
+            }),
                 secondWindow = createWindow({
                     content: "http://google.com/"
                 });
@@ -586,7 +586,7 @@
 
             assert.isOk(
                 parseInt(firstWindow1.wrapper.css("zIndex")) <
-                    parseInt($(".k-overlay").css("zIndex"))
+                parseInt($(".k-overlay").css("zIndex"))
             );
         });
 
@@ -706,8 +706,8 @@
 
             dialog.pin();
 
-            finalTop = parseInt(dialog.wrapper.css("top"), 10);
-            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+            var finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            var finalLeft = parseInt(dialog.wrapper.css("left"), 10);
 
             assert.equal(finalTop, initialTop - $(window).scrollTop());
             assert.equal(finalLeft, initialLeft - $(window).scrollLeft());
@@ -715,7 +715,7 @@
             spacerDiv.remove();
         });
 
-        it("pin() itself should not subtract scroll without center or unpin where called", function(){
+        it("pin() itself should not subtract scroll without center or unpin where called", function() {
             var spacerDiv = $(
                 "<div style='width:6000px;height:3000px'>&nbsp;</div>"
             ).appendTo(Mocha.fixture);
@@ -735,8 +735,8 @@
 
             dialog.pin();
 
-            finalTop = parseInt(dialog.wrapper.css("top"), 10);
-            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+            var finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            var finalLeft = parseInt(dialog.wrapper.css("left"), 10);
 
             assert.equal(finalTop, initialTop);
             assert.equal(finalLeft, initialLeft);
@@ -821,8 +821,8 @@
 
             dialog.unpin();
 
-            finalTop = parseInt(dialog.wrapper.css("top"), 10);
-            finalLeft = parseInt(dialog.wrapper.css("left"), 10);
+            var finalTop = parseInt(dialog.wrapper.css("top"), 10);
+            var finalLeft = parseInt(dialog.wrapper.css("left"), 10);
 
             assert.equal(finalTop, initialTop + $(window).scrollTop());
             assert.equal(finalLeft, initialLeft + $(window).scrollLeft());
@@ -1555,12 +1555,12 @@
         it("get properly modals", function() {
             var dialog1 = createWindow({
                 modal: true,
-                title:  'First Window'
+                title: 'First Window'
             });
 
             var dialog2 = createWindow({
                 modal: true,
-                title:  'Second Window'
+                title: 'Second Window'
             });
 
             assert.equal(dialog1._modals().length, 2);
@@ -1568,22 +1568,22 @@
         });
 
         it("get properly modals in containment scenario", function() {
-            var div = $('<div id="containement" style="height:500px;width:500px">')
+            var div = $('<div id="containement" style="height:500px;width:500px">');
             div.appendTo(Mocha.fixture);
 
             var dialog1 = createWindow({
                 modal: true,
-                title:  'First Window',
+                title: 'First Window',
                 draggable: {
-                    containment : '#containement'
+                    containment: '#containement'
                 }
             });
 
             var dialog2 = createWindow({
                 modal: true,
-                title:  'Second Window',
+                title: 'Second Window',
                 draggable: {
-                    containment : '#containement'
+                    containment: '#containement'
                 }
             });
 

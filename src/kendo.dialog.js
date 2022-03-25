@@ -14,7 +14,6 @@
         var kendo = window.kendo,
             Widget = kendo.ui.Widget,
             TabKeyTrap = kendo.ui.Popup.TabKeyTrap,
-            proxy = $.proxy,
             template = kendo.template,
             keys = kendo.keys,
             isFunction = kendo.isFunction,
@@ -88,7 +87,7 @@
                 var that = this,
                     wrapper;
 
-                that._centerCallback = proxy(that._center, that);
+                that._centerCallback = that._center.bind(that);
 
                 that.appendTo = $(BODY);
                 if (!defined(options.visible) || options.visible === null) {
@@ -386,10 +385,10 @@
                     that.element.autoApplyNS(NS);
 
                     wrapper.find(KICONCLOSE)
-                        .on("click", proxy(that._closeClick, that))
-                        .on("keydown", proxy(that._closeKeyHandler, that));
+                        .on("click", that._closeClick.bind(that))
+                        .on("keydown", that._closeKeyHandler.bind(that));
 
-                    that.element.on("keydown", proxy(that._keydown, that));
+                    that.element.on("keydown", that._keydown.bind(that));
                 }
             },
 
@@ -404,8 +403,8 @@
 
             _addButtons: function(actionbar) {
                 var that = this,
-                    actionClick = proxy(that._actionClick, that),
-                    actionKeyHandler = proxy(that._actionKeyHandler, that),
+                    actionClick = that._actionClick.bind(that),
+                    actionKeyHandler = that._actionKeyHandler.bind(that),
                     actions = that.options.actions,
                     length = actions.length,
                     action,
@@ -527,7 +526,7 @@
                     wrapper.show().kendoStop().kendoAnimate({
                         effects: showOptions.effects,
                         duration: showOptions.duration,
-                        complete: proxy(that._openAnimationEnd, that)
+                        complete: that._openAnimationEnd.bind(that)
                     });
                     wrapper.show();
 
@@ -617,7 +616,7 @@
                         effects: hideOptions.effects || showOptions.effects,
                         reverse: hideOptions.reverse === true,
                         duration: hideOptions.duration,
-                        complete: proxy(this._closeAnimationEnd, this)
+                        complete: this._closeAnimationEnd.bind(this)
                     });
                 }
 
@@ -949,7 +948,7 @@
 
                 DialogBase.fn._init.call(that, element, options);
 
-                that.bind(HIDE, proxy(that.destroy, that));
+                that.bind(HIDE, that.destroy.bind(that));
 
                 that._ariaDescribedBy();
                 that._initFocus();

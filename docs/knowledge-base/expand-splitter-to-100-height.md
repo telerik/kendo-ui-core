@@ -1,20 +1,49 @@
 ---
-title: Expand to 100% Height and Auto-Resize
-page_title: Expand to 100% Height and Auto-Resize | Kendo UI Splitter
+title: Expand the Splitter to 100% Height and Auto-Resize
+page_title: Expand the Splitter to 100% Height and Auto-Resize
 description: "Learn how to expand the Kendo UI Splitter to a 100% height and make it resize automatically."
-previous_url: /kendo-ui-mvc/controls/layout/splitter/how-to/expand-splitter-to-100-height
+previous_url: /kendo-ui-mvc/controls/layout/splitter/how-to/expand-splitter-to-100-height, /controls/layout/splitter/how-to/expand-splitter-to-100-height
 slug: howto_expandto100heightandautoresize_splitter
+tags: telerik, kendo, jquery, splitter, expand, to, 100%, percent, height, auto, resize  
+component: splitter
+type: how-to
+res_type: kb
 ---
 
-# Expand to 100% Height and Auto-Resize
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Splitter for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I expand the Kendo UI Splitter to a 100% height and make it resize automatically?
+
+## Solution
 
 You can vertically expand and resize the Splitter together with the browser window.
 
-Web standards require that elements with percentage height have a parent element with an explicit height. The rule applies recursively until an element with a pixel height is reached or until the `<html>` element is reached. If the requirement is not met, the computed height of the Splitter falls back to `auto` and the widget collapses, depending on its content.
+Web standards require elements with a height set in percentage to have a parent element with an explicit height. The rule applies recursively until an element with a pixel height is reached or until the `<html>` element is reached. If the requirement is not met, the computed height of the Splitter falls back to `auto` and the widget collapses, depending on its content.
 
 You have to also remove the border of the Splitter. Elements that are 100% high cannot have borders, margins, paddings, and sibling elements. In a nested Splitter, the inner Splitters remove their borders automatically given that each Splitter is a direct child of a parent pane.
 
-## Automatic Resizing to 100% Height
+### Automatic Resizing to 100% Height
 
 In the following example, the outer Splitter has no siblings and has a 100% height style applied. Its parent is the `<body>` element, so it receives a `height:100%` style. This in turn requires the `<html>` element to obtain the same style.
 
@@ -93,7 +122,7 @@ In the following example, the outer Splitter has no siblings and has a 100% heig
 </script>
 ```
 
-## Manual Resizing to Calculated Heights
+### Manual Resizing to Calculated Heights
 
 If the dimensions of the Splitter do not depend directly on the browser viewport size or if the Splitter has visible siblings, using a 100% height for it may not be applicable. In this case, you will need to manually set the height of the [wrapper](/intro/widget-basics/wrapper-element) `<div>` and then call the [`resize`](/web/splitter/overview#resizing-a-splitter-manually) method of the widget.
 

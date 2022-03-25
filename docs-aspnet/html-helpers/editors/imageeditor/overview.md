@@ -86,3 +86,4 @@ The following example demonstrates how to handle ImageEditor events on the clien
 {% endif %}
 * [Using the API of the ImageEditor HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/imageeditor/api)
 * [Server-Side API](/api/imageeditor)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/imageeditor)

@@ -162,9 +162,12 @@ The following example demonstrates the basic configuration of the ComboBox.
 ## Functionality and Features
 
 * [Binding]({% slug htmlhelpers_combobox_databinding_aspnetcore %})
+* [Appearance]({% slug appearance_combobox_aspnetcore %})
 * [Grouping]({% slug htmlhelpers_combobox_grouping_aspnetcore %})
 * [Virtualization]({% slug htmlhelpers_combobox_virtualization_aspnetcore %})
+* [Filtering]({% slug htmlhelpers_combobox_filtering_aspnetcore %})
 * [Templates]({% slug htmlhelpers_combobox_templates_aspnetcore %})
+* [Cascading]({% slug htmlhelpers_combobox_cascading_aspnetcore %})
 * [Accessibility]({% slug accessibility_aspnetcore_combobox %})
 
 ## Events
@@ -206,6 +209,12 @@ The following example demonstrates how to subscribe to events by a handler name.
     function combobox_change() {
         // Handle the change event.
     }
+
+    $(document).ready(function() {
+        var comboBoxWidget = $("#combobox").data("kendoComboBox"); //Get an instance of the ComboBox.
+        comboBoxWidget.value("Item3"); //Set the value of the ComboBox programmatically when the page has finished loading.
+        comboBoxWidget.trigger("change"); //Trigger the "change" event manually (the value() method does not trigger it). Refer to the client-side API for further details.
+    });
     </script>
 ```
 ### Handling by Template Delegate
@@ -239,3 +248,4 @@ The following example demonstrates how to subscribe to events by a template dele
 {% endif %}
 * [Using the API of the ComboBox HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/combobox/api)
 * [Server-Side API](/api/combobox)
+* [Client-Side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/combobox)

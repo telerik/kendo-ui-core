@@ -15,7 +15,6 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         Widget = ui.Widget,
         DataBoundWidget = ui.DataBoundWidget,
-        proxy = $.proxy,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
         LIST_CONTENT = "k-list-content k-virtual-content",
         TABLE_CONTENT = "k-table-body k-table-scroller",
@@ -421,7 +420,7 @@ var __meta__ = { // jshint ignore:line
                     that.value(value);
                 });
             } else {
-                that._refreshHandler = $.proxy(that.refresh, that);
+                that._refreshHandler = that.refresh.bind(that);
             }
 
             that.dataSource = dataSource.bind(CHANGE, that._refreshHandler);
@@ -1065,7 +1064,7 @@ var __meta__ = { // jshint ignore:line
 
         mute: function(callback) {
             this._mute = true;
-            proxy(callback(), this);
+            callback();
             this._mute = false;
         },
 
@@ -1275,7 +1274,7 @@ var __meta__ = { // jshint ignore:line
 
             that._renderItems = that._whenChanged(
                 scrollCallback(content, that._onScroll),
-                syncList(that._reorderList(that._items, $.proxy(render, that)))
+                syncList(that._reorderList(that._items, render.bind(that)))
             );
 
             that._renderItems();
@@ -1485,7 +1484,7 @@ var __meta__ = { // jshint ignore:line
 
             var theValidator = listValidator(options, screenHeight);
 
-            return $.proxy(function(value, force) {
+            return (function(value, force) {
                 var result = this.result,
                     lastScrollTop = this._lastScrollTop;
 
@@ -1497,7 +1496,7 @@ var __meta__ = { // jshint ignore:line
                 this.result = result;
 
                 return result;
-            }, this);
+            }).bind(this);
         },
 
         _whenChanged: function(getter, callback) {
@@ -1517,7 +1516,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
             var length = list.length;
             var currentOffset = -Infinity;
-            reorder = $.proxy(map2(reorder, this.templates), this);
+            reorder = map2(reorder, this.templates).bind(this);
 
             return function(list2, offset, force) {
                 var diff = offset - currentOffset;
@@ -1564,7 +1563,7 @@ var __meta__ = { // jshint ignore:line
             var itemClass = this.options.columns && this.options.columns.length ? TABLE_ITEM : LIST_ITEM;
 
             if (this.options.selectable) {
-                this._selectProxy = $.proxy(this, "_clickHandler");
+                this._selectProxy = this._clickHandler.bind(this);
                 this.element.on(CLICK + VIRTUAL_LIST_NS, "." + itemClass, this._selectProxy);
             }
         },

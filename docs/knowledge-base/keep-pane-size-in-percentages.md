@@ -1,13 +1,43 @@
 ---
-title: Keep Pane Size in Percentage Points
-page_title: Keep Pane Size in Percentage Points | Kendo UI Splitter
+title: Keep the Pane Size of the Splitter in Percentage Points
+page_title: Keep the Pane Size of the Splitter in Percentage Points
 description: "Learn how to keep the Kendo UI Splitter pane sizes in percentages upon user resize."
 slug: howto_keeppanesizepercentages_splitter
+previous_url: /controls/layout/splitter/how-to/keep-pane-size-in-percentages 
+tags: telerik, kendo, jquery, splitter, keep, pane, size, in, percentage, points 
+component: splitter 
+type: how-to
+res_type: kb
 ---
 
-# Keep Pane Size in Percentage Points
+## Environment
 
-The following example demonstrates how to keep the Kendo UI Splitter pane sizes in percentages upon user resizes.
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Splitter for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I keep the Kendo UI Splitter pane sizes in percentages upon user resize?
+
+## Solution
+
+The following example demonstrates how to achieve the desired scenario.
 
 ```dojo
     <div id="splitter" style="height: 400px">

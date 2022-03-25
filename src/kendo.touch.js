@@ -13,7 +13,6 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
-        proxy = $.proxy,
         abs = Math.abs,
         MAX_DOUBLE_TAP_DISTANCE = 20;
 
@@ -48,17 +47,17 @@ var __meta__ = { // jshint ignore:line
                 fastTap: options.fastTap,
                 press: eventProxy("touchstart"),
                 hold: eventProxy("hold"),
-                tap: proxy(that, "_tap"),
+                tap: that._tap.bind(that),
                 gesturestart: gestureEventProxy("gesturestart"),
                 gesturechange: gestureEventProxy("gesturechange"),
                 gestureend: gestureEventProxy("gestureend")
             });
 
             if (options.enableSwipe) {
-                that.events.bind("start", proxy(that, "_swipestart"));
-                that.events.bind("move", proxy(that, "_swipemove"));
+                that.events.bind("start", that._swipestart.bind(that));
+                that.events.bind("move", that._swipemove.bind(that));
             } else {
-                that.events.bind("start", proxy(that, "_dragstart"));
+                that.events.bind("start", that._dragstart.bind(that));
                 that.events.bind("move", eventProxy("drag"));
                 that.events.bind("end", eventProxy("dragend"));
             }

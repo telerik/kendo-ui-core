@@ -24,8 +24,7 @@ var __meta__ = {// jshint ignore:line
         LABELCLASSES = "k-label k-input-label",
         STATEDISABLED = "k-disabled",
         NOCLICKCLASS = "k-no-click",
-        ARIA_DISABLED = "aria-disabled",
-        proxy = $.proxy;
+        ARIA_DISABLED = "aria-disabled";
 
     var TextBox = Widget.extend({
         init: function (element, options) {
@@ -160,9 +159,9 @@ var __meta__ = {// jshint ignore:line
                 wrapper.removeClass(STATEDISABLED)
                         .removeClass(NOCLICKCLASS);
 
-                element.on("focusin" + NS, proxy(that._focusin, that));
-                element.on("focusout" + NS, proxy(that._focusout, that));
-                element.on("change" + NS, proxy(that._change, that));
+                element.on("focusin" + NS, that._focusin.bind(that));
+                element.on("focusout" + NS, that._focusout.bind(that));
+                element.on("change" + NS, that._change.bind(that));
             } else {
                 element.attr(DISABLED, disable)
                        .attr(READONLY, readonly)

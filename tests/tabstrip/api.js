@@ -15,13 +15,11 @@
         if (argsCheck) {
             isRaised = !!e.contentElement;
             argsCheck = false;
-        } else
-            isRaised = true;
+        } else { isRaised = true; }
     }
 
     function Activate(e) {
-        if ($(e.contentElement).is(":visible"))
-            isActivateRaised = true;
+        if ($(e.contentElement).is(":visible")) { isActivateRaised = true; }
     }
 
 
@@ -150,6 +148,7 @@
             });
 
         });
+
         afterEach(function() {
             jasmine.clock().uninstall();
 
@@ -183,7 +182,6 @@
         });
 
         it('trigger input select should not bubble', function() {
-
             isRaised = false;
 
             var tabstrip = getTabStrip();
@@ -208,7 +206,6 @@
         });
 
         it('clicking should raise onSelect event', function() {
-
             var item = getRootItem(2);
 
             isRaised = false;
@@ -497,7 +494,7 @@
                 tabStrip.tabGroup.children("[data-animating]").removeAttr("data-animating");
                 tabStrip.contentAnimators.filter(".k-state-active").each(function() {
                     $(this).removeClass("k-state-active");
-                })
+                });
 
                 tabStrip.activateTab(tabStrip.tabGroup.children("li:first-child"));
                 jasmine.clock().tick();
@@ -530,7 +527,7 @@
                 tabStrip.tabGroup.children("[data-animating]").removeAttr("data-animating");
                 tabStrip.contentAnimators.filter(".k-state-active").each(function() {
                     $(this).removeClass("k-state-active");
-                })
+                });
 
                 tabStrip.activateTab(tabStrip.tabGroup.children("li:last-child"));
                 jasmine.clock().tick();

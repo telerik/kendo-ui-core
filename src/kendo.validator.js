@@ -39,7 +39,7 @@ var __meta__ = { // jshint ignore:line
         VALIDATE = "validate",
         CHANGE = "change",
         VALIDATE_INPUT = "validateInput",
-        proxy = $.proxy,
+
         patternMatcher = function(value, pattern) {
             if (typeof pattern === "string") {
                 pattern = new RegExp('^(?:' + pattern + ')$');
@@ -337,7 +337,7 @@ var __meta__ = { // jshint ignore:line
             var that = this;
 
             if (that.element.is(FORM)) {
-                that.element.on("submit" + NS, proxy(that._submit, that));
+                that.element.on("submit" + NS, that._submit.bind(that));
             }
 
             if (that.options.validateOnBlur) {
@@ -731,7 +731,7 @@ var __meta__ = { // jshint ignore:line
             container.addClass([VALIDATIONSUMMARY, MESSAGEBOX].join(" "));
             container.attr("role", "alert");
 
-            container.on("click" + NS, proxy(that._summaryClick, that));
+            container.on("click" + NS, that._summaryClick.bind(that));
 
             return container;
         },

@@ -3,6 +3,7 @@ title: Add Auto-Resizing Splitter
 page_title: Add Auto-Resizing Splitter | Kendo UI Window
 description: "Learn how to add a Splitter that resizes automatically along with the Kendo UI Window."
 slug: howto_addautoresizingsplitter_window
+previous_url: /controls/layout/splitter/how-to/add-auto-resizing-splitter-to-window
 ---
 
 # Add Auto-Resizing Splitter

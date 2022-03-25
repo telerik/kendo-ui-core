@@ -67,7 +67,7 @@
                 colors = colors.split(",");
             }
 
-            if ($.isArray(colors)) {
+            if (Array.isArray(colors)) {
                 colors = $.map(colors, function(x) { return parseColor(x); });
             }
 

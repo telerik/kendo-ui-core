@@ -8,8 +8,9 @@
         if (argsCheck) {
             isRaised = !!e.contentElement;
             argsCheck = false;
-        } else
+        } else {
             isRaised = true;
+        }
     }
 
     var tabstrip;

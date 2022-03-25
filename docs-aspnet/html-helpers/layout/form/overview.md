@@ -187,7 +187,7 @@ The following example demonstrates a basic configuration for the Form and how to
 
 {% if site.core %}
 
-# Events
+## Events
 
 You can subscribe to all events of the Form component.
 

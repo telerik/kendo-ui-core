@@ -19,7 +19,6 @@ var __meta__ = { // jshint ignore:line
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
-        proxy = $.proxy,
         extend = $.extend,
         setTimeout = window.setTimeout,
         CLICK = "click",
@@ -287,7 +286,7 @@ var __meta__ = { // jshint ignore:line
                 attachDelay = !isNaN(allowHideAfter) && allowHideAfter > 0;
 
             function attachClick(target) {
-                target.on(CLICK + NS, proxy(that._hideStatic, that, wrapper));
+                target.on(CLICK + NS, that._hideStatic.bind(that, wrapper));
             }
 
             if (options.hideOnClick) {

@@ -60,6 +60,22 @@
             pager.page(1);
             assert.equal(element.find(".k-widget.k-dropdown").attr("aria-label"), "Page sizes drop down");
         });
+
+        it("when navigatable is not enabled prev/next buttons don't have aria-describedby", function() {
+            var element = setup(null, { pageSizes: [1, 2], buttonCount: 2 });
+            pager.page(1);
+            var ariaFound = false;
+            var buttons = element.find("> a");
+
+            buttons.each(function () {
+                var button = $(this);
+                if (button.attr("aria-describedby")) {
+                    ariaFound=true;
+                }
+            })
+
+            assert.isNotOk(ariaFound);
+        });
     });
 
     describe("kendo.ui.Pager Axe", function() {

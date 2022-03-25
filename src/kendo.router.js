@@ -239,7 +239,7 @@ var __meta__ = { // jshint ignore:line
                 locations: [current]
             });
 
-            adapter.change($.proxy(this, "_checkUrl"));
+            adapter.change(this._checkUrl.bind(this));
         },
 
         createAdapter:function(options) {

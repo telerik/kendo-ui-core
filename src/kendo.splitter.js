@@ -15,7 +15,6 @@ var __meta__ = { // jshint ignore:line
         ui = kendo.ui,
         keys = kendo.keys,
         extend = $.extend,
-        proxy = $.proxy,
         Widget = ui.Widget,
         pxUnitsRegex = /^\d+(\.\d+)?px$/i,
         percentageUnitsRegex = /^\d+(\.\d+)?%$/i,
@@ -137,7 +136,7 @@ var __meta__ = { // jshint ignore:line
             // do not use delegated events to increase performance of nested elements
             that.element
                 .children(".k-splitbar-draggable-" + orientation)
-                    .on("keydown" + NS, proxy(that._keydown, that))
+                    .on("keydown" + NS, that._keydown.bind(that))
                     .on("mousedown" + NS, function(e) { e.currentTarget.focus(); })
                     .on("focus" + NS, function(e) { $(e.currentTarget).addClass(FOCUSED);  })
                     .on("blur" + NS, function(e) { $(e.currentTarget).removeClass(FOCUSED);
@@ -147,16 +146,16 @@ var __meta__ = { // jshint ignore:line
                     })
                     .on(MOUSEENTER + NS, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                     .on(MOUSELEAVE + NS, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                    .on("mousedown" + NS, proxy(that._addOverlays, that))
+                    .on("mousedown" + NS, that._addOverlays.bind(that))
                 .end()
                 .children(".k-splitbar")
-                    .on("dblclick" + NS, proxy(that._togglePane, that))
+                    .on("dblclick" + NS, that._togglePane.bind(that))
                     .children(".k-collapse-next, .k-collapse-prev").on(CLICK + NS, that._arrowClick(COLLAPSE)).end()
                     .children(".k-expand-next, .k-expand-prev").on(CLICK + NS, that._arrowClick(EXPAND)).end()
                 .end();
 
-            $(window).on("resize" + NS + that._marker, proxy(that.resize, that, false));
-            $(document).on("mouseup" + NS + that._marker, proxy(that._removeOverlays, that));
+            $(window).on("resize" + NS + that._marker, that.resize.bind(that, false));
+            $(document).on("mouseup" + NS + that._marker, that._removeOverlays.bind(that));
         },
 
         _detachEvents: function() {
@@ -690,12 +689,12 @@ var __meta__ = { // jshint ignore:line
         that._resizable = new kendo.ui.Resizable(splitter.element, {
             orientation: orientation,
             handle: ".k-splitbar-draggable-" + orientation + "[data-marker=" + splitter._marker + "]",
-            hint: proxy(that._createHint, that),
-            start: proxy(that._start, that),
-            max: proxy(that._max, that),
-            min: proxy(that._min, that),
+            hint: that._createHint.bind(that),
+            start: that._start.bind(that),
+            max: that._max.bind(that),
+            min: that._min.bind(that),
             invalidClass:"k-restricted-size-" + orientation,
-            resizeend: proxy(that._stop, that)
+            resizeend: that._stop.bind(that)
         });
     }
 
