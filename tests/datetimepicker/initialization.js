@@ -31,8 +31,8 @@
 
             var date = icons.eq(0);
             var time = icons.eq(1);
-            assert.isOk(date.hasClass("k-select k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
-            assert.isOk(time.hasClass("k-select k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
+            assert.isOk(date.hasClass("k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
+            assert.isOk(time.hasClass("k-input-button k-button k-button-md k-button-solid k-button-solid-base k-icon-button"));
 
 
             assert.equal(date.attr("tabindex"), "-1");

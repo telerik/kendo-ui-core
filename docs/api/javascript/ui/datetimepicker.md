@@ -710,7 +710,7 @@ Sets a value controlling size of the component. Can also be set to the following
 ## Fields
 
 ### options `Object`
-An object, which holds the options of the widget.
+An object, which holds the [`configuration options`](/api/javascript/ui/datetimepicker#configuration) of the widget.
 
 #### Example - get options of the widget
 
@@ -721,7 +721,7 @@ An object, which holds the options of the widget.
     var datetimepicker = $("#datetimepicker").data("datetimepicker");
 
     var options = datetimepicker.options;
-    <script>
+    </script>
 
 ## Methods
 

@@ -1,11 +1,41 @@
 ---
 title: Handle Unique Identifiers with Menu Items
-page_title: Handle Unique Identifiers with Menu Items | Kendo UI Menu
-description: "Learn how to handle unique identifiers with Kendo UI Menu items."
+page_title: Handle Unique Identifiers with Menu Items 
+description: "Learn how to handle unique identifiers with Kendo UI for jQuery Menu items."
 slug: howto_handleuniqueidentifiers_menu
+previous_url: /controls/navigation/menu/how-to/handle-unique-identifiers
+tags: telerik, kendo, jquery, menu, handle, unique, identifiers, with, items
+component: menu
+type: how-to
+res_type: kb
 ---
 
-# Handle Unique Identifiers with Menu Items
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Menu for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I handle unique identifiers with Kendo UI for jQuery Menu items?
+
+## Solution
 
 Commonly, you are required to handle custom identifiers with click handlers or, as in this case, by using the [`select`](/api/javascript/ui/menu/events/select) event.
 
@@ -20,7 +50,7 @@ In this way, you can programmatically:
 
 The following examples demonstrate how to handle a custom command attribute to accomplish specific application requirements such as the ones mentioned in the previous list.
 
-## Bound with JSON Data
+### Bound with JSON Data
 
 
 
@@ -69,7 +99,7 @@ The following examples demonstrate how to handle a custom command attribute to a
 </script>
 ```
 
-## Created with HTML Elements
+### Created with HTML Elements
 
 
 
@@ -112,4 +142,3 @@ The following examples demonstrate how to handle a custom command attribute to a
 * [How to Create Split Button]({% slug howto_createa_split_button_menu %})
 * [How to Use FontAwesome Icons]({% slug howto_use_fontawesome_icons_menu %})
 
-For more runnable examples on the Kendo UI Menu, browse the [**How To** documentation folder]({% slug howto_showcontextmenuintreelist_menu %}).

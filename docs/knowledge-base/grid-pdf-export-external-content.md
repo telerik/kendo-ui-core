@@ -285,3 +285,5 @@ I am working on a multiple grid export to PDF which needs a custom template.
       </style>
     </div>
 ```
+
+Additionally, you can change the appearance of the PDF output as it appears in the browser while you draw the DOM elements by using CSS rules that apply only to the PDF output. More information about this you can find in [this documentation article](/framework/drawing/pdf-output/custom-appearance).

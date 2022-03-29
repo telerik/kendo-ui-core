@@ -2,7 +2,7 @@
 title: Show DropDownList Item Details in ToolTip
 page_title: Show DropDownList Item Details in ToolTip
 description: "Learn how to show details for Kendo UI DropDownList items by using a Kendo UI Tooltip."
-previous_url: /controls/editors/dropdownlist/how-to/show-tooltip-for-items, /controls/editors/dropdownlist/how-to/appearance/show-tooltip-for-items
+previous_url: /controls/editors/dropdownlist/how-to/show-tooltip-for-items, /controls/editors/dropdownlist/how-to/appearance/show-tooltip-for-items, /controls/layout/tooltip/how-to/kendoui-tooltip-in-dropdownlist
 slug: howto_show_list_items_details_in_tooltip_dropdownlist
 tags: telerik, kendo, jquery, dropdownlist, show, item, details, in, tooltip
 component: dropdownlist
@@ -44,9 +44,11 @@ The following example demonstrates how to customize the information displayed in
 
 
 ```dojo
-<input id="dropdownlist" />
+<input id="dropdownlist" style="width:300px" />
 <script>
   var ddl = $("#dropdownlist").kendoDropDownList({
+    width:300,
+    size:"small",
     dataSource: {
       transport: {
         read: {
@@ -60,7 +62,7 @@ The following example demonstrates how to customize the information displayed in
   }).data('kendoDropDownList');
 
   $('body').kendoTooltip({
-    filter: 'li.k-item',
+    filter: 'li.k-list-item',
     position: 'right',
     content: function(e){
       var item = ddl.dataItem($(e.target));

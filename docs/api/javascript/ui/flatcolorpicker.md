@@ -230,6 +230,7 @@ Allows customization of "Apply" / "Cancel" labels.
     </script>
 
 ### messages.apply `String`
+
 Allows customization of "Apply" label.
 
 #### Example
@@ -245,6 +246,7 @@ Allows customization of "Apply" label.
     </script>
 
 ### messages.cancel `String`
+
 Allows customization of "Cancel" label.
 
 #### Example
@@ -298,6 +300,7 @@ Allows customization of the rgb's green input's aria-label in the Gradient's inp
 ### messages.blue `String` *(default: "Blue")*
 
 Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
+
 ### messages.alpha `String` *(default: "Alpha")*
 
 Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.

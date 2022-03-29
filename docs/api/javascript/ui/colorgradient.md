@@ -148,6 +148,7 @@ Allows customization of the rgb's green input's aria-label in the Gradient's inp
 ### messages.blue `String` *(default: "Blue")*
 
 Allows customization of the rgb's blue input's aria-label in the Gradient's input editor.
+
 ### messages.alpha `String` *(default: "Alpha")*
 
 Allows customization of the rgb's alpha input's aria-label in the Gradient's input editor.

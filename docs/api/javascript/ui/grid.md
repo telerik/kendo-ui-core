@@ -855,19 +855,23 @@ The JavaScript function executed when the cell/row is about to be opened for edi
 
     <div id="grid"></div>
     <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        {
-          field: "salary",
-		      editable: function (dataItem) {
-              return dataItem.name === "Jane";
+      $("#grid").kendoGrid({
+        columns: [
+          { field: "name",
+           editable: function (dataItem) {
+             return dataItem.name === "Jane"; // Name editor is created only if dataItem name is Jane
+           }
+          },
+          {
+            field: "salary",
+            editable: function (dataItem) {
+              return dataItem.name === "Jane"; // Salary editor is created only if dataItem name is Jane
+            }
           }
-        }
-      ],
-      editable: true,
-      dataSource: [ { name: "Jane", salary: 2000 }, { name: "Bill", salary: 2000 } ]
-    });
+        ],
+        editable: true,
+        dataSource: [ { name: "Jane", salary: 2000 }, { name: "Bill", salary: 2000 } ]
+      });
     </script>
 
 ### columns.editor `Function`
@@ -2677,7 +2681,9 @@ so the two should not be used at the same time.
 
 If set to `true` the grid will render a select column with checkboxes in each cell, thus enabling multi-row selection. The header checkbox allows users to select/deselect all the rows on the current page. The [`change`](/api/javascript/ui/grid/events/change) event is fired when a row is selected.
 
-#### Example - disable sorting
+More about the Grid Selection feature you can find in [this documentation article](/controls/data-management/grid/selection).
+
+#### Example - enable multi-row selection by adding a select column with checkboxes
 
     <div id="grid"></div>
     <script>

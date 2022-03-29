@@ -1,18 +1,45 @@
 ---
-title: Initialize the Grid
-page_title: Initialize the Grid | Kendo UI Window
-description: "Learn how to initialize a Kendo UI Grid inside a Kendo UI Window widget by resizing it according to the dimensions of its container."
+title: Initialize the Grid in the Window
+page_title: Initialize the Grid in the Window
+description: "Learn how to initialize a Kendo UI for jQuery Grid inside a Kendo UI Window widget by resizing it according to the dimensions of its container."
 slug: initialize_thegrid_window_widget
+previous_url: /controls/layout/window/how-to/initiliaze-grid-in-window
+tags: telerik, kendo, jquery, window, initialize, the, grid
+component: window
+type: how-to
+res_type: kb
 ---
 
-# Initialize the Grid
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI Window for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I initialize the Kendo UI for jQuery Grid in a Kendo UI for jQuery Window?
+
+## Solution
 
 The example below demonstrates how to use the `activate` event when initializing the Grid within the Window so as it is resized according to the dimensions of its container.
 
-> **Important**
->
-> In addition to the Kendo UI Window, this example can be applied to the TabStrip and PanelBar widgets, which, too, act as hidden containers for the Grid.
-
+>In addition to the Kendo UI Window, this example can be applied to the TabStrip and PanelBar widgets, which, too, act as hidden containers for the Grid.
 
 
 ```dojo
@@ -64,4 +91,4 @@ The example below demonstrates how to use the `activate` event when initializing
 * [How to Display Loading Indicator over Window]({% slug howto_displayloadingindicator_overwindow_window %})
 * [How to Use Custom Action Icons]({% slug howto_customactionicons_window %})
 
-For more runnable examples on the Kendo UI Window, browse the [**How To** documentation folder]({% slug howto_usemvvmbinding_forwindowdataediting_mvvm_window %}).
+

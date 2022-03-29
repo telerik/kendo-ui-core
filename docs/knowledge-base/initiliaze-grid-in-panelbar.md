@@ -1,15 +1,45 @@
 ---
 title: Initialize a Grid in the PanelBar
-page_title: Initialize a Grid in the PanelBar | Kendo UI PanelBar
+page_title: Initialize a Grid in the PanelBar
 description: "Learn how to initialize the Grid inside the Kendo UI PanelBar by resizing it according to the dimensions of its container."
 slug: initialize_thegrid_panelbar_widget
+previous_url: /controls/navigation/panelbar/how-to/initiliaze-grid-in-panelbar
+tags: telerik, kendo, jquery, panelbar, initialize, grid
+component: panelbar
+type: how-to
+res_type: kb
 ---
 
-# Initialize a Grid in the PanelBar
+## Environment
+
+<table>
+ <tr>
+  <td>Product</td>
+  <td>Progress Kendo UI PanelBar for jQuery</td>
+ </tr>
+ <tr>
+  <td>Operating System</td>
+  <td>Windows 10 64bit</td>
+ </tr>
+ <tr>
+  <td>Visual Studio version</td>
+  <td>Visual Studio 2017</td>
+ </tr>
+ <tr>
+  <td>Preferred Language</td>
+  <td>JavaScript</td>
+ </tr>
+</table>
+
+## Description
+
+How can I initialize the Grid inside the Kendo UI PanelBar by resizing it according to the dimensions of its container?
+
+## Solution
 
 The following example demonstrates how to use the `activate` event when initializing the Grid within the PanelBar so as it is resized according to the dimensions of its container.
 
-> In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid.
+>In addition to the Kendo UI PanelBar, this example can be applied to the TabStrip and Window widgets, which, too, act as hidden containers for the Grid.
 
 ```dojo
     <body>

@@ -139,12 +139,13 @@ var __meta__ = { // jshint ignore:line
                 object.parent = parent;
 
                 object.bind(CHANGE, function(e) {
+                    var isGroup = object.hasOwnProperty("hasSubgroups");
                     that.trigger(CHANGE, {
                         field: e.field,
                         node: e.node,
                         index: e.index,
                         items: e.items || [this],
-                        action: e.node ? (e.action || "itemloaded") : "itemchange"
+                        action: e.node || isGroup ? (e.action || "itemloaded") : "itemchange"
                     });
                 });
             }
@@ -4098,10 +4099,10 @@ var __meta__ = { // jshint ignore:line
                 var group = data[idx];
                 if (group.hasSubgroups) {
                     this._clearEmptyGroups(group.items);
-                } else {
-                    if (group.items && !group.items.length) {
-                        splice.apply(group.parent(), [idx, 1]);
-                    }
+                }
+                
+                if (group.items && !group.items.length) {
+                    splice.apply(group.parent(), [idx, 1]);
                 }
             }
         },
