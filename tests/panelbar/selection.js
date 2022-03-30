@@ -2,9 +2,8 @@
     var panelbar;
     var ul;
 
-    describe("panelbar selection", function () {
+    describe("panelbar selection", function() {
         beforeEach(function() {
-
 
             Mocha.fixture.append(
                 '<ul id="panelbar">' +
@@ -107,26 +106,26 @@
             panelbar.destroy();
         });
 
-    function getRootItem(index) {
-        return ul.find('.k-header').parent().eq(index)
-    }
+        function getRootItem(index) {
+            return ul.find('.k-header').parent().eq(index);
+        }
 
-    it('clicking root items selects them', function() {
-        var firstLink = getRootItem(0).find('> .k-link');
+        it('clicking root items selects them', function() {
+            var firstLink = getRootItem(0).find('> .k-link');
 
-        firstLink.trigger({ type: 'click' });
+            firstLink.trigger({ type: 'click' });
 
-        assert.isOk(firstLink.hasClass('k-state-selected'));
-    });
+            assert.isOk(firstLink.hasClass('k-state-selected'));
+        });
 
-    it('selecting root items deselects their siblings', function() {
-        var firstLink = getRootItem(0).find('> .k-link');
-        var secondLink = getRootItem(1).find('> .k-link');
+        it('selecting root items deselects their siblings', function() {
+            var firstLink = getRootItem(0).find('> .k-link');
+            var secondLink = getRootItem(1).find('> .k-link');
 
-        firstLink.trigger({ type: 'click' });
-        secondLink.trigger({ type: 'click' });
+            firstLink.trigger({ type: 'click' });
+            secondLink.trigger({ type: 'click' });
 
-        assert.equal(ul.find('.k-state-selected').length, 1);
-    });
+            assert.equal(ul.find('.k-state-selected').length, 1);
+        });
     });
 }());

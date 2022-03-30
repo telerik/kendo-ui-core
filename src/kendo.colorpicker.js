@@ -82,7 +82,7 @@ var __meta__ = { // jshint ignore:line
             }
             that._value = options.value = value;
 
-            var _buttonHtml = kendo.html.renderButton('<button class="k-select k-button-rectangle k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, that.options, {
+            var _buttonHtml = kendo.html.renderButton('<button class="k-select k-input-button" unselectable="on" aria-label="select" tabindex="-1"></button>', $.extend({}, that.options, {
                 icon: "arrow-s"
             }));
 

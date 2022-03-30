@@ -47,7 +47,7 @@ The following example demonstrates how to implement [a custom MVVM binding]({% s
             <input data-role="maskedtextbox"
                    data-bind="value: phoneNumber, mask: mask"
                    style="width: 200px">
-            <button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base"  data-bind="click: changeMask"><span class="k-button-text">Change mask</span></button>
+            <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base"  data-bind="click: changeMask"><span class="k-button-text">Change mask</span></button>
         </div>
     </div>
     <script>

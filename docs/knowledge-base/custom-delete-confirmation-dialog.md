@@ -44,8 +44,8 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
 <script type="text/x-kendo-template" id="windowTemplate">
     <p> Delete <strong>#= ProductName #</strong> ? </p>
     <p> We have #= UnitsInStock # units in stock. </p>
-    <button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" id="yesButton"><span class="k-button-text">Yes</span></button>
-    <button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">No</span></button>
+    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="yesButton"><span class="k-button-text">Yes</span></button>
+    <button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">No</span></button>
 </script>
 
 <script>
@@ -112,7 +112,7 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
             { field: "Discontinued"},
             { command: [
                 {name: "edit"},
-                {name: "Delete",  
+                {name: "Delete",
                     click: function(e){  //add a click event listener on the delete button
                         e.preventDefault(); //prevent page scroll reset
                         var tr = $(e.target).closest("tr"); //get the row for deletion
@@ -128,7 +128,7 @@ To achieve this behavior, use the Kendo UI templates, the Window, and the `remov
                         $("#noButton").click(function(){
                             window.close();
                         })
-                    }                              
+                    }
                 }
                 ]}],
             editable: {

@@ -2,7 +2,7 @@
     var panelbar;
     var ul;
 
-    describe('panelbar single expand api', function () {
+    describe('panelbar single expand api', function() {
         beforeEach(function() {
 
 
@@ -107,26 +107,26 @@
             panelbar.destroy();
         });
 
-    function getRootItem(index) {
-        return ul.find('.k-header').parent().eq(index)
-    }
+        function getRootItem(index) {
+            return ul.find('.k-header').parent().eq(index);
+        }
 
-    it('expand should collapse other opened items', function() {
-        var item = getRootItem(0);
-        var item2 = getRootItem(2);
+        it('expand should collapse other opened items', function() {
+            var item = getRootItem(0);
+            var item2 = getRootItem(2);
 
-        panelbar.expand(item2);
+            panelbar.expand(item2);
 
-        assert.equal(item.find('> .k-group').css("display"), "none");
-    });
+            assert.equal(item.find('> .k-group').css("display"), "none");
+        });
 
-    it('expand should not collapse item which is already expanded', function() {
-        var item = getRootItem(2);
+        it('expand should not collapse item which is already expanded', function() {
+            var item = getRootItem(2);
 
-        panelbar.expand(item);
-        panelbar.expand(item);
+            panelbar.expand(item);
+            panelbar.expand(item);
 
-        assert.equal(item.find('> .k-group').css("display"), "block");
-    });
+            assert.equal(item.find('> .k-group').css("display"), "block");
+        });
     });
 }());

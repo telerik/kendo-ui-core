@@ -10,6 +10,12 @@ position: 1
 
 This article lists the breaking or important changes in the 2022 releases of {{ site.product }}.
 
+## {{ site.product }} R1 2022 SP2
+
+**Button**
+
+As of the 2022 R1 SP2 release the `Shape` configuration option of the Button component is no longer available. The Button height is determined by the specified `Size` and font-size, while the width depends on the `Size`, font-size, and text length.
+
 ## {{ site.product }} R1 2022 SP1
 
 **Scheduler**

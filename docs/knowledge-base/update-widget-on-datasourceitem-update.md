@@ -80,8 +80,8 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
                 <dd>#:Discontinued#</dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#"><span class="k-icon k-i-delete"></span></a>
         </div>
         </div>
       </script>
@@ -110,8 +110,8 @@ To re-render the widget, manually trigger the `change` event of the `dataSource`
                 <dd><input type="checkbox" class="k-checkbox k-checkbox-md k-rounded-md" name="Discontinued" data-bind="checked:Discontinued"></dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-icon-button k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-icon-button k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-icon-button k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-icon-button k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
         </div>
         </div>
       </script>

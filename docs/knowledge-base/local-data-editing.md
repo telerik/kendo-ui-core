@@ -43,11 +43,11 @@ You need this functionality because assigning a non-default `id` value for the n
 
 ```dojo
 
-    <script>       
+    <script>
 
-      function localDataSource(options) {   
+      function localDataSource(options) {
         var id =  options.schema.model.id;
-        var data = options.data;               
+        var data = options.data;
         var newId = -1;
         var created, updated, deleted;
 
@@ -58,7 +58,7 @@ You need this functionality because assigning a non-default `id` value for the n
               updated = {};
               deleted = {};
 
-              e.success(data || []);                
+              e.success(data || []);
             },
 
             update: function(e) {
@@ -79,7 +79,7 @@ You need this functionality because assigning a non-default `id` value for the n
               e.success();
             },
             create: function(e) {
-              var item = e.data;                  
+              var item = e.data;
               item[id] = newId--;
               created[item[id]] = $.extend(true, {}, item);
 
@@ -173,7 +173,7 @@ You need this functionality because assigning a non-default `id` value for the n
             this.set("shapes", diagram.dataSource.getChanges());
             this.set("connections", diagram.connectionsDataSource.getChanges());
             this.set("visible", true);
-          },            
+          },
           shapes: {
             deleted: [],
             created: [],
@@ -257,9 +257,9 @@ You need this functionality because assigning a non-default `id` value for the n
       }
     </script>
 
-    <div id="diagram"></div>        
+    <div id="diagram"></div>
     <div id="changes">
-      <button type="button" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" data-bind="click:showChanges"><span class="k-button-text">Show changes</span></button>
+      <button type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" data-bind="click:showChanges"><span class="k-button-text">Show changes</span></button>
       <div data-bind="visible:visible">
         Deleted Shapes:
         <div data-bind="source: shapes.deleted" data-template="shapeItemTemplate">

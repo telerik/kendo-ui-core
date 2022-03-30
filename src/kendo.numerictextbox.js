@@ -531,7 +531,9 @@ var __meta__ = { // jshint ignore:line
             text = inputs.first();
 
             if (text.length < 2) {
-                text = $('<input type="text"/>').insertBefore(element);
+                text = $('<input type="text"/>')
+                        .attr(kendo.attr("validate"), false)
+                        .insertBefore(element);
             }
 
             try {

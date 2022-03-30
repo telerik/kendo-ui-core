@@ -106,7 +106,7 @@
         });
 
         function getRootItem(index) {
-            return ul.children().eq(index)
+            return ul.children().eq(index);
         }
 
         it("clicking collapsed item not expand if it is disabled", function() {

@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 (function() {
     var isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
     var PanelBar = kendo.ui.PanelBar;

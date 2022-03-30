@@ -77,7 +77,7 @@ The code comments contain tips for the suggested implementation. For more inform
 
 	<br /><br />
 
-	<button id="save" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">Validate</span></button>
+	<button id="save" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" id="noButton"><span class="k-button-text">Validate</span></button>
 
 </form>
 

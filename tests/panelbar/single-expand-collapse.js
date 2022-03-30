@@ -179,7 +179,7 @@
         });
 
         function getRootItem(index) {
-            return ul.find('.k-header').parent().eq(index)
+            return ul.find('.k-header').parent().eq(index);
         }
 
         it('clicking not expandable item should not collapse expanded item', function() {

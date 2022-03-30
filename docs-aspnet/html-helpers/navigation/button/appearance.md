@@ -20,32 +20,10 @@ For a complete example, refer to the [Appearance Demo of the Button](https://dem
 
 The Button HtmlHelper provides the following methods for styling:
 
-- [`Shape()`](#shape)—specifies the type of the Button shape.
 - [`Size()`](#size)—configures the overall size of the component.
 - [`ThemeColor()`](#themecolor)—configures what color will be applied to the component.
 - [`FillMode()`](#fillmode)—defines how the color is applied to the Button.
 - [`Rounded()`](#rounded)—determines the border radius of the component.
-
-### Shape
-
-By default, the Button has a rectangular shape. The `Shape()` method allows you to change the default shape to `Square`. 
-
-```HtmlHelper
-@(Html.Kendo().Button()
-    .Name("textButton")
-    .Shape(ComponentShape.Square)
-    .HtmlAttributes( new {type = "button"} )
-    .Content("Text Button")
-)
-```
-{% if site.core %}
-```TagHelper
-<kendo-button name="textButton"
-              shape="ComponentShape.Square">
-    Text Button
-</kendo-button>
-```
-{% endif %}
 
 ### Size
 
@@ -105,15 +83,15 @@ The following options are available for the `FillMode` configuration:
 The `ThemeColor` configuration provides a variety of colors that can be applied to the Button. The available options are:
 
 - `Base`
-- `Primary` 
-- `Secondary` 
-- `Tertiary` 
-- `Info` 
-- `Success` 
-- `Warning` 
-- `Error` 
+- `Primary`
+- `Secondary`
+- `Tertiary`
+- `Info`
+- `Success`
+- `Warning`
+- `Error`
 - `Dark`
-- `Light` 
+- `Light`
 - `Inverse`
 
 The default `ThemeColor` is `Base`.
@@ -166,7 +144,7 @@ The following values are available for the `Rounded` option:
 
 ## Old vs New Rendering
 
-The old rendering of the component consisted of a `button` element with a single class named `k-button`. The `k-button` held all the styling information related to the Button component. 
+The old rendering of the component consisted of a `button` element with a single class named `k-button`. The `k-button` held all the styling information related to the Button component.
 
 ```html
  <!-- OLD -->
@@ -177,7 +155,7 @@ Currently, styles are split in multiple class names. Each class is scoped to a s
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" >
+<button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >
 </button>
 ```
 
@@ -187,12 +165,12 @@ The `k-primary` class is substituted with the appropriate `ThemeColor` class. Fo
 
 ```html
  <!-- OLD -->
-<button class="k-button k-primary">        
+<button class="k-button k-primary">
         Primary Button
 </button>
 
 <!-- NEW -->
-<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-primary">
+<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">
         Primary Button
 </button>
 ```
@@ -203,12 +181,12 @@ The `k-flat` class is substituted with the appropriate `FillMode` and `ThemeColo
 
 ```html
  <!-- OLD -->
-<button class="k-button k-primary">        
+<button class="k-button k-primary">
         Flat Button
 </button>
 
 <!-- NEW -->
-<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-flat k-button-flat-base">
+<button class="k-button k-button-md k-rounded-md k-button-flat k-button-flat-base">
         Flat Button
 </button>
 ```
@@ -230,12 +208,12 @@ With the old rendering, the `k-button-icon` class was used for the Buttons with 
 ```
 
 ```NEW
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
 
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base k-icon-button">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-icon-button">
     <span class="k-button-icon k-icon k-i-folder"></span>
 </button>
 ```

@@ -16,7 +16,7 @@ For more details on the decision behind the new rendering, visit the [Components
 
 ## Old vs New Rendering
 
-In the old rendering the `k-button` was used to style an element to look like a Button component. Applying `k-button` class to an HTML element was enough to style a native element like the Button component. 
+In the old rendering the `k-button` was used to style an element to look like a Button component. Applying `k-button` class to an HTML element was enough to style a native element like the Button component.
 
 ```html
  <!-- OLD -->
@@ -27,7 +27,7 @@ In the current rendering, we use multiple classes. Each class is responsible for
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" >
+<button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >
 </button>
 ```
 
@@ -49,12 +49,12 @@ In the old rendering, the `k-button-icon` class was used for the buttons with ic
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
 
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base k-icon-button">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-icon-button">
     <span class="k-button-icon k-icon k-i-folder"></span>
 </button>
 ```

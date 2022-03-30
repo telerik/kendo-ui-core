@@ -66,7 +66,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/combob
 - `lg`—large border radius
 - `full`—ellipse-like border radius
 
-The default value is `medium` and it is applied to the `span.k-combobox` wrapping element through the `k-rounded-md` class. 
+The default value is `medium` and it is applied to the `span.k-combobox` wrapping element through the `k-rounded-md` class.
 
 The example below shows a basic ComboBox configuration and how to set `rounded` to "full":
 
@@ -82,7 +82,7 @@ The changes are applied to the `span.k-combobox` wrapping element:
 
 ```html
 <span class="k-combobox k-input k-rounded-full">
-    ...    
+    ...
 </span>
 ```
 
@@ -112,7 +112,7 @@ The changes are applied to the `span.k-combobox` wrapping element:
 
 ```html
 <span class="k-combobox k-input k-input-outline">
-    ...    
+    ...
 </span>
 ```
 
@@ -148,7 +148,7 @@ The old rendering of the component consisted of several wrapping elements:
   </span>
   ```
 
-- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the dropdown arrow icon. 
+- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the dropdown arrow icon.
 
   ```html
   <span class="k-icon k-i-arrow-60-down">
@@ -183,14 +183,14 @@ The new rendering of the component consists of a wrapping `span` element that co
   <span class="k-icon k-i-arrow-s k-button-icon"></span>
   ```
 
-Below you will find the differences between the old and the new rendering. 
+Below you will find the differences between the old and the new rendering.
 
 Wrapper Rendering:
 
 ```html
 <!-- OLD WRAPPER-->
 <span class="k-widget k-combobox">
-    <input id="combobox" type="text" class="k-input" placeholder="...">      
+    <input id="combobox" type="text" class="k-input" placeholder="...">
 </span>
 
 <!-- NEW WRAPPER -->
@@ -210,8 +210,8 @@ Popup rendering without virtualization:
       <ul class="k-list k-reset">
         <li class="k-item">Patricio Simpson</li>
         ...
-        <li class="k-item k-first"> 
-            Ann Devon 
+        <li class="k-item k-first">
+            Ann Devon
             <div class="k-group">UK</div>
         </li>
         ...
@@ -220,7 +220,7 @@ Popup rendering without virtualization:
     <div class="k-nodata">
       <div>No Data!</div>
     </div>
-    <div class="k-footer"> 
+    <div class="k-footer">
       [Footer template]
     </div>
 </div>
@@ -306,7 +306,7 @@ Popup rendering with virtualization:
                 ...
                 <li class="k-list-item k-first">
                     <span class="k-list-item-text">
-                        Ernst Handel, Austria 
+                        Ernst Handel, Austria
                     </span>
                     <div class="k-list-item-group-label">Austria</div>
                 </li>

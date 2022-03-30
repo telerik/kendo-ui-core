@@ -108,7 +108,7 @@ The `Rounded.Medium` value is reflected through the `k-rounded-md` class applied
 
 ```html
 <span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-solid k-input-lg k-rounded-md">
-    ...   
+    ...
 </span>
 ```
 
@@ -267,7 +267,7 @@ New Wrapper Rendering:
     <span class="k-clear-value k-hidden" title="clear" role="button" tabindex="-1">
         <span class="k-icon k-i-x"></span>
     </span>
-    <button class="k-select k-input-button k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base k-icon-button">
+    <button class="k-select k-input-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
 </span>

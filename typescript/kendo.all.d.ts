@@ -2577,7 +2577,6 @@ declare namespace kendo.ui {
         iconClass?: string | undefined;
         imageUrl?: string | undefined;
         rounded?: string | undefined;
-        shape?: string | undefined;
         size?: string | undefined;
         spriteCssClass?: string | undefined;
         themeColor?: string | undefined;
@@ -12108,7 +12107,7 @@ declare namespace kendo.ui {
         pageX?: number | undefined;
         pageY?: number | undefined;
         status?: string | undefined;
-        setStatus?: Function | undefined; 
+        setStatus?: Function | undefined;
     }
 
     interface TreeListDragendEvent extends TreeListEvent {

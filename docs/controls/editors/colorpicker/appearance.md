@@ -3,7 +3,7 @@ title: Appearance
 page_title: jQuery ColorPicker Documentation | Appearance
 description: "Learn how to apply different styling options to the ColorPicker widget."
 slug: appearance_kendoui_colorpicker_widget
-position: 5 
+position: 5
 ---
 
 # Appearance
@@ -66,7 +66,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/colorp
 - `lg`—large border radius
 - `full`—ellipse-like border radius
 
-The default value is `medium` and it is applied to the `span.k-colorpicker` wrapping element through the `k-rounded-md` class. 
+The default value is `medium` and it is applied to the `span.k-colorpicker` wrapping element through the `k-rounded-md` class.
 
 The example below shows a basic ColorPicker configuration and how to set `rounded` to "full":
 
@@ -82,7 +82,7 @@ The changes are applied to the `span.k-colorpicker` wrapping element:
 
 ```html
 <span class="k-colorpicker k-picker k-rounded-full">
-    ...    
+    ...
 </span>
 ```
 
@@ -112,7 +112,7 @@ The changes are applied to the `span.k-colorpicker` wrapping element:
 
 ```html
 <span class="k-colorpicker k-input k-input-outline">
-    ...    
+    ...
 </span>
 ```
 
@@ -133,12 +133,12 @@ The old rendering of the component consisted of several wrapping elements:
   <span class="k-picker-wrap">
   </span>
   ```
-  
+
 - The `span` element containing infromation about the selected color in the ColorPicker. This element is a child of the `k-picker-wrap` span.
 ```html
   <!-- no tool icon -->
   <span class="k-selected-color" ></span>
-  
+
   <!-- with tool icon -->
   <span class="k-icon k-tool-icon k-i-foreground-color">
 	<span class="k-selected-color"></span>
@@ -153,7 +153,7 @@ The old rendering of the component consisted of several wrapping elements:
   </span>
   ```
 
-- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the colorpicker dropdown icon icon. 
+- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the colorpicker dropdown icon icon.
 
   ```html
   <span class="k-icon k-i-arrow-s">
@@ -165,7 +165,7 @@ The following example demonstrates the full version of the old rendering:
 <div role="textbox" aria-haspopup="true" class="k-colorpicker" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
     <!-- no tool icon -->
     <span class="k-picker-wrap">
-        <span class="k-selected-color k-no-color" style="background-color: rgb(255, 255, 255);"></span> 
+        <span class="k-selected-color k-no-color" style="background-color: rgb(255, 255, 255);"></span>
 		<!-- k-no-color is added when value is null -->
         <span role="button" class="k-select" unselectable="on" aria-label="select">
             <span class="k-icon k-i-arrow-s"></span>
@@ -194,8 +194,8 @@ The following example demonstrates the full version of the old rendering:
         <span class="k-coloreditor-preview-color k-color-preview k-no-color" style="background-color: rgba(0,0,0, 0.5)">
         </span>
         <span class="k-coloreditor-current-color k-color-preview k-no-color" style="background-color: rgba(0,0,0, 0.5)">
-        </span>                        
-     </div> 
+        </span>
+     </div>
     ...
 </div>
 ```
@@ -208,8 +208,8 @@ The new rendering of the component consists of a single wrapping `span` element 
   <span class="k-colorpicker k-picker k-icon-picker k-picker-solid k-picker-md k-rounded-md">
   </span>
   ```
-  
-- The inner span element with the `k-input-inner` class renders the color preview of the ColorPicker  
+
+- The inner span element with the `k-input-inner` class renders the color preview of the ColorPicker
 
   ```html
   <span class="k-input-inner" ></span>
@@ -229,7 +229,7 @@ The following example demonstrates the new rendering:
 <span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker k-picker-{fillMode} k-picker-{size} k-rounded-{rounded}" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
     <span class="k-input-inner">
 
-        <!-- no tool icon --> 
+        <!-- no tool icon -->
         <span class="k-value-icon k-color-preview  k-no-color">
             <!-- k-no-color is added when value is null -->
             <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
@@ -237,13 +237,13 @@ The following example demonstrates the new rendering:
 
 
         <!-- with tool icon -->
-         <span class="k-value-icon k-color-preview k-icon-color-preview k-no-color"> 
+         <span class="k-value-icon k-color-preview k-icon-color-preview k-no-color">
              <!-- k-no-color is added when value is null -->
              <span class="k-color-preview-icon k-icon k-i-edit-tools {toolIcon}"></span>
              <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
-         </span> 
+         </span>
     </span>
-    <button class="k-select k-button-rectangle k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
+    <button class="k-select k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
     <input id="colorpicker" data-role="colorpicker" style="display: none;">
@@ -256,13 +256,13 @@ The following example demonstrates the new rendering:
     ...
     <div class="k-coloreditor-preview k-vstack">
         <!-- k-no-color is added when value is null -->
-        <span class="k-coloreditor-preview-color k-color-preview k-no-color"> 
+        <span class="k-coloreditor-preview-color k-color-preview k-no-color">
             <span class="k-color-preview-mask" style="background-color: rgba(0,0,0, 0.5)"></span>
         </span>
         <span class="k-coloreditor-current-color k-color-preview k-no-color">
             <span class="k-color-preview-mask" style="background-color: #FF6358;"></span>
-        </span>                        
-     </div> 
+        </span>
+     </div>
  ...
 </div>
 ```
@@ -279,7 +279,7 @@ Previously, a reference to the button element was obtainable through the `k-sele
 $(".k-select") // Returns a reference to the ColorPicker dropdown button element in the old rendering.
 ```
 
-With the new rendering, a reference to the button element can be obtained also through the `k-button` and `k-input-button` classes. 
+With the new rendering, a reference to the button element can be obtained also through the `k-button` and `k-input-button` classes.
 
 ```javascript
 $(".k-button") // Returns a reference to the ColorPicker dropdown button element in the new rendering.
@@ -294,13 +294,13 @@ $(".k-selected-color") // In the old rendering returns a reference to the ColorP
 $(".k-tool-icon") // In the old rendering returns a reference to the ColorPicker color preview element when a toolIcon is configured.
 ```
 
-With the new rendering, a reference to the `span` element containing the color preview can be obtained through the `k-input-inner` class. 
+With the new rendering, a reference to the `span` element containing the color preview can be obtained through the `k-input-inner` class.
 
 ```javascript
 $(".k-input-inner") // Returns a reference to the ColorPicker color preview element in the new rendering.
 ```
 
-With the new rendering, a reference to the `span` element containing the selected color can be obtained through the `k-color-preview-mask` class. 
+With the new rendering, a reference to the `span` element containing the selected color can be obtained through the `k-color-preview-mask` class.
 
 ```javascript
 $(".k-color-preview-mask") // Returns a reference to span element containing the selected color in the new rendering.```

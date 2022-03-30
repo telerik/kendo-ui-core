@@ -8,7 +8,7 @@ position: 9
 
 # Appearance
 
-> As of Kendo UI R1 2022, the jQuery MultiColumnComboBox widget has new rendering and styling options. 
+> As of Kendo UI R1 2022, the jQuery MultiColumnComboBox widget has new rendering and styling options.
 
 In this article, you will find information about the rendering of the Kendo UI MultiColumnComboBox.
 
@@ -102,7 +102,7 @@ The changes are applied to the `span.k-combobox` wrapping element:
 
 ```html
 <span class="k-input k-combobox k-widget k-dropdowngrid k-combobox-clearable k-input-outline k-input-lg k-rounded-md">
-    ...   
+    ...
 </span>
 ```
 
@@ -255,7 +255,7 @@ New Wrapper Rendering:
     <span class="k-clear-value k-hidden" title="clear" role="button" tabindex="-1">
         <span class="k-icon k-i-x"></span>
     </span>
-    <button class="k-select k-input-button k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base k-icon-button">
+    <button class="k-select k-input-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
 </span>

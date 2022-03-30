@@ -45,9 +45,9 @@ Specify the custom editor to the columns object before passing it to the `setOpt
     <script src="https://demos.telerik.com/kendo-ui/content/shared/js/products.js"></script>
 
     <div class="box wide">
-      <button id="save"class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" >Save State
+      <button id="save"class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >Save State
       </button>
-      <button id="load" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" >Load State
+      <button id="load" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >Load State
       </button>
     </div>
 
@@ -110,11 +110,11 @@ Specify the custom editor to the columns object before passing it to the `setOpt
           let filter = parsedOptions.dataSource.filter;
           columns[1].editor = categoryDropDownEditor;
           // Change only the columns options. You can use the same approach for other settings as well.
-          grid.setOptions({ 
+          grid.setOptions({
             columns: columns,
             dataSource: {
               filter: filter
-            }	
+            }
           });
         }
       });

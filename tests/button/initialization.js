@@ -26,7 +26,6 @@
         assert.isOk(button.hasClass("k-rounded-md"));
         assert.isOk(button.hasClass("k-button-solid"));
         assert.isOk(button.hasClass("k-button-solid-base"));
-        assert.isOk(button.hasClass("k-button-rectangle"));
     });
 
     it("Button element applies classes specified in styles options", function() {
@@ -34,15 +33,13 @@
             size: "large",
             rounded: "full",
             fillMode: "link",
-            themeColor: "primary",
-            shape: "square"
+            themeColor: "primary"
         });
 
         assert.isOk(button.hasClass("k-button-lg"));
         assert.isOk(button.hasClass("k-rounded-full"));
         assert.isOk(button.hasClass("k-button-link"));
         assert.isOk(button.hasClass("k-button-link-primary"));
-        assert.isOk(button.hasClass("k-button-square"));
     });
 
     it("Button has inner element with class k-button-text", function() {

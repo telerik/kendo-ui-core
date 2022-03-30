@@ -48,10 +48,10 @@ To achieve this behavior:
 
 ```dojo
 
-    <input type="button" value="Undo" onclick="undoChange(); return false;" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">
-    <input type="button" value="Redo" onclick="redoChange(); return false;" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base">
+    <input type="button" value="Undo" onclick="undoChange(); return false;" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
+    <input type="button" value="Redo" onclick="redoChange(); return false;" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base">
     <div id="diagram" style="height: 400px"></div>
-    <input type="button" class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base" value="Change shape color" onclick="changeShape(); return false;">
+    <input type="button" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-base" value="Change shape color" onclick="changeShape(); return false;">
     <script>
         var diagram = $("#diagram").kendoDiagram({
             shapes: [

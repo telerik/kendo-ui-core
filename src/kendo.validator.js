@@ -412,6 +412,7 @@ var __meta__ = { // jshint ignore:line
                 template = that._errorTemplate,
                 result = that._checkValidity(input),
                 valid = result.valid,
+                widgetInstance,
                 className = "." + INVALIDMSG,
                 fieldName = (input.attr(NAME) || ""),
                 lbl = that._findMessageContainer(fieldName).add(input.next(className).filter(function() {
@@ -445,7 +446,7 @@ var __meta__ = { // jshint ignore:line
                 if (lbl.length !== 0) {
                     lbl.replaceWith(messageLabel);
                 } else {
-                    var widgetInstance = kendo.widgetInstance(input);
+                    widgetInstance = kendo.widgetInstance(input);
                     var parentElement = input.parent().get(0);
                     var nextElement = input.next().get(0);
                     var prevElement = input.prev().get(0);
@@ -490,16 +491,13 @@ var __meta__ = { // jshint ignore:line
                 this.trigger(VALIDATE_INPUT, { valid: valid, input: input, error: messageText, field: fieldName });
             }
 
-            if (isInputInner && inputWrapper.length) {
-                inputWrapper.toggleClass(INVALIDINPUT, !valid);
-                inputWrapper.toggleClass(VALIDINPUT, valid);
+            widgetInstance = kendo.widgetInstance(input);
+            if (!widgetInstance || !(widgetInstance._inputWrapper || widgetInstance.wrapper)) {
+                input.toggleClass(INVALIDINPUT, !valid);
+                input.toggleClass(VALIDINPUT, valid);
             }
 
-            input.toggleClass(INVALIDINPUT, !valid);
-            input.toggleClass(VALIDINPUT, valid);
-
-
-            if (kendo.widgetInstance(input)) {
+            if (widgetInstance) {
                 var widget = kendo.widgetInstance(input);
                 var inputWrap = widget._inputWrapper || widget.wrapper;
                 var inputLabel = widget._inputLabel;

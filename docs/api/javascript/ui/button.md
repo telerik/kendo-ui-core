@@ -215,19 +215,6 @@ Controls what border radius is applied to a button. Valid values are: `"small"`,
         });
     </script>
 
-### shape `String` *(default: 'rectangle')*
-
-Controls if the button is square or not. Valid values are: `"rectangle"`, `"square"`, and `null`. Default value is `"rectangle"`.
-
-#### Example
-
-    <button id="button" type="button">Cancel</button>
-    <script>
-        $("#button").kendoButton({
-            shape: "square"
-        });
-    </script>
-
 ### size `String` *(default: 'medium')*
 
 Controls the overall physical size of a button. Valid values are:  `"small"`, `"medium"`, `"large"`, and `null`. Default value is `"medium"`.

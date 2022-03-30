@@ -79,7 +79,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/dropdo
 - `lg`—large border radius
 - `full`—ellipse-like border radius
 
-The default value is `full` and it is applied to the wrapping `span.k-dropdowntree` element that contains the whole HTML through the `k-rounded-full` class. 
+The default value is `full` and it is applied to the wrapping `span.k-dropdowntree` element that contains the whole HTML through the `k-rounded-full` class.
 
 The example below shows a basic DropDownTree configuration and how to set `rounded` to "medium":
 
@@ -200,7 +200,7 @@ New Single Selection Rendering:
         class="k-icon k-i-x"></span>
     </span>
     <button unselectable="on"
-        class="k-select k-input-button k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base k-icon-button"
+        class="k-select k-input-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button"
         aria-label="select"><span class="k-icon k-i-arrow-60-down k-button-icon"></span>
     </button>
     <input id="dropdowntree" data-role="dropdowntree" style="display: none;">
@@ -246,7 +246,7 @@ New Multiple Selection rendering:
 </span>
 ```
 
-With the previous versions, when the filtering was enabled, the search icon in the DropDownTree popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side. 
+With the previous versions, when the filtering was enabled, the search icon in the DropDownTree popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side.
 ## Visual Backwards Compatibility
 
 In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.

@@ -1787,14 +1787,25 @@
             assert.isNotOk(textbox._inputLabel.hasClass("k-error-text"));
         });
 
+        it("validator does not set invalid class to inner element", function() {
+            var form = $('<form><textarea required ></textarea></form>');
+            var validator = setup(form);
+            var textarea = form.find("textarea").kendoTextArea({
+            }).data("kendoTextArea");
+
+            validator.validate();
+            assert.isNotOk(textarea.element.hasClass("k-invalid"));
+            assert.isOk(textarea.wrapper.hasClass("k-invalid"));
+        });
+
         it("reset clears invalid NumericTextBox label color", function() {
             var form = $('<form><input required /></form>');
             var validator = setup(form);
             var textbox = form.find("input").kendoNumericTextBox({
                 label: "text"
             }).data("kendoNumericTextBox");
-
             validator.validate();
+            assert.isNotOk(textbox._text.hasClass("k-valid"));
             assert.isOk(textbox._inputLabel.hasClass("k-text-error"));
 
             validator.reset();

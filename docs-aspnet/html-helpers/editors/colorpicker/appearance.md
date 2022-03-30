@@ -98,7 +98,7 @@ The following example demonstrates how to set `FillMode` in the declaration of t
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-input-solid` class.
 
 ```html
-<span class="k-colorpicker k-input k-input-solid">   
+<span class="k-colorpicker k-input k-input-solid">
 </span>
 ```
 
@@ -111,7 +111,7 @@ Old Rendering:
 <div role="textbox" aria-haspopup="true" class="k-colorpicker" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
     <!-- no tool icon -->
     <span class="k-picker-wrap">
-        <span class="k-selected-color k-no-color" style="background-color: rgb(255, 255, 255);"></span> 
+        <span class="k-selected-color k-no-color" style="background-color: rgb(255, 255, 255);"></span>
 		<!-- k-no-color is added when value is null -->
         <span role="button" class="k-select" unselectable="on" aria-label="select">
             <span class="k-icon k-i-arrow-s"></span>
@@ -140,8 +140,8 @@ Old Rendering:
         <span class="k-coloreditor-preview-color k-color-preview k-no-color" style="background-color: rgba(0,0,0, 0.5)">
         </span>
         <span class="k-coloreditor-current-color k-color-preview k-no-color" style="background-color: rgba(0,0,0, 0.5)">
-        </span>                        
-     </div> 
+        </span>
+     </div>
     ...
 </div>
 New Rendering:
@@ -149,7 +149,7 @@ New Rendering:
 <span role="textbox" aria-haspopup="true" class="k-colorpicker k-picker k-icon-picker k-picker-{fillMode} k-picker-{size} k-rounded-{rounded}" aria-disabled="false" tabindex="0" aria-label="Current selected color is ">
     <span class="k-input-inner">
 
-        <!-- no tool icon --> 
+        <!-- no tool icon -->
         <span class="k-value-icon k-color-preview  k-no-color">
             <!-- k-no-color is added when value is null -->
             <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
@@ -157,13 +157,13 @@ New Rendering:
 
 
         <!-- with tool icon -->
-         <span class="k-value-icon k-color-preview k-icon-color-preview k-no-color"> 
+         <span class="k-value-icon k-color-preview k-icon-color-preview k-no-color">
              <!-- k-no-color is added when value is null -->
              <span class="k-color-preview-icon k-icon k-i-edit-tools {toolIcon}"></span>
              <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
-         </span> 
+         </span>
     </span>
-    <button class="k-select k-button-rectangle k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
+    <button class="k-select k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
     <input id="colorpicker" data-role="colorpicker" style="display: none;">
@@ -176,13 +176,13 @@ New Rendering:
     ...
     <div class="k-coloreditor-preview k-vstack">
         <!-- k-no-color is added when value is null -->
-        <span class="k-coloreditor-preview-color k-color-preview k-no-color"> 
+        <span class="k-coloreditor-preview-color k-color-preview k-no-color">
             <span class="k-color-preview-mask" style="background-color: rgba(0,0,0, 0.5)"></span>
         </span>
         <span class="k-coloreditor-current-color k-color-preview k-no-color">
             <span class="k-color-preview-mask" style="background-color: #FF6358;"></span>
-        </span>                        
-     </div> 
+        </span>
+     </div>
  ...
 </div>
 

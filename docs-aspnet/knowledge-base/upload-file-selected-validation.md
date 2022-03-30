@@ -31,7 +31,7 @@ component: upload
 
 ## Description
 
-How can I validate if a file is selected for upload when working with the {{ site.product }} Upload?  
+How can I validate if a file is selected for upload when working with the {{ site.product }} Upload?
 
 ## Solution
 
@@ -67,7 +67,7 @@ How can I validate if a file is selected for upload when working with the {{ sit
             )
        )
        <span class="k-invalid-msg" data-for="files"></span>
-       <input type="submit" id="submitForm" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" />
+       <input type="submit" id="submitForm" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" />
     </form>
 ```
 **Validate** on form submission whilst preventing the default behavior.
@@ -113,15 +113,15 @@ For the complete example, refer to the following [Telerik REPL](https://netcorer
                     if (input.attr('name') == "files") {
                         var uploadControl = $("#files").data("kendoUpload");
                         var uploadedFiled = uploadControl.getFiles();
-    
+
                         return uploadedFiled.length > 0;
                     }
-    
+
                     return true;
                   }
                 }
             }).data("kendoValidator");
-    
+
         $(document).ready(function () {
             $("#submitForm").on("click", function (e) {
                 e.preventDefault();

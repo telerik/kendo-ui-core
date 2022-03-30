@@ -20,28 +20,10 @@ For a live example, visit the [Styling Demo of the Button](https://demos.telerik
 
 The Kendo UI Button supports the following styling options:
 
-- [`shape`](#shape)—configures the shape of the component.
 - [`size`](#size)—configures the overall size of the component.
 - [`themeColor`](#themecolor)—configures what color will be applied to the component.
 - [`fillMode`](#fillmode)—configures how the color is applied to the component.
 - [`rounded`](#rounded)—configures the border radius of the component.
-
-
-### Shape
-
-The `square` option controls if the Button has square shape or not. The structure of the class is `k-button-{shape}`.
-
-The following values are available for the [`shape`](/api/javascript/ui/button/configuration/shape) option:
-
-- `rectangle`
-- `square`
-
-By default, the Button will have a rectangular shape. The default shape will be applied to the button element through the `k-button-rectangle` class.
-
-```html
-<button class="k-button k-button-rectangle" >
-</button>
-```
 
 ### Size
 
@@ -85,15 +67,15 @@ The `themeColor` option controls the color that will be applied to the rendered 
 The following values are available for the [`themeColor`](/api/javascript/ui/button/configuration/themecolor) option:
 
 - `base`
-- `primary` 
-- `secondary` 
-- `tertiary` 
-- `info` 
-- `success` 
-- `warning` 
-- `error` 
+- `primary`
+- `secondary`
+- `tertiary`
+- `info`
+- `success`
+- `warning`
+- `error`
 - `dark`
-- `light` 
+- `light`
 - `inverse`
 
 The default `themeColor` value is `base`. A button with default `fillMode` and `themeColor` will have `k-button-solid-base` class applied.
@@ -134,7 +116,7 @@ The default rounded value is `medium` and it is applied to the button element th
 
 ## Old vs New Rendering
 
-The old rendering of the component consisted of a `button` element with a single class named `k-button`. The `k-button` held all the styling information related to the Button component. 
+The old rendering of the component consisted of a `button` element with a single class named `k-button`. The `k-button` held all the styling information related to the Button component.
 
 ```html
  <!-- OLD -->
@@ -145,7 +127,7 @@ Currently, styles are split in multiple class names. Each class is scoped to a s
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" >
+<button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >
 </button>
 ```
 
@@ -155,11 +137,11 @@ The `k-primary` class is substituted with the appropriate `themeColor` class. Fo
 
 ```html
  <!-- OLD -->
-<button class="k-button k-primary">        
+<button class="k-button k-primary">
         Primary Button
 </button>
 
-<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-primary">
+<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">
         Primary Button
 </button>
 ```
@@ -170,11 +152,11 @@ The `k-flat` class is substituted with the appropriate `fillMode` and `themeColo
 
 ```html
  <!-- OLD -->
-<button class="k-button k-primary">        
+<button class="k-button k-primary">
         Flat Button
 </button>
 
-<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-flat k-button-flat-base">
+<button class="k-button k-button-md k-rounded-md k-button-flat k-button-flat-base">
         Flat Button
 </button>
 ```
@@ -199,12 +181,12 @@ With the old rendering, the `k-button-icon` class was used for the Buttons with 
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
 
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base k-icon-button">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-icon-button">
     <span class="k-button-icon k-icon k-i-folder"></span>
 </button>
 ```

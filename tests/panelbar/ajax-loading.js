@@ -39,14 +39,14 @@
             $.mockjax({
                 url: "ajax-view-one.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
             $.mockjax({
                 url: "ajax-view-two.html",
                 response: function() {
-                    this.responseText = "<p>This content was loaded via ajax ().</p>"
+                    this.responseText = "<p>This content was loaded via ajax ().</p>";
                 }
             });
 
@@ -71,7 +71,7 @@
             var children = ul.find("li:last").children();
 
             assert.equal(children.filter("a").length, 1);
-            assert.equal(children.filter("span").length, 0)
+            assert.equal(children.filter("span").length, 0);
         });
 
         it("clicking collapsed content items should expand them", function(done) {

@@ -7,7 +7,7 @@ slug: button_styling
 
 # Button Styling
 
-In this article, you will find information about how to style HTML elements so that to achieve the same appearance as Kendo Button. 
+In this article, you will find information about how to style HTML elements so that to achieve the same appearance as Kendo Button.
 
 > As of Kendo UI R1 2022, the Kendo Button uses brand new rendering.
 
@@ -16,7 +16,7 @@ For additional information regarding the decision behind these changes, visit th
 
 ## Old vs New Rendering
 
-With the old rendering the `k-button` held all the styling information related to the button styling. Applying `k-button` class to an HTML element was enough to style a native element and to achieve the same appearance as Kendo Button. 
+With the old rendering the `k-button` held all the styling information related to the button styling. Applying `k-button` class to an HTML element was enough to style a native element and to achieve the same appearance as Kendo Button.
 
 ```html
  <!-- OLD -->
@@ -27,40 +27,40 @@ Currently, styles are split in multiple class names. Each class is scoped to a s
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" >
+<button class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" >
 </button>
 ```
 
 ### Primary Button
 
-With the old rendering, the `k-primary` class was used in order to style a button as primary. With the new rendering the `k-primary` class is substituted with the appropriate `themeColor` class. 
-The example below demonstrates how a `button` element can be styled in order to achieve a primary button appearance. 
+With the old rendering, the `k-primary` class was used in order to style a button as primary. With the new rendering the `k-primary` class is substituted with the appropriate `themeColor` class.
+The example below demonstrates how a `button` element can be styled in order to achieve a primary button appearance.
 
 ```html
  <!-- OLD -->
-<button class="k-button k-primary">        
+<button class="k-button k-primary">
         Primary Button
 </button>
 
  <!-- NEW -->
-<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-primary">
+<button class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary">
         Primary Button
 </button>
 ```
 
 ### Flat Button
 
-The `k-flat` class is substituted with the appropriate `fillMode` and `themeColor` classes. 
-The example below demonstrates how a `button` element can be styled in order to achieve a flat button appearance. 
+The `k-flat` class is substituted with the appropriate `fillMode` and `themeColor` classes.
+The example below demonstrates how a `button` element can be styled in order to achieve a flat button appearance.
 
 ```html
  <!-- OLD -->
-<button class="k-button k-flat">        
+<button class="k-button k-flat">
         Flat Button
 </button>
 
  <!-- NEW -->
-<button class="k-button k-button-md k-button-rectangle k-rounded-md k-button-flat k-button-flat-base">
+<button class="k-button k-button-md k-rounded-md k-button-flat k-button-flat-base">
         Flat Button
 </button>
 ```
@@ -87,12 +87,12 @@ The example below demonstrates the new rendering:
 
 ```html
 <!-- NEW -->
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
 
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base k-icon-button">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base k-icon-button">
     <span class="k-button-icon k-icon k-i-folder"></span>
 </button>
 ```

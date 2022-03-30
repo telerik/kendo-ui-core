@@ -8,7 +8,7 @@ position: 0
 
 # Components Rendering Overview
 
-The R1 2022 release introduces new rendering for several components. In the long run, we will make similar rendering improvements to most of the UI components in the suite. These are breaking changes that affect both the SASS and the LESS-based themes. 
+The R1 2022 release introduces new rendering for several components. In the long run, we will make similar rendering improvements to most of the UI components in the suite. These are breaking changes that affect both the SASS and the LESS-based themes.
 
 > Larger visual updates like these can have implications in the form of visual regressions, which could appear when upgrading from an older version to R1 2022. While we believe that we have caught and resolved many visual regression issues while getting ready for R1 2022, there may be additional issues discovered after the release. We are firmly committed to address these issues as quickly as possible and will continue to push out updates with fixes to our themes and components after the R1 2022 release.
 
@@ -24,7 +24,7 @@ The R1 2022 release introduces new rendering for several components. In the long
 
 The new rendering gives developers more flexibility when customizing the look-and-feel of our components. The Kendo UI themes support several common options on a component level, which allow customizing the appearance of the component. This helps to avoid the need of manually overriding the CSS styles of a component.
 
-The feedback we have received from our customers shows that they need an easier way of modifying the appearance of the components. Many of our customers prefer to customize the default themes, so that the components match the look and feel of the application they are used in. The new rendering aims to ease the customization of the components and to allow developers to implement any design requirements with less work. 
+The feedback we have received from our customers shows that they need an easier way of modifying the appearance of the components. Many of our customers prefer to customize the default themes, so that the components match the look and feel of the application they are used in. The new rendering aims to ease the customization of the components and to allow developers to implement any design requirements with less work.
 
 ## Styling Options
 
@@ -40,7 +40,7 @@ The new rendering of the components supports several common options on a compone
 - [`Rounded`](#rounded)
 - [`FillMode`](#fill-mode)
 
-Each component has its own appearance documentation article with information about the supported options and their values. 
+Each component has its own appearance documentation article with information about the supported options and their values.
 
 For a list of all the updated components and their respective articles, see the [Updated Components](#updated-components) section.
 
@@ -90,19 +90,13 @@ For more information about the available `Size` values, visit the [Appearance do
 
 ### Shape
 
-The `Shape` property controls the shape of the component. The structure of the CSS class is `k-{component}-{shape}`. 
+The `Shape` property controls the shape of the component. The structure of the CSS class is `k-{component}-{shape}`.
 
-The following example shows a Button with a `Square` value set to its `Shape` option:
+The following example shows a Badge with `rectangle` shape:
 
 ```html
-<button type="button" class="k-button k-button-square">
-    <span class="k-button-text">Text</span>
-</button>
+<span class="k-badge k-badge-solid k-badge-primary k-badge-md k-badge-rectangle k-badge-inline">2</span>
 ```
-
-The following image demonstrates the appearance of a Button, with different `Shape` values applied:
-
-![Shape Option Image](images/shape-option.png)
 
 For more information about the available `Shape` option values, visit the [Appearance documentation](#updated-components) of the respective component.
 
@@ -134,7 +128,7 @@ For more information about the available `Rounded` option values, visit the [App
 
 ### Fill Mode
 
-The `FillMode` property controls how the color is applied to the component. The structure of the CSS class is `k-{component}-{fillMode}`. 
+The `FillMode` property controls how the color is applied to the component. The structure of the CSS class is `k-{component}-{fillMode}`.
 
 The following example shows a Button with a `Solid` fill mode:
 
@@ -152,7 +146,7 @@ For more information about the available `FillMode` option values, visit the [Ap
 
 ### Overriding Default Component Options
 
-The styling options that come with the new rendering can be set globally. 
+The styling options that come with the new rendering can be set globally.
 
 The following example shows how to set the size option of the Button to `large`. The default size of the Button is `medium`.
 
@@ -162,7 +156,7 @@ The following example shows how to set the size option of the Button to `large`.
 </script>
 ```
 
-To apply this override to all Buttons in your application, add the script after the `kendo.all.min.js` script reference in the Layout. If you want the override to be applied only to the Buttons on a specific page, add the script at the beginning of the respective view. 
+To apply this override to all Buttons in your application, add the script after the `kendo.all.min.js` script reference in the Layout. If you want the override to be applied only to the Buttons on a specific page, add the script at the beginning of the respective view.
 
 ## State Classes
 
@@ -221,7 +215,7 @@ Visit the [LESS Migration]({% slug less_themes_migration %}) help article for ad
 
 ### How Do I Know If I Am Using a LESS Theme?
 
-The easiest way to verify whether you are using the LESS themes, is to check if you have multiple Kendo CSS files referenced, specifically files that use the following naming convention: 
+The easiest way to verify whether you are using the LESS themes, is to check if you have multiple Kendo CSS files referenced, specifically files that use the following naming convention:
 
 - kendo.common.min.css
 - kendo.[theme-name].min.css
@@ -256,7 +250,7 @@ Example of the old Button rendering:
 Example of the new Button rendering:
 
 ```html
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
@@ -264,7 +258,7 @@ Example of the new Button rendering:
 
 As demonstrated in the examples above, the `k-button-icontext` class is no longer present in the button element. Any custom CSS rules that use the `k-button-icontext` class as a selector will no longer have the expected effect. You need to find the CSS rules that use non-existing classes in your code, and update their selectors with one of the new classes.
 
-### How Can I Update the Reference to Target the Element In the New Rendering? 
+### How Can I Update the Reference to Target the Element In the New Rendering?
 
 The easiest way to solve the [issue with missing classes](#how-do-i-know-if-i-have-overriden-a-class-name) is to update the selectors of the CSS rules that target a  specific element.
 

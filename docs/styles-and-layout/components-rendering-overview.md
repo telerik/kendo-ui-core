@@ -46,7 +46,7 @@ The new rendering of the components supports several common options on a compone
 - [`rounded`](#rounded)
 - [`fillMode`](#fill-mode)
 
-Each component has its own appearance documentation with information about all of the supported options and their values. 
+Each component has its own appearance documentation with information about all of the supported options and their values.
 
 For a list of all updated components and their respective articles, check the [Updated Components](#updated-components) section.
 
@@ -57,15 +57,15 @@ The `themeColor` property controls which color is used to style the specific com
 The following values are available for the `themeColor` option:
 
 - `base`
-- `primary` 
-- `secondary` 
-- `tertiary` 
-- `info` 
-- `success` 
-- `warning` 
-- `error` 
+- `primary`
+- `secondary`
+- `tertiary`
+- `info`
+- `success`
+- `warning`
+- `error`
 - `dark`
-- `light` 
+- `light`
 - `inverse`
 
 The following example shows a Kendo UI Button with `solid` fill mode and `base` theme color:
@@ -108,19 +108,13 @@ For more information regarding the available `size` values, visit the [appearanc
 
 ### Shape
 
-The `shape` property controls the shape of the component. The structure of the CSS class is `k-{component}-{shape}`. 
+The `shape` property controls the shape of the component. The structure of the CSS class is `k-{component}-{shape}`.
 
-The following example shows a Kendo UI Button with a `square` shape:
+The following example shows a Kendo UI Badge with a `rectangle` shape:
 
 ```html
-<button type="button" class="k-button k-button-square">
-    <span class="k-button-text">Text</span>
-</button>
+<span class="k-badge k-badge-solid k-badge-primary k-badge-md k-badge-rectangle k-badge-inline">2</span>
 ```
-
-The following image showcases the result of applying the different `shape` values to a button:
-
-![Shape Option Image](images/shape-option.png)
 
 For more information regarding the available `shape` values, visit the [appearance documentation](#updated-components) of the corresponding component.
 
@@ -153,7 +147,7 @@ For more information regarding the available `rounded` values, visit the [appear
 
 ### Fill Mode
 
-The `fillMode` property controls how the color is applied to the component. The structure of the CSS class is `k-{component}-{fillMode}`. 
+The `fillMode` property controls how the color is applied to the component. The structure of the CSS class is `k-{component}-{fillMode}`.
 
 The following example shows a Kendo UI Button with a `solid` fill mode:
 
@@ -273,7 +267,7 @@ Visit the [LESS Migration]({% slug less_themes_migration %}) help article for ad
 
 ### How Do I Know If I Am Using a LESS Theme?
 
-The easiest way to know if you are using the LESS themes is if you are including multiple CSS files, specifically files that follow the following naming pattern: 
+The easiest way to know if you are using the LESS themes is if you are including multiple CSS files, specifically files that follow the following naming pattern:
 
 - kendo.common.min.css
 - kendo.[theme-name].min.css
@@ -308,7 +302,7 @@ Example of the old Kendo UI Button rendering:
 Example of the new Kendo UI Button rendering:
 
 ```html
-<button class="k-button k-button-solid k-button-md k-button-rectangle k-rounded-md k-button-solid-base">
+<button class="k-button k-button-solid k-button-md k-rounded-md k-button-solid-base">
     <span class="k-button-icon k-icon k-i-folder"></span>
     <span class="k-button-text">Button</span>
 </button>
@@ -316,7 +310,7 @@ Example of the new Kendo UI Button rendering:
 
 As demonstrated in the examples above, the `k-button-icontext` class is no longer present on the button element. Any custom styling that has been applied through the specified class will be gone. In order to update the custom styling, you need to find the CSS rule in your code which uses a non-existing class and replace it with one of the new classes.
 
-### How Can I Update the Reference to Target the Element In the New Rendering? 
+### How Can I Update the Reference to Target the Element In the New Rendering?
 
 The easiest way to solve the [issue with missing classes](#how-do-i-know-if-i-have-overriden-a-class-name) is to change the name of the class selector that is targeting the specific element.
 

@@ -10,6 +10,12 @@ position: 0
 
 This article lists the breaking or important changes in the 2022 releases of Kendo UI.
 
+## Kendo UI R1 2022 SP2
+
+**Button**
+
+As of the 2022 R1 SP2 release the `shape` configuration option of the Button component is no longer available. The Button height is determined by the specified `size` and font-size, while the width depends on the `size`, font-size, and text length.
+
 ## Kendo UI 2022 R1 SP1
 
 **Scheduler**

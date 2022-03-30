@@ -234,7 +234,7 @@ New Single Selection Rendering:
         class="k-icon k-i-x"></span>
     </span>
     <button unselectable="on"
-        class="k-select k-input-button k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base k-icon-button"
+        class="k-select k-input-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button"
         aria-label="select"><span class="k-icon k-i-arrow-60-down k-button-icon"></span>
     </button>
     <input id="dropdowntree" data-role="dropdowntree" style="display: none;">

@@ -39,7 +39,7 @@ Use the [`addRow`](/api/javascript/ui/grid/methods/addrow) and [`removeRow`](/ap
 1. Use the `columns.template` property to add a custom button to the column.
 
     ````dojo
-    { template: "<button class='k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"}
+    { template: "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"}
     ````
 
 1. Apply the [`editRow`](/api/javascript/ui/grid/methods/editrow) method by passing the row for which the button was clicked as an argument.
@@ -110,8 +110,8 @@ Use the [`addRow`](/api/javascript/ui/grid/methods/addrow) and [`removeRow`](/ap
                 "ProductName",
                 { field: "UnitPrice", title: "Unit Price", format: "{0:c}"},
                 { field: "UnitsInStock", title:"Units In Stock"},
-                { template: "<button class='k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"},
-                { template: "<button class='k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base customDelete'><span class='k-button-text'>My Delete</span></button>", title:"Custom Delete"},
+                { template: "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base customEdit'><span class='k-button-text'>My Edit</span></button>", title:"Custom Edit"},
+                { template: "<button class='k-button k-button-md k-rounded-md k-button-solid k-button-solid-base customDelete'><span class='k-button-text'>My Delete</span></button>", title:"Custom Delete"},
                 { field: "Discontinued", width: "120px" },
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }]
             });

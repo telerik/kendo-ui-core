@@ -138,7 +138,7 @@ The following example demonstrates how to set `Rounded` in the declaration of th
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
 ```html
-<span class="k-dropdown k-picker k-rounded-md"> 
+<span class="k-dropdown k-picker k-rounded-md">
 </span>
 ```
 
@@ -234,7 +234,7 @@ The old rendering of the component consisted of several wrapping elements:
   </span>
   ```
 
-- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the dropdown arrow icon. 
+- The icon `span` element with the `k-icon` class. This element is a child of the `k-select` span and renders the dropdown arrow icon.
 
   ```html
   <span class="k-icon k-i-arrow-60-down">
@@ -273,10 +273,10 @@ The new rendering of the component consists of a single wrapping `span` element 
 
 ```html
  <input id="products" data-role="dropdownlist">
-```  
+```
 
-With the previous versions, when the filtering was enabled, the search icon in the DropDownList popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side. 
- 
+With the previous versions, when the filtering was enabled, the search icon in the DropDownList popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side.
+
 The examples below demonstrate the full version of the old and new rendering:
 
 Wrapper Rendering:
@@ -284,7 +284,7 @@ Wrapper Rendering:
 ```html
 <!-- OLD WRAPPER-->
 <span class="k-widget k-dropdown">
-    <input id="dropdownlist" type="text" class="k-input" placeholder="...">      
+    <input id="dropdownlist" type="text" class="k-input" placeholder="...">
 </span>
 
 <!-- NEW WRAPPER -->
@@ -292,7 +292,7 @@ Wrapper Rendering:
     <span class="k-input-inner">
         <span class="k-input-value-text">Patricio Simpson</span>
     </span>
-    <button class="k-select k-input-button k-button k-button-md k-button-rectangle k-rounded-md k-button-solid k-button-solid-base k-icon-button">
+    <button class="k-select k-input-button k-button k-button-md k-rounded-md k-button-solid k-button-solid-base k-icon-button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
 </span>
@@ -309,8 +309,8 @@ Popup rendering without virtualization:
       <ul class="k-list k-reset">
         <li class="k-item">Patricio Simpson</li>
         ...
-        <li class="k-item k-first"> 
-            Ann Devon 
+        <li class="k-item k-first">
+            Ann Devon
             <div class="k-group">UK</div>
         </li>
         ...
@@ -319,7 +319,7 @@ Popup rendering without virtualization:
     <div class="k-nodata">
       <div>No Data!</div>
     </div>
-    <div class="k-footer"> 
+    <div class="k-footer">
       [Footer template]
     </div>
 </div>
@@ -405,7 +405,7 @@ Popup rendering with virtualization:
                 ...
                 <li class="k-list-item k-first">
                     <span class="k-list-item-text">
-                        Ernst Handel, Austria 
+                        Ernst Handel, Austria
                     </span>
                     <div class="k-list-item-group-label">Austria</div>
                 </li>
@@ -450,7 +450,7 @@ Previously, a reference to the dropdown button element was obtainable through th
 $(".k-select") // Returns a reference to the calendar button element in the old rendering.
 ```
 
-With the new rendering, a reference to the dropdown button element is obtainable through the `k-button` and `k-input-button` classes. 
+With the new rendering, a reference to the dropdown button element is obtainable through the `k-button` and `k-input-button` classes.
 
 ```javascript
 $(".k-button") // Returns a reference to the calendar button element in the new rendering.

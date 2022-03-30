@@ -43,7 +43,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
     <div id="example">
 
       <div id="confirmation"></div>
-      <a id="add-new-button" role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md" href="#"><span class="k-button-icon k-icon k-i-add"></span>Add new record</a>
+      <a id="add-new-button" role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md" href="#"><span class="k-button-icon k-icon k-i-add"></span>Add new record</a>
       <div id="listView"></div>
 
       <script type="text/x-kendo-tmpl" id="template">
@@ -59,9 +59,9 @@ The following example demonstrates how to add a custom **Delete** confirmation d
                 <dd>#:Discontinued#</dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-edit-button" href="\\#">Edit<span class="k-button-icon k-icon k-i-edit"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-delete-button" href="\\#">Built-in delete<span class="k-icon k-i-close"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-cancel-button" href="\\#" onClick="deleteItem(event)">Custom delete<span class="k-icon k-i-close"></span></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-edit-button" href="\\#">Edit<span class="k-button-icon k-icon k-i-edit"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">Built-in delete<span class="k-icon k-i-close"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#" onClick="deleteItem(event)">Custom delete<span class="k-icon k-i-close"></span></span></a>
         </div>
         </div>
       </script>
@@ -69,8 +69,8 @@ The following example demonstrates how to add a custom **Delete** confirmation d
       <script type="text/x-kendo-template" id="confirmTemplate">
         Delete <strong>#= ProductName #</strong> ? </p>
         We have #= UnitsInStock # units in stock. </p>
-        <a id="yesButton" role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-delete-button" href="\\#">Yes</a>
-        <a id="noButton" role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-delete-button" href="\\#">No</a>
+        <a id="yesButton" role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">Yes</a>
+        <a id="noButton" role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-delete-button" href="\\#">No</a>
       </script>
 
       <script type="text/x-kendo-tmpl" id="editTemplate">
@@ -97,8 +97,8 @@ The following example demonstrates how to add a custom **Delete** confirmation d
                 <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
         </dl>
             <div class="edit-buttons">
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
-                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-update-button" href="\\#"><span class="k-button-icon k-icon k-i-check"></span></a>
+                <a role="button" class="k-button k-button-solid-base k-button-solid k-button-md k-rounded-md k-cancel-button" href="\\#"><span class="k-button-icon k-icon k-i-cancel"></span></a>
         </div>
         </div>
       </script>
@@ -111,7 +111,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
           var confirmPopup = $("#confirmation").getKendoWindow();
           var confirmTemplate = kendo.template($("#confirmTemplate").html());
           confirmPopup.content(confirmTemplate(product)); //send the row data object to the template and render it
-          confirmPopup.center().open();  
+          confirmPopup.center().open();
 
           $("#yesButton").click(function(){
             listView.dataSource.remove(product)  //prepare a "destroy" request
@@ -175,7 +175,7 @@ The following example demonstrates how to add a custom **Delete** confirmation d
 
           var listView = $("#listView").kendoListView({
             dataSource: dataSource,
-            remove: function(e) {                
+            remove: function(e) {
               if(!confirm("Do you want to delete " + e.model.get("ProductName") + "?")){
                 e.preventDefault();
               }
