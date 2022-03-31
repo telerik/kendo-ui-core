@@ -78,7 +78,7 @@ The following example demonstrates how to set `Size` in the declaration of the D
 The default `Size` value is `Medium` and it is applied to the wrapping span element through the `k-picker-md` class.
 
 ```html
-<span class="k-dropdown k-picker k-picker-md">
+<span class="k-dropdownlist k-picker k-picker-md">
 </span>
 ```
 
@@ -138,7 +138,7 @@ The following example demonstrates how to set `Rounded` in the declaration of th
 The default `Rounded` value is `Medium` and it is applied to the wrapping span element through the `k-rounded-md` class.
 
 ```html
-<span class="k-dropdown k-picker k-rounded-md">
+<span class="k-dropdownlist k-picker k-rounded-md">
 </span>
 ```
 
@@ -198,7 +198,7 @@ The following example demonstrates how to set `FillMode` in the declaration of t
 The default `FillMode` value is `Solid` and it is applied to the wrapping span element through the `k-picker-solid` class.
 
 ```html
-<span class="k-dropdown k-picker k-picker-solid">
+<span class="k-dropdownlist k-picker k-picker-solid">
 </span>
 ```
 
@@ -240,13 +240,12 @@ The old rendering of the component consisted of several wrapping elements:
   <span class="k-icon k-i-arrow-60-down">
   ```
 
-
 The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements:
 
 - The `span` element controls the overall appearance of the widget and has the following class structure:
 
   ```html
-  <span class="k-picker k-dropdown k-widget k-picker-solid k-picker-md k-rounded-md">
+  <span class="k-picker k-dropdownlist k-picker-solid k-picker-md k-rounded-md">
   </span>
   ```
 
@@ -288,7 +287,7 @@ Wrapper Rendering:
 </span>
 
 <!-- NEW WRAPPER -->
-<span class="k-picker k-dropdown k-widget k-picker-solid k-picker-md k-rounded-md">
+<span class="k-picker k-dropdownlist k-picker-solid k-picker-md k-rounded-md">
     <span class="k-input-inner">
         <span class="k-input-value-text">Patricio Simpson</span>
     </span>
@@ -441,7 +440,7 @@ $(".k-input") // Returns a reference to the input element in the old rendering.
 With the new rendering, the DropDownList input element must be targeted by using the `k-input-inner` class.
 
 ```javascript
-$('.k-dropdown .k-input-inner') // Returns a reference to the input element in the new rendering.
+$('.k-dropdownlist .k-input-inner') // Returns a reference to the input element in the new rendering.
 ```
 
 Previously, a reference to the dropdown button element was obtainable through the `k-select` class.

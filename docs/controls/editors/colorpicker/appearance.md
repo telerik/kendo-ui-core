@@ -243,7 +243,7 @@ The following example demonstrates the new rendering:
              <span class="k-color-preview-mask" style="background-color: rgb(255, 255, 255);"></span>
          </span>
     </span>
-    <button class="k-select k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
+    <button class="k-input-button k-button k-button-{size} k-rounded-{rounded} k-button-{fillMode} k-button-{fillMode}-base k-icon-button" unselectable="on" aria-label="select" type="button">
         <span class="k-icon k-i-arrow-s k-button-icon"></span>
     </button>
     <input id="colorpicker" data-role="colorpicker" style="display: none;">

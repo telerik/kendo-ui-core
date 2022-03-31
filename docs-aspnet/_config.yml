@@ -457,6 +457,8 @@ navigation:
      "*checkboxgroup":
         title: "CheckBoxGroup"
         isNew: true
+     "*colorgradient":
+        title: "ColorGradient"
      "*colorpalette":
         title: "ColorPalette"
      "*colorpicker":
@@ -755,11 +757,16 @@ defaults:
         path: "html-helpers/editors/checkbox"
     values:
         title_prefix: "ASP.NET Core CheckBox Component"
-
+-
     scope:
         path: "html-helpers/editors/checkboxgroup"
     values:
         title_prefix: "ASP.NET Core CheckBoxGroup Component"
+-
+    scope:
+        path: "html-helpers/editors/colorgradient"
+    values:
+        title_prefix: "ASP.NET Core ColorGradient Component"
 -
     scope:
         path: "html-helpers/editors/colorpalette"

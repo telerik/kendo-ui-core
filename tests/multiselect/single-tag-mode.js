@@ -41,7 +41,7 @@
         assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.find(".k-chip-content").html(), "1 item(s) selected");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 item(s) selected</span>');
         assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
         assert.equal(tag.find(".k-chip-icon").attr("aria-label"), "open");
         assert.equal(tag.find(".k-chip-icon").html(), "");
@@ -59,7 +59,7 @@
         assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.find(".k-chip-content").html(), "1 selected of 15");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 selected of 15</span>');
         assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
     });
 
@@ -75,7 +75,7 @@
         assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.find(".k-chip-content").html(), "1 (1) selected of 15");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 (1) selected of 15</span>');
         assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
     });
 
@@ -91,7 +91,7 @@
         assert.equal(tagList.children(".k-chip").length, 1);
 
         assert.equal(tag.children().length, 2);
-        assert.equal(tag.find(".k-chip-content").html(), "1 (1) selected of 15");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1 (1) selected of 15</span>');
         assert.isOk(tag.find(".k-chip-icon").is(".k-i-arrow-s"));
     });
 
@@ -107,7 +107,7 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tag.find(".k-chip-content").html(), "3,15,15");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">3,15,15</span>');
     });
 
     it("Removes tag when no value", function() {
@@ -136,7 +136,7 @@
         var tagList = multiselect.tagList;
         var tag = tagList.children(".k-chip:first");
 
-        assert.equal(tag.find(".k-chip-content").html(), "1,1,15");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">1,1,15</span>');
     });
 
     it("Do not remove tag when click 'arrow' icon", function() {
@@ -251,7 +251,7 @@
         assert.equal(selectValue.length, 2);
         var tagList = multiselect.tagList;
         var tag = tagList.children(".k-chip:first");
-        assert.equal(tag.find(".k-chip-content").html(), "2 item(s) selected");
+        assert.equal(tag.find(".k-chip-content").html(), '<span class="k-chip-label">2 item(s) selected</span>');
     });
 
     it("Clear selected values clear button when delete the tag after filtering", function() {

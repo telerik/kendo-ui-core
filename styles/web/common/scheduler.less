@@ -793,9 +793,15 @@ div.k-scheduler-marquee:after
     margin: 0;
 }
 
-.k-edit-field > ul.k-reset .k-widget
-{
-    margin-left: .8em;
+.k-edit-field > ul.k-reset {
+    .k-widget,
+    .k-dropdownlist,
+    .k-numerictextbox,
+    .k-dateinput,
+    .k-datepicker,
+    .k-datetimepicker {
+        margin-left: .8em;
+    }
 }
 
 .k-edit-field > ul.k-reset .k-numerictextbox,
@@ -804,9 +810,9 @@ div.k-scheduler-marquee:after
     width: 5em;
 }
 
-.k-edit-field > ul.k-reset .k-dropdown,
+.k-edit-field > ul.k-reset .k-dropdownlist,
 .k-edit-field > ul.k-reset .k-datepicker,
-div[name="recurrenceRule"] > .k-dropdown
+div[name="recurrenceRule"] > .k-dropdownlist
 {
     width: 9em;
 }
@@ -824,12 +830,12 @@ div[name="recurrenceRule"] > .k-dropdown
     text-align: center;
 }
 
-.k-scheduler-timezones .k-dropdown:first-child
+.k-scheduler-timezones .k-dropdownlist:first-child
 {
     width: 100%;
 }
 
-.k-scheduler-timezones .k-dropdown + .k-dropdown
+.k-scheduler-timezones .k-dropdownlist + .k-dropdownlist
 {
     margin: .5em 0 .7em;
 }

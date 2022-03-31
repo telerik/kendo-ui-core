@@ -424,7 +424,7 @@
 
         multiselect.open();
 
-        multiselect.tagList.children(".k-chip").last().find(".k-i-x").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x-circle").click();
 
         var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
@@ -465,7 +465,7 @@
 
         multiselect.open();
 
-        multiselect.tagList.children(".k-chip").first().find(".k-i-x").click();
+        multiselect.tagList.children(".k-chip").first().find(".k-i-x-circle").click();
 
         var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();
@@ -506,8 +506,8 @@
 
         multiselect.open();
 
-        multiselect.tagList.children(".k-chip").last().find(".k-i-x").click();
-        multiselect.tagList.children(".k-chip").last().find(".k-i-x").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x-circle").click();
+        multiselect.tagList.children(".k-chip").last().find(".k-i-x-circle").click();
 
         var tags = multiselect.tagList.children(".k-chip");
         var values = multiselect.value();

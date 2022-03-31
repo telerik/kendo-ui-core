@@ -354,7 +354,7 @@
             dataSource: ["item1", "item2"],
             value: "item1"
         });
-        var tag = multiselect.tagList.children(".k-chip").first().find(".k-chip-icon");
+        var tag = multiselect.tagList.children(".k-chip").first().find(".k-chip-action");
 
         assert.equal(tag.attr("aria-hidden"), "true");
 

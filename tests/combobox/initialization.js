@@ -88,7 +88,7 @@
             var arrow = button.children().eq(0);
 
             assert.isOk(button.is("button"));
-            assert.isOk(button.hasClass("k-select"));
+            assert.isOk(button.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
             assert.isOk(arrow.hasClass("k-icon k-i-arrow-s"));
             assert.equal(arrow.html(), "");

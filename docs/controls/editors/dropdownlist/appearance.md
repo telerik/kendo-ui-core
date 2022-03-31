@@ -47,10 +47,10 @@ The example below shows a basic configuration and how to set `size` to "large":
 </script>
 ```
 
-Below is the HTML that is affected from the configuration. The changes are applied to the `span.k-dropdown` wrapping element:
+Below is the HTML that is affected from the configuration. The changes are applied to the `span.k-dropdownlist` wrapping element:
 
 ```html
-<span class="k-dropdown k-picker k-picker-lg">
+<span class="k-dropdownlist k-picker k-picker-lg">
     ...
 </span>
 ```
@@ -66,7 +66,7 @@ The following values are available for the [`rounded`](/api/javascript/ui/dropdo
 - `lg`—large border radius
 - `full`—ellipse-like border radius
 
-The default value is `medium` and it is applied to the `span.k-dropdown` wrapping element through the `k-rounded-md` class.
+The default value is `medium` and it is applied to the `span.k-dropdownlist` wrapping element through the `k-rounded-md` class.
 
 The example below shows a basic DropDownList configuration and how to set `rounded` to "full":
 
@@ -78,10 +78,11 @@ The example below shows a basic DropDownList configuration and how to set `round
     });
 </script>
 ```
-The changes are applied to the `span.k-dropdown` wrapping element:
+
+The changes are applied to the `span.k-dropdownlist` wrapping element:
 
 ```html
-<span class="k-dropdown k-picker k-rounded-full">
+<span class="k-dropdownlist k-picker k-rounded-full">
     ...
 </span>
 ```
@@ -96,7 +97,7 @@ The following values are available for the [`fillMode`](/api/javascript/ui/dropd
 - `flat`
 - `outline`
 
-The default value is `solid` and it is applied to the `span.k-dropdown` wrapping element through the `k-picker-solid` class.
+The default value is `solid` and it is applied to the `span.k-dropdownlist` wrapping element through the `k-picker-solid` class.
 
 The example below shows a basic DropDownList configuration and how to set `fillMode` to "outline":
 
@@ -108,10 +109,11 @@ The example below shows a basic DropDownList configuration and how to set `fillM
     });
 </script>
 ```
-The changes are applied to the `span.k-dropdown` wrapping element:
+
+The changes are applied to the `span.k-dropdownlist` wrapping element:
 
 ```html
-<span class="k-dropdown k-picker k-picker-outline">
+<span class="k-dropdownlist k-picker k-picker-outline">
     ...
 </span>
 ```
@@ -154,13 +156,12 @@ The old rendering of the component consisted of several wrapping elements:
   <span class="k-icon k-i-arrow-60-down">
   ```
 
-
 The new rendering of the component consists of a single wrapping `span` element that contains the child `input` and `button` elements:
 
 - The `span` element controls the overall appearance of the widget and has the following class structure:
 
   ```html
-  <span class="k-picker k-dropdown k-widget k-picker-solid k-picker-md k-rounded-md">
+  <span class="k-picker k-dropdownlist k-picker-solid k-picker-md k-rounded-md">
   </span>
   ```
 
@@ -183,7 +184,6 @@ The new rendering of the component consists of a single wrapping `span` element 
   <span class="k-icon k-i-arrow-s k-button-icon"></span>
   ```
 
-
 With the previous versions, when the filtering was enabled, the search icon in the DropDownList popup was rendered on the right side. With the new rendering, the search icon is rendered on the left side.
 
 The examples below demonstrates the full version of the old and new rendering:
@@ -197,7 +197,7 @@ Wrapper Rendering:
 </span>
 
 <!-- NEW WRAPPER -->
-<span class="k-picker k-dropdown k-widget k-picker-solid k-picker-md k-rounded-md">
+<span class="k-picker k-dropdownlist k-picker-solid k-picker-md k-rounded-md">
     <span class="k-input-inner">
         <span class="k-input-value-text">Patricio Simpson</span>
     </span>
@@ -334,7 +334,6 @@ Popup rendering with virtualization:
 </div>
 ```
 
-
 ## Visual Backwards Compatibility
 
 In order to achieve the same look and feel as the old rendering, the element references must be updated. Visit the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) and [JQuery Selectors Migration]({% slug components_rendering_overview %}#jquery-selectors-migration) sections of the [Styling Overview]({% slug components_rendering_overview %}) article for additional information.
@@ -350,20 +349,20 @@ $(".k-input") // Returns a reference to the input element in the old rendering.
 With the new rendering, the DropDownList input element must be targeted by using the `k-input-inner` class.
 
 ```javascript
-$('.k-dropdown .k-input-inner') // Returns a reference to the input element in the new rendering.
+$('.k-dropdownlist .k-input-inner') // Returns a reference to the input element in the new rendering.
 ```
 
 Previously, a reference to the dropdown button element was obtainable through the `k-select` class.
 
 ```javascript
-$(".k-select") // Returns a reference to the calendar button element in the old rendering.
+$(".k-select") // Returns a reference to the dropdown button element in the old rendering.
 ```
 
 With the new rendering, a reference to the dropdown button element is obtainable through the `k-button` and `k-input-button` classes.
 
 ```javascript
-$(".k-button") // Returns a reference to the calendar button element in the new rendering.
-$(".k-input-button") // Returns a reference to the calendar button element in the new rendering.
+$(".k-button") // Returns a reference to the dropdown button element in the new rendering.
+$(".k-input-button") // Returns a reference to the dropdown button element in the new rendering.
 ```
 
 Previously, a reference to the items in the DropDownList popup was obtainable through the `k-item` class.

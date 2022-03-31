@@ -13,7 +13,7 @@
 @input-font-family: inherit;
 @input-font-size: inherit;
 @input-line-height: @line-height;
-@input-line-height-em: @input-line-height * 1em;
+@input-line-height-em: ( @input-line-height * 1em );
 
 @input-values-margin-y: 2px;
 @input-values-margin-x: @input-values-margin-y;
@@ -1577,7 +1577,8 @@
         padding: 2px .3em;
     }
 
-    .k-tiles-arrange .k-dropdown {
+    .k-tiles-arrange .k-dropdown,
+    .k-tiles-arrange .k-dropdownlist {
         width: 80px;
     }
 }
@@ -1803,12 +1804,12 @@ div.k-spreadsheet-window {
 }
 
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-textbox,
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-dropdown {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-dropdownlist  {
     width: 16.35em;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdown,
-.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdownlist,
+.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdownlist.k-align {
     width: 5.8em;
 }
 

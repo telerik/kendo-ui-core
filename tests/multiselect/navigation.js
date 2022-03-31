@@ -928,7 +928,7 @@ describe("kendo.ui.MultiSelect navigation in virtual scenario", function () {
 
         assert.equal(multiselect.currentTag(), null);
         assert.equal(multiselect.tagList.children(".k-chip").length, 1);
-        assert.equal(multiselect.tagList.children(".k-chip").eq(0).find("span").html(), "Option0");
+        assert.equal(multiselect.tagList.children(".k-chip").eq(0).find("span").html(), '<span class="k-chip-label">Option0</span>');
     });
 
     it("MultiSelect does not raise exception on DELETE", function() {

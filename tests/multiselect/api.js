@@ -81,7 +81,7 @@
             multiselect.value("0");
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 1);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+            assert.equal(multiselect.tagList.children(":first").find("span").html(), '<span class="k-chip-label">Option0</span>');
             assert.isOk(multiselect.element[0].children[0].selected);
         });
 
@@ -93,7 +93,7 @@
             multiselect.value("1");
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 1);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option1");
+            assert.equal(multiselect.tagList.children(":first").find("span").html(), '<span class="k-chip-label">Option1</span>');
             assert.isOk(multiselect.element[0].children[1].selected);
             assert.isOk(!multiselect.element[0].children[0].selected);
         });
@@ -207,8 +207,8 @@
             multiselect.value(["0", "1"]);
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 2);
-            assert.equal(multiselect.tagList.children(".k-chip:first").find("span").html(), "Option0");
-            assert.equal(multiselect.tagList.children(".k-chip:last").find("span").html(), "Option1");
+            assert.equal(multiselect.tagList.children(".k-chip:first").find("span").html(), '<span class="k-chip-label">Option0</span>');
+            assert.equal(multiselect.tagList.children(".k-chip:last").find("span").html(), '<span class="k-chip-label">Option1</span>');
             assert.isOk(multiselect.element[0].children[0].selected);
             assert.isOk(multiselect.element[0].children[1].selected);
         });
@@ -221,7 +221,7 @@
             multiselect.value(value);
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 1);
-            assert.equal(multiselect.tagList.children(":first").find("span").html(), "Option0");
+            assert.equal(multiselect.tagList.children(":first").find("span").html(), '<span class="k-chip-label">Option0</span>');
             assert.isOk(multiselect.element[0].children[0].selected);
         });
 
@@ -378,7 +378,7 @@
             multiselect.enable(false);
             multiselect.enable(true);
 
-            multiselect.tagList.find(".k-i-x").click();
+            multiselect.tagList.find(".k-i-x-circle").click();
             multiselect.wrapper.mousedown();
 
             assert.equal(multiselect.tagList.children(".k-chip").length, 0);

@@ -19,7 +19,7 @@
                 } catch (e) {
                     //destroy failed because widget is not fully initialized
                 }
-                element.closest(".k-dropdown").remove();
+                element.closest(".k-dropdownlist").remove();
             }
 
             $(".test").remove();
@@ -51,7 +51,7 @@
 
             assert.isOk(wrapper.parent().is("span.test"));
             assert.isOk(wrapper.is("span.k-picker"));
-            assert.isOk(wrapper.hasClass("k-picker k-dropdown"));
+            assert.isOk(wrapper.hasClass("k-picker k-dropdownlist"));
             assert.isOk(!input.is(":visible"));
         });
 
@@ -104,7 +104,7 @@
                 arrow = spanArrow.children().eq(0);
 
             assert.isOk(spanArrow.is("button"));
-            assert.isOk(spanArrow.hasClass("k-select"));
+            assert.isOk(spanArrow.hasClass("k-input-button"));
             assert.isOk(arrow.is("span"));
             assert.isOk(arrow.hasClass("k-icon k-i-arrow-s"));
             assert.equal(arrow.html(), "");

@@ -13,7 +13,7 @@
 @input-font-family: inherit;
 @input-font-size: inherit;
 @input-line-height: @line-height;
-@input-line-height-em: @input-line-height * 1em;
+@input-line-height-em: ( @input-line-height * 1em );
 
 @input-values-margin-y: 2px;
 @input-values-margin-x: @input-values-margin-y;
@@ -1590,7 +1590,8 @@
     .k-tiles-arrange {
         margin-left: auto;
 
-        .k-dropdown {
+        .k-dropdown,
+        .k-dropdownlist {
             width: 80px;
         }
     }
@@ -1794,17 +1795,13 @@ div.k-spreadsheet-window {
     padding: 0 1em;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
-    min-width: 59px;
-}
-
 .k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-textbox,
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-dropdown {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-dropdownlist {
     width: 15.74em;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdown,
-.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdownlist,
+.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdownlist.k-align {
     width: 5.6em;
 }
 

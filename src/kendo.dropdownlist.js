@@ -1268,7 +1268,7 @@ var __meta__ = { // jshint ignore:line
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                arrowBtn = html.renderButton('<button type="button" tabindex="-1" unselectable="on" class="k-select k-input-button" aria-label="select"></button>', {
+                arrowBtn = html.renderButton('<button type="button" tabindex="-1" unselectable="on" class="k-input-button" aria-label="select"></button>', {
                     icon: "arrow-s",
                     size: options.size,
                     fillMode: options.fillMode,
@@ -1286,7 +1286,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that.span = span;
-            that._arrow = wrapper.find(".k-select");
+            that._arrow = wrapper.find(".k-input-button");
             that._arrowIcon = that._arrow.find(".k-icon");
         },
 
@@ -1305,7 +1305,7 @@ var __meta__ = { // jshint ignore:line
             }
 
             that._focused = that.wrapper = wrapper
-                .addClass("k-picker k-dropdown k-widget")
+                .addClass("k-picker k-dropdownlist")
                 .addClass(DOMelement.className)
                 .removeClass('input-validation-error')
                 .css("display", "")

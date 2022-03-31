@@ -173,9 +173,11 @@ New Rendering:
             id="multiselect_taglist">
             <span class="k-chip k-chip-{size} k-rounded-md k-chip-solid k-chip-solid-base"
                 aria-setsize="1">
-                <span unselectable="on" class="k-chip-content">Item1</span>
-                <span class="k-chip-icon k-icon k-i-x" unselectable="on" aria-hidden="true" aria-label="delete"
-                    title="delete">
+                <span unselectable="on" class="k-chip-content">
+                    <span class="k-chip-label">Item1</span>
+                </span>
+                <span class="k-chip-action k-chip-remove-action" unselectable="on" aria-hidden="true" aria-label="delete" title="delete">
+                    <span class="k-icon k-i-x-circle"></span>
                 </span>
             </span>
             <input class="k-input-inner" autocomplete="off" role="textbox" title=""

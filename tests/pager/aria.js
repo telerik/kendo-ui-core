@@ -58,7 +58,7 @@
         it("pager dropdown should have aria-label", function() {
             var element = setup(null, { navigatable: true, pageSizes: [1, 2] });
             pager.page(1);
-            assert.equal(element.find(".k-widget.k-dropdown").attr("aria-label"), "Page sizes drop down");
+            assert.equal(element.find(".k-dropdownlist").attr("aria-label"), "Page sizes drop down");
         });
 
         it("when navigatable is not enabled prev/next buttons don't have aria-describedby", function() {

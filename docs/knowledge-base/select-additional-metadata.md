@@ -1,6 +1,6 @@
 ---
 title: Upload Files and Select Additional Metadata
-page_title: Upload Files and Select Additional Metadata 
+page_title: Upload Files and Select Additional Metadata
 description: "Learn how to upload files and select additional metadata with the Kendo UI Upload widget."
 slug: howto_select_additional_metadata_upload
 previous_url: /controls/editors/upload/how-to/select-additional-metadata
@@ -138,7 +138,7 @@ The following example demonstrates how to achieve the desired scenario.
                         font-style: italic;
                     }
 
-                .k-dropdown{
+                .k-dropdownlist{
                     width:auto;
                 }
 

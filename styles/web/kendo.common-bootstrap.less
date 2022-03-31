@@ -13,7 +13,7 @@
 @input-font-family: inherit;
 @input-font-size: inherit;
 @input-line-height: @line-height;
-@input-line-height-em: @input-line-height * 1em;
+@input-line-height-em: ( @input-line-height * 1em );
 
 @input-values-margin-y: 2px;
 @input-values-margin-x: @input-values-margin-y;
@@ -1459,7 +1459,7 @@
     height: 38em;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdown {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-edit-field .k-numerictextbox + .k-dropdownlist {
     width: 5.2em;
 }
 
@@ -1469,6 +1469,6 @@
     padding: 0.65em 0 1em;
 }
 
-.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdown.k-align {
+.k-editor-dialog.k-editor-table-wizard-dialog .k-dropdownlist.k-align {
     min-width: 56px;
 }
