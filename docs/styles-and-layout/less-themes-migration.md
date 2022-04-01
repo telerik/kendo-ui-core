@@ -34,23 +34,23 @@ The migration to a SASS theme is a very straightforward process:
 
    ```html
         <!-- The following styles are required for the LESS Classic theme. -->
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.common.min.css" />
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.default.min.css" />
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.default.mobile.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.common.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.default.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.default.mobile.min.css" />
    ```
 
 1. Add a reference to the SASS theme that you want to use, for example:
 
    ```html
         <!-- The following styles are required for the SASS Classic theme. -->
-        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.classic-main.min.css" />
+        <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.classic-main.min.css" />
    ```
 
 With the new rendering of the components, some CSS classes will be deleted. If you use any of those classes to customize a component, you will have to update their references. Otherwise the customizations will be lost. For additional information, check the [CSS Classes Migration]({% slug components_rendering_overview %}#css-classes-migration) section of the [Components Rendering Overview]({% slug components_rendering_overview %}) article.
 
 ## How Do I Know Which SASS Theme Corresponds to My Current LESS Theme?
 
-The LESS themes have SASS swatches which are under the `Classic` theme.
+The LESS themes have SASS swatch counterparts.
 
 ![Classic Swatches](images/theme-builder-classic-swatches.png)
 
@@ -58,25 +58,27 @@ The following table contains the name of the LESS theme and its SASS counterpart
 
 | LESS Theme   | SASS Theme | Status | SASS Theme CDN
 |:---         |:---        |:---        |:---
-| `Default` | `Classic Theme - Main` | Available | https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.classic-main.min.css |
-| `Blue Opal` | `Classic Theme - Opal` | Available | https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.classic-opal.min.css |
-| `Silver` | `Classic Theme - Silver` | Available | https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.classic-silver.min.css |
-| `Fiori` | `Classic Theme - Fiori` | In Progress | N/A |
-| `Flat` | `Classic Theme - Flat` | In Progress | N/A |
-| `High Contrast` | `Classic Theme - High Contrast` | In Progress | N/A |
-| `Metro` | `Classic Theme - Metro` | In Progress | N/A |
-| `Metro Black` | `Classic Theme - Metro Black` | In Progress | N/A |
-| `Moonlight` | `Classic Theme - Moonlight` | In Progress | N/A |
-| `Nova` | `Classic Theme - Nova` | In Progress | N/A |
-| `Office 365` | `Classic Theme - Office 365` | In Progress | N/A |
-| `Uniform` | `Classic Theme - Uniform` | In Progress | N/A |
+| `Default` | `Classic - Main` | Available | https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.classic-main.min.css |
+| `Blue Opal` | `Classic - Opal` | Available | https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.classic-opal.min.css |
+| `Silver` | `Classic - Silver` | Available | https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.classic-silver.min.css |
+| `Fiori` | TBD | TBD | N/A |
+| `Bootstrap 3` | `Bootstrap - Bootstrap 3` | In Progress | N/A |
+| `Bootstrap 3 Dark` | `Bootstrap - Bootstrap 3 Dark` | In Progress | N/A |
+| `Flat` | `Bootstrap - Turquoise` | In Progress | N/A |
+| `Flat Dark` | `Bootstrap - Turquoise Dark` | In Progress | N/A |
+| `High Contrast` | TBD | TBD | N/A |
+| `Metro` | TBD | TBD | N/A |
+| `Moonlight` | TBD | TBD | N/A |
+| `Nova` | `Material - Nova` | Available | https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.material-nova.min.css |
+| `Office 365` | TBD | TBD | N/A |
+| `Uniform` | TBD | TBD | N/A |
 
 > The Bootstrap and Material LESS themes will not have their own SASS swatches. The dedicated Bootstrap and Material SASS themes should be used instead.
 
 The following example demonstrates how to add a theme to your project:
 
 ```html
-<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2021.3.1207/styles/kendo.classic-main.min.css" /> 
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2022.1.119/styles/kendo.classic-main.min.css" /> 
 ```
 
 The above snippet must be added to the `head` element of the page.

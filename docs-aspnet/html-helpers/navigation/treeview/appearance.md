@@ -100,14 +100,14 @@ New Rendering:
         <li role="treeitem" class="k-item k-treeview-item k-first k-last"
             data-uid="e023e8b6-c3ab-4bda-9590-21361b00ab4d" aria-selected="false" aria-expanded="true"
             data-expanded="true" aria-busy="false">
-            <div class="k-treeview-top k-treeview-bot k-top k-bot"><span class="k-treeview-toggle"><span
+            <div class="k-treeview-top k-treeview-bot"><span class="k-treeview-toggle"><span
                         class="k-icon k-i-collapse"></span></span><span class="k-treeview-leaf k-in"><span
                         class="k-treeview-leaf-text">foo</span></span></div>
             <ul class="k-group k-treeview-group" role="group" style="display: block;">
                 <li role="treeitem" class="k-item k-treeview-item k-last"
                     data-uid="c86b0972-66ca-4bdc-adf1-6a2dcceb2198" aria-selected="false" aria-disabled="true"
                     aria-expanded="true" data-expanded="true" aria-busy="false">
-                    <div class="k-treeview-bot k-treeview-top k-bot"><span class="k-treeview-toggle"><span
+                    <div class="k-treeview-bot"><span class="k-treeview-toggle"><span
                                 class="k-icon k-i-collapse"></span></span><span
                             class="k-treeview-leaf k-in k-disabled"><span class="k-treeview-leaf-text">bar</span></span>
                     </div>
@@ -115,7 +115,7 @@ New Rendering:
                         <li role="treeitem" class="k-item k-treeview-item k-last"
                             data-uid="e6b9f504-57ee-42b9-8898-bb1ca050d535" aria-selected="true" aria-expanded="false"
                             data-expanded="false">
-                            <div class="k-treeview-bot k-bot"><span class="k-treeview-leaf k-in k-selected"><span
+                            <div class="k-treeview-bot"><span class="k-treeview-leaf k-in k-selected"><span
                                         class="k-treeview-leaf-text">baz</span></span></div>
                         </li>
                     </ul>
@@ -158,7 +158,7 @@ New Rendering with Checkboxes:
         <li role="treeitem" class="k-item k-treeview-item k-first k-last"
             data-uid="d326b551-4386-4dda-8a12-bee3dbcbb940" aria-checked="false" aria-selected="false"
             aria-expanded="true" data-expanded="true" aria-busy="false">
-            <div class="k-treeview-top k-treeview-bot k-top k-bot"><span class="k-treeview-toggle"><span
+            <div class="k-treeview-top k-treeview-bot"><span class="k-treeview-toggle"><span
                         class="k-icon k-i-collapse"></span></span><span class="k-checkbox-wrapper"
                     role="presentation"><input aria-hidden="true" type="checkbox" tabindex="-1"
                         id="_d326b551-4386-4dda-8a12-bee3dbcbb940" class="k-checkbox k-checkbox-{size} k-rounded-md"><span
@@ -168,7 +168,7 @@ New Rendering with Checkboxes:
                 <li role="treeitem" class="k-item k-treeview-item k-last"
                     data-uid="ce664b23-821c-4a63-9b86-b926c540e714" aria-checked="false" aria-selected="false"
                     aria-disabled="true" aria-expanded="true" data-expanded="true" aria-busy="false">
-                    <div class="k-treeview-bot k-treeview-top k-bot"><span class="k-treeview-toggle"><span
+                    <div class="k-treeview-bot"><span class="k-treeview-toggle"><span
                                 class="k-icon k-i-collapse"></span></span><span class="k-checkbox-wrapper"
                             role="presentation"><input aria-hidden="true" type="checkbox" tabindex="-1" disabled=""
                                 id="_ce664b23-821c-4a63-9b86-b926c540e714"
@@ -180,7 +180,7 @@ New Rendering with Checkboxes:
                         <li role="treeitem" class="k-item k-treeview-item k-last"
                             data-uid="eea3515a-89ef-4a97-bd6f-05e537073be0" aria-checked="false" aria-selected="true"
                             aria-expanded="false" data-expanded="false">
-                            <div class="k-treeview-bot k-bot"><span class="k-checkbox-wrapper"
+                            <div class="k-treeview-bot"><span class="k-checkbox-wrapper"
                                     role="presentation"><input aria-hidden="true" type="checkbox" tabindex="-1"
                                         id="_eea3515a-89ef-4a97-bd6f-05e537073be0"
                                         class="k-checkbox k-checkbox-{size} k-rounded-md"><span

@@ -1549,7 +1549,7 @@ var __meta__ = { // jshint ignore:line
         },
 
         _loader: function() {
-            this._loading = $('<span class="k-icon k-i-loading ' + HIDDENCLASS + '"></span>').insertAfter(this.tagList);
+            this._loading = $('<span class="k-icon k-i-loading k-input-loading-icon ' + HIDDENCLASS + '"></span>').insertAfter(this.tagList);
         },
 
         _clearButton: function() {

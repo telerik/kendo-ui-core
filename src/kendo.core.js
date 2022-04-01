@@ -4581,7 +4581,7 @@ function pad(number, digits, end) {
     };
 
     kendo.cycleForm = function(form) {
-        var firstElement = form.find("input, .k-widget").first();
+        var firstElement = form.find("input, .k-widget, .k-dropdownlist, .k-combobox").first();
         var lastElement = form.find("button, .k-button").last();
 
         function focus(el) {
