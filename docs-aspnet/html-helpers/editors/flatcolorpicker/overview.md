@@ -51,6 +51,21 @@ The following example demonstrates how to subscribe to events by a handler name.
           }
       </script>
 ```
+{% if site.core %}
+```TagHelper
+@addTagHelper *, Kendo.Mvc
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<script>
+        function change(e) {
+             console.log("Change in picker #" + this.element.attr("id") + " :: " + e.value);
+        }
+</script>
+
+<kendo-flatcolorpicker name="flatColorPicker" value="#00f" on-change="change">
+</kendo-flatcolorpicker>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
@@ -83,5 +98,5 @@ To reference an existing Telerik UI FlatColorPicker instance, use the [`jQuery.d
 
 ## See Also
 
-* [Basic Usage of the FlatColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/flatcolorpicker)
+* [Basic Usage of the FlatColorPicker HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/flatcolorpicker)
 * [Server-Side API](/api/flatcolorpicker)

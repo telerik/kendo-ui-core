@@ -679,15 +679,14 @@
                         that.maximize();
                         that.wrapper.trigger("focus");
                     }
-
                 } else if (e.altKey && keyCode == keys.DOWN){
                     if (!isMinimized && !isMaximized) {
                         that.minimize();
                         that.wrapper.trigger("focus");
                     } else if (isMaximized) {
                         that.restore();
+                        that.wrapper.trigger("focus");
                     }
-
                 }
 
                 offset = kendo.getOffset(wrapper);
