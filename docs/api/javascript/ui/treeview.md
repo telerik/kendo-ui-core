@@ -2011,6 +2011,45 @@ The expanded node
     treeview.bind("expand", tree_expand);
     </script>
 
+### loadCompleted
+
+This event triggers only when `loadOnDemand` is set to `false` - it indicates that all nodes that need to be loaded are ready and present as data items in the DataSource of the TreeView.
+
+#### Event Data
+
+##### e.nodes `Array`
+
+All the nodes that have children and are loaded. If empty array is passed then no nodes have children to be loaded.
+
+#### Example
+
+    <div id="treeview"></div>
+    <script>
+    var dataSource = new kendo.data.HierarchicalDataSource({
+      transport: {
+        read: {
+          url: "https://demos.telerik.com/kendo-ui/service/Employees",
+          dataType: "jsonp"
+        }
+      },
+      schema: {
+        model: {
+          id: "EmployeeId",
+          hasChildren: "HasEmployees"
+        }
+      }
+    });
+
+    $("#treeview").kendoTreeView({
+      loadOnDemand: false,
+      dataSource: dataSource,
+      dataTextField: "FullName",
+      loadCompleted: function (ev) {
+        console.log("Load Completed: ", ev.nodes);
+      }
+    });
+    </script>
+
 ### kendoKeydown
 
 Triggered when the user presses a keyboard key while the TreeView is focused.

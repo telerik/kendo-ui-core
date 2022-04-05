@@ -55,6 +55,8 @@ var __meta__ = { // jshint ignore:line
         REQUESTSTART = "requestStart",
         PROGRESS = "progress",
         REQUESTEND = "requestEnd",
+        ITEMSLOADED = "itemsLoaded",
+        ITEMLOAD = "itemLoad",
         crud = [CREATE, READ, UPDATE, DESTROY],
         identity = function(o) { return o; },
         getter = kendo.getter,
@@ -83,6 +85,8 @@ var __meta__ = { // jshint ignore:line
             that.length = array.length;
 
             that.wrapAll(array, that);
+            that._loadPromises = [];
+            that._loadedNodes = [];
         },
 
         at: function(index) {
@@ -148,9 +152,30 @@ var __meta__ = { // jshint ignore:line
                         action: e.node || isGroup ? (e.action || "itemloaded") : "itemchange"
                     });
                 });
+
+                object.bind(ITEMLOAD, function (e) {
+                    that._loadPromises.push(e.promise);
+                    that._loading = true;
+
+                    e.promise.done(function(){
+                        that._loadedNodes.push(e.node);
+                        var index = that._loadPromises.indexOf(e.promise);
+                        that._loadPromises.splice(index, 1);
+
+                        if(!that._loadPromises.length){
+                            that._loading = false;
+                            that.trigger(ITEMSLOADED, {collection: that, nodes: that._loadedNodes});
+                            that._loadedNodes = [];
+                        }
+                    });
+                });
             }
 
             return object;
+        },
+
+        loading: function () {
+            return this._loading;
         },
 
         push: function() {
@@ -4100,7 +4125,7 @@ var __meta__ = { // jshint ignore:line
                 if (group.hasSubgroups) {
                     this._clearEmptyGroups(group.items);
                 }
-                
+
                 if (group.items && !group.items.length) {
                     splice.apply(group.parent(), [idx, 1]);
                 }
@@ -5870,6 +5895,14 @@ var __meta__ = { // jshint ignore:line
                     }
                 });
 
+                children.bind(ITEMSLOADED, function (e) {
+                    var collection = that.parent();
+
+                    if (collection) {
+                        collection.trigger(ITEMSLOADED, e);
+                    }
+                });
+
                 that._updateChildrenField();
             }
         },
@@ -5930,6 +5963,9 @@ var __meta__ = { // jshint ignore:line
                 }
 
                 promise = children[method](options);
+                if (!this._loaded) {
+                    this.trigger(ITEMLOAD, {promise: promise, node: this});
+                }
             } else {
                 this.loaded(true);
             }
@@ -5995,6 +6031,27 @@ var __meta__ = { // jshint ignore:line
             that._data.bind(ERROR, function(e) {
                 that.trigger(ERROR, e);
             });
+
+            that._data.bind(ITEMSLOADED, function(e) {
+                that.trigger(ITEMSLOADED, e);
+            });
+        },
+
+        loading: function () {
+            if(this._data) {
+                return this._data.loading() || this._childrenLoading();
+            }
+            return false;
+        },
+
+        _childrenLoading: function () {
+            var isLoading = false;
+            this._data.forEach(function (node) {
+                if(node.hasChildren && node.children.loading()) {
+                    isLoading = true;
+                }
+            });
+            return isLoading;
         },
 
         read: function(data) {

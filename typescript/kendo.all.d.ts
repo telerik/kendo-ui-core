@@ -12311,6 +12311,7 @@ declare namespace kendo.ui {
         dataTextField?: string|any | undefined;
         dataUrlField?: string | undefined;
         dragAndDrop?: boolean | undefined;
+        loadCompleted?(e: TreeViewEvent): void;
         loadOnDemand?: boolean | undefined;
         messages?: TreeViewMessages | undefined;
         template?: string|Function | undefined;
