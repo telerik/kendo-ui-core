@@ -438,11 +438,16 @@ defaults:
         path: "html-helpers/interactivity/skeletoncontainer"
     values:
         title_prefix: "ASP.NET MVC SkeletonContainer Component"
-
+-
     scope:
         path: "html-helpers/interactivity/progressbar"
     values:
         title_prefix: "ASP.NET MVC ProgressBar Component"
+-
+    scope:
+        path: "html-helpers/interactivity/circularprogressbar"
+    values:
+        title_prefix: "ASP.NET MVC Circular ProgressBar Component"
 -
     scope:
         path: "html-helpers/interactivity/sortable"

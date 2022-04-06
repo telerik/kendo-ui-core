@@ -22,6 +22,12 @@ The classic Editor posts its value automatically because it is based on a `form`
         .HtmlAttributes(new { style = "width: 100%;height:440px" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor" style="width: 100%;height:440px">
+    </kendo-editor>
+```
+{% endif %}
 
 ## Inline Mode
 
@@ -31,9 +37,15 @@ If you use the `Tag()` method of the Editor with a `"div"` parameter, the Editor
     @(Html.Kendo().Editor()
         .Name("editor")
         .Tag("div")
-        .HtmlAttributes(new { style = "width: 100%;height:440px" })
+        .HtmlAttributes(new { style="width: 100%;height:440px" })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor tag="div" name="editor" style = "width: 100%;height:440px">
+    </kendo-editor>
+```
+{% endif %}
 
 With the previous configuration, the tools of the Editor are only visible when the widget is focused. Its content resides on the main web page and the styling of the page influences the editable content.
 

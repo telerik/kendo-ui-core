@@ -23,6 +23,20 @@ The following example demonstrates how to use a string row template which genera
             "<td><strong>#=ShipCountry #</strong></td>" +
         "</tr>")
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        string rowTemplate = "<tr data-uid='#=data.uid#'>" +
+            "<td>#=data.OrderID#</td>" +
+            "<td><strong>#=ShipCountry #</strong></td>" +
+            "</tr>";
+    }
+    <kendo-grid name="grid" style="height:430px;"
+            row-template="@rowTemplate">
+    </kendo-grid>
+```
+{% endif %}
+
 
 ![A Grid with an applied row template](../row-template.png)
 

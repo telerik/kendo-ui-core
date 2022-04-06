@@ -57,6 +57,37 @@ The following example demonstrates how to define the ContextMenu.
     })
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-contextmenu name="menu" target="#target" show-on="click">
+        <popup-animation>
+            <open effects="fade:in" duration="500" />
+        </popup-animation>
+        <items>
+            <menu-item text="Furniture">
+                <sub-items>
+                    <menu-item text="Sofas"></menu-item>
+                    <menu-item text="Chairs"></menu-item>
+                    <menu-item text="Tables">
+                        <sub-items>
+                            <menu-item text="Dinning Tables"></menu-item>
+                            <menu-item text="Coffee Tables"></menu-item>
+                        </sub-items>
+                    </menu-item>
+                    <menu-item text="Accessories"></menu-item>
+                </sub-items>
+            </menu-item>
+            <menu-item text="Electronics">
+                <sub-items>
+                    <menu-item text="TVs"></menu-item>
+                    <menu-item text="Laptops"></menu-item>
+                </sub-items>
+            </menu-item>
+        </items>
+    </kendo-contextmenu>
+```
+{% endif %}
+
 
 ## Configuration
 
@@ -120,6 +151,50 @@ The following example demonstrates the basic configuration of the ContextMenu Ht
     }
 </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-contextmenu name="contextmenu" target="#target" hover-delay="500"  orientation="ContextMenuOrientation.Horizontal"
+        on-open="onOpen">
+        <items>
+            <menu-item text="Baseball" image-url="@Url.Content("~/shared/icons/sports/baseball.png")">
+                <sub-items>
+                    <menu-item text="Top News" />
+                    <menu-item text="Photo Galleries" />
+                    <menu-item separator="true"></menu-item>
+                    <menu-item text="Videos Records" />
+                    <menu-item text="Radio Records" />
+                </sub-items>
+            </menu-item>
+            <menu-item text="Golf" image-url="@Url.Content("~/shared/icons/sports/golf.png")">
+                <sub-items>
+                    <menu-item text="Top News" />
+                    <menu-item text="Photo Galleries" />
+                    <menu-item separator="true"></menu-item>
+                    <menu-item text="Videos Records" />
+                    <menu-item text="Radio Records" />
+                </sub-items>
+            </menu-item>
+            <menu-item text="Swimming" image-url="@Url.Content("~/shared/icons/sports/swimming.png")">
+                <sub-items>
+                    <menu-item text="Top News" />
+                    <menu-item text="Photo Galleries" />
+                </sub-items>
+            </menu-item>
+        </items>
+        <popup-animation >
+            <open effects="expand:vertical fade:in"/>
+        </popup-animation>
+    </kendo-contextmenu>
+
+    <script type="text/javascript">
+        function onOpen() {
+        // The Name() of the ContextMenu is used to get its instance.
+        var menu = $("#contextmenu").data("kendoContextMenu");
+        console.log(menu);
+        }
+    </script>
+```
+{% endif %}
 
 ## Events
 
@@ -156,6 +231,27 @@ The following example demonstrates how to subscribe to events by a handler name.
     }
 </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-contextmenu name="contextmenu" target="#target" show-on="click"
+        on-open="openMenu" on-close="closeMenu" on-select="onSelect">
+    </kendo-contextmenu>
+
+    <script>
+    function openMenu(){
+        // Handle the open event.
+    }
+
+    function closeMenu(){
+        // Handle the close event.
+    }
+
+    function onSelect(){
+        // Handle the select event.
+    }
+</script>
+```
+{% endif %}
 
 ### By Template Delegates
 

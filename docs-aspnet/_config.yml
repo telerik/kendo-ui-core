@@ -546,6 +546,8 @@ navigation:
         title: "OrgChart"
      "*progressbar":
         title: "ProgressBar"
+     "*circularprogressbar":
+        title: "CircularProgressBar"
      "*qrcode":
         title: "QRCode"
      "*/radiobutton":
@@ -947,6 +949,11 @@ defaults:
         path: "html-helpers/interactivity/progressbar"
     values:
         title_prefix: "ASP.NET Core ProgressBar Component"
+-
+    scope:
+        path: "html-helpers/interactivity/circularprogressbar"
+    values:
+        title_prefix: "ASP.NET Core Circular ProgressBar Component"
 -
     scope:
         path: "html-helpers/interactivity/sortable"

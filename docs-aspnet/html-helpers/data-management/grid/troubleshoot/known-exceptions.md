@@ -43,20 +43,39 @@ An exception that a request has been blocked because sensitive information could
 
 Yet another reason is that you explicitly specified that the Grid should make HTTP `GET` requests via the `Type` setting but did not allow HTTP `GET` requests.
 
-**Solution** Allow `GET` requests.
+**Solution** Allow `GET` requests
 
-    // View
+```HtmlHelper
+
     // Omitted for brevity.
     .DataSource(dataSource => dataSource.Ajax()
         .Read(read => read.Action("Read", "Home").Type(HttpVerbs.Get)) // tell the DataSource to make GET requests
     // Omitted for brevity.
-    // Controller
+```
+{% if site.core %}
+```TagHelper
+
+    // Omitted for brevity.
+    <datasource page="0" type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
+        <schema data="Data" total="Total" errors="Errors">
+            <model id="ProductID"></model>
+        </schema>
+        <transport>
+            <read url="@Url.Action("Read","Home")" type="Get" />
+        </transport>
+    </datasource>
+    // Omitted for brevity.
+    
+```
+{% endif %}
+```Controller
     public ActionResult Read([DataSourceRequest] DataSourceRequest request)
     {
         var data = GetData();
 
         return Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
     }
+```
 
 ## Limited Usage of Templates
 

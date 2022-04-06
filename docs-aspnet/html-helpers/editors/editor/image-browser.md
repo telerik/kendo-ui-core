@@ -29,6 +29,19 @@ To retrieve and upload the files and directories, the image browser needs a serv
     )
 ```
 {% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+        <image-browser i file-types="*.png,*.gif,*.jpg,*.jpeg">
+            <image-browser-transport thumbnail-url="@Url.Action("Thumbnail", "ImageBrowser")" upload-url="@Url.Action("Upload", "ImageBrowser")" image-url="../shared/UserFiles/Images/{0}">
+                <create url="@Url.Action("Create", "ImageBrowser")" />
+                <read url="@Url.Action("Read", "ImageBrowser")" />
+                <destroy url="@Url.Action("Destroy", "ImageBrowser")" />
+            </image-browser-transport>
+        </image-browser>
+    </kendo-editor>
+```
+{% endif %}
+{% if site.core %}
 ```ImageBrowserController
     public class ImageBrowserController : EditorImageBrowserController
     {
@@ -907,6 +920,28 @@ In order to set up the ImageBrowser of the Telerik UI Editor for {{ site.framewo
             )
         )
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+    <kendo-editor name="editor">
+        <image-browser>
+            <image-browser-transport upload-url="/Editor/ImageBrowser?handler=Upload" image-url="/Images/{0}">
+                <create url="/Editor/ImageBrowser?handler=Create" />
+                <read url="/Editor/ImageBrowser?handler=Read" />
+                <destroy url="/Editor/ImageBrowser?handler=Destroy" />
+            </image-browser-transport>
+        </image-browser>
+        <schema>
+                <image-browser-model>
+                    <fields>
+                        <name field="Name" />
+                        <size field="Size" />
+                        <type field="EntryType" />
+                    </fields>
+                </image-browser-model>
+            </schema>
+    </kendo-editor>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
     public JsonResult OnPostRead(string path)
     {

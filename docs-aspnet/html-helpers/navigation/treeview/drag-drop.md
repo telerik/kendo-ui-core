@@ -26,6 +26,21 @@ The following example demonstrates how to enable the drag-and-drop functionality
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" drag-and-drop="true" datatextfield="Name" load-on-demand="true" name="treeview">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Employees", "TreeView")"/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-treeview>
+```
+{% endif %}
+
 
 ## See Also
 

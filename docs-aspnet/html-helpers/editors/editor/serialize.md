@@ -36,6 +36,19 @@ The Editor provides the following configuration options:
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+        <serialization entities="true" scripts="true" semantic="true" custom="serializeHandler"/>
+    </kendo-editor>
+
+    <script>
+        function serializeHandler(html) {
+            return html.replace(/(<\/?)b(\s?)/, "$1strong$2");
+        }
+    </script>
+```
+{% endif %}
 
 ## Deserializing
 
@@ -55,6 +68,19 @@ Deserialization is the process of parsing the HTML string input from the `value(
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+        <deserialization custom="deserializeHandler"/>
+    </kendo-editor>
+
+    <script>
+        function deserializeHandler(html) {
+            return html.replace(/(<\/?)b(\s?)/, "$1strong$2")
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

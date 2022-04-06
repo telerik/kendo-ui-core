@@ -239,6 +239,10 @@ By default, the Telerik UI Grid for {{ site.framework }} exports all rows. Howev
 ```HtmlHelper
 .Selectable()
 ```
+```TagHelper
+    <selectable />
+```
+
 
 Or, add a checkbox column for selection:
 
@@ -246,6 +250,9 @@ Or, add a checkbox column for selection:
 .Columns(columns => {
     columns.Select().Width(80);
 })
+```
+```TagHelper
+     <column width="80" selectable="true"/>
 ```
  {% endif%}
 

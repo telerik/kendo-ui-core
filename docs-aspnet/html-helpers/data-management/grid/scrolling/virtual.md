@@ -16,13 +16,20 @@ For runnable examples, refer to the [demo on virtualization of remote data by th
 
 When virtual scrolling is enabled, the Grid loads data from its remote data source while the user scrolls vertically.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
-            .Name("grid")
-            .HtmlAttributes(new { style = "height: 380px;" })
-            .Scrollable(scrollable => scrollable.Virtual(true))
-        )
-    ```
+```HtmlHelper
+    @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
+        .Name("grid")
+        .HtmlAttributes(new { style = "height: 380px;" })
+        .Scrollable(scrollable => scrollable.Virtual(true))
+    )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <scrollable enabled="true" virtual="true" />
+    </kendo-grid>
+```
+{% endif %}
 
 In virtual scrolling, the HTML output is different from the standard scrolling functionality&mdash;the data table of the Grid is not placed inside a scrollable container. The scrollbar belongs to a separate `div.k-scrollbar` which affects scenarios when the data rows have to be manually scrolled to a particular position.
 

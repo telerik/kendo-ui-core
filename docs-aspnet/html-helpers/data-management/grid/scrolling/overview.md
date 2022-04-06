@@ -140,6 +140,36 @@ The scrollable container is `div.k-grid-content` and it is possible to retrieve 
         }
     });
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" on-data-binding="onGridDataBinding" on-data-bound="onGridDataBound"  >
+        <scrollable enabled="true"/>
+    </kendo-grid>
+    <script>
+        $(function () {
+            // Initialize the variable which will hold the scroll positions.
+            var scrollOffset = {
+                left: 0,
+                top: 0
+            };
+
+            // Save the scroll position before the new data is rendered.
+            function onGridDataBinding (e) {
+                var container = e.sender.wrapper.children(".k-grid-content"); // Or ".k-virtual-scrollable-wrap".
+                scrollOffset.left = container.scrollLeft();
+                scrollOffset.top = container.scrollTop(); // Use only if virtual scrolling is disabled.
+            }
+
+            // Restore the scroll position after the new data is rendered.
+            function onGridDataBound (e) {
+                var container = e.sender.wrapper.children(".k-grid-content"); // Or ".k-virtual-scrollable-wrap".
+                container.scrollLeft(scrollOffset.left);
+                container.scrollTop(scrollOffset.top); // Use only if virtual scrolling is disabled.
+            }
+        });
+    </script>
+```
+{% endif %}
 
 ## Adjusting Scrollbar and Page Layout on Zoom
 

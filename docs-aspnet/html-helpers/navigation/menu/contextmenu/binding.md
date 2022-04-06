@@ -47,6 +47,27 @@ The Telerik UI ContextMenu enables you to bind it to a hierarchical model.
             })
     )
     ```
+    {% if site.core %}
+    ```TagHelper
+        @{
+        var menuItems = Model.Select(category =>
+            {
+                return new MenuItemBase
+                {
+                    Text = category.CategoryName,
+                    Children = category.Products.Select(product =>
+                    {
+                        return new MenuItemBase { Text = product.ProductName };
+                    })
+                };
+            });
+        }
+
+        <kendo-contextmenu name="contextmenu" target="#target" show-on="click" 
+            bind-to="menuItems">
+        </kendo-contextmenu>
+    ```
+    {% endif %}
     ```Controller
     public class ContextMenuController : BaseController
     {

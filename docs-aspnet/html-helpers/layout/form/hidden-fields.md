@@ -67,6 +67,18 @@ To add support for the `HiddenInput` attribute, use the following implementation
         })
     )
 ```
+
+{% if site.core %}
+```TagHelper
+   <kendo-form name="formExample" form-data="@Model" action="Index" method="POST">
+        <form-items>
+            <form-item field="UserId">
+            </form-item>
+        </form-items>
+    </kendo-form>    
+```
+{% endif %}
+
 {% if site.core %}
 To add a method for enabling the injection of the `AntiForgeryToken` input in:
 

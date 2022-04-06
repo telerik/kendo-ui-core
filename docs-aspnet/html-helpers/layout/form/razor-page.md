@@ -59,6 +59,40 @@ See the implementation details in the example below, and for the full project wi
         $("#formExample").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
     </script>
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @{
+        var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+
+    <kendo-form layout="grid" form-data="@Model.Order" name="formExample" method="POST">
+            <form-items>
+                <form-item field="ShipName">
+                    <item-label text="Ship Name:">
+                </form-item>
+                <form-item field="ShipCity">
+                    <item-label text="Ship City:">
+                </form-item>
+                <form-item field="OrderDate">
+                    <item-label text="Order Date:">
+                    <datepicker-editor></datepicker-editor>
+                </form-item>
+                <form-item field="Freight">
+                    <item-label text="Freight:">
+                    <numerictextbox-editor></numerictextbox-editor>
+                </form-item>
+            </form-items>
+            <validatable validate-on-blur="true" validation-summary="true" 
+            error-template="<span style='color: red'>#:message#</span>" />
+            <grid cols="2" gutter="20" />
+        </kendo-form>
+
+    <script>
+        $("#formExample").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
+    </script>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
     [BindProperty]
     public OrderViewModel Order { get; set; }
@@ -177,6 +211,84 @@ See the implementation details in the example below, where the JSON errors are a
         $("#formExample").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
     </script>
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @{
+        var token = Xsrf.GetAndStoreTokens(HttpContext).RequestToken;
+    }
+
+    <kendo-form layout="grid" form-data="@Model.Order" name="formExample" method="POST" 
+    on-submit="onFormSubmit" on-clear="onFormClear">
+        <form-items>
+            <form-item field="ShipName">
+                <item-label text="Ship Name:">
+            </form-item>
+            <form-item field="ShipCity">
+                <item-label text="Ship City:">
+            </form-item>
+            <form-item field="OrderDate">
+                <item-label text="Order Date:">
+                <datepicker-editor></datepicker-editor>
+            </form-item>
+            <form-item field="Freight">
+                <item-label text="Freight:">
+                <numerictextbox-editor></numerictextbox-editor>
+            </form-item>
+        </form-items>
+        <validatable validate-on-blur="true" validation-summary="true" 
+        error-template="<span style='color: red'>#:message#</span>" />
+        <grid cols="2" gutter="20" />
+    </kendo-form>
+
+    <script>
+        function onFormClear(e) {
+            $("#validation-success").html("");
+        };
+
+        function onFormSubmit(ev) {
+            ev.preventDefault();
+
+            var modelData = ev.model;
+            modelData.OrderDate = modelData.OrderDate.toJSON();
+
+            $.ajax({
+                type: 'POST',
+                url: "@Url.Page("FormAjaxSubmit","Submit")",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("RequestVerificationToken",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                data: modelData,
+                dataType: 'json',
+                success: function (data) {
+                    var form = $("#formExample").getKendoForm();
+
+                    form.validator.validationSummary.find("ul").empty();
+                    form.validator.validationSummary.addClass("k-hidden");
+                    $("#validation-success").html("<div class='k-messagebox k-messagebox-success'>" + data.success + "</div>");
+                },
+                error: function (data) {
+                    var response = JSON.parse(data.responseText);
+                    var form = $("#formExample").getKendoForm();
+                    var errorString = "";
+
+                    $.each(response.errors, function (key, value) {
+                        errorString += '<li>' + value + '</li>';
+                    });
+
+                    $("#validation-success").html("");
+                    form.validator.validationSummary.find("ul").empty();
+                    form.validator.validationSummary.find("ul").append(errorString);
+                    form.validator.validationSummary.toggleClass("k-hidden");
+                }
+            })
+        };
+
+        $("#formExample").append($("<input type='hidden' name='__RequestVerificationToken' value='@token' data-stop='true' />"))
+    </script>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
     [BindProperty]
     public OrderViewModel Order { get; set; }

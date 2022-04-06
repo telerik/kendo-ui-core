@@ -19,16 +19,29 @@ The Telerik UI Grid for {{ site.framework }} relies on {{ site.framework }} edit
 
 The configuration later in this article will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<Order>()
-            .Name("Grid")
-            .Columns(columns =>
-            {
-                columns.Bound(o => o.OrderDate);
-                columns.Bound(o => o.ShipCountry);
-            })
-            .Editable(editable => editable.Mode(GridEditMode.InLine))
-    ```
+```HtmlHelper
+    @(Html.Kendo().Grid<Order>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(o => o.OrderDate);
+            columns.Bound(o => o.ShipCountry);
+        })
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" height="500">
+        <columns>
+            <column field="OrderDate" editor="OrderDate">
+            </column>
+            <column field="ShipCountry" editor="ShipCountry">
+            </column>
+        </columns>
+        <editable mode="inline" />
+    </kendo-grid>
+```
+{% endif %}
 
 The following example demonstrates the code that will be used to get the editor HTML for the `OrderDate` and `ShipCountry` properties.
 
@@ -112,6 +125,50 @@ Your project may require you to create a custom editor for a specific property. 
             [UIHint("EmployeeEditor")]
             public Employee Employee { get; set; }
         }
+
+
+{% if site.core %}
+
+## TagHelper Editor Templates
+
+To configure Editor Templates when using TagHelper define them in a `[Kendo Template](https://docs.telerik.com/kendo-ui/framework/templates/overview)`. 
+
+```
+    <kendo-grid name="Grid">
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+            <schema data="Data" total="Total">
+                <model id="ProductID">
+                    <fields>
+                        <field name="ProductID" type="number" editable="false"></field>
+                        <field name="ProductName" type="string"></field>
+                    </fields>
+                </model>
+            </schema>
+            <transport>
+                    <read url="@Url.Action("Products_Read" "Grid")" />
+                    <update url="@Url.Action("Products_Update" "Grid")" />
+                    <create url="@Url.Action("Products_Create" "Grid")" />
+                    <destroy url="@Url.Action("Products_Destroy" "Grid")" />
+            </transport>
+        </datasource>
+        <columns>
+            <column field="ProductName" />
+            <column field="ProductID" />
+            <column width="160">
+                <commands>
+                    <column-command text="Edit" name="edit"></column-command>
+                    <column-command text="Delete" name="destroy"></column-command>
+                </commands>
+            </column>
+        </columns>
+        <toolbar>
+            <toolbar-button name="create"></toolbar-button> 
+            <toolbar-button name="save"></toolbar-button>
+        </toolbar>
+        <editable mode="inline" template-id=""/>
+    </kendo-grid>
+```
+{% endif %}
 
 ## See Also
 

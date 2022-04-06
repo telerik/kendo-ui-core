@@ -84,7 +84,73 @@ The following example demonstrates how to define the Menu.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-menu name="menu">
+<kendo-menu orientation="MenuOrientation.Horizontal" name="Menu">
+        <items>
+            <menu-item text="Products">
+                <sub-items>
+                    <menu-item text="Furniture">
+                        <sub-items>
+                            <menu-item text="Tables & Chairs"></menu-item>
+                            <menu-item text="Sofas"></menu-item>
+                            <menu-item text="Occasional Furniture"></menu-item>
+                            <menu-item text="Childerns Furniture"></menu-item>
+                            <menu-item text="Beds"></menu-item>
+                        </sub-items>
+                    </menu-item>
+                    <menu-item text="Decor">
+                        <sub-items>
+                            <menu-item text="Bed Linen"></menu-item>
+                            <menu-item text="Throws"></menu-item>
+                            <menu-item text="Curtains & Blinds"></menu-item>
+                            <menu-item text="Rugs"></menu-item>
+                            <menu-item text="Carpets"></menu-item>
+                        </sub-items>
+                    </menu-item>
+                    <menu-item text="Storage">
+                        <sub-items>
+                            <menu-item text="Wall Shelving"></menu-item>
+                            <menu-item text="Kids Storage"></menu-item>
+                            <menu-item text="Baskets"></menu-item>
+                            <menu-item text="Multimedia Storage"></menu-item>
+                            <menu-item text="Floor Shelving"></menu-item>
+                            <menu-item text="Toilet Roll Holders"></menu-item>
+                            <menu-item text="Storage Jars"></menu-item>
+                            <menu-item text="Drawers"></menu-item>
+                            <menu-item text="Boxes"></menu-item>
+                        </sub-items>
+                    </menu-item>
+                    <menu-item text="Lights">
+                        <sub-items>
+                            <menu-item text="Ceiling"></menu-item>
+                            <menu-item text="Table"></menu-item>
+                            <menu-item text="Floor"></menu-item>
+                            <menu-item text="Shades"></menu-item>
+                            <menu-item text="Wall Lights"></menu-item>
+                            <menu-item text="Spotlights"></menu-item>
+                            <menu-item text="Push Light"></menu-item>
+                            <menu-item text="String Lights"></menu-item>
+                        </sub-items>
+                    </menu-item>
+                </sub-items>
+            </menu-item>
+            <menu-item text="Around the Globe">
+                <sub-items>
+                    <menu-item text="United States"></menu-item>
+                    <menu-item text="Canada"></menu-item>
+                    <menu-item text="Europe"></menu-item>
+                    <menu-item text="Australia"></menu-item>
+                </sub-items>
+            </menu-item>
+            <menu-item text="Decor">
+                <sub-items>
+                    <menu-item text="Bed Linen"></menu-item>
+                    <menu-item text="Throws"></menu-item>
+                    <menu-item text="Curtains & Blinds"></menu-item>
+                    <menu-item text="Rugs"></menu-item>
+                    <menu-item text="Carpets"></menu-item>
+                </sub-items>
+            </menu-item>
+        </items>
     </kendo-menu>
 ```
 {% endif %}
@@ -164,18 +230,46 @@ The following example demonstrates the basic configuration of the Menu.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-menu name="menu">
+    <kendo-menu name="menu" hover-delay="500" direction="MenuDirection.Left" orientation="MenuOrientation.Horizontal"
+                on-open="onOpen" on-close="onClose" on-select="onSelect" on-activate="onActivate" on-deactivate="onDeactivate">
         <items>
-            <menu-item text="Home"></menu-item>
-            <menu-item text="Second Page"></menu-item>
+            <menu-item text="Baseball" image-url="@Url.Content("~/shared/icons/sports/baseball.png")">
+                <sub-items>
+                    <menu-item text="Top News" />
+                    <menu-item text="Photo Galleries" />
+                    <menu-item separator="true"></menu-item>
+                    <menu-item text="Videos Records" />
+                    <menu-item text="Radio Records" />
+                </sub-items>
+            </menu-item>
+            <menu-item text="Golf" image-url="@Url.Content("~/shared/icons/sports/golf.png")">
+                <sub-items>
+                    <menu-item text="Top News" />
+                    <menu-item text="Photo Galleries" />
+                    <menu-item separator="true"></menu-item>
+                    <menu-item text="Videos Records" />
+                    <menu-item text="Radio Records" />
+                </sub-items>
+            </menu-item>
+            <menu-item text="Swimming" image-url="@Url.Content("~/shared/icons/sports/swimming.png")">
+                <sub-items>
+                    <menu-item text="Top News" />
+                    <menu-item text="Photo Galleries" />
+                </sub-items>
+            </menu-item>
         </items>
-        <open-on-click enabled="true" root-menu-items="true" sub-menu-items="false" />
         <popup-animation>
-            <open duration="500" />
-            <close duration="300" />
+            <open effects="expand:vertical fade:in" />
         </popup-animation>
-        <scrollable enabled="false" />
     </kendo-menu>
+
+    <script type="text/javascript">
+        $(function () {
+            // The Name() of the Menu is used to get its client-side instance.
+            var menu = $("#menu").data("kendoMenu");
+            console.log(menu);
+        });
+    </script>
 ```
 {% endif %}
 

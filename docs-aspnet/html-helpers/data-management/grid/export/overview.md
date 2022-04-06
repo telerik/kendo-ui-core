@@ -31,6 +31,16 @@ To enable the PDF and Excel Export functionality, add the following ToolBar conf
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="excel"></toolbar-button>
+            <toolbar-button name="pdf"></toolbar-button>
+        </toolbar>
+    </kendo-grid>
+```
+{% endif %}
 
 ## See Also
 

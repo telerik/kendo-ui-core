@@ -120,6 +120,26 @@ To avoid the default content styles from the previous example, remove or overrid
         });
     </script>
 ```
+```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor" value="@{
+        <text>
+            <p>
+                The Editor allows your users to edit HTML in a familiar, user-friendly way.
+            </p>
+        </text>
+    }">
+    </kendo-editor>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var editor = $("#editor").data("kendoEditor");
+            var styleTag = editor.body.parentNode.getElementsByTagName("style")[0];
+            styleTag.parentNode.removeChild(styleTag);
+        });
+    </script>
+```
+{% endif %}
 
 ## Custom Styles
 

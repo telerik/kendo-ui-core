@@ -1955,6 +1955,11 @@ var __meta__ = { // jshint ignore:line
             }
         } else {
             if (skip !== undefined && take !== undefined) {
+                total = query.data.length;
+
+                if (skip + take > total && options.virtual) {
+                    skip -= skip + take - total;
+                }
                 query = query.range(skip, take);
             }
 
@@ -4162,6 +4167,10 @@ var __meta__ = { // jshint ignore:line
                 if(that._take === undefined && that._pageSize !== undefined) {
                     that._take = that._pageSize;
                     options.take = that._take;
+                }
+
+                if(that.options.virtual) {
+                    options.virtual = that.options.virtual;
                 }
 
                 if (options.sort) {

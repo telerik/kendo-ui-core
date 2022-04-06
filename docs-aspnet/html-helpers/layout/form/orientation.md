@@ -42,6 +42,33 @@ By default, the Form uses `vertical` orientation mode and renders the labels abo
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @model Kendo.Mvc.Examples.Models.Form.UserViewModel
+
+     <kendo-form name="formExample" orientation="vertical" form-data="@Model" action="Index" method="POST">
+        <form-items>
+            <form-item type="group">
+                <item-label text="Registration Form">
+                    <form-items>
+                        <form-item field="FirstName">
+                            <item-label text="FirstName" />
+                        </form-item>
+                        <form-item field="LastName">
+                            <item-label text="Last Name:">
+                        </form-item>
+                        <form-item field="UserName">
+                            <item-label text="Username:">
+                        </form-item>
+                        <form-item field="Password" hint="Hint: enter alphanumeric characters only.">
+                            <item-label text="Password:">
+                        </form-item>
+                    </form-items>
+            </form-item>
+        </form-items>
+    </kendo-form>
+```
+{% endif %}
 
 ## Horizontal Mode
 
@@ -70,6 +97,33 @@ Set the `Оrientation` option to `horizontal`, if you want to render labels to t
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    @model Kendo.Mvc.Examples.Models.Form.UserViewModel
+
+     <kendo-form name="formExample" orientation="horizontal" form-data="@Model" action="Index" method="POST">
+        <form-items>
+            <form-item type="group">
+                <item-label text="Registration Form">
+                    <form-items>
+                        <form-item field="FirstName">
+                            <item-label text="FirstName" />
+                        </form-item>
+                        <form-item field="LastName">
+                            <item-label text="Last Name:">
+                        </form-item>
+                        <form-item field="UserName">
+                            <item-label text="Username:">
+                        </form-item>
+                        <form-item field="Password" hint="Hint: enter alphanumeric characters only.">
+                            <item-label text="Password:">
+                        </form-item>
+                    </form-items>
+            </form-item>
+        </form-items>
+    </kendo-form>
+    ```
+{% endif %}
 
 ## See Also
 

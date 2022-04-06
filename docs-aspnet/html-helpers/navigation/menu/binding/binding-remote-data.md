@@ -48,6 +48,20 @@ The Menu supports remote data binding as of the R2 2019 release.
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-menu name="Menu" datatextfield="Name">
+            <hierarchical-datasource>
+                <schema>
+                    <hierarchical-model children="Products"></hierarchical-model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("GetCategories", "Menu")" />
+                </transport>
+            </hierarchical-datasource>
+        </kendo-menu>
+    ```
+    {% endif %}
 
 ## See Also
 

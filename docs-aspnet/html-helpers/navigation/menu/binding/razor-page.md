@@ -33,6 +33,26 @@ In order to set up the Menu component bindings, you need to configure the `Read`
 		}
 	</script>
 ```
+    {% if site.core %}
+    ```tab-TagHelper(cshtml)
+        <kendo-menu name="Menu" datatextfield="Name">
+            <hierarchical-datasource>
+                <schema>
+                    <hierarchical-model children="Products"></hierarchical-model>
+                </schema>
+                <transport>
+                    <read url="/Menu/MenuRemoteData?handler=Read" data="dataFunction" />
+                </transport>
+            </hierarchical-datasource>
+        </kendo-menu>
+        
+        <script>  
+            function dataFunction() {     
+                return kendo.antiForgeryTokens();
+            }
+        </script>
+    ```
+    {% endif %}
 ```tab-PageModel(cshtml.cs)      
 
     public JsonResult OnGetRead()

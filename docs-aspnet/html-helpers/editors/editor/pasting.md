@@ -50,6 +50,25 @@ The following example demonstrates how to copy the HTML content above the Editor
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <p>
+        Copy this is a paragraph that has some
+        <span style="font-family:Impact, Charcoal, sans-serif;">
+            inline
+        </span>
+        <span style="font-family:Impact, Charcoal, sans-serif;color:#ffffff;background-color:#3366ff;">
+            styles
+        </span>
+        and paste it in the Editor.
+    </p>
+    <hr />
+
+    <kendo-editor name="editor">
+    	<paste-cleanup span="true" />
+    </kendo-editor>
+```
+{% endif %}
 
 ## Pasting from MS Word
 
@@ -71,6 +90,13 @@ The following example demonstrates how to adjust the MS Word specific options. T
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+    	<paste-cleanup ms-tags="true" ms-all-formatting="false" ms-convert-lists="true"/>
+    </kendo-editor>
+```
+{% endif %}
 
 ## Creating Custom pasteCleanup Functions
 
@@ -95,6 +121,19 @@ The following example demonstrates a simple logic to strip the `<strong>` tags f
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+    	<paste-cleanup custom="customPasteCleanUp"/>
+    </kendo-editor>
+
+    <script>
+        function customPasteCleanUp(html) {
+            return html.replace(/<\/?strong[^>]*>/, "");
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

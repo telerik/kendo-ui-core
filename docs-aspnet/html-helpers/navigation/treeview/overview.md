@@ -39,7 +39,15 @@ The following example demonstrates how to define the TreeView.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-treeview name="treeView1">
+    <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Read_TreeViewData", "TreeView")" cache="true" />
+            </transport>
+        </hierarchical-datasource>
     </kendo-treeview>
 ```
 {% endif %}
@@ -212,6 +220,78 @@ The following example demonstrates the available TreeView events and how an even
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" drag-and-drop="true" load-on-demand="true" name="treeview" 
+    on-change="onChange" on-select="onSelect" on-check="onCheck" on-collapse="onCollapse"
+     on-expand="onExpand" on-dragstart="onDragStart" on-drag="onDrag" on-drop="onDrop
+     " on-dragend="onDragEnd" on-navigate="onNavigate">
+        <items>
+            <treeview-item expanded="true" checked="false" text="Furniture" selected="false" enabled="true">
+                <items>
+                    <treeview-item expanded="false" checked="false" text="Tables & Chairs" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Sofas" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Occasional Furniture" selected="false" enabled="true">
+                    </treeview-item>
+                </items>
+            </treeview-item>
+            <treeview-item expanded="false" checked="false" text="Decor" selected="false" enabled="true">
+                <items>
+                    <treeview-item expanded="false" checked="false" text="Bed Linen" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Curtains & Blinds" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Carpets" selected="false" enabled="true">
+                    </treeview-item>
+                </items>
+            </treeview-item>
+            <treeview-item expanded="false" checked="false" text="Storage" selected="false" enabled="true">
+            </treeview-item>
+        </items>
+        <checkboxes enabled="true" />
+    </kendo-treeview>
+
+    <script type="text/javascript">
+        function onChange(e) {
+            console.log('Selected node changed to:', e.sender.select());
+        }
+
+        function onSelect(e) {
+            console.log('Selected node:', e.node);
+        }
+
+        function onCheck(e) {
+            console.log('Checked node:', e.node);
+        }
+
+        function onCollapse(e) {
+            console.log('Collapsed node:', e.node);
+        }
+
+        function onExpand(e) {
+            console.log('Expanded node:', e.node);
+        }
+
+        function onDragStart(e) {
+            console.log('Started dragging:', e.sourceNode);
+        }
+
+        function onDrag(e) {
+            console.log("Dragging:", e.sourceNode);
+        }
+
+        function onDragEnd(e) {
+            console.log("Finished dragging:", e.sourceNode);
+        }
+
+        function onDrop(e) {
+            console.log("Dropped:", e.sourceNode);
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

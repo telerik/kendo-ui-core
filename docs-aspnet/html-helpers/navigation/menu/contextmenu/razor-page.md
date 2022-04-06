@@ -53,6 +53,37 @@ The example below demonstrates how to pass antiforgery token when an item from t
 		}
 	</script>
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+	<div id="target">Right click here</div>
+
+    <kendo-contextmenu name="menu" target="#target" orientation="ContextMenuOrientation.Vertical"
+		on-select="onSelect">
+        <items>
+            <menu-item text="Edit">
+            </menu-item>
+            <menu-item text="Cancel">
+            </menu-item>
+        </items>
+    </kendo-contextmenu>
+
+	<script>
+        function onSelect(e) {
+            if ($(e.item).text() == "Edit") {
+                $.ajax({
+                    url: "/ContextMenu/ContextMenuIndex?handler=Custom",
+                    type: "POST",
+                    contentType: "application/json",
+                    headers: {
+                        RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                    }
+                });
+            }        
+        }
+    </script>
+```
+{% endif %}
+
 ```tab-PageModel(cshtml.cs)      
 
     public void OnPostCustom()

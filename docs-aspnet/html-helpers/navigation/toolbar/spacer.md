@@ -21,6 +21,17 @@ The `Spacer` command type moves the tools that are declared after it to the righ
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-toolbar name="ToolBar">
+        <toolbar-items>
+            <item type="CommandType.Button" text="Button 1" id="button1" />
+            <item type="CommandType.Spacer" />
+            <item type="CommandType.Button" text="Button 2" id="button2" />
+        </toolbar-items>
+    </kendo-toolbar>
+```
+{% endif %}
 
 You can use multiple spacers to create an equal amount of space between several tools.
 
@@ -36,6 +47,19 @@ You can use multiple spacers to create an equal amount of space between several 
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-toolbar name="ToolBar">
+        <toolbar-items>
+            <item type="CommandType.Button" text="Button 1" id="button1" />
+            <item type="CommandType.Spacer" />
+            <item type="CommandType.Button" text="Button 2" id="button2" />
+            <item type="CommandType.Spacer" />
+            <item type="CommandType.Button" text="Button 3" id="button3" />
+        </toolbar-items>
+    </kendo-toolbar>
+```
+{% endif %}
 
 ## See Also
 

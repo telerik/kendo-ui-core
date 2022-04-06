@@ -89,6 +89,31 @@ To configure the Grid for {{ site.framework }} to display additional details of 
               .Pageable()
         )
     ```
+    
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                <schema data="Data" total="Total">
+                    <model id="ProductID">
+                        <fields>
+                            <field name="ProductID" type="number" editable="false"></field>
+                            <field name="ProductName" type="string"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Products_Read" "Grid")" />
+                </transport>
+            </datasource>
+            <columns>
+                <column field="ProductID" />
+                <column field="ProductName" />
+            </columns>
+            <pageable enabled="true"/>
+        </kendo-grid>
+    ```
+    {% endif %}
 
 1. Define the client template using the [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the data item&mdash;Product entity&mdash;to which the current Grid row is bound.
 
@@ -121,6 +146,30 @@ To configure the Grid for {{ site.framework }} to display additional details of 
               .ClientDetailTemplateId("client-template")
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" detail-template-id="client-template">
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                <schema data="Data" total="Total">
+                    <model id="ProductID">
+                        <fields>
+                            <field name="ProductID" type="number" editable="false"></field>
+                            <field name="ProductName" type="string"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Products_Read" "Grid")" />
+                </transport>
+            </datasource>
+            <columns>
+                <column field="ProductID" />
+                <column field="ProductName" />
+            </columns>
+            <pageable enabled="true"/>
+        </kendo-grid>
+    ```
+    {% endif %}
 
 {% if site.mvc %}
 1. Build and run the project.
@@ -220,6 +269,30 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
               )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" >
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                <schema data="Data" total="Total">
+                    <model id="CategoryID">
+                        <fields>
+                            <field name="CategoryID" type="number" editable="false"></field>
+                            <field name="CategoryName" type="string"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Categories_Read" "Grid")" />
+                </transport>
+            </datasource>
+            <columns>
+                <column field="CategoryID" />
+                <column field="CategoryName" />
+            </columns>
+            <pageable enabled="true"/>
+        </kendo-grid>
+    ```
+    {% endif %}
 
 1. Define the client template using [Kendo UI Template](https://docs.telerik.com/kendo-ui/framework/templates/overview) syntax. The context of the template is the **Category** entity to which the current Grid row is bound. The template itself contains another Grid which is bound to the `Products_Read` action.
 
@@ -244,6 +317,32 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
             )
         </script>
     ```
+    
+    {% if site.core %}
+    ```TagHelper
+        @{
+            var url =@Url.Action("HierarchyBinding_Orders","Grid");
+        }
+        <script id="client-template" type="text/html">
+        <kendo-grid name="grid_#=CategoryID#" is-in-client-template="true">
+            <columns>
+                <column field="ProductID">
+                </column>
+                <column field="ProductName" template="<strong>\\#:ProductName\\#</strong>""> // escape the "#" characters
+                </column>
+            </columns>
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <schema data="Data" total="Total" errors="Errors">
+                </schema>
+                <transport>
+                    <read url="@Html.Raw(url+"?employeeID=#=EmployeeID#")" />
+                </transport>
+            </datasource>
+            <pageable enabled="true" />
+        </kendo-grid>
+</script>
+    ```
+    {% endif %}
 
 1. Specify the `id` of the template using the `ClientDetailTemplateId` method.
 
@@ -261,6 +360,30 @@ To configure the Grid for {{ site.framework }} to display all **Product** entiti
               .ClientDetailTemplateId("client-template")
         )
     ```
+        {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid" detail-template-id="client-template" >
+            <datasource type="DataSourceTagHelperType.Ajax" page-size="20"
+                <schema data="Data" total="Total">
+                    <model id="CategoryID">
+                        <fields>
+                            <field name="CategoryID" type="number" editable="false"></field>
+                            <field name="CategoryName" type="string"></field>
+                        </fields>
+                    </model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Categories_Read" "Grid")" />
+                </transport>
+            </datasource>
+            <columns>
+                <column field="CategoryID" />
+                <column field="CategoryName" />
+            </columns>
+            <pageable enabled="true"/>
+        </kendo-grid>
+    ```
+    {% endif %}
 
 {% if site.mvc %}
 1. Build and run the project.

@@ -38,6 +38,32 @@ The following example demonstrates how to set three action buttons in a Dialog w
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-dialog name="dialog" title="Software Update" width="400" modal="false">
+        <actions>
+            <action text="Skip this version">
+            </action>
+            <action text="Remind me later">
+            </action>
+            <action text="Install update" primary="true" action="onInstall">
+            </action>
+        </actions>
+        <content>
+            <p>A new version of <strong>Kendo UI</strong> is available. Would you like to download and install it now?</p>
+        </content>
+    </kendo-dialog>
+
+    <script type="text/javascript">
+        function onInstall(e) {
+            alert("Install update action was clicked");
+            // Returning false will prevent the closing of the dialog.
+            return true;
+        }
+    </script>
+
+```
+{% endif %}
 
 ## See Also
 

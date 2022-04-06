@@ -17,7 +17,7 @@ The Telerik UI ColorPalette HtmlHelper for {{ site.framework }} is a server-side
 
 The ColorPalette provides suggestions depending on the typed text and allows multiple value entries.
 
-* [Demo page for the ColorPalette](https://demos.telerik.com/{{ site.platform }}/colorpicker/palette)
+* [Demo page for the ColorPalette](https://demos.telerik.com/{{ site.platform }}/colorpalette)
 
 ## Initializing the ColorPalette
 
@@ -29,6 +29,13 @@ The following example demonstrates how to define the ColorPalette.
           .Value("#ff0000") // Set the value of the ColorPalette.
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-colorpalette name = "colorpalette"
+                    value="#ff0000">
+</kendo-colorpalette>
+```
+{% endif %}
 
 ## Events
 
@@ -45,6 +52,15 @@ The following example demonstrates how to subscribe to events by a handler name.
             .Change("colorpalette_change")
         )
     )
+```
+{% if site.core %}
+```TagHelper
+<kendo-colorpalette name = "colorpalette"
+                    on-change="colorpalette_change">
+</kendo-colorpalette>
+```
+{% endif %}
+```script
     <script>
         function colorpalette_change(e) {
             // Handle the change event.
@@ -86,6 +102,6 @@ To reference an existing Telerik UI ColorPalette instance, use the [`jQuery.data
 
 ## See Also
 
-* [Basic Usage of the ColorPalette HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/palette)
-* [Using the Palette Presets in the ColorPalette HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpicker/palette-presets)
+* [Basic Usage of the ColorPalette HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/palette)
+* [Using the Palette Presets in the ColorPalette HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/colorpalette/palette-presets)
 * [Server-Side API](/api/colorpalette)

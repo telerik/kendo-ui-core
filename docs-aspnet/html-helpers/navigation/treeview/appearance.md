@@ -27,6 +27,7 @@ The default size value is `Medium`.
 
 The example below shows a basic TreeView configuration and how to set `Size` to "Large":
 
+```HtmlHelper
     @(Html.Kendo().TreeView()
         .Name("treeview")
         .Size(ComponentSize.Large)
@@ -49,6 +50,37 @@ The example below shows a basic TreeView configuration and how to set `Size` to 
             items.Add().Text("Item 3");
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" load-on-demand="true" name="treeview" size="ComponentSize.Large">
+        <items>
+            <treeview-item expanded="true" checked="false" text="Item 1" selected="false" enabled="true">
+                <items>
+                    <treeview-item expanded="false" checked="false" text="Item 1.1" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Item 1.2" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Item 1.3" selected="false" enabled="true">
+                    </treeview-item>
+</items>
+            </treeview-item>
+            <treeview-item expanded="false" checked="false" text="Item 2" selected="false" enabled="true">
+                <items>
+                    <treeview-item expanded="false" checked="false" text="Item 2.1" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Item 2.2" selected="false" enabled="true">
+                    </treeview-item>
+                    <treeview-item expanded="false" checked="false" text="Item 2.3" selected="false" enabled="true">
+                    </treeview-item>
+                </items>
+            </treeview-item>
+            <treeview-item expanded="false" checked="false" text="Item 3" selected="false" enabled="true">
+            </treeview-item>
+        </items>
+    </kendo-treeview>
+```
+{% endif %}
 
 Below is the HTML that is affected from by the `Size` option. The changes are applied to the `div.k-treeview` wrapping element:
 

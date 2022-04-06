@@ -42,6 +42,18 @@ The following sections provide step-by-step instructions and examples on getting
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-grid name="grid">
+            <selectable mode="multiple,cell" />
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Orders_Read","Grid")" />
+                </transport>
+            </datasource>
+        </kendo-grid>
+    ```
+    {% endif %}
 
 ### Initializing a ContextMenu
 
@@ -71,6 +83,27 @@ The following sections provide step-by-step instructions and examples on getting
             .Events(ev => ev.Select("onSelect"))
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-contextmenu name="contextmenu" target=".contextMenuIcon" show-on="click" align-to-anchor="true" on-select="onSelect">
+            <popup-animation>
+                <open effects="fade:in" duration="500" />
+            </popup-animation>
+            <items>
+                <menu-item text="Copy" image-html-attributes='new Dictionary<string,object> { ["id"] = "copy" }'>
+                </menu-item>
+                <menu-item text="Copy with Headers" image-html-attributes='new Dictionary<string,object> { ["id"] = "copyWithHeaders" }'></menu-item>
+                <menu-item separator="true"></menu-item>
+                <menu-item text="Export" image-html-attributes='new Dictionary<string,object> { ["id"] = "export" }'>
+                </menu-item>
+                <menu-item text="Export with Headers" image-html-attributes='new Dictionary<string,object> { ["id"] = "exportWithHeaders" }'>
+                </menu-item>
+                <menu-item text="Export to Chart" image-html-attributes='new Dictionary<string,object> { ["id"] = "exportToChart" }'>
+                </menu-item>
+            </items>
+        </kendo-contextmenu>
+    ```
+    {% endif %}
 
 1. Define the event handling function.
 

@@ -28,6 +28,24 @@ The ToolBar provides options for closing its popup from a button `click` event i
     }
 </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-toolbar name="ToolBar">
+        <toolbar-items>
+            <item type="CommandType.Button" text="Button" />
+            <item template="<a class='k-item k-state-default ng-scope' >Test</a>"
+            overflow-template="<button onclick='action()' class='btn' >Test</button>"
+            overflow="ShowInOverflowPopup.Always">
+		    </item>
+        </toolbar-items>
+    </kendo-toolbar>
+    <script>
+        function action() {
+            $("#toolbar").data("kendoToolBar").popup.close();
+        }
+    </script>
+```
+{% endif %}
 ```Controller
     public class ToolBarController : Controller
     {

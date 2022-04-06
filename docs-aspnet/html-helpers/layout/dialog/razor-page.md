@@ -42,6 +42,33 @@ The example below demonstrates how to pass antiforgery token when an action from
 		}
 	</script>
 ```
+{% if site.core %}
+```tab-TagHelper
+    <kendo-dialog name="dialog" title="Data Update" width="400" modal="false" >
+        <actions>            
+            <action text="Cancel">
+            </action>
+            <action text="Send data" primary="true" action="onSendData">
+            </action>
+        </actions>
+        <content>
+            <p>Would you like to confirm updating the data?</p>
+        </content>
+    </kendo-dialog>
+	
+	<script>
+		function onSendData() {
+			$.ajax({
+				url: "/Dialog/DialogIndex",
+				type: "POST",				
+				headers: {
+					RequestVerificationToken: kendo.antiForgeryTokens().__RequestVerificationToken
+				},
+				dataType: "json"
+			});
+		}
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 
     public void OnPost()

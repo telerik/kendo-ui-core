@@ -23,6 +23,13 @@ To define the immutable elements in the content area, set the [`contenteditable`
         .Value("<div contenteditable='false'>this is immutable</div><div>this is mutable</div>")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor" value="<div contenteditable='false'>this is immutable</div><div>this is mutable</div>">
+        <immutables enabled="true" />
+    </kendo-editor>
+```
+{% endif %}
 
 ## Serializing Immutables
 
@@ -41,6 +48,14 @@ The `immutables.serialization` configuration method accepts the following parame
         .Value("<div contenteditable='false'>this is immutable</div><div>this is mutable</div>")
     )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-editor name="editor" value="<div contenteditable='false'>this is immutable</div><div>this is mutable</div>">
+            <immutables serialization="<div></div>" />
+        </kendo-editor>
+    ```
+    {% endif %}
+    
 
 * [Kendo UI for jQuery template](https://docs.telerik.com/kendo-ui/framework/templates/overview)&mdash;Contains the immutable `data` DOM element.
 
@@ -53,6 +68,7 @@ The `immutables.serialization` configuration method accepts the following parame
         .Value("<div contenteditable='false'>this is immutable</div><div>this is mutable</div>")
     )
     ```
+    
 
 * `Function`&mdash;A callback function. Exposes the immutable DOM element in the overload and is expected to return a string.
 
@@ -73,6 +89,20 @@ The `immutables.serialization` configuration method accepts the following parame
         }
     </script>
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-editor name="editor">
+            <immutables serialization-handler="immutablesSerializationHandler" />
+        </kendo-editor>
+        
+        <script>
+            function immutablesSerializationHandler(node) {
+                var tagName = node.tagName;
+                return "<" + tagName + ">" + "</" + tagName + ">";
+            }
+        </script>
+    ```
+    {% endif %}
 
 ## Deserializing Immutables
 

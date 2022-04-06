@@ -25,13 +25,19 @@ The Grid supports endless scrolling both when it is bound to local and remote da
 * When bound to local data arrays, the Grid serializes all items to the client and while the user scrolls, the widget displays new items.
 * When bound to remote data, the Grid serializes only the items for one page. When the user scrolls to the end of the list, the Grid sends an AJAX request to get the items for the next page. When the data is returned, the Grid renders only the new items and appends them to the old ones.
 
-    ```HtmlHelper
-        @(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
-            .Name("grid")
-            .Scrollable(sc => sc.Endless(true))
-            /* Other configuration. */
-        )
-    ```
+```HtmlHelper
+@(Html.Kendo().Grid<AspNetCoreGrid.Models.OrderViewModel>()
+    .Name("grid")
+    .Scrollable(sc => sc.Endless(true))
+    /* Other configuration. */
+)
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid" >
+        <scrollable enabled="true" endless="true"/>
+    </kendo-grid>
+```
+{% endif %}
 
 ## Using with Editing
 

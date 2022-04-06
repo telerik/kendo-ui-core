@@ -26,7 +26,6 @@ To enable the Excel export option of the Grid:
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
         <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
-
         @(Html.Kendo().Grid<ProductViewModel>()
             .Name("grid")
             .ToolBar(tools => tools.Excel())
@@ -38,6 +37,25 @@ To enable the Excel export option of the Grid:
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.js"></script>
+        <script src="https://kendo.cdn.telerik.com/{{ site.mvcCoreVersion }}/js/kendo.all.min.js"></script>
+        <kendo-grid name="grid">
+            <toolbar>
+                <toolbar-button name="excel"></toolbar-button>
+            </toolbar>
+            <excel file-name="Products.xlsx" />
+            <datasource type="DataSourceTagHelperType.Ajax">
+                <transport>
+                    <read url="@Url.Action("Products_Read","Home")" />
+                </transport>
+            </datasource>
+        </kendo-grid>
+    ```
+    {% endif %}
+        
 
 To initiate the Excel export, press the **Toolbar** button or use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid) and call the [`saveAsExcel`](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/methods/saveasexcel) method.
 
@@ -80,6 +98,21 @@ By default, the Telerik UI Grid for {{ site.framework }} exports only the curren
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="grid">
+        <toolbar>
+            <toolbar-button name="excel"></toolbar-button>
+        </toolbar>
+        <excel all-pages="true" />
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Products_Read","Home")" />
+            </transport>
+        </datasource>
+    </kendo-grid>
+```
+{% endif %}
 
 ## Customizing Excel Documents
 

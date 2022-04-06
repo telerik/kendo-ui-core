@@ -26,6 +26,21 @@ You can define the `Checkboxes` configuration option by:
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+            <hierarchical-datasource>
+                <schema>
+                    <hierarchical-model id="id"></hierarchical-model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Read_TreeViewData", "TreeView")"/>
+                </transport>
+            </hierarchical-datasource>
+            <checkboxes enabled="true" />
+        </kendo-treeview>
+    ```
+    {% endif %}
 
 * Using inner (detailed) configuration options.
   * The `Name()` configuration sets the `name` attribute of the checkbox inputs. That name will be used when a form is being posted to the server.
@@ -51,6 +66,24 @@ You can define the `Checkboxes` configuration option by:
             <input type='checkbox' name='checkedFiles[#= item.id #]' value='true' />
           </script>
     ```
+        {% if site.core %}
+    ```TagHelper
+        <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+            <hierarchical-datasource>
+                <schema>
+                    <hierarchical-model id="id"></hierarchical-model>
+                </schema>
+                <transport>
+                    <read url="@Url.Action("Read_TreeViewData", "TreeView")"/>
+                </transport>
+            </hierarchical-datasource>
+            <checkboxes check-children="true" enabled="true" template-id="checkbox-template"/>
+        </kendo-treeview>
+        <script type="text/kendo-template" id="checkbox-template">
+            <input type='checkbox' name='checkedFiles[#= item.id #]' value='true' />
+        </script>
+    ```
+    {% endif %}
 
 ## See Also
 

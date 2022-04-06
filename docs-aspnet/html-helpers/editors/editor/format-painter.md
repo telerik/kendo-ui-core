@@ -22,6 +22,20 @@ Use the `Format Painter` option of the Editor to quickly apply the same formatti
             )
         )
     ```
+    {% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+	    <tools>
+	 	    <tool name="copyFormat">
+	 	    </tool>
+	 	    <tool name="applyFormat">
+	 	    </tool>
+	 	    <tool name="cleanFormatting">
+	 	    </tool>
+	    </tools>
+    </kendo-editor>
+```
+{% endif %}
 1. Focus or select the text that you want to copy the formatting from.
 1. Click on the `Copy Format` tool in the widget's toolbar.
 1. Select the text fragment that you want to apply the style to.

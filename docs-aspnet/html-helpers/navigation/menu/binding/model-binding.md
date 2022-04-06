@@ -49,6 +49,27 @@ The Telerik UI Menu enables you to bind it to a hierarchical model.
         })
     )
     ```
+    {% if site.core %}
+```TagHelper
+@{
+    var menuItems = Model.Select(category =>
+    {
+        return new MenuItemBase
+        {
+            Text = category.CategoryName,
+            Children = category.Products.Select(product =>
+            {
+                return new MenuItemBase { Text = product.ProductName };
+            })
+        };
+    });
+}
+
+    <kendo-menu name="Menu" bind-to="menuItems">
+    </kendo-menu>
+```
+{% endif %}
+
 
 ## See Also
 

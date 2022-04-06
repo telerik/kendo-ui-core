@@ -39,6 +39,29 @@ The following example shows how to disable the built-in validation on blur.
         });
     )
 ```
+{% if site.core %}
+```TagHelper
+        <kendo-form name="exampleForm" form-data="@Model"" action="Index" method="POST">
+        <form-items>
+            <form-item type="group">
+                <item-label text="Registration Form">
+                    <form-items>
+                        <form-item field="FirstName">
+                            <item-label text="FirstName" />
+                        </form-item>
+                        <form-item field="LastName">
+                            <item-label text="Last Name:">
+                        </form-item>
+                        <form-item field="Agree">
+                            <item-label text="Agree to Terms:">
+                        </form-item>
+                    </form-items>
+            </form-item>
+        </form-items>
+        <validatable validate-on-blur="true" error-template="<span style='color: red'>Fill in #=data.field#</span>" />
+    </kendo-form>
+```
+{% endif %}
 
 ## Validation Summary
 
@@ -107,6 +130,33 @@ The following example shows how to set `ValidationSummary.Container`.
         });
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-form name="exampleForm" form-data="@Model" action="Index" method="POST">
+        <form-items>
+            <form-item type="group">
+                <item-label text="Registration Form">
+                    <form-items>
+                        <form-item field="FirstName">
+                            <item-label text="FirstName" />
+                        </form-item>
+                        <form-item field="LastName">
+                            <item-label text="Last Name:">
+                        </form-item>
+                        <form-item field="HireDate">
+                            <item-label text="Hire Date:">
+                                <datepicker-editor></datepicker-editor>
+                        </form-item>
+                        <form-item field="retireDate">
+                            <item-label text="Retire Date:">
+                                <datepicker-editor></datepicker-editor>
+                        </form-item>
+                    </form-items>
+            </form-item>
+        </form-items>
+    </kendo-form>
+```
+{% endif %}
 
 ## Error Message Template
 

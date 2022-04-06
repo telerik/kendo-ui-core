@@ -18,7 +18,12 @@ The following example demonstrates how to enable the default built-in `No Record
     )
 ```
 {% if site.core %}
-{% else %}
+```TagHelper
+    <kendo-grid name="Grid">
+	    <no-records />
+    </kendo-grid>
+```
+{% endif %}
 The following example demonstrates how to define a custom `No Records` message. In this case, the custom message is be displayed centered inside the empty Grid's data area.
 
 ```HtmlHelper
@@ -26,6 +31,12 @@ The following example demonstrates how to define a custom `No Records` message. 
         .Name("Grid")
         .NoRecords("string HTML template, automatically centered")
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="Grid">
+	    <no-records template="string HTML template, automatically centered" />
+    </kendo-grid>
 ```
 {% endif %}
 The following example demonstrates how to define a non-centered custom `No Records` message. In this case, the custom message is displayed with no centering styles applied, which allows an easier and more advanced appearance customization through custom CSS code.
@@ -36,6 +47,13 @@ The following example demonstrates how to define a non-centered custom `No Recor
         .NoRecords(n => n.Template("string HTML template, not centered"))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-grid name="Grid">
+	    <no-records template="string HTML template, automatically centered" />
+    </kendo-grid>
+```
+{% endif %}
 
 The following example demonstrates how to define a custom `No Records` message with an external Kendo UI template. This case is the same as the above one, but the template is defined outside the Grid declaration.
 
@@ -49,6 +67,17 @@ The following example demonstrates how to define a custom `No Records` message w
         .NoRecords(n => n.TemplateId("no-records-template-id"))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <script id="no-records-template-id" type="text/x-kendo-template">
+        external HTML template, not centered
+    </script>
+    
+    <kendo-grid name="Grid">
+	    <no-records template-id="no-records-template-id" />
+    </kendo-grid>
+```
+{% endif %}
 
 ## See Also
 

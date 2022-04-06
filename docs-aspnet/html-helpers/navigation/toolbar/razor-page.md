@@ -67,6 +67,71 @@ For the full project with RazorPages examples, visit our [GitHub repository](htt
     </script>
 	
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+    @addTagHelper *, Kendo.Mvc
+    <kendo-toolbar name="ToolBar">
+        <toolbar-items>
+            <item text="Button" type="CommandType.Button" sprite-css-class="">
+            </item>
+            <item text="Toggle Button" togglable="true" type="CommandType.Button">
+            </item>
+            <item text="Insert" type="CommandType.SplitButton">
+                <menu-buttons>
+                    <toolbar-button icon="insert-up" text="Insert above" />
+                    <toolbar-button icon="insert-middle" text="Insert between" />
+                    <toolbar-button icon="insert-down" text="Insert below" />
+                </menu-buttons>
+            </item>
+            <item type="CommandType.Separator">
+            </item>
+            <item template="<label for='dropdown'>Format:</label>">
+            </item>
+            <item template="<input id='dropdown' style='width: 150px;' />" overflow="ShowInOverflowPopup.Never">
+            </item>
+            <item type="CommandType.Separator">
+            </item>
+            <item type="CommandType.ButtonGroup">
+                <buttons>
+                    <toolbar-button group="text-align" icon="align-left" togglable="true" text="Left" />
+                    <toolbar-button group="text-align" icon="align-center" togglable="true" text="Center" />
+                    <toolbar-button group="text-align" icon="align-right" togglable="true" text="Right" />
+                </buttons>
+            </item>
+            <item type="CommandType.ButtonGroup">
+                <buttons>
+                    <toolbar-button icon="bold" togglable="true" text="Bold" />
+                    <toolbar-button icon="italic" togglable="true" text="Italic" />
+                    <toolbar-button icon="underline" togglable="true" text="Underline" />
+                </buttons>
+            </item>
+            <item text="Action" type="CommandType.Button" overflow="ShowInOverflowPopup.Always">
+            </item>
+            <item text="Another Action" type="CommandType.Button" overflow="ShowInOverflowPopup.Always">
+            </item>
+            <item text="Something else here" type="CommandType.Button" overflow="ShowInOverflowPopup.Always">
+            </item>
+        </toolbar-items>
+    </kendo-toolbar>
+    
+    <script>
+        $(document).ready(function () {
+            $("#dropdown").kendoDropDownList({
+                optionLabel: "Paragraph",
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: [
+                    { text: "Heading 1", value: 1 },
+                    { text: "Heading 2", value: 2 },
+                    { text: "Heading 3", value: 3 },
+                    { text: "Title", value: 4 },
+                    { text: "Subtitle", value: 5 },
+                ]
+            });
+        });
+    </script>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 	
     public void OnGet()

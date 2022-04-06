@@ -18,6 +18,16 @@ The Telerik UI Editor for {{ site.framework }} comes with a built-in option to e
             )
     )
 ````
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+        <tools>
+	 	    <tool name="pdf">
+	 	    </tool>
+	    </tools>
+    </kendo-editor>
+```
+{% endif %}
 
 Customizations such as file name, font size, export of all pages can be added to the [`Pdf`](/api/Kendo.Mvc.UI.Fluent/EditorPdfSettingsBuilder) option of the widget:
 
@@ -27,6 +37,7 @@ Customizations such as file name, font size, export of all pages can be added to
         .Pdf(pdf => pdf
             .Margin(20, 20, 20, 20)
             .FileName("Telerik UI Editor Export")
+            .ProxyURL(Url.Action("Pdf_Export_Save", "Editor"))
             .PaperSize("A4")
         )
         .Tools(tools => tools
@@ -34,6 +45,19 @@ Customizations such as file name, font size, export of all pages can be added to
         )
     )
 ````
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor">
+        <tools>
+	 	    <tool name="pdf">
+	 	    </tool>
+	    </tools>
+	    <pdf paper-size="A4" file-name="Telerik UI Editor Export" proxy-url="/Editor/Pdf_Export_Save">
+            <margin left="20" right="20" top="20" bottom="20" />
+	    </pdf>
+    </kendo-editor>
+```
+{% endif %}
 
 ## See Also
 

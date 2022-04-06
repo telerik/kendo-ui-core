@@ -519,6 +519,34 @@ Removes a drawing previously added with [`addDrawing`](#methods-addDrawing).
 
 The drawing object.
 
+### resize
+
+Resize the sheet to accommodate the specified number of rows and columns. If the
+new dimensions are smaller than the current ones, any existing data in the rows
+or columns that are to be removed will be discarded.
+
+#### Parameters
+
+##### newRows `Number`
+
+The new number of rows.
+
+##### newColumns `Number`
+
+The new number of columns.
+
+#### Example
+
+    <div id="spreadsheet"></div>
+    <script type="text/javascript" charset="utf-8">
+        $("#spreadsheet").kendoSpreadsheet({ rows: 10, columns: 5 });
+        var spreadsheet = $("#spreadsheet").data("kendoSpreadsheet");
+        var sheet = spreadsheet.activeSheet();
+
+        sheet.resize(1000, 30);
+        // the sheet will now contain 1000 rows and 30 columns
+    </script>
+
 ### rowHeight
 
 Gets or sets the height of the row at the given index.

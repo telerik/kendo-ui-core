@@ -36,6 +36,27 @@ The ToolBar enables you to use [FontAwesome icons](http://fortawesome.github.io/
     }
 </style>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-toolbar name="toolBar">
+        <toolbar-items>
+            <item type="CommandType.Button" text="Paper plane" sprite-css-class="fas fa-paper-plane" />
+            <item type="CommandType.Button" text="Plane" sprite-css-class="fal fa-plane" />
+            <item type="CommandType.Button" text="Space shuttle" sprite-css-class="fas fa-space-shuttle" />
+        </toolbar-items>
+    </kendo-toolbar>
+    
+    <style>
+        .fas.k-sprite,
+        .fas.k-sprite::before,
+        .fal.k-sprite,
+        .fal.k-sprite::before {
+            font-size: 14px;
+            line-height: 16px;
+        }
+    </style>
+```
+{% endif %}
 ```Controller
     public class ToolBarController : Controller
     {

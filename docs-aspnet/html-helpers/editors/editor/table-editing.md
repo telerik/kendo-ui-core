@@ -24,6 +24,45 @@ To enable the table editing, you should add the `TableEditing` tool to the widge
       .Tools(tools => tools.TableEditing())
     )
 ```
+```
+{% if site.core %}
+```TagHelper
+    <kendo-editor name="editor" style="height:440px" aria-label="editor">
+      <tools>
+        <tool name="tableWizard">
+        </tool>
+        <tool name="createTable">
+        </tool>
+        <tool name="addColumnLeft">
+        </tool>
+        <tool name="addColumnRight">
+        </tool>
+        <tool name="addRowAbove">
+        </tool>
+        <tool name="addRowBelow">
+        </tool>
+        <tool name="deleteColumn">
+        </tool>
+        <tool name="deleteRow">
+        </tool>
+        <tool name="mergeCellsHorizontally">
+        </tool>
+        <tool name="mergeCellsVertically">
+        </tool>
+        <tool name="splitCellHorizontally">
+        </tool>
+        <tool name="splitCellVertically">
+        </tool>
+        <tool name="tableAlignLeft">
+        </tool>
+        <tool name="tableAlignCenter">
+        </tool>
+        <tool name="tableAlignRight">
+        </tool>
+      </tools>
+    </kendo-editor>
+```
+{% endif %}
 
 ## Inserting a Table
 

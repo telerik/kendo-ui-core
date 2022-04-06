@@ -37,6 +37,30 @@ The following example demonstrates how to configure a TreeView with three levels
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" load-on-demand="true" name="treeview">
+        <items>
+            <treeview-item expanded="true" text="My Web Site">
+                <items>
+                    <treeview-item expanded="true"  text="images">
+                        <items>
+                            <treeview-item text="logo.png">
+                            </treeview-item>
+                            <treeview-item text="body-back.png">
+                            </treeview-item>
+                        </items>
+                    </treeview-item>
+                    <treeview-item text="about.html" >
+                    </treeview-item>
+                    <treeview-item text="contacts.html" >
+                    </treeview-item>
+                </items>
+            </treeview-item>
+        </items>
+    </kendo-treeview>
+```
+{% endif %}
 
 ## Local Data Binding
 
@@ -48,6 +72,12 @@ You can bind the TreeView locally on the server by passing the appropriate colle
     .BindTo((IEnumerable<TreeViewItemModel>)ViewBag.treeData)
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview name="treeview-left" bind-to="(IEnumerable<TreeViewItemBase>)ViewBag.inlineDefault">
+    </kendo-treeview>
+```
+{% endif %}
 ```Controller
 public ActionResult Local_Data_Binding()
 {
@@ -119,6 +149,20 @@ The TreeView provides support for remote data binding by using a [`DataSource`](
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Read_TreeViewData", "TreeView")"/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-treeview>
+```
+{% endif %}
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {
@@ -166,6 +210,18 @@ In order to set up the TreeView component bindings, you need to configure the `R
     )
 )
 ```
+```tab-TagHelper(cshtml)
+    <kendo-treeview auto-bind="true" datatextfield="Name" load-on-demand="true" name="treeview">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Page("TreeViewIndex", "TreeViewRead")"/>
+            </transport>
+        </hierarchical-datasource>
+    </kendo-treeview>
+```
 ```tab-PageModel(cshtml.cs)
     public JsonResult OnGetTreeViewRead(int? id)
     {
@@ -180,6 +236,7 @@ In order to set up the TreeView component bindings, you need to configure the `R
     }
 ```
 {% endif %}
+
 ## See Also
 
 * [Local Data Binding by the TreeView HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/treeview/local-data-binding)
