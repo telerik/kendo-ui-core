@@ -41,7 +41,7 @@ To customize the rows and cells based on the values of the data items, utilize a
 
 The usage of the `dataBound` handler and the iteration of the table rows is suitable only if you intend to customize all Grid rows. The approach loops through all Grid rows and, based on the values they contain, determines which custom-class names will be applied to them.
 
-Refer to the [following REPL](https://netcorerepl.telerik.com/ccuPvWbJ55wNDdBy48) for a live demo of the approach.
+Refer to the [following REPL](https://netcorerepl.telerik.com/GmYHdEFR556Q5I6J58) for a live demo of the approach.
 
 ```
     //Grid definition also available in the *Custom data source Demo*
