@@ -32,6 +32,16 @@ To enable the chunk upload:
             )
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+    <kendo-upload name="files">
+	    <async save-url="@Url.Action("ChunkSave","Upload")" 
+		       remove-url="@Url.Action("Remove","Upload")" 
+		       auto-upload="true" 
+		       chunk-size="1100"/>
+    </kendo-upload>
+    ```
+    {% endif %}
 
 {% if site.core %}
 1. Implement the server-side logic (that is, the `ChunkSave` action is assigned) which processes the file chunks and merges them into file:
@@ -335,6 +345,19 @@ To fine-tune the chunk upload, use any of the following configuration options:
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-upload name="files">
+    	<async auto-upload="true"
+    		   save-url="@Url.Action("ChunkSave","Upload")" 
+    		   remove-url="@Url.Action("Remove","Upload")"
+    		   chunk-size="1100" 
+    		   concurrent="true" 
+    		   auto-retry-after="300" 
+    		   max-auto-retries="4"/>
+    </kendo-upload>
+```
+{% endif %}
 
 ## See Also
 

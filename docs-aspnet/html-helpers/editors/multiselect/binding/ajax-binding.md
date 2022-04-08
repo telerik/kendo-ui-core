@@ -46,6 +46,19 @@ You can configure the Telerik UI MultiSelect for Ajax binding to the Northwind *
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-multiselect name="productMultiSelect"
+                           datatextfield="ProductName"
+                           datavaluefield="ProductID">
+           <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+               <transport>
+                    <read url="@Url.Action("GetProducts", "Home")" />
+               </transport>
+           </datasource>
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## See Also
 

@@ -12,7 +12,7 @@ This article describes how to configure the Telerik UI Upload component for {{ s
 
 See the Upload configuration in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)
+```tab-HtmlHelper(cshtml)
 @page
 @model Telerik.Examples.RazorPages.Pages.Upload.UploadIndexModel
 @{
@@ -28,12 +28,32 @@ See the Upload configuration in the example below, and for the full project with
 	.Name("files")
 	.Async(a=>
 		a.SaveUrl("./UploadIndex?handler=Save")
-		.RemoveUrl("./UploadIndex?handler=Save")
+		.RemoveUrl("./UploadIndex?handler=Remove")
 	)
 	.Validation(validation => validation.AllowedExtensions(new string[] { ".jpg" , ".png", ".jpeg" }))
     .Validation(validation => validation.MaxFileSize(2000000))
 )
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+@page
+@model Telerik.Examples.RazorPages.Pages.Upload.UploadIndexModel
+@{
+	ViewData["Title"] = "UploadIndex";
+    string[] extensions = { ".gif", ".jpg", ".png" };
+}
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@Html.AntiForgeryToken()
+
+<h1>UploadIndex</h1>
+
+<kendo-upload name="files">
+    <async remove-url="@Url.Page("UploadIndex","Remove")" save-url="@Url.Page("UploadIndex","Save")" />
+    <validation allowed-extensions="@extensions" max-file-size="2000000" />
+</kendo-upload>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)
     public class UploadIndexModel : PageModel
     {

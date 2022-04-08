@@ -28,6 +28,8 @@ You can configure the Telerik UI MultiSelect for server binding to the Northwind
 1. Add a server bound MultiSelect.
 
    ```HtmlHelper
+        @model IEnumerable<ProjectName.Models.ProductViewModel>
+
         @(Html.Kendo().MultiSelect()
             .Name("productDropDownList") // The name of the MultiSelect is mandatory. It specifies the "id" attribute of the widget.
             .DataTextField("ProductName") // Specify which property of the Product to be used by the MultiSelect as a text.
@@ -35,6 +37,17 @@ You can configure the Telerik UI MultiSelect for server binding to the Northwind
             .BindTo(Model)   // Pass the list of Products to the MultiSelect.
         )
    ```
+   {% if site.core %}
+    ```TagHelper
+        @model IEnumerable<ProjectName.Models.ProductViewModel>
+        
+        <kendo-multiselect name="productDropDownList"
+                           datatextfield="ProductName"
+                           datavaluefield="ProductID"
+                           bind-to="Model">
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## See Also
 

@@ -37,6 +37,26 @@ The following example demonstrates how to access the `window` and `document` obj
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" title="Iframe Window" iframe="true" content-url="@Url.Action("Content","Home")">
+    </kendo-window>
+
+    <script>
+        $(function() {
+            var windowElement = $("#window");
+            var iframeDomElement = windowElement.children("iframe")[0];
+            var iframeWindowObject = iframeDomElement.contentWindow;
+
+            var iframeDocumentObject = iframeDomElement.contentDocument;
+            // which is equivalent to
+            // var iframeDocumentObject = iframeWindowObject.document;
+
+            var iframejQuery = iframeWindowObject.$; // if jQuery is registered inside the iframe page, of course
+        });
+    </script>
+```
+{% endif %}
 
 ## See Also
 

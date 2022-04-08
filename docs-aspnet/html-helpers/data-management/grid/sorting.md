@@ -21,6 +21,13 @@ To control the sorting in the Grid, use the [`Sortable`](/api/Kendo.Mvc.UI.Fluen
         ...
     )
 ```
+{% if site.core %}
+```TagHelper
+     <kendo-grid name="Grid">
+        <sortable enabled="true"/>
+     </kendo-grid>
+```
+{% endif %} 
 
 > Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be sortable. To enable sorting on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
 
@@ -35,28 +42,48 @@ The Grid supports the following sort modes:
 
 By default, the Grid applies single-column sorting when the `Sortable()` method is enabled. Alternatively, you can configure single-column sort mode by setting the [`SortMode`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#sortmodekendomvcuigridsortmode){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#sortmodekendomvcuigridsortmode){% endif %}.
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable(sortable => sortable
             .SortMode(GridSortMode.SingleColumn))
         ...
     )
+```
+{% if site.core %}
+```TagHelper
+     <kendo-grid name="Grid">
+        <sortable enabled="true" mode="single"/>
+     </kendo-grid>
+```
+{% endif %} 
+
 
 ### Multi-Column Sorting
 
 To allow the multi-column sorting, set the [`SortMode()`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#sortmodekendomvcuigridsortmode){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#sortmodekendomvcuigridsortmode){% endif %} method to `MultipleColumn`.
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable(sortable => sortable
             .SortMode(GridSortMode.MultipleColumn))
         ...
     )
+```
+{% if site.core %}
+```TagHelper
+     <kendo-grid name="Grid">
+        <sortable enabled="true" mode="multiple"/>
+     </kendo-grid>
+```
+{% endif %} 
 
 You can also specify if the columns can be unsorted by setting the [`AllowUnsort`](/api/Kendo.Mvc.UI.Fluent/GridBoundColumnSortableBuilder#allowunsortsystemboolean) property to `true` or `false`. For a runnable example, refer to the [demo on sorting in the Grid](https://demos.telerik.com/{{ site.platform }}/grid/sorting).
 
 With the multi-column sorting you can configure the Grid to display the sort indexes in the header by enabling the [`ShowIndexes`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#showindexessystemboolean){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#showindexessystemboolean){% endif %} property.
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable(sortable => sortable
@@ -65,6 +92,14 @@ With the multi-column sorting you can configure the Grid to display the sort ind
             .ShowIndexes(true))
         ...
     )
+```
+{% if site.core %}
+```TagHelper
+     <kendo-grid name="Grid">
+        <sortable enabled="true" allow-unsort="true" mode="multiple" show-indexes="true"/>
+     </kendo-grid>
+```
+{% endif %} 
 
 ### Mixed-Column Sorting
 
@@ -72,17 +107,27 @@ The mixed sorting allows you to [single-sort](#single-column-sorting) columns by
 
 To enable the mixed-column sorting, set the [`SortMode()`]{% if site.core %}(/api/Kendo.Mvc.UI.Fluent/GridSortableSettingsBuilder#sortmodekendomvcuigridsortmode){% else %}(/api/Kendo.Mvc.UI.Fluent/GridSortSettingsBuilder#sortmodekendomvcuigridsortmode){% endif %} option to `Mixed`.
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable(sortable => sortable
             .SortMode(GridSortMode.Mixed))
         ...
     )
+```
+{% if site.core %}
+```TagHelper
+     <kendo-grid name="Grid">
+        <sortable enabled="true" mode="mixed"/>
+     </kendo-grid>
+```
+{% endif %} 
 
 ## Defining Field Type
 
 If you want to sort a column as a different type than the original one in the database (for example, decimal<->string and vice versa), you can use the following approach:
 
+```HtmlHelper
     @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
         .Name("Grid")
         .Sortable()
@@ -99,6 +144,26 @@ If you want to sort a column as a different type than the original one in the da
             .Read(read => read.Action("Orders_Read", "Grid"))
         )
     )
+```
+{% if site.core %}
+```TagHelper
+     <kendo-grid name="Grid">
+        <sortable enabled="true"/>
+        <datasource type="DataSourceTagHelperType.Ajax" page-size="20" server-operation="false">
+            <schema>
+               <model id="OrderID">
+                   <fields>
+                       <field name="Freight" type="string"></field>
+                   </fields>
+               </model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Orders_Read","Grid")"/>
+            </transport>
+        </datasource>
+     </kendo-grid>
+```
+{% endif %} 
 
 ## See Also
 

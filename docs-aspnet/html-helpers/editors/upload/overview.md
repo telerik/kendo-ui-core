@@ -37,12 +37,10 @@ The following example demonstrates how to define the Upload widget.
 )
 ```
 ```TagHelper
-    <kendo-upload drop-zone="drop-zone1" name="test">
-        <async auto-upload="true" />
-        <validation allowed-extensions="@Model.Extensions" />
-        <files>
-            <file name="dummy" size="1024" />
-        </files>
+    <kendo-upload name="files">
+        <async auto-upload="true" 
+               save-url="@Url.Action("Save", "Upload")" 
+               remove-url="@Url.Action("Remove","Upload")" />
     </kendo-upload>
 ```
 ```Controller
@@ -189,6 +187,16 @@ An Upload widget configured in such way offers support for multiple file selecti
     });
 </script>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-upload name="files" multiple="true">
+    <async save-url="@Url.Action("ChunkSave","Upload")" 
+	       remove-url="@Url.Action("Remove","Upload")" 
+	       auto-upload="true" 
+	       chunk-size="1100"/>
+</kendo-upload>
+```
+{% endif %}
 
 ## Functionality and Features
 
@@ -270,6 +278,70 @@ The following example demonstrates Upload HTML helper exposes several events, wh
     }
 </script>
 ```
+{% if site.core %}
+```TagHelper
+<kendo-upload name="files" 
+			  on-cancel="onCancel" 
+			  on-complete="onComplete"
+			  on-error="onError" 
+			  on-progress="onProgress" 
+			  on-remove="onRemove" 
+			  on-select="onSelect"
+			  on-success="onSuccess" 
+			  on-upload="onUpload">
+	<async auto-upload="true" 
+           save-url="@Url.Action("Save","Upload")" 
+           remove-url="@Url.Action("Remove","Upload")"/>
+</kendo-upload>
+
+
+<script type="text/javascript">
+    function onSelect(e) {
+        console.log("Select :: " + getFileInfo(e));
+    }
+
+    function onUpload(e) {
+        console.log("Upload :: " + getFileInfo(e));
+    }
+
+    function onSuccess(e) {
+        console.log("Success (" + e.operation + ") :: " + getFileInfo(e));
+    }
+
+    function onError(e) {
+        console.log("Error (" + e.operation + ") :: " + getFileInfo(e));
+    }
+
+    function onComplete(e) {
+        console.log("Complete");
+    }
+
+    function onCancel(e) {
+        console.log("Cancel :: " + getFileInfo(e));
+    }
+
+    function onRemove(e) {
+        console.log("Remove :: " + getFileInfo(e));
+    }
+
+    function onProgress(e) {
+        console.log("Upload progress :: " + e.percentComplete + "% :: " + getFileInfo(e));
+    }
+
+    function getFileInfo(e) {
+        return $.map(e.files, function(file) {
+            var info = file.name;
+
+            // File size is not available in all browsers.
+            if (file.size > 0) {
+                info  += " (" + Math.ceil(file.size / 1024) + " KB)";
+            }
+            return info;
+        }).join(", ");
+    }
+</script>
+```
+{% endif %}
 
 ## See Also
 

@@ -47,8 +47,8 @@ To send metadata over to the `Save()` handler:
     ```    
     {% if site.core %}
     ```TagHelper
-        <kendo-upload drop-zone="drop-zone1" name="files" on-upload="onUpload">
-            <async save-url="/Upload/ChunkSave" remove-url="/Upload/Remove" />
+        <kendo-upload name="files" on-upload="onUpload">
+            <async save-url="@Url.Action("ChunkSave","Upload")" remove-url="@Url.Action("Remove","Upload")" />
         </kendo-upload>
     ```
     {% endif %}
@@ -89,6 +89,13 @@ To receive metadata from the `save` handler:
             .Events(e => e.Success("onSuccess"))
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-upload name="files" on-success="onSuccess">
+            <async save-url="@Url.Action("ChunkSave","Upload")" remove-url="@Url.Action("Remove","Upload")" />
+        </kendo-upload>
+    ```
+    {% endif %}
 
 ## See Also
 

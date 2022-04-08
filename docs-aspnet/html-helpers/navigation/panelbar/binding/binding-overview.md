@@ -37,6 +37,26 @@ The following example demonstrates how to configure a PanelBar with three levels
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-panelbar name="panelbar">
+        <items>
+            <panelbar-item text="My Web Site">
+                <items>
+                    <panelbar-item text="images">
+                        <items>
+                            <panelbar-item text="logo.png"></panelbar-item>
+                            <panelbar-item text="body-back.png"></panelbar-item>
+                        </items>
+                    </panelbar-item>
+                    <panelbar-item text="about.html"></panelbar-item>
+                    <panelbar-item text="contacts.html"></panelbar-item>
+                </items>
+            </panelbar-item>
+        </items>
+    </kendo-panelbar>
+```
+{% endif %}
 
 ## PanelBar Binding
 

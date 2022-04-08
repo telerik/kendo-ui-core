@@ -39,6 +39,20 @@ The following example demonstrates how to configure MultiSelect for Server Filte
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="products"
+                       datatextfield="ProductName"
+                       datavaluefield="ProductID"
+                       filter="FilterType.Contains">
+       <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+           <transport>
+                <read url="@Url.Action("ServerFiltering_GetProducts", "MultiSelect")" />
+           </transport>
+       </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts(string text)
     {
@@ -84,6 +98,20 @@ For smaller sets of data, the {{ site.product_short }} MultiSelect also supports
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="products"
+                       datatextfield="ProductName"
+                       datavaluefield="ProductID"
+                       filter="FilterType.Contains">
+       <datasource type="DataSourceTagHelperType.Custom" server-filtering="false">
+           <transport>
+                <read url="@Url.Action("ServerFiltering_GetProducts", "MultiSelect")" />
+           </transport>
+       </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 ```Controller
     public JsonResult ServerFiltering_GetProducts()
     {с

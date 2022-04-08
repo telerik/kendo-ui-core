@@ -22,13 +22,18 @@ The `Size()` method controls how big or small the rendered radio input looks.
 
 The example below demonstrates how to adjust the `Size` of the component:
 
-```
+```HtmlHelper
 @(Html.Kendo().RadioButton()
     .Name("radioBtn")
     .Checked(true)
     .Size(ComponentSize.Small)
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-radiobutton name="radioBtn" checked="true" size="small"></kendo-radiobutton>
+```
+{% endif %}
 
 The following values are available for the `Size` option:
 

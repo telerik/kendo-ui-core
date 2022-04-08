@@ -113,7 +113,7 @@ var __meta__ = { // jshint ignore:line
 
             that._wrapper();
             that._list();
-            that._ariaLabel();
+            that._ariaLabel(that._getList());
             element = that.element.attr("multiple", "multiple").hide();
 
             if (element[0] && !that.options.dataSource) {
@@ -959,32 +959,6 @@ var __meta__ = { // jshint ignore:line
 
             if (that.options.navigatable) {
                 that._getList().attr(TABINDEX, that._getTabIndex());
-            }
-        },
-
-        _ariaLabel: function() {
-            var that = this;
-            var inputElm = that.element;
-            var ul = that._getList();
-            var id = inputElm.attr("id");
-            var labelElm = $("label[for=\'" + id + "\']");
-            var ariaLabel = inputElm.attr("aria-label");
-            var ariaLabelledBy = inputElm.attr("aria-labelledby");
-            var labelId;
-
-            if (ariaLabel) {
-                ul.attr("aria-label", ariaLabel);
-            } else if (ariaLabelledBy) {
-                ul.attr("aria-labelledby", ariaLabelledBy);
-            } else if (labelElm.length) {
-                labelId = labelElm.attr("id");
-                if (labelId) {
-                    ul.attr("aria-labelledby", labelId);
-                } else {
-                    labelId = kendo.guid();
-                    labelElm.attr("id", labelId);
-                    ul.attr("aria-labelledby", labelId);
-                }
             }
         },
 

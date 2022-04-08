@@ -35,6 +35,17 @@ The Following example demonstrates how you can configure the [Animation effects]
     .Content("Window Content")
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-window name="window" title="Window">
+    <popup-animation enabled="true">
+        <open effects="zoom:in fade-in" duration="500" />
+        <close effects="zoom:out fade-in" duration="350" reverse="false" />
+    </popup-animation>
+    <content>Window Content</content>
+</kendo-window>
+```
+{% endif %}
 
 ## See Also
 

@@ -36,6 +36,26 @@ You can include images in the Telerik UI for {{ site.framework }} PanelBar items
     )
 
 ```
+{% if site.core %}
+```TagHelper
+<kendo-panelbar name="panelbar-images">
+    <items>
+        <panelbar-item text="Baseball" image-url="@Url.Content("~/shared/icons/sports/baseball.png")">
+            <items>
+                <panelbar-item text="Top News" image-url="@Url.Content("~/shared/icons/16/star.png")">
+                </panelbar-item>
+                <panelbar-item text="Photo Galleries" image-url="@Url.Content("~/shared/icons/16/photo.png")">
+                </panelbar-item>
+                <panelbar-item text="Video Records" image-url="@Url.Content("~/shared/icons/16/video.png")">
+                </panelbar-item>
+                <panelbar-item text="Radio Records" image-url="@Url.Content("~/shared/icons/16/speaker.png")">
+                </panelbar-item>
+            </items>
+        </panelbar-item>
+    </items>
+</kendo-panelbar>
+```
+{% endif %}
 
 ## Sprites
 
@@ -58,6 +78,20 @@ You can also set sprites the the Telerik UI for {{ site.framework }} PanelBar it
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-panelbar name="panelbar-sprites">
+    <items>
+            <panelbar-item text="Brazil" icon-class="k-sprite brazilFlag">
+                <items>
+                    <panelbar-item text="History" icon-class="k-sprite historyIcon"></panelbar-item>
+                    <panelbar-item text="Geography" icon-class="k-sprite geographyIcon"></panelbar-item>
+                </items>
+            </panelbar-item>
+        </items>
+</kendo-panelbar>
+```
+{% endif %}
 
 ## See Also
 

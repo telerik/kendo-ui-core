@@ -25,6 +25,11 @@ The following example demonstrates how to set a `zip code` mask.
           .Mask("00000-9999") // Set the zip code.
     )
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-maskedtextbox name="maskedtextbox" mask="00000-9999"></kendo-maskedtextbox>
+```
+{% endif %}
 
 ## Custom Masks
 
@@ -43,6 +48,18 @@ The following example demonstrates how to define a custom rule for the `-` (minu
         .Mask("~0000") // Set a mask with a custom rule.
    )
 ```
+{% if site.core %}
+```TagHelper
+  @{
+    var rules = new Dictionary<string, string>()
+    {
+        {"~", "/[+-]/"}
+    };
+  }
+
+  <kendo-maskedtextbox name="maskedtextbox" rules="@rules" mask="~0000" ></kendo-maskedtextbox>
+```
+{% endif %}
 
 ## See Also
 

@@ -29,6 +29,21 @@ To display single or multiple tags for the selected items set the [`TagMode()`](
           })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="products"
+                       tag-mode="@MultiSelectTagMode.Single"
+                       datatextfield="ProductName"
+                       datavaluefield="ProductId"
+                       filter="FilterType.Contains">
+        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+               <transport>
+                    <read url="@Url.Action("ServerFiltering_GetProducts", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## See Also
 

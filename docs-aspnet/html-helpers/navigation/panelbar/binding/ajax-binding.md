@@ -21,6 +21,17 @@ The PanelBar provides support for remote data binding by using a `DataSource` co
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-panelbar name="panelbar" datatextfield="Name">
+        <hierarchical-datasource>
+            <transport>
+                <read url="@Url.Action("Read_PanelBarData", "Home")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-panelbar>
+```
+{% endif %}
 ```Controller
 public static IList<HierarchicalViewModel> GetHierarchicalData()
 {

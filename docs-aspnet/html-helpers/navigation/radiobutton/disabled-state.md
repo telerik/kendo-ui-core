@@ -22,6 +22,12 @@ The following example demonstrates how to use the `.Enable()` configuration opti
         .Label("Disabled radio button")
         .Checked(false))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radiobutton name="disabledRadioButton" label="Disabled radio button" enabled="false" checked="false">
+    </kendo-radiobutton>
+```
+{% endif %}
 
 ## See Also
 

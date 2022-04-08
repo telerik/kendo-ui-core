@@ -34,6 +34,18 @@ The following example demonstrates a sample configuration for all the three type
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        string[] extensions = { ".gif", ".jpg", ".png" };
+    }
+    
+    <kendo-upload name="files">
+        <async save-url="@Url.Action("ChunkSave","Upload")" remove-url="@Url.Action("Remove","Upload")" />
+        <validation allowed-extensions="@extensions" max-file-size="31457280" min-file-size="30720" />
+    </kendo-upload>
+```
+{% endif %}
 
 ### File Extension
 

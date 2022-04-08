@@ -12,7 +12,7 @@ This article describes how to configure the Telerik UI Window for {{ site.framew
 
 The example below demonstrates how to load content in Window from the server. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)  	
+```tab-HtmlHelper(cshtml)  	
 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
 
@@ -32,6 +32,20 @@ The example below demonstrates how to load content in Window from the server. Se
 		.Width(600)    
 	)
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+ 	@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+	@Html.AntiForgeryToken()
+
+	@{
+    	string[] actions = new string[] { "Minimize", "Maximize", "Close" };
+	}
+
+	<kendo-window name="window" title="Window title" actions="@actions">
+	    <content><p>@Model.Text</p></content>
+	</kendo-window>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 
     public string Text = String.Empty;

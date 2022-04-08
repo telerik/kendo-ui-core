@@ -32,6 +32,25 @@ The following example demonstrates how to use the `TemplateId()` configuration:
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <script id="template" type="text/kendo-ui-template">
+        # if (!item.items) { #
+            #: item.text #
+        # } else { #
+            <b> #: item.text # </b> 
+        # } #
+    </script>
+
+    <kendo-panelbar name="panelbar" template-id="template">
+        <hierarchical-datasource>
+            <transport>
+                <read url="@Url.Action("Read_TemplateData", "PanelBar")" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-panelbar>
+```
+{% endif %}
 
 ## See Also
 * [Templates in the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar/templates)

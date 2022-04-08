@@ -31,7 +31,7 @@ The following values are available for the `Size` option:
 - `Large`—large size (applies the `k-input-lg` class to the wrapping span element)
 
 The following example demonstrates how to set `Size` in the declaration of the MultiSelect:
-
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DownArrow()
@@ -50,6 +50,26 @@ The following example demonstrates how to set `Size` in the declaration of the M
             }
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var multiSelect_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {Text = "Item1", Value ="1"},
+            new SelectListItem() {Text = "Item2", Value ="2"},
+            new SelectListItem() {Text = "Item3", Value ="3"}
+        };
+    }
+
+    <kendo-multiselect name="multiselect"
+                       down-arrow="true"
+                       placeholder="Select..."
+                       size="ComponentSize.Large"
+                       bind-to="multiSelect_data">
+    </kendo-multiselect>
+```
+{% endif %}
 
 The default size value is `Medium` and it is applied to the `span` wrapping element through the `k-input-md` class.
 
@@ -74,7 +94,7 @@ The following values are available for the `Rounded` option:
 - `Full`—largest (ellipse-like) border radius (applies the `k-rounded-full` class to the wrapping span element)
 
 The following example demonstrates how to set `Rounded` in the declaration of the MultiSelect:
-
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DownArrow()
@@ -93,6 +113,26 @@ The following example demonstrates how to set `Rounded` in the declaration of th
             }
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var multiSelect_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {Text = "Item1", Value ="1"},
+            new SelectListItem() {Text = "Item2", Value ="2"},
+            new SelectListItem() {Text = "Item3", Value ="3"}
+        };
+    }
+
+    <kendo-multiselect name="multiselect"
+                       down-arrow="true"
+                       placeholder="Select..."
+                       rounded="Rounded.Medium"
+                       bind-to="multiSelect_data">
+    </kendo-multiselect>
+```
+{% endif %}
 
 The default rounded value is `Full`. It applies the `k-rounded-full` class to the `span.k-multiselect` wrapping element that contains the HTML of the component. The class is also applied to the `span.k-chip` element which contains the HTML of the tags.
 
@@ -118,7 +158,7 @@ The following values are available for the `FillMode` option:
 The default value is `Solid` and it is applied to the `span.k-multiselect` wrapping element through the `k-input-solid` class and to the `span.k-chip` elements through the `.k-chip-solid .k-chip-solid-base` classes.
 
 The following example demonstrates how to set `FillMode` in the declaration of the MultiSelect:
-
+```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("multiselect")
         .DownArrow()
@@ -137,6 +177,26 @@ The following example demonstrates how to set `FillMode` in the declaration of t
             }
         })
     )
+```
+{% if site.core %}
+```TagHelper
+    @{
+        var multiSelect_data = new List<SelectListItem>()
+        {
+            new SelectListItem() {Text = "Item1", Value ="1"},
+            new SelectListItem() {Text = "Item2", Value ="2"},
+            new SelectListItem() {Text = "Item3", Value ="3"}
+        };
+    }
+
+    <kendo-multiselect name="multiselect"
+                       down-arrow="true"
+                       placeholder="Select..."
+                       fill-mode="FillMode.Outline"
+                       bind-to="multiSelect_data">
+    </kendo-multiselect>
+```
+{% endif %}
 
 The `FillMode.Outline` value is reflected through the respective classes applied to the `span.k-multiselect` wrapping element and to the `span.k-chip` elements:
 

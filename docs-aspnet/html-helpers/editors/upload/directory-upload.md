@@ -26,6 +26,15 @@ The following example demonstrates how you can enable the `Directory` upload fea
         .DirectoryDrop(true)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-upload name="files" directory="true" directory-drop="true">
+    	<async save-url="@Url.Action("Directory_Upload","Upload")"
+    		   remove-url="@Url.Action("Directory_Remove","Upload")" 
+    		   auto-upload="false"/>
+    </kendo-upload>
+```
+{% endif %}
 ```Controller
     public class UploadController : Controller
     {

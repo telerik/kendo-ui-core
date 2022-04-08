@@ -38,7 +38,6 @@ var __meta__ = { // jshint ignore:line
         FIXED_GROUP_HEADER = ".k-list-group-sticky-header",
         GROUP_LABEL = ".k-list-item-group-label",
         ITEMSELECTOR = ".k-list-item",
-        LABELIDPART = "_label",
         OPEN = "open",
         CLOSE = "close",
         CASCADE = "cascade",
@@ -792,37 +791,7 @@ var __meta__ = { // jshint ignore:line
 
             that.ul.attr(ARIA_LIVE, !that._isFilterEnabled() ? "off" : "polite");
 
-            that._ariaLabel();
-        },
-
-        _ariaLabel: function() {
-            var that = this;
-            var focusedElm = that._focused;
-            var inputElm = that.element;
-            var inputId = inputElm.attr("id");
-            var labelElm = $("label[for=\"" + inputId + "\"]");
-            var ariaLabel = inputElm.attr(ARIA_LABEL);
-            var ariaLabelledBy = inputElm.attr(ARIA_LABELLEDBY);
-
-            if (focusedElm === inputElm) {
-                return;
-            }
-
-            if (ariaLabel) {
-                focusedElm.attr(ARIA_LABEL, ariaLabel);
-            } else if (ariaLabelledBy) {
-                focusedElm.attr(ARIA_LABELLEDBY, ariaLabelledBy);
-            } else if (labelElm.length) {
-                var labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || kendo.guid());
-                focusedElm.attr(ARIA_LABELLEDBY, labelId);
-            }
-        },
-
-        _generateLabelId: function(label, inputId) {
-            var labelId = inputId + LABELIDPART;
-            label.attr("id", labelId);
-
-            return labelId;
+            that._ariaLabel(that._focused);
         },
 
         _blur: function() {

@@ -37,6 +37,17 @@ To bind the Telerik UI MaskedTextBox within a `RazorPage`:
             <input type="submit" name="name" value="Submit Form" />
         </form>
     ```
+    {% if site.core %}
+    ```TagHelper
+        <form method="post">
+            <label for="phone_number">Phone number:</label>
+            <kendo-maskedtextbox for="PhoneNumber" mask="(999) 000-0000" >
+            </kendo-maskedtextbox>
+            <br />
+            <input type="submit" name="name" value="Submit Form" />
+        </form>
+    ```
+    {% endif %}
 
 1. Bind the property values in the backend:
 

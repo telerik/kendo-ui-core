@@ -29,6 +29,18 @@ The following example demonstrates how to insert a complete form inside the Wind
         .Render();
     }
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window">
+        <content>
+            @using (Html.BeginForm("FormSubmit", "Home"))
+            {
+                //...
+            }
+        </content>
+    </kendo-window>
+```
+{% endif %}
 
 ## Loading External Form
 
@@ -55,6 +67,24 @@ To handle this behavior, render the content in an `iframe`.
             }
         </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="PopupForm" 
+        title="My Form"
+        content-url="@Url.Action("GetForm","Home")"
+        iframe="true"
+        resizable="true"
+        draggable="true">
+    </kendo-window>
+
+    <script>
+        // Implement a script that will close the popup when model is valid.
+        function closeFormPopup() {
+            $("#PopupForm").data("kendoWindow").close();
+        }
+    </script>
+```
+{% endif %}
 ```HomeController.cs
     public IActionResult GetForm()
     {

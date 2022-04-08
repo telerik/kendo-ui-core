@@ -20,6 +20,13 @@ To control filtering in the Grid, use the `Filterable` property.
         .Filterable() // Enable the Menu filter mode.
         ...
 ```
+{% if site.core %}
+```TagHelper
+   <kendo-grid name="Grid">
+      <filterable enabled="true" />
+   </kendo-grid>
+```
+{% endif %}
 
 Each `Filterable` configuration of the columns allows the setting of a custom DataSource.
 
@@ -30,6 +37,22 @@ Each `Filterable` configuration of the columns allows the setting of a custom Da
     );
     .ShowIndexes(true))
 ```
+{% if site.core %}
+```TagHelper
+   ...
+   <columns>
+	    <column field="LastName" width="220">
+	        <filterable enabled="true" multi="true">
+				<datasource>
+					<transport>
+						<read url="@Url.Action("Unique","Grid")" data="{ field: 'LastName' }" />
+					</transport>
+				</datasource>
+			</filterable>
+	    </column>
+   </columns>
+```
+{% endif %}
 
 > Only columns that are [bound to a field](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid/configuration/columns.field) can be filterable. To enable filtering on a column bound to an object, [bind the column to a field of that object](https://docs.telerik.com/aspnet-core/knowledge-base/grid-enable-operations-for-object-column).
 
@@ -46,6 +69,16 @@ To set the desired filter mode, use the `Filterable->Mode` property. You can ena
     ...
     columns.Bound(p => p.UnitsInStock).Width(140).Filterable(ftb => ftb.Multi(true).CheckAll(true));
 ```
+{% if site.core %}
+```TagHelper
+   ...
+   <columns>
+	    <column field="UnitsInStock" width="140">
+	        <filterable enabled="true" multi="true" check-all="true" />
+	    </column>
+   </columns>
+```
+{% endif %}
 
 ## Filter Operators
 

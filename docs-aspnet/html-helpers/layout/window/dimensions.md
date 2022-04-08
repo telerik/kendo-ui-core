@@ -29,6 +29,17 @@ Apart from the automatic size calculation, you can explicitly set the `Width()` 
         </text>)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" title="Alvar Aalto" height="250" width="300">
+        <content>
+            Alvar Aalto is one of the greatest names in modern architecture and design.
+            Glassblowers at the iittala factory still meticulously handcraft the legendary vases
+            that are variations on one theme, fluid organic shapes that let the end user decide the use.
+        </content>
+    </kendo-window>
+```
+{% endif %}
 
 The Window also allows configuration for its `min` and `max` dimensions (height and width).
 
@@ -49,6 +60,17 @@ The Window also allows configuration for its `min` and `max` dimensions (height 
         </text>)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" title="Alvar Aalto" min-width="150" max-width="450" min-height="200" max-height="300">
+        <content>
+            Alvar Aalto is one of the greatest names in modern architecture and design.
+            Glassblowers at the iittala factory still meticulously handcraft the legendary vases
+            that are variations on one theme, fluid organic shapes that let the end user decide the use.
+        </content>
+    </kendo-window>
+```
+{% endif %}
 
 ## Adjusting the Size Depending on Content
 

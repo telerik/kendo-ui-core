@@ -32,11 +32,19 @@ The following values are available for the `Size` option:
 
 The following example demonstrates how to set `Size` in the declaration of the MaskedTextBox:
 
-    @(Html.Kendo().MaskedTextBox()
-      .Name("maskedtextbox")
-      .Mask("(999) 000-0000")
-      .Size(ComponentSize.Large)
-    )
+```HtmlHelper
+  @(Html.Kendo().MaskedTextBox()
+    .Name("maskedtextbox")
+    .Mask("(999) 000-0000")
+    .Size(ComponentSize.Large)
+  )
+```
+{% if site.core %}
+ ```TagHelper
+    <kendo-maskedtextbox name="maskedtextbox" mask="(999) 000-0000" size="ComponentSize.Large">
+    </kendo-maskedtextbox>
+ ```
+{% endif %}
 
 The default size value is `Medium`.
 
@@ -58,11 +66,19 @@ The following values are available for the `Rounded` option:
 
 The following example demonstrates how to set `Rounded` in the declaration of the MaskedTextBox:
 
-    @(Html.Kendo().MaskedTextBox()
-      .Name("maskedtextbox")
-      .Mask("(999) 000-0000")
-      .Rounded(Rounded.Large)
-    )
+```HtmlHelper
+  @(Html.Kendo().MaskedTextBox()
+    .Name("maskedtextbox")
+    .Mask("(999) 000-0000")
+    .Rounded(Rounded.Large)
+  )
+```
+{% if site.core %}
+ ```TagHelper
+    <kendo-maskedtextbox name="maskedtextbox" mask="(999) 000-0000" rounded="Rounded.Large">
+    </kendo-maskedtextbox>
+ ```
+{% endif %}
 
 The default rounded value is `Medium`.
 
@@ -82,12 +98,20 @@ The following values are available for the `FillMode` option:
 - `Outline`—applies the `k-input-outline` class to the wrapping span element
 
 The following example demonstrates how to set `FillMode` in the declaration of the MaskedTextBox:
-
-    @(Html.Kendo().MaskedTextBox()
-      .Name("maskedtextbox")
-      .Mask("(999) 000-0000")
-      .FillMode(FillMode.Outline)
-    )
+    
+```HtmlHelper
+  @(Html.Kendo().MaskedTextBox()
+    .Name("maskedtextbox")
+    .Mask("(999) 000-0000")
+    .FillMode(FillMode.Outline)
+  )
+```
+{% if site.core %}
+ ```TagHelper
+    <kendo-maskedtextbox name="maskedtextbox" mask="(999) 000-0000" fill-mode="FillMode.Outline">
+    </kendo-maskedtextbox>
+ ```
+{% endif %}
 
 The default fillMode value is `solid`.
 
@@ -123,13 +147,25 @@ The new rendering of the component keeps the `span` element and the child `input
 
 The following example demonstrates how to configure the appearance of the component through configuration:
 
-    @(Html.Kendo().MaskedTextBox()
-      .Name("maskedtextbox")
-      .Mask("(999) 000-0000")
-      .Size(ComponentSize.Medium)
-      .Rounded(Rounded.Medium)
-      .FillMode(FillMode.Solid)
-    )
+```HtmlHelper
+  @(Html.Kendo().MaskedTextBox()
+    .Name("maskedtextbox")
+    .Mask("(999) 000-0000")
+    .Size(ComponentSize.Medium)
+    .Rounded(Rounded.Medium)
+    .FillMode(FillMode.Solid)
+  )
+```
+{% if site.core %}
+ ```TagHelper
+    <kendo-maskedtextbox name="maskedtextbox" 
+                         mask="(999) 000-0000" 
+                         size=ComponentSize.Medium 
+                         rounded=Rounded.Medium 
+                         fill-mode=FillMode.Solid>
+    </kendo-maskedtextbox>
+ ```
+{% endif %}
 
 The following HTML structure shows how the MaskedTextBox will render:
 

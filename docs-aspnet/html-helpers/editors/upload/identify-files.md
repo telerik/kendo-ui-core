@@ -48,6 +48,29 @@ The generated `uid` is added as a property of the `e.files` collection to all of
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-upload name="files" on-select="onSelect">
+	    <async save-url="@Url.Action("Save","Upload")" 
+	    	   remove-url="@Url.Action("Remove","Upload")"
+	    	   auto-upload="true"/>
+    </kendo-upload>
+
+    <script type="text/javascript">
+        function onSelect(e) {
+            console.log("Selected files uids :: [ " + getFileInfo(e) + " ]");
+        }
+
+        function getFileInfo(e) {
+            return $.map(e.files, function(file) {
+                var info = file.uid;
+
+                return info;
+            }).join(", ");
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

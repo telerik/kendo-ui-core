@@ -30,6 +30,16 @@ The PanelBar enables you to manually define the properties of each item.
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+     <kendo-panelbar name="panelbar">
+        <items>
+            <panelbar-item text="Item 1"></panelbar-item>
+            <panelbar-item text="Item 2"></panelbar-item>
+        </items>
+    </kendo-panelbar>
+    ```
+    {% endif %}
 
 ## See Also
 

@@ -24,6 +24,11 @@ To define static content, use the `Content()` configuration method.
         .Content("Hello!")
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-tooltip name="tooltip" position="top" content="Hello!"></kendo-tooltip>
+```
+{% endif %}
 
 ## Using Content Template
 
@@ -61,6 +66,31 @@ The following example demonstrates how to customize the Tooltip by referencing a
         </div>
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <ul id="products">
+        <li>
+            <a href="#" data-id="11" title="A cheese made in the artisan tradition by rural dairy farmers in the north of Spain">
+                Queso de Cabrales
+            </a>
+        </li>
+        <li>
+            <a href="#" data-id="12" title="A cheese made in the La Mancha region of Spain from the milk of sheep of the Manchega breed">
+                Queso<br />Manchego
+            </a> 
+        </li>
+    </ul>
+
+    <kendo-tooltip name="products" filter="a" position="top" content-template-id="template"></kendo-tooltip>
+
+    <script id="template" type="text/x-kendo-template">
+        <div class="template-wrapper">
+            <p>#=target.data('id')#</p>
+            <p>#=target.data('title')#</p>
+        </div>
+    </script>
+```
+{% endif %}
 
 ## Loading Content with AJAX
 
@@ -86,6 +116,25 @@ The following example demonstrates how to load the content asynchronously with A
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+   <kendo-tooltip name="products" 
+                  filter="a" 
+                  position="top"
+                  width="220"
+                  height="280"
+                  content-url="@Url.Action("Details","Tooltip")" 
+                  on-request-start="requestStart">
+   </kendo-tooltip>
+   <script type="text/javascript">
+        function requestStart(e) {
+            e.options.data = {
+                id: e.target.data("id")
+            }
+        }
+   </script>
+```
+{% endif %}
 
 For a complete example, refer to the [Loading Content with AJAX Demo](https://demos.telerik.com/{{ site.platform }}/tooltip/ajax).
 

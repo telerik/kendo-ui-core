@@ -12,7 +12,7 @@ This article describes how to configure a Remote DataSource of a Telerik PanelBa
 
 In order to set up the PanelBar component bindings, you need to configure the `Read` method of its `DataSource` instance. The URL in this method should refer the name of the method in the PageModel. See the implementation details in the example below, and for the full project with RazorPages examples, visit our [GitHub repository](https://github.com/telerik/ui-for-aspnet-core-examples/tree/master/Telerik.Examples.RazorPages).
 
-```tab-HtmlHelper(csthml)   
+```tab-HtmlHelper(cshtml)   
      
     @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 	@Html.AntiForgeryToken()
@@ -27,6 +27,21 @@ In order to set up the PanelBar component bindings, you need to configure the `R
         )
 	)	
 ```
+{% if site.core %}
+```tab-TagHelper(cshtml)
+    
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+	@Html.AntiForgeryToken()
+    
+    <kendo-panelbar name="panelbar" datatextfield="Name">
+        <hierarchical-datasource>
+            <transport>
+                <read url="/PanelBar/PanelBarRemoteData?handler=Read" />
+            </transport>
+        </hierarchical-datasource>
+    </kendo-panelbar>
+```
+{% endif %}
 ```tab-PageModel(cshtml.cs)      
 
     public JsonResult OnGetRead(int? id)

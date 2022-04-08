@@ -279,7 +279,7 @@ var __meta__ = { // jshint ignore:line
                 "aria-multiselectable": true
             });
             that.input.attr("aria-controls", id);
-            that._ariaLabel();
+            that._ariaLabel(that._focused);
         },
 
         _activateItem: function() {

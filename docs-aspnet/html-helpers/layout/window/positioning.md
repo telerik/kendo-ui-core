@@ -32,6 +32,17 @@ The following example demonstrates how to center and open a Kendo UI for jQuery 
         .Events(e => e.Click("onClick"))
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" title="Centered Window" visible="false" width="200" height="200">
+        <content>Window content here.</content>
+    </kendo-window>
+
+    <kendo-button name="button" on-click="onClick">
+        <content>Open Window</content>
+    </kendo-button>
+```
+{% endif %}
 
 The following example demonstrates how to center and open the Window upon button click.
 

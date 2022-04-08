@@ -39,3 +39,13 @@ The following example demonstrates how to configure the PanelBar animation:
     })
     )
 ```
+ {% if site.core %}
+```TagHelper
+<kendo-panelbar name="panelbar">
+    <animation enabled="true">
+        <expand effects="expand:vertical fade:in zoom:in" duration="600"/>
+        <collapse effects="fade:out" duration="200" />
+    </animation>
+</kendo-panelbar>
+```
+{% endif %}

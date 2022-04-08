@@ -49,6 +49,17 @@ Local data is the data that is available on the client when the MultiSelect is i
             .BindTo(Model.Orders)
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.ProductViewModel
+
+        <kendo-multiselect for="SelectedOrders"
+                           datavaluefield="OrderID"
+                           datatextfield="OrderName"
+                           bind-to="Model.Orders">
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## Remote Data
 
@@ -82,7 +93,7 @@ You can configure the MultiSelect to get its data from a remote source by making
         @model MvcApplication1.Models.ProductViewModel
 
         @(Html.Kendo().MultiSelectFor(m => m.SelectedOrders)
-            .Filter("contains")
+            .Filter(FilterType.Contains)
             .DataValueField("OrderID")
             .DataTextField("OrderName")
             .DataSource(source =>
@@ -95,6 +106,22 @@ You can configure the MultiSelect to get its data from a remote source by making
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        @model MvcApplication1.Models.ProductViewModel
+
+        <kendo-multiselect for="SelectedOrders"
+                           filter="FilterType.Contains"
+                           datavaluefield="OrderID"
+                           datatextfield="OrderName">
+            <datasource type="DataSourceTagHelperType.Custom" server-filtering="false">
+                <transport>
+                     <read url="@Url.Action("GetOrdersAjax", "Home")" />
+                </transport>
+            </datasource>
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## See Also
 

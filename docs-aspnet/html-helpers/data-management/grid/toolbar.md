@@ -13,7 +13,8 @@ The [`ToolBar()`](/api/Kendo.Mvc.UI.Fluent/GridToolBarCommandFactory) configurat
 ## Built-In Commands
 
 You can configure the Toolbar and include any of the built-in commands:
-```
+
+```HtmlHelper
     .ToolBar(toolbar=> {
         toolbar.Create();
         toolbar.Save();
@@ -22,6 +23,18 @@ You can configure the Toolbar and include any of the built-in commands:
         toolbar.Search();
     })
 ```
+{% if site.core %}
+```TagHelper
+    <toolbar>
+        <toolbar-button name="create"></toolbar-button> 
+        <toolbar-button name="save"></toolbar-button> 
+        <toolbar-button name="pdf"></toolbar-button>
+        <toolbar-button name="excel"></toolbar-button>
+        <toolbar-button name="search"></toolbar-button>
+    </toolbar>
+```
+{% endif %} 
+
 
 | Command | Description | Resources|
 |---|---|---|
@@ -36,7 +49,7 @@ You can configure the Toolbar and include any of the built-in commands:
 The {{site.product}} Grid supports adding custom commands to it's Toolbar.
 
 The following example demonstrates how to add a custom command to the Toolbar:
-```Razor
+```HtmlHelper
     .ToolBar(toolbar=> {
         toolbar.Custom().Text("Click me").HtmlAttributes(new { id = "customCommand" });
     })
@@ -49,8 +62,25 @@ The following example demonstrates how to add a custom command to the Toolbar:
             //add custom command logic here
         });
     })
-</script>
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <toolbar>
+        <toolbar-button name="customCommand" text="Click me"></toolbar-button> 
+    </toolbar>
+
+    <script>
+    $(document).ready(function(){
+        $(".k-grid-customCommand").click(function (e) {
+            e.preventDefault();
+            alert('click')
+            //add custom command logic here
+        });
+    })
+    </script>
+```
+{% endif %} 
 
 ## Toolbar Template
 
@@ -61,10 +91,10 @@ When you use a Toolbar Template, and you also want to use a built-in command, th
 ```
     <script id="GridToolbarTemplate" type="text/x-kendo-template">
         <div class="refreshBtnContainer">
-            <a href="\\#" class="k-pager-refresh k-link k-button k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
+            <a href="\\#" class="k-pager-refresh k-link k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icon" title="Refresh"><span class="k-icon k-i-reload"></span></a>
         </div>
         
-        <a role="button" class="k-button k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
+        <a role="button" class="k-button k-button-solid-base k-button-solid k-button-rectangle k-button-md k-rounded-md k-button-icontext k-grid-pdf" href="\\#"><span class="k-icon k-i-file-pdf"></span>Export to PDF</a>
         
         <div class="toolbar">
             <label class="category-label" for="category">Show products by category:</label>

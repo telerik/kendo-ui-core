@@ -39,7 +39,18 @@ You can initialize custom drop zones depending on a particular selector that pro
         .DropZone(".dropZoneElement")
     )
 ```
-
+{% if site.core %}
+```TagHelper
+    <div class="dropZoneElement" style="height: 200px; width: 200px; border: 1px solid red;">
+    </div>
+    
+    <kendo-upload name="files" drop-zone=".dropZoneElement">
+	    <async save-url="@Url.Action("Save","Upload")" 
+		       remove-url="@Url.Action("Remove","Upload")"
+		       auto-upload="true"/>
+    </kendo-upload>
+```
+{% endif %}
 To customize the appearance of the drop zone during the process of dragging and dropping, note the following:
 
 1. When the user drags the file over the browser window, the custom drop zone element receives the `"k-dropzone-active"` class.

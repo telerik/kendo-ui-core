@@ -35,6 +35,27 @@ The Window then renders `k-icon` and `k-i-actionname` CSS classes for the action
         });
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        string[] actions = new string[] { "Custom", "Minimize", "Maximize", "Close" };
+    }
+    
+    <kendo-window name="window" title="Window" actions="@actions">
+        <content>Window Content</content>
+    </kendo-window>
+
+    <script>
+        $(document).ready(function() {
+            $("#window").data("kendoWindow").wrapper
+                .find(".k-i-custom").parent().click(function (e) {
+                    alert("Custom action button clicked");
+                    e.preventDefault();
+                });
+        });
+    </script>
+```
+{% endif %}
 
 ## See Also
 

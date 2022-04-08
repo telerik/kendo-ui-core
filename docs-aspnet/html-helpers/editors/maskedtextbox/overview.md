@@ -64,11 +64,22 @@ The following example demonstrates how to subscribe to events by a handler name.
   }
   </script>
 ```
+{% if site.core %}
+```TagHelper
+  <kendo-maskedtextbox name="maskedtextbox" on-change="maskedtextbox_change"></kendo-maskedtextbox>
+  <script>
+  function maskedtextbox_change() {
+      // Handle the change event.
+  }
+  </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
 The following example demonstrates how to subscribe to events by a template delegate.
-
+    
+```HtmlHelper
     @(Html.Kendo().MaskedTextBox()
         .Name("maskedtextbox")
         .Events(e => e
@@ -79,6 +90,17 @@ The following example demonstrates how to subscribe to events by a template dele
             </text>)
         )
     )
+```
+{% if site.core %}
+```TagHelper
+    <kendo-maskedtextbox name="maskedtextbox"
+                         on-change="
+                         function() {
+                           // Handle the change event inline.
+                         }">
+    </kendo-maskedtextbox>
+```
+{% endif %}
 
 ## Referencing Existing Instances
 

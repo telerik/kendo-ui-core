@@ -32,6 +32,9 @@ var __meta__ = { // jshint ignore:line
         BOOLEAN = "boolean",
         UNDEFINED = "undefined",
         PREFIX = "prefix",
+        ARIA_LABELLEDBY = "aria-labelledby",
+        ARIA_LABEL = "aria-label",
+        LABELIDPART = "_label",
         getterCache = {},
         setterCache = {},
         slice = [].slice,
@@ -3025,6 +3028,29 @@ function pad(number, digits, end) {
             el.addClass(classes.join(" "));
         },
 
+        _ariaLabel: function(target) {
+            var that = this,
+                inputElm = that.element,
+                inputId = inputElm.attr("id"),
+                labelElm = $("label[for=\"" + inputId + "\"]"),
+                ariaLabel = inputElm.attr(ARIA_LABEL),
+                ariaLabelledBy = inputElm.attr(ARIA_LABELLEDBY),
+                labelId;
+
+            if (target[0] === inputElm[0]) {
+                return;
+            }
+
+            if (ariaLabel) {
+                target.attr(ARIA_LABEL, ariaLabel);
+            } else if (ariaLabelledBy) {
+                target.attr(ARIA_LABELLEDBY, ariaLabelledBy);
+            } else if (labelElm.length) {
+                labelId = labelElm.attr("id") || that._generateLabelId(labelElm, inputId || kendo.guid());
+                target.attr(ARIA_LABELLEDBY, labelId);
+            }
+        },
+
         _clearCssClasses: function(newOptions, element) {
             var protoOptions = this.__proto__.options, // jshint ignore:line
                 currentOptions = this.options,
@@ -3065,7 +3091,15 @@ function pad(number, digits, end) {
                     }
                 }
             }
-        }
+        },
+
+        _generateLabelId: function(label, inputId){
+            var labelId = inputId + LABELIDPART;
+
+            label.attr("id", labelId);
+
+            return labelId;
+        },
     });
 
     var DataBoundWidget = Widget.extend({

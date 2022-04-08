@@ -15,6 +15,7 @@ You can bind the PanelBar locally on the server by passing the appropriate colle
 
 1. Pass the data to the view through `ViewData`.
 
+    ```HtmlHelper
         public ActionResult Index()
         {
             ViewBag.panelbarData = GetData();
@@ -64,9 +65,66 @@ You can bind the PanelBar locally on the server by passing the appropriate colle
                         }
                     }
                 };
-
             return data;
         }
+     ```
+    {% if site.core %}
+    ```TagHelper
+        using Kendo.Mvc.TagHelpers;
+        
+        public ActionResult Index()
+        {
+            ViewBag.panelbarData = GetData();
+            return View();
+        }
+    
+        private IEnumerable<PanelBarItemBase> GetData()
+        {
+            List<PanelBarItemBase> data = new List<PanelBarItemBase>
+            {
+                new PanelBarItemBase
+                {
+                    Text = "Furniture",
+                    Items = new List<PanelBarItemBase>
+                    {
+                        new PanelBarItemBase()
+                        {
+                            Text = "Tables & Chairs"
+                        },
+                        new PanelBarItemBase
+                        {
+                             Text = "Sofas"
+                        },
+                        new PanelBarItemBase
+                        {
+                             Text = "Occasional Furniture"
+                        }
+                    }
+                },
+                new PanelBarItemBase
+                {
+                    Text = "Decor",
+                    Items = new List<PanelBarItemBase>
+                    {
+                        new PanelBarItemBase()
+                        {
+                            Text = "Bed Linen"
+                        },
+                        new PanelBarItemBase
+                        {
+                             Text = "Curtains & Blinds"
+                        },
+                        new PanelBarItemBase
+                        {
+                             Text = "Carpets"
+                        }
+                    }
+                }
+            };
+            return data;
+        }
+    ```
+    {% endif %}
 
 1. Add the PanelBar to the view and bind it to the data that is saved in the `ViewData`.
 
@@ -78,6 +136,12 @@ You can bind the PanelBar locally on the server by passing the appropriate colle
             .BindTo((IEnumerable<PanelBarItemModel>)ViewBag.panelbarData)
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-panelbar name="panelbar" bind-to="ViewBag.panelbarData">
+        </kendo-panelbar>
+    ```
+    {% endif %}
 
 ## See Also
 

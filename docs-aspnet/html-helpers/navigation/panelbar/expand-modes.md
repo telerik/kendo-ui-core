@@ -35,7 +35,26 @@ The PanelBar supports a single and a multiple expand mode.
         })
     )
 ```
-
+{% if site.core %}
+```TagHelper
+<kendo-panelbar name="panelbar" expand-mode="single">
+    <items>
+        <panelbar-item text="Root1">
+            <items>
+                <panelbar-item text="Level2 1"></panelbar-item>
+                <panelbar-item text="Level2 1"></panelbar-item>
+            </items>
+        </panelbar-item>
+        <panelbar-item text="Root2">
+            <items>
+                <panelbar-item text="Level2 1"></panelbar-item>
+                <panelbar-item text="Level2 2"></panelbar-item>
+            </items>
+        </panelbar-item>
+    </items>
+</kendo-panelbar>
+```
+{% endif %}
 ## See Also
 
 * [Basic Usage of the PanelBar HtmlHelper for {{ site.framework }} (Demo)](https://demos.telerik.com/{{ site.platform }}/panelbar)

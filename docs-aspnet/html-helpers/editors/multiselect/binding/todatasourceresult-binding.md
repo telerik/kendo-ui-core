@@ -51,6 +51,21 @@ You can configure the Telerik UI MultiSelect to use a custom DataSource and, in 
             })
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-multiselect name="productDropDownList"
+                           datatextfield="ProductName"
+                           datavaluefield="ProductID">
+           <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+                <transport>
+                     <read url="@Url.Action("GetProducts", "Home")" />
+                </transport>
+                <schema data="Data" total="Total">
+	 	        </schema>
+           </datasource>                 
+        </kendo-multiselect>
+    ```
+    {% endif %}
 
 ## See Also
 

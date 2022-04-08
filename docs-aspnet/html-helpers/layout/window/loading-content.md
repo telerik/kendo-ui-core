@@ -24,6 +24,15 @@ The Window exposes a `Content()` configuration method which allows you to load p
         </text>)
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" title="Static content">
+        <content>
+            <strong>Static content</strong> of the Window.
+        </content>
+    </kendo-window>
+```
+{% endif %}
 
 ## Load-on-Demand Content
 
@@ -56,6 +65,16 @@ In some scenarios, it is required to configure the Window to load dynamic conten
         {% endif %}
         )
     ```
+    {% if site.core %}
+    ```TagHelper
+        <kendo-window name="window" title="About Alvar Aalto" content-url="@Url.Action("AjaxContent","Window")">
+        </kendo-window>
+
+          // In case the window is used in a RazorPages project, supply the name of the RazorPage in the content-url option
+          // content-url="MyRazorPageName"
+    ```
+    {% endif %}
+
 You can also use another [`.LoadContentFrom()`](/api/Kendo.Mvc.UI.Fluent/WindowBuilder#loadcontentfrommicrosoftaspnetcoreroutingroutevaluedictionary) overload to pass additional details to the action method returning the Window's content:
 
 ```HtmlHelper
@@ -65,6 +84,12 @@ You can also use another [`.LoadContentFrom()`](/api/Kendo.Mvc.UI.Fluent/WindowB
         .LoadContentFrom("UserDetails", "Window", new { userId = 10}) //Define the Action, Controller names and additional route values.
     )
 ```
+{% if site.core %}
+ ```TagHelper
+<kendo-window name="window" title="User Details" content-url="@Url.Action("AjaxContent","Window",new { userId = 10 })">
+</kendo-window>
+ ```
+{% endif %}
 ```Controller
 public IActionResult UserDetails(int userId)
 {

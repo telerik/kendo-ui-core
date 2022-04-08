@@ -37,8 +37,8 @@ The following example demonstrates how to define the Window.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-window name="window1">
-        <content>Window contents</content>
+    <kendo-window name="window" title="Window title">
+        <content>Static content of the Window.</content>
     </kendo-window>
 ```
 {% endif %}
@@ -80,24 +80,27 @@ The following example demonstrates the basic configuration of the Window.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-window name="window" title="About Alvar Aalto" draggable="true"
-        width="400" on-close="onClose">
-        <content>
-            <div class="armchair">
-                <img src="@Url.Content("~/shared/web/window/armchair-402.png")"
-                    alt="Artek Alvar Aalto - Armchair 402" />
-                Artek Alvar Aalto - Armchair 402
-            </div>
+    @{
+        string[] actions = new string[] { "Refresh", "Minimize", "Maximize", "Close" };
+    }
 
-            <p>
-                Alvar Aalto is one of the greatest names in modern architecture and design.
-                Glassblowers at the iittala factory still meticulously handcraft the legendary
-                vases that are variations on one theme, fluid organic shapes that let the end user
-                ecide the use. Interpretations of the shape in new colors and materials add to the
-                growing Alvar Aalto Collection that remains true to his original design.
-            </p>
-        </content>
+    <kendo-window name="window" 
+                  title="Window title" 
+                  width="500"
+                  height="300"
+                  visible="true"
+                  actions="actions"
+                  content-url="@Url.Action("AjaxContent","Window")"
+                  draggable="false"
+                  resizable="false">
     </kendo-window>
+
+     <script type="text/javascript">
+        $(function() {
+            // The Name() of the Window is used to get its client-side instance.
+            var dialog = $("#window").data("kendoWindow");
+        });
+    </script>
 ```
 {% endif %}
 
@@ -136,6 +139,20 @@ The following example demonstrates how to subscribe to events by handler name.
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window" on-open="window_open" on-close="window_close"></kendo-window>
+    <script>
+        function window_open() {
+            // Handle the open event.
+        }
+
+        function window_close() {
+            // Handle the close event.
+        }
+    </script>
+```
+{% endif %}
 
 ### Handling by Template Delegate
 
@@ -158,6 +175,18 @@ The following example demonstrates how to subscribe to events by using a templat
         )
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-window name="window"
+     on-open="function() {
+        //Handle the open event inline.
+    }"
+     on-close="function() {
+       //Handle the open event inline.
+    }">
+    </kendo-window>
+```
+{% endif %}
 
 ## See Also
 

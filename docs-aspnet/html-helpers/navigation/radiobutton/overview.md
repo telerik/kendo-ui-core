@@ -29,6 +29,11 @@ The following example demonstrates how to initialize the RadioButton.
         .Label("I agree")
         .Checked(true))
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-radiobutton name="MyRadioButton" label="I agree" checked="true"></kendo-radiobutton>
+```
+{% endif %}
 
 ## Functionality and Features
 

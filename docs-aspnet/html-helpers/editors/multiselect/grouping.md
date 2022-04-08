@@ -20,6 +20,8 @@ The following example demonstrates how to group the data in the MultiSelect by c
 ```HtmlHelper
     @(Html.Kendo().MultiSelect()
         .Name("customers")
+        .DataTextField("ContactName")
+        .DataValueField("CustomerID")
         .Placeholder("Select customers...")
         .DataSource(source =>  source
             .Custom()
@@ -31,8 +33,6 @@ The following example demonstrates how to group the data in the MultiSelect by c
                         .Data("onAdditionalData");
                 }))
                 .ServerFiltering(true))
-        .DataTextField("ContactName")
-        .DataValueField("CustomerID")
     )
     <script>
         function onAdditionalData() {
@@ -42,6 +42,30 @@ The following example demonstrates how to group the data in the MultiSelect by c
         }
     </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       placeholder="Select customers...">
+        <datasource type="DataSourceTagHelperType.Custom" server-filtering="true">
+            <groups>
+                <group field="Country" typeof="string"></group>
+            </groups>
+            <transport>
+                 <read url="@Url.Action("Customers_Read", "MultiSelect")" data="onAdditionalData"/>
+            </transport>
+        </datasource>
+    </kendo-multiselect>
+    <script>
+        function onAdditionalData() {
+            return {
+                text: $("#customers").val()
+            };
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

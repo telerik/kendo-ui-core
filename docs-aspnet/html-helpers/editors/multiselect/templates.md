@@ -35,6 +35,26 @@ The following example demonstrates how to customize the MultiSelect by referenci
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="itemTemplate" type="text/x-kendo-template">
+        ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       item-template-id="itemTemplate">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 The following example demonstrates how to customize the MultiSelect by declaring an inline string.
 
@@ -53,6 +73,20 @@ The following example demonstrates how to customize the MultiSelect by declaring
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       item-template="<span><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## Item Template
 
@@ -81,6 +115,26 @@ The following example demonstrates how to define an item template and how to eva
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="itemTemplate" type="text/x-kendo-template">
+        ContactName: #:data.ContactName#, CustomerID: #:data.CustomerID#
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       item-template-id="itemTemplate">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## Tag Template
 
@@ -109,6 +163,26 @@ The following example demonstrates how to define a tag template.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="tagTemplate" type="text/x-kendo-template">
+        ContactName: #:data.ContactName#
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       tag-template-id="tagTemplate">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## Header Template
 
@@ -137,6 +211,26 @@ The following example demonstrates how to define a header template.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="headerTemplate" type="text/x-kendo-template">
+        <strong>Header</strong>
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       header-template-id="headerTemplate">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## Footer Template
 
@@ -165,6 +259,26 @@ The following example demonstrates how to define a footer template.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="footerTemplate" type="text/x-kendo-template">
+        Total <strong>#: instance.dataSource.total() #</strong> items found
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       footer-template-id="footerTemplate">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## No-Data Templates
 
@@ -193,6 +307,26 @@ The following example demonstrates how to define a `noDataTemplate` template.
         })
     )
 ```
+{% if site.core %}
+```TagHelper
+    <!-- Template -->
+    <script id="noDataTemplate" type="text/x-kendo-template">
+        <strong>No Data!</strong>
+    </script>
+
+    <!-- MultiSelect initialization -->
+    <kendo-multiselect name="customers"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       no-data-template-id="noDataTemplate">
+        <datasource type="DataSourceTagHelperType.Custom">
+               <transport>
+                    <read url="@Url.Action("Customers_Read", "MultiSelect")" />
+               </transport>
+        </datasource>
+    </kendo-multiselect>
+```
+{% endif %}
 
 ## See Also
 

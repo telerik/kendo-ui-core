@@ -23,11 +23,24 @@ An Upload in the synchronous mode behaves like a regular file input&mdash;the se
             .HtmlAttributes(new { aria_label = "files" })
         )
         <p style="padding-top: 1em; text-align: right">
-            <button type="submit" class="k-button k-primary">Submit</button>
+            <button type="submit" class="k-button k-button-solid-primary k-button-solid k-button-rectangle k-button-md k-rounded-md">Submit</button>
         </p>
     </div>
 </form>
 ```
+{% if site.core %}
+```TagHelper
+<form method="post" action='@Url.Action("Submit")'>
+    <div class="demo-section k-content">
+        <kendo-upload name="files" aria-label="files">
+        </kendo-upload>
+        <p style="padding-top: 1em; text-align: right">
+            <button type="submit" class="k-button k-button-solid-primary k-button-solid k-button-rectangle k-button-md k-rounded-md">Submit</button>
+        </p>
+    </div>
+</form>
+```
+{% endif %}
 ```Controller
 public IWebHostEnvironment WebHostEnvironment { get; set; }
 
@@ -75,6 +88,15 @@ An Upload in the asynchronous mode requires dedicated server handlers to store a
     )
 )
 ```
+{% if site.core %}
+```TagHelper
+<kendo-upload name="files">
+    <async auto-upload="true" 
+           save-url="@Url.Action("SaveAsync", "Upload")" 
+           remove-url="@Url.Action("Remove","Upload")" />
+</kendo-upload>
+```
+{% endif %}
 ```Controller
 public IWebHostingEnvironment WebHostEnvironment { get; set; }
 
