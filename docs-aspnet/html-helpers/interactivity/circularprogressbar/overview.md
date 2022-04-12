@@ -90,6 +90,8 @@ The following example demonstrates the basic configuration of the ProgressBar.
 ```
 {% endif %}
 
+You can control the size of the Circular ProgressBar, by placing it in a `div` container with a specific height.
+
 ## Modes
 
 The Circular ProgressBar has two modes: `infinite` and `finite`.
