@@ -8752,32 +8752,6 @@ Can also be set to the following string values:
 
 > Check [Selection](https://demos.telerik.com/kendo-ui/grid/selection) for a live demo.
 
-### selectable.dragToSelect `Boolean` *(default: true)*
-
-When set to `true`, the user can drag to select multiple Grid rows or cells.
-
-> Applies only for [multiple row or cell selection](/api/javascript/ui/grid/configuration/selectable.mode). 
-
-#### Example - disable dragging to select multiple Grid rows
-
-    <div id="grid"></div>
-    <script>
-    $("#grid").kendoGrid({
-      columns: [
-        { field: "name" },
-        { field: "age" }
-      ],
-      dataSource: [
-        { name: "Jane Doe", age: 30 },
-        { name: "John Doe", age: 33 }
-      ],
-      selectable: {
-        mode: "multiple, row",
-        dragToSelect: false
-      }
-    });
-    </script>
-
 ### selectable.mode `String`
 
 Can be set to the following string values:
