@@ -4,6 +4,7 @@ page_title: Visual Studio Code Integration | Download and Installation | Kendo U
 description: "Learn how to easily create web applications with Kendo UI for jQuery in Visual Studio Code."
 slug: kendoui_vscode_integration
 position: 7
+published: False
 ---
 
 # Kendo UI Productivity Tools for Visual Studio Code
