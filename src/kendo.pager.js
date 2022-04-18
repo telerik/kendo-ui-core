@@ -270,7 +270,7 @@ var __meta__ = { // jshint ignore:line
         options: {
             name: "Pager",
             ARIATemplate: "Page navigation, page #=page# of #=totalPages#",
-            selectTemplate: '<li><span tabindex="#=tabindex#" #if (navigatable) {# aria-label="#=title#" #}# class="k-link k-state-selected">#=text#</span></li>',
+            selectTemplate: '<li><span role="button" tabindex="#=tabindex#" #if (navigatable) {# aria-label="#=title#" #}# class="k-link k-state-selected">#=text#</span></li>',
             currentPageTemplate: '<li class="k-current-page"><span class="k-link k-pager-nav">#=text#</span></li>',
             linkTemplate: '<li><a tabindex="#=tabindex#" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',
             numericItemTemplate: '<li><a tabindex="-1" href="\\#" class="k-link" data-#=ns#page="#=idx#" #if (title !== "") {# title="#=title#" #}#>#=text#</a></li>',

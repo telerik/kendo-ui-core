@@ -1394,6 +1394,23 @@
             assert.isTrue(typeof result.filters !== 'undefined');
         });
 
+        it("_composeItemsFilter should return a filter with 'and' logic", function () {
+            var dataSource = remoteDataSource(null, {
+                total: 100,
+                serverPaging: false,
+                filter: { filters: [{ value:"ContactName", operator:"eq", field:"test"}], logic: "or" },
+                group: [{
+                    field: 'ShipAddress'
+                }, {
+                    field: 'ContactName'
+                }],
+                groupPaging: true
+            });
+
+            var result = dataSource._composeItemsFilter({field: 'ShipAddress', value:'test'});
+            assert.equal(result.logic, "and");
+        });
+
         it("_composeItemsFilter should create a filter object which contains the values of the parent groups", function () {
             var dataSource = remoteDataSource(null, {
                 total: 100,

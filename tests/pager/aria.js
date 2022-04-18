@@ -49,6 +49,12 @@
             assert.equal(element.find(".k-pager-numbers .k-link:eq(0)").attr("aria-label"), "Page 1");
         });
 
+        it("selected page button should have role button", function() {
+            var element = setup(null, { navigatable: true, numeric: true });
+            pager.page(1);
+            assert.equal(element.find(".k-pager-numbers .k-link:eq(0)").attr("role"), "button");
+        });
+
         it("pager element should have aria-label", function() {
             var element = setup(null, { navigatable: true, numeric: true });
             pager.page(1);
