@@ -2,7 +2,7 @@
     var BottomNavigation = kendo.ui.BottomNavigation,
         element, div;
 
-    describe("kendo.ui.bottomnavigation API", function () {
+    describe("kendo.ui.bottomnavigation API", function() {
         beforeEach(function() {
             element = $("<nav></nav>").appendTo(Mocha.fixture);
             div = $("<div />").appendTo(Mocha.fixture);
@@ -121,7 +121,7 @@
             assert.isOk(bottomNav.items().eq(0).is(".newItem"));
         });
 
-        it("select method returns selected item", function(){
+        it("select method returns selected item", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", selected: true },
@@ -132,7 +132,7 @@
             assert.equal(bottomNav.select().index(), 0);
         });
 
-        it("select method deselects items and select new one", function(){
+        it("select method deselects items and select new one", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", selected: true },
@@ -146,7 +146,7 @@
             assert.isOk(bottomNav.items().eq(1).is(".k-state-selected"));
         });
 
-        it("select method can toggle selection", function(){
+        it("select method can toggle selection", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", selected: true },
@@ -160,7 +160,7 @@
             assert.isFalse(bottomNav.items().eq(1).is(".k-state-selected"));
         });
 
-        it("select method works with DOM element", function(){
+        it("select method works with DOM element", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", selected: true },
@@ -174,7 +174,7 @@
             assert.isFalse(bottomNav.items().eq(1).is(".k-state-selected"));
         });
 
-        it("enable method can enable item", function(){
+        it("enable method can enable item", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", enabled: false },
@@ -189,7 +189,7 @@
             assert.isFalse(bottomNav.items().eq(0).is(".k-state-disabled"));
         });
 
-        it("enable method can enable item", function(){
+        it("enable method can enable item", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -202,7 +202,7 @@
             assert.isOk(bottomNav.items().eq(0).is(".k-state-disabled"));
         });
 
-        it("enable method works with DOM element", function(){
+        it("enable method works with DOM element", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -215,7 +215,7 @@
             assert.isOk(bottomNav.items().eq(0).is(".k-state-disabled"));
         });
 
-        it("item method returns item by index", function(){
+        it("item method returns item by index", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -226,7 +226,7 @@
             assert.equal(bottomNav.item(1)[0], bottomNav.element.find(".k-bottom-nav-item")[1]);
         });
 
-        it("item method returns item by index as string", function(){
+        it("item method returns item by index as string", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -237,7 +237,7 @@
             assert.equal(bottomNav.item("1")[0], bottomNav.element.find(".k-bottom-nav-item")[1]);
         });
 
-        it("item method returns null with NaN index", function(){
+        it("item method returns null with NaN index", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -248,7 +248,7 @@
             assert.equal(bottomNav.item("s"), null);
         });
 
-        it("itemById method returns item", function(){
+        it("itemById method returns item", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", attributes: { id: "itemId" } },
@@ -260,7 +260,7 @@
         });
 
 
-        it("add method appends new item", function(){
+        it("add method appends new item", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" }
@@ -273,7 +273,7 @@
             assert.equal(bottomNav.items().eq(1).text(), "text");
         });
 
-        it("add method adds new item before given element", function(){
+        it("add method adds new item before given element", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" }
@@ -286,7 +286,7 @@
             assert.equal(bottomNav.items().eq(0).text(), "text");
         });
 
-        it("remove method removes item", function(){
+        it("remove method removes item", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -300,7 +300,7 @@
             assert.equal(bottomNav.items().eq(0).text(), "text");
         });
 
-        it("remove method works with DOM element", function(){
+        it("remove method works with DOM element", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -314,7 +314,7 @@
             assert.equal(bottomNav.items().eq(0).text(), "text");
         });
 
-        it("showText method hides all text elements", function(){
+        it("showText method hides all text elements", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -328,7 +328,7 @@
             assert.isFalse(bottomNav.items().eq(1).find(".k-bottom-nav-item-text").is(":visible"));
         });
 
-        it("showText method shows back hidden text elements", function(){
+        it("showText method shows back hidden text elements", function() {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home" },
@@ -343,12 +343,12 @@
             assert.isOk(bottomNav.items().eq(1).find(".k-bottom-nav-item-text").is(":visible"));
         });
 
-        it("select event is fired", function(done){
+        it("select event is fired", function(done) {
             var bottomNav = setup({
                 items: [
                     { text: "home", icon: "home", url: "http://url/" }
                 ],
-                select: function () {
+                select: function() {
                     assert.isOk(true);
                     done();
                 }

@@ -45,7 +45,6 @@ var __meta__ = { // jshint ignore:line
         KEDITITEM = "k-edit-item",
         PAGER_CLASS = "k-listview-pager",
         ITEM_CLASS = "k-listview-item",
-        TABINDEX = "tabindex",
         ARIA_SETSIZE = "aria-setsize",
         ARIA_POSINSET = "aria-posinset",
         ARIA_ROLE = "role",
@@ -245,8 +244,6 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this.content = this.element;
             }
-
-            this.content.attr(TABINDEX, -1);
 
             if (height) {
                 this.element.css("height", height);
@@ -718,7 +715,7 @@ var __meta__ = { // jshint ignore:line
                             active = activeElement(), idx,
                             scrollable = that.options.scrollable;
 
-                        if (!target.is(that.element) || (!canHandle && !isTextBox && key !== keys.ESC) || (isTextBox && key !== keys.ESC && key !== keys.ENTER)) {
+                        if (target.hasClass(PAGER_CLASS) || (!canHandle && !isTextBox && key !== keys.ESC) || (isTextBox && key !== keys.ESC && key !== keys.ENTER)) {
                             return;
                         }
 
@@ -880,6 +877,7 @@ var __meta__ = { // jshint ignore:line
                 index = editable.element.index();
                 editable.element.replaceWith(template(data));
                 item = that.items().eq(index);
+                item.addClass(ITEM_CLASS);
                 item.attr(kendo.attr("uid"), data.uid);
                 item.attr(ARIA_ROLE, role);
 
@@ -988,11 +986,10 @@ var __meta__ = { // jshint ignore:line
 
         _crudHandlers: function() {
             var that = this,
-                mousedownNs = MOUSEDOWN + NS,
                 touchstartNs = TOUCHSTART + NS,
                 clickNs = CLICK + NS;
 
-            that.content.on(mousedownNs + " " + touchstartNs, ".k-edit-button", function(e) {
+            that.content.on(touchstartNs + " " + clickNs, ".k-edit-button", function(e) {
                 e.preventDefault();
                 var item = $(this).closest("[" + kendo.attr("uid") + "]");
                 setTimeout(function() {
@@ -1001,7 +998,7 @@ var __meta__ = { // jshint ignore:line
             });
 
 
-            that.content.on(mousedownNs + " " + touchstartNs, ".k-delete-button", function(e) {
+            that.content.on(touchstartNs + " " + clickNs, ".k-delete-button", function(e) {
                 e.preventDefault();
                 var item = $(this).closest("[" + kendo.attr("uid") + "]");
                  setTimeout(function() {

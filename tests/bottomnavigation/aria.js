@@ -2,7 +2,7 @@
     var BottomNavigation = kendo.ui.BottomNavigation,
         element, div;
 
-    describe("kendo.ui.bottomnavigation with AXE", function () {
+    describe("kendo.ui.bottomnavigation with AXE", function() {
         beforeEach(function() {
             element = $("<nav></nav>").appendTo(Mocha.fixture);
             div = $("<div />").appendTo(Mocha.fixture);

@@ -2,7 +2,7 @@
     var BottomNavigation = kendo.ui.BottomNavigation,
         element, div;
 
-    describe("kendo.ui.bottomnavigation initialization", function () {
+    describe("kendo.ui.bottomnavigation initialization", function() {
         beforeEach(function() {
             element = $("<nav></nav>").appendTo(Mocha.fixture);
             div = $("<div />").appendTo(Mocha.fixture);

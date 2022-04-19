@@ -139,6 +139,17 @@
             listView.content.find(".k-cancel-button").click();
         });
 
+        it("clicking the cancel button sets the k-listview-item class", function() {
+            var listView = setup({
+                    editTemplate: '<li><button class="k-cancel-button"></li>',
+                });
+
+            listView.edit(listView.content.children().first());
+
+            listView.content.find(".k-cancel-button").click();
+            assert.isOk(listView.content.children().first().hasClass("k-listview-item"));
+        });
+
         it("preventing the cancel event leaves the item in edit mode", function() {
             var called = false,
                 listView = setup({

@@ -257,32 +257,49 @@ The filters which are applied over the data items. By default, no filter is appl
 
 #### Example - set a single filter
 
+    <h3>All names(no filters)</h3>
+    <div id="non-filtered"></div>
+    <h3>All names that start with "Ja"</h3>
+    <div id="filtered"></div>
+      
     <script>
+    var data = [
+      { name: "Jane Doe" },
+      { name: "John Doe" },
+      { name: "Jane Sam" },
+      { name: "John Doe" },
+      { name: "Jane Mike" }
+    ];
     var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "Jane Doe" },
-        { name: "John Doe" }
-      ],
-      filter: { field: "name", operator: "startswith", value: "Jane" }
+      data: data,
+      filter: { field: "name", operator: "startswith", value: "Ja" }
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view.length); // displays "1"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view[0].name); // displays "Jane Doe"
+    	view.forEach(function(item) {
+        $("#filtered").append("name - " + item.name + "<br>");
+      });
+    });
+      
+    data.forEach(function(item) {
+      $("#non-filtered").append("name - " + item.name + "<br>");
     });
     </script>
 
 #### Example - set the filter as a conjunction (and)
 
+    <h3>All products(no filters)</h3>
+    <div id="non-filtered"></div>
+    <h3>All products with category "Beverages" that are not "Coffee".</h3>
+    <div id="filtered"></div>
+
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [
-        { name: "Tea", category: "Beverages" },
+    var data = [{ name: "Tea", category: "Beverages" },
         { name: "Coffee", category: "Beverages" },
-        { name: "Ham", category: "Food" }
-      ],
+        { name: "Ham", category: "Food" }];
+      
+    var dataSource = new kendo.data.DataSource({
+      data: data,
       filter: [
         // leave data items which are "Beverage" and not "Coffee"
         { field: "category", operator: "eq", value: "Beverages" },
@@ -291,22 +308,32 @@ The filters which are applied over the data items. By default, no filter is appl
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view.length); // displays "1"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view[0].name); // displays "Tea"
+      view.forEach(function(item) {
+        $("#filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
+      });
+    });
+      
+    data.forEach(function(item) {
+      $("#non-filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
     });
     </script>
 
 #### Example - set the filter as a disjunction (or)
 
+    <h3>All products(no filters)</h3>
+    <div id="non-filtered"></div>
+    <h3>All products with category "Food" or name "Tea".</h3>
+    <div id="filtered"></div>
+      
     <script>
-    var dataSource = new kendo.data.DataSource({
-      data: [
+    var data = [
         { name: "Tea", category: "Beverages" },
         { name: "Coffee", category: "Beverages" },
         { name: "Ham", category: "Food" }
-      ],
+      ];
+      
+    var dataSource = new kendo.data.DataSource({
+      data: data,
       filter: {
         // leave data items which are "Food" or "Tea"
         logic: "or",
@@ -318,12 +345,13 @@ The filters which are applied over the data items. By default, no filter is appl
     });
     dataSource.fetch(function(){
       var view = dataSource.view();
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view.length); // displays "2"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view[0].name); // displays "Tea"
-	/* The result can be observed in the DevTools(F12) console of the browser. */
-      console.log(view[1].name); // displays "Ham"
+      view.forEach(function(item) {
+        $("#filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
+      });
+    });
+      
+    data.forEach(function(item) {
+      $("#non-filtered").append("name - " + item.name + ", category - " + item.category + "<br>");
     });
     </script>
 

@@ -2,7 +2,7 @@
     var BottomNavigation = kendo.ui.BottomNavigation,
         element, div;
 
-    describe("kendo.ui.bottomnavigation items rendering", function () {
+    describe("kendo.ui.bottomnavigation items rendering", function() {
         beforeEach(function() {
             element = $("<nav></nav>").appendTo(Mocha.fixture);
             div = $("<div />").appendTo(Mocha.fixture);
@@ -177,10 +177,6 @@
             assert.equal(bottomNav.items().eq(0).html(), '<span class="template">custom template</span>');
             assert.equal(bottomNav.items().eq(1).html(), '<span class="item-template">custom template</span>');
         });
-
-
-
-
     });
 }());
 

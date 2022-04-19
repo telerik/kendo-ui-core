@@ -287,9 +287,10 @@ Custom commands are supported by specifying the [click](columns.command.click) o
       ],
       editable: true,
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -310,9 +311,10 @@ Custom commands are supported by specifying the [click](columns.command.click) o
       ],
       editable: "inline",
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -342,9 +344,10 @@ Custom commands are supported by specifying the [click](columns.command.click) o
       ],
       editable: true,
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -369,9 +372,10 @@ The CSS class applied to the command button.
       ],
       editable: true,
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -417,9 +421,10 @@ The function context (available via the `this` keyword) will be set to the grid 
        }
       ],
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -451,9 +456,10 @@ When it is defined as an object it allows to customize the web font icon for the
        }
       ],
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -481,9 +487,10 @@ When it is defined as an object it allows to customize the web font icon for the
        }
       ],
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -514,9 +521,10 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
        }
       ],
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -547,9 +555,10 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
        }
       ],
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -580,9 +589,10 @@ The class for the [web font icon](https://docs.telerik.com/kendo-ui/styles-and-l
        }
       ],
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -608,9 +618,10 @@ The name of the command. The built-in commands are "edit" and "destroy". Can be 
       ],
       editable: "popup",
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -664,9 +675,10 @@ The text displayed by the command button and the "cancel", "edit" and "update" t
       ],
       editable: true,
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -717,9 +729,10 @@ The "edit" text of the edit command.
       ],
       editable: "inline",
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -744,9 +757,10 @@ The "cancel" text of the edit command.
       ],
       editable: "inline",
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -771,9 +785,10 @@ The "update" text of the edit command.
       ],
       editable: "inline",
       dataSource: {
-        data: [ { name: "Jane Doe" } ],
+        data: [ {Id: 1, name: "Jane Doe" } ],
         schema: {
           model: {
+            id: "Id",
             fields: {
               name: { type: "string" }
             }
@@ -2397,7 +2412,7 @@ The fields which can be used in the template are:
 
 ### columns.groupFooterTemplate `String|Function`
 
-The [template](/api/javascript/kendo/methods/template) which renders the group footer when the grid is grouped by the column field. By default the group footer is not displayed.
+The [template](/api/javascript/kendo/methods/template) which renders the group footer for the corresponding column. By default the group footer is not displayed. The group footer will always appear as long as at least one column has a defined groupFooterTemplate.
 
 The fields which can be used in the template are:
 
