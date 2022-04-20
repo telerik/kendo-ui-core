@@ -52,47 +52,46 @@ The following example demonstrates how to define the Grid.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-grid name="grid"></kendo-grid>
+    <kendo-grid name="grid">
+        <columns>
+            <column field="ContactName" width="140"></column>
+            <column field="ContactTitle" width="190"></column>
+            <column field="CompanyName"></column>
+            <column field="Country" width="110"></column>
+        </columns>
+        <datasource type="DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Customers_Read","Grid")"/>
+            </transport>
+        </datasource>
+    </kendo-grid>
 ```
 {% endif %}
 ```Controller
-    namespace Kendo.Mvc.Examples.Controllers
+    public class GridController : Controller
     {
-	    public partial class GridController : BaseController
+        public ActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
         {
-            [Demo]
-            public IActionResult Index()
+            var result = Enumerable.Range(0, 50).Select(i => new Customer
             {
-                return View();
-            }
+                CompanyName = "Company Name " + i,
+                ContactName = "Contact Name " + i,
+                ContactTitle = "Contact Title " + i,
+                Country = "Coutry " + i
+            });
 
-		    public IActionResult Customers_Read([DataSourceRequest] DataSourceRequest request)
-		    {
-		    	return Json(GetCustomers().ToDataSourceResult(request));
-		    }
-
-		    private static IEnumerable<CustomerViewModel> GetCustomers()
-		    {
-                using (var northwind = new SampleEntitiesDataContext())
-                {
-                    return northwind.Customers.Select(customer => new CustomerViewModel
-                    {
-                        CustomerID = customer.CustomerID,
-                        CompanyName = customer.CompanyName,
-                        ContactName = customer.ContactName,
-                        ContactTitle = customer.ContactTitle,
-                        Address = customer.Address,
-                        City = customer.City,
-                        Region = customer.Region,
-                        PostalCode = customer.PostalCode,
-                        Country = customer.Country,
-                        Phone = customer.Phone,
-                        Fax = customer.Fax,
-                        Bool = customer.Bool
-                    }).ToList();
-                }
-		    }
-        }    
+            var dsResult = result.ToDataSourceResult(request);
+            return Json(dsResult);
+        }
+    }
+```
+```Customer.cs
+    public class Customer
+    {
+        public string ContactName { get; set; }
+        public string CompanyName { get; set; }
+        public string Country { get; set; }
+        public string ContactTitle { get; set; }
     }
 ```
 
@@ -192,7 +191,6 @@ The Grid configuration options are passed as attributes of the helper. The Grid 
     * [Globalization]({% slug globalization_grid_aspnetcore %})
     * [Accessibility]({% slug accessibility_aspnetcore_grid %})
 
-For more information on implementing specific scenarios, refer to the [**Knowledge Base**](/knowledge-base) section.
 
 ## Events
 
@@ -267,13 +265,28 @@ You can subscribe to all Grid events and then use them to further customize the 
 ## Referencing Existing Instances
 
 To refer to an existing Grid instance, use the [`jQuery.data()`](https://api.jquery.com/jQuery.data/) method. Once a reference is established, use the [Grid client-side API](https://docs.telerik.com/kendo-ui/api/javascript/ui/grid#methods) to control its behavior.
-
+```
         <script>
         $(function() {
             // The Name() of the Grid is used to get its client-side instance.
             var grid = $("#grid").data("kendoGrid");
         });
         </script>
+```
+
+## Learning Resources
+
+* [Knowledge Base](/knowledge-base)
+{% if site.core %}
+* [Forum Discussions](https://www.telerik.com/forums/aspnet-core-ui?tagId=753) 
+* [Demos](https://demos.telerik.com/aspnet-core/grid)
+{% endif %}
+{% if site.mvc %}
+* [Forum Discussions](https://www.telerik.com/forums/aspnet-mvc?tagId=754) 
+* [Demos](https://demos.telerik.com/aspnet-mvc/grid)
+{% endif %}
+* [How-To Examples](https://github.com/telerik/ui-for-aspnet-mvc-examples/tree/master/grid)
+
 
 ## See Also
 

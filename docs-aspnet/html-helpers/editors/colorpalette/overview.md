@@ -15,8 +15,6 @@ The Telerik UI ColorPalette TagHelper and HtmlHelper for {{ site.framework }} ar
 The Telerik UI ColorPalette HtmlHelper for {{ site.framework }} is a server-side wrapper for the Kendo UI ColorPalette widget.
 {% endif %}
 
-The ColorPalette provides suggestions depending on the typed text and allows multiple value entries.
-
 * [Demo page for the ColorPalette](https://demos.telerik.com/{{ site.platform }}/colorpalette)
 
 ## Initializing the ColorPalette

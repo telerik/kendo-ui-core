@@ -544,9 +544,9 @@ navigation:
      "*/orgchart":
         isNew: true
         title: "OrgChart"
-     "*progressbar":
+     "html-helpers/interactivity/progressbar":
         title: "ProgressBar"
-     "*circularprogressbar":
+     "html-helpers/interactivity/circularprogressbar":
         title: "CircularProgressBar"
      "*qrcode":
         title: "QRCode"
