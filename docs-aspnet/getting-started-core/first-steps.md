@@ -67,7 +67,9 @@ Using the Visual Studio extensions is the fastest approach to create and configu
 
 1. Close any running Visual Studio instances.
 
-1. Go to the [{{ site.product_long }} Extension](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions) page and click **Download**.
+1. Go to the appropriate Visual Studio Extensions page and click **Download**
+    - [{{ site.product_long }} Extension (for VS 2022)](https://marketplace.visualstudio.com/items?itemName=TelerikInc.ProgressTelerikASPNETCoreVSExtensions)
+    - [{{ site.product_long }} Extension (for VS 2017 & VS 2019)](https://marketplace.visualstudio.com/items?itemName=TelerikInc.TelerikASPNETCoreVSExtensions)
 
 1. Locate and double-click the `TelerikUI.ASP.NET.Core.VSPackage.vsix` file to install the extensions.
 
