@@ -623,5 +623,71 @@
         "cancel": "Abbrechen"
       });
   }
+  
+  /* PDFViewer */
+  
+  if (kendo.ui.PDFViewer) {
+    kendo.ui.PDFViewer.prototype.options.messages =
+        $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
+            defaultFileName: 'Mein Dokument',
+            toolbar: {
+                zoom: {
+                    zoomOut: 'Herauszoomen',
+                    zoomIn: 'Hineinzoomen',
+                    actualWidth: 'Tatsächliche Breite',
+                    autoWidth: 'Automatische Breite',
+                    fitToWidth: 'An Breite anpassen',
+                    fitToPage: 'An Seite anpassen'
+                },
+                open: 'Öffnen',
+                exportAs: 'Exportieren',
+                download: 'Herunterladen',
+                pager: {
+                    first: 'Zur ersten Seite',
+                    previous: 'Zur vorherigen Seite',
+                    next: 'Zur nächsten Seite',
+                    last: 'Zur letzten Seite',
+                    of: ' von {0} ',
+                    page: 'Seite',
+                    pages: 'Seiten'
+                },
+                print: 'Drucken',
+                toggleSelection: 'Markierungsmodus',
+                togglePan: 'Schwenkmodus',
+                search: 'Suchen'
+            },
+            errorMessages: {
+                notSupported: 'Dateityp nicht unterstützt.',
+                parseError: 'Fehler beim Verarbeiten der Datei.',
+                notFound: 'Datei konnte nicht gefunden werden.',
+                popupBlocked: 'Popups sind blockiert.'
+            },
+            dialogs: {
+                exportAsDialog: {
+                    title: 'Exportieren...',
+                    defaultFileName: 'Dokument',
+                    pdf: 'Portable Document Format (.pdf)',
+                    png: 'Portable Network Graphics (.png)',
+                    svg: 'Scalable Vector Graphics (.svg)',
+                    labels: {
+                        fileName: 'Dateiname',
+                        saveAsType: 'Speichern als',
+                        page: 'Seite'
+                    }
+                },
+                okText: 'OK',
+                save: 'Speichern',
+                cancel: 'Abbrechen',
+                search: {
+                    inputLabel: 'Suchtext',
+                    matchCase: 'Gross-/Kleinschreibung beachten',
+                    next: 'Nächster Treffer',
+                    previous: 'Vorheriger Treffer',
+                    close: 'Schliessen',
+                    of: 'von'
+                }
+            }
+        });
+  }
 
 })(window.kendo.jQuery);
