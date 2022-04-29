@@ -24,7 +24,7 @@
             DISABLED = "disabled",
             DISABLEDSTATE = "k-disabled",
             FOCUSEDSTATE = "k-focus",
-            SELECTEDSTATE = "k-selected";
+            ACTIVESTATE = "k-active";
 
         var BUTTON_DEFAULTS = {
             icon: "",
@@ -123,7 +123,7 @@
                 var that = this;
                 that.element.removeClass(FOCUSEDSTATE);
                 setTimeout(function() {
-                    that.element.removeClass(SELECTEDSTATE);
+                    that.element.removeClass(ACTIVESTATE);
                 });
             },
 
@@ -142,12 +142,12 @@
             },
 
             _removeActive: function() {
-                this.element.removeClass(SELECTEDSTATE);
+                this.element.removeClass(ACTIVESTATE);
             },
 
             _addActive: function() {
                 if (this.options.enable) {
-                    this.element.addClass(SELECTEDSTATE);
+                    this.element.addClass(ACTIVESTATE);
                 }
             },
 

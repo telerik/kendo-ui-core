@@ -58,7 +58,41 @@ The following example demonstrates how to define the Scheduler.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-scheduler name="scheduler"></kendo-scheduler>
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        string defaultTitle = "No Title";
+    }
+
+    <kendo-scheduler name="scheduler"
+        date="new DateTime(2013, 6, 13)"
+        start-time="new DateTime(2013, 6, 13, 7, 0, 0, 0)"
+        height="600"
+        timezone="Etc/UTC">
+        <views>
+            <view type="day"></view>
+            <view type="week" selected="true"></view>
+            <view type="timeline"></view>
+        </views>
+        <scheduler-datasource type="@DataSourceTagHelperType.Ajax">
+            <transport>
+                <read url="@Url.Action("Read", "Scheduler")" />
+                <create url="@Url.Action("Create", "Scheduler")" />
+                <destroy url="@Url.Action("Destroy", "Scheduler")" />
+                <update url="@Url.Action("Update", "Scheduler")" />
+            </transport>
+            <schema data="Data" total="Total" errors="Errors">
+                <scheduler-model id="TaskID">
+                    <fields>
+                        <field name="TaskID" type="number"></field>
+                        <field name="recurrenceId" from="RecurrenceID" type="number"></field>
+                        <field name="title" from="Title" type="string" default-value="@defaultTitle"></field>
+                        <field name="OwnerID" type="number" default-value="1"></field>
+                    </fields>
+                </scheduler-model>
+            </schema>
+        </scheduler-datasource>
+    </kendo-scheduler>
 ```
 {% endif %}
 ```Controller
@@ -187,25 +221,25 @@ The following example demonstrates the basic configuration of the Scheduler.
         }
         <kendo-scheduler name="scheduler" height="600" date="new DateTime(2013, 6, 13)" start-time="new DateTime(2013, 6, 13, 7, 0, 0, 0)" timezone="Etc/UTC">
             <views>
-                    <view type="day"></view>
-                    <view type="workWeek" selected="true"></view>
-                    <view type="week"></view>
-                    <view type="month"></view>
-                    <view type="agenda"></view>
-                    <view type="timeline"></view>
+                <view type="day"></view>
+                <view type="workWeek" selected="true"></view>
+                <view type="week"></view>
+                <view type="month"></view>
+                <view type="agenda"></view>
+                <view type="timeline"></view>
             </views>
             <resources>
-                    <resource name="Owner" datacolorfield="Color" datatextfield="Text" datavaluefield="Value" field="OwnerID" bind-to="@resources">
-                    </resource>
+                <resource name="Owner" datacolorfield="Color" datatextfield="Text" datavaluefield="Value" field="OwnerID" bind-to="@resources">
+                </resource>
             </resources>
             <scheduler-datasource>
-                    <transport>
+                <transport>
                     <read url="https://demos.telerik.com/kendo-ui/service/tasks" type="jsonp" />
                     <update url="https://demos.telerik.com/kendo-ui/service/tasks/update" type="jsonp" />
-                    </transport>
-                    <schema data="Data" total="Total" errors="Errors">
+                </transport>
+                <schema data="Data" total="Total" errors="Errors">
                     <scheduler-model id="TaskID">
-                            <fields>
+                        <fields>
                             <field name="TaskID" type="number"></field>
                             <field name="title" from="Title" type="string"></field>
                             <field name="start" from="Start" type="date"></field>
@@ -218,9 +252,9 @@ The following example demonstrates the basic configuration of the Scheduler.
                             <field name="startTimezone" from="StartTimeZone" type="string"></field>
                             <field name="endTimezone" from="EndTimeZone" type="string"></field>
                             <field name="isAllDay" from="IsAllDay" type="boolean"></field>
-                            </fields>
+                        </fields>
                     </scheduler-model>
-                    </schema>
+                </schema>
             </scheduler-datasource>
         </kendo-scheduler>
 ```

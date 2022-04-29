@@ -29,7 +29,7 @@ function getButtonContainer(contents) {
     buttonContainer = $("<div class='buttonContainer'>" +
         "<button type='button'>" + contents + "</button>" +
         "<button type='button'>" + contents + "</button>" +
-    "</div>").appendTo(Mocha.fixture);
+        "</div>").appendTo(Mocha.fixture);
 
     return buttonContainer;
 }

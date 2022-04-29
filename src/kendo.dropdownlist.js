@@ -94,11 +94,6 @@ var __meta__ = { // jshint ignore:line
 
             that._aria();
 
-            //should read changed value of closed dropdownlist
-            if (kendo.support.browser.chrome) {
-                that.wrapper.attr("aria-live", "polite");
-            }
-
             that._enable();
 
             that._attachFocusHandlers();
@@ -285,7 +280,7 @@ var __meta__ = { // jshint ignore:line
             var wrapper = this.wrapper,
                 inputId = wrapper.find(".k-input-inner").attr('id');
 
-            wrapper.attr("aria-activedescendant", inputId);
+            wrapper.attr("aria-describedby", inputId);
         },
 
         _focusInput: function () {
@@ -1142,9 +1137,11 @@ var __meta__ = { // jshint ignore:line
                 optionLabel.addClass("k-focus")
                            .attr("id", listView._optionID);
 
-                this._focused.add(this.filterInput)
-                    .removeAttr("aria-activedescendant")
-                    .attr("aria-activedescendant", listView._optionID);
+                if (this.filterInput) {
+                    this.filterInput
+                        .removeAttr("aria-activedescendant")
+                        .attr("aria-activedescendant", listView._optionID);
+                }
             }
         },
 
@@ -1276,7 +1273,7 @@ var __meta__ = { // jshint ignore:line
                     rounded: null
                 });
 
-                wrapper.append('<span id="' + id + '" unselectable="on" role="option" aria-selected="true" class="k-input-inner">' +
+                wrapper.append('<span id="' + id + '" unselectable="on" class="k-input-inner">' +
                             '<span class="k-input-value-text"></span>' +
                         '</span>')
                     .append(arrowBtn)
@@ -1312,7 +1309,7 @@ var __meta__ = { // jshint ignore:line
                 .attr({
                     accesskey: element.attr("accesskey"),
                     unselectable: "on",
-                    role: "listbox",
+                    role: "combobox",
                     "aria-haspopup": "listbox",
                     "aria-expanded": false
                 });
@@ -1332,10 +1329,6 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this.wrapper.attr("aria-expanded", true);
                 this.ul.attr("aria-hidden", false);
-
-                if (kendo.support.browser.chrome) {
-                    this.wrapper.removeAttr("aria-live");
-                }
             }
         },
 
@@ -1345,10 +1338,6 @@ var __meta__ = { // jshint ignore:line
             } else {
                 this.wrapper.attr("aria-expanded", false);
                 this.ul.attr("aria-hidden", true);
-
-                if (kendo.support.browser.chrome) {
-                    this.wrapper.attr("aria-live", "polite");
-                }
             }
         },
 

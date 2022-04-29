@@ -156,9 +156,9 @@
 
             var button = container.find("#foo");
 
-            assert.isOk(!button.hasClass("k-active"));
+            assert.isOk(!button.hasClass("k-selected"));
             click(button);
-            assert.isOk(button.hasClass("k-active"), "Button receives k-active class after click");
+            assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 
         it("click on a toggleButton's icon changes the button state", function() {
@@ -169,10 +169,10 @@
             });
 
             var button = container.find("#foo");
-            assert.isOk(!button.hasClass("k-active"));
+            assert.isOk(!button.hasClass("k-selected"));
 
             click(container.find("span.k-i-foo"));
-            assert.isOk(button.hasClass("k-active"), "Button receives k-active class after click");
+            assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 
         it("click on selected toggleButton deselects it", function() {
@@ -185,10 +185,10 @@
             var button = container.find("#foo");
 
             click(button);
-            assert.isOk(button.hasClass("k-active"));
+            assert.isOk(button.hasClass("k-selected"));
 
             click(button);
-            assert.isOk(!button.hasClass("k-active"));
+            assert.isOk(!button.hasClass("k-selected"));
         });
 
         it("click on disabled toggleButton does not change its state", function() {
@@ -201,7 +201,7 @@
             var button = container.find("#foo");
 
             click(button);
-            assert.isOk(!button.hasClass("k-active"), "Button state is not changed");
+            assert.isOk(!button.hasClass("k-selected"), "Button state is not changed");
         });
 
         it("click on disabled toggleButton does not trigger the toggle event", function() {
@@ -275,6 +275,51 @@
             click(button);
         });
 
+        it("click on toggleButton in a SplitButton triggers toggle event", function(done) {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                            { id: "option1", text: "Option 1", togglable: true },
+                            { id: "option2", text: "Option 2", togglable: true },
+                            { id: "option3", text: "Option 3", togglable: true }
+                        ]
+                    }
+                ],
+                toggle: function() {
+                    assert.isOk(true, "Toggle event is clicked");
+                    done();
+                }
+            });
+
+            var button = container.find("#splitButton");
+            click(button);
+            click($("#option3"));
+        });
+
+        it("click on toggleButton in a SplitButton triggers toggle event (button level)", function(done) {
+            container.kendoToolBar({
+                items: [
+                    {
+                        type: "splitButton", id: "splitButton", text: "Split Button", menuButtons: [
+                            { id: "option1", text: "Option 1", togglable: true },
+                            { id: "option2", text: "Option 2", togglable: true },
+                            { id: "option3", text: "Option 3", togglable: true,
+                                toggle: function() {
+                                    assert.isOk(true, "Toggle event is clicked");
+                                    done();
+                                }
+                            }
+                        ]
+                    }
+                ]
+            });
+
+            var button = container.find("#splitButton");
+            click(button);
+            click($("#option3"));
+        });
+
         it("selecting toggle button that belongs to a group will deselect other buttons from the same group", function() {
             container.kendoToolBar({
                 items: [
@@ -287,13 +332,13 @@
 
             click(buttons.eq(0));
 
-            assert.isOk(buttons.eq(0).hasClass("k-active"), "First button is selected");
-            assert.isOk(!buttons.eq(1).hasClass("k-active"), "Second button is deselected");
+            assert.isOk(buttons.eq(0).hasClass("k-selected"), "First button is selected");
+            assert.isOk(!buttons.eq(1).hasClass("k-selected"), "Second button is deselected");
 
             click(buttons.eq(1));
 
-            assert.isOk(!buttons.eq(0).hasClass("k-active"), "First button is deselected");
-            assert.isOk(buttons.eq(1).hasClass("k-active"), "Second button is selected");
+            assert.isOk(!buttons.eq(0).hasClass("k-selected"), "First button is deselected");
+            assert.isOk(buttons.eq(1).hasClass("k-selected"), "Second button is selected");
         });
 
         it("click on splitButton triggers click event", function(done) {
@@ -579,9 +624,9 @@
 
             var button = toolbar.popup.element.find("#foo_overflow > .k-button");
 
-            assert.isOk(!button.hasClass("k-active"));
+            assert.isOk(!button.hasClass("k-selected"));
             click(button);
-            assert.isOk(button.hasClass("k-active"), "Button receives k-active class after click");
+            assert.isOk(button.hasClass("k-selected"), "Button receives k-selected class after click");
         });
 
         it("click event is not fired for disabled buttons (overflow)", function() {
@@ -762,8 +807,8 @@
 
             click($("#left_overflow"));
 
-            assert.isOk($("#left").hasClass("k-active"));
-            assert.isOk($("#left_overflow").hasClass("k-active"));
+            assert.isOk($("#left").hasClass("k-selected"));
+            assert.isOk($("#left_overflow").hasClass("k-selected"));
         });
 
     });

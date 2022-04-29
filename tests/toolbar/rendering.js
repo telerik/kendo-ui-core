@@ -531,17 +531,17 @@
             assert.equal(container.children().text(), "foo", "ToggleButton has correct text");
         });
 
-        it("by default toggleButton does not have k-active class", function() {
+        it("by default toggleButton does not have k-selected class", function() {
             container.kendoToolBar({
                 items: [
                     { type: "button", togglable: true, text: "foo" }
                 ]
             });
 
-            assert.isOk(!container.find(".k-toggle-button.k-active").length);
+            assert.isOk(!container.find(".k-toggle-button.k-selected").length);
         });
 
-        it("toggleButton with selected: true receives k-active class", function() {
+        it("toggleButton with selected: true receives k-selected class", function() {
             container.kendoToolBar({
                 items: [
                     { type: "button", togglable: true, text: "foo", selected: true },
@@ -549,8 +549,8 @@
                 ]
             });
 
-            assert.isOk(container.find(".k-toggle-button.k-active").length);
-            assert.equal($(".k-overflow-button.k-active").length, 2);
+            assert.isOk(container.find(".k-toggle-button.k-selected").length);
+            assert.equal($(".k-overflow-button.k-selected").length, 2);
         });
 
         it("by default toggleButton does not have group", function() {
@@ -1445,13 +1445,13 @@
 
             container.data("kendoToolBar").toggle((container.find("#bar")));
 
-            assert.isOk(!$("#foo").hasClass("k-active"), 1);
-            assert.isOk($("#bar").hasClass("k-active"), 2);
-            assert.isOk(!$("#baz").hasClass("k-active"), 3);
+            assert.isOk(!$("#foo").hasClass("k-selected"), 1);
+            assert.isOk($("#bar").hasClass("k-selected"), 2);
+            assert.isOk(!$("#baz").hasClass("k-selected"), 3);
 
-            assert.isOk(!$("#foo_overflow").hasClass("k-active"), 4);
-            assert.isOk($("#bar_overflow").hasClass("k-active"), 5);
-            assert.isOk(!$("#baz_overflow").hasClass("k-active"), 6);
+            assert.isOk(!$("#foo_overflow").hasClass("k-selected"), 4);
+            assert.isOk($("#bar_overflow").hasClass("k-selected"), 5);
+            assert.isOk(!$("#baz_overflow").hasClass("k-selected"), 6);
         });
 
         it("split button has k-rounded-md class", function() {

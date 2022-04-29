@@ -8,9 +8,48 @@ position: 2
 
 # Color Presets
 
-The ColorPalette provides a set of predefined color palettes such as `basic` (default) and `websafe`. You can also configure a custom set of palettes.
+The ColorPalette provides a set of predefined color palettes - `basic` (default) and `websafe`. You can also configure a custom set of palettes.
 
-The example below demonstrates how to use the presets and add custom palettes:
+### Basic Palette
+
+The example below demonstrates how to use the `basic` palettes:
+
+```HtmlHelper
+    @(Html.Kendo().ColorPalette()
+            .Name("basic")
+            .Palette(ColorPickerPalette.Basic))
+```
+```TagHelper
+    <kendo-colorpalette name="basic"
+                        palette="ColorPickerPalette.Basic">
+    </kendo-colorpalette>
+```
+The result from the configuration is : 
+
+![Basic Presets](./images/basic-presets.png)
+
+### WebSafe Palette
+
+The example below demonstrates how to use the `websafe` palettes:
+
+```HtmlHelper
+    @(Html.Kendo().ColorPalette()
+            .Name("websafe")
+            .Palette(ColorPickerPalette.WebSafe))
+```
+```TagHelper
+    <kendo-colorpalette name="websafe"
+                        palette="ColorPickerPalette.WebSafe">
+    </kendo-colorpalette>
+```
+
+The result from the configuration is : 
+
+![WebSafe Presets](./images/websafe-presets.png)
+
+### Custom Palette
+
+The following example demonstrates how to add custom palettes:
 
 ```HtmlHelper
     <div id="example">
@@ -41,8 +80,6 @@ The example below demonstrates how to use the presets and add custom palettes:
                         "#7f7f7f", "#0c0c0c", "#635672", "#343336", "#746425", "#4e5d3c", "#295e70", "#243c75", "#372970", "#533366"
                     }))
         </div>
-
-
         <div class="box-col">
             <h4>Austin</h4>
             @(Html.Kendo().ColorPalette()
@@ -55,21 +92,6 @@ The example below demonstrates how to use the presets and add custom palettes:
                         "#a5a5a5", "#262626", "#a9ea25", "#2e2d21", "#6f9400", "#544e43", "#bf4d00", "#6c6f4b", "#6f5032", "#d77b00",
                         "#7f7f7f", "#0c0c0c", "#74a50f", "#1f1e16", "#4a6300", "#38342d", "#7f3300", "#484a32", "#4a3521", "#8f5200"
                     }))
-        </div>
-
-        <br style="clear:both">
-
-        <div class="box-col">
-            <h4>WebSafe</h4>
-            @(Html.Kendo().ColorPalette()
-                    .Name("websafe")
-                    .Palette(ColorPickerPalette.WebSafe))
-        </div>
-        <div class="box-col">
-            <h4>Basic</h4>
-            @(Html.Kendo().ColorPalette()
-                    .Name("basic")
-                    .Palette(ColorPickerPalette.Basic))
         </div>
     </div>
 </div>
@@ -123,6 +145,11 @@ The example below demonstrates how to use the presets and add custom palettes:
     </div>
 ```
 {% endif %}
+
+The result from the configuration is : 
+
+![Custom Presets](./images/custom-presets.png)
+
 
 ## See Also
 

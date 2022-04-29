@@ -117,7 +117,7 @@ By default, the Telerik UI Grid for {{ site.framework }} exports only the curren
 
 ## Customizing Excel Documents
 
-The [`ExcelExport()`](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration. For more information on how the Excel documents work, refer to the article on [Excel export in Kendo UI for jQuery]({% slug introduction_excelexport_kendoui %}).
+The [`ExcelExport()`](/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#excelexportsystemstring) event allows the customization of the generated Excel document. The `workbook` event argument exposes the generated Excel workbook configuration. For more information on how the Excel documents work, refer to the article on [Excel export in Kendo UI for jQuery](https://docs.telerik.com/kendo-ui/framework/excel/introduction).
 
 1. Attach an excel export handler.
 

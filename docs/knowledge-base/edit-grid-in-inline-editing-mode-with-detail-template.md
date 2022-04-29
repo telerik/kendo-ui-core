@@ -48,9 +48,11 @@ The following example demonstrates how to edit records by using a different deta
   <div id="text-container">
     #: text #
   </div>
-  <textarea style="display: none;" id="text-editor" rows="10" cols="100" data-bind="value:text">
-    #: text #
-  </textarea>
+  <span class="k-input k-textarea k-input-solid k-input-md k-rounded-md" style="">
+    <textarea style="display: none;" id="text-editor" class="!k-overflow-y-auto k-input-inner" rows="10" cols="100" data-bind="value:text">
+       #: text #
+    </textarea>
+  </span>
 </script>
 <div id="grid"></div>
 <script>

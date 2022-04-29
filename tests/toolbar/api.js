@@ -292,8 +292,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo", true);
-            assert.isOk($("#foo").hasClass("k-active"));
-            assert.isOk($("#foo_overflow > .k-button").hasClass("k-active"));
+            assert.isOk($("#foo").hasClass("k-selected"));
+            assert.isOk($("#foo_overflow > .k-button").hasClass("k-selected"));
         });
 
         it("Changing the toggle state of an overflow button is propagated to the twin element located in the toolbar wrapper", function() {
@@ -304,8 +304,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo_overflow", true);
-            assert.isOk($("#foo").hasClass("k-active"));
-            assert.isOk($("#foo_overflow > .k-button").hasClass("k-active"));
+            assert.isOk($("#foo").hasClass("k-selected"));
+            assert.isOk($("#foo_overflow > .k-button").hasClass("k-selected"));
         });
 
         it("toggle method selects togglable button", function() {
@@ -316,8 +316,8 @@
             }).data("kendoToolBar");
 
             toolbar.toggle("#foo_overflow", true);
-            assert.isOk($("#foo").hasClass("k-active"));
-            assert.isOk($("#foo_overflow > .k-button").hasClass("k-active"));
+            assert.isOk($("#foo").hasClass("k-selected"));
+            assert.isOk($("#foo_overflow > .k-button").hasClass("k-selected"));
         });
 
         it("toggle method deselects togglable button", function() {
@@ -329,8 +329,8 @@
 
             toolbar.toggle("#foo_overflow", true);
             toolbar.toggle("#foo_overflow", false);
-            assert.isOk(!$("#foo").hasClass("k-active"));
-            assert.isOk(!$("#foo_overflow > .k-button").hasClass("k-active"));
+            assert.isOk(!$("#foo").hasClass("k-selected"));
+            assert.isOk(!$("#foo_overflow > .k-button").hasClass("k-selected"));
         });
 
         it("toggle method respects flag 'false'", function() {
@@ -615,12 +615,12 @@
 
             toolbar.toggle($("#option1"), true);
 
-            assert.isOk($("#option1").hasClass("k-active"));
+            assert.isOk($("#option1").hasClass("k-selected"));
 
             toolbar.toggle($("#option2"), true);
 
-            assert.isOk(!$("#option1").hasClass("k-active"));
-            assert.isOk($("#option2").hasClass("k-active"));
+            assert.isOk(!$("#option1").hasClass("k-selected"));
+            assert.isOk($("#option2").hasClass("k-selected"));
         });
 
     });

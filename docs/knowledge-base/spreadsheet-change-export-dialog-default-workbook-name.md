@@ -51,7 +51,7 @@ How can I change the default filename of the workbook which appears in the Expor
         }]
     }).getKendoSpreadsheet();
 
-    var downloadBtn = spread.element.find(".k-button-icon .k-i-download");
+    var downloadBtn = spread.element.find(".k-button-icon.k-i-download");
 
     downloadBtn.parent().on("click", function(e) {
       var exportPopup = $("body").find(".k-spreadsheet-window.k-popup-edit-form"),

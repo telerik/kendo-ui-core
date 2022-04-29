@@ -42,7 +42,7 @@ How can I hide the default Upload button and upload the selected file by clickin
 
 ```dojo
 	<input type="file" name="files" id="files"/>
-	<input type="button" value="Upload Selected Files" class="k-button" onclick="uploadSelected()"  />
+	<input type="button" value="Upload Selected Files" class="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary k-upload-button" onclick="uploadSelected()"  />
 	<script>
 		$("#files").kendoUpload({
 			async: {

@@ -111,10 +111,10 @@
             }
         });
 
-        it("DropDownList renders role='listbox'", function() {
+        it("DropDownList renders role='combobox'", function() {
             var dropdownlist = new DropDownList(input);
 
-            assert.equal(dropdownlist.wrapper.attr("role"), "listbox");
+            assert.equal(dropdownlist.wrapper.attr("role"), "combobox");
         });
 
         it("DropDownList renders aria-haspopup", function() {
@@ -135,12 +135,12 @@
             assert.equal(dropdownlist.wrapper.attr("aria-owns"), dropdownlist.ul.attr("id"));
         });
 
-        it("DropDownList renders aria-activedescendant", function() {
+        it("DropDownList renders aria-describedby", function() {
             var dropdownlist = new DropDownList(input.attr("id", "test"), {
                 dataSource: ["Item", "Item2"]
             });
 
-            assert.equal(dropdownlist.wrapper.attr("aria-activedescendant"), dropdownlist.wrapper.find(".k-input-inner")[0].id);
+            assert.equal(dropdownlist.wrapper.attr("aria-describedby"), dropdownlist.wrapper.find(".k-input-inner")[0].id);
         });
 
         it("DropDownList renders aria-selected", function() {
@@ -291,27 +291,5 @@
 
             label.remove();
         });
-
-        if (kendo.support.browser.chrome) {
-            it("wrapper has aria-live=polite set", function() {
-                var ddl = new DropDownList(input, {
-                    dataSource: ["Item"],
-                    animation: false
-                });
-
-                assert.equal(ddl.wrapper.attr("aria-live"), "polite");
-            });
-
-            it("wrapper does not have aria-live=polite when popup is open", function() {
-                var ddl = new DropDownList(input, {
-                    dataSource: ["Item"],
-                    animation: false
-                });
-
-                ddl.open();
-
-                assert.equal(ddl.wrapper.attr("aria-live"), undefined);
-            });
-        }
     });
 }());
