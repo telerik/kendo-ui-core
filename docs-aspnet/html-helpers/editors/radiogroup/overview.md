@@ -33,7 +33,7 @@ The following example demonstrates how to define the RadioGroup.
 {% if site.core %}
 ```TagHelper
      <kendo-radiogroup name="radiogroup"
-            radio-name="radiogroup">
+                       radio-name="radiogroup">
     </kendo-radiogroup>
 ```
 {% endif %}
@@ -63,12 +63,12 @@ The following example demonstrates the basic configuration for the RadioGroup.
 {% if site.core %}
 ```TagHelper
     <kendo-radiogroup name="radiogroup"
-                      radio-name="radiogroup">
+                      radio-name="radiogroup"
+                      value="1">
         <kendo-radiogroup-items>
-            <kendo-radiogroup-item value="one" label="First">
-            </kendo-radiogroup-item>
-            <kendo-radiogroup-item value="two" label="Second">
-            </kendo-radiogroup-item>
+            <kendo-radiogroup-item label="Spain" value="1"></kendo-radiogroup-item>
+            <kendo-radiogroup-item label="Italy" value="2"></kendo-radiogroup-item>
+            <kendo-radiogroup-item label="UK" value="3"></kendo-radiogroup-item>
         </kendo-radiogroup-items>
     </kendo-radiogroup>
 ```

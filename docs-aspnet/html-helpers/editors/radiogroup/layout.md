@@ -16,16 +16,27 @@ The following example shows how to set the RadioGroup layout:
     @(Html.Kendo().RadioGroup()
         .Name("radiogroup")        
         .BindTo(new[] { "English", "German", "Italian", "Russian", "Spanish" })
-        .Layout("vertical")
+        .Layout(RadioGroupLayout.Vertical)
         .Value("Italian")
     ) 
 ```
 {% if site.core %}
 ```TagHelper
+    @{
+        var items = new List<IInputGroupItem>()
+        {
+            new InputGroupItemModel() { Label = "English", Enabled = true, Encoded = false, Value = "1" },
+            new InputGroupItemModel() { Label = "German",  Enabled = true, Encoded = false, Value = "2" },
+            new InputGroupItemModel() { Label = "Italian", Enabled = true, Encoded = false, Value = "3" },
+            new InputGroupItemModel() { Label = "Russian", Enabled = true, Encoded = false, Value = "4" },
+            new InputGroupItemModel() { Label = "Spanish", Enabled = true, Encoded = false, Value = "5" },     
+        };
+    }
     <kendo-radiogroup name="radiogroup"
-        radio-name="radiogroup"        
-        layout="RadioGroupLayout.Horizontal"
-        bind-to="Model.Items">
+                      radio-name="radiogroup" 
+                      bind-to="items"
+                      layout="RadioGroupLayout.Vertical"
+                      value="3">
     </kendo-radiogroup>
 ```
 {% endif %}

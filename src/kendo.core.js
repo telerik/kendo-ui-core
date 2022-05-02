@@ -9,6 +9,15 @@ var __meta__ = { // jshint ignore:line
     description: "The core of the Kendo framework."
 };
 
+var packageMetadata = {
+    name: '@progress/kendo-ui',
+    productName: 'Kendo UI',
+    productCodes: ['KENDOUICOMPLETE', 'KENDOUI', 'KENDOUI', 'KENDOUICOMPLETE'],
+    publishDate: 0,
+    version: '',
+    licensingDocsUrl: 'https://www.telerik.com/kendo-ui/my-license/'
+};
+
 /*jshint eqnull: true, loopfunc: true, evil: true, boss: true, freeze: false*/
 (function($, window, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
@@ -2857,6 +2866,8 @@ function pad(number, digits, end) {
         init: function(element, options) {
             var that = this;
 
+            validatePackage();
+
             that.element = kendo.jQuery(element).handler(that);
 
             that.angular("init", options);
@@ -5196,6 +5207,16 @@ function pad(number, digits, end) {
                 typeof obj;
         };
     }());
+
+    var KendoLicensing={validatePackage:function(){},setScriptKey:function(){}};
+
+    window.KendoLicensing = {
+        setScriptKey: KendoLicensing.setScriptKey
+    };
+
+    function validatePackage() {
+        KendoLicensing.validatePackage(packageMetadata);
+    }
 
 })(jQuery, window);
 

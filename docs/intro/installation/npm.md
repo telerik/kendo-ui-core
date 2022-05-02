@@ -3,7 +3,7 @@ title: Installing with NPM
 page_title: Installing with NPM | Download and Installation | Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and install Kendo UI Core or Kendo UI as NPM packages."
 slug: kendoui_npm_packages_kendoui_installation
-position: 5
+position: 50
 ---
 
 # Installing with NPM
@@ -14,7 +14,7 @@ This article assumes that you are familiar with the necessary steps to use brows
 
 Kendo UI for jQuery maintains the [Kendo UI Core](#kendo-ui-core-on-npm) and the [Kendo UI](#kendo-ui-on-npm) NPM packages. All Kendo UI for jQuery official releases, service packs, and internal builds are uploaded to both of them.
 
-> The Kendo UI for jQuery NPM package is available only for commercial license holders. For more information, refer to the [list of Kendo UI for jQuery components and their bundle support]({% slug welcometo_kendoui %}#list-of-widgets).
+> As of the R2 2022 release the commercial NPM package (*@progress/kendo-ui*) requires a [script license activation]({% slug using-license-code %}).
 
 ## Kendo UI Core on NPM
 
@@ -74,3 +74,4 @@ This section provides solutions for common issues you might encounter while inst
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI for jQuery with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})

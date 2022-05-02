@@ -4,7 +4,7 @@ page_title: Installing with Bower | Download and Installation | Kendo UI for jQu
 description: "Get started with Kendo UI for jQuery and install the Kendo UI Professional or Kendo UI Core distributions by using the Bower package manager."
 previous_url: /install/bower
 slug: kendoui_bower_packages_kendoui_installation
-position: 3
+position: 30
 ---
 
 # Installing with Bower
@@ -129,3 +129,4 @@ This section provides solutions for common issues you might encounter while inst
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})

@@ -92,7 +92,43 @@ The following example demonstrates how to define the Spreadsheet.
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-spreadsheet name="spreadsheet"></kendo-spreadsheet>
+    @addTagHelper *, Kendo.Mvc
+
+    @{
+        string[] mergedCells = new string[] { "A1:F1", "C15:E15" };
+    }
+    <kendo-spreadsheet name="spreadsheet">
+        <sheets>
+            <sheet name="FoodOrder" merged-cells="@mergedCells">
+                <columns>
+                    <sheet-column width="100" />
+                    <sheet-column width="215" />
+                    <sheet-column width="115" />
+                    <sheet-column width="115" />
+                    <sheet-column width="115" />
+                    <sheet-column width="155" />
+                </columns>
+                <rows>
+                    <sheet-row height="50">
+                        <cells>
+                            <cell value="My Company" font-size="25" background="rgb(142,196,65)" text-align="SpreadsheetTextAlign.Center" color="white">
+                            </cell>
+                        </cells>
+                    </sheet-row>
+                    <sheet-row height="25">
+                        <cells>
+                            <cell value="ID" background="rgb(212,223,50)" text-align="SpreadsheetTextAlign.Center"></cell>
+                            <cell value="Product" background="rgb(212,223,50)" text-align="SpreadsheetTextAlign.Center"></cell>
+                            <cell value="Quantity" background="rgb(212,223,50)" text-align="SpreadsheetTextAlign.Center"></cell>
+                            <cell value="Price" background="rgb(212,223,50)" text-align="SpreadsheetTextAlign.Center"></cell>
+                            <cell value="Tax" background="rgb(212,223,50)" text-align="SpreadsheetTextAlign.Center"></cell>
+                            <cell value="Amount" background="rgb(212,223,50)" text-align="SpreadsheetTextAlign.Center"></cell>
+                        </cells>
+                    </sheet-row>
+                </rows>
+            </sheet>
+        </sheets>
+    </kendo-spreadsheet>
 ```
 {% endif %}
 ```Controller

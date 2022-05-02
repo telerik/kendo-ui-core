@@ -28,15 +28,15 @@ The example below demonstrates how to use the Items() method to configure the ra
 ```
 {% if site.core %}
 ```TagHelper
-   <kendo-radiogroup name="radiogroup"
-                      radio-name="radiogroup">
-        <kendo-radiogroup-items>
-            <kendo-radiogroup-item value="one" label="First">
-            </kendo-radiogroup-item>
-            <kendo-radiogroup-item value="two" label="Second">
-            </kendo-radiogroup-item>
-        </kendo-radiogroup-items>
-    </kendo-radiogroup>
+     <kendo-radiogroup name="radiogroup" 
+                       radio-name="radiogroup" 
+                       value="1">
+          <kendo-radiogroup-items>
+              <kendo-radiogroup-item label="Phone (SMS)" value="1"></kendo-radiogroup-item>
+              <kendo-radiogroup-item label="E-mail" value="2"></kendo-radiogroup-item>
+              <kendo-radiogroup-item label="None" value="3"></kendo-radiogroup-item>
+          </kendo-radiogroup-items>
+     </kendo-radiogroup>
 ```
 {% endif %}
 
@@ -106,8 +106,8 @@ You can configure the items in the RadioGroup widget by using the BindTo method.
         @model MvcApplication1.Models.RadioGroupViewModel
 
         <kendo-radiogroup name="radiogroup"
-                      radio-name="radiogroup"                      
-                      bind-to="Model.Items">
+                          radio-name="radiogroup"                      
+                          bind-to="Model.Items">
         </kendo-radiogroup>
     ```
     {% endif %}

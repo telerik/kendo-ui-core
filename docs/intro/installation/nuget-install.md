@@ -3,7 +3,7 @@ title: Installing with NuGet
 page_title: Installing with NuGet | Download and Installation | Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and install the Kendo UI Professional or Kendo UI Core NuGet packages."
 slug: kendoui_nuget_packages
-position: 6
+position: 60
 ---
 
 # Installing with NuGet
@@ -123,3 +123,4 @@ Regardless of the package installation approach you choose, after the installati
 * [Installing Kendo UI for jQuery by Using the CDN Services]({% slug kendoui_cdn_services_installation %})
 * [Installing Kendo UI for jQuery with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Getting Up and Running with Your Kendo UI for jQuery Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})

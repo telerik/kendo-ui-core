@@ -4,10 +4,10 @@
     if (kendo.ui.FlatColorPicker) {
         kendo.ui.FlatColorPicker.prototype.options.messages =
             $.extend(true, kendo.ui.FlatColorPicker.prototype.options.messages, {
-                "apply": "ÊØÈíŞ",
-                "cancel": "ÅáÛÇÁ",
-                "noColor": "ÈáÇ áæä",
-                "clearColor": "ÅÒÇáÉ Çááæä"
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "noColor": "Ø¨Ù„Ø§ Ù„ÙˆÙ†",
+                "clearColor": "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ù„ÙˆÙ†"
             });
     }
 
@@ -16,10 +16,10 @@
     if (kendo.ui.ColorPicker) {
         kendo.ui.ColorPicker.prototype.options.messages =
             $.extend(true, kendo.ui.ColorPicker.prototype.options.messages, {
-                "apply": "ÊØÈíŞ",
-                "cancel": "ÅáÛÇÁ",
-                "noColor": "ÈÏæä áæä",
-                "clearColor": "ÅÒÇáÉ Çááæä"
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "noColor": "Ø¨Ø¯ÙˆÙ† Ù„ÙˆÙ†",
+                "clearColor": "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ù„ÙˆÙ†"
             });
     }
 
@@ -28,24 +28,24 @@
     if (kendo.ui.ColumnMenu) {
         kendo.ui.ColumnMenu.prototype.options.messages =
             $.extend(true, kendo.ui.ColumnMenu.prototype.options.messages, {
-                "sortAscending": "ÊÑÊíÈ ÊÕÇÚÏí",
-                "sortDescending": "ÊÑÊíÈ ÊäÇÒáí",
-                "filter": "İÑÒ",
-                "column": "ÚãæÏ",
-                "columns": "ÃÚãÏÉ",
-                "columnVisibility": "ÙåæÑ ÇáÚãæÏ",
-                "clear": "ãÓÍ",
-                "cancel": "ÅáÛÇÁ",
-                "done": "Êã",
-                "settings": "ÊÚÏíá ÅÚÏÇÏÇÊ ÇáÚãæÏ",
-                "lock": "Şİá ÇáÚãæÏ",
-                "unlock": "ÇáÛÇÁ Şİá ÇáÚãæÏ",
-                "stick": "ÊËÈíÊ ÇáÚÇãæÏ",
-                "unstick": "ÅáÛÇÁ ÊËÈíÊ ÇáÚãæÏ",
-                "setColumnPosition": "ÊÚííä ãæÖÚ ÇáÚãæÏ",
-                "apply": "ÊØÈíŞ",
-                "reset": "ÅÚÇÏÉ ÖÈØ",
-                "buttonTitle": "{0} ÊÚÏíá ÅÚÏÇÏÇÊ ÇáÚãæÏ"
+                "sortAscending": "ØªØ±ØªÙŠØ¨ ØªØµØ§Ø¹Ø¯ÙŠ",
+                "sortDescending": "ØªØ±ØªÙŠØ¨ ØªÙ†Ø§Ø²Ù„ÙŠ",
+                "filter": "ÙØ±Ø²",
+                "column": "Ø¹Ù…ÙˆØ¯",
+                "columns": "Ø£Ø¹Ù…Ø¯Ø©",
+                "columnVisibility": "Ø¸Ù‡ÙˆØ± Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "clear": "Ù…Ø³Ø­",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "done": "ØªÙ…",
+                "settings": "ØªØ¹Ø¯ÙŠÙ„ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "lock": "Ù‚ÙÙ„ Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "unlock": "Ø§Ù„ØºØ§Ø¡ Ù‚ÙÙ„ Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "stick": "ØªØ«Ø¨ÙŠØª Ø§Ù„Ø¹Ø§Ù…ÙˆØ¯",
+                "unstick": "Ø¥Ù„ØºØ§Ø¡ ØªØ«Ø¨ÙŠØª Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "setColumnPosition": "ØªØ¹ÙŠÙŠÙ† Ù…ÙˆØ¶Ø¹ Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "reset": "Ø¥Ø¹Ø§Ø¯Ø© Ø¶Ø¨Ø·",
+                "buttonTitle": "{0} ØªØ¹Ø¯ÙŠÙ„ Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø¹Ù…ÙˆØ¯"
             });
     }
 
@@ -54,8 +54,8 @@
     if (kendo.ui.DateRangePicker) {
         kendo.ui.DateRangePicker.prototype.options.messages =
             $.extend(true, kendo.ui.DateRangePicker.prototype.options.messages, {
-                "startLabel": "ÈÏÇíÉ",
-                "endLabel": "äåÇíÉ"
+                "startLabel": "Ø¨Ø¯Ø§ÙŠØ©",
+                "endLabel": "Ù†Ù‡Ø§ÙŠØ©"
             });
     }
 
@@ -64,115 +64,115 @@
     if (kendo.ui.Editor) {
         kendo.ui.Editor.prototype.options.messages =
             $.extend(true, kendo.ui.Editor.prototype.options.messages, {
-                "bold": "Óãíß",
-                "italic": "ãÇÆá",
-                "underline": "ÊÍÊå ÎØ",
-                "strikethrough": "íÊæÓØøå ÎØ",
-                "superscript": "ÍÑİ Úáæí",
-                "subscript": "ÍÑİ Óİáí",
-                "justifyCenter": "ãÍÇĞÇÉ İí ÇáãäÊÕİ",
-                "justifyLeft": "ãÍÇĞÇÉ ÇáäÕ Åáì ÇáíÓÇÑ",
-                "justifyRight": "ãÍÇĞÇÉ ÇáäÕ Åáì Çáíãíä",
-                "justifyFull": "ãÍÇĞÇÉ",
-                "insertUnorderedList": "ÅÏÑÇÌ ŞÇÆãÉ ÛíÑ ãÑÊÈÉ",
-                "insertOrderedList": "ÅÏÑÇÌ ŞÇÆãÉ ãÑÊÈÉ",
-                "indent": "ãÓÇİÉ ÈÇÏÆÉ",
-                "outdent": "ÇáåÇãÔ ÇáÎÇÑÌí",
-                "createLink": "ÅÏÑÇÌ ÑÇÈØ",
-                "unlink": "ÅÒÇáÉ ÇáÑÇÈØ",
-                "insertImage": "ÅÏÑÇÌ ÕæÑÉ",
-                "insertFile": "ÅÏÑÇÌ ãáİ",
-                "insertHtml": "HTML ÅÏÑÇÌ",
-                "viewHtml": "HTML ÚÑÖ",
-                "fontName": "ÇÎÊÑ ãÌãæÚÉ ÇáÎØæØ",
-                "fontNameInherit": "(äæÚ ÇáÎØ)",
-                "fontSize": "ÇÎÊÑ ÍÌã ÇáÎØ",
-                "fontSizeInherit": "(ÍÌã ÇáÎØ)",
-                "formatBlock": "ÊäÓíŞ",
-                "formatting": "ÊäÓíŞ",
-                "foreColor": "áæä",
-                "backColor": "áæä ÇáÎáİíÉ",
-                "style": "ÃäãÇØ",
-                "emptyFolder": "ãÌáÏ İÇÑÛ",
-                "uploadFile": "ÑİÚ",
-                "overflowAnchor": "ÃÏæÇÊ ÃßËÑ",
-                "orderBy": "ÊÑÊíÈ ÈæÇÓØÉ:",
-                "orderBySize": "ÇáÍÌã",
-                "orderByName": "ÇáÇÓã",
-                "invalidFileType": "Çáãáİ ÇáãÍÏÏ \"{0}\" ÛíÑ ÕÇáÍ. ÃäæÇÚ ÇáãáİÇÊ ÇáãÏÚæãÉ åí {1}.",
-                "deleteFile": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ Çáãáİ '{0}'¿",
-                "overwriteFile": "íæÌÏ ãáİ ÈÇÓã \"{0}\" ÈÇáİÚá İí ÇáÏáíá ÇáÍÇáí. åá ÊÑíÏ ÇÓÊÈÏÇáå¿",
-                "directoryNotFound": "áã íÊã ÇáÚËæÑ Úáì Ïáíá ÈåĞÇ ÇáÇÓã.",
-                "imageWebAddress": "ÚäæÇä ÕİÍÉ ÇáÅäÊÑäÊ",
-                "imageAltText": "äÕ ÈÏíá",
-                "imageWidth": "ÇáÚÑÖ (ÈßÓá)",
-                "imageHeight": "ÇáÇÑÊİÇÚ (ÈßÓá)",
-                "fileWebAddress": "ÚäæÇä ÕİÍÉ ÇáÅäÊÑäÊ",
-                "fileTitle": "ÚäæÇä",
-                "linkWebAddress": "ÚäæÇä ÕİÍÉ ÇáÅäÊÑäÊ",
-                "linkText": "äÕ",
-                "linkToolTip": "ÊáãíÍ",
-                "linkOpenInNewWindow": "İÊÍ ÇáÑÇÈØ İí äÇİĞÉ ÌÏíÏÉ",
-                "dialogUpdate": "ÊÍÏíË",
-                "dialogInsert": "ÅÏÑÇÌ",
-                "dialogButtonSeparator": "Ãæ",
-                "dialogCancel": "ÅáÛÇÁ",
-                "cleanFormatting": "ÅÒÇáÉ ÇáÊäÓíŞ",
-                "createTable": "ÃäÔíÁ ÌÏæá",
-                "addColumnLeft": "ÃÖİ ÚãæÏ Åáí ÇáíÓÇÑ",
-                "addColumnRight": "ÃÖİ ÚãæÏ Åáí Çáíãíä",
-                "addRowAbove": "ÃÖİ Õİ Åáí ÇáÃÚáí",
-                "addRowBelow": "ÃÖİ Õİ Åáí ÇáÃÓİá",
-                "deleteRow": "ÍĞİ Õİ",
-                "deleteColumn": "ÍĞİ ÚãæÏ",
-                "dialogOk": "ÍÓäğÇ",
-                "tableWizard": "ãÚÇáÌ ÇáÌÏÇæá",
-                "tableTab": "ÌÏæá",
-                "cellTab": "ÎáíÉ",
-                "accessibilityTab": "ÅãßÇäíÉ ÇáæÕæá",
-                "caption": "æÕİ",
-                "summary": "ãáÎÕ",
-                "width": "ÇáÚÑÖ",
-                "height": "ÇÑÊİÇÚ",
-                "units": "ÇáæÍÏÇÊ",
-                "cellSpacing": "ÊÈÇÚÏ ÇáÎáÇíÇ",
-                "cellPadding": "äØÇŞ ÇáÎáíÉ",
-                "cellMargin": "åÇãÔ ÇáÎáíÉ",
-                "alignment": "ÇáãÍÇĞÇÉ",
-                "background": "ÇáÎáİíÉ",
-                "cssClass": "İÆÉ Çá CSS",
+                "bold": "Ø³Ù…ÙŠÙƒ",
+                "italic": "Ù…Ø§Ø¦Ù„",
+                "underline": "ØªØ­ØªÙ‡ Ø®Ø·",
+                "strikethrough": "ÙŠØªÙˆØ³Ø·Ù‘Ù‡ Ø®Ø·",
+                "superscript": "Ø­Ø±Ù Ø¹Ù„ÙˆÙŠ",
+                "subscript": "Ø­Ø±Ù Ø³ÙÙ„ÙŠ",
+                "justifyCenter": "Ù…Ø­Ø§Ø°Ø§Ø© ÙÙŠ Ø§Ù„Ù…Ù†ØªØµÙ",
+                "justifyLeft": "Ù…Ø­Ø§Ø°Ø§Ø© Ø§Ù„Ù†Øµ Ø¥Ù„Ù‰ Ø§Ù„ÙŠØ³Ø§Ø±",
+                "justifyRight": "Ù…Ø­Ø§Ø°Ø§Ø© Ø§Ù„Ù†Øµ Ø¥Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "justifyFull": "Ù…Ø­Ø§Ø°Ø§Ø©",
+                "insertUnorderedList": "Ø¥Ø¯Ø±Ø§Ø¬ Ù‚Ø§Ø¦Ù…Ø© ØºÙŠØ± Ù…Ø±ØªØ¨Ø©",
+                "insertOrderedList": "Ø¥Ø¯Ø±Ø§Ø¬ Ù‚Ø§Ø¦Ù…Ø© Ù…Ø±ØªØ¨Ø©",
+                "indent": "Ù…Ø³Ø§ÙØ© Ø¨Ø§Ø¯Ø¦Ø©",
+                "outdent": "Ø§Ù„Ù‡Ø§Ù…Ø´ Ø§Ù„Ø®Ø§Ø±Ø¬ÙŠ",
+                "createLink": "Ø¥Ø¯Ø±Ø§Ø¬ Ø±Ø§Ø¨Ø·",
+                "unlink": "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ø±Ø§Ø¨Ø·",
+                "insertImage": "Ø¥Ø¯Ø±Ø§Ø¬ ØµÙˆØ±Ø©",
+                "insertFile": "Ø¥Ø¯Ø±Ø§Ø¬ Ù…Ù„Ù",
+                "insertHtml": "HTML Ø¥Ø¯Ø±Ø§Ø¬",
+                "viewHtml": "HTML Ø¹Ø±Ø¶",
+                "fontName": "Ø§Ø®ØªØ± Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ù„Ø®Ø·ÙˆØ·",
+                "fontNameInherit": "(Ù†ÙˆØ¹ Ø§Ù„Ø®Ø·)",
+                "fontSize": "Ø§Ø®ØªØ± Ø­Ø¬Ù… Ø§Ù„Ø®Ø·",
+                "fontSizeInherit": "(Ø­Ø¬Ù… Ø§Ù„Ø®Ø·)",
+                "formatBlock": "ØªÙ†Ø³ÙŠÙ‚",
+                "formatting": "ØªÙ†Ø³ÙŠÙ‚",
+                "foreColor": "Ù„ÙˆÙ†",
+                "backColor": "Ù„ÙˆÙ† Ø§Ù„Ø®Ù„ÙÙŠØ©",
+                "style": "Ø£Ù†Ù…Ø§Ø·",
+                "emptyFolder": "Ù…Ø¬Ù„Ø¯ ÙØ§Ø±Øº",
+                "uploadFile": "Ø±ÙØ¹",
+                "overflowAnchor": "Ø£Ø¯ÙˆØ§Øª Ø£ÙƒØ«Ø±",
+                "orderBy": "ØªØ±ØªÙŠØ¨ Ø¨ÙˆØ§Ø³Ø·Ø©:",
+                "orderBySize": "Ø§Ù„Ø­Ø¬Ù…",
+                "orderByName": "Ø§Ù„Ø§Ø³Ù…",
+                "invalidFileType": "Ø§Ù„Ù…Ù„Ù Ø§Ù„Ù…Ø­Ø¯Ø¯ \"{0}\" ØºÙŠØ± ØµØ§Ù„Ø­. Ø£Ù†ÙˆØ§Ø¹ Ø§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ…Ø© Ù‡ÙŠ {1}.",
+                "deleteFile": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ø§Ù„Ù…Ù„Ù '{0}'ØŸ",
+                "overwriteFile": "ÙŠÙˆØ¬Ø¯ Ù…Ù„Ù Ø¨Ø§Ø³Ù… \"{0}\" Ø¨Ø§Ù„ÙØ¹Ù„ ÙÙŠ Ø§Ù„Ø¯Ù„ÙŠÙ„ Ø§Ù„Ø­Ø§Ù„ÙŠ. Ù‡Ù„ ØªØ±ÙŠØ¯ Ø§Ø³ØªØ¨Ø¯Ø§Ù„Ù‡ØŸ",
+                "directoryNotFound": "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø¯Ù„ÙŠÙ„ Ø¨Ù‡Ø°Ø§ Ø§Ù„Ø§Ø³Ù….",
+                "imageWebAddress": "Ø¹Ù†ÙˆØ§Ù† ØµÙØ­Ø© Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª",
+                "imageAltText": "Ù†Øµ Ø¨Ø¯ÙŠÙ„",
+                "imageWidth": "Ø§Ù„Ø¹Ø±Ø¶ (Ø¨ÙƒØ³Ù„)",
+                "imageHeight": "Ø§Ù„Ø§Ø±ØªÙØ§Ø¹ (Ø¨ÙƒØ³Ù„)",
+                "fileWebAddress": "Ø¹Ù†ÙˆØ§Ù† ØµÙØ­Ø© Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª",
+                "fileTitle": "Ø¹Ù†ÙˆØ§Ù†",
+                "linkWebAddress": "Ø¹Ù†ÙˆØ§Ù† ØµÙØ­Ø© Ø§Ù„Ø¥Ù†ØªØ±Ù†Øª",
+                "linkText": "Ù†Øµ",
+                "linkToolTip": "ØªÙ„Ù…ÙŠØ­",
+                "linkOpenInNewWindow": "ÙØªØ­ Ø§Ù„Ø±Ø§Ø¨Ø· ÙÙŠ Ù†Ø§ÙØ°Ø© Ø¬Ø¯ÙŠØ¯Ø©",
+                "dialogUpdate": "ØªØ­Ø¯ÙŠØ«",
+                "dialogInsert": "Ø¥Ø¯Ø±Ø§Ø¬",
+                "dialogButtonSeparator": "Ø£Ùˆ",
+                "dialogCancel": "Ø¥Ù„ØºØ§Ø¡",
+                "cleanFormatting": "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„ØªÙ†Ø³ÙŠÙ‚",
+                "createTable": "Ø£Ù†Ø´ÙŠØ¡ Ø¬Ø¯ÙˆÙ„",
+                "addColumnLeft": "Ø£Ø¶Ù Ø¹Ù…ÙˆØ¯ Ø¥Ù„ÙŠ Ø§Ù„ÙŠØ³Ø§Ø±",
+                "addColumnRight": "Ø£Ø¶Ù Ø¹Ù…ÙˆØ¯ Ø¥Ù„ÙŠ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "addRowAbove": "Ø£Ø¶Ù ØµÙ Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø¹Ù„ÙŠ",
+                "addRowBelow": "Ø£Ø¶Ù ØµÙ Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø³ÙÙ„",
+                "deleteRow": "Ø­Ø°Ù ØµÙ",
+                "deleteColumn": "Ø­Ø°Ù Ø¹Ù…ÙˆØ¯",
+                "dialogOk": "Ø­Ø³Ù†Ù‹Ø§",
+                "tableWizard": "Ù…Ø¹Ø§Ù„Ø¬ Ø§Ù„Ø¬Ø¯Ø§ÙˆÙ„",
+                "tableTab": "Ø¬Ø¯ÙˆÙ„",
+                "cellTab": "Ø®Ù„ÙŠØ©",
+                "accessibilityTab": "Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„",
+                "caption": "ÙˆØµÙ",
+                "summary": "Ù…Ù„Ø®Øµ",
+                "width": "Ø§Ù„Ø¹Ø±Ø¶",
+                "height": "Ø§Ø±ØªÙØ§Ø¹",
+                "units": "Ø§Ù„ÙˆØ­Ø¯Ø§Øª",
+                "cellSpacing": "ØªØ¨Ø§Ø¹Ø¯ Ø§Ù„Ø®Ù„Ø§ÙŠØ§",
+                "cellPadding": "Ù†Ø·Ø§Ù‚ Ø§Ù„Ø®Ù„ÙŠØ©",
+                "cellMargin": "Ù‡Ø§Ù…Ø´ Ø§Ù„Ø®Ù„ÙŠØ©",
+                "alignment": "Ø§Ù„Ù…Ø­Ø§Ø°Ø§Ø©",
+                "background": "Ø§Ù„Ø®Ù„ÙÙŠØ©",
+                "cssClass": "ÙØ¦Ø© Ø§Ù„ CSS",
                 "id": "ID",
-                "border": "ÅØÇÑ",
-                "borderStyle": "äãØ ÇáÅØÇÑ",
-                "collapseBorders": "ÊÕÛíÑ ÇáÍÏæÏ",
-                "wrapText": "ÇáÊİÇİ ÇáäÕ",
-                "associateCellsWithHeaders": "ÑÄæÓ ãŞÊÑäÉ",
-                "alignLeft": "ãÍÇĞÇÉ Åáì ÇáíÓÇÑ",
-                "alignCenter": "ãÍÇĞÇÉ Åáì ÇáãäÊÕİ",
-                "alignRight": "ãÍÇĞÇÉ Åáì Çáíãíä",
-                "alignLeftTop": "ãÍÇĞÇÉ Åáì ÃÚáì ÇáíÓÇÑ",
-                "alignCenterTop": "ãÍÇĞÇÉ Åáí ÃÚáí ÇáãäÊÕİ",
-                "alignRightTop": "ãÍÇĞÇÉ Åáì ÃÚáì Çáíãíä",
-                "alignLeftMiddle": "ãÍÇĞÇÉ Åáì æÓØ ÇáíÓÇÑ",
-                "alignCenterMiddle": "ãÍÇĞÇÉ Åáí æÓØ ÇáãäÊÕİ",
-                "alignRightMiddle": "ãÍÇĞÇÉ Åáì æÓØ Çáíãíä",
-                "alignLeftBottom": "ãÍÇĞÇÉ Åáì ÃÓİá ÇáíÓÇÑ",
-                "alignCenterBottom": "ãÍÇĞÇÉ Åáì ÃÓİá ÇáãäÊÕİ",
-                "alignRightBottom": "ãÍÇĞÇÉ Åáì ÃÓİá Çáíãíä",
-                "alignRemove": "ÅÒÇáÉ ÇáãÍÇĞÇÉ",
-                "columns": "ÇáÃÚãÏÉ",
-                "rows": "Õİæİ",
-                "selectAllCells": "ÊÍÏíÏ ßá ÇáÎáÇíÇ",
-                "print": "ØÈÇÚÉ",
-                "headerRows": "ÑÃÓ ÇáÕİæİ",
-                "headerColumns": "ÑÃÓ ÇáÇÚãÏÉ",
-                "tableSummaryPlaceholder": "ÓãÉ ÇáãáÎÕ ÛíÑ ãÊæÇİŞÉ ãÚ HTML5.",
-                "associateNone": "áÇ ÔíÁ",
-                "associateScope": "ÇŞÊÑÇä ÈÇÓÊÎÏÇã ÓãÉ \"ÇáäØÇŞ\"",
-                "associateIds": "ÇŞÊÑÇä ÈÇÓÊÎÏÇã ÇáãÚÑİÇÊ",
-                "copyFormat": "äÓÎ ÇáÊäÓíŞ",
-                "applyFormat": "ÊØÈíŞ ÇáÊäÓíŞ",
-                "borderNone": "áÇ ÔíÁ"
+                "border": "Ø¥Ø·Ø§Ø±",
+                "borderStyle": "Ù†Ù…Ø· Ø§Ù„Ø¥Ø·Ø§Ø±",
+                "collapseBorders": "ØªØµØºÙŠØ± Ø§Ù„Ø­Ø¯ÙˆØ¯",
+                "wrapText": "Ø§Ù„ØªÙØ§Ù Ø§Ù„Ù†Øµ",
+                "associateCellsWithHeaders": "Ø±Ø¤ÙˆØ³ Ù…Ù‚ØªØ±Ù†Ø©",
+                "alignLeft": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø§Ù„ÙŠØ³Ø§Ø±",
+                "alignCenter": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø§Ù„Ù…Ù†ØªØµÙ",
+                "alignRight": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "alignLeftTop": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø£Ø¹Ù„Ù‰ Ø§Ù„ÙŠØ³Ø§Ø±",
+                "alignCenterTop": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø£Ø¹Ù„ÙŠ Ø§Ù„Ù…Ù†ØªØµÙ",
+                "alignRightTop": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø£Ø¹Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "alignLeftMiddle": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ ÙˆØ³Ø· Ø§Ù„ÙŠØ³Ø§Ø±",
+                "alignCenterMiddle": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ ÙˆØ³Ø· Ø§Ù„Ù…Ù†ØªØµÙ",
+                "alignRightMiddle": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ ÙˆØ³Ø· Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "alignLeftBottom": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø£Ø³ÙÙ„ Ø§Ù„ÙŠØ³Ø§Ø±",
+                "alignCenterBottom": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø£Ø³ÙÙ„ Ø§Ù„Ù…Ù†ØªØµÙ",
+                "alignRightBottom": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø£Ø³ÙÙ„ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "alignRemove": "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ù…Ø­Ø§Ø°Ø§Ø©",
+                "columns": "Ø§Ù„Ø£Ø¹Ù…Ø¯Ø©",
+                "rows": "ØµÙÙˆÙ",
+                "selectAllCells": "ØªØ­Ø¯ÙŠØ¯ ÙƒÙ„ Ø§Ù„Ø®Ù„Ø§ÙŠØ§",
+                "print": "Ø·Ø¨Ø§Ø¹Ø©",
+                "headerRows": "Ø±Ø£Ø³ Ø§Ù„ØµÙÙˆÙ",
+                "headerColumns": "Ø±Ø£Ø³ Ø§Ù„Ø§Ø¹Ù…Ø¯Ø©",
+                "tableSummaryPlaceholder": "Ø³Ù…Ø© Ø§Ù„Ù…Ù„Ø®Øµ ØºÙŠØ± Ù…ØªÙˆØ§ÙÙ‚Ø© Ù…Ø¹ HTML5.",
+                "associateNone": "Ù„Ø§ Ø´ÙŠØ¡",
+                "associateScope": "Ø§Ù‚ØªØ±Ø§Ù† Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø³Ù…Ø© \"Ø§Ù„Ù†Ø·Ø§Ù‚\"",
+                "associateIds": "Ø§Ù‚ØªØ±Ø§Ù† Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„Ù…Ø¹Ø±ÙØ§Øª",
+                "copyFormat": "Ù†Ø³Ø® Ø§Ù„ØªÙ†Ø³ÙŠÙ‚",
+                "applyFormat": "ØªØ·Ø¨ÙŠÙ‚ Ø§Ù„ØªÙ†Ø³ÙŠÙ‚",
+                "borderNone": "Ù„Ø§ Ø´ÙŠØ¡"
             });
     }
 
@@ -181,17 +181,17 @@
     if (kendo.ui.FileBrowser) {
         kendo.ui.FileBrowser.prototype.options.messages =
             $.extend(true, kendo.ui.FileBrowser.prototype.options.messages, {
-                "uploadFile": "ÑİÚ",
-                "orderBy": "ÊÑÊíÈ ÈæÇÓØÉ",
-                "orderByName": "ÇáÇÓã",
-                "orderBySize": "ÇáÍÌã",
-                "directoryNotFound": "áã íÊã ÇáÚËæÑ Úáì ãÓÇÑ ÈåĞÇ ÇáÇÓã.",
-                "emptyFolder": "ãÌáÏ İÇÑÛ",
-                "deleteFile": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ '{0}'¿",
-                "invalidFileType": "Çáãáİ \"{0}\" ÛíÑ ÕÇáÍ¡ ÃäæÇÚ ÇáãáİÇÊ ÇáãÏÚæãÉ åí {1}.",
-                "overwriteFile": "Çáãáİ ÈÇÓã \"{0}\" ãæÌæÏ ÈÇáİÚá İí ÇáãÓÇÑ. åá ÊÑíÏ ÇÓÊÈÏÇáå¿",
-                "dropFilesHere": "Şã ÈÓÍÈ Çáãáİ åäÇ áÑİÚå",
-                "search": "ÈÍË"
+                "uploadFile": "Ø±ÙØ¹",
+                "orderBy": "ØªØ±ØªÙŠØ¨ Ø¨ÙˆØ§Ø³Ø·Ø©",
+                "orderByName": "Ø§Ù„Ø§Ø³Ù…",
+                "orderBySize": "Ø§Ù„Ø­Ø¬Ù…",
+                "directoryNotFound": "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ù…Ø³Ø§Ø± Ø¨Ù‡Ø°Ø§ Ø§Ù„Ø§Ø³Ù….",
+                "emptyFolder": "Ù…Ø¬Ù„Ø¯ ÙØ§Ø±Øº",
+                "deleteFile": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù '{0}'ØŸ",
+                "invalidFileType": "Ø§Ù„Ù…Ù„Ù \"{0}\" ØºÙŠØ± ØµØ§Ù„Ø­ØŒ Ø£Ù†ÙˆØ§Ø¹ Ø§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ…Ø© Ù‡ÙŠ {1}.",
+                "overwriteFile": "Ø§Ù„Ù…Ù„Ù Ø¨Ø§Ø³Ù… \"{0}\" Ù…ÙˆØ¬ÙˆØ¯ Ø¨Ø§Ù„ÙØ¹Ù„ ÙÙŠ Ø§Ù„Ù…Ø³Ø§Ø±. Ù‡Ù„ ØªØ±ÙŠØ¯ Ø§Ø³ØªØ¨Ø¯Ø§Ù„Ù‡ØŸ",
+                "dropFilesHere": "Ù‚Ù… Ø¨Ø³Ø­Ø¨ Ø§Ù„Ù…Ù„Ù Ù‡Ù†Ø§ Ù„Ø±ÙØ¹Ù‡",
+                "search": "Ø¨Ø­Ø«"
             });
     }
 
@@ -201,71 +201,71 @@
         kendo.ui.FileManager.prototype.options.messages =
             $.extend(true, kendo.ui.FileManager.prototype.options.messages, {
                 toolbar: {
-                    createFolder: "ãÌáÏ ÌÏíÏ",
-                    upload: "ÑİÚ",
-                    sortDirection: "ÊÑÊíÈ",
-                    sortDirectionAsc: "ÊÑÊíÈ ÊÕÇÚÏí",
-                    sortDirectionDesc: "ÊÑÊíÈ ÊäÇÒáí",
-                    sortField: "ÊÑÊíÈ ÈæÇÓØÉ",
-                    nameField: "ÇáÇÓã",
-                    sizeField: "ÍÌã Çáãáİ",
-                    typeField: "ÇáäæÚ",
-                    dateModifiedField: "ÊÇÑíÎ ÇáÊÚÏíá",
-                    dateCreatedField: "ÊÇÑíÎ ÇáÅäÔÇÁ",
-                    listView: "ÚÑÖ ÇáŞÇÆãÉ",
-                    gridView: "ÚÑÖ ÔÈßí",
-                    search: "ÈÍË",
-                    details: "ÚÑÖ ÇáÊİÇÕíá",
-                    detailsChecked: "ãÍÏÏ",
-                    detailsUnchecked: "ÛíÑ ãÍÏÏ",
-                    "delete": "ÍĞİ",
-                    rename: "ÅÚÇÏÉ ÇáÊÓãíÉ"
+                    createFolder: "Ù…Ø¬Ù„Ø¯ Ø¬Ø¯ÙŠØ¯",
+                    upload: "Ø±ÙØ¹",
+                    sortDirection: "ØªØ±ØªÙŠØ¨",
+                    sortDirectionAsc: "ØªØ±ØªÙŠØ¨ ØªØµØ§Ø¹Ø¯ÙŠ",
+                    sortDirectionDesc: "ØªØ±ØªÙŠØ¨ ØªÙ†Ø§Ø²Ù„ÙŠ",
+                    sortField: "ØªØ±ØªÙŠØ¨ Ø¨ÙˆØ§Ø³Ø·Ø©",
+                    nameField: "Ø§Ù„Ø§Ø³Ù…",
+                    sizeField: "Ø­Ø¬Ù… Ø§Ù„Ù…Ù„Ù",
+                    typeField: "Ø§Ù„Ù†ÙˆØ¹",
+                    dateModifiedField: "ØªØ§Ø±ÙŠØ® Ø§Ù„ØªØ¹Ø¯ÙŠÙ„",
+                    dateCreatedField: "ØªØ§Ø±ÙŠØ® Ø§Ù„Ø¥Ù†Ø´Ø§Ø¡",
+                    listView: "Ø¹Ø±Ø¶ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø©",
+                    gridView: "Ø¹Ø±Ø¶ Ø´Ø¨ÙƒÙŠ",
+                    search: "Ø¨Ø­Ø«",
+                    details: "Ø¹Ø±Ø¶ Ø§Ù„ØªÙØ§ØµÙŠÙ„",
+                    detailsChecked: "Ù…Ø­Ø¯Ø¯",
+                    detailsUnchecked: "ØºÙŠØ± Ù…Ø­Ø¯Ø¯",
+                    "delete": "Ø­Ø°Ù",
+                    rename: "Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„ØªØ³Ù…ÙŠØ©"
                 },
                 views: {
-                    nameField: "ÇáÇÓã",
-                    sizeField: "ÍÌã Çáãáİ",
-                    typeField: "ÇáäæÚ",
-                    dateModifiedField: "ÊÇÑíÎ ÇáÊÚÏíá",
-                    dateCreatedField: "ÊÇÑíÎ ÇáÅäÔÇÁ",
-                    items: "ÇáÚäÇÕÑ"
+                    nameField: "Ø§Ù„Ø§Ø³Ù…",
+                    sizeField: "Ø­Ø¬Ù… Ø§Ù„Ù…Ù„Ù",
+                    typeField: "Ø§Ù„Ù†ÙˆØ¹",
+                    dateModifiedField: "ØªØ§Ø±ÙŠØ® Ø§Ù„ØªØ¹Ø¯ÙŠÙ„",
+                    dateCreatedField: "ØªØ§Ø±ÙŠØ® Ø§Ù„Ø¥Ù†Ø´Ø§Ø¡",
+                    items: "Ø§Ù„Ø¹Ù†Ø§ØµØ±"
                 },
                 dialogs: {
                     upload: {
-                        title: "ÑİÚ ÇáãáİÇÊ",
-                        clear: "ÅÒÇáÉ ÇáŞÇÆãÉ",
-                        done: "Êã"
+                        title: "Ø±ÙØ¹ Ø§Ù„Ù…Ù„ÙØ§Øª",
+                        clear: "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ù‚Ø§Ø¦Ù…Ø©",
+                        done: "ØªÙ…"
                     },
                     moveConfirm: {
-                        title: "ÊÃßíÏ ÇáäÓÎ Ãæ ÇáäŞá",
-                        content: "<p style='text-align: center;'>åá ÃäÊ ãÊÃßÏ ãä ÅÊãÇã ÇáäÓÎ Ãæ ÇáÍĞİ¿</p>",
-                        okText: "äÓÎ",
-                        cancel: "äŞá",
-                        close: "ÅÛáÇŞ"
+                        title: "ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ù†Ø³Ø® Ø£Ùˆ Ø§Ù„Ù†Ù‚Ù„",
+                        content: "<p style='text-align: center;'>Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø¥ØªÙ…Ø§Ù… Ø§Ù„Ù†Ø³Ø® Ø£Ùˆ Ø§Ù„Ø­Ø°ÙØŸ</p>",
+                        okText: "Ù†Ø³Ø®",
+                        cancel: "Ù†Ù‚Ù„",
+                        close: "Ø¥ØºÙ„Ø§Ù‚"
                     },
                     deleteConfirm: {
-                        title: "ÊÃßíÏ ÇáÍĞİ",
-                        content: "<p style='text-align: center;'>åá ÃäÊ ãÊÃßÏ ãä ÍĞİ ÇáãáİÇÊ ÇáãÍÏÏÉ¿?</br>áÇ íãßäß ÇáÊÑÇÌÚ Úä åĞÇ ÇáÅÌÑÇÁ.</p>",
-                        okText: "ÍĞİ",
-                        cancel: "ÅáÛÇÁ",
-                        close: "ÅÛáÇŞ"
+                        title: "ØªØ£ÙƒÙŠØ¯ Ø§Ù„Ø­Ø°Ù",
+                        content: "<p style='text-align: center;'>Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ø§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù…Ø­Ø¯Ø¯Ø©ØŸ?</br>Ù„Ø§ ÙŠÙ…ÙƒÙ†Ùƒ Ø§Ù„ØªØ±Ø§Ø¬Ø¹ Ø¹Ù† Ù‡Ø°Ø§ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡.</p>",
+                        okText: "Ø­Ø°Ù",
+                        cancel: "Ø¥Ù„ØºØ§Ø¡",
+                        close: "Ø¥ØºÙ„Ø§Ù‚"
                     },
                     renamePrompt: {
-                        title: "ÅÚÇÏÉ ÇáÊÓãíÉ",
-                        content: "<p style='text-align: center;'>ÃÏÎá ÇÓã ãáİ ÌÏíÏ</p>",
-                        okText: "ÅÚÇÏÉ ÇáÊÓãíÉ",
-                        cancel: "ÅáÛÇÁ",
-                        close: "ÅÛáÇŞ"
+                        title: "Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„ØªØ³Ù…ÙŠØ©",
+                        content: "<p style='text-align: center;'>Ø£Ø¯Ø®Ù„ Ø§Ø³Ù… Ù…Ù„Ù Ø¬Ø¯ÙŠØ¯</p>",
+                        okText: "Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„ØªØ³Ù…ÙŠØ©",
+                        cancel: "Ø¥Ù„ØºØ§Ø¡",
+                        close: "Ø¥ØºÙ„Ø§Ù‚"
                     }
                 },
                 previewPane: {
-                    noFileSelected: "áã íÊã ÇÎÊíÇÑ Ãí ãáİ",
-                    extension: "ÇáäæÚ",
-                    size: "ÇáÍÌã",
-                    created: "ÊÇÑíÎ ÇáÅäÔÇÁ",
-                    createdUtc: "ÊÇÑíÎ ÇáÅäÔÇÁ (UTC)",
-                    modified: "ÊÇÑíÎ ÇáÊÚÏíá",
-                    modifiedUtc: "ÊÇÑíÎ ÇáÊÚÏíá (UTC)",
-                    items: "ÇáÚäÇÕÑ"
+                    noFileSelected: "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ø£ÙŠ Ù…Ù„Ù",
+                    extension: "Ø§Ù„Ù†ÙˆØ¹",
+                    size: "Ø§Ù„Ø­Ø¬Ù…",
+                    created: "ØªØ§Ø±ÙŠØ® Ø§Ù„Ø¥Ù†Ø´Ø§Ø¡",
+                    createdUtc: "ØªØ§Ø±ÙŠØ® Ø§Ù„Ø¥Ù†Ø´Ø§Ø¡ (UTC)",
+                    modified: "ØªØ§Ø±ÙŠØ® Ø§Ù„ØªØ¹Ø¯ÙŠÙ„",
+                    modifiedUtc: "ØªØ§Ø±ÙŠØ® Ø§Ù„ØªØ¹Ø¯ÙŠÙ„ (UTC)",
+                    items: "Ø§Ù„Ø¹Ù†Ø§ØµØ±"
                 }
             });
     }
@@ -275,11 +275,11 @@
     if (kendo.ui.FilterCell) {
         kendo.ui.FilterCell.prototype.options.messages =
             $.extend(true, kendo.ui.FilterCell.prototype.options.messages, {
-                "isTrue": "ÕÍíÍ",
-                "isFalse": "ÎØÃ",
-                "filter": "İÑÒ",
-                "clear": "ÅÒÇáÉ",
-                "operator": "ÚÇãá"
+                "isTrue": "ØµØ­ÙŠØ­",
+                "isFalse": "Ø®Ø·Ø£",
+                "filter": "ÙØ±Ø²",
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "operator": "Ø¹Ø§Ù…Ù„"
             });
     }
 
@@ -289,44 +289,44 @@
         kendo.ui.FilterCell.prototype.options.operators =
             $.extend(true, kendo.ui.FilterCell.prototype.options.operators, {
                 "string": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "startswith": "íÈÏÃ ÈÜ",
-                    "contains": "íÊÖãä",
-                    "doesnotcontain": "áÇ íÊÖãä",
-                    "endswith": "íäÊåí ÈÜ",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ",
-                    "isempty": "İÇÑÛ",
-                    "isnotempty": "áíÓ İÇÑÛÇ",
-                    "isnullorempty": "áíÓ áå ŞíãÉ",
-                    "isnotnullorempty": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "startswith": "ÙŠØ¨Ø¯Ø£ Ø¨Ù€",
+                    "contains": "ÙŠØªØ¶Ù…Ù†",
+                    "doesnotcontain": "Ù„Ø§ ÙŠØªØ¶Ù…Ù†",
+                    "endswith": "ÙŠÙ†ØªÙ‡ÙŠ Ø¨Ù€",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©",
+                    "isempty": "ÙØ§Ø±Øº",
+                    "isnotempty": "Ù„ÙŠØ³ ÙØ§Ø±ØºØ§",
+                    "isnullorempty": "Ù„ÙŠØ³ Ù„Ù‡ Ù‚ÙŠÙ…Ø©",
+                    "isnotnullorempty": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 },
                 "number": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "gte": "ÃßÈÑ ãä Ãæ íÓÇæí",
-                    "gt": "ÃßÈÑ ãä",
-                    "lte": "ÃŞá ãä Ãæ íÓÇæí",
-                    "lt": "ÃŞá ãä",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gte": "Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gt": "Ø£ÙƒØ¨Ø± Ù…Ù†",
+                    "lte": "Ø£Ù‚Ù„ Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "lt": "Ø£Ù‚Ù„ Ù…Ù†",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 },
                 "date": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "gte": "ÈÚÏ Ãæ íÓÇæí",
-                    "gt": "ÈÚÏ",
-                    "lte": "ŞÈá Ãæ íÓÇæí",
-                    "lt": "ŞÈá",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gte": "Ø¨Ø¹Ø¯ Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gt": "Ø¨Ø¹Ø¯",
+                    "lte": "Ù‚Ø¨Ù„ Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "lt": "Ù‚Ø¨Ù„",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 },
                 "enums": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 }
             });
     }
@@ -336,21 +336,21 @@
     if (kendo.ui.FilterMenu) {
         kendo.ui.FilterMenu.prototype.options.messages =
             $.extend(true, kendo.ui.FilterMenu.prototype.options.messages, {
-                "info": "ÅÙåÇÑ ÇáÚäÇÕÑ ĞÇÊ ÇáŞíãÉ ÇáÊí:",
-                "title": "ÅÙåÇÑ ÇáÚäÇÕÑ ĞÇÊ ÇáŞíãÉ ÇáÊí",
-                "isTrue": "ÕÍíÍ",
-                "isFalse": "ÎØÃ",
-                "filter": "İÑÒ",
-                "clear": "ÅÒÇáÉ",
-                "and": "æ",
-                "or": "Ãæ",
-                "selectValue": "-ÇÎÊÑ ÇáŞíãÉ-",
-                "operator": "ÚÇãá",
-                "value": "ŞíãÉ",
-                "cancel": "ÅáÛÇÁ",
-                "done": "Êã",
-                "into": "İí",
-                "buttonTitle": "{0} İÑÒ ÅÚÏÇÏÇÊ ÇáÚãæÏ"
+                "info": "Ø¥Ø¸Ù‡Ø§Ø± Ø§Ù„Ø¹Ù†Ø§ØµØ± Ø°Ø§Øª Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„ØªÙŠ:",
+                "title": "Ø¥Ø¸Ù‡Ø§Ø± Ø§Ù„Ø¹Ù†Ø§ØµØ± Ø°Ø§Øª Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„ØªÙŠ",
+                "isTrue": "ØµØ­ÙŠØ­",
+                "isFalse": "Ø®Ø·Ø£",
+                "filter": "ÙØ±Ø²",
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "and": "Ùˆ",
+                "or": "Ø£Ùˆ",
+                "selectValue": "-Ø§Ø®ØªØ± Ø§Ù„Ù‚ÙŠÙ…Ø©-",
+                "operator": "Ø¹Ø§Ù…Ù„",
+                "value": "Ù‚ÙŠÙ…Ø©",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "done": "ØªÙ…",
+                "into": "ÙÙŠ",
+                "buttonTitle": "{0} ÙØ±Ø² Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø¹Ù…ÙˆØ¯"
             });
     }
 
@@ -360,44 +360,44 @@
         kendo.ui.FilterMenu.prototype.options.operators =
             $.extend(true, kendo.ui.FilterMenu.prototype.options.operators, {
                 "string": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "startswith": "íÈÏÃ ÈÜ",
-                    "contains": "íÊÖãä",
-                    "doesnotcontain": "áÇ íÊÖãä",
-                    "endswith": "íäÊåí È",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ",
-                    "isempty": "İÇÑÛ",
-                    "isnotempty": "áíÓ İÇÑÛÇ",
-                    "isnullorempty": "áíÓ áå ŞíãÉ",
-                    "isnotnullorempty": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "startswith": "ÙŠØ¨Ø¯Ø£ Ø¨Ù€",
+                    "contains": "ÙŠØªØ¶Ù…Ù†",
+                    "doesnotcontain": "Ù„Ø§ ÙŠØªØ¶Ù…Ù†",
+                    "endswith": "ÙŠÙ†ØªÙ‡ÙŠ Ø¨",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©",
+                    "isempty": "ÙØ§Ø±Øº",
+                    "isnotempty": "Ù„ÙŠØ³ ÙØ§Ø±ØºØ§",
+                    "isnullorempty": "Ù„ÙŠØ³ Ù„Ù‡ Ù‚ÙŠÙ…Ø©",
+                    "isnotnullorempty": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 },
                 "number": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "gte": "ÃßÈÑ ãä Ãæ íÓÇæí",
-                    "gt": "ÃßÈÑ ãä",
-                    "lte": "ÃŞá ãä Ãæ íÓÇæí",
-                    "lt": "ÃŞá ãä",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gte": "Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gt": "Ø£ÙƒØ¨Ø± Ù…Ù†",
+                    "lte": "Ø£Ù‚Ù„ Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "lt": "Ø£Ù‚Ù„ Ù…Ù†",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 },
                 "date": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "gte": "ÈÚÏ Ãæ íÓÇæí",
-                    "gt": "ÈÚÏ",
-                    "lte": "ÈÚÏ Ãæ íÓÇæí",
-                    "lt": "ÈÚÏ",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gte": "Ø¨Ø¹Ø¯ Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "gt": "Ø¨Ø¹Ø¯",
+                    "lte": "Ø¨Ø¹Ø¯ Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                    "lt": "Ø¨Ø¹Ø¯",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 },
                 "enums": {
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí",
-                    "isnull": "ÈáÇ ŞíãÉ",
-                    "isnotnull": "áå ŞíãÉ"
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                    "isnull": "Ø¨Ù„Ø§ Ù‚ÙŠÙ…Ø©",
+                    "isnotnull": "Ù„Ù‡ Ù‚ÙŠÙ…Ø©"
                 }
             });
     }
@@ -407,15 +407,15 @@
     if (kendo.ui.FilterMultiCheck) {
         kendo.ui.FilterMultiCheck.prototype.options.messages =
             $.extend(true, kendo.ui.FilterMultiCheck.prototype.options.messages, {
-                "checkAll": "ÇÎÊÑ Çáßá",
-                "clearAll": "ÅÒÇáÉ Çáßá",
-                "clear": "ÅÒÇáÉ",
-                "filter": "İÑÒ",
-                "search": "ÈÍË",
-                "cancel": "ÅáÛÇÁ",
-                "selectedItemsFormat": "{0} ÇáÚäÇÕÑ ÇáãÍÏøÏÉ",
-                "done": "Êã",
-                "into": "İí"
+                "checkAll": "Ø§Ø®ØªØ± Ø§Ù„ÙƒÙ„",
+                "clearAll": "Ø¥Ø²Ø§Ù„Ø© Ø§Ù„ÙƒÙ„",
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "filter": "ÙØ±Ø²",
+                "search": "Ø¨Ø­Ø«",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "selectedItemsFormat": "{0} Ø§Ù„Ø¹Ù†Ø§ØµØ± Ø§Ù„Ù…Ø­Ø¯Ù‘Ø¯Ø©",
+                "done": "ØªÙ…",
+                "into": "ÙÙŠ"
             });
     }
 
@@ -425,47 +425,47 @@
         kendo.ui.Gantt.prototype.options.messages =
             $.extend(true, kendo.ui.Gantt.prototype.options.messages, {
                 "actions": {
-                    "addChild": "ÃÖİ ãÎØøØ İÑÚí",
-                    "append": "ÅÖÇİÉ ãåãÉ",
-                    "insertAfter": "ÃÖİ Åáí ÇáÃÓİá",
-                    "insertBefore": "ÃÖİ Åáì ÇáÃÚáì",
-                    "pdf": "PDF ÊÕÏíÑ Åáì ãáİ"
+                    "addChild": "Ø£Ø¶Ù Ù…Ø®Ø·Ù‘Ø· ÙØ±Ø¹ÙŠ",
+                    "append": "Ø¥Ø¶Ø§ÙØ© Ù…Ù‡Ù…Ø©",
+                    "insertAfter": "Ø£Ø¶Ù Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø³ÙÙ„",
+                    "insertBefore": "Ø£Ø¶Ù Ø¥Ù„Ù‰ Ø§Ù„Ø£Ø¹Ù„Ù‰",
+                    "pdf": "PDF ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰ Ù…Ù„Ù"
                 },
-                "cancel": "ÅáÛÇÁ",
-                "deleteDependencyWindowTitle": "ÍĞİ ÇáÚáÇŞÉ ÇáÇÚÊãÇÏíÉ",
-                "deleteTaskWindowTitle": "ÍĞİ ÇáãåãÉ",
-                "destroy": "ÍĞİ",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "deleteDependencyWindowTitle": "Ø­Ø°Ù Ø§Ù„Ø¹Ù„Ø§Ù‚Ø© Ø§Ù„Ø§Ø¹ØªÙ…Ø§Ø¯ÙŠØ©",
+                "deleteTaskWindowTitle": "Ø­Ø°Ù Ø§Ù„Ù…Ù‡Ù…Ø©",
+                "destroy": "Ø­Ø°Ù",
                 "editor": {
-                    "assingButton": "ÊÚííä",
-                    "editorTitle": "ãåãÉ",
-                    "end": "äåÇíÉ",
-                    "percentComplete": "ÇßÊãÇá",
-                    "plannedStart": "ÇáÈÏÇíÉ ÇáãÎØØ áåÇ",
-                    "plannedEnd": "ÇáäåÇíÉ ÇáãÎØØ áåÇ",
-                    "resources": "ãæÇÑÏ",
-                    "resourcesEditorTitle": "ãæÇÑÏ",
-                    "resourcesHeader": "ãæÇÑÏ",
-                    "start": "ÈÏÇíÉ",
-                    "title": "ÚäæÇä",
-                    "unitsHeader": "ÇáæÍÏÇÊ"
+                    "assingButton": "ØªØ¹ÙŠÙŠÙ†",
+                    "editorTitle": "Ù…Ù‡Ù…Ø©",
+                    "end": "Ù†Ù‡Ø§ÙŠØ©",
+                    "percentComplete": "Ø§ÙƒØªÙ…Ø§Ù„",
+                    "plannedStart": "Ø§Ù„Ø¨Ø¯Ø§ÙŠØ© Ø§Ù„Ù…Ø®Ø·Ø· Ù„Ù‡Ø§",
+                    "plannedEnd": "Ø§Ù„Ù†Ù‡Ø§ÙŠØ© Ø§Ù„Ù…Ø®Ø·Ø· Ù„Ù‡Ø§",
+                    "resources": "Ù…ÙˆØ§Ø±Ø¯",
+                    "resourcesEditorTitle": "Ù…ÙˆØ§Ø±Ø¯",
+                    "resourcesHeader": "Ù…ÙˆØ§Ø±Ø¯",
+                    "start": "Ø¨Ø¯Ø§ÙŠØ©",
+                    "title": "Ø¹Ù†ÙˆØ§Ù†",
+                    "unitsHeader": "Ø§Ù„ÙˆØ­Ø¯Ø§Øª"
                 },
                 "plannedTasks": {
-                    "switchText": "ÇáãåÇã ÇáãÎØØ áåÇ",
-                    "offsetTooltipAdvanced": "æÕá Åáì ÇáãæÚÏ ÇáäåÇÆí ãÈßÑğÇ",
-                    "offsetTooltipDelay": "ÊÃÎíÑ",
-                    "seconds": "ËæÇäí",
-                    "minutes": "ÏŞÇÆŞ",
-                    "hours": "ÓÇÚÇÊ",
-                    "days": "ÃíÇã"
+                    "switchText": "Ø§Ù„Ù…Ù‡Ø§Ù… Ø§Ù„Ù…Ø®Ø·Ø· Ù„Ù‡Ø§",
+                    "offsetTooltipAdvanced": "ÙˆØµÙ„ Ø¥Ù„Ù‰ Ø§Ù„Ù…ÙˆØ¹Ø¯ Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ Ù…Ø¨ÙƒØ±Ù‹Ø§",
+                    "offsetTooltipDelay": "ØªØ£Ø®ÙŠØ±",
+                    "seconds": "Ø«ÙˆØ§Ù†ÙŠ",
+                    "minutes": "Ø¯Ù‚Ø§Ø¦Ù‚",
+                    "hours": "Ø³Ø§Ø¹Ø§Øª",
+                    "days": "Ø£ÙŠØ§Ù…"
                 },
-                "save": "ÍİÙ",
+                "save": "Ø­ÙØ¸",
                 "views": {
-                    "day": "íæã",
-                    "end": "äåÇíÉ",
-                    "month": "ÔåÑ",
-                    "start": "ÈÏÇíÉ",
-                    "week": "ÃÓÈæÚ",
-                    "year": "ÓäÉ"
+                    "day": "ÙŠÙˆÙ…",
+                    "end": "Ù†Ù‡Ø§ÙŠØ©",
+                    "month": "Ø´Ù‡Ø±",
+                    "start": "Ø¨Ø¯Ø§ÙŠØ©",
+                    "week": "Ø£Ø³Ø¨ÙˆØ¹",
+                    "year": "Ø³Ù†Ø©"
                 }
             });
     }
@@ -476,27 +476,27 @@
         kendo.ui.Grid.prototype.options.messages =
             $.extend(true, kendo.ui.Grid.prototype.options.messages, {
                 "commands": {
-                    "cancel": "ÅáÛÇÁ ÇáÊÛííÑÇÊ",
-                    "canceledit": "ÅáÛÇÁ",
-                    "create": "ÅÖÇİÉ ÓÌá ÌÏíÏ",
-                    "destroy": "ÍĞİ",
-                    "edit": "ÊÚÏíá",
-                    "excel": "Excel ÊÕÏíÑ Åáì",
-                    "pdf": "ÊÕÏíÑ Åáì PDF",
-                    "save": "ÍİÙ ÇáÊÛííÑÇÊ",
-                    "select": "ÇÎÊÑ",
-                    "update": "ÊÍÏíË"
+                    "cancel": "Ø¥Ù„ØºØ§Ø¡ Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª",
+                    "canceledit": "Ø¥Ù„ØºØ§Ø¡",
+                    "create": "Ø¥Ø¶Ø§ÙØ© Ø³Ø¬Ù„ Ø¬Ø¯ÙŠØ¯",
+                    "destroy": "Ø­Ø°Ù",
+                    "edit": "ØªØ¹Ø¯ÙŠÙ„",
+                    "excel": "Excel ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰",
+                    "pdf": "ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰ PDF",
+                    "save": "Ø­ÙØ¸ Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª",
+                    "select": "Ø§Ø®ØªØ±",
+                    "update": "ØªØ­Ø¯ÙŠØ«"
                 },
                 "editable": {
-                    "cancelDelete": "ÅáÛÇÁ",
-                    "confirmation": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ ÇáÓÌá¿",
-                    "confirmDelete": "ÍĞİ"
+                    "cancelDelete": "Ø¥Ù„ØºØ§Ø¡",
+                    "confirmation": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ø§Ù„Ø³Ø¬Ù„ØŸ",
+                    "confirmDelete": "Ø­Ø°Ù"
                 },
-                "noRecords": "áÇ ÊæÌÏ ÓÌáÇÊ ãÊÇÍÉ.",
-                "search": "ÈÍË...",
+                "noRecords": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø³Ø¬Ù„Ø§Øª Ù…ØªØ§Ø­Ø©.",
+                "search": "Ø¨Ø­Ø«...",
                 "expandCollapseColumnHeader": "",
-                "groupHeader": "ctrl + space áÚãá ãÌãæÚÉ ÇÖÛØ",
-                "ungroupHeader": "ctrl + space áÅáÛÇÁ ÇáãÌãæÚÉ ÇÖÛØ"
+                "groupHeader": "ctrl + space Ù„Ø¹Ù…Ù„ Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ø¶ØºØ·",
+                "ungroupHeader": "ctrl + space Ù„Ø¥Ù„ØºØ§Ø¡ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ø¶ØºØ·"
             });
     }
 
@@ -505,26 +505,26 @@
     if (kendo.ui.TaskBoard) {
         kendo.ui.TaskBoard.prototype.options.messages =
             $.extend(true, kendo.ui.TaskBoard.prototype.options.messages, {
-                "edit": "ÊÚÏíá",
-                "createNewCard": "ÅäÔÇÁ ÈØÇŞÉ ÌÏíÏÉ",
-                "create": "ÅäÔÇÁ",
-                "search": "ÈÍË",
-                "previewCard": "ãÚÇíäÉ ÇáÈØÇŞÉ",
-                "addCard": "ÅÖÇİÉ ÈØÇŞÉ",
-                "editCard": "ÊÚÏíá ÇáÈØÇŞÉ",
-                "deleteCard": "ÍĞİ ÇáÈØÇŞÉ",
-                "addColumn": "ÅÖÇİÉ ÚãæÏ",
-                "editColumn": "ÊÚÏíá ÇáÚãæÏ",
-                "deleteColumn": "ÍĞİ ÇáÚãæÏ",
-                "close": "ÅÛáÇŞ",
-                "cancel": "ÅáÛÇÁ",
-                "delete": "ÍĞİ",
-                "saveChanges": "ÍİÙ ÇáÊÛííÑÇÊ",
-                "title": "ÇáÚäæÇä:",
-                "description": "ÇáæÕİ:",
-                "newColumn": "ÚãæÏ ÌÏíÏ",
-                "deleteColumnConfirm": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ åĞÇ ÇáÚãæÏ¿",
-                "deleteCardConfirm": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ ÇáÈØÇŞÉ¿"
+                "edit": "ØªØ¹Ø¯ÙŠÙ„",
+                "createNewCard": "Ø¥Ù†Ø´Ø§Ø¡ Ø¨Ø·Ø§Ù‚Ø© Ø¬Ø¯ÙŠØ¯Ø©",
+                "create": "Ø¥Ù†Ø´Ø§Ø¡",
+                "search": "Ø¨Ø­Ø«",
+                "previewCard": "Ù…Ø¹Ø§ÙŠÙ†Ø© Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©",
+                "addCard": "Ø¥Ø¶Ø§ÙØ© Ø¨Ø·Ø§Ù‚Ø©",
+                "editCard": "ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©",
+                "deleteCard": "Ø­Ø°Ù Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©",
+                "addColumn": "Ø¥Ø¶Ø§ÙØ© Ø¹Ù…ÙˆØ¯",
+                "editColumn": "ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "deleteColumn": "Ø­Ø°Ù Ø§Ù„Ø¹Ù…ÙˆØ¯",
+                "close": "Ø¥ØºÙ„Ø§Ù‚",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "delete": "Ø­Ø°Ù",
+                "saveChanges": "Ø­ÙØ¸ Ø§Ù„ØªØºÙŠÙŠØ±Ø§Øª",
+                "title": "Ø§Ù„Ø¹Ù†ÙˆØ§Ù†:",
+                "description": "Ø§Ù„ÙˆØµÙ:",
+                "newColumn": "Ø¹Ù…ÙˆØ¯ Ø¬Ø¯ÙŠØ¯",
+                "deleteColumnConfirm": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø¹Ù…ÙˆØ¯ØŸ",
+                "deleteCardConfirm": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©ØŸ"
             });
     }
 
@@ -533,19 +533,19 @@
     if (kendo.ui.TreeList) {
         kendo.ui.TreeList.prototype.options.messages =
             $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
-                "noRows": "áÇ ÊæÌÏ ÓÌáÇÊ áÚÑÖåÇ",
-                "loading": "ÌÇÑ ÇáÊÍãíá...",
-                "requestFailed": "İÔá ÇáØáÈ.",
-                "retry": "ÃÚÏ ÇáãÍÇæáÉ",
+                "noRows": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø³Ø¬Ù„Ø§Øª Ù„Ø¹Ø±Ø¶Ù‡Ø§",
+                "loading": "Ø¬Ø§Ø± Ø§Ù„ØªØ­Ù…ÙŠÙ„...",
+                "requestFailed": "ÙØ´Ù„ Ø§Ù„Ø·Ù„Ø¨.",
+                "retry": "Ø£Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©",
                 "commands": {
-                    "edit": "ÊÚÏíá",
-                    "update": "ÊÍÏíË",
-                    "canceledit": "ÅáÛÇÁ",
-                    "create": "ÅÖÇİÉ ÓÌá ÌÏíÏ",
-                    "createchild": "ÅÖÇİÉ ÓÌá İÑÚí",
-                    "destroy": "ÍĞİ",
-                    "excel": "Excel ÊÕÏíÑ Åáì",
-                    "pdf": "PDF ÊÕÏíÑ Åáì"
+                    "edit": "ØªØ¹Ø¯ÙŠÙ„",
+                    "update": "ØªØ­Ø¯ÙŠØ«",
+                    "canceledit": "Ø¥Ù„ØºØ§Ø¡",
+                    "create": "Ø¥Ø¶Ø§ÙØ© Ø³Ø¬Ù„ Ø¬Ø¯ÙŠØ¯",
+                    "createchild": "Ø¥Ø¶Ø§ÙØ© Ø³Ø¬Ù„ ÙØ±Ø¹ÙŠ",
+                    "destroy": "Ø­Ø°Ù",
+                    "excel": "Excel ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰",
+                    "pdf": "PDF ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰"
                 }
             });
     }
@@ -555,7 +555,7 @@
     if (kendo.ui.Groupable) {
         kendo.ui.Groupable.prototype.options.messages =
             $.extend(true, kendo.ui.Groupable.prototype.options.messages, {
-                "empty": "ÇÓÍÈ ÑÃÓ ÇáÚãæÏ æÃÏÑÌå åäÇ ááÊÌãíÚ ÈæÇÓØÉ åĞÇ ÇáÚãæÏ"
+                "empty": "Ø§Ø³Ø­Ø¨ Ø±Ø£Ø³ Ø§Ù„Ø¹Ù…ÙˆØ¯ ÙˆØ£Ø¯Ø±Ø¬Ù‡ Ù‡Ù†Ø§ Ù„Ù„ØªØ¬Ù…ÙŠØ¹ Ø¨ÙˆØ§Ø³Ø·Ø© Ù‡Ø°Ø§ Ø§Ù„Ø¹Ù…ÙˆØ¯"
             });
     }
 
@@ -564,8 +564,8 @@
     if (kendo.ui.NumericTextBox) {
         kendo.ui.NumericTextBox.prototype.options =
             $.extend(true, kendo.ui.NumericTextBox.prototype.options, {
-                "upArrowText": "ÒíÇÏÉ ÇáŞíãÉ",
-                "downArrowText": "ÊŞáíá ÇáŞíãÉ"
+                "upArrowText": "Ø²ÙŠØ§Ø¯Ø© Ø§Ù„Ù‚ÙŠÙ…Ø©",
+                "downArrowText": "ØªÙ‚Ù„ÙŠÙ„ Ø§Ù„Ù‚ÙŠÙ…Ø©"
             });
     }
 
@@ -574,12 +574,12 @@
     if (kendo.ui.MediaPlayer) {
         kendo.ui.MediaPlayer.prototype.options.messages =
             $.extend(true, kendo.ui.MediaPlayer.prototype.options.messages, {
-                "pause": "ÅíŞÇİ ãÄŞÊ",
-                "play": "ÊÔÛíá",
-                "mute": "ßÊã ÇáÕæÊ",
-                "unmute": "ÅáÛÇÁ ßÊã ÇáÕæÊ",
-                "quality": "ÇáÌæÏÉ",
-                "fullscreen": "ÊßÈíÑ ÇáÔÇÔÉ"
+                "pause": "Ø¥ÙŠÙ‚Ø§Ù Ù…Ø¤Ù‚Øª",
+                "play": "ØªØ´ØºÙŠÙ„",
+                "mute": "ÙƒØªÙ… Ø§Ù„ØµÙˆØª",
+                "unmute": "Ø¥Ù„ØºØ§Ø¡ ÙƒØªÙ… Ø§Ù„ØµÙˆØª",
+                "quality": "Ø§Ù„Ø¬ÙˆØ¯Ø©",
+                "fullscreen": "ØªÙƒØ¨ÙŠØ± Ø§Ù„Ø´Ø§Ø´Ø©"
             });
     }
 
@@ -588,20 +588,20 @@
     if (kendo.ui.Pager) {
         kendo.ui.Pager.prototype.options.messages =
             $.extend(true, kendo.ui.Pager.prototype.options.messages, {
-                "allPages": "Çáßá",
-                "display": "{0} - {1} ãä {2} ÚäÇÕÑ",
-                "empty": "áÇ ÊæÌÏ ÚäÇÕÑ áÚÑÖåÇ",
-                "page": "ÕİÍÉ",
-                "pageButtonLabel": "ÕİÍÉ {0}",
-                "pageSizeDropDownLabel": "ŞÇÆãÉ ÚÏÏ ÚäÇÕÑ ÇáÕİÍÉ",
-                "of": "ãä {0}",
-                "itemsPerPage": "ÚäÇÕÑ ßá ÕİÍÉ",
-                "first": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÃæáì",
-                "previous": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÓÇÈŞÉ",
-                "next": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÊÇáíÉ",
-                "last": "ÇĞåÈ Åáì ÇáÕİÍÉ ÇáÃÎíÑÉ",
-                "refresh": "ÊÍÏíË",
-                "morePages": "ÇáãÒíÏ ãä ÇáÕİÍÇÊ"
+                "allPages": "Ø§Ù„ÙƒÙ„",
+                "display": "{0} - {1} Ù…Ù† {2} Ø¹Ù†Ø§ØµØ±",
+                "empty": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¹Ù†Ø§ØµØ± Ù„Ø¹Ø±Ø¶Ù‡Ø§",
+                "page": "ØµÙØ­Ø©",
+                "pageButtonLabel": "ØµÙØ­Ø© {0}",
+                "pageSizeDropDownLabel": "Ù‚Ø§Ø¦Ù…Ø© Ø¹Ø¯Ø¯ Ø¹Ù†Ø§ØµØ± Ø§Ù„ØµÙØ­Ø©",
+                "of": "Ù…Ù† {0}",
+                "itemsPerPage": "Ø¹Ù†Ø§ØµØ± ÙƒÙ„ ØµÙØ­Ø©",
+                "first": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰",
+                "previous": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©",
+                "next": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„ØªØ§Ù„ÙŠØ©",
+                "last": "Ø§Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø©",
+                "refresh": "ØªØ­Ø¯ÙŠØ«",
+                "morePages": "Ø§Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„ØµÙØ­Ø§Øª"
             });
     }
 
@@ -610,18 +610,18 @@
     if (kendo.ui.TreeListPager) {
         kendo.ui.TreeListPager.prototype.options.messages =
             $.extend(true, kendo.ui.TreeListPager.prototype.options.messages, {
-                "allPages": "Çáßá",
-                "display": "{0} - {1} of {2} ÇáÚäÇÕÑ",
-                "empty": "áÇ íæÌÏ ÚäÇÕÑ áÚÑÖåÇ",
-                "page": "ÕİÍÉ",
-                "of": "ãä {0}",
-                "itemsPerPage": "ÚäÕÑ ßá ÕİÍÉ",
-                "first": "ÅĞåÈ Åáì ÕİÍÉ ÇáÃæáì",
-                "previous": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÓÇÈŞÉ",
-                "next": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÊÇáíÉ",
-                "last": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÃÎíÑÉ",
-                "refresh": "ÊÍÏíË",
-                "morePages": "ÇáãÒíÏ ãä ÇáÕİÍÇÊ"
+                "allPages": "Ø§Ù„ÙƒÙ„",
+                "display": "{0} - {1} of {2} Ø§Ù„Ø¹Ù†Ø§ØµØ±",
+                "empty": "Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø¹Ù†Ø§ØµØ± Ù„Ø¹Ø±Ø¶Ù‡Ø§",
+                "page": "ØµÙØ­Ø©",
+                "of": "Ù…Ù† {0}",
+                "itemsPerPage": "Ø¹Ù†ØµØ± ÙƒÙ„ ØµÙØ­Ø©",
+                "first": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ ØµÙØ­Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰",
+                "previous": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©",
+                "next": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„ØªØ§Ù„ÙŠØ©",
+                "last": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø©",
+                "refresh": "ØªØ­Ø¯ÙŠØ«",
+                "morePages": "Ø§Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„ØµÙØ­Ø§Øª"
             });
     }
 
@@ -630,9 +630,9 @@
     if (kendo.ui.PivotGrid) {
         kendo.ui.PivotGrid.prototype.options.messages =
             $.extend(true, kendo.ui.PivotGrid.prototype.options.messages, {
-                "measureFields": "ÓÍÈ ÍŞæá ÇáÈíÇäÇÊ åäÇ",
-                "columnFields": "ÓÍÈ ÍŞæá ÇáÚãæÏ åäÇ",
-                "rowFields": "ÇÓÍÈ ÍŞæá ÇáÕİæİ åäÇ"
+                "measureFields": "Ø³Ø­Ø¨ Ø­Ù‚ÙˆÙ„ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ù‡Ù†Ø§",
+                "columnFields": "Ø³Ø­Ø¨ Ø­Ù‚ÙˆÙ„ Ø§Ù„Ø¹Ù…ÙˆØ¯ Ù‡Ù†Ø§",
+                "rowFields": "Ø§Ø³Ø­Ø¨ Ø­Ù‚ÙˆÙ„ Ø§Ù„ØµÙÙˆÙ Ù‡Ù†Ø§"
             });
     }
 
@@ -641,21 +641,21 @@
     if (kendo.ui.PivotFieldMenu) {
         kendo.ui.PivotFieldMenu.prototype.options.messages =
             $.extend(true, kendo.ui.PivotFieldMenu.prototype.options.messages, {
-                "info": "ÅÙåÇÑ ÇáÚäÇÕÑ ĞÇÊ ÇáŞíãÉ ÇáÊí:",
-                "filterFields": "İÑÒ ÇáÍŞæá",
-                "filter": "İÑÒ",
-                "include": "ÊÔÊãá ÇáÍŞæá...",
-                "title": "ÇáÍŞæá ÇáÊí íÌÈ ÊÖãíäåÇ",
-                "clear": "ÅÒÇáÉ",
-                "ok": "ÍÓäÇ",
-                "cancel": "ÅáÛÇÁ",
+                "info": "Ø¥Ø¸Ù‡Ø§Ø± Ø§Ù„Ø¹Ù†Ø§ØµØ± Ø°Ø§Øª Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„ØªÙŠ:",
+                "filterFields": "ÙØ±Ø² Ø§Ù„Ø­Ù‚ÙˆÙ„",
+                "filter": "ÙØ±Ø²",
+                "include": "ØªØ´ØªÙ…Ù„ Ø§Ù„Ø­Ù‚ÙˆÙ„...",
+                "title": "Ø§Ù„Ø­Ù‚ÙˆÙ„ Ø§Ù„ØªÙŠ ÙŠØ¬Ø¨ ØªØ¶Ù…ÙŠÙ†Ù‡Ø§",
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "ok": "Ø­Ø³Ù†Ø§",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
                 "operators": {
-                    "contains": "íÊÖãä",
-                    "doesnotcontain": "áÇ íÊÖãä",
-                    "startswith": "íÈÏÃ È",
-                    "endswith": "íäÊåí È",
-                    "eq": "íÓÇæí",
-                    "neq": "áÇ íÓÇæí"
+                    "contains": "ÙŠØªØ¶Ù…Ù†",
+                    "doesnotcontain": "Ù„Ø§ ÙŠØªØ¶Ù…Ù†",
+                    "startswith": "ÙŠØ¨Ø¯Ø£ Ø¨",
+                    "endswith": "ÙŠÙ†ØªÙ‡ÙŠ Ø¨",
+                    "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                    "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ"
                 }
             });
     }
@@ -665,64 +665,64 @@
     if (kendo.ui.RecurrenceEditor) {
         kendo.ui.RecurrenceEditor.prototype.options.messages =
             $.extend(true, kendo.ui.RecurrenceEditor.prototype.options.messages, {
-                "repeat": "ÊßÑÇÑ",
-                "recurrenceEditorTitle": "ãÍÑÑ ÇáÊßÑÇÑ",
+                "repeat": "ØªÙƒØ±Ø§Ø±",
+                "recurrenceEditorTitle": "Ù…Ø­Ø±Ø± Ø§Ù„ØªÙƒØ±Ø§Ø±",
                 "frequencies": {
-                    "never": "ÇÈÏÇğ",
-                    "hourly": "ßá ÓÇÚÉ",
-                    "daily": "íæãíÇğ",
-                    "weekly": "ÃÓÈæÚíÇ",
-                    "monthly": "ÔåÑíÇğ",
-                    "yearly": "Óäæí"
+                    "never": "Ø§Ø¨Ø¯Ø§Ù‹",
+                    "hourly": "ÙƒÙ„ Ø³Ø§Ø¹Ø©",
+                    "daily": "ÙŠÙˆÙ…ÙŠØ§Ù‹",
+                    "weekly": "Ø£Ø³Ø¨ÙˆØ¹ÙŠØ§",
+                    "monthly": "Ø´Ù‡Ø±ÙŠØ§Ù‹",
+                    "yearly": "Ø³Ù†ÙˆÙŠ"
                 },
                 "hourly": {
-                    "repeatEvery": ":ÊßÑÇÑ ßá",
-                    "interval": "ÓÇÚÉ"
+                    "repeatEvery": ":ØªÙƒØ±Ø§Ø± ÙƒÙ„",
+                    "interval": "Ø³Ø§Ø¹Ø©"
                 },
                 "daily": {
-                    "repeatEvery": "ÊßÑÇÑ ßá:",
-                    "interval": "íæã"
+                    "repeatEvery": "ØªÙƒØ±Ø§Ø± ÙƒÙ„:",
+                    "interval": "ÙŠÙˆÙ…"
                 },
                 "weekly": {
-                    "interval": "ÃÓÈæÚ",
-                    "repeatEvery": "ÊßÑÇÑ ßá:",
-                    "repeatOn": "ÊßÑÇÑ Úáì:"
+                    "interval": "Ø£Ø³Ø¨ÙˆØ¹",
+                    "repeatEvery": "ØªÙƒØ±Ø§Ø± ÙƒÙ„:",
+                    "repeatOn": "ØªÙƒØ±Ø§Ø± Ø¹Ù„Ù‰:"
                 },
                 "monthly": {
-                    "repeatEvery": "ÊßÑÇÑ ßá:",
-                    "repeatOn": "ÊßÑÇÑ Úáì:",
-                    "interval": "ÔåÑ",
-                    "day": "íæã",
-                    "date": "ÊÇÑíÎ"
+                    "repeatEvery": "ØªÙƒØ±Ø§Ø± ÙƒÙ„:",
+                    "repeatOn": "ØªÙƒØ±Ø§Ø± Ø¹Ù„Ù‰:",
+                    "interval": "Ø´Ù‡Ø±",
+                    "day": "ÙŠÙˆÙ…",
+                    "date": "ØªØ§Ø±ÙŠØ®"
                 },
                 "yearly": {
-                    "repeatEvery": "ÊßÑÇÑ ßá:",
-                    "repeatOn": "ßÑÑ Úáì:",
-                    "interval": "ÓäÉ",
-                    "of": "ãä",
-                    "month": "ÔåÑ",
-                    "day": "íæã",
-                    "date": "ÊÇÑíÎ"
+                    "repeatEvery": "ØªÙƒØ±Ø§Ø± ÙƒÙ„:",
+                    "repeatOn": "ÙƒØ±Ø± Ø¹Ù„Ù‰:",
+                    "interval": "Ø³Ù†Ø©",
+                    "of": "Ù…Ù†",
+                    "month": "Ø´Ù‡Ø±",
+                    "day": "ÙŠÙˆÙ…",
+                    "date": "ØªØ§Ø±ÙŠØ®"
                 },
                 "end": {
-                    "label": "ÇáäåÇíÉ:",
-                    "mobileLabel": "íäÊåí",
-                    "never": "ÇÈÏğÇ",
-                    "after": "ÈÚÏ",
-                    "occurrence": "ÍÏË (ÃÍÏË)",
-                    "on": "ÊÔÛíá"
+                    "label": "Ø§Ù„Ù†Ù‡Ø§ÙŠØ©:",
+                    "mobileLabel": "ÙŠÙ†ØªÙ‡ÙŠ",
+                    "never": "Ø§Ø¨Ø¯Ù‹Ø§",
+                    "after": "Ø¨Ø¹Ø¯",
+                    "occurrence": "Ø­Ø¯Ø« (Ø£Ø­Ø¯Ø«)",
+                    "on": "ØªØ´ØºÙŠÙ„"
                 },
                 "offsetPositions": {
-                    "first": "ÇáÃæá",
-                    "second": "ÇáËÇäí",
-                    "third": "ÇáËÇáË",
-                    "fourth": "ÇáÑÇÈÚ",
-                    "last": "ÇáÃÎíÑ"
+                    "first": "Ø§Ù„Ø£ÙˆÙ„",
+                    "second": "Ø§Ù„Ø«Ø§Ù†ÙŠ",
+                    "third": "Ø§Ù„Ø«Ø§Ù„Ø«",
+                    "fourth": "Ø§Ù„Ø±Ø§Ø¨Ø¹",
+                    "last": "Ø§Ù„Ø£Ø®ÙŠØ±"
                 },
                 "weekdays": {
-                    "day": "íæã",
-                    "weekday": "íæã ãä ÃíÇã ÇáÃÓÈæÚ",
-                    "weekend": "íæã ÚØáÉ äåÇíÉ ÇáÃÓÈæÚ"
+                    "day": "ÙŠÙˆÙ…",
+                    "weekday": "ÙŠÙˆÙ… Ù…Ù† Ø£ÙŠØ§Ù… Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹",
+                    "weekend": "ÙŠÙˆÙ… Ø¹Ø·Ù„Ø© Ù†Ù‡Ø§ÙŠØ© Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹"
                 }
             });
     }
@@ -732,20 +732,20 @@
     if (kendo.ui.MobileRecurrenceEditor) {
         kendo.ui.MobileRecurrenceEditor.prototype.options.messages =
             $.extend(true, kendo.ui.MobileRecurrenceEditor.prototype.options.messages, kendo.ui.RecurrenceEditor.prototype.options.messages, {
-                "cancel": "ÅáÛÇÁ",
-                "update": "ÍİÙ",
-                "endTitle": "ÅäåÇÁ ÇáÊßÑÇÑ",
-                "repeatTitle": "ßÑÑø ÇáäãØ",
-                "headerTitle": "ÊßÑÇÑ ÇáÍÏË",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "update": "Ø­ÙØ¸",
+                "endTitle": "Ø¥Ù†Ù‡Ø§Ø¡ Ø§Ù„ØªÙƒØ±Ø§Ø±",
+                "repeatTitle": "ÙƒØ±Ø±Ù‘ Ø§Ù„Ù†Ù…Ø·",
+                "headerTitle": "ØªÙƒØ±Ø§Ø± Ø§Ù„Ø­Ø¯Ø«",
                 "end": {
                     "patterns": {
-                        "never": "ÇÈÏğÇ",
-                        "after": "ÈÚÏ...",
-                        "on": "ÊÔÛíá..."
+                        "never": "Ø§Ø¨Ø¯Ù‹Ø§",
+                        "after": "Ø¨Ø¹Ø¯...",
+                        "on": "ØªØ´ØºÙŠÙ„..."
                     },
-                    "never": "ÇÈÏğÇ",
-                    "after": "ÅäåÇÁ ÇáÊßÑÇÑ ÈÚÏ",
-                    "on": "ÅäåÇÁ ÇáÊßÑÇÑ ÚäÏ"
+                    "never": "Ø§Ø¨Ø¯Ù‹Ø§",
+                    "after": "Ø¥Ù†Ù‡Ø§Ø¡ Ø§Ù„ØªÙƒØ±Ø§Ø± Ø¨Ø¹Ø¯",
+                    "on": "Ø¥Ù†Ù‡Ø§Ø¡ Ø§Ù„ØªÙƒØ±Ø§Ø± Ø¹Ù†Ø¯"
                 },
                 "daily": {
                     "interval": ""
@@ -758,22 +758,22 @@
                 },
                 "monthly": {
                     "interval": "",
-                    "repeatBy": "ÊßÑÇÑ ÈæÇÓØÉ:",
-                    "dayOfMonth": "íæã ãä ÇáÔåÑ",
-                    "dayOfWeek": "íæã İí ÇáÃÓÈæÚ",
-                    "repeatEvery": "ÊßÑÇÑ ßá",
-                    "every": "ßá",
-                    "day": "íæã"
+                    "repeatBy": "ØªÙƒØ±Ø§Ø± Ø¨ÙˆØ§Ø³Ø·Ø©:",
+                    "dayOfMonth": "ÙŠÙˆÙ… Ù…Ù† Ø§Ù„Ø´Ù‡Ø±",
+                    "dayOfWeek": "ÙŠÙˆÙ… ÙÙŠ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹",
+                    "repeatEvery": "ØªÙƒØ±Ø§Ø± ÙƒÙ„",
+                    "every": "ÙƒÙ„",
+                    "day": "ÙŠÙˆÙ…"
                 },
                 "yearly": {
                     "interval": "",
-                    "repeatBy": ":ÊßÑÇÑ ÈæÇÓØÉ",
-                    "dayOfMonth": "íæã İí ÇáÔåÑ",
-                    "dayOfWeek": "íæã İí ÇáÃÓÈæÚ",
-                    "repeatEvery": ":ÊßÑÇÑ ßá",
-                    "every": "ßá",
-                    "month": "ÔåÑ",
-                    "day": "íæã"
+                    "repeatBy": ":ØªÙƒØ±Ø§Ø± Ø¨ÙˆØ§Ø³Ø·Ø©",
+                    "dayOfMonth": "ÙŠÙˆÙ… ÙÙŠ Ø§Ù„Ø´Ù‡Ø±",
+                    "dayOfWeek": "ÙŠÙˆÙ… ÙÙŠ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹",
+                    "repeatEvery": ":ØªÙƒØ±Ø§Ø± ÙƒÙ„",
+                    "every": "ÙƒÙ„",
+                    "month": "Ø´Ù‡Ø±",
+                    "day": "ÙŠÙˆÙ…"
                 }
             });
     }
@@ -783,61 +783,61 @@
     if (kendo.ui.Scheduler) {
         kendo.ui.Scheduler.prototype.options.messages =
             $.extend(true, kendo.ui.Scheduler.prototype.options.messages, {
-                "allDay": "ØæÇá Çáíæã",
-                "date": "ÊÇÑíÎ",
-                "event": "ÍÏË",
-                "time": "æŞÊ",
-                "showFullDay": "ÚÑÖ ßÇãá ááíæã",
-                "showWorkDay": "ÚÑÖ ÓÇÚÇÊ ÇáÚãá",
-                "today": "Çáíæã",
-                "save": "ÍİÙ",
-                "cancel": "ÅáÛÇÁ",
-                "destroy": "ÍĞİ",
-                "resetSeries": "ÅÚÇÏÉ ÖÈØ ÇáÓáÓáÉ",
-                "deleteWindowTitle": "ÍĞİ ÇáÍÏË",
-                "ariaSlotLabel": "ãÍÏÏ ãä{0:t} Åáì {1:t}",
-                "ariaEventLabel": "{0} İí{1:D} ÚäÏ {2:t}",
+                "allDay": "Ø·ÙˆØ§Ù„ Ø§Ù„ÙŠÙˆÙ…",
+                "date": "ØªØ§Ø±ÙŠØ®",
+                "event": "Ø­Ø¯Ø«",
+                "time": "ÙˆÙ‚Øª",
+                "showFullDay": "Ø¹Ø±Ø¶ ÙƒØ§Ù…Ù„ Ù„Ù„ÙŠÙˆÙ…",
+                "showWorkDay": "Ø¹Ø±Ø¶ Ø³Ø§Ø¹Ø§Øª Ø§Ù„Ø¹Ù…Ù„",
+                "today": "Ø§Ù„ÙŠÙˆÙ…",
+                "save": "Ø­ÙØ¸",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "destroy": "Ø­Ø°Ù",
+                "resetSeries": "Ø¥Ø¹Ø§Ø¯Ø© Ø¶Ø¨Ø· Ø§Ù„Ø³Ù„Ø³Ù„Ø©",
+                "deleteWindowTitle": "Ø­Ø°Ù Ø§Ù„Ø­Ø¯Ø«",
+                "ariaSlotLabel": "Ù…Ø­Ø¯Ø¯ Ù…Ù†{0:t} Ø¥Ù„Ù‰ {1:t}",
+                "ariaEventLabel": "{0} ÙÙŠ{1:D} Ø¹Ù†Ø¯ {2:t}",
                 "editable": {
-                    "confirmation": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ ÇáÍÏË¿"
+                    "confirmation": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ø§Ù„Ø­Ø¯Ø«ØŸ"
                 },
                 "views": {
-                    "day": "íæã",
-                    "week": "ÃÓÈæÚ",
-                    "workWeek": "ÃÓÈæÚ ÇáÚãá",
-                    "agenda": "ÌÏæá ÇáÃÚãÇá",
-                    "month": "ÔåÑ"
+                    "day": "ÙŠÙˆÙ…",
+                    "week": "Ø£Ø³Ø¨ÙˆØ¹",
+                    "workWeek": "Ø£Ø³Ø¨ÙˆØ¹ Ø§Ù„Ø¹Ù…Ù„",
+                    "agenda": "Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ø£Ø¹Ù…Ø§Ù„",
+                    "month": "Ø´Ù‡Ø±"
                 },
                 "recurrenceMessages": {
-                    "deleteWindowTitle": "ÍĞİ ÇáÚäÕÑ ÇáãÊßÑÑ",
-                    "resetSeriesWindowTitle": "ÅÚÇÏÉ ÖÈØ ÇáÓáÓáÉ",
-                    "deleteWindowOccurrence": "ÍĞİ ÇáÍÏË ÇáÍÇáí",
-                    "deleteWindowSeries": "ÍĞİ ÇáÓáÓáÉ",
-                    "deleteRecurringConfirmation": "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ åĞÇ ÇáÍÏË¿",
-                    "deleteSeriesConfirmation": "åá ÃäÊ ãÊÃßÏ ÍĞİ ÇáÓáÓáÉ ÈÃßãáåÇ¿",
-                    "editWindowTitle": "ÊÚÏíá ÇáÚäÕÑ ÇáãÊßÑÑ",
-                    "editWindowOccurrence": "ÊÚÏíá ÇáÍÏË ÇáÍÇáí",
-                    "editWindowSeries": "ÊÚÏíá ÇáÓáÓáÉ",
-                    "deleteRecurring": "åá ÊÑíÏ ÍĞİ åĞÇ ÇáÍÏË İŞØ Ãã ÇáÓáÓáÉ ÈÃßãáåÇ¿",
-                    "editRecurring": "åá ÊÑíÏ ÊÚÏíá åĞÇ ÇáÍÏË İŞØ Ãã ÇáÓáÓáÉ ÈÃßãáåÇ¿"
+                    "deleteWindowTitle": "Ø­Ø°Ù Ø§Ù„Ø¹Ù†ØµØ± Ø§Ù„Ù…ØªÙƒØ±Ø±",
+                    "resetSeriesWindowTitle": "Ø¥Ø¹Ø§Ø¯Ø© Ø¶Ø¨Ø· Ø§Ù„Ø³Ù„Ø³Ù„Ø©",
+                    "deleteWindowOccurrence": "Ø­Ø°Ù Ø§Ù„Ø­Ø¯Ø« Ø§Ù„Ø­Ø§Ù„ÙŠ",
+                    "deleteWindowSeries": "Ø­Ø°Ù Ø§Ù„Ø³Ù„Ø³Ù„Ø©",
+                    "deleteRecurringConfirmation": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø­Ø¯Ø«ØŸ",
+                    "deleteSeriesConfirmation": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ø­Ø°Ù Ø§Ù„Ø³Ù„Ø³Ù„Ø© Ø¨Ø£ÙƒÙ…Ù„Ù‡Ø§ØŸ",
+                    "editWindowTitle": "ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø¹Ù†ØµØ± Ø§Ù„Ù…ØªÙƒØ±Ø±",
+                    "editWindowOccurrence": "ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø­Ø¯Ø« Ø§Ù„Ø­Ø§Ù„ÙŠ",
+                    "editWindowSeries": "ØªØ¹Ø¯ÙŠÙ„ Ø§Ù„Ø³Ù„Ø³Ù„Ø©",
+                    "deleteRecurring": "Ù‡Ù„ ØªØ±ÙŠØ¯ Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø­Ø¯Ø« ÙÙ‚Ø· Ø£Ù… Ø§Ù„Ø³Ù„Ø³Ù„Ø© Ø¨Ø£ÙƒÙ…Ù„Ù‡Ø§ØŸ",
+                    "editRecurring": "Ù‡Ù„ ØªØ±ÙŠØ¯ ØªØ¹Ø¯ÙŠÙ„ Ù‡Ø°Ø§ Ø§Ù„Ø­Ø¯Ø« ÙÙ‚Ø· Ø£Ù… Ø§Ù„Ø³Ù„Ø³Ù„Ø© Ø¨Ø£ÙƒÙ…Ù„Ù‡Ø§ØŸ"
                 },
                 "editor": {
-                    "title": "ÚäæÇä",
-                    "start": "ÈÏÁ",
-                    "end": "ÅäåÇÁ",
-                    "allDayEvent": "ÍÏË Çáíæã ÈÃßãáå",
-                    "description": "æÕİ",
-                    "repeat": "ÊßÑÇÑ",
+                    "title": "Ø¹Ù†ÙˆØ§Ù†",
+                    "start": "Ø¨Ø¯Ø¡",
+                    "end": "Ø¥Ù†Ù‡Ø§Ø¡",
+                    "allDayEvent": "Ø­Ø¯Ø« Ø§Ù„ÙŠÙˆÙ… Ø¨Ø£ÙƒÙ…Ù„Ù‡",
+                    "description": "ÙˆØµÙ",
+                    "repeat": "ØªÙƒØ±Ø§Ø±",
                     "timezone": " ",
-                    "startTimezone": "ÈÏÁ äÙÇã ÇáÊæŞíÊ",
-                    "endTimezone": "ÅäåÇÁ äÙÇã ÇáÊæŞíÊ",
-                    "separateTimezones": "ÇÓÊÎÏÇã ãäÇØŞ ÒãäíÉ ãäİÕáÉ ááÈÏÁ æÇáÇäÊåÇÁ",
-                    "timezoneEditorTitle": "ÇáãäÇØŞ ÇáÒãäíÉ",
-                    "timezoneEditorButton": "ÇáãäØŞÉ ÇáÒãäíÉ",
-                    "timezoneTitle": "ÇáãäÇØŞ ÇáÒãäíÉ",
-                    "noTimezone": "ÈáÇ äÙÇã ÊæŞíÊ",
-                    "editorTitle": "ÍÏË"
+                    "startTimezone": "Ø¨Ø¯Ø¡ Ù†Ø¸Ø§Ù… Ø§Ù„ØªÙˆÙ‚ÙŠØª",
+                    "endTimezone": "Ø¥Ù†Ù‡Ø§Ø¡ Ù†Ø¸Ø§Ù… Ø§Ù„ØªÙˆÙ‚ÙŠØª",
+                    "separateTimezones": "Ø§Ø³ØªØ®Ø¯Ø§Ù… Ù…Ù†Ø§Ø·Ù‚ Ø²Ù…Ù†ÙŠØ© Ù…Ù†ÙØµÙ„Ø© Ù„Ù„Ø¨Ø¯Ø¡ ÙˆØ§Ù„Ø§Ù†ØªÙ‡Ø§Ø¡",
+                    "timezoneEditorTitle": "Ø§Ù„Ù…Ù†Ø§Ø·Ù‚ Ø§Ù„Ø²Ù…Ù†ÙŠØ©",
+                    "timezoneEditorButton": "Ø§Ù„Ù…Ù†Ø·Ù‚Ø© Ø§Ù„Ø²Ù…Ù†ÙŠØ©",
+                    "timezoneTitle": "Ø§Ù„Ù…Ù†Ø§Ø·Ù‚ Ø§Ù„Ø²Ù…Ù†ÙŠØ©",
+                    "noTimezone": "Ø¨Ù„Ø§ Ù†Ø¸Ø§Ù… ØªÙˆÙ‚ÙŠØª",
+                    "editorTitle": "Ø­Ø¯Ø«"
                 },
-                "search": "ÈÍË..."
+                "search": "Ø¨Ø­Ø«..."
             });
     }
 
@@ -846,180 +846,180 @@
     if (kendo.spreadsheet && kendo.spreadsheet.messages.borderPalette) {
         kendo.spreadsheet.messages.borderPalette =
             $.extend(true, kendo.spreadsheet.messages.borderPalette, {
-                "allBorders": "ßá ÇáÌæÇäÈ",
-                "insideBorders": "ÇáÍÏæÏ ÇáÏÇÎáíÉ",
-                "insideHorizontalBorders": "ÍÏæÏ ÃİŞíÉ ÏÇÎáíÉ",
-                "insideVerticalBorders": "ÍÏæÏ ÚãæÏíÉ ÏÇÎáíÉ",
-                "outsideBorders": "ÇáÍÏæÏ ÇáÎÇÑÌíÉ",
-                "leftBorder": "ÇáÍÏ ÇáÃíÓÑ",
-                "topBorder": "ÇáÍÏ ÇáÚáæí",
-                "rightBorder": "ÇáÍÏ ÇáÃíãä",
-                "bottomBorder": "ÇáÍÏ ÇáÓİáí",
-                "noBorders": "ÈáÇ ÍÏæÏ",
-                "reset": "ÅÚÇÏÉ ÊÚííä Çááæä",
-                "customColor": "áæä ãÎÕøÕ...",
-                "apply": "ÊØÈíŞ",
-                "cancel": "ÅáÛÇÁ"
+                "allBorders": "ÙƒÙ„ Ø§Ù„Ø¬ÙˆØ§Ù†Ø¨",
+                "insideBorders": "Ø§Ù„Ø­Ø¯ÙˆØ¯ Ø§Ù„Ø¯Ø§Ø®Ù„ÙŠØ©",
+                "insideHorizontalBorders": "Ø­Ø¯ÙˆØ¯ Ø£ÙÙ‚ÙŠØ© Ø¯Ø§Ø®Ù„ÙŠØ©",
+                "insideVerticalBorders": "Ø­Ø¯ÙˆØ¯ Ø¹Ù…ÙˆØ¯ÙŠØ© Ø¯Ø§Ø®Ù„ÙŠØ©",
+                "outsideBorders": "Ø§Ù„Ø­Ø¯ÙˆØ¯ Ø§Ù„Ø®Ø§Ø±Ø¬ÙŠØ©",
+                "leftBorder": "Ø§Ù„Ø­Ø¯ Ø§Ù„Ø£ÙŠØ³Ø±",
+                "topBorder": "Ø§Ù„Ø­Ø¯ Ø§Ù„Ø¹Ù„ÙˆÙŠ",
+                "rightBorder": "Ø§Ù„Ø­Ø¯ Ø§Ù„Ø£ÙŠÙ…Ù†",
+                "bottomBorder": "Ø§Ù„Ø­Ø¯ Ø§Ù„Ø³ÙÙ„ÙŠ",
+                "noBorders": "Ø¨Ù„Ø§ Ø­Ø¯ÙˆØ¯",
+                "reset": "Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† Ø§Ù„Ù„ÙˆÙ†",
+                "customColor": "Ù„ÙˆÙ† Ù…Ø®ØµÙ‘Øµ...",
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡"
             });
     }
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.dialogs) {
         kendo.spreadsheet.messages.dialogs =
             $.extend(true, kendo.spreadsheet.messages.dialogs, {
-                "apply": "ÊØÈíŞ",
-                "save": "ÍİÙ",
-                "cancel": "ÅáÛÇÁ",
-                "remove": "ÍĞİ",
-                "retry": "ÃÚÏ ÇáãÍÇæáÉ",
-                "revert": "ÊÑÇÌÚ",
-                "okText": "ÍÓäğÇ",
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "save": "Ø­ÙØ¸",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "remove": "Ø­Ø°Ù",
+                "retry": "Ø£Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©",
+                "revert": "ØªØ±Ø§Ø¬Ø¹",
+                "okText": "Ø­Ø³Ù†Ù‹Ø§",
                 "formatCellsDialog": {
-                    "title": "ÕíÛÉ",
+                    "title": "ØµÙŠØºØ©",
                     "categories": {
-                        "number": "ÑŞã",
-                        "currency": "ÚãáÉ",
-                        "date": "ÊÇÑíÎ"
+                        "number": "Ø±Ù‚Ù…",
+                        "currency": "Ø¹Ù…Ù„Ø©",
+                        "date": "ØªØ§Ø±ÙŠØ®"
                     }
                 },
                 "fontFamilyDialog": {
-                    "title": "ÇáÎØ"
+                    "title": "Ø§Ù„Ø®Ø·"
                 },
                 "fontSizeDialog": {
-                    "title": "ÍÌã ÇáÎØ"
+                    "title": "Ø­Ø¬Ù… Ø§Ù„Ø®Ø·"
                 },
                 "bordersDialog": {
-                    "title": "ÍÏæÏ"
+                    "title": "Ø­Ø¯ÙˆØ¯"
                 },
                 "alignmentDialog": {
-                    "title": "ÇáãÍÇĞÇÉ",
+                    "title": "Ø§Ù„Ù…Ø­Ø§Ø°Ø§Ø©",
                     "buttons": {
-                        "justtifyLeft": "ãÍÇĞÇÉ Åáì ÇáíÓÇÑ",
-                        "justifyCenter": "æÓØ",
-                        "justifyRight": "ãÍÇĞÇÉ Åáí Çáíãíä",
-                        "justifyFull": "ÖÈØ",
-                        "alignTop": "ãÍÇĞÇÉ Åáí ÇáÃÚáí",
-                        "alignMiddle": "ãÍÇĞÇÉ Åáí ÇáãäÊÕİ",
-                        "alignBottom": "ãÍÇĞÇÉ Åáí ÇáÃÓİá"
+                        "justtifyLeft": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„Ù‰ Ø§Ù„ÙŠØ³Ø§Ø±",
+                        "justifyCenter": "ÙˆØ³Ø·",
+                        "justifyRight": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                        "justifyFull": "Ø¶Ø¨Ø·",
+                        "alignTop": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø¹Ù„ÙŠ",
+                        "alignMiddle": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„Ù…Ù†ØªØµÙ",
+                        "alignBottom": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø³ÙÙ„"
                     }
                 },
                 "mergeDialog": {
-                    "title": "ÏãÌ ÇáÎáÇíÇ",
+                    "title": "Ø¯Ù…Ø¬ Ø§Ù„Ø®Ù„Ø§ÙŠØ§",
                     "buttons": {
-                        "mergeCells": "ÏãÌ Çáßá",
-                        "mergeHorizontally": "ÏãÌ ÃİŞíğÇ",
-                        "mergeVertically": "ÏãÌ ÑÃÓíÇ",
-                        "unmerge": "İß ÇáÏãÌ"
+                        "mergeCells": "Ø¯Ù…Ø¬ Ø§Ù„ÙƒÙ„",
+                        "mergeHorizontally": "Ø¯Ù…Ø¬ Ø£ÙÙ‚ÙŠÙ‹Ø§",
+                        "mergeVertically": "Ø¯Ù…Ø¬ Ø±Ø£Ø³ÙŠØ§",
+                        "unmerge": "ÙÙƒ Ø§Ù„Ø¯Ù…Ø¬"
                     }
                 },
                 "freezeDialog": {
-                    "title": "ÊÌãíÏ ÇáÃÌÒÇÁ",
+                    "title": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡",
                     "buttons": {
-                        "freezePanes": "ÊÌãíÏ ÇáÃÌÒÇÁ",
-                        "freezeRows": "ÊÌãíÏ ÇáÕİæİ",
-                        "freezeColumns": "ÊÌãíÏ ÇáÃÚãÏÉ",
-                        "unfreeze": "ÅáÛÇÁ ÊÌãíÏ ÇáÃÌÒÇÁ"
+                        "freezePanes": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡",
+                        "freezeRows": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„ØµÙÙˆÙ",
+                        "freezeColumns": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¹Ù…Ø¯Ø©",
+                        "unfreeze": "Ø¥Ù„ØºØ§Ø¡ ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡"
                     }
                 },
                 "confirmationDialog": {
-                    "text": "åá ÃäÊ ãÊÃßÏ ãä ÅÒÇáÉ åĞå ÇáæÑŞÉ¿",
-                    "title": "ÅÒÇáÉ æÑŞÉ"
+                    "text": "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø¥Ø²Ø§Ù„Ø© Ù‡Ø°Ù‡ Ø§Ù„ÙˆØ±Ù‚Ø©ØŸ",
+                    "title": "Ø¥Ø²Ø§Ù„Ø© ÙˆØ±Ù‚Ø©"
                 },
                 "validationDialog": {
-                    "title": "ÊÃßíÏ ÕÍÉ ÇáÈíÇäÇÊ",
-                    "hintMessage": "ÇáÑÌÇÁ ÅÏÎÇá ŞíãÉ ÕÇáÍÉ {0} áŞíãÉ {1}.",
-                    "hintTitle": "ÇáÊÍŞŞ {0}",
+                    "title": "ØªØ£ÙƒÙŠØ¯ ØµØ­Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª",
+                    "hintMessage": "Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¥Ø¯Ø®Ø§Ù„ Ù‚ÙŠÙ…Ø© ØµØ§Ù„Ø­Ø© {0} Ù„Ù‚ÙŠÙ…Ø© {1}.",
+                    "hintTitle": "Ø§Ù„ØªØ­Ù‚Ù‚ {0}",
                     "criteria": {
-                        "any": "Çí ŞíãÉ",
-                        "number": "ÑŞã",
-                        "text": "äÕ",
-                        "date": "ÊÇÑíÎ",
-                        "custom": "ÕíÛÉ ãÎÕÕÉ",
-                        "list": "ŞÇÆãÉ"
+                        "any": "Ø§ÙŠ Ù‚ÙŠÙ…Ø©",
+                        "number": "Ø±Ù‚Ù…",
+                        "text": "Ù†Øµ",
+                        "date": "ØªØ§Ø±ÙŠØ®",
+                        "custom": "ØµÙŠØºØ© Ù…Ø®ØµØµØ©",
+                        "list": "Ù‚Ø§Ø¦Ù…Ø©"
                     },
                     "comparers": {
-                        "greaterThan": "ÃßËÑ ãä",
-                        "lessThan": "ÃŞá ãä",
-                        "between": "Èíä",
-                        "notBetween": "áíÓ Èíä",
-                        "equalTo": "íÓÇæí",
-                        "notEqualTo": "áÇ íÓÇæí",
-                        "greaterThanOrEqualTo": "ÃßÈÑ ãä Ãæ íÓÇæí",
-                        "lessThanOrEqualTo": "ÇŞá ãä Çæ íÓÇæí"
+                        "greaterThan": "Ø£ÙƒØ«Ø± Ù…Ù†",
+                        "lessThan": "Ø£Ù‚Ù„ Ù…Ù†",
+                        "between": "Ø¨ÙŠÙ†",
+                        "notBetween": "Ù„ÙŠØ³ Ø¨ÙŠÙ†",
+                        "equalTo": "ÙŠØ³Ø§ÙˆÙŠ",
+                        "notEqualTo": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                        "greaterThanOrEqualTo": "Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                        "lessThanOrEqualTo": "Ø§Ù‚Ù„ Ù…Ù† Ø§Ùˆ ÙŠØ³Ø§ÙˆÙŠ"
                     },
                     "comparerMessages": {
-                        "greaterThan": "ÃßÈÑ ãä {0}",
-                        "lessThan": "ÃŞá ãä {0}",
-                        "between": "Èíä {0} æ {1}",
-                        "notBetween": "áíÓ Èíä {0} æ {1}",
-                        "equalTo": "íÓÇæí {0}",
-                        "notEqualTo": "áÇ íÓÇæí {0}",
-                        "greaterThanOrEqualTo": "ÃßÈÑ ãä Ãæ íÓÇæí {0}",
-                        "lessThanOrEqualTo": "ÃÕÛÑ ãä Ãæ íÓÇæí {0}",
-                        "custom": "ÇáÊí ÊÊæÇİŞ ãÚ ÇáÕíÛÉ: {0}"
+                        "greaterThan": "Ø£ÙƒØ¨Ø± Ù…Ù† {0}",
+                        "lessThan": "Ø£Ù‚Ù„ Ù…Ù† {0}",
+                        "between": "Ø¨ÙŠÙ† {0} Ùˆ {1}",
+                        "notBetween": "Ù„ÙŠØ³ Ø¨ÙŠÙ† {0} Ùˆ {1}",
+                        "equalTo": "ÙŠØ³Ø§ÙˆÙŠ {0}",
+                        "notEqualTo": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ {0}",
+                        "greaterThanOrEqualTo": "Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ {0}",
+                        "lessThanOrEqualTo": "Ø£ØµØºØ± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ {0}",
+                        "custom": "Ø§Ù„ØªÙŠ ØªØªÙˆØ§ÙÙ‚ Ù…Ø¹ Ø§Ù„ØµÙŠØºØ©: {0}"
                     },
                     "labels": {
-                        "criteria": "ÇáãÚÇííÑ ÇáÚÇãÉ",
-                        "comparer": "ÇáãŞÇÑäÉ",
-                        "min": "ÍÏ ÃÏäì",
-                        "max": "ÍÏ ÃŞÕì",
-                        "value": "ŞíãÉ",
-                        "start": "ÈÏÁ",
-                        "end": "ÅäåÇÁ",
-                        "onInvalidData": "Úáì ÈíÇäÇÊ ÛíÑ ÕÇáÍÉ",
-                        "rejectInput": "ÑİÖ ÇáÅÏÎÇá",
-                        "showWarning": "ÅÙåÇÑ ÇáÊÍĞíÑ",
-                        "showHint": "ÇÙåÇÑ ÇáÊáãíÍ",
-                        "hintTitle": "ÚäæÇä ÇáÊáãíÍ",
-                        "hintMessage": "ÑÓÇáÉ ÊáãíÍ",
-                        "ignoreBlank": "ÊÌÇåá ÇáİÑÇÛ"
+                        "criteria": "Ø§Ù„Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„Ø¹Ø§Ù…Ø©",
+                        "comparer": "Ø§Ù„Ù…Ù‚Ø§Ø±Ù†Ø©",
+                        "min": "Ø­Ø¯ Ø£Ø¯Ù†Ù‰",
+                        "max": "Ø­Ø¯ Ø£Ù‚ØµÙ‰",
+                        "value": "Ù‚ÙŠÙ…Ø©",
+                        "start": "Ø¨Ø¯Ø¡",
+                        "end": "Ø¥Ù†Ù‡Ø§Ø¡",
+                        "onInvalidData": "Ø¹Ù„Ù‰ Ø¨ÙŠØ§Ù†Ø§Øª ØºÙŠØ± ØµØ§Ù„Ø­Ø©",
+                        "rejectInput": "Ø±ÙØ¶ Ø§Ù„Ø¥Ø¯Ø®Ø§Ù„",
+                        "showWarning": "Ø¥Ø¸Ù‡Ø§Ø± Ø§Ù„ØªØ­Ø°ÙŠØ±",
+                        "showHint": "Ø§Ø¸Ù‡Ø§Ø± Ø§Ù„ØªÙ„Ù…ÙŠØ­",
+                        "hintTitle": "Ø¹Ù†ÙˆØ§Ù† Ø§Ù„ØªÙ„Ù…ÙŠØ­",
+                        "hintMessage": "Ø±Ø³Ø§Ù„Ø© ØªÙ„Ù…ÙŠØ­",
+                        "ignoreBlank": "ØªØ¬Ø§Ù‡Ù„ Ø§Ù„ÙØ±Ø§Øº"
                     },
                     "placeholders": {
-                        "typeTitle": "ÇßÊÈ ÇáÚäæÇä",
-                        "typeMessage": "ÇßÊÈ ÇáÑÓÇáÉ"
+                        "typeTitle": "Ø§ÙƒØªØ¨ Ø§Ù„Ø¹Ù†ÙˆØ§Ù†",
+                        "typeMessage": "Ø§ÙƒØªØ¨ Ø§Ù„Ø±Ø³Ø§Ù„Ø©"
                     }
                 },
                 "exportAsDialog": {
-                    "title": "ÊÕÏíÑ...",
+                    "title": "ØªØµØ¯ÙŠØ±...",
                     "labels": {
-                        "fileName": "ÇÓã Çáãáİ",
-                        "saveAsType": "ÍİÙ ßäæÚ",
-                        "exportArea": "ÊÕÏíÑ",
-                        "paperSize": "ÍÌã ÇáæÑŞ",
-                        "margins": "ÇáåæÇãÔ",
-                        "orientation": "ÊæÌíå",
-                        "print": "ØÈÇÚÉ",
-                        "guidelines": "ÇáŞæÇÚÏ ÇáÇÑÔÇÏíÉ",
-                        "center": "æÓØ",
-                        "horizontally": "ÃİŞíÇ",
-                        "vertically": "ÚãæÏíÇ"
+                        "fileName": "Ø§Ø³Ù… Ø§Ù„Ù…Ù„Ù",
+                        "saveAsType": "Ø­ÙØ¸ ÙƒÙ†ÙˆØ¹",
+                        "exportArea": "ØªØµØ¯ÙŠØ±",
+                        "paperSize": "Ø­Ø¬Ù… Ø§Ù„ÙˆØ±Ù‚",
+                        "margins": "Ø§Ù„Ù‡ÙˆØ§Ù…Ø´",
+                        "orientation": "ØªÙˆØ¬ÙŠÙ‡",
+                        "print": "Ø·Ø¨Ø§Ø¹Ø©",
+                        "guidelines": "Ø§Ù„Ù‚ÙˆØ§Ø¹Ø¯ Ø§Ù„Ø§Ø±Ø´Ø§Ø¯ÙŠØ©",
+                        "center": "ÙˆØ³Ø·",
+                        "horizontally": "Ø£ÙÙ‚ÙŠØ§",
+                        "vertically": "Ø¹Ù…ÙˆØ¯ÙŠØ§"
                     }
                 },
                 "modifyMergedDialog": {
-                    "errorMessage": "áÇ íãßä ÊÛííÑ ÌÒÁ ãä ÇáÎáíÉ ÇáãÏãÌÉ."
+                    "errorMessage": "Ù„Ø§ ÙŠÙ…ÙƒÙ† ØªØºÙŠÙŠØ± Ø¬Ø²Ø¡ Ù…Ù† Ø§Ù„Ø®Ù„ÙŠØ© Ø§Ù„Ù…Ø¯Ù…Ø¬Ø©."
                 },
                 "useKeyboardDialog": {
-                    "title": "ÇáäÓÎ æÇááÕŞ",
-                    "errorMessage": "áÇ íãßä ÇÓÊÏÚÇÁ åĞå ÇáÅÌÑÇÁÇÊ ãä ÎáÇá ÇáŞÇÆãÉ. ÇáÑÌÇÁ ÈÏáÇğ ãä Ğáß ÇÓÊÎÏÇã ÇÎÊÕÇÑÇÊ áæÍÉ ÇáãİÇÊíÍ:",
+                    "title": "Ø§Ù„Ù†Ø³Ø® ÙˆØ§Ù„Ù„ØµÙ‚",
+                    "errorMessage": "Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø§Ø³ØªØ¯Ø¹Ø§Ø¡ Ù‡Ø°Ù‡ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª Ù…Ù† Ø®Ù„Ø§Ù„ Ø§Ù„Ù‚Ø§Ø¦Ù…Ø©. Ø§Ù„Ø±Ø¬Ø§Ø¡ Ø¨Ø¯Ù„Ø§Ù‹ Ù…Ù† Ø°Ù„Ùƒ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ø®ØªØµØ§Ø±Ø§Øª Ù„ÙˆØ­Ø© Ø§Ù„Ù…ÙØ§ØªÙŠØ­:",
                     "labels": {
-                        "forCopy": "ááäÓÎ",
-                        "forCut": "ááŞÕ",
-                        "forPaste": "ááÕŞ"
+                        "forCopy": "Ù„Ù„Ù†Ø³Ø®",
+                        "forCut": "Ù„Ù„Ù‚Øµ",
+                        "forPaste": "Ù„Ù„ØµÙ‚"
                     }
                 },
                 "unsupportedSelectionDialog": {
-                    "errorMessage": "áÇ íãßä ÊäİíĞ åĞÇ ÇáÅÌÑÇÁ Úáì ÅÎÊíÇÑ ãä ãÊÚÏÏ."
+                    "errorMessage": "Ù„Ø§ ÙŠÙ…ÙƒÙ† ØªÙ†ÙÙŠØ° Ù‡Ø°Ø§ Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡ Ø¹Ù„Ù‰ Ø¥Ø®ØªÙŠØ§Ø± Ù…Ù† Ù…ØªØ¹Ø¯Ø¯."
                 },
                 "insertCommentDialog": {
-                    "title": "ÅÖÇİÉ ÊÚáíŞ",
+                    "title": "Ø¥Ø¶Ø§ÙØ© ØªØ¹Ù„ÙŠÙ‚",
                     "labels": {
-                        "comment": "ÊÚáíŞ",
-                        "removeComment": "ÍĞİ ÊÚáíŞ"
+                        "comment": "ØªØ¹Ù„ÙŠÙ‚",
+                        "removeComment": "Ø­Ø°Ù ØªØ¹Ù„ÙŠÙ‚"
                     }
                 },
                 "insertImageDialog": {
-                    "title": "ÅÖÇİÉ ÕæÑÉ",
-                    "info": "ÇÓÍÈ ÕæÑÉ åäÇ¡ Ãæ ÇäŞÑ ááÇÎÊíÇÑ",
-                    "typeError": "ÇáÑÌÇÁ ÊÍÏíÏ ÕæÑÉ ÈÊäÓíŞ JPEG Ãæ PNG Ãæ GIF"
+                    "title": "Ø¥Ø¶Ø§ÙØ© ØµÙˆØ±Ø©",
+                    "info": "Ø§Ø³Ø­Ø¨ ØµÙˆØ±Ø© Ù‡Ù†Ø§ØŒ Ø£Ùˆ Ø§Ù†Ù‚Ø± Ù„Ù„Ø§Ø®ØªÙŠØ§Ø±",
+                    "typeError": "Ø§Ù„Ø±Ø¬Ø§Ø¡ ØªØ­Ø¯ÙŠØ¯ ØµÙˆØ±Ø© Ø¨ØªÙ†Ø³ÙŠÙ‚ JPEG Ø£Ùˆ PNG Ø£Ùˆ GIF"
                 }
             });
     }
@@ -1027,38 +1027,38 @@
     if (kendo.spreadsheet && kendo.spreadsheet.messages.filterMenu) {
         kendo.spreadsheet.messages.filterMenu =
             $.extend(true, kendo.spreadsheet.messages.filterMenu, {
-                "sortAscending": "äØÇŞ ÇáÊÑÊíÈ ãä Ã Åáì í",
-                "sortDescending": "äØÇŞ ÇáÊÑÊíÈ ãä í Åáì Ã",
-                "filterByValue": "İÑÒ ÍÓÈ ÇáŞíãÉ",
-                "filterByCondition": "İÑÒ ÍÓÈ ÇáÔÑØ",
-                "apply": "ÊØÈíŞ",
-                "search": "ÈÍË",
-                "addToCurrent": "ÃÖİ Åáì ÇáÅÎÊíÇÑ ÇáÍÇáí",
-                "clear": "ãÓÍ",
-                "blanks": "(İÑÇÛÇÊ)",
-                "operatorNone": "áÇ ÔíÁ",
-                "and": "æ",
-                "or": "Ãæ",
+                "sortAscending": "Ù†Ø·Ø§Ù‚ Ø§Ù„ØªØ±ØªÙŠØ¨ Ù…Ù† Ø£ Ø¥Ù„Ù‰ ÙŠ",
+                "sortDescending": "Ù†Ø·Ø§Ù‚ Ø§Ù„ØªØ±ØªÙŠØ¨ Ù…Ù† ÙŠ Ø¥Ù„Ù‰ Ø£",
+                "filterByValue": "ÙØ±Ø² Ø­Ø³Ø¨ Ø§Ù„Ù‚ÙŠÙ…Ø©",
+                "filterByCondition": "ÙØ±Ø² Ø­Ø³Ø¨ Ø§Ù„Ø´Ø±Ø·",
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "search": "Ø¨Ø­Ø«",
+                "addToCurrent": "Ø£Ø¶Ù Ø¥Ù„Ù‰ Ø§Ù„Ø¥Ø®ØªÙŠØ§Ø± Ø§Ù„Ø­Ø§Ù„ÙŠ",
+                "clear": "Ù…Ø³Ø­",
+                "blanks": "(ÙØ±Ø§ØºØ§Øª)",
+                "operatorNone": "Ù„Ø§ Ø´ÙŠØ¡",
+                "and": "Ùˆ",
+                "or": "Ø£Ùˆ",
                 "operators": {
                     "string": {
-                        "contains": "íÍÊæí ÇáäÕ Úáì",
-                        "doesnotcontain": "áÇ íÍÊæí ÇáäÕ Úáì",
-                        "startswith": "íÈÏÃ ÇáäÕ ÈÜ",
-                        "endswith": "íäÊåí ÇáäÕ ÈÜ"
+                        "contains": "ÙŠØ­ØªÙˆÙŠ Ø§Ù„Ù†Øµ Ø¹Ù„Ù‰",
+                        "doesnotcontain": "Ù„Ø§ ÙŠØ­ØªÙˆÙŠ Ø§Ù„Ù†Øµ Ø¹Ù„Ù‰",
+                        "startswith": "ÙŠØ¨Ø¯Ø£ Ø§Ù„Ù†Øµ Ø¨Ù€",
+                        "endswith": "ÙŠÙ†ØªÙ‡ÙŠ Ø§Ù„Ù†Øµ Ø¨Ù€"
                     },
                     "date": {
-                        "eq": "ÇáÊÇÑíÎ åæ",
-                        "neq": "ÇáÊÇÑíÎ áíÓ",
-                        "lt": "ÇáÊÇÑíÎ ŞÈá",
-                        "gt": "ÇáÊÇÑíÎ ÈÚÏ"
+                        "eq": "Ø§Ù„ØªØ§Ø±ÙŠØ® Ù‡Ùˆ",
+                        "neq": "Ø§Ù„ØªØ§Ø±ÙŠØ® Ù„ÙŠØ³",
+                        "lt": "Ø§Ù„ØªØ§Ø±ÙŠØ® Ù‚Ø¨Ù„",
+                        "gt": "Ø§Ù„ØªØ§Ø±ÙŠØ® Ø¨Ø¹Ø¯"
                     },
                     "number": {
-                        "eq": "íÓÇæí",
-                        "neq": "áÇ íÓÇæí",
-                        "gte": "ÃßÈÑ ãä Ãæ íÓÇæí",
-                        "gt": "ÃßÈÑ ãä",
-                        "lte": "ÃÕÛÑ ãä Ãæ íÓÇæí",
-                        "lt": "ÇŞá ãä"
+                        "eq": "ÙŠØ³Ø§ÙˆÙŠ",
+                        "neq": "Ù„Ø§ ÙŠØ³Ø§ÙˆÙŠ",
+                        "gte": "Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                        "gt": "Ø£ÙƒØ¨Ø± Ù…Ù†",
+                        "lte": "Ø£ØµØºØ± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ",
+                        "lt": "Ø§Ù‚Ù„ Ù…Ù†"
                     }
                 }
             });
@@ -1067,96 +1067,96 @@
     if (kendo.spreadsheet && kendo.spreadsheet.messages.colorPicker) {
         kendo.spreadsheet.messages.colorPicker =
             $.extend(true, kendo.spreadsheet.messages.colorPicker, {
-                "reset": "ÅÚÇÏÉ ÊÚííä Çááæä",
-                "customColor": "áæä ãÎÕøÕ...",
-                "apply": "ÊØÈíŞ",
-                "cancel": "ÅáÛÇÁ"
+                "reset": "Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† Ø§Ù„Ù„ÙˆÙ†",
+                "customColor": "Ù„ÙˆÙ† Ù…Ø®ØµÙ‘Øµ...",
+                "apply": "ØªØ·Ø¨ÙŠÙ‚",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡"
             });
     }
 
     if (kendo.spreadsheet && kendo.spreadsheet.messages.toolbar) {
         kendo.spreadsheet.messages.toolbar =
             $.extend(true, kendo.spreadsheet.messages.toolbar, {
-                "addColumnLeft": "ÃÖİ ÚãæÏ Åáì ÇáíÓÇÑ",
-                "addColumnRight": "ÃÖİ ÚãæÏ Åáì Çáíãíä",
-                "addRowAbove": "ÃÖİ Õİ Åáí ÇáÃÚáí",
-                "addRowBelow": "ÃÖİ Õİ Åáí ÇáÃÓİá",
-                "alignment": "ãÍÇĞÇÉ",
+                "addColumnLeft": "Ø£Ø¶Ù Ø¹Ù…ÙˆØ¯ Ø¥Ù„Ù‰ Ø§Ù„ÙŠØ³Ø§Ø±",
+                "addColumnRight": "Ø£Ø¶Ù Ø¹Ù…ÙˆØ¯ Ø¥Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                "addRowAbove": "Ø£Ø¶Ù ØµÙ Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø¹Ù„ÙŠ",
+                "addRowBelow": "Ø£Ø¶Ù ØµÙ Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø³ÙÙ„",
+                "alignment": "Ù…Ø­Ø§Ø°Ø§Ø©",
                 "alignmentButtons": {
-                    "justtifyLeft": "ãÍÇĞÇÉ Åáí ÇáíÓÇÑ",
-                    "justifyCenter": "æÓØ",
-                    "justifyRight": "ãÍÇĞÇÉ Åáí Çáíãíä",
-                    "justifyFull": "ÖÈØ",
-                    "alignTop": "ãÍÇĞÇÉ Åáí ÇáÃÚáí",
-                    "alignMiddle": "ãÍÇĞÇÉ Åáí ÇáãäÊÕİ",
-                    "alignBottom": "ãÍÇĞÇÉ áÃÓİá"
+                    "justtifyLeft": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„ÙŠØ³Ø§Ø±",
+                    "justifyCenter": "ÙˆØ³Ø·",
+                    "justifyRight": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„ÙŠÙ…ÙŠÙ†",
+                    "justifyFull": "Ø¶Ø¨Ø·",
+                    "alignTop": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„Ø£Ø¹Ù„ÙŠ",
+                    "alignMiddle": "Ù…Ø­Ø§Ø°Ø§Ø© Ø¥Ù„ÙŠ Ø§Ù„Ù…Ù†ØªØµÙ",
+                    "alignBottom": "Ù…Ø­Ø§Ø°Ø§Ø© Ù„Ø£Ø³ÙÙ„"
                 },
-                "backgroundColor": "ÎáİíÉ",
-                "bold": "Óãíß",
-                "borders": "ÍÏæÏ",
+                "backgroundColor": "Ø®Ù„ÙÙŠØ©",
+                "bold": "Ø³Ù…ÙŠÙƒ",
+                "borders": "Ø­Ø¯ÙˆØ¯",
                 "colorPicker": {
-                    "reset": "ÅÚÇÏÉ ÊÚííä Çááæä",
-                    "customColor": "áæä ãÎÕÕ..."
+                    "reset": "Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† Ø§Ù„Ù„ÙˆÙ†",
+                    "customColor": "Ù„ÙˆÙ† Ù…Ø®ØµØµ..."
                 },
-                "copy": "äÓÎ",
-                "cut": "ŞÕ",
-                "deleteColumn": "ÍĞİ ÚãæÏ",
-                "deleteRow": "ÍĞİ Õİ",
-                "excelImport": "ÇÓÊíÑÇÏ ãä Excel...",
-                "filter": "İáÊÑ",
-                "fontFamily": "ÇáÎØ",
-                "fontSize": "ÍÌã ÇáÎØ",
-                "format": "ÊäÓíŞ ãÎÕÕ...",
+                "copy": "Ù†Ø³Ø®",
+                "cut": "Ù‚Øµ",
+                "deleteColumn": "Ø­Ø°Ù Ø¹Ù…ÙˆØ¯",
+                "deleteRow": "Ø­Ø°Ù ØµÙ",
+                "excelImport": "Ø§Ø³ØªÙŠØ±Ø§Ø¯ Ù…Ù† Excel...",
+                "filter": "ÙÙ„ØªØ±",
+                "fontFamily": "Ø§Ù„Ø®Ø·",
+                "fontSize": "Ø­Ø¬Ù… Ø§Ù„Ø®Ø·",
+                "format": "ØªÙ†Ø³ÙŠÙ‚ Ù…Ø®ØµØµ...",
                 "formatTypes": {
-                    "automatic": "ÃæÊæãÇÊíßí",
-                    "number": "ÑŞã",
-                    "percent": "äÓÈå ãÆæíå",
-                    "financial": "ãÇáí",
-                    "currency": "ÚãáÉ",
-                    "date": "ÊÇÑíÎ",
-                    "time": "ÇáæŞÊ",
-                    "dateTime": "æŞÊ ÇáÊÇÑíÎ",
-                    "duration": "ãÏÉ",
-                    "moreFormats": "ÇáãÒíÏ ãä ÇáÊäÓíŞÇÊ..."
+                    "automatic": "Ø£ÙˆØªÙˆÙ…Ø§ØªÙŠÙƒÙŠ",
+                    "number": "Ø±Ù‚Ù…",
+                    "percent": "Ù†Ø³Ø¨Ù‡ Ù…Ø¦ÙˆÙŠÙ‡",
+                    "financial": "Ù…Ø§Ù„ÙŠ",
+                    "currency": "Ø¹Ù…Ù„Ø©",
+                    "date": "ØªØ§Ø±ÙŠØ®",
+                    "time": "Ø§Ù„ÙˆÙ‚Øª",
+                    "dateTime": "ÙˆÙ‚Øª Ø§Ù„ØªØ§Ø±ÙŠØ®",
+                    "duration": "Ù…Ø¯Ø©",
+                    "moreFormats": "Ø§Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„ØªÙ†Ø³ÙŠÙ‚Ø§Øª..."
                 },
-                "formatDecreaseDecimal": "ÅäŞÇÕ ÇáÚáÇãÉ ÇáÚÔÑíÉ",
-                "formatIncreaseDecimal": "ÒíÇÏÉ ÇáÚáÇãÉ ÇáÚÔÑíÉ",
-                "freeze": "ÊÌãíÏ ÇáÃÌÒÇÁ",
+                "formatDecreaseDecimal": "Ø¥Ù†Ù‚Ø§Øµ Ø§Ù„Ø¹Ù„Ø§Ù…Ø© Ø§Ù„Ø¹Ø´Ø±ÙŠØ©",
+                "formatIncreaseDecimal": "Ø²ÙŠØ§Ø¯Ø© Ø§Ù„Ø¹Ù„Ø§Ù…Ø© Ø§Ù„Ø¹Ø´Ø±ÙŠØ©",
+                "freeze": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡",
                 "freezeButtons": {
-                    "freezePanes": "ÊÌãíÏ ÇáÃÌÒÇÁ",
-                    "freezeRows": "ÊÌãíÏ ÇáÕİæİ",
-                    "freezeColumns": "ÊÌãíÏ ÇáÃÚãÏÉ",
-                    "unfreeze": "ÅáÛÇÁ ÊÌãíÏ ÇáÃÌÒÇÁ"
+                    "freezePanes": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡",
+                    "freezeRows": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„ØµÙÙˆÙ",
+                    "freezeColumns": "ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¹Ù…Ø¯Ø©",
+                    "unfreeze": "Ø¥Ù„ØºØ§Ø¡ ØªØ¬Ù…ÙŠØ¯ Ø§Ù„Ø£Ø¬Ø²Ø§Ø¡"
                 },
-                "insertComment": "ÅÖÇİÉ ÊÚáíŞ",
-                "insertImage": "ÅÖÇİÉ ÕæÑÉ",
-                "italic": "ãÇÆá",
-                "merge": "ÏãÌ ÇáÎáÇíÇ",
+                "insertComment": "Ø¥Ø¶Ø§ÙØ© ØªØ¹Ù„ÙŠÙ‚",
+                "insertImage": "Ø¥Ø¶Ø§ÙØ© ØµÙˆØ±Ø©",
+                "italic": "Ù…Ø§Ø¦Ù„",
+                "merge": "Ø¯Ù…Ø¬ Ø§Ù„Ø®Ù„Ø§ÙŠØ§",
                 "mergeButtons": {
-                    "mergeCells": "ÏãÌ Çáßá",
-                    "mergeHorizontally": "ÏãÌ ÃİŞí",
-                    "mergeVertically": "ÏãÌ ÑÃÓí",
-                    "unmerge": "ÅáÛÇÁ ÇáÏãÌ"
+                    "mergeCells": "Ø¯Ù…Ø¬ Ø§Ù„ÙƒÙ„",
+                    "mergeHorizontally": "Ø¯Ù…Ø¬ Ø£ÙÙ‚ÙŠ",
+                    "mergeVertically": "Ø¯Ù…Ø¬ Ø±Ø£Ø³ÙŠ",
+                    "unmerge": "Ø¥Ù„ØºØ§Ø¡ Ø§Ù„Ø¯Ù…Ø¬"
                 },
-                "open": "İÊÍ...",
-                "paste": "áÕŞ",
+                "open": "ÙØªØ­...",
+                "paste": "Ù„ØµÙ‚",
                 "quickAccess": {
-                    "redo": "ÅÚÇÏÉ",
-                    "undo": "ÊÑÇÌÚ"
+                    "redo": "Ø¥Ø¹Ø§Ø¯Ø©",
+                    "undo": "ØªØ±Ø§Ø¬Ø¹"
                 },
-                "saveAs": "ÍİÙ ÈÇÓã...",
-                "sortAsc": "ÊÑÊíÈ ÊÕÇÚÏí",
-                "sortDesc": "ÊÑÊíÈ ÊäÇÒáí",
+                "saveAs": "Ø­ÙØ¸ Ø¨Ø§Ø³Ù…...",
+                "sortAsc": "ØªØ±ØªÙŠØ¨ ØªØµØ§Ø¹Ø¯ÙŠ",
+                "sortDesc": "ØªØ±ØªÙŠØ¨ ØªÙ†Ø§Ø²Ù„ÙŠ",
                 "sortButtons": {
-                    "sortSheetAsc": "İÑÒ ÇáÕİÍÉ ãä Ã Åáì í",
-                    "sortSheetDesc": "İÑÒ ÇáÕİÍÉ ãä í Åáì Ã",
-                    "sortRangeAsc": "İÑÒ ãä Ã Åáì í",
-                    "sortRangeDesc": "İÑÒ ãä í Åáì Ã"
+                    "sortSheetAsc": "ÙØ±Ø² Ø§Ù„ØµÙØ­Ø© Ù…Ù† Ø£ Ø¥Ù„Ù‰ ÙŠ",
+                    "sortSheetDesc": "ÙØ±Ø² Ø§Ù„ØµÙØ­Ø© Ù…Ù† ÙŠ Ø¥Ù„Ù‰ Ø£",
+                    "sortRangeAsc": "ÙØ±Ø² Ù…Ù† Ø£ Ø¥Ù„Ù‰ ÙŠ",
+                    "sortRangeDesc": "ÙØ±Ø² Ù…Ù† ÙŠ Ø¥Ù„Ù‰ Ø£"
                 },
-                "textColor": "áæä ÇáäÕ",
-                "textWrap": "ÏæÑÇä ÇáäÕ",
-                "underline": "ÎØ ÃÓİá ÇáäÕ",
-                "validation": "ÇáÊÍŞŞ ãä ÕÍÉ ÇáÈíÇäÇÊ.."
+                "textColor": "Ù„ÙˆÙ† Ø§Ù„Ù†Øµ",
+                "textWrap": "Ø¯ÙˆØ±Ø§Ù† Ø§Ù„Ù†Øµ",
+                "underline": "Ø®Ø· Ø£Ø³ÙÙ„ Ø§Ù„Ù†Øµ",
+                "validation": "Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† ØµØ­Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª.."
             });
     }
 
@@ -1164,14 +1164,14 @@
         kendo.spreadsheet.messages.view =
             $.extend(true, kendo.spreadsheet.messages.view, {
                 "errors": {
-                    "shiftingNonblankCells": "áÇ íãßäß ÅÏÑÇÌ ÇáÎáÇíÇ áÇÍÊãÇá İŞÏ ÇáÈíÇäÇÊ. Şã ÈÊÍÏíÏ ãßÇä ÂÎÑ Ãæ ÍĞİ ÇáÈíÇäÇÊ ãä äåÇíÉ æÑŞÉ ÇáÚãá.",
-                    "filterRangeContainingMerges": "áÇ íãßä ÅäÔÇÁ İáÊÑ ÏÇÎá ÎáÇíÇ ãÏãÌÉ",
-                    "validationError": "ÇáŞíãÉ ÇáÊí ÇÏÎáÊåÇ ÊÎÇáİ ÇáŞæÇÚÏ ÇáÊí İí ÇáÎáíÉ."
+                    "shiftingNonblankCells": "Ù„Ø§ ÙŠÙ…ÙƒÙ†Ùƒ Ø¥Ø¯Ø±Ø§Ø¬ Ø§Ù„Ø®Ù„Ø§ÙŠØ§ Ù„Ø§Ø­ØªÙ…Ø§Ù„ ÙÙ‚Ø¯ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª. Ù‚Ù… Ø¨ØªØ­Ø¯ÙŠØ¯ Ù…ÙƒØ§Ù† Ø¢Ø®Ø± Ø£Ùˆ Ø­Ø°Ù Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ù…Ù† Ù†Ù‡Ø§ÙŠØ© ÙˆØ±Ù‚Ø© Ø§Ù„Ø¹Ù…Ù„.",
+                    "filterRangeContainingMerges": "Ù„Ø§ ÙŠÙ…ÙƒÙ† Ø¥Ù†Ø´Ø§Ø¡ ÙÙ„ØªØ± Ø¯Ø§Ø®Ù„ Ø®Ù„Ø§ÙŠØ§ Ù…Ø¯Ù…Ø¬Ø©",
+                    "validationError": "Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„ØªÙŠ Ø§Ø¯Ø®Ù„ØªÙ‡Ø§ ØªØ®Ø§Ù„Ù Ø§Ù„Ù‚ÙˆØ§Ø¹Ø¯ Ø§Ù„ØªÙŠ ÙÙŠ Ø§Ù„Ø®Ù„ÙŠØ©."
                 },
                 "tabs": {
-                    "home": "ÇáÕİÍÉ ÇáÑÆíÓíÉ",
-                    "insert": "ÅÏÑÇÌ",
-                    "data": "ÇáÈíÇäÇÊ"
+                    "home": "Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©",
+                    "insert": "Ø¥Ø¯Ø±Ø§Ø¬",
+                    "data": "Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª"
                 }
             });
     }
@@ -1181,8 +1181,8 @@
     if (kendo.ui.Slider) {
         kendo.ui.Slider.prototype.options =
             $.extend(true, kendo.ui.Slider.prototype.options, {
-                "increaseButtonTitle": "ÒíÇÏÉ",
-                "decreaseButtonTitle": "ÇäÎİÇÖ"
+                "increaseButtonTitle": "Ø²ÙŠØ§Ø¯Ø©",
+                "decreaseButtonTitle": "Ø§Ù†Ø®ÙØ§Ø¶"
             });
     }
 
@@ -1192,13 +1192,13 @@
         kendo.ui.ListBox.prototype.options.messages =
             $.extend(true, kendo.ui.ListBox.prototype.options.messages, {
                 "tools": {
-                    "remove": "ÍĞİ",
-                    "moveUp": "ÇäÊŞá ááÃÚáì",
-                    "moveDown": "ÇäÊŞá áÃÓİá",
-                    "transferTo": "äŞá Åáì",
-                    "transferFrom": "äŞá ãä",
-                    "transferAllTo": "äŞá Çáßá Åáì",
-                    "transferAllFrom": "äŞá Çáßá ãä"
+                    "remove": "Ø­Ø°Ù",
+                    "moveUp": "Ø§Ù†ØªÙ‚Ù„ Ù„Ù„Ø£Ø¹Ù„Ù‰",
+                    "moveDown": "Ø§Ù†ØªÙ‚Ù„ Ù„Ø£Ø³ÙÙ„",
+                    "transferTo": "Ù†Ù‚Ù„ Ø¥Ù„Ù‰",
+                    "transferFrom": "Ù†Ù‚Ù„ Ù…Ù†",
+                    "transferAllTo": "Ù†Ù‚Ù„ Ø§Ù„ÙƒÙ„ Ø¥Ù„Ù‰",
+                    "transferAllFrom": "Ù†Ù‚Ù„ Ø§Ù„ÙƒÙ„ Ù…Ù†"
                 }
             });
     }
@@ -1208,19 +1208,19 @@
     if (kendo.ui.TreeList) {
         kendo.ui.TreeList.prototype.options.messages =
             $.extend(true, kendo.ui.TreeList.prototype.options.messages, {
-                "noRows": "áÇ ÊæÌÏ ÓÌáÇÊ áÚÑÖåÇ",
-                "loading": "ÌÇÑ ÇáÊÍãíá...",
-                "requestFailed": "İÔá ÇáØáÈ.",
-                "retry": "ÃÚÏ ÇáãÍÇæáÉ",
+                "noRows": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø³Ø¬Ù„Ø§Øª Ù„Ø¹Ø±Ø¶Ù‡Ø§",
+                "loading": "Ø¬Ø§Ø± Ø§Ù„ØªØ­Ù…ÙŠÙ„...",
+                "requestFailed": "ÙØ´Ù„ Ø§Ù„Ø·Ù„Ø¨.",
+                "retry": "Ø£Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©",
                 "commands": {
-                    "edit": "ÊÚÏíá",
-                    "update": "ÊÍÏíË",
-                    "canceledit": "ÅáÛÇÁ",
-                    "create": "ÅÖÇİÉ ÓÌá ÌÏíÏ",
-                    "createchild": "ÅÖÇİÉ ÓÌá İÑÚí",
-                    "destroy": "ÍĞİ",
-                    "excel": "Excel ÊÕÏíÑ Åáì",
-                    "pdf": "PDF ÊÕÏíÑ Åáì"
+                    "edit": "ØªØ¹Ø¯ÙŠÙ„",
+                    "update": "ØªØ­Ø¯ÙŠØ«",
+                    "canceledit": "Ø¥Ù„ØºØ§Ø¡",
+                    "create": "Ø¥Ø¶Ø§ÙØ© Ø³Ø¬Ù„ Ø¬Ø¯ÙŠØ¯",
+                    "createchild": "Ø¥Ø¶Ø§ÙØ© Ø³Ø¬Ù„ ÙØ±Ø¹ÙŠ",
+                    "destroy": "Ø­Ø°Ù",
+                    "excel": "Excel ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰",
+                    "pdf": "PDF ØªØµØ¯ÙŠØ± Ø¥Ù„Ù‰"
                 }
             });
     }
@@ -1230,9 +1230,9 @@
     if (kendo.ui.TreeView) {
         kendo.ui.TreeView.prototype.options.messages =
             $.extend(true, kendo.ui.TreeView.prototype.options.messages, {
-                "loading": "ÌÇÑ ÇáÊÍãíá...",
-                "requestFailed": "İÔá ÇáØáÈ.",
-                "retry": "ÃÚÏ ÇáãÍÇæáÉ"
+                "loading": "Ø¬Ø§Ø± Ø§Ù„ØªØ­Ù…ÙŠÙ„...",
+                "requestFailed": "ÙØ´Ù„ Ø§Ù„Ø·Ù„Ø¨.",
+                "retry": "Ø£Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©"
             });
     }
 
@@ -1241,25 +1241,25 @@
     if (kendo.ui.Upload) {
         kendo.ui.Upload.prototype.options.localization =
             $.extend(true, kendo.ui.Upload.prototype.options.localization, {
-                "select": "ÊÍÏíÏ ÇáãáİÇÊ...",
-                "cancel": "ÅáÛÇÁ",
-                "retry": "ÃÚÏ ÇáãÍÇæáÉ",
-                "remove": "ÅÒÇáÉ",
-                "clearSelectedFiles": "ÅÒÇáÉ",
-                "uploadSelectedFiles": "ÑİÚ ãáİÇÊ",
-                "dropFilesHere": "Şã ÈÓÍÈ Çáãáİ åäÇ áÑİÚå",
-                "statusUploading": "ÌÇÑ ÇáÑİÚ",
-                "statusUploaded": "Êã ÇáÑİÚ",
-                "statusWarning": "ÊÍĞíÑ",
-                "statusFailed": "İÔá",
-                "headerStatusPaused": "ÇíŞÇİ",
-                "headerStatusUploading": "ÌÇÑ ÇáÑİÚ...",
-                "headerStatusUploaded": "Êã",
-                "uploadSuccess": "(Êã ÑİÚ Çáãáİ (ÇáãáİÇÊ.",
-                "uploadFail": "(İÔá ÑİÚ Çáãáİ (ÇáãáİÇÊ.",
-                "invalidMaxFileSize": "ÍÌã Çáãáİ ßÈíÑ ÌÏÇğ.",
-                "invalidMinFileSize": "ÍÌã Çáãáİ ÕÛíÑ ÌÏÇğ.",
-                "invalidFileExtension": "äæÚ Çáãáİ ÛíÑ ãÓãæÍ Èå."
+                "select": "ØªØ­Ø¯ÙŠØ¯ Ø§Ù„Ù…Ù„ÙØ§Øª...",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡",
+                "retry": "Ø£Ø¹Ø¯ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©",
+                "remove": "Ø¥Ø²Ø§Ù„Ø©",
+                "clearSelectedFiles": "Ø¥Ø²Ø§Ù„Ø©",
+                "uploadSelectedFiles": "Ø±ÙØ¹ Ù…Ù„ÙØ§Øª",
+                "dropFilesHere": "Ù‚Ù… Ø¨Ø³Ø­Ø¨ Ø§Ù„Ù…Ù„Ù Ù‡Ù†Ø§ Ù„Ø±ÙØ¹Ù‡",
+                "statusUploading": "Ø¬Ø§Ø± Ø§Ù„Ø±ÙØ¹",
+                "statusUploaded": "ØªÙ… Ø§Ù„Ø±ÙØ¹",
+                "statusWarning": "ØªØ­Ø°ÙŠØ±",
+                "statusFailed": "ÙØ´Ù„",
+                "headerStatusPaused": "Ø§ÙŠÙ‚Ø§Ù",
+                "headerStatusUploading": "Ø¬Ø§Ø± Ø§Ù„Ø±ÙØ¹...",
+                "headerStatusUploaded": "ØªÙ…",
+                "uploadSuccess": "(ØªÙ… Ø±ÙØ¹ Ø§Ù„Ù…Ù„Ù (Ø§Ù„Ù…Ù„ÙØ§Øª.",
+                "uploadFail": "(ÙØ´Ù„ Ø±ÙØ¹ Ø§Ù„Ù…Ù„Ù (Ø§Ù„Ù…Ù„ÙØ§Øª.",
+                "invalidMaxFileSize": "Ø­Ø¬Ù… Ø§Ù„Ù…Ù„Ù ÙƒØ¨ÙŠØ± Ø¬Ø¯Ø§Ù‹.",
+                "invalidMinFileSize": "Ø­Ø¬Ù… Ø§Ù„Ù…Ù„Ù ØµØºÙŠØ± Ø¬Ø¯Ø§Ù‹.",
+                "invalidFileExtension": "Ù†ÙˆØ¹ Ø§Ù„Ù…Ù„Ù ØºÙŠØ± Ù…Ø³Ù…ÙˆØ­ Ø¨Ù‡."
             });
     }
 
@@ -1268,15 +1268,15 @@
     if (kendo.ui.Validator) {
         kendo.ui.Validator.prototype.options.messages =
             $.extend(true, kendo.ui.Validator.prototype.options.messages, {
-                "required": "{0} ãØáæÈ",
-                "pattern": "{0} ÛíÑ ÕÇáÍ",
-                "min": "{0} íÌÈ Ãä Êßæä ÃßÈÑ ãä Ãæ ÊÓÇæí {1}",
-                "max": "{0} íÌÈ Ãä Êßæä ÃÕÛÑ ãä Ãæ ÊÓÇæí {1}",
-                "step": "{0} ÛíÑ ÕÇáÍ",
-                "email": "{0} ÈÑíÏ ÅáßÊÑæäí ÛíÑ ÕÇáÍ",
-                "url": "{0} ÑÇÈØ ÛíÑ ÕÇáÍ",
-                "date": "{0} ÊÇÑíÎ ÛíÑ ÕÇáÍ",
-                "dateCompare": "íÌÈ Ãä íßæä ÊÇÑíÎ ÇáÇäÊåÇÁ ÃßÈÑ ãä Ãæ íÓÇæí ÊÇÑíÎ ÇáÈÏÁ"
+                "required": "{0} Ù…Ø·Ù„ÙˆØ¨",
+                "pattern": "{0} ØºÙŠØ± ØµØ§Ù„Ø­",
+                "min": "{0} ÙŠØ¬Ø¨ Ø£Ù† ØªÙƒÙˆÙ† Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ØªØ³Ø§ÙˆÙŠ {1}",
+                "max": "{0} ÙŠØ¬Ø¨ Ø£Ù† ØªÙƒÙˆÙ† Ø£ØµØºØ± Ù…Ù† Ø£Ùˆ ØªØ³Ø§ÙˆÙŠ {1}",
+                "step": "{0} ØºÙŠØ± ØµØ§Ù„Ø­",
+                "email": "{0} Ø¨Ø±ÙŠØ¯ Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ ØºÙŠØ± ØµØ§Ù„Ø­",
+                "url": "{0} Ø±Ø§Ø¨Ø· ØºÙŠØ± ØµØ§Ù„Ø­",
+                "date": "{0} ØªØ§Ø±ÙŠØ® ØºÙŠØ± ØµØ§Ù„Ø­",
+                "dateCompare": "ÙŠØ¬Ø¨ Ø£Ù† ÙŠÙƒÙˆÙ† ØªØ§Ø±ÙŠØ® Ø§Ù„Ø§Ù†ØªÙ‡Ø§Ø¡ Ø£ÙƒØ¨Ø± Ù…Ù† Ø£Ùˆ ÙŠØ³Ø§ÙˆÙŠ ØªØ§Ø±ÙŠØ® Ø§Ù„Ø¨Ø¯Ø¡"
             });
     }
 
@@ -1284,7 +1284,7 @@
     if (kendo.ui.progress) {
         kendo.ui.progress.messages =
             $.extend(true, kendo.ui.progress.messages, {
-                "loading": "ÌÇÑí ÇáÊÍãíá..."
+                "loading": "Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­Ù…ÙŠÙ„..."
             });
     }
 
@@ -1293,7 +1293,7 @@
     if (kendo.ui.Dialog) {
         kendo.ui.Dialog.prototype.options.messages =
             $.extend(true, kendo.ui.Dialog.prototype.options.localization, {
-                "close": "ÅÛáÇŞ"
+                "close": "Ø¥ØºÙ„Ø§Ù‚"
             });
     }
 
@@ -1310,7 +1310,7 @@
     if (kendo.ui.Alert) {
         kendo.ui.Alert.prototype.options.messages =
             $.extend(true, kendo.ui.Alert.prototype.options.localization, {
-                "okText": "ÍÓäğÇ"
+                "okText": "Ø­Ø³Ù†Ù‹Ø§"
             });
     }
 
@@ -1319,8 +1319,8 @@
     if (kendo.ui.Confirm) {
         kendo.ui.Confirm.prototype.options.messages =
             $.extend(true, kendo.ui.Confirm.prototype.options.localization, {
-                "okText": "ÍÓäğÇ",
-                "cancel": "ÅáÛÇÁ"
+                "okText": "Ø­Ø³Ù†Ù‹Ø§",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡"
             });
     }
 
@@ -1328,8 +1328,8 @@
     if (kendo.ui.Prompt) {
         kendo.ui.Prompt.prototype.options.messages =
             $.extend(true, kendo.ui.Prompt.prototype.options.localization, {
-                "okText": "ÍÓäğÇ",
-                "cancel": "ÅáÛÇÁ"
+                "okText": "Ø­Ø³Ù†Ù‹Ø§",
+                "cancel": "Ø¥Ù„ØºØ§Ø¡"
             });
     }
 
@@ -1337,13 +1337,13 @@
     if (kendo.ui.DateInput) {
         kendo.ui.DateInput.prototype.options.messages =
             $.extend(true, kendo.ui.DateInput.prototype.options.messages, {
-                "year": "ÓäÉ",
-                "month": "ÔåÑ",
-                "day": "íæã",
-                "weekday": "íæã İí ÇáÃÓÈæÚ",
-                "hour": "ÓÇÚÇÊ",
-                "minute": "ÏŞÇÆŞ",
-                "second": "ËæÇäí",
+                "year": "Ø³Ù†Ø©",
+                "month": "Ø´Ù‡Ø±",
+                "day": "ÙŠÙˆÙ…",
+                "weekday": "ÙŠÙˆÙ… ÙÙŠ Ø§Ù„Ø£Ø³Ø¨ÙˆØ¹",
+                "hour": "Ø³Ø§Ø¹Ø§Øª",
+                "minute": "Ø¯Ù‚Ø§Ø¦Ù‚",
+                "second": "Ø«ÙˆØ§Ù†ÙŠ",
                 "dayperiod": "AM/PM"
             });
     }
@@ -1353,8 +1353,8 @@
     if (kendo.ui.List) {
         kendo.ui.List.prototype.options.messages =
             $.extend(true, kendo.ui.List.prototype.options.messages, {
-                "clear": "ÅÒÇáÉ",
-                "noData": "áÇ ÊæÌÏ ÈíÇäÇÊ."
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "noData": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¨ÙŠØ§Ù†Ø§Øª."
             });
     }
 
@@ -1391,10 +1391,10 @@
     if (kendo.ui.DropDownTree) {
         kendo.ui.DropDownTree.prototype.options.messages =
             $.extend(true, kendo.ui.DropDownTree.prototype.options.messages, {
-                "singleTag": "ÚäÕÑ (ÚäÇÕÑ) ãÍÏÏÉ",
-                "clear": "ÅÒÇáÉ",
-                "deleteTag": "ÍĞİ",
-                "noData": "áã íÊã ÅíÌÇÏ ÈíÇäÇÊ."
+                "singleTag": "Ø¹Ù†ØµØ± (Ø¹Ù†Ø§ØµØ±) Ù…Ø­Ø¯Ø¯Ø©",
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "deleteTag": "Ø­Ø°Ù",
+                "noData": "Ù„Ù… ÙŠØªÙ… Ø¥ÙŠØ¬Ø§Ø¯ Ø¨ÙŠØ§Ù†Ø§Øª."
             });
     }
 
@@ -1403,10 +1403,10 @@
     if (kendo.ui.MultiSelect) {
         kendo.ui.MultiSelect.prototype.options.messages =
             $.extend(true, kendo.ui.MultiSelect.prototype.options.messages, {
-                "singleTag": "ÚäÕÑ (ÚäÇÕÑ) ãÍÏÏÉ",
-                "clear": "ÅÒÇáÉ",
-                "deleteTag": "ÍĞİ",
-                "noData": "áÇ ÊæÌÏ ÈíÇäÇÊ."
+                "singleTag": "Ø¹Ù†ØµØ± (Ø¹Ù†Ø§ØµØ±) Ù…Ø­Ø¯Ø¯Ø©",
+                "clear": "Ø¥Ø²Ø§Ù„Ø©",
+                "deleteTag": "Ø­Ø°Ù",
+                "noData": "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø¨ÙŠØ§Ù†Ø§Øª."
             });
     }
 
@@ -1415,9 +1415,9 @@
     if (kendo.ui.Chat) {
         kendo.ui.Chat.prototype.options.messages =
             $.extend(true, kendo.ui.Chat.prototype.options.messages, {
-                "placeholder": "íßÊÈ ÇáÂä...",
-                "toggleButton": "ÊÈÏíá ÔÑíØ ÇáÃÏæÇÊ",
-                "sendButton": "ÃÑÓá ÑÓÇáÉ"
+                "placeholder": "ÙŠÙƒØªØ¨ Ø§Ù„Ø¢Ù†...",
+                "toggleButton": "ØªØ¨Ø¯ÙŠÙ„ Ø´Ø±ÙŠØ· Ø§Ù„Ø£Ø¯ÙˆØ§Øª",
+                "sendButton": "Ø£Ø±Ø³Ù„ Ø±Ø³Ø§Ù„Ø©"
             });
     }
 
@@ -1426,12 +1426,12 @@
     if (kendo.ui.Wizard) {
         kendo.ui.Wizard.prototype.options.messages =
             $.extend(true, kendo.ui.Wizard.prototype.options.messages, {
-                "reset": "ÅÚÇÏÉ ÊÚííä",
-                "previous": "ÇáÓÇÈŞ",
-                "next": "ÇáÊÇáí",
-                "done": "Êã",
-                "step": "ÎØæÉ",
-                "of": "ãä"
+                "reset": "Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ†",
+                "previous": "Ø§Ù„Ø³Ø§Ø¨Ù‚",
+                "next": "Ø§Ù„ØªØ§Ù„ÙŠ",
+                "done": "ØªÙ…",
+                "step": "Ø®Ø·ÙˆØ©",
+                "of": "Ù…Ù†"
             });
     }
 
@@ -1440,63 +1440,63 @@
     if (kendo.ui.PDFViewer) {
         kendo.ui.PDFViewer.prototype.options.messages =
             $.extend(true, kendo.ui.PDFViewer.prototype.options.messages, {
-                defaultFileName: "ãÓÊäÏ",
+                defaultFileName: "Ù…Ø³ØªÙ†Ø¯",
                 toolbar: {
                     zoom: {
-                        "zoomLevel": "ãÓÊæì ÇáÊßÈíÑ/ÇáÊÕÛíÑ",
-                        "zoomOut": "ÊÕÛíÑ",
-                        "zoomIn": "ÊßÈíÑ",
-                        "actualWidth": "ÇáÚÑÖ ÇáÍŞíŞí",
-                        "autoWidth": "ÖÈØ ÇáÚÑÖ ÊáŞÇÆíğÇ",
-                        "fitToWidth": "ÊÊáÇÆã ãÚ ÇáÚÑÖ",
-                        "fitToPage": "ÊáÇÆã ÇáÕİÍÉ"
+                        "zoomLevel": "Ù…Ø³ØªÙˆÙ‰ Ø§Ù„ØªÙƒØ¨ÙŠØ±/Ø§Ù„ØªØµØºÙŠØ±",
+                        "zoomOut": "ØªØµØºÙŠØ±",
+                        "zoomIn": "ØªÙƒØ¨ÙŠØ±",
+                        "actualWidth": "Ø§Ù„Ø¹Ø±Ø¶ Ø§Ù„Ø­Ù‚ÙŠÙ‚ÙŠ",
+                        "autoWidth": "Ø¶Ø¨Ø· Ø§Ù„Ø¹Ø±Ø¶ ØªÙ„Ù‚Ø§Ø¦ÙŠÙ‹Ø§",
+                        "fitToWidth": "ØªØªÙ„Ø§Ø¦Ù… Ù…Ø¹ Ø§Ù„Ø¹Ø±Ø¶",
+                        "fitToPage": "ØªÙ„Ø§Ø¦Ù… Ø§Ù„ØµÙØ­Ø©"
                     },
-                    "open": "İÊÍ",
-                    "exportAs": "ÊÕÏíÑ",
-                    "download": "ÊÍãíá",
+                    "open": "ÙØªØ­",
+                    "exportAs": "ØªØµØ¯ÙŠØ±",
+                    "download": "ØªØ­Ù…ÙŠÙ„",
                     pager: {
-                        "first": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÃæáì",
-                        "previous": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÓÇÈŞÉ",
-                        "next": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÊÇáíÉ",
-                        "last": "ÅĞåÈ Åáì ÇáÕİÍÉ ÇáÃÎíÑÉ",
-                        "of": "ãä {0}",
-                        "page": "ÕİÍÉ",
-                        "pages": "ÕİÍÇÊ"
+                        "first": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰",
+                        "previous": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©",
+                        "next": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„ØªØ§Ù„ÙŠØ©",
+                        "last": "Ø¥Ø°Ù‡Ø¨ Ø¥Ù„Ù‰ Ø§Ù„ØµÙØ­Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø©",
+                        "of": "Ù…Ù† {0}",
+                        "page": "ØµÙØ­Ø©",
+                        "pages": "ØµÙØ­Ø§Øª"
                     },
-                    "print": "ØÈÇÚÉ",
-                    "toggleSelection": "Êãßíä ÇáÊÍÏíÏ",
-                    "togglePan": "Êãßíä ÇáÊÍÑíß",
-                    "search": "ÈÍË"
+                    "print": "Ø·Ø¨Ø§Ø¹Ø©",
+                    "toggleSelection": "ØªÙ…ÙƒÙŠÙ† Ø§Ù„ØªØ­Ø¯ÙŠØ¯",
+                    "togglePan": "ØªÙ…ÙƒÙŠÙ† Ø§Ù„ØªØ­Ø±ÙŠÙƒ",
+                    "search": "Ø¨Ø­Ø«"
                 },
                 errorMessages: {
-                    "notSupported": "pdf íÓãÍ İŞØ ÈãáİÇÊ.",
-                    "parseError": "PDF İÔá İí ãÚÇáÌÉ ãáİ.",
-                    "notFound": "áã íÊã ÇáÚËæÑ Úáì Çáãáİ.",
-                    "popupBlocked": "Êã ÍÙÑ ÇáäÇİĞÉ ÇáãäÈËŞÉ."
+                    "notSupported": "pdf ÙŠØ³Ù…Ø­ ÙÙ‚Ø· Ø¨Ù…Ù„ÙØ§Øª.",
+                    "parseError": "PDF ÙØ´Ù„ ÙÙŠ Ù…Ø¹Ø§Ù„Ø¬Ø© Ù…Ù„Ù.",
+                    "notFound": "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø§Ù„Ù…Ù„Ù.",
+                    "popupBlocked": "ØªÙ… Ø­Ø¸Ø± Ø§Ù„Ù†Ø§ÙØ°Ø© Ø§Ù„Ù…Ù†Ø¨Ø«Ù‚Ø©."
                 },
                 dialogs: {
                     exportAsDialog: {
-                        "title": "ÊÕÏíÑ...",
-                        "defaultFileName": "ãÓÊäÏ",
-                        "pdf": "(.pdf) ÊäÓíŞ ÇáãÓÊäÏÇÊ ÈÅãÊÏÇÏ",
-                        "png": "ÊäÓíŞ ÔÈßÉ ÇáÊÕãíãÇÊ ÈÅãÊÏÇÏ (.png)",
-                        "svg": "ÊäÓíŞ ÇáÊÕãíãÇÊ ÈÅãÊÏÇÏ (.svg)",
+                        "title": "ØªØµØ¯ÙŠØ±...",
+                        "defaultFileName": "Ù…Ø³ØªÙ†Ø¯",
+                        "pdf": "(.pdf) ØªÙ†Ø³ÙŠÙ‚ Ø§Ù„Ù…Ø³ØªÙ†Ø¯Ø§Øª Ø¨Ø¥Ù…ØªØ¯Ø§Ø¯",
+                        "png": "ØªÙ†Ø³ÙŠÙ‚ Ø´Ø¨ÙƒØ© Ø§Ù„ØªØµÙ…ÙŠÙ…Ø§Øª Ø¨Ø¥Ù…ØªØ¯Ø§Ø¯ (.png)",
+                        "svg": "ØªÙ†Ø³ÙŠÙ‚ Ø§Ù„ØªØµÙ…ÙŠÙ…Ø§Øª Ø¨Ø¥Ù…ØªØ¯Ø§Ø¯ (.svg)",
                         "labels": {
-                            "fileName": "ÇÓã Çáãáİ",
-                            "saveAsType": "ÍİÙ ÈÇÓã",
-                            "page": "ÕİÍÉ"
+                            "fileName": "Ø§Ø³Ù… Ø§Ù„Ù…Ù„Ù",
+                            "saveAsType": "Ø­ÙØ¸ Ø¨Ø§Ø³Ù…",
+                            "page": "ØµÙØ­Ø©"
                         }
                     },
-                    "okText": "ÍÓäÇ",
-                    "save": "ÍİÙ",
-                    "cancel": "ÅáÛÇÁ",
+                    "okText": "Ø­Ø³Ù†Ø§",
+                    "save": "Ø­ÙØ¸",
+                    "cancel": "Ø¥Ù„ØºØ§Ø¡",
                     "search": {
-                        "inputLabel": "äÕ ÇáÈÍË",
-                        "matchCase": "ÍÇáÉ ãÊØÇÈŞÉ",
-                        "next": "ÇáÊØÇÈŞ ÇáÊÇáí",
-                        "previous": "ÇáÊØÇÈŞ ÇáÓÇÈŞ",
-                        "close": "ÅÛáÇŞ",
-                        "of": "ãä"
+                        "inputLabel": "Ù†Øµ Ø§Ù„Ø¨Ø­Ø«",
+                        "matchCase": "Ø­Ø§Ù„Ø© Ù…ØªØ·Ø§Ø¨Ù‚Ø©",
+                        "next": "Ø§Ù„ØªØ·Ø§Ø¨Ù‚ Ø§Ù„ØªØ§Ù„ÙŠ",
+                        "previous": "Ø§Ù„ØªØ·Ø§Ø¨Ù‚ Ø§Ù„Ø³Ø§Ø¨Ù‚",
+                        "close": "Ø¥ØºÙ„Ø§Ù‚",
+                        "of": "Ù…Ù†"
                     }
                 }
             });
@@ -1507,10 +1507,10 @@
     if (kendo.ui.Captcha) {
         kendo.ui.Captcha.prototype.options.messages =
             $.extend(true, kendo.ui.Captcha.prototype.options.messages, {
-                "reset": "ÅÚÇÏÉ ÊÚííä ßáãÉ ÇáÊÍŞŞ",
-                "audio": "äØŞ ßáãÉ ÇáÊÍŞŞ",
-                "imageAlt": "ÇßÊÈ ßáãÉ ÇáÊÍŞŞ ßãÇ İí ÇáÕæÑÉ",
-                "success": "Êã ÇáÊÍŞŞ ÈäÌÇÍ"
+                "reset": "Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ† ÙƒÙ„Ù…Ø© Ø§Ù„ØªØ­Ù‚Ù‚",
+                "audio": "Ù†Ø·Ù‚ ÙƒÙ„Ù…Ø© Ø§Ù„ØªØ­Ù‚Ù‚",
+                "imageAlt": "Ø§ÙƒØªØ¨ ÙƒÙ„Ù…Ø© Ø§Ù„ØªØ­Ù‚Ù‚ ÙƒÙ…Ø§ ÙÙŠ Ø§Ù„ØµÙˆØ±Ø©",
+                "success": "ØªÙ… Ø§Ù„ØªØ­Ù‚Ù‚ Ø¨Ù†Ø¬Ø§Ø­"
             });
     }
 
@@ -1519,22 +1519,22 @@
     if (kendo.ui.OrgChart) {
         kendo.ui.OrgChart.prototype.options.messages =
             $.extend(true, kendo.ui.OrgChart.prototype.options.messages, {
-                label: "Çáåíßá ÇáÊäÙíãí",
-                edit: "ÊÚÏíá",
-                create: "ÅäÔÇÁ",
-                destroy: "ÍĞİ",
-                destroyContent: "åá ÃäÊ ãÊÃßÏ ãä ÍĞİ åĞÇ ÇáÚäÕÑ æÇáÚäÇÕÑ ÇáÊÇÈÚÉ áå¿",
-                destroyTitle: "ÍĞİ ÚäÕÑ",
-                cancel: "ÅáÛÇÁ",
-                save: "ÍİÙ",
-                menuLabel: "ŞÇÆãÉ ÇáÊÚÏíá",
-                uploadAvatar: "ÊÍãíá ÕæÑÉ ÌÏíÏÉ",
-                parent: "ÚäÕÑ ÑÆíÓí",
-                name: "ÇáÇÓã",
-                title: "ÇáÚäæÇä",
-                none: "--áÇ ÔíÁ--",
-                expand: "ÚÑÖ",
-                collapse: "Øí"
+                label: "Ø§Ù„Ù‡ÙŠÙƒÙ„ Ø§Ù„ØªÙ†Ø¸ÙŠÙ…ÙŠ",
+                edit: "ØªØ¹Ø¯ÙŠÙ„",
+                create: "Ø¥Ù†Ø´Ø§Ø¡",
+                destroy: "Ø­Ø°Ù",
+                destroyContent: "Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ù…Ù† Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ø¹Ù†ØµØ± ÙˆØ§Ù„Ø¹Ù†Ø§ØµØ± Ø§Ù„ØªØ§Ø¨Ø¹Ø© Ù„Ù‡ØŸ",
+                destroyTitle: "Ø­Ø°Ù Ø¹Ù†ØµØ±",
+                cancel: "Ø¥Ù„ØºØ§Ø¡",
+                save: "Ø­ÙØ¸",
+                menuLabel: "Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„ØªØ¹Ø¯ÙŠÙ„",
+                uploadAvatar: "ØªØ­Ù…ÙŠÙ„ ØµÙˆØ±Ø© Ø¬Ø¯ÙŠØ¯Ø©",
+                parent: "Ø¹Ù†ØµØ± Ø±Ø¦ÙŠØ³ÙŠ",
+                name: "Ø§Ù„Ø§Ø³Ù…",
+                title: "Ø§Ù„Ø¹Ù†ÙˆØ§Ù†",
+                none: "--Ù„Ø§ Ø´ÙŠØ¡--",
+                expand: "Ø¹Ø±Ø¶",
+                collapse: "Ø·ÙŠ"
             });
     }
 })(window.kendo.jQuery);

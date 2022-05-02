@@ -3,7 +3,7 @@ title: Adding Kendo UI in Your Project
 page_title: Adding Kendo UI in Your Project | Download and Installation | Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and learn how to host the library in your project by downloading the bundles and adding the CSS and JavaScript references."
 slug: hosting_kendoui
-position: 2
+position: 20
 ---
 
 # Adding Kendo UI in Your Project
@@ -179,3 +179,4 @@ The following example demonstrates the full initialization of the [DatePicker](h
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})

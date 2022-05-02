@@ -4,7 +4,7 @@ page_title: Using CDN | Download and Installation | Kendo UI for jQuery
 description: "Get started with Kendo UI for jQuery and install the Kendo UI widgets by using the Kendo UI CDN services."
 previous_url: /install/cdn
 slug: kendoui_cdn_services_installation
-position: 4
+position: 40
 ---
 
 # Using CDN
@@ -108,3 +108,4 @@ This section provides solutions for common issues you might encounter while usin
 * [Installing Kendo UI with NPM]({% slug kendoui_npm_packages_kendoui_installation %})
 * [Installing Kendo UI with NuGet]({% slug kendoui_nuget_packages %})
 * [Getting Up and Running with Your Kendo UI Project (Guide)]({% slug getting_started_installation_kendoui %})
+* [Using Script License Code]({% slug using-license-code %})
