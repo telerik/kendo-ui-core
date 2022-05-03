@@ -161,29 +161,33 @@ The following example demonstrates the available TreeView events and how an even
 
 ```HtmlHelper
     @(Html.Kendo().TreeView()
-        .Name("treeview")
-        .DataTextField("Name")
-        .Checkboxes(true)
-        .DragAndDrop(true)
-        .DataSource(dataSource => dataSource
-            .Read(read => read
-                .Action("Employees", "TreeView")
+            .Name("treeview")
+            .Checkboxes(true)
+            .DragAndDrop(true)
+            .LoadOnDemand(false)
+            .Events(events => events
+                .Change("onChange")
+                .Select("onSelect")
+                .Check("onCheck")
+                .Collapse("onCollapse")
+                .Expand("onExpand")
+                .DragStart("onDragStart")
+                .Drag("onDrag")
+                .Drop("onDrop")
+                .DragEnd("onDragEnd")
+                .Navigate("onNavigate")
+                .LoadCompleted("onLoadCompleted")
+            )
+            .DataTextField("Name")
+            .DataSource(dataSource => dataSource
+                .Read(read => read
+                    .Action("Employees", "treeview")
+                )
             )
         )
-        .Events(events => eventsChange("onChange")
-            .Select("onSelect")
-            .Check("onCheck")
-            .Collapse("onCollapse")
-            .Expand("onExpand")
-            .DragStart("onDragStart")
-            .Drag("onDrag")
-            .DragEnd("onDragEnd")
-            .Drop("onDrop")
-        )
-    )
 
     <script type="text/javascript">
-        function onChange(e) {
+            function onChange(e) {
             console.log('Selected node changed to:', e.sender.select());
         }
 
@@ -218,38 +222,23 @@ The following example demonstrates the available TreeView events and how an even
         function onDrop(e) {
             console.log("Dropped:", e.sourceNode);
         }
+
+        function onLoadCompleted(e) {
+            console.log("Load Completed: ", Array.prototype.map.call(e.nodes, function (item) { return item.Name; }).join(", "));
+        }
     </script>
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-treeview auto-bind="true" drag-and-drop="true" load-on-demand="true" name="treeview" 
-    on-change="onChange" on-select="onSelect" on-check="onCheck" on-collapse="onCollapse"
-     on-expand="onExpand" on-dragstart="onDragStart" on-drag="onDrag" on-drop="onDrop
-     " on-dragend="onDragEnd" on-navigate="onNavigate">
-        <items>
-            <treeview-item expanded="true" checked="false" text="Furniture" selected="false" enabled="true">
-                <items>
-                    <treeview-item expanded="false" checked="false" text="Tables & Chairs" selected="false" enabled="true">
-                    </treeview-item>
-                    <treeview-item expanded="false" checked="false" text="Sofas" selected="false" enabled="true">
-                    </treeview-item>
-                    <treeview-item expanded="false" checked="false" text="Occasional Furniture" selected="false" enabled="true">
-                    </treeview-item>
-                </items>
-            </treeview-item>
-            <treeview-item expanded="false" checked="false" text="Decor" selected="false" enabled="true">
-                <items>
-                    <treeview-item expanded="false" checked="false" text="Bed Linen" selected="false" enabled="true">
-                    </treeview-item>
-                    <treeview-item expanded="false" checked="false" text="Curtains & Blinds" selected="false" enabled="true">
-                    </treeview-item>
-                    <treeview-item expanded="false" checked="false" text="Carpets" selected="false" enabled="true">
-                    </treeview-item>
-                </items>
-            </treeview-item>
-            <treeview-item expanded="false" checked="false" text="Storage" selected="false" enabled="true">
-            </treeview-item>
-        </items>
+    <kendo-treeview auto-bind="true" drag-and-drop="true" load-on-demand="false" datatextfield="Name" name="treeview" on-change="onChange" on-select="onSelect" on-check="onCheck" on-collapse="onCollapse" on-expand="onExpand" on-dragstart="onDragStart" on-drag="onDrag" on-drop="onDrop" on-dragend="onDragEnd" on-navigate="onNavigate" on-load-completed="onLoadCompleted">
+        <hierarchical-datasource>
+            <schema>
+                <hierarchical-model id="id"></hierarchical-model>
+            </schema>
+            <transport>
+                <read url="@Url.Action("Employees", "treeview")" cache="true" />
+            </transport>
+        </hierarchical-datasource>
         <checkboxes enabled="true" />
     </kendo-treeview>
 
@@ -288,6 +277,10 @@ The following example demonstrates the available TreeView events and how an even
 
         function onDrop(e) {
             console.log("Dropped:", e.sourceNode);
+        }
+
+        function onLoadCompleted(e) {
+            console.log("Load Completed: ", Array.prototype.map.call(e.nodes, function (item) { return item.Name; }).join(", "));
         }
     </script>
 ```
