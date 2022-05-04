@@ -23,6 +23,7 @@ The license key installation process involves two steps:
 
 ## Getting a License Key
 
+<link rel="stylesheet" href="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/0.0.1/styles/license-key/styles.css" />
 <script src="https://d3fu8oi3wk1rz4.cloudfront.net/kendo-docs-demos-assets/0.0.1/scripts/license-key/index.js"></script>
 
 <license-download-link

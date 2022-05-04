@@ -552,6 +552,18 @@
             assert.equal(textbox.wrapper.hasClass("k-expand-padding"), false);
         });
 
+        it("NumericTextBox setOptons correctly sets spinners size", function() {
+            var textbox = new NumericTextBox(input, {
+                spinners: true
+            });
+            textbox.setOptions({
+                size: "large"
+            });
+
+            assert.equal(textbox._arrowsWrap.is(":visible"), true);
+            assert.equal(textbox._arrowsWrap.find(".k-button-lg").length, 2);
+        });
+
         it("NumericTextBox setOptons correctly hides spinners", function() {
             var textbox = new NumericTextBox(input, {
                 spinners: true

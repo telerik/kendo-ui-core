@@ -101,6 +101,26 @@ You can set the select mode to `Multiple` or `Single`. Additionally, the Grid pr
 ```
 {% endif %}
 
+## Drag to Select
+
+The Grid allows conditional drag to select when multiple selection is configured for rows or cells through the `DragToSelect` property.
+
+```HtmlHelper
+        @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.OrderViewModel>()
+        .Name("cellSelection")
+        .Selectable(selectable => selectable
+            .DragToSelect(false)
+            .Mode(GridSelectionMode.Multiple)
+            .Type(GridSelectionType.Row))
+        ...
+```
+{% if site.core %}
+```TagHelper
+       <kendo-grid name="cellSelection">
+             <selectable dragToSelect="false" mode="multiple, row"/>
+       </kendo-grid>      
+```
+{% endif %}
 
 ## Persisting the Selection
 

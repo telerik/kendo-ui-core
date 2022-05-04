@@ -2262,6 +2262,24 @@ Indicates whether the characters outside the ASCII range will be encoded as HTML
     console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
     </script>
 
+### serialization.optimizeTags `Boolean` *(default: false)*
+
+Indicates whether optizable tags should be removed from the DOM. Currently, optimizable tags are `span` and `font` elements with no attributes and no decoration or formatting applied (via inline styles/attributes).
+
+#### Example
+
+    <textarea id="editor"></textarea>
+    <script>
+    $("#editor").kendoEditor({
+      value: "<p><span>non-decorated text</span></p><p><span style=\"text-decoration: underline;\">underline text</span></p>",
+      serialization: {
+        optimizeTags: true
+      }
+    });
+	/* The result can be observed in the DevTools(F12) console of the browser. */
+    console.log($("#editor").data("kendoEditor").value()); // logs "The character &auml; is an umlaut"
+    </script>
+
 ### serialization.scripts `Boolean` *(default: false)*
 
 Indicates whether inline scripts will be serialized and posted to the server.
