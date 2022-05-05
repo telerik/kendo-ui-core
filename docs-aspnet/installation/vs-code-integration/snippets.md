@@ -12,7 +12,7 @@ Visual Studio Code snippets are templates that make it easier to enter repetitiv
 
 ## {{site.product}} Snippets
 
-The {{site.product}} Visual Studio Code extension provides snippets for the components listed in the table below in both flavors&mdash;HTML Helpers and Tag Helpers. Type `tc`&mdash;short for Telerik UI for ASP.NET Core&mdash;or the name of component you wish to add.
+The {{site.product}} Visual Studio Code Productivity Tools provide snippets for the components listed in the table below in both flavors&mdash;HTML Helpers and Tag Helpers. Type `tc`&mdash;short for Telerik UI for ASP.NET Core&mdash;or the name of component you wish to add.
 
 | Component | Html Helper snippet | TagHelper snippet |
 |--- | --- | --- |
@@ -55,3 +55,16 @@ The {{site.product}} Visual Studio Code extension provides snippets for the comp
 | [Form Item](https://docs.telerik.com/{{site.platform}}/html-helpers/layout/dialog/itmes) | `tc-formitem-html` | `tc-formitem-tag` |
 
 For further details on using snipets, creating personalized snippets or disabling snippets refer to the [official Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/userdefinedsnippets).
+
+## {{site.product}} Scaffolder
+
+The {{site.product}} Visual Studio Code scaffolder allows you to quickly generate Views with some of the most popular components:
+
+* [Grid]({% slug htmlhelpers_grid_aspnetcore_overview %})
+* [Chart]({% slug htmlhelpers_charts_aspnetcore %})
+* [Form]({% slug htmlhelpers_form_aspnetcore_overview %})
+* [ListView]({% slug htmlhelpers_listview_aspnetcore %})
+* [Gantt]({% slug htmlhelpers_gantt_aspnetcore %})
+* [Scheduler]({% slug htmlhelpers_scheduler_aspnetcore %})
+
+The Visual Studio Code scaffolder allows you to configure multiple component-specific properties. It will prompt you for input on the controller handling the CRUD operataions, if applicable, component name and model names. For example, if you scaffold a new page with the Telerik UI for ASP.NET Core Grid, you will be able to set its the CRUD endpoints for the DataSource, set the configuration for sorting, filtering, grouping, column resizing and more properties.

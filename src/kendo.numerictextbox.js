@@ -380,7 +380,7 @@ var __meta__ = { // jshint ignore:line
 
             if (!arrows[0]) {
                 arrows = $(buttonHtml("increase", options.upArrowText, options) + buttonHtml("decrease", options.downArrowText, options))
-                        .insertAfter(element);
+                        .appendTo(that.wrapper);
 
                 that._arrowsWrap = arrows.wrapAll('<span class="k-input-spinner k-spin-button"/>').parent();
             }

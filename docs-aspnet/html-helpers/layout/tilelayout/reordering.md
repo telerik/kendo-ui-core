@@ -38,7 +38,19 @@ The example below will render a grid with two columns which can be reordered bot
 ```
 {% if site.core %}
 ```TagHelper
-     <kendo-tilelayout name="tilelayout" columns="3" reorderable="true">     
+     <kendo-tilelayout columns="2" columns-width="285px" reorderable="true" rows-height="285px" name="tilelayout">
+        <containers>
+            <container body-template="Item one body" col-span="1" row-span="1">
+                <container-header text="Item one"/>
+            </container>
+            <container body-template="Item two body" col-span="1" row-span="1">
+                <container-header text="Item two"/>
+            </container>
+            <container body-template="Item three body" col-span="1" row-span="1">
+                <container-header text="Item three"/>
+            </container>
+        </containers>
+    </kendo-tilelayout>   
 ```
 {% endif %}
 

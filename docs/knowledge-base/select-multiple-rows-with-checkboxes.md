@@ -63,7 +63,7 @@ The following example demonstrates how to select multiple rows by using the chec
         },
         columns: [{
             title: "select",
-            template: '<input class="checkbox" type="checkbox" />'
+            template: '<input class="k-checkbox k-checkbox-md k-rounded-md" type="checkbox" />'
           },
           { field: "id" },
           { field: "foo" },

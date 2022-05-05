@@ -561,6 +561,7 @@
             });
 
             assert.equal(textbox._arrowsWrap.is(":visible"), true);
+            assert.equal(textbox._arrowsWrap.index(), 3);
             assert.equal(textbox._arrowsWrap.find(".k-button-lg").length, 2);
         });
 

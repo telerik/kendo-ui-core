@@ -32,7 +32,16 @@ The example below will render a grid with two rows and two columns which can be 
 ```
 {% if site.core %}
 ```TagHelper
-     <kendo-tilelayout name="tilelayout" columns="3" resizable="true">     
+    <kendo-tilelayout columns="3" resizable="true" name="tilelayout" on-resize="onTileResize">
+        <containers>
+            <container body-template="Item one body" col-span="1" row-span="1">
+                <container-header text="Item one"/>
+            </container>
+            <container body-template="Item two body" col-span="1" row-span="1">
+                <container-header text="Item two"/>
+            </container>
+        </containers>
+    </kendo-tilelayout>   
 ```
 {% endif %}
 
@@ -42,10 +51,24 @@ The widget triggers a [`Resize()`](/api/Kendo.Mvc.UI.Fluent/TileLayoutEventBuild
 
 ```HtmlHelper
     .Events(e=>e.Resize("onResize"))
-    resize: function (e) {
-        console.log(e.container.find(".k-card-header").text());
-    }
+    <script>
+        function onResize (e) {
+            console.log(e.container.find(".k-card-header").text());
+        }
+    </script>
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-tilelayout name="tilelayout" on-resize="onResize">
+    </kendo-tilelayout>
+
+    <script>
+        function onResize(e) {
+            console.log(e.container.find(".k-card-header").text());
+        }
+    </script>
+```
+{% endif %}
 
 ## See Also
 

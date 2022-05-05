@@ -22,6 +22,13 @@ The following example demonstrates how to enable the key navigation in the TileL
         // options omitted for brevity
     )
 ```
+{% if site.core %}
+```TagHelper
+    <kendo-tilelayout name="tilelayout" navigatable="true">
+        // options omitted for brevity
+    </kendo-tilelayout>
+```
+{% endif %}
 
 ## See Also
 

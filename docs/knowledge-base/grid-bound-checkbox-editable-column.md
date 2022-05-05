@@ -110,7 +110,7 @@ The following example demonstrates the full implementation of the approach.
           "ProductName",
           { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: 110 },
           { field: "UnitsInStock", title: "Units In Stock", width: 110 },
-          { field: "Discontinued", template: '<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx" />', width: 110, editable: function(e){ return false; } },
+          { field: "Discontinued", template: '<input type="checkbox" #= Discontinued ? \'checked="checked"\' : "" # class="chkbx k-checkbox k-checkbox-md k-rounded-md" />', width: 110, editable: function(e){ return false; } },
           { command: "destroy", title: "&nbsp;", width: 100 }],
         editable: true
       });
@@ -123,4 +123,10 @@ The following example demonstrates the full implementation of the approach.
         dataItem.dirty = true;
       });
     </script>
+    <style> 
+        .k-grid-content td 
+        { 
+          position:relative; 
+        } 
+    </style>
 ```

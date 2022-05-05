@@ -28,13 +28,12 @@ Use an external input element as a search box. You can retrieve the string that 
 
 ````dojo
 <div class="demo-section k-content wide">
-        <input type='text' id='searchBox' class='k-textbox' placeholder='search items' />
+       <input type='text' id='searchBox' class='k-input k-textbox k-input-solid k-input-md k-rounded-md' placeholder='search items' />
         <br />
         <br />
-
-        <div>
-          <select id="optional"></select>
-          <select id="selected"></select>
+        
+          <select id="optional" style="width: 200px"></select>
+          <select id="selected" style="width: 200px"></select>
         </div>
       </div>
       <script>
@@ -90,6 +89,12 @@ Use an external input element as a search box. You can retrieve the string that 
           });
         });
       </script>
+      <style> 
+        .k-input
+        { 
+          width: 250px;
+        } 
+      </style>
 ````
 
 For the complete implementation of the approach, refer to [this runnable example](https://dojo.telerik.com/EworIV/3).

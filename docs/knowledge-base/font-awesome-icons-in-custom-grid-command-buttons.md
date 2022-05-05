@@ -123,7 +123,7 @@ The following example demonstrates how to use FontAwesome icons with the built-i
         height: 20px;
       }
 
-      .k-column-menu .k-i-arrow-60-right:before {
+      .k-column-menu .k-i-arrow-e:before {
         content: "\f061";
       }
        .k-header-column-menu .k-i-more-vertical:before{

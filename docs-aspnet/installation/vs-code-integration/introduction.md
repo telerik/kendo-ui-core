@@ -8,17 +8,17 @@ position: 1
 
 # Visual Studio Code Integration Overview
 
-The **Telerik UI for ASP.NET Core Template Wizard** is an extension for [Visual Studio Code](https://code.visualstudio.com/) that enhances the application development experience with Telerik UI for ASP.NET Core.
+The **Telerik UI for ASP.NET Core Productivity Tools** is an extension for [Visual Studio Code](https://code.visualstudio.com/) that enhances the application development experience with Telerik UI for ASP.NET Core.
 
 As its primary advantage, the VS Code extension facilitates the creation of projects through a wizard directly in Visual Studio Code.
 
-## Get the Extension
+## Get Telerik UI for ASP.NET Core Productivity Tools
 
-You can get the extention:
+You can get the extension:
 
 * from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=TelerikInc.aspnetcoretemplatewizard)
 
-* by opening the **Extensions** tab in Visual Studio Code, then searching for **Telerik UI for ASP.NET Core Template Wizard** and clicking **Install**
+* by opening the **Extensions** tab in Visual Studio Code, then searching for **Telerik UI for ASP.NET Core Productivity Tools** and clicking **Install**
 
 
 ## Create a Telerik Project
@@ -27,9 +27,7 @@ To create a Telerik-enabled ASP.NET Core project:
 
 1. Press `Ctrl`+`Shift`+`P` in Windows/Linux or `Cmd`+`Shift`+`P` on Mac to open the VSCode extension launcher.
 
-1. Type/Select `Telerik UI for ASP.NET Core Template Wizard: Launch` and press `Enter` to launch the extension.
-
-    ![launch Telerik ASP.NET Core VS Code extension](images/launch-extension.png)
+1. Type/Select `Telerik UI for ASP.NET Core Productivity Tools: Launch` and press `Enter` to launch the extension.
 
 1. Enter a project name and select the location.
 
