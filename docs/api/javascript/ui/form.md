@@ -722,7 +722,7 @@ Defines the attributes that are applied to the input element.
       }
     </style>
  
-### items.layout `Object` *(default: '')*
+### items.layout `String` *(default: '')*
 
 Specify the layout of the item when `items.type` is set to "group". Valid options:
 

@@ -41,20 +41,36 @@ You can also customize the drag-and-drop appearance of the ListBox by using its 
 ```
 {% if site.core %}
 ```TagHelper
-    <kendo-listbox name="listbox" template-id="template" selectable="ListBoxSelectable.Multiple"  datatextfield="ProductName" datavaluefield="ProductID">
-            <draggable hint="hint" enabled="true" placeholder="placeholder" />
-            <datasource>
-                <transport>
-                    <read datatype="jsonp" url="https://demos.telerik.com/kendo-ui/service/Products" />
-                </transport>
-            </datasource>
-            <toolbar position="ListBoxToolbarPosition.Right"
-                        tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
-        </kendo-listbox>
 
-    <script type="text/kendo-x-tmpl" id="template">
-        <h5 style="background-color:aqua">#=ProductName#</h5>
-    </script>
+    @{
+    var dropSources1 = new string[]{ "listbox2" };
+    var products1 = new List<string>();
+
+    var dropSources2 = new string[]{ "listbox1" };
+    var products2 = new List<string>();
+    }
+
+    <kendo-listbox name="listbox1"
+                    datavaluefield="ProductID"
+                    datatextfield="ProductName"
+                    drop-sources="dropSources1"
+                    on-add="function(e){setDiscontinued(e, true)}"
+                    on-remove="function(e){setDiscontinued(e, false)}"
+                    connect-with="listbox2"
+                    bind-to="products1"
+                    selectable="ListBoxSelectable.Single">
+        <draggable enabled="true" />
+    </kendo-listbox>
+
+    <kendo-listbox name="listbox2"
+                    drop-sources="dropSources2"
+                    datavaluefield="ProductID"
+                    datatextfield="ProductName"
+                    connect-with="listbox1"
+                    bind-to="products2"
+                    selectable="ListBoxSelectable.Single">
+        <draggable enabled="true" />
+    </kendo-listbox>
 
 ```
 {% endif %}

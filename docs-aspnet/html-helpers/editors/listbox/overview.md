@@ -42,12 +42,13 @@ The following example demonstrates how to define the ListBox.
 {% if site.core %}
 ```TagHelper
 
-        <kendo-listbox name="optional" connect-with="selected" bind-to="ViewBag.Attendees">
+        @{
+            var tools = new string[] { "moveUp", "moveDown"};
+        }
+        <kendo-listbox name="optional" 
+                       bind-to="ViewBag.Attendees">
             <toolbar position="ListBoxToolbarPosition.Right"
-                     tools='new string[] {moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
-        </kendo-listbox>
-
-        <kendo-listbox name="selected" selectable="ListBoxSelectable.Multiple" bind-to="new List<string>()">
+                     tools="tools" />
         </kendo-listbox>
 
 ```

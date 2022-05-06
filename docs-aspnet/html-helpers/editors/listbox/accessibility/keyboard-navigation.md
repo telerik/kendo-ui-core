@@ -14,7 +14,8 @@ The ListBox supports its keyboard navigation functionality through the `Navigata
 
 The following example demonstrates how to enable the key navigation in the ListBox.
 
-```
+```HtmlHelper
+
     @(Html.Kendo().ListBox()
         .Name("listbox")
         .ConnectWith("listbox2")
@@ -35,7 +36,36 @@ The following example demonstrates how to enable the key navigation in the ListB
         .Selectable(ListBoxSelectable.Single)
         .Navigatable(true) // Enable the keyboard navigation
     )
+
 ```
+{% if site.core %}
+```TagHelper
+    @{
+        var products = new List<ProductViewModel>();
+    }
+     <kendo-listbox name="listbox"
+                    connect-with="listbox2"
+                    datavaluefield="ProductID"
+                    datatextfield="ProductName"
+                    selectable="ListBoxSelectable.Multiple"
+                    navigatable="true">
+            <datasource>
+                <transport>
+                    <read url="@Url.Action("GetProducts", "ListBox")"/>
+                </transport>
+            </datasource>
+     </kendo-listbox>
+
+     <kendo-listbox name="listbox2"
+                    bind-to="products"
+                    datavaluefield="ProductID"
+                    datatextfield="ProductName"
+                    selectable="ListBoxSelectable.Single"
+                    navigatable="true">
+     </kendo-listbox>
+
+```
+{% endif %}
 
 ## See Also
 

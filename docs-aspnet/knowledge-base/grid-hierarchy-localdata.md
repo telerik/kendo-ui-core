@@ -17,7 +17,11 @@ I want to simply bind Parent grid to a model which contains a list of elements a
 
 To achieve the desired result follow the steps below:
 
+ {% if site.core %}
   1. Configure the Grid for [Local Data Binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %}).
+{% else %}
+  1. Configure the Grid for [Server Binding]({% slug serverbinding_grid_aspnetmvc %}).
+{% endif %}
   1. Follwo the requirements for configuring the [Hierarchy funtionliaty]({% slug hierarchy_grid_htmlhelper_aspnetcore %})
   1. Define a ClientTemplate with DataSource configured for Ajax binding and set the AutoBind configuration to `false`
   1. Add an event handler to the [`DetailInit`](https://docs.telerik.com/{{ site.platform }}/api/Kendo.Mvc.UI.Fluent/GridEventBuilder#detailinitsystemstring) event and use it to set teh data for the child Grid

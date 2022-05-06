@@ -23,6 +23,13 @@ To bind the Telerik UI ListBox to a data set  within a RazorPage:
             .Read(r=>r.Url("/ListBox/ListBoxBinding?handler=ReadOptional"))
         )
     ```
+    ```TagHelper
+    <datasource>
+        <transport>
+            <read url="/ListBox/ListBoxBinding?handler=ReadOptional"/>
+        </transport>
+    </datasource>
+    ```
 
 1. Within the `.cs` file, introduce an ActionMethod to return the data set:
 

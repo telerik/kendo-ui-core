@@ -49,6 +49,45 @@ The ListBox provides templates for its items that are passed as а function or s
         .BindTo(new List<CustomerViewModel>())
     )
 ```
+{% if site.core %}
+```TagHelper
+
+    @{
+        var dropSources = new string[] { "selected" };
+        var dropSources2 = new string[] { "optional" };
+        var customers = new List<CustomerViewModel>();
+        var customers2 = new List<CustomerViewModel>();
+        var tools = new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove" };
+    }
+
+    <kendo-listbox name="optional"
+                    datatextfield="ContactName"
+                    datavaluefield="CustomerID"
+                    template-id="customer-item-template"
+                    drop-sources="dropSources"
+                    connect-with="selected"
+                    bind-to="customers">
+            <draggable enabled="true" placeholder="customPlaceholder"/>
+            <datasource>
+                <transport>
+                    <read url="@Url.Action("GetCustomers", "ListBox")"/>
+                </transport>
+            </datasource>
+            <toolbar position="ListBoxToolbarPosition.Right"
+                        tools="tools"/>
+    </kendo-listbox>
+
+    <kendo-listbox name="selected"
+                    datatextfield="ContactName"
+                    datavaluefield="CustomerID"
+                    template-id="customer-item-template"
+                    drop-sources ="dropSources2"
+                    connect-with="opitonal"
+                    bind-to="customers2">
+            <draggable enabled="true" placeholder="customPlaceholder"/>
+    </kendo-listbox>
+```
+{% endif %}
 ``` scripts
     <script id="customer-item-template" type="text/x-kendo-template">
         <span class="k-state-default" style="background-image: url(@Url.Content("~/shared/web/Customers/")#:data.CustomerID#.jpg);"></span>

@@ -11,7 +11,11 @@ position: 1
 
 Depending on the configuration of its [DataSource]({% slug htmlhelpers_datasource_aspnetcore %}), the {{ site.product_short }} Grid provides different types of data binding. 
 
+*{% if site.core %}
 * [Local data binding]({% slug htmlhelpers_grid_aspnetcore_localbinding %})
+{% else %}
+* [Server binding binding]({% slug serverbinding_grid_aspnetmvc %})
+{% endif %}
 * [Remote data binding]({% slug htmlhelpers_grid_aspnetcore_ajaxbinding %})
 * [SignalR data binding]({% slug htmlhelpers_grid_aspnetcore_signalrbinding %})
 * [Custom Binding]({% slug custombinding_grid_aspnetmvc %}){% if site.mvc %} 

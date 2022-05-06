@@ -90,7 +90,11 @@ To scaffold the Grid HtmlHelper for ASP.NET MVC:
 
 	From this screen, you can select the Grid events to which you want to attach handlers.
 
-	> Not all events are supported in the server-binding mode. To see the complete list, refer to [this article]({% slug htmlhelpers_grid_aspnetcore_localbinding %}#supported-client-side-events).
+	{% if site.core %}
+	> Not all events are supported in the local-binding mode. To see the complete list, refer to [this article]({% slug htmlhelpers_grid_aspnetcore_localbinding %}#supported-client-side-events).
+	{% else %}
+	> Not all events are supported in the server-binding mode. To see the complete list, refer to [this article]({% slug serverbinding_grid_aspnetmvc %}#supported-client-side-events).
+	{% endif %}
 
 1. When finished with the Grid configuration, click **Add** at the bottom. The Grid Controller and the corresponding View are now generated.
 

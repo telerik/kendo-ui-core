@@ -46,7 +46,7 @@ The causes of this issue are various.
 {% else %}
     When configured for server binding, the Kendo UI Grid for ASP.NET MVC does not fire all client-side events.
 
-**Solution** For more information on how to resolve this issue, refer to the [article on server binding of the Grid]({% slug htmlhelpers_grid_aspnetcore_localbinding %}#supported-client-side-events).
+**Solution** For more information on how to resolve this issue, refer to the [article on server binding of the Grid]({% slug serverbinding_grid_aspnetmvc %}#supported-client-side-events).
 
 For an Ajax() bound Grid, make sure that the `.ServerOperation(false)` property is disabled.
 {% endif %}

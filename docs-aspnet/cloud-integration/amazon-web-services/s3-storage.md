@@ -144,7 +144,7 @@ private string Policy(S3Config config)
             new { acl = config.Acl },
             new [] { "starts-with", "$success_action_redirect", "" },
             new [] { "starts-with", "$Content-Type", config.ContentTypePrefix },
-            new Dictionary<string, string> {{ "x-amz-meta-uuid", config.Uuid.ToString() }}
+            new Dictionary<string, string> {% raw %} {{ "x-amz-meta-uuid", config.Uuid.ToString() }} {% endraw %}
         }
     });
 

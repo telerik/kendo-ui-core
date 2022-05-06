@@ -53,17 +53,49 @@ To enable the multiple-selection mode of the ListBox, add `ListBoxSelectable.Mul
 {% if site.core %}
 ```TagHelper
 
-    <kendo-listbox name="listbox" datatextfield="ProductName" datavaluefield="ProductID">
-        <datasource>
-            <transport>
-                <read datatype="jsonp" url="https://demos.telerik.com/kendo-ui/service/Products" />
-            </transport>
-        </datasource>
-        <toolbar position="ListBoxToolbarPosition.Right"
-                    tools='new string[] { "moveUp", "moveDown", "transferTo", "transferFrom", "transferAllTo", "transferAllFrom", "remove"}' />
-    </kendo-listbox>
+        @{
+            var dropSources = new string[] { "selected" };
+            var dropSources2 = new string[] { "optional" };
+            var customers = new List<CustomerViewModel>();
+            var customers2 = new List<CustomerViewModel>();
+            var tools = new string[] { "transferTo", "remove" };
+        }
+        <kendo-listbox name="optional"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       template-id="customer-item-template"
+                       drop-sources="dropSources"
+                       connect-with="selected"
+                       selectable="ListBoxSelectable.Single"
+                       bind-to="customers">
+                <draggable enabled="true" placeholder="customPlaceholder"/>
+                <datasource>
+                    <transport>
+                        <read url="@Url.Action("GetCustomers", "ListBox")"/>
+                    </transport>
+                </datasource>
+                <toolbar position="ListBoxToolbarPosition.Right"
+                         tools="tools"/>
+        </kendo-listbox>
+
+        <kendo-listbox name="selected"
+                       datatextfield="ContactName"
+                       datavaluefield="CustomerID"
+                       template-id="customer-item-template"
+                       drop-sources ="dropSources2"
+                       connect-with="opitonal"
+                       selectable="ListBoxSelectable.Multiple"
+                       bind-to="customers2">
+                <draggable enabled="true" placeholder="customPlaceholder"/>
+        </kendo-listbox>
 ```
 {% endif %}
+```Template
+    <script id="customer-item-template" type="text/x-kendo-template">
+        <span class="k-state-default" style="background-image: url('../content/web/Customers/#:data.CustomerID#.jpg')"></span>
+        <span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>
+    </script>
+```
 
 ## Reordering of Selections
 
